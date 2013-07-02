@@ -1,0 +1,533 @@
+options:
+  general:
+    #[integer] The max number of players allowed in a single party (including the leader)
+    maxPartySize: 4
+    #[string] The name of the skyblock world, will be automatically generated if it doesn't exist
+    worldName: skyworld
+    #[integer] The time in seconds before a player can use the /island info command again (note: cooldowns are reset when the plugin is reloaded)
+    cooldownInfo: 30
+    #[integer] The time in seconds before a player can use the /island restart command again (note: cooldowns are reset when the plugin is reloaded)
+    cooldownRestart: 600
+  island:
+    #[filename] The schematic to use for island generation.
+    #Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
+    schematicName: yourschematicname
+    #[integer] The number of blocks between islands
+    distance: 110
+    #[true/false] If true, remove all hostile mobs when a player teleports back to their island
+    removeCreaturesByTeleport: true
+    #[integer] The y-coordinate (height) where islands are spawned
+    height: 120
+    #[item list] The list of items to place in the chest when a player starts a new island. ITEM_ID:HOW_MANY
+    #default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign (for chest prot plugins)
+    chestItems: '79:2 360:1 81:1 327:1 40:1 39:1 361:1 338:1 323:1'
+    #[true/false] If true, add extra items to a chest when a player starts a new island (for donors and special players)
+    addExtraItems: true
+    #[permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
+    #Only checked if 'addExtraItems' is set to true
+    extraPermissions: 
+    #[permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY
+    #When granting the permission, prefix it with "usb." so the full permission to add would be usb.smallbonus
+      smallbonus: '4:32 320:5'
+      mediumbonus: '50:16 327:1'
+      largebonus: '3:10 12:10'  
+    #[true/false] If true, use WorldGuard to automatically create a protective region for each island
+    protectWithWorldGuard: false
+    #[integer] The size of the protective region for each island. Can't be higher than 'distance' (only used if 'protectWithWorldGuard'
+    #is set to true.
+    protectionRange: 100
+    #[allow/deny] If set to allow, pvp will be enabled on player islands.
+    allowPvP: deny
+    #[true/false] Allow players to completely lock their islands so non-party members can't enter (locking still requires permission usb.lock)
+    allowIslandLock: false
+    #[true/false] Use old SkySMP style island generation.  Set this to true if you want to use the old
+    # island style, or set to false if you want to use the new sytle island generation. Only affects new islands.
+    useOldIslands: false
+    #[true/false] If true, use island levels/ranks (/island info) - may have a slight impact on performance
+    #Set to false if you have performance issues
+    useIslandLevel: true
+    #Note: The island levels/ranks will be configurable in a future update.
+    #[true/false] If true, a top 10 islands list will be generated when the plugin is loaded.
+    #This can take a long time with a lot of players or large islands. Use /dev topten to manually generate the list.
+    useTopTen: true
+  extras:
+    #[true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
+    #NOTE: Requires EssentialsSpawn or another plugin with the "/spawn" command
+    sendToSpawn: false
+    #[true/false] If true, a player can right-click on a block of obsidian on their island while holding an empty bucket to remove the obsidian and fill the bucket with lava. This is useful for people that accidently
+    #turn their lava into obsidian with a bad cobblestone generator design. Will only work on the player's island and if there are no other obsidian blocks nearby (so can't be used on portals).
+    obsidianToLava: true
+  challenges:
+    #[true/false] Enable the use of the challenges command.
+    allowChallenges: true
+    #[true/false] Should first time challenge completions be broadcast to the whole server?
+    broadcastCompletion: true
+    #[text] The color/formatting of the broadcast text when showing first time completions
+    broadcastText: '&6'
+    #[list] The ranks to sort the challenges into.
+    ranks: 'Easy Medium Hard Master'
+    #[true/false] should challenges in higher level ranks require challenges in lower level ranks to be completed?
+    requirePreviousRank: true
+    #[integer] The number of tasks per rank that can be left uncompleted to advance to the next rank. For example, if you have 4 easy challenges
+    #with a rankLeeway of 1, a player would only need to complete 3 to advance to the next rank. A rankLeeway of 0 would require them all.
+    rankLeeway: 1
+    #[color code] The color to use for uncompleted challenges in the list
+    challengeColor: '&e'
+    #[color code] The color to use for completed challenges in the list (non-repeatable)
+    finishedColor: '&2'
+    #[color code] The color to use for completed challenges in the list (repeatable)
+    repeatableColor: '&a'
+    #[true/false] Enable an economy plugin via vault(required for currencyReward)
+    enableEconomyPlugin: true
+    #[list] The list of challenges, add as many as you like.  Be sure to use only lowercase in the challenge names.
+    challengeList:
+      #[text] The name of the challenge that shows up when you do /challenges. All challenge names should be lower case!!
+      cobblestonegenerator:
+        #[text] What the player sees when they do /challenges <challengename>
+        description: 'Create a cobblestone generator and mine 64 cobblestone.'
+        #[rank] The rank to assign this challenge (must be in the ranks list above)
+        rankLevel: 'Easy'
+        #[onIsland/onPlayer/islandLevel] This tells whether the required blocks/items should be in the player's inventory or on their island
+        # When using onIsland, the player must be 10 blocks away from the required blocks on his island.
+        # When using islandLevel, the 'requiredItems' field should be the island level required. The player must use /island level first to update his level.
+        type: onPlayer
+        #[itemid list] The itemid:count of the items required for the challenge (data values are not supported for required items)
+        requiredItems: '4:64'
+        #[true/false] Whether or not to remove the required items from the player's inventory. Only affects onPlayer type challenges. If false, suggested to make the challenge non-repeatable.
+        takeItems: true
+        #[itemid list] The itemid:<datavalue>:count of the reward to give the player for completing the challenge
+        itemReward: '334:3'
+        #[permission node] A permission granted for completion (use none to not give a permission)
+        permissionReward: 'none'
+        #[text] The text name of the reward (to display to the player). No need to list currency rewards here, but you should list permission rewards if you have them.
+        rewardText: '3 leather'
+        #[integer] How much currency to give for the first time completion (requires an economy plugin)
+        currencyReward: 10
+        #[integer] How much xp to give to the player for the first time completion.
+        xpReward: 30
+        #[true/false] Can the player repeat the challenge? onIsland and islandLevel challenges cannot be repeated.
+        repeatable: true
+        #[itemid list] The itemid:count of the reward to give the player for completing the challenge after the first time
+        repeatItemReward: '334:1'
+        #[text] The text to display when the player is rewarded.
+        repeatRewardText: '1 leather'
+        #[integer] How much currency to give when the challenge is repeated (requires an economy plugin)
+        repeatCurrencyReward: 5
+        #[integer] How much xp to give to the player for the repeat completions.
+        repeatXpReward: 10
+      applecollector:
+        description: 'Collect 2 apples from trees.'
+        rankLevel: 'Easy'
+        type: onPlayer
+        requiredItems: '260:2'
+        takeItems: true
+        itemReward: '6:0:2 6:1:2 6:2:2 6:3:2'
+        rewardText: '2 of each kind of sapling'
+        currencyReward: 10
+        xpReward: 30
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '6:0:1 6:1:1 6:2:1 6:3:1'
+        repeatRewardText: '1 of each kind of sapling'
+        repeatCurrencyReward: 5
+        repeatXpReward: 10
+      wheatfarmer:
+        description: 'Create a wheat farm and harvest 64 units of wheat'
+        rankLevel: 'Easy'
+        type: onPlayer
+        requiredItems: '296:64'
+        takeItems: true
+        itemReward: '3:5'
+        rewardText: '5 dirt'
+        currencyReward: 10
+        xpReward: 30
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '3:1'
+        repeatRewardText: '1 dirt'
+        repeatCurrencyReward: 5
+        repeatXpReward: 10
+      cactusfarmer:
+        description: 'Create a cactus farm and harvest 64 cacti'
+        rankLevel: 'Easy'
+        type: onPlayer
+        requiredItems: '81:64'
+        takeItems: true
+        itemReward: '12:10'
+        rewardText: '10 sand'
+        currencyReward: 15
+        xpReward: 30
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '12:1'
+        repeatRewardText: '1 sand'
+        repeatCurrencyReward: 1
+        repeatXpReward: 10
+      sugarfarmer:
+        description: 'Create a sugar cane farm and refine 64 units of sugar'
+        rankLevel: 'Easy'
+        type: onPlayer
+        requiredItems: '353:64'
+        takeItems: true
+        itemReward: '3:5 82:15'
+        rewardText: '5 dirt and 15 clay blocks'
+        currencyReward: 15
+        xpReward: 30
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '82:2'
+        repeatRewardText: '2 clay blocks'
+        repeatCurrencyReward: 5
+        repeatXpReward: 10
+      melonfarmer:
+        description: 'Create a melon farm and harvest 128 slices of melon'
+        rankLevel: 'Easy'
+        type: onPlayer
+        requiredItems: '360:128'
+        takeItems: true
+        itemReward: '3:5'
+        rewardText: '5 dirt'
+        currencyReward: 15
+        xpReward: 30
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '3:2'
+        repeatRewardText: '2 dirt blocks'
+        repeatCurrencyReward: 5
+        repeatXpReward: 10
+      pumpkinfarmer:
+        description: 'Create a pumpkin farm and harvest 64 pumpkins'
+        rankLevel: 'Easy'
+        type: onPlayer
+        requiredItems: '86:64'
+        takeItems: true
+        itemReward: '3:5'
+        rewardText: '5 dirt'
+        currencyReward: 15
+        xpReward: 30
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '3:2'
+        repeatRewardText: '2 dirt blocks'
+        repeatCurrencyReward: 5
+        repeatXpReward: 10
+      shroompicker:
+        description: 'Create a mushroom farm and collect 64 red and 64 brown mushrooms'
+        rankLevel: 'Easy'
+        type: onPlayer
+        requiredItems: '39:64 40:64'
+        takeItems: true
+        itemReward: '110:1'
+        rewardText: '1 mycelium block'
+        currencyReward: 15
+        xpReward: 30
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '110:1'
+        repeatRewardText: '1 mycelium block'
+        repeatCurrencyReward: 5
+        repeatXpReward: 10
+      novicebuilder:
+        description: 'Reach island level 20 (/island level).'
+        rankLevel: 'Easy'
+        type: islandLevel
+        requiredItems: 20
+        takeItems: false
+        itemReward: '257:1 3:5'
+        rewardText: '1 iron pickaxe and 5 dirt'
+        currencyReward: 50
+        xpReward: 50
+        permissionReward: 'none'
+        repeatable: false
+        repeatItemReward: ''
+        repeatRewardText: ''
+        repeatCurrencyReward: 0
+        repeatXpReward: 0
+      monsterslayer:
+        description: 'Kill monsters and collect 64 rotten flesh, 32 skeleton bones, 32 string, 32 arrows, 16 gunpowder, 5 spider eyes'
+        rankLevel: 'Medium'
+        type: onPlayer
+        requiredItems: '367:64 287:32 289:16 262:32 352:32 375:5'
+        takeItems: true
+        itemReward: '331:16 15:5 318:1'
+        rewardText: '16 redstone dust, 1 flint, and 5 iron(ore)'
+        currencyReward: 75
+        xpReward: 75
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '331:2 15:1 318:1'
+        repeatRewardText: '2 redstone dust, 1 flint, and 1 iron(ore)'
+        repeatCurrencyReward: 15
+        repeatXpReward: 15
+      expertfarmer:
+        description: 'Harvest 64 units of the following: wheat, sugar, melon, carrots, potatoes, pumpkin'
+        rankLevel: 'Medium'
+        type: onPlayer
+        requiredItems: '360:64 353:64 296:64 392:64 391:64 86:64'
+        takeItems: true
+        itemReward: '331:16 351:3:1 383:90:1 383:92:1 383:93:1'
+        rewardText: '16 redstone dust, 1 cocoa bean, 1 spawn egg(chicken,cow,pig)'
+        currencyReward: 75
+        xpReward: 75
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '351:3:1 383:90:1 383:92:1 383:93:1'
+        repeatRewardText: '1 cocoa bean, 1 spawn egg(chicken,cow,pig)'
+        repeatCurrencyReward: 20
+        repeatXpReward: 20
+      fisherman:
+        description: 'Make a fishing pond, then catch and cook 10 fish'
+        rankLevel: 'Medium'
+        type: onPlayer
+        requiredItems: '350:10'
+        takeItems: true
+        itemReward: '331:16 15:5 351:5'
+        rewardText: '16 redstone dust, 5 inksac, 5 iron (ore)'
+        currencyReward: 75
+        xpReward: 75
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '331:2 15:1 351:1'
+        repeatRewardText: '2 redstone dust, 1 inksac, 1 iron (ore)'
+        repeatCurrencyReward: 15
+        repeatXpReward: 15
+      lumberjack:
+        description: 'Create a tree farm and collect 16 oak, birch, jungle, and spruce logs'
+        rankLevel: 'Medium'
+        type: onPlayer
+        requiredItems: '17:0:16 17:1:16 17:2:16 17:3:16'
+        takeItems: true
+        itemReward: '331:16 15:5 383:98:1'
+        rewardText: '16 redstone dust, 5 iron (ore), 1 wolf spawn egg'
+        currencyReward: 75
+        xpReward: 75
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '331:2 15:1'
+        repeatRewardText: '2 redstone dust, 1 iron (ore)'
+        repeatCurrencyReward: 15
+        repeatXpReward: 15
+      cookielover:
+        description: 'Make 128 cookies and a bucket of milk'
+        rankLevel: 'Medium'
+        type: onPlayer
+        requiredItems: '335:1 357:128'
+        takeItems: true
+        itemReward: '331:16 15:5'
+        rewardText: '16 redstone dust, 5 iron (ore)'
+        currencyReward: 75
+        xpReward: 75
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '331:2 15:1'
+        repeatRewardText: '2 redstone dust, 1 iron (ore)'
+        repeatCurrencyReward: 15
+        repeatXpReward: 15
+      adeptbuilder:
+        description: 'Reach island level 100 (/island level).'
+        rankLevel: 'Medium'
+        type: islandLevel
+        requiredItems: 100
+        takeItems: false
+        itemReward: '49:10'
+        rewardText: '10 obsidian blocks'
+        currencyReward: 50
+        xpReward: 50
+        permissionReward: 'none'
+        repeatable: false
+        repeatItemReward: ''
+        repeatRewardText: ''
+        repeatCurrencyReward: 0
+        repeatXpReward: 0
+      homeowner:
+        description: 'Build a house that contains at least 1 door, bed, bookshelf, crafting table, furnace, window, and torch.'
+        rankLevel: 'Medium'
+        type: onIsland
+        requiredItems: '26:1 58:1 20:1 64:1 61:1 47:1 50:1'
+        takeItems: false
+        itemReward: '84:1 2267:1 22:10'
+        rewardText: '1 jukebox, 1 music disk, 10 lapis lazuli blocks'
+        currencyReward: 100
+        xpReward: 100
+        permissionReward: 'none'
+        repeatable: false
+        repeatItemReward: ''
+        repeatRewardText: ''
+        repeatCurrencyReward: 0
+        repeatXpReward: 0
+      netherportal:
+        description: 'Build a nether portal on your island and activate it.'
+        rankLevel: 'Hard'
+        type: onIsland
+        requiredItems: '49:10 90:1'
+        takeItems: false
+        itemReward: '276:1'
+        rewardText: '1 diamond sword'
+        currencyReward: 100
+        xpReward: 100
+        permissionReward: 'none'
+        repeatable: false
+        repeatItemReward: ''
+        repeatRewardText: ''
+        repeatCurrencyReward: 0
+        repeatXpReward: 0
+      pearlcollector:
+        description: 'Collect 15 enderpearls from endermen'
+        rankLevel: 'Hard'
+        type: onPlayer
+        requiredItems: '368:15'
+        takeItems: true
+        itemReward: '266:5 369:1'
+        rewardText: '5 gold ingots and 1 blaze rod'
+        currencyReward: 50
+        xpReward: 100
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '266:1 369:1'
+        repeatRewardText: '1 gold ingot and 1 blaze rod'
+        repeatCurrencyReward: 15
+        repeatXpReward: 15
+      slimefarmer:
+        description: 'Collect 40 slimeballs from slimes'
+        rankLevel: 'Hard'
+        type: onPlayer
+        requiredItems: '341:40'
+        takeItems: true
+        itemReward: '266:5 388:1'
+        rewardText: '5 gold ingots and 5 emeralds'
+        currencyReward: 50
+        xpReward: 100
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '331:8'
+        repeatRewardText: '8 redstone dust'
+        repeatCurrencyReward: 15
+        repeatXpReward: 15
+      baker:
+        description: 'Bake 5 cakes and 5 pumpkin pies'
+        rankLevel: 'Hard'
+        type: onPlayer
+        requiredItems: '354:5 400:5'
+        takeItems: true
+        itemReward: '266:5 264:1'
+        rewardText: '5 gold ingots and 1 diamond'
+        currencyReward: 50
+        xpReward: 100
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '15:1'
+        repeatRewardText: '1 iron (ore)'
+        repeatCurrencyReward: 15
+        repeatXpReward: 15
+      explorer:
+        description: 'Make 1 map, compass, clock and collect 64 netherrack, 16 soulsand, and 1 ghast tear'
+        rankLevel: 'Hard'
+        type: onPlayer
+        requiredItems: '87:64 88:16 370:1 358:1 345:1 347:1'
+        takeItems: true
+        itemReward: '27:32 66:256 264:1 383:98:1'
+        rewardText: '256 rails, 32 powered rails, 1 ocelot spawn egg, 1 diamond'
+        currencyReward: 100
+        xpReward: 100
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '15:1'
+        repeatRewardText: '1 iron (ore)'
+        repeatCurrencyReward: 20
+        repeatXpReward: 20
+      expertbuilder:
+        description: 'Reach island level 250 (/island level).'
+        rankLevel: 'Hard'
+        type: islandLevel
+        requiredItems: 250
+        takeItems: false
+        itemReward: '264:1 3:20 12:20'
+        rewardText: '1 diamond, 20 dirt, and 20 sand'
+        currencyReward: 150
+        xpReward: 150
+        permissionReward: 'none'
+        repeatable: false
+        repeatItemReward: ''
+        repeatRewardText: ''
+        repeatCurrencyReward: 0
+        repeatXpReward: 0
+      woolcollector:
+        description: 'Collect 5 of every color of wool'
+        rankLevel: 'Master'
+        type: onPlayer
+        requiredItems: '35:0:5 35:1:5 35:2:5 35:3:5 35:4:5 35:5:5 35:6:5 35:7:5 35:8:5 35:9:5 35:10:5 35:11:5 35:12:5 35:13:5 35:14:5 35:15:5' 
+        takeItems: true
+        itemReward: '264:2 2262:1 2263:1 2261:1 383:91:1 388:5'
+        rewardText: '2 diamonds, 5 emeralds, 3 music disks, 1 sheep spawn egg'
+        currencyReward: 200
+        xpReward: 200
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '388:1 383:91:1'
+        repeatRewardText: '1 emerald, 1 sheep spawn egg'
+        repeatCurrencyReward: 20
+        repeatXpReward: 20
+      maestro:
+        description: 'Craft a jukebox and collect all music discs'
+        rankLevel: 'Master'
+        type: onPlayer
+        requiredItems: '2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1' 
+        takeItems: true
+        itemReward: '264:3 388:10'
+        rewardText: '3 diamonds and 10 emeralds'
+        currencyReward: 200
+        xpReward: 200
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '266:1'
+        repeatRewardText: '1 gold ingot'
+        repeatCurrencyReward: 20
+        repeatXpReward: 20
+      emeraldcollector:
+        description: 'Collect 50 emeralds'
+        rankLevel: 'Master'
+        type: onPlayer
+        requiredItems: '388:50' 
+        takeItems: true
+        itemReward: '264:2'
+        rewardText: '2 diamonds'
+        currencyReward: 200
+        xpReward: 200
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '266:2'
+        repeatRewardText: '2 gold ingots'
+        repeatCurrencyReward: 20
+        repeatXpReward: 20
+      topchef:
+        description: 'Collect 1 of every kind of cooked or crafted edible food (no raw food, zombie flesh, or super golden apples)'
+        rankLevel: 'Master'
+        type: onPlayer
+        requiredItems: '393:1 297:1 354:1 366:1 350:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1' 
+        takeItems: true
+        itemReward: '264:2 2257:1 2258:1 2260:1 383:96:1 388:5'
+        rewardText: '2 diamonds, 3 music discs, 1 mooshroom spawn egg, and 5 emeralds'
+        currencyReward: 200
+        xpReward: 200
+        permissionReward: 'none'
+        repeatable: true
+        repeatItemReward: '266:1 383:96:1 388:1'
+        repeatRewardText: '1 gold ingot, 1 mooshroom spawn egg, 1 emerald'
+        repeatCurrencyReward: 20
+        repeatXpReward: 20
+      skylord:
+        description: 'Get an island level of 1000'
+        rankLevel: 'Master'
+        type: islandLevel
+        requiredItems: 1000
+        takeItems: false
+        itemReward: '264:1'
+        rewardText: '1 diamond, &eTitle: &a[&2SkyLord&4+&a]&f'
+        currencyReward: 250
+        xpReward: 250
+        permissionReward: 'titlemanager.title.skylordplus skyblockserver.endaccess'
+        repeatable: false
+        repeatItemReward: ''
+        repeatRewardText: ''
+        repeatCurrencyReward: 0
+        repeatXpReward: 0

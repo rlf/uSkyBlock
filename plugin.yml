@@ -1,0 +1,88 @@
+name: uSkyBlock
+main: us.talabrek.ultimateskyblock.uSkyBlock
+version: 1.0.7
+description: Ultimate SkyBlock. 
+author: Talabrek (based on code by Qgel and others)
+load: STARTUP
+commands:
+    island:
+        description: Commands to use your island
+        aliases: [is, skyblock, sb]
+        usage:  |
+             /island [restart/sethome/info/lock/unlock/top/party]
+    dev:
+        description: admin commands
+        usage:  |
+            /dev
+    challenges:
+        description: skyblock challenges
+        aliases: [c, challenge]
+        usage:  |  
+            /challenges help for more information
+permissions:    
+  usb.*:
+    children:
+      usb.island.*:
+        children:
+          usb.island.create:
+            description: Let the player use the /island command
+          usb.island.info:
+            description: Let the player check their island level
+          usb.island.topten:
+            description: Let the player see the top ten list
+          usb.island.sethome:
+            description: Let the player set their island teleport point
+          usb.island.challenges:
+            description: Let the player use the /challenges command
+          usb.island.warp:
+            description: Let the player use /island warp to warp to an open island.
+      usb.extra.*:
+        children:
+          usb.extra.hunger:
+            description: The player won't lose hunger on their island.
+          usb.extra.partysize:
+            description: The player can have double the party members on their island
+          usb.extra.addwarp:
+            description: The player can open his island, allowing other players to warp there.
+      usb.party.*:
+        children:
+          usb.party.create:
+            description: Let a player invite other players to join a party
+          usb.party.kick:
+            description: Let a player kick other players
+          usb.party.makeleader:
+            description: Let a player make another player leader of the party
+          usb.party.join:
+            description: Let a player join another player's party
+      usb.mod.*:
+        children:
+          usb.mod.protect:
+            description: Let a player add protection to another player's island
+          usb.mod.protectall:
+            description: Let a player try to add protection to all unprotected islands
+          usb.mod.topten:
+            description: Let a player manually update the top ten list
+          usb.mod.orphan:
+            description: Let a player check and modify the orphan list
+          usb.mod.goto:
+            description: Let a player teleport to another player's island
+          usb.mod.party:
+            description: Let a player access the moderator party commands
+          usb.mod.challenges:
+            description: Let a player access the moderator challenge commands to complete and reset another player's challenges. 
+          usb.mod.bypasscooldowns:
+            description: Let a player bypass the cooldowns for the /island info and /island restart commands
+          usb.mod.bypassprotection:
+            description: Let a player bypass the built in island protection
+      usb.admin.*:
+        children:
+          usb.admin.reload:
+            description: Let a player reload the config.yml
+          usb.admin.delete:
+            description: Let a player completely remove a player's island (including blocks)
+          usb.admin.remove:
+            description: Let a player remove another player's ownership of an island (island blocks remain)
+          usb.admin.register:
+            description: Let a player register the nearest island (using the bedrock) to another player.
+          usb.admin.purge:
+            description: Let a player purge old islands.
