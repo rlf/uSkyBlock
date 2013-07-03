@@ -1,34 +1,22 @@
 package us.talabrek.ultimateskyblock;
 
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-import java.io.File;
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.scheduler.BukkitScheduler;
 
 public class IslandCommand implements CommandExecutor {
 	public Location Islandlocation;
@@ -605,7 +593,7 @@ public class IslandCommand implements CommandExecutor {
 									/*  644 */WorldGuardHandler.removePlayerFromRegion(player.getName(), this.tempTargetPlayer);
 								}
 							} else {
-								/*  648 */System.out.print("Player " + player.getName() + " failed to remove " + this.tempTargetPlayer);
+								/*  648 */System.out.println("Player " + player.getName() + " failed to remove " + this.tempTargetPlayer);
 								/*  649 */player.sendMessage(ChatColor.RED + "That player is not part of your island group!");
 							}
 						}
@@ -636,7 +624,7 @@ public class IslandCommand implements CommandExecutor {
 					/*  676 */if (((PlayerInfo) uSkyBlock.getInstance().getActivePlayers().get(player.getName())).getMembers().size() > 2) {
 						/*  678 */player.sendMessage(ChatColor.RED
 								+ "Remove all players from your party other than the player you are transferring to.");
-						/*  679 */System.out.print(player.getName() + " tried to transfer his island, but his party has too many people!");
+						/*  679 */System.out.println(player.getName() + " tried to transfer his island, but his party has too many people!");
 						/*  680 */return true;
 					}
 
@@ -1090,14 +1078,14 @@ public class IslandCommand implements CommandExecutor {
 
 	public boolean addPlayertoParty(String playername, String partyleader) {
 		/* 1298 */if (!uSkyBlock.getInstance().getActivePlayers().containsKey(playername)) {
-			/* 1300 */System.out.print("Failed to add player to party! (" + playername + ")");
+			/* 1300 */System.out.println("Failed to add player to party! (" + playername + ")");
 			/* 1301 */return false;
 		}
 		/* 1303 */if (!uSkyBlock.getInstance().getActivePlayers().containsKey(partyleader)) {
-			/* 1305 */System.out.print("Failed to add player to party! (" + playername + ")");
+			/* 1305 */System.out.println("Failed to add player to party! (" + playername + ")");
 			/* 1306 */return false;
 		}
-		/* 1308 */System.out.print("Adding player: " + playername + " to party with leader: " + partyleader);
+		/* 1308 */System.out.println("Adding player: " + playername + " to party with leader: " + partyleader);
 		/* 1309 */((PlayerInfo) uSkyBlock.getInstance().getActivePlayers().get(playername)).setJoinParty(partyleader,
 				((PlayerInfo) uSkyBlock.getInstance().getActivePlayers().get(partyleader)).getIslandLocation());
 		/* 1310 */if (!playername.equalsIgnoreCase(partyleader)) {
@@ -1121,7 +1109,7 @@ public class IslandCommand implements CommandExecutor {
 
 		/* 1330 */if (!((PlayerInfo) uSkyBlock.getInstance().getActivePlayers().get(playername)).getPartyLeader().equalsIgnoreCase(
 				partyleader)) {
-			/* 1332 */System.out.print("Error adding player to a new party!");
+			/* 1332 */System.out.println("Error adding player to a new party!");
 			/* 1333 */return false;
 		}
 		/* 1335 */return true;
@@ -1168,7 +1156,7 @@ public class IslandCommand implements CommandExecutor {
 
 	public boolean getIslandLevel(Player player, String islandPlayer) {
 		/* 1383 */if (this.allowInfo) {
-			/* 1385 */System.out.print("Preparing to calculate island level");
+			/* 1385 */System.out.println("Preparing to calculate island level");
 			/* 1386 */this.allowInfo = false;
 			/* 1387 */final String playerx = player.getName();
 			/* 1388 */final String islandPlayerx = islandPlayer;
@@ -1179,7 +1167,7 @@ public class IslandCommand implements CommandExecutor {
 			}
 			/* 1395 */uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
 				public void run() {
-					/* 1399 */System.out.print("Calculating island level in async thread");
+					/* 1399 */System.out.println("Calculating island level in async thread");
 					try {
 						/* 1401 */String player = playerx;
 						/* 1402 */String islandPlayer = islandPlayerx;
@@ -1233,16 +1221,16 @@ public class IslandCommand implements CommandExecutor {
 									.setIslandLevel(blockcount / 100);
 						}
 					} catch (Exception e) {
-						/* 1459 */System.out.print("Error while calculating Island Level: " + e);
+						/* 1459 */System.out.println("Error while calculating Island Level: " + e);
 						/* 1460 */IslandCommand.this.allowInfo = true;
 					}
-					/* 1462 */System.out.print("Finished async info thread");
+					/* 1462 */System.out.println("Finished async info thread");
 
 					/* 1465 */uSkyBlock.getInstance().getServer().getScheduler()
 							.scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable() {
 								public void run() {
 									/* 1470 */IslandCommand.this.allowInfo = true;
-									/* 1471 */System.out.print("Back to sync thread for info");
+									/* 1471 */System.out.println("Back to sync thread for info");
 									/* 1472 */if (Bukkit.getPlayer(playerx) != null) {
 										/* 1474 */Bukkit.getPlayer(playerx).sendMessage(
 												ChatColor.YELLOW + "Information about " + islandPlayerx + "'s Island:");
@@ -1262,14 +1250,14 @@ public class IslandCommand implements CommandExecutor {
 												/* 1484 */Bukkit.getPlayer(playerx).sendMessage(ChatColor.RED + "Error: Invalid Player");
 										}
 									}
-									/* 1487 */System.out.print("Finished with sync thread for info");
+									/* 1487 */System.out.println("Finished with sync thread for info");
 								}
 							}, 0L);
 				}
 			});
 		} else {
 			/* 1494 */player.sendMessage(ChatColor.RED + "Can't use that command right now! Try again in a few seconds.");
-			/* 1495 */System.out.print(player.getName() + " tried to use /island info but someone else used it first!");
+			/* 1495 */System.out.println(player.getName() + " tried to use /island info but someone else used it first!");
 			/* 1496 */return false;
 		}
 		/* 1498 */return true;
