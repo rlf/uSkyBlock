@@ -1,5 +1,12 @@
 package us.talabrek.ultimateskyblock;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.plugin.Plugin;
+
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
@@ -8,33 +15,24 @@ import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
-import java.io.File;
-import java.io.IOException;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.plugin.Plugin;
 
 public class WorldEditHandler {
 	public static WorldEditPlugin getWorldEdit() {
-		/* 22 */Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldEdit");
+		final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldEdit");
 
-		/* 25 */if ((plugin == null) || (!(plugin instanceof WorldEditPlugin))) {
-			/* 26 */return null;
-		}
+		if (plugin == null || !(plugin instanceof WorldEditPlugin)) { return null; }
 
-		/* 29 */return (WorldEditPlugin) plugin;
+		return (WorldEditPlugin) plugin;
 	}
 
 	public static boolean loadIslandSchematic(World world, File file, Location origin) throws DataException, IOException,
 			MaxChangedBlocksException {
-		/* 33 */Vector v = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
-		/* 34 */SchematicFormat format = SchematicFormat.getFormat(file);
-		/* 35 */if (format == null) {
-			/* 37 */return false;
-		}
-		/* 39 */EditSession es = new EditSession(new BukkitWorld(world), 999999999);
-		/* 40 */CuboidClipboard cc = format.load(file);
-		/* 41 */cc.paste(es, v, false);
-		/* 42 */return true;
+		final Vector v = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+		final SchematicFormat format = SchematicFormat.getFormat(file);
+		if (format == null) { return false; }
+		final EditSession es = new EditSession(new BukkitWorld(world), 999999999);
+		final CuboidClipboard cc = format.load(file);
+		cc.paste(es, v, false);
+		return true;
 	}
 }

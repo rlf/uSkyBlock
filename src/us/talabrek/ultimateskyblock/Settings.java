@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
 import java.util.Set;
+
 import org.bukkit.inventory.ItemStack;
 
 public class Settings {

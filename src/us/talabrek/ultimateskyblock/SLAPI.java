@@ -8,16 +8,16 @@ import java.io.ObjectOutputStream;
 
 public class SLAPI {
 	public static void save(Object obj, File path) throws Exception {
-		/* 17 */ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
-		/* 18 */oos.writeObject(obj);
-		/* 19 */oos.flush();
-		/* 20 */oos.close();
+		final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
+		oos.writeObject(obj);
+		oos.flush();
+		oos.close();
 	}
 
 	public static Object load(File path) throws Exception {
-		/* 24 */ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
-		/* 25 */Object result = ois.readObject();
-		/* 26 */ois.close();
-		/* 27 */return result;
+		final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+		final Object result = ois.readObject();
+		ois.close();
+		return result;
 	}
 }

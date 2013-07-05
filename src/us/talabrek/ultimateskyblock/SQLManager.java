@@ -1,16 +1,13 @@
 package us.talabrek.ultimateskyblock;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import lib.PatPeter.SQLibrary.MySQL;
 
-@SuppressWarnings("unused")
 public class SQLManager {
 
 	private MySQL sql;
@@ -66,7 +63,7 @@ public class SQLManager {
 				logger.warning("Failed to connect.");
 				connected = false;
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logger.warning(e.getMessage());
 			logger.warning("Failed to connect.");
 			connected = false;
@@ -98,7 +95,7 @@ public class SQLManager {
 		try {
 			logger.info("Setting up MySQL.");
 			query("CREATE TABLE IF NOT EXISTS " + table + " (" + setup + ")");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
@@ -137,7 +134,7 @@ public class SQLManager {
 		try {
 			sql.query(cmd);
 			return true;
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -153,9 +150,9 @@ public class SQLManager {
 	private ResultSet queryResponse(String cmd) {
 		if (!isConnected()) { return null; }
 		try {
-			ResultSet result = sql.query(cmd);
+			final ResultSet result = sql.query(cmd);
 			return result;
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -174,7 +171,7 @@ public class SQLManager {
 		if (!isConnected()) { return false; }
 		try {
 			return queryResponse("SELECT * FROM " + table + " WHERE username = '" + name + "' LIMIT 1").next();
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -190,9 +187,9 @@ public class SQLManager {
 	 */
 	public List<String> getKeys(String table) {
 		if (!isConnected()) { return null; }
-		List<String> list = new ArrayList<String>();
+		final List<String> list = new ArrayList<String>();
 		try {
-			ResultSet rs = queryResponse("SELECT * FROM " + table + " WHERE username != 'null'");
+			final ResultSet rs = queryResponse("SELECT * FROM " + table + " WHERE username != 'null'");
 			if (rs != null) {
 				while (rs.next()) {
 					if (rs.getString("username") != null) {
@@ -200,7 +197,7 @@ public class SQLManager {
 					}
 				}
 			}
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
@@ -235,9 +232,9 @@ public class SQLManager {
 	 */
 	public Object get(String table, String name, String field) {
 		try {
-			ResultSet rs = queryResponse("SELECT * FROM " + table + " WHERE username = '" + name + "' LIMIT 1");
+			final ResultSet rs = queryResponse("SELECT * FROM " + table + " WHERE username = '" + name + "' LIMIT 1");
 			if (rs.next()) { return rs.getObject(field); }
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
