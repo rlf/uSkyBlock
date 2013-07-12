@@ -20,19 +20,581 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class IslandCommand implements CommandExecutor {
-	public Location Islandlocation;
-	private List<String> tempParty;
-	private String tempLeader;
-	private String tempTargetPlayer;
 	public boolean allowInfo = true;
 	private final HashMap<String, String> inviteList = new HashMap<String, String>();
+	public Location Islandlocation;
+	private String tempLeader;
+	private List<String> tempParty;
+	private String tempTargetPlayer;
 	String tPlayer;
 
 	public IslandCommand() {
 		inviteList.put("NoInvited", "NoInviter");
 	}
 
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] split) {
+	public boolean addPlayertoParty(final String playername, final String partyleader) {
+		if (!uSkyBlock.getInstance().getActivePlayers().containsKey(playername)) {
+			System.out.println("uSkyblock " + "Failed to add player to party! (" + playername + ")");
+			return false;
+		}
+		if (!uSkyBlock.getInstance().getActivePlayers().containsKey(partyleader)) {
+			System.out.println("uSkyblock " + "Failed to add player to party! (" + playername + ")");
+			return false;
+		}
+		System.out.println("uSkyblock " + "Adding player: " + playername + " to party with leader: " + partyleader);
+		uSkyBlock.getInstance().getActivePlayers().get(playername)
+				.setJoinParty(partyleader, uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
+		if (!playername.equalsIgnoreCase(partyleader)) {
+			if (uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation() != null) {
+				uSkyBlock.getInstance().getActivePlayers().get(playername)
+						.setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation());
+			} else {
+				uSkyBlock.getInstance().getActivePlayers().get(playername)
+						.setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
+			}
+
+			if (!uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(playername)) {
+				uSkyBlock.getInstance().getActivePlayers().get(partyleader).addMember(playername);
+			}
+			if (!uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(partyleader)) {
+				uSkyBlock.getInstance().getActivePlayers().get(partyleader).addMember(partyleader);
+			}
+		}
+		uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getActivePlayers().get(playername));
+
+		if (!uSkyBlock.getInstance().getActivePlayers().get(playername).getPartyLeader().equalsIgnoreCase(partyleader)) {
+			System.out.println("uSkyblock " + "Error adding player to a new party!");
+			return false;
+		}
+		return true;
+	}
+
+	private boolean createIsland(final CommandSender sender) {
+		final Player player = (Player) sender;
+		final Location last = uSkyBlock.getInstance().getLastIsland();
+		last.setY(Settings.island_height);
+		try {
+			do {
+				uSkyBlock.getInstance().removeNextOrphan();
+
+				if (!uSkyBlock.getInstance().hasOrphanedIsland()) {
+					break;
+				}
+			} while (uSkyBlock.getInstance().islandAtLocation(uSkyBlock.getInstance().checkOrphan()));
+
+			while (uSkyBlock.getInstance().hasOrphanedIsland()
+					&& !uSkyBlock.getInstance().checkOrphan().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
+				uSkyBlock.getInstance().removeNextOrphan();
+			}
+			Location next;
+			if (uSkyBlock.getInstance().hasOrphanedIsland()
+					&& !uSkyBlock.getInstance().islandAtLocation(uSkyBlock.getInstance().checkOrphan())) {
+				next = uSkyBlock.getInstance().getOrphanedIsland();
+				uSkyBlock.getInstance().saveOrphans();
+				uSkyBlock.getInstance().updateOrphans();
+			} else {
+				next = nextIslandLocation(last);
+				uSkyBlock.getInstance().setLastIsland(next);
+
+				while (uSkyBlock.getInstance().islandAtLocation(next)) {
+					next = nextIslandLocation(next);
+				}
+
+				uSkyBlock.getInstance().setLastIsland(next);
+			}
+			boolean hasIslandNow = false;
+
+			if (uSkyBlock.getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
+				String cSchem = "";
+				for (int i = 0; i < uSkyBlock.getInstance().getSchemFile().length; i++) {
+					if (!hasIslandNow) {
+						if (uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.') > 0) {
+							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0,
+									uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
+						} else {
+							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName();
+						}
+
+						if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, uSkyBlock.getSkyBlockWorld())) {
+							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(),
+									uSkyBlock.getInstance().getSchemFile()[i], next)) {
+								setChest(next, player);
+								hasIslandNow = true;
+							}
+						}
+					}
+				}
+				if (!hasIslandNow) {
+					for (int i = 0; i < uSkyBlock.getInstance().getSchemFile().length; i++) {
+						if (uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.') > 0) {
+							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0,
+									uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
+						} else {
+							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName();
+						}
+						if (cSchem.equalsIgnoreCase(Settings.island_schematicName)) {
+							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(),
+									uSkyBlock.getInstance().getSchemFile()[i], next)) {
+								setChest(next, player);
+								hasIslandNow = true;
+							}
+						}
+					}
+				}
+			}
+			if (!hasIslandNow) {
+				if (!Settings.island_useOldIslands) {
+					generateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, uSkyBlock.getSkyBlockWorld());
+				} else {
+					oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, uSkyBlock.getSkyBlockWorld());
+				}
+			}
+			setNewPlayerIsland(player, next);
+
+			player.getInventory().clear();
+			player.getEquipment().clear();
+			final Iterator<Entity> ents = player.getNearbyEntities(50.0D, 250.0D, 50.0D).iterator();
+			while (ents.hasNext()) {
+				final Entity tempent = ents.next();
+				if (!(tempent instanceof Player)) {
+					tempent.remove();
+				}
+			}
+			if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+				WorldGuardHandler.protectIsland(sender, sender.getName());
+			}
+		} catch (final Exception ex) {
+			player.sendMessage("Could not create your Island. Pleace contact a server moderator.");
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public void generateIslandBlocks(final int x, final int z, final Player player, final World world) {
+		final int y = Settings.island_height;
+		final Block blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(7);
+		islandLayer1(x, z, player, world);
+		islandLayer2(x, z, player, world);
+		islandLayer3(x, z, player, world);
+		islandLayer4(x, z, player, world);
+		islandExtras(x, z, player, world);
+	}
+
+	public Location getChestSpawnLoc(final Location loc, final Player player) {
+		for (int x = -15; x <= 15; x++) {
+			for (int y = -15; y <= 15; y++) {
+				for (int z = -15; z <= 15; z++) {
+					if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z + 1)
+								.getTypeId() == 0
+								&& uSkyBlock.getSkyBlockWorld()
+										.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z + 1).getTypeId() != 0) { return new Location(
+								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z - 1)
+								.getTypeId() == 0
+								&& uSkyBlock.getSkyBlockWorld()
+										.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z - 1).getTypeId() != 0) { return new Location(
+								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y, loc.getBlockZ() + z)
+								.getTypeId() == 0
+								&& uSkyBlock.getSkyBlockWorld()
+										.getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0) { return new Location(
+								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y, loc.getBlockZ() + z)
+								.getTypeId() == 0
+								&& uSkyBlock.getSkyBlockWorld()
+										.getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0) { return new Location(
+								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
+						return loc;
+					}
+				}
+			}
+		}
+		return loc;
+	}
+
+	public boolean getIslandLevel(final Player player, final String islandPlayer) {
+		if (allowInfo) {
+			System.out.println("uSkyblock " + "Preparing to calculate island level");
+			allowInfo = false;
+			final String playerx = player.getName();
+			final String islandPlayerx = islandPlayer;
+			if (!uSkyBlock.getInstance().hasIsland(islandPlayer) && !uSkyBlock.getInstance().hasParty(islandPlayer)) {
+				player.sendMessage(ChatColor.RED + "That player is invalid or does not have an island!");
+				allowInfo = true;
+				return false;
+			}
+			uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+				public void run() {
+					System.out.println("uSkyblock " + "Calculating island level in async thread");
+					try {
+						final String player = playerx;
+						final String islandPlayer = islandPlayerx;
+						Location l;
+						if (uSkyBlock.getInstance().getActivePlayers().get(player).getHasParty()) {
+							l = uSkyBlock.getInstance().getActivePlayers().get(player).getPartyIslandLocation();
+						} else {
+							l = uSkyBlock.getInstance().getActivePlayers().get(player).getIslandLocation();
+						}
+						int blockcount = 0;
+						if (player.equalsIgnoreCase(islandPlayer)) {
+							int cobblecount = 0;
+							final int px = l.getBlockX();
+							final int py = l.getBlockY();
+							final int pz = l.getBlockZ();
+							for (int x = -50; x <= 50; x++) {
+								for (int y = Settings.island_height * -1; y <= 255 - Settings.island_height; y++) {
+									for (int z = -50; z <= 50; z++) {
+										final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
+										if (b.getTypeId() == 57) {
+											blockcount += 300;
+										}
+										if (b.getTypeId() == 41 || b.getTypeId() == 116 || b.getTypeId() == 122) {
+											blockcount += 150;
+										}
+										if (b.getTypeId() == 49 || b.getTypeId() == 42) {
+											blockcount += 10;
+										}
+										if (b.getTypeId() == 47 || b.getTypeId() == 84) {
+											blockcount += 5;
+										}
+										if (b.getTypeId() == 79 || b.getTypeId() == 82 || b.getTypeId() == 112 || b.getTypeId() == 2
+												|| b.getTypeId() == 110) {
+											blockcount += 3;
+										}
+										if (b.getTypeId() == 98 || b.getTypeId() == 45 || b.getTypeId() == 35 || b.getTypeId() == 24
+												|| b.getTypeId() == 121 || b.getTypeId() == 108 || b.getTypeId() == 109
+												|| b.getTypeId() == 43 || b.getTypeId() == 20) {
+											blockcount += 2;
+										}
+										if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 9 && b.getTypeId() != 10
+												&& b.getTypeId() != 11 && b.getTypeId() != 4 || b.getTypeId() == 4 && cobblecount < 10000) {
+											blockcount++;
+											if (b.getTypeId() == 4) {
+												cobblecount++;
+											}
+										}
+									}
+								}
+							}
+						}
+
+						if (player.equalsIgnoreCase(islandPlayer)) {
+							uSkyBlock.getInstance().getActivePlayers().get(player).setIslandLevel(blockcount / 100);
+						}
+					} catch (final Exception e) {
+						System.out.println("uSkyblock " + "Error while calculating Island Level: " + e);
+						allowInfo = true;
+					}
+					System.out.println("uSkyblock " + "Finished async info thread");
+
+					uSkyBlock.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable() {
+						public void run() {
+							allowInfo = true;
+							System.out.println("uSkyblock " + "Back to sync thread for info");
+							if (Bukkit.getPlayer(playerx) != null) {
+								Bukkit.getPlayer(playerx).sendMessage(
+										ChatColor.YELLOW + "Information about " + islandPlayerx + "'s Island:");
+								if (playerx.equalsIgnoreCase(islandPlayerx)) {
+									Bukkit.getPlayer(playerx).sendMessage(
+											ChatColor.GREEN + "Island level is " + ChatColor.WHITE
+													+ uSkyBlock.getInstance().getActivePlayers().get(playerx).getIslandLevel());
+								} else {
+									final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(islandPlayerx);
+									if (pi != null) {
+										Bukkit.getPlayer(playerx).sendMessage(
+												ChatColor.GREEN + "Island level is " + ChatColor.WHITE + pi.getIslandLevel());
+									} else {
+										Bukkit.getPlayer(playerx).sendMessage(ChatColor.RED + "Error: Invalid Player");
+									}
+								}
+							}
+							System.out.println("uSkyblock " + "Finished with sync thread for info");
+						}
+					}, 0L);
+				}
+			});
+		} else {
+			player.sendMessage(ChatColor.RED + "Can't use that command right now! Try again in a few seconds.");
+			System.out.println("uSkyblock " + player.getName() + " tried to use /island info but someone else used it first!");
+			return false;
+		}
+		return true;
+	}
+
+	public <T, E> T getKeyByValue(final Map<T, E> map, final E value) {
+		for (final Map.Entry<T, E> entry : map.entrySet()) {
+			if (value.equals(entry.getValue())) { return entry.getKey(); }
+		}
+		return null;
+	}
+
+	private void inviteDebug(final Player player) {
+		player.sendMessage(inviteList.toString());
+	}
+
+	private void invitePurge() {
+		inviteList.clear();
+		inviteList.put("NoInviter", "NoInvited");
+	}
+
+	private void islandExtras(final int x, final int z, final Player player, final World world) {
+		int y = Settings.island_height;
+
+		Block blockToChange = world.getBlockAt(x, y + 5, z);
+		blockToChange.setTypeId(17);
+		blockToChange = world.getBlockAt(x, y + 6, z);
+		blockToChange.setTypeId(17);
+		blockToChange = world.getBlockAt(x, y + 7, z);
+		blockToChange.setTypeId(17);
+		y = Settings.island_height + 8;
+		for (int x_operate = x - 2; x_operate <= x + 2; x_operate++) {
+			for (int z_operate = z - 2; z_operate <= z + 2; z_operate++) {
+				blockToChange = world.getBlockAt(x_operate, y, z_operate);
+				blockToChange.setTypeId(18);
+			}
+		}
+		blockToChange = world.getBlockAt(x + 2, y, z + 2);
+		blockToChange.setTypeId(0);
+		blockToChange = world.getBlockAt(x + 2, y, z - 2);
+		blockToChange.setTypeId(0);
+		blockToChange = world.getBlockAt(x - 2, y, z + 2);
+		blockToChange.setTypeId(0);
+		blockToChange = world.getBlockAt(x - 2, y, z - 2);
+		blockToChange.setTypeId(0);
+		blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(17);
+		y = Settings.island_height + 9;
+		for (int x_operate = x - 1; x_operate <= x + 1; x_operate++) {
+			for (int z_operate = z - 1; z_operate <= z + 1; z_operate++) {
+				blockToChange = world.getBlockAt(x_operate, y, z_operate);
+				blockToChange.setTypeId(18);
+			}
+		}
+		blockToChange = world.getBlockAt(x - 2, y, z);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x + 2, y, z);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x, y, z - 2);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x, y, z + 2);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(17);
+		y = Settings.island_height + 10;
+		blockToChange = world.getBlockAt(x - 1, y, z);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x + 1, y, z);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x, y, z - 1);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x, y, z + 1);
+		blockToChange.setTypeId(18);
+		blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(17);
+		blockToChange = world.getBlockAt(x, y + 1, z);
+		blockToChange.setTypeId(18);
+
+		blockToChange = world.getBlockAt(x, Settings.island_height + 5, z + 1);
+		blockToChange.setTypeId(54);
+		final Chest chest = (Chest) blockToChange.getState();
+		final Inventory inventory = chest.getInventory();
+		inventory.clear();
+		inventory.setContents(Settings.island_chestItems);
+		if (Settings.island_addExtraItems) {
+			for (final String island_extraPermission : Settings.island_extraPermissions) {
+				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
+					final String[] chestItemString = uSkyBlock.getInstance().getConfig()
+							.getString("options.island.extraPermissions." + island_extraPermission).split(" ");
+					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
+					String[] amountdata = new String[2];
+					for (int j = 0; j < chestItemString.length; j++) {
+						amountdata = chestItemString[j].split(":");
+						tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
+						inventory.addItem(new ItemStack[] { tempChest[j] });
+					}
+				}
+			}
+		}
+	}
+
+	private void islandLayer1(final int x, final int z, final Player player, final World world) {
+		int y = Settings.island_height;
+		y = Settings.island_height + 4;
+		for (int x_operate = x - 3; x_operate <= x + 3; x_operate++) {
+			for (int z_operate = z - 3; z_operate <= z + 3; z_operate++) {
+				final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
+				blockToChange.setTypeId(2);
+			}
+		}
+		Block blockToChange = world.getBlockAt(x - 3, y, z + 3);
+		blockToChange.setTypeId(0);
+		blockToChange = world.getBlockAt(x - 3, y, z - 3);
+		blockToChange.setTypeId(0);
+		blockToChange = world.getBlockAt(x + 3, y, z - 3);
+		blockToChange.setTypeId(0);
+		blockToChange = world.getBlockAt(x + 3, y, z + 3);
+		blockToChange.setTypeId(0);
+	}
+
+	private void islandLayer2(final int x, final int z, final Player player, final World world) {
+		int y = Settings.island_height;
+		y = Settings.island_height + 3;
+		for (int x_operate = x - 2; x_operate <= x + 2; x_operate++) {
+			for (int z_operate = z - 2; z_operate <= z + 2; z_operate++) {
+				final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
+				blockToChange.setTypeId(3);
+			}
+		}
+		Block blockToChange = world.getBlockAt(x - 3, y, z);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x + 3, y, z);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z - 3);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z + 3);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(12);
+	}
+
+	private void islandLayer3(final int x, final int z, final Player player, final World world) {
+		int y = Settings.island_height;
+		y = Settings.island_height + 2;
+		for (int x_operate = x - 1; x_operate <= x + 1; x_operate++) {
+			for (int z_operate = z - 1; z_operate <= z + 1; z_operate++) {
+				final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
+				blockToChange.setTypeId(3);
+			}
+		}
+		Block blockToChange = world.getBlockAt(x - 2, y, z);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x + 2, y, z);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z - 2);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z + 2);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(12);
+	}
+
+	private void islandLayer4(final int x, final int z, final Player player, final World world) {
+		int y = Settings.island_height;
+		y = Settings.island_height + 1;
+		Block blockToChange = world.getBlockAt(x - 1, y, z);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x + 1, y, z);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z - 1);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z + 1);
+		blockToChange.setTypeId(3);
+		blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(12);
+	}
+
+	private Location nextIslandLocation(final Location lastIsland) {
+		final int x = (int) lastIsland.getX();
+		final int z = (int) lastIsland.getZ();
+		final Location nextPos = lastIsland;
+		if (x < z) {
+			if (-1 * x < z) {
+				nextPos.setX(nextPos.getX() + Settings.island_distance);
+				return nextPos;
+			}
+			nextPos.setZ(nextPos.getZ() + Settings.island_distance);
+			return nextPos;
+		}
+		if (x > z) {
+			if (-1 * x >= z) {
+				nextPos.setX(nextPos.getX() - Settings.island_distance);
+				return nextPos;
+			}
+			nextPos.setZ(nextPos.getZ() - Settings.island_distance);
+			return nextPos;
+		}
+		if (x <= 0) {
+			nextPos.setZ(nextPos.getZ() + Settings.island_distance);
+			return nextPos;
+		}
+		nextPos.setZ(nextPos.getZ() - Settings.island_distance);
+		return nextPos;
+	}
+
+	public void oldGenerateIslandBlocks(final int x, final int z, final Player player, final World world) {
+		final int y = Settings.island_height;
+
+		for (int x_operate = x; x_operate < x + 3; x_operate++) {
+			for (int y_operate = y; y_operate < y + 3; y_operate++) {
+				for (int z_operate = z; z_operate < z + 6; z_operate++) {
+					final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
+					blockToChange.setTypeId(2);
+				}
+			}
+		}
+
+		for (int x_operate = x + 3; x_operate < x + 6; x_operate++) {
+			for (int y_operate = y; y_operate < y + 3; y_operate++) {
+				for (int z_operate = z + 3; z_operate < z + 6; z_operate++) {
+					final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
+					blockToChange.setTypeId(2);
+				}
+			}
+
+		}
+
+		for (int x_operate = x + 3; x_operate < x + 7; x_operate++) {
+			for (int y_operate = y + 7; y_operate < y + 10; y_operate++) {
+				for (int z_operate = z + 3; z_operate < z + 7; z_operate++) {
+					final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
+					blockToChange.setTypeId(18);
+				}
+			}
+
+		}
+
+		for (int y_operate = y + 3; y_operate < y + 9; y_operate++) {
+			final Block blockToChange = world.getBlockAt(x + 5, y_operate, z + 5);
+			blockToChange.setTypeId(17);
+		}
+
+		Block blockToChange = world.getBlockAt(x + 1, y + 3, z + 1);
+		blockToChange.setTypeId(54);
+		final Chest chest = (Chest) blockToChange.getState();
+		final Inventory inventory = chest.getInventory();
+		inventory.clear();
+		inventory.setContents(Settings.island_chestItems);
+		if (Settings.island_addExtraItems) {
+			for (final String island_extraPermission : Settings.island_extraPermissions) {
+				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
+					final String[] chestItemString = uSkyBlock.getInstance().getConfig()
+							.getString("options.island.extraPermissions." + island_extraPermission).split(" ");
+					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
+					String[] amountdata = new String[2];
+					for (int j = 0; j < chestItemString.length; j++) {
+						amountdata = chestItemString[j].split(":");
+						tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
+						inventory.addItem(new ItemStack[] { tempChest[j] });
+					}
+				}
+			}
+		}
+
+		blockToChange = world.getBlockAt(x, y, z);
+		blockToChange.setTypeId(7);
+
+		blockToChange = world.getBlockAt(x + 2, y + 1, z + 1);
+		blockToChange.setTypeId(12);
+		blockToChange = world.getBlockAt(x + 2, y + 1, z + 2);
+		blockToChange.setTypeId(12);
+		blockToChange = world.getBlockAt(x + 2, y + 1, z + 3);
+		blockToChange.setTypeId(12);
+	}
+
+	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
 		if (!(sender instanceof Player)) { return false; }
 		final Player player = (Player) sender;
 
@@ -65,12 +627,13 @@ public class IslandCommand implements CommandExecutor {
 			if (split.length == 1) {
 				if (split[0].equals("restart") || split[0].equals("reset")) {
 					if (pi.getHasParty()) {
-						if (!pi.getPartyLeader().equalsIgnoreCase(player.getName()))
+						if (!pi.getPartyLeader().equalsIgnoreCase(player.getName())) {
 							player.sendMessage(ChatColor.RED
 									+ "Only the owner may restart this island. Leave this island in order to start your own (/island leave).");
-						else
+						} else {
 							player.sendMessage(ChatColor.YELLOW
 									+ "You must remove all players from your island before you can restart it (/island kick <player>). See a list of players currently part of your island using /island party.");
+						}
 						return true;
 					}
 					if (!uSkyBlock.getInstance().onRestartCooldown(player) || Settings.general_cooldownRestart == 0) {
@@ -89,17 +652,19 @@ public class IslandCommand implements CommandExecutor {
 					return true;
 				}
 				if (split[0].equals("lock")) {
-					if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld()))
+					if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
 						WorldGuardHandler.islandLock(sender, player.getName());
-					else
+					} else {
 						player.sendMessage(ChatColor.RED + "You don't have access to this command!");
+					}
 					return true;
 				}
 				if (split[0].equals("unlock")) {
-					if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld()))
+					if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
 						WorldGuardHandler.islandUnlock(sender, player.getName());
-					else
+					} else {
 						player.sendMessage(ChatColor.RED + "You don't have access to this command!");
+					}
 					return true;
 				}
 				if (split[0].equals("help")) {
@@ -170,8 +735,9 @@ public class IslandCommand implements CommandExecutor {
 							// uSkyBlock.getInstance().setInfoCooldown(player);
 							if (!pi.getHasParty() && !pi.getHasIsland()) {
 								player.sendMessage(ChatColor.RED + "You do not have an island!");
-							} else
+							} else {
 								getIslandLevel(player, player.getName());
+							}
 							return true;
 						}
 
@@ -179,7 +745,7 @@ public class IslandCommand implements CommandExecutor {
 						// "You can use that command again in "
 						// + uSkyBlock.getInstance().getInfoCooldownTime(player)
 						// / 1000L + " seconds.");
-						return true;
+						// return true;
 					}
 
 					player.sendMessage(ChatColor.YELLOW + "You must be on your island to use this command.");
@@ -194,16 +760,18 @@ public class IslandCommand implements CommandExecutor {
 								if (tempParty.size() < Settings.general_maxPartySize * 2) {
 									player.sendMessage(ChatColor.GREEN + "You can invite "
 											+ (Settings.general_maxPartySize * 2 - tempParty.size()) + " more players.");
-								} else
+								} else {
 									player.sendMessage(ChatColor.RED + "You can't invite any more players.");
+								}
 								return true;
 							}
 
 							if (tempParty.size() < Settings.general_maxPartySize) {
 								player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize - tempParty.size())
 										+ " more players.");
-							} else
+							} else {
 								player.sendMessage(ChatColor.RED + "You can't invite any more players.");
+							}
 							return true;
 						}
 
@@ -285,15 +853,17 @@ public class IslandCommand implements CommandExecutor {
 				if (split[0].equalsIgnoreCase("partypurge")) {
 					if (VaultHandler.checkPerk(player.getName(), "usb.mod.party", player.getWorld())) {
 						player.sendMessage(ChatColor.RED + "This command no longer functions!");
-					} else
+					} else {
 						player.sendMessage(ChatColor.RED + "You can't access that command!");
+					}
 					return true;
 				}
 				if (split[0].equalsIgnoreCase("partyclean")) {
 					if (VaultHandler.checkPerk(player.getName(), "usb.mod.party", player.getWorld())) {
 						player.sendMessage(ChatColor.RED + "This command no longer functions!");
-					} else
+					} else {
 						player.sendMessage(ChatColor.RED + "You can't access that command!");
+					}
 					return true;
 				}
 				if (split[0].equalsIgnoreCase("purgeinvites")) {
@@ -308,8 +878,9 @@ public class IslandCommand implements CommandExecutor {
 				if (split[0].equalsIgnoreCase("partylist")) {
 					if (VaultHandler.checkPerk(player.getName(), "usb.mod.party", player.getWorld())) {
 						player.sendMessage(ChatColor.RED + "This command is currently not active.");
-					} else
+					} else {
 						player.sendMessage(ChatColor.RED + "You can't access that command!");
+					}
 					return true;
 				}
 				if (split[0].equalsIgnoreCase("invitelist")) {
@@ -333,17 +904,18 @@ public class IslandCommand implements CommandExecutor {
 
 							player.getInventory().clear();
 							player.getEquipment().clear();
-							if (Settings.extras_sendToSpawn)
+							if (Settings.extras_sendToSpawn) {
 								player.performCommand("spawn");
-							else {
+							} else {
 								player.teleport(uSkyBlock.getSkyBlockWorld().getSpawnLocation());
 							}
 
 							removePlayerFromParty(player.getName(), tempLeader);
 
 							player.sendMessage(ChatColor.YELLOW + "You have left the island and returned to the player spawn.");
-							if (Bukkit.getPlayer(tempLeader) != null)
+							if (Bukkit.getPlayer(tempLeader) != null) {
 								Bukkit.getPlayer(tempLeader).sendMessage(ChatColor.RED + player.getName() + " has left your island!");
+							}
 							tempParty.remove(player.getName());
 							if (tempParty.size() < 2) {
 								removePlayerFromParty(tempLeader, tempLeader);
@@ -364,31 +936,36 @@ public class IslandCommand implements CommandExecutor {
 					return true;
 				}
 				if (split[0].equals("party")) {
-					if (VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld()))
+					if (VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
 						player.sendMessage(ChatColor.WHITE + "/island invite <playername>" + ChatColor.YELLOW
 								+ " to invite a player to join your island.");
+					}
 					if (uSkyBlock.getInstance().hasParty(player.getName())) {
 						player.sendMessage(ChatColor.WHITE + "/island leave" + ChatColor.YELLOW
 								+ " leave your current island and return to spawn");
 						if (tempLeader.equalsIgnoreCase(sender.getName())) {
-							if (VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld()))
+							if (VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
 								player.sendMessage(ChatColor.WHITE + "/island remove <playername>" + ChatColor.YELLOW
 										+ " remove <playername> from your island");
-							if (VaultHandler.checkPerk(player.getName(), "usb.party.makeleader", player.getWorld()))
+							}
+							if (VaultHandler.checkPerk(player.getName(), "usb.party.makeleader", player.getWorld())) {
 								player.sendMessage(ChatColor.WHITE + "/island makeleader <playername>" + ChatColor.YELLOW
 										+ " give ownership of the island to <playername>");
+							}
 							if (VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
 								if (tempParty.size() < Settings.general_maxPartySize * 2) {
 									player.sendMessage(ChatColor.GREEN + "You can invite "
 											+ (Settings.general_maxPartySize * 2 - tempParty.size()) + " more players.");
-								} else
+								} else {
 									player.sendMessage(ChatColor.RED + "You can't invite any more players.");
+								}
 
 							} else if (tempParty.size() < Settings.general_maxPartySize) {
 								player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize - tempParty.size())
 										+ " more players.");
-							} else
+							} else {
 								player.sendMessage(ChatColor.RED + "You can't invite any more players.");
+							}
 
 						}
 
@@ -410,8 +987,9 @@ public class IslandCommand implements CommandExecutor {
 						// uSkyBlock.getInstance().setInfoCooldown(player);
 						if (!pi.getHasParty() && !pi.getHasIsland()) {
 							player.sendMessage(ChatColor.RED + "You do not have an island!");
-						} else
+						} else {
 							getIslandLevel(player, split[1]);
+						}
 						return true;
 					}
 
@@ -419,7 +997,7 @@ public class IslandCommand implements CommandExecutor {
 					// "You can use that command again in "
 					// + uSkyBlock.getInstance().getInfoCooldownTime(player) /
 					// 1000L + " seconds.");
-					return true;
+					// return true;
 				}
 				if (split[0].equalsIgnoreCase("invite") && VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
 					if (Bukkit.getPlayer(split[1]) == null) {
@@ -476,10 +1054,12 @@ public class IslandCommand implements CommandExecutor {
 								} else {
 									player.sendMessage(ChatColor.RED + "Your island is full, you can't invite anyone else.");
 								}
-							} else
+							} else {
 								player.sendMessage(ChatColor.RED + "That player is already with a group on an island.");
-						} else
+							}
+						} else {
 							player.sendMessage(ChatColor.RED + "Only the island's owner may invite new players.");
+						}
 					} else {
 						if (!uSkyBlock.getInstance().hasParty(player.getName())) {
 							if (!uSkyBlock.getInstance().hasParty(Bukkit.getPlayer(split[1]).getName())) {
@@ -537,17 +1117,18 @@ public class IslandCommand implements CommandExecutor {
 										Bukkit.getPlayer(split[1]).sendMessage(
 												ChatColor.RED + player.getName() + " has removed you from their island!");
 									}
-									if (Settings.extras_sendToSpawn)
+									if (Settings.extras_sendToSpawn) {
 										Bukkit.getPlayer(split[1]).performCommand("spawn");
-									else {
+									} else {
 										Bukkit.getPlayer(split[1]).teleport(uSkyBlock.getSkyBlockWorld().getSpawnLocation());
 									}
 
 								}
 
-								if (Bukkit.getPlayer(tempLeader) != null)
+								if (Bukkit.getPlayer(tempLeader) != null) {
 									Bukkit.getPlayer(tempLeader).sendMessage(
 											ChatColor.RED + tempTargetPlayer + " has been removed from the island.");
+								}
 								removePlayerFromParty(tempTargetPlayer, tempLeader);
 								tempParty.remove(tempTargetPlayer);
 								if (tempParty.size() < 2) {
@@ -562,10 +1143,12 @@ public class IslandCommand implements CommandExecutor {
 								System.out.println("uSkyblock " + "Player " + player.getName() + " failed to remove " + tempTargetPlayer);
 								player.sendMessage(ChatColor.RED + "That player is not part of your island group!");
 							}
-						} else
+						} else {
 							player.sendMessage(ChatColor.RED + "Only the island's owner may remove people from the island!");
-					} else
+						}
+					} else {
 						player.sendMessage(ChatColor.RED + "No one else is on your island, are you seeing things?");
+					}
 					return true;
 				}
 				if (split[0].equalsIgnoreCase("makeleader")
@@ -602,8 +1185,9 @@ public class IslandCommand implements CommandExecutor {
 					if (uSkyBlock.getInstance().hasParty(player.getName())) {
 						if (tempLeader.equalsIgnoreCase(player.getName())) {
 							if (tempParty.contains(tempTargetPlayer)) {
-								if (Bukkit.getPlayer(split[1]) != null)
+								if (Bukkit.getPlayer(split[1]) != null) {
 									Bukkit.getPlayer(split[1]).sendMessage(ChatColor.GREEN + "You are now the owner of your island.");
+								}
 								player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(split[1]).getName()
 										+ " is now the owner of your island!");
 								removePlayerFromParty(tempTargetPlayer, tempLeader);
@@ -623,8 +1207,9 @@ public class IslandCommand implements CommandExecutor {
 						} else {
 							player.sendMessage(ChatColor.RED + "This isn't your island, so you can't give it away!");
 						}
-					} else
+					} else {
 						player.sendMessage(ChatColor.RED + "Could not change leaders.");
+					}
 					return true;
 				}
 				if (split[0].equalsIgnoreCase("checkparty")) {
@@ -640,8 +1225,9 @@ public class IslandCommand implements CommandExecutor {
 								final PlayerInfo pip2 = uSkyBlock.getInstance().readPlayerFile(pip.getPartyLeader());
 								player.sendMessage(pip2.getMembers().toString());
 							}
-						} else
+						} else {
 							player.sendMessage(ChatColor.RED + "That player is not in an island party!");
+						}
 					} else {
 						player.sendMessage(ChatColor.RED + "You can't access that command!");
 					}
@@ -655,434 +1241,18 @@ public class IslandCommand implements CommandExecutor {
 		return false;
 	}
 
-	private boolean createIsland(CommandSender sender) {
-		final Player player = (Player) sender;
-		final Location last = uSkyBlock.getInstance().getLastIsland();
-		last.setY(Settings.island_height);
-		try {
-			do {
-				uSkyBlock.getInstance().removeNextOrphan();
-
-				if (!uSkyBlock.getInstance().hasOrphanedIsland())
-					break;
-			} while (uSkyBlock.getInstance().islandAtLocation(uSkyBlock.getInstance().checkOrphan()));
-
-			while (uSkyBlock.getInstance().hasOrphanedIsland()
-					&& !uSkyBlock.getInstance().checkOrphan().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
-				uSkyBlock.getInstance().removeNextOrphan();
-			}
-			Location next;
-			if (uSkyBlock.getInstance().hasOrphanedIsland()
-					&& !uSkyBlock.getInstance().islandAtLocation(uSkyBlock.getInstance().checkOrphan())) {
-				next = uSkyBlock.getInstance().getOrphanedIsland();
-				uSkyBlock.getInstance().saveOrphans();
-				uSkyBlock.getInstance().updateOrphans();
-			} else {
-				next = nextIslandLocation(last);
-				uSkyBlock.getInstance().setLastIsland(next);
-
-				while (uSkyBlock.getInstance().islandAtLocation(next)) {
-					next = nextIslandLocation(next);
-				}
-
-				uSkyBlock.getInstance().setLastIsland(next);
-			}
-			boolean hasIslandNow = false;
-
-			if (uSkyBlock.getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
-				String cSchem = "";
-				for (int i = 0; i < uSkyBlock.getInstance().getSchemFile().length; i++) {
-					if (!hasIslandNow) {
-						if (uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.') > 0) {
-							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0,
-									uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
-						} else
-							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName();
-
-						if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, uSkyBlock.getSkyBlockWorld())) {
-							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(),
-									uSkyBlock.getInstance().getSchemFile()[i], next)) {
-								setChest(next, player);
-								hasIslandNow = true;
-							}
-						}
-					}
-				}
-				if (!hasIslandNow) {
-					for (int i = 0; i < uSkyBlock.getInstance().getSchemFile().length; i++) {
-						if (uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.') > 0) {
-							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0,
-									uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
-						} else
-							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName();
-						if (cSchem.equalsIgnoreCase(Settings.island_schematicName)) {
-							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(),
-									uSkyBlock.getInstance().getSchemFile()[i], next)) {
-								setChest(next, player);
-								hasIslandNow = true;
-							}
-						}
-					}
-				}
-			}
-			if (!hasIslandNow) {
-				if (!Settings.island_useOldIslands)
-					generateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, uSkyBlock.getSkyBlockWorld());
-				else {
-					oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, uSkyBlock.getSkyBlockWorld());
-				}
-			}
-			setNewPlayerIsland(player, next);
-
-			player.getInventory().clear();
-			player.getEquipment().clear();
-			final Iterator<Entity> ents = player.getNearbyEntities(50.0D, 250.0D, 50.0D).iterator();
-			while (ents.hasNext()) {
-				final Entity tempent = ents.next();
-				if (!(tempent instanceof Player)) {
-					tempent.remove();
-				}
-			}
-			if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard"))
-				WorldGuardHandler.protectIsland(sender, sender.getName());
-		} catch (final Exception ex) {
-			player.sendMessage("Could not create your Island. Pleace contact a server moderator.");
-			ex.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-	public void generateIslandBlocks(int x, int z, Player player, World world) {
-		final int y = Settings.island_height;
-		final Block blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(7);
-		islandLayer1(x, z, player, world);
-		islandLayer2(x, z, player, world);
-		islandLayer3(x, z, player, world);
-		islandLayer4(x, z, player, world);
-		islandExtras(x, z, player, world);
-	}
-
-	public void oldGenerateIslandBlocks(int x, int z, Player player, World world) {
-		final int y = Settings.island_height;
-
-		for (int x_operate = x; x_operate < x + 3; x_operate++) {
-			for (int y_operate = y; y_operate < y + 3; y_operate++) {
-				for (int z_operate = z; z_operate < z + 6; z_operate++) {
-					final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
-					blockToChange.setTypeId(2);
-				}
-			}
-		}
-
-		for (int x_operate = x + 3; x_operate < x + 6; x_operate++) {
-			for (int y_operate = y; y_operate < y + 3; y_operate++) {
-				for (int z_operate = z + 3; z_operate < z + 6; z_operate++) {
-					final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
-					blockToChange.setTypeId(2);
-				}
-			}
-
-		}
-
-		for (int x_operate = x + 3; x_operate < x + 7; x_operate++) {
-			for (int y_operate = y + 7; y_operate < y + 10; y_operate++) {
-				for (int z_operate = z + 3; z_operate < z + 7; z_operate++) {
-					final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
-					blockToChange.setTypeId(18);
-				}
-			}
-
-		}
-
-		for (int y_operate = y + 3; y_operate < y + 9; y_operate++) {
-			final Block blockToChange = world.getBlockAt(x + 5, y_operate, z + 5);
-			blockToChange.setTypeId(17);
-		}
-
-		Block blockToChange = world.getBlockAt(x + 1, y + 3, z + 1);
-		blockToChange.setTypeId(54);
-		final Chest chest = (Chest) blockToChange.getState();
-		final Inventory inventory = chest.getInventory();
-		inventory.clear();
-		inventory.setContents(Settings.island_chestItems);
-		if (Settings.island_addExtraItems) {
-			for (final String island_extraPermission : Settings.island_extraPermissions) {
-				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
-					final String[] chestItemString = uSkyBlock.getInstance().getConfig()
-							.getString("options.island.extraPermissions." + island_extraPermission).split(" ");
-					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-					String[] amountdata = new String[2];
-					for (int j = 0; j < chestItemString.length; j++) {
-						amountdata = chestItemString[j].split(":");
-						tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
-						inventory.addItem(new ItemStack[] { tempChest[j] });
-					}
-				}
-			}
-		}
-
-		blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(7);
-
-		blockToChange = world.getBlockAt(x + 2, y + 1, z + 1);
-		blockToChange.setTypeId(12);
-		blockToChange = world.getBlockAt(x + 2, y + 1, z + 2);
-		blockToChange.setTypeId(12);
-		blockToChange = world.getBlockAt(x + 2, y + 1, z + 3);
-		blockToChange.setTypeId(12);
-	}
-
-	private Location nextIslandLocation(Location lastIsland) {
-		final int x = (int) lastIsland.getX();
-		final int z = (int) lastIsland.getZ();
-		final Location nextPos = lastIsland;
-		if (x < z) {
-			if (-1 * x < z) {
-				nextPos.setX(nextPos.getX() + Settings.island_distance);
-				return nextPos;
-			}
-			nextPos.setZ(nextPos.getZ() + Settings.island_distance);
-			return nextPos;
-		}
-		if (x > z) {
-			if (-1 * x >= z) {
-				nextPos.setX(nextPos.getX() - Settings.island_distance);
-				return nextPos;
-			}
-			nextPos.setZ(nextPos.getZ() - Settings.island_distance);
-			return nextPos;
-		}
-		if (x <= 0) {
-			nextPos.setZ(nextPos.getZ() + Settings.island_distance);
-			return nextPos;
-		}
-		nextPos.setZ(nextPos.getZ() - Settings.island_distance);
-		return nextPos;
-	}
-
-	private void islandLayer1(int x, int z, Player player, World world) {
-		int y = Settings.island_height;
-		y = Settings.island_height + 4;
-		for (int x_operate = x - 3; x_operate <= x + 3; x_operate++) {
-			for (int z_operate = z - 3; z_operate <= z + 3; z_operate++) {
-				final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
-				blockToChange.setTypeId(2);
-			}
-		}
-		Block blockToChange = world.getBlockAt(x - 3, y, z + 3);
-		blockToChange.setTypeId(0);
-		blockToChange = world.getBlockAt(x - 3, y, z - 3);
-		blockToChange.setTypeId(0);
-		blockToChange = world.getBlockAt(x + 3, y, z - 3);
-		blockToChange.setTypeId(0);
-		blockToChange = world.getBlockAt(x + 3, y, z + 3);
-		blockToChange.setTypeId(0);
-	}
-
-	private void islandLayer2(int x, int z, Player player, World world) {
-		int y = Settings.island_height;
-		y = Settings.island_height + 3;
-		for (int x_operate = x - 2; x_operate <= x + 2; x_operate++) {
-			for (int z_operate = z - 2; z_operate <= z + 2; z_operate++) {
-				final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
-				blockToChange.setTypeId(3);
-			}
-		}
-		Block blockToChange = world.getBlockAt(x - 3, y, z);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x + 3, y, z);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z - 3);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z + 3);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(12);
-	}
-
-	private void islandLayer3(int x, int z, Player player, World world) {
-		int y = Settings.island_height;
-		y = Settings.island_height + 2;
-		for (int x_operate = x - 1; x_operate <= x + 1; x_operate++) {
-			for (int z_operate = z - 1; z_operate <= z + 1; z_operate++) {
-				final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
-				blockToChange.setTypeId(3);
-			}
-		}
-		Block blockToChange = world.getBlockAt(x - 2, y, z);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x + 2, y, z);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z - 2);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z + 2);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(12);
-	}
-
-	private void islandLayer4(int x, int z, Player player, World world) {
-		int y = Settings.island_height;
-		y = Settings.island_height + 1;
-		Block blockToChange = world.getBlockAt(x - 1, y, z);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x + 1, y, z);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z - 1);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z + 1);
-		blockToChange.setTypeId(3);
-		blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(12);
-	}
-
-	private void islandExtras(int x, int z, Player player, World world) {
-		int y = Settings.island_height;
-
-		Block blockToChange = world.getBlockAt(x, y + 5, z);
-		blockToChange.setTypeId(17);
-		blockToChange = world.getBlockAt(x, y + 6, z);
-		blockToChange.setTypeId(17);
-		blockToChange = world.getBlockAt(x, y + 7, z);
-		blockToChange.setTypeId(17);
-		y = Settings.island_height + 8;
-		for (int x_operate = x - 2; x_operate <= x + 2; x_operate++) {
-			for (int z_operate = z - 2; z_operate <= z + 2; z_operate++) {
-				blockToChange = world.getBlockAt(x_operate, y, z_operate);
-				blockToChange.setTypeId(18);
-			}
-		}
-		blockToChange = world.getBlockAt(x + 2, y, z + 2);
-		blockToChange.setTypeId(0);
-		blockToChange = world.getBlockAt(x + 2, y, z - 2);
-		blockToChange.setTypeId(0);
-		blockToChange = world.getBlockAt(x - 2, y, z + 2);
-		blockToChange.setTypeId(0);
-		blockToChange = world.getBlockAt(x - 2, y, z - 2);
-		blockToChange.setTypeId(0);
-		blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(17);
-		y = Settings.island_height + 9;
-		for (int x_operate = x - 1; x_operate <= x + 1; x_operate++) {
-			for (int z_operate = z - 1; z_operate <= z + 1; z_operate++) {
-				blockToChange = world.getBlockAt(x_operate, y, z_operate);
-				blockToChange.setTypeId(18);
-			}
-		}
-		blockToChange = world.getBlockAt(x - 2, y, z);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x + 2, y, z);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x, y, z - 2);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x, y, z + 2);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(17);
-		y = Settings.island_height + 10;
-		blockToChange = world.getBlockAt(x - 1, y, z);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x + 1, y, z);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x, y, z - 1);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x, y, z + 1);
-		blockToChange.setTypeId(18);
-		blockToChange = world.getBlockAt(x, y, z);
-		blockToChange.setTypeId(17);
-		blockToChange = world.getBlockAt(x, y + 1, z);
-		blockToChange.setTypeId(18);
-
-		blockToChange = world.getBlockAt(x, Settings.island_height + 5, z + 1);
-		blockToChange.setTypeId(54);
-		final Chest chest = (Chest) blockToChange.getState();
-		final Inventory inventory = chest.getInventory();
-		inventory.clear();
-		inventory.setContents(Settings.island_chestItems);
-		if (Settings.island_addExtraItems) {
-			for (final String island_extraPermission : Settings.island_extraPermissions) {
-				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
-					final String[] chestItemString = uSkyBlock.getInstance().getConfig()
-							.getString("options.island.extraPermissions." + island_extraPermission).split(" ");
-					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-					String[] amountdata = new String[2];
-					for (int j = 0; j < chestItemString.length; j++) {
-						amountdata = chestItemString[j].split(":");
-						tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
-						inventory.addItem(new ItemStack[] { tempChest[j] });
-					}
-				}
-			}
-		}
-	}
-
-	private void setNewPlayerIsland(Player player, Location loc) {
-		uSkyBlock.getInstance().getActivePlayers().get(player.getName()).setHasIsland(true);
-		uSkyBlock.getInstance().getActivePlayers().get(player.getName()).setIslandLocation(loc);
-
-		player.teleport(getChestSpawnLoc(loc, player));
-		uSkyBlock.getInstance().homeSet(player);
-		uSkyBlock.getInstance().writePlayerFile(player.getName(), uSkyBlock.getInstance().getActivePlayers().get(player.getName()));
-	}
-
-	private void inviteDebug(Player player) {
-		player.sendMessage(inviteList.toString());
-	}
-
-	private void invitePurge() {
-		inviteList.clear();
-		inviteList.put("NoInviter", "NoInvited");
-	}
-
-	public boolean addPlayertoParty(String playername, String partyleader) {
-		if (!uSkyBlock.getInstance().getActivePlayers().containsKey(playername)) {
-			System.out.println("uSkyblock " + "Failed to add player to party! (" + playername + ")");
-			return false;
-		}
-		if (!uSkyBlock.getInstance().getActivePlayers().containsKey(partyleader)) {
-			System.out.println("uSkyblock " + "Failed to add player to party! (" + playername + ")");
-			return false;
-		}
-		System.out.println("uSkyblock " + "Adding player: " + playername + " to party with leader: " + partyleader);
-		uSkyBlock.getInstance().getActivePlayers().get(playername)
-				.setJoinParty(partyleader, uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
-		if (!playername.equalsIgnoreCase(partyleader)) {
-			if (uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation() != null) {
-				uSkyBlock.getInstance().getActivePlayers().get(playername)
-						.setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation());
-			} else {
-				uSkyBlock.getInstance().getActivePlayers().get(playername)
-						.setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
-			}
-
-			if (!uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(playername)) {
-				uSkyBlock.getInstance().getActivePlayers().get(partyleader).addMember(playername);
-			}
-			if (!uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(partyleader)) {
-				uSkyBlock.getInstance().getActivePlayers().get(partyleader).addMember(partyleader);
-			}
-		}
-		uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getActivePlayers().get(playername));
-
-		if (!uSkyBlock.getInstance().getActivePlayers().get(playername).getPartyLeader().equalsIgnoreCase(partyleader)) {
-			System.out.println("uSkyblock " + "Error adding player to a new party!");
-			return false;
-		}
-		return true;
-	}
-
-	public void removePlayerFromParty(String playername, String partyleader) {
+	public void removePlayerFromParty(final String playername, final String partyleader) {
 		if (uSkyBlock.getInstance().getActivePlayers().containsKey(playername)) {
-			if (!uSkyBlock.getInstance().getActivePlayers().get(playername).getPartyLeader().equalsIgnoreCase(playername))
+			if (!uSkyBlock.getInstance().getActivePlayers().get(playername).getPartyLeader().equalsIgnoreCase(playername)) {
 				uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(null);
+			}
 			uSkyBlock.getInstance().getActivePlayers().get(playername).setLeaveParty();
 			uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getActivePlayers().get(playername));
 		} else {
 			final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(playername);
-			if (!pi.getPartyLeader().equalsIgnoreCase(playername))
+			if (!pi.getPartyLeader().equalsIgnoreCase(playername)) {
 				pi.setHomeLocation(null);
+			}
 			pi.setLeaveParty();
 			uSkyBlock.getInstance().writePlayerFile(playername, pi);
 		}
@@ -1093,124 +1263,17 @@ public class IslandCommand implements CommandExecutor {
 			uSkyBlock.getInstance().writePlayerFile(partyleader, uSkyBlock.getInstance().getActivePlayers().get(partyleader));
 		} else {
 			final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(partyleader);
-			if (pi.getMembers().contains(playername))
+			if (pi.getMembers().contains(playername)) {
 				pi.removeMember(playername);
+			}
 			uSkyBlock.getInstance().writePlayerFile(partyleader, pi);
 		}
 	}
 
-	public <T, E> T getKeyByValue(Map<T, E> map, E value) {
-		for (final Map.Entry<T, E> entry : map.entrySet()) {
-			if (value.equals(entry.getValue())) { return entry.getKey(); }
-		}
-		return null;
-	}
-
-	public boolean getIslandLevel(Player player, String islandPlayer) {
-		if (allowInfo) {
-			System.out.println("uSkyblock " + "Preparing to calculate island level");
-			allowInfo = false;
-			final String playerx = player.getName();
-			final String islandPlayerx = islandPlayer;
-			if (!uSkyBlock.getInstance().hasIsland(islandPlayer) && !uSkyBlock.getInstance().hasParty(islandPlayer)) {
-				player.sendMessage(ChatColor.RED + "That player is invalid or does not have an island!");
-				allowInfo = true;
-				return false;
-			}
-			uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
-				public void run() {
-					System.out.println("uSkyblock " + "Calculating island level in async thread");
-					try {
-						final String player = playerx;
-						final String islandPlayer = islandPlayerx;
-						Location l;
-						if (uSkyBlock.getInstance().getActivePlayers().get(player).getHasParty()) {
-							l = uSkyBlock.getInstance().getActivePlayers().get(player).getPartyIslandLocation();
-						} else
-							l = uSkyBlock.getInstance().getActivePlayers().get(player).getIslandLocation();
-						int blockcount = 0;
-						if (player.equalsIgnoreCase(islandPlayer)) {
-							int cobblecount = 0;
-							final int px = l.getBlockX();
-							final int py = l.getBlockY();
-							final int pz = l.getBlockZ();
-							for (int x = -50; x <= 50; x++) {
-								for (int y = Settings.island_height * -1; y <= 255 - Settings.island_height; y++) {
-									for (int z = -50; z <= 50; z++) {
-										final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-										if (b.getTypeId() == 57)
-											blockcount += 300;
-										if (b.getTypeId() == 41 || b.getTypeId() == 116 || b.getTypeId() == 122)
-											blockcount += 150;
-										if (b.getTypeId() == 49 || b.getTypeId() == 42)
-											blockcount += 10;
-										if (b.getTypeId() == 47 || b.getTypeId() == 84)
-											blockcount += 5;
-										if (b.getTypeId() == 79 || b.getTypeId() == 82 || b.getTypeId() == 112 || b.getTypeId() == 2
-												|| b.getTypeId() == 110)
-											blockcount += 3;
-										if (b.getTypeId() == 98 || b.getTypeId() == 45 || b.getTypeId() == 35 || b.getTypeId() == 24
-												|| b.getTypeId() == 121 || b.getTypeId() == 108 || b.getTypeId() == 109
-												|| b.getTypeId() == 43 || b.getTypeId() == 20)
-											blockcount += 2;
-										if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 9 && b.getTypeId() != 10
-												&& b.getTypeId() != 11 && b.getTypeId() != 4 || b.getTypeId() == 4 && cobblecount < 10000) {
-											blockcount++;
-											if (b.getTypeId() == 4) {
-												cobblecount++;
-											}
-										}
-									}
-								}
-							}
-						}
-
-						if (player.equalsIgnoreCase(islandPlayer)) {
-							uSkyBlock.getInstance().getActivePlayers().get(player).setIslandLevel(blockcount / 100);
-						}
-					} catch (final Exception e) {
-						System.out.println("uSkyblock " + "Error while calculating Island Level: " + e);
-						allowInfo = true;
-					}
-					System.out.println("uSkyblock " + "Finished async info thread");
-
-					uSkyBlock.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable() {
-						public void run() {
-							allowInfo = true;
-							System.out.println("uSkyblock " + "Back to sync thread for info");
-							if (Bukkit.getPlayer(playerx) != null) {
-								Bukkit.getPlayer(playerx).sendMessage(
-										ChatColor.YELLOW + "Information about " + islandPlayerx + "'s Island:");
-								if (playerx.equalsIgnoreCase(islandPlayerx)) {
-									Bukkit.getPlayer(playerx).sendMessage(
-											ChatColor.GREEN + "Island level is " + ChatColor.WHITE
-													+ uSkyBlock.getInstance().getActivePlayers().get(playerx).getIslandLevel());
-								} else {
-									final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(islandPlayerx);
-									if (pi != null)
-										Bukkit.getPlayer(playerx).sendMessage(
-												ChatColor.GREEN + "Island level is " + ChatColor.WHITE + pi.getIslandLevel());
-									else
-										Bukkit.getPlayer(playerx).sendMessage(ChatColor.RED + "Error: Invalid Player");
-								}
-							}
-							System.out.println("uSkyblock " + "Finished with sync thread for info");
-						}
-					}, 0L);
-				}
-			});
-		} else {
-			player.sendMessage(ChatColor.RED + "Can't use that command right now! Try again in a few seconds.");
-			System.out.println("uSkyblock " + player.getName() + " tried to use /island info but someone else used it first!");
-			return false;
-		}
-		return true;
-	}
-
-	public void setChest(Location loc, Player player) {
-		for (int x = -15; x <= 15; x++)
-			for (int y = -15; y <= 15; y++)
-				for (int z = -15; z <= 15; z++)
+	public void setChest(final Location loc, final Player player) {
+		for (int x = -15; x <= 15; x++) {
+			for (int y = -15; y <= 15; y++) {
+				for (int z = -15; z <= 15; z++) {
 					if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
 						final Block blockToChange = uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y,
 								loc.getBlockZ() + z);
@@ -1234,42 +1297,17 @@ public class IslandCommand implements CommandExecutor {
 							}
 						}
 					}
-	}
-
-	public Location getChestSpawnLoc(Location loc, Player player) {
-		for (int x = -15; x <= 15; x++) {
-			for (int y = -15; y <= 15; y++) {
-				for (int z = -15; z <= 15; z++) {
-					if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z + 1)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z + 1).getTypeId() != 0)
-							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ()
-									+ z + 1);
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z - 1)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z - 1).getTypeId() != 0)
-							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ()
-									+ z + 1);
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y, loc.getBlockZ() + z)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0)
-							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ()
-									+ z + 1);
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y, loc.getBlockZ() + z)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0)
-							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ()
-									+ z + 1);
-						return loc;
-					}
 				}
 			}
 		}
-		return loc;
+	}
+
+	private void setNewPlayerIsland(final Player player, final Location loc) {
+		uSkyBlock.getInstance().getActivePlayers().get(player.getName()).setHasIsland(true);
+		uSkyBlock.getInstance().getActivePlayers().get(player.getName()).setIslandLocation(loc);
+
+		player.teleport(getChestSpawnLoc(loc, player));
+		uSkyBlock.getInstance().homeSet(player);
+		uSkyBlock.getInstance().writePlayerFile(player.getName(), uSkyBlock.getInstance().getActivePlayers().get(player.getName()));
 	}
 }

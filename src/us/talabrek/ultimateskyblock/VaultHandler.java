@@ -8,35 +8,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class VaultHandler {
-	public static Permission perms = null;
 	public static Economy econ = null;
+	public static Permission perms = null;
 
-	public static void addPerk(Player player, String perk) {
-		perms.playerAdd((String) null, player.getName(), perk);
-	}
-
-	public static void removePerk(Player player, String perk) {
-		perms.playerRemove((String) null, player.getName(), perk);
-	}
-
-	public static void addGroup(Player player, String perk) {
+	public static void addGroup(final Player player, final String perk) {
 		perms.playerAddGroup((String) null, player.getName(), perk);
 	}
 
-	public static boolean checkPerk(String player, String perk, World world) {
-		if (perms.has((String) null, player, perk))
-			return true;
-		if (perms.has(world, player, perk))
-			return true;
+	public static void addPerk(final Player player, final String perk) {
+		perms.playerAdd((String) null, player.getName(), perk);
+	}
+
+	public static boolean checkPerk(final String player, final String perk, final World world) {
+		if (perms.has((String) null, player, perk)) { return true; }
+		if (perms.has(world, player, perk)) { return true; }
 		return false;
 	}
 
-	public static boolean setupPermissions() {
-		final RegisteredServiceProvider<Permission> rsp = uSkyBlock.getInstance().getServer().getServicesManager()
-				.getRegistration(Permission.class);
-		if (rsp.getProvider() != null)
-			perms = rsp.getProvider();
-		return perms != null;
+	public static void removePerk(final Player player, final String perk) {
+		perms.playerRemove((String) null, player.getName(), perk);
 	}
 
 	public static boolean setupEconomy() {
@@ -46,5 +36,14 @@ public class VaultHandler {
 		if (rsp == null) { return false; }
 		econ = rsp.getProvider();
 		return econ != null;
+	}
+
+	public static boolean setupPermissions() {
+		final RegisteredServiceProvider<Permission> rsp = uSkyBlock.getInstance().getServer().getServicesManager()
+				.getRegistration(Permission.class);
+		if (rsp.getProvider() != null) {
+			perms = rsp.getProvider();
+		}
+		return perms != null;
 	}
 }

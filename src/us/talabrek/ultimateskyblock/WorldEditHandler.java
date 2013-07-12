@@ -25,7 +25,7 @@ public class WorldEditHandler {
 		return (WorldEditPlugin) plugin;
 	}
 
-	public static boolean loadIslandSchematic(World world, File file, Location origin) throws DataException, IOException,
+	public static boolean loadIslandSchematic(final World world, final File file, final Location origin) throws DataException, IOException,
 			MaxChangedBlocksException {
 		final Vector v = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
 		final SchematicFormat format = SchematicFormat.getFormat(file);

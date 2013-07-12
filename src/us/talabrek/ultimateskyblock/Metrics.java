@@ -21,16 +21,27 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.scheduler.BukkitTask;
 
 public class Metrics {
-	private final Plugin plugin;
+	private static String encode(final String text) throws UnsupportedEncodingException {
+		return URLEncoder.encode(text, "UTF-8");
+	}
+
+	private static void encodeDataPair(final StringBuilder buffer, final String key, final String value)
+			throws UnsupportedEncodingException {
+		buffer.append('&').append(encode(key)).append('=').append(encode(value));
+	}
+
 	private final YamlConfiguration configuration;
 	private final File configurationFile;
-	private final String guid;
 	private final boolean debug;
+	private final String guid;
+
 	private final Object optOutLock = new Object();
+
+	private final Plugin plugin;
 
 	private volatile BukkitTask task = null;
 
-	public Metrics(Plugin plugin) throws IOException {
+	public Metrics(final Plugin plugin) throws IOException {
 		if (plugin == null) { throw new IllegalArgumentException("Plugin cannot be null"); }
 
 		this.plugin = plugin;
@@ -51,37 +62,46 @@ public class Metrics {
 		debug = configuration.getBoolean("debug", false);
 	}
 
-	public boolean start() {
+	public void disable() throws IOException {
 		synchronized (optOutLock) {
-			if (isOptOut()) { return false; }
+			if (!isOptOut()) {
+				configuration.set("opt-out", Boolean.valueOf(true));
+				configuration.save(configurationFile);
+			}
 
-			if (task != null) { return true; }
-
-			task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
-				private boolean firstPost = true;
-
-				public void run() {
-					try {
-						synchronized (optOutLock) {
-							if (Metrics.this.isOptOut() && task != null) {
-								task.cancel();
-								task = null;
-							}
-
-						}
-
-						Metrics.this.postPlugin(!firstPost);
-
-						firstPost = false;
-					} catch (final IOException e) {
-						if (debug)
-							Bukkit.getLogger().log(Level.INFO, "[Metrics] " + e.getMessage());
-					}
-				}
-			}, 0L, 12000L);
-
-			return true;
+			if (task != null) {
+				task.cancel();
+				task = null;
+			}
 		}
+	}
+
+	public void enable() throws IOException {
+		synchronized (optOutLock) {
+			if (isOptOut()) {
+				configuration.set("opt-out", Boolean.valueOf(false));
+				configuration.save(configurationFile);
+			}
+
+			if (task == null) {
+				start();
+			}
+		}
+	}
+
+	public File getConfigFile() {
+		final File pluginsFolder = plugin.getDataFolder().getParentFile();
+
+		return new File(new File(pluginsFolder, "PluginMetrics"), "config.yml");
+	}
+
+	private boolean isMineshafterPresent() {
+		try {
+			Class.forName("mineshafter.MineServer");
+			return true;
+		} catch (final Exception e) {
+		}
+		return false;
 	}
 
 	public boolean isOptOut() {
@@ -103,39 +123,7 @@ public class Metrics {
 		}
 	}
 
-	public void enable() throws IOException {
-		synchronized (optOutLock) {
-			if (isOptOut()) {
-				configuration.set("opt-out", Boolean.valueOf(false));
-				configuration.save(configurationFile);
-			}
-
-			if (task == null)
-				start();
-		}
-	}
-
-	public void disable() throws IOException {
-		synchronized (optOutLock) {
-			if (!isOptOut()) {
-				configuration.set("opt-out", Boolean.valueOf(true));
-				configuration.save(configurationFile);
-			}
-
-			if (task != null) {
-				task.cancel();
-				task = null;
-			}
-		}
-	}
-
-	public File getConfigFile() {
-		final File pluginsFolder = plugin.getDataFolder().getParentFile();
-
-		return new File(new File(pluginsFolder, "PluginMetrics"), "config.yml");
-	}
-
-	private void postPlugin(boolean isPing) throws IOException {
+	private void postPlugin(final boolean isPing) throws IOException {
 		final PluginDescriptionFile description = plugin.getDescription();
 		final String pluginName = description.getName();
 		final boolean onlineMode = Bukkit.getServer().getOnlineMode();
@@ -174,9 +162,9 @@ public class Metrics {
 
 		final URL url = new URL("http://mcstats.org" + String.format("/report/%s", new Object[] { encode(pluginName) }));
 		URLConnection connection;
-		if (isMineshafterPresent())
+		if (isMineshafterPresent()) {
 			connection = url.openConnection(Proxy.NO_PROXY);
-		else {
+		} else {
 			connection = url.openConnection();
 		}
 
@@ -192,24 +180,40 @@ public class Metrics {
 		writer.close();
 		reader.close();
 
-		if (response == null || response.startsWith("ERR"))
-			throw new IOException(response);
+		if (response == null || response.startsWith("ERR")) { throw new IOException(response); }
 	}
 
-	private boolean isMineshafterPresent() {
-		try {
-			Class.forName("mineshafter.MineServer");
+	public boolean start() {
+		synchronized (optOutLock) {
+			if (isOptOut()) { return false; }
+
+			if (task != null) { return true; }
+
+			task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
+				private boolean firstPost = true;
+
+				public void run() {
+					try {
+						synchronized (optOutLock) {
+							if (Metrics.this.isOptOut() && task != null) {
+								task.cancel();
+								task = null;
+							}
+
+						}
+
+						Metrics.this.postPlugin(!firstPost);
+
+						firstPost = false;
+					} catch (final IOException e) {
+						if (debug) {
+							Bukkit.getLogger().log(Level.INFO, "[Metrics] " + e.getMessage());
+						}
+					}
+				}
+			}, 0L, 12000L);
+
 			return true;
-		} catch (final Exception e) {
 		}
-		return false;
-	}
-
-	private static void encodeDataPair(StringBuilder buffer, String key, String value) throws UnsupportedEncodingException {
-		buffer.append('&').append(encode(key)).append('=').append(encode(value));
-	}
-
-	private static String encode(String text) throws UnsupportedEncodingException {
-		return URLEncoder.encode(text, "UTF-8");
 	}
 }

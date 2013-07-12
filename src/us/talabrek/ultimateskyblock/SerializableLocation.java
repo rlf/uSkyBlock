@@ -8,12 +8,12 @@ import org.bukkit.World;
 
 public class SerializableLocation implements Serializable {
 	private static final long serialVersionUID = 23L;
+	private final String world;
 	private final double x;
 	private final double y;
 	private final double z;
-	private final String world;
 
-	public SerializableLocation(Location loc) {
+	public SerializableLocation(final Location loc) {
 		x = loc.getX();
 		y = loc.getY();
 		z = loc.getZ();
@@ -22,8 +22,7 @@ public class SerializableLocation implements Serializable {
 
 	public Location getLocation() {
 		final World w = Bukkit.getWorld(world);
-		if (w == null)
-			return null;
+		if (w == null) { return null; }
 		final Location toRet = new Location(w, x, y, z);
 		return toRet;
 	}

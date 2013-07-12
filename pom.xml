@@ -19,6 +19,15 @@
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <outputDirectory>D:\Users\Jordan\Minecraft\1.5.1 R0.1 Server\plugins\</outputDirectory>
+          <finalName>uSkyBlock</finalName>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.0</version>
         <configuration>
@@ -52,11 +61,6 @@
     <dependency>
   	  <groupId>worldguard</groupId>
   	  <artifactId>WorldGuard</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-  	  <groupId>sqlibrary</groupId>
-  	  <artifactId>SQLibrary</artifactId>
       <version>1.0</version>
     </dependency>
   </dependencies>

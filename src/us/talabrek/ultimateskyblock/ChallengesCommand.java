@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ChallengesCommand implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] split) {
+	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
 		if (!(sender instanceof Player)) { return false; }
 
 		final Player player = sender.getServer().getPlayer(sender.getName());
