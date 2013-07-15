@@ -94,14 +94,6 @@ public class uSkyBlock extends JavaPlugin {
 		purgeActive = true;
 	}
 
-	public FileConfiguration getChallengeConfig() {
-		// TODO create a challenge yml file and return it's fileconfiguration
-		// instead of the config.
-		// TODO move all challenge options from config to the challenge yml file
-		// and optionally rename them (as well as in source)
-		return getConfig();
-	}
-
 	public void addActivePlayer(final String player, final PlayerInfo pi) {
 		activePlayers.put(player, pi);
 	}
@@ -471,6 +463,14 @@ public class uSkyBlock extends JavaPlugin {
 				log.warning(ex.getMessage());
 			}
 		}
+	}
+
+	public FileConfiguration getChallengeConfig() {
+		// TODO create a challenge yml file and return it's fileconfiguration
+		// instead of the config.
+		// TODO move all challenge options from config to the challenge yml file
+		// and optionally rename them (as well as in source)
+		return getConfig();
 	}
 
 	public String getChallengesFromRank(final Player player, final String rank) {

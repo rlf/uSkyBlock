@@ -22,6 +22,24 @@ public class ProtectionEvents implements Listener {
 	private Player attacker = null;
 	private Player breaker = null;
 
+	/**
+	 * Prevent players from interacting with horses on other players' islands
+	 * but allow in spawn and on own island.
+	 */
+	@EventHandler(priority = EventPriority.NORMAL)
+	private void onHorseLead(final PlayerInteractEntityEvent event) {
+		if (event.getRightClicked().getType() == EntityType.HORSE) {
+			final Player player = event.getPlayer();
+			if (player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
+				if (!uSkyBlock.getInstance().locationIsOnIsland(player, event.getRightClicked().getLocation())
+						&& !uSkyBlock.getInstance().playerIsInSpawn(event.getPlayer())
+						&& !VaultHandler.checkPerk(player.getName(), "usb.mod.bypassprotection", player.getWorld()) && !player.isOp()) {
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerAttack(final EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof Player) {
@@ -138,24 +156,6 @@ public class ProtectionEvents implements Listener {
 			if (breaker.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
 				if (!uSkyBlock.getInstance().locationIsOnIsland(breaker, event.getVehicle().getLocation())
 						&& !VaultHandler.checkPerk(breaker.getName(), "usb.mod.bypassprotection", breaker.getWorld()) && !breaker.isOp()) {
-					event.setCancelled(true);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Prevent players from interacting with horses on other players' islands
-	 * but allow in spawn and on own island.
-	 */
-	@EventHandler(priority = EventPriority.NORMAL)
-	private void onHorseLead(PlayerInteractEntityEvent event) {
-		if (event.getRightClicked().getType() == EntityType.HORSE) {
-			Player player = event.getPlayer();
-			if (player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
-				if (!uSkyBlock.getInstance().locationIsOnIsland(player, event.getRightClicked().getLocation())
-						&& !uSkyBlock.getInstance().playerIsInSpawn(event.getPlayer())
-						&& !VaultHandler.checkPerk(player.getName(), "usb.mod.bypassprotection", player.getWorld()) && !player.isOp()) {
 					event.setCancelled(true);
 				}
 			}
