@@ -94,6 +94,14 @@ public class uSkyBlock extends JavaPlugin {
 		purgeActive = true;
 	}
 
+	public FileConfiguration getChallengeConfig() {
+		// TODO create a challenge yml file and return it's fileconfiguration
+		// instead of the config.
+		// TODO move all challenge options from config to the challenge yml file
+		// and optionally rename them (as well as in source)
+		return getConfig();
+	}
+
 	public void addActivePlayer(final String player, final PlayerInfo pi) {
 		activePlayers.put(player, pi);
 	}
@@ -141,7 +149,7 @@ public class uSkyBlock extends JavaPlugin {
 	public boolean checkIfCanCompleteChallenge(final Player player, final String challenge) {
 		final PlayerInfo pi = getActivePlayers().get(player.getName());
 
-		if (!isRankAvailable(player, getConfig().getString("options.challenges.challengeList." + challenge + ".rankLevel"))) {
+		if (!isRankAvailable(player, getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".rankLevel"))) {
 			player.sendMessage(ChatColor.RED + "You have not unlocked this challenge yet!");
 			return false;
 		}
@@ -149,33 +157,34 @@ public class uSkyBlock extends JavaPlugin {
 			player.sendMessage(ChatColor.RED + "Unknown challenge name (check spelling)!");
 			return false;
 		}
-		if (pi.checkChallenge(challenge) && !getConfig().getBoolean("options.challenges.challengeList." + challenge + ".repeatable")) {
+		if (pi.checkChallenge(challenge)
+				&& !getChallengeConfig().getBoolean("options.challenges.challengeList." + challenge + ".repeatable")) {
 			player.sendMessage(ChatColor.RED + "This challenge is not repeatable!");
 			return false;
 		}
 		if (pi.checkChallenge(challenge)
-				&& (getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland") || getConfig()
+				&& (getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland") || getChallengeConfig()
 						.getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland"))) {
 			player.sendMessage(ChatColor.RED + "This challenge is not repeatable!");
 			return false;
 		}
-		if (getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onPlayer")) {
+		if (getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onPlayer")) {
 			if (!hasRequired(player, challenge, "onPlayer")) {
 				player.sendMessage(ChatColor.RED
-						+ getConfig().getString(
+						+ getChallengeConfig().getString(
 								new StringBuilder("options.challenges.challengeList.").append(challenge).append(".description").toString()));
 				player.sendMessage(ChatColor.RED + "You don't have enough of the required item(s)!");
 				return false;
 			}
 			return true;
 		}
-		if (getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland")) {
+		if (getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland")) {
 			if (!playerIsOnIsland(player)) {
 				player.sendMessage(ChatColor.RED + "You must be on your island to do that!");
 			}
 			if (!hasRequired(player, challenge, "onIsland")) {
 				player.sendMessage(ChatColor.RED
-						+ getConfig().getString(
+						+ getChallengeConfig().getString(
 								new StringBuilder("options.challenges.challengeList.").append(challenge).append(".description").toString()));
 
 				player.sendMessage(ChatColor.RED + "You must be standing within 10 blocks of all required items.");
@@ -183,12 +192,12 @@ public class uSkyBlock extends JavaPlugin {
 			}
 			return true;
 		}
-		if (getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("islandLevel")) {
-			if (pi.getIslandLevel() >= getConfig().getInt("options.challenges.challengeList." + challenge + ".requiredItems")) { return true; }
+		if (getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("islandLevel")) {
+			if (pi.getIslandLevel() >= getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".requiredItems")) { return true; }
 
 			player.sendMessage(ChatColor.RED
 					+ "Your island must be level "
-					+ getConfig().getInt(
+					+ getChallengeConfig().getInt(
 							new StringBuilder("options.challenges.challengeList.").append(challenge).append(".requiredItems").toString())
 					+ " to complete this challenge!");
 			return false;
@@ -312,25 +321,6 @@ public class uSkyBlock extends JavaPlugin {
 			updateOrphans();
 		}
 	}
-
-	// public static World getSkyBlockWorld() {
-	// if (skyBlockWorld == null) {
-	// WorldCreator wc = new WorldCreator(Settings.general_worldName);
-	// wc.generator(new SkyBlockChunkGenerator());
-	// wc.type(WorldType.FLAT);
-	// wc.environment(World.Environment.NORMAL);
-	// skyBlockWorld = Bukkit.createWorld(wc);
-	// skyBlockWorld.setAutoSave(false);
-	// instance.getServer().unloadWorld(skyBlockWorld, false);
-	// WorldUnloader.clearWorldReference(skyBlockWorld);
-	// skyBlockWorld.getWorldFolder().renameTo(
-	// new
-	// File(skyBlockWorld.getWorldFolder().getAbsolutePath().replace(Settings.general_worldName,
-	// "uSkyBlock")));
-	// }
-	//
-	// return skyBlockWorld;
-	// }
 
 	public void devDeletePlayerIsland(final String player) {
 		if (!getActivePlayers().containsKey(player)) {
@@ -491,7 +481,7 @@ public class uSkyBlock extends JavaPlugin {
 		while (itr.hasNext()) {
 			final String tempString = itr.next();
 			if (pi.checkChallenge(tempString)) {
-				if (getConfig().getBoolean("options.challenges.challengeList." + tempString + ".repeatable")) {
+				if (getChallengeConfig().getBoolean("options.challenges.challengeList." + tempString + ".repeatable")) {
 					fullString = fullString + Settings.challenges_repeatableColor.replace('&', '§') + tempString + ChatColor.DARK_GRAY
 							+ " - ";
 				} else {
@@ -655,20 +645,24 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public boolean giveReward(final Player player, final String challenge) {
-		final String[] permList = getConfig()
-				.getString("options.challenges.challengeList." + challenge.toLowerCase() + ".permissionReward").split(" ");
+		final String[] permList = getChallengeConfig().getString(
+				"options.challenges.challengeList." + challenge.toLowerCase() + ".permissionReward").split(" ");
 		int rewCurrency = 0;
 		player.sendMessage(ChatColor.GREEN + "You have completed the " + challenge + " challenge!");
 		String[] rewList;
 		if (!getInstance().getActivePlayers().get(player.getName()).checkChallenge(challenge)) {
-			rewList = getConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".itemReward").split(" ");
+			rewList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".itemReward").split(
+					" ");
 			if (Settings.challenges_enableEconomyPlugin && VaultHandler.econ != null) {
-				rewCurrency = getConfig().getInt("options.challenges.challengeList." + challenge.toLowerCase() + ".currencyReward");
+				rewCurrency = getChallengeConfig()
+						.getInt("options.challenges.challengeList." + challenge.toLowerCase() + ".currencyReward");
 			}
 		} else {
-			rewList = getConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".repeatItemReward").split(" ");
+			rewList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".repeatItemReward")
+					.split(" ");
 			if (Settings.challenges_enableEconomyPlugin && VaultHandler.econ != null) {
-				rewCurrency = getConfig().getInt("options.challenges.challengeList." + challenge.toLowerCase() + ".repeatCurrencyReward");
+				rewCurrency = getChallengeConfig().getInt(
+						"options.challenges.challengeList." + challenge.toLowerCase() + ".repeatCurrencyReward");
 			}
 		}
 		int rewItem = 0;
@@ -677,25 +671,26 @@ public class uSkyBlock extends JavaPlugin {
 		if (Settings.challenges_enableEconomyPlugin && VaultHandler.econ != null) {
 			VaultHandler.econ.depositPlayer(player.getName(), rewCurrency);
 			if (getInstance().getActivePlayers().get(player.getName()).checkChallenge(challenge)) {
-				player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
+				player.giveExp(getInstance().getChallengeConfig().getInt(
+						"options.challenges.challengeList." + challenge + ".repeatXpReward"));
 				player.sendMessage(ChatColor.YELLOW
 						+ "Repeat reward(s): "
 						+ ChatColor.WHITE
 						+ getInstance()
-								.getConfig()
+								.getChallengeConfig()
 								.getString(
 										new StringBuilder("options.challenges.challengeList.").append(challenge)
 												.append(".repeatRewardText").toString()).replace('&', '§'));
 				player.sendMessage(ChatColor.YELLOW
 						+ "Repeat exp reward: "
 						+ ChatColor.WHITE
-						+ getInstance().getConfig().getInt(
+						+ getInstance().getChallengeConfig().getInt(
 								new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatXpReward")
 										.toString()));
 				player.sendMessage(ChatColor.YELLOW
 						+ "Repeat currency reward: "
 						+ ChatColor.WHITE
-						+ getInstance().getConfig().getInt(
+						+ getInstance().getChallengeConfig().getInt(
 								new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatCurrencyReward")
 										.toString()) + " " + VaultHandler.econ.currencyNamePlural());
 			} else {
@@ -704,42 +699,42 @@ public class uSkyBlock extends JavaPlugin {
 							Settings.challenges_broadcastText.replace('&', '§') + player.getName() + " has completed the " + challenge
 									+ " challenge!");
 				}
-				player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
+				player.giveExp(getInstance().getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
 				player.sendMessage(ChatColor.YELLOW
 						+ "Reward(s): "
 						+ ChatColor.WHITE
 						+ getInstance()
-								.getConfig()
+								.getChallengeConfig()
 								.getString(
 										new StringBuilder("options.challenges.challengeList.").append(challenge).append(".rewardText")
 												.toString()).replace('&', '§'));
 				player.sendMessage(ChatColor.YELLOW
 						+ "Exp reward: "
 						+ ChatColor.WHITE
-						+ getInstance().getConfig().getInt(
+						+ getInstance().getChallengeConfig().getInt(
 								new StringBuilder("options.challenges.challengeList.").append(challenge).append(".xpReward").toString()));
 				player.sendMessage(ChatColor.YELLOW
 						+ "Currency reward: "
 						+ ChatColor.WHITE
-						+ getInstance().getConfig().getInt(
+						+ getInstance().getChallengeConfig().getInt(
 								new StringBuilder("options.challenges.challengeList.").append(challenge).append(".currencyReward")
 										.toString()) + " " + VaultHandler.econ.currencyNamePlural());
 			}
 
 		} else if (getInstance().getActivePlayers().get(player.getName()).checkChallenge(challenge)) {
-			player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
+			player.giveExp(getInstance().getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
 			player.sendMessage(ChatColor.YELLOW
 					+ "Repeat reward(s): "
 					+ ChatColor.WHITE
 					+ getInstance()
-							.getConfig()
+							.getChallengeConfig()
 							.getString(
 									new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatRewardText")
 											.toString()).replace('&', '§'));
 			player.sendMessage(ChatColor.YELLOW
 					+ "Repeat exp reward: "
 					+ ChatColor.WHITE
-					+ getInstance().getConfig().getInt(
+					+ getInstance().getChallengeConfig().getInt(
 							new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatXpReward").toString()));
 		} else {
 			if (Settings.challenges_broadcastCompletion) {
@@ -747,19 +742,19 @@ public class uSkyBlock extends JavaPlugin {
 						Settings.challenges_broadcastText.replace('&', '§') + player.getName() + " has completed the " + challenge
 								+ " challenge!");
 			}
-			player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
+			player.giveExp(getInstance().getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
 			player.sendMessage(ChatColor.YELLOW
 					+ "Reward(s): "
 					+ ChatColor.WHITE
 					+ getInstance()
-							.getConfig()
+							.getChallengeConfig()
 							.getString(
 									new StringBuilder("options.challenges.challengeList.").append(challenge).append(".rewardText")
 											.toString()).replace('&', '§'));
 			player.sendMessage(ChatColor.YELLOW
 					+ "Exp reward: "
 					+ ChatColor.WHITE
-					+ getInstance().getConfig().getInt(
+					+ getInstance().getChallengeConfig().getInt(
 							new StringBuilder("options.challenges.challengeList.").append(challenge).append(".xpReward").toString()));
 		}
 
@@ -812,7 +807,8 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public boolean hasRequired(final Player player, final String challenge, final String type) {
-		final String[] reqList = getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems").split(" ");
+		final String[] reqList = getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems").split(
+				" ");
 
 		if (type.equalsIgnoreCase("onPlayer")) {
 			int reqItem = 0;
@@ -831,7 +827,7 @@ public class uSkyBlock extends JavaPlugin {
 					if (!player.getInventory().containsAtLeast(new ItemStack(reqItem, reqAmount, (short) reqMod), reqAmount)) { return false; }
 				}
 			}
-			if (getConfig().getBoolean("options.challenges.challengeList." + challenge + ".takeItems")) {
+			if (getChallengeConfig().getBoolean("options.challenges.challengeList." + challenge + ".takeItems")) {
 				takeRequired(player, challenge, type);
 			}
 			return true;
@@ -1068,7 +1064,7 @@ public class uSkyBlock extends JavaPlugin {
 			Settings.island_height = 120;
 		}
 		try {
-			Settings.challenges_rankLeeway = getConfig().getInt("options.challenges.rankLeeway");
+			Settings.challenges_rankLeeway = getChallengeConfig().getInt("options.challenges.rankLeeway");
 			if (Settings.challenges_rankLeeway < 0) {
 				Settings.challenges_rankLeeway = 0;
 			}
@@ -1108,17 +1104,17 @@ public class uSkyBlock extends JavaPlugin {
 		Settings.island_allowIslandLock = getConfig().getBoolean("options.island.allowIslandLock");
 		Settings.island_useOldIslands = getConfig().getBoolean("options.island.useOldIslands");
 
-		final Set<String> challengeList = getConfig().getConfigurationSection("options.challenges.challengeList").getKeys(false);
+		final Set<String> challengeList = getChallengeConfig().getConfigurationSection("options.challenges.challengeList").getKeys(false);
 		Settings.challenges_challengeList = challengeList;
-		Settings.challenges_broadcastCompletion = getConfig().getBoolean("options.challenges.broadcastCompletion");
-		Settings.challenges_broadcastText = getConfig().getString("options.challenges.broadcastText");
-		Settings.challenges_challengeColor = getConfig().getString("options.challenges.challengeColor");
-		Settings.challenges_enableEconomyPlugin = getConfig().getBoolean("options.challenges.enableEconomyPlugin");
-		Settings.challenges_finishedColor = getConfig().getString("options.challenges.finishedColor");
-		Settings.challenges_repeatableColor = getConfig().getString("options.challenges.repeatableColor");
-		Settings.challenges_requirePreviousRank = getConfig().getBoolean("options.challenges.requirePreviousRank");
-		Settings.challenges_allowChallenges = getConfig().getBoolean("options.challenges.allowChallenges");
-		final String[] rankListString = getConfig().getString("options.challenges.ranks").split(" ");
+		Settings.challenges_broadcastCompletion = getChallengeConfig().getBoolean("options.challenges.broadcastCompletion");
+		Settings.challenges_broadcastText = getChallengeConfig().getString("options.challenges.broadcastText");
+		Settings.challenges_challengeColor = getChallengeConfig().getString("options.challenges.challengeColor");
+		Settings.challenges_enableEconomyPlugin = getChallengeConfig().getBoolean("options.challenges.enableEconomyPlugin");
+		Settings.challenges_finishedColor = getChallengeConfig().getString("options.challenges.finishedColor");
+		Settings.challenges_repeatableColor = getChallengeConfig().getString("options.challenges.repeatableColor");
+		Settings.challenges_requirePreviousRank = getChallengeConfig().getBoolean("options.challenges.requirePreviousRank");
+		Settings.challenges_allowChallenges = getChallengeConfig().getBoolean("options.challenges.allowChallenges");
+		final String[] rankListString = getChallengeConfig().getString("options.challenges.ranks").split(" ");
 		Settings.challenges_ranks = rankListString;
 	}
 
@@ -1310,8 +1306,9 @@ public class uSkyBlock extends JavaPlugin {
 		final Iterator<?> itr = Settings.challenges_challengeList.iterator();
 		while (itr.hasNext()) {
 			final String tempString = (String) itr.next();
-			if (challenges.containsKey(getConfig().getString("options.challenges.challengeList." + tempString + ".rankLevel"))) {
-				challenges.get(getConfig().getString("options.challenges.challengeList." + tempString + ".rankLevel")).add(tempString);
+			if (challenges.containsKey(getChallengeConfig().getString("options.challenges.challengeList." + tempString + ".rankLevel"))) {
+				challenges.get(getChallengeConfig().getString("options.challenges.challengeList." + tempString + ".rankLevel")).add(
+						tempString);
 			}
 		}
 	}
@@ -1500,9 +1497,7 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public void setLastIsland(final Location island) {
-		getConfig();
 		MemorySection.createPath(getConfig().getConfigurationSection("options.general"), "lastIslandX");
-		getConfig();
 		MemorySection.createPath(getConfig().getConfigurationSection("options.general"), "lastIslandZ");
 		getConfig().set("options.general.lastIslandX", Integer.valueOf(island.getBlockX()));
 		getConfig().set("options.general.lastIslandZ", Integer.valueOf(island.getBlockZ()));
@@ -1559,7 +1554,8 @@ public class uSkyBlock extends JavaPlugin {
 
 	public boolean takeRequired(final Player player, final String challenge, final String type) {
 		if (type.equalsIgnoreCase("onPlayer")) {
-			final String[] reqList = getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems").split(" ");
+			final String[] reqList = getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems")
+					.split(" ");
 
 			int reqItem = 0;
 			int reqAmount = 0;

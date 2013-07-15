@@ -47,23 +47,23 @@ public class ChallengesCommand implements CommandExecutor {
 						+ Settings.challenges_repeatableColor.replace('&', '§') + "Completed(repeatable) ");
 			} else if (uSkyBlock.getInstance().isRankAvailable(
 					player,
-					uSkyBlock.getInstance().getConfig()
+					uSkyBlock.getInstance().getChallengeConfig()
 							.getString("options.challenges.challengeList." + split[0].toLowerCase() + ".rankLevel"))) {
 				sender.sendMessage(ChatColor.YELLOW + "Challenge Name: " + ChatColor.WHITE + split[0].toLowerCase());
 				sender.sendMessage(ChatColor.YELLOW
 						+ uSkyBlock
 								.getInstance()
-								.getConfig()
+								.getChallengeConfig()
 								.getString(
 										new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 												.append(".description").toString()));
-				if (uSkyBlock.getInstance().getConfig().getString("options.challenges.challengeList." + split[0].toLowerCase() + ".type")
-						.equalsIgnoreCase("onPlayer")) {
-					if (uSkyBlock.getInstance().getConfig()
+				if (uSkyBlock.getInstance().getChallengeConfig()
+						.getString("options.challenges.challengeList." + split[0].toLowerCase() + ".type").equalsIgnoreCase("onPlayer")) {
+					if (uSkyBlock.getInstance().getChallengeConfig()
 							.getBoolean("options.challenges.challengeList." + split[0].toLowerCase() + ".takeItems")) {
 						sender.sendMessage(ChatColor.RED + "You will lose all required items when you complete this challenge!");
 					}
-				} else if (uSkyBlock.getInstance().getConfig()
+				} else if (uSkyBlock.getInstance().getChallengeConfig()
 						.getString("options.challenges.challengeList." + split[0].toLowerCase() + ".type").equalsIgnoreCase("onIsland")) {
 					sender.sendMessage(ChatColor.RED + "All required items must be placed on your island!");
 				}
@@ -74,15 +74,15 @@ public class ChallengesCommand implements CommandExecutor {
 							+ ChatColor.WHITE
 							+ uSkyBlock
 									.getInstance()
-									.getConfig()
+									.getChallengeConfig()
 									.getString(
 											new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 													.append(".rankLevel").toString()));
 				}
 				if (uSkyBlock.getInstance().getActivePlayers().get(player.getName()).checkChallenge(split[0].toLowerCase())
-						&& (!uSkyBlock.getInstance().getConfig()
+						&& (!uSkyBlock.getInstance().getChallengeConfig()
 								.getString("options.challenges.challengeList." + split[0].toLowerCase() + ".type")
-								.equalsIgnoreCase("onPlayer") || !uSkyBlock.getInstance().getConfig()
+								.equalsIgnoreCase("onPlayer") || !uSkyBlock.getInstance().getChallengeConfig()
 								.getBoolean("options.challenges.challengeList." + split[0].toLowerCase() + ".repeatable"))) {
 					sender.sendMessage(ChatColor.RED + "This Challenge is not repeatable!");
 					return true;
@@ -94,7 +94,7 @@ public class ChallengesCommand implements CommandExecutor {
 								+ ChatColor.WHITE
 								+ uSkyBlock
 										.getInstance()
-										.getConfig()
+										.getChallengeConfig()
 										.getString(
 												new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 														.append(".repeatRewardText").toString()).replace('&', '§'));
@@ -103,7 +103,7 @@ public class ChallengesCommand implements CommandExecutor {
 								+ ChatColor.WHITE
 								+ uSkyBlock
 										.getInstance()
-										.getConfig()
+										.getChallengeConfig()
 										.getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 												.append(".repeatXpReward").toString()));
 						sender.sendMessage(ChatColor.YELLOW
@@ -111,7 +111,7 @@ public class ChallengesCommand implements CommandExecutor {
 								+ ChatColor.WHITE
 								+ uSkyBlock
 										.getInstance()
-										.getConfig()
+										.getChallengeConfig()
 										.getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 												.append(".repeatCurrencyReward").toString()) + " " + VaultHandler.econ.currencyNamePlural());
 					} else {
@@ -120,7 +120,7 @@ public class ChallengesCommand implements CommandExecutor {
 								+ ChatColor.WHITE
 								+ uSkyBlock
 										.getInstance()
-										.getConfig()
+										.getChallengeConfig()
 										.getString(
 												new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 														.append(".rewardText").toString()).replace('&', '§'));
@@ -129,7 +129,7 @@ public class ChallengesCommand implements CommandExecutor {
 								+ ChatColor.WHITE
 								+ uSkyBlock
 										.getInstance()
-										.getConfig()
+										.getChallengeConfig()
 										.getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 												.append(".xpReward").toString()));
 						sender.sendMessage(ChatColor.YELLOW
@@ -137,7 +137,7 @@ public class ChallengesCommand implements CommandExecutor {
 								+ ChatColor.WHITE
 								+ uSkyBlock
 										.getInstance()
-										.getConfig()
+										.getChallengeConfig()
 										.getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 												.append(".currencyReward").toString()) + " " + VaultHandler.econ.currencyNamePlural());
 					}
@@ -148,7 +148,7 @@ public class ChallengesCommand implements CommandExecutor {
 							+ ChatColor.WHITE
 							+ uSkyBlock
 									.getInstance()
-									.getConfig()
+									.getChallengeConfig()
 									.getString(
 											new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 													.append(".repeatRewardText").toString()).replace('&', '§'));
@@ -157,7 +157,7 @@ public class ChallengesCommand implements CommandExecutor {
 							+ ChatColor.WHITE
 							+ uSkyBlock
 									.getInstance()
-									.getConfig()
+									.getChallengeConfig()
 									.getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 											.append(".repeatXpReward").toString()));
 				} else {
@@ -166,7 +166,7 @@ public class ChallengesCommand implements CommandExecutor {
 							+ ChatColor.WHITE
 							+ uSkyBlock
 									.getInstance()
-									.getConfig()
+									.getChallengeConfig()
 									.getString(
 											new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 													.append(".rewardText").toString()).replace('&', '§'));
@@ -175,7 +175,7 @@ public class ChallengesCommand implements CommandExecutor {
 							+ ChatColor.WHITE
 							+ uSkyBlock
 									.getInstance()
-									.getConfig()
+									.getChallengeConfig()
 									.getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase())
 											.append(".xpReward").toString()));
 				}

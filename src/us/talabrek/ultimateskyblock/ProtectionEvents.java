@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,6 +13,7 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
@@ -136,6 +138,24 @@ public class ProtectionEvents implements Listener {
 			if (breaker.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
 				if (!uSkyBlock.getInstance().locationIsOnIsland(breaker, event.getVehicle().getLocation())
 						&& !VaultHandler.checkPerk(breaker.getName(), "usb.mod.bypassprotection", breaker.getWorld()) && !breaker.isOp()) {
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Prevent players from interacting with horses on other players' islands
+	 * but allow in spawn and on own island.
+	 */
+	@EventHandler(priority = EventPriority.NORMAL)
+	private void onHorseLead(PlayerInteractEntityEvent event) {
+		if (event.getRightClicked().getType() == EntityType.HORSE) {
+			Player player = event.getPlayer();
+			if (player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
+				if (!uSkyBlock.getInstance().locationIsOnIsland(player, event.getRightClicked().getLocation())
+						&& !uSkyBlock.getInstance().playerIsInSpawn(event.getPlayer())
+						&& !VaultHandler.checkPerk(player.getName(), "usb.mod.bypassprotection", player.getWorld()) && !player.isOp()) {
 					event.setCancelled(true);
 				}
 			}
