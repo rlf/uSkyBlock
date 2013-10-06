@@ -1222,7 +1222,15 @@ public class uSkyBlock extends JavaPlugin {
 		getCommand("dev").setExecutor(new DevCommand());
 
 		if (Settings.island_useTopTen) {
-			getInstance().updateTopTen(getInstance().generateTopTen());
+			Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
+
+				@Override
+				public void run() {
+					getInstance().updateTopTen(getInstance().generateTopTen());
+					instance.log.info("Generating Top 10");
+				}
+				
+			});
 		}
 		populateChallengeList();
 		log.info(pluginFile.getName() + " v." + pluginFile.getVersion() + " enabled.");
