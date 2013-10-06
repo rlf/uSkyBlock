@@ -27,7 +27,7 @@ public class ProtectionEvents implements Listener {
 	 * but allow in spawn and on own island.
 	 */
 	@EventHandler(priority = EventPriority.NORMAL)
-	private void onHorseLead(final PlayerInteractEntityEvent event) {
+	public void onHorseLead(final PlayerInteractEntityEvent event) {
 		if (event.getRightClicked().getType() == EntityType.HORSE) {
 			final Player player = event.getPlayer();
 			if (player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
