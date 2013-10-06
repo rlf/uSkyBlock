@@ -42,15 +42,12 @@ public class IslandCommand implements CommandExecutor {
 			return false;
 		}
 		System.out.println("uSkyblock " + "Adding player: " + playername + " to party with leader: " + partyleader);
-		uSkyBlock.getInstance().getActivePlayers().get(playername)
-				.setJoinParty(partyleader, uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
+		uSkyBlock.getInstance().getActivePlayers().get(playername).setJoinParty(partyleader, uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
 		if (!playername.equalsIgnoreCase(partyleader)) {
 			if (uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation() != null) {
-				uSkyBlock.getInstance().getActivePlayers().get(playername)
-						.setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation());
+				uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation());
 			} else {
-				uSkyBlock.getInstance().getActivePlayers().get(playername)
-						.setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
+				uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
 			}
 
 			if (!uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(playername)) {
@@ -82,13 +79,11 @@ public class IslandCommand implements CommandExecutor {
 				}
 			} while (uSkyBlock.getInstance().islandAtLocation(uSkyBlock.getInstance().checkOrphan()));
 
-			while (uSkyBlock.getInstance().hasOrphanedIsland()
-					&& !uSkyBlock.getInstance().checkOrphan().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
+			while (uSkyBlock.getInstance().hasOrphanedIsland() && !uSkyBlock.getInstance().checkOrphan().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
 				uSkyBlock.getInstance().removeNextOrphan();
 			}
 			Location next;
-			if (uSkyBlock.getInstance().hasOrphanedIsland()
-					&& !uSkyBlock.getInstance().islandAtLocation(uSkyBlock.getInstance().checkOrphan())) {
+			if (uSkyBlock.getInstance().hasOrphanedIsland() && !uSkyBlock.getInstance().islandAtLocation(uSkyBlock.getInstance().checkOrphan())) {
 				next = uSkyBlock.getInstance().getOrphanedIsland();
 				uSkyBlock.getInstance().saveOrphans();
 				uSkyBlock.getInstance().updateOrphans();
@@ -109,15 +104,13 @@ public class IslandCommand implements CommandExecutor {
 				for (int i = 0; i < uSkyBlock.getInstance().getSchemFile().length; i++) {
 					if (!hasIslandNow) {
 						if (uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.') > 0) {
-							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0,
-									uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
+							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0, uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
 						} else {
 							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName();
 						}
 
 						if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, uSkyBlock.getSkyBlockWorld())) {
-							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(),
-									uSkyBlock.getInstance().getSchemFile()[i], next)) {
+							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(), uSkyBlock.getInstance().getSchemFile()[i], next)) {
 								setChest(next, player);
 								hasIslandNow = true;
 							}
@@ -127,14 +120,12 @@ public class IslandCommand implements CommandExecutor {
 				if (!hasIslandNow) {
 					for (int i = 0; i < uSkyBlock.getInstance().getSchemFile().length; i++) {
 						if (uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.') > 0) {
-							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0,
-									uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
+							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName().substring(0, uSkyBlock.getInstance().getSchemFile()[i].getName().lastIndexOf('.'));
 						} else {
 							cSchem = uSkyBlock.getInstance().getSchemFile()[i].getName();
 						}
 						if (cSchem.equalsIgnoreCase(Settings.island_schematicName)) {
-							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(),
-									uSkyBlock.getInstance().getSchemFile()[i], next)) {
+							if (WorldEditHandler.loadIslandSchematic(uSkyBlock.getSkyBlockWorld(), uSkyBlock.getInstance().getSchemFile()[i], next)) {
 								setChest(next, player);
 								hasIslandNow = true;
 							}
@@ -187,26 +178,18 @@ public class IslandCommand implements CommandExecutor {
 			for (int y = -15; y <= 15; y++) {
 				for (int z = -15; z <= 15; z++) {
 					if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z + 1)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z + 1).getTypeId() != 0) { return new Location(
-								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z - 1)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z - 1).getTypeId() != 0) { return new Location(
-								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y, loc.getBlockZ() + z)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0) { return new Location(
-								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
-						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y, loc.getBlockZ() + z)
-								.getTypeId() == 0
-								&& uSkyBlock.getSkyBlockWorld()
-										.getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0) { return new Location(
-								uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1); }
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z + 1).getTypeId() == 0 && uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z + 1).getTypeId() != 0) {
+							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1);
+						}
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z - 1).getTypeId() == 0 && uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y - 1, loc.getBlockZ() + z - 1).getTypeId() != 0) {
+							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1);
+						}
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x + 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0) {
+							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1);
+						}
+						if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x - 1, loc.getBlockY() + y - 1, loc.getBlockZ() + z).getTypeId() != 0) {
+							return new Location(uSkyBlock.getSkyBlockWorld(), loc.getBlockX() + x, loc.getBlockY() + y + 1, loc.getBlockZ() + z + 1);
+						}
 						return loc;
 					}
 				}
@@ -215,107 +198,118 @@ public class IslandCommand implements CommandExecutor {
 		return loc;
 	}
 
+	private int calculateIslandLevel(Location l) {
+		int cobblecount = 0;
+		int blockcount = 0;
+		final int px = l.getBlockX();
+		final int py = l.getBlockY();
+		final int pz = l.getBlockZ();
+		for (int x = -50; x <= 50; x++) {
+			for (int y = Settings.island_height * -1; y <= 255 - Settings.island_height; y++) {
+				for (int z = -50; z <= 50; z++) {
+					final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
+					if (b.getTypeId() == 57) {
+						blockcount += 300;
+					}
+					if (b.getTypeId() == 41 || b.getTypeId() == 116 || b.getTypeId() == 122) {
+						blockcount += 150;
+					}
+					if (b.getTypeId() == 49 || b.getTypeId() == 42) {
+						blockcount += 10;
+					}
+					if (b.getTypeId() == 47 || b.getTypeId() == 84) {
+						blockcount += 5;
+					}
+					if (b.getTypeId() == 79 || b.getTypeId() == 82 || b.getTypeId() == 112 || b.getTypeId() == 2 || b.getTypeId() == 110) {
+						blockcount += 3;
+					}
+					if (b.getTypeId() == 98 || b.getTypeId() == 45 || b.getTypeId() == 35 || b.getTypeId() == 24 || b.getTypeId() == 121 || b.getTypeId() == 108 || b.getTypeId() == 109 || b.getTypeId() == 43 || b.getTypeId() == 20) {
+						blockcount += 2;
+					}
+					if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 9 && b.getTypeId() != 10 && b.getTypeId() != 11 && b.getTypeId() != 4 || b.getTypeId() == 4 && cobblecount < 10000) {
+						blockcount++;
+						if (b.getTypeId() == 4) {
+							cobblecount++;
+						}
+					}
+				}
+			}
+		}
+
+		return blockcount / 100;
+	}
+
 	public boolean getIslandLevel(final Player player, final String islandPlayer) {
 		if (allowInfo) {
 			System.out.println("uSkyblock " + "Preparing to calculate island level");
 			allowInfo = false;
-			final String playerx = player.getName();
-			final String islandPlayerx = islandPlayer;
 			if (!uSkyBlock.getInstance().hasIsland(islandPlayer) && !uSkyBlock.getInstance().hasParty(islandPlayer)) {
 				player.sendMessage(ChatColor.RED + "That player is invalid or does not have an island!");
 				allowInfo = true;
 				return false;
 			}
-			uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
-				public void run() {
-					System.out.println("uSkyblock " + "Calculating island level in async thread");
-					try {
-						final String player = playerx;
-						final String islandPlayer = islandPlayerx;
-						Location l;
-						if (uSkyBlock.getInstance().getActivePlayers().get(player).getHasParty()) {
-							l = uSkyBlock.getInstance().getActivePlayers().get(player).getPartyIslandLocation();
-						} else {
-							l = uSkyBlock.getInstance().getActivePlayers().get(player).getIslandLocation();
-						}
-						int blockcount = 0;
-						if (player.equalsIgnoreCase(islandPlayer)) {
-							int cobblecount = 0;
-							final int px = l.getBlockX();
-							final int py = l.getBlockY();
-							final int pz = l.getBlockZ();
-							for (int x = -50; x <= 50; x++) {
-								for (int y = Settings.island_height * -1; y <= 255 - Settings.island_height; y++) {
-									for (int z = -50; z <= 50; z++) {
-										final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-										if (b.getTypeId() == 57) {
-											blockcount += 300;
-										}
-										if (b.getTypeId() == 41 || b.getTypeId() == 116 || b.getTypeId() == 122) {
-											blockcount += 150;
-										}
-										if (b.getTypeId() == 49 || b.getTypeId() == 42) {
-											blockcount += 10;
-										}
-										if (b.getTypeId() == 47 || b.getTypeId() == 84) {
-											blockcount += 5;
-										}
-										if (b.getTypeId() == 79 || b.getTypeId() == 82 || b.getTypeId() == 112 || b.getTypeId() == 2
-												|| b.getTypeId() == 110) {
-											blockcount += 3;
-										}
-										if (b.getTypeId() == 98 || b.getTypeId() == 45 || b.getTypeId() == 35 || b.getTypeId() == 24
-												|| b.getTypeId() == 121 || b.getTypeId() == 108 || b.getTypeId() == 109
-												|| b.getTypeId() == 43 || b.getTypeId() == 20) {
-											blockcount += 2;
-										}
-										if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 9 && b.getTypeId() != 10
-												&& b.getTypeId() != 11 && b.getTypeId() != 4 || b.getTypeId() == 4 && cobblecount < 10000) {
-											blockcount++;
-											if (b.getTypeId() == 4) {
-												cobblecount++;
-											}
-										}
-									}
-								}
-							}
-						}
+			try {
 
-						if (player.equalsIgnoreCase(islandPlayer)) {
-							uSkyBlock.getInstance().getActivePlayers().get(player).setIslandLevel(blockcount / 100);
-						}
-					} catch (final Exception e) {
-						System.out.println("uSkyblock " + "Error while calculating Island Level: " + e);
-						allowInfo = true;
-					}
-					System.out.println("uSkyblock " + "Finished async info thread");
-
-					uSkyBlock.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable() {
-						public void run() {
-							allowInfo = true;
-							System.out.println("uSkyblock " + "Back to sync thread for info");
-							if (Bukkit.getPlayer(playerx) != null) {
-								Bukkit.getPlayer(playerx).sendMessage(
-										ChatColor.YELLOW + "Information about " + islandPlayerx + "'s Island:");
-								if (playerx.equalsIgnoreCase(islandPlayerx)) {
-									Bukkit.getPlayer(playerx).sendMessage(
-											ChatColor.GREEN + "Island level is " + ChatColor.WHITE
-													+ uSkyBlock.getInstance().getActivePlayers().get(playerx).getIslandLevel());
-								} else {
-									final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(islandPlayerx);
-									if (pi != null) {
-										Bukkit.getPlayer(playerx).sendMessage(
-												ChatColor.GREEN + "Island level is " + ChatColor.WHITE + pi.getIslandLevel());
-									} else {
-										Bukkit.getPlayer(playerx).sendMessage(ChatColor.RED + "Error: Invalid Player");
-									}
-								}
-							}
-							System.out.println("uSkyblock " + "Finished with sync thread for info");
-						}
-					}, 0L);
+				Location l;
+				PlayerInfo playerInfo = uSkyBlock.getInstance().getActivePlayers().get(player.getName());
+				if (playerInfo.getHasParty()) {
+					l = playerInfo.getPartyIslandLocation();
+				} else {
+					l = playerInfo.getIslandLocation();
 				}
-			});
+
+				if (player.getName().equalsIgnoreCase(islandPlayer)) {
+					playerInfo.setIslandLevel(calculateIslandLevel(l));
+				}
+
+			} catch (final Exception e) {
+				System.out.println("uSkyblock " + "Error while calculating Island Level: " + e);
+				e.printStackTrace();
+				allowInfo = true;
+			}
+
+			allowInfo = true;
+
+			if (player != null) {
+				player.sendMessage(ChatColor.YELLOW + "Information about " + islandPlayer + "'s Island:");
+				if (player.getName().equalsIgnoreCase(islandPlayer)) {
+					player.sendMessage(ChatColor.GREEN + "Island level is " + ChatColor.WHITE + uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getIslandLevel());
+				} else {
+					final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(islandPlayer);
+					if (pi != null) {
+						if (pi.getIslandLevel() == 0) {
+							player.sendMessage(ChatColor.RED + "Recalculating, please wait");
+
+							Location l;
+
+							if (pi.getHasParty()) {
+								l = pi.getPartyIslandLocation();
+							} else {
+								l = pi.getIslandLocation();
+							}
+
+							if (l == null) {
+								player.sendMessage(ChatColor.RED + "Error: Invalid Player");
+								return true;
+							}
+
+							pi.setIslandLevel(calculateIslandLevel(l));
+
+							Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+
+								@Override
+								public void run() {
+									uSkyBlock.getInstance().writePlayerFile(pi.getPlayerName(), pi);
+								}
+
+							});
+						}
+						player.sendMessage(ChatColor.GREEN + "Island level is " + ChatColor.WHITE + pi.getIslandLevel());
+					} else {
+						player.sendMessage(ChatColor.RED + "Error: Invalid Player");
+					}
+				}
+			}
 		} else {
 			player.sendMessage(ChatColor.RED + "Can't use that command right now! Try again in a few seconds.");
 			System.out.println("uSkyblock " + player.getName() + " tried to use /island info but someone else used it first!");
@@ -326,7 +320,9 @@ public class IslandCommand implements CommandExecutor {
 
 	public <T, E> T getKeyByValue(final Map<T, E> map, final E value) {
 		for (final Map.Entry<T, E> entry : map.entrySet()) {
-			if (value.equals(entry.getValue())) { return entry.getKey(); }
+			if (value.equals(entry.getValue())) {
+				return entry.getKey();
+			}
 		}
 		return null;
 	}
@@ -406,8 +402,7 @@ public class IslandCommand implements CommandExecutor {
 		if (Settings.island_addExtraItems) {
 			for (final String island_extraPermission : Settings.island_extraPermissions) {
 				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
-					final String[] chestItemString = uSkyBlock.getInstance().getConfig()
-							.getString("options.island.extraPermissions." + island_extraPermission).split(" ");
+					final String[] chestItemString = uSkyBlock.getInstance().getConfig().getString("options.island.extraPermissions." + island_extraPermission).split(" ");
 					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
 					String[] amountdata = new String[2];
 					for (int j = 0; j < chestItemString.length; j++) {
@@ -570,8 +565,7 @@ public class IslandCommand implements CommandExecutor {
 		if (Settings.island_addExtraItems) {
 			for (final String island_extraPermission : Settings.island_extraPermissions) {
 				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
-					final String[] chestItemString = uSkyBlock.getInstance().getConfig()
-							.getString("options.island.extraPermissions." + island_extraPermission).split(" ");
+					final String[] chestItemString = uSkyBlock.getInstance().getConfig().getString("options.island.extraPermissions." + island_extraPermission).split(" ");
 					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
 					String[] amountdata = new String[2];
 					for (int j = 0; j < chestItemString.length; j++) {
@@ -595,7 +589,9 @@ public class IslandCommand implements CommandExecutor {
 	}
 
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
-		if (!(sender instanceof Player)) { return false; }
+		if (!(sender instanceof Player)) {
+			return false;
+		}
 		final Player player = (Player) sender;
 
 		if (!VaultHandler.checkPerk(player.getName(), "usb.island.create", player.getWorld())) {
@@ -628,11 +624,9 @@ public class IslandCommand implements CommandExecutor {
 				if (split[0].equals("restart") || split[0].equals("reset")) {
 					if (pi.getHasParty()) {
 						if (!pi.getPartyLeader().equalsIgnoreCase(player.getName())) {
-							player.sendMessage(ChatColor.RED
-									+ "Only the owner may restart this island. Leave this island in order to start your own (/island leave).");
+							player.sendMessage(ChatColor.RED + "Only the owner may restart this island. Leave this island in order to start your own (/island leave).");
 						} else {
-							player.sendMessage(ChatColor.YELLOW
-									+ "You must remove all players from your island before you can restart it (/island kick <player>). See a list of players currently part of your island using /island party.");
+							player.sendMessage(ChatColor.YELLOW + "You must remove all players from your island before you can restart it (/island kick <player>). See a list of players currently part of your island using /island party.");
 						}
 						return true;
 					}
@@ -642,12 +636,10 @@ public class IslandCommand implements CommandExecutor {
 						return createIsland(sender);
 					}
 
-					player.sendMessage(ChatColor.YELLOW + "You can restart your island in "
-							+ uSkyBlock.getInstance().getRestartCooldownTime(player) / 1000L + " seconds.");
+					player.sendMessage(ChatColor.YELLOW + "You can restart your island in " + uSkyBlock.getInstance().getRestartCooldownTime(player) / 1000L + " seconds.");
 					return true;
 				}
-				if ((split[0].equals("sethome") || split[0].equals("tpset"))
-						&& VaultHandler.checkPerk(player.getName(), "usb.island.sethome", player.getWorld())) {
+				if ((split[0].equals("sethome") || split[0].equals("tpset")) && VaultHandler.checkPerk(player.getName(), "usb.island.sethome", player.getWorld())) {
 					uSkyBlock.getInstance().homeSet(player);
 					return true;
 				}
@@ -670,46 +662,35 @@ public class IslandCommand implements CommandExecutor {
 				if (split[0].equals("help")) {
 					player.sendMessage(ChatColor.GREEN + "[SkyBlock command usage]");
 
-					player.sendMessage(ChatColor.YELLOW + "/island :" + ChatColor.WHITE
-							+ " start your island, or teleport back to one you have.");
-					player.sendMessage(ChatColor.YELLOW + "/island restart :" + ChatColor.WHITE
-							+ " delete your island and start a new one.");
+					player.sendMessage(ChatColor.YELLOW + "/island :" + ChatColor.WHITE + " start your island, or teleport back to one you have.");
+					player.sendMessage(ChatColor.YELLOW + "/island restart :" + ChatColor.WHITE + " delete your island and start a new one.");
 					player.sendMessage(ChatColor.YELLOW + "/island sethome :" + ChatColor.WHITE + " set your island teleport point.");
 					if (Settings.island_useIslandLevel) {
 						player.sendMessage(ChatColor.YELLOW + "/island level :" + ChatColor.WHITE + " check your island level");
-						player.sendMessage(ChatColor.YELLOW + "/island level <player> :" + ChatColor.WHITE
-								+ " check another player's island level.");
+						player.sendMessage(ChatColor.YELLOW + "/island level <player> :" + ChatColor.WHITE + " check another player's island level.");
 					}
 					if (VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
 						player.sendMessage(ChatColor.YELLOW + "/island party :" + ChatColor.WHITE + " view your party information.");
-						player.sendMessage(ChatColor.YELLOW + "/island invite <player>:" + ChatColor.WHITE
-								+ " invite a player to join your island.");
+						player.sendMessage(ChatColor.YELLOW + "/island invite <player>:" + ChatColor.WHITE + " invite a player to join your island.");
 						player.sendMessage(ChatColor.YELLOW + "/island leave :" + ChatColor.WHITE + " leave another player's island.");
 					}
 					if (VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
-						player.sendMessage(ChatColor.YELLOW + "/island kick <player>:" + ChatColor.WHITE
-								+ " remove a player from your island.");
+						player.sendMessage(ChatColor.YELLOW + "/island kick <player>:" + ChatColor.WHITE + " remove a player from your island.");
 					}
 					if (VaultHandler.checkPerk(player.getName(), "usb.party.join", player.getWorld())) {
-						player.sendMessage(ChatColor.YELLOW + "/island [accept/reject]:" + ChatColor.WHITE
-								+ " accept/reject an invitation.");
+						player.sendMessage(ChatColor.YELLOW + "/island [accept/reject]:" + ChatColor.WHITE + " accept/reject an invitation.");
 					}
 					if (VaultHandler.checkPerk(player.getName(), "usb.party.makeleader", player.getWorld())) {
-						player.sendMessage(ChatColor.YELLOW + "/island makeleader <player>:" + ChatColor.WHITE
-								+ " transfer the island to <player>.");
+						player.sendMessage(ChatColor.YELLOW + "/island makeleader <player>:" + ChatColor.WHITE + " transfer the island to <player>.");
 					}
 					player.sendMessage(ChatColor.YELLOW + "/island top :" + ChatColor.WHITE + " see the top ranked islands.");
 					if (Settings.island_allowIslandLock) {
 						if (!VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
-							player.sendMessage(ChatColor.DARK_GRAY + "/island lock :" + ChatColor.GRAY
-									+ " non-group members can't enter your island.");
-							player.sendMessage(ChatColor.DARK_GRAY + "/island unlock :" + ChatColor.GRAY
-									+ " allow anyone to enter your island.");
+							player.sendMessage(ChatColor.DARK_GRAY + "/island lock :" + ChatColor.GRAY + " non-group members can't enter your island.");
+							player.sendMessage(ChatColor.DARK_GRAY + "/island unlock :" + ChatColor.GRAY + " allow anyone to enter your island.");
 						} else {
-							player.sendMessage(ChatColor.YELLOW + "/island lock :" + ChatColor.WHITE
-									+ " non-group members can't enter your island.");
-							player.sendMessage(ChatColor.YELLOW + "/island unlock :" + ChatColor.WHITE
-									+ " allow anyone to enter your island.");
+							player.sendMessage(ChatColor.YELLOW + "/island lock :" + ChatColor.WHITE + " non-group members can't enter your island.");
+							player.sendMessage(ChatColor.YELLOW + "/island unlock :" + ChatColor.WHITE + " allow anyone to enter your island.");
 						}
 
 					}
@@ -727,8 +708,7 @@ public class IslandCommand implements CommandExecutor {
 					uSkyBlock.getInstance().displayTopTen(player);
 					return true;
 				}
-				if ((split[0].equals("info") || split[0].equals("level"))
-						&& VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
+				if ((split[0].equals("info") || split[0].equals("level")) && VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
 					if (uSkyBlock.getInstance().playerIsOnIsland(player)) {
 						if (true) {// !uSkyBlock.getInstance().onInfoCooldown(player)
 									// || Settings.general_cooldownInfo == 0) {
@@ -752,14 +732,12 @@ public class IslandCommand implements CommandExecutor {
 					return true;
 				}
 				if (split[0].equals("invite") && VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
-					player.sendMessage(ChatColor.YELLOW + "Use" + ChatColor.WHITE + " /island invite <playername>" + ChatColor.YELLOW
-							+ " to invite a player to your island.");
+					player.sendMessage(ChatColor.YELLOW + "Use" + ChatColor.WHITE + " /island invite <playername>" + ChatColor.YELLOW + " to invite a player to your island.");
 					if (uSkyBlock.getInstance().hasParty(player.getName())) {
 						if (tempLeader.equalsIgnoreCase(player.getName())) {
 							if (VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
 								if (tempParty.size() < Settings.general_maxPartySize * 2) {
-									player.sendMessage(ChatColor.GREEN + "You can invite "
-											+ (Settings.general_maxPartySize * 2 - tempParty.size()) + " more players.");
+									player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize * 2 - tempParty.size()) + " more players.");
 								} else {
 									player.sendMessage(ChatColor.RED + "You can't invite any more players.");
 								}
@@ -767,8 +745,7 @@ public class IslandCommand implements CommandExecutor {
 							}
 
 							if (tempParty.size() < Settings.general_maxPartySize) {
-								player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize - tempParty.size())
-										+ " more players.");
+								player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize - tempParty.size()) + " more players.");
 							} else {
 								player.sendMessage(ChatColor.RED + "You can't invite any more players.");
 							}
@@ -783,8 +760,7 @@ public class IslandCommand implements CommandExecutor {
 				}
 				if (split[0].equals("accept") && VaultHandler.checkPerk(player.getName(), "usb.party.join", player.getWorld())) {
 					if (uSkyBlock.getInstance().onInfoCooldown(player) && Settings.general_cooldownInfo > 0) {
-						player.sendMessage(ChatColor.YELLOW + "You can't join an island for another "
-								+ uSkyBlock.getInstance().getRestartCooldownTime(player) / 1000L + " seconds.");
+						player.sendMessage(ChatColor.YELLOW + "You can't join an island for another " + uSkyBlock.getInstance().getRestartCooldownTime(player) / 1000L + " seconds.");
 						return true;
 					}
 					if (!uSkyBlock.getInstance().hasParty(player.getName()) && inviteList.containsKey(player.getName())) {
@@ -797,8 +773,7 @@ public class IslandCommand implements CommandExecutor {
 							addPlayertoParty(inviteList.get(player.getName()), inviteList.get(player.getName()));
 							player.sendMessage(ChatColor.GREEN + "You have joined an island! Use /island party to see the other members.");
 							if (Bukkit.getPlayer(inviteList.get(player.getName())) != null) {
-								Bukkit.getPlayer(inviteList.get(player.getName())).sendMessage(
-										ChatColor.GREEN + player.getName() + " has joined your island!");
+								Bukkit.getPlayer(inviteList.get(player.getName())).sendMessage(ChatColor.GREEN + player.getName() + " has joined your island!");
 							}
 						} else {
 							if (pi.getHasIsland()) {
@@ -807,8 +782,7 @@ public class IslandCommand implements CommandExecutor {
 							player.sendMessage(ChatColor.GREEN + "You have joined an island! Use /island party to see the other members.");
 							addPlayertoParty(player.getName(), inviteList.get(player.getName()));
 							if (Bukkit.getPlayer(inviteList.get(player.getName())) != null) {
-								Bukkit.getPlayer(inviteList.get(player.getName())).sendMessage(
-										ChatColor.GREEN + player.getName() + " has joined your island!");
+								Bukkit.getPlayer(inviteList.get(player.getName())).sendMessage(ChatColor.GREEN + player.getName() + " has joined your island!");
 							} else {
 								player.sendMessage(ChatColor.RED + "You couldn't join the island, maybe it's full.");
 
@@ -823,8 +797,7 @@ public class IslandCommand implements CommandExecutor {
 						player.getEquipment().clear();
 
 						if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-							if (WorldGuardHandler.getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld())
-									.hasRegion(inviteList.get(player.getName()) + "Island")) {
+							if (WorldGuardHandler.getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(inviteList.get(player.getName()) + "Island")) {
 								WorldGuardHandler.addPlayerToOldRegion(inviteList.get(player.getName()), player.getName());
 							}
 						}
@@ -840,8 +813,7 @@ public class IslandCommand implements CommandExecutor {
 					if (inviteList.containsKey(player.getName())) {
 						player.sendMessage(ChatColor.YELLOW + "You have rejected the invitation to join an island.");
 						if (Bukkit.getPlayer(inviteList.get(player.getName())) != null) {
-							Bukkit.getPlayer(inviteList.get(player.getName())).sendMessage(
-									ChatColor.RED + player.getName() + " has rejected your island invite!");
+							Bukkit.getPlayer(inviteList.get(player.getName())).sendMessage(ChatColor.RED + player.getName() + " has rejected your island invite!");
 						}
 						inviteList.remove(player.getName());
 					} else {
@@ -896,8 +868,7 @@ public class IslandCommand implements CommandExecutor {
 				if (split[0].equals("leave") && VaultHandler.checkPerk(player.getName(), "usb.party.join", player.getWorld())) {
 					if (player.getWorld().getName().equalsIgnoreCase(uSkyBlock.getSkyBlockWorld().getName())) {
 						if (uSkyBlock.getInstance().hasParty(player.getName())) {
-							if (uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getPartyLeader()
-									.equalsIgnoreCase(player.getName())) {
+							if (uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getPartyLeader().equalsIgnoreCase(player.getName())) {
 								player.sendMessage(ChatColor.YELLOW + "You are the leader, use /island remove <player> instead.");
 								return true;
 							}
@@ -921,13 +892,11 @@ public class IslandCommand implements CommandExecutor {
 								removePlayerFromParty(tempLeader, tempLeader);
 							}
 
-							if (Settings.island_protectWithWorldGuard
-									&& Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+							if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
 								WorldGuardHandler.removePlayerFromRegion(tempLeader, player.getName());
 							}
 						} else {
-							player.sendMessage(ChatColor.RED
-									+ "You can't leave your island if you are the only person. Try using /island restart if you want a new one!");
+							player.sendMessage(ChatColor.RED + "You can't leave your island if you are the only person. Try using /island restart if you want a new one!");
 							return true;
 						}
 					} else {
@@ -937,32 +906,26 @@ public class IslandCommand implements CommandExecutor {
 				}
 				if (split[0].equals("party")) {
 					if (VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
-						player.sendMessage(ChatColor.WHITE + "/island invite <playername>" + ChatColor.YELLOW
-								+ " to invite a player to join your island.");
+						player.sendMessage(ChatColor.WHITE + "/island invite <playername>" + ChatColor.YELLOW + " to invite a player to join your island.");
 					}
 					if (uSkyBlock.getInstance().hasParty(player.getName())) {
-						player.sendMessage(ChatColor.WHITE + "/island leave" + ChatColor.YELLOW
-								+ " leave your current island and return to spawn");
+						player.sendMessage(ChatColor.WHITE + "/island leave" + ChatColor.YELLOW + " leave your current island and return to spawn");
 						if (tempLeader.equalsIgnoreCase(sender.getName())) {
 							if (VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
-								player.sendMessage(ChatColor.WHITE + "/island remove <playername>" + ChatColor.YELLOW
-										+ " remove <playername> from your island");
+								player.sendMessage(ChatColor.WHITE + "/island remove <playername>" + ChatColor.YELLOW + " remove <playername> from your island");
 							}
 							if (VaultHandler.checkPerk(player.getName(), "usb.party.makeleader", player.getWorld())) {
-								player.sendMessage(ChatColor.WHITE + "/island makeleader <playername>" + ChatColor.YELLOW
-										+ " give ownership of the island to <playername>");
+								player.sendMessage(ChatColor.WHITE + "/island makeleader <playername>" + ChatColor.YELLOW + " give ownership of the island to <playername>");
 							}
 							if (VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
 								if (tempParty.size() < Settings.general_maxPartySize * 2) {
-									player.sendMessage(ChatColor.GREEN + "You can invite "
-											+ (Settings.general_maxPartySize * 2 - tempParty.size()) + " more players.");
+									player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize * 2 - tempParty.size()) + " more players.");
 								} else {
 									player.sendMessage(ChatColor.RED + "You can't invite any more players.");
 								}
 
 							} else if (tempParty.size() < Settings.general_maxPartySize) {
-								player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize - tempParty.size())
-										+ " more players.");
+								player.sendMessage(ChatColor.GREEN + "You can invite " + (Settings.general_maxPartySize - tempParty.size()) + " more players.");
 							} else {
 								player.sendMessage(ChatColor.RED + "You can't invite any more players.");
 							}
@@ -974,14 +937,12 @@ public class IslandCommand implements CommandExecutor {
 						player.sendMessage(ChatColor.WHITE + tPi.getMembers().toString());
 					} else if (inviteList.containsKey(player.getName())) {
 						player.sendMessage(ChatColor.YELLOW + inviteList.get(player.getName()) + " has invited you to join their island.");
-						player.sendMessage(ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW
-								+ " to accept or reject the invite.");
+						player.sendMessage(ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW + " to accept or reject the invite.");
 					}
 					return true;
 				}
 			} else if (split.length == 2) {
-				if ((split[0].equals("info") || split[0].equals("level"))
-						&& VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
+				if ((split[0].equals("info") || split[0].equals("level")) && VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
 					if (true) {// !uSkyBlock.getInstance().onInfoCooldown(player)
 								// || Settings.general_cooldownInfo == 0) {
 						// uSkyBlock.getInstance().setInfoCooldown(player);
@@ -1029,11 +990,8 @@ public class IslandCommand implements CommandExecutor {
 										player.sendMessage(ChatColor.GREEN + "Invite sent to " + Bukkit.getPlayer(split[1]).getName());
 
 										Bukkit.getPlayer(split[1]).sendMessage(player.getName() + " has invited you to join their island!");
-										Bukkit.getPlayer(split[1]).sendMessage(
-												ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW
-														+ " to accept or reject the invite.");
-										Bukkit.getPlayer(split[1]).sendMessage(
-												ChatColor.RED + "WARNING: You will lose your current island if you accept!");
+										Bukkit.getPlayer(split[1]).sendMessage(ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW + " to accept or reject the invite.");
+										Bukkit.getPlayer(split[1]).sendMessage(ChatColor.RED + "WARNING: You will lose your current island if you accept!");
 									} else {
 										player.sendMessage(ChatColor.RED + "Your island is full, you can't invite anyone else.");
 									}
@@ -1046,11 +1004,8 @@ public class IslandCommand implements CommandExecutor {
 									player.sendMessage(ChatColor.GREEN + "Invite sent to " + Bukkit.getPlayer(split[1]).getName());
 
 									Bukkit.getPlayer(split[1]).sendMessage(player.getName() + " has invited you to join their island!");
-									Bukkit.getPlayer(split[1]).sendMessage(
-											ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW
-													+ " to accept or reject the invite.");
-									Bukkit.getPlayer(split[1]).sendMessage(
-											ChatColor.RED + "WARNING: You will lose your current island if you accept!");
+									Bukkit.getPlayer(split[1]).sendMessage(ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW + " to accept or reject the invite.");
+									Bukkit.getPlayer(split[1]).sendMessage(ChatColor.RED + "WARNING: You will lose your current island if you accept!");
 								} else {
 									player.sendMessage(ChatColor.RED + "Your island is full, you can't invite anyone else.");
 								}
@@ -1071,12 +1026,8 @@ public class IslandCommand implements CommandExecutor {
 
 								player.sendMessage(ChatColor.GREEN + "Invite sent to " + Bukkit.getPlayer(split[1]).getName());
 								Bukkit.getPlayer(split[1]).sendMessage(player.getName() + " has invited you to join their island!");
-								Bukkit.getPlayer(split[1])
-										.sendMessage(
-												ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW
-														+ " to accept or reject the invite.");
-								Bukkit.getPlayer(split[1]).sendMessage(
-										ChatColor.RED + "WARNING: You will lose your current island if you accept!");
+								Bukkit.getPlayer(split[1]).sendMessage(ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW + " to accept or reject the invite.");
+								Bukkit.getPlayer(split[1]).sendMessage(ChatColor.RED + "WARNING: You will lose your current island if you accept!");
 							} else {
 								player.sendMessage(ChatColor.RED + "That player is already with a group on an island.");
 							}
@@ -1088,8 +1039,7 @@ public class IslandCommand implements CommandExecutor {
 					}
 					return true;
 				}
-				if ((split[0].equalsIgnoreCase("remove") || split[0].equalsIgnoreCase("kick"))
-						&& VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
+				if ((split[0].equalsIgnoreCase("remove") || split[0].equalsIgnoreCase("kick")) && VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
 					if (Bukkit.getPlayer(split[1]) == null && Bukkit.getOfflinePlayer(split[1]) == null) {
 						player.sendMessage(ChatColor.RED + "That player doesn't exist.");
 						return true;
@@ -1110,12 +1060,10 @@ public class IslandCommand implements CommandExecutor {
 									return true;
 								}
 								if (Bukkit.getPlayer(split[1]) != null) {
-									if (Bukkit.getPlayer(split[1]).getWorld().getName()
-											.equalsIgnoreCase(uSkyBlock.getSkyBlockWorld().getName())) {
+									if (Bukkit.getPlayer(split[1]).getWorld().getName().equalsIgnoreCase(uSkyBlock.getSkyBlockWorld().getName())) {
 										Bukkit.getPlayer(split[1]).getInventory().clear();
 										Bukkit.getPlayer(split[1]).getEquipment().clear();
-										Bukkit.getPlayer(split[1]).sendMessage(
-												ChatColor.RED + player.getName() + " has removed you from their island!");
+										Bukkit.getPlayer(split[1]).sendMessage(ChatColor.RED + player.getName() + " has removed you from their island!");
 									}
 									if (Settings.extras_sendToSpawn) {
 										Bukkit.getPlayer(split[1]).performCommand("spawn");
@@ -1126,8 +1074,7 @@ public class IslandCommand implements CommandExecutor {
 								}
 
 								if (Bukkit.getPlayer(tempLeader) != null) {
-									Bukkit.getPlayer(tempLeader).sendMessage(
-											ChatColor.RED + tempTargetPlayer + " has been removed from the island.");
+									Bukkit.getPlayer(tempLeader).sendMessage(ChatColor.RED + tempTargetPlayer + " has been removed from the island.");
 								}
 								removePlayerFromParty(tempTargetPlayer, tempLeader);
 								tempParty.remove(tempTargetPlayer);
@@ -1135,8 +1082,7 @@ public class IslandCommand implements CommandExecutor {
 									removePlayerFromParty(player.getName(), tempLeader);
 								}
 
-								if (Settings.island_protectWithWorldGuard
-										&& Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+								if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
 									WorldGuardHandler.removePlayerFromRegion(player.getName(), tempTargetPlayer);
 								}
 							} else {
@@ -1151,15 +1097,13 @@ public class IslandCommand implements CommandExecutor {
 					}
 					return true;
 				}
-				if (split[0].equalsIgnoreCase("makeleader")
-						&& VaultHandler.checkPerk(player.getName(), "usb.party.makeleader", player.getWorld())) {
+				if (split[0].equalsIgnoreCase("makeleader") && VaultHandler.checkPerk(player.getName(), "usb.party.makeleader", player.getWorld())) {
 					if (Bukkit.getPlayer(split[1]) == null) {
 						player.sendMessage(ChatColor.RED + "That player must be online to transfer the island.");
 						return true;
 					}
 
-					if (!uSkyBlock.getInstance().getActivePlayers().containsKey(player.getName())
-							|| !uSkyBlock.getInstance().getActivePlayers().containsKey(Bukkit.getPlayer(split[1]).getName())) {
+					if (!uSkyBlock.getInstance().getActivePlayers().containsKey(player.getName()) || !uSkyBlock.getInstance().getActivePlayers().containsKey(Bukkit.getPlayer(split[1]).getName())) {
 						player.sendMessage(ChatColor.RED + "Both players must be online to transfer an island.");
 						return true;
 					}
@@ -1170,10 +1114,8 @@ public class IslandCommand implements CommandExecutor {
 					}
 
 					if (uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getMembers().size() > 2) {
-						player.sendMessage(ChatColor.RED
-								+ "Remove all players from your party other than the player you are transferring to.");
-						System.out.println("uSkyblock " + player.getName()
-								+ " tried to transfer his island, but his party has too many people!");
+						player.sendMessage(ChatColor.RED + "Remove all players from your party other than the player you are transferring to.");
+						System.out.println("uSkyblock " + player.getName() + " tried to transfer his island, but his party has too many people!");
 						return true;
 					}
 
@@ -1188,8 +1130,7 @@ public class IslandCommand implements CommandExecutor {
 								if (Bukkit.getPlayer(split[1]) != null) {
 									Bukkit.getPlayer(split[1]).sendMessage(ChatColor.GREEN + "You are now the owner of your island.");
 								}
-								player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(split[1]).getName()
-										+ " is now the owner of your island!");
+								player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(split[1]).getName() + " is now the owner of your island!");
 								removePlayerFromParty(tempTargetPlayer, tempLeader);
 								removePlayerFromParty(player.getName(), tempLeader);
 								addPlayertoParty(player.getName(), tempTargetPlayer);
@@ -1197,8 +1138,7 @@ public class IslandCommand implements CommandExecutor {
 
 								uSkyBlock.getInstance().transferIsland(player.getName(), tempTargetPlayer);
 
-								if (Settings.island_protectWithWorldGuard
-										&& Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+								if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
 									WorldGuardHandler.transferRegion(player.getName(), tempTargetPlayer, sender);
 								}
 								return true;
@@ -1275,8 +1215,7 @@ public class IslandCommand implements CommandExecutor {
 			for (int y = -15; y <= 15; y++) {
 				for (int z = -15; z <= 15; z++) {
 					if (uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-						final Block blockToChange = uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y,
-								loc.getBlockZ() + z);
+						final Block blockToChange = uSkyBlock.getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
 						final Chest chest = (Chest) blockToChange.getState();
 						final Inventory inventory = chest.getInventory();
 						inventory.clear();
@@ -1284,8 +1223,7 @@ public class IslandCommand implements CommandExecutor {
 						if (Settings.island_addExtraItems) {
 							for (final String island_extraPermission : Settings.island_extraPermissions) {
 								if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
-									final String[] chestItemString = uSkyBlock.getInstance().getConfig()
-											.getString("options.island.extraPermissions." + island_extraPermission).split(" ");
+									final String[] chestItemString = uSkyBlock.getInstance().getConfig().getString("options.island.extraPermissions." + island_extraPermission).split(" ");
 									final ItemStack[] tempChest = new ItemStack[chestItemString.length];
 									String[] amountdata = new String[2];
 									for (int j = 0; j < chestItemString.length; j++) {
