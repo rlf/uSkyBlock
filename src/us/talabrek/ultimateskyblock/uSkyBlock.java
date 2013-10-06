@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -1341,7 +1342,13 @@ public class uSkyBlock extends JavaPlugin {
 			in.close();
 			fileIn.close();
 			return p;
-		} catch (final Exception e) {
+		} catch (EOFException e) {
+			log.warning(playerName + " is corrupted, deleting on exit.");
+			f.deleteOnExit();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
