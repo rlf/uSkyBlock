@@ -45,6 +45,10 @@ public class PlayerInfo implements Serializable {
 	public void addMember(final String member) {
 		members.add(member);
 	}
+	
+	public void clearChallenges() {
+		challengeList.clear();
+	}
 
 	public void buildChallengeList() {
 		if (challengeList == null) {
