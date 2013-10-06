@@ -1204,7 +1204,11 @@ public class uSkyBlock extends JavaPlugin {
 		}
 
 		getCommand("island").setExecutor(new IslandCommand());
-		getCommand("challenges").setExecutor(new ChallengesCommand());
+
+		ChallengesCommand challengesCommand = new ChallengesCommand();
+		getCommand("challenges").setExecutor(challengesCommand);
+		getCommand("challenges").setTabCompleter(challengesCommand);
+
 		getCommand("dev").setExecutor(new DevCommand());
 
 		if (Settings.island_useTopTen) {
