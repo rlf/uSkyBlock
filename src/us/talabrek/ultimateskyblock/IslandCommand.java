@@ -1175,8 +1175,11 @@ public class IslandCommand implements CommandExecutor {
 
 	public void removePlayerFromParty(final String playername, final String partyleader) {
 		if (uSkyBlock.getInstance().getActivePlayers().containsKey(playername)) {
-			if (!uSkyBlock.getInstance().getActivePlayers().get(playername).getPartyLeader().equalsIgnoreCase(playername)) {
-				uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(null);
+			PlayerInfo pi = uSkyBlock.getInstance().getActivePlayers().get(playername);
+			if (pi != null && pi.getPartyLeader() != null) {
+				if (!pi.getPartyLeader().equalsIgnoreCase(playername)) {
+					uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(null);
+				}
 			}
 			uSkyBlock.getInstance().getActivePlayers().get(playername).setLeaveParty();
 			uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getActivePlayers().get(playername));
