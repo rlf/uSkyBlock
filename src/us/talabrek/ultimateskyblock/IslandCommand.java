@@ -198,6 +198,9 @@ public class IslandCommand implements CommandExecutor {
 	}
 
 	private int calculateIslandLevel(Location l) {
+		if (l == null)
+			return 0;
+
 		int cobblecount = 0;
 		int blockcount = 0;
 		final int px = l.getBlockX();
