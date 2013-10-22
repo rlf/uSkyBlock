@@ -19,8 +19,12 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 
 	public List<String> onTabComplete(CommandSender sender, Command command, String commandLabel, String args[]) {
 		ArrayList<String> challenges = new ArrayList<String>();
+
 		String find = args[0].toLowerCase();
-		
+
+		if (find.equals("c") && args.length == 2)
+			find = args[1].toLowerCase();
+
 		for (String name : challengeNames) {
 			if (name.startsWith(find))
 				challenges.add(name);
