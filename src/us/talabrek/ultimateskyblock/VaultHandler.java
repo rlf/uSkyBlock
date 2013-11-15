@@ -4,6 +4,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -17,6 +18,14 @@ public class VaultHandler {
 
 	public static void addPerk(final Player player, final String perk) {
 		perms.playerAdd((String) null, player.getName(), perk);
+	}
+	
+	public static boolean hasPerm(CommandSender sender, String perm)
+	{
+		if(sender instanceof Player)
+			return checkPerk(sender.getName(), perm, ((Player)sender).getWorld());
+		
+		return sender.hasPermission(perm);
 	}
 
 	public static boolean checkPerk(final String player, final String perk, final World world) {

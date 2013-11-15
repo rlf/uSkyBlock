@@ -67,6 +67,11 @@ public class uSkyBlock extends JavaPlugin {
 	{
 		return world.equals(getSkyBlockWorld());
 	}
+	
+	public static Logger getLog()
+	{
+		return Logger.getLogger("uSkyBlock");
+	}
 
 	HashMap<String, PlayerInfo> activePlayers = new HashMap<String, PlayerInfo>();
 	LinkedHashMap<String, List<String>> challenges = new LinkedHashMap<String, List<String>>();
@@ -437,7 +442,7 @@ public class uSkyBlock extends JavaPlugin {
 	
 	public void onEnterSkyBlock(Player player)
 	{
-		getPlayer(player.getName());
+		getOrCreatePlayer(player.getName());
 	}
 	
 	public void onLeaveSkyBlock(Player player)
@@ -463,7 +468,7 @@ public class uSkyBlock extends JavaPlugin {
 		return activePlayers.containsKey(player);
 	}
 	
-	public PlayerInfo getPlayer(String player)
+	public PlayerInfo getOrCreatePlayer(String player)
 	{
 		if(isActivePlayer(player))
 			return activePlayers.get(player);
@@ -486,6 +491,30 @@ public class uSkyBlock extends JavaPlugin {
 		pi.buildChallengeList();
 		addActivePlayer(player, pi);
 		System.out.println("uSkyblock " + "Loaded player file for " + player);
+		
+		return pi;
+	}
+	
+	public PlayerInfo getPlayer(String player)
+	{
+		if(isActivePlayer(player))
+			return activePlayers.get(player);
+		
+		PlayerInfo pi = readPlayerFile(player);
+		
+		if(pi != null)
+		{
+			if (pi.getHasParty() && pi.getPartyIslandLocation() == null) 
+			{
+				final PlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
+				pi.setPartyIslandLocation(pi2.getIslandLocation());
+				writePlayerFile(player, pi);
+			}
+	
+			pi.buildChallengeList();
+			addActivePlayer(player, pi);
+			System.out.println("uSkyblock " + "Loaded player file for " + player);
+		}
 		
 		return pi;
 	}
@@ -1374,7 +1403,7 @@ public class uSkyBlock extends JavaPlugin {
 		return null;
 	}
 
-	public PlayerInfo readPlayerFile(final String playerName) {
+	private PlayerInfo readPlayerFile(final String playerName) {
 		final File f = new File(directoryPlayers, playerName);
 		if (!f.exists()) {
 			return null;
@@ -1454,35 +1483,7 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public void removeIsland(final Location loc) {
-		if (loc != null) {
-			final Location l = loc;
-			final int px = l.getBlockX();
-			final int py = l.getBlockY();
-			final int pz = l.getBlockZ();
-			for (int x = Settings.island_protectionRange / 2 * -1; x <= Settings.island_protectionRange / 2; x++) {
-				for (int y = 0; y <= 255; y++) {
-					for (int z = Settings.island_protectionRange / 2 * -1; z <= Settings.island_protectionRange / 2; z++) {
-						final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-						if (!b.getType().equals(Material.AIR)) {
-							if (b.getType().equals(Material.CHEST)) {
-								final Chest c = (Chest) b.getState();
-								final ItemStack[] items = new ItemStack[c.getInventory().getContents().length];
-								c.getInventory().setContents(items);
-							} else if (b.getType().equals(Material.FURNACE)) {
-								final Furnace f = (Furnace) b.getState();
-								final ItemStack[] items = new ItemStack[f.getInventory().getContents().length];
-								f.getInventory().setContents(items);
-							} else if (b.getType().equals(Material.DISPENSER)) {
-								final Dispenser d = (Dispenser) b.getState();
-								final ItemStack[] items = new ItemStack[d.getInventory().getContents().length];
-								d.getInventory().setContents(items);
-							}
-							b.setType(Material.AIR);
-						}
-					}
-				}
-			}
-		}
+		
 	}
 
 	public void removeIslandBlocks(final Location loc) {

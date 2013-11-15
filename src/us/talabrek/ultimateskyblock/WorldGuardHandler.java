@@ -80,6 +80,7 @@ public class WorldGuardHandler {
 		}
 	}
 
+	// TODO: This needs to be rewritten
 	public static void protectAllIslands(final CommandSender sender) {
 		String player = "";
 		int checkislands = 0;
@@ -89,16 +90,18 @@ public class WorldGuardHandler {
 				ProtectedRegion region;
 				for (final Player playerx : players) {
 					player = playerx.getName();
-					if (uSkyBlock.getInstance().readPlayerFile(player).getIslandLocation() != null
-							&& !getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) {
+					PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player);
+					
+					if(pi == null)
+						continue;
+					
+					if (pi.getIslandLocation() != null && !getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) 
+					{
 						region = null;
 						final DefaultDomain owners = new DefaultDomain();
-						region = new ProtectedCuboidRegion(player + "Island", getProtectionVectorLeft(uSkyBlock.getInstance()
-								.readPlayerFile(player).getIslandLocation()), getProtectionVectorRight(uSkyBlock.getInstance()
-								.readPlayerFile(player).getIslandLocation()));
+						region = new ProtectedCuboidRegion(player + "Island", getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
 						owners.addPlayer(player);
 						if (uSkyBlock.getInstance().hasParty(player)) {
-							final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(player);
 							final List<?> members = pi.getMembers();
 							if (!members.isEmpty()) {
 								final Iterator<?> memlist = members.iterator();
@@ -120,7 +123,7 @@ public class WorldGuardHandler {
 						region.setFlag(DefaultFlag.CHEST_ACCESS, DefaultFlag.CHEST_ACCESS.parseInput(getWorldGuard(), sender, "deny"));
 						region.setFlag(DefaultFlag.USE, DefaultFlag.USE.parseInput(getWorldGuard(), sender, "deny"));
 						final ApplicableRegionSet set = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld())
-								.getApplicableRegions(uSkyBlock.getInstance().readPlayerFile(player).getIslandLocation());
+								.getApplicableRegions(pi.getIslandLocation());
 						if (set.size() > 0) {
 							for (final ProtectedRegion regions : set) {
 								if (!regions.getId().equalsIgnoreCase("__global__")) {
@@ -137,18 +140,18 @@ public class WorldGuardHandler {
 				final OfflinePlayer[] players2 = Bukkit.getServer().getOfflinePlayers();
 				for (final OfflinePlayer playerx : players2) {
 					player = playerx.getName();
-					if (uSkyBlock.getInstance().readPlayerFile(player) == null) {
-						System.out.println("uSkyblock " + player + " does not have an island file!");
-					} else if (uSkyBlock.getInstance().readPlayerFile(player).getIslandLocation() != null
-							&& !getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) {
+					PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player);
+					
+					if(pi == null)
+						continue;
+					
+					if (pi.getIslandLocation() != null && !getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) 
+					{
 						region = null;
 						final DefaultDomain owners = new DefaultDomain();
-						region = new ProtectedCuboidRegion(player + "Island", getProtectionVectorLeft(uSkyBlock.getInstance()
-								.readPlayerFile(player).getIslandLocation()), getProtectionVectorRight(uSkyBlock.getInstance()
-								.readPlayerFile(player).getIslandLocation()));
+						region = new ProtectedCuboidRegion(player + "Island", getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
 						owners.addPlayer(player);
 						if (uSkyBlock.getInstance().hasParty(player)) {
-							final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(player);
 							final List<String> members = pi.getMembers();
 							if (!members.isEmpty()) {
 								final Iterator<String> memlist = members.iterator();
@@ -169,7 +172,7 @@ public class WorldGuardHandler {
 						region.setFlag(DefaultFlag.CHEST_ACCESS, DefaultFlag.CHEST_ACCESS.parseInput(getWorldGuard(), sender, "deny"));
 						region.setFlag(DefaultFlag.USE, DefaultFlag.USE.parseInput(getWorldGuard(), sender, "deny"));
 						final ApplicableRegionSet set = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld())
-								.getApplicableRegions(uSkyBlock.getInstance().readPlayerFile(player).getIslandLocation());
+								.getApplicableRegions(pi.getIslandLocation());
 						if (set.size() > 0) {
 							for (final ProtectedRegion regions : set) {
 								if (!regions.getId().equalsIgnoreCase("__global__")) {
@@ -195,13 +198,15 @@ public class WorldGuardHandler {
 	public static void protectIsland(final CommandSender sender, final String player) {
 		try {
 			if (Settings.island_protectWithWorldGuard) {
-				if (uSkyBlock.getInstance().readPlayerFile(player).getIslandLocation() != null
+				PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player);
+
+				
+				
+				if (pi.getIslandLocation() != null
 						&& !getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) {
 					ProtectedRegion region = null;
 					final DefaultDomain owners = new DefaultDomain();
-					region = new ProtectedCuboidRegion(player + "Island", getProtectionVectorLeft(uSkyBlock.getInstance()
-							.readPlayerFile(player).getIslandLocation()), getProtectionVectorRight(uSkyBlock.getInstance()
-							.readPlayerFile(player).getIslandLocation()));
+					region = new ProtectedCuboidRegion(player + "Island", getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
 					owners.addPlayer(player);
 					region.setOwners(owners);
 					region.setParent(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion("__Global__"));
@@ -218,7 +223,7 @@ public class WorldGuardHandler {
 					region.setFlag(DefaultFlag.CHEST_ACCESS, DefaultFlag.CHEST_ACCESS.parseInput(getWorldGuard(), sender, "deny"));
 					region.setFlag(DefaultFlag.USE, DefaultFlag.USE.parseInput(getWorldGuard(), sender, "deny"));
 					final ApplicableRegionSet set = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getApplicableRegions(
-							uSkyBlock.getInstance().readPlayerFile(player).getIslandLocation());
+							pi.getIslandLocation());
 					if (set.size() > 0) {
 						for (final ProtectedRegion regions : set) {
 							if (!regions.getId().equalsIgnoreCase("__global__")) {
