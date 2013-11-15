@@ -69,7 +69,7 @@ permissions:
           usb.mod.party:
             description: Let a player access the moderator party commands
           usb.mod.challenges:
-            description: Let a player access the moderator challenge commands to complete and reset another player's challenges. 
+            description: Let a player access the moderator challenge commands to view, complete and reset another player's challenges. 
           usb.mod.bypasscooldowns:
             description: Let a player bypass the cooldowns for the /island info and /island restart commands
           usb.mod.bypassprotection:

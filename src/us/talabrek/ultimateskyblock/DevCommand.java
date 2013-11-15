@@ -82,7 +82,9 @@ public class DevCommand implements CommandExecutor {
 			if (hasPerm(sender, "usb.mod.challenges"))
 				sender.sendMessage(ChatColor.YELLOW + "/dev resetchallenge <challengename> <player>:" + ChatColor.WHITE + " marks a challenge as incomplete");
 			if (hasPerm(sender, "usb.mod.challenges"))
-				sender.sendMessage(ChatColor.YELLOW + "/dev resetallchallenges <challengename>:" + ChatColor.WHITE + " resets all of the player's challenges");
+				sender.sendMessage(ChatColor.YELLOW + "/dev resetallchallenges <playername>:" + ChatColor.WHITE + " resets all of the player's challenges");
+			if (hasPerm(sender, "usb.mod.challenges"))
+				sender.sendMessage(ChatColor.YELLOW + "/dev viewchallenges <playername>: " + ChatColor.WHITE + " views the completed challenges for that player");
 			if (hasPerm(sender, "usb.admin.purge"))
 				sender.sendMessage(ChatColor.YELLOW + "/dev purge [TimeInDays]:" + ChatColor.WHITE + " delete inactive islands older than [TimeInDays].");
 			if (hasPerm(sender, "usb.mod.party"))
@@ -92,6 +94,21 @@ public class DevCommand implements CommandExecutor {
 		} 
 		else
 			sender.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+	}
+	
+	private void displayChallenges(CommandSender sender, OfflinePlayer player)
+	{
+		sender.sendMessage(ChatColor.GOLD + player.getName() + "'s Challanges:");
+
+		sender.sendMessage(ChatColor.GOLD + Settings.challenges_ranks[0] + ": " + uSkyBlock.getInstance().getChallengesFromRank(player, Settings.challenges_ranks[0]));
+		for (int i = 1; i < Settings.challenges_ranks.length; i++) 
+		{
+			int rankComplete = uSkyBlock.getInstance().checkRankCompletion(player, Settings.challenges_ranks[i - 1]);
+			if (rankComplete <= 0)
+				sender.sendMessage(ChatColor.GOLD + Settings.challenges_ranks[i] + ": " + uSkyBlock.getInstance().getChallengesFromRank(player, Settings.challenges_ranks[i]));
+//			else
+//				sender.sendMessage(ChatColor.GOLD + Settings.challenges_ranks[i] + ChatColor.GRAY + ": Complete " + rankComplete + " more " + Settings.challenges_ranks[i - 1] + " challenges to unlock this rank!");
+		}
 	}
 
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) 
@@ -356,6 +373,21 @@ public class DevCommand implements CommandExecutor {
 					uSkyBlock.getInstance().getActivePlayers().get(split[1]).resetAllChallenges();
 					sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
 				}
+			}
+			else if(split[0].equals("viewchallenges") && hasPerm(sender, "usb.mod.challenges"))
+			{
+				OfflinePlayer player = Bukkit.getOfflinePlayer(split[1]);
+				if(!player.hasPlayedBefore())
+				{
+					player = Bukkit.getPlayer(split[1]);
+					if(player == null)
+					{
+						sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+						return true;
+					}
+				}
+				
+				displayChallenges(sender, player);
 			}
 		} 
 		else if (split.length == 3) 

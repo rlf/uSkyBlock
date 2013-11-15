@@ -42,7 +42,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 		if (!Settings.challenges_allowChallenges) {
 			return true;
 		}
-		if (!VaultHandler.checkPerk(player.getName(), "usb.island.challenges", player.getWorld()) && !player.isOp()) {
+		if (!VaultHandler.checkPerk(player.getName(), "usb.island.challenges", player.getWorld())) {
 			player.sendMessage(ChatColor.RED + "You don't have access to this command!");
 			return true;
 		}

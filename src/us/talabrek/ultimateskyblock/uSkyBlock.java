@@ -192,7 +192,7 @@ public class uSkyBlock extends JavaPlugin {
 		return orphaned.peek();
 	}
 
-	public int checkRankCompletion(final Player player, final String rank) {
+	public int checkRankCompletion(final OfflinePlayer player, final String rank) {
 		if (!Settings.challenges_requirePreviousRank) {
 			return 0;
 		}
@@ -464,7 +464,7 @@ public class uSkyBlock extends JavaPlugin {
 		return getConfig();
 	}
 
-	public String getChallengesFromRank(final Player player, final String rank) {
+	public String getChallengesFromRank(final OfflinePlayer player, final String rank) {
 		rankDisplay = challenges.get(rank);
 		String fullString = "";
 		final PlayerInfo pi = getActivePlayers().get(player.getName());
