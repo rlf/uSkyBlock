@@ -526,12 +526,12 @@ public class uSkyBlock extends JavaPlugin {
 			final String tempString = itr.next();
 			if (pi.checkChallenge(tempString)) {
 				if (getChallengeConfig().getBoolean("options.challenges.challengeList." + tempString + ".repeatable")) {
-					fullString = fullString + Settings.challenges_repeatableColor.replace('&', '§') + tempString + ChatColor.DARK_GRAY + " - ";
+					fullString = fullString + ChatColor.translateAlternateColorCodes('&', Settings.challenges_repeatableColor) + tempString + ChatColor.DARK_GRAY + " - ";
 				} else {
-					fullString = fullString + Settings.challenges_finishedColor.replace('&', '§') + tempString + ChatColor.DARK_GRAY + " - ";
+					fullString = fullString + ChatColor.translateAlternateColorCodes('&', Settings.challenges_finishedColor) + tempString + ChatColor.DARK_GRAY + " - ";
 				}
 			} else {
-				fullString = fullString + Settings.challenges_challengeColor.replace('&', '§') + tempString + ChatColor.DARK_GRAY + " - ";
+				fullString = fullString + ChatColor.translateAlternateColorCodes('&', Settings.challenges_challengeColor) + tempString + ChatColor.DARK_GRAY + " - ";
 			}
 		}
 		if (fullString.length() > 3) {
@@ -737,29 +737,29 @@ public class uSkyBlock extends JavaPlugin {
 			VaultHandler.econ.depositPlayer(player.getName(), rewCurrency);
 			if (getInstance().getPlayer(player.getName()).checkChallenge(challenge)) {
 				player.giveExp(getInstance().getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
-				player.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatRewardText").toString()).replace('&', '§'));
+				player.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatRewardText").toString())));
 				player.sendMessage(ChatColor.YELLOW + "Repeat exp reward: " + ChatColor.WHITE + getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatXpReward").toString()));
 				player.sendMessage(ChatColor.YELLOW + "Repeat currency reward: " + ChatColor.WHITE + getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatCurrencyReward").toString()) + " " + VaultHandler.econ.currencyNamePlural());
 			} else {
 				if (Settings.challenges_broadcastCompletion) {
-					Bukkit.getServer().broadcastMessage(Settings.challenges_broadcastText.replace('&', '§') + player.getName() + " has completed the " + challenge + " challenge!");
+					Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', Settings.challenges_broadcastText + player.getName() + " has completed the " + challenge + " challenge!"));
 				}
 				player.giveExp(getInstance().getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
-				player.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".rewardText").toString()).replace('&', '§'));
+				player.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".rewardText").toString())));
 				player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".xpReward").toString()));
 				player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".currencyReward").toString()) + " " + VaultHandler.econ.currencyNamePlural());
 			}
 
 		} else if (getInstance().getPlayer(player.getName()).checkChallenge(challenge)) {
 			player.giveExp(getInstance().getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
-			player.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatRewardText").toString()).replace('&', '§'));
+			player.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.translateAlternateColorCodes('&', ChatColor.WHITE + getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatRewardText").toString())));
 			player.sendMessage(ChatColor.YELLOW + "Repeat exp reward: " + ChatColor.WHITE + getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".repeatXpReward").toString()));
 		} else {
 			if (Settings.challenges_broadcastCompletion) {
-				Bukkit.getServer().broadcastMessage(Settings.challenges_broadcastText.replace('&', '§') + player.getName() + " has completed the " + challenge + " challenge!");
+				Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', Settings.challenges_broadcastText + player.getName() + " has completed the " + challenge + " challenge!"));
 			}
 			player.giveExp(getInstance().getChallengeConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
-			player.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".rewardText").toString()).replace('&', '§'));
+			player.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.translateAlternateColorCodes('&', ChatColor.WHITE + getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".rewardText").toString())));
 			player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".xpReward").toString()));
 		}
 

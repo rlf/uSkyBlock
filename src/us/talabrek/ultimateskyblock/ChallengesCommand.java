@@ -69,7 +69,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 				sender.sendMessage(ChatColor.YELLOW + "Use /c <name> to view information about a challenge.");
 				sender.sendMessage(ChatColor.YELLOW + "Use /c complete <name> to attempt to complete that challenge.");
 				sender.sendMessage(ChatColor.YELLOW + "Challenges will have different colors depending on if they are:");
-				sender.sendMessage(Settings.challenges_challengeColor.replace('&', '§') + "Incomplete " + Settings.challenges_finishedColor.replace('&', '§') + "Completed(not repeatable) " + Settings.challenges_repeatableColor.replace('&', '§') + "Completed(repeatable) ");
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Settings.challenges_challengeColor + "Incomplete " + Settings.challenges_finishedColor + "Completed(not repeatable) " + Settings.challenges_repeatableColor + "Completed(repeatable) "));
 			} else if (uSkyBlock.getInstance().isRankAvailable(player, uSkyBlock.getInstance().getChallengeConfig().getString("options.challenges.challengeList." + split[0].toLowerCase() + ".rankLevel"))) {
 				sender.sendMessage(ChatColor.YELLOW + "Challenge Name: " + ChatColor.WHITE + split[0].toLowerCase());
 				sender.sendMessage(ChatColor.YELLOW + uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".description").toString()));
@@ -90,20 +90,20 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 				}
 				if (Settings.challenges_enableEconomyPlugin && VaultHandler.econ != null) {
 					if (uSkyBlock.getInstance().getPlayer(player.getName()).checkChallenge(split[0].toLowerCase())) {
-						sender.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".repeatRewardText").toString()).replace('&', '§'));
+						sender.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".repeatRewardText").toString())));
 						player.sendMessage(ChatColor.YELLOW + "Repeat exp reward: " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".repeatXpReward").toString()));
 						sender.sendMessage(ChatColor.YELLOW + "Repeat currency reward: " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".repeatCurrencyReward").toString()) + " " + VaultHandler.econ.currencyNamePlural());
 					} else {
-						sender.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".rewardText").toString()).replace('&', '§'));
+						sender.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".rewardText").toString())));
 						player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".xpReward").toString()));
 						sender.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".currencyReward").toString()) + " " + VaultHandler.econ.currencyNamePlural());
 					}
 
 				} else if (uSkyBlock.getInstance().getPlayer(player.getName()).checkChallenge(split[0].toLowerCase())) {
-					sender.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".repeatRewardText").toString()).replace('&', '§'));
+					sender.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".repeatRewardText").toString())));
 					player.sendMessage(ChatColor.YELLOW + "Repeat exp reward: " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".repeatXpReward").toString()));
 				} else {
-					sender.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".rewardText").toString()).replace('&', '§'));
+					sender.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".rewardText").toString())));
 					player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + uSkyBlock.getInstance().getChallengeConfig().getInt(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".xpReward").toString()));
 				}
 
