@@ -240,6 +240,13 @@ public class DevCommand implements CommandExecutor {
 				
 				Player player = (Player)sender;
 				PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(split[1]);
+				
+				if(pi == null)
+				{
+					sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+					return true;
+				}
+				
 				if (pi.getHasParty() && !pi.getPartyLeader().equalsIgnoreCase(split[1])) {
 					pi = uSkyBlock.getInstance().readPlayerFile(pi.getPartyLeader());
 				}
@@ -356,23 +363,14 @@ public class DevCommand implements CommandExecutor {
 			} 
 			else if (split[0].equals("resetallchallenges") && (hasPerm(sender, "usb.mod.challenges"))) 
 			{
-				if (!uSkyBlock.getInstance().isActivePlayer(split[1])) 
+				PlayerInfo pi = uSkyBlock.getInstance().getPlayer(split[1]);
+				if(pi == null)
 				{
-					final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(split[1]);
-					if (pi == null) 
-					{
-						sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-						return true;
-					}
-					pi.resetAllChallenges();
-					uSkyBlock.getInstance().writePlayerFile(split[1], pi);
-					sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
-				} 
-				else 
-				{
-					uSkyBlock.getInstance().getPlayer(split[1]).resetAllChallenges();
-					sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
+					sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+					return true;
 				}
+				pi.resetAllChallenges();
+				sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
 			}
 			else if(split[0].equals("viewchallenges") && hasPerm(sender, "usb.mod.challenges"))
 			{
