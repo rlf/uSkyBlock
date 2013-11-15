@@ -32,33 +32,33 @@ public class IslandCommand implements CommandExecutor {
 	}
 
 	public boolean addPlayertoParty(final String playername, final String partyleader) {
-		if (!uSkyBlock.getInstance().getActivePlayers().containsKey(playername)) {
+		if (!uSkyBlock.getInstance().isActivePlayer(playername)) {
 			System.out.println("uSkyblock " + "Failed to add player to party! (" + playername + ")");
 			return false;
 		}
-		if (!uSkyBlock.getInstance().getActivePlayers().containsKey(partyleader)) {
+		if (!uSkyBlock.getInstance().isActivePlayer(partyleader)) {
 			System.out.println("uSkyblock " + "Failed to add player to party! (" + playername + ")");
 			return false;
 		}
 		System.out.println("uSkyblock " + "Adding player: " + playername + " to party with leader: " + partyleader);
-		uSkyBlock.getInstance().getActivePlayers().get(playername).setJoinParty(partyleader, uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
+		uSkyBlock.getInstance().getPlayer(playername).setJoinParty(partyleader, uSkyBlock.getInstance().getPlayer(partyleader).getIslandLocation());
 		if (!playername.equalsIgnoreCase(partyleader)) {
-			if (uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation() != null) {
-				uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getHomeLocation());
+			if (uSkyBlock.getInstance().getPlayer(partyleader).getHomeLocation() != null) {
+				uSkyBlock.getInstance().getPlayer(playername).setHomeLocation(uSkyBlock.getInstance().getPlayer(partyleader).getHomeLocation());
 			} else {
-				uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(uSkyBlock.getInstance().getActivePlayers().get(partyleader).getIslandLocation());
+				uSkyBlock.getInstance().getPlayer(playername).setHomeLocation(uSkyBlock.getInstance().getPlayer(partyleader).getIslandLocation());
 			}
 
-			if (!uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(playername)) {
-				uSkyBlock.getInstance().getActivePlayers().get(partyleader).addMember(playername);
+			if (!uSkyBlock.getInstance().getPlayer(partyleader).getMembers().contains(playername)) {
+				uSkyBlock.getInstance().getPlayer(partyleader).addMember(playername);
 			}
-			if (!uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(partyleader)) {
-				uSkyBlock.getInstance().getActivePlayers().get(partyleader).addMember(partyleader);
+			if (!uSkyBlock.getInstance().getPlayer(partyleader).getMembers().contains(partyleader)) {
+				uSkyBlock.getInstance().getPlayer(partyleader).addMember(partyleader);
 			}
 		}
-		uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getActivePlayers().get(playername));
+		uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getPlayer(playername));
 
-		if (!uSkyBlock.getInstance().getActivePlayers().get(playername).getPartyLeader().equalsIgnoreCase(partyleader)) {
+		if (!uSkyBlock.getInstance().getPlayer(playername).getPartyLeader().equalsIgnoreCase(partyleader)) {
 			System.out.println("uSkyblock " + "Error adding player to a new party!");
 			return false;
 		}
@@ -253,7 +253,7 @@ public class IslandCommand implements CommandExecutor {
 			try {
 
 				Location l;
-				PlayerInfo playerInfo = uSkyBlock.getInstance().getActivePlayers().get(player.getName());
+				PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayer(player.getName());
 				if (playerInfo.getHasParty()) {
 					l = playerInfo.getPartyIslandLocation();
 				} else {
@@ -275,7 +275,7 @@ public class IslandCommand implements CommandExecutor {
 			if (player != null) {
 				player.sendMessage(ChatColor.YELLOW + "Information about " + islandPlayer + "'s Island:");
 				if (player.getName().equalsIgnoreCase(islandPlayer)) {
-					player.sendMessage(ChatColor.GREEN + "Island level is " + ChatColor.WHITE + uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getIslandLevel());
+					player.sendMessage(ChatColor.GREEN + "Island level is " + ChatColor.WHITE + uSkyBlock.getInstance().getPlayer(player.getName()).getIslandLevel());
 				} else {
 					final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(islandPlayer);
 					if (pi != null) {
@@ -601,7 +601,7 @@ public class IslandCommand implements CommandExecutor {
 			return true;
 		}
 
-		final PlayerInfo pi = uSkyBlock.getInstance().getActivePlayers().get(player.getName());
+		final PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getName());
 		if (pi == null) {
 			player.sendMessage(ChatColor.RED + "Error: Couldn't read your player data!");
 			return true;
@@ -617,7 +617,7 @@ public class IslandCommand implements CommandExecutor {
 				if (pi.getHomeLocation() != null || pi.getHasParty()) {
 					uSkyBlock.getInstance().homeTeleport(player);
 				} else {
-					uSkyBlock.getInstance().getActivePlayers().get(player.getName()).setHomeLocation(pi.getIslandLocation());
+					uSkyBlock.getInstance().getPlayer(player.getName()).setHomeLocation(pi.getIslandLocation());
 				}
 
 				return true;
@@ -863,7 +863,7 @@ public class IslandCommand implements CommandExecutor {
 				if (split[0].equals("leave") && VaultHandler.checkPerk(player.getName(), "usb.party.join", player.getWorld())) {
 					if (player.getWorld().getName().equalsIgnoreCase(uSkyBlock.getSkyBlockWorld().getName())) {
 						if (uSkyBlock.getInstance().hasParty(player.getName())) {
-							if (uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getPartyLeader().equalsIgnoreCase(player.getName())) {
+							if (uSkyBlock.getInstance().getPlayer(player.getName()).getPartyLeader().equalsIgnoreCase(player.getName())) {
 								player.sendMessage(ChatColor.YELLOW + "You are the leader, use /island remove <player> instead.");
 								return true;
 							}
@@ -1098,17 +1098,17 @@ public class IslandCommand implements CommandExecutor {
 						return true;
 					}
 
-					if (!uSkyBlock.getInstance().getActivePlayers().containsKey(player.getName()) || !uSkyBlock.getInstance().getActivePlayers().containsKey(Bukkit.getPlayer(split[1]).getName())) {
+					if (!uSkyBlock.getInstance().isActivePlayer(player.getName()) || !uSkyBlock.getInstance().isActivePlayer(Bukkit.getPlayer(split[1]).getName())) {
 						player.sendMessage(ChatColor.RED + "Both players must be online to transfer an island.");
 						return true;
 					}
 
-					if (!uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getHasParty()) {
+					if (!uSkyBlock.getInstance().getPlayer(player.getName()).getHasParty()) {
 						player.sendMessage(ChatColor.RED + "You must be in a party to transfer your island.");
 						return true;
 					}
 
-					if (uSkyBlock.getInstance().getActivePlayers().get(player.getName()).getMembers().size() > 2) {
+					if (uSkyBlock.getInstance().getPlayer(player.getName()).getMembers().size() > 2) {
 						player.sendMessage(ChatColor.RED + "Remove all players from your party other than the player you are transferring to.");
 						System.out.println("uSkyblock " + player.getName() + " tried to transfer his island, but his party has too many people!");
 						return true;
@@ -1177,15 +1177,15 @@ public class IslandCommand implements CommandExecutor {
 	}
 
 	public void removePlayerFromParty(final String playername, final String partyleader) {
-		if (uSkyBlock.getInstance().getActivePlayers().containsKey(playername)) {
-			PlayerInfo pi = uSkyBlock.getInstance().getActivePlayers().get(playername);
+		if (uSkyBlock.getInstance().isActivePlayer(playername)) {
+			PlayerInfo pi = uSkyBlock.getInstance().getPlayer(playername);
 			if (pi != null && pi.getPartyLeader() != null) {
 				if (!pi.getPartyLeader().equalsIgnoreCase(playername)) {
-					uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(null);
+					uSkyBlock.getInstance().getPlayer(playername).setHomeLocation(null);
 				}
 			}
-			uSkyBlock.getInstance().getActivePlayers().get(playername).setLeaveParty();
-			uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getActivePlayers().get(playername));
+			uSkyBlock.getInstance().getPlayer(playername).setLeaveParty();
+			uSkyBlock.getInstance().writePlayerFile(playername, uSkyBlock.getInstance().getPlayer(playername));
 		} else {
 			final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(playername);
 			if (!pi.getPartyLeader().equalsIgnoreCase(playername)) {
@@ -1194,11 +1194,11 @@ public class IslandCommand implements CommandExecutor {
 			pi.setLeaveParty();
 			uSkyBlock.getInstance().writePlayerFile(playername, pi);
 		}
-		if (uSkyBlock.getInstance().getActivePlayers().containsKey(partyleader)) {
-			if (uSkyBlock.getInstance().getActivePlayers().get(partyleader).getMembers().contains(playername)) {
-				uSkyBlock.getInstance().getActivePlayers().get(partyleader).removeMember(playername);
+		if (uSkyBlock.getInstance().isActivePlayer(partyleader)) {
+			if (uSkyBlock.getInstance().getPlayer(partyleader).getMembers().contains(playername)) {
+				uSkyBlock.getInstance().getPlayer(partyleader).removeMember(playername);
 			}
-			uSkyBlock.getInstance().writePlayerFile(partyleader, uSkyBlock.getInstance().getActivePlayers().get(partyleader));
+			uSkyBlock.getInstance().writePlayerFile(partyleader, uSkyBlock.getInstance().getPlayer(partyleader));
 		} else {
 			final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(partyleader);
 			if (pi.getMembers().contains(playername)) {
@@ -1239,11 +1239,11 @@ public class IslandCommand implements CommandExecutor {
 	}
 
 	private void setNewPlayerIsland(final Player player, final Location loc) {
-		uSkyBlock.getInstance().getActivePlayers().get(player.getName()).setHasIsland(true);
-		uSkyBlock.getInstance().getActivePlayers().get(player.getName()).setIslandLocation(loc);
+		uSkyBlock.getInstance().getPlayer(player.getName()).setHasIsland(true);
+		uSkyBlock.getInstance().getPlayer(player.getName()).setIslandLocation(loc);
 
 		player.teleport(getChestSpawnLoc(loc, player));
 		uSkyBlock.getInstance().homeSet(player);
-		uSkyBlock.getInstance().writePlayerFile(player.getName(), uSkyBlock.getInstance().getActivePlayers().get(player.getName()));
+		uSkyBlock.getInstance().writePlayerFile(player.getName(), uSkyBlock.getInstance().getPlayer(player.getName()));
 	}
 }

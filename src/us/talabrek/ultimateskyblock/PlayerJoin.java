@@ -8,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -46,28 +47,29 @@ public class PlayerJoin implements Listener {
 			}
 		}
 	}
+	
 
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerJoin(final PlayerJoinEvent event) {
-		PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(event.getPlayer().getName());
-		if (pi == null) {
-			System.out.println("uSkyblock " + "Creating a new skyblock file for " + event.getPlayer().getName());
-			pi = new PlayerInfo(event.getPlayer().getName());
-			uSkyBlock.getInstance().writePlayerFile(event.getPlayer().getName(), pi);
-		}
-		if (pi.getHasParty() && pi.getPartyIslandLocation() == null) {
-			final PlayerInfo pi2 = uSkyBlock.getInstance().readPlayerFile(pi.getPartyLeader());
-			pi.setPartyIslandLocation(pi2.getIslandLocation());
-			uSkyBlock.getInstance().writePlayerFile(event.getPlayer().getName(), pi);
-		}
-
-		pi.buildChallengeList();
-		uSkyBlock.getInstance().addActivePlayer(event.getPlayer().getName(), pi);
-		System.out.println("uSkyblock " + "Loaded player file for " + event.getPlayer().getName());
+	public void onPlayerJoin(final PlayerJoinEvent event) 
+	{
+		if(!uSkyBlock.isSkyBlockWorld(event.getPlayer().getWorld()))
+			return;
+		
+		uSkyBlock.getInstance().onEnterSkyBlock(event.getPlayer());
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onPlayerChangeWorld(PlayerChangedWorldEvent event)
+	{
+		if(!uSkyBlock.isSkyBlockWorld(event.getPlayer().getWorld()))
+			uSkyBlock.getInstance().onLeaveSkyBlock(event.getPlayer());
+		else
+			uSkyBlock.getInstance().onEnterSkyBlock(event.getPlayer());
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerQuit(final PlayerQuitEvent event) {
-		uSkyBlock.getInstance().removeActivePlayer(event.getPlayer().getName());
+	public void onPlayerQuit(final PlayerQuitEvent event) 
+	{
+		uSkyBlock.getInstance().onLeaveSkyBlock(event.getPlayer());
 	}
 }

@@ -356,7 +356,7 @@ public class DevCommand implements CommandExecutor {
 			} 
 			else if (split[0].equals("resetallchallenges") && (hasPerm(sender, "usb.mod.challenges"))) 
 			{
-				if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[1])) 
+				if (!uSkyBlock.getInstance().isActivePlayer(split[1])) 
 				{
 					final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(split[1]);
 					if (pi == null) 
@@ -370,7 +370,7 @@ public class DevCommand implements CommandExecutor {
 				} 
 				else 
 				{
-					uSkyBlock.getInstance().getActivePlayers().get(split[1]).resetAllChallenges();
+					uSkyBlock.getInstance().getPlayer(split[1]).resetAllChallenges();
 					sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
 				}
 			}
@@ -394,7 +394,7 @@ public class DevCommand implements CommandExecutor {
 		{
 			if (split[0].equals("completechallenge") && (hasPerm(sender, "usb.mod.challenges"))) 
 			{
-				if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[2])) 
+				if (!uSkyBlock.getInstance().isActivePlayer(split[2])) 
 				{
 					final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(split[2]);
 					if (pi == null) 
@@ -413,19 +413,19 @@ public class DevCommand implements CommandExecutor {
 				} 
 				else 
 				{
-					if (uSkyBlock.getInstance().getActivePlayers().get(split[2]).checkChallenge(split[1].toLowerCase())
-							|| !uSkyBlock.getInstance().getActivePlayers().get(split[2]).challengeExists(split[1].toLowerCase())) 
+					if (uSkyBlock.getInstance().getPlayer(split[2]).checkChallenge(split[1].toLowerCase())
+							|| !uSkyBlock.getInstance().getPlayer(split[2]).challengeExists(split[1].toLowerCase())) 
 					{
 						sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or is already completed");
 						return true;
 					}
-					uSkyBlock.getInstance().getActivePlayers().get(split[2]).completeChallenge(split[1].toLowerCase());
+					uSkyBlock.getInstance().getPlayer(split[2]).completeChallenge(split[1].toLowerCase());
 					sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
 				}
 			} 
 			else if (split[0].equals("resetchallenge") && (hasPerm(sender, "usb.mod.challenges"))) 
 			{
-				if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[2])) 
+				if (!uSkyBlock.getInstance().isActivePlayer(split[2])) 
 				{
 					final PlayerInfo pi = uSkyBlock.getInstance().readPlayerFile(split[2]);
 					if (pi == null) 
@@ -444,13 +444,13 @@ public class DevCommand implements CommandExecutor {
 				} 
 				else 
 				{
-					if (!uSkyBlock.getInstance().getActivePlayers().get(split[2]).checkChallenge(split[1].toLowerCase())
-							|| !uSkyBlock.getInstance().getActivePlayers().get(split[2]).challengeExists(split[1].toLowerCase())) 
+					if (!uSkyBlock.getInstance().getPlayer(split[2]).checkChallenge(split[1].toLowerCase())
+							|| !uSkyBlock.getInstance().getPlayer(split[2]).challengeExists(split[1].toLowerCase())) 
 					{
 						sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or isn't yet completed");
 						return true;
 					}
-					uSkyBlock.getInstance().getActivePlayers().get(split[2]).resetChallenge(split[1].toLowerCase());
+					uSkyBlock.getInstance().getPlayer(split[2]).resetChallenge(split[1].toLowerCase());
 					sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
 				}
 			}
