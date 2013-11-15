@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -115,25 +116,32 @@ public class DevCommand implements CommandExecutor {
 				return true;
 			}
 			
-			if (pi.getHasParty() && !pi.getPartyLeader().equalsIgnoreCase(player.getName()))
-				pi = uSkyBlock.getInstance().getPlayer(pi.getPartyLeader());
-			
-			if (pi == null)
-				sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-			else 
+			if(uSkyBlock.getInstance().homeTeleport((Player)sender, player))
+				sender.sendMessage(ChatColor.GREEN + "Teleporting to " + player.getName() + "'s island.");
+			else
 			{
-				if (pi.getHomeLocation() != null) 
+				PlayerInfo info = uSkyBlock.getInstance().getPlayer(player.getName());
+				if(info != null)
 				{
-					sender.sendMessage(ChatColor.GREEN + "Teleporting to " + player.getName() + "'s island.");
-					((Player)sender).teleport(pi.getIslandLocation());
+					final Location target = info.getTeleportLocation();
+					if(target != null)
+					{
+						sender.sendMessage(ChatColor.GOLD + "WARNING: No safe location found. Unsafe teleport in 5 seconds.");
+						final Player sendingPlayer = (Player)sender;
+						Bukkit.getScheduler().scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable()
+						{
+							@Override
+							public void run()
+							{
+								if(!sendingPlayer.teleport(target))
+									sendingPlayer.sendMessage(ChatColor.RED + "Error: Teleport was cancelled.");
+							}
+						}, 100L);
+						
+						return true;
+					}
 				}
-				else if (pi.getIslandLocation() != null) 
-				{
-					sender.sendMessage(ChatColor.GREEN + "Teleporting to " + player.getName() + "'s island.");
-					((Player)sender).teleport(pi.getIslandLocation());
-				}
-				else
-					sender.sendMessage("Error: That player does not have an island!");
+				sender.sendMessage(ChatColor.RED + "Error: That player does not have an island!");
 			}
 		} 
 		else if (split[0].equals("remove")) 
@@ -163,7 +171,7 @@ public class DevCommand implements CommandExecutor {
 			if (pi.getIslandLocation() != null) 
 			{
 				sender.sendMessage(ChatColor.YELLOW + "Removing " + player.getName() + "'s island.");
-				uSkyBlock.getInstance().deletePlayerIsland(player.getName());
+				uSkyBlock.getInstance().removeIsland(pi);
 			}
 			else
 				sender.sendMessage("Error: That player does not have an island!");

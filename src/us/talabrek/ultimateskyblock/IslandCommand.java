@@ -616,12 +616,12 @@ public class IslandCommand implements CommandExecutor {
 		}
 
 		if (pi.getIslandLocation() != null || pi.getHasParty()) {
-			if (split.length == 0) {
-				if (pi.getHomeLocation() != null || pi.getHasParty()) {
-					uSkyBlock.getInstance().homeTeleport(player);
-				} else {
-					pi.setHomeLocation(pi.getIslandLocation());
-				}
+			if (split.length == 0)
+			{
+				if(uSkyBlock.getInstance().homeTeleport(player, player))
+					player.sendMessage(ChatColor.GREEN + "Teleporting you to your island. (/island help for more info)");
+				else if(pi.getHasIsland() || pi.getHasParty())
+					player.sendMessage(ChatColor.RED + "There is no safe location to put you. Please contact a moderator or admin.");
 
 				return true;
 			}
@@ -636,7 +636,7 @@ public class IslandCommand implements CommandExecutor {
 						return true;
 					}
 					if (!uSkyBlock.getInstance().onRestartCooldown(player) || Settings.general_cooldownRestart == 0) {
-						uSkyBlock.getInstance().deletePlayerIsland(player.getName());
+						uSkyBlock.getInstance().removeIsland(pi);
 						uSkyBlock.getInstance().setRestartCooldown(player);
 						return createIsland(sender);
 					}
@@ -764,7 +764,7 @@ public class IslandCommand implements CommandExecutor {
 					if (!uSkyBlock.getInstance().hasParty(player.getName()) && inviteList.containsKey(player.getName())) {
 						if (!uSkyBlock.getInstance().hasParty(inviteList.get(player.getName()))) {
 							if (pi.getHasIsland()) {
-								uSkyBlock.getInstance().deletePlayerIsland(player.getName());
+								uSkyBlock.getInstance().removeIsland(pi);
 							}
 
 							addPlayertoParty(player.getName(), inviteList.get(player.getName()));
@@ -775,7 +775,7 @@ public class IslandCommand implements CommandExecutor {
 							}
 						} else {
 							if (pi.getHasIsland()) {
-								uSkyBlock.getInstance().deletePlayerIsland(player.getName());
+								uSkyBlock.getInstance().removeIsland(pi);
 							}
 							player.sendMessage(ChatColor.GREEN + "You have joined an island! Use /island party to see the other members.");
 							addPlayertoParty(player.getName(), inviteList.get(player.getName()));
@@ -789,7 +789,7 @@ public class IslandCommand implements CommandExecutor {
 						}
 						uSkyBlock.getInstance().setRestartCooldown(player);
 
-						uSkyBlock.getInstance().homeTeleport(player);
+						uSkyBlock.getInstance().homeTeleport(player, player);
 
 						player.getInventory().clear();
 						player.getEquipment().clear();

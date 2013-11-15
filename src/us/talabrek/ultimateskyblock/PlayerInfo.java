@@ -249,4 +249,18 @@ public class PlayerInfo implements Serializable {
 	public void setPlayerName(final String s) {
 		playerName = s;
 	}
+	
+	public Location getTeleportLocation()
+	{
+		Location target = getHomeLocation();
+		if(target == null)
+		{
+			if (getIslandLocation() == null && getHasParty()) 
+				target = getPartyIslandLocation();
+			else if (getIslandLocation() != null)
+				target = getIslandLocation();
+		}
+		
+		return target;
+	}
 }

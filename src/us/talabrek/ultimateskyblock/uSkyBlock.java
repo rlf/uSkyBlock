@@ -46,6 +46,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import us.talabrek.ultimateskyblock.async.IslandRemover;
+
 public class uSkyBlock extends JavaPlugin {
 	private static uSkyBlock instance;
 	public static World skyBlockWorld = null;
@@ -218,61 +220,12 @@ public class uSkyBlock extends JavaPlugin {
 		return rankDisplay.size() - Settings.challenges_rankLeeway - ranksCompleted;
 	}
 
-	public boolean clearAbandoned() {
-		int numOffline = 0;
-		final OfflinePlayer[] oplayers = Bukkit.getServer().getOfflinePlayers();
-		System.out.println("uSkyblock " + "Attemping to add more orphans");
-		for (final OfflinePlayer oplayer : oplayers) {
-			long offlineTime = oplayer.getLastPlayed();
-			offlineTime = (System.currentTimeMillis() - offlineTime) / 3600000L;
-			if (offlineTime > 250L && getInstance().hasIsland(oplayer.getName()) && offlineTime < 50000L) {
-				final PlayerInfo pi = getInstance().readPlayerFile(oplayer.getName());
-				final Location l = pi.getIslandLocation();
-				int blockcount = 0;
-				final int px = l.getBlockX();
-				final int py = l.getBlockY();
-				final int pz = l.getBlockZ();
-				for (int x = -30; x <= 30; x++) {
-					for (int y = -30; y <= 30; y++) {
-						for (int z = -30; z <= 30; z++) {
-							final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-							if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 10) {
-								blockcount++;
-							}
-						}
-					}
-				}
-				if (blockcount < 200) {
-					numOffline++;
-					WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(oplayer.getName() + "Island");
-					orphaned.push(pi.getIslandLocation());
-
-					pi.setHomeLocation(null);
-					pi.setHasIsland(false);
-					pi.setIslandLocation(null);
-					writePlayerFile(oplayer.getName(), pi);
-				}
-			}
-		}
-
-		if (numOffline > 0) {
-			System.out.println("uSkyblock " + "Added " + numOffline + " new orphans.");
-			saveOrphans();
-			updateOrphans();
-			return true;
-		}
-		System.out.println("uSkyblock " + "No new orphans to add!");
-		return false;
-	}
-
 	public void clearArmorContents(final Player player) {
 		player.getInventory().setArmorContents(new ItemStack[player.getInventory().getArmorContents().length]);
 	}
 
 	public void clearOrphanedIsland() {
-		while (hasOrphanedIsland()) {
-			orphaned.pop();
-		}
+		orphaned.clear();
 	}
 
 	public void deactivatePurge() {
@@ -283,107 +236,58 @@ public class uSkyBlock extends JavaPlugin {
 		removeList.remove(0);
 	}
 
-	public void deletePlayerIsland(final String player) {
-		if (!isActivePlayer(player)) {
-			PlayerInfo pi = readPlayerFile(player);
-			if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-				if (WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-					WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
-				}
-			}
-			orphaned.push(pi.getIslandLocation());
-			removeIsland(pi.getIslandLocation());
-			pi = new PlayerInfo(player);
-			pi.clearChallenges();
-			saveOrphans();
-			updateOrphans();
-			writePlayerFile(player, pi);
-		} else {
-			if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-				if (WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-					WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
-				}
-			}
-			orphaned.push(getPlayer(player).getIslandLocation());
-			removeIsland(getPlayer(player).getIslandLocation());
-			final PlayerInfo pi = new PlayerInfo(player);
-			removeActivePlayer(player);
-			addActivePlayer(player, pi);
-			saveOrphans();
-			updateOrphans();
+	public void devDeletePlayerIsland(final String player) 
+	{
+		PlayerInfo island = getPlayer(player);
+		
+		island.clearChallenges();
+		island.setIslandLocation(null);
+		island.setIslandLevel(0);
+		island.setIslandExp(0);
+		
+		uSkyBlock.getLog().info("Removed " + island.getPlayerName() + "'s island");
+		if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) 
+		{
+			if (WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island"))
+				WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
 		}
 	}
-
-	public void devDeletePlayerIsland(final String player) {
-		if (!isActivePlayer(player)) {
-			PlayerInfo pi = readPlayerFile(player);
-			if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-				if (WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-					WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
+	
+	public Location getBedrockNear(Location loc, int range)
+	{
+		for(int x = loc.getBlockX() - range; x <= loc.getBlockX() + range; ++x)
+		{
+			for(int y = loc.getBlockY() - range; y <= loc.getBlockY() + range; ++y)
+			{
+				for(int z = loc.getBlockZ() - range; z <= loc.getBlockZ() + range; ++z)
+				{
+					if(loc.getWorld().getBlockAt(x, y, z).getType() == Material.BEDROCK)
+						return new Location(loc.getWorld(), x, y, z);
 				}
 			}
-			pi = new PlayerInfo(player);
-			writePlayerFile(player, pi);
-		} else {
-			if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-				if (WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-					WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
-				}
-			}
-			final PlayerInfo pi = new PlayerInfo(player);
-			removeActivePlayer(player);
-			addActivePlayer(player, pi);
 		}
+		
+		return null;
 	}
 
-	public boolean devSetPlayerIsland(final CommandSender sender, final Location l, final String player) {
-		if (!isActivePlayer(player)) {
-			final PlayerInfo pi = readPlayerFile(player);
-			final int px = l.getBlockX();
-			final int py = l.getBlockY();
-			final int pz = l.getBlockZ();
-			for (int x = -10; x <= 10; x++) {
-				for (int y = -10; y <= 10; y++) {
-					for (int z = -10; z <= 10; z++) {
-						final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-						if (b.getTypeId() == 7) {
-							pi.setHomeLocation(new Location(l.getWorld(), px + x, py + y + 3, pz + z));
-							pi.setHasIsland(true);
-							pi.setIslandLocation(b.getLocation());
-							writePlayerFile(player, pi);
-							if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-								WorldGuardHandler.protectIsland(sender, player);
-							}
-							return true;
-						}
-					}
-				}
-			}
-		} else {
-			final int px = l.getBlockX();
-			final int py = l.getBlockY();
-			final int pz = l.getBlockZ();
-			for (int x = -10; x <= 10; x++) {
-				for (int y = -10; y <= 10; y++) {
-					for (int z = -10; z <= 10; z++) {
-						final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-						if (b.getTypeId() == 7) {
-							getPlayer(player).setHomeLocation(new Location(l.getWorld(), px + x, py + y + 3, pz + z));
-							getPlayer(player).setHasIsland(true);
-							getPlayer(player).setIslandLocation(b.getLocation());
-							final PlayerInfo pi = getPlayer(player);
-							removeActivePlayer(player);
-							addActivePlayer(player, pi);
-							if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-								WorldGuardHandler.protectIsland(sender, player);
-							}
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
+	public boolean devSetPlayerIsland(final CommandSender sender, final Location l, final String player) 
+	{
+		Location bedrock = getBedrockNear(l, 10);
+		
+		if(bedrock == null)
+			return false;
+		
+		bedrock.setY(bedrock.getY() + 3);
+		PlayerInfo pi = getPlayer(player);
+		
+		pi.setHomeLocation(bedrock);
+		pi.setHasIsland(true);
+		pi.setIslandLocation(bedrock);
+		
+		if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard"))
+			WorldGuardHandler.protectIsland(sender, player);
+
+		return true;
 	}
 
 	public boolean displayTopTen(final Player player) {
@@ -653,59 +557,6 @@ public class uSkyBlock extends JavaPlugin {
 		return 0L;
 	}
 
-	public Location getSafeHomeLocation(final PlayerInfo p) {
-		Location home = null;
-		if (p.getHomeLocation() == null) {
-			if (p.getIslandLocation() == null && p.getHasParty()) {
-				home = p.getPartyIslandLocation();
-			} else if (p.getIslandLocation() != null) {
-				home = p.getIslandLocation();
-			}
-		} else {
-			home = p.getHomeLocation();
-		}
-
-		if (isSafeLocation(home)) {
-			return home;
-		}
-
-		for (int y = home.getBlockY() + 25; y > 0; y--) {
-			final Location n = new Location(home.getWorld(), home.getBlockX(), y, home.getBlockZ());
-			if (isSafeLocation(n)) {
-				return n;
-			}
-		}
-		for (int y = home.getBlockY(); y < 255; y++) {
-			final Location n = new Location(home.getWorld(), home.getBlockX(), y, home.getBlockZ());
-			if (isSafeLocation(n)) {
-				return n;
-			}
-		}
-		if (p.getHasParty() && !p.getPartyLeader().equalsIgnoreCase(p.getPlayer().getName())) {
-			return p.getPartyIslandLocation();
-		}
-		final Location island = p.getIslandLocation();
-		if (isSafeLocation(island)) {
-			return island;
-		}
-
-		for (int y = island.getBlockY() + 25; y > 0; y--) {
-			final Location n = new Location(island.getWorld(), island.getBlockX(), y, island.getBlockZ());
-			if (isSafeLocation(n)) {
-				return n;
-			}
-		}
-		for (int y = island.getBlockY(); y < 255; y++) {
-			final Location n = new Location(island.getWorld(), island.getBlockX(), y, island.getBlockZ());
-			if (isSafeLocation(n)) {
-				return n;
-			}
-		}
-		if (p.getHasParty() && !p.getPartyLeader().equalsIgnoreCase(p.getPlayer().getName())) {
-			return p.getPartyIslandLocation();
-		}
-		return p.getHomeLocation();
-	}
 
 	public File[] getSchemFile() {
 		return schemFile;
@@ -940,23 +791,28 @@ public class uSkyBlock extends JavaPlugin {
 		return true;
 	}
 
-	public boolean homeTeleport(final Player player) {
-		Location homeSweetHome = null;
+	public boolean homeTeleport(Player player, OfflinePlayer toPlayer) 
+	{
+		PlayerInfo pi = getPlayer(toPlayer.getName());
 		
-		if (isActivePlayer(player.getName())) {
-			homeSweetHome = getInstance().getSafeHomeLocation(getPlayer(player.getName()));
-		}
-
-		if (homeSweetHome == null) {
-			player.performCommand("spawn");
-			player.sendMessage(ChatColor.RED + "You are not part of an island. Returning you the spawn area!");
+		if(pi == null)
+			return false;
+		
+		Location target = pi.getTeleportLocation();
+		
+		if(target == null)
+			return false;
+		
+		if(pi.getHomeLocation() == null)
+			pi.setHomeLocation(target);
+		
+		if(Misc.safeTeleport(player, target))
+		{
+			getInstance().removeCreatures(target);
 			return true;
 		}
-
-		getInstance().removeCreatures(homeSweetHome);
-		player.teleport(homeSweetHome);
-		player.sendMessage(ChatColor.GREEN + "Teleporting you to your island. (/island help for more info)");
-		return true;
+		
+		return false;
 	}
 
 	public boolean islandAtLocation(final Location loc) {
@@ -1001,32 +857,6 @@ public class uSkyBlock extends JavaPlugin {
 
 		}
 
-		return false;
-	}
-
-	public boolean isSafeLocation(final Location l) {
-		if (l == null) {
-			return false;
-		}
-
-		final Block ground = l.getBlock().getRelative(BlockFace.DOWN);
-		final Block air1 = l.getBlock();
-		final Block air2 = l.getBlock().getRelative(BlockFace.UP);
-		if (ground.getType().equals(Material.AIR)) {
-			return false;
-		}
-		if (ground.getType().equals(Material.LAVA)) {
-			return false;
-		}
-		if (ground.getType().equals(Material.STATIONARY_LAVA)) {
-			return false;
-		}
-		if (ground.getType().equals(Material.CACTUS)) {
-			return false;
-		}
-		if ((air1.getType().equals(Material.AIR) || air1.getType().equals(Material.CROPS) || air1.getType().equals(Material.LONG_GRASS) || air1.getType().equals(Material.RED_ROSE) || air1.getType().equals(Material.YELLOW_FLOWER) || air1.getType().equals(Material.DEAD_BUSH) || air1.getType().equals(Material.SIGN_POST) || air1.getType().equals(Material.SIGN)) && air2.getType().equals(Material.AIR)) {
-			return true;
-		}
 		return false;
 	}
 
@@ -1471,52 +1301,16 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public void removeInactive(final List<String> removePlayerList) {
+		// TODO: This could be removed
 		getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(getInstance(), new Runnable() {
 			public void run() {
 				if (uSkyBlock.getInstance().getRemoveList().size() > 0 && !uSkyBlock.getInstance().isPurgeActive()) {
-					uSkyBlock.getInstance().deletePlayerIsland(uSkyBlock.getInstance().getRemoveList().get(0));
+					removeIsland(getPlayer(uSkyBlock.getInstance().getRemoveList().get(0)));
 					System.out.println("uSkyblock " + "[uSkyBlock] Purge: Removing " + uSkyBlock.getInstance().getRemoveList().get(0) + "'s island");
 					uSkyBlock.getInstance().deleteFromRemoveList();
 				}
 			}
 		}, 0L, 200L);
-	}
-
-	public void removeIsland(final Location loc) {
-		
-	}
-
-	public void removeIslandBlocks(final Location loc) {
-		if (loc != null) {
-			System.out.println("uSkyblock " + "Removing blocks from an abandoned island.");
-			final Location l = loc;
-			final int px = l.getBlockX();
-			final int py = l.getBlockY();
-			final int pz = l.getBlockZ();
-			for (int x = -20; x <= 20; x++) {
-				for (int y = -20; y <= 20; y++) {
-					for (int z = -20; z <= 20; z++) {
-						final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-						if (!b.getType().equals(Material.AIR)) {
-							if (b.getType().equals(Material.CHEST)) {
-								final Chest c = (Chest) b.getState();
-								final ItemStack[] items = new ItemStack[c.getInventory().getContents().length];
-								c.getInventory().setContents(items);
-							} else if (b.getType().equals(Material.FURNACE)) {
-								final Furnace f = (Furnace) b.getState();
-								final ItemStack[] items = new ItemStack[f.getInventory().getContents().length];
-								f.getInventory().setContents(items);
-							} else if (b.getType().equals(Material.DISPENSER)) {
-								final Dispenser d = (Dispenser) b.getState();
-								final ItemStack[] items = new ItemStack[d.getInventory().getContents().length];
-								d.getInventory().setContents(items);
-							}
-							b.setType(Material.AIR);
-						}
-					}
-				}
-			}
-		}
 	}
 
 	public void removeNextOrphan() {
@@ -1717,5 +1511,18 @@ public class uSkyBlock extends JavaPlugin {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void removeIsland(PlayerInfo island)
+	{
+		ArrayList<PlayerInfo> list = new ArrayList<PlayerInfo>(1);
+		list.add(island);
+		removeIslands(list);
+	}
+	
+	public void removeIslands(List<PlayerInfo> islands)
+	{
+		IslandRemover remover = new IslandRemover(islands);
+		remover.start();
 	}
 }
