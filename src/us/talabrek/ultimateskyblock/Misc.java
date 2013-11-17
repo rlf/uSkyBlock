@@ -36,7 +36,7 @@ public class Misc
 		if(closest == null)
 			return false;
 		
-		return player.teleport(closest);
+		return player.teleport(closest.add(0.5, 0, 0.5));
 	}
 	
 	public static boolean isSafeLocation(Location loc)

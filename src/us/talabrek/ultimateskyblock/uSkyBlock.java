@@ -46,6 +46,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import us.talabrek.ultimateskyblock.async.IslandBuilder;
 import us.talabrek.ultimateskyblock.async.IslandRemover;
 
 public class uSkyBlock extends JavaPlugin {
@@ -284,8 +285,22 @@ public class uSkyBlock extends JavaPlugin {
 		pi.setHasIsland(true);
 		pi.setIslandLocation(bedrock);
 		
-		if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard"))
-			WorldGuardHandler.protectIsland(sender, player);
+		if (Settings.island_protectWithWorldGuard && Bukkit.getPluginManager().isPluginEnabled("WorldGuard"))
+		{
+			try
+			{
+				WorldGuardHandler.protectIsland(pi);
+			}
+			catch(IllegalArgumentException e)
+			{
+				sender.sendMessage(ChatColor.RED + e.getMessage());
+			}
+			catch(IllegalStateException e)
+			{
+				e.printStackTrace();
+				sender.sendMessage(ChatColor.RED + "An error with WorldGuard occured. See console for details.");
+			}
+		}
 
 		return true;
 	}
@@ -372,7 +387,7 @@ public class uSkyBlock extends JavaPlugin {
 		return activePlayers.containsKey(player);
 	}
 	
-	public PlayerInfo getOrCreatePlayer(String player)
+	public synchronized PlayerInfo getOrCreatePlayer(String player)
 	{
 		if(isActivePlayer(player))
 			return activePlayers.get(player);
@@ -399,7 +414,7 @@ public class uSkyBlock extends JavaPlugin {
 		return pi;
 	}
 	
-	public PlayerInfo getPlayer(String player)
+	public synchronized PlayerInfo getPlayer(String player)
 	{
 		if(isActivePlayer(player))
 			return activePlayers.get(player);
@@ -1518,6 +1533,16 @@ public class uSkyBlock extends JavaPlugin {
 		ArrayList<PlayerInfo> list = new ArrayList<PlayerInfo>(1);
 		list.add(island);
 		removeIslands(list);
+	}
+	
+	public void restartIsland(PlayerInfo island)
+	{
+		ArrayList<PlayerInfo> list = new ArrayList<PlayerInfo>(1);
+		list.add(island);
+
+		IslandRemover remover = new IslandRemover(list);
+		remover.then(new IslandBuilder(Bukkit.getPlayer(island.getPlayerName())));
+		remover.start();
 	}
 	
 	public void removeIslands(List<PlayerInfo> islands)

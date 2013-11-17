@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import us.talabrek.ultimateskyblock.async.IslandProtector;
 import us.talabrek.ultimateskyblock.async.PartyListBuilder;
 
 public class DevCommand implements CommandExecutor {
@@ -295,7 +296,7 @@ public class DevCommand implements CommandExecutor {
 				if (Settings.island_protectWithWorldGuard) 
 				{
 					sender.sendMessage(ChatColor.YELLOW + "Protecting all unprotected player Islands.");
-					WorldGuardHandler.protectAllIslands(sender);
+					Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new IslandProtector());
 				} 
 				else
 					sender.sendMessage(ChatColor.RED + "You must enable WorldGuard protection in the config.yml to use this!");

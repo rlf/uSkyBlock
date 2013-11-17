@@ -16,7 +16,7 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-public class IslandRemover implements Runnable
+public class IslandRemover extends QueueTask
 {
 	private List<PlayerInfo> mIslands;
 	private Iterator<PlayerInfo> mNext;
@@ -39,9 +39,16 @@ public class IslandRemover implements Runnable
 	@Override
 	public void run()
 	{
+		PlayerInfo island = mNext.next();
+		
+		if(!remove(island))
+			++mFailCount;
+		
 		if(!mNext.hasNext())
 		{
 			mTask.cancel();
+			
+			doNext();
 			
 			if(mFailCount > 0)
 				uSkyBlock.getLog().info("Island removal finished. " + mFailCount + " islands failed");
@@ -50,11 +57,6 @@ public class IslandRemover implements Runnable
 			
 			return;
 		}
-		
-		PlayerInfo island = mNext.next();
-		
-		if(!remove(island))
-			++mFailCount;
 	}
 	
 	private boolean remove(PlayerInfo island)
