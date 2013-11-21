@@ -11,10 +11,13 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class Purger implements Runnable
 {
-	private int mTime;
-	public Purger(int time)
+	private long mEarliest;
+	private boolean mNoIsland;
+	
+	public Purger(long time, boolean includeNoIsland)
 	{
-		mTime = time;
+		mEarliest = System.currentTimeMillis() - time;
+		mNoIsland = includeNoIsland;
 	}
 	
 	@Override
@@ -22,8 +25,6 @@ public class Purger implements Runnable
 	{
 		File directoryPlayers = uSkyBlock.getInstance().directoryPlayers;
 
-		long offlineTime = 0L;
-		
 		uSkyBlock.getLog().info("Preparing list of islands to purge.");
 		
 		LinkedList<PlayerInfo> toRemove = new LinkedList<PlayerInfo>();
@@ -33,9 +34,7 @@ public class Purger implements Runnable
 			OfflinePlayer player = Bukkit.getOfflinePlayer(child.getName());
 			if(player.hasPlayedBefore() && !player.isOnline())
 			{
-				offlineTime = player.getLastPlayed();
-				offlineTime = (System.currentTimeMillis() - offlineTime) / 3600000L;
-				if (offlineTime > mTime && uSkyBlock.getInstance().hasIsland(player.getName())) 
+				if (player.getLastPlayed() < mEarliest || (mNoIsland && !uSkyBlock.getInstance().hasIsland(player.getName()))) 
 				{
 					PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getName());
 					if (pi != null && !pi.getHasParty() && pi.getIslandLevel() < 10) 

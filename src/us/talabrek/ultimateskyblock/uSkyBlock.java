@@ -29,10 +29,6 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.Chest;
-import org.bukkit.block.Dispenser;
-import org.bukkit.block.Furnace;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.MemorySection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -89,7 +85,6 @@ public class uSkyBlock extends JavaPlugin {
 	private Stack<Location> orphaned = new Stack<Location>();
 	public PluginDescriptionFile pluginFile;
 	public String pName;
-	public boolean purgeActive = false;
 	List<String> rankDisplay;
 	public List<String> removeList = new ArrayList<String>();
 	HashMap<Integer, Integer> requiredList = new HashMap<Integer, Integer>();
@@ -101,11 +96,6 @@ public class uSkyBlock extends JavaPlugin {
 	private File skyblockDataFile = null;
 
 	LinkedHashMap<String, Double> topTen;
-
-	public void activatePurge() {
-		purgeActive = true;
-	}
-
 
 	public void addOrphan(final Location island) {
 		orphaned.push(island);
@@ -227,10 +217,6 @@ public class uSkyBlock extends JavaPlugin {
 
 	public void clearOrphanedIsland() {
 		orphaned.clear();
-	}
-
-	public void deactivatePurge() {
-		purgeActive = false;
 	}
 
 	public void deleteFromRemoveList() {
@@ -841,17 +827,13 @@ public class uSkyBlock extends JavaPlugin {
 			for (int y = -2; y <= 2; y++) {
 				for (int z = -2; z <= 2; z++) {
 					final Block b = new Location(loc.getWorld(), px + x, py + y, pz + z).getBlock();
-					if (b.getTypeId() != 0) {
+					if (!b.isEmpty()) {
 						return true;
 					}
 				}
 			}
 		}
 		return false;
-	}
-
-	public boolean isPurgeActive() {
-		return purgeActive;
 	}
 
 	public boolean isRankAvailable(final Player player, final String rank) {
@@ -884,7 +866,7 @@ public class uSkyBlock extends JavaPlugin {
 			for (int y = -30; y <= 30; y++) {
 				for (int z = -30; z <= 30; z++) {
 					final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-					if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 10) {
+					if (!b.isEmpty() && !b.isLiquid()) {
 						blockcount++;
 						if (blockcount > 200) {
 							return true;
@@ -1313,19 +1295,6 @@ public class uSkyBlock extends JavaPlugin {
 				}
 			}
 		}
-	}
-
-	public void removeInactive(final List<String> removePlayerList) {
-		// TODO: This could be removed
-		getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(getInstance(), new Runnable() {
-			public void run() {
-				if (uSkyBlock.getInstance().getRemoveList().size() > 0 && !uSkyBlock.getInstance().isPurgeActive()) {
-					removeIsland(getPlayer(uSkyBlock.getInstance().getRemoveList().get(0)));
-					System.out.println("uSkyblock " + "[uSkyBlock] Purge: Removing " + uSkyBlock.getInstance().getRemoveList().get(0) + "'s island");
-					uSkyBlock.getInstance().deleteFromRemoveList();
-				}
-			}
-		}, 0L, 200L);
 	}
 
 	public void removeNextOrphan() {

@@ -59,7 +59,7 @@ public class DevCommand implements CommandExecutor {
 			if (VaultHandler.hasPerm(sender, "usb.mod.challenges"))
 				sender.sendMessage(ChatColor.YELLOW + "/dev viewchallenges <playername>: " + ChatColor.WHITE + " views the completed challenges for that player");
 			if (VaultHandler.hasPerm(sender, "usb.admin.purge"))
-				sender.sendMessage(ChatColor.YELLOW + "/dev purge [TimeInDays]:" + ChatColor.WHITE + " delete inactive islands older than [TimeInDays].");
+				sender.sendMessage(ChatColor.YELLOW + "/dev purge <datediff>:" + ChatColor.WHITE + " delete inactive islands older than <datediff>. The format is a standard date diff");
 			if (VaultHandler.hasPerm(sender, "usb.mod.party"))
 				sender.sendMessage(ChatColor.YELLOW + "/dev buildpartylist:" + ChatColor.WHITE + " build a new party list (use this if parties are broken).");
 			if (VaultHandler.hasPerm(sender, "usb.mod.party"))
@@ -361,22 +361,6 @@ public class DevCommand implements CommandExecutor {
 				uSkyBlock.getInstance().updateTopTen(uSkyBlock.getInstance().generateTopTen());
 				sender.sendMessage(ChatColor.YELLOW + "Finished generation of the Top Ten list");
 			} 
-			else if (split[0].equals("purge")) 
-			{
-				if(!VaultHandler.hasPerm(sender, "usb.admin.purge"))
-				{
-					sender.sendMessage(ChatColor.RED + "You do not have permission to use that.");
-					return true;
-				}
-				
-				if (uSkyBlock.getInstance().isPurgeActive()) 
-				{
-					sender.sendMessage(ChatColor.RED + "A purge is already running, please wait for it to finish!");
-					return true;
-				}
-				sender.sendMessage(ChatColor.YELLOW + "Usage: /dev purge [TimeInDays]");
-				return true;
-			}
 			else
 			{
 				sender.sendMessage(ChatColor.RED + "Unknown command " + ChatColor.YELLOW + "/dev " + split[0]);
@@ -393,15 +377,21 @@ public class DevCommand implements CommandExecutor {
 					return true;
 				}
 				
-				if (uSkyBlock.getInstance().isPurgeActive()) 
+				long time = Misc.parseDateDiff(split[1]);
+				
+				if(time == 0)
 				{
-					sender.sendMessage(ChatColor.RED + "A purge is already running, please wait for it to finish!");
+					sender.sendMessage(ChatColor.RED + "Unknown date diff format: " + split[1]);
 					return true;
 				}
-				uSkyBlock.getInstance().activatePurge();
-				int time = Integer.parseInt(split[1]) * 24;
-				sender.sendMessage(ChatColor.YELLOW + "Marking all islands inactive for more than " + split[1] + " days.");
-				Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Purger(time));
+				else if(time < 0)
+				{
+					sender.sendMessage(ChatColor.RED + "Cannot use a negative date diff here (that would be in the future!).");
+					return true;
+				}
+				
+				sender.sendMessage(ChatColor.YELLOW + "Purging islands for players that have not been on for " + Misc.dateDiffToString(time, false) + ".");
+				Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Purger(time, false));
 			} 
 			else
 				return onPlayerCommand(sender, split);
