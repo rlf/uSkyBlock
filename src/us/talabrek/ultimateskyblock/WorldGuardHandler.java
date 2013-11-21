@@ -1,14 +1,9 @@
 package us.talabrek.ultimateskyblock;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldedit.BlockVector;
@@ -88,7 +83,7 @@ public class WorldGuardHandler {
 		protectIsland(uSkyBlock.getInstance().getPlayer(playerName));
 	}
 	
-	public static void protectIsland(PlayerInfo pi) throws IllegalArgumentException, IllegalStateException
+	public static synchronized void protectIsland(PlayerInfo pi) throws IllegalArgumentException, IllegalStateException
 	{
 		if(!Settings.island_protectWithWorldGuard || pi == null)
 			return;

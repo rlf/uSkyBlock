@@ -36,13 +36,13 @@ public class PlayerJoin implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerInteract(final PlayerInteractEvent event) {
 		if (Settings.extras_obsidianToLava && uSkyBlock.getInstance().playerIsOnIsland(event.getPlayer())) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getPlayer().getItemInHand().getTypeId() == 325
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getPlayer().getItemInHand().getType() == Material.BUCKET
 					&& event.getClickedBlock().getType() == Material.OBSIDIAN) {
 				if (!uSkyBlock.getInstance().testForObsidian(event.getClickedBlock())) {
 					event.getPlayer().sendMessage(ChatColor.YELLOW + "Changing your obsidian back into lava. Be careful!");
 					event.getClickedBlock().setType(Material.AIR);
-					event.getPlayer().getInventory().removeItem(new ItemStack[] { new ItemStack(325, 1) });
-					event.getPlayer().getInventory().addItem(new ItemStack[] { new ItemStack(327, 1) });
+					event.getPlayer().getInventory().removeItem(new ItemStack[] { new ItemStack(Material.BUCKET, 1) });
+					event.getPlayer().getInventory().addItem(new ItemStack[] { new ItemStack(Material.BUCKET, 1) });
 				}
 			}
 		}

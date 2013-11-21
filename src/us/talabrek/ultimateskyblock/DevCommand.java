@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock;
 
-import java.io.File;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -14,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.async.IslandProtector;
 import us.talabrek.ultimateskyblock.async.PartyListBuilder;
+import us.talabrek.ultimateskyblock.async.Purger;
 
 public class DevCommand implements CommandExecutor {
 	public void buildPartyList() 
@@ -263,7 +263,10 @@ public class DevCommand implements CommandExecutor {
 			displayChallenges(sender, player);
 		}
 		else
-			return false;
+		{
+			sender.sendMessage(ChatColor.RED + "Unknown command " + ChatColor.YELLOW + "/dev " + split[0]);
+			return true;
+		}
 		return true;
 	}
 
@@ -374,6 +377,11 @@ public class DevCommand implements CommandExecutor {
 				sender.sendMessage(ChatColor.YELLOW + "Usage: /dev purge [TimeInDays]");
 				return true;
 			}
+			else
+			{
+				sender.sendMessage(ChatColor.RED + "Unknown command " + ChatColor.YELLOW + "/dev " + split[0]);
+				return true;
+			}
 		} 
 		else if (split.length == 2) 
 		{
@@ -391,16 +399,12 @@ public class DevCommand implements CommandExecutor {
 					return true;
 				}
 				uSkyBlock.getInstance().activatePurge();
-				final int time = Integer.parseInt(split[1]) * 24;
+				int time = Integer.parseInt(split[1]) * 24;
 				sender.sendMessage(ChatColor.YELLOW + "Marking all islands inactive for more than " + split[1] + " days.");
-				uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() 
-				{
-					public void run() {
-						
-					}
-				});
+				Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Purger(time));
 			} 
-			return onPlayerCommand(sender, split);
+			else
+				return onPlayerCommand(sender, split);
 		} 
 		else if (split.length == 3) 
 		{
@@ -456,6 +460,11 @@ public class DevCommand implements CommandExecutor {
 				
 				pi.resetChallenge(split[1].toLowerCase());
 				sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + player.getName());
+			}
+			else
+			{
+				sender.sendMessage(ChatColor.RED + "Unknown command " + ChatColor.YELLOW + "/dev " + split[0]);
+				return true;
 			}
 		}
 		return true;

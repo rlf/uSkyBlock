@@ -1,28 +1,22 @@
 package us.talabrek.ultimateskyblock;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+
+import com.google.common.collect.HashBiMap;
 
 import us.talabrek.ultimateskyblock.async.IslandBuilder;
 
 public class IslandCommand implements CommandExecutor {
 	public boolean allowInfo = true;
-	private final HashMap<String, String> inviteList = new HashMap<String, String>();
+	private final HashBiMap<String, String> inviteList = HashBiMap.create();
 	public Location Islandlocation;
 	private String tempLeader;
 	private List<String> tempParty;
@@ -73,48 +67,92 @@ public class IslandCommand implements CommandExecutor {
 
 	
 
-	private int calculateIslandLevel(Location l) {
+	private int calculateIslandLevel(Location l) 
+	{
 		if (l == null)
 			return 0;
 
-		int cobblecount = 0;
-		int blockcount = 0;
-		final int px = l.getBlockX();
-		final int py = l.getBlockY();
-		final int pz = l.getBlockZ();
-		for (int x = -50; x <= 50; x++) {
-			for (int y = Settings.island_height * -1; y <= 255 - Settings.island_height; y++) {
-				for (int z = -50; z <= 50; z++) {
+		int cobbleCount = 0;
+		int blockCount = 0;
+		int px = l.getBlockX();
+		int py = l.getBlockY();
+		int pz = l.getBlockZ();
+		for (int x = -50; x <= 50; ++x) 
+		{
+			for (int y = 0; y <= 255; ++y) 
+			{
+				for (int z = -50; z <= 50; ++z) 
+				{
 					final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
-					if (b.getTypeId() == 57) {
-						blockcount += 300;
-					}
-					if (b.getTypeId() == 41 || b.getTypeId() == 116 || b.getTypeId() == 122) {
-						blockcount += 150;
-					}
-					if (b.getTypeId() == 49 || b.getTypeId() == 42) {
-						blockcount += 10;
-					}
-					if (b.getTypeId() == 47 || b.getTypeId() == 84) {
-						blockcount += 5;
-					}
-					if (b.getTypeId() == 79 || b.getTypeId() == 82 || b.getTypeId() == 112 || b.getTypeId() == 2 || b.getTypeId() == 110) {
-						blockcount += 3;
-					}
-					if (b.getTypeId() == 98 || b.getTypeId() == 45 || b.getTypeId() == 35 || b.getTypeId() == 24 || b.getTypeId() == 121 || b.getTypeId() == 108 || b.getTypeId() == 109 || b.getTypeId() == 43 || b.getTypeId() == 20) {
-						blockcount += 2;
-					}
-					if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 9 && b.getTypeId() != 10 && b.getTypeId() != 11 && b.getTypeId() != 4 || b.getTypeId() == 4 && cobblecount < 10000) {
-						blockcount++;
-						if (b.getTypeId() == 4) {
-							cobblecount++;
+					switch(b.getType())
+					{
+					case DIAMOND_BLOCK:
+					case EMERALD_BLOCK:
+					case BEACON:
+						blockCount += 300;
+						break;
+					case GOLD_BLOCK:
+					case ENCHANTMENT_TABLE:
+					case DRAGON_EGG:
+						blockCount += 150;
+						break;
+					case OBSIDIAN:
+					case IRON_BLOCK:
+					case REDSTONE_BLOCK:
+						blockCount += 10;
+						break;
+					case BOOKSHELF:
+					case JUKEBOX:
+					case HARD_CLAY:
+					case STAINED_CLAY:
+						blockCount += 5;
+						break;
+					case ICE:
+					case CLAY:
+					case NETHER_BRICK:
+					case GRASS:
+					case MYCEL:
+					case GLOWSTONE:
+					case NETHER_BRICK_STAIRS:
+					case QUARTZ_BLOCK:
+					case QUARTZ_STAIRS:
+						blockCount += 3;
+						break;
+					case SMOOTH_BRICK:
+					case BRICK:
+					case WOOL:
+					case SANDSTONE:
+					case ENDER_STONE:
+					case BRICK_STAIRS:
+					case SMOOTH_STAIRS:
+					case DOUBLE_STEP:
+					case GLASS:
+						blockCount += 2;
+						break;
+					case COBBLESTONE:
+						if(cobbleCount < 10000)
+						{
+							++cobbleCount;
+							++blockCount;
 						}
+						break;
+						
+					// 0 pointers
+					case WATER:
+					case STATIONARY_WATER:
+					case LAVA:
+					case STATIONARY_LAVA:
+						break;
+						
+					default:
+						++blockCount;
+						break;
 					}
 				}
 			}
 		}
 
-		return blockcount / 100;
+		return blockCount / 100;
 	}
 
 	private boolean getIslandLevel(final Player player, final String islandPlayer) {
@@ -194,15 +232,6 @@ public class IslandCommand implements CommandExecutor {
 			return false;
 		}
 		return true;
-	}
-
-	public <T, E> T getKeyByValue(final Map<T, E> map, final E value) {
-		for (final Map.Entry<T, E> entry : map.entrySet()) {
-			if (value.equals(entry.getValue())) {
-				return entry.getKey();
-			}
-		}
-		return null;
 	}
 
 	private void inviteDebug(final Player player) {
@@ -610,7 +639,7 @@ public class IslandCommand implements CommandExecutor {
 								if (VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
 									if (tempParty.size() < Settings.general_maxPartySize * 2) {
 										if (inviteList.containsValue(player.getName())) {
-											inviteList.remove(getKeyByValue(inviteList, player.getName()));
+											inviteList.inverse().remove(player.getName());
 											player.sendMessage(ChatColor.YELLOW + "Removing your previous invite.");
 										}
 										inviteList.put(Bukkit.getPlayer(split[1]).getName(), player.getName());
@@ -624,7 +653,7 @@ public class IslandCommand implements CommandExecutor {
 									}
 								} else if (tempParty.size() < Settings.general_maxPartySize) {
 									if (inviteList.containsValue(player.getName())) {
-										inviteList.remove(getKeyByValue(inviteList, player.getName()));
+										inviteList.inverse().remove(player.getName());
 										player.sendMessage(ChatColor.YELLOW + "Removing your previous invite.");
 									}
 									inviteList.put(Bukkit.getPlayer(split[1]).getName(), player.getName());
@@ -646,7 +675,7 @@ public class IslandCommand implements CommandExecutor {
 						if (!uSkyBlock.getInstance().hasParty(player.getName())) {
 							if (!uSkyBlock.getInstance().hasParty(Bukkit.getPlayer(split[1]).getName())) {
 								if (inviteList.containsValue(player.getName())) {
-									inviteList.remove(getKeyByValue(inviteList, player.getName()));
+									inviteList.inverse().remove(player.getName());
 									player.sendMessage(ChatColor.YELLOW + "Removing your previous invite.");
 								}
 								inviteList.put(Bukkit.getPlayer(split[1]).getName(), player.getName());
