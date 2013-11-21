@@ -36,8 +36,8 @@ public class Purger implements Runnable
 			{
 				if (player.getLastPlayed() < mEarliest || (mNoIsland && !uSkyBlock.getInstance().hasIsland(player.getName()))) 
 				{
-					PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getName());
-					if (pi != null && !pi.getHasParty() && pi.getIslandLevel() < 10) 
+					PlayerInfo pi = uSkyBlock.getInstance().getPlayerNoStore(player.getName());
+					if (pi != null && (mNoIsland || pi.getHasIsland())) 
 						toRemove.add(pi);
 				}
 			}

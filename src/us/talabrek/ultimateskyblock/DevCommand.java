@@ -262,6 +262,33 @@ public class DevCommand implements CommandExecutor {
 			
 			displayChallenges(sender, player);
 		}
+		else if(split[0].equals("protect"))
+		{
+			if(!VaultHandler.hasPerm(sender, "usb.mod.protect"))
+			{
+				sender.sendMessage(ChatColor.RED + "You do not have permission to use that.");
+				return true;
+			}
+			
+			if (Settings.island_protectWithWorldGuard) 
+			{
+				try
+				{
+					WorldGuardHandler.protectIsland(pi);
+					sender.sendMessage(ChatColor.GREEN + "Protected " + player.getName() + "'s island.");
+				}
+				catch(IllegalArgumentException e)
+				{
+					sender.sendMessage(ChatColor.RED + e.getMessage());
+				}
+				catch(IllegalStateException e)
+				{
+					sender.sendMessage(ChatColor.RED + "Unable to comply. A problem with WorldGuard occurred.");
+				}
+			} 
+			else
+				sender.sendMessage(ChatColor.RED + "You must enable WorldGuard protection in the config.yml to use this!");
+		}
 		else
 		{
 			sender.sendMessage(ChatColor.RED + "Unknown command " + ChatColor.YELLOW + "/dev " + split[0]);

@@ -28,6 +28,10 @@ permissions:
             description: Let the player use the /island command
           usb.island.info:
             description: Let the player check their island level
+          usb.island.info.others:
+            description: Let the player check anothers island level
+            children:
+              usb.island.info: true
           usb.island.topten:
             description: Let the player see the top ten list
           usb.island.sethome:

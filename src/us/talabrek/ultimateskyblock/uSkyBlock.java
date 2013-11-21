@@ -94,7 +94,7 @@ public class uSkyBlock extends JavaPlugin {
 	private FileConfiguration skyblockData = null;
 
 	private File skyblockDataFile = null;
-
+	
 	LinkedHashMap<String, Double> topTen;
 
 	public void addOrphan(final Location island) {
@@ -309,9 +309,9 @@ public class uSkyBlock extends JavaPlugin {
 					if (pMembers.contains(playerName)) {
 						pMembers.remove(playerName);
 					}
-					player.sendMessage(ChatColor.GREEN + "#" + i + ": " + playerName + pMembers.toString() + " - Island level " + topTen.get(playerName).intValue());
+					player.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + playerName + ChatColor.GRAY + pMembers.toString() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + topTen.get(playerName).intValue());
 				} else {
-					player.sendMessage(ChatColor.GREEN + "#" + i + ": " + playerName + " - Island level " + topTen.get(playerName).intValue());
+					player.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + playerName + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + topTen.get(playerName).intValue());
 				}
 			}
 			if (playerName.equalsIgnoreCase(player.getName())) {
@@ -400,6 +400,41 @@ public class uSkyBlock extends JavaPlugin {
 		return pi;
 	}
 	
+	public synchronized boolean deletePlayerData(String player)
+	{
+		if(isActivePlayer(player))
+			return false;
+		
+		File file = new File(directoryPlayers, player);
+		
+		if(!file.exists())
+			return false;
+		
+		return file.delete();
+	}
+	
+	public synchronized PlayerInfo getPlayerNoStore(String player)
+	{
+		if(isActivePlayer(player))
+			return activePlayers.get(player);
+		
+		PlayerInfo pi = readPlayerFile(player);
+		
+		if(pi != null)
+		{
+			if (pi.getHasParty() && pi.getPartyIslandLocation() == null) 
+			{
+				final PlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
+				pi.setPartyIslandLocation(pi2.getIslandLocation());
+				writePlayerFile(player, pi);
+			}
+	
+			pi.buildChallengeList();
+		}
+		
+		return pi;
+	}
+	
 	public synchronized PlayerInfo getPlayer(String player)
 	{
 		if(isActivePlayer(player))
@@ -422,6 +457,11 @@ public class uSkyBlock extends JavaPlugin {
 		}
 		
 		return pi;
+	}
+	
+	public synchronized void savePlayer(PlayerInfo info)
+	{
+		writePlayerFile(info.getPlayerName(), info);
 	}
 	
 	public void getAllFiles(final String path) {
@@ -1428,15 +1468,23 @@ public class uSkyBlock extends JavaPlugin {
 		if (!isActivePlayer(playerfrom) || !isActivePlayer(playerto)) {
 			return false;
 		}
-		if (getPlayer(playerfrom).getHasIsland()) {
-			getPlayer(playerto).setHasIsland(true);
-			getPlayer(playerto).setIslandLocation(getPlayer(playerfrom).getIslandLocation());
-			getPlayer(playerto).setIslandLevel(getPlayer(playerfrom).getIslandLevel());
-			getPlayer(playerto).setPartyIslandLocation(null);
-			getPlayer(playerfrom).setHasIsland(false);
-			getPlayer(playerfrom).setIslandLocation(null);
-			getPlayer(playerfrom).setIslandLevel(0);
-			getPlayer(playerfrom).setPartyIslandLocation(getPlayer(playerto).getIslandLocation());
+		
+		PlayerInfo from = getPlayer(playerfrom);
+		PlayerInfo to = getPlayer(playerto);
+		
+		if (from.getHasIsland()) {
+			to.setHasIsland(true);
+			to.setIslandLocation(from.getIslandLocation());
+			to.setIslandLevel(from.getIslandLevel());
+			to.setPartyIslandLocation(null);
+			
+			from.setHasIsland(false);
+			from.setIslandLocation(null);
+			from.setIslandLevel(0);
+			from.setPartyIslandLocation(to.getIslandLocation());
+			
+			savePlayer(from);
+			savePlayer(to);
 			return true;
 		}
 		return false;
@@ -1483,7 +1531,7 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
-	public void writePlayerFile(final String playerName, final PlayerInfo pi) {
+	private void writePlayerFile(final String playerName, final PlayerInfo pi) {
 		final File f = new File(directoryPlayers, playerName);
 		try {
 			final FileOutputStream fileOut = new FileOutputStream(f);

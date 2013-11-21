@@ -80,7 +80,7 @@ public class WorldGuardHandler {
 	
 	public static void protectIsland(String playerName) throws IllegalArgumentException, IllegalStateException
 	{
-		protectIsland(uSkyBlock.getInstance().getPlayer(playerName));
+		protectIsland(uSkyBlock.getInstance().getPlayerNoStore(playerName));
 	}
 	
 	public static synchronized void protectIsland(PlayerInfo pi) throws IllegalArgumentException, IllegalStateException

@@ -38,7 +38,7 @@ public class PartyListBuilder implements Runnable
 				if (!leaderInfo.getMembers().contains(file.getName()))
 					leaderInfo.addMember(file.getName());
 
-				uSkyBlock.getInstance().writePlayerFile(info.getPartyLeader(), leaderInfo);
+				uSkyBlock.getInstance().savePlayer(leaderInfo);
 			}
 		}
 		

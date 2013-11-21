@@ -423,7 +423,7 @@ public class IslandBuilder implements Runnable
 
 		player.teleport(getChestSpawnLoc(loc, player));
 		uSkyBlock.getInstance().homeSet(player);
-		uSkyBlock.getInstance().writePlayerFile(player.getName(), uSkyBlock.getInstance().getPlayer(player.getName()));
+		uSkyBlock.getInstance().savePlayer(uSkyBlock.getInstance().getPlayer(player.getName()));
 	}
 	
 	public Location getChestSpawnLoc(final Location loc, final Player player) {

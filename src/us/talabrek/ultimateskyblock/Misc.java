@@ -167,7 +167,7 @@ public class Misc
 			if(shortFormat)
 				result += years + "y";
 			else
-				result += years + " Year" + (years > 1 ? "s" : "");
+				result += years + " Year" + (years != 1 ? "s " : " ");
 		}
 		
 		if(dateDiff >= 2191500000L)
@@ -177,7 +177,7 @@ public class Misc
 			if(shortFormat)
 				result += months + "mo";
 			else
-				result += months + " Month" + (months > 1 ? "s" : "");
+				result += months + " Month" + (months != 1 ? "s " : " ");
 		}
 		else
 			months = 0;
@@ -189,7 +189,7 @@ public class Misc
 			if(shortFormat)
 				result += weeks + "w";
 			else
-				result += weeks + " Week" + (weeks > 1 ? "s" : "");
+				result += weeks + " Week" + (weeks != 1 ? "s " : " ");
 		}
 		else
 			weeks = 0;
@@ -201,7 +201,7 @@ public class Misc
 			if(shortFormat)
 				result += days + "d";
 			else
-				result += days + " Day" + (days > 1 ? "s" : "");
+				result += days + " Day" + (days != 1 ? "s " : " ");
 		}
 		else
 			days = 0;
@@ -213,7 +213,7 @@ public class Misc
 			if(shortFormat)
 				result += hours + "h";
 			else
-				result += hours + " Hour" + (hours > 1 ? "s" : "");
+				result += hours + " Hour" + (hours != 1 ? "s " : " ");
 		}
 		else
 			hours = 0;
@@ -225,18 +225,18 @@ public class Misc
 			if(shortFormat)
 				result += minutes + "m";
 			else
-				result += minutes + " Minute" + (minutes > 1 ? "s" : "");
+				result += minutes + " Minute" + (minutes != 1 ? "s " : " ");
 		}
 		else
 			minutes = 0;
 		
-		if(dateDiff >= 0)
+		if(dateDiff >= 1000L) // Dont to less than 1 second
 		{
 			seconds = (int)(dateDiff / 1000L);
 			if(shortFormat)
 				result += seconds + "s";
 			else
-				result += seconds + " Second" + (seconds > 1 ? "s" : "");
+				result += seconds + " Second" + (seconds != 1 ? "s " : " ");
 		}
 		else
 			seconds = 0;

@@ -9,7 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.scheduler.BukkitTask;
 
 import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
@@ -20,9 +19,10 @@ public class IslandRemover extends QueueTask
 {
 	private List<PlayerInfo> mIslands;
 	private Iterator<PlayerInfo> mNext;
-	private BukkitTask mTask;
-	
 	private int mFailCount = 0;
+	private int mVisitedCount = 0; 
+	
+	private long mLastUpdate;
 	
 	public IslandRemover(List<PlayerInfo> islands)
 	{
@@ -31,8 +31,14 @@ public class IslandRemover extends QueueTask
 	
 	public void start()
 	{
-		mTask = Bukkit.getScheduler().runTaskTimer(uSkyBlock.getInstance(), this, 0L, 20L);
+		if(mIslands.isEmpty())
+			return;
+		
+		Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), this, 4L);
 		mNext = mIslands.iterator();
+		mLastUpdate = System.currentTimeMillis();
+		mVisitedCount = 0;
+		mFailCount = 0;
 		uSkyBlock.getLog().info("Starting removal of " + mIslands.size() + " islands");
 	}
 	
@@ -41,27 +47,47 @@ public class IslandRemover extends QueueTask
 	{
 		PlayerInfo island = mNext.next();
 		
-		if(!remove(island))
+		++mVisitedCount;
+		
+		if(System.currentTimeMillis() - mLastUpdate > 2000)
+		{
+			uSkyBlock.getLog().info(String.format("Removal: %d/%d %.0f%%", mVisitedCount, mIslands.size(), (mVisitedCount / (float)mIslands.size()) * 100));
+			mLastUpdate = System.currentTimeMillis();
+		}
+		
+		boolean ok = false;
+		boolean removed = false;
+		
+		if(!island.getHasIsland() && !island.getHasParty())
+		{
+			ok = uSkyBlock.getInstance().deletePlayerData(island.getPlayerName());
+		}
+		else
+			removed = ok = remove(island);
+		
+		if(!ok)
 			++mFailCount;
 		
 		if(!mNext.hasNext())
 		{
-			mTask.cancel();
-			
 			doNext();
 			
 			if(mFailCount > 0)
 				uSkyBlock.getLog().info("Island removal finished. " + mFailCount + " islands failed");
 			else
 				uSkyBlock.getLog().info("Island removal finished.");
-			
-			return;
 		}
+		else
+			Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), this, (removed ? 20L : 4L));
 	}
 	
 	private boolean remove(PlayerInfo island)
 	{
 		Location center = island.getIslandLocation();
+		
+		if(island.getHasParty() && island.getPlayerName().equals(island.getPartyLeader()))
+			center = island.getPartyIslandLocation();
+		
 		if(center == null)
 			return false;
 		
@@ -102,6 +128,6 @@ public class IslandRemover extends QueueTask
 		
 		uSkyBlock.getLog().info("Removed " + island.getPlayerName() + "'s island");
 		
-		return true;
+		return uSkyBlock.getInstance().deletePlayerData(island.getPlayerName());
 	}
 }
