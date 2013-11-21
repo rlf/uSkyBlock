@@ -184,6 +184,7 @@ public class IslandCommand implements CommandExecutor {
 				l = info.getIslandLocation();
 
 			info.setIslandLevel(calculateIslandLevel(l));
+			uSkyBlock.getInstance().updateTopIsland(info);
 		} 
 		catch (final Exception e) 
 		{

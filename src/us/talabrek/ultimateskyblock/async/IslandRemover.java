@@ -128,6 +128,10 @@ public class IslandRemover extends QueueTask
 		
 		uSkyBlock.getLog().info("Removed " + island.getPlayerName() + "'s island");
 		
-		return uSkyBlock.getInstance().deletePlayerData(island.getPlayerName());
+		uSkyBlock.getInstance().removeFromTop(island);
+		if(!uSkyBlock.getInstance().deletePlayerData(island.getPlayerName()))
+			uSkyBlock.getInstance().savePlayer(island);
+		
+		return true;
 	}
 }

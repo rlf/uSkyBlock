@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.async.IslandProtector;
 import us.talabrek.ultimateskyblock.async.PartyListBuilder;
 import us.talabrek.ultimateskyblock.async.Purger;
+import us.talabrek.ultimateskyblock.async.TopGenerator;
 
 public class DevCommand implements CommandExecutor {
 	public void buildPartyList() 
@@ -384,9 +385,8 @@ public class DevCommand implements CommandExecutor {
 					return true;
 				}
 				
-				sender.sendMessage(ChatColor.YELLOW + "Generating the Top Ten list");
-				uSkyBlock.getInstance().updateTopTen(uSkyBlock.getInstance().generateTopTen());
-				sender.sendMessage(ChatColor.YELLOW + "Finished generation of the Top Ten list");
+				sender.sendMessage(ChatColor.YELLOW + "Updating the Top Ten list");
+				Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new TopGenerator());
 			} 
 			else
 			{

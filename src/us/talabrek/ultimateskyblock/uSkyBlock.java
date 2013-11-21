@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -44,6 +46,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import us.talabrek.ultimateskyblock.async.IslandBuilder;
 import us.talabrek.ultimateskyblock.async.IslandRemover;
+import us.talabrek.ultimateskyblock.async.TopGenerator;
 
 public class uSkyBlock extends JavaPlugin {
 	private static uSkyBlock instance;
@@ -69,7 +72,7 @@ public class uSkyBlock extends JavaPlugin {
 	
 	public static Logger getLog()
 	{
-		return Logger.getLogger("uSkyBlock");
+		return instance.getLogger();
 	}
 
 	HashMap<String, PlayerInfo> activePlayers = new HashMap<String, PlayerInfo>();
@@ -95,7 +98,7 @@ public class uSkyBlock extends JavaPlugin {
 
 	private File skyblockDataFile = null;
 	
-	LinkedHashMap<String, Double> topTen;
+	private ArrayList<Entry<String, Integer>> mTopList;
 
 	public void addOrphan(final Location island) {
 		orphaned.push(island);
@@ -291,60 +294,55 @@ public class uSkyBlock extends JavaPlugin {
 		return true;
 	}
 
-	public boolean displayTopTen(final Player player) {
+	public synchronized boolean displayTopTen(CommandSender sender) 
+	{
 		int i = 1;
 		int playerrank = 0;
-		player.sendMessage(ChatColor.YELLOW + "Displaying the top 10 islands:");
-		if (topTen == null) {
-			player.sendMessage(ChatColor.RED + "Top ten list not generated yet!");
+		if(mTopList == null)
+		{
+			sender.sendMessage(ChatColor.RED + "The top list has not generated yet.");
 			return false;
 		}
+		sender.sendMessage(ChatColor.YELLOW + "Displaying the top " + mTopList.size() + " islands:");
+		
+		String leader = sender.getName();
+		
+		if(sender instanceof Player)
+		{
+			PlayerInfo info = getPlayerNoStore(sender.getName());
+			if(info.getHasParty())
+				leader = info.getPartyLeader();
+		}
 
-		final PlayerInfo pi2 = getPlayer(player.getName());
-		for (final String playerName : topTen.keySet()) {
-			if (i <= 10) {
-				if (hasParty(playerName)) {
-					final PlayerInfo pix = readPlayerFile(playerName);
-					final List<?> pMembers = pix.getMembers();
-					if (pMembers.contains(playerName)) {
-						pMembers.remove(playerName);
-					}
-					player.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + playerName + ChatColor.GRAY + pMembers.toString() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + topTen.get(playerName).intValue());
-				} else {
-					player.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + playerName + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + topTen.get(playerName).intValue());
-				}
+		for (Entry<String, Integer> entry : mTopList) 
+		{
+			if (i <= 10) 
+			{
+				if (hasParty(entry.getKey())) 
+				{
+					PlayerInfo info = getPlayerNoStore(entry.getKey());
+					List<String> members = info.getMembers();
+					members.remove(entry.getKey());
+					
+					sender.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + entry.getKey() + ChatColor.GRAY + members.toString() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + entry.getValue());
+				} 
+				else 
+					sender.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + entry.getKey() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + entry.getValue());
 			}
-			if (playerName.equalsIgnoreCase(player.getName())) {
+			else if(!(sender instanceof Player))
+				break;
+
+			if(entry.getKey().equals(leader))
 				playerrank = i;
-			}
-			if (pi2.getHasParty()) {
-				if (playerName.equalsIgnoreCase(pi2.getPartyLeader())) {
-					playerrank = i;
-				}
-			}
+
 			i++;
 		}
-		player.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank);
+		
+		if(sender instanceof Player)
+			sender.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank);
 		return true;
 	}
 
-	public LinkedHashMap<String, Double> generateTopTen() {
-		final HashMap<String, Double> tempMap = new LinkedHashMap<String, Double>();
-		final File folder = directoryPlayers;
-		final File[] listOfFiles = folder.listFiles();
-
-		for (final File listOfFile : listOfFiles) {
-			PlayerInfo pi;
-			if ((pi = getInstance().readPlayerFile(listOfFile.getName())) != null) {
-				if (pi.getIslandLevel() > 0 && (!pi.getHasParty() || pi.getPartyLeader().equalsIgnoreCase(pi.getPlayerName()))) {
-					tempMap.put(listOfFile.getName(), Double.valueOf(pi.getIslandLevel()));
-				}
-			}
-		}
-		final LinkedHashMap<String, Double> sortedMap = sortHashMapByValuesD(tempMap);
-		return sortedMap;
-	}
-	
 	public void onEnterSkyBlock(Player player)
 	{
 		getOrCreatePlayer(player.getName());
@@ -1146,17 +1144,9 @@ public class uSkyBlock extends JavaPlugin {
 
 		getCommand("dev").setExecutor(new DevCommand());
 
-		if (Settings.island_useTopTen) {
-			Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
+		if (Settings.island_useTopTen)
+			Bukkit.getScheduler().runTaskAsynchronously(this, new TopGenerator());
 
-				@Override
-				public void run() {
-					getInstance().updateTopTen(getInstance().generateTopTen());
-					instance.log.info("Generating Top 10");
-				}
-
-			});
-		}
 		populateChallengeList();
 		log.info(pluginFile.getName() + " v." + pluginFile.getVersion() + " enabled.");
 		getInstance().getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
@@ -1513,10 +1503,6 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
-	public void updateTopTen(final LinkedHashMap<String, Double> map) {
-		topTen = map;
-	}
-
 	public void writePartyFile(final List<Party> pi) {
 		final File f = new File(getDataFolder(), "partylist.bin");
 		try {
@@ -1566,5 +1552,74 @@ public class uSkyBlock extends JavaPlugin {
 	{
 		IslandRemover remover = new IslandRemover(islands);
 		remover.start();
+	}
+
+	public synchronized void setTopIslands( ArrayList<Entry<String, Integer>> topList )
+	{
+		mTopList = topList;
+	}
+	
+	public synchronized void removeFromTop( PlayerInfo island)
+	{
+		if(mTopList == null || (!island.getHasIsland() && !island.getPlayerName().equals(island.getPartyLeader())))
+			return;
+		
+		for(int i = 0; i < mTopList.size(); ++i)
+		{
+			Entry<String, Integer> entry = mTopList.get(i);
+			
+			if(entry.getKey().equals(island.getPlayerName()))
+			{
+				mTopList.remove(i);
+				return;
+			}
+		}
+	}
+	
+	public synchronized void updateTopIsland( PlayerInfo island )
+	{
+		if(mTopList == null)
+			return;
+		
+		String name = island.getPlayerName();
+		if(island.getHasParty())
+			name = island.getPartyLeader();
+		
+		int currentIndex = -1;
+		int newIndex = -1;
+		for(int i = 0; i < mTopList.size(); ++i)
+		{
+			Entry<String, Integer> entry = mTopList.get(i);
+			
+			if(entry.getKey().equals(name))
+				currentIndex = i;
+			
+			if(newIndex == -1 && entry.getValue() < island.getIslandLevel())
+				newIndex = i;
+			
+			if(currentIndex != -1 && newIndex != -1)
+				break;
+		}
+		
+		if(newIndex == -1)
+			newIndex = mTopList.size();
+		
+		Entry<String, Integer> entry = new AbstractMap.SimpleEntry<String, Integer>(name, island.getIslandLevel());
+
+		if(currentIndex != -1)
+		{
+			if(currentIndex < newIndex)
+			{
+				mTopList.add(newIndex, entry);
+				mTopList.remove(currentIndex);
+			}
+			else
+			{
+				mTopList.remove(currentIndex);
+				mTopList.add(newIndex, entry);
+			}
+		}
+		else
+			mTopList.add(newIndex, entry);
 	}
 }
