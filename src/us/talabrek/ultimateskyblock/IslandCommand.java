@@ -224,17 +224,112 @@ public class IslandCommand implements CommandExecutor {
 		return uSkyBlock.getInstance().getPlayerNoStore(player.getName());
 	}
 	
+	private boolean onConsoleCommand(CommandSender sender, Command command, String label, String[] split)
+	{
+		if(split.length == 1 && split[0].equalsIgnoreCase("top"))
+		{
+			if(!VaultHandler.hasPerm(sender, "usb.island.topten"))
+			{
+				sender.sendMessage(ChatColor.RED + "You do not have permission to do that");
+				return true;
+			}
+			
+			uSkyBlock.getInstance().displayTopTen(sender);
+			return true;
+		}
+		else if(split.length == 2 && (split[0].equalsIgnoreCase("level") || split[0].equalsIgnoreCase("info")) && Settings.island_useIslandLevel)
+		{
+			if (!VaultHandler.hasPerm(sender, "usb.island.info"))
+			{
+				sender.sendMessage(ChatColor.RED + "You do not have permission to do that");
+				return true;
+			}
+			
+			PlayerInfo info = null;
+			if (!VaultHandler.hasPerm(sender, "usb.island.info.others"))
+			{
+				sender.sendMessage(ChatColor.RED + "You do not have permission to do that");
+				return true;
+			}
+			
+			info = getPlayerInfo(split[1]);
+			if(info == null)
+			{
+				sender.sendMessage(ChatColor.RED + "Unknown player: " + split[1]);
+				return true;
+			}
+			if (info.getHasParty() || info.getHasIsland())
+				getIslandLevel(sender, info);
+			else
+				sender.sendMessage(ChatColor.RED + info.getPlayerName() + " does not have an island to rank.");
+			
+			return true;
+		}
+		else if (split.length == 1 && split[0].equals("help")) 
+		{
+			sender.sendMessage(ChatColor.GREEN + "[SkyBlock command usage]");
+			
+			if(sender instanceof Player)
+			{
+				sender.sendMessage(ChatColor.YELLOW + "/island :" + ChatColor.WHITE + " start your island, or teleport back to one you have.");
+				sender.sendMessage(ChatColor.YELLOW + "/island restart :" + ChatColor.WHITE + " delete your island and start a new one.");
+				sender.sendMessage(ChatColor.YELLOW + "/island sethome :" + ChatColor.WHITE + " set your island teleport point.");
+				if (Settings.island_useIslandLevel) 
+				{
+					sender.sendMessage(ChatColor.YELLOW + "/island level :" + ChatColor.WHITE + " check your island level");
+					sender.sendMessage(ChatColor.YELLOW + "/island level <player> :" + ChatColor.WHITE + " check another player's island level.");
+				}
+				if (VaultHandler.hasPerm(sender, "usb.party.create")) 
+				{
+					sender.sendMessage(ChatColor.YELLOW + "/island party :" + ChatColor.WHITE + " view your party information.");
+					sender.sendMessage(ChatColor.YELLOW + "/island invite <player>:" + ChatColor.WHITE + " invite a player to join your island.");
+					sender.sendMessage(ChatColor.YELLOW + "/island leave :" + ChatColor.WHITE + " leave another player's island.");
+				}
+				if (VaultHandler.hasPerm(sender, "usb.party.kick"))
+					sender.sendMessage(ChatColor.YELLOW + "/island kick <player>:" + ChatColor.WHITE + " remove a player from your island.");
+				if (VaultHandler.hasPerm(sender, "usb.party.join"))
+					sender.sendMessage(ChatColor.YELLOW + "/island [accept/reject]:" + ChatColor.WHITE + " accept/reject an invitation.");
+				if (VaultHandler.hasPerm(sender, "usb.party.makeleader"))
+					sender.sendMessage(ChatColor.YELLOW + "/island makeleader <player>:" + ChatColor.WHITE + " transfer the island to <player>.");
+				
+				if (Settings.island_allowIslandLock) 
+				{
+					if (!VaultHandler.hasPerm(sender, "usb.lock")) 
+					{
+						sender.sendMessage(ChatColor.DARK_GRAY + "/island lock :" + ChatColor.GRAY + " non-group members can't enter your island.");
+						sender.sendMessage(ChatColor.DARK_GRAY + "/island unlock :" + ChatColor.GRAY + " allow anyone to enter your island.");
+					} 
+					else 
+					{
+						sender.sendMessage(ChatColor.YELLOW + "/island lock :" + ChatColor.WHITE + " non-group members can't enter your island.");
+						sender.sendMessage(ChatColor.YELLOW + "/island unlock :" + ChatColor.WHITE + " allow anyone to enter your island.");
+					}
+
+				}
+			}
+			else
+				sender.sendMessage(ChatColor.YELLOW + "/island level <player> :" + ChatColor.WHITE + " check another player's island level.");
+
+			sender.sendMessage(ChatColor.YELLOW + "/island top :" + ChatColor.WHITE + " see the top ranked islands.");
+
+			return true;
+		}
+		return false;
+	}
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] split) 
 	{
-		if (!(sender instanceof Player)) 
-			return false;
-
 		if (!VaultHandler.hasPerm(sender, "usb.island.create")) 
 		{
 			sender.sendMessage(ChatColor.RED + "You don't have permission to use that command!");
 			return true;
 		}
+		
+		if(onConsoleCommand(sender, command, label, split))
+			return true;
+		
+		if(!(sender instanceof Player))
+			return false;
 		
 		Player player = (Player) sender;
 		
@@ -281,50 +376,30 @@ public class IslandCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.RED + "You do not have permission to do that");
 					return true;
 				}
-				if(split.length > 2)
+				if(split.length != 1)
 				{
 					sender.sendMessage(ChatColor.RED + "Usage: /" + label + " " + split[0] + " " + ChatColor.GREEN + "[player]");
 					return true;
 				}
 				
-				PlayerInfo info = null;
-				if(split.length == 2)
+				PlayerInfo info = uSkyBlock.getInstance().getPlayer(sender.getName());
+				
+				if(info == null)
 				{
-					if (!VaultHandler.hasPerm(sender, "usb.island.info.others"))
-					{
-						sender.sendMessage(ChatColor.RED + "You do not have permission to do that");
-						return true;
-					}
-					
-					info = getPlayerInfo(split[1]);
-					if(info == null)
-					{
-						sender.sendMessage(ChatColor.RED + "Unknown player: " + split[1]);
-						return true;
-					}
+					sender.sendMessage(ChatColor.RED + "There was an error reading your player data!");
+					return true;
 				}
+				
+				if (info.getHasParty() || info.getHasIsland())
+					getIslandLevel(sender, info);
+				else if(split.length == 2)
+					player.sendMessage(ChatColor.RED + info.getPlayerName() + " does not have an island to rank.");
 				else
-				{
-					info = uSkyBlock.getInstance().getPlayer(sender.getName());
-					
-					if(info == null)
-					{
-						sender.sendMessage(ChatColor.RED + "There was an error reading your player data!");
-						return true;
-					}
-					
-					if (info.getHasParty() || info.getHasIsland())
-						getIslandLevel(sender, info);
-					else if(split.length == 2)
-						player.sendMessage(ChatColor.RED + info.getPlayerName() + " does not have an island to rank.");
-					else
-						player.sendMessage(ChatColor.RED + "You do not have an island to rank.");
-				}
+					player.sendMessage(ChatColor.RED + "You do not have an island to rank.");
 				
 				return true;
 			}
 		}
-		
 		
 		PlayerInfo pi = uSkyBlock.getInstance().getPlayer(sender.getName());
 		if (pi == null) 
@@ -390,48 +465,7 @@ public class IslandCommand implements CommandExecutor {
 					}
 					return true;
 				}
-				if (split[0].equals("help")) {
-					player.sendMessage(ChatColor.GREEN + "[SkyBlock command usage]");
-
-					player.sendMessage(ChatColor.YELLOW + "/island :" + ChatColor.WHITE + " start your island, or teleport back to one you have.");
-					player.sendMessage(ChatColor.YELLOW + "/island restart :" + ChatColor.WHITE + " delete your island and start a new one.");
-					player.sendMessage(ChatColor.YELLOW + "/island sethome :" + ChatColor.WHITE + " set your island teleport point.");
-					if (Settings.island_useIslandLevel) {
-						player.sendMessage(ChatColor.YELLOW + "/island level :" + ChatColor.WHITE + " check your island level");
-						player.sendMessage(ChatColor.YELLOW + "/island level <player> :" + ChatColor.WHITE + " check another player's island level.");
-					}
-					if (VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
-						player.sendMessage(ChatColor.YELLOW + "/island party :" + ChatColor.WHITE + " view your party information.");
-						player.sendMessage(ChatColor.YELLOW + "/island invite <player>:" + ChatColor.WHITE + " invite a player to join your island.");
-						player.sendMessage(ChatColor.YELLOW + "/island leave :" + ChatColor.WHITE + " leave another player's island.");
-					}
-					if (VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
-						player.sendMessage(ChatColor.YELLOW + "/island kick <player>:" + ChatColor.WHITE + " remove a player from your island.");
-					}
-					if (VaultHandler.checkPerk(player.getName(), "usb.party.join", player.getWorld())) {
-						player.sendMessage(ChatColor.YELLOW + "/island [accept/reject]:" + ChatColor.WHITE + " accept/reject an invitation.");
-					}
-					if (VaultHandler.checkPerk(player.getName(), "usb.party.makeleader", player.getWorld())) {
-						player.sendMessage(ChatColor.YELLOW + "/island makeleader <player>:" + ChatColor.WHITE + " transfer the island to <player>.");
-					}
-					player.sendMessage(ChatColor.YELLOW + "/island top :" + ChatColor.WHITE + " see the top ranked islands.");
-					if (Settings.island_allowIslandLock) {
-						if (!VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
-							player.sendMessage(ChatColor.DARK_GRAY + "/island lock :" + ChatColor.GRAY + " non-group members can't enter your island.");
-							player.sendMessage(ChatColor.DARK_GRAY + "/island unlock :" + ChatColor.GRAY + " allow anyone to enter your island.");
-						} else {
-							player.sendMessage(ChatColor.YELLOW + "/island lock :" + ChatColor.WHITE + " non-group members can't enter your island.");
-							player.sendMessage(ChatColor.YELLOW + "/island unlock :" + ChatColor.WHITE + " allow anyone to enter your island.");
-						}
-
-					}
-
-					return true;
-				}
-				if (split[0].equals("top") && VaultHandler.checkPerk(player.getName(), "usb.island.topten", player.getWorld())) {
-					uSkyBlock.getInstance().displayTopTen(player);
-					return true;
-				}
+				
 				if (split[0].equals("invite") && VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
 					player.sendMessage(ChatColor.YELLOW + "Use" + ChatColor.WHITE + " /island invite <playername>" + ChatColor.YELLOW + " to invite a player to your island.");
 					if (uSkyBlock.getInstance().hasParty(player.getName())) {

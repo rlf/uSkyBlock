@@ -100,8 +100,10 @@ public class uSkyBlock extends JavaPlugin {
 	
 	private ArrayList<Entry<String, Integer>> mTopList;
 
-	public void addOrphan(final Location island) {
+	public void addOrphan(final Location island) 
+	{
 		orphaned.push(island);
+		saveOrphans();
 	}
 
 	public void addToRemoveList(final String string) {
@@ -297,13 +299,13 @@ public class uSkyBlock extends JavaPlugin {
 	public synchronized boolean displayTopTen(CommandSender sender) 
 	{
 		int i = 1;
-		int playerrank = 0;
 		if(mTopList == null)
 		{
 			sender.sendMessage(ChatColor.RED + "The top list has not generated yet.");
 			return false;
 		}
-		sender.sendMessage(ChatColor.YELLOW + "Displaying the top " + mTopList.size() + " islands:");
+		int playerrank = mTopList.size();
+		sender.sendMessage(ChatColor.YELLOW + "Displaying the top 10 islands:");
 		
 		String leader = sender.getName();
 		
@@ -339,7 +341,7 @@ public class uSkyBlock extends JavaPlugin {
 		}
 		
 		if(sender instanceof Player)
-			sender.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank);
+			sender.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank + " of " + mTopList.size());
 		return true;
 	}
 

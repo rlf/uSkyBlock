@@ -323,7 +323,6 @@ public class DevCommand implements CommandExecutor {
 					return true;
 				}
 				
-				sender.sendMessage(ChatColor.YELLOW + "Protecting all unprotected player Islands.");
 				if (Settings.island_protectWithWorldGuard) 
 				{
 					sender.sendMessage(ChatColor.YELLOW + "Protecting all unprotected player Islands.");
