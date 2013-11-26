@@ -33,22 +33,26 @@ public class PlayerJoin implements Listener {
 		}
 	}
 
+	@SuppressWarnings( "deprecation" )
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerInteract(final PlayerInteractEvent event) {
-		if (Settings.extras_obsidianToLava && uSkyBlock.getInstance().playerIsOnIsland(event.getPlayer())) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getPlayer().getItemInHand().getType() == Material.BUCKET
-					&& event.getClickedBlock().getType() == Material.OBSIDIAN) {
-				if (!uSkyBlock.getInstance().testForObsidian(event.getClickedBlock())) {
-					event.getPlayer().sendMessage(ChatColor.YELLOW + "Changing your obsidian back into lava. Be careful!");
-					event.getClickedBlock().setType(Material.AIR);
-					event.getPlayer().getInventory().removeItem(new ItemStack[] { new ItemStack(Material.BUCKET, 1) });
-					event.getPlayer().getInventory().addItem(new ItemStack[] { new ItemStack(Material.BUCKET, 1) });
-				}
+	public void onPlayerInteract(final PlayerInteractEvent event) 
+	{
+		if (Settings.extras_obsidianToLava && uSkyBlock.getInstance().playerIsOnIsland(event.getPlayer())) 
+		{
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) 
+					&& event.getPlayer().getItemInHand().getType() == Material.BUCKET
+					&& event.getClickedBlock().getType() == Material.OBSIDIAN
+					&& event.getClickedBlock().getRelative(event.getBlockFace()).getType() == Material.AIR) 
+			{
+				event.getPlayer().sendMessage(ChatColor.YELLOW + "Changing your obsidian back into lava. Be careful!");
+				event.getClickedBlock().setType(Material.AIR);
+				event.getPlayer().getInventory().removeItem(new ItemStack[] { new ItemStack(Material.BUCKET, 1) });
+				event.getPlayer().getInventory().addItem(new ItemStack[] { new ItemStack(Material.LAVA_BUCKET, 1) });
+				event.getPlayer().updateInventory();
 			}
 		}
 	}
 	
-
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerJoin(final PlayerJoinEvent event) 
 	{
