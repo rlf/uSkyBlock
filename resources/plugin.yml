@@ -40,6 +40,11 @@ permissions:
             description: Let the player use the /challenges command
           usb.island.warp:
             description: Let the player use /island warp to warp to an open island.
+          usb.island.warp.override:
+            description: Let the player use /island warpo to warp to an island regardless of warp settings.
+            default: op
+            children:
+              usb.island.warp: true
       usb.extra.*:
         children:
           usb.extra.hunger:

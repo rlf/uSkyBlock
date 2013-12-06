@@ -47,6 +47,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.async.IslandBuilder;
 import us.talabrek.ultimateskyblock.async.IslandRemover;
 import us.talabrek.ultimateskyblock.async.TopGenerator;
+import us.talabrek.ultimateskyblock.command.island.*;
 
 public class uSkyBlock extends JavaPlugin {
 	private static uSkyBlock instance;
@@ -57,9 +58,13 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public static World getSkyBlockWorld() {
-		if (skyBlockWorld == null) {
-			skyBlockWorld = WorldCreator.name(Settings.general_worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generator(new SkyBlockChunkGenerator()).createWorld();
-			WorldCreator.name("uSkyBlock").type(WorldType.FLAT).environment(World.Environment.NORMAL).generator(new SkyBlockChunkGenerator()).createWorld();
+		if (skyBlockWorld == null)
+		{
+			skyBlockWorld = WorldCreator.name(Settings.general_worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generateStructures(false).generator(new SkyBlockChunkGenerator()).createWorld();
+			if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core"))
+		    {
+				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
+		    }
 		}
 
 		return skyBlockWorld;
@@ -832,30 +837,6 @@ public class uSkyBlock extends JavaPlugin {
 		return true;
 	}
 
-	public boolean homeTeleport(Player player, OfflinePlayer toPlayer) 
-	{
-		PlayerInfo pi = getPlayer(toPlayer.getName());
-		
-		if(pi == null)
-			return false;
-		
-		Location target = pi.getTeleportLocation();
-		
-		if(target == null)
-			return false;
-		
-		if(pi.getHomeLocation() == null)
-			pi.setHomeLocation(target);
-		
-		if(Misc.safeTeleport(player, target))
-		{
-			getInstance().removeCreatures(target);
-			return true;
-		}
-		
-		return false;
-	}
-
 	public boolean islandAtLocation(final Location loc) {
 		if (loc == null) {
 			return true;
@@ -1104,13 +1085,13 @@ public class uSkyBlock extends JavaPlugin {
 		filePlugin = new File(getDataFolder(), "config.yml");
 		loadPluginConfig();
 		registerEvents();
-		directoryPlayers = new File(getDataFolder() + File.separator + "players");
+		directoryPlayers = new File(getDataFolder(), "players");
 		if (!directoryPlayers.exists())
 			directoryPlayers.mkdir();
 		
 		loadPlayerFiles();
 
-		directorySchematics = new File(getDataFolder() + File.separator + "schematics");
+		directorySchematics = new File(getDataFolder(), "schematics");
 		if (!directorySchematics.exists()) {
 			directorySchematics.mkdir();
 		}
@@ -1138,41 +1119,77 @@ public class uSkyBlock extends JavaPlugin {
 			e.printStackTrace();
 		}
 
-		getCommand("island").setExecutor(new IslandCommand());
+		CommandDispatcher islandCommand = new CommandDispatcher("island", "Allows you to play skyblock");
+		islandCommand.setDefault(new IslandDefaultCommand());
+		islandCommand.registerCommand(new IslandAcceptCommand());
+		islandCommand.registerCommand(new IslandRejectCommand());
+		
+		islandCommand.registerCommand(new IslandInviteCommand());
+		islandCommand.registerCommand(new IslandBanCommand());
+		islandCommand.registerCommand(new IslandKickCommand());
+		islandCommand.registerCommand(new IslandLeaveCommand());
+		islandCommand.registerCommand(new IslandMakeLeaderCommand());
+		islandCommand.registerCommand(new IslandPartyCommand());
+		
+		islandCommand.registerCommand(new IslandLevelCommand());
+		islandCommand.registerCommand(new IslandRestartCommand());
+		islandCommand.registerCommand(new IslandSetHomeCommand());
+		islandCommand.registerCommand(new IslandSetWarpCommand());
+		islandCommand.registerCommand(new IslandToggleWarpCommand());
+		islandCommand.registerCommand(new IslandTopCommand());
+		islandCommand.registerCommand(new IslandWarpCommand());
+		
+		if(Settings.island_allowIslandLock)
+		{
+			islandCommand.registerCommand(new IslandLockCommand());
+			islandCommand.registerCommand(new IslandUnlockCommand());
+		}
+		
+		getCommand("island").setExecutor(islandCommand);
+		getCommand("island").setTabCompleter(islandCommand);
 
 		ChallengesCommand challengesCommand = new ChallengesCommand();
 		getCommand("challenges").setExecutor(challengesCommand);
 		getCommand("challenges").setTabCompleter(challengesCommand);
 
 		getCommand("dev").setExecutor(new DevCommand());
-
+		
 		if (Settings.island_useTopTen)
 			Bukkit.getScheduler().runTaskAsynchronously(this, new TopGenerator());
 
 		populateChallengeList();
 		log.info(pluginFile.getName() + " v." + pluginFile.getVersion() + " enabled.");
-		getInstance().getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
-			public void run() {
-				if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vault")) {
-					System.out.println("uSkyblock " + "[uSkyBlock] Using vault for permissions");
+		getInstance().getServer().getScheduler().runTask(getInstance(), new Runnable() 
+		{
+			public void run() 
+			{
+				// Force world load
+				getSkyBlockWorld();
+				
+				if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vault")) 
+				{
+					log.info("Using vault for permissions");
 					VaultHandler.setupPermissions();
-					try {
-						lastIsland = new Location(uSkyBlock.getSkyBlockWorld(), uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"), Settings.island_height, uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
-					} catch (final Exception e) {
-						lastIsland = new Location(uSkyBlock.getSkyBlockWorld(), 0.0D, Settings.island_height, 0.0D);
-					}
-					if (lastIsland == null) {
-						lastIsland = new Location(uSkyBlock.getSkyBlockWorld(), 0.0D, Settings.island_height, 0.0D);
-					}
+				}
+				try 
+				{
+					lastIsland = new Location(uSkyBlock.getSkyBlockWorld(), uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"), Settings.island_height, uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
+				} 
+				catch (final Exception e) 
+				{
+					lastIsland = new Location(uSkyBlock.getSkyBlockWorld(), 0.0D, Settings.island_height, 0.0D);
+				}
+				if (lastIsland == null)
+					lastIsland = new Location(uSkyBlock.getSkyBlockWorld(), 0.0D, Settings.island_height, 0.0D);
 
-					if (Settings.island_protectWithWorldGuard && !Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-						final PluginManager manager = uSkyBlock.getInstance().getServer().getPluginManager();
-						System.out.println("uSkyblock " + "[uSkyBlock] WorldGuard not loaded! Using built in protection.");
-						manager.registerEvents(new ProtectionEvents(), uSkyBlock.getInstance());
-					}
+				if (Settings.island_protectWithWorldGuard && !Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) 
+				{
+					final PluginManager manager = uSkyBlock.getInstance().getServer().getPluginManager();
+					log.info("WorldGuard not loaded! Using built in protection.");
+					manager.registerEvents(new ProtectionEvents(), uSkyBlock.getInstance());
 				}
 			}
-		}, 0L);
+		});
 	}
 
 	public boolean onInfoCooldown(final Player player) {

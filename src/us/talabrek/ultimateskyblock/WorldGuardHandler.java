@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -153,26 +152,25 @@ public class WorldGuardHandler {
 		}
 	}
 
-	public static void transferRegion(final String owner, final String player, final CommandSender sender) {
-		try {
+	public static void transferRegion(String owner, String player) {
+		try 
+		{
+			RegionManager manager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
+			
+			ProtectedRegion original = manager.getRegionExact(owner + "Island");
+			
 			ProtectedRegion region2 = null;
-			region2 = new ProtectedCuboidRegion(player + "Island", getWorldGuard().getRegionManager(Bukkit.getWorld("skyworld"))
-					.getRegion(owner + "Island").getMinimumPoint(), getWorldGuard()
-					.getRegionManager(Bukkit.getWorld(Settings.general_worldName)).getRegion(owner + "Island").getMaximumPoint());
-			region2.setOwners(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(owner + "Island").getOwners());
-			region2.setParent(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion("__Global__"));
-			region2.setFlag(
-					DefaultFlag.GREET_MESSAGE,
-					DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "You are entering a protected island area. (" + player
-							+ ")"));
-			region2.setFlag(
-					DefaultFlag.FAREWELL_MESSAGE,
-					DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "You are leaving a protected island area. (" + player
-							+ ")"));
-			region2.setFlag(DefaultFlag.PVP, DefaultFlag.PVP.parseInput(getWorldGuard(), sender, "deny"));
-			getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).removeRegion(owner + "Island");
-			getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).addRegion(region2);
-		} catch (final Exception e) {
+			region2 = new ProtectedCuboidRegion(player + "Island", original.getMinimumPoint(), original.getMaximumPoint());
+			region2.setOwners(original.getOwners());
+			region2.setParent(manager.getRegion("__Global__"));
+			region2.setFlag( DefaultFlag.GREET_MESSAGE, "You are entering a protected island area. (" + player + ")" );
+			region2.setFlag( DefaultFlag.FAREWELL_MESSAGE, "You are leaving a protected island area. (" + player + ")");
+			region2.setFlag( DefaultFlag.PVP, State.DENY);
+			manager.removeRegion(original.getId());
+			manager.addRegion(region2);
+		} 
+		catch (final Exception e) 
+		{
 			System.out.println("Error transferring WorldGuard Protected Region from (" + owner + ") to (" + player + ")");
 		}
 	}

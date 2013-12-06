@@ -3,8 +3,10 @@ package us.talabrek.ultimateskyblock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -18,26 +20,50 @@ public class Misc
 		double closestDist = Double.MAX_VALUE;
 		Location closest = null;
 		
-		for(int x = loc.getBlockX() - horRange; x < loc.getBlockX() + horRange; ++x)
+		for(int y = 0; y < loc.getWorld().getMaxHeight(); ++y)
 		{
-			for(int z = loc.getBlockZ() - horRange; z < loc.getBlockZ() + horRange; ++z)
+			for(int x = loc.getBlockX() - horRange; x < loc.getBlockX() + horRange; ++x)
 			{
-				for(int y = 0; y < loc.getWorld().getMaxHeight(); ++y)
+				for(int z = loc.getBlockZ() - horRange; z < loc.getBlockZ() + horRange; ++z)
 				{
-					Location l = new Location(loc.getWorld(), x, y, z);
-					double dist = loc.distanceSquared(l);
-					
-					if(dist < closestDist && isSafeLocation(l))
+					for(int i = 0; i < 2; ++i)
 					{
-						closest = l;
-						closestDist = dist;
+						int yy = loc.getBlockY();
+						
+						if(i == 0)
+						{
+							yy -= y;
+							if(yy < 0)
+								continue;
+						}
+						else
+						{
+							yy += y;
+							if(yy >= loc.getWorld().getMaxHeight())
+								continue;
+						}
+	
+						Location l = new Location(loc.getWorld(), x, yy, z);
+						double dist = loc.distanceSquared(l);
+						
+						if(dist < closestDist && isSafeLocation(l))
+						{
+							closest = l;
+							closestDist = dist;
+						}
 					}
 				}
 			}
+			
+			if(y*y > closestDist)
+				break;
 		}
 		
 		if(closest == null)
 			return false;
+		
+		closest.setPitch(loc.getPitch());
+		closest.setYaw(loc.getYaw());
 		
 		return player.teleport(closest.add(0.5, 0, 0.5));
 	}
@@ -242,5 +268,18 @@ public class Misc
 			seconds = 0;
 		
 		return result;
+	}
+	
+	public static PlayerInfo getPlayerInfo(String name)
+	{
+		OfflinePlayer player = Bukkit.getOfflinePlayer(name);
+		if(!player.hasPlayedBefore())
+		{
+			player = Bukkit.getPlayer(name);
+			if(player == null)
+				return null;
+		}
+		
+		return uSkyBlock.getInstance().getPlayerNoStore(player.getName());
 	}
 }

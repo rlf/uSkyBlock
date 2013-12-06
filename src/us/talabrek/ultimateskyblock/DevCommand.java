@@ -118,33 +118,28 @@ public class DevCommand implements CommandExecutor {
 				return true;
 			}
 			
-			if(uSkyBlock.getInstance().homeTeleport((Player)sender, player))
-				sender.sendMessage(ChatColor.GREEN + "Teleporting to " + player.getName() + "'s island.");
-			else
+			PlayerInfo info = uSkyBlock.getInstance().getPlayer(player.getName());
+			if(info != null)
 			{
-				PlayerInfo info = uSkyBlock.getInstance().getPlayer(player.getName());
-				if(info != null)
+				final Location target = info.getTeleportLocation();
+				if(target != null)
 				{
-					final Location target = info.getTeleportLocation();
-					if(target != null)
+					sender.sendMessage(ChatColor.GOLD + "WARNING: No safe location found. Unsafe teleport in 5 seconds.");
+					final Player sendingPlayer = (Player)sender;
+					Bukkit.getScheduler().scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable()
 					{
-						sender.sendMessage(ChatColor.GOLD + "WARNING: No safe location found. Unsafe teleport in 5 seconds.");
-						final Player sendingPlayer = (Player)sender;
-						Bukkit.getScheduler().scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable()
+						@Override
+						public void run()
 						{
-							@Override
-							public void run()
-							{
-								if(!sendingPlayer.teleport(target))
-									sendingPlayer.sendMessage(ChatColor.RED + "Error: Teleport was cancelled.");
-							}
-						}, 100L);
-						
-						return true;
-					}
+							if(!sendingPlayer.teleport(target))
+								sendingPlayer.sendMessage(ChatColor.RED + "Error: Teleport was cancelled.");
+						}
+					}, 100L);
+					
+					return true;
 				}
-				sender.sendMessage(ChatColor.RED + "Error: That player does not have an island!");
 			}
+			sender.sendMessage(ChatColor.RED + "Error: That player does not have an island!");
 		} 
 		else if (split[0].equals("remove")) 
 		{
