@@ -4,6 +4,9 @@ version: ${pom.version}
 description: Ultimate SkyBlock.
 author: Talabrek (based on code by Qgel and others)
 load: STARTUP
+
+depend: [Vault]
+
 commands:
     island:
         description: Commands to use your island

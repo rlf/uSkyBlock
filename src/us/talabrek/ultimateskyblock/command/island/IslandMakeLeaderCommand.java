@@ -79,6 +79,12 @@ public class IslandMakeLeaderCommand implements ICommand
 			sender.sendMessage(ChatColor.RED + "Unknown player " + args[0]);
 			return true;
 		}
+
+		if(otherPlayer.equals(sender))
+		{
+			sender.sendMessage(ChatColor.RED + "You cannot transfer to yourself.");
+			return true;
+		}
 		
 		PlayerInfo otherInfo = uSkyBlock.getInstance().getOrCreatePlayer(otherPlayer.getName());
 		

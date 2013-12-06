@@ -145,7 +145,10 @@ public class IslandPartyCommand implements ICommand
                 sender.sendMessage(ChatColor.WHITE + "/island [accept/reject]" + ChatColor.YELLOW + " to accept or reject the transfer.");
         		break;
         	}
-            
+        }
+        else
+        {
+        	sender.sendMessage(ChatColor.RED + "Nothing to display.");
         }
         
 		return true;

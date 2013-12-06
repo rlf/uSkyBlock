@@ -60,34 +60,39 @@ public class CommandDispatcher implements CommandExecutor, TabCompleter
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) 
 	{
-		if(args.length == 0)
+		if(args.length == 0 && mDefaultCommand == null)
 		{
 			displayUsage(sender, label, null);
 			return true;
 		}
 		
-		String subCommand = args[0].toLowerCase();
-		String[] subArgs = (args.length > 1 ? Arrays.copyOfRange(args, 1, args.length) : new String[0]);
-		
 		ICommand com = null;
-		if(mCommands.containsKey(subCommand))
+		String subCommand = "";
+		
+		String[] subArgs = args;
+		
+		if(args.length > 0)
 		{
-			com = mCommands.get(subCommand);
-		}
-		else
-		{
-			// Check aliases
-AliasCheck:	for(Entry<String, ICommand> ent : mCommands.entrySet())
+			subCommand = args[0].toLowerCase();
+			subArgs = (args.length > 1 ? Arrays.copyOfRange(args, 1, args.length) : new String[0]);
+			
+			if(mCommands.containsKey(subCommand))
+				com = mCommands.get(subCommand);
+			else
 			{
-				if(ent.getValue().getAliases() != null)
+				// Check aliases
+	AliasCheck:	for(Entry<String, ICommand> ent : mCommands.entrySet())
 				{
-					String[] aliases = ent.getValue().getAliases();
-					for(String alias : aliases)
+					if(ent.getValue().getAliases() != null)
 					{
-						if(subCommand.equalsIgnoreCase(alias))
+						String[] aliases = ent.getValue().getAliases();
+						for(String alias : aliases)
 						{
-							com = ent.getValue();
-							break AliasCheck;
+							if(subCommand.equalsIgnoreCase(alias))
+							{
+								com = ent.getValue();
+								break AliasCheck;
+							}
 						}
 					}
 				}

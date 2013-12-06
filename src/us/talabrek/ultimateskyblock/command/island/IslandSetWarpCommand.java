@@ -77,6 +77,8 @@ public class IslandSetWarpCommand implements ICommand
 		info.setWarpLocation(player.getLocation());
 		info.warpOn();
 		
+		sender.sendMessage(ChatColor.GREEN + "Your warp has been set at your location. Warping to your island is also enabled.");
+		
 		return true;
 	}
 
