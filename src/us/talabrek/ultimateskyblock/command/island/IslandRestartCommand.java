@@ -1,12 +1,9 @@
 package us.talabrek.ultimateskyblock.command.island;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.WeakHashMap;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
 import us.talabrek.ultimateskyblock.ICommand;
 import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
@@ -14,7 +11,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandRestartCommand implements ICommand
 {
-	private WeakHashMap<Player, Long> mLastUsedCommand = new WeakHashMap<Player, Long>();
+	private HashMap<String, Long> mCooldownEnd = new HashMap<String, Long>();
+	private HashMap<String, Integer> mRestartCount = new HashMap<String, Integer>();
 	
 	@Override
 	public String getName()
@@ -75,19 +73,26 @@ public class IslandRestartCommand implements ICommand
 			return true;
 		}
 		
-		long lastUsed = 0;
-		if(mLastUsedCommand.containsKey(sender))
-			lastUsed = mLastUsedCommand.get(sender);
-		
-		if(Settings.general_cooldownRestart == 0 || (System.currentTimeMillis() - lastUsed) > Settings.general_cooldownRestart * 1000)
+		long endTime = 0;
+		int restartCount = 0;
+		if(mCooldownEnd.containsKey(sender.getName()))
 		{
-			mLastUsedCommand.put((Player)sender, System.currentTimeMillis());
+			endTime = mCooldownEnd.get(sender.getName());
+			restartCount = mRestartCount.get(sender.getName());
+		}
+		
+		if(Settings.general_cooldownRestart == 0 || endTime < System.currentTimeMillis())
+		{
+			++restartCount;
+			endTime = System.currentTimeMillis() + (Settings.general_cooldownRestart * 1000) + (long)((Settings.general_cooldownRestart * 1000) * (restartCount - 1) * (restartCount - 1) * 0.4f);
+			mCooldownEnd.put(sender.getName(), endTime);
+			mRestartCount.put(sender.getName(), restartCount);
 			sender.sendMessage(ChatColor.GREEN + "Creating a new island for you.");
 			uSkyBlock.getInstance().restartIsland(info);
 		}
 		else
 		{
-			long remaining = ((Settings.general_cooldownRestart * 1000) - (System.currentTimeMillis() - lastUsed)) / 1000;
+			long remaining = (endTime - System.currentTimeMillis()) / 1000;
 			sender.sendMessage(ChatColor.RED + "You must wait " + remaining + " seconds before you can restart again.");
 		}
 		
