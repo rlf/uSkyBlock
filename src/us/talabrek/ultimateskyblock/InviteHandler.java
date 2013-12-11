@@ -43,6 +43,7 @@ public class InviteHandler
 		
 		mInvites.put(player, new Invite(islandOwner, Invite.Type.JoinIsland));
 		
+		islandOwner.sendMessage("You have invited " + player.getName() + " to join your island.");
 		player.sendMessage(islandOwner.getName() + " has invited you to join their island!");
         player.sendMessage("Use " + ChatColor.YELLOW + "/island [accept|reject]" + ChatColor.WHITE + " to accept or reject the invite.");
         //player.sendMessage("This invite will expire in 20 seconds.");
@@ -115,6 +116,8 @@ public class InviteHandler
 		
 		player.sendMessage(ChatColor.GREEN + "You have joined " + invite.from.getName() + "'s island.");
 		invite.from.sendMessage(ChatColor.GREEN + player.getName() + " has accepted your invitation to join your island.");
+		
+		removeInvite(player);
 		
 		if(!Misc.safeTeleport(player, inviterIsland.getTeleportLocation()))
 		{
@@ -189,6 +192,8 @@ public class InviteHandler
 		
 		player.sendMessage(ChatColor.GREEN + "You now own " + invite.from.getName() + "'s island.");
 		invite.from.sendMessage(ChatColor.GREEN + player.getName() + " has accepted your transfer request.");
+		
+		removeInvite(player);
 	}
 	
 	public static void acceptInvite(final Player player)
@@ -197,10 +202,10 @@ public class InviteHandler
 		
 		if(invite.type == Type.JoinIsland)
 			acceptInviteJoin(invite, player);
-		else
+		else if(invite.type == Type.Transfer)
 			acceptInviteTransfer(invite, player);
-
-		removeInvite(player);
+		else
+			removeInvite(player);
 	}
 	
 	public static void rejectInvite(Player player)

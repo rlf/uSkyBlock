@@ -143,7 +143,8 @@ public class IslandKickCommand implements ICommand
 		
 		if(all)
 		{
-			for(String member : info.getMembers())
+			ArrayList<String> members = new ArrayList<String>(info.getMembers());
+			for(String member : members)
 			{
 				if(member.equals(sender.getName()))
 					continue;
