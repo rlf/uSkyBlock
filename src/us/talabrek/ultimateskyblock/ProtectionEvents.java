@@ -116,7 +116,7 @@ public class ProtectionEvents implements Listener {
 		if (event.getPlayer().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
 			if (!uSkyBlock.getInstance().playerIsOnIsland(event.getPlayer()) && !uSkyBlock.getInstance().playerIsInSpawn(event.getPlayer()) && !VaultHandler.checkPerk(event.getPlayer().getName(), "usb.mod.bypassprotection", event.getPlayer().getWorld()) && !event.getPlayer().isOp()) {
 
-				if (!event.getItem().getType().isEdible())
+				if (event.getClickedBlock() != null && !event.getClickedBlock().getType().isEdible())
 					event.setCancelled(true);
 			}
 		}
