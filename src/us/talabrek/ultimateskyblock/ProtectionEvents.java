@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +19,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.bukkit.potion.Potion;
 
 public class ProtectionEvents implements Listener {
 	private Player attacker = null;
@@ -118,7 +120,8 @@ public class ProtectionEvents implements Listener {
 			if (!uSkyBlock.getInstance().playerIsOnIsland(event.getPlayer()) && !uSkyBlock.getInstance().playerIsInSpawn(event.getPlayer()) && !VaultHandler.checkPerk(event.getPlayer().getName(), "usb.mod.bypassprotection", event.getPlayer().getWorld()) && !event.getPlayer().isOp()) {
 
 				if (event.getClickedBlock() != null && !event.getClickedBlock().getType().isEdible()) {
-					// System.out.println(event.getClickedBlock() + " " + event.getClickedBlock().getType().isEdible());
+					// System.out.println(event.getClickedBlock() + " " +
+					// event.getClickedBlock().getType().isEdible());
 					event.setCancelled(true);
 				}
 			}
@@ -157,10 +160,42 @@ public class ProtectionEvents implements Listener {
 		if (player.hasPermission("usb.mod.bypassprotection"))
 			return;
 
-		if (event.getEntered().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
-			if (!uSkyBlock.getInstance().locationIsOnIsland(player, event.getVehicle().getLocation())) {
-				player.sendMessage(ChatColor.RED + "You can only do that on your island!");
+		if (!event.getEntered().getWorld().getName().equalsIgnoreCase(Settings.general_worldName))
+			return;
+
+		if (!uSkyBlock.getInstance().locationIsOnIsland(player, event.getVehicle().getLocation())) {
+			player.sendMessage(ChatColor.RED + "You can only do that on your island!");
+			event.setCancelled(true);
+		}
+	}
+
+	@EventHandler
+	public void onPotionThrow(PlayerInteractEvent event) {
+		if (event.getPlayer().hasPermission("usb.mod.bypassprotection"))
+			return;
+
+		if (!event.getPlayer().getWorld().getName().equalsIgnoreCase(Settings.general_worldName))
+			return;
+
+		if (uSkyBlock.getInstance().locationIsOnIsland(event.getPlayer(), event.getPlayer().getLocation()))
+			return;
+
+		if (event.getMaterial() == Material.POTION && event.getItem().getDurability() != 0) {
+
+			Potion potion = null;
+
+			try {
+				potion = Potion.fromItemStack(event.getItem());
+			} catch (IllegalArgumentException e) {
+				return;
+			}
+
+			if (potion == null)
+				return;
+
+			if (potion.isSplash()) {
 				event.setCancelled(true);
+				event.getPlayer().sendMessage(ChatColor.RED + "Splash potions are disabled when not on your island!");
 			}
 		}
 	}
