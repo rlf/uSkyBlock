@@ -390,7 +390,6 @@ public class PlayerInfo implements Serializable {
 	public void recalculateLevel(final Runnable callback) {
 		uSkyBlock.getInstance().getServer().getScheduler().runTask(uSkyBlock.getInstance(), new Runnable() {
 			public void run() {
-				System.out.print("Calculating island level in async thread");
 
 				try {
 					Location loc;

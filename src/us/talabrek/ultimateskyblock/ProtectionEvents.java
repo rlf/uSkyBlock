@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
 
 public class ProtectionEvents implements Listener {
 	private Player attacker = null;
@@ -140,6 +141,24 @@ public class ProtectionEvents implements Listener {
 				if (!uSkyBlock.getInstance().locationIsOnIsland(breaker, event.getVehicle().getLocation()) && !VaultHandler.checkPerk(breaker.getName(), "usb.mod.bypassprotection", breaker.getWorld()) && !breaker.isOp()) {
 					event.setCancelled(true);
 				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void onPlayerEnterVehicle(VehicleEnterEvent event) {
+		if (!(event.getEntered() instanceof Player))
+			return;
+
+		Player player = (Player) event.getEntered();
+
+		if (player.hasPermission("usb.mod.bypassprotection"))
+			return;
+
+		if (event.getEntered().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
+			if (!uSkyBlock.getInstance().locationIsOnIsland(player, event.getVehicle().getLocation())) {
+				player.sendMessage(ChatColor.RED + "You can only do that on your island!");
+				event.setCancelled(true);
 			}
 		}
 	}
