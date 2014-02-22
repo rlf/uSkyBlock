@@ -29,7 +29,7 @@ public class ProtectionEvents implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onHorseLead(final PlayerInteractEntityEvent event) {
-		if (event.getRightClicked().getType() == EntityType.HORSE) {
+		if (event.getRightClicked().getType() == EntityType.HORSE || event.getRightClicked().getType() == EntityType.ITEM_FRAME) {
 			final Player player = event.getPlayer();
 			if (player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
 				if (!uSkyBlock.getInstance().locationIsOnIsland(player, event.getRightClicked().getLocation()) && !uSkyBlock.getInstance().playerIsInSpawn(event.getPlayer()) && !VaultHandler.checkPerk(player.getName(), "usb.mod.bypassprotection", player.getWorld()) && !player.isOp()) {
@@ -117,8 +117,10 @@ public class ProtectionEvents implements Listener {
 		if (event.getPlayer().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
 			if (!uSkyBlock.getInstance().playerIsOnIsland(event.getPlayer()) && !uSkyBlock.getInstance().playerIsInSpawn(event.getPlayer()) && !VaultHandler.checkPerk(event.getPlayer().getName(), "usb.mod.bypassprotection", event.getPlayer().getWorld()) && !event.getPlayer().isOp()) {
 
-				if (event.getClickedBlock() != null && !event.getClickedBlock().getType().isEdible())
+				if (event.getClickedBlock() != null && !event.getClickedBlock().getType().isEdible()) {
+					// System.out.println(event.getClickedBlock() + " " + event.getClickedBlock().getType().isEdible());
 					event.setCancelled(true);
+				}
 			}
 		}
 	}
