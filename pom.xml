@@ -67,14 +67,6 @@
 			<type>jar</type>
 			<optional>true</optional>
 		</dependency>
-		<dependency> <!-- NMS blocks -->
-			<groupId>org.bukkit</groupId>
-			<artifactId>craftbukkit</artifactId>
-			<version>LATEST</version>
-			<scope>compile</scope>
-			<type>jar</type>
-			<optional>true</optional>
-		</dependency>
 		<dependency>
 	      <groupId>net.milkbowl</groupId>
 	      <artifactId>vault</artifactId>
