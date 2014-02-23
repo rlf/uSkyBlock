@@ -383,9 +383,6 @@ public class IslandBuilder implements Runnable
 			}
 			setNewPlayerIsland(mPlayer, next);
 
-			mPlayer.getInventory().clear();
-			mPlayer.getEquipment().clear();
-			
 			for(Entity tempent : mPlayer.getNearbyEntities(50.0D, 250.0D, 50.0D))
 			{
 				if (!(tempent instanceof Player))
