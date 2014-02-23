@@ -76,7 +76,7 @@ public class IslandDefaultCommand implements ICommand
 			if(pi.teleportHome((Player)sender))
 				sender.sendMessage(ChatColor.GREEN + "Teleporting you to your island. (/island help for more info)");
 			else
-				sender.sendMessage(ChatColor.RED + "There is no safe location to put you. Please contact a moderator or admin.");
+				sender.sendMessage(ChatColor.RED + "There is no safe location to put you. Teleporting anyway.");
 		}
 		
 		return true;

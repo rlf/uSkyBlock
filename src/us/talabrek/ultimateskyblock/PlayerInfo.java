@@ -361,6 +361,8 @@ public class PlayerInfo implements Serializable {
 		if (Misc.safeTeleport(player, target)) {
 			uSkyBlock.getInstance().removeCreatures(target);
 			return true;
+		} else {
+			player.teleport(target);
 		}
 
 		return false;
