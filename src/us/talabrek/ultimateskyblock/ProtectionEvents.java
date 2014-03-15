@@ -44,6 +44,9 @@ public class ProtectionEvents implements Listener {
 
 		if (!(event.getDamager() instanceof Player) && !(event.getDamager() instanceof Projectile))
 			return;
+		
+		if (event.getEntity() instanceof Player)
+			return;
 
 		Player damager = null;
 
