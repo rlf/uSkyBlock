@@ -407,9 +407,10 @@ public class PlayerInfo implements Serializable {
 						int px = loc.getBlockX();
 						int py = loc.getBlockY();
 						int pz = loc.getBlockZ();
-						for (int x = -50; x <= 50; ++x) {
+                        int radius = (Settings.island_distance / 2);
+						for (int x = -radius; x <= radius; ++x) {
 							for (int y = 0; y <= 255; ++y) {
-								for (int z = -50; z <= 50; ++z) {
+								for (int z = -radius; z <= radius; ++z) {
 									Block b = loc.getWorld().getBlockAt(px + x, py + y, pz + z);
 									switch (b.getType()) {
 										case DIAMOND_BLOCK:
