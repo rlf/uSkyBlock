@@ -190,7 +190,7 @@ public class DevCommand implements CommandExecutor {
 			if (pi.getHasIsland())
 				uSkyBlock.getInstance().devDeletePlayerIsland(player.getName());
 			
-			if (uSkyBlock.getInstance().devSetPlayerIsland(sender, ((Player)player).getLocation(), player.getName()))
+			if (uSkyBlock.getInstance().devSetPlayerIsland(sender, ((Player)sender).getLocation(), player.getName()))
 				sender.sendMessage(ChatColor.GREEN + "Set " + player.getName() + "'s island to the bedrock nearest you.");
 			else
 				sender.sendMessage(ChatColor.RED + "Bedrock not found: unable to set the island!");
