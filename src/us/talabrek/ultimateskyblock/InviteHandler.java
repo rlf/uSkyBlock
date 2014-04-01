@@ -216,7 +216,12 @@ public class InviteHandler {
 	private static void addPlayerToParty(PlayerInfo player, PlayerInfo partyLeader) {
 		uSkyBlock.getLog().info("Adding " + player.getPlayerName() + " to " + partyLeader.getPlayerName() + "'s island.");
 
+		if (!partyLeader.getHasParty()){
+			partyLeader.setJoinParty(partyLeader.getPlayerName(), partyLeader.getIslandLocation());
+		}
+
 		player.setJoinParty(partyLeader.getPlayerName(), partyLeader.getIslandLocation());
+
 		if (partyLeader.getHomeLocation() != null)
 			player.setHomeLocation(partyLeader.getHomeLocation());
 		else
