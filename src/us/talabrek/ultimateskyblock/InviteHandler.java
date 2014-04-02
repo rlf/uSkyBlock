@@ -124,8 +124,12 @@ public class InviteHandler {
 	private static void acceptInviteTransfer(Invite invite, final Player player) {
 		PlayerInfo info = uSkyBlock.getInstance().getOrCreatePlayer(player.getName());
 
+		if (info.getHasParty() && info.getPartyLeader() == invite.from.getName()) {
+			info.setLeaveParty();
+		}
+
 		if (info.getHasParty()) {
-			player.sendMessage(ChatColor.RED + "You are already part of a party. Please leave the party first.");
+			player.sendMessage(ChatColor.RED + "You are already part of a different party. Please leave the party first.");
 			removeInvite(player);
 			return;
 		}
