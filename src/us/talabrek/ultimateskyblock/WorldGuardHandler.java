@@ -161,7 +161,11 @@ public class WorldGuardHandler {
 			
 			ProtectedRegion region2 = null;
 			region2 = new ProtectedCuboidRegion(player + "Island", original.getMinimumPoint(), original.getMaximumPoint());
-			region2.setOwners(original.getOwners());
+			DefaultDomain owners = original.getOwners();
+			if (!owners.contains(player)) {
+				owners.addPlayer(player);
+			}
+			region2.setOwners(owners);
 			region2.setParent(manager.getRegion("__Global__"));
 			region2.setFlag( DefaultFlag.GREET_MESSAGE, "You are entering a protected island area. (" + player + ")" );
 			region2.setFlag( DefaultFlag.FAREWELL_MESSAGE, "You are leaving a protected island area. (" + player + ")");
