@@ -60,7 +60,7 @@ public class IslandKickCommand implements ICommand {
 			if (uSkyBlock.isSkyBlockWorld(onlinePlayer.getWorld())) {
 
 				if (Settings.extras_sendToSpawn)
-					Misc.safeTeleport(onlinePlayer, Bukkit.getWorlds().get(0).getSpawnLocation());
+					Misc.safeTeleport(onlinePlayer, Bukkit.getWorld("spawnworld").getSpawnLocation());
 				else
 					Misc.safeTeleport(onlinePlayer, uSkyBlock.getSkyBlockWorld().getSpawnLocation());
 			}
