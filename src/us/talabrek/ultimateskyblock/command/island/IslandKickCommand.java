@@ -118,6 +118,12 @@ public class IslandKickCommand implements ICommand {
 				sender.sendMessage(ChatColor.RED + "You cannot kick yourself.");
 				return true;
 			}
+
+			if (!other.getPartyLeader().equals(sender.getName())){
+				sender.sendMessage(ChatColor.RED + args[0] + " is not a member of your party!");
+				return true;
+			}
+
 		}
 
 		if (all) {
