@@ -279,7 +279,7 @@ options:
         description: 'Make a fishing pond, then catch and cook 10 fish'
         rankLevel: 'Medium'
         type: onPlayer
-        requiredItems: '350:10'
+        requiredItems: '350:0:10'
         takeItems: true
         itemReward: '331:16 15:5 351:5'
         rewardText: '16 redstone dust, 5 inksac, 5 iron (ore)'
