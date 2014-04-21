@@ -5,6 +5,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -20,23 +21,23 @@ public class TopGenerator implements Runnable
 	{
 		uSkyBlock.getInstance().setTopIslands(null);
 		
-		TreeMap<Integer, String> topIslands = new TreeMap<Integer, String>();
+		TreeMap<Integer, UUID> topIslands = new TreeMap<Integer, UUID>();
 		uSkyBlock.getLog().info("Generating top list");
 		
 		File playerDir = uSkyBlock.getInstance().directoryPlayers;
 
 		for (File file : playerDir.listFiles()) 
 		{
-			PlayerInfo info = uSkyBlock.getInstance().getPlayerNoStore(file.getName());
+			PlayerInfo info = uSkyBlock.getInstance().getPlayerNoStore(UUID.fromString(file.getName()));
 			
-			if(info != null && info.getIslandLevel() > 0 && (!info.getHasParty() || info.getPartyLeader().equals(info.getPlayerName())))
-				topIslands.put(info.getIslandLevel(), info.getPlayerName());
+			if(info != null && info.getIslandLevel() > 0 && (!info.getHasParty() || info.getPartyLeader().equals(info.getPlayerUUID())))
+				topIslands.put(info.getIslandLevel(), info.getPlayer().getUniqueId());
 		}
 		
-		ArrayList<Entry<String, Integer>> shortList = new ArrayList<Entry<String, Integer>>(topIslands.size());
+		ArrayList<Entry<UUID, Integer>> shortList = new ArrayList<Entry<UUID, Integer>>(topIslands.size());
 		
-		for(Entry<Integer, String> entry : topIslands.descendingMap().entrySet())
-			shortList.add(new AbstractMap.SimpleEntry<String, Integer>(entry.getValue(), entry.getKey()));
+		for(Entry<Integer, UUID> entry : topIslands.descendingMap().entrySet())
+			shortList.add(new AbstractMap.SimpleEntry<UUID, Integer>(entry.getValue(), entry.getKey()));
 		
 		uSkyBlock.getInstance().setTopIslands(shortList);
 

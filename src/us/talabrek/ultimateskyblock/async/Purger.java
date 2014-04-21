@@ -34,9 +34,9 @@ public class Purger implements Runnable
 			OfflinePlayer player = Bukkit.getOfflinePlayer(child.getName());
 			if(player.hasPlayedBefore() && !player.isOnline())
 			{
-				if (player.getLastPlayed() < mEarliest || (mNoIsland && !uSkyBlock.getInstance().hasIsland(player.getName()))) 
+				if (player.getLastPlayed() < mEarliest || (mNoIsland && !uSkyBlock.getInstance().hasIsland(player.getUniqueId())))
 				{
-					PlayerInfo pi = uSkyBlock.getInstance().getPlayerNoStore(player.getName());
+					PlayerInfo pi = uSkyBlock.getInstance().getPlayerNoStore(player.getUniqueId());
 					if (pi != null && (mNoIsland || pi.getHasIsland())) 
 						toRemove.add(pi);
 				}

@@ -60,7 +60,7 @@ public class IslandRemover extends QueueTask
 		
 		if(!island.getHasIsland() && !island.getHasParty())
 		{
-			ok = uSkyBlock.getInstance().deletePlayerData(island.getPlayerName());
+			ok = uSkyBlock.getInstance().deletePlayerData(island.getPlayerUUID());
 		}
 		else
 			removed = ok = remove(island);
@@ -85,7 +85,7 @@ public class IslandRemover extends QueueTask
 	{
 		Location center = island.getIslandLocation();
 		
-		if(island.getHasParty() && island.getPlayerName().equals(island.getPartyLeader()))
+		if(island.getHasParty() && island.getPlayerUUID().equals(island.getPartyLeader()))
 			center = island.getPartyIslandLocation();
 		
 		if(center == null)
@@ -116,8 +116,8 @@ public class IslandRemover extends QueueTask
 		
 		if (Settings.island_protectWithWorldGuard && Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) 
 		{
-			if (WorldGuardHandler.getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(island.getPlayerName() + "Island"))
-				WorldGuardHandler.getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).removeRegion(island.getPlayerName() + "Island");
+			if (WorldGuardHandler.getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(island.getPlayer().getName() + "Island"))
+				WorldGuardHandler.getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).removeRegion(island.getPlayer().getName() + "Island");
 		}
 		
 		uSkyBlock.getInstance().addOrphan(island.getIslandLocation());
@@ -128,10 +128,10 @@ public class IslandRemover extends QueueTask
 		island.setHasIsland(false);
 		island.setHomeLocation(null);
 		
-		uSkyBlock.getLog().info("Removed " + island.getPlayerName() + "'s island");
+		uSkyBlock.getLog().info("Removed " + island.getPlayer().getName() + "'s island");
 		
 		uSkyBlock.getInstance().removeFromTop(island);
-		if(!uSkyBlock.getInstance().deletePlayerData(island.getPlayerName()))
+		if(!uSkyBlock.getInstance().deletePlayerData(island.getPlayerUUID()))
 			uSkyBlock.getInstance().savePlayer(island);
 		
 		return true;

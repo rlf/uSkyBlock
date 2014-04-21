@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.async;
 
 import java.io.File;
+import java.util.UUID;
 
 import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -21,14 +22,14 @@ public class PartyListBuilder implements Runnable
 		
 		for(File file : mDir.listFiles())
 		{
-			PlayerInfo info = uSkyBlock.getInstance().getPlayer(file.getName());
+			PlayerInfo info = uSkyBlock.getInstance().getPlayer(UUID.fromString(file.getName()));
 			if(info == null)
 				continue;
 			
 			if (info.getHasParty()) 
 			{
 				PlayerInfo leaderInfo;
-				if (!info.getPartyLeader().equalsIgnoreCase(file.getName())) 
+				if (!info.getPartyLeader().equals(UUID.fromString(file.getName())))
 					leaderInfo = uSkyBlock.getInstance().getPlayer(info.getPartyLeader());
 				else
 					leaderInfo = info;
@@ -36,7 +37,7 @@ public class PartyListBuilder implements Runnable
 				leaderInfo.getHasParty();
 
 				if (!leaderInfo.getMembers().contains(file.getName()))
-					leaderInfo.addMember(file.getName());
+					leaderInfo.addMember(UUID.fromString(file.getName()));
 
 				uSkyBlock.getInstance().savePlayer(leaderInfo);
 			}

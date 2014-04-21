@@ -97,7 +97,7 @@ public class IslandBuilder implements Runnable
 		inventory.setContents(Settings.island_chestItems);
 		if (Settings.island_addExtraItems) {
 			for (final String island_extraPermission : Settings.island_extraPermissions) {
-				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
+				if (VaultHandler.checkPerk(player, "usb." + island_extraPermission, player.getWorld())) {
 					final String[] chestItemString = uSkyBlock.getInstance().getConfig().getString("options.island.extraPermissions." + island_extraPermission).split(" ");
 					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
 					String[] amountdata = new String[2];
@@ -260,7 +260,7 @@ public class IslandBuilder implements Runnable
 		inventory.setContents(Settings.island_chestItems);
 		if (Settings.island_addExtraItems) {
 			for (final String island_extraPermission : Settings.island_extraPermissions) {
-				if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
+				if (VaultHandler.checkPerk(player, "usb." + island_extraPermission, player.getWorld())) {
 					final String[] chestItemString = uSkyBlock.getInstance().getConfig().getString("options.island.extraPermissions." + island_extraPermission).split(" ");
 					final ItemStack[] tempChest = new ItemStack[chestItemString.length];
 					String[] amountdata = new String[2];
@@ -393,7 +393,7 @@ public class IslandBuilder implements Runnable
 			{
 				try
 				{
-					WorldGuardHandler.protectIsland(mPlayer.getName());
+					WorldGuardHandler.protectIsland(mPlayer);
 				}
 				catch(IllegalArgumentException e)
 				{
@@ -415,12 +415,12 @@ public class IslandBuilder implements Runnable
 	}
 	
 	private void setNewPlayerIsland(final Player player, final Location loc) {
-		uSkyBlock.getInstance().getPlayer(player.getName()).setHasIsland(true);
-		uSkyBlock.getInstance().getPlayer(player.getName()).setIslandLocation(loc);
+		uSkyBlock.getInstance().getPlayer(player.getUniqueId()).setHasIsland(true);
+		uSkyBlock.getInstance().getPlayer(player.getUniqueId()).setIslandLocation(loc);
 
 		player.teleport(getChestSpawnLoc(loc, player));
 		uSkyBlock.getInstance().homeSet(player);
-		uSkyBlock.getInstance().savePlayer(uSkyBlock.getInstance().getPlayer(player.getName()));
+		uSkyBlock.getInstance().savePlayer(uSkyBlock.getInstance().getPlayer(player.getUniqueId()));
 	}
 	
 	public Location getChestSpawnLoc(final Location loc, final Player player) {
@@ -460,7 +460,7 @@ public class IslandBuilder implements Runnable
 						inventory.setContents(Settings.island_chestItems);
 						if (Settings.island_addExtraItems) {
 							for (final String island_extraPermission : Settings.island_extraPermissions) {
-								if (VaultHandler.checkPerk(player.getName(), "usb." + island_extraPermission, player.getWorld())) {
+								if (VaultHandler.checkPerk(player, "usb." + island_extraPermission, player.getWorld())) {
 									final String[] chestItemString = uSkyBlock.getInstance().getConfig().getString("options.island.extraPermissions." + island_extraPermission).split(" ");
 									final ItemStack[] tempChest = new ItemStack[chestItemString.length];
 									String[] amountdata = new String[2];

@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.async;
 
 import java.io.File;
+import java.util.UUID;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
@@ -23,7 +24,9 @@ public class IslandProtector implements Runnable
 		
 		for(File file : dir.listFiles())
 		{
-			PlayerInfo pi = uSkyBlock.getInstance().getPlayer(file.getName());
+			// not completely sure of this
+			// todo: get sure
+			PlayerInfo pi = uSkyBlock.getInstance().getPlayer(UUID.fromString(file.getName()));
 			
 			if(pi == null || !pi.getHasIsland())
 				continue;
