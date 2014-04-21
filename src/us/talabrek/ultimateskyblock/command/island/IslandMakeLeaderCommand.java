@@ -64,7 +64,7 @@ public class IslandMakeLeaderCommand implements ICommand
 		if(args.length != 1)
 			return false;
 		
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(sender.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 		
 		if(info == null)
 		{
@@ -86,7 +86,7 @@ public class IslandMakeLeaderCommand implements ICommand
 			return true;
 		}
 		
-		PlayerInfo otherInfo = uSkyBlock.getInstance().getOrCreatePlayer(otherPlayer.getName());
+		PlayerInfo otherInfo = uSkyBlock.getInstance().getOrCreatePlayer(otherPlayer.getUniqueId());
 		
 		if(otherInfo.getHasParty())
 		{

@@ -1,26 +1,24 @@
 package us.talabrek.ultimateskyblock;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class PlayerInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String playerName;
+	private UUID playerUUID;
 	private boolean hasIsland;
 	private boolean hasParty;
 	private boolean warpActive;
-	private List<String> members;
-	private List<String> banned;
-	private String partyLeader;
+	private List<UUID> members;
+	private List<UUID> banned;
+	private UUID partyLeader;
 	private String partyIslandLocation;
 	private String islandLocation;
 	private String homeLocation;
@@ -30,10 +28,10 @@ public class PlayerInfo implements Serializable {
 	private float islandExp;
 	private int islandLevel;
 
-	public PlayerInfo(final String playerName) {
-		this.playerName = playerName;
-		members = new ArrayList<String>();
-		banned = new ArrayList<String>();
+	public PlayerInfo(final UUID playerUUID) {
+		this.playerUUID = playerUUID;
+		members = new ArrayList<UUID>();
+		banned = new ArrayList<UUID>();
 		hasIsland = false;
 		warpActive = false;
 		islandLocation = null;
@@ -59,7 +57,7 @@ public class PlayerInfo implements Serializable {
 		homeLocation = null;
 		warpLocation = null;
 		warpActive = false;
-		members = new ArrayList<String>();
+		members = new ArrayList<UUID>();
 	}
 
 	public void removeFromIsland() {
@@ -73,7 +71,7 @@ public class PlayerInfo implements Serializable {
 		homeLocation = null;
 		warpLocation = null;
 		warpActive = false;
-		members = new ArrayList<String>();
+		members = new ArrayList<UUID>();
 	}
 
 	public void toggleWarpActive() {
@@ -103,26 +101,26 @@ public class PlayerInfo implements Serializable {
 		return getLocationString(warpLocation);
 	}
 
-	public List<String> getBanned() {
+	public List<UUID> getBanned() {
 		if (banned == null)
-			banned = new ArrayList<String>();
+			banned = new ArrayList<UUID>();
 		return banned;
 	}
 
-	public void addBan(String player) {
-		getBanned().add(player);
+	public void addBan(UUID playerUUID) {
+		getBanned().add(playerUUID);
 	}
 
-	public void removeBan(String player) {
-		getBanned().remove(player);
+	public void removeBan(UUID playerUUID) {
+		getBanned().remove(playerUUID);
 	}
 
-	public boolean isBanned(String player) {
-		return getBanned().contains(player);
+	public boolean isBanned(UUID playerUUID) {
+		return getBanned().contains(playerUUID);
 	}
 
-	public void addMember(final String member) {
-		members.add(member);
+	public void addMember(final UUID memberUUID) {
+		members.add(memberUUID);
 	}
 
 	public void clearChallenges() {
@@ -174,7 +172,7 @@ public class PlayerInfo implements Serializable {
 
 	public void displayChallengeList() {
 		final Iterator<String> itr = challengeList.keySet().iterator();
-		System.out.println("uSkyblock " + "Displaying Challenge list for " + playerName);
+		System.out.println("uSkyblock " + "Displaying Challenge list for " + Bukkit.getOfflinePlayer(playerUUID).getName());
 		while (itr.hasNext()) {
 			final String current = itr.next();
 			System.out.println("uSkyblock " + current + ": " + challengeList.get(current));
@@ -191,7 +189,7 @@ public class PlayerInfo implements Serializable {
 
 	public boolean getHasParty() {
 		if (members == null) {
-			members = new ArrayList<String>();
+			members = new ArrayList<UUID>();
 		}
 		return hasParty;
 	}
@@ -227,7 +225,7 @@ public class PlayerInfo implements Serializable {
 		return null;
 	}
 
-	public List<String> getMembers() {
+	public List<UUID> getMembers() {
 		return members;
 	}
 
@@ -235,16 +233,16 @@ public class PlayerInfo implements Serializable {
 		return getLocationString(partyIslandLocation);
 	}
 
-	public String getPartyLeader() {
+	public UUID getPartyLeader() {
 		return partyLeader;
 	}
 
 	public Player getPlayer() {
-		return Bukkit.getPlayerExact(playerName);
+		return Bukkit.getPlayer(playerUUID);
 	}
 
-	public String getPlayerName() {
-		return playerName;
+	public UUID getPlayerUUID() {
+		return playerUUID;
 	}
 
 	private String getStringLocation(final Location l) {
@@ -255,7 +253,7 @@ public class PlayerInfo implements Serializable {
 	}
 
 	public void ListData() {
-		System.out.println("uSkyblock " + "Player: " + getPlayerName());
+		System.out.println("uSkyblock " + "Player: " + getPlayer().getName());
 		System.out.println("uSkyblock " + "Has an island?: " + getHasIsland());
 		System.out.println("uSkyblock " + "Has a party?: " + getHasParty());
 		if (getHasIsland()) {
@@ -267,7 +265,7 @@ public class PlayerInfo implements Serializable {
 		System.out.println("uSkyblock " + "Island Level: " + islandLevel);
 	}
 
-	public void removeMember(final String member) {
+	public void removeMember(final UUID member) {
 		members.remove(member);
 	}
 
@@ -307,7 +305,7 @@ public class PlayerInfo implements Serializable {
 		islandLocation = getStringLocation(l);
 	}
 
-	public void setJoinParty(final String leader, final Location l) {
+	public void setJoinParty(final UUID leader, final Location l) {
 		hasParty = true;
 		partyLeader = leader;
 		partyIslandLocation = getStringLocation(l);
@@ -318,10 +316,10 @@ public class PlayerInfo implements Serializable {
 		partyLeader = null;
 		islandLevel = 0;
 		partyIslandLocation = null;
-		members = new ArrayList<String>();
+		members = new ArrayList<UUID>();
 	}
 
-	public void setMembers(final List<String> newMembers) {
+	public void setMembers(final List<UUID> newMembers) {
 		members = newMembers;
 	}
 
@@ -329,12 +327,12 @@ public class PlayerInfo implements Serializable {
 		partyIslandLocation = getStringLocation(l);
 	}
 
-	public void setPartyLeader(final String leader) {
+	public void setPartyLeader(final UUID leader) {
 		partyLeader = leader;
 	}
 
-	public void setPlayerName(final String s) {
-		playerName = s;
+	public void setPlayerUUID(final UUID s) {
+		playerUUID = s;
 	}
 
 	public Location getTeleportLocation() {

@@ -66,7 +66,7 @@ public class IslandSetWarpCommand implements ICommand
 			return true;
 		}
 		
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(sender.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
 		
 		if(info == null)
 		{

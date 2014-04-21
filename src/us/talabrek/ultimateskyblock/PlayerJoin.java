@@ -24,7 +24,7 @@ public class PlayerJoin implements Listener {
 			if (hungerman.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
 				if (hungerman.getFoodLevel() > event.getFoodLevel()) {
 					if (uSkyBlock.getInstance().playerIsOnIsland(hungerman)) {
-						if (VaultHandler.checkPerk(hungerman.getName(), "usb.extra.hunger", hungerman.getWorld())) {
+						if (VaultHandler.checkPerk(hungerman, "usb.extra.hunger", hungerman.getWorld())) {
 							event.setCancelled(true);
 						}
 					}
@@ -59,21 +59,21 @@ public class PlayerJoin implements Listener {
 		if(!uSkyBlock.isSkyBlockWorld(event.getPlayer().getWorld()))
 			return;
 		
-		uSkyBlock.getInstance().onEnterSkyBlock(event.getPlayer());
+		uSkyBlock.getInstance().onEnterSkyBlock(event.getPlayer().getUniqueId());
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerChangeWorld(PlayerChangedWorldEvent event)
 	{
 		if(!uSkyBlock.isSkyBlockWorld(event.getPlayer().getWorld()))
-			uSkyBlock.getInstance().onLeaveSkyBlock(event.getPlayer());
+			uSkyBlock.getInstance().onLeaveSkyBlock(event.getPlayer().getUniqueId());
 		else
-			uSkyBlock.getInstance().onEnterSkyBlock(event.getPlayer());
+			uSkyBlock.getInstance().onEnterSkyBlock(event.getPlayer().getUniqueId());
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerQuit(final PlayerQuitEvent event) 
 	{
-		uSkyBlock.getInstance().onLeaveSkyBlock(event.getPlayer());
+		uSkyBlock.getInstance().onLeaveSkyBlock(event.getPlayer().getUniqueId());
 	}
 }

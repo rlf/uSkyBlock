@@ -59,7 +59,7 @@ public class IslandDefaultCommand implements ICommand
 	@Override
 	public boolean onCommand( CommandSender sender, String label, String[] args )
 	{
-		PlayerInfo pi = uSkyBlock.getInstance().getOrCreatePlayer(sender.getName());
+		PlayerInfo pi = uSkyBlock.getInstance().getOrCreatePlayer(((Player)sender).getUniqueId());
 		if (pi == null) 
 		{
 			sender.sendMessage(ChatColor.RED + "Error: Couldn't read your player data!");

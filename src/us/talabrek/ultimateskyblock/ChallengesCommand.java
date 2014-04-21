@@ -39,8 +39,8 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 		if (!(sender instanceof Player))
 			return false;
 
-		PlayerInfo pi = uSkyBlock.getInstance().getPlayer(sender.getName());
 		Player player = (Player)sender;
+		PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
 		
 		if (!Settings.challenges_allowChallenges)
 		{
@@ -53,7 +53,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 			sender.sendMessage(ChatColor.RED + "You don't have access to this command!");
 			return true;
 		}
-		if (!uSkyBlock.isSkyBlockWorld(((Player)sender).getWorld())) 
+		if (!uSkyBlock.isSkyBlockWorld(player.getWorld()))
 		{
 			sender.sendMessage(ChatColor.RED + "You can only submit challenges in the skyblock world!");
 			return true;
@@ -65,7 +65,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 			sender.sendMessage(ChatColor.GOLD + Settings.challenges_ranks[0] + ": " + uSkyBlock.getInstance().getChallengesFromRank(player, Settings.challenges_ranks[0]));
 			for (int i = 1; i < Settings.challenges_ranks.length; i++) 
 			{
-				rankComplete = uSkyBlock.getInstance().checkRankCompletion(player, Settings.challenges_ranks[i - 1]);
+				rankComplete = uSkyBlock.getInstance().checkRankCompletion(player.getUniqueId(), Settings.challenges_ranks[i - 1]);
 				if (rankComplete <= 0)
 					sender.sendMessage(ChatColor.GOLD + Settings.challenges_ranks[i] + ": " + uSkyBlock.getInstance().getChallengesFromRank(player, Settings.challenges_ranks[i]));
 				else
@@ -83,7 +83,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 				sender.sendMessage(ChatColor.YELLOW + "Challenges will have different colors depending on if they are:");
 				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Settings.challenges_challengeColor + "Incomplete " + Settings.challenges_finishedColor + "Completed(not repeatable) " + Settings.challenges_repeatableColor + "Completed(repeatable) "));
 			} 
-			else if (uSkyBlock.getInstance().isRankAvailable(player, uSkyBlock.getInstance().getChallengeConfig().getString("options.challenges.challengeList." + split[0].toLowerCase() + ".rankLevel"))) 
+			else if (uSkyBlock.getInstance().isRankAvailable(player.getUniqueId(), uSkyBlock.getInstance().getChallengeConfig().getString("options.challenges.challengeList." + split[0].toLowerCase() + ".rankLevel")))
 			{
 				sender.sendMessage(ChatColor.YELLOW + "Challenge Name: " + ChatColor.WHITE + split[0].toLowerCase());
 				sender.sendMessage(ChatColor.YELLOW + uSkyBlock.getInstance().getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(split[0].toLowerCase()).append(".description").toString()));

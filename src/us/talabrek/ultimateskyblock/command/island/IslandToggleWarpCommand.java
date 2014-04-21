@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.ICommand;
 import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -57,7 +58,7 @@ public class IslandToggleWarpCommand implements ICommand
 	@Override
 	public boolean onCommand( CommandSender sender, String label, String[] args )
 	{
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(sender.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
 		
 		if(info == null)
 		{

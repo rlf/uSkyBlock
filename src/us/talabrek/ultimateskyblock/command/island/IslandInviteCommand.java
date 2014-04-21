@@ -64,7 +64,7 @@ public class IslandInviteCommand implements ICommand
 		if(args.length > 1)
 			return false;
 
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(sender.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 		
 		if(info == null)
 		{
@@ -82,7 +82,7 @@ public class IslandInviteCommand implements ICommand
 			sender.sendMessage(ChatColor.YELLOW + "Use" + ChatColor.WHITE + " /island invite <playername>" + ChatColor.YELLOW + " to invite a player to your island.");
 	        if (info.getHasParty())
 	        {
-	        	if (info.getPartyLeader().equalsIgnoreCase(sender.getName()))
+	        	if (info.getPartyLeader().equals(((Player)sender).getUniqueId()))
 	        	{
 	        		if(info.getMembers().size() < maxSize)
 	        			sender.sendMessage(ChatColor.GREEN + "You can invite " + (maxSize - info.getMembers().size()) + " more players.");

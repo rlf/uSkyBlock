@@ -71,7 +71,7 @@ public class IslandWarpCommand implements ICommand
 		
 		if(args.length == 0 && !override)
 		{
-			PlayerInfo info = uSkyBlock.getInstance().getPlayer(sender.getName());
+			PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
 			
 			if(info == null || (!info.getHasIsland() && !info.getHasParty()))
 			{
@@ -99,16 +99,16 @@ public class IslandWarpCommand implements ICommand
 			
 			if(info.isWarpActive() || override)
 			{
-				if(override || !info.isBanned(sender.getName()))
+				if(override || !info.isBanned(((Player) sender).getUniqueId()))
 				{
 					if(!info.teleportWarp((Player)sender))
 						sender.sendMessage(ChatColor.RED + "There is no safe location to put you, please contact a MOD or ADMIN");
 				}
 				else
-					sender.sendMessage(ChatColor.RED + info.getPlayerName() + " has banned you from warping to their island.");
+					sender.sendMessage(ChatColor.RED + info.getPlayer().getName() + " has banned you from warping to their island.");
 			}
 			else
-				sender.sendMessage(ChatColor.RED + info.getPlayerName() + " has warping disabled.");
+				sender.sendMessage(ChatColor.RED + info.getPlayer().getName() + " has warping disabled.");
 		}
 		else
 			return false;

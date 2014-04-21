@@ -93,7 +93,7 @@ public class IslandPartyCommand implements ICommand
 		}
 		else
 		{
-			info = uSkyBlock.getInstance().getPlayer(sender.getName());
+			info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 			
 			if(info == null)
 			{

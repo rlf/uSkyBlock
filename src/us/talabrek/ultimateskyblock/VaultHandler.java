@@ -23,14 +23,15 @@ public class VaultHandler {
 	public static boolean hasPerm(CommandSender sender, String perm)
 	{
 		if(sender instanceof Player)
-			return checkPerk(sender.getName(), perm, ((Player)sender).getWorld());
+			return checkPerk((Player)sender, perm, ((Player)sender).getWorld());
 		
 		return sender.hasPermission(perm);
 	}
 
-	public static boolean checkPerk(final String player, final String perk, final World world) {
-		if (perms.has((String) null, player, perk)) { return true; }
-		if (perms.has(world, player, perk)) { return true; }
+	public static boolean checkPerk(final Player player, final String perk, final World world) {
+
+		if (perms.has((String) null, player.getName(), perk)) { return true; }
+		if (perms.has(world, player.getName(), perk)) { return true; }
 		return false;
 	}
 

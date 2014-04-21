@@ -280,6 +280,6 @@ public class Misc
 				return null;
 		}
 		
-		return uSkyBlock.getInstance().getPlayerNoStore(player.getName());
+		return uSkyBlock.getInstance().getPlayerNoStore(player.getUniqueId());
 	}
 }

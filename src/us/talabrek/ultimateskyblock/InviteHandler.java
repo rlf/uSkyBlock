@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.UUID;
 import java.util.WeakHashMap;
 
 import org.bukkit.Bukkit;
@@ -13,30 +14,30 @@ import us.talabrek.ultimateskyblock.async.IslandRemover;
 
 public class InviteHandler {
 	private static WeakHashMap<Player, Invite> mInvites = new WeakHashMap<Player, Invite>();
-	private static WeakHashMap<Player, HashSet<String>> mInvitedPlayers = new WeakHashMap<Player, HashSet<String>>();
+	private static WeakHashMap<Player, HashSet<UUID>> mInvitedPlayers = new WeakHashMap<Player, HashSet<UUID>>();
 
 	public static void invitePlayer(Player player, Player islandOwner) throws IllegalArgumentException {
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(islandOwner.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getPlayer(islandOwner.getUniqueId());
 
-		if (info.getMembers().contains(player.getName()))
+		if (info.getMembers().contains(player.getUniqueId()))
 			throw new IllegalArgumentException(player.getName() + " is already in your party.");
 
-		if (uSkyBlock.getInstance().hasParty(player.getName()))
+		if (uSkyBlock.getInstance().hasParty(player.getUniqueId()))
 			throw new IllegalArgumentException(player.getName() + " is already in a party.");
 
-		HashSet<String> invites = mInvitedPlayers.get(islandOwner);
+		HashSet<UUID> invites = mInvitedPlayers.get(islandOwner);
 		if (invites == null) {
-			invites = new HashSet<String>();
+			invites = new HashSet<UUID>();
 			mInvitedPlayers.put(islandOwner, invites);
 		}
 
-		if (invites.contains(player.getName()))
+		if (invites.contains(player.getUniqueId()))
 			throw new IllegalArgumentException("You have already invited that player");
 
 		// Remove any existing invites
 		removeInvite(player);
 
-		invites.add(player.getName());
+		invites.add(player.getUniqueId());
 
 		mInvites.put(player, new Invite(islandOwner, Invite.Type.JoinIsland));
 
@@ -44,21 +45,21 @@ public class InviteHandler {
 		player.sendMessage(islandOwner.getName() + " has invited you to join their island!");
 		player.sendMessage("Use " + ChatColor.YELLOW + "/island [accept|reject]" + ChatColor.WHITE + " to accept or reject the invite.");
 		// player.sendMessage("This invite will expire in 20 seconds.");
-		if (uSkyBlock.getInstance().hasIsland(player.getName()))
+		if (uSkyBlock.getInstance().hasIsland(player.getUniqueId()))
 			player.sendMessage(ChatColor.GOLD + "WARNING: You will lose your current island if you accept!");
 	}
 
 	public static void transferRequest(Player from, Player to) throws IllegalArgumentException {
-		HashSet<String> invites = mInvitedPlayers.get(from);
+		HashSet<UUID> invites = mInvitedPlayers.get(from);
 		if (invites == null) {
-			invites = new HashSet<String>();
+			invites = new HashSet<UUID>();
 			mInvitedPlayers.put(from, invites);
 		}
 
 		// Remove any existing invites
 		removeInvite(to);
 
-		invites.add(to.getName());
+		invites.add(to.getUniqueId());
 
 		mInvites.put(to, new Invite(from, Invite.Type.Transfer));
 	}
@@ -78,7 +79,7 @@ public class InviteHandler {
 	}
 
 	private static void acceptInviteJoin(Invite invite, final Player player) {
-		PlayerInfo info = uSkyBlock.getInstance().getOrCreatePlayer(player.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getOrCreatePlayer(player.getUniqueId());
 
 		if (info.getHasParty()) {
 			player.sendMessage(ChatColor.RED + "You are already part of a party. Please leave the party first.");
@@ -98,7 +99,7 @@ public class InviteHandler {
 			return;
 		}
 
-		PlayerInfo inviterIsland = uSkyBlock.getInstance().getPlayer(invite.from.getName());
+		PlayerInfo inviterIsland = uSkyBlock.getInstance().getPlayer(invite.from.getUniqueId());
 		addPlayerToParty(info, inviterIsland);
 
 		player.sendMessage(ChatColor.GREEN + "You have joined " + invite.from.getName() + "'s island.");
@@ -122,9 +123,9 @@ public class InviteHandler {
 	}
 
 	private static void acceptInviteTransfer(Invite invite, final Player player) {
-		PlayerInfo info = uSkyBlock.getInstance().getOrCreatePlayer(player.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getOrCreatePlayer(player.getUniqueId());
 
-		if (info.getHasParty() && info.getPartyLeader() == invite.from.getName()) {
+		if (info.getHasParty() && info.getPartyLeader().equals(invite.from.getUniqueId())) {
 			info.setLeaveParty();
 		}
 
@@ -146,15 +147,15 @@ public class InviteHandler {
 			return;
 		}
 
-		PlayerInfo inviterIsland = uSkyBlock.getInstance().getPlayer(invite.from.getName());
+		PlayerInfo inviterIsland = uSkyBlock.getInstance().getPlayer(invite.from.getUniqueId());
 
 		info.setHasIsland(true);
 		info.setIslandLocation(inviterIsland.getIslandLocation());
 		info.setIslandLevel(inviterIsland.getIslandLevel());
 		info.setPartyIslandLocation(null);
 
-		info.addMember(inviterIsland.getPlayerName());
-		inviterIsland.setJoinParty(info.getPlayerName(), info.getIslandLocation());
+		info.addMember(inviterIsland.getPlayerUUID());
+		inviterIsland.setJoinParty(info.getPlayerUUID(), info.getIslandLocation());
 
 		inviterIsland.setHasIsland(false);
 		inviterIsland.setIslandLocation(null);
@@ -166,7 +167,7 @@ public class InviteHandler {
 		info.getBanned().clear();
 
 		if (Settings.island_protectWithWorldGuard && Bukkit.getPluginManager().isPluginEnabled("WorldGuard"))
-			WorldGuardHandler.transferRegion(inviterIsland.getPlayerName(), info.getPlayerName());
+			WorldGuardHandler.transferRegion(inviterIsland.getPlayer().getName(), info.getPlayer().getName());
 
 		uSkyBlock.getInstance().savePlayer(inviterIsland);
 		uSkyBlock.getInstance().savePlayer(info);
@@ -210,28 +211,28 @@ public class InviteHandler {
 		if (invite == null)
 			return;
 
-		HashSet<String> invites = mInvitedPlayers.get(invite.from);
-		invites.remove(player.getName());
+		HashSet<UUID> invites = mInvitedPlayers.get(invite.from);
+		invites.remove(player.getUniqueId());
 
 		if (invites.isEmpty())
 			mInvitedPlayers.remove(invite.from);
 	}
 
 	private static void addPlayerToParty(PlayerInfo player, PlayerInfo partyLeader) {
-		uSkyBlock.getLog().info("Adding " + player.getPlayerName() + " to " + partyLeader.getPlayerName() + "'s island.");
+		uSkyBlock.getLog().info("Adding " + player.getPlayer().getName() + " to " + partyLeader.getPlayer().getName() + "'s island.");
 
 		if (!partyLeader.getHasParty()){
-			partyLeader.setJoinParty(partyLeader.getPlayerName(), partyLeader.getIslandLocation());
+			partyLeader.setJoinParty(partyLeader.getPlayerUUID(), partyLeader.getIslandLocation());
 		}
 
-		player.setJoinParty(partyLeader.getPlayerName(), partyLeader.getIslandLocation());
+		player.setJoinParty(partyLeader.getPlayerUUID(), partyLeader.getIslandLocation());
 
 		if (partyLeader.getHomeLocation() != null)
 			player.setHomeLocation(partyLeader.getHomeLocation());
 		else
 			player.setHomeLocation(partyLeader.getIslandLocation());
 
-		partyLeader.addMember(player.getPlayerName());
+		partyLeader.addMember(player.getPlayerUUID());
 	}
 
 	public static class Invite {

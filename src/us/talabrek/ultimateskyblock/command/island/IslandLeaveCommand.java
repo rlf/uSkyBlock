@@ -56,7 +56,7 @@ public class IslandLeaveCommand implements ICommand {
 		if (args.length != 0)
 			return false;
 
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(sender.getName());
+		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 
 		if (info == null) {
 			sender.sendMessage(ChatColor.RED + "You have not started skyblock. Please use " + ChatColor.YELLOW + "/island" + ChatColor.RED + " to begin");
@@ -85,7 +85,7 @@ public class IslandLeaveCommand implements ICommand {
 		info.setLeaveParty();
 		info.setHomeLocation(null);
 
-		leader.getMembers().remove(info.getPlayerName());
+		leader.getMembers().remove(info.getPlayerUUID());
 
 		if (Settings.extras_sendToSpawn)
 			Misc.safeTeleport(player, Bukkit.getWorlds().get(0).getSpawnLocation());
@@ -97,11 +97,11 @@ public class IslandLeaveCommand implements ICommand {
 		if (leader.getPlayer() != null)
 			leader.getPlayer().sendMessage(ChatColor.YELLOW + player.getName() + " has left your party.");
 
-		if (leader.getMembers().isEmpty() || (leader.getMembers().size() == 1 && leader.getMembers().contains(leader.getPlayerName())))
+		if (leader.getMembers().isEmpty() || (leader.getMembers().size() == 1 && leader.getMembers().contains(leader.getPlayerUUID())))
 			leader.setLeaveParty();
 
 		if (Settings.island_protectWithWorldGuard && Bukkit.getPluginManager().isPluginEnabled("WorldGuard"))
-			WorldGuardHandler.removePlayerFromRegion(leader.getPlayerName(), player.getName());
+			WorldGuardHandler.removePlayerFromRegion(leader.getPlayer().getName(), player.getName());
 
 		info.save();
 		leader.save();

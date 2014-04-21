@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldedit.BlockVector;
@@ -77,9 +78,9 @@ public class WorldGuardHandler {
 		}
 	}
 	
-	public static void protectIsland(String playerName) throws IllegalArgumentException, IllegalStateException
+	public static void protectIsland(Player player) throws IllegalArgumentException, IllegalStateException
 	{
-		protectIsland(uSkyBlock.getInstance().getPlayerNoStore(playerName));
+		protectIsland(uSkyBlock.getInstance().getPlayerNoStore(player.getUniqueId()));
 	}
 	
 	public static synchronized void protectIsland(PlayerInfo pi) throws IllegalArgumentException, IllegalStateException
@@ -89,10 +90,10 @@ public class WorldGuardHandler {
 		
 		try
 		{
-			String regionName = pi.getPlayerName() + "Island";
+			String regionName = pi.getPlayer().getName() + "Island";
 
 			if(!pi.getHasIsland())
-				throw new IllegalArgumentException(pi.getPlayerName() + " does not have an island.");
+				throw new IllegalArgumentException(pi.getPlayer().getName() + " does not have an island.");
 				
 			RegionManager manager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
 			
@@ -101,10 +102,10 @@ public class WorldGuardHandler {
 			
 			ProtectedRegion region = null;
 			region = new ProtectedCuboidRegion(regionName, getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
-			region.getOwners().addPlayer(pi.getPlayerName());
+			region.getOwners().addPlayer(pi.getPlayer().getName());
 			region.setPriority(100);
-			region.setFlag( DefaultFlag.GREET_MESSAGE, "You are entering a protected island area. (" + pi.getPlayerName() + ")");
-			region.setFlag( DefaultFlag.FAREWELL_MESSAGE, "You are leaving a protected island area. (" + pi.getPlayerName() + ")");
+			region.setFlag( DefaultFlag.GREET_MESSAGE, "You are entering a protected island area. (" + pi.getPlayer().getName() + ")");
+			region.setFlag( DefaultFlag.FAREWELL_MESSAGE, "You are leaving a protected island area. (" + pi.getPlayer().getName() + ")");
 			
 			if(Settings.island_allowPvP.equalsIgnoreCase("allow"))
 				region.setFlag(DefaultFlag.PVP, State.ALLOW);
@@ -125,7 +126,7 @@ public class WorldGuardHandler {
 			}
 			
 			manager.addRegion(region);
-			uSkyBlock.getLog().info("New protected region created for " + pi.getPlayerName() + "'s Island");
+			uSkyBlock.getLog().info("New protected region created for " + pi.getPlayer().getName() + "'s Island");
 			manager.save();
 		} 
 		catch (ProtectionDatabaseException e) 
