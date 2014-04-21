@@ -1204,26 +1204,6 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Party> readPartyFile() {
-		final File f = new File(getDataFolder(), "partylist.bin");
-		if (!f.exists()) {
-			return null;
-		}
-		try {
-			final FileInputStream fileIn = new FileInputStream(f);
-			final ObjectInputStream in = new ObjectInputStream(fileIn);
-
-			final List<Party> p = (List<Party>) in.readObject();
-			in.close();
-			fileIn.close();
-			return p;
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	private PlayerInfo readPlayerFile(final UUID playerUUID) {
 
 		String UUIDString = playerUUID.toString();
@@ -1470,20 +1450,6 @@ public class uSkyBlock extends JavaPlugin {
 			}
 		} catch (final Exception e) {
 			System.out.println("uSkyblock " + "Error saving orphan file!");
-		}
-	}
-
-	public void writePartyFile(final List<Party> pi) {
-		final File f = new File(getDataFolder(), "partylist.bin");
-		try {
-			final FileOutputStream fileOut = new FileOutputStream(f);
-			final ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			out.writeObject(pi);
-			out.flush();
-			out.close();
-			fileOut.close();
-		} catch (final Exception e) {
-			e.printStackTrace();
 		}
 	}
 
