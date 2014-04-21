@@ -1036,9 +1036,14 @@ public class uSkyBlock extends JavaPlugin {
 		filePlugin = new File(getDataFolder(), "config.yml");
 		loadPluginConfig();
 		registerEvents();
-		directoryPlayers = new File(getDataFolder(), "players");
+
+		directoryPlayers = new File(getDataFolder(), "playerdata");
 		if (!directoryPlayers.exists()) {
 			directoryPlayers.mkdir();
+		}
+		File oldDirectoryPlayers = new File(getDataFolder(), "players");
+		if (oldDirectoryPlayers.exists()) {
+			convertPlayerFiles(oldDirectoryPlayers);
 		}
 
 		loadPlayerFiles();
@@ -1134,6 +1139,59 @@ public class uSkyBlock extends JavaPlugin {
 				}
 			}
 		});
+
+	}
+
+	private void convertPlayerFiles(final File oldDirectoryPlayers) {
+
+		// Only call this at launch, if a player joins before the migration,
+		// they may lose their data.
+
+		for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+			convertPlayerFileOld(player.getName(), player.getUniqueId(), oldDirectoryPlayers);
+		}
+
+		// After this, the only remaining files in the player directory should be
+		// from an import from a different server, or if you've been deleting
+		// Bukkit's /world/playerdata or /world/players files.
+
+		File[] remainingFiles = oldDirectoryPlayers.listFiles();
+		if (remainingFiles == null) {
+			oldDirectoryPlayers.deleteOnExit();
+		} else {
+			System.out.println("[uSkyBlock] Some Player Files Not Converted:");
+			for (File playerFile : oldDirectoryPlayers.listFiles()) {
+				System.out.println(playerFile.getName());
+			}
+		}
+
+	}
+
+	private void convertPlayerFileOld(final String playerName, final UUID playerUUID, final File oldPlayerDirectory) {
+
+		final File f = new File(oldPlayerDirectory, playerName);
+		if (!f.exists()) {
+			return;
+		}
+		try {
+			final FileInputStream fileIn = new FileInputStream(f);
+			final ObjectInputStream in = new ObjectInputStream(fileIn);
+			final PlayerInfo p = (PlayerInfo) in.readObject();
+			in.close();
+			fileIn.close();
+			writePlayerFile(playerUUID, p);
+			f.deleteOnExit();  // delete the old file
+			return;
+		} catch (EOFException e) {
+			log.warning(playerName + " is corrupted, deleting on exit.");
+			f.deleteOnExit();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return;
 
 	}
 
