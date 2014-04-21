@@ -288,6 +288,7 @@ public class DevCommand implements CommandExecutor {
 				}
 				catch(IllegalStateException e)
 				{
+					e.printStackTrace();
 					sender.sendMessage(ChatColor.RED + "Unable to comply. A problem with WorldGuard occurred.");
 				}
 			} 

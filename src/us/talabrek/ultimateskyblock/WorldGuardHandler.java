@@ -131,6 +131,7 @@ public class WorldGuardHandler {
 		} 
 		catch (ProtectionDatabaseException e) 
 		{
+			e.printStackTrace();
 			throw new IllegalStateException("Unable to save regions", e);
 		}
 	}
@@ -176,6 +177,7 @@ public class WorldGuardHandler {
 		} 
 		catch (final Exception e) 
 		{
+			e.printStackTrace();
 			System.out.println("Error transferring WorldGuard Protected Region from (" + owner + ") to (" + player + ")");
 		}
 	}
