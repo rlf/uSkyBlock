@@ -1147,28 +1147,45 @@ public class uSkyBlock extends JavaPlugin {
 		// Only call this at launch, if a player joins before the migration,
 		// they may lose their data.
 
-		for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
-			convertPlayerFileOld(player.getName(), player.getUniqueId(), oldDirectoryPlayers);
-		}
 
-		// After this, the only remaining files in the player directory should be
-		// from an import from a different server, or if you've been deleting
-		// Bukkit's /world/playerdata or /world/players files.
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+			@Override
+			public void run() {
 
-		File[] remainingFiles = oldDirectoryPlayers.listFiles();
-		if (remainingFiles == null) {
-			oldDirectoryPlayers.deleteOnExit();
-		} else {
-			System.out.println("[uSkyBlock] Some Player Files Not Converted:");
-			for (File playerFile : oldDirectoryPlayers.listFiles()) {
-				System.out.println(playerFile.getName());
+				int i = 1;
+
+				int playerCount = Bukkit.getOfflinePlayers().length;
+
+				for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+					++i;
+					if (player.getName() != null && player.getUniqueId() != null)
+						convertPlayerFileOld(player.getName(), player.getUniqueId(), oldDirectoryPlayers);
+					if (i % 100 == 0) {
+						System.out.println("Converted " + i + "/" + playerCount + " player files!");
+					}
+				}
+
+				// After this, the only remaining files in the player directory should be
+				// from an import from a different server, or if you've been deleting
+				// Bukkit's /world/playerdata or /world/players files.
+
+				File[] remainingFiles = oldDirectoryPlayers.listFiles();
+				if (remainingFiles == null) {
+					oldDirectoryPlayers.deleteOnExit();
+				} else {
+					System.out.println("[uSkyBlock] Some Player Files Not Converted:");
+					for (File playerFile : oldDirectoryPlayers.listFiles()) {
+						System.out.println(playerFile.getName());
+					}
+				}
 			}
-		}
+		}, 20L);
 
 	}
 
 	private void convertPlayerFileOld(final String playerName, final UUID playerUUID, final File oldPlayerDirectory) {
 
+		System.out.println("Converting: " + playerName);
 		final File f = new File(oldPlayerDirectory, playerName);
 		if (!f.exists()) {
 			return;
@@ -1176,10 +1193,11 @@ public class uSkyBlock extends JavaPlugin {
 		try {
 			final FileInputStream fileIn = new FileInputStream(f);
 			final ObjectInputStream in = new ObjectInputStream(fileIn);
-			final PlayerInfo p = (PlayerInfo) in.readObject();
+			final OldPlayerInfo p = (OldPlayerInfo) in.readObject();
 			in.close();
 			fileIn.close();
-			writePlayerFile(playerUUID, p);
+			PlayerInfo p2 = new PlayerInfo(p);
+			writePlayerFile(playerUUID, p2);
 			f.deleteOnExit();  // delete the old file
 			return;
 		} catch (EOFException e) {

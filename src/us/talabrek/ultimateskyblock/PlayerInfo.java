@@ -46,6 +46,49 @@ public class PlayerInfo implements Serializable {
 		islandLevel = 0;
 	}
 
+	// constructor using OldPlayerInfo, for conversion
+	public PlayerInfo(final OldPlayerInfo oldPlayerInfo) {
+		playerUUID = Bukkit.getPlayer(oldPlayerInfo.playerName).getUniqueId();
+
+		members = new ArrayList<UUID>();
+		for (String memberName : oldPlayerInfo.members) {
+			members.add(Bukkit.getPlayer(memberName).getUniqueId());
+		}
+
+		banned = new ArrayList<UUID>();
+		for (String bannedName : oldPlayerInfo.banned) {
+			banned.add(Bukkit.getPlayer(bannedName).getUniqueId());
+		}
+
+		hasIsland = oldPlayerInfo.hasIsland;
+
+		hasParty = oldPlayerInfo.hasParty;
+
+		warpActive = oldPlayerInfo.warpActive;
+
+		if (oldPlayerInfo.partyLeader != null)
+			partyLeader = Bukkit.getPlayer(oldPlayerInfo.partyLeader).getUniqueId();
+		else
+			partyLeader = null;
+
+		partyIslandLocation = oldPlayerInfo.partyIslandLocation;
+
+		islandLocation = oldPlayerInfo.islandLocation;
+
+		homeLocation = oldPlayerInfo.homeLocation;
+
+		warpLocation = oldPlayerInfo.warpLocation;
+
+		deathWorld = oldPlayerInfo.deathWorld;
+
+		challengeList = oldPlayerInfo.challengeList;
+
+		islandExp = oldPlayerInfo.islandExp;
+
+		islandLevel = oldPlayerInfo.islandLevel;
+
+	}
+
 	public void startNewIsland(Location l) {
 		hasIsland = true;
 		setIslandLocation(l);
