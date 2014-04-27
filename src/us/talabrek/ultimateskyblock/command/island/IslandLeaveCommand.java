@@ -89,8 +89,8 @@ public class IslandLeaveCommand implements ICommand {
 
 		sender.sendMessage(ChatColor.YELLOW + "You have left that party.");
 
-		if (leader.getPlayer() != null)
-			leader.getPlayer().sendMessage(ChatColor.YELLOW + player.getName() + " has left your party.");
+		if (leader.getPlayer() instanceof Player)
+            ((Player)leader.getPlayer()).sendMessage(ChatColor.YELLOW + player.getName() + " has left your party.");
 
 		if (leader.getMembers().isEmpty() || (leader.getMembers().size() == 1 && leader.getMembers().contains(leader.getPlayerUUID())))
 			leader.setLeaveParty();

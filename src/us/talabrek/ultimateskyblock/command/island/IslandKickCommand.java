@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -49,10 +50,11 @@ public class IslandKickCommand implements ICommand {
 	}
 
 	private void removePlayer(UUIDPlayerInfo player, UUIDPlayerInfo owner, CommandSender sender) {
-		Player onlinePlayer = player.getPlayer();
+		OfflinePlayer offlinePlayer = player.getPlayer();
 
-		if (onlinePlayer != null) {
-			onlinePlayer.sendMessage(ChatColor.RED + "You have been kicked from " + owner.getPlayer().getName() + "'s skyblock.");
+		if (offlinePlayer instanceof Player) {
+            Player onlinePlayer = (Player)offlinePlayer;
+            onlinePlayer.sendMessage(ChatColor.RED + "You have been kicked from " + owner.getPlayer().getName() + "'s skyblock.");
 			if (uSkyBlock.isSkyBlockWorld(onlinePlayer.getWorld())) {
 
 				if (Settings.extras_sendToSpawn)

@@ -280,8 +280,8 @@ public class UUIDPlayerInfo implements Serializable {
         return partyLeader;
     }
 
-    public Player getPlayer() {
-        return Bukkit.getPlayer(playerUUID);
+    public OfflinePlayer getPlayer() {
+        return Bukkit.getOfflinePlayer(playerUUID);
     }
 
     public UUID getPlayerUUID() {

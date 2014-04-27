@@ -1171,7 +1171,7 @@ public class uSkyBlock extends JavaPlugin {
 
 				File[] remainingFiles = oldDirectoryPlayers.listFiles();
 				if (remainingFiles == null) {
-					oldDirectoryPlayers.deleteOnExit();
+					oldDirectoryPlayers.delete();
 				} else {
 					System.out.println("[uSkyBlock] Some Player Files Not Converted:");
 					for (File playerFile : oldDirectoryPlayers.listFiles()) {
@@ -1198,7 +1198,7 @@ public class uSkyBlock extends JavaPlugin {
 			fileIn.close();
 			UUIDPlayerInfo p2 = new UUIDPlayerInfo(p);
 			writePlayerFile(playerUUID, p2);
-			f.deleteOnExit();  // delete the old file
+			f.delete();  // delete the old file
 			return;
 		} catch (EOFException e) {
 			log.warning(playerName + " is corrupted, deleting on exit.");

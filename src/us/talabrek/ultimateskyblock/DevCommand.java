@@ -220,7 +220,8 @@ public class DevCommand implements CommandExecutor {
 
 				final List<String> pListStrings = new ArrayList<String>();
 				for (UUID uuid : pList) {
-					pListStrings.add(Bukkit.getPlayer(uuid).getName());
+                    System.out.println("Party members: " + uuid.toString());
+					pListStrings.add(Bukkit.getOfflinePlayer(uuid).getName());
 				}
 
 				sender.sendMessage(ChatColor.GREEN + Bukkit.getOfflinePlayer(pi.getPartyLeader()).getName()
