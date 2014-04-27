@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class TopGenerator implements Runnable
@@ -28,7 +28,7 @@ public class TopGenerator implements Runnable
 
 		for (File file : playerDir.listFiles()) 
 		{
-			PlayerInfo info = uSkyBlock.getInstance().getPlayerNoStore(UUID.fromString(file.getName()));
+			UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayerNoStore(UUID.fromString(file.getName()));
 			
 			if(info != null && info.getIslandLevel() > 0 && (!info.getHasParty() || info.getPartyLeader().equals(info.getPlayerUUID())))
 				topIslands.put(info.getIslandLevel(), info.getPlayer().getUniqueId());

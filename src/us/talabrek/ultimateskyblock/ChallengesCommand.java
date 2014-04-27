@@ -40,7 +40,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 			return false;
 
 		Player player = (Player)sender;
-		PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
+		UUIDPlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
 		
 		if (!Settings.challenges_allowChallenges)
 		{

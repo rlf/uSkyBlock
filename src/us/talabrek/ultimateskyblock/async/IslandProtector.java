@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -26,7 +26,7 @@ public class IslandProtector implements Runnable
 		{
 			// not completely sure of this
 			// todo: get sure
-			PlayerInfo pi = uSkyBlock.getInstance().getPlayer(UUID.fromString(file.getName()));
+			UUIDPlayerInfo pi = uSkyBlock.getInstance().getPlayer(UUID.fromString(file.getName()));
 			
 			if(pi == null || !pi.getHasIsland())
 				continue;

@@ -7,12 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.Misc;
-import us.talabrek.ultimateskyblock.PlayerInfo;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.*;
 
 public class IslandLeaveCommand implements ICommand {
 
@@ -56,7 +51,7 @@ public class IslandLeaveCommand implements ICommand {
 		if (args.length != 0)
 			return false;
 
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
+		UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 
 		if (info == null) {
 			sender.sendMessage(ChatColor.RED + "You have not started skyblock. Please use " + ChatColor.YELLOW + "/island" + ChatColor.RED + " to begin");
@@ -80,7 +75,7 @@ public class IslandLeaveCommand implements ICommand {
 			return true;
 		}
 
-		PlayerInfo leader = uSkyBlock.getInstance().getPlayer(info.getPartyLeader());
+		UUIDPlayerInfo leader = uSkyBlock.getInstance().getPlayer(info.getPartyLeader());
 
 		info.setLeaveParty();
 		info.setHomeLocation(null);

@@ -83,7 +83,7 @@ public class WorldGuardHandler {
 		protectIsland(uSkyBlock.getInstance().getPlayerNoStore(player.getUniqueId()));
 	}
 	
-	public static synchronized void protectIsland(PlayerInfo pi) throws IllegalArgumentException, IllegalStateException
+	public static synchronized void protectIsland(UUIDPlayerInfo pi) throws IllegalArgumentException, IllegalStateException
 	{
 		if(!Settings.island_protectWithWorldGuard || pi == null)
 			return;

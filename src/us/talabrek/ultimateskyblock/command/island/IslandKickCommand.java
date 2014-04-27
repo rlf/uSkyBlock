@@ -9,12 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.Misc;
-import us.talabrek.ultimateskyblock.PlayerInfo;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.*;
 
 public class IslandKickCommand implements ICommand {
 
@@ -53,7 +48,7 @@ public class IslandKickCommand implements ICommand {
 		return false;
 	}
 
-	private void removePlayer(PlayerInfo player, PlayerInfo owner, CommandSender sender) {
+	private void removePlayer(UUIDPlayerInfo player, UUIDPlayerInfo owner, CommandSender sender) {
 		Player onlinePlayer = player.getPlayer();
 
 		if (onlinePlayer != null) {
@@ -85,7 +80,7 @@ public class IslandKickCommand implements ICommand {
 		if (args.length != 1)
 			return false;
 
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
+		UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
 
 		if (info == null) {
 			sender.sendMessage(ChatColor.RED + "You have not started skyblock. Please use " + ChatColor.YELLOW + "/island" + ChatColor.RED + " to begin");
@@ -104,7 +99,7 @@ public class IslandKickCommand implements ICommand {
 
 		boolean all = false;
 
-		PlayerInfo other = null;
+		UUIDPlayerInfo other = null;
 
 		if (args[0].equalsIgnoreCase("all"))
 			all = true;

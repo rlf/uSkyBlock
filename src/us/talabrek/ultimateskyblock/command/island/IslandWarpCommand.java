@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.ICommand;
 import us.talabrek.ultimateskyblock.Misc;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandWarpCommand implements ICommand
@@ -71,7 +71,7 @@ public class IslandWarpCommand implements ICommand
 		
 		if(args.length == 0 && !override)
 		{
-			PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
+			UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
 			
 			if(info == null || (!info.getHasIsland() && !info.getHasParty()))
 			{
@@ -89,7 +89,7 @@ public class IslandWarpCommand implements ICommand
 		}
 		else if(args.length == 1)
 		{
-			PlayerInfo info = Misc.getPlayerInfo(args[0]);
+			UUIDPlayerInfo info = Misc.getPlayerInfo(args[0]);
 			
 			if(info == null || (!info.getHasIsland() && !info.getHasParty()))
 			{

@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.ICommand;
 import us.talabrek.ultimateskyblock.InviteHandler;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandMakeLeaderCommand implements ICommand
@@ -64,7 +64,7 @@ public class IslandMakeLeaderCommand implements ICommand
 		if(args.length != 1)
 			return false;
 		
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
+		UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 		
 		if(info == null)
 		{
@@ -86,7 +86,7 @@ public class IslandMakeLeaderCommand implements ICommand
 			return true;
 		}
 		
-		PlayerInfo otherInfo = uSkyBlock.getInstance().getOrCreatePlayer(otherPlayer.getUniqueId());
+		UUIDPlayerInfo otherInfo = uSkyBlock.getInstance().getOrCreatePlayer(otherPlayer.getUniqueId());
 		
 		if(otherInfo.getHasParty())
 		{

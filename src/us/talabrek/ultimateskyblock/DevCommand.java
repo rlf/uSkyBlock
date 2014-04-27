@@ -98,7 +98,7 @@ public class DevCommand implements CommandExecutor {
 			}
 		}
 		
-		PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
+		UUIDPlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
 		
 		if(pi == null)
 		{
@@ -120,7 +120,7 @@ public class DevCommand implements CommandExecutor {
 				return true;
 			}
 			
-			PlayerInfo info = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
+			UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
 			if(info != null)
 			{
 				final Location target = info.getTeleportLocation();
@@ -207,7 +207,7 @@ public class DevCommand implements CommandExecutor {
 			
 			if (pi.getHasParty()) 
 			{
-				final PlayerInfo piL = uSkyBlock.getInstance().getPlayer(pi.getPartyLeader());
+				final UUIDPlayerInfo piL = uSkyBlock.getInstance().getPlayer(pi.getPartyLeader());
 				final List<UUID> pList = piL.getMembers();
 				if (pList.contains(player.getUniqueId()))
 				{
@@ -440,7 +440,7 @@ public class DevCommand implements CommandExecutor {
 				}
 			}
 			
-			PlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
+			UUIDPlayerInfo pi = uSkyBlock.getInstance().getPlayer(player.getUniqueId());
 			
 			if(pi == null)
 			{

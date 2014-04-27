@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandToggleWarpCommand implements ICommand
@@ -58,7 +58,7 @@ public class IslandToggleWarpCommand implements ICommand
 	@Override
 	public boolean onCommand( CommandSender sender, String label, String[] args )
 	{
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
+		UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player) sender).getUniqueId());
 		
 		if(info == null)
 		{

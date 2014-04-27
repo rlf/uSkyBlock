@@ -7,12 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.InviteHandler;
-import us.talabrek.ultimateskyblock.PlayerInfo;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.VaultHandler;
-import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.*;
 
 public class IslandInviteCommand implements ICommand
 {
@@ -64,7 +59,7 @@ public class IslandInviteCommand implements ICommand
 		if(args.length > 1)
 			return false;
 
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
+		UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 		
 		if(info == null)
 		{

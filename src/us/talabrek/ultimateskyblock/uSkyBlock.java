@@ -67,7 +67,7 @@ public class uSkyBlock extends JavaPlugin {
 		return instance.getLogger();
 	}
 
-	HashMap<UUID, PlayerInfo> activePlayers = new HashMap<UUID, PlayerInfo>();
+	HashMap<UUID, UUIDPlayerInfo> activePlayers = new HashMap<UUID, UUIDPlayerInfo>();
 	LinkedHashMap<String, List<String>> challenges = new LinkedHashMap<String, List<String>>();
 	public FileConfiguration configPlugin;
 	public File directoryPlayers;
@@ -134,7 +134,7 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public boolean checkIfCanCompleteChallenge(final Player player, final String challenge) {
-		final PlayerInfo pi = getPlayer(player.getUniqueId());
+		final UUIDPlayerInfo pi = getPlayer(player.getUniqueId());
 
 		if (!isRankAvailable(player.getUniqueId(), getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".rankLevel"))) {
 			player.sendMessage(ChatColor.RED + "You have not unlocked this challenge yet!");
@@ -194,7 +194,7 @@ public class uSkyBlock extends JavaPlugin {
 		}
 		rankDisplay = challenges.get(rank);
 		int ranksCompleted = 0;
-		final PlayerInfo pi = getPlayer(playerUUID);
+		final UUIDPlayerInfo pi = getPlayer(playerUUID);
 		final Iterator<String> itr = rankDisplay.iterator();
 		while (itr.hasNext()) {
 			final String tempString = itr.next();
@@ -220,7 +220,7 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public void devDeletePlayerIsland(final UUID playerUUID) {
-		PlayerInfo island = getPlayer(playerUUID);
+		UUIDPlayerInfo island = getPlayer(playerUUID);
 
 		island.clearChallenges();
 		island.setIslandLocation(null);
@@ -255,7 +255,7 @@ public class uSkyBlock extends JavaPlugin {
 			return false;
 
 		bedrock.setY(bedrock.getY() + 3);
-		PlayerInfo pi = getPlayer(playerUUID);
+		UUIDPlayerInfo pi = getPlayer(playerUUID);
 
 		pi.setHomeLocation(bedrock);
 		pi.setHasIsland(true);
@@ -287,7 +287,7 @@ public class uSkyBlock extends JavaPlugin {
 		UUID leaderUUID = UUID.randomUUID();
 
 		if (sender instanceof Player) {
-			PlayerInfo info = getPlayerNoStore(((Player) sender).getUniqueId());
+			UUIDPlayerInfo info = getPlayerNoStore(((Player) sender).getUniqueId());
 			if (info.getHasParty())
 				leaderUUID = info.getPartyLeader();
 		}
@@ -295,7 +295,7 @@ public class uSkyBlock extends JavaPlugin {
 		for (Entry<UUID, Integer> entry : mTopList) {
 			if (i <= 10) {
 				if (hasParty(entry.getKey())) {
-					PlayerInfo info = getPlayerNoStore(entry.getKey());
+					UUIDPlayerInfo info = getPlayerNoStore(entry.getKey());
 					List<UUID> members = info.getMembers();
 					members.remove(entry.getKey());
 
@@ -324,7 +324,7 @@ public class uSkyBlock extends JavaPlugin {
 		removeActivePlayer(playerUUID);
 	}
 
-	private void addActivePlayer(final UUID playerUUID, final PlayerInfo pi) {
+	private void addActivePlayer(final UUID playerUUID, final UUIDPlayerInfo pi) {
 		activePlayers.put(playerUUID, pi);
 	}
 
@@ -342,20 +342,20 @@ public class uSkyBlock extends JavaPlugin {
 		return activePlayers.containsKey(playerUUID);
 	}
 
-	public synchronized PlayerInfo getOrCreatePlayer(UUID playerUUID) {
+	public synchronized UUIDPlayerInfo getOrCreatePlayer(UUID playerUUID) {
 		if (isActivePlayer(playerUUID))
 			return activePlayers.get(playerUUID);
 
-		PlayerInfo pi = readPlayerFile(playerUUID);
+		UUIDPlayerInfo pi = readPlayerFile(playerUUID);
 
 		if (pi == null) {
 			System.out.println("uSkyblock " + "Creating a new skyblock file for " + getPlayer(playerUUID).getPlayer().getName());
-			pi = new PlayerInfo(playerUUID);
+			pi = new UUIDPlayerInfo(playerUUID);
 			writePlayerFile(playerUUID, pi);
 		}
 
 		if (pi.getHasParty() && pi.getPartyIslandLocation() == null) {
-			final PlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
+			final UUIDPlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
 			pi.setPartyIslandLocation(pi2.getIslandLocation());
 			writePlayerFile(playerUUID, pi);
 		}
@@ -379,15 +379,15 @@ public class uSkyBlock extends JavaPlugin {
 		return file.delete();
 	}
 
-	public synchronized PlayerInfo getPlayerNoStore(UUID playerUUID) {
+	public synchronized UUIDPlayerInfo getPlayerNoStore(UUID playerUUID) {
 		if (isActivePlayer(playerUUID))
 			return activePlayers.get(playerUUID);
 
-		PlayerInfo pi = readPlayerFile(playerUUID);
+		UUIDPlayerInfo pi = readPlayerFile(playerUUID);
 
 		if (pi != null) {
 			if (pi.getHasParty() && pi.getPartyIslandLocation() == null) {
-				final PlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
+				final UUIDPlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
 				pi.setPartyIslandLocation(pi2.getIslandLocation());
 				writePlayerFile(playerUUID, pi);
 			}
@@ -398,15 +398,15 @@ public class uSkyBlock extends JavaPlugin {
 		return pi;
 	}
 
-	public synchronized PlayerInfo getPlayer(UUID playerUUID) {
+	public synchronized UUIDPlayerInfo getPlayer(UUID playerUUID) {
 		if (isActivePlayer(playerUUID))
 			return activePlayers.get(playerUUID);
 
-		PlayerInfo pi = readPlayerFile(playerUUID);
+		UUIDPlayerInfo pi = readPlayerFile(playerUUID);
 
 		if (pi != null) {
 			if (pi.getHasParty() && pi.getPartyIslandLocation() == null) {
-				final PlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
+				final UUIDPlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
 				pi.setPartyIslandLocation(pi2.getIslandLocation());
 				writePlayerFile(playerUUID, pi);
 			}
@@ -419,7 +419,7 @@ public class uSkyBlock extends JavaPlugin {
 		return pi;
 	}
 
-	public synchronized void savePlayer(PlayerInfo info) {
+	public synchronized void savePlayer(UUIDPlayerInfo info) {
 		writePlayerFile(info.getPlayerUUID(), info);
 	}
 
@@ -453,7 +453,7 @@ public class uSkyBlock extends JavaPlugin {
 	public String getChallengesFromRank(final OfflinePlayer player, final String rank) {
 		rankDisplay = challenges.get(rank);
 		String fullString = "";
-		final PlayerInfo pi = getPlayer(player.getUniqueId());
+		final UUIDPlayerInfo pi = getPlayer(player.getUniqueId());
 		final Iterator<String> itr = rankDisplay.iterator();
 		while (itr.hasNext()) {
 			final String tempString = itr.next();
@@ -534,7 +534,7 @@ public class uSkyBlock extends JavaPlugin {
 			return getPlayer(playerUUID).getIslandLocation();
 		}
 
-		final PlayerInfo pi = getInstance().readPlayerFile(playerUUID);
+		final UUIDPlayerInfo pi = getInstance().readPlayerFile(playerUUID);
 		if (pi == null) {
 			return null;
 		}
@@ -675,7 +675,7 @@ public class uSkyBlock extends JavaPlugin {
 			return getPlayer(playerUUID).getHasIsland();
 		}
 
-		final PlayerInfo pi = getInstance().readPlayerFile(playerUUID);
+		final UUIDPlayerInfo pi = getInstance().readPlayerFile(playerUUID);
 		if (pi == null) {
 			return false;
 		}
@@ -691,7 +691,7 @@ public class uSkyBlock extends JavaPlugin {
 			return getPlayer(playerUUID).getHasParty();
 		}
 
-		final PlayerInfo pi = getInstance().readPlayerFile(playerUUID);
+		final UUIDPlayerInfo pi = getInstance().readPlayerFile(playerUUID);
 		if (pi == null) {
 			return false;
 		}
@@ -782,7 +782,7 @@ public class uSkyBlock extends JavaPlugin {
 		if (isActivePlayer(playerUUID)) {
 			getPlayer(playerUUID).setHomeLocation(loc);
 		} else {
-			final PlayerInfo pi = getInstance().readPlayerFile(playerUUID);
+			final UUIDPlayerInfo pi = getInstance().readPlayerFile(playerUUID);
 			pi.setHomeLocation(loc);
 			getInstance().writePlayerFile(playerUUID, pi);
 		}
@@ -1193,10 +1193,10 @@ public class uSkyBlock extends JavaPlugin {
 		try {
 			final FileInputStream fileIn = new FileInputStream(f);
 			final ObjectInputStream in = new ObjectInputStream(fileIn);
-			final OldPlayerInfo p = (OldPlayerInfo) in.readObject();
+			final PlayerInfo p = (PlayerInfo) in.readObject();
 			in.close();
 			fileIn.close();
-			PlayerInfo p2 = new PlayerInfo(p);
+			UUIDPlayerInfo p2 = new UUIDPlayerInfo(p);
 			writePlayerFile(playerUUID, p2);
 			f.deleteOnExit();  // delete the old file
 			return;
@@ -1280,7 +1280,7 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
-	private PlayerInfo readPlayerFile(final UUID playerUUID) {
+	private UUIDPlayerInfo readPlayerFile(final UUID playerUUID) {
 
 		String UUIDString = playerUUID.toString();
 
@@ -1292,7 +1292,7 @@ public class uSkyBlock extends JavaPlugin {
 			try {
 				final FileInputStream fileIn = new FileInputStream(f);
 				final ObjectInputStream in = new ObjectInputStream(fileIn);
-				final PlayerInfo p = (PlayerInfo) in.readObject();
+				final UUIDPlayerInfo p = (UUIDPlayerInfo) in.readObject();
 				in.close();
 				fileIn.close();
 				return p;
@@ -1485,8 +1485,8 @@ public class uSkyBlock extends JavaPlugin {
 			return false;
 		}
 
-		PlayerInfo from = getPlayer(playerfrom);
-		PlayerInfo to = getPlayer(playerto);
+		UUIDPlayerInfo from = getPlayer(playerfrom);
+		UUIDPlayerInfo to = getPlayer(playerto);
 
 		if (from.getHasIsland()) {
 			to.setHasIsland(true);
@@ -1529,7 +1529,7 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
-	private void writePlayerFile(final UUID playerUUID, final PlayerInfo pi) {
+	private void writePlayerFile(final UUID playerUUID, final UUIDPlayerInfo pi) {
 
 		String UUIDString = playerUUID.toString();
 
@@ -1546,14 +1546,14 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
-	public void removeIsland(PlayerInfo island) {
-		ArrayList<PlayerInfo> list = new ArrayList<PlayerInfo>(1);
+	public void removeIsland(UUIDPlayerInfo island) {
+		ArrayList<UUIDPlayerInfo> list = new ArrayList<UUIDPlayerInfo>(1);
 		list.add(island);
 		removeIslands(list);
 	}
 
-	public void restartIsland(PlayerInfo island) {
-		ArrayList<PlayerInfo> list = new ArrayList<PlayerInfo>(1);
+	public void restartIsland(UUIDPlayerInfo island) {
+		ArrayList<UUIDPlayerInfo> list = new ArrayList<UUIDPlayerInfo>(1);
 		list.add(island);
 
 		IslandRemover remover = new IslandRemover(list);
@@ -1561,7 +1561,7 @@ public class uSkyBlock extends JavaPlugin {
 		remover.start();
 	}
 
-	public void removeIslands(List<PlayerInfo> islands) {
+	public void removeIslands(List<UUIDPlayerInfo> islands) {
 		IslandRemover remover = new IslandRemover(islands);
 		remover.start();
 	}
@@ -1570,7 +1570,7 @@ public class uSkyBlock extends JavaPlugin {
 		mTopList = topList;
 	}
 
-	public synchronized void removeFromTop(PlayerInfo island) {
+	public synchronized void removeFromTop(UUIDPlayerInfo island) {
 		if (mTopList == null || (!island.getHasIsland() && !island.getPlayerUUID().equals(island.getPartyLeader())))
 			return;
 
@@ -1584,7 +1584,7 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
-	public synchronized void updateTopIsland(PlayerInfo island) {
+	public synchronized void updateTopIsland(UUIDPlayerInfo island) {
 		if (mTopList == null)
 			return;
 

@@ -10,21 +10,21 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.InventoryHolder;
 
-import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandRemover extends QueueTask
 {
-	private List<PlayerInfo> mIslands;
-	private Iterator<PlayerInfo> mNext;
+	private List<UUIDPlayerInfo> mIslands;
+	private Iterator<UUIDPlayerInfo> mNext;
 	private int mFailCount = 0;
 	private int mVisitedCount = 0; 
 	
 	private long mLastUpdate;
 	
-	public IslandRemover(List<PlayerInfo> islands)
+	public IslandRemover(List<UUIDPlayerInfo> islands)
 	{
 		mIslands = islands;
 	}
@@ -45,7 +45,7 @@ public class IslandRemover extends QueueTask
 	@Override
 	public void run()
 	{
-		PlayerInfo island = mNext.next();
+		UUIDPlayerInfo island = mNext.next();
 		
 		++mVisitedCount;
 		
@@ -81,7 +81,7 @@ public class IslandRemover extends QueueTask
 			Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), this, (removed ? 20L : 4L));
 	}
 	
-	private boolean remove(PlayerInfo island)
+	private boolean remove(UUIDPlayerInfo island)
 	{
 		Location center = island.getIslandLocation();
 		

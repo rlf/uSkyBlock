@@ -8,8 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandRestartCommand implements ICommand
@@ -64,8 +64,8 @@ public class IslandRestartCommand implements ICommand
 	{
 		if(args.length != 0)
 			return false;
-		
-		PlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
+
+		UUIDPlayerInfo info = uSkyBlock.getInstance().getPlayer(((Player)sender).getUniqueId());
 		
 		if (info.getHasParty()) 
 		{

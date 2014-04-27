@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.async.IslandBuilder;
 
@@ -59,7 +59,7 @@ public class IslandDefaultCommand implements ICommand
 	@Override
 	public boolean onCommand( CommandSender sender, String label, String[] args )
 	{
-		PlayerInfo pi = uSkyBlock.getInstance().getOrCreatePlayer(((Player)sender).getUniqueId());
+		UUIDPlayerInfo pi = uSkyBlock.getInstance().getOrCreatePlayer(((Player)sender).getUniqueId());
 		if (pi == null) 
 		{
 			sender.sendMessage(ChatColor.RED + "Error: Couldn't read your player data!");
