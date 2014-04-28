@@ -94,7 +94,7 @@ public class IslandKickCommand implements ICommand {
 			return true;
 		}
 
-		if (!info.getPartyLeader().equals(sender.getName())) {
+		if (!info.getPartyLeader().equals(((Player) sender).getUniqueId())) {
 			sender.sendMessage(ChatColor.RED + "You are not the party leader.");
 			return true;
 		}
@@ -118,7 +118,7 @@ public class IslandKickCommand implements ICommand {
 			}
 
 			// todo: check if other party leader exists
-			if (!other.getPartyLeader().equals(sender.getName())){
+			if (!other.getPartyLeader().equals(((Player)sender).getUniqueId())){
 				sender.sendMessage(ChatColor.RED + args[0] + " is not a member of your party!");
 				return true;
 			}
