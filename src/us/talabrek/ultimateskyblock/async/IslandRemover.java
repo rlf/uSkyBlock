@@ -34,7 +34,7 @@ public class IslandRemover extends QueueTask
 		if(mIslands.isEmpty())
 			return;
 		
-		Bukkit.getScheduler().runTaskLaterAsynchronously(uSkyBlock.getInstance(), this, 4L);
+		Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), this, 4L);
 		mNext = mIslands.iterator();
 		mLastUpdate = System.currentTimeMillis();
 		mVisitedCount = 0;
