@@ -298,10 +298,14 @@ public class uSkyBlock extends JavaPlugin {
 					UUIDPlayerInfo info = getPlayerNoStore(entry.getKey());
 					List<UUID> members = info.getMembers();
 					members.remove(entry.getKey());
+                    ArrayList<String> memberStrings = new ArrayList<String>();
+                    for (UUID member : members) {
+                        memberStrings.add(Bukkit.getOfflinePlayer(member).getName());
+                    }
 
-					sender.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + entry.getKey() + ChatColor.GRAY + members.toString() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + entry.getValue());
+					sender.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + Bukkit.getOfflinePlayer(entry.getKey()).getName() + ChatColor.GRAY + memberStrings.toString() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + entry.getValue());
 				} else
-					sender.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + entry.getKey() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + entry.getValue());
+					sender.sendMessage(ChatColor.GRAY + "" + i + ": " + ChatColor.GOLD + Bukkit.getOfflinePlayer(entry.getKey()).getName() + ChatColor.WHITE + " - Island level " + ChatColor.YELLOW + entry.getValue());
 			} else if (!(sender instanceof Player))
 				break;
 
@@ -349,7 +353,7 @@ public class uSkyBlock extends JavaPlugin {
 		UUIDPlayerInfo pi = readPlayerFile(playerUUID);
 
 		if (pi == null) {
-			System.out.println("uSkyblock " + "Creating a new skyblock file for " + getPlayer(playerUUID).getPlayer().getName());
+			System.out.println("uSkyblock " + "Creating a new skyblock file for " + Bukkit.getPlayer(playerUUID).getName());
 			pi = new UUIDPlayerInfo(playerUUID);
 			writePlayerFile(playerUUID, pi);
 		}
@@ -362,7 +366,7 @@ public class uSkyBlock extends JavaPlugin {
 
 		pi.buildChallengeList();
 		addActivePlayer(playerUUID, pi);
-		System.out.println("uSkyblock " + "Loaded player file for " + getPlayer(playerUUID).getPlayer().getName());
+		System.out.println("uSkyblock " + "Loaded player file for " + Bukkit.getPlayer(playerUUID).getName());
 
 		return pi;
 	}
