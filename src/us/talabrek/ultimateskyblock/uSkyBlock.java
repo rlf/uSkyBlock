@@ -388,7 +388,8 @@ public class uSkyBlock extends JavaPlugin {
 		if (pi != null) {
 			if (pi.getHasParty() && pi.getPartyIslandLocation() == null) {
 				final UUIDPlayerInfo pi2 = readPlayerFile(pi.getPartyLeader());
-				pi.setPartyIslandLocation(pi2.getIslandLocation());
+                if (pi2 != null && pi2.getIslandLocation() != null)
+				    pi.setPartyIslandLocation(pi2.getIslandLocation());
 				writePlayerFile(playerUUID, pi);
 			}
 
@@ -1174,9 +1175,9 @@ public class uSkyBlock extends JavaPlugin {
 					oldDirectoryPlayers.delete();
 				} else {
 					System.out.println("[uSkyBlock] Some Player Files Not Converted:");
-					for (File playerFile : oldDirectoryPlayers.listFiles()) {
-						System.out.println(playerFile.getName());
-					}
+					//for (File playerFile : oldDirectoryPlayers.listFiles()) {
+					//	System.out.println(playerFile.getName());
+					//}
 				}
 			}
 		}, 20L);
@@ -1185,7 +1186,7 @@ public class uSkyBlock extends JavaPlugin {
 
 	private void convertPlayerFileOld(final String playerName, final UUID playerUUID, final File oldPlayerDirectory) {
 
-		System.out.println("Converting: " + playerName);
+		//System.out.println("Converting: " + playerName);
 		final File f = new File(oldPlayerDirectory, playerName);
 		if (!f.exists()) {
 			return;
@@ -1198,7 +1199,7 @@ public class uSkyBlock extends JavaPlugin {
 			fileIn.close();
 			UUIDPlayerInfo p2 = new UUIDPlayerInfo(p);
 			writePlayerFile(playerUUID, p2);
-			f.delete();  // delete the old file
+			f.delete();
 			return;
 		} catch (EOFException e) {
 			log.warning(playerName + " is corrupted, deleting on exit.");
@@ -1532,6 +1533,7 @@ public class uSkyBlock extends JavaPlugin {
 	private void writePlayerFile(final UUID playerUUID, final UUIDPlayerInfo pi) {
 
 		String UUIDString = playerUUID.toString();
+        //System.out.println("Saving " + UUIDString);
 
 		final File f = new File(directoryPlayers, UUIDString);
 		try {
