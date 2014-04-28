@@ -242,7 +242,7 @@ public class DevCommand implements CommandExecutor {
 				if (pi.getPartyLeader() != null)
 					sender.sendMessage(ChatColor.RED + "Party leader: " + Bukkit.getOfflinePlayer(pi.getPartyLeader()).getName() + " should be null!");
 				
-				if (pi.getMembers() != null)
+				if (!pi.getMembers().isEmpty())
 					sender.sendMessage(ChatColor.RED + "Player has party members, but shouldn't!");
 				
 			}
