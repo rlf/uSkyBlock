@@ -95,7 +95,6 @@ public class IslandMakeLeaderCommand implements ICommand
 		}
 		
 		InviteHandler.transferRequest((Player)sender, otherPlayer);
-		sender.sendMessage(ChatColor.GREEN + "You have sent a request to " + otherPlayer.getName() + " to transfer your island to them.");
 		
 		return true;
 	}

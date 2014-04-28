@@ -56,12 +56,22 @@ public class InviteHandler {
 			mInvitedPlayers.put(from, invites);
 		}
 
+        if (invites.contains(to.getUniqueId()))
+            throw new IllegalArgumentException("You have already invited that player");
+
 		// Remove any existing invites
 		removeInvite(to);
 
 		invites.add(to.getUniqueId());
 
 		mInvites.put(to, new Invite(from, Invite.Type.Transfer));
+
+        from.sendMessage("You have invited " + to.getName() + " to become your island leader.");
+        to.sendMessage(from.getName() + " has invited you to become their island leader!");
+        to.sendMessage("Use " + ChatColor.YELLOW + "/island [accept|reject]" + ChatColor.WHITE + " to accept or reject the invite.");
+        // player.sendMessage("This invite will expire in 20 seconds.");
+        if (uSkyBlock.getInstance().hasIsland(to.getUniqueId()))
+            to.sendMessage(ChatColor.GOLD + "WARNING: You will lose your current island if you accept!");
 	}
 
 	public static boolean hasInvite(Player player, Invite.Type type) {
@@ -154,8 +164,7 @@ public class InviteHandler {
 		info.setIslandLevel(inviterIsland.getIslandLevel());
 		info.setPartyIslandLocation(null);
 
-		info.addMember(inviterIsland.getPlayerUUID());
-		inviterIsland.setJoinParty(info.getPlayerUUID(), info.getIslandLocation());
+        addPlayerToParty(inviterIsland, info);
 
 		inviterIsland.setHasIsland(false);
 		inviterIsland.setIslandLocation(null);
