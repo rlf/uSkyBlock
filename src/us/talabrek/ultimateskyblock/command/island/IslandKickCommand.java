@@ -94,11 +94,6 @@ public class IslandKickCommand implements ICommand {
 			return true;
 		}
 
-		if (!info.getPartyLeader().equals(((Player) sender).getUniqueId())) {
-			sender.sendMessage(ChatColor.RED + "You are not the party leader.");
-			return true;
-		}
-
 		boolean all = false;
 
 		UUIDPlayerInfo other = null;
@@ -117,6 +112,16 @@ public class IslandKickCommand implements ICommand {
 				return true;
 			}
 
+            if (other.getPlayer().getPlayer() != null &&
+                    uSkyBlock.isSkyBlockWorld(other.getPlayer().getPlayer().getWorld()) &&
+                    other.getPlayer().getPlayer().getLocation().distance(info.getIslandLocation()) < Settings.island_distance) {
+                // if player, regardless of party, is on the owner's island, send to spawn
+                if (Settings.extras_sendToSpawn)
+                    Misc.safeTeleport(other.getPlayer().getPlayer(), Bukkit.getWorld("spawnworld").getSpawnLocation());
+                else
+                    Misc.safeTeleport(other.getPlayer().getPlayer(), uSkyBlock.getSkyBlockWorld().getSpawnLocation());
+            }
+
 			// todo: check if other party leader exists
 			if (!other.getPartyLeader().equals(((Player)sender).getUniqueId())){
 				sender.sendMessage(ChatColor.RED + args[0] + " is not a member of your party!");
@@ -124,6 +129,11 @@ public class IslandKickCommand implements ICommand {
 			}
 
 		}
+
+        if (!info.getPartyLeader().equals(((Player) sender).getUniqueId())) {
+            sender.sendMessage(ChatColor.RED + "You are not the party leader.");
+            return true;
+        }
 
 		if (all) {
 			ArrayList<UUID> members = new ArrayList<UUID>(info.getMembers());
