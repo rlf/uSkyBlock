@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -122,7 +123,10 @@ public class IslandPartyCommand implements ICommand
 
             sender.sendMessage(ChatColor.YELLOW + "Listing your island members:");
             UUIDPlayerInfo leader = uSkyBlock.getInstance().getPlayerNoStore(info.getPartyLeader());
-            sender.sendMessage(ChatColor.WHITE + leader.getMembers().toString());
+            ArrayList<String> memberStrings = new ArrayList<String>();
+            for (UUID member : leader.getMembers())
+                memberStrings.add(Bukkit.getOfflinePlayer(member).getName());
+            sender.sendMessage(ChatColor.WHITE + memberStrings.toString());
         } 
         else if (sender instanceof Player && InviteHandler.hasInvite((Player)sender))
         {
