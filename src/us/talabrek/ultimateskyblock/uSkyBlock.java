@@ -290,6 +290,8 @@ public class uSkyBlock extends JavaPlugin {
 			UUIDPlayerInfo info = getPlayerNoStore(((Player) sender).getUniqueId());
 			if (info.getHasParty())
 				leaderUUID = info.getPartyLeader();
+            else
+                leaderUUID = info.getPlayerUUID();
 		}
 
 		for (Entry<UUID, Integer> entry : mTopList) {
