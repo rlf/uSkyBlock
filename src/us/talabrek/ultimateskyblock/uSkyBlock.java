@@ -8,8 +8,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.Stack;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -38,7 +48,24 @@ import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.async.IslandBuilder;
 import us.talabrek.ultimateskyblock.async.IslandRemover;
 import us.talabrek.ultimateskyblock.async.TopGenerator;
-import us.talabrek.ultimateskyblock.command.island.*;
+import us.talabrek.ultimateskyblock.command.island.IslandAcceptCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandBanCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandDefaultCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandInviteCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandKickCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandLeaveCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandLevelCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandLockCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandMakeLeaderCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandPartyCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandRejectCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandRestartCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandSetHomeCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandSetWarpCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandToggleWarpCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandTopCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandUnlockCommand;
+import us.talabrek.ultimateskyblock.command.island.IslandWarpCommand;
 
 public class uSkyBlock extends JavaPlugin {
 	private static uSkyBlock instance;
@@ -745,9 +772,9 @@ public class uSkyBlock extends JavaPlugin {
 			final int px = l.getBlockX();
 			final int py = l.getBlockY();
 			final int pz = l.getBlockZ();
-			for (int x = -10; x <= 10; x++) {
-				for (int y = -3; y <= 10; y++) {
-					for (int z = -10; z <= 10; z++) {
+			for (int x = -50; x <= 50; x++) {
+				for (int y = -3; y <= 256; y++) {
+					for (int z = -50; z <= 50; z++) {
 						final Block b = new Location(l.getWorld(), px + x, py + y, pz + z).getBlock();
 						for (int i = 0; i < neededItem.length; i++) {
 							if (b.getTypeId() == neededItem[i][0]) {
