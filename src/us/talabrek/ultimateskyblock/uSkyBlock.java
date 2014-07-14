@@ -194,7 +194,7 @@ public class uSkyBlock extends JavaPlugin {
 			if (!hasRequired(player, challenge, "onIsland")) {
 				player.sendMessage(ChatColor.RED + getChallengeConfig().getString(new StringBuilder("options.challenges.challengeList.").append(challenge).append(".description").toString()));
 
-				player.sendMessage(ChatColor.RED + "You must be standing within 10 blocks of all required items.");
+				player.sendMessage(ChatColor.RED + "You must be standing within 50 blocks of all required items.");
 				return false;
 			}
 			return true;
@@ -629,6 +629,7 @@ public class uSkyBlock extends JavaPlugin {
 
 	public boolean giveReward(final Player player, final String challenge) {
 		final String[] permList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".permissionReward").split(" ");
+		final String[] cmdList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".executeCommand").split(" , ");
 		int rewCurrency = 0;
 		player.sendMessage(ChatColor.GREEN + "You have completed the " + challenge + " challenge!");
 		String[] rewList;
@@ -683,6 +684,11 @@ public class uSkyBlock extends JavaPlugin {
 				}
 			}
 		}
+		for (final String s : cmdList) {
+			if (!s.equalsIgnoreCase("none")) {
+				getServer().dispatchCommand(getServer().getConsoleSender(), s);
+			}
+		}
 		for (final String s : rewList) {
 			final String[] sPart = s.split(":");
 			if (sPart.length == 2) {
@@ -703,7 +709,7 @@ public class uSkyBlock extends JavaPlugin {
 
 		return true;
 	}
-
+	
 	public boolean hasIsland(final UUID playerUUID) {
 		if (isActivePlayer(playerUUID)) {
 			return getPlayer(playerUUID).getHasIsland();
