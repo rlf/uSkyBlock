@@ -99,6 +99,8 @@ options:
         itemReward: '334:3'
         #[permission node] A permission granted for completion (use none to not give a permission)
         permissionReward: 'none'
+        #[command] A command executed through the console for completion(use none to not execute a command)
+        executeCommand: 'none'
         #[text] The text name of the reward (to display to the player). No need to list currency rewards here, but you should list permission rewards if you have them.
         rewardText: '3 leather'
         #[integer] How much currency to give for the first time completion (requires an economy plugin)
@@ -142,6 +144,7 @@ options:
         currencyReward: 10
         xpReward: 30
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '3:1'
         repeatRewardText: '1 dirt'
@@ -158,6 +161,7 @@ options:
         currencyReward: 15
         xpReward: 30
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '12:1'
         repeatRewardText: '1 sand'
@@ -174,6 +178,7 @@ options:
         currencyReward: 15
         xpReward: 30
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '82:2'
         repeatRewardText: '2 clay blocks'
@@ -190,6 +195,7 @@ options:
         currencyReward: 15
         xpReward: 30
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '3:2'
         repeatRewardText: '2 dirt blocks'
@@ -206,6 +212,7 @@ options:
         currencyReward: 15
         xpReward: 30
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '3:2'
         repeatRewardText: '2 dirt blocks'
@@ -222,6 +229,7 @@ options:
         currencyReward: 15
         xpReward: 30
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '110:1'
         repeatRewardText: '1 mycelium block'
@@ -238,6 +246,7 @@ options:
         currencyReward: 50
         xpReward: 50
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: false
         repeatItemReward: ''
         repeatRewardText: ''
@@ -254,6 +263,7 @@ options:
         currencyReward: 75
         xpReward: 75
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '331:2 15:1 318:1'
         repeatRewardText: '2 redstone dust, 1 flint, and 1 iron(ore)'
@@ -270,6 +280,7 @@ options:
         currencyReward: 75
         xpReward: 75
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '351:3:1 383:90:1 383:92:1 383:93:1'
         repeatRewardText: '1 cocoa bean, 1 spawn egg(chicken,cow,pig)'
@@ -286,6 +297,7 @@ options:
         currencyReward: 75
         xpReward: 75
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '331:2 15:1 351:1'
         repeatRewardText: '2 redstone dust, 1 inksac, 1 iron (ore)'
@@ -302,6 +314,7 @@ options:
         currencyReward: 75
         xpReward: 75
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '331:2 15:1'
         repeatRewardText: '2 redstone dust, 1 iron (ore)'
@@ -318,6 +331,7 @@ options:
         currencyReward: 75
         xpReward: 75
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '331:2 15:1'
         repeatRewardText: '2 redstone dust, 1 iron (ore)'
@@ -334,6 +348,7 @@ options:
         currencyReward: 50
         xpReward: 50
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: false
         repeatItemReward: ''
         repeatRewardText: ''
@@ -350,6 +365,7 @@ options:
         currencyReward: 100
         xpReward: 100
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: false
         repeatItemReward: ''
         repeatRewardText: ''
@@ -366,6 +382,7 @@ options:
         currencyReward: 100
         xpReward: 100
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: false
         repeatItemReward: ''
         repeatRewardText: ''
@@ -382,6 +399,7 @@ options:
         currencyReward: 50
         xpReward: 100
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '266:1 369:1'
         repeatRewardText: '1 gold ingot and 1 blaze rod'
@@ -398,6 +416,7 @@ options:
         currencyReward: 50
         xpReward: 100
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '331:8'
         repeatRewardText: '8 redstone dust'
@@ -414,6 +433,7 @@ options:
         currencyReward: 50
         xpReward: 100
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '15:1'
         repeatRewardText: '1 iron (ore)'
@@ -430,6 +450,7 @@ options:
         currencyReward: 100
         xpReward: 100
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '15:1'
         repeatRewardText: '1 iron (ore)'
@@ -446,6 +467,7 @@ options:
         currencyReward: 150
         xpReward: 150
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: false
         repeatItemReward: ''
         repeatRewardText: ''
@@ -462,6 +484,7 @@ options:
         currencyReward: 200
         xpReward: 200
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '388:1 383:91:1'
         repeatRewardText: '1 emerald, 1 sheep spawn egg'
@@ -478,6 +501,7 @@ options:
         currencyReward: 200
         xpReward: 200
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '266:1'
         repeatRewardText: '1 gold ingot'
@@ -494,6 +518,7 @@ options:
         currencyReward: 200
         xpReward: 200
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '266:2'
         repeatRewardText: '2 gold ingots'
@@ -510,6 +535,7 @@ options:
         currencyReward: 200
         xpReward: 200
         permissionReward: 'none'
+        executeCommand: 'none'
         repeatable: true
         repeatItemReward: '266:1 383:96:1 388:1'
         repeatRewardText: '1 gold ingot, 1 mooshroom spawn egg, 1 emerald'
@@ -526,6 +552,7 @@ options:
         currencyReward: 250
         xpReward: 250
         permissionReward: 'titlemanager.title.skylordplus skyblockserver.endaccess'
+        executeCommand: 'none'
         repeatable: false
         repeatItemReward: ''
         repeatRewardText: ''
