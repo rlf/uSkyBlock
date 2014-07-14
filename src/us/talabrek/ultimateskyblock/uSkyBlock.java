@@ -686,7 +686,8 @@ public class uSkyBlock extends JavaPlugin {
 		}
 		for (final String s : cmdList) {
 			if (!s.equalsIgnoreCase("none")) {
-				getServer().dispatchCommand(getServer().getConsoleSender(), s);
+				String pnamevar = player.getName();
+				getServer().dispatchCommand(getServer().getConsoleSender(), s.replace("%player", pnamevar));
 			}
 		}
 		for (final String s : rewList) {
