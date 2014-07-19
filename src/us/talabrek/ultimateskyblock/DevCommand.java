@@ -85,6 +85,7 @@ public class DevCommand implements CommandExecutor {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private boolean onPlayerCommand(CommandSender sender, String[] split)
 	{
 		OfflinePlayer player = Bukkit.getOfflinePlayer(split[1]);
@@ -304,6 +305,7 @@ public class DevCommand implements CommandExecutor {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] split) 
 	{
 		if (split.length == 0)

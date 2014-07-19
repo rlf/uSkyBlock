@@ -1,16 +1,8 @@
 package us.talabrek.ultimateskyblock;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 
 public class PlayerInfo implements Serializable {
     public static final long serialVersionUID = 1L;

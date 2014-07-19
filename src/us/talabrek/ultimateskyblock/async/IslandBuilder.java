@@ -32,6 +32,7 @@ public class IslandBuilder implements Runnable
 		//generateIslandBlocks(mLocation.getBlockX(), mLocation.getBlockZ(), mPlayer, mLocation.getWorld());
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void islandExtras(final int x, final int z, final Player player, final World world) {
 		int y = Settings.island_height;
 
@@ -111,6 +112,7 @@ public class IslandBuilder implements Runnable
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void islandLayer1(final int x, final int z, final Player player, final World world) {
 		int y = Settings.island_height;
 		y = Settings.island_height + 4;
@@ -130,6 +132,7 @@ public class IslandBuilder implements Runnable
 		blockToChange.setTypeId(0);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void islandLayer2(final int x, final int z, final Player player, final World world) {
 		int y = Settings.island_height;
 		y = Settings.island_height + 3;
@@ -151,6 +154,7 @@ public class IslandBuilder implements Runnable
 		blockToChange.setTypeId(12);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void islandLayer3(final int x, final int z, final Player player, final World world) {
 		int y = Settings.island_height;
 		y = Settings.island_height + 2;
@@ -172,6 +176,7 @@ public class IslandBuilder implements Runnable
 		blockToChange.setTypeId(12);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void islandLayer4(final int x, final int z, final Player player, final World world) {
 		int y = Settings.island_height;
 		y = Settings.island_height + 1;
@@ -215,6 +220,7 @@ public class IslandBuilder implements Runnable
 		return nextPos;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void oldGenerateIslandBlocks(final int x, final int z, final Player player, final World world) {
 		final int y = Settings.island_height;
 
@@ -284,6 +290,7 @@ public class IslandBuilder implements Runnable
 		blockToChange.setTypeId(12);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void generateIslandBlocks(final int x, final int z, final Player player, final World world) {
 		final int y = Settings.island_height;
 		final Block blockToChange = world.getBlockAt(x, y, z);
@@ -423,6 +430,7 @@ public class IslandBuilder implements Runnable
 		uSkyBlock.getInstance().savePlayer(uSkyBlock.getInstance().getPlayer(player.getUniqueId()));
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Location getChestSpawnLoc(final Location loc, final Player player) {
 		for (int x = -15; x <= 15; x++) {
 			for (int y = -15; y <= 15; y++) {
@@ -448,6 +456,7 @@ public class IslandBuilder implements Runnable
 		return loc;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void setChest(final Location loc, final Player player) {
 		for (int x = -15; x <= 15; x++) {
 			for (int y = -15; y <= 15; y++) {

@@ -627,6 +627,7 @@ public class uSkyBlock extends JavaPlugin {
 		return l;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean giveReward(final Player player, final String challenge) {
 		final String[] permList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".permissionReward").split(" ");
 		final String[] cmdList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".executeCommand").split(" , ");
@@ -739,6 +740,7 @@ public class uSkyBlock extends JavaPlugin {
 		return pi.getHasParty();
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean hasRequired(final Player player, final String challenge, final String type) {
 		final String[] reqList = getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems").split(" ");
 
@@ -905,6 +907,7 @@ public class uSkyBlock extends JavaPlugin {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void loadPluginConfig() {
 		try {
 			getConfig();
@@ -1359,6 +1362,7 @@ public class uSkyBlock extends JavaPlugin {
 		// }
 	}
 
+	@SuppressWarnings("deprecation")
 	public void reloadData() {
 		if (skyblockDataFile == null) {
 			skyblockDataFile = new File(getDataFolder(), "skyblockData.yml");
@@ -1469,6 +1473,7 @@ public class uSkyBlock extends JavaPlugin {
 		return sortedMap;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean takeRequired(final Player player, final String challenge, final String type) {
 		if (type.equalsIgnoreCase("onPlayer")) {
 			final String[] reqList = getChallengeConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems").split(" ");

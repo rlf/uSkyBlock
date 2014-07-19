@@ -58,6 +58,7 @@ public class IslandMakeLeaderCommand implements ICommand
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand( CommandSender sender, String label, String[] args )
 	{

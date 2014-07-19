@@ -2,12 +2,18 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import us.talabrek.ultimateskyblock.*;
+import us.talabrek.ultimateskyblock.ICommand;
+import us.talabrek.ultimateskyblock.InviteHandler;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.VaultHandler;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandInviteCommand implements ICommand
 {
@@ -53,6 +59,7 @@ public class IslandInviteCommand implements ICommand
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand( CommandSender sender, String label, String[] args )
 	{

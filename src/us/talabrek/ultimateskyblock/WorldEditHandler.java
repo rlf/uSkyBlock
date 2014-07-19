@@ -16,6 +16,7 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 
+@SuppressWarnings("deprecation")
 public class WorldEditHandler {
 	public static WorldEditPlugin getWorldEdit() {
 		final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldEdit");
@@ -25,6 +26,7 @@ public class WorldEditHandler {
 		return (WorldEditPlugin) plugin;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static boolean loadIslandSchematic(final World world, final File file, final Location origin) throws DataException, IOException,
 			MaxChangedBlocksException {
 		final Vector v = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());

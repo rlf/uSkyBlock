@@ -270,6 +270,7 @@ public class Misc
 		return result;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static UUIDPlayerInfo getPlayerInfo(String name)
 	{
 		OfflinePlayer player = Bukkit.getOfflinePlayer(name);

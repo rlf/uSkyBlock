@@ -4,6 +4,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 public class ItemParser {
+	@SuppressWarnings("deprecation")
 	public static ItemStack getItemStackfromString(final String s) {
 		if (s.equalsIgnoreCase("")) { return null; }
 		final ItemStack x = new ItemStack(1);
@@ -45,6 +46,7 @@ public class ItemParser {
 		return x;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static String parseItemStackToString(final ItemStack item) {
 		if (item == null) { return ""; }
 

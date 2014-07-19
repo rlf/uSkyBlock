@@ -20,6 +20,7 @@ public class Purger implements Runnable
 		mNoIsland = includeNoIsland;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void run()
 	{

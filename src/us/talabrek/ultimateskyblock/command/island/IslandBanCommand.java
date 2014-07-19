@@ -50,6 +50,7 @@ public class IslandBanCommand implements ICommand {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, String label, String[] args) {
 		if (args.length > 1)
