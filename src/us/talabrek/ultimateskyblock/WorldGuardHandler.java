@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -10,7 +11,6 @@ import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag.State;
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -87,55 +87,55 @@ public class WorldGuardHandler {
 	{
 		if(!Settings.island_protectWithWorldGuard || pi == null)
 			return;
-		
+
 		try
 		{
 			String regionName = pi.getPlayer().getName() + "Island";
 
 			if(!pi.getHasIsland())
 				throw new IllegalArgumentException(pi.getPlayer().getName() + " does not have an island.");
-				
+
 			RegionManager manager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
-			
+
 			if(manager.hasRegion(regionName))
 				return;
-			
+
 			ProtectedRegion region = null;
 			region = new ProtectedCuboidRegion(regionName, getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
 			region.getOwners().addPlayer(pi.getPlayer().getName());
 			region.setPriority(100);
 			region.setFlag( DefaultFlag.GREET_MESSAGE, "You are entering a protected island area. (" + pi.getPlayer().getName() + ")");
 			region.setFlag( DefaultFlag.FAREWELL_MESSAGE, "You are leaving a protected island area. (" + pi.getPlayer().getName() + ")");
-			
+
 			if(Settings.island_allowPvP.equalsIgnoreCase("allow"))
 				region.setFlag(DefaultFlag.PVP, State.ALLOW);
 			else
 				region.setFlag(DefaultFlag.PVP, State.DENY);
-			
+
 			region.setFlag(DefaultFlag.CHEST_ACCESS, State.DENY);
 			region.setFlag(DefaultFlag.USE, State.DENY);
-			
+
 			ApplicableRegionSet set = manager.getApplicableRegions(pi.getIslandLocation());
-			if (set.size() > 0) 
+			if (set.size() > 0)
 			{
-				for (final ProtectedRegion regions : set) 
+				for (final ProtectedRegion regions : set)
 				{
 					if (!regions.getId().equalsIgnoreCase("__global__"))
 						manager.removeRegion(regions.getId());
 				}
 			}
-			
+
 			manager.addRegion(region);
 			uSkyBlock.getLog().info("New protected region created for " + pi.getPlayer().getName() + "'s Island");
 			manager.save();
-		} 
-		catch (ProtectionDatabaseException e) 
+		}
+		catch (StorageException e)
 		{
 			e.printStackTrace();
 			throw new IllegalStateException("Unable to save regions", e);
 		}
 	}
-	
+
 	public static void removePlayerFromRegion(final String owner, final String player) {
 		if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(owner + "Island")) {
 			final DefaultDomain owners = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(owner + "Island")
@@ -159,7 +159,7 @@ public class WorldGuardHandler {
 		{
 			RegionManager manager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
 			
-			ProtectedRegion original = manager.getRegionExact(owner + "Island");
+			ProtectedRegion original = manager.getRegion(owner + "Island");
 			
 			ProtectedRegion region2 = null;
 			region2 = new ProtectedCuboidRegion(player + "Island", original.getMinimumPoint(), original.getMaximumPoint());

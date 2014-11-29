@@ -1553,10 +1553,9 @@ public class uSkyBlock extends JavaPlugin {
 	}
 
 	public void unloadPlayerFiles() {
-		for (int i = 0; i < Bukkit.getServer().getOnlinePlayers().length; i++) {
-			final Player[] removedPlayers = Bukkit.getServer().getOnlinePlayers();
-			if (isActivePlayer(removedPlayers[i].getUniqueId())) {
-				removeActivePlayer(removedPlayers[i].getUniqueId());
+		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+			if (isActivePlayer(player.getUniqueId())) {
+				removeActivePlayer(player.getUniqueId());
 			}
 		}
 	}
