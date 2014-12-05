@@ -1,20 +1,13 @@
 package us.talabrek.ultimateskyblock;
 
-import java.util.Random;
-import org.bukkit.World;
-import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.generator.*;
+import org.bukkit.*;
+import java.util.*;
 
-public class SkyBlockChunkGenerator
-  extends ChunkGenerator
+public class SkyBlockChunkGenerator extends ChunkGenerator
 {
-  public SkyBlockChunkGenerator() {}
-  
-  public byte[] generate(World world, Random random, int cx, int cz)
-  {
-    byte[] result = new byte[32768];
-    
-
-
-    return result;
-  }
+    public byte[] generate(final World world, final Random random, final int cx, final int cz) {
+        final byte[] result = new byte[32768];
+        return result;
+    }
 }

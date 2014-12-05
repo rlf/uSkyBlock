@@ -1,188 +1,163 @@
 package us.talabrek.ultimateskyblock;
 
-import java.io.PrintStream;
-import java.io.Serializable;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
+import java.io.*;
+import org.bukkit.entity.*;
+import org.bukkit.*;
 
-public class PlayerInfoOld
-  implements Serializable
+public class PlayerInfoOld implements Serializable
 {
-  private static final long serialVersionUID = 1L;
-  private String playerName;
-  private boolean hasIsland;
-  private boolean hasParty;
-  private String islandLocation;
-  private String homeLocation;
-  private String partyIslandLocation;
-  
-  public PlayerInfoOld(String playerName)
-  {
-    this.hasIsland = false;
-    this.hasParty = false;
-    this.islandLocation = "";
-    this.homeLocation = "";
-  }
-  
-  public PlayerInfoOld(String playerName, boolean hasIsland, int iX, int iY, int iZ, int hX, int hY, int hZ)
-  {
-    this.playerName = playerName;
-    this.hasIsland = hasIsland;
-    if ((iX == 0) && (iY == 0) && (iZ == 0)) {
-      this.islandLocation = null;
-    } else {
-      this.islandLocation = getStringLocation(new Location(uSkyBlock.getSkyBlockWorld(), iX, iY, iZ));
+    private static final long serialVersionUID = 1L;
+    private String playerName;
+    private boolean hasIsland;
+    private boolean hasParty;
+    private String islandLocation;
+    private String homeLocation;
+    private String partyIslandLocation;
+    
+    public PlayerInfoOld(final String playerName) {
+        super();
+        this.hasIsland = false;
+        this.hasParty = false;
+        this.islandLocation = "";
+        this.homeLocation = "";
     }
-    if ((hX == 0) && (hY == 0) && (hZ == 0)) {
-      this.homeLocation = null;
-    } else {
-      this.homeLocation = getStringLocation(new Location(uSkyBlock.getSkyBlockWorld(), hX, hY, hZ));
+    
+    public PlayerInfoOld(final String playerName, final boolean hasIsland, final int iX, final int iY, final int iZ, final int hX, final int hY, final int hZ) {
+        super();
+        this.playerName = playerName;
+        this.hasIsland = hasIsland;
+        if (iX == 0 && iY == 0 && iZ == 0) {
+            this.islandLocation = null;
+        }
+        else {
+            this.islandLocation = this.getStringLocation(new Location(uSkyBlock.getSkyBlockWorld(), (double)iX, (double)iY, (double)iZ));
+        }
+        if (hX == 0 && hY == 0 && hZ == 0) {
+            this.homeLocation = null;
+        }
+        else {
+            this.homeLocation = this.getStringLocation(new Location(uSkyBlock.getSkyBlockWorld(), (double)hX, (double)hY, (double)hZ));
+        }
     }
-  }
-  
-  public void startNewIsland(Location l)
-  {
-    this.hasIsland = true;
-    setIslandLocation(l);
-    this.hasParty = false;
-    this.homeLocation = null;
-  }
-  
-  public void removeFromIsland()
-  {
-    this.hasIsland = false;
-    setIslandLocation(null);
-    this.hasParty = false;
-    this.homeLocation = null;
-  }
-  
-  public void setPlayerName(String s)
-  {
-    this.playerName = s;
-  }
-  
-  public boolean getHasIsland()
-  {
-    return this.hasIsland;
-  }
-  
-  public String locationForParty()
-  {
-    return getPartyLocationString(this.islandLocation);
-  }
-  
-  public String locationForPartyOld()
-  {
-    return getPartyLocationString(this.partyIslandLocation);
-  }
-  
-  public Player getPlayer()
-  {
-    return Bukkit.getPlayer(this.playerName);
-  }
-  
-  public String getPlayerName()
-  {
-    return this.playerName;
-  }
-  
-  public void setHasIsland(boolean b)
-  {
-    this.hasIsland = b;
-  }
-  
-  public void setIslandLocation(Location l)
-  {
-    this.islandLocation = getStringLocation(l);
-  }
-  
-  public Location getIslandLocation()
-  {
-    return getLocationString(this.islandLocation);
-  }
-  
-  public void setHomeLocation(Location l)
-  {
-    this.homeLocation = getStringLocation(l);
-  }
-  
-  public Location getHomeLocation()
-  {
-    return getLocationString(this.homeLocation);
-  }
-  
-  public boolean getHasParty()
-  {
-    return this.hasParty;
-  }
-  
-  public void setJoinParty(Location l)
-  {
-    this.hasParty = true;
-    this.islandLocation = getStringLocation(l);
-    this.hasIsland = true;
-  }
-  
-  public void setLeaveParty()
-  {
-    this.hasParty = false;
-    this.islandLocation = null;
-    this.hasIsland = false;
-  }
-  
-  private Location getLocationString(String s)
-  {
-    if ((s == null) || (s.trim() == "")) {
-      return null;
+    
+    public void startNewIsland(final Location l) {
+        this.hasIsland = true;
+        this.setIslandLocation(l);
+        this.hasParty = false;
+        this.homeLocation = null;
     }
-    String[] parts = s.split(":");
-    if (parts.length == 4)
-    {
-      World w = Bukkit.getServer().getWorld(parts[0]);
-      int x = Integer.parseInt(parts[1]);
-      int y = Integer.parseInt(parts[2]);
-      int z = Integer.parseInt(parts[3]);
-      return new Location(w, x, y, z);
+    
+    public void removeFromIsland() {
+        this.hasIsland = false;
+        this.setIslandLocation(null);
+        this.hasParty = false;
+        this.homeLocation = null;
     }
-    return null;
-  }
-  
-  private String getPartyLocationString(String s)
-  {
-    if ((s == null) || (s.trim() == "")) {
-      return null;
+    
+    public void setPlayerName(final String s) {
+        this.playerName = s;
     }
-    String[] parts = s.split(":");
-    if (parts.length == 4) {
-      return parts[1] + "," + parts[3];
+    
+    public boolean getHasIsland() {
+        return this.hasIsland;
     }
-    return null;
-  }
-  
-  public void displayData(String player)
-  {
-    System.out.print(player + " has an island: " + getHasIsland());
-    if (getIslandLocation() != null) {
-      System.out.print(player + " island location: " + getIslandLocation().toString());
+    
+    public String locationForParty() {
+        return this.getPartyLocationString(this.islandLocation);
     }
-    if (getHomeLocation() != null) {
-      System.out.print(player + " home location: " + getHomeLocation().toString());
+    
+    public String locationForPartyOld() {
+        return this.getPartyLocationString(this.partyIslandLocation);
     }
-  }
-  
-  private String getStringLocation(Location l)
-  {
-    if (l == null) {
-      return "";
+    
+    public Player getPlayer() {
+        return Bukkit.getPlayer(this.playerName);
     }
-    return l.getWorld().getName() + ":" + l.getBlockX() + ":" + l.getBlockY() + ":" + l.getBlockZ();
-  }
-  
-  public Location getPartyIslandLocation()
-  {
-    return getLocationString(this.partyIslandLocation);
-  }
+    
+    public String getPlayerName() {
+        return this.playerName;
+    }
+    
+    public void setHasIsland(final boolean b) {
+        this.hasIsland = b;
+    }
+    
+    public void setIslandLocation(final Location l) {
+        this.islandLocation = this.getStringLocation(l);
+    }
+    
+    public Location getIslandLocation() {
+        return this.getLocationString(this.islandLocation);
+    }
+    
+    public void setHomeLocation(final Location l) {
+        this.homeLocation = this.getStringLocation(l);
+    }
+    
+    public Location getHomeLocation() {
+        return this.getLocationString(this.homeLocation);
+    }
+    
+    public boolean getHasParty() {
+        return this.hasParty;
+    }
+    
+    public void setJoinParty(final Location l) {
+        this.hasParty = true;
+        this.islandLocation = this.getStringLocation(l);
+        this.hasIsland = true;
+    }
+    
+    public void setLeaveParty() {
+        this.hasParty = false;
+        this.islandLocation = null;
+        this.hasIsland = false;
+    }
+    
+    private Location getLocationString(final String s) {
+        if (s == null || s.trim() == "") {
+            return null;
+        }
+        final String[] parts = s.split(":");
+        if (parts.length == 4) {
+            final World w = Bukkit.getServer().getWorld(parts[0]);
+            final int x = Integer.parseInt(parts[1]);
+            final int y = Integer.parseInt(parts[2]);
+            final int z = Integer.parseInt(parts[3]);
+            return new Location(w, (double)x, (double)y, (double)z);
+        }
+        return null;
+    }
+    
+    private String getPartyLocationString(final String s) {
+        if (s == null || s.trim() == "") {
+            return null;
+        }
+        final String[] parts = s.split(":");
+        if (parts.length == 4) {
+            return String.valueOf(parts[1]) + "," + parts[3];
+        }
+        return null;
+    }
+    
+    public void displayData(final String player) {
+        System.out.print(String.valueOf(player) + " has an island: " + this.getHasIsland());
+        if (this.getIslandLocation() != null) {
+            System.out.print(String.valueOf(player) + " island location: " + this.getIslandLocation().toString());
+        }
+        if (this.getHomeLocation() != null) {
+            System.out.print(String.valueOf(player) + " home location: " + this.getHomeLocation().toString());
+        }
+    }
+    
+    private String getStringLocation(final Location l) {
+        if (l == null) {
+            return "";
+        }
+        return String.valueOf(l.getWorld().getName()) + ":" + l.getBlockX() + ":" + l.getBlockY() + ":" + l.getBlockZ();
+    }
+    
+    public Location getPartyIslandLocation() {
+        return this.getLocationString(this.partyIslandLocation);
+    }
 }
