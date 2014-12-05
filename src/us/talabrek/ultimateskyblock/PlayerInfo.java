@@ -339,7 +339,7 @@ public class PlayerInfo implements Serializable
                 this.challengeListNew.put(currentChallenge, new Challenge(currentChallenge, this.getPlayerConfig(player).getLong("player.challenges." + currentChallenge + ".firstCompleted"), this.getPlayerConfig(player).getInt("player.challenges." + currentChallenge + ".timesCompleted"), this.getPlayerConfig(player).getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
             }
             if (Bukkit.getPlayer(player) != null && this.getPlayerConfig(player).getBoolean("player.kickWarning")) {
-                Bukkit.getPlayer(player).sendMessage("§cYou were removed from your island since the last time you played!");
+                Bukkit.getPlayer(player).sendMessage("\u00a7cYou were removed from your island since the last time you played!");
                 this.getPlayerConfig(player).set("player.kickWarning", (Object)false);
             }
             return this;

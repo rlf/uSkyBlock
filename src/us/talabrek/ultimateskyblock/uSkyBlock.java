@@ -1798,7 +1798,7 @@ public class uSkyBlock extends JavaPlugin
                 player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
                 player.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + getInstance().getConfig().getString("options.challenges.challengeList." + challenge + ".repeatRewardText"));
                 player.sendMessage(ChatColor.YELLOW + "Repeat exp reward: " + ChatColor.WHITE + getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
-                player.sendMessage(ChatColor.YELLOW + "Repeat currency reward: " + ChatColor.WHITE + this.df.format(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatCurrencyReward") * rewBonus) + " " + VaultHandler.econ.currencyNamePlural() + "�a(+" + this.df.format((rewBonus - 1.0) * 100.0) + "%)");
+                player.sendMessage(ChatColor.YELLOW + "Repeat currency reward: " + ChatColor.WHITE + this.df.format(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatCurrencyReward") * rewBonus) + " " + VaultHandler.econ.currencyNamePlural() + "\u00a7a(+" + this.df.format((rewBonus - 1.0) * 100.0) + "%)");
             }
             else {
                 if (Settings.challenges_broadcastCompletion) {
@@ -1807,7 +1807,7 @@ public class uSkyBlock extends JavaPlugin
                 player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
                 player.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + getInstance().getConfig().getString("options.challenges.challengeList." + challenge + ".rewardText"));
                 player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
-                player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + this.df.format(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".currencyReward") * rewBonus) + " " + VaultHandler.econ.currencyNamePlural() + "�a(+" + this.df.format((rewBonus - 1.0) * 100.0) + "%)");
+                player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + this.df.format(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".currencyReward") * rewBonus) + " " + VaultHandler.econ.currencyNamePlural() + "\u00a7a(+" + this.df.format((rewBonus - 1.0) * 100.0) + "%)");
             }
         }
         else if (getInstance().getActivePlayers().get(player.getName()).checkChallenge(challenge) > 0) {
@@ -1960,7 +1960,7 @@ public class uSkyBlock extends JavaPlugin
         this.getIslandConfig(location).set("general.warpLocationZ", (Object)0);
         this.getIslandConfig(location).set("general.warpActive", (Object)false);
         this.getIslandConfig(location).set("log.logPos", (Object)1);
-        this.getIslandConfig(location).set("log.1", (Object)"�d[skyblock] The island has been created.");
+        this.getIslandConfig(location).set("log.1", (Object)"\u00a7d[skyblock] The island has been created.");
         this.setupPartyLeader(location, leader);
     }
     
@@ -2787,33 +2787,33 @@ public class uSkyBlock extends JavaPlugin
         final ItemStack pHead = new ItemStack(397, 1, (short)3);
         final SkullMeta meta3 = (SkullMeta)pHead.getItemMeta();
         ItemMeta meta2 = this.sign.getItemMeta();
-        meta2.setDisplayName("�hPlayer Permissions");
-        this.lores.add("�eClick here to return to");
-        this.lores.add("�eyour island group's info.");
+        meta2.setDisplayName("\u00a7hPlayer Permissions");
+        this.lores.add("\u00a7eClick here to return to");
+        this.lores.add("\u00a7eyour island group's info.");
         meta2.setLore((List)this.lores);
         this.sign.setItemMeta(meta2);
         this.GUIpartyPlayer.addItem(new ItemStack[] { this.sign });
         this.lores.clear();
         meta3.setDisplayName(String.valueOf(pname) + "'s Permissions");
-        this.lores.add("�eHover over an icon to view");
-        this.lores.add("�ea permission. Change the");
-        this.lores.add("�epermission by clicking it.");
+        this.lores.add("\u00a7eHover over an icon to view");
+        this.lores.add("\u00a7ea permission. Change the");
+        this.lores.add("\u00a7epermission by clicking it.");
         meta3.setLore((List)this.lores);
         pHead.setItemMeta((ItemMeta)meta3);
         this.GUIpartyPlayer.addItem(new ItemStack[] { pHead });
         this.lores.clear();
         meta2 = this.biome.getItemMeta();
         if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + pname + ".canChangeBiome")) {
-            meta2.setDisplayName("�aChange Biome");
-            this.lores.add("�fThis player �acan�f change the");
-            this.lores.add("�fisland's biome. Click here");
-            this.lores.add("�fto remove this permission.");
+            meta2.setDisplayName("\u00a7aChange Biome");
+            this.lores.add("\u00a7fThis player \u00a7acan\u00a7f change the");
+            this.lores.add("\u00a7fisland's biome. Click here");
+            this.lores.add("\u00a7fto remove this permission.");
         }
         else {
-            meta2.setDisplayName("�cChange Biome");
-            this.lores.add("�fThis player �ccannot�f change the");
-            this.lores.add("�fisland's biome. Click here");
-            this.lores.add("�fto grant this permission.");
+            meta2.setDisplayName("\u00a7cChange Biome");
+            this.lores.add("\u00a7fThis player \u00a7ccannot\u00a7f change the");
+            this.lores.add("\u00a7fisland's biome. Click here");
+            this.lores.add("\u00a7fto grant this permission.");
         }
         meta2.setLore((List)this.lores);
         this.biome.setItemMeta(meta2);
@@ -2821,18 +2821,18 @@ public class uSkyBlock extends JavaPlugin
         this.lores.clear();
         meta2 = this.lock.getItemMeta();
         if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + pname + ".canToggleLock")) {
-            meta2.setDisplayName("�aToggle Island Lock");
-            this.lores.add("�fThis player �acan�f toggle the");
-            this.lores.add("�fisland's lock, which prevents");
-            this.lores.add("�fnon-group members from entering.");
-            this.lores.add("�fClick here to remove this permission.");
+            meta2.setDisplayName("\u00a7aToggle Island Lock");
+            this.lores.add("\u00a7fThis player \u00a7acan\u00a7f toggle the");
+            this.lores.add("\u00a7fisland's lock, which prevents");
+            this.lores.add("\u00a7fnon-group members from entering.");
+            this.lores.add("\u00a7fClick here to remove this permission.");
         }
         else {
-            meta2.setDisplayName("�cToggle Island Lock");
-            this.lores.add("�fThis player �ccannot�f toggle the");
-            this.lores.add("�fisland's lock, which prevents");
-            this.lores.add("�fnon-group members from entering.");
-            this.lores.add("�fClick here to add this permission");
+            meta2.setDisplayName("\u00a7cToggle Island Lock");
+            this.lores.add("\u00a7fThis player \u00a7ccannot\u00a7f toggle the");
+            this.lores.add("\u00a7fisland's lock, which prevents");
+            this.lores.add("\u00a7fnon-group members from entering.");
+            this.lores.add("\u00a7fClick here to add this permission");
         }
         meta2.setLore((List)this.lores);
         this.lock.setItemMeta(meta2);
@@ -2840,20 +2840,20 @@ public class uSkyBlock extends JavaPlugin
         this.lores.clear();
         meta2 = this.warpset.getItemMeta();
         if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + pname + ".canChangeWarp")) {
-            meta2.setDisplayName("�aSet Island Warp");
-            this.lores.add("�fThis player �acan�f set the");
-            this.lores.add("�fisland's warp, which allows");
-            this.lores.add("�fnon-group members to teleport");
-            this.lores.add("�fto the island. Click here to");
-            this.lores.add("�fremove this permission.");
+            meta2.setDisplayName("\u00a7aSet Island Warp");
+            this.lores.add("\u00a7fThis player \u00a7acan\u00a7f set the");
+            this.lores.add("\u00a7fisland's warp, which allows");
+            this.lores.add("\u00a7fnon-group members to teleport");
+            this.lores.add("\u00a7fto the island. Click here to");
+            this.lores.add("\u00a7fremove this permission.");
         }
         else {
-            meta2.setDisplayName("�cSet Island Warp");
-            this.lores.add("�fThis player �ccannot�f set the");
-            this.lores.add("�fisland's warp, which allows");
-            this.lores.add("�fnon-group members to teleport");
-            this.lores.add("�fto the island. Click here to");
-            this.lores.add("�fadd this permission.");
+            meta2.setDisplayName("\u00a7cSet Island Warp");
+            this.lores.add("\u00a7fThis player \u00a7ccannot\u00a7f set the");
+            this.lores.add("\u00a7fisland's warp, which allows");
+            this.lores.add("\u00a7fnon-group members to teleport");
+            this.lores.add("\u00a7fto the island. Click here to");
+            this.lores.add("\u00a7fadd this permission.");
         }
         meta2.setLore((List)this.lores);
         this.warpset.setItemMeta(meta2);
@@ -2861,20 +2861,20 @@ public class uSkyBlock extends JavaPlugin
         this.lores.clear();
         meta2 = this.warptoggle.getItemMeta();
         if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + pname + ".canToggleWarp")) {
-            meta2.setDisplayName("�aToggle Island Warp");
-            this.lores.add("�fThis player �acan�f toggle the");
-            this.lores.add("�fisland's warp, allowing them");
-            this.lores.add("�fto turn it on or off at anytime.");
-            this.lores.add("�fbut not set the location. Click");
-            this.lores.add("�fhere to remove this permission.");
+            meta2.setDisplayName("\u00a7aToggle Island Warp");
+            this.lores.add("\u00a7fThis player \u00a7acan\u00a7f toggle the");
+            this.lores.add("\u00a7fisland's warp, allowing them");
+            this.lores.add("\u00a7fto turn it on or off at anytime.");
+            this.lores.add("\u00a7fbut not set the location. Click");
+            this.lores.add("\u00a7fhere to remove this permission.");
         }
         else {
-            meta2.setDisplayName("�cToggle Island Warp");
-            this.lores.add("�fThis player �ccannot�f toggle the");
-            this.lores.add("�fisland's warp, allowing them");
-            this.lores.add("�fto turn it on or off at anytime,");
-            this.lores.add("�fbut not set the location. Click");
-            this.lores.add("�fhere to add this permission.");
+            meta2.setDisplayName("\u00a7cToggle Island Warp");
+            this.lores.add("\u00a7fThis player \u00a7ccannot\u00a7f toggle the");
+            this.lores.add("\u00a7fisland's warp, allowing them");
+            this.lores.add("\u00a7fto turn it on or off at anytime,");
+            this.lores.add("\u00a7fbut not set the location. Click");
+            this.lores.add("\u00a7fhere to add this permission.");
         }
         meta2.setLore((List)this.lores);
         this.warptoggle.setItemMeta(meta2);
@@ -2882,18 +2882,18 @@ public class uSkyBlock extends JavaPlugin
         this.lores.clear();
         meta2 = this.invite.getItemMeta();
         if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + pname + ".canInviteOthers")) {
-            meta2.setDisplayName("�aInvite Players");
-            this.lores.add("�fThis player �acan�f invite");
-            this.lores.add("�fother players to the island if");
-            this.lores.add("�fthere is enough room for more");
-            this.lores.add("�fmembers. Click here to remove");
-            this.lores.add("�fthis permission.");
+            meta2.setDisplayName("\u00a7aInvite Players");
+            this.lores.add("\u00a7fThis player \u00a7acan\u00a7f invite");
+            this.lores.add("\u00a7fother players to the island if");
+            this.lores.add("\u00a7fthere is enough room for more");
+            this.lores.add("\u00a7fmembers. Click here to remove");
+            this.lores.add("\u00a7fthis permission.");
         }
         else {
-            meta2.setDisplayName("�cInvite Players");
-            this.lores.add("�fThis player �ccannot�f invite");
-            this.lores.add("�fother players to the island.");
-            this.lores.add("�fClick here to add this permission.");
+            meta2.setDisplayName("\u00a7cInvite Players");
+            this.lores.add("\u00a7fThis player \u00a7ccannot\u00a7f invite");
+            this.lores.add("\u00a7fother players to the island.");
+            this.lores.add("\u00a7fClick here to add this permission.");
         }
         meta2.setLore((List)this.lores);
         this.invite.setItemMeta(meta2);
@@ -2901,18 +2901,18 @@ public class uSkyBlock extends JavaPlugin
         this.lores.clear();
         meta2 = this.kick.getItemMeta();
         if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + pname + ".canKickOthers")) {
-            meta2.setDisplayName("�aKick Players");
-            this.lores.add("�fThis player �acan�f kick");
-            this.lores.add("�fother players from the island,");
-            this.lores.add("�fbut they are unable to kick");
-            this.lores.add("�fthe island leader. Click here");
-            this.lores.add("�fto remove this permission.");
+            meta2.setDisplayName("\u00a7aKick Players");
+            this.lores.add("\u00a7fThis player \u00a7acan\u00a7f kick");
+            this.lores.add("\u00a7fother players from the island,");
+            this.lores.add("\u00a7fbut they are unable to kick");
+            this.lores.add("\u00a7fthe island leader. Click here");
+            this.lores.add("\u00a7fto remove this permission.");
         }
         else {
-            meta2.setDisplayName("�cKick Players");
-            this.lores.add("�fThis player �ccannot�f kick");
-            this.lores.add("�fother players from the island.");
-            this.lores.add("�fClick here to add this permission.");
+            meta2.setDisplayName("\u00a7cKick Players");
+            this.lores.add("\u00a7fThis player \u00a7ccannot\u00a7f kick");
+            this.lores.add("\u00a7fother players from the island.");
+            this.lores.add("\u00a7fClick here to add this permission.");
         }
         meta2.setLore((List)this.lores);
         this.kick.setItemMeta(meta2);
@@ -2922,23 +2922,23 @@ public class uSkyBlock extends JavaPlugin
     }
     
     public Inventory displayPartyGUI(final Player player) {
-        this.GUIparty = Bukkit.createInventory((InventoryHolder)null, 18, "�9Island Group Members");
+        this.GUIparty = Bukkit.createInventory((InventoryHolder)null, 18, "\u00a79Island Group Members");
         final Set<String> memberList = (Set<String>)getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getConfigurationSection("party.members").getKeys(false);
         this.tempIt = memberList.iterator();
         final SkullMeta meta3 = (SkullMeta)this.pHead.getItemMeta();
         final ItemMeta meta2 = this.sign.getItemMeta();
-        meta2.setDisplayName("�aGroup Info");
-        this.lores.add("Group Members: �2" + getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getInt("party.currentSize") + "�7/�e" + getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getInt("party.maxSize"));
+        meta2.setDisplayName("\u00a7aGroup Info");
+        this.lores.add("Group Members: \u00a72" + getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getInt("party.currentSize") + "\u00a77/\u00a7e" + getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getInt("party.maxSize"));
         if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getInt("party.currentSize") < getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getInt("party.maxSize")) {
-            this.lores.add("�aMore players can be invited to this island.");
+            this.lores.add("\u00a7aMore players can be invited to this island.");
         }
         else {
-            this.lores.add("�cThis island is full.");
+            this.lores.add("\u00a7cThis island is full.");
         }
-        this.lores.add("�eHover over a player's icon to");
-        this.lores.add("�eview their permissions. The");
-        this.lores.add("�eleader can change permissions");
-        this.lores.add("�eby clicking a player's icon.");
+        this.lores.add("\u00a7eHover over a player's icon to");
+        this.lores.add("\u00a7eview their permissions. The");
+        this.lores.add("\u00a7eleader can change permissions");
+        this.lores.add("\u00a7eby clicking a player's icon.");
         meta2.setLore((List)this.lores);
         this.sign.setItemMeta(meta2);
         this.GUIparty.addItem(new ItemStack[] { this.sign });
@@ -2946,58 +2946,58 @@ public class uSkyBlock extends JavaPlugin
         while (this.tempIt.hasNext()) {
             final String temp = this.tempIt.next();
             if (temp.equalsIgnoreCase(getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader"))) {
-                meta3.setDisplayName("�f" + temp);
-                this.lores.add("�a�lLeader");
-                this.lores.add("�aCan �fchange the island's biome.");
-                this.lores.add("�aCan �flock/unlock the island.");
-                this.lores.add("�aCan �fset the island's warp.");
-                this.lores.add("�aCan �ftoggle the island's warp.");
-                this.lores.add("�aCan �finvite others to the island.");
-                this.lores.add("�aCan �fkick others from the island.");
+                meta3.setDisplayName("\u00a7f" + temp);
+                this.lores.add("\u00a7a\u00a7lLeader");
+                this.lores.add("\u00a7aCan \u00a7fchange the island's biome.");
+                this.lores.add("\u00a7aCan \u00a7flock/unlock the island.");
+                this.lores.add("\u00a7aCan \u00a7fset the island's warp.");
+                this.lores.add("\u00a7aCan \u00a7ftoggle the island's warp.");
+                this.lores.add("\u00a7aCan \u00a7finvite others to the island.");
+                this.lores.add("\u00a7aCan \u00a7fkick others from the island.");
                 meta3.setLore((List)this.lores);
                 this.lores.clear();
             }
             else {
-                meta3.setDisplayName("�f" + temp);
-                this.lores.add("�e�lMember");
+                meta3.setDisplayName("\u00a7f" + temp);
+                this.lores.add("\u00a7e\u00a7lMember");
                 if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + temp + ".canChangeBiome")) {
-                    this.lores.add("�aCan �fchange the island's biome.");
+                    this.lores.add("\u00a7aCan \u00a7fchange the island's biome.");
                 }
                 else {
-                    this.lores.add("�cCannot �fchange the island's biome.");
+                    this.lores.add("\u00a7cCannot \u00a7fchange the island's biome.");
                 }
                 if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + temp + ".canToggleLock")) {
-                    this.lores.add("�aCan �flock/unlock the island.");
+                    this.lores.add("\u00a7aCan \u00a7flock/unlock the island.");
                 }
                 else {
-                    this.lores.add("�cCannot �flock/unlock the island.");
+                    this.lores.add("\u00a7cCannot \u00a7flock/unlock the island.");
                 }
                 if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + temp + ".canChangeWarp")) {
-                    this.lores.add("�aCan �fset the island's warp.");
+                    this.lores.add("\u00a7aCan \u00a7fset the island's warp.");
                 }
                 else {
-                    this.lores.add("�cCannot �fset the island's warp.");
+                    this.lores.add("\u00a7cCannot \u00a7fset the island's warp.");
                 }
                 if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + temp + ".canToggleWarp")) {
-                    this.lores.add("�aCan �ftoggle the island's warp.");
+                    this.lores.add("\u00a7aCan \u00a7ftoggle the island's warp.");
                 }
                 else {
-                    this.lores.add("�cCannot �ftoggle the island's warp.");
+                    this.lores.add("\u00a7cCannot \u00a7ftoggle the island's warp.");
                 }
                 if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + temp + ".canInviteOthers")) {
-                    this.lores.add("�aCan �finvite others to the island.");
+                    this.lores.add("\u00a7aCan \u00a7finvite others to the island.");
                 }
                 else {
-                    this.lores.add("�cCannot �finvite others to the island.");
+                    this.lores.add("\u00a7cCannot \u00a7finvite others to the island.");
                 }
                 if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + temp + ".canKickOthers")) {
-                    this.lores.add("�aCan �fkick others from the island.");
+                    this.lores.add("\u00a7aCan \u00a7fkick others from the island.");
                 }
                 else {
-                    this.lores.add("�cCannot �fkick others from the island.");
+                    this.lores.add("\u00a7cCannot \u00a7fkick others from the island.");
                 }
                 if (player.getName().equalsIgnoreCase(getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader"))) {
-                    this.lores.add("�e<Click to change this player's permissions>");
+                    this.lores.add("\u00a7e<Click to change this player's permissions>");
                 }
                 meta3.setLore((List)this.lores);
                 this.lores.clear();
@@ -3010,18 +3010,18 @@ public class uSkyBlock extends JavaPlugin
     }
     
     public Inventory displayLogGUI(final Player player) {
-        this.GUIlog = Bukkit.createInventory((InventoryHolder)null, 9, "�9Island Log");
+        this.GUIlog = Bukkit.createInventory((InventoryHolder)null, 9, "\u00a79Island Log");
         ItemMeta meta4 = this.sign.getItemMeta();
-        meta4.setDisplayName("�lIsland Log");
-        this.lores.add("�eClick here to return to");
-        this.lores.add("�ethe main island screen.");
+        meta4.setDisplayName("\u00a7lIsland Log");
+        this.lores.add("\u00a7eClick here to return to");
+        this.lores.add("\u00a7ethe main island screen.");
         meta4.setLore((List)this.lores);
         this.sign.setItemMeta(meta4);
         this.GUIlog.addItem(new ItemStack[] { this.sign });
         this.lores.clear();
         this.currentLogItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
         meta4 = this.currentLogItem.getItemMeta();
-        meta4.setDisplayName("�e�lIsland Log");
+        meta4.setDisplayName("\u00a7e\u00a7lIsland Log");
         for (int i = 1; i <= 10; ++i) {
             if (getInstance().getIslandConfig(this.getActivePlayers().get(player.getName()).locationForParty()).contains("log." + i)) {
                 this.lores.add(getInstance().getIslandConfig(this.getActivePlayers().get(player.getName()).locationForParty()).getString("log." + i));
@@ -3035,11 +3035,11 @@ public class uSkyBlock extends JavaPlugin
     }
     
     public Inventory displayBiomeGUI(final Player player) {
-        this.GUIbiome = Bukkit.createInventory((InventoryHolder)null, 18, "�9Island Biome");
+        this.GUIbiome = Bukkit.createInventory((InventoryHolder)null, 18, "\u00a79Island Biome");
         ItemMeta meta4 = this.sign.getItemMeta();
-        meta4.setDisplayName("�hIsland Biome");
-        this.lores.add("�eClick here to return to");
-        this.lores.add("�ethe main island screen.");
+        meta4.setDisplayName("\u00a7hIsland Biome");
+        this.lores.add("\u00a7eClick here to return to");
+        this.lores.add("\u00a7ethe main island screen.");
         meta4.setLore((List)this.lores);
         this.sign.setItemMeta(meta4);
         this.GUIbiome.addItem(new ItemStack[] { this.sign });
@@ -3047,27 +3047,27 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.WATER, 1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.ocean", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Ocean");
-            this.lores.add("�fThe ocean biome is the basic");
-            this.lores.add("�fstarting biome for all islands.");
-            this.lores.add("�fpassive mobs like animals will");
-            this.lores.add("�fnot spawn. Hostile mobs will");
-            this.lores.add("�fspawn normally.");
+            meta4.setDisplayName("\u00a7aBiome: Ocean");
+            this.lores.add("\u00a7fThe ocean biome is the basic");
+            this.lores.add("\u00a7fstarting biome for all islands.");
+            this.lores.add("\u00a7fpassive mobs like animals will");
+            this.lores.add("\u00a7fnot spawn. Hostile mobs will");
+            this.lores.add("\u00a7fspawn normally.");
             if (this.checkCurrentBiome(player, "OCEAN")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Ocean");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The ocean biome is the basic");
-            this.lores.add("�7starting biome for all islands.");
-            this.lores.add("�7passive mobs like animals will");
-            this.lores.add("�7not spawn. Hostile mobs will");
-            this.lores.add("�7spawn normally.");
+            meta4.setDisplayName("\u00a78Biome: Ocean");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The ocean biome is the basic");
+            this.lores.add("\u00a77starting biome for all islands.");
+            this.lores.add("\u00a77passive mobs like animals will");
+            this.lores.add("\u00a77not spawn. Hostile mobs will");
+            this.lores.add("\u00a77spawn normally.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3076,27 +3076,27 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.SAPLING, 1, (short)1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.forst", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Forest");
-            this.lores.add("�fThe forest biome will allow");
-            this.lores.add("�fyour island to spawn passive.");
-            this.lores.add("�fmobs like animals (including");
-            this.lores.add("�fwolves). Hostile mobs will");
-            this.lores.add("�fspawn normally.");
+            meta4.setDisplayName("\u00a7aBiome: Forest");
+            this.lores.add("\u00a7fThe forest biome will allow");
+            this.lores.add("\u00a7fyour island to spawn passive.");
+            this.lores.add("\u00a7fmobs like animals (including");
+            this.lores.add("\u00a7fwolves). Hostile mobs will");
+            this.lores.add("\u00a7fspawn normally.");
             if (this.checkCurrentBiome(player, "FOREST")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Forest");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The forest biome will allow");
-            this.lores.add("�7your island to spawn passive.");
-            this.lores.add("�7mobs like animals (including");
-            this.lores.add("�7wolves). Hostile mobs will");
-            this.lores.add("�7spawn normally.");
+            meta4.setDisplayName("\u00a78Biome: Forest");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The forest biome will allow");
+            this.lores.add("\u00a77your island to spawn passive.");
+            this.lores.add("\u00a77mobs like animals (including");
+            this.lores.add("\u00a77wolves). Hostile mobs will");
+            this.lores.add("\u00a77spawn normally.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3105,27 +3105,27 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.SAND, 1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.desert", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Desert");
-            this.lores.add("�fThe desert biome makes it so");
-            this.lores.add("�fthat there is no rain or snow");
-            this.lores.add("�fon your island. Passive mobs");
-            this.lores.add("�fwon't spawn. Hostile mobs will");
-            this.lores.add("�fspawn normally.");
+            meta4.setDisplayName("\u00a7aBiome: Desert");
+            this.lores.add("\u00a7fThe desert biome makes it so");
+            this.lores.add("\u00a7fthat there is no rain or snow");
+            this.lores.add("\u00a7fon your island. Passive mobs");
+            this.lores.add("\u00a7fwon't spawn. Hostile mobs will");
+            this.lores.add("\u00a7fspawn normally.");
             if (this.checkCurrentBiome(player, "DESERT")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Desert");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The desert biome makes it so");
-            this.lores.add("�7that there is no rain or snow");
-            this.lores.add("�7on your island. Passive mobs");
-            this.lores.add("�7won't spawn. Hostile mobs will");
-            this.lores.add("�7spawn normally.");
+            meta4.setDisplayName("\u00a78Biome: Desert");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The desert biome makes it so");
+            this.lores.add("\u00a77that there is no rain or snow");
+            this.lores.add("\u00a77on your island. Passive mobs");
+            this.lores.add("\u00a77won't spawn. Hostile mobs will");
+            this.lores.add("\u00a77spawn normally.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3134,27 +3134,27 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.SAPLING, 1, (short)3);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.jungle", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Jungle");
-            this.lores.add("�fThe jungle biome is bright");
-            this.lores.add("�fand colorful. Passive mobs");
-            this.lores.add("�f(including ocelots) will");
-            this.lores.add("�fspawn. Hostile mobs will");
-            this.lores.add("�fspawn normally.");
+            meta4.setDisplayName("\u00a7aBiome: Jungle");
+            this.lores.add("\u00a7fThe jungle biome is bright");
+            this.lores.add("\u00a7fand colorful. Passive mobs");
+            this.lores.add("\u00a7f(including ocelots) will");
+            this.lores.add("\u00a7fspawn. Hostile mobs will");
+            this.lores.add("\u00a7fspawn normally.");
             if (this.checkCurrentBiome(player, "JUNGLE")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Jungle");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The jungle biome is bright");
-            this.lores.add("�7and colorful. Passive mobs");
-            this.lores.add("�7(including ocelots) will");
-            this.lores.add("�7spawn. Hostile mobs will");
-            this.lores.add("�7spawn normally.");
+            meta4.setDisplayName("\u00a78Biome: Jungle");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The jungle biome is bright");
+            this.lores.add("\u00a77and colorful. Passive mobs");
+            this.lores.add("\u00a77(including ocelots) will");
+            this.lores.add("\u00a77spawn. Hostile mobs will");
+            this.lores.add("\u00a77spawn normally.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3163,29 +3163,29 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.WATER_LILY, 1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.swampland", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Swampland");
-            this.lores.add("�fThe swamp biome is dark");
-            this.lores.add("�fand dull. Passive mobs");
-            this.lores.add("�fwill spawn normally and");
-            this.lores.add("�fslimes have a small chance");
-            this.lores.add("�fto spawn at night depending");
-            this.lores.add("�fon the moon phase.");
+            meta4.setDisplayName("\u00a7aBiome: Swampland");
+            this.lores.add("\u00a7fThe swamp biome is dark");
+            this.lores.add("\u00a7fand dull. Passive mobs");
+            this.lores.add("\u00a7fwill spawn normally and");
+            this.lores.add("\u00a7fslimes have a small chance");
+            this.lores.add("\u00a7fto spawn at night depending");
+            this.lores.add("\u00a7fon the moon phase.");
             if (this.checkCurrentBiome(player, "SWAMPLAND")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Swampland");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The swamp biome is dark");
-            this.lores.add("�7and dull. Passive mobs");
-            this.lores.add("�7will spawn normally and");
-            this.lores.add("�7slimes have a small chance");
-            this.lores.add("�7to spawn at night depending");
-            this.lores.add("�7on the moon phase.");
+            meta4.setDisplayName("\u00a78Biome: Swampland");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The swamp biome is dark");
+            this.lores.add("\u00a77and dull. Passive mobs");
+            this.lores.add("\u00a77will spawn normally and");
+            this.lores.add("\u00a77slimes have a small chance");
+            this.lores.add("\u00a77to spawn at night depending");
+            this.lores.add("\u00a77on the moon phase.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3194,27 +3194,27 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.SNOW, 1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.taiga", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Taiga");
-            this.lores.add("�fThe taiga biome has snow");
-            this.lores.add("�finstead of rain. Passive");
-            this.lores.add("�fmobs will spawn normally");
-            this.lores.add("�f(including wolves) and");
-            this.lores.add("�fhostile mobs will spawn.");
+            meta4.setDisplayName("\u00a7aBiome: Taiga");
+            this.lores.add("\u00a7fThe taiga biome has snow");
+            this.lores.add("\u00a7finstead of rain. Passive");
+            this.lores.add("\u00a7fmobs will spawn normally");
+            this.lores.add("\u00a7f(including wolves) and");
+            this.lores.add("\u00a7fhostile mobs will spawn.");
             if (this.checkCurrentBiome(player, "TAIGA")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Taiga");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The taiga biome has snow");
-            this.lores.add("�7instead of rain. Passive");
-            this.lores.add("�7mobs will spawn normally");
-            this.lores.add("�7(including wolves) and");
-            this.lores.add("�7hostile mobs will spawn.");
+            meta4.setDisplayName("\u00a78Biome: Taiga");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The taiga biome has snow");
+            this.lores.add("\u00a77instead of rain. Passive");
+            this.lores.add("\u00a77mobs will spawn normally");
+            this.lores.add("\u00a77(including wolves) and");
+            this.lores.add("\u00a77hostile mobs will spawn.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3223,29 +3223,29 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.RED_MUSHROOM, 1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.mushroom", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Mushroom");
-            this.lores.add("�fThe mushroom biome is");
-            this.lores.add("�fbright and colorful.");
-            this.lores.add("�fMooshrooms are the only");
-            this.lores.add("�fmobs that will spawn.");
-            this.lores.add("�fNo other passive or");
-            this.lores.add("�fhostile mobs will spawn.");
+            meta4.setDisplayName("\u00a7aBiome: Mushroom");
+            this.lores.add("\u00a7fThe mushroom biome is");
+            this.lores.add("\u00a7fbright and colorful.");
+            this.lores.add("\u00a7fMooshrooms are the only");
+            this.lores.add("\u00a7fmobs that will spawn.");
+            this.lores.add("\u00a7fNo other passive or");
+            this.lores.add("\u00a7fhostile mobs will spawn.");
             if (this.checkCurrentBiome(player, "MUSHROOM")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Mushroom");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The mushroom biome is");
-            this.lores.add("�7bright and colorful.");
-            this.lores.add("�7Mooshrooms are the only");
-            this.lores.add("�7mobs that will spawn.");
-            this.lores.add("�7No other passive or");
-            this.lores.add("�7hostile mobs will spawn.");
+            meta4.setDisplayName("\u00a78Biome: Mushroom");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The mushroom biome is");
+            this.lores.add("\u00a77bright and colorful.");
+            this.lores.add("\u00a77Mooshrooms are the only");
+            this.lores.add("\u00a77mobs that will spawn.");
+            this.lores.add("\u00a77No other passive or");
+            this.lores.add("\u00a77hostile mobs will spawn.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3254,29 +3254,29 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.FIRE, 1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.hell", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Hell(Nether)");
-            this.lores.add("�fThe hell biome looks");
-            this.lores.add("�fdark and dead. Some");
-            this.lores.add("�fmobs from the nether will");
-            this.lores.add("�fspawn in this biome");
-            this.lores.add("�f(excluding ghasts and");
-            this.lores.add("�fblazes).");
+            meta4.setDisplayName("\u00a7aBiome: Hell(Nether)");
+            this.lores.add("\u00a7fThe hell biome looks");
+            this.lores.add("\u00a7fdark and dead. Some");
+            this.lores.add("\u00a7fmobs from the nether will");
+            this.lores.add("\u00a7fspawn in this biome");
+            this.lores.add("\u00a7f(excluding ghasts and");
+            this.lores.add("\u00a7fblazes).");
             if (this.checkCurrentBiome(player, "HELL")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Hell(Nether)");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The hell biome looks");
-            this.lores.add("�7dark and dead. Some");
-            this.lores.add("�7mobs from the nether will");
-            this.lores.add("�7spawn in this biome");
-            this.lores.add("�7(excluding ghasts and");
-            this.lores.add("�7blazes).");
+            meta4.setDisplayName("\u00a78Biome: Hell(Nether)");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The hell biome looks");
+            this.lores.add("\u00a77dark and dead. Some");
+            this.lores.add("\u00a77mobs from the nether will");
+            this.lores.add("\u00a77spawn in this biome");
+            this.lores.add("\u00a77(excluding ghasts and");
+            this.lores.add("\u00a77blazes).");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3285,25 +3285,25 @@ public class uSkyBlock extends JavaPlugin
         this.currentBiomeItem = new ItemStack(Material.EYE_OF_ENDER, 1);
         meta4 = this.currentBiomeItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", player.getWorld())) {
-            meta4.setDisplayName("�aBiome: Sky(End)");
-            this.lores.add("�fThe sky biome gives your");
-            this.lores.add("�fisland a special dark sky.");
-            this.lores.add("�fOnly endermen will spawn");
-            this.lores.add("�fin this biome.");
+            meta4.setDisplayName("\u00a7aBiome: Sky(End)");
+            this.lores.add("\u00a7fThe sky biome gives your");
+            this.lores.add("\u00a7fisland a special dark sky.");
+            this.lores.add("\u00a7fOnly endermen will spawn");
+            this.lores.add("\u00a7fin this biome.");
             if (this.checkCurrentBiome(player, "SKY")) {
-                this.lores.add("�2�lThis is your current biome.");
+                this.lores.add("\u00a72\u00a7lThis is your current biome.");
             }
             else {
-                this.lores.add("�e�lClick to change to this biome.");
+                this.lores.add("\u00a7e\u00a7lClick to change to this biome.");
             }
         }
         else {
-            meta4.setDisplayName("�8Biome: Sky(End)");
-            this.lores.add("�cYou cannot use this biome.");
-            this.lores.add("�7The sky biome gives your");
-            this.lores.add("�7island a special dark sky.");
-            this.lores.add("�7Only endermen will spawn");
-            this.lores.add("�7in this biome.");
+            meta4.setDisplayName("\u00a78Biome: Sky(End)");
+            this.lores.add("\u00a7cYou cannot use this biome.");
+            this.lores.add("\u00a77The sky biome gives your");
+            this.lores.add("\u00a77island a special dark sky.");
+            this.lores.add("\u00a77Only endermen will spawn");
+            this.lores.add("\u00a77in this biome.");
         }
         meta4.setLore((List)this.lores);
         this.currentBiomeItem.setItemMeta(meta4);
@@ -3313,7 +3313,7 @@ public class uSkyBlock extends JavaPlugin
     }
     
     public Inventory displayChallengeGUI(final Player player) {
-        this.GUIchallenge = Bukkit.createInventory((InventoryHolder)null, 36, "�9Challenge Menu");
+        this.GUIchallenge = Bukkit.createInventory((InventoryHolder)null, 36, "\u00a79Challenge Menu");
         final PlayerInfo pi = getInstance().getActivePlayers().get(player.getName());
         this.populateChallengeRank(player, 0, Material.DIRT, 0, pi);
         this.populateChallengeRank(player, 1, Material.IRON_BLOCK, 9, pi);
@@ -3323,71 +3323,71 @@ public class uSkyBlock extends JavaPlugin
     }
     
     public Inventory displayIslandGUI(final Player player) {
-        this.GUIisland = Bukkit.createInventory((InventoryHolder)null, 18, "�9Island Menu");
+        this.GUIisland = Bukkit.createInventory((InventoryHolder)null, 18, "\u00a79Island Menu");
         if (this.hasIsland(player.getName())) {
             this.currentIslandItem = new ItemStack(Material.ENDER_PORTAL, 1);
             ItemMeta meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lReturn Home");
-            this.lores.add("�fReturn to your island's home");
-            this.lores.add("�fpoint. You can change your home");
-            this.lores.add("�fpoint to any location on your");
-            this.lores.add("�fisland using �b/island sethome");
-            this.lores.add("�e�lClick here to return home.");
+            meta4.setDisplayName("\u00a7a\u00a7lReturn Home");
+            this.lores.add("\u00a7fReturn to your island's home");
+            this.lores.add("\u00a7fpoint. You can change your home");
+            this.lores.add("\u00a7fpoint to any location on your");
+            this.lores.add("\u00a7fisland using \u00a7b/island sethome");
+            this.lores.add("\u00a7e\u00a7lClick here to return home.");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.DIAMOND_ORE, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lChallenges");
-            this.lores.add("�fView a list of challenges that");
-            this.lores.add("�fyou can complete on your island");
-            this.lores.add("�fto earn skybucks, items, perks,");
-            this.lores.add("�fand titles.");
-            this.lores.add("�e�lClick here to view challenges.");
+            meta4.setDisplayName("\u00a7a\u00a7lChallenges");
+            this.lores.add("\u00a7fView a list of challenges that");
+            this.lores.add("\u00a7fyou can complete on your island");
+            this.lores.add("\u00a7fto earn skybucks, items, perks,");
+            this.lores.add("\u00a7fand titles.");
+            this.lores.add("\u00a7e\u00a7lClick here to view challenges.");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.EXP_BOTTLE, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lIsland Level");
-            this.lores.add("�eCurrent Level: �a" + this.showIslandLevel(player));
-            this.lores.add("�fGain island levels by expanding");
-            this.lores.add("�fyour skyblock and completing");
-            this.lores.add("�fcertain challenges. Rarer blocks");
-            this.lores.add("�fwill add more to your level.");
-            this.lores.add("�e�lClick here to refresh.");
-            this.lores.add("�e�l(must be on island)");
+            meta4.setDisplayName("\u00a7a\u00a7lIsland Level");
+            this.lores.add("\u00a7eCurrent Level: \u00a7a" + this.showIslandLevel(player));
+            this.lores.add("\u00a7fGain island levels by expanding");
+            this.lores.add("\u00a7fyour skyblock and completing");
+            this.lores.add("\u00a7fcertain challenges. Rarer blocks");
+            this.lores.add("\u00a7fwill add more to your level.");
+            this.lores.add("\u00a7e\u00a7lClick here to refresh.");
+            this.lores.add("\u00a7e\u00a7l(must be on island)");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
             final SkullMeta meta2 = (SkullMeta)this.currentIslandItem.getItemMeta();
-            meta2.setDisplayName("�a�lIsland Group");
-            this.lores.add("�eMembers: �2" + this.showCurrentMembers(player) + "/" + this.showMaxMembers(player));
-            this.lores.add("�fView the members of your island");
-            this.lores.add("�fgroup and their permissions. If");
-            this.lores.add("�fyou are the island leader, you");
-            this.lores.add("�fcan change the member permissions.");
-            this.lores.add("�e�lClick here to view or change.");
+            meta2.setDisplayName("\u00a7a\u00a7lIsland Group");
+            this.lores.add("\u00a7eMembers: \u00a72" + this.showCurrentMembers(player) + "/" + this.showMaxMembers(player));
+            this.lores.add("\u00a7fView the members of your island");
+            this.lores.add("\u00a7fgroup and their permissions. If");
+            this.lores.add("\u00a7fyou are the island leader, you");
+            this.lores.add("\u00a7fcan change the member permissions.");
+            this.lores.add("\u00a7e\u00a7lClick here to view or change.");
             meta2.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta((ItemMeta)meta2);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.SAPLING, 1, (short)3);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lChange Island Biome");
-            this.lores.add("�eCurrent Biome: �b" + this.getCurrentBiome(player).toUpperCase());
-            this.lores.add("�fThe island biome affects things");
-            this.lores.add("�flike grass color and spawning");
-            this.lores.add("�fof both animals and monsters.");
+            meta4.setDisplayName("\u00a7a\u00a7lChange Island Biome");
+            this.lores.add("\u00a7eCurrent Biome: \u00a7b" + this.getCurrentBiome(player).toUpperCase());
+            this.lores.add("\u00a7fThe island biome affects things");
+            this.lores.add("\u00a7flike grass color and spawning");
+            this.lores.add("\u00a7fof both animals and monsters.");
             if (this.checkIslandPermission(player, "canChangeBiome")) {
-                this.lores.add("�e�lClick here to change biomes.");
+                this.lores.add("\u00a7e\u00a7lClick here to change biomes.");
             }
             else {
-                this.lores.add("�c�lYou can't change the biome.");
+                this.lores.add("\u00a7c\u00a7lYou can't change the biome.");
             }
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
@@ -3395,30 +3395,30 @@ public class uSkyBlock extends JavaPlugin
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.IRON_FENCE, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lIsland Lock");
+            meta4.setDisplayName("\u00a7a\u00a7lIsland Lock");
             if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("general.locked")) {
-                this.lores.add("�eLock Status: �aActive");
-                this.lores.add("�fYour island is currently �clocked.");
-                this.lores.add("�fPlayers outside of your group");
-                this.lores.add("�fare unable to enter your island.");
+                this.lores.add("\u00a7eLock Status: \u00a7aActive");
+                this.lores.add("\u00a7fYour island is currently \u00a7clocked.");
+                this.lores.add("\u00a7fPlayers outside of your group");
+                this.lores.add("\u00a7fare unable to enter your island.");
                 if (this.checkIslandPermission(player, "canToggleLock")) {
-                    this.lores.add("�e�lClick here to unlock your island.");
+                    this.lores.add("\u00a7e\u00a7lClick here to unlock your island.");
                 }
                 else {
-                    this.lores.add("�c�lYou can't change the lock.");
+                    this.lores.add("\u00a7c\u00a7lYou can't change the lock.");
                 }
             }
             else {
-                this.lores.add("�eLock Status: �8Inactive");
-                this.lores.add("�fYour island is currently �aunlocked.");
-                this.lores.add("�fAll players are able to enter your");
-                this.lores.add("�fisland, but only you and your group");
-                this.lores.add("�fmembers may build there.");
+                this.lores.add("\u00a7eLock Status: \u00a78Inactive");
+                this.lores.add("\u00a7fYour island is currently \u00a7aunlocked.");
+                this.lores.add("\u00a7fAll players are able to enter your");
+                this.lores.add("\u00a7fisland, but only you and your group");
+                this.lores.add("\u00a7fmembers may build there.");
                 if (this.checkIslandPermission(player, "canToggleLock")) {
-                    this.lores.add("�e�lClick here to lock your island.");
+                    this.lores.add("\u00a7e\u00a7lClick here to lock your island.");
                 }
                 else {
-                    this.lores.add("�c�lYou can't change the lock.");
+                    this.lores.add("\u00a7c\u00a7lYou can't change the lock.");
                 }
             }
             meta4.setLore((List)this.lores);
@@ -3428,31 +3428,31 @@ public class uSkyBlock extends JavaPlugin
             if (getInstance().getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("general.warpActive")) {
                 this.currentIslandItem = new ItemStack(Material.PORTAL, 1);
                 meta4 = this.currentIslandItem.getItemMeta();
-                meta4.setDisplayName("�a�lIsland Warp");
-                this.lores.add("�eWarp Status: �aActive");
-                this.lores.add("�fOther players may warp to your");
-                this.lores.add("�fisland at anytime to the point");
-                this.lores.add("�fyou set using �d/island setwarp.");
+                meta4.setDisplayName("\u00a7a\u00a7lIsland Warp");
+                this.lores.add("\u00a7eWarp Status: \u00a7aActive");
+                this.lores.add("\u00a7fOther players may warp to your");
+                this.lores.add("\u00a7fisland at anytime to the point");
+                this.lores.add("\u00a7fyou set using \u00a7d/island setwarp.");
                 if (this.checkIslandPermission(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", getSkyBlockWorld())) {
-                    this.lores.add("�e�lClick here to deactivate.");
+                    this.lores.add("\u00a7e\u00a7lClick here to deactivate.");
                 }
                 else {
-                    this.lores.add("�c�lYou can't change the warp.");
+                    this.lores.add("\u00a7c\u00a7lYou can't change the warp.");
                 }
             }
             else {
                 this.currentIslandItem = new ItemStack(Material.ENDER_STONE, 1);
                 meta4 = this.currentIslandItem.getItemMeta();
-                meta4.setDisplayName("�a�lIsland Warp");
-                this.lores.add("�eWarp Status: �8Inactive");
-                this.lores.add("�fOther players can't warp to your");
-                this.lores.add("�fisland. Set a warp point using");
-                this.lores.add("�d/island setwarp �fbefore activating.");
+                meta4.setDisplayName("\u00a7a\u00a7lIsland Warp");
+                this.lores.add("\u00a7eWarp Status: \u00a78Inactive");
+                this.lores.add("\u00a7fOther players can't warp to your");
+                this.lores.add("\u00a7fisland. Set a warp point using");
+                this.lores.add("\u00a7d/island setwarp \u00a7fbefore activating.");
                 if (this.checkIslandPermission(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", getSkyBlockWorld())) {
-                    this.lores.add("�e�lClick here to activate.");
+                    this.lores.add("\u00a7e\u00a7lClick here to activate.");
                 }
                 else {
-                    this.lores.add("�c�lYou can't change the warp.");
+                    this.lores.add("\u00a7c\u00a7lYou can't change the warp.");
                 }
             }
             meta4.setLore((List)this.lores);
@@ -3461,26 +3461,26 @@ public class uSkyBlock extends JavaPlugin
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.CHEST, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lBuy Perks");
-            this.lores.add("�fVisit the perk shop to buy");
-            this.lores.add("�fspecial abilities for your");
-            this.lores.add("�fisland and character, as well");
-            this.lores.add("�fas titles and more.");
-            this.lores.add("�e�lClick here to open the shop!");
+            meta4.setDisplayName("\u00a7a\u00a7lBuy Perks");
+            this.lores.add("\u00a7fVisit the perk shop to buy");
+            this.lores.add("\u00a7fspecial abilities for your");
+            this.lores.add("\u00a7fisland and character, as well");
+            this.lores.add("\u00a7fas titles and more.");
+            this.lores.add("\u00a7e\u00a7lClick here to open the shop!");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.ENDER_CHEST, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lBuy Donor Perks");
-            this.lores.add("�fThis special perk shop is");
-            this.lores.add("�fonly available to donors!");
+            meta4.setDisplayName("\u00a7a\u00a7lBuy Donor Perks");
+            this.lores.add("\u00a7fThis special perk shop is");
+            this.lores.add("\u00a7fonly available to donors!");
             if (VaultHandler.checkPerk(player.getName(), "group.donor", player.getWorld())) {
-                this.lores.add("�e�lClick here to open the shop!");
+                this.lores.add("\u00a7e\u00a7lClick here to open the shop!");
             }
             else {
-                this.lores.add("�a�lClick here to become a donor!");
+                this.lores.add("\u00a7a\u00a7lClick here to become a donor!");
             }
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
@@ -3488,34 +3488,34 @@ public class uSkyBlock extends JavaPlugin
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lIsland Log");
-            this.lores.add("�fView a log of events from");
-            this.lores.add("�fyour island such as member,");
-            this.lores.add("�fbiome, and warp changes.");
-            this.lores.add("�e�lClick to view the log.");
+            meta4.setDisplayName("\u00a7a\u00a7lIsland Log");
+            this.lores.add("\u00a7fView a log of events from");
+            this.lores.add("\u00a7fyour island such as member,");
+            this.lores.add("\u00a7fbiome, and warp changes.");
+            this.lores.add("\u00a7e\u00a7lClick to view the log.");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.BED, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lChange Home Location");
-            this.lores.add("�fWhen you teleport to your");
-            this.lores.add("�fisland you will be taken to");
-            this.lores.add("�fthis location.");
-            this.lores.add("�e�lClick here to change.");
+            meta4.setDisplayName("\u00a7a\u00a7lChange Home Location");
+            this.lores.add("\u00a7fWhen you teleport to your");
+            this.lores.add("\u00a7fisland you will be taken to");
+            this.lores.add("\u00a7fthis location.");
+            this.lores.add("\u00a7e\u00a7lClick here to change.");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.HOPPER, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lChange Warp Location");
-            this.lores.add("�fWhen your warp is activated,");
-            this.lores.add("�fother players will be taken to");
-            this.lores.add("�fthis point when they teleport");
-            this.lores.add("�fto your island.");
-            this.lores.add("�e�lClick here to change.");
+            meta4.setDisplayName("\u00a7a\u00a7lChange Warp Location");
+            this.lores.add("\u00a7fWhen your warp is activated,");
+            this.lores.add("\u00a7fother players will be taken to");
+            this.lores.add("\u00a7fthis point when they teleport");
+            this.lores.add("\u00a7fto your island.");
+            this.lores.add("\u00a7e\u00a7lClick here to change.");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.setItem(15, this.currentIslandItem);
@@ -3524,41 +3524,41 @@ public class uSkyBlock extends JavaPlugin
         else if (VaultHandler.checkPerk(player.getName(), "group.member", getSkyBlockWorld())) {
             this.currentIslandItem = new ItemStack(Material.GRASS, 1);
             ItemMeta meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lStart an Island");
-            this.lores.add("�fStart your skyblock journey");
-            this.lores.add("�fby starting your own island.");
-            this.lores.add("�fComplete challenges to earn");
-            this.lores.add("�fitems and skybucks to help");
-            this.lores.add("�fexpand your skyblock. You can");
-            this.lores.add("�finvite others to join in");
-            this.lores.add("�fbuilding your island empire!");
-            this.lores.add("�e�lClick here to start!");
+            meta4.setDisplayName("\u00a7a\u00a7lStart an Island");
+            this.lores.add("\u00a7fStart your skyblock journey");
+            this.lores.add("\u00a7fby starting your own island.");
+            this.lores.add("\u00a7fComplete challenges to earn");
+            this.lores.add("\u00a7fitems and skybucks to help");
+            this.lores.add("\u00a7fexpand your skyblock. You can");
+            this.lores.add("\u00a7finvite others to join in");
+            this.lores.add("\u00a7fbuilding your island empire!");
+            this.lores.add("\u00a7e\u00a7lClick here to start!");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
             final SkullMeta meta2 = (SkullMeta)this.currentIslandItem.getItemMeta();
-            meta2.setDisplayName("�a�lJoin an Island");
-            this.lores.add("�fWant to join another player's");
-            this.lores.add("�fisland instead of starting");
-            this.lores.add("�fyour own? If another player");
-            this.lores.add("�finvites you to their island");
-            this.lores.add("�fyou can click here or use");
-            this.lores.add("�e/island accept �fto join them.");
-            this.lores.add("�e�lClick here to accept an invite!");
-            this.lores.add("�e�l(You must be invited first)");
+            meta2.setDisplayName("\u00a7a\u00a7lJoin an Island");
+            this.lores.add("\u00a7fWant to join another player's");
+            this.lores.add("\u00a7fisland instead of starting");
+            this.lores.add("\u00a7fyour own? If another player");
+            this.lores.add("\u00a7finvites you to their island");
+            this.lores.add("\u00a7fyou can click here or use");
+            this.lores.add("\u00a7e/island accept \u00a7fto join them.");
+            this.lores.add("\u00a7e\u00a7lClick here to accept an invite!");
+            this.lores.add("\u00a7e\u00a7l(You must be invited first)");
             meta2.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta((ItemMeta)meta2);
             this.GUIisland.setItem(4, this.currentIslandItem);
             this.lores.clear();
             this.currentIslandItem = new ItemStack(Material.SIGN, 1);
             meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lIsland Help");
-            this.lores.add("�fNeed help with skyblock");
-            this.lores.add("�fconcepts or commands? View");
-            this.lores.add("�fdetails about them here.");
-            this.lores.add("�e�lClick here for help!");
+            meta4.setDisplayName("\u00a7a\u00a7lIsland Help");
+            this.lores.add("\u00a7fNeed help with skyblock");
+            this.lores.add("\u00a7fconcepts or commands? View");
+            this.lores.add("\u00a7fdetails about them here.");
+            this.lores.add("\u00a7e\u00a7lClick here for help!");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.setItem(8, this.currentIslandItem);
@@ -3567,11 +3567,11 @@ public class uSkyBlock extends JavaPlugin
         else {
             this.currentIslandItem = new ItemStack(Material.BOOK, 1);
             final ItemMeta meta4 = this.currentIslandItem.getItemMeta();
-            meta4.setDisplayName("�a�lWelcome to the Server!");
-            this.lores.add("�fPlease read and accept the");
-            this.lores.add("�fserver rules to become a");
-            this.lores.add("�fmember and start your skyblock.");
-            this.lores.add("�e�lClick here to read!");
+            meta4.setDisplayName("\u00a7a\u00a7lWelcome to the Server!");
+            this.lores.add("\u00a7fPlease read and accept the");
+            this.lores.add("\u00a7fserver rules to become a");
+            this.lores.add("\u00a7fmember and start your skyblock.");
+            this.lores.add("\u00a7e\u00a7lClick here to read!");
             meta4.setLore((List)this.lores);
             this.currentIslandItem.setItemMeta(meta4);
             this.GUIisland.addItem(new ItemStack[] { this.currentIslandItem });
@@ -3608,9 +3608,9 @@ public class uSkyBlock extends JavaPlugin
         int rankComplete = 0;
         this.currentChallengeItem = new ItemStack(mat, 1);
         ItemMeta meta4 = this.currentChallengeItem.getItemMeta();
-        meta4.setDisplayName("�e�lRank: " + Settings.challenges_ranks[rankIndex]);
-        this.lores.add("�fComplete most challenges in");
-        this.lores.add("�fthis rank to unlock the next rank.");
+        meta4.setDisplayName("\u00a7e\u00a7lRank: " + Settings.challenges_ranks[rankIndex]);
+        this.lores.add("\u00a7fComplete most challenges in");
+        this.lores.add("\u00a7fthis rank to unlock the next rank.");
         meta4.setLore((List)this.lores);
         this.currentChallengeItem.setItemMeta(meta4);
         this.GUIchallenge.setItem(location, this.currentChallengeItem);
@@ -3622,9 +3622,9 @@ public class uSkyBlock extends JavaPlugin
                 if (rankComplete > 0) {
                     this.currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)14);
                     meta4 = this.currentChallengeItem.getItemMeta();
-                    meta4.setDisplayName("�4�lLocked Challenge");
-                    this.lores.add("�7Complete " + rankComplete + " more " + Settings.challenges_ranks[rankIndex - 1] + " challenges");
-                    this.lores.add("�7to unlock this rank.");
+                    meta4.setDisplayName("\u00a74\u00a7lLocked Challenge");
+                    this.lores.add("\u00a77Complete " + rankComplete + " more " + Settings.challenges_ranks[rankIndex - 1] + " challenges");
+                    this.lores.add("\u00a77to unlock this rank.");
                     meta4.setLore((List)this.lores);
                     this.currentChallengeItem.setItemMeta(meta4);
                     this.GUIchallenge.setItem(++location, this.currentChallengeItem);
@@ -3635,38 +3635,38 @@ public class uSkyBlock extends JavaPlugin
             if (challengeList[i].charAt(1) == 'e') {
                 this.currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)4);
                 meta4 = this.currentChallengeItem.getItemMeta();
-                meta4.setDisplayName(challengeList[i].replace("�e", "�e�l"));
-                challengeList[i] = challengeList[i].replace("�e", "");
-                challengeList[i] = challengeList[i].replace("�8", "");
+                meta4.setDisplayName(challengeList[i].replace("\u00a7e", "\u00a7e\u00a7l"));
+                challengeList[i] = challengeList[i].replace("\u00a7e", "");
+                challengeList[i] = challengeList[i].replace("\u00a78", "");
             }
             else if (challengeList[i].charAt(1) == 'a') {
-                if (!getInstance().getConfig().contains("options.challenges.challengeList." + challengeList[i].replace("�a", "").replace("�2", "").replace("�e", "").replace("�8", "").toLowerCase() + ".displayItem")) {
+                if (!getInstance().getConfig().contains("options.challenges.challengeList." + challengeList[i].replace("\u00a7a", "").replace("\u00a72", "").replace("\u00a7e", "").replace("\u00a78", "").toLowerCase() + ".displayItem")) {
                     this.currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)5);
                 }
                 else {
-                    this.currentChallengeItem = new ItemStack(Material.getMaterial(getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].replace("�a", "").replace("�2", "").replace("�e", "").replace("�8", "").toLowerCase() + ".displayItem")), 1);
+                    this.currentChallengeItem = new ItemStack(Material.getMaterial(getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].replace("\u00a7a", "").replace("\u00a72", "").replace("\u00a7e", "").replace("\u00a78", "").toLowerCase() + ".displayItem")), 1);
                 }
                 meta4 = this.currentChallengeItem.getItemMeta();
-                meta4.setDisplayName(challengeList[i].replace("�a", "�a�l"));
-                challengeList[i] = challengeList[i].replace("�a", "");
-                challengeList[i] = challengeList[i].replace("�8", "");
+                meta4.setDisplayName(challengeList[i].replace("\u00a7a", "\u00a7a\u00a7l"));
+                challengeList[i] = challengeList[i].replace("\u00a7a", "");
+                challengeList[i] = challengeList[i].replace("\u00a78", "");
             }
             else if (challengeList[i].charAt(1) == '2') {
                 this.currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)13);
                 meta4 = this.currentChallengeItem.getItemMeta();
-                meta4.setDisplayName(challengeList[i].replace("�2", "�2�l"));
-                challengeList[i] = challengeList[i].replace("�2", "");
-                challengeList[i] = challengeList[i].replace("�8", "");
+                meta4.setDisplayName(challengeList[i].replace("\u00a72", "\u00a72\u00a7l"));
+                challengeList[i] = challengeList[i].replace("\u00a72", "");
+                challengeList[i] = challengeList[i].replace("\u00a78", "");
             }
             else {
                 this.currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)4);
                 meta4 = this.currentChallengeItem.getItemMeta();
-                meta4.setDisplayName(challengeList[i].replace("�e", "�e�l"));
-                challengeList[i] = challengeList[i].replace("�e", "");
-                challengeList[i] = challengeList[i].replace("�8", "");
+                meta4.setDisplayName(challengeList[i].replace("\u00a7e", "\u00a7e\u00a7l"));
+                challengeList[i] = challengeList[i].replace("\u00a7e", "");
+                challengeList[i] = challengeList[i].replace("\u00a78", "");
             }
-            this.lores.add("�7" + getInstance().getConfig().getString("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".description"));
-            this.lores.add("�eThis challenge requires the following:");
+            this.lores.add("\u00a77" + getInstance().getConfig().getString("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".description"));
+            this.lores.add("\u00a7eThis challenge requires the following:");
             final String[] reqList = this.getConfig().getString("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".requiredItems").split(" ");
             int reqItem = 0;
             int reqAmount = 0;
@@ -3719,34 +3719,34 @@ public class uSkyBlock extends JavaPlugin
                     reqMod = Integer.parseInt(sPart[1]);
                 }
                 final ItemStack newItem = new ItemStack(reqItem, reqAmount, (short)reqMod);
-                this.lores.add("�f" + newItem.getAmount() + " " + newItem.getType().toString());
+                this.lores.add("\u00a7f" + newItem.getAmount() + " " + newItem.getType().toString());
             }
             if (pi.checkChallenge(challengeList[i].toLowerCase()) > 0 && getInstance().getConfig().getBoolean("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatable")) {
                 if (pi.onChallengeCooldown(challengeList[i].toLowerCase())) {
                     if (pi.getChallengeCooldownTime(challengeList[i].toLowerCase()) / 86400000L >= 1L) {
                         final int days = (int)pi.getChallengeCooldownTime(challengeList[i].toLowerCase()) / 86400000;
-                        this.lores.add("�4Requirements will reset in " + days + " days.");
+                        this.lores.add("\u00a74Requirements will reset in " + days + " days.");
                     }
                     else {
                         final int hours = (int)pi.getChallengeCooldownTime(challengeList[i].toLowerCase()) / 3600000;
-                        this.lores.add("�4Requirements will reset in " + hours + " hours.");
+                        this.lores.add("\u00a74Requirements will reset in " + hours + " hours.");
                     }
                 }
-                this.lores.add("�6Item Reward: �a" + getInstance().getConfig().getString("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatRewardText"));
-                this.lores.add("�6Currency Reward: �a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatCurrencyReward"));
-                this.lores.add("�6Exp Reward: �a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatXpReward"));
-                this.lores.add("�dTotal times completed: �f" + pi.getChallenge(challengeList[i].toLowerCase()).getTimesCompleted());
-                this.lores.add("�e�lClick to complete this challenge.");
+                this.lores.add("\u00a76Item Reward: \u00a7a" + getInstance().getConfig().getString("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatRewardText"));
+                this.lores.add("\u00a76Currency Reward: \u00a7a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatCurrencyReward"));
+                this.lores.add("\u00a76Exp Reward: \u00a7a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatXpReward"));
+                this.lores.add("\u00a7dTotal times completed: \u00a7f" + pi.getChallenge(challengeList[i].toLowerCase()).getTimesCompleted());
+                this.lores.add("\u00a7e\u00a7lClick to complete this challenge.");
             }
             else {
-                this.lores.add("�6Item Reward: �a" + getInstance().getConfig().getString("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".rewardText"));
-                this.lores.add("�6Currency Reward: �a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".currencyReward"));
-                this.lores.add("�6Exp Reward: �a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".xpReward"));
+                this.lores.add("\u00a76Item Reward: \u00a7a" + getInstance().getConfig().getString("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".rewardText"));
+                this.lores.add("\u00a76Currency Reward: \u00a7a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".currencyReward"));
+                this.lores.add("\u00a76Exp Reward: \u00a7a" + getInstance().getConfig().getInt("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".xpReward"));
                 if (getInstance().getConfig().getBoolean("options.challenges.challengeList." + challengeList[i].toLowerCase() + ".repeatable")) {
-                    this.lores.add("�e�lClick to complete this challenge.");
+                    this.lores.add("\u00a7e\u00a7lClick to complete this challenge.");
                 }
                 else {
-                    this.lores.add("�4�lYou can't repeat this challenge.");
+                    this.lores.add("\u00a74\u00a7lYou can't repeat this challenge.");
                 }
             }
             meta4.setLore((List)this.lores);
@@ -3765,10 +3765,10 @@ public class uSkyBlock extends JavaPlugin
         while (temp.hasNext()) {
             final String player = temp.next();
             if (Bukkit.getPlayer(player) != null) {
-                Bukkit.getPlayer(player).sendMessage("�d[skyblock] " + message);
+                Bukkit.getPlayer(player).sendMessage("\u00a7d[skyblock] " + message);
             }
         }
-        getInstance().getIslandConfig(location).set("log." + ++currentLogPos, (Object)("�d[" + dateTxt + "] " + message));
+        getInstance().getIslandConfig(location).set("log." + ++currentLogPos, (Object)("\u00a7d[" + dateTxt + "] " + message));
         if (currentLogPos < 10) {
             getInstance().getIslandConfig(location).set("log.logPos", (Object)currentLogPos);
         }

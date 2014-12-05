@@ -34,8 +34,8 @@ public class WorldGuardHandler
                     region.setOwners(owners);
                     region.setParent(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion("__Global__"));
                     region.setPriority(100);
-                    region.setFlag((Flag)DefaultFlag.GREET_MESSAGE, (Object)DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), (CommandSender)sender, "�d** You are entering a protected island area. (" + player + ")"));
-                    region.setFlag((Flag)DefaultFlag.FAREWELL_MESSAGE, (Object)DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), (CommandSender)sender, "�d** You are leaving a protected island area. (" + player + ")"));
+                    region.setFlag((Flag)DefaultFlag.GREET_MESSAGE, (Object)DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), (CommandSender)sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
+                    region.setFlag((Flag)DefaultFlag.FAREWELL_MESSAGE, (Object)DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), (CommandSender)sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
                     region.setFlag((Flag)DefaultFlag.PVP, (Object)DefaultFlag.PVP.parseInput(getWorldGuard(), (CommandSender)sender, Settings.island_allowPvP));
                     region.setFlag((Flag)DefaultFlag.CHEST_ACCESS, (Object)DefaultFlag.CHEST_ACCESS.parseInput(getWorldGuard(), (CommandSender)sender, "deny"));
                     region.setFlag((Flag)DefaultFlag.USE, (Object)DefaultFlag.USE.parseInput(getWorldGuard(), (CommandSender)sender, "deny"));
@@ -137,8 +137,8 @@ public class WorldGuardHandler
             region2 = (ProtectedRegion)new ProtectedCuboidRegion(String.valueOf(player) + "Island", getWorldGuard().getRegionManager(Bukkit.getWorld("skyworld")).getRegion(String.valueOf(owner) + "Island").getMinimumPoint(), getWorldGuard().getRegionManager(Bukkit.getWorld(Settings.general_worldName)).getRegion(String.valueOf(owner) + "Island").getMaximumPoint());
             region2.setOwners(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(owner) + "Island").getOwners());
             region2.setParent(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion("__Global__"));
-            region2.setFlag((Flag)DefaultFlag.GREET_MESSAGE, (Object)DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "�d** You are entering a protected island area. (" + player + ")"));
-            region2.setFlag((Flag)DefaultFlag.FAREWELL_MESSAGE, (Object)DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "�d** You are leaving a protected island area. (" + player + ")"));
+            region2.setFlag((Flag)DefaultFlag.GREET_MESSAGE, (Object)DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
+            region2.setFlag((Flag)DefaultFlag.FAREWELL_MESSAGE, (Object)DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
             region2.setFlag((Flag)DefaultFlag.PVP, (Object)DefaultFlag.PVP.parseInput(getWorldGuard(), sender, "deny"));
             region2.setFlag((Flag)DefaultFlag.DESTROY_VEHICLE, (Object)DefaultFlag.DESTROY_VEHICLE.parseInput(getWorldGuard(), sender, "deny"));
             region2.setFlag((Flag)DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, (Object)DefaultFlag.ENTITY_ITEM_FRAME_DESTROY.parseInput(getWorldGuard(), sender, "deny"));

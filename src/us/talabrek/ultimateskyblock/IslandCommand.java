@@ -95,7 +95,7 @@ public class IslandCommand implements CommandExecutor
                             uSkyBlock.getInstance().warpSet(player);
                         }
                         else {
-                            player.sendMessage("�cYou do not have permission to set your island's warp point!");
+                            player.sendMessage("\u00a7cYou do not have permission to set your island's warp point!");
                         }
                         return true;
                     }
@@ -138,7 +138,7 @@ public class IslandCommand implements CommandExecutor
                                 }
                             }
                             else {
-                                player.sendMessage("�cYou do not have permission to enable/disable your island's warp!");
+                                player.sendMessage("\u00a7cYou do not have permission to enable/disable your island's warp!");
                             }
                         }
                         else {
@@ -258,7 +258,7 @@ public class IslandCommand implements CommandExecutor
                     if ((split[0].equals("biome") || split[0].equals("b")) && pi.getIslandLocation() != null) {
                         player.openInventory(uSkyBlock.getInstance().displayBiomeGUI(player));
                         if (!uSkyBlock.getInstance().getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canToggleLock")) {
-                            player.sendMessage("�cYou do not have permission to change the biome of your current island.");
+                            player.sendMessage("\u00a7cYou do not have permission to change the biome of your current island.");
                         }
                         return true;
                     }
@@ -440,10 +440,10 @@ public class IslandCommand implements CommandExecutor
                             player.sendMessage(ChatColor.YELLOW + "Listing your island members:");
                             String total = "";
                             this.memberList = (Set<String>)uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getConfigurationSection("party.members").getKeys(false);
-                            total = String.valueOf(total) + "�a<" + uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader") + "> ";
+                            total = String.valueOf(total) + "\u00a7a<" + uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader") + "> ";
                             for (final String temp : this.memberList) {
                                 if (!temp.equalsIgnoreCase(uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader"))) {
-                                    total = String.valueOf(total) + "�e[" + temp + "]";
+                                    total = String.valueOf(total) + "\u00a7e[" + temp + "]";
                                 }
                             }
                             player.sendMessage(total);

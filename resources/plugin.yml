@@ -1,12 +1,9 @@
 name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
-version: ${pom.version}
-description: Ultimate SkyBlock.
+version: 2.0.0
+description: Ultimate SkyBlock. 
 author: Talabrek (based on code by Qgel and others)
 load: STARTUP
-
-depend: [Vault]
-
 commands:
     island:
         description: Commands to use your island
@@ -31,10 +28,6 @@ permissions:
             description: Let the player use the /island command
           usb.island.info:
             description: Let the player check their island level
-          usb.island.info.others:
-            description: Let the player check anothers island level
-            children:
-              usb.island.info: true
           usb.island.topten:
             description: Let the player see the top ten list
           usb.island.sethome:
@@ -43,19 +36,42 @@ permissions:
             description: Let the player use the /challenges command
           usb.island.warp:
             description: Let the player use /island warp to warp to an open island.
-          usb.island.warp.override:
-            description: Let the player use /island warpo to warp to an island regardless of warp settings.
-            default: op
-            children:
-              usb.island.warp: true
+          usb.island.ban:
+            description: Let the player use /island ban to ban players from warping to their island.
+      usb.biome.*:
+        children:
+          usb.biome.ocean:
+            description: Let the player change their islands biome to OCEAN.
+          usb.biome.jungle:
+            description: Let the player change their islands biome to JUNGLE.
+          usb.biome.hell:
+            description: Let the player change their islands biome to HELL.
+          usb.biome.sky:
+            description: Let the player change their islands biome to SKY.
+          usb.biome.desert:
+            description: Let the player change their islands biome to DESERT.
+          usb.biome.forest:
+            description: Let the player change their islands biome to FOREST.
+          usb.biome.swampland:
+            description: Let the player change their islands biome to SWAMPLAND.
+          usb.biome.mushroom:
+            description: Let the player change their islands biome to MUSHROOM_ISLAND.
+          usb.biome.taiga:
+            description: Let the player change their islands biome to TAIGA.
       usb.extra.*:
         children:
           usb.extra.hunger:
+            description: The player will lose hunger 25 percent slower.
+          usb.extra.hunger2:
+            description: The player will lose hunger 50 percent slower.
+          usb.extra.hunger3:
+            description: The player will lose hunger 75 percent slower.
+          usb.extra.hunger4:
             description: The player won't lose hunger on their island.
           usb.extra.partysize:
-            description: The player can have double the party members on their island
+            description: The player can have 8 total members on their island, which is double the default.
           usb.extra.addwarp:
-            description: The player can open his island, allowing other players to warp there.
+            description: The player can open his island allowing other players to warp there.
       usb.party.*:
         children:
           usb.party.create:
@@ -81,11 +97,13 @@ permissions:
           usb.mod.party:
             description: Let a player access the moderator party commands
           usb.mod.challenges:
-            description: Let a player access the moderator challenge commands to view, complete and reset another player's challenges. 
+            description: Let a player access the moderator challenge commands to complete and reset another player's challenges. 
           usb.mod.bypasscooldowns:
             description: Let a player bypass the cooldowns for the /island info and /island restart commands
           usb.mod.bypassprotection:
             description: Let a player bypass the built in island protection
+          usb.mod.setbiome:
+            description: Let a player set another players biome.
       usb.admin.*:
         children:
           usb.admin.reload:
@@ -96,5 +114,7 @@ permissions:
             description: Let a player remove another player's ownership of an island (island blocks remain)
           usb.admin.register:
             description: Let a player register the nearest island (using the bedrock) to another player.
+          usb.admin.bypassspawnprotection:
+            description: Let a player bypass the built in spawn protection.
           usb.admin.purge:
             description: Let a player purge old islands.

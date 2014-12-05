@@ -1,0 +1,13 @@
+player:
+  hasIsland: false
+  islandX: 0
+  islandY: 0
+  islandZ: 0
+  homeX: 0
+  homeY: 0
+  homeZ: 0
+  challenges:
+    cobblestonegenerator:
+      firstCompleted: 0
+      timesCompleted: 0
+      timesCompletedSinceTimer: 0

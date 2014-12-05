@@ -150,7 +150,7 @@ public class PlayerJoin implements Listener
     
     @EventHandler(priority = EventPriority.MONITOR)
     public void guiClick(final InventoryClickEvent event) {
-        if (event.getInventory().getName().equalsIgnoreCase("§9Island Group Members")) {
+        if (event.getInventory().getName().equalsIgnoreCase("\u00a79Island Group Members")) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
@@ -163,7 +163,7 @@ public class PlayerJoin implements Listener
                 this.p.closeInventory();
                 this.p.openInventory(uSkyBlock.getInstance().displayIslandGUI(this.p));
             }
-            else if (this.meta.getLore().contains("§a§lLeader")) {
+            else if (this.meta.getLore().contains("\u00a7a\u00a7lLeader")) {
                 this.p.closeInventory();
                 this.p.openInventory(uSkyBlock.getInstance().displayPartyGUI(this.p));
             }
@@ -287,7 +287,7 @@ public class PlayerJoin implements Listener
             if (event.getCurrentItem().getType() != Material.DIRT && event.getCurrentItem().getType() != Material.IRON_BLOCK && event.getCurrentItem().getType() != Material.GOLD_BLOCK && event.getCurrentItem().getType() != Material.DIAMOND_BLOCK) {
                 (this.p = (Player)event.getWhoClicked()).closeInventory();
                 if (event.getCurrentItem().getItemMeta() != null) {
-                    this.p.performCommand("c c " + event.getCurrentItem().getItemMeta().getDisplayName().replace("§e", "").replace("§8", "").replace("§a", "").replace("§2", "").replace("§l", ""));
+                    this.p.performCommand("c c " + event.getCurrentItem().getItemMeta().getDisplayName().replace("\u00a7e", "").replace("\u00a78", "").replace("\u00a7a", "").replace("\u00a72", "").replace("\u00a7l", ""));
                 }
                 this.p.openInventory(uSkyBlock.getInstance().displayChallengeGUI(this.p));
             }
@@ -385,7 +385,7 @@ public class PlayerJoin implements Listener
     
     @EventHandler(priority = EventPriority.MONITOR)
     public void onInventoryDrag(final InventoryDragEvent event) {
-        if (event.getInventory().getName().equalsIgnoreCase("§9SB Island Group Members")) {
+        if (event.getInventory().getName().equalsIgnoreCase("\u00a79SB Island Group Members")) {
             event.setCancelled(true);
             this.meta = (SkullMeta)event.getCursor().getItemMeta();
             this.p = (Player)event.getWhoClicked();
