@@ -5,7 +5,7 @@ import java.util.List;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import us.talabrek.ultimateskyblock.ICommand;
+import us.talabrek.ultimateskyblock.command.ICommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandSetHomeCommand implements ICommand

@@ -48,6 +48,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.async.IslandBuilder;
 import us.talabrek.ultimateskyblock.async.IslandRemover;
 import us.talabrek.ultimateskyblock.async.TopGenerator;
+import us.talabrek.ultimateskyblock.command.CommandDispatcher;
+import us.talabrek.ultimateskyblock.command.dev.DevCommand;
 import us.talabrek.ultimateskyblock.command.island.IslandAcceptCommand;
 import us.talabrek.ultimateskyblock.command.island.IslandBanCommand;
 import us.talabrek.ultimateskyblock.command.island.IslandDefaultCommand;
@@ -66,6 +68,11 @@ import us.talabrek.ultimateskyblock.command.island.IslandToggleWarpCommand;
 import us.talabrek.ultimateskyblock.command.island.IslandTopCommand;
 import us.talabrek.ultimateskyblock.command.island.IslandUnlockCommand;
 import us.talabrek.ultimateskyblock.command.island.IslandWarpCommand;
+import us.talabrek.ultimateskyblock.command.challenge.ChallengesCommand;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 
 public class uSkyBlock extends JavaPlugin {
 	private static uSkyBlock instance;
@@ -79,7 +86,7 @@ public class uSkyBlock extends JavaPlugin {
 		if (skyBlockWorld == null) {
 			skyBlockWorld = WorldCreator.name(Settings.general_worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generateStructures(false).generator(new SkyBlockChunkGenerator()).createWorld();
 			if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
+				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock -a false");
 			}
 		}
 
@@ -1676,5 +1683,9 @@ public class uSkyBlock extends JavaPlugin {
 			}
 		} else
 			mTopList.add(newIndex, entry);
+	}
+
+	public void runAsync(Runnable runnable) {
+		getServer().getScheduler().runTask(this, runnable);
 	}
 }

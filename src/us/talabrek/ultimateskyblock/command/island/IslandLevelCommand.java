@@ -10,6 +10,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.*;
+import us.talabrek.ultimateskyblock.async.IslandCalculator;
+import us.talabrek.ultimateskyblock.command.ICommand;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 
 public class IslandLevelCommand implements ICommand
 {
@@ -96,16 +100,14 @@ public class IslandLevelCommand implements ICommand
 			{
 				mBlockedSenders.add(sender);
 				final UUIDPlayerInfo fInfo = info;
-				info.recalculateLevel(new Runnable()
-				{
+				uSkyBlock.getInstance().runAsync(new IslandCalculator(fInfo, new Runnable() {
 					@Override
-					public void run()
-					{
+					public void run() {
 						sender.sendMessage(ChatColor.YELLOW + "Information about " + fInfo.getPlayer().getName() + "'s Island:");
 						sender.sendMessage(ChatColor.GREEN + " Level: " + ChatColor.YELLOW + fInfo.getIslandLevel());
 						mBlockedSenders.remove(sender);
 					}
-				});
+				}));
 			}
 			else
 				sender.sendMessage(ChatColor.RED + info.getPlayer().getName() + " does not have an island to rank.");

@@ -5,8 +5,8 @@ import java.util.UUID;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
-import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
-import us.talabrek.ultimateskyblock.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandProtector implements Runnable

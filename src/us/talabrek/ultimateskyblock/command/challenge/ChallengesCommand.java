@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.command.challenge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class ChallengesCommand implements CommandExecutor, TabCompleter {
 	private ArrayList<String> challengeNames = new ArrayList<String>(Settings.challenges_challengeList.size());
@@ -48,7 +52,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
 			return true;
 		}
 		
-		if (!VaultHandler.hasPerm(sender, "usb.island.challenges")) 
+		if (!VaultHandler.hasPerm(sender, "usb.island.challenges"))
 		{
 			sender.sendMessage(ChatColor.RED + "You don't have access to this command!");
 			return true;

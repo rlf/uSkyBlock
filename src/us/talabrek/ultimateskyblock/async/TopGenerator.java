@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class TopGenerator implements Runnable

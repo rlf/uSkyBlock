@@ -10,6 +10,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 
 public class Misc
 {

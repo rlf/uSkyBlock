@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
-import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class Purger implements Runnable

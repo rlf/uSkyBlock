@@ -11,6 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.*;
+import us.talabrek.ultimateskyblock.command.ICommand;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 
 public class IslandKickCommand implements ICommand {
 

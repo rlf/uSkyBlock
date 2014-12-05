@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.bukkit.command.CommandSender;
 
-import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.command.ICommand;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 
 public class IslandUnlockCommand implements ICommand
 {

@@ -21,6 +21,8 @@ import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.potion.Potion;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.model.Settings;
 
 public class ProtectionEvents implements Listener {
 	private Player breaker = null;

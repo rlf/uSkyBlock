@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bukkit.command.CommandSender;
 
-import us.talabrek.ultimateskyblock.ICommand;
+import us.talabrek.ultimateskyblock.command.ICommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandTopCommand implements ICommand

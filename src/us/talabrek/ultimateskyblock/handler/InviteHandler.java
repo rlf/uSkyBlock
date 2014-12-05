@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.handler;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,8 +9,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import us.talabrek.ultimateskyblock.InviteHandler.Invite.Type;
+import us.talabrek.ultimateskyblock.handler.InviteHandler.Invite.Type;
+import us.talabrek.ultimateskyblock.Misc;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.async.IslandRemover;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class InviteHandler {
 	private static WeakHashMap<Player, Invite> mInvites = new WeakHashMap<Player, Invite>();

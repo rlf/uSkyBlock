@@ -6,8 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.ICommand;
-import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.command.ICommand;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandToggleWarpCommand implements ICommand

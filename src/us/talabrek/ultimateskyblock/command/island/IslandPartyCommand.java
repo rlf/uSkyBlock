@@ -10,7 +10,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.*;
-import us.talabrek.ultimateskyblock.InviteHandler.Invite;
+import us.talabrek.ultimateskyblock.handler.InviteHandler;
+import us.talabrek.ultimateskyblock.handler.InviteHandler.Invite;
+import us.talabrek.ultimateskyblock.command.ICommand;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
 
 public class IslandPartyCommand implements ICommand
 {
@@ -128,7 +133,7 @@ public class IslandPartyCommand implements ICommand
                 memberStrings.add(Bukkit.getOfflinePlayer(member).getName());
             sender.sendMessage(ChatColor.WHITE + memberStrings.toString());
         } 
-        else if (sender instanceof Player && InviteHandler.hasInvite((Player)sender))
+        else if (sender instanceof Player && InviteHandler.hasInvite((Player) sender))
         {
         	Invite invite = InviteHandler.getInvite((Player)sender);
         	

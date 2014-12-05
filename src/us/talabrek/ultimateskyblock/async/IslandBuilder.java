@@ -12,10 +12,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import us.talabrek.ultimateskyblock.Misc;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.VaultHandler;
-import us.talabrek.ultimateskyblock.WorldEditHandler;
-import us.talabrek.ultimateskyblock.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandBuilder implements Runnable

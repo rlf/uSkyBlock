@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import org.bukkit.ChatColor;
@@ -16,6 +16,9 @@ import com.sk89q.worldguard.protection.flags.StateFlag.State;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class WorldGuardHandler {
 	public static void addPlayerToOldRegion(final String owner, final String player) {

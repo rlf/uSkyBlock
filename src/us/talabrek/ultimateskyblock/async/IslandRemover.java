@@ -10,9 +10,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.InventoryHolder;
 
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.UUIDPlayerInfo;
-import us.talabrek.ultimateskyblock.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.model.Settings;
+import us.talabrek.ultimateskyblock.model.UUIDPlayerInfo;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class IslandRemover extends QueueTask
