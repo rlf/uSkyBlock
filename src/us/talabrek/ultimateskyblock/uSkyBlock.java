@@ -627,10 +627,18 @@ public class uSkyBlock extends JavaPlugin {
 		return l;
 	}
 
+    private String[] getChallengeConfigArray(String challenge, String key) {
+        String value = getChallengeConfig().getString("options.challenges.challengeList." + challenge + "." + key);
+        if (value != null) {
+            return value.split(",");
+        }
+        return new String[0];
+    }
 	@SuppressWarnings("deprecation")
-	public boolean giveReward(final Player player, final String challenge) {
-		final String[] permList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".permissionReward").split(" ");
-		final String[] cmdList = getChallengeConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".executeCommand").split(" , ");
+	public boolean giveReward(final Player player, final String challengeArg) {
+        String challenge = challengeArg != null ? challengeArg.toLowerCase() : "";
+		final String[] permList = getChallengeConfigArray(challenge, "permissionReward");
+		final String[] cmdList = getChallengeConfigArray(challenge, "executeCommand");
 		int rewCurrency = 0;
 		player.sendMessage(ChatColor.GREEN + "You have completed the " + challenge + " challenge!");
 		String[] rewList;

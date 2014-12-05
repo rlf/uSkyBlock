@@ -53,7 +53,7 @@
 			<version>1.8-R0.1-SNAPSHOT</version>
 			<optional>true</optional>
             <scope>system</scope>
-            <systemPath>${env.BUKKIT_BUILD}/Bukkit-1.8-R0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>${env.SPIGOT_BASE}/Bukkit/target/bukkit-1.8-R0.1-SNAPSHOT.jar</systemPath>
 		</dependency>
 		<dependency>
 	      <groupId>net.milkbowl.vault</groupId>

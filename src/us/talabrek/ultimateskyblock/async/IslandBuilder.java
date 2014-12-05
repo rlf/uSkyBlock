@@ -29,7 +29,6 @@ public class IslandBuilder implements Runnable
 	public void run()
 	{
 		createIsland();
-		//generateIslandBlocks(mLocation.getBlockX(), mLocation.getBlockZ(), mPlayer, mLocation.getWorld());
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -426,6 +425,7 @@ public class IslandBuilder implements Runnable
 		uSkyBlock.getInstance().getPlayer(player.getUniqueId()).setIslandLocation(loc);
 
 		player.teleport(getChestSpawnLoc(loc, player));
+        player.getInventory().clear();
 		uSkyBlock.getInstance().homeSet(player);
 		uSkyBlock.getInstance().savePlayer(uSkyBlock.getInstance().getPlayer(player.getUniqueId()));
 	}
