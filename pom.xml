@@ -23,7 +23,7 @@
 	      <resource>
 	        <targetPath>.</targetPath>
 	        <filtering>true</filtering>
-	        <directory>${basedir}/resources</directory>
+	        <directory>src/main/resources</directory>
 	        <includes>
 	          <include>*.yml</include>
 	          <include>README.md</include>
@@ -38,8 +38,6 @@
 				</includes>
 			</resource>
 	    </resources>
-	
-	    <sourceDirectory>src</sourceDirectory>
 	    <plugins>
 	      <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
@@ -87,6 +85,12 @@
 			<scope>compile</scope>
 			<type>jar</type>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

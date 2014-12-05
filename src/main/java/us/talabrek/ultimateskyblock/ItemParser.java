@@ -2,10 +2,10 @@ package us.talabrek.ultimateskyblock;
 
 import org.bukkit.inventory.*;
 import org.bukkit.enchantments.*;
+
 import java.util.*;
 
-public class ItemParser
-{
+public class ItemParser {
     public static String parseItemStackToString(final ItemStack item) {
         if (item == null) {
             return "";
@@ -24,7 +24,7 @@ public class ItemParser
         }
         return s.trim();
     }
-    
+
     public static ItemStack getItemStackfromString(final String s) {
         if (s.equalsIgnoreCase("")) {
             return null;
@@ -40,17 +40,13 @@ public class ItemParser
             final String name = sp[0];
             if (name.equals("id")) {
                 x.setTypeId(Integer.parseInt(sp[1]));
-            }
-            else if (name.equals("amount")) {
+            } else if (name.equals("amount")) {
                 x.setAmount(Integer.parseInt(sp[1]));
-            }
-            else if (name.equals("durab")) {
-                x.setDurability((short)Integer.parseInt(sp[1]));
-            }
-            else if (name.equals("data")) {
-                x.getData().setData((byte)Integer.parseInt(sp[1]));
-            }
-            else if (name.equals("ench")) {
+            } else if (name.equals("durab")) {
+                x.setDurability((short) Integer.parseInt(sp[1]));
+            } else if (name.equals("data")) {
+                x.getData().setData((byte) Integer.parseInt(sp[1]));
+            } else if (name.equals("ench")) {
                 int enchId = 0;
                 int level = 0;
                 String[] split2;
@@ -62,14 +58,12 @@ public class ItemParser
                     }
                     if (prop[0].equals("eid")) {
                         enchId = Integer.parseInt(prop[1]);
-                    }
-                    else if (prop[0].equals("elevel")) {
+                    } else if (prop[0].equals("elevel")) {
                         level = Integer.parseInt(prop[1]);
                         x.addUnsafeEnchantment(Enchantment.getById(enchId), level);
                     }
                 }
-            }
-            else {
+            } else {
                 uSkyBlock.getInstance().log.warning("error, unknown itemvalue");
             }
         }

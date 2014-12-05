@@ -26,7 +26,7 @@ banned:
   list: []
 log:
   logPos: 2
-  1: '&d[skyblock] The island has been created.'
+  1: '§d[skyblock] The island has been created.'
   2: ''
   3: ''
   4: ''

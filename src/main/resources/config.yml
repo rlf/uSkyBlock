@@ -6,6 +6,7 @@ options:
     cooldownInfo: 30
     cooldownRestart: 600
     biomeChange: 3600
+    permission: group.member
   island:
     schematicName: yourschematicname
     distance: 110
@@ -33,14 +34,14 @@ options:
   challenges:
     allowChallenges: true
     broadcastCompletion: true
-    broadcastText: '&6'
+    broadcastText: '§6'
     ranks: Easy Medium Hard Master
     requirePreviousRank: true
     rankLeeway: 1
     defaultResetInHours: 144
-    challengeColor: '&e'
-    finishedColor: '&2'
-    repeatableColor: '&a'
+    challengeColor: '§e'
+    finishedColor: '§2'
+    repeatableColor: '§a'
     enableEconomyPlugin: true
     challengeList:
       cobblestonegenerator:
@@ -428,13 +429,13 @@ options:
         displayItem: 35
         takeItems: true
         itemReward: 264:2 2262:1 2263:1 2261:1 383:91:1 388:5
-        rewardText: &cUnknown
+        rewardText: §cUnknown
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: 388:5 383:91:1
-        repeatRewardText: &cUnknown
+        repeatRewardText: §cUnknown
         repeatCurrencyReward: 50
         repeatXpReward: 20
       glassmaker:
@@ -445,13 +446,13 @@ options:
         displayItem: 95
         takeItems: true
         itemReward: 264:2 2262:1 2263:1 2261:1 383:91:1 388:5
-        rewardText: &cUnknown
+        rewardText: §cUnknown
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: 388:5 383:91:1
-        repeatRewardText: &cUnknown
+        repeatRewardText: §cUnknown
         repeatCurrencyReward: 50
         repeatXpReward: 20
       masterfarmer:
@@ -463,13 +464,13 @@ options:
         takeItems: true
         resetInHours: 5
         itemReward: 264:3 388:5
-        rewardText: &cUnknown
+        rewardText: §cUnknown
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: '388:5 266:2'
-        repeatRewardText: &cUnknown
+        repeatRewardText: §cUnknown
         repeatCurrencyReward: 50
         repeatXpReward: 20
       maestro:
@@ -480,13 +481,13 @@ options:
         displayItem: 2256
         takeItems: true
         itemReward: 264:3 388:10
-        rewardText: &cUnknown
+        rewardText: §cUnknown
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: '266:2 264:1'
-        repeatRewardText: &cUnknown
+        repeatRewardText: §cUnknown
         repeatCurrencyReward: 50
         repeatXpReward: 20
       emeraldcollector:
@@ -497,13 +498,13 @@ options:
         displayItem: 388
         takeItems: true
         itemReward: '264:2'
-        rewardText: &cUnknown
+        rewardText: §cUnknown
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: '264:1'
-        repeatRewardText: &cUnknown
+        repeatRewardText: §cUnknown
         repeatCurrencyReward: 50
         repeatXpReward: 20
       topchef:
@@ -514,13 +515,13 @@ options:
         displayItem: 391
         takeItems: true
         itemReward: 264:2 2257:1 2258:1 2260:1 383:96:1 388:5
-        rewardText: &cUnknown
+        rewardText: §cUnknown
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: 266:3 383:96:1 388:5
-        repeatRewardText: &cUnknown
+        repeatRewardText: §cUnknown
         repeatCurrencyReward: 50
         repeatXpReward: 20
       skylord:
@@ -530,7 +531,7 @@ options:
         requiredItems: 1000
         takeItems: false
         itemReward: '264:1'
-        rewardText: &cUnknown
+        rewardText: §cUnknown
         currencyReward: 250
         xpReward: 250
         permissionReward: none

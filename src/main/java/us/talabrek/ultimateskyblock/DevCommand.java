@@ -2,17 +2,18 @@ package us.talabrek.ultimateskyblock;
 
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+
 import java.io.*;
+
 import org.bukkit.plugin.*;
 import org.bukkit.*;
 
-public class DevCommand implements CommandExecutor
-{
+public class DevCommand implements CommandExecutor {
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
         if (!(sender instanceof Player)) {
             return false;
         }
-        final Player player = (Player)sender;
+        final Player player = (Player) sender;
         if (split.length == 0) {
             if (VaultHandler.checkPerk(player.getName(), "usb.mod.protect", player.getWorld()) || VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || VaultHandler.checkPerk(player.getName(), "usb.mod.topten", player.getWorld()) || VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || VaultHandler.checkPerk(player.getName(), "usb.admin.delete", player.getWorld()) || VaultHandler.checkPerk(player.getName(), "usb.admin.remove", player.getWorld()) || VaultHandler.checkPerk(player.getName(), "usb.admin.register", player.getWorld()) || player.isOp()) {
                 player.sendMessage("[dev usage]");
@@ -64,50 +65,40 @@ public class DevCommand implements CommandExecutor
                 if (VaultHandler.checkPerk(player.getName(), "usb.mod.party", player.getWorld()) || player.isOp()) {
                     player.sendMessage(ChatColor.YELLOW + "/dev info <player>:" + ChatColor.WHITE + " check the party information for the given player.");
                 }
-            }
-            else {
+            } else {
                 player.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
             }
-        }
-        else if (split.length == 1) {
+        } else if (split.length == 1) {
             if (split[0].equals("clearorphan") && (VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "Clearing all old (empty) island locations.");
                 uSkyBlock.getInstance().clearOrphanedIsland();
-            }
-            else if (split[0].equals("protectall") && (VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("protectall") && (VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "This command is only available using WorldGuard.");
                 if (Settings.island_protectWithWorldGuard) {
                     player.sendMessage(ChatColor.YELLOW + "This command has been disabled.");
-                }
-                else {
+                } else {
                     player.sendMessage(ChatColor.RED + "You must enable WorldGuard protection in the config.yml to use this!");
                 }
-            }
-            else if (split[0].equals("buildislandlist") && (VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("buildislandlist") && (VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "Building island list..");
                 uSkyBlock.getInstance().buildIslandList();
                 player.sendMessage(ChatColor.YELLOW + "Finished building island list..");
-            }
-            else if (split[0].equals("orphancount") && (VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("orphancount") && (VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || player.isOp())) {
                 player.sendMessage(new StringBuilder().append(ChatColor.YELLOW).append(uSkyBlock.getInstance().orphanCount()).append(" old island locations will be used before new ones.").toString());
-            }
-            else if (split[0].equals("reload") && (VaultHandler.checkPerk(player.getName(), "usb.admin.reload", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("reload") && (VaultHandler.checkPerk(player.getName(), "usb.admin.reload", player.getWorld()) || player.isOp())) {
                 uSkyBlock.getInstance().reloadConfig();
-                uSkyBlock.getInstance().loadPluginConfig();
+                Settings.loadPluginConfig(uSkyBlock.getInstance().getConfig());
                 uSkyBlock.getInstance().reloadLevelConfig();
                 uSkyBlock.getInstance().loadLevelConfig();
                 player.sendMessage(ChatColor.YELLOW + "Configuration reloaded from file.");
-            }
-            else if (split[0].equals("saveorphan") && (VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("saveorphan") && (VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "Saving the orphan list.");
                 uSkyBlock.getInstance().saveOrphans();
-            }
-            else if (split[0].equals("topten") && (VaultHandler.checkPerk(player.getName(), "usb.mod.topten", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("topten") && (VaultHandler.checkPerk(player.getName(), "usb.mod.topten", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "Generating the Top Ten list");
                 uSkyBlock.getInstance().updateTopTen(uSkyBlock.getInstance().generateTopTen());
                 player.sendMessage(ChatColor.YELLOW + "Finished generation of the Top Ten list");
-            }
-            else if (split[0].equals("purge") && (VaultHandler.checkPerk(player.getName(), "usb.admin.purge", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("purge") && (VaultHandler.checkPerk(player.getName(), "usb.admin.purge", player.getWorld()) || player.isOp())) {
                 if (uSkyBlock.getInstance().isPurgeActive()) {
                     player.sendMessage(ChatColor.RED + "A purge is already running, please wait for it to finish!");
                     return true;
@@ -115,8 +106,7 @@ public class DevCommand implements CommandExecutor
                 player.sendMessage(ChatColor.YELLOW + "Usage: /dev purge [TimeInDays]");
                 return true;
             }
-        }
-        else if (split.length == 2) {
+        } else if (split.length == 2) {
             if (split[0].equals("purge") && (VaultHandler.checkPerk(player.getName(), "usb.admin.purge", player.getWorld()) || player.isOp())) {
                 if (uSkyBlock.getInstance().isPurgeActive()) {
                     player.sendMessage(ChatColor.RED + "A purge is already running, please wait for it to finish!");
@@ -125,7 +115,7 @@ public class DevCommand implements CommandExecutor
                 uSkyBlock.getInstance().activatePurge();
                 final int time = Integer.parseInt(split[1]) * 24;
                 player.sendMessage(ChatColor.YELLOW + "Marking all islands inactive for more than " + split[1] + " days.");
-                uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously((Plugin)uSkyBlock.getInstance(), (Runnable)new Runnable() {
+                uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
                     @Override
                     public void run() {
                         final File directoryPlayers = new File(uSkyBlock.getInstance().getDataFolder() + File.separator + "players");
@@ -150,7 +140,7 @@ public class DevCommand implements CommandExecutor
                             }
                         }
                         System.out.print("Removing " + uSkyBlock.getInstance().getRemoveList().size() + " inactive islands.");
-                        uSkyBlock.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask((Plugin)uSkyBlock.getInstance(), (Runnable)new Runnable() {
+                        uSkyBlock.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(uSkyBlock.getInstance(), new Runnable() {
                             @Override
                             public void run() {
                                 if (uSkyBlock.getInstance().getRemoveList().size() > 0 && uSkyBlock.getInstance().isPurgeActive()) {
@@ -166,13 +156,11 @@ public class DevCommand implements CommandExecutor
                         }, 0L, 20L);
                     }
                 });
-            }
-            else if (split[0].equals("goto") && (VaultHandler.checkPerk(player.getName(), "usb.mod.goto", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("goto") && (VaultHandler.checkPerk(player.getName(), "usb.mod.goto", player.getWorld()) || player.isOp())) {
                 final PlayerInfo pi = new PlayerInfo(split[1]);
                 if (!pi.getHasIsland()) {
                     player.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                }
-                else {
+                } else {
                     if (pi.getHomeLocation() != null) {
                         player.sendMessage(ChatColor.GREEN + "Teleporting to " + split[1] + "'s island.");
                         player.teleport(pi.getHomeLocation());
@@ -185,13 +173,11 @@ public class DevCommand implements CommandExecutor
                     }
                     player.sendMessage("Error: That player does not have an island!");
                 }
-            }
-            else if (split[0].equals("remove") && (VaultHandler.checkPerk(player.getName(), "usb.admin.remove", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("remove") && (VaultHandler.checkPerk(player.getName(), "usb.admin.remove", player.getWorld()) || player.isOp())) {
                 final PlayerInfo pi = new PlayerInfo(split[1]);
                 if (!pi.getHasIsland()) {
                     player.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                }
-                else {
+                } else {
                     if (pi.getIslandLocation() != null) {
                         player.sendMessage(ChatColor.YELLOW + "Removing " + split[1] + "'s island.");
                         uSkyBlock.getInstance().devDeletePlayerIsland(split[1]);
@@ -199,13 +185,11 @@ public class DevCommand implements CommandExecutor
                     }
                     player.sendMessage("Error: That player does not have an island!");
                 }
-            }
-            else if (split[0].equals("delete") && (VaultHandler.checkPerk(player.getName(), "usb.admin.delete", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("delete") && (VaultHandler.checkPerk(player.getName(), "usb.admin.delete", player.getWorld()) || player.isOp())) {
                 final PlayerInfo pi = new PlayerInfo(split[1]);
                 if (!pi.getHasIsland()) {
                     player.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                }
-                else {
+                } else {
                     if (pi.getIslandLocation() != null) {
                         player.sendMessage(ChatColor.YELLOW + "Removing " + split[1] + "'s island.");
                         uSkyBlock.getInstance().deletePlayerIsland(split[1]);
@@ -213,20 +197,17 @@ public class DevCommand implements CommandExecutor
                     }
                     player.sendMessage("Error: That player does not have an island!");
                 }
-            }
-            else if (split[0].equals("register") && (VaultHandler.checkPerk(player.getName(), "usb.admin.register", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("register") && (VaultHandler.checkPerk(player.getName(), "usb.admin.register", player.getWorld()) || player.isOp())) {
                 final PlayerInfo pi = new PlayerInfo(split[1]);
                 if (pi.getHasIsland()) {
                     uSkyBlock.getInstance().devDeletePlayerIsland(split[1]);
                 }
                 if (uSkyBlock.getInstance().devSetPlayerIsland(player, player.getLocation(), split[1])) {
                     player.sendMessage(ChatColor.GREEN + "Set " + split[1] + "'s island to the bedrock nearest you.");
-                }
-                else {
+                } else {
                     player.sendMessage(ChatColor.RED + "Bedrock not found: unable to set the island!");
                 }
-            }
-            else if (!split[0].equals("info") || (!VaultHandler.checkPerk(player.getName(), "usb.mod.party", player.getWorld()) && !player.isOp())) {
+            } else if (!split[0].equals("info") || (!VaultHandler.checkPerk(player.getName(), "usb.mod.party", player.getWorld()) && !player.isOp())) {
                 if (split[0].equals("resetallchallenges") && (VaultHandler.checkPerk(player.getName(), "usb.mod.challenges", player.getWorld()) || player.isOp())) {
                     if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[1])) {
                         final PlayerInfo pi = new PlayerInfo(split[1]);
@@ -237,13 +218,11 @@ public class DevCommand implements CommandExecutor
                         pi.resetAllChallenges();
                         pi.savePlayerConfig(split[1]);
                         player.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
-                    }
-                    else {
+                    } else {
                         uSkyBlock.getInstance().getActivePlayers().get(split[1]).resetAllChallenges();
                         player.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
                     }
-                }
-                else if (split[0].equals("setbiome") && (VaultHandler.checkPerk(player.getName(), "usb.mod.setbiome", player.getWorld()) || player.isOp())) {
+                } else if (split[0].equals("setbiome") && (VaultHandler.checkPerk(player.getName(), "usb.mod.setbiome", player.getWorld()) || player.isOp())) {
                     if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[1])) {
                         final PlayerInfo pi = new PlayerInfo(split[1]);
                         if (!pi.getHasIsland()) {
@@ -253,15 +232,13 @@ public class DevCommand implements CommandExecutor
                         uSkyBlock.getInstance().setBiome(pi.getIslandLocation(), "OCEAN");
                         pi.savePlayerConfig(split[1]);
                         player.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
-                    }
-                    else {
+                    } else {
                         uSkyBlock.getInstance().setBiome(uSkyBlock.getInstance().getActivePlayers().get(split[1]).getIslandLocation(), "OCEAN");
                         player.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
                     }
                 }
             }
-        }
-        else if (split.length == 3) {
+        } else if (split.length == 3) {
             if (split[0].equals("completechallenge") && (VaultHandler.checkPerk(player.getName(), "usb.mod.challenges", player.getWorld()) || player.isOp())) {
                 if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[2])) {
                     final PlayerInfo pi = new PlayerInfo(split[2]);
@@ -276,8 +253,7 @@ public class DevCommand implements CommandExecutor
                     pi.completeChallenge(split[1].toLowerCase());
                     pi.savePlayerConfig(split[2]);
                     player.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
-                }
-                else {
+                } else {
                     if (uSkyBlock.getInstance().getActivePlayers().get(split[2]).checkChallenge(split[1].toLowerCase()) > 0 || !uSkyBlock.getInstance().getActivePlayers().get(split[2]).challengeExists(split[1].toLowerCase())) {
                         player.sendMessage(ChatColor.RED + "Challenge doesn't exist or is already completed");
                         return true;
@@ -285,8 +261,7 @@ public class DevCommand implements CommandExecutor
                     uSkyBlock.getInstance().getActivePlayers().get(split[2]).completeChallenge(split[1].toLowerCase());
                     player.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
                 }
-            }
-            else if (split[0].equals("resetchallenge") && (VaultHandler.checkPerk(player.getName(), "usb.mod.challenges", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("resetchallenge") && (VaultHandler.checkPerk(player.getName(), "usb.mod.challenges", player.getWorld()) || player.isOp())) {
                 if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[2])) {
                     final PlayerInfo pi = new PlayerInfo(split[2]);
                     if (!pi.getHasIsland()) {
@@ -300,8 +275,7 @@ public class DevCommand implements CommandExecutor
                     pi.resetChallenge(split[1].toLowerCase());
                     pi.savePlayerConfig(split[2]);
                     player.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been reset for " + split[2]);
-                }
-                else {
+                } else {
                     if (uSkyBlock.getInstance().getActivePlayers().get(split[2]).checkChallenge(split[1].toLowerCase()) == 0 || !uSkyBlock.getInstance().getActivePlayers().get(split[2]).challengeExists(split[1].toLowerCase())) {
                         player.sendMessage(ChatColor.RED + "Challenge doesn't exist or isn't yet completed");
                         return true;
@@ -309,8 +283,7 @@ public class DevCommand implements CommandExecutor
                     uSkyBlock.getInstance().getActivePlayers().get(split[2]).resetChallenge(split[1].toLowerCase());
                     player.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
                 }
-            }
-            else if (split[0].equals("setbiome") && (VaultHandler.checkPerk(player.getName(), "usb.mod.setbiome", player.getWorld()) || player.isOp())) {
+            } else if (split[0].equals("setbiome") && (VaultHandler.checkPerk(player.getName(), "usb.mod.setbiome", player.getWorld()) || player.isOp())) {
                 if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[1])) {
                     final PlayerInfo pi = new PlayerInfo(split[1]);
                     if (!pi.getHasIsland()) {
@@ -319,16 +292,13 @@ public class DevCommand implements CommandExecutor
                     }
                     if (uSkyBlock.getInstance().setBiome(pi.getIslandLocation(), split[2])) {
                         player.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to " + split[2].toUpperCase() + ".");
-                    }
-                    else {
+                    } else {
                         player.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
                     }
                     pi.savePlayerConfig(split[1]);
-                }
-                else if (uSkyBlock.getInstance().setBiome(uSkyBlock.getInstance().getActivePlayers().get(split[1]).getIslandLocation(), split[2])) {
+                } else if (uSkyBlock.getInstance().setBiome(uSkyBlock.getInstance().getActivePlayers().get(split[1]).getIslandLocation(), split[2])) {
                     player.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to " + split[2].toUpperCase() + ".");
-                }
-                else {
+                } else {
                     player.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
                 }
             }

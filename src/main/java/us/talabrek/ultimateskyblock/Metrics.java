@@ -2,16 +2,20 @@ package us.talabrek.ultimateskyblock;
 
 import org.bukkit.configuration.file.*;
 import org.bukkit.scheduler.*;
+
 import java.util.*;
+
 import org.bukkit.*;
+
 import java.util.logging.*;
+
 import org.bukkit.configuration.*;
 import org.bukkit.plugin.*;
+
 import java.io.*;
 import java.net.*;
 
-public class Metrics
-{
+public class Metrics {
     private static final int REVISION = 6;
     private static final String BASE_URL = "http://mcstats.org";
     private static final String REPORT_URL = "/report/%s";
@@ -23,7 +27,7 @@ public class Metrics
     private final boolean debug;
     private final Object optOutLock;
     private volatile BukkitTask task;
-    
+
     public Metrics(final Plugin plugin) throws IOException {
         super();
         this.optOutLock = new Object();
@@ -33,17 +37,17 @@ public class Metrics
         }
         this.plugin = plugin;
         this.configurationFile = this.getConfigFile();
-        (this.configuration = YamlConfiguration.loadConfiguration(this.configurationFile)).addDefault("opt-out", (Object)false);
-        this.configuration.addDefault("guid", (Object)UUID.randomUUID().toString());
-        this.configuration.addDefault("debug", (Object)false);
-        if (this.configuration.get("guid", (Object)null) == null) {
+        (this.configuration = YamlConfiguration.loadConfiguration(this.configurationFile)).addDefault("opt-out", (Object) false);
+        this.configuration.addDefault("guid", (Object) UUID.randomUUID().toString());
+        this.configuration.addDefault("debug", (Object) false);
+        if (this.configuration.get("guid", (Object) null) == null) {
             this.configuration.options().header("http://mcstats.org").copyDefaults(true);
             this.configuration.save(this.configurationFile);
         }
         this.guid = this.configuration.getString("guid");
         this.debug = this.configuration.getBoolean("debug", false);
     }
-    
+
     public boolean start() {
         synchronized (this.optOutLock) {
             if (this.isOptOut()) {
@@ -54,9 +58,9 @@ public class Metrics
                 // monitorexit(this.optOutLock)
                 return true;
             }
-            this.task = this.plugin.getServer().getScheduler().runTaskTimerAsynchronously(this.plugin, (Runnable)new Runnable() {
+            this.task = this.plugin.getServer().getScheduler().runTaskTimerAsynchronously(this.plugin, (Runnable) new Runnable() {
                 private boolean firstPost = true;
-                
+
                 @Override
                 public void run() {
                     try {
@@ -69,8 +73,7 @@ public class Metrics
                         // monitorexit(Metrics.access$0(this.this$0))
                         Metrics.this.postPlugin(!this.firstPost);
                         this.firstPost = false;
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         if (Metrics.this.debug) {
                             Bukkit.getLogger().log(Level.INFO, "[Metrics] " + e.getMessage());
                         }
@@ -81,20 +84,18 @@ public class Metrics
             return true;
         }
     }
-    
+
     public boolean isOptOut() {
         synchronized (this.optOutLock) {
             try {
                 this.configuration.load(this.getConfigFile());
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 if (this.debug) {
                     Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
                 }
                 // monitorexit(this.optOutLock)
                 return true;
-            }
-            catch (InvalidConfigurationException ex2) {
+            } catch (InvalidConfigurationException ex2) {
                 if (this.debug) {
                     Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex2.getMessage());
                 }
@@ -105,11 +106,11 @@ public class Metrics
             return this.configuration.getBoolean("opt-out", false);
         }
     }
-    
+
     public void enable() throws IOException {
         synchronized (this.optOutLock) {
             if (this.isOptOut()) {
-                this.configuration.set("opt-out", (Object)false);
+                this.configuration.set("opt-out", (Object) false);
                 this.configuration.save(this.configurationFile);
             }
             if (this.task == null) {
@@ -118,11 +119,11 @@ public class Metrics
         }
         // monitorexit(this.optOutLock)
     }
-    
+
     public void disable() throws IOException {
         synchronized (this.optOutLock) {
             if (!this.isOptOut()) {
-                this.configuration.set("opt-out", (Object)true);
+                this.configuration.set("opt-out", (Object) true);
                 this.configuration.save(this.configurationFile);
             }
             if (this.task != null) {
@@ -132,12 +133,12 @@ public class Metrics
         }
         // monitorexit(this.optOutLock)
     }
-    
+
     public File getConfigFile() {
         final File pluginsFolder = this.plugin.getDataFolder().getParentFile();
         return new File(new File(pluginsFolder, "PluginMetrics"), "config.yml");
     }
-    
+
     private void postPlugin(final boolean isPing) throws IOException {
         final PluginDescriptionFile description = this.plugin.getDescription();
         final String pluginName = description.getName();
@@ -172,8 +173,7 @@ public class Metrics
         URLConnection connection;
         if (this.isMineshafterPresent()) {
             connection = url.openConnection(Proxy.NO_PROXY);
-        }
-        else {
+        } else {
             connection = url.openConnection();
         }
         connection.setDoOutput(true);
@@ -188,25 +188,24 @@ public class Metrics
             throw new IOException(response);
         }
     }
-    
+
     private boolean isMineshafterPresent() {
         try {
             Class.forName("mineshafter.MineServer");
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
-    
+
     private static void encodeDataPair(final StringBuilder buffer, final String key, final String value) throws UnsupportedEncodingException {
         buffer.append('&').append(encode(key)).append('=').append(encode(value));
     }
-    
+
     private static String encode(final String text) throws UnsupportedEncodingException {
         return URLEncoder.encode(text, "UTF-8");
     }
-    
+
     static /* synthetic */ void access$2(final Metrics metrics, final BukkitTask task) {
         metrics.task = task;
     }

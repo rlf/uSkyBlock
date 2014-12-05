@@ -9,39 +9,40 @@ import org.bukkit.command.*;
 import com.sk89q.worldguard.protection.flags.*;
 import com.sk89q.worldguard.protection.regions.*;
 import com.sk89q.worldguard.protection.*;
+
 import java.util.*;
+
 import com.sk89q.worldedit.*;
 import org.bukkit.*;
 
-public class WorldGuardHandler
-{
+public class WorldGuardHandler {
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
         if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
             return null;
         }
-        return (WorldGuardPlugin)plugin;
+        return (WorldGuardPlugin) plugin;
     }
-    
+
     public static void protectIsland(final Player sender, final String player, final PlayerInfo pi) {
         try {
             if (Settings.island_protectWithWorldGuard) {
                 if (pi.getIslandLocation() != null && !getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(String.valueOf(player) + "Island")) {
                     ProtectedRegion region = null;
                     final DefaultDomain owners = new DefaultDomain();
-                    region = (ProtectedRegion)new ProtectedCuboidRegion(String.valueOf(player) + "Island", getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
+                    region = new ProtectedCuboidRegion(String.valueOf(player) + "Island", getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
                     owners.addPlayer(player);
                     region.setOwners(owners);
                     region.setParent(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion("__Global__"));
                     region.setPriority(100);
-                    region.setFlag((Flag)DefaultFlag.GREET_MESSAGE, (Object)DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), (CommandSender)sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
-                    region.setFlag((Flag)DefaultFlag.FAREWELL_MESSAGE, (Object)DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), (CommandSender)sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
-                    region.setFlag((Flag)DefaultFlag.PVP, (Object)DefaultFlag.PVP.parseInput(getWorldGuard(), (CommandSender)sender, Settings.island_allowPvP));
-                    region.setFlag((Flag)DefaultFlag.CHEST_ACCESS, (Object)DefaultFlag.CHEST_ACCESS.parseInput(getWorldGuard(), (CommandSender)sender, "deny"));
-                    region.setFlag((Flag)DefaultFlag.USE, (Object)DefaultFlag.USE.parseInput(getWorldGuard(), (CommandSender)sender, "deny"));
-                    region.setFlag((Flag)DefaultFlag.DESTROY_VEHICLE, (Object)DefaultFlag.DESTROY_VEHICLE.parseInput(getWorldGuard(), (CommandSender)sender, "deny"));
-                    region.setFlag((Flag)DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, (Object)DefaultFlag.ENTITY_ITEM_FRAME_DESTROY.parseInput(getWorldGuard(), (CommandSender)sender, "deny"));
-                    region.setFlag((Flag)DefaultFlag.ENTITY_PAINTING_DESTROY, (Object)DefaultFlag.ENTITY_PAINTING_DESTROY.parseInput(getWorldGuard(), (CommandSender)sender, "deny"));
+                    region.setFlag((Flag) DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
+                    region.setFlag((Flag) DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
+                    region.setFlag((Flag) DefaultFlag.PVP, DefaultFlag.PVP.parseInput(getWorldGuard(), sender, Settings.island_allowPvP));
+                    region.setFlag((Flag) DefaultFlag.CHEST_ACCESS, DefaultFlag.CHEST_ACCESS.parseInput(getWorldGuard(), sender, "deny"));
+                    region.setFlag((Flag) DefaultFlag.USE, DefaultFlag.USE.parseInput(getWorldGuard(), sender, "deny"));
+                    region.setFlag((Flag) DefaultFlag.DESTROY_VEHICLE, DefaultFlag.DESTROY_VEHICLE.parseInput(getWorldGuard(), sender, "deny"));
+                    region.setFlag((Flag) DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, DefaultFlag.ENTITY_ITEM_FRAME_DESTROY.parseInput(getWorldGuard(), sender, "deny"));
+                    region.setFlag((Flag) DefaultFlag.ENTITY_PAINTING_DESTROY, DefaultFlag.ENTITY_PAINTING_DESTROY.parseInput(getWorldGuard(), sender, "deny"));
                     final ApplicableRegionSet set = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getApplicableRegions(pi.getIslandLocation());
                     if (set.size() > 0) {
                         for (final ProtectedRegion regions : set) {
@@ -53,60 +54,54 @@ public class WorldGuardHandler
                     getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).addRegion(region);
                     System.out.print("New protected region created for " + player + "'s Island by " + sender.getName());
                     getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
-                }
-                else {
+                } else {
                     sender.sendMessage("Player doesn't have an island or it's already protected!");
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.print("ERROR: Failed to protect " + player + "'s Island (" + sender.getName() + ")");
             ex.printStackTrace();
         }
     }
-    
+
     public static void islandLock(final CommandSender sender, final String player) {
         try {
             if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(String.valueOf(player) + "Island")) {
-                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(player) + "Island").setFlag((Flag)DefaultFlag.ENTRY, (Object)DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "deny"));
+                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(player) + "Island").setFlag((Flag) DefaultFlag.ENTRY, DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "deny"));
                 sender.sendMessage(ChatColor.YELLOW + "Your island is now locked. Only your party members may enter.");
                 getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
-            }
-            else {
+            } else {
                 sender.sendMessage(ChatColor.RED + "You must be the party leader to lock your island!");
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.print("ERROR: Failed to lock " + player + "'s Island (" + sender.getName() + ")");
             ex.printStackTrace();
         }
     }
-    
+
     public static void islandUnlock(final CommandSender sender, final String player) {
         try {
             if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(String.valueOf(player) + "Island")) {
-                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(player) + "Island").setFlag((Flag)DefaultFlag.ENTRY, (Object)DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "allow"));
+                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(player) + "Island").setFlag((Flag) DefaultFlag.ENTRY, DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "allow"));
                 sender.sendMessage(ChatColor.YELLOW + "Your island is unlocked and anyone may enter, however only you and your party members may build or remove blocks.");
                 getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
-            }
-            else {
+            } else {
                 sender.sendMessage(ChatColor.RED + "You must be the party leader to unlock your island!");
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.print("ERROR: Failed to unlock " + player + "'s Island (" + sender.getName() + ")");
             ex.printStackTrace();
         }
     }
-    
+
     public static BlockVector getProtectionVectorLeft(final Location island) {
         return new BlockVector(island.getX() + Settings.island_protectionRange / 2, 255.0, island.getZ() + Settings.island_protectionRange / 2);
     }
-    
+
     public static BlockVector getProtectionVectorRight(final Location island) {
         return new BlockVector(island.getX() - Settings.island_protectionRange / 2, 0.0, island.getZ() - Settings.island_protectionRange / 2);
     }
-    
+
     public static void removePlayerFromRegion(final String owner, final String player) {
         if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(String.valueOf(owner) + "Island")) {
             final DefaultDomain owners = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(owner) + "Island").getOwners();
@@ -114,7 +109,7 @@ public class WorldGuardHandler
             getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(owner) + "Island").setOwners(owners);
         }
     }
-    
+
     public static void addPlayerToOldRegion(final String owner, final String player) {
         if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(String.valueOf(owner) + "Island")) {
             final DefaultDomain owners = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(owner) + "Island").getOwners();
@@ -122,7 +117,7 @@ public class WorldGuardHandler
             getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(owner) + "Island").setOwners(owners);
         }
     }
-    
+
     public static void resetPlayerRegion(final String owner) {
         if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(String.valueOf(owner) + "Island")) {
             final DefaultDomain owners = new DefaultDomain();
@@ -130,23 +125,22 @@ public class WorldGuardHandler
             getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(owner) + "Island").setOwners(owners);
         }
     }
-    
+
     public static void transferRegion(final String owner, final String player, final CommandSender sender) {
         try {
             ProtectedRegion region2 = null;
-            region2 = (ProtectedRegion)new ProtectedCuboidRegion(String.valueOf(player) + "Island", getWorldGuard().getRegionManager(Bukkit.getWorld("skyworld")).getRegion(String.valueOf(owner) + "Island").getMinimumPoint(), getWorldGuard().getRegionManager(Bukkit.getWorld(Settings.general_worldName)).getRegion(String.valueOf(owner) + "Island").getMaximumPoint());
+            region2 = new ProtectedCuboidRegion(String.valueOf(player) + "Island", getWorldGuard().getRegionManager(Bukkit.getWorld("skyworld")).getRegion(String.valueOf(owner) + "Island").getMinimumPoint(), getWorldGuard().getRegionManager(Bukkit.getWorld(Settings.general_worldName)).getRegion(String.valueOf(owner) + "Island").getMaximumPoint());
             region2.setOwners(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(String.valueOf(owner) + "Island").getOwners());
             region2.setParent(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion("__Global__"));
-            region2.setFlag((Flag)DefaultFlag.GREET_MESSAGE, (Object)DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
-            region2.setFlag((Flag)DefaultFlag.FAREWELL_MESSAGE, (Object)DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
-            region2.setFlag((Flag)DefaultFlag.PVP, (Object)DefaultFlag.PVP.parseInput(getWorldGuard(), sender, "deny"));
-            region2.setFlag((Flag)DefaultFlag.DESTROY_VEHICLE, (Object)DefaultFlag.DESTROY_VEHICLE.parseInput(getWorldGuard(), sender, "deny"));
-            region2.setFlag((Flag)DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, (Object)DefaultFlag.ENTITY_ITEM_FRAME_DESTROY.parseInput(getWorldGuard(), sender, "deny"));
-            region2.setFlag((Flag)DefaultFlag.ENTITY_PAINTING_DESTROY, (Object)DefaultFlag.ENTITY_PAINTING_DESTROY.parseInput(getWorldGuard(), sender, "deny"));
+            region2.setFlag((Flag) DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
+            region2.setFlag((Flag) DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
+            region2.setFlag((Flag) DefaultFlag.PVP, DefaultFlag.PVP.parseInput(getWorldGuard(), sender, "deny"));
+            region2.setFlag((Flag) DefaultFlag.DESTROY_VEHICLE, DefaultFlag.DESTROY_VEHICLE.parseInput(getWorldGuard(), sender, "deny"));
+            region2.setFlag((Flag) DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, DefaultFlag.ENTITY_ITEM_FRAME_DESTROY.parseInput(getWorldGuard(), sender, "deny"));
+            region2.setFlag((Flag) DefaultFlag.ENTITY_PAINTING_DESTROY, DefaultFlag.ENTITY_PAINTING_DESTROY.parseInput(getWorldGuard(), sender, "deny"));
             getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).removeRegion(String.valueOf(owner) + "Island");
             getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).addRegion(region2);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error transferring WorldGuard Protected Region from (" + owner + ") to (" + player + ")");
         }
     }
