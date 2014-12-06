@@ -1,6 +1,6 @@
 name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
-version: 2.0.0
+version: ${project.version}-${buildNumber}
 description: Ultimate SkyBlock. 
 author: Talabrek (based on code by Qgel and others)
 load: STARTUP
