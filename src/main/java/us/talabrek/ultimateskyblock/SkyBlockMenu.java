@@ -975,6 +975,9 @@ public class SkyBlockMenu {
     }
 
     public void onClick(InventoryClickEvent event) {
+        if (event == null || event.getCurrentItem() == null || event.getWhoClicked() == null) {
+            return; // Bail out, nothing we can do anyway
+        }
         Player p = (Player) event.getWhoClicked();
         ItemMeta meta = event.getCurrentItem().getItemMeta();
         SkullMeta skull = meta instanceof SkullMeta ? (SkullMeta) meta : null;
