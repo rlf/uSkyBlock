@@ -18,17 +18,12 @@ import org.bukkit.event.inventory.*;
 
 public class PlayerJoin implements Listener {
     private Player hungerman;
-    private SkullMeta meta;
     int randomNum;
-    Player p;
-    String[] playerPerm;
 
     public PlayerJoin() {
         super();
         this.hungerman = null;
-        this.meta = null;
         this.randomNum = 0;
-        this.p = null;
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -152,214 +147,11 @@ public class PlayerJoin implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void guiClick(final InventoryClickEvent event) {
-        if (event.getInventory().getName().equalsIgnoreCase("\u00a79Island Group Members")) {
-            event.setCancelled(true);
-            if (event.getSlot() < 0 || event.getSlot() > 35) {
-                return;
-            }
-            if (event.getCurrentItem().getTypeId() == 397) {
-                this.meta = (SkullMeta) event.getCurrentItem().getItemMeta();
-            }
-            this.p = (Player) event.getWhoClicked();
-            if (this.meta == null || event.getCurrentItem().getType() == Material.SIGN) {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (this.meta.getLore().contains("\u00a7a\u00a7lLeader")) {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyGUI(this.p));
-            } else if (!uSkyBlock.getInstance().isPartyLeader(this.p)) {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyGUI(this.p));
-            } else {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.meta.getOwner()));
-                this.meta = null;
-            }
-        } else if (event.getInventory().getName().contains("Permissions")) {
-            event.setCancelled(true);
-            if (event.getSlot() < 0 || event.getSlot() > 35) {
-                return;
-            }
-            this.p = (Player) event.getWhoClicked();
-            this.playerPerm = event.getInventory().getName().split(" ");
-            if (event.getCurrentItem().getTypeId() == 6) {
-                this.p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(this.p, this.playerPerm[0], "canChangeBiome");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 101) {
-                this.p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(this.p, this.playerPerm[0], "canToggleLock");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 90) {
-                this.p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(this.p, this.playerPerm[0], "canChangeWarp");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 69) {
-                this.p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(this.p, this.playerPerm[0], "canToggleWarp");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 398) {
-                this.p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(this.p, this.playerPerm[0], "canInviteOthers");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 301) {
-                this.p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(this.p, this.playerPerm[0], "canKickOthers");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 323) {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyGUI(this.p));
-            } else {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.playerPerm[0]));
-            }
-        } else if (event.getInventory().getName().contains("Island Biome")) {
-            event.setCancelled(true);
-            if (event.getSlot() < 0 || event.getSlot() > 35) {
-                return;
-            }
-            this.p = (Player) event.getWhoClicked();
-            if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 3) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome jungle");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 1) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome forest");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.SAND) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome desert");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.SNOW) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome taiga");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.EYE_OF_ENDER) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome sky");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.WATER_LILY) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome swampland");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.FIRE) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome hell");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.RED_MUSHROOM) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome mushroom");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.WATER) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome ocean");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            }
-        } else if (event.getInventory().getName().contains("Challenge Menu")) {
-            event.setCancelled(true);
-            if (event.getSlot() < 0 || event.getSlot() > 35) {
-                return;
-            }
-            if (event.getCurrentItem().getType() != Material.DIRT && event.getCurrentItem().getType() != Material.IRON_BLOCK && event.getCurrentItem().getType() != Material.GOLD_BLOCK && event.getCurrentItem().getType() != Material.DIAMOND_BLOCK) {
-                (this.p = (Player) event.getWhoClicked()).closeInventory();
-                if (event.getCurrentItem().getItemMeta() != null) {
-                    this.p.performCommand("c c " + event.getCurrentItem().getItemMeta().getDisplayName().replace("\u00a7e", "").replace("\u00a78", "").replace("\u00a7a", "").replace("\u00a72", "").replace("\u00a7l", ""));
-                }
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayChallengeGUI(this.p));
-            } else {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            }
-        } else if (event.getInventory().getName().contains("Island Log")) {
-            event.setCancelled(true);
-            if (event.getSlot() < 0 || event.getSlot() > 35) {
-                return;
-            }
-            this.p.closeInventory();
-            this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-        } else if (event.getInventory().getName().contains("Island Menu")) {
-            event.setCancelled(true);
-            if (event.getSlot() < 0 || event.getSlot() > 35) {
-                return;
-            }
-            this.p = (Player) event.getWhoClicked();
-            if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 3) {
-                this.p.closeInventory();
-                this.p.performCommand("island biome");
-            } else if (event.getCurrentItem().getType() == Material.SKULL_ITEM) {
-                this.p.closeInventory();
-                this.p.performCommand("island party");
-            } else if (event.getCurrentItem().getType() == Material.BED) {
-                this.p.closeInventory();
-                this.p.performCommand("island sethome");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.HOPPER) {
-                this.p.closeInventory();
-                this.p.performCommand("island setwarp");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.BOOK_AND_QUILL) {
-                this.p.closeInventory();
-                this.p.performCommand("island log");
-            } else if (event.getCurrentItem().getType() == Material.ENDER_PORTAL) {
-                this.p.closeInventory();
-                this.p.performCommand("island home");
-            } else if (event.getCurrentItem().getType() == Material.GRASS) {
-                this.p.closeInventory();
-                this.p.performCommand("island create");
-            } else if (event.getCurrentItem().getType() == Material.CHEST) {
-                this.p.closeInventory();
-                this.p.performCommand("chc open perks");
-            } else if (event.getCurrentItem().getType() == Material.ENDER_CHEST) {
-                this.p.closeInventory();
-                if (VaultHandler.checkPerk(this.p.getName(), "group.donor", this.p.getWorld())) {
-                    this.p.performCommand("chc open donor");
-                } else {
-                    this.p.performCommand("donate");
-                }
-            } else if (event.getCurrentItem().getType() == Material.EXP_BOTTLE) {
-                this.p.closeInventory();
-                this.p.performCommand("island level");
-            } else if (event.getCurrentItem().getType() == Material.DIAMOND_ORE) {
-                this.p.closeInventory();
-                this.p.performCommand("c");
-            } else if (event.getCurrentItem().getType() == Material.ENDER_STONE || event.getCurrentItem().getType() == Material.PORTAL) {
-                this.p.closeInventory();
-                this.p.performCommand("island togglewarp");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(event.getWhoClicked().getName()).locationForParty()).getBoolean("general.locked")) {
-                this.p.closeInventory();
-                this.p.performCommand("island unlock");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && !uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(event.getWhoClicked().getName()).locationForParty()).getBoolean("general.locked")) {
-                this.p.closeInventory();
-                this.p.performCommand("island lock");
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            } else {
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(this.p));
-            }
-        }
+        uSkyBlock.getInstance().getMenu().onClick(event);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onInventoryDrag(final InventoryDragEvent event) {
-        if (event.getInventory().getName().equalsIgnoreCase("\u00a79SB Island Group Members")) {
-            event.setCancelled(true);
-            this.meta = (SkullMeta) event.getCursor().getItemMeta();
-            this.p = (Player) event.getWhoClicked();
-            if (this.meta.getOwner() == null) {
-                this.p.updateInventory();
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyGUI(this.p));
-            } else {
-                this.p.updateInventory();
-                this.p.closeInventory();
-                this.p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(this.p, this.meta.getOwner()));
-            }
-        }
+        uSkyBlock.getInstance().getMenu().onDrag(event);
     }
 }

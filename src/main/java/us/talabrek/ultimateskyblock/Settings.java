@@ -136,7 +136,7 @@ public class Settings {
         } catch (Exception e) {
             general_spawnSize = 50;
         }
-        // TODO: 06/12/2014 - RasmusLock:
+        // TODO: 06/12/2014 - R4zorax: Null pointer protection
         final String[] chestItemString = config.getString("options.island.chestItems").split(" ");
         final ItemStack[] tempChest = new ItemStack[chestItemString.length];
         String[] amountdata = new String[2];
