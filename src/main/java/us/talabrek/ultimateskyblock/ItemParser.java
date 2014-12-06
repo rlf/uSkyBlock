@@ -11,15 +11,15 @@ public class ItemParser {
             return "";
         }
         String s = "";
-        s = String.valueOf(s) + "id:" + item.getTypeId() + ";";
-        s = String.valueOf(s) + "amount:" + item.getAmount() + ";";
-        s = String.valueOf(s) + "durab:" + item.getDurability() + ";";
-        s = String.valueOf(s) + "data:" + item.getData().getData() + ";";
+        s = s + "id:" + item.getTypeId() + ";";
+        s = s + "amount:" + item.getAmount() + ";";
+        s = s + "durab:" + item.getDurability() + ";";
+        s = s + "data:" + item.getData().getData() + ";";
         if (item.getEnchantments().size() > 0) {
-            s = String.valueOf(s) + "ench:";
+            s = s + "ench:";
             for (final Enchantment e : item.getEnchantments().keySet()) {
-                s = String.valueOf(s) + "eid#" + e.getId() + " ";
-                s = String.valueOf(s) + "elevel#" + item.getEnchantments().get(e) + " ";
+                s = s + "eid#" + e.getId() + " ";
+                s = s + "elevel#" + item.getEnchantments().get(e) + " ";
             }
         }
         return s.trim();

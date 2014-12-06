@@ -64,7 +64,7 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayPartyPlayerGUI(final Player player, final String pname) {
-        this.GUIpartyPlayer = Bukkit.createInventory(null, 9, String.valueOf(pname) + " <Permissions>");
+        this.GUIpartyPlayer = Bukkit.createInventory(null, 9, pname + " <Permissions>");
         final ItemStack pHead = new ItemStack(397, 1, (short) 3);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = this.sign.getItemMeta();
@@ -75,7 +75,7 @@ public class SkyBlockMenu {
         this.sign.setItemMeta(meta2);
         this.GUIpartyPlayer.addItem(new ItemStack[]{this.sign});
         this.lores.clear();
-        meta3.setDisplayName(String.valueOf(pname) + "'s Permissions");
+        meta3.setDisplayName(pname + "'s Permissions");
         lores.add("\u00a7eHover over an icon to view");
         lores.add("\u00a7ea permission. Change the");
         lores.add("\u00a7epermission by clicking it.");

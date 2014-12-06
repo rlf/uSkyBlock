@@ -139,12 +139,12 @@ public class PlayerInfoOld implements Serializable {
     }
 
     public void displayData(final String player) {
-        System.out.print(String.valueOf(player) + " has an island: " + this.getHasIsland());
+        System.out.print(player + " has an island: " + this.getHasIsland());
         if (this.getIslandLocation() != null) {
-            System.out.print(String.valueOf(player) + " island location: " + this.getIslandLocation().toString());
+            System.out.print(player + " island location: " + this.getIslandLocation().toString());
         }
         if (this.getHomeLocation() != null) {
-            System.out.print(String.valueOf(player) + " home location: " + this.getHomeLocation().toString());
+            System.out.print(player + " home location: " + this.getHomeLocation().toString());
         }
     }
 

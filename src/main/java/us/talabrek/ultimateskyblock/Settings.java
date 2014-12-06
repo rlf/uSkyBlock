@@ -48,77 +48,77 @@ public class Settings {
     public static Material[] itemList;
 
     static {
-        Settings.blockList = new int[256];
-        Settings.limitList = new int[256];
-        Settings.diminishingReturnsList = new int[256];
-        Settings.itemList = new Material[2000];
+        blockList = new int[256];
+        limitList = new int[256];
+        diminishingReturnsList = new int[256];
+        itemList = new Material[2000];
     }
 
     public static boolean loadPluginConfig(FileConfiguration config) {
         boolean changed = false;
         try {
-            Settings.general_maxPartySize = config.getInt("options.general.maxPartySize");
-            if (Settings.general_maxPartySize < 0) {
-                Settings.general_maxPartySize = 0;
+            general_maxPartySize = config.getInt("options.general.maxPartySize");
+            if (general_maxPartySize < 0) {
+                general_maxPartySize = 0;
             }
         } catch (Exception e) {
-            Settings.general_maxPartySize = 4;
+            general_maxPartySize = 4;
         }
         try {
-            Settings.island_distance = config.getInt("options.island.distance");
-            if (Settings.island_distance < 50) {
-                Settings.island_distance = 50;
+            island_distance = config.getInt("options.island.distance");
+            if (island_distance < 50) {
+                island_distance = 50;
             }
         } catch (Exception e) {
-            Settings.island_distance = 110;
+            island_distance = 110;
         }
         try {
-            Settings.island_protectionRange = config.getInt("options.island.protectionRange");
-            if (Settings.island_protectionRange > Settings.island_distance) {
-                Settings.island_protectionRange = Settings.island_distance;
+            island_protectionRange = config.getInt("options.island.protectionRange");
+            if (island_protectionRange > island_distance) {
+                island_protectionRange = island_distance;
             }
         } catch (Exception e) {
-            Settings.island_protectionRange = 100;
+            island_protectionRange = 100;
         }
         try {
-            Settings.general_cooldownInfo = config.getInt("options.general.cooldownInfo");
-            if (Settings.general_cooldownInfo < 0) {
-                Settings.general_cooldownInfo = 0;
+            general_cooldownInfo = config.getInt("options.general.cooldownInfo");
+            if (general_cooldownInfo < 0) {
+                general_cooldownInfo = 0;
             }
         } catch (Exception e) {
-            Settings.general_cooldownInfo = 60;
+            general_cooldownInfo = 60;
         }
         try {
-            Settings.general_biomeChange = config.getInt("options.general.biomeChange");
-            if (Settings.general_biomeChange < 0) {
-                Settings.general_biomeChange = 0;
+            general_biomeChange = config.getInt("options.general.biomeChange");
+            if (general_biomeChange < 0) {
+                general_biomeChange = 0;
             }
         } catch (Exception e) {
-            Settings.general_biomeChange = 3600;
+            general_biomeChange = 3600;
         }
         try {
-            Settings.general_cooldownRestart = config.getInt("options.general.cooldownRestart");
-            if (Settings.general_cooldownRestart < 0) {
-                Settings.general_cooldownRestart = 0;
+            general_cooldownRestart = config.getInt("options.general.cooldownRestart");
+            if (general_cooldownRestart < 0) {
+                general_cooldownRestart = 0;
             }
         } catch (Exception e) {
-            Settings.general_cooldownRestart = 60;
+            general_cooldownRestart = 60;
         }
         try {
-            Settings.island_height = config.getInt("options.island.height");
-            if (Settings.island_height < 20) {
-                Settings.island_height = 20;
+            island_height = config.getInt("options.island.height");
+            if (island_height < 20) {
+                island_height = 20;
             }
         } catch (Exception e) {
-            Settings.island_height = 120;
+            island_height = 120;
         }
         try {
-            Settings.challenges_rankLeeway = config.getInt("options.challenges.rankLeeway");
-            if (Settings.challenges_rankLeeway < 0) {
-                Settings.challenges_rankLeeway = 0;
+            challenges_rankLeeway = config.getInt("options.challenges.rankLeeway");
+            if (challenges_rankLeeway < 0) {
+                challenges_rankLeeway = 0;
             }
         } catch (Exception e) {
-            Settings.challenges_rankLeeway = 0;
+            challenges_rankLeeway = 0;
         }
         if (!config.contains("options.extras.obsidianToLava")) {
             config.set("options.extras.obsidianToLava", true);
@@ -129,13 +129,14 @@ public class Settings {
             changed = true;
         }
         try {
-            Settings.general_spawnSize = config.getInt("options.general.spawnSize");
-            if (Settings.general_spawnSize < 50) {
-                Settings.general_spawnSize = 50;
+            general_spawnSize = config.getInt("options.general.spawnSize");
+            if (general_spawnSize < 50) {
+                general_spawnSize = 50;
             }
         } catch (Exception e) {
-            Settings.general_spawnSize = 50;
+            general_spawnSize = 50;
         }
+        // TODO: 06/12/2014 - RasmusLock:
         final String[] chestItemString = config.getString("options.island.chestItems").split(" ");
         final ItemStack[] tempChest = new ItemStack[chestItemString.length];
         String[] amountdata = new String[2];
@@ -143,34 +144,34 @@ public class Settings {
             amountdata = chestItemString[i].split(":");
             tempChest[i] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
         }
-        Settings.island_chestItems = tempChest;
-        Settings.island_allowPvP = config.getString("options.island.allowPvP");
-        Settings.island_schematicName = config.getString("options.island.schematicName");
-        if (!Settings.island_allowPvP.equalsIgnoreCase("allow")) {
-            Settings.island_allowPvP = "deny";
+        island_chestItems = tempChest;
+        island_allowPvP = config.getString("options.island.allowPvP");
+        island_schematicName = config.getString("options.island.schematicName");
+        if (!island_allowPvP.equalsIgnoreCase("allow")) {
+            island_allowPvP = "deny";
         }
         final Set<String> permissionList = config.getConfigurationSection("options.island.extraPermissions").getKeys(true);
-        Settings.island_addExtraItems = config.getBoolean("options.island.addExtraItems");
-        Settings.extras_obsidianToLava = config.getBoolean("options.extras.obsidianToLava");
-        Settings.island_useIslandLevel = config.getBoolean("options.island.useIslandLevel");
-        Settings.island_extraPermissions = permissionList.toArray(new String[0]);
-        Settings.island_protectWithWorldGuard = config.getBoolean("options.island.protectWithWorldGuard");
-        Settings.extras_sendToSpawn = config.getBoolean("options.extras.sendToSpawn");
-        Settings.island_useTopTen = config.getBoolean("options.island.useTopTen");
-        Settings.general_worldName = config.getString("options.general.worldName");
-        Settings.island_removeCreaturesByTeleport = config.getBoolean("options.island.removeCreaturesByTeleport");
-        Settings.island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
-        Settings.island_useOldIslands = config.getBoolean("options.island.useOldIslands");
-        Settings.challenges_challengeList = config.getConfigurationSection("options.challenges.challengeList").getKeys(false);
-        Settings.challenges_broadcastCompletion = config.getBoolean("options.challenges.broadcastCompletion");
-        Settings.challenges_broadcastText = config.getString("options.challenges.broadcastText");
-        Settings.challenges_challengeColor = config.getString("options.challenges.challengeColor");
-        Settings.challenges_enableEconomyPlugin = config.getBoolean("options.challenges.enableEconomyPlugin");
-        Settings.challenges_finishedColor = config.getString("options.challenges.finishedColor");
-        Settings.challenges_repeatableColor = config.getString("options.challenges.repeatableColor");
-        Settings.challenges_requirePreviousRank = config.getBoolean("options.challenges.requirePreviousRank");
-        Settings.challenges_allowChallenges = config.getBoolean("options.challenges.allowChallenges");
-        Settings.challenges_ranks = config.getString("options.challenges.ranks").split(" ");
+        island_addExtraItems = config.getBoolean("options.island.addExtraItems");
+        extras_obsidianToLava = config.getBoolean("options.extras.obsidianToLava");
+        island_useIslandLevel = config.getBoolean("options.island.useIslandLevel");
+        island_extraPermissions = permissionList.toArray(new String[0]);
+        island_protectWithWorldGuard = config.getBoolean("options.island.protectWithWorldGuard");
+        extras_sendToSpawn = config.getBoolean("options.extras.sendToSpawn");
+        island_useTopTen = config.getBoolean("options.island.useTopTen");
+        general_worldName = config.getString("options.general.worldName");
+        island_removeCreaturesByTeleport = config.getBoolean("options.island.removeCreaturesByTeleport");
+        island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
+        island_useOldIslands = config.getBoolean("options.island.useOldIslands");
+        challenges_challengeList = config.getConfigurationSection("options.challenges.challengeList").getKeys(false);
+        challenges_broadcastCompletion = config.getBoolean("options.challenges.broadcastCompletion");
+        challenges_broadcastText = config.getString("options.challenges.broadcastText");
+        challenges_challengeColor = config.getString("options.challenges.challengeColor");
+        challenges_enableEconomyPlugin = config.getBoolean("options.challenges.enableEconomyPlugin");
+        challenges_finishedColor = config.getString("options.challenges.finishedColor");
+        challenges_repeatableColor = config.getString("options.challenges.repeatableColor");
+        challenges_requirePreviousRank = config.getBoolean("options.challenges.requirePreviousRank");
+        challenges_allowChallenges = config.getBoolean("options.challenges.allowChallenges");
+        challenges_ranks = config.getString("options.challenges.ranks").split(" ");
 
         // TODO: Fix wrongly formatting in text uSkyBlock.correctFormatting(String)
         return changed;

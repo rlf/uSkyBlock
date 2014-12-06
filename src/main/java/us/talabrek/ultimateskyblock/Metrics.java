@@ -151,7 +151,7 @@ public class Metrics {
         encodeDataPair(data, "version", pluginVersion);
         encodeDataPair(data, "server", serverVersion);
         encodeDataPair(data, "players", Integer.toString(playersOnline));
-        encodeDataPair(data, "revision", String.valueOf(6));
+        encodeDataPair(data, "revision", ""+6);
         final String osname = System.getProperty("os.name");
         String osarch = System.getProperty("os.arch");
         final String osversion = System.getProperty("os.version");

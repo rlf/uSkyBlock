@@ -5,6 +5,7 @@ import com.sk89q.worldedit.data.DataException;
 import org.bukkit.*;
 import org.bukkit.block.*;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
@@ -32,13 +33,10 @@ public class uSkyBlock extends JavaPlugin {
     private FileConfiguration levelConfig;
     private FileConfiguration lastIslandConfig;
     private FileConfiguration orphans;
-    private FileConfiguration tempIsland;
     private HashMap<String, FileConfiguration> islands;
     private File levelConfigFile;
     private File orphanFile;
     private File lastIslandConfigFile;
-    private File islandConfigFile;
-    private File tempIslandFile;
     public static World skyBlockWorld;
     private static uSkyBlock instance;
     public List<String> removeList;
@@ -51,7 +49,6 @@ public class uSkyBlock extends JavaPlugin {
     private Stack<Location> reverseOrphaned;
     public File directoryPlayers;
     public File directoryIslands;
-    private File directorySchematics;
     public File[] schemFile;
     public String pName;
     public Location islandTestLocation;
@@ -77,13 +74,10 @@ public class uSkyBlock extends JavaPlugin {
         this.levelConfig = null;
         this.lastIslandConfig = null;
         this.orphans = null;
-        this.tempIsland = null;
         this.islands = new HashMap<>();
         this.levelConfigFile = null;
         this.orphanFile = null;
         this.lastIslandConfigFile = null;
-        this.islandConfigFile = null;
-        this.tempIslandFile = null;
         this.removeList = new ArrayList<>();
         this.orphaned = new Stack<>();
         this.tempOrphaned = new Stack<>();
@@ -143,11 +137,11 @@ public class uSkyBlock extends JavaPlugin {
         if (!this.directoryIslands.exists()) {
             this.directoryIslands.mkdir();
         }
-        this.directorySchematics = new File(this.getDataFolder() + File.separator + "schematics");
-        if (!this.directorySchematics.exists()) {
-            this.directorySchematics.mkdir();
+        File directorySchematics = new File(this.getDataFolder() + File.separator + "schematics");
+        if (!directorySchematics.exists()) {
+            directorySchematics.mkdir();
         }
-        this.schemFile = this.directorySchematics.listFiles();
+        this.schemFile = directorySchematics.listFiles();
         if (this.schemFile == null) {
             System.out.print("[uSkyBlock] No schematic file loaded.");
         } else {
@@ -270,24 +264,26 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    public boolean displayTopTen(final Player player) {
+    public boolean displayTopTen(final CommandSender sender) {
         int i = 1;
         int playerrank = 0;
-        player.sendMessage(ChatColor.YELLOW + "Displaying the top 10 islands:");
+        sender.sendMessage(ChatColor.YELLOW + "Displaying the top 10 islands:");
         if (topTen == null) {
-            player.sendMessage(ChatColor.RED + "Top ten list not generated yet!");
+            sender.sendMessage(ChatColor.RED + "Top ten list not generated yet!");
             return false;
         }
         for (final String playerName : topTen.keySet()) {
             if (i <= 10) {
-                player.sendMessage(ChatColor.GREEN + "#" + i + ": " + playerName + " - Island level " + topTen.get(playerName));
+                sender.sendMessage(ChatColor.GREEN + "#" + i + ": " + playerName + " - Island level " + topTen.get(playerName));
             }
-            if (playerName.equalsIgnoreCase(player.getName())) {
+            if (playerName != null && playerName.equalsIgnoreCase(sender.getName())) {
                 playerrank = i;
             }
             ++i;
         }
-        player.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank);
+        if (playerrank > 0) {
+            sender.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank);
+        }
         return true;
     }
 
@@ -434,8 +430,8 @@ public class uSkyBlock extends JavaPlugin {
 
     public Location getSafeWarpLocation(final PlayerInfo p) {
         Location warp = null;
-        this.getTempIslandConfig(p.locationForParty());
-        if (this.tempIsland.getInt("general.warpLocationX") == 0) {
+        FileConfiguration island = getTempIslandConfig(p.locationForParty());
+        if (island.getInt("general.warpLocationX") == 0) {
             if (p.getHomeLocation() == null) {
                 if (p.getIslandLocation() != null) {
                     warp = p.getIslandLocation();
@@ -444,7 +440,7 @@ public class uSkyBlock extends JavaPlugin {
                 warp = p.getHomeLocation();
             }
         } else {
-            warp = new Location(uSkyBlock.skyBlockWorld, (double) this.tempIsland.getInt("general.warpLocationX"), (double) this.tempIsland.getInt("general.warpLocationY"), (double) this.tempIsland.getInt("general.warpLocationZ"));
+            warp = new Location(uSkyBlock.skyBlockWorld, (double) island.getInt("general.warpLocationX"), (double) island.getInt("general.warpLocationY"), (double) island.getInt("general.warpLocationZ"));
         }
         if (warp == null) {
             System.out.print("Error warping player to " + p.getPlayerName() + "'s island.");
@@ -502,8 +498,8 @@ public class uSkyBlock extends JavaPlugin {
     public void deletePlayerIsland(final String player) {
         if (!this.getActivePlayers().containsKey(player)) {
             final PlayerInfo pi = new PlayerInfo(player);
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(String.valueOf(player) + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(String.valueOf(player) + "Island");
+            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
+                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
             }
             this.orphaned.push(pi.getIslandLocation());
             this.removeIsland(pi.getIslandLocation());
@@ -512,8 +508,8 @@ public class uSkyBlock extends JavaPlugin {
             this.saveOrphans();
             pi.savePlayerConfig(player);
         } else {
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(String.valueOf(player) + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(String.valueOf(player) + "Island");
+            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
+                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
             }
             this.orphaned.push(this.getActivePlayers().get(player).getIslandLocation());
             this.removeIsland(this.getActivePlayers().get(player).getIslandLocation());
@@ -608,14 +604,14 @@ public class uSkyBlock extends JavaPlugin {
     public void devDeletePlayerIsland(final String player) {
         if (!this.getActivePlayers().containsKey(player)) {
             PlayerInfo pi = new PlayerInfo(player);
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(String.valueOf(player) + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(String.valueOf(player) + "Island");
+            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
+                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
             }
             pi = new PlayerInfo(player);
             pi.savePlayerConfig(player);
         } else {
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(String.valueOf(player) + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(String.valueOf(player) + "Island");
+            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
+                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
             }
             final PlayerInfo pi = new PlayerInfo(player);
             this.removeActivePlayer(player);
@@ -797,7 +793,7 @@ public class uSkyBlock extends JavaPlugin {
         }
         while (!this.reverseOrphaned.isEmpty()) {
             final Location tempLoc = this.reverseOrphaned.pop();
-            fullOrphan = String.valueOf(fullOrphan) + tempLoc.getBlockX() + "," + tempLoc.getBlockZ() + ";";
+            fullOrphan = fullOrphan + tempLoc.getBlockX() + "," + tempLoc.getBlockZ() + ";";
         }
         this.getOrphans().set("orphans.list", fullOrphan);
         this.saveOrphansFile();
@@ -1069,39 +1065,18 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public LinkedHashMap<String, Double> generateTopTen() {
-        final HashMap<String, Double> tempMap = new LinkedHashMap<>();
+        final HashMap<String, Double> tempMap = new HashMap<>();
         final File folder = this.directoryIslands;
         final File[] listOfFiles = folder.listFiles();
         for (int i = 0; i < listOfFiles.length; ++i) {
-            if (this.getTempIslandConfig(listOfFiles[i].getName().replaceAll(".yml", "")) != null && this.getTempIslandConfig(listOfFiles[i].getName().replaceAll(".yml", "")).getInt("general.level") > 0) {
-                tempMap.put(this.getTempIslandConfig(listOfFiles[i].getName().replaceAll(".yml", "")).getString("party.leader"), (double) this.getTempIslandConfig(listOfFiles[i].getName().replaceAll(".yml", "")).getInt("general.level"));
+            FileConfiguration islandConfig = this.getTempIslandConfig(listOfFiles[i].getName().replaceAll(".yml", ""));
+            if (islandConfig != null && islandConfig.getInt("general.level") > 0) {
+                tempMap.put(islandConfig.getString("party.leader"), islandConfig.getDouble("general.level"));
             }
         }
-        final LinkedHashMap<String, Double> sortedMap = this.sortHashMapByValuesD(tempMap);
-        return sortedMap;
-    }
-
-    public LinkedHashMap<String, Double> sortHashMapByValuesD(final HashMap<String, Double> passedMap) {
-        final List<String> mapKeys = new ArrayList<>(passedMap.keySet());
-        final List<Double> mapValues = new ArrayList<>(passedMap.values());
-        Collections.sort(mapValues);
-        Collections.reverse(mapValues);
-        Collections.sort(mapKeys);
-        Collections.reverse(mapKeys);
-        final LinkedHashMap<String, Double> sortedMap = new LinkedHashMap<>();
-        for (final Double val : mapValues) {
-            for (final String key : mapKeys) {
-                final String comp1 = passedMap.get(key).toString();
-                final String comp2 = val.toString();
-                if (comp1.equals(comp2)) {
-                    passedMap.remove(key);
-                    mapKeys.remove(key);
-                    sortedMap.put(key, val);
-                    break;
-                }
-            }
-        }
-        return sortedMap;
+        TreeMap<String, Double> sortedMap = new TreeMap<>(new TopTenComparator(tempMap));
+        sortedMap.putAll(tempMap);
+        return new LinkedHashMap<>(sortedMap);
     }
 
     public boolean onInfoCooldown(final Player player) {
@@ -1254,12 +1229,12 @@ public class uSkyBlock extends JavaPlugin {
         for (final String tempString : this.rankDisplay) {
             if (pi.checkChallenge(tempString) > 0) {
                 if (this.getConfig().getBoolean("options.challenges.challengeList." + tempString + ".repeatable")) {
-                    fullString = String.valueOf(fullString) + Settings.challenges_repeatableColor + tempString + ChatColor.DARK_GRAY + " - ";
+                    fullString = fullString + Settings.challenges_repeatableColor + tempString + ChatColor.DARK_GRAY + " - ";
                 } else {
-                    fullString = String.valueOf(fullString) + Settings.challenges_finishedColor + tempString + ChatColor.DARK_GRAY + " - ";
+                    fullString = fullString + Settings.challenges_finishedColor + tempString + ChatColor.DARK_GRAY + " - ";
                 }
             } else {
-                fullString = String.valueOf(fullString) + Settings.challenges_challengeColor + tempString + ChatColor.DARK_GRAY + " - ";
+                fullString = fullString + Settings.challenges_challengeColor + tempString + ChatColor.DARK_GRAY + " - ";
             }
         }
         if (fullString.length() > 4) {
@@ -1686,89 +1661,80 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void clearIslandConfig(final String location, final String leader) {
-        this.getIslandConfig(location).set("general.level", 0);
-        this.getIslandConfig(location).set("general.warpLocationX", 0);
-        this.getIslandConfig(location).set("general.warpLocationY", 0);
-        this.getIslandConfig(location).set("general.warpLocationZ", 0);
-        this.getIslandConfig(location).set("general.warpActive", false);
-        this.getIslandConfig(location).set("log.logPos", 1);
-        this.getIslandConfig(location).set("log.1", "\u00a7d[skyblock] The island has been created.");
+        FileConfiguration islandConfig = this.getIslandConfig(location);
+        islandConfig.set("general.level", 0);
+        islandConfig.set("general.warpLocationX", 0);
+        islandConfig.set("general.warpLocationY", 0);
+        islandConfig.set("general.warpLocationZ", 0);
+        islandConfig.set("general.warpActive", false);
+        islandConfig.set("log.logPos", 1);
+        islandConfig.set("log.1", "\u00a7d[skyblock] The island has been created.");
         this.setupPartyLeader(location, leader);
     }
 
     public void setupPartyLeader(final String location, final String leader) {
-        this.getIslandConfig(location).createSection("party.members." + leader);
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + leader), "canChangeBiome");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + leader), "canToggleLock");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + leader), "canChangeWarp");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + leader), "canToggleWarp");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + leader), "canInviteOthers");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + leader), "canKickOthers");
-        this.getIslandConfig(location).set("party.leader", leader);
-        this.getIslandConfig(location).set("party.members." + leader + ".canChangeBiome", true);
-        this.getIslandConfig(location).set("party.members." + leader + ".canToggleLock", true);
-        this.getIslandConfig(location).set("party.members." + leader + ".canChangeWarp", true);
-        this.getIslandConfig(location).set("party.members." + leader + ".canToggleWarp", true);
-        this.getIslandConfig(location).set("party.members." + leader + ".canInviteOthers", true);
-        this.getIslandConfig(location).set("party.members." + leader + ".canKickOthers", true);
+        FileConfiguration islandConfig = this.getIslandConfig(location);
+        ConfigurationSection section = islandConfig.createSection("party.members." + leader);
+        FileConfiguration.createPath(section, "canChangeBiome");
+        FileConfiguration.createPath(section, "canToggleLock");
+        FileConfiguration.createPath(section, "canChangeWarp");
+        FileConfiguration.createPath(section, "canToggleWarp");
+        FileConfiguration.createPath(section, "canInviteOthers");
+        FileConfiguration.createPath(section, "canKickOthers");
+        islandConfig.set("party.leader", leader);
+        islandConfig.set("party.members." + leader + ".canChangeBiome", true);
+        islandConfig.set("party.members." + leader + ".canToggleLock", true);
+        islandConfig.set("party.members." + leader + ".canChangeWarp", true);
+        islandConfig.set("party.members." + leader + ".canToggleWarp", true);
+        islandConfig.set("party.members." + leader + ".canInviteOthers", true);
+        islandConfig.set("party.members." + leader + ".canKickOthers", true);
         this.saveIslandConfig(location);
     }
 
     public void setupPartyMember(final String location, final String member) {
-        this.getIslandConfig(location).createSection("party.members." + member);
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + member), "canChangeBiome");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + member), "canToggleLock");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + member), "canChangeWarp");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + member), "canToggleWarp");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + member), "canInviteOthers");
-        this.getIslandConfig(location);
-        FileConfiguration.createPath(this.getIslandConfig(location).getConfigurationSection("party.members." + member), "canKickOthers");
-        this.getIslandConfig(location).set("party.members." + member + ".canChangeBiome", false);
-        this.getIslandConfig(location).set("party.currentSize", this.getIslandConfig(location).getInt("party.currentSize") + 1);
-        this.getIslandConfig(location).set("party.members." + member + ".canToggleLock", false);
-        this.getIslandConfig(location).set("party.members." + member + ".canChangeWarp", false);
-        this.getIslandConfig(location).set("party.members." + member + ".canToggleWarp", false);
-        this.getIslandConfig(location).set("party.members." + member + ".canInviteOthers", false);
-        this.getIslandConfig(location).set("party.members." + member + ".canKickOthers", false);
-        this.getIslandConfig(location).set("party.members." + member + ".canBanOthers", false);
+        FileConfiguration islandConfig = this.getIslandConfig(location);
+        ConfigurationSection section = islandConfig.createSection("party.members." + member);
+        FileConfiguration.createPath(section, "canChangeBiome");
+        FileConfiguration.createPath(section, "canToggleLock");
+        FileConfiguration.createPath(section, "canChangeWarp");
+        FileConfiguration.createPath(section, "canToggleWarp");
+        FileConfiguration.createPath(section, "canInviteOthers");
+        FileConfiguration.createPath(section, "canKickOthers");
+        islandConfig.set("party.members." + member + ".canChangeBiome", false);
+        islandConfig.set("party.currentSize", islandConfig.getInt("party.currentSize") + 1);
+        islandConfig.set("party.members." + member + ".canToggleLock", false);
+        islandConfig.set("party.members." + member + ".canChangeWarp", false);
+        islandConfig.set("party.members." + member + ".canToggleWarp", false);
+        islandConfig.set("party.members." + member + ".canInviteOthers", false);
+        islandConfig.set("party.members." + member + ".canKickOthers", false);
+        islandConfig.set("party.members." + member + ".canBanOthers", false);
         this.saveIslandConfig(location);
     }
 
     public void reloadIslandConfig(final String location) {
-        this.islandConfigFile = new File(this.directoryIslands, String.valueOf(location) + ".yml");
-        this.islands.put(location, YamlConfiguration.loadConfiguration(this.islandConfigFile));
+        File islandConfigFile = new File(directoryIslands, location + ".yml");
+        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(islandConfigFile);
+        islands.put(location, configuration);
         final InputStream defConfigStream = this.getResource("island.yml");
         if (defConfigStream != null) {
             final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            this.islands.get(location).setDefaults(defConfig);
+            configuration.setDefaults(defConfig);
         }
-        this.saveIslandConfig(location);
+        saveIslandConfig(location);
     }
 
     public FileConfiguration getTempIslandConfig(final String location) {
-        this.tempIslandFile = new File(this.directoryIslands, String.valueOf(location) + ".yml");
-        return this.tempIsland = YamlConfiguration.loadConfiguration(this.tempIslandFile);
+        File islandFile = new File(this.directoryIslands, location + ".yml");
+        return YamlConfiguration.loadConfiguration(islandFile);
     }
 
     public FileConfiguration getCurrentPlayerConfig(final String player) {
-        File file = new File(this.directoryPlayers, String.valueOf(player) + ".yml");
+        File file = new File(this.directoryPlayers, player + ".yml");
         return YamlConfiguration.loadConfiguration(file);
     }
 
     public void createIslandConfig(final String location, final String leader) {
         this.saveDefaultIslandsConfig(location);
-        this.islandConfigFile = new File(this.directoryIslands, String.valueOf(location) + ".yml");
         final InputStream defConfigStream = this.getResource("island.yml");
         if (defConfigStream != null) {
             this.islands.put(location, YamlConfiguration.loadConfiguration(defConfigStream));
@@ -1792,26 +1758,26 @@ public class uSkyBlock extends JavaPlugin {
         if (this.islands.get(location) == null) {
             return;
         }
+        File file = new File(this.directoryIslands, location + ".yml");
         try {
-            this.islandConfigFile = new File(this.directoryIslands, String.valueOf(location) + ".yml");
-            this.getIslandConfig(location).save(this.islandConfigFile);
+            getIslandConfig(location).save(file);
         } catch (IOException ex) {
-            this.getLogger().log(Level.SEVERE, "Could not save config to " + this.islandConfigFile, ex);
+            this.getLogger().log(Level.SEVERE, "Could not save config to " + file, ex);
         }
     }
 
     public void deleteIslandConfig(final String location) {
-        (this.islandConfigFile = new File(this.directoryIslands, String.valueOf(location) + ".yml")).delete();
+        File file = new File(this.directoryIslands, location + ".yml");
+        // TODO: 06/12/2014 - rlf: This is quite error-prone in Java
+        file.delete();
     }
 
     public void saveDefaultIslandsConfig(final String location) {
+        File file = new File(this.directoryIslands, location + ".yml");
         try {
-            if (this.islandConfigFile == null) {
-                this.islandConfigFile = new File(this.directoryIslands, String.valueOf(location) + ".yml");
-                this.getIslandConfig(location).save(this.islandConfigFile);
-            }
+            getIslandConfig(location).save(file);
         } catch (IOException ex) {
-            this.getLogger().log(Level.SEVERE, "Could not save config to " + this.islandConfigFile, ex);
+            this.getLogger().log(Level.SEVERE, "Could not save config to " + file, ex);
         }
     }
 
@@ -1954,28 +1920,28 @@ public class uSkyBlock extends JavaPlugin {
             biomeList = "OCEAN, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.forest", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "FOREST, ";
+            biomeList = biomeList + "FOREST, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.jungle", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "JUNGLE, ";
+            biomeList = biomeList + "JUNGLE, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.desert", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "DESERT, ";
+            biomeList = biomeList + "DESERT, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.taiga", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "TAIGA, ";
+            biomeList = biomeList + "TAIGA, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.swampland", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "SWAMPLAND, ";
+            biomeList = biomeList + "SWAMPLAND, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.mushroom", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "MUSHROOM, ";
+            biomeList = biomeList + "MUSHROOM, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.hell", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "HELL, ";
+            biomeList = biomeList + "HELL, ";
         }
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", getSkyBlockWorld())) {
-            biomeList = String.valueOf(biomeList) + "SKY, ";
+            biomeList = biomeList + "SKY, ";
         }
         player.sendMessage(ChatColor.YELLOW + "You have access to the following Biomes:");
         player.sendMessage(ChatColor.GREEN + biomeList.substring(0, biomeList.length() - 2));

@@ -221,12 +221,12 @@ public class PlayerInfo implements Serializable {
     }
 
     public void displayData(final String player) {
-        System.out.print(String.valueOf(player) + " has an island: " + this.getHasIsland());
+        System.out.print(player + " has an island: " + this.getHasIsland());
         if (this.getIslandLocation() != null) {
-            System.out.print(String.valueOf(player) + " island location: " + this.getIslandLocation().toString());
+            System.out.print(player + " island location: " + this.getIslandLocation().toString());
         }
         if (this.getHomeLocation() != null) {
-            System.out.print(String.valueOf(player) + " home location: " + this.getHomeLocation().toString());
+            System.out.print(player + " home location: " + this.getHomeLocation().toString());
         }
     }
 
@@ -254,7 +254,7 @@ public class PlayerInfo implements Serializable {
         System.out.print("Displaying Challenge list for " + this.playerName);
         while (itr.hasNext()) {
             final String current = itr.next();
-            System.out.print(String.valueOf(current) + ": " + this.challengeListNew.get(current));
+            System.out.print(current + ": " + this.challengeListNew.get(current));
         }
     }
 
@@ -349,7 +349,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public void reloadPlayerConfig(final String player) {
-        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, String.valueOf(player) + ".yml");
+        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
         this.playerData = YamlConfiguration.loadConfiguration(this.playerConfigFile);
     }
 
@@ -399,7 +399,7 @@ public class PlayerInfo implements Serializable {
             this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompleted", this.challengeListNew.get(currentChallenge).getTimesCompleted());
             this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", this.challengeListNew.get(currentChallenge).getTimesCompletedSinceTimer());
         }
-        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, String.valueOf(player) + ".yml");
+        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
         try {
             this.getPlayerConfig(player).save(this.playerConfigFile);
             System.out.println("Player data saved!");
@@ -409,6 +409,6 @@ public class PlayerInfo implements Serializable {
     }
 
     public void deleteIslandConfig(final String player) {
-        (this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, String.valueOf(player) + ".yml")).delete();
+        (this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml")).delete();
     }
 }

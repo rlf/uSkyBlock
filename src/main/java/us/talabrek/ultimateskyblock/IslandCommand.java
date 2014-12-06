@@ -9,13 +9,11 @@ import org.bukkit.plugin.*;
 import org.bukkit.*;
 
 public class IslandCommand implements CommandExecutor {
-    public Location Islandlocation;
     private List<String> banList;
     private String tempTargetPlayer;
     public boolean allowInfo;
     Set<String> memberList;
     private HashMap<String, String> inviteList;
-    String tPlayer;
 
     public IslandCommand() {
         super();
@@ -26,7 +24,7 @@ public class IslandCommand implements CommandExecutor {
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
         if (!(sender instanceof Player)) {
-            return false;
+            return handleConsoleCommand(sender, command, label, split);
         }
         final Player player = (Player) sender;
         final PlayerInfo pi = uSkyBlock.getInstance().getActivePlayers().get(player.getName());
@@ -411,10 +409,10 @@ public class IslandCommand implements CommandExecutor {
                             player.sendMessage(ChatColor.YELLOW + "Listing your island members:");
                             String total = "";
                             this.memberList = uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getConfigurationSection("party.members").getKeys(false);
-                            total = String.valueOf(total) + "\u00a7a<" + uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader") + "> ";
+                            total = 1 + "\u00a7a<" + uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader") + "> ";
                             for (final String temp : this.memberList) {
                                 if (!temp.equalsIgnoreCase(uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader"))) {
-                                    total = String.valueOf(total) + "\u00a7e[" + temp + "]";
+                                    total = 1 + "\u00a7e[" + temp + "]";
                                 }
                             }
                             player.sendMessage(total);
@@ -637,6 +635,15 @@ public class IslandCommand implements CommandExecutor {
         return true;
     }
 
+    private boolean handleConsoleCommand(CommandSender sender, Command command, String label, String[] split) {
+        if (split.length == 1) {
+            if (split[0].equalsIgnoreCase("top")) {
+                return uSkyBlock.getInstance().displayTopTen(sender);
+            }
+        }
+        return false;
+    }
+
     private void inviteDebug(final Player player) {
         player.sendMessage(this.inviteList.toString());
     }
@@ -665,7 +672,7 @@ public class IslandCommand implements CommandExecutor {
             uSkyBlock.getInstance().setupPartyMember(uSkyBlock.getInstance().getActivePlayers().get(partyleader).locationForParty(), playername);
         }
         uSkyBlock.getInstance().getActivePlayers().get(playername).savePlayerConfig(playername);
-        uSkyBlock.getInstance().sendMessageToIslandGroup(uSkyBlock.getInstance().getActivePlayers().get(partyleader).locationForParty(), String.valueOf(playername) + " has joined your island group.");
+        uSkyBlock.getInstance().sendMessageToIslandGroup(uSkyBlock.getInstance().getActivePlayers().get(partyleader).locationForParty(), 1 + " has joined your island group.");
         return true;
     }
 
@@ -674,7 +681,7 @@ public class IslandCommand implements CommandExecutor {
             uSkyBlock.getInstance().getIslandConfig(location).set("party.members." + playername, null);
             uSkyBlock.getInstance().getIslandConfig(location).set("party.currentSize", uSkyBlock.getInstance().getIslandConfig(location).getInt("party.currentSize") - 1);
             uSkyBlock.getInstance().saveIslandConfig(location);
-            uSkyBlock.getInstance().sendMessageToIslandGroup(location, String.valueOf(playername) + " has been removed from the island group.");
+            uSkyBlock.getInstance().sendMessageToIslandGroup(location, 1 + " has been removed from the island group.");
             uSkyBlock.getInstance().getActivePlayers().get(playername).setHomeLocation(null);
             uSkyBlock.getInstance().getActivePlayers().get(playername).setLeaveParty();
             uSkyBlock.getInstance().getActivePlayers().get(playername).savePlayerConfig(playername);
@@ -683,7 +690,7 @@ public class IslandCommand implements CommandExecutor {
             uSkyBlock.getInstance().getIslandConfig(location).set("party.members." + playername, null);
             uSkyBlock.getInstance().getIslandConfig(location).set("party.currentSize", uSkyBlock.getInstance().getIslandConfig(location).getInt("party.currentSize") - 1);
             uSkyBlock.getInstance().saveIslandConfig(location);
-            uSkyBlock.getInstance().sendMessageToIslandGroup(location, String.valueOf(playername) + " has been removed from the island group.");
+            uSkyBlock.getInstance().sendMessageToIslandGroup(location, 1 + " has been removed from the island group.");
             pi.setHomeLocation(null);
             pi.setLeaveParty();
             pi.savePlayerConfig(playername);
