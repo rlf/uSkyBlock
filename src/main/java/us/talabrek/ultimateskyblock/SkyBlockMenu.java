@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -22,14 +21,7 @@ import java.util.logging.Level;
  * The UI menu of uSkyBlock (using the inventory UI).
  */
 public class SkyBlockMenu {
-    List<String> lores;
     private uSkyBlock skyBlock;
-    public Inventory GUIparty;
-    public Inventory GUIpartyPlayer;
-    public Inventory GUIisland;
-    public Inventory GUIchallenge;
-    public Inventory GUIbiome;
-    public Inventory GUIlog;
     ItemStack pHead;
     ItemStack sign;
     ItemStack biome;
@@ -38,19 +30,9 @@ public class SkyBlockMenu {
     ItemStack warptoggle;
     ItemStack invite;
     ItemStack kick;
-    ItemStack currentBiomeItem;
-    ItemStack currentIslandItem;
-    ItemStack currentLogItem;
-    Iterator<String> tempIt;
 
     public SkyBlockMenu(uSkyBlock skyBlock) {
-        skyBlock = skyBlock;
-        GUIparty = null;
-        GUIpartyPlayer = null;
-        GUIisland = null;
-        GUIchallenge = null;
-        GUIbiome = null;
-        GUIlog = null;
+        this.skyBlock = skyBlock;
         pHead = new ItemStack(397, 1, (short) 3);
         sign = new ItemStack(323, 1);
         biome = new ItemStack(6, 1, (short) 3);
@@ -59,31 +41,28 @@ public class SkyBlockMenu {
         warptoggle = new ItemStack(69, 1);
         invite = new ItemStack(398, 1);
         kick = new ItemStack(301, 1);
-        currentBiomeItem = null;
-        currentIslandItem = null;
-        currentLogItem = null;
-        lores = new ArrayList<>();
     }
 
     public Inventory displayPartyPlayerGUI(final Player player, final String pname) {
-        GUIpartyPlayer = Bukkit.createInventory(null, 9, pname + " <Permissions>");
+        List<String> lores = new ArrayList<>();
+        Inventory menu = Bukkit.createInventory(null, 9, pname + " <Permissions>");
         final ItemStack pHead = new ItemStack(397, 1, (short) 3);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = sign.getItemMeta();
         meta2.setDisplayName("\u00a7hPlayer Permissions");
         lores.add("\u00a7eClick here to return to");
         lores.add("\u00a7eyour island group's info.");
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         sign.setItemMeta(meta2);
-        GUIpartyPlayer.addItem(new ItemStack[]{sign});
+        menu.addItem(new ItemStack[]{sign});
         lores.clear();
         meta3.setDisplayName(pname + "'s Permissions");
         lores.add("\u00a7eHover over an icon to view");
         lores.add("\u00a7ea permission. Change the");
         lores.add("\u00a7epermission by clicking it.");
-        meta3.setLore((List) lores);
+        meta3.setLore(lores);
         pHead.setItemMeta(meta3);
-        GUIpartyPlayer.addItem(new ItemStack[]{pHead});
+        menu.addItem(new ItemStack[]{pHead});
         lores.clear();
         meta2 = biome.getItemMeta();
         if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canChangeBiome")) {
@@ -97,9 +76,9 @@ public class SkyBlockMenu {
             lores.add("\u00a7fisland's biome. Click here");
             lores.add("\u00a7fto grant this permission.");
         }
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         biome.setItemMeta(meta2);
-        GUIpartyPlayer.addItem(new ItemStack[]{biome});
+        menu.addItem(new ItemStack[]{biome});
         lores.clear();
         meta2 = lock.getItemMeta();
         if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canToggleLock")) {
@@ -115,9 +94,9 @@ public class SkyBlockMenu {
             lores.add("\u00a7fnon-group members from entering.");
             lores.add("\u00a7fClick here to add this permission");
         }
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         lock.setItemMeta(meta2);
-        GUIpartyPlayer.addItem(new ItemStack[]{lock});
+        menu.addItem(new ItemStack[]{lock});
         lores.clear();
         meta2 = warpset.getItemMeta();
         if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canChangeWarp")) {
@@ -135,9 +114,9 @@ public class SkyBlockMenu {
             lores.add("\u00a7fto the island. Click here to");
             lores.add("\u00a7fadd this permission.");
         }
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         warpset.setItemMeta(meta2);
-        GUIpartyPlayer.addItem(new ItemStack[]{warpset});
+        menu.addItem(new ItemStack[]{warpset});
         lores.clear();
         meta2 = warptoggle.getItemMeta();
         if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canToggleWarp")) {
@@ -155,9 +134,9 @@ public class SkyBlockMenu {
             lores.add("\u00a7fbut not set the location. Click");
             lores.add("\u00a7fhere to add this permission.");
         }
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         warptoggle.setItemMeta(meta2);
-        GUIpartyPlayer.addItem(new ItemStack[]{warptoggle});
+        menu.addItem(new ItemStack[]{warptoggle});
         lores.clear();
         meta2 = invite.getItemMeta();
         if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canInviteOthers")) {
@@ -173,9 +152,9 @@ public class SkyBlockMenu {
             lores.add("\u00a7fother players to the island.");
             lores.add("\u00a7fClick here to add this permission.");
         }
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         invite.setItemMeta(meta2);
-        GUIpartyPlayer.addItem(new ItemStack[]{invite});
+        menu.addItem(new ItemStack[]{invite});
         lores.clear();
         meta2 = kick.getItemMeta();
         if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canKickOthers")) {
@@ -191,17 +170,17 @@ public class SkyBlockMenu {
             lores.add("\u00a7fother players from the island.");
             lores.add("\u00a7fClick here to add this permission.");
         }
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         kick.setItemMeta(meta2);
-        GUIpartyPlayer.addItem(new ItemStack[]{kick});
+        menu.addItem(new ItemStack[]{kick});
         lores.clear();
-        return GUIpartyPlayer;
+        return menu;
     }
 
     public Inventory displayPartyGUI(final Player player) {
-        GUIparty = Bukkit.createInventory(null, 18, "\u00a79Island Group Members");
+        List<String> lores = new ArrayList<>();
+        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Group Members");
         final Set<String> memberList = skyBlock.getIslandConfig(player).getConfigurationSection("party.members").getKeys(false);
-        tempIt = memberList.iterator();
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         final ItemMeta meta2 = sign.getItemMeta();
         meta2.setDisplayName("\u00a7aGroup Info");
@@ -215,12 +194,11 @@ public class SkyBlockMenu {
         lores.add("\u00a7eview their permissions. The");
         lores.add("\u00a7eleader can change permissions");
         lores.add("\u00a7eby clicking a player's icon.");
-        meta2.setLore((List) lores);
+        meta2.setLore(lores);
         sign.setItemMeta(meta2);
-        GUIparty.addItem(new ItemStack[]{sign});
+        menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        while (tempIt.hasNext()) {
-            final String temp = tempIt.next();
+        for (String temp : memberList) {
             if (temp.equalsIgnoreCase(skyBlock.getIslandConfig(player).getString("party.leader"))) {
                 meta3.setDisplayName("\u00a7f" + temp);
                 lores.add("\u00a7a\u00a7lLeader");
@@ -230,7 +208,7 @@ public class SkyBlockMenu {
                 lores.add("\u00a7aCan \u00a7ftoggle the island's warp.");
                 lores.add("\u00a7aCan \u00a7finvite others to the island.");
                 lores.add("\u00a7aCan \u00a7fkick others from the island.");
-                meta3.setLore((List) lores);
+                meta3.setLore(lores);
                 lores.clear();
             } else {
                 meta3.setDisplayName("\u00a7f" + temp);
@@ -268,28 +246,29 @@ public class SkyBlockMenu {
                 if (player.getName().equalsIgnoreCase(skyBlock.getIslandConfig(player).getString("party.leader"))) {
                     lores.add("\u00a7e<Click to change this player's permissions>");
                 }
-                meta3.setLore((List) lores);
+                meta3.setLore(lores);
                 lores.clear();
             }
             meta3.setOwner(temp);
             pHead.setItemMeta(meta3);
-            GUIparty.addItem(new ItemStack[]{pHead});
+            menu.addItem(new ItemStack[]{pHead});
         }
-        return GUIparty;
+        return menu;
     }
 
     public Inventory displayLogGUI(final Player player) {
-        GUIlog = Bukkit.createInventory(null, 9, "\u00a79Island Log");
+        List<String> lores = new ArrayList<>();
+        Inventory menu = Bukkit.createInventory(null, 9, "\u00a79Island Log");
         ItemMeta meta4 = sign.getItemMeta();
         meta4.setDisplayName("\u00a7lIsland Log");
         lores.add("\u00a7eClick here to return to");
         lores.add("\u00a7ethe main island screen.");
-        meta4.setLore((List) lores);
+        meta4.setLore(lores);
         sign.setItemMeta(meta4);
-        GUIlog.addItem(new ItemStack[]{sign});
+        menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        currentLogItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
-        meta4 = currentLogItem.getItemMeta();
+        ItemStack menuItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7e\u00a7lIsland Log");
         FileConfiguration islandConfig = skyBlock.getIslandConfig(player);
         for (int i = 1; i <= 10; ++i) {
@@ -299,25 +278,26 @@ public class SkyBlockMenu {
                 break;
             }
         }
-        meta4.setLore((List) lores);
-        currentLogItem.setItemMeta(meta4);
-        GUIlog.setItem(8, currentLogItem);
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.setItem(8, menuItem);
         lores.clear();
-        return GUIlog;
+        return menu;
     }
 
     public Inventory displayBiomeGUI(final Player player) {
-        GUIbiome = Bukkit.createInventory(null, 18, "\u00a79Island Biome");
+        List<String> lores = new ArrayList<>();
+        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Biome");
         ItemMeta meta4 = sign.getItemMeta();
         meta4.setDisplayName("\u00a7hIsland Biome");
         lores.add("\u00a7eClick here to return to");
         lores.add("\u00a7ethe main island screen.");
-        meta4.setLore((List) lores);
+        meta4.setLore(lores);
         sign.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{sign});
+        menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.WATER, 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        ItemStack menuItem = new ItemStack(Material.WATER, 1);
+        meta4 = menuItem.getItemMeta();
         String currentBiome = skyBlock.getCurrentBiome(player);
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.ocean", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Ocean");
@@ -340,12 +320,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77not spawn. Hostile mobs will");
             lores.add("\u00a77spawn normally.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.SAPLING, 1, (short) 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.SAPLING, 1, (short) 1);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.forst", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Forest");
             lores.add("\u00a7fThe forest biome will allow");
@@ -367,12 +347,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77wolves). Hostile mobs will");
             lores.add("\u00a77spawn normally.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.SAND, 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.SAND, 1);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.desert", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Desert");
             lores.add("\u00a7fThe desert biome makes it so");
@@ -394,12 +374,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77won't spawn. Hostile mobs will");
             lores.add("\u00a77spawn normally.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.SAPLING, 1, (short) 3);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.SAPLING, 1, (short) 3);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.jungle", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Jungle");
             lores.add("\u00a7fThe jungle biome is bright");
@@ -421,12 +401,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77spawn. Hostile mobs will");
             lores.add("\u00a77spawn normally.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.WATER_LILY, 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.WATER_LILY, 1);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.swampland", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Swampland");
             lores.add("\u00a7fThe swamp biome is dark");
@@ -450,12 +430,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77to spawn at night depending");
             lores.add("\u00a77on the moon phase.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.SNOW, 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.SNOW, 1);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.taiga", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Taiga");
             lores.add("\u00a7fThe taiga biome has snow");
@@ -477,12 +457,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77(including wolves) and");
             lores.add("\u00a77hostile mobs will spawn.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.RED_MUSHROOM, 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.RED_MUSHROOM, 1);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.mushroom", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Mushroom");
             lores.add("\u00a7fThe mushroom biome is");
@@ -506,12 +486,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77No other passive or");
             lores.add("\u00a77hostile mobs will spawn.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.FIRE, 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.FIRE, 1);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.hell", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Hell(Nether)");
             lores.add("\u00a7fThe hell biome looks");
@@ -535,12 +515,12 @@ public class SkyBlockMenu {
             lores.add("\u00a77(excluding ghasts and");
             lores.add("\u00a77blazes).");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentBiomeItem = new ItemStack(Material.EYE_OF_ENDER, 1);
-        meta4 = currentBiomeItem.getItemMeta();
+        menuItem = new ItemStack(Material.EYE_OF_ENDER, 1);
+        meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Sky(End)");
             lores.add("\u00a7fThe sky biome gives your");
@@ -560,53 +540,56 @@ public class SkyBlockMenu {
             lores.add("\u00a77Only endermen will spawn");
             lores.add("\u00a77in this biome.");
         }
-        meta4.setLore((List) lores);
-        currentBiomeItem.setItemMeta(meta4);
-        GUIbiome.addItem(new ItemStack[]{currentBiomeItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        return GUIbiome;
+        return menu;
     }
 
     public Inventory displayChallengeGUI(final Player player) {
-        GUIchallenge = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu");
+        Inventory menu = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu");
         final PlayerInfo pi = skyBlock.getActivePlayers().get(player.getName());
-        populateChallengeRank(player, 0, Material.DIRT, 0, pi);
-        populateChallengeRank(player, 1, Material.IRON_BLOCK, 9, pi);
-        populateChallengeRank(player, 2, Material.GOLD_BLOCK, 18, pi);
-        populateChallengeRank(player, 3, Material.DIAMOND_BLOCK, 27, pi);
-        return GUIchallenge;
+        // TODO: 06/12/2014 - R4zorax: Support more challenge-ranks (i.e. pagination on "header item".
+        populateChallengeRank(menu, player, 0, Material.DIRT, 0, pi);
+        populateChallengeRank(menu, player, 1, Material.IRON_BLOCK, 9, pi);
+        populateChallengeRank(menu, player, 2, Material.GOLD_BLOCK, 18, pi);
+        populateChallengeRank(menu, player, 3, Material.DIAMOND_BLOCK, 27, pi);
+        return menu;
     }
 
     public Inventory displayIslandGUI(final Player player) {
-        GUIisland = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
+        List<String> lores = new ArrayList<>();
+        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
         if (skyBlock.hasIsland(player.getName())) {
-            showMainMenu(player);
+            addMainMenu(menu, player);
         } else if (hasAccess(player)) {
-            showInitMenu();
+            addInitMenu(menu);
         } else {
             // TODO: 06/12/2014 - R4zorax: Make this actually work
-            currentIslandItem = new ItemStack(Material.BOOK, 1);
-            final ItemMeta meta4 = currentIslandItem.getItemMeta();
+            ItemStack menuItem = new ItemStack(Material.BOOK, 1);
+            final ItemMeta meta4 = menuItem.getItemMeta();
             meta4.setDisplayName("\u00a7a\u00a7lWelcome to the Server!");
             lores.add("\u00a7fPlease read and accept the");
             lores.add("\u00a7fserver rules to become a");
             lores.add("\u00a7fmember and start your skyblock.");
             lores.add("\u00a7e\u00a7lClick here to read!");
-            meta4.setLore((List) lores);
-            currentIslandItem.setItemMeta(meta4);
-            GUIisland.addItem(new ItemStack[]{currentIslandItem});
+            meta4.setLore(lores);
+            menuItem.setItemMeta(meta4);
+            menu.addItem(menuItem);
             lores.clear();
         }
-        return GUIisland;
+        return menu;
     }
 
     private boolean hasAccess(Player player) {
         return VaultHandler.checkPerm(player, skyBlock.getConfig().getString("options.general.permission"), skyBlock.getSkyBlockWorld());
     }
 
-    private void showInitMenu() {
-        currentIslandItem = new ItemStack(Material.GRASS, 1);
-        ItemMeta meta4 = currentIslandItem.getItemMeta();
+    private void addInitMenu(Inventory menu) {
+        List<String> lores = new ArrayList<>();
+        ItemStack menuItem = new ItemStack(Material.GRASS, 1);
+        ItemMeta meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lStart an Island");
         lores.add("\u00a7fStart your skyblock journey");
         lores.add("\u00a7fby starting your own island.");
@@ -616,12 +599,12 @@ public class SkyBlockMenu {
         lores.add("\u00a7finvite others to join in");
         lores.add("\u00a7fbuilding your island empire!");
         lores.add("\u00a7e\u00a7lClick here to start!");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentIslandItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-        final SkullMeta meta2 = (SkullMeta) currentIslandItem.getItemMeta();
+        menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
         meta2.setDisplayName("\u00a7a\u00a7lJoin an Island");
         lores.add("\u00a7fWant to join another player's");
         lores.add("\u00a7fisland instead of starting");
@@ -631,50 +614,53 @@ public class SkyBlockMenu {
         lores.add("\u00a7e/island accept \u00a7fto join them.");
         lores.add("\u00a7e\u00a7lClick here to accept an invite!");
         lores.add("\u00a7e\u00a7l(You must be invited first)");
-        meta2.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta2);
-        GUIisland.setItem(4, currentIslandItem);
+        meta2.setLore(lores);
+        menuItem.setItemMeta(meta2);
+        menu.setItem(4, menuItem);
         lores.clear();
-        currentIslandItem = new ItemStack(Material.SIGN, 1);
-        meta4 = currentIslandItem.getItemMeta();
+        menuItem = new ItemStack(Material.SIGN, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lIsland Help");
         lores.add("\u00a7fNeed help with skyblock");
         lores.add("\u00a7fconcepts or commands? View");
         lores.add("\u00a7fdetails about them here.");
         lores.add("\u00a7e\u00a7lClick here for help!");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.setItem(8, currentIslandItem);
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.setItem(8, menuItem);
         lores.clear();
     }
 
-    private void showMainMenu(Player player) {
-        currentIslandItem = new ItemStack(Material.ENDER_PORTAL, 1);
-        ItemMeta meta4 = currentIslandItem.getItemMeta();
+    private void addMainMenu(Inventory menu, Player player) {
+        List<String> lores = new ArrayList<>();
+        ItemStack menuItem = new ItemStack(Material.DARK_OAK_DOOR_ITEM, 1);
+        ItemMeta meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lReturn Home");
         lores.add("\u00a7fReturn to your island's home");
         lores.add("\u00a7fpoint. You can change your home");
         lores.add("\u00a7fpoint to any location on your");
         lores.add("\u00a7fisland using \u00a7b/island sethome");
         lores.add("\u00a7e\u00a7lClick here to return home.");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentIslandItem = new ItemStack(Material.DIAMOND_ORE, 1);
-        meta4 = currentIslandItem.getItemMeta();
+
+        menuItem = new ItemStack(Material.DIAMOND_ORE, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lChallenges");
-        lores.add("\u00a7fView a list of challenges that");
+        lores.add("\u00a7fView a list of \u00a79challenges\u00a7f that");
         lores.add("\u00a7fyou can complete on your island");
         lores.add("\u00a7fto earn skybucks, items, perks,");
         lores.add("\u00a7fand titles.");
         lores.add("\u00a7e\u00a7lClick here to view challenges.");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
+
         lores.clear();
-        currentIslandItem = new ItemStack(Material.EXP_BOTTLE, 1);
-        meta4 = currentIslandItem.getItemMeta();
+        menuItem = new ItemStack(Material.EXP_BOTTLE, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lIsland Level");
         lores.add("\u00a7eCurrent Level: \u00a7a" + showIslandLevel(player));
         lores.add("\u00a7fGain island levels by expanding");
@@ -683,12 +669,13 @@ public class SkyBlockMenu {
         lores.add("\u00a7fwill add more to your level.");
         lores.add("\u00a7e\u00a7lClick here to refresh.");
         lores.add("\u00a7e\u00a7l(must be on island)");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentIslandItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-        final SkullMeta meta2 = (SkullMeta) currentIslandItem.getItemMeta();
+
+        menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
         meta2.setDisplayName("\u00a7a\u00a7lIsland Group");
         lores.add("\u00a7eMembers: \u00a72" + showCurrentMembers(player) + "/" + showMaxMembers(player));
         lores.add("\u00a7fView the members of your island");
@@ -696,12 +683,13 @@ public class SkyBlockMenu {
         lores.add("\u00a7fyou are the island leader, you");
         lores.add("\u00a7fcan change the member permissions.");
         lores.add("\u00a7e\u00a7lClick here to view or change.");
-        meta2.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta2);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta2.setLore(lores);
+        menuItem.setItemMeta(meta2);
+        menu.addItem(menuItem);
         lores.clear();
-        currentIslandItem = new ItemStack(Material.SAPLING, 1, (short) 3);
-        meta4 = currentIslandItem.getItemMeta();
+
+        menuItem = new ItemStack(Material.SAPLING, 1, (short) 3);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lChange Island Biome");
         lores.add("\u00a7eCurrent Biome: \u00a7b" + getCurrentBiome(player).toUpperCase());
         lores.add("\u00a7fThe island biome affects things");
@@ -712,12 +700,13 @@ public class SkyBlockMenu {
         } else {
             lores.add("\u00a7c\u00a7lYou can't change the biome.");
         }
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentIslandItem = new ItemStack(Material.IRON_FENCE, 1);
-        meta4 = currentIslandItem.getItemMeta();
+
+        menuItem = new ItemStack(Material.IRON_FENCE, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lIsland Lock");
         if (skyBlock.getIslandConfig(player).getBoolean("general.locked")) {
             lores.add("\u00a7eLock Status: \u00a7aActive");
@@ -741,13 +730,14 @@ public class SkyBlockMenu {
                 lores.add("\u00a7c\u00a7lYou can't change the lock.");
             }
         }
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
+
         if (skyBlock.getIslandConfig(player).getBoolean("general.warpActive")) {
-            currentIslandItem = new ItemStack(Material.PORTAL, 1);
-            meta4 = currentIslandItem.getItemMeta();
+            menuItem = new ItemStack(Material.ENDER_PORTAL_FRAME, 1);
+            meta4 = menuItem.getItemMeta();
             meta4.setDisplayName("\u00a7a\u00a7lIsland Warp");
             lores.add("\u00a7eWarp Status: \u00a7aActive");
             lores.add("\u00a7fOther players may warp to your");
@@ -759,8 +749,8 @@ public class SkyBlockMenu {
                 lores.add("\u00a7c\u00a7lYou can't change the warp.");
             }
         } else {
-            currentIslandItem = new ItemStack(Material.ENDER_STONE, 1);
-            meta4 = currentIslandItem.getItemMeta();
+            menuItem = new ItemStack(Material.ENDER_STONE, 1);
+            meta4 = menuItem.getItemMeta();
             meta4.setDisplayName("\u00a7a\u00a7lIsland Warp");
             lores.add("\u00a7eWarp Status: \u00a78Inactive");
             lores.add("\u00a7fOther players can't warp to your");
@@ -772,69 +762,46 @@ public class SkyBlockMenu {
                 lores.add("\u00a7c\u00a7lYou can't change the warp.");
             }
         }
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
         lores.clear();
-        currentIslandItem = new ItemStack(Material.CHEST, 1);
-        meta4 = currentIslandItem.getItemMeta();
-        meta4.setDisplayName("\u00a7a\u00a7lBuy Perks");
-        lores.add("\u00a7fVisit the perk shop to buy");
-        lores.add("\u00a7fspecial abilities for your");
-        lores.add("\u00a7fisland and character, as well");
-        lores.add("\u00a7fas titles and more.");
-        lores.add("\u00a7e\u00a7lClick here to open the shop!");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
-        lores.clear();
-        currentIslandItem = new ItemStack(Material.ENDER_CHEST, 1);
-        meta4 = currentIslandItem.getItemMeta();
-        meta4.setDisplayName("\u00a7a\u00a7lBuy Donor Perks");
-        lores.add("\u00a7fThis special perk shop is");
-        lores.add("\u00a7fonly available to donors!");
-        if (VaultHandler.checkPerk(player.getName(), "group.donor", player.getWorld())) {
-            lores.add("\u00a7e\u00a7lClick here to open the shop!");
-        } else {
-            lores.add("\u00a7a\u00a7lClick here to become a donor!");
-        }
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.setItem(16, currentIslandItem);
-        lores.clear();
-        currentIslandItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
-        meta4 = currentIslandItem.getItemMeta();
+
+        menuItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lIsland Log");
         lores.add("\u00a7fView a log of events from");
         lores.add("\u00a7fyour island such as member,");
         lores.add("\u00a7fbiome, and warp changes.");
         lores.add("\u00a7e\u00a7lClick to view the log.");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.setItem(8, menuItem); // Last item, first line
         lores.clear();
-        currentIslandItem = new ItemStack(Material.BED, 1);
-        meta4 = currentIslandItem.getItemMeta();
+
+        menuItem = new ItemStack(Material.BED, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lChange Home Location");
         lores.add("\u00a7fWhen you teleport to your");
         lores.add("\u00a7fisland you will be taken to");
         lores.add("\u00a7fthis location.");
         lores.add("\u00a7e\u00a7lClick here to change.");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.addItem(new ItemStack[]{currentIslandItem});
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.setItem(9, menuItem); // First item, 2nd line
         lores.clear();
-        currentIslandItem = new ItemStack(Material.HOPPER, 1);
-        meta4 = currentIslandItem.getItemMeta();
+
+        menuItem = new ItemStack(Material.HOPPER, 1);
+        meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lChange Warp Location");
         lores.add("\u00a7fWhen your warp is activated,");
         lores.add("\u00a7fother players will be taken to");
         lores.add("\u00a7fthis point when they teleport");
         lores.add("\u00a7fto your island.");
         lores.add("\u00a7e\u00a7lClick here to change.");
-        meta4.setLore((List) lores);
-        currentIslandItem.setItemMeta(meta4);
-        GUIisland.setItem(15, currentIslandItem);
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.setItem(15, menuItem);
         lores.clear();
     }
 
@@ -858,7 +825,8 @@ public class SkyBlockMenu {
         return skyBlock.getIslandConfig(player).getInt("party.maxSize");
     }
 
-    public void populateChallengeRank(final Player player, final int rankIndex, final Material mat, int location, final PlayerInfo pi) {
+    public void populateChallengeRank(Inventory menu, final Player player, final int rankIndex, final Material mat, int location, final PlayerInfo pi) {
+        List<String> lores = new ArrayList<>();
         int rankComplete = 0;
         ItemStack currentChallengeItem = new ItemStack(mat, 1);
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
@@ -866,9 +834,9 @@ public class SkyBlockMenu {
         meta4.setDisplayName("\u00a7e\u00a7lRank: " + currentRank);
         lores.add("\u00a7fComplete most challenges in");
         lores.add("\u00a7fthis rank to unlock the next rank.");
-        meta4.setLore((List) lores);
+        meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
-        GUIchallenge.setItem(location, currentChallengeItem);
+        menu.setItem(location, currentChallengeItem);
         lores.clear();
         final String[] challengeList = skyBlock.getChallengesFromRank(player, currentRank).split(" - ");
         for (int i = 0; i < challengeList.length; ++i) {
@@ -883,9 +851,9 @@ public class SkyBlockMenu {
                         meta4.setDisplayName("\u00a74\u00a7lLocked Challenge");
                         lores.add("\u00a77Complete " + rankComplete + " more " + Settings.challenges_ranks[rankIndex - 1] + " challenges");
                         lores.add("\u00a77to unlock this rank.");
-                        meta4.setLore((List) lores);
+                        meta4.setLore(lores);
                         currentChallengeItem.setItemMeta(meta4);
-                        GUIchallenge.setItem(++location, currentChallengeItem);
+                        menu.setItem(++location, currentChallengeItem);
                         lores.clear();
                         continue;
                     }
@@ -984,9 +952,9 @@ public class SkyBlockMenu {
                         lores.add("\u00a74\u00a7lYou can't repeat this challenge.");
                     }
                 }
-                meta4.setLore((List) lores);
+                meta4.setLore(lores);
                 currentChallengeItem.setItemMeta(meta4);
-                GUIchallenge.setItem(++location, currentChallengeItem);
+                menu.setItem(++location, currentChallengeItem);
                 lores.clear();
             } catch (NullPointerException e) {
                 skyBlock.getLogger().log(Level.SEVERE, "Mis-configured challenge " + challenge, e);
@@ -1008,14 +976,12 @@ public class SkyBlockMenu {
 
     public void onClick(InventoryClickEvent event) {
         Player p = (Player) event.getWhoClicked();
-        SkullMeta meta = (SkullMeta) event.getCurrentItem().getItemMeta();
+        ItemMeta meta = event.getCurrentItem().getItemMeta();
+        SkullMeta skull = meta instanceof SkullMeta ? (SkullMeta) meta : null;
         if (event.getInventory().getName().equalsIgnoreCase("\u00a79Island Group Members")) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
-            }
-            if (event.getCurrentItem().getTypeId() == 397) {
-                meta = (SkullMeta) event.getCurrentItem().getItemMeta();
             }
             p = (Player) event.getWhoClicked();
             if (meta == null || event.getCurrentItem().getType() == Material.SIGN) {
@@ -1027,10 +993,9 @@ public class SkyBlockMenu {
             } else if (!uSkyBlock.getInstance().isPartyLeader(p)) {
                 p.closeInventory();
                 p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyGUI(p));
-            } else {
+            } else if (skull != null) {
                 p.closeInventory();
-                p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(p, meta.getOwner()));
-                meta = null;
+                p.openInventory(uSkyBlock.getInstance().getMenu().displayPartyPlayerGUI(p, skull.getOwner()));
             }
         } else if (event.getInventory().getName().contains("Permissions")) {
             event.setCancelled(true);
@@ -1163,29 +1128,19 @@ public class SkyBlockMenu {
             } else if (event.getCurrentItem().getType() == Material.BOOK_AND_QUILL) {
                 p.closeInventory();
                 p.performCommand("island log");
-            } else if (event.getCurrentItem().getType() == Material.ENDER_PORTAL) {
+            } else if (event.getCurrentItem().getType() == Material.DARK_OAK_DOOR_ITEM) {
                 p.closeInventory();
                 p.performCommand("island home");
             } else if (event.getCurrentItem().getType() == Material.GRASS) {
                 p.closeInventory();
                 p.performCommand("island create");
-            } else if (event.getCurrentItem().getType() == Material.CHEST) {
-                p.closeInventory();
-                p.performCommand("chc open perks");
-            } else if (event.getCurrentItem().getType() == Material.ENDER_CHEST) {
-                p.closeInventory();
-                if (VaultHandler.checkPerk(p.getName(), "group.donor", p.getWorld())) {
-                    p.performCommand("chc open donor");
-                } else {
-                    p.performCommand("donate");
-                }
             } else if (event.getCurrentItem().getType() == Material.EXP_BOTTLE) {
                 p.closeInventory();
                 p.performCommand("island level");
             } else if (event.getCurrentItem().getType() == Material.DIAMOND_ORE) {
                 p.closeInventory();
                 p.performCommand("c");
-            } else if (event.getCurrentItem().getType() == Material.ENDER_STONE || event.getCurrentItem().getType() == Material.PORTAL) {
+            } else if (event.getCurrentItem().getType() == Material.ENDER_STONE || event.getCurrentItem().getType() == Material.ENDER_PORTAL_FRAME) {
                 p.closeInventory();
                 p.performCommand("island togglewarp");
                 p.openInventory(uSkyBlock.getInstance().getMenu().displayIslandGUI(p));
