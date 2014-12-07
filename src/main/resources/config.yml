@@ -45,28 +45,28 @@ options:
     enableEconomyPlugin: true
     challengeList:
       cobblestonegenerator:
-        description: Mine from a cobblestone generator.
+        description: 'Mine from a cobblestone generator.'
         rankLevel: Easy
         type: onPlayer
         requiredItems: 4:64;+2
         resetInHours: 20
         displayItem: 4
         takeItems: true
-        itemReward: '334:3'
+        itemReward: 334:3
         permissionReward: none
         rewardText: 3 leather
         currencyReward: 10
         xpReward: 30
         repeatable: true
-        repeatItemReward: '334:1'
+        repeatItemReward: 334:1
         repeatRewardText: 1 leather
         repeatCurrencyReward: 2
         repeatXpReward: 5
       applecollector:
-        description: Collect apples from trees.
+        description: 'Collect apples from trees.'
         rankLevel: Easy
         type: onPlayer
-        requiredItems: '260:2;+1'
+        requiredItems: 260:2;+1
         resetInHours: 20
         displayItem: 260
         takeItems: true
@@ -77,47 +77,47 @@ options:
         permissionReward: none
         repeatable: true
         repeatItemReward: 6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:1
-        repeatRewardText: 1 of all saplings
+        repeatRewardText: 1 of each sapling
         repeatCurrencyReward: 2
         repeatXpReward: 5
       wheatfarmer:
-        description: Harvest wheat from a farm.
+        description: 'Harvest wheat from a farm.'
         rankLevel: Easy
         type: onPlayer
         requiredItems: 296:64;+4
         resetInHours: 20
         displayItem: 296
         takeItems: true
-        itemReward: '3:5'
+        itemReward: 3:5
         rewardText: 5 dirt
         currencyReward: 10
         xpReward: 30
         permissionReward: none
         repeatable: true
-        repeatItemReward: '3:1'
+        repeatItemReward: 3:1
         repeatRewardText: 1 dirt
         repeatCurrencyReward: 2
         repeatXpReward: 5
       cactusfarmer:
-        description: Harvest cacti from a farm.
+        description: 'Harvest cacti from a farm.'
         rankLevel: Easy
         type: onPlayer
         requiredItems: 81:64;+4
         resetInHours: 20
         displayItem: 81
         takeItems: true
-        itemReward: '12:10'
+        itemReward: 12:10
         rewardText: 10 sand
         currencyReward: 15
         xpReward: 30
         permissionReward: none
         repeatable: true
-        repeatItemReward: '12:1'
+        repeatItemReward: 12:1
         repeatRewardText: 1 sand
         repeatCurrencyReward: 2
         repeatXpReward: 5
       sugarfarmer:
-        description: Harvest sugarcane from a farm.
+        description: 'Harvest sugarcane from a farm.'
         rankLevel: Easy
         type: onPlayer
         requiredItems: 338:64;+4
@@ -130,48 +130,48 @@ options:
         xpReward: 30
         permissionReward: none
         repeatable: true
-        repeatItemReward: '82:1'
-        repeatRewardText: 1 clay
+        repeatItemReward: 82:1
+        repeatRewardText: 1 clay block
         repeatCurrencyReward: 2
         repeatXpReward: 3
       melonfarmer:
-        description: Harvest slices of melon from a farm.
+        description: 'Harvest slices of melon from a farm.'
         rankLevel: Easy
         type: onPlayer
         requiredItems: 360:128;+8
         displayItem: 360
         resetInHours: 20
         takeItems: true
-        itemReward: '3:5'
+        itemReward: 3:5
         rewardText: 5 dirt
         currencyReward: 15
         xpReward: 30
         permissionReward: none
         repeatable: true
-        repeatItemReward: '3:1'
+        repeatItemReward: 3:1
         repeatRewardText: 1 dirt
         repeatCurrencyReward: 2
         repeatXpReward: 3
       pumpkinfarmer:
-        description: Harvest pumpkins from a farm.
+        description: 'Harvest pumpkins from a farm.'
         rankLevel: Easy
         type: onPlayer
         requiredItems: 86:64;+4
         displayItem: 86
         resetInHours: 20
         takeItems: true
-        itemReward: '3:5'
+        itemReward: 3:5
         rewardText: 5 dirt
         currencyReward: 15
         xpReward: 30
         permissionReward: none
         repeatable: true
-        repeatItemReward: '3:1'
+        repeatItemReward: 3:1
         repeatRewardText: 1 dirt
         repeatCurrencyReward: 2
         repeatXpReward: 10
       novicebuilder:
-        description: Reach island level 20.
+        description: 'Reach island level 20.'
         rankLevel: Easy
         type: islandLevel
         requiredItems: 20
@@ -183,45 +183,45 @@ options:
         permissionReward: none
         repeatable: false
         repeatItemReward: 3:1
-        repeatRewardText: 'Test'
+        repeatRewardText: 1 Dirt
         repeatCurrencyReward: 5
         repeatXpReward: 5
       shroompicker:
-        description: Collect red and brown mushrooms.
+        description: 'Collect red and brown mushrooms.'
         rankLevel: Medium
         type: onPlayer
         requiredItems: 39:64;+4 40:64;+4
         displayItem: 40
         takeItems: true
-        itemReward: '110:1'
+        itemReward: 110:1
         rewardText: 1 mycelium
         currencyReward: 15
         xpReward: 30
         permissionReward: none
         repeatable: true
-        repeatItemReward: '110:1 3:2:2'
-        repeatRewardText: 1 mycelium, 2 podzol
+        repeatItemReward: 110:1 3:2:2
+        repeatRewardText: 1 mycelium and 2 podzol
         repeatCurrencyReward: 5
         repeatXpReward: 10
       monsterslayer:
-        description: Kill monsters and collect their parts.
+        description: 'Kill monsters and collect their parts.'
         rankLevel: Medium
         type: onPlayer
         requiredItems: 367:64;+4 287:32;+2 289:16;+1 262:32;+2 352:32;+2 375:5
         displayItem: 367
         takeItems: true
         itemReward: 331:16 15:5 318:1
-        rewardText: 16 redstone, 1 flint, and 5 iron
+        rewardText: 16 redstone dust, 1 flint and 5 iron ore
         currencyReward: 75
         xpReward: 75
         permissionReward: none
         repeatable: true
         repeatItemReward: 331:2 15:1 318:1
-        repeatRewardText: 2 redstone, 1 flint, and 1 iron
+        repeatRewardText: 2 redstone dust, 1 flint and 1 iron ore
         repeatCurrencyReward: 10
         repeatXpReward: 15
       expertfarmer:
-        description: 'Harvest many different farming resources'
+        description: 'Harvest many different farming resources.'
         rankLevel: Medium
         type: onPlayer
         requiredItems: 360:64;+2 353:64;+2 296:64;+2 392:64;+2 391:64;+2 86:64;+2 81:64;+2
@@ -229,73 +229,73 @@ options:
         displayItem: 60
         takeItems: true
         itemReward: 331:16 351:3:1 383:90:1 383:92:1 383:93:1
-        rewardText: 16 redstone, 1 cocoa, 3 animals
+        rewardText: 16 redstone dust, 1 cocoa bean and 3 animal spawn eggs
         currencyReward: 75
         xpReward: 75
         permissionReward: none
         repeatable: true
         repeatItemReward: 351:3:1 383:90:1 383:92:1 383:93:1 82:5
-        repeatRewardText: 1 cocoa, 3 animals, 5 clay
+        repeatRewardText: 1 cocoa bean, 3 animal spawn eggs and 5 clay blocks
         repeatCurrencyReward: 30
         repeatXpReward: 25
       fisherman:
-        description: Catch different types of fish.
+        description: 'Catch different types of fish.'
         rankLevel: Medium
         type: onPlayer
-        requiredItems: '349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1'
+        requiredItems: 349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1
         displayItem: 349
         takeItems: true
         itemReward: 331:16 15:5 351:5
-        rewardText: 16 redstone, 5 inksac, 5 iron
+        rewardText: 16 redstone dust, 5 inksacs and 5 iron ore
         currencyReward: 75
         xpReward: 75
         permissionReward: none
         repeatable: true
         repeatItemReward: 331:2 351:2
-        repeatRewardText: 2 redstone, 2 inksac
+        repeatRewardText: 2 redstone dust and 2 inksacs
         repeatCurrencyReward: 10
         repeatXpReward: 15
       lumberjack:
-        description: Collect all types of wood logs.
+        description: 'Collect all types of wood logs.'
         rankLevel: Medium
         type: onPlayer
         requiredItems: 17:0:16;+2 17:1:16;+2 17:2:16;+2 17:3:16;+2 162:0:16;+2 162:1:16;+2
         displayItem: 17
         takeItems: true
         itemReward: 331:16 15:5 383:95:1
-        rewardText: 16 redstone, 5 iron, 1 wolf
+        rewardText: 16 redstone dust, 5 iron ore and 1 wolf spawn egg
         currencyReward: 75
         xpReward: 75
         permissionReward: none
         repeatable: true
         repeatItemReward: 331:2 15:1
-        repeatRewardText: 2 redstone, 1 iron
+        repeatRewardText: 2 redstone dust and 1 iron ore
         repeatCurrencyReward: 20
         repeatXpReward: 15
       cookielover:
-        description: Make cookies and a bucket of milk
+        description: 'Make cookies and a bucket of milk.'
         rankLevel: Medium
         type: onPlayer
         requiredItems: 335:1 357:128;+4
         displayItem: 357
         takeItems: true
         itemReward: 331:16 15:5 325:1
-        rewardText: 16 redstone, 5 iron, 1 bucket
+        rewardText: 16 redstone dust, 5 iron ore and 1 bucket
         currencyReward: 75
         xpReward: 75
         permissionReward: none
         repeatable: true
         repeatItemReward: 331:2 325:1
-        repeatRewardText: 2 redstone, 1 bucket
+        repeatRewardText: 2 redstone dust and 1 bucket
         repeatCurrencyReward: 5
         repeatXpReward: 15
       adeptbuilder:
-        description: Reach island level 100.
+        description: 'Reach island level 100.'
         rankLevel: Medium
         type: islandLevel
         requiredItems: 100
         takeItems: false
-        itemReward: '49:12'
+        itemReward: 49:12
         rewardText: 12 obsidian
         currencyReward: 75
         xpReward: 75
@@ -306,13 +306,13 @@ options:
         repeatCurrencyReward: 0
         repeatXpReward: 0
       homeowner:
-        description: Build a house with furnishings.
+        description: 'Build a house with furnishings.'
         rankLevel: Medium
         type: onIsland
         requiredItems: 26:1 58:1 20:1 64:1 61:1 47:1 50:1
         takeItems: false
         itemReward: 84:1 2267:1 22:10
-        rewardText: 1 jukebox, 1 disk, 10 lapis lazuli
+        rewardText: 1 jukebox, 1 music disk and 10 lapis lazuli blocks
         currencyReward: 100
         xpReward: 100
         permissionReward: none
@@ -322,12 +322,12 @@ options:
         repeatCurrencyReward: 0
         repeatXpReward: 0
       netherportal:
-        description: Build a nether portal on your island.
+        description: 'Build a nether portal on your island.'
         rankLevel: Hard
         type: onIsland
         requiredItems: 49:10 90:1
         takeItems: false
-        itemReward: '276:1'
+        itemReward: 276:1
         rewardText: 1 diamond sword
         currencyReward: 100
         xpReward: 100
@@ -338,81 +338,81 @@ options:
         repeatCurrencyReward: 0
         repeatXpReward: 0
       pearlcollector:
-        description: Collect enderpearls from endermen.
+        description: 'Collect enderpearls from endermen.'
         rankLevel: Hard
         type: onPlayer
-        requiredItems: '368:10;+1'
+        requiredItems: 368:10;+1
         displayItem: 368
         takeItems: true
         itemReward: 266:5 369:1
-        rewardText: 5 gold and 1 blaze rod
+        rewardText: 5 gold ingots and 1 blaze rod
         currencyReward: 50
         xpReward: 100
         permissionReward: none
         repeatable: true
         repeatItemReward: 266:1 369:1
-        repeatRewardText: 1 gold and 1 blaze rod
+        repeatRewardText: 1 gold ingot and 1 blaze rod
         repeatCurrencyReward: 25
         repeatXpReward: 15
       slimefarmer:
-        description: Collect slimeballs from slimes
+        description: 'Collect slimeballs from slimes.'
         rankLevel: Hard
         type: onPlayer
         requiredItems: 341:64;+4
         displayItem: 341
         takeItems: true
         itemReward: 266:5 388:5
-        rewardText: 5 gold and 5 emeralds
+        rewardText: 5 gold ingots and 5 emeralds
         currencyReward: 50
         xpReward: 100
         permissionReward: none
         repeatable: true
-        repeatItemReward: '331:2 388:1'
-        repeatRewardText: 2 redstone, 1 emerald
+        repeatItemReward: 331:2 388:1
+        repeatRewardText: 2 redstone dust and 1 emerald
         repeatCurrencyReward: 5
         repeatXpReward: 5
       baker:
-        description: Bake cakes, pumpkin pies, and cookies.
+        description: 'Bake cakes, pumpkin pies, and cookies.'
         rankLevel: Hard
         type: onPlayer
         requiredItems: 354:5;+1 400:5;+1 357:128;+4
         displayItem: 354
         takeItems: true
         itemReward: 266:5 264:1
-        rewardText: 5 gold and 1 diamond
+        rewardText: 5 gold ingots and 1 diamond
         currencyReward: 50
         xpReward: 100
         permissionReward: none
         repeatable: true
-        repeatItemReward: '15:2 266:1'
-        repeatRewardText: 2 iron, 1 gold
+        repeatItemReward: 15:2 266:1
+        repeatRewardText: 2 iron ore and 1 gold ingot
         repeatCurrencyReward: 30
         repeatXpReward: 15
       explorer:
-        description: Collect items for exploration, nether items.
+        description: 'Collect items for exploration, nether items.'
         rankLevel: Hard
         type: onPlayer
         requiredItems: 87:64 88:16 370:1 395:1 345:1 347:1
         displayItem: 370
         takeItems: true
         itemReward: 27:32 66:256 264:1 383:98:1
-        rewardText: 288 rails, 1 ocelot, 1 diamond
+        rewardText: 32 powered rails, 256 rails, 1 diamond and 1 ocelot spawn egg
         currencyReward: 100
         xpReward: 100
         permissionReward: none
         repeatable: true
         repeatItemReward: 66:64 15:1 421:1 388:5
-        repeatRewardText: 64 rails, 1 iron, 5 emerald, 1 tag
+        repeatRewardText: 64 rails, 1 iron ore, 1 nametag and 5 emerald
         repeatCurrencyReward: 25
         repeatXpReward: 20
       expertbuilder:
-        description: Reach island level 250.
+        description: 'Reach island level 250.'
         rankLevel: Hard
         type: islandLevel
         requiredItems: 250
         takeItems: false
         itemReward: 264:1 3:32 12:32
-        rewardText: 1 diamond, 32 dirt, and 32 sand
+        rewardText: 1 diamond, 32 dirt and 32 sand
         currencyReward: 150
         xpReward: 150
         permissionReward: none
@@ -422,41 +422,41 @@ options:
         repeatCurrencyReward: 0
         repeatXpReward: 0
       woolcollector:
-        description: Collect every color of wool.
+        description: 'Collect every color of wool.'
         rankLevel: Master
         type: onPlayer
         requiredItems: 35:0:5;+1 35:1:5;+1 35:2:5;+1 35:3:5;+1 35:4:5;+1 35:5:5;+1 35:6:5;+1 35:7:5;+1 35:8:5;+1 35:9:5;+1 35:10:5;+1 35:11:5;+1 35:12:5;+1 35:13:5;+1 35:14:5;+1 35:15:5;+1
         displayItem: 35
         takeItems: true
         itemReward: 264:2 2262:1 2263:1 2261:1 383:91:1 388:5
-        rewardText: §cUnknown
+        rewardText: 2 diamonds, 3 music disks, 1 sheep spawn egg and 5 emeralds
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: 388:5 383:91:1
-        repeatRewardText: §cUnknown
+        repeatRewardText: 5 emeralds and 1 sheep spawn egg
         repeatCurrencyReward: 50
         repeatXpReward: 20
       glassmaker:
-        description: Collect every color of stained glass.
+        description: 'Collect every color of stained glass.'
         rankLevel: Master
         type: onPlayer
         requiredItems: 95:0:16;+2 95:1:16;+2 95:2:16;+2 95:3:16;+2 95:4:16;+2 95:5:16;+2 95:6:16;+2 95:7:16;+2 95:8:16;+2 95:9:16;+2 95:10:16;+2 95:11:16;+2 95:12:16;+2 95:13:16;+2 95:14:16;+2 95:15:16;+2
         displayItem: 95
         takeItems: true
         itemReward: 264:2 2262:1 2263:1 2261:1 383:91:1 388:5
-        rewardText: §cUnknown
+        rewardText: 2 diamonds, 3 music disks, 1 sheep spawn egg and 5 emeralds
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: 388:5 383:91:1
-        repeatRewardText: §cUnknown
+        repeatRewardText: 1 sheep spawn egg and 5 emeralds
         repeatCurrencyReward: 50
         repeatXpReward: 20
       masterfarmer:
-        description: Collect a large amount of farmed items.
+        description: 'Collect a large amount of farmed items.'
         rankLevel: Master
         type: onPlayer
         requiredItems: 360:128;+1 353:128;+1 296:128;+1 392:128;+1 391:128;+1 86:128;+1 81:128;+1 396:1;+1 322:0:1;+1
@@ -464,74 +464,74 @@ options:
         takeItems: true
         resetInHours: 5
         itemReward: 264:3 388:5
-        rewardText: §cUnknown
+        rewardText: 3 diamonds and 5 emeralds
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
-        repeatItemReward: '388:5 266:2'
-        repeatRewardText: §cUnknown
+        repeatItemReward: 388:5 266:2
+        repeatRewardText: 5 emeralds and 2 gold ingots
         repeatCurrencyReward: 50
         repeatXpReward: 20
       maestro:
-        description: Make a jukebox and collect all music discs.
+        description: 'Make a jukebox and collect all music discs.'
         rankLevel: Master
         type: onPlayer
         requiredItems: 2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1
         displayItem: 2256
         takeItems: true
         itemReward: 264:3 388:10
-        rewardText: §cUnknown
+        rewardText: 3 diamonds and 10 emeralds
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
-        repeatItemReward: '266:2 264:1'
-        repeatRewardText: §cUnknown
+        repeatItemReward: 266:2 264:1
+        repeatRewardText: 2 gold ingots and 1 diamond
         repeatCurrencyReward: 50
         repeatXpReward: 20
       emeraldcollector:
-        description: Collect emeralds.
+        description: 'Collect emeralds.'
         rankLevel: Master
         type: onPlayer
-        requiredItems: '388:50;+10'
+        requiredItems: 388:50;+10
         displayItem: 388
         takeItems: true
-        itemReward: '264:2'
-        rewardText: §cUnknown
+        itemReward: 264:2
+        rewardText: 2 diamonds
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
-        repeatItemReward: '264:1'
-        repeatRewardText: §cUnknown
+        repeatItemReward: 264:1
+        repeatRewardText: 1 diamond
         repeatCurrencyReward: 50
         repeatXpReward: 20
       topchef:
-        description: Collect every kind of edible food.
+        description: 'Collect every kind of edible food.'
         rankLevel: Master
         type: onPlayer
         requiredItems: 393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1
         displayItem: 391
         takeItems: true
         itemReward: 264:2 2257:1 2258:1 2260:1 383:96:1 388:5
-        rewardText: §cUnknown
+        rewardText: 2 diamonds, 3 music disks, 1 mooshroom spawn egg and 5 emeralds
         currencyReward: 200
         xpReward: 200
         permissionReward: none
         repeatable: true
         repeatItemReward: 266:3 383:96:1 388:5
-        repeatRewardText: §cUnknown
+        repeatRewardText: 3 gold ingots, 1 mooshroom spawn egg and 5 emeralds
         repeatCurrencyReward: 50
         repeatXpReward: 20
       skylord:
-        description: Get an island level of 1000.
+        description: 'Get an island level of 1000.'
         rankLevel: Master
         type: islandLevel
         requiredItems: 1000
         takeItems: false
-        itemReward: '264:1'
-        rewardText: §cUnknown
+        itemReward: 264:1
+        rewardText: 1 diamond
         currencyReward: 250
         xpReward: 250
         permissionReward: none
