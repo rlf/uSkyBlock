@@ -2,6 +2,39 @@
 
 This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin, which he has decided to stop supporting.
 
+# Installation
+
+This version depends on the following plugins:
+
+* Bukkit 1.8-R0.1-SNAPSHOT (I.e. the latest Spigot 1.8 release)
+* Vault 1.4
+* WorldEdit 6.0.0-SNAPSHOT
+* WorldGuard 6.0.0-SNAPSHOT
+
+## Building/Compiling
+
+Requirements:
+
+* Maven
+* Java SDK 1.7 or above
+* A local revision of the Spigot build (see http://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8.36598/)
+
+Configure Environment and Run Maven
+
+1. Define the SPIGOT_BASE environment variable to the folder where the BuildTools.jar reside
+2. Make sure that the Bukkit folder in that hiearchy contains a /target/bukkit*.jar file
+3. Run `mvn install` in the uSkyBlock folder
+
+TODO: Remove systemPaths from pom.xml
+
+## Issues
+
+Issues are maintained on the GitHub page: https://github.com/rlf/uSkyBlock/issues
+
+## Contributing
+
+Fork-away, and create pull-requests
+
 ## License
 
 TL;DR - This is licensed under GPLv3
