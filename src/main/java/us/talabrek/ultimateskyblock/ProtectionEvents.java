@@ -8,6 +8,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.hanging.*;
 import org.bukkit.event.vehicle.*;
 import org.bukkit.event.entity.*;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 public class ProtectionEvents implements Listener {
     private Player attacker;

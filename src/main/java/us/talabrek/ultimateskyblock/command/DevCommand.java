@@ -1,12 +1,15 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.io.*;
 
-import org.bukkit.plugin.*;
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class DevCommand implements CommandExecutor {
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {

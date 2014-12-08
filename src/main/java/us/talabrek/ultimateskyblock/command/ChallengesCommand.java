@@ -1,8 +1,11 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class ChallengesCommand implements CommandExecutor {
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
@@ -22,7 +25,8 @@ public class ChallengesCommand implements CommandExecutor {
             return true;
         }
         if (split.length == 0) {
-            player.openInventory(uSkyBlock.getInstance().getMenu().displayChallengeGUI(player));
+            uSkyBlock.getInstance().getMenuHandler().showMenu(player, "§9Challenge Menu");
+            //player.openInventory(uSkyBlock.getInstance().getMenu().displayChallengeGUI(player));
         } else if (split.length == 1) {
             if (split[0].equalsIgnoreCase("help") || split[0].equalsIgnoreCase("complete") || split[0].equalsIgnoreCase("c")) {
                 sender.sendMessage(ChatColor.YELLOW + "Use /c <name> to view information about a challenge.");

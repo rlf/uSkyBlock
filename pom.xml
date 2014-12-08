@@ -66,6 +66,17 @@
                     <include>*.yml</include>
                     <include>README.md</include>
                 </includes>
+                <excludes>
+                    <exclude>menu.yml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>menu.yml</include>
+                </includes>
             </resource>
             <resource>
                 <targetPath>.</targetPath>

@@ -1,7 +1,5 @@
 package us.talabrek.ultimateskyblock;
 
-import org.bukkit.inventory.meta.*;
-
 import java.io.*;
 
 import org.bukkit.event.*;
@@ -12,9 +10,8 @@ import org.bukkit.inventory.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.entity.*;
 
-import java.util.*;
-
-import org.bukkit.event.inventory.*;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 
 public class PlayerJoin implements Listener {
     private Player hungerman;
@@ -143,15 +140,5 @@ public class PlayerJoin implements Listener {
                 }
             }
         }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void guiClick(final InventoryClickEvent event) {
-        uSkyBlock.getInstance().getMenu().onClick(event);
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onInventoryDrag(final InventoryDragEvent event) {
-        uSkyBlock.getInstance().getMenu().onDrag(event);
     }
 }

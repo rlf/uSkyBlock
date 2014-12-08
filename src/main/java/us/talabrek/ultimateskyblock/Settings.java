@@ -27,7 +27,6 @@ public class Settings {
     public static boolean island_allowIslandLock;
     public static boolean island_useIslandLevel;
     public static boolean island_useTopTen;
-    public static int island_listTime;
     public static int general_cooldownInfo;
     public static int general_cooldownRestart;
     public static int general_biomeChange;
@@ -172,9 +171,9 @@ public class Settings {
         challenges_requirePreviousRank = config.getBoolean("options.challenges.requirePreviousRank");
         challenges_allowChallenges = config.getBoolean("options.challenges.allowChallenges");
         challenges_ranks = config.getString("options.challenges.ranks").split(" ");
+        String icons = config.getString("options.challenges.rank_icons");
 
         // TODO: Fix wrongly formatting in text uSkyBlock.correctFormatting(String)
         return changed;
     }
-
 }

@@ -17,8 +17,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.talabrek.ultimateskyblock.menu.uSkyBlockMenuProvider;
+import us.talabrek.ultimateskyblock.command.ChallengesCommand;
+import us.talabrek.ultimateskyblock.command.DevCommand;
+import us.talabrek.ultimateskyblock.command.IslandCommand;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.menu.EvaluatorProvider;
+import us.talabrek.ultimateskyblock.menu.MenuHandler;
+import us.talabrek.ultimateskyblock.menu.ParameterEvaluator;
+import us.talabrek.ultimateskyblock.provider.ConfigProvider;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -33,6 +46,7 @@ public class uSkyBlock extends JavaPlugin {
     private FileConfiguration levelConfig;
     private FileConfiguration lastIslandConfig;
     private FileConfiguration orphans;
+    private FileConfiguration menuConfig;
     private HashMap<String, FileConfiguration> islands;
     private File levelConfigFile;
     private File orphanFile;
@@ -42,7 +56,6 @@ public class uSkyBlock extends JavaPlugin {
     public List<String> removeList;
     List<String> rankDisplay;
     public FileConfiguration configPlugin;
-    public File filePlugin;
     private Location lastIsland;
     private Stack<Location> orphaned;
     private Stack<Location> tempOrphaned;
@@ -62,11 +75,12 @@ public class uSkyBlock extends JavaPlugin {
     public boolean purgeActive;
     private FileConfiguration skyblockData;
     private File skyblockDataFile;
-    private SkyBlockMenu menu;
 
     static {
         uSkyBlock.skyBlockWorld = null;
     }
+
+    private MenuHandler menuHandler;
 
     public uSkyBlock() {
         super();
@@ -109,7 +123,6 @@ public class uSkyBlock extends JavaPlugin {
 
     public void onEnable() {
         (uSkyBlock.instance = this).saveDefaultConfig();
-        this.menu = new SkyBlockMenu(this);
         this.saveDefaultLevelConfig();
         this.saveDefaultOrphans();
         this.pluginFile = this.getDescription();
@@ -119,8 +132,6 @@ public class uSkyBlock extends JavaPlugin {
         if (!this.getDataFolder().exists()) {
             this.getDataFolder().mkdir();
         }
-        this.configPlugin = super.getConfig();
-        this.filePlugin = new File(this.getDataFolder(), "config.yml");
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
         }
@@ -208,12 +219,11 @@ public class uSkyBlock extends JavaPlugin {
                             getInstance().createIslandConfig(pi.locationForParty(), player.getName());
                         }
                         getInstance().clearIslandConfig(pi.locationForParty(), player.getName());
-                        if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                            WorldGuardHandler.protectIsland(player, player.getName(), pi);
-                        }
                     }
                     f.delete();
                 }
+                // Only do it's thing, if enabled, and no region exists
+                WorldGuardHandler.protectIsland(player, player.getName(), pi);
                 getInstance().addActivePlayer(player.getName(), pi);
                 if (pi.getHasIsland() && getInstance().getTempIslandConfig(pi.locationForParty()) == null) {
                     getInstance().createIslandConfig(pi.locationForParty(), player.getName());
@@ -244,6 +254,99 @@ public class uSkyBlock extends JavaPlugin {
         } else {
             System.out.print("[uSkyBlock] Using WorldGuard protection.");
         }
+        ConfigProvider menuConfigProvider = new ConfigProvider() {
+            @Override
+            public FileConfiguration getConfig() {
+                return getMenuConfig();
+            }
+        };
+        menuHandler = new MenuHandler(menuConfigProvider, new uSkyBlockMenuProvider(this), createParameterEvaluator());
+        manager.registerEvents(menuHandler, this);
+    }
+
+    @Override
+    public FileConfiguration getConfig() {
+        if (configPlugin != null) {
+            return configPlugin;
+        }
+        configPlugin = getFileConfiguration("config.yml");
+        return configPlugin;
+    }
+
+    private FileConfiguration getMenuConfig() {
+        if (menuConfig != null) {
+            return menuConfig;
+        }
+        menuConfig = getFileConfiguration("menu.yml");
+        return menuConfig;
+    }
+
+    private FileConfiguration getFileConfiguration(String fileName) {
+        FileConfiguration config = null;
+        File configFile = new File(getDataFolder(), fileName);
+        if (!configFile.exists()) {
+            // TODO: 08/12/2014 - R4zorax: Check version numbers, and overwrite (make a backup)
+            InputStream resourceFromJar = getClassLoader().getResourceAsStream(fileName);
+            try {
+                Files.copy(resourceFromJar, Paths.get(configFile.toURI()));
+                InputStreamReader reader = new InputStreamReader(new FileInputStream(configFile), "UTF-8");
+                config = YamlConfiguration.loadConfiguration(reader);
+            } catch (IOException e) {
+                // Ahh, well, we tried
+                log.warning("[uSkyBlock] Unable to load " + fileName + ", using defaults");
+                config = YamlConfiguration.loadConfiguration(new InputStreamReader(resourceFromJar));
+            }
+        } else {
+            try {
+                InputStreamReader reader = new InputStreamReader(new FileInputStream(configFile), "UTF-8");
+                config = YamlConfiguration.loadConfiguration(reader);
+            } catch (UnsupportedEncodingException | FileNotFoundException e) {
+                // Given the use of UTF-8 + the file.exists above, this is highly unlikely
+                log.warning("[uSkyBlock] Could not read " + fileName);
+            }
+        }
+        return config;
+    }
+
+    public MenuHandler getMenuHandler() {
+        return menuHandler;
+    }
+
+    public boolean checkIslandPermission(final Player player, final String permission) {
+        return getIslandConfig(player).getBoolean("party.members." + player.getName() + "." + permission);
+    }
+
+    private EvaluatorProvider createParameterEvaluator() {
+        return new EvaluatorProvider() {
+            @Override
+            public ParameterEvaluator getEvaluator(Player player) {
+                Map<String,String> map = new HashMap<>();
+                map.put("$PLAYER", player.getDisplayName());
+                PlayerInfo playerInfo = getPlayerInfo(player);
+                if (playerInfo != null) {
+                    for (int i = 1; i <= 10; i++) {
+                        map.put("$log." + i, "");
+                    }
+                    map.put("$HAS_ISLAND", ""+playerInfo.getHasIsland());
+                    map.put("$HAS_PARTY" , "" + playerInfo.getHasParty());
+                    FileConfiguration is = getIslandConfig(player);
+                    for (String key : is.getKeys(true)) {
+                        map.put("$" + key, is.getString(key));
+                    }
+                    ConfigurationSection section = getMenuConfig().getConfigurationSection("access");
+                    for (String perm : section.getKeys(false)) {
+                        boolean check = checkIslandPermission(player, perm);
+                        map.put("$" + perm, "" + check);
+                        map.put("$access." + perm, section.getConfigurationSection(perm).getString("" + check));
+                    }
+                    for (String biome : Arrays.asList("jungle", "forest", "swampland", "ocean", "mushroom", "sky", "hell", "taiga", "desert")) {
+                        boolean check = VaultHandler.checkPerm(player, "usb.biome." + biome, getSkyBlockWorld());
+                        map.put("$usb.biome." + biome, "" + check);
+                    }
+                }
+                return new ParameterEvaluator(map);
+            }
+        };
     }
 
     public PlayerInfo readPlayerFile(final String playerName) {
@@ -637,7 +740,9 @@ public class uSkyBlock extends JavaPlugin {
                             getInstance().createIslandConfig(pi.locationForParty(), player);
                             getInstance().clearIslandConfig(pi.locationForParty(), player);
                             if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                                WorldGuardHandler.protectIsland(sender, player, pi);
+                                if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
+                                    sender.sendMessage("Player doesn't have an island or it's already protected!");
+                                }
                             }
                             getIslandConfig(pi.locationForParty());
                             return true;
@@ -1192,9 +1297,9 @@ public class uSkyBlock extends JavaPlugin {
         return this.activePlayers;
     }
 
-    public PlayerInfo getPlayerInfo(Player name) {
+    public PlayerInfo getPlayerInfo(Player player) {
         // TODO: UUID aware
-        return activePlayers.get(name.getName());
+        return activePlayers.get(player.getName());
     }
 
     public void addActivePlayer(final String player, final PlayerInfo pi) {
@@ -1582,7 +1687,7 @@ public class uSkyBlock extends JavaPlugin {
         return this.skyblockData;
     }
 
-    double dReturns(final double val, final double scale) {
+    public double dReturns(final double val, final double scale) {
         if (val < 0.0) {
             return -this.dReturns(-val, scale);
         }
@@ -1631,33 +1736,26 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void loadLevelConfig() {
-        try {
-            this.getLevelConfig();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FileConfiguration config = getLevelConfig();
         for (int i = 1; i <= 255; ++i) {
-            if (this.getLevelConfig().contains("blockValues." + i)) {
-                Settings.blockList[i] = this.getLevelConfig().getInt("blockValues." + i);
+            if (config.contains("blockValues." + i)) {
+                Settings.blockList[i] = config.getInt("blockValues." + i);
             } else {
-                Settings.blockList[i] = this.getLevelConfig().getInt("general.default");
+                Settings.blockList[i] = config.getInt("general.default");
             }
-            if (this.getLevelConfig().contains("blockLimits." + i)) {
-                Settings.limitList[i] = this.getLevelConfig().getInt("blockLimits." + i);
+            if (config.contains("blockLimits." + i)) {
+                Settings.limitList[i] = config.getInt("blockLimits." + i);
             } else {
                 Settings.limitList[i] = -1;
             }
-            if (this.getLevelConfig().contains("diminishingReturns." + i)) {
-                Settings.diminishingReturnsList[i] = this.getLevelConfig().getInt("diminishingReturns." + i);
-            } else if (this.getLevelConfig().getBoolean("general.useDiminishingReturns")) {
-                Settings.diminishingReturnsList[i] = this.getLevelConfig().getInt("general.defaultScale");
+            if (config.contains("diminishingReturns." + i)) {
+                Settings.diminishingReturnsList[i] = config.getInt("diminishingReturns." + i);
+            } else if (config.getBoolean("general.useDiminishingReturns")) {
+                Settings.diminishingReturnsList[i] = config.getInt("general.defaultScale");
             } else {
                 Settings.diminishingReturnsList[i] = -1;
             }
         }
-        System.out.print(Settings.blockList[57]);
-        System.out.print(Settings.diminishingReturnsList[57]);
-        System.out.print(Settings.limitList[57]);
     }
 
     public void clearIslandConfig(final String location, final String leader) {
@@ -2036,7 +2134,9 @@ public class uSkyBlock extends JavaPlugin {
                 }
             }
             if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                WorldGuardHandler.protectIsland(player, sender.getName(), pi);
+                if (!WorldGuardHandler.protectIsland(player, sender.getName(), pi)) {
+                    sender.sendMessage("Player doesn't have an island or it's already protected!");
+                }
             }
         } catch (Exception ex) {
             player.sendMessage("Could not create your Island. Pleace contact a server moderator.");
@@ -2433,13 +2533,14 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void changePlayerPermission(final Player player, final String playername, final String perm) {
-        if (!getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).contains("party.members." + playername + "." + perm)) {
+        FileConfiguration islandConfig = getIslandConfig(player);
+        if (!islandConfig.contains("party.members." + playername + "." + perm)) {
             return;
         }
-        if (getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).getBoolean("party.members." + playername + "." + perm)) {
-            getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).set("party.members." + playername + "." + perm, false);
+        if (islandConfig.getBoolean("party.members." + playername + "." + perm)) {
+            islandConfig.set("party.members." + playername + "." + perm, false);
         } else {
-            getIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty()).set("party.members." + playername + "." + perm, true);
+            islandConfig.set("party.members." + playername + "." + perm, true);
         }
         getInstance().saveIslandConfig(getInstance().getActivePlayers().get(player.getName()).locationForParty());
     }
@@ -2484,10 +2585,6 @@ public class uSkyBlock extends JavaPlugin {
         } else {
             getIslandConfig(location).set("log.logPos", 0);
         }
-    }
-
-    public SkyBlockMenu getMenu() {
-        return menu;
     }
 
     public static String stripFormatting(String format) {

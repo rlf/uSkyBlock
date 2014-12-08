@@ -1,0 +1,442 @@
+access:
+  canToggleLock:
+    true:  §e§lClick here to toggle lock.
+    false: §c§lYou can't change the lock.
+  canChangeBiome:
+    true:  §e§lClick here to change biomes.
+    false: §c§lYou can't change the biome.
+  canToggleWarp:
+    true: §e§lClick here to toggle.
+    false: §c§lYou can't change the warp.
+menus:
+  §9Island Menu:
+    size: 18
+    items:
+      0:
+        icon: DARK_OAK_DOOR_ITEM
+        title: §a§lReturn Home
+        lore:
+          - §fReturn to your island's home
+          - §fpoint. You can change your home
+          - §fpoint to any location on your
+          - §fisland using §b/island sethome
+          - §e§lClick here to return home.
+        command: island home
+      1:
+        icon: 56
+        title: §a§lChallenges
+        lore:
+          - §fView a list of §9challenges§f that
+          - §fyou can complete on your island
+          - §fto earn skybucks, items, perks,
+          - §fand titles.
+          - §e§lClick here to view challenges.
+        command: challenges
+      2:
+        icon: EXP_BOTTLE
+        title: §a§lIsland Level
+        lore:
+          - §eCurrent Level: §a$general.level
+          - §fGain island levels by expanding
+          - §fyour skyblock and completing
+          - §fcertain challenges. Rarer blocks
+          - §fwill add more to your level.
+          - §e§lClick here to refresh.
+          - §e§l(must be on island)
+        command: island level
+      3:
+        icon: SKULL_ITEM
+        title: §a§lIsland Group
+        lore:
+          - §eMembers: §2$general.partySize/$general.maxSize
+          - §fView the members of your island
+          - §fgroup and their permissions. If
+          - §fyou are the island leader, you
+          - §fcan change the member permissions.
+          - §e§lClick here to view or change.
+        subMenu: §9Island Group Members
+      4:
+        icon: SAPLING
+        title: §a§lChange Island Biome
+        lore:
+          - §eCurrent Biome: §b$general.biome
+          - §fThe island biome affects things
+          - §flike grass color and spawning
+          - §fof both animals and monsters.
+          - $access.canChangeBiome
+        subMenu: §9Island Biome
+      51:
+        icon: IRON_FENCE
+        title: §a§lIsland Lock
+        enabled: $general.locked
+        index: 5
+        lore:
+          - §eLock Status: §aActive
+          - §fYour island is currently §clocked.
+          - §fPlayers outside of your group
+          - §fare unable to enter your island.
+          - $access.canToggleLock
+        command: island lock
+      52:
+        icon: IRON_FENCE
+        title: §a§lIsland Lock
+        enabled: "!$general.locked"
+        index: 5
+        lore:
+          - §eLock Status: §8Inactive
+          - §fYour island is currently §aunlocked.
+          - §fAll players are able to enter your
+          - §fisland, but only you and your group
+          - §fmembers may build there.
+          - $access.canToggleLock
+        command: island unlock
+      61:
+        icon: ENDER_PORTAL_FRAME
+        enabled: $general.warpActive
+        title: §a§lIsland Warp
+        index: 6
+        lore:
+          - §eWarp Status: §aActive
+          - §fOther players may warp to your
+          - §fisland at anytime to the point
+          - §fyou set using §d/island setwarp.
+          - $access.canToggleWarp
+        command: island togglewarp
+      62:
+        icon: ENDER_STONE
+        enabled: "!$general.warpActive"
+        title: §a§lIsland Warp
+        index: 6
+        lore:
+          - §eWarp Status: §8Inactive
+          - §fOther players can't warp to your
+          - §fisland. Set a warp point using
+          - §d/island setwarp §fbefore activating.
+          - $access.canToggleWarp
+        command: island togglewarp
+      8:
+        icon: BOOK_AND_QUILL
+        title: §a§lIsland Log
+        lore:
+          - §fView a log of events from
+          - §fyour island such as member,
+          - §fbiome, and warp changes.
+          - §e§lClick to view the log.
+        subMenu: §9Island Log
+      9:
+        icon: BED
+        title: §a§lChange Home Location
+        lore:
+          - §fWhen you teleport to your
+          - §fisland you will be taken to
+          - §fthis location.
+          - §e§lClick here to change.
+        command: island sethome
+      15:
+        icon: HOPPER
+        title: §a§lChange Warp Location
+        lore:
+          - §fWhen your warp is activated,
+          - §fother players will be taken to
+          - §fthis point when they teleport
+          - §fto your island.
+          - §e§lClick here to change.
+        command: island setwarp
+        
+  §9Island Biome:
+    size: 18
+    items:
+      9:
+        title: §hIsland Biome
+        subMenu: §9Island Menu
+        lore:
+        - §eClick here to return to
+        - §ethe main island screen.
+      101:
+        icon: RAW_FISH:2
+        title: "§aBiome: Ocean"
+        enabled: $usb.biome.ocean
+        index: 0
+        lore:
+          - §fThe ocean biome is the basic
+          - §fstarting biome for all islands.
+          - §fpassive mobs like animals will
+          - §fnot spawn. Hostile mobs will
+          - §fspawn normally.
+          - §e§lClick to change to this biome.
+        command: island biome ocean
+      102:
+        icon: RAW_FISH:2
+        title: "§8Biome: Ocean"
+        enabled: "!$usb.biome.ocean"
+        index: 0
+        lore:
+          - §cYou cannot use this biome.
+          - §7The ocean biome is the basic
+          - §7starting biome for all islands.
+          - §7passive mobs like animals will
+          - §7not spawn. Hostile mobs will
+          - §7spawn normally.
+      201:
+        icon: SAPLING:1
+        title: "§aBiome: Forest"
+        index: 1
+        enabled: $usb.biome.forest
+        lore:
+          - §fThe forest biome will allow
+          - §fyour island to spawn passive.
+          - §fmobs like animals (including
+          - §fwolves). Hostile mobs will
+          - §fspawn normally.
+          - §e§lClick to change to this biome.
+        command: island biome forest
+      202:
+        icon: SAPLING:1
+        title: "§8Biome: Forest"
+        index: 1
+        enabled: "!$usb.biome.forest"
+        lore:
+          - §cYou cannot use this biome.
+          - §7The forest biome will allow
+          - §7your island to spawn passive.
+          - §7mobs like animals (including
+          - §7wolves). Hostile mobs will
+          - §7spawn normally.
+      301:
+        title: "§aBiome: Desert"
+        icon: SAND
+        enabled: $usb.biome.desert
+        index: 2
+        command: island biome desert
+        lore:
+          - §fThe desert biome makes it so
+          - §fthat there is no rain or snow
+          - §fon your island. Passive mobs
+          - §fwon't spawn. Hostile mobs will
+          - §fspawn normally.
+          - §e§lClick to change to this biome.
+      302:
+        icon: SAND
+        title: "§8Biome: Desert"
+        enabled: "!$usb.biome.desert"
+        index: 2
+        lore:
+          - §cYou cannot use this biome.
+          - §7The desert biome makes it so
+          - §7that there is no rain or snow
+          - §7on your island. Passive mobs
+          - §7won't spawn. Hostile mobs will
+          - §7spawn normally.
+      401:
+        icon: SAPLING:3
+        title: "§aBiome: Jungle"
+        index: 3
+        enabled: $usb.biome.jungle
+        command: island biome jungle
+        lore:
+          - §fThe jungle biome is bright
+          - §fand colorful. Passive mobs
+          - §f(including ocelots) will
+          - §fspawn. Hostile mobs will
+          - §fspawn normally.
+          - §e§lClick to change to this biome.
+      402:
+        icon: SAPLING:3
+        title: "§8Biome: Jungle"
+        index: 3
+        enabled: "!$usb.biome.jungle"
+        lore:
+          - §cYou cannot use this biome.
+          - §7The jungle biome is bright
+          - §7and colorful. Passive mobs
+          - §7(including ocelots) will
+          - §7spawn. Hostile mobs will
+          - §7spawn normally.
+      501:
+        icon: WATER_LILY
+        title: "§aBiome: Swampland"
+        enabled: $usb.biome.swampland
+        index: 4
+        command: island biome swampland
+        lore:
+          - §fThe swamp biome is dark
+          - §fand dull. Passive mobs
+          - §fwill spawn normally and
+          - §fslimes have a small chance
+          - §fto spawn at night depending
+          - §fon the moon phase.
+          - §e§lClick to change to this biome.
+      502:
+        icon: WATER_LILY
+        title: "§8Biome: Swampland"
+        enabled: "!$usb.biome.swampland"
+        index: 4
+        lore:
+          - §cYou cannot use this biome.
+          - §7The swamp biome is dark
+          - §7and dull. Passive mobs
+          - §7will spawn normally and
+          - §7slimes have a small chance
+          - §7to spawn at night depending
+          - §7on the moon phase.
+      601:
+        icon: SNOW
+        enabled: $usb.biome.taiga
+        index: 5
+        title: "§aBiome: Taiga"
+        command: island biome taiga
+        lore:
+          - §fThe taiga biome has snow
+          - §finstead of rain. Passive
+          - §fmobs will spawn normally
+          - §f(including wolves) and
+          - §fhostile mobs will spawn.
+          - §e§lClick to change to this biome.
+      602:
+        icon: SNOW
+        enabled: "!$usb.biome.taiga"
+        index: 5
+        title: "§8Biome: Taiga"
+        lore:
+          - §cYou cannot use this biome.
+          - §7The taiga biome has snow
+          - §7instead of rain. Passive
+          - §7mobs will spawn normally
+          - §7(including wolves) and
+          - §7hostile mobs will spawn.
+      701:
+        enabled: $usb.biome.mushroom
+        index: 6
+        command: island biome mushroom
+        icon: RED_MUSHROOM
+        title: "§aBiome: Mushroom"
+        lore:
+          - §fThe mushroom biome is
+          - §fbright and colorful.
+          - §fMooshrooms are the only
+          - §fmobs that will spawn.
+          - §fNo other passive or
+          - §fhostile mobs will spawn.
+          - §e§lClick to change to this biome.
+      702:
+        enabled: "!$usb.biome.mushroom"
+        index: 6
+        icon: RED_MUSHROOM
+        title: "§8Biome: Mushroom"
+        lore:
+          - §cYou cannot use this biome.
+          - §7The mushroom biome is
+          - §7bright and colorful.
+          - §7Mooshrooms are the only
+          - §7mobs that will spawn.
+          - §7No other passive or
+          - §7hostile mobs will spawn.
+      801:
+        enabled: $usb.biome.hell
+        index: 7
+        command: island biome hell
+        icon: NETHER_BRICK
+        title: "§aBiome: Hell (Nether)"
+        lore:
+          - §fThe hell biome looks
+          - §fdark and dead. Some
+          - §fmobs from the nether will
+          - §fspawn in this biome
+          - §f(excluding ghasts and
+          - §fblazes).
+          - §e§lClick to change to this biome.
+      802:
+        enabled: "!$usb.biome.hell"
+        index: 7
+        icon: NETHER_BRICK
+        title: "§8Biome: Hell (Nether)"
+        lore:
+          - §cYou cannot use this biome.
+          - §7The hell biome looks
+          - §7dark and dead. Some
+          - §7mobs from the nether will
+          - §7spawn in this biome
+          - §7(excluding ghasts and
+          - §7blazes).
+      901:
+        enabled: $usb.biome.sky
+        index: 8
+        icon: EYE_OF_ENDER
+        command: island biome sky
+        title: "§aBiome: Sky (End)"
+        lore:
+          - §fThe sky biome gives your
+          - §fisland a special dark sky.
+          - §fOnly endermen will spawn
+          - §fin this biome.
+          - §e§lClick to change to this biome.
+      902:
+        enabled: "!$usb.biome.sky"
+        index: 8
+        icon: EYE_OF_ENDER
+        title: "§8Biome: Sky (End)"
+        lore:
+          - §cYou cannot use this biome.
+          - §7The sky biome gives your
+          - §7island a special dark sky.
+          - §7Only endermen will spawn
+          - §7in this biome.
+  §9Island Log:
+    size: 9
+    items:
+      0:
+        icon: SIGN
+        title: §lIsland Log
+        lore:
+          - §eClick here to return to
+          - §ethe main island screen.
+        subMenu: §9Island Menu
+      8:
+        icon: BOOK_AND_QUILL
+        title: §e§lIsland Log
+        lore:
+          - $log.1
+          - $log.2
+          - $log.3
+          - $log.4
+          - $log.5
+          - $log.6
+          - $log.7
+          - $log.8
+          - $log.9
+          - $log.10
+  __RANKS__:
+    items:
+      0:
+        icon: DIRT
+        title: Easy
+        index: 0
+        lore:
+          - §e§lRank: Easy
+          - §fComplete most challenges in
+          - §fthis rank to unlock the next rank.
+      1:
+        icon: IRON_BLOCK
+        title: Medium
+        index: 9
+        lore:
+          - §e§lRank: Medium
+          - §fComplete most challenges in
+          - §fthis rank to unlock the next rank.
+      2:
+        icon: GOLD_BLOCK
+        title: Hard
+        index: 18
+        lore:
+          - §e§lRank: Hard
+          - §fComplete most challenges in
+          - §fthis rank to unlock the next rank.
+      3:
+        icon: DIAMOND_BLOCK
+        title: Master
+        index: 27
+        lore:
+          - §e§lRank: Master
+          - §fComplete most challenges in
+          - §fthis rank to unlock the next rank.
+version: 2.0

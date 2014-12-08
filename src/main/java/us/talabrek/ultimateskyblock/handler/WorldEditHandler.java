@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.handler;
 
 import org.bukkit.Location;
 import org.bukkit.plugin.*;
@@ -10,6 +10,7 @@ import com.sk89q.worldedit.data.*;
 import java.io.*;
 
 import com.sk89q.worldedit.*;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class WorldEditHandler {
     public static WorldEditPlugin getWorldEdit() {

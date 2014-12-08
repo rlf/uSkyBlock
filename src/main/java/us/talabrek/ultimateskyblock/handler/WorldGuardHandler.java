@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldguard.bukkit.*;
 import org.bukkit.Location;
@@ -14,6 +14,9 @@ import java.util.*;
 
 import com.sk89q.worldedit.*;
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class WorldGuardHandler {
     public static WorldGuardPlugin getWorldGuard() {
@@ -24,7 +27,7 @@ public class WorldGuardHandler {
         return (WorldGuardPlugin) plugin;
     }
 
-    public static void protectIsland(final Player sender, final String player, final PlayerInfo pi) {
+    public static boolean protectIsland(final Player sender, final String player, final PlayerInfo pi) {
         try {
             if (Settings.island_protectWithWorldGuard) {
                 if (pi.getIslandLocation() != null && !getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) {
@@ -33,6 +36,7 @@ public class WorldGuardHandler {
                     region = new ProtectedCuboidRegion(player + "Island", getProtectionVectorLeft(pi.getIslandLocation()), getProtectionVectorRight(pi.getIslandLocation()));
                     owners.addPlayer(player);
                     region.setOwners(owners);
+                    // TODO: 07/12/2014 - R4zorax: Add additional flags from a config file (i.e. allow-pickup: deny).
                     region.setParent(getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion("__Global__"));
                     region.setPriority(100);
                     region.setFlag((Flag) DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
@@ -54,14 +58,15 @@ public class WorldGuardHandler {
                     getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).addRegion(region);
                     System.out.print("New protected region created for " + player + "'s Island by " + sender.getName());
                     getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
+                    return true;
                 } else {
-                    sender.sendMessage("Player doesn't have an island or it's already protected!");
                 }
             }
         } catch (Exception ex) {
             System.out.print("ERROR: Failed to protect " + player + "'s Island (" + sender.getName() + ")");
             ex.printStackTrace();
         }
+        return false;
     }
 
     public static void islandLock(final CommandSender sender, final String player) {

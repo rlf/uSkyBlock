@@ -1,0 +1,23 @@
+menus:
+  §9Island Menu:
+    items:
+      0:
+        icon: DARK_OAK_DOOR_ITEM
+        title: \u00a7a\u00a7lReturn Home
+        lore:
+          - \u00a7fReturn to your island's home
+          - \u00a7fpoint. You can change your home
+          - \u00a7fpoint to any location on your
+          - \u00a7fisland using \u00a7b/island sethome
+          - \u00a7e\u00a7lClick here to return home.
+        command: is home
+      3:
+        icon: 56
+        title: §a§lChallenges
+        lore:
+          - §fView a list of §9challenges§f that
+          - §fyou can complete on your island
+          - §fto earn skybucks, items, perks,
+          - §fand titles.
+          - §e§lClick here to view challenges.
+        command: c

@@ -1,10 +1,11 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.handler;
 
 import net.milkbowl.vault.permission.*;
 import net.milkbowl.vault.economy.*;
 import org.bukkit.entity.*;
 import org.bukkit.*;
 import org.bukkit.plugin.*;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public enum VaultHandler {;
     private static Permission perms;
