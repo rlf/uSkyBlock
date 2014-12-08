@@ -39,6 +39,29 @@ options:
     useOldIslands: false
     useIslandLevel: true
     useTopTen: true
+  extra-menus:
+    7:
+      title: '§a§lBuy Perks'
+      displayItem: CHEST
+      commands:
+       - 'chestcommands open perks'
+      lore:
+       - '§fVisit the perk shop to buy'
+       - '§fspecial abilities for your'
+       - '§fisland and character, as well'
+       - '§fas titles and more.'
+       - '§e§lClick here to open the shop!'
+    16:
+      title: '§a§lBuy Donor Perks'
+      displayItem: ENDER_CHEST
+      commands:
+       - '[group.donor]chestcommands open donor'
+       - '[!group.donor]donate'
+      lore:
+       - '§fThis special perk shop is'
+       - '§7fonly available to donors!'
+       - '[group.donor]§e§lClick here to open the shop!'
+       - '[!group.donor]§a§7Click here to become a donor!'
   extras:
     sendToSpawn: false
     obsidianToLava: true
