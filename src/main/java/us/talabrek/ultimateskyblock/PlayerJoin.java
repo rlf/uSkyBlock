@@ -40,11 +40,11 @@ public class PlayerJoin implements Listener {
                     uSkyBlock.getInstance().createIslandConfig(pi.locationForParty(), event.getPlayer().getName());
                 }
                 uSkyBlock.getInstance().clearIslandConfig(pi.locationForParty(), event.getPlayer().getName());
-                if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                    WorldGuardHandler.protectIsland(event.getPlayer(), event.getPlayer().getName(), pi);
-                }
             }
             f.delete();
+        }
+        if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+            WorldGuardHandler.protectIsland(event.getPlayer(), event.getPlayer().getName(), pi);
         }
         uSkyBlock.getInstance().addActivePlayer(event.getPlayer().getName(), pi);
         if (pi.getHasIsland() && !uSkyBlock.getInstance().getTempIslandConfig(pi.locationForParty()).contains("general.level")) {

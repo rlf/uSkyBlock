@@ -22,6 +22,17 @@ options:
       extremebonus: 352:8 263:4
       donorbonus: 261:1 262:32 272:1
     protectWithWorldGuard: false
+    worldGuardFlags:
+      ALL:
+        pvp: 'deny'
+        chest-access: 'deny'
+        use: 'deny'
+        destroy-vehicle: 'deny'
+        entity-item-frame-destroy: 'deny'
+        entity-painting-destroy: 'deny'
+      OWNERS:
+        use: 'allow'
+        chest-access: 'allow'
     protectionRange: 105
     allowPvP: deny
     allowIslandLock: true

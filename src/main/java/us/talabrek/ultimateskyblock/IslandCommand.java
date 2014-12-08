@@ -52,9 +52,7 @@ public class IslandCommand implements CommandExecutor {
                     return true;
                 }
                 if (!uSkyBlock.getInstance().onRestartCooldown(player) || Settings.general_cooldownRestart == 0) {
-                    uSkyBlock.getInstance().restartPlayerIsland(player, pi.getIslandLocation());
-                    uSkyBlock.getInstance().setRestartCooldown(player);
-                    return true;
+                    return uSkyBlock.getInstance().restartPlayerIsland(player, pi.getIslandLocation());
                 }
                 player.sendMessage(ChatColor.YELLOW + "You can restart your island in " + uSkyBlock.getInstance().getRestartCooldownTime(player) / 1000L + " seconds.");
                 return true;

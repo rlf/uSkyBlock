@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // TODO: Move all the texts to resource-files (translatable).
 /**
@@ -880,53 +882,7 @@ public class SkyBlockMenu {
                     meta4 = currentChallengeItem.getItemMeta();
                     meta4.setDisplayName(challenge);
                 }
-                lores.add("\u00a77" + config.getString("options.challenges.challengeList." + challengeName + ".description"));
-                lores.add("\u00a7eThis challenge requires the following:");
-                final String[] reqList = config.getString("options.challenges.challengeList." + challengeName + ".requiredItems").split(" ");
-                int reqItem = 0;
-                int reqAmount = 0;
-                int reqMod = -1;
-                String[] array;
-                for (int length = (array = reqList).length, j = 0; j < length; ++j) {
-                    final String s = array[j];
-                    final String[] sPart = s.split(":");
-                    if (sPart.length == 2) {
-                        reqItem = Integer.parseInt(sPart[0]);
-                        final String[] sScale = sPart[1].split(";");
-                        if (sScale.length == 1) {
-                            reqAmount = Integer.parseInt(sPart[1]);
-                        } else if (sScale.length == 2) {
-                            if (sScale[1].charAt(0) == '+') {
-                                reqAmount = Integer.parseInt(sScale[0]) + Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName);
-                            } else if (sScale[1].charAt(0) == '*') {
-                                reqAmount = Integer.parseInt(sScale[0]) * (Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName));
-                            } else if (sScale[1].charAt(0) == '-') {
-                                reqAmount = Integer.parseInt(sScale[0]) - Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName);
-                            } else if (sScale[1].charAt(0) == '/') {
-                                reqAmount = Integer.parseInt(sScale[0]) / (Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName));
-                            }
-                        }
-                    } else if (sPart.length == 3) {
-                        reqItem = Integer.parseInt(sPart[0]);
-                        final String[] sScale = sPart[2].split(";");
-                        if (sScale.length == 1) {
-                            reqAmount = Integer.parseInt(sPart[2]);
-                        } else if (sScale.length == 2) {
-                            if (sScale[1].charAt(0) == '+') {
-                                reqAmount = Integer.parseInt(sScale[0]) + Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName);
-                            } else if (sScale[1].charAt(0) == '*') {
-                                reqAmount = Integer.parseInt(sScale[0]) * (Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName));
-                            } else if (sScale[1].charAt(0) == '-') {
-                                reqAmount = Integer.parseInt(sScale[0]) - Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName);
-                            } else if (sScale[1].charAt(0) == '/') {
-                                reqAmount = Integer.parseInt(sScale[0]) / (Integer.parseInt(sScale[1].substring(1)) * skyBlock.getActivePlayers().get(player.getName()).checkChallengeSinceTimer(challengeName));
-                            }
-                        }
-                        reqMod = Integer.parseInt(sPart[1]);
-                    }
-                    final ItemStack newItem = new ItemStack(reqItem, reqAmount, (short) reqMod);
-                    lores.add("\u00a7f" + newItem.getAmount() + " " + newItem.getType().toString());
-                }
+                addRequiredItems(player, lores, challengeName, config);
                 if (pi.checkChallenge(challengeName) > 0 && config.getBoolean("options.challenges.challengeList." + challengeName + ".repeatable")) {
                     if (pi.onChallengeCooldown(challengeName)) {
                         if (pi.getChallengeCooldownTime(challengeName) / 86400000L >= 1L) {
@@ -957,9 +913,42 @@ public class SkyBlockMenu {
                 menu.setItem(++location, currentChallengeItem);
                 lores.clear();
             } catch (NullPointerException e) {
-                skyBlock.getLogger().log(Level.SEVERE, "Mis-configured challenge " + challenge, e);
+                skyBlock.getLogger().log(Level.SEVERE, "Misconfigured challenge " + challenge, e);
             }
         }
+    }
+
+    private void addRequiredItems(Player player, List<String> lores, String challengeName, FileConfiguration config) {
+        lores.add("\u00a77" + config.getString("options.challenges.challengeList." + challengeName + ".description"));
+        lores.add("\u00a7eThis challenge requires the following:");
+        String reqItems = config.getString("options.challenges.challengeList." + challengeName + ".requiredItems");
+        int timesCompleted = skyBlock.getPlayerInfo(player).checkChallengeSinceTimer(challengeName);
+        if (reqItems != null) {
+            Pattern reqPattern = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?");
+            for (String item : reqItems.split(" ")) {
+                Matcher m = reqPattern.matcher(item);
+                if (m.matches()) {
+                    int reqItem = Integer.parseInt(m.group("type"));
+                    int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype")) : 0;
+                    int amount = Integer.parseInt(m.group("amount"));
+                    char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
+                    int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc")) : 0;
+                    amount = calcAmount(amount, op, inc, timesCompleted);
+                    Material mat = Material.getMaterial(reqItem); // Deprecated my ass
+                    lores.add("\u00a7f" + amount + " " + mat.name());
+                }
+            }
+        }
+    }
+
+    private int calcAmount(int amount, char op, int inc, int timesCompleted) {
+        switch (op) {
+            case '+': return amount + inc*timesCompleted;
+            case '-': return amount - inc*timesCompleted; // Why?
+            case '*': return amount * inc * timesCompleted; // Oh, my god! Just do the time m8!
+            case '/': return amount / (inc * timesCompleted); // Yay! Free stuff!!!
+        }
+        return amount;
     }
 
     private boolean isCompletedChallenge(String challengeName) {
