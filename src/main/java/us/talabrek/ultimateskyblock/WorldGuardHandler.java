@@ -72,18 +72,18 @@ public class WorldGuardHandler {
                 ConfigurationSection groupSection = configurationSection.getConfigurationSection(group);
                 RegionGroup regionGroup = RegionGroup.valueOf(group.toUpperCase());
                 if (regionGroup == null) {
-                    System.out.println("&4[uSkyBlock]&r Unknown group " + group + " in config.yml");
+                    uSkyBlock.LOG.warning("&4[uSkyBlock]&r Unknown group " + group + " in config.yml");
                     continue;
                 }
                 for (String flag : groupSection.getKeys(false)) {
                     String stateString = groupSection.getString(flag);
                     StateFlag.State state = StateFlag.State.valueOf(stateString.toUpperCase());
                     if (state == null) {
-                        System.out.println("&4[uSkyBlock]&r Unknown state " + stateString + " only allow/deny supported");
+                        uSkyBlock.LOG.warning("&4[uSkyBlock]&r Unknown state " + stateString + " only allow/deny supported");
                         continue;
                     }
                     region.setFlag(new StateFlag(flag, false, regionGroup), state);
-                    System.out.println("\u00a9[uSkyBlock]&r Setting flag " + flag + " to " + state + " for " + regionGroup);
+                    uSkyBlock.LOG.finest("\u00a9[uSkyBlock]&r Setting flag " + flag + " to " + state + " for " + regionGroup);
                 }
             }
         } else {
@@ -186,7 +186,7 @@ public class WorldGuardHandler {
             getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).removeRegion(owner + "Island");
             getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).addRegion(region2);
         } catch (Exception e) {
-            System.out.println("Error transferring WorldGuard Protected Region from (" + owner + ") to (" + player + ")");
+            uSkyBlock.LOG.info("Error transferring WorldGuard Protected Region from (" + owner + ") to (" + player + ")");
         }
     }
 }

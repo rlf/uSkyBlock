@@ -6,7 +6,6 @@ options:
     cooldownInfo: 30
     cooldownRestart: 600
     biomeChange: 3600
-    permission: group.member
   island:
     schematicName: yourschematicname
     distance: 110

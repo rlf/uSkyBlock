@@ -592,7 +592,7 @@ public class SkyBlockMenu {
                 item.setItemMeta(meta);
                 menu.setItem(index, item);
             } catch (Exception e) {
-                System.out.println("\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
+                uSkyBlock.LOG.info("\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
             }
         }
     }
@@ -630,13 +630,13 @@ public class SkyBlockMenu {
                                 player.performCommand(cmd);
                             }
                         } else {
-                            System.out.println("\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
+                            uSkyBlock.LOG.info("\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
                         }
                     }
                     return true;
                 }
             } catch (Exception e) {
-                System.out.println("\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
+                uSkyBlock.LOG.info("\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
             }
         }
         return false;
@@ -658,27 +658,10 @@ public class SkyBlockMenu {
         Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
         if (skyBlock.hasIsland(player.getName())) {
             addMainMenu(menu, player);
-        } else if (hasAccess(player)) {
-            addInitMenu(menu);
         } else {
-            // TODO: 06/12/2014 - R4zorax: Make this actually work
-            ItemStack menuItem = new ItemStack(Material.BOOK, 1);
-            final ItemMeta meta4 = menuItem.getItemMeta();
-            meta4.setDisplayName("\u00a7a\u00a7lWelcome to the Server!");
-            lores.add("\u00a7fPlease read and accept the");
-            lores.add("\u00a7fserver rules to become a");
-            lores.add("\u00a7fmember and start your skyblock.");
-            lores.add("\u00a7e\u00a7lClick here to read!");
-            meta4.setLore(lores);
-            menuItem.setItemMeta(meta4);
-            menu.addItem(menuItem);
-            lores.clear();
+            addInitMenu(menu);
         }
         return menu;
-    }
-
-    private boolean hasAccess(Player player) {
-        return VaultHandler.checkPerm(player, skyBlock.getConfig().getString("options.general.permission"), skyBlock.getSkyBlockWorld());
     }
 
     private void addInitMenu(Inventory menu) {
@@ -1024,22 +1007,12 @@ public class SkyBlockMenu {
                     int amount = Integer.parseInt(m.group("amount"));
                     char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
                     int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc")) : 0;
-                    amount = calcAmount(amount, op, inc, timesCompleted);
+                    amount = skyBlock.calcAmount(amount, op, inc, timesCompleted);
                     Material mat = Material.getMaterial(reqItem); // Deprecated my ass
                     lores.add("\u00a7f" + amount + " " + mat.name());
                 }
             }
         }
-    }
-
-    private int calcAmount(int amount, char op, int inc, int timesCompleted) {
-        switch (op) {
-            case '+': return amount + inc*timesCompleted;
-            case '-': return amount - inc*timesCompleted; // Why?
-            case '*': return amount * inc * timesCompleted; // Oh, my god! Just do the time m8!
-            case '/': return amount / (inc * timesCompleted); // Yay! Free stuff!!!
-        }
-        return amount;
     }
 
     private boolean isCompletedChallenge(String challengeName) {

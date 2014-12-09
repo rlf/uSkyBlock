@@ -613,7 +613,7 @@ public class IslandCommand implements CommandExecutor {
                                 }
                                 this.removePlayerFromParty(this.tempTargetPlayer, uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader"), pi.locationForParty());
                                 if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                                    System.out.println("Removing from " + uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader") + "'s Island");
+                                    uSkyBlock.LOG.info("Removing from " + uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader") + "'s Island");
                                     WorldGuardHandler.removePlayerFromRegion(uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader"), this.tempTargetPlayer);
                                 }
                             } else {

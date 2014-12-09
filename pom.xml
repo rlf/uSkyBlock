@@ -89,17 +89,17 @@
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
-            <version>1.4</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldedit</artifactId>
-            <version>6.0.0-SNAPSHOT</version>
+            <version>LATEST</version>
             <scope>compile</scope>
             <type>jar</type>
             <optional>true</optional>
@@ -107,7 +107,7 @@
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
-            <version>6.0.0-SNAPSHOT</version>
+            <version>LATEST</version>
             <scope>compile</scope>
             <type>jar</type>
             <optional>true</optional>

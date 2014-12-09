@@ -49,7 +49,7 @@ public class PlayerJoin implements Listener {
         uSkyBlock.getInstance().addActivePlayer(event.getPlayer().getName(), pi);
         if (pi.getHasIsland() && !uSkyBlock.getInstance().getTempIslandConfig(pi.locationForParty()).contains("general.level")) {
             uSkyBlock.getInstance().createIslandConfig(pi.locationForParty(), event.getPlayer().getName());
-            System.out.println("Creating new Config File");
+            uSkyBlock.LOG.info("Creating new Config File");
         }
         uSkyBlock.getInstance().getIslandConfig(pi.locationForParty());
         System.out.print("Loaded player file for " + event.getPlayer().getName());

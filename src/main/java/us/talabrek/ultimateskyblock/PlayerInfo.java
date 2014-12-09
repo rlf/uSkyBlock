@@ -17,7 +17,7 @@ public class PlayerInfo implements Serializable {
     private boolean hasParty;
     private String islandLocation;
     private String homeLocation;
-    private HashMap<String, Challenge> challengeListNew;
+    private HashMap<String, Challenge> challenges;
     private String partyIslandLocation;
     private FileConfiguration playerData;
     private File playerConfigFile;
@@ -41,7 +41,7 @@ public class PlayerInfo implements Serializable {
         } else {
             this.homeLocation = this.getStringLocation(new Location(uSkyBlock.getSkyBlockWorld(), (double) hX, (double) hY, (double) hZ));
         }
-        this.challengeListNew = new HashMap<>();
+        this.challenges = new HashMap<>();
         this.buildChallengeList();
     }
 
@@ -149,45 +149,46 @@ public class PlayerInfo implements Serializable {
     }
 
     public void completeChallenge(final String challenge) {
-        if (this.challengeListNew.containsKey(challenge)) {
-            if (!this.onChallengeCooldown(challenge)) {
+        if (challenges.containsKey(challenge)) {
+            if (!onChallengeCooldown(challenge)) {
+                long now = System.currentTimeMillis();
                 if (uSkyBlock.getInstance().getConfig().contains("options.challenges.challengeList." + challenge + ".resetInHours")) {
-                    this.challengeListNew.get(challenge).setFirstCompleted(Calendar.getInstance().getTimeInMillis() + uSkyBlock.getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".resetInHours") * 3600000);
+                    challenges.get(challenge).setFirstCompleted(now + uSkyBlock.getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".resetInHours") * 3600000);
                 } else if (uSkyBlock.getInstance().getConfig().contains("options.challenges.defaultResetInHours")) {
-                    this.challengeListNew.get(challenge).setFirstCompleted(Calendar.getInstance().getTimeInMillis() + uSkyBlock.getInstance().getConfig().getInt("options.challenges.defaultResetInHours") * 3600000);
+                    challenges.get(challenge).setFirstCompleted(now + uSkyBlock.getInstance().getConfig().getInt("options.challenges.defaultResetInHours") * 3600000);
                 } else {
-                    this.challengeListNew.get(challenge).setFirstCompleted(Calendar.getInstance().getTimeInMillis() + 518400000L);
+                    challenges.get(challenge).setFirstCompleted(now + 518400000L);
                 }
             }
-            this.challengeListNew.get(challenge).addTimesCompleted();
+            challenges.get(challenge).addTimesCompleted();
         }
     }
 
     public long getChallengeCooldownTime(final String challenge) {
-        if (this.getChallenge(challenge).getFirstCompleted() <= 0L) {
+        if (getChallenge(challenge).getFirstCompleted() <= 0L) {
             return 0L;
         }
-        if (this.getChallenge(challenge).getFirstCompleted() > Calendar.getInstance().getTimeInMillis()) {
-            return this.getChallenge(challenge).getFirstCompleted() - Calendar.getInstance().getTimeInMillis();
+        if (getChallenge(challenge).getFirstCompleted() > System.currentTimeMillis()) {
+            return getChallenge(challenge).getFirstCompleted() - System.currentTimeMillis();
         }
         return 0L;
     }
 
     public boolean onChallengeCooldown(final String challenge) {
-        return this.getChallenge(challenge).getFirstCompleted() > 0L && this.getChallenge(challenge).getFirstCompleted() > Calendar.getInstance().getTimeInMillis();
+        return getChallenge(challenge).getFirstCompleted() > System.currentTimeMillis();
     }
 
     public void resetChallenge(final String challenge) {
-        if (this.challengeListNew.containsKey(challenge)) {
-            this.challengeListNew.get(challenge).setTimesCompleted(0);
-            this.challengeListNew.get(challenge).setFirstCompleted(0L);
+        if (challenges.containsKey(challenge)) {
+            challenges.get(challenge).setTimesCompleted(0);
+            challenges.get(challenge).setFirstCompleted(0L);
         }
     }
 
     public int checkChallenge(final String challenge) {
         try {
-            if (this.challengeListNew.containsKey(challenge.toLowerCase())) {
-                return this.challengeListNew.get(challenge.toLowerCase()).getTimesCompleted();
+            if (challenges.containsKey(challenge.toLowerCase())) {
+                return challenges.get(challenge.toLowerCase()).getTimesCompleted();
             }
         } catch (ClassCastException ex) {
         }
@@ -196,8 +197,9 @@ public class PlayerInfo implements Serializable {
 
     public int checkChallengeSinceTimer(final String challenge) {
         try {
-            if (this.challengeListNew.containsKey(challenge.toLowerCase())) {
-                return this.challengeListNew.get(challenge.toLowerCase()).getTimesCompletedSinceTimer();
+            String challengeKey = challenge.toLowerCase();
+            if (onChallengeCooldown(challengeKey) && challenges.containsKey(challengeKey)) {
+                return challenges.get(challengeKey).getTimesCompletedSinceTimer();
             }
         } catch (ClassCastException ex) {
         }
@@ -205,18 +207,15 @@ public class PlayerInfo implements Serializable {
     }
 
     public Challenge getChallenge(final String challenge) {
-        if (this.challengeListNew.containsKey(challenge.toLowerCase())) {
-            return this.challengeListNew.get(challenge.toLowerCase());
-        }
-        return null;
+        return challenges.get(challenge.toLowerCase());
     }
 
     public boolean challengeExists(final String challenge) {
-        return this.challengeListNew.containsKey(challenge.toLowerCase());
+        return challenges.containsKey(challenge.toLowerCase());
     }
 
     public void resetAllChallenges() {
-        this.challengeListNew = null;
+        this.challenges = null;
         this.buildChallengeList();
     }
 
@@ -231,30 +230,21 @@ public class PlayerInfo implements Serializable {
     }
 
     public void buildChallengeList() {
-        if (this.challengeListNew == null) {
-            this.challengeListNew = new HashMap<>();
+        if (this.challenges == null) {
+            this.challenges = new HashMap<>();
         }
         for (final String current : Settings.challenges_challengeList) {
-            if (!this.challengeListNew.containsKey(current.toLowerCase())) {
-                this.challengeListNew.put(current.toLowerCase(), new Challenge(current.toLowerCase(), 0L, 0, 0));
+            if (!challenges.containsKey(current.toLowerCase())) {
+                challenges.put(current.toLowerCase(), new Challenge(current.toLowerCase(), 0L, 0, 0));
             }
         }
-        if (this.challengeListNew.size() > Settings.challenges_challengeList.size()) {
-            final Object[] challengeArray = this.challengeListNew.keySet().toArray();
+        if (challenges.size() > Settings.challenges_challengeList.size()) {
+            final Object[] challengeArray = challenges.keySet().toArray();
             for (int i = 0; i < challengeArray.length; ++i) {
                 if (!Settings.challenges_challengeList.contains(challengeArray[i].toString())) {
-                    this.challengeListNew.remove(challengeArray[i].toString());
+                    challenges.remove(challengeArray[i].toString());
                 }
             }
-        }
-    }
-
-    public void displayChallengeList() {
-        final Iterator<String> itr = this.challengeListNew.keySet().iterator();
-        System.out.print("Displaying Challenge list for " + this.playerName);
-        while (itr.hasNext()) {
-            final String current = itr.next();
-            System.out.print(current + ": " + this.challengeListNew.get(current));
         }
     }
 
@@ -270,7 +260,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public void setupPlayer(final String player) {
-        System.out.println("Creating player config Paths!");
+        uSkyBlock.LOG.info("Creating player config Paths!");
         this.getPlayerConfig(player).createSection("player");
         this.getPlayerConfig(player);
         FileConfiguration.createPath(this.getPlayerConfig(player).getConfigurationSection("player"), "hasIsland");
@@ -296,7 +286,7 @@ public class PlayerInfo implements Serializable {
         this.getPlayerConfig(player).set("player.homeY", 0);
         this.getPlayerConfig(player).set("player.homeZ", 0);
         this.getPlayerConfig(player).set("player.kickWarning", false);
-        final Iterator<String> ent = this.challengeListNew.keySet().iterator();
+        final Iterator<String> ent = challenges.keySet().iterator();
         String currentChallenge = "";
         while (ent.hasNext()) {
             currentChallenge = ent.next();
@@ -307,9 +297,9 @@ public class PlayerInfo implements Serializable {
             FileConfiguration.createPath(this.getPlayerConfig(player).getConfigurationSection("player.challenges." + currentChallenge), "timesCompleted");
             this.getPlayerConfig(player);
             FileConfiguration.createPath(this.getPlayerConfig(player).getConfigurationSection("player.challenges." + currentChallenge), "timesCompletedSinceTimer");
-            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".firstCompleted", this.challengeListNew.get(currentChallenge).getFirstCompleted());
-            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompleted", this.challengeListNew.get(currentChallenge).getTimesCompleted());
-            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", this.challengeListNew.get(currentChallenge).getTimesCompletedSinceTimer());
+            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".firstCompleted", challenges.get(currentChallenge).getFirstCompleted());
+            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompleted", challenges.get(currentChallenge).getTimesCompleted());
+            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", challenges.get(currentChallenge).getTimesCompletedSinceTimer());
         }
     }
 
@@ -331,10 +321,10 @@ public class PlayerInfo implements Serializable {
             this.buildChallengeList();
             final Iterator<String> ent = Settings.challenges_challengeList.iterator();
             String currentChallenge = "";
-            this.challengeListNew = new HashMap<>();
+            this.challenges = new HashMap<>();
             while (ent.hasNext()) {
                 currentChallenge = ent.next();
-                this.challengeListNew.put(currentChallenge, new Challenge(currentChallenge, this.getPlayerConfig(player).getLong("player.challenges." + currentChallenge + ".firstCompleted"), this.getPlayerConfig(player).getInt("player.challenges." + currentChallenge + ".timesCompleted"), this.getPlayerConfig(player).getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
+                challenges.put(currentChallenge, new Challenge(currentChallenge, this.getPlayerConfig(player).getLong("player.challenges." + currentChallenge + ".firstCompleted"), this.getPlayerConfig(player).getInt("player.challenges." + currentChallenge + ".timesCompleted"), this.getPlayerConfig(player).getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
             }
             if (Bukkit.getPlayer(player) != null && this.getPlayerConfig(player).getBoolean("player.kickWarning")) {
                 Bukkit.getPlayer(player).sendMessage("\u00a7cYou were removed from your island since the last time you played!");
@@ -343,7 +333,7 @@ public class PlayerInfo implements Serializable {
             return this;
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Returning null while loading, not good!");
+            uSkyBlock.LOG.info("Returning null while loading, not good!");
             return null;
         }
     }
@@ -354,14 +344,14 @@ public class PlayerInfo implements Serializable {
     }
 
     public void createPlayerConfig(final String player) {
-        System.out.println("Creating new player config!");
+        uSkyBlock.LOG.info("Creating new player config!");
         this.getPlayerConfig(player);
         this.setupPlayer(player);
     }
 
     public FileConfiguration getPlayerConfig(final String player) {
         if (this.playerData == null) {
-            System.out.println("Reloading player data!");
+            uSkyBlock.LOG.info("Reloading player data!");
             this.reloadPlayerConfig(player);
         }
         return this.playerData;
@@ -369,7 +359,7 @@ public class PlayerInfo implements Serializable {
 
     public void savePlayerConfig(final String player) {
         if (this.playerData == null) {
-            System.out.println("Can't save player data!");
+            uSkyBlock.LOG.info("Can't save player data!");
             return;
         }
         this.getPlayerConfig(player).set("player.hasIsland", this.getHasIsland());
@@ -391,18 +381,18 @@ public class PlayerInfo implements Serializable {
             this.getPlayerConfig(player).set("player.homeY", 0);
             this.getPlayerConfig(player).set("player.homeZ", 0);
         }
-        final Iterator<String> ent = this.challengeListNew.keySet().iterator();
+        final Iterator<String> ent = challenges.keySet().iterator();
         String currentChallenge = "";
         while (ent.hasNext()) {
             currentChallenge = ent.next();
-            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".firstCompleted", this.challengeListNew.get(currentChallenge).getFirstCompleted());
-            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompleted", this.challengeListNew.get(currentChallenge).getTimesCompleted());
-            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", this.challengeListNew.get(currentChallenge).getTimesCompletedSinceTimer());
+            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".firstCompleted", challenges.get(currentChallenge).getFirstCompleted());
+            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompleted", challenges.get(currentChallenge).getTimesCompleted());
+            this.getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", challenges.get(currentChallenge).getTimesCompletedSinceTimer());
         }
         this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
         try {
             this.getPlayerConfig(player).save(this.playerConfigFile);
-            System.out.println("Player data saved!");
+            uSkyBlock.LOG.info("Player data saved!");
         } catch (IOException ex) {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + this.playerConfigFile, ex);
         }

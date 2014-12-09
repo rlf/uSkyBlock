@@ -17,18 +17,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class uSkyBlock extends JavaPlugin {
+    public static final Logger LOG = Logger.getLogger(uSkyBlock.class.getName());
+    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<data>[0-9]+))?:(?<amount>[0-9]+)");
     public PluginDescriptionFile pluginFile;
     public Logger log;
     Date date;
@@ -102,7 +103,7 @@ public class uSkyBlock extends JavaPlugin {
                 this.setLastIsland(this.lastIsland);
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong saving the island and/or party data!");
+            uSkyBlock.LOG.info("Something went wrong saving the island and/or party data!");
             e.printStackTrace();
         }
         this.log.info(String.valueOf(this.pluginFile.getName()) + " v" + this.pluginFile.getVersion() + " disabled.");
@@ -216,7 +217,7 @@ public class uSkyBlock extends JavaPlugin {
                 getInstance().addActivePlayer(player.getName(), pi);
                 if (pi.getHasIsland() && getInstance().getTempIslandConfig(pi.locationForParty()) == null) {
                     getInstance().createIslandConfig(pi.locationForParty(), player.getName());
-                    System.out.println("Creating new Config File");
+                    uSkyBlock.LOG.info("Creating new Config File");
                 }
                 getIslandConfig(pi.locationForParty());
             }
@@ -1254,7 +1255,7 @@ public class uSkyBlock extends JavaPlugin {
             return false;
         }
         if (this.getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onPlayer")) {
-            if (!this.hasRequired(player, challenge, "onPlayer")) {
+            if (!this.tryComplete(player, challenge, "onPlayer")) {
                 player.sendMessage(ChatColor.RED + this.getConfig().getString("options.challenges.challengeList." + challenge + ".description"));
                 player.sendMessage(ChatColor.RED + "You don't have enough of the required item(s)!");
                 return false;
@@ -1264,7 +1265,7 @@ public class uSkyBlock extends JavaPlugin {
             if (!this.playerIsOnIsland(player)) {
                 player.sendMessage(ChatColor.RED + "You must be on your island to do that!");
             }
-            if (!this.hasRequired(player, challenge, "onIsland")) {
+            if (!this.tryComplete(player, challenge, "onIsland")) {
                 player.sendMessage(ChatColor.RED + this.getConfig().getString("options.challenges.challengeList." + challenge + ".description"));
                 player.sendMessage(ChatColor.RED + "You must be standing within 10 blocks of all required items.");
                 return false;
@@ -1282,151 +1283,110 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    public boolean takeRequired(final Player player, final String challenge, final String type) {
-        if (type.equalsIgnoreCase("onPlayer")) {
-            final String[] reqList = this.getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems").split(" ");
-            int reqItem = 0;
-            int reqAmount = 0;
-            int reqMod = -1;
-            String[] array;
-            for (int length = (array = reqList).length, i = 0; i < length; ++i) {
-                final String s = array[i];
-                final String[] sPart = s.split(":");
-                if (sPart.length == 2) {
-                    reqItem = Integer.parseInt(sPart[0]);
-                    final String[] sScale = sPart[1].split(";");
-                    if (sScale.length == 1) {
-                        reqAmount = Integer.parseInt(sPart[1]);
-                    } else if (sScale.length == 2) {
-                        if (sScale[1].charAt(0) == '+') {
-                            reqAmount = Integer.parseInt(sScale[0]) + Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '*') {
-                            reqAmount = Integer.parseInt(sScale[0]) * (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        } else if (sScale[1].charAt(0) == '-') {
-                            reqAmount = Integer.parseInt(sScale[0]) - Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '/') {
-                            reqAmount = Integer.parseInt(sScale[0]) / (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        }
-                    }
-                    if (!player.getInventory().contains(reqItem, reqAmount)) {
-                        return false;
-                    }
-                    player.getInventory().removeItem(new ItemStack[]{new ItemStack(reqItem, reqAmount)});
-                } else if (sPart.length == 3) {
-                    reqItem = Integer.parseInt(sPart[0]);
-                    final String[] sScale = sPart[2].split(";");
-                    if (sScale.length == 1) {
-                        reqAmount = Integer.parseInt(sPart[2]);
-                    } else if (sScale.length == 2) {
-                        if (sScale[1].charAt(0) == '+') {
-                            reqAmount = Integer.parseInt(sScale[0]) + Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '*') {
-                            reqAmount = Integer.parseInt(sScale[0]) * (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        } else if (sScale[1].charAt(0) == '-') {
-                            reqAmount = Integer.parseInt(sScale[0]) - Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '/') {
-                            reqAmount = Integer.parseInt(sScale[0]) / (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        }
-                    }
-                    reqMod = Integer.parseInt(sPart[1]);
-                    if (!player.getInventory().containsAtLeast(new ItemStack(reqItem, reqAmount, (short) reqMod), reqAmount)) {
-                        return false;
-                    }
-                    player.getInventory().removeItem(new ItemStack[]{new ItemStack(reqItem, reqAmount, (short) reqMod)});
-                }
-            }
-            return true;
+    public int calcAmount(int amount, char op, int inc, int timesCompleted) {
+        switch (op) {
+            case '+':
+                return amount + inc * timesCompleted;
+            case '-':
+                return amount - inc * timesCompleted; // Why?
+            case '*':
+                return amount * inc * timesCompleted; // Oh, my god! Just do the time m8!
+            case '/':
+                return amount / (inc * timesCompleted); // Yay! Free stuff!!!
         }
-        return type.equalsIgnoreCase("onIsland") || type.equalsIgnoreCase("islandLevel");
+        return amount;
     }
 
-    public boolean hasRequired(final Player player, final String challenge, final String type) {
-        final String[] reqList = this.getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems").split(" ");
+    public boolean tryComplete(final Player player, final String challenge, final String type) {
         if (type.equalsIgnoreCase("onPlayer")) {
-            int reqItem = 0;
-            int reqAmount = 0;
-            int reqMod = -1;
-            String[] array;
-            for (int length = (array = reqList).length, n = 0; n < length; ++n) {
-                final String s = array[n];
-                final String[] sPart = s.split(":");
-                if (sPart.length == 2) {
-                    reqItem = Integer.parseInt(sPart[0]);
-                    final String[] sScale = sPart[1].split(";");
-                    if (sScale.length == 1) {
-                        reqAmount = Integer.parseInt(sPart[1]);
-                    } else if (sScale.length == 2) {
-                        if (sScale[1].charAt(0) == '+') {
-                            reqAmount = Integer.parseInt(sScale[0]) + Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '*') {
-                            reqAmount = Integer.parseInt(sScale[0]) * (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        } else if (sScale[1].charAt(0) == '-') {
-                            reqAmount = Integer.parseInt(sScale[0]) - Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '/') {
-                            reqAmount = Integer.parseInt(sScale[0]) / (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        }
-                    }
-                    if (!player.getInventory().containsAtLeast(new ItemStack(reqItem, reqAmount, (short) 0), reqAmount)) {
-                        return false;
-                    }
-                } else if (sPart.length == 3) {
-                    reqItem = Integer.parseInt(sPart[0]);
-                    final String[] sScale = sPart[2].split(";");
-                    if (sScale.length == 1) {
-                        reqAmount = Integer.parseInt(sPart[2]);
-                    } else if (sScale.length == 2) {
-                        if (sScale[1].charAt(0) == '+') {
-                            reqAmount = Integer.parseInt(sScale[0]) + Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '*') {
-                            reqAmount = Integer.parseInt(sScale[0]) * (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        } else if (sScale[1].charAt(0) == '-') {
-                            reqAmount = Integer.parseInt(sScale[0]) - Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge);
-                        } else if (sScale[1].charAt(0) == '/') {
-                            reqAmount = Integer.parseInt(sScale[0]) / (Integer.parseInt(sScale[1].substring(1)) * getPlayerInfo(player).checkChallengeSinceTimer(challenge));
-                        }
-                    }
-                    reqMod = Integer.parseInt(sPart[1]);
-                    if (!player.getInventory().containsAtLeast(new ItemStack(reqItem, reqAmount, (short) reqMod), reqAmount)) {
-                        return false;
-                    }
-                }
-            }
-            if (this.getConfig().getBoolean("options.challenges.challengeList." + challenge + ".takeItems")) {
-                this.takeRequired(player, challenge, type);
-            }
-            return true;
+            return tryCompleteOnPlayer(player, challenge);
         }
         if (type.equalsIgnoreCase("onIsland")) {
-            final int[][] neededItem = new int[reqList.length][2];
-            for (int i = 0; i < reqList.length; ++i) {
-                final String[] sPart = reqList[i].split(":");
-                neededItem[i][0] = Integer.parseInt(sPart[0]);
-                neededItem[i][1] = Integer.parseInt(sPart[1]);
+            return tryCompleteOnIsland(player, challenge);
+        }
+        return true;
+    }
+
+    private boolean islandContains(Player player, List<ItemStack> itemStacks, int radius) {
+        final Location l = player.getLocation();
+        final int px = l.getBlockX();
+        final int py = l.getBlockY();
+        final int pz = l.getBlockZ();
+        World world = l.getWorld();
+        int[] blockCount = new int[0xffffff];
+        int[] baseBlocks = new int[0xffff];
+        for (int x = px - radius; x <= px + radius; x++) {
+            for (int y = py - radius; y <= py + radius; y++) {
+                for (int z = pz - radius; z <= pz + radius; z++) {
+                    Block block = world.getBlockAt(x, y, z);
+                    blockCount[block.getTypeId() << 8 + block.getData()]++;
+                    baseBlocks[block.getTypeId()]++;
+                }
             }
-            final Location l = player.getLocation();
-            final int px = l.getBlockX();
-            final int py = l.getBlockY();
-            final int pz = l.getBlockZ();
-            for (int x = -10; x <= 10; ++x) {
-                for (int y = -3; y <= 10; ++y) {
-                    for (int z = -10; z <= 10; ++z) {
-                        final Block b = new Location(l.getWorld(), (double) (px + x), (double) (py + y), (double) (pz + z)).getBlock();
-                        for (int j = 0; j < neededItem.length; ++j) {
-                            if (b.getTypeId() == neededItem[j][0]) {
-                                final int[] array2 = neededItem[j];
-                                final int n2 = 1;
-                                --array2[n2];
-                            }
-                        }
+        }
+        for (ItemStack item : itemStacks) {
+            if (item.getDurability() != 0 && blockCount[item.getTypeId() << 8 + item.getDurability()] < item.getAmount()) {
+                return false;
+            } else if (baseBlocks[item.getTypeId()] < item.getAmount()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean tryCompleteOnIsland(Player player, String challenge) {
+        String reqItems = getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems");
+        if (reqItems == null) {
+            return false;
+        }
+        List<ItemStack> items = new ArrayList<>();
+        for (String reqItem : reqItems.split(" ")) {
+            Matcher m = ITEM_AMOUNT_PATTERN.matcher(reqItem);
+            if (m.matches()) {
+                int id = Integer.parseInt(m.group("id"));
+                int data = m.group("data") != null ? Integer.parseInt(m.group("data")) : 0;
+                int amount = Integer.parseInt(m.group("amount"));
+                items.add(new ItemStack(id, amount, (short) data));
+            } else {
+                LOG.warning("Invalid item found for challenge " + challenge + ", " + reqItem);
+            }
+        }
+        int radius = getConfig().getInt("options.challenges.challengeList." + challenge + ".radius", 10);
+        if (islandContains(player, items, radius)) {
+            giveReward(player, challenge);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean tryCompleteOnPlayer(Player player, String challenge) {
+        String reqItems = getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems");
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        boolean takeItems = this.getConfig().getBoolean("options.challenges.challengeList." + challenge + ".takeItems");
+        int timesCompleted = playerInfo.checkChallengeSinceTimer(challenge);
+        if (reqItems != null) {
+            List<ItemStack> items = new ArrayList<>();
+            Pattern reqPattern = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?");
+            for (String item : reqItems.split(" ")) {
+                Matcher m = reqPattern.matcher(item);
+                if (m.matches()) {
+                    int reqItem = Integer.parseInt(m.group("type"));
+                    int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype")) : 0;
+                    int amount = Integer.parseInt(m.group("amount"));
+                    char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
+                    int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc")) : 0;
+                    amount = calcAmount(amount, op, inc, timesCompleted);
+                    ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
+                    items.add(mat);
+                    if (!player.getInventory().containsAtLeast(mat, amount)) {
+                        return false;
                     }
                 }
             }
-            for (int k = 0; k < neededItem.length; ++k) {
-                if (neededItem[k][1] > 0) {
-                    return false;
-                }
+            if (takeItems) {
+                player.getInventory().removeItem(items.toArray(new ItemStack[items.size()]));
             }
-            return true;
+            giveReward(player, challenge);
         }
         return true;
     }
@@ -1909,7 +1869,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean createIsland(final CommandSender sender, final PlayerInfo pi) {
-        System.out.println("Creating player island...");
+        uSkyBlock.LOG.info("Creating player island...");
         final Player player = (Player) sender;
         final Location last = getInstance().getLastIsland();
         last.setY((double) Settings.island_height);
@@ -1928,7 +1888,7 @@ public class uSkyBlock extends JavaPlugin {
             ex.printStackTrace();
             return false;
         }
-        System.out.println("Finished creating player island.");
+        uSkyBlock.LOG.info("Finished creating player island.");
         return true;
     }
 
