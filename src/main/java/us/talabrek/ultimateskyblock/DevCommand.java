@@ -1,4 +1,4 @@
-package src.main.java.us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock;
 
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
