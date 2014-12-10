@@ -23,9 +23,6 @@ public class DevCommand implements CommandExecutor {
                 if (VaultHandler.checkPerk(player.getName(), "usb.admin.reload", player.getWorld()) || player.isOp()) {
                     player.sendMessage(ChatColor.YELLOW + "/dev reload:" + ChatColor.WHITE + " reload configuration from file.");
                 }
-                if (VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || player.isOp()) {
-                    player.sendMessage(ChatColor.YELLOW + "/dev protectall:" + ChatColor.WHITE + " add island protection to unprotected islands.");
-                }
                 if (VaultHandler.checkPerk(player.getName(), "usb.mod.topten", player.getWorld()) || player.isOp()) {
                     player.sendMessage(ChatColor.YELLOW + "/dev topten:" + ChatColor.WHITE + " manually update the top 10 list");
                 }
@@ -72,13 +69,6 @@ public class DevCommand implements CommandExecutor {
             if (split[0].equals("clearorphan") && (VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "Clearing all old (empty) island locations.");
                 uSkyBlock.getInstance().clearOrphanedIsland();
-            } else if (split[0].equals("protectall") && (VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || player.isOp())) {
-                player.sendMessage(ChatColor.YELLOW + "This command is only available using WorldGuard.");
-                if (Settings.island_protectWithWorldGuard) {
-                    player.sendMessage(ChatColor.YELLOW + "This command has been disabled.");
-                } else {
-                    player.sendMessage(ChatColor.RED + "You must enable WorldGuard protection in the config.yml to use this!");
-                }
             } else if (split[0].equals("buildislandlist") && (VaultHandler.checkPerk(player.getName(), "usb.mod.protectall", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "Building island list..");
                 uSkyBlock.getInstance().buildIslandList();
@@ -87,9 +77,7 @@ public class DevCommand implements CommandExecutor {
                 player.sendMessage(new StringBuilder().append(ChatColor.YELLOW).append(uSkyBlock.getInstance().orphanCount()).append(" old island locations will be used before new ones.").toString());
             } else if (split[0].equals("reload") && (VaultHandler.checkPerk(player.getName(), "usb.admin.reload", player.getWorld()) || player.isOp())) {
                 uSkyBlock.getInstance().reloadConfig();
-                Settings.loadPluginConfig(uSkyBlock.getInstance().getConfig());
-                uSkyBlock.getInstance().reloadLevelConfig();
-                uSkyBlock.getInstance().loadLevelConfig();
+
                 player.sendMessage(ChatColor.YELLOW + "Configuration reloaded from file.");
             } else if (split[0].equals("saveorphan") && (VaultHandler.checkPerk(player.getName(), "usb.mod.orphan", player.getWorld()) || player.isOp())) {
                 player.sendMessage(ChatColor.YELLOW + "Saving the orphan list.");

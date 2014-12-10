@@ -8,10 +8,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ import java.util.regex.Pattern;
 public class SkyBlockMenu {
     private static final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
     private uSkyBlock skyBlock;
+    private final ChallengeLogic challengeLogic;
     ItemStack pHead;
     ItemStack sign;
     ItemStack biome;
@@ -36,8 +39,9 @@ public class SkyBlockMenu {
     ItemStack invite;
     ItemStack kick;
 
-    public SkyBlockMenu(uSkyBlock skyBlock) {
+    public SkyBlockMenu(uSkyBlock skyBlock, ChallengeLogic challengeLogic) {
         this.skyBlock = skyBlock;
+        this.challengeLogic = challengeLogic;
         pHead = new ItemStack(397, 1, (short) 3);
         sign = new ItemStack(323, 1);
         biome = new ItemStack(6, 1, (short) 3);
@@ -592,7 +596,7 @@ public class SkyBlockMenu {
                 item.setItemMeta(meta);
                 menu.setItem(index, item);
             } catch (Exception e) {
-                uSkyBlock.LOG.info("\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
+                uSkyBlock.log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
             }
         }
     }
@@ -630,13 +634,13 @@ public class SkyBlockMenu {
                                 player.performCommand(cmd);
                             }
                         } else {
-                            uSkyBlock.LOG.info("\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
+                            uSkyBlock.log(Level.INFO, "\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
                         }
                     }
                     return true;
                 }
             } catch (Exception e) {
-                uSkyBlock.LOG.info("\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
+                uSkyBlock.log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
             }
         }
         return false;
@@ -646,10 +650,10 @@ public class SkyBlockMenu {
         Inventory menu = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu");
         final PlayerInfo pi = skyBlock.getActivePlayers().get(player.getName());
         // TODO: 06/12/2014 - R4zorax: Support more challenge-ranks (i.e. pagination on "header item".
-        populateChallengeRank(menu, player, 0, Material.DIRT, 0, pi);
-        populateChallengeRank(menu, player, 1, Material.IRON_BLOCK, 9, pi);
-        populateChallengeRank(menu, player, 2, Material.GOLD_BLOCK, 18, pi);
-        populateChallengeRank(menu, player, 3, Material.DIAMOND_BLOCK, 27, pi);
+        challengeLogic.populateChallengeRank(menu, player, 0, Material.DIRT, 0, pi);
+        challengeLogic.populateChallengeRank(menu, player, 1, Material.IRON_BLOCK, 9, pi);
+        challengeLogic.populateChallengeRank(menu, player, 2, Material.GOLD_BLOCK, 18, pi);
+        challengeLogic.populateChallengeRank(menu, player, 3, Material.DIAMOND_BLOCK, 27, pi);
         return menu;
     }
 
@@ -711,7 +715,7 @@ public class SkyBlockMenu {
 
     private void addMainMenu(Inventory menu, Player player) {
         List<String> lores = new ArrayList<>();
-        ItemStack menuItem = new ItemStack(Material.DARK_OAK_DOOR_ITEM, 1);
+        ItemStack menuItem = new ItemStack(Material.WOOD_DOOR, 1);
         ItemMeta meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lReturn Home");
         lores.add("\u00a7fReturn to your island's home");
@@ -904,131 +908,10 @@ public class SkyBlockMenu {
         return skyBlock.getIslandConfig(player).getInt("party.maxSize");
     }
 
-    public void populateChallengeRank(Inventory menu, final Player player, final int rankIndex, final Material mat, int location, final PlayerInfo pi) {
-        List<String> lores = new ArrayList<>();
-        int rankComplete = 0;
-        ItemStack currentChallengeItem = new ItemStack(mat, 1);
-        ItemMeta meta4 = currentChallengeItem.getItemMeta();
-        String currentRank = Settings.challenges_ranks[rankIndex];
-        meta4.setDisplayName("\u00a7e\u00a7lRank: " + currentRank);
-        lores.add("\u00a7fComplete most challenges in");
-        lores.add("\u00a7fthis rank to unlock the next rank.");
-        meta4.setLore(lores);
-        currentChallengeItem.setItemMeta(meta4);
-        menu.setItem(location, currentChallengeItem);
-        lores.clear();
-        final String[] challengeList = skyBlock.getChallengesFromRank(player, currentRank).split(" - ");
-        for (int i = 0; i < challengeList.length; ++i) {
-            String challenge = skyBlock.correctFormatting(challengeList[i]);
-            String challengeName = skyBlock.stripFormatting(challenge).toLowerCase();
-            try {
-                if (rankIndex > 0) {
-                    rankComplete = skyBlock.checkRankCompletion(player, Settings.challenges_ranks[rankIndex - 1]);
-                    if (rankComplete > 0) {
-                        currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
-                        meta4 = currentChallengeItem.getItemMeta();
-                        meta4.setDisplayName("\u00a74\u00a7lLocked Challenge");
-                        lores.add("\u00a77Complete " + rankComplete + " more " + Settings.challenges_ranks[rankIndex - 1] + " challenges");
-                        lores.add("\u00a77to unlock this rank.");
-                        meta4.setLore(lores);
-                        currentChallengeItem.setItemMeta(meta4);
-                        menu.setItem(++location, currentChallengeItem);
-                        lores.clear();
-                        continue;
-                    }
-                }
-                FileConfiguration config = skyBlock.getConfig();
-                currentChallengeItem = createChallengeItemStack(challenge, challengeName, config);
-                meta4 = currentChallengeItem.getItemMeta();
-                meta4.setDisplayName(challenge);
-                addRequiredItems(player, lores, challengeName, config);
-                if (pi.checkChallenge(challengeName) > 0 && config.getBoolean("options.challenges.challengeList." + challengeName + ".repeatable")) {
-                    if (pi.onChallengeCooldown(challengeName)) {
-                        if (pi.getChallengeCooldownTime(challengeName) / 86400000L >= 1L) {
-                            final int days = (int) pi.getChallengeCooldownTime(challengeName) / 86400000;
-                            lores.add("\u00a74Requirements will reset in " + days + " days.");
-                        } else {
-                            final int hours = (int) pi.getChallengeCooldownTime(challengeName) / 3600000;
-                            lores.add("\u00a74Requirements will reset in " + hours + " hours.");
-                        }
-                    }
-                    lores.add("\u00a76Item Reward: \u00a7a" + config.getString("options.challenges.challengeList." + challengeName + ".repeatRewardText"));
-                    lores.add("\u00a76Currency Reward: \u00a7a" + config.getInt("options.challenges.challengeList." + challengeName + ".repeatCurrencyReward"));
-                    lores.add("\u00a76Exp Reward: \u00a7a" + config.getInt("options.challenges.challengeList." + challengeName + ".repeatXpReward"));
-                    lores.add("\u00a7dTotal times completed: \u00a7f" + pi.getChallenge(challengeName).getTimesCompleted());
-                    lores.add("\u00a7e\u00a7lClick to complete this challenge.");
-                } else {
-                    lores.add("\u00a76Item Reward: \u00a7a" + config.getString("options.challenges.challengeList." + challengeName + ".rewardText"));
-                    lores.add("\u00a76Currency Reward: \u00a7a" + config.getInt("options.challenges.challengeList." + challengeName + ".currencyReward"));
-                    lores.add("\u00a76Exp Reward: \u00a7a" + config.getInt("options.challenges.challengeList." + challengeName + ".xpReward"));
-                    if (config.getBoolean("options.challenges.challengeList." + challengeName + ".repeatable")) {
-                        lores.add("\u00a7e\u00a7lClick to complete this challenge.");
-                    } else {
-                        lores.add("\u00a74\u00a7lYou can't repeat this challenge.");
-                    }
-                }
-                meta4.setLore(lores);
-                currentChallengeItem.setItemMeta(meta4);
-                menu.setItem(++location, currentChallengeItem);
-                lores.clear();
-            } catch (NullPointerException e) {
-                skyBlock.getLogger().log(Level.SEVERE, "Misconfigured challenge " + challenge, e);
-            }
-        }
-    }
 
-    private ItemStack createChallengeItemStack(String challenge, String challengeName, FileConfiguration config) {
-        ItemStack currentChallengeItem;
-        int itemType = config.getInt("options.challenges.challengeList." + challengeName + ".displayItem", -1);
-        boolean hasIcon = itemType != -1;
-        int stained = Material.STAINED_GLASS_PANE.getId();
-        if (isRepeatableChallenge(challenge)) {
-            currentChallengeItem = new ItemStack(hasIcon ? itemType : stained, 1, hasIcon ? 0 : (short) 5);
-        } else if (isCompletedChallenge(challenge)) {
-            currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 13);
-        } else {
-            currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 4);
-        }
-        return currentChallengeItem;
-    }
-
-    private void addRequiredItems(Player player, List<String> lores, String challengeName, FileConfiguration config) {
-        lores.add("\u00a77" + config.getString("options.challenges.challengeList." + challengeName + ".description"));
-        lores.add("\u00a7eThis challenge requires the following:");
-        String reqItems = config.getString("options.challenges.challengeList." + challengeName + ".requiredItems");
-        int timesCompleted = skyBlock.getPlayerInfo(player).checkChallengeSinceTimer(challengeName);
-        if (reqItems != null) {
-            Pattern reqPattern = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?");
-            for (String item : reqItems.split(" ")) {
-                Matcher m = reqPattern.matcher(item);
-                if (m.matches()) {
-                    int reqItem = Integer.parseInt(m.group("type"));
-                    int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype")) : 0;
-                    int amount = Integer.parseInt(m.group("amount"));
-                    char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
-                    int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc")) : 0;
-                    amount = skyBlock.calcAmount(amount, op, inc, timesCompleted);
-                    Material mat = Material.getMaterial(reqItem); // Deprecated my ass
-                    lores.add("\u00a7f" + amount + " " + mat.name());
-                }
-            }
-        }
-    }
-
-    private boolean isCompletedChallenge(String challengeName) {
-        return challengeName.charAt(1) == '2';
-    }
-
-    private boolean isRepeatableChallenge(String challengeName) {
-        return challengeName.charAt(1) == 'a';
-    }
-
-    private boolean isNormalChallenge(String challengeName) {
-        return challengeName.charAt(1) == 'e';
-    }
 
     public void onClick(InventoryClickEvent event) {
-        if (event == null || event.getCurrentItem() == null || event.getWhoClicked() == null) {
+        if (event == null || event.getCurrentItem() == null || event.getWhoClicked() == null || event.getSlotType() != InventoryType.SlotType.CONTAINER) {
             return; // Bail out, nothing we can do anyway
         }
         Player p = (Player) event.getWhoClicked();
@@ -1184,7 +1067,7 @@ public class SkyBlockMenu {
             } else if (event.getCurrentItem().getType() == Material.BOOK_AND_QUILL) {
                 p.closeInventory();
                 p.performCommand("island log");
-            } else if (event.getCurrentItem().getType() == Material.DARK_OAK_DOOR_ITEM) {
+            } else if (event.getCurrentItem().getType() == Material.WOOD_DOOR) {
                 p.closeInventory();
                 p.performCommand("island home");
             } else if (event.getCurrentItem().getType() == Material.GRASS) {

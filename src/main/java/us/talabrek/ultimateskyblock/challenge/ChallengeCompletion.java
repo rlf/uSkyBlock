@@ -1,19 +1,19 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.challenge;
 
-public class Challenge {
+public class ChallengeCompletion {
     private String name;
     private long firstCompleted;
     private int timesCompleted;
     private int timesCompletedSinceTimer;
 
-    public Challenge(final String name) {
+    public ChallengeCompletion(final String name) {
         super();
         this.name = name;
         this.firstCompleted = 0L;
         this.timesCompleted = 0;
     }
 
-    public Challenge(final String name, final long firstCompleted, final int timesCompleted, final int timesCompletedSinceTimer) {
+    public ChallengeCompletion(final String name, final long firstCompleted, final int timesCompleted, final int timesCompletedSinceTimer) {
         super();
         this.name = name;
         this.firstCompleted = firstCompleted;
@@ -27,6 +27,15 @@ public class Challenge {
 
     public long getFirstCompleted() {
         return this.firstCompleted;
+    }
+
+    public boolean isOnCooldown() {
+        return firstCompleted > System.currentTimeMillis();
+    }
+
+    public long getCooldownInMillis() {
+        long now = System.currentTimeMillis();
+        return firstCompleted > now ? firstCompleted - now : 0;
     }
 
     public int getTimesCompleted() {

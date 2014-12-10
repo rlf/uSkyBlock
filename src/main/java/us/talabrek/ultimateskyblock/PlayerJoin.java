@@ -13,6 +13,7 @@ import org.bukkit.event.entity.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
+import java.util.logging.Level;
 
 import org.bukkit.event.inventory.*;
 
@@ -43,13 +44,11 @@ public class PlayerJoin implements Listener {
             }
             f.delete();
         }
-        if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-            WorldGuardHandler.protectIsland(event.getPlayer(), event.getPlayer().getName(), pi);
-        }
+        WorldGuardHandler.protectIsland(event.getPlayer(), event.getPlayer().getName(), pi);
         uSkyBlock.getInstance().addActivePlayer(event.getPlayer().getName(), pi);
         if (pi.getHasIsland() && !uSkyBlock.getInstance().getTempIslandConfig(pi.locationForParty()).contains("general.level")) {
             uSkyBlock.getInstance().createIslandConfig(pi.locationForParty(), event.getPlayer().getName());
-            uSkyBlock.LOG.info("Creating new Config File");
+            uSkyBlock.log(Level.INFO, "Creating new Config File");
         }
         uSkyBlock.getInstance().getIslandConfig(pi.locationForParty());
         System.out.print("Loaded player file for " + event.getPlayer().getName());

@@ -4,8 +4,8 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
+import java.util.logging.Level;
 
-import org.bukkit.plugin.*;
 import org.bukkit.*;
 
 public class IslandCommand implements CommandExecutor {
@@ -307,9 +307,7 @@ public class IslandCommand implements CommandExecutor {
                             uSkyBlock.getInstance().homeTeleport(player);
                             player.getInventory().clear();
                             player.getEquipment().clear();
-                            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(String.valueOf(uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(this.inviteList.get(player.getName())).locationForParty()).getString("party.leader")) + "Island")) {
-                                WorldGuardHandler.addPlayerToOldRegion(uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(this.inviteList.get(player.getName())).locationForParty()).getString("party.leader"), player.getName());
-                            }
+                            WorldGuardHandler.addPlayerToOldRegion(uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(this.inviteList.get(player.getName())).locationForParty()).getString("party.leader"), player.getName());
                             this.inviteList.remove(player.getName());
                             return true;
                         }
@@ -387,9 +385,7 @@ public class IslandCommand implements CommandExecutor {
                                 } else {
                                     player.teleport(uSkyBlock.getSkyBlockWorld().getSpawnLocation());
                                 }
-                                if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                                    WorldGuardHandler.removePlayerFromRegion(uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader"), player.getName());
-                                }
+                                WorldGuardHandler.removePlayerFromRegion(uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader"), player.getName());
                                 this.removePlayerFromParty(player.getName(), uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader"), pi.locationForParty());
                                 player.sendMessage(ChatColor.YELLOW + "You have left the island and returned to the player spawn.");
                                 if (Bukkit.getPlayer(uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader")) != null) {
@@ -612,10 +608,8 @@ public class IslandCommand implements CommandExecutor {
                                     Bukkit.getPlayer(uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader")).sendMessage(ChatColor.RED + this.tempTargetPlayer + " has been removed from the island.");
                                 }
                                 this.removePlayerFromParty(this.tempTargetPlayer, uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getString("party.leader"), pi.locationForParty());
-                                if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                                    uSkyBlock.LOG.info("Removing from " + uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader") + "'s Island");
-                                    WorldGuardHandler.removePlayerFromRegion(uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader"), this.tempTargetPlayer);
-                                }
+                                uSkyBlock.log(Level.INFO, "Removing from " + uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader") + "'s Island");
+                                WorldGuardHandler.removePlayerFromRegion(uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getString("party.leader"), this.tempTargetPlayer);
                             } else {
                                 System.out.print("Player " + player.getName() + " failed to remove " + this.tempTargetPlayer);
                                 player.sendMessage(ChatColor.RED + "That player is not part of your island group!");
@@ -716,65 +710,26 @@ public class IslandCommand implements CommandExecutor {
             this.allowInfo = true;
             return false;
         }
+        final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? uSkyBlock.getInstance().getPlayerInfo(player) : new PlayerInfo(islandPlayer);
         uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
-                try {
-                    final int[] values = new int[256];
-                    final String playerName = player.getName();
-                    final Location l = uSkyBlock.getInstance().getActivePlayers().get(playerName).getIslandLocation();
-                    int blockcount = 0;
-                    if (playerName.equalsIgnoreCase(islandPlayer)) {
-                        final int px = l.getBlockX();
-                        final int py = l.getBlockY();
-                        final int pz = l.getBlockZ();
-                        final World w = l.getWorld();
-                        for (int x = Settings.island_protectionRange / 2 * -1; x <= Settings.island_protectionRange / 2; ++x) {
-                            for (int y = 0; y <= 255; ++y) {
-                                for (int z = Settings.island_protectionRange / 2 * -1; z <= Settings.island_protectionRange / 2; ++z) {
-                                    final int[] array = values;
-                                    final int typeId = w.getBlockAt(px + x, py + y, pz + z).getTypeId();
-                                    ++array[typeId];
-                                }
-                            }
-                        }
-                        for (int i = 1; i <= 255; ++i) {
-                            if (values[i] > Settings.limitList[i] && Settings.limitList[i] >= 0) {
-                                values[i] = Settings.limitList[i];
-                            }
-                            if (Settings.diminishingReturnsList[i] > 0) {
-                                values[i] = (int) Math.round(uSkyBlock.getInstance().dReturns(values[i], Settings.diminishingReturnsList[i]));
-                            }
-                            values[i] *= Settings.blockList[i];
-                            blockcount += values[i];
-                        }
+                if (player.getName().equals(playerInfo.getPlayerName())) {
+                    try {
+                        uSkyBlock.getInstance().getLevelLogic().calculateScore(playerInfo);
+                    } catch (Exception e) {
+                        uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
+                    } finally {
+                        IslandCommand.this.allowInfo = true;
                     }
-                    if (playerName.equalsIgnoreCase(islandPlayer)) {
-                        uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(playerName).locationForParty()).set("general.level", blockcount / uSkyBlock.getInstance().getLevelConfig().getInt("general.pointsPerLevel"));
-                        uSkyBlock.getInstance().getActivePlayers().get(playerName).savePlayerConfig(playerName);
-                    }
-                } catch (Exception e) {
-                    System.out.print("Error while calculating Island Level: " + e);
-                    IslandCommand.this.allowInfo = true;
                 }
                 uSkyBlock.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(uSkyBlock.getInstance(), new Runnable() {
                     @Override
                     public void run() {
                         IslandCommand.this.allowInfo = true;
-                        if (Bukkit.getPlayer(player.getUniqueId()) != null) {
-                            Bukkit.getPlayer(player.getUniqueId()).sendMessage(ChatColor.YELLOW + "Information about " + islandPlayer + "'s Island:");
-                            if (player.getName().equalsIgnoreCase(islandPlayer)) {
-                                // TODO: UUID support
-                                Bukkit.getPlayer(player.getUniqueId()).sendMessage(ChatColor.GREEN + "Island level is " + uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty()).getInt("general.level"));
-                                uSkyBlock.getInstance().saveIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(player.getName()).locationForParty());
-                            } else {
-                                final PlayerInfo pi = new PlayerInfo(islandPlayer);
-                                if (!pi.getHasIsland()) {
-                                    Bukkit.getPlayer(player.getUniqueId()).sendMessage(ChatColor.GREEN + "Island level is " + ChatColor.WHITE + uSkyBlock.getInstance().getIslandConfig(pi.locationForParty()).getInt("general.level"));
-                                } else {
-                                    Bukkit.getPlayer(player.getUniqueId()).sendMessage(ChatColor.RED + "Error: Invalid Player");
-                                }
-                            }
+                        if (player.isOnline()) {
+                            player.sendMessage(ChatColor.YELLOW + "Information about " + islandPlayer + "'s Island:");
+                            player.sendMessage(ChatColor.GREEN + "Island level is " + uSkyBlock.getInstance().getIslandConfig(playerInfo).getInt("general.level"));
                         }
                     }
                 }, 0L);

@@ -2,10 +2,12 @@ package us.talabrek.ultimateskyblock;
 
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldguard.protection.managers.RegionManager;
 import org.bukkit.*;
 import org.bukkit.block.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
@@ -14,37 +16,38 @@ import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
+import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
+import us.talabrek.ultimateskyblock.challenge.LevelLogic;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class uSkyBlock extends JavaPlugin {
-    public static final Logger LOG = Logger.getLogger(uSkyBlock.class.getName());
-    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<data>[0-9]+))?:(?<amount>[0-9]+)");
-    public PluginDescriptionFile pluginFile;
-    public Logger log;
+    private final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
+
+    private SkyBlockMenu menu;
+    private ChallengeLogic challengeLogic;
+    private LevelLogic levelLogic;
+
+    private static String pName = "";
     Date date;
-    public DecimalFormat df;
-    private FileConfiguration levelConfig;
     private FileConfiguration lastIslandConfig;
     private FileConfiguration orphans;
     private HashMap<String, FileConfiguration> islands;
-    private File levelConfigFile;
     private File orphanFile;
     private File lastIslandConfigFile;
     public static World skyBlockWorld;
     private static uSkyBlock instance;
     public List<String> removeList;
-    List<String> rankDisplay;
     private Location lastIsland;
     private Stack<Location> orphaned;
     private Stack<Location> tempOrphaned;
@@ -52,7 +55,6 @@ public class uSkyBlock extends JavaPlugin {
     public File directoryPlayers;
     public File directoryIslands;
     public File[] schemFile;
-    public String pName;
     public Location islandTestLocation;
     LinkedHashMap<String, Double> topTen;
     HashMap<String, Long> infoCooldown;
@@ -64,7 +66,6 @@ public class uSkyBlock extends JavaPlugin {
     public boolean purgeActive;
     private FileConfiguration skyblockData;
     private File skyblockDataFile;
-    private SkyBlockMenu menu;
 
     static {
         uSkyBlock.skyBlockWorld = null;
@@ -72,9 +73,8 @@ public class uSkyBlock extends JavaPlugin {
 
     public uSkyBlock() {
         super();
-        this.df = new DecimalFormat(".#");
         // TODO: 08/12/2014 - R4zorax: Most of these should be converted to local variables
-        this.levelConfig = null;
+        configFiles.clear();
         this.lastIslandConfig = null;
         this.orphans = null;
         this.islands = new HashMap<>();
@@ -103,39 +103,75 @@ public class uSkyBlock extends JavaPlugin {
                 this.setLastIsland(this.lastIsland);
             }
         } catch (Exception e) {
-            uSkyBlock.LOG.info("Something went wrong saving the island and/or party data!");
-            e.printStackTrace();
+            log(Level.INFO, "Something went wrong saving the island and/or party data!", e);
         }
-        this.log.info(String.valueOf(this.pluginFile.getName()) + " v" + this.pluginFile.getVersion() + " disabled.");
+    }
+
+    /**
+     * System-encoding agnostic config-reader
+     */
+    public FileConfiguration getFileConfiguration(String configName) {
+        // Caching, for your convenience! (and a bigger memory print!)
+        if (!configFiles.containsKey(configName)) {
+            FileConfiguration config = new YamlConfiguration();
+            try {
+                // read from datafolder!
+                File configFile = new File(getDataFolder(), configName);
+                // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
+                if (!configFile.exists()) {
+                    // copy from jar
+                    try (InputStream in = getClassLoader().getResourceAsStream(configName)) {
+                        Files.copy(in, Paths.get(configFile.toURI()), StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException e) {
+                        log(Level.WARNING, "Unable to create config file " + configFile, e);
+                    }
+                }
+                if (configFile.exists()) {
+                    // FORCE utf8 - don't rely on super.getConfig() or FileConfiguration.load()
+                    try (Reader rdr = new InputStreamReader(new FileInputStream(configFile), "UTF-8")) {
+                        config.load(rdr);
+                    } catch (InvalidConfigurationException | IOException e) {
+                        log(Level.SEVERE, "Unable to read config file " + configFile, e);
+                    }
+                }
+            } catch (Exception e) {
+                log(Level.SEVERE, "Unable to handle config-file " + configName, e);
+            }
+            configFiles.put(configName, config);
+        }
+        return configFiles.get(configName);
+    }
+
+    @Override
+    public FileConfiguration getConfig() {
+        return getFileConfiguration("config.yml");
     }
 
     public void onEnable() {
-        (uSkyBlock.instance = this).saveDefaultConfig();
-        this.menu = new SkyBlockMenu(this);
-        this.saveDefaultLevelConfig();
-        this.saveDefaultOrphans();
-        this.pluginFile = this.getDescription();
-        this.log = this.getLogger();
-        this.pName = ChatColor.WHITE + "[" + ChatColor.GREEN + this.pluginFile.getName() + ChatColor.WHITE + "] ";
-        VaultHandler.setupEconomy();
-        if (!this.getDataFolder().exists()) {
-            this.getDataFolder().mkdir();
+        instance = this;
+        configFiles.clear();
+        this.pName = ChatColor.WHITE + "[" + ChatColor.GREEN + getDescription().getName() + ChatColor.WHITE + "] ";
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
         }
+        VaultHandler.setupEconomy();
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
         }
-        this.loadLevelConfig();
-        this.registerEvents();
+
+        this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
+        this.menu = new SkyBlockMenu(this, challengeLogic);
+        this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
+        levelLogic.load();
         this.directoryPlayers = new File(this.getDataFolder() + File.separator + "players");
-        this.directoryIslands = new File(this.getDataFolder() + File.separator + "islands");
         if (!this.directoryPlayers.exists()) {
-            this.directoryPlayers.mkdir();
-            this.loadPlayerFiles();
-        } else {
-            this.loadPlayerFiles();
+            this.directoryPlayers.mkdirs();
         }
+        this.loadPlayerFiles();
+
+        this.directoryIslands = new File(this.getDataFolder() + File.separator + "islands");
         if (!this.directoryIslands.exists()) {
-            this.directoryIslands.mkdir();
+            this.directoryIslands.mkdirs();
         }
         File directorySchematics = new File(this.getDataFolder() + File.separator + "schematics");
         if (!directorySchematics.exists()) {
@@ -147,19 +183,19 @@ public class uSkyBlock extends JavaPlugin {
         } else {
             System.out.print("[uSkyBlock] " + this.schemFile.length + " schematics loaded.");
         }
+        this.registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
         this.getCommand("dev").setExecutor(new DevCommand());
         if (Settings.island_useTopTen) {
             getInstance().updateTopTen(getInstance().generateTopTen());
         }
-        this.populateChallengeList();
-        this.log.info(String.valueOf(this.pluginFile.getName()) + " v." + this.pluginFile.getVersion() + " enabled.");
+
         getInstance().getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
                 if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vault")) {
-                    System.out.print("[uSkyBlock] Using vault for permissions");
+                    log(Level.INFO, "Using vault for permissions");
                     VaultHandler.setupPermissions();
                     try {
                         if (!uSkyBlock.this.getLastIslandConfig().contains("options.general.lastIslandX") && uSkyBlock.this.getConfig().contains("options.general.lastIslandX")) {
@@ -177,11 +213,6 @@ public class uSkyBlock extends JavaPlugin {
                     }
                     if (uSkyBlock.this.lastIsland == null) {
                         setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
-                    }
-                    if (Settings.island_protectWithWorldGuard && !Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                        final PluginManager manager = uSkyBlock.getInstance().getServer().getPluginManager();
-                        System.out.print("[uSkyBlock] WorldGuard not loaded! Using built in protection.");
-                        manager.registerEvents(new ProtectionEvents(), uSkyBlock.getInstance());
                     }
                     uSkyBlock.getInstance().setupOrphans();
                 }
@@ -208,22 +239,18 @@ public class uSkyBlock extends JavaPlugin {
                             getInstance().createIslandConfig(pi.locationForParty(), player.getName());
                         }
                         getInstance().clearIslandConfig(pi.locationForParty(), player.getName());
-                        if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                            WorldGuardHandler.protectIsland(player, player.getName(), pi);
-                        }
+                        WorldGuardHandler.protectIsland(player, player.getName(), pi);
                     }
                     f.delete();
                 }
                 getInstance().addActivePlayer(player.getName(), pi);
                 if (pi.getHasIsland() && getInstance().getTempIslandConfig(pi.locationForParty()) == null) {
                     getInstance().createIslandConfig(pi.locationForParty(), player.getName());
-                    uSkyBlock.LOG.info("Creating new Config File");
+                    log(Level.INFO, "Creating new Config File");
                 }
                 getIslandConfig(pi.locationForParty());
             }
         }
-        System.out.print("Island Configs Loaded:");
-        getInstance().displayIslandConfigs();
     }
 
     // TODO: UUID support
@@ -238,12 +265,6 @@ public class uSkyBlock extends JavaPlugin {
     public void registerEvents() {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerJoin(), this);
-        if (!Settings.island_protectWithWorldGuard) {
-            System.out.print("[uSkyBlock] Using built in protection.");
-            manager.registerEvents(new ProtectionEvents(), this);
-        } else {
-            System.out.print("[uSkyBlock] Using WorldGuard protection.");
-        }
     }
 
     public PlayerInfo readPlayerFile(final String playerName) {
@@ -291,98 +312,32 @@ public class uSkyBlock extends JavaPlugin {
         this.topTen = map;
     }
 
-    public Location getLocationString(final String s) {
-        if (s == null || s.trim() == "") {
-            return null;
-        }
-        final String[] parts = s.split(":");
-        if (parts.length == 4) {
-            final World w = this.getServer().getWorld(parts[0]);
-            final int x = Integer.parseInt(parts[1]);
-            final int y = Integer.parseInt(parts[2]);
-            final int z = Integer.parseInt(parts[3]);
-            return new Location(w, (double) x, (double) y, (double) z);
-        }
-        return null;
-    }
-
-    public String getStringLocation(final Location l) {
-        if (l == null) {
-            return "";
-        }
-        return String.valueOf(l.getWorld().getName()) + ":" + l.getBlockX() + ":" + l.getBlockY() + ":" + l.getBlockZ();
-    }
-
-    public void setStringbyPath(final FileConfiguration fc, final File f, final String path, final Object value) {
-        fc.set(path, value.toString());
-        try {
-            fc.save(f);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getStringbyPath(final FileConfiguration fc, final File file, final String path, final Object stdValue, final boolean addMissing) {
-        if (!fc.contains(path)) {
-            if (addMissing) {
-                this.setStringbyPath(fc, file, path, stdValue);
-            }
-            return stdValue.toString();
-        }
-        return fc.getString(path);
-    }
-
-    public static World getSkyBlockWorld() {
+    public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
-            uSkyBlock.skyBlockWorld = WorldCreator.name(Settings.general_worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generator(new SkyBlockChunkGenerator()).createWorld();
-            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
+            skyBlockWorld = getServer().getWorld(getConfig().getString("options.general.worldName", "skyworld"));
+            if (skyBlockWorld == null) {
+                uSkyBlock.skyBlockWorld = WorldCreator
+                        .name(Settings.general_worldName)
+                        .type(WorldType.FLAT)
+                        .environment(World.Environment.NORMAL)
+                        .generator(new SkyBlockChunkGenerator())
+                        .createWorld();
+                if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal uSkyBlock");
+                }
             }
         }
         return uSkyBlock.skyBlockWorld;
+    }
+
+    public static World getSkyBlockWorld() {
+        return getInstance().getWorld();
     }
 
     public void clearOrphanedIsland() {
         while (this.hasOrphanedIsland()) {
             this.orphaned.pop();
         }
-    }
-
-    public void clearArmorContents(final Player player) {
-        player.getInventory().setArmorContents(new ItemStack[player.getInventory().getArmorContents().length]);
-    }
-
-    public void getAllFiles(final String path) {
-        final File dirpath = new File(path);
-        if (!dirpath.exists()) {
-            return;
-        }
-        File[] listFiles;
-        for (int length = (listFiles = dirpath.listFiles()).length, i = 0; i < length; ++i) {
-            final File f = listFiles[i];
-            try {
-                if (f.isDirectory()) {
-                    this.getAllFiles(f.getAbsolutePath());
-                }
-            } catch (Exception ex) {
-                this.log.warning(ex.getMessage());
-            }
-        }
-    }
-
-    public Location getYLocation(final Location l) {
-        for (int y = 0; y < 254; ++y) {
-            final int px = l.getBlockX();
-            final int py = y;
-            final int pz = l.getBlockZ();
-            final Block b1 = new Location(l.getWorld(), (double) px, (double) py, (double) pz).getBlock();
-            final Block b2 = new Location(l.getWorld(), (double) px, (double) (py + 1), (double) pz).getBlock();
-            final Block b3 = new Location(l.getWorld(), (double) px, (double) (py + 2), (double) pz).getBlock();
-            if (!b1.getType().equals(Material.AIR) && b2.getType().equals(Material.AIR) && b3.getType().equals(Material.AIR)) {
-                return b2.getLocation();
-            }
-        }
-        return l;
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
@@ -496,11 +451,10 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void deletePlayerIsland(final String player) {
+        RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
         if (!this.getActivePlayers().containsKey(player)) {
             final PlayerInfo pi = new PlayerInfo(player);
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
-            }
+            regionManager.removeRegion(player + "Island");
             this.orphaned.push(pi.getIslandLocation());
             this.removeIsland(pi.getIslandLocation());
             this.deleteIslandConfig(pi.locationForParty());
@@ -508,8 +462,8 @@ public class uSkyBlock extends JavaPlugin {
             this.saveOrphans();
             pi.savePlayerConfig(player);
         } else {
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
+            if (regionManager.hasRegion(player + "Island")) {
+                regionManager.removeRegion(player + "Island");
             }
             this.orphaned.push(this.getActivePlayers().get(player).getIslandLocation());
             this.removeIsland(this.getActivePlayers().get(player).getIslandLocation());
@@ -561,16 +515,16 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void devDeletePlayerIsland(final String player) {
+        RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
         if (!this.getActivePlayers().containsKey(player)) {
-            PlayerInfo pi = new PlayerInfo(player);
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
+            if (regionManager.hasRegion(player + "Island")) {
+                regionManager.removeRegion(player + "Island");
             }
-            pi = new PlayerInfo(player);
+            PlayerInfo pi = new PlayerInfo(player);
             pi.savePlayerConfig(player);
         } else {
-            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard") && WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).hasRegion(player + "Island")) {
-                WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(player + "Island");
+            if (regionManager.hasRegion(player + "Island")) {
+                regionManager.removeRegion(player + "Island");
             }
             final PlayerInfo pi = new PlayerInfo(player);
             this.removeActivePlayer(player);
@@ -595,10 +549,8 @@ public class uSkyBlock extends JavaPlugin {
                             pi.savePlayerConfig(player);
                             getInstance().createIslandConfig(pi.locationForParty(), player);
                             getInstance().clearIslandConfig(pi.locationForParty(), player);
-                            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                                if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
-                                    sender.sendMessage("Player doesn't have an island or it's already protected!");
-                                }
+                            if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
+                                sender.sendMessage("Player doesn't have an island or it's already protected!");
                             }
                             getIslandConfig(pi.locationForParty());
                             return true;
@@ -615,15 +567,13 @@ public class uSkyBlock extends JavaPlugin {
                     for (int z2 = -10; z2 <= 10; ++z2) {
                         final Block b2 = new Location(l.getWorld(), (double) (px2 + x2), (double) (py2 + y2), (double) (pz2 + z2)).getBlock();
                         if (b2.getTypeId() == 7) {
-                            this.getActivePlayers().get(player).setHomeLocation(new Location(l.getWorld(), (double) (px2 + x2), (double) (py2 + y2 + 3), (double) (pz2 + z2)));
-                            this.getActivePlayers().get(player).setHasIsland(true);
-                            this.getActivePlayers().get(player).setIslandLocation(b2.getLocation());
-                            final PlayerInfo pi2 = this.getActivePlayers().get(player);
-                            this.removeActivePlayer(player);
-                            this.addActivePlayer(player, pi2);
-                            if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-                                WorldGuardHandler.protectIsland(sender, player, pi2);
-                            }
+                            PlayerInfo playerInfo = this.getActivePlayers().get(player);
+                            playerInfo.setHomeLocation(new Location(l.getWorld(), (double) (px2 + x2), (double) (py2 + y2 + 3), (double) (pz2 + z2)));
+                            playerInfo.setHasIsland(true);
+                            playerInfo.setIslandLocation(b2.getLocation());
+                            removeActivePlayer(player);
+                            addActivePlayer(player, playerInfo);
+                            WorldGuardHandler.protectIsland(sender, player, playerInfo);
                             return true;
                         }
                     }
@@ -1153,335 +1103,27 @@ public class uSkyBlock extends JavaPlugin {
         return this.activePlayers;
     }
 
+    public PlayerInfo getPlayerInfo(String playerName) {
+        return activePlayers.get(playerName);
+    }
+
     public PlayerInfo getPlayerInfo(Player name) {
         // TODO: UUID aware
         return activePlayers.get(name.getName());
     }
 
     public void addActivePlayer(final String player, final PlayerInfo pi) {
-        this.activePlayers.put(player, pi);
+        activePlayers.put(player, pi);
     }
 
     public void removeActivePlayer(final String player) {
-        if (this.activePlayers.containsKey(player)) {
-            this.activePlayers.get(player).savePlayerConfig(player);
-            this.activePlayers.remove(player);
-            System.out.print("Removing player from memory: " + player);
+        if (activePlayers.containsKey(player)) {
+            activePlayers.get(player).savePlayerConfig(player);
+            activePlayers.remove(player);
+            log(Level.INFO, "Removing player from memory: " + player);
         }
     }
 
-    public void populateChallengeList() {
-        List<String> templist = new ArrayList<>();
-        for (int i = 0; i < Settings.challenges_ranks.length; ++i) {
-            this.challenges.put(Settings.challenges_ranks[i], templist);
-            templist = new ArrayList<>();
-        }
-        for (final String tempString : Settings.challenges_challengeList) {
-            if (this.challenges.containsKey(this.getConfig().getString("options.challenges.challengeList." + tempString + ".rankLevel"))) {
-                this.challenges.get(this.getConfig().getString("options.challenges.challengeList." + tempString + ".rankLevel")).add(tempString);
-            }
-        }
-    }
-
-    public String getChallengesFromRank(final Player player, final String rank) {
-        this.rankDisplay = this.challenges.get(rank);
-        String fullString = "";
-        final PlayerInfo pi = this.getActivePlayers().get(player.getName());
-        for (final String tempString : this.rankDisplay) {
-            if (pi.checkChallenge(tempString) > 0) {
-                if (this.getConfig().getBoolean("options.challenges.challengeList." + tempString + ".repeatable")) {
-                    fullString = fullString + Settings.challenges_repeatableColor + tempString + ChatColor.DARK_GRAY + " - ";
-                } else {
-                    fullString = fullString + Settings.challenges_finishedColor + tempString + ChatColor.DARK_GRAY + " - ";
-                }
-            } else {
-                fullString = fullString + Settings.challenges_challengeColor + tempString + ChatColor.DARK_GRAY + " - ";
-            }
-        }
-        if (fullString.length() > 4) {
-            fullString = fullString.substring(0, fullString.length() - 3);
-        }
-        return fullString;
-    }
-
-    public int checkRankCompletion(final Player player, final String rank) {
-        if (!Settings.challenges_requirePreviousRank) {
-            return 0;
-        }
-        this.rankDisplay = this.challenges.get(rank);
-        int ranksCompleted = 0;
-        final PlayerInfo pi = this.getActivePlayers().get(player.getName());
-        for (final String tempString : this.rankDisplay) {
-            if (pi.checkChallenge(tempString) > 0) {
-                ++ranksCompleted;
-            }
-        }
-        return this.rankDisplay.size() - Settings.challenges_rankLeeway - ranksCompleted;
-    }
-
-    public boolean isRankAvailable(final Player player, final String rank) {
-        if (this.challenges.size() < 2) {
-            return true;
-        }
-        for (int i = 0; i < Settings.challenges_ranks.length; ++i) {
-            if (Settings.challenges_ranks[i].equalsIgnoreCase(rank)) {
-                if (i == 0) {
-                    return true;
-                }
-                if (this.checkRankCompletion(player, Settings.challenges_ranks[i - 1]) <= 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean checkIfCanCompleteChallenge(final Player player, final String challenge) {
-        final PlayerInfo pi = this.getActivePlayers().get(player.getName());
-        if (!this.isRankAvailable(player, this.getConfig().getString("options.challenges.challengeList." + challenge + ".rankLevel"))) {
-            player.sendMessage(ChatColor.RED + "You have not unlocked this challenge yet!");
-            return false;
-        }
-        if (!pi.challengeExists(challenge)) {
-            player.sendMessage(ChatColor.RED + "Unknown challenge name (check spelling)!");
-            return false;
-        }
-        if (pi.checkChallenge(challenge) > 0 && !this.getConfig().getBoolean("options.challenges.challengeList." + challenge + ".repeatable")) {
-            player.sendMessage(ChatColor.RED + "This challenge is not repeatable!");
-            return false;
-        }
-        if (pi.checkChallenge(challenge) > 0 && (this.getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland") || this.getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland"))) {
-            player.sendMessage(ChatColor.RED + "This challenge is not repeatable!");
-            return false;
-        }
-        if (this.getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onPlayer")) {
-            if (!this.tryComplete(player, challenge, "onPlayer")) {
-                player.sendMessage(ChatColor.RED + this.getConfig().getString("options.challenges.challengeList." + challenge + ".description"));
-                player.sendMessage(ChatColor.RED + "You don't have enough of the required item(s)!");
-                return false;
-            }
-            return true;
-        } else if (this.getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("onIsland")) {
-            if (!this.playerIsOnIsland(player)) {
-                player.sendMessage(ChatColor.RED + "You must be on your island to do that!");
-            }
-            if (!this.tryComplete(player, challenge, "onIsland")) {
-                player.sendMessage(ChatColor.RED + this.getConfig().getString("options.challenges.challengeList." + challenge + ".description"));
-                player.sendMessage(ChatColor.RED + "You must be standing within 10 blocks of all required items.");
-                return false;
-            }
-            return true;
-        } else {
-            if (!this.getConfig().getString("options.challenges.challengeList." + challenge + ".type").equalsIgnoreCase("islandLevel")) {
-                return false;
-            }
-            if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("general.level") >= this.getConfig().getInt("options.challenges.challengeList." + challenge + ".requiredItems")) {
-                return true;
-            }
-            player.sendMessage(ChatColor.RED + "Your island must be level " + this.getConfig().getInt("options.challenges.challengeList." + challenge + ".requiredItems") + " to complete this challenge!");
-            return false;
-        }
-    }
-
-    public int calcAmount(int amount, char op, int inc, int timesCompleted) {
-        switch (op) {
-            case '+':
-                return amount + inc * timesCompleted;
-            case '-':
-                return amount - inc * timesCompleted; // Why?
-            case '*':
-                return amount * inc * timesCompleted; // Oh, my god! Just do the time m8!
-            case '/':
-                return amount / (inc * timesCompleted); // Yay! Free stuff!!!
-        }
-        return amount;
-    }
-
-    public boolean tryComplete(final Player player, final String challenge, final String type) {
-        if (type.equalsIgnoreCase("onPlayer")) {
-            return tryCompleteOnPlayer(player, challenge);
-        }
-        if (type.equalsIgnoreCase("onIsland")) {
-            return tryCompleteOnIsland(player, challenge);
-        }
-        return true;
-    }
-
-    private boolean islandContains(Player player, List<ItemStack> itemStacks, int radius) {
-        final Location l = player.getLocation();
-        final int px = l.getBlockX();
-        final int py = l.getBlockY();
-        final int pz = l.getBlockZ();
-        World world = l.getWorld();
-        int[] blockCount = new int[0xffffff];
-        int[] baseBlocks = new int[0xffff];
-        for (int x = px - radius; x <= px + radius; x++) {
-            for (int y = py - radius; y <= py + radius; y++) {
-                for (int z = pz - radius; z <= pz + radius; z++) {
-                    Block block = world.getBlockAt(x, y, z);
-                    blockCount[block.getTypeId() << 8 + block.getData()]++;
-                    baseBlocks[block.getTypeId()]++;
-                }
-            }
-        }
-        for (ItemStack item : itemStacks) {
-            if (item.getDurability() != 0 && blockCount[item.getTypeId() << 8 + item.getDurability()] < item.getAmount()) {
-                return false;
-            } else if (baseBlocks[item.getTypeId()] < item.getAmount()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean tryCompleteOnIsland(Player player, String challenge) {
-        String reqItems = getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems");
-        if (reqItems == null) {
-            return false;
-        }
-        List<ItemStack> items = new ArrayList<>();
-        for (String reqItem : reqItems.split(" ")) {
-            Matcher m = ITEM_AMOUNT_PATTERN.matcher(reqItem);
-            if (m.matches()) {
-                int id = Integer.parseInt(m.group("id"));
-                int data = m.group("data") != null ? Integer.parseInt(m.group("data")) : 0;
-                int amount = Integer.parseInt(m.group("amount"));
-                items.add(new ItemStack(id, amount, (short) data));
-            } else {
-                LOG.warning("Invalid item found for challenge " + challenge + ", " + reqItem);
-            }
-        }
-        int radius = getConfig().getInt("options.challenges.challengeList." + challenge + ".radius", 10);
-        if (islandContains(player, items, radius)) {
-            giveReward(player, challenge);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean tryCompleteOnPlayer(Player player, String challenge) {
-        String reqItems = getConfig().getString("options.challenges.challengeList." + challenge + ".requiredItems");
-        PlayerInfo playerInfo = getPlayerInfo(player);
-        boolean takeItems = this.getConfig().getBoolean("options.challenges.challengeList." + challenge + ".takeItems");
-        int timesCompleted = playerInfo.checkChallengeSinceTimer(challenge);
-        if (reqItems != null) {
-            List<ItemStack> items = new ArrayList<>();
-            Pattern reqPattern = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?");
-            for (String item : reqItems.split(" ")) {
-                Matcher m = reqPattern.matcher(item);
-                if (m.matches()) {
-                    int reqItem = Integer.parseInt(m.group("type"));
-                    int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype")) : 0;
-                    int amount = Integer.parseInt(m.group("amount"));
-                    char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
-                    int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc")) : 0;
-                    amount = calcAmount(amount, op, inc, timesCompleted);
-                    ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
-                    items.add(mat);
-                    if (!player.getInventory().containsAtLeast(mat, amount)) {
-                        return false;
-                    }
-                }
-            }
-            if (takeItems) {
-                player.getInventory().removeItem(items.toArray(new ItemStack[items.size()]));
-            }
-            giveReward(player, challenge);
-        }
-        return true;
-    }
-
-    public boolean giveReward(final Player player, final String challenge) {
-        final String[] permList = this.getConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".permissionReward").split(" ");
-        double rewCurrency = 0.0;
-        player.sendMessage(ChatColor.GREEN + "You have completed the " + challenge + " challenge!");
-        String[] rewList;
-        if (getPlayerInfo(player).checkChallenge(challenge) == 0) {
-            rewList = this.getConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".itemReward").split(" ");
-            if (Settings.challenges_enableEconomyPlugin && VaultHandler.hasEcon()) {
-                rewCurrency = this.getConfig().getInt("options.challenges.challengeList." + challenge.toLowerCase() + ".currencyReward");
-            }
-        } else {
-            rewList = this.getConfig().getString("options.challenges.challengeList." + challenge.toLowerCase() + ".repeatItemReward").split(" ");
-            if (Settings.challenges_enableEconomyPlugin && VaultHandler.hasEcon()) {
-                rewCurrency = this.getConfig().getInt("options.challenges.challengeList." + challenge.toLowerCase() + ".repeatCurrencyReward");
-            }
-        }
-        int rewItem = 0;
-        int rewAmount = 0;
-        double rewBonus = 1.0;
-        int rewMod = -1;
-        if (Settings.challenges_enableEconomyPlugin && VaultHandler.hasEcon()) {
-            if (VaultHandler.checkPerk(player.getName(), "group.memberplus", getSkyBlockWorld())) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.all", getSkyBlockWorld())) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.25", getSkyBlockWorld())) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.50", getSkyBlockWorld())) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.75", getSkyBlockWorld())) {
-                rewBonus += 0.1;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.100", getSkyBlockWorld())) {
-                rewBonus += 0.2;
-            }
-            VaultHandler.depositPlayer(player.getName(), rewCurrency * rewBonus);
-            if (getPlayerInfo(player).checkChallenge(challenge) > 0) {
-                player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
-                player.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + getInstance().getConfig().getString("options.challenges.challengeList." + challenge + ".repeatRewardText"));
-                player.sendMessage(ChatColor.YELLOW + "Repeat exp reward: " + ChatColor.WHITE + getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
-                player.sendMessage(ChatColor.YELLOW + "Repeat currency reward: " + ChatColor.WHITE + this.df.format(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatCurrencyReward") * rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a(+" + this.df.format((rewBonus - 1.0) * 100.0) + "%)");
-            } else {
-                if (Settings.challenges_broadcastCompletion) {
-                    Bukkit.getServer().broadcastMessage(Settings.challenges_broadcastText + player.getName() + " has completed the " + challenge + " challenge!");
-                }
-                player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
-                player.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + getInstance().getConfig().getString("options.challenges.challengeList." + challenge + ".rewardText"));
-                player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
-                player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + this.df.format(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".currencyReward") * rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a(+" + this.df.format((rewBonus - 1.0) * 100.0) + "%)");
-            }
-        } else if (getPlayerInfo(player).checkChallenge(challenge) > 0) {
-            player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
-            player.sendMessage(ChatColor.YELLOW + "Repeat reward(s): " + ChatColor.WHITE + getInstance().getConfig().getString("options.challenges.challengeList." + challenge + ".repeatRewardText"));
-            player.sendMessage(ChatColor.YELLOW + "Repeat exp reward: " + ChatColor.WHITE + getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".repeatXpReward"));
-        } else {
-            if (Settings.challenges_broadcastCompletion) {
-                Bukkit.getServer().broadcastMessage(Settings.challenges_broadcastText + player.getName() + " has completed the " + challenge + " challenge!");
-            }
-            player.giveExp(getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
-            player.sendMessage(ChatColor.YELLOW + "Reward(s): " + ChatColor.WHITE + getInstance().getConfig().getString("options.challenges.challengeList." + challenge + ".rewardText"));
-            player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + getInstance().getConfig().getInt("options.challenges.challengeList." + challenge + ".xpReward"));
-        }
-        String[] array;
-        for (int length = (array = permList).length, i = 0; i < length; ++i) {
-            final String s = array[i];
-            if (!s.equalsIgnoreCase("none") && !VaultHandler.checkPerk(player.getName(), s, player.getWorld())) {
-                VaultHandler.addPerk(player, s);
-            }
-        }
-        String[] array2;
-        for (int length2 = (array2 = rewList).length, j = 0; j < length2; ++j) {
-            final String s = array2[j];
-            final String[] sPart = s.split(":");
-            if (sPart.length == 2) {
-                rewItem = Integer.parseInt(sPart[0]);
-                rewAmount = Integer.parseInt(sPart[1]);
-                player.getInventory().addItem(new ItemStack[]{new ItemStack(rewItem, rewAmount)});
-            } else if (sPart.length == 3) {
-                rewItem = Integer.parseInt(sPart[0]);
-                rewAmount = Integer.parseInt(sPart[2]);
-                rewMod = Integer.parseInt(sPart[1]);
-                player.getInventory().addItem(new ItemStack[]{new ItemStack(rewItem, rewAmount, (short) rewMod)});
-            }
-        }
-        getPlayerInfo(player).completeChallenge(challenge);
-        return true;
-    }
 
     public void reloadData() {
         if (this.skyblockDataFile == null) {
@@ -1500,84 +1142,6 @@ public class uSkyBlock extends JavaPlugin {
             this.reloadData();
         }
         return this.skyblockData;
-    }
-
-    double dReturns(final double val, final double scale) {
-        if (val < 0.0) {
-            return -this.dReturns(-val, scale);
-        }
-        final double mult = val / scale;
-        final double trinum = (Math.sqrt(8.0 * mult + 1.0) - 1.0) / 2.0;
-        return trinum * scale;
-    }
-
-    public void reloadLevelConfig() {
-        if (this.levelConfigFile == null) {
-            this.levelConfigFile = new File(this.getDataFolder(), "levelConfig.yml");
-        }
-        this.levelConfig = YamlConfiguration.loadConfiguration(this.levelConfigFile);
-        final InputStream defConfigStream = this.getResource("levelConfig.yml");
-        if (defConfigStream != null) {
-            final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            this.levelConfig.setDefaults(defConfig);
-        }
-    }
-
-    public FileConfiguration getLevelConfig() {
-        if (this.levelConfig == null) {
-            this.reloadLevelConfig();
-        }
-        return this.levelConfig;
-    }
-
-    public void saveLevelConfig() {
-        if (this.levelConfig == null || this.levelConfigFile == null) {
-            return;
-        }
-        try {
-            this.getLevelConfig().save(this.levelConfigFile);
-        } catch (IOException ex) {
-            this.getLogger().log(Level.SEVERE, "Could not save config to " + this.levelConfigFile, ex);
-        }
-    }
-
-    public void saveDefaultLevelConfig() {
-        if (this.levelConfigFile == null) {
-            this.levelConfigFile = new File(this.getDataFolder(), "levelConfig.yml");
-        }
-        if (!this.levelConfigFile.exists()) {
-            getInstance().saveResource("levelConfig.yml", false);
-        }
-    }
-
-    public void loadLevelConfig() {
-        try {
-            this.getLevelConfig();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (int i = 1; i <= 255; ++i) {
-            if (this.getLevelConfig().contains("blockValues." + i)) {
-                Settings.blockList[i] = this.getLevelConfig().getInt("blockValues." + i);
-            } else {
-                Settings.blockList[i] = this.getLevelConfig().getInt("general.default");
-            }
-            if (this.getLevelConfig().contains("blockLimits." + i)) {
-                Settings.limitList[i] = this.getLevelConfig().getInt("blockLimits." + i);
-            } else {
-                Settings.limitList[i] = -1;
-            }
-            if (this.getLevelConfig().contains("diminishingReturns." + i)) {
-                Settings.diminishingReturnsList[i] = this.getLevelConfig().getInt("diminishingReturns." + i);
-            } else if (this.getLevelConfig().getBoolean("general.useDiminishingReturns")) {
-                Settings.diminishingReturnsList[i] = this.getLevelConfig().getInt("general.defaultScale");
-            } else {
-                Settings.diminishingReturnsList[i] = -1;
-            }
-        }
-        System.out.print(Settings.blockList[57]);
-        System.out.print(Settings.diminishingReturnsList[57]);
-        System.out.print(Settings.limitList[57]);
     }
 
     public void clearIslandConfig(final String location, final String leader) {
@@ -1665,6 +1229,10 @@ public class uSkyBlock extends JavaPlugin {
 
     public FileConfiguration getIslandConfig(final Player player) {
         return getIslandConfig(getPlayerInfo(player).locationForParty());
+    }
+
+    public FileConfiguration getIslandConfig(final PlayerInfo info) {
+        return getIslandConfig(info.locationForParty());
     }
 
     public FileConfiguration getIslandConfig(final String location) {
@@ -1869,7 +1437,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean createIsland(final CommandSender sender, final PlayerInfo pi) {
-        uSkyBlock.LOG.info("Creating player island...");
+        log(Level.INFO, "Creating player island...");
         final Player player = (Player) sender;
         final Location last = getInstance().getLastIsland();
         last.setY((double) Settings.island_height);
@@ -1888,15 +1456,13 @@ public class uSkyBlock extends JavaPlugin {
             ex.printStackTrace();
             return false;
         }
-        uSkyBlock.LOG.info("Finished creating player island.");
+        log(Level.INFO, "Finished creating player island.");
         return true;
     }
 
     private void protectWithWorldGuard(CommandSender sender, Player player, PlayerInfo pi) {
-        if (Settings.island_protectWithWorldGuard && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
-            if (!WorldGuardHandler.protectIsland(player, sender.getName(), pi)) {
-                sender.sendMessage("Player doesn't have an island or it's already protected!");
-            }
+        if (!WorldGuardHandler.protectIsland(player, sender.getName(), pi)) {
+            sender.sendMessage("Player doesn't have an island or it's already protected!");
         }
     }
 
@@ -2087,8 +1653,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     private void islandLayer2(final int x, final int z, final Player player, final World world) {
-        int y = Settings.island_height;
-        y = Settings.island_height + 3;
+        int y = Settings.island_height + 3;
         for (int x_operate = x - 2; x_operate <= x + 2; ++x_operate) {
             for (int z_operate = z - 2; z_operate <= z + 2; ++z_operate) {
                 final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
@@ -2326,13 +1891,6 @@ public class uSkyBlock extends JavaPlugin {
         this.islands.remove(location);
     }
 
-    public void displayIslandConfigs() {
-        final Iterator<String> islandList = this.islands.keySet().iterator();
-        while (islandList.hasNext()) {
-            System.out.print(islandList.next());
-        }
-    }
-
     public void updatePartyNumber(final Player player) {
         if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 8 && VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
             getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 8);
@@ -2425,5 +1983,27 @@ public class uSkyBlock extends JavaPlugin {
             return "";
         }
         return format.replaceAll("&([0-9a-fklmor])", "\u00a7$1");
+    }
+
+    public static void log(Level level, String message) {
+        log(level, message, null);
+    }
+
+    public static void log(Level level, String message, Throwable t) {
+        getInstance().getLogger().log(level, pName + message, t);
+    }
+
+    public ChallengeLogic getChallengeLogic() {
+        return challengeLogic;
+    }
+
+    public LevelLogic getLevelLogic() {
+        return levelLogic;
+    }
+
+    @Override
+    public void reloadConfig() {
+        Settings.loadPluginConfig(getConfig());
+        levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
     }
 }

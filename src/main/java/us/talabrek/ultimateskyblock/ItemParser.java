@@ -4,6 +4,7 @@ import org.bukkit.inventory.*;
 import org.bukkit.enchantments.*;
 
 import java.util.*;
+import java.util.logging.Level;
 
 public class ItemParser {
     public static String parseItemStackToString(final ItemStack item) {
@@ -35,7 +36,7 @@ public class ItemParser {
             final String thing = split[i];
             final String[] sp = thing.split(":");
             if (sp.length != 2) {
-                uSkyBlock.getInstance().log.warning("error, wrong type size");
+                uSkyBlock.log(Level.WARNING,  "error, wrong type size '" + thing + "'");
             }
             final String name = sp[0];
             if (name.equals("id")) {
@@ -54,7 +55,7 @@ public class ItemParser {
                     final String enchantment = split2[j];
                     final String[] prop = enchantment.split("#");
                     if (prop.length != 2) {
-                        uSkyBlock.getInstance().log.warning("error, wrong enchantmenttype length");
+                        uSkyBlock.log(Level.SEVERE, "error, wrong enchantmenttype length, '" + enchantment + "'");
                     }
                     if (prop[0].equals("eid")) {
                         enchId = Integer.parseInt(prop[1]);
@@ -64,7 +65,7 @@ public class ItemParser {
                     }
                 }
             } else {
-                uSkyBlock.getInstance().log.warning("error, unknown itemvalue");
+                uSkyBlock.log(Level.SEVERE, "error, unknown itemvalue, '" + name + "'");
             }
         }
         return x;
