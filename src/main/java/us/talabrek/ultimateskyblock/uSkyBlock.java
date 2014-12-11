@@ -294,7 +294,7 @@ public class uSkyBlock extends JavaPlugin {
         }
         for (final String playerName : topTen.keySet()) {
             if (i <= 10) {
-                sender.sendMessage(ChatColor.GREEN + "#" + i + ": " + playerName + " - Island level " + topTen.get(playerName));
+                sender.sendMessage(String.format(ChatColor.GREEN + "#%2d: %s - Island level %5.2f", i, playerName, topTen.get(playerName)));
             }
             if (playerName != null && playerName.equalsIgnoreCase(sender.getName())) {
                 playerrank = i;

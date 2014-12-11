@@ -77,8 +77,8 @@ public class LevelLogic {
         for (int x = -radius; x <= radius; ++x) {
             for (int y = 0; y <= 255; ++y) {
                 for (int z = -radius; z <= radius; ++z) {
-                    typeId = w.getBlockAt(px + x, py + y, pz + z).getTypeId();
-                    values[typeId]++;
+                    typeId = w.getBlockAt(px + x, y, pz + z).getTypeId();
+                    values[typeId] += 1;
                 }
             }
         }

@@ -34,7 +34,7 @@ public class WorldGuardHandler {
             WorldGuardPlugin worldGuard = getWorldGuard();
             RegionManager regionManager = worldGuard.getRegionManager(uSkyBlock.getSkyBlockWorld());
             String regionName = player + "Island";
-            if (pi.getIslandLocation() != null && noOrOldRegion(regionManager, regionName, sender)) {
+            if (pi.getIslandLocation() != null && noOrOldRegion(regionManager, regionName, pi)) {
                 ProtectedCuboidRegion region = new ProtectedCuboidRegion(player + "Island",
                         getProtectionVectorLeft(pi.getIslandLocation()),
                         getProtectionVectorRight(pi.getIslandLocation()));
@@ -44,10 +44,14 @@ public class WorldGuardHandler {
                 region.setPriority(100);
                 region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
                 region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
-                setRegionFlags(sender, region, worldGuard);
+                region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
+
                 final ApplicableRegionSet set = regionManager.getApplicableRegions(pi.getIslandLocation());
                 if (set.size() > 0) {
-                    for (final ProtectedRegion regions : set) {
+                    for (ProtectedRegion regions : set) {
                         if (!regions.getId().equalsIgnoreCase("__global__")) {
                             regionManager.removeRegion(regions.getId());
                         }
@@ -55,8 +59,8 @@ public class WorldGuardHandler {
                 }
                 regionManager.addRegion(region);
                 System.out.print("New protected region created for " + player + "'s Island by " + sender.getName());
-                regionManager.saveChanges();
-                //uSkyBlock.getInstance().getIslandConfig(sender).set("general.regionVersion", VERSION);
+                regionManager.save();
+                uSkyBlock.getInstance().getIslandConfig(pi).set("general.regionVersion", VERSION);
                 return true;
             }
         } catch (Exception ex) {
@@ -66,45 +70,11 @@ public class WorldGuardHandler {
         return false;
     }
 
-    private static void setRegionFlags(Player sender, ProtectedCuboidRegion region, WorldGuardPlugin worldGuard) throws InvalidFlagFormat {
-        FileConfiguration config = uSkyBlock.getInstance().getConfig();
-        ConfigurationSection configurationSection = config.getConfigurationSection("options.island.worldGuardFlags");
-        if (configurationSection != null) {
-            for (String group : configurationSection.getKeys(false)) {
-                ConfigurationSection groupSection = configurationSection.getConfigurationSection(group);
-                RegionGroup regionGroup = RegionGroup.valueOf(group.toUpperCase());
-                if (regionGroup == null) {
-                    uSkyBlock.log(Level.WARNING, "Unknown group " + group + " in config.yml");
-                    continue;
-                }
-                for (String flag : groupSection.getKeys(false)) {
-                    String stateString = groupSection.getString(flag);
-                    StateFlag.State state = StateFlag.State.valueOf(stateString.toUpperCase());
-                    if (state == null) {
-                        uSkyBlock.log(Level.WARNING, "Unknown state " + stateString + " only allow/deny supported");
-                        continue;
-                    }
-                    region.setFlag(new StateFlag(flag, true, regionGroup), state);
-                    uSkyBlock.log(Level.FINEST, "Setting flag " + flag + " to " + state + " for " + regionGroup);
-                }
-            }
-        } else {
-            region.setFlag(DefaultFlag.PVP, DefaultFlag.PVP.parseInput(worldGuard, sender, "deny"));
-            region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
-        }
-    }
-
-    private static boolean noOrOldRegion(RegionManager regionManager, String regionId, Player player) {
+    private static boolean noOrOldRegion(RegionManager regionManager, String regionId, PlayerInfo playerInfo) {
         if (!regionManager.hasRegion(regionId)) {
             return true;
         }
-/*
-        FileConfiguration islandConfig = uSkyBlock.getInstance().getIslandConfig(player);
-        if (islandConfig.getInt("general.regionVersion", 0) < VERSION) {
-            return true;
-        }
-*/
-        return false;
+        return uSkyBlock.getInstance().getIslandConfig(playerInfo).getInt("general.regionVersion", 0) < VERSION;
     }
 
     public static void islandLock(final CommandSender sender, final String player) {

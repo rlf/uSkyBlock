@@ -746,9 +746,9 @@ public class IslandCommand implements CommandExecutor {
                                     player.sendMessage(String.format("%05.2f  %d %s",
                                             score.getScore(), score.getCount(), VaultHandler.getItemName(material)));
                                 }
-                                player.sendMessage(MessageFormat.format(ChatColor.GREEN + "Island level is {0,number,#.##}", shared[0].getScore()));
+                                player.sendMessage(String.format(ChatColor.GREEN + "Island level is %5.2f", shared[0].getScore()));
                             } else {
-                                player.sendMessage(MessageFormat.format(ChatColor.GREEN + "Island level is {0,number,#.##}", uSkyBlock.getInstance().getIslandConfig(playerInfo).getDouble("general.level")));
+                                player.sendMessage(String.format(ChatColor.GREEN + "Island level is %5.2f", uSkyBlock.getInstance().getIslandConfig(playerInfo).getDouble("general.level")));
                             }
                         }
                     }
