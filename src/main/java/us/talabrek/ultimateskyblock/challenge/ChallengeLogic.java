@@ -187,13 +187,13 @@ public class ChallengeLogic {
             for (int y = py - radius; y <= py + radius; y++) {
                 for (int z = pz - radius; z <= pz + radius; z++) {
                     Block block = world.getBlockAt(x, y, z);
-                    blockCount[block.getTypeId() << 8 + block.getData()]++;
+                    blockCount[(block.getTypeId() << 8) + (block.getData() & 0xff)]++;
                     baseBlocks[block.getTypeId()]++;
                 }
             }
         }
         for (ItemStack item : itemStacks) {
-            if (item.getDurability() != 0 && blockCount[item.getTypeId() << 8 + item.getDurability()] < item.getAmount()) {
+            if (item.getDurability() != 0 && blockCount[(item.getTypeId() << 8) + (item.getDurability() & 0xff)] < item.getAmount()) {
                 return false;
             } else if (baseBlocks[item.getTypeId()] < item.getAmount()) {
                 return false;
