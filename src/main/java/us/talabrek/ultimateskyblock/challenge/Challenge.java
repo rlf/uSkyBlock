@@ -95,6 +95,7 @@ public class Challenge {
                 ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
                 ItemMeta meta = mat.getItemMeta();
                 meta.setDisplayName("\u00a7f" + amount + " " + mat.getType());
+                mat.setItemMeta(meta);
                 items.add(mat);
             }
         }
