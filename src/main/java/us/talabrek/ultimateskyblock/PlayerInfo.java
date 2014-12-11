@@ -143,7 +143,7 @@ public class PlayerInfo implements Serializable {
         if (l == null) {
             return null;
         }
-        return "" + l.getX() + "," + l.getZ();
+        return "" + l.getBlockX() + "," + l.getBlockZ();
     }
 
     public void completeChallenge(final String challenge) {
@@ -278,7 +278,7 @@ public class PlayerInfo implements Serializable {
             this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
                     playerConfig.getInt("player.islandX"), playerConfig.getInt("player.islandY"), playerConfig.getInt("player.islandZ"));
             this.homeLocation = new Location(uSkyBlock.getSkyBlockWorld(),
-                    playerConfig.getInt("player.homeX"), playerConfig.getInt("player.homeY"), playerConfig.getInt("player.homeZ"),
+                    playerConfig.getInt("player.homeX") + 0.5, playerConfig.getInt("player.homeY") + 0.2, playerConfig.getInt("player.homeZ") + 0.5,
                     playerConfig.getInt("player.homeYaw", 0), playerConfig.getInt("player.homePitch", 0));
             buildChallengeList();
             for (String currentChallenge : challenges.keySet()) {
@@ -321,38 +321,43 @@ public class PlayerInfo implements Serializable {
             uSkyBlock.log(Level.INFO, "Can't save player data!");
             return;
         }
-        getPlayerConfig(player).set("player.hasIsland", this.getHasIsland());
+        FileConfiguration playerConfig = getPlayerConfig(player);
+        playerConfig.set("player.hasIsland", this.getHasIsland());
         Location location = this.getIslandLocation();
         if (location != null) {
-            getPlayerConfig(player).set("player.islandX", location.getBlockX());
-            getPlayerConfig(player).set("player.islandY", location.getBlockY());
-            getPlayerConfig(player).set("player.islandZ", location.getBlockZ());
+            playerConfig.set("player.islandX", location.getBlockX());
+            playerConfig.set("player.islandY", location.getBlockY());
+            playerConfig.set("player.islandZ", location.getBlockZ());
         } else {
-            getPlayerConfig(player).set("player.islandX", 0);
-            getPlayerConfig(player).set("player.islandY", 0);
-            getPlayerConfig(player).set("player.islandZ", 0);
+            playerConfig.set("player.islandX", 0);
+            playerConfig.set("player.islandY", 0);
+            playerConfig.set("player.islandZ", 0);
         }
         Location home = this.getHomeLocation();
         if (home != null) {
-            getPlayerConfig(player).set("player.homeX", home.getBlockX());
-            getPlayerConfig(player).set("player.homeY", home.getBlockY());
-            getPlayerConfig(player).set("player.homeZ", home.getBlockZ());
+            playerConfig.set("player.homeX", home.getBlockX());
+            playerConfig.set("player.homeY", home.getBlockY());
+            playerConfig.set("player.homeZ", home.getBlockZ());
+            playerConfig.set("player.homeYaw", home.getYaw());
+            playerConfig.set("player.homePitch", home.getPitch());
         } else {
-            getPlayerConfig(player).set("player.homeX", 0);
-            getPlayerConfig(player).set("player.homeY", 0);
-            getPlayerConfig(player).set("player.homeZ", 0);
+            playerConfig.set("player.homeX", 0);
+            playerConfig.set("player.homeY", 0);
+            playerConfig.set("player.homeZ", 0);
+            playerConfig.set("player.homeYaw", 0);
+            playerConfig.set("player.homePitch", 0);
         }
         final Iterator<String> ent = challenges.keySet().iterator();
         String currentChallenge = "";
         while (ent.hasNext()) {
             currentChallenge = ent.next();
-            getPlayerConfig(player).set("player.challenges." + currentChallenge + ".firstCompleted", challenges.get(currentChallenge).getFirstCompleted());
-            getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompleted", challenges.get(currentChallenge).getTimesCompleted());
-            getPlayerConfig(player).set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", challenges.get(currentChallenge).getTimesCompletedSinceTimer());
+            playerConfig.set("player.challenges." + currentChallenge + ".firstCompleted", challenges.get(currentChallenge).getFirstCompleted());
+            playerConfig.set("player.challenges." + currentChallenge + ".timesCompleted", challenges.get(currentChallenge).getTimesCompleted());
+            playerConfig.set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", challenges.get(currentChallenge).getTimesCompletedSinceTimer());
         }
         this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
         try {
-            getPlayerConfig(player).save(this.playerConfigFile);
+            playerConfig.save(this.playerConfigFile);
             uSkyBlock.log(Level.INFO, "Player data saved!");
         } catch (IOException ex) {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + this.playerConfigFile, ex);
