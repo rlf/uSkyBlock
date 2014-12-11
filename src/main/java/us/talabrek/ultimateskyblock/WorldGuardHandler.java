@@ -56,6 +56,7 @@ public class WorldGuardHandler {
                 regionManager.addRegion(region);
                 System.out.print("New protected region created for " + player + "'s Island by " + sender.getName());
                 regionManager.saveChanges();
+                //uSkyBlock.getInstance().getIslandConfig(sender).set("general.regionVersion", VERSION);
                 return true;
             }
         } catch (Exception ex) {
@@ -97,10 +98,12 @@ public class WorldGuardHandler {
         if (!regionManager.hasRegion(regionId)) {
             return true;
         }
+/*
         FileConfiguration islandConfig = uSkyBlock.getInstance().getIslandConfig(player);
         if (islandConfig.getInt("general.regionVersion", 0) < VERSION) {
             return true;
         }
+*/
         return false;
     }
 

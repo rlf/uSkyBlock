@@ -23,6 +23,7 @@ public class LevelLogic {
 
     public LevelLogic(FileConfiguration config) {
         this.config = config;
+        load();
     }
 
     public void load() {
@@ -66,7 +67,7 @@ public class LevelLogic {
             }
         }
         double score = 0;
-        for (int i = 1; i <= MAX_BLOCK; ++i) {
+        for (int i = 1; i < MAX_BLOCK; ++i) {
             double count = values[i];
             if (count > blockLimit[i] && blockLimit[i] != -1) {
                 count = blockLimit[i]; // Hard edge

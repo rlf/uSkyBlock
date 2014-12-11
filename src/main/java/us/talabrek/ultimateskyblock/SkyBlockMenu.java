@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -189,12 +190,15 @@ public class SkyBlockMenu {
     public Inventory displayPartyGUI(final Player player) {
         List<String> lores = new ArrayList<>();
         Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Group Members");
-        final Set<String> memberList = skyBlock.getIslandConfig(player).getConfigurationSection("party.members").getKeys(false);
+        FileConfiguration islandConfig = skyBlock.getIslandConfig(player);
+        final Set<String> memberList = islandConfig.getConfigurationSection("party.members") != null
+                ? islandConfig.getConfigurationSection("party.members").getKeys(false)
+                : Collections.<String>emptySet();
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         final ItemMeta meta2 = sign.getItemMeta();
         meta2.setDisplayName("\u00a7aGroup Info");
-        lores.add("Group Members: \u00a72" + skyBlock.getIslandConfig(player).getInt("party.currentSize") + "\u00a77/\u00a7e" + skyBlock.getIslandConfig(player).getInt("party.maxSize"));
-        if (skyBlock.getIslandConfig(player).getInt("party.currentSize") < skyBlock.getIslandConfig(player).getInt("party.maxSize")) {
+        lores.add("Group Members: \u00a72" + islandConfig.getInt("party.currentSize") + "\u00a77/\u00a7e" + islandConfig.getInt("party.maxSize"));
+        if (islandConfig.getInt("party.currentSize") < islandConfig.getInt("party.maxSize")) {
             lores.add("\u00a7aMore players can be invited to this island.");
         } else {
             lores.add("\u00a7cThis island is full.");
@@ -208,7 +212,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
         for (String temp : memberList) {
-            if (temp.equalsIgnoreCase(skyBlock.getIslandConfig(player).getString("party.leader"))) {
+            if (temp.equalsIgnoreCase(islandConfig.getString("party.leader"))) {
                 meta3.setDisplayName("\u00a7f" + temp);
                 lores.add("\u00a7a\u00a7lLeader");
                 lores.add("\u00a7aCan \u00a7fchange the island's biome.");
@@ -222,37 +226,37 @@ public class SkyBlockMenu {
             } else {
                 meta3.setDisplayName("\u00a7f" + temp);
                 lores.add("\u00a7e\u00a7lMember");
-                if (skyBlock.getIslandConfig(player).getBoolean("party.members." + temp + ".canChangeBiome")) {
+                if (islandConfig.getBoolean("party.members." + temp + ".canChangeBiome")) {
                     lores.add("\u00a7aCan \u00a7fchange the island's biome.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7fchange the island's biome.");
                 }
-                if (skyBlock.getIslandConfig(player).getBoolean("party.members." + temp + ".canToggleLock")) {
+                if (islandConfig.getBoolean("party.members." + temp + ".canToggleLock")) {
                     lores.add("\u00a7aCan \u00a7flock/unlock the island.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7flock/unlock the island.");
                 }
-                if (skyBlock.getIslandConfig(player).getBoolean("party.members." + temp + ".canChangeWarp")) {
+                if (islandConfig.getBoolean("party.members." + temp + ".canChangeWarp")) {
                     lores.add("\u00a7aCan \u00a7fset the island's warp.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7fset the island's warp.");
                 }
-                if (skyBlock.getIslandConfig(player).getBoolean("party.members." + temp + ".canToggleWarp")) {
+                if (islandConfig.getBoolean("party.members." + temp + ".canToggleWarp")) {
                     lores.add("\u00a7aCan \u00a7ftoggle the island's warp.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7ftoggle the island's warp.");
                 }
-                if (skyBlock.getIslandConfig(player).getBoolean("party.members." + temp + ".canInviteOthers")) {
+                if (islandConfig.getBoolean("party.members." + temp + ".canInviteOthers")) {
                     lores.add("\u00a7aCan \u00a7finvite others to the island.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7finvite others to the island.");
                 }
-                if (skyBlock.getIslandConfig(player).getBoolean("party.members." + temp + ".canKickOthers")) {
+                if (islandConfig.getBoolean("party.members." + temp + ".canKickOthers")) {
                     lores.add("\u00a7aCan \u00a7fkick others from the island.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7fkick others from the island.");
                 }
-                if (player.getName().equalsIgnoreCase(skyBlock.getIslandConfig(player).getString("party.leader"))) {
+                if (player.getName().equalsIgnoreCase(islandConfig.getString("party.leader"))) {
                     lores.add("\u00a7e<Click to change this player's permissions>");
                 }
                 meta3.setLore(lores);

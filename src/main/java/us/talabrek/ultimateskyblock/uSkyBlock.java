@@ -64,8 +64,6 @@ public class uSkyBlock extends JavaPlugin {
     LinkedHashMap<String, List<String>> challenges;
     HashMap<Integer, Integer> requiredList;
     public boolean purgeActive;
-    private FileConfiguration skyblockData;
-    private File skyblockDataFile;
 
     static {
         uSkyBlock.skyBlockWorld = null;
@@ -92,8 +90,6 @@ public class uSkyBlock extends JavaPlugin {
         this.challenges = new LinkedHashMap<>();
         this.requiredList = new HashMap<>();
         this.purgeActive = false;
-        this.skyblockData = null;
-        this.skyblockDataFile = null;
     }
 
     public void onDisable() {
@@ -150,10 +146,8 @@ public class uSkyBlock extends JavaPlugin {
     public void onEnable() {
         instance = this;
         configFiles.clear();
+        createFolders();
         this.pName = ChatColor.WHITE + "[" + ChatColor.GREEN + getDescription().getName() + ChatColor.WHITE + "] ";
-        if (!getDataFolder().exists()) {
-            getDataFolder().mkdirs();
-        }
         VaultHandler.setupEconomy();
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
@@ -162,27 +156,9 @@ public class uSkyBlock extends JavaPlugin {
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
-        levelLogic.load();
-        this.directoryPlayers = new File(this.getDataFolder() + File.separator + "players");
-        if (!this.directoryPlayers.exists()) {
-            this.directoryPlayers.mkdirs();
-        }
+
         this.loadPlayerFiles();
 
-        this.directoryIslands = new File(this.getDataFolder() + File.separator + "islands");
-        if (!this.directoryIslands.exists()) {
-            this.directoryIslands.mkdirs();
-        }
-        File directorySchematics = new File(this.getDataFolder() + File.separator + "schematics");
-        if (!directorySchematics.exists()) {
-            directorySchematics.mkdir();
-        }
-        this.schemFile = directorySchematics.listFiles();
-        if (this.schemFile == null) {
-            System.out.print("[uSkyBlock] No schematic file loaded.");
-        } else {
-            System.out.print("[uSkyBlock] " + this.schemFile.length + " schematics loaded.");
-        }
         this.registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
@@ -218,6 +194,30 @@ public class uSkyBlock extends JavaPlugin {
                 }
             }
         }, 0L);
+    }
+
+    private void createFolders() {
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+        this.directoryPlayers = new File(this.getDataFolder() + File.separator + "players");
+        if (!this.directoryPlayers.exists()) {
+            this.directoryPlayers.mkdirs();
+        }
+        this.directoryIslands = new File(this.getDataFolder() + File.separator + "islands");
+        if (!this.directoryIslands.exists()) {
+            this.directoryIslands.mkdirs();
+        }
+        File directorySchematics = new File(this.getDataFolder() + File.separator + "schematics");
+        if (!directorySchematics.exists()) {
+            directorySchematics.mkdir();
+        }
+        this.schemFile = directorySchematics.listFiles();
+        if (this.schemFile == null) {
+            System.out.print("[uSkyBlock] No schematic file loaded.");
+        } else {
+            System.out.print("[uSkyBlock] " + this.schemFile.length + " schematics loaded.");
+        }
     }
 
     public static uSkyBlock getInstance() {
@@ -1124,26 +1124,6 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-
-    public void reloadData() {
-        if (this.skyblockDataFile == null) {
-            this.skyblockDataFile = new File(this.getDataFolder(), "skyblockData.yml");
-        }
-        this.skyblockData = YamlConfiguration.loadConfiguration(this.skyblockDataFile);
-        final InputStream defConfigStream = this.getResource("skyblockData.yml");
-        if (defConfigStream != null) {
-            final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            this.skyblockData.setDefaults(defConfig);
-        }
-    }
-
-    public FileConfiguration getData() {
-        if (this.skyblockData == null) {
-            this.reloadData();
-        }
-        return this.skyblockData;
-    }
-
     public void clearIslandConfig(final String location, final String leader) {
         FileConfiguration islandConfig = this.getIslandConfig(location);
         islandConfig.set("general.level", 0);
@@ -1236,21 +1216,21 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public FileConfiguration getIslandConfig(final String location) {
-        if (this.islands.get(location) == null) {
-            this.reloadIslandConfig(location);
+        if (islands.get(location) == null) {
+            reloadIslandConfig(location);
         }
-        return this.islands.get(location);
+        return islands.get(location);
     }
 
     public void saveIslandConfig(final String location) {
-        if (this.islands.get(location) == null) {
+        if (islands.get(location) == null) {
             return;
         }
         File file = new File(this.directoryIslands, location + ".yml");
         try {
             getIslandConfig(location).save(file);
         } catch (IOException ex) {
-            this.getLogger().log(Level.SEVERE, "Could not save config to " + file, ex);
+            getLogger().log(Level.SEVERE, "Could not save config to " + file, ex);
         }
     }
 
