@@ -44,7 +44,11 @@ public class WorldGuardHandler {
                 region.setPriority(100);
                 region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
                 region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
-                region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+                if (uSkyBlock.getInstance().getConfig().getBoolean("options.island.allowPvP")) {
+                    region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
+                } else {
+                    region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+                }
                 region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
                 region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
                 region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
