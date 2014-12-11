@@ -15,7 +15,6 @@ public class Settings {
     public static int general_spawnSize;
     public static boolean island_removeCreaturesByTeleport;
     public static int island_protectionRange;
-    public static String island_allowPvP;
     public static ItemStack[] island_chestItems;
     public static boolean island_addExtraItems;
     public static String[] island_extraPermissions;
@@ -113,11 +112,7 @@ public class Settings {
             tempChest[i] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
         }
         island_chestItems = tempChest;
-        island_allowPvP = config.getString("options.island.allowPvP");
         island_schematicName = config.getString("options.island.schematicName");
-        if (!island_allowPvP.equalsIgnoreCase("allow")) {
-            island_allowPvP = "deny";
-        }
         final Set<String> permissionList = config.getConfigurationSection("options.island.extraPermissions").getKeys(true);
         island_addExtraItems = config.getBoolean("options.island.addExtraItems");
         extras_obsidianToLava = config.getBoolean("options.extras.obsidianToLava");
