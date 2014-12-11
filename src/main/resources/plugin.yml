@@ -4,7 +4,7 @@ version: ${project.version}-${buildNumber}
 description: Ultimate SkyBlock. 
 author: Talabrek (based on code by Qgel and others)
 load: STARTUP
-depend: [Vault, WorldEdit]
+depend: [Vault, WorldEdit, WorldGuard]
 commands:
     island:
         description: Commands to use your island
