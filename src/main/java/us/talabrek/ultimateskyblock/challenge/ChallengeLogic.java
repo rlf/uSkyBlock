@@ -262,7 +262,7 @@ public class ChallengeLogic {
     public boolean giveReward(final Player player, final String challengeName) {
         World skyWorld = skyBlock.getWorld();
         Challenge challenge = getChallenge(challengeName);
-        player.sendMessage(ChatColor.GREEN + "You have completed the " + challengeName + " challengeName!");
+        player.sendMessage(ChatColor.GREEN + "You have completed the " + challengeName + " challenge!");
         PlayerInfo playerInfo = skyBlock.getPlayerInfo(player);
         Reward reward = null;
         boolean isFirstCompletion = playerInfo.checkChallenge(challengeName) == 0;
@@ -296,7 +296,7 @@ public class ChallengeLogic {
         }
         player.giveExp(reward.getXpReward());
         if (defaults.broadcastCompletion && isFirstCompletion) {
-            Bukkit.getServer().broadcastMessage(config.getString("broadcastText") + player.getName() + " has completed the " + challengeName + " challengeName!");
+            Bukkit.getServer().broadcastMessage(config.getString("broadcastText") + player.getName() + " has completed the " + challengeName + " challenge!");
         }
         player.sendMessage(ChatColor.YELLOW + "Item reward(s): " + ChatColor.WHITE + reward.getRewardText());
         player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + reward.getXpReward());
