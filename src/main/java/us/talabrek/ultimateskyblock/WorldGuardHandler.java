@@ -89,7 +89,7 @@ public class WorldGuardHandler {
                 }
             }
         } else {
-            region.setFlag(DefaultFlag.PVP, DefaultFlag.PVP.parseInput(worldGuard, sender, Settings.island_allowPvP));
+            region.setFlag(DefaultFlag.PVP, DefaultFlag.PVP.parseInput(worldGuard, sender, "deny"));
             region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
         }
     }
