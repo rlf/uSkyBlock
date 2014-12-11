@@ -138,17 +138,17 @@ challengeList:
     description: 'Harvest slices of melon from a farm.'
     rankLevel: Easy
     type: onPlayer
-    requiredItems: 360:128;+8
+    requiredItems: '360:128;+8'
     displayItem: 360
     resetInHours: 20
     takeItems: true
-    itemReward: 3:5
+    itemReward: '3:5'
     rewardText: 5 dirt
     currencyReward: 15
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: 3:1
+    repeatItemReward: '3:1'
     repeatRewardText: 1 dirt
     repeatCurrencyReward: 2
     repeatXpReward: 3
@@ -156,17 +156,17 @@ challengeList:
     description: 'Harvest pumpkins from a farm.'
     rankLevel: Easy
     type: onPlayer
-    requiredItems: 86:64;+4
+    requiredItems: '86:64;+4'
     displayItem: 86
     resetInHours: 20
     takeItems: true
-    itemReward: 3:5
+    itemReward: '3:5'
     rewardText: 5 dirt
     currencyReward: 15
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: 3:1
+    repeatItemReward: '3:1'
     repeatRewardText: 1 dirt
     repeatCurrencyReward: 2
     repeatXpReward: 10
@@ -174,15 +174,15 @@ challengeList:
     description: 'Reach island level 20.'
     rankLevel: Easy
     type: islandLevel
-    requiredItems: 20
+    requiredItems: '20'
     takeItems: false
-    itemReward: 257:1 3:5
+    itemReward: '257:1 3:5'
     rewardText: 1 iron pickaxe, 5 dirt
     currencyReward: 50
     xpReward: 50
     permissionReward: none
     repeatable: false
-    repeatItemReward: 3:1
+    repeatItemReward: '3:1'
     repeatRewardText: 1 Dirt
     repeatCurrencyReward: 5
     repeatXpReward: 5
@@ -190,16 +190,16 @@ challengeList:
     description: 'Collect red and brown mushrooms.'
     rankLevel: Medium
     type: onPlayer
-    requiredItems: 39:64;+4 40:64;+4
+    requiredItems: '39:64;+4 40:64;+4'
     displayItem: 40
     takeItems: true
-    itemReward: 110:1
+    itemReward: '110:1'
     rewardText: 1 mycelium
     currencyReward: 15
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: 110:1 3:2:2
+    repeatItemReward: '110:1 3:2:2'
     repeatRewardText: 1 mycelium, 2 podzol
     repeatCurrencyReward: 5
     repeatXpReward: 10
@@ -207,16 +207,16 @@ challengeList:
     description: 'Kill monsters and collect their parts.'
     rankLevel: Medium
     type: onPlayer
-    requiredItems: 367:64;+4 287:32;+2 289:16;+1 262:32;+2 352:32;+2 375:5
+    requiredItems: '367:64;+4 287:32;+2 289:16;+1 262:32;+2 352:32;+2 375:5'
     displayItem: 367
     takeItems: true
-    itemReward: 331:16 15:5 318:1
+    itemReward: '331:16 15:5 318:1'
     rewardText: 16 redstone, 1 flint, 5 iron
     currencyReward: 75
     xpReward: 75
     permissionReward: none
     repeatable: true
-    repeatItemReward: 331:2 15:1 318:1
+    repeatItemReward: '331:2 15:1 318:1'
     repeatRewardText: 2 redstone, 1 flint, 1 iron
     repeatCurrencyReward: 10
     repeatXpReward: 15
@@ -224,17 +224,17 @@ challengeList:
     description: 'Harvest many different farming resources.'
     rankLevel: Medium
     type: onPlayer
-    requiredItems: 360:64;+2 353:64;+2 296:64;+2 392:64;+2 391:64;+2 86:64;+2 81:64;+2
+    requiredItems: '360:64;+2 353:64;+2 296:64;+2 392:64;+2 391:64;+2 86:64;+2 81:64;+2'
     resetInHours: 20
     displayItem: 60
     takeItems: true
-    itemReward: 331:16 351:3:1 383:90:1 383:92:1 383:93:1
+    itemReward: '331:16 351:3:1 383:90:1 383:92:1 383:93:1'
     rewardText: 16 redstone, 1 cocoa, 3 animals
     currencyReward: 75
     xpReward: 75
     permissionReward: none
     repeatable: true
-    repeatItemReward: 351:3:1 383:90:1 383:92:1 383:93:1 82:5
+    repeatItemReward: '351:3:1 383:90:1 383:92:1 383:93:1 82:5'
     repeatRewardText: 1 cocoa, 3 animals, 5 clay
     repeatCurrencyReward: 30
     repeatXpReward: 25
@@ -242,16 +242,16 @@ challengeList:
     description: 'Catch different types of fish.'
     rankLevel: Medium
     type: onPlayer
-    requiredItems: 349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1
+    requiredItems: '349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1'
     displayItem: 349
     takeItems: true
-    itemReward: 331:16 15:5 351:5
+    itemReward: '331:16 15:5 351:5'
     rewardText: 16 redstone, 5 inksac, 5 iron
     currencyReward: 75
     xpReward: 75
     permissionReward: none
     repeatable: true
-    repeatItemReward: 331:2 351:2
+    repeatItemReward: '331:2 351:2'
     repeatRewardText: 2 redstone, 2 inksac
     repeatCurrencyReward: 10
     repeatXpReward: 15
@@ -259,16 +259,16 @@ challengeList:
     description: 'Collect all types of wood logs.'
     rankLevel: Medium
     type: onPlayer
-    requiredItems: 17:0:16;+2 17:1:16;+2 17:2:16;+2 17:3:16;+2 162:0:16;+2 162:1:16;+2
+    requiredItems: '17:0:16;+2 17:1:16;+2 17:2:16;+2 17:3:16;+2 162:0:16;+2 162:1:16;+2'
     displayItem: 17
     takeItems: true
-    itemReward: 331:16 15:5 383:95:1
+    itemReward: '331:16 15:5 383:95:1'
     rewardText: 16 redstone, 5 iron, 1 wolf
     currencyReward: 75
     xpReward: 75
     permissionReward: none
     repeatable: true
-    repeatItemReward: 331:2 15:1
+    repeatItemReward: '331:2 15:1'
     repeatRewardText: 2 redstone, 1 iron
     repeatCurrencyReward: 20
     repeatXpReward: 15
@@ -276,16 +276,16 @@ challengeList:
     description: 'Make cookies and a bucket of milk.'
     rankLevel: Medium
     type: onPlayer
-    requiredItems: 335:1 357:128;+4
+    requiredItems: '335:1 357:128;+4'
     displayItem: 357
     takeItems: true
-    itemReward: 331:16 15:5 325:1
+    itemReward: '331:16 15:5 325:1'
     rewardText: 16 redstone, 5 iron, 1 bucket
     currencyReward: 75
     xpReward: 75
     permissionReward: none
     repeatable: true
-    repeatItemReward: 331:2 325:1
+    repeatItemReward: '331:2 325:1'
     repeatRewardText: 2 redstone, 1 bucket
     repeatCurrencyReward: 5
     repeatXpReward: 15
@@ -293,9 +293,9 @@ challengeList:
     description: 'Reach island level 100.'
     rankLevel: Medium
     type: islandLevel
-    requiredItems: 100
+    requiredItems: '100'
     takeItems: false
-    itemReward: 49:12
+    itemReward: '49:12'
     rewardText: 12 obsidian
     currencyReward: 75
     xpReward: 75
@@ -309,9 +309,9 @@ challengeList:
     description: 'Build a house with furnishings.'
     rankLevel: Medium
     type: onIsland
-    requiredItems: 26:1 58:1 20:1 64:1 61:1 47:1 50:1
+    requiredItems: '26:1 58:1 20:1 64:1 61:1 47:1 50:1'
     takeItems: false
-    itemReward: 84:1 2267:1 22:10
+    itemReward: '84:1 2267:1 22:10'
     rewardText: 1 jukebox, 1 disk and 10 lapis lazuli
     currencyReward: 100
     xpReward: 100
@@ -325,9 +325,9 @@ challengeList:
     description: 'Build a nether portal on your island.'
     rankLevel: Hard
     type: onIsland
-    requiredItems: 49:10 90:1
+    requiredItems: '49:10 90:1'
     takeItems: false
-    itemReward: 276:1
+    itemReward: '276:1'
     rewardText: 1 diamond sword
     currencyReward: 100
     xpReward: 100
@@ -341,16 +341,16 @@ challengeList:
     description: 'Collect enderpearls from endermen.'
     rankLevel: Hard
     type: onPlayer
-    requiredItems: 368:10;+1
+    requiredItems: '368:10;+1'
     displayItem: 368
     takeItems: true
-    itemReward: 266:5 369:1
+    itemReward: '266:5 369:1'
     rewardText: 5 gold ingots, 1 blaze rod
     currencyReward: 50
     xpReward: 100
     permissionReward: none
     repeatable: true
-    repeatItemReward: 266:1 369:1
+    repeatItemReward: '266:1 369:1'
     repeatRewardText: 1 gold ingot, 1 blaze rod
     repeatCurrencyReward: 25
     repeatXpReward: 15
@@ -358,16 +358,16 @@ challengeList:
     description: 'Collect slimeballs from slimes.'
     rankLevel: Hard
     type: onPlayer
-    requiredItems: 341:64;+4
+    requiredItems: '341:64;+4'
     displayItem: 341
     takeItems: true
-    itemReward: 266:5 388:5
+    itemReward: '266:5 388:5'
     rewardText: 5 gold ingots, 5 emeralds
     currencyReward: 50
     xpReward: 100
     permissionReward: none
     repeatable: true
-    repeatItemReward: 331:2 388:1
+    repeatItemReward: '331:2 388:1'
     repeatRewardText: 2 redstone, 1 emerald
     repeatCurrencyReward: 5
     repeatXpReward: 5
@@ -375,16 +375,16 @@ challengeList:
     description: 'Bake cakes, pumpkin pies, and cookies.'
     rankLevel: Hard
     type: onPlayer
-    requiredItems: 354:5;+1 400:5;+1 357:128;+4
+    requiredItems: '354:5;+1 400:5;+1 357:128;+4'
     displayItem: 354
     takeItems: true
-    itemReward: 266:5 264:1
+    itemReward: '266:5 264:1'
     rewardText: 5 gold ingots, 1 diamond
     currencyReward: 50
     xpReward: 100
     permissionReward: none
     repeatable: true
-    repeatItemReward: 15:2 266:1
+    repeatItemReward: '15:2 266:1'
     repeatRewardText: 2 iron, 1 gold ingot
     repeatCurrencyReward: 30
     repeatXpReward: 15
@@ -392,16 +392,16 @@ challengeList:
     description: 'Collect items for exploration, nether items.'
     rankLevel: Hard
     type: onPlayer
-    requiredItems: 87:64 88:16 370:1 395:1 345:1 347:1
+    requiredItems: '87:64 88:16 370:1 395:1 345:1 347:1'
     displayItem: 370
     takeItems: true
-    itemReward: 27:32 66:256 264:1 383:98:1
+    itemReward: '27:32 66:256 264:1 383:98:1'
     rewardText: 288 rails, 1 diamond, 1 ocelot
     currencyReward: 100
     xpReward: 100
     permissionReward: none
     repeatable: true
-    repeatItemReward: 66:64 15:1 421:1 388:5
+    repeatItemReward: '66:64 15:1 421:1 388:5'
     repeatRewardText: 64 rails, 1 iron, 1 tag, 5 emerald
     repeatCurrencyReward: 25
     repeatXpReward: 20
@@ -409,9 +409,9 @@ challengeList:
     description: 'Reach island level 250.'
     rankLevel: Hard
     type: islandLevel
-    requiredItems: 250
+    requiredItems: '250'
     takeItems: false
-    itemReward: 264:1 3:32 12:32
+    itemReward: '264:1 3:32 12:32'
     rewardText: 1 diamond, 32 dirt, 32 sand
     currencyReward: 150
     xpReward: 150
@@ -425,16 +425,16 @@ challengeList:
     description: 'Collect every color of wool.'
     rankLevel: Master
     type: onPlayer
-    requiredItems: 35:0:5;+1 35:1:5;+1 35:2:5;+1 35:3:5;+1 35:4:5;+1 35:5:5;+1 35:6:5;+1 35:7:5;+1 35:8:5;+1 35:9:5;+1 35:10:5;+1 35:11:5;+1 35:12:5;+1 35:13:5;+1 35:14:5;+1 35:15:5;+1
+    requiredItems: '35:0:5;+1 35:1:5;+1 35:2:5;+1 35:3:5;+1 35:4:5;+1 35:5:5;+1 35:6:5;+1 35:7:5;+1 35:8:5;+1 35:9:5;+1 35:10:5;+1 35:11:5;+1 35:12:5;+1 35:13:5;+1 35:14:5;+1 35:15:5;+1'
     displayItem: 35
     takeItems: true
-    itemReward: 264:2 2262:1 2263:1 2261:1 383:91:1 388:5
+    itemReward: '264:2 2262:1 2263:1 2261:1 383:91:1 388:5'
     rewardText: 2 diamonds, 3 disks, 1 sheep, 5 emeralds
     currencyReward: 200
     xpReward: 200
     permissionReward: none
     repeatable: true
-    repeatItemReward: 388:5 383:91:1
+    repeatItemReward: '388:5 383:91:1'
     repeatRewardText: 5 emeralds, 1 sheep
     repeatCurrencyReward: 50
     repeatXpReward: 20
@@ -442,16 +442,16 @@ challengeList:
     description: 'Collect every color of stained glass.'
     rankLevel: Master
     type: onPlayer
-    requiredItems: 95:0:16;+2 95:1:16;+2 95:2:16;+2 95:3:16;+2 95:4:16;+2 95:5:16;+2 95:6:16;+2 95:7:16;+2 95:8:16;+2 95:9:16;+2 95:10:16;+2 95:11:16;+2 95:12:16;+2 95:13:16;+2 95:14:16;+2 95:15:16;+2
+    requiredItems: '95:0:16;+2 95:1:16;+2 95:2:16;+2 95:3:16;+2 95:4:16;+2 95:5:16;+2 95:6:16;+2 95:7:16;+2 95:8:16;+2 95:9:16;+2 95:10:16;+2 95:11:16;+2 95:12:16;+2 95:13:16;+2 95:14:16;+2 95:15:16;+2'
     displayItem: 95
     takeItems: true
-    itemReward: 264:2 2262:1 2263:1 2261:1 383:91:1 388:5
+    itemReward: '264:2 2262:1 2263:1 2261:1 383:91:1 388:5'
     rewardText: 2 diamond, 3 disk, 1 sheep, 5 emerald
     currencyReward: 200
     xpReward: 200
     permissionReward: none
     repeatable: true
-    repeatItemReward: 388:5 383:91:1
+    repeatItemReward: '388:5 383:91:1'
     repeatRewardText: 1 sheep, 5 emeralds
     repeatCurrencyReward: 50
     repeatXpReward: 20
@@ -459,17 +459,17 @@ challengeList:
     description: 'Collect a large amount of farmed items.'
     rankLevel: Master
     type: onPlayer
-    requiredItems: 360:128;+1 353:128;+1 296:128;+1 392:128;+1 391:128;+1 86:128;+1 81:128;+1 396:1;+1 322:0:1;+1
+    requiredItems: '360:128;+1 353:128;+1 296:128;+1 392:128;+1 391:128;+1 86:128;+1 81:128;+1 396:1;+1 322:0:1;+1'
     displayItem: 293
     takeItems: true
     resetInHours: 5
-    itemReward: 264:3 388:5
+    itemReward: '264:3 388:5'
     rewardText: 3 diamonds, 5 emeralds
     currencyReward: 200
     xpReward: 200
     permissionReward: none
     repeatable: true
-    repeatItemReward: 388:5 266:2
+    repeatItemReward: '388:5 266:2'
     repeatRewardText: 5 emeralds, 2 gold ingots
     repeatCurrencyReward: 50
     repeatXpReward: 20
@@ -477,16 +477,16 @@ challengeList:
     description: 'Make a jukebox and collect all music discs.'
     rankLevel: Master
     type: onPlayer
-    requiredItems: 2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1
+    requiredItems: '2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1'
     displayItem: 2256
     takeItems: true
-    itemReward: 264:3 388:10
+    itemReward: '264:3 388:10'
     rewardText: 3 diamonds, 10 emeralds
     currencyReward: 200
     xpReward: 200
     permissionReward: none
     repeatable: true
-    repeatItemReward: 266:2 264:1
+    repeatItemReward: '266:2 264:1'
     repeatRewardText: 2 gold ingots, 1 diamond
     repeatCurrencyReward: 50
     repeatXpReward: 20
@@ -494,16 +494,16 @@ challengeList:
     description: 'Collect emeralds.'
     rankLevel: Master
     type: onPlayer
-    requiredItems: 388:50;+10
+    requiredItems: '388:50;+10'
     displayItem: 388
     takeItems: true
-    itemReward: 264:2
+    itemReward: '264:2'
     rewardText: 2 diamonds
     currencyReward: 200
     xpReward: 200
     permissionReward: none
     repeatable: true
-    repeatItemReward: 264:1
+    repeatItemReward: '264:1'
     repeatRewardText: 1 diamond
     repeatCurrencyReward: 50
     repeatXpReward: 20
@@ -511,16 +511,16 @@ challengeList:
     description: 'Collect every kind of edible food.'
     rankLevel: Master
     type: onPlayer
-    requiredItems: 393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1
+    requiredItems: '393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1'
     displayItem: 391
     takeItems: true
-    itemReward: 264:2 2257:1 2258:1 2260:1 383:96:1 388:5
+    itemReward: '264:2 2257:1 2258:1 2260:1 383:96:1 388:5'
     rewardText: 2 diamond, 3 disk, 1 mooshroom, 5 emerald
     currencyReward: 200
     xpReward: 200
     permissionReward: none
     repeatable: true
-    repeatItemReward: 266:3 383:96:1 388:5
+    repeatItemReward: '266:3 383:96:1 388:5'
     repeatRewardText: 3 gold ingots, 1 mooshroom, 5 emeralds
     repeatCurrencyReward: 50
     repeatXpReward: 20
@@ -528,9 +528,9 @@ challengeList:
     description: 'Get an island level of 1000.'
     rankLevel: Master
     type: islandLevel
-    requiredItems: 1000
+    requiredItems: '1000'
     takeItems: false
-    itemReward: 264:1
+    itemReward: '264:1'
     rewardText: 1 diamond
     currencyReward: 250
     xpReward: 250
