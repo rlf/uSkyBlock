@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
+import net.milkbowl.vault.item.Items;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
@@ -743,7 +744,7 @@ public class IslandCommand implements CommandExecutor {
                                 for (BlockScore score : shared[0].getTop(10)) {
                                     Material material = Material.getMaterial(score.getBlockId());
                                     player.sendMessage(String.format("%05.2f  %d %s",
-                                            score.getScore(), score.getCount(), material));
+                                            score.getScore(), score.getCount(), VaultHandler.getItemName(material)));
                                 }
                                 player.sendMessage(MessageFormat.format(ChatColor.GREEN + "Island level is {0,number,#.##}", shared[0].getScore()));
                             } else {

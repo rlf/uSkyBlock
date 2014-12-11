@@ -1,9 +1,12 @@
 package us.talabrek.ultimateskyblock;
 
+import net.milkbowl.vault.item.ItemInfo;
+import net.milkbowl.vault.item.Items;
 import net.milkbowl.vault.permission.*;
 import net.milkbowl.vault.economy.*;
 import org.bukkit.entity.*;
 import org.bukkit.*;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.*;
 
 public enum VaultHandler {;
@@ -62,6 +65,22 @@ public enum VaultHandler {;
         }
         econ = rsp.getProvider();
         return econ != null;
+    }
+
+    public static String getItemName(ItemStack stack) {
+        if (stack != null) {
+            ItemInfo itemInfo = Items.itemByStack(stack);
+            return itemInfo != null ? itemInfo.getName() : "" + stack.getType();
+        }
+        return null;
+    }
+
+    public static String getItemName(Material material) {
+        if (material != null) {
+            ItemInfo itemInfo = Items.itemByType(material);
+            return itemInfo != null ? itemInfo.getName() : material.name();
+        }
+        return null;
     }
 
     public static boolean hasEcon() {

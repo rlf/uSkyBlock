@@ -1,7 +1,10 @@
 package us.talabrek.ultimateskyblock.challenge;
 
+import net.milkbowl.vault.item.ItemInfo;
+import net.milkbowl.vault.item.Items;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.talabrek.ultimateskyblock.VaultHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,12 +97,17 @@ public class Challenge {
                 amount = calcAmount(amount, op, inc, timesCompleted);
                 ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
                 ItemMeta meta = mat.getItemMeta();
-                meta.setDisplayName("\u00a7f" + amount + " " + mat.getType());
+                meta.setDisplayName("\u00a7f" + amount + " " + VaultHandler.getItemName(mat));
                 mat.setItemMeta(meta);
                 items.add(mat);
             }
         }
         return items;
+    }
+
+    private String getName(ItemStack mat) {
+        ItemInfo itemInfo = Items.itemByStack(mat);
+        return itemInfo != null ? itemInfo.getName() : "" + mat.getType();
     }
 
     public String getRank() {
