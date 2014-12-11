@@ -1,14 +1,18 @@
-package us.talabrek.ultimateskyblock.challenge;
+package us.talabrek.ultimateskyblock.island;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Business logic regarding the calculation of level
@@ -49,15 +53,27 @@ public class LevelLogic {
         }
     }
 
-    public long calculateScore(PlayerInfo playerInfo) {
-        final int[] values = new int[MAX_BLOCK];
+    public void loadIslandChunks(Location l, int radius) {
+        World world = l.getWorld();
+        final int px = l.getBlockX();
+        final int pz = l.getBlockZ();
+        for (int x = -radius-16; x <= radius+16; x += 16) {
+            for (int z = -radius-16; z <= radius+16; z += 16) {
+                world.loadChunk((px + x) / 16, (pz + z) / 16);
+            }
+        }
+    }
+
+    public IslandScore calculateScore(PlayerInfo playerInfo) {
+        final int radius = Settings.island_protectionRange / 2;
+        int pointsPerLevel = config.getInt("general.pointsPerLevel");
         final Location l = playerInfo.getIslandLocation();
         final int px = l.getBlockX();
         final int py = l.getBlockY();
         final int pz = l.getBlockZ();
         final World w = l.getWorld();
-        int radius = Settings.island_protectionRange / 2;
         int typeId;
+        final int[] values = new int[MAX_BLOCK];
         for (int x = -radius; x <= radius; ++x) {
             for (int y = 0; y <= 255; ++y) {
                 for (int z = -radius; z <= radius; ++z) {
@@ -67,21 +83,23 @@ public class LevelLogic {
             }
         }
         double score = 0;
+        List<BlockScore> blocks = new ArrayList<>();
         for (int i = 1; i < MAX_BLOCK; ++i) {
-            double count = values[i];
-            if (count > blockLimit[i] && blockLimit[i] != -1) {
-                count = blockLimit[i]; // Hard edge
+            int count = values[i];
+            if (count > 0) {
+                double adjustedCount = count;
+                if (count > blockLimit[i] && blockLimit[i] != -1) {
+                    adjustedCount = blockLimit[i]; // Hard edge
+                }
+                if (blockDR[i] > 0) {
+                    adjustedCount = dReturns(count, blockDR[i]);
+                }
+                double blockScore = adjustedCount * blockValue[i];
+                score += blockScore;
+                blocks.add(new BlockScore(i, count, blockScore/pointsPerLevel));
             }
-            if (blockDR[i] > 0) {
-                count = dReturns(count, blockDR[i]);
-            }
-            score += count*blockValue[i];
         }
-        long islandLevel = Math.round(score / config.getInt("general.pointsPerLevel"));
-        uSkyBlock.getInstance().getIslandConfig(playerInfo).set("general.level", islandLevel);
-        playerInfo.savePlayerConfig(playerInfo.getPlayerName());
-        uSkyBlock.getInstance().saveIslandConfig(playerInfo.locationForParty());
-        return islandLevel;
+        return new IslandScore(score/pointsPerLevel, blocks);
     }
 
     double dReturns(final double val, final double scale) {

@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class ChallengeLogic {
     private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<data>[0-9]+))?:(?<amount>[0-9]+)");
     // TODO: 09/12/2014 - R4zorax: This is not thread-safe...
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat(".#");
+    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat(".#");
     public static final int MS_MIN = 60*1000;
     public static final int MS_HOUR = 60*MS_MIN;
     public static final long MS_DAY = 24*MS_HOUR;

@@ -20,7 +20,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
-import us.talabrek.ultimateskyblock.challenge.LevelLogic;
+import us.talabrek.ultimateskyblock.island.LevelLogic;
 
 import java.io.*;
 import java.nio.file.Files;

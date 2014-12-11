@@ -3,10 +3,14 @@ package us.talabrek.ultimateskyblock;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.logging.Level;
 
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.island.BlockScore;
+import us.talabrek.ultimateskyblock.island.BlockScoreComparator;
+import us.talabrek.ultimateskyblock.island.IslandScore;
 
 public class IslandCommand implements CommandExecutor {
     private List<String> banList;
@@ -253,12 +257,7 @@ public class IslandCommand implements CommandExecutor {
                             if (!pi.getHasParty() && !pi.getHasIsland()) {
                                 player.sendMessage(ChatColor.RED + "You do not have an island!");
                             } else {
-                                for (int x = Settings.island_protectionRange / 2 * -1 - 16; x <= Settings.island_protectionRange / 2 + 16; x += 16) {
-                                    for (int z = Settings.island_protectionRange / 2 * -1 - 16; z <= Settings.island_protectionRange / 2 + 16; z += 16) {
-                                        uSkyBlock.getSkyBlockWorld().loadChunk((pi.getIslandLocation().getBlockX() + x) / 16, (pi.getIslandLocation().getBlockZ() + z) / 16);
-                                    }
-                                }
-                                this.getIslandLevel(player, player.getName());
+                                getIslandLevel(player, player.getName(), split[0]);
                             }
                             return true;
                         }
@@ -422,7 +421,7 @@ public class IslandCommand implements CommandExecutor {
                     if (!pi.getHasParty() && !pi.getHasIsland()) {
                         player.sendMessage(ChatColor.RED + "You do not have an island!");
                     } else {
-                        this.getIslandLevel(player, split[1]);
+                        this.getIslandLevel(player, split[1], split[0]);
                     }
                     return true;
                 }
@@ -698,7 +697,7 @@ public class IslandCommand implements CommandExecutor {
         return null;
     }
 
-    public boolean getIslandLevel(final Player player, final String islandPlayer) {
+    public boolean getIslandLevel(final Player player, final String islandPlayer, final String cmd) {
         if (!this.allowInfo) {
             player.sendMessage(ChatColor.RED + "Can't use that command right now! Try again in a few seconds.");
             System.out.print(String.valueOf(player.getName()) + " tried to use /island info but someone else used it first!");
@@ -711,12 +710,22 @@ public class IslandCommand implements CommandExecutor {
             return false;
         }
         final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? uSkyBlock.getInstance().getPlayerInfo(player) : new PlayerInfo(islandPlayer);
+        if (player.getName().equals(playerInfo.getPlayerName())) {
+            uSkyBlock.getInstance().getLevelLogic().loadIslandChunks(playerInfo.getIslandLocation(), Settings.island_protectionRange/2);
+        }
         uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
+                final IslandScore[] shared = new IslandScore[1];
                 if (player.getName().equals(playerInfo.getPlayerName())) {
                     try {
-                        uSkyBlock.getInstance().getLevelLogic().calculateScore(playerInfo);
+                        IslandScore score = uSkyBlock.getInstance().getLevelLogic().calculateScore(playerInfo);
+                        uSkyBlock.getInstance().getIslandConfig(playerInfo).set("general.level", score.getScore());
+                        playerInfo.savePlayerConfig(playerInfo.getPlayerName());
+                        uSkyBlock.getInstance().saveIslandConfig(playerInfo.locationForParty());
+                        if (cmd.equalsIgnoreCase("info")) {
+                            shared[0] = score;
+                        }
                     } catch (Exception e) {
                         uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
                     } finally {
@@ -729,7 +738,17 @@ public class IslandCommand implements CommandExecutor {
                         IslandCommand.this.allowInfo = true;
                         if (player.isOnline()) {
                             player.sendMessage(ChatColor.YELLOW + "Information about " + islandPlayer + "'s Island:");
-                            player.sendMessage(ChatColor.GREEN + "Island level is " + uSkyBlock.getInstance().getIslandConfig(playerInfo).getInt("general.level"));
+                            if (cmd.equalsIgnoreCase("info") && shared[0] != null) {
+                                player.sendMessage("Score Count Block");
+                                for (BlockScore score : shared[0].getTop(10)) {
+                                    Material material = Material.getMaterial(score.getBlockId());
+                                    player.sendMessage(String.format("%05.2f  %d %s",
+                                            score.getScore(), score.getCount(), material));
+                                }
+                                player.sendMessage(MessageFormat.format(ChatColor.GREEN + "Island level is {0,number,#.##}", shared[0].getScore()));
+                            } else {
+                                player.sendMessage(MessageFormat.format(ChatColor.GREEN + "Island level is {0,number,#.##}", uSkyBlock.getInstance().getIslandConfig(playerInfo).getDouble("general.level")));
+                            }
                         }
                     }
                 }, 0L);
