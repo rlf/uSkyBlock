@@ -737,7 +737,7 @@ public class uSkyBlock extends JavaPlugin {
             return true;
         }
         getInstance().removeCreatures(homeSweetHome);
-        player.teleport(homeSweetHome);
+        player.teleport(homeSweetHome.add(0.5,0.5,0.5)); // Push to the middle of the block!
         player.sendMessage(ChatColor.GREEN + "Teleporting you to your island.");
         return true;
     }
