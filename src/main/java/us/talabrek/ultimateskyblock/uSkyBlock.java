@@ -70,7 +70,6 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public uSkyBlock() {
-        super();
         // TODO: 08/12/2014 - R4zorax: Most of these should be converted to local variables
         configFiles.clear();
         this.lastIslandConfig = null;
@@ -336,7 +335,7 @@ public class uSkyBlock extends JavaPlugin {
 
     public void clearOrphanedIsland() {
         while (this.hasOrphanedIsland()) {
-            this.orphaned.pop();
+            orphaned.pop();
         }
     }
 
@@ -455,7 +454,7 @@ public class uSkyBlock extends JavaPlugin {
         if (!this.getActivePlayers().containsKey(player)) {
             final PlayerInfo pi = new PlayerInfo(player);
             regionManager.removeRegion(player + "Island");
-            this.orphaned.push(pi.getIslandLocation());
+            orphaned.push(pi.getIslandLocation());
             this.removeIsland(pi.getIslandLocation());
             this.deleteIslandConfig(pi.locationForParty());
             pi.removeFromIsland();
@@ -465,7 +464,7 @@ public class uSkyBlock extends JavaPlugin {
             if (regionManager.hasRegion(player + "Island")) {
                 regionManager.removeRegion(player + "Island");
             }
-            this.orphaned.push(this.getActivePlayers().get(player).getIslandLocation());
+            orphaned.push(this.getActivePlayers().get(player).getIslandLocation());
             this.removeIsland(this.getActivePlayers().get(player).getIslandLocation());
             this.deleteIslandConfig(this.getActivePlayers().get(player).locationForParty());
             final PlayerInfo pi = new PlayerInfo(player);
@@ -584,7 +583,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public int orphanCount() {
-        return this.orphaned.size();
+        return orphaned.size();
     }
 
     public void removeIsland(final Location loc) {
@@ -674,37 +673,39 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean hasOrphanedIsland() {
-        return !this.orphaned.empty();
+        return !orphaned.empty();
     }
 
     public Location checkOrphan() {
-        return this.orphaned.peek();
+        return orphaned.peek();
     }
 
     public Location getOrphanedIsland() {
         if (this.hasOrphanedIsland()) {
-            return this.orphaned.pop();
+            return orphaned.pop();
         }
         return null;
     }
 
     public void addOrphan(final Location island) {
-        this.orphaned.push(island);
+        orphaned.push(island);
     }
 
     public void removeNextOrphan() {
-        this.orphaned.pop();
+        orphaned.pop();
     }
 
     public void saveOrphans() {
         String fullOrphan = "";
-        this.tempOrphaned = (Stack<Location>) this.orphaned.clone();
+        this.tempOrphaned = (Stack<Location>) orphaned.clone();
         while (!this.tempOrphaned.isEmpty()) {
-            this.reverseOrphaned.push(this.tempOrphaned.pop());
+            reverseOrphaned.push(this.tempOrphaned.pop());
         }
-        while (!this.reverseOrphaned.isEmpty()) {
-            final Location tempLoc = this.reverseOrphaned.pop();
-            fullOrphan = fullOrphan + tempLoc.getBlockX() + "," + tempLoc.getBlockZ() + ";";
+        while (!reverseOrphaned.isEmpty()) {
+            final Location tempLoc = reverseOrphaned.pop();
+            if (tempLoc != null) {
+                fullOrphan += tempLoc.getBlockX() + "," + tempLoc.getBlockZ() + ";";
+            }
         }
         this.getOrphans().set("orphans.list", fullOrphan);
         this.saveOrphansFile();
@@ -715,11 +716,11 @@ public class uSkyBlock extends JavaPlugin {
             final String fullOrphan = this.getOrphans().getString("orphans.list");
             if (!fullOrphan.isEmpty()) {
                 final String[] orphanArray = fullOrphan.split(";");
-                this.orphaned = new Stack<>();
+                orphaned = new Stack<>();
                 for (int i = 0; i < orphanArray.length; ++i) {
                     final String[] orphanXY = orphanArray[i].split(",");
                     final Location tempLoc = new Location(getSkyBlockWorld(), (double) Integer.parseInt(orphanXY[0]), (double) Settings.island_height, (double) Integer.parseInt(orphanXY[1]));
-                    this.orphaned.push(tempLoc);
+                    orphaned.push(tempLoc);
                 }
             }
         }
@@ -958,7 +959,7 @@ public class uSkyBlock extends JavaPlugin {
                 if (blockcount < 200) {
                     ++numOffline;
                     WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(String.valueOf(oplayers[i].getName()) + "Island");
-                    this.orphaned.push(pi.getIslandLocation());
+                    orphaned.push(pi.getIslandLocation());
                     pi.setHomeLocation(null);
                     pi.setHasIsland(false);
                     pi.setIslandLocation(null);
