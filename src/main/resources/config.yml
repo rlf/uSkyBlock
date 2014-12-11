@@ -1,37 +1,66 @@
 version: '2.0.1 Do not change!'
 options:
   general:
+    #[integer] The max number of players allowed in a single party. (including the leader)
     maxPartySize: 4
+    #[string] The name of the skyblock world, will be automatically generated if it doesn't exist.
     worldName: skyworld
+    #[integer] Not sure what this affects plugin wise.
     spawnSize: 150
+    #[integer] The time in seconds before a player can use the /island info command again. (note: cooldowns are reset when the plugin is reloaded)
     cooldownInfo: 30
+    #[integer] The time in seconds before a player can use the /island restart command again.
     cooldownRestart: 600
+    #[integer] The time in seconds before a player can use the /island biome command again.
     biomeChange: 3600
   island:
+    #[filename] The schematic to use for island generation.
+    #Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
     schematicName: yourschematicname
+    #[integer] The number of blocks between islands.
     distance: 110
+    #[true/false] If true, remove all hostile mobs when a player teleports back to their island.
     removeCreaturesByTeleport: false
+    #[integer] The y-coordinate (height) where islands are spawned.
     height: 150
-    chestItems: '79:2 360:1 81:1 327:1 40:1 39:1 361:1 338:1 323:1'
+    #[item list] The list of items to place in the chest when a player starts a new island. ITEM_ID:HOW_MANY.
+    #default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign.
+    chestItems: 79:2 360:1 81:1 327:1 40:1 39:1 361:1 338:1 323:1
+    #[true/false] If true, add extra items to a chest when a player starts a new island. (for donors and special players)
     addExtraItems: true
+    #[permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
+    #Only checked if 'addExtraItems' is set to true.
     extraPermissions:
-      smallbonus: '4:16 320:5'
-      mediumbonus: '50:16 327:1'
-      largebonus: '3:5 12:5'
-      giantbonus: '2:1 110:1'
-      extremebonus: '352:8 263:4'
-      donorbonus: '261:1 262:32 272:1'
+    #[permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY
+    #When granting the permission, prefix it with "usb." so the full permission to add would be usb.smallbonus
+      smallbonus: 4:16 320:5
+      mediumbonus: 50:16 327:1
+      largebonus: 3:5 12:5
+      giantbonus: 2:1 110:1
+      extremebonus: 352:8 263:4
+      donorbonus: 261:1 262:32 272:1
     worldGuardFlags:
       ALL:
+        #[allow/deny] If allow, pvp will be enabled on every island.
         pvp: 'deny'
+        #[allow/deny] If allow, players can destroy vehicles on any island.
         destroy-vehicle: 'deny'
+        #[allow/deny] If allow, players can destroy item frames on any island.
         entity-item-frame-destroy: 'deny'
+        #[allow/deny] If allow, players can destroy paintings on any island.
         entity-painting-destroy: 'deny'
+    #[integer] The size of the protective region for each island. Can't be higher than 'distance' 
+    #(only used if 'protectWithWorldGuard' is set to true.
     protectionRange: 105
-    allowPvP: deny
+    #[true/false] Allow players to completely lock their islands so non-party members can't enter. (locking still requires permission usb.lock)
     allowIslandLock: true
+    #[true/false] Use old SkySMP style island generation. Set this to true if you want to use the old
+    # island style, or set to false if you want to use the new sytle island generation. Only affects new islands.
     useOldIslands: false
+    #[true/false] If true, use island levels/ranks (/island info) - may have a slight impact on performance
+    #Set to false if you have performance issues
     useIslandLevel: true
+    #[true/false] If true, a top 10 islands list will be generated when the plugin is loaded.
     useTopTen: true
   extra-menus:
     7:
@@ -57,6 +86,10 @@ options:
        - '[group.donor]§e§lClick here to open the shop!'
        - '[!group.donor]§a§7Click here to become a donor!'
   extras:
-    sendToSpawn: false
+    #[true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
+    #NOTE: Requires EssentialsSpawn or another plugin with the "/spawn" command
+    sendToSpawn: true
+    #[true/false] If true, a player can right-click on a block of obsidian on their island while holding an empty bucket to remove the obsidian and fill the bucket with lava. This is useful for people that accidently
+    #turn their lava into obsidian with a bad cobblestone generator design. Will only work on the player's island and if there are no other obsidian blocks nearby (so can't be used on portals).
     obsidianToLava: true
   challenges: 'moved to challenges.yml'
