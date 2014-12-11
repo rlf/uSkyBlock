@@ -35,7 +35,7 @@ challengeList:
     # When using islandLevel, the 'requiredItems' field should be the island level required. The player must use /island level first to update his level.
     type: onPlayer
     #[itemid list] The itemid:count of the items required for the challenge (data values are not supported for required items)
-    requiredItems: 4:64;+2
+    requiredItems: '4:64;+2'
     #[integer] The time in hours before required items reset to default.
     resetInHours: 20
     #[itemid] The itemid of the item to be displayed in the challenge menu for complete challenges.
@@ -43,7 +43,7 @@ challengeList:
     #[true/false] Whether or not to remove the required items from the player's inventory. Only affects onPlayer type challenges. If false, suggested to make the challenge non-repeatable.
     takeItems: true
     #[itemid list] The itemid:<datavalue>:count of the reward to give the player for completing the challenge.
-    itemReward: 334:3
+    itemReward: '334:3'
     #[permission node] A permission granted for completion (use none to not give a permission)
     permissionReward: none
     #[text] The text name of the reward (to display to the player). No need to list currency rewards here, but you should list permission rewards if you have them.
@@ -55,7 +55,7 @@ challengeList:
     #[true/false] If true, the player can repeat the challenge. onIsland and islandLevel challenges cannot be repeated.
     repeatable: true
     #[itemid list] The itemid:count of the reward to give the player for completing the challenge after the first time.
-    repeatItemReward: 334:1
+    repeatItemReward: '334:1'
     #[text] The text name of the reward (to display to the player).
     repeatRewardText: 1 leather
     #[integer] How much currency to give when the challenge is repeated (requires an economy plugin)
@@ -66,17 +66,17 @@ challengeList:
     description: 'Collect apples from trees.'
     rankLevel: Easy
     type: onPlayer
-    requiredItems: 260:2;+1
+    requiredItems: '260:2;+1'
     resetInHours: 20
     displayItem: 260
     takeItems: true
-    itemReward: 6:0:2 6:1:2 6:2:2 6:3:2
+    itemReward: '6:0:2 6:1:2 6:2:2 6:3:2'
     rewardText: 2 of each common sapling
     currencyReward: 10
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: 6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:1
+    repeatItemReward: '6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:1'
     repeatRewardText: 1 of each sapling
     repeatCurrencyReward: 2
     repeatXpReward: 5
@@ -84,17 +84,17 @@ challengeList:
     description: 'Harvest wheat from a farm.'
     rankLevel: Easy
     type: onPlayer
-    requiredItems: 296:64;+4
+    requiredItems: '296:64;+4'
     resetInHours: 20
     displayItem: 296
     takeItems: true
-    itemReward: 3:5
+    itemReward: '3:5'
     rewardText: 5 dirt
     currencyReward: 10
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: 3:1
+    repeatItemReward: '3:1'
     repeatRewardText: 1 dirt
     repeatCurrencyReward: 2
     repeatXpReward: 5
@@ -102,17 +102,17 @@ challengeList:
     description: 'Harvest cacti from a farm.'
     rankLevel: Easy
     type: onPlayer
-    requiredItems: 81:64;+4
+    requiredItems: '81:64;+4'
     resetInHours: 20
     displayItem: 81
     takeItems: true
-    itemReward: 12:10
+    itemReward: '12:10'
     rewardText: 10 sand
     currencyReward: 15
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: 12:1
+    repeatItemReward: '12:1'
     repeatRewardText: 1 sand
     repeatCurrencyReward: 2
     repeatXpReward: 5
@@ -120,17 +120,17 @@ challengeList:
     description: 'Harvest sugarcane from a farm.'
     rankLevel: Easy
     type: onPlayer
-    requiredItems: 338:64;+4
+    requiredItems: '338:64;+4'
     resetInHours: 20
     displayItem: 338
     takeItems: true
-    itemReward: 3:5 82:15
+    itemReward: '3:5 82:15'
     rewardText: 5 dirt, 15 clay
     currencyReward: 15
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: 82:1
+    repeatItemReward: '82:1'
     repeatRewardText: 1 clay
     repeatCurrencyReward: 2
     repeatXpReward: 3
