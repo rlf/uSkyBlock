@@ -86,6 +86,9 @@ public class ChallengeLogic {
     }
 
     public boolean isRankAvailable(final Player player, final String rank) {
+        if (!defaults.requiresPreviousRank) {
+            return true;
+        }
         if (ranks.size() < 2) {
             return true;
         }
