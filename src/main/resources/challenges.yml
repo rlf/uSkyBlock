@@ -70,14 +70,14 @@ challengeList:
     resetInHours: 20
     displayItem: 260
     takeItems: true
-    itemReward: '6:0:2 6:1:2 6:2:2 6:3:2'
-    rewardText: 2 of each common sapling
+    itemReward: '6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:2'
+    rewardText: 1 of each sapling, (2 dark oak)
     currencyReward: 10
     xpReward: 30
     permissionReward: none
     repeatable: true
-    repeatItemReward: '6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:1'
-    repeatRewardText: 1 of each sapling
+    repeatItemReward: '6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:2'
+    repeatRewardText: 1 of each sapling, (2 dark oak)
     repeatCurrencyReward: 2
     repeatXpReward: 5
   wheatfarmer:
