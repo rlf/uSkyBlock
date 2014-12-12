@@ -137,11 +137,10 @@ public class ChallengeLogic {
             }
             return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND_LEVEL) {
-            if (skyBlock.getIslandConfig(player).getInt("general.level") >= challenge.getRequiredLevel()) {
-                return true;
+            if (!tryCompleteIslandLevel(player, challenge)) {
+                player.sendMessage(ChatColor.RED + "Your island must be level " + challenge.getRequiredLevel() + " to complete this challenge!");
             }
-            player.sendMessage(ChatColor.RED + "Your island must be level " + challenge.getRequiredLevel() + " to complete this challenge!");
-            return false;
+            return true;
         }
         return false;
     }
@@ -165,14 +164,22 @@ public class ChallengeLogic {
     }
 
     public boolean tryComplete(final Player player, final String challenge, final String type) {
-
         if (type.equalsIgnoreCase("onPlayer")) {
             return tryCompleteOnPlayer(player, challenge);
-        }
-        if (type.equalsIgnoreCase("onIsland")) {
+        } else if (type.equalsIgnoreCase("onIsland")) {
             return tryCompleteOnIsland(player, challenge);
+        } else {
+            player.sendMessage(ChatColor.RED + "Unknown type of challenge: " + type);
         }
         return true;
+    }
+
+    private boolean tryCompleteIslandLevel(Player player, Challenge challenge) {
+        if (skyBlock.getIslandConfig(player).getInt("general.level") >= challenge.getRequiredLevel()) {
+            giveReward(player, challenge.getName());
+            return true;
+        }
+        return false;
     }
 
     private boolean islandContains(Player player, List<ItemStack> itemStacks, int radius) {

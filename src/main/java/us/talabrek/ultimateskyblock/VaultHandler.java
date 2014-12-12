@@ -9,6 +9,8 @@ import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.*;
 
+import java.nio.charset.Charset;
+
 public enum VaultHandler {;
     private static Permission perms;
     private static Economy econ;
@@ -81,6 +83,16 @@ public enum VaultHandler {;
             return itemInfo != null ? itemInfo.getName() : material.name();
         }
         return null;
+    }
+
+    public static String getItemName(int blockId) {
+        ItemInfo itemInfo = Items.itemById(blockId);
+        if (itemInfo != null && itemInfo.getName() != null) {
+            return itemInfo.getName();
+        } else {
+            Material material = Material.getMaterial(blockId);
+            return material != null ? material.name() : null;
+        }
     }
 
     public static boolean hasEcon() {
