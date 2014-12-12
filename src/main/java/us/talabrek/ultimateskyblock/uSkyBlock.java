@@ -809,8 +809,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean locationIsOnIsland(final Player player, final Location loc) {
-        // TODO: 12/12/2014 - R4zorax: Is equals correctly implemented?
-        if (!loc.getWorld().equals(skyBlockWorld)) {
+        if (!isSkyWorld(player.getWorld())) {
             return false;
         }
         if (this.getActivePlayers().containsKey(player.getName())) {
@@ -821,7 +820,7 @@ public class uSkyBlock extends JavaPlugin {
             int r = Settings.island_radius;
             CuboidRegion region = new CuboidRegion(
                     new Vector(p.getBlockX()-r, 0, p.getBlockZ()-r),
-                    new Vector(p.getBlockX()-r, 0, p.getBlockZ()-r)
+                    new Vector(p.getBlockX()+r, 255, p.getBlockZ()+r)
             );
             return region.contains(new Vector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()));
         }
