@@ -23,6 +23,7 @@ blockValues:
   15: 200
   16: 200
   18: 0
+  19: 50
   20: 50
   21: 300
   22: 500
@@ -97,15 +98,25 @@ blockValues:
   156: 100
   157: 20
   159: 50
+  165: 250
+  167: 20
+  168: 50
+  169: 50
   171: 20
   172: 20
+  173: 500
+  176: 20
+  177: 20
+  179: 20
+
 #blockLimits - blocks listed here will stop adding to island levels after the given number of blocks.
 blockLimits:
   04: 10000
+  19: 20
   87: 10000
   88: 10000
-  121: 10000
   106: 100
+  121: 10000
   130: 3
   138: 10
 #diminishingReturns [ID: SCALE] - The listed blocks will add more to island level before SCALE number of blocks are counted towards the island level, and less to island level after SCALE.
@@ -140,3 +151,8 @@ diminishingReturns:
   128: 5000
   139: 5000
   156: 10000
+  165: 100
+  167: 10
+  173: 100
+  176: 20
+  177: 20

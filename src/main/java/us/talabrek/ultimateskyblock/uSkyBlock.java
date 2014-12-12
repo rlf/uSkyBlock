@@ -1,9 +1,12 @@
 package us.talabrek.ultimateskyblock;
 
-import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.*;
+import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import org.bukkit.*;
+import org.bukkit.Location;
 import org.bukkit.block.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
@@ -13,6 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -55,7 +59,6 @@ public class uSkyBlock extends JavaPlugin {
     public File directoryPlayers;
     public File directoryIslands;
     public File[] schemFile;
-    public Location islandTestLocation;
     LinkedHashMap<String, Double> topTen;
     HashMap<String, Long> infoCooldown;
     HashMap<String, Long> restartCooldown;
@@ -81,7 +84,6 @@ public class uSkyBlock extends JavaPlugin {
         this.orphaned = new Stack<>();
         this.tempOrphaned = new Stack<>();
         this.reverseOrphaned = new Stack<>();
-        this.islandTestLocation = null;
         this.infoCooldown = new HashMap<>();
         this.restartCooldown = new HashMap<>();
         this.biomeCooldown = new HashMap<>();
@@ -92,6 +94,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void onDisable() {
+        HandlerList.unregisterAll(this);
         try {
             this.unloadPlayerFiles();
             if (this.lastIsland != null) {
@@ -158,7 +161,7 @@ public class uSkyBlock extends JavaPlugin {
 
         this.loadPlayerFiles();
 
-        this.registerEvents();
+        registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
         this.getCommand("dev").setExecutor(new DevCommand());
@@ -263,7 +266,7 @@ public class uSkyBlock extends JavaPlugin {
 
     public void registerEvents() {
         final PluginManager manager = this.getServer().getPluginManager();
-        manager.registerEvents(new PlayerJoin(), this);
+        manager.registerEvents(new PlayerEvents(this), this);
     }
 
     public PlayerInfo readPlayerFile(final String playerName) {
@@ -317,7 +320,7 @@ public class uSkyBlock extends JavaPlugin {
             if (skyBlockWorld == null) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
-                        .type(WorldType.FLAT)
+                        .type(WorldType.NORMAL)
                         .environment(World.Environment.NORMAL)
                         .generator(new SkyBlockChunkGenerator())
                         .createWorld();
@@ -802,37 +805,27 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean playerIsOnIsland(final Player player) {
-        if (this.getActivePlayers().containsKey(player.getName())) {
-            if (this.getActivePlayers().get(player.getName()).getHasIsland()) {
-                this.islandTestLocation = this.getActivePlayers().get(player.getName()).getIslandLocation();
-            }
-            if (this.islandTestLocation == null) {
-                return false;
-            }
-            if (player.getLocation().getX() > this.islandTestLocation.getX() - Settings.island_protectionRange / 2 && player.getLocation().getX() < this.islandTestLocation.getX() + Settings.island_protectionRange / 2 && player.getLocation().getZ() > this.islandTestLocation.getZ() - Settings.island_protectionRange / 2 && player.getLocation().getZ() < this.islandTestLocation.getZ() + Settings.island_protectionRange / 2) {
-                return true;
-            }
-        }
-        return false;
+        return locationIsOnIsland(player, player.getLocation());
     }
 
     public boolean locationIsOnIsland(final Player player, final Location loc) {
+        // TODO: 12/12/2014 - R4zorax: Is equals correctly implemented?
+        if (!loc.getWorld().equals(skyBlockWorld)) {
+            return false;
+        }
         if (this.getActivePlayers().containsKey(player.getName())) {
-            if (this.getActivePlayers().get(player.getName()).getHasIsland()) {
-                this.islandTestLocation = this.getActivePlayers().get(player.getName()).getIslandLocation();
-            }
-            if (this.islandTestLocation == null) {
+            Location p = getPlayerInfo(player).getIslandLocation();
+            if (p == null) {
                 return false;
             }
-            if (loc.getX() > this.islandTestLocation.getX() - Settings.island_protectionRange / 2 && loc.getX() < this.islandTestLocation.getX() + Settings.island_protectionRange / 2 && loc.getZ() > this.islandTestLocation.getZ() - Settings.island_protectionRange / 2 && loc.getZ() < this.islandTestLocation.getZ() + Settings.island_protectionRange / 2) {
-                return true;
-            }
+            int r = Settings.island_radius;
+            CuboidRegion region = new CuboidRegion(
+                    new Vector(p.getBlockX()-r, 0, p.getBlockZ()-r),
+                    new Vector(p.getBlockX()-r, 0, p.getBlockZ()-r)
+            );
+            return region.contains(new Vector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()));
         }
         return false;
-    }
-
-    public boolean playerIsInSpawn(final Player player) {
-        return player.getLocation().getX() > Settings.general_spawnSize * -1 && player.getLocation().getX() < Settings.general_spawnSize && player.getLocation().getZ() > Settings.general_spawnSize * -1 && player.getLocation().getZ() < Settings.general_spawnSize;
     }
 
     public boolean hasIsland(final String playername) {
@@ -841,17 +834,6 @@ public class uSkyBlock extends JavaPlugin {
         }
         final PlayerInfo pi = new PlayerInfo(playername);
         return pi.getHasIsland();
-    }
-
-    public Location getPlayerIsland(final String playername) {
-        if (this.getActivePlayers().containsKey(playername)) {
-            return this.getActivePlayers().get(playername).getIslandLocation();
-        }
-        final PlayerInfo pi = new PlayerInfo(playername);
-        if (!pi.getHasIsland()) {
-            return null;
-        }
-        return pi.getIslandLocation();
     }
 
     public boolean islandAtLocation(final Location loc) {
@@ -1986,5 +1968,12 @@ public class uSkyBlock extends JavaPlugin {
     public void reloadConfig() {
         Settings.loadPluginConfig(getConfig());
         levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
+    }
+
+    public boolean isSkyWorld(World world) {
+        if (world == null) {
+            return false;
+        }
+        return skyBlockWorld.getName().equalsIgnoreCase(world.getName());
     }
 }

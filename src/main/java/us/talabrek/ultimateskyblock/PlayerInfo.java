@@ -298,8 +298,8 @@ public class PlayerInfo implements Serializable {
 
     // TODO: 09/12/2014 - R4zorax: All this should be made UUID
     public void reloadPlayerConfig(final String player) {
-        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
-        this.playerData = YamlConfiguration.loadConfiguration(this.playerConfigFile);
+        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
+        playerData = YamlConfiguration.loadConfiguration(playerConfigFile);
     }
 
     public void createPlayerConfig(final String player) {
@@ -309,15 +309,15 @@ public class PlayerInfo implements Serializable {
     }
 
     public FileConfiguration getPlayerConfig(final String player) {
-        if (this.playerData == null) {
+        if (playerData == null) {
             uSkyBlock.log(Level.INFO, "Reloading player data!");
-            this.reloadPlayerConfig(player);
+            reloadPlayerConfig(player);
         }
-        return this.playerData;
+        return playerData;
     }
 
     public void savePlayerConfig(final String player) {
-        if (this.playerData == null) {
+        if (playerData == null) {
             uSkyBlock.log(Level.INFO, "Can't save player data!");
             return;
         }
@@ -355,12 +355,12 @@ public class PlayerInfo implements Serializable {
             playerConfig.set("player.challenges." + currentChallenge + ".timesCompleted", challenges.get(currentChallenge).getTimesCompleted());
             playerConfig.set("player.challenges." + currentChallenge + ".timesCompletedSinceTimer", challenges.get(currentChallenge).getTimesCompletedSinceTimer());
         }
-        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
+        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, player + ".yml");
         try {
-            playerConfig.save(this.playerConfigFile);
+            playerConfig.save(playerConfigFile);
             uSkyBlock.log(Level.INFO, "Player data saved!");
         } catch (IOException ex) {
-            uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + this.playerConfigFile, ex);
+            uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + playerConfigFile, ex);
         }
     }
 }

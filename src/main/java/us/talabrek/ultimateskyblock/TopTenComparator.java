@@ -11,7 +11,6 @@ public class TopTenComparator implements Comparator<String> {
     private final Map<String, Double> dataMap;
 
     public TopTenComparator(Map<String,Double> map) {
-        // Copies the map, since the comparator is used to modify the map.
         this.dataMap = map;
     }
     @Override

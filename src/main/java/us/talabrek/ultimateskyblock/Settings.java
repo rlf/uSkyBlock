@@ -15,6 +15,7 @@ public class Settings {
     public static int general_spawnSize;
     public static boolean island_removeCreaturesByTeleport;
     public static int island_protectionRange;
+    public static int island_radius;
     public static ItemStack[] island_chestItems;
     public static boolean island_addExtraItems;
     public static String[] island_extraPermissions;
@@ -55,6 +56,7 @@ public class Settings {
         } catch (Exception e) {
             island_protectionRange = 100;
         }
+        island_radius = island_protectionRange / 2;
         try {
             general_cooldownInfo = config.getInt("options.general.cooldownInfo");
             if (general_cooldownInfo < 0) {
