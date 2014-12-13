@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.VaultHandler;
@@ -202,79 +203,87 @@ public class ChallengeLogic {
                 }
             }
         }
+        StringBuilder sb = new StringBuilder();
+        boolean hasAll = true;
         for (ItemStack item : itemStacks) {
-            if (item.getDurability() != 0 && blockCount[(item.getTypeId() << 8) + (item.getDurability() & 0xff)] < item.getAmount()) {
-                return false;
-            } else if (baseBlocks[item.getTypeId()] < item.getAmount()) {
-                return false;
+            int diffSpecific = item.getAmount() - blockCount[(item.getTypeId() << 8) + (item.getDurability() & 0xff)];
+            int diffGeneral = item.getAmount() - baseBlocks[item.getTypeId()];
+            if (item.getDurability() != 0 && diffSpecific > 0) {
+                sb.append(" " + ChatColor.RED + diffSpecific
+                        + " " + ChatColor.AQUA + VaultHandler.getItemName(item));
+                hasAll = false;
+            } if (diffGeneral > 0) {
+                sb.append(" " + ChatColor.RED + diffGeneral
+                        + " " + ChatColor.AQUA + VaultHandler.getItemName(item));
+                hasAll = false;
             }
         }
-        return true;
+        if (!hasAll) {
+            player.sendMessage(ChatColor.YELLOW + "Still the following blocks short:" + sb.toString());
+        }
+        return hasAll;
     }
 
-    private boolean tryCompleteOnIsland(Player player, String challenge) {
-        String reqItems = config.getString("challengeList." + challenge + ".requiredItems");
-        if (reqItems == null) {
-            return false;
-        }
-        List<ItemStack> items = new ArrayList<>();
-        for (String reqItem : reqItems.split(" ")) {
-            Matcher m = ITEM_AMOUNT_PATTERN.matcher(reqItem);
-            if (m.matches()) {
-                int id = Integer.parseInt(m.group("id"));
-                int data = m.group("data") != null ? Integer.parseInt(m.group("data")) : 0;
-                int amount = Integer.parseInt(m.group("amount"));
-                items.add(new ItemStack(id, amount, (short) data));
-            } else {
-                uSkyBlock.log(Level.WARNING, "Invalid item found for challenge " + challenge + ", " + reqItem);
-            }
-        }
-        int radius = config.getInt("challengeList." + challenge + ".radius", 10);
-        if (islandContains(player, items, radius)) {
-            giveReward(player, challenge);
+    private boolean tryCompleteOnIsland(Player player, String challengeName) {
+        Challenge challenge = getChallenge(challengeName);
+        List<ItemStack> requiredItems = challenge.getRequiredItems(0);
+        int radius = challenge.getRadius();
+        if (islandContains(player, requiredItems, radius)) {
+            giveReward(player, challengeName);
             return true;
         }
         return false;
     }
 
-    private boolean tryCompleteOnPlayer(Player player, String challenge) {
-        String reqItems = config.getString("challengeList." + challenge + ".requiredItems");
+    private boolean tryCompleteOnPlayer(Player player, String challengeName) {
+        Challenge challenge = getChallenge(challengeName);
         PlayerInfo playerInfo = skyBlock.getPlayerInfo(player);
-        boolean takeItems = config.getBoolean("challengeList." + challenge + ".takeItems");
-        int timesCompleted = playerInfo.checkChallengeSinceTimer(challenge);
-        if (reqItems != null) {
-            List<ItemStack> items = new ArrayList<>();
-            Pattern reqPattern = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?");
-            for (String item : reqItems.split(" ")) {
-                Matcher m = reqPattern.matcher(item);
-                if (m.matches()) {
-                    int reqItem = Integer.parseInt(m.group("type"));
-                    int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype")) : 0;
-                    int amount = Integer.parseInt(m.group("amount"));
-                    char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
-                    int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc")) : 0;
-                    amount = calcAmount(amount, op, inc, timesCompleted);
-                    ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
-                    items.add(mat);
-                    if (!player.getInventory().containsAtLeast(mat, amount)) {
-                        return false;
-                    }
+        ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
+        if (challenge != null && completion != null) {
+            StringBuilder sb = new StringBuilder();
+            boolean hasAll = true;
+            List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedSinceTimer());
+            for (ItemStack required : requiredItems) {
+                required.setItemMeta(null);
+                if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
+                    sb.append(" " + ChatColor.RED + (required.getAmount() - getCountOf(player.getInventory(), required))
+                            + " " + ChatColor.AQUA + VaultHandler.getItemName(required));
+                    hasAll = false;
                 }
             }
-            if (takeItems) {
-                player.getInventory().removeItem(items.toArray(new ItemStack[items.size()]));
+            if (hasAll) {
+                if (challenge.isTakeItems()) {
+                    player.getInventory().removeItem(requiredItems.toArray(new ItemStack[requiredItems.size()]));
+                }
+                giveReward(player, challenge);
+                return true;
+            } else {
+                player.sendMessage(ChatColor.YELLOW + "You are the following items short:" + sb.toString());
             }
-            giveReward(player, challenge);
         }
         return true;
     }
 
+    private int getCountOf(PlayerInventory inventory, ItemStack required) {
+        int count = 0;
+        for (ItemStack invItem : inventory.all(required.getType()).values()) {
+            if (invItem.getDurability() == required.getDurability()) {
+                count += invItem.getAmount();
+            }
+        }
+        return count;
+    }
+
     public boolean giveReward(final Player player, final String challengeName) {
+        return giveReward(player, getChallenge(challengeName));
+    }
+
+    private boolean giveReward(Player player, Challenge challenge) {
+        String challengeName = challenge.getName();
         World skyWorld = skyBlock.getWorld();
-        Challenge challenge = getChallenge(challengeName);
         player.sendMessage(ChatColor.GREEN + "You have completed the " + challengeName + " challenge!");
         PlayerInfo playerInfo = skyBlock.getPlayerInfo(player);
-        Reward reward = null;
+        Reward reward;
         boolean isFirstCompletion = playerInfo.checkChallenge(challengeName) == 0;
         if (isFirstCompletion) {
             reward = challenge.getReward();
@@ -325,19 +334,6 @@ public class ChallengeLogic {
 
     public long getResetInMillis(String challenge) {
         return getChallenge(challenge).getResetInHours() * MS_HOUR;
-    }
-
-    public List<String> getItemLore(PlayerInfo player, String challengeName) {
-        Challenge challenge = getChallenge(challengeName);
-        ChallengeCompletion completion = player.getChallenge(challengeName);
-        List<String> lores = new ArrayList<>();
-        lores.add("\u00a77" + challenge.getDescription());
-        lores.add("\u00a7eThis challenge requires the following:");
-        int timesCompleted = completion.getTimesCompletedSinceTimer();
-        for (ItemStack item : challenge.getRequiredItems(timesCompleted)) {
-            lores.add(item.getItemMeta().getDisplayName());
-        }
-        return lores;
     }
 
     public ItemStack getItemStack(PlayerInfo playerInfo, String challengeName) {
