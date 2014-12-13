@@ -156,7 +156,7 @@ public class uSkyBlock extends JavaPlugin {
         instance = this;
         configFiles.clear();
         createFolders();
-        this.pName = ChatColor.WHITE + "[" + ChatColor.GREEN + getDescription().getName() + ChatColor.WHITE + "] ";
+        uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         VaultHandler.setupEconomy();
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
@@ -166,8 +166,6 @@ public class uSkyBlock extends JavaPlugin {
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this);
-
-        this.loadPlayerFiles();
 
         registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
@@ -184,23 +182,22 @@ public class uSkyBlock extends JavaPlugin {
                     log(Level.INFO, "Using vault for permissions");
                     VaultHandler.setupPermissions();
                     try {
-                        if (!uSkyBlock.this.getLastIslandConfig().contains("options.general.lastIslandX") && uSkyBlock.this.getConfig().contains("options.general.lastIslandX")) {
-                            uSkyBlock.this.getLastIslandConfig();
-                            FileConfiguration.createPath(uSkyBlock.this.getLastIslandConfig().getConfigurationSection("options.general"), "lastIslandX");
-                            uSkyBlock.this.getLastIslandConfig();
-                            FileConfiguration.createPath(uSkyBlock.this.getLastIslandConfig().getConfigurationSection("options.general"), "lastIslandZ");
-                            uSkyBlock.this.getLastIslandConfig().set("options.general.lastIslandX", uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"));
-                            uSkyBlock.this.getLastIslandConfig().set("options.general.lastIslandZ", uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
-                            uSkyBlock.this.saveLastIslandConfig();
+                        FileConfiguration config = getLastIslandConfig();
+                        if (!config.contains("options.general.lastIslandX") && uSkyBlock.this.getConfig().contains("options.general.lastIslandX")) {
+                            FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandX");
+                            FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandZ");
+                            config.set("options.general.lastIslandX", getConfig().getInt("options.general.lastIslandX"));
+                            config.set("options.general.lastIslandZ", getConfig().getInt("options.general.lastIslandZ"));
+                            saveLastIslandConfig();
                         }
-                        setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) uSkyBlock.this.getLastIslandConfig().getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) uSkyBlock.this.getLastIslandConfig().getInt("options.general.lastIslandZ")));
+                        setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) config.getInt("options.general.lastIslandZ")));
                     } catch (Exception e) {
                         setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
                     }
                     if (uSkyBlock.this.lastIsland == null) {
                         setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
                     }
-                    uSkyBlock.getInstance().setupOrphans();
+                    setupOrphans();
                 }
             }
         }, 0L);
@@ -234,35 +231,6 @@ public class uSkyBlock extends JavaPlugin {
         return uSkyBlock.instance;
     }
 
-    public void loadPlayerFiles() {
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if (player.isOnline()) {
-                final File f = new File(getInstance().directoryPlayers, player.getName());
-                final PlayerInfo pi = new PlayerInfo(player.getName());
-                if (f.exists()) {
-                    final PlayerInfo pi2 = readPlayerFile(player.getName());
-                    if (pi2 != null) {
-                        pi.setIslandLocation(pi2.getIslandLocation());
-                        pi.setHomeLocation(pi2.getHomeLocation());
-                        pi.setHasIsland(pi2.getHasIsland());
-                        if (getIslandConfig(pi.locationForParty()) == null) {
-                            createIslandConfig(pi.locationForParty(), player.getName());
-                        }
-                        clearIslandConfig(pi.locationForParty(), player.getName());
-                        WorldGuardHandler.protectIsland(player, player.getName(), pi);
-                    }
-                    f.delete();
-                }
-                addActivePlayer(player.getName(), pi);
-                if (pi.getHasIsland() && getTempIslandConfig(pi.locationForParty()) == null) {
-                    createIslandConfig(pi.locationForParty(), player.getName());
-                    log(Level.INFO, "Creating new Config File");
-                }
-                getIslandConfig(pi.locationForParty());
-            }
-        }
-    }
-
     // TODO: UUID support
     public void unloadPlayerFiles() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
@@ -275,24 +243,6 @@ public class uSkyBlock extends JavaPlugin {
     public void registerEvents() {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerEvents(this), this);
-    }
-
-    public PlayerInfo readPlayerFile(final String playerName) {
-        final File f = new File(this.directoryPlayers, playerName);
-        if (!f.exists()) {
-            return null;
-        }
-        try {
-            final FileInputStream fileIn = new FileInputStream(f);
-            final ObjectInputStream in = new ObjectInputStream(fileIn);
-            final PlayerInfo p = (PlayerInfo) in.readObject();
-            in.close();
-            fileIn.close();
-            return p;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public boolean displayTopTen(final CommandSender sender) {
@@ -958,7 +908,12 @@ public class uSkyBlock extends JavaPlugin {
 
     public PlayerInfo loadPlayerData(Player player) {
         final PlayerInfo pi = loadPlayerAndIsland(player);
-        WorldGuardHandler.protectIsland(player, player.getName(), pi);
+        if (!pi.getHasParty()) {
+            WorldGuardHandler.protectIsland(player, player.getName(), pi);
+        } else {
+            FileConfiguration islandConfig = getIslandConfig(player);
+            WorldGuardHandler.protectIsland(player, islandConfig.getString("party.leader"), pi);
+        }
         addActivePlayer(player.getName(), pi);
         uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
         return pi;
