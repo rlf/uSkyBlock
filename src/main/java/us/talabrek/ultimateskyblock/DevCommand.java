@@ -172,7 +172,7 @@ public class DevCommand implements CommandExecutor {
                 } else {
                     if (pi.getIslandLocation() != null) {
                         sender.sendMessage(ChatColor.YELLOW + "Removing " + split[1] + "'s island.");
-                        uSkyBlock.getInstance().devDeletePlayerIsland(split[1]);
+                        uSkyBlock.getInstance().deletePlayerIsland(split[1]);
                         return true;
                     }
                     sender.sendMessage("Error: That player does not have an island!");
@@ -196,7 +196,7 @@ public class DevCommand implements CommandExecutor {
             	player = (Player) sender;
                 final PlayerInfo pi = new PlayerInfo(split[1]);
                 if (pi.getHasIsland()) {
-                    uSkyBlock.getInstance().devDeletePlayerIsland(split[1]);
+                    uSkyBlock.getInstance().deletePlayerIsland(split[1]);
                 }
                 if (uSkyBlock.getInstance().devSetPlayerIsland(player, player.getLocation(), split[1])) {
                     sender.sendMessage(ChatColor.GREEN + "Set " + split[1] + "'s island to the bedrock nearest you.");
