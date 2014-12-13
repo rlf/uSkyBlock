@@ -11,6 +11,12 @@ This version depends on the following plugins:
 * WorldEdit 6.0.0-SNAPSHOT
 * WorldGuard 6.0.0-SNAPSHOT
 
+## Releases
+
+There is a lot of pre-releases (the ones named RX.Y), these are test-releases, and are released here, until we get a working build-server to provide developer-snapshots.
+
+Only promoted releases are considered "safe". Any of the pre-releases will contain various bugs and regressions.
+
 ## Config-files
 
 *Note*: The R0.X release candidates all change heavily in most of the config files, so place close attention to the changes between your local copy, and the "default" ones.
