@@ -467,8 +467,8 @@ public class uSkyBlock extends JavaPlugin {
             regionManager.removeRegion(player + "Island");
         }
         orphaned.push(pi.getIslandLocation());
-        this.removeIsland(this.getActivePlayers().get(player).getIslandLocation());
-        this.deleteIslandConfig(this.getActivePlayers().get(player).locationForParty());
+        removeIsland(pi.getIslandLocation());
+        deleteIslandConfig(pi.locationForParty());
         pi.removeFromIsland();
         pi.savePlayerConfig(player);
         this.saveOrphans();

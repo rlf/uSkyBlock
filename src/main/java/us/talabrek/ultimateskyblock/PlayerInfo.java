@@ -122,23 +122,6 @@ public class PlayerInfo implements Serializable {
         }
     }
 
-    private Location getLocationString(final String s) {
-        if (s == null || s.trim() == "") {
-            return null;
-        }
-        final String[] parts = s.split(":");
-        if (parts.length >= 4) {
-            final World w = Bukkit.getServer().getWorld(parts[0]);
-            final int x = Integer.parseInt(parts[1]);
-            final int y = Integer.parseInt(parts[2]);
-            final int z = Integer.parseInt(parts[3]);
-            float yaw = parts.length == 6 ? Float.parseFloat(parts[4]) : 0;
-            float pitch = parts.length == 6 ? Float.parseFloat(parts[5]) : 0;
-            return new Location(w, (double) x, (double) y, (double) z, yaw, pitch);
-        }
-        return null;
-    }
-
     private String getPartyLocationString(Location l) {
         if (l == null) {
             return null;
@@ -178,17 +161,6 @@ public class PlayerInfo implements Serializable {
         return 0;
     }
 
-    public int checkChallengeSinceTimer(final String challenge) {
-        try {
-            String challengeKey = challenge.toLowerCase();
-            if (onChallengeCooldown(challengeKey) && challenges.containsKey(challengeKey)) {
-                return challenges.get(challengeKey).getTimesCompletedSinceTimer();
-            }
-        } catch (ClassCastException ex) {
-        }
-        return 0;
-    }
-
     public ChallengeCompletion getChallenge(final String challenge) {
         return challenges.get(challenge.toLowerCase());
     }
@@ -207,15 +179,6 @@ public class PlayerInfo implements Serializable {
             this.challenges = new HashMap<>();
         }
         uSkyBlock.getInstance().getChallengeLogic().populateChallenges(challenges);
-    }
-
-    private String getStringLocation(final Location l) {
-        if (l == null) {
-            return "";
-        }
-        return String.valueOf(l.getWorld().getName()) + ":"
-                + l.getBlockX() + ":" + l.getBlockY() + ":" + l.getBlockZ()
-                + ":" + l.getYaw() + ":" + l.getPitch();
     }
 
     public Location getPartyIslandLocation() {
