@@ -2,8 +2,8 @@ name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
 version: ${project.version}-${buildNumber}
 description: Ultimate SkyBlock. 
-author: Talabrek (based on code by Qgel and others)
-load: STARTUP
+author: Talabrek, R4zorax and others
+load: POSTWORLD
 depend: [Vault, WorldEdit, WorldGuard]
 softdepend: [Multiverse-Core]
 commands:
@@ -12,10 +12,11 @@ commands:
         aliases: [is, skyblock, sb]
         usage:  |
              /island [restart/sethome/info/lock/unlock/top/party]
-    dev:
+    usb:
         description: admin commands
+        aliases: [dev]
         usage:  |
-            /dev
+            /usb
     challenges:
         description: skyblock challenges
         aliases: [c, challenge]

@@ -24,6 +24,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
+import us.talabrek.ultimateskyblock.event.PlayerEvents;
+import us.talabrek.ultimateskyblock.island.IslandCommand;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 
 import java.io.*;
@@ -164,12 +166,12 @@ public class uSkyBlock extends JavaPlugin {
         registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
-        this.getCommand("dev").setExecutor(new DevCommand());
+        this.getCommand("usb").setExecutor(new DevCommand());
         if (Settings.island_useTopTen) {
-            getInstance().updateTopTen(getInstance().generateTopTen());
+            updateTopTen(getInstance().generateTopTen());
         }
 
-        getInstance().getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
+        getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
                 if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vault")) {
@@ -232,22 +234,22 @@ public class uSkyBlock extends JavaPlugin {
                 final File f = new File(getInstance().directoryPlayers, player.getName());
                 final PlayerInfo pi = new PlayerInfo(player.getName());
                 if (f.exists()) {
-                    final PlayerInfo pi2 = getInstance().readPlayerFile(player.getName());
+                    final PlayerInfo pi2 = readPlayerFile(player.getName());
                     if (pi2 != null) {
                         pi.setIslandLocation(pi2.getIslandLocation());
                         pi.setHomeLocation(pi2.getHomeLocation());
                         pi.setHasIsland(pi2.getHasIsland());
                         if (getIslandConfig(pi.locationForParty()) == null) {
-                            getInstance().createIslandConfig(pi.locationForParty(), player.getName());
+                            createIslandConfig(pi.locationForParty(), player.getName());
                         }
-                        getInstance().clearIslandConfig(pi.locationForParty(), player.getName());
+                        clearIslandConfig(pi.locationForParty(), player.getName());
                         WorldGuardHandler.protectIsland(player, player.getName(), pi);
                     }
                     f.delete();
                 }
-                getInstance().addActivePlayer(player.getName(), pi);
-                if (pi.getHasIsland() && getInstance().getTempIslandConfig(pi.locationForParty()) == null) {
-                    getInstance().createIslandConfig(pi.locationForParty(), player.getName());
+                addActivePlayer(player.getName(), pi);
+                if (pi.getHasIsland() && getTempIslandConfig(pi.locationForParty()) == null) {
+                    createIslandConfig(pi.locationForParty(), player.getName());
                     log(Level.INFO, "Creating new Config File");
                 }
                 getIslandConfig(pi.locationForParty());
@@ -549,8 +551,8 @@ public class uSkyBlock extends JavaPlugin {
                             pi.setHasIsland(true);
                             pi.setIslandLocation(b.getLocation());
                             pi.savePlayerConfig(player);
-                            getInstance().createIslandConfig(pi.locationForParty(), player);
-                            getInstance().clearIslandConfig(pi.locationForParty(), player);
+                            createIslandConfig(pi.locationForParty(), player);
+                            clearIslandConfig(pi.locationForParty(), player);
                             if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
                                 sender.sendMessage("Player doesn't have an island or it's already protected!");
                             }
@@ -732,14 +734,14 @@ public class uSkyBlock extends JavaPlugin {
     public boolean homeTeleport(final Player player) {
         Location homeSweetHome = null;
         if (this.getActivePlayers().containsKey(player.getName())) {
-            homeSweetHome = getInstance().getSafeHomeLocation(this.getActivePlayers().get(player.getName()));
+            homeSweetHome = getSafeHomeLocation(this.getActivePlayers().get(player.getName()));
         }
         if (homeSweetHome == null) {
             player.performCommand("spawn");
             player.sendMessage(ChatColor.RED + "You are not part of an island. Returning you the spawn area!");
             return true;
         }
-        getInstance().removeCreatures(homeSweetHome);
+        removeCreatures(homeSweetHome);
         player.teleport(homeSweetHome); // Push to the middle of the block!
         player.sendMessage(ChatColor.GREEN + "Teleporting you to your island.");
         return true;
@@ -751,7 +753,7 @@ public class uSkyBlock extends JavaPlugin {
             player.sendMessage(ChatColor.RED + "That player does not exist!");
             return true;
         }
-        warpSweetWarp = getInstance().getSafeWarpLocation(pi);
+        warpSweetWarp = getSafeWarpLocation(pi);
         if (warpSweetWarp == null) {
             player.sendMessage(ChatColor.RED + "Unable to warp you to that player's island!");
             return true;
@@ -863,100 +865,6 @@ public class uSkyBlock extends JavaPlugin {
         return new SkyBlockChunkGenerator();
     }
 
-    public Stack<SerializableLocation> changeStackToFile(final Stack<Location> stack) {
-        final Stack<SerializableLocation> finishStack = new Stack<>();
-        final Stack<Location> tempStack = new Stack<>();
-        while (!stack.isEmpty()) {
-            tempStack.push(stack.pop());
-        }
-        while (!tempStack.isEmpty()) {
-            if (tempStack.peek() != null) {
-                finishStack.push(new SerializableLocation(tempStack.pop()));
-            } else {
-                tempStack.pop();
-            }
-        }
-        return finishStack;
-    }
-
-    public Stack<Location> changestackfromfile(final Stack<SerializableLocation> stack) {
-        final Stack<SerializableLocation> tempStack = new Stack<>();
-        final Stack<Location> finishStack = new Stack<>();
-        while (!stack.isEmpty()) {
-            tempStack.push(stack.pop());
-        }
-        while (!tempStack.isEmpty()) {
-            if (tempStack.peek() != null) {
-                finishStack.push(tempStack.pop().getLocation());
-            } else {
-                tempStack.pop();
-            }
-        }
-        return finishStack;
-    }
-
-    public boolean largeIsland(final Location l) {
-        final int blockcount = 0;
-        final int px = l.getBlockX();
-        final int py = l.getBlockY();
-        final int pz = l.getBlockZ();
-        for (int x = -30; x <= 30; ++x) {
-            for (int y = -30; y <= 30; ++y) {
-                for (int z = -30; z <= 30; ++z) {
-                    final Block b = new Location(l.getWorld(), (double) (px + x), (double) (py + y), (double) (pz + z)).getBlock();
-                    if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 10 && blockcount > 200) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return blockcount > 200;
-    }
-
-    public boolean clearAbandoned() {
-        int numOffline = 0;
-        final OfflinePlayer[] oplayers = Bukkit.getServer().getOfflinePlayers();
-        System.out.print("Attemping to add more orphans");
-        for (int i = 0; i < oplayers.length; ++i) {
-            long offlineTime = oplayers[i].getLastPlayed();
-            offlineTime = (System.currentTimeMillis() - offlineTime) / 3600000L;
-            if (offlineTime > 250L && getInstance().hasIsland(oplayers[i].getName()) && offlineTime < 50000L) {
-                final PlayerInfo pi = new PlayerInfo(oplayers[i].getName());
-                final Location l = pi.getIslandLocation();
-                int blockcount = 0;
-                final int px = l.getBlockX();
-                final int py = l.getBlockY();
-                final int pz = l.getBlockZ();
-                for (int x = -30; x <= 30; ++x) {
-                    for (int y = -30; y <= 30; ++y) {
-                        for (int z = -30; z <= 30; ++z) {
-                            final Block b = new Location(l.getWorld(), (double) (px + x), (double) (py + y), (double) (pz + z)).getBlock();
-                            if (b.getTypeId() != 0 && b.getTypeId() != 8 && b.getTypeId() != 10) {
-                                ++blockcount;
-                            }
-                        }
-                    }
-                }
-                if (blockcount < 200) {
-                    ++numOffline;
-                    WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld()).removeRegion(String.valueOf(oplayers[i].getName()) + "Island");
-                    orphaned.push(pi.getIslandLocation());
-                    pi.setHomeLocation(null);
-                    pi.setHasIsland(false);
-                    pi.setIslandLocation(null);
-                    pi.savePlayerConfig(pi.getPlayerName());
-                }
-            }
-        }
-        if (numOffline > 0) {
-            System.out.print("Added " + numOffline + " new orphans.");
-            this.saveOrphans();
-            return true;
-        }
-        System.out.print("No new orphans to add!");
-        return false;
-    }
-
     public LinkedHashMap<String, Double> generateTopTen() {
         final HashMap<String, Double> tempMap = new HashMap<>();
         final File folder = this.directoryIslands;
@@ -973,33 +881,33 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean onInfoCooldown(final Player player) {
-        return this.infoCooldown.containsKey(player.getName()) && this.infoCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis();
+        return infoCooldown.containsKey(player.getName()) && infoCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis();
     }
 
     public boolean onBiomeCooldown(final Player player) {
-        return this.biomeCooldown.containsKey(player.getName()) && this.biomeCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis();
+        return biomeCooldown.containsKey(player.getName()) && biomeCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis();
     }
 
     public boolean onRestartCooldown(final Player player) {
-        return this.restartCooldown.containsKey(player.getName()) && this.restartCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis();
+        return restartCooldown.containsKey(player.getName()) && this.restartCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis();
     }
 
     public long getInfoCooldownTime(final Player player) {
-        if (!this.infoCooldown.containsKey(player.getName())) {
+        if (!infoCooldown.containsKey(player.getName())) {
             return 0L;
         }
-        if (this.infoCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis()) {
-            return this.infoCooldown.get(player.getName()) - Calendar.getInstance().getTimeInMillis();
+        if (infoCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis()) {
+            return infoCooldown.get(player.getName()) - Calendar.getInstance().getTimeInMillis();
         }
         return 0L;
     }
 
     public long getBiomeCooldownTime(final Player player) {
-        if (!this.biomeCooldown.containsKey(player.getName())) {
+        if (!biomeCooldown.containsKey(player.getName())) {
             return 0L;
         }
-        if (this.biomeCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis()) {
-            return this.biomeCooldown.get(player.getName()) - Calendar.getInstance().getTimeInMillis();
+        if (biomeCooldown.get(player.getName()) > Calendar.getInstance().getTimeInMillis()) {
+            return biomeCooldown.get(player.getName()) - Calendar.getInstance().getTimeInMillis();
         }
         return 0L;
     }
@@ -1015,11 +923,11 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void setInfoCooldown(final Player player) {
-        this.infoCooldown.put(player.getName(), Calendar.getInstance().getTimeInMillis() + Settings.general_cooldownInfo * 1000);
+        infoCooldown.put(player.getName(), Calendar.getInstance().getTimeInMillis() + Settings.general_cooldownInfo * 1000);
     }
 
     public void setBiomeCooldown(final Player player) {
-        this.biomeCooldown.put(player.getName(), Calendar.getInstance().getTimeInMillis() + Settings.general_biomeChange * 1000);
+        biomeCooldown.put(player.getName(), Calendar.getInstance().getTimeInMillis() + Settings.general_biomeChange * 1000);
     }
 
     public void setRestartCooldown(final Player player) {
@@ -1030,6 +938,9 @@ public class uSkyBlock extends JavaPlugin {
         return this.schemFile;
     }
 
+    /**
+     * Tests for more than one obsidian close by.
+     */
     public boolean testForObsidian(final Block block) {
         for (int x = -3; x <= 3; ++x) {
             for (int y = -3; y <= 3; ++y) {
@@ -1042,19 +953,6 @@ public class uSkyBlock extends JavaPlugin {
             }
         }
         return false;
-    }
-
-    public void removeInactive(final List<String> removePlayerList) {
-        getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                if (uSkyBlock.getInstance().getRemoveList().size() > 0 && !uSkyBlock.getInstance().isPurgeActive()) {
-                    uSkyBlock.getInstance().deletePlayerIsland(uSkyBlock.getInstance().getRemoveList().get(0));
-                    System.out.print("[uSkyBlock] Purge: Removing " + uSkyBlock.getInstance().getRemoveList().get(0) + "'s island");
-                    uSkyBlock.getInstance().deleteFromRemoveList();
-                }
-            }
-        }, 0L, 200L);
     }
 
     public List<String> getRemoveList() {
@@ -1085,13 +983,13 @@ public class uSkyBlock extends JavaPlugin {
         return this.activePlayers;
     }
 
-    public PlayerInfo getPlayerInfo(String playerName) {
-        return activePlayers.get(playerName);
-    }
-
-    public PlayerInfo getPlayerInfo(Player name) {
+    public PlayerInfo getPlayerInfo(Player player) {
         // TODO: UUID aware
-        return activePlayers.get(name.getName());
+        PlayerInfo playerInfo = activePlayers.get(player.getName());
+        if (playerInfo == null) {
+            playerInfo = loadPlayerAndIsland(player);
+        }
+        return playerInfo;
     }
 
     public void addActivePlayer(final String player, final PlayerInfo pi) {
@@ -1104,6 +1002,34 @@ public class uSkyBlock extends JavaPlugin {
             activePlayers.remove(player);
             log(Level.INFO, "Removing player from memory: " + player);
         }
+    }
+
+    public PlayerInfo loadPlayerData(Player player) {
+        final PlayerInfo pi = loadPlayerAndIsland(player);
+        WorldGuardHandler.protectIsland(player, player.getName(), pi);
+        addActivePlayer(player.getName(), pi);
+        uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
+        return pi;
+    }
+
+    private PlayerInfo loadPlayerAndIsland(Player player) {
+        String playerName = player.getName();
+        final PlayerInfo playerInfo = new PlayerInfo(playerName);
+        activePlayers.put(playerName, playerInfo);
+        FileConfiguration islandConfig = getIslandConfig(playerInfo.locationForParty());
+        if (islandConfig == null || !islandConfig.contains("general.level")) {
+            uSkyBlock.log(Level.INFO, "Creating new Island-config File");
+            createIslandConfig(playerInfo.locationForParty(), playerName);
+            clearIslandConfig(playerInfo.locationForParty(), playerName);
+        }
+        return playerInfo;
+    }
+
+    public void unloadPlayerData(Player player) {
+        if (hasIsland(player.getName()) && !hasIslandMembersOnline(player)) {
+            removeIslandConfig(getActivePlayers().get(player.getName()).locationForParty());
+        }
+        removeActivePlayer(player.getName());
     }
 
     public void clearIslandConfig(final String location, final String leader) {
@@ -1266,7 +1192,7 @@ public class uSkyBlock extends JavaPlugin {
             this.lastIslandConfigFile = new File(this.getDataFolder(), "lastIslandConfig.yml");
         }
         if (!this.lastIslandConfigFile.exists()) {
-            getInstance().saveResource("lastIslandConfig.yml", false);
+            saveResource("lastIslandConfig.yml", false);
         }
     }
 
@@ -1305,7 +1231,7 @@ public class uSkyBlock extends JavaPlugin {
             this.orphanFile = new File(this.getDataFolder(), "orphans.yml");
         }
         if (!this.orphanFile.exists()) {
-            getInstance().saveResource("orphans.yml", false);
+            saveResource("orphans.yml", false);
         }
     }
 
@@ -1401,7 +1327,7 @@ public class uSkyBlock extends JavaPlugin {
     public boolean createIsland(final CommandSender sender, final PlayerInfo pi) {
         log(Level.INFO, "Creating player island...");
         final Player player = (Player) sender;
-        final Location last = getInstance().getLastIsland();
+        final Location last = getLastIsland();
         last.setY((double) Settings.island_height);
         try {
             Location next = getNextIslandLocation(last);
@@ -1409,7 +1335,7 @@ public class uSkyBlock extends JavaPlugin {
             setNewPlayerIsland(player, next);
             player.getInventory().clear();
             player.getEquipment().clear();
-            getInstance().changePlayerBiome(player, "OCEAN");
+            changePlayerBiome(player, "OCEAN");
             refreshIslandChunks(next);
             clearEntitiesNearPlayer(player);
             protectWithWorldGuard(sender, player, pi);
@@ -1432,27 +1358,27 @@ public class uSkyBlock extends JavaPlugin {
         boolean hasIslandNow = false;
         if (getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
             String cSchem = "";
-            for (int i = 0; i < getInstance().getSchemFile().length; ++i) {
+            for (int i = 0; i < getSchemFile().length; ++i) {
                 if (!hasIslandNow) {
                     if (getInstance().getSchemFile()[i].getName().lastIndexOf(46) > 0) {
-                        cSchem = getInstance().getSchemFile()[i].getName().substring(0, getInstance().getSchemFile()[i].getName().lastIndexOf(46));
+                        cSchem = getSchemFile()[i].getName().substring(0, getSchemFile()[i].getName().lastIndexOf(46));
                     } else {
-                        cSchem = getInstance().getSchemFile()[i].getName();
+                        cSchem = getSchemFile()[i].getName();
                     }
-                    if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, getSkyBlockWorld()) && WorldEditHandler.loadIslandSchematic(getSkyBlockWorld(), getInstance().getSchemFile()[i], next)) {
+                    if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, getSkyBlockWorld()) && WorldEditHandler.loadIslandSchematic(getSkyBlockWorld(), getSchemFile()[i], next)) {
                         this.setChest(next, player);
                         hasIslandNow = true;
                     }
                 }
             }
             if (!hasIslandNow) {
-                for (int i = 0; i < getInstance().getSchemFile().length; ++i) {
+                for (int i = 0; i < getSchemFile().length; ++i) {
                     if (getInstance().getSchemFile()[i].getName().lastIndexOf(46) > 0) {
-                        cSchem = getInstance().getSchemFile()[i].getName().substring(0, getInstance().getSchemFile()[i].getName().lastIndexOf(46));
+                        cSchem = getSchemFile()[i].getName().substring(0, getSchemFile()[i].getName().lastIndexOf(46));
                     } else {
-                        cSchem = getInstance().getSchemFile()[i].getName();
+                        cSchem = getSchemFile()[i].getName();
                     }
-                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName) && WorldEditHandler.loadIslandSchematic(getSkyBlockWorld(), getInstance().getSchemFile()[i], next)) {
+                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName) && WorldEditHandler.loadIslandSchematic(getSkyBlockWorld(), getSchemFile()[i], next)) {
                         this.setChest(next, player);
                         hasIslandNow = true;
                     }
@@ -1469,31 +1395,32 @@ public class uSkyBlock extends JavaPlugin {
         next.setY((double) Settings.island_height);
     }
 
+    // TODO: 13/12/2014 - R4zorax: Move island logic somewhere else... (IslandLogic comes to mind)
     private Location getNextIslandLocation(Location last) {
         while (getInstance().hasOrphanedIsland()) {
             if (!getInstance().islandAtLocation(getInstance().checkOrphan())) {
                 break;
             }
-            getInstance().removeNextOrphan();
+            removeNextOrphan();
         }
         while (getInstance().hasOrphanedIsland() && !getInstance().checkOrphan().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
-            getInstance().removeNextOrphan();
+            removeNextOrphan();
         }
         Location next;
         if (getInstance().hasOrphanedIsland() && !getInstance().islandAtLocation(getInstance().checkOrphan())) {
-            next = getInstance().getOrphanedIsland();
-            getInstance().saveOrphans();
+            next = getOrphanedIsland();
+            saveOrphans();
         } else {
-            next = this.nextIslandLocation(last);
-            getInstance().setLastIsland(next);
-            while (getInstance().islandAtLocation(next)) {
-                next = this.nextIslandLocation(next);
+            next = nextIslandLocation(last);
+            setLastIsland(next);
+            while (islandAtLocation(next)) {
+                next = nextIslandLocation(next);
             }
-            while (getInstance().islandInSpawn(next)) {
-                next = this.nextIslandLocation(next);
-            }
-            getInstance().setLastIsland(next);
         }
+        while (islandInSpawn(next)) {
+            next = nextIslandLocation(next);
+        }
+        setLastIsland(next);
         return next;
     }
 
@@ -1547,7 +1474,7 @@ public class uSkyBlock extends JavaPlugin {
         if (Settings.island_addExtraItems) {
             for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
                 if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                    final String[] chestItemString = getInstance().getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
+                    final String[] chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
                     final ItemStack[] tempChest = new ItemStack[chestItemString.length];
                     String[] amountdata = new String[2];
                     for (int j = 0; j < chestItemString.length; ++j) {
@@ -1735,7 +1662,7 @@ public class uSkyBlock extends JavaPlugin {
         if (Settings.island_addExtraItems) {
             for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
                 if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                    final String[] chestItemString = getInstance().getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
+                    final String[] chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
                     final ItemStack[] tempChest = new ItemStack[chestItemString.length];
                     String[] amountdata = new String[2];
                     for (int j = 0; j < chestItemString.length; ++j) {
@@ -1761,7 +1688,7 @@ public class uSkyBlock extends JavaPlugin {
                         if (Settings.island_addExtraItems) {
                             for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
                                 if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                                    final String[] chestItemString = getInstance().getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
+                                    final String[] chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
                                     final ItemStack[] tempChest = new ItemStack[chestItemString.length];
                                     String[] amountdata = new String[2];
                                     for (int j = 0; j < chestItemString.length; ++j) {
@@ -1814,8 +1741,8 @@ public class uSkyBlock extends JavaPlugin {
             this.createIslandConfig(getPlayerInfo(player).locationForParty(), player.getName());
         }
         this.clearIslandConfig(getPlayerInfo(player).locationForParty(), player.getName());
-        getInstance().updatePartyNumber(player);
-        getInstance().homeSet(player);
+        updatePartyNumber(player);
+        homeSet(player);
         getPlayerInfo(player).savePlayerConfig(player.getName());
     }
 
@@ -1828,7 +1755,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void buildIslandList() {
-        final File folder = getInstance().directoryPlayers;
+        final File folder = directoryPlayers;
         final File[] listOfFiles = folder.listFiles();
         System.out.print(ChatColor.YELLOW + "[uSkyBlock] Building a new island list...");
         for (int i = 0; i < listOfFiles.length; ++i) {
@@ -1856,22 +1783,22 @@ public class uSkyBlock extends JavaPlugin {
     public void updatePartyNumber(final Player player) {
         if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 8 && VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
             getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 8);
-            getInstance().saveIslandConfig(getPlayerInfo(player).locationForParty());
+            saveIslandConfig(getPlayerInfo(player).locationForParty());
             return;
         }
         if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 7 && VaultHandler.checkPerk(player.getName(), "usb.extra.party3", player.getWorld())) {
             getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 7);
-            getInstance().saveIslandConfig(getPlayerInfo(player).locationForParty());
+            saveIslandConfig(getPlayerInfo(player).locationForParty());
             return;
         }
         if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 6 && VaultHandler.checkPerk(player.getName(), "usb.extra.party2", player.getWorld())) {
             getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 6);
-            getInstance().saveIslandConfig(getPlayerInfo(player).locationForParty());
+            saveIslandConfig(getPlayerInfo(player).locationForParty());
             return;
         }
         if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 5 && VaultHandler.checkPerk(player.getName(), "usb.extra.party1", player.getWorld())) {
             getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 5);
-            getInstance().saveIslandConfig(getPlayerInfo(player).locationForParty());
+            saveIslandConfig(getPlayerInfo(player).locationForParty());
         }
     }
 
@@ -1884,12 +1811,13 @@ public class uSkyBlock extends JavaPlugin {
         } else {
             getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.members." + playername + "." + perm, true);
         }
-        getInstance().saveIslandConfig(getPlayerInfo(player).locationForParty());
+        saveIslandConfig(getPlayerInfo(player).locationForParty());
     }
 
-    public boolean checkForOnlineMembers(final Player p) {
-        for (final String tString : getIslandConfig(getInstance().getActivePlayers().get(p.getName()).locationForParty()).getConfigurationSection("party.members").getKeys(false)) {
-            if (Bukkit.getPlayer(tString) != null && !Bukkit.getPlayer(tString).getName().equalsIgnoreCase(p.getName())) {
+    public boolean hasIslandMembersOnline(final Player p) {
+        FileConfiguration islandConfig = getIslandConfig(p);
+        for (final String member : islandConfig.getConfigurationSection("party.members").getKeys(false)) {
+            if (Bukkit.getPlayer(member) != null && !Bukkit.getPlayer(member).isOnline()) {
                 return true;
             }
         }
@@ -1902,7 +1830,7 @@ public class uSkyBlock extends JavaPlugin {
 
     public void setConfigBiome(final Player p, final String biome) {
         getIslandConfig(getInstance().getActivePlayers().get(p.getName()).locationForParty()).set("general.biome", biome);
-        getInstance().saveIslandConfig(getInstance().getActivePlayers().get(p.getName()).locationForParty());
+        saveIslandConfig(getInstance().getActivePlayers().get(p.getName()).locationForParty());
     }
 
     public boolean isPartyLeader(final Player player) {
@@ -1912,8 +1840,7 @@ public class uSkyBlock extends JavaPlugin {
     public void sendMessageToIslandGroup(final String location, final String message) {
         final Iterator<String> temp = getIslandConfig(location).getConfigurationSection("party.members").getKeys(false).iterator();
         this.date = new Date();
-        final String dateTxt;
-        final String myDateString = dateTxt = DateFormat.getDateInstance(3).format(this.date).toString();
+        final String dateTxt = DateFormat.getDateInstance(3).format(this.date).toString();
         int currentLogPos = getIslandConfig(location).getInt("log.logPos");
         while (temp.hasNext()) {
             final String player = temp.next();

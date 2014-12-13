@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.event;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import us.talabrek.ultimateskyblock.*;
 
 import java.util.Random;
 import java.util.logging.Level;
@@ -31,40 +32,14 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(final PlayerJoinEvent event) {
-        loadPlayerData(event.getPlayer());
-    }
-
-    private void loadPlayerData(Player player) {
-        final PlayerInfo pi = loadPlayerAndIsland(player.getName());
-        WorldGuardHandler.protectIsland(player, player.getName(), pi);
-        plugin.addActivePlayer(player.getName(), pi);
-        uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
-    }
-
-    private PlayerInfo loadPlayerAndIsland(String playerName) {
-        final PlayerInfo pi = new PlayerInfo(playerName);
-        FileConfiguration islandConfig = plugin.getIslandConfig(pi.locationForParty());
-        if (islandConfig == null || !islandConfig.contains("general.level")) {
-            uSkyBlock.log(Level.INFO, "Creating new Island-config File");
-            plugin.createIslandConfig(pi.locationForParty(), playerName);
+        if (plugin.isSkyWorld(event.getPlayer().getWorld())) {
+            plugin.loadPlayerData(event.getPlayer());
         }
-        plugin.clearIslandConfig(pi.locationForParty(), playerName);
-        return pi;
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerQuit(final PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        if (plugin.isSkyWorld(player.getWorld())) {
-            unloadPlayerData(player);
-        }
-    }
-
-    private void unloadPlayerData(Player player) {
-        if (plugin.hasIsland(player.getName()) && !plugin.checkForOnlineMembers(player)) {
-            plugin.removeIslandConfig(plugin.getActivePlayers().get(player.getName()).locationForParty());
-        }
-        plugin.removeActivePlayer(player.getName());
+        plugin.unloadPlayerData(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

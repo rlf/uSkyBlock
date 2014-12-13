@@ -310,7 +310,6 @@ public class PlayerInfo implements Serializable {
 
     public FileConfiguration getPlayerConfig(final String player) {
         if (playerData == null) {
-            uSkyBlock.log(Level.INFO, "Reloading player data!");
             reloadPlayerConfig(player);
         }
         return playerData;
