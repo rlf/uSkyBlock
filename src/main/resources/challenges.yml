@@ -439,20 +439,20 @@ challengeList:
     repeatCurrencyReward: 50
     repeatXpReward: 20
   glassmaker:
-    description: 'Collect every color of stained glass.'
+    description: 'Collect every color of stained glass panes.'
     rankLevel: Master
     type: onPlayer
-    requiredItems: '95:0:16;+2 95:1:16;+2 95:2:16;+2 95:3:16;+2 95:4:16;+2 95:5:16;+2 95:6:16;+2 95:7:16;+2 95:8:16;+2 95:9:16;+2 95:10:16;+2 95:11:16;+2 95:12:16;+2 95:13:16;+2 95:14:16;+2 95:15:16;+2'
-    displayItem: 95
+    requiredItems: '160:0:16;+2 160:1:16;+2 160:2:16;+2 160:3:16;+2 160:4:16;+2 160:5:16;+2 160:6:16;+2 160:7:16;+2 160:8:16;+2 160:9:16;+2 160:10:16;+2 160:11:16;+2 160:12:16;+2 160:13:16;+2 160:14:16;+2 160:15:16;+2'
+    displayItem: 160
     takeItems: true
-    itemReward: '264:2 2262:1 2263:1 2261:1 383:91:1 388:5'
-    rewardText: 2 diamond, 3 disk, 1 sheep, 5 emerald
+    itemReward: '264:2 2262:1 2263:1 2261:1 383:100:1 388:5'
+    rewardText: 2 diamond, 3 disk, 1 horse, 5 emerald
     currencyReward: 200
     xpReward: 200
     permissionReward: none
     repeatable: true
-    repeatItemReward: '388:5 383:91:1'
-    repeatRewardText: 1 sheep, 5 emeralds
+    repeatItemReward: '388:5 383:100:1'
+    repeatRewardText: 1 horse, 5 emeralds
     repeatCurrencyReward: 50
     repeatXpReward: 20
   masterfarmer:
