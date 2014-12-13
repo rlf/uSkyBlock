@@ -43,7 +43,7 @@ public class ChallengeCompletion {
     }
 
     public int getTimesCompletedSinceTimer() {
-        return isOnCooldown() ? this.timesCompletedSinceTimer : 1;
+        return isOnCooldown() ? this.timesCompletedSinceTimer : timesCompleted > 0 ? 1 : 0;
     }
 
     public void setFirstCompleted(final long newCompleted) {
