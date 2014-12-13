@@ -520,19 +520,13 @@ public class uSkyBlock extends JavaPlugin {
 
     public void devDeletePlayerIsland(final String player) {
         RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
-        if (!this.getActivePlayers().containsKey(player)) {
-            if (regionManager.hasRegion(player + "Island")) {
-                regionManager.removeRegion(player + "Island");
-            }
-            PlayerInfo pi = new PlayerInfo(player);
+        if (regionManager.hasRegion(player + "Island")) {
+            regionManager.removeRegion(player + "Island");
+        }
+        PlayerInfo pi = new PlayerInfo(player);
+        removeIsland(pi.getIslandLocation());
+        if (activePlayers.containsKey(player)) {
             pi.savePlayerConfig(player);
-        } else {
-            if (regionManager.hasRegion(player + "Island")) {
-                regionManager.removeRegion(player + "Island");
-            }
-            final PlayerInfo pi = new PlayerInfo(player);
-            this.removeActivePlayer(player);
-            this.addActivePlayer(player, pi);
         }
     }
 
