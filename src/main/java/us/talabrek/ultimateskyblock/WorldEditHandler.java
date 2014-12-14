@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
+import com.sk89q.worldedit.blocks.BaseBlock;
+import com.sk89q.worldedit.regions.Region;
 import org.bukkit.Location;
 import org.bukkit.plugin.*;
 import org.bukkit.*;
@@ -30,5 +32,15 @@ public class WorldEditHandler {
         final CuboidClipboard cc = format.load(file);
         cc.paste(es, v, false);
         return true;
+    }
+
+    public static boolean clearIsland(World skyWorld, Region region) {
+        EditSession session = new EditSession(new BukkitWorld(skyWorld), region.getArea());
+        try {
+            session.setBlocks(region, new BaseBlock(0));
+            return true;
+        } catch (MaxChangedBlocksException e) {
+            return false;
+        }
     }
 }

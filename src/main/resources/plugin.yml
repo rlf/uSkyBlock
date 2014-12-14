@@ -3,7 +3,7 @@ main: us.talabrek.ultimateskyblock.uSkyBlock
 version: ${project.version}-${buildNumber}
 description: Ultimate SkyBlock. 
 author: Talabrek, R4zorax and others
-load: POSTWORLD
+load: STARTUP
 depend: [Vault, WorldEdit, WorldGuard]
 softdepend: [Multiverse-Core]
 commands:

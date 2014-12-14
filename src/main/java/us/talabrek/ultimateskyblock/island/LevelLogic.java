@@ -58,7 +58,6 @@ public class LevelLogic {
         int pointsPerLevel = config.getInt("general.pointsPerLevel");
         final Location l = playerInfo.getIslandLocation();
         final int px = l.getBlockX();
-        final int py = l.getBlockY();
         final int pz = l.getBlockZ();
         final World w = l.getWorld();
         int typeId;
