@@ -19,7 +19,7 @@ import com.sk89q.worldedit.*;
 import org.bukkit.*;
 
 public class WorldGuardHandler {
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
