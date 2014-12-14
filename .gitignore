@@ -11,3 +11,6 @@ bin
 /lib
 /.classpath
 /.project
+**/*.iml
+**/*~
+.idea
