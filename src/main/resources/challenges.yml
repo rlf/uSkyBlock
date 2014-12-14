@@ -226,7 +226,7 @@ challengeList:
     type: onPlayer
     requiredItems: '360:64;+2 353:64;+2 296:64;+2 392:64;+2 391:64;+2 86:64;+2 81:64;+2'
     resetInHours: 20
-    displayItem: 60
+    displayItem: 292
     takeItems: true
     itemReward: '331:16 351:3:1 383:90:1 383:92:1 383:93:1'
     rewardText: 16 redstone, 1 cocoa, 3 animals
