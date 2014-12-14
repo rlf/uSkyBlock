@@ -29,21 +29,28 @@ public class WorldGuardHandler {
         return (WorldGuardPlugin) plugin;
     }
 
-    public static boolean protectIsland(final Player sender, final String player, final PlayerInfo pi) {
+    public static boolean protectIsland(final Player sender, final String islandName, final PlayerInfo pi) {
         try {
             WorldGuardPlugin worldGuard = getWorldGuard();
             RegionManager regionManager = worldGuard.getRegionManager(uSkyBlock.getSkyBlockWorld());
-            String regionName = player + "Island";
+            String regionName = islandName + "Island";
             if (pi.getIslandLocation() != null && noOrOldRegion(regionManager, regionName, pi)) {
-                ProtectedCuboidRegion region = new ProtectedCuboidRegion(player + "Island",
+                FileConfiguration islandConfig = uSkyBlock.getInstance().getIslandConfig(pi);
+                ProtectedCuboidRegion region = new ProtectedCuboidRegion(islandName + "Island",
                         getProtectionVectorLeft(pi.getIslandLocation()),
                         getProtectionVectorRight(pi.getIslandLocation()));
                 final DefaultDomain owners = new DefaultDomain();
-                owners.addPlayer(player);
+                owners.addPlayer(pi.getPlayerName());
+                ConfigurationSection members = islandConfig.getConfigurationSection("party.members");
+                if (members !=  null) {
+                    for (String member : members.getKeys(false)) {
+                        owners.addPlayer(member);
+                    }
+                }
                 region.setOwners(owners);
                 region.setPriority(100);
-                region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are entering a protected island area. (" + player + ")"));
-                region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are leaving a protected island area. (" + player + ")"));
+                region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are entering a protected island area. (" + islandName + ")"));
+                region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(worldGuard, sender, "\u00a7d** You are leaving a protected island area. (" + islandName + ")"));
                 if (uSkyBlock.getInstance().getConfig().getBoolean("options.island.allowPvP")) {
                     region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
                 } else {
@@ -62,13 +69,13 @@ public class WorldGuardHandler {
                     }
                 }
                 regionManager.addRegion(region);
-                System.out.print("New protected region created for " + player + "'s Island by " + sender.getName());
+                System.out.print("New protected region created for " + islandName + "'s Island by " + sender.getName());
                 regionManager.save();
-                uSkyBlock.getInstance().getIslandConfig(pi).set("general.regionVersion", VERSION);
+                islandConfig.set("general.regionVersion", VERSION);
                 return true;
             }
         } catch (Exception ex) {
-            System.out.print("ERROR: Failed to protect " + player + "'s Island (" + sender.getName() + ")");
+            System.out.print("ERROR: Failed to protect " + islandName + "'s Island (" + sender.getName() + ")");
             ex.printStackTrace();
         }
         return false;

@@ -432,7 +432,7 @@ public class uSkyBlock extends JavaPlugin {
             removeIsland(next);
             createIsland(player, next);
             next.setY((double) Settings.island_height);
-            this.setNewPlayerIsland(player, next);
+            setNewPlayerIsland(player, next);
             clearPlayerInventory(player);
             changePlayerBiome(player, "OCEAN");
             refreshIslandChunks(next);
@@ -908,12 +908,8 @@ public class uSkyBlock extends JavaPlugin {
 
     public PlayerInfo loadPlayerData(Player player) {
         final PlayerInfo pi = loadPlayerAndIsland(player);
-        if (!pi.getHasParty()) {
-            WorldGuardHandler.protectIsland(player, player.getName(), pi);
-        } else {
-            FileConfiguration islandConfig = getIslandConfig(player);
-            WorldGuardHandler.protectIsland(player, islandConfig.getString("party.leader"), pi);
-        }
+        FileConfiguration islandConfig = getIslandConfig(pi);
+        WorldGuardHandler.protectIsland(player, islandConfig.getString("party.leader"), pi);
         addActivePlayer(player.getName(), pi);
         uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
         return pi;
@@ -924,7 +920,7 @@ public class uSkyBlock extends JavaPlugin {
         final PlayerInfo playerInfo = new PlayerInfo(playerName);
         activePlayers.put(playerName, playerInfo);
         FileConfiguration islandConfig = getIslandConfig(playerInfo.locationForParty());
-        if (islandConfig == null || !islandConfig.contains("general.level")) {
+        if (islandConfig == null) {
             uSkyBlock.log(Level.INFO, "Creating new Island-config File");
             createIslandConfig(playerInfo.locationForParty(), playerName);
             clearIslandConfig(playerInfo.locationForParty(), playerName);
@@ -1005,11 +1001,6 @@ public class uSkyBlock extends JavaPlugin {
     public FileConfiguration getTempIslandConfig(final String location) {
         File islandFile = new File(this.directoryIslands, location + ".yml");
         return YamlConfiguration.loadConfiguration(islandFile);
-    }
-
-    public FileConfiguration getCurrentPlayerConfig(final String player) {
-        File file = new File(this.directoryPlayers, player + ".yml");
-        return YamlConfiguration.loadConfiguration(file);
     }
 
     public void createIslandConfig(final String location, final String leader) {
@@ -1688,24 +1679,28 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void updatePartyNumber(final Player player) {
-        if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 8 && VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
-            getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 8);
-            saveIslandConfig(getPlayerInfo(player).locationForParty());
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        String islandLocation = playerInfo.locationForParty();
+        FileConfiguration islandConfig = getIslandConfig(islandLocation);
+        // TODO: 14/12/2014 - R4zorax: Move this freaking party-sizing somewhere else
+        if (islandConfig.getInt("party.maxSize") < 8 && VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
+            islandConfig.set("party.maxSize", 8);
+            saveIslandConfig(islandLocation);
             return;
         }
-        if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 7 && VaultHandler.checkPerk(player.getName(), "usb.extra.party3", player.getWorld())) {
-            getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 7);
-            saveIslandConfig(getPlayerInfo(player).locationForParty());
+        if (islandConfig.getInt("party.maxSize") < 7 && VaultHandler.checkPerk(player.getName(), "usb.extra.party3", player.getWorld())) {
+            islandConfig.set("party.maxSize", 7);
+            saveIslandConfig(islandLocation);
             return;
         }
-        if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 6 && VaultHandler.checkPerk(player.getName(), "usb.extra.party2", player.getWorld())) {
-            getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 6);
-            saveIslandConfig(getPlayerInfo(player).locationForParty());
+        if (islandConfig.getInt("party.maxSize") < 6 && VaultHandler.checkPerk(player.getName(), "usb.extra.party2", player.getWorld())) {
+            islandConfig.set("party.maxSize", 6);
+            saveIslandConfig(islandLocation);
             return;
         }
-        if (getIslandConfig(getPlayerInfo(player).locationForParty()).getInt("party.maxSize") < 5 && VaultHandler.checkPerk(player.getName(), "usb.extra.party1", player.getWorld())) {
-            getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.maxSize", 5);
-            saveIslandConfig(getPlayerInfo(player).locationForParty());
+        if (islandConfig.getInt("party.maxSize") < 5 && VaultHandler.checkPerk(player.getName(), "usb.extra.party1", player.getWorld())) {
+            islandConfig.set("party.maxSize", 5);
+            saveIslandConfig(islandLocation);
         }
     }
 
