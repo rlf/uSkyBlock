@@ -1,7 +1,9 @@
 package us.talabrek.ultimateskyblock;
 
 import com.sk89q.worldedit.blocks.BaseBlock;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
 import org.bukkit.plugin.*;
 import org.bukkit.*;
@@ -10,6 +12,7 @@ import com.sk89q.worldedit.bukkit.*;
 import com.sk89q.worldedit.data.*;
 
 import java.io.*;
+import java.util.logging.Level;
 
 import com.sk89q.worldedit.*;
 
@@ -34,12 +37,14 @@ public class WorldEditHandler {
         return true;
     }
 
-    public static boolean clearIsland(World skyWorld, Region region) {
-        EditSession session = new EditSession(new BukkitWorld(skyWorld), region.getArea());
+    public static boolean clearIsland(World skyWorld, ProtectedRegion region) {
+        CuboidRegion cube = new CuboidRegion(new BukkitWorld(skyWorld), region.getMinimumPoint(), region.getMaximumPoint());
+        EditSession session = new EditSession(new BukkitWorld(skyWorld), cube.getArea());
         try {
-            session.setBlocks(region, new BaseBlock(0));
+            session.setBlocks(cube, new BaseBlock(0));
             return true;
         } catch (MaxChangedBlocksException e) {
+            uSkyBlock.log(Level.SEVERE, "Unable to clear island", e);
             return false;
         }
     }

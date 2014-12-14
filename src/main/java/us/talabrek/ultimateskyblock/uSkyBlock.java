@@ -5,6 +5,7 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.blocks.*;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.*;
@@ -411,14 +412,13 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void deletePlayerIsland(final String player) {
-        RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
         final PlayerInfo pi = new PlayerInfo(player);
-        if (regionManager.hasRegion(player + "Island")) {
-            regionManager.removeRegion(player + "Island");
-        }
         orphaned.push(pi.getIslandLocation());
         removeIsland(pi.getIslandLocation());
-        deleteIslandConfig(pi.locationForParty());
+        RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
+        regionManager.removeRegion(player + "Island");
+        String islandLocation = pi.locationForParty();
+        deleteIslandConfig(islandLocation);
         pi.removeFromIsland();
         pi.savePlayerConfig(player);
         this.saveOrphans();
@@ -525,27 +525,10 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void removeIsland(final Location loc) {
-        if (loc != null) {
-            int radius = Settings.island_radius;
-            uSkyBlock.getInstance().getIslandLogic().loadIslandChunks(loc, radius);
-            final int px = loc.getBlockX();
-            final int pz = loc.getBlockZ();
-            World world = loc.getWorld();
-            // TODO: 13/12/2014 - R4zorax: This should perhaps be moved to a worker thread
-            for (int x = -radius; x <= radius; ++x) {
-                for (int y = 0; y <= 255; ++y) {
-                    for (int z = -radius; z <= radius; ++z) {
-                        final Block b = world.getBlockAt(px + x, y, pz + z);
-                        if (!b.getType().equals(Material.AIR)) {
-                            BlockState state = b.getState();
-                            if (state instanceof InventoryHolder) {
-                                InventoryHolder holder = (InventoryHolder) state;
-                                holder.getInventory().clear();
-                            }
-                            b.setType(Material.AIR);
-                        }
-                    }
-                }
+        ApplicableRegionSet applicableRegions = WorldGuardHandler.getWorldGuard().getRegionManager(skyBlockWorld).getApplicableRegions(loc);
+        for (ProtectedRegion region : applicableRegions) {
+            if (!region.getId().equalsIgnoreCase("__global__")) {
+                WorldEditHandler.clearIsland(skyBlockWorld, region);
             }
         }
     }

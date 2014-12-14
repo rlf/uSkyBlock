@@ -39,8 +39,6 @@ public class IslandLogic {
         FileConfiguration islandConfig = plugin.getIslandConfig(playerInfo);
         String regionName = islandConfig.getString("party.leader") + "Island";
         ProtectedRegion region = WorldGuardHandler.getWorldGuard().getRegionManager(plugin.getWorld()).getRegion(regionName);
-        Region worldEditRegion = new CuboidRegion(plugin.getWorld(),
-                region.getMinimumPoint(),
-                region.getMaximumPoint());
+        WorldEditHandler.clearIsland(plugin.getWorld(), region);
     }
 }
