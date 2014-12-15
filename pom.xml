@@ -22,7 +22,11 @@
             <id>sk89q-mvn2</id>
             <url>http://mvn2.sk89q.com/repo</url>
         </repository>
-
+        <repository>
+            <id>mvdw-public</id>
+            <name>Public Repositories</name>
+            <url>http://repo.mvdw-software.be/content/groups/public/</url>
+        </repository>
     </repositories>
     <build>
         <finalName>uSkyBlock</finalName>
@@ -83,8 +87,7 @@
             <artifactId>bukkit</artifactId>
             <version>1.8-R0.1-SNAPSHOT</version>
             <optional>true</optional>
-            <scope>system</scope>
-            <systemPath>${env.SPIGOT_BASE}/Bukkit/target/Bukkit-1.8-R0.1-SNAPSHOT.jar</systemPath>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
