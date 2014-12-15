@@ -1122,8 +1122,8 @@ public class uSkyBlock extends JavaPlugin {
         int r = Settings.island_radius;
         final int px = loc.getBlockX();
         final int pz = loc.getBlockZ();
-        for (int x = px - r; x <= px + r; x += 16) {
-            for (int z = pz - r; z <= pz + r; z += 16) {
+        for (int x = px - r; x <= px + r + 16; x += 16) {
+            for (int z = pz - r; z <= pz + r + 16; z += 16) {
                 Chunk chunk = skyBlockWorld.getChunkAt(x, z);
                 chunk.load();
                 skyBlockWorld.setBiome(chunk.getX(), chunk.getZ(), biome);

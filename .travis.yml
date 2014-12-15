@@ -9,3 +9,6 @@ deploy:
   on:
     repo: rlf/uSkyBlock
     branch: v2.0.0
+cache:
+  directories:
+  - $HOME/.m2
