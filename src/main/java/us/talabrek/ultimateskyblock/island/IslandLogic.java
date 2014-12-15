@@ -1,15 +1,9 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import us.talabrek.ultimateskyblock.PlayerInfo;
 import us.talabrek.ultimateskyblock.WorldEditHandler;
 import us.talabrek.ultimateskyblock.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -35,10 +29,14 @@ public class IslandLogic {
         }
     }
 
-    public void clearIsland(PlayerInfo playerInfo) {
-        FileConfiguration islandConfig = plugin.getIslandConfig(playerInfo);
-        String regionName = islandConfig.getString("party.leader") + "Island";
-        ProtectedRegion region = WorldGuardHandler.getWorldGuard().getRegionManager(plugin.getWorld()).getRegion(regionName);
-        WorldEditHandler.clearIsland(plugin.getWorld(), region);
+    public void clearIsland(Location loc) {
+        World skyBlockWorld = plugin.getWorld();
+        ApplicableRegionSet applicableRegions = WorldGuardHandler.getWorldGuard().getRegionManager(skyBlockWorld).getApplicableRegions(loc);
+        for (ProtectedRegion region : applicableRegions) {
+            if (!region.getId().equalsIgnoreCase("__global__")) {
+                WorldEditHandler.clearIsland(skyBlockWorld, region);
+            }
+        }
     }
+
 }

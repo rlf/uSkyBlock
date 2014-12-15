@@ -5,6 +5,7 @@ import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
+import org.bukkit.block.Biome;
 import org.bukkit.plugin.*;
 import org.bukkit.*;
 import com.sk89q.worldedit.schematic.*;
@@ -38,7 +39,7 @@ public class WorldEditHandler {
     }
 
     public static boolean clearIsland(World skyWorld, ProtectedRegion region) {
-        CuboidRegion cube = new CuboidRegion(new BukkitWorld(skyWorld), region.getMinimumPoint(), region.getMaximumPoint());
+        Region cube = getRegion(skyWorld, region);
         EditSession session = new EditSession(new BukkitWorld(skyWorld), cube.getArea());
         try {
             session.setBlocks(cube, new BaseBlock(0));
@@ -47,5 +48,9 @@ public class WorldEditHandler {
             uSkyBlock.log(Level.SEVERE, "Unable to clear island", e);
             return false;
         }
+    }
+
+    private static Region getRegion(World skyWorld, ProtectedRegion region) {
+        return new CuboidRegion(new BukkitWorld(skyWorld), region.getMinimumPoint(), region.getMaximumPoint());
     }
 }

@@ -1,7 +1,9 @@
 package us.talabrek.ultimateskyblock;
 
+import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
@@ -412,7 +414,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void deletePlayerIsland(final String player) {
-        final PlayerInfo pi = new PlayerInfo(player);
+        final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
         orphaned.push(pi.getIslandLocation());
         removeIsland(pi.getIslandLocation());
         RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
@@ -421,6 +423,7 @@ public class uSkyBlock extends JavaPlugin {
         deleteIslandConfig(islandLocation);
         pi.removeFromIsland();
         pi.savePlayerConfig(player);
+        removeActivePlayer(player);
         this.saveOrphans();
     }
 
@@ -435,7 +438,6 @@ public class uSkyBlock extends JavaPlugin {
             setNewPlayerIsland(player, next);
             clearPlayerInventory(player);
             changePlayerBiome(player, "OCEAN");
-            refreshIslandChunks(next);
             clearEntitiesNearPlayer(player);
             setRestartCooldown(player);
             return true;
@@ -451,14 +453,6 @@ public class uSkyBlock extends JavaPlugin {
         ItemStack[] armor = player.getEquipment().getArmorContents();
         player.getEquipment().setArmorContents(new ItemStack[armor.length]);
         player.getEnderChest().clear();
-    }
-
-    private void refreshIslandChunks(Location next) {
-        for (int x = Settings.island_protectionRange / 2 * -1 - 16; x <= Settings.island_protectionRange / 2 + 16; x += 16) {
-            for (int z = Settings.island_protectionRange / 2 * -1 - 16; z <= Settings.island_protectionRange / 2 + 16; z += 16) {
-                getSkyBlockWorld().refreshChunk((next.getBlockX() + x) / 16, (next.getBlockZ() + z) / 16);
-            }
-        }
     }
 
     private void clearEntitiesNearPlayer(Player player) {
@@ -525,12 +519,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void removeIsland(final Location loc) {
-        ApplicableRegionSet applicableRegions = WorldGuardHandler.getWorldGuard().getRegionManager(skyBlockWorld).getApplicableRegions(loc);
-        for (ProtectedRegion region : applicableRegions) {
-            if (!region.getId().equalsIgnoreCase("__global__")) {
-                WorldEditHandler.clearIsland(skyBlockWorld, region);
-            }
-        }
+        islandLogic.clearIsland(loc);
     }
 
     public boolean hasParty(final String playername) {
@@ -700,8 +689,8 @@ public class uSkyBlock extends JavaPlugin {
             }
             int r = Settings.island_radius;
             CuboidRegion region = new CuboidRegion(
-                    new Vector(p.getBlockX()-r, 0, p.getBlockZ()-r),
-                    new Vector(p.getBlockX()+r, 255, p.getBlockZ()+r)
+                    new Vector(p.getBlockX() - r, 0, p.getBlockZ() - r),
+                    new Vector(p.getBlockX() + r, 255, p.getBlockZ() + r)
             );
             return region.contains(new Vector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()));
         }
@@ -891,8 +880,10 @@ public class uSkyBlock extends JavaPlugin {
 
     public PlayerInfo loadPlayerData(Player player) {
         final PlayerInfo pi = loadPlayerAndIsland(player);
-        FileConfiguration islandConfig = getIslandConfig(pi);
-        WorldGuardHandler.protectIsland(player, islandConfig.getString("party.leader"), pi);
+        if (pi.getHasIsland()) {
+            FileConfiguration islandConfig = getIslandConfig(pi);
+            WorldGuardHandler.protectIsland(player, islandConfig.getString("party.leader"), pi);
+        }
         addActivePlayer(player.getName(), pi);
         uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
         return pi;
@@ -902,11 +893,13 @@ public class uSkyBlock extends JavaPlugin {
         String playerName = player.getName();
         final PlayerInfo playerInfo = new PlayerInfo(playerName);
         activePlayers.put(playerName, playerInfo);
-        FileConfiguration islandConfig = getIslandConfig(playerInfo.locationForParty());
-        if (islandConfig == null) {
-            uSkyBlock.log(Level.INFO, "Creating new Island-config File");
-            createIslandConfig(playerInfo.locationForParty(), playerName);
-            clearIslandConfig(playerInfo.locationForParty(), playerName);
+        if (playerInfo.getHasIsland()) {
+            FileConfiguration islandConfig = getIslandConfig(playerInfo.locationForParty());
+            if (islandConfig == null) {
+                uSkyBlock.log(Level.INFO, "Creating new Island-config File");
+                createIslandConfig(playerInfo.locationForParty(), playerName);
+                clearIslandConfig(playerInfo.locationForParty(), playerName);
+            }
         }
         return playerInfo;
     }
@@ -1068,15 +1061,6 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    public void saveDefaultLastIslandConfig() {
-        if (this.lastIslandConfigFile == null) {
-            this.lastIslandConfigFile = new File(this.getDataFolder(), "lastIslandConfig.yml");
-        }
-        if (!this.lastIslandConfigFile.exists()) {
-            saveResource("lastIslandConfig.yml", false);
-        }
-    }
-
     public void reloadOrphans() {
         if (this.orphanFile == null) {
             this.orphanFile = new File(this.getDataFolder(), "orphans.yml");
@@ -1107,56 +1091,45 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    public void saveDefaultOrphans() {
-        if (this.orphanFile == null) {
-            this.orphanFile = new File(this.getDataFolder(), "orphans.yml");
+    public boolean setBiome(final Location loc, final String bName) {
+        Biome biome;
+        if (bName.equalsIgnoreCase("jungle")) {
+            biome = Biome.JUNGLE;
+        } else if (bName.equalsIgnoreCase("hell")) {
+            biome = Biome.HELL;
+        } else if (bName.equalsIgnoreCase("sky")) {
+            biome = Biome.SKY;
+        } else if (bName.equalsIgnoreCase("mushroom")) {
+            biome = Biome.MUSHROOM_ISLAND;
+        } else if (bName.equalsIgnoreCase("ocean")) {
+            biome = Biome.OCEAN;
+        } else if (bName.equalsIgnoreCase("swampland")) {
+            biome = Biome.SWAMPLAND;
+        } else if (bName.equalsIgnoreCase("taiga")) {
+            biome = Biome.TAIGA;
+        } else if (bName.equalsIgnoreCase("desert")) {
+            biome = Biome.DESERT;
+        } else if (bName.equalsIgnoreCase("forest")) {
+            biome = Biome.FOREST;
+        } else {
+            biome = Biome.OCEAN;
         }
-        if (!this.orphanFile.exists()) {
-            saveResource("orphans.yml", false);
-        }
+        setBiome(loc, biome);
+        return biome != Biome.OCEAN;
     }
 
-    public boolean setBiome(final Location loc, final String bName) {
+    private void setBiome(Location loc, Biome biome) {
+        int r = Settings.island_radius;
         final int px = loc.getBlockX();
         final int pz = loc.getBlockZ();
-        Biome bType = Biome.OCEAN;
-        if (bName.equalsIgnoreCase("jungle")) {
-            bType = Biome.JUNGLE;
-        } else if (bName.equalsIgnoreCase("hell")) {
-            bType = Biome.HELL;
-        } else if (bName.equalsIgnoreCase("sky")) {
-            bType = Biome.SKY;
-        } else if (bName.equalsIgnoreCase("mushroom")) {
-            bType = Biome.MUSHROOM_ISLAND;
-        } else if (bName.equalsIgnoreCase("ocean")) {
-            bType = Biome.OCEAN;
-        } else if (bName.equalsIgnoreCase("swampland")) {
-            bType = Biome.SWAMPLAND;
-        } else if (bName.equalsIgnoreCase("taiga")) {
-            bType = Biome.TAIGA;
-        } else if (bName.equalsIgnoreCase("desert")) {
-            bType = Biome.DESERT;
-        } else if (bName.equalsIgnoreCase("forest")) {
-            bType = Biome.FOREST;
-        } else {
-            bType = Biome.OCEAN;
-        }
-        for (int x = Settings.island_protectionRange / 2 * -1 - 16; x <= Settings.island_protectionRange / 2 + 16; x += 16) {
-            for (int z = Settings.island_protectionRange / 2 * -1 - 16; z <= Settings.island_protectionRange / 2 + 16; z += 16) {
-                getSkyBlockWorld().loadChunk((px + x) / 16, (pz + z) / 16);
+        for (int x = px - r; x <= px + r; x += 16) {
+            for (int z = pz - r; z <= pz + r; z += 16) {
+                Chunk chunk = skyBlockWorld.getChunkAt(x, z);
+                chunk.load();
+                skyBlockWorld.setBiome(chunk.getX(), chunk.getZ(), biome);
+                skyBlockWorld.refreshChunk(chunk.getX(), chunk.getZ());
             }
         }
-        for (int x = Settings.island_protectionRange / 2 * -1; x <= Settings.island_protectionRange / 2; ++x) {
-            for (int z = Settings.island_protectionRange / 2 * -1; z <= Settings.island_protectionRange / 2; ++z) {
-                getSkyBlockWorld().setBiome(px + x, pz + z, bType);
-            }
-        }
-        for (int x = Settings.island_protectionRange / 2 * -1 - 16; x <= Settings.island_protectionRange / 2 + 16; x += 16) {
-            for (int z = Settings.island_protectionRange / 2 * -1 - 16; z <= Settings.island_protectionRange / 2 + 16; z += 16) {
-                getSkyBlockWorld().refreshChunk((px + x) / 16, (pz + z) / 16);
-            }
-        }
-        return bType != Biome.OCEAN;
     }
 
     public boolean changePlayerBiome(final Player player, final String bName) {
@@ -1164,8 +1137,8 @@ public class uSkyBlock extends JavaPlugin {
             return false;
         }
         if (getIslandConfig(getPlayerInfo(player).locationForParty()).getBoolean("party.members." + player.getName() + ".canChangeBiome")) {
-            this.setBiome(getPlayerInfo(player).getIslandLocation(), bName);
-            this.setConfigBiome(player, bName);
+            setBiome(getPlayerInfo(player).getIslandLocation(), bName);
+            setConfigBiome(player, bName);
             return true;
         }
         return false;
@@ -1217,7 +1190,6 @@ public class uSkyBlock extends JavaPlugin {
             player.getInventory().clear();
             player.getEquipment().clear();
             changePlayerBiome(player, "OCEAN");
-            refreshIslandChunks(next);
             clearEntitiesNearPlayer(player);
             protectWithWorldGuard(sender, player, pi);
         } catch (Exception ex) {
