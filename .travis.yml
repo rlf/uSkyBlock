@@ -7,8 +7,8 @@ deploy:
     secure: JjpBYKmA8ByMiNEXLQcRyhyvvdgcGw4DR2CYAtusTIYm5cemqHWN9M9kkqGVauOMVONPlxsA8OVRdzPRAAlFY/c9PkCcCspMYSVWs9+Py8sCqMrtTxol3Ncecs1FRItdnFQ4p7x+naTYRZdH0EF+eOfyMAZRq7YY624FX4md3xQ=
   file: target/uSkyBlock.jar
   release-number: ${project.version}-${buildNumber}-b${TRAVIS_BUILD_NUMBER}
+  skip_cleanup: true
   on:
-    tags: true
     repo: rlf/uSkyBlock
     branch: v2.0.0
 cache:
