@@ -101,7 +101,7 @@ public class DevCommand implements CommandExecutor {
                     return true;
                 }
                 uSkyBlock.getInstance().activatePurge();
-                final int time = Integer.parseInt(split[1]) * 24;
+                final int time = Integer.parseInt(split[1], 10) * 24;
                 sender.sendMessage(ChatColor.YELLOW + "Marking all islands inactive for more than " + split[1] + " days.");
                 uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
                     @SuppressWarnings("deprecation")

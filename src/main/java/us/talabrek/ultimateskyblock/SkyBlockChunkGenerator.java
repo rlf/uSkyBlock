@@ -7,11 +7,11 @@ import java.util.*;
 
 public class SkyBlockChunkGenerator extends ChunkGenerator {
     private static final BlockPopulator populator = new SkyBlockPopulator();
-    private static final byte[][] blockSections = new byte[256/16][];
+    private static final byte[] generate = new byte[32768];
 
     @Override
-    public byte[][] generateBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
-        return blockSections;
+    public byte[] generate(World world, Random random, int x, int z) {
+        return generate;
     }
 
     @Override

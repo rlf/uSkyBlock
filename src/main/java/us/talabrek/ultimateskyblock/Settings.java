@@ -111,7 +111,7 @@ public class Settings {
         String[] amountdata = new String[2];
         for (int i = 0; i < tempChest.length; ++i) {
             amountdata = chestItemString[i].split(":");
-            tempChest[i] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
+            tempChest[i] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
         }
         island_chestItems = tempChest;
         island_schematicName = config.getString("options.island.schematicName");

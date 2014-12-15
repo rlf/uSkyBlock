@@ -80,8 +80,7 @@ public class Challenge {
     }
 
     public int getRequiredLevel() {
-        // TODO: 10/12/2014 - R4zorax: Somehow ensure this is correct?
-        return Integer.parseInt(requiredItems);
+        return Integer.parseInt(requiredItems, 10);
     }
 
     public List<ItemStack> getRequiredItems(int timesCompleted) {
@@ -89,11 +88,11 @@ public class Challenge {
         for (String item : requiredItems.split(" ")) {
             Matcher m = REQ_PATTERN.matcher(item);
             if (m.matches()) {
-                int reqItem = Integer.parseInt(m.group("type"));
-                int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype")) : 0;
-                int amount = Integer.parseInt(m.group("amount"));
+                int reqItem = Integer.parseInt(m.group("type"), 10);
+                int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype"), 10) : 0;
+                int amount = Integer.parseInt(m.group("amount"), 10);
                 char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
-                int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc")) : 0;
+                int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc"), 10) : 0;
                 amount = calcAmount(amount, op, inc, timesCompleted);
                 ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
                 ItemMeta meta = mat.getItemMeta();

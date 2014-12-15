@@ -573,7 +573,7 @@ public class SkyBlockMenu {
                 continue;
             }
             try {
-                int index = Integer.parseInt(sIndex);
+                int index = Integer.parseInt(sIndex, 10);
                 String title = menuSection.getString("title", "\u00a9Unknown");
                 String icon = menuSection.getString("displayItem", "CHEST");
                 List<String> lores = new ArrayList<>();
@@ -663,7 +663,6 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayIslandGUI(final Player player) {
-        List<String> lores = new ArrayList<>();
         Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
         if (skyBlock.hasIsland(player.getName())) {
             addMainMenu(menu, player);

@@ -35,17 +35,17 @@ public class LevelLogic {
         Arrays.fill(blockLimit, defaultLimit);
         ConfigurationSection blockValueSection = config.getConfigurationSection("blockValues");
         for (String blockKey : blockValueSection.getKeys(false)) {
-            int blockId = Integer.parseInt(blockKey);
+            int blockId = Integer.parseInt(blockKey, 10);
             blockValue[blockId] = blockValueSection.getInt(blockKey, defaultValue);
         }
         ConfigurationSection blockLimitSection = config.getConfigurationSection("blockLimits");
         for (String blockKey : blockLimitSection.getKeys(false)) {
-            int blockId = Integer.parseInt(blockKey);
+            int blockId = Integer.parseInt(blockKey, 10);
             blockLimit[blockId] = blockLimitSection.getInt(blockKey, defaultLimit);
         }
         ConfigurationSection diminishingReturnSection = config.getConfigurationSection("diminishingReturns");
         for (String blockKey : diminishingReturnSection.getKeys(false)) {
-            int blockId = Integer.parseInt(blockKey);
+            int blockId = Integer.parseInt(blockKey, 10);
             blockDR[blockId] = diminishingReturnSection.getInt(blockKey, defaultDR);
         }
     }
@@ -71,7 +71,7 @@ public class LevelLogic {
         List<BlockScore> blocks = new ArrayList<>();
         for (int i = 1; i < MAX_BLOCK; ++i) {
             int count = values[i];
-            if (count > 0) {
+            if (count > 0 && blockValue[i] > 0) {
                 double adjustedCount = count;
                 if (count > blockLimit[i] && blockLimit[i] != -1) {
                     adjustedCount = blockLimit[i]; // Hard edge

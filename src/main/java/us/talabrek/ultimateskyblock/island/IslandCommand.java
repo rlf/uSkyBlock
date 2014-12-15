@@ -38,7 +38,7 @@ public class IslandCommand implements CommandExecutor {
         }
         String iName = "";
         FileConfiguration islandConfig = null;
-        if (pi.getHasIsland() && pi.getIslandLocation() != null) {
+        if (pi.getHasIsland()) {
             iName = pi.locationForParty();
             islandConfig = sky.getIslandConfig(pi);
         }
@@ -48,7 +48,12 @@ public class IslandCommand implements CommandExecutor {
             return true;
         }
         if (split.length == 1) {
-            if ((split[0].equals("restart") || split[0].equals("reset")) && pi.getIslandLocation() != null) {
+            if (requireIsland(split[0]) && !pi.getHasIsland()) {
+                player.sendMessage(ChatColor.RED + "No island!" +
+                        ChatColor.YELLOW + " You do not currently have an island, use " +
+                        ChatColor.AQUA + "/is create" + ChatColor.YELLOW + " to get one");
+            }
+            if ((split[0].equals("restart") || split[0].equals("reset")) && pi.getHasIsland()) {
                 if (sky.getIslandConfig(iName).getInt("party.currentSize") > 1) {
                     if (!sky.getIslandConfig(iName).getString("party.leader").equalsIgnoreCase(player.getName())) {
                         player.sendMessage(ChatColor.RED + "Only the owner may restart this island. Leave this island in order to start your own (/island leave).");
@@ -63,11 +68,11 @@ public class IslandCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.YELLOW + "You can restart your island in " + sky.getRestartCooldownTime(player) / 1000L + " seconds.");
                 return true;
             } else {
-                if ((split[0].equals("sethome") || split[0].equals("tpset")) && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.island.sethome", player.getWorld())) {
+                if ((split[0].equals("sethome") || split[0].equals("tpset")) && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.island.sethome", player.getWorld())) {
                     sky.homeSet(player);
                     return true;
                 }
-                if ((split[0].equals("log") || split[0].equals("l")) && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.island.create", player.getWorld())) {
+                if ((split[0].equals("log") || split[0].equals("l")) && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.island.create", player.getWorld())) {
                     player.openInventory(sky.getMenu().displayLogGUI(player));
                     return true;
                 }
@@ -82,14 +87,14 @@ public class IslandCommand implements CommandExecutor {
                     }
                     return true;
                 } else {
-                    if ((split[0].equals("home") || split[0].equals("h")) && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.island.sethome", player.getWorld())) {
+                    if ((split[0].equals("home") || split[0].equals("h")) && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.island.sethome", player.getWorld())) {
                         if (pi.getHomeLocation() == null) {
                             sky.getPlayerInfo(player).setHomeLocation(pi.getIslandLocation());
                         }
                         sky.homeTeleport(player);
                         return true;
                     }
-                    if ((split[0].equals("setwarp") || split[0].equals("warpset")) && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", player.getWorld())) {
+                    if ((split[0].equals("setwarp") || split[0].equals("warpset")) && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", player.getWorld())) {
                         if (sky.getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canChangeWarp")) {
                             sky.sendMessageToIslandGroup(iName, String.valueOf(player.getName()) + " changed the island warp location.");
                             sky.warpSet(player);
@@ -117,7 +122,7 @@ public class IslandCommand implements CommandExecutor {
                         }
                         return true;
                     }
-                    if ((split[0].equals("togglewarp") || split[0].equals("tw")) && pi.getIslandLocation() != null) {
+                    if ((split[0].equals("togglewarp") || split[0].equals("tw")) && pi.getHasIsland()) {
                         if (VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", player.getWorld())) {
                             if (sky.getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canToggleWarp")) {
                                 if (!sky.getIslandConfig(iName).getBoolean("general.warpActive")) {
@@ -139,7 +144,7 @@ public class IslandCommand implements CommandExecutor {
                         }
                         return true;
                     }
-                    if ((split[0].equals("ban") || split[0].equals("banned") || split[0].equals("banlist") || split[0].equals("b")) && pi.getIslandLocation() != null) {
+                    if ((split[0].equals("ban") || split[0].equals("banned") || split[0].equals("banlist") || split[0].equals("b")) && pi.getHasIsland()) {
                         if (VaultHandler.checkPerk(player.getName(), "usb.island.ban", player.getWorld())) {
                             player.sendMessage(ChatColor.YELLOW + "The following players are banned from warping to your island:");
                             player.sendMessage(ChatColor.RED + this.getBanList(player));
@@ -149,7 +154,7 @@ public class IslandCommand implements CommandExecutor {
                         }
                         return true;
                     }
-                    if (split[0].equals("lock") && pi.getIslandLocation() != null) {
+                    if (split[0].equals("lock") && pi.getHasIsland()) {
                         if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
                             if (sky.getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canToggleLock")) {
                                 WorldGuardHandler.islandLock(sender, sky.getIslandConfig(iName).getString("party.leader"));
@@ -169,7 +174,7 @@ public class IslandCommand implements CommandExecutor {
                         }
                         return true;
                     }
-                    if (split[0].equals("unlock") && pi.getIslandLocation() != null) {
+                    if (split[0].equals("unlock") && pi.getHasIsland()) {
                         if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
                             if (sky.getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canToggleLock")) {
                                 WorldGuardHandler.islandUnlock(sender, sky.getIslandConfig(iName).getString("party.leader"));
@@ -240,14 +245,14 @@ public class IslandCommand implements CommandExecutor {
                         sky.displayTopTen(player);
                         return true;
                     }
-                    if ((split[0].equals("biome") || split[0].equals("b")) && pi.getIslandLocation() != null) {
+                    if ((split[0].equals("biome") || split[0].equals("b")) && pi.getHasIsland()) {
                         player.openInventory(sky.getMenu().displayBiomeGUI(player));
                         if (!sky.getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canChangeBiome")) {
                             player.sendMessage("\u00a7cYou do not have permission to change the biome of your current island.");
                         }
                         return true;
                     }
-                    if ((split[0].equals("info") || split[0].equals("level")) && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
+                    if ((split[0].equals("info") || split[0].equals("level")) && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
                         if (!sky.playerIsOnIsland(player)) {
                             player.sendMessage(ChatColor.YELLOW + "You must be on your island to use this command.");
                             return true;
@@ -263,7 +268,7 @@ public class IslandCommand implements CommandExecutor {
                         }
                         player.sendMessage(ChatColor.YELLOW + "You can use that command again in " + sky.getInfoCooldownTime(player) / 1000L + " seconds.");
                         return true;
-                    } else if (split[0].equals("invite") && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
+                    } else if (split[0].equals("invite") && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
                         player.sendMessage(ChatColor.YELLOW + "Use" + ChatColor.WHITE + " /island invite <playername>" + ChatColor.YELLOW + " to invite a player to your island.");
                         if (!sky.hasParty(player.getName())) {
                             return true;
@@ -334,7 +339,7 @@ public class IslandCommand implements CommandExecutor {
                             }
                             return true;
                         }
-                        if (split[0].equals("leave") && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.party.join", player.getWorld())) {
+                        if (split[0].equals("leave") && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.party.join", player.getWorld())) {
                             if (player.getWorld().getName().equalsIgnoreCase(uSkyBlock.getSkyBlockWorld().getName())) {
                                 if (!sky.hasParty(player.getName())) {
                                     player.sendMessage(ChatColor.RED + "You can't leave your island if you are the only person. Try using /island restart if you want a new one!");
@@ -362,7 +367,7 @@ public class IslandCommand implements CommandExecutor {
                             }
                             return true;
                         }
-                        if (split[0].equals("party") && pi.getIslandLocation() != null) {
+                        if (split[0].equals("party") && pi.getHasIsland()) {
                             if (VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
                                 player.openInventory(sky.getMenu().displayPartyGUI(player));
                             }
@@ -382,7 +387,7 @@ public class IslandCommand implements CommandExecutor {
                 }
             }
         } else if (split.length == 2) {
-            if ((split[0].equals("info") || split[0].equals("level")) && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
+            if ((split[0].equals("info") || split[0].equals("level")) && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
                 if (!sky.onInfoCooldown(player) || Settings.general_cooldownInfo == 0) {
                     sky.setInfoCooldown(player);
                     if (!pi.getHasParty() && !pi.getHasIsland()) {
@@ -433,7 +438,7 @@ public class IslandCommand implements CommandExecutor {
                     }
                     return true;
                 }
-                if ((split[0].equals("biome") || split[0].equals("b")) && pi.getIslandLocation() != null) {
+                if ((split[0].equals("biome") || split[0].equals("b")) && pi.getHasIsland()) {
                     if (sky.getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canChangeBiome")) {
                         if (sky.onBiomeCooldown(player) && Settings.general_biomeChange != 0) {
                             player.sendMessage(ChatColor.YELLOW + "You can change your biome again in " + sky.getBiomeCooldownTime(player) / 1000L / 60L + " minutes.");
@@ -458,7 +463,7 @@ public class IslandCommand implements CommandExecutor {
                     }
                     return true;
                 }
-                if (split[0].equalsIgnoreCase("invite") && pi.getIslandLocation() != null && VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
+                if (split[0].equalsIgnoreCase("invite") && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.party.create", player.getWorld())) {
                     if (!sky.getIslandConfig(iName).getBoolean("party.members." + player.getName() + ".canInviteOthers")) {
                         player.sendMessage(ChatColor.RED + "You do not have permission to invite others to this island!");
                         return true;
@@ -579,6 +584,10 @@ public class IslandCommand implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    private boolean requireIsland(String s) {
+        return !Arrays.asList("create", "top", "help", "h").contains(s.toLowerCase());
     }
 
     private boolean handleConsoleCommand(CommandSender sender, Command command, String label, String[] split) {

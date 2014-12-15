@@ -68,10 +68,10 @@ public class uSkyBlock extends JavaPlugin {
     public File directoryIslands;
     public File[] schemFile;
     LinkedHashMap<String, Double> topTen;
-    HashMap<String, Long> infoCooldown;
-    HashMap<String, Long> restartCooldown;
-    HashMap<String, Long> biomeCooldown;
-    HashMap<String, PlayerInfo> activePlayers;
+    Map<String, Long> infoCooldown;
+    Map<String, Long> restartCooldown;
+    Map<String, Long> biomeCooldown;
+    private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
     LinkedHashMap<String, List<String>> challenges;
     HashMap<Integer, Integer> requiredList;
     public boolean purgeActive;
@@ -95,7 +95,6 @@ public class uSkyBlock extends JavaPlugin {
         this.infoCooldown = new HashMap<>();
         this.restartCooldown = new HashMap<>();
         this.biomeCooldown = new HashMap<>();
-        this.activePlayers = new HashMap<>();
         this.challenges = new LinkedHashMap<>();
         this.requiredList = new HashMap<>();
         this.purgeActive = false;
@@ -125,8 +124,8 @@ public class uSkyBlock extends JavaPlugin {
                 File configFile = new File(getDataFolder(), configName);
                 // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
                 if (!configFile.exists()) {
-                    // copy from jar
                     try (InputStream in = getClassLoader().getResourceAsStream(configName)) {
+                        // copy from jar
                         Files.copy(in, Paths.get(configFile.toURI()), StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException e) {
                         log(Level.WARNING, "Unable to create config file " + configFile, e);
@@ -160,6 +159,7 @@ public class uSkyBlock extends JavaPlugin {
     public void onEnable() {
         instance = this;
         configFiles.clear();
+        activePlayers.clear();
         createFolders();
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         VaultHandler.setupEconomy();
@@ -307,11 +307,11 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
-        Location home = null;
-        if (p.getHomeLocation() == null) {
-            if (p.getIslandLocation() != null) {
-                home = p.getIslandLocation();
-            }
+        Location home;
+        if (p.getHomeLocation() != null) {
+            home = p.getHomeLocation();
+        } else if (p.getIslandLocation() != null) {
+            home = p.getIslandLocation();
         } else {
             home = p.getHomeLocation();
         }
@@ -595,7 +595,10 @@ public class uSkyBlock extends JavaPlugin {
                 orphaned = new Stack<>();
                 for (int i = 0; i < orphanArray.length; ++i) {
                     final String[] orphanXY = orphanArray[i].split(",");
-                    final Location tempLoc = new Location(getSkyBlockWorld(), (double) Integer.parseInt(orphanXY[0]), (double) Settings.island_height, (double) Integer.parseInt(orphanXY[1]));
+                    final Location tempLoc = new Location(
+                            getSkyBlockWorld(), Integer.parseInt(orphanXY[0], 10),
+                            Settings.island_height,
+                            Integer.parseInt(orphanXY[1], 10));
                     orphaned.push(tempLoc);
                 }
             }
@@ -613,7 +616,7 @@ public class uSkyBlock extends JavaPlugin {
             return true;
         }
         removeCreatures(homeSweetHome);
-        player.teleport(homeSweetHome); // Push to the middle of the block!
+        player.teleport(homeSweetHome);
         player.sendMessage(ChatColor.GREEN + "Teleporting you to your island.");
         return true;
     }
@@ -701,11 +704,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean hasIsland(final String playername) {
-        if (this.getActivePlayers().containsKey(playername)) {
-            return this.getActivePlayers().get(playername).getHasIsland();
-        }
-        final PlayerInfo pi = new PlayerInfo(playername);
-        return pi.getHasIsland();
+        return getPlayerInfo(playername).getHasIsland();
     }
 
     public boolean islandAtLocation(final Location loc) {
@@ -862,8 +861,8 @@ public class uSkyBlock extends JavaPlugin {
         this.purgeActive = false;
     }
 
-    private HashMap<String, PlayerInfo> getActivePlayers() {
-        return this.activePlayers;
+    private Map<String, PlayerInfo> getActivePlayers() {
+        return activePlayers;
     }
 
     public PlayerInfo getPlayerInfo(Player player) {
@@ -1350,7 +1349,7 @@ public class uSkyBlock extends JavaPlugin {
                     String[] amountdata = new String[2];
                     for (int j = 0; j < chestItemString.length; ++j) {
                         amountdata = chestItemString[j].split(":");
-                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
+                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
                         inventory.addItem(new ItemStack[]{tempChest[j]});
                     }
                 }
@@ -1538,7 +1537,7 @@ public class uSkyBlock extends JavaPlugin {
                     String[] amountdata = new String[2];
                     for (int j = 0; j < chestItemString.length; ++j) {
                         amountdata = chestItemString[j].split(":");
-                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
+                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
                         inventory.addItem(new ItemStack[]{tempChest[j]});
                     }
                 }
@@ -1564,7 +1563,7 @@ public class uSkyBlock extends JavaPlugin {
                                     String[] amountdata = new String[2];
                                     for (int j = 0; j < chestItemString.length; ++j) {
                                         amountdata = chestItemString[j].split(":");
-                                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0]), Integer.parseInt(amountdata[1]));
+                                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
                                         inventory.addItem(new ItemStack[]{tempChest[j]});
                                     }
                                 }

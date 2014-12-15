@@ -90,9 +90,9 @@ public class ChallengeFactory {
             for (String reward : itemReward.split(" ")) {
                 Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
                 if (m.matches()) {
-                    int id = Integer.parseInt(m.group("id"));
-                    short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub")) : 0;
-                    int amount = Integer.parseInt(m.group("amount"));
+                    int id = Integer.parseInt(m.group("id"), 10);
+                    short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
+                    int amount = Integer.parseInt(m.group("amount"), 10);
                     itemList.add(new ItemStack(id, amount, sub));
                 } else {
                     throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + itemReward + "'");
@@ -108,8 +108,8 @@ public class ChallengeFactory {
         if (displayItem != null) {
             Matcher matcher = ITEM_PATTERN.matcher(displayItem);
             if (matcher.matches()) {
-                material = Material.getMaterial(Integer.parseInt(matcher.group("id")));
-                subType = matcher.group("sub") != null ? (short) Integer.parseInt(matcher.group("sub")) : 0;
+                material = Material.getMaterial(Integer.parseInt(matcher.group("id"), 10));
+                subType = matcher.group("sub") != null ? (short) Integer.parseInt(matcher.group("sub"), 10) : 0;
             }
         }
         if (material == null) {

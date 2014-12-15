@@ -10,11 +10,11 @@ general:
   defaultScale: 10000
 #blockValues [ID: VALUE] - the blocks listed below will have custom values instead of the default.
 blockValues:
-  02: 20
-  03: 20
-  07: 0
-  08: 0
-  09: 0
+  2: 20
+  3: 20
+  7: 0
+  8: 0
+  9: 0
   10: 0
   11: 0
   12: 20
@@ -111,7 +111,7 @@ blockValues:
 
 #blockLimits - blocks listed here will stop adding to island levels after the given number of blocks.
 blockLimits:
-  04: 10000
+  4: 10000
   19: 20
   87: 10000
   88: 10000
@@ -156,3 +156,4 @@ diminishingReturns:
   173: 100
   176: 20
   177: 20
+version: 1

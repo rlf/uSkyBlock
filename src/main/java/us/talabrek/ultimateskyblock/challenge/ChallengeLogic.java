@@ -378,7 +378,7 @@ public class ChallengeLogic {
         words.add(s.substring(jx));
         return words;
     }
-    public void populateChallenges(HashMap<String, ChallengeCompletion> challengeMap) {
+    public void populateChallenges(Map<String, ChallengeCompletion> challengeMap) {
         for (Challenge challenge : challengeData.values()) {
             String key = challenge.getName().toLowerCase();
             if (!challengeMap.containsKey(key)) {
