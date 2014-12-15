@@ -17,6 +17,7 @@ import java.util.logging.Level;
 
 import com.sk89q.worldedit.*;
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 public class WorldGuardHandler {
     private static final int VERSION = 2;

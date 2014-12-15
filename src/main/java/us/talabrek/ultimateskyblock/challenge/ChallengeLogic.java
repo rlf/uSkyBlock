@@ -8,14 +8,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**

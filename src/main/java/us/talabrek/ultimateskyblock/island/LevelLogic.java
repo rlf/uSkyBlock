@@ -1,14 +1,11 @@
 package us.talabrek.ultimateskyblock.island;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.scheduler.BukkitTask;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
 import java.util.Arrays;

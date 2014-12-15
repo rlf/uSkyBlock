@@ -4,9 +4,13 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
 import org.bukkit.World;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.WorldEditHandler;
 import us.talabrek.ultimateskyblock.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Responsible for island creation, locating locations, purging, clearing etc.
@@ -14,8 +18,24 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 public class IslandLogic {
     private final uSkyBlock plugin;
 
+    private final Map<String, IslandInfo> islands = new ConcurrentHashMap<>();
+
     public IslandLogic(uSkyBlock plugin) {
         this.plugin = plugin;
+    }
+
+    public IslandInfo getIslandInfo(String islandName) {
+        if (!islands.containsKey(islandName)) {
+            islands.put(islandName, new IslandInfo(islandName));
+        }
+        return islands.get(islandName);
+    }
+
+    public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
+        if (playerInfo.getHasIsland()) {
+            return getIslandInfo(playerInfo.locationForParty());
+        }
+        return null;
     }
 
     public void loadIslandChunks(Location l, int radius) {

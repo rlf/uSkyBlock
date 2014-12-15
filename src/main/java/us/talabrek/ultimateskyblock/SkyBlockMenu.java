@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -652,7 +653,7 @@ public class SkyBlockMenu {
 
     public Inventory displayChallengeGUI(final Player player) {
         Inventory menu = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu");
-        final PlayerInfo pi = skyBlock.getActivePlayers().get(player.getName());
+        final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         // TODO: 06/12/2014 - R4zorax: Support more challenge-ranks (i.e. pagination on "header item".
         challengeLogic.populateChallengeRank(menu, player, 0, Material.DIRT, 0, pi);
         challengeLogic.populateChallengeRank(menu, player, 1, Material.IRON_BLOCK, 9, pi);
@@ -1054,6 +1055,8 @@ public class SkyBlockMenu {
                 return;
             }
             p = (Player) event.getWhoClicked();
+            PlayerInfo playerInfo = skyBlock.getPlayerInfo(p);
+            FileConfiguration islandConfig = skyBlock.getIslandConfig(playerInfo);
             if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 3) {
                 p.closeInventory();
                 p.performCommand("island biome");
@@ -1087,11 +1090,11 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.performCommand("island togglewarp");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(event.getWhoClicked().getName()).locationForParty()).getBoolean("general.locked")) {
+            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && islandConfig.getBoolean("general.locked")) {
                 p.closeInventory();
                 p.performCommand("island unlock");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && !uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(event.getWhoClicked().getName()).locationForParty()).getBoolean("general.locked")) {
+            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && !islandConfig.getBoolean("general.locked")) {
                 p.closeInventory();
                 p.performCommand("island lock");
                 p.openInventory(displayIslandGUI(p));

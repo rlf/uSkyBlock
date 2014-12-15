@@ -6,6 +6,7 @@ import org.bukkit.entity.*;
 import java.io.*;
 
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 public class DevCommand implements CommandExecutor {
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
@@ -204,99 +205,64 @@ public class DevCommand implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "Bedrock not found: unable to set the island!");
                 }
             } else if (!split[0].equals("info") || (!sender.hasPermission("usb.mod.party"))) {
+                PlayerInfo pi = uSkyBlock.getInstance().getPlayerInfo(split[1]);
                 if (split[0].equals("resetallchallenges") && (sender.hasPermission("usb.mod.challenges"))) {
-                    if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[1])) {
-                        final PlayerInfo pi = new PlayerInfo(split[1]);
-                        if (!pi.getHasIsland()) {
-                            sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                            return true;
-                        }
-                        pi.resetAllChallenges();
-                        pi.savePlayerConfig(split[1]);
-                        sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
-                    } else {
-                        uSkyBlock.getInstance().getActivePlayers().get(split[1]).resetAllChallenges();
-                        sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
+                    if (!pi.getHasIsland()) {
+                        sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+                        return true;
                     }
+                    pi.resetAllChallenges();
+                    pi.save();
+                    sender.sendMessage(ChatColor.YELLOW + split[1] + " has had all challenges reset.");
                 } else if (split[0].equals("setbiome") && (sender.hasPermission("usb.mod.setbiome"))) {
-                    if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[1])) {
-                        final PlayerInfo pi = new PlayerInfo(split[1]);
-                        if (!pi.getHasIsland()) {
-                            sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                            return true;
-                        }
-                        uSkyBlock.getInstance().setBiome(pi.getIslandLocation(), "OCEAN");
-                        pi.savePlayerConfig(split[1]);
-                        sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
-                    } else {
-                        uSkyBlock.getInstance().setBiome(uSkyBlock.getInstance().getActivePlayers().get(split[1]).getIslandLocation(), "OCEAN");
-                        sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
+                    if (!pi.getHasIsland()) {
+                        sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+                        return true;
                     }
+                    uSkyBlock.getInstance().setBiome(pi.getIslandLocation(), "OCEAN");
+                    pi.save();
+                    sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
                 }
             }
         } else if (split.length == 3) {
             if (split[0].equals("completechallenge") && (sender.hasPermission("usb.mod.challenges"))) {
-                if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[2])) {
-                    final PlayerInfo pi = new PlayerInfo(split[2]);
-                    if (!pi.getHasIsland()) {
-                        sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                        return true;
-                    }
-                    if (pi.checkChallenge(split[1].toLowerCase()) > 0 || !pi.challengeExists(split[1].toLowerCase())) {
-                        sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or is already completed");
-                        return true;
-                    }
-                    pi.completeChallenge(split[1].toLowerCase());
-                    pi.savePlayerConfig(split[2]);
-                    sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
-                } else {
-                    if (uSkyBlock.getInstance().getActivePlayers().get(split[2]).checkChallenge(split[1].toLowerCase()) > 0 || !uSkyBlock.getInstance().getActivePlayers().get(split[2]).challengeExists(split[1].toLowerCase())) {
-                        sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or is already completed");
-                        return true;
-                    }
-                    uSkyBlock.getInstance().getActivePlayers().get(split[2]).completeChallenge(split[1].toLowerCase());
-                    sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
+                PlayerInfo pi = uSkyBlock.getInstance().getPlayerInfo(split[2]);
+                if (!pi.getHasIsland()) {
+                    sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+                    return true;
                 }
+                if (pi.checkChallenge(split[1].toLowerCase()) > 0 || !pi.challengeExists(split[1].toLowerCase())) {
+                    sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or is already completed");
+                    return true;
+                }
+                pi.completeChallenge(split[1].toLowerCase());
+                pi.save();
+                sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
             } else if (split[0].equals("resetchallenge") && (sender.hasPermission("usb.mod.challenges"))) {
-                if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[2])) {
-                    final PlayerInfo pi = new PlayerInfo(split[2]);
-                    if (!pi.getHasIsland()) {
-                        sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                        return true;
-                    }
-                    if (pi.checkChallenge(split[1].toLowerCase()) == 0 || !pi.challengeExists(split[1].toLowerCase())) {
-                        sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or isn't yet completed");
-                        return true;
-                    }
-                    pi.resetChallenge(split[1].toLowerCase());
-                    pi.savePlayerConfig(split[2]);
-                    sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been reset for " + split[2]);
-                } else {
-                    if (uSkyBlock.getInstance().getActivePlayers().get(split[2]).checkChallenge(split[1].toLowerCase()) == 0 || !uSkyBlock.getInstance().getActivePlayers().get(split[2]).challengeExists(split[1].toLowerCase())) {
-                        sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or isn't yet completed");
-                        return true;
-                    }
-                    uSkyBlock.getInstance().getActivePlayers().get(split[2]).resetChallenge(split[1].toLowerCase());
-                    sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been completed for " + split[2]);
+                PlayerInfo pi = uSkyBlock.getInstance().getPlayerInfo(split[2]);
+                if (!pi.getHasIsland()) {
+                    sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+                    return true;
                 }
+                if (pi.checkChallenge(split[1].toLowerCase()) == 0 || !pi.challengeExists(split[1].toLowerCase())) {
+                    sender.sendMessage(ChatColor.RED + "Challenge doesn't exist or isn't yet completed");
+                    return true;
+                }
+                pi.resetChallenge(split[1].toLowerCase());
+                pi.save();
+                sender.sendMessage(ChatColor.YELLOW + "challange: " + split[1].toLowerCase() + " has been reset for " + split[2]);
             } else if (split[0].equals("setbiome") && (sender.hasPermission("usb.mod.setbiome"))) {
-                if (!uSkyBlock.getInstance().getActivePlayers().containsKey(split[1])) {
-                    final PlayerInfo pi = new PlayerInfo(split[1]);
-                    if (!pi.getHasIsland()) {
-                        sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
-                        return true;
-                    }
-                    if (uSkyBlock.getInstance().setBiome(pi.getIslandLocation(), split[2])) {
-                        sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to " + split[2].toUpperCase() + ".");
-                    } else {
-                        sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
-                    }
-                    pi.savePlayerConfig(split[1]);
-                } else if (uSkyBlock.getInstance().setBiome(uSkyBlock.getInstance().getActivePlayers().get(split[1]).getIslandLocation(), split[2])) {
+                PlayerInfo pi = uSkyBlock.getInstance().getPlayerInfo(split[1]);
+                if (!pi.getHasIsland()) {
+                    sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
+                    return true;
+                }
+                if (uSkyBlock.getInstance().setBiome(pi.getIslandLocation(), split[2])) {
                     sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to " + split[2].toUpperCase() + ".");
                 } else {
                     sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
                 }
+                pi.save();
             }
         }
         return true;
