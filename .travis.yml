@@ -1,1 +1,4 @@
+# Travis build file
 language: java
+git:
+  submodules: false
