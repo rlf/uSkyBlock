@@ -280,16 +280,16 @@ public class uSkyBlock extends JavaPlugin {
 
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
-                uSkyBlock.skyBlockWorld = WorldCreator
+            uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
-                        .type(WorldType.NORMAL)
+                        .type(WorldType.FLAT)
                         .environment(World.Environment.NORMAL)
                         .generator(new SkyBlockChunkGenerator())
-                        .generateStructures(false)
                         .createWorld();
             if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal uSkyBlock");
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
             }
+            uSkyBlock.skyBlockWorld.save();
         }
         return uSkyBlock.skyBlockWorld;
     }
