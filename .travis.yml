@@ -9,7 +9,6 @@ deploy:
   release-number: v2.0.1-b${TRAVIS_BUILD_NUMBER}
   skip_cleanup: true
   on:
-    tags: true
     repo: rlf/uSkyBlock
     branch: v2.0.0
     all_branches: true
