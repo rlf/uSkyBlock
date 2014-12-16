@@ -1,13 +1,18 @@
 package us.talabrek.ultimateskyblock;
 
-import org.bukkit.generator.*;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.generator.BlockPopulator;
+import org.bukkit.generator.ChunkGenerator;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class SkyBlockChunkGenerator extends ChunkGenerator {
-    private static final BlockPopulator populator = new SkyBlockPopulator();
     private static final byte[] generate = new byte[32768];
+    private static final byte[][] blockSections = new byte[16][];
+    private static final short[][] extBlockSections = new short[16][];
 
     @Override
     public byte[] generate(World world, Random random, int x, int z) {
@@ -15,19 +20,22 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
     }
 
     @Override
+    public short[][] generateExtBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
+        return extBlockSections;
+    }
+
+    @Override
+    public byte[][] generateBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
+        return blockSections;
+    }
+
+    @Override
     public List<BlockPopulator> getDefaultPopulators(World world) {
-        return Collections.singletonList(populator);
+        return Collections.emptyList();
     }
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
         return new Location(world, 0, Settings.island_height, 0);
-    }
-
-    private static class SkyBlockPopulator extends BlockPopulator {
-        @Override
-        public void populate(World world, Random random, Chunk chunk) {
-            return;
-        }
     }
 }

@@ -280,17 +280,15 @@ public class uSkyBlock extends JavaPlugin {
 
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
-            skyBlockWorld = getServer().getWorld(getConfig().getString("options.general.worldName", "skyworld"));
-            if (skyBlockWorld == null) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
                         .type(WorldType.NORMAL)
                         .environment(World.Environment.NORMAL)
                         .generator(new SkyBlockChunkGenerator())
+                        .generateStructures(false)
                         .createWorld();
-                if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal uSkyBlock");
-                }
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal uSkyBlock");
             }
         }
         return uSkyBlock.skyBlockWorld;
@@ -307,16 +305,17 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
-        Location home;
+        Location home = null;
         if (p.getHomeLocation() != null) {
             home = p.getHomeLocation();
         } else if (p.getIslandLocation() != null) {
             home = p.getIslandLocation();
-        } else {
-            home = p.getHomeLocation();
         }
         if (this.isSafeLocation(home)) {
             return home;
+        }
+        if (home == null) {
+            return null;
         }
         for (int y = home.getBlockY() + 25; y > 0; --y) {
             final Location n = new Location(home.getWorld(), (double) home.getBlockX(), (double) y, (double) home.getBlockZ());
@@ -333,6 +332,9 @@ public class uSkyBlock extends JavaPlugin {
         final Location island = p.getIslandLocation();
         if (this.isSafeLocation(island)) {
             return island;
+        }
+        if (island == null) {
+            return null;
         }
         for (int y2 = island.getBlockY() + 25; y2 > 0; --y2) {
             final Location n2 = new Location(island.getWorld(), (double) island.getBlockX(), (double) y2, (double) island.getBlockZ());
@@ -1142,7 +1144,9 @@ public class uSkyBlock extends JavaPlugin {
         for (int x = px - r; x <= px + r + 16; x += 16) {
             for (int z = pz - r; z <= pz + r + 16; z += 16) {
                 Chunk chunk = skyBlockWorld.getChunkAt(x, z);
-                chunk.load();
+                if (!chunk.isLoaded()) {
+                    chunk.load(true); // Generate
+                }
                 skyBlockWorld.setBiome(chunk.getX(), chunk.getZ(), biome);
                 skyBlockWorld.refreshChunk(chunk.getX(), chunk.getZ());
             }
@@ -1773,5 +1777,9 @@ public class uSkyBlock extends JavaPlugin {
 
     public IslandLogic getIslandLogic() {
         return islandLogic;
+    }
+
+    public void runAsync(Runnable runnable) {
+        getServer().getScheduler().runTaskAsynchronously(this, runnable);
     }
 }

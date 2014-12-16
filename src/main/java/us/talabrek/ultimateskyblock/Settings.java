@@ -122,7 +122,7 @@ public class Settings {
         island_extraPermissions = permissionList.toArray(new String[0]);
         extras_sendToSpawn = config.getBoolean("options.extras.sendToSpawn");
         island_useTopTen = config.getBoolean("options.island.useTopTen");
-        general_worldName = config.getString("options.general.worldName");
+        general_worldName = config.getString("options.general.worldName", "skyworld");
         island_removeCreaturesByTeleport = config.getBoolean("options.island.removeCreaturesByTeleport");
         island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
         island_useOldIslands = config.getBoolean("options.island.useOldIslands");

@@ -38,16 +38,16 @@ public class WorldEditHandler {
         return true;
     }
 
-    public static boolean clearIsland(World skyWorld, ProtectedRegion region) {
+    public static void clearIsland(final World skyWorld, final ProtectedRegion region) {
+        long t = System.currentTimeMillis();
+        long diff = 0;
         Region cube = getRegion(skyWorld, region);
-        EditSession session = new EditSession(new BukkitWorld(skyWorld), cube.getArea());
-        try {
-            session.setBlocks(cube, new BaseBlock(0));
-            return true;
-        } catch (MaxChangedBlocksException e) {
-            uSkyBlock.log(Level.SEVERE, "Unable to clear island", e);
-            return false;
+        for (Vector2D chunk : cube.getChunks()) {
+            skyWorld.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ());
+            skyWorld.refreshChunk(chunk.getBlockX(), chunk.getBlockZ());
         }
+        diff = System.currentTimeMillis() - t;
+        uSkyBlock.log(Level.INFO, String.format("Refreshed island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
     }
 
     private static Region getRegion(World skyWorld, ProtectedRegion region) {

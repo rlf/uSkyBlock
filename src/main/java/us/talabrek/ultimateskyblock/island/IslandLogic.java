@@ -44,7 +44,7 @@ public class IslandLogic {
         final int pz = l.getBlockZ();
         for (int x = -radius-16; x <= radius+16; x += 16) {
             for (int z = -radius-16; z <= radius+16; z += 16) {
-                world.loadChunk((px + x) / 16, (pz + z) / 16);
+                world.loadChunk((px + x) / 16, (pz + z) / 16, true);
             }
         }
     }
