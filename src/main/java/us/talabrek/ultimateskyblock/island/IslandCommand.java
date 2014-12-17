@@ -242,7 +242,7 @@ public class IslandCommand implements CommandExecutor {
                         return true;
                     }
                     if (split[0].equals("top") && VaultHandler.checkPerk(player.getName(), "usb.island.topten", player.getWorld())) {
-                        sky.displayTopTen(player);
+                        sky.getIslandLogic().showTopTen(player);
                         return true;
                     }
                     if ((split[0].equals("biome") || split[0].equals("b")) && pi.getHasIsland()) {
@@ -447,12 +447,12 @@ public class IslandCommand implements CommandExecutor {
                         if (sky.playerIsOnIsland(player)) {
                             if (sky.changePlayerBiome(player, split[1])) {
                                 player.sendMessage(ChatColor.GREEN + "You have changed your island's biome to " + split[1].toUpperCase());
-                                player.sendMessage(ChatColor.GREEN + "You may need to relog to see the changes.");
+                                player.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");
                                 sky.sendMessageToIslandGroup(iName, String.valueOf(player.getName()) + " changed the island biome to " + split[1].toUpperCase());
                                 sky.setBiomeCooldown(player);
                             } else {
                                 player.sendMessage(ChatColor.GREEN + "Unknown biome name, changing your biome to OCEAN");
-                                player.sendMessage(ChatColor.GREEN + "You may need to relog to see the changes.");
+                                player.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");
                                 sky.sendMessageToIslandGroup(iName, String.valueOf(player.getName()) + " changed the island biome to OCEAN");
                             }
                         } else {
@@ -593,7 +593,8 @@ public class IslandCommand implements CommandExecutor {
     private boolean handleConsoleCommand(CommandSender sender, Command command, String label, String[] split) {
         if (split.length == 1) {
             if (split[0].equalsIgnoreCase("top")) {
-                return uSkyBlock.getInstance().displayTopTen(sender);
+                uSkyBlock.getInstance().getIslandLogic().showTopTen(sender);
+                return true;
             }
         }
         return false;

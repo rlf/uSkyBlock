@@ -84,7 +84,7 @@ public class DevCommand implements CommandExecutor {
                 uSkyBlock.getInstance().saveOrphans();
             } else if (split[0].equals("topten") && (sender.hasPermission("usb.mod.topten"))) {
                 sender.sendMessage(ChatColor.YELLOW + "Generating the Top Ten list");
-                uSkyBlock.getInstance().updateTopTen(uSkyBlock.getInstance().generateTopTen());
+                uSkyBlock.getInstance().getIslandLogic().showTopTen(sender);
                 sender.sendMessage(ChatColor.YELLOW + "Finished generation of the Top Ten list");
             } else if (split[0].equals("purge") && (sender.hasPermission("usb.admin.purge"))) {
                 if (uSkyBlock.getInstance().isPurgeActive()) {

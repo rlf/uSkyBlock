@@ -69,8 +69,8 @@ options:
     #Set to false if you have performance issues
     useIslandLevel: true
 
-    #[true/false] If true, a top 10 islands list will be generated when the plugin is loaded.
-    useTopTen: true
+    # [integer] The time in minutes for how often the top-ten list will be re-generated when doing /is top
+    topTenTimeout: 7
 
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands
   extra-menus:

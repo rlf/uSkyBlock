@@ -29,6 +29,7 @@ public class Settings {
     public static boolean extras_sendToSpawn;
     public static boolean extras_obsidianToLava;
     public static String island_schematicName;
+    public static long island_topTenTimeout;
 
     public static boolean loadPluginConfig(FileConfiguration config) {
         boolean changed = false;
@@ -126,6 +127,7 @@ public class Settings {
         island_removeCreaturesByTeleport = config.getBoolean("options.island.removeCreaturesByTeleport");
         island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
         island_useOldIslands = config.getBoolean("options.island.useOldIslands");
+        island_topTenTimeout = config.getInt("options.island.topTenTimeout", 7); // Every 7 minutes
         return changed;
     }
 

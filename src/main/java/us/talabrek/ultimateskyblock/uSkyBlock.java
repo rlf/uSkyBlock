@@ -27,10 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
-import us.talabrek.ultimateskyblock.island.IslandCommand;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.island.IslandLogic;
-import us.talabrek.ultimateskyblock.island.LevelLogic;
+import us.talabrek.ultimateskyblock.island.*;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 import java.io.*;
@@ -57,7 +54,7 @@ public class uSkyBlock extends JavaPlugin {
     private HashMap<String, FileConfiguration> islands;
     private File orphanFile;
     private File lastIslandConfigFile;
-    public static World skyBlockWorld;
+    public static volatile World skyBlockWorld;
     private static uSkyBlock instance;
     public List<String> removeList;
     private Location lastIsland;
@@ -67,7 +64,6 @@ public class uSkyBlock extends JavaPlugin {
     public File directoryPlayers;
     public File directoryIslands;
     public File[] schemFile;
-    LinkedHashMap<String, Double> topTen;
     Map<String, Long> infoCooldown;
     Map<String, Long> restartCooldown;
     Map<String, Long> biomeCooldown;
@@ -170,15 +166,12 @@ public class uSkyBlock extends JavaPlugin {
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
-        this.islandLogic = new IslandLogic(this);
+        this.islandLogic = new IslandLogic(this, directoryIslands);
 
         registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
         this.getCommand("usb").setExecutor(new DevCommand());
-        if (Settings.island_useTopTen) {
-            updateTopTen(getInstance().generateTopTen());
-        }
 
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
@@ -251,36 +244,9 @@ public class uSkyBlock extends JavaPlugin {
         manager.registerEvents(new PlayerEvents(this), this);
     }
 
-    public boolean displayTopTen(final CommandSender sender) {
-        int i = 1;
-        int playerrank = 0;
-        sender.sendMessage(ChatColor.YELLOW + "Displaying the top 10 islands:");
-        if (topTen == null) {
-            sender.sendMessage(ChatColor.RED + "Top ten list not generated yet!");
-            return false;
-        }
-        for (final String playerName : topTen.keySet()) {
-            if (i <= 10) {
-                sender.sendMessage(String.format(ChatColor.GREEN + "#%2d: %s - Island level %5.2f", i, playerName, topTen.get(playerName)));
-            }
-            if (playerName != null && playerName.equalsIgnoreCase(sender.getName())) {
-                playerrank = i;
-            }
-            ++i;
-        }
-        if (playerrank > 0) {
-            sender.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank);
-        }
-        return true;
-    }
-
-    public void updateTopTen(final LinkedHashMap<String, Double> map) {
-        this.topTen = map;
-    }
-
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
-            skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
+            //skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
             if (skyBlockWorld == null) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
@@ -757,27 +723,6 @@ public class uSkyBlock extends JavaPlugin {
         return new SkyBlockChunkGenerator();
     }
 
-    public LinkedHashMap<String, Double> generateTopTen() {
-        final HashMap<String, Double> tempMap = new HashMap<>();
-        final File folder = this.directoryIslands;
-        final File[] listOfFiles = folder.listFiles();
-        for (int i = 0; i < listOfFiles.length; ++i) {
-            FileConfiguration islandConfig = this.getTempIslandConfig(listOfFiles[i].getName().replaceAll(".yml", ""));
-            if (islandConfig != null && islandConfig.getInt("general.level") > 0) {
-                String partyLeader = islandConfig.getString("party.leader");
-                PlayerInfo pi = getPlayerInfo(partyLeader);
-                if (pi != null) {
-                    tempMap.put(pi.getDisplayName(), islandConfig.getDouble("general.level"));
-                } else {
-                    tempMap.put(partyLeader, islandConfig.getDouble("general.level"));
-                }
-            }
-        }
-        TreeMap<String, Double> sortedMap = new TreeMap<>(new TopTenComparator(tempMap));
-        sortedMap.putAll(tempMap);
-        return new LinkedHashMap<>(sortedMap);
-    }
-
     public boolean onInfoCooldown(final Player player) {
         return !player.hasPermission("usb.exempt.infoCooldown")
                 && infoCooldown.containsKey(player.getName())
@@ -1161,28 +1106,9 @@ public class uSkyBlock extends JavaPlugin {
         int r = Settings.island_radius;
         final int px = loc.getBlockX();
         final int pz = loc.getBlockZ();
-        int minX = px - r;
-        int minZ = pz - r;
-        int maxX = px + r;
-        int maxZ = pz + r;
-        // Align to chunks
-        minX -= minX % 16;
-        maxX -= maxX % 16;
-        minZ -= minZ % 16;
-        maxZ -= maxZ % 16;
-        for (int x = minX; x <= maxX; x += 16) {
-            for (int z = minZ; z <= maxZ; z += 16) {
-                skyBlockWorld.loadChunk(x/16, z/16, true); // Chunk Coords
-            }
-        }
         for (int x = px-r; x <= px+r; x++) {
             for (int z = pz-r; z <= pz+r; z++) {
                 skyBlockWorld.setBiome(x, z, biome); // World Coords
-            }
-        }
-        for (int x = minX; x <= maxX; x += 16) {
-            for (int z = minZ; z <= maxZ; z += 16) {
-                skyBlockWorld.refreshChunk(x/16, z/16); // Chunk Coords
             }
         }
     }
