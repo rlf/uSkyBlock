@@ -425,7 +425,7 @@ public class uSkyBlock extends JavaPlugin {
     public void deletePlayerIsland(final String player) {
         final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
         orphaned.push(pi.getIslandLocation());
-        removeIsland(pi.getIslandLocation());
+        islandLogic.clearIsland(pi.getIslandLocation());
         RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
         regionManager.removeRegion(player + "Island");
         String islandLocation = pi.locationForParty();
@@ -433,7 +433,8 @@ public class uSkyBlock extends JavaPlugin {
         pi.removeFromIsland();
         pi.save();
         removeActivePlayer(player);
-        this.saveOrphans();
+        saveOrphans();
+        // TODO: 17/12/2014 - R4zorax: Teleport players on the island
     }
 
     public boolean restartPlayerIsland(final Player player, final Location next) {
@@ -441,14 +442,29 @@ public class uSkyBlock extends JavaPlugin {
             return false;
         }
         try {
-            removeIsland(next);
+            islandLogic.clearIsland(next);
             createIsland(player, next);
+            changePlayerBiome(player, "OCEAN");
+            islandLogic.reloadIsland(next);
             next.setY((double) Settings.island_height);
             setNewPlayerIsland(player, next);
             clearPlayerInventory(player);
-            changePlayerBiome(player, "OCEAN");
             clearEntitiesNearPlayer(player);
             setRestartCooldown(player);
+            player.sendMessage(ChatColor.RED + "Close your eyes!");
+            getServer().getScheduler().runTaskLater(this, new Runnable() {
+                @Override
+                public void run() {
+                    player.performCommand("spawn");
+                    player.sendMessage(ChatColor.YELLOW + "Warping you to your new island!" + ChatColor.GREEN + " Get ready!");
+                    getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            uSkyBlock.getInstance().homeTeleport(player);
+                        }
+                    }, 10);
+                }
+            }, 10);
             return true;
         } catch (Exception e) {
             player.sendMessage("Could not create your Island. Please contact a server moderator.");
@@ -1145,20 +1161,34 @@ public class uSkyBlock extends JavaPlugin {
         int r = Settings.island_radius;
         final int px = loc.getBlockX();
         final int pz = loc.getBlockZ();
-        for (int x = px - r; x <= px + r + 16; x += 16) {
-            for (int z = pz - r; z <= pz + r + 16; z += 16) {
-                Chunk chunk = skyBlockWorld.getChunkAt(x, z);
-                if (!chunk.isLoaded()) {
-                    chunk.load(true); // Generate
-                }
-                skyBlockWorld.setBiome(chunk.getX(), chunk.getZ(), biome);
-                skyBlockWorld.refreshChunk(chunk.getX(), chunk.getZ());
+        int minX = px - r;
+        int minZ = pz - r;
+        int maxX = px + r;
+        int maxZ = pz + r;
+        // Align to chunks
+        minX -= minX % 16;
+        maxX -= maxX % 16;
+        minZ -= minZ % 16;
+        maxZ -= maxZ % 16;
+        for (int x = minX; x <= maxX; x += 16) {
+            for (int z = minZ; z <= maxZ; z += 16) {
+                skyBlockWorld.loadChunk(x/16, z/16, true); // Chunk Coords
+            }
+        }
+        for (int x = px-r; x <= px+r; x++) {
+            for (int z = pz-r; z <= pz+r; z++) {
+                skyBlockWorld.setBiome(x, z, biome); // World Coords
+            }
+        }
+        for (int x = minX; x <= maxX; x += 16) {
+            for (int z = minZ; z <= maxZ; z += 16) {
+                skyBlockWorld.refreshChunk(x/16, z/16); // Chunk Coords
             }
         }
     }
 
     public boolean changePlayerBiome(final Player player, final String bName) {
-        if (!VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, player.getWorld())) {
+        if (!VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, skyBlockWorld)) {
             return false;
         }
         if (getIslandConfig(getPlayerInfo(player).locationForParty()).getBoolean("party.members." + player.getName() + ".canChangeBiome")) {
@@ -1171,31 +1201,31 @@ public class uSkyBlock extends JavaPlugin {
 
     public void listBiomes(final Player player) {
         String biomeList = ", ";
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.ocean", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.ocean", skyBlockWorld)) {
             biomeList = "OCEAN, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.forest", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.forest", skyBlockWorld)) {
             biomeList = biomeList + "FOREST, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.jungle", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.jungle", skyBlockWorld)) {
             biomeList = biomeList + "JUNGLE, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.desert", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.desert", skyBlockWorld)) {
             biomeList = biomeList + "DESERT, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.taiga", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.taiga", skyBlockWorld)) {
             biomeList = biomeList + "TAIGA, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.swampland", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.swampland", skyBlockWorld)) {
             biomeList = biomeList + "SWAMPLAND, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.mushroom", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.mushroom", skyBlockWorld)) {
             biomeList = biomeList + "MUSHROOM, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.hell", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.hell", skyBlockWorld)) {
             biomeList = biomeList + "HELL, ";
         }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", getSkyBlockWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", skyBlockWorld)) {
             biomeList = biomeList + "SKY, ";
         }
         player.sendMessage(ChatColor.YELLOW + "You have access to the following Biomes:");
@@ -1243,7 +1273,7 @@ public class uSkyBlock extends JavaPlugin {
                     } else {
                         cSchem = getSchemFile()[i].getName();
                     }
-                    if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, getSkyBlockWorld()) && WorldEditHandler.loadIslandSchematic(getSkyBlockWorld(), getSchemFile()[i], next)) {
+                    if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, skyBlockWorld) && WorldEditHandler.loadIslandSchematic(skyBlockWorld, getSchemFile()[i], next)) {
                         this.setChest(next, player);
                         hasIslandNow = true;
                     }
@@ -1256,7 +1286,7 @@ public class uSkyBlock extends JavaPlugin {
                     } else {
                         cSchem = getSchemFile()[i].getName();
                     }
-                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName) && WorldEditHandler.loadIslandSchematic(getSkyBlockWorld(), getSchemFile()[i], next)) {
+                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName) && WorldEditHandler.loadIslandSchematic(skyBlockWorld, getSchemFile()[i], next)) {
                         this.setChest(next, player);
                         hasIslandNow = true;
                     }
@@ -1265,9 +1295,9 @@ public class uSkyBlock extends JavaPlugin {
         }
         if (!hasIslandNow) {
             if (!Settings.island_useOldIslands) {
-                this.generateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, getSkyBlockWorld());
+                this.generateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, skyBlockWorld);
             } else {
-                this.oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, getSkyBlockWorld());
+                this.oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, skyBlockWorld);
             }
         }
         next.setY((double) Settings.island_height);
@@ -1557,8 +1587,8 @@ public class uSkyBlock extends JavaPlugin {
         for (int x = -15; x <= 15; ++x) {
             for (int y = -15; y <= 15; ++y) {
                 for (int z = -15; z <= 15; ++z) {
-                    if (getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-                        final Block blockToChange = getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
+                    if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
+                        final Block blockToChange = skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
                         final Chest chest = (Chest) blockToChange.getState();
                         final Inventory inventory = chest.getInventory();
                         inventory.clear();
@@ -1588,18 +1618,18 @@ public class uSkyBlock extends JavaPlugin {
             for (int y = -15; y <= 15; ++y) {
                 int z = -15;
                 while (z <= 15) {
-                    if (getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-                        if (getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + (z + 1)).getTypeId() == 0 && getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + (y - 1), loc.getBlockZ() + (z + 1)).getTypeId() != 0) {
-                            return new Location(getSkyBlockWorld(), (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
+                    if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
+                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + (z + 1)).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + (y - 1), loc.getBlockZ() + (z + 1)).getTypeId() != 0) {
+                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
                         }
-                        if (getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + (z - 1)).getTypeId() == 0 && getSkyBlockWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + (y - 1), loc.getBlockZ() + (z - 1)).getTypeId() != 0) {
-                            return new Location(getSkyBlockWorld(), (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
+                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + (z - 1)).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + (y - 1), loc.getBlockZ() + (z - 1)).getTypeId() != 0) {
+                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
                         }
-                        if (getSkyBlockWorld().getBlockAt(loc.getBlockX() + (x + 1), loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && getSkyBlockWorld().getBlockAt(loc.getBlockX() + (x + 1), loc.getBlockY() + (y - 1), loc.getBlockZ() + z).getTypeId() != 0) {
-                            return new Location(getSkyBlockWorld(), (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
+                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + (x + 1), loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + (x + 1), loc.getBlockY() + (y - 1), loc.getBlockZ() + z).getTypeId() != 0) {
+                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
                         }
-                        if (getSkyBlockWorld().getBlockAt(loc.getBlockX() + (x - 1), loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && getSkyBlockWorld().getBlockAt(loc.getBlockX() + (x - 1), loc.getBlockY() + (y - 1), loc.getBlockZ() + z).getTypeId() != 0) {
-                            return new Location(getSkyBlockWorld(), (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
+                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + (x - 1), loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + (x - 1), loc.getBlockY() + (y - 1), loc.getBlockZ() + z).getTypeId() != 0) {
+                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
                         }
                         loc.setY(loc.getY() + 1.0);
                         return loc;

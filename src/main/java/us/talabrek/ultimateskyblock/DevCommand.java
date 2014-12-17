@@ -146,10 +146,10 @@ public class DevCommand implements CommandExecutor {
                     }
                 });
             } else if (split[0].equals("goto") && (sender.hasPermission("usb.mod.goto"))) {
-            	if (!(sender instanceof Player)) {
+                if (!(sender instanceof Player)) {
                     return false;
                 }
-            	player = (Player) sender;
+                player = (Player) sender;
                 final PlayerInfo pi = new PlayerInfo(split[1]);
                 if (!pi.getHasIsland()) {
                     sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
@@ -166,14 +166,13 @@ public class DevCommand implements CommandExecutor {
                     }
                     sender.sendMessage("Error: That player does not have an island!");
                 }
-            } else if (split[0].equals("remove") && (sender.hasPermission("usb.admin.remove"))) {
+            } else if (split[0].equals("refresh") && (sender.hasPermission("usb.admin.refresh"))) {
                 final PlayerInfo pi = new PlayerInfo(split[1]);
                 if (!pi.getHasIsland()) {
                     sender.sendMessage(ChatColor.RED + "Error: Invalid Player (check spelling)");
                 } else {
                     if (pi.getIslandLocation() != null) {
-                        sender.sendMessage(ChatColor.YELLOW + "Removing " + split[1] + "'s island.");
-                        uSkyBlock.getInstance().deletePlayerIsland(split[1]);
+                        uSkyBlock.getInstance().getIslandLogic().reloadIsland(pi.getIslandLocation());
                         return true;
                     }
                     sender.sendMessage("Error: That player does not have an island!");

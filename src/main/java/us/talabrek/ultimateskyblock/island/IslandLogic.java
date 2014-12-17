@@ -3,7 +3,10 @@ package us.talabrek.ultimateskyblock.island;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.WorldEditHandler;
 import us.talabrek.ultimateskyblock.WorldGuardHandler;
@@ -59,4 +62,13 @@ public class IslandLogic {
         }
     }
 
+    public void reloadIsland(Location loc) {
+        World skyBlockWorld = plugin.getWorld();
+        ApplicableRegionSet applicableRegions = WorldGuardHandler.getWorldGuard().getRegionManager(skyBlockWorld).getApplicableRegions(loc);
+        for (ProtectedRegion region : applicableRegions) {
+            if (!region.getId().equalsIgnoreCase("__global__")) {
+                WorldEditHandler.reloadIsland(skyBlockWorld, region);
+            }
+        }
+    }
 }
