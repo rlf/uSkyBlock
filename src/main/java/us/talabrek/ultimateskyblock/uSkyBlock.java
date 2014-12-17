@@ -246,7 +246,7 @@ public class uSkyBlock extends JavaPlugin {
 
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
-            //skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
+            skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
             if (skyBlockWorld == null) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)

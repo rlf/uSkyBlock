@@ -72,16 +72,22 @@ public class LevelLogic {
         for (int i = 1; i < MAX_BLOCK; ++i) {
             int count = values[i];
             if (count > 0 && blockValue[i] > 0) {
+                BlockScore.State state = BlockScore.State.NORMAL;
                 double adjustedCount = count;
                 if (count > blockLimit[i] && blockLimit[i] != -1) {
                     adjustedCount = blockLimit[i]; // Hard edge
-                }
-                if (blockDR[i] > 0) {
+                    state = BlockScore.State.LIMIT;
+                } else if (blockDR[i] > 0) {
+                    if (count < blockDR[i]) {
+                        state = BlockScore.State.GOOD;
+                    } else if (count > blockDR[i]) {
+                        state = BlockScore.State.DIMINISHING;
+                    }
                     adjustedCount = dReturns(count, blockDR[i]);
                 }
                 double blockScore = adjustedCount * blockValue[i];
                 score += blockScore;
-                blocks.add(new BlockScore(i, count, blockScore/pointsPerLevel));
+                blocks.add(new BlockScore(i, count, blockScore/pointsPerLevel, state));
             }
         }
         return new IslandScore(score/pointsPerLevel, blocks);

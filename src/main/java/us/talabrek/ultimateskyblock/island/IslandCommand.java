@@ -693,8 +693,9 @@ public class IslandCommand implements CommandExecutor {
                                 player.sendMessage("Score Count Block");
                                 for (BlockScore score : shared[0].getTop(10)) {
                                     Material material = Material.getMaterial(score.getBlockId());
-                                    player.sendMessage(String.format("%05.2f  %d %s",
-                                            score.getScore(), score.getCount(), VaultHandler.getItemName(material)));
+                                    player.sendMessage(score.getState().getColor() + String.format("%05.2f  %d %s",
+                                            score.getScore(), score.getCount(),
+                                            VaultHandler.getItemName(material)));
                                 }
                                 player.sendMessage(String.format(ChatColor.GREEN + "Island level is %5.2f", shared[0].getScore()));
                             } else {
