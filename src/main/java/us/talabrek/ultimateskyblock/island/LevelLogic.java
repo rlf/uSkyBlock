@@ -77,12 +77,8 @@ public class LevelLogic {
                 if (count > blockLimit[i] && blockLimit[i] != -1) {
                     adjustedCount = blockLimit[i]; // Hard edge
                     state = BlockScore.State.LIMIT;
-                } else if (blockDR[i] > 0) {
-                    if (count < blockDR[i]) {
-                        state = BlockScore.State.GOOD;
-                    } else if (count > blockDR[i]) {
-                        state = BlockScore.State.DIMINISHING;
-                    }
+                } else if (blockDR[i] > 0 && count > blockDR[i]) {
+                    state = BlockScore.State.DIMINISHING;
                     adjustedCount = dReturns(count, blockDR[i]);
                 }
                 double blockScore = adjustedCount * blockValue[i];
