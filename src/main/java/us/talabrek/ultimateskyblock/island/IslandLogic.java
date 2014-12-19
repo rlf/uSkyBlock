@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,6 +21,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -76,14 +78,16 @@ public class IslandLogic {
         }
     }
 
-    public void reloadIsland(Location loc) {
-        World skyBlockWorld = plugin.getWorld();
-        ApplicableRegionSet applicableRegions = WorldGuardHandler.getWorldGuard().getRegionManager(skyBlockWorld).getApplicableRegions(loc);
-        for (ProtectedRegion region : applicableRegions) {
-            if (!region.getId().equalsIgnoreCase("__global__")) {
-                WorldEditHandler.reloadIsland(skyBlockWorld, region);
-            }
-        }
+    public void reloadIsland(Location location) {
+        reloadIsland(location2Name(location));
+    }
+
+    private String location2Name(Location location) {
+        return location != null ? ("" + location.getBlockX() + "," + location.getBlockZ()) : "null";
+    }
+
+    public void reloadIsland(String location) {
+        getIslandInfo(location).reload();
     }
 
     private void displayTopTen(final CommandSender sender) {
@@ -157,5 +161,23 @@ public class IslandLogic {
             return null;
         }
         return config;
+    }
+
+
+    public synchronized IslandInfo createIsland(String location, String player) {
+        IslandInfo info = getIslandInfo(location);
+        info.clearIslandConfig(player);
+        return info;
+    }
+
+    public synchronized void deleteIslandConfig(final String location) {
+        File file = new File(this.directoryIslands, location + ".yml");
+        file.delete();
+        islands.remove(location);
+    }
+
+    public void removeIslandFromMemory(String islandName) {
+        getIslandInfo(islandName).save();
+        islands.remove(islandName);
     }
 }

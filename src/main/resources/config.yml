@@ -11,13 +11,13 @@ options:
     spawnSize: 150
 
     # [integer] The time in seconds before a player can use the /island info command again. (note: cooldowns are reset when the plugin is reloaded)
-    cooldownInfo: 30
+    cooldownInfo: 20
 
     # [integer] The time in seconds before a player can use the /island restart command again.
-    cooldownRestart: 600
+    cooldownRestart: 30
 
     # [integer] The time in seconds before a player can use the /island biome command again.
-    biomeChange: 3600
+    biomeChange: 180
   island:
     # [filename] The schematic to use for island generation.
     # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.

@@ -178,7 +178,7 @@ public class ChallengeLogic {
     }
 
     private boolean tryCompleteIslandLevel(Player player, Challenge challenge) {
-        if (skyBlock.getIslandConfig(player).getInt("general.level") >= challenge.getRequiredLevel()) {
+        if (skyBlock.getIslandInfo(player).getLevel() >= challenge.getRequiredLevel()) {
             giveReward(player, challenge.getName());
             return true;
         }

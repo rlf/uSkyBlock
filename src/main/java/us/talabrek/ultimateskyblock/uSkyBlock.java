@@ -48,10 +48,8 @@ public class uSkyBlock extends JavaPlugin {
     private IslandLogic islandLogic;
 
     private static String pName = "";
-    Date date;
     private FileConfiguration lastIslandConfig;
     private FileConfiguration orphans;
-    private HashMap<String, FileConfiguration> islands;
     private File orphanFile;
     private File lastIslandConfigFile;
     public static volatile World skyBlockWorld;
@@ -68,8 +66,6 @@ public class uSkyBlock extends JavaPlugin {
     Map<String, Long> restartCooldown;
     Map<String, Long> biomeCooldown;
     private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
-    LinkedHashMap<String, List<String>> challenges;
-    HashMap<Integer, Integer> requiredList;
     public boolean purgeActive;
 
     static {
@@ -81,7 +77,6 @@ public class uSkyBlock extends JavaPlugin {
         configFiles.clear();
         this.lastIslandConfig = null;
         this.orphans = null;
-        this.islands = new HashMap<>();
         this.orphanFile = null;
         this.lastIslandConfigFile = null;
         this.removeList = new ArrayList<>();
@@ -91,8 +86,6 @@ public class uSkyBlock extends JavaPlugin {
         this.infoCooldown = new HashMap<>();
         this.restartCooldown = new HashMap<>();
         this.biomeCooldown = new HashMap<>();
-        this.challenges = new LinkedHashMap<>();
-        this.requiredList = new HashMap<>();
         this.purgeActive = false;
     }
 
@@ -395,7 +388,7 @@ public class uSkyBlock extends JavaPlugin {
         RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
         regionManager.removeRegion(player + "Island");
         String islandLocation = pi.locationForParty();
-        deleteIslandConfig(islandLocation);
+        islandLogic.deleteIslandConfig(islandLocation);
         pi.removeFromIsland();
         pi.save();
         removeActivePlayer(player);
@@ -440,10 +433,14 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void clearPlayerInventory(Player player) {
-        player.getInventory().clear();
-        ItemStack[] armor = player.getEquipment().getArmorContents();
-        player.getEquipment().setArmorContents(new ItemStack[armor.length]);
-        player.getEnderChest().clear();
+        if (player.getWorld().getName().equalsIgnoreCase(skyBlockWorld.getName())) {
+            player.getInventory().clear();
+            ItemStack[] armor = player.getEquipment().getArmorContents();
+            player.getEquipment().setArmorContents(new ItemStack[armor.length]);
+            player.getEnderChest().clear();
+        } else {
+            log(Level.SEVERE, "Trying to clear player-inventory of " + player + ", even though they are not in the skyworld!");
+        }
     }
 
     private void clearEntitiesNearPlayer(Player player) {
@@ -469,12 +466,10 @@ public class uSkyBlock extends JavaPlugin {
                             pi.setHasIsland(true);
                             pi.setIslandLocation(b.getLocation());
                             pi.save();
-                            createIslandConfig(pi.locationForParty(), player);
-                            clearIslandConfig(pi.locationForParty(), player);
+                            islandLogic.createIsland(pi.locationForParty(), player);
                             if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
                                 sender.sendMessage("Player doesn't have an island or it's already protected!");
                             }
-                            getIslandConfig(pi.locationForParty());
                             return true;
                         }
                     }
@@ -507,18 +502,6 @@ public class uSkyBlock extends JavaPlugin {
 
     public int orphanCount() {
         return orphaned.size();
-    }
-
-    public void removeIsland(final Location loc) {
-        islandLogic.clearIsland(loc);
-    }
-
-    public boolean hasParty(final String playername) {
-        if (this.getActivePlayers().containsKey(playername)) {
-            return this.getIslandConfig(this.getActivePlayers().get(playername).locationForParty()).getInt("party.currentSize") > 1;
-        }
-        final PlayerInfo pi = new PlayerInfo(playername);
-        return pi.getHasIsland() && this.getTempIslandConfig(pi.locationForParty()).getInt("party.currentSize") > 1;
     }
 
     public Location getLastIsland() {
@@ -648,7 +631,7 @@ public class uSkyBlock extends JavaPlugin {
         }
         if (this.playerIsOnIsland(player)) {
             if (this.getActivePlayers().containsKey(player.getName())) {
-                this.setWarpLocation(this.getActivePlayers().get(player.getName()).locationForParty(), player.getLocation());
+                islandLogic.getIslandInfo(getPlayerInfo(player)).setWarpLocation(player.getLocation());
             }
             player.sendMessage(ChatColor.GREEN + "Your skyblock incoming warp has been set to your current location.");
             return true;
@@ -866,8 +849,8 @@ public class uSkyBlock extends JavaPlugin {
     public PlayerInfo loadPlayerData(Player player) {
         final PlayerInfo pi = loadPlayerAndIsland(player.getName());
         if (pi.getHasIsland()) {
-            FileConfiguration islandConfig = getIslandConfig(pi);
-            WorldGuardHandler.protectIsland(player, islandConfig.getString("party.leader"), pi);
+            IslandInfo islandInfo = islandLogic.getIslandInfo(pi);
+            WorldGuardHandler.protectIsland(player, islandInfo.getLeader(), pi);
         }
         addActivePlayer(player.getName(), pi);
         uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
@@ -877,142 +860,25 @@ public class uSkyBlock extends JavaPlugin {
     private PlayerInfo loadPlayerAndIsland(String playerName) {
         final PlayerInfo playerInfo = new PlayerInfo(playerName);
         activePlayers.put(playerName, playerInfo);
-        if (playerInfo.getHasIsland()) {
-            FileConfiguration islandConfig = getIslandConfig(playerInfo.locationForParty());
-            if (islandConfig == null) {
-                uSkyBlock.log(Level.INFO, "Creating new Island-config File");
-                createIslandConfig(playerInfo.locationForParty(), playerName);
-                clearIslandConfig(playerInfo.locationForParty(), playerName);
-            }
-        }
         return playerInfo;
     }
 
     public void unloadPlayerData(Player player) {
         if (hasIsland(player.getName()) && !hasIslandMembersOnline(player)) {
-            removeIslandConfig(getActivePlayers().get(player.getName()).locationForParty());
+            islandLogic.removeIslandFromMemory(getPlayerInfo(player).locationForParty());
         }
         removeActivePlayer(player.getName());
     }
 
-    public void clearIslandConfig(final String location, final String leader) {
-        FileConfiguration islandConfig = this.getIslandConfig(location);
-        islandConfig.set("general.level", 0);
-        islandConfig.set("general.warpLocationX", 0);
-        islandConfig.set("general.warpLocationY", 0);
-        islandConfig.set("general.warpLocationZ", 0);
-        islandConfig.set("general.warpActive", false);
-        islandConfig.set("log.logPos", 1);
-        islandConfig.set("log.1", "\u00a7d[skyblock] The island has been created.");
-        this.setupPartyLeader(location, leader);
-    }
 
-    public void setupPartyLeader(final String location, final String leader) {
-        FileConfiguration islandConfig = this.getIslandConfig(location);
-        ConfigurationSection section = islandConfig.createSection("party.members." + leader);
-        FileConfiguration.createPath(section, "canChangeBiome");
-        FileConfiguration.createPath(section, "canToggleLock");
-        FileConfiguration.createPath(section, "canChangeWarp");
-        FileConfiguration.createPath(section, "canToggleWarp");
-        FileConfiguration.createPath(section, "canInviteOthers");
-        FileConfiguration.createPath(section, "canKickOthers");
-        islandConfig.set("party.leader", leader);
-        islandConfig.set("party.members." + leader + ".canChangeBiome", true);
-        islandConfig.set("party.members." + leader + ".canToggleLock", true);
-        islandConfig.set("party.members." + leader + ".canChangeWarp", true);
-        islandConfig.set("party.members." + leader + ".canToggleWarp", true);
-        islandConfig.set("party.members." + leader + ".canInviteOthers", true);
-        islandConfig.set("party.members." + leader + ".canKickOthers", true);
-        this.saveIslandConfig(location);
-    }
-
-    public void setupPartyMember(final String location, final String member) {
-        FileConfiguration islandConfig = this.getIslandConfig(location);
-        ConfigurationSection section = islandConfig.createSection("party.members." + member);
-        FileConfiguration.createPath(section, "canChangeBiome");
-        FileConfiguration.createPath(section, "canToggleLock");
-        FileConfiguration.createPath(section, "canChangeWarp");
-        FileConfiguration.createPath(section, "canToggleWarp");
-        FileConfiguration.createPath(section, "canInviteOthers");
-        FileConfiguration.createPath(section, "canKickOthers");
-        islandConfig.set("party.members." + member + ".canChangeBiome", false);
-        islandConfig.set("party.currentSize", islandConfig.getInt("party.currentSize") + 1);
-        islandConfig.set("party.members." + member + ".canToggleLock", false);
-        islandConfig.set("party.members." + member + ".canChangeWarp", false);
-        islandConfig.set("party.members." + member + ".canToggleWarp", false);
-        islandConfig.set("party.members." + member + ".canInviteOthers", false);
-        islandConfig.set("party.members." + member + ".canKickOthers", false);
-        islandConfig.set("party.members." + member + ".canBanOthers", false);
-        this.saveIslandConfig(location);
-    }
 
     public void reloadIslandConfig(final String location) {
-        File islandConfigFile = new File(directoryIslands, location + ".yml");
-        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(islandConfigFile);
-        islands.put(location, configuration);
-        final InputStream defConfigStream = this.getResource("island.yml");
-        if (defConfigStream != null) {
-            final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            configuration.setDefaults(defConfig);
-        }
-        saveIslandConfig(location);
+        islandLogic.reloadIsland(location);
     }
 
     public FileConfiguration getTempIslandConfig(final String location) {
         File islandFile = new File(this.directoryIslands, location + ".yml");
         return YamlConfiguration.loadConfiguration(islandFile);
-    }
-
-    public void createIslandConfig(final String location, final String leader) {
-        this.saveDefaultIslandsConfig(location);
-        final InputStream defConfigStream = this.getResource("island.yml");
-        if (defConfigStream != null) {
-            this.islands.put(location, YamlConfiguration.loadConfiguration(defConfigStream));
-            this.getIslandConfig(location);
-            this.setupPartyLeader(location, leader);
-        }
-    }
-
-    public FileConfiguration getIslandConfig(final Player player) {
-        return getIslandConfig(getPlayerInfo(player).locationForParty());
-    }
-
-    public FileConfiguration getIslandConfig(final PlayerInfo info) {
-        return getIslandConfig(info.locationForParty());
-    }
-
-    public FileConfiguration getIslandConfig(final String location) {
-        if (islands.get(location) == null) {
-            reloadIslandConfig(location);
-        }
-        return islands.get(location);
-    }
-
-    public void saveIslandConfig(final String location) {
-        if (islands.get(location) == null) {
-            return;
-        }
-        File file = new File(this.directoryIslands, location + ".yml");
-        try {
-            getIslandConfig(location).save(file);
-        } catch (IOException ex) {
-            getLogger().log(Level.SEVERE, "Could not save config to " + file, ex);
-        }
-    }
-
-    public void deleteIslandConfig(final String location) {
-        File file = new File(this.directoryIslands, location + ".yml");
-        file.delete();
-        removeIslandConfig(location);
-    }
-
-    public void saveDefaultIslandsConfig(final String location) {
-        File file = new File(this.directoryIslands, location + ".yml");
-        try {
-            getIslandConfig(location).save(file);
-        } catch (IOException ex) {
-            this.getLogger().log(Level.SEVERE, "Could not save config to " + file, ex);
-        }
     }
 
     public void reloadLastIslandConfig() {
@@ -1117,9 +983,11 @@ public class uSkyBlock extends JavaPlugin {
         if (!VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, skyBlockWorld)) {
             return false;
         }
-        if (getIslandConfig(getPlayerInfo(player).locationForParty()).getBoolean("party.members." + player.getName() + ".canChangeBiome")) {
-            setBiome(getPlayerInfo(player).getIslandLocation(), bName);
-            setConfigBiome(player, bName);
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
+        if (islandInfo.hasPerm(player.getName(), "canChangeBiome")) {
+            setBiome(playerInfo.getIslandLocation(), bName);
+            islandInfo.setBiome(bName);
             return true;
         }
         return false;
@@ -1539,116 +1407,88 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    public Location getChestSpawnLoc(final Location loc, final Player player) {
-        for (int x = -15; x <= 15; ++x) {
-            for (int y = -15; y <= 15; ++y) {
-                int z = -15;
-                while (z <= 15) {
-                    if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + (z + 1)).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + (y - 1), loc.getBlockZ() + (z + 1)).getTypeId() != 0) {
-                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
-                        }
-                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + (z - 1)).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + (y - 1), loc.getBlockZ() + (z - 1)).getTypeId() != 0) {
-                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
-                        }
-                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + (x + 1), loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + (x + 1), loc.getBlockY() + (y - 1), loc.getBlockZ() + z).getTypeId() != 0) {
-                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
-                        }
-                        if (skyBlockWorld.getBlockAt(loc.getBlockX() + (x - 1), loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 0 && skyBlockWorld.getBlockAt(loc.getBlockX() + (x - 1), loc.getBlockY() + (y - 1), loc.getBlockZ() + z).getTypeId() != 0) {
-                            return new Location(skyBlockWorld, (double) (loc.getBlockX() + x), (double) (loc.getBlockY() + (y + 1)), (double) (loc.getBlockZ() + (z + 1)));
-                        }
-                        loc.setY(loc.getY() + 1.0);
-                        return loc;
-                    } else {
-                        ++z;
+    /**
+     * Finds the neares block to loc that is a chest.
+     * @param loc The location to scan for a chest.
+     * @return The location of the chest
+     */
+    public Location findChestLocation(final Location loc) {
+        World world = loc.getWorld();
+        int px = loc.getBlockX();
+        int pz = loc.getBlockZ();
+        int py = loc.getBlockY();
+        for (int dy = 1; dy <= 30; dy++) {
+            for (int dx = 1; dx <= 30; dx++) {
+                for (int dz = 1; dz <= 30; dz++) {
+                    // Scans from the center and out
+                    int x = px + (dx % 2 == 0 ? dx/2 : -dx/2);
+                    int z = pz + (dz % 2 == 0 ? dz/2 : -dz/2);
+                    int y = py + (dy % 2 == 0 ? dy/2 : -dy/2);
+                    if (world.getBlockAt(x, y, z).getType() == Material.CHEST) {
+                        return new Location(world, x, y, z);
                     }
                 }
             }
         }
-        return loc;
+        return null;
+    }
+
+    private Location findNearestSpawnLocation(Location loc) {
+        World world = loc.getWorld();
+        int px = loc.getBlockX();
+        int pz = loc.getBlockZ();
+        int py = loc.getBlockY();
+        for (int dy = 0; dy <= 15; dy++) {
+            for (int dx = 1; dx <= 30; dx++) {
+                for (int dz = 1; dz <= 30; dz++) {
+                    // Scans from the center and out
+                    int x = px + (dx % 2 == 0 ? dx/2 : -dx/2);
+                    int z = pz + (dz % 2 == 0 ? dz/2 : -dz/2);
+                    int y = py + dy;
+                    if (world.getBlockAt(x, y, z).getType() == Material.AIR && world.getBlockAt(x, y+1, z).getType() == Material.AIR) {
+                        // look at the old location
+                        Location spawnLocation = new Location(world, x, y, z);
+                        Location d = loc.clone().subtract(spawnLocation);
+                        spawnLocation.setDirection(d.toVector());
+                        return spawnLocation;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public Location getChestSpawnLoc(final Location loc, final Player player) {
+        return findNearestSpawnLocation(findChestLocation(loc));
     }
 
     private void setNewPlayerIsland(final Player player, final Location loc) {
         getPlayerInfo(player).startNewIsland(loc);
-        player.teleport(this.getChestSpawnLoc(loc, player));
-        if (this.getIslandConfig(getPlayerInfo(player).locationForParty()) == null) {
-            this.createIslandConfig(getPlayerInfo(player).locationForParty(), player.getName());
-        }
-        this.clearIslandConfig(getPlayerInfo(player).locationForParty(), player.getName());
-        updatePartyNumber(player);
+        player.teleport(getChestSpawnLoc(loc, player).add(0.5, 0.1, 0.5)); // Center on block.
+        IslandInfo info = islandLogic.createIsland(getPlayerInfo(player).locationForParty(), player.getName());
+        info.updatePartyNumber(player);
         homeSet(player);
         getPlayerInfo(player).save();
-    }
-
-    public void setWarpLocation(final String location, final Location loc) {
-        this.getIslandConfig(location).set("general.warpLocationX", loc.getBlockX());
-        this.getIslandConfig(location).set("general.warpLocationY", loc.getBlockY());
-        this.getIslandConfig(location).set("general.warpLocationZ", loc.getBlockZ());
-        this.getIslandConfig(location).set("general.warpActive", true);
-        this.saveIslandConfig(location);
     }
 
     public void buildIslandList() {
         final File folder = directoryPlayers;
         final File[] listOfFiles = folder.listFiles();
-        System.out.print(ChatColor.YELLOW + "[uSkyBlock] Building a new island list...");
+        log(Level.INFO, "Building a new island list...");
         for (int i = 0; i < listOfFiles.length; ++i) {
             final PlayerInfo pi = new PlayerInfo(listOfFiles[i].getName());
             if (pi.getHasIsland()) {
-                System.out.print("Creating new island file for " + pi.getPlayerName());
-                this.createIslandConfig(pi.locationForParty(), pi.getPlayerName());
-                this.saveIslandConfig(pi.locationForParty());
+                log(Level.INFO, "Creating new island file for " + pi.getPlayerName());
+                islandLogic.createIsland(pi.locationForParty(), pi.getPlayerName());
             }
         }
         // TODO: 15/12/2014 - R4zorax: Support reading the old-format (at some time)
-        System.out.print(ChatColor.YELLOW + "[uSkyBlock] Party list completed.");
+        log(Level.INFO, "Party list completed.");
     }
 
-    public void removeIslandConfig(final String location) {
-        this.islands.remove(location);
-    }
-
-    public void updatePartyNumber(final Player player) {
-        PlayerInfo playerInfo = getPlayerInfo(player);
-        String islandLocation = playerInfo.locationForParty();
-        FileConfiguration islandConfig = getIslandConfig(islandLocation);
-        // TODO: 14/12/2014 - R4zorax: Move this freaking party-sizing somewhere else
-        if (islandConfig.getInt("party.maxSize") < 8 && VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
-            islandConfig.set("party.maxSize", 8);
-            saveIslandConfig(islandLocation);
-            return;
-        }
-        if (islandConfig.getInt("party.maxSize") < 7 && VaultHandler.checkPerk(player.getName(), "usb.extra.party3", player.getWorld())) {
-            islandConfig.set("party.maxSize", 7);
-            saveIslandConfig(islandLocation);
-            return;
-        }
-        if (islandConfig.getInt("party.maxSize") < 6 && VaultHandler.checkPerk(player.getName(), "usb.extra.party2", player.getWorld())) {
-            islandConfig.set("party.maxSize", 6);
-            saveIslandConfig(islandLocation);
-            return;
-        }
-        if (islandConfig.getInt("party.maxSize") < 5 && VaultHandler.checkPerk(player.getName(), "usb.extra.party1", player.getWorld())) {
-            islandConfig.set("party.maxSize", 5);
-            saveIslandConfig(islandLocation);
-        }
-    }
-
-    public void changePlayerPermission(final Player player, final String playername, final String perm) {
-        if (!getIslandConfig(getPlayerInfo(player).locationForParty()).contains("party.members." + playername + "." + perm)) {
-            return;
-        }
-        if (getIslandConfig(getPlayerInfo(player).locationForParty()).getBoolean("party.members." + playername + "." + perm)) {
-            getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.members." + playername + "." + perm, false);
-        } else {
-            getIslandConfig(getPlayerInfo(player).locationForParty()).set("party.members." + playername + "." + perm, true);
-        }
-        saveIslandConfig(getPlayerInfo(player).locationForParty());
-    }
 
     public boolean hasIslandMembersOnline(final Player p) {
-        FileConfiguration islandConfig = getIslandConfig(p);
-        for (final String member : islandConfig.getConfigurationSection("party.members").getKeys(false)) {
+        for (final String member : islandLogic.getIslandInfo(getPlayerInfo(p)).getMembers()) {
             if (Bukkit.getPlayer(member) != null && !Bukkit.getPlayer(member).isOnline()) {
                 return true;
             }
@@ -1657,35 +1497,28 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public String getCurrentBiome(Player p) {
-        return getIslandConfig(getInstance().getActivePlayers().get(p.getName()).locationForParty()).getString("general.biome").toUpperCase();
+        return getIslandInfo(p).getBiome();
     }
 
-    public void setConfigBiome(final Player p, final String biome) {
-        getIslandConfig(getInstance().getActivePlayers().get(p.getName()).locationForParty()).set("general.biome", biome);
-        saveIslandConfig(getInstance().getActivePlayers().get(p.getName()).locationForParty());
+    public IslandInfo getIslandInfo(Player player) {
+        return islandLogic.getIslandInfo(getPlayerInfo(player));
     }
 
     public boolean isPartyLeader(final Player player) {
-        return getIslandConfig(player).getString("party.leader").equalsIgnoreCase(player.getName());
+        return getIslandInfo(player).getLeader().equalsIgnoreCase(player.getName());
     }
 
     public void sendMessageToIslandGroup(final String location, final String message) {
-        final Iterator<String> temp = getIslandConfig(location).getConfigurationSection("party.members").getKeys(false).iterator();
-        this.date = new Date();
-        final String dateTxt = DateFormat.getDateInstance(3).format(this.date).toString();
-        int currentLogPos = getIslandConfig(location).getInt("log.logPos");
-        while (temp.hasNext()) {
-            final String player = temp.next();
-            if (Bukkit.getPlayer(player) != null) {
-                Bukkit.getPlayer(player).sendMessage("\u00a7d[skyblock] " + message);
-            }
-        }
-        getIslandConfig(location).set("log." + ++currentLogPos, "\u00a7d[" + dateTxt + "] " + message);
-        if (currentLogPos < 10) {
-            getIslandConfig(location).set("log.logPos", currentLogPos);
-        } else {
-            getIslandConfig(location).set("log.logPos", 0);
-        }
+        IslandInfo islandInfo = getIslandInfo(location);
+        islandInfo.sendMessageToIslandGroup(message);
+    }
+
+    public IslandInfo getIslandInfo(String location) {
+        return islandLogic.getIslandInfo(location);
+    }
+
+    public IslandInfo getIslandInfo(PlayerInfo pi) {
+        return islandLogic.getIslandInfo(pi);
     }
 
     public SkyBlockMenu getMenu() {
@@ -1742,4 +1575,5 @@ public class uSkyBlock extends JavaPlugin {
     public void runAsync(Runnable runnable) {
         getServer().getScheduler().runTaskAsynchronously(this, runnable);
     }
+
 }

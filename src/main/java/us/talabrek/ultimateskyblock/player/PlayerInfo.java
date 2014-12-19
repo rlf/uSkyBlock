@@ -19,7 +19,6 @@ public class PlayerInfo implements Serializable {
     private String playerName;
     private String displayName;
     private boolean hasIsland;
-    private boolean hasParty;
 
     private Location islandLocation;
     private Location homeLocation;
@@ -36,14 +35,12 @@ public class PlayerInfo implements Serializable {
     public void startNewIsland(final Location l) {
         this.hasIsland = true;
         this.setIslandLocation(l);
-        this.hasParty = false;
         this.homeLocation = null;
     }
 
     public void removeFromIsland() {
         this.hasIsland = false;
         this.setIslandLocation(null);
-        this.hasParty = false;
         this.homeLocation = null;
     }
 
@@ -83,10 +80,6 @@ public class PlayerInfo implements Serializable {
         return homeLocation != null ? homeLocation.clone() : null;
     }
 
-    public boolean getHasParty() {
-        return this.hasParty;
-    }
-
     public String getDisplayName() {
         return displayName != null ? displayName : playerName;
     }
@@ -96,13 +89,11 @@ public class PlayerInfo implements Serializable {
     }
 
     public void setJoinParty(final Location l) {
-        this.hasParty = true;
         this.islandLocation = l != null ? l.clone() : null;
         this.hasIsland = true;
     }
 
     public void setLeaveParty() {
-        this.hasParty = false;
         this.islandLocation = null;
         this.hasIsland = false;
         if (Bukkit.getPlayer(this.playerName) == null) {
@@ -196,7 +187,6 @@ public class PlayerInfo implements Serializable {
             this.hasIsland = false;
             this.islandLocation = null;
             this.homeLocation = null;
-            this.hasParty = false;
             buildChallengeList();
             createPlayerConfig();
             return this;

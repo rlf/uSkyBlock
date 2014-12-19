@@ -1,15 +1,14 @@
 package us.talabrek.ultimateskyblock;
 
+import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
-import net.milkbowl.vault.permission.*;
-import net.milkbowl.vault.economy.*;
-import org.bukkit.entity.*;
-import org.bukkit.*;
+import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.*;
-
-import java.nio.charset.Charset;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 public enum VaultHandler {;
     private static Permission perms;

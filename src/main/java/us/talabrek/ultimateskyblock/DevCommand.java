@@ -6,6 +6,7 @@ import org.bukkit.entity.*;
 import java.io.*;
 
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 public class DevCommand implements CommandExecutor {
@@ -119,8 +120,9 @@ public class DevCommand implements CommandExecutor {
                                 if (offlineTime > time && uSkyBlock.getInstance().hasIsland(oplayer.getName())) {
                                     final PlayerInfo pi = new PlayerInfo(oplayer.getName());
                                     if (pi.getHasIsland()) {
-                                        if (!pi.getHasParty()) {
-                                            if (uSkyBlock.getInstance().getTempIslandConfig(pi.locationForParty()) != null && uSkyBlock.getInstance().getTempIslandConfig(pi.locationForParty()).getInt("general.level") < 10 && child.getName() != null) {
+                                        IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(pi);
+                                        if (!islandInfo.isParty()) {
+                                            if (islandInfo.getLevel() < 10 && child.getName() != null) {
                                                 uSkyBlock.getInstance().addToRemoveList(child.getName());
                                             }
                                         }
