@@ -88,7 +88,9 @@ public class IslandCommand implements CommandExecutor {
                                     ChatColor.YELLOW + " You already have an island. If you want a fresh island, type" +
                                     ChatColor.AQUA + " /is restart" + ChatColor.YELLOW + " to get one");
                         } else {
-                            player.sendMessage(ChatColor.RED + "You are already a member of an island. Leave this island in order to start your own (/island leave).");
+                            player.sendMessage(ChatColor.RED + "Island found!" +
+                                    ChatColor.YELLOW + " You are already a member of an island. To start your own, first" +
+                                    ChatColor.AQUA + " /is leave");
                         }
                     }
                     return true;
