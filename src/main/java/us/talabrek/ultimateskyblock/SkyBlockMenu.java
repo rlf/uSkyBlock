@@ -14,6 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,7 +77,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{pHead});
         lores.clear();
         meta2 = biome.getItemMeta();
-        if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canChangeBiome")) {
+        if (skyBlock.getIslandInfo(player).hasPerm(pname, "canChangeBiome")) {
             meta2.setDisplayName("\u00a7aChange Biome");
             lores.add("\u00a7fThis player \u00a7acan\u00a7f change the");
             lores.add("\u00a7fisland's biome. Click here");
@@ -91,7 +93,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{biome});
         lores.clear();
         meta2 = lock.getItemMeta();
-        if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canToggleLock")) {
+        if (skyBlock.getIslandInfo(player).hasPerm(pname, "canToggleLock")) {
             meta2.setDisplayName("\u00a7aToggle Island Lock");
             lores.add("\u00a7fThis player \u00a7acan\u00a7f toggle the");
             lores.add("\u00a7fisland's lock, which prevents");
@@ -109,7 +111,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{lock});
         lores.clear();
         meta2 = warpset.getItemMeta();
-        if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canChangeWarp")) {
+        if (skyBlock.getIslandInfo(player).hasPerm(pname, "canChangeWarp")) {
             meta2.setDisplayName("\u00a7aSet Island Warp");
             lores.add("\u00a7fThis player \u00a7acan\u00a7f set the");
             lores.add("\u00a7fisland's warp, which allows");
@@ -129,7 +131,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{warpset});
         lores.clear();
         meta2 = warptoggle.getItemMeta();
-        if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canToggleWarp")) {
+        if (skyBlock.getIslandInfo(player).hasPerm(pname, "canToggleWarp")) {
             meta2.setDisplayName("\u00a7aToggle Island Warp");
             lores.add("\u00a7fThis player \u00a7acan\u00a7f toggle the");
             lores.add("\u00a7fisland's warp, allowing them");
@@ -149,7 +151,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{warptoggle});
         lores.clear();
         meta2 = invite.getItemMeta();
-        if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canInviteOthers")) {
+        if (skyBlock.getIslandInfo(player).hasPerm(pname, "canInviteOthers")) {
             meta2.setDisplayName("\u00a7aInvite Players");
             lores.add("\u00a7fThis player \u00a7acan\u00a7f invite");
             lores.add("\u00a7fother players to the island if");
@@ -167,7 +169,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{invite});
         lores.clear();
         meta2 = kick.getItemMeta();
-        if (skyBlock.getIslandConfig(player).getBoolean("party.members." + pname + ".canKickOthers")) {
+        if (skyBlock.getIslandInfo(player).hasPerm(pname, "canKickOthers")) {
             meta2.setDisplayName("\u00a7aKick Players");
             lores.add("\u00a7fThis player \u00a7acan\u00a7f kick");
             lores.add("\u00a7fother players from the island,");
@@ -190,15 +192,13 @@ public class SkyBlockMenu {
     public Inventory displayPartyGUI(final Player player) {
         List<String> lores = new ArrayList<>();
         Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Group Members");
-        FileConfiguration islandConfig = skyBlock.getIslandConfig(player);
-        final Set<String> memberList = islandConfig.getConfigurationSection("party.members") != null
-                ? islandConfig.getConfigurationSection("party.members").getKeys(false)
-                : Collections.<String>emptySet();
+        IslandInfo islandInfo = skyBlock.getIslandInfo(player);
+        final Set<String> memberList = islandInfo.getMembers();
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         final ItemMeta meta2 = sign.getItemMeta();
         meta2.setDisplayName("\u00a7aGroup Info");
-        lores.add("Group Members: \u00a72" + islandConfig.getInt("party.currentSize") + "\u00a77/\u00a7e" + islandConfig.getInt("party.maxSize"));
-        if (islandConfig.getInt("party.currentSize") < islandConfig.getInt("party.maxSize")) {
+        lores.add("Group Members: \u00a72" + islandInfo.getPartySize() + "\u00a77/\u00a7e" + islandInfo.getMaxPartySize());
+        if (islandInfo.getPartySize() < islandInfo.getMaxPartySize()) {
             lores.add("\u00a7aMore players can be invited to this island.");
         } else {
             lores.add("\u00a7cThis island is full.");
@@ -212,7 +212,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
         for (String temp : memberList) {
-            if (temp.equalsIgnoreCase(islandConfig.getString("party.leader"))) {
+            if (temp.equalsIgnoreCase(islandInfo.getLeader())) {
                 meta3.setDisplayName("\u00a7f" + temp);
                 lores.add("\u00a7a\u00a7lLeader");
                 lores.add("\u00a7aCan \u00a7fchange the island's biome.");
@@ -226,37 +226,37 @@ public class SkyBlockMenu {
             } else {
                 meta3.setDisplayName("\u00a7f" + temp);
                 lores.add("\u00a7e\u00a7lMember");
-                if (islandConfig.getBoolean("party.members." + temp + ".canChangeBiome")) {
+                if (islandInfo.hasPerm(temp, "canChangeBiome")) {
                     lores.add("\u00a7aCan \u00a7fchange the island's biome.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7fchange the island's biome.");
                 }
-                if (islandConfig.getBoolean("party.members." + temp + ".canToggleLock")) {
+                if (islandInfo.hasPerm(temp, "canToggleLock")) {
                     lores.add("\u00a7aCan \u00a7flock/unlock the island.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7flock/unlock the island.");
                 }
-                if (islandConfig.getBoolean("party.members." + temp + ".canChangeWarp")) {
+                if (islandInfo.hasPerm(temp, "canChangeWarp")) {
                     lores.add("\u00a7aCan \u00a7fset the island's warp.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7fset the island's warp.");
                 }
-                if (islandConfig.getBoolean("party.members." + temp + ".canToggleWarp")) {
+                if (islandInfo.hasPerm(temp, "canToggleWarp")) {
                     lores.add("\u00a7aCan \u00a7ftoggle the island's warp.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7ftoggle the island's warp.");
                 }
-                if (islandConfig.getBoolean("party.members." + temp + ".canInviteOthers")) {
+                if (islandInfo.hasPerm(temp, "canInviteOthers")) {
                     lores.add("\u00a7aCan \u00a7finvite others to the island.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7finvite others to the island.");
                 }
-                if (islandConfig.getBoolean("party.members." + temp + ".canKickOthers")) {
+                if (islandInfo.hasPerm(temp, "canKickOthers")) {
                     lores.add("\u00a7aCan \u00a7fkick others from the island.");
                 } else {
                     lores.add("\u00a7cCannot \u00a7fkick others from the island.");
                 }
-                if (player.getName().equalsIgnoreCase(islandConfig.getString("party.leader"))) {
+                if (player.getName().equalsIgnoreCase(islandInfo.getLeader())) {
                     lores.add("\u00a7e<Click to change this player's permissions>");
                 }
                 meta3.setLore(lores);
@@ -283,13 +283,8 @@ public class SkyBlockMenu {
         ItemStack menuItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7e\u00a7lIsland Log");
-        FileConfiguration islandConfig = skyBlock.getIslandConfig(player);
-        for (int i = 1; i <= 10; ++i) {
-            if (islandConfig.contains("log." + i)) {
-                lores.add(islandConfig.getString("log." + i));
-            } else {
-                break;
-            }
+        for (String log : skyBlock.getIslandInfo(player).getLog()) {
+            lores.add(log);
         }
         meta4.setLore(lores);
         menuItem.setItemMeta(meta4);
@@ -572,7 +567,7 @@ public class SkyBlockMenu {
                 continue;
             }
             try {
-                int index = Integer.parseInt(sIndex);
+                int index = Integer.parseInt(sIndex, 10);
                 String title = menuSection.getString("title", "\u00a9Unknown");
                 String icon = menuSection.getString("displayItem", "CHEST");
                 List<String> lores = new ArrayList<>();
@@ -652,7 +647,7 @@ public class SkyBlockMenu {
 
     public Inventory displayChallengeGUI(final Player player) {
         Inventory menu = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu");
-        final PlayerInfo pi = skyBlock.getActivePlayers().get(player.getName());
+        final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         // TODO: 06/12/2014 - R4zorax: Support more challenge-ranks (i.e. pagination on "header item".
         challengeLogic.populateChallengeRank(menu, player, 0, Material.DIRT, 0, pi);
         challengeLogic.populateChallengeRank(menu, player, 1, Material.IRON_BLOCK, 9, pi);
@@ -662,7 +657,6 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayIslandGUI(final Player player) {
-        List<String> lores = new ArrayList<>();
         Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
         if (skyBlock.hasIsland(player.getName())) {
             addMainMenu(menu, player);
@@ -732,6 +726,8 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
+        IslandInfo islandInfo = skyBlock.getIslandInfo(player);
+
         menuItem = new ItemStack(Material.DIAMOND_ORE, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lChallenges");
@@ -748,7 +744,7 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.EXP_BOTTLE, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lIsland Level");
-        lores.add("\u00a7eCurrent Level: \u00a7a" + showIslandLevel(player));
+        lores.add("\u00a7eCurrent Level: \u00a7a" + islandInfo.getLevel());
         lores.add("\u00a7fGain island levels by expanding");
         lores.add("\u00a7fyour skyblock and completing");
         lores.add("\u00a7fcertain challenges. Rarer blocks");
@@ -763,7 +759,7 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
         meta2.setDisplayName("\u00a7a\u00a7lIsland Group");
-        lores.add("\u00a7eMembers: \u00a72" + showCurrentMembers(player) + "/" + showMaxMembers(player));
+        lores.add("\u00a7eMembers: \u00a72" + islandInfo.getPartySize() + "/" + islandInfo.getMaxPartySize());
         lores.add("\u00a7fView the members of your island");
         lores.add("\u00a7fgroup and their permissions. If");
         lores.add("\u00a7fyou are the island leader, you");
@@ -777,11 +773,11 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.SAPLING, 1, (short) 3);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lChange Island Biome");
-        lores.add("\u00a7eCurrent Biome: \u00a7b" + getCurrentBiome(player).toUpperCase());
+        lores.add("\u00a7eCurrent Biome: \u00a7b" + islandInfo.getBiome());
         lores.add("\u00a7fThe island biome affects things");
         lores.add("\u00a7flike grass color and spawning");
         lores.add("\u00a7fof both animals and monsters.");
-        if (checkIslandPermission(player, "canChangeBiome")) {
+        if (islandInfo.hasPerm(player, "canChangeBiome")) {
             lores.add("\u00a7e\u00a7lClick here to change biomes.");
         } else {
             lores.add("\u00a7c\u00a7lYou can't change the biome.");
@@ -794,12 +790,12 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.IRON_FENCE, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7lIsland Lock");
-        if (skyBlock.getIslandConfig(player).getBoolean("general.locked")) {
+        if (skyBlock.getIslandInfo(player).isLocked()) {
             lores.add("\u00a7eLock Status: \u00a7aActive");
             lores.add("\u00a7fYour island is currently \u00a7clocked.");
             lores.add("\u00a7fPlayers outside of your group");
             lores.add("\u00a7fare unable to enter your island.");
-            if (checkIslandPermission(player, "canToggleLock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock")) {
                 lores.add("\u00a7e\u00a7lClick here to unlock your island.");
             } else {
                 lores.add("\u00a7c\u00a7lYou can't change the lock.");
@@ -810,7 +806,7 @@ public class SkyBlockMenu {
             lores.add("\u00a7fAll players are able to enter your");
             lores.add("\u00a7fisland, but only you and your group");
             lores.add("\u00a7fmembers may build there.");
-            if (checkIslandPermission(player, "canToggleLock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock")) {
                 lores.add("\u00a7e\u00a7lClick here to lock your island.");
             } else {
                 lores.add("\u00a7c\u00a7lYou can't change the lock.");
@@ -821,7 +817,7 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
-        if (skyBlock.getIslandConfig(player).getBoolean("general.warpActive")) {
+        if (skyBlock.getIslandInfo(player).hasWarp()) {
             menuItem = new ItemStack(Material.ENDER_PORTAL_FRAME, 1);
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName("\u00a7a\u00a7lIsland Warp");
@@ -829,7 +825,7 @@ public class SkyBlockMenu {
             lores.add("\u00a7fOther players may warp to your");
             lores.add("\u00a7fisland at anytime to the point");
             lores.add("\u00a7fyou set using \u00a7d/island setwarp.");
-            if (checkIslandPermission(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", skyBlock.getSkyBlockWorld())) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", skyBlock.getSkyBlockWorld())) {
                 lores.add("\u00a7e\u00a7lClick here to deactivate.");
             } else {
                 lores.add("\u00a7c\u00a7lYou can't change the warp.");
@@ -842,7 +838,7 @@ public class SkyBlockMenu {
             lores.add("\u00a7fOther players can't warp to your");
             lores.add("\u00a7fisland. Set a warp point using");
             lores.add("\u00a7d/island setwarp \u00a7fbefore activating.");
-            if (checkIslandPermission(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", skyBlock.getSkyBlockWorld())) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", skyBlock.getSkyBlockWorld())) {
                 lores.add("\u00a7e\u00a7lClick here to activate.");
             } else {
                 lores.add("\u00a7c\u00a7lYou can't change the warp.");
@@ -892,28 +888,6 @@ public class SkyBlockMenu {
         addExtraMenus(player, menu);
     }
 
-    public boolean checkIslandPermission(final Player player, final String permission) {
-        return skyBlock.getIslandConfig(player).getBoolean("party.members." + player.getName() + "." + permission);
-    }
-
-    public String getCurrentBiome(final Player player) {
-        return skyBlock.getIslandConfig(player).getString("general.biome");
-    }
-
-    public int showIslandLevel(final Player player) {
-        return skyBlock.getIslandConfig(player).getInt("general.level");
-    }
-
-    public int showCurrentMembers(final Player player) {
-        return skyBlock.getIslandConfig(player).getInt("party.currentSize");
-    }
-
-    public int showMaxMembers(final Player player) {
-        return skyBlock.getIslandConfig(player).getInt("party.maxSize");
-    }
-
-
-
     public void onClick(InventoryClickEvent event) {
         if (event == null || event.getCurrentItem() == null || event.getWhoClicked() == null || event.getSlotType() != InventoryType.SlotType.CONTAINER) {
             return; // Bail out, nothing we can do anyway
@@ -926,7 +900,6 @@ public class SkyBlockMenu {
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            p = (Player) event.getWhoClicked();
             if (meta == null || event.getCurrentItem().getType() == Material.SIGN) {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));
@@ -945,31 +918,32 @@ public class SkyBlockMenu {
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            p = (Player) event.getWhoClicked();
             String[] playerPerm = event.getInventory().getName().split(" ");
+            IslandInfo islandInfo = skyBlock.getIslandInfo(p);
+            // TODO: 19/12/2014 - R4zorax: Make this more robust!
             if (event.getCurrentItem().getTypeId() == 6) {
                 p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(p, playerPerm[0], "canChangeBiome");
+                islandInfo.togglePerm(playerPerm[0], "canChangeBiome");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
             } else if (event.getCurrentItem().getTypeId() == 101) {
                 p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(p, playerPerm[0], "canToggleLock");
+                islandInfo.togglePerm(playerPerm[0], "canToggleLock");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
             } else if (event.getCurrentItem().getTypeId() == 90) {
                 p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(p, playerPerm[0], "canChangeWarp");
+                islandInfo.togglePerm(playerPerm[0], "canChangeWarp");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
             } else if (event.getCurrentItem().getTypeId() == 69) {
                 p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(p, playerPerm[0], "canToggleWarp");
+                islandInfo.togglePerm(playerPerm[0], "canToggleWarp");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
             } else if (event.getCurrentItem().getTypeId() == 398) {
                 p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(p, playerPerm[0], "canInviteOthers");
+                islandInfo.togglePerm(playerPerm[0], "canInviteOthers");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
             } else if (event.getCurrentItem().getTypeId() == 301) {
                 p.closeInventory();
-                uSkyBlock.getInstance().changePlayerPermission(p, playerPerm[0], "canKickOthers");
+                islandInfo.togglePerm(playerPerm[0], "canKickOthers");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
             } else if (event.getCurrentItem().getTypeId() == 323) {
                 p.closeInventory();
@@ -983,7 +957,6 @@ public class SkyBlockMenu {
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            p = (Player) event.getWhoClicked();
             if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 3) {
                 p.closeInventory();
                 p.performCommand("island biome jungle");
@@ -1053,7 +1026,8 @@ public class SkyBlockMenu {
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            p = (Player) event.getWhoClicked();
+            PlayerInfo playerInfo = skyBlock.getPlayerInfo(p);
+            IslandInfo islandInfo = skyBlock.getIslandInfo(playerInfo);
             if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 3) {
                 p.closeInventory();
                 p.performCommand("island biome");
@@ -1087,14 +1061,16 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.performCommand("island togglewarp");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(event.getWhoClicked().getName()).locationForParty()).getBoolean("general.locked")) {
+            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && islandInfo.isLocked()) {
                 p.closeInventory();
                 p.performCommand("island unlock");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && !uSkyBlock.getInstance().getIslandConfig(uSkyBlock.getInstance().getActivePlayers().get(event.getWhoClicked().getName()).locationForParty()).getBoolean("general.locked")) {
+            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && !islandInfo.isLocked()) {
                 p.closeInventory();
                 p.performCommand("island lock");
                 p.openInventory(displayIslandGUI(p));
+            } else if (event.getCurrentItem().getType() == Material.SIGN) {
+                p.performCommand("chestcommands open island_help");
             } else {
                 if (!isExtraMenuAction(p, event.getCurrentItem())) {
                     p.closeInventory();

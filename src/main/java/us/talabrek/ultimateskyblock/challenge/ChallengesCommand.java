@@ -4,7 +4,7 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -20,12 +20,17 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             return false;
         }
         final Player player = (Player)sender;
-        if (!VaultHandler.checkPerk(player.getName(), "usb.island.challenges", player.getWorld()) && !player.isOp()) {
+        if (!VaultHandler.checkPerk(player.getName(), "usb.island.challenges", player.getWorld())) {
             player.sendMessage(ChatColor.RED + "You don't have access to this command!");
             return true;
         }
         if (!player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
             player.sendMessage(ChatColor.RED + "You can only submit challenges in the skyblock world!");
+            return true;
+        }
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
+        if (!playerInfo.getHasIsland()) {
+            player.sendMessage(ChatColor.RED + "You can only submit challenges when you have an island!");
             return true;
         }
         ChallengeLogic challengeLogic = uSkyBlock.getInstance().getChallengeLogic();
@@ -52,7 +57,6 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                 if (challengeLogic.getRanks().size() > 1) {
                     player.sendMessage(ChatColor.YELLOW + "Rank: " + ChatColor.WHITE + challenge.getRank());
                 }
-                PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
                 ChallengeCompletion completion = playerInfo.getChallenge(arg);
                 if (completion.getTimesCompleted() > 0 && !challenge.isRepeatable()) {
                     player.sendMessage(ChatColor.RED + "This Challenge is not repeatable!");

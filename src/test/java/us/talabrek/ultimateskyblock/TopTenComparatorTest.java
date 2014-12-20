@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
 import org.junit.Test;
+import us.talabrek.ultimateskyblock.island.TopTenComparator;
 
 import java.util.*;
 

@@ -1,21 +1,22 @@
 package us.talabrek.ultimateskyblock;
 
-import com.sk89q.worldedit.blocks.BaseBlock;
+import com.sk89q.worldedit.*;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.Biome;
-import org.bukkit.plugin.*;
-import org.bukkit.*;
-import com.sk89q.worldedit.schematic.*;
-import com.sk89q.worldedit.bukkit.*;
-import com.sk89q.worldedit.data.*;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
-
-import com.sk89q.worldedit.*;
 
 public class WorldEditHandler {
     public static WorldEditPlugin getWorldEdit() {
@@ -38,16 +39,26 @@ public class WorldEditHandler {
         return true;
     }
 
-    public static boolean clearIsland(World skyWorld, ProtectedRegion region) {
-        Region cube = getRegion(skyWorld, region);
-        EditSession session = new EditSession(new BukkitWorld(skyWorld), cube.getArea());
-        try {
-            session.setBlocks(cube, new BaseBlock(0));
-            return true;
-        } catch (MaxChangedBlocksException e) {
-            uSkyBlock.log(Level.SEVERE, "Unable to clear island", e);
-            return false;
+    public static void reloadIsland(final World skyWorld, final ProtectedRegion region) {
+        long t = System.currentTimeMillis();
+        final Region cube = getRegion(skyWorld, region);
+        for (Vector2D chunk : cube.getChunks()) {
+            skyWorld.loadChunk(chunk.getBlockX()/16, chunk.getBlockZ()/16, true);
+            skyWorld.refreshChunk(chunk.getBlockX()/16, chunk.getBlockZ()/16);
         }
+        long diff = System.currentTimeMillis() - t;
+        uSkyBlock.log(Level.INFO, String.format("Reloaded island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+    }
+
+    public static void clearIsland(final World skyWorld, final ProtectedRegion region) {
+        long t = System.currentTimeMillis();
+        final Region cube = getRegion(skyWorld, region);
+        for (Vector2D chunk : cube.getChunks()) {
+            skyWorld.loadChunk(chunk.getBlockX() / 16, chunk.getBlockZ() / 16, true);
+            skyWorld.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ());
+        }
+        long diff = System.currentTimeMillis() - t;
+        uSkyBlock.log(Level.INFO, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
     }
 
     private static Region getRegion(World skyWorld, ProtectedRegion region) {

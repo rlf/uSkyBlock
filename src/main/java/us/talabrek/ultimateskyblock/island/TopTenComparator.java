@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.island;
 
 import java.util.Comparator;
 import java.util.HashMap;

@@ -11,13 +11,13 @@ options:
     spawnSize: 150
 
     # [integer] The time in seconds before a player can use the /island info command again. (note: cooldowns are reset when the plugin is reloaded)
-    cooldownInfo: 30
+    cooldownInfo: 20
 
     # [integer] The time in seconds before a player can use the /island restart command again.
-    cooldownRestart: 600
+    cooldownRestart: 30
 
     # [integer] The time in seconds before a player can use the /island biome command again.
-    biomeChange: 3600
+    biomeChange: 180
   island:
     # [filename] The schematic to use for island generation.
     # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
@@ -69,8 +69,8 @@ options:
     #Set to false if you have performance issues
     useIslandLevel: true
 
-    #[true/false] If true, a top 10 islands list will be generated when the plugin is loaded.
-    useTopTen: true
+    # [integer] The time in minutes for how often the top-ten list will be re-generated when doing /is top
+    topTenTimeout: 7
 
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands
   extra-menus:

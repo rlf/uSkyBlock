@@ -6,6 +6,13 @@ deploy:
   api_key:
     secure: jwzx6+syioJoymcqS6AmFflOK3mBNFVWg5l215l7nKnaI7RLEVMA5n69s/mShAwmrqCfNg42Erg1p58Eivb2tdughIgWghDUlLXOz+B1KBC107Ci0m5Nvtn2AtXWillwv5KtzbokrfMxrx1mhELXO4h21mWcvAo3ovoB6hZWTII=
   file: target/uSkyBlock.jar
+  release-number: latest
+  skip_cleanup: true
   on:
+    tags: true
     repo: rlf/uSkyBlock
     branch: v2.0.0
+    all_branches: true
+cache:
+  directories:
+  - $HOME/.m2

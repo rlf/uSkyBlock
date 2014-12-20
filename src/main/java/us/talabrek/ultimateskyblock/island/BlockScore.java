@@ -1,30 +1,46 @@
 package us.talabrek.ultimateskyblock.island;
 
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
+
 /**
  * How much of your score is calculated based on a specific blockId.
  */
 public class BlockScore {
-    private final int blockId;
+    public enum State { NORMAL(ChatColor.AQUA), GOOD(ChatColor.GREEN), LIMIT(ChatColor.RED), DIMINISHING(ChatColor.YELLOW);
+        private final ChatColor color;
+        State(ChatColor color) {
+            this.color = color;
+        }
+        public ChatColor getColor() {
+            return color;
+        }
+    }
+
+    private final ItemStack block;
     private final int count;
     private final double score;
+    private final State state;
 
-    public BlockScore(int blockId, int count, double score) {
-        this.blockId = blockId;
+    public BlockScore(ItemStack block, int count, double score, State state) {
+        this.block = block;
         this.count = count;
         this.score = score;
+        this.state = state;
     }
 
     @Override
     public String toString() {
         return "BlockScore{" +
-                "blockId=" + blockId +
+                "block=" + block +
                 ", count=" + count +
                 ", score=" + score +
+                ", state=" + state +
                 '}';
     }
 
-    public int getBlockId() {
-        return blockId;
+    public ItemStack getBlock() {
+        return block;
     }
 
     public int getCount() {
@@ -33,5 +49,9 @@ public class BlockScore {
 
     public double getScore() {
         return score;
+    }
+
+    public State getState() {
+        return state;
     }
 }

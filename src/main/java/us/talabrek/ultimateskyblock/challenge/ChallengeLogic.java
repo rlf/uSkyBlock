@@ -8,14 +8,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import us.talabrek.ultimateskyblock.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -179,7 +178,7 @@ public class ChallengeLogic {
     }
 
     private boolean tryCompleteIslandLevel(Player player, Challenge challenge) {
-        if (skyBlock.getIslandConfig(player).getInt("general.level") >= challenge.getRequiredLevel()) {
+        if (skyBlock.getIslandInfo(player).getLevel() >= challenge.getRequiredLevel()) {
             giveReward(player, challenge.getName());
             return true;
         }
@@ -379,7 +378,7 @@ public class ChallengeLogic {
         words.add(s.substring(jx));
         return words;
     }
-    public void populateChallenges(HashMap<String, ChallengeCompletion> challengeMap) {
+    public void populateChallenges(Map<String, ChallengeCompletion> challengeMap) {
         for (Challenge challenge : challengeData.values()) {
             String key = challenge.getName().toLowerCase();
             if (!challengeMap.containsKey(key)) {

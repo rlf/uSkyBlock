@@ -6,6 +6,10 @@
     <version>2.0.1-SNAPSHOT</version>
     <name>Ultimate Skyblock</name>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <scm>
         <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
         <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
@@ -16,7 +20,6 @@
         <repository>
             <id>vault-repo</id>
             <url>http://nexus.theyeticave.net/content/repositories/public/</url>
-            <snapshots></snapshots>
         </repository>
         <repository>
             <id>sk89q-mvn2</id>
@@ -24,7 +27,6 @@
         </repository>
         <repository>
             <id>mvdw-public</id>
-            <name>Public Repositories</name>
             <url>http://repo.mvdw-software.be/content/groups/public/</url>
         </repository>
     </repositories>
@@ -92,17 +94,17 @@
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
-            <version>LATEST</version>
+            <version>1.5.1</version>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
-            <version>LATEST</version>
+            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldedit</artifactId>
-            <version>LATEST</version>
+            <version>6.0.0-SNAPSHOT</version>
             <scope>compile</scope>
             <type>jar</type>
             <optional>true</optional>
@@ -110,7 +112,7 @@
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
-            <version>LATEST</version>
+            <version>6.0.0-SNAPSHOT</version>
             <scope>compile</scope>
             <type>jar</type>
             <optional>true</optional>

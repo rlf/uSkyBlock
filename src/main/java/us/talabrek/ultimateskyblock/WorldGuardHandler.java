@@ -17,6 +17,8 @@ import java.util.logging.Level;
 
 import com.sk89q.worldedit.*;
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 public class WorldGuardHandler {
     private static final int VERSION = 2;
@@ -34,18 +36,15 @@ public class WorldGuardHandler {
             WorldGuardPlugin worldGuard = getWorldGuard();
             RegionManager regionManager = worldGuard.getRegionManager(uSkyBlock.getSkyBlockWorld());
             String regionName = islandName + "Island";
-            if (pi.getIslandLocation() != null && noOrOldRegion(regionManager, regionName, pi)) {
-                FileConfiguration islandConfig = uSkyBlock.getInstance().getIslandConfig(pi);
+            IslandInfo islandConfig = uSkyBlock.getInstance().getIslandInfo(pi);
+            if (pi.getIslandLocation() != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
                 ProtectedCuboidRegion region = new ProtectedCuboidRegion(islandName + "Island",
                         getProtectionVectorLeft(pi.getIslandLocation()),
                         getProtectionVectorRight(pi.getIslandLocation()));
                 final DefaultDomain owners = new DefaultDomain();
                 owners.addPlayer(pi.getPlayerName());
-                ConfigurationSection members = islandConfig.getConfigurationSection("party.members");
-                if (members !=  null) {
-                    for (String member : members.getKeys(false)) {
-                        owners.addPlayer(member);
-                    }
+                for (String member : islandConfig.getMembers()) {
+                    owners.addPlayer(member);
                 }
                 region.setOwners(owners);
                 region.setPriority(100);
@@ -71,7 +70,7 @@ public class WorldGuardHandler {
                 regionManager.addRegion(region);
                 System.out.print("New protected region created for " + islandName + "'s Island by " + sender.getName());
                 regionManager.save();
-                islandConfig.set("general.regionVersion", VERSION);
+                islandConfig.setRegionVersion(VERSION);
                 return true;
             }
         } catch (Exception ex) {
@@ -81,11 +80,11 @@ public class WorldGuardHandler {
         return false;
     }
 
-    private static boolean noOrOldRegion(RegionManager regionManager, String regionId, PlayerInfo playerInfo) {
+    private static boolean noOrOldRegion(RegionManager regionManager, String regionId, IslandInfo island) {
         if (!regionManager.hasRegion(regionId)) {
             return true;
         }
-        return uSkyBlock.getInstance().getIslandConfig(playerInfo).getInt("general.regionVersion", 0) < VERSION;
+        return island.getRegionVersion() < VERSION;
     }
 
     public static void islandLock(final CommandSender sender, final String player) {

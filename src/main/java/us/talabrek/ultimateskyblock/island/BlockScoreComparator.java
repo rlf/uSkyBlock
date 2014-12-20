@@ -15,7 +15,7 @@ public class BlockScoreComparator implements Comparator<BlockScore> {
             cmp = o2.getCount() - o1.getCount();
         }
         if (cmp == 0) {
-            cmp = VaultHandler.getItemName(o2.getBlockId()).compareTo(VaultHandler.getItemName(o1.getBlockId()));
+            cmp = VaultHandler.getItemName(o2.getBlock()).compareTo(VaultHandler.getItemName(o1.getBlock()));
         }
         return cmp;
     }
