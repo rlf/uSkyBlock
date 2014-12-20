@@ -93,7 +93,7 @@ options:
        - '[!group.donor]donate'
       lore:
        - '§fThis special perk shop is'
-       - '§7fonly available to donors!'
+       - '§fonly available to donors!'
        - '[group.donor]§e§lClick here to open the shop!'
        - '[!group.donor]§a§7Click here to become a donor!'
 
