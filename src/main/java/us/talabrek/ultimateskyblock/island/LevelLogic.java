@@ -27,7 +27,7 @@ public class LevelLogic {
     private static final int DATA_MASK = 0xf;
     private final FileConfiguration config;
 
-    private final int blockValue[] = new int[MAX_BLOCK<<DATA_BITS];
+    private final float blockValue[] = new float[MAX_BLOCK<<DATA_BITS];
     private final int blockLimit[] = new int[MAX_BLOCK<<DATA_BITS];
     private final int blockDR[] = new int[MAX_BLOCK<<DATA_BITS];
 
@@ -37,7 +37,7 @@ public class LevelLogic {
     }
 
     public void load() {
-        int defaultValue = config.getInt("general.default", 10);
+        float defaultValue = (float) config.getDouble("general.default", 10);
         int defaultLimit = config.getInt("general.limit", Integer.MAX_VALUE);
         int defaultDR = config.getInt("general.defaultScale", 10000);
         Arrays.fill(blockValue, defaultValue);
@@ -45,7 +45,7 @@ public class LevelLogic {
         ConfigurationSection blockValueSection = config.getConfigurationSection("blockValues");
         for (String blockKey : blockValueSection.getKeys(false)) {
             int[] blockIds = getBlockIds(blockKey);
-            int value = blockValueSection.getInt(blockKey, defaultValue);
+            float value = (float) blockValueSection.getDouble(blockKey, defaultValue);
             for (int blockId : blockIds) {
                 blockValue[blockId] = value;
             }
