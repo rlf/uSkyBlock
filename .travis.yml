@@ -4,7 +4,7 @@ git:
 deploy:
   provider: releases
   api_key:
-    secure: JjpBYKmA8ByMiNEXLQcRyhyvvdgcGw4DR2CYAtusTIYm5cemqHWN9M9kkqGVauOMVONPlxsA8OVRdzPRAAlFY/c9PkCcCspMYSVWs9+Py8sCqMrtTxol3Ncecs1FRItdnFQ4p7x+naTYRZdH0EF+eOfyMAZRq7YY624FX4md3xQ=
+    secure: jwzx6+syioJoymcqS6AmFflOK3mBNFVWg5l215l7nKnaI7RLEVMA5n69s/mShAwmrqCfNg42Erg1p58Eivb2tdughIgWghDUlLXOz+B1KBC107Ci0m5Nvtn2AtXWillwv5KtzbokrfMxrx1mhELXO4h21mWcvAo3ovoB6hZWTII=
   file: target/uSkyBlock.jar
   on:
     repo: rlf/uSkyBlock
