@@ -82,6 +82,14 @@ public class IslandCommand implements CommandExecutor {
                     if (pi.getIslandLocation().getBlockX() == 0 && pi.getIslandLocation().getBlockY() == 0 && pi.getIslandLocation().getBlockZ() == 0) {
                         sky.createIsland(sender, pi);
                         return true;
+                    }else if (pi.getHasIsland()){
+                        if (island.isLeader(player)) {
+                            player.sendMessage(ChatColor.RED + "Island found!" +
+                                    ChatColor.YELLOW + " You already have an island. If you want a fresh island, type" +
+                                    ChatColor.AQUA + " /is restart" + ChatColor.YELLOW + " to get one");
+                        } else {
+                            player.sendMessage(ChatColor.RED + "You are already a member of an island. Leave this island in order to start your own (/island leave).");
+                        }
                     }
                     return true;
                 } else {
@@ -364,6 +372,8 @@ public class IslandCommand implements CommandExecutor {
                     }
                 }
             }
+            player.sendMessage(ChatColor.RED + "Invalid SkyBlock command. Please refer to" + ChatColor.AQUA + " /is help");
+            return true;
         } else if (split.length == 2) {
             if ((split[0].equals("info") || split[0].equals("level")) && pi.getHasIsland() && VaultHandler.checkPerk(player.getName(), "usb.island.info", player.getWorld()) && Settings.island_useIslandLevel) {
                 if (!sky.onInfoCooldown(player) || Settings.general_cooldownInfo == 0) {
@@ -491,7 +501,8 @@ public class IslandCommand implements CommandExecutor {
                     otherPlayer.sendMessage(ChatColor.RED + "WARNING: You will lose your current island if you accept!");
                     sky.sendMessageToIslandGroup(iName, String.valueOf(player.getName()) + " invited " + otherPlayer.getName() + " to the island group.");
                     return true;
-                } else if ((split[0].equalsIgnoreCase("remove") || split[0].equalsIgnoreCase("kick")) && VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
+                }
+                if ((split[0].equalsIgnoreCase("remove") || split[0].equalsIgnoreCase("kick")) && VaultHandler.checkPerk(player.getName(), "usb.party.kick", player.getWorld())) {
                     if (island == null || !island.hasPerm(player, "canKickOthers")) {
                         player.sendMessage(ChatColor.RED + "You do not have permission to kick others from this island!");
                         return true;
@@ -545,8 +556,12 @@ public class IslandCommand implements CommandExecutor {
                     return true;
                 }
             }
+            player.sendMessage(ChatColor.RED + "Invalid SkyBlock command. Please refer to" + ChatColor.AQUA + " /is help");
+            return true;
+        } else {
+            player.sendMessage(ChatColor.RED + "Invalid SkyBlock command. Please refer to" + ChatColor.AQUA + " /is help");
+            return true;
         }
-        return true;
     }
 
     private boolean requireIsland(String s) {
