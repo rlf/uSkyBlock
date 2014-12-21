@@ -11,12 +11,12 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
@@ -34,7 +34,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.text.DateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -404,7 +403,6 @@ public class uSkyBlock extends JavaPlugin {
             islandLogic.clearIsland(next);
             createIsland(player, next);
             changePlayerBiome(player, "OCEAN");
-            islandLogic.reloadIsland(next);
             next.setY((double) Settings.island_height);
             setNewPlayerIsland(player, next);
             clearPlayerInventory(player);
@@ -444,11 +442,16 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     private void clearEntitiesNearPlayer(Player player) {
-        for (final Entity tempent : player.getNearbyEntities((double) (Settings.island_protectionRange / 2), 250.0, (double) (Settings.island_protectionRange / 2))) {
-            if (!(tempent instanceof Player)) {
-                tempent.remove();
+        for (final Entity entity : player.getNearbyEntities((double) (Settings.island_radius), 255.0, (double) (Settings.island_radius))) {
+            if (!validEntity(entity)) {
+                entity.remove();
             }
         }
+    }
+
+    private boolean validEntity(Entity entity) {
+        return (entity instanceof Player) ||
+                (entity.getFallDistance() == 0 && !(entity instanceof Monster));
     }
 
     public boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
@@ -1059,30 +1062,31 @@ public class uSkyBlock extends JavaPlugin {
     private void createIsland(Player player, Location next) throws DataException, IOException, MaxChangedBlocksException {
         boolean hasIslandNow = false;
         if (getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
-            String cSchem = "";
-            for (int i = 0; i < getSchemFile().length; ++i) {
-                if (!hasIslandNow) {
-                    if (getInstance().getSchemFile()[i].getName().lastIndexOf(46) > 0) {
-                        cSchem = getSchemFile()[i].getName().substring(0, getSchemFile()[i].getName().lastIndexOf(46));
-                    } else {
-                        cSchem = getSchemFile()[i].getName();
-                    }
-                    if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, skyBlockWorld) && WorldEditHandler.loadIslandSchematic(skyBlockWorld, getSchemFile()[i], next)) {
-                        this.setChest(next, player);
-                        hasIslandNow = true;
-                    }
+            for (File schemFile : getSchemFile()) {
+                // First run-through - try to set the island the player has permission for.
+                String cSchem = schemFile.getName();
+                if (cSchem.lastIndexOf('.') > 0) {
+                    cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
+                }
+                if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, skyBlockWorld)
+                        && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
+                    setChest(next, player);
+                    hasIslandNow = true;
+                    break;
                 }
             }
             if (!hasIslandNow) {
-                for (int i = 0; i < getSchemFile().length; ++i) {
-                    if (getInstance().getSchemFile()[i].getName().lastIndexOf(46) > 0) {
-                        cSchem = getSchemFile()[i].getName().substring(0, getSchemFile()[i].getName().lastIndexOf(46));
-                    } else {
-                        cSchem = getSchemFile()[i].getName();
+                for (File schemFile : getSchemFile()) {
+                    // 2nd Run through, set the default set schematic (if found).
+                    String cSchem = schemFile.getName();
+                    if (cSchem.lastIndexOf('.') > 0) {
+                        cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
                     }
-                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName) && WorldEditHandler.loadIslandSchematic(skyBlockWorld, getSchemFile()[i], next)) {
+                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName)
+                            && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
                         this.setChest(next, player);
                         hasIslandNow = true;
+                        break;
                     }
                 }
             }
@@ -1430,7 +1434,7 @@ public class uSkyBlock extends JavaPlugin {
                 }
             }
         }
-        return null;
+        return loc;
     }
 
     private Location findNearestSpawnLocation(Location loc) {
@@ -1438,14 +1442,16 @@ public class uSkyBlock extends JavaPlugin {
         int px = loc.getBlockX();
         int pz = loc.getBlockZ();
         int py = loc.getBlockY();
-        for (int dy = 0; dy <= 15; dy++) {
+        for (int dy = 1; dy <= 30; dy++) {
             for (int dx = 1; dx <= 30; dx++) {
                 for (int dz = 1; dz <= 30; dz++) {
                     // Scans from the center and out
                     int x = px + (dx % 2 == 0 ? dx/2 : -dx/2);
                     int z = pz + (dz % 2 == 0 ? dz/2 : -dz/2);
-                    int y = py + dy;
-                    if (world.getBlockAt(x, y, z).getType() == Material.AIR && world.getBlockAt(x, y+1, z).getType() == Material.AIR) {
+                    int y = py + (dy % 2 == 0 ? dy/2 : -dy/2);
+                    if (world.getBlockAt(x, y, z).getType() == Material.AIR
+                            && world.getBlockAt(x, y+1, z).getType() == Material.AIR
+                            && world.getBlockAt(x, y-1, z).getType().isSolid()) {
                         // look at the old location
                         Location spawnLocation = new Location(world, x, y, z);
                         Location d = loc.clone().subtract(spawnLocation);
