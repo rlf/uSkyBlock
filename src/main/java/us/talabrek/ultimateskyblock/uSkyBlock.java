@@ -1563,8 +1563,21 @@ public class uSkyBlock extends JavaPlugin {
 
     @Override
     public void reloadConfig() {
+        reloadConfigs();
         Settings.loadPluginConfig(getConfig());
-        levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
+    }
+
+    private void reloadConfigs() {
+        // Update all of the loaded configs.
+        for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()){
+            File configFile = new File(getDataFolder(), e.getKey());
+            readConfig(e.getValue(), configFile);
+        }
+
+        this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
+        this.menu = new SkyBlockMenu(this, challengeLogic);
+        this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
+        this.islandLogic = new IslandLogic(this, directoryIslands);
     }
 
     public boolean isSkyWorld(World world) {
