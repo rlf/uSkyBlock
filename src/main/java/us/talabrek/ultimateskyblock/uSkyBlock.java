@@ -1469,12 +1469,14 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     private void setNewPlayerIsland(final Player player, final Location loc) {
-        getPlayerInfo(player).startNewIsland(loc);
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        playerInfo.startNewIsland(loc);
         player.teleport(getChestSpawnLoc(loc, player).add(0.5, 0.1, 0.5)); // Center on block.
-        IslandInfo info = islandLogic.createIsland(getPlayerInfo(player).locationForParty(), player.getName());
+        IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), player.getName());
         info.updatePartyNumber(player);
         homeSet(player);
-        getPlayerInfo(player).save();
+        playerInfo.resetAllChallenges();
+        playerInfo.save();
     }
 
     public void buildIslandList() {
@@ -1591,8 +1593,7 @@ public class uSkyBlock extends JavaPlugin {
         return islandLogic;
     }
 
-    public void runAsync(Runnable runnable) {
-        getServer().getScheduler().runTaskAsynchronously(this, runnable);
+    public void execCommand(String command) {
+        getServer().dispatchCommand(getServer().getConsoleSender(), command);
     }
-
 }

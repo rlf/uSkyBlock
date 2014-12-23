@@ -30,8 +30,7 @@ public class ChallengeLogic {
 
     private final FileConfiguration config;
     private final uSkyBlock skyBlock;
-    private final Map<String, Challenge> challengeData;
-    private final List<String> ranks;
+    private final Map<String, Rank> ranks;
 
     public final ChallengeDefaults defaults;
 
@@ -39,19 +38,23 @@ public class ChallengeLogic {
         this.config = config;
         this.skyBlock = skyBlock;
         this.defaults = ChallengeFactory.createDefaults(config.getRoot());
-        ranks = Arrays.asList(config.getString("ranks", "").split(" "));
-        this.challengeData = ChallengeFactory.createChallengeMap(config.getConfigurationSection("challengeList"), defaults);
+        load();
+        ranks = ChallengeFactory.createRankMap(config.getConfigurationSection("ranks"), defaults);
     }
 
-    public List<String> getRanks() {
-        return Collections.unmodifiableList(ranks);
+    private void load() {
+        Arrays.asList(config.getString("ranks", "").split(" "));
     }
 
-    public List<String> getAvailableChallengeNames(Player player) {
+    public List<Rank> getRanks() {
+        return Collections.unmodifiableList(new ArrayList<>(ranks.values()));
+    }
+
+    public List<String> getAvailableChallengeNames(PlayerInfo playerInfo) {
         List<String> list = new ArrayList<>();
-        for (String rank : ranks) {
-            if (isRankAvailable(player, rank)) {
-                for (Challenge challenge : getChallengesForRank(rank)) {
+        for (Rank rank : ranks.values()) {
+            if (rank.isAvailable(playerInfo)) {
+                for (Challenge challenge : rank.getChallenges()) {
                     list.add(challenge.getName());
                 }
             } else {
@@ -60,14 +63,9 @@ public class ChallengeLogic {
         }
         return list;
     }
+
     public List<Challenge> getChallengesForRank(String rank) {
-        List<Challenge> challenges = new ArrayList<>();
-        for (Challenge challenge : challengeData.values()) {
-            if (challenge.getRank().equalsIgnoreCase(rank)) {
-                challenges.add(challenge);
-            }
-        }
-        return challenges;
+        return ranks.get(rank).getChallenges();
     }
 
     public int checkRankCompletion(final Player player, final String rank) {
@@ -85,31 +83,11 @@ public class ChallengeLogic {
         return challengesInRank.size() - defaults.rankLeeway - completedInRank;
     }
 
-    public boolean isRankAvailable(final Player player, final String rank) {
-        if (!defaults.requiresPreviousRank) {
-            return true;
-        }
-        if (ranks.size() < 2) {
-            return true;
-        }
-        for (int i = 0; i < ranks.size(); i++) {
-            if (ranks.get(i).equalsIgnoreCase(rank)) {
-                if (i == 0) {
-                    return true;
-                }
-                if (checkRankCompletion(player, ranks.get(i-1)) <= 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public boolean completeChallenge(final Player player, final String challengeName) {
         final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         Challenge challenge = getChallenge(challengeName);
         ChallengeCompletion completion = pi.getChallenge(challengeName);
-        if (!this.isRankAvailable(player, challenge.getRank())) {
+        if (!challenge.getRank().isAvailable(pi)) {
             player.sendMessage(ChatColor.RED + "You have not unlocked this challenge yet!");
             return false;
         }
@@ -148,8 +126,15 @@ public class ChallengeLogic {
         return false;
     }
 
-    public Challenge getChallenge(String challenge) {
-        return challengeData.get(challenge.toLowerCase());
+    public Challenge getChallenge(String challengeName) {
+        for (Rank rank : ranks.values()) {
+            for (Challenge challenge : rank.getChallenges()) {
+                if (challenge.getName().equalsIgnoreCase(challengeName)) {
+                    return challenge;
+                }
+            }
+        }
+        return null;
     }
 
     public static int calcAmount(int amount, char op, int inc, int timesCompleted) {
@@ -319,10 +304,24 @@ public class ChallengeLogic {
         player.sendMessage(ChatColor.YELLOW + "Item reward(s): " + ChatColor.WHITE + reward.getRewardText());
         player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + reward.getXpReward());
         player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + this.DECIMAL_FORMAT.format(reward.getCurrencyReward()*rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a (+" + this.DECIMAL_FORMAT.format((rewBonus - 1.0) * 100.0) + "%)");
-        if (isFirstCompletion && reward.getPermissionReward() != null) {
-            for (String perm : reward.getPermissionReward().split(" ")) {
-                if (!VaultHandler.checkPerm(player, perm, player.getWorld())) {
-                    VaultHandler.addPerk(player, perm);
+        if (isFirstCompletion) {
+            if (reward.getPermissionReward() != null) {
+                for (String perm : reward.getPermissionReward().split(" ")) {
+                    if (!VaultHandler.checkPerm(player, perm, player.getWorld())) {
+                        VaultHandler.addPerk(player, perm);
+                    }
+                }
+            }
+            for (String cmd : reward.getCommands()) {
+                String command = cmd.replaceAll("\\{playerName\\}", player.getDisplayName())
+                        .replaceAll("\\{position\\}", player.getLocation().toString()) // Figure out what this should be
+                        .replaceAll("\\{challenge\\}", challengeName);
+                if (command.contains("{party}")) {
+                    for (String member : skyBlock.getIslandInfo(playerInfo).getMembers()) {
+                        skyBlock.execCommand(command.replaceAll("\\{party\\}", member));
+                    }
+                } else {
+                    skyBlock.execCommand(command);
                 }
             }
         }
@@ -379,49 +378,56 @@ public class ChallengeLogic {
         return words;
     }
     public void populateChallenges(Map<String, ChallengeCompletion> challengeMap) {
-        for (Challenge challenge : challengeData.values()) {
-            String key = challenge.getName().toLowerCase();
-            if (!challengeMap.containsKey(key)) {
-                challengeMap.put(key, new ChallengeCompletion(key, 0L, 0, 0));
+        for (Rank rank : ranks.values()) {
+            for (Challenge challenge : rank.getChallenges()) {
+                String key = challenge.getName().toLowerCase();
+                if (!challengeMap.containsKey(key)) {
+                    challengeMap.put(key, new ChallengeCompletion(key, 0L, 0, 0));
+                }
             }
         }
     }
 
-    public void populateChallengeRank(Inventory menu, final Player player, final int rankIndex, final Material mat, int location, final PlayerInfo playerInfo) {
+    public void populateChallengeRank(Inventory menu, Player player, PlayerInfo pi, int page) {
+        List<Rank> ranksOnPage = new ArrayList<>(ranks.values());
+        // page 1 = 0-4, 2 = 5-8, ...
+        if (page > 0) {
+            ranksOnPage = ranksOnPage.subList(((page-1)*4), Math.min(page*4, ranksOnPage.size()));
+        }
+        int location = 0;
+        for (Rank rank : ranksOnPage) {
+            populateChallengeRank(menu, player, rank, location, pi);
+            location += 9;
+        }
+    }
+
+    public void populateChallengeRank(Inventory menu, final Player player, final Rank rank, int location, final PlayerInfo playerInfo) {
         List<String> lores = new ArrayList<>();
-        int rankComplete = 0;
-        ItemStack currentChallengeItem = new ItemStack(mat, 1);
+        ItemStack currentChallengeItem = rank.getDisplayItem();
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
-        String currentRank = ranks.get(rankIndex);
-        meta4.setDisplayName("\u00a7e\u00a7lRank: " + currentRank);
+        meta4.setDisplayName("\u00a7e\u00a7lRank: " + rank.getName());
         lores.add("\u00a7fComplete most challenges in");
         lores.add("\u00a7fthis rank to unlock the next rank.");
         meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
         menu.setItem(location, currentChallengeItem);
-        lores.clear();
-        for (Challenge challenge : getChallengesForRank(currentRank)) {
+        List<String> missingRequirements = rank.getMissingRequirements(playerInfo);
+        for (Challenge challenge : rank.getChallenges()) {
+            lores.clear();
             String challengeName = challenge.getName();
             try {
-                if (rankIndex > 0) {
-                    String previousRank = ranks.get(rankIndex - 1);
-                    rankComplete = checkRankCompletion(player, previousRank);
-                    if (rankComplete > 0) {
-                        currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
-                        meta4 = currentChallengeItem.getItemMeta();
-                        meta4.setDisplayName("\u00a74\u00a7lLocked Challenge");
-                        lores.add("\u00a77Complete " + rankComplete + " more " + previousRank + " challenges");
-                        lores.add("\u00a77to unlock this rank.");
-                        meta4.setLore(lores);
-                        currentChallengeItem.setItemMeta(meta4);
-                        menu.setItem(++location, currentChallengeItem);
-                        lores.clear();
-                        continue;
-                    }
+                if (!missingRequirements.isEmpty()) {
+                    currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
+                    meta4 = currentChallengeItem.getItemMeta();
+                    meta4.setDisplayName("\u00a74\u00a7lLocked Challenge");
+                    lores.addAll(missingRequirements);
+                    meta4.setLore(lores);
+                    currentChallengeItem.setItemMeta(meta4);
+                    menu.setItem(++location, currentChallengeItem);
+                } else {
+                    currentChallengeItem = getItemStack(playerInfo, challengeName);
+                    menu.setItem(++location, currentChallengeItem);
                 }
-                currentChallengeItem = getItemStack(playerInfo, challengeName);
-                menu.setItem(++location, currentChallengeItem);
-                lores.clear();
             } catch (Exception e) {
                 skyBlock.getLogger().log(Level.SEVERE, "Invalid challenge " + challenge, e);
             }

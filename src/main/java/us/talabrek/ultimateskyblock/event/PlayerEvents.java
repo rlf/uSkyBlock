@@ -44,7 +44,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerFoodChange(final FoodLevelChangeEvent event) {
-        if (event.getEntity() instanceof Player) {
+        if (event.getEntity() instanceof Player && plugin.isSkyWorld(event.getEntity().getWorld())) {
             Player hungerman = (Player) event.getEntity();
             float randomNum = RANDOM.nextFloat();
             if (plugin.isSkyWorld(hungerman.getWorld()) && hungerman.getFoodLevel() > event.getFoodLevel() && plugin.playerIsOnIsland(hungerman)) {

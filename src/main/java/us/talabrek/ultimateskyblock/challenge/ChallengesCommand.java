@@ -35,7 +35,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
         }
         ChallengeLogic challengeLogic = uSkyBlock.getInstance().getChallengeLogic();
         if (split.length == 0) {
-            player.openInventory(uSkyBlock.getInstance().getMenu().displayChallengeGUI(player));
+            player.openInventory(uSkyBlock.getInstance().getMenu().displayChallengeGUI(player, 1));
         } else if (split.length == 1) {
             String arg = split[0].toLowerCase();
             Challenge challenge = challengeLogic.getChallenge(arg);
@@ -44,7 +44,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                 player.sendMessage(ChatColor.YELLOW + "Use /c complete <name> to attempt to complete that challenge.");
                 player.sendMessage(ChatColor.YELLOW + "Challenges will have different colors depending on if they are:");
                 player.sendMessage(challengeLogic.defaults.challengeColor + "Incomplete " + challengeLogic.defaults.finishedColor + "Completed (not repeatable) " + challengeLogic.defaults.repeatableColor + "Completed(repeatable) ");
-            } else if (challenge != null && challengeLogic.isRankAvailable(player, challenge.getRank())) {
+            } else if (challenge != null && challenge.getRank().isAvailable(playerInfo)) {
                 player.sendMessage(ChatColor.YELLOW + "Challenge Name: " + ChatColor.WHITE + arg.toLowerCase());
                 player.sendMessage(ChatColor.YELLOW + challenge.getDescription());
                 if (challenge.getType() == Challenge.Type.PLAYER) {
@@ -97,7 +97,8 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                 suggestions.add("complete");
             }
             if (args.length >= 1) {
-                suggestions.addAll(uSkyBlock.getInstance().getChallengeLogic().getAvailableChallengeNames(player));
+                PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
+                suggestions.addAll(uSkyBlock.getInstance().getChallengeLogic().getAvailableChallengeNames(playerInfo));
                 filter(suggestions, args[args.length - 1]);
             }
             Collections.sort(suggestions);

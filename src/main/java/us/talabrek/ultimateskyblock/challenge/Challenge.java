@@ -33,7 +33,7 @@ public class Challenge {
     private final String description;
     private final Type type;
     private final String requiredItems;
-    private final String rank;
+    private final Rank rank;
     private final int resetInHours;
     private final ItemStack displayItem;
     private final boolean takeItems;
@@ -41,7 +41,7 @@ public class Challenge {
     private final Reward reward;
     private final Reward repeatReward;
 
-    public Challenge(String name, String description, Type type, String requiredItems, String rank, int resetInHours, ItemStack displayItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
+    public Challenge(String name, String description, Type type, String requiredItems, Rank rank, int resetInHours, ItemStack displayItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
         this.name = name;
         this.type = type;
         this.requiredItems = requiredItems;
@@ -109,7 +109,7 @@ public class Challenge {
         return itemInfo != null ? itemInfo.getName() : "" + mat.getType();
     }
 
-    public String getRank() {
+    public Rank getRank() {
         return rank;
     }
 

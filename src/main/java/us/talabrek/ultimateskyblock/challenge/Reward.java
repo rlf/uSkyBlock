@@ -13,13 +13,15 @@ public class Reward {
     private final int currencyReward;
     private final int xpReward;
     private final String rewardText;
+    private final List<String> commands;
 
-    public Reward(String rewardText, List<ItemStack> itemReward, String permissionReward, int currencyReward, int xpReward) {
+    public Reward(String rewardText, List<ItemStack> itemReward, String permissionReward, int currencyReward, int xpReward, List<String> commands) {
         this.itemReward = itemReward;
         this.permissionReward = permissionReward;
         this.currencyReward = currencyReward;
         this.xpReward = xpReward;
         this.rewardText = rewardText;
+        this.commands = commands;
     }
 
     public List<ItemStack> getItemReward() {
@@ -42,6 +44,10 @@ public class Reward {
         return rewardText;
     }
 
+    public List<String> getCommands() {
+        return commands;
+    }
+
     @Override
     public String toString() {
         return "Reward{" +
@@ -50,6 +56,7 @@ public class Reward {
                 ", currencyReward=" + currencyReward +
                 ", xpReward=" + xpReward +
                 ", rewardText='" + rewardText + '\'' +
+                ", commands=" + commands +
                 '}';
     }
 }

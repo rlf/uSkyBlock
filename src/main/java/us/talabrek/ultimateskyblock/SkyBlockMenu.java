@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
  */
 public class SkyBlockMenu {
     private static final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
+    private static final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile("Challenge Menu \\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock skyBlock;
     private final ChallengeLogic challengeLogic;
     ItemStack pHead;
@@ -645,14 +646,10 @@ public class SkyBlockMenu {
         return false;
     }
 
-    public Inventory displayChallengeGUI(final Player player) {
-        Inventory menu = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu");
+    public Inventory displayChallengeGUI(final Player player, int page) {
+        Inventory menu = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu (" + page + "/" + ((challengeLogic.getRanks().size()/4)+1) + ")");
         final PlayerInfo pi = skyBlock.getPlayerInfo(player);
-        // TODO: 06/12/2014 - R4zorax: Support more challenge-ranks (i.e. pagination on "header item".
-        challengeLogic.populateChallengeRank(menu, player, 0, Material.DIRT, 0, pi);
-        challengeLogic.populateChallengeRank(menu, player, 1, Material.IRON_BLOCK, 9, pi);
-        challengeLogic.populateChallengeRank(menu, player, 2, Material.GOLD_BLOCK, 18, pi);
-        challengeLogic.populateChallengeRank(menu, player, 3, Material.DIAMOND_BLOCK, 27, pi);
+        challengeLogic.populateChallengeRank(menu, player, pi, page);
         return menu;
     }
 
@@ -997,22 +994,39 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));
             }
-        } else if (event.getInventory().getName().contains("Challenge Menu")) {
+        } else if (event.getInventory().getName().contains("Challenge Menu (")) {
             event.setCancelled(true);
+            Matcher m = CHALLENGE_PAGE_HEADER.matcher(event.getInventory().getName());
+            int page = 1;
+            int max = 1;
+            if (m.find()) {
+                page = Integer.parseInt(m.group("p"));
+                max = Integer.parseInt(m.group("max"));
+            }
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            if (event.getCurrentItem().getType() != Material.DIRT && event.getCurrentItem().getType() != Material.IRON_BLOCK && event.getCurrentItem().getType() != Material.GOLD_BLOCK && event.getCurrentItem().getType() != Material.DIAMOND_BLOCK) {
+            if ((event.getSlot() % 9) > 0) { // 0,9... are the rank-headers...
                 p.closeInventory();
                 if (event.getCurrentItem().getItemMeta() != null) {
                     String challenge = event.getCurrentItem().getItemMeta().getDisplayName();
                     String challengeName = uSkyBlock.stripFormatting(challenge);
                     p.performCommand("c c " + challengeName);
                 }
-                p.openInventory(displayChallengeGUI(p));
+                p.openInventory(displayChallengeGUI(p, page));
             } else {
                 p.closeInventory();
-                p.openInventory(displayIslandGUI(p));
+                if (event.getSlot() < 18) { // Upper half
+                    if (page > 1) {
+                        p.openInventory(displayChallengeGUI(p, page - 1));
+                    } else {
+                        p.openInventory(displayIslandGUI(p));
+                    }
+                } else if (page < max) {
+                    p.openInventory(displayChallengeGUI(p, page+1));
+                } else {
+                    p.openInventory(displayIslandGUI(p));
+                }
             }
         } else if (event.getInventory().getName().contains("Island Log")) {
             event.setCancelled(true);

@@ -23,19 +23,6 @@ public class ChallengeFactory {
         ChallengeFactory.log = log;
     }
 
-    public static Map<String, Challenge> createChallengeMap(ConfigurationSection section, ChallengeDefaults defaults) {
-        Map<String, Challenge> map = new LinkedHashMap<>();
-        for (String challenge : section.getKeys(false)) {
-            String key = challenge.toLowerCase();
-            try {
-                map.put(key, createChallenge(section.getConfigurationSection(challenge), defaults));
-            } catch (Exception e) {
-                log.log(Level.WARNING, "Unable to parse challenge " + challenge + ":" + e.getMessage());
-            }
-        }
-        return map;
-    }
-
     public static ChallengeDefaults createDefaults(ConfigurationSection section) {
         return new ChallengeDefaults(
                 section.getInt("defaultResetInHours", 144),
@@ -49,39 +36,33 @@ public class ChallengeFactory {
                 section.getInt("radius", 10));
     }
 
-    public static Challenge createChallenge(ConfigurationSection section, ChallengeDefaults defaults) {
+    public static Challenge createChallenge(Rank rank, ConfigurationSection section, ChallengeDefaults defaults) {
         String name = section.getName().toLowerCase();
         Challenge.Type type = Challenge.Type.from(section.getString("type", "onPlayer"));
         String requiredItems = section.getString("requiredItems");
-        String rank = section.getString("rankLevel");
-        int resetInHours = section.getInt("resetInHours", defaults.resetInHours);
+        int resetInHours = section.getInt("resetInHours", rank.getResetInHours());
         String description = section.getString("description");
         ItemStack displayItem = createItemStack(
                 section.getString("displayItem", defaults.displayItem),
                 name, description);
         boolean takeItems = section.getBoolean("takeItems", true);
         int radius = section.getInt("radius", 10);
-        Reward reward = createReward(section);
-        Reward repeatReward = section.getBoolean("repeatable", true) ? createRepeatReward(section) : null;
+        Reward reward = createReward(section.getConfigurationSection("reward"));
+        Reward repeatReward = createReward(section.getConfigurationSection("repeatReward"));
         return new Challenge(name, description, type, requiredItems, rank, resetInHours, displayItem, takeItems, radius, reward, repeatReward);
     }
 
-    private static Reward createRepeatReward(ConfigurationSection section) {
-        return new Reward(
-                section.getString("repeatRewardText"),
-                createItemList(section.getString("repeatItemReward")),
-                "",
-                section.getInt("repeatCurrencyReward", 0),
-                section.getInt("repeatXpReward", 0));
-    }
-
     private static Reward createReward(ConfigurationSection section) {
+        if (section == null) {
+            return null;
+        }
         return new Reward(
-                section.getString("rewardText"),
-                createItemList(section.getString("itemReward")),
-                section.getString("permissionReward"),
-                section.getInt("currencyReward", 0),
-                section.getInt("xpReward", 0));
+                section.getString("text"),
+                createItemList(section.getString("items")),
+                section.getString("permission"),
+                section.getInt("currency", 0),
+                section.getInt("xp", 0),
+                section.getStringList("commands"));
     }
 
     private static List<ItemStack> createItemList(String itemReward) {
@@ -125,5 +106,16 @@ public class ChallengeFactory {
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
         return itemStack;
+    }
+
+    public static Map<String, Rank> createRankMap(ConfigurationSection ranksSection, ChallengeDefaults defaults) {
+        LinkedHashMap<String, Rank> ranks = new LinkedHashMap<>();
+        Rank previous = null;
+        for (String rankName : ranksSection.getKeys(false)) {
+            Rank rank = new Rank(ranksSection.getConfigurationSection(rankName), previous, defaults);
+            ranks.put(rankName, rank);
+            previous = rank;
+        }
+        return ranks;
     }
 }
