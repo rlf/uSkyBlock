@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * The summary of island calculation.
@@ -13,7 +12,33 @@ public class IslandScore {
 
     public IslandScore(double score, List<BlockScore> top) {
         this.score = score;
-        this.top = top;
+        this.top = joinTop(top);
+    }
+
+    /**
+     * Consolidates the top, so scores with the same name is combined.
+     */
+    private List<BlockScore> joinTop(List<BlockScore> top) {
+        Map<String,BlockScore> scoreMap = new HashMap<>();
+        for (BlockScore score : top) {
+            BlockScore existing = scoreMap.get(score.getName());
+            if (existing == null) {
+                scoreMap.put(score.getName(), score);
+            } else {
+                scoreMap.put(score.getName(), add(score, existing));
+            }
+        }
+        return new ArrayList<>(scoreMap.values());
+    }
+
+    private BlockScore add(BlockScore score, BlockScore existing) {
+        BlockScore.State state = score.getState();
+        if (score.getState().ordinal() > existing.getState().ordinal()) {
+            state = existing.getState();
+        }
+        return new BlockScore(existing.getBlock(),
+                score.getCount() + existing.getCount(),
+                score.getScore() + existing.getScore(), state, score.getName());
     }
 
     public double getScore() {

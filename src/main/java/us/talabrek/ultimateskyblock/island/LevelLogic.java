@@ -120,7 +120,11 @@ public class LevelLogic {
             for (int y = 0; y <= 255; ++y) {
                 for (int z = -radius; z <= radius; ++z) {
                     Block block = w.getBlockAt(px + x, y, pz + z);
-                    values[getBlockId(block)] += 1;
+                    int blockId = getBlockId(block);
+                    if (blockValue[blockId] == -1) {
+                        blockId = blockId & (0xffffffff ^ DATA_MASK); // remove sub-type
+                    }
+                    values[blockId] += 1;
                 }
             }
         }

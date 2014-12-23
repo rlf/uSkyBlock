@@ -303,26 +303,24 @@ public class ChallengeLogic {
         }
         player.sendMessage(ChatColor.YELLOW + "Item reward(s): " + ChatColor.WHITE + reward.getRewardText());
         player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + reward.getXpReward());
-        player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + this.DECIMAL_FORMAT.format(reward.getCurrencyReward()*rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a (+" + this.DECIMAL_FORMAT.format((rewBonus - 1.0) * 100.0) + "%)");
-        if (isFirstCompletion) {
-            if (reward.getPermissionReward() != null) {
-                for (String perm : reward.getPermissionReward().split(" ")) {
-                    if (!VaultHandler.checkPerm(player, perm, player.getWorld())) {
-                        VaultHandler.addPerk(player, perm);
-                    }
+        player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + this.DECIMAL_FORMAT.format(reward.getCurrencyReward() * rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a (+" + this.DECIMAL_FORMAT.format((rewBonus - 1.0) * 100.0) + "%)");
+        if (reward.getPermissionReward() != null) {
+            for (String perm : reward.getPermissionReward().split(" ")) {
+                if (!VaultHandler.checkPerm(player, perm, player.getWorld())) {
+                    VaultHandler.addPerk(player, perm);
                 }
             }
-            for (String cmd : reward.getCommands()) {
-                String command = cmd.replaceAll("\\{playerName\\}", player.getDisplayName())
-                        .replaceAll("\\{position\\}", player.getLocation().toString()) // Figure out what this should be
-                        .replaceAll("\\{challenge\\}", challengeName);
-                if (command.contains("{party}")) {
-                    for (String member : skyBlock.getIslandInfo(playerInfo).getMembers()) {
-                        skyBlock.execCommand(command.replaceAll("\\{party\\}", member));
-                    }
-                } else {
-                    skyBlock.execCommand(command);
+        }
+        for (String cmd : reward.getCommands()) {
+            String command = cmd.replaceAll("\\{playerName\\}", player.getDisplayName())
+                    .replaceAll("\\{position\\}", player.getLocation().toString()) // Figure out what this should be
+                    .replaceAll("\\{challenge\\}", challengeName);
+            if (command.contains("{party}")) {
+                for (String member : skyBlock.getIslandInfo(playerInfo).getMembers()) {
+                    skyBlock.execCommand(command.replaceAll("\\{party\\}", member));
                 }
+            } else {
+                skyBlock.execCommand(command);
             }
         }
         player.getInventory().addItem(reward.getItemReward().toArray(new ItemStack[0]));
