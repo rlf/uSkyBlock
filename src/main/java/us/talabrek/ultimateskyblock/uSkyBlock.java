@@ -1589,11 +1589,33 @@ public class uSkyBlock extends JavaPlugin {
         return skyBlockWorld.getName().equalsIgnoreCase(world.getName());
     }
 
+    public boolean isSkyAssociatedWorld(World world) {
+        return world.getName().startsWith(skyBlockWorld.getName());
+    }
+
     public IslandLogic getIslandLogic() {
         return islandLogic;
     }
 
-    public void execCommand(String command) {
-        getServer().dispatchCommand(getServer().getConsoleSender(), command);
+    public void execCommand(Player player, String command) {
+        if (command == null || player == null) {
+            return;
+        }
+        if (!isSkyAssociatedWorld(player.getWorld())) {
+            return;
+        }
+        if (command.startsWith("op:")) {
+            if (player.isOp()) {
+                player.performCommand(command.substring(3).trim());
+            } else {
+                player.setOp(true);
+                player.performCommand(command.substring(3).trim());
+                player.setOp(false);
+            }
+        } else if (command.startsWith("console:")) {
+            getServer().dispatchCommand(getServer().getConsoleSender(), command.substring(8).trim());
+        } else {
+            player.performCommand(command);
+        }
     }
 }

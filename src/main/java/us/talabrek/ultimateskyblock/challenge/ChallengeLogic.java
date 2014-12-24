@@ -317,10 +317,10 @@ public class ChallengeLogic {
                     .replaceAll("\\{challenge\\}", challengeName);
             if (command.contains("{party}")) {
                 for (String member : skyBlock.getIslandInfo(playerInfo).getMembers()) {
-                    skyBlock.execCommand(command.replaceAll("\\{party\\}", member));
+                    skyBlock.execCommand(player, command.replaceAll("\\{party\\}", member));
                 }
             } else {
-                skyBlock.execCommand(command);
+                skyBlock.execCommand(player, command);
             }
         }
         player.getInventory().addItem(reward.getItemReward().toArray(new ItemStack[0]));
