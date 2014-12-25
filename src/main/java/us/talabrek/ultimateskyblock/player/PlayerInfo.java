@@ -282,4 +282,8 @@ public class PlayerInfo implements Serializable {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + playerConfigFile, ex);
         }
     }
+
+    public Collection<ChallengeCompletion> getChallenges() {
+        return challenges.values();
+    }
 }

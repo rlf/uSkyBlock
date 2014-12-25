@@ -24,9 +24,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.talabrek.ultimateskyblock.admin.DevCommand;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
+import us.talabrek.ultimateskyblock.imports.impl.PlayerImporterImpl;
 import us.talabrek.ultimateskyblock.island.*;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
@@ -45,6 +47,7 @@ public class uSkyBlock extends JavaPlugin {
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
+    private PlayerImporterImpl importer;
 
     private static String pName = "";
     private FileConfiguration lastIslandConfig;
@@ -1621,5 +1624,12 @@ public class uSkyBlock extends JavaPlugin {
         } else {
             player.performCommand(command);
         }
+    }
+
+    public PlayerImporterImpl getPlayerImporter() {
+        if (importer == null) {
+            importer = new PlayerImporterImpl(this);
+        }
+        return importer;
     }
 }
