@@ -1,4 +1,5 @@
 # uSkyBlock
+OLD WORLDEDIT AND WORLDGUARD VERSION
 
 This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin, which he has decided to stop supporting.
 
