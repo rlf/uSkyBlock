@@ -1,67 +1,76 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.admin;
 
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class DevCommand implements CommandExecutor {
+    private Map<String, Command> commandMap = new HashMap<>();
+
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
         final Player player;
         if (split.length == 0) {
             if (sender.hasPermission("usb.mod.protect") || sender.hasPermission("usb.mod.protectall") || sender.hasPermission("usb.mod.topten") || sender.hasPermission("usb.mod.orphan") || sender.hasPermission("usb.admin.delete") || sender.hasPermission("usb.admin.remove") || sender.hasPermission("usb.admin.register")) {
-            	sender.sendMessage("[dev usage]");
+            	sender.sendMessage("[usb usage]");
                 if (sender.hasPermission("usb.mod.protect")) {
-                	sender.sendMessage(ChatColor.YELLOW + "/dev protect <player>:" + ChatColor.WHITE + " add protection to an island.");
+                	sender.sendMessage(ChatColor.YELLOW + "/usb protect <player>:" + ChatColor.WHITE + " add protection to an island.");
                 }
                 if (sender.hasPermission("usb.admin.reload")) {
-                	sender.sendMessage(ChatColor.YELLOW + "/dev reload:" + ChatColor.WHITE + " reload configuration from file.");
+                	sender.sendMessage(ChatColor.YELLOW + "/usb reload:" + ChatColor.WHITE + " reload configuration from file.");
+                }
+                if (sender.hasPermission("usb.admin.import")) {
+                    sender.sendMessage(ChatColor.YELLOW + "/usb import:" + ChatColor.WHITE + " try to import data from an old version.");
                 }
                 if (sender.hasPermission("usb.mod.protectall")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev protectall:" + ChatColor.WHITE + " add island protection to unprotected islands.");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb protectall:" + ChatColor.WHITE + " add island protection to unprotected islands.");
                 }
                 if (sender.hasPermission("usb.mod.topten")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev topten:" + ChatColor.WHITE + " manually update the top 10 list");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb topten:" + ChatColor.WHITE + " manually update the top 10 list");
                 }
                 if (sender.hasPermission("usb.mod.orphan")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev orphancount:" + ChatColor.WHITE + " unused island locations count");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb orphancount:" + ChatColor.WHITE + " unused island locations count");
                 }
                 if (sender.hasPermission("usb.mod.orphan")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev clearorphan:" + ChatColor.WHITE + " remove any unused island locations.");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb clearorphan:" + ChatColor.WHITE + " remove any unused island locations.");
                 }
                 if (sender.hasPermission("usb.mod.orphan")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev saveorphan:" + ChatColor.WHITE + " save the list of old (empty) island locations.");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb saveorphan:" + ChatColor.WHITE + " save the list of old (empty) island locations.");
                 }
                 if (sender.hasPermission("usb.admin.delete")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev delete <player>:" + ChatColor.WHITE + " delete an island (removes blocks).");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb delete <player>:" + ChatColor.WHITE + " delete an island (removes blocks).");
                 }
                 if (sender.hasPermission("usb.admin.remove")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev remove <player>:" + ChatColor.WHITE + " remove a player from an island.");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb remove <player>:" + ChatColor.WHITE + " remove a player from an island.");
                 }
                 if (sender.hasPermission("usb.admin.register")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev register <player>:" + ChatColor.WHITE + " set a player's island to your location");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb register <player>:" + ChatColor.WHITE + " set a player's island to your location");
                 }
                 if (sender.hasPermission("usb.mod.challenges")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev completechallenge <challengename> <player>:" + ChatColor.WHITE + " marks a challenge as complete");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb completechallenge <challengename> <player>:" + ChatColor.WHITE + " marks a challenge as complete");
                 }
                 if (sender.hasPermission("usb.mod.challenges")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev resetchallenge <challengename> <player>:" + ChatColor.WHITE + " marks a challenge as incomplete");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb resetchallenge <challengename> <player>:" + ChatColor.WHITE + " marks a challenge as incomplete");
                 }
                 if (sender.hasPermission("usb.mod.challenges")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev resetallchallenges <challengename>:" + ChatColor.WHITE + " resets all of the player's challenges");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb resetallchallenges <challengename>:" + ChatColor.WHITE + " resets all of the player's challenges");
                 }
                 if (sender.hasPermission("usb.admin.purge")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev purge [TimeInDays]:" + ChatColor.WHITE + " delete inactive islands older than [TimeInDays].");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb purge [TimeInDays]:" + ChatColor.WHITE + " delete inactive islands older than [TimeInDays].");
                 }
                 if (sender.hasPermission("usb.mod.party")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev buildpartylist:" + ChatColor.WHITE + " build a new party list (use this if parties are broken).");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb buildpartylist:" + ChatColor.WHITE + " build a new party list (use this if parties are broken).");
                 }
                 if (sender.hasPermission("usb.mod.party")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/dev info <player>:" + ChatColor.WHITE + " check the party information for the given player.");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb info <player>:" + ChatColor.WHITE + " check the party information for the given player.");
                 }
             } else {
                 sender.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
@@ -92,8 +101,10 @@ public class DevCommand implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "A purge is already running, please wait for it to finish!");
                     return true;
                 }
-                sender.sendMessage(ChatColor.YELLOW + "Usage: /dev purge [TimeInDays]");
+                sender.sendMessage(ChatColor.YELLOW + "Usage: /usb purge [TimeInDays]");
                 return true;
+            } else if (split[0].equals("import") && sender.hasPermission("usb.admin.import")) {
+                uSkyBlock.getInstance().getPlayerImporter().importUSB(sender);
             }
         } else if (split.length == 2) {
             if (split[0].equals("purge") && (sender.hasPermission("usb.admin.purge"))) {
