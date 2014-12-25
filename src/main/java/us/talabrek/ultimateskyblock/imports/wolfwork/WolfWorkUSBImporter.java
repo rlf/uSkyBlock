@@ -98,6 +98,8 @@ public class WolfWorkUSBImporter implements USBImporter {
             }
             // Not really that important - since it's most likely different!
             islandInfo.setLevel(playerInfo.getIslandLevel());
+            islandInfo.setMaxPartySize(4);
+            islandInfo.setBiome("OCEAN");
             islandInfo.save();
         }
     }
