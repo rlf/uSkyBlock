@@ -66,11 +66,14 @@ public class IslandInfo {
         section.set("canToggleWarp", true);
         section.set("canInviteOthers", true);
         section.set("canKickOthers", true);
+        config.set("party.currentSize", getMembers().size());
         save();
     }
 
     public void setupPartyMember(final String member) {
-        config.set("party.currentSize", config.getInt("party.currentSize") + 1);
+        if (!getMembers().contains(member)) {
+            config.set("party.currentSize", config.getInt("party.currentSize") + 1);
+        }
         ConfigurationSection section = config.createSection("party.members." + member);
         section.set("canChangeBiome", false);
         section.set("canToggleLock", false);
@@ -243,14 +246,18 @@ public class IslandInfo {
 
     public void banPlayer(String player) {
         List<String> stringList = config.getStringList("banned.list");
-        stringList.add(player);
+        if (!stringList.contains(player)) {
+            stringList.add(player);
+        }
         config.set("banned.list", stringList);
         save();
     }
 
     public void unbanPlayer(String player) {
         List<String> stringList = config.getStringList("banned.list");
-        stringList.remove(player);
+        while (stringList.contains(player)) {
+            stringList.remove(player);
+        }
         config.set("banned.list", stringList);
         save();
     }
@@ -294,5 +301,10 @@ public class IslandInfo {
 
     public boolean isParty() {
         return getMembers().size() > 1;
+    }
+
+    public void setMaxPartySize(int size) {
+        config.set("party.maxSize", size);
+        save();
     }
 }

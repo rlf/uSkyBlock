@@ -541,7 +541,9 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void addOrphan(final Location island) {
-        orphaned.push(island);
+        if (!orphaned.contains(island)) {
+            orphaned.push(island);
+        }
     }
 
     public void removeNextOrphan() {
