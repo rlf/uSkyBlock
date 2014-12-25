@@ -1,7 +1,7 @@
 # uSkyBlock
 OLD WORLDEDIT AND WORLDGUARD VERSION
 
-This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin, which he has decided to stop supporting.
+This is a fork of http://www.spigotmc.org/resources/uskyblock.2280/ to support older versions of Worldedit and/or WorldGuard
 
 # Installation
 
@@ -9,8 +9,8 @@ This version depends on the following plugins:
 
 * Bukkit 1.8-R0.1-SNAPSHOT (I.e. the latest Spigot 1.8 release)
 * Vault 1.4
-* WorldEdit 6.0.0-SNAPSHOT
-* WorldGuard 6.0.0-SNAPSHOT
+* WorldEdit 5.6~ FORK SPECIFIC
+* WorldGuard 5.9 FORK SPECIFIC
 
 ## Config-files
 
@@ -29,14 +29,6 @@ Configure Environment and Run Maven
 1. Define the SPIGOT_BASE environment variable to the folder where the BuildTools.jar reside
 2. Make sure that the Bukkit folder in that hiearchy contains a /target/bukkit*.jar file
 3. Run `mvn install` in the uSkyBlock folder
-
-## Issues
-
-Issues are maintained on the GitHub page: https://github.com/rlf/uSkyBlock/issues
-
-## Contributing
-
-Fork-away, and create pull-requests
 
 ## License
 
