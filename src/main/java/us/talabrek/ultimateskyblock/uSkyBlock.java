@@ -1068,8 +1068,10 @@ public class uSkyBlock extends JavaPlugin {
                 if (cSchem.lastIndexOf('.') > 0) {
                     cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
                 }
-                if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, skyBlockWorld)
-                        && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
+//                if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, skyBlockWorld)
+//                        && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
+              if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, skyBlockWorld)
+            		  && WorldEditHandler.loadIslandSchematic(skyBlockWorld, schemFile, next)) {
                     setChest(next, player);
                     hasIslandNow = true;
                     break;
@@ -1082,8 +1084,10 @@ public class uSkyBlock extends JavaPlugin {
                     if (cSchem.lastIndexOf('.') > 0) {
                         cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
                     }
+//                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName)
+//                            && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
                     if (cSchem.equalsIgnoreCase(Settings.island_schematicName)
-                            && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
+                            && WorldEditHandler.loadIslandSchematic(skyBlockWorld, schemFile, next)) {
                         this.setChest(next, player);
                         hasIslandNow = true;
                         break;

@@ -4,19 +4,22 @@ import com.sk89q.worldedit.*;
 import com.sk89q.worldedit.bukkit.BukkitPlayer;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.extent.clipboard.Clipboard;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
-import com.sk89q.worldedit.function.operation.Operation;
-import com.sk89q.worldedit.function.operation.Operations;
+import com.sk89q.worldedit.data.DataException;
+//import com.sk89q.worldedit.extent.clipboard.Clipboard;
+//import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
+//import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
+//import com.sk89q.worldedit.function.operation.Operation;
+//import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.session.ClipboardHolder;
-import com.sk89q.worldedit.world.registry.WorldData;
+import com.sk89q.worldedit.schematic.SchematicFormat;
+//import com.sk89q.worldedit.session.ClipboardHolder;
+//import com.sk89q.worldedit.world.registry.WorldData;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
+//import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.io.*;
@@ -31,7 +34,7 @@ public class WorldEditHandler {
         return (WorldEditPlugin) plugin;
     }
 
-    public static boolean loadIslandSchematic(Player player, final World world, final File file, final Location origin) {
+/*    public static boolean loadIslandSchematic(Player player, final World world, final File file, final Location origin) {
         WorldEdit worldEdit = getWorldEdit().getWorldEdit();
         BukkitPlayer wePlayer = getWorldEdit().wrapPlayer(player);
         LocalSession session = worldEdit.getSession(wePlayer);
@@ -60,7 +63,20 @@ public class WorldEditHandler {
             uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
         }
         return false;
-    }
+    }*/
+    
+//	@SuppressWarnings("deprecation")
+	public static boolean loadIslandSchematic(final World world, final File file, final Location origin) throws DataException, IOException, MaxChangedBlocksException {
+		final Vector v = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+		final SchematicFormat format = SchematicFormat.getFormat(file);
+		if (format == null) { 
+			return false;
+		}
+		final EditSession es = new EditSession(new BukkitWorld(world), 999999999);
+		final CuboidClipboard cc = format.load(file);
+		cc.paste(es, v, false);
+		return true;
+	}
 
     public static void clearIsland(final World skyWorld, final ProtectedRegion region) {
         long t = System.currentTimeMillis();
