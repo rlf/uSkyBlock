@@ -138,6 +138,9 @@ public class IslandInfo {
     }
 
     public void setWarpLocation(Location loc) {
+        if (loc == null) {
+            return;
+        }
         config.set("general.warpLocationX", loc.getBlockX());
         config.set("general.warpLocationY", loc.getBlockY());
         config.set("general.warpLocationZ", loc.getBlockZ());
@@ -162,7 +165,7 @@ public class IslandInfo {
     }
 
     public String getBiome() {
-        return config.getString("general.biome").toUpperCase();
+        return config.getString("general.biome", "OCEAN").toUpperCase();
     }
 
     public void log(String message) {
