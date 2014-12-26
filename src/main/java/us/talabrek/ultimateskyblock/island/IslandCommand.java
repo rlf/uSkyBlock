@@ -393,7 +393,12 @@ public class IslandCommand implements CommandExecutor {
                 Player otherPlayer = Bukkit.getPlayer(split[1]); // Might not be used, might be
                 if (split[0].equals("warp") || split[0].equals("w")) {
                     if (VaultHandler.checkPerk(player.getName(), "usb.island.warp", player.getWorld())) {
-                        PlayerInfo wPi = sky.getPlayerInfo(otherPlayer);
+                        PlayerInfo wPi;
+                        if (otherPlayer != null) {
+                            wPi = sky.getPlayerInfo(otherPlayer);
+                        } else {
+                            wPi  = sky.getPlayerInfo(split[1]);
+                        }
                         if (wPi == null || !wPi.getHasIsland()) {
                             player.sendMessage(ChatColor.RED + "That player does not exist!");
                             return true;
