@@ -242,7 +242,7 @@ public class uSkyBlock extends JavaPlugin {
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
             skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
-            if (skyBlockWorld == null) {
+            if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures()) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
                         .type(WorldType.NORMAL)
@@ -250,10 +250,10 @@ public class uSkyBlock extends JavaPlugin {
                         .environment(World.Environment.NORMAL)
                         .generator(new SkyBlockChunkGenerator())
                         .createWorld();
-                if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
-                }
                 uSkyBlock.skyBlockWorld.save();
+            }
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
             }
         }
         return uSkyBlock.skyBlockWorld;
