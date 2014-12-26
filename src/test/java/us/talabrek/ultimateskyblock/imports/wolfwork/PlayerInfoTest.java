@@ -11,7 +11,8 @@ public class PlayerInfoTest {
 
     @Test
     public void testDeserialization() throws Exception {
-        for (String playerName : new String[]{"Block_Busta_7", "Moctezuma309", "solukkajr", "xFreakyPVPx", "matt9959"}) {
+        for (String playerName : new String[]{"Block_Busta_7", "Moctezuma309", "solukkajr",
+                "xFreakyPVPx", "matt9959", "xXMasterOfPvpXx", "pi4music"}) {
             try (ObjectInputStream in = new WolfWorkObjectInputStream(getClass().getClassLoader().getResourceAsStream(playerName))) {
                 final PlayerInfo p = (PlayerInfo) in.readObject();
                 assertThat(p, notNullValue());
