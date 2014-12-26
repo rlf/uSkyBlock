@@ -759,7 +759,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean islandInSpawn(final Location loc) {
-        return loc == null || (loc.getX() > -50.0 && loc.getX() < 50.0 && loc.getZ() > -50.0 && loc.getZ() < 50.0);
+        return loc == null || new Location(getSkyBlockWorld(), 0, loc.getBlockY(), 0).distance(loc) <= Settings.general_spawnSize;
     }
 
     public ChunkGenerator getDefaultWorldGenerator(final String worldName, final String id) {
