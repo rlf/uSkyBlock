@@ -23,11 +23,15 @@ public class IslandCommand implements CommandExecutor {
     }
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
+        uSkyBlock sky = uSkyBlock.getInstance();
+        if (!sky.isRequirementsMet(sender, false)) {
+            sender.sendMessage(ChatColor.RED + "/is is currently disabled, contact a server-administrator");
+            return true;
+        }
         if (!(sender instanceof Player)) {
             return handleConsoleCommand(sender, command, label, split);
         }
         final Player player = (Player) sender;
-        uSkyBlock sky = uSkyBlock.getInstance();
         final PlayerInfo pi = sky.getPlayerInfo(player);
         if (pi == null) {
             player.sendMessage(ChatColor.RED + "Error: Couldn't read your player data!");

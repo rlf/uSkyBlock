@@ -22,6 +22,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.admin.DevCommand;
@@ -30,7 +31,10 @@ import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.event.MobEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.imports.impl.PlayerImporterImpl;
-import us.talabrek.ultimateskyblock.island.*;
+import us.talabrek.ultimateskyblock.island.IslandCommand;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.island.IslandLogic;
+import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 
@@ -43,6 +47,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 public class uSkyBlock extends JavaPlugin {
+    private static final String[][] depends = new String[][]{
+            new String[]{"Vault", "1.5"},
+            new String[]{"WorldEdit", "6.0"},
+            new String[]{"WorldGuard", "6.0"},
+    };
+    private static String missingRequirements = null;
     private final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
 
     private SkyBlockMenu menu;
@@ -151,6 +161,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public void onEnable() {
+        missingRequirements = null;
         instance = this;
         configFiles.clear();
         activePlayers.clear();
@@ -209,6 +220,30 @@ public class uSkyBlock extends JavaPlugin {
                 }, 100);
             }
         }, 0L);
+    }
+
+    public synchronized boolean isRequirementsMet(CommandSender sender, boolean isDev) {
+        if (missingRequirements == null) {
+            PluginManager pluginManager = getServer().getPluginManager();
+            missingRequirements = "";
+            for (String[] pluginReq : depends) {
+                if (pluginManager.isPluginEnabled(pluginReq[0])) {
+                    PluginDescriptionFile desc = pluginManager.getPlugin(pluginReq[0]).getDescription();
+                    if (pluginReq[1].compareTo(desc.getVersion()) > 0) {
+                        missingRequirements += "\u00a7buSkyBlock\u00a7e depends on \u00a79" + pluginReq[0] + "\u00a7e >= \u00a7av" + pluginReq[1] + "\u00a7e but only \u00a7cv" + desc.getVersion() + "\u00a7e was found!\n";
+                    }
+                } else {
+                    missingRequirements += "\u00a7buSkyBlock\u00a7e depends on \u00a79" + pluginReq[0] + "\u00a7e >= \u00a7av" + pluginReq[1];
+                }
+            }
+        }
+        if (missingRequirements.isEmpty()) {
+            return true;
+        } else if (isDev || sender.isOp()) {
+            sender.sendMessage(missingRequirements.split("\n"));
+            return false;
+        }
+        return false;
     }
 
     private void createFolders() {
