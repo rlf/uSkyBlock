@@ -312,16 +312,8 @@ public class ChallengeLogic {
             }
         }
         for (String cmd : reward.getCommands()) {
-            String command = cmd.replaceAll("\\{playerName\\}", player.getDisplayName())
-                    .replaceAll("\\{position\\}", player.getLocation().toString()) // Figure out what this should be
-                    .replaceAll("\\{challenge\\}", challengeName);
-            if (command.contains("{party}")) {
-                for (String member : skyBlock.getIslandInfo(playerInfo).getMembers()) {
-                    skyBlock.execCommand(player, command.replaceAll("\\{party\\}", member));
-                }
-            } else {
-                skyBlock.execCommand(player, command);
-            }
+            String command = cmd.replaceAll("\\{challenge\\}", challengeName);
+            skyBlock.execCommand(player, command);
         }
         player.getInventory().addItem(reward.getItemReward().toArray(new ItemStack[0]));
         playerInfo.completeChallenge(challengeName);
