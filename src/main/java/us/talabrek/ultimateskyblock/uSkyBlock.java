@@ -1661,6 +1661,20 @@ public class uSkyBlock extends JavaPlugin {
         if (!isSkyAssociatedWorld(player.getWorld())) {
             return;
         }
+        command = command
+                .replaceAll("\\{playerName\\}", player.getDisplayName())
+                .replaceAll("\\{position\\}", player.getLocation().toString()); // Figure out what this should be
+        if (command.contains("{party}")) {
+            PlayerInfo playerInfo = getPlayerInfo(player);
+            for (String member : getIslandInfo(playerInfo).getMembers()) {
+                doExecCommand(player, command.replaceAll("\\{party\\}", member));
+            }
+        } else {
+            doExecCommand(player, command);
+        }
+    }
+
+    private void doExecCommand(Player player, String command) {
         if (command.startsWith("op:")) {
             if (player.isOp()) {
                 player.performCommand(command.substring(3).trim());

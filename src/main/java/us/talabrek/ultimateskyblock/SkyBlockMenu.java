@@ -628,10 +628,10 @@ public class SkyBlockMenu {
                             if (perm != null) {
                                 boolean hasPerm = VaultHandler.checkPerm(player, perm, world);
                                 if ((hasPerm && !not) || (!hasPerm && not)) {
-                                    player.performCommand(cmd);
+                                    skyBlock.execCommand(player, cmd);
                                 }
                             } else {
-                                player.performCommand(cmd);
+                                skyBlock.execCommand(player, cmd);
                             }
                         } else {
                             uSkyBlock.log(Level.INFO, "\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
