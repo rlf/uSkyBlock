@@ -3,22 +3,26 @@ package us.talabrek.ultimateskyblock.event;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 import us.talabrek.ultimateskyblock.*;
 
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Level;
 
 public class PlayerEvents implements Listener {
@@ -70,6 +74,105 @@ public class PlayerEvents implements Listener {
                     }
                 }
             }
+        }
+    }
+
+    @EventHandler
+    public void onDropEvent(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        if (!plugin.isSkyWorld(player.getWorld())) {
+            return;
+        }
+        addDropInfo(player, event.getItemDrop().getItemStack());
+    }
+
+    @EventHandler
+    public void onDeathEvent(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        if (!plugin.isSkyWorld(player.getWorld())) {
+            return;
+        }
+        // Take over the drop, since Bukkit don't do this in a Metadatable format.
+        if (!event.getKeepInventory()) {
+            for (ItemStack stack : event.getDrops()) {
+                addDropInfo(player, stack);
+            }
+        }
+    }
+
+    private void addDropInfo(Player player, ItemStack stack) {
+        ItemMeta meta = stack.getItemMeta();
+        List<String> lore = meta.getLore();
+        if (lore == null) {
+            lore = new ArrayList<>();
+        }
+        lore.add("Dropped by: " + player.getName());
+        meta.setLore(lore);
+        stack.setItemMeta(meta);
+    }
+
+    private void clearDropInfo(ItemStack stack) {
+        ItemMeta meta = stack.getItemMeta();
+        List<String> lore = meta.getLore();
+        if (lore != null && !lore.isEmpty()) {
+            if (lore.get(lore.size()-1).startsWith("Dropped by: ")) {
+                lore.remove(lore.size()-1);
+            }
+            meta.setLore(lore);
+            stack.setItemMeta(meta);
+        }
+    }
+
+    @EventHandler
+    public void onPickupEvent(PlayerPickupItemEvent event) {
+        Player player = event.getPlayer();
+        if (!plugin.isSkyWorld(player.getWorld())) {
+            return;
+        }
+        if (wasDroppedBy(player, event)) {
+            clearDropInfo(event.getItem().getItemStack());
+            return; // Allowed
+        }
+        if (plugin.playerIsOnIsland(player) || plugin.playerIsInSpawn(player)) {
+            clearDropInfo(event.getItem().getItemStack());
+            return;
+        }
+        // You are on anothers island, and the stuff dropped weren't yours.
+        event.setCancelled(true);
+        plugin.notifyPlayer(player, "You can only trade in spawn");
+    }
+
+    private boolean wasDroppedBy(Player player, PlayerPickupItemEvent event) {
+        ItemStack itemStack = event.getItem().getItemStack();
+        ItemMeta meta = itemStack.getItemMeta();
+        List<String> lore = meta.getLore();
+        if (lore != null && !lore.isEmpty()) {
+            String lastLine = lore.get(lore.size()-1);
+            return lastLine.equalsIgnoreCase("Dropped by: " + player.getName());
+        }
+        return false;
+    }
+
+    @EventHandler
+    public void onShearEvent(PlayerShearEntityEvent event) {
+        Player player = event.getPlayer();
+        if (!plugin.isSkyWorld(player.getWorld())) {
+            return; // Not our concern
+        }
+        if (!plugin.playerIsOnIsland(player)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (!plugin.isSkyWorld(event.getDamager().getWorld())) {
+            return;
+        }
+        if (event.getDamager() instanceof Player
+                && event.getEntity() instanceof Creature
+                && !plugin.playerIsOnIsland((Player)event.getDamager())) {
+            event.setCancelled(true);
         }
     }
 
