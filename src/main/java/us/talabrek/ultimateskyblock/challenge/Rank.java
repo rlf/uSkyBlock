@@ -83,6 +83,19 @@ public class Rank {
                     missing.add("\u00a77Complete " + (leeway-rankLeeway) + " more " + previousRank + " challenges");
                 }
             }
+            for (String challengeName : requires.getStringList("challenges")) {
+                ChallengeCompletion challenge = playerInfo.getChallenge(challengeName);
+                StringBuilder sb = new StringBuilder();
+                if (challenge != null && challenge.getTimesCompleted() <= 0) {
+                    if (sb.length() > 0) {
+                        sb.append(", ");
+                    }
+                    sb.append(challengeName);
+                }
+                if (sb.length() > 0) {
+                    missing.add("\u00a77Complete " + sb.toString());
+                }
+            }
             if (!missing.isEmpty()) {
                 missing.add("\u00a77to unlock this rank");
             }

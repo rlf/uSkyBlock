@@ -1626,6 +1626,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     private void reloadConfigs() {
+        createFolders();
         // Update all of the loaded configs.
         for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()){
             File configFile = new File(getDataFolder(), e.getKey());
