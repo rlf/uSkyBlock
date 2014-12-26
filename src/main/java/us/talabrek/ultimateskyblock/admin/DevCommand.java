@@ -19,6 +19,9 @@ public class DevCommand implements CommandExecutor, TabCompleter {
     private Map<String, Command> commandMap = new HashMap<>();
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
+        if (!uSkyBlock.getInstance().isRequirementsMet(sender, true)) {
+            return true;
+        }
         final Player player;
         if (split.length == 0) {
             if (sender.hasPermission("usb.mod.protect") || sender.hasPermission("usb.mod.protectall") || sender.hasPermission("usb.mod.topten") || sender.hasPermission("usb.mod.orphan") || sender.hasPermission("usb.admin.delete") || sender.hasPermission("usb.admin.remove") || sender.hasPermission("usb.admin.register")) {
@@ -117,7 +120,7 @@ public class DevCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(ChatColor.YELLOW + "Marking all islands inactive for more than " + split[1] + " days.");
                 uSkyBlock.getInstance().getServer().getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
                     @SuppressWarnings("deprecation")
-					@Override
+                    @Override
                     public void run() {
                         final File directoryPlayers = new File(uSkyBlock.getInstance().getDataFolder() + File.separator + "players");
                         long offlineTime = 0L;
