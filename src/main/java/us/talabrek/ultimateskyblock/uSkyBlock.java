@@ -27,10 +27,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.admin.DevCommand;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
+import us.talabrek.ultimateskyblock.event.MobEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.imports.impl.PlayerImporterImpl;
 import us.talabrek.ultimateskyblock.island.*;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -47,6 +49,7 @@ public class uSkyBlock extends JavaPlugin {
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
+    private PlayerNotifier notifier;
     private PlayerImporterImpl importer;
 
     private static String pName = "";
@@ -158,10 +161,12 @@ public class uSkyBlock extends JavaPlugin {
             saveConfig();
         }
 
+        // Not sure this is needed - isn't reloadConfig() invoked before onEnable?
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this, directoryIslands);
+        this.notifier = new PlayerNotifier(getConfig());
 
         registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
@@ -192,6 +197,16 @@ public class uSkyBlock extends JavaPlugin {
                     }
                     setupOrphans();
                 }
+                getServer().getScheduler().runTaskLater(instance, new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Player player : getServer().getOnlinePlayers()) {
+                            if (isSkyWorld(player.getWorld())) {
+                                loadPlayerData(player);
+                            }
+                        }
+                    }
+                }, 100);
             }
         }, 0L);
     }
@@ -230,6 +245,7 @@ public class uSkyBlock extends JavaPlugin {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             if (this.getActivePlayers().containsKey(player.getName())) {
                 this.removeActivePlayer(player.getName());
+                notifier.unloadPlayer(player);
             }
         }
     }
@@ -237,12 +253,13 @@ public class uSkyBlock extends JavaPlugin {
     public void registerEvents() {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerEvents(this), this);
+        manager.registerEvents(new MobEvents(this), this);
     }
 
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
             skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
-            if (skyBlockWorld == null) {
+            if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures()) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
                         .type(WorldType.NORMAL)
@@ -250,10 +267,10 @@ public class uSkyBlock extends JavaPlugin {
                         .environment(World.Environment.NORMAL)
                         .generator(new SkyBlockChunkGenerator())
                         .createWorld();
-                if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
-                }
                 uSkyBlock.skyBlockWorld.save();
+            }
+            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
             }
         }
         return uSkyBlock.skyBlockWorld;
@@ -850,7 +867,7 @@ public class uSkyBlock extends JavaPlugin {
         if (activePlayers.containsKey(player)) {
             activePlayers.get(player).save();
             activePlayers.remove(player);
-            log(Level.INFO, "Removing player from memory: " + player);
+            log(Level.FINE, "Removing player from memory: " + player);
         }
     }
 
@@ -876,9 +893,8 @@ public class uSkyBlock extends JavaPlugin {
             islandLogic.removeIslandFromMemory(getPlayerInfo(player).locationForParty());
         }
         removeActivePlayer(player.getName());
+        notifier.unloadPlayer(player);
     }
-
-
 
     public void reloadIslandConfig(final String location) {
         islandLogic.reloadIsland(location);
@@ -1570,8 +1586,8 @@ public class uSkyBlock extends JavaPlugin {
 
     @Override
     public void reloadConfig() {
-        reloadConfigs();
         Settings.loadPluginConfig(getConfig());
+        reloadConfigs();
     }
 
     private void reloadConfigs() {
@@ -1591,7 +1607,7 @@ public class uSkyBlock extends JavaPlugin {
         if (world == null) {
             return false;
         }
-        return skyBlockWorld.getName().equalsIgnoreCase(world.getName());
+        return getSkyBlockWorld().getName().equalsIgnoreCase(world.getName());
     }
 
     public boolean isSkyAssociatedWorld(World world) {
@@ -1629,5 +1645,18 @@ public class uSkyBlock extends JavaPlugin {
             importer = new PlayerImporterImpl(this);
         }
         return importer;
+    }
+
+    public boolean playerIsInSpawn(Player player) {
+        Location pLoc = player.getLocation();
+        Location spawnCenter = new Location(skyBlockWorld, 0, pLoc.getBlockY(), 0);
+        return spawnCenter.distance(pLoc) <= Settings.general_spawnSize;
+    }
+
+    /**
+     * Notify the player, but max. every X seconds.
+     */
+    public void notifyPlayer(Player player, String msg) {
+        notifier.notifyPlayer(player, msg);
     }
 }
