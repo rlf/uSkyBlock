@@ -7,7 +7,7 @@ options:
     # [string] The name of the skyblock world, will be automatically generated if it doesn't exist.
     worldName: skyworld
 
-    # [integer] Not sure what this affects plugin wise.
+    # [integer] Area around 0,0 where islands will not be created to protect spawn.
     spawnSize: 150
 
     # [integer] The time in seconds before a player can use the /island info command again. (note: cooldowns are reset when the plugin is reloaded)
@@ -72,13 +72,19 @@ options:
     # [integer] The time in minutes for how often the top-ten list will be re-generated when doing /is top
     topTenTimeout: 7
 
-  # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands
+  # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
+  # Any empty slot can be filled using this format.
   extra-menus:
+  # [integer 0-17] The slot your new menu will appear in.
     7:
+      # [String] The title of your menu.
       title: '§a§lBuy Perks'
+      # [String] The item to be displayed. Note, this must be an item not used elsewhere in the menu.
       displayItem: CHEST
+      # [string] List of commands to run when player clicks your menu.
       commands:
        - 'chestcommands open perks'
+      # [string] Description of what your menu does.
       lore:
        - '§fVisit the perk shop to buy'
        - '§fspecial abilities for your'
