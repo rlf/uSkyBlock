@@ -25,11 +25,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.talabrek.ultimateskyblock.admin.AdminCommand;
 import us.talabrek.ultimateskyblock.admin.DevCommand;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.event.MobEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
+import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.PlayerImporterImpl;
 import us.talabrek.ultimateskyblock.island.IslandCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -182,7 +187,8 @@ public class uSkyBlock extends JavaPlugin {
         registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
-        this.getCommand("usb").setExecutor(new DevCommand());
+        this.getCommand("dev").setExecutor(new DevCommand());
+        this.getCommand("usb").setExecutor(new AdminCommand());
 
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
@@ -304,9 +310,7 @@ public class uSkyBlock extends JavaPlugin {
                         .createWorld();
                 uSkyBlock.skyBlockWorld.save();
             }
-            if (Bukkit.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv import " + Settings.general_worldName + " normal -g uSkyBlock");
-            }
+            MultiverseCoreHandler.importWorld(skyBlockWorld);
         }
         return uSkyBlock.skyBlockWorld;
     }
@@ -509,51 +513,41 @@ public class uSkyBlock extends JavaPlugin {
                 (entity.getFallDistance() == 0 && !(entity instanceof Monster));
     }
 
+    public Location findBedrockLocation(final Location l) {
+        final int px = l.getBlockX();
+        final int py = l.getBlockY();
+        final int pz = l.getBlockZ();
+        World world = l.getWorld();
+        for (int x = -10; x <= 10; ++x) {
+            for (int y = -10; y <= 10; ++y) {
+                for (int z = -10; z <= 10; ++z) {
+                    final Block b = world.getBlockAt(px + x, py + y, pz + z);
+                    if (b.getType() == Material.BEDROCK) {
+                        return new Location(world, px+x, py+y, pz+z);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
-        if (!this.getActivePlayers().containsKey(player)) {
-            final PlayerInfo pi = new PlayerInfo(player);
-            final int px = l.getBlockX();
-            final int py = l.getBlockY();
-            final int pz = l.getBlockZ();
-            for (int x = -10; x <= 10; ++x) {
-                for (int y = -10; y <= 10; ++y) {
-                    for (int z = -10; z <= 10; ++z) {
-                        final Block b = new Location(l.getWorld(), (double) (px + x), (double) (py + y), (double) (pz + z)).getBlock();
-                        if (b.getTypeId() == 7) {
-                            pi.setHomeLocation(new Location(l.getWorld(), (double) (px + x), (double) (py + y + 3), (double) (pz + z)));
-                            pi.setHasIsland(true);
-                            pi.setIslandLocation(b.getLocation());
-                            pi.save();
-                            islandLogic.createIsland(pi.locationForParty(), player);
-                            if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
-                                sender.sendMessage("Player doesn't have an island or it's already protected!");
-                            }
-                            return true;
-                        }
-                    }
-                }
+        PlayerInfo pi = getPlayerInfo(player);
+        Location bedrockLocation = findBedrockLocation(l);
+        if (bedrockLocation != null) {
+            if (bedrockLocation.equals(pi.getIslandLocation())) {
+                sender.sendMessage(ChatColor.RED + "Player is already assigned to this island!");
+                return true;
             }
-        } else {
-            final int px2 = l.getBlockX();
-            final int py2 = l.getBlockY();
-            final int pz2 = l.getBlockZ();
-            for (int x2 = -10; x2 <= 10; ++x2) {
-                for (int y2 = -10; y2 <= 10; ++y2) {
-                    for (int z2 = -10; z2 <= 10; ++z2) {
-                        final Block b2 = new Location(l.getWorld(), (double) (px2 + x2), (double) (py2 + y2), (double) (pz2 + z2)).getBlock();
-                        if (b2.getTypeId() == 7) {
-                            PlayerInfo playerInfo = this.getActivePlayers().get(player);
-                            playerInfo.setHomeLocation(new Location(l.getWorld(), (double) (px2 + x2), (double) (py2 + y2 + 3), (double) (pz2 + z2)));
-                            playerInfo.setHasIsland(true);
-                            playerInfo.setIslandLocation(b2.getLocation());
-                            removeActivePlayer(player);
-                            addActivePlayer(player, playerInfo);
-                            WorldGuardHandler.protectIsland(sender, player, playerInfo);
-                            return true;
-                        }
-                    }
-                }
+            pi.setHomeLocation(null);
+            pi.setHasIsland(true);
+            pi.setIslandLocation(bedrockLocation);
+            pi.setHomeLocation(getSafeHomeLocation(pi));
+            islandLogic.createIsland(pi.locationForParty(), player);
+            if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
+                sender.sendMessage(ChatColor.RED + "Player doesn't have an island or it's already protected!");
             }
+            return true;
         }
         return false;
     }
@@ -1534,22 +1528,6 @@ public class uSkyBlock extends JavaPlugin {
         playerInfo.resetAllChallenges();
         playerInfo.save();
     }
-
-    public void buildIslandList() {
-        final File folder = directoryPlayers;
-        final File[] listOfFiles = folder.listFiles();
-        log(Level.INFO, "Building a new island list...");
-        for (int i = 0; i < listOfFiles.length; ++i) {
-            final PlayerInfo pi = new PlayerInfo(listOfFiles[i].getName());
-            if (pi.getHasIsland()) {
-                log(Level.INFO, "Creating new island file for " + pi.getPlayerName());
-                islandLogic.createIsland(pi.locationForParty(), pi.getPlayerName());
-            }
-        }
-        // TODO: 15/12/2014 - R4zorax: Support reading the old-format (at some time)
-        log(Level.INFO, "Party list completed.");
-    }
-
 
     public boolean hasIslandMembersOnline(final Player p) {
         for (final String member : islandLogic.getIslandInfo(getPlayerInfo(p)).getMembers()) {

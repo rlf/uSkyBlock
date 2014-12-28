@@ -4,7 +4,7 @@ import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import us.talabrek.ultimateskyblock.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 import java.util.ArrayList;
 import java.util.List;

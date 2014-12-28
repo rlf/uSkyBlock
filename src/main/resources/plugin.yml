@@ -14,9 +14,12 @@ commands:
              /island [restart/sethome/info/lock/unlock/top/party]
     usb:
         description: admin commands
-        aliases: [dev]
         usage:  |
-            /usb
+            /usb for more info
+    dev:
+        description: old admin commands
+        usage:  |
+            /dev for more info
     challenges:
         description: skyblock challenges
         aliases: [c, challenge]

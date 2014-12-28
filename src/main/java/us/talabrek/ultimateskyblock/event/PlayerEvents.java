@@ -2,9 +2,7 @@ package us.talabrek.ultimateskyblock.event;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Creature;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,11 +17,10 @@ import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.metadata.FixedMetadataValue;
 import us.talabrek.ultimateskyblock.*;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 import java.util.*;
-import java.util.logging.Level;
 
 public class PlayerEvents implements Listener {
     private static final Random RANDOM = new Random();
@@ -121,6 +118,15 @@ public class PlayerEvents implements Listener {
             meta.setLore(lore);
             stack.setItemMeta(meta);
         }
+    }
+
+    @EventHandler
+    public void onPickupInventoryEvent(InventoryPickupItemEvent event) {
+        if (!plugin.isSkyWorld(event.getItem().getWorld())) {
+            return;
+        }
+        // I.e. hoppers...
+        clearDropInfo(event.getItem().getItemStack());
     }
 
     @EventHandler

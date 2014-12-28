@@ -8,6 +8,8 @@ import java.util.logging.Level;
 
 import org.bukkit.*;
 import us.talabrek.ultimateskyblock.*;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 public class IslandCommand implements CommandExecutor {
