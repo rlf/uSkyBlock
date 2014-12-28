@@ -6,6 +6,8 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.command.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.Map;
+
 /**
  * Reloads the config-files for USB.
  */
@@ -15,7 +17,7 @@ public class ReloadCommand extends AbstractUSBCommand {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String... args) {
+    public boolean execute(CommandSender sender, Map<String,Object> data, String... args) {
         uSkyBlock.getInstance().reloadConfig();
         Settings.loadPluginConfig(uSkyBlock.getInstance().getConfig());
         sender.sendMessage(ChatColor.YELLOW + "Configuration reloaded from file.");

@@ -265,6 +265,10 @@ public class IslandInfo {
         save();
     }
 
+    public List<String> getBans() {
+        return config.getStringList("banned.list");
+    }
+
     public void removeMember(String playername) {
         config.set("party.members." + playername, null);
         config.set("party.currentSize", getPartySize() - 1);
@@ -309,5 +313,41 @@ public class IslandInfo {
     public void setMaxPartySize(int size) {
         config.set("party.maxSize", size);
         save();
+    }
+
+    public Location getWarpLocation() {
+        if (hasWarp()) {
+            return new Location(uSkyBlock.getInstance().getSkyBlockWorld(),
+                    config.getInt("general.warpLocationX", 0),
+                    config.getInt("general.warpLocationY", 0),
+                    config.getInt("general.warpLocationZ", 0));
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        String str = ChatColor.AQUA + "Island Info:\n";
+        str += ChatColor.GRAY + "  - level: " + ChatColor.DARK_AQUA + String.format("%5.2f", getLevel()) +"\n";
+        str += ChatColor.GRAY + "  - location: " + ChatColor.DARK_AQUA +  name + "\n";
+        str += ChatColor.GRAY + "  - warp: " + ChatColor.DARK_AQUA +  hasWarp() + "\n";
+        if (hasWarp()) {
+            str += ChatColor.GRAY + "     loc: " + ChatColor.DARK_AQUA +  getWarpLocation() + "\n";
+        }
+        str += ChatColor.GRAY + "  - locked: " + ChatColor.DARK_AQUA +  isLocked() + "\n";
+        str += ChatColor.DARK_AQUA + "Party:\n";
+        str += ChatColor.GRAY + "  - leader: " + ChatColor.DARK_AQUA + getLeader() + "\n";
+        str += ChatColor.GRAY + "  - members: " + ChatColor.DARK_AQUA + getMembers() + "\n";
+        str += ChatColor.GRAY + "  - size: " + ChatColor.DARK_AQUA + getPartySize() + "\n";
+        str += ChatColor.GRAY + "  - max: " + ChatColor.DARK_AQUA + getMaxPartySize() + "\n";
+        str += ChatColor.DARK_AQUA + "Bans:\n";
+        for (String ban : getBans()) {
+            str += ChatColor.GRAY + "  - " + ban + "\n";
+        }
+        str += ChatColor.DARK_AQUA + "Log:\n";
+        for (String log : getLog()) {
+            str += ChatColor.GRAY + "  - " + log + "\n";
+        }
+        return str;
     }
 }

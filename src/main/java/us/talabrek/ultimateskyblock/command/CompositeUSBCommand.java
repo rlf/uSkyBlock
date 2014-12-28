@@ -17,13 +17,20 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
     private final String name;
     private final String permission;
     private final String description;
+    private final String[] params;
+    private CompositeUSBCommand parent;
     private final Map<String, USBCommand> commandMap;
     private final Map<String, TabCompleter> tabMap;
 
     public CompositeUSBCommand(String name, String permission, String description) {
+        this(name, permission, null, description);
+    }
+
+    public CompositeUSBCommand(String name, String permission, String params, String description) {
         this.name = name;
         this.permission = permission;
         this.description = description;
+        this.params = params != null ? params.split(" ") : new String[0];
         commandMap = new HashMap<>();
         tabMap = new HashMap<>();
     }
@@ -31,6 +38,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
     public CompositeUSBCommand add(USBCommand... cmds) {
         for (USBCommand cmd : cmds) {
             commandMap.put(cmd.getName().toLowerCase(), cmd);
+            cmd.setParent(this);
         }
         return this;
     }
@@ -62,22 +70,27 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
 
     @Override
     public String[] getParams() {
-        return new String[0];
+        return params;
     }
 
     @Override
-    public boolean execute(CommandSender sender, String... args) {
+    public boolean execute(CommandSender sender, Map<String,Object> data, String... args) {
         if (args.length == 0 || (args.length == 1 && args[0].matches("(?iu)h|help"))) {
             showUsage(sender);
         } else if (args.length > 1 && args[0].matches("(?iu)h|help")) {
             showUsage(sender, args[1]);
-        } else if (args.length >= 1 && commandMap.containsKey(args[0].toLowerCase())) {
-            USBCommand usbCommand = commandMap.get(args[0].toLowerCase());
-            String[] subArgs = new String[args.length-1];
-            System.arraycopy(args, 1, subArgs, 0, subArgs.length);
-            if (!hasAccess(usbCommand, sender)) {
+        } else if (args.length > params.length) {
+            String cmdName = args[params.length].toLowerCase();
+            USBCommand cmd = commandMap.get(cmdName);
+            String[] subArgs = new String[args.length-1-params.length];
+            System.arraycopy(args, 1+params.length, subArgs, 0, subArgs.length);
+            int ix = 0;
+            for (String p : params) {
+                data.put(p, args[ix++]);
+            }
+            if (!hasAccess(cmd, sender)) {
                 showUsage(sender);
-            } else if (!usbCommand.execute(sender, subArgs)) {
+            } else if (!cmd.execute(sender, data, subArgs)) {
                 showUsage(sender, args[0]);
             }
         } else {
@@ -86,12 +99,12 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
         return true;
     }
     private void showUsage(CommandSender sender) {
-        String msg = "\u00a77Usage: \u00a73/" + name + " \u00a7e [command] | help [command]\n";
+        String msg = "\u00a77Usage: " + getShortDescription(this);
         ArrayList<String> cmds = new ArrayList<>(commandMap.keySet());
         Collections.sort(cmds);
         for (String key : cmds) {
-            USBCommand usbCommand = commandMap.get(key);
-            msg += "  \u00a73" + usbCommand.getName() + "\u00a77 " + usbCommand.getDescription() + "\n";
+            USBCommand cmd = commandMap.get(key);
+            msg += "  " + getShortDescription(cmd);
         }
         sender.sendMessage(msg.split("\n"));
     }
@@ -101,8 +114,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
         USBCommand cmd = commandMap.get(cmdName);
         if (cmd != null && hasAccess(cmd, sender)) {
             String msg = "\u00a77Usage: \u00a73/" + name + " \u00a7e";
-            msg += cmdName + " \u00a7f";
-            msg += cmd.getDescription() + "\n";
+            msg += getShortDescription(cmd);
             if (cmd.getUsage() != null && !cmd.getUsage().isEmpty()) {
                 msg += "\u00a77" + cmd.getUsage();
             }
@@ -110,6 +122,19 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
         } else {
             showUsage(sender);
         }
+    }
+
+    private String getShortDescription(USBCommand cmd) {
+        String msg = "\u00a73" + cmd.getName() + "\u00a7a";
+        for (String param : cmd.getParams()) {
+            msg += " <" + param + ">";
+        }
+        if (cmd instanceof CompositeUSBCommand) {
+            msg += " [command|help]";
+        }
+        msg += "\u00a77 - ";
+        msg += cmd.getDescription() + "\n";
+        return msg;
     }
 
     public boolean hasAccess(USBCommand cmd, CommandSender sender) {
@@ -128,24 +153,65 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
         return strings;
     }
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (args.length == 0 || args.length == 1) {
-            return super.onTabComplete(sender, command, alias, args);
-        } else if (args.length == 2 && args[0].matches(HELP_PATTERN)) {
-            return super.onTabComplete(sender, command, alias, args);
-        } else {
-            String cmdName = args[0].toLowerCase();
-            USBCommand cmd = commandMap.get(cmdName);
-            if (cmd != null) {
-                String[] subArgs = new String[args.length-1];
-                System.arraycopy(args, 1, subArgs, 0, subArgs.length);
-                String[] params = cmd.getParams();
-                if (params.length >= subArgs.length && tabMap.containsKey(params[subArgs.length-1])) {
-                    return tabMap.get(params[subArgs.length-1]).onTabComplete(sender, command, cmd.getName(), subArgs);
+    protected TabCompleter getTabCompleter(USBCommand cmd, int argNum) {
+        argNum = argNum >= 0 ? argNum : 0;
+        if (cmd.getParams().length > argNum) {
+            String paramName = cmd.getParams()[argNum];
+            if (tabMap.containsKey(paramName)) {
+                return tabMap.get(paramName);
+            } else if (getParent() != null) {
+                TabCompleter tab = getParent().getTabCompleter(cmd, argNum);
+                if (tab != null) {
+                    return tab;
                 }
             }
         }
+        if (cmd.getTabCompleter() != null) {
+            return cmd.getTabCompleter();
+        }
+        return null;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length <=  params.length && args.length > 0) {
+            TabCompleter tab = getTabCompleter(this, args.length-1);
+            if (tab != null && tab != this) {
+                return tab.onTabComplete(sender, command, alias, args);
+            } else if (tab == this) {
+                return getTabList(sender, args[args.length-1]);
+            }
+        } else if (args.length > params.length+1) { // Sub-commands
+            String cmdName = args[params.length].toLowerCase();
+            USBCommand cmd = commandMap.get(cmdName);
+            if (cmd != null && (args.length - params.length) > 1) { // Go deeper
+                String[] subArgs = new String[args.length-1-params.length];
+                System.arraycopy(args, 1+params.length, subArgs, 0, subArgs.length);
+                TabCompleter tab = getTabCompleter(cmd, subArgs.length - 1);
+                if (tab != null) {
+                    return tab.onTabComplete(sender, command, alias, subArgs);
+                }
+            } else {
+                return super.onTabComplete(sender, command, alias, args);
+            }
+        } else {
+            return super.onTabComplete(sender, command, alias, args);
+        }
         return Collections.emptyList();
+    }
+
+    @Override
+    public TabCompleter getTabCompleter() {
+        return this;
+    }
+
+    @Override
+    public CompositeUSBCommand getParent() {
+        return parent;
+    }
+
+    @Override
+    public void setParent(CompositeUSBCommand parent) {
+        this.parent = parent;
     }
 }

@@ -26,7 +26,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.talabrek.ultimateskyblock.admin.AdminCommand;
-import us.talabrek.ultimateskyblock.admin.DevCommand;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.event.MobEvents;
@@ -47,7 +46,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
@@ -74,7 +75,6 @@ public class uSkyBlock extends JavaPlugin {
     private File lastIslandConfigFile;
     public static volatile World skyBlockWorld;
     private static uSkyBlock instance;
-    public List<String> removeList;
     private Location lastIsland;
     private Stack<Location> orphaned;
     private Stack<Location> tempOrphaned;
@@ -99,7 +99,6 @@ public class uSkyBlock extends JavaPlugin {
         this.orphans = null;
         this.orphanFile = null;
         this.lastIslandConfigFile = null;
-        this.removeList = new ArrayList<>();
         this.orphaned = new Stack<>();
         this.tempOrphaned = new Stack<>();
         this.reverseOrphaned = new Stack<>();
@@ -187,8 +186,7 @@ public class uSkyBlock extends JavaPlugin {
         registerEvents();
         this.getCommand("island").setExecutor(new IslandCommand());
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
-        this.getCommand("dev").setExecutor(new DevCommand());
-        this.getCommand("usb").setExecutor(new AdminCommand());
+        this.getCommand("usb").setExecutor(new AdminCommand(instance));
 
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
@@ -533,15 +531,23 @@ public class uSkyBlock extends JavaPlugin {
 
     public boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
         PlayerInfo pi = getPlayerInfo(player);
-        Location bedrockLocation = findBedrockLocation(l);
-        if (bedrockLocation != null) {
-            if (bedrockLocation.equals(pi.getIslandLocation())) {
+        Location newLoc = findBedrockLocation(l);
+        if (pi.getHasIsland()) {
+            Location oldLoc = pi.getIslandLocation();
+            if (newLoc != null && oldLoc != null
+                    && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ()))
+            {
+                uSkyBlock.getInstance().deletePlayerIsland(pi.getPlayerName());
+            }
+        }
+        if (newLoc != null) {
+            if (newLoc.equals(pi.getIslandLocation())) {
                 sender.sendMessage(ChatColor.RED + "Player is already assigned to this island!");
                 return true;
             }
             pi.setHomeLocation(null);
             pi.setHasIsland(true);
-            pi.setIslandLocation(bedrockLocation);
+            pi.setIslandLocation(newLoc);
             pi.setHomeLocation(getSafeHomeLocation(pi));
             islandLogic.createIsland(pi.locationForParty(), player);
             if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
@@ -762,18 +768,21 @@ public class uSkyBlock extends JavaPlugin {
 
     public boolean onInfoCooldown(final Player player) {
         return !player.hasPermission("usb.exempt.infoCooldown")
+                && !player.hasPermission("usb.mod.bypasscooldowns")
                 && infoCooldown.containsKey(player.getName())
                 && infoCooldown.get(player.getName()) > System.currentTimeMillis();
     }
 
     public boolean onBiomeCooldown(final Player player) {
         return !player.hasPermission("usb.exempt.biomeCooldown")
+                && !player.hasPermission("usb.mod.bypasscooldowns")
                 && biomeCooldown.containsKey(player.getName())
                 && biomeCooldown.get(player.getName()) > System.currentTimeMillis();
     }
 
     public boolean onRestartCooldown(final Player player) {
         return !player.hasPermission("usb.exempt.restartCooldown")
+                && !player.hasPermission("usb.mod.bypasscooldowns")
                 && restartCooldown.containsKey(player.getName())
                 && this.restartCooldown.get(player.getName()) > System.currentTimeMillis();
     }
@@ -839,18 +848,6 @@ public class uSkyBlock extends JavaPlugin {
             }
         }
         return false;
-    }
-
-    public List<String> getRemoveList() {
-        return this.removeList;
-    }
-
-    public void addToRemoveList(final String string) {
-        this.removeList.add(string);
-    }
-
-    public void deleteFromRemoveList() {
-        this.removeList.remove(0);
     }
 
     public boolean isPurgeActive() {
@@ -1640,6 +1637,7 @@ public class uSkyBlock extends JavaPlugin {
             return;
         }
         command = command
+                .replaceAll("\\{player\\}", player.getName())
                 .replaceAll("\\{playerName\\}", player.getDisplayName())
                 .replaceAll("\\{position\\}", player.getLocation().toString()); // Figure out what this should be
         if (command.contains("{party}")) {

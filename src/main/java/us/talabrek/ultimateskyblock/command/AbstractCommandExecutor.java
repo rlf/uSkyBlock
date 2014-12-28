@@ -21,7 +21,7 @@ public class AbstractCommandExecutor extends CompositeUSBCommand implements Comm
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        return super.execute(commandSender, strings);
+    public boolean onCommand(CommandSender commandSender, Command command, String alias, String[] args) {
+        return super.execute(commandSender, new HashMap<String, Object>(), args);
     }
 }

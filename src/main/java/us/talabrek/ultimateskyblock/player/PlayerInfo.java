@@ -286,4 +286,17 @@ public class PlayerInfo implements Serializable {
     public Collection<ChallengeCompletion> getChallenges() {
         return challenges.values();
     }
+
+    @Override
+    public String toString() {
+        String str = ChatColor.AQUA + "Player Info:\n";
+        str += ChatColor.GRAY + "  - name: " + ChatColor.DARK_AQUA + getPlayerName() + "\n";
+        str += ChatColor.GRAY + "  - nick: " + ChatColor.DARK_AQUA + getDisplayName() + "\n";
+        str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA +  getHasIsland() + "\n";
+        str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  getHomeLocation() + "\n";
+        str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + getIslandLocation() + "\n";
+        // TODO: 28/12/2014 - R4zorax: Some info about challenges?
+        return str;
+    }
+
 }
