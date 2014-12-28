@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.island;
 
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 /**
  * How much of your score is calculated based on a specific blockId.

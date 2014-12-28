@@ -89,7 +89,9 @@ public class PlayerImporterImpl {
         int chunkSize = plugin.getConfig().getInt("general.import.maxChunk", 100);
         int delay = plugin.getConfig().getInt("general.import.delay", 15);
         plugin.log(Level.INFO, "Importing " + files.length + " players in chunks of " + chunkSize);
-        doImport(sender, importer, files, 0, chunkSize, delay);
+        if (files.length > 0) {
+            doImport(sender, importer, files, 0, chunkSize, delay);
+        }
     }
 
     private void doImport(final CommandSender sender, final USBImporter importer, final File[] files, final int offset, final int chunkSize, final int delay) {

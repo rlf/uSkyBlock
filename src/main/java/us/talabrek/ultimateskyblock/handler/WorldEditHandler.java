@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.*;
 import com.sk89q.worldedit.bukkit.BukkitPlayer;
@@ -18,6 +18,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.*;
 import java.util.logging.Level;

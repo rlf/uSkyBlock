@@ -6,7 +6,7 @@ import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;

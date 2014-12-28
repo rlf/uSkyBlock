@@ -4,24 +4,19 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.WorldEditHandler;
-import us.talabrek.ultimateskyblock.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -114,7 +109,6 @@ public class IslandLogic {
     public void showTopTen(final CommandSender sender) {
         long t = System.currentTimeMillis();
         if (t > (lastGenerate + (Settings.island_topTenTimeout*60000))) {
-            sender.sendMessage(ChatColor.YELLOW + "The top ten is sort of old, I will generate a new one, hold on...");
             lastGenerate = t;
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override

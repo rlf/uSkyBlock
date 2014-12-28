@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldguard.bukkit.*;
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -17,8 +17,10 @@ import java.util.logging.Level;
 
 import com.sk89q.worldedit.*;
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 public class WorldGuardHandler {
     private static final int VERSION = 2;
@@ -31,7 +33,7 @@ public class WorldGuardHandler {
         return (WorldGuardPlugin) plugin;
     }
 
-    public static boolean protectIsland(final Player sender, final String islandName, final PlayerInfo pi) {
+    public static boolean protectIsland(final CommandSender sender, final String islandName, final PlayerInfo pi) {
         try {
             WorldGuardPlugin worldGuard = getWorldGuard();
             RegionManager regionManager = worldGuard.getRegionManager(uSkyBlock.getSkyBlockWorld());

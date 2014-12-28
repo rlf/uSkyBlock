@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.text.DecimalFormat;
@@ -64,23 +64,18 @@ public class ChallengeLogic {
         return list;
     }
 
-    public List<Challenge> getChallengesForRank(String rank) {
-        return ranks.get(rank).getChallenges();
-    }
-
-    public int checkRankCompletion(final Player player, final String rank) {
-        if (!defaults.requiresPreviousRank) {
-            return 0;
-        }
-        int completedInRank = 0;
-        final PlayerInfo pi = skyBlock.getPlayerInfo(player);
-        List<Challenge> challengesInRank = getChallengesForRank(rank);
-        for (Challenge challenge : challengesInRank) {
-            if (pi.checkChallenge(challenge.getName()) > 0) {
-                ++completedInRank;
+    public List<String> getAllChallengeNames() {
+        List<String> list = new ArrayList<>();
+        for (Rank rank : ranks.values()) {
+            for (Challenge challenge : rank.getChallenges()) {
+                list.add(challenge.getName());
             }
         }
-        return challengesInRank.size() - defaults.rankLeeway - completedInRank;
+        return list;
+    }
+
+    public List<Challenge> getChallengesForRank(String rank) {
+        return ranks.get(rank).getChallenges();
     }
 
     public boolean completeChallenge(final Player player, final String challengeName) {

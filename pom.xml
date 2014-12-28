@@ -29,6 +29,10 @@
             <id>mvdw-public</id>
             <url>http://repo.mvdw-software.be/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>onarandombox</id>
+            <url>http://repo.onarandombox.com/content/groups/public</url>
+        </repository>
     </repositories>
     <build>
         <finalName>uSkyBlock</finalName>
@@ -117,6 +121,19 @@
             <type>jar</type>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.onarandombox.multiversecore</groupId>
+            <artifactId>Multiverse-Core</artifactId>
+            <version>2.5</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>craftbukkit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- TESTING -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

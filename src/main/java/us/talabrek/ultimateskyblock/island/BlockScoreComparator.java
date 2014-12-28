@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
-import us.talabrek.ultimateskyblock.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 import java.util.Comparator;
 
