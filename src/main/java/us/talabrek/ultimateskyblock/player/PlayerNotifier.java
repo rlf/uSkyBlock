@@ -23,7 +23,7 @@ public class PlayerNotifier {
     public synchronized void notifyPlayer(Player player, String message) {
         UUID uuid = player.getUniqueId();
         String lastMsg = lastMessage.get(uuid);
-        if (lastMsg != null && lastMsg.equals(message)) {
+        if (lastMsg != null && !lastMsg.equals(message)) {
             long now = System.currentTimeMillis();
             long last = this.lastTime.get(uuid);
             if (now >= last + maxSpam) {

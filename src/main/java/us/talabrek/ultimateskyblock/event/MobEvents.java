@@ -4,7 +4,9 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreeperPowerEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.player.PlayerShearEntityEvent;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 /**
@@ -38,5 +40,28 @@ public class MobEvents implements Listener {
      */
     private boolean isValidTarget(Entity target) {
         return target instanceof Player && plugin.playerIsOnIsland((Player)target);
+    }
+
+    @EventHandler
+    public void onShearEvent(PlayerShearEntityEvent event) {
+        Player player = event.getPlayer();
+        if (!plugin.isSkyWorld(player.getWorld())) {
+            return; // Not our concern
+        }
+        if (!plugin.playerIsOnIsland(player)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (!plugin.isSkyWorld(event.getDamager().getWorld())) {
+            return;
+        }
+        if (event.getDamager() instanceof Player
+                && event.getEntity() instanceof Creature
+                && !plugin.playerIsOnIsland((Player)event.getDamager())) {
+            event.setCancelled(true);
+        }
     }
 }

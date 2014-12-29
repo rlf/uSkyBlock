@@ -29,6 +29,8 @@ import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
+import us.talabrek.ultimateskyblock.event.ItemDropEvents;
+import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.MobEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
@@ -294,6 +296,10 @@ public class uSkyBlock extends JavaPlugin {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MobEvents(this), this);
+        manager.registerEvents(new MenuEvents(this), this);
+        if (getConfig().getBoolean("options.protection.item-drops", true)) {
+            manager.registerEvents(new ItemDropEvents(this), this);
+        }
     }
 
     public World getWorld() {

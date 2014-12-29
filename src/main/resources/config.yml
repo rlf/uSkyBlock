@@ -75,7 +75,7 @@ options:
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.
   extra-menus:
-  # [integer 0-17] The slot your new menu will appear in.
+    # [integer 0-17] The slot your new menu will appear in.
     7:
       # [String] The title of your menu.
       title: '§a§lBuy Perks'
@@ -111,3 +111,7 @@ options:
     # [true/false] If true, a player can right-click on a block of obsidian on their island while holding an empty bucket to remove the obsidian and fill the bucket with lava. This is useful for people that accidently
     # turn their lava into obsidian with a bad cobblestone generator design. Will only work on the player's island and if there are no other obsidian blocks nearby (so can't be used on portals).
     obsidianToLava: true
+
+  protection:
+    # Whether or not, items dropped on the ground should be limited to party-members.
+    item-drops: true
