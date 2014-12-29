@@ -53,7 +53,7 @@ public class KickCommand extends RequireIslandCommand {
                 if (Bukkit.getPlayer(island.getLeader()) != null) {
                     Bukkit.getPlayer(island.getLeader()).sendMessage("\u00a74" + playerName + " has been removed from the island.");
                 }
-                island.removeMember(plugin.getPlayerInfo(player.getName()));
+                island.removeMember(plugin.getPlayerInfo(playerName));
                 uSkyBlock.log(Level.INFO, "Removing from " + island.getLeader() + "'s Island");
             } else {
                 player.sendMessage("\u00a74That player is not part of your island group!");
