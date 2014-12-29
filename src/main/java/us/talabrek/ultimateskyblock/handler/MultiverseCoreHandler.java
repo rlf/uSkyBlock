@@ -23,7 +23,7 @@ public enum MultiverseCoreHandler {;
         MultiverseCore core = getMultiverseCore();
         if (core != null) {
             if (!core.getMVWorldManager().isMVWorld(skyWorld)) {
-                core.getMVWorldManager().addWorld(skyWorld.getName(), World.Environment.NORMAL, null, WorldType.NORMAL, false, "uSkyBlock");
+                core.getMVWorldManager().addWorld(skyWorld.getName(), World.Environment.NORMAL, "0", WorldType.NORMAL, false, "uSkyBlock");
             }
         }
     }

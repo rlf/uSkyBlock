@@ -169,4 +169,17 @@ public class WorldGuardHandler {
             uSkyBlock.log(Level.INFO, "Error transferring WorldGuard Protected Region from (" + owner + ") to (" + player + ")");
         }
     }
+
+    public static String getRegionAt(Location location) {
+        WorldGuardPlugin worldGuard = getWorldGuard();
+        RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
+        ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(location);
+        for (ProtectedRegion region : applicableRegions) {
+            String id = region.getId().toLowerCase();
+            if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
+                return id.substring(0, id.length()-6);
+            }
+        }
+        return null;
+    }
 }

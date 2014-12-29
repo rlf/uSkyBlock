@@ -5,21 +5,31 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import us.talabrek.ultimateskyblock.LocationUtil;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.TimeUtil;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
+
+import static org.bukkit.Material.AIR;
+import static org.bukkit.Material.BEDROCK;
 
 /**
  * Responsible for island creation, locating locations, purging, clearing etc.
@@ -71,6 +81,60 @@ public class IslandLogic {
                 WorldEditHandler.clearIsland(skyBlockWorld, region);
             }
         }
+    }
+
+    public boolean clearFlatland(final CommandSender sender, final Location loc, int delay) {
+        if (loc == null) {
+            return false;
+        }
+        final World w = loc.getWorld();
+        final int px = loc.getBlockX();
+        final int pz = loc.getBlockZ();
+        final int py = 0;
+        final int range = Math.max(Settings.island_protectionRange, Settings.island_distance) + 1;
+        final int radius = range/2;
+        // 5 sampling points...
+        if (w.getBlockAt(px, py, pz).getType() == BEDROCK
+                || w.getBlockAt(px+radius, py, pz+radius).getType() == BEDROCK
+                || w.getBlockAt(px+radius, py, pz-radius).getType() == BEDROCK
+                || w.getBlockAt(px-radius, py, pz+radius).getType() == BEDROCK
+                || w.getBlockAt(px-radius, py, pz-radius).getType() == BEDROCK)
+        {
+            sender.sendMessage(String.format("\u00a74Flatland detected under your island!\u00a7e Clearing it in %s, stay clear.", TimeUtil.ticksAsString(delay)));
+            final AtomicInteger sharedY = new AtomicInteger(0);
+            final Runnable clearYLayer = new Runnable() {
+                long tStart;
+                long timeUsed = 0;
+                @Override
+                public void run() {
+                    long t = System.currentTimeMillis();
+                    int y = sharedY.getAndIncrement();
+                    if (y  <= 3) {
+                        if (y == 0) {
+                            tStart = t;
+                        }
+                        for (int dx = 1; dx <= range; dx++) {
+                            for (int dz = 1; dz <= range; dz++) {
+                                Block b = w.getBlockAt(px + (dx % 2 == 0 ? dx/2 : -dx/2),
+                                        y, pz + (dz % 2 == 0 ? dz/2 : -dz/2));
+                                if (b.getType() != AIR) {
+                                    b.setType(AIR);
+                                }
+                            }
+                        }
+                        long diffTicks = (System.currentTimeMillis() - t)/50;
+                        timeUsed += diffTicks;
+                        plugin.getServer().getScheduler().runTaskLater(plugin, this, diffTicks);
+                    } else {
+                        plugin.log(Level.INFO, String.format("Flatland cleared at %s in %s (%s)", LocationUtil.asString(loc), TimeUtil.millisAsString(System.currentTimeMillis() - tStart), TimeUtil.millisAsString(timeUsed)));
+                        sender.sendMessage("\u00a7eFlatland was cleared under your island. Take care.");
+                    }
+                }
+            };
+            plugin.getServer().getScheduler().runTaskLater(plugin, clearYLayer, delay);
+            return true;
+        }
+        return false;
     }
 
     public void reloadIsland(Location location) {

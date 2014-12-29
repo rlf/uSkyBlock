@@ -40,5 +40,6 @@ public class AdminCommand extends AbstractCommandExecutor {
                 sender.sendMessage(playerInfo.toString());
             }
         });
+        add(new FixCommand(plugin));
     }
 }

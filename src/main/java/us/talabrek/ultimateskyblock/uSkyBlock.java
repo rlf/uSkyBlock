@@ -880,7 +880,7 @@ public class uSkyBlock extends JavaPlugin {
     public PlayerInfo getPlayerInfo(String playerName) {
         PlayerInfo playerInfo = activePlayers.get(playerName);
         if (playerInfo == null) {
-            playerInfo = loadPlayerAndIsland(playerName);
+            playerInfo = loadPlayerInfo(playerName);
             activePlayers.put(playerName, playerInfo);
         }
         return playerInfo;
@@ -899,17 +899,18 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public PlayerInfo loadPlayerData(Player player) {
-        final PlayerInfo pi = loadPlayerAndIsland(player.getName());
+        final PlayerInfo pi = loadPlayerInfo(player.getName());
         if (pi.getHasIsland()) {
             IslandInfo islandInfo = islandLogic.getIslandInfo(pi);
             WorldGuardHandler.protectIsland(player, islandInfo.getLeader(), pi);
+            islandLogic.clearFlatland(player, pi.getIslandLocation(), 200);
         }
         addActivePlayer(player.getName(), pi);
         uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
         return pi;
     }
 
-    private PlayerInfo loadPlayerAndIsland(String playerName) {
+    private PlayerInfo loadPlayerInfo(String playerName) {
         final PlayerInfo playerInfo = new PlayerInfo(playerName);
         activePlayers.put(playerName, playerInfo);
         return playerInfo;
