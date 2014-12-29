@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.command.island;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.SkyBlockMenu;
+import us.talabrek.ultimateskyblock.command.InviteHandler;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;

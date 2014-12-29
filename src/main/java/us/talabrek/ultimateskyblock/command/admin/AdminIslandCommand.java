@@ -97,7 +97,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     }
 
     private void protectIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
-        if (WorldGuardHandler.protectIsland(sender, islandInfo.getLeader(), playerInfo)) {
+        if (WorldGuardHandler.protectIsland(sender, playerInfo)) {
             sender.sendMessage("\u00a7e" + playerInfo.getPlayerName() + "'s island at " + playerInfo.locationForParty() + " has been protected");
         } else {
             sender.sendMessage("\u00a74" + playerInfo.getPlayerName() + "'s island at " + playerInfo.locationForParty() + " was already protected");

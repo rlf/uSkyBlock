@@ -3,15 +3,18 @@ package us.talabrek.ultimateskyblock.island;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -210,7 +213,7 @@ public class IslandInfo {
     }
 
     public void lock(Player player) {
-        WorldGuardHandler.islandLock(player, getLeader());
+        WorldGuardHandler.islandLock(player, name);
         config.set("general.locked", true);
         sendMessageToIslandGroup(player.getName() + " locked the island.");
         if (hasWarp()) {
@@ -222,7 +225,7 @@ public class IslandInfo {
     }
 
     public void unlock(Player player) {
-        WorldGuardHandler.islandUnlock(player, getLeader());
+        WorldGuardHandler.islandUnlock(player, name);
         config.set("general.locked", false);
         sendMessageToIslandGroup(player.getName() + " unlocked the island.");
         save();
@@ -338,6 +341,12 @@ public class IslandInfo {
         return null;
     }
 
+    public Location getIslandLocation() {
+        World world = uSkyBlock.getInstance().getWorld();
+        String[] cords = name.split(",");
+        return new Location(world, Long.parseLong(cords[0], 10), Settings.island_height, Long.parseLong(cords[1], 10));
+    }
+
     @Override
     public String toString() {
         String str = "\u00a7bIsland Info:\n";
@@ -345,7 +354,7 @@ public class IslandInfo {
         str += ChatColor.GRAY + "  - location: " + ChatColor.DARK_AQUA +  name + "\n";
         str += ChatColor.GRAY + "  - warp: " + ChatColor.DARK_AQUA +  hasWarp() + "\n";
         if (hasWarp()) {
-            str += ChatColor.GRAY + "     loc: " + ChatColor.DARK_AQUA +  getWarpLocation() + "\n";
+            str += ChatColor.GRAY + "     loc: " + ChatColor.DARK_AQUA + LocationUtil.asString(getWarpLocation()) + "\n";
         }
         str += ChatColor.GRAY + "  - locked: " + ChatColor.DARK_AQUA +  isLocked() + "\n";
         str += ChatColor.DARK_AQUA + "Party:\n";

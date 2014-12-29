@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.command.InviteHandler;
 
 import java.util.Map;
 

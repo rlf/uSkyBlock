@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command.island;
+package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -83,7 +83,7 @@ public class InviteHandler {
             uuids.remove(uuid);
             player.sendMessage(ChatColor.GREEN + "You have joined an island! Use /island party to see the other members.");
             // TODO: 29/12/2014 - R4zorax: Perhaps these steps should belong somewhere else?
-            addPlayertoParty(player, island);
+            addPlayerToParty(player, island);
             plugin.setRestartCooldown(player);
             plugin.homeTeleport(player);
             plugin.clearPlayerInventory(player);
@@ -97,7 +97,7 @@ public class InviteHandler {
         return waitingInvites.get(island.getName());
     }
 
-    public boolean addPlayertoParty(final Player player, final IslandInfo island) {
+    public boolean addPlayerToParty(final Player player, final IslandInfo island) {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         PlayerInfo leaderInfo = plugin.getPlayerInfo(island.getLeader());
         playerInfo.setJoinParty(leaderInfo.getIslandLocation());

@@ -9,6 +9,7 @@ import java.util.*;
 import org.bukkit.configuration.file.*;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.*;
@@ -293,8 +294,8 @@ public class PlayerInfo implements Serializable {
         str += ChatColor.GRAY + "  - name: " + ChatColor.DARK_AQUA + getPlayerName() + "\n";
         str += ChatColor.GRAY + "  - nick: " + ChatColor.DARK_AQUA + getDisplayName() + "\n";
         str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA +  getHasIsland() + "\n";
-        str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  getHomeLocation() + "\n";
-        str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + getIslandLocation() + "\n";
+        str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  LocationUtil.asString(getHomeLocation()) + "\n";
+        str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + LocationUtil.asString(getIslandLocation()) + "\n";
         // TODO: 28/12/2014 - R4zorax: Some info about challenges?
         return str;
     }

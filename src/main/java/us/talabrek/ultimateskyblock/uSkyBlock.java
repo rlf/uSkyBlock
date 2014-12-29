@@ -551,7 +551,7 @@ public class uSkyBlock extends JavaPlugin {
             pi.setIslandLocation(newLoc);
             pi.setHomeLocation(getSafeHomeLocation(pi));
             islandLogic.createIsland(pi.locationForParty(), player);
-            if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
+            if (!WorldGuardHandler.protectIsland(sender, pi)) {
                 sender.sendMessage("\u00a74Player doesn't have an island or it's already protected!");
             }
             return true;
@@ -902,7 +902,7 @@ public class uSkyBlock extends JavaPlugin {
         final PlayerInfo pi = loadPlayerInfo(player.getName());
         if (pi.getHasIsland()) {
             IslandInfo islandInfo = islandLogic.getIslandInfo(pi);
-            WorldGuardHandler.protectIsland(player, islandInfo.getLeader(), pi);
+            WorldGuardHandler.protectIsland(player, pi);
             islandLogic.clearFlatland(player, pi.getIslandLocation(), 200);
         }
         addActivePlayer(player.getName(), pi);
@@ -1103,7 +1103,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     private void protectWithWorldGuard(CommandSender sender, Player player, PlayerInfo pi) {
-        if (!WorldGuardHandler.protectIsland(player, sender.getName(), pi)) {
+        if (!WorldGuardHandler.protectIsland(player, pi)) {
             sender.sendMessage("Player doesn't have an island or it's already protected!");
         }
     }

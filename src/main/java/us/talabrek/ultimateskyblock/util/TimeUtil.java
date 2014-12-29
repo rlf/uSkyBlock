@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.util;
 
 public enum TimeUtil {;
     private static final long SEC = 1000;
@@ -21,7 +21,7 @@ public enum TimeUtil {;
         if (m > 0) {
             str += " " + m + "m";
         }
-        if (s > 0) {
+        if (s > 0 || str.isEmpty()) {
             str += " " + s + "s";
         }
         return str.trim();
