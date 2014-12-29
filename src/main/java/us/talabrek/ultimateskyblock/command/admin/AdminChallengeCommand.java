@@ -1,11 +1,10 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
-import us.talabrek.ultimateskyblock.command.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.CompositeUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -26,11 +25,11 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, ChallengeCompletion completion) {
                 String challenge = completion.getName();
                 if (completion.getTimesCompleted() > 0) {
-                    sender.sendMessage(ChatColor.RED + "Challenge has already been completed");
+                    sender.sendMessage("\u00a74Challenge has already been completed");
                 } else {
                     playerInfo.completeChallenge(challenge);
                     playerInfo.save();
-                    sender.sendMessage(ChatColor.YELLOW + "challenge: " + challenge + " has been completed for " + playerInfo.getPlayerName());
+                    sender.sendMessage("\u00a7echallenge: " + challenge + " has been completed for " + playerInfo.getPlayerName());
                 }
             }
         });
@@ -40,22 +39,22 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 String challenge = completion.getName();
                 String playerName = pi.getPlayerName();
                 if (completion.getTimesCompleted() == 0) {
-                    sender.sendMessage(ChatColor.RED + "Challenge has never been completed");
+                    sender.sendMessage("\u00a74Challenge has never been completed");
                 } else {
                     pi.resetChallenge(challenge);
                     pi.save();
-                    sender.sendMessage(ChatColor.YELLOW + "challenge: " + challenge + " has been reset for " + playerName);
+                    sender.sendMessage("\u00a7echallenge: " + challenge + " has been reset for " + playerName);
                 }
             }
         });
         add(new AbstractUSBCommand("resetall", null, "resets all challenges for the player") {
             @Override
-            public boolean execute(CommandSender sender, Map<String, Object> data, String... args) {
+            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 PlayerInfo playerInfo = (PlayerInfo) data.get("playerInfo");
                 if (playerInfo != null) {
                     playerInfo.resetAllChallenges();
                     playerInfo.save();
-                    sender.sendMessage(ChatColor.YELLOW + playerInfo.getPlayerName() + " has had all challenges reset.");
+                    sender.sendMessage("\u00a7e" + playerInfo.getPlayerName() + " has had all challenges reset.");
                     return true;
                 }
                 return false;
@@ -65,14 +64,14 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
     }
 
     @Override
-    public boolean execute(CommandSender sender, Map<String, Object> data, String... args) {
+    public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (args.length > 0) {
             PlayerInfo playerInfo = plugin.getPlayerInfo(args[0]);
             if (playerInfo != null) {
                 data.put("playerInfo", playerInfo);
             }
         }
-        return super.execute(sender, data, args);
+        return super.execute(sender, alias, data, args);
     }
 
     private abstract class ChallengeCommand extends AbstractUSBCommand {
@@ -82,7 +81,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
         protected abstract void doExecute(CommandSender sender, PlayerInfo playerInfo, ChallengeCompletion challenge);
 
         @Override
-        public boolean execute(CommandSender sender, Map<String, Object> data, String... args) {
+        public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
             PlayerInfo playerInfo = (PlayerInfo) data.get("playerInfo");
             if (playerInfo != null && args.length > 0) {
                 ChallengeCompletion completion = playerInfo.getChallenge(args[0]);
@@ -90,10 +89,10 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                     doExecute(sender, playerInfo, completion);
                     return true;
                 } else {
-                    sender.sendMessage(ChatColor.RED + "No challenge named " + args[0] + " was found!");
+                    sender.sendMessage("\u00a74No challenge named " + args[0] + " was found!");
                 }
             } else {
-                sender.sendMessage(ChatColor.RED + "No player named " + data.get("player") + " was found!");
+                sender.sendMessage("\u00a74No player named " + data.get("player") + " was found!");
             }
             return false;
         }

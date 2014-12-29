@@ -63,7 +63,7 @@ public class PlayerImporterImpl {
         }
         final USBImporter importer = getImporter(name);
         if (importer == null) {
-            sender.sendMessage(ChatColor.RED + "No importer named " + ChatColor.YELLOW + name + ChatColor.RED + " found");
+            sender.sendMessage("\u00a74No importer named \u00a7e" + name + "\u00a74 found");
             return;
         }
         Bukkit.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
@@ -76,7 +76,7 @@ public class PlayerImporterImpl {
 
     private void doImport(CommandSender sender, USBImporter importer) {
         String msg = "Imported " + importer.importOrphans(plugin, plugin.getDataFolder()) + " orphans";
-        sender.sendMessage(ChatColor.YELLOW + msg);
+        sender.sendMessage("\u00a7e" + msg);
         plugin.log(Level.INFO, msg);
         countSuccess = 0;
         countFailed = 0;
@@ -116,11 +116,11 @@ public class PlayerImporterImpl {
                 countSuccess += count;
                 countFailed += failed;
                 float progress = 100f*(countSuccess+countFailed)/files.length;
-                sender.sendMessage(String.format(ChatColor.YELLOW + "Progress: %02f%% (%d/%d - success:%d, failed:%d)", progress, countFailed+countSuccess, files.length, countSuccess, countFailed));
+                sender.sendMessage(String.format("\u00a7eProgress: %02f%% (%d/%d - success:%d, failed:%d)", progress, countFailed+countSuccess, files.length, countSuccess, countFailed));
                 if (offset+chunkSize < files.length) {
                     doImport(sender, importer, files, offset + chunkSize, chunkSize, delay);
                 } else {
-                    sender.sendMessage(ChatColor.YELLOW + "Converted " + countSuccess + "/" + (countSuccess + countFailed) + " players");
+                    sender.sendMessage("\u00a7eConverted " + countSuccess + "/" + (countSuccess + countFailed) + " players");
                 }
             }
         }, delay);

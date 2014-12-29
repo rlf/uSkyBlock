@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +20,7 @@ public class GotoIslandCommand extends AbstractPlayerInfoCommand {
     @Override
     protected void doExecute(CommandSender sender, PlayerInfo playerInfo) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Only supported for players");
+            sender.sendMessage("\u00a74Only supported for players");
         }
         Player player = (Player) sender;
         if (playerInfo.getHomeLocation() != null) {
@@ -33,6 +33,6 @@ public class GotoIslandCommand extends AbstractPlayerInfoCommand {
             player.teleport(playerInfo.getIslandLocation());
             return;
         }
-        sender.sendMessage(ChatColor.RED + "That player does not have an island!");
+        sender.sendMessage("\u00a74That player does not have an island!");
     }
 }

@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
@@ -53,8 +54,8 @@ public class IslandInfo {
         config.set("general.warpLocationZ", 0);
         config.set("general.warpActive", false);
         config.set("log.logPos", 1);
-        config.set("log.1", "\u00a7d[skyblock] The island has been created.");
         setupPartyLeader(leader);
+        sendMessageToIslandGroup("The island has been created.");
     }
 
     public void setupPartyLeader(final String leader) {
@@ -199,6 +200,10 @@ public class IslandInfo {
         return config.getBoolean("general.locked");
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setWarpActive(boolean active) {
         config.set("general.warpActive", active);
         save();
@@ -210,7 +215,7 @@ public class IslandInfo {
         sendMessageToIslandGroup(player.getName() + " locked the island.");
         if (hasWarp()) {
             config.set("general.warpActive", false);
-            player.sendMessage(ChatColor.RED + "Since your island is locked, your incoming warp has been deactivated.");
+            player.sendMessage("\u00a74Since your island is locked, your incoming warp has been deactivated.");
             sendMessageToIslandGroup(player.getName() + " deactivated the island warp.");
         }
         save();
@@ -267,6 +272,14 @@ public class IslandInfo {
 
     public List<String> getBans() {
         return config.getStringList("banned.list");
+    }
+
+    public void removeMember(PlayerInfo member) {
+        WorldGuardHandler.removePlayerFromRegion(getLeader(), member.getPlayerName());
+        member.setHomeLocation(null);
+        member.setLeaveParty();
+        member.save();
+        removeMember(member.getPlayerName());
     }
 
     public void removeMember(String playername) {
@@ -327,7 +340,7 @@ public class IslandInfo {
 
     @Override
     public String toString() {
-        String str = ChatColor.AQUA + "Island Info:\n";
+        String str = "\u00a7bIsland Info:\n";
         str += ChatColor.GRAY + "  - level: " + ChatColor.DARK_AQUA + String.format("%5.2f", getLevel()) +"\n";
         str += ChatColor.GRAY + "  - location: " + ChatColor.DARK_AQUA +  name + "\n";
         str += ChatColor.GRAY + "  - warp: " + ChatColor.DARK_AQUA +  hasWarp() + "\n";

@@ -1,8 +1,7 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.command.AbstractUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -17,7 +16,7 @@ public abstract class AbstractPlayerInfoCommand extends AbstractUSBCommand {
     }
     protected abstract void doExecute(CommandSender sender, PlayerInfo playerInfo);
     @Override
-    public boolean execute(CommandSender sender, Map<String, Object> data, String... args) {
+    public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (args.length > 0) {
             String playerName = args[0];
             PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(playerName);
@@ -26,7 +25,7 @@ public abstract class AbstractPlayerInfoCommand extends AbstractUSBCommand {
                 doExecute(sender, playerInfo);
                 return true;
             }
-            sender.sendMessage(ChatColor.YELLOW + "Invalid player " + args[0] + " supplied.");
+            sender.sendMessage("\u00a7eInvalid player " + args[0] + " supplied.");
         }
         return false;
     }

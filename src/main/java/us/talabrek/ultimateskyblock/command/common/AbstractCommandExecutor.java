@@ -1,14 +1,10 @@
-package us.talabrek.ultimateskyblock.command;
+package us.talabrek.ultimateskyblock.command.common;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.command.completion.AbstractTabCompleter;
-import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Command delegator.
@@ -22,6 +18,6 @@ public class AbstractCommandExecutor extends CompositeUSBCommand implements Comm
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String alias, String[] args) {
-        return super.execute(commandSender, new HashMap<String, Object>(), args);
+        return super.execute(commandSender, alias, new HashMap<String, Object>(), args);
     }
 }

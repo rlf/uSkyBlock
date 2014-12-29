@@ -1,8 +1,9 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.command.AbstractCommandExecutor;
+import us.talabrek.ultimateskyblock.command.admin.*;
+import us.talabrek.ultimateskyblock.command.common.AbstractCommandExecutor;
 import us.talabrek.ultimateskyblock.command.completion.AllPlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.BiomeTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.ChallengeTabCompleter;

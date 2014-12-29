@@ -25,9 +25,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import us.talabrek.ultimateskyblock.admin.AdminCommand;
+import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
+import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.event.MobEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
@@ -35,7 +36,6 @@ import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.PlayerImporterImpl;
-import us.talabrek.ultimateskyblock.island.IslandCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
@@ -49,6 +49,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
@@ -82,9 +83,9 @@ public class uSkyBlock extends JavaPlugin {
     public File directoryPlayers;
     public File directoryIslands;
     public File[] schemFile;
-    Map<String, Long> infoCooldown;
-    Map<String, Long> restartCooldown;
-    Map<String, Long> biomeCooldown;
+    Map<UUID, Long> infoCooldown;
+    Map<UUID, Long> restartCooldown;
+    Map<UUID, Long> biomeCooldown;
     private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
     public boolean purgeActive;
 
@@ -184,7 +185,7 @@ public class uSkyBlock extends JavaPlugin {
         this.notifier = new PlayerNotifier(getConfig());
 
         registerEvents();
-        this.getCommand("island").setExecutor(new IslandCommand());
+        this.getCommand("island").setExecutor(new IslandCommand(this, menu));
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
         this.getCommand("usb").setExecutor(new AdminCommand(instance));
 
@@ -465,12 +466,12 @@ public class uSkyBlock extends JavaPlugin {
             clearPlayerInventory(player);
             clearEntitiesNearPlayer(player);
             setRestartCooldown(player);
-            player.sendMessage(ChatColor.RED + "Close your eyes!");
+            player.sendMessage("\u00a74Close your eyes!");
             getServer().getScheduler().runTaskLater(this, new Runnable() {
                 @Override
                 public void run() {
                     player.performCommand("spawn");
-                    player.sendMessage(ChatColor.YELLOW + "Warping you to your new island!" + ChatColor.GREEN + " Get ready!");
+                    player.sendMessage("\u00a7eWarping you to your new island!" + ChatColor.GREEN + " Get ready!");
                     getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
                         @Override
                         public void run() {
@@ -542,7 +543,7 @@ public class uSkyBlock extends JavaPlugin {
         }
         if (newLoc != null) {
             if (newLoc.equals(pi.getIslandLocation())) {
-                sender.sendMessage(ChatColor.RED + "Player is already assigned to this island!");
+                sender.sendMessage("\u00a74Player is already assigned to this island!");
                 return true;
             }
             pi.setHomeLocation(null);
@@ -551,7 +552,7 @@ public class uSkyBlock extends JavaPlugin {
             pi.setHomeLocation(getSafeHomeLocation(pi));
             islandLogic.createIsland(pi.locationForParty(), player);
             if (!WorldGuardHandler.protectIsland(sender, player, pi)) {
-                sender.sendMessage(ChatColor.RED + "Player doesn't have an island or it's already protected!");
+                sender.sendMessage("\u00a74Player doesn't have an island or it's already protected!");
             }
             return true;
         }
@@ -643,7 +644,7 @@ public class uSkyBlock extends JavaPlugin {
         }
         if (homeSweetHome == null) {
             player.performCommand("spawn");
-            player.sendMessage(ChatColor.RED + "You are not part of an island. Returning you the spawn area!");
+            player.sendMessage("\u00a74You are not part of an island. Returning you the spawn area!");
             return true;
         }
         removeCreatures(homeSweetHome);
@@ -655,12 +656,12 @@ public class uSkyBlock extends JavaPlugin {
     public boolean warpTeleport(final Player player, final PlayerInfo pi) {
         Location warpSweetWarp = null;
         if (pi == null) {
-            player.sendMessage(ChatColor.RED + "That player does not exist!");
+            player.sendMessage("\u00a74That player does not exist!");
             return true;
         }
         warpSweetWarp = getSafeWarpLocation(pi);
         if (warpSweetWarp == null) {
-            player.sendMessage(ChatColor.RED + "Unable to warp you to that player's island!");
+            player.sendMessage("\u00a74Unable to warp you to that player's island!");
             return true;
         }
         player.teleport(warpSweetWarp);
@@ -670,7 +671,7 @@ public class uSkyBlock extends JavaPlugin {
 
     public boolean homeSet(final Player player) {
         if (!player.getWorld().getName().equalsIgnoreCase(getSkyBlockWorld().getName())) {
-            player.sendMessage(ChatColor.RED + "You must be closer to your island to set your skyblock home!");
+            player.sendMessage("\u00a74You must be closer to your island to set your skyblock home!");
             return true;
         }
         if (this.playerIsOnIsland(player)) {
@@ -680,13 +681,13 @@ public class uSkyBlock extends JavaPlugin {
             player.sendMessage(ChatColor.GREEN + "Your skyblock home has been set to your current location.");
             return true;
         }
-        player.sendMessage(ChatColor.RED + "You must be closer to your island to set your skyblock home!");
+        player.sendMessage("\u00a74You must be closer to your island to set your skyblock home!");
         return true;
     }
 
     public boolean warpSet(final Player player) {
         if (!player.getWorld().getName().equalsIgnoreCase(getSkyBlockWorld().getName())) {
-            player.sendMessage(ChatColor.RED + "You must be closer to your island to set your warp!");
+            player.sendMessage("\u00a74You must be closer to your island to set your warp!");
             return true;
         }
         if (this.playerIsOnIsland(player)) {
@@ -696,7 +697,7 @@ public class uSkyBlock extends JavaPlugin {
             player.sendMessage(ChatColor.GREEN + "Your skyblock incoming warp has been set to your current location.");
             return true;
         }
-        player.sendMessage(ChatColor.RED + "You must be closer to your island to set your warp!");
+        player.sendMessage("\u00a74You must be closer to your island to set your warp!");
         return true;
     }
 
@@ -769,64 +770,64 @@ public class uSkyBlock extends JavaPlugin {
     public boolean onInfoCooldown(final Player player) {
         return !player.hasPermission("usb.exempt.infoCooldown")
                 && !player.hasPermission("usb.mod.bypasscooldowns")
-                && infoCooldown.containsKey(player.getName())
-                && infoCooldown.get(player.getName()) > System.currentTimeMillis();
+                && infoCooldown.containsKey(player.getUniqueId())
+                && infoCooldown.get(player.getUniqueId()) > System.currentTimeMillis();
     }
 
     public boolean onBiomeCooldown(final Player player) {
         return !player.hasPermission("usb.exempt.biomeCooldown")
                 && !player.hasPermission("usb.mod.bypasscooldowns")
-                && biomeCooldown.containsKey(player.getName())
-                && biomeCooldown.get(player.getName()) > System.currentTimeMillis();
+                && biomeCooldown.containsKey(player.getUniqueId())
+                && biomeCooldown.get(player.getUniqueId()) > System.currentTimeMillis();
     }
 
     public boolean onRestartCooldown(final Player player) {
         return !player.hasPermission("usb.exempt.restartCooldown")
                 && !player.hasPermission("usb.mod.bypasscooldowns")
-                && restartCooldown.containsKey(player.getName())
-                && this.restartCooldown.get(player.getName()) > System.currentTimeMillis();
+                && restartCooldown.containsKey(player.getUniqueId())
+                && this.restartCooldown.get(player.getUniqueId()) > System.currentTimeMillis();
     }
 
     public long getInfoCooldownTime(final Player player) {
-        if (!infoCooldown.containsKey(player.getName())) {
+        if (!infoCooldown.containsKey(player.getUniqueId())) {
             return 0L;
         }
-        if (infoCooldown.get(player.getName()) > System.currentTimeMillis()) {
-            return infoCooldown.get(player.getName()) - System.currentTimeMillis();
+        if (infoCooldown.get(player.getUniqueId()) > System.currentTimeMillis()) {
+            return infoCooldown.get(player.getUniqueId()) - System.currentTimeMillis();
         }
         return 0L;
     }
 
     public long getBiomeCooldownTime(final Player player) {
-        if (!biomeCooldown.containsKey(player.getName())) {
+        if (!biomeCooldown.containsKey(player.getUniqueId())) {
             return 0L;
         }
-        if (biomeCooldown.get(player.getName()) > System.currentTimeMillis()) {
-            return biomeCooldown.get(player.getName()) - System.currentTimeMillis();
+        if (biomeCooldown.get(player.getUniqueId()) > System.currentTimeMillis()) {
+            return biomeCooldown.get(player.getUniqueId()) - System.currentTimeMillis();
         }
         return 0L;
     }
 
     public long getRestartCooldownTime(final Player player) {
-        if (!this.restartCooldown.containsKey(player.getName())) {
+        if (!this.restartCooldown.containsKey(player.getUniqueId())) {
             return 0L;
         }
-        if (this.restartCooldown.get(player.getName()) > System.currentTimeMillis()) {
-            return this.restartCooldown.get(player.getName()) - System.currentTimeMillis();
+        if (this.restartCooldown.get(player.getUniqueId()) > System.currentTimeMillis()) {
+            return this.restartCooldown.get(player.getUniqueId()) - System.currentTimeMillis();
         }
         return 0L;
     }
 
     public void setInfoCooldown(final Player player) {
-        infoCooldown.put(player.getName(), System.currentTimeMillis() + Settings.general_cooldownInfo * 1000);
+        infoCooldown.put(player.getUniqueId(), System.currentTimeMillis() + Settings.general_cooldownInfo * 1000);
     }
 
     public void setBiomeCooldown(final Player player) {
-        biomeCooldown.put(player.getName(), System.currentTimeMillis() + Settings.general_biomeChange * 1000);
+        biomeCooldown.put(player.getUniqueId(), System.currentTimeMillis() + Settings.general_biomeChange * 1000);
     }
 
     public void setRestartCooldown(final Player player) {
-        this.restartCooldown.put(player.getName(), System.currentTimeMillis() + Settings.general_cooldownRestart * 1000);
+        this.restartCooldown.put(player.getUniqueId(), System.currentTimeMillis() + Settings.general_cooldownRestart * 1000);
     }
 
     public File[] getSchemFile() {
@@ -1072,9 +1073,9 @@ public class uSkyBlock extends JavaPlugin {
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", skyBlockWorld)) {
             biomeList = biomeList + "SKY, ";
         }
-        player.sendMessage(ChatColor.YELLOW + "You have access to the following Biomes:");
+        player.sendMessage("\u00a7eYou have access to the following Biomes:");
         player.sendMessage(ChatColor.GREEN + biomeList.substring(0, biomeList.length() - 2));
-        player.sendMessage(ChatColor.YELLOW + "Use /island biome <biomename> to change your biome. You must wait " + Settings.general_biomeChange / 60 + " minutes between each biome change.");
+        player.sendMessage("\u00a7eUse /island biome <biomename> to change your biome. You must wait " + Settings.general_biomeChange / 60 + " minutes between each biome change.");
     }
 
     public boolean createIsland(final CommandSender sender, final PlayerInfo pi) {

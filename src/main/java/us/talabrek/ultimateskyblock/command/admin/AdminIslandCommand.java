@@ -1,10 +1,10 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.command.CompositeUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.command.AbstractUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -43,7 +43,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
         });
         add(new AbstractUSBCommand("protectall", "usb.mod.protectall", "protects all islands (time consuming)") {
             @Override
-            public boolean execute(CommandSender sender, Map<String, Object> data, String... args) {
+            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 protectAll(sender);
                 return true;
             }
@@ -60,7 +60,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 if (args.length > 0) {
                     setBiome(sender, playerInfo, islandInfo, args[0]);
                 } else {
-                    sender.sendMessage(ChatColor.RED + "No biome supplied!");
+                    sender.sendMessage("\u00a74No biome supplied!");
                 }
             }
         });
@@ -76,20 +76,20 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     private void setBiome(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String biome) {
         if (uSkyBlock.getInstance().setBiome(playerInfo.getIslandLocation(), biome)) {
             islandInfo.setBiome(biome);
-            sender.sendMessage(ChatColor.YELLOW + playerInfo.getPlayerName() + " has had their biome changed to " + biome + ".");
+            sender.sendMessage("\u00a7e" + playerInfo.getPlayerName() + " has had their biome changed to " + biome + ".");
         } else {
-            sender.sendMessage(ChatColor.YELLOW + playerInfo.getPlayerName() + " has had their biome changed to OCEAN.");
+            sender.sendMessage("\u00a7e" + playerInfo.getPlayerName() + " has had their biome changed to OCEAN.");
         }
         sender.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");
     }
 
     private void protectAll(CommandSender sender) {
-        sender.sendMessage(ChatColor.YELLOW + "Oups, that was embarrassing - protectall is currently out of order");
+        sender.sendMessage("\u00a7eOups, that was embarrassing - protectall is currently out of order");
     }
 
     private void deleteIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
         if (playerInfo.getIslandLocation() != null) {
-            sender.sendMessage(ChatColor.YELLOW + "Removing " + playerInfo.getPlayerName() + "'s island.");
+            sender.sendMessage("\u00a7eRemoving " + playerInfo.getPlayerName() + "'s island.");
             uSkyBlock.getInstance().deletePlayerIsland(playerInfo.getPlayerName());
         } else {
             sender.sendMessage("Error: That player does not have an island!");
@@ -98,9 +98,9 @@ public class AdminIslandCommand extends CompositeUSBCommand {
 
     private void protectIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
         if (WorldGuardHandler.protectIsland(sender, islandInfo.getLeader(), playerInfo)) {
-            sender.sendMessage(ChatColor.YELLOW + playerInfo.getPlayerName() + "'s island at " + playerInfo.locationForParty() + " has been protected");
+            sender.sendMessage("\u00a7e" + playerInfo.getPlayerName() + "'s island at " + playerInfo.locationForParty() + " has been protected");
         } else {
-            sender.sendMessage(ChatColor.RED + playerInfo.getPlayerName() + "'s island at " + playerInfo.locationForParty() + " was already protected");
+            sender.sendMessage("\u00a74" + playerInfo.getPlayerName() + "'s island at " + playerInfo.locationForParty() + " was already protected");
         }
     }
 }

@@ -1,8 +1,8 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.command.AbstractUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.imports.impl.ImportTabCompleter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -26,7 +26,7 @@ public class ImportCommand extends AbstractUSBCommand {
     }
 
     @Override
-    public boolean execute(CommandSender sender, Map<String,Object> data, String... args) {
+    public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (args.length == 1) {
             uSkyBlock.getInstance().getPlayerImporter().importUSB(sender, args[args.length - 1]);
             return true;

@@ -93,10 +93,10 @@ public class WorldGuardHandler {
         try {
             if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) {
                 getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(player + "Island").setFlag(DefaultFlag.ENTRY, DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "deny"));
-                sender.sendMessage(ChatColor.YELLOW + "Your island is now locked. Only your party members may enter.");
+                sender.sendMessage("\u00a7eYour island is now locked. Only your party members may enter.");
                 getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
             } else {
-                sender.sendMessage(ChatColor.RED + "You must be the party leader to lock your island!");
+                sender.sendMessage("\u00a74You must be the party leader to lock your island!");
             }
         } catch (Exception ex) {
             System.out.print("ERROR: Failed to lock " + player + "'s Island (" + sender.getName() + ")");
@@ -108,10 +108,10 @@ public class WorldGuardHandler {
         try {
             if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(player + "Island")) {
                 getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(player + "Island").setFlag(DefaultFlag.ENTRY, DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "allow"));
-                sender.sendMessage(ChatColor.YELLOW + "Your island is unlocked and anyone may enter, however only you and your party members may build or remove blocks.");
+                sender.sendMessage("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks.");
                 getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
             } else {
-                sender.sendMessage(ChatColor.RED + "You must be the party leader to unlock your island!");
+                sender.sendMessage("\u00a74You must be the party leader to unlock your island!");
             }
         } catch (Exception ex) {
             System.out.print("ERROR: Failed to unlock " + player + "'s Island (" + sender.getName() + ")");

@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command;
+package us.talabrek.ultimateskyblock.command.common;
 
 import java.util.Comparator;
 

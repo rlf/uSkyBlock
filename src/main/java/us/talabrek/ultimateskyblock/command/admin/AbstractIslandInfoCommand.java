@@ -1,6 +1,5 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -25,8 +24,8 @@ public abstract class AbstractIslandInfoCommand extends AbstractPlayerInfoComman
     }
 
     @Override
-    public boolean execute(CommandSender sender, Map<String, Object> data, String... args) {
-        if (super.execute(sender, data, args)) {
+    public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
+        if (super.execute(sender, alias, data, args)) {
             PlayerInfo playerInfo = (PlayerInfo) data.get("playerInfo");
             if (playerInfo != null) {
                 IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(playerInfo);
@@ -36,7 +35,7 @@ public abstract class AbstractIslandInfoCommand extends AbstractPlayerInfoComman
                     doExecute(sender, playerInfo, islandInfo, subArgs);
                     return true;
                 } else {
-                    sender.sendMessage(ChatColor.YELLOW + "Player " + playerInfo.getPlayerName() + " has no island!");
+                    sender.sendMessage("\u00a7ePlayer " + playerInfo.getPlayerName() + " has no island!");
                 }
             }
         }

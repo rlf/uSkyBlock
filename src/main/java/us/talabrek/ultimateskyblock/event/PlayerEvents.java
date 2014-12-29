@@ -191,7 +191,7 @@ public class PlayerEvents implements Listener {
                 && player.getItemInHand().getType() == Material.BUCKET
                 && event.getClickedBlock().getType() == Material.OBSIDIAN
                 && !plugin.testForObsidian(event.getClickedBlock())) {
-            player.sendMessage(ChatColor.YELLOW + "Changing your obsidian back into lava. Be careful!");
+            player.sendMessage("\u00a7eChanging your obsidian back into lava. Be careful!");
             event.getClickedBlock().setType(Material.AIR);
             player.getInventory().removeItem(new ItemStack[]{new ItemStack(Material.BUCKET, 1)});
             player.getInventory().addItem(new ItemStack[]{new ItemStack(Material.LAVA_BUCKET, 1)});

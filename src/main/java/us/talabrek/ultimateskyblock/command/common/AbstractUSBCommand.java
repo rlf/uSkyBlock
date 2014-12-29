@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command;
+package us.talabrek.ultimateskyblock.command.common;
 
 import org.bukkit.command.TabCompleter;
 
@@ -6,7 +6,7 @@ import org.bukkit.command.TabCompleter;
  * Convenience implementation of the USBCommand
  */
 public abstract class AbstractUSBCommand implements USBCommand {
-    private final String name;
+    private final String[] aliases;
     private final String permission;
     private final String description;
     private final String usage;
@@ -14,7 +14,7 @@ public abstract class AbstractUSBCommand implements USBCommand {
     private CompositeUSBCommand parent;
 
     public AbstractUSBCommand(String name, String permission, String params, String description, String usage) {
-        this.name = name;
+        this.aliases = name.split("\\|");
         this.permission = permission;
         this.description = description;
         this.usage = usage;
@@ -35,7 +35,11 @@ public abstract class AbstractUSBCommand implements USBCommand {
 
     @Override
     public String getName() {
-        return name;
+        return aliases[0];
+    }
+
+    public String[] getAliases() {
+        return aliases;
     }
 
     @Override

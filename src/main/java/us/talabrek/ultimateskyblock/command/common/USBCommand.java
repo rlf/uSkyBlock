@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command;
+package us.talabrek.ultimateskyblock.command.common;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -39,9 +39,15 @@ public interface USBCommand {
     String[] getParams();
 
     /**
+     * Returns aliases for the command.
+     * Can be empty, cannot be <code>null</code>.
+     */
+    String[] getAliases();
+
+    /**
      * Executes the command.
      */
-    boolean execute(CommandSender sender, Map<String, Object> data, String... args);
+    boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args);
 
     /**
      * Optional TabCompleter to override the default ones.

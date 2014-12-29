@@ -1,9 +1,8 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.command.AbstractUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
@@ -17,10 +16,10 @@ public class ReloadCommand extends AbstractUSBCommand {
     }
 
     @Override
-    public boolean execute(CommandSender sender, Map<String,Object> data, String... args) {
+    public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         uSkyBlock.getInstance().reloadConfig();
         Settings.loadPluginConfig(uSkyBlock.getInstance().getConfig());
-        sender.sendMessage(ChatColor.YELLOW + "Configuration reloaded from file.");
+        sender.sendMessage("\u00a7eConfiguration reloaded from file.");
         return true;
     }
 }

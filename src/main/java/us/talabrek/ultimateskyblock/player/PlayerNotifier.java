@@ -29,7 +29,7 @@ public class PlayerNotifier {
             if (now >= last + maxSpam) {
                 lastMessage.put(uuid, message);
                 lastTime.put(uuid, now);
-                player.sendMessage(ChatColor.YELLOW + message);
+                player.sendMessage("\u00a7e" + message);
             }
         }
     }

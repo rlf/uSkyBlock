@@ -289,7 +289,7 @@ public class PlayerInfo implements Serializable {
 
     @Override
     public String toString() {
-        String str = ChatColor.AQUA + "Player Info:\n";
+        String str = "\u00a7bPlayer Info:\n";
         str += ChatColor.GRAY + "  - name: " + ChatColor.DARK_AQUA + getPlayerName() + "\n";
         str += ChatColor.GRAY + "  - nick: " + ChatColor.DARK_AQUA + getDisplayName() + "\n";
         str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA +  getHasIsland() + "\n";

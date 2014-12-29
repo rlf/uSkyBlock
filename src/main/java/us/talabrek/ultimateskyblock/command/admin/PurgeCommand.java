@@ -1,10 +1,9 @@
-package us.talabrek.ultimateskyblock.admin;
+package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.command.AbstractUSBCommand;
+import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -27,14 +26,14 @@ public class PurgeCommand extends AbstractUSBCommand {
     }
 
     @Override
-    public boolean execute(final CommandSender sender, Map<String, Object> data, String... args) {
+    public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (plugin.isPurgeActive()) {
-            sender.sendMessage(ChatColor.RED + "A purge is already running, please wait for it to finish!");
+            sender.sendMessage("\u00a74A purge is already running, please wait for it to finish!");
             return true;
         }
         plugin.activatePurge();
         final int time = Integer.parseInt(args[1], 10) * 24;
-        sender.sendMessage(ChatColor.YELLOW + "Marking all islands inactive for more than " + args[1] + " days.");
+        sender.sendMessage("\u00a7eMarking all islands inactive for more than " + args[1] + " days.");
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @SuppressWarnings("deprecation")
             @Override

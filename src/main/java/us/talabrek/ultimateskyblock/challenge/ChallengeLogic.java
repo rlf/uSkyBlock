@@ -83,38 +83,38 @@ public class ChallengeLogic {
         Challenge challenge = getChallenge(challengeName);
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (!challenge.getRank().isAvailable(pi)) {
-            player.sendMessage(ChatColor.RED + "You have not unlocked this challenge yet!");
+            player.sendMessage("\u00a74You have not unlocked this challenge yet!");
             return false;
         }
         if (!pi.challengeExists(challengeName)) {
-            player.sendMessage(ChatColor.RED + "Unknown challenge name (check spelling)!");
+            player.sendMessage("\u00a74Unknown challenge name (check spelling)!");
             return false;
         }
         if (completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
-            player.sendMessage(ChatColor.RED + "The " + challengeName + " challenge is not repeatable!");
+            player.sendMessage("\u00a74The " + challengeName + " challenge is not repeatable!");
             return false;
         }
         if (challenge.getType() == Challenge.Type.PLAYER) {
             if (!tryComplete(player, challengeName, "onPlayer")) {
-                player.sendMessage(ChatColor.RED + challenge.getDescription());
-                player.sendMessage(ChatColor.RED + "You don't have enough of the required item(s)!");
+                player.sendMessage("\u00a74" + challenge.getDescription());
+                player.sendMessage("\u00a74You don't have enough of the required item(s)!");
                 return false;
             }
             return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND) {
             if (!skyBlock.playerIsOnIsland(player)) {
-                player.sendMessage(ChatColor.RED + "You must be on your island to do that!");
+                player.sendMessage("\u00a74You must be on your island to do that!");
                 return false;
             }
             if (!tryComplete(player, challengeName, "onIsland")) {
-                player.sendMessage(ChatColor.RED + challenge.getDescription());
-                player.sendMessage(ChatColor.RED + "You must be standing within " + challenge.getRadius() + " blocks of all required items.");
+                player.sendMessage("\u00a74" + challenge.getDescription());
+                player.sendMessage("\u00a74You must be standing within " + challenge.getRadius() + " blocks of all required items.");
                 return false;
             }
             return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND_LEVEL) {
             if (!tryCompleteIslandLevel(player, challenge)) {
-                player.sendMessage(ChatColor.RED + "Your island must be level " + challenge.getRequiredLevel() + " to complete this challenge!");
+                player.sendMessage("\u00a74Your island must be level " + challenge.getRequiredLevel() + " to complete this challenge!");
             }
             return true;
         }
@@ -152,7 +152,7 @@ public class ChallengeLogic {
         } else if (type.equalsIgnoreCase("onIsland")) {
             return tryCompleteOnIsland(player, challenge);
         } else {
-            player.sendMessage(ChatColor.RED + "Unknown type of challenge: " + type);
+            player.sendMessage("\u00a74Unknown type of challenge: " + type);
         }
         return true;
     }
@@ -188,17 +188,17 @@ public class ChallengeLogic {
             int diffSpecific = item.getAmount() - blockCount[(item.getTypeId() << 8) + (item.getDurability() & 0xff)];
             int diffGeneral = item.getAmount() - baseBlocks[item.getTypeId()];
             if (item.getDurability() != 0 && diffSpecific > 0) {
-                sb.append(" " + ChatColor.RED + diffSpecific
-                        + " " + ChatColor.AQUA + VaultHandler.getItemName(item));
+                sb.append(" \u00a74" + diffSpecific
+                        + " \u00a7b" + VaultHandler.getItemName(item));
                 hasAll = false;
             } if (diffGeneral > 0) {
-                sb.append(" " + ChatColor.RED + diffGeneral
-                        + " " + ChatColor.AQUA + VaultHandler.getItemName(item));
+                sb.append(" \u00a74" + diffGeneral
+                        + " \u00a7b" + VaultHandler.getItemName(item));
                 hasAll = false;
             }
         }
         if (!hasAll) {
-            player.sendMessage(ChatColor.YELLOW + "Still the following blocks short:" + sb.toString());
+            player.sendMessage("\u00a7eStill the following blocks short:" + sb.toString());
         }
         return hasAll;
     }
@@ -225,8 +225,8 @@ public class ChallengeLogic {
             for (ItemStack required : requiredItems) {
                 required.setItemMeta(null);
                 if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
-                    sb.append(" " + ChatColor.RED + (required.getAmount() - getCountOf(player.getInventory(), required))
-                            + " " + ChatColor.AQUA + VaultHandler.getItemName(required));
+                    sb.append(" \u00a74" + (required.getAmount() - getCountOf(player.getInventory(), required))
+                            + " \u00a7b" + VaultHandler.getItemName(required));
                     hasAll = false;
                 }
             }
@@ -237,7 +237,7 @@ public class ChallengeLogic {
                 giveReward(player, challenge);
                 return true;
             } else {
-                player.sendMessage(ChatColor.YELLOW + "You are the following items short:" + sb.toString());
+                player.sendMessage("\u00a7eYou are the following items short:" + sb.toString());
             }
         }
         return true;
@@ -296,9 +296,9 @@ public class ChallengeLogic {
         if (defaults.broadcastCompletion && isFirstCompletion) {
             Bukkit.getServer().broadcastMessage(config.getString("broadcastText") + player.getName() + " has completed the " + challengeName + " challenge!");
         }
-        player.sendMessage(ChatColor.YELLOW + "Item reward(s): " + ChatColor.WHITE + reward.getRewardText());
-        player.sendMessage(ChatColor.YELLOW + "Exp reward: " + ChatColor.WHITE + reward.getXpReward());
-        player.sendMessage(ChatColor.YELLOW + "Currency reward: " + ChatColor.WHITE + this.DECIMAL_FORMAT.format(reward.getCurrencyReward() * rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a (+" + this.DECIMAL_FORMAT.format((rewBonus - 1.0) * 100.0) + "%)");
+        player.sendMessage("\u00a7eItem reward(s): " + ChatColor.WHITE + reward.getRewardText());
+        player.sendMessage("\u00a7eExp reward: " + ChatColor.WHITE + reward.getXpReward());
+        player.sendMessage("\u00a7eCurrency reward: " + ChatColor.WHITE + this.DECIMAL_FORMAT.format(reward.getCurrencyReward() * rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a (+" + this.DECIMAL_FORMAT.format((rewBonus - 1.0) * 100.0) + "%)");
         if (reward.getPermissionReward() != null) {
             for (String perm : reward.getPermissionReward().split(" ")) {
                 if (!VaultHandler.checkPerm(player, perm, player.getWorld())) {

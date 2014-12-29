@@ -88,9 +88,9 @@ public class IslandLogic {
     private void displayTopTen(final CommandSender sender) {
         int i = 1;
         int playerrank = 0;
-        sender.sendMessage(ChatColor.YELLOW + "Displaying the top 10 islands:");
+        sender.sendMessage("\u00a7eDisplaying the top 10 islands:");
         if (top == null || top.isEmpty()) {
-            sender.sendMessage(ChatColor.RED + "Top ten list is empty! (perhaps the generation failed?)");
+            sender.sendMessage("\u00a74Top ten list is empty! (perhaps the generation failed?)");
         }
         for (final String playerName : top.keySet()) {
             if (i <= 10) {
@@ -102,7 +102,7 @@ public class IslandLogic {
             ++i;
         }
         if (playerrank > 0) {
-            sender.sendMessage(ChatColor.YELLOW + "Your rank is: " + ChatColor.WHITE + playerrank);
+            sender.sendMessage("\u00a7eYour rank is: " + ChatColor.WHITE + playerrank);
         }
     }
 
