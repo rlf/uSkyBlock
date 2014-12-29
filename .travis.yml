@@ -8,9 +8,9 @@ env:
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
 after_success:
-  - 'REPO_URL=https://api.github.com/repos/rlf/uSkyBlock/releases'
+  - 'REPO_URI=repos/rlf/uSkyBlock/releases'
   - 'RELEASEID=814169'
   - 'ARTIFACT=uSkyBlock.jar'
-  - 'ASSETID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "${REPO_URL}/${RELEASEID}/assets" | jq ".[0].id")'
-  - 'curl -XDELETE -s -H "Authorization: token ${GITHUB_TOKEN}" "${REPO_URL}/assets/${ASSETID}"'
-  - 'curl -XPOST -s -H "Authorization: token ${GITHUB_TOKEN}" -H "Content-Type: application/octet-stream" --data-binary @./target/${ARTIFACT} "${REPO_URL}/${ASSETID}/assets?name=${ARTIFACT}"'
+  - 'ASSETID=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/${REPO_URI}/${RELEASEID}/assets" | jq ".[0].id")'
+  - 'curl -XDELETE -s -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/${REPO_URI}/assets/${ASSETID}"'
+  - 'curl -XPOST -s -H "Authorization: token ${GITHUB_TOKEN}" -H "Content-Type: application/octet-stream" --data-binary @target/${ARTIFACT} "https://uploads.github.com/${REPO_URI}/814169/assets?name=${ARTIFACT}"'
