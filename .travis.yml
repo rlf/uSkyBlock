@@ -1,9 +1,7 @@
 language: java
-jdk:
-- oraclejdk7
 cache:
   directories:
-  - "$HOME/.m2"
+    - "$HOME/.m2"
 env:
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
@@ -14,4 +12,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    all_branches: true
+    branch: master
