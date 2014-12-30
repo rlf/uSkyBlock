@@ -4,7 +4,6 @@ import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldguard.protection.managers.RegionManager;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -31,7 +30,7 @@ import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
-import us.talabrek.ultimateskyblock.event.MobEvents;
+import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
@@ -295,10 +294,12 @@ public class uSkyBlock extends JavaPlugin {
     public void registerEvents() {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerEvents(this), this);
-        manager.registerEvents(new MobEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
-        if (getConfig().getBoolean("options.protection.item-drops", true)) {
-            manager.registerEvents(new ItemDropEvents(this), this);
+        if (getConfig().getBoolean("options.protection.enabled", true)) {
+            manager.registerEvents(new GriefEvents(this), this);
+            if (getConfig().getBoolean("options.protection.item-drops", true)) {
+                manager.registerEvents(new ItemDropEvents(this), this);
+            }
         }
     }
 

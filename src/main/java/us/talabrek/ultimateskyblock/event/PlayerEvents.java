@@ -75,7 +75,7 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerInteract(final PlayerInteractEvent event) {
+    public void onClickOnObsidian(final PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (Settings.extras_obsidianToLava && plugin.playerIsOnIsland(player)
                 && plugin.isSkyWorld(player.getWorld())

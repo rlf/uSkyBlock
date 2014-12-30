@@ -112,6 +112,18 @@ options:
     # turn their lava into obsidian with a bad cobblestone generator design. Will only work on the player's island and if there are no other obsidian blocks nearby (so can't be used on portals).
     obsidianToLava: true
 
+  # Contains flags for enabling PROTECTION of various mechanics.
   protection:
     # Whether or not, items dropped on the ground should be limited to party-members.
     item-drops: true
+    # If true, only creepers targeting party-members will explode
+    creepers: true
+    visitors:
+      # Protect visitors from trampling your crop
+      trampling: true
+      # Protect against visitors attacked animals
+      kill-animals: true
+      # Protect against visitors attacking monsters
+      kill-monsters: true
+      # Protect from shearing
+      shearing: true
