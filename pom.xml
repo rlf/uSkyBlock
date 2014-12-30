@@ -99,11 +99,13 @@
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <version>1.5.1</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.5</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
@@ -126,6 +128,7 @@
             <artifactId>Multiverse-Core</artifactId>
             <version>2.5</version>
             <scope>compile</scope>
+            <optional>true</optional>
             <exclusions>
                 <exclusion>
                     <groupId>org.bukkit</groupId>
