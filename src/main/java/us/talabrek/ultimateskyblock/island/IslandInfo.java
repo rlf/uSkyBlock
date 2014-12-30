@@ -86,7 +86,7 @@ public class IslandInfo {
         section.set("canInviteOthers", false);
         section.set("canKickOthers", false);
         section.set("canBanOthers", false);
-        WorldGuardHandler.addPlayerToOldRegion(config.getString("party.leader"), member);
+        WorldGuardHandler.addPlayerToOldRegion(name, member);
         save();
     }
 
@@ -278,7 +278,7 @@ public class IslandInfo {
     }
 
     public void removeMember(PlayerInfo member) {
-        WorldGuardHandler.removePlayerFromRegion(getLeader(), member.getPlayerName());
+        WorldGuardHandler.removePlayerFromRegion(name, member.getPlayerName());
         member.setHomeLocation(null);
         member.setLeaveParty();
         member.save();

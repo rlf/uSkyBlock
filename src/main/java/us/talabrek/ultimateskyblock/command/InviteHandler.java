@@ -90,7 +90,7 @@ public class InviteHandler {
             plugin.setRestartCooldown(player);
             plugin.homeTeleport(player);
             plugin.clearPlayerInventory(player);
-            WorldGuardHandler.addPlayerToOldRegion(island.getLeader(), player.getName());
+            WorldGuardHandler.addPlayerToOldRegion(island.getName(), player.getName());
             return true;
         }
         return false;
