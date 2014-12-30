@@ -34,9 +34,12 @@ public class InviteHandler {
             return false;
         }
         if (oPi.getHasIsland()) {
-            player.sendMessage("\u00a74That player is already with a group on an island.");
-            otherPlayer.sendMessage("\u00a7e" + player.getDisplayName() + "\u00a7e tried to invite you, but you are already in a party.");
-            return false;
+            IslandInfo oIsland = plugin.getIslandInfo(oPi);
+            if (oIsland.isParty() && oIsland.isLeader(otherPlayer)) {
+                player.sendMessage("\u00a74That player is already leader on another island.");
+                otherPlayer.sendMessage("\u00a7e" + player.getDisplayName() + "\u00a7e tried to invite you, but you are already in a party.");
+                return false;
+            }
         }
         invites.add(otherPlayer.getUniqueId());
         inviteMap.put(otherPlayer.getUniqueId(), new Invite(island.getName()));
@@ -75,10 +78,10 @@ public class InviteHandler {
         Invite invite = inviteMap.remove(uuid);
         if (invite != null) {
             PlayerInfo pi = plugin.getPlayerInfo(player);
-            if (pi.getHasIsland()) {
+            IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
+            if (pi.getHasIsland() && !island.isParty()) {
                 plugin.deletePlayerIsland(player.getName());
             }
-            IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
             Set<UUID> uuids = waitingInvites.get(invite.getIslandName());
             uuids.remove(uuid);
             player.sendMessage(ChatColor.GREEN + "You have joined an island! Use /island party to see the other members.");

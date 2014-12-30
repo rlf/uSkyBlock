@@ -7,7 +7,7 @@ deploy:
   api-key: ${GITHUB_TOKEN}
   file: target/uSkyBlock.jar
   skip_cleanup: true
-  release-name: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}-${TRAVIS_COMMIT}"
+  tag_name: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}-${TRAVIS_COMMIT}"
 cache:
   directories:
   - $HOME/.m2
