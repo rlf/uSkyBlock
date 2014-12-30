@@ -176,4 +176,9 @@ public class WorldGuardHandler {
         }
         return null;
     }
+
+    public static void removeIslandRegion(String islandName) {
+        RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
+        regionManager.removeRegion(islandName + "island");
+    }
 }

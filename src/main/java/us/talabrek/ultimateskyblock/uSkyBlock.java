@@ -448,8 +448,7 @@ public class uSkyBlock extends JavaPlugin {
         final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
         orphaned.push(pi.getIslandLocation());
         islandLogic.clearIsland(pi.getIslandLocation());
-        RegionManager regionManager = WorldGuardHandler.getWorldGuard().getRegionManager(getSkyBlockWorld());
-        regionManager.removeRegion(player + "Island");
+        WorldGuardHandler.removeIslandRegion(pi.locationForParty());
         String islandLocation = pi.locationForParty();
         islandLogic.deleteIslandConfig(islandLocation);
         pi.removeFromIsland();
@@ -905,14 +904,13 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public PlayerInfo loadPlayerData(Player player) {
+        uSkyBlock.log(Level.INFO, "Loading player data for " + player.getName());
         final PlayerInfo pi = loadPlayerInfo(player.getName());
         if (pi.getHasIsland()) {
-            IslandInfo islandInfo = islandLogic.getIslandInfo(pi);
             WorldGuardHandler.protectIsland(player, pi);
             islandLogic.clearFlatland(player, pi.getIslandLocation(), 200);
         }
         addActivePlayer(player.getName(), pi);
-        uSkyBlock.log(Level.INFO, "Loaded player file for " + player.getName());
         return pi;
     }
 
