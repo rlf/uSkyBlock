@@ -51,13 +51,25 @@ TL;DR - This is licensed under GPLv3
 Originally the uSkyBlock was a continuation of the skySMP plugin, which was licensed under GPLv3
 (see http://dev.bukkit.org/bukkit-plugins/skysmp/).
 
-Unfortunately, Talabrek didn't seem to be aware of what software-licensing means, and claimed that his uSkyBlock was his private property.
+Talabrek intended to share the code with the public, but simply didn't have the time available to do so.
 
-When he abandoned the project - and the community called for a disclosure of the source-code, Dev-Bukkit decided to pull his plugin from the repository, and Talabrek countered by simply not sharing neither source-code nor binary releases.
+Unfortunately, he had registered the plugin as `All rights reserved` on Bukkit, meaning the bukkit staff put the plugin under moderation - further increasing the work-load required to share the plugin.
 
-Even though this is in violation of the GPLv3 license - no-one really cares.
+Those trying to get hold on Talabrek, had a hard time, and eventually multiple developers got hold on different versions of the uSkyBlock plugin, and tried to continue the work in various channels (wesley27 and wolfwork comes to mind).
 
-So even though Talabrek deserves all the credit in the world - for making such an awesome plugin, this continuation is going to continue without him.
+After app. 1½ months of refactoring, I got the following e-mail from Talabrek:
+
+> Recently, now that a stable 1.8 and the future of spigot is looking hopeful, I have gotten back to work on the plugin. There is much to be done though, and I just don't have the time to do it, so I finally decided to make it available for the public to work on. This is when I noticed the work you and others have done on the plugin.
+>
+> I don't have the time and energy to devote to actively developing this plugin anymore, but it is like a pet project to me so I would still like to have a role in it's development. You are making the best effort that I have seen, so I would like for you to continue.
+>
+> If you are interested, I can make my current code available to you (it's much different than what you currently have now, but some parts might be useful).
+>
+> -Talabrek
+
+So this repository will try to consolidate the many different "branches" out there.
+
+Talabrek is back, allthough not 100%
 
 ## References
 
