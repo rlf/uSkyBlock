@@ -90,6 +90,10 @@ public class ItemDropEvents implements Listener {
             clearDropInfo(event.getItem().getItemStack());
             return; // Allowed
         }
+        if (player.hasPermission("usb.mod.bypassprotection")) {
+            clearDropInfo(event.getItem().getItemStack());
+            return;
+        }
         if (plugin.playerIsOnIsland(player) || plugin.playerIsInSpawn(player)) {
             clearDropInfo(event.getItem().getItemStack());
             return;

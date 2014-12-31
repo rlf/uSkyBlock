@@ -64,6 +64,9 @@ public class GriefEvents implements Listener {
         if (!shearingEnabled || !plugin.isSkyWorld(player.getWorld())) {
             return; // Not our concern
         }
+        if (player.hasPermission("usb.mod.bypassprotection")) {
+            return;
+        }
         if (!plugin.playerIsOnIsland(player)) {
             event.setCancelled(true);
         }
@@ -71,12 +74,15 @@ public class GriefEvents implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if ((!killAnimalsEnabled && !killMonstersEnabled) && !plugin.isSkyWorld(event.getDamager().getWorld())) {
+        if ((!killAnimalsEnabled && !killMonstersEnabled) || !plugin.isSkyWorld(event.getDamager().getWorld())) {
             return;
         }
         if (event.getDamager() instanceof Player
                 && event.getEntity() instanceof Creature
                 && !plugin.playerIsOnIsland((Player)event.getDamager())) {
+            if (((Player) event.getDamager()).hasPermission("usb.mod.bypassprotection")) {
+                return;
+            }
             if (killAnimalsEnabled && event.getEntity() instanceof Animals) {
                 event.setCancelled(true);
             } else if (killMonstersEnabled && event.getEntity() instanceof Monster) {

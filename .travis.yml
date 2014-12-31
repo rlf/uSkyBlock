@@ -2,14 +2,17 @@ language: java
 env:
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
+    new_tag: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
+before-deploy:
+  - "git tag ${new_tag}"
+  - "git push --tags"
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
   file: target/uSkyBlock.jar
   skip_cleanup: true
   prerelease: true
-  tag_name: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
-  name: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
+  tag_name: ${new_tag}
   on:
     all_branches: true
 cache:
