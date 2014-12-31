@@ -10,6 +10,8 @@ deploy:
   prerelease: true
   tag_name: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
   name: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
+  on:
+    all_branches: true
 cache:
   directories:
   - $HOME/.m2
