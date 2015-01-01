@@ -28,10 +28,7 @@ import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
-import us.talabrek.ultimateskyblock.event.ItemDropEvents;
-import us.talabrek.ultimateskyblock.event.MenuEvents;
-import us.talabrek.ultimateskyblock.event.GriefEvents;
-import us.talabrek.ultimateskyblock.event.PlayerEvents;
+import us.talabrek.ultimateskyblock.event.*;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
@@ -295,6 +292,7 @@ public class uSkyBlock extends JavaPlugin {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
+        manager.registerEvents(new ExploitEvents(this), this);
         if (getConfig().getBoolean("options.protection.enabled", true)) {
             manager.registerEvents(new GriefEvents(this), this);
             if (getConfig().getBoolean("options.protection.item-drops", true)) {
@@ -476,7 +474,7 @@ public class uSkyBlock extends JavaPlugin {
             getServer().getScheduler().runTaskLater(this, new Runnable() {
                 @Override
                 public void run() {
-                    player.performCommand("spawn");
+                    execCommand(player, "op:spawn");
                     player.sendMessage("\u00a7eWarping you to your new island!" + ChatColor.GREEN + " Get ready!");
                     getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
                         @Override

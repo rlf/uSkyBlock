@@ -124,7 +124,7 @@ public class IslandInfo {
     }
 
     public String getLeader() {
-        return config.getString("party.leader");
+        return config.getString("party.leader", "");
     }
 
     public boolean hasPerm(Player player, String perm) {
@@ -192,7 +192,7 @@ public class IslandInfo {
     }
 
     public boolean isLeader(String playerName) {
-        return getLeader().equalsIgnoreCase(playerName);
+        return getLeader() != null && getLeader().equalsIgnoreCase(playerName);
     }
 
     public boolean hasWarp() {
