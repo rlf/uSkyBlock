@@ -13,7 +13,7 @@ deploy:
   file: target/uSkyBlock.jar
   skip_cleanup: true
   prerelease: true
-  tag_name: ${PRE_TAG}
+  tag_name: "v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
   on:
     all_branches: true
 cache:
