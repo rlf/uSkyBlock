@@ -99,7 +99,6 @@ public class WorldGuardHandler {
         } else {
             region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
         }
-        region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
         region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
         region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
         return region;
