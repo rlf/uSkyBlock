@@ -570,8 +570,8 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public Location getLastIsland() {
-        if (this.lastIsland.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
-            return this.lastIsland;
+        if (lastIsland != null && isSkyWorld(lastIsland.getWorld())) {
+            return lastIsland;
         }
         this.setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
         return new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0);
