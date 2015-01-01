@@ -127,3 +127,5 @@ options:
       kill-monsters: true
       # Protect from shearing
       shearing: true
+      # Protect from villager-trading
+      villager-trading: true
