@@ -1,10 +1,10 @@
 language: java
 env:
-  PRE_TAG="v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
 
 before-deploy:
+  - PRE_TAG="v2.0.1-SNAPSHOT-b${TRAVIS_BUILD_NUMBER}"
   - "git tag ${PRE_TAG}"
   - "git push --tags"
 deploy:
