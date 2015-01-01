@@ -30,6 +30,7 @@ public class Settings {
     public static boolean extras_obsidianToLava;
     public static String island_schematicName;
     public static long island_topTenTimeout;
+    public static boolean island_allowPvP;
 
     public static boolean loadPluginConfig(FileConfiguration config) {
         boolean changed = false;
@@ -128,6 +129,7 @@ public class Settings {
         island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
         island_useOldIslands = config.getBoolean("options.island.useOldIslands");
         island_topTenTimeout = config.getInt("options.island.topTenTimeout", 7); // Every 7 minutes
+        island_allowPvP = config.getString("options.island.allowPvP", "deny").equalsIgnoreCase("allow");
         return changed;
     }
 

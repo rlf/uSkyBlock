@@ -8,9 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
@@ -23,6 +21,8 @@ import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import java.util.*;
 
 public class PlayerEvents implements Listener {
+    private static final Set<EntityDamageEvent.DamageCause> FIRE_TRAP = new HashSet<>(
+            Arrays.asList(EntityDamageEvent.DamageCause.LAVA, EntityDamageEvent.DamageCause.FIRE, EntityDamageEvent.DamageCause.FIRE_TICK));
     private static final Random RANDOM = new Random();
     
     private final uSkyBlock plugin;
@@ -90,4 +90,15 @@ public class PlayerEvents implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onLavaDamage(final EntityDamageByBlockEvent event) {
+        if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
+            return;
+        }
+        if (!Settings.island_allowPvP
+                && FIRE_TRAP.contains(event.getCause())
+                && event.getEntity() instanceof Player && !plugin.playerIsOnIsland((Player)event.getEntity())) {
+            event.setCancelled(true);
+        }
+    }
 }
