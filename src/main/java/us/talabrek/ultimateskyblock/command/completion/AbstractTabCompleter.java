@@ -33,6 +33,9 @@ public abstract class AbstractTabCompleter implements TabCompleter {
                 }
             }
         }
+        if (filtered.size() > 20) {
+            filtered = filtered.subList(0, 20);
+        }
         return filtered;
     }
 }
