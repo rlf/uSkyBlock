@@ -18,7 +18,6 @@ public class ReloadCommand extends AbstractUSBCommand {
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         uSkyBlock.getInstance().reloadConfig();
-        Settings.loadPluginConfig(uSkyBlock.getInstance().getConfig());
         sender.sendMessage("\u00a7eConfiguration reloaded from file.");
         return true;
     }

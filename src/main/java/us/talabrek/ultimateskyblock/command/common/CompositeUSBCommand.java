@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.AbstractTabCompleter;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.*;
 
@@ -87,6 +88,9 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
 
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
+        if (!uSkyBlock.getInstance().isRequirementsMet(sender, false)) {
+            return false;
+        }
         if (args.length == 0 || (args.length == 1 && args[0].matches(HELP_PATTERN))) {
             showUsage(sender);
         } else if (args.length > 1 && args[0].matches(HELP_PATTERN)) {

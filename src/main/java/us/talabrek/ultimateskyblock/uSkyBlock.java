@@ -885,7 +885,6 @@ public class uSkyBlock extends JavaPlugin {
         PlayerInfo playerInfo = activePlayers.get(playerName);
         if (playerInfo == null) {
             playerInfo = loadPlayerInfo(playerName);
-            activePlayers.put(playerName, playerInfo);
         }
         return playerInfo;
     }
@@ -1612,7 +1611,7 @@ public class uSkyBlock extends JavaPlugin {
             File configFile = new File(getDataFolder(), e.getKey());
             readConfig(e.getValue(), configFile);
         }
-
+        activePlayers.clear();
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
