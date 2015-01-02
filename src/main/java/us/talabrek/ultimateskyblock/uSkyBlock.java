@@ -419,7 +419,7 @@ public class uSkyBlock extends JavaPlugin {
         final Block ground = l.getBlock().getRelative(BlockFace.DOWN);
         final Block air1 = l.getBlock();
         final Block air2 = l.getBlock().getRelative(BlockFace.UP);
-        return !ground.getType().equals(Material.AIR) && !ground.getType().equals(Material.LAVA) && !ground.getType().equals(Material.STATIONARY_LAVA) && !ground.getType().equals(Material.CACTUS) && ((air1.getType().equals(Material.AIR) || air1.getType().equals(Material.CROPS) || air1.getType().equals(Material.LONG_GRASS) || air1.getType().equals(Material.RED_ROSE) || air1.getType().equals(Material.YELLOW_FLOWER) || air1.getType().equals(Material.DEAD_BUSH) || air1.getType().equals(Material.SIGN_POST) || air1.getType().equals(Material.SIGN)) && air2.getType().equals(Material.AIR));
+        return ground.getType().isSolid() && !air1.getType().isSolid() && !air2.getType().isSolid();
     }
 
     public void removeCreatures(final Location l) {
@@ -1500,11 +1500,9 @@ public class uSkyBlock extends JavaPlugin {
                     int x = px + (dx % 2 == 0 ? dx/2 : -dx/2);
                     int z = pz + (dz % 2 == 0 ? dz/2 : -dz/2);
                     int y = py + (dy % 2 == 0 ? dy/2 : -dy/2);
-                    if (world.getBlockAt(x, y, z).getType() == Material.AIR
-                            && world.getBlockAt(x, y+1, z).getType() == Material.AIR
-                            && world.getBlockAt(x, y-1, z).getType().isSolid()) {
+                    Location spawnLocation = new Location(world, x, y, z);
+                    if (isSafeLocation(spawnLocation)) {
                         // look at the old location
-                        Location spawnLocation = new Location(world, x, y, z);
                         Location d = loc.clone().subtract(spawnLocation);
                         spawnLocation.setDirection(d.toVector());
                         return spawnLocation;
