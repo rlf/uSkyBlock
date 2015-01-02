@@ -129,3 +129,5 @@ options:
       shearing: true
       # Protect from villager-trading
       villager-trading: true
+      # Whether or not visitors are protected from fall damage
+      fall: true

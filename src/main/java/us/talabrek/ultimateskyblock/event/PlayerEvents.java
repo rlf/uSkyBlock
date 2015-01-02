@@ -26,9 +26,11 @@ public class PlayerEvents implements Listener {
     private static final Random RANDOM = new Random();
     
     private final uSkyBlock plugin;
+    private final boolean visitorFallProtected;
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
+        visitorFallProtected = plugin.getConfig().getBoolean("options.protection.visitors.fall", true);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -91,12 +93,12 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onLavaDamage(final EntityDamageByBlockEvent event) {
+    public void onVisitorDamage(final EntityDamageByBlockEvent event) {
         if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
         if (!Settings.island_allowPvP
-                && FIRE_TRAP.contains(event.getCause())
+                && (FIRE_TRAP.contains(event.getCause()) || (event.getCause() == EntityDamageEvent.DamageCause.FALL) && visitorFallProtected)
                 && event.getEntity() instanceof Player && !plugin.playerIsOnIsland((Player)event.getEntity())) {
             event.setCancelled(true);
         }
