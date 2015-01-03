@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.*;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.*;
@@ -19,6 +20,7 @@ public class PlayerInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     private String playerName;
     private String displayName;
+    private UUID uuid;
     private boolean hasIsland;
 
     private Location islandLocation;
@@ -194,6 +196,7 @@ public class PlayerInfo implements Serializable {
         }
         try {
             this.displayName = playerConfig.getString("player.displayName", playerName);
+            this.uuid = UUIDUtil.fromString(playerConfig.getString("player.uuid", null));
             this.hasIsland = playerConfig.getBoolean("player.hasIsland");
             this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
                     playerConfig.getInt("player.islandX"), playerConfig.getInt("player.islandY"), playerConfig.getInt("player.islandZ"));
@@ -243,6 +246,7 @@ public class PlayerInfo implements Serializable {
         FileConfiguration playerConfig = playerData;
         playerConfig.set("player.hasIsland", getHasIsland());
         playerConfig.set("player.displayName", displayName);
+        playerConfig.set("player.uuid", UUIDUtil.asString(uuid));
         Location location = this.getIslandLocation();
         if (location != null) {
             playerConfig.set("player.islandX", location.getBlockX());
@@ -300,4 +304,9 @@ public class PlayerInfo implements Serializable {
         return str;
     }
 
+    public void updatePlayerInfo(Player player) {
+        setDisplayName(player.getDisplayName());
+        uuid = player.getUniqueId();
+        save();
+    }
 }

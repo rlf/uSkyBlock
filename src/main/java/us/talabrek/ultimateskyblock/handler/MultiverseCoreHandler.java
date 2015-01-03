@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.handler;
 
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MultiversePlugin;
+import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldType;
@@ -24,6 +25,10 @@ public enum MultiverseCoreHandler {;
         if (core != null) {
             if (!core.getMVWorldManager().isMVWorld(skyWorld)) {
                 core.getMVWorldManager().addWorld(skyWorld.getName(), World.Environment.NORMAL, "0", WorldType.NORMAL, false, "uSkyBlock");
+            } else {
+                MultiverseWorld mvWorld = core.getMVWorldManager().getMVWorld(skyWorld);
+                mvWorld.setEnvironment(World.Environment.NORMAL);
+                mvWorld.setGenerator("uSkyBlock");
             }
         }
     }

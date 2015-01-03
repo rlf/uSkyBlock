@@ -304,7 +304,7 @@ public class uSkyBlock extends JavaPlugin {
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
             skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
-            if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures()) {
+            if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures() || !(skyBlockWorld.getGenerator() instanceof SkyBlockChunkGenerator)) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
                         .type(WorldType.NORMAL)
@@ -876,7 +876,7 @@ public class uSkyBlock extends JavaPlugin {
         String playerName = player.getName();
         PlayerInfo playerInfo = getPlayerInfo(playerName);
         if (player != null && player.isOnline()) {
-            playerInfo.setDisplayName(player.getDisplayName());
+            playerInfo.updatePlayerInfo(player);
         }
         return playerInfo;
     }
