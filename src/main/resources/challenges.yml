@@ -48,8 +48,8 @@ ranks:
         # [itemid] The itemid of the item to be displayed in the challenge menu for complete challenges.
         displayItem: 4
         reward:
+          # [text] Description of the reward. If omitted §4Unknown will be shown.
           text: '3 leather'
-          # [true/false] Whether or not to remove the required items from the player's inventory. Only affects onPlayer type challenges. If false, suggested to make the challenge non-repeatable.
           # [itemid list] The itemid:<datavalue>:count of the reward to give the player for completing the challenge.
           items: '334:3'
           # [permission node] A permission granted for completion (use none to not give a permission)
@@ -60,11 +60,11 @@ ranks:
           # [integer] How much xp to give to the player for the first time completion.
           xp: 30
           # Executes the given command upon completion, possible arguments are:
-          # player - The name of the player
-          # playerName - The display name of the player
-          # challenge - The name of the challenge
-          # position - The position of the player
-          # party - Execute the command once for each member of the party (substituting the name)
+          # {player}     - The name of the player
+          # {playerName} - The display name of the player
+          # {challenge}  - The name of the challenge
+          # {position}   - The position of the player
+          # {party}      - Execute the command once for each member of the party (substituting the name)
           commands:
             - 'effect {party} 10'
 

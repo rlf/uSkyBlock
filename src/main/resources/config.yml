@@ -18,6 +18,10 @@ options:
 
     # [integer] The time in seconds before a player can use the /island biome command again.
     biomeChange: 180
+
+    # [integer] The number of milliseconds between the same notification is sent to the player.
+    # This is used when events are triggered heavily - i.e. item-pickup-prevention, damage-prevention etc.
+    maxSpam: 2000
   island:
     # [filename] The schematic to use for island generation.
     # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
