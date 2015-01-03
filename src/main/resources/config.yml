@@ -52,7 +52,6 @@ options:
       donorbonus: 261:1 262:32 272:1
 
     # [integer] The size of the protective region for each island. Can't be higher than 'distance'
-    # (only used if 'protectWithWorldGuard' is set to true.
     protectionRange: 105
 
     # Allow PvP on the island
