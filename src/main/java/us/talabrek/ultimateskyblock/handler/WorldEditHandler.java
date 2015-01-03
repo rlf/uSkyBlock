@@ -66,11 +66,13 @@ public class WorldEditHandler {
 
     public static void clearIsland(final World skyWorld, final ProtectedRegion region) {
         long t = System.currentTimeMillis();
+        BukkitWorld bukkitWorld = new BukkitWorld(skyWorld);
+        EditSession editSession = new EditSession(bukkitWorld, 255 * Settings.island_protectionRange * Settings.island_protectionRange);
+        editSession.enableQueue();
         final Region cube = getRegion(skyWorld, region);
-        for (Vector2D chunk : cube.getChunks()) {
-            skyWorld.loadChunk(chunk.getBlockX() / 16, chunk.getBlockZ() / 16, true);
-            skyWorld.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ());
-        }
+        bukkitWorld.regenerate(cube, editSession);
+        editSession.flushQueue();
+        editSession.commit();
         long diff = System.currentTimeMillis() - t;
         uSkyBlock.log(Level.INFO, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
     }
