@@ -174,7 +174,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
         ArrayList<String> strings = new ArrayList<>();
         for (USBCommand cmd : aliasMap.values()) {
             if (hasAccess(cmd, commandSender)) {
-                strings.add(cmd.getName());
+                strings.addAll(Arrays.asList(cmd.getAliases()));
             }
         }
         strings.add("help");

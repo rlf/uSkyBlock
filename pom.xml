@@ -13,7 +13,6 @@
     <scm>
         <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
         <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
-        <tag>v2.0.0</tag>
         <url>https://github.com/rlf/uSkyBlock.git</url>
     </scm>
     <repositories>
