@@ -221,7 +221,10 @@ public class ChallengeLogic {
         Map<EntityType, Set<EntityMatch>> matchMap = new HashMap<>();
         for (EntityMatch match : requiredEntities) {
             countMap.put(match, match.getCount());
-            Set<EntityMatch> set = matchMap.getOrDefault(match.getType(), new HashSet<EntityMatch>());
+            Set<EntityMatch> set = matchMap.get(match.getType());
+            if (set == null) {
+                set = new HashSet<>();
+            }
             set.add(match);
             matchMap.put(match.getType(), set);
         }

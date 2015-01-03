@@ -23,8 +23,8 @@ public class PlayerNotifier {
         UUID uuid = player.getUniqueId();
         String lastMsg = lastMessage.get(uuid);
         long now = System.currentTimeMillis();
-        long last = lastTime.getOrDefault(uuid, 0L);
-        if (now >= last + maxSpam || !message.equals(lastMsg)) {
+        Long last = lastTime.get(uuid);
+        if (last == null || now >= last + maxSpam || !message.equals(lastMsg)) {
             lastMessage.put(uuid, message);
             lastTime.put(uuid, now);
             player.sendMessage("\u00a7e" + message);
