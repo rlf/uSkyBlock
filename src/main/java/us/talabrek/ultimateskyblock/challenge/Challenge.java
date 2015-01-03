@@ -2,6 +2,8 @@ package us.talabrek.ultimateskyblock.challenge;
 
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
@@ -33,6 +35,7 @@ public class Challenge {
     private final String description;
     private final Type type;
     private final String requiredItems;
+    private final List<EntityMatch> requiredEntities;
     private final Rank rank;
     private final int resetInHours;
     private final ItemStack displayItem;
@@ -41,10 +44,11 @@ public class Challenge {
     private final Reward reward;
     private final Reward repeatReward;
 
-    public Challenge(String name, String description, Type type, String requiredItems, Rank rank, int resetInHours, ItemStack displayItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
+    public Challenge(String name, String description, Type type, String requiredItems, List<EntityMatch> requiredEntities, Rank rank, int resetInHours, ItemStack displayItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
         this.name = name;
         this.type = type;
         this.requiredItems = requiredItems;
+        this.requiredEntities = requiredEntities;
         this.rank = rank;
         this.resetInHours = resetInHours;
         this.displayItem = displayItem;
@@ -67,10 +71,6 @@ public class Challenge {
         return type;
     }
 
-    public String getRequiredItems() {
-        return requiredItems;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -80,7 +80,10 @@ public class Challenge {
     }
 
     public int getRequiredLevel() {
-        return Integer.parseInt(requiredItems, 10);
+        if (type == Type.ISLAND_LEVEL) {
+            return Integer.parseInt(requiredItems, 10);
+        }
+        return 0;
     }
 
     public List<ItemStack> getRequiredItems(int timesCompleted) {
@@ -102,6 +105,10 @@ public class Challenge {
             }
         }
         return items;
+    }
+
+    public List<EntityMatch> getRequiredEntities() {
+        return requiredEntities;
     }
 
     private String getName(ItemStack mat) {

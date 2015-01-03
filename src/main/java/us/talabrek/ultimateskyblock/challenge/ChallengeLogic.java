@@ -3,6 +3,8 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -207,11 +209,49 @@ public class ChallengeLogic {
         Challenge challenge = getChallenge(challengeName);
         List<ItemStack> requiredItems = challenge.getRequiredItems(0);
         int radius = challenge.getRadius();
-        if (islandContains(player, requiredItems, radius)) {
+        if (islandContains(player, requiredItems, radius) && hasEntitiesNear(player, challenge.getRequiredEntities(), radius)) {
             giveReward(player, challengeName);
             return true;
         }
         return false;
+    }
+
+    private boolean hasEntitiesNear(Player player, List<EntityMatch> requiredEntities, int radius) {
+        Map<EntityMatch, Integer> countMap = new LinkedHashMap<>();
+        Map<EntityType, Set<EntityMatch>> matchMap = new HashMap<>();
+        for (EntityMatch match : requiredEntities) {
+            countMap.put(match, match.getCount());
+            Set<EntityMatch> set = matchMap.getOrDefault(match.getType(), new HashSet<EntityMatch>());
+            set.add(match);
+            matchMap.put(match.getType(), set);
+        }
+        List<Entity> nearbyEntities = player.getNearbyEntities(radius, radius, radius);
+        for (Entity entity : nearbyEntities) {
+            if (matchMap.containsKey(entity.getType())) {
+                for (Iterator<EntityMatch> it = matchMap.get(entity.getType()).iterator(); it.hasNext();) {
+                    EntityMatch match = it.next();
+                    if (match.matches(entity)) {
+                        int newCount = countMap.get(match) - 1;
+                        if (newCount <= 0) {
+                            countMap.remove(match);
+                            it.remove();
+                        } else {
+                            countMap.put(match, newCount);
+                        }
+                    }
+                }
+            }
+        }
+        if (!countMap.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (Map.Entry<EntityMatch,Integer> entry : countMap.entrySet()) {
+                sb.append("\u00a7e - ");
+                sb.append(" \u00a74" + entry.getValue() + " \u00a7ex");
+                sb.append(" \u00a7b" + entry.getKey() + "\n");
+            }
+            player.sendMessage(("\u00a7eStill the following entities short:\n" + sb.toString()).split("\n"));
+        }
+        return countMap.isEmpty();
     }
 
     private boolean tryCompleteOnPlayer(Player player, String challengeName) {

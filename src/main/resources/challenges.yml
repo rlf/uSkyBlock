@@ -485,6 +485,12 @@ ranks:
           xp: 250
   Skylord:
     displayItem: BEACON
+    requires:
+      challenges:
+      - expertbuilder
+      - emeraldcollector
+      - netherportal
+      rankLeeway: 1
     challenges:
       beaconator:
         description: 'Build a very expensive beacon.'
@@ -496,5 +502,46 @@ ranks:
           text: 'Packed ice and snow'
           currency: 4000
           xp: 1000
+  Collector:
+    displayItem: SKULL_ITEM
+    challenges:
+      village-people:
+        description: 'Obtain a whole village.'
+        type: onIsland
+        radius: 32
+        requiredEntities:
+        - 'Villager:{"Profession":"FARMER"}'
+        - 'Villager:{"Profession":"LIBRARIAN"}'
+        - 'Villager:{"Profession":"PRIEST"}'
+        - 'Villager:{"Profession":3}'
+        - 'Villager:{"Profession":"BUTCHER"}'
+        reward:
+          items: '56:16'
+      industrial-farmer:
+        description: 'Create a mega-farm'
+        type: onIsland
+        radius: 40
+        requiredEntities:
+        - 'Cow:8'
+        - 'Pig:8'
+        - 'Sheep:{"Color":0}'
+        - 'Sheep:{"Color":1}'
+        - 'Sheep:{"Color":2}'
+        - 'Sheep:{"Color":3}'
+        - 'Sheep:{"Color":4}'
+        - 'Sheep:{"Color":5}'
+        - 'Sheep:{"Color":6}'
+        - 'Sheep:{"Color":7}'
+        - 'Sheep:{"Color":8}'
+        - 'Sheep:{"Color":9}'
+        - 'Sheep:{"Color":10}'
+        - 'Sheep:{"Color":11}'
+        - 'Sheep:{"Color":12}'
+        - 'Sheep:{"Color":13}'
+        - 'Sheep:{"Color":14}'
+        - 'Sheep:{"Color":15}'
+        - 'Chicken:16'
+        reward:
+          items: '410:20 409:64'
 # DO NOT CHANGE!
-version: 3
+version: 4
