@@ -89,7 +89,7 @@ public class WorldGuardHandler {
         region.setPriority(100);
         region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering a protected island area. (" + islandConfig.getLeader() + ")"));
         region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving a protected island area. (" + islandConfig.getLeader() + ")"));
-        if (plugin.getConfig().getBoolean("options.island.allowPvP")) {
+        if (Settings.island_allowPvP) {
             region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
         } else {
             region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
