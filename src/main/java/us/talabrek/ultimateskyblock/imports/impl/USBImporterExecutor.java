@@ -1,9 +1,9 @@
 package us.talabrek.ultimateskyblock.imports.impl;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
+import us.talabrek.ultimateskyblock.imports.name2uuid.Name2UUIDImporter;
 import us.talabrek.ultimateskyblock.imports.wolfwork.WolfWorkUSBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -16,15 +16,16 @@ import java.util.ServiceLoader;
 import java.util.logging.Level;
 
 /**
- * Tries all available importers on a file.
+ * Delegates and batches the import.
  */
-public class PlayerImporterImpl {
+// TODO: 04/01/2015 - R4zorax: Support BarAPI
+public class USBImporterExecutor {
     private final uSkyBlock plugin;
     private List<USBImporter> importers;
     private volatile int countSuccess;
     private volatile int countFailed;
 
-    public PlayerImporterImpl(uSkyBlock plugin) {
+    public USBImporterExecutor(uSkyBlock plugin) {
         this.plugin = plugin;
     }
 
@@ -40,6 +41,7 @@ public class PlayerImporterImpl {
         if (importers == null) {
             importers = new ArrayList<>();
             importers.add(new WolfWorkUSBImporter());
+            //importers.add(new Name2UUIDImporter());
             ServiceLoader serviceLoader = ServiceLoader.load(USBImporter.class, getClass().getClassLoader());
             for (Iterator<USBImporter> it = serviceLoader.iterator(); it.hasNext(); ) {
                 importers.add(it.next());
@@ -80,12 +82,7 @@ public class PlayerImporterImpl {
         plugin.log(Level.INFO, msg);
         countSuccess = 0;
         countFailed = 0;
-        final File[] files = plugin.directoryPlayers.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name != null && !name.endsWith(".yml");
-            }
-        });
+        final File[] files = importer.getFiles(plugin);
         int chunkSize = plugin.getConfig().getInt("general.import.maxChunk", 100);
         int delay = plugin.getConfig().getInt("general.import.delay", 15);
         plugin.log(Level.INFO, "Importing " + files.length + " players in chunks of " + chunkSize);
@@ -102,12 +99,9 @@ public class PlayerImporterImpl {
                 int failed = 0;
                 for (int i = offset; i < files.length && i < offset+chunkSize; i++) {
                     File playerFile = files[i];
-                    if (importer.importPlayer(plugin, playerFile)) {
+                    if (importer.importFile(plugin, playerFile)) {
                         count++;
                         plugin.log(Level.FINE, "Successfully imported player-file " + playerFile);
-                        if (!playerFile.delete()) {
-                            playerFile.deleteOnExit();
-                        }
                     } else {
                         failed++;
                         plugin.log(Level.WARNING, "Could not import player-file " + playerFile);
@@ -120,6 +114,7 @@ public class PlayerImporterImpl {
                 if (offset+chunkSize < files.length) {
                     doImport(sender, importer, files, offset + chunkSize, chunkSize, delay);
                 } else {
+                    importer.completed(plugin, countSuccess, countFailed);
                     sender.sendMessage("\u00a7eConverted " + countSuccess + "/" + (countSuccess + countFailed) + " players");
                 }
             }

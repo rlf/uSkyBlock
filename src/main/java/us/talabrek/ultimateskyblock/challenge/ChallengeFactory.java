@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -21,7 +22,6 @@ import java.util.regex.Pattern;
  */
 public class ChallengeFactory {
     private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<sub>[0-9]+))?");
-    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<sub>[0-9]+))?:(?<amount>[0-9]+)");
     private static final Pattern ENTITY_PATTERN = Pattern.compile("(?<type>[a-zA-Z0-9]+)(?<meta>:\\{.*\\})?(:(?<count>[0-9]+))?");
     private static Logger log = Logger.getLogger(ChallengeFactory.class.getName());
 
@@ -98,30 +98,13 @@ public class ChallengeFactory {
         }
         return new Reward(
                 section.getString("text", "\u00a74Unknown"),
-                createItemList(section.getString("items")),
+                ItemStackUtil.createItemList(section.getString("items")),
                 section.getString("permission"),
                 section.getInt("currency", 0),
                 section.getInt("xp", 0),
                 section.getStringList("commands"));
     }
 
-    private static List<ItemStack> createItemList(String itemReward) {
-        List<ItemStack> itemList = new ArrayList<>();
-        if (itemReward != null && !itemReward.trim().isEmpty()) {
-            for (String reward : itemReward.split(" ")) {
-                Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
-                if (m.matches()) {
-                    int id = Integer.parseInt(m.group("id"), 10);
-                    short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
-                    int amount = Integer.parseInt(m.group("amount"), 10);
-                    itemList.add(new ItemStack(id, amount, sub));
-                } else {
-                    throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + itemReward + "'");
-                }
-            }
-        }
-        return itemList;
-    }
 
     private static ItemStack createItemStack(String displayItem, String name, String description) {
         Material material = Material.DIRT;

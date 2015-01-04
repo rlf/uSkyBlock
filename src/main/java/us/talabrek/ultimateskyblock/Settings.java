@@ -6,6 +6,7 @@ import org.bukkit.inventory.*;
 import java.util.*;
 
 import org.bukkit.*;
+import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 public class Settings {
     public static int general_maxPartySize;
@@ -108,14 +109,9 @@ public class Settings {
             general_spawnSize = 50;
         }
         // TODO: 06/12/2014 - R4zorax: Null pointer protection
-        final String[] chestItemString = config.getString("options.island.chestItems").split(" ");
-        final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-        String[] amountdata = new String[2];
-        for (int i = 0; i < tempChest.length; ++i) {
-            amountdata = chestItemString[i].split(":");
-            tempChest[i] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
-        }
-        island_chestItems = tempChest;
+        String chestItemString = config.getString("options.island.chestItems", "");
+        island_chestItems = ItemStackUtil.createItemArray(chestItemString);
+
         island_schematicName = config.getString("options.island.schematicName");
         final Set<String> permissionList = config.getConfigurationSection("options.island.extraPermissions").getKeys(true);
         island_addExtraItems = config.getBoolean("options.island.addExtraItems");

@@ -18,7 +18,8 @@ public class TopTenComparatorTest {
         testMap.put("test C", 123.4);
         testMap.put("test AB", 10.3);
         testMap.put("test D", 8.0);
-        String expected = "{test C=123.4, test AB=10.3, test B=10.3, test A=10.2, test D=8.0}";
+        testMap.put("test E", 20.123);
+        String expected = "{test C=123.4, test E=20.123, test AB=10.3, test B=10.3, test A=10.2, test D=8.0}";
 
         TreeMap<String, Double> sorted = new TreeMap<>(new TopTenComparator(testMap));
         sorted.putAll(testMap);

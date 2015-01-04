@@ -17,10 +17,10 @@ public interface USBImporter {
     /**
      * Imports the player into the existing data structure.
      * @param plugin        The USB plugin
-     * @param playerFile The file to import.
+     * @param file The file to import.
      * @return <code>true</code> iff the import was successful.
      */
-    boolean importPlayer(uSkyBlock plugin, File playerFile);
+    boolean importFile(uSkyBlock plugin, File file);
 
     /**
      * Imports various files from the data-folder (i.e. orphans etc.).
@@ -29,4 +29,13 @@ public interface USBImporter {
      * @return <code>true</code> if anything was imported, false otherwise.
      */
     int importOrphans(uSkyBlock plugin, File configFolder);
+
+    /**
+     * Returns the candidates for import.
+     * @param plugin
+     * @return
+     */
+    File[] getFiles(uSkyBlock plugin);
+
+    void completed(uSkyBlock plugin, int success, int failed);
 }

@@ -20,18 +20,21 @@ public class WolfWorkUSBImporter implements USBImporter {
     }
 
     @Override
-    public boolean importPlayer(uSkyBlock plugin, File playerFile) {
+    public boolean importFile(uSkyBlock plugin, File file) {
         try {
-            PlayerInfo playerInfo = readPlayerInfo(playerFile);
+            PlayerInfo playerInfo = readPlayerInfo(file);
             if (playerInfo == null) {
                 return false;
             }
             us.talabrek.ultimateskyblock.player.PlayerInfo pi = importPlayerInfo(plugin, playerInfo);
             importIsland(plugin, playerInfo, pi);
             plugin.removeActivePlayer(pi.getPlayerName());
+            if (!file.delete()) {
+                file.deleteOnExit();
+            }
             return true;
         } catch (Exception e) {
-            plugin.log(Level.WARNING, "Unable to import " + playerFile, e);
+            plugin.log(Level.WARNING, "Unable to import " + file, e);
             return false;
         }
     }
@@ -128,5 +131,20 @@ public class WolfWorkUSBImporter implements USBImporter {
             // Ignore...
         }
         return null;
+    }
+
+    @Override
+    public File[] getFiles(uSkyBlock plugin) {
+        return plugin.directoryPlayers.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name != null && !name.endsWith(".yml");
+            }
+        });
+    }
+
+    @Override
+    public void completed(uSkyBlock plugin, int success, int failed) {
+        // Do nothing
     }
 }

@@ -309,4 +309,8 @@ public class PlayerInfo implements Serializable {
         uuid = player.getUniqueId();
         save();
     }
+
+    public UUID getUniqueId() {
+        return uuid;
+    }
 }

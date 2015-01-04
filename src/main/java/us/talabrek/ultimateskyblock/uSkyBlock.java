@@ -33,12 +33,14 @@ import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.imports.impl.PlayerImporterImpl;
+import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
+import us.talabrek.ultimateskyblock.player.UUIDManager;
+import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -60,12 +62,13 @@ public class uSkyBlock extends JavaPlugin {
     private static String missingRequirements = null;
     private final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
 
+    private UUIDManager uuidManager;
     private SkyBlockMenu menu;
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
     private PlayerNotifier notifier;
-    private PlayerImporterImpl importer;
+    private USBImporterExecutor importer;
 
     private static String pName = "";
     private FileConfiguration lastIslandConfig;
@@ -90,6 +93,7 @@ public class uSkyBlock extends JavaPlugin {
     static {
         uSkyBlock.skyBlockWorld = null;
     }
+
 
     public uSkyBlock() {
         // TODO: 08/12/2014 - R4zorax: Most of these should be converted to local variables
@@ -176,6 +180,7 @@ public class uSkyBlock extends JavaPlugin {
         }
 
         // Not sure this is needed - isn't reloadConfig() invoked before onEnable?
+        this.uuidManager = new UUIDManager(this);
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
@@ -903,6 +908,7 @@ public class uSkyBlock extends JavaPlugin {
 
     public PlayerInfo loadPlayerData(Player player) {
         uSkyBlock.log(Level.INFO, "Loading player data for " + player.getName());
+        uuidManager.updatePlayer(player);
         final PlayerInfo pi = loadPlayerInfo(player.getName());
         if (pi.getHasIsland()) {
             WorldGuardHandler.protectIsland(player, pi);
@@ -1419,14 +1425,8 @@ public class uSkyBlock extends JavaPlugin {
         if (Settings.island_addExtraItems) {
             for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
                 if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                    final String[] chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
-                    final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-                    String[] amountdata = new String[2];
-                    for (int j = 0; j < chestItemString.length; ++j) {
-                        amountdata = chestItemString[j].split(":");
-                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
-                        inventory.addItem(new ItemStack[]{tempChest[j]});
-                    }
+                    final String chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i], "");
+                    inventory.addItem(ItemStackUtil.createItemArray(chestItemString));
                 }
             }
         }
@@ -1610,6 +1610,7 @@ public class uSkyBlock extends JavaPlugin {
             readConfig(e.getValue(), configFile);
         }
         activePlayers.clear();
+        this.uuidManager = new UUIDManager(this);
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
@@ -1668,9 +1669,9 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    public PlayerImporterImpl getPlayerImporter() {
+    public USBImporterExecutor getPlayerImporter() {
         if (importer == null) {
-            importer = new PlayerImporterImpl(this);
+            importer = new USBImporterExecutor(this);
         }
         return importer;
     }

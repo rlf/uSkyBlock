@@ -191,13 +191,14 @@ public class IslandLogic {
         final File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
             FileConfiguration islandConfig = readIslandConfig(file);
-            if (islandConfig != null && islandConfig.getInt("general.level") > 0) {
+            double level = islandConfig != null ? islandConfig.getDouble("general.level", 0) : 0;
+            if (islandConfig != null && level > 0) {
                 String partyLeader = islandConfig.getString("party.leader");
                 PlayerInfo pi = plugin.getPlayerInfo(partyLeader);
                 if (pi != null) {
-                    tempMap.put(pi.getDisplayName(), islandConfig.getDouble("general.level"));
+                    tempMap.put(pi.getDisplayName(), level);
                 } else {
-                    tempMap.put(partyLeader, islandConfig.getDouble("general.level"));
+                    tempMap.put(partyLeader, level);
                 }
             }
         }
