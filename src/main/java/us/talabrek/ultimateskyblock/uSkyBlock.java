@@ -21,6 +21,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -450,7 +451,7 @@ public class uSkyBlock extends JavaPlugin {
 
     public void deletePlayerIsland(final String player) {
         final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
-        orphaned.push(pi.getIslandLocation());
+        addOrphan(pi.getIslandLocation());
         islandLogic.clearIsland(pi.getIslandLocation());
         WorldGuardHandler.removeIslandRegion(pi.locationForParty());
         String islandLocation = pi.locationForParty();
@@ -749,23 +750,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean islandAtLocation(final Location loc) {
-        if (loc == null) {
-            return true;
-        }
-        final int px = loc.getBlockX();
-        final int py = loc.getBlockY();
-        final int pz = loc.getBlockZ();
-        for (int x = -2; x <= 2; ++x) {
-            for (int y = -50; y <= 50; ++y) {
-                for (int z = -2; z <= 2; ++z) {
-                    final Block b = new Location(loc.getWorld(), (double) (px + x), (double) (py + y), (double) (pz + z)).getBlock();
-                    if (b.getTypeId() != 0) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return WorldGuardHandler.getRegionAt(loc) != null;
     }
 
     public boolean islandInSpawn(final Location loc) {
@@ -1160,17 +1145,17 @@ public class uSkyBlock extends JavaPlugin {
 
     // TODO: 13/12/2014 - R4zorax: Move island logic somewhere else... (IslandLogic comes to mind)
     private Location getNextIslandLocation(Location last) {
-        while (getInstance().hasOrphanedIsland()) {
-            if (!getInstance().islandAtLocation(getInstance().checkOrphan())) {
+        while (hasOrphanedIsland() && !isSkyWorld(checkOrphan().getWorld())) {
+            removeNextOrphan();
+        }
+        while (hasOrphanedIsland()) {
+            if (!islandAtLocation(checkOrphan())) {
                 break;
             }
             removeNextOrphan();
         }
-        while (getInstance().hasOrphanedIsland() && !getInstance().checkOrphan().getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
-            removeNextOrphan();
-        }
         Location next;
-        if (getInstance().hasOrphanedIsland() && !getInstance().islandAtLocation(getInstance().checkOrphan())) {
+        if (hasOrphanedIsland() && !islandAtLocation(checkOrphan())) {
             next = getOrphanedIsland();
             saveOrphans();
         } else {
@@ -1493,6 +1478,28 @@ public class uSkyBlock extends JavaPlugin {
         int px = loc.getBlockX();
         int pz = loc.getBlockZ();
         int py = loc.getBlockY();
+        Block chestBlock = world.getBlockAt(loc);
+        if (chestBlock.getType() == Material.CHEST) {
+            BlockFace primaryDirection = null;
+            // Start by checking in front of the chest.
+            MaterialData data = chestBlock.getState().getData();
+            if (data instanceof org.bukkit.material.Chest) {
+                primaryDirection = ((org.bukkit.material.Chest)data).getFacing();
+            }
+            if (primaryDirection == BlockFace.NORTH) {
+                // Neg Z
+                pz -= 1; // start one block in the north dir.
+            } else if (primaryDirection == BlockFace.SOUTH) {
+                // Pos Z
+                pz += 1; // start one block in the south dir
+            } else if (primaryDirection == BlockFace.WEST) {
+                // Neg X
+                px -= 1; // start one block in the west dir
+            } else if (primaryDirection == BlockFace.EAST) {
+                // Pos X
+                px += 1; // start one block in the east dir
+            }
+        }
         for (int dy = 1; dy <= 30; dy++) {
             for (int dx = 1; dx <= 30; dx++) {
                 for (int dz = 1; dz <= 30; dz++) {
@@ -1513,14 +1520,14 @@ public class uSkyBlock extends JavaPlugin {
         return null;
     }
 
-    public Location getChestSpawnLoc(final Location loc, final Player player) {
+    public Location getChestSpawnLoc(final Location loc) {
         return findNearestSpawnLocation(findChestLocation(loc));
     }
 
     private void setNewPlayerIsland(final Player player, final Location loc) {
         PlayerInfo playerInfo = getPlayerInfo(player);
         playerInfo.startNewIsland(loc);
-        player.teleport(getChestSpawnLoc(loc, player).add(0.5, 0.1, 0.5)); // Center on block.
+        player.teleport(getChestSpawnLoc(loc).add(0.5, 0.1, 0.5)); // Center on block.
         IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), player.getName());
         info.updatePartyNumber(player);
         homeSet(player);
