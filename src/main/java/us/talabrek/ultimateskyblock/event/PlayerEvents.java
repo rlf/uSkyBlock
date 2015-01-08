@@ -1,23 +1,20 @@
 package us.talabrek.ultimateskyblock.event;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.*;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -117,15 +114,28 @@ public class PlayerEvents implements Listener {
         if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
-        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+        Player p2 = (Player) event.getEntity();
+        if (event.getDamager() instanceof Player) {
             Player p1 = (Player) event.getDamager();
-            Player p2 = (Player) event.getEntity();
-            IslandInfo is1 = plugin.getIslandInfo(p1);
-            IslandInfo is2 = plugin.getIslandInfo(p2);
-            if (is1 != null && is2 != null && is1.getName().equals(is2.getName())) {
-                plugin.notifyPlayer(p1, "\u00a7eYou cannot hurt island-members.");
-                event.setCancelled(true);
+            cancelMemberDamage(p1, p2, event);
+        } else if (event.getDamager() instanceof Projectile) {
+            ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
+            if (shooter instanceof Player) {
+                Player p1 = (Player) shooter;
+                cancelMemberDamage(p1, p2, event);
             }
+        }
+    }
+
+    private void cancelMemberDamage(Player p1, Player p2, EntityDamageByEntityEvent event) {
+        IslandInfo is1 = plugin.getIslandInfo(p1);
+        IslandInfo is2 = plugin.getIslandInfo(p2);
+        if (is1 != null && is2 != null && is1.getName().equals(is2.getName())) {
+            plugin.notifyPlayer(p1, "\u00a7eYou cannot hurt island-members.");
+            event.setCancelled(true);
         }
     }
 }

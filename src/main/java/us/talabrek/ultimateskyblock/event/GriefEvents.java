@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
+import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 /**
@@ -77,17 +78,33 @@ public class GriefEvents implements Listener {
         if ((!killAnimalsEnabled && !killMonstersEnabled) || !plugin.isSkyWorld(event.getDamager().getWorld())) {
             return;
         }
+        if (!(event.getEntity() instanceof Creature)) {
+            return;
+        }
         if (event.getDamager() instanceof Player
-                && event.getEntity() instanceof Creature
                 && !plugin.playerIsOnIsland((Player)event.getDamager())) {
             if (((Player) event.getDamager()).hasPermission("usb.mod.bypassprotection")) {
                 return;
             }
-            if (killAnimalsEnabled && event.getEntity() instanceof Animals) {
-                event.setCancelled(true);
-            } else if (killMonstersEnabled && event.getEntity() instanceof Monster) {
-                event.setCancelled(true);
+            cancelMobDamage(event);
+        } else if (event.getDamager() instanceof Projectile) {
+            ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
+            if (!(shooter instanceof Player)) {
+                return;
             }
+            Player player = (Player) shooter;
+            if (player.hasPermission("usb.mod.bypassprotection") || plugin.playerIsOnIsland(player)) {
+                return;
+            }
+            cancelMobDamage(event);
+        }
+    }
+
+    private void cancelMobDamage(EntityDamageByEntityEvent event) {
+        if (killAnimalsEnabled && event.getEntity() instanceof Animals) {
+            event.setCancelled(true);
+        } else if (killMonstersEnabled && event.getEntity() instanceof Monster) {
+            event.setCancelled(true);
         }
     }
 
