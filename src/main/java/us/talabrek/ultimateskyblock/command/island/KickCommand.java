@@ -33,8 +33,9 @@ public class KickCommand extends RequireIslandCommand {
                 player.sendMessage("\u00a74No one else is on your island, are you seeing things?");
                 return true;
             }
-            if (!island.isLeader(playerName)) {
+            if (island.isLeader(playerName)) {
                 player.sendMessage("\u00a74You can't remove the leader from the Island!");
+                return true;
             }
             if (player.getName().equalsIgnoreCase(playerName)) {
                 player.sendMessage("\u00a74Stop kickin' yourself!");
