@@ -1,6 +1,6 @@
 name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
-version: ${project.version}-${buildNumber}
+version: ${gitTag}
 description: Ultimate SkyBlock. 
 author: Talabrek, R4zorax and others
 load: STARTUP
