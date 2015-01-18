@@ -155,7 +155,12 @@ public class IslandLogic {
         }
         for (final String playerName : top.keySet()) {
             if (i <= 10) {
-                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): %s \u00a77(%s)", i, top.get(playerName), playerName, topMembers.get(playerName)));
+                String members = topMembers.get(playerName);
+                if (!members.isEmpty()) {
+                    members = "(" + members + ")";
+                }
+                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): %s \u00a77%s", i, top.get(playerName),
+                        playerName, members));
             }
             if (playerName != null && playerName.equalsIgnoreCase(sender.getName())) {
                 playerrank = i;
@@ -193,18 +198,20 @@ public class IslandLogic {
             if (islandConfig != null && level > 0) {
                 String partyLeader = islandConfig.getString("party.leader");
                 PlayerInfo pi = plugin.getPlayerInfo(partyLeader);
+                String key = partyLeader;
                 if (pi != null) {
-                    partyLeader = pi.getDisplayName();
+                    key = pi.getDisplayName();
                 }
-                tempMap.put(partyLeader, level);
+                tempMap.put(key, level);
                 ConfigurationSection members = islandConfig.getConfigurationSection("party.members");
                 if (members != null) {
                     Set<String> membersStr = members.getKeys(false);
                     if (membersStr != null) {
+                        membersStr.remove(partyLeader);
                         String toStr = Arrays.toString(membersStr.toArray(new String[membersStr.size()]));
-                        memberMap.put(partyLeader, toStr.substring(1, toStr.length()-1));
+                        memberMap.put(key, toStr.substring(1, toStr.length()-1));
                     } else {
-                        memberMap.put(partyLeader, partyLeader);
+                        memberMap.put(key, "");
                     }
                 }
             }
