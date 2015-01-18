@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,10 +21,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
@@ -42,6 +40,7 @@ public class IslandLogic {
 
     private volatile long lastGenerate = 0;
     private final LinkedHashMap<String, Double> top = new LinkedHashMap<>();
+    private final LinkedHashMap<String, String> topMembers = new LinkedHashMap<>();
 
     public IslandLogic(uSkyBlock plugin, File directoryIslands) {
         this.plugin = plugin;
@@ -156,7 +155,7 @@ public class IslandLogic {
         }
         for (final String playerName : top.keySet()) {
             if (i <= 10) {
-                sender.sendMessage(String.format(ChatColor.GREEN + "#%2d: %s - Island level %5.2f", i, playerName, top.get(playerName)));
+                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): %s \u00a77(%s)", i, top.get(playerName), playerName, topMembers.get(playerName)));
             }
             if (playerName != null && playerName.equalsIgnoreCase(sender.getName())) {
                 playerrank = i;
@@ -170,7 +169,7 @@ public class IslandLogic {
 
     public void showTopTen(final CommandSender sender) {
         long t = System.currentTimeMillis();
-        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000))) {
+        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || sender.hasPermission("usb.admin.topten")) {
             lastGenerate = t;
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override
@@ -185,6 +184,7 @@ public class IslandLogic {
     }
     private void generateTopTen() {
         final HashMap<String, Double> tempMap = new HashMap<>();
+        final HashMap<String, String> memberMap = new HashMap<>();
         final File folder = directoryIslands;
         final File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
@@ -194,9 +194,18 @@ public class IslandLogic {
                 String partyLeader = islandConfig.getString("party.leader");
                 PlayerInfo pi = plugin.getPlayerInfo(partyLeader);
                 if (pi != null) {
-                    tempMap.put(pi.getDisplayName(), level);
-                } else {
-                    tempMap.put(partyLeader, level);
+                    partyLeader = pi.getDisplayName();
+                }
+                tempMap.put(partyLeader, level);
+                ConfigurationSection members = islandConfig.getConfigurationSection("party.members");
+                if (members != null) {
+                    Set<String> membersStr = members.getKeys(false);
+                    if (membersStr != null) {
+                        String toStr = Arrays.toString(membersStr.toArray(new String[membersStr.size()]));
+                        memberMap.put(partyLeader, toStr.substring(1, toStr.length()-1));
+                    } else {
+                        memberMap.put(partyLeader, partyLeader);
+                    }
                 }
             }
         }
@@ -206,6 +215,8 @@ public class IslandLogic {
             lastGenerate = System.currentTimeMillis();
             top.clear();
             top.putAll(sortedMap);
+            topMembers.clear();
+            topMembers.putAll(memberMap);
         }
     }
 

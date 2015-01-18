@@ -123,3 +123,5 @@ permissions:
             description: Let a player purge old islands.
           usb.admin.import:
             description: Let a player import other-formats (players, islands, orphans).
+          usb.admin.topten:
+            description: Let a player force top-ten regeneration.
