@@ -56,7 +56,6 @@ ranks:
           items: '334:3'
           # [permission node] A permission granted for completion. Multiple permissions are space-separated, i.e. - "test.1 test.2" (use none to not give a permission)
           permission: none
-          # [text] The text name of the reward (to display to the player). No need to list currency rewards here, but you should list permission rewards if you have them.
           # [integer] How much currency to give for the first time completion. (requires an economy plugin)
           currency: 10
           # [integer] How much xp to give to the player for the first time completion.
