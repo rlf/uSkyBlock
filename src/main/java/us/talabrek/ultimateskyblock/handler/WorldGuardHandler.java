@@ -163,7 +163,7 @@ public class WorldGuardHandler {
         }
     }
 
-    public static String getRegionAt(Location location) {
+    public static String getIslandNameAt(Location location) {
         WorldGuardPlugin worldGuard = getWorldGuard();
         RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
         ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(location);
@@ -171,6 +171,19 @@ public class WorldGuardHandler {
             String id = region.getId().toLowerCase();
             if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
                 return id.substring(0, id.length()-6);
+            }
+        }
+        return null;
+    }
+
+    public static ProtectedRegion getIslandRegionAt(Location location) {
+        WorldGuardPlugin worldGuard = getWorldGuard();
+        RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
+        ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(location);
+        for (ProtectedRegion region : applicableRegions) {
+            String id = region.getId().toLowerCase();
+            if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
+                return region;
             }
         }
         return null;

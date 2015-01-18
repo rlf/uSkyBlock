@@ -73,13 +73,11 @@ public class IslandLogic {
         }
     }
 
-    public void clearIsland(Location loc) {
+    public void clearIsland(Location loc, Runnable afterDeletion) {
         World skyBlockWorld = plugin.getWorld();
-        ApplicableRegionSet applicableRegions = WorldGuardHandler.getWorldGuard().getRegionManager(skyBlockWorld).getApplicableRegions(loc);
-        for (ProtectedRegion region : applicableRegions) {
-            if (!region.getId().equalsIgnoreCase("__global__")) {
-                WorldEditHandler.clearIsland(skyBlockWorld, region);
-            }
+        ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
+        if (region != null) {
+            WorldEditHandler.clearIsland(skyBlockWorld, region, afterDeletion);
         }
     }
 

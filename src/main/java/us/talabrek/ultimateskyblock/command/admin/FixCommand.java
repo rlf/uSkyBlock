@@ -26,7 +26,7 @@ public class FixCommand extends AbstractUSBCommand {
         if (args.length == 1) {
             playerName = args[0];
         } else if (args.length == 0 && sender instanceof Player) {
-            playerName = WorldGuardHandler.getRegionAt(((Player) sender).getLocation());
+            playerName = WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation());
         }
         PlayerInfo playerInfo = playerName != null ? plugin.getPlayerInfo(playerName) : null;
         if (!tryFlatlandFix(sender, playerName, playerInfo)) {

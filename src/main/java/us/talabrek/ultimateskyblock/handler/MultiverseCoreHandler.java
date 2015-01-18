@@ -20,6 +20,11 @@ public enum MultiverseCoreHandler {;
         return null;
     }
 
+    public static boolean hasMultiverse() {
+        Plugin plugin = Bukkit.getPluginManager().getPlugin("Multiverse-Core");
+        return plugin != null && plugin.isEnabled();
+    }
+
     public static void importWorld(World skyWorld) {
         MultiverseCore core = getMultiverseCore();
         if (core != null) {
@@ -29,6 +34,10 @@ public enum MultiverseCoreHandler {;
                 MultiverseWorld mvWorld = core.getMVWorldManager().getMVWorld(skyWorld);
                 mvWorld.setEnvironment(World.Environment.NORMAL);
                 mvWorld.setGenerator("uSkyBlock");
+            }
+        } else if (hasMultiverse()) {
+            if (!Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv import " + skyWorld.getName() + " NORMAL -g uSkyBlock")) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv import " + skyWorld.getName() + " NORMAL uSkyBlock");
             }
         }
     }

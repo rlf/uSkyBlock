@@ -1,8 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
-import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
@@ -25,9 +23,11 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import us.talabrek.ultimateskyblock.command.AdminCommand;
+import us.talabrek.ultimateskyblock.async.BalancedExecutor;
+import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
+import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.event.*;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
@@ -70,6 +70,7 @@ public class uSkyBlock extends JavaPlugin {
     private IslandLogic islandLogic;
     private PlayerNotifier notifier;
     private USBImporterExecutor importer;
+    private BalancedExecutor executor;
 
     private static String pName = "";
     private FileConfiguration lastIslandConfig;
@@ -171,6 +172,7 @@ public class uSkyBlock extends JavaPlugin {
     public void onEnable() {
         missingRequirements = null;
         instance = this;
+        executor = new SyncBalancedExecutor(Bukkit.getScheduler());
         configFiles.clear();
         activePlayers.clear();
         createFolders();
@@ -449,53 +451,62 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    public void deletePlayerIsland(final String player) {
-        final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
+    private void postDelete(final PlayerInfo pi) {
         addOrphan(pi.getIslandLocation());
-        islandLogic.clearIsland(pi.getIslandLocation());
-        WorldGuardHandler.removeIslandRegion(pi.locationForParty());
         String islandLocation = pi.locationForParty();
+        WorldGuardHandler.removeIslandRegion(pi.locationForParty());
         islandLogic.deleteIslandConfig(islandLocation);
         pi.removeFromIsland();
         pi.save();
-        removeActivePlayer(player);
+        removeActivePlayer(pi.getPlayerName());
         saveOrphans();
-        // TODO: 17/12/2014 - R4zorax: Teleport players on the island
+    }
+
+    public void deletePlayerIsland(final String player) {
+        final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
+        islandLogic.clearIsland(pi.getIslandLocation(), new Runnable() {
+            @Override
+            public void run() {
+                postDelete(pi);
+            }
+        });
+    }
+
+    private void postRestart(final Player player, final Location next) {
+        createIsland(player, next);
+        changePlayerBiome(player, "OCEAN");
+        next.setY((double) Settings.island_height);
+        setNewPlayerIsland(player, next);
+        clearPlayerInventory(player);
+        clearEntitiesNearPlayer(player);
+        setRestartCooldown(player);
+        player.sendMessage("\u00a74Close your eyes!");
+        getServer().getScheduler().runTaskLater(this, new Runnable() {
+            @Override
+            public void run() {
+                execCommand(player, "op:spawn");
+                player.sendMessage("\u00a7eWarping you to your new island!" + ChatColor.GREEN + " Get ready!");
+                getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
+                    @Override
+                    public void run() {
+                        uSkyBlock.getInstance().homeTeleport(player);
+                    }
+                }, 10);
+            }
+        }, 10);
     }
 
     public boolean restartPlayerIsland(final Player player, final Location next) {
         if (next.getBlockX() == 0 && next.getBlockZ() == 0) {
             return false;
         }
-        try {
-            islandLogic.clearIsland(next);
-            createIsland(player, next);
-            changePlayerBiome(player, "OCEAN");
-            next.setY((double) Settings.island_height);
-            setNewPlayerIsland(player, next);
-            clearPlayerInventory(player);
-            clearEntitiesNearPlayer(player);
-            setRestartCooldown(player);
-            player.sendMessage("\u00a74Close your eyes!");
-            getServer().getScheduler().runTaskLater(this, new Runnable() {
-                @Override
-                public void run() {
-                    execCommand(player, "op:spawn");
-                    player.sendMessage("\u00a7eWarping you to your new island!" + ChatColor.GREEN + " Get ready!");
-                    getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
-                        @Override
-                        public void run() {
-                            uSkyBlock.getInstance().homeTeleport(player);
-                        }
-                    }, 10);
-                }
-            }, 10);
-            return true;
-        } catch (Exception e) {
-            player.sendMessage("Could not create your Island. Please contact a server moderator.");
-            e.printStackTrace();
-            return false;
-        }
+        islandLogic.clearIsland(next, new Runnable() {
+            @Override
+            public void run() {
+                postRestart(player, next);
+            }
+        });
+        return true;
     }
 
     public void clearPlayerInventory(Player player) {
@@ -532,7 +543,7 @@ public class uSkyBlock extends JavaPlugin {
                 for (int z = -10; z <= 10; ++z) {
                     final Block b = world.getBlockAt(px + x, py + y, pz + z);
                     if (b.getType() == Material.BEDROCK) {
-                        return new Location(world, px+x, py+y, pz+z);
+                        return new Location(world, px + x, py + y, pz + z);
                     }
                 }
             }
@@ -546,8 +557,7 @@ public class uSkyBlock extends JavaPlugin {
         if (pi.getHasIsland()) {
             Location oldLoc = pi.getIslandLocation();
             if (newLoc != null && oldLoc != null
-                    && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ()))
-            {
+                    && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ())) {
                 uSkyBlock.getInstance().deletePlayerIsland(pi.getPlayerName());
             }
         }
@@ -711,17 +721,6 @@ public class uSkyBlock extends JavaPlugin {
         return true;
     }
 
-    public boolean homeSet(final String player, final Location loc) {
-        if (this.getActivePlayers().containsKey(player)) {
-            this.getActivePlayers().get(player).setHomeLocation(loc);
-        } else {
-            final PlayerInfo pi = new PlayerInfo(player);
-            pi.setHomeLocation(loc);
-            pi.save();
-        }
-        return true;
-    }
-
     public boolean playerIsOnIsland(final Player player) {
         return locationIsOnIsland(player, player.getLocation());
     }
@@ -750,7 +749,7 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean islandAtLocation(final Location loc) {
-        return WorldGuardHandler.getRegionAt(loc) != null;
+        return WorldGuardHandler.getIslandNameAt(loc) != null;
     }
 
     public boolean islandInSpawn(final Location loc) {
@@ -1017,8 +1016,8 @@ public class uSkyBlock extends JavaPlugin {
         int r = Settings.island_radius;
         final int px = loc.getBlockX();
         final int pz = loc.getBlockZ();
-        for (int x = px-r; x <= px+r; x++) {
-            for (int z = pz-r; z <= pz+r; z++) {
+        for (int x = px - r; x <= px + r; x++) {
+            for (int z = pz - r; z <= pz + r; z++) {
                 skyBlockWorld.setBiome(x, z, biome); // World Coords
             }
         }
@@ -1101,7 +1100,7 @@ public class uSkyBlock extends JavaPlugin {
         }
     }
 
-    private void createIsland(Player player, Location next) throws DataException, IOException, MaxChangedBlocksException {
+    private void createIsland(Player player, Location next) {
         boolean hasIslandNow = false;
         if (getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
             for (File schemFile : getSchemFile()) {
@@ -1449,6 +1448,7 @@ public class uSkyBlock extends JavaPlugin {
 
     /**
      * Finds the neares block to loc that is a chest.
+     *
      * @param loc The location to scan for a chest.
      * @return The location of the chest
      */
@@ -1461,9 +1461,9 @@ public class uSkyBlock extends JavaPlugin {
             for (int dx = 1; dx <= 30; dx++) {
                 for (int dz = 1; dz <= 30; dz++) {
                     // Scans from the center and out
-                    int x = px + (dx % 2 == 0 ? dx/2 : -dx/2);
-                    int z = pz + (dz % 2 == 0 ? dz/2 : -dz/2);
-                    int y = py + (dy % 2 == 0 ? dy/2 : -dy/2);
+                    int x = px + (dx % 2 == 0 ? dx / 2 : -dx / 2);
+                    int z = pz + (dz % 2 == 0 ? dz / 2 : -dz / 2);
+                    int y = py + (dy % 2 == 0 ? dy / 2 : -dy / 2);
                     if (world.getBlockAt(x, y, z).getType() == Material.CHEST) {
                         return new Location(world, x, y, z);
                     }
@@ -1484,7 +1484,7 @@ public class uSkyBlock extends JavaPlugin {
             // Start by checking in front of the chest.
             MaterialData data = chestBlock.getState().getData();
             if (data instanceof org.bukkit.material.Chest) {
-                primaryDirection = ((org.bukkit.material.Chest)data).getFacing();
+                primaryDirection = ((org.bukkit.material.Chest) data).getFacing();
             }
             if (primaryDirection == BlockFace.NORTH) {
                 // Neg Z
@@ -1504,9 +1504,9 @@ public class uSkyBlock extends JavaPlugin {
             for (int dx = 1; dx <= 30; dx++) {
                 for (int dz = 1; dz <= 30; dz++) {
                     // Scans from the center and out
-                    int x = px + (dx % 2 == 0 ? dx/2 : -dx/2);
-                    int z = pz + (dz % 2 == 0 ? dz/2 : -dz/2);
-                    int y = py + (dy % 2 == 0 ? dy/2 : -dy/2);
+                    int x = px + (dx % 2 == 0 ? dx / 2 : -dx / 2);
+                    int z = pz + (dz % 2 == 0 ? dz / 2 : -dz / 2);
+                    int y = py + (dy % 2 == 0 ? dy / 2 : -dy / 2);
                     Location spawnLocation = new Location(world, x, y, z);
                     if (isSafeLocation(spawnLocation)) {
                         // look at the old location
@@ -1556,11 +1556,6 @@ public class uSkyBlock extends JavaPlugin {
         return getIslandInfo(player).getLeader().equalsIgnoreCase(player.getName());
     }
 
-    public void sendMessageToIslandGroup(final String location, final String message) {
-        IslandInfo islandInfo = getIslandInfo(location);
-        islandInfo.sendMessageToIslandGroup(message);
-    }
-
     public IslandInfo getIslandInfo(String location) {
         return islandLogic.getIslandInfo(location);
     }
@@ -1580,19 +1575,12 @@ public class uSkyBlock extends JavaPlugin {
         return format.replaceAll("(\u00a7|&)[0-9a-fklmor]", "");
     }
 
-    public static String correctFormatting(String format) {
-        if (format == null || format.trim().isEmpty()) {
-            return "";
-        }
-        return format.replaceAll("&([0-9a-fklmor])", "\u00a7$1");
-    }
-
     public static void log(Level level, String message) {
         log(level, message, null);
     }
 
     public static void log(Level level, String message, Throwable t) {
-        getInstance().getLogger().log(level, pName + message, t);
+        getInstance().getLogger().log(level, message, t);
     }
 
     public ChallengeLogic getChallengeLogic() {
@@ -1612,7 +1600,7 @@ public class uSkyBlock extends JavaPlugin {
     private void reloadConfigs() {
         createFolders();
         // Update all of the loaded configs.
-        for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()){
+        for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()) {
             File configFile = new File(getDataFolder(), e.getKey());
             readConfig(e.getValue(), configFile);
         }
@@ -1694,5 +1682,9 @@ public class uSkyBlock extends JavaPlugin {
      */
     public void notifyPlayer(Player player, String msg) {
         notifier.notifyPlayer(player, msg);
+    }
+
+    public BalancedExecutor getExecutor() {
+        return executor;
     }
 }
