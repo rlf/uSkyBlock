@@ -689,6 +689,10 @@ public class uSkyBlock extends JavaPlugin {
         return true;
     }
 
+    public void spawnTeleport(final Player player) {
+        execCommand(player, "op:spawn");
+    }
+
     public boolean homeSet(final Player player) {
         if (!player.getWorld().getName().equalsIgnoreCase(getSkyBlockWorld().getName())) {
             player.sendMessage("\u00a74You must be closer to your island to set your skyblock home!");
@@ -1071,9 +1075,11 @@ public class uSkyBlock extends JavaPlugin {
         player.sendMessage("\u00a7eUse /island biome <biomename> to change your biome. You must wait " + Settings.general_biomeChange / 60 + " minutes between each biome change.");
     }
 
-    public boolean createIsland(final CommandSender sender, final PlayerInfo pi) {
+    public boolean createIsland(final Player player, final PlayerInfo pi) {
+        if (isSkyWorld(player.getWorld())) {
+            spawnTeleport(player);
+        }
         log(Level.INFO, "Creating player island...");
-        final Player player = (Player) sender;
         final Location last = getLastIsland();
         last.setY((double) Settings.island_height);
         try {
@@ -1084,7 +1090,7 @@ public class uSkyBlock extends JavaPlugin {
             player.getEquipment().clear();
             changePlayerBiome(player, "OCEAN");
             clearEntitiesNearPlayer(player);
-            protectWithWorldGuard(sender, player, pi);
+            protectWithWorldGuard(player, player, pi);
         } catch (Exception ex) {
             player.sendMessage("Could not create your Island. Please contact a server moderator.");
             ex.printStackTrace();
