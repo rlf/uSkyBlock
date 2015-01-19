@@ -1,9 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,17 +12,17 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
+
+import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
 
 /**
  * Data object for an island
@@ -42,7 +39,7 @@ public class IslandInfo {
         file = new File(directory, islandName + ".yml");
         name = islandName;
         if (file.exists()) {
-            uSkyBlock.readConfig(config, file);
+            readConfig(config, file);
         }
     }
 
@@ -165,7 +162,8 @@ public class IslandInfo {
     }
 
     public Set<String> getMembers() {
-        return config.getConfigurationSection("party.members").getKeys(false);
+        ConfigurationSection memberSection = config.getConfigurationSection("party.members");
+        return memberSection != null ? memberSection.getKeys(false) : Collections.<String>emptySet();
     }
 
     public String getBiome() {
@@ -371,5 +369,63 @@ public class IslandInfo {
             str += ChatColor.GRAY + "  - " + log + "\n";
         }
         return str;
+    }
+
+    public void renamePlayer(Player player, String oldName) {
+        ConfigurationSection members = config.getConfigurationSection("party.members");
+        ConfigurationSection section = config.getConfigurationSection("party.members." + oldName);
+        String newName = player.getName();
+        boolean dirty = false;
+        if (section != null) {
+            String uuid = section.getString("uuid", null);
+            if (uuid == null || uuid.equals(player.getUniqueId())) {
+                section = members.createSection(newName, section.getValues(true));
+                section.set("uuid", UUIDUtil.asString(player.getUniqueId()));
+                dirty = true;
+            } else {
+                throw new IllegalStateException("Member " + oldName + " has a different UUID than " + player);
+            }
+        }
+        if (isLeader(oldName)) {
+            String uuid = section.getString("party.leader-uuid", null);
+            if (uuid == null || uuid.equals(player.getUniqueId())) {
+                config.set("party.leader", newName);
+                config.set("party.leader-uuid", player.getUniqueId());
+                dirty = true;
+            } else {
+                throw new IllegalStateException("Leader " + oldName + " has a different UUID than " + player);
+            }
+        }
+        List<String> bans = getBans();
+        if (bans.contains(oldName)) {
+            bans.remove(oldName);
+            bans.add(newName);
+            config.set("banned.list", bans);
+            dirty = true;
+        }
+        if (dirty) {
+            save();
+        }
+    }
+
+    public boolean hasOnlineMembers() {
+        ConfigurationSection members = config.getConfigurationSection("party.members");
+        if (members != null) {
+            for (String memberName : members.getKeys(false)) {
+                String uuid = members.getString(memberName + ".uuid", null);
+                if (uuid != null) {
+                    OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUIDUtil.fromString(uuid));
+                    if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                        return true;
+                    }
+                } else {
+                    OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(memberName);
+                    if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

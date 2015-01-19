@@ -19,7 +19,7 @@ public class IslandCommand extends AbstractCommandExecutor {
     private final SkyBlockMenu menu;
 
     public IslandCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super("island|is", null, "general island command");
+        super("island|is", "usb.island.create", "general island command");
         this.menu = menu;
         InviteHandler inviteHandler = new InviteHandler(plugin);
         AllPlayerTabCompleter playerTabCompleter = new AllPlayerTabCompleter();

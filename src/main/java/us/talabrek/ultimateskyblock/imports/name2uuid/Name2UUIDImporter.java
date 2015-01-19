@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
+
 /**
  * Converts from name-based files to UUID based.
  */
@@ -54,7 +56,7 @@ public class Name2UUIDImporter implements USBImporter {
     private boolean importIsland(uSkyBlock plugin, File file) {
         log.info("Importing " + file);
         FileConfiguration config = new YamlConfiguration();
-        plugin.readConfig(config, file);
+        readConfig(config, file);
         if (config.contains("party.leader") && !config.contains("party.leader.name")) {
             String leaderName = config.getString("party.leader");
             ConfigurationSection leaderSection = config.createSection("party.leader");
@@ -111,7 +113,7 @@ public class Name2UUIDImporter implements USBImporter {
         File newConfig = new File(plugin.getDataFolder() + File.separator + "players", uniqueId.toString() + ".yml");
         if (file.renameTo(newConfig)) {
             FileConfiguration config = new YamlConfiguration();
-            plugin.readConfig(config, newConfig);
+            readConfig(config, newConfig);
             if (config.contains("player.uuid")) {
                 log.info("Skipping, player.uuid already present");
                 return true;

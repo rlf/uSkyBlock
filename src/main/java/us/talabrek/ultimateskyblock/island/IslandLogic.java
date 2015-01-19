@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -11,13 +10,17 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.island.task.RenamePlayerTask;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.FileUtil;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
+import us.talabrek.ultimateskyblock.uuid.PlayerNameChangedEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -254,5 +257,23 @@ public class IslandLogic {
     public void removeIslandFromMemory(String islandName) {
         getIslandInfo(islandName).save();
         islands.remove(islandName);
+    }
+
+    public void renamePlayer(PlayerInfo playerInfo, Runnable completion, PlayerNameChangedEvent... changes) {
+        String[] files = directoryIslands.list(FileUtil.createYmlFilenameFilter());
+        RenamePlayerTask task = new RenamePlayerTask(playerInfo.locationForParty(), files, this, changes);
+        plugin.getAsyncExecutor().execute(plugin, task, completion, 0.8f, 20);
+    }
+
+    public void renamePlayer(String islandName, PlayerNameChangedEvent... changes) {
+        IslandInfo islandInfo = getIslandInfo(islandName);
+        if (islandInfo != null) {
+            for (PlayerNameChangedEvent e : changes) {
+                islandInfo.renamePlayer(e.getPlayer(), e.getOldName());
+            }
+            if (!islandInfo.hasOnlineMembers()) {
+                removeIslandFromMemory(islandInfo.getName());
+            }
+        }
     }
 }

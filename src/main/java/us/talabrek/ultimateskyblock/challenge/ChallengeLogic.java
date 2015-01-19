@@ -24,8 +24,6 @@ import java.util.regex.Pattern;
  */
 public class ChallengeLogic {
     private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<data>[0-9]+))?:(?<amount>[0-9]+)");
-    // TODO: 09/12/2014 - R4zorax: This is not thread-safe...
-    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat(".#");
     public static final int MS_MIN = 60*1000;
     public static final int MS_HOUR = 60*MS_MIN;
     public static final long MS_DAY = 24*MS_HOUR;
@@ -339,9 +337,11 @@ public class ChallengeLogic {
         if (defaults.broadcastCompletion && isFirstCompletion) {
             Bukkit.getServer().broadcastMessage(config.getString("broadcastText") + player.getName() + " has completed the " + challengeName + " challenge!");
         }
-        player.sendMessage("\u00a7eItem reward(s): " + ChatColor.WHITE + reward.getRewardText());
-        player.sendMessage("\u00a7eExp reward: " + ChatColor.WHITE + reward.getXpReward());
-        player.sendMessage("\u00a7eCurrency reward: " + ChatColor.WHITE + this.DECIMAL_FORMAT.format(reward.getCurrencyReward() * rewBonus) + " " + VaultHandler.getEcon().currencyNamePlural() + "\u00a7a (+" + this.DECIMAL_FORMAT.format((rewBonus - 1.0) * 100.0) + "%)");
+        player.sendMessage(String.format("\u00a7eItem reward(s): \u00a7f%d", reward.getRewardText()));
+        player.sendMessage(String.format("\u00a7eExp reward: \u00a7f%d", reward.getXpReward()));
+        if (VaultHandler.hasEcon()) {
+            player.sendMessage(String.format("\u00a7eCurrency reward: \u00a7f%5.2f %s \u00a7a (%4.2f%%)", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
+        }
         if (reward.getPermissionReward() != null) {
             for (String perm : reward.getPermissionReward().split(" ")) {
                 if (!VaultHandler.checkPerm(player, perm, player.getWorld())) {

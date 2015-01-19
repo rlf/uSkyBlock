@@ -8,7 +8,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
@@ -23,6 +22,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.async.BalancedExecutor;
 import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
@@ -40,10 +40,15 @@ import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
-import us.talabrek.ultimateskyblock.player.UUIDManager;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
+import us.talabrek.ultimateskyblock.uuid.PlayerDB;
+import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
+import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -54,6 +59,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
+
 public class uSkyBlock extends JavaPlugin {
     private static final String[][] depends = new String[][]{
             new String[]{"Vault", "1.5"},
@@ -63,7 +70,6 @@ public class uSkyBlock extends JavaPlugin {
     private static String missingRequirements = null;
     private final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
 
-    private UUIDManager uuidManager;
     private SkyBlockMenu menu;
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
@@ -71,6 +77,7 @@ public class uSkyBlock extends JavaPlugin {
     private PlayerNotifier notifier;
     private USBImporterExecutor importer;
     private BalancedExecutor executor;
+    private BalancedExecutor asyncExecutor;
 
     private static String pName = "";
     private FileConfiguration lastIslandConfig;
@@ -156,14 +163,6 @@ public class uSkyBlock extends JavaPlugin {
         return configFiles.get(configName);
     }
 
-    public static void readConfig(FileConfiguration config, File configFile) {
-        try (Reader rdr = new InputStreamReader(new FileInputStream(configFile), "UTF-8")) {
-            config.load(rdr);
-        } catch (InvalidConfigurationException | IOException e) {
-            log(Level.SEVERE, "Unable to read config file " + configFile, e);
-        }
-    }
-
     @Override
     public FileConfiguration getConfig() {
         return getFileConfiguration("config.yml");
@@ -173,6 +172,7 @@ public class uSkyBlock extends JavaPlugin {
         missingRequirements = null;
         instance = this;
         executor = new SyncBalancedExecutor(Bukkit.getScheduler());
+        asyncExecutor = new AsyncBalancedExecutor(Bukkit.getScheduler());
         configFiles.clear();
         activePlayers.clear();
         createFolders();
@@ -183,7 +183,6 @@ public class uSkyBlock extends JavaPlugin {
         }
 
         // Not sure this is needed - isn't reloadConfig() invoked before onEnable?
-        this.uuidManager = new UUIDManager(this);
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
@@ -298,6 +297,9 @@ public class uSkyBlock extends JavaPlugin {
 
     public void registerEvents() {
         final PluginManager manager = this.getServer().getPluginManager();
+        PlayerDB playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        manager.registerEvents(new PlayerNameChangeListener(this), this);
+        manager.registerEvents(new PlayerNameChangeManager(this, playerDB), this);
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
         manager.registerEvents(new ExploitEvents(this), this);
@@ -896,7 +898,6 @@ public class uSkyBlock extends JavaPlugin {
 
     public PlayerInfo loadPlayerData(Player player) {
         uSkyBlock.log(Level.INFO, "Loading player data for " + player.getName());
-        uuidManager.updatePlayer(player);
         final PlayerInfo pi = loadPlayerInfo(player.getName());
         if (pi.getHasIsland()) {
             WorldGuardHandler.protectIsland(player, pi);
@@ -1611,7 +1612,6 @@ public class uSkyBlock extends JavaPlugin {
             readConfig(e.getValue(), configFile);
         }
         activePlayers.clear();
-        this.uuidManager = new UUIDManager(this);
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
@@ -1693,4 +1693,6 @@ public class uSkyBlock extends JavaPlugin {
     public BalancedExecutor getExecutor() {
         return executor;
     }
+
+    public BalancedExecutor getAsyncExecutor() { return asyncExecutor; }
 }

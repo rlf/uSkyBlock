@@ -313,4 +313,16 @@ public class PlayerInfo implements Serializable {
     public UUID getUniqueId() {
         return uuid;
     }
+
+    public PlayerInfo renameTo(String newName) {
+        File file = new File(playerConfigFile.getParent(), newName + ".yml");
+        if (file.exists()) {
+            file.delete();
+        }
+        file = playerConfigFile;
+        playerName = newName;
+        save();
+        file.delete();
+        return this;
+    }
 }
