@@ -479,21 +479,13 @@ public class uSkyBlock extends JavaPlugin {
         changePlayerBiome(player, "OCEAN");
         next.setY((double) Settings.island_height);
         setNewPlayerIsland(player, next);
-        clearPlayerInventory(player);
-        clearEntitiesNearPlayer(player);
         setRestartCooldown(player);
-        player.sendMessage("\u00a74Close your eyes!");
-        getServer().getScheduler().runTaskLater(this, new Runnable() {
+        getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
-                execCommand(player, "op:spawn");
-                player.sendMessage("\u00a7eWarping you to your new island!" + ChatColor.GREEN + " Get ready!");
-                getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
-                    @Override
-                    public void run() {
-                        uSkyBlock.getInstance().homeTeleport(player);
-                    }
-                }, 10);
+                homeTeleport(player);
+                clearPlayerInventory(player);
+                clearEntitiesNearPlayer(player);
             }
         }, 10);
     }
@@ -502,6 +494,7 @@ public class uSkyBlock extends JavaPlugin {
         if (next.getBlockX() == 0 && next.getBlockZ() == 0) {
             return false;
         }
+        spawnTeleport(player);
         islandLogic.clearIsland(next, new Runnable() {
             @Override
             public void run() {
@@ -1103,14 +1096,14 @@ public class uSkyBlock extends JavaPlugin {
             Location next = getNextIslandLocation(last);
             createIsland(player, next);
             setNewPlayerIsland(player, next);
-            player.getInventory().clear();
-            player.getEquipment().clear();
             changePlayerBiome(player, "OCEAN");
-            clearEntitiesNearPlayer(player);
             protectWithWorldGuard(player, player, pi);
+            homeTeleport(player);
+            clearPlayerInventory(player);
+            clearEntitiesNearPlayer(player);
         } catch (Exception ex) {
             player.sendMessage("Could not create your Island. Please contact a server moderator.");
-            ex.printStackTrace();
+            log(Level.SEVERE, "Error creating island", ex);
             return false;
         }
         log(Level.INFO, "Finished creating player island.");
@@ -1550,10 +1543,9 @@ public class uSkyBlock extends JavaPlugin {
     private void setNewPlayerIsland(final Player player, final Location loc) {
         PlayerInfo playerInfo = getPlayerInfo(player);
         playerInfo.startNewIsland(loc);
-        safeTeleport(player, getChestSpawnLoc(loc).add(0.5, 0.1, 0.5));
+        playerInfo.setHomeLocation(getChestSpawnLoc(loc).add(0.5, 0.1, 0.5));
         IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), player.getName());
         info.updatePartyNumber(player);
-        homeSet(player);
         playerInfo.resetAllChallenges();
         playerInfo.save();
     }
@@ -1710,5 +1702,7 @@ public class uSkyBlock extends JavaPlugin {
         return executor;
     }
 
-    public BalancedExecutor getAsyncExecutor() { return asyncExecutor; }
+    public BalancedExecutor getAsyncExecutor() {
+        return asyncExecutor;
+    }
 }

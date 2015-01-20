@@ -24,7 +24,6 @@ public class CreateCommand extends RequirePlayerCommand {
         }
         if (pi.getIslandLocation().getBlockX() == 0 && pi.getIslandLocation().getBlockY() == 0 && pi.getIslandLocation().getBlockZ() == 0) {
             plugin.createIsland(player, pi);
-            return true;
         } else if (pi.getHasIsland()) {
             IslandInfo island = plugin.getIslandInfo(pi);
             if (island.isLeader(player)) {
