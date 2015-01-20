@@ -23,7 +23,7 @@ public class AcceptRejectCommand extends RequirePlayerCommand {
             }
         } else if (alias.equalsIgnoreCase("accept")) {
             if (inviteHandler.accept(player)) {
-                player.sendMessage("\u00a7eYou have rejected the invitation to join an island.");
+                player.sendMessage("\u00a7eYou have accepted the invitation to join an island.");
             } else {
                 player.sendMessage("\u00a74You haven't been invited.");
             }

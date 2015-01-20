@@ -85,7 +85,7 @@
                     <replacements>
                         <replacement>
                             <token>v2.0.1</token>
-                            <value>gitTag=v2.0.1</value>
+                            <value>gitTag=2.0.1</value>
                         </replacement>
                     </replacements>
                 </configuration>

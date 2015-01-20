@@ -25,7 +25,7 @@ public class TopTenComparator implements Comparator<String> {
     private int getValue(String key) {
         Double d = dataMap.get(key);
         if (d != null) {
-            return (int)(d.doubleValue()*10);
+            return (int)(Math.round(d.doubleValue()*10));
         }
         return 0;
     }

@@ -38,9 +38,10 @@ public class LeaveCommand extends RequireIslandCommand {
             if (Bukkit.getPlayer(island.getLeader()) != null) {
                 Bukkit.getPlayer(island.getLeader()).sendMessage("\u00a74" + player.getName() + " has left your island!");
             }
+            return true;
         } else {
             player.sendMessage("\u00a74You must be in the skyblock world to leave your party!");
+            return true;
         }
-        return false;
     }
 }

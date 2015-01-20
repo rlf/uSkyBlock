@@ -27,8 +27,9 @@ public abstract class AbstractTabCompleter implements TabCompleter {
     public static List<String> filter(Collection<String> list, String prefix) {
         List<String> filtered = new ArrayList<>();
         if (list != null) {
+            String lowerPrefix = prefix.toLowerCase();
             for (String test : list) {
-                if (test.startsWith(prefix)) {
+                if (test.toLowerCase().startsWith(lowerPrefix)) {
                     filtered.add(test);
                 }
             }

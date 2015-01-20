@@ -69,7 +69,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     private void removePlayerFromIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
         sender.sendMessage("Removing " + playerInfo.getPlayerName() + " from island");
         playerInfo.removeFromIsland();
-        islandInfo.removeMember(playerInfo.getPlayerName());
+        islandInfo.removeMember(playerInfo);
         playerInfo.save();
     }
 
@@ -90,7 +90,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     private void deleteIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
         if (playerInfo.getIslandLocation() != null) {
             sender.sendMessage("\u00a7eRemoving " + playerInfo.getPlayerName() + "'s island.");
-            uSkyBlock.getInstance().deletePlayerIsland(playerInfo.getPlayerName());
+            uSkyBlock.getInstance().deletePlayerIsland(playerInfo.getPlayerName(), null);
         } else {
             sender.sendMessage("Error: That player does not have an island!");
         }

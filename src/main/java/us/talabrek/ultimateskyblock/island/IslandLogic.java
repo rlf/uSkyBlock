@@ -42,8 +42,7 @@ public class IslandLogic {
     private final Map<String, IslandInfo> islands = new ConcurrentHashMap<>();
 
     private volatile long lastGenerate = 0;
-    private final LinkedHashMap<String, Double> top = new LinkedHashMap<>();
-    private final LinkedHashMap<String, String> topMembers = new LinkedHashMap<>();
+    private final List<IslandLevel> ranks = new ArrayList<>();
 
     public IslandLogic(uSkyBlock plugin, File directoryIslands) {
         this.plugin = plugin;
@@ -150,25 +149,21 @@ public class IslandLogic {
     }
 
     private void displayTopTen(final CommandSender sender) {
-        int i = 1;
         int playerrank = 0;
         sender.sendMessage("\u00a7eDisplaying the top 10 islands:");
-        if (top == null || top.isEmpty()) {
-            sender.sendMessage("\u00a74Top ten list is empty! (perhaps the generation failed?)");
-        }
-        for (final String playerName : top.keySet()) {
-            if (i <= 10) {
-                String members = topMembers.get(playerName);
-                if (!members.isEmpty()) {
-                    members = "(" + members + ")";
+        synchronized (ranks) {
+            if (ranks == null || ranks.isEmpty()) {
+                sender.sendMessage("\u00a74Top ten list is empty! (perhaps the generation failed?)");
+            }
+            int place = 1;
+            for (final IslandLevel level : ranks.subList(0, Math.min(ranks.size(), 10))) {
+                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): %s \u00a77%s", place, level.getScore(),
+                        level.getLeaderName(), level.getMembers()));
+                if (level.hasMember(sender.getName())) {
+                    playerrank = place;
                 }
-                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): %s \u00a77%s", i, top.get(playerName),
-                        playerName, members));
+                place++;
             }
-            if (playerName != null && playerName.equalsIgnoreCase(sender.getName())) {
-                playerrank = i;
-            }
-            ++i;
         }
         if (playerrank > 0) {
             sender.sendMessage("\u00a7eYour rank is: " + ChatColor.WHITE + playerrank);
@@ -191,8 +186,7 @@ public class IslandLogic {
         }
     }
     private void generateTopTen() {
-        final HashMap<String, Double> tempMap = new HashMap<>();
-        final HashMap<String, String> memberMap = new HashMap<>();
+        List<IslandLevel> topTen = new ArrayList<>();
         final File folder = directoryIslands;
         final File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
@@ -201,32 +195,28 @@ public class IslandLogic {
             if (islandConfig != null && level > 0) {
                 String partyLeader = islandConfig.getString("party.leader");
                 PlayerInfo pi = plugin.getPlayerInfo(partyLeader);
-                String key = partyLeader;
+                String partyLeaderName = partyLeader;
                 if (pi != null) {
-                    key = pi.getDisplayName();
+                    partyLeaderName = pi.getDisplayName();
                 }
-                tempMap.put(key, level);
+                String toStr = "";
                 ConfigurationSection members = islandConfig.getConfigurationSection("party.members");
                 if (members != null) {
                     Set<String> membersStr = members.getKeys(false);
                     if (membersStr != null) {
                         membersStr.remove(partyLeader);
-                        String toStr = Arrays.toString(membersStr.toArray(new String[membersStr.size()]));
-                        memberMap.put(key, toStr.substring(1, toStr.length()-1));
-                    } else {
-                        memberMap.put(key, "");
+                        toStr = Arrays.toString(membersStr.toArray(new String[membersStr.size()]));
+                        toStr = toStr.substring(1, toStr.length()-1);
                     }
                 }
+                topTen.add(new IslandLevel(islandConfig.getName(), partyLeaderName, !toStr.isEmpty() ? "(" + toStr + ")" : "", level));
             }
         }
-        TreeMap<String, Double> sortedMap = new TreeMap<>(new TopTenComparator(tempMap));
-        sortedMap.putAll(tempMap);
-        synchronized (top) {
+        Collections.sort(topTen);
+        synchronized (ranks) {
             lastGenerate = System.currentTimeMillis();
-            top.clear();
-            top.putAll(sortedMap);
-            topMembers.clear();
-            topMembers.putAll(memberMap);
+            ranks.clear();
+            ranks.addAll(topTen);
         }
     }
 

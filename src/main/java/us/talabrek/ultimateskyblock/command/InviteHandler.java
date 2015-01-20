@@ -68,7 +68,7 @@ public class InviteHandler {
         return false;
     }
 
-    public synchronized boolean accept(Player player) {
+    public synchronized boolean accept(final Player player) {
         UUID uuid = player.getUniqueId();
         IslandInfo oldIsland = plugin.getIslandInfo(player);
         if (oldIsland != null && oldIsland.isParty()) {
@@ -78,19 +78,30 @@ public class InviteHandler {
         Invite invite = inviteMap.remove(uuid);
         if (invite != null) {
             PlayerInfo pi = plugin.getPlayerInfo(player);
-            IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
+            final IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
+            boolean deleteOldIsland = false;
             if (pi.getHasIsland() && !island.isParty()) {
-                plugin.deletePlayerIsland(player.getName());
+                deleteOldIsland = true;
             }
             Set<UUID> uuids = waitingInvites.get(invite.getIslandName());
             uuids.remove(uuid);
-            player.sendMessage(ChatColor.GREEN + "You have joined an island! Use /island party to see the other members.");
-            // TODO: 29/12/2014 - R4zorax: Perhaps these steps should belong somewhere else?
-            addPlayerToParty(player, island);
-            plugin.setRestartCooldown(player);
-            plugin.homeTeleport(player);
-            plugin.clearPlayerInventory(player);
-            WorldGuardHandler.addPlayerToOldRegion(island.getName(), player.getName());
+            Runnable joinIsland = new Runnable() {
+                @Override
+                public void run() {
+                    player.sendMessage(ChatColor.GREEN + "You have joined an island! Use /island party to see the other members.");
+                    // TODO: 29/12/2014 - R4zorax: Perhaps these steps should belong somewhere else?
+                    addPlayerToParty(player, island);
+                    plugin.setRestartCooldown(player);
+                    plugin.homeTeleport(player);
+                    plugin.clearPlayerInventory(player);
+                    WorldGuardHandler.addPlayerToOldRegion(island.getName(), player.getName());
+                }
+            };
+            if (deleteOldIsland) {
+                plugin.deletePlayerIsland(player.getName(), joinIsland);
+            } else {
+                joinIsland.run();
+            }
             return true;
         }
         return false;

@@ -232,7 +232,7 @@ public class uSkyBlock extends JavaPlugin {
         }, 0L);
     }
 
-    public synchronized boolean isRequirementsMet(CommandSender sender, boolean isDev) {
+    public synchronized boolean isRequirementsMet(CommandSender sender) {
         if (missingRequirements == null) {
             PluginManager pluginManager = getServer().getPluginManager();
             missingRequirements = "";
@@ -249,11 +249,10 @@ public class uSkyBlock extends JavaPlugin {
         }
         if (missingRequirements.isEmpty()) {
             return true;
-        } else if (isDev || sender.isOp()) {
+        } else {
             sender.sendMessage(missingRequirements.split("\n"));
             return false;
         }
-        return false;
     }
 
     private void createFolders() {
@@ -464,12 +463,13 @@ public class uSkyBlock extends JavaPlugin {
         saveOrphans();
     }
 
-    public void deletePlayerIsland(final String player) {
+    public void deletePlayerIsland(final String player, final Runnable runner) {
         final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
         islandLogic.clearIsland(pi.getIslandLocation(), new Runnable() {
             @Override
             public void run() {
                 postDelete(pi);
+                if (runner != null) runner.run();
             }
         });
     }
@@ -554,13 +554,14 @@ public class uSkyBlock extends JavaPlugin {
     }
 
     public boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
-        PlayerInfo pi = getPlayerInfo(player);
-        Location newLoc = findBedrockLocation(l);
+        final PlayerInfo pi = getPlayerInfo(player);
+        final Location newLoc = findBedrockLocation(l);
+        boolean deleteOldIsland = false;
         if (pi.getHasIsland()) {
             Location oldLoc = pi.getIslandLocation();
             if (newLoc != null && oldLoc != null
                     && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ())) {
-                uSkyBlock.getInstance().deletePlayerIsland(pi.getPlayerName());
+                deleteOldIsland = true;
             }
         }
         if (newLoc != null) {
@@ -568,13 +569,22 @@ public class uSkyBlock extends JavaPlugin {
                 sender.sendMessage("\u00a74Player is already assigned to this island!");
                 return true;
             }
-            pi.setHomeLocation(null);
-            pi.setHasIsland(true);
-            pi.setIslandLocation(newLoc);
-            pi.setHomeLocation(getSafeHomeLocation(pi));
-            islandLogic.createIsland(pi.locationForParty(), player);
-            if (!WorldGuardHandler.protectIsland(sender, pi)) {
-                sender.sendMessage("\u00a74Player doesn't have an island or it's already protected!");
+            Runnable resetIsland = new Runnable() {
+                @Override
+                public void run() {
+                    pi.setHomeLocation(null);
+                    pi.setHasIsland(true);
+                    pi.setIslandLocation(newLoc);
+                    pi.setHomeLocation(getSafeHomeLocation(pi));
+                    islandLogic.createIsland(pi.locationForParty(), player);
+                    WorldGuardHandler.protectIsland(sender, pi);
+                    pi.save();
+                }
+            };
+            if (deleteOldIsland) {
+                deletePlayerIsland(pi.getPlayerName(), resetIsland);
+            } else {
+                resetIsland.run();
             }
             return true;
         }
@@ -670,9 +680,15 @@ public class uSkyBlock extends JavaPlugin {
             return true;
         }
         removeCreatures(homeSweetHome);
-        player.teleport(homeSweetHome);
+        safeTeleport(player, homeSweetHome);
         player.sendMessage(ChatColor.GREEN + "Teleporting you to your island.");
         return true;
+    }
+
+    private void safeTeleport(Player player, Location homeSweetHome) {
+        player.setVelocity(new org.bukkit.util.Vector());
+        player.teleport(homeSweetHome);
+        player.setVelocity(new org.bukkit.util.Vector());
     }
 
     public boolean warpTeleport(final Player player, final PlayerInfo pi) {
@@ -686,7 +702,7 @@ public class uSkyBlock extends JavaPlugin {
             player.sendMessage("\u00a74Unable to warp you to that player's island!");
             return true;
         }
-        player.teleport(warpSweetWarp);
+        safeTeleport(player, warpSweetWarp);
         player.sendMessage(ChatColor.GREEN + "Teleporting you to " + pi.getPlayerName() + "'s island.");
         return true;
     }
@@ -1534,7 +1550,7 @@ public class uSkyBlock extends JavaPlugin {
     private void setNewPlayerIsland(final Player player, final Location loc) {
         PlayerInfo playerInfo = getPlayerInfo(player);
         playerInfo.startNewIsland(loc);
-        player.teleport(getChestSpawnLoc(loc).add(0.5, 0.1, 0.5)); // Center on block.
+        safeTeleport(player, getChestSpawnLoc(loc).add(0.5, 0.1, 0.5));
         IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), player.getName());
         info.updatePartyNumber(player);
         homeSet(player);

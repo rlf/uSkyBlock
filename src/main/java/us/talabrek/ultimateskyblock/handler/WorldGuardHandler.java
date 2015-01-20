@@ -11,6 +11,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
@@ -69,14 +70,14 @@ public class WorldGuardHandler {
             regionManager.removeRegion(islandInfo.getLeader() + "island");
             regionManager.addRegion(region);
             regionManager.save();
-        } catch (StorageException|InvalidFlagFormat e) {
+        } catch (StorageException | InvalidFlagFormat e) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
 
     }
+
     private static ProtectedCuboidRegion setRegionFlags(CommandSender sender, IslandInfo islandConfig) throws InvalidFlagFormat {
         String regionName = islandConfig.getName() + "island";
-        uSkyBlock plugin = uSkyBlock.getInstance();
         Location islandLocation = islandConfig.getIslandLocation();
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName,
                 getProtectionVectorLeft(islandLocation),
@@ -148,10 +149,22 @@ public class WorldGuardHandler {
     }
 
     public static void removePlayerFromRegion(final String islandName, final String player) {
-        if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(islandName + "island")) {
-            final DefaultDomain owners = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(islandName + "island").getOwners();
-            owners.removePlayer(player);
-            getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(islandName + "island").setOwners(owners);
+        RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
+        try {
+            if (regionManager.hasRegion(islandName + "island")) {
+                ProtectedRegion region = regionManager.getRegion(islandName + "island");
+                final DefaultDomain owners = region.getOwners();
+                owners.removePlayer(player);
+                if (owners.size() == 0) {
+                    region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(), "\u00a74** You are entering a protected - but abandoned - island area."));
+                    region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(), "\u00a74** You are leaving an abandoned island."));
+                }
+                region.setOwners(owners);
+                regionManager.addRegion(region);
+                regionManager.save();
+            }
+        } catch (StorageException|InvalidFlagFormat e) {
+            uSkyBlock.getInstance().log(Level.WARNING, "Error saving island region after removal of " + player);
         }
     }
 
@@ -170,7 +183,7 @@ public class WorldGuardHandler {
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
             if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
-                return id.substring(0, id.length()-6);
+                return id.substring(0, id.length() - 6);
             }
         }
         return null;

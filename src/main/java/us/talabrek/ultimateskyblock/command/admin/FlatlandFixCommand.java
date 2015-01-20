@@ -12,10 +12,10 @@ import java.util.Map;
 /**
  * Tries to clear an area of flatland.
  */
-public class FixCommand extends AbstractUSBCommand {
+public class FlatlandFixCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
-    public FixCommand(uSkyBlock plugin) {
+    public FlatlandFixCommand(uSkyBlock plugin) {
         super("fix-flatland", "usb.admin.remove", "?player", "tries to fix the the area of flatland.");
         this.plugin = plugin;
     }

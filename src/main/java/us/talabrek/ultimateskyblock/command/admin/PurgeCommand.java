@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.command.admin;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import us.talabrek.ultimateskyblock.command.admin.task.PurgeTask;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -63,24 +64,16 @@ public class PurgeCommand extends AbstractUSBCommand {
                     }
                 }
                 plugin.log(Level.INFO, "Removing " + removeList.size() + " inactive islands.");
-                final int[] jobId = new int[1];
-                jobId[0] = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+                Runnable completion = new Runnable() {
                     @Override
                     public void run() {
-                        if (!removeList.isEmpty() && plugin.isPurgeActive()) {
-                            String playerName = removeList.remove(0);
-                            plugin.deletePlayerIsland(playerName);
-                            plugin.log(Level.INFO, "Purge: Removing " + playerName + "'s island");
-                        }
                         if (removeList.isEmpty() && plugin.isPurgeActive()) {
                             plugin.log(Level.INFO, "Finished purging marked inactive islands.");
-                            if (jobId != null && jobId[0] != 0) {
-                                plugin.getServer().getScheduler().cancelTask(jobId[0]);
-                            }
                             plugin.deactivatePurge();
                         }
                     }
-                }, 0L, 20L);
+                };
+                plugin.getExecutor().execute(plugin, new PurgeTask(plugin, removeList), completion, 0.2f, 10);
             }
         });
         return false;

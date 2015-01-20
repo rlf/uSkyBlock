@@ -88,7 +88,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
 
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-        if (!uSkyBlock.getInstance().isRequirementsMet(sender, false)) {
+        if (!uSkyBlock.getInstance().isRequirementsMet(sender)) {
             return false;
         }
         if (args.length == 0 || (args.length == 1 && args[0].matches(HELP_PATTERN))) {
