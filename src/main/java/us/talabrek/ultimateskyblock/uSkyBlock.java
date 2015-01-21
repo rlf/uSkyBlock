@@ -122,8 +122,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         HandlerList.unregisterAll(this);
         try {
             this.unloadPlayerFiles();
-            if (this.lastIsland != null) {
-                this.setLastIsland(this.lastIsland);
+            if (lastIsland != null) {
+                setLastIsland(lastIsland);
             }
         } catch (Exception e) {
             log(Level.INFO, "Something went wrong saving the island and/or party data!", e);
@@ -929,10 +929,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         notifier.unloadPlayer(player);
     }
 
-    public void reloadIslandConfig(final String location) {
-        islandLogic.reloadIsland(location);
-    }
-
     public FileConfiguration getTempIslandConfig(final String location) {
         File islandFile = new File(this.directoryIslands, location + ".yml");
         return YamlConfiguration.loadConfiguration(islandFile);
@@ -1157,8 +1153,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         next.setY((double) Settings.island_height);
     }
 
-    // TODO: 13/12/2014 - R4zorax: Move island logic somewhere else... (IslandLogic comes to mind)
-    private Location getNextIslandLocation(Location last) {
+    private synchronized Location getNextIslandLocation(Location last) {
         while (hasOrphanedIsland() && !isSkyWorld(checkOrphan().getWorld())) {
             removeNextOrphan();
         }
@@ -1168,18 +1163,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
             removeNextOrphan();
         }
-        Location next;
+        Location next = last;
         if (hasOrphanedIsland() && !islandAtLocation(checkOrphan())) {
             next = getOrphanedIsland();
             saveOrphans();
-        } else {
-            next = nextIslandLocation(last);
-            setLastIsland(next);
-            while (islandAtLocation(next)) {
-                next = nextIslandLocation(next);
-            }
         }
-        while (islandInSpawn(next)) {
+        while (islandInSpawn(next) || islandAtLocation(next)) {
             next = nextIslandLocation(next);
         }
         setLastIsland(next);
