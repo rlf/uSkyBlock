@@ -40,6 +40,14 @@ public class LevelCommand extends RequireIslandCommand {
             }
             player.sendMessage("\u00a7eYou can use that command again in " + plugin.getInfoCooldownTime(player) / 1000L + " seconds.");
             return true;
+        } else if (args.length == 1) {
+            if (player.hasPermission("usb.island.info.other") && (!plugin.onInfoCooldown(player) || Settings.general_cooldownInfo == 0)) {
+                plugin.setInfoCooldown(player);
+                getIslandLevel(player, args[0], alias);
+            } else {
+                player.sendMessage("\u00a74You do not have access to that command!");
+            }
+            return true;
         }
         return false;
     }
@@ -98,6 +106,4 @@ public class LevelCommand extends RequireIslandCommand {
         }
         return true;
     }
-
-
 }
