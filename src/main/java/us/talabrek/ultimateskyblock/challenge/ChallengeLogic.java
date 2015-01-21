@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -339,7 +340,7 @@ public class ChallengeLogic {
         }
         player.sendMessage(String.format("\u00a7eItem reward(s): \u00a7f%s", reward.getRewardText()));
         player.sendMessage(String.format("\u00a7eExp reward: \u00a7f%d", reward.getXpReward()));
-        if (VaultHandler.hasEcon()) {
+        if (defaults.enableEconomyPlugin && VaultHandler.hasEcon()) {
             player.sendMessage(String.format("\u00a7eCurrency reward: \u00a7f%5.2f %s \u00a7a (%4.2f%%)", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
         }
         if (reward.getPermissionReward() != null) {
