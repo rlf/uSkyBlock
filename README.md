@@ -11,7 +11,7 @@ This version depends on the following plugins:
 * WorldEdit 6.0.0-SNAPSHOT
 * WorldGuard 6.0.0-SNAPSHOT
 
-## Releases [![Build Status](https://travis-ci.org/rlf/uSkyBlock.svg?branch=v2.0.0)](https://travis-ci.org/rlf/uSkyBlock)
+## Releases [![Build Status](https://api.travis-ci.org/rlf/uSkyBlock.svg)](https://travis-ci.org/rlf/uSkyBlock)
 
 There is a lot of pre-releases (the ones named RX.Y), these are test-releases, and are released here, until we get a working build-server to provide developer-snapshots.
 
