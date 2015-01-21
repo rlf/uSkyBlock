@@ -71,7 +71,7 @@ ranks:
           # {position}   - The position of the player
           # {party}      - Execute the command once for each member of the party (substituting the name)
           commands:
-            - 'effect {party} 10'
+            - 'op:effect {party} 10'
 
         repeatReward:
           # [text] The text name of the reward (to display to the player).

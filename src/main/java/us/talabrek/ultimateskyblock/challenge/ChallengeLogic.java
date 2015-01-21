@@ -337,7 +337,7 @@ public class ChallengeLogic {
         if (defaults.broadcastCompletion && isFirstCompletion) {
             Bukkit.getServer().broadcastMessage(config.getString("broadcastText") + player.getName() + " has completed the " + challengeName + " challenge!");
         }
-        player.sendMessage(String.format("\u00a7eItem reward(s): \u00a7f%d", reward.getRewardText()));
+        player.sendMessage(String.format("\u00a7eItem reward(s): \u00a7f%s", reward.getRewardText()));
         player.sendMessage(String.format("\u00a7eExp reward: \u00a7f%d", reward.getXpReward()));
         if (VaultHandler.hasEcon()) {
             player.sendMessage(String.format("\u00a7eCurrency reward: \u00a7f%5.2f %s \u00a7a (%4.2f%%)", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
