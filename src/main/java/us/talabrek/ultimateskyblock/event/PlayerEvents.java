@@ -28,10 +28,12 @@ public class PlayerEvents implements Listener {
     
     private final uSkyBlock plugin;
     private final boolean visitorFallProtected;
+    private final boolean visitorFireProtected;
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
         visitorFallProtected = plugin.getConfig().getBoolean("options.protection.visitors.fall", true);
+        visitorFireProtected = plugin.getConfig().getBoolean("options.protection.visitors.fire-damage", true);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -102,9 +104,12 @@ public class PlayerEvents implements Listener {
         if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
+        // Only protect visitors against damage, if pvp is disabled
         if (!Settings.island_allowPvP
-                && (FIRE_TRAP.contains(event.getCause()) || (event.getCause() == EntityDamageEvent.DamageCause.FALL) && visitorFallProtected)
-                && event.getEntity() instanceof Player && !plugin.playerIsOnIsland((Player)event.getEntity())) {
+                && ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
+                  || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
+                && event.getEntity() instanceof Player
+                && !plugin.playerIsOnIsland((Player)event.getEntity())) {
             event.setCancelled(true);
         }
     }

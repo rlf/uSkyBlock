@@ -134,3 +134,5 @@ options:
       villager-trading: true
       # Whether or not visitors are protected from fall damage
       fall: true
+      # Whether or not visiotrs are protected from fire damage (incl. lava)
+      fire-damage: true
