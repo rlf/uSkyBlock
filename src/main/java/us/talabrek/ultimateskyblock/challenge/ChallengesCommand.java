@@ -16,6 +16,9 @@ import java.util.ListIterator;
 
 public class ChallengesCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
+        if (!uSkyBlock.getInstance().isRequirementsMet(sender)) {
+            return false;
+        }
         if (!(sender instanceof Player)) {
             return false;
         }

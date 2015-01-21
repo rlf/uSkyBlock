@@ -200,7 +200,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     VaultHandler.setupPermissions();
                     try {
                         FileConfiguration config = getLastIslandConfig();
-                        if (!config.contains("options.general.lastIslandX") && uSkyBlock.this.getConfig().contains("options.general.lastIslandX")) {
+                        if (!config.contains("options.general.lastIslandX") && getConfig().contains("options.general.lastIslandX")) {
                             FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandX");
                             FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandZ");
                             config.set("options.general.lastIslandX", getConfig().getInt("options.general.lastIslandX"));
@@ -216,6 +216,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     }
                     setupOrphans();
                 }
+                WorldGuardHandler.setupGlobal(getSkyBlockWorld());
                 getServer().getScheduler().runTaskLater(instance, new Runnable() {
                     @Override
                     public void run() {
@@ -227,7 +228,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     }
                 }, 100);
             }
-        }, 0L);
+        }, 150L);
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender) {

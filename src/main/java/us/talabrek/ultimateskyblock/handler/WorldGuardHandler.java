@@ -9,10 +9,12 @@ import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.managers.storage.StorageException;
+import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
@@ -205,5 +207,22 @@ public class WorldGuardHandler {
     public static void removeIslandRegion(String islandName) {
         RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
         regionManager.removeRegion(islandName + "island");
+    }
+
+    public static void setupGlobal(World world) {
+        RegionManager regionManager = getWorldGuard().getRegionManager(world);
+        if (regionManager != null) {
+            ProtectedRegion global = regionManager.getRegion("__global__");
+            if (global == null) {
+                global = new GlobalProtectedRegion("__global__");
+            }
+            global.setFlag(DefaultFlag.BUILD, StateFlag.State.DENY);
+            regionManager.addRegion(global);
+            try {
+                regionManager.save();
+            } catch (StorageException e) {
+                uSkyBlock.getInstance().log(Level.WARNING, "Error saving global region", e);
+            }
+        }
     }
 }
