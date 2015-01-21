@@ -2,7 +2,7 @@
 .settings
 .classpath
 bin
-
+/dependency-reduced-pom.xml
 # Package Files #
 *.jar
 *.war

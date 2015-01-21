@@ -22,6 +22,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
 import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.async.BalancedExecutor;
@@ -229,6 +230,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 }, 100);
             }
         }, 150L);
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        } catch (Exception e) {
+            log(Level.WARNING, "Failed to submit metrics data", e);
+        }
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender) {
