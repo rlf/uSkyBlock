@@ -5,7 +5,9 @@ env:
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
-  file: target/uSkyBlock.jar
+  file:
+  - target/uSkyBlock.jar
+  - target/uSkyBlock-api.jar
   skip_cleanup: true
   pre-release: true
   on:
