@@ -100,7 +100,7 @@ public class ItemDropEvents implements Listener {
         }
         // You are on another's island, and the stuff dropped weren't yours.
         event.setCancelled(true);
-        plugin.notifyPlayer(player, "You can only trade in spawn");
+        plugin.notifyPlayer(player, "You cannot pick up other players' loot when you are a visitor!");
     }
 
     private boolean wasDroppedBy(Player player, PlayerPickupItemEvent event) {
