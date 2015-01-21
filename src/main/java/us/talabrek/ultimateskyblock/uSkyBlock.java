@@ -22,6 +22,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
 import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.async.BalancedExecutor;
 import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
@@ -36,6 +37,7 @@ import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -52,16 +54,13 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
 
-public class uSkyBlock extends JavaPlugin {
+public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private static final String[][] depends = new String[][]{
             new String[]{"Vault", "1.5"},
             new String[]{"WorldEdit", "6.0"},
@@ -102,7 +101,6 @@ public class uSkyBlock extends JavaPlugin {
     static {
         uSkyBlock.skyBlockWorld = null;
     }
-
 
     public uSkyBlock() {
         // TODO: 08/12/2014 - R4zorax: Most of these should be converted to local variables
@@ -1704,5 +1702,33 @@ public class uSkyBlock extends JavaPlugin {
 
     public BalancedExecutor getAsyncExecutor() {
         return asyncExecutor;
+    }
+
+    public static uSkyBlockAPI getAPI() {
+        return getInstance();
+    }
+
+    // API
+
+    @Override
+    public List<IslandLevel> getTopTen() {
+        return getRanks(0, 10);
+    }
+
+    @Override
+    public List<IslandLevel> getRanks(int offset, int length) {
+        return islandLogic != null ? islandLogic.getRanks(offset, length) : Collections.<IslandLevel>emptyList();
+    }
+
+    @Override
+    public double getIslandLevel(Player player) {
+        PlayerInfo info = getPlayerInfo(player);
+        if (info != null) {
+            IslandInfo islandInfo = getIslandInfo(info);
+            if (islandInfo != null) {
+                return islandInfo.getLevel();
+            }
+        }
+        return 0;
     }
 }

@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.island;
+package us.talabrek.ultimateskyblock.api;
 
 /**
  * Simple Immutable POJO for holding the island level.

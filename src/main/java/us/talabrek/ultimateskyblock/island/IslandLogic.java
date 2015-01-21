@@ -10,8 +10,8 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.task.RenamePlayerTask;
@@ -185,6 +185,17 @@ public class IslandLogic {
             displayTopTen(sender);
         }
     }
+
+    public List<IslandLevel> getRanks(int offset, int length) {
+        synchronized (ranks) {
+            int size = ranks.size();
+            if (size <= offset) {
+                return Collections.emptyList();
+            }
+            return ranks.subList(offset, Math.min(size-offset, length));
+        }
+    }
+
     private void generateTopTen() {
         List<IslandLevel> topTen = new ArrayList<>();
         final File folder = directoryIslands;
