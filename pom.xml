@@ -175,7 +175,12 @@
                     <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
                     <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-                    <includes><include>**/uSkyBlock-*-api.jar</include></includes>
+                    <includes>
+                        <include>**/uSkyBlock*-api.jar</include>
+                        <include>**/uSkyBlock*-api.pom</include>
+                        <include>**/uSkyBlock*-api.*.md5</include>
+                        <include>**/uSkyBlock*-api.*.sha1</include>
+                    </includes>
                     <repositoryName>uSkyBlock</repositoryName>      <!-- github repo name -->
                     <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
                     <oauth2Token>${GITHUB_TOKEN}</oauth2Token>

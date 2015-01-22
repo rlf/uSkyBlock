@@ -1,4 +1,7 @@
 language: java
+branches:
+  only:
+    - /^v2.*$/
 env:
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
@@ -9,7 +12,7 @@ deploy:
   api-key: ${GITHUB_TOKEN}
   file:
   - target/uSkyBlock.jar
-  - target/uSkyBlock-2.1.0-SNAPSHOT-api.jar
+  - target/uSkyBlock-api.jar
   skip_cleanup: true
   on:
     tags: true
