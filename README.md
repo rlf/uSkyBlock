@@ -1,6 +1,6 @@
 # uSkyBlock
 
-This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin, which he has decided to stop supporting.
+This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin.
 
 # Installation
 
@@ -13,13 +13,15 @@ This version depends on the following plugins:
 
 ## Releases [![Build Status](https://api.travis-ci.org/rlf/uSkyBlock.svg)](https://travis-ci.org/rlf/uSkyBlock)
 
-There is a lot of pre-releases (the ones named RX.Y), these are test-releases, and are released here, until we get a working build-server to provide developer-snapshots.
+We have been releasing close to 100 "pre-releases" or "release-candidates" so far, and are getting ready to make our first "official release".
 
-Only promoted releases are considered "safe". Any of the pre-releases will contain various bugs and regressions.
+This will be named v2.1.0, and moving forward from this one, we will start to use the micro-versions for release-candidates, the minor version for "official releases", and the major-version to signify changes that might require data-conversion or similar.
 
 ## Config-files
 
-*Note*: The R0.X release candidates all change heavily in most of the config files, so place close attention to the changes between your local copy, and the "default" ones.
+*Note*: Config files might change quite a bit, so before installing the plugin, please move existing config files aside, and manually merge them after the plugin has "installed" it's own versions.
+
+We are working on a feature, that will do this automatically - but until that is released, please follow the above procedure.
 
 # Building/Compiling
 
@@ -69,9 +71,9 @@ Talabrek intended to share the code with the public, but simply didn't have the 
 
 Unfortunately, he had registered the plugin as `All rights reserved` on Bukkit, meaning the bukkit staff put the plugin under moderation - further increasing the work-load required to share the plugin.
 
-Those trying to get hold on Talabrek, had a hard time, and eventually multiple developers got hold on different versions of the uSkyBlock plugin, and tried to continue the work in various channels (wesley27 and wolfwork comes to mind).
+Those trying to get hold on Talabrek, had a hard time, and eventually multiple developers got their hands on different versions of the uSkyBlock plugin, and tried to continue the work in various channels (wesley27 and wolfwork comes to mind).
 
-After app. 1½ months of refactoring, I got the following e-mail from Talabrek:
+On the very last day of 2014, we received the following e-mail from Talabrek:
 
 > Recently, now that a stable 1.8 and the future of spigot is looking hopeful, I have gotten back to work on the plugin. There is much to be done though, and I just don't have the time to do it, so I finally decided to make it available for the public to work on. This is when I noticed the work you and others have done on the plugin.
 >
