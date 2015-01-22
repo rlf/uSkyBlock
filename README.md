@@ -17,6 +17,10 @@ We have been releasing close to 100 "pre-releases" or "release-candidates" so fa
 
 This will be named v2.1.0, and moving forward from this one, we will start to use the micro-versions for release-candidates, the minor version for "official releases", and the major-version to signify changes that might require data-conversion or similar.
 
+### Compatibilty Releases for Bukkit 1.7.9/10
+We have decided to also include `compat` releases, which are compiled to work under Bukkit 1.7.10.
+They have not been tested as thouroughly as the 1.8 (`master`) releases - so they are 100% "use at your own risk".
+
 ## Config-files
 
 *Note*: Config files might change quite a bit, so before installing the plugin, please move existing config files aside, and manually merge them after the plugin has "installed" it's own versions.
