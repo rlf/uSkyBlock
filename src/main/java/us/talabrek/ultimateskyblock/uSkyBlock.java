@@ -63,9 +63,9 @@ import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private static final String[][] depends = new String[][]{
-            new String[]{"Vault", "1.5"},
-            new String[]{"WorldEdit", "6.0"},
-            new String[]{"WorldGuard", "6.0"},
+            new String[]{"Vault", "1.4"},
+            new String[]{"WorldEdit", "5.5"},
+            new String[]{"WorldGuard", "5.9"},
     };
     private static String missingRequirements = null;
     private final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
