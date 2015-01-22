@@ -1609,6 +1609,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     private void reloadConfigs() {
         createFolders();
+        HandlerList.unregisterAll(this);
         // Update all of the loaded configs.
         for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()) {
             File configFile = new File(getDataFolder(), e.getKey());
@@ -1619,6 +1620,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this, directoryIslands);
+        registerEvents();
     }
 
     public boolean isSkyWorld(World world) {

@@ -2,6 +2,10 @@ language: java
 env:
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
+before_install:
+  - mvn versions:set -DnewVersion=${TRAVIS_TAG}
+  - mvn -DskipTests -DfinalName=uSkyBlock install
+install: mvn test
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
@@ -13,6 +17,8 @@ deploy:
   on:
     tags: true
     all_branches: true
+after_success:
+  - mvn install deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
   - $HOME/.m2
