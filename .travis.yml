@@ -4,21 +4,18 @@ env:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
 before_install:
   - mvn versions:set -DnewVersion=${TRAVIS_TAG}
-  - mvn -DskipTests -DfinalName=uSkyBlock install
-install: mvn test
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
   file:
   - target/uSkyBlock.jar
-  - target/uSkyBlock-api.jar
+  - target/uSkyBlock-2.1.0-SNAPSHOT-api.jar
   skip_cleanup: true
-  pre-release: true
   on:
     tags: true
     all_branches: true
 after_success:
-  - mvn install deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
+  - mvn deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
   - $HOME/.m2

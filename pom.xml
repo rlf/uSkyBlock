@@ -8,7 +8,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}</finalName>
+        <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
     </properties>
 
     <scm>
@@ -151,6 +152,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
+                            <finalName>${artifactId}-${project.version}</finalName>
                             <classifier>api</classifier>
                             <includes><include>**/api/*</include></includes>
                         </configuration>
@@ -173,7 +175,7 @@
                     <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
                     <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-                    <includes><include>**/*</include></includes>
+                    <includes><include>**/uSkyBlock-*-api.jar</include></includes>
                     <repositoryName>uSkyBlock</repositoryName>      <!-- github repo name -->
                     <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
                     <oauth2Token>${GITHUB_TOKEN}</oauth2Token>
