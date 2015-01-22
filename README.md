@@ -81,9 +81,7 @@ After app. 1½ months of refactoring, I got the following e-mail from Talabrek:
 >
 > -Talabrek
 
-So this repository will try to consolidate the many different "branches" out there.
-
-Talabrek is back, allthough not 100%
+So, with Talabreks blessing, this repository will try to consolidate the many different "branches" out there.
 
 ## References
 
