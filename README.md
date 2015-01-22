@@ -35,13 +35,25 @@ Configure Environment and Run Maven
 2. Make sure that the Bukkit folder in that hiearchy contains a /target/bukkit*.jar file
 3. Run `mvn install` in the uSkyBlock folder
 
-## Issues
 
-Issues are maintained on the GitHub page: https://github.com/rlf/uSkyBlock/issues
+# API
+uSkyBlock has an API (since v2.0.1-RC1.65).
+
+To use it, simply drop the api-jar to the classpath of your own plugin, and write some code along these lines:
+```java
+Plugin plugin = Bukkit.getPluginManager().getPlugin("uSkyBlock");
+if (plugin instanceof uSkyBlockAPI && plugin.isEnabled()) {
+  uSkyBlockAPI usb = (uSkyBlockAPI) plugin;
+  player.sendMessage(String.format(
+    "\u00a79Your island score is \u00a74%5.2f!", 
+    usb.getIslandLevel(player)
+  ));
+}
+```
 
 ## Contributing
 
-Fork-away, and create pull-requests
+Fork-away, and create pull-requests - we review and accept almost any changes.
 
 ## License
 
