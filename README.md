@@ -29,11 +29,13 @@ Requirements:
 * Java SDK 1.7 or above
 * A local revision of the Spigot build (see http://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8.36598/)
 
-Configure Environment and Run Maven
+## Configure Environment and Run Maven
+Note: If you are using the same environment, as the one you used to build Spigot, everything should simply compile,
+since all dependencies are already in your local maven repository.
 
-1. Define the SPIGOT_BASE environment variable to the folder where the BuildTools.jar reside
-2. Make sure that the Bukkit folder in that hiearchy contains a /target/bukkit*.jar file
-3. Run `mvn install` in the uSkyBlock folder
+1. Run `mvn install` in the uSkyBlock folder
+2. `target/uSkyBlock.jar` - plugin, ready for installation in Spigot/Bukkit
+3. `target/uSkyBlock-api.jar` - jar-file of the API only, only requirement for integrating against USB.
 
 
 # API
