@@ -20,7 +20,7 @@ import java.util.List;
  *         // Complain here
  *     }
  * }</pre>
- * @since v2.0.1-RC1.64
+ * @since v2.1.0
  */
 @SuppressWarnings("UnusedDeclaration")
 public interface uSkyBlockAPI extends Plugin {
@@ -28,7 +28,7 @@ public interface uSkyBlockAPI extends Plugin {
      * Returns the currently registered score for the given player.
      * @param player The player to check.
      * @return The score, if available.
-     * @since v2.0.1-RC1.64
+     * @since v2.1.0
      */
     double getIslandLevel(Player player);
 
@@ -37,14 +37,14 @@ public interface uSkyBlockAPI extends Plugin {
      * @param offset A 0-based offset.
      * @param length The max number of records to return.
      * @return A list (possibly empty) of the entries within the designated range.
-     * @since v2.0.1-RC1.64
+     * @since v2.1.0
      */
     List<IslandLevel> getRanks(int offset, int length);
 
     /**
      * Convenience method for #getRanks(0, 10).
      * @return The top-ten list of islands.
-     * @since v2.0.1-RC1.64
+     * @since v2.1.0
      */
     List<IslandLevel> getTopTen();
 }

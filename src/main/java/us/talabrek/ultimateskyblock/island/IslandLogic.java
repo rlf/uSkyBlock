@@ -10,6 +10,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
@@ -156,10 +157,15 @@ public class IslandLogic {
                 sender.sendMessage("\u00a74Top ten list is empty! (perhaps the generation failed?)");
             }
             int place = 1;
+            String playerName = sender instanceof Player ? ((Player)sender).getDisplayName() : sender.getName();
             for (final IslandLevel level : ranks.subList(0, Math.min(ranks.size(), 10))) {
+                String members = "";
+                if (!level.getMembers().isEmpty()) {
+                    members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
+                }
                 sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): %s \u00a77%s", place, level.getScore(),
-                        level.getLeaderName(), level.getMembers()));
-                if (level.hasMember(sender.getName())) {
+                        level.getLeaderName(), members));
+                if (level.getMembers().contains(sender.getName()) || level.getLeaderName().equals(playerName)) {
                     playerrank = place;
                 }
                 place++;
@@ -210,17 +216,16 @@ public class IslandLogic {
                 if (pi != null) {
                     partyLeaderName = pi.getDisplayName();
                 }
-                String toStr = "";
                 ConfigurationSection members = islandConfig.getConfigurationSection("party.members");
+                List<String> memberList = new ArrayList<>();
                 if (members != null) {
                     Set<String> membersStr = members.getKeys(false);
                     if (membersStr != null) {
                         membersStr.remove(partyLeader);
-                        toStr = Arrays.toString(membersStr.toArray(new String[membersStr.size()]));
-                        toStr = toStr.substring(1, toStr.length()-1);
+                        memberList.addAll(membersStr);
                     }
                 }
-                topTen.add(new IslandLevel(islandConfig.getName(), partyLeaderName, !toStr.isEmpty() ? "(" + toStr + ")" : "", level));
+                topTen.add(new IslandLevel(islandConfig.getName(), partyLeaderName, memberList, level));
             }
         }
         Collections.sort(topTen);

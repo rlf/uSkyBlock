@@ -17,7 +17,17 @@
         <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
         <url>https://github.com/rlf/uSkyBlock.git</url>
     </scm>
+
     <repositories>
+        <repository>
+            <id>uSkyBlock-mvn-repo</id>
+            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+
         <repository>
             <id>vault-repo</id>
             <url>http://nexus.theyeticave.net/content/repositories/public/</url>
