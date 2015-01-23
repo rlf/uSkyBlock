@@ -46,7 +46,7 @@ public class KickCommand extends RequireIslandCommand {
                     plugin.clearPlayerInventory(otherPlayer);
                     otherPlayer.sendMessage("\u00a74" + player.getName() + " has removed you from their island!");
                     if (Settings.extras_sendToSpawn) {
-                        otherPlayer.performCommand("spawn");
+                        plugin.spawnTeleport(otherPlayer);
                     } else {
                         otherPlayer.teleport(uSkyBlock.getSkyBlockWorld().getSpawnLocation());
                     }

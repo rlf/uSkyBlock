@@ -1,6 +1,8 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -37,6 +39,12 @@ public abstract class AbstractIslandInfoCommand extends AbstractPlayerInfoComman
                 } else {
                     sender.sendMessage("\u00a7ePlayer " + playerInfo.getPlayerName() + " has no island!");
                 }
+            }
+        } else if (sender instanceof Player && WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation()) != null) {
+            IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation()));
+            if (islandInfo != null) {
+                doExecute(sender, null, islandInfo, args);
+                return true;
             }
         }
         return false;

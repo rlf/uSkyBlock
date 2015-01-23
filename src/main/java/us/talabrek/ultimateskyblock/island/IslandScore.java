@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * The summary of island calculation.
  */
-public class IslandScore {
+public class IslandScore implements us.talabrek.ultimateskyblock.api.model.IslandScore {
     private final double score;
     private final List<BlockScore> top;
     private boolean isSorted = false;
@@ -41,11 +41,18 @@ public class IslandScore {
                 score.getScore() + existing.getScore(), state, score.getName());
     }
 
+
+    @Override
     public double getScore() {
         return score;
     }
 
+
+    @Override
     public List<BlockScore> getTop(int num) {
+        if (num <= 0) {
+            throw new IllegalArgumentException("Number must be a positive integer.");
+        }
         if (!isSorted) {
             Collections.sort(top, new BlockScoreComparator());
             isSorted = true;

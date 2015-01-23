@@ -1,4 +1,4 @@
-version: '2.0.1 Do not change!'
+
 options:
   general:
     # [integer] The max number of players allowed in a single party. (including the leader)
@@ -65,7 +65,7 @@ options:
     allowIslandLock: true
 
     #[true/false] Use old SkySMP style island generation. Set this to true if you want to use the old
-    # island style, or set to false if you want to use the new sytle island generation. Only affects new islands.
+    # island style, or set to false if you want to use the new style island generation. Only affects new islands.
     useOldIslands: false
 
     #[true/false] If true, use island levels/ranks (/island info) - may have a slight impact on performance
@@ -73,7 +73,11 @@ options:
     useIslandLevel: true
 
     # [integer] The time in minutes for how often the top-ten list will be re-generated when doing /is top
-    topTenTimeout: 7
+    topTenTimeout: 20
+
+    # [integer] The time in minutes for refreshing/recalculating the score for players on their island
+    # set to 0 to disabled
+    autoRefreshScore: 10
 
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.
@@ -136,3 +140,6 @@ options:
       fall: true
       # Whether or not visiotrs are protected from fire damage (incl. lava)
       fire-damage: true
+
+# DO NOT TOUCH THIS!
+version: 3

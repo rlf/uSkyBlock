@@ -64,6 +64,26 @@ public class IslandLevel implements Comparable<IslandLevel> {
         if (cmp == 0) {
             cmp = getLeaderName().compareTo(o.getLeaderName());
         }
+        if (cmp == 0) {
+            cmp = getIslandName().compareTo(o.getIslandName());
+        }
         return cmp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IslandLevel that = (IslandLevel) o;
+
+        if (!islandName.equals(that.islandName)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return islandName.hashCode();
     }
 }

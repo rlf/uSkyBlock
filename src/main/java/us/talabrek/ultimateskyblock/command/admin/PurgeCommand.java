@@ -73,7 +73,7 @@ public class PurgeCommand extends AbstractUSBCommand {
                         }
                     }
                 };
-                plugin.getExecutor().execute(plugin, new PurgeTask(plugin, removeList), completion, 0.2f, 10);
+                plugin.getExecutor().execute(plugin, new PurgeTask(plugin, removeList), completion, 0.3f, 1);
             }
         });
         return false;

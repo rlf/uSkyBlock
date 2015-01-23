@@ -6,13 +6,13 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.task.RenamePlayerTask;
@@ -183,7 +183,7 @@ public class IslandLogic {
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    generateTopTen();
+                    generateTopTen(sender);
                     displayTopTen(sender);
                 }
             });
@@ -202,30 +202,22 @@ public class IslandLogic {
         }
     }
 
-    private void generateTopTen() {
+    private void generateTopTen(final CommandSender sender) {
         List<IslandLevel> topTen = new ArrayList<>();
         final File folder = directoryIslands;
-        final File[] listOfFiles = folder.listFiles();
-        for (File file : listOfFiles) {
-            FileConfiguration islandConfig = readIslandConfig(file);
-            double level = islandConfig != null ? islandConfig.getDouble("general.level", 0) : 0;
-            if (islandConfig != null && level > 0) {
-                String partyLeader = islandConfig.getString("party.leader");
-                PlayerInfo pi = plugin.getPlayerInfo(partyLeader);
-                String partyLeaderName = partyLeader;
-                if (pi != null) {
-                    partyLeaderName = pi.getDisplayName();
-                }
-                ConfigurationSection members = islandConfig.getConfigurationSection("party.members");
-                List<String> memberList = new ArrayList<>();
-                if (members != null) {
-                    Set<String> membersStr = members.getKeys(false);
-                    if (membersStr != null) {
-                        membersStr.remove(partyLeader);
-                        memberList.addAll(membersStr);
-                    }
-                }
-                topTen.add(new IslandLevel(islandConfig.getName(), partyLeaderName, memberList, level));
+        final String[] listOfFiles = folder.list(FileUtil.createYmlFilenameFilter());
+        for (String file : listOfFiles) {
+            String islandName = FileUtil.getBasename(file);
+            boolean wasLoaded = islands.containsKey(islandName);
+            IslandInfo islandInfo = getIslandInfo(islandName);
+            double level = islandInfo != null ? islandInfo.getLevel() : 0;
+            if (islandInfo != null && level > 10) {
+                PlayerInfo pi = plugin.getPlayerInfo(islandInfo.getLeader());
+                IslandLevel islandLevel = createIslandLevel(islandInfo, pi, level);
+                topTen.add(islandLevel);
+            }
+            if (!wasLoaded) {
+                removeIslandFromMemory(islandName);
             }
         }
         Collections.sort(topTen);
@@ -234,6 +226,18 @@ public class IslandLogic {
             ranks.clear();
             ranks.addAll(topTen);
         }
+        plugin.fireChangeEvent(sender, uSkyBlockEvent.Cause.RANK_UPDATED);
+    }
+
+    private IslandLevel createIslandLevel(IslandInfo islandInfo, PlayerInfo pi, double level) {
+        String partyLeader = islandInfo.getLeader();
+        String partyLeaderName = partyLeader;
+        if (pi != null) {
+            partyLeaderName = pi.getDisplayName();
+        }
+        List<String> memberList = new ArrayList<>(islandInfo.getMembers());
+        memberList.remove(partyLeader);
+        return new IslandLevel(islandInfo.getName(), partyLeaderName, memberList, level);
     }
 
     private FileConfiguration readIslandConfig(File file) {
@@ -268,7 +272,7 @@ public class IslandLogic {
     public void renamePlayer(PlayerInfo playerInfo, Runnable completion, PlayerNameChangedEvent... changes) {
         String[] files = directoryIslands.list(FileUtil.createYmlFilenameFilter());
         RenamePlayerTask task = new RenamePlayerTask(playerInfo.locationForParty(), files, this, changes);
-        plugin.getAsyncExecutor().execute(plugin, task, completion, 0.8f, 20);
+        plugin.getAsyncExecutor().execute(plugin, task, completion, 0.8f, 1);
     }
 
     public void renamePlayer(String islandName, PlayerNameChangedEvent... changes) {
@@ -280,6 +284,15 @@ public class IslandLogic {
             if (!islandInfo.hasOnlineMembers()) {
                 removeIslandFromMemory(islandInfo.getName());
             }
+        }
+    }
+
+    public void updateRank(IslandInfo islandInfo, PlayerInfo playerInfo, IslandScore score) {
+        synchronized (ranks) {
+            IslandLevel islandLevel = createIslandLevel(islandInfo, playerInfo, score.getScore());
+            ranks.remove(islandLevel);
+            ranks.add(islandLevel);
+            Collections.sort(ranks);
         }
     }
 }

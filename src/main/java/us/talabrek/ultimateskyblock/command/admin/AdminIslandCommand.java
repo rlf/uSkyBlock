@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
@@ -15,7 +16,7 @@ import java.util.Map;
  * The island moderator command.
  */
 public class AdminIslandCommand extends CompositeUSBCommand {
-    public AdminIslandCommand() {
+    public AdminIslandCommand(final uSkyBlock plugin) {
         super("island", "usb.admin.island", "manage islands");
         add(new AbstractIslandInfoCommand("protect", "usb.mod.protect", "protects the island") {
             @Override
@@ -23,10 +24,33 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 protectIsland(sender, playerInfo, islandInfo);
             }
         });
-        add(new AbstractIslandInfoCommand("delete", "usb.admin.delete", "delete the island (removes the blocks)") {
+        add(new AbstractUSBCommand("delete", "usb.admin.delete", "?island", "delete the island (removes the blocks)") {
             @Override
-            protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
-                deleteIsland(sender, playerInfo, islandInfo);
+            public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
+                if (args.length == 1) {
+                    PlayerInfo playerInfo = plugin.getPlayerInfo(args[0]);
+                    if (playerInfo == null) {
+                        sender.sendMessage(String.format("\u00a74Could not locate an island for player %s!", args[0]));
+                        return false;
+                    }
+                    deleteIsland(sender, playerInfo);
+                    return true;
+                } else if (args.length == 0 && sender instanceof Player) {
+                    String islandName = WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation());
+                    if (islandName != null) {
+                        if (plugin.deleteEmptyIsland(islandName, new Runnable() {
+                            @Override
+                            public void run() {
+                                sender.sendMessage("\u00a79Deleted abandoned island at your current location.");
+                            }
+                        })) {
+                            return true;
+                        } else {
+                            sender.sendMessage("\u00a74Island at this location has members!\n\u00a7eUse \u00a79/usb island delete <name>\u00a7e to delete it.");
+                        }
+                    }
+                }
+                return false;
             }
         });
         add(new AbstractIslandInfoCommand("remove", "usb.admin.remove", "removes the player from the island") {
@@ -87,7 +111,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
         sender.sendMessage("\u00a7eOups, that was embarrassing - protectall is currently out of order");
     }
 
-    private void deleteIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
+    private void deleteIsland(CommandSender sender, PlayerInfo playerInfo) {
         if (playerInfo.getIslandLocation() != null) {
             sender.sendMessage("\u00a7eRemoving " + playerInfo.getPlayerName() + "'s island.");
             uSkyBlock.getInstance().deletePlayerIsland(playerInfo.getPlayerName(), null);

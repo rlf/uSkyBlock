@@ -29,7 +29,7 @@ public class LeaveCommand extends RequireIslandCommand {
             player.getInventory().clear();
             player.getEquipment().clear();
             if (Settings.extras_sendToSpawn) {
-                player.performCommand("spawn");
+                plugin.spawnTeleport(player);
             } else {
                 player.teleport(uSkyBlock.getSkyBlockWorld().getSpawnLocation());
             }

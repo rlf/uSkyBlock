@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.command.island;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.BlockScore;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -60,7 +61,7 @@ public class LevelCommand extends RequireIslandCommand {
         }
         final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? plugin.getPlayerInfo(player) : new PlayerInfo(islandPlayer);
         if (player.getName().equals(playerInfo.getPlayerName())) {
-            plugin.getIslandLogic().loadIslandChunks(playerInfo.getIslandLocation(), Settings.island_protectionRange / 2);
+            plugin.getIslandLogic().loadIslandChunks(playerInfo.getIslandLocation(), Settings.island_radius);
         }
         final IslandScore[] shared = new IslandScore[1];
         final Runnable showInfo = new Runnable() {
@@ -88,12 +89,11 @@ public class LevelCommand extends RequireIslandCommand {
                 public void run() {
                     if (player.getName().equals(playerInfo.getPlayerName())) {
                         try {
-                            IslandScore score = plugin.getLevelLogic().calculateScore(playerInfo);
-                            plugin.getIslandInfo(playerInfo).setLevel(score.getScore());
-                            playerInfo.save();
+                            IslandScore score = plugin.recalculateScore(player, playerInfo);
                             if (cmd.equalsIgnoreCase("info")) {
                                 shared[0] = score;
                             }
+                            plugin.fireChangeEvent(new uSkyBlockEvent(player, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
                         } catch (Exception e) {
                             uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
                         }
@@ -106,4 +106,6 @@ public class LevelCommand extends RequireIslandCommand {
         }
         return true;
     }
+
+
 }

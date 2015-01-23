@@ -22,8 +22,12 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.async.BalancedExecutor;
 import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
@@ -40,7 +44,10 @@ import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
+import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
+import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
+import us.talabrek.ultimateskyblock.island.task.RecalculateTask;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
@@ -97,7 +104,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     Map<UUID, Long> restartCooldown;
     Map<UUID, Long> biomeCooldown;
     private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
-    public boolean purgeActive;
+    private boolean purgeActive;
+
+    private BukkitTask autoRecalculateTask;
 
     static {
         uSkyBlock.skyBlockWorld = null;
@@ -141,16 +150,28 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             try {
                 // read from datafolder!
                 File configFile = new File(getDataFolder(), configName);
-                // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
-                if (!configFile.exists()) {
-                    try (InputStream in = getClassLoader().getResourceAsStream(configName)) {
-                        // copy from jar
-                        Files.copy(in, Paths.get(configFile.toURI()), StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        log(Level.WARNING, "Unable to create config file " + configFile, e);
-                    }
+                File configFileJar = new File(getDataFolder(), configName + ".org");
+                try (InputStream in = getClassLoader().getResourceAsStream(configName)) {
+                    // copy from jar
+                    Files.copy(in, Paths.get(configFileJar.toURI()), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    log(Level.WARNING, "Unable to create config file " + configFile, e);
                 }
-                if (configFile.exists()) {
+                // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
+                FileConfiguration configFolder = new YamlConfiguration();
+                FileConfiguration configJar = new YamlConfiguration();
+                readConfig(configFolder, configFile);
+                readConfig(configJar, configFileJar);
+                if (!configFile.exists() || configFolder.getInt("version", 0) < configJar.getInt("version", 0)) {
+                    if (configFile.exists()) {
+                        log(Level.INFO, "Moving existing config " + configName + " to " + configName + ".bak");
+                        Files.move(Paths.get(configFile.toURI()),
+                                Paths.get(new File(getDataFolder(), configName + ".bak").toURI()),
+                                StandardCopyOption.REPLACE_EXISTING);
+                    }
+                    Files.move(Paths.get(configFileJar.toURI()), Paths.get(configFile.toURI()), StandardCopyOption.REPLACE_EXISTING);
+                    config = configJar;
+                } else if (configFile.exists()) {
                     // FORCE utf8 - don't rely on super.getConfig() or FileConfiguration.load()
                     readConfig(config, configFile);
                 }
@@ -174,25 +195,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         asyncExecutor = new AsyncBalancedExecutor(Bukkit.getScheduler());
         configFiles.clear();
         activePlayers.clear();
-        createFolders();
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
-        VaultHandler.setupEconomy();
-        if (Settings.loadPluginConfig(getConfig())) {
-            saveConfig();
-        }
-
-        // Not sure this is needed - isn't reloadConfig() invoked before onEnable?
-        this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
-        this.menu = new SkyBlockMenu(this, challengeLogic);
-        this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
-        this.islandLogic = new IslandLogic(this, directoryIslands);
-        this.notifier = new PlayerNotifier(getConfig());
-
-        registerEvents();
+        reloadConfigs();
         this.getCommand("island").setExecutor(new IslandCommand(this, menu));
         this.getCommand("challenges").setExecutor(new ChallengesCommand());
         this.getCommand("usb").setExecutor(new AdminCommand(instance));
-
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
@@ -290,7 +297,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return uSkyBlock.instance;
     }
 
-    // TODO: UUID support
     public void unloadPlayerFiles() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             if (this.getActivePlayers().containsKey(player.getName())) {
@@ -459,14 +465,38 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private void postDelete(final PlayerInfo pi) {
-        addOrphan(pi.getIslandLocation());
-        String islandLocation = pi.locationForParty();
-        WorldGuardHandler.removeIslandRegion(pi.locationForParty());
-        islandLogic.deleteIslandConfig(islandLocation);
+        IslandInfo islandInfo = getIslandInfo(pi);
+        if (islandInfo != null) {
+            postDelete(islandInfo);
+        }
         pi.removeFromIsland();
         pi.save();
         removeActivePlayer(pi.getPlayerName());
+    }
+
+    private void postDelete(final IslandInfo islandInfo) {
+        addOrphan(islandInfo.getIslandLocation());
+        WorldGuardHandler.removeIslandRegion(islandInfo.getName());
+        islandLogic.deleteIslandConfig(islandInfo.getName());
         saveOrphans();
+    }
+
+    public boolean deleteEmptyIsland(String islandName, final Runnable runner) {
+        final IslandInfo islandInfo = getIslandInfo(islandName);
+        if (islandInfo != null && islandInfo.getMembers().isEmpty()) {
+            islandLogic.clearIsland(islandInfo.getIslandLocation(), new Runnable() {
+                @Override
+                public void run() {
+                    postDelete(islandInfo);
+                    if (runner != null) {
+                        runner.run();
+                    }
+                }
+            });
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void deletePlayerIsland(final String player, final Runnable runner) {
@@ -723,22 +753,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             return true;
         }
         player.sendMessage("\u00a74You must be closer to your island to set your skyblock home!");
-        return true;
-    }
-
-    public boolean warpSet(final Player player) {
-        if (!player.getWorld().getName().equalsIgnoreCase(getSkyBlockWorld().getName())) {
-            player.sendMessage("\u00a74You must be closer to your island to set your warp!");
-            return true;
-        }
-        if (this.playerIsOnIsland(player)) {
-            if (this.getActivePlayers().containsKey(player.getName())) {
-                islandLogic.getIslandInfo(getPlayerInfo(player)).setWarpLocation(player.getLocation());
-            }
-            player.sendMessage(ChatColor.GREEN + "Your skyblock incoming warp has been set to your current location.");
-            return true;
-        }
-        player.sendMessage("\u00a74You must be closer to your island to set your warp!");
         return true;
     }
 
@@ -1610,6 +1624,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private void reloadConfigs() {
         createFolders();
         HandlerList.unregisterAll(this);
+        VaultHandler.setupEconomy();
+        if (Settings.loadPluginConfig(getConfig())) {
+            saveConfig();
+        }
         // Update all of the loaded configs.
         for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()) {
             File configFile = new File(getDataFolder(), e.getKey());
@@ -1620,7 +1638,18 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this, directoryIslands);
+        this.notifier = new PlayerNotifier(getConfig());
         registerEvents();
+        if (autoRecalculateTask != null) {
+            autoRecalculateTask.cancel();
+        }
+        int refreshEveryMinute = getConfig().getInt("options.island.autoRefreshScore", 0);
+        if (refreshEveryMinute > 0) {
+            int refreshTicks = refreshEveryMinute * 1200; // Ticks per minute
+            autoRecalculateTask = new RecalculateRunnable(this).runTaskTimer(this, refreshTicks, refreshTicks);
+        } else {
+            autoRecalculateTask = null;
+        }
     }
 
     public boolean isSkyWorld(World world) {
@@ -1729,5 +1758,30 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
         }
         return 0;
+    }
+
+    public void fireChangeEvent(CommandSender sender, uSkyBlockEvent.Cause cause) {
+        Player player = (sender instanceof Player) ? (Player) sender : null;
+        final uSkyBlockEvent event = new uSkyBlockEvent(player, this, cause);
+        fireChangeEvent(event);
+    }
+
+    public void fireChangeEvent(final uSkyBlockEvent event) {
+        getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {
+                    @Override
+                    public void run() {
+                        getServer().getPluginManager().callEvent(event);
+                    }
+                }
+        );
+    }
+
+    public IslandScore recalculateScore(Player player, PlayerInfo playerInfo) {
+        IslandScore score = getLevelLogic().calculateScore(playerInfo);
+        IslandInfo islandInfo = getIslandInfo(playerInfo);
+        islandInfo.setLevel(score.getScore());
+        getIslandLogic().updateRank(islandInfo, playerInfo, score);
+        fireChangeEvent(new uSkyBlockScoreChangedEvent(player, this, score));
+        return score;
     }
 }

@@ -153,7 +153,7 @@ public class WorldEditHandler {
                     afterDeletion.run();
                 }
             }
-        }, 0.5f, 10); // 50% load, max. 10 ticks in a row
+        }, 0.5f, 1); // 50% load, max. 10 ticks in a row
     }
 
     private static Region getRegion(World skyWorld, ProtectedRegion region) {
