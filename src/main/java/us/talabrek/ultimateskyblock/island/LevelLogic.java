@@ -112,9 +112,13 @@ public class LevelLogic {
     }
 
     public IslandScore calculateScore(PlayerInfo playerInfo) {
+        final Location l = playerInfo.getIslandLocation();
+        return calculateScore(l);
+    }
+
+    public IslandScore calculateScore(Location l) {
         final int radius = Settings.island_protectionRange / 2;
         int pointsPerLevel = config.getInt("general.pointsPerLevel");
-        final Location l = playerInfo.getIslandLocation();
         final int px = l.getBlockX();
         final int pz = l.getBlockZ();
         final World w = l.getWorld();

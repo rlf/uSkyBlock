@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.io.IOException;
@@ -33,15 +34,29 @@ public class PlayerNameChangeManager implements Listener {
         checkPlayer(player);
     }
 
+    @EventHandler(priority = EventPriority.LOW)
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        save(event.getPlayer());
+    }
+
     private void checkPlayer(Player player) {
         String oldName = playerDB.getName(player.getUniqueId());
         if (oldName == null || !oldName.equals(player.getName())) {
-            try {
-                playerDB.setName(player.getUniqueId(), player.getName());
-            } catch (IOException e) {
-                log.log(Level.SEVERE, "Error saving player-name in database.", e);
-            }
+            save(player);
             plugin.getServer().getPluginManager().callEvent(new PlayerNameChangedEvent(player, oldName));
+        } else {
+            save(player);
+        }
+    }
+
+    private void save(Player player) {
+        if (playerDB == null) {
+            return;
+        }
+        try {
+            playerDB.updatePlayer(player);
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "Error saving player in database.", e);
         }
     }
 }

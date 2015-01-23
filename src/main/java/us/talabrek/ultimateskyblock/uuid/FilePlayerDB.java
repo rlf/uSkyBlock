@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.uuid;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;
@@ -26,12 +27,21 @@ public class FilePlayerDB implements PlayerDB {
 
     @Override
     public String getName(UUID uuid) {
-        return config.getString(UUIDUtil.asString(uuid), null);
+        String uuidStr = UUIDUtil.asString(uuid);
+        return config.getString(uuidStr + ".name", config.getString(uuidStr, null));
     }
 
     @Override
-    public void setName(UUID uuid, String name) throws IOException {
-        config.set(UUIDUtil.asString(uuid), name);
+    public String getDisplayName(UUID uuid) {
+        String uuidStr = UUIDUtil.asString(uuid);
+        return config.getString(uuidStr + ".displayName", null);
+    }
+
+    @Override
+    public void updatePlayer(Player player) throws IOException {
+        String uuid = UUIDUtil.asString(player.getUniqueId());
+        config.set(uuid + ".name", player.getName());
+        config.set(uuid + ".displayName", player.getDisplayName());
         config.save(file);
     }
 }

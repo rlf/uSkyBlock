@@ -20,6 +20,7 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangedEvent;
 
@@ -212,8 +213,7 @@ public class IslandLogic {
             IslandInfo islandInfo = getIslandInfo(islandName);
             double level = islandInfo != null ? islandInfo.getLevel() : 0;
             if (islandInfo != null && level > 10) {
-                PlayerInfo pi = plugin.getPlayerInfo(islandInfo.getLeader());
-                IslandLevel islandLevel = createIslandLevel(islandInfo, pi, level);
+                IslandLevel islandLevel = createIslandLevel(islandInfo, level);
                 topTen.add(islandLevel);
             }
             if (!wasLoaded) {
@@ -229,28 +229,17 @@ public class IslandLogic {
         plugin.fireChangeEvent(sender, uSkyBlockEvent.Cause.RANK_UPDATED);
     }
 
-    private IslandLevel createIslandLevel(IslandInfo islandInfo, PlayerInfo pi, double level) {
+    private IslandLevel createIslandLevel(IslandInfo islandInfo, double level) {
         String partyLeader = islandInfo.getLeader();
-        String partyLeaderName = partyLeader;
-        if (pi != null) {
-            partyLeaderName = pi.getDisplayName();
-        }
+        String partyLeaderName = PlayerUtil.getPlayerDisplayName(partyLeader);
         List<String> memberList = new ArrayList<>(islandInfo.getMembers());
         memberList.remove(partyLeader);
-        return new IslandLevel(islandInfo.getName(), partyLeaderName, memberList, level);
-    }
-
-    private FileConfiguration readIslandConfig(File file) {
-        FileConfiguration config = new YamlConfiguration();
-        try {
-            config.load(file);
-        } catch (IOException | InvalidConfigurationException e) {
-            uSkyBlock.log(Level.WARNING, "Error reading island " + file.getName(), e);
-            return null;
+        List<String> names = new ArrayList<>();
+        for (String name : memberList) {
+            names.add(PlayerUtil.getPlayerDisplayName(name));
         }
-        return config;
+        return new IslandLevel(islandInfo.getName(), partyLeaderName, names, level);
     }
-
 
     public synchronized IslandInfo createIsland(String location, String player) {
         IslandInfo info = getIslandInfo(location);
@@ -287,9 +276,9 @@ public class IslandLogic {
         }
     }
 
-    public void updateRank(IslandInfo islandInfo, PlayerInfo playerInfo, IslandScore score) {
+    public void updateRank(IslandInfo islandInfo, IslandScore score) {
         synchronized (ranks) {
-            IslandLevel islandLevel = createIslandLevel(islandInfo, playerInfo, score.getScore());
+            IslandLevel islandLevel = createIslandLevel(islandInfo, score.getScore());
             ranks.remove(islandLevel);
             ranks.add(islandLevel);
             Collections.sort(ranks);

@@ -1,4 +1,3 @@
-
 options:
   general:
     # [integer] The max number of players allowed in a single party. (including the leader)
@@ -141,5 +140,10 @@ options:
       # Whether or not visiotrs are protected from fire damage (incl. lava)
       fire-damage: true
 
+  # This section provide some performance tweaking configs
+  advanced:
+    # If true, use player-names instead of display-names
+    disableDisplayNames: false
+
 # DO NOT TOUCH THIS!
-version: 3
+version: 4

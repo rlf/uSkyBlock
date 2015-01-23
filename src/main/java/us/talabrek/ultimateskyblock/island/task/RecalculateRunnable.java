@@ -1,12 +1,14 @@
 package us.talabrek.ultimateskyblock.island.task;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RecalculateRunnable extends BukkitRunnable {
     private final uSkyBlock plugin;
@@ -17,14 +19,14 @@ public class RecalculateRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        List<Player> recalcPlayers = new ArrayList<>();
+        Set<String> recalcIslands = new HashSet<>();
         for (Player player : plugin.getWorld().getPlayers()) {
             if (player.isOnline() && plugin.playerIsOnIsland(player)) {
-                recalcPlayers.add(player);
+                recalcIslands.add(plugin.getPlayerInfo(player).locationForParty());
             }
         }
-        if (!recalcPlayers.isEmpty()) {
-            plugin.getExecutor().execute(plugin, new RecalculateTask(plugin, recalcPlayers), new Runnable() {
+        if (!recalcIslands.isEmpty()) {
+            plugin.getExecutor().execute(plugin, new RecalculateTask(plugin, recalcIslands), new Runnable() {
                 @Override
                 public void run() {
                     plugin.fireChangeEvent(new uSkyBlockEvent(null, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));

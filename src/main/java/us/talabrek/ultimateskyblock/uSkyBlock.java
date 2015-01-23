@@ -22,12 +22,12 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
+import us.talabrek.ultimateskyblock.api.IslandLevel;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
-import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.async.BalancedExecutor;
 import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
@@ -42,15 +42,14 @@ import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
-import us.talabrek.ultimateskyblock.island.task.RecalculateTask;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
@@ -175,6 +174,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     // FORCE utf8 - don't rely on super.getConfig() or FileConfiguration.load()
                     readConfig(config, configFile);
                 }
+                configFileJar.delete();
             } catch (Exception e) {
                 log(Level.SEVERE, "Unable to handle config-file " + configName, e);
             }
@@ -306,9 +306,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    public void registerEvents() {
+    public void registerEvents(PlayerDB playerDB) {
         final PluginManager manager = this.getServer().getPluginManager();
-        PlayerDB playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
         manager.registerEvents(new PlayerNameChangeListener(this), this);
         manager.registerEvents(new PlayerNameChangeManager(this, playerDB), this);
         manager.registerEvents(new PlayerEvents(this), this);
@@ -1633,13 +1632,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             File configFile = new File(getDataFolder(), e.getKey());
             readConfig(e.getValue(), configFile);
         }
+        PlayerDB playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        PlayerUtil.loadConfig(playerDB, getConfig());
         activePlayers.clear();
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this, directoryIslands);
         this.notifier = new PlayerNotifier(getConfig());
-        registerEvents();
+        registerEvents(playerDB);
         if (autoRecalculateTask != null) {
             autoRecalculateTask.cancel();
         }
@@ -1776,11 +1777,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         );
     }
 
-    public IslandScore recalculateScore(Player player, PlayerInfo playerInfo) {
-        IslandScore score = getLevelLogic().calculateScore(playerInfo);
-        IslandInfo islandInfo = getIslandInfo(playerInfo);
+    public IslandScore recalculateScore(Player player, String islandName) {
+        IslandInfo islandInfo = getIslandInfo(islandName);
+        IslandScore score = getLevelLogic().calculateScore(islandInfo.getIslandLocation());
         islandInfo.setLevel(score.getScore());
-        getIslandLogic().updateRank(islandInfo, playerInfo, score);
+        getIslandLogic().updateRank(islandInfo, score);
         fireChangeEvent(new uSkyBlockScoreChangedEvent(player, this, score));
         return score;
     }

@@ -89,7 +89,7 @@ public class LevelCommand extends RequireIslandCommand {
                 public void run() {
                     if (player.getName().equals(playerInfo.getPlayerName())) {
                         try {
-                            IslandScore score = plugin.recalculateScore(player, playerInfo);
+                            IslandScore score = plugin.recalculateScore(player, playerInfo.locationForParty());
                             if (cmd.equalsIgnoreCase("info")) {
                                 shared[0] = score;
                             }
