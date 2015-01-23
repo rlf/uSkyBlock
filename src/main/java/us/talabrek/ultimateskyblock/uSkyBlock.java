@@ -787,7 +787,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean islandInSpawn(final Location loc) {
-        return loc == null || new Location(getSkyBlockWorld(), 0, loc.getBlockY(), 0).distance(loc) <= Settings.general_spawnSize;
+        if (loc == null) {
+            return true;
+        }
+        return WorldGuardHandler.isIslandIntersectingSpawn(loc);
     }
 
     public ChunkGenerator getDefaultWorldGenerator(final String worldName, final String id) {

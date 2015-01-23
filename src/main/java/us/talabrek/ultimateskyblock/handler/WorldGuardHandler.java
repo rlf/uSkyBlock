@@ -1,6 +1,9 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.BlockVector;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
@@ -22,6 +25,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.Collections;
 import java.util.logging.Level;
 
 public class WorldGuardHandler {
@@ -224,5 +228,16 @@ public class WorldGuardHandler {
                 uSkyBlock.getInstance().log(Level.WARNING, "Error saving global region", e);
             }
         }
+    }
+
+    public static boolean isIslandIntersectingSpawn(Location islandLocation) {
+        int r = Settings.general_spawnSize;
+        ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", new BlockVector(-r, 0, -r), new BlockVector(r, 0, r));
+        r = Settings.island_radius;
+        Vector islandCenter = new Vector(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
+        ProtectedCuboidRegion islandRegion = new ProtectedCuboidRegion("island",
+                new BlockVector(islandCenter.subtract(r, 0, r)),
+                new BlockVector(islandCenter.add(r, 0, r)));
+        return !islandRegion.getIntersectingRegions(Collections.singletonList(spawn)).isEmpty();
     }
 }
