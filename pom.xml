@@ -113,9 +113,8 @@
 			<groupId>com.sk89q</groupId>
 			<artifactId>worldguard</artifactId>
 			<version>5.9</version>
-			<scope>compile</scope>
-			<type>jar</type>
-			<optional>true</optional>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/WorldEdit.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
