@@ -142,8 +142,8 @@ options:
 
   # This section provide some performance tweaking configs
   advanced:
-    # If true, use player-names instead of display-names
-    disableDisplayNames: false
+    # If true, display-name is looked up (might be performance intensive).
+    useDisplayNames: false
 
 # DO NOT TOUCH THIS!
-version: 4
+version: 5

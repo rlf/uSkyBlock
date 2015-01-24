@@ -26,6 +26,17 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
+    public UUID getUUIDFromName(String name) {
+        for (String uuidStr : config.getKeys(false)) {
+            String entryName = config.getString(uuidStr + ".name", config.getString(uuidStr, null));
+            if (entryName != null && entryName.equals(name)) {
+                return UUIDUtil.fromString(uuidStr);
+            }
+        }
+        return null;
+    }
+
+    @Override
     public String getName(UUID uuid) {
         String uuidStr = UUIDUtil.asString(uuid);
         return config.getString(uuidStr + ".name", config.getString(uuidStr, null));
@@ -35,6 +46,15 @@ public class FilePlayerDB implements PlayerDB {
     public String getDisplayName(UUID uuid) {
         String uuidStr = UUIDUtil.asString(uuid);
         return config.getString(uuidStr + ".displayName", null);
+    }
+
+    @Override
+    public String getDisplayName(String playerName) {
+        UUID uuid = getUUIDFromName(playerName);
+        if (uuid != null) {
+            return getDisplayName(uuid);
+        }
+        return playerName;
     }
 
     @Override

@@ -48,7 +48,7 @@ import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
@@ -58,13 +58,11 @@ import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
@@ -74,7 +72,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             new String[]{"WorldGuard", "6.0"},
     };
     private static String missingRequirements = null;
-    private final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
 
     private SkyBlockMenu menu;
     private ChallengeLogic challengeLogic;
@@ -113,8 +110,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public uSkyBlock() {
-        // TODO: 08/12/2014 - R4zorax: Most of these should be converted to local variables
-        configFiles.clear();
         this.lastIslandConfig = null;
         this.orphans = null;
         this.orphanFile = null;
@@ -140,44 +135,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    /**
-     * System-encoding agnostic config-reader
-     */
-    public FileConfiguration getFileConfiguration(String configName) {
-        // Caching, for your convenience! (and a bigger memory print!)
-        if (!configFiles.containsKey(configName)) {
-            FileConfiguration config = new YamlConfiguration();
-            try {
-                // read from datafolder!
-                File configFile = new File(getDataFolder(), configName);
-                // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
-                FileConfiguration configFolder = new YamlConfiguration();
-                FileConfiguration configJar = new YamlConfiguration();
-                readConfig(configFolder, configFile);
-                readConfig(configJar, getClassLoader().getResourceAsStream(configName));
-                if (!configFile.exists() || configFolder.getInt("version", 0) < configJar.getInt("version", 0)) {
-                    if (configFile.exists()) {
-                        File backupFolder = new File(getDataFolder(), "backup");
-                        backupFolder.mkdirs();
-                        String bakFile = String.format("%1$s-%2$tY%2$tm%2$td-%2$tH%2$tM.bak", configName, new Date());
-                        log(Level.INFO, "Moving existing config " + configName + " to backup/" + bakFile);
-                        Files.move(Paths.get(configFile.toURI()),
-                                Paths.get(new File(backupFolder, bakFile).toURI()),
-                                StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    config = configJar;
-                    config.save(configFile);
-                } else if (configFile.exists()) {
-                    // FORCE utf8 - don't rely on super.getConfig() or FileConfiguration.load()
-                    readConfig(config, configFile);
-                }
-            } catch (Exception e) {
-                log(Level.SEVERE, "Unable to handle config-file " + configName, e);
-            }
-            configFiles.put(configName, config);
-        }
-        return configFiles.get(configName);
-    }
+
 
     @Override
     public FileConfiguration getConfig() {
@@ -187,9 +145,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public void onEnable() {
         missingRequirements = null;
         instance = this;
+        FileUtil.init(getDataFolder());
         executor = new SyncBalancedExecutor(Bukkit.getScheduler());
         asyncExecutor = new AsyncBalancedExecutor(Bukkit.getScheduler());
-        configFiles.clear();
         activePlayers.clear();
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         reloadConfigs();
@@ -1371,10 +1329,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             saveConfig();
         }
         // Update all of the loaded configs.
-        for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()) {
-            File configFile = new File(getDataFolder(), e.getKey());
-            readConfig(e.getValue(), configFile);
-        }
+        FileUtil.reload();
+
         PlayerDB playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
         PlayerUtil.loadConfig(playerDB, getConfig());
         activePlayers.clear();
