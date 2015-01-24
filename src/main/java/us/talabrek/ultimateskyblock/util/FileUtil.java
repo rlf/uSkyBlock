@@ -25,6 +25,17 @@ public enum FileUtil {;
         }
     }
 
+    public static void readConfig(FileConfiguration config, InputStream inputStream) {
+        if (inputStream == null) {
+            return;
+        }
+        try (Reader rdr = new InputStreamReader(inputStream, "UTF-8")) {
+            config.load(rdr);
+        } catch (InvalidConfigurationException | IOException e) {
+            log.log(Level.SEVERE, "Unable to read configuration", e);
+        }
+    }
+
     public static FilenameFilter createYmlFilenameFilter() {
         return new FilenameFilter() {
             @Override

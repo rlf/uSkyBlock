@@ -38,9 +38,9 @@ import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.event.*;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
+import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.IslandScore;
@@ -80,6 +80,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
+    private IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
     private USBImporterExecutor importer;
     private BalancedExecutor executor;
@@ -149,32 +150,27 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             try {
                 // read from datafolder!
                 File configFile = new File(getDataFolder(), configName);
-                File configFileJar = new File(getDataFolder(), configName + ".org");
-                try (InputStream in = getClassLoader().getResourceAsStream(configName)) {
-                    // copy from jar
-                    Files.copy(in, Paths.get(configFileJar.toURI()), StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException e) {
-                    log(Level.WARNING, "Unable to create config file " + configFile, e);
-                }
                 // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
                 FileConfiguration configFolder = new YamlConfiguration();
                 FileConfiguration configJar = new YamlConfiguration();
                 readConfig(configFolder, configFile);
-                readConfig(configJar, configFileJar);
+                readConfig(configJar, getClassLoader().getResourceAsStream(configName));
                 if (!configFile.exists() || configFolder.getInt("version", 0) < configJar.getInt("version", 0)) {
                     if (configFile.exists()) {
-                        log(Level.INFO, "Moving existing config " + configName + " to " + configName + ".bak");
+                        File backupFolder = new File(getDataFolder(), "backup");
+                        backupFolder.mkdirs();
+                        String bakFile = String.format("%1$s-%2$tY%2$tm%2$td-%2$tH%2$tM.bak", configName, new Date());
+                        log(Level.INFO, "Moving existing config " + configName + " to backup/" + bakFile);
                         Files.move(Paths.get(configFile.toURI()),
-                                Paths.get(new File(getDataFolder(), configName + ".bak").toURI()),
+                                Paths.get(new File(backupFolder, bakFile).toURI()),
                                 StandardCopyOption.REPLACE_EXISTING);
                     }
-                    Files.move(Paths.get(configFileJar.toURI()), Paths.get(configFile.toURI()), StandardCopyOption.REPLACE_EXISTING);
                     config = configJar;
+                    config.save(configFile);
                 } else if (configFile.exists()) {
                     // FORCE utf8 - don't rely on super.getConfig() or FileConfiguration.load()
                     readConfig(config, configFile);
                 }
-                configFileJar.delete();
             } catch (Exception e) {
                 log(Level.SEVERE, "Unable to handle config-file " + configName, e);
             }
@@ -510,7 +506,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private void postRestart(final Player player, final Location next) {
-        createIsland(player, next);
+        islandGenerator.createIsland(this, player, next);
         changePlayerBiome(player, "OCEAN");
         next.setY((double) Settings.island_height);
         setNewPlayerIsland(player, next);
@@ -1112,7 +1108,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         last.setY((double) Settings.island_height);
         try {
             Location next = getNextIslandLocation(last);
-            createIsland(player, next);
+            islandGenerator.createIsland(this, player, next);
             setNewPlayerIsland(player, next);
             changePlayerBiome(player, "OCEAN");
             protectWithWorldGuard(player, player, pi);
@@ -1134,49 +1130,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    private void createIsland(Player player, Location next) {
-        boolean hasIslandNow = false;
-        if (getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
-            for (File schemFile : getSchemFile()) {
-                // First run-through - try to set the island the player has permission for.
-                String cSchem = schemFile.getName();
-                if (cSchem.lastIndexOf('.') > 0) {
-                    cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
-                }
-                if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, skyBlockWorld)
-                        && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
-                    setChest(next, player);
-                    hasIslandNow = true;
-                    break;
-                }
-            }
-            if (!hasIslandNow) {
-                for (File schemFile : getSchemFile()) {
-                    // 2nd Run through, set the default set schematic (if found).
-                    String cSchem = schemFile.getName();
-                    if (cSchem.lastIndexOf('.') > 0) {
-                        cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
-                    }
-                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName)
-                            && WorldEditHandler.loadIslandSchematic(player, skyBlockWorld, schemFile, next)) {
-                        this.setChest(next, player);
-                        hasIslandNow = true;
-                        break;
-                    }
-                }
-            }
-        }
-        if (!hasIslandNow) {
-            if (!Settings.island_useOldIslands) {
-                this.generateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, skyBlockWorld);
-            } else {
-                this.oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, skyBlockWorld);
-            }
-        }
-        next.setY((double) Settings.island_height);
-    }
-
     private synchronized Location getNextIslandLocation(Location last) {
+        // Cleanup orphans
         while (hasOrphanedIsland() && !isSkyWorld(checkOrphan().getWorld())) {
             removeNextOrphan();
         }
@@ -1186,87 +1141,19 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
             removeNextOrphan();
         }
+        // Use last island-location (if available)
         Location next = last;
+        // Scan orphans for a valid "re-use spot"
         if (hasOrphanedIsland() && !islandAtLocation(checkOrphan())) {
             next = getOrphanedIsland();
             saveOrphans();
         }
+        // Ensure the found location is valid (or find one that is).
         while (islandInSpawn(next) || islandAtLocation(next)) {
             next = nextIslandLocation(next);
         }
         setLastIsland(next);
         return next;
-    }
-
-    public void generateIslandBlocks(final int x, final int z, final Player player, final World world) {
-        final int y = Settings.island_height;
-        final Block blockToChange = world.getBlockAt(x, y, z);
-        blockToChange.setTypeId(7);
-        this.islandLayer1(x, z, player, world);
-        this.islandLayer2(x, z, player, world);
-        this.islandLayer3(x, z, player, world);
-        this.islandLayer4(x, z, player, world);
-        this.islandExtras(x, z, player, world);
-    }
-
-    public void oldGenerateIslandBlocks(final int x, final int z, final Player player, final World world) {
-        final int y = Settings.island_height;
-        for (int x_operate = x; x_operate < x + 3; ++x_operate) {
-            for (int y_operate = y; y_operate < y + 3; ++y_operate) {
-                for (int z_operate = z; z_operate < z + 6; ++z_operate) {
-                    final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
-                    blockToChange.setTypeId(2);
-                }
-            }
-        }
-        for (int x_operate = x + 3; x_operate < x + 6; ++x_operate) {
-            for (int y_operate = y; y_operate < y + 3; ++y_operate) {
-                for (int z_operate = z + 3; z_operate < z + 6; ++z_operate) {
-                    final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
-                    blockToChange.setTypeId(2);
-                }
-            }
-        }
-        for (int x_operate = x + 3; x_operate < x + 7; ++x_operate) {
-            for (int y_operate = y + 7; y_operate < y + 10; ++y_operate) {
-                for (int z_operate = z + 3; z_operate < z + 7; ++z_operate) {
-                    final Block blockToChange = world.getBlockAt(x_operate, y_operate, z_operate);
-                    blockToChange.setTypeId(18);
-                }
-            }
-        }
-        for (int y_operate2 = y + 3; y_operate2 < y + 9; ++y_operate2) {
-            final Block blockToChange2 = world.getBlockAt(x + 5, y_operate2, z + 5);
-            blockToChange2.setTypeId(17);
-        }
-        Block blockToChange3 = world.getBlockAt(x + 1, y + 3, z + 1);
-        blockToChange3.setTypeId(54);
-        final Chest chest = (Chest) blockToChange3.getState();
-        final Inventory inventory = chest.getInventory();
-        inventory.clear();
-        inventory.setContents(Settings.island_chestItems);
-        if (Settings.island_addExtraItems) {
-            for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
-                if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                    final String[] chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
-                    final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-                    String[] amountdata = new String[2];
-                    for (int j = 0; j < chestItemString.length; ++j) {
-                        amountdata = chestItemString[j].split(":");
-                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
-                        inventory.addItem(new ItemStack[]{tempChest[j]});
-                    }
-                }
-            }
-        }
-        blockToChange3 = world.getBlockAt(x, y, z);
-        blockToChange3.setTypeId(7);
-        blockToChange3 = world.getBlockAt(x + 2, y + 1, z + 1);
-        blockToChange3.setTypeId(12);
-        blockToChange3 = world.getBlockAt(x + 2, y + 1, z + 2);
-        blockToChange3.setTypeId(12);
-        blockToChange3 = world.getBlockAt(x + 2, y + 1, z + 3);
-        blockToChange3.setTypeId(12);
     }
 
     private Location nextIslandLocation(final Location lastIsland) {
@@ -1296,153 +1183,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    private void islandLayer1(final int x, final int z, final Player player, final World world) {
-        int y = Settings.island_height;
-        y = Settings.island_height + 4;
-        for (int x_operate = x - 3; x_operate <= x + 3; ++x_operate) {
-            for (int z_operate = z - 3; z_operate <= z + 3; ++z_operate) {
-                final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
-                blockToChange.setTypeId(2);
-            }
-        }
-        Block blockToChange2 = world.getBlockAt(x - 3, y, z + 3);
-        blockToChange2.setTypeId(0);
-        blockToChange2 = world.getBlockAt(x - 3, y, z - 3);
-        blockToChange2.setTypeId(0);
-        blockToChange2 = world.getBlockAt(x + 3, y, z - 3);
-        blockToChange2.setTypeId(0);
-        blockToChange2 = world.getBlockAt(x + 3, y, z + 3);
-        blockToChange2.setTypeId(0);
-    }
-
-    private void islandLayer2(final int x, final int z, final Player player, final World world) {
-        int y = Settings.island_height + 3;
-        for (int x_operate = x - 2; x_operate <= x + 2; ++x_operate) {
-            for (int z_operate = z - 2; z_operate <= z + 2; ++z_operate) {
-                final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
-                blockToChange.setTypeId(3);
-            }
-        }
-        Block blockToChange2 = world.getBlockAt(x - 3, y, z);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x + 3, y, z);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x, y, z - 3);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x, y, z + 3);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x, y, z);
-        blockToChange2.setTypeId(12);
-    }
-
-    private void islandLayer3(final int x, final int z, final Player player, final World world) {
-        int y = Settings.island_height;
-        y = Settings.island_height + 2;
-        for (int x_operate = x - 1; x_operate <= x + 1; ++x_operate) {
-            for (int z_operate = z - 1; z_operate <= z + 1; ++z_operate) {
-                final Block blockToChange = world.getBlockAt(x_operate, y, z_operate);
-                blockToChange.setTypeId(3);
-            }
-        }
-        Block blockToChange2 = world.getBlockAt(x - 2, y, z);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x + 2, y, z);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x, y, z - 2);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x, y, z + 2);
-        blockToChange2.setTypeId(3);
-        blockToChange2 = world.getBlockAt(x, y, z);
-        blockToChange2.setTypeId(12);
-    }
-
-    private void islandLayer4(final int x, final int z, final Player player, final World world) {
-        int y = Settings.island_height;
-        y = Settings.island_height + 1;
-        Block blockToChange = world.getBlockAt(x - 1, y, z);
-        blockToChange.setTypeId(3);
-        blockToChange = world.getBlockAt(x + 1, y, z);
-        blockToChange.setTypeId(3);
-        blockToChange = world.getBlockAt(x, y, z - 1);
-        blockToChange.setTypeId(3);
-        blockToChange = world.getBlockAt(x, y, z + 1);
-        blockToChange.setTypeId(3);
-        blockToChange = world.getBlockAt(x, y, z);
-        blockToChange.setTypeId(12);
-    }
-
-    private void islandExtras(final int x, final int z, final Player player, final World world) {
-        int y = Settings.island_height;
-        Block blockToChange = world.getBlockAt(x, y + 5, z);
-        blockToChange.setTypeId(17);
-        blockToChange = world.getBlockAt(x, y + 6, z);
-        blockToChange.setTypeId(17);
-        blockToChange = world.getBlockAt(x, y + 7, z);
-        blockToChange.setTypeId(17);
-        y = Settings.island_height + 8;
-        for (int x_operate = x - 2; x_operate <= x + 2; ++x_operate) {
-            for (int z_operate = z - 2; z_operate <= z + 2; ++z_operate) {
-                blockToChange = world.getBlockAt(x_operate, y, z_operate);
-                blockToChange.setTypeId(18);
-            }
-        }
-        blockToChange = world.getBlockAt(x + 2, y, z + 2);
-        blockToChange.setTypeId(0);
-        blockToChange = world.getBlockAt(x + 2, y, z - 2);
-        blockToChange.setTypeId(0);
-        blockToChange = world.getBlockAt(x - 2, y, z + 2);
-        blockToChange.setTypeId(0);
-        blockToChange = world.getBlockAt(x - 2, y, z - 2);
-        blockToChange.setTypeId(0);
-        blockToChange = world.getBlockAt(x, y, z);
-        blockToChange.setTypeId(17);
-        y = Settings.island_height + 9;
-        for (int x_operate = x - 1; x_operate <= x + 1; ++x_operate) {
-            for (int z_operate = z - 1; z_operate <= z + 1; ++z_operate) {
-                blockToChange = world.getBlockAt(x_operate, y, z_operate);
-                blockToChange.setTypeId(18);
-            }
-        }
-        blockToChange = world.getBlockAt(x - 2, y, z);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x + 2, y, z);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x, y, z - 2);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x, y, z + 2);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x, y, z);
-        blockToChange.setTypeId(17);
-        y = Settings.island_height + 10;
-        blockToChange = world.getBlockAt(x - 1, y, z);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x + 1, y, z);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x, y, z - 1);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x, y, z + 1);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x, y, z);
-        blockToChange.setTypeId(17);
-        blockToChange = world.getBlockAt(x, y + 1, z);
-        blockToChange.setTypeId(18);
-        blockToChange = world.getBlockAt(x, Settings.island_height + 5, z + 1);
-        blockToChange.setTypeId(54);
-        blockToChange.setData((byte) 3);
-        final Chest chest = (Chest) blockToChange.getState();
-        final Inventory inventory = chest.getInventory();
-        inventory.clear();
-        inventory.setContents(Settings.island_chestItems);
-        if (Settings.island_addExtraItems) {
-            for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
-                if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                    final String chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i], "");
-                    inventory.addItem(ItemStackUtil.createItemArray(chestItemString));
-                }
-            }
-        }
-    }
-
     public void setChest(final Location loc, final Player player) {
         for (int x = -15; x <= 15; ++x) {
             for (int y = -15; y <= 15; ++y) {
@@ -1458,7 +1198,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                                 if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
                                     final String[] chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
                                     final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-                                    String[] amountdata = new String[2];
+                                    String[] amountdata;
                                     for (int j = 0; j < chestItemString.length; ++j) {
                                         amountdata = chestItemString[j].split(":");
                                         tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
@@ -1474,7 +1214,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     /**
-     * Finds the neares block to loc that is a chest.
+     * Finds the nearest block to loc that is a chest.
      *
      * @param loc The location to scan for a chest.
      * @return The location of the chest
@@ -1638,6 +1378,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         PlayerDB playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
         PlayerUtil.loadConfig(playerDB, getConfig());
         activePlayers.clear();
+        islandGenerator = new IslandGenerator(getConfig());
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));

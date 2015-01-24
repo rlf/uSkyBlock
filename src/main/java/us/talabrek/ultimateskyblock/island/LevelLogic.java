@@ -27,12 +27,13 @@ public class LevelLogic {
     private static final Pattern KEY_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<sub>(\\*|[0-9]+|[0-9]+-[0-9]+)))?");
     private static final int MAX_BLOCK = 255;
     private static final int DATA_BITS = 4;
+    private static final int MAX_INDEX = MAX_BLOCK << DATA_BITS;
     private static final int DATA_MASK = 0xf;
     private final FileConfiguration config;
 
-    private final float blockValue[] = new float[MAX_BLOCK<<DATA_BITS];
-    private final int blockLimit[] = new int[MAX_BLOCK<<DATA_BITS];
-    private final int blockDR[] = new int[MAX_BLOCK<<DATA_BITS];
+    private final float blockValue[] = new float[MAX_INDEX];
+    private final int blockLimit[] = new int[MAX_INDEX];
+    private final int blockDR[] = new int[MAX_INDEX];
 
     public LevelLogic(FileConfiguration config) {
         this.config = config;
@@ -43,7 +44,14 @@ public class LevelLogic {
         float defaultValue = (float) config.getDouble("general.default", 10);
         int defaultLimit = config.getInt("general.limit", Integer.MAX_VALUE);
         int defaultDR = config.getInt("general.defaultScale", 10000);
-        Arrays.fill(blockValue, defaultValue);
+        // Per default, let all blocks (regardless of data-value) share limit and score
+        for (int b = 0;  b < MAX_INDEX; b++) {
+            if ((b << DATA_BITS) == b) {
+                blockValue[b] = defaultValue;
+            } else {
+                blockValue[b] = -1; // Share with the blockId:0 block
+            }
+        }
         Arrays.fill(blockLimit, defaultLimit);
         ConfigurationSection blockValueSection = config.getConfigurationSection("blockValues");
         for (String blockKey : blockValueSection.getKeys(false)) {
@@ -88,7 +96,10 @@ public class LevelLogic {
     }
 
     private byte[] getDataValues(String sub) {
-        if (sub == null || sub.equalsIgnoreCase("*") || sub.equalsIgnoreCase("0-15")) {
+        if (sub == null) {
+            return new byte[]{0};
+        }
+        if (sub.equalsIgnoreCase("*") || sub.equalsIgnoreCase("0-15")) {
             byte[] data = new byte[16];
             for (int i = 0; i < data.length; i++) {
                 data[i] = (byte) ((i) & 0xff);
@@ -122,7 +133,7 @@ public class LevelLogic {
         final int px = l.getBlockX();
         final int pz = l.getBlockZ();
         final World w = l.getWorld();
-        final int[] values = new int[MAX_BLOCK<<DATA_BITS];
+        final int[] counts = new int[MAX_BLOCK<<DATA_BITS];
         for (int x = -radius; x <= radius; ++x) {
             for (int y = 0; y <= 255; ++y) {
                 for (int z = -radius; z <= radius; ++z) {
@@ -130,15 +141,18 @@ public class LevelLogic {
                     int blockId = getBlockId(block);
                     if (blockValue[blockId] == -1) {
                         blockId = blockId & (0xffffffff ^ DATA_MASK); // remove sub-type
+                    } else if (blockValue[blockId] < -1) {
+                        // Direct addressing
+                        blockId = -(Math.round(blockValue[blockId]) & 0xffffff);
                     }
-                    values[blockId] += 1;
+                    counts[blockId] += 1;
                 }
             }
         }
         double score = 0;
         List<BlockScore> blocks = new ArrayList<>();
         for (int i = 1<<DATA_BITS; i < MAX_BLOCK<<DATA_BITS; ++i) {
-            int count = values[i];
+            int count = counts[i];
             if (count > 0 && blockValue[i] > 0) {
                 BlockScore.State state = BlockScore.State.NORMAL;
                 double adjustedCount = count;

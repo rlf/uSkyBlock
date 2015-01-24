@@ -232,6 +232,9 @@ public class WorldGuardHandler {
 
     public static boolean isIslandIntersectingSpawn(Location islandLocation) {
         int r = Settings.general_spawnSize;
+        if (r == 0) {
+            return false;
+        }
         ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", new BlockVector(-r, 0, -r), new BlockVector(r, 0, r));
         r = Settings.island_radius;
         Vector islandCenter = new Vector(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
