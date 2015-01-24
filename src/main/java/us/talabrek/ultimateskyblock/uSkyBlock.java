@@ -6,7 +6,6 @@ import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.Chest;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -16,7 +15,6 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -77,7 +75,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
-    private IslandGenerator islandGenerator;
+    public IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
     private USBImporterExecutor importer;
     private BalancedExecutor executor;
@@ -1138,36 +1136,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
             lastIsland.setZ(lastIsland.getZ() - Settings.island_distance);
             return lastIsland;
-        }
-    }
-
-    public void setChest(final Location loc, final Player player) {
-        for (int x = -15; x <= 15; ++x) {
-            for (int y = -15; y <= 15; ++y) {
-                for (int z = -15; z <= 15; ++z) {
-                    if (skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-                        final Block blockToChange = skyBlockWorld.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
-                        final Chest chest = (Chest) blockToChange.getState();
-                        final Inventory inventory = chest.getInventory();
-                        inventory.clear();
-                        inventory.setContents(Settings.island_chestItems);
-                        if (Settings.island_addExtraItems) {
-                            for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
-                                if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                                    final String[] chestItemString = getConfig().getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
-                                    final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-                                    String[] amountdata;
-                                    for (int j = 0; j < chestItemString.length; ++j) {
-                                        amountdata = chestItemString[j].split(":");
-                                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
-                                        inventory.addItem(new ItemStack[]{tempChest[j]});
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 

@@ -40,7 +40,7 @@ public class IslandGenerator {
                 }
                 if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, uSkyBlock.skyBlockWorld)
                         && WorldEditHandler.loadIslandSchematic(player, uSkyBlock.skyBlockWorld, schemFile, next)) {
-                    plugin.setChest(next, player);
+                    setChest(next, player);
                     hasIslandNow = true;
                     break;
                 }
@@ -54,7 +54,7 @@ public class IslandGenerator {
                     }
                     if (cSchem.equalsIgnoreCase(Settings.island_schematicName)
                             && WorldEditHandler.loadIslandSchematic(player, uSkyBlock.skyBlockWorld, schemFile, next)) {
-                        plugin.setChest(next, player);
+                        setChest(next, player);
                         hasIslandNow = true;
                         break;
                     }
@@ -115,23 +115,6 @@ public class IslandGenerator {
         Block blockToChange3 = world.getBlockAt(x + 1, y + 3, z + 1);
         blockToChange3.setTypeId(54);
         final Chest chest = (Chest) blockToChange3.getState();
-        final Inventory inventory = chest.getInventory();
-        inventory.clear();
-        inventory.setContents(Settings.island_chestItems);
-        if (Settings.island_addExtraItems) {
-            for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
-                if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                    final String[] chestItemString = config.getString("options.island.extraPermissions." + Settings.island_extraPermissions[i]).split(" ");
-                    final ItemStack[] tempChest = new ItemStack[chestItemString.length];
-                    String[] amountdata;
-                    for (int j = 0; j < chestItemString.length; ++j) {
-                        amountdata = chestItemString[j].split(":");
-                        tempChest[j] = new ItemStack(Integer.parseInt(amountdata[0], 10), Integer.parseInt(amountdata[1], 10));
-                        inventory.addItem(new ItemStack[]{tempChest[j]});
-                    }
-                }
-            }
-        }
         blockToChange3 = world.getBlockAt(x, y, z);
         blockToChange3.setTypeId(7);
         blockToChange3 = world.getBlockAt(x + 2, y + 1, z + 1);
@@ -140,6 +123,7 @@ public class IslandGenerator {
         blockToChange3.setTypeId(12);
         blockToChange3 = world.getBlockAt(x + 2, y + 1, z + 3);
         blockToChange3.setTypeId(12);
+        setChest(chest.getLocation(), player);
     }
 
     private void islandLayer1(final int x, final int z, final Player player, final World world) {
@@ -273,17 +257,38 @@ public class IslandGenerator {
         blockToChange.setTypeId(54);
         blockToChange.setData((byte) 3);
         final Chest chest = (Chest) blockToChange.getState();
-        final Inventory inventory = chest.getInventory();
-        inventory.clear();
-        inventory.setContents(Settings.island_chestItems);
-        if (Settings.island_addExtraItems) {
-            for (int i = 0; i < Settings.island_extraPermissions.length; ++i) {
-                if (VaultHandler.checkPerk(player.getName(), "usb." + Settings.island_extraPermissions[i], player.getWorld())) {
-                    final String chestItemString = config.getString("options.island.extraPermissions." + Settings.island_extraPermissions[i], "");
-                    inventory.addItem(ItemStackUtil.createItemArray(chestItemString));
+        setChest(chest.getLocation(), player);
+    }
+
+    public void setChest(final Location loc, final Player player) {
+        World world = loc.getWorld();
+        for (int dx = 1; dx <= 30; dx++) {
+            for (int dy = 1; dy <= 30; dy++) {
+                for (int dz = 1; dz <= 30; dz++) {
+                    int x = ((dx % 2) == 0) ? dx/2 : -dx/2;
+                    int y = ((dy % 2) == 0) ? dy/2 : -dy/2;
+                    int z = ((dz % 2) == 0) ? dz/2 : -dz/2;
+                    if (world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
+                        final Block blockToChange = world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
+                        final Chest chest = (Chest) blockToChange.getState();
+                        final Inventory inventory = chest.getInventory();
+                        inventory.clear();
+                        inventory.setContents(Settings.island_chestItems);
+                        if (Settings.island_addExtraItems) {
+                            for (String perm : Settings.island_extraPermissions) {
+                                if (VaultHandler.checkPerk(player.getName(), "usb." + perm, world)) {
+                                    String itemString = config.getString("options.island.extraPermissions." + perm);
+                                    if (itemString == null || itemString.isEmpty()) {
+                                        continue;
+                                    }
+                                    ItemStack[] itemArray = ItemStackUtil.createItemArray(itemString);
+                                    inventory.addItem(itemArray);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-
 }
