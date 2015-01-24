@@ -32,6 +32,10 @@ public class PurgeCommand extends AbstractUSBCommand {
             sender.sendMessage("\u00a74A purge is already running, please wait for it to finish!");
             return true;
         }
+        if (args.length == 0 || !args[0].matches("[0-9]+")) {
+            sender.sendMessage("\u00a74You must provide the age in days to purge!");
+            return false;
+        }
         plugin.activatePurge();
         final int time = Integer.parseInt(args[1], 10) * 24;
         sender.sendMessage("\u00a7eMarking all islands inactive for more than " + args[1] + " days.");
