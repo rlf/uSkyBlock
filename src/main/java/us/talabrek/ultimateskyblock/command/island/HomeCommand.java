@@ -17,6 +17,11 @@ public class HomeCommand extends RequireIslandCommand {
         if (pi.getHomeLocation() == null) {
             pi.setHomeLocation(pi.getIslandLocation());
         }
+        int maxParty = plugin.getConfig().getInt("options.general.maxPartySize", 4);
+        if (maxParty > island.getMaxPartySize()) {
+            island.setMaxPartySize(maxParty);
+        }
+        island.updatePartyNumber(player);
         plugin.homeTeleport(player);
         return true;
     }

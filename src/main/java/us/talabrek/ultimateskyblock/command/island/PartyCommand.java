@@ -44,11 +44,15 @@ public class PartyCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new AbstractUSBCommand("uninvite", "player", "withdraw an invite") {
+        add(new AbstractUSBCommand("uninvite", null, "player", "withdraw an invite") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
                     IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
+                    if (!islandInfo.isLeader(sender.getName()) || !islandInfo.hasPerm(sender.getName(), "canInviteOthers")) {
+                        sender.sendMessage("\u00a74You don't have permissions to unvite players.");
+                        return true;
+                    }
                     String playerName = args[0];
                     if (inviteHandler.uninvite(islandInfo, playerName)) {
                         sender.sendMessage("\u00a7eSuccessfully withdrew invite for " + playerName);
