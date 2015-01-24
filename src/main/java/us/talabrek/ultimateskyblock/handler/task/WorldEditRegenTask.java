@@ -42,7 +42,7 @@ public class WorldEditRegenTask implements IncrementalTask {
         boolean complete = isComplete();
         if (complete) {
             editSession.flushQueue();
-            editSession.commit(); // is this the heavy part?
+            // v6 only editSession.commit(); // is this the heavy part?
         }
         return complete;
     }

@@ -1,18 +1,12 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.*;
-import com.sk89q.worldedit.bukkit.BukkitPlayer;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.extent.clipboard.Clipboard;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
-import com.sk89q.worldedit.function.operation.Operation;
-import com.sk89q.worldedit.function.operation.Operations;
+import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.session.ClipboardHolder;
-import com.sk89q.worldedit.world.registry.WorldData;
+import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -24,7 +18,8 @@ import us.talabrek.ultimateskyblock.handler.task.WorldEditRegenTask;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegenTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -39,35 +34,21 @@ public class WorldEditHandler {
         return (WorldEditPlugin) plugin;
     }
 
-    public static boolean loadIslandSchematic(Player player, final World world, final File file, final Location origin) {
-        WorldEdit worldEdit = getWorldEdit().getWorldEdit();
-        BukkitPlayer wePlayer = getWorldEdit().wrapPlayer(player);
-        LocalSession session = worldEdit.getSession(wePlayer);
-        try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
-            BukkitWorld bukkitWorld = new BukkitWorld(world);
-            ClipboardReader reader = ClipboardFormat.SCHEMATIC.getReader(in);
-
-            WorldData worldData = bukkitWorld.getWorldData();
-            Clipboard clipboard = reader.read(worldData);
-            ClipboardHolder holder = new ClipboardHolder(clipboard, worldData);
-            session.setClipboard(holder);
-
-            EditSession editSession = new EditSession(bukkitWorld, 255 * Settings.island_protectionRange * Settings.island_protectionRange);
-            editSession.enableQueue();
-            Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
-            Operation operation = holder
-                    .createPaste(editSession, worldData)
-                    .to(to)
-                    .ignoreAirBlocks(false)
-                    .build();
-            Operations.completeLegacy(operation);
-            editSession.flushQueue();
-            editSession.commit();
-            return true;
-        } catch (IOException|WorldEditException e) {
-            uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
+    public static boolean loadIslandSchematic(final Player player, final World world, final File file, final Location origin) {
+        final Vector v = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+        final SchematicFormat format = SchematicFormat.getFormat(file);
+        if (format == null) {
+            return false;
         }
-        return false;
+        final EditSession es = new EditSession(new BukkitWorld(world), Settings.island_protectionRange*Settings.island_protectionRange*255);
+        final CuboidClipboard cc;
+        try {
+            cc = format.load(file);
+            cc.paste(es, v, false);
+        } catch (IOException | MaxChangedBlocksException | DataException e) {
+            uSkyBlock.log(Level.WARNING, "Error loading schematic " + file, e);
+        }
+        return true;
     }
 
     /**

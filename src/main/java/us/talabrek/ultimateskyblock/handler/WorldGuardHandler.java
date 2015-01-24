@@ -7,11 +7,11 @@ import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -76,7 +76,7 @@ public class WorldGuardHandler {
             regionManager.removeRegion(islandInfo.getLeader() + "island");
             regionManager.addRegion(region);
             regionManager.save();
-        } catch (StorageException | InvalidFlagFormat e) {
+        } catch (ProtectionDatabaseException|InvalidFlagFormat e) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
 
@@ -94,6 +94,14 @@ public class WorldGuardHandler {
         }
         region.setOwners(owners);
         region.setPriority(100);
+
+        // WG 5.9 flags
+        region.setFlag(DefaultFlag.CHEST_ACCESS, StateFlag.State.DENY);
+        region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
+        region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
+        region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
+        region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
+
         region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering a protected island area. (" + islandConfig.getLeader() + ")"));
         region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving a protected island area. (" + islandConfig.getLeader() + ")"));
         if (Settings.island_allowPvP) {
@@ -169,7 +177,7 @@ public class WorldGuardHandler {
                 regionManager.addRegion(region);
                 regionManager.save();
             }
-        } catch (StorageException|InvalidFlagFormat e) {
+        } catch (ProtectionDatabaseException|InvalidFlagFormat e) {
             uSkyBlock.getInstance().log(Level.WARNING, "Error saving island region after removal of " + player);
         }
     }
@@ -224,7 +232,7 @@ public class WorldGuardHandler {
             regionManager.addRegion(global);
             try {
                 regionManager.save();
-            } catch (StorageException e) {
+            } catch (ProtectionDatabaseException e) {
                 uSkyBlock.getInstance().log(Level.WARNING, "Error saving global region", e);
             }
         }
