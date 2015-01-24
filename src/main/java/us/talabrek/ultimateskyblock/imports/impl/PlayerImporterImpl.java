@@ -21,18 +21,19 @@ import java.util.logging.Level;
 public class PlayerImporterImpl {
     private final uSkyBlock plugin;
     private List<USBImporter> importers;
+    private volatile int countSuccess;
+    private volatile int countFailed;
 
     public PlayerImporterImpl(uSkyBlock plugin) {
         this.plugin = plugin;
     }
 
-    public boolean importPlayer(File playerFile) {
+    public List<String> getImporterNames() {
+        List<String> result = new ArrayList<>();
         for (USBImporter importer : getImporters()) {
-            if (importer.importPlayer(plugin, playerFile)) {
-                return true;
-            }
+            result.add(importer.getName());
         }
-        return false;
+        return result;
     }
 
     private List<USBImporter> getImporters() {
@@ -47,46 +48,79 @@ public class PlayerImporterImpl {
         return importers;
     }
 
-    public void importUSB(final CommandSender sender) {
+    public USBImporter getImporter(String name) {
+        for (USBImporter importer : getImporters()) {
+            if (name.equalsIgnoreCase(importer.getName())) {
+                return importer;
+            }
+        }
+        return null;
+    }
+
+    public void importUSB(final CommandSender sender, String name) {
+        if (name == null || sender == null) {
+            throw new IllegalArgumentException("sender and name must be non-null");
+        }
+        final USBImporter importer = getImporter(name);
+        if (importer == null) {
+            sender.sendMessage(ChatColor.RED + "No importer named " + ChatColor.YELLOW + name + ChatColor.RED + " found");
+            return;
+        }
         Bukkit.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                doImport(sender);
+                doImport(sender, importer);
             }
         });
     }
 
-    private void doImport(CommandSender sender) {
-        String msg = "Imported " + importOrphans(plugin, plugin.getDataFolder()) + " orphans";
+    private void doImport(CommandSender sender, USBImporter importer) {
+        String msg = "Imported " + importer.importOrphans(plugin, plugin.getDataFolder()) + " orphans";
         sender.sendMessage(ChatColor.YELLOW + msg);
         plugin.log(Level.INFO, msg);
-        int countSuccess = 0;
-        int countFailed = 0;
-        for (File playerFile : plugin.directoryPlayers.listFiles(new FilenameFilter() {
+        countSuccess = 0;
+        countFailed = 0;
+        final File[] files = plugin.directoryPlayers.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name != null && !name.endsWith(".yml");
             }
-        })) {
-            if (importPlayer(playerFile)) {
-                countSuccess++;
-                plugin.log(Level.INFO, "Successfully imported player-file " + playerFile);
-                if (!playerFile.delete()) {
-                    playerFile.deleteOnExit();
-                }
-            } else {
-                countFailed++;
-                plugin.log(Level.WARNING, "Could not import player-file " + playerFile);
-            }
-        }
-        sender.sendMessage(ChatColor.YELLOW + "Converted " + countSuccess + "/" + (countSuccess+countFailed) + " players");
+        });
+        int chunkSize = plugin.getConfig().getInt("general.import.maxChunk", 100);
+        int delay = plugin.getConfig().getInt("general.import.delay", 15);
+        plugin.log(Level.INFO, "Importing " + files.length + " players in chunks of " + chunkSize);
+        doImport(sender, importer, files, 0, chunkSize, delay);
     }
 
-    private int importOrphans(uSkyBlock plugin, File dataFolder) {
-        int count = 0;
-        for (USBImporter importer : getImporters()) {
-            count += importer.importOrphans(plugin, dataFolder);
-        }
-        return count;
+    private void doImport(final CommandSender sender, final USBImporter importer, final File[] files, final int offset, final int chunkSize, final int delay) {
+        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
+            @Override
+            public void run() {
+                int count = 0;
+                int failed = 0;
+                for (int i = offset; i < files.length && i < offset+chunkSize; i++) {
+                    File playerFile = files[i];
+                    if (importer.importPlayer(plugin, playerFile)) {
+                        count++;
+                        plugin.log(Level.FINE, "Successfully imported player-file " + playerFile);
+                        if (!playerFile.delete()) {
+                            playerFile.deleteOnExit();
+                        }
+                    } else {
+                        failed++;
+                        plugin.log(Level.WARNING, "Could not import player-file " + playerFile);
+                    }
+                }
+                countSuccess += count;
+                countFailed += failed;
+                float progress = 100f*(countSuccess+countFailed)/files.length;
+                sender.sendMessage(String.format(ChatColor.YELLOW + "Progress: %02f%% (%d/%d - success:%d, failed:%d)", progress, countFailed+countSuccess, files.length, countSuccess, countFailed));
+                if (offset+chunkSize < files.length) {
+                    doImport(sender, importer, files, offset + chunkSize, chunkSize, delay);
+                } else {
+                    sender.sendMessage(ChatColor.YELLOW + "Converted " + countSuccess + "/" + (countSuccess + countFailed) + " players");
+                }
+            }
+        }, delay);
     }
 }

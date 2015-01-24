@@ -277,7 +277,7 @@ public class PlayerInfo implements Serializable {
         playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
         try {
             playerConfig.save(playerConfigFile);
-            uSkyBlock.log(Level.INFO, "Player data saved!");
+            uSkyBlock.log(Level.FINEST, "Player data saved!");
         } catch (IOException ex) {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + playerConfigFile, ex);
         }

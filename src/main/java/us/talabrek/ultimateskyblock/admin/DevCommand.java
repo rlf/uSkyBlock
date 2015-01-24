@@ -4,8 +4,7 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import org.bukkit.*;
 import us.talabrek.ultimateskyblock.Settings;
@@ -13,7 +12,10 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-public class DevCommand implements CommandExecutor {
+public class DevCommand implements CommandExecutor, TabCompleter {
+    private static final List<String> commands = Arrays.asList("protect", "reload", "import", "protectall", "topten",
+            "orphancount", "clearorphan", "saveorphan", "delete", "remove", "register", "completechallenge",
+            "resetchallenge", "resetallchallenges", "purge", "buildpartylist", "info");
     private Map<String, Command> commandMap = new HashMap<>();
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
@@ -28,7 +30,7 @@ public class DevCommand implements CommandExecutor {
                 	sender.sendMessage(ChatColor.YELLOW + "/usb reload:" + ChatColor.WHITE + " reload configuration from file.");
                 }
                 if (sender.hasPermission("usb.admin.import")) {
-                    sender.sendMessage(ChatColor.YELLOW + "/usb import:" + ChatColor.WHITE + " try to import data from an old version.");
+                    sender.sendMessage(ChatColor.YELLOW + "/usb import <importer>:" + ChatColor.WHITE + " try to import data from an old version.");
                 }
                 if (sender.hasPermission("usb.mod.protectall")) {
                     sender.sendMessage(ChatColor.YELLOW + "/usb protectall:" + ChatColor.WHITE + " add island protection to unprotected islands.");
@@ -103,8 +105,6 @@ public class DevCommand implements CommandExecutor {
                 }
                 sender.sendMessage(ChatColor.YELLOW + "Usage: /usb purge [TimeInDays]");
                 return true;
-            } else if (split[0].equals("import") && sender.hasPermission("usb.admin.import")) {
-                uSkyBlock.getInstance().getPlayerImporter().importUSB(sender);
             }
         } else if (split.length == 2) {
             if (split[0].equals("purge") && (sender.hasPermission("usb.admin.purge"))) {
@@ -216,7 +216,7 @@ public class DevCommand implements CommandExecutor {
                 } else {
                     sender.sendMessage(ChatColor.RED + "Bedrock not found: unable to set the island!");
                 }
-            } else if (!split[0].equals("info") || (!sender.hasPermission("usb.mod.party"))) {
+            } else if (split[0].equals("resetallchallenges") || split[0].equals("setbiome")) {
                 PlayerInfo pi = uSkyBlock.getInstance().getPlayerInfo(split[1]);
                 if (split[0].equals("resetallchallenges") && (sender.hasPermission("usb.mod.challenges"))) {
                     if (!pi.getHasIsland()) {
@@ -235,6 +235,10 @@ public class DevCommand implements CommandExecutor {
                     pi.save();
                     sender.sendMessage(ChatColor.YELLOW + split[1] + " has had their biome changed to OCEAN.");
                 }
+            } else if (split[0].equalsIgnoreCase("import") && sender.hasPermission("usb.admin.import")) {
+                uSkyBlock.getInstance().getPlayerImporter().importUSB(sender, split[1]);
+            } else {
+                sender.sendMessage(ChatColor.RED + "No valid usb commands found!");
             }
         } else if (split.length == 3) {
             if (split[0].equals("completechallenge") && (sender.hasPermission("usb.mod.challenges"))) {
@@ -278,5 +282,29 @@ public class DevCommand implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    private List<String> filter(List<String> list, String prefix) {
+        List<String> result = new ArrayList<>();
+        for (String item : list) {
+            if (item.startsWith(prefix)) {
+                result.add(item);
+            }
+        }
+        Collections.sort(result);
+        return result;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args) {
+        if (args.length == 0 || args.length == 1) {
+            return filter(commands, args.length == 1 ? args[0] : "");
+        } else if (args.length == 2) {
+            String arg = args[1];
+            if (args[0].equalsIgnoreCase("import")) {
+                return filter(uSkyBlock.getInstance().getPlayerImporter().getImporterNames(), arg);
+            }
+        }
+        return null;
     }
 }

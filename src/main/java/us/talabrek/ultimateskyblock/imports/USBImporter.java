@@ -9,6 +9,12 @@ import java.io.File;
  */
 public interface USBImporter {
     /**
+     * Identifies the importer.
+     * @return The name of the importer
+     */
+    String getName();
+
+    /**
      * Imports the player into the existing data structure.
      * @param plugin        The USB plugin
      * @param playerFile The file to import.

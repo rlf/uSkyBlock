@@ -13,6 +13,12 @@ import java.util.logging.Level;
  * An importer for the wolfwork branch.
  */
 public class WolfWorkUSBImporter implements USBImporter {
+
+    @Override
+    public String getName() {
+        return "wolfwork";
+    }
+
     @Override
     public boolean importPlayer(uSkyBlock plugin, File playerFile) {
         try {
@@ -22,8 +28,10 @@ public class WolfWorkUSBImporter implements USBImporter {
             }
             us.talabrek.ultimateskyblock.player.PlayerInfo pi = importPlayerInfo(plugin, playerInfo);
             importIsland(plugin, playerInfo, pi);
+            plugin.removeActivePlayer(pi.getPlayerName());
             return true;
         } catch (Exception e) {
+            plugin.log(Level.WARNING, "Unable to import " + playerFile, e);
             return false;
         }
     }
@@ -65,7 +73,11 @@ public class WolfWorkUSBImporter implements USBImporter {
         // Copy PlayerInfo
         us.talabrek.ultimateskyblock.player.PlayerInfo pi = plugin.getPlayerInfo(playerInfo.getPlayerName());
         pi.setHasIsland(playerInfo.getHasIsland());
-        pi.setIslandLocation(playerInfo.getIslandLocation());
+        if (playerInfo.getIslandLocation() != null) {
+            pi.setIslandLocation(playerInfo.getIslandLocation());
+        } else if (playerInfo.getPartyIslandLocation() != null) {
+            pi.setIslandLocation(playerInfo.getPartyIslandLocation());
+        }
         pi.setHomeLocation(playerInfo.getHomeLocation());
         // Challenges
         long now = System.currentTimeMillis();
@@ -87,6 +99,8 @@ public class WolfWorkUSBImporter implements USBImporter {
         if (islandInfo != null) {
             if (playerInfo.getPartyLeader() != null) {
                 islandInfo.setupPartyLeader(playerInfo.getPartyLeader());
+            } else {
+                islandInfo.setupPartyLeader(playerInfo.getPlayerName());
             }
             for (String member : playerInfo.getMembers()) {
                 islandInfo.setupPartyMember(member);
