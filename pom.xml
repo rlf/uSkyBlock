@@ -193,6 +193,7 @@
                     <repositoryName>uSkyBlock</repositoryName>      <!-- github repo name -->
                     <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
                     <oauth2Token>${GITHUB_TOKEN}</oauth2Token>
+                    <merge>true</merge>
                 </configuration>
                 <executions>
                     <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
