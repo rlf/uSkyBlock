@@ -163,7 +163,9 @@
                         </goals>
                         <configuration>
                             <classifier>api</classifier>
-                            <includes><include>**/api/*</include></includes>
+                            <includes>
+                                <include>us/talabrek/ultimateskyblock/api/**</include>
+                            </includes>
                         </configuration>
                     </execution>
                 </executions>
