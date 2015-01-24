@@ -932,7 +932,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final PlayerInfo pi = loadPlayerInfo(player.getName());
         if (pi.getHasIsland()) {
             WorldGuardHandler.protectIsland(player, pi);
-            islandLogic.clearFlatland(player, pi.getIslandLocation(), 200);
+            islandLogic.clearFlatland(player, pi.getIslandLocation(), 400);
         }
         addActivePlayer(player.getName(), pi);
         return pi;

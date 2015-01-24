@@ -21,7 +21,7 @@ public class SyncBalancedExecutor implements BalancedExecutor {
     @Override
     public void execute(final Plugin plugin, final IncrementalTask task, final Runnable completion, final float loadFactor, final int maxTicks) {
         final AtomicInteger offset = new AtomicInteger(0);
-        final AtomicInteger length = new AtomicInteger(5);
+        final AtomicInteger length = new AtomicInteger(1);
         final Runnable runner = new Runnable() {
             @Override
             public void run() {

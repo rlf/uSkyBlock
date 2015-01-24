@@ -1,37 +1,35 @@
 package us.talabrek.ultimateskyblock.island;
 
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.handler.task.WorldEditClearTask;
 import us.talabrek.ultimateskyblock.island.task.RenamePlayerTask;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangedEvent;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 
-import static org.bukkit.Material.AIR;
 import static org.bukkit.Material.BEDROCK;
 
 /**
@@ -101,38 +99,10 @@ public class IslandLogic {
                 || w.getBlockAt(px-radius, py, pz+radius).getType() == BEDROCK
                 || w.getBlockAt(px-radius, py, pz-radius).getType() == BEDROCK)
         {
-            sender.sendMessage(String.format("\u00a74Flatland detected under your island!\u00a7e Clearing it in %s, stay clear.", TimeUtil.ticksAsString(delay)));
-            final AtomicInteger sharedY = new AtomicInteger(0);
-            final Runnable clearYLayer = new Runnable() {
-                long tStart;
-                long timeUsed = 0;
-                @Override
-                public void run() {
-                    long t = System.currentTimeMillis();
-                    int y = sharedY.getAndIncrement();
-                    if (y  <= 3) {
-                        if (y == 0) {
-                            tStart = t;
-                        }
-                        for (int dx = 1; dx <= range; dx++) {
-                            for (int dz = 1; dz <= range; dz++) {
-                                Block b = w.getBlockAt(px + (dx % 2 == 0 ? dx/2 : -dx/2),
-                                        y, pz + (dz % 2 == 0 ? dz/2 : -dz/2));
-                                if (b.getType() != AIR) {
-                                    b.setType(AIR);
-                                }
-                            }
-                        }
-                        long diffTicks = (System.currentTimeMillis() - t)/50;
-                        timeUsed += diffTicks;
-                        plugin.getServer().getScheduler().runTaskLater(plugin, this, diffTicks);
-                    } else {
-                        plugin.log(Level.INFO, String.format("Flatland cleared at %s in %s (%s)", LocationUtil.asString(loc), TimeUtil.millisAsString(System.currentTimeMillis() - tStart), TimeUtil.millisAsString(timeUsed)));
-                        sender.sendMessage("\u00a7eFlatland was cleared under your island. Take care.");
-                    }
-                }
-            };
-            plugin.getServer().getScheduler().runTaskLater(plugin, clearYLayer, delay);
+            sender.sendMessage(String.format("\u00a7c-----------------------------------\n\u00a7cFlatland detected under your island!\n\u00a7e Clearing it in %s, stay clear.\n\u00a7c-----------------------------------\n", TimeUtil.ticksAsString(delay)));
+            new WorldEditClearTask(plugin, sender, new CuboidRegion(new Vector(px-radius, 0, pz-radius),
+                    new Vector(px+radius, 4, pz+radius)),
+                    "\u00a7eFlatland was cleared under your island (%s). Take care.").runTaskLater(plugin, delay);
             return true;
         }
         return false;
