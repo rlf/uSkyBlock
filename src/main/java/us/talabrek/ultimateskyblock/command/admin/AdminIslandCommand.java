@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.command.admin;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
 import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
@@ -68,7 +69,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
         add(new AbstractUSBCommand("protectall", "usb.mod.protectall", "protects all islands (time consuming)") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                protectAll(sender);
+                protectAll(plugin, sender);
                 return true;
             }
         });
@@ -107,8 +108,16 @@ public class AdminIslandCommand extends CompositeUSBCommand {
         sender.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");
     }
 
-    private void protectAll(CommandSender sender) {
-        sender.sendMessage("\u00a7eOups, that was embarrassing - protectall is currently out of order");
+    private void protectAll(uSkyBlock plugin, CommandSender sender) {
+        synchronized (plugin) {
+            if (plugin.isProtectAllActive()) {
+                sender.sendMessage("\u00a74Sorry!\u00a7e A protect-all is already running. Let it complete first.");
+                return;
+            }
+            plugin.setProtectAllActive(true);
+        }
+        sender.sendMessage("\u00a7eStarting a protect-all task. It will take a while.");
+        new ProtectAllTask(plugin, sender).runTask(plugin);
     }
 
     private void deleteIsland(CommandSender sender, PlayerInfo playerInfo) {

@@ -43,14 +43,21 @@ public class WorldGuardHandler {
 
     public static boolean protectIsland(final CommandSender sender, final PlayerInfo pi) {
         uSkyBlock plugin = uSkyBlock.getInstance();
+        IslandInfo islandConfig = plugin.getIslandInfo(pi);
+        if (islandConfig == null) {
+            return false;
+        }
+        return protectIsland(plugin, sender, islandConfig);
+    }
+
+    public static boolean protectIsland(uSkyBlock plugin, CommandSender sender, IslandInfo islandConfig) {
         try {
             WorldGuardPlugin worldGuard = getWorldGuard();
             RegionManager regionManager = worldGuard.getRegionManager(uSkyBlock.getSkyBlockWorld());
-            IslandInfo islandConfig = plugin.getIslandInfo(pi);
             String regionName = islandConfig.getName() + "island";
-            if (pi.getIslandLocation() != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
+            if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
                 ProtectedCuboidRegion region = setRegionFlags(sender, islandConfig);
-                final ApplicableRegionSet set = regionManager.getApplicableRegions(pi.getIslandLocation());
+                final ApplicableRegionSet set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
                 if (set.size() > 0) {
                     for (ProtectedRegion regions : set) {
                         if (!regions.getId().equalsIgnoreCase("__global__")) {
@@ -59,13 +66,14 @@ public class WorldGuardHandler {
                     }
                 }
                 regionManager.addRegion(region);
-                plugin.log(Level.INFO, "New protected region created for " + pi.getPlayerName() + "'s Island by " + sender.getName());
+                plugin.log(Level.INFO, "New protected region created for " + islandConfig.getLeader() + "'s Island by " + sender.getName());
                 regionManager.save();
                 islandConfig.setRegionVersion(VERSION);
                 return true;
             }
         } catch (Exception ex) {
-            plugin.log(Level.SEVERE, "ERROR: Failed to protect " + pi.getPlayerName() + "'s Island (" + sender.getName() + ")", ex);
+            String name = islandConfig != null ? islandConfig.getLeader() : "Unknown";
+            plugin.log(Level.SEVERE, "ERROR: Failed to protect " + name + "'s Island (" + sender.getName() + ")", ex);
         }
         return false;
     }
@@ -171,7 +179,7 @@ public class WorldGuardHandler {
                 regionManager.addRegion(region);
                 regionManager.save();
             }
-        } catch (StorageException|InvalidFlagFormat e) {
+        } catch (StorageException | InvalidFlagFormat e) {
             uSkyBlock.getInstance().log(Level.WARNING, "Error saving island region after removal of " + player);
         }
     }

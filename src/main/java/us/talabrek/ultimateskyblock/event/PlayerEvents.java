@@ -25,10 +25,12 @@ public class PlayerEvents implements Listener {
     private static final Set<EntityDamageEvent.DamageCause> FIRE_TRAP = new HashSet<>(
             Arrays.asList(EntityDamageEvent.DamageCause.LAVA, EntityDamageEvent.DamageCause.FIRE, EntityDamageEvent.DamageCause.FIRE_TICK));
     private static final Random RANDOM = new Random();
+    private static final int OBSIDIAN_SPAM = 10000; // Max once every 10 seconds.
     
     private final uSkyBlock plugin;
     private final boolean visitorFallProtected;
     private final boolean visitorFireProtected;
+    private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -81,9 +83,18 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onClickOnObsidian(final PlayerInteractEvent event) {
+        if (!plugin.isSkyWorld(event.getPlayer().getWorld())) {
+            return;
+        }
+        long now = System.currentTimeMillis();
         Player player = event.getPlayer();
         PlayerInventory inventory = player != null ? player.getInventory() : null;
         Block block = event.getClickedBlock();
+        Long lastClick = obsidianClick.get(player.getUniqueId());
+        if (lastClick != null && lastClick + OBSIDIAN_SPAM < now) {
+            plugin.notifyPlayer(player, "\u00a74You can only convert obsidian once every 10 seconds");
+            return;
+        }
         if (Settings.extras_obsidianToLava && plugin.playerIsOnIsland(player)
                 && plugin.isSkyWorld(player.getWorld())
                 && event.getAction() == Action.RIGHT_CLICK_BLOCK
@@ -91,6 +102,7 @@ public class PlayerEvents implements Listener {
                 && block != null
                 && block.getType() == Material.OBSIDIAN
                 && !plugin.testForObsidian(block)) {
+            obsidianClick.put(player.getUniqueId(), now);
             player.sendMessage("\u00a7eChanging your obsidian back into lava. Be careful!");
             inventory.setItem(inventory.getHeldItemSlot(), new ItemStack(Material.LAVA_BUCKET, 1));
             player.updateInventory();

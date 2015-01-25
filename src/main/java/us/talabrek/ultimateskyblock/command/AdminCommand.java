@@ -23,6 +23,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         TabCompleter biomeCompleter = new BiomeTabCompleter();
         addTab("oplayer", playerCompleter);
         addTab("player", allPlayerCompleter);
+        addTab("island", allPlayerCompleter);
         addTab("challenge", challengeCompleter);
         addTab("biome", biomeCompleter);
         add(new ReloadCommand());

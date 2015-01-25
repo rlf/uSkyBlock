@@ -2,7 +2,14 @@ package us.talabrek.ultimateskyblock;
 
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -33,7 +40,11 @@ import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
-import us.talabrek.ultimateskyblock.event.*;
+import us.talabrek.ultimateskyblock.event.ExploitEvents;
+import us.talabrek.ultimateskyblock.event.GriefEvents;
+import us.talabrek.ultimateskyblock.event.ItemDropEvents;
+import us.talabrek.ultimateskyblock.event.MenuEvents;
+import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -56,12 +67,16 @@ import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
-import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private static final String[][] depends = new String[][]{
@@ -99,7 +114,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     Map<UUID, Long> restartCooldown;
     Map<UUID, Long> biomeCooldown;
     private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
-    private boolean purgeActive;
+
+    private volatile boolean purgeActive;
+    private volatile boolean protectAllActive;
 
     private BukkitTask autoRecalculateTask;
 
@@ -1452,5 +1469,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getIslandLogic().updateRank(islandInfo, score);
         fireChangeEvent(new uSkyBlockScoreChangedEvent(player, this, score));
         return score;
+    }
+
+    public synchronized boolean isProtectAllActive() {
+        return protectAllActive;
+    }
+
+    public synchronized void setProtectAllActive(boolean protectAllActive) {
+        this.protectAllActive = protectAllActive;
     }
 }
