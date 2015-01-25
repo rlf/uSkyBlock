@@ -61,6 +61,15 @@ public enum FileUtil {;
         };
     }
 
+    public static FilenameFilter createIslandFilenameFilter() {
+        return new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name != null && name.matches("-?[0-9]+,-?[0-9]+.yml");
+            }
+        };
+    }
+
     public static String getBasename(String file) {
         if (file != null && file.lastIndexOf('.') != -1) {
             return file.substring(0, file.lastIndexOf('.'));

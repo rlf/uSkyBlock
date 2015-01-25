@@ -80,8 +80,9 @@ public class InviteHandler {
             PlayerInfo pi = plugin.getPlayerInfo(player);
             final IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
             boolean deleteOldIsland = false;
-            if (pi.getHasIsland() && !island.isParty()) {
-                deleteOldIsland = true;
+            if (pi.getHasIsland() && pi.getIslandLocation() != null) {
+                String islandName = WorldGuardHandler.getIslandNameAt(pi.getIslandLocation());
+                deleteOldIsland = !island.getName().equals(islandName);
             }
             Set<UUID> uuids = waitingInvites.get(invite.getIslandName());
             uuids.remove(uuid);

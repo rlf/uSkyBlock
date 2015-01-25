@@ -20,4 +20,8 @@ public enum LocationUtil {;
         }
         return s;
     }
+
+    public static boolean isEmptyLocation(Location location) {
+        return location == null || (location.getBlockX() == 0 && location.getBlockZ() == 0 && location.getBlockY() == 0);
+    }
 }

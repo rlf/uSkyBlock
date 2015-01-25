@@ -61,7 +61,7 @@ public class ProtectAllTask extends BukkitRunnable implements IncrementalTask {
 
     @Override
     public void run() {
-        String[] list = plugin.directoryIslands.list(FileUtil.createYmlFilenameFilter());
+        String[] list = plugin.directoryIslands.list(FileUtil.createIslandFilenameFilter());
         islandNames.addAll(Arrays.asList(list));
         size = list.length;
         final long tStart = System.currentTimeMillis();

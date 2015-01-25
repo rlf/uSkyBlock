@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.bukkit.Material.BEDROCK;
 
@@ -38,6 +39,7 @@ import static org.bukkit.Material.BEDROCK;
  * Responsible for island creation, locating locations, purging, clearing etc.
  */
 public class IslandLogic {
+    private static final Logger log = Logger.getLogger(IslandLogic.class.getName());
     private final uSkyBlock plugin;
     private final File directoryIslands;
 
@@ -77,6 +79,7 @@ public class IslandLogic {
     }
 
     public void clearIsland(Location loc, Runnable afterDeletion) {
+        log.fine("clearing island at " + loc);
         World skyBlockWorld = plugin.getWorld();
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {

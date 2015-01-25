@@ -28,11 +28,7 @@ public class LeaveCommand extends RequireIslandCommand {
             }
             player.getInventory().clear();
             player.getEquipment().clear();
-            if (Settings.extras_sendToSpawn) {
-                plugin.spawnTeleport(player);
-            } else {
-                player.teleport(uSkyBlock.getSkyBlockWorld().getSpawnLocation());
-            }
+            plugin.spawnTeleport(player);
             island.removeMember(pi);
             player.sendMessage("\u00a7eYou have left the island and returned to the player spawn.");
             if (Bukkit.getPlayer(island.getLeader()) != null) {

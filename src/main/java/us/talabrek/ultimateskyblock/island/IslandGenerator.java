@@ -16,13 +16,14 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 /**
  * The factory for creating islands (actual blocks).
  */
 @SuppressWarnings("deprecation")
 public class IslandGenerator {
-
+    private static final Logger log = Logger.getLogger(IslandGenerator.class.getName());
     private final FileConfiguration config;
 
     public IslandGenerator(FileConfiguration config) {
@@ -30,6 +31,7 @@ public class IslandGenerator {
     }
 
     public void createIsland(uSkyBlock plugin, Player player, Location next) {
+        log.fine("creating island for " + player + " at " + next);
         boolean hasIslandNow = false;
         if (uSkyBlock.getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
             for (File schemFile : plugin.getSchemFile()) {
@@ -42,6 +44,7 @@ public class IslandGenerator {
                         && WorldEditHandler.loadIslandSchematic(player, uSkyBlock.skyBlockWorld, schemFile, next)) {
                     setChest(next, player);
                     hasIslandNow = true;
+                    log.fine("chose schematic " + cSchem + " due to permission.");
                     break;
                 }
             }
@@ -56,6 +59,7 @@ public class IslandGenerator {
                             && WorldEditHandler.loadIslandSchematic(player, uSkyBlock.skyBlockWorld, schemFile, next)) {
                         setChest(next, player);
                         hasIslandNow = true;
+                        log.fine("chose schematic " + cSchem);
                         break;
                     }
                 }
@@ -63,8 +67,10 @@ public class IslandGenerator {
         }
         if (!hasIslandNow) {
             if (!Settings.island_useOldIslands) {
+                log.fine("generating a uSkyBlock default island");
                 generateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, uSkyBlock.skyBlockWorld);
             } else {
+                log.fine("generating a skySMP island");
                 oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), player, uSkyBlock.skyBlockWorld);
             }
         }

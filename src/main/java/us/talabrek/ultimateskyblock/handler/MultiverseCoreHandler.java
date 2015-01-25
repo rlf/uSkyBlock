@@ -7,6 +7,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 /**
  * Wrapper for the MVCore plugin.
@@ -14,8 +15,8 @@ import us.talabrek.ultimateskyblock.Settings;
 public enum MultiverseCoreHandler {;
     public static MultiverseCore getMultiverseCore() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("Multiverse-Core");
-        if (plugin instanceof MultiversePlugin) {
-            return ((MultiversePlugin)plugin).getCore();
+        if (plugin instanceof MultiverseCore) {
+            return (MultiverseCore)plugin;
         }
         return null;
     }
@@ -28,7 +29,7 @@ public enum MultiverseCoreHandler {;
     public static void importWorld(World skyWorld) {
         MultiverseCore core = getMultiverseCore();
         if (core != null) {
-            Location worldSpawn = new Location(skyWorld, 0, Settings.island_height, 0);
+            Location worldSpawn = new Location(skyWorld, 0.5, Settings.island_height + 0.1, 0.5);
             if (!core.getMVWorldManager().isMVWorld(skyWorld)) {
                 core.getMVWorldManager().addWorld(skyWorld.getName(), World.Environment.NORMAL, "0", WorldType.NORMAL, false, "uSkyBlock");
             }
@@ -36,15 +37,13 @@ public enum MultiverseCoreHandler {;
             mvWorld.setEnvironment(World.Environment.NORMAL);
             mvWorld.setGenerator("uSkyBlock");
             if (Settings.general_spawnSize > 0) {
-                if (isEmptyLocation(mvWorld.getSpawnLocation())) {
+                if (LocationUtil.isEmptyLocation(mvWorld.getSpawnLocation())) {
+                    mvWorld.setAdjustSpawn(false);
                     mvWorld.setSpawnLocation(worldSpawn);
-                } else {
-                    worldSpawn = mvWorld.getSpawnLocation();
                 }
-                Block spawnBlock = skyWorld.getBlockAt(worldSpawn);
-                if (!spawnBlock.getType().isSolid()) {
-                    spawnBlock.setType(Material.BEDROCK);
-                }
+            }
+            if (!Settings.extras_sendToSpawn) {
+                mvWorld.setRespawnToWorld(mvWorld.getName());
             }
         } else if (hasMultiverse()) {
             if (!Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv import " + skyWorld.getName() + " NORMAL -g uSkyBlock")) {
@@ -53,7 +52,4 @@ public enum MultiverseCoreHandler {;
         }
     }
 
-    private static boolean isEmptyLocation(Location location) {
-        return location == null || (location.getBlockX() == 0 && location.getBlockZ() == 0 && location.getBlockY() == 0);
-    }
 }

@@ -2,8 +2,6 @@ package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
@@ -24,7 +22,6 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -46,6 +43,9 @@ public class WorldGuardHandler {
         IslandInfo islandConfig = plugin.getIslandInfo(pi);
         if (islandConfig == null) {
             return false;
+        }
+        if (islandConfig.getLeader().isEmpty()) {
+            islandConfig.setupPartyLeader(pi.getPlayerName());
         }
         return protectIsland(plugin, sender, islandConfig);
     }
@@ -104,8 +104,10 @@ public class WorldGuardHandler {
         }
         region.setOwners(owners);
         region.setPriority(100);
-        region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering \u00A7b" + islandConfig.getLeader() + "'s \u00a7disland! "));
-        region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving \u00A7b" + islandConfig.getLeader() + "'s \u00a7disland! "));
+        region.setFlag(DefaultFlag.GREET_MESSAGE,
+                DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering \u00a7b" + islandConfig.getLeader() + "'s \u00a7disland."));
+        region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
+                DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving \u00a7b" + islandConfig.getLeader() + "'s \u00a7disland."));
         if (Settings.island_allowPvP) {
             region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
         } else {

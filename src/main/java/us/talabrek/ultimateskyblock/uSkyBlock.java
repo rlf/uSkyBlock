@@ -58,6 +58,7 @@ import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.util.FileUtil;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
@@ -145,6 +146,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             if (lastIsland != null) {
                 setLastIsland(lastIsland);
             }
+            skyBlockWorld = null; // Force a reload on config.
         } catch (Exception e) {
             log(Level.INFO, "Something went wrong saving the island and/or party data!", e);
         }
@@ -158,6 +160,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void onEnable() {
+        skyBlockWorld = null; // Force a re-import or what-ever...
         missingRequirements = null;
         instance = this;
         FileUtil.init(getDataFolder());
@@ -304,8 +307,23 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 uSkyBlock.skyBlockWorld.save();
             }
             MultiverseCoreHandler.importWorld(skyBlockWorld);
+            setupWorld(skyBlockWorld);
+
         }
         return uSkyBlock.skyBlockWorld;
+    }
+
+    private void setupWorld(World skyWorld) {
+        if (Settings.general_spawnSize > 0) {
+            if (LocationUtil.isEmptyLocation(skyWorld.getSpawnLocation())) {
+                skyWorld.setSpawnLocation(0, Settings.island_height, 0);
+            }
+            Location worldSpawn = skyWorld.getSpawnLocation();
+            Block spawnBlock = skyWorld.getBlockAt(worldSpawn);
+            if (!spawnBlock.getType().isSolid()) {
+                spawnBlock.setType(Material.BEDROCK);
+            }
+        }
     }
 
     public static World getSkyBlockWorld() {
@@ -479,6 +497,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private void postRestart(final Player player, final Location next) {
+        getLogger().log(Level.FINE, "executing postRestart for " + player + " on " + next);
         islandGenerator.createIsland(this, player, next);
         changePlayerBiome(player, "OCEAN");
         next.setY((double) Settings.island_height);
@@ -487,11 +506,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
+                getLogger().log(Level.FINE, "porting player back to the island");
                 homeTeleport(player);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
             }
-        }, 10);
+        }, 20);
     }
 
     public boolean restartPlayerIsland(final Player player, final Location next) {
@@ -564,7 +584,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (newLoc != null) {
             if (newLoc.equals(pi.getIslandLocation())) {
                 sender.sendMessage("\u00a74Player is already assigned to this island!");
-                return true;
+                deleteOldIsland = false;
             }
             Runnable resetIsland = new Runnable() {
                 @Override
@@ -705,7 +725,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void spawnTeleport(final Player player) {
-        execCommand(player, "op:spawn");
+        if (Settings.extras_sendToSpawn) {
+            execCommand(player, "op:spawn");
+        } else {
+            player.teleport(getWorld().getSpawnLocation());
+        }
     }
 
     public boolean homeSet(final Player player) {
