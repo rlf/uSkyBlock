@@ -144,6 +144,5 @@ options:
   advanced:
     # If true, display-name is looked up (might be performance intensive).
     useDisplayNames: false
-
 # DO NOT TOUCH THIS!
-version: 5
+version: 6

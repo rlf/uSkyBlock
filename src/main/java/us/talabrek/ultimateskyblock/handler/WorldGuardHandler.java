@@ -24,8 +24,10 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 public class WorldGuardHandler {
@@ -230,17 +232,32 @@ public class WorldGuardHandler {
         }
     }
 
+    public static ApplicableRegionSet getIntersectingRegions(Location islandLocation) {
+        RegionManager regionManager = getWorldGuard().getRegionManager(islandLocation.getWorld());
+        ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(getIslandRegion(islandLocation));
+        for (Iterator<ProtectedRegion> iterator = applicableRegions.iterator(); iterator.hasNext(); ) {
+            if (iterator.next() instanceof GlobalProtectedRegion) {
+                iterator.remove();
+            }
+        }
+        return applicableRegions;
+    }
+
     public static boolean isIslandIntersectingSpawn(Location islandLocation) {
         int r = Settings.general_spawnSize;
         if (r == 0) {
             return false;
         }
-        ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", new BlockVector(-r, 0, -r), new BlockVector(r, 0, r));
-        r = Settings.island_radius;
-        Vector islandCenter = new Vector(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
-        ProtectedCuboidRegion islandRegion = new ProtectedCuboidRegion("island",
-                new BlockVector(islandCenter.subtract(r, 0, r)),
-                new BlockVector(islandCenter.add(r, 0, r)));
+        ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", new BlockVector(-r, 0, -r), new BlockVector(r, 255, r));
+        ProtectedCuboidRegion islandRegion = getIslandRegion(islandLocation);
         return !islandRegion.getIntersectingRegions(Collections.singletonList(spawn)).isEmpty();
+    }
+
+    private static ProtectedCuboidRegion getIslandRegion(Location islandLocation) {
+        int r = Settings.island_radius;
+        Vector islandCenter = new Vector(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
+        return new ProtectedCuboidRegion(String.format("%d,%dIsland", islandCenter.getBlockX(), islandLocation.getBlockZ()),
+                new BlockVector(islandCenter.subtract(r, 0, r)),
+                new BlockVector(islandCenter.add(r, 255, r)));
     }
 }

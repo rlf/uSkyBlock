@@ -735,7 +735,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean islandAtLocation(final Location loc) {
-        return WorldGuardHandler.getIslandNameAt(loc) != null;
+        return WorldGuardHandler.getIntersectingRegions(loc).size() > 0;
     }
 
     public boolean islandInSpawn(final Location loc) {

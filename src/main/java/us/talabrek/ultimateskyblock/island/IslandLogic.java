@@ -18,6 +18,7 @@ import us.talabrek.ultimateskyblock.island.task.RenamePlayerTask;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangedEvent;
@@ -29,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 
 import static org.bukkit.Material.BEDROCK;
 
@@ -79,6 +81,9 @@ public class IslandLogic {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
             WorldEditHandler.clearIsland(skyBlockWorld, region, afterDeletion);
+        } else {
+            uSkyBlock.log(Level.WARNING, "Trying to delete an island - with no WG region! (" + LocationUtil.asString(loc) + ")");
+            afterDeletion.run();
         }
     }
 

@@ -5,7 +5,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -20,7 +26,6 @@ import java.util.logging.Logger;
  */
 public enum FileUtil {;
     private static final Logger log = Logger.getLogger(FileUtil.class.getName());
-
     private static final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
     private static File dataFolder;
 
@@ -72,30 +77,32 @@ public enum FileUtil {;
         // Caching, for your convenience! (and a bigger memory print!)
 
         if (!configFiles.containsKey(configName)) {
-            FileConfiguration config = new YamlConfiguration();
+            YamlConfiguration config = new YamlConfiguration();
             try {
                 // read from datafolder!
                 File configFile = new File(getDataFolder(), configName);
                 // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
-                FileConfiguration configFolder = new YamlConfiguration();
-                FileConfiguration configJar = new YamlConfiguration();
-                readConfig(configFolder, configFile);
-                readConfig(configJar, FileUtil.class.getClassLoader().getResourceAsStream(configName));
-                if (!configFile.exists() || configFolder.getInt("version", 0) < configJar.getInt("version", 0)) {
+                YamlConfiguration configJar = new YamlConfiguration();
+                readConfig(config, configFile);
+                File orgFile = new File(dataFolder, configName + ".org");
+                FileUtil.copy(FileUtil.class.getClassLoader().getResourceAsStream(configName), orgFile);
+                readConfig(configJar, orgFile);
+                if (!configFile.exists() || config.getInt("version", 0) < configJar.getInt("version", 0)) {
                     if (configFile.exists()) {
                         File backupFolder = new File(getDataFolder(), "backup");
                         backupFolder.mkdirs();
-                        String bakFile = String.format("%1$s-%2$tY%2$tm%2$td-%2$tH%2$tM.yml", configName, new Date());
+                        String bakFile = String.format("%1$s-%2$tY%2$tm%2$td-%2$tH%2$tM.yml", getBasename(configName), new Date());
                         log.log(Level.INFO, "Moving existing config " + configName + " to backup/" + bakFile);
                         Files.move(Paths.get(configFile.toURI()),
                                 Paths.get(new File(backupFolder, bakFile).toURI()),
                                 StandardCopyOption.REPLACE_EXISTING);
+                        config = mergeConfig(configJar, config);
+                        config.options().header("Merge from between jar-file and existing config");
+                        config.save(configFile);
+                    } else {
+                        FileUtil.copy(FileUtil.class.getClassLoader().getResourceAsStream(configName), configFile);
+                        config = configJar;
                     }
-                    config = configJar;
-                    config.save(configFile);
-                } else if (configFile.exists()) {
-                    // FORCE utf8 - don't rely on super.getConfig() or FileConfiguration.load()
-                    readConfig(config, configFile);
                 }
             } catch (Exception e) {
                 log.log(Level.SEVERE, "Unable to handle config-file " + configName, e);
@@ -103,6 +110,23 @@ public enum FileUtil {;
             configFiles.put(configName, config);
         }
         return configFiles.get(configName);
+    }
+
+    private static void copy(InputStream stream, File file) throws IOException {
+        Files.copy(stream, Paths.get(file.toURI()), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    /**
+     * Merges the important keys from src to destination.
+     * @param src The source (containing the new values).
+     * @param dest The destination (containgin old-values).
+     */
+    private static YamlConfiguration mergeConfig(YamlConfiguration src, YamlConfiguration dest) {
+        int version = src.getInt("version", dest.getInt("version"));
+        dest.setDefaults(src); // Overwrite the "new-values" with existing ones.
+        dest.options().copyDefaults(true);
+        dest.set("version", version);
+        return dest;
     }
 
     public static void init(File dataFolder) {

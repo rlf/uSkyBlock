@@ -6,7 +6,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.async.IncrementalTask;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 
