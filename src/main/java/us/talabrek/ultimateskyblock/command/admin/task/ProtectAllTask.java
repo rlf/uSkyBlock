@@ -35,10 +35,15 @@ public class ProtectAllTask extends BukkitRunnable implements IncrementalTask {
     @Override
     public boolean execute(Plugin javaPlugin, int offset, int length) {
         for (int i = 0; i < length && !islandNames.isEmpty(); i++) {
-            String islandName = FileUtil.getBasename(islandNames.remove(0));
+            String fileName = islandNames.remove(0);
+            String islandName = FileUtil.getBasename(fileName);
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
-            if (WorldGuardHandler.protectIsland(plugin, sender, islandInfo)) {
-                success++;
+            try {
+                if (WorldGuardHandler.protectIsland(plugin, sender, islandInfo)) {
+                    success++;
+                }
+            } catch (Exception e) {
+                log.log(Level.INFO, "Error occurred trying to process " + fileName, e);
             }
         }
         return isComplete();
