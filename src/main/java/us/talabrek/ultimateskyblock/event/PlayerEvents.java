@@ -91,7 +91,7 @@ public class PlayerEvents implements Listener {
         PlayerInventory inventory = player != null ? player.getInventory() : null;
         Block block = event.getClickedBlock();
         Long lastClick = obsidianClick.get(player.getUniqueId());
-        if (lastClick != null && lastClick + OBSIDIAN_SPAM < now) {
+        if (lastClick != null && (lastClick + OBSIDIAN_SPAM) >= now) {
             plugin.notifyPlayer(player, "\u00a74You can only convert obsidian once every 10 seconds");
             return;
         }
