@@ -13,7 +13,8 @@ import java.util.*;
  */
 public class CompositeUSBCommand extends AbstractTabCompleter implements USBCommand, TabCompleter {
 
-    public static final String HELP_PATTERN = "(?iu)help";
+    public static final String HELP_PATTERN = "(?iu)help|\\?";
+    private static final int MAX_PER_PAGE = 10;
 
     private final String name;
     private final String[] aliases;
@@ -68,7 +69,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
 
     @Override
     public String getPermission() {
-        return permission;
+        return permission != null && !permission.isEmpty() ? permission : null;
     }
 
     @Override
@@ -92,7 +93,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
             return false;
         }
         if (args.length == 0 || (args.length == 1 && args[0].matches(HELP_PATTERN))) {
-            showUsage(sender);
+            showUsage(sender, 1);
         } else if (args.length > 1 && args[0].matches(HELP_PATTERN)) {
             showUsage(sender, args[1]);
         } else if (args.length > params.length) {
@@ -105,22 +106,36 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
                 data.put(p, args[ix++]);
             }
             if (!hasAccess(cmd, sender)) {
-                showUsage(sender);
+                showUsage(sender, 1);
             } else if (!cmd.execute(sender, cmdName, data, subArgs)) {
                 showUsage(sender, args[0]);
             }
         } else {
-            showUsage(sender);
+            showUsage(sender, 1);
         }
         return true;
     }
-    private void showUsage(CommandSender sender) {
-        String msg = "\u00a77Usage: " + getShortDescription(this);
-        ArrayList<String> cmds = new ArrayList<>(commandMap.keySet());
+    private void showUsage(CommandSender sender, int page) {
+        String msg = "\u00a77Usage: " + getShortDescription(sender, this);
+        List<String> cmds = new ArrayList<>(commandMap.keySet());
         Collections.sort(cmds);
+        int realPage = 0;
+        int maxPage = 0;
+        if (cmds.size() > MAX_PER_PAGE) {
+            msg = msg.substring(0, msg.length()-1); // Remove \n
+            maxPage = (int) Math.round(Math.ceil(cmds.size() * 1f / MAX_PER_PAGE));
+            realPage = Math.max(1, Math.min(maxPage, page));
+            msg += " \u00a77[" + realPage + "/" + maxPage + "]\n";
+            cmds = cmds.subList((realPage-1)*MAX_PER_PAGE, Math.min(realPage*MAX_PER_PAGE, cmds.size()));
+        }
         for (String key : cmds) {
             USBCommand cmd = commandMap.get(key);
-            msg += "  " + getShortDescription(cmd);
+            msg += "  " + getShortDescription(sender, cmd);
+        }
+        if (realPage > 0 && maxPage > realPage) {
+            msg += "\u00a77Use \u00a73/" + getName() + " ? " + (realPage+1) + " \u00a77 to display next page\n";
+        } else if (realPage > 0 && maxPage == realPage) {
+            msg += "\u00a77Use \u00a73/" + getName() + " ? " + (realPage-1) + " \u00a77 to display previous page\n";
         }
         sender.sendMessage(msg.split("\n"));
     }
@@ -130,17 +145,30 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
         USBCommand cmd = aliasMap.get(cmdName);
         if (cmd != null && hasAccess(cmd, sender)) {
             String msg = "\u00a77Usage: \u00a73/" + name + " \u00a7e";
-            msg += getShortDescription(cmd);
+            msg += getShortDescription(sender, cmd);
             if (cmd.getUsage() != null && !cmd.getUsage().isEmpty()) {
                 msg += "\u00a77" + cmd.getUsage();
             }
             sender.sendMessage(msg.split("\n"));
+        } else if (cmdName.matches("[0-9]+")) {
+            showUsage(sender, Integer.parseInt(cmdName));
         } else {
-            showUsage(sender);
+            List<String> cmds = filter(aliasMap.keySet(), cmdName);
+            if (cmds.isEmpty()) {
+                showUsage(sender, 1);
+            } else {
+                String msg = "\u00a77Usage: " + getShortDescription(sender, this);
+                Collections.sort(cmds);
+                for (String key : cmds) {
+                    USBCommand scmd = commandMap.get(key);
+                    msg += "  " + getShortDescription(sender, scmd);
+                }
+                sender.sendMessage(msg.split("\n"));
+            }
         }
     }
 
-    private String getShortDescription(USBCommand cmd) {
+    private String getShortDescription(CommandSender sender, USBCommand cmd) {
         String msg = "\u00a73" + cmd.getName();
         String[] aliases = cmd.getAliases();
         if (aliases.length > 1) {
@@ -161,7 +189,11 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
             msg += " [command|help]";
         }
         msg += "\u00a77 - \u00a7e";
-        msg += cmd.getDescription() + "\n";
+        msg += cmd.getDescription();
+        if (sender.isOp() && cmd.getPermission() != null) {
+            msg += " \u00a7c(" + cmd.getPermission() + ")";
+        }
+        msg += "\n";
         return msg;
     }
 

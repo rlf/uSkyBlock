@@ -1,7 +1,9 @@
 package us.talabrek.ultimateskyblock.async;
 
+import com.google.common.util.concurrent.AtomicDouble;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
@@ -20,17 +22,21 @@ public class SyncBalancedExecutor implements BalancedExecutor {
 
     @Override
     public void execute(final Plugin plugin, final IncrementalTask task, final Runnable completion, final float loadFactor, final int maxTicks) {
+        log.log(Level.FINE, String.format("Scheduling task : %s for sync-balanced execution with %3.0f%% load and %d max-ticks",
+                task.toString(), loadFactor, maxTicks));
         scheduler.runTask(plugin, new IncrementalExecution(plugin, task, completion, loadFactor, maxTicks));
     }
 
     private class IncrementalExecution implements Runnable {
         final AtomicInteger offset = new AtomicInteger(0);
         final AtomicInteger length = new AtomicInteger(1);
+        final AtomicDouble usedTicks = new AtomicDouble(0);
         private final Plugin plugin;
         private final IncrementalTask task;
         private final Runnable completion;
         private final float loadFactor;
         private final int maxTicks;
+        private final long tStart = System.currentTimeMillis();
 
         public IncrementalExecution(Plugin plugin, IncrementalTask task, Runnable completion, float loadFactor, int maxTicks) {
             this.plugin = plugin;
@@ -55,6 +61,7 @@ public class SyncBalancedExecutor implements BalancedExecutor {
                     long t2 = System.currentTimeMillis();
                     // TODO: 18/01/2015 - R4zorax: Show progress somewhere
                     float ticks = (t2-t1)/50;
+                    usedTicks.addAndGet(ticks);
                     if (ticks < 1) {
                         ticks = 1;
                     }
@@ -68,6 +75,10 @@ public class SyncBalancedExecutor implements BalancedExecutor {
                     log.log(Level.FINE, "Executed " + len + " tasks in " + ticks + " ticks");
                     if (task.isComplete() || len == 0) {
                         log.log(Level.FINE, "Task completed, running completion in " + waitTime + " ticks.");
+                        log.log(Level.FINE,
+                                String.format("Sync-balanced execution of %s completed in %s using %5.2f ticks",
+                                        task.toString(), TimeUtil.millisAsString(System.currentTimeMillis() - tStart),
+                                        usedTicks.get()));
                         scheduler.runTaskLater(plugin, completion, waitTime);
                     } else {
                         log.log(Level.FINE, "Scheduling next " + newLength + " tasks in " + waitTime + " ticks.");

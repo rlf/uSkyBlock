@@ -1,6 +1,8 @@
 package us.talabrek.ultimateskyblock.imports.wolfwork;
 
+import org.bukkit.Bukkit;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -118,6 +120,7 @@ public class WolfWorkUSBImporter implements USBImporter {
             islandInfo.setMaxPartySize(4);
             islandInfo.setBiome("OCEAN");
             islandInfo.save();
+            WorldGuardHandler.updateRegion(Bukkit.getConsoleSender(), islandInfo);
         }
     }
 

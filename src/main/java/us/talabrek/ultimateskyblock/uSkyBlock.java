@@ -27,6 +27,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
@@ -141,6 +142,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public void onDisable() {
         HandlerList.unregisterAll(this);
+        Bukkit.getScheduler().cancelTasks(this);
         try {
             this.unloadPlayerFiles();
             if (lastIsland != null) {
@@ -1011,6 +1013,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean setBiome(final Location loc, final String bName) {
+        Biome biome = getBiome(bName);
+        setBiome(loc, biome);
+        return biome != Biome.OCEAN;
+    }
+
+    public Biome getBiome(String bName) {
         Biome biome;
         if (bName.equalsIgnoreCase("jungle")) {
             biome = Biome.JUNGLE;
@@ -1033,8 +1041,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } else {
             biome = Biome.OCEAN;
         }
-        setBiome(loc, biome);
-        return biome != Biome.OCEAN;
+        return biome;
     }
 
     private void setBiome(Location loc, Biome biome) {

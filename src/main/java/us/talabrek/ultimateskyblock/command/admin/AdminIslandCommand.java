@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
@@ -76,20 +77,32 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new AbstractIslandInfoCommand("setbiome", "usb.mod.biome", "sets the biome of the island") {
-            private final String[] params = new String[]{"player", "biome"};
+        add(new AbstractUSBCommand("setbiome", "usb.mod.biome", "?island biome", "sets the biome of the island") {
             @Override
-            public String[] getParams() {
-                return params;
-            }
-
-            @Override
-            protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
-                if (args.length > 0) {
-                    setBiome(sender, playerInfo, islandInfo, args[0]);
-                } else {
-                    sender.sendMessage("\u00a74No biome supplied!");
+            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
+                if (args.length == 2) {
+                    PlayerInfo playerInfo = plugin.getPlayerInfo(args[0]);
+                    if (playerInfo == null || !playerInfo.getHasIsland()) {
+                        sender.sendMessage("\u00a74That player has no island.");
+                        return false;
+                    }
+                    setBiome(sender, playerInfo, plugin.getIslandInfo(playerInfo), args[1]);
+                    return true;
+                } else if (args.length == 1 && sender instanceof Player) {
+                    Biome biome = plugin.getBiome(args[0]);
+                    String islandName = WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation());
+                    if (biome == null || islandName == null) {
+                        return false;
+                    }
+                    IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+                    if (islandInfo == null) {
+                        sender.sendMessage("\u00a74No valid island at your location");
+                        return false;
+                    }
+                    setBiome(sender, islandInfo, biome.name());
+                    return true;
                 }
+                return false;
             }
         });
     }
@@ -97,11 +110,23 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     private void removePlayerFromIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
         if (playerInfo == null) {
             sender.sendMessage("\u00a74No valid player-name supplied.");
+            return;
         }
         sender.sendMessage("Removing " + playerInfo.getPlayerName() + " from island");
         playerInfo.removeFromIsland();
         islandInfo.removeMember(playerInfo);
         playerInfo.save();
+    }
+
+    private void setBiome(CommandSender sender, IslandInfo islandInfo, String biome) {
+        if (uSkyBlock.getInstance().setBiome(islandInfo.getIslandLocation(), biome)) {
+            islandInfo.setBiome(biome);
+            sender.sendMessage("\u00a7eChanged biome of " + islandInfo.getLeader() + "'s island to " + biome + ".");
+        } else {
+            islandInfo.setBiome("OCEAN");
+            sender.sendMessage("\u00a7eChanged biome of " + islandInfo.getLeader() + "'s island to OCEAN.");
+        }
+        sender.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");
     }
 
     private void setBiome(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String biome) {
@@ -113,6 +138,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
             islandInfo.setBiome(biome);
             sender.sendMessage("\u00a7e" + playerInfo.getPlayerName() + " has had their biome changed to " + biome + ".");
         } else {
+            islandInfo.setBiome("OCEAN");
             sender.sendMessage("\u00a7e" + playerInfo.getPlayerName() + " has had their biome changed to OCEAN.");
         }
         sender.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");

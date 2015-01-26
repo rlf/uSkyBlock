@@ -46,8 +46,11 @@ public class WorldGuardHandler {
         }
         if (islandConfig.getLeader().isEmpty()) {
             islandConfig.setupPartyLeader(pi.getPlayerName());
+            updateRegion(sender, islandConfig);
+            return true;
+        } else {
+            return protectIsland(plugin, sender, islandConfig);
         }
-        return protectIsland(plugin, sender, islandConfig);
     }
 
     public static boolean protectIsland(uSkyBlock plugin, CommandSender sender, IslandInfo islandConfig) {
