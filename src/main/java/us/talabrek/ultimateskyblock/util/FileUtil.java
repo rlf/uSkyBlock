@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
@@ -36,7 +37,16 @@ public enum FileUtil {;
         }
         try (Reader rdr = new InputStreamReader(new FileInputStream(configFile), "UTF-8")) {
             config.load(rdr);
-        } catch (InvalidConfigurationException | IOException e) {
+        } catch (InvalidConfigurationException e) {
+            log.log(Level.SEVERE, "Unable to read config file " + configFile, e);
+            if (configFile.exists()) {
+                try {
+                    Files.copy(Paths.get(configFile.toURI()), Paths.get(configFile.getParent(), configFile.getName() + ".err"), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e1) {
+                    // Ignore - we tried...
+                }
+            }
+        } catch (IOException e) {
             log.log(Level.SEVERE, "Unable to read config file " + configFile, e);
         }
     }

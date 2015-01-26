@@ -53,7 +53,7 @@ public class IslandLogic {
         this.directoryIslands = directoryIslands;
     }
 
-    public IslandInfo getIslandInfo(String islandName) {
+    public synchronized IslandInfo getIslandInfo(String islandName) {
         if (!islands.containsKey(islandName)) {
             islands.put(islandName, new IslandInfo(islandName));
         }
@@ -187,15 +187,19 @@ public class IslandLogic {
         final String[] listOfFiles = folder.list(FileUtil.createYmlFilenameFilter());
         for (String file : listOfFiles) {
             String islandName = FileUtil.getBasename(file);
-            boolean wasLoaded = islands.containsKey(islandName);
-            IslandInfo islandInfo = getIslandInfo(islandName);
-            double level = islandInfo != null ? islandInfo.getLevel() : 0;
-            if (islandInfo != null && level > 10) {
-                IslandLevel islandLevel = createIslandLevel(islandInfo, level);
-                topTen.add(islandLevel);
-            }
-            if (!wasLoaded) {
-                removeIslandFromMemory(islandName);
+            try {
+                boolean wasLoaded = islands.containsKey(islandName);
+                IslandInfo islandInfo = getIslandInfo(islandName);
+                double level = islandInfo != null ? islandInfo.getLevel() : 0;
+                if (islandInfo != null && level > 10) {
+                    IslandLevel islandLevel = createIslandLevel(islandInfo, level);
+                    topTen.add(islandLevel);
+                }
+                if (!wasLoaded) {
+                    islands.remove(islandName);
+                }
+            } catch (Exception e) {
+                plugin.getLogger().log(Level.WARNING, "Error during top10 generation", e);
             }
         }
         Collections.sort(topTen);
