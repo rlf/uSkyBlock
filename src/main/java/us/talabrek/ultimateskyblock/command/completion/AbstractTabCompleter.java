@@ -8,7 +8,9 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Common ancestor of the TabCompleters.
@@ -25,7 +27,7 @@ public abstract class AbstractTabCompleter implements TabCompleter {
     }
 
     public static List<String> filter(Collection<String> list, String prefix) {
-        List<String> filtered = new ArrayList<>();
+        Set<String> filtered = new LinkedHashSet<>();
         if (list != null) {
             String lowerPrefix = prefix.toLowerCase();
             for (String test : list) {
@@ -35,8 +37,8 @@ public abstract class AbstractTabCompleter implements TabCompleter {
             }
         }
         if (filtered.size() > 20) {
-            filtered = filtered.subList(0, 20);
+            return new ArrayList<>(filtered).subList(0, 20);
         }
-        return filtered;
+        return new ArrayList<>(filtered);
     }
 }

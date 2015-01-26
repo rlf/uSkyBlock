@@ -204,7 +204,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
     @Override
     protected List<String> getTabList(CommandSender commandSender, String term) {
         ArrayList<String> strings = new ArrayList<>();
-        for (USBCommand cmd : aliasMap.values()) {
+        for (USBCommand cmd : commandMap.values()) {
             if (hasAccess(cmd, commandSender)) {
                 strings.addAll(Arrays.asList(cmd.getAliases()));
             }
