@@ -48,6 +48,7 @@ import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
@@ -153,7 +154,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             log(Level.INFO, "Something went wrong saving the island and/or party data!", e);
         }
     }
-
 
 
     @Override
@@ -502,6 +502,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getLogger().log(Level.FINE, "executing postRestart for " + player + " on " + next);
         islandGenerator.createIsland(this, player, next);
         changePlayerBiome(player, "OCEAN");
+        WorldEditHandler.unloadRegion(next);
         next.setY((double) Settings.island_height);
         setNewPlayerIsland(player, next);
         setRestartCooldown(player);
@@ -510,10 +511,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             public void run() {
                 getLogger().log(Level.FINE, "porting player back to the island");
                 homeTeleport(player);
+                WorldEditHandler.loadRegion(next);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
+                getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
+                    @Override
+                    public void run() {
+                        WorldEditHandler.refreshRegion(next);
+                    }
+                }, 10);
             }
-        }, 20);
+        }, 10);
     }
 
     public boolean restartPlayerIsland(final Player player, final Location next) {

@@ -43,5 +43,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         });
         add(new FlatlandFixCommand(plugin));
         add(new DebugCommand(plugin));
+        add(new WGCommand(plugin));
     }
 }

@@ -29,8 +29,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WorldEditHandler {
+    private static final Logger log = Logger.getLogger(WorldEditHandler.class.getName());
+
     public static WorldEditPlugin getWorldEdit() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldEdit");
         if (plugin == null || !(plugin instanceof WorldEditPlugin)) {
@@ -40,6 +43,7 @@ public class WorldEditHandler {
     }
 
     public static boolean loadIslandSchematic(Player player, final World world, final File file, final Location origin) {
+        log.finer("Trying to load schematic " + file + " for " + player);
         WorldEdit worldEdit = getWorldEdit().getWorldEdit();
         BukkitPlayer wePlayer = getWorldEdit().wrapPlayer(player);
         LocalSession session = worldEdit.getSession(wePlayer);
@@ -140,6 +144,7 @@ public class WorldEditHandler {
     }
 
     public static void clearIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
+        log.finer("Clearing island " + region);
         final long t = System.currentTimeMillis();
         final Region cube = getRegion(skyWorld, region);
         Set<Vector2D> innerChunks = getInnerChunks(cube);
@@ -161,13 +166,30 @@ public class WorldEditHandler {
         return new CuboidRegion(new BukkitWorld(skyWorld), region.getMinimumPoint(), region.getMaximumPoint());
     }
 
-    public static void refreshRegion(Location location) {
+    public static void loadRegion(Location location) {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(location);
         World world = location.getWorld();
         Region cube = getRegion(world, region);
         for (Vector2D chunk : cube.getChunks()) {
             world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true, false);
             world.loadChunk(chunk.getBlockX(), chunk.getBlockZ(), false);
+        }
+    }
+
+    public static void unloadRegion(Location location) {
+        ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(location);
+        World world = location.getWorld();
+        Region cube = getRegion(world, region);
+        for (Vector2D chunk : cube.getChunks()) {
+            world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true);
+        }
+    }
+
+    public static void refreshRegion(Location location) {
+        ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(location);
+        World world = location.getWorld();
+        Region cube = getRegion(world, region);
+        for (Vector2D chunk : cube.getChunks()) {
             world.refreshChunk(chunk.getBlockX(), chunk.getBlockZ());
         }
     }
