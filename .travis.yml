@@ -1,11 +1,17 @@
 language: java
 branches:
   only:
+    # Only build (and deploy) pushes tagged with a version number
     - /^v2.*$/
 env:
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
+notifications:
+  email:
+    on_success: change
+    on_failure: change
 before_install:
+  # Change the maven-version to be the tag (for the API deploy)
   - mvn versions:set -DnewVersion=${TRAVIS_TAG}
 deploy:
   provider: releases
@@ -18,6 +24,7 @@ deploy:
     tags: true
     all_branches: true
 after_success:
+  # Deploy API to the GitHub maven repo
   - mvn deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
