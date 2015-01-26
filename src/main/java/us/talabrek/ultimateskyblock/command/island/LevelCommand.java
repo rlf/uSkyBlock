@@ -55,7 +55,7 @@ public class LevelCommand extends RequireIslandCommand {
 
     public boolean getIslandLevel(final Player player, final String islandPlayer, final String cmd) {
         PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
-        if (!info.getHasIsland() && !plugin.getIslandInfo(info).isParty()) {
+        if (info == null || !info.getHasIsland() && !plugin.getIslandInfo(info).isParty()) {
             player.sendMessage("\u00a74That player is invalid or does not have an island!");
             return false;
         }

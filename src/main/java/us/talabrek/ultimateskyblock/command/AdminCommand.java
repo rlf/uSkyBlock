@@ -28,7 +28,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         addTab("biome", biomeCompleter);
         add(new ReloadCommand());
         add(new ImportCommand());
-        add(new GenTopTenCommand());
+        add(new GenTopTenCommand(plugin));
         add(new RegisterIslandToPlayerCommand());
         add(new AdminChallengeCommand(plugin, challengeCompleter));
         add(new OrphanCommand());

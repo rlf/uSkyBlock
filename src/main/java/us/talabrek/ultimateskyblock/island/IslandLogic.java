@@ -128,7 +128,7 @@ public class IslandLogic {
         getIslandInfo(location).reload();
     }
 
-    private void displayTopTen(final CommandSender sender) {
+    public void displayTopTen(final CommandSender sender) {
         int playerrank = 0;
         sender.sendMessage("\u00a7eDisplaying the top 10 islands:");
         synchronized (ranks) {
@@ -181,7 +181,7 @@ public class IslandLogic {
         }
     }
 
-    private void generateTopTen(final CommandSender sender) {
+    public void generateTopTen(final CommandSender sender) {
         List<IslandLevel> topTen = new ArrayList<>();
         final File folder = directoryIslands;
         final String[] listOfFiles = folder.list(FileUtil.createYmlFilenameFilter());
