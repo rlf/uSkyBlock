@@ -95,6 +95,11 @@ public class ChallengeLogic {
             player.sendMessage("\u00a74The " + challengeName + " challenge is not repeatable!");
             return false;
         }
+        if (completion.getTimesCompleted() > 0 && completion.isOnCooldown())
+        {
+        	player.sendMessage("\u00a74This challenge is on cooldown.");
+        	return false;
+        }
         if (challenge.getType() == Challenge.Type.PLAYER) {
             if (!tryComplete(player, challengeName, "onPlayer")) {
                 player.sendMessage("\u00a74" + challenge.getDescription());
