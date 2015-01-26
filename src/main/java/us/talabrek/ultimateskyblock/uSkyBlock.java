@@ -208,9 +208,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                             }
                         }
                     }
-                }, 100);
+                }, 50L);
             }
-        }, 150L);
+        }, 50L);
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
