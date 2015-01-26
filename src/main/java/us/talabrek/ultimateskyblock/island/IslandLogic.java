@@ -116,18 +116,6 @@ public class IslandLogic {
         return false;
     }
 
-    public void reloadIsland(Location location) {
-        reloadIsland(location2Name(location));
-    }
-
-    private String location2Name(Location location) {
-        return location != null ? ("" + location.getBlockX() + "," + location.getBlockZ()) : "null";
-    }
-
-    public void reloadIsland(String location) {
-        getIslandInfo(location).reload();
-    }
-
     public void displayTopTen(final CommandSender sender) {
         int playerrank = 0;
         sender.sendMessage("\u00a7eDisplaying the top 10 islands:");
@@ -235,7 +223,7 @@ public class IslandLogic {
         islands.remove(location);
     }
 
-    public void removeIslandFromMemory(String islandName) {
+    public synchronized void removeIslandFromMemory(String islandName) {
         getIslandInfo(islandName).save();
         islands.remove(islandName);
     }
