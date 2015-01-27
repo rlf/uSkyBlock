@@ -21,6 +21,7 @@ options:
     # [integer] The number of milliseconds between the same notification is sent to the player.
     # This is used when events are triggered heavily - i.e. item-pickup-prevention, damage-prevention etc.
     maxSpam: 2000
+
   island:
     # [filename] The schematic to use for island generation.
     # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
@@ -63,13 +64,16 @@ options:
     #[true/false] Allow players to completely lock their islands so non-party members can't enter. (locking still requires permission usb.lock)
     allowIslandLock: true
 
-    #[true/false] Use old SkySMP style island generation. Set this to true if you want to use the old
+    # [true/false] Use old SkySMP style island generation. Set this to true if you want to use the old
     # island style, or set to false if you want to use the new style island generation. Only affects new islands.
     useOldIslands: false
 
-    #[true/false] If true, use island levels/ranks (/island info) - may have a slight impact on performance
-    #Set to false if you have performance issues
+    # [true/false] If true, use island levels/ranks (/island info) - may have a slight impact on performance
+    # Set to false if you have performance issues
     useIslandLevel: true
+
+    # [true/false] Whether or not /is top should be available.
+    useTopTen: true
 
     # [integer] The time in minutes for how often the top-ten list will be re-generated when doing /is top
     topTenTimeout: 20
@@ -112,7 +116,7 @@ options:
   extras:
     # [true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
     # NOTE: Requires EssentialsSpawn or another plugin with the "/spawn" command
-    sendToSpawn: true
+    sendToSpawn: false
 
     # [true/false] If true, a player can right-click on a block of obsidian on their island while holding an empty bucket to remove the obsidian and fill the bucket with lava. This is useful for people that accidently
     # turn their lava into obsidian with a bad cobblestone generator design. Will only work on the player's island and if there are no other obsidian blocks nearby (so can't be used on portals).
@@ -144,5 +148,8 @@ options:
   advanced:
     # If true, display-name is looked up (might be performance intensive).
     useDisplayNames: false
-# DO NOT TOUCH THIS!
-version: 6
+
+    # [number] The threshold for purging islands.
+    # any island with a level above this, is spared.
+    purgeLevel: 10
+version: 9

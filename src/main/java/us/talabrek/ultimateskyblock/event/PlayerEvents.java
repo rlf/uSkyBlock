@@ -155,4 +155,14 @@ public class PlayerEvents implements Listener {
             event.setCancelled(true);
         }
     }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        if (Settings.extras_sendToSpawn) {
+            return;
+        }
+        if (plugin.isSkyWorld(event.getPlayer().getWorld())) {
+            event.setRespawnLocation(plugin.getSkyBlockWorld().getSpawnLocation());
+        }
+    }
 }

@@ -75,7 +75,10 @@ public enum FileUtil {;
         return new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name != null && name.matches("-?[0-9]+,-?[0-9]+.yml");
+                return name != null
+                        && name.matches("-?[0-9]+,-?[0-9]+.yml")
+                        && !"null.yml".equalsIgnoreCase(name)
+                        && !"0,0.yml".equalsIgnoreCase(name);
             }
         };
     }
@@ -103,9 +106,7 @@ public enum FileUtil {;
                 // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
                 YamlConfiguration configJar = new YamlConfiguration();
                 readConfig(config, configFile);
-                File orgFile = new File(dataFolder, configName + ".org");
-                FileUtil.copy(FileUtil.class.getClassLoader().getResourceAsStream(configName), orgFile);
-                readConfig(configJar, orgFile);
+                readConfig(configJar, FileUtil.class.getClassLoader().getResourceAsStream(configName));
                 if (!configFile.exists() || config.getInt("version", 0) < configJar.getInt("version", 0)) {
                     if (configFile.exists()) {
                         File backupFolder = new File(getDataFolder(), "backup");
@@ -117,7 +118,11 @@ public enum FileUtil {;
                                 StandardCopyOption.REPLACE_EXISTING);
                         config = mergeConfig(configJar, config);
                         config.options().header("Merge from between jar-file and existing config");
-                        config.save(configFile);
+                        if (isPrimaryConfig(configName)) {
+                            uSkyBlock.getInstance().saveConfig(); // preserve comments
+                        } else {
+                            config.save(configFile);
+                        }
                     } else {
                         FileUtil.copy(FileUtil.class.getClassLoader().getResourceAsStream(configName), configFile);
                         config = configJar;
@@ -129,6 +134,10 @@ public enum FileUtil {;
             configFiles.put(configName, config);
         }
         return configFiles.get(configName);
+    }
+
+    private static boolean isPrimaryConfig(String configName) {
+        return configName.equalsIgnoreCase("config.yml");
     }
 
     private static void copy(InputStream stream, File file) throws IOException {

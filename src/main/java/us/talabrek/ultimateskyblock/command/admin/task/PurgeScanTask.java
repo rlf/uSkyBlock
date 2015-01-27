@@ -26,6 +26,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
     private final long cutOff;
     private final long now;
     private final uSkyBlock plugin;
+    private final double purgeLevel;
 
     public PurgeScanTask(uSkyBlock plugin, File islandDir, int time) {
         this.plugin = plugin;
@@ -35,6 +36,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
         this.islandList = Arrays.asList(islandList);
         size = islandList.length;
         purgeList = new ArrayList<>();
+        purgeLevel = plugin.getConfig().getDouble("options.advanced.purgeLevel", 10);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
             String islandName = FileUtil.getBasename(islandFile);
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null) {
-                if (islandInfo.getLevel() < 10 && offlineSince(islandInfo.getMembers())) {
+                if (islandInfo.getLevel() < purgeLevel && offlineSince(islandInfo.getMembers())) {
                     purgeList.add(islandName);
                 }
             }

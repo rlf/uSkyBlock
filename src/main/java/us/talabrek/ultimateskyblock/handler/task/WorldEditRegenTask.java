@@ -1,6 +1,8 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.Region;
 import org.bukkit.World;
@@ -17,10 +19,12 @@ import java.util.logging.Level;
  * Do WorldEdit stuff in increments
  */
 public class WorldEditRegenTask implements IncrementalTask {
-
+    private static final BaseBlock AIR = new BaseBlock(0);
+    private static final BaseBlock GLASS = new BaseBlock(20);
     private final EditSession editSession;
     private final BukkitWorld bukkitWorld;
     private final List<Region> regions;
+    private final int size;
     private int index = 0;
 
     public WorldEditRegenTask(World world, Set<Region> borderRegions) {
@@ -28,15 +32,25 @@ public class WorldEditRegenTask implements IncrementalTask {
         editSession = new EditSession(bukkitWorld, 255 * Settings.island_protectionRange * Settings.island_protectionRange);
         editSession.enableQueue();
         regions = new ArrayList<>(borderRegions);
+        size = regions.size();
         log.log(Level.FINE, "Planning regen of regions: " + regions);
     }
     @Override
     public boolean execute(Plugin plugin, int offset, int length) {
         log.log(Level.FINE, "Executing WorldEditRegen of regions " + offset + "-" + (offset+length) + " of " + regions.size() + " regions");
-        for (int i = offset; i < offset+length && i < getLength(); i++) {
-            Region region = regions.get(i);
+        for (int i = 0; i < length && !regions.isEmpty(); i++) {
+            Region region = regions.remove(i);
             editSession.enableQueue();
+            /*
+            try {
+                editSession.setBlocks(region, GLASS);
+                editSession.flushQueue();
+            } catch (MaxChangedBlocksException e) {
+                plugin.getLogger().log(Level.WARNING, "Unable to clear region " + region);
+            }
+            */
             bukkitWorld.regenerate(region, editSession);
+            editSession.flushQueue();
         }
         this.index = offset + length;
         boolean complete = isComplete();
@@ -49,11 +63,11 @@ public class WorldEditRegenTask implements IncrementalTask {
 
     @Override
     public int getLength() {
-        return regions.size();
+        return size;
     }
 
     @Override
     public boolean isComplete() {
-        return index >= (regions.size()-1);
+        return regions.isEmpty();
     }
 }

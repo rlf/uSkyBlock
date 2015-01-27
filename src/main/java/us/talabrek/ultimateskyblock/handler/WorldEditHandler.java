@@ -85,9 +85,9 @@ public class WorldEditHandler {
             int bx = chunk.getBlockX()*16;
             int bz = chunk.getBlockZ()*16;
             Vector v1 = new Vector(bx, by, bz);
-            Vector v2 = new Vector(bx+16, by, bz);
-            Vector v3 = new Vector(bx+16, by, bz+16);
-            Vector v4 = new Vector(bx, by, bz+16);
+            Vector v2 = new Vector(bx+15, by, bz);
+            Vector v3 = new Vector(bx+15, by, bz+15);
+            Vector v4 = new Vector(bx, by, bz+15);
             if (!region.contains(v1) || !region.contains(v2) || !region.contains(v3) || !region.contains(v4)) {
                 it.remove();
             }
@@ -103,39 +103,38 @@ public class WorldEditHandler {
         Set<Region> borders = new HashSet<>();
         Vector min = region.getMinimumPoint();
         Vector max = region.getMaximumPoint();
-        int minY = Math.min(min.getBlockY(), max.getBlockY());
-        int maxY = Math.max(min.getBlockY(), max.getBlockY());
-        int minX = Math.min(min.getBlockX(), max.getBlockX());
-        int maxX = Math.max(min.getBlockX(), max.getBlockX());
-        int minZ = Math.min(min.getBlockZ(), max.getBlockZ());
-        int maxZ = Math.max(min.getBlockZ(), max.getBlockZ());
+        int minY = min.getBlockY();
+        int maxY = max.getBlockY();
+        int minX = min.getBlockX();
+        int maxX = max.getBlockX();
+        int minZ = min.getBlockZ();
+        int maxZ = max.getBlockZ();
 
-        // Java and modulo is weird - and we need the right sign for the arithmetic below to work.
-        int minModX = Math.abs(minX % 16);
-        int maxModX = Math.abs(maxX % 16);
-        int minModZ = Math.abs(minZ % 16);
-        int maxModZ = Math.abs(maxZ % 16);
-        int minChunkX = minModX == 0 ? minX : minX + (16 - minModX);
-        int maxChunkX = maxModX == 0 ? maxX : maxX - maxModX;
-        int minChunkZ = minModZ == 0 ? minZ : minZ + (16 - minModZ);
-        int maxChunkZ = maxModZ == 0 ? maxZ : maxZ - maxModZ;
+        int minModX = minX < 0 ? -(minX % 16) : minX % 16;
+        int maxModX = maxX < 0 ? -(maxX % 16) : maxX % 16;
+        int minModZ = minZ < 0 ? -(minZ % 16) : minZ % 16;
+        int maxModZ = maxZ < 0 ? -(maxZ % 16) : maxZ % 16;
+        int minChunkX = minX + (16-minModX);
+        int maxChunkX = maxX - maxModX;
+        int minChunkZ = minZ + (16-minModZ);
+        int maxChunkZ = maxZ - maxModZ;
         // min < minChunk < maxChunk < max
-        if ((minChunkX - minX) > 0) {
+        if ((minChunkX - minX) != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(minX, minY, minZ),
                     new Vector(minChunkX, maxY, maxZ)));
         }
-        if ((maxZ - maxChunkZ) > 0) {
+        if ((maxZ - maxChunkZ) != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(minChunkX, minY, maxChunkZ),
                     new Vector(maxChunkX, maxY, maxZ)));
         }
-        if ((maxX - maxChunkX) > 0) {
+        if ((maxX - maxChunkX) != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(maxChunkX, minY, minZ),
                     new Vector(maxX, maxY, maxZ)));
         }
-        if ((minChunkZ - minZ) > 0) {
+        if ((minChunkZ - minZ) != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(minChunkX, minY, minZ),
                     new Vector(maxChunkX, maxY, minChunkZ)));

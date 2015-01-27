@@ -2,6 +2,8 @@ package us.talabrek.ultimateskyblock.async;
 
 import org.bukkit.plugin.Plugin;
 
+import java.util.List;
+
 /**
  * Supports executing tasks in smaller increments, and balancing it against the server-load.
  */
@@ -14,4 +16,24 @@ public interface BalancedExecutor {
      * @param maxTicks   The maximum number of ticks to execute in one go.
      */
     void execute(Plugin plugin, IncrementalTask task, Runnable completion, float loadFactor, int maxTicks);
+
+    /**
+     * Cancels the task.
+     * @param task The task to cancel.
+     * @return <code>true</code> if it was possible to cancel the task.
+     */
+    boolean cancel(IncrementalTask task);
+
+    /**
+     * Return the currently completed progress of the given task.
+     * @param task The task to query.
+     * @return A number between [0..1].
+     */
+    TaskProgress getProgress(IncrementalTask task);
+
+    /**
+     * Returns a list of currently executing tasks.
+     * @return a list of currently executing tasks.
+     */
+    List<TaskProgress> getTasks();
 }

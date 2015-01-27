@@ -24,6 +24,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -82,7 +83,7 @@ import java.util.logging.Level;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
-    private static final String[][] depends = new String[][]{
+    public static final String[][] depends = new String[][]{
             new String[]{"Vault", "1.5"},
             new String[]{"WorldEdit", "6.0"},
             new String[]{"WorldGuard", "6.0"},
@@ -155,7 +156,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-
     @Override
     public FileConfiguration getConfig() {
         return getFileConfiguration("config.yml");
@@ -171,9 +171,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         activePlayers.clear();
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         reloadConfigs();
-        this.getCommand("island").setExecutor(new IslandCommand(this, menu));
-        this.getCommand("challenges").setExecutor(new ChallengesCommand());
-        this.getCommand("usb").setExecutor(new AdminCommand(instance));
+
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
@@ -321,9 +319,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 skyWorld.setSpawnLocation(0, Settings.island_height, 0);
             }
             Location worldSpawn = skyWorld.getSpawnLocation();
-            Block spawnBlock = skyWorld.getBlockAt(worldSpawn);
-            if (!spawnBlock.getType().isSolid()) {
+            if (!isSafeLocation(worldSpawn)) {
+                Block spawnBlock = skyWorld.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
                 spawnBlock.setType(Material.BEDROCK);
+                Block air1 = spawnBlock.getRelative(BlockFace.UP);
+                air1.setType(Material.AIR);
+                air1.getRelative(BlockFace.UP).setType(Material.AIR);
             }
         }
     }
@@ -514,14 +515,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 WorldEditHandler.loadRegion(next);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
-                getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
-                    @Override
-                    public void run() {
-                        WorldEditHandler.refreshRegion(next);
-                    }
-                }, 10);
             }
-        }, 10);
+        }, 20);
     }
 
     public boolean restartPlayerIsland(final Player player, final Location next) {
@@ -603,8 +598,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     pi.setHasIsland(true);
                     pi.setIslandLocation(newLoc);
                     pi.setHomeLocation(getSafeHomeLocation(pi));
-                    islandLogic.createIsland(pi.locationForParty(), player);
-                    WorldGuardHandler.protectIsland(sender, pi);
+                    IslandInfo island = islandLogic.createIsland(pi.locationForParty(), player);
+                    WorldGuardHandler.updateRegion(sender, island);
                     pi.save();
                 }
             };
@@ -1341,7 +1336,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     @Override
     public void reloadConfig() {
-        Settings.loadPluginConfig(getConfig());
         reloadConfigs();
     }
 
@@ -1375,6 +1369,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } else {
             autoRecalculateTask = null;
         }
+        getCommand("island").setExecutor(new IslandCommand(this, menu));
+        getCommand("challenges").setExecutor(new ChallengesCommand());
+        getCommand("usb").setExecutor(new AdminCommand(instance));
     }
 
     public boolean isSkyWorld(World world) {
@@ -1516,5 +1513,22 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public synchronized void setProtectAllActive(boolean protectAllActive) {
         this.protectAllActive = protectAllActive;
+    }
+
+    public String getVersionInfo() {
+        PluginDescriptionFile description = getDescription();
+        String msg = "\u00a77Name: \u00a7b" + description.getName() + "\n";
+        msg += "\u00a77Version: \u00a7b" + description.getVersion() + "\n";
+        msg += "\u00a77Description: \u00a7b" + description.getDescription() + "\n";
+        msg += "\u00a77------------------------------\n";
+        msg += "\u00a77Server: \u00a7e" + getServer().getName() + " " + getServer().getVersion() + "\n";
+        for (String[] dep : depends) {
+            Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);
+            msg += "\u00a77------------------------------\n";
+            msg += "\u00a77Name: \u00a7d" + dependency.getName() + "\n";
+            msg += "\u00a77Version: \u00a7d" + dependency.getDescription().getVersion() + "\n";
+        }
+        msg += "\u00a77------------------------------\n";
+        return msg;
     }
 }

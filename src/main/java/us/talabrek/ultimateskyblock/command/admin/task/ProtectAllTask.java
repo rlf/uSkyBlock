@@ -69,7 +69,7 @@ public class ProtectAllTask extends BukkitRunnable implements IncrementalTask {
             @Override
             public void run() {
                 long now = System.currentTimeMillis();
-                String message = String.format("\u00a7eCompleted protect-all in %s, %d new regions were created!", TimeUtil.millisAsString(tStart-now), success);
+                String message = String.format("\u00a7eCompleted protect-all in %s, %d new regions were created!", TimeUtil.millisAsString(now-tStart), success);
                 if (sender instanceof Player && ((Player)sender).isOnline()) {
                     sender.sendMessage(message);
                 }

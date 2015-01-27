@@ -21,6 +21,7 @@ public class WorldRegenTask implements IncrementalTask {
     public WorldRegenTask(World world, Set<Vector2D> chunks) {
         this.world = world;
         this.chunks = new ArrayList<>(chunks);
+        log.log(Level.FINE, "Planning regen of chunks: " + chunks);
     }
 
     @Override
@@ -29,6 +30,7 @@ public class WorldRegenTask implements IncrementalTask {
         this.index = offset + length;
         for (int i = offset; i < (offset+length) && i < chunks.size(); i++) {
             Vector2D chunk = chunks.get(i);
+            world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ());
             world.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ());
         }
         return isComplete();

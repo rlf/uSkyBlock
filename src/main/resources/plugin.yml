@@ -1,7 +1,7 @@
 name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
-version: ${gitTag}
-description: Ultimate SkyBlock. 
+version: ${project.version}
+description: Ultimate SkyBlock v${gitTag}
 author: Talabrek, R4zorax and others
 load: STARTUP
 depend: [Vault, WorldEdit, WorldGuard]

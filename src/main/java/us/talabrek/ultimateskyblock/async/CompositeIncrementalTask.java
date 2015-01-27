@@ -1,8 +1,10 @@
 package us.talabrek.ultimateskyblock.async;
 
 import org.bukkit.plugin.Plugin;
+import us.talabrek.ultimateskyblock.util.TaskUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -54,6 +56,16 @@ public class CompositeIncrementalTask implements IncrementalTask {
     }
 
     @Override
+    public String toString() {
+        String[] taskNames = new String[tasks.size()];
+        int i = 0;
+        for (InternalTask task : tasks) {
+            taskNames[i++] = task.toString();
+        }
+        return Arrays.toString(taskNames);
+    }
+
+    @Override
     public boolean isComplete() {
         return tasks.get(tasks.size()-1).getTask().isComplete();
     }
@@ -75,6 +87,11 @@ public class CompositeIncrementalTask implements IncrementalTask {
 
         public int getEndOffset() {
             return startOffset + task.getLength();
+        }
+
+        @Override
+        public String toString() {
+            return "[" + startOffset + "]" + TaskUtil.getTaskName(getTask());
         }
     }
 }

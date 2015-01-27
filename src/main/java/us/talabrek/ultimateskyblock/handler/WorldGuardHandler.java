@@ -24,11 +24,13 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class WorldGuardHandler {
-    private static final int VERSION = 3;
+    private static final int VERSION = 4;
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
@@ -63,7 +65,7 @@ public class WorldGuardHandler {
                 final ApplicableRegionSet set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
                 if (set.size() > 0) {
                     for (ProtectedRegion regions : set) {
-                        if (!regions.getId().equalsIgnoreCase("__global__")) {
+                        if (!(regions instanceof GlobalProtectedRegion)) {
                             regionManager.removeRegion(regions.getId());
                         }
                     }
@@ -130,15 +132,20 @@ public class WorldGuardHandler {
         if (!regionManager.hasRegion(regionId)) {
             return true;
         }
+        if (regionManager.getRegion(regionId).getOwners().size() == 0) {
+            return true;
+        }
         return island.getRegionVersion() < VERSION;
     }
 
     public static void islandLock(final CommandSender sender, final String islandName) {
         try {
-            if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(islandName + "island")) {
-                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(islandName + "island").setFlag(DefaultFlag.ENTRY, DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "deny"));
+            RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
+            if (regionManager.hasRegion(islandName + "island")) {
+                ProtectedRegion region = regionManager.getRegion(islandName + "island");
+                region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
                 sender.sendMessage("\u00a7eYour island is now locked. Only your party members may enter.");
-                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
+                regionManager.save();
             } else {
                 sender.sendMessage("\u00a74You must be the party leader to lock your island!");
             }
@@ -149,10 +156,12 @@ public class WorldGuardHandler {
 
     public static void islandUnlock(final CommandSender sender, final String islandName) {
         try {
-            if (getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).hasRegion(islandName + "island")) {
-                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).getRegion(islandName + "island").setFlag(DefaultFlag.ENTRY, DefaultFlag.ENTRY.parseInput(getWorldGuard(), sender, "allow"));
+            RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
+            if (regionManager.hasRegion(islandName + "island")) {
+                ProtectedRegion region = regionManager.getRegion(islandName + "island");
+                region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
                 sender.sendMessage("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks.");
-                getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld()).save();
+                regionManager.save();
             } else {
                 sender.sendMessage("\u00a74You must be the party leader to unlock your island!");
             }
@@ -245,15 +254,16 @@ public class WorldGuardHandler {
         }
     }
 
-    public static ApplicableRegionSet getIntersectingRegions(Location islandLocation) {
+    public static Set<ProtectedRegion> getIntersectingRegions(Location islandLocation) {
         RegionManager regionManager = getWorldGuard().getRegionManager(islandLocation.getWorld());
         ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(getIslandRegion(islandLocation));
-        for (Iterator<ProtectedRegion> iterator = applicableRegions.iterator(); iterator.hasNext(); ) {
+        Set<ProtectedRegion> regions = new HashSet<>(applicableRegions.getRegions());
+        for (Iterator<ProtectedRegion> iterator = regions.iterator(); iterator.hasNext(); ) {
             if (iterator.next() instanceof GlobalProtectedRegion) {
                 iterator.remove();
             }
         }
-        return applicableRegions;
+        return regions;
     }
 
     public static boolean isIslandIntersectingSpawn(Location islandLocation) {
