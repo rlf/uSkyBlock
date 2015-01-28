@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.async;
 
 import us.talabrek.ultimateskyblock.util.TaskUtil;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 /**
  * POJO for holding progress of an executing task.
@@ -36,5 +37,10 @@ public class TaskProgress {
 
     public String getName() {
         return TaskUtil.getTaskName(task);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("§3%s §7%3.0f%%§e %s (%3.1f ticks)", getName(), getProgress() * 100, TimeUtil.millisAsString(getMillis()), getTicks());
     }
 }

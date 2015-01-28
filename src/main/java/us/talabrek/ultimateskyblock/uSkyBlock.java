@@ -83,10 +83,10 @@ import java.util.logging.Level;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
-    public static final String[][] depends = new String[][]{
-            new String[]{"Vault", "1.5"},
-            new String[]{"WorldEdit", "6.0"},
-            new String[]{"WorldGuard", "6.0"},
+    private static final String[][] depends = new String[][]{
+            new String[]{"Vault", "1.4"},
+            new String[]{"WorldEdit", "5.5"},
+            new String[]{"WorldGuard", "5.9"},
     };
     private static String missingRequirements = null;
 
@@ -1070,40 +1070,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             return true;
         }
         return false;
-    }
-
-    public void listBiomes(final Player player) {
-        String biomeList = ", ";
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.ocean", skyBlockWorld)) {
-            biomeList = "OCEAN, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.forest", skyBlockWorld)) {
-            biomeList = biomeList + "FOREST, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.jungle", skyBlockWorld)) {
-            biomeList = biomeList + "JUNGLE, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.desert", skyBlockWorld)) {
-            biomeList = biomeList + "DESERT, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.taiga", skyBlockWorld)) {
-            biomeList = biomeList + "TAIGA, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.swampland", skyBlockWorld)) {
-            biomeList = biomeList + "SWAMPLAND, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.mushroom", skyBlockWorld)) {
-            biomeList = biomeList + "MUSHROOM, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.hell", skyBlockWorld)) {
-            biomeList = biomeList + "HELL, ";
-        }
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", skyBlockWorld)) {
-            biomeList = biomeList + "SKY, ";
-        }
-        player.sendMessage("\u00a7eYou have access to the following Biomes:");
-        player.sendMessage(ChatColor.GREEN + biomeList.substring(0, biomeList.length() - 2));
-        player.sendMessage("\u00a7eUse /island biome <biomename> to change your biome. You must wait " + Settings.general_biomeChange / 60 + " minutes between each biome change.");
     }
 
     public boolean createIsland(final Player player, final PlayerInfo pi) {

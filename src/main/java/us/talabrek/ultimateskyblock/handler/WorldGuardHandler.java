@@ -145,6 +145,7 @@ public class WorldGuardHandler {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
                 sender.sendMessage("\u00a7eYour island is now locked. Only your party members may enter.");
+                regionManager.addRegion(region);
                 regionManager.save();
             } else {
                 sender.sendMessage("\u00a74You must be the party leader to lock your island!");
@@ -161,6 +162,7 @@ public class WorldGuardHandler {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
                 sender.sendMessage("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks.");
+                regionManager.addRegion(region);
                 regionManager.save();
             } else {
                 sender.sendMessage("\u00a74You must be the party leader to unlock your island!");

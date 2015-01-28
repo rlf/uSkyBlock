@@ -24,7 +24,7 @@ public class RecalculateTask implements IncrementalTask {
 
     @Override
     public boolean execute(Plugin bukkitPlugin, int offset, int length) {
-        for (int i = 0; i < Math.min(locations.size(), length); i++) {
+        for (int i = 0; i < Math.min(locations.size(), length) && !locations.isEmpty(); i++) {
             plugin.recalculateScore(null, locations.remove(0));
         }
         return isComplete();

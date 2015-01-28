@@ -33,11 +33,9 @@ public class AsyncCommand extends CompositeUSBCommand {
                         return true;
                     }
                     String msg = "\u00a7dTasks:\n";
-                    int i = 1;
+                    int i = 0;
                     for (TaskProgress progress : taskList) {
-                        msg += String.format("\u00a7e[%02d]\u00a77: \u00a73%s \u00a77%3.0f\u00a7e %s (%3.1f ticks)\n",
-                                i++, progress.getName(), 100 * progress.getProgress(),
-                                TimeUtil.millisAsString(progress.getMillis()), progress.getTicks());
+                        msg += String.format("\u00a7e[%2d]\u00a77: %s\n", i++, progress.toString());
                     }
                     sender.sendMessage(msg.split("\n"));
                     return true;
@@ -86,7 +84,7 @@ public class AsyncCommand extends CompositeUSBCommand {
                     return true;
                 }
                 int index = Integer.parseInt(args[0]);
-                if (index >= 1 && index <= taskList.size()) {
+                if (index >= 0 && index < taskList.size()) {
                     performCommand(sender, taskList.get(index), index <= asyncOffset);
                     return true;
                 } else {

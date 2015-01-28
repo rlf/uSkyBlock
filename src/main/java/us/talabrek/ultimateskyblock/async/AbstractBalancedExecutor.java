@@ -121,6 +121,7 @@ public abstract class AbstractBalancedExecutor implements BalancedExecutor {
                                         task.toString(), TimeUtil.millisAsString(System.currentTimeMillis() - tStart),
                                         usedTicks[0]));
                         doLater(plugin, completion, waitTime);
+                        tasks.remove(task);
                     } else {
                         log.log(Level.FINE, "Scheduling next " + newLength + " tasks in " + waitTime + " ticks.");
                         doLater(plugin, IncrementalExecution.this, waitTime);
@@ -128,6 +129,7 @@ public abstract class AbstractBalancedExecutor implements BalancedExecutor {
                 }
             } else {
                 doLater(plugin, completion, 0);
+                tasks.remove(task);
             }
         }
         public synchronized void stop() {
