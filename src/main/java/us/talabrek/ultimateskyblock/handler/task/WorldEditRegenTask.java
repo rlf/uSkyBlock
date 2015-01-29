@@ -39,7 +39,7 @@ public class WorldEditRegenTask implements IncrementalTask {
     public boolean execute(Plugin plugin, int offset, int length) {
         log.log(Level.FINE, "Executing WorldEditRegen of regions " + offset + "-" + (offset+length) + " of " + regions.size() + " regions");
         for (int i = 0; i < length && !regions.isEmpty(); i++) {
-            Region region = regions.remove(i);
+            Region region = regions.remove(0);
             editSession.enableQueue();
             /*
             try {

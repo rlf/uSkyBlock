@@ -653,10 +653,12 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayIslandGUI(final Player player) {
-        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
+        Inventory menu = null;
         if (skyBlock.hasIsland(player.getName())) {
+            menu = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
             addMainMenu(menu, player);
         } else {
+            menu = Bukkit.createInventory(null, 9, "\u00a79Island Create Menu");
             addInitMenu(menu);
         }
         return menu;
@@ -1061,9 +1063,6 @@ public class SkyBlockMenu {
             } else if (event.getCurrentItem().getType() == Material.WOOD_DOOR) {
                 p.closeInventory();
                 p.performCommand("island home");
-            } else if (event.getCurrentItem().getType() == Material.GRASS) {
-                p.closeInventory();
-                p.performCommand("island create");
             } else if (event.getCurrentItem().getType() == Material.EXP_BOTTLE) {
                 p.closeInventory();
                 p.performCommand("island level");
@@ -1089,6 +1088,18 @@ public class SkyBlockMenu {
                     p.closeInventory();
                     p.openInventory(displayIslandGUI(p));
                 }
+            }
+        } else if (event.getInventory().getName().contains("Island Create Menu")) {
+            event.setCancelled(true);
+            if (event.getSlot() == 0) {
+                p.closeInventory();
+                p.performCommand("island create");
+            } else if (event.getCurrentItem().getType() == Material.SKULL_ITEM) {
+                p.closeInventory();
+                p.performCommand("island accept");
+            } else if (event.getCurrentItem().getType() == Material.SIGN) {
+                p.closeInventory();
+                p.performCommand("chestcommands open island_help");
             }
         }
     }

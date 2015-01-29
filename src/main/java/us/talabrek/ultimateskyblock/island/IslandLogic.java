@@ -61,7 +61,7 @@ public class IslandLogic {
     }
 
     public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
-        if (playerInfo.getHasIsland()) {
+        if (playerInfo != null && playerInfo.getHasIsland()) {
             return getIslandInfo(playerInfo.locationForParty());
         }
         return null;

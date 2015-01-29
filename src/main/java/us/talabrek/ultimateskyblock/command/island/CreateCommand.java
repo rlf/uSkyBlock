@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Map;
 
@@ -18,11 +19,7 @@ public class CreateCommand extends RequirePlayerCommand {
     @Override
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         PlayerInfo pi = plugin.getPlayerInfo(player);
-        if (pi.getIslandLocation() == null) {
-            plugin.createIsland(player, pi);
-            return true;
-        }
-        if (pi.getIslandLocation().getBlockX() == 0 && pi.getIslandLocation().getBlockY() == 0 && pi.getIslandLocation().getBlockZ() == 0) {
+        if (LocationUtil.isEmptyLocation(pi.getIslandLocation())) {
             plugin.createIsland(player, pi);
         } else if (pi.getHasIsland()) {
             IslandInfo island = plugin.getIslandInfo(pi);
