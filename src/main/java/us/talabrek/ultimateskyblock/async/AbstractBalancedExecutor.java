@@ -104,8 +104,8 @@ public abstract class AbstractBalancedExecutor implements BalancedExecutor {
                     // TODO: 18/01/2015 - R4zorax: Show progress somewhere
                     double ticks = (t2-t1)/50d;
                     usedTicks[0] += ticks;
-                    if (ticks < 1) {
-                        ticks = 1;
+                    if (ticks == 0) {
+                        ticks = 0.5;
                     }
                     // update length for next iteration
                     int newLength = (int) Math.round(len * maxTicks / ticks);

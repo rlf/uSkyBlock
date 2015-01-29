@@ -122,6 +122,7 @@ public class PlayerEvents implements Listener {
                   || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
                 && event.getEntity() instanceof Player
                 && !plugin.playerIsOnIsland((Player)event.getEntity())) {
+            event.setDamage(0);
             event.setCancelled(true);
         }
     }

@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  */
 @SuppressWarnings("deprecation")
 public class IslandGenerator {
+    private static final String CN = IslandGenerator.class.getName();
     private static final Logger log = Logger.getLogger(IslandGenerator.class.getName());
     private final FileConfiguration config;
 
@@ -31,6 +32,7 @@ public class IslandGenerator {
     }
 
     public void createIsland(uSkyBlock plugin, Player player, Location next) {
+        log.entering(CN, "createIsland", new Object[]{plugin, player, next});
         log.fine("creating island for " + player + " at " + next);
         boolean hasIslandNow = false;
         if (uSkyBlock.getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
@@ -75,6 +77,7 @@ public class IslandGenerator {
             }
         }
         next.setY((double) Settings.island_height);
+        log.exiting(CN, "createIsland");
     }
 
     public void generateIslandBlocks(final int x, final int z, final Player player, final World world) {

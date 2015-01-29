@@ -28,8 +28,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WorldGuardHandler {
+    private static final String CN = WorldGuardHandler.class.getName();
+    private static final Logger log = Logger.getLogger(CN);
     private static final int VERSION = 4;
 
     public static WorldGuardPlugin getWorldGuard() {
@@ -41,17 +44,22 @@ public class WorldGuardHandler {
     }
 
     public static boolean protectIsland(final CommandSender sender, final PlayerInfo pi) {
-        uSkyBlock plugin = uSkyBlock.getInstance();
-        IslandInfo islandConfig = plugin.getIslandInfo(pi);
-        if (islandConfig == null) {
-            return false;
-        }
-        if (islandConfig.getLeader().isEmpty()) {
-            islandConfig.setupPartyLeader(pi.getPlayerName());
-            updateRegion(sender, islandConfig);
-            return true;
-        } else {
-            return protectIsland(plugin, sender, islandConfig);
+        log.entering(CN, "protectIsland", new Object[]{sender, pi});
+        try {
+            uSkyBlock plugin = uSkyBlock.getInstance();
+            IslandInfo islandConfig = plugin.getIslandInfo(pi);
+            if (islandConfig == null) {
+                return false;
+            }
+            if (islandConfig.getLeader().isEmpty()) {
+                islandConfig.setupPartyLeader(pi.getPlayerName());
+                updateRegion(sender, islandConfig);
+                return true;
+            } else {
+                return protectIsland(plugin, sender, islandConfig);
+            }
+        } finally {
+            log.exiting(CN, "protectIsland");
         }
     }
 
