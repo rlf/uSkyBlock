@@ -112,7 +112,7 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onVisitorDamage(final EntityDamageByBlockEvent event) {
+    public void onVisitorDamage(final EntityDamageEvent event) {
         if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
@@ -122,7 +122,7 @@ public class PlayerEvents implements Listener {
                   || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
                 && event.getEntity() instanceof Player
                 && !plugin.playerIsOnIsland((Player)event.getEntity())) {
-            event.setDamage(0);
+            event.setDamage(-event.getDamage());
             event.setCancelled(true);
         }
     }
