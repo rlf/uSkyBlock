@@ -10,6 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
         <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
+        <travis.buildNumber>dev</travis.buildNumber>
     </properties>
 
     <scm>
@@ -49,6 +50,17 @@
             <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
     </repositories>
+    <profiles>
+        <profile>
+            <id>build-num</id>
+            <activation>
+                <property><name>TRAVIS_BUILD_NUMBER</name></property>
+            </activation>
+            <properties>
+                <travis.buildNumber>${env.TRAVIS_BUILD_NUMBER}</travis.buildNumber>
+            </properties>
+        </profile>
+    </profiles>
     <build>
         <finalName>${finalName}</finalName>
         <plugins>
