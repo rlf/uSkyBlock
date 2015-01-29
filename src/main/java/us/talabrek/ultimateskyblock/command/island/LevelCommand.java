@@ -59,8 +59,9 @@ public class LevelCommand extends RequireIslandCommand {
             player.sendMessage("\u00a74That player is invalid or does not have an island!");
             return false;
         }
-        final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? plugin.getPlayerInfo(player) : new PlayerInfo(islandPlayer);
-        if (player.getName().equals(playerInfo.getPlayerName())) {
+        final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(islandPlayer);
+        final boolean shouldRecalculate = player.getName().equals(playerInfo.getPlayerName()) || player.hasPermission("usb.admin.island");
+        if (shouldRecalculate) {
             plugin.getIslandLogic().loadIslandChunks(playerInfo.getIslandLocation(), Settings.island_radius);
         }
         final IslandScore[] shared = new IslandScore[1];
@@ -83,20 +84,18 @@ public class LevelCommand extends RequireIslandCommand {
                 }
             }
         };
-        if (player.getName().equals(playerInfo.getPlayerName())) {
+        if (shouldRecalculate) {
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    if (player.getName().equals(playerInfo.getPlayerName())) {
-                        try {
-                            IslandScore score = plugin.recalculateScore(player, playerInfo.locationForParty());
-                            if (cmd.equalsIgnoreCase("info")) {
-                                shared[0] = score;
-                            }
-                            plugin.fireChangeEvent(new uSkyBlockEvent(player, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
-                        } catch (Exception e) {
-                            uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
+                    try {
+                        IslandScore score = plugin.recalculateScore(player, playerInfo.locationForParty());
+                        if (cmd.equalsIgnoreCase("info")) {
+                            shared[0] = score;
                         }
+                        plugin.fireChangeEvent(new uSkyBlockEvent(player, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
+                    } catch (Exception e) {
+                        uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
                     }
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 0L);
                 }
