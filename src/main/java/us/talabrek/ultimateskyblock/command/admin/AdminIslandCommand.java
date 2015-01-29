@@ -105,6 +105,8 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 return false;
             }
         });
+        add(new MakeLeaderCommand(plugin));
+        add(new RegisterIslandToPlayerCommand());
     }
 
     private void removePlayerFromIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {

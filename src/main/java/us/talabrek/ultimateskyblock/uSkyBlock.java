@@ -42,6 +42,7 @@ import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
+import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
 import us.talabrek.ultimateskyblock.event.ExploitEvents;
 import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
@@ -155,6 +156,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } catch (Exception e) {
             log(Level.INFO, "Something went wrong saving the island and/or party data!", e);
         }
+        DebugCommand.disableLogging(null);
     }
 
     @Override

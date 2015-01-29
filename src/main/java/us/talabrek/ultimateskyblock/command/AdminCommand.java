@@ -29,7 +29,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new ReloadCommand());
         add(new ImportCommand());
         add(new GenTopTenCommand(plugin));
-        add(new RegisterIslandToPlayerCommand());
+        //add(new RegisterIslandToPlayerCommand());
         add(new AdminChallengeCommand(plugin, challengeCompleter));
         add(new OrphanCommand());
         add(new AdminIslandCommand(plugin));
@@ -46,6 +46,5 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new WGCommand(plugin));
         add(new VersionCommand(plugin));
         add(new AsyncCommand(plugin));
-        add(new MakeLeaderCommand(plugin));
     }
 }

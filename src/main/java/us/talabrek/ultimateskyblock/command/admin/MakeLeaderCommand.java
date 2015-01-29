@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
@@ -39,11 +40,16 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
                 return false;
             }
             if (playerInfo != null && playerInfo.getHasIsland()) {
-                sender.sendMessage("\u00a74Player " + playerName + " alread has an island.\u00a7eUse \u00a7d/usb remove <name>\u00a7e to remove him first.");
+                sender.sendMessage("\u00a7ePlayer \u00a7d" + playerName + "\u00a7e already has an island.\u00a7eUse \u00a7d/usb island remove <name>\u00a7e to remove him first.");
                 return false;
             }
+            playerInfo.setJoinParty(islandInfo.getIslandLocation());
+            Location homeLocation = islandPlayer.getHomeLocation();
+            islandInfo.removeMember(islandPlayer); // Remove leader
             islandInfo.setupPartyLeader(playerInfo.getPlayerName()); // Promote member
-            islandInfo.removeMember(playerInfo); // Remove leader
+            playerInfo.setHomeLocation(homeLocation);
+            islandPlayer.save();
+            playerInfo.save();
             WorldGuardHandler.updateRegion(sender, islandInfo);
             islandInfo.sendMessageToIslandGroup("\u00a7bLeadership transferred by " + sender.getName() + "\u00a7b to " + playerName);
             return true;

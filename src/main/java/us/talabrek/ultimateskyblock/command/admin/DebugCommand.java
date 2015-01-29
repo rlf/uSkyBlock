@@ -26,11 +26,8 @@ public class DebugCommand extends CompositeUSBCommand {
     public static final Logger log = Logger.getLogger("us.talabrek.ultimateskyblock");
     private static Handler logHandler = null;
 
-    private final uSkyBlock plugin;
-
     public DebugCommand(final uSkyBlock plugin) {
         super("debug", "usb.admin", "control debugging");
-        this.plugin = plugin;
         add(new AbstractUSBCommand("setlevel", null, "level", "set debug-level") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
@@ -73,26 +70,30 @@ public class DebugCommand extends CompositeUSBCommand {
         }
     }
 
-    private void setLogLevel(CommandSender sender, String arg) {
+    public static void setLogLevel(CommandSender sender, String arg) {
         try {
             Level level = Level.parse(arg.toUpperCase());
             log.setLevel(level);
-            plugin.getLogger().setLevel(level);
+            uSkyBlock.getInstance().getLogger().setLevel(level);
             sender.sendMessage("\u00a7eSet debug-level to " + level);
         } catch (Exception e) {
             sender.sendMessage("\u00a74Invalid argument, try FINE, FINEST, DEBUG, INFO");
         }
     }
 
-    private void disableLogging(CommandSender sender) {
-        log.removeHandler(logHandler);
-        plugin.getLogger().removeHandler(logHandler);
-        logHandler.close();
-        sender.sendMessage("\u00a7eLogging disabled!");
+    public static void disableLogging(CommandSender sender) {
+        if (logHandler != null) {
+            log.removeHandler(logHandler);
+            uSkyBlock.getInstance().getLogger().removeHandler(logHandler);
+            logHandler.close();
+            if (sender != null) {
+                sender.sendMessage("\u00a7eLogging disabled!");
+            }
+        }
         logHandler = null;
     }
 
-    private void enableLogging(CommandSender sender, uSkyBlock plugin) {
+    public static void enableLogging(CommandSender sender, uSkyBlock plugin) {
         if (logHandler != null) {
             log.removeHandler(logHandler);
             plugin.getLogger().removeHandler(logHandler);
@@ -112,6 +113,7 @@ public class DebugCommand extends CompositeUSBCommand {
             sender.sendMessage("\u00a74Unable to enable logging: " + e.getMessage());
         }
     }
+
     public static class SingleLineFormatter extends Formatter {
         @Override
         public String format(LogRecord record) {
