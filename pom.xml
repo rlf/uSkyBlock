@@ -220,8 +220,6 @@
                     <includes>
                         <include>**/uSkyBlock*.jar</include>
                         <include>**/uSkyBlock*.pom</include>
-                        <include>**/uSkyBlock*.md5</include>
-                        <include>**/uSkyBlock*.sha1</include>
                     </includes>
                     <repositoryName>uSkyBlock</repositoryName>      <!-- github repo name -->
                     <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
