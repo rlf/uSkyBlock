@@ -85,7 +85,7 @@ public class LevelCommand extends RequireIslandCommand {
             }
         };
         if (shouldRecalculate) {
-            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+            plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -99,7 +99,7 @@ public class LevelCommand extends RequireIslandCommand {
                     }
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 0L);
                 }
-            });
+            }, 1L);
         } else {
             showInfo.run();
         }
