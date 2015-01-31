@@ -97,7 +97,7 @@ public class LevelCommand extends RequireIslandCommand {
                     } catch (Exception e) {
                         uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
                     }
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 0L);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 10L);
                 }
             }, 1L);
         } else {

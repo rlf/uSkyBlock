@@ -5,12 +5,9 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
-import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
@@ -34,10 +31,12 @@ public class LevelLogic {
     private final float blockValue[] = new float[MAX_INDEX];
     private final int blockLimit[] = new int[MAX_INDEX];
     private final int blockDR[] = new int[MAX_INDEX];
+    private int pointsPerLevel;
 
     public LevelLogic(FileConfiguration config) {
         this.config = config;
         load();
+        pointsPerLevel = config.getInt("general.pointsPerLevel");
     }
 
     public void load() {
@@ -122,33 +121,21 @@ public class LevelLogic {
         return new byte[0];
     }
 
-    public IslandScore calculateScore(PlayerInfo playerInfo) {
-        final Location l = playerInfo.getIslandLocation();
-        return calculateScore(l);
-    }
-
     public IslandScore calculateScore(Location l) {
         final int radius = Settings.island_protectionRange / 2;
-        int pointsPerLevel = config.getInt("general.pointsPerLevel");
         final int px = l.getBlockX();
         final int pz = l.getBlockZ();
         final World w = l.getWorld();
-        final int[] counts = new int[MAX_BLOCK<<DATA_BITS];
+        final int[] counts = createBlockCountArray();
         for (int x = -radius; x <= radius; ++x) {
-            for (int y = 0; y <= 255; ++y) {
-                for (int z = -radius; z <= radius; ++z) {
-                    Block block = w.getBlockAt(px + x, y, pz + z);
-                    int blockId = getBlockId(block);
-                    if (blockValue[blockId] == -1) {
-                        blockId = blockId & (0xffffffff ^ DATA_MASK); // remove sub-type
-                    } else if (blockValue[blockId] < -1) {
-                        // Direct addressing
-                        blockId = -(Math.round(blockValue[blockId]) & 0xffffff);
-                    }
-                    counts[blockId] += 1;
-                }
+            for (int z = -radius; z <= radius; ++z) {
+                addBlockCount(w, px+x, pz+z, counts);
             }
         }
+        return createIslandScore(counts);
+    }
+
+    public IslandScore createIslandScore(int[] counts) {
         double score = 0;
         List<BlockScore> blocks = new ArrayList<>();
         for (int i = 1<<DATA_BITS; i < MAX_BLOCK<<DATA_BITS; ++i) {
@@ -165,10 +152,24 @@ public class LevelLogic {
                 }
                 double blockScore = adjustedCount * blockValue[i];
                 score += blockScore;
-                blocks.add(new BlockScore(new ItemStack(i >> DATA_BITS, 1, (short)(i & DATA_MASK)), count, blockScore/pointsPerLevel, state));
+                blocks.add(new BlockScore(new ItemStack(i >> DATA_BITS, 1, (short)(i & DATA_MASK)), count, blockScore/ pointsPerLevel, state));
             }
         }
-        return new IslandScore(score/pointsPerLevel, blocks);
+        return new IslandScore(score/ pointsPerLevel, blocks);
+    }
+
+    public void addBlockCount(World w, int x, int z, int[] counts) {
+        for (int y = 0; y <= 255; ++y) {
+            Block block = w.getBlockAt(x, y, z);
+            int blockId = getBlockId(block);
+            if (blockValue[blockId] == -1) {
+                blockId = blockId & (0xffffffff ^ DATA_MASK); // remove sub-type
+            } else if (blockValue[blockId] < -1) {
+                // Direct addressing
+                blockId = -(Math.round(blockValue[blockId]) & 0xffffff);
+            }
+            counts[blockId] += 1;
+        }
     }
 
     private int getBlockId(Block block) {
@@ -184,4 +185,7 @@ public class LevelLogic {
         return trinum * scale;
     }
 
+    public int[] createBlockCountArray() {
+        return new int[MAX_BLOCK << DATA_BITS];
+    }
 }

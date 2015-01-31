@@ -14,7 +14,7 @@ public class IslandLevel implements Comparable<IslandLevel> {
 
     public IslandLevel(String islandName, String leaderName, List<String> members, double score) {
         this.islandName = islandName;
-        this.leaderName = leaderName;
+        this.leaderName = leaderName != null ? leaderName : "\u00a7eAbandoned";
         this.members = members;
         this.score = score;
     }

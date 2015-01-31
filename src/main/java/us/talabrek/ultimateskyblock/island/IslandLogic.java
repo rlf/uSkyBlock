@@ -187,7 +187,7 @@ public class IslandLogic {
                     islands.remove(islandName);
                 }
             } catch (Exception e) {
-                plugin.getLogger().log(Level.WARNING, "Error during top10 generation", e);
+                plugin.getLogger().log(Level.WARNING, "Error during rank generation", e);
             }
         }
         Collections.sort(topTen);

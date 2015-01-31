@@ -80,7 +80,7 @@ options:
 
     # [integer] The time in minutes for refreshing/recalculating the score for players on their island
     # set to 0 to disabled
-    autoRefreshScore: 10
+    autoRefreshScore: 0
 
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.

@@ -1101,6 +1101,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 changePlayerBiome(player, "OCEAN");
                 protectWithWorldGuard(player, player, pi);
                 homeTeleport(player);
+                setRestartCooldown(player);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
             } catch (Exception ex) {
@@ -1485,10 +1486,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public IslandScore recalculateScore(Player player, String islandName) {
         IslandInfo islandInfo = getIslandInfo(islandName);
         IslandScore score = getLevelLogic().calculateScore(islandInfo.getIslandLocation());
+        updateScore(player, islandInfo, score);
+        return score;
+    }
+
+    public void updateScore(Player player, IslandInfo islandInfo, IslandScore score) {
         islandInfo.setLevel(score.getScore());
         getIslandLogic().updateRank(islandInfo, score);
         fireChangeEvent(new uSkyBlockScoreChangedEvent(player, this, score));
-        return score;
     }
 
     public synchronized boolean isProtectAllActive() {

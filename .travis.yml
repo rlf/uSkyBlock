@@ -10,7 +10,8 @@ notifications:
   email: false
 before_install:
   # Change the maven-version to be the tag (for the API deploy)
-  - mvn versions:set -DnewVersion=${TRAVIS_TAG}
+  # Skip the 'v'
+  - mvn versions:set -DnewVersion=${TRAVIS_TAG:1}
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}

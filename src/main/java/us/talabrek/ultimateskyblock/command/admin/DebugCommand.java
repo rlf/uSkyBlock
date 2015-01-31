@@ -66,7 +66,6 @@ public class DebugCommand extends CompositeUSBCommand {
         String debugLevel = plugin.getConfig().getString("options.advanced.debugLevel", null);
         if (debugLevel != null) {
             setLogLevel(plugin.getServer().getConsoleSender(), debugLevel);
-            enableLogging(plugin.getServer().getConsoleSender(), plugin);
         }
     }
 
@@ -76,8 +75,9 @@ public class DebugCommand extends CompositeUSBCommand {
             log.setLevel(level);
             uSkyBlock.getInstance().getLogger().setLevel(level);
             sender.sendMessage("\u00a7eSet debug-level to " + level);
+            enableLogging(sender, uSkyBlock.getInstance());
         } catch (Exception e) {
-            sender.sendMessage("\u00a74Invalid argument, try FINE, FINEST, DEBUG, INFO");
+            sender.sendMessage("\u00a74Invalid argument, try INFO, FINE, FINER, FINEST");
         }
     }
 
