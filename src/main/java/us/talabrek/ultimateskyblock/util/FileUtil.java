@@ -16,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,6 +29,7 @@ import java.util.logging.Logger;
  */
 public enum FileUtil {;
     private static final Logger log = Logger.getLogger(FileUtil.class.getName());
+    private static final Collection<String> allwaysOverwrite = Arrays.asList("levelConfig.yml");
     private static final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
     private static File dataFolder;
 
@@ -116,11 +119,11 @@ public enum FileUtil {;
                         Files.move(Paths.get(configFile.toURI()),
                                 Paths.get(new File(backupFolder, bakFile).toURI()),
                                 StandardCopyOption.REPLACE_EXISTING);
-                        config = mergeConfig(configJar, config);
-                        config.options().header("Merge from between jar-file and existing config");
-                        if (isPrimaryConfig(configName)) {
-                            uSkyBlock.getInstance().saveConfig(); // preserve comments
+                        if (allwaysOverwrite.contains(configName)) {
+                            FileUtil.copy(FileUtil.class.getClassLoader().getResourceAsStream(configName), configFile);
+                            config = configJar;
                         } else {
+                            config = mergeConfig(configJar, config);
                             config.save(configFile);
                         }
                     } else {
@@ -150,9 +153,11 @@ public enum FileUtil {;
      * @param dest The destination (containgin old-values).
      */
     private static YamlConfiguration mergeConfig(YamlConfiguration src, YamlConfiguration dest) {
-        int version = src.getInt("version", dest.getInt("version"));
-        dest.setDefaults(src); // Overwrite the "new-values" with existing ones.
+        int existing = dest.getInt("version");
+        int version = src.getInt("version", existing);
+        dest.setDefaults(src);
         dest.options().copyDefaults(true);
+        src.options().header("Merge from between jar-file v" + version + " and existing config v" + existing);
         dest.set("version", version);
         return dest;
     }

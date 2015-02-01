@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * Business logic regarding the calculation of level
  */
 public class LevelLogic {
-    private static final Pattern KEY_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<sub>(\\*|[0-9]+|[0-9]+-[0-9]+)))?");
+    private static final Pattern KEY_PATTERN = Pattern.compile("(?<id>[0-9]+)([/:](?<sub>(\\*|[0-9]+|[0-9]+-[0-9]+)))?");
     private static final int MAX_BLOCK = 255;
     private static final int DATA_BITS = 4;
     private static final int MAX_INDEX = MAX_BLOCK << DATA_BITS;
