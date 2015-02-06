@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -38,7 +39,7 @@ public class UUIDLeaderImporter implements USBImporter {
             boolean changed = false;
             String leaderName = null;
             try (FileWriter fw = new FileWriter(ymlPath.toFile()); BufferedWriter out = new BufferedWriter(fw)) {
-                for (String line : Files.readAllLines(file.toPath())) {
+                for (String line : Files.readAllLines(file.toPath(), Charset.forName("UTF-8"))) {
                     if (line.contains("leader:")) {
                         leaderName = line.substring(line.indexOf("leader:") + 7).trim();
                     }
