@@ -10,7 +10,7 @@ import java.io.File;
 /**
  * The World Edit 5.5.8 specific adaptations.
  */
-public class WorldEdit558Adaptor implements WordEditAdaptor {
+public class WorldEdit558Adaptor implements WorldEditAdaptor {
     private WorldEditPlugin worldEditPlugin;
 
     public WorldEdit558Adaptor() {

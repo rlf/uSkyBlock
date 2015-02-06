@@ -13,7 +13,7 @@ import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.async.CompositeIncrementalTask;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditRegenTask;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegenTask;
-import us.talabrek.ultimateskyblock.handler.worldedit.WordEditAdaptor;
+import us.talabrek.ultimateskyblock.handler.worldedit.WorldEditAdaptor;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.*;
@@ -35,7 +35,7 @@ public class WorldEditHandler {
     }
 
     public static boolean loadIslandSchematic(Player player, final World world, final File file, final Location origin) {
-        return WordEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(player, world, file, origin);
+        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(player, world, file, origin);
     }
 
     /**

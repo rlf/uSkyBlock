@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * API allowing us to support both WE 5 and WE 6.
  */
-public interface WordEditAdaptor {
+public interface WorldEditAdaptor {
     /**
      * Initializes the API.
      * @param worldEditPlugin
@@ -29,18 +29,18 @@ public interface WordEditAdaptor {
 
     public static class Factory {
         private static final Logger log = Logger.getLogger(Factory.class.getName());
-        public static WordEditAdaptor create(WorldEditPlugin worldEdit) {
+        public static WorldEditAdaptor create(WorldEditPlugin worldEdit) {
             if (worldEdit != null && worldEdit.isEnabled() && worldEdit.getDescription() != null) {
                 VersionUtil.Version version = VersionUtil.getVersion(worldEdit.getDescription().getVersion());
                 String apiClass = null;
                 if (version.isGTE("6.0")) {
-                    apiClass = "us.talabrek.ultimateskyblock.handler.worldedit.WordEdit6Adaptor";
+                    apiClass = "us.talabrek.ultimateskyblock.handler.worldedit.WorldEdit6Adaptor";
                 } else if (version.isGTE("5.5.8")) {
-                    apiClass = "us.talabrek.ultimateskyblock.handler.worldedit.WordEdit558Adaptor";
+                    apiClass = "us.talabrek.ultimateskyblock.handler.worldedit.WorldEdit558Adaptor";
                 }
                 if (apiClass != null) {
                     try {
-                        WordEditAdaptor api = (WordEditAdaptor) Class.forName(apiClass).newInstance();
+                        WorldEditAdaptor api = (WorldEditAdaptor) Class.forName(apiClass).newInstance();
                         api.init(worldEdit);
                         return api;
                     } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {

@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 /**
  * The World Edit 6.0 specific adaptations
  */
-public class WorldEdit6Adaptor implements WordEditAdaptor {
+public class WorldEdit6Adaptor implements WorldEditAdaptor {
     private static final Logger log = Logger.getLogger(WorldEdit6Adaptor.class.getName());
     private WorldEditPlugin worldEditPlugin;
 
