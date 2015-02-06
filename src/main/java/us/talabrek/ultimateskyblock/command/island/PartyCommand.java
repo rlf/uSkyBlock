@@ -76,6 +76,7 @@ public class PartyCommand extends CompositeUSBCommand {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         if (playerInfo == null || !playerInfo.getHasIsland()) {
             player.sendMessage("\u00a74No Island. \u00a7eUse \u00a7b/is create\u00a7e to get one");
+            return true;
         }
         if (args.length == 0) {
             player.openInventory(menu.displayPartyGUI(player));

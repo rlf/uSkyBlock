@@ -48,12 +48,12 @@ options:
     # [permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY
     # When granting the permission, prefix it with "usb." so the full permission to add would be usb.smallbonus
     extraPermissions:
-      smallbonus: 4:16 320:5
-      mediumbonus: 50:16 327:1
-      largebonus: 3:5 12:5
-      giantbonus: 2:1 110:1
-      extremebonus: 352:8 263:4
-      donorbonus: 261:1 262:32 272:1
+      smallbonus: '4:16 320:5'
+      mediumbonus: '50:16 327:1'
+      largebonus: '3:5 12:5'
+      giantbonus: '2:1 110:1'
+      extremebonus: '352:8 263:4'
+      donorbonus: '261:1 262:32 272:1'
 
     # [integer] The size of the protective region for each island. Can't be higher than 'distance'
     protectionRange: 105

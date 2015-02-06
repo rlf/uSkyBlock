@@ -224,7 +224,11 @@ public class IslandLogic {
     }
 
     public synchronized void removeIslandFromMemory(String islandName) {
-        getIslandInfo(islandName).save();
+        try {
+            getIslandInfo(islandName).save();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "Unable to save island: " + islandName, e);
+        }
         islands.remove(islandName);
     }
 

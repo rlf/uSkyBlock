@@ -381,20 +381,22 @@ public class IslandInfo {
             if (uuid == null || uuid.equals(player.getUniqueId())) {
                 section = members.createSection(newName, section.getValues(true));
                 section.set("uuid", UUIDUtil.asString(player.getUniqueId()));
+                members.set(oldName, null); // remove existing section
                 dirty = true;
             } else {
                 throw new IllegalStateException("Member " + oldName + " has a different UUID than " + player);
             }
         }
         if (isLeader(oldName)) {
-            String uuid = section.getString("party.leader-uuid", null);
+            String uuid = config.getString("party.leader-uuid", null);
             if (uuid == null || uuid.equals(player.getUniqueId())) {
                 config.set("party.leader", newName);
-                config.set("party.leader-uuid", player.getUniqueId());
+                config.set("party.leader-uuid", UUIDUtil.asString(player.getUniqueId()));
                 dirty = true;
             } else {
                 throw new IllegalStateException("Leader " + oldName + " has a different UUID than " + player);
             }
+            WorldGuardHandler.updateRegion(player, this);
         }
         List<String> bans = getBans();
         if (bans.contains(oldName)) {

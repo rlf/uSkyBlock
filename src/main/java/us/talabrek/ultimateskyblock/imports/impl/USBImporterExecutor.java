@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.imports.impl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
+import us.talabrek.ultimateskyblock.imports.fixuuidleader.UUIDLeaderImporter;
 import us.talabrek.ultimateskyblock.imports.name2uuid.Name2UUIDImporter;
 import us.talabrek.ultimateskyblock.imports.wolfwork.WolfWorkUSBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -41,6 +42,7 @@ public class USBImporterExecutor {
         if (importers == null) {
             importers = new ArrayList<>();
             importers.add(new WolfWorkUSBImporter());
+            importers.add(new UUIDLeaderImporter());
             //importers.add(new Name2UUIDImporter());
             ServiceLoader serviceLoader = ServiceLoader.load(USBImporter.class, getClass().getClassLoader());
             for (Iterator<USBImporter> it = serviceLoader.iterator(); it.hasNext(); ) {

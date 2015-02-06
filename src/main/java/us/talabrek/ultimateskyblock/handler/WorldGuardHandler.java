@@ -9,7 +9,6 @@ import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -22,6 +21,7 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
-    private static final int VERSION = 4;
+    private static final int VERSION = 7;
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
@@ -99,7 +99,7 @@ public class WorldGuardHandler {
             regionManager.removeRegion(islandInfo.getLeader() + "island");
             regionManager.addRegion(region);
             save(regionManager);
-        } catch (StorageException | InvalidFlagFormat e) {
+        } catch (Exception e) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
 
@@ -121,6 +121,7 @@ public class WorldGuardHandler {
                 DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering \u00a7b" + islandConfig.getLeader() + "'s \u00a7disland."));
         region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
                 DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving \u00a7b" + islandConfig.getLeader() + "'s \u00a7disland."));
+        setVersionSpecificFlags(region);
         if (Settings.island_allowPvP) {
             region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
         } else {
@@ -131,9 +132,24 @@ public class WorldGuardHandler {
         } else {
             region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
         }
-        region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
-        region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
         return region;
+    }
+
+    private static void setVersionSpecificFlags(ProtectedCuboidRegion region) {
+        WorldGuardPlugin worldGuard = getWorldGuard();
+        if (worldGuard != null && worldGuard.isEnabled() && worldGuard.getDescription() != null) {
+            VersionUtil.Version wgVersion = VersionUtil.getVersion(worldGuard.getDescription().getVersion());
+            if (wgVersion.isGTE("6.0")) {
+                // Default values sort of bring us there... niiiiice
+            } else {
+                // 5.9 or below
+                region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.CHEST_ACCESS, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
+            }
+        }
     }
 
     private static boolean noOrOldRegion(RegionManager regionManager, String regionId, IslandInfo island) {
@@ -162,13 +178,13 @@ public class WorldGuardHandler {
         }
     }
 
-    private static void save(final RegionManager regionManager) throws StorageException {
+    private static void save(final RegionManager regionManager) {
         Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
                 try {
-                    regionManager.saveChanges();
-                } catch (StorageException e) {
+                    regionManager.save();
+                } catch (Exception e) {
                     log.log(Level.WARNING, "Unable to save regions", e);
                 }
             }
@@ -214,7 +230,7 @@ public class WorldGuardHandler {
                 regionManager.addRegion(region);
                 save(regionManager);
             }
-        } catch (StorageException | InvalidFlagFormat e) {
+        } catch (Exception e) {
             uSkyBlock.getInstance().log(Level.WARNING, "Error saving island region after removal of " + player);
         }
     }
@@ -267,19 +283,22 @@ public class WorldGuardHandler {
             }
             global.setFlag(DefaultFlag.BUILD, StateFlag.State.DENY);
             regionManager.addRegion(global);
-            try {
-                save(regionManager);
-            } catch (StorageException e) {
-                uSkyBlock.getInstance().log(Level.WARNING, "Error saving global region", e);
-            }
+            save(regionManager);
         }
     }
 
+    private static Set<ProtectedRegion> getRegions(ApplicableRegionSet set) {
+        Set<ProtectedRegion> regions = new HashSet<>();
+        for (ProtectedRegion region : set) {
+            regions.add(region);
+        }
+        return regions;
+    }
     public static Set<ProtectedRegion> getIntersectingRegions(Location islandLocation) {
         log.entering(CN, "getIntersectingRegions", islandLocation);
         RegionManager regionManager = getWorldGuard().getRegionManager(islandLocation.getWorld());
         ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(getIslandRegion(islandLocation));
-        Set<ProtectedRegion> regions = new HashSet<>(applicableRegions.getRegions());
+        Set<ProtectedRegion> regions = getRegions(applicableRegions);
         for (Iterator<ProtectedRegion> iterator = regions.iterator(); iterator.hasNext(); ) {
             if (iterator.next() instanceof GlobalProtectedRegion) {
                 iterator.remove();
@@ -299,6 +318,9 @@ public class WorldGuardHandler {
             ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", new BlockVector(-r, 0, -r), new BlockVector(r, 255, r));
             ProtectedCuboidRegion islandRegion = getIslandRegion(islandLocation);
             return !islandRegion.getIntersectingRegions(Collections.singletonList(spawn)).isEmpty();
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "Unable to locate intersecting regions", e);
+            return false;
         } finally {
             log.exiting(CN, "isIslandIntersectingSpawn");
         }

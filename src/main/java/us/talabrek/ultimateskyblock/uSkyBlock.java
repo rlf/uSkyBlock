@@ -130,6 +130,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         uSkyBlock.skyBlockWorld = null;
     }
 
+    private PlayerDB playerDB;
+
     public uSkyBlock() {
         this.lastIslandConfig = null;
         this.orphans = null;
@@ -1334,7 +1336,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         // Update all of the loaded configs.
         FileUtil.reload();
 
-        PlayerDB playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
         PlayerUtil.loadConfig(playerDB, getConfig());
         activePlayers.clear();
         islandGenerator = new IslandGenerator(getConfig());
@@ -1519,5 +1521,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         msg += "\u00a77------------------------------\n";
         return msg;
+    }
+
+    public PlayerDB getPlayerDB() {
+        return playerDB;
     }
 }
