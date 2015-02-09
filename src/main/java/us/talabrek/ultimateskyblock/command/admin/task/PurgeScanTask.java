@@ -33,7 +33,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
         now = System.currentTimeMillis();
         this.cutOff = now - (time * 3600000);
         String[] islandList = islandDir.list(FileUtil.createYmlFilenameFilter());
-        this.islandList = Arrays.asList(islandList);
+        this.islandList = new ArrayList<>(Arrays.asList(islandList));
         size = islandList.length;
         purgeList = new ArrayList<>();
         purgeLevel = plugin.getConfig().getDouble("options.advanced.purgeLevel", 10);
