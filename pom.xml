@@ -62,9 +62,6 @@
         </profile>
         <profile>
             <id>wg5</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <dependencies>
                 <dependency>
                     <groupId>com.sk89q</groupId>
@@ -78,6 +75,9 @@
         </profile>
         <profile>
             <id>wg6</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <dependencies>
                 <dependency>
                     <groupId>com.sk89q</groupId>

@@ -24,11 +24,11 @@ public class PurgeTask implements IncrementalTask {
     @Override
     public boolean execute(Plugin plugin, int offset, int length) {
         for (int i = 0; i < length && !removeList.isEmpty(); i++) {
-            final String playerName = removeList.remove(0);
-            skyBlock.deletePlayerIsland(playerName, new Runnable() {
+            final String islandName = removeList.remove(0);
+            skyBlock.deleteIsland(islandName, new Runnable() {
                 @Override
                 public void run() {
-                    skyBlock.log(Level.INFO, "Purge: Removed " + playerName + "'s island");
+                    skyBlock.log(Level.INFO, "Purge: Removed island at " + islandName);
                 }
             });
         }

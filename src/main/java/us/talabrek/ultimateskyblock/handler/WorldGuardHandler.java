@@ -72,12 +72,10 @@ public class WorldGuardHandler {
             String regionName = islandConfig.getName() + "island";
             if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
                 ProtectedCuboidRegion region = setRegionFlags(sender, islandConfig);
-                final ApplicableRegionSet set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
-                if (set.size() > 0) {
-                    for (ProtectedRegion regions : set) {
-                        if (!(regions instanceof GlobalProtectedRegion)) {
-                            regionManager.removeRegion(regions.getId());
-                        }
+                final Iterable<ProtectedRegion> set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
+                for (ProtectedRegion regions : set) {
+                    if (!(regions instanceof GlobalProtectedRegion)) {
+                        regionManager.removeRegion(regions.getId());
                     }
                 }
                 regionManager.addRegion(region);
@@ -253,7 +251,7 @@ public class WorldGuardHandler {
     public static String getIslandNameAt(Location location) {
         WorldGuardPlugin worldGuard = getWorldGuard();
         RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
-        ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(location);
+        Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(location);
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
             if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
@@ -266,7 +264,7 @@ public class WorldGuardHandler {
     public static ProtectedRegion getIslandRegionAt(Location location) {
         WorldGuardPlugin worldGuard = getWorldGuard();
         RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
-        ApplicableRegionSet applicableRegions = regionManager.getApplicableRegions(location);
+        Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(location);
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
             if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
@@ -301,6 +299,7 @@ public class WorldGuardHandler {
         }
         return regions;
     }
+
     public static Set<ProtectedRegion> getIntersectingRegions(Location islandLocation) {
         log.entering(CN, "getIntersectingRegions", islandLocation);
         RegionManager regionManager = getWorldGuard().getRegionManager(islandLocation.getWorld());
