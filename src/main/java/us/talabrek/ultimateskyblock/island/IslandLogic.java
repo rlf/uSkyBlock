@@ -206,7 +206,10 @@ public class IslandLogic {
         memberList.remove(partyLeader);
         List<String> names = new ArrayList<>();
         for (String name : memberList) {
-            names.add(PlayerUtil.getPlayerDisplayName(name));
+            String displayName = PlayerUtil.getPlayerDisplayName(name);
+            if (displayName != null) {
+                names.add(displayName);
+            }
         }
         return new IslandLevel(islandInfo.getName(), partyLeaderName, names, level);
     }
