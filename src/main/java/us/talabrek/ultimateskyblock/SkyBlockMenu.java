@@ -552,7 +552,7 @@ public class SkyBlockMenu {
         menuItem.setItemMeta(meta4);
         menu.addItem(menuItem);
         lores.clear();
-        menuItem = new ItemStack(Material.LONG_GRASS, 1);
+        menuItem = new ItemStack(Material.LONG_GRASS, 1, (byte)1);
         meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.plains", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Plains");
@@ -1042,6 +1042,14 @@ public class SkyBlockMenu {
             } else if (event.getCurrentItem().getType() == Material.RED_MUSHROOM) {
                 p.closeInventory();
                 p.performCommand("island biome mushroom");
+                p.openInventory(displayIslandGUI(p));
+            } else if (event.getCurrentItem().getType() == Material.LONG_GRASS) {
+                p.closeInventory();
+                p.performCommand("island biome plains");
+                p.openInventory(displayIslandGUI(p));
+            } else if (event.getCurrentItem().getType() == Material.EMERALD_ORE) {
+                p.closeInventory();
+                p.performCommand("island biome extremehills");
                 p.openInventory(displayIslandGUI(p));
             } else if (event.getCurrentItem().getType() == Material.RAW_FISH) {
                 p.closeInventory();
