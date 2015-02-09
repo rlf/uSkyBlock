@@ -143,6 +143,9 @@ options:
       fall: true
       # Whether or not visiotrs are protected from fire damage (incl. lava)
       fire-damage: true
+  party:
+    # The number of ticks before an invite timeouts (20 ticks per sec.)
+    invite-timeout: 100
 
   # This section provide some performance tweaking configs
   advanced:

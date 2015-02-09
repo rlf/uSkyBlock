@@ -17,6 +17,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -34,6 +35,7 @@ public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
     private static final int VERSION = 7;
+    private static BukkitTask saveTask;
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
@@ -179,16 +181,21 @@ public class WorldGuardHandler {
     }
 
     private static void save(final RegionManager regionManager) {
-        Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+        if (saveTask != null) {
+            saveTask.cancel();
+            saveTask = null;
+        }
+        saveTask = Bukkit.getScheduler().runTaskLaterAsynchronously(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Shouldn't be needed in WG 6 - seems to be in WG 5.
                     regionManager.save();
                 } catch (Exception e) {
                     log.log(Level.WARNING, "Unable to save regions", e);
                 }
             }
-        });
+        }, 100); // Save in 5 secs.
     }
 
     public static void islandUnlock(final CommandSender sender, final String islandName) {
