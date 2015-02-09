@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.event;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -139,7 +140,8 @@ public class PlayerEvents implements Listener {
         if (event.getDamager() instanceof Player) {
             Player p1 = (Player) event.getDamager();
             cancelMemberDamage(p1, p2, event);
-        } else if (event.getDamager() instanceof Projectile) {
+        } else if (event.getDamager() instanceof Projectile
+                && !(event.getDamager() instanceof EnderPearl)) {
             ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
             if (shooter instanceof Player) {
                 Player p1 = (Player) shooter;
