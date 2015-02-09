@@ -15,11 +15,21 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class ChallengesCommand implements CommandExecutor, TabCompleter {
+    private final uSkyBlock plugin;
+
+    public ChallengesCommand(uSkyBlock plugin) {
+        this.plugin = plugin;
+    }
+    
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
-        if (!uSkyBlock.getInstance().isRequirementsMet(sender)) {
+        if (!plugin.isRequirementsMet(sender)) {
             return false;
         }
         if (!(sender instanceof Player)) {
+            return false;
+        }
+        if (!plugin.getChallengeLogic().isEnabled()) {
+            sender.sendMessage("\u00a7eChallenges has been disabled. Contact an administrator.");
             return false;
         }
         final Player player = (Player)sender;
@@ -31,14 +41,14 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             player.sendMessage("\u00a74You can only submit challenges in the skyblock world!");
             return true;
         }
-        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
+        PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         if (!playerInfo.getHasIsland()) {
             player.sendMessage("\u00a74You can only submit challenges when you have an island!");
             return true;
         }
-        ChallengeLogic challengeLogic = uSkyBlock.getInstance().getChallengeLogic();
+        ChallengeLogic challengeLogic = plugin.getChallengeLogic();
         if (split.length == 0) {
-            player.openInventory(uSkyBlock.getInstance().getMenu().displayChallengeGUI(player, 1));
+            player.openInventory(plugin.getMenu().displayChallengeGUI(player, 1));
         } else if (split.length == 1) {
             String arg = split[0].toLowerCase();
             Challenge challenge = challengeLogic.getChallenge(arg);
@@ -100,8 +110,8 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                 suggestions.add("complete");
             }
             if (args.length >= 1) {
-                PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
-                suggestions.addAll(uSkyBlock.getInstance().getChallengeLogic().getAvailableChallengeNames(playerInfo));
+                PlayerInfo playerInfo = plugin.getPlayerInfo(player);
+                suggestions.addAll(plugin.getChallengeLogic().getAvailableChallengeNames(playerInfo));
                 filter(suggestions, args[args.length - 1]);
             }
             Collections.sort(suggestions);

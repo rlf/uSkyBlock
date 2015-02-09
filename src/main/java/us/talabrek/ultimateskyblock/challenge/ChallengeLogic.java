@@ -43,6 +43,9 @@ public class ChallengeLogic {
         ranks = ChallengeFactory.createRankMap(config.getConfigurationSection("ranks"), defaults);
     }
 
+    public boolean isEnabled() {
+        return config.getBoolean("allowChallenges", true);
+    }
     private void load() {
         Arrays.asList(config.getString("ranks", "").split(" "));
     }

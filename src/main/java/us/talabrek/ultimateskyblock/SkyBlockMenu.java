@@ -733,7 +733,11 @@ public class SkyBlockMenu {
         lores.add("\u00a7fyou can complete on your island");
         lores.add("\u00a7fto earn skybucks, items, perks,");
         lores.add("\u00a7fand titles.");
-        lores.add("\u00a7e\u00a7lClick here to view challenges.");
+        if (skyBlock.getChallengeLogic().isEnabled()) {
+            lores.add("\u00a7e\u00a7lClick here to view challenges.");
+        } else {
+            lores.add("\u00a74\u00a7lChallenges disabled.");
+        }
         meta4.setLore(lores);
         menuItem.setItemMeta(meta4);
         menu.addItem(menuItem);
