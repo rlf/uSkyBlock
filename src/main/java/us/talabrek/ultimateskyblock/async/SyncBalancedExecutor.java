@@ -14,7 +14,9 @@ public class SyncBalancedExecutor extends AbstractBalancedExecutor {
 
     @Override
     protected void doLater(Plugin plugin, Runnable runnable, long delay) {
-        scheduler.runTaskLater(plugin, runnable, delay);
+        if (plugin != null && plugin.isEnabled()) {
+            scheduler.runTaskLater(plugin, runnable, delay);
+        }
     }
 
 }
