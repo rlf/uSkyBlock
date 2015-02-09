@@ -32,7 +32,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
         this.plugin = plugin;
         now = System.currentTimeMillis();
         this.cutOff = now - (time * 3600000);
-        String[] islandList = islandDir.list(FileUtil.createYmlFilenameFilter());
+        String[] islandList = islandDir.list(FileUtil.createIslandFilenameFilter());
         this.islandList = new ArrayList<>(Arrays.asList(islandList));
         size = islandList.length;
         purgeList = new ArrayList<>();

@@ -40,6 +40,7 @@ public enum MultiverseCoreHandler {;
                 if (LocationUtil.isEmptyLocation(mvWorld.getSpawnLocation())) {
                     mvWorld.setAdjustSpawn(false);
                     mvWorld.setSpawnLocation(worldSpawn);
+                    skyWorld.setSpawnLocation(worldSpawn.getBlockX(), worldSpawn.getBlockY(), worldSpawn.getBlockZ());
                 }
             }
             if (!Settings.extras_sendToSpawn) {
