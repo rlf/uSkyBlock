@@ -1057,6 +1057,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             biome = Biome.DESERT;
         } else if (bName.equalsIgnoreCase("forest")) {
             biome = Biome.FOREST;
+        } else if (bName.equalsIgnoreCase("plains")) {
+            biome = Biome.PLAINS;
+        } else if (bName.equalsIgnoreCase("extreme_hills")) {
+            biome = Biome.EXTREME_HILLS;
         } else {
             biome = Biome.OCEAN;
         }
@@ -1357,7 +1361,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             autoRecalculateTask = null;
         }
         getCommand("island").setExecutor(new IslandCommand(this, menu));
-        getCommand("challenges").setExecutor(new ChallengesCommand());
+        getCommand("challenges").setExecutor(new ChallengesCommand(this));
         getCommand("usb").setExecutor(new AdminCommand(instance));
     }
 

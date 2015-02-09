@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;

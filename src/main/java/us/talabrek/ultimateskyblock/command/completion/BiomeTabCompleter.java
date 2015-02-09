@@ -11,7 +11,7 @@ import java.util.List;
 public class BiomeTabCompleter extends AbstractTabCompleter {
     // TODO: 27/12/2014 - R4zorax: Perhaps this should be read from somewhere?
     private static final List<String> BIOMES = Arrays.asList("jungle","hell","sky","mushroom","ocean","swampland",
-            "taiga","desert","forest");
+            "taiga","desert","forest","plains","extremehills");
 
     @Override
     protected List<String> getTabList(CommandSender commandSender, String term) {

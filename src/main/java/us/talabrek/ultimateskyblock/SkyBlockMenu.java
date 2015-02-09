@@ -552,6 +552,58 @@ public class SkyBlockMenu {
         menuItem.setItemMeta(meta4);
         menu.addItem(menuItem);
         lores.clear();
+        menuItem = new ItemStack(Material.LONG_GRASS, 1);
+        meta4 = menuItem.getItemMeta();
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.plains", player.getWorld())) {
+            meta4.setDisplayName("\u00a7aBiome: Plains");
+            lores.add("\u00a7fThe plains biome has rain");
+            lores.add("\u00a7finstead of snow. Passive");
+            lores.add("\u00a7fmobs will spawn normally");
+            lores.add("\u00a7f(including horses) and");
+            lores.add("\u00a7fhostile mobs will spawn.");
+            if ("PLAINS".equals(currentBiome)) {
+                lores.add("\u00a72\u00a7lThis is your current biome.");
+            } else {
+                lores.add("\u00a7e\u00a7lClick to change to this biome.");
+            }
+        } else {
+            meta4.setDisplayName("\u00a78Biome: Plains");
+            lores.add("\u00a7cYou cannot use this biome.");
+            lores.add("\u00a77The plains biome has rain");
+            lores.add("\u00a77instead of snow. Passive");
+            lores.add("\u00a77mobs will spawn normally");
+            lores.add("\u00a77(including horses) and");
+            lores.add("\u00a77hostile mobs will spawn.");
+        }
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
+        lores.clear();
+        menuItem = new ItemStack(Material.EMERALD_ORE, 1);
+        meta4 = menuItem.getItemMeta();
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.extremehills", player.getWorld())) {
+            meta4.setDisplayName("\u00a7aBiome: Extreme Hills");
+            lores.add("\u00a7fThe extreme hills biome.");
+            lores.add("\u00a7fPassive mobs will spawn ");
+            lores.add("\u00a7fnormally and hostile");
+            lores.add("\u00a7fmobs will spawn.");
+            if ("EXTREME_HILLS".equals(currentBiome)) {
+                lores.add("\u00a72\u00a7lThis is your current biome.");
+            } else {
+                lores.add("\u00a7e\u00a7lClick to change to this biome.");
+            }
+        } else {
+            meta4.setDisplayName("\u00a78Biome: Extreme Hills");
+            lores.add("\u00a7cYou cannot use this biome.");
+            lores.add("\u00a77The extreme hills biome.");
+            lores.add("\u00a77Passive mobs will spawn ");
+            lores.add("\u00a77normally and hostile");
+            lores.add("\u00a77mobs will spawn.");
+        }
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
+        lores.clear();
         return menu;
     }
 

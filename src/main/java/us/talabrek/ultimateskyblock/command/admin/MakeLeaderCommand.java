@@ -2,9 +2,7 @@ package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.island.RequirePlayerCommand;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
