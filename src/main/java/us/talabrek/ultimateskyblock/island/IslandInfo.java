@@ -396,7 +396,6 @@ public class IslandInfo {
             } else {
                 throw new IllegalStateException("Leader " + oldName + " has a different UUID than " + player);
             }
-            WorldGuardHandler.updateRegion(player, this);
         }
         List<String> bans = getBans();
         if (bans.contains(oldName)) {
@@ -406,6 +405,7 @@ public class IslandInfo {
             dirty = true;
         }
         if (dirty) {
+            WorldGuardHandler.updateRegion(player, this);
             save();
         }
     }
