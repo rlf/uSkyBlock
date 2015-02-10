@@ -28,10 +28,6 @@ public class KickCommand extends RequireIslandCommand {
                 player.sendMessage("\u00a74That player doesn't exist.");
                 return true;
             }
-            if (!island.isParty()) {
-                player.sendMessage("\u00a74No one else is on your island, are you seeing things?");
-                return true;
-            }
             if (island.isLeader(playerName)) {
                 player.sendMessage("\u00a74You can't remove the leader from the Island!");
                 return true;
@@ -51,8 +47,12 @@ public class KickCommand extends RequireIslandCommand {
                 }
                 island.removeMember(plugin.getPlayerInfo(playerName));
                 uSkyBlock.log(Level.INFO, "Removing from " + island.getLeader() + "'s Island");
+            } else if (otherPlayer != null && plugin.locationIsOnIsland(player, otherPlayer.getLocation())) {
+                plugin.spawnTeleport(otherPlayer);
+                otherPlayer.sendMessage("\u00a74" + player.getName() + " has kicked you from their island!");
+                player.sendMessage("\u00a74" + playerName + " has been kicked from the island.");
             } else {
-                player.sendMessage("\u00a74That player is not part of your island group!");
+                player.sendMessage("\u00a74That player is not part of your island group, and not on your island!");
             }
             return true;
         }
