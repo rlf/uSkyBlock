@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.util;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -159,6 +160,16 @@ public enum FileUtil {;
         dest.options().copyDefaults(true);
         src.options().header("Merge from between jar-file v" + version + " and existing config v" + existing);
         dest.set("version", version);
+        ConfigurationSection forceSection = src.getConfigurationSection("force-replace");
+        if (forceSection != null) {
+            for (String key : forceSection.getKeys(false)) {
+                Object def = forceSection.get(key, null);
+                Object value = dest.get(key, def);
+                if (def != null && def.equals(value)) {
+                    dest.set(key, def);
+                }
+            }
+        }
         return dest;
     }
 

@@ -145,7 +145,7 @@ options:
       fire-damage: true
   party:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
-    invite-timeout: 100
+    invite-timeout: 600
 
   # This section provide some performance tweaking configs
   advanced:
@@ -155,4 +155,7 @@ options:
     # [number] The threshold for purging islands.
     # any island with a level above this, is spared.
     purgeLevel: 10
-version: 9
+# DO NOT TOUCH THE FIELDS BELOW
+version: 10
+force-replace:
+  options.party.invite-timeout: 100
