@@ -170,6 +170,7 @@ public enum FileUtil {;
                 }
             }
         }
+        dest.set("force-replace", null);
         return dest;
     }
 
