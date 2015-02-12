@@ -144,7 +144,7 @@ public class InviteHandler {
             island.setupPartyMember(player.getName());
         }
         playerInfo.save();
-        island.sendMessageToIslandGroup(player.getDisplayName() + " has joined your island group.");
+        island.sendMessageToIslandGroup(player.getDisplayName() + "\u00a7d has joined your island group.");
         return true;
     }
 
