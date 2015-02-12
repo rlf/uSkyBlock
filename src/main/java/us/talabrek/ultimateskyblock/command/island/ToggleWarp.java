@@ -20,10 +20,10 @@ public class ToggleWarp extends RequireIslandCommand {
                     player.sendMessage("\u00a74Your island is locked. You must unlock it before enabling your warp.");
                     return true;
                 }
-                island.sendMessageToIslandGroup("\u00a7b"player.getName() + "\u00a7d activated the island warp.");
+                island.sendMessageToIslandGroup("\u00a7b" +player.getName() + "\u00a7d activated the island warp.");
                 island.setWarpActive(true);
             } else {
-                island.sendMessageToIslandGroup("\u00a7b"player.getName() + "\u00a7d deactivated the island warp.");
+                island.sendMessageToIslandGroup("\u00a7b" +player.getName() + "\u00a7d deactivated the island warp.");
                 island.setWarpActive(false);
             }
         } else {
