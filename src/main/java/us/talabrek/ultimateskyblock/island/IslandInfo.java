@@ -214,11 +214,11 @@ public class IslandInfo {
     public void lock(Player player) {
         WorldGuardHandler.islandLock(player, name);
         config.set("general.locked", true);
-        sendMessageToIslandGroup(player.getName() + " locked the island.");
+        sendMessageToIslandGroup("\u00a7b"+player.getName() + "\u00a7d locked the island.");
         if (hasWarp()) {
             config.set("general.warpActive", false);
             player.sendMessage("\u00a74Since your island is locked, your incoming warp has been deactivated.");
-            sendMessageToIslandGroup(player.getName() + " deactivated the island warp.");
+            sendMessageToIslandGroup("\u00a7b"+player.getName() + "\u00a7d deactivated the island warp.");
         }
         save();
     }
@@ -226,7 +226,7 @@ public class IslandInfo {
     public void unlock(Player player) {
         WorldGuardHandler.islandUnlock(player, name);
         config.set("general.locked", false);
-        sendMessageToIslandGroup(player.getName() + " unlocked the island.");
+        sendMessageToIslandGroup("\u00a7b"+player.getName() + "\u00a7d unlocked the island.");
         save();
     }
 
@@ -288,7 +288,7 @@ public class IslandInfo {
         config.set("party.members." + playername, null);
         config.set("party.currentSize", getPartySize() - 1);
         save();
-        sendMessageToIslandGroup(playername + " has been removed from the island group.");
+        sendMessageToIslandGroup("\u00a7b" +playername + "\u00a7d has been removed from the island group.");
     }
 
     public void setLevel(double score) {
