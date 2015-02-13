@@ -55,7 +55,7 @@ public class InviteCommand extends RequireIslandCommand {
                 return true;
             }
             if (inviteHandler.invite(player, island, otherPlayer)) {
-                island.sendMessageToIslandGroup(player.getDisplayName() + " invited " + otherPlayer.getDisplayName());
+                island.sendMessageToIslandGroup(player.getDisplayName() + "\u00a7d invited " + otherPlayer.getDisplayName());
             }
         }
         return true;

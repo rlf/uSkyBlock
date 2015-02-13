@@ -16,7 +16,7 @@ public class SetWarpCommand extends RequireIslandCommand {
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
         if (island.hasPerm(player, "canChangeWarp")) {
             island.setWarpLocation(player.getLocation());
-            island.sendMessageToIslandGroup(player.getName() + " changed the island warp location.");
+            island.sendMessageToIslandGroup("\u00a7b" +player.getName() + "\u00a7d changed the island warp location.");
         } else {
             player.sendMessage("\u00a7cYou do not have permission to set your island's warp point!");
         }
