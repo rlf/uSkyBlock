@@ -1288,7 +1288,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         playerInfo.setHomeLocation(getChestSpawnLoc(loc).add(0.5, 0.1, 0.5));
         IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), player.getName());
         info.updatePartyNumber(player);
-        playerInfo.resetAllChallenges();
+        if (challengeLogic.isResetOnCreate()) {
+            playerInfo.resetAllChallenges();
+        }
         playerInfo.save();
     }
 

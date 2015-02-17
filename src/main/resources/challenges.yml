@@ -28,6 +28,9 @@ repeatableColor: '§a'
 #[true/false] If true, enables vault to handle currency rewards.
 enableEconomyPlugin: true
 
+# [true/false] If false, challenges are not reset on island creation (or restart)
+resetChallengesOnCreate: true
+
 ranks:
   Easy:
     displayItem: DIRT
@@ -549,4 +552,4 @@ ranks:
         reward:
           items: '410:20 409:64'
 # DO NOT CHANGE!
-version: 4
+version: 5

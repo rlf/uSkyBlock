@@ -465,4 +465,8 @@ public class ChallengeLogic {
             }
         }
     }
+
+    public boolean isResetOnCreate() {
+        return config.getBoolean("resetChallengesOnCreate", true);
+    }
 }
