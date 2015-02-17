@@ -564,10 +564,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public void clearPlayerInventory(Player player) {
         getLogger().entering(CN, "clearPlayerInventory", player);
         if (player.getWorld().getName().equalsIgnoreCase(skyBlockWorld.getName())) {
-            player.getInventory().clear();
-            ItemStack[] armor = player.getEquipment().getArmorContents();
-            player.getEquipment().setArmorContents(new ItemStack[armor.length]);
-            player.getEnderChest().clear();
+            if (getConfig().getBoolean("options.restart.clearInventory", true)) {
+                player.getInventory().clear();
+            }
+            if (getConfig().getBoolean("options.restart.clearArmor", true)) {
+                ItemStack[] armor = player.getEquipment().getArmorContents();
+                player.getEquipment().setArmorContents(new ItemStack[armor.length]);
+            }
+            if (getConfig().getBoolean("options.restart.clearEnderChest", true)) {
+                player.getEnderChest().clear();
+            }
         } else {
             log(Level.SEVERE, "Trying to clear player-inventory of " + player + ", even though they are not in the skyworld!");
         }

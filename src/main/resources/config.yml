@@ -155,7 +155,17 @@ options:
     # [number] The threshold for purging islands.
     # any island with a level above this, is spared.
     purgeLevel: 10
+
+  # Section about restarting your island (or accepting an invite).
+  restart:
+    # Clears the player's inventory on island create/restart
+    clearInventory: true
+    # Clears the player's armor on island create/restart
+    clearArmor: true
+    # Clears the player's enderchest on island create/restart
+    clearEnderChest: true
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 10
+version: 11
 force-replace:
   options.party.invite-timeout: 100
