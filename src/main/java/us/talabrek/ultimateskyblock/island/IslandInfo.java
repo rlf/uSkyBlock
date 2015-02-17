@@ -302,7 +302,7 @@ public class IslandInfo {
     }
 
     public double getLevel() {
-        return config.getDouble("general.level");
+        return getMembers().isEmpty() ? 0 : config.getDouble("general.level");
     }
 
     public void setRegionVersion(int version) {
