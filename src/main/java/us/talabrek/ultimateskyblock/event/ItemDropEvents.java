@@ -41,10 +41,8 @@ public class ItemDropEvents implements Listener {
             return;
         }
         // Take over the drop, since Bukkit don't do this in a Metadatable format.
-        if (!event.getKeepInventory()) {
-            for (ItemStack stack : event.getDrops()) {
-                addDropInfo(player, stack);
-            }
+        for (ItemStack stack : event.getDrops()) {
+            addDropInfo(player, stack);
         }
     }
 
