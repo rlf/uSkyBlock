@@ -1,6 +1,9 @@
 package us.talabrek.ultimateskyblock.island;
 
+import com.sk89q.worldedit.*;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.*;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -9,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -21,6 +25,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.*;
+import java.util.Vector;
 import java.util.logging.Level;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
@@ -430,5 +435,9 @@ public class IslandInfo {
             }
         }
         return false;
+    }
+
+    public boolean contains(Location loc) {
+        return name.equalsIgnoreCase(WorldGuardHandler.getIslandNameAt(loc));
     }
 }
