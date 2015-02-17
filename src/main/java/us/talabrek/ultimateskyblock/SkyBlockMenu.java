@@ -581,7 +581,7 @@ public class SkyBlockMenu {
         lores.clear();
         menuItem = new ItemStack(Material.EMERALD_ORE, 1);
         meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.extremehills", player.getWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.extreme_hills", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Extreme Hills");
             lores.add("\u00a7fThe extreme hills biome.");
             lores.add("\u00a7fPassive mobs will spawn ");
@@ -1049,7 +1049,7 @@ public class SkyBlockMenu {
                 p.openInventory(displayIslandGUI(p));
             } else if (event.getCurrentItem().getType() == Material.EMERALD_ORE) {
                 p.closeInventory();
-                p.performCommand("island biome extremehills");
+                p.performCommand("island biome extreme_hills");
                 p.openInventory(displayIslandGUI(p));
             } else if (event.getCurrentItem().getType() == Material.RAW_FISH) {
                 p.closeInventory();
