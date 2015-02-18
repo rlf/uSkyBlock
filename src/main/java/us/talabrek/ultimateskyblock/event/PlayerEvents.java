@@ -18,6 +18,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.*;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 
 import java.util.*;
@@ -166,6 +167,20 @@ public class PlayerEvents implements Listener {
         }
         if (plugin.isSkyWorld(event.getPlayer().getWorld())) {
             event.setRespawnLocation(plugin.getSkyBlockWorld().getSpawnLocation());
+        }
+    }
+
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent event) {
+        if(!plugin.isSkyWorld(event.getTo().getWorld())) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
+        if(islandInfo != null && islandInfo.isBanned(player.getName())) {
+            event.setCancelled(true);
+            player.sendMessage("\u00a74That player has forbidden you from teleporting to their island.");
         }
     }
 }
