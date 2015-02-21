@@ -77,10 +77,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Stack;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 
@@ -92,6 +95,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             new String[]{"WorldGuard", "5.9"},
     };
     private static String missingRequirements = null;
+    private static final Random RND = new Random(System.currentTimeMillis());
 
     private SkyBlockMenu menu;
     private ChallengeLogic challengeLogic;
@@ -1422,6 +1426,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 .replaceAll("\\{player\\}", player.getName())
                 .replaceAll("\\{playerName\\}", player.getDisplayName())
                 .replaceAll("\\{position\\}", player.getLocation().toString()); // Figure out what this should be
+        Matcher m = Pattern.compile("^\\{p=(?<prob>0?\\.[0-9]+)\\}(.*)$").matcher(command);
+        if (m.matches()) {
+            double p = Double.parseDouble(m.group("prob"));
+            command = m.group(2);
+            if (RND.nextDouble() > p) {
+                return; // Skip the command
+            }
+        }
         if (command.contains("{party}")) {
             PlayerInfo playerInfo = getPlayerInfo(player);
             for (String member : getIslandInfo(playerInfo).getMembers()) {
@@ -1457,6 +1469,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public boolean playerIsInSpawn(Player player) {
         Location pLoc = player.getLocation();
+        if (!isSkyWorld(pLoc.getWorld())) {
+            return false;
+        }
         Location spawnCenter = new Location(skyBlockWorld, 0, pLoc.getBlockY(), 0);
         return spawnCenter.distance(pLoc) <= Settings.general_spawnSize;
     }

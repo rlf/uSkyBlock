@@ -79,8 +79,10 @@ ranks:
         repeatReward:
           # [text] The text name of the reward (to display to the player).
           text: '1 leather'
-          #[itemid list] The itemid:count of the reward to give the player for completing the challenge after the first time.
-          items: '334:1'
+          # [itemid list] The itemid:count of the reward to give the player for completing the challenge after the first time.
+          items:
+          - '334:1'
+          - '{p=0.02}340:1'
           # [integer] How much currency to give when the challenge is repeated (requires an economy plugin)
           currency: 2
           # [integer] How much xp to give to the player for the repeat completions.
@@ -113,7 +115,9 @@ ranks:
           xp: 30
         repeatReward:
           text: '1 dirt'
-          items: '3:1'
+          items:
+          - '3:1'
+          - '{p=0.2}352:1'
           currency: 2
           xp: 5
       cactusfarmer:
@@ -142,7 +146,9 @@ ranks:
           currency: 15
           xp: 30
         repeatReward:
-          items: '82:1'
+          items:
+          - '82:1'
+          - '{p=0.05}3:1'
           text: '1 clay'
           currency: 2
           xp: 3
@@ -433,7 +439,10 @@ ranks:
           currency: 200
           xp: 200
         repeatReward:
-          items: '388:5 266:2'
+          items:
+          - '388:5'
+          - '266:2'
+          - '{p=0.05}264:1'
           text: '5 emeralds, 2 gold ingots'
           currency: 50
           xp: 20
@@ -448,7 +457,10 @@ ranks:
           currency: 200
           xp: 200
         repeatReward:
-          items: '266:2 264:1'
+          items:
+          - '266:2'
+          - '264:1'
+          - '{p=0.2}264:1'
           text: '2 gold ingots, 1 diamond'
           currency: 50
           xp: 20
@@ -552,4 +564,4 @@ ranks:
         reward:
           items: '410:20 409:64'
 # DO NOT CHANGE!
-version: 5
+version: 6
