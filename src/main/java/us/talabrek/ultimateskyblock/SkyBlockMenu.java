@@ -334,7 +334,7 @@ public class SkyBlockMenu {
         lores.clear();
         menuItem = new ItemStack(Material.SAPLING, 1, (short) 1);
         meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.forst", player.getWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.forest", player.getWorld())) {
             meta4.setDisplayName("\u00a7aBiome: Forest");
             lores.add("\u00a7fThe forest biome will allow");
             lores.add("\u00a7fyour island to spawn passive.");
