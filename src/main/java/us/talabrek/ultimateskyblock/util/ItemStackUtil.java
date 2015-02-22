@@ -43,7 +43,7 @@ public enum ItemStackUtil {;
                     short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
                     int amount = Integer.parseInt(m.group("amount"), 10);
                     itemList.add(new ItemStack(id, amount, sub));
-                } else {
+                } else if (!reward.isEmpty()) {
                     throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
                 }
             }
