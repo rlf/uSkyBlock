@@ -334,6 +334,18 @@ ranks:
           text: '1 gold ingot, 1 blaze rod'
           currency: 25
           xp: 15
+      brickleveler:
+        description: 'Place 50 island levels worth of stone brick on your island.'
+        type: onIsland
+        radius: 35
+        requiredItems: '98:0:2500'
+        repeatable: false
+        displayItem: 98
+        reward:
+          items: '98:0:320'
+          text: '320 stone brick'
+          currency: 50
+          xp: 50
       slimefarmer:
         description: 'Collect slimeballs from slimes.'
         type: onPlayer
@@ -363,6 +375,21 @@ ranks:
           items: '15:2 266:1'
           text: '2 iron, 1 gold ingot'
           currency: 30
+          xp: 15
+      technician:
+        description: 'Collect some of every type of redstone equipment.'
+        type: onPlayer
+        requiredItems: '331:128;+16 76:32;+4 356:5;+1 404:3;+1 33:2;+1 29:2;+1 69:1;+1 77:1;+1 70:1;+1 154:1;+1 23:1;+1 158:1;+1 151:1;+1'
+        displayItem: 331
+        reward:
+          items: '152:16 25:8 131:4'
+          text: '16 redstone blocks, 8 noteblocks and 4 tripwire hooks'
+          currency: 75
+          xp: 75
+        repeatReward:
+          items: '152:1 131:1'
+          text: '1 redstone block and 1 tripwire hook'
+          currency: 15
           xp: 15
       explorer:
         description: 'Collect items for exploration, nether items.'
@@ -446,6 +473,21 @@ ranks:
           text: '5 emeralds, 2 gold ingots'
           currency: 50
           xp: 20
+      topchef:
+        description: Collect every kind of edible food.
+        type: onPlayer
+        requiredItems: 393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1
+        displayItem: 391
+        reward:
+          items: 264:2 2257:1 2258:1 2260:1 383:96:1 388:5
+          text: 2 diamond, 3 disk, 1 mooshroom, 5 emerald
+          currency: 200
+          xp: 200
+        repeatReward:
+          items: 266:3 383:96:1 388:5
+          text: 3 gold ingots, 1 mooshroom, 5 emeralds
+          currency: 50
+          xp: 20
       maestro:
         description: 'Make a jukebox and collect all music discs.'
         type: onPlayer
@@ -522,6 +564,62 @@ ranks:
           text: 'Packed ice and snow'
           currency: 4000
           xp: 1000
+      firefighter:
+        description: 'Collect some blaze rods.'
+        type: onPlayer
+        requiredItems: '369:128;+4'
+        displayItem: 369 
+        reward:
+          items: '264:2 49:15'
+          text: '2 diamonds and 15 obsidian'
+          currency: 100
+          xp: 100
+        repeatReward:
+          items: '49:3'
+          text: '3 obsidian'
+          currency: 15
+          xp: 15
+      goldfinger:
+        description: 'Gather some gold bars.'
+        type: onPlayer
+        requiredItems: '266:128'
+        displayItem: 266
+        reward:
+          items: '264:1 383:100:1 329:1 420:1'
+          text: '1 diamond, 1 horse egg, 1 saddle, 1 lead'
+          currency: 250
+          xp: 250
+        repeatReward:
+          items: '388:4'
+          text: '4 emeralds'
+          currency: 50
+          xp: 50
+      torchbearer:
+        description: 'Create and place at least 15,000 torches on your island.'
+        type: onIsland
+        requiredItems: '50:15000'
+        repeatable: false
+        displayItem: 50
+        reward:
+          items: '123:15 73:15'
+          text: '15 redstone lamp and 15 redstone ore'
+          currency: 500
+          xp: 500
+      witherhunter:
+        description: 'Collect some Wither Skeleton skulls.'
+        type: onPlayer
+        requiredItems: '397:1:10;+1'
+        displayItem: '397:1'
+        reward:
+          items: '264:5'
+          text: '5 diamonds'
+          currency: 275 
+          xp: 300
+        repeatReward:
+          items: '266:2'
+          text: '2 gold ingots'
+          currency: 50
+          xp: 75
   Collector:
     displayItem: SKULL_ITEM
     challenges:
@@ -563,5 +661,50 @@ ranks:
         - 'Chicken:16'
         reward:
           items: '410:20 409:64'
+      greenthumb:
+        description: 'Collect some grass.'
+        type: onPlayer
+        requiredItems: '2:64;+4'
+        displayItem: 2
+        reward:
+          items: '48:10 98:1:10'
+          text: '10 mossy cobblestone and 10 mossy stone brick'
+          currency: 125
+          xp: 125
+        repeatReward:
+          items: '48:2 98:1:2'
+          text: '2 mossy cobblestone and 2 mossy stone brick'
+          currency: 25
+          xp: 25
+      seacaptain:
+        description: 'Catch a plethora of pufferfish.'
+        type: onPlayer
+        requiredItems: '349:3:25;+1'
+        displayItem: 349
+        reward:
+          items: '264:1 373:8269:15'
+          text: '1 diamond and 15 extended water-breathing potions'
+          currency: 50
+          xp: 50
+        repeatReward:
+          items: '373:8269:1'
+          text: '1 extended water-breathing potion'
+          currency: 10
+          xp: 10
+      ironforge:
+        description: 'Gather a load of iron bars.'
+        type: onPlayer
+        requiredItems: '265:256'
+        displayItem: 265
+        reward:
+          items: '264:1 312:1'
+          text: '1 diamond and a pair of diamond leggings'
+          currency: 300
+          xp: 300
+        repeatReward:
+          items: '388:4'
+          text: '4 emeralds'
+          currency: 50
+          xp: 50
 # DO NOT CHANGE!
 version: 6
