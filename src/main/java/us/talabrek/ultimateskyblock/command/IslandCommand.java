@@ -44,6 +44,7 @@ public class IslandCommand extends AbstractCommandExecutor {
         }
         add(new BiomeCommand(plugin, menu));
         add(new LevelCommand(plugin));
+        add(new InfoCommand(plugin));
         add(new InviteCommand(plugin, inviteHandler));
         add(new AcceptRejectCommand(inviteHandler));
         add(new LeaveCommand(plugin));

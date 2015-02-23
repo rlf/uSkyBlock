@@ -11,7 +11,7 @@ commands:
         description: Commands to use your island
         aliases: [is, skyblock, sb]
         usage:  |
-             /island [restart/sethome/info/lock/unlock/top/party]
+             /island [restart/sethome/info/level/lock/unlock/top/party]
     usb:
         description: admin commands
         aliases: [dev]
@@ -30,6 +30,8 @@ permissions:
           usb.island.create:
             description: Let the player use the /island command
           usb.island.info:
+            description: Let the player check their island info(level make-up)
+          usb.island.level:
             description: Let the player check their island level
           usb.island.topten:
             description: Let the player see the top ten list
