@@ -45,6 +45,12 @@ public class PlayerInfo implements Serializable {
         this.hasIsland = false;
         this.setIslandLocation(null);
         this.homeLocation = null;
+        if (uuid != null) {
+            Player player = Bukkit.getPlayer(uuid);
+            if (player != null && player.isOnline()) {
+                uSkyBlock.getInstance().spawnTeleport(player);
+            }
+        }
     }
 
     public boolean getHasIsland() {
