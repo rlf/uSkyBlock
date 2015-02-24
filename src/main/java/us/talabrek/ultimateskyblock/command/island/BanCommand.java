@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class BanCommand extends RequireIslandCommand {
     public BanCommand(uSkyBlock plugin) {
-        super(plugin, "ban|banned|balist|b", "usb.island.ban", "ban/unban a player from your island.");
+        super(plugin, "ban|banned|balist|b", "usb.island.ban", "player", "ban/unban a player from your island.");
     }
 
     @Override

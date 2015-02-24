@@ -17,7 +17,7 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
     public MakeLeaderCommand(uSkyBlock plugin) {
-        super("makeleader|transfer", "usb.admin.island", "island oplayer", "transfer leadership to another player");
+        super("makeleader|transfer", "usb.admin.makeleader", "leader oplayer", "transfer leadership to another player");
         this.plugin = plugin;
     }
 

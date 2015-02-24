@@ -20,6 +20,7 @@ import us.talabrek.ultimateskyblock.*;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 import java.util.*;
 
@@ -42,8 +43,12 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerJoin(final PlayerJoinEvent event) {
-        if (plugin.isSkyWorld(event.getPlayer().getWorld())) {
-            plugin.loadPlayerData(event.getPlayer());
+        Player player = event.getPlayer();
+        if (plugin.isSkyWorld(player.getWorld())) {
+            PlayerInfo playerInfo = plugin.loadPlayerData(player);
+            if (playerInfo != null && !playerInfo.getHasIsland() && player.isFlying()) {
+                uSkyBlock.getInstance().spawnTeleport(player);
+            }
         }
     }
 
@@ -172,13 +177,12 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent event) {
-        if(!plugin.isSkyWorld(event.getTo().getWorld())) {
+        if (!plugin.isSkyWorld(event.getTo().getWorld())) {
             return;
         }
-
         Player player = event.getPlayer();
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
-        if(islandInfo != null && islandInfo.isBanned(player.getName())) {
+        if (islandInfo != null && islandInfo.isBanned(player.getName())) {
             event.setCancelled(true);
             player.sendMessage("\u00a74That player has forbidden you from teleporting to their island.");
         }

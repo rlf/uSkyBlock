@@ -95,8 +95,6 @@ permissions:
             description: Let a player try to add protection to all unprotected islands
           usb.mod.topten:
             description: Let a player manually update the top ten list
-          usb.mod.orphan:
-            description: Let a player check and modify the orphan list
           usb.mod.goto:
             description: Let a player teleport to another player's island
           usb.mod.party:
@@ -127,3 +125,5 @@ permissions:
             description: Let a player import other-formats (players, islands, orphans).
           usb.admin.topten:
             description: Let a player force top-ten regeneration.
+          usb.admin.orphan:
+            description: Let a player check and modify the orphan list

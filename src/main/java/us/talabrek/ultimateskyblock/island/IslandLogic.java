@@ -54,6 +54,9 @@ public class IslandLogic {
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
+        if (islandName == null || islandName.isEmpty()) {
+            return null;
+        }
         if (!islands.containsKey(islandName)) {
             islands.put(islandName, new IslandInfo(islandName));
         }

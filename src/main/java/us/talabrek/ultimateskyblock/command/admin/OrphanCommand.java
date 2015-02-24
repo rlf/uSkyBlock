@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class OrphanCommand extends CompositeUSBCommand {
     public OrphanCommand() {
-        super("orphan", "usb.mod.orphan", "manage orphans");
+        super("orphan", "usb.admin.orphan", "manage orphans");
         add(new AbstractUSBCommand("count", "count orphans") {
                 @Override
                 public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {

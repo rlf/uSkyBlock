@@ -29,7 +29,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 protectIsland(sender, islandInfo);
             }
         });
-        add(new AbstractUSBCommand("delete", "usb.admin.delete", "?island", "delete the island (removes the blocks)") {
+        add(new AbstractUSBCommand("delete", "usb.admin.delete", "?leader", "delete the island (removes the blocks)") {
             @Override
             public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
@@ -70,14 +70,14 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 sender.sendMessage(islandInfo.toString());
             }
         });
-        add(new AbstractUSBCommand("protectall", "usb.mod.protectall", "protects all islands (time consuming)") {
+        add(new AbstractUSBCommand("protectall", "usb.admin.protectall", "protects all islands (time consuming)") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 protectAll(plugin, sender);
                 return true;
             }
         });
-        add(new AbstractUSBCommand("setbiome", "usb.mod.biome", "?island biome", "sets the biome of the island") {
+        add(new AbstractUSBCommand("setbiome", "usb.admin.setbiome", "?leader biome", "sets the biome of the island") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 2) {
