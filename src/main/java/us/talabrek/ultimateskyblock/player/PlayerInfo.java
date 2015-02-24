@@ -16,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.*;
 import java.io.*;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class PlayerInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     private String playerName;
@@ -215,7 +217,7 @@ public class PlayerInfo implements Serializable {
                 challenges.put(currentChallenge, new ChallengeCompletion(currentChallenge, playerConfig.getLong("player.challenges." + currentChallenge + ".firstCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
             }
             if (Bukkit.getPlayer(playerName) != null && playerConfig.getBoolean("player.kickWarning")) {
-                Bukkit.getPlayer(playerName).sendMessage("\u00a7cYou were removed from your island since the last time you played!");
+                Bukkit.getPlayer(playerName).sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
                 playerConfig.set("player.kickWarning", false);
             }
             return this;

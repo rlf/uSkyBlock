@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Registers an island to a player.
  */
@@ -26,9 +28,9 @@ public class RegisterIslandToPlayerCommand extends AbstractUSBCommand {
         String playerName = args[0];
         Player player = (Player) sender;
         if (uSkyBlock.getInstance().devSetPlayerIsland(player, player.getLocation(), playerName)) {
-            sender.sendMessage(ChatColor.GREEN + "Set " + playerName + "'s island to the bedrock nearest you.");
+            sender.sendMessage(tr("\u00a7aSet {0}'s island to the bedrock nearest you.", playerName));
         } else {
-            sender.sendMessage("\u00a74Bedrock not found: unable to set the island!");
+            sender.sendMessage(tr("\u00a74Bedrock not found: unable to set the island!"));
         }
         return true;
     }

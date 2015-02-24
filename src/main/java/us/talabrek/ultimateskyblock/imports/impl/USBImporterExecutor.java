@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Delegates and batches the import.
  */
@@ -67,7 +69,7 @@ public class USBImporterExecutor {
         }
         final USBImporter importer = getImporter(name);
         if (importer == null) {
-            sender.sendMessage("\u00a74No importer named \u00a7e" + name + "\u00a74 found");
+            sender.sendMessage(tr("\u00a74No importer named \u00a7e{0}\u00a74 found", name));
             return;
         }
         Bukkit.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
@@ -117,7 +119,7 @@ public class USBImporterExecutor {
                     doImport(sender, importer, files, offset + chunkSize, chunkSize, delay);
                 } else {
                     importer.completed(plugin, countSuccess, countFailed);
-                    sender.sendMessage("\u00a7eConverted " + countSuccess + "/" + (countSuccess + countFailed) + " players");
+                    sender.sendMessage(tr("\u00a7eConverted " + countSuccess + "/" + (countSuccess + countFailed) + " players"));
                 }
             }
         }, delay);

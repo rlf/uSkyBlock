@@ -9,6 +9,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class WarpCommand extends RequirePlayerCommand {
 
     private final uSkyBlock plugin;
@@ -24,40 +26,40 @@ public class WarpCommand extends RequirePlayerCommand {
             IslandInfo island = plugin.getIslandInfo(player);
             if (island != null && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", player.getWorld())) {
                 if (island.hasWarp()) {
-                    player.sendMessage(ChatColor.GREEN + "Your incoming warp is active, players may warp to your island.");
+                    player.sendMessage(tr("\u00a7aYour incoming warp is active, players may warp to your island."));
                 } else {
-                    player.sendMessage("\u00a74Your incoming warp is inactive, players may not warp to your island.");
+                    player.sendMessage(tr("\u00a74Your incoming warp is inactive, players may not warp to your island."));
                 }
-                player.sendMessage("\u00a7fSet incoming warp to your current location using \u00a7e/island setwarp");
-                player.sendMessage("\u00a7fToggle your warp on/off using \u00a7e/island togglewarp");
+                player.sendMessage(tr("\u00a7fSet incoming warp to your current location using \u00a7e/island setwarp"));
+                player.sendMessage(tr("\u00a7fToggle your warp on/off using \u00a7e/island togglewarp"));
             } else {
-                player.sendMessage("\u00a74You do not have permission to create a warp on your island!");
+                player.sendMessage(tr("\u00a74You do not have permission to create a warp on your island!"));
             }
             if (VaultHandler.checkPerk(player.getName(), "usb.island.warp", player.getWorld())) {
-                player.sendMessage("\u00a7fWarp to another island using \u00a7e/island warp <player>");
+                player.sendMessage(tr("\u00a7fWarp to another island using \u00a7e/island warp <player>"));
             } else {
-                player.sendMessage("\u00a74You do not have permission to warp to other islands!");
+                player.sendMessage(tr("\u00a74You do not have permission to warp to other islands!"));
             }
             return true;
         } else if (args.length == 1) {
             if (VaultHandler.checkPerk(player.getName(), "usb.island.warp", player.getWorld())) {
                 PlayerInfo playerInfo = plugin.getPlayerInfo(args[0]);
                 if (playerInfo == null || !playerInfo.getHasIsland()) {
-                    player.sendMessage("\u00a74That player does not exist!");
+                    player.sendMessage(tr("\u00a74That player does not exist!"));
                     return true;
                 }
                 IslandInfo island = plugin.getIslandInfo(playerInfo);
                 if (!island.hasWarp()) {
-                    player.sendMessage("\u00a74That player does not have an active warp.");
+                    player.sendMessage(tr("\u00a74That player does not have an active warp."));
                     return true;
                 }
                 if (!island.isBanned(player)) {
                     plugin.warpTeleport(player, playerInfo);
                 } else {
-                    player.sendMessage("\u00a74That player has forbidden you from warping to their island.");
+                    player.sendMessage(tr("\u00a74That player has forbidden you from warping to their island."));
                 }
             } else {
-                player.sendMessage("\u00a74You do not have permission to warp to other islands!");
+                player.sendMessage(tr("\u00a74You do not have permission to warp to other islands!"));
             }
             return true;
         }

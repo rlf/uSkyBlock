@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Handles Orphans.
  */
@@ -17,14 +19,14 @@ public class OrphanCommand extends CompositeUSBCommand {
         add(new AbstractUSBCommand("count", "count orphans") {
                 @Override
                 public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                    sender.sendMessage("\u00a7e" + uSkyBlock.getInstance().orphanCount() + " old island locations will be used before new ones.");
+                    sender.sendMessage(tr("\u00a7e{0} old island locations will be used before new ones.", uSkyBlock.getInstance().orphanCount()));
                     return true;
                 }
             });
         add(new AbstractUSBCommand("clear", "clear orphans") {
                 @Override
                 public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                    sender.sendMessage("\u00a7eClearing all old (empty) island locations.");
+                    sender.sendMessage(tr("\u00a7eClearing all old (empty) island locations."));
                     uSkyBlock.getInstance().clearOrphanedIsland();
                     return true;
                 }
@@ -32,7 +34,7 @@ public class OrphanCommand extends CompositeUSBCommand {
         add(new AbstractUSBCommand("save", "save orphans") {
                 @Override
                 public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                    sender.sendMessage("\u00a7eSaving the orphan list.");
+                    sender.sendMessage(tr("\u00a7eSaving the orphan list."));
                     uSkyBlock.getInstance().saveOrphans();
                     return true;
                 }
@@ -42,7 +44,7 @@ public class OrphanCommand extends CompositeUSBCommand {
                 public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                     FileConfiguration config = uSkyBlock.getInstance().getOrphans();
                     String list = config.getString("orphans.list", "");
-                    sender.sendMessage("\u00a7eOrphans: " + list);
+                    sender.sendMessage(tr("\u00a7eOrphans: {0}", list));
                     return true;
                 }
             });

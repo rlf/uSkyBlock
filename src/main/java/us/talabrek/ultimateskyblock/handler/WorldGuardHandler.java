@@ -31,6 +31,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
@@ -168,10 +170,10 @@ public class WorldGuardHandler {
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
-                sender.sendMessage("\u00a7eYour island is now locked. Only your party members may enter.");
+                sender.sendMessage(tr("\u00a7eYour island is now locked. Only your party members may enter."));
                 save(regionManager);
             } else {
-                sender.sendMessage("\u00a74You must be the party leader to lock your island!");
+                sender.sendMessage(tr("\u00a74You must be the party leader to lock your island!"));
             }
         } catch (Exception ex) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to lock " + islandName + "'s Island (" + sender.getName() + ")", ex);
@@ -202,10 +204,10 @@ public class WorldGuardHandler {
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
-                sender.sendMessage("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks.");
+                sender.sendMessage(tr("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks."));
                 save(regionManager);
             } else {
-                sender.sendMessage("\u00a74You must be the party leader to unlock your island!");
+                sender.sendMessage(tr("\u00a74You must be the party leader to unlock your island!"));
             }
         } catch (Exception ex) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to unlock " + islandName + "'s Island (" + sender.getName() + ")", ex);

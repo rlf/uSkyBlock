@@ -12,6 +12,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.*;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class PartyCommand extends CompositeUSBCommand {
     private final uSkyBlock plugin;
     private final SkyBlockMenu menu;
@@ -33,7 +35,7 @@ public class PartyCommand extends CompositeUSBCommand {
                 IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
                 Set<UUID> pendingInvites = inviteHandler.getPendingInvites(islandInfo);
                 if (pendingInvites == null || pendingInvites.isEmpty()) {
-                    sender.sendMessage("\u00a7eNo pending invites");
+                    sender.sendMessage(tr("\u00a7eNo pending invites"));
                 } else {
                     List<String> invites = new ArrayList<>();
                     for (UUID uuid : pendingInvites) {
@@ -50,7 +52,7 @@ public class PartyCommand extends CompositeUSBCommand {
                 if (args.length == 1) {
                     IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
                     if (!islandInfo.isLeader(sender.getName()) || !islandInfo.hasPerm(sender.getName(), "canInviteOthers")) {
-                        sender.sendMessage("\u00a74You don't have permissions to unvite players.");
+                        sender.sendMessage(tr("\u00a74You don't have permissions to unvite players."));
                         return true;
                     }
                     String playerName = args[0];
@@ -69,13 +71,13 @@ public class PartyCommand extends CompositeUSBCommand {
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("\u00a74This command can only be executed by a player");
+            sender.sendMessage(tr("\u00a74This command can only be executed by a player"));
             return false;
         }
         Player player = (Player) sender;
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         if (playerInfo == null || !playerInfo.getHasIsland()) {
-            player.sendMessage("\u00a74No Island. \u00a7eUse \u00a7b/is create\u00a7e to get one");
+            player.sendMessage(tr("\u00a74No Island. \u00a7eUse \u00a7b/is create\u00a7e to get one"));
             return true;
         }
         if (args.length == 0) {

@@ -6,6 +6,8 @@ import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Common command for all those that require a Player as CommandSender.
  */
@@ -24,7 +26,7 @@ public abstract class RequirePlayerCommand extends AbstractUSBCommand {
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("\u00a74This command can only be executed by a player");
+            sender.sendMessage(tr("\u00a74This command can only be executed by a player"));
             return false;
         }
         Player player = (Player) sender;

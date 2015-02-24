@@ -31,6 +31,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
+import org.xnap.commons.i18n.I18n;
+import org.xnap.commons.i18n.I18nFactory;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
@@ -86,8 +88,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
+
+
     private static final String CN = uSkyBlock.class.getName();
     private static final String[][] depends = new String[][]{
             new String[]{"Vault", "1.4"},
@@ -161,7 +166,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
             skyBlockWorld = null; // Force a reload on config.
         } catch (Exception e) {
-            log(Level.INFO, "Something went wrong saving the island and/or party data!", e);
+            log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
         DebugCommand.disableLogging(null);
     }
@@ -630,7 +635,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         if (newLoc != null) {
             if (newLoc.equals(pi.getIslandLocation())) {
-                sender.sendMessage("\u00a74Player is already assigned to this island!");
+                sender.sendMessage(tr("\u00a74Player is already assigned to this island!"));
                 deleteOldIsland = false;
             }
             Runnable resetIsland = new Runnable() {
@@ -742,12 +747,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
             if (homeSweetHome == null) {
                 player.performCommand("spawn");
-                player.sendMessage("\u00a74You are not part of an island. Returning you the spawn area!");
+                player.sendMessage(tr("\u00a74You are not part of an island. Returning you the spawn area!"));
                 return true;
             }
             removeCreatures(homeSweetHome);
             safeTeleport(player, homeSweetHome);
-            player.sendMessage(ChatColor.GREEN + "Teleporting you to your island.");
+            player.sendMessage(tr("\u00a7aTeleporting you to your island."));
             return true;
         } finally {
             getLogger().exiting(CN, "homeTeleport");
@@ -763,16 +768,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public boolean warpTeleport(final Player player, final PlayerInfo pi) {
         Location warpSweetWarp = null;
         if (pi == null) {
-            player.sendMessage("\u00a74That player does not exist!");
+            player.sendMessage(tr("\u00a74That player does not exist!"));
             return true;
         }
         warpSweetWarp = getSafeWarpLocation(pi);
         if (warpSweetWarp == null) {
-            player.sendMessage("\u00a74Unable to warp you to that player's island!");
+            player.sendMessage(tr("\u00a74Unable to warp you to that player's island!"));
             return true;
         }
         safeTeleport(player, warpSweetWarp);
-        player.sendMessage(ChatColor.GREEN + "Teleporting you to " + pi.getPlayerName() + "'s island.");
+        player.sendMessage(tr("\u00a7aTeleporting you to " + pi.getPlayerName() + "'s island."));
         return true;
     }
 
@@ -788,17 +793,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public boolean homeSet(final Player player) {
         if (!player.getWorld().getName().equalsIgnoreCase(getSkyBlockWorld().getName())) {
-            player.sendMessage("\u00a74You must be closer to your island to set your skyblock home!");
+            player.sendMessage(tr("\u00a74You must be closer to your island to set your skyblock home!"));
             return true;
         }
         if (this.playerIsOnIsland(player)) {
             if (this.getActivePlayers().containsKey(player.getName())) {
                 this.getActivePlayers().get(player.getName()).setHomeLocation(player.getLocation());
             }
-            player.sendMessage(ChatColor.GREEN + "Your skyblock home has been set to your current location.");
+            player.sendMessage(tr("\u00a7aYour skyblock home has been set to your current location."));
             return true;
         }
-        player.sendMessage("\u00a74You must be closer to your island to set your skyblock home!");
+        player.sendMessage(tr("\u00a74You must be closer to your island to set your skyblock home!"));
         return true;
     }
 
@@ -1144,7 +1149,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
             } catch (Exception ex) {
-                player.sendMessage("Could not create your Island. Please contact a server moderator.");
+                player.sendMessage(tr("Could not create your Island. Please contact a server moderator."));
                 log(Level.SEVERE, "Error creating island", ex);
                 return false;
             }
@@ -1157,7 +1162,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     private void protectWithWorldGuard(CommandSender sender, Player player, PlayerInfo pi) {
         if (!WorldGuardHandler.protectIsland(player, pi)) {
-            sender.sendMessage("Player doesn't have an island or it's already protected!");
+            sender.sendMessage(tr("Player doesn't have an island or it's already protected!"));
         }
     }
 

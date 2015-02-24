@@ -9,6 +9,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Command that lookup island info given the player name.
  */
@@ -37,7 +39,7 @@ public abstract class AbstractIslandInfoCommand extends AbstractPlayerInfoComman
                     doExecute(sender, playerInfo, islandInfo, subArgs);
                     return true;
                 } else {
-                    sender.sendMessage("\u00a7ePlayer " + playerInfo.getPlayerName() + " has no island!");
+                    sender.sendMessage(tr("\u00a7ePlayer {0} has no island!", playerInfo.getPlayerName()));
                 }
             }
         } else if (sender instanceof Player && WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation()) != null) {

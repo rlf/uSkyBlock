@@ -29,6 +29,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * Data object for an island
@@ -222,8 +223,8 @@ public class IslandInfo {
         sendMessageToIslandGroup("\u00a7b"+player.getName() + "\u00a7d locked the island.");
         if (hasWarp()) {
             config.set("general.warpActive", false);
-            player.sendMessage("\u00a74Since your island is locked, your incoming warp has been deactivated.");
-            sendMessageToIslandGroup("\u00a7b"+player.getName() + "\u00a7d deactivated the island warp.");
+            player.sendMessage(tr("\u00a74Since your island is locked, your incoming warp has been deactivated."));
+            sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d deactivated the island warp.", player.getName()));
         }
         save();
     }
