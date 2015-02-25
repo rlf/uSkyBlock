@@ -306,7 +306,7 @@
                         <id>generate-po-class</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>gettext</goal>
+                            <goal>merge</goal>
                         </goals>
                     </execution>
                     <execution>
