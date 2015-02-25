@@ -20,8 +20,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 /**
  * The home of challenge business logic.
  */
@@ -89,38 +87,38 @@ public class ChallengeLogic {
         Challenge challenge = getChallenge(challengeName);
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (!challenge.getRank().isAvailable(pi)) {
-            player.sendMessage(tr("\u00a74The " + challengeName + " challenge is not repeatable!"));
+            player.sendMessage("\u00a74You have not unlocked this challenge yet!");
             return false;
         }
         if (!pi.challengeExists(challengeName)) {
-            player.sendMessage(tr("\u00a74The " + challengeName + " challenge is not repeatable!"));
+            player.sendMessage("\u00a74Unknown challenge name (check spelling)!");
             return false;
         }
         if (completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
-            player.sendMessage(tr("\u00a74The " + challengeName + " challenge is not repeatable!"));
+            player.sendMessage("\u00a74The " + challengeName + " challenge is not repeatable!");
             return false;
         }
         if (challenge.getType() == Challenge.Type.PLAYER) {
             if (!tryComplete(player, challengeName, "onPlayer")) {
                 player.sendMessage("\u00a74" + challenge.getDescription());
-                player.sendMessage(tr("\u00a74You don't have enough of the required item(s)!"));
+                player.sendMessage("\u00a74You don't have enough of the required item(s)!");
                 return false;
             }
             return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND) {
             if (!skyBlock.playerIsOnIsland(player)) {
-                player.sendMessage(tr("\u00a74You must be on your island to do that!"));
+                player.sendMessage("\u00a74You must be on your island to do that!");
                 return false;
             }
             if (!tryComplete(player, challengeName, "onIsland")) {
                 player.sendMessage("\u00a74" + challenge.getDescription());
-                player.sendMessage(tr("\u00a74You must be standing within " + challenge.getRadius() + " blocks of all required items."));
+                player.sendMessage("\u00a74You must be standing within " + challenge.getRadius() + " blocks of all required items.");
                 return false;
             }
             return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND_LEVEL) {
             if (!tryCompleteIslandLevel(player, challenge)) {
-                player.sendMessage(tr("\u00a74Your island must be level " + challenge.getRequiredLevel() + " to complete this challenge!"));
+                player.sendMessage("\u00a74Your island must be level " + challenge.getRequiredLevel() + " to complete this challenge!");
             }
             return true;
         }
@@ -307,7 +305,7 @@ public class ChallengeLogic {
     private boolean giveReward(Player player, Challenge challenge) {
         String challengeName = challenge.getName();
         World skyWorld = skyBlock.getWorld();
-        player.sendMessage(tr("\u00a7aYou have completed the " + challengeName + " challenge!"));
+        player.sendMessage(ChatColor.GREEN + "You have completed the " + challengeName + " challenge!");
         PlayerInfo playerInfo = skyBlock.getPlayerInfo(player);
         Reward reward;
         boolean isFirstCompletion = playerInfo.checkChallenge(challengeName) == 0;
@@ -364,7 +362,7 @@ public class ChallengeLogic {
             player.getWorld().dropItem(player.getLocation(), item);
         }
         if (!leftOvers.isEmpty()) {
-            player.sendMessage(tr("\u00a7eYour inventory is \u00a74full\u00a7e. Items dropped on the ground."));
+            player.sendMessage("\u00a7eYour inventory is \u00a74full\u00a7e. Items dropped on the ground.");
         }
         playerInfo.completeChallenge(challengeName);
         return true;

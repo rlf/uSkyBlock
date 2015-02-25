@@ -7,8 +7,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 /**
  * Command that has <code>player</code> as first argument, and uses playerInfo.
  */
@@ -27,7 +25,7 @@ public abstract class AbstractPlayerInfoCommand extends AbstractUSBCommand {
                 doExecute(sender, playerInfo);
                 return true;
             }
-            sender.sendMessage(tr("\u00a7eInvalid player {0} supplied.", args[0]));
+            sender.sendMessage("\u00a7eInvalid player " + args[0] + " supplied.");
         }
         return false;
     }

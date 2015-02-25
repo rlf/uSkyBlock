@@ -6,8 +6,6 @@ import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 /**
  * Teleports to the player's island.
  */
@@ -22,19 +20,19 @@ public class GotoIslandCommand extends AbstractPlayerInfoCommand {
     @Override
     protected void doExecute(CommandSender sender, PlayerInfo playerInfo) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(tr("\u00a74Only supported for players"));
+            sender.sendMessage("\u00a74Only supported for players");
         }
         Player player = (Player) sender;
         if (playerInfo.getHomeLocation() != null) {
-            sender.sendMessage(tr("\u00a7aTeleporting to {0}'s island.", playerInfo.getPlayerName()));
+            sender.sendMessage(ChatColor.GREEN + "Teleporting to " + playerInfo.getPlayerName() + "'s island.");
             player.teleport(playerInfo.getHomeLocation());
             return;
         }
         if (playerInfo.getIslandLocation() != null) {
-            sender.sendMessage(tr("\u00a7aTeleporting to {0}'s island.", playerInfo.getPlayerName()));
+            sender.sendMessage(ChatColor.GREEN + "Teleporting to " + playerInfo.getPlayerName() + "'s island.");
             player.teleport(playerInfo.getIslandLocation());
             return;
         }
-        sender.sendMessage(tr("\u00a74That player does not have an island!"));
+        sender.sendMessage("\u00a74That player does not have an island!");
     }
 }

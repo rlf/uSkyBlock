@@ -20,7 +20,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -107,7 +106,7 @@ public enum FileUtil {;
             YamlConfiguration config = new YamlConfiguration();
             try {
                 // read from datafolder!
-                File configFile = getConfigFile(configName);
+                File configFile = new File(getDataFolder(), configName);
                 // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
                 YamlConfiguration configJar = new YamlConfiguration();
                 readConfig(config, configFile);
@@ -139,15 +138,6 @@ public enum FileUtil {;
             configFiles.put(configName, config);
         }
         return configFiles.get(configName);
-    }
-
-    private static File getConfigFile(String configName) {
-        String baseName = getBasename(configName);
-        File file = new File(getDataFolder(), baseName + "_" + Locale.getDefault().getLanguage() + configName.substring(baseName.length()));
-        if (file.exists()) {
-            return file;
-        }
-        return new File(getDataFolder(), configName);
     }
 
     private static boolean isPrimaryConfig(String configName) {

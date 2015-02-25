@@ -12,8 +12,6 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 /**
  * Tries to clear an area of flatland.
  */
@@ -41,7 +39,7 @@ public class FlatlandFixCommand extends AbstractUSBCommand {
             }
         }
         if (islandLocation == null || !tryFlatlandFix(sender, islandLocation)) {
-            sender.sendMessage(tr("\u00a74No valid island found"));
+            sender.sendMessage("\u00a74No valid island found");
         }
         return true;
     }
@@ -49,7 +47,7 @@ public class FlatlandFixCommand extends AbstractUSBCommand {
     private boolean tryFlatlandFix(CommandSender sender, Location islandLocation) {
         // TODO: 29/12/2014 - R4zorax: Load chunks first?
         if (!plugin.getIslandLogic().clearFlatland(sender, islandLocation, 0)) {
-            sender.sendMessage(tr("\u00a74No flatland detected at {0}'s island!", LocationUtil.asString(islandLocation)));
+            sender.sendMessage("\u00a74No flatland detected at " + LocationUtil.asString(islandLocation) + "'s island!");
         }
         return true;
     }

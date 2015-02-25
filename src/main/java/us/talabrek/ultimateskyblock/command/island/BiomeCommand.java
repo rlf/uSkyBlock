@@ -10,8 +10,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 public class BiomeCommand extends RequireIslandCommand {
     private final SkyBlockMenu menu;
 
@@ -24,7 +22,7 @@ public class BiomeCommand extends RequireIslandCommand {
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
         if (args.length == 0) {
             if (!island.hasPerm(player, "canChangeBiome")) {
-                player.sendMessage(tr("\u00a7cYou do not have permission to change the biome of your current island."));
+                player.sendMessage("\u00a7cYou do not have permission to change the biome of your current island.");
             } else {
                 player.openInventory(menu.displayBiomeGUI(player)); // Weird, that we show the UI
             }
@@ -33,25 +31,25 @@ public class BiomeCommand extends RequireIslandCommand {
             String biome = args[0];
             if (island.hasPerm(player, "canChangeBiome")) {
                 if (plugin.onBiomeCooldown(player) && Settings.general_biomeChange != 0) {
-                    player.sendMessage(tr("\u00a7eYou can change your biome again in {0,number,#} minutes.", plugin.getBiomeCooldownTime(player) / 1000L / 60L));
+                    player.sendMessage("\u00a7eYou can change your biome again in " + plugin.getBiomeCooldownTime(player) / 1000L / 60L + " minutes.");
                     return true;
                 }
                 if (plugin.playerIsOnIsland(player)) {
                     if (plugin.changePlayerBiome(player, biome)) {
-                        player.sendMessage(tr("\u00a7aYou have changed your island's biome to {0}", biome.toUpperCase()));
-                        player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
-                        island.sendMessageToIslandGroup(tr("{0} changed the island biome to {1}", player.getName(), biome.toUpperCase()));
+                        player.sendMessage(ChatColor.GREEN + "You have changed your island's biome to " + biome.toUpperCase());
+                        player.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");
+                        island.sendMessageToIslandGroup(player.getName() + " changed the island biome to " + biome.toUpperCase());
                         plugin.setBiomeCooldown(player);
                     } else {
-                        player.sendMessage(tr("\u00a7aUnknown biome name, changing your biome to OCEAN"));
-                        player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
-                        island.sendMessageToIslandGroup(tr("{0} changed the island biome to OCEAN", player.getName()));
+                        player.sendMessage(ChatColor.GREEN + "Unknown biome name, changing your biome to OCEAN");
+                        player.sendMessage(ChatColor.GREEN + "You may need to go to spawn, or relog, to see the changes.");
+                        island.sendMessageToIslandGroup(player.getName() + " changed the island biome to OCEAN");
                     }
                 } else {
-                    player.sendMessage(tr("\u00a7eYou must be on your island to change the biome!"));
+                    player.sendMessage("\u00a7eYou must be on your island to change the biome!");
                 }
             } else {
-                player.sendMessage(tr("\u00a74You do not have permission to change the biome of this island!"));
+                player.sendMessage("\u00a74You do not have permission to change the biome of this island!");
             }
         }
         return true;

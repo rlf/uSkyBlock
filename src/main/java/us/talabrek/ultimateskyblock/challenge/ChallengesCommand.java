@@ -14,8 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 public class ChallengesCommand implements CommandExecutor, TabCompleter {
     private final uSkyBlock plugin;
 
@@ -31,21 +29,21 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             return false;
         }
         if (!plugin.getChallengeLogic().isEnabled()) {
-            sender.sendMessage(tr("\u00a7eChallenges has been disabled. Contact an administrator."));
+            sender.sendMessage("\u00a7eChallenges has been disabled. Contact an administrator.");
             return false;
         }
         final Player player = (Player)sender;
         if (!VaultHandler.checkPerk(player.getName(), "usb.island.challenges", player.getWorld())) {
-            player.sendMessage(tr("\u00a74You don't have access to this command!"));
+            player.sendMessage("\u00a74You don't have access to this command!");
             return true;
         }
         if (!player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
-            player.sendMessage(tr("\u00a74You can only submit challenges in the skyblock world!"));
+            player.sendMessage("\u00a74You can only submit challenges in the skyblock world!");
             return true;
         }
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         if (!playerInfo.getHasIsland()) {
-            player.sendMessage(tr("\u00a74You can only submit challenges when you have an island!"));
+            player.sendMessage("\u00a74You can only submit challenges when you have an island!");
             return true;
         }
         ChallengeLogic challengeLogic = plugin.getChallengeLogic();
@@ -55,26 +53,26 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             String arg = split[0].toLowerCase();
             Challenge challenge = challengeLogic.getChallenge(arg);
             if (arg.equals("help") || arg.equals("complete") || arg.equals("c")) {
-                player.sendMessage(tr("\u00a7eUse /c <name> to view information about a challenge."));
-                player.sendMessage(tr("\u00a7eUse /c complete <name> to attempt to complete that challenge."));
-                player.sendMessage(tr("\u00a7eChallenges will have different colors depending on if they are:"));
+                player.sendMessage("\u00a7eUse /c <name> to view information about a challenge.");
+                player.sendMessage("\u00a7eUse /c complete <name> to attempt to complete that challenge.");
+                player.sendMessage("\u00a7eChallenges will have different colors depending on if they are:");
                 player.sendMessage(challengeLogic.defaults.challengeColor + "Incomplete " + challengeLogic.defaults.finishedColor + "Completed (not repeatable) " + challengeLogic.defaults.repeatableColor + "Completed(repeatable) ");
             } else if (challenge != null && challenge.getRank().isAvailable(playerInfo)) {
                 player.sendMessage("\u00a7eChallenge Name: " + ChatColor.WHITE + arg.toLowerCase());
                 player.sendMessage("\u00a7e" + challenge.getDescription());
                 if (challenge.getType() == Challenge.Type.PLAYER) {
                     if (challenge.isTakeItems()) {
-                        player.sendMessage(tr("\u00a74You will lose all required items when you complete this challenge!"));
+                        player.sendMessage("\u00a74You will lose all required items when you complete this challenge!");
                     }
                 } else if (challenge.getType() == Challenge.Type.ISLAND) {
-                    player.sendMessage(tr("\u00a74All required items must be placed on your island, within " + challenge.getRadius() + " blocks of you."));
+                    player.sendMessage("\u00a74All required items must be placed on your island, within " + challenge.getRadius() + " blocks of you.");
                 }
                 if (challengeLogic.getRanks().size() > 1) {
                     player.sendMessage("\u00a7eRank: " + ChatColor.WHITE + challenge.getRank());
                 }
                 ChallengeCompletion completion = playerInfo.getChallenge(arg);
                 if (completion.getTimesCompleted() > 0 && !challenge.isRepeatable()) {
-                    player.sendMessage(tr("\u00a74This Challenge is not repeatable!"));
+                    player.sendMessage("\u00a74This Challenge is not repeatable!");
                     return true;
                 }
                 ItemStack item = challenge.getDisplayItem(completion, challengeLogic.defaults.enableEconomyPlugin);
@@ -85,7 +83,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                 }
                 player.sendMessage("\u00a7eTo complete this challenge, use " + "\u00a7f/c c " + arg.toLowerCase());
             } else {
-                player.sendMessage(tr("\u00a74Invalid challenge name! Use /c help for more information"));
+                player.sendMessage("\u00a74Invalid challenge name! Use /c help for more information");
             }
         } else if (split.length == 2 && (split[0].equalsIgnoreCase("complete") || split[0].equalsIgnoreCase("c"))) {
             challengeLogic.completeChallenge(player, split[1]);

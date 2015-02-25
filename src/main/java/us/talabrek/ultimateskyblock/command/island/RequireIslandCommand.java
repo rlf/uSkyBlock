@@ -7,8 +7,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 /**
  * Common command for all the /is commands that require an island.
  */
@@ -41,7 +39,7 @@ public abstract class RequireIslandCommand extends RequirePlayerCommand {
             IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
             return doExecute(alias, player, playerInfo, islandInfo, data, args);
         } else {
-            player.sendMessage(tr("\u00a74No Island. \u00a7eUse \u00a7b/is create\u00a7e to get one"));
+            player.sendMessage("\u00a74No Island. \u00a7eUse \u00a7b/is create\u00a7e to get one");
         }
         return false;
     }

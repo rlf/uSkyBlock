@@ -8,8 +8,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 public class MakeLeaderCommand extends RequireIslandCommand {
     public MakeLeaderCommand(uSkyBlock plugin) {
         super(plugin, "makeleader|transfer", "usb.island.create", "member", "transfer leadership to another member");
@@ -20,22 +18,22 @@ public class MakeLeaderCommand extends RequireIslandCommand {
         if (args.length == 1) {
             String member = args[0];
             if (!island.getMembers().contains(member)) {
-                player.sendMessage(tr("\u00a74You can only transfer ownership to party-members!"));
+                player.sendMessage("\u00a74You can only transfer ownership to party-members!");
                 return true;
             }
             if (island.getLeader().equals(member)) {
-                player.sendMessage(tr("{0}\u00a7e is already leader of your island!", member));
+                player.sendMessage(member + "\u00a7e is already leader of your island!");
                 return true;
             }
             if (!island.isLeader(player)) {
-                player.sendMessage(tr("\u00a74Only leader can transfer leadership!"));
-                island.sendMessageToIslandGroup(tr("{0} tried to take over the island!", member));
+                player.sendMessage("\u00a74Only leader can transfer leadership!");
+                island.sendMessageToIslandGroup(member + " tried to take over the island!");
                 return true;
             }
             island.setupPartyLeader(member); // Promote member
             island.setupPartyMember(player.getName()); // Demote leader
             WorldGuardHandler.updateRegion(player, island);
-            island.sendMessageToIslandGroup(tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", player.getDisplayName(), member));
+            island.sendMessageToIslandGroup("\u00a7bLeadership transferred by " + player.getDisplayName() + "\u00a7b to " + member);
             return true;
         }
         return false;

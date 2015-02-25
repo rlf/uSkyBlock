@@ -5,8 +5,6 @@ import us.talabrek.ultimateskyblock.command.InviteHandler;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 public class AcceptRejectCommand extends RequirePlayerCommand {
     private final InviteHandler inviteHandler;
 
@@ -19,15 +17,15 @@ public class AcceptRejectCommand extends RequirePlayerCommand {
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         if (alias.equalsIgnoreCase("reject")) {
             if (inviteHandler.reject(player)) {
-                player.sendMessage(tr("\u00a7eYou have rejected the invitation to join an island."));
+                player.sendMessage("\u00a7eYou have rejected the invitation to join an island.");
             } else {
-                player.sendMessage(tr("\u00a74You haven't been invited."));
+                player.sendMessage("\u00a74You haven't been invited.");
             }
         } else if (alias.equalsIgnoreCase("accept")) {
             if (inviteHandler.accept(player)) {
-                player.sendMessage(tr("\u00a7eYou have accepted the invitation to join an island."));
+                player.sendMessage("\u00a7eYou have accepted the invitation to join an island.");
             } else {
-                player.sendMessage(tr("\u00a74You haven't been invited."));
+                player.sendMessage("\u00a74You haven't been invited.");
             }
         }
         return true;

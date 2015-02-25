@@ -297,33 +297,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.googlecode.gettext-commons</groupId>
-                <artifactId>gettext-maven-plugin</artifactId>
-                <version>1.2.4</version>
-                <executions>
-                    <execution>
-                        <id>generate-po-class</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>gettext</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>convert-po-class</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>dist</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <javaVersion>2</javaVersion>
-                    <poDirectory>${basedir}/src/main/po</poDirectory>
-                    <targetBundle>us.talabrek.ultimateskyblock.Messages</targetBundle>
-                    <outputFormat>properties</outputFormat>
-                </configuration>
-            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -333,7 +306,6 @@
                 <includes>
                     <include>*.yml</include>
                     <include>README.md</include>
-                    <include>**/*.properties</include>
                 </includes>
             </resource>
             <resource>
@@ -384,12 +356,6 @@
             <groupId>org.mcstats.bukkit</groupId>
             <artifactId>metrics</artifactId>
             <version>R8-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.gettext-commons</groupId>
-            <artifactId>gettext-commons</artifactId>
-            <version>0.9.8</version>
             <scope>compile</scope>
         </dependency>
         <!-- TESTING -->

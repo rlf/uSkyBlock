@@ -10,8 +10,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 /**
  * Allows transfer of leadership to another player.
  */
@@ -31,16 +29,16 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
             PlayerInfo islandPlayer = plugin.getPlayerInfo(island);
             PlayerInfo playerInfo = plugin.getPlayerInfo(playerName);
             if (islandPlayer == null || !islandPlayer.getHasIsland()) {
-                sender.sendMessage(tr("\u00a74Player {0} has no island to transfer!", island));
+                sender.sendMessage("\u00a74Player " + island + " has no island to transfer!");
                 return false;
             }
             IslandInfo islandInfo = plugin.getIslandInfo(islandPlayer);
             if (islandInfo == null) {
-                sender.sendMessage(tr("\u00a74Player {0} has no island to transfer!", island));
+                sender.sendMessage("\u00a74Player " + island + " has no island to transfer!");
                 return false;
             }
             if (playerInfo != null && playerInfo.getHasIsland()) {
-                sender.sendMessage(tr("\u00a7ePlayer \u00a7d{0}\u00a7e already has an island.\u00a7eUse \u00a7d/usb island remove <name>\u00a7e to remove him first.", playerName));
+                sender.sendMessage("\u00a7ePlayer \u00a7d" + playerName + "\u00a7e already has an island.\u00a7eUse \u00a7d/usb island remove <name>\u00a7e to remove him first.");
                 return false;
             }
             playerInfo.setJoinParty(islandInfo.getIslandLocation());
@@ -51,7 +49,7 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
             islandPlayer.save();
             playerInfo.save();
             WorldGuardHandler.updateRegion(sender, islandInfo);
-            islandInfo.sendMessageToIslandGroup(tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", sender.getName(), playerName));
+            islandInfo.sendMessageToIslandGroup("\u00a7bLeadership transferred by " + sender.getName() + "\u00a7b to " + playerName);
             return true;
         }
         return false;
