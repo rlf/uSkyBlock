@@ -31,7 +31,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 } else {
                     playerInfo.completeChallenge(challenge);
                     playerInfo.save();
-                    sender.sendMessage("\u00a7echallenge: " + challenge + " has been completed for " + playerInfo.getPlayerName());
+                    sender.sendMessage(tr("\u00a7echallenge: {0} has been completed for {1}", challenge,  playerInfo.getPlayerName()));
                 }
             }
         });
@@ -45,7 +45,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 } else {
                     pi.resetChallenge(challenge);
                     pi.save();
-                    sender.sendMessage("\u00a7echallenge: " + challenge + " has been reset for " + playerName);
+                    sender.sendMessage(tr("\u00a7echallenge: {0} has been reset for {1}", challenge, playerName));
                 }
             }
         });
@@ -56,7 +56,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 if (playerInfo != null) {
                     playerInfo.resetAllChallenges();
                     playerInfo.save();
-                    sender.sendMessage(tr("\u00a7e" + playerInfo.getPlayerName() + " has had all challenges reset."));
+                    sender.sendMessage(tr("\u00a7e{0} has had all challenges reset.", playerInfo.getPlayerName()));
                     return true;
                 }
                 return false;

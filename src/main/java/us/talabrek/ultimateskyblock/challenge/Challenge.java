@@ -2,8 +2,6 @@ package us.talabrek.ultimateskyblock.challenge;
 
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
@@ -14,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.*;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * The data-object for a challenge
@@ -136,31 +135,31 @@ public class Challenge {
                 long cooldown = completion.getCooldownInMillis();
                 if (cooldown >= MS_DAY) {
                     final int days = (int) (cooldown / MS_DAY);
-                    lores.add("\u00a74Requirements will reset in " + days + " days.");
+                    lores.add(tr("\u00a74Requirements will reset in {0} days.", days));
                 } else if (cooldown >= MS_HOUR) {
                     final int hours = (int) cooldown / MS_HOUR;
-                    lores.add("\u00a74Requirements will reset in " + hours + " hours.");
+                    lores.add(tr("\u00a74Requirements will reset in {0} hours.", hours));
                 } else {
                     final int minutes = Math.round(cooldown / MS_MIN);
-                    lores.add("\u00a74Requirements will reset in " + minutes + " minutes.");
+                    lores.add(tr("\u00a74Requirements will reset in {0} minutes.", minutes));
                 }
             }
             reward = getRepeatReward();
         }
-        lores.add("\u00a7eThis challenge requires the following:");
+        lores.add(tr("\u00a7eThis challenge requires the following:"));
         for (ItemStack item : getRequiredItems(timesCompleted)) {
             lores.add(item.getItemMeta().getDisplayName());
         }
         List<String> lines = wordWrap(reward.getRewardText(), 20, 30);
-        lores.add("\u00a76Item Reward: \u00a7a" + lines.get(0));
+        lores.add(tr("\u00a76Item Reward: \u00a7a") + lines.get(0));
         for (String line : lines.subList(1, lines.size())) {
-            lores.add("\u00a7a" + line);
+            lores.add(tr("\u00a7a") + line);
         }
         if (withCurrency) {
-            lores.add("\u00a76Currency Reward: \u00a7a" + reward.getCurrencyReward());
+            lores.add(tr("\u00a76Currency Reward: \u00a7a{0}", reward.getCurrencyReward()));
         }
-        lores.add("\u00a76Exp Reward: \u00a7a" + reward.getXpReward());
-        lores.add("\u00a7dTotal times completed: \u00a7f" + completion.getTimesCompleted());
+        lores.add(tr("\u00a76Exp Reward: \u00a7a{0}", reward.getXpReward()));
+        lores.add(tr("\u00a7dTotal times completed: \u00a7f{0}", completion.getTimesCompleted()));
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
         return currentChallengeItem;

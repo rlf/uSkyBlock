@@ -10,12 +10,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
@@ -88,21 +86,13 @@ public class ChallengeLogic {
         final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         Challenge challenge = getChallenge(challengeName);
         ChallengeCompletion completion = pi.getChallenge(challengeName);
-        if (!challenge.getRank().isAvailable(pi)) {
-            player.sendMessage(tr("\u00a74The " + challengeName + " challenge is not repeatable!"));
-            return false;
-        }
-        if (!pi.challengeExists(challengeName)) {
-            player.sendMessage(tr("\u00a74The " + challengeName + " challenge is not repeatable!"));
-            return false;
-        }
-        if (completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
-            player.sendMessage(tr("\u00a74The " + challengeName + " challenge is not repeatable!"));
+        if (!challenge.getRank().isAvailable(pi) || !pi.challengeExists(challengeName) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
+            player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));
             return false;
         }
         if (challenge.getType() == Challenge.Type.PLAYER) {
             if (!tryComplete(player, challengeName, "onPlayer")) {
-                player.sendMessage("\u00a74" + challenge.getDescription());
+                player.sendMessage(tr("\u00a74{0}", challenge.getDescription()));
                 player.sendMessage(tr("\u00a74You don't have enough of the required item(s)!"));
                 return false;
             }
@@ -113,14 +103,14 @@ public class ChallengeLogic {
                 return false;
             }
             if (!tryComplete(player, challengeName, "onIsland")) {
-                player.sendMessage("\u00a74" + challenge.getDescription());
-                player.sendMessage(tr("\u00a74You must be standing within " + challenge.getRadius() + " blocks of all required items."));
+                player.sendMessage(tr("\u00a74{0}", challenge.getDescription()));
+                player.sendMessage(tr("\u00a74You must be standing within {0} blocks of all required items.", challenge.getRadius()));
                 return false;
             }
             return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND_LEVEL) {
             if (!tryCompleteIslandLevel(player, challenge)) {
-                player.sendMessage(tr("\u00a74Your island must be level " + challenge.getRequiredLevel() + " to complete this challenge!"));
+                player.sendMessage(tr("\u00a74Your island must be level {0} to complete this challenge!", challenge.getRequiredLevel()));
             }
             return true;
         }
@@ -158,7 +148,7 @@ public class ChallengeLogic {
         } else if (type.equalsIgnoreCase("onIsland")) {
             return tryCompleteOnIsland(player, challenge);
         } else {
-            player.sendMessage("\u00a74Unknown type of challenge: " + type);
+            player.sendMessage(tr("\u00a74Unknown type of challenge: {0}", type));
         }
         return true;
     }
@@ -204,7 +194,7 @@ public class ChallengeLogic {
             }
         }
         if (!hasAll) {
-            player.sendMessage("\u00a7eStill the following blocks short:" + sb.toString());
+            player.sendMessage(tr("\u00a7eStill the following blocks short: {0}", sb.toString()));
         }
         return hasAll;
     }
@@ -256,7 +246,7 @@ public class ChallengeLogic {
                 sb.append(" \u00a74" + entry.getValue() + " \u00a7ex");
                 sb.append(" \u00a7b" + entry.getKey() + "\n");
             }
-            player.sendMessage(("\u00a7eStill the following entities short:\n" + sb.toString()).split("\n"));
+            player.sendMessage(tr("\u00a7eStill the following entities short:\n{0}", sb.toString()).split("\n"));
         }
         return countMap.isEmpty();
     }
@@ -284,7 +274,7 @@ public class ChallengeLogic {
                 giveReward(player, challenge);
                 return true;
             } else {
-                player.sendMessage("\u00a7eYou are the following items short:" + sb.toString());
+                player.sendMessage(tr("\u00a7eYou are the following items short:{0}", sb.toString()));
             }
         }
         return true;
@@ -307,7 +297,7 @@ public class ChallengeLogic {
     private boolean giveReward(Player player, Challenge challenge) {
         String challengeName = challenge.getName();
         World skyWorld = skyBlock.getWorld();
-        player.sendMessage(tr("\u00a7aYou have completed the " + challengeName + " challenge!"));
+        player.sendMessage(tr("\u00a7aYou have completed the {0} challenge!", challengeName));
         PlayerInfo playerInfo = skyBlock.getPlayerInfo(player);
         Reward reward;
         boolean isFirstCompletion = playerInfo.checkChallenge(challengeName) == 0;
@@ -343,10 +333,10 @@ public class ChallengeLogic {
         if (defaults.broadcastCompletion && isFirstCompletion) {
             Bukkit.getServer().broadcastMessage(config.getString("broadcastText") + player.getName() + " has completed the " + challengeName + " challenge!");
         }
-        player.sendMessage(String.format("\u00a7eItem reward(s): \u00a7f%s", reward.getRewardText()));
-        player.sendMessage(String.format("\u00a7eExp reward: \u00a7f%d", reward.getXpReward()));
+        player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
+        player.sendMessage(tr("\u00a7eExp reward: \u00a7f{0,number,#.#}", reward.getXpReward()));
         if (defaults.enableEconomyPlugin && VaultHandler.hasEcon()) {
-            player.sendMessage(String.format("\u00a7eCurrency reward: \u00a7f%5.2f %s \u00a7a (%4.2f%%)", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
+            player.sendMessage(tr("\u00a7eCurrency reward: \u00a7f{0,number,###.##} {1} \u00a7a ({2,number,##.##})%", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
         }
         if (reward.getPermissionReward() != null) {
             for (String perm : reward.getPermissionReward().split(" ")) {
@@ -388,9 +378,9 @@ public class ChallengeLogic {
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = meta.getLore();
         if (challenge.isRepeatable() || completion.getTimesCompleted() == 0) {
-            lores.add("\u00a7e\u00a7lClick to complete this challenge.");
+            lores.add(tr("\u00a7e\u00a7lClick to complete this challenge."));
         } else {
-            lores.add("\u00a74\u00a7lYou can't repeat this challenge.");
+            lores.add(tr("\u00a74\u00a7lYou can't repeat this challenge."));
         }
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
@@ -446,8 +436,8 @@ public class ChallengeLogic {
         ItemStack currentChallengeItem = rank.getDisplayItem();
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
         meta4.setDisplayName("\u00a7e\u00a7lRank: " + rank.getName());
-        lores.add("\u00a7fComplete most challenges in");
-        lores.add("\u00a7fthis rank to unlock the next rank.");
+        lores.add(tr("\u00a7fComplete most challenges in"));
+        lores.add(tr("\u00a7fthis rank to unlock the next rank."));
         meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
         menu.setItem(location, currentChallengeItem);
@@ -459,7 +449,7 @@ public class ChallengeLogic {
                 if (!missingRequirements.isEmpty()) {
                     currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
                     meta4 = currentChallengeItem.getItemMeta();
-                    meta4.setDisplayName("\u00a74\u00a7lLocked Challenge");
+                    meta4.setDisplayName(tr("\u00a74\u00a7lLocked Challenge"));
                     lores.addAll(missingRequirements);
                     meta4.setLore(lores);
                     currentChallengeItem.setItemMeta(meta4);
