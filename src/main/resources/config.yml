@@ -143,6 +143,8 @@ options:
       fall: true
       # Whether or not visiotrs are protected from fire damage (incl. lava)
       fire-damage: true
+      # Whether or not visitors should be allowed to drop items
+      item-drops: true
   party:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
     invite-timeout: 600

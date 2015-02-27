@@ -266,6 +266,10 @@ public class IslandInfo {
         }
         config.set("banned.list", stringList);
         save();
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
+        if (playerInfo != null) {
+            playerInfo.banFromIsland(name);
+        }
     }
 
     public void unbanPlayer(String player) {

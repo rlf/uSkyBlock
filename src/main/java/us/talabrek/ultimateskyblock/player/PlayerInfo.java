@@ -331,4 +331,12 @@ public class PlayerInfo implements Serializable {
         file.delete();
         return this;
     }
+
+    public void banFromIsland(String name) {
+        List<String> bannedFrom = playerData.getStringList("bannedFrom");
+        if (bannedFrom != null && !bannedFrom.contains(name)) {
+            bannedFrom.add(name);
+            save();
+        }
+    }
 }
