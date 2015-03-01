@@ -132,7 +132,7 @@ public class IslandLogic {
                 if (!level.getMembers().isEmpty()) {
                     members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
                 }
-                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): %s \u00a77%s", place, level.getScore(),
+                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a7f%s", place, level.getScore(),
                         level.getLeaderName(), members));
                 if (level.getMembers().contains(sender.getName()) || level.getLeaderName().equals(playerName)) {
                     playerrank = place;
