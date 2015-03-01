@@ -6,6 +6,8 @@ import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
@@ -27,7 +29,8 @@ public class FilePlayerDB implements PlayerDB {
 
     @Override
     public UUID getUUIDFromName(String name) {
-        for (String uuidStr : config.getKeys(false)) {
+        Set<String> keys = new HashSet<>(config.getKeys(false));
+        for (String uuidStr : keys) {
             String entryName = config.getString(uuidStr + ".name", config.getString(uuidStr, null));
             if (entryName != null && entryName.equals(name)) {
                 return UUIDUtil.fromString(uuidStr);

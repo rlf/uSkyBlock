@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.imports.update;
 
 import us.talabrek.ultimateskyblock.imports.USBImporter;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 
