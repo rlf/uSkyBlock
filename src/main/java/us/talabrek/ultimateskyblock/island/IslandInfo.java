@@ -1,10 +1,10 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.sk89q.worldedit.*;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,7 +12,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -24,8 +23,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
-import java.util.*;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
@@ -34,6 +36,7 @@ import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
  * Data object for an island
  */
 public class IslandInfo {
+    private static final int YML_VERSION = 1;
     private static File directory = new File(".");
 
     private final File file;
@@ -47,6 +50,21 @@ public class IslandInfo {
         if (file.exists()) {
             readConfig(config, file);
         }
+        if (config.getInt("version", 0) < YML_VERSION) {
+            updateConfig();
+        }
+    }
+
+    private void updateConfig() {
+        int currentVersion = config.getInt("version", 0);
+        if (currentVersion < 1) {
+            // add ban-info to the individual player-configs.
+            for (String banned : getBans()) {
+                banPlayerInfo(banned);
+            }
+        }
+        config.set("version", YML_VERSION);
+        save();
     }
 
     public static void setDirectory(File dir) {
@@ -60,6 +78,7 @@ public class IslandInfo {
         config.set("general.warpLocationZ", 0);
         config.set("general.warpActive", false);
         config.set("log.logPos", 1);
+        config.set("version", YML_VERSION);
         setupPartyLeader(leader);
         sendMessageToIslandGroup("The island has been created.");
     }
@@ -266,6 +285,10 @@ public class IslandInfo {
         }
         config.set("banned.list", stringList);
         save();
+        banPlayerInfo(player);
+    }
+
+    private void banPlayerInfo(String player) {
         PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
         if (playerInfo != null) {
             playerInfo.banFromIsland(name);
@@ -279,6 +302,14 @@ public class IslandInfo {
         }
         config.set("banned.list", stringList);
         save();
+        unbanPlayerInfo(player);
+    }
+
+    private void unbanPlayerInfo(String player) {
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(player);
+        if (playerInfo != null) {
+            playerInfo.unbanFromIsland(name);
+        }
     }
 
     public List<String> getBans() {

@@ -18,6 +18,7 @@ import java.io.*;
 
 public class PlayerInfo implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final int YML_VERSION = 1;
     private String playerName;
     private String displayName;
     private UUID uuid;
@@ -336,7 +337,21 @@ public class PlayerInfo implements Serializable {
         List<String> bannedFrom = playerData.getStringList("bannedFrom");
         if (bannedFrom != null && !bannedFrom.contains(name)) {
             bannedFrom.add(name);
+            playerData.set("bannedFrom", bannedFrom);
             save();
         }
+    }
+
+    public void unbanFromIsland(String name) {
+        List<String> bannedFrom = playerData.getStringList("bannedFrom");
+        if (bannedFrom != null && bannedFrom.contains(name)) {
+            bannedFrom.remove(name);
+            playerData.set("bannedFrom", bannedFrom);
+            save();
+        }
+    }
+
+    public List<String> getBannedFrom() {
+        return playerData.getStringList("bannedFrom");
     }
 }
