@@ -51,7 +51,7 @@ public class IslandLogic {
     public IslandLogic(uSkyBlock plugin, File directoryIslands) {
         this.plugin = plugin;
         this.directoryIslands = directoryIslands;
-        showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMember", true);
+        showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
