@@ -15,7 +15,7 @@ public class VersionCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
     public VersionCommand(uSkyBlock plugin) {
-        super("version|v", "usb.admin", "displays version information");
+        super("version|v", "usb.admin.version", "displays version information");
         this.plugin = plugin;
     }
 

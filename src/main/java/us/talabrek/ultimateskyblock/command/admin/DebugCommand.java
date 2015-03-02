@@ -27,7 +27,7 @@ public class DebugCommand extends CompositeUSBCommand {
     private static Handler logHandler = null;
 
     public DebugCommand(final uSkyBlock plugin) {
-        super("debug", "usb.admin", "control debugging");
+        super("debug", "usb.admin.debug", "control debugging");
         add(new AbstractUSBCommand("setlevel", null, "level", "set debug-level") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {

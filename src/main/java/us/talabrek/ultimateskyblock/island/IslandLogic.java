@@ -43,6 +43,7 @@ public class IslandLogic {
     private final File directoryIslands;
 
     private final Map<String, IslandInfo> islands = new ConcurrentHashMap<>();
+    private final boolean showMembers;
 
     private volatile long lastGenerate = 0;
     private final List<IslandLevel> ranks = new ArrayList<>();
@@ -50,6 +51,7 @@ public class IslandLogic {
     public IslandLogic(uSkyBlock plugin, File directoryIslands) {
         this.plugin = plugin;
         this.directoryIslands = directoryIslands;
+        showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMember", true);
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
@@ -129,7 +131,7 @@ public class IslandLogic {
             String playerName = sender instanceof Player ? ((Player)sender).getDisplayName() : sender.getName();
             for (final IslandLevel level : ranks.subList(0, Math.min(ranks.size(), 10))) {
                 String members = "";
-                if (!level.getMembers().isEmpty()) {
+                if (showMembers && !level.getMembers().isEmpty()) {
                     members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
                 }
                 sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a7f%s", place, level.getScore(),

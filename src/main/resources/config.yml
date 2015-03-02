@@ -82,6 +82,9 @@ options:
     # set to 0 to disabled
     autoRefreshScore: 0
 
+    # [true/false] Whether or not to include island-members on the top-ten scoreboard
+    topTenShowMembers: true
+
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.
   extra-menus:
@@ -168,6 +171,6 @@ options:
     clearEnderChest: true
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 11
+version: 12
 force-replace:
   options.party.invite-timeout: 100
