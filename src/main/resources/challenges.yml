@@ -597,6 +597,7 @@ ranks:
       torchbearer:
         description: 'Create and place at least 15,000 torches on your island.'
         type: onIsland
+        radius: 52
         requiredItems: '50:15000'
         repeatable: false
         displayItem: 50
