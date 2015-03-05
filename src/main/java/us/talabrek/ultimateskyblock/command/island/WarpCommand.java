@@ -2,12 +2,15 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class WarpCommand extends RequirePlayerCommand {
 
@@ -52,7 +55,19 @@ public class WarpCommand extends RequirePlayerCommand {
                     return true;
                 }
                 if (!island.isBanned(player)) {
-                    plugin.warpTeleport(player, playerInfo);
+                	if(player.hasPermission("usb.mod.bypassteleport") || (plugin.getConfig().getInt("options.island.islandTeleportDelay") == 0)) {
+                    	plugin.warpTeleport(player, playerInfo);
+                    } else {
+                    	final Player p = player;
+                    	final PlayerInfo pi = playerInfo;
+                    	Timer t = new Timer();
+            			t.schedule(new TimerTask() {
+            				@Override
+            				public void run() {
+            					plugin.warpTeleport(p, pi);
+            				}
+            			}, (plugin.getConfig().getInt("options.island.islandTeleportDelay") * 1000));
+                    }
                 } else {
                     player.sendMessage("\u00a74That player has forbidden you from warping to their island.");
                 }
