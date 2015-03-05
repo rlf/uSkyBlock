@@ -1,13 +1,12 @@
 package us.talabrek.ultimateskyblock.command.admin.task;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.async.IncrementalTask;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
     public PurgeScanTask(uSkyBlock plugin, File islandDir, int time) {
         this.plugin = plugin;
         now = System.currentTimeMillis();
-        this.cutOff = now - (time * 3600000);
+        this.cutOff = now - (time * 3600000L);
         String[] islandList = islandDir.list(FileUtil.createIslandFilenameFilter());
         this.islandList = new ArrayList<>(Arrays.asList(islandList));
         size = islandList.length;
@@ -46,7 +45,9 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
             String islandName = FileUtil.getBasename(islandFile);
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null) {
-                if (islandInfo.getLevel() < purgeLevel && offlineSince(islandInfo.getMembers())) {
+            	Set<String> memberlist = islandInfo.getMembers();
+            	memberlist.add(islandInfo.getLeader());
+                if (islandInfo.getLevel() < purgeLevel && offlineSince(memberlist)) {
                     purgeList.add(islandName);
                 }
             }
@@ -56,8 +57,9 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
 
     private boolean offlineSince(Set<String> members) {
         for (String member : members) {
-            OfflinePlayer oplayer = Bukkit.getOfflinePlayer(member);
-            if (oplayer.isOnline() || oplayer.getLastPlayed() > cutOff) {
+        	//PlayerInfo loadPlayerInfo(String playerName)
+        	PlayerInfo pi = plugin.getPlayerInfo(member);
+            if ( pi.timestamp > cutOff) {
                 return false;
             }
         }
