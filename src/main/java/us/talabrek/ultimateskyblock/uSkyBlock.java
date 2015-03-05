@@ -605,7 +605,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final int pz = l.getBlockZ();
         World world = l.getWorld();
         for (int x = -10; x <= 10; ++x) {
-            for (int y = -10; y <= 10; ++y) {
+            for (int y = -30; y <= 30; ++y) {
                 for (int z = -10; z <= 10; ++z) {
                     final Block b = world.getBlockAt(px + x, py + y, pz + z);
                     if (b.getType() == Material.BEDROCK) {
@@ -830,7 +830,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean islandAtLocation(final Location loc) {
-        return WorldGuardHandler.getIntersectingRegions(loc).size() > 0;
+    	return ( (WorldGuardHandler.getIntersectingRegions(loc).size() > 0) ||
+	      			  (findBedrockLocation( loc) != null));
+
     }
 
     public boolean islandInSpawn(final Location loc) {
