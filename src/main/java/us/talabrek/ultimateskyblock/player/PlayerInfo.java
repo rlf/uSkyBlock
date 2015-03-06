@@ -30,6 +30,7 @@ public class PlayerInfo implements Serializable {
     private final Map<String, ChallengeCompletion> challenges = new ConcurrentHashMap<>();
     private FileConfiguration playerData;
     private File playerConfigFile;
+    public long timestamp;
 
     public PlayerInfo(final String playerName) {
         this.playerName = playerName;
@@ -230,6 +231,7 @@ public class PlayerInfo implements Serializable {
     // TODO: 09/12/2014 - R4zorax: All this should be made UUID
     private void reloadPlayerConfig() {
         playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
+        timestamp = playerConfigFile.lastModified();
         playerData = YamlConfiguration.loadConfiguration(playerConfigFile);
     }
 
