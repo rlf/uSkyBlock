@@ -354,4 +354,8 @@ public class PlayerInfo implements Serializable {
     public List<String> getBannedFrom() {
         return playerData.getStringList("bannedFrom");
     }
+
+    public long getLastSaved() {
+        return playerConfigFile.lastModified();
+    }
 }

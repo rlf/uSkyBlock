@@ -1,11 +1,10 @@
 package us.talabrek.ultimateskyblock.command.admin.task;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.async.IncrementalTask;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 
@@ -46,7 +45,9 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
             String islandName = FileUtil.getBasename(islandFile);
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null) {
-                if (islandInfo.getLevel() < purgeLevel && offlineSince(islandInfo.getMembers())) {
+                Set<String> members = islandInfo.getMembers();
+                members.add(islandInfo.getLeader());
+                if (islandInfo.getLevel() < purgeLevel && abandonedSince(members)) {
                     purgeList.add(islandName);
                 }
             }
@@ -54,10 +55,10 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
         return isComplete();
     }
 
-    private boolean offlineSince(Set<String> members) {
+    private boolean abandonedSince(Set<String> members) {
         for (String member : members) {
-            OfflinePlayer oplayer = Bukkit.getOfflinePlayer(member);
-            if (oplayer.isOnline() || oplayer.getLastPlayed() > cutOff) {
+            PlayerInfo playerInfo = plugin.getPlayerInfo(member);
+            if (playerInfo != null && playerInfo.getLastSaved() > cutOff) {
                 return false;
             }
         }
