@@ -167,7 +167,9 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
                 Collections.sort(cmds);
                 for (String key : cmds) {
                     USBCommand scmd = commandMap.get(key);
-                    msg += "  " + getShortDescription(sender, scmd);
+                    if (scmd != null) {
+                        msg += "  " + getShortDescription(sender, scmd);
+                    }
                 }
                 sender.sendMessage(msg.split("\n"));
             }
