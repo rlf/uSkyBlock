@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * The purge-command.
  */
@@ -31,16 +33,16 @@ public class PurgeCommand extends AbstractUSBCommand {
     @Override
     public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (plugin.isPurgeActive()) {
-            sender.sendMessage("\u00a74A purge is already running, please wait for it to finish!");
+            sender.sendMessage(tr("\u00a74A purge is already running, please wait for it to finish!"));
             return true;
         }
         if (args.length == 0 || !args[0].matches("[0-9]+")) {
-            sender.sendMessage("\u00a74You must provide the age in days to purge!");
+            sender.sendMessage(tr("\u00a74You must provide the age in days to purge!"));
             return false;
         }
         plugin.activatePurge();
         final int time = Integer.parseInt(args[0], 10) * 24;
-        sender.sendMessage("\u00a7eMarking all islands inactive for more than " + args[0] + " days.");
+        sender.sendMessage(tr("\u00a7eMarking all islands inactive for more than {0} days.", args[0]));
         new PurgeScanTask(plugin, plugin.directoryIslands, time).runTask(plugin);
         return true;
     }

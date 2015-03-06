@@ -19,6 +19,8 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Debug control.
  */
@@ -46,7 +48,7 @@ public class DebugCommand extends CompositeUSBCommand {
                 } else if (alias.equals("enable")) {
                     enableLogging(sender, plugin);
                 } else {
-                    sender.sendMessage("\u00a74Logging wasn't active, so you can't disable it!");
+                    sender.sendMessage(tr("\u00a74Logging wasn't active, so you can't disable it!"));
                 }
                 return true;
             }
@@ -56,9 +58,9 @@ public class DebugCommand extends CompositeUSBCommand {
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (logHandler != null) {
                     logHandler.flush();
-                    sender.sendMessage("\u00a7eLog-file has been flushed.");
+                    sender.sendMessage(tr("\u00a7eLog-file has been flushed."));
                 } else {
-                    sender.sendMessage("\u00a74Logging is not enabled, use \u00a7d/usb debug enable");
+                    sender.sendMessage(tr("\u00a74Logging is not enabled, use \u00a7d/usb debug enable"));
                 }
                 return true;
             }
@@ -77,7 +79,7 @@ public class DebugCommand extends CompositeUSBCommand {
             sender.sendMessage("\u00a7eSet debug-level to " + level);
             enableLogging(sender, uSkyBlock.getInstance());
         } catch (Exception e) {
-            sender.sendMessage("\u00a74Invalid argument, try INFO, FINE, FINER, FINEST");
+            sender.sendMessage(tr("\u00a74Invalid argument, try INFO, FINE, FINER, FINEST"));
         }
     }
 
@@ -87,7 +89,7 @@ public class DebugCommand extends CompositeUSBCommand {
             uSkyBlock.getInstance().getLogger().removeHandler(logHandler);
             logHandler.close();
             if (sender != null) {
-                sender.sendMessage("\u00a7eLogging disabled!");
+                sender.sendMessage(tr("\u00a7eLogging disabled!"));
             }
         }
         logHandler = null;

@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Async Controller
  */
@@ -29,13 +31,13 @@ public class AsyncCommand extends CompositeUSBCommand {
                     asyncOffset = taskList.size();
                     taskList.addAll(plugin.getExecutor().getTasks());
                     if (taskList.isEmpty()) {
-                        sender.sendMessage("\u00a7cNo running tasks");
+                        sender.sendMessage(tr("\u00a7cNo running tasks"));
                         return true;
                     }
                     String msg = "\u00a7dTasks:\n";
                     int i = 0;
                     for (TaskProgress progress : taskList) {
-                        msg += String.format("\u00a7e[%2d]\u00a77: %s\n", i++, progress.toString());
+                        msg += String.format(tr("\u00a7e[%2d]\u00a77: %s\n"), i++, progress.toString());
                     }
                     sender.sendMessage(msg.split("\n"));
                     return true;
@@ -48,7 +50,7 @@ public class AsyncCommand extends CompositeUSBCommand {
                 if (doCancel(task, isAsync)) {
                     sender.sendMessage("\u00a7eSuccessfully cancelled task : "+ task);
                 } else {
-                    sender.sendMessage("\u00a74Could not cancel " + task + ".");
+                    sender.sendMessage(tr("\u00a74Could not cancel " + task + "."));
                 }
             }
 
@@ -75,12 +77,12 @@ public class AsyncCommand extends CompositeUSBCommand {
                 return false;
             }
             if (!args[0].matches("[0-9]+")) {
-                sender.sendMessage("\u00a74A valid number must be supplied as task-id.");
+                sender.sendMessage(tr("\u00a74A valid number must be supplied as task-id."));
                 return false;
             }
             synchronized (taskList) {
                 if (taskList.isEmpty()) {
-                    sender.sendMessage("\u00a74No tasks detected.\u00a7e Try \u00a7b/usb async list\u00a7e first.");
+                    sender.sendMessage(tr("\u00a74No tasks detected.\u00a7e Try \u00a7b/usb async list\u00a7e first."));
                     return true;
                 }
                 int index = Integer.parseInt(args[0]);
@@ -88,7 +90,7 @@ public class AsyncCommand extends CompositeUSBCommand {
                     performCommand(sender, taskList.get(index), index <= asyncOffset);
                     return true;
                 } else {
-                    sender.sendMessage("\u00a74A number between 1 and " + taskList.size() + " expected.");
+                    sender.sendMessage(tr("\u00a74A number between 1 and " + taskList.size() + " expected."));
                     return false;
                 }
             }

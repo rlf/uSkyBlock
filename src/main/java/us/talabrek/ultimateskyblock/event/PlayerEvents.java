@@ -24,6 +24,8 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 import java.util.*;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class PlayerEvents implements Listener {
     private static final Set<EntityDamageEvent.DamageCause> FIRE_TRAP = new HashSet<>(
             Arrays.asList(EntityDamageEvent.DamageCause.LAVA, EntityDamageEvent.DamageCause.FIRE, EntityDamageEvent.DamageCause.FIRE_TICK));
@@ -110,7 +112,7 @@ public class PlayerEvents implements Listener {
                 && block.getType() == Material.OBSIDIAN
                 && !plugin.testForObsidian(block)) {
             obsidianClick.put(player.getUniqueId(), now);
-            player.sendMessage("\u00a7eChanging your obsidian back into lava. Be careful!");
+            player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
             inventory.setItem(inventory.getHeldItemSlot(), new ItemStack(Material.LAVA_BUCKET, 1));
             player.updateInventory();
             block.setType(Material.AIR);
@@ -184,7 +186,7 @@ public class PlayerEvents implements Listener {
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
         if (islandInfo != null && islandInfo.isBanned(player.getName())) {
             event.setCancelled(true);
-            player.sendMessage("\u00a74That player has forbidden you from teleporting to their island.");
+            player.sendMessage(tr("\u00a74That player has forbidden you from teleporting to their island."));
         }
     }
 }

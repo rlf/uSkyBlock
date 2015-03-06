@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class CreateCommand extends RequirePlayerCommand {
     private final uSkyBlock plugin;
 
@@ -24,16 +26,16 @@ public class CreateCommand extends RequirePlayerCommand {
         } else if (pi.getHasIsland()) {
             IslandInfo island = plugin.getIslandInfo(pi);
             if (island.isLeader(player)) {
-                player.sendMessage("\u00a74Island found!" +
+                player.sendMessage(tr("\u00a74Island found!" +
                         "\u00a7e You already have an island. If you want a fresh island, type" +
-                        "\u00a7b /is restart\u00a7e to get one");
+                        "\u00a7b /is restart\u00a7e to get one"));
             } else {
-                player.sendMessage("\u00a74Island found!" +
+                player.sendMessage(tr("\u00a74Island found!" +
                         "\u00a7e You are already a member of an island. To start your own, first" +
-                        "\u00a7b /is leave");
+                        "\u00a7b /is leave"));
             }
         } else {
-            player.sendMessage("\u00a7eYou can create a new island in " + plugin.getRestartCooldownTime(player) / 1000L + " seconds.");
+            player.sendMessage(tr("\u00a7eYou can create a new island in {0,number,#} seconds.", plugin.getRestartCooldownTime(player) / 1000L));
         }
         return true;
     }

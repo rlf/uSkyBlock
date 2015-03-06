@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.island;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -33,6 +32,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.bukkit.Material.BEDROCK;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * Responsible for island creation, locating locations, purging, clearing etc.
@@ -122,10 +122,10 @@ public class IslandLogic {
 
     public void displayTopTen(final CommandSender sender) {
         int playerrank = 0;
-        sender.sendMessage("\u00a7eDisplaying the top 10 islands:");
+        sender.sendMessage(tr("\u00a7eDisplaying the top 10 islands:"));
         synchronized (ranks) {
             if (ranks == null || ranks.isEmpty()) {
-                sender.sendMessage("\u00a74Top ten list is empty! (perhaps the generation failed?)");
+                sender.sendMessage(tr("\u00a74Top ten list is empty! (perhaps the generation failed?)"));
             }
             int place = 1;
             String playerName = sender instanceof Player ? ((Player)sender).getDisplayName() : sender.getName();
@@ -134,7 +134,7 @@ public class IslandLogic {
                 if (showMembers && !level.getMembers().isEmpty()) {
                     members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
                 }
-                sender.sendMessage(String.format("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a7f%s", place, level.getScore(),
+                sender.sendMessage(String.format(tr("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a77%s"), place, level.getScore(),
                         level.getLeaderName(), members));
                 if (level.getMembers().contains(sender.getName()) || level.getLeaderName().equals(playerName)) {
                     playerrank = place;
@@ -143,7 +143,7 @@ public class IslandLogic {
             }
         }
         if (playerrank > 0) {
-            sender.sendMessage("\u00a7eYour rank is: " + ChatColor.WHITE + playerrank);
+            sender.sendMessage(tr("\u00a7eYour rank is: \u00a7f{0}", playerrank));
         }
     }
 

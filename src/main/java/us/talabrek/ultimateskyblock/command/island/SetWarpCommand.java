@@ -7,6 +7,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class SetWarpCommand extends RequireIslandCommand {
     public SetWarpCommand(uSkyBlock plugin) {
         super(plugin, "setwarp|warpset", "usb.extra.addwarp", "set your island's warp location");
@@ -16,9 +18,9 @@ public class SetWarpCommand extends RequireIslandCommand {
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
         if (island.hasPerm(player, "canChangeWarp")) {
             island.setWarpLocation(player.getLocation());
-            island.sendMessageToIslandGroup("\u00a7b" +player.getName() + "\u00a7d changed the island warp location.");
+            island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d changed the island warp location.", player.getName()));
         } else {
-            player.sendMessage("\u00a7cYou do not have permission to set your island's warp point!");
+            player.sendMessage(tr("\u00a7cYou do not have permission to set your island's warp point!"));
         }
         return true;
     }
