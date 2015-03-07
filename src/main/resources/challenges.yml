@@ -541,8 +541,8 @@ ranks:
         type: islandLevel
         requiredItems: '1000'
         reward:
-          items: '264:1'
-          text: '1 diamond'
+          items: '264:1 120:12'
+          text: '1 diamond & 1 end-portal'
           currency: 250
           xp: 250
   Skylord:
@@ -703,9 +703,13 @@ ranks:
           currency: 300
           xp: 300
         repeatReward:
-          items: '388:4'
-          text: '4 emeralds'
+          items:
+          - '388:4'
+          - '{p=0.1}264:1'
+          - '{p=0.01}264:1'
+          - '{p=0.005}264:1'
+          text: '4 emeralds & chance of dia'
           currency: 50
           xp: 50
 # DO NOT CHANGE!
-version: 7
+version: 8
