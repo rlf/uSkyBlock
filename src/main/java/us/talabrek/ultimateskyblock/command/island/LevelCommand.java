@@ -2,9 +2,11 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -79,6 +81,7 @@ public class LevelCommand extends RequireIslandCommand {
                 @Override
                 public void run() {
                     try {
+                    	IslandScore score = plugin.recalculateScore(player, playerInfo.locationForParty());
                         plugin.fireChangeEvent(new uSkyBlockEvent(player, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
                     } catch (Exception e) {
                         uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
