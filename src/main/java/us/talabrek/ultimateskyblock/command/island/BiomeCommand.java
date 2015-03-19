@@ -43,7 +43,7 @@ public class BiomeCommand extends RequireIslandCommand {
                         island.sendMessageToIslandGroup(tr("{0} changed the island biome to {1}", player.getName(), biome.toUpperCase()));
                         plugin.setBiomeCooldown(player);
                     } else {
-                        player.sendMessage(tr("\u00a7aUnknown biome name, changing your biome to OCEAN"));
+                        player.sendMessage(tr("\u00a7aYou have misspelled the biome name, changing your biome to OCEAN"));
                         player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
                         island.sendMessageToIslandGroup(tr("{0} changed the island biome to OCEAN", player.getName()));
                     }
