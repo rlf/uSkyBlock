@@ -6,8 +6,8 @@ This is a continually updated and custom version of Talabrek's Ultimate SkyBlock
 
 This version depends on the following plugins:
 
-* Bukkit 1.8-R0.1-SNAPSHOT (I.e. the latest Spigot 1.8 release)
-* Vault 1.4
+* Bukkit/Spigot 1.8-R0.1-SNAPSHOT (I.e. the latest Spigot 1.8 release)
+* Vault 1.5.x
 * WorldEdit 6.0.0-SNAPSHOT
 * WorldGuard 6.0.0-SNAPSHOT
 
