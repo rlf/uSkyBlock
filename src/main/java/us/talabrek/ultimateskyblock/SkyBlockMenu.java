@@ -32,7 +32,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  */
 public class SkyBlockMenu {
     private static final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
-    private static final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile("Challenge Menu \\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
+    private static final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu ")+ "\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock skyBlock;
     private final ChallengeLogic challengeLogic;
     ItemStack pHead;

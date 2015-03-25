@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-25 01:20+0100\n"
+"POT-Creation-Date: 2015-03-14 12:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: da <LL@li.org>\n"
@@ -913,11 +913,11 @@ msgstr "§4That player does not have an active warp."
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4That player has forbidden you from warping to their island."
 
-#: us/talabrek/ultimateskyblock/event/ExploitEvents.java:45
+#: us/talabrek/ultimateskyblock/event/ExploitEvents.java:47
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr "§eYou can not use another islands portals! Shame on you - cheater!"
 
-#: us/talabrek/ultimateskyblock/event/ExploitEvents.java:61
+#: us/talabrek/ultimateskyblock/event/ExploitEvents.java:63
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrading isn't allowed on other islands. Go home - cheater!"
 
@@ -949,21 +949,21 @@ msgstr ""
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4You must be the party leader to unlock your island!"
 
-#: us/talabrek/ultimateskyblock/imports/impl/USBImporterExecutor.java:72
+#: us/talabrek/ultimateskyblock/imports/impl/USBImporterExecutor.java:74
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4No importer named §e{0}§4 found"
 
-#: us/talabrek/ultimateskyblock/imports/impl/USBImporterExecutor.java:122
+#: us/talabrek/ultimateskyblock/imports/impl/USBImporterExecutor.java:124
 msgid "§eConverted "
 msgstr "§eConverted "
 
-#: us/talabrek/ultimateskyblock/island/IslandInfo.java:226
+#: us/talabrek/ultimateskyblock/island/IslandInfo.java:245
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr ""
 "§4Since your island is locked, your incoming warp has been deactivated."
 
-#: us/talabrek/ultimateskyblock/island/IslandInfo.java:227
+#: us/talabrek/ultimateskyblock/island/IslandInfo.java:246
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deactivated the island warp."
@@ -977,7 +977,8 @@ msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr "§4Top ten list is empty! (perhaps the generation failed?)"
 
 #: us/talabrek/ultimateskyblock/island/IslandLogic.java:137
-msgid "§a#%2d §7(%5.2f): %s §7%s"
+#, fuzzy
+msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): %s §7%s"
 
 #: us/talabrek/ultimateskyblock/island/IslandLogic.java:146
@@ -985,9 +986,13 @@ msgstr "§a#%2d §7(%5.2f): %s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eYour rank is: §f{0}"
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:220
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:221
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr "§cYou were removed from your island since the last time you played!"
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:35
+msgid "Challenge Menu "
+msgstr ""
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:66
 msgid "§hPlayer Permissions"
@@ -2352,10 +2357,10 @@ msgstr "§4You must be closer to your island to set your skyblock home!"
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§aYour skyblock home has been set to your current location."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1152
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1154
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Could not create your Island. Please contact a server moderator."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1165
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1167
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Player doesn't have an island or it's already protected!"
