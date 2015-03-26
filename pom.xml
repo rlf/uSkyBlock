@@ -224,12 +224,17 @@
                     <artifactSet>
                         <includes>
                             <include>org.mcstats.*:*</include>
+                            <include>com.googlecode.gettext-commons:*</include>
                         </includes>
                     </artifactSet>
                     <relocations>
                         <relocation>
                             <pattern>org.mcstats</pattern>
                             <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.xnap.commons.i18n</pattern>
+                            <shadedPattern>us.talabrek.ultimateskyblock.i18n</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
