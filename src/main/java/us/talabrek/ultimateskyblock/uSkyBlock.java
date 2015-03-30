@@ -746,8 +746,19 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 homeSweetHome = getSafeHomeLocation(this.getActivePlayers().get(player.getName()));
             }
             if (homeSweetHome == null) {
-                player.performCommand("spawn");
-                player.sendMessage(tr("\u00a74You are not part of an island. Returning you the spawn area!"));
+            	if(player.hasPermission("usb.mod.bypassteleport") || (getConfig().getInt("options.island.islandTeleportDelay") == 0)) {
+            		player.performCommand("spawn");
+                    player.sendMessage(tr("\u00a74You are not part of an island. Returning you the spawn area!"));
+            	} else {
+            		player.sendMessage("\u00a74You are not part of an island. You will be returned to the spawn area in " + getConfig().getInt("options.island.islandTeleportDelay") + " seconds.");
+            		getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
+                		@Override
+                		public void run() {
+                			player.performCommand("spawn");
+                            player.sendMessage(tr("\u00a74Returning you the spawn area!"));
+                		}
+                	}, (getConfig().getInt("options.island.islandTeleportDelay") * 1000));
+            	}
                 return true;
             }
             removeCreatures(homeSweetHome);
@@ -759,10 +770,22 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    private void safeTeleport(Player player, Location homeSweetHome) {
-        player.setVelocity(new org.bukkit.util.Vector());
-        player.teleport(homeSweetHome);
-        player.setVelocity(new org.bukkit.util.Vector());
+    private void safeTeleport(final Player player, final Location homeSweetHome) {
+    	if(player.hasPermission("usb.mod.bypassteleport") || (getConfig().getInt("options.island.islandTeleportDelay") == 0)) {
+    		player.setVelocity(new org.bukkit.util.Vector());
+            player.teleport(homeSweetHome);
+            player.setVelocity(new org.bukkit.util.Vector());
+    	} else {
+    		player.sendMessage("\u00a7aYou will be teleported in " + getConfig().getInt("options.island.islandTeleportDelay") + " seconds.");
+    		getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
+        		@Override
+        		public void run() {
+        			player.setVelocity(new org.bukkit.util.Vector());
+        	        player.teleport(homeSweetHome);
+        	        player.setVelocity(new org.bukkit.util.Vector());
+        		}
+        	}, (getConfig().getInt("options.island.islandTeleportDelay") * 1000));
+    	}
     }
 
     public boolean warpTeleport(final Player player, final PlayerInfo pi) {
@@ -783,11 +806,26 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public void spawnTeleport(final Player player) {
         getLogger().entering(CN, "spawnTeleport", new Object[]{ player });
-        if (Settings.extras_sendToSpawn) {
-            execCommand(player, "op:spawn");
-        } else {
-            player.teleport(getWorld().getSpawnLocation());
-        }
+        
+        if(player.hasPermission("usb.mod.bypassteleport") || (getConfig().getInt("options.island.islandTeleportDelay") == 0)) {
+        	if (Settings.extras_sendToSpawn) {
+                execCommand(player, "op:spawn");
+            } else {
+                player.teleport(getWorld().getSpawnLocation());
+            }
+    	} else {
+    		player.sendMessage("\u00a7aYou will be teleported in " + getConfig().getInt("options.island.islandTeleportDelay") + " seconds.");
+    		getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
+        		@Override
+        		public void run() {
+        			if (Settings.extras_sendToSpawn) {
+        	            execCommand(player, "op:spawn");
+        	        } else {
+        	            player.teleport(getWorld().getSpawnLocation());
+        	        }
+        		}
+        	}, (getConfig().getInt("options.island.islandTeleportDelay") * 1000));
+    	}
         getLogger().exiting(CN, "spawnTeleport");
     }
 

@@ -105,6 +105,8 @@ permissions:
             description: Let a player bypass the cooldowns for the /island info and /island restart commands
           usb.mod.bypassprotection:
             description: Let a player bypass the built in island protection
+          usb.mod.bypassteleport:
+            description: Let a player bypass the teleport wait time
           usb.mod.setbiome:
             description: Let a player set another players biome.
       usb.admin.*:
