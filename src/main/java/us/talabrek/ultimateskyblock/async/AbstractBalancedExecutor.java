@@ -117,7 +117,7 @@ public abstract class AbstractBalancedExecutor implements BalancedExecutor {
                     }
                     length[0] = newLength;
                     long waitTime = (long) Math.ceil((1-loadFactor)*ticks);
-                    log.log(Level.FINE, "Executed " + len + " tasks in " + ticks + " ticks");
+                    log.log(Level.FINE, "Executed " + len + " tasks in " + ticks + " ticks (next length = " + newLength + ")");
                     if (task.isComplete() || len == 0) {
                         log.log(Level.FINE,
                                 String.format("Balanced execution of %s completed in %s using %5.2f ticks",

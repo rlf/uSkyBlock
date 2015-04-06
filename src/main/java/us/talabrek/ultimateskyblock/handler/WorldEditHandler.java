@@ -62,6 +62,40 @@ public class WorldEditHandler {
     /**
      * Returns a collection of regions covering the borders of the original region.
      * <b>Note:</b> complements the #getInnerChunks
+     *
+     * <pre>
+     *     ^
+     *     |           +---+---+---+---+---+---+
+     *     |           |   |   |   |   |   |   |
+     *     |           |   |   |   |   |   |   |
+     *     |           +---+---+---+---+---+---+
+     *     |         l |   | D=======C |   |   |
+     *     |           |   | I |   | I |   |   |
+     *     |         k +---+-I-R---Q-I-+---+---+
+     *     |           |   | I |   | I |   |   |
+     *     |           |   | I |   | I |   |   |
+     *     |         j +---+-I-O---P-I-+---+---+
+     *     |           |   | I |   | I |   |   |
+     *     |         i |   | A=======B |   |   |
+     *     |           +---+---+---+---+---+---+
+     *     |                 a b   c d
+     *     +----------------------------------------->
+     *
+     * Points:
+     *     A = (a,i)
+     *     B = (d,i)
+     *     C = (d,l)
+     *     D = (a,l)
+     *
+     *     M(x) = X mod 16, i.e. Mc = C mod 16.
+     *
+     * Borders:
+     *     O = A + 16 - Ma   | A > 0
+     *       = A - Ma        | A <= 0
+     *
+     *     Q = C - Mc - 1    | C > 0 && Mc != 15
+     *       = C + Mc - 16   | C < 0 && Mc != -1
+     * </pre>
      */
     public static Set<Region> getBorderRegions(Region region) {
         Set<Region> borders = new HashSet<>();
@@ -74,34 +108,35 @@ public class WorldEditHandler {
         int minZ = min.getBlockZ();
         int maxZ = max.getBlockZ();
 
-        int minModX = minX < 0 ? -(minX % 16) : minX % 16;
-        int maxModX = maxX < 0 ? -(maxX % 16) : maxX % 16;
-        int minModZ = minZ < 0 ? -(minZ % 16) : minZ % 16;
-        int maxModZ = maxZ < 0 ? -(maxZ % 16) : maxZ % 16;
-        int minChunkX = minX + (16-minModX);
-        int maxChunkX = maxX - maxModX;
-        int minChunkZ = minZ + (16-minModZ);
-        int maxChunkZ = maxZ - maxModZ;
+        int minModX = minX % 16;
+        int maxModX = maxX % 16;
+        int minModZ = minZ % 16;
+        int maxModZ = maxZ % 16;
+        // Negative values are aligned differently than positive values
+        int minChunkX = minModX > 0 ? minX + 16 - minModX : minX - minModX;
+        int maxChunkX = maxModX >= 0 && maxModX != 15 ? maxX - maxModX - 1 : maxModX < 0 && maxModX != -1 ? maxX - 16 + maxModX : maxX;
+        int minChunkZ = minModZ > 0 ? minZ + 16 - minModZ : minZ - minModZ;
+        int maxChunkZ = maxModZ >= 0 && maxModZ != 15 ? maxZ - maxModZ - 1 : maxModZ < 0 && maxModZ != -1 ? maxZ - 16 + maxModZ : maxZ;
         // min < minChunk < maxChunk < max
-        if ((minChunkX - minX) != 0) {
+        if (minModX != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(minX, minY, minZ),
-                    new Vector(minChunkX, maxY, maxZ)));
+                    new Vector(minChunkX-1, maxY, maxZ)));
         }
-        if ((maxZ - maxChunkZ) != 0) {
+        if (maxModZ != 15 && maxModZ != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(minChunkX, minY, maxChunkZ),
+                    new Vector(minChunkX, minY, maxChunkZ+1),
                     new Vector(maxChunkX, maxY, maxZ)));
         }
-        if ((maxX - maxChunkX) != 0) {
+        if (maxModX != 15 && maxModX != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(maxChunkX, minY, minZ),
+                    new Vector(maxChunkX+1, minY, minZ),
                     new Vector(maxX, maxY, maxZ)));
         }
-        if ((minChunkZ - minZ) != 0) {
+        if (minModZ != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(minChunkX, minY, minZ),
-                    new Vector(maxChunkX, maxY, minChunkZ)));
+                    new Vector(maxChunkX, maxY, minChunkZ-1)));
         }
         return borders;
     }
@@ -113,7 +148,7 @@ public class WorldEditHandler {
         Set<Vector2D> innerChunks = getInnerChunks(cube);
         WorldRegenTask worldRegenTask = new WorldRegenTask(skyWorld, innerChunks);
         WorldEditRegenTask worldEditTask = new WorldEditRegenTask(skyWorld, getBorderRegions(cube));
-        uSkyBlock.getInstance().getExecutor().execute(uSkyBlock.getInstance(), new CompositeIncrementalTask(worldRegenTask, worldEditTask), new Runnable() {
+        uSkyBlock.getInstance().getExecutor().execute(uSkyBlock.getInstance(), new CompositeIncrementalTask(worldEditTask, worldRegenTask), new Runnable() {
             @Override
             public void run() {
                 long diff = System.currentTimeMillis() - t;
@@ -122,7 +157,7 @@ public class WorldEditHandler {
                     afterDeletion.run();
                 }
             }
-        }, 0.5f, 1); // 50% load, max. 10 ticks in a row
+        }, 0.5f, 1); // 50% load, max. 1 ticks in a row
     }
 
     private static Region getRegion(World skyWorld, ProtectedRegion region) {
