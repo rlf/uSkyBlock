@@ -1495,8 +1495,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 player.performCommand(command.substring(3).trim());
             } else {
                 player.setOp(true);
-                player.performCommand(command.substring(3).trim());
-                player.setOp(false);
+                // Prevent privilege escalation if called command throws unhandled exception
+                try {
+                	player.performCommand(command.substring(3).trim());
+                } finally {
+                	player.setOp(false);
+                }
             }
         } else if (command.startsWith("console:")) {
             getServer().dispatchCommand(getServer().getConsoleSender(), command.substring(8).trim());
