@@ -63,6 +63,10 @@ permissions:
             description: Let the player change their islands biome to MUSHROOM_ISLAND.
           usb.biome.taiga:
             description: Let the player change their islands biome to TAIGA.
+          usb.biome.plains:
+            description: Let the player change their islands biome to PLAINS.
+          usb.biome.extreme_hills:
+            description: Let the player change their islands biome to EXTREME_HILLS.
       usb.extra.*:
         children:
           usb.extra.hunger:
@@ -83,8 +87,6 @@ permissions:
             description: Let a player invite other players to join a party
           usb.party.kick:
             description: Let a player kick other players
-          usb.party.makeleader:
-            description: Let a player make another player leader of the party
           usb.party.join:
             description: Let a player join another player's party
       usb.mod.*:
