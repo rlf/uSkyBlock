@@ -175,6 +175,10 @@ options:
     # Clears the player's enderchest on island create/restart
     clearEnderChest: true
 
+    # [ticks] The number of ticks to wait, before porting the player back
+    # on /is restart (default: 20)
+    teleportDelay: 20
+
 # DO NOT TOUCH THE FIELDS BELOW
 version: 14
 force-replace:

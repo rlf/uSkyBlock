@@ -553,7 +553,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
             }
-        }, 20);
+        }, getConfig().getInt("options.restart.teleportDelay", 20));
     }
 
     public boolean restartPlayerIsland(final Player player, final Location next) {
@@ -760,7 +760,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     private void safeTeleport(final Player player, final Location homeSweetHome) {
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
-        if(player.hasPermission("usb.mod.bypassteleport") || (delay == 0)) {
+        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0)) {
     		player.setVelocity(new org.bukkit.util.Vector());
             player.teleport(homeSweetHome);
             player.setVelocity(new org.bukkit.util.Vector());
