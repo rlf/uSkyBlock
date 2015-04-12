@@ -30,4 +30,9 @@ public enum TimeUtil {;
     public static String ticksAsString(int ticks) {
         return millisAsString(ticks * 50);
     }
+
+    public static long secondsAsTicks(int secs) {
+        // 20 ticks per second = 50 ms per tick
+        return (secs * 100) / 5;
+    }
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-12 13:31+0200\n"
+"POT-Creation-Date: 2015-04-12 13:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: da <LL@li.org>\n"
@@ -907,7 +907,7 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4You do not have permission to warp to other islands!"
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:48
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:792
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:783
 msgid "§4That player does not exist!"
 msgstr "§4That player does not exist!"
 
@@ -987,9 +987,8 @@ msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr "§4Top ten list is empty! (perhaps the generation failed?)"
 
 #: us/talabrek/ultimateskyblock/island/IslandLogic.java:143
-#, fuzzy
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
-msgstr "§a#%2d §7(%5.2f): %s §7%s"
+msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 
 #: us/talabrek/ultimateskyblock/island/IslandLogic.java:152
 #, java-format
@@ -1015,9 +1014,8 @@ msgid "§eClick here to return to"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:68
-#, fuzzy
 msgid "§eyour island group's info."
-msgstr "§b{0}§d has joined your island group."
+msgstr "§edin øs gruppe information."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:74
 msgid "§eHover over an icon to view"
@@ -2339,48 +2337,53 @@ msgstr ""
 msgid "Island Biome"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:168
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:169
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Something went wrong saving the island and/or party data!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:636
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:637
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Player is already assigned to this island!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:749
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:748
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr "§4You are not part of an island. Returning you the spawn area!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:756
-#, fuzzy
-msgid "§4Returning you the spawn area!"
-msgstr "§4You are not part of an island. Returning you the spawn area!"
-
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:764
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:754
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleporting you to your island."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:797
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:768
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:807
+#, fuzzy, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§eYou can use that command again in {0} seconds."
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:788
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Unable to warp you to that player's island!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:801
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:792
 msgid "§aTeleporting you to "
 msgstr "§aTeleporting you to "
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:832
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:842
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:824
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:834
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4You must be closer to your island to set your skyblock home!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:839
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:831
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§aYour skyblock home has been set to your current location."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1192
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1184
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Could not create your Island. Please contact a server moderator."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1205
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1197
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Player doesn't have an island or it's already protected!"
+
+#, fuzzy
+#~ msgid "§4Returning you the spawn area!"
+#~ msgstr "§4You are not part of an island. Returning you the spawn area!"

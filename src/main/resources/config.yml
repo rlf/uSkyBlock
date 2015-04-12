@@ -1,3 +1,5 @@
+# The language used in the plugin (en is default, currently, only da is partially supported).
+language: en
 options:
   general:
     # [integer] The max number of players allowed in a single party. (including the leader)
@@ -174,6 +176,6 @@ options:
     clearEnderChest: true
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 13
+version: 14
 force-replace:
   options.party.invite-timeout: 100
