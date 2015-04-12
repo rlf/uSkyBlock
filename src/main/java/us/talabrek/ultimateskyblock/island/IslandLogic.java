@@ -176,7 +176,7 @@ public class IslandLogic {
     public void generateTopTen(final CommandSender sender) {
         List<IslandLevel> topTen = new ArrayList<>();
         final File folder = directoryIslands;
-        final String[] listOfFiles = folder.list(FileUtil.createYmlFilenameFilter());
+        final String[] listOfFiles = folder.list(FileUtil.createIslandFilenameFilter());
         for (String file : listOfFiles) {
             String islandName = FileUtil.getBasename(file);
             try {
@@ -263,5 +263,9 @@ public class IslandLogic {
             ranks.add(islandLevel);
             Collections.sort(ranks);
         }
+    }
+
+    public boolean hasIsland(Location loc) {
+        return loc == null || new File(directoryIslands, LocationUtil.getIslandName(loc) + ".yml").exists();
     }
 }

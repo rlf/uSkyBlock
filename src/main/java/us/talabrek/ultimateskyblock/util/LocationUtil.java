@@ -24,4 +24,11 @@ public enum LocationUtil {;
     public static boolean isEmptyLocation(Location location) {
         return location == null || (location.getBlockX() == 0 && location.getBlockZ() == 0 && location.getBlockY() == 0);
     }
+
+    public static String getIslandName(Location location) {
+        if (location == null) {
+            return null;
+        }
+        return "" + location.getBlockX() + "," + location.getBlockZ();
+    }
 }

@@ -61,7 +61,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public String locationForParty() {
-        return getPartyLocationString(this.islandLocation);
+        return LocationUtil.getIslandName(this.islandLocation);
     }
 
     public Player getPlayer() {
@@ -111,13 +111,6 @@ public class PlayerInfo implements Serializable {
         if (Bukkit.getPlayer(this.playerName) == null) {
             getPlayerConfig().set("player.kickWarning", true);
         }
-    }
-
-    private String getPartyLocationString(Location l) {
-        if (l == null) {
-            return null;
-        }
-        return "" + l.getBlockX() + "," + l.getBlockZ();
     }
 
     public void completeChallenge(final String challenge) {
