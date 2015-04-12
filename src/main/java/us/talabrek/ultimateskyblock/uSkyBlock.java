@@ -27,11 +27,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
-import org.xnap.commons.i18n.I18n;
-import org.xnap.commons.i18n.I18nFactory;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
@@ -548,7 +545,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             @Override
             public void run() {
                 getLogger().log(Level.FINE, "porting player back to the island");
-                homeTeleport(player);
+                homeTeleport(player, true);
                 WorldEditHandler.loadRegion(next);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
@@ -737,7 +734,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    public boolean homeTeleport(final Player player) {
+    public boolean homeTeleport(final Player player, boolean force) {
         getLogger().entering(CN, "homeTeleport", player);
         try {
             Location homeSweetHome = null;
@@ -750,17 +747,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 return true;
             }
             removeCreatures(homeSweetHome);
-            safeTeleport(player, homeSweetHome);
             player.sendMessage(tr("\u00a7aTeleporting you to your island."));
+            safeTeleport(player, homeSweetHome, force);
             return true;
         } finally {
             getLogger().exiting(CN, "homeTeleport");
         }
     }
 
-    private void safeTeleport(final Player player, final Location homeSweetHome) {
+    private void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
-        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0)) {
+        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
     		player.setVelocity(new org.bukkit.util.Vector());
             player.teleport(homeSweetHome);
             player.setVelocity(new org.bukkit.util.Vector());
@@ -777,7 +774,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     	}
     }
 
-    public boolean warpTeleport(final Player player, final PlayerInfo pi) {
+    public boolean warpTeleport(final Player player, final PlayerInfo pi, boolean force) {
         Location warpSweetWarp = null;
         if (pi == null) {
             player.sendMessage(tr("\u00a74That player does not exist!"));
@@ -788,7 +785,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             player.sendMessage(tr("\u00a74Unable to warp you to that player's island!"));
             return true;
         }
-        safeTeleport(player, warpSweetWarp);
+        safeTeleport(player, warpSweetWarp, force);
         player.sendMessage(tr("\u00a7aTeleporting you to " + pi.getPlayerName() + "'s island."));
         return true;
     }
@@ -1176,7 +1173,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 setNewPlayerIsland(player, next);
                 changePlayerBiome(player, "OCEAN");
                 protectWithWorldGuard(player, player, pi);
-                homeTeleport(player);
+                homeTeleport(player, true);
                 setRestartCooldown(player);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);

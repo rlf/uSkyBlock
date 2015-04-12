@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -54,7 +53,7 @@ public class WarpCommand extends RequirePlayerCommand {
                     return true;
                 }
                 if (!island.isBanned(player)) {
-                    plugin.warpTeleport(player, playerInfo);
+                    plugin.warpTeleport(player, playerInfo, false);
                 } else {
                     player.sendMessage(tr("\u00a74That player has forbidden you from warping to their island."));
                 }

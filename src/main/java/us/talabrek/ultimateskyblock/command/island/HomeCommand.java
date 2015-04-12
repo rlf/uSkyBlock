@@ -22,7 +22,7 @@ public class HomeCommand extends RequireIslandCommand {
             island.setMaxPartySize(maxParty);
         }
         island.updatePartyNumber(player);
-        plugin.homeTeleport(player);
+        plugin.homeTeleport(player, false);
         return true;
     }
 }
