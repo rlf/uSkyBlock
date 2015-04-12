@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -560,7 +559,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (next.getBlockX() == 0 && next.getBlockZ() == 0) {
             return false;
         }
-        spawnTeleport(player);
         islandLogic.clearIsland(next, new Runnable() {
             @Override
             public void run() {

@@ -17,8 +17,10 @@ import us.talabrek.ultimateskyblock.handler.worldedit.WorldEditAdaptor;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -192,5 +194,17 @@ public class WorldEditHandler {
         }
     }
 
-
+    public static List<Player> getPlayersInRegion(World world, ProtectedRegion region) {
+        // Note: This might be heavy - for large servers...
+        List<Player> players = new ArrayList<>();
+        for (Player player : world.getPlayers()) {
+            if (player != null && player.isOnline()) {
+                Location p = player.getLocation();
+                if (region.contains(p.getBlockX(), p.getBlockY(), p.getBlockZ())) {
+                    players.add(player);
+                }
+            }
+        }
+        return players;
+    }
 }

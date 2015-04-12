@@ -87,6 +87,12 @@ public class IslandLogic {
         World skyBlockWorld = plugin.getWorld();
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
+            for (Player player : WorldEditHandler.getPlayersInRegion(plugin.getWorld(), region)) {
+                if (player != null && player.isOnline() && !player.isFlying()) {
+                    player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
+                    plugin.spawnTeleport(player);
+                }
+            }
             WorldEditHandler.clearIsland(skyBlockWorld, region, afterDeletion);
         } else {
             log.log(Level.WARNING, "Trying to delete an island - with no WG region! ({0})", LocationUtil.asString(loc));
