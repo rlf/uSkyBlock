@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-04 13:14+0200\n"
+"POT-Creation-Date: 2015-04-12 13:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: da <LL@li.org>\n"
@@ -855,14 +855,19 @@ msgstr ""
 msgid "§eYou can restart your island in "
 msgstr "§eYou can restart your island in "
 
-#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:21
+#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:20
+msgid "§cYou do not have permission to set your island's warp point!"
+msgstr "§cYou do not have permission to set your island's warp point!"
+
+#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:22
+#, fuzzy
+msgid "§cYou need to be on your own island to set the warp!"
+msgstr "§4You must be on your island to do that!"
+
+#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:25
 #, java-format
 msgid "§b{0}§d changed the island warp location."
 msgstr "§b{0}§d changed the island warp location."
-
-#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:23
-msgid "§cYou do not have permission to set your island's warp point!"
-msgstr "§cYou do not have permission to set your island's warp point!"
 
 #: us/talabrek/ultimateskyblock/command/island/ToggleWarp.java:22
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
@@ -987,7 +992,7 @@ msgstr "§a#%2d §7(%5.2f): %s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eYour rank is: §f{0}"
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:221
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:214
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr "§cYou were removed from your island since the last time you played!"
 
@@ -2066,6 +2071,11 @@ msgstr "§4This Challenge is not repeatable!"
 msgid "§a§lIsland Level"
 msgstr ""
 
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:803
+#, java-format
+msgid "§eCurrent Level: §a{0,number,##.#}"
+msgstr "§eLevel: §a{0,number,##.#}"
+
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:804
 msgid "§fGain island levels by expanding"
 msgstr ""
@@ -2363,10 +2373,10 @@ msgstr "§4You must be closer to your island to set your skyblock home!"
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§aYour skyblock home has been set to your current location."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1192
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1194
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Could not create your Island. Please contact a server moderator."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1205
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1207
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Player doesn't have an island or it's already protected!"

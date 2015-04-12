@@ -800,7 +800,7 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.EXP_BOTTLE, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Level"));
-        lores.add("\u00a7eCurrent Level: \u00a7a" + islandInfo.getLevel());
+        lores.add(tr("\u00a7eCurrent Level: \u00a7a{0,number,##.#}", islandInfo.getLevel()));
         lores.add(tr("\u00a7fGain island levels by expanding"));
         lores.add(tr("\u00a7fyour skyblock and completing"));
         lores.add(tr("\u00a7fcertain challenges. Rarer blocks"));

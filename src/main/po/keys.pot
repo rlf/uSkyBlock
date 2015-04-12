@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-06 13:22+0200\n"
+"POT-Creation-Date: 2015-04-12 13:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -829,13 +829,17 @@ msgstr ""
 msgid "§eYou can restart your island in "
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:21
-#, java-format
-msgid "§b{0}§d changed the island warp location."
+#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:20
+msgid "§cYou do not have permission to set your island's warp point!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:23
-msgid "§cYou do not have permission to set your island's warp point!"
+#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:22
+msgid "§cYou need to be on your own island to set the warp!"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:25
+#, java-format
+msgid "§b{0}§d changed the island warp location."
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/ToggleWarp.java:22
@@ -957,7 +961,7 @@ msgstr ""
 msgid "§eYour rank is: §f{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:221
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:214
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr ""
 
@@ -2005,6 +2009,11 @@ msgstr ""
 msgid "§a§lIsland Level"
 msgstr ""
 
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:803
+#, java-format
+msgid "§eCurrent Level: §a{0,number,##.#}"
+msgstr ""
+
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:804
 msgid "§fGain island levels by expanding"
 msgstr ""
@@ -2290,10 +2299,10 @@ msgstr ""
 msgid "§aYour skyblock home has been set to your current location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1192
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1194
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1205
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1207
 msgid "Player doesn't have an island or it's already protected!"
 msgstr ""
