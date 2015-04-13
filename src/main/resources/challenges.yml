@@ -595,7 +595,7 @@ ranks:
           currency: 50
           xp: 50
       torchbearer:
-        description: 'Create and place at least 15,000 torches on your island.'
+        description: 'Place at least 15,000 torches on your island.'
         type: onIsland
         radius: 52
         requiredItems: '50:15000'
