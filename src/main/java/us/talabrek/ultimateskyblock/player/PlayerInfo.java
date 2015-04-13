@@ -307,9 +307,11 @@ public class PlayerInfo implements Serializable {
     }
 
     public void updatePlayerInfo(Player player) {
-        setDisplayName(player.getDisplayName());
-        uuid = player.getUniqueId();
-        save();
+        if (!player.getDisplayName().equals(displayName) || !player.getUniqueId().equals(uuid)) {
+            setDisplayName(player.getDisplayName());
+            uuid = player.getUniqueId();
+            save();
+        }
     }
 
     public UUID getUniqueId() {
