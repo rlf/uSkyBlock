@@ -127,34 +127,45 @@ public class IslandLogic {
         return false;
     }
 
-    public void displayTopTen(final CommandSender sender) {
-        int playerrank = 0;
-        sender.sendMessage(tr("\u00a7eDisplaying the top 10 islands:"));
+    public void displayTopTen(final CommandSender sender, int page) {
         synchronized (ranks) {
+            int maxpage = (( ranks.size()-1) / 10) + 1;
+            if (page > maxpage) {
+                page = maxpage;
+            }
+            if (page < 1) {
+                page = 1;
+            }
+            sender.sendMessage(tr("\u00a7eWALL OF FAME (page {0} of {1}):", page, maxpage));
             if (ranks == null || ranks.isEmpty()) {
                 sender.sendMessage(tr("\u00a74Top ten list is empty! (perhaps the generation failed?)"));
             }
             int place = 1;
             String playerName = sender instanceof Player ? ((Player)sender).getDisplayName() : sender.getName();
-            for (final IslandLevel level : ranks.subList(0, Math.min(ranks.size(), 10))) {
+            PlayerInfo playerInfo = plugin.getPlayerInfo(playerName);
+            IslandRank rank = null;
+            if (playerInfo != null && playerInfo.getHasIsland()) {
+                rank = getRank(playerInfo.locationForParty());
+            }
+            int offset = (page-1) * 10;
+            place += offset;
+            for (final IslandLevel level : ranks.subList(offset, Math.min(ranks.size(), 10*page))) {
                 String members = "";
                 if (showMembers && !level.getMembers().isEmpty()) {
                     members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
                 }
                 sender.sendMessage(String.format(tr("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a77%s"), place, level.getScore(),
                         level.getLeaderName(), members));
-                if (level.getMembers().contains(sender.getName()) || level.getLeaderName().equals(playerName)) {
-                    playerrank = place;
-                }
                 place++;
             }
+            if (rank != null) {
+                sender.sendMessage(tr("\u00a7eYour rank is: \u00a7f{0}", rank.getRank()));
+            }
         }
-        if (playerrank > 0) {
-            sender.sendMessage(tr("\u00a7eYour rank is: \u00a7f{0}", playerrank));
-        }
+
     }
 
-    public void showTopTen(final CommandSender sender) {
+    public void showTopTen(final CommandSender sender, final int page) {
         long t = System.currentTimeMillis();
         if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || sender.hasPermission("usb.admin.topten")) {
             lastGenerate = t;
@@ -162,11 +173,11 @@ public class IslandLogic {
                 @Override
                 public void run() {
                     generateTopTen(sender);
-                    displayTopTen(sender);
+                    displayTopTen(sender, page);
                 }
             });
         } else {
-            displayTopTen(sender);
+            displayTopTen(sender, page);
         }
     }
 

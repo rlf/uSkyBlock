@@ -26,7 +26,7 @@ public class GenTopTenCommand extends AbstractUSBCommand {
             @Override
             public void run() {
                 plugin.getIslandLogic().generateTopTen(sender);
-                plugin.getIslandLogic().showTopTen(sender);
+                plugin.getIslandLogic().showTopTen(sender, 1);
                 sender.sendMessage(tr("\u00a7eFinished generation of the Top Ten list"));
             }
         });

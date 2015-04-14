@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 00:39+0200\n"
+"POT-Creation-Date: 2015-04-15 01:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -958,19 +958,20 @@ msgstr ""
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:132
-msgid "§eDisplaying the top 10 islands:"
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:139
+#, java-format
+msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:135
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:141
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:144
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:157
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:153
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:162
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr ""

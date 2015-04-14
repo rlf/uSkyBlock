@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 00:39+0200\n"
+"POT-Creation-Date: 2015-04-15 01:01+0200\n"
 "PO-Revision-Date: 2015-04-12 14:26+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
@@ -991,19 +991,20 @@ msgstr "§b{0}§d deaktiverede øens besøgsportal."
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:132
-msgid "§eDisplaying the top 10 islands:"
-msgstr "§eViser top 10:"
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:139
+#, java-format
+msgid "§eWALL OF FAME (page {0} of {1}):"
+msgstr "§eTOP (side {0} af {1}:"
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:135
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:141
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr "§4Top 10 listen er tom! (Måske fejlede opdateringen?)"
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:144
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:157
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:153
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:162
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin position er: §f{0}"
@@ -1910,6 +1911,9 @@ msgstr ""
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:1195
 msgid "Player doesn't have an island or it's already protected!"
 msgstr ""
+
+#~ msgid "§eDisplaying the top 10 islands:"
+#~ msgstr "§eViser top 10:"
 
 #~ msgid "§eHover over an icon to view"
 #~ msgstr "§eHold musen over et ikon for"
