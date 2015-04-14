@@ -420,7 +420,7 @@ public class IslandInfo {
         boolean dirty = false;
         if (section != null) {
             String uuid = section.getString("uuid", null);
-            if (uuid == null || uuid.equals(player.getUniqueId())) {
+            if (uuid == null || uuid.equals(UUIDUtil.asString(player.getUniqueId()))) {
                 section = members.createSection(newName, section.getValues(true));
                 section.set("uuid", UUIDUtil.asString(player.getUniqueId()));
                 members.set(oldName, null); // remove existing section
