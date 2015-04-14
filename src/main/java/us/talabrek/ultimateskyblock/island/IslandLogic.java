@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
+import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -273,5 +274,18 @@ public class IslandLogic {
 
     public boolean hasIsland(Location loc) {
         return loc == null || new File(directoryIslands, LocationUtil.getIslandName(loc) + ".yml").exists();
+    }
+
+    public IslandRank getRank(String islandName) {
+        if (ranks != null) {
+            ArrayList<IslandLevel> rankList = new ArrayList<>(ranks);
+            for (int i = 0; i < rankList.size(); i++) {
+                IslandLevel level = rankList.get(i);
+                if (level.getIslandName().equalsIgnoreCase(islandName)) {
+                    return new IslandRank(level, i+1);
+                }
+            }
+        }
+        return null;
     }
 }

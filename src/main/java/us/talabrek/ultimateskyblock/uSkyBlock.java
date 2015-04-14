@@ -30,6 +30,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
+import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
@@ -1555,6 +1556,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
         }
         return 0;
+    }
+
+    @Override
+    public IslandRank getIslandRank(Player player) {
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        return islandLogic != null && playerInfo != null && playerInfo.getHasIsland() ?
+                islandLogic.getRank(playerInfo.locationForParty())
+                : null;
     }
 
     public void fireChangeEvent(CommandSender sender, uSkyBlockEvent.Cause cause) {

@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandScore;
@@ -55,7 +56,7 @@ public class LevelCommand extends RequireIslandCommand {
     }
 
     public boolean getIslandLevel(final Player player, final String islandPlayer, final String cmd) {
-        PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
+        final PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
         if (info == null || !info.getHasIsland() && !plugin.getIslandInfo(info).isParty()) {
             player.sendMessage(tr("\u00a74That player is invalid or does not have an island!"));
             return false;
@@ -71,7 +72,11 @@ public class LevelCommand extends RequireIslandCommand {
                 if (player.isOnline()) {
                     player.sendMessage(tr("\u00a7eInformation about " + islandPlayer + "'s Island:"));
                     if (cmd.equalsIgnoreCase("level")) {
-                        player.sendMessage(String.format("\u00a7aIsland level is %5.2f", plugin.getIslandInfo(playerInfo).getLevel()));
+                        IslandRank rank = plugin.getIslandLogic().getRank(playerInfo.locationForParty());
+                        player.sendMessage(new String[]{
+                                tr("\u00a7aIsland level is {0,number,###.##}", rank.getScore()),
+                                tr("\u00a79Rank is {0}", rank.getRank())
+                        });
                     }
                 }
             }
