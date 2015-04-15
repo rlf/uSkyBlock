@@ -431,7 +431,7 @@ public class IslandInfo {
         }
         if (isLeader(oldName)) {
             String uuid = config.getString("party.leader-uuid", null);
-            if (uuid == null || uuid.equals(player.getUniqueId())) {
+            if (uuid == null || uuid.equals(UUIDUtil.asString(player.getUniqueId()))) {
                 config.set("party.leader", newName);
                 config.set("party.leader-uuid", UUIDUtil.asString(player.getUniqueId()));
                 dirty = true;

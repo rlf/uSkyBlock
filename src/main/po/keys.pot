@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 01:09+0200\n"
+"POT-Creation-Date: 2015-04-15 22:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1813,20 +1813,40 @@ msgid ""
 "§e§lClick here to change."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:751
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:750
 msgid "§9Island Group Members"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:759
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:758
 msgid "§a§lLeader"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:769
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:768
 msgid "Permissions"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:808
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:807
 msgid "Island Biome"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:860
+msgid "Challenge Menu ("
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:894
+msgid "§9Island Log"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:901
+msgid "§9Island Menu"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:952
+msgid "§9Island Create Menu"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:968
+msgid "§9SB Island Group Members"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:167

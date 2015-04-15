@@ -741,7 +741,6 @@ public class SkyBlockMenu {
     }
 
     public void onClick(InventoryClickEvent event) {
-        // TODO: 25/02/2015 - R4zorax: NOTE: the tr calls below will most likely fck things up.
         if (event == null || event.getCurrentItem() == null || event.getWhoClicked() == null || event.getSlotType() != InventoryType.SlotType.CONTAINER) {
             return; // Bail out, nothing we can do anyway
         }
@@ -858,7 +857,7 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));
             }
-        } else if (event.getInventory().getName().contains("Challenge Menu (")) {
+        } else if (event.getInventory().getName().contains(tr("Challenge Menu ("))) {
             event.setCancelled(true);
             Matcher m = CHALLENGE_PAGE_HEADER.matcher(event.getInventory().getName());
             int page = 1;
@@ -892,14 +891,14 @@ public class SkyBlockMenu {
                     p.openInventory(displayIslandGUI(p));
                 }
             }
-        } else if (event.getInventory().getName().contains("Island Log")) {
+        } else if (event.getInventory().getName().contains(tr("\u00a79Island Log"))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
             p.closeInventory();
             p.openInventory(displayIslandGUI(p));
-        } else if (event.getInventory().getName().contains("Island Menu")) {
+        } else if (event.getInventory().getName().contains(tr("\u00a79Island Menu"))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
@@ -944,15 +943,13 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.performCommand("island lock");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.SIGN) {
-                p.performCommand("chestcommands open island_help");
             } else {
                 if (!isExtraMenuAction(p, event.getCurrentItem())) {
                     p.closeInventory();
                     p.openInventory(displayIslandGUI(p));
                 }
             }
-        } else if (event.getInventory().getName().contains("Island Create Menu")) {
+        } else if (event.getInventory().getName().contains(tr("\u00a79Island Create Menu"))) {
             event.setCancelled(true);
             if (event.getSlot() == 0) {
                 p.closeInventory();
@@ -968,7 +965,7 @@ public class SkyBlockMenu {
     }
 
     public void onDrag(InventoryDragEvent event) {
-        if (event.getInventory().getName().equalsIgnoreCase("\u00a79SB Island Group Members")) {
+        if (event.getInventory().getName().equalsIgnoreCase(tr("\u00a79SB Island Group Members"))) {
             event.setCancelled(true);
             SkullMeta meta = (SkullMeta) event.getCursor().getItemMeta();
             Player p = (Player) event.getWhoClicked();

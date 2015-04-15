@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 01:01+0200\n"
+"POT-Creation-Date: 2015-04-15 22:43+0200\n"
 "PO-Revision-Date: 2015-04-12 14:26+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
@@ -790,12 +790,12 @@ msgid "§eYou can use that command again in {0} seconds."
 msgstr "§eDu kan ikke bruge den kommando igen de næste {0} sekunder."
 
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:77
-#, fuzzy, java-format
+#, java-format
 msgid "§aIsland level is {0,number,###.##}"
-msgstr "§eXP præmie: §f{0,number,#.#}"
+msgstr "§eØen niveau er {0,number,###.##}"
 
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:78
-#, fuzzy, java-format
+#, java-format
 msgid "§9Rank is {0}"
 msgstr "§eDin position er: §f{0}"
 
@@ -1275,11 +1275,12 @@ msgstr "§lØens Log"
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:236
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:259
-#, fuzzy
 msgid ""
 "§eClick here to return to\n"
 "§ethe main island screen."
-msgstr "§eKlik her og returner til"
+msgstr ""
+"§eKlik her og returner til\n"
+"§eøens hovedmenu."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:243
 msgid "§e§lIsland Log"
@@ -1698,9 +1699,9 @@ msgid "§a§lIsland Level"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:633
-#, fuzzy, java-format
+#, java-format
 msgid "§eCurrent Level: §a{0,number,##.#}"
-msgstr "§eXP præmie: §f{0,number,#.#}"
+msgstr "§eØens niveau: §a{0,number,##.#}"
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:634
 msgid ""
@@ -1849,21 +1850,41 @@ msgid ""
 "§e§lClick here to change."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:751
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:750
 msgid "§9Island Group Members"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:759
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:758
 msgid "§a§lLeader"
 msgstr "§a§lLeder"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:769
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:768
 msgid "Permissions"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:808
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:807
 msgid "Island Biome"
 msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:860
+msgid "Challenge Menu ("
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:894
+msgid "§9Island Log"
+msgstr "§9Øens Log"
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:901
+msgid "§9Island Menu"
+msgstr "§9Hoved menu"
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:952
+msgid "§9Island Create Menu"
+msgstr "§9Start menu"
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:968
+msgid "§9SB Island Group Members"
+msgstr "§9Ø Medlemskab"
 
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:167
 msgid "Something went wrong saving the island and/or party data!"
@@ -1883,9 +1904,9 @@ msgstr ""
 
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:766
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:805
-#, fuzzy, java-format
+#, java-format
 msgid "§aYou will be teleported in {0} seconds."
-msgstr "§eDu kan ikke bruge den kommando igen de næste {0} sekunder."
+msgstr "§eDu vil blive teleporteret om {0} sekunder."
 
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:786
 msgid "§4Unable to warp you to that player's island!"
