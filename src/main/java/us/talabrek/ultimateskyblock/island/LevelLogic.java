@@ -1,5 +1,11 @@
 package us.talabrek.ultimateskyblock.island;
 
+import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import org.bukkit.Bukkit;
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -8,12 +14,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
+import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,11 +33,15 @@ import java.util.regex.Pattern;
  * Business logic regarding the calculation of level
  */
 public class LevelLogic {
+    public static final String CN = LevelLogic.class.getName();
+    private static final Logger log = Logger.getLogger(CN);
+
     private static final Pattern KEY_PATTERN = Pattern.compile("(?<id>[0-9]+)([/:](?<sub>(\\*|[0-9]+|[0-9]+-[0-9]+)))?");
     private static final int MAX_BLOCK = 255;
     private static final int DATA_BITS = 4;
     private static final int MAX_INDEX = MAX_BLOCK << DATA_BITS;
     private static final int DATA_MASK = 0xf;
+    private final uSkyBlock plugin;
     private final FileConfiguration config;
 
     private final float blockValue[] = new float[MAX_INDEX];
@@ -33,7 +49,8 @@ public class LevelLogic {
     private final int blockDR[] = new int[MAX_INDEX];
     private int pointsPerLevel;
 
-    public LevelLogic(FileConfiguration config) {
+    public LevelLogic(uSkyBlock plugin, FileConfiguration config) {
+        this.plugin = plugin;
         this.config = config;
         load();
         pointsPerLevel = config.getInt("general.pointsPerLevel");
@@ -44,7 +61,7 @@ public class LevelLogic {
         int defaultLimit = config.getInt("general.limit", Integer.MAX_VALUE);
         int defaultDR = config.getInt("general.defaultScale", 10000);
         // Per default, let all blocks (regardless of data-value) share limit and score
-        for (int b = 0;  b < MAX_INDEX; b++) {
+        for (int b = 0; b < MAX_INDEX; b++) {
             if ((b << DATA_BITS) == b) {
                 blockValue[b] = defaultValue;
             } else {
@@ -107,18 +124,70 @@ public class LevelLogic {
         } else if (!sub.isEmpty()) {
             String[] split = sub.split("-");
             if (split.length == 1) {
-                return new byte[] { (byte) (Integer.parseInt(split[0]) & 0xff)};
+                return new byte[]{(byte) (Integer.parseInt(split[0]) & 0xff)};
             } else {
                 int min = Integer.parseInt(split[0]);
                 int max = Integer.parseInt(split[1]);
-                byte[] data = new byte[max-min];
+                byte[] data = new byte[max - min];
                 for (int i = 0; i < data.length; i++) {
-                    data[i] = (byte) ((min+i) & 0xff);
+                    data[i] = (byte) ((min + i) & 0xff);
                 }
                 return data;
             }
         }
         return new byte[0];
+    }
+
+    public void calculateScoreAsync(final Location l, final Callback<IslandScore> callback) {
+        log.entering(CN, "calculateScoreAsync");
+        // is further threading needed here?
+        ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
+        if (region == null) {
+            log.warning("No WG region found for island at " + LocationUtil.asString(l));
+            return;
+        }
+        Region weRegion = new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint());
+        final List<ChunkSnapshot> snapshots = new ArrayList<>();
+        log.finer("Snapshotting chunks");
+        for (Vector2D chunk : weRegion.getChunks()) {
+            snapshots.add(l.getWorld().getChunkAt(chunk.getBlockX(), chunk.getBlockZ()).getChunkSnapshot());
+        }
+        log.finer("Done making chunk-snapshots of " + weRegion);
+        final int px = l.getBlockX();
+        final int pz = l.getBlockZ();
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+            @Override
+            public void run() {
+                final int radius = Settings.island_protectionRange / 2;
+                final int[] counts = createBlockCountArray();
+                for (int x = px - radius; x <= px + radius; ++x) {
+                    for (int z = pz - radius; z <= pz + radius; ++z) {
+                        ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshots);
+                        // Fucking modulo for negative numbers...
+                        int cx = x < 0 ? ((x % 16) + 16) % 16 : x % 16;
+                        int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
+                        for (int y = 0; y <= 255; y++) {
+                            int blockId = chunk.getBlockTypeId(cx, y, cz);
+                            blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
+                            addBlockCount(blockId, counts);
+                        }
+                    }
+                }
+                IslandScore islandScore = createIslandScore(counts);
+                callback.setState(islandScore);
+                Bukkit.getScheduler().runTask(plugin, callback);
+                log.exiting(CN, "calculateScoreAsync");
+            }
+        });
+    }
+
+    private ChunkSnapshot getChunkSnapshot(int x, int z, List<ChunkSnapshot> snapshots) {
+        for (ChunkSnapshot chunk : snapshots) {
+            if (chunk.getX() == x && chunk.getZ() == z) {
+                return chunk;
+            }
+        }
+        return null;
     }
 
     public IslandScore calculateScore(Location l) {
@@ -129,7 +198,7 @@ public class LevelLogic {
         final int[] counts = createBlockCountArray();
         for (int x = -radius; x <= radius; ++x) {
             for (int z = -radius; z <= radius; ++z) {
-                addBlockCount(w, px+x, pz+z, counts);
+                addBlockCount(w, px + x, pz + z, counts);
             }
         }
         return createIslandScore(counts);
@@ -138,7 +207,7 @@ public class LevelLogic {
     public IslandScore createIslandScore(int[] counts) {
         double score = 0;
         List<BlockScore> blocks = new ArrayList<>();
-        for (int i = 1<<DATA_BITS; i < MAX_BLOCK<<DATA_BITS; ++i) {
+        for (int i = 1 << DATA_BITS; i < MAX_BLOCK << DATA_BITS; ++i) {
             int count = counts[i];
             if (count > 0 && blockValue[i] > 0) {
                 BlockScore.State state = BlockScore.State.NORMAL;
@@ -152,24 +221,32 @@ public class LevelLogic {
                 }
                 double blockScore = adjustedCount * blockValue[i];
                 score += blockScore;
-                blocks.add(new BlockScore(new ItemStack(i >> DATA_BITS, 1, (short)(i & DATA_MASK)), count, blockScore/ pointsPerLevel, state));
+                blocks.add(new BlockScore(new ItemStack(i >> DATA_BITS, 1, (short) (i & DATA_MASK)), count, blockScore / pointsPerLevel, state));
             }
         }
-        return new IslandScore(score/ pointsPerLevel, blocks);
+        return new IslandScore(score / pointsPerLevel, blocks);
     }
 
     public void addBlockCount(World w, int x, int z, int[] counts) {
         for (int y = 0; y <= 255; ++y) {
             Block block = w.getBlockAt(x, y, z);
-            int blockId = getBlockId(block);
-            if (blockValue[blockId] == -1) {
-                blockId = blockId & (0xffffffff ^ DATA_MASK); // remove sub-type
-            } else if (blockValue[blockId] < -1) {
-                // Direct addressing
-                blockId = -(Math.round(blockValue[blockId]) & 0xffffff);
-            }
-            counts[blockId] += 1;
+            addBlockCount(block, counts);
         }
+    }
+
+    private void addBlockCount(Block block, int[] counts) {
+        int blockId = getBlockId(block);
+        addBlockCount(blockId, counts);
+    }
+
+    private void addBlockCount(int blockId, int[] counts) {
+        if (blockValue[blockId] == -1) {
+            blockId = blockId & (0xffffffff ^ DATA_MASK); // remove sub-type
+        } else if (blockValue[blockId] < -1) {
+            // Direct addressing
+            blockId = -(Math.round(blockValue[blockId]) & 0xffffff);
+        }
+        counts[blockId] += 1;
     }
 
     private int getBlockId(Block block) {

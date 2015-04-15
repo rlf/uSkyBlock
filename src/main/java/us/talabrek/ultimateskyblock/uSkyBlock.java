@@ -36,6 +36,7 @@ import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
 import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.async.BalancedExecutor;
+import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
@@ -1416,7 +1417,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         islandGenerator = new IslandGenerator(getConfig());
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
-        this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
+        this.levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this, directoryIslands);
         this.notifier = new PlayerNotifier(getConfig());
         registerEvents(playerDB);
@@ -1622,5 +1623,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public PlayerDB getPlayerDB() {
         return playerDB;
+    }
+
+    public void calculateScoreAsync(final Player player, String islandName, final Callback<IslandScore> callback) {
+        IslandInfo islandInfo = getIslandInfo(islandName);
+        getLevelLogic().calculateScoreAsync(islandInfo.getIslandLocation(), new Callback<IslandScore>() {
+            @Override
+            public void run() {
+                callback.setState(getState());
+                callback.run();
+                fireChangeEvent(new uSkyBlockEvent(player, getInstance(), uSkyBlockEvent.Cause.RANK_UPDATED));
+            }
+        });
     }
 }

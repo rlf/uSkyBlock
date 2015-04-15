@@ -47,16 +47,28 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
         return score;
     }
 
-
     @Override
     public List<BlockScore> getTop(int num) {
+        return getTop(0, num);
+    }
+
+    @Override
+    public List<BlockScore> getTop(int offset, int num) {
         if (num <= 0) {
             throw new IllegalArgumentException("Number must be a positive integer.");
+        }
+        if (offset < 0) {
+            throw new IllegalArgumentException("Offset must be a non-negative integer.");
         }
         if (!isSorted) {
             Collections.sort(top, new BlockScoreComparator());
             isSorted = true;
         }
-        return top.subList(0, Math.min(num, top.size()));
+        return top.subList(offset, Math.min(offset+num, top.size()));
+    }
+
+    @Override
+    public int getSize() {
+        return top.size();
     }
 }
