@@ -32,20 +32,14 @@ public class LevelCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7eYou must be on your island to use this command."));
                 return true;
             }
-            if (!plugin.onInfoCooldown(player) || Settings.general_cooldownInfo == 0) {
-                plugin.setInfoCooldown(player);
-                if (!island.isParty() && !pi.getHasIsland()) {
-                    player.sendMessage(tr("\u00a74You do not have an island!"));
-                } else {
-                    getIslandLevel(player, player.getName(), alias);
-                }
-                return true;
+            if (!island.isParty() && !pi.getHasIsland()) {
+                player.sendMessage(tr("\u00a74You do not have an island!"));
+            } else {
+                getIslandLevel(player, player.getName(), alias);
             }
-            player.sendMessage(tr("\u00a7eYou can use that command again in {0} seconds.", plugin.getInfoCooldownTime(player) / 1000L));
             return true;
         } else if (args.length == 1) {
-            if (player.hasPermission("usb.island.info.other") && (!plugin.onInfoCooldown(player) || Settings.general_cooldownInfo == 0)) {
-                plugin.setInfoCooldown(player);
+            if (player.hasPermission("usb.island.level.other")) {
                 getIslandLevel(player, args[0], alias);
             } else {
                 player.sendMessage(tr("\u00a74You do not have access to that command!"));
@@ -86,7 +80,7 @@ public class LevelCommand extends RequireIslandCommand {
                 @Override
                 public void run() {
                     try {
-                    	IslandScore score = plugin.recalculateScore(player, playerInfo.locationForParty());
+                        IslandScore score = plugin.recalculateScore(player, playerInfo.locationForParty());
                         plugin.fireChangeEvent(new uSkyBlockEvent(player, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
                     } catch (Exception e) {
                         uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);

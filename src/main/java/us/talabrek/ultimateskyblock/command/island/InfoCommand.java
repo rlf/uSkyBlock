@@ -31,20 +31,14 @@ public class InfoCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7eYou must be on your island to use this command."));
                 return true;
             }
-            if (!plugin.onInfoCooldown(player) || Settings.general_cooldownInfo == 0) {
-                plugin.setInfoCooldown(player);
-                if (!island.isParty() && !pi.getHasIsland()) {
-                    player.sendMessage(tr("\u00a74You do not have an island!"));
-                } else {
-                    getIslandInfo(player, player.getName(), alias, args.length == 1 ? Integer.parseInt(args[0], 10) : 1);
-                }
-                return true;
+            if (!island.isParty() && !pi.getHasIsland()) {
+                player.sendMessage(tr("\u00a74You do not have an island!"));
+            } else {
+                getIslandInfo(player, player.getName(), alias, args.length == 1 ? Integer.parseInt(args[0], 10) : 1);
             }
-            player.sendMessage(tr("\u00a7eYou can use that command again in {0,number,##.#} seconds.", plugin.getInfoCooldownTime(player) / 1000L));
             return true;
         } else if (args.length == 1 || (args.length == 2 && args[1].matches("\\d*"))) {
-            if (player.hasPermission("usb.island.info.other") && (!plugin.onInfoCooldown(player) || Settings.general_cooldownInfo == 0)) {
-                plugin.setInfoCooldown(player);
+            if (player.hasPermission("usb.island.info.other")) {
                 getIslandInfo(player, args[0], alias, args.length == 2 ? Integer.parseInt(args[1], 10) : 1);
             } else {
                 player.sendMessage(tr("\u00a74You do not have access to that command!"));
@@ -66,7 +60,7 @@ public class InfoCommand extends RequireIslandCommand {
             @Override
             public void run() {
                 if (player.isOnline()) {
-                    int maxPage = ((getState().getSize()-1) / 10) + 1;
+                    int maxPage = ((getState().getSize() - 1) / 10) + 1;
                     int currentPage = page;
                     if (currentPage < 1) {
                         currentPage = 1;
@@ -77,7 +71,7 @@ public class InfoCommand extends RequireIslandCommand {
                     player.sendMessage(tr("\u00a7eBlocks on {0}s Island (page {1,number} of {2,number}):", islandPlayer, currentPage, maxPage));
                     if (cmd.equalsIgnoreCase("info") && getState() != null) {
                         player.sendMessage(tr("Score Count Block"));
-                        for (BlockScore score : getState().getTop((currentPage-1)*10, 10)) {
+                        for (BlockScore score : getState().getTop((currentPage - 1) * 10, 10)) {
                             player.sendMessage(score.getState().getColor() + String.format("%05.2f  %d %s",
                                     score.getScore(), score.getCount(),
                                     VaultHandler.getItemName(score.getBlock())));

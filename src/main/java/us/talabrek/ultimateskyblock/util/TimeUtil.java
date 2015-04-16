@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock.util;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public enum TimeUtil {;
     private static final long SEC = 1000;
     private static final long MIN = 60*SEC;
@@ -13,16 +15,16 @@ public enum TimeUtil {;
         long s = (millis % MIN) / SEC;
         String str = "";
         if (d > 0) {
-            str += d + "d";
+            str += d + tr("d");
         }
         if (h > 0) {
-            str += " " + h + "h";
+            str += " " + h + tr("h");
         }
         if (m > 0) {
-            str += " " + m + "m";
+            str += " " + m + tr("m");
         }
         if (s > 0 || str.isEmpty()) {
-            str += " " + s + "s";
+            str += " " + s + tr("s");
         }
         return str.trim();
     }
@@ -38,5 +40,9 @@ public enum TimeUtil {;
 
     public static long secondsAsMillis(long timeout) {
         return timeout * 1000;
+    }
+
+    public static int millisAsSeconds(long millis) {
+        return (int) Math.ceil(millis / 1000f);
     }
 }

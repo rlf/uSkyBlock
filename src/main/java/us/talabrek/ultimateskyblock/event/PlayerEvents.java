@@ -115,7 +115,7 @@ public class PlayerEvents implements Listener {
                 && player.getItemInHand().getType() == Material.BUCKET
                 && block != null
                 && block.getType() == Material.OBSIDIAN
-                && !plugin.testForObsidian(block)) {
+                && !testForObsidian(block)) {
             obsidianClick.put(player.getUniqueId(), now);
             player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
             inventory.setItem(inventory.getHeldItemSlot(), new ItemStack(Material.LAVA_BUCKET, 1));
@@ -123,6 +123,22 @@ public class PlayerEvents implements Listener {
             block.setType(Material.AIR);
             event.setCancelled(true); // Don't execute the click anymore (since that would re-place the lava).
         }
+    }
+    /**
+     * Tests for more than one obsidian close by.
+     */
+    public boolean testForObsidian(final Block block) {
+        for (int x = -3; x <= 3; ++x) {
+            for (int y = -3; y <= 3; ++y) {
+                for (int z = -3; z <= 3; ++z) {
+                    final Block testBlock = block.getWorld().getBlockAt(block.getX() + x, block.getY() + y, block.getZ() + z);
+                    if ((x != 0 || y != 0 || z != 0) && testBlock.getType() == Material.OBSIDIAN) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @EventHandler

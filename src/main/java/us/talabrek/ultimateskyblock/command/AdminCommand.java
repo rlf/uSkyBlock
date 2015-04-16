@@ -47,5 +47,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new WGCommand(plugin));
         add(new VersionCommand(plugin));
         add(new AsyncCommand(plugin));
+        add(new CooldownCommand(plugin));
     }
 }
