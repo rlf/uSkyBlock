@@ -1,9 +1,12 @@
 package us.talabrek.ultimateskyblock.event;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.ThrownPotion;
@@ -11,6 +14,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPhysicsEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
@@ -117,6 +122,37 @@ public class PlayerEvents implements Listener {
             player.updateInventory();
             block.setType(Material.AIR);
             event.setCancelled(true); // Don't execute the click anymore (since that would re-place the lava).
+        }
+    }
+
+    @EventHandler
+    public void onLavaReplace(BlockPlaceEvent event) {
+        if (event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
+            return; // Skip
+        }
+        if (event.getBlockReplacedState() != null &&
+                isLavaSource(event.getBlockReplacedState().getType(), event.getBlockReplacedState().getRawData())) {
+            plugin.notifyPlayer(event.getPlayer(), tr("\u00a74It's a bad idea to replace your lava!"));
+            event.setCancelled(true);
+        }
+    }
+
+    private boolean isLavaSource(Material type, byte data) {
+        return (type == Material.STATIONARY_LAVA || type == Material.LAVA) && data == 0;
+    }
+
+    @EventHandler
+    public void onLavaAbsorption(EntityChangeBlockEvent event) {
+        if (!plugin.isSkyWorld(event.getBlock().getWorld())) {
+            return;
+        }
+        if (isLavaSource(event.getBlock().getType(), event.getBlock().getData())) {
+            if (event.getTo() != Material.LAVA && event.getTo() != Material.STATIONARY_LAVA) {
+                event.setCancelled(true);
+                ItemStack item = new ItemStack(event.getTo(), 1, event.getData());
+                Location above = event.getBlock().getLocation().add(0, 1, 0);
+                event.getBlock().getWorld().dropItemNaturally(above, item);
+            }
         }
     }
 
