@@ -74,6 +74,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +88,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
@@ -443,7 +446,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final Block ground = l.getBlock().getRelative(BlockFace.DOWN);
         final Block air1 = l.getBlock();
         final Block air2 = l.getBlock().getRelative(BlockFace.UP);
-        return ground.getType().isSolid() && !air1.getType().isSolid() && !air2.getType().isSolid();
+        return ground.getType().isSolid() && isBreathable(air1) && isBreathable(air2);
     }
 
     public void removeCreatures(final Location l) {
