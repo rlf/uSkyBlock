@@ -166,6 +166,10 @@ options:
     # any island with a level above this, is spared.
     purgeLevel: 10
 
+    # [seconds] The number of seconds for confirming a command by
+    # re-executing it (/is leave, /is restart).
+    confirmTimeout: 10
+
   # Section about restarting your island (or accepting an invite).
   restart:
     # Clears the player's inventory on island create/restart
@@ -180,6 +184,6 @@ options:
     teleportDelay: 20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 14
+version: 15
 force-replace:
   options.party.invite-timeout: 100

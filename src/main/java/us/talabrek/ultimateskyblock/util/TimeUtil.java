@@ -35,4 +35,8 @@ public enum TimeUtil {;
         // 20 ticks per second = 50 ms per tick
         return (secs * 100) / 5;
     }
+
+    public static long secondsAsMillis(long timeout) {
+        return timeout * 1000;
+    }
 }

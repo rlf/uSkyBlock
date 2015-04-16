@@ -48,6 +48,7 @@ import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
+import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
@@ -143,6 +144,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private PlayerDB playerDB;
+    private ConfirmHandler confirmHandler;
 
     public uSkyBlock() {
         this.lastIslandConfig = null;
@@ -1434,6 +1436,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } else {
             autoRecalculateTask = null;
         }
+        confirmHandler = new ConfirmHandler(this, getConfig().getInt("options.advanced.confirmTimeout", 10));
         getCommand("island").setExecutor(new IslandCommand(this, menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
         getCommand("usb").setExecutor(new AdminCommand(instance));
@@ -1638,5 +1641,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 fireChangeEvent(new uSkyBlockEvent(player, getInstance(), uSkyBlockEvent.Cause.RANK_UPDATED));
             }
         });
+    }
+
+    public ConfirmHandler getConfirmHandler() {
+        return confirmHandler;
     }
 }

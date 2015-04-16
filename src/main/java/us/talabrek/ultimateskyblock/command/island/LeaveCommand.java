@@ -6,12 +6,17 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.Map;
+import java.util.UUID;
+import java.util.WeakHashMap;
 
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 @SuppressWarnings("deprecation")
 public class LeaveCommand extends RequireIslandCommand {
+
     public LeaveCommand(uSkyBlock plugin) {
         super(plugin, "leave", "usb.party.join", "leave your party");
     }
@@ -25,6 +30,9 @@ public class LeaveCommand extends RequireIslandCommand {
             }
             if (island.isLeader(player)) {
                 player.sendMessage(tr("\u00a7eYou own this island, use /island remove <player> instead."));
+                return true;
+            }
+            if (!plugin.getConfirmHandler().checkCommand(player, "/is leave")) {
                 return true;
             }
             player.getInventory().clear();
