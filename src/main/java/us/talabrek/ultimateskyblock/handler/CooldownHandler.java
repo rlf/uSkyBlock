@@ -74,7 +74,7 @@ public class CooldownHandler {
 
     public Map<String, Long> getCooldowns(UUID uuid) {
         if (cooldowns.containsKey(uuid)) {
-            return cooldowns.getOrDefault(uuid, Collections.<String, Long>emptyMap());
+            return cooldowns.get(uuid);
         }
         return Collections.emptyMap();
     }
