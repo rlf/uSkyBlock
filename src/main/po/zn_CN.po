@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
@@ -1609,9 +1610,9 @@ msgid ""
 msgstr ""
 "§c你无法使用当前生物群系\n"
 "§f沼泽(Swampland)生物群系\n"
-"§f会让人感觉非常不安."
+"§f会让人感觉非常不安.\n"
 "§f中立生物将会正常生成.\n"
-"§f敌对生物将会正常生成."
+"§f敌对生物将会正常生成.\n"
 "§f史莱姆有一定几率会在夜晚生成."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:358
@@ -1735,7 +1736,8 @@ msgid ""
 "§fOnly endermen will spawn\n"
 "§fin this biome."
 msgstr ""
-"§f末地(Sky/End) 生物群系将会使你的世界变为黑暗."
+"§f末地(Sky/End) 生物群系将会\n"
+"§f使你的世界变为黑暗.\n"
 "§f只会生成末影人."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:420
@@ -1750,8 +1752,8 @@ msgid ""
 "§7Only endermen will spawn\n"
 "§7in this biome."
 msgstr ""
-"§c你无法使用当前生物群系."
-"§7末地(Sky/End) 生物群系将会使你的世界变为黑暗."
+"§7末地(Sky/End) 生物群系将会\n"
+"§7使你的世界变为黑暗.\n"
 "§7只会生成末影人."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:430
@@ -1840,7 +1842,7 @@ msgstr ""
 "§f完成丰富的挑战任务以获取\n"
 "§f各种物资来扩建/升级你的岛屿~\n"
 "§f同时你还可以邀请其余玩家\n"
-"§f加入你的岛屿一起建造,完成挑战!"
+"§f加入你的岛屿一起建造,完成挑战!\n"
 "§a§l点击图标开始岛屿生涯!"
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:587
@@ -1863,7 +1865,7 @@ msgstr ""
 "§f如果有玩家邀请你加入岛屿\n"
 "§f点击这里或者输入§e/island accept \n"
 "§f即可接受邀请并且加入对方的岛屿\n"
-"§e§l点击图标接受一个邀请请求!"
+"§e§l点击图标接受一个邀请请求!\n"
 "§c(前提是得有人邀请你)"
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:595
@@ -1877,9 +1879,9 @@ msgid ""
 "§fdetails about them here.\n"
 "§e§lClick here for help!"
 msgstr ""
-"§f对玩法不了解?"
-"§f对指令不了解?"
-"§f需要一些帮助?"
+"§f对玩法不了解?\n"
+"§f对指令不了解?\n"
+"§f需要一些帮助?\n"
 "§a§l点击图标获取相关帮助!"
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:607
@@ -1896,7 +1898,7 @@ msgid ""
 msgstr ""
 "§f返回你的岛屿出生点.\n"
 "§f你可以使用指令§e/island sethome \n"
-"§f更改你岛屿的出生点."
+"§f更改你岛屿的出生点.\n"
 "§e§l点击图标更改岛屿出生点."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:618
@@ -1976,8 +1978,8 @@ msgid ""
 "§flike grass color and spawning\n"
 "§fof both animals and monsters."
 msgstr ""
-"§f更改岛屿生物群系可以"
-"§f使你拥有更多的资源"
+"§f更改岛屿生物群系可以\n"
+"§f使你拥有更多的资源\n"
 "§f同时也能生成更多的生物."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:656
@@ -2063,7 +2065,7 @@ msgstr ""
 "§e传送点状态: §8未激活\n"
 "§f非团队成员无法传送到你的岛屿.\n"
 "§f在启用传送点之前,可使用指令\n"
-"§e/iosland setwarp§f设置岛屿传送点."
+"§e/island setwarp§f设置岛屿传送点."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:704
 msgid "§e§lClick here to activate."
@@ -2096,7 +2098,8 @@ msgid ""
 "§fthis location.\n"
 "§e§lClick here to change."
 msgstr ""
-"§f设置你传送会岛屿的坐标.\n"
+"§f设置你传送回岛屿时\n"
+"§f所在的坐标.\n"
 "§e§l点击图标更改坐标."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:734
@@ -2161,7 +2164,7 @@ msgstr "§4玩家早就已经分配给这个岛屿了!"
 
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:747
 msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4你不是岛屿的一员.将你传送会出生点!"
+msgstr "§4你不是岛屿的一员.将你传送回出生点!"
 
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:752
 msgid "§aTeleporting you to your island."
