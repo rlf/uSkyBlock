@@ -37,8 +37,8 @@ public class ConfirmHandler {
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                confirmMap.remove(player.getUniqueId());
-                if (player != null && player.isOnline()) {
+                ConfirmCommand confirmCommand = confirmMap.remove(player.getUniqueId());
+                if (confirmCommand != null && player != null && player.isOnline()) {
                     player.sendMessage(tr("\u00a79{0}\u00a77 timed out", cmd));
                 }
             }
