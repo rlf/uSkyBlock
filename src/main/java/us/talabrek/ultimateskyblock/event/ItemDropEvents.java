@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,15 +21,22 @@ import java.util.List;
  */
 public class ItemDropEvents implements Listener {
     private final uSkyBlock plugin;
+    private final boolean visitorsCanDrop;
 
     public ItemDropEvents(uSkyBlock plugin) {
         this.plugin = plugin;
+        visitorsCanDrop = plugin.getConfig().getBoolean("options.protection.visitors.item-drops", true);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDropEvent(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         if (!plugin.isSkyWorld(player.getWorld())) {
+            return;
+        }
+        if (!visitorsCanDrop && !plugin.playerIsOnIsland(player) && !plugin.playerIsInSpawn(player)) {
+            event.setCancelled(true);
+            plugin.notifyPlayer(player, "\u00a7eVisitors can't drop items!");
             return;
         }
         addDropInfo(player, event.getItemDrop().getItemStack());
@@ -38,6 +46,11 @@ public class ItemDropEvents implements Listener {
     public void onDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
         if (!plugin.isSkyWorld(player.getWorld())) {
+            return;
+        }
+        if (!visitorsCanDrop && !plugin.playerIsOnIsland(player) && !plugin.playerIsInSpawn(player)) {
+            event.getDrops().clear();
+            plugin.notifyPlayer(player, "\u00a7eVisitors can't drop items!");
             return;
         }
         // Take over the drop, since Bukkit don't do this in a Metadatable format.
@@ -61,8 +74,11 @@ public class ItemDropEvents implements Listener {
         ItemMeta meta = stack.getItemMeta();
         List<String> lore = meta.getLore();
         if (lore != null && !lore.isEmpty()) {
-            if (lore.get(lore.size()-1).startsWith("Dropped by: ")) {
-                lore.remove(lore.size()-1);
+            for (Iterator<String> it = lore.iterator(); it.hasNext(); ) {
+                String line = it.next();
+                if (line.startsWith("Dropped by: ")) {
+                    it.remove();
+                }
             }
             meta.setLore(lore);
             stack.setItemMeta(meta);

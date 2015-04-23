@@ -20,6 +20,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class PlayerInfo implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final int YML_VERSION = 1;
     private String playerName;
     private String displayName;
     private UUID uuid;
@@ -60,7 +61,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public String locationForParty() {
-        return getPartyLocationString(this.islandLocation);
+        return LocationUtil.getIslandName(this.islandLocation);
     }
 
     public Player getPlayer() {
@@ -110,13 +111,6 @@ public class PlayerInfo implements Serializable {
         if (Bukkit.getPlayer(this.playerName) == null) {
             getPlayerConfig().set("player.kickWarning", true);
         }
-    }
-
-    private String getPartyLocationString(Location l) {
-        if (l == null) {
-            return null;
-        }
-        return "" + l.getBlockX() + "," + l.getBlockZ();
     }
 
     public void completeChallenge(final String challenge) {
@@ -313,9 +307,11 @@ public class PlayerInfo implements Serializable {
     }
 
     public void updatePlayerInfo(Player player) {
-        setDisplayName(player.getDisplayName());
-        uuid = player.getUniqueId();
-        save();
+        if (!player.getDisplayName().equals(displayName) || !player.getUniqueId().equals(uuid)) {
+            setDisplayName(player.getDisplayName());
+            uuid = player.getUniqueId();
+            save();
+        }
     }
 
     public UUID getUniqueId() {
@@ -332,5 +328,31 @@ public class PlayerInfo implements Serializable {
         save();
         file.delete();
         return this;
+    }
+
+    public void banFromIsland(String name) {
+        List<String> bannedFrom = playerData.getStringList("bannedFrom");
+        if (bannedFrom != null && !bannedFrom.contains(name)) {
+            bannedFrom.add(name);
+            playerData.set("bannedFrom", bannedFrom);
+            save();
+        }
+    }
+
+    public void unbanFromIsland(String name) {
+        List<String> bannedFrom = playerData.getStringList("bannedFrom");
+        if (bannedFrom != null && bannedFrom.contains(name)) {
+            bannedFrom.remove(name);
+            playerData.set("bannedFrom", bannedFrom);
+            save();
+        }
+    }
+
+    public List<String> getBannedFrom() {
+        return playerData.getStringList("bannedFrom");
+    }
+
+    public long getLastSaved() {
+        return playerConfigFile.lastModified();
     }
 }

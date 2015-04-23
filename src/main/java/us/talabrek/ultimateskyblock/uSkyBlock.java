@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,17 +27,16 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
-import org.xnap.commons.i18n.I18n;
-import org.xnap.commons.i18n.I18nFactory;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
+import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
 import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.async.BalancedExecutor;
+import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
@@ -50,6 +48,8 @@ import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
+import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
+import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
@@ -66,6 +66,7 @@ import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
@@ -87,6 +88,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
@@ -126,9 +128,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public File directoryPlayers;
     public File directoryIslands;
     public File[] schemFile;
-    Map<UUID, Long> infoCooldown;
-    Map<UUID, Long> restartCooldown;
-    Map<UUID, Long> biomeCooldown;
     private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
 
     private volatile boolean purgeActive;
@@ -141,6 +140,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private PlayerDB playerDB;
+    private ConfirmHandler confirmHandler;
+
+    private CooldownHandler cooldownHandler;
 
     public uSkyBlock() {
         this.lastIslandConfig = null;
@@ -150,9 +152,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.orphaned = new Stack<>();
         this.tempOrphaned = new Stack<>();
         this.reverseOrphaned = new Stack<>();
-        this.infoCooldown = new HashMap<>();
-        this.restartCooldown = new HashMap<>();
-        this.biomeCooldown = new HashMap<>();
         this.purgeActive = false;
     }
 
@@ -444,7 +443,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final Block ground = l.getBlock().getRelative(BlockFace.DOWN);
         final Block air1 = l.getBlock();
         final Block air2 = l.getBlock().getRelative(BlockFace.UP);
-        return ground.getType().isSolid() && !air1.getType().isSolid() && !air2.getType().isSolid();
+        return ground.getType().isSolid() && isBreathable(air1) && isBreathable(air2);
     }
 
     public void removeCreatures(final Location l) {
@@ -543,24 +542,23 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         WorldEditHandler.unloadRegion(next);
         next.setY((double) Settings.island_height);
         setNewPlayerIsland(player, next);
-        setRestartCooldown(player);
+        getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
         getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
                 getLogger().log(Level.FINE, "porting player back to the island");
-                homeTeleport(player);
+                homeTeleport(player, true);
                 WorldEditHandler.loadRegion(next);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
             }
-        }, 20);
+        }, getConfig().getInt("options.restart.teleportDelay", 20));
     }
 
     public boolean restartPlayerIsland(final Player player, final Location next) {
         if (next.getBlockX() == 0 && next.getBlockZ() == 0) {
             return false;
         }
-        spawnTeleport(player);
         islandLogic.clearIsland(next, new Runnable() {
             @Override
             public void run() {
@@ -610,7 +608,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final int pz = l.getBlockZ();
         World world = l.getWorld();
         for (int x = -10; x <= 10; ++x) {
-            for (int y = -10; y <= 10; ++y) {
+            for (int y = -30; y <= 30; ++y) {
                 for (int z = -10; z <= 10; ++z) {
                     final Block b = world.getBlockAt(px + x, py + y, pz + z);
                     if (b.getType() == Material.BEDROCK) {
@@ -738,7 +736,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    public boolean homeTeleport(final Player player) {
+    public boolean homeTeleport(final Player player, boolean force) {
         getLogger().entering(CN, "homeTeleport", player);
         try {
             Location homeSweetHome = null;
@@ -746,26 +744,39 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 homeSweetHome = getSafeHomeLocation(this.getActivePlayers().get(player.getName()));
             }
             if (homeSweetHome == null) {
-                player.performCommand("spawn");
                 player.sendMessage(tr("\u00a74You are not part of an island. Returning you the spawn area!"));
+                spawnTeleport(player);
                 return true;
             }
             removeCreatures(homeSweetHome);
-            safeTeleport(player, homeSweetHome);
             player.sendMessage(tr("\u00a7aTeleporting you to your island."));
+            safeTeleport(player, homeSweetHome, force);
             return true;
         } finally {
             getLogger().exiting(CN, "homeTeleport");
         }
     }
 
-    private void safeTeleport(Player player, Location homeSweetHome) {
-        player.setVelocity(new org.bukkit.util.Vector());
-        player.teleport(homeSweetHome);
-        player.setVelocity(new org.bukkit.util.Vector());
+    private void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
+        int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
+        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
+    		player.setVelocity(new org.bukkit.util.Vector());
+            player.teleport(homeSweetHome);
+            player.setVelocity(new org.bukkit.util.Vector());
+    	} else {
+    		player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", delay));
+    		getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
+        		@Override
+        		public void run() {
+        			player.setVelocity(new org.bukkit.util.Vector());
+        	        player.teleport(homeSweetHome);
+        	        player.setVelocity(new org.bukkit.util.Vector());
+        		}
+        	}, TimeUtil.secondsAsTicks(delay));
+    	}
     }
 
-    public boolean warpTeleport(final Player player, final PlayerInfo pi) {
+    public boolean warpTeleport(final Player player, final PlayerInfo pi, boolean force) {
         Location warpSweetWarp = null;
         if (pi == null) {
             player.sendMessage(tr("\u00a74That player does not exist!"));
@@ -776,18 +787,34 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             player.sendMessage(tr("\u00a74Unable to warp you to that player's island!"));
             return true;
         }
-        safeTeleport(player, warpSweetWarp);
+        safeTeleport(player, warpSweetWarp, force);
         player.sendMessage(tr("\u00a7aTeleporting you to " + pi.getPlayerName() + "'s island."));
         return true;
     }
 
     public void spawnTeleport(final Player player) {
         getLogger().entering(CN, "spawnTeleport", new Object[]{ player });
-        if (Settings.extras_sendToSpawn) {
-            execCommand(player, "op:spawn");
-        } else {
-            player.teleport(getWorld().getSpawnLocation());
-        }
+
+        int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
+        if(player.hasPermission("usb.mod.bypassteleport") || (delay == 0)) {
+        	if (Settings.extras_sendToSpawn) {
+                execCommand(player, "op:spawn");
+            } else {
+                player.teleport(getWorld().getSpawnLocation());
+            }
+    	} else {
+    		player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", delay));
+    		getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    if (Settings.extras_sendToSpawn) {
+                        execCommand(player, "op:spawn");
+                    } else {
+                        player.teleport(getWorld().getSpawnLocation());
+                    }
+                }
+            }, TimeUtil.secondsAsTicks(delay));
+    	}
         getLogger().exiting(CN, "spawnTeleport");
     }
 
@@ -835,7 +862,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean islandAtLocation(final Location loc) {
-        return WorldGuardHandler.getIntersectingRegions(loc).size() > 0;
+    	return ((WorldGuardHandler.getIntersectingRegions(loc).size() > 0)
+                || (findBedrockLocation(loc) != null)
+                || islandLogic.hasIsland(loc)
+        );
+
     }
 
     public boolean islandInSpawn(final Location loc) {
@@ -849,88 +880,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return new SkyBlockChunkGenerator();
     }
 
-    public boolean onInfoCooldown(final Player player) {
-        return !player.hasPermission("usb.exempt.infoCooldown")
-                && !player.hasPermission("usb.mod.bypasscooldowns")
-                && infoCooldown.containsKey(player.getUniqueId())
-                && infoCooldown.get(player.getUniqueId()) > System.currentTimeMillis();
-    }
-
-    public boolean onBiomeCooldown(final Player player) {
-        return !player.hasPermission("usb.exempt.biomeCooldown")
-                && !player.hasPermission("usb.mod.bypasscooldowns")
-                && biomeCooldown.containsKey(player.getUniqueId())
-                && biomeCooldown.get(player.getUniqueId()) > System.currentTimeMillis();
-    }
-
-    public boolean onRestartCooldown(final Player player) {
-        return !player.hasPermission("usb.exempt.restartCooldown")
-                && !player.hasPermission("usb.mod.bypasscooldowns")
-                && restartCooldown.containsKey(player.getUniqueId())
-                && this.restartCooldown.get(player.getUniqueId()) > System.currentTimeMillis();
-    }
-
-    public long getInfoCooldownTime(final Player player) {
-        if (!infoCooldown.containsKey(player.getUniqueId())) {
-            return 0L;
-        }
-        if (infoCooldown.get(player.getUniqueId()) > System.currentTimeMillis()) {
-            return infoCooldown.get(player.getUniqueId()) - System.currentTimeMillis();
-        }
-        return 0L;
-    }
-
-    public long getBiomeCooldownTime(final Player player) {
-        if (!biomeCooldown.containsKey(player.getUniqueId())) {
-            return 0L;
-        }
-        if (biomeCooldown.get(player.getUniqueId()) > System.currentTimeMillis()) {
-            return biomeCooldown.get(player.getUniqueId()) - System.currentTimeMillis();
-        }
-        return 0L;
-    }
-
-    public long getRestartCooldownTime(final Player player) {
-        if (!this.restartCooldown.containsKey(player.getUniqueId())) {
-            return 0L;
-        }
-        if (this.restartCooldown.get(player.getUniqueId()) > System.currentTimeMillis()) {
-            return this.restartCooldown.get(player.getUniqueId()) - System.currentTimeMillis();
-        }
-        return 0L;
-    }
-
-    public void setInfoCooldown(final Player player) {
-        infoCooldown.put(player.getUniqueId(), System.currentTimeMillis() + Settings.general_cooldownInfo * 1000);
-    }
-
-    public void setBiomeCooldown(final Player player) {
-        biomeCooldown.put(player.getUniqueId(), System.currentTimeMillis() + Settings.general_biomeChange * 1000);
-    }
-
-    public void setRestartCooldown(final Player player) {
-        this.restartCooldown.put(player.getUniqueId(), System.currentTimeMillis() + Settings.general_cooldownRestart * 1000);
-    }
-
     public File[] getSchemFile() {
         return this.schemFile;
-    }
-
-    /**
-     * Tests for more than one obsidian close by.
-     */
-    public boolean testForObsidian(final Block block) {
-        for (int x = -3; x <= 3; ++x) {
-            for (int y = -3; y <= 3; ++y) {
-                for (int z = -3; z <= 3; ++z) {
-                    final Block testBlock = getSkyBlockWorld().getBlockAt(block.getX() + x, block.getY() + y, block.getZ() + z);
-                    if ((x != 0 || y != 0 || z != 0) && testBlock.getType() == Material.OBSIDIAN) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public boolean isPurgeActive() {
@@ -1144,8 +1095,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 setNewPlayerIsland(player, next);
                 changePlayerBiome(player, "OCEAN");
                 protectWithWorldGuard(player, player, pi);
-                homeTeleport(player);
-                setRestartCooldown(player);
+                homeTeleport(player, true);
+                getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
             } catch (Exception ex) {
@@ -1386,7 +1337,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         islandGenerator = new IslandGenerator(getConfig());
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
-        this.levelLogic = new LevelLogic(getFileConfiguration("levelConfig.yml"));
+        this.levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this, directoryIslands);
         this.notifier = new PlayerNotifier(getConfig());
         registerEvents(playerDB);
@@ -1400,6 +1351,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } else {
             autoRecalculateTask = null;
         }
+        confirmHandler = new ConfirmHandler(this, getConfig().getInt("options.advanced.confirmTimeout", 10));
+        cooldownHandler = new CooldownHandler(this);
         getCommand("island").setExecutor(new IslandCommand(this, menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
         getCommand("usb").setExecutor(new AdminCommand(instance));
@@ -1455,8 +1408,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 player.performCommand(command.substring(3).trim());
             } else {
                 player.setOp(true);
-                player.performCommand(command.substring(3).trim());
-                player.setOp(false);
+                // Prevent privilege escalation if called command throws unhandled exception
+                try {
+                	player.performCommand(command.substring(3).trim());
+                } finally {
+                	player.setOp(false);
+                }
             }
         } else if (command.startsWith("console:")) {
             getServer().dispatchCommand(getServer().getConsoleSender(), command.substring(8).trim());
@@ -1524,6 +1481,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return 0;
     }
 
+    @Override
+    public IslandRank getIslandRank(Player player) {
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        return islandLogic != null && playerInfo != null && playerInfo.getHasIsland() ?
+                islandLogic.getRank(playerInfo.locationForParty())
+                : null;
+    }
+
     public void fireChangeEvent(CommandSender sender, uSkyBlockEvent.Cause cause) {
         Player player = (sender instanceof Player) ? (Player) sender : null;
         final uSkyBlockEvent event = new uSkyBlockEvent(player, this, cause);
@@ -1580,5 +1545,25 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public PlayerDB getPlayerDB() {
         return playerDB;
+    }
+
+    public void calculateScoreAsync(final Player player, String islandName, final Callback<IslandScore> callback) {
+        IslandInfo islandInfo = getIslandInfo(islandName);
+        getLevelLogic().calculateScoreAsync(islandInfo.getIslandLocation(), new Callback<IslandScore>() {
+            @Override
+            public void run() {
+                callback.setState(getState());
+                callback.run();
+                fireChangeEvent(new uSkyBlockEvent(player, getInstance(), uSkyBlockEvent.Cause.RANK_UPDATED));
+            }
+        });
+    }
+
+    public ConfirmHandler getConfirmHandler() {
+        return confirmHandler;
+    }
+
+    public CooldownHandler getCooldownHandler() {
+        return cooldownHandler;
     }
 }

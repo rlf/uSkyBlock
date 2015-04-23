@@ -21,7 +21,8 @@ public class CreateCommand extends RequirePlayerCommand {
     @Override
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         PlayerInfo pi = plugin.getPlayerInfo(player);
-        if (LocationUtil.isEmptyLocation(pi.getIslandLocation()) && !plugin.onRestartCooldown(player)) {
+        int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
+        if (LocationUtil.isEmptyLocation(pi.getIslandLocation()) && cooldown == 0) {
             plugin.createIsland(player, pi);
         } else if (pi.getHasIsland()) {
             IslandInfo island = plugin.getIslandInfo(pi);
@@ -35,7 +36,7 @@ public class CreateCommand extends RequirePlayerCommand {
                         "\u00a7b /is leave"));
             }
         } else {
-            player.sendMessage(tr("\u00a7eYou can create a new island in {0,number,#} seconds.", plugin.getRestartCooldownTime(player) / 1000L));
+            player.sendMessage(tr("\u00a7eYou can create a new island in {0,number,#} seconds.", cooldown));
         }
         return true;
     }

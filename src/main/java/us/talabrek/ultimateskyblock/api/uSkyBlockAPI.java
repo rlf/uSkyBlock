@@ -33,6 +33,14 @@ public interface uSkyBlockAPI extends Plugin {
     double getIslandLevel(Player player);
 
     /**
+     * Returns the current rank of the island of the supplied player.
+     * @param player The player to query for
+     * @since v2.3-HF2d
+     * @return A rank-object for the given player, or <code>null</code> if none exist.
+     */
+    IslandRank getIslandRank(Player player);
+
+    /**
      * Returns the rank-list.
      * @param offset A 0-based offset.
      * @param length The max number of records to return.

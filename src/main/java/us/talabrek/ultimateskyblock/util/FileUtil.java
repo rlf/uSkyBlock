@@ -108,10 +108,9 @@ public enum FileUtil {;
             try {
                 // read from datafolder!
                 File configFile = getConfigFile(configName);
-                // TODO: 09/12/2014 - R4zorax: Also replace + backup if jar-version is newer than local version
                 YamlConfiguration configJar = new YamlConfiguration();
                 readConfig(config, configFile);
-                readConfig(configJar, FileUtil.class.getClassLoader().getResourceAsStream(configName));
+                readConfig(configJar, getResource(configName));
                 if (!configFile.exists() || config.getInt("version", 0) < configJar.getInt("version", 0)) {
                     if (configFile.exists()) {
                         File backupFolder = new File(getDataFolder(), "backup");
@@ -122,14 +121,14 @@ public enum FileUtil {;
                                 Paths.get(new File(backupFolder, bakFile).toURI()),
                                 StandardCopyOption.REPLACE_EXISTING);
                         if (allwaysOverwrite.contains(configName)) {
-                            FileUtil.copy(FileUtil.class.getClassLoader().getResourceAsStream(configName), configFile);
+                            FileUtil.copy(getResource(configName), configFile);
                             config = configJar;
                         } else {
                             config = mergeConfig(configJar, config);
                             config.save(configFile);
                         }
                     } else {
-                        FileUtil.copy(FileUtil.class.getClassLoader().getResourceAsStream(configName), configFile);
+                        FileUtil.copy(getResource(configName), configFile);
                         config = configJar;
                     }
                 }
@@ -139,6 +138,17 @@ public enum FileUtil {;
             configFiles.put(configName, config);
         }
         return configFiles.get(configName);
+    }
+
+    private static InputStream getResource(String configName) {
+        String baseName = getBasename(configName);
+        String resourceName = baseName + "_" + Locale.getDefault().getLanguage() + configName.substring(baseName.length());
+        ClassLoader loader = FileUtil.class.getClassLoader();
+        InputStream resourceAsStream = loader.getResourceAsStream(resourceName);
+        if (resourceAsStream != null) {
+            return resourceAsStream;
+        }
+        return loader.getResourceAsStream(configName);
     }
 
     private static File getConfigFile(String configName) {

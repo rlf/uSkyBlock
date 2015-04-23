@@ -44,6 +44,9 @@ public class ChallengeFactory {
 
     public static Challenge createChallenge(Rank rank, ConfigurationSection section, ChallengeDefaults defaults) {
         String name = section.getName().toLowerCase();
+        if (section.getBoolean("disabled", false)) {
+            return null; // Skip this challenge
+        }
         Challenge.Type type = Challenge.Type.from(section.getString("type", "onPlayer"));
         String requiredItems = section.getString("requiredItems", "");
         List<EntityMatch> requiredEntities = createEntities(section.getStringList("requiredEntities"));

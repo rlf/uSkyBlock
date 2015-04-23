@@ -23,7 +23,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     private final uSkyBlock plugin;
 
     public AdminIslandCommand(final uSkyBlock plugin) {
-        super("island", "usb.admin.island", "manage islands");
+        super("island", "", "manage islands");
         this.plugin = plugin;
         add(new AbstractIslandInfoCommand("protect", "usb.mod.protect", "protects the island") {
             @Override

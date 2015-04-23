@@ -1,3 +1,5 @@
+# The language used in the plugin (en is default, currently, only da is partially supported).
+language: en
 options:
   general:
     # [integer] The max number of players allowed in a single party. (including the leader)
@@ -58,6 +60,9 @@ options:
     # [integer] The size of the protective region for each island. Can't be higher than 'distance'
     protectionRange: 105
 
+    # [integer] The delay in seconds before teleporting to an island. Affects /is home, /is warp, /is spawn
+    islandTeleportDelay: 5
+
     # Allow PvP on the island
     allowPvP: deny
 
@@ -81,6 +86,9 @@ options:
     # [integer] The time in minutes for refreshing/recalculating the score for players on their island
     # set to 0 to disabled
     autoRefreshScore: 0
+
+    # [true/false] Whether or not to include island-members on the top-ten scoreboard
+    topTenShowMembers: true
 
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.
@@ -143,6 +151,8 @@ options:
       fall: true
       # Whether or not visiotrs are protected from fire damage (incl. lava)
       fire-damage: true
+      # Whether or not visitors should be allowed to drop items
+      item-drops: true
   party:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
     invite-timeout: 600
@@ -156,6 +166,10 @@ options:
     # any island with a level above this, is spared.
     purgeLevel: 10
 
+    # [seconds] The number of seconds for confirming a command by
+    # re-executing it (/is leave, /is restart).
+    confirmTimeout: 10
+
   # Section about restarting your island (or accepting an invite).
   restart:
     # Clears the player's inventory on island create/restart
@@ -165,7 +179,11 @@ options:
     # Clears the player's enderchest on island create/restart
     clearEnderChest: true
 
+    # [ticks] The number of ticks to wait, before porting the player back
+    # on /is restart (default: 20)
+    teleportDelay: 20
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 11
+version: 15
 force-replace:
   options.party.invite-timeout: 100

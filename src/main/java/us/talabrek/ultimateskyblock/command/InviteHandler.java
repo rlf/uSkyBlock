@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -113,8 +112,7 @@ public class InviteHandler {
                     player.sendMessage(tr("\u00a7aYou have joined an island! Use /island party to see the other members."));
                     // TODO: 29/12/2014 - R4zorax: Perhaps these steps should belong somewhere else?
                     addPlayerToParty(player, island);
-                    plugin.setRestartCooldown(player);
-                    plugin.homeTeleport(player);
+                    plugin.homeTeleport(player, true);
                     plugin.clearPlayerInventory(player);
                     WorldGuardHandler.addPlayerToOldRegion(island.getName(), player.getName());
                 }

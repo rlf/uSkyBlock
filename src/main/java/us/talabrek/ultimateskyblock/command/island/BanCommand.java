@@ -11,7 +11,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class BanCommand extends RequireIslandCommand {
     public BanCommand(uSkyBlock plugin) {
-        super(plugin, "ban|banned|balist|b", "usb.island.ban", "player", "ban/unban a player from your island.");
+        super(plugin, "ban|unban", "usb.island.ban", "player", "ban/unban a player from your island.");
     }
 
     @Override

@@ -21,7 +21,7 @@ public class AsyncCommand extends CompositeUSBCommand {
     private int asyncOffset = 0;
 
     public AsyncCommand(final uSkyBlock plugin) {
-        super("async", "usb.admin", "controls the currently running async tasks");
+        super("async", "usb.admin.async", "controls the currently running async tasks");
         add(new AbstractUSBCommand("list", "lists currently running tasks") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {

@@ -26,7 +26,10 @@ public class Rank {
         this.config = section;
         ConfigurationSection challengeSection = section.getConfigurationSection("challenges");
         for (String challengeName : challengeSection.getKeys(false)) {
-            challenges.add(ChallengeFactory.createChallenge(this, challengeSection.getConfigurationSection(challengeName), defaults));
+            Challenge challenge = ChallengeFactory.createChallenge(this, challengeSection.getConfigurationSection(challengeName), defaults);
+            if (challenge != null) {
+                challenges.add(challenge);
+            }
         }
     }
 

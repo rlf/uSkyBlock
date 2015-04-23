@@ -2,9 +2,12 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -29,20 +32,14 @@ public class LevelCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7eYou must be on your island to use this command."));
                 return true;
             }
-            if (!plugin.onInfoCooldown(player) || Settings.general_cooldownInfo == 0) {
-                plugin.setInfoCooldown(player);
-                if (!island.isParty() && !pi.getHasIsland()) {
-                    player.sendMessage(tr("\u00a74You do not have an island!"));
-                } else {
-                    getIslandLevel(player, player.getName(), alias);
-                }
-                return true;
+            if (!island.isParty() && !pi.getHasIsland()) {
+                player.sendMessage(tr("\u00a74You do not have an island!"));
+            } else {
+                getIslandLevel(player, player.getName(), alias);
             }
-            player.sendMessage(tr("\u00a7eYou can use that command again in {0} seconds.", plugin.getInfoCooldownTime(player) / 1000L));
             return true;
         } else if (args.length == 1) {
-            if (player.hasPermission("usb.island.info.other") && (!plugin.onInfoCooldown(player) || Settings.general_cooldownInfo == 0)) {
-                plugin.setInfoCooldown(player);
+            if (player.hasPermission("usb.island.level.other")) {
                 getIslandLevel(player, args[0], alias);
             } else {
                 player.sendMessage(tr("\u00a74You do not have access to that command!"));
@@ -53,7 +50,7 @@ public class LevelCommand extends RequireIslandCommand {
     }
 
     public boolean getIslandLevel(final Player player, final String islandPlayer, final String cmd) {
-        PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
+        final PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
         if (info == null || !info.getHasIsland() && !plugin.getIslandInfo(info).isParty()) {
             player.sendMessage(tr("\u00a74That player is invalid or does not have an island!"));
             return false;
@@ -69,7 +66,11 @@ public class LevelCommand extends RequireIslandCommand {
                 if (player.isOnline()) {
                     player.sendMessage(tr("\u00a7eInformation about " + islandPlayer + "'s Island:"));
                     if (cmd.equalsIgnoreCase("level")) {
-                        player.sendMessage(String.format("\u00a7aIsland level is %5.2f", plugin.getIslandInfo(playerInfo).getLevel()));
+                        IslandRank rank = plugin.getIslandLogic().getRank(playerInfo.locationForParty());
+                        player.sendMessage(new String[]{
+                                tr("\u00a7aIsland level is {0,number,###.##}", rank.getScore()),
+                                tr("\u00a79Rank is {0}", rank.getRank())
+                        });
                     }
                 }
             }
@@ -79,6 +80,7 @@ public class LevelCommand extends RequireIslandCommand {
                 @Override
                 public void run() {
                     try {
+                        IslandScore score = plugin.recalculateScore(player, playerInfo.locationForParty());
                         plugin.fireChangeEvent(new uSkyBlockEvent(player, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
                     } catch (Exception e) {
                         uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);

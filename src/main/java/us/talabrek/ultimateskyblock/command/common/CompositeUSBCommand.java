@@ -6,6 +6,7 @@ import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.AbstractTabCompleter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -106,7 +107,12 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
                 data.put(p, args[ix++]);
             }
             if (!hasAccess(cmd, sender)) {
-                showUsage(sender, 1);
+                if (cmd != null && sender.isOp()) {
+                    sender.sendMessage(MessageFormat.format("\u00a7eYou do not have access (\u00a74{0}\u00a7e)", cmd.getPermission()));
+                } else {
+                    sender.sendMessage("\u00a7eYou do not have access");
+                }
+                showUsage(sender, args[0]);
             } else if (!cmd.execute(sender, cmdName, data, subArgs)) {
                 showUsage(sender, args[0]);
             }
@@ -161,7 +167,9 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
                 Collections.sort(cmds);
                 for (String key : cmds) {
                     USBCommand scmd = commandMap.get(key);
-                    msg += "  " + getShortDescription(sender, scmd);
+                    if (scmd != null) {
+                        msg += "  " + getShortDescription(sender, scmd);
+                    }
                 }
                 sender.sendMessage(msg.split("\n"));
             }
