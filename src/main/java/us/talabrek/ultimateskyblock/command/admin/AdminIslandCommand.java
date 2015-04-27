@@ -125,10 +125,10 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     private void setBiome(CommandSender sender, IslandInfo islandInfo, String biome) {
         if (uSkyBlock.getInstance().setBiome(islandInfo.getIslandLocation(), biome)) {
             islandInfo.setBiome(biome);
-            sender.sendMessage(tr("\u00a7eChanged biome of {0}'s island to {1}.", islandInfo.getLeader(), biome));
+            sender.sendMessage(tr("\u00a7eChanged biome of {0}s island to {1}.", islandInfo.getLeader(), biome));
         } else {
             islandInfo.setBiome("OCEAN");
-            sender.sendMessage(tr("\u00a7eChanged biome of {0}'s island to OCEAN.", islandInfo.getLeader()));
+            sender.sendMessage(tr("\u00a7eChanged biome of {0}s island to OCEAN.", islandInfo.getLeader()));
         }
         sender.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
     }

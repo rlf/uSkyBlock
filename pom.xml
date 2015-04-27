@@ -325,7 +325,7 @@
                 <configuration>
                     <javaVersion>2</javaVersion>
                     <poDirectory>${basedir}/src/main/po</poDirectory>
-                    <targetBundle>us.talabrek.ultimateskyblock.Messages</targetBundle>
+                    <targetBundle>us.talabrek.ultimateskyblock.i18n.Messages</targetBundle>
                     <outputFormat>properties</outputFormat>
                 </configuration>
             </plugin>

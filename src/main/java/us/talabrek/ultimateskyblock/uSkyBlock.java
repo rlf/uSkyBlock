@@ -64,6 +64,7 @@ import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.util.FileUtil;
+import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -79,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
@@ -1328,6 +1330,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
         }
+        I18nUtil.setLocale(new Locale(getConfig().getString("language", "en_US")));
         // Update all of the loaded configs.
         FileUtil.reload();
 

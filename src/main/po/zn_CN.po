@@ -1,21 +1,20 @@
-﻿# uSkyBlock main file for Simplified Chinese translations
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
-#
-#, fuzzy
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
-"Report-Msgid-Bugs-To: https://github.com/rlf/uSkyBlock/issues\n"
-"POT-Creation-Date: 2015-04-17 00:22+0200\n"
-"PO-Revision-Date: 2015-04-23 HO:MI+ZONE\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-27 13:17+0200\n"
+"PO-Revision-Date: 2015-04-27 13:13+0100\n"
 "Last-Translator: Miku_Snow <admin@915mc.com>\n"
 "Language-Team: 915mc <admin@915mc.com>\n"
-"Language: ZN_CN \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.6\n"
 
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:138
 #, java-format
@@ -278,12 +277,12 @@ msgstr "从岛屿上移除了 {0}"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:128
 #, java-format
-msgid "§eChanged biome of {0}'s island to {1}."
+msgid "§eChanged biome of {0}s island to {1}."
 msgstr "§e将 {0} 的岛屿的生物群系更改为 {1}"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:131
-#, java-format
-msgid "§eChanged biome of {0}'s island to OCEAN."
+#, fuzzy, java-format
+msgid "§eChanged biome of {0}s island to OCEAN."
 msgstr "§e将 {0} 的岛屿的生物群系更改为 OCEAN(海洋生物群系)"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:133
@@ -321,12 +320,12 @@ msgid "Error: That player does not have an island!"
 msgstr "错误: 玩家未拥有岛屿。"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:174
-#, java-format
+#, fuzzy, java-format
 msgid "§e{0}'s island at {1} has been protected"
 msgstr "§e{0} 的岛屿在 {1} 被保护"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:176
-#, java-format
+#, fuzzy, java-format
 msgid "§4{0}'s island at {1} was already protected"
 msgstr "§4{0} 的岛屿在 {1} 早就被保护了"
 
@@ -459,8 +458,8 @@ msgid ""
 "§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
 "to remove him first."
 msgstr ""
-"§e玩家 §d{0} §e早就拥有了岛屿。§e输入§d/usb island remove <玩家名>§e"
-"将他移除。"
+"§e玩家 §d{0} §e早就拥有了岛屿。§e输入§d/usb island remove <玩家名>§e将他移"
+"除。"
 
 #: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:54
 #: us/talabrek/ultimateskyblock/command/island/MakeLeaderCommand.java:38
@@ -530,9 +529,7 @@ msgstr "§e卸载区块在{0}"
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
-msgstr ""
-"§4你的岛屿已经满员,或者你有太多等待邀请请求。你无法"
-"再邀请其他人。"
+msgstr "§4你的岛屿已经满员,或者你有太多等待邀请请求。你无法再邀请其他人。"
 
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:42
 msgid "§4That player is already leader on another island."
@@ -568,8 +565,7 @@ msgstr "§4你无法使用当前命令。请先离开你当前的团队。"
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:112
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
-msgstr ""
-"§a你加入了一个岛屿!输入/island party 来查看团队成员。"
+msgstr "§a你加入了一个岛屿!输入/island party 来查看团队成员。"
 
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:147
 #, java-format
@@ -628,8 +624,7 @@ msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:28
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
-msgstr ""
-"§c你没有权限更改你当前岛屿的生物群系."
+msgstr "§c你没有权限更改你当前岛屿的生物群系."
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:38
 #, java-format
@@ -667,16 +662,16 @@ msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
 msgstr ""
-"§4岛屿已存在!§e你早就拥有一个岛屿了.如果你想要一个权限的岛屿，"
-"输入§b /is restart §e来重新开始岛屿生涯."
+"§4岛屿已存在!§e你早就拥有一个岛屿了.如果你想要一个权限的岛屿，输入§b /is "
+"restart §e来重新开始岛屿生涯."
 
 #: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:34
 msgid ""
 "§4Island found!§e You are already a member of an island. To start your own, "
 "first§b /is leave"
 msgstr ""
-"§4岛屿已存在!§e你已经加入了一个岛屿.如果你想开始一个属于"
-"自己的岛屿生涯，请先输入§b /is leave §e来离开当前团队."
+"§4岛屿已存在!§e你已经加入了一个岛屿.如果你想开始一个属于自己的岛屿生涯，请先"
+"输入§b /is leave §e来离开当前团队."
 
 #: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:39
 #, java-format
@@ -720,8 +715,7 @@ msgstr "计分方块"
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:26
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
-msgstr ""
-"§e驶入§f/island invite <玩家ID> §e邀请玩家加入你的岛屿."
+msgstr "§e驶入§f/island invite <玩家ID> §e邀请玩家加入你的岛屿."
 
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:31
 msgid "§4Only the island's owner can invite!"
@@ -797,8 +791,8 @@ msgid ""
 "§4You can't leave your island if you are the only person. Try using /island "
 "restart if you want a new one!"
 msgstr ""
-"§4如果你是岛屿上唯一的成员,你将无法离开岛屿."
-"如果你想重新开始,输入§e/island restart"
+"§4如果你是岛屿上唯一的成员,你将无法离开岛屿.如果你想重新开始,输入§e/island "
+"restart"
 
 #: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:32
 msgid "§eYou own this island, use /island remove <player> instead."
@@ -880,8 +874,8 @@ msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
 msgstr ""
-"§4只有岛屿的主人才能重新开始岛屿.离开当前岛屿"
-"开始属于你自己的岛屿生涯请输入(/island leave)"
+"§4只有岛屿的主人才能重新开始岛屿.离开当前岛屿开始属于你自己的岛屿生涯请输入(/"
+"island leave)"
 
 #: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:24
 msgid ""
@@ -889,8 +883,8 @@ msgid ""
 "island kick <player>). See a list of players currently part of your island "
 "using /island party."
 msgstr ""
-"§e想要重新开始你的岛屿，你必须移除所有岛屿成员(/island kick <玩家ID>)."
-"查看当前岛屿玩家列表请输入/island party"
+"§e想要重新开始你的岛屿，你必须移除所有岛屿成员(/island kick <玩家ID>).查看当"
+"前岛屿玩家列表请输入/island party"
 
 #: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:30
 #, java-format
@@ -952,7 +946,7 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4你没有权限传送到其他玩家的岛屿上"
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:47
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:782
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:784
 msgid "§4That player does not exist!"
 msgstr "§4玩家不存在!"
 
@@ -994,8 +988,7 @@ msgstr "§9{0}§7超时"
 msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
-msgstr ""
-"§9{0}§e是§c危险的§e.请等待§a{1}§e秒后在这样做."
+msgstr "§9{0}§e是§c危险的§e.请等待§a{1}§e秒后在这样做."
 
 #: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:173
 msgid "§eYour island is now locked. Only your party members may enter."
@@ -1010,8 +1003,8 @@ msgid ""
 "§eYour island is unlocked and anyone may enter, however only you and your "
 "party members may build or remove blocks."
 msgstr ""
-"§e你岛屿当前处于未锁定状态,s所有人都可以访问你的岛屿"
-"不过只有你和岛屿成员才能进行建造."
+"§e你岛屿当前处于未锁定状态,s所有人都可以访问你的岛屿不过只有你和岛屿成员才能"
+"进行建造."
 
 #: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:210
 msgid "§4You must be the party leader to unlock your island!"
@@ -1134,7 +1127,6 @@ msgstr ""
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:96
 msgid "§cToggle Island Lock"
 msgstr "§c切换岛屿的锁定状态"
-
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:97
 msgid ""
@@ -2154,50 +2146,50 @@ msgstr "§9岛屿创建菜单"
 msgid "§9SB Island Group Members"
 msgstr "§9岛屿团队成员"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:168
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:170
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:636
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:638
 msgid "§4Player is already assigned to this island!"
 msgstr "§4玩家早就已经分配给这个岛屿了!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:747
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:749
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr "§4你不是岛屿的一员.将你传送回出生点!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:752
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:754
 msgid "§aTeleporting you to your island."
 msgstr "§a将你传送回自己的岛屿."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:767
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:806
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:769
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:808
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§a将在 {0} 秒后进行传送."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:787
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:789
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4无法传送至玩家的岛屿!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:791
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:793
 msgid "§aTeleporting you to "
 msgstr "§a将你传送到"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:823
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:833
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:825
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:835
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4你必须在岛屿上才能设置你的家!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:830
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:832
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§a你岛屿家的位置已经设置在你当前位置."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1103
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1105
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "无法为你创建岛屿.请联系管理员."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1116
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1118
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "玩家未拥有岛屿,或者已经被保护了!"
 
