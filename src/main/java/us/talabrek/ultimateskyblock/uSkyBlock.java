@@ -1330,7 +1330,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
         }
-        I18nUtil.setLocale(new Locale(getConfig().getString("language", "en_US")));
         // Update all of the loaded configs.
         FileUtil.reload();
 
