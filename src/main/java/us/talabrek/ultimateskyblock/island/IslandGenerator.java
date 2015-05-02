@@ -26,17 +26,28 @@ public class IslandGenerator {
     private static final String CN = IslandGenerator.class.getName();
     private static final Logger log = Logger.getLogger(IslandGenerator.class.getName());
     private final FileConfiguration config;
+    private final File[] schemFiles;
 
-    public IslandGenerator(FileConfiguration config) {
+    public IslandGenerator(File dataFolder, FileConfiguration config) {
         this.config = config;
+        File directorySchematics = new File(dataFolder + File.separator + "schematics");
+        if (!directorySchematics.exists()) {
+            directorySchematics.mkdir();
+        }
+        this.schemFiles = directorySchematics.listFiles();
+        if (this.schemFiles == null) {
+            System.out.print("[uSkyBlock] No schematic file loaded.");
+        } else {
+            System.out.print("[uSkyBlock] " + this.schemFiles.length + " schematics loaded.");
+        }
     }
 
     public void createIsland(uSkyBlock plugin, Player player, Location next) {
         log.entering(CN, "createIsland", new Object[]{plugin, player, next});
         log.fine("creating island for " + player + " at " + next);
         boolean hasIslandNow = false;
-        if (uSkyBlock.getInstance().getSchemFile().length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
-            for (File schemFile : plugin.getSchemFile()) {
+        if (schemFiles.length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
+            for (File schemFile : schemFiles) {
                 // First run-through - try to set the island the player has permission for.
                 String cSchem = schemFile.getName();
                 if (cSchem.lastIndexOf('.') > 0) {
@@ -51,7 +62,7 @@ public class IslandGenerator {
                 }
             }
             if (!hasIslandNow) {
-                for (File schemFile : plugin.getSchemFile()) {
+                for (File schemFile : schemFiles) {
                     // 2nd Run through, set the default set schematic (if found).
                     String cSchem = schemFile.getName();
                     if (cSchem.lastIndexOf('.') > 0) {

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 12:46+0200\n"
-"PO-Revision-Date: 2015-05-02 12:21+0100\n"
+"POT-Creation-Date: 2015-05-03 00:24+0200\n"
+"PO-Revision-Date: 2015-05-03 00:32+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -691,7 +691,7 @@ msgstr "§eGensender chunks til klienten"
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:31
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:39
 msgid "load the region chunks"
-msgstr ""
+msgstr "load chunks fra regionen"
 
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:35
 #, java-format
@@ -1255,7 +1255,7 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4Du har ikke tilladelse til at teleportere til andre øer!"
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:47
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:784
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:773
 msgid "§4That player does not exist!"
 msgstr "§4Ingen spiller fundet!"
 
@@ -1302,7 +1302,7 @@ msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§eAt udføre §9{0}§e er §cRISITABELT§e. Gentag kommandoen inden for §a{1}§e "
+"§eAt udføre §9{0}§e er §cRISIKABELT§e. Gentag kommandoen inden for §a{1}§e "
 "sekunder for at fortsætte!"
 
 #: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:173
@@ -1425,6 +1425,9 @@ msgid ""
 "§fisland's biome. Click here\n"
 "§fto grant this permission."
 msgstr ""
+"§fThis player §ccannot§f change the\n"
+"§fisland's biome. Click here\n"
+"§fto grant this permission."
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:94
 msgid "§aToggle Island Lock"
@@ -2262,50 +2265,50 @@ msgstr "Udfordringer"
 msgid "§9SB Island Group Members"
 msgstr "§9Ø Medlemskab"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:170
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:169
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:638
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:627
 msgid "§4Player is already assigned to this island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:749
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:738
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:754
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:743
 msgid "§aTeleporting you to your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:769
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:808
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:758
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:797
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§eDu vil blive teleporteret om {0} sekunder."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:789
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:778
 msgid "§4Unable to warp you to that player's island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:793
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:782
 msgid "§aTeleporting you to "
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:825
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:835
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:814
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:824
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:832
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:821
 msgid "§aYour skyblock home has been set to your current location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1105
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1090
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1118
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1103
 msgid "Player doesn't have an island or it's already protected!"
 msgstr ""
 

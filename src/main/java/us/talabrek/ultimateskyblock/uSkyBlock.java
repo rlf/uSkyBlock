@@ -129,7 +129,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private Stack<Location> reverseOrphaned;
     public File directoryPlayers;
     public File directoryIslands;
-    public File[] schemFile;
     private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
 
     private volatile boolean purgeActive;
@@ -269,16 +268,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             directoryIslands.mkdirs();
         }
         IslandInfo.setDirectory(directoryIslands);
-        File directorySchematics = new File(this.getDataFolder() + File.separator + "schematics");
-        if (!directorySchematics.exists()) {
-            directorySchematics.mkdir();
-        }
-        this.schemFile = directorySchematics.listFiles();
-        if (this.schemFile == null) {
-            System.out.print("[uSkyBlock] No schematic file loaded.");
-        } else {
-            System.out.print("[uSkyBlock] " + this.schemFile.length + " schematics loaded.");
-        }
     }
 
     public static uSkyBlock getInstance() {
@@ -882,10 +871,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return new SkyBlockChunkGenerator();
     }
 
-    public File[] getSchemFile() {
-        return this.schemFile;
-    }
-
     public boolean isPurgeActive() {
         return this.purgeActive;
     }
@@ -1336,7 +1321,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
         PlayerUtil.loadConfig(playerDB, getConfig());
         activePlayers.clear();
-        islandGenerator = new IslandGenerator(getConfig());
+        islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
