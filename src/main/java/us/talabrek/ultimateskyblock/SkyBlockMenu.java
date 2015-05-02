@@ -60,7 +60,7 @@ public class SkyBlockMenu {
 
     public Inventory displayPartyPlayerGUI(final Player player, final String pname) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 9, pname + " <Permissions>");
+        Inventory menu = Bukkit.createInventory(null, 9, tr("{0} <Permissions>", pname));
         final ItemStack pHead = new ItemStack(397, 1, (short) 3);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = sign.getItemMeta();
@@ -230,7 +230,7 @@ public class SkyBlockMenu {
 
     public Inventory displayLogGUI(final Player player) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 9, "\u00a79Island Log");
+        Inventory menu = Bukkit.createInventory(null, 9, tr("\u00a79Island Log"));
         ItemMeta meta4 = sign.getItemMeta();
         meta4.setDisplayName(tr("\u00a7lIsland Log"));
         addLore(lores, tr("\u00a7eClick here to return to\n\u00a7ethe main island screen."));
@@ -554,7 +554,7 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayChallengeGUI(final Player player, int page) {
-        Inventory menu = Bukkit.createInventory(null, 36, "\u00a79Challenge Menu (" + page + "/" + ((challengeLogic.getRanks().size() / 4) + 1) + ")");
+        Inventory menu = Bukkit.createInventory(null, 36, tr("\u00a79Challenge Menu ({0}/{1})", page, ((challengeLogic.getRanks().size() / 4) + 1)));
         final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         challengeLogic.populateChallengeRank(menu, player, pi, page);
         return menu;
@@ -563,10 +563,10 @@ public class SkyBlockMenu {
     public Inventory displayIslandGUI(final Player player) {
         Inventory menu = null;
         if (skyBlock.hasIsland(player.getName())) {
-            menu = Bukkit.createInventory(null, 18, "\u00a79Island Menu");
+            menu = Bukkit.createInventory(null, 18, tr("\u00a79Island Menu"));
             addMainMenu(menu, player);
         } else {
-            menu = Bukkit.createInventory(null, 9, "\u00a79Island Create Menu");
+            menu = Bukkit.createInventory(null, 9, tr("\u00a79Island Create Menu"));
             addInitMenu(menu);
         }
         return menu;

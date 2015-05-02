@@ -14,7 +14,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  */
 public class ReloadCommand extends AbstractUSBCommand {
     public ReloadCommand() {
-        super("reload", "usb.admin.reload", "reload configuration from file.");
+        super("reload", "usb.admin.reload", tr("reload configuration from file."));
     }
 
     @Override

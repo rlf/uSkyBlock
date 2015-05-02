@@ -11,7 +11,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class SetWarpCommand extends RequireIslandCommand {
     public SetWarpCommand(uSkyBlock plugin) {
-        super(plugin, "setwarp|warpset", "usb.extra.addwarp", "set your island's warp location");
+        super(plugin, "setwarp|warpset", "usb.extra.addwarp", tr("set your island's warp location"));
     }
 
     @Override

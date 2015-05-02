@@ -15,7 +15,7 @@ public class WarpCommand extends RequirePlayerCommand {
     private final uSkyBlock plugin;
 
     public WarpCommand(uSkyBlock plugin) {
-        super("warp|w", "usb.island.warp", "island", "warp to another player's island");
+        super("warp|w", "usb.island.warp", "island", tr("warp to another player's island"));
         this.plugin = plugin;
     }
 

@@ -11,7 +11,7 @@ public class AcceptRejectCommand extends RequirePlayerCommand {
     private final InviteHandler inviteHandler;
 
     public AcceptRejectCommand(InviteHandler inviteHandler) {
-        super("accept|reject", "usb.party.join", "accept/reject an invitation.");
+        super("accept|reject", "usb.party.join", tr("accept/reject an invitation."));
         this.inviteHandler = inviteHandler;
     }
 

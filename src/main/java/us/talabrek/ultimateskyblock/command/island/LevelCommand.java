@@ -1,8 +1,6 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
@@ -18,7 +16,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class LevelCommand extends RequireIslandCommand {
     public LevelCommand(uSkyBlock plugin) {
-        super(plugin, "level", "usb.island.level", "?island", "check your or anothers island level");
+        super(plugin, "level", "usb.island.level", "?island", tr("check your or anothers island level"));
     }
 
     @Override

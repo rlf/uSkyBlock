@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
@@ -15,7 +14,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  */
 public class RegisterIslandToPlayerCommand extends AbstractUSBCommand {
     public RegisterIslandToPlayerCommand() {
-        super("register", "usb.admin.register", "player", "set a player's island to your location");
+        super("register", "usb.admin.register", "player", tr("set a player's island to your location"));
     }
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {

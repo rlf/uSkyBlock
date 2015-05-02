@@ -21,8 +21,8 @@ public class AsyncCommand extends CompositeUSBCommand {
     private int asyncOffset = 0;
 
     public AsyncCommand(final uSkyBlock plugin) {
-        super("async", "usb.admin.async", "controls the currently running async tasks");
-        add(new AbstractUSBCommand("list", "lists currently running tasks") {
+        super("async", "usb.admin.async", tr("controls the currently running async tasks"));
+        add(new AbstractUSBCommand("list", tr("lists currently running tasks")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 synchronized (taskList) {
@@ -44,7 +44,7 @@ public class AsyncCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractTaskCommand("cancel", "cancels the task with the given number.") {
+        add(new AbstractTaskCommand("cancel", tr("cancels the task with the given number.")) {
             @Override
             protected void performCommand(CommandSender sender, TaskProgress task, boolean isAsync) {
                 if (doCancel(task, isAsync)) {

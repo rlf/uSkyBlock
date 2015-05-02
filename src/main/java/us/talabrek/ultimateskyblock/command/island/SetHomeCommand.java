@@ -7,9 +7,11 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class SetHomeCommand extends RequireIslandCommand {
     public SetHomeCommand(uSkyBlock plugin) {
-        super(plugin, "sethome|tpset", "usb.island.sethome", "set the island-home");
+        super(plugin, "sethome|tpset", "usb.island.sethome", tr("set the island-home"));
     }
 
     @Override

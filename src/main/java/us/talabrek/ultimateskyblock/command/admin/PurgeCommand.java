@@ -26,7 +26,7 @@ public class PurgeCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
     public PurgeCommand(uSkyBlock plugin) {
-        super("purge", "usb.admin.purge", "time-in-days", "purges all abandoned islands");
+        super("purge", "usb.admin.purge", "time-in-days", tr("purges all abandoned islands"));
         this.plugin = plugin;
     }
 

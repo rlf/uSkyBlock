@@ -8,11 +8,13 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class LogCommand extends RequireIslandCommand {
     private final SkyBlockMenu menu;
 
     public LogCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super(plugin, "log|l", "usb.island.create", "display log");
+        super(plugin, "log|l", "usb.island.create", tr("display log"));
         this.menu = menu;
     }
 

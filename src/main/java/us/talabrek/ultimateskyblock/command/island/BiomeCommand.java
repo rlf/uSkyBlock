@@ -1,10 +1,8 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.SkyBlockMenu;
-import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -17,7 +15,7 @@ public class BiomeCommand extends RequireIslandCommand {
     private final SkyBlockMenu menu;
 
     public BiomeCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super(plugin, "biome|b", null, "biome", "change the biome of the island");
+        super(plugin, "biome|b", null, "biome", tr("change the biome of the island"));
         this.menu = menu;
     }
 

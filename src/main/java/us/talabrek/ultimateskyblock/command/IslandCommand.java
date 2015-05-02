@@ -13,6 +13,8 @@ import us.talabrek.ultimateskyblock.command.completion.OnlinePlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.island.*;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * The main /island command
  */
@@ -20,7 +22,7 @@ public class IslandCommand extends AbstractCommandExecutor {
     private final SkyBlockMenu menu;
 
     public IslandCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super("island|is", "usb.island.create", "general island command");
+        super("island|is", "usb.island.create", tr("general island command"));
         this.menu = menu;
         InviteHandler inviteHandler = new InviteHandler(plugin);
         AllPlayerTabCompleter playerTabCompleter = new AllPlayerTabCompleter();

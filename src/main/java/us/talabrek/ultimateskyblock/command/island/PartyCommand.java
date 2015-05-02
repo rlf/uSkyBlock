@@ -19,17 +19,17 @@ public class PartyCommand extends CompositeUSBCommand {
     private final SkyBlockMenu menu;
 
     public PartyCommand(final uSkyBlock plugin, SkyBlockMenu menu, final InviteHandler inviteHandler) {
-        super("party", "usb.island.create", "show party information");
+        super("party", "usb.island.create", tr("show party information"));
         this.plugin = plugin;
         this.menu = menu;
-        add(new AbstractUSBCommand("info", "shows information about your party") {
+        add(new AbstractUSBCommand("info", tr("shows information about your party")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 sender.sendMessage(plugin.getIslandInfo((Player) sender).toString());
                 return true;
             }
         });
-        add(new AbstractUSBCommand("invites", "show pending invites") {
+        add(new AbstractUSBCommand("invites", tr("show pending invites")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
@@ -46,7 +46,7 @@ public class PartyCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new AbstractUSBCommand("uninvite", null, "player", "withdraw an invite") {
+        add(new AbstractUSBCommand("uninvite", null, "player", tr("withdraw an invite")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {

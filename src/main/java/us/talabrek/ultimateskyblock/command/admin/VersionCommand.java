@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Displays detailed version information.
  */
@@ -15,7 +17,7 @@ public class VersionCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
     public VersionCommand(uSkyBlock plugin) {
-        super("version|v", "usb.admin.version", "displays version information");
+        super("version|v", "usb.admin.version", tr("displays version information"));
         this.plugin = plugin;
     }
 

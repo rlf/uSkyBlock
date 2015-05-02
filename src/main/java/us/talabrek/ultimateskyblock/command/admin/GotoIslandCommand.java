@@ -15,7 +15,7 @@ public class GotoIslandCommand extends AbstractPlayerInfoCommand {
     private final uSkyBlock plugin;
 
     public GotoIslandCommand(uSkyBlock plugin) {
-        super("goto", "usb.mod.goto", "Teleport to another players island");
+        super("goto", "usb.mod.goto", tr("Teleport to another players island"));
         this.plugin = plugin;
     }
 

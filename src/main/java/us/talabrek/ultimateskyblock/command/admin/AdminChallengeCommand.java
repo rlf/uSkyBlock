@@ -20,7 +20,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
     private final uSkyBlock plugin;
 
     public AdminChallengeCommand(final uSkyBlock plugin, TabCompleter challengeCompleter) {
-        super("challenge", "usb.mod.challenges", "player", "Manage challenges for a player");
+        super("challenge", "usb.mod.challenges", "player", tr("Manage challenges for a player"));
         this.plugin = plugin;
         add(new ChallengeCommand("complete", null, "completes the challenge for the player") {
             @Override
@@ -35,7 +35,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new ChallengeCommand("reset", null, "resets the challenge for the player") {
+        add(new ChallengeCommand("reset", null, tr("resets the challenge for the player")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo pi, ChallengeCompletion completion) {
                 String challenge = completion.getName();
@@ -49,7 +49,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractUSBCommand("resetall", null, "resets all challenges for the player") {
+        add(new AbstractUSBCommand("resetall", null, tr("resets all challenges for the player")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 PlayerInfo playerInfo = (PlayerInfo) data.get("playerInfo");

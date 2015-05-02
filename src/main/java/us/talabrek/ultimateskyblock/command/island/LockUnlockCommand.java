@@ -13,7 +13,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class LockUnlockCommand extends RequireIslandCommand {
     public LockUnlockCommand(uSkyBlock plugin) {
-        super(plugin, "lock|unlock", "usb.lock", "lock your island to non-party members.");
+        super(plugin, "lock|unlock", "usb.lock", tr("lock your island to non-party members."));
     }
 
     @Override

@@ -12,7 +12,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class MakeLeaderCommand extends RequireIslandCommand {
     public MakeLeaderCommand(uSkyBlock plugin) {
-        super(plugin, "makeleader|transfer", "usb.island.create", "member", "transfer leadership to another member");
+        super(plugin, "makeleader|transfer", "usb.island.create", "member", tr("transfer leadership to another member"));
     }
 
     @Override

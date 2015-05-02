@@ -14,7 +14,7 @@ public class CreateCommand extends RequirePlayerCommand {
     private final uSkyBlock plugin;
 
     public CreateCommand(uSkyBlock plugin) {
-        super("create|c", "usb.island.create", "create an island");
+        super("create|c", "usb.island.create", tr("create an island"));
         this.plugin = plugin;
     }
 

@@ -6,11 +6,13 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class TopCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
     public TopCommand(uSkyBlock plugin) {
-        super("top", "usb.island.topten", "?page", "display the top10 of islands");
+        super("top", "usb.island.topten", "?page", tr("display the top10 of islands"));
         this.plugin = plugin;
     }
 

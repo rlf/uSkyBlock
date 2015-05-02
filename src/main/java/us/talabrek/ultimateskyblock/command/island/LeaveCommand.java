@@ -18,7 +18,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class LeaveCommand extends RequireIslandCommand {
 
     public LeaveCommand(uSkyBlock plugin) {
-        super(plugin, "leave", "usb.party.join", "leave your party");
+        super(plugin, "leave", "usb.party.join", tr("leave your party"));
     }
 
     @Override

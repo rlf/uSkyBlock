@@ -17,7 +17,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class InfoCommand extends RequireIslandCommand {
     public InfoCommand(uSkyBlock plugin) {
-        super(plugin, "info", "usb.island.info", "?island", "check your or anothers island info");
+        super(plugin, "info", "usb.island.info", "?island", tr("check your or anothers island info"));
     }
 
     @Override

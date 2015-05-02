@@ -14,7 +14,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 @SuppressWarnings("deprecation")
 public class KickCommand extends RequireIslandCommand {
     public KickCommand(uSkyBlock plugin) {
-        super(plugin, "kick|remove", "usb.party.kick", "player", "remove a member from your island.");
+        super(plugin, "kick|remove", "usb.party.kick", "player", tr("remove a member from your island."));
     }
 
     @Override

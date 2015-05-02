@@ -21,7 +21,7 @@ public class FlatlandFixCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
     public FlatlandFixCommand(uSkyBlock plugin) {
-        super("fix-flatland", "usb.admin.remove", "?player", "tries to fix the the area of flatland.");
+        super("fix-flatland", "usb.admin.remove", "?player", tr("tries to fix the the area of flatland."));
         this.plugin = plugin;
     }
 

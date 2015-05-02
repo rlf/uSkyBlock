@@ -29,8 +29,8 @@ public class DebugCommand extends CompositeUSBCommand {
     private static Handler logHandler = null;
 
     public DebugCommand(final uSkyBlock plugin) {
-        super("debug", "usb.admin.debug", "control debugging");
-        add(new AbstractUSBCommand("setlevel", null, "level", "set debug-level") {
+        super("debug", "usb.admin.debug", tr("control debugging"));
+        add(new AbstractUSBCommand("setlevel", null, "level", tr("set debug-level")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
@@ -40,7 +40,7 @@ public class DebugCommand extends CompositeUSBCommand {
                 return false;
             }
         });
-        add(new AbstractUSBCommand("enable|disable", null, "toggle debug-logging") {
+        add(new AbstractUSBCommand("enable|disable", null, tr("toggle debug-logging")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (logHandler != null && alias.equals("disable")) {
@@ -53,7 +53,7 @@ public class DebugCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new AbstractUSBCommand("flush", null, "flush current content of the logger to file.") {
+        add(new AbstractUSBCommand("flush", null, tr("flush current content of the logger to file.")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (logHandler != null) {

@@ -23,8 +23,8 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  */
 public class CooldownCommand extends CompositeUSBCommand {
     public CooldownCommand(final uSkyBlock plugin) {
-        super("cooldown|cd", "usb.admin.cooldown", "player", "Controls player-cooldowns");
-        add(new AbstractUSBCommand("clear|c", null, "command", "clears the cooldown on a command (* = all)") {
+        super("cooldown|cd", "usb.admin.cooldown", "player", tr("Controls player-cooldowns"));
+        add(new AbstractUSBCommand("clear|c", null, "command", tr("clears the cooldown on a command (* = all)")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (!data.containsKey("p") || !(data.get("p") instanceof Player)) {
@@ -45,7 +45,7 @@ public class CooldownCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractUSBCommand("reset|r", null, "command", "resets the cooldown on the command") {
+        add(new AbstractUSBCommand("reset|r", null, "command", tr("resets the cooldown on the command")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (!data.containsKey("p") || !(data.get("p") instanceof Player)) {
@@ -64,7 +64,7 @@ public class CooldownCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractUSBCommand("list|l", "lists all the active cooldowns") {
+        add(new AbstractUSBCommand("list|l", tr("lists all the active cooldowns")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (data.containsKey("uuid") && data.get("uuid") instanceof UUID) {

@@ -15,7 +15,7 @@ public class GenTopTenCommand extends AbstractUSBCommand {
     private final uSkyBlock plugin;
 
     public GenTopTenCommand(uSkyBlock plugin) {
-        super("topten", "usb.mod.topten", "manually update the top 10 list");
+        super("topten", "usb.mod.topten", tr("manually update the top 10 list"));
         this.plugin = plugin;
     }
 

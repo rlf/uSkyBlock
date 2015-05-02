@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Command for importing external formats.
  */
@@ -16,7 +18,7 @@ public class ImportCommand extends AbstractUSBCommand {
     private final ImportTabCompleter completer;
 
     public ImportCommand() {
-        super("import", "usb.admin.import", "format", "imports players and islands from other formats", null);
+        super("import", "usb.admin.import", "format", tr("imports players and islands from other formats"));
         completer = new ImportTabCompleter();
     }
 

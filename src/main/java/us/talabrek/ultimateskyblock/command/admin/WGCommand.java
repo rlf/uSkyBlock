@@ -18,9 +18,9 @@ public class WGCommand extends CompositeUSBCommand {
     private final uSkyBlock plugin;
 
     public WGCommand(uSkyBlock plugin) {
-        super("wg", "usb.admin.wg", "various WorldGuard utilities");
+        super("wg", "usb.admin.wg", tr("various WorldGuard utilities"));
         this.plugin = plugin;
-        add(new RequirePlayerCommand("refresh", null, "refreshes the chunks around the player") {
+        add(new RequirePlayerCommand("refresh", null, tr("refreshes the chunks around the player")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 WorldEditHandler.refreshRegion(player.getLocation());
@@ -28,7 +28,7 @@ public class WGCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new RequirePlayerCommand("load", null, "load the region chunks") {
+        add(new RequirePlayerCommand("load", null, tr("load the region chunks")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 WorldEditHandler.loadRegion(player.getLocation());
@@ -36,7 +36,7 @@ public class WGCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new RequirePlayerCommand("unload", null, "load the region chunks") {
+        add(new RequirePlayerCommand("unload", null, tr("load the region chunks")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 WorldEditHandler.unloadRegion(player.getLocation());

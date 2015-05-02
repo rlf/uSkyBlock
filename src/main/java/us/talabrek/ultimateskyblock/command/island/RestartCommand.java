@@ -12,7 +12,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class RestartCommand extends RequireIslandCommand {
     public RestartCommand(uSkyBlock plugin) {
-        super(plugin, "restart|reset", "delete your island and start a new one.");
+        super(plugin, "restart|reset", tr("delete your island and start a new one."));
     }
 
     @Override
