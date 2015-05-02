@@ -34,6 +34,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class SkyBlockMenu {
     private static final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
     private static final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu ") + "\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
+    public static final int CHALLENGE_PAGESIZE = 54;
     private uSkyBlock skyBlock;
     private final ChallengeLogic challengeLogic;
     ItemStack pHead;
@@ -554,7 +555,7 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayChallengeGUI(final Player player, int page) {
-        Inventory menu = Bukkit.createInventory(null, 36, tr("\u00a79Challenge Menu ({0}/{1})", page, ((challengeLogic.getRanks().size() / 4) + 1)));
+        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE, tr("\u00a79Challenge Menu ({0}/{1})", page, ((challengeLogic.getRanks().size() / 6) + 1)));
         final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         challengeLogic.populateChallengeRank(menu, player, pi, page);
         return menu;
@@ -857,7 +858,7 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));
             }
-        } else if (event.getInventory().getName().contains(tr("Challenge Menu ("))) {
+        } else if (event.getInventory().getName().contains(tr("Challenge Menu"))) {
             event.setCancelled(true);
             Matcher m = CHALLENGE_PAGE_HEADER.matcher(event.getInventory().getName());
             int page = 1;
@@ -866,7 +867,7 @@ public class SkyBlockMenu {
                 page = Integer.parseInt(m.group("p"));
                 max = Integer.parseInt(m.group("max"));
             }
-            if (event.getSlot() < 0 || event.getSlot() > 35) {
+            if (event.getSlot() < 0 || event.getSlot() > CHALLENGE_PAGESIZE) {
                 return;
             }
             if ((event.getSlot() % 9) > 0) { // 0,9... are the rank-headers...
@@ -879,7 +880,7 @@ public class SkyBlockMenu {
                 p.openInventory(displayChallengeGUI(p, page));
             } else {
                 p.closeInventory();
-                if (event.getSlot() < 18) { // Upper half
+                if (event.getSlot() < CHALLENGE_PAGESIZE/2) { // Upper half
                     if (page > 1) {
                         p.openInventory(displayChallengeGUI(p, page - 1));
                     } else {

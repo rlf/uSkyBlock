@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 12:02+0200\n"
+"POT-Creation-Date: 2015-05-02 12:46+0200\n"
 "PO-Revision-Date: 2015-05-02 12:21+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
@@ -60,47 +60,47 @@ msgstr "§6Erfaring: §a{0}"
 msgid "§dTotal times completed: §f{0}"
 msgstr "§dTotalt antal aflevering: §f{0}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:90
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:92
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4{0} udfordringen er ikke gentagelig!"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:95
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:106
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:97
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:108
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:21
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:96
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:98
 msgid "§4You don't have enough of the required item(s)!"
 msgstr "§4Du har ikke nok af de påkrævede ting!"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:102
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:104
 msgid "§4You must be on your island to do that!"
 msgstr "§4Du skal være på din ø, for at gøre det!"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:107
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:109
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
 msgstr "§4Du skal stå inden for {0} blokke af alle de påkrævede elementer."
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:113
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:115
 #, java-format
 msgid "§4Your island must be level {0} to complete this challenge!"
 msgstr "§4Din ø skal mindst være level {0} for at gennemføre denne udfordring!"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:151
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:153
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Ukendt udfordrings-type: {0}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:197
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:199
 #, java-format
 msgid "§eStill the following blocks short: {0}"
 msgstr "§eDu mangler stadig følgende blokke: {0}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:249
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:251
 #, java-format
 msgid ""
 "§eStill the following entities short:\n"
@@ -109,52 +109,62 @@ msgstr ""
 "§eDu mangler stadig følgende elementer:\n"
 "{0}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:277
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:279
 #, java-format
 msgid "§eYou are the following items short:{0}"
 msgstr "§eDu mangler følgende:{0}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:300
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:302
 #, java-format
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aDo you gennemført {0}-udfordringen!"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:336
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:338
 #, java-format
 msgid "§eItem reward(s): §f{0}"
 msgstr "§ePræmie: §f{0}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:337
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:339
 #, java-format
 msgid "§eExp reward: §f{0,number,#.#}"
 msgstr "§eXP præmie: §f{0,number,#.#}"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:339
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:341
 #, java-format
 msgid "§eCurrency reward: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
 msgstr "§ePenge præmie: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:357
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:359
 msgid "§eYour inventory is §4full§e. Items dropped on the ground."
 msgstr "§eDine tasker ef §4fulde§e. Tingene er faldet på jorden."
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:381
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:383
 msgid "§e§lClick to complete this challenge."
 msgstr "§e§lKlik for at gennemføre udfordringen."
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:383
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:385
 msgid "§4§lYou can't repeat this challenge."
 msgstr "§4§lDu kan ikke gentage denne udfordring."
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:439
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:441
 msgid "§fComplete most challenges in"
 msgstr "§fGennemfør de fleste udfordringer"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:440
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:442
 msgid "§fthis rank to unlock the next rank."
 msgstr "§fpå dette niveau, for at åbne det næste."
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:452
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:444
+#, fuzzy
+msgid "§eClick here to show previous page"
+msgstr "§fKlik her for at fjerne tilladelsen."
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:446
+#, fuzzy
+msgid "§eClick here to show next page"
+msgstr "§fKlik her for at tillade."
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:459
 msgid "§4§lLocked Challenge"
 msgstr "§4§lLåst udfordring"
 
@@ -1360,19 +1370,20 @@ msgid "§cYou were removed from your island since the last time you played!"
 msgstr "§cDu er blevet udvist af din ø, siden du sidst spillede!"
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:36
+#, fuzzy
 msgid "Challenge Menu "
-msgstr "Udfordringer "
+msgstr "Udfordringer"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:63
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:64
 #, fuzzy, java-format
 msgid "{0} <Permissions>"
 msgstr "§hSpiller tilladelser"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:67
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:68
 msgid "§hPlayer Permissions"
 msgstr "§hSpiller tilladelser"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:68
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:69
 msgid ""
 "§eClick here to return to\n"
 "§eyour island group's info."
@@ -1380,7 +1391,7 @@ msgstr ""
 "§eKlik her for at vende tilbage\n"
 "§etil din ø's medlemsmenu."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:74
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:75
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"
@@ -1390,11 +1401,11 @@ msgstr ""
 "§efor at se tilladelsen.\n"
 "§eSkift ved at klikke."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:81
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:82
 msgid "§aChange Biome"
 msgstr "§aSkift Biome"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:82
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:83
 msgid ""
 "§fThis player §acan§f change the\n"
 "§fisland's biome. Click here\n"
@@ -1404,22 +1415,22 @@ msgstr ""
 "§føens biome. Klik her\n"
 "§ffor at fjerne tilladelsen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:84
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:85
 msgid "§cChange Biome"
 msgstr "§cSkift Biome"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:85
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:86
 msgid ""
 "§fThis player §ccannot§f change the\n"
 "§fisland's biome. Click here\n"
 "§fto grant this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:93
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:94
 msgid "§aToggle Island Lock"
 msgstr "§aSkift Øens Lås"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:94
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:95
 msgid ""
 "§fThis player §acan§f toggle the\n"
 "§fisland's lock, which prevents\n"
@@ -1427,11 +1438,11 @@ msgid ""
 "§fClick here to remove this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:96
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:97
 msgid "§cToggle Island Lock"
 msgstr "§cLås Øen"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:97
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:98
 msgid ""
 "§fThis player §ccannot§f toggle the\n"
 "§fisland's lock, which prevents\n"
@@ -1439,11 +1450,11 @@ msgid ""
 "§fClick here to add this permission"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:105
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:106
 msgid "§aSet Island Warp"
 msgstr "§aSæt gæsteportal"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:106
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:107
 msgid ""
 "§fThis player §acan§f set the\n"
 "§fisland's warp, which allows\n"
@@ -1452,11 +1463,11 @@ msgid ""
 "§fremove this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:108
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:109
 msgid "§cSet Island Warp"
 msgstr "§cSæt gæsteportal"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:109
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:110
 msgid ""
 "§fThis player §ccannot§f set the\n"
 "§fisland's warp, which allows\n"
@@ -1465,11 +1476,11 @@ msgid ""
 "§fadd this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:117
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:118
 msgid "§aToggle Island Warp"
 msgstr "§aSkift gæsteportal"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:118
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:119
 msgid ""
 "§fThis player §acan§f toggle the\n"
 "§fisland's warp, allowing them\n"
@@ -1478,11 +1489,11 @@ msgid ""
 "§fhere to remove this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:120
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:121
 msgid "§cToggle Island Warp"
 msgstr "§cSkift gæsteportal"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:121
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:122
 msgid ""
 "§fThis player §ccannot§f toggle the\n"
 "§fisland's warp, allowing them\n"
@@ -1491,11 +1502,11 @@ msgid ""
 "§fhere to add this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:129
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:130
 msgid "§aInvite Players"
 msgstr "§aInviter spillere"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:130
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:131
 msgid ""
 "§fThis player §acan§f invite\n"
 "§fother players to the island if\n"
@@ -1504,22 +1515,22 @@ msgid ""
 "§fthis permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:132
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:133
 msgid "§cInvite Players"
 msgstr "§cInviter spillere"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:133
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:134
 msgid ""
 "§fThis player §ccannot§f invite\n"
 "§fother players to the island.\n"
 "§fClick here to add this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:141
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:142
 msgid "§aKick Players"
 msgstr "§aSpark spillere"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:142
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:143
 msgid ""
 "§fThis player §acan§f kick\n"
 "§fother players from the island,\n"
@@ -1528,30 +1539,30 @@ msgid ""
 "§fto remove this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:144
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:145
 msgid "§cKick Players"
 msgstr "§cSpark spillere"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:145
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:146
 msgid ""
 "§fThis player §ccannot§f kick\n"
 "§fother players from the island.\n"
 "§fClick here to add this permission."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:167
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:168
 msgid "§aGroup Info"
 msgstr "§aMedlems info"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:170
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:171
 msgid "§aMore players can be invited to this island."
 msgstr "§aFlere spillere kan be inviteret til denne ø."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:172
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:173
 msgid "§cThis island is full."
 msgstr "§cDenne ø er fuld!"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:174
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:175
 msgid ""
 "§eHover over a player's icon to\n"
 "§eview their permissions. The\n"
@@ -1559,7 +1570,7 @@ msgid ""
 "§eby clicking a player's icon."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:182
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:183
 msgid ""
 "§a§lLeader\n"
 "§aCan §fchange the island's biome.\n"
@@ -1570,68 +1581,73 @@ msgid ""
 "§aCan §fkick others from the island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:187
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:188
 msgid "§e§lMember"
 msgstr "§e§lMedlem"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:189
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:190
 msgid "§aCan §fchange the island's biome."
 msgstr "§aKan §fændre øens biome."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:191
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:192
 msgid "§cCannot §fchange the island's biome."
 msgstr "§cKan ikke §fændre øens biome."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:194
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:195
 msgid "§aCan §flock/unlock the island."
 msgstr "§aKan §flåse øen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:196
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:197
 msgid "§cCannot §flock/unlock the island."
 msgstr "§cKan §flåse øen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:199
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:200
 msgid "§aCan §fset the island's warp."
 msgstr "§aKan §fsætte øens gæsteportal."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:201
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:202
 msgid "§cCannot §fset the island's warp."
 msgstr "§cKan ikke §fændre gæsteportalen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:204
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:205
 msgid "§aCan §ftoggle the island's warp."
 msgstr "§aKan §fændre øens gæsteportal."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:206
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:207
 msgid "§cCannot §ftoggle the island's warp."
 msgstr "§cKan ikke §fændre gæsteportalen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:209
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:210
 msgid "§aCan §finvite others to the island."
 msgstr "§aKan §finvitere andre spillere til øen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:211
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:212
 msgid "§cCannot §finvite others to the island."
 msgstr "§cKan ikke §finvitere andre til øen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:214
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:215
 msgid "§aCan §fkick others from the island."
 msgstr "§aKan §fsparke andre fra øen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:216
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:217
 msgid "§cCannot §fkick others from the island."
 msgstr "§cKan ikke §fsparke andre fra øen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:219
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:220
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<Klik for at ændre tilladelse>"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:235
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:234
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:895
+msgid "§9Island Log"
+msgstr "§9Øens Log"
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:236
 msgid "§lIsland Log"
 msgstr "§lØens Log"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:236
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:259
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:237
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:260
 msgid ""
 "§eClick here to return to\n"
 "§ethe main island screen."
@@ -1639,19 +1655,19 @@ msgstr ""
 "§eKlik her og returner til\n"
 "§eøens hovedmenu."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:243
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:244
 msgid "§e§lIsland Log"
 msgstr "§e§lØens Log"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:258
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:259
 msgid "§hIsland Biome"
 msgstr "§hØens Biome"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:268
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:269
 msgid "§aBiome: Ocean"
 msgstr "§aBiome: Hav"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:269
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:270
 msgid ""
 "§fThe ocean biome is the basic\n"
 "§fstarting biome for all islands.\n"
@@ -1660,39 +1676,39 @@ msgid ""
 "§fspawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:271
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:289
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:307
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:325
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:343
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:361
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:379
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:397
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:415
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:433
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:451
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:272
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:290
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:308
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:326
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:344
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:362
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:380
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:398
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:416
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:434
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:452
 msgid "§2§lThis is your current biome."
 msgstr "§2§lDette er din nuværende biome."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:273
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:291
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:309
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:327
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:345
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:363
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:381
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:399
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:417
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:435
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:453
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:274
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:292
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:310
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:328
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:346
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:364
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:382
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:400
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:418
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:436
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:454
 msgid "§e§lClick to change to this biome."
 msgstr "§e§lKlik for at ændre biomen."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:276
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:277
 msgid "§8Biome: Ocean"
 msgstr "§8Biome: Hav"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:277
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:278
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The ocean biome is the basic\n"
@@ -1702,11 +1718,11 @@ msgid ""
 "§7spawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:286
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:287
 msgid "§aBiome: Forest"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:287
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:288
 msgid ""
 "§fThe forest biome will allow\n"
 "§fyour island to spawn passive.\n"
@@ -1715,11 +1731,11 @@ msgid ""
 "§fspawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:294
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:295
 msgid "§8Biome: Forest"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:295
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:296
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The forest biome will allow\n"
@@ -1729,11 +1745,11 @@ msgid ""
 "§7spawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:304
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:305
 msgid "§aBiome: Desert"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:305
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:306
 msgid ""
 "§fThe desert biome makes it so\n"
 "§fthat there is no rain or snow\n"
@@ -1742,11 +1758,11 @@ msgid ""
 "§fspawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:312
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:313
 msgid "§8Biome: Desert"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:313
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:314
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The desert biome makes it so\n"
@@ -1756,11 +1772,11 @@ msgid ""
 "§7spawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:322
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:323
 msgid "§aBiome: Jungle"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:323
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:324
 msgid ""
 "§fThe jungle biome is bright\n"
 "§fand colorful. Passive mobs\n"
@@ -1769,11 +1785,11 @@ msgid ""
 "§fspawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:330
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:331
 msgid "§8Biome: Jungle"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:331
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:332
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The jungle biome is bright\n"
@@ -1783,11 +1799,11 @@ msgid ""
 "§7spawn normally."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:340
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:341
 msgid "§aBiome: Swampland"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:341
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:342
 msgid ""
 "§fThe swamp biome is dark\n"
 "§fand dull. Passive mobs\n"
@@ -1797,11 +1813,11 @@ msgid ""
 "§fon the moon phase."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:348
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:349
 msgid "§8Biome: Swampland"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:349
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:350
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The swamp biome is dark\n"
@@ -1812,11 +1828,11 @@ msgid ""
 "§7on the moon phase."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:358
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:359
 msgid "§aBiome: Taiga"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:359
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:360
 msgid ""
 "§fThe taiga biome has snow\n"
 "§finstead of rain. Passive\n"
@@ -1825,11 +1841,11 @@ msgid ""
 "§fhostile mobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:366
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:367
 msgid "§8Biome: Taiga"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:367
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:368
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The taiga biome has snow\n"
@@ -1839,11 +1855,11 @@ msgid ""
 "§7hostile mobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:376
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:377
 msgid "§aBiome: Mushroom"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:377
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:378
 msgid ""
 "§fThe mushroom biome is\n"
 "§fbright and colorful.\n"
@@ -1853,11 +1869,11 @@ msgid ""
 "§fhostile mobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:384
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:385
 msgid "§8Biome: Mushroom"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:385
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:386
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The mushroom biome is\n"
@@ -1868,11 +1884,11 @@ msgid ""
 "§7hostile mobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:394
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:395
 msgid "§aBiome: Hell(Nether)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:395
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:396
 msgid ""
 "§fThe hell biome looks\n"
 "§fdark and dead. Some\n"
@@ -1882,11 +1898,11 @@ msgid ""
 "§fblazes)."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:402
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:403
 msgid "§8Biome: Hell(Nether)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:403
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:404
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The hell biome looks\n"
@@ -1897,11 +1913,11 @@ msgid ""
 "§7blazes)."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:412
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:413
 msgid "§aBiome: Sky(End)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:413
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:414
 msgid ""
 "§fThe sky biome gives your\n"
 "§fisland a special dark sky.\n"
@@ -1909,11 +1925,11 @@ msgid ""
 "§fin this biome."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:420
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:421
 msgid "§8Biome: Sky(End)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:421
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:422
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The sky biome gives your\n"
@@ -1922,11 +1938,11 @@ msgid ""
 "§7in this biome."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:430
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:431
 msgid "§aBiome: Plains"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:431
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:432
 msgid ""
 "§fThe plains biome has rain\n"
 "§finstead of snow. Passive\n"
@@ -1935,11 +1951,11 @@ msgid ""
 "§fhostile mobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:438
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:439
 msgid "§8Biome: Plains"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:439
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:440
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The plains biome has rain\n"
@@ -1949,11 +1965,11 @@ msgid ""
 "§7hostile mobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:448
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:449
 msgid "§aBiome: Extreme Hills"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:449
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:450
 msgid ""
 "§fThe extreme hills biome.\n"
 "§fPassive mobs will spawn \n"
@@ -1961,11 +1977,11 @@ msgid ""
 "§fmobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:456
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:457
 msgid "§8Biome: Extreme Hills"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:457
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:458
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The extreme hills biome.\n"
@@ -1974,26 +1990,26 @@ msgid ""
 "§7mobs will spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:557
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:558
 #, java-format
 msgid "§9Challenge Menu ({0}/{1})"
 msgstr "§9Udfordringer ({0}/{1}) "
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:566
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:901
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:567
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:902
 msgid "§9Island Menu"
 msgstr "§9Hoved menu"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:569
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:952
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:570
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:953
 msgid "§9Island Create Menu"
 msgstr "§9Start menu"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:579
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:580
 msgid "§a§lStart an Island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:580
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:581
 msgid ""
 "§fStart your skyblock journey\n"
 "§fby starting your own island.\n"
@@ -2005,11 +2021,11 @@ msgid ""
 "§e§lClick here to start!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:587
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:588
 msgid "§a§lJoin an Island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:588
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:589
 msgid ""
 "§fWant to join another player's\n"
 "§fisland instead of starting\n"
@@ -2021,11 +2037,11 @@ msgid ""
 "§e§l(You must be invited first)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:595
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:596
 msgid "§a§lIsland Help"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:596
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:597
 msgid ""
 "§fNeed help with skyblock\n"
 "§fconcepts or commands? View\n"
@@ -2033,11 +2049,11 @@ msgid ""
 "§e§lClick here for help!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:607
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:608
 msgid "§a§lReturn Home"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:608
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:609
 msgid ""
 "§fReturn to your island's home\n"
 "§fpoint. You can change your home\n"
@@ -2046,11 +2062,11 @@ msgid ""
 "§e§lClick here to return home."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:618
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:619
 msgid "§a§lChallenges"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:619
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:620
 msgid ""
 "§fView a list of §9challenges§f that\n"
 "§fyou can complete on your island\n"
@@ -2058,24 +2074,24 @@ msgid ""
 "§fand titles."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:621
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:622
 msgid "§e§lClick here to view challenges."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:623
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:624
 msgid "§4§lChallenges disabled."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:632
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:633
 msgid "§a§lIsland Level"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:633
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:634
 #, java-format
 msgid "§eCurrent Level: §a{0,number,##.#}"
 msgstr "§eØens niveau: §a{0,number,##.#}"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:634
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:635
 msgid ""
 "§fGain island levels by expanding\n"
 "§fyour skyblock and completing\n"
@@ -2085,11 +2101,11 @@ msgid ""
 "§e§l(must be on island)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:642
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:643
 msgid "§a§lIsland Group"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:644
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:645
 msgid ""
 "§fView the members of your island\n"
 "§fgroup and their permissions. If\n"
@@ -2098,30 +2114,30 @@ msgid ""
 "§e§lClick here to view or change."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:652
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:653
 msgid "§a§lChange Island Biome"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:654
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:655
 msgid ""
 "§fThe island biome affects things\n"
 "§flike grass color and spawning\n"
 "§fof both animals and monsters."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:656
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:657
 msgid "§e§lClick here to change biomes."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:658
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:659
 msgid "§c§lYou can't change the biome."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:667
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:668
 msgid "§a§lIsland Lock"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:669
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:670
 msgid ""
 "§eLock Status: §aActive\n"
 "§fYour island is currently §clocked.\n"
@@ -2129,16 +2145,16 @@ msgid ""
 "§fare unable to enter your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:671
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:672
 msgid "§e§lClick here to unlock your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:673
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:680
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:674
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:681
 msgid "§c§lYou can't change the lock."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:676
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:677
 msgid ""
 "§eLock Status: §8Inactive\n"
 "§fYour island is currently §aunlocked.\n"
@@ -2147,16 +2163,16 @@ msgid ""
 "§fmembers may build there."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:678
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:679
 msgid "§e§lClick here to lock your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:691
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:701
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:692
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:702
 msgid "§a§lIsland Warp"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:692
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:693
 msgid ""
 "§eWarp Status: §aActive\n"
 "§fOther players may warp to your\n"
@@ -2164,16 +2180,16 @@ msgid ""
 "§fyou set using §d/island setwarp."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:694
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:695
 msgid "§e§lClick here to deactivate."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:696
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:706
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:697
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:707
 msgid "§c§lYou can't change the warp."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:702
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:703
 msgid ""
 "§eWarp Status: §8Inactive\n"
 "§fOther players can't warp to your\n"
@@ -2181,15 +2197,15 @@ msgid ""
 "§d/island setwarp §fbefore activating."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:704
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:705
 msgid "§e§lClick here to activate."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:716
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:717
 msgid "§a§lIsland Log"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:717
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:718
 msgid ""
 "§fView a log of events from\n"
 "§fyour island such as member,\n"
@@ -2197,11 +2213,11 @@ msgid ""
 "§e§lClick to view the log."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:725
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:726
 msgid "§a§lChange Home Location"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:726
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:727
 msgid ""
 "§fWhen you teleport to your\n"
 "§fisland you will be taken to\n"
@@ -2209,11 +2225,11 @@ msgid ""
 "§e§lClick here to change."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:734
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:735
 msgid "§a§lChange Warp Location"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:735
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:736
 msgid ""
 "§fWhen your warp is activated,\n"
 "§fother players will be taken to\n"
@@ -2222,31 +2238,27 @@ msgid ""
 "§e§lClick here to change."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:750
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:751
 msgid "§9Island Group Members"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:758
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:759
 msgid "§a§lLeader"
 msgstr "§a§lLeder"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:768
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:769
 msgid "Permissions"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:807
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:808
 msgid "Island Biome"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:860
-msgid "Challenge Menu ("
-msgstr ""
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:861
+msgid "Challenge Menu"
+msgstr "Udfordringer"
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:894
-msgid "§9Island Log"
-msgstr "§9Øens Log"
-
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:968
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:969
 msgid "§9SB Island Group Members"
 msgstr "§9Ø Medlemskab"
 
@@ -2352,14 +2364,8 @@ msgstr ""
 #~ msgid "§fnon-group members from entering."
 #~ msgstr "§fgæster fra at komme på besøg."
 
-#~ msgid "§fClick here to remove this permission."
-#~ msgstr "§fKlik her for at fjerne tilladelsen."
-
 #~ msgid "§fThis player §ccannot§f toggle the"
 #~ msgstr "§fDenne spiller kan §cikke§f skifte"
-
-#~ msgid "§fClick here to add this permission"
-#~ msgstr "§fKlik her for at tillade."
 
 #~ msgid "§fThis player §acan§f set the"
 #~ msgstr "§fDenne spiller §akan§f sætte"

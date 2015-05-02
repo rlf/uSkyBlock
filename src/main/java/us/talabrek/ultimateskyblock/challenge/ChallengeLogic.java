@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.talabrek.ultimateskyblock.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -28,6 +29,7 @@ public class ChallengeLogic {
     public static final int MS_MIN = 60*1000;
     public static final int MS_HOUR = 60*MS_MIN;
     public static final long MS_DAY = 24*MS_HOUR;
+    public static final int ROWS_OF_RANKS = 6;
 
     private final FileConfiguration config;
     private final uSkyBlock skyBlock;
@@ -422,7 +424,7 @@ public class ChallengeLogic {
         List<Rank> ranksOnPage = new ArrayList<>(ranks.values());
         // page 1 = 0-4, 2 = 5-8, ...
         if (page > 0) {
-            ranksOnPage = ranksOnPage.subList(((page-1)*4), Math.min(page*4, ranksOnPage.size()));
+            ranksOnPage = ranksOnPage.subList(((page-1)* ROWS_OF_RANKS), Math.min(page*ROWS_OF_RANKS, ranksOnPage.size()));
         }
         int location = 0;
         for (Rank rank : ranksOnPage) {
@@ -438,6 +440,11 @@ public class ChallengeLogic {
         meta4.setDisplayName("\u00a7e\u00a7lRank: " + rank.getName());
         lores.add(tr("\u00a7fComplete most challenges in"));
         lores.add(tr("\u00a7fthis rank to unlock the next rank."));
+        if (location < SkyBlockMenu.CHALLENGE_PAGESIZE/2) {
+            lores.add(tr("\u00a7eClick here to show previous page"));
+        } else {
+            lores.add(tr("\u00a7eClick here to show next page"));
+        }
         meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
         menu.setItem(location, currentChallengeItem);
