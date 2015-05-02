@@ -33,7 +33,7 @@ public class Reward {
         List<ItemStack> copy = new ArrayList<>();
         for (Map.Entry<ItemStack,Double> e : itemReward.entrySet()) {
             if (RND.nextDouble() < e.getValue()) {
-                copy.add(e.getKey());
+                copy.add(e.getKey().clone());
             }
         }
         return copy;
