@@ -35,8 +35,17 @@ public enum FileUtil {;
     private static final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
     private static File dataFolder;
 
-    public static void readConfig(FileConfiguration config, File configFile) {
-        if (configFile == null || !configFile.exists()) {
+    public static void readConfig(FileConfiguration config, File file) {
+        if (file == null) {
+            log.log(Level.INFO, "No "  + file + " found, it will be created");
+            return;
+        }
+        File configFile = file;
+        File localeFile = new File(configFile.getParentFile(), getLocaleName(file.getName()));
+        if (localeFile.exists() && localeFile.canRead()) {
+            configFile = localeFile;
+        }
+        if (!configFile.exists()) {
             log.log(Level.INFO, "No "  + configFile + " found, it will be created");
             return;
         }
@@ -86,6 +95,10 @@ public enum FileUtil {;
                         && !"0,0.yml".equalsIgnoreCase(name);
             }
         };
+    }
+
+    public static String getBasename(File file) {
+        return getBasename(file.getName());
     }
 
     public static String getBasename(String file) {
@@ -141,8 +154,7 @@ public enum FileUtil {;
     }
 
     private static InputStream getResource(String configName) {
-        String baseName = getBasename(configName);
-        String resourceName = baseName + "_" + Locale.getDefault().getLanguage() + configName.substring(baseName.length());
+        String resourceName = getLocaleName(configName);
         ClassLoader loader = FileUtil.class.getClassLoader();
         InputStream resourceAsStream = loader.getResourceAsStream(resourceName);
         if (resourceAsStream != null) {
@@ -151,9 +163,13 @@ public enum FileUtil {;
         return loader.getResourceAsStream(configName);
     }
 
+    private static String getLocaleName(String fileName) {
+        String baseName = getBasename(fileName);
+        return baseName + "_" + I18nUtil.getLocale() + fileName.substring(baseName.length());
+    }
+
     private static File getConfigFile(String configName) {
-        String baseName = getBasename(configName);
-        File file = new File(getDataFolder(), baseName + "_" + Locale.getDefault().getLanguage() + configName.substring(baseName.length()));
+        File file = new File(getDataFolder(), getLocaleName(configName));
         if (file.exists()) {
             return file;
         }

@@ -23,7 +23,7 @@ public enum I18nUtil {;
         return I18nFactory.getI18n(I18nUtil.class, getLocale());
     }
 
-    private static Locale getLocale() {
+    public static Locale getLocale() {
         return Settings.locale;
     }
 }

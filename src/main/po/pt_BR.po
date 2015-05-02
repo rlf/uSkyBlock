@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 12:46+0200\n"
+"POT-Creation-Date: 2015-05-03 00:40+0200\n"
 "PO-Revision-Date: 2015-04-22 14:22-0300\n"
 "Last-Translator: Snesz <rodriigosantos11@gmail.com>\n"
 "Language-Team: Snesz <rodriigosantos11@gmail.com>\n"
@@ -1251,7 +1251,7 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4Você não tem permissão para teleportar até outras ilhas."
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:47
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:784
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:773
 msgid "§4That player does not exist!"
 msgstr "§4Esse jogador não existe!"
 
@@ -2513,50 +2513,50 @@ msgstr "Menu de desafios"
 msgid "§9SB Island Group Members"
 msgstr "§9SB Membros do grupo"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:170
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:169
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Algo ocorreu mal ao salvar a ilha e informações do grupo!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:638
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:627
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Jogador já faz parte dessa ilha!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:749
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:738
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr "§4Você não faz parte dessa ilha. Retornando você para o spawn!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:754
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:743
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportando você para sua ilha."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:769
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:808
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:758
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:797
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§aVocê vai ser teleportado em {0} segundos."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:789
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:778
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Impossível de teleportar você para ilha do jogador!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:793
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:782
 msgid "§aTeleporting you to "
 msgstr "§aTeleportando você para"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:825
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:835
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:814
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:824
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Você deve estar mais perto da sua ilha para definir a home!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:832
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:821
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§aSua home foi definida na sua localização atual."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1105
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1090
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Não foi possível criar sua ilha. Por favor contate a um moderador."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1118
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1103
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Jogador não tem uma ilha ou já está protegida!"
 

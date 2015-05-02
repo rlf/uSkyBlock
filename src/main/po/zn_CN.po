@@ -1,12 +1,12 @@
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 12:46+0200\n"
+"POT-Creation-Date: 2015-05-03 00:40+0200\n"
 "PO-Revision-Date: 2015-04-27 13:13+0100\n"
 "Last-Translator: Miku_Snow <admin@915mc.com>\n"
 "Language-Team: 915mc <admin@915mc.com>\n"
@@ -1231,7 +1231,7 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4你没有权限传送到其他玩家的岛屿上"
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:47
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:784
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:773
 msgid "§4That player does not exist!"
 msgstr "§4玩家不存在!"
 
@@ -2449,50 +2449,50 @@ msgstr "调整菜单"
 msgid "§9SB Island Group Members"
 msgstr "§9岛屿团队成员"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:170
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:169
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:638
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:627
 msgid "§4Player is already assigned to this island!"
 msgstr "§4玩家早就已经分配给这个岛屿了!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:749
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:738
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr "§4你不是岛屿的一员.将你传送回出生点!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:754
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:743
 msgid "§aTeleporting you to your island."
 msgstr "§a将你传送回自己的岛屿."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:769
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:808
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:758
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:797
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§a将在 {0} 秒后进行传送."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:789
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:778
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4无法传送至玩家的岛屿!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:793
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:782
 msgid "§aTeleporting you to "
 msgstr "§a将你传送到"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:825
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:835
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:814
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:824
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4你必须在岛屿上才能设置你的家!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:832
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:821
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§a你岛屿家的位置已经设置在你当前位置."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1105
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1090
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "无法为你创建岛屿.请联系管理员."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1118
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1103
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "玩家未拥有岛屿,或者已经被保护了!"
 
