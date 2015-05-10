@@ -33,9 +33,8 @@ public class PlayerNameChangeListener implements Listener {
         final Player player = e.getPlayer();
         final long t1 = System.currentTimeMillis();
         // TODO: 19/01/2015 - R4zorax: Block for interactions while converting?
-        PlayerInfo playerInfo = plugin.getPlayerInfo(oldName).renameTo(player.getName());
-        plugin.removeActivePlayer(oldName); // Force a reload
-        plugin.addActivePlayer(player.getName(), playerInfo);
+
+        PlayerInfo playerInfo = plugin.getPlayerLogic().renameTo(oldName, player.getName());
         Runnable completion = new Runnable() {
             @Override
             public void run() {

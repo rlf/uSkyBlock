@@ -245,6 +245,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public void save() {
+        log.entering(CN, "save", playerName);
         if (playerData == null) {
             uSkyBlock.log(Level.INFO, "Can't save player data!");
             return;
@@ -292,6 +293,7 @@ public class PlayerInfo implements Serializable {
         } catch (IOException ex) {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + playerConfigFile, ex);
         }
+        log.exiting(CN, "save");
     }
 
     public Collection<ChallengeCompletion> getChallenges() {

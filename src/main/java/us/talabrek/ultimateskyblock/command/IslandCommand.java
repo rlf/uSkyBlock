@@ -19,10 +19,12 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  * The main /island command
  */
 public class IslandCommand extends AbstractCommandExecutor {
+    private final uSkyBlock plugin;
     private final SkyBlockMenu menu;
 
     public IslandCommand(uSkyBlock plugin, SkyBlockMenu menu) {
         super("island|is", "usb.island.create", tr("general island command"));
+        this.plugin = plugin;
         this.menu = menu;
         InviteHandler inviteHandler = new InviteHandler(plugin);
         AllPlayerTabCompleter playerTabCompleter = new AllPlayerTabCompleter();
@@ -58,6 +60,10 @@ public class IslandCommand extends AbstractCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+        if (sender instanceof Player && plugin.getPlayerLogic().isLocked((Player) sender)) {
+            sender.sendMessage(tr("\u00a74Your island data is being loaded - try again later"));
+            return true;
+        }
         if (args.length == 0 && sender instanceof Player) {
             Player player = (Player) sender;
             player.openInventory(menu.displayIslandGUI(player));

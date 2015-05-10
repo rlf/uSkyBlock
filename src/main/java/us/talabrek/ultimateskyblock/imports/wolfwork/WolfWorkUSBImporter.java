@@ -30,7 +30,7 @@ public class WolfWorkUSBImporter implements USBImporter {
             }
             us.talabrek.ultimateskyblock.player.PlayerInfo pi = importPlayerInfo(plugin, playerInfo);
             importIsland(plugin, playerInfo, pi);
-            plugin.removeActivePlayer(pi.getPlayerName());
+            plugin.getPlayerLogic().removeActivePlayer(pi);
             if (!file.delete()) {
                 file.deleteOnExit();
             }

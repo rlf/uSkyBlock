@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.island;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -45,6 +46,7 @@ public class IslandLogic {
 
     private final Map<String, IslandInfo> islands = new ConcurrentHashMap<>();
     private final boolean showMembers;
+    private final boolean flatlandFix;
 
     private volatile long lastGenerate = 0;
     private final List<IslandLevel> ranks = new ArrayList<>();
@@ -53,6 +55,7 @@ public class IslandLogic {
         this.plugin = plugin;
         this.directoryIslands = directoryIslands;
         showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
+        flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
@@ -101,28 +104,40 @@ public class IslandLogic {
         }
     }
 
-    public boolean clearFlatland(final CommandSender sender, final Location loc, int delay) {
+    public boolean clearFlatland(final CommandSender sender, final Location loc, final int delay) {
         if (loc == null) {
             return false;
         }
-        final World w = loc.getWorld();
-        final int px = loc.getBlockX();
-        final int pz = loc.getBlockZ();
-        final int py = 0;
-        final int range = Math.max(Settings.island_protectionRange, Settings.island_distance) + 1;
-        final int radius = range/2;
-        // 5 sampling points...
-        if (w.getBlockAt(px, py, pz).getType() == BEDROCK
-                || w.getBlockAt(px+radius, py, pz+radius).getType() == BEDROCK
-                || w.getBlockAt(px+radius, py, pz-radius).getType() == BEDROCK
-                || w.getBlockAt(px-radius, py, pz+radius).getType() == BEDROCK
-                || w.getBlockAt(px-radius, py, pz-radius).getType() == BEDROCK)
-        {
-            sender.sendMessage(String.format("\u00a7c-----------------------------------\n\u00a7cFlatland detected under your island!\n\u00a7e Clearing it in %s, stay clear.\n\u00a7c-----------------------------------\n", TimeUtil.ticksAsString(delay)));
-            new WorldEditClearTask(plugin, sender, new CuboidRegion(new Vector(px-radius, 0, pz-radius),
-                    new Vector(px+radius, 4, pz+radius)),
-                    "\u00a7eFlatland was cleared under your island (%s). Take care.").runTaskLater(plugin, delay);
-            return true;
+        if (delay > 0 && !flatlandFix) {
+            return false; // Skip
+        }
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                final World w = loc.getWorld();
+                final int px = loc.getBlockX();
+                final int pz = loc.getBlockZ();
+                final int py = 0;
+                final int range = Math.max(Settings.island_protectionRange, Settings.island_distance) + 1;
+                final int radius = range/2;
+                // 5 sampling points...
+                if (w.getBlockAt(px, py, pz).getType() == BEDROCK
+                        || w.getBlockAt(px+radius, py, pz+radius).getType() == BEDROCK
+                        || w.getBlockAt(px+radius, py, pz-radius).getType() == BEDROCK
+                        || w.getBlockAt(px-radius, py, pz+radius).getType() == BEDROCK
+                        || w.getBlockAt(px-radius, py, pz-radius).getType() == BEDROCK)
+                {
+                    sender.sendMessage(String.format("\u00a7c-----------------------------------\n\u00a7cFlatland detected under your island!\n\u00a7e Clearing it in %s, stay clear.\n\u00a7c-----------------------------------\n", TimeUtil.ticksAsString(delay)));
+                    new WorldEditClearTask(plugin, sender, new CuboidRegion(new Vector(px-radius, 0, pz-radius),
+                            new Vector(px+radius, 4, pz+radius)),
+                            "\u00a7eFlatland was cleared under your island (%s). Take care.").runTaskLater(plugin, delay);
+                }
+            }
+        };
+        if (Bukkit.isPrimaryThread()) {
+            runnable.run();
+        } else {
+            Bukkit.getScheduler().runTask(plugin, runnable);
         }
         return false;
     }

@@ -62,9 +62,9 @@ import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.PlayerLogic;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.util.FileUtil;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -78,14 +78,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,7 +124,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private Stack<Location> reverseOrphaned;
     public File directoryPlayers;
     public File directoryIslands;
-    private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
 
     private volatile boolean purgeActive;
     private volatile boolean protectAllActive;
@@ -144,6 +138,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private ConfirmHandler confirmHandler;
 
     private CooldownHandler cooldownHandler;
+    private PlayerLogic playerLogic;
 
     public uSkyBlock() {
         this.lastIslandConfig = null;
@@ -183,7 +178,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         FileUtil.init(getDataFolder());
         executor = new SyncBalancedExecutor(Bukkit.getScheduler());
         asyncExecutor = new AsyncBalancedExecutor(Bukkit.getScheduler());
-        activePlayers.clear();
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         reloadConfigs();
 
@@ -217,7 +211,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     public void run() {
                         for (Player player : getServer().getOnlinePlayers()) {
                             if (isSkyWorld(player.getWorld())) {
-                                loadPlayerData(player);
+                                playerLogic.loadPlayerData(player);
                             }
                         }
                     }
@@ -276,8 +270,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public void unloadPlayerFiles() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if (this.getActivePlayers().containsKey(player.getName())) {
-                this.removeActivePlayer(player.getName());
+            if (playerLogic.isActive(player)) {
+                playerLogic.removeActivePlayer(player);
                 notifier.unloadPlayer(player);
             }
         }
@@ -465,7 +459,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         pi.removeFromIsland();
         pi.save();
-        removeActivePlayer(pi.getPlayerName());
+        playerLogic.removeActivePlayer(pi);
     }
 
     private void postDelete(final IslandInfo islandInfo) {
@@ -480,7 +474,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (islandInfo != null) {
             for (String member : new ArrayList<>(islandInfo.getMembers())) {
                 islandInfo.removeMember(member);
-                getPlayerInfo(member).removeFromIsland();
+                playerLogic.getPlayerInfo(member).removeFromIsland();
             }
             islandLogic.clearIsland(islandInfo.getIslandLocation(), new Runnable() {
                 @Override
@@ -516,7 +510,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void deletePlayerIsland(final String player, final Runnable runner) {
-        final PlayerInfo pi = activePlayers.containsKey(player) ? activePlayers.get(player) : new PlayerInfo(player);
+        final PlayerInfo pi = playerLogic.getPlayerInfo(player);
         islandLogic.clearIsland(pi.getIslandLocation(), new Runnable() {
             @Override
             public void run() {
@@ -612,7 +606,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
-        final PlayerInfo pi = getPlayerInfo(player);
+        final PlayerInfo pi = playerLogic.getPlayerInfo(player);
         final Location newLoc = findBedrockLocation(l);
         boolean deleteOldIsland = false;
         if (pi.getHasIsland()) {
@@ -731,8 +725,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getLogger().entering(CN, "homeTeleport", player);
         try {
             Location homeSweetHome = null;
-            if (this.getActivePlayers().containsKey(player.getName())) {
-                homeSweetHome = getSafeHomeLocation(this.getActivePlayers().get(player.getName()));
+            PlayerInfo playerInfo = playerLogic.getPlayerInfo(player.getName());
+            if (playerInfo != null) {
+                homeSweetHome = getSafeHomeLocation(playerInfo);
             }
             if (homeSweetHome == null) {
                 player.sendMessage(tr("\u00a74You are not part of an island. Returning you the spawn area!"));
@@ -815,8 +810,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             return true;
         }
         if (this.playerIsOnIsland(player)) {
-            if (this.getActivePlayers().containsKey(player.getName())) {
-                this.getActivePlayers().get(player.getName()).setHomeLocation(player.getLocation());
+            PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
+            if (playerInfo != null) {
+                playerInfo.setHomeLocation(player.getLocation());
             }
             player.sendMessage(tr("\u00a7aYour skyblock home has been set to your current location."));
             return true;
@@ -833,8 +829,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (!isSkyWorld(player.getWorld())) {
             return false;
         }
-        if (this.getActivePlayers().containsKey(player.getName())) {
-            Location p = getPlayerInfo(player).getIslandLocation();
+        PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
+        if (playerInfo != null) {
+            Location p = playerInfo.getIslandLocation();
             if (p == null) {
                 return false;
             }
@@ -849,7 +846,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean hasIsland(final String playername) {
-        return getPlayerInfo(playername).getHasIsland();
+        return playerLogic.getPlayerInfo(playername).getHasIsland();
     }
 
     public boolean islandAtLocation(final Location loc) {
@@ -883,62 +880,19 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.purgeActive = false;
     }
 
-    private Map<String, PlayerInfo> getActivePlayers() {
-        return activePlayers;
-    }
-
     public PlayerInfo getPlayerInfo(Player player) {
-        // TODO: UUID aware
-        String playerName = player.getName();
-        PlayerInfo playerInfo = getPlayerInfo(playerName);
-        if (player != null && player.isOnline()) {
-            playerInfo.updatePlayerInfo(player);
-        }
-        return playerInfo;
+        return playerLogic.getPlayerInfo(player);
     }
 
     public PlayerInfo getPlayerInfo(String playerName) {
-        PlayerInfo playerInfo = activePlayers.get(playerName);
-        if (playerInfo == null) {
-            playerInfo = loadPlayerInfo(playerName);
-        }
-        return playerInfo;
-    }
-
-    public void addActivePlayer(final String player, final PlayerInfo pi) {
-        activePlayers.put(player, pi);
-    }
-
-    public void removeActivePlayer(final String player) {
-        if (activePlayers.containsKey(player)) {
-            activePlayers.get(player).save();
-            activePlayers.remove(player);
-            log(Level.FINE, "Removing player from memory: " + player);
-        }
-    }
-
-    public PlayerInfo loadPlayerData(Player player) {
-        uSkyBlock.log(Level.INFO, "Loading player data for " + player.getName());
-        final PlayerInfo pi = loadPlayerInfo(player.getName());
-        if (pi.getHasIsland()) {
-            WorldGuardHandler.protectIsland(player, pi);
-            islandLogic.clearFlatland(player, pi.getIslandLocation(), 400);
-        }
-        addActivePlayer(player.getName(), pi);
-        return pi;
-    }
-
-    private PlayerInfo loadPlayerInfo(String playerName) {
-        final PlayerInfo playerInfo = new PlayerInfo(playerName);
-        activePlayers.put(playerName, playerInfo);
-        return playerInfo;
+        return playerLogic.getPlayerInfo(playerName);
     }
 
     public void unloadPlayerData(Player player) {
         if (hasIsland(player.getName()) && !hasIslandMembersOnline(player)) {
             islandLogic.removeIslandFromMemory(getPlayerInfo(player).locationForParty());
         }
-        removeActivePlayer(player.getName());
+        playerLogic.removeActivePlayer(player);
         notifier.unloadPlayer(player);
     }
 
@@ -1320,13 +1274,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
         playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
         PlayerUtil.loadConfig(playerDB, getConfig());
-        activePlayers.clear();
         islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         this.menu = new SkyBlockMenu(this, challengeLogic);
         this.levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
         this.islandLogic = new IslandLogic(this, directoryIslands);
         this.notifier = new PlayerNotifier(getConfig());
+        this.playerLogic = new PlayerLogic(this);
         registerEvents(playerDB);
         if (autoRecalculateTask != null) {
             autoRecalculateTask.cancel();
@@ -1552,5 +1506,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public CooldownHandler getCooldownHandler() {
         return cooldownHandler;
+    }
+
+    public PlayerLogic getPlayerLogic() {
+        return playerLogic;
     }
 }

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-03 00:40+0200\n"
+"POT-Creation-Date: 2015-05-10 20:38+0200\n"
 "PO-Revision-Date: 2015-04-27 13:13+0100\n"
 "Last-Translator: Miku_Snow <admin@915mc.com>\n"
 "Language-Team: 915mc <admin@915mc.com>\n"
@@ -167,48 +167,53 @@ msgid "§4§lLocked Challenge"
 msgstr "§4§l挑战锁定"
 
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:34
+#: us/talabrek/ultimateskyblock/command/IslandCommand.java:64
+msgid "§4Your island data is being loaded - try again later"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:38
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§e挑战不可用,请联系服务器管理员."
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:39
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:43
 #: us/talabrek/ultimateskyblock/command/island/LockUnlockCommand.java:29
 #: us/talabrek/ultimateskyblock/command/island/LockUnlockCommand.java:41
 msgid "§4You don't have access to this command!"
 msgstr "§4你无法使用当前指令。"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:43
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:47
 msgid "§4You can only submit challenges in the skyblock world!"
 msgstr "§4你只能在空岛世界提交挑战。"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:48
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:52
 msgid "§4You can only submit challenges when you have an island!"
 msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:58
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:62
 msgid "§eUse /c <name> to view information about a challenge."
 msgstr "§e输入/c <name> 查询一个挑战的详情信息。"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:59
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:63
 msgid "§eUse /c complete <name> to attempt to complete that challenge."
 msgstr "§e输入/c complete <name> 来完成一个挑战。"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:60
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:64
 msgid "§eChallenges will have different colors depending on if they are:"
 msgstr "§e挑战将会根据不同难度显示不同颜色:"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:67
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:71
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr "§4挑战所需物品将会从你背包内移除。"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:70
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:74
 msgid "§4All required items must be placed on your island, within "
 msgstr "§4所有挑战所需物品必须放在你岛屿上,并且在一定范围内:"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:77
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:81
 msgid "§4This Challenge is not repeatable!"
 msgstr "§4当前任务不可重复。"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:88
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:92
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4错误的挑战名!输入/c help 获取更多信息"
 
@@ -1231,7 +1236,7 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4你没有权限传送到其他玩家的岛屿上"
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:47
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:773
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:768
 msgid "§4That player does not exist!"
 msgstr "§4玩家不存在!"
 
@@ -1243,7 +1248,7 @@ msgstr "§4玩家未拥有激活的传送点."
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
 
-#: us/talabrek/ultimateskyblock/command/IslandCommand.java:25
+#: us/talabrek/ultimateskyblock/command/IslandCommand.java:26
 msgid "general island command"
 msgstr ""
 
@@ -1255,15 +1260,15 @@ msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§e交易无法在别的岛屿上进行.滚回家 - 骗子!"
 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:120
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:131
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§e已经将你的黑曜石变为岩浆.请务必当心!"
 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:151
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:162
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4替换岩浆真是一个§f'不错'§4的注意呢~"
 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:241
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:252
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
 
@@ -1317,29 +1322,29 @@ msgstr "§4因为你的岛屿处于锁定状态,岛屿传送点也将禁用."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d禁止了岛屿传送点."
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:93
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:96
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:139
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:154
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§e荣誉墙 (页数 {0} - {1}):"
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:141
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:156
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr "§4前十名单是控的!(可能统计出错?)"
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:157
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:172
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:162
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:177
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§e你的排名是: §f{0}"
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:214
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:217
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr "§c因为你太久未登陆,所以你被从岛屿上移除了"
 
@@ -1574,6 +1579,11 @@ msgstr ""
 "§f点击图标即可§a增加\n"
 "§f玩家的这项权限."
 
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:163
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:751
+msgid "§9Island Group Members"
+msgstr "§9岛屿团队成员"
+
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:168
 msgid "§aGroup Info"
 msgstr "§a团队信息"
@@ -1693,6 +1703,11 @@ msgstr ""
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:244
 msgid "§e§lIsland Log"
 msgstr "§e§l岛屿日志"
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:257
+#, fuzzy
+msgid "§9Island Biome"
+msgstr "§a岛屿生物群系"
 
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:259
 msgid "§hIsland Biome"
@@ -2424,10 +2439,6 @@ msgstr ""
 "§f其他玩家可以任意传送到你岛屿设置的传送点.\n"
 "§e§l点击更改岛屿的传送点."
 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:751
-msgid "§9Island Group Members"
-msgstr "§9岛屿团队成员"
-
 #: us/talabrek/ultimateskyblock/SkyBlockMenu.java:759
 msgid "§a§lLeader"
 msgstr "§a§l岛主"
@@ -2449,50 +2460,50 @@ msgstr "调整菜单"
 msgid "§9SB Island Group Members"
 msgstr "§9岛屿团队成员"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:169
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:164
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:627
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:621
 msgid "§4Player is already assigned to this island!"
 msgstr "§4玩家早就已经分配给这个岛屿了!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:738
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:733
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr "§4你不是岛屿的一员.将你传送回出生点!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:743
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:738
 msgid "§aTeleporting you to your island."
 msgstr "§a将你传送回自己的岛屿."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:758
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:797
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:753
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:792
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§a将在 {0} 秒后进行传送."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:778
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:773
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4无法传送至玩家的岛屿!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:782
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:777
 msgid "§aTeleporting you to "
 msgstr "§a将你传送到"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:814
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:824
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:809
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:820
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4你必须在岛屿上才能设置你的家!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:821
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:817
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§a你岛屿家的位置已经设置在你当前位置."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1090
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1044
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "无法为你创建岛屿.请联系管理员."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1103
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1057
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "玩家未拥有岛屿,或者已经被保护了!"
 

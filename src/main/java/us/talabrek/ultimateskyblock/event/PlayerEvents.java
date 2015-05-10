@@ -65,10 +65,7 @@ public class PlayerEvents implements Listener {
         log.entering(CN, "onPlayerJoin", event);
         Player player = event.getPlayer();
         if (plugin.isSkyWorld(player.getWorld())) {
-            PlayerInfo playerInfo = plugin.loadPlayerData(player);
-            if (playerInfo != null && !playerInfo.getHasIsland() && player.isFlying()) {
-                uSkyBlock.getInstance().spawnTeleport(player);
-            }
+            plugin.getPlayerLogic().loadPlayerDataAsync(player);
         }
         log.exiting(CN, "onPlayerJoin");
     }

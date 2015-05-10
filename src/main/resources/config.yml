@@ -90,6 +90,10 @@ options:
     # [true/false] Whether or not to include island-members on the top-ten scoreboard
     topTenShowMembers: true
 
+    # [true/false] Whether or not to try and fix flat-land issues when players join the server
+    # Note: will make the PlayerJoin event take longer.
+    fixFlatland: false
+
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.
   extra-menus:
@@ -184,6 +188,6 @@ options:
     teleportDelay: 20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 15
+version: 16
 force-replace:
   options.party.invite-timeout: 100
