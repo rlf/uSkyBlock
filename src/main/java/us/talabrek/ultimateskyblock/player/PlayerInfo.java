@@ -19,6 +19,8 @@ import java.io.*;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class PlayerInfo implements Serializable {
+    private static final String CN = PlayerInfo.class.getName();
+    private static final Logger log = Logger.getLogger(CN);
     private static final long serialVersionUID = 1L;
     private static final int YML_VERSION = 1;
     private String playerName;
@@ -187,6 +189,7 @@ public class PlayerInfo implements Serializable {
     }
 
     private PlayerInfo loadPlayer() {
+        log.entering(CN, "loadPlayer:" + this.playerName);
         FileConfiguration playerConfig = getPlayerConfig();
         if (!playerConfig.contains("player.hasIsland")) {
             this.hasIsland = false;
@@ -214,6 +217,7 @@ public class PlayerInfo implements Serializable {
                 Bukkit.getPlayer(playerName).sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
                 playerConfig.set("player.kickWarning", false);
             }
+            log.exiting(CN, "loadPlayer");
             return this;
         } catch (Exception e) {
             e.printStackTrace();

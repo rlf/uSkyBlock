@@ -160,7 +160,7 @@ public class SkyBlockMenu {
 
     public Inventory displayPartyGUI(final Player player) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Group Members");
+        Inventory menu = Bukkit.createInventory(null, 18, tr("\u00a79Island Group Members"));
         IslandInfo islandInfo = skyBlock.getIslandInfo(player);
         final Set<String> memberList = islandInfo.getMembers();
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
@@ -254,7 +254,7 @@ public class SkyBlockMenu {
 
     public Inventory displayBiomeGUI(final Player player) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79Island Biome");
+        Inventory menu = Bukkit.createInventory(null, 18, tr("\u00a79Island Biome"));
         ItemMeta meta4 = sign.getItemMeta();
         meta4.setDisplayName(tr("\u00a7hIsland Biome"));
         addLore(lores, tr("\u00a7eClick here to return to\n\u00a7ethe main island screen."));
