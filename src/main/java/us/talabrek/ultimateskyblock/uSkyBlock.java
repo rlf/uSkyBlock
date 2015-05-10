@@ -1446,13 +1446,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         );
     }
 
-    public IslandScore recalculateScore(Player player, String islandName) {
-        IslandInfo islandInfo = getIslandInfo(islandName);
-        IslandScore score = getLevelLogic().calculateScore(islandInfo.getIslandLocation());
-        updateScore(player, islandInfo, score);
-        return score;
-    }
-
     public void updateScore(Player player, IslandInfo islandInfo, IslandScore score) {
         islandInfo.setLevel(score.getScore());
         getIslandLogic().updateRank(islandInfo, score);
@@ -1489,13 +1482,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void calculateScoreAsync(final Player player, String islandName, final Callback<IslandScore> callback) {
-        IslandInfo islandInfo = getIslandInfo(islandName);
+        final IslandInfo islandInfo = getIslandInfo(islandName);
         getLevelLogic().calculateScoreAsync(islandInfo.getIslandLocation(), new Callback<IslandScore>() {
             @Override
             public void run() {
-                callback.setState(getState());
+                IslandScore score = getState();
+                callback.setState(score);
                 callback.run();
-                fireChangeEvent(new uSkyBlockEvent(player, getInstance(), uSkyBlockEvent.Cause.RANK_UPDATED));
+                islandInfo.setLevel(score.getScore());
+                getIslandLogic().updateRank(islandInfo, score);
+                fireChangeEvent(new uSkyBlockEvent(player, getInstance(), uSkyBlockEvent.Cause.SCORE_CHANGED));
             }
         });
     }

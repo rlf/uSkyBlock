@@ -139,6 +139,7 @@ public class LevelLogic {
     }
 
     public void calculateScoreAsync(final Location l, final Callback<IslandScore> callback) {
+        // TODO: 10/05/2015 - R4zorax: Ensure no overlapping calls to this one happen...
         log.entering(CN, "calculateScoreAsync");
         // is further threading needed here?
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
@@ -188,20 +189,6 @@ public class LevelLogic {
             }
         }
         return null;
-    }
-
-    public IslandScore calculateScore(Location l) {
-        final int radius = Settings.island_protectionRange / 2;
-        final int px = l.getBlockX();
-        final int pz = l.getBlockZ();
-        final World w = l.getWorld();
-        final int[] counts = createBlockCountArray();
-        for (int x = -radius; x <= radius; ++x) {
-            for (int z = -radius; z <= radius; ++z) {
-                addBlockCount(w, px + x, pz + z, counts);
-            }
-        }
-        return createIslandScore(counts);
     }
 
     public IslandScore createIslandScore(int[] counts) {

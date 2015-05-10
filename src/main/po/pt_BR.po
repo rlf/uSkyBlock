@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 20:38+0200\n"
+"POT-Creation-Date: 2015-05-10 22:36+0200\n"
 "PO-Revision-Date: 2015-04-22 14:22-0300\n"
 "Last-Translator: Snesz <rodriigosantos11@gmail.com>\n"
 "Language-Team: Snesz <rodriigosantos11@gmail.com>\n"
@@ -899,28 +899,28 @@ msgid "check your or anothers island info"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:26
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:25
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:26
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr ""
 "§4Nível de ilha está desativado, entre em contato com um administrador."
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:31
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:30
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:31
 msgid "§eYou must be on your island to use this command."
 msgstr "§eVocê precisa estar na sua ilha para usar esse comando."
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:35
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:34
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:35
 msgid "§4You do not have an island!"
 msgstr "§4Você não tem uma ilha!"
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:44
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:43
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:44
 msgid "§4You do not have access to that command!"
 msgstr "§4Você não tem acesso a esse comando!"
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:54
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:53
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:54
 msgid "§4That player is invalid or does not have an island!"
 msgstr "§4Esse jogador é inválido ou não tem uma ilha!"
 
@@ -1046,20 +1046,20 @@ msgstr "§4{0} saiu da ilha!"
 msgid "§4You must be in the skyblock world to leave your party!"
 msgstr "§4Você deve estar na sua ilha para sair do seu grupo!"
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:19
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:20
 msgid "check your or anothers island level"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:65
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:63
 msgid "§eInformation about "
 msgstr "§eInformação sobre"
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:69
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:67
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
 msgstr "§aNível da ilha é {0,number,###.##}"
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:70
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:68
 #, java-format
 msgid "§9Rank is {0}"
 msgstr "§9Categoria é {0}"

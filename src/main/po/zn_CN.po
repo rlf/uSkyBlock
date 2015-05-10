@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 20:38+0200\n"
+"POT-Creation-Date: 2015-05-10 22:36+0200\n"
 "PO-Revision-Date: 2015-04-27 13:13+0100\n"
 "Last-Translator: Miku_Snow <admin@915mc.com>\n"
 "Language-Team: 915mc <admin@915mc.com>\n"
@@ -889,27 +889,27 @@ msgid "check your or anothers island info"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:26
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:25
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:26
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4岛屿等级系统未启用,请联系管理员."
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:31
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:30
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:31
 msgid "§eYou must be on your island to use this command."
 msgstr "§e你必须在你的岛屿上来使用这个指令."
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:35
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:34
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:35
 msgid "§4You do not have an island!"
 msgstr "§4你还未拥有一个岛屿!"
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:44
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:43
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:44
 msgid "§4You do not have access to that command!"
 msgstr "§4你没有权限使用这个指令!"
 
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:54
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:53
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:54
 msgid "§4That player is invalid or does not have an island!"
 msgstr "§4玩家不存在或仍未拥有一个岛屿!"
 
@@ -1034,20 +1034,20 @@ msgstr "§4{0}离开了你的岛屿!"
 msgid "§4You must be in the skyblock world to leave your party!"
 msgstr "§4你必须在岛屿世界才能离开你的团队!"
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:19
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:20
 msgid "check your or anothers island level"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:65
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:63
 msgid "§eInformation about "
 msgstr "§e相关信息"
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:69
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:67
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
 msgstr "§a岛屿等级: {0,number,###.##}"
 
-#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:70
+#: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:68
 #, java-format
 msgid "§9Rank is {0}"
 msgstr "§9排名: {0}"
