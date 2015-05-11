@@ -27,8 +27,11 @@
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
         </repository>
-
         <repository>
             <id>vault-repo</id>
             <url>http://nexus.theyeticave.net/content/repositories/public/</url>
@@ -59,6 +62,7 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
+        <!--
         <repository>
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
@@ -69,6 +73,7 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
+        -->
         <repository>
             <id>Plugin Metrics</id>
             <url>http://repo.mcstats.org/content/repositories/public</url>
