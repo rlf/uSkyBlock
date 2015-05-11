@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 22:36+0200\n"
+"POT-Creation-Date: 2015-05-11 20:24+0200\n"
 "PO-Revision-Date: 2015-05-03 00:32+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
@@ -843,7 +843,8 @@ msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eDu kan ikke ændre biome de næste {0,number,#} minutter."
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:41
-msgid "§aYou have changed your island's biome to {0}"
+#, fuzzy, java-format
+msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§aDu har ændret din ø's biome til {0}"
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
@@ -1370,7 +1371,7 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin position er: §f{0}"
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:217
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:218
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr "§cDu er blevet udvist af din ø, siden du sidst spillede!"
 

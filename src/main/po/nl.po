@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # dutchy1001 <EMAIL@ADDRESS>, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 22:36+0200\n"
+"POT-Creation-Date: 2015-05-11 20:24+0200\n"
 "PO-Revision-Date: 2015-04-22 10:09-0000\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
@@ -831,7 +831,8 @@ msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:41
-msgid "§aYou have changed your island's biome to {0}"
+#, java-format
+msgid "§aYou have changed your island''s biome to {0}"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
@@ -1327,7 +1328,7 @@ msgstr ""
 msgid "§eYour rank is: §f{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:217
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:218
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr ""
 

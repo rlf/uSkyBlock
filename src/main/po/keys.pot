@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-11 09:12+0200\n"
+"POT-Creation-Date: 2015-05-11 20:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -813,7 +813,8 @@ msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:41
-msgid "§aYou have changed your island's biome to {0}"
+#, java-format
+msgid "§aYou have changed your island''s biome to {0}"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
@@ -1307,7 +1308,7 @@ msgstr ""
 msgid "§eYour rank is: §f{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:217
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:218
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr ""
 

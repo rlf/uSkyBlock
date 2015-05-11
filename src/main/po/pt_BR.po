@@ -2,12 +2,12 @@
 # Copyright (C) 2015 R4zorax and more
 # This file is distributed under the same license as the PACKAGE package.
 # R4zorax, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 22:36+0200\n"
+"POT-Creation-Date: 2015-05-11 20:24+0200\n"
 "PO-Revision-Date: 2015-04-22 14:22-0300\n"
 "Last-Translator: Snesz <rodriigosantos11@gmail.com>\n"
 "Language-Team: Snesz <rodriigosantos11@gmail.com>\n"
@@ -840,7 +840,8 @@ msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eVocê pode alterar o bioma novamente em {0,number,#} minutos."
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:41
-msgid "§aYou have changed your island's biome to {0}"
+#, fuzzy, java-format
+msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§aVocê alterou o bioma da ilha para {0}"
 
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
@@ -1367,7 +1368,7 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eSeu rank é: §f{0}"
 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:217
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:218
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr "§cVocê foi expulso da sua ilha desde a última vez que você entrou!"
 

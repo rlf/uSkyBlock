@@ -38,7 +38,7 @@ public class BiomeCommand extends RequireIslandCommand {
                 }
                 if (plugin.playerIsOnIsland(player)) {
                     if (plugin.changePlayerBiome(player, biome)) {
-                        player.sendMessage(tr("\u00a7aYou have changed your island's biome to {0}", biome.toUpperCase()));
+                        player.sendMessage(tr("\u00a7aYou have changed your island''s biome to {0}", biome.toUpperCase()));
                         player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
                         island.sendMessageToIslandGroup(tr("{0} changed the island biome to {1}", player.getName(), biome.toUpperCase()));
                         plugin.getCooldownHandler().resetCooldown(player, "biome", Settings.general_biomeChange);

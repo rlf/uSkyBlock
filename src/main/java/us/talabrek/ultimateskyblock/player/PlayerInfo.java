@@ -123,6 +123,7 @@ public class PlayerInfo implements Serializable {
 
             }
             challenges.get(challenge).addTimesCompleted();
+            save();
         }
     }
 
@@ -245,6 +246,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public void save() {
+        // TODO: 11/05/2015 - R4zorax: Instead of saving directly, schedule it for later...
         log.entering(CN, "save", playerName);
         if (playerData == null) {
             uSkyBlock.log(Level.INFO, "Can't save player data!");

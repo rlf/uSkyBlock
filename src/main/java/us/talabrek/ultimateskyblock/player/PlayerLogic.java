@@ -7,10 +7,13 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +23,7 @@ import java.util.logging.Logger;
 public class PlayerLogic {
     private static final Logger log = Logger.getLogger(PlayerLogic.class.getName());
     private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
-    private final Set<UUID> locked = Collections.synchronizedSet(new HashSet<UUID>());
+    private final Queue<String> locked = new ConcurrentLinkedQueue<String>();
     private final uSkyBlock plugin;
 
     public PlayerLogic(uSkyBlock plugin) {
@@ -35,20 +38,20 @@ public class PlayerLogic {
 
     public PlayerInfo getPlayerInfo(final Player player) {
         try {
-            locked.add(player.getUniqueId());
+            locked.add(player.getName());
             PlayerInfo playerInfo = getPlayerInfo(player.getName());
             if (player.isOnline()) {
                 playerInfo.updatePlayerInfo(player);
             }
             return playerInfo;
         } finally {
-            locked.remove(player.getUniqueId());
+            locked.remove(player.getName());
         }
     }
 
     public PlayerInfo getPlayerInfo(String player) {
         PlayerInfo playerInfo = activePlayers.get(player);
-        if (playerInfo == null) {
+        if (playerInfo == null && !locked.contains(player)) {
             playerInfo = loadPlayerInfo(player);
         }
         return playerInfo;
@@ -56,7 +59,7 @@ public class PlayerLogic {
 
     public boolean isLocked(Player player) {
         synchronized (locked) {
-            return locked.contains(player.getUniqueId());
+            return locked.contains(player.getName());
         }
     }
 
@@ -88,15 +91,22 @@ public class PlayerLogic {
     }
 
     public synchronized PlayerInfo renameTo(String oldName, String name) {
-        PlayerInfo playerInfo = getPlayerInfo(oldName);
-        playerInfo = playerInfo.renameTo(name);
-        activePlayers.remove(oldName);
-        activePlayers.put(name, playerInfo);
-        return playerInfo;
+        try {
+            locked.add(oldName);
+            locked.add(name);
+            PlayerInfo playerInfo = getPlayerInfo(oldName);
+            playerInfo = playerInfo.renameTo(name);
+            activePlayers.remove(oldName);
+            activePlayers.put(name, playerInfo);
+            return playerInfo;
+        } finally {
+            locked.remove(name);
+            locked.remove(oldName);
+        }
     }
 
     public void loadPlayerDataAsync(final Player player) {
-        locked.add(player.getUniqueId());
+        locked.add(player.getName());
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
@@ -110,12 +120,12 @@ public class PlayerLogic {
                                     uSkyBlock.getInstance().spawnTeleport(player);
                                 }
                             } finally {
-                                locked.remove(player.getUniqueId());
+                                locked.remove(player.getName());
                             }
                         }
                     });
                 } catch (Exception e) {
-                    locked.remove(player.getUniqueId());
+                    locked.remove(player.getName());
                     throw e;
                 }
             }
