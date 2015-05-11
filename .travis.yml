@@ -11,7 +11,7 @@ notifications:
 before_install:
   # Change the maven-version to be the tag (for the API deploy)
   # Skip the 'v'
-  - mvn versions:set -DnewVersion=${TRAVIS_TAG:1}
+  - mvn -nsu versions:set -DnewVersion=${TRAVIS_TAG:1}
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
@@ -24,7 +24,7 @@ deploy:
     all_branches: true
 after_success:
   # Deploy API to the GitHub maven repo
-  - mvn deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
+  - mvn -nsu deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
   - $HOME/.m2
