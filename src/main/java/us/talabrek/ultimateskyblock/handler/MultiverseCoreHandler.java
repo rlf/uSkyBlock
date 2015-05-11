@@ -1,10 +1,11 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.onarandombox.MultiverseCore.MultiverseCore;
-import com.onarandombox.MultiverseCore.api.MultiversePlugin;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
-import org.bukkit.*;
-import org.bukkit.block.Block;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.WorldType;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
