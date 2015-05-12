@@ -13,7 +13,7 @@ before_install:
   # Skip the 'v'
   - mvn versions:set -DnewVersion=${TRAVIS_TAG:1}
 script:
-  - mvn -U -DskipTests=true install
+  - mvn -DskipTests=true install
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
@@ -26,7 +26,7 @@ deploy:
     all_branches: true
 after_success:
   # Deploy API to the GitHub maven repo
-  - mvn deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
+  - mvn -nsu deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
   - $HOME/.m2
