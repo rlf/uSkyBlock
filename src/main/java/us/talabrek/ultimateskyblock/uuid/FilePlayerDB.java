@@ -28,7 +28,7 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public UUID getUUIDFromName(String name) {
+    public synchronized UUID getUUIDFromName(String name) {
         Set<String> keys = new HashSet<>(config.getKeys(false));
         for (String uuidStr : keys) {
             String entryName = config.getString(uuidStr + ".name", config.getString(uuidStr, null));
@@ -40,19 +40,19 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public String getName(UUID uuid) {
+    public synchronized String getName(UUID uuid) {
         String uuidStr = UUIDUtil.asString(uuid);
         return config.getString(uuidStr + ".name", config.getString(uuidStr, null));
     }
 
     @Override
-    public String getDisplayName(UUID uuid) {
+    public synchronized String getDisplayName(UUID uuid) {
         String uuidStr = UUIDUtil.asString(uuid);
         return config.getString(uuidStr + ".displayName", null);
     }
 
     @Override
-    public String getDisplayName(String playerName) {
+    public synchronized String getDisplayName(String playerName) {
         UUID uuid = getUUIDFromName(playerName);
         if (uuid != null) {
             return getDisplayName(uuid);
@@ -61,7 +61,7 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public void updatePlayer(Player player) throws IOException {
+    public synchronized void updatePlayer(Player player) throws IOException {
         String uuid = UUIDUtil.asString(player.getUniqueId());
         config.set(uuid + ".name", player.getName());
         config.set(uuid + ".displayName", player.getDisplayName());

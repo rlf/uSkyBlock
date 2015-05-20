@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-11 20:24+0200\n"
+"POT-Creation-Date: 2015-05-20 22:18+0200\n"
 "PO-Revision-Date: 2015-05-03 00:32+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
@@ -155,14 +155,12 @@ msgid "§fthis rank to unlock the next rank."
 msgstr "§fpå dette niveau, for at åbne det næste."
 
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:444
-#, fuzzy
 msgid "§eClick here to show previous page"
-msgstr "§fKlik her for at fjerne tilladelsen."
+msgstr "§fKlik her for forrige side"
 
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:446
-#, fuzzy
 msgid "§eClick here to show next page"
-msgstr "§fKlik her for at tillade."
+msgstr "§fKlik her for næste side."
 
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:459
 msgid "§4§lLocked Challenge"
@@ -300,9 +298,8 @@ msgstr ""
 "§eBrug §9/usb island delete <navn>§e for at slette den."
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:63
-#, fuzzy
 msgid "removes the player from the island"
-msgstr "§fandre spillere fra øen,"
+msgstr "fjerner spilleren fra øen"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:69
 msgid "print out info about the island"
@@ -313,9 +310,8 @@ msgid "protects all islands (time consuming)"
 msgstr "beskytter alle øer (tidskrævende)"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:82
-#, fuzzy
 msgid "sets the biome of the island"
-msgstr "{0} forsøgte at overtage øen!"
+msgstr "sætter øens biome"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:88
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:138
@@ -384,23 +380,21 @@ msgid "Error: That player does not have an island!"
 msgstr "Fejl: Den spiller har ingen ø!"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:174
-#, fuzzy, java-format
-msgid "§e{0}'s island at {1} has been protected"
-msgstr "§e{0}'s ø ved {1} er blevet beskyttet"
+msgid "\u00a7e{0}''s island at {1} has been protected"
+msgstr "§e{0}''s ø ved {1} er blevet beskyttet"
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:176
-#, fuzzy, java-format
-msgid "§4{0}'s island at {1} was already protected"
-msgstr "§4{0}'s ø ved {1} var allerede beskyttet"
+#, java-format
+msgid "§4{0}''s island at {1} was already protected"
+msgstr "§4{0}''s ø ved {1} var allerede beskyttet"
 
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:24
 msgid "controls the currently running async tasks"
 msgstr "håndter aktive asynkrone opgaver"
 
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:25
-#, fuzzy
 msgid "lists currently running tasks"
-msgstr "§cIngen igangværende opgaver"
+msgstr "viser igangværende opgaver"
 
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:34
 msgid "§cNo running tasks"
@@ -550,9 +544,8 @@ msgid "§eFinished generation of the Top Ten list"
 msgstr "§eBlev færdig med genereringen af top 10"
 
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:18
-#, fuzzy
 msgid "Teleport to another players island"
-msgstr "§fandre spillere til øen."
+msgstr "Teleporterer til en andens ø"
 
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:25
 msgid "§4Only supported for players"
@@ -598,9 +591,8 @@ msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§bEjerskab overført af {0}§b til {1}"
 
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:18
-#, fuzzy
 msgid "manage orphans"
-msgstr "§eGemmer listen af forældreløse."
+msgstr "håndter forældreløse."
 
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:19
 msgid "count orphans"
@@ -657,7 +649,7 @@ msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
 #: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:17
 #, fuzzy
 msgid "set a player's island to your location"
-msgstr "§4Ingen valid ø på din position"
+msgstr "tildeler øen til en spiller"
 
 #: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:30
 #, java-format
@@ -669,9 +661,8 @@ msgid "§4Bedrock not found: unable to set the island!"
 msgstr "§4Intet grundfjeld fundet: Ikke istand til at sætte ø-ejerskab!"
 
 #: us/talabrek/ultimateskyblock/command/admin/ReloadCommand.java:17
-#, fuzzy
 msgid "reload configuration from file."
-msgstr "§eKonfigurationen blev genindlæst fra fil."
+msgstr "genindlæs konfigurationen fra fil."
 
 #: us/talabrek/ultimateskyblock/command/admin/ReloadCommand.java:23
 msgid "§eConfiguration reloaded from file."
@@ -1261,7 +1252,7 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4Du har ikke tilladelse til at teleportere til andre øer!"
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:47
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:768
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:770
 msgid "§4That player does not exist!"
 msgstr "§4Ingen spiller fundet!"
 
@@ -2277,51 +2268,95 @@ msgstr "Udfordringer"
 msgid "§9SB Island Group Members"
 msgstr "§9Ø Medlemskab"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:164
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:165
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:621
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:623
 msgid "§4Player is already assigned to this island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:733
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:735
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:738
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:740
 msgid "§aTeleporting you to your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:753
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:792
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:755
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:794
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§eDu vil blive teleporteret om {0} sekunder."
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:773
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:775
 msgid "§4Unable to warp you to that player's island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:777
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:779
 msgid "§aTeleporting you to "
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:809
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:820
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:811
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:822
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:817
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:819
 msgid "§aYour skyblock home has been set to your current location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1044
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1046
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1057
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1059
 msgid "Player doesn't have an island or it's already protected!"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1467
+#, java-format
+msgid "§7Name: §b{0}\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1468
+#, java-format
+msgid "§7Version: §b{0}\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1469
+#, java-format
+msgid "§7Description: §b{0}\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1470
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1475
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1480
+msgid "§7------------------------------\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1471
+#, java-format
+msgid "§7Server: §e{0} {1}\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1476
+msgid "§2ENABLED"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1476
+msgid "§4DISABLED"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1476
+#, java-format
+msgid "§7Name: §d{0} ({1})\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1477
+#, java-format
+msgid "§7Version: §d{0}\n"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/util/TimeUtil.java:18
