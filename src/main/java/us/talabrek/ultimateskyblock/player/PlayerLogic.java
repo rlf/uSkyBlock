@@ -40,7 +40,7 @@ public class PlayerLogic {
         try {
             locked.add(player.getName());
             PlayerInfo playerInfo = getPlayerInfo(player.getName());
-            if (player.isOnline()) {
+            if (playerInfo != null && player.isOnline()) {
                 playerInfo.updatePlayerInfo(player);
             }
             return playerInfo;
