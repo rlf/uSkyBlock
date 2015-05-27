@@ -461,6 +461,24 @@ public class SkyBlockMenu {
         menuItem.setItemMeta(meta4);
         menu.addItem(menuItem);
         lores.clear();
+        menuItem = new ItemStack(Material.RED_FLOWER, 1, (short) 5);
+        meta4 = menuItem.getItemMeta();
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.flowerforest", player.getWorld())) {
+            meta4.setDisplayName(tr("\u00a7aBiome: Flower Forest"));
+            addLore(lores, tr("\u00a7fThe flower forest biome.\n\u00a7fPassive mobs will spawn \n\u00a7fnormally and hostile\n\u00a7fmobs will spawn."));
+            if ("FLOWERFOREST".equals(currentBiome)) {
+                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
+            } else {
+                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
+            }
+        } else {
+            meta4.setDisplayName(tr("\u00a78Biome: Flower Forest"));
+            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The flower forest biome.\n\u00a77Passive mobs will spawn \n\u00a77normally and hostile\n\u00a77mobs will spawn."));
+        }
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
+        lores.clear();
         return menu;
     }
 
@@ -849,6 +867,10 @@ public class SkyBlockMenu {
             } else if (event.getCurrentItem().getType() == Material.EMERALD_ORE) {
                 p.closeInventory();
                 p.performCommand("island biome extreme_hills");
+                p.openInventory(displayIslandGUI(p));
+            } else if (event.getCurrentItem().getType() == Material.RED_FLOWER && event.getCurrentItem().getDurability() == 5) {
+                p.closeInventory();
+                p.performCommand("island biome flowerforest");
                 p.openInventory(displayIslandGUI(p));
             } else if (event.getCurrentItem().getType() == Material.RAW_FISH) {
                 p.closeInventory();
