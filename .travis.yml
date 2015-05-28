@@ -1,5 +1,5 @@
 language: java
-sudo: false
+sudo: true
 branches:
   only:
     # Only build (and deploy) pushes tagged with a version number
