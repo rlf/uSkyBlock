@@ -463,10 +463,10 @@ public class SkyBlockMenu {
         lores.clear();
         menuItem = new ItemStack(Material.RED_ROSE, 1, (short) 5);
         meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.flowerforest", player.getWorld())) {
+        if (VaultHandler.checkPerk(player.getName(), "usb.biome.flower_forest", player.getWorld())) {
             meta4.setDisplayName(tr("\u00a7aBiome: Flower Forest"));
             addLore(lores, tr("\u00a7fThe flower forest biome.\n\u00a7fPassive mobs will spawn \n\u00a7fnormally and hostile\n\u00a7fmobs will spawn."));
-            if ("FLOWERFOREST".equals(currentBiome)) {
+            if ("FLOWER_FOREST".equals(currentBiome)) {
                 addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
             } else {
                 addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
@@ -870,7 +870,7 @@ public class SkyBlockMenu {
                 p.openInventory(displayIslandGUI(p));
             } else if (event.getCurrentItem().getType() == Material.RED_ROSE && event.getCurrentItem().getDurability() == 5) {
                 p.closeInventory();
-                p.performCommand("island biome flowerforest");
+                p.performCommand("island biome flower_forest");
                 p.openInventory(displayIslandGUI(p));
             } else if (event.getCurrentItem().getType() == Material.RAW_FISH) {
                 p.closeInventory();

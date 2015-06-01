@@ -993,6 +993,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             biome = Biome.PLAINS;
         } else if (bName.equalsIgnoreCase("extreme_hills")) {
             biome = Biome.EXTREME_HILLS;
+        } else if (bName.equalsIgnoreCase("flower_forest")) {
+            biome = Biome.FLOWER_FOREST;
         } else {
             biome = Biome.OCEAN;
         }
