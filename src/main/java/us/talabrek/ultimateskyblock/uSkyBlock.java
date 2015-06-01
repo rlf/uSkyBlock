@@ -824,7 +824,18 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean playerIsOnIsland(final Player player) {
-        return locationIsOnIsland(player, player.getLocation());
+        return locationIsOnIsland(player, player.getLocation()) || playerIsTrusted(player);
+    }
+
+    private boolean playerIsTrusted(Player player) {
+        String islandName = WorldGuardHandler.getIslandNameAt(player.getLocation());
+        if (islandName != null) {
+            IslandInfo islandInfo = islandLogic.getIslandInfo(islandName);
+            if (islandInfo != null && islandInfo.getTrustees().contains(player.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean locationIsOnIsland(final Player player, final Location loc) {

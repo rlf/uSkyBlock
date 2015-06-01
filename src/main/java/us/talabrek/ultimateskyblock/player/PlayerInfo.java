@@ -304,12 +304,14 @@ public class PlayerInfo implements Serializable {
 
     @Override
     public String toString() {
+        // TODO: 01/06/2015 - R4zorax: use i18n.tr
         String str = "\u00a7bPlayer Info:\n";
         str += ChatColor.GRAY + "  - name: " + ChatColor.DARK_AQUA + getPlayerName() + "\n";
         str += ChatColor.GRAY + "  - nick: " + ChatColor.DARK_AQUA + getDisplayName() + "\n";
         str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA +  getHasIsland() + "\n";
         str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  LocationUtil.asString(getHomeLocation()) + "\n";
         str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + LocationUtil.asString(getIslandLocation()) + "\n";
+        str += ChatColor.GRAY + "  - banned from: " + ChatColor.DARK_AQUA + getBannedFrom() + "\n";
         // TODO: 28/12/2014 - R4zorax: Some info about challenges?
         return str;
     }
@@ -362,5 +364,21 @@ public class PlayerInfo implements Serializable {
 
     public long getLastSaved() {
         return playerConfigFile.lastModified();
+    }
+
+    public void addTrust(String name) {
+        List<String> trustedOn = playerData.getStringList("trustedOn");
+        if (!trustedOn.contains(name)) {
+            trustedOn.add(name);
+            playerData.set("trustedOn", trustedOn);
+        }
+        save();
+    }
+
+    public void removeTrust(String name) {
+        List<String> trustedOn = playerData.getStringList("trustedOn");
+        trustedOn.remove(name);
+        playerData.set("trustedOn", trustedOn);
+        save();
     }
 }

@@ -56,6 +56,7 @@ public class IslandCommand extends AbstractCommandExecutor {
         add(new PartyCommand(plugin, menu, inviteHandler));
         add(new MakeLeaderCommand(plugin));
         add(new SpawnCommand(plugin));
+        add(new TrustCommand(plugin));
     }
 
     @Override

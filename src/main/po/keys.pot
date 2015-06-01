@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-01 21:56+0200\n"
+"POT-Creation-Date: 2015-06-01 23:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,6 +67,7 @@ msgstr ""
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:97
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:108
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:21
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:24
 #, java-format
 msgid "§4{0}"
 msgstr ""
@@ -163,7 +165,7 @@ msgid "§4§lLocked Challenge"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:34
-#: us/talabrek/ultimateskyblock/command/IslandCommand.java:64
+#: us/talabrek/ultimateskyblock/command/IslandCommand.java:65
 msgid "§4Your island data is being loaded - try again later"
 msgstr ""
 
@@ -1167,6 +1169,37 @@ msgstr ""
 msgid "display the top10 of islands"
 msgstr ""
 
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:17
+msgid "trust/untrust a player to help on your island."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:23
+msgid "§eThe following players are trusted on your island:"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:25
+msgid "§eTo trust/untrust from your island, use /island trust <player>"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:30
+msgid "§4Members are already trusted!"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:35
+#, java-format
+msgid "§4Unknown player {0}"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:40
+#, java-format
+msgid "§eYou have trusted §4{0}§e on your island."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:43
+#, java-format
+msgid "§eYou have revoked your trust in §a{0}§e on your island."
+msgstr ""
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:18
 msgid "warp to another player's island"
 msgstr ""
@@ -1249,21 +1282,21 @@ msgid ""
 "accept!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:173
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:174
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:176
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:177
 msgid "§4You must be the party leader to lock your island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:207
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:208
 msgid ""
 "§eYour island is unlocked and anyone may enter, however only you and your "
 "party members may build or remove blocks."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:210
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:211
 msgid "§4You must be the party leader to unlock your island!"
 msgstr ""
 
@@ -2264,54 +2297,54 @@ msgstr ""
 msgid "§aYour skyblock home has been set to your current location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1046
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1059
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1059
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1072
 msgid "Player doesn't have an island or it's already protected!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1467
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1480
 #, java-format
 msgid "§7Name: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1468
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1481
 #, java-format
 msgid "§7Version: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1469
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1482
 #, java-format
 msgid "§7Description: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1470
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1475
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1480
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1483
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1488
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1493
 msgid "§7------------------------------\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1471
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1484
 #, java-format
 msgid "§7Server: §e{0} {1}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1476
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
 msgid "§2ENABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1476
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
 msgid "§4DISABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1476
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1477
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1490
 #, java-format
 msgid "§7Version: §d{0}\n"
 msgstr ""

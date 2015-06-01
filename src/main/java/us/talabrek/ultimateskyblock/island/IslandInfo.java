@@ -317,6 +317,34 @@ public class IslandInfo {
         return config.getStringList("banned.list");
     }
 
+    public List<String> getTrustees() {
+        return config.getStringList("trust.list");
+    }
+
+    public void trust(String name) {
+        List<String> trustees = getTrustees();
+        if (!trustees.contains(name)) {
+            trustees.add(name);
+            config.set("trust.list", trustees);
+        }
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(name);
+        if (playerInfo != null) {
+            playerInfo.addTrust(name);
+        }
+        save();
+    }
+
+    public void untrust(String name) {
+        List<String> trustees = getTrustees();
+        trustees.remove(name);
+        config.set("trust.list", trustees);
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(name);
+        if (playerInfo != null) {
+            playerInfo.removeTrust(name);
+        }
+        save();
+    }
+
     public void removeMember(PlayerInfo member) {
         WorldGuardHandler.removePlayerFromRegion(name, member.getPlayerName());
         member.setHomeLocation(null);
@@ -446,6 +474,13 @@ public class IslandInfo {
             config.set("banned.list", bans);
             dirty = true;
         }
+        List<String> trustees = getTrustees();
+        if (trustees.contains(oldName)) {
+            trustees.remove(oldName);
+            trustees.add(newName);
+            config.set("trust.list", trustees);
+            dirty = true;
+        }
         if (dirty) {
             WorldGuardHandler.updateRegion(player, this);
             save();
@@ -476,4 +511,5 @@ public class IslandInfo {
     public boolean contains(Location loc) {
         return name.equalsIgnoreCase(WorldGuardHandler.getIslandNameAt(loc));
     }
+
 }

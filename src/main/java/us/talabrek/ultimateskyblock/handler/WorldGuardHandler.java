@@ -117,7 +117,12 @@ public class WorldGuardHandler {
         for (String member : islandConfig.getMembers()) {
             owners.addPlayer(member);
         }
+        DefaultDomain members = new DefaultDomain();
+        for (String trust : islandConfig.getTrustees()) {
+            members.addPlayer(trust);
+        }
         region.setOwners(owners);
+        region.setMembers(members);
         region.setPriority(100);
         region.setFlag(DefaultFlag.GREET_MESSAGE,
                 DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering \u00a7b" + islandConfig.getLeader() + "'s \u00a7disland."));
