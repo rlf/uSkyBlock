@@ -461,7 +461,7 @@ public class SkyBlockMenu {
         menuItem.setItemMeta(meta4);
         menu.addItem(menuItem);
         lores.clear();
-        menuItem = new ItemStack(Material.RED_FLOWER, 1, (short) 5);
+        menuItem = new ItemStack(Material.RED_ROSE, 1, (short) 5);
         meta4 = menuItem.getItemMeta();
         if (VaultHandler.checkPerk(player.getName(), "usb.biome.flowerforest", player.getWorld())) {
             meta4.setDisplayName(tr("\u00a7aBiome: Flower Forest"));
@@ -868,7 +868,7 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.performCommand("island biome extreme_hills");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.RED_FLOWER && event.getCurrentItem().getDurability() == 5) {
+            } else if (event.getCurrentItem().getType() == Material.RED_ROSE && event.getCurrentItem().getDurability() == 5) {
                 p.closeInventory();
                 p.performCommand("island biome flowerforest");
                 p.openInventory(displayIslandGUI(p));
