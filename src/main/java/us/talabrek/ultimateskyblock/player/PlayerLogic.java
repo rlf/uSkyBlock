@@ -111,19 +111,7 @@ public class PlayerLogic {
             @Override
             public void run() {
                 try {
-                    final PlayerInfo playerInfo = loadPlayerData(player);
-                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                if (playerInfo != null && !playerInfo.getHasIsland() && !player.isOnGround()) {
-                                    uSkyBlock.getInstance().spawnTeleport(player);
-                                }
-                            } finally {
-                                locked.remove(player.getName());
-                            }
-                        }
-                    });
+                    loadPlayerData(player);
                 } catch (Exception e) {
                     locked.remove(player.getName());
                     throw e;

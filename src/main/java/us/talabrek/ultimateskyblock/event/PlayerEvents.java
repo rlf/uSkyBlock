@@ -64,9 +64,7 @@ public class PlayerEvents implements Listener {
     public void onPlayerJoin(final PlayerJoinEvent event) {
         log.entering(CN, "onPlayerJoin", event);
         Player player = event.getPlayer();
-        if (plugin.isSkyWorld(player.getWorld())) {
-            plugin.getPlayerLogic().loadPlayerDataAsync(player);
-        }
+        plugin.getPlayerLogic().loadPlayerDataAsync(player);
         log.exiting(CN, "onPlayerJoin");
     }
 
