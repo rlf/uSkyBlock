@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class OnlinePlayerTabCompleter extends AbstractTabCompleter {
     @Override
-    protected List<String> getTabList(CommandSender commandSender, String term) {
+    public List<String> getTabList(CommandSender commandSender, String term) {
         List<String> list = new ArrayList<>();
         // TODO: 27/12/2014 - R4zorax: What about display-names?
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {

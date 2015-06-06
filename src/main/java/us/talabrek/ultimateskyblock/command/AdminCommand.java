@@ -19,9 +19,9 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class AdminCommand extends AbstractCommandExecutor {
     public AdminCommand(uSkyBlock plugin) {
         super("usb", "usb.admin", tr("Ultimate SkyBlock Admin"));
-        TabCompleter playerCompleter = new OnlinePlayerTabCompleter();
+        OnlinePlayerTabCompleter playerCompleter = new OnlinePlayerTabCompleter();
         TabCompleter challengeCompleter = new ChallengeTabCompleter();
-        TabCompleter allPlayerCompleter = new AllPlayerTabCompleter();
+        TabCompleter allPlayerCompleter = new AllPlayerTabCompleter(playerCompleter);
         TabCompleter biomeCompleter = new BiomeTabCompleter();
         addTab("oplayer", playerCompleter);
         addTab("player", allPlayerCompleter);

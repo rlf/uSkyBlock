@@ -27,10 +27,11 @@ public class IslandCommand extends AbstractCommandExecutor {
         this.plugin = plugin;
         this.menu = menu;
         InviteHandler inviteHandler = new InviteHandler(plugin);
-        AllPlayerTabCompleter playerTabCompleter = new AllPlayerTabCompleter();
+        OnlinePlayerTabCompleter onlinePlayerTabCompleter = new OnlinePlayerTabCompleter();
+        AllPlayerTabCompleter playerTabCompleter = new AllPlayerTabCompleter(onlinePlayerTabCompleter);
         addTab("island", playerTabCompleter);
         addTab("player", playerTabCompleter);
-        addTab("oplayer", new OnlinePlayerTabCompleter());
+        addTab("oplayer", onlinePlayerTabCompleter);
         addTab("biome", new BiomeTabCompleter());
         addTab("member", new MemberTabCompleter(plugin));
         add(new RestartCommand(plugin));
