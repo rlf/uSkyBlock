@@ -1348,13 +1348,39 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 return; // Skip the command
             }
         }
+        m = Pattern.compile("^\\{d=(?<delay>[0-9]+)\\}(.*)$").matcher(command);
+        int delay = 0;
+        if (m.matches()) {
+            delay = Integer.parseInt(m.group("delay"));
+            command = m.group(2);
+        }
         if (command.contains("{party}")) {
             PlayerInfo playerInfo = getPlayerInfo(player);
             for (String member : getIslandInfo(playerInfo).getMembers()) {
-                doExecCommand(player, command.replaceAll("\\{party\\}", member));
+                doExecCommand(player, command.replaceAll("\\{party\\}", member), delay);
             }
         } else {
-            doExecCommand(player, command);
+            doExecCommand(player, command, delay);
+        }
+    }
+
+    private void doExecCommand(final Player player, final String command, int delay) {
+        if (delay == 0) {
+            Bukkit.getScheduler().runTask(this, new Runnable() {
+                @Override
+                public void run() {
+                    doExecCommand(player, command);
+                }
+            });
+        } else if (delay > 0) {
+            Bukkit.getScheduler().runTaskLater(this, new Runnable() {
+                @Override
+                public void run() {
+                    doExecCommand(player, command);
+                }
+            }, delay);
+        } else {
+            log(Level.INFO, "WARN: Misconfigured command found, with negative delay! " + command);
         }
     }
 
@@ -1366,9 +1392,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 player.setOp(true);
                 // Prevent privilege escalation if called command throws unhandled exception
                 try {
-                	player.performCommand(command.substring(3).trim());
+                    player.performCommand(command.substring(3).trim());
                 } finally {
-                	player.setOp(false);
+                    player.setOp(false);
                 }
             }
         } else if (command.startsWith("console:")) {

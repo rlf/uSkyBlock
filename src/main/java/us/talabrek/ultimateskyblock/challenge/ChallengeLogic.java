@@ -347,16 +347,16 @@ public class ChallengeLogic {
                 }
             }
         }
-        for (String cmd : reward.getCommands()) {
-            String command = cmd.replaceAll("\\{challenge\\}", challengeName);
-            skyBlock.execCommand(player, command);
-        }
         HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(reward.getItemReward().toArray(new ItemStack[0]));
         for (ItemStack item : leftOvers.values()) {
             player.getWorld().dropItem(player.getLocation(), item);
         }
         if (!leftOvers.isEmpty()) {
             player.sendMessage(tr("\u00a7eYour inventory is \u00a74full\u00a7e. Items dropped on the ground."));
+        }
+        for (String cmd : reward.getCommands()) {
+            String command = cmd.replaceAll("\\{challenge\\}", challengeName);
+            skyBlock.execCommand(player, command);
         }
         playerInfo.completeChallenge(challengeName);
         return true;
