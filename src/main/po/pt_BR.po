@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-01 23:31+0200\n"
+"POT-Creation-Date: 2015-06-06 09:34+0200\n"
 "PO-Revision-Date: 2015-04-27 12:58-0300\n"
 "Last-Translator: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language-Team: _Rodrigo <rodriigosantos11@gmail.com>\n"
@@ -135,7 +135,7 @@ msgstr "§ePrêmio em XP: §f{0,number,#.#}"
 msgid "§eCurrency reward: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
 msgstr "§ePrêmio em dinheiro:f{0,number,###.##} {1} §a ({2,number,##.##})%"
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:359
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:355
 msgid "§eYour inventory is §4full§e. Items dropped on the ground."
 msgstr "§eSeu inventário está §4cheio§e. Items cairam no chão."
 
@@ -170,7 +170,7 @@ msgid "§4§lLocked Challenge"
 msgstr "§4§lDesafio trancado"
 
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:34
-#: us/talabrek/ultimateskyblock/command/IslandCommand.java:65
+#: us/talabrek/ultimateskyblock/command/IslandCommand.java:66
 msgid "§4Your island data is being loaded - try again later"
 msgstr ""
 
@@ -1318,15 +1318,15 @@ msgstr "§eVocê não pode usar outros portais na ilha!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrocas não são permitidas em outras ilhas."
 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:131
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:129
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eAlterando seu obsidian de volta para lava."
 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:162
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:160
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Essa é uma má ideia para substituir sua lava!"
 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:252
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:250
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Esse jogador proibiu você de teleportar até a ilha dele."
 
@@ -2648,46 +2648,46 @@ msgstr "Não foi possível criar sua ilha. Por favor contate a um moderador."
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Jogador não tem uma ilha ou já está protegida!"
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1480
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1506
 #, java-format
 msgid "§7Name: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1481
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1507
 #, java-format
 msgid "§7Version: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1482
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1508
 #, java-format
 msgid "§7Description: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1483
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1488
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1493
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1509
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1514
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1519
 msgid "§7------------------------------\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1484
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1510
 #, java-format
 msgid "§7Server: §e{0} {1}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1515
 msgid "§2ENABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1515
 msgid "§4DISABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1515
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1490
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1516
 #, java-format
 msgid "§7Version: §d{0}\n"
 msgstr ""
