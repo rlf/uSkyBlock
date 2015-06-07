@@ -1,4 +1,4 @@
-# The language used in the plugin (en is default, currently, only da is partially supported).
+# The language used in the plugin (en is default).
 language: en
 options:
   general:
