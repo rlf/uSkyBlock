@@ -62,14 +62,21 @@ public class IslandCommand extends AbstractCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-        if (sender instanceof Player && plugin.getPlayerLogic().isLocked((Player) sender)) {
-            sender.sendMessage(tr("\u00a74Your island data is being loaded - try again later"));
-            return true;
-        }
-        if (args.length == 0 && sender instanceof Player) {
+        if (sender instanceof Player) {
             Player player = (Player) sender;
-            player.openInventory(menu.displayIslandGUI(player));
-            return true;
+            if (plugin.getPlayerLogic().isLocked(player)) {
+                sender.sendMessage(tr("\u00a74Your island data is being loaded - try again later"));
+                return true;
+            }
+            if (plugin.getPlayerLogic().getPlayerInfo(player) == null) {
+                plugin.getPlayerLogic().loadPlayerDataAsync(player);
+                sender.sendMessage(tr("\u00a74Your island data is being loaded - try again later"));
+                return true;
+            }
+            if (args.length == 0) {
+                player.openInventory(menu.displayIslandGUI(player));
+                return true;
+            }
         }
         return super.onCommand(sender, command, alias, args);
     }
