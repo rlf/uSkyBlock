@@ -211,9 +211,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     @Override
                     public void run() {
                         for (Player player : getServer().getOnlinePlayers()) {
-                            if (isSkyWorld(player.getWorld())) {
-                                playerLogic.loadPlayerData(player);
-                            }
+                            playerLogic.loadPlayerDataAsync(player);
                         }
                     }
                 }, 50L);
@@ -781,10 +779,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void spawnTeleport(final Player player) {
+        spawnTeleport(player, false);
+    }
+    public void spawnTeleport(final Player player, boolean force) {
         getLogger().entering(CN, "spawnTeleport", new Object[]{ player });
 
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
-        if(player.hasPermission("usb.mod.bypassteleport") || (delay == 0)) {
+        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
         	if (Settings.extras_sendToSpawn) {
                 execCommand(player, "op:spawn");
             } else {
@@ -1041,7 +1042,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getLogger().entering(CN, "createIsland", new Object[]{player, pi});
         try {
             if (isSkyWorld(player.getWorld())) {
-                spawnTeleport(player);
+                spawnTeleport(player, true);
             }
             final Location last = getLastIsland();
             last.setY((double) Settings.island_height);
@@ -1051,7 +1052,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 setNewPlayerIsland(player, next);
                 changePlayerBiome(player, "OCEAN");
                 protectWithWorldGuard(player, player, pi);
-                homeTeleport(player, true);
+                homeTeleport(player, true); // Later?
                 getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
                 clearPlayerInventory(player);
                 clearEntitiesNearPlayer(player);
@@ -1485,12 +1486,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     }
                 }
         );
-    }
-
-    public void updateScore(Player player, IslandInfo islandInfo, IslandScore score) {
-        islandInfo.setLevel(score.getScore());
-        getIslandLogic().updateRank(islandInfo, score);
-        fireChangeEvent(new uSkyBlockScoreChangedEvent(player, this, score));
     }
 
     public synchronized boolean isProtectAllActive() {

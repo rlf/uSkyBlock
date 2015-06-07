@@ -61,7 +61,7 @@ options:
     protectionRange: 105
 
     # [integer] The delay in seconds before teleporting to an island. Affects /is home, /is warp, /is spawn
-    islandTeleportDelay: 3
+    islandTeleportDelay: 2
 
     # Allow PvP on the island
     allowPvP: deny
@@ -188,6 +188,7 @@ options:
     teleportDelay: 20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 17
+version: 18
 force-replace:
   options.party.invite-timeout: 100
+  options.island.islandTeleportDelay: 5

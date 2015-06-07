@@ -198,11 +198,12 @@ public enum FileUtil {;
         dest.set("version", version);
         ConfigurationSection forceSection = src.getConfigurationSection("force-replace");
         if (forceSection != null) {
-            for (String key : forceSection.getKeys(false)) {
+            for (String key : forceSection.getKeys(true)) {
                 Object def = forceSection.get(key, null);
                 Object value = dest.get(key, def);
+                Object newDef = src.get(key, null);
                 if (def != null && def.equals(value)) {
-                    dest.set(key, def);
+                    dest.set(key, newDef);
                 }
             }
         }

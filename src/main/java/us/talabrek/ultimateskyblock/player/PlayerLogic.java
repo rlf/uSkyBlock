@@ -113,8 +113,9 @@ public class PlayerLogic {
                 try {
                     loadPlayerData(player);
                 } catch (Exception e) {
-                    locked.remove(player.getName());
                     throw e;
+                } finally {
+                    locked.remove(player.getName());
                 }
             }
         });

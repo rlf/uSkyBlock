@@ -94,7 +94,7 @@ public class IslandLogic {
             for (Player player : WorldEditHandler.getPlayersInRegion(plugin.getWorld(), region)) {
                 if (player != null && player.isOnline() && !player.isFlying()) {
                     player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
-                    plugin.spawnTeleport(player);
+                    plugin.spawnTeleport(player, true);
                 }
             }
             WorldEditHandler.clearIsland(skyBlockWorld, region, afterDeletion);
