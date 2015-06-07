@@ -816,6 +816,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
             if (playerInfo != null) {
                 playerInfo.setHomeLocation(player.getLocation());
+                playerInfo.save();
             }
             player.sendMessage(tr("\u00a7aYour skyblock home has been set to your current location."));
             return true;
