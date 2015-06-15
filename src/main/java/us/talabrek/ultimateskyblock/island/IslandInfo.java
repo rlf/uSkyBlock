@@ -420,6 +420,7 @@ public class IslandInfo {
         String str = "\u00a7bIsland Info:\n";
         str += ChatColor.GRAY + "  - level: " + ChatColor.DARK_AQUA + String.format("%5.2f", getLevel()) +"\n";
         str += ChatColor.GRAY + "  - location: " + ChatColor.DARK_AQUA +  name + "\n";
+        str += ChatColor.GRAY + "  - biome: " + ChatColor.DARK_AQUA + getBiome() + "\n";
         str += ChatColor.GRAY + "  - warp: " + ChatColor.DARK_AQUA +  hasWarp() + "\n";
         if (hasWarp()) {
             str += ChatColor.GRAY + "     loc: " + ChatColor.DARK_AQUA + LocationUtil.asString(getWarpLocation()) + "\n";
