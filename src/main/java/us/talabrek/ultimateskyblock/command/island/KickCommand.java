@@ -26,10 +26,6 @@ public class KickCommand extends RequireIslandCommand {
             }
             String playerName = args[0];
             Player otherPlayer = Bukkit.getPlayer(playerName);
-            if (otherPlayer == null && Bukkit.getOfflinePlayer(playerName) == null) {
-                player.sendMessage(tr("\u00a74That player doesn't exist."));
-                return true;
-            }
             if (island.isLeader(playerName)) {
                 player.sendMessage(tr("\u00a74You can't remove the leader from the Island!"));
                 return true;

@@ -18,31 +18,36 @@ public class TrustCommand extends RequireIslandCommand {
     }
 
     @Override
-    protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
+    protected boolean doExecute(final String alias, final Player player, PlayerInfo pi, final IslandInfo island, Map<String, Object> data, String... args) {
         if (args.length == 0) {
             player.sendMessage(tr("\u00a7eThe following players are trusted on your island:"));
             player.sendMessage(tr("\u00a74{0}", island.getTrustees()));
             player.sendMessage(tr("\u00a7eTo trust/untrust from your island, use /island trust <player>"));
             return true;
         } else if (args.length == 1) {
-            String name = args[0];
+            final String name = args[0];
             if (island.getMembers().contains(name)) {
                 player.sendMessage(tr("\u00a74Members are already trusted!"));
                 return true;
             }
-            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-            if (offlinePlayer == null || !offlinePlayer.hasPlayedBefore()) {
-                player.sendMessage(tr("\u00a74Unknown player {0}", name));
-                return true;
-            }
-            if (alias.equals("trust")) {
-                island.trust(name);
-                player.sendMessage(tr("\u00a7eYou have trusted \u00a74{0}\u00a7e on your island.", name));
-            } else {
-                island.untrust(name);
-                player.sendMessage(tr("\u00a7eYou have revoked your trust in \u00a7a{0}\u00a7e on your island.", name));
-            }
-            WorldGuardHandler.updateRegion(player, island);
+            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
+                    if (offlinePlayer == null) {
+                        player.sendMessage(tr("\u00a74Unknown player {0}", name));
+                        return;
+                    }
+                    if (alias.equals("trust")) {
+                        island.trust(name);
+                        player.sendMessage(tr("\u00a7eYou have trusted \u00a74{0}\u00a7e on your island.", name));
+                    } else {
+                        island.untrust(name);
+                        player.sendMessage(tr("\u00a7eYou have revoked your trust in \u00a7a{0}\u00a7e on your island.", name));
+                    }
+                    WorldGuardHandler.updateRegion(player, island);
+                }
+            });
             return true;
         }
         return false;
