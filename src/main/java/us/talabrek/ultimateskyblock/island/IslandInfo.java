@@ -494,13 +494,13 @@ public class IslandInfo {
             for (String memberName : members.getKeys(false)) {
                 String uuid = members.getString(memberName + ".uuid", null);
                 if (uuid != null) {
-                    OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUIDUtil.fromString(uuid));
-                    if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                    Player onlinePlayer = Bukkit.getPlayer(UUIDUtil.fromString(uuid));
+                    if (onlinePlayer != null) {
                         return true;
                     }
                 } else {
-                    OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(memberName);
-                    if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                    Player onlinePlayer = Bukkit.getPlayer(memberName);
+                    if (onlinePlayer != null) {
                         return true;
                     }
                 }

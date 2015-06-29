@@ -19,7 +19,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 @SuppressWarnings("deprecation")
 public class InviteHandler {
     private final Map<UUID, Invite> inviteMap = new HashMap<>();
-    private final Map<String, Set<UUID>> waitingInvites = new HashMap<>();
+    private final Map<String, Map<UUID, String>> waitingInvites = new HashMap<>();
     private final uSkyBlock plugin;
 
     public InviteHandler(uSkyBlock plugin) {
@@ -28,9 +28,9 @@ public class InviteHandler {
 
     public synchronized boolean invite(Player player, final IslandInfo island, Player otherPlayer) {
         PlayerInfo oPi = plugin.getPlayerInfo(otherPlayer);
-        Set<UUID> invites = waitingInvites.get(island.getName());
+        Map<UUID, String> invites = waitingInvites.get(island.getName());
         if (invites == null) {
-            invites = new HashSet<>();
+            invites = new HashMap<>();
         }
         if (island.getPartySize() + invites.size() >= island.getMaxPartySize()) {
             player.sendMessage(tr("\u00a74Your island is full, or you have too many pending invites. You can't invite anyone else."));
@@ -45,7 +45,7 @@ public class InviteHandler {
             }
         }
         final UUID uniqueId = otherPlayer.getUniqueId();
-        invites.add(uniqueId);
+        invites.put(uniqueId, otherPlayer.getName());
         final Invite invite = new Invite(island.getName(), uniqueId, player.getDisplayName());
         inviteMap.put(uniqueId, invite);
         waitingInvites.put(island.getName(), invites);
@@ -104,8 +104,10 @@ public class InviteHandler {
                 String islandName = WorldGuardHandler.getIslandNameAt(pi.getIslandLocation());
                 deleteOldIsland = !island.getName().equals(islandName);
             }
-            Set<UUID> uuids = waitingInvites.get(invite.getIslandName());
-            uuids.remove(uuid);
+            Map<UUID, String> uuids = waitingInvites.get(invite.getIslandName());
+            if (uuids != null) {
+                uuids.remove(uuid);
+            }
             Runnable joinIsland = new Runnable() {
                 @Override
                 public void run() {
@@ -128,7 +130,11 @@ public class InviteHandler {
     }
 
     public synchronized Set<UUID> getPendingInvites(IslandInfo island) {
-        return waitingInvites.get(island.getName());
+        return waitingInvites.containsKey(island.getName()) ? waitingInvites.get(island.getName()).keySet() : null;
+    }
+
+    public synchronized Collection<String> getPendingInvitesAsNames(IslandInfo island) {
+        return waitingInvites.containsKey(island.getName()) ? waitingInvites.get(island.getName()).values() : null;
     }
 
     public boolean addPlayerToParty(final Player player, final IslandInfo island) {
@@ -158,7 +164,7 @@ public class InviteHandler {
     }
 
     private synchronized boolean uninvite(IslandInfo islandInfo, UUID uuid) {
-        Set<UUID> invites = waitingInvites.get(islandInfo.getName());
+        Set<UUID> invites = getPendingInvites(islandInfo);
         if (invites != null && invites.contains(uuid)) {
             Invite invite = inviteMap.remove(uuid);
             invites.remove(uuid);

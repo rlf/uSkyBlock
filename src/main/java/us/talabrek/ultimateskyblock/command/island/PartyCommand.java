@@ -33,15 +33,11 @@ public class PartyCommand extends CompositeUSBCommand {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
-                Set<UUID> pendingInvites = inviteHandler.getPendingInvites(islandInfo);
-                if (pendingInvites == null || pendingInvites.isEmpty()) {
+                Collection<String> pendingInvitesAsNames = inviteHandler.getPendingInvitesAsNames(islandInfo);
+                if (pendingInvitesAsNames == null || pendingInvitesAsNames.isEmpty()) {
                     sender.sendMessage(tr("\u00a7eNo pending invites"));
                 } else {
-                    List<String> invites = new ArrayList<>();
-                    for (UUID uuid : pendingInvites) {
-                        invites.add(plugin.getServer().getOfflinePlayer(uuid).getName());
-                    }
-                    sender.sendMessage("\u00a7ePending invites: " + invites);
+                    sender.sendMessage("\u00a7ePending invites: " + pendingInvitesAsNames);
                 }
                 return true;
             }
