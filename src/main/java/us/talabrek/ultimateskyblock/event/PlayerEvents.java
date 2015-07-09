@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import java.text.DecimalFormat;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -15,6 +16,7 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -48,7 +50,7 @@ public class PlayerEvents implements Listener {
             Arrays.asList(EntityDamageEvent.DamageCause.LAVA, EntityDamageEvent.DamageCause.FIRE, EntityDamageEvent.DamageCause.FIRE_TICK));
     private static final Random RANDOM = new Random();
     private static final int OBSIDIAN_SPAM = 10000; // Max once every 10 seconds.
-    
+
     private final uSkyBlock plugin;
     private final boolean visitorFallProtected;
     private final boolean visitorFireProtected;
@@ -133,6 +135,7 @@ public class PlayerEvents implements Listener {
             event.setCancelled(true); // Don't execute the click anymore (since that would re-place the lava).
         }
     }
+
     /**
      * Tests for more than one obsidian close by.
      */
@@ -248,6 +251,21 @@ public class PlayerEvents implements Listener {
         if (islandInfo != null && islandInfo.isBanned(player.getName())) {
             event.setCancelled(true);
             player.sendMessage(tr("\u00a74That player has forbidden you from teleporting to their island."));
+        }
+    }
+
+    private final DecimalFormat islandLevelFormat = new DecimalFormat("#,##0.00");;
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onChat(AsyncPlayerChatEvent event) {
+        String format = event.getFormat();
+        if (format.contains("{uskyblock_island_level}")) {
+            Player player = event.getPlayer();
+            IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(player);
+            if (islandInfo != null) {
+                event.setFormat(format.replace("{uskyblock_island_level}", islandLevelFormat.format(islandInfo.getLevel())));
+            } else {
+                event.setFormat(format.replace("{uskyblock_island_level}", islandLevelFormat.format(0)));
+            }
         }
     }
 }
