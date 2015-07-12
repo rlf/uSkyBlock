@@ -142,6 +142,12 @@ public class IslandInfo {
             config.set("party.maxSize", 6);
         } else if (config.getInt("party.maxSize") < 5 && VaultHandler.checkPerk(player.getName(), "usb.extra.party1", player.getWorld())) {
             config.set("party.maxSize", 5);
+        } else {
+            if (!config.contains("party.maxSize")) {
+                config.set("party.maxSize", Settings.general_maxPartySize);
+            } else if (config.getInt("party.maxSize") != Settings.general_maxPartySize) {
+                config.set("party.maxSize", Settings.general_maxPartySize);
+            }
         }
         save();
     }
