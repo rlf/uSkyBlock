@@ -23,6 +23,14 @@ public class CreateCommand extends RequirePlayerCommand {
         PlayerInfo pi = plugin.getPlayerInfo(player);
         int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
         if (LocationUtil.isEmptyLocation(pi.getIslandLocation()) && cooldown == 0) {
+            if (pi.isIslandGenerating()) {
+                player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot create now."));
+                return true;
+            }
+            if (pi.isIslandRestarting()) {
+                player.sendMessage(tr("\u00a7cYour island is in the process of restarting, you cannot create now."));
+                return true;
+            }
             plugin.createIsland(player, pi);
         } else if (pi.getHasIsland()) {
             IslandInfo island = plugin.getIslandInfo(pi);

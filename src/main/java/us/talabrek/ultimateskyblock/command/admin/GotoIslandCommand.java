@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -27,12 +28,21 @@ public class GotoIslandCommand extends AbstractPlayerInfoCommand {
         Player player = (Player) sender;
         if (playerInfo.getHomeLocation() != null) {
             sender.sendMessage(tr("\u00a7aTeleporting to {0}'s island.", playerInfo.getPlayerName()));
-            player.teleport(playerInfo.getHomeLocation());
+
+            Location homeLocation = playerInfo.getHomeLocation();
+            if (!homeLocation.getWorld().isChunkLoaded(homeLocation.getBlockX() >> 4, homeLocation.getBlockZ() >> 4)) {
+                homeLocation.getWorld().loadChunk(homeLocation.getBlockX() >> 4, homeLocation.getBlockZ() >> 4);
+            }
+            player.teleport(homeLocation);
             return;
         }
         if (playerInfo.getIslandLocation() != null) {
             sender.sendMessage(tr("\u00a7aTeleporting to {0}'s island.", playerInfo.getPlayerName()));
-            player.teleport(playerInfo.getIslandLocation());
+            Location islandLocation = playerInfo.getIslandLocation();
+            if (!islandLocation.getWorld().isChunkLoaded(islandLocation.getBlockX() >> 4, islandLocation.getBlockZ() >> 4)) {
+                islandLocation.getWorld().loadChunk(islandLocation.getBlockX() >> 4, islandLocation.getBlockZ() >> 4);
+            }
+            player.teleport(islandLocation);
             return;
         }
         sender.sendMessage(tr("\u00a74That player does not have an island!"));

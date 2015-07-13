@@ -59,6 +59,7 @@ public class WorldEditClearTask extends BukkitRunnable implements IncrementalTas
         Iterator<Region> border = borderRegions.iterator();
         for (int i = 0; i < length; i++) {
             EditSession editSession = new EditSession(bukkitWorld, maxBlocks);
+            editSession.setFastMode(true);
             if (inner.hasNext()) {
                 Vector2D chunk = inner.next();
                 inner.remove();
