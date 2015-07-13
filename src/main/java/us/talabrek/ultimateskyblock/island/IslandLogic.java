@@ -253,7 +253,7 @@ public class IslandLogic {
 
     public synchronized IslandInfo createIsland(String location, String player) {
         IslandInfo info = getIslandInfo(location);
-        info.clearIslandConfig(player);
+        info.resetIslandConfig(player);
         return info;
     }
 

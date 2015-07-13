@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.player;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Collections;
@@ -69,6 +70,10 @@ public class PlayerLogic {
         if (pi.getHasIsland()) {
             WorldGuardHandler.protectIsland(player, pi);
             plugin.getIslandLogic().clearFlatland(player, pi.getIslandLocation(), 400);
+            IslandInfo islandInfo = plugin.getIslandInfo(pi);
+            if (islandInfo != null) {
+                islandInfo.handleMemberLoggedIn(player);
+            }
         }
         activePlayers.put(player.getName(), pi);
         return pi;
