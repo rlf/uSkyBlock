@@ -184,7 +184,7 @@ options:
     clearEnderChest: true
 
     # [ticks] The number of ticks to wait, before porting the player back
-    # on /is restart (default: 20)
+    # on /is restart or /is create (default: 20)
     teleportDelay: 20
 
 # DO NOT TOUCH THE FIELDS BELOW

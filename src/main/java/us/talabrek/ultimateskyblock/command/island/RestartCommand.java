@@ -27,9 +27,18 @@ public class RestartCommand extends RequireIslandCommand {
         }
         int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
         if (cooldown > 0) {
-            player.sendMessage(tr("\u00a7eYou can restart your island in {0} seconds.", cooldown));
+            player.sendMessage(tr("\u00a7cYou can restart your island in {0} seconds.", cooldown));
             return true;
         } else {
+            if (pi.isIslandRestarting()) {
+                player.sendMessage(tr("\u00a7cYour island is already in the process of restarting."));
+                return true;
+            }
+            if (pi.isIslandGenerating()) {
+                player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot restart now."));
+                return true;
+            }
+
             if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
                 plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
                 return plugin.restartPlayerIsland(player, pi.getIslandLocation());

@@ -28,6 +28,9 @@ public class PlayerInfo implements Serializable {
     private UUID uuid;
     private boolean hasIsland;
 
+    private boolean islandGenerating = false;
+    private boolean islandRestarting = false;
+
     private Location islandLocation;
     private Location homeLocation;
 
@@ -380,5 +383,21 @@ public class PlayerInfo implements Serializable {
         trustedOn.remove(name);
         playerData.set("trustedOn", trustedOn);
         save();
+    }
+
+    public boolean isIslandGenerating() {
+        return this.islandGenerating;
+    }
+
+    public void setIslandGenerating(boolean value) {
+        this.islandGenerating = value;
+    }
+
+    public boolean isIslandRestarting() {
+        return this.islandRestarting;
+    }
+
+    public void setIslandRestarting(boolean value) {
+        this.islandRestarting = value;
     }
 }

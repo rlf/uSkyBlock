@@ -61,6 +61,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
 
             EditSession editSession = new EditSession(bukkitWorld, 255 * Settings.island_protectionRange * Settings.island_protectionRange);
             editSession.enableQueue();
+            editSession.setFastMode(true);
             Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
             Operation operation = holder
                     .createPaste(editSession, worldData)

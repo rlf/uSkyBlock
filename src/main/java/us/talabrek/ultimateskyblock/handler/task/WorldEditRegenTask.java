@@ -31,6 +31,7 @@ public class WorldEditRegenTask implements IncrementalTask {
     public WorldEditRegenTask(World world, Set<Region> borderRegions) {
         bukkitWorld = new BukkitWorld(world);
         editSession = new EditSession(bukkitWorld, 255 * Settings.island_protectionRange * Settings.island_protectionRange);
+        editSession.setFastMode(true);
         editSession.enableQueue();
         log.log(Level.FINE, "Planning regen of borders: " + borderRegions);
         regions = createRegions(borderRegions);

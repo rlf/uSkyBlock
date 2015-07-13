@@ -1,22 +1,17 @@
 package us.talabrek.ultimateskyblock.player;
 
+import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * Holds the active players
@@ -121,6 +116,19 @@ public class PlayerLogic {
                     throw e;
                 } finally {
                     locked.remove(player.getName());
+
+                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            if (player != null && player.isOnline()) {
+                                PlayerInfo playerInfo = plugin.getPlayerInfo(player);
+                                if (!playerInfo.getHasIsland() && player.getLocation().getWorld().getName().equalsIgnoreCase(uSkyBlock.skyBlockWorld.getName())) {
+                                    plugin.spawnTeleport(player, true);
+                                    player.sendMessage(tr("\u00a7cIt seems you logged out in the sky world, however you are not a member of an island. Teleporting you to spawn."));
+                                }
+                            }
+                        }
+                    });
                 }
             }
         });
