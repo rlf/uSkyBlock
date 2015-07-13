@@ -19,7 +19,6 @@ public class HomeCommand extends RequireIslandCommand {
         if (pi.getHomeLocation() == null) {
             pi.setHomeLocation(pi.getIslandLocation());
         }
-        island.updatePartyNumber(player);
         plugin.homeTeleport(player, false);
         return true;
     }
