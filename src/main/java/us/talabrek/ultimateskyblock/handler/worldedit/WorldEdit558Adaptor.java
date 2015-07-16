@@ -21,7 +21,7 @@ public class WorldEdit558Adaptor implements WorldEditAdaptor {
         this.worldEditPlugin = worldEditPlugin;
     }
     @Override
-    public boolean loadIslandSchematic(Player player, World world, File file, Location origin) {
+    public boolean loadIslandSchematic(World world, File file, Location origin) {
         return false;
     }
 }

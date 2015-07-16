@@ -37,15 +37,17 @@ public class BiomeCommand extends RequireIslandCommand {
                     return true;
                 }
                 if (plugin.playerIsOnIsland(player)) {
-                    if (plugin.changePlayerBiome(player, biome)) {
-                        player.sendMessage(tr("\u00a7aYou have changed your island''s biome to {0}", biome.toUpperCase()));
-                        player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
-                        island.sendMessageToIslandGroup(tr("{0} changed the island biome to {1}", player.getName(), biome.toUpperCase()));
-                        plugin.getCooldownHandler().resetCooldown(player, "biome", Settings.general_biomeChange);
+                    if (plugin.biomeExists(biome)) {
+                        if (plugin.changePlayerBiome(player, biome)) {
+                            player.sendMessage(tr("\u00a7aYou have changed your island''s biome to {0}", biome.toUpperCase()));
+                            player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
+                            island.sendMessageToIslandGroup(tr("{0} changed the island biome to {1}", player.getName(), biome.toUpperCase()));
+                            plugin.getCooldownHandler().resetCooldown(player, "biome", Settings.general_biomeChange);
+                        } else {
+                            player.sendMessage(tr("\u00a7cYou do not have permission to change your biome to that type."));
+                        }
                     } else {
-                        player.sendMessage(tr("\u00a7aYou have misspelled the biome name, changing your biome to OCEAN"));
-                        player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
-                        island.sendMessageToIslandGroup(tr("{0} changed the island biome to OCEAN", player.getName()));
+                        player.sendMessage(tr("\u00a7cYou have misspelled the biome name."));
                     }
                 } else {
                     player.sendMessage(tr("\u00a7eYou must be on your island to change the biome!"));

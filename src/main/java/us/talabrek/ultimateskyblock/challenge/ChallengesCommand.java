@@ -22,7 +22,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
     public ChallengesCommand(uSkyBlock plugin) {
         this.plugin = plugin;
     }
-    
+
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
         if (!plugin.isRequirementsMet(sender)) {
             return false;
