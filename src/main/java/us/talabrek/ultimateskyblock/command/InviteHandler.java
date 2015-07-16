@@ -155,6 +155,10 @@ public class InviteHandler {
     }
 
     public synchronized boolean uninvite(IslandInfo islandInfo, String playerName) {
+        if (Bukkit.isPrimaryThread()) {
+            throw new UnsupportedOperationException("This method cannot be called in the primary thread!");
+        }
+
         OfflinePlayer offlinePlayer = plugin.getServer().getOfflinePlayer(playerName);
         if (offlinePlayer != null) {
             UUID uuid = offlinePlayer.getUniqueId();

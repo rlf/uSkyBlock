@@ -62,6 +62,7 @@ public class PlayerLogic {
     public PlayerInfo loadPlayerData(final Player player) {
         log.log(Level.INFO, "Loading player data for " + player.getName());
         final PlayerInfo pi = loadPlayerInfo(player.getName());
+        plugin.getPlayerNameChangeManager().checkPlayer(player, pi);
         if (pi.getHasIsland()) {
             WorldGuardHandler.protectIsland(player, pi);
             plugin.getIslandLogic().clearFlatland(player, pi.getIslandLocation(), 400);
@@ -90,17 +91,16 @@ public class PlayerLogic {
         }
     }
 
-    public synchronized PlayerInfo renameTo(String oldName, String name) {
+    public synchronized PlayerInfo renameTo(PlayerInfo playerInfo, String oldName, String newName) {
         try {
             locked.add(oldName);
-            locked.add(name);
-            PlayerInfo playerInfo = getPlayerInfo(oldName);
-            playerInfo = playerInfo.renameTo(name);
+            locked.add(newName);
+            playerInfo = playerInfo.renameTo(newName);
             activePlayers.remove(oldName);
-            activePlayers.put(name, playerInfo);
+            activePlayers.put(newName, playerInfo);
             return playerInfo;
         } finally {
-            locked.remove(name);
+            locked.remove(newName);
             locked.remove(oldName);
         }
     }
