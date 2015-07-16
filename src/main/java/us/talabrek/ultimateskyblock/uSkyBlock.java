@@ -137,6 +137,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private CooldownHandler cooldownHandler;
     private PlayerLogic playerLogic;
 
+    private PlayerNameChangeManager playerNameChangeManager;
+
     public uSkyBlock() {
         this.lastIslandConfig = null;
         this.orphans = null;
@@ -276,7 +278,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public void registerEvents(PlayerDB playerDB) {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerNameChangeListener(this), this);
-        manager.registerEvents(new PlayerNameChangeManager(this, playerDB), this);
+        manager.registerEvents(this.playerNameChangeManager = new PlayerNameChangeManager(this, playerDB), this);
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
         manager.registerEvents(new ExploitEvents(this), this);
@@ -1577,5 +1579,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public PlayerLogic getPlayerLogic() {
         return playerLogic;
+    }
+
+    public PlayerNameChangeManager getPlayerNameChangeManager() {
+        return playerNameChangeManager;
     }
 }

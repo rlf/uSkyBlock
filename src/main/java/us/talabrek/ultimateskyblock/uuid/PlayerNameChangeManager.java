@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 /**
  * Responsible for detecting when a player changes name.
@@ -23,15 +24,6 @@ public class PlayerNameChangeManager implements Listener {
     public PlayerNameChangeManager(Plugin plugin, PlayerDB playerDB) {
         this.plugin = plugin;
         this.playerDB = playerDB;
-        for (Player player : plugin.getServer().getOnlinePlayers()) {
-            checkPlayer(player);
-        }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        checkPlayer(player);
     }
 
     @EventHandler(priority = EventPriority.LOW)
@@ -39,11 +31,11 @@ public class PlayerNameChangeManager implements Listener {
         save(event.getPlayer());
     }
 
-    private void checkPlayer(Player player) {
+    public void checkPlayer(Player player, PlayerInfo playerInfo) {
         String oldName = playerDB.getName(player.getUniqueId());
-        if (oldName == null || !oldName.equals(player.getName())) {
+        if (oldName == null || !oldName.equalsIgnoreCase(player.getName())) {
             save(player);
-            plugin.getServer().getPluginManager().callEvent(new PlayerNameChangedEvent(player, oldName));
+            plugin.getServer().getPluginManager().callEvent(new PlayerNameChangedEvent(player, playerInfo, oldName, player.getName()));
         } else {
             save(player);
         }
