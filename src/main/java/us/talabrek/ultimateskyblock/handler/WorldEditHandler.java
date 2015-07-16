@@ -36,8 +36,8 @@ public class WorldEditHandler {
         return (WorldEditPlugin) plugin;
     }
 
-    public static boolean loadIslandSchematic(Player player, final World world, final File file, final Location origin) {
-        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(player, world, file, origin);
+    public static boolean loadIslandSchematic(final World world, final File file, final Location origin) {
+        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(world, file, origin);
     }
 
     /**
@@ -149,7 +149,8 @@ public class WorldEditHandler {
         final Region cube = getRegion(skyWorld, region);
         Set<Vector2D> innerChunks = getInnerChunks(cube);
         WorldRegenTask worldRegenTask = new WorldRegenTask(skyWorld, innerChunks);
-        WorldEditRegenTask worldEditTask = new WorldEditRegenTask(skyWorld, getBorderRegions(cube));
+        Set<Region> borderRegions = getBorderRegions(cube);
+        WorldEditRegenTask worldEditTask = new WorldEditRegenTask(skyWorld, borderRegions);
         uSkyBlock.getInstance().getExecutor().execute(uSkyBlock.getInstance(), new CompositeIncrementalTask(worldEditTask, worldRegenTask), new Runnable() {
             @Override
             public void run() {
