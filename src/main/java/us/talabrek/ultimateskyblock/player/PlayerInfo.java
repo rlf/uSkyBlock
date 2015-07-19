@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock.player;
 
+import com.google.common.base.Preconditions;
+import java.nio.file.Files;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.*;
 import org.bukkit.*;
@@ -8,6 +10,7 @@ import java.util.*;
 
 import org.bukkit.configuration.file.*;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
@@ -38,11 +41,14 @@ public class PlayerInfo implements Serializable {
     private FileConfiguration playerData;
     private File playerConfigFile;
 
-    public PlayerInfo(final String playerName) {
-        this.playerName = playerName;
-        loadPlayer();
+    public PlayerInfo(final String currentPlayerName, final UUID playerUUID) {
+        this.playerName = currentPlayerName;
+        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
+        if (this.playerConfigFile.exists() || !uSkyBlock.getInstance().getPlayerNameChangeManager().hasNameChanged(playerUUID, currentPlayerName)) {
+            loadPlayer();
+        }
     }
-
+    
     public void startNewIsland(final Location l) {
         this.hasIsland = true;
         this.setIslandLocation(l);
@@ -53,8 +59,8 @@ public class PlayerInfo implements Serializable {
         this.hasIsland = false;
         this.setIslandLocation(null);
         this.homeLocation = null;
-        if (uuid != null) {
-            Player player = Bukkit.getPlayer(uuid);
+        if (this.uuid != null) {
+            Player player = Bukkit.getPlayer(this.uuid);
             if (player != null && player.isOnline()) {
                 uSkyBlock.getInstance().spawnTeleport(player);
             }
@@ -108,14 +114,6 @@ public class PlayerInfo implements Serializable {
     public void setJoinParty(final Location l) {
         this.islandLocation = l != null ? l.clone() : null;
         this.hasIsland = true;
-    }
-
-    public void setLeaveParty() {
-        this.islandLocation = null;
-        this.hasIsland = false;
-        if (Bukkit.getPlayer(this.playerName) == null) {
-            getPlayerConfig().set("player.kickWarning", true);
-        }
     }
 
     public void completeChallenge(final String challenge) {
@@ -181,7 +179,6 @@ public class PlayerInfo implements Serializable {
         pSection.set("homeZ", 0);
         pSection.set("homeYaw", 0);
         pSection.set("homePitch", 0);
-        pSection.set("kickWarning", false);
         final Iterator<String> ent = challenges.keySet().iterator();
         while (ent.hasNext()) {
             String currentChallenge = ent.next();
@@ -191,42 +188,55 @@ public class PlayerInfo implements Serializable {
             cSection.set("timesCompletedSinceTimer", challenges.get(currentChallenge).getTimesCompletedSinceTimer());
         }
     }
-
+    
     private PlayerInfo loadPlayer() {
-        log.entering(CN, "loadPlayer:" + this.playerName);
-        FileConfiguration playerConfig = getPlayerConfig();
-        if (!playerConfig.contains("player.hasIsland")) {
-            this.hasIsland = false;
-            this.islandLocation = null;
-            this.homeLocation = null;
-            buildChallengeList();
-            createPlayerConfig();
-            return this;
-        }
+        Player onlinePlayer = getPlayer();
         try {
-            this.displayName = playerConfig.getString("player.displayName", playerName);
-            this.uuid = UUIDUtil.fromString(playerConfig.getString("player.uuid", null));
-            this.hasIsland = playerConfig.getBoolean("player.hasIsland");
-            this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
-                    playerConfig.getInt("player.islandX"), playerConfig.getInt("player.islandY"), playerConfig.getInt("player.islandZ"));
-            this.homeLocation = new Location(uSkyBlock.getSkyBlockWorld(),
-                    playerConfig.getInt("player.homeX") + 0.5, playerConfig.getInt("player.homeY") + 0.2, playerConfig.getInt("player.homeZ") + 0.5,
-                    (float) playerConfig.getDouble("player.homeYaw", 0.0),
-                    (float) playerConfig.getDouble("player.homePitch", 0.0));
-            buildChallengeList();
-            for (String currentChallenge : challenges.keySet()) {
-                challenges.put(currentChallenge, new ChallengeCompletion(currentChallenge, playerConfig.getLong("player.challenges." + currentChallenge + ".firstCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
+            log.entering(CN, "loadPlayer:" + this.playerName);
+            FileConfiguration playerConfig = getPlayerConfig();
+            if (!playerConfig.contains("player.hasIsland")) {
+                this.hasIsland = false;
+                this.islandLocation = null;
+                this.homeLocation = null;
+                buildChallengeList();
+                createPlayerConfig();
+                return this;
             }
-            if (Bukkit.getPlayer(playerName) != null && playerConfig.getBoolean("player.kickWarning")) {
-                Bukkit.getPlayer(playerName).sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
-                playerConfig.set("player.kickWarning", false);
+            try {
+                this.displayName = playerConfig.getString("player.displayName", playerName);
+                this.uuid = UUIDUtil.fromString(playerConfig.getString("player.uuid", null));
+                this.hasIsland = playerConfig.getBoolean("player.hasIsland");
+                this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
+                        playerConfig.getInt("player.islandX"), playerConfig.getInt("player.islandY"), playerConfig.getInt("player.islandZ"));
+                this.homeLocation = new Location(uSkyBlock.getSkyBlockWorld(),
+                        playerConfig.getInt("player.homeX") + 0.5, playerConfig.getInt("player.homeY") + 0.2, playerConfig.getInt("player.homeZ") + 0.5,
+                        (float) playerConfig.getDouble("player.homeYaw", 0.0),
+                        (float) playerConfig.getDouble("player.homePitch", 0.0));
+                
+                IslandInfo loadedIslandInfo = uSkyBlock.getInstance().getIslandInfo(LocationUtil.getIslandName(this.islandLocation));
+                if (loadedIslandInfo == null || !loadedIslandInfo.getMembers().contains(this.playerName)) {
+                    if (onlinePlayer != null && onlinePlayer.isOnline()) {
+                        onlinePlayer.sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
+                    }
+                    
+                    removeFromIsland();
+                }
+                
+                buildChallengeList();
+                for (String currentChallenge : challenges.keySet()) {
+                    challenges.put(currentChallenge, new ChallengeCompletion(currentChallenge, playerConfig.getLong("player.challenges." + currentChallenge + ".firstCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
+                }
+                log.exiting(CN, "loadPlayer");
+                return this;
+            } catch (Exception e) {
+                e.printStackTrace();
+                uSkyBlock.log(Level.INFO, "Returning null while loading, not good!");
+                return null;
             }
-            log.exiting(CN, "loadPlayer");
-            return this;
-        } catch (Exception e) {
-            e.printStackTrace();
-            uSkyBlock.log(Level.INFO, "Returning null while loading, not good!");
-            return null;
+        } finally {
+            if (onlinePlayer != null && onlinePlayer.isOnline()) {
+                updatePlayerInfo(onlinePlayer);
+            }
         }
     }
 
@@ -331,15 +341,27 @@ public class PlayerInfo implements Serializable {
         return uuid;
     }
 
-    public PlayerInfo renameTo(String newName) {
-        File file = new File(playerConfigFile.getParent(), newName + ".yml");
-        if (file.exists()) {
-            file.delete();
+    public synchronized PlayerInfo renameFrom(String oldName) {
+        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
+        
+        // Delete the new file if for some reason it already exists.
+        if (this.playerConfigFile.exists()) {
+            this.playerConfigFile.delete();
         }
-        file = playerConfigFile;
-        playerName = newName;
-        save();
-        file.delete();
+        File oldPlayerFile = new File(this.playerConfigFile.getParent(), oldName + ".yml");
+        if (oldPlayerFile.exists()) {
+            // Copy the old file to the new file.
+            try {
+                Files.move(oldPlayerFile.toPath(), this.playerConfigFile.toPath());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        // Delete the old player file if it still exists.
+        if (oldPlayerFile.exists()) {
+            oldPlayerFile.delete();
+        }
+        loadPlayer();
         return this;
     }
 

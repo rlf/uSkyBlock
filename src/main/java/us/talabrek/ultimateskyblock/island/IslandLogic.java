@@ -21,7 +21,7 @@ import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
-import us.talabrek.ultimateskyblock.uuid.PlayerNameChangedEvent;
+import us.talabrek.ultimateskyblock.uuid.AsyncPlayerNameChangedEvent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,18 +54,37 @@ public class IslandLogic {
     public IslandLogic(uSkyBlock plugin, File directoryIslands) {
         this.plugin = plugin;
         this.directoryIslands = directoryIslands;
-        showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
-        flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
+        this.showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
+        this.flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
-        if (islandName == null || islandName.isEmpty()) {
+        if (islandName == null) {
             return null;
         }
+
         if (!islands.containsKey(islandName)) {
-            islands.put(islandName, new IslandInfo(islandName));
+            IslandInfo islandInfo = new IslandInfo(islandName);
+            if (islandInfo.exists()) {
+                islands.put(islandName, islandInfo);   
+                return islandInfo;
+            }
+            // We don't load the island if the file did not exist.
+            return null;
         }
         return islands.get(islandName);
+    }
+    
+    public synchronized IslandInfo createIslandInfo(String islandName) {
+        IslandInfo islandInfo = getIslandInfo(islandName);
+        if (islandInfo != null) {
+            return islandInfo;
+        }
+        
+        if (!islands.containsKey(islandName)) {
+            islands.put(islandName, islandInfo = new IslandInfo(islandName));
+        }
+        return islandInfo;
     }
 
     public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
@@ -252,7 +271,7 @@ public class IslandLogic {
     }
 
     public synchronized IslandInfo createIsland(String location, String player) {
-        IslandInfo info = getIslandInfo(location);
+        IslandInfo info = createIslandInfo(location);
         info.resetIslandConfig(player);
         return info;
     }
@@ -267,7 +286,7 @@ public class IslandLogic {
         islands.remove(islandName);
     }
 
-    public void renamePlayer(PlayerInfo playerInfo, Runnable completion, PlayerNameChangedEvent change) {
+    public void renamePlayer(PlayerInfo playerInfo, Runnable completion, AsyncPlayerNameChangedEvent change) {
         List<String> islands = new ArrayList<>();
         islands.add(playerInfo.locationForParty());
         islands.addAll(playerInfo.getBannedFrom());
@@ -279,7 +298,7 @@ public class IslandLogic {
         }
     }
 
-    public void renamePlayer(String islandName, PlayerNameChangedEvent e) {
+    public void renamePlayer(String islandName, AsyncPlayerNameChangedEvent e) {
         IslandInfo islandInfo = getIslandInfo(islandName);
         if (islandInfo != null) {
             islandInfo.renamePlayer(e.getPlayer(), e.getOldName());

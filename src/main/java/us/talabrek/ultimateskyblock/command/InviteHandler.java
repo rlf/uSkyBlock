@@ -55,7 +55,6 @@ public class InviteHandler {
                 tr("\u00a7f/island [accept/reject]\u00a7e to accept or reject the invite."),
                 tr("\u00a74WARNING: You will lose your current island if you accept!")
         });
-        final String leaderName = player.getDisplayName();
         int timeout = plugin.getConfig().getInt("options.party.invite-timeout", 100);
         BukkitTask timeoutTask = plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
             @Override
@@ -139,16 +138,12 @@ public class InviteHandler {
 
     public boolean addPlayerToParty(final Player player, final IslandInfo island) {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
-        PlayerInfo leaderInfo = plugin.getPlayerInfo(island.getLeader());
-        playerInfo.setJoinParty(leaderInfo.getIslandLocation());
-        if (playerInfo != leaderInfo) { // Caching is done in sky, this should be safe...
-            if (leaderInfo.getHomeLocation() != null) {
-                playerInfo.setHomeLocation(leaderInfo.getHomeLocation());
-            } else {
-                playerInfo.setHomeLocation(leaderInfo.getIslandLocation());
-            }
-            island.setupPartyMember(player.getName());
+        if (playerInfo == null) {
+            return false;
         }
+        
+        playerInfo.setJoinParty(island.getIslandLocation());
+        island.setupPartyMember(player.getName());
         playerInfo.save();
         island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has joined your island group.", player.getDisplayName()));
         return true;

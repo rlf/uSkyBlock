@@ -60,12 +60,17 @@ public class IslandInfo {
                 config.set("maxSize", null);
                 save();
             }
-        }
-        if (config.getInt("version", 0) < YML_VERSION) {
-            updateConfig();
+
+            if (config.getInt("version", 0) < YML_VERSION) {
+                updateConfig();
+            }
         }
     }
 
+    public boolean exists() {
+        return this.file.exists();
+    }
+    
     private void updateConfig() {
         int currentVersion = config.getInt("version", 0);
         if (currentVersion < 1) {
@@ -423,7 +428,7 @@ public class IslandInfo {
     public void removeMember(PlayerInfo member) {
         WorldGuardHandler.removePlayerFromRegion(name, member.getPlayerName());
         member.setHomeLocation(null);
-        member.setLeaveParty();
+        member.removeFromIsland();
         member.save();
         removeMember(member.getPlayerName());
     }

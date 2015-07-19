@@ -581,7 +581,7 @@ public class SkyBlockMenu {
 
     public Inventory displayIslandGUI(final Player player) {
         Inventory menu = null;
-        if (skyBlock.hasIsland(player.getName())) {
+        if (skyBlock.hasIsland(player)) {
             menu = Bukkit.createInventory(null, 18, tr("\u00a79Island Menu"));
             addMainMenu(menu, player);
         } else {
