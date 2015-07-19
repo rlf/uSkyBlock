@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
+import com.google.common.base.Preconditions;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import java.io.File;
@@ -491,7 +492,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (islandInfo != null) {
             for (String member : new ArrayList<>(islandInfo.getMembers())) {
                 islandInfo.removeMember(member);
-                playerLogic.getPlayerInfo(member).removeFromIsland();
             }
             islandLogic.clearIsland(islandInfo.getIslandLocation(), new Runnable() {
                 @Override
@@ -527,11 +527,19 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void deletePlayerIsland(final String player, final Runnable runner) {
-        final PlayerInfo pi = playerLogic.getPlayerInfo(player);
+        PlayerInfo pi = playerLogic.getPlayerInfo(player);
+        
+        if (pi == null) {
+            if (Bukkit.isPrimaryThread()) {
+                return;
+            }
+            pi = playerLogic.loadPlayerData(Bukkit.getOfflinePlayer(player).getUniqueId(), player);
+        }
+        final PlayerInfo finalPI = pi;
         islandLogic.clearIsland(pi.getIslandLocation(), new Runnable() {
             @Override
             public void run() {
-                postDelete(pi);
+                postDelete(finalPI);
                 if (runner != null) runner.run();
             }
         });
@@ -632,9 +640,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         return null;
     }
-
-    public boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
-        final PlayerInfo pi = playerLogic.getPlayerInfo(player);
+    
+    public synchronized boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
+        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main thread!");
+        
+        PlayerInfo pi = playerLogic.getPlayerInfo(player);
+        if (pi == null) {
+            pi = this.playerLogic.loadPlayerData(Bukkit.getOfflinePlayer(player).getUniqueId(), player);
+        }
+        final PlayerInfo finalPI = pi;
+        
         final Location newLoc = findBedrockLocation(l);
         boolean deleteOldIsland = false;
         if (pi.getHasIsland()) {
@@ -652,13 +667,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             Runnable resetIsland = new Runnable() {
                 @Override
                 public void run() {
-                    pi.setHomeLocation(null);
-                    pi.setHasIsland(true);
-                    pi.setIslandLocation(newLoc);
-                    pi.setHomeLocation(getSafeHomeLocation(pi));
-                    IslandInfo island = islandLogic.createIsland(pi.locationForParty(), player);
+                    finalPI.setHomeLocation(null);
+                    finalPI.setHasIsland(true);
+                    finalPI.setIslandLocation(newLoc);
+                    finalPI.setHomeLocation(getSafeHomeLocation(finalPI));
+                    IslandInfo island = islandLogic.createIsland(finalPI.locationForParty(), player);
                     WorldGuardHandler.updateRegion(sender, island);
-                    pi.save();
+                    finalPI.save();
                 }
             };
             if (deleteOldIsland) {
@@ -753,7 +768,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getLogger().entering(CN, "homeTeleport", player);
         try {
             Location homeSweetHome = null;
-            PlayerInfo playerInfo = playerLogic.getPlayerInfo(player.getName());
+            PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
             if (playerInfo != null) {
                 homeSweetHome = getSafeHomeLocation(playerInfo);
             }
@@ -901,8 +916,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return false;
     }
 
-    public boolean hasIsland(final String playername) {
-        return playerLogic.getPlayerInfo(playername).getHasIsland();
+    public boolean hasIsland(final Player player) {
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        return playerInfo != null && playerInfo.getHasIsland();
     }
 
     public boolean islandAtLocation(final Location loc) {
@@ -945,7 +961,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void unloadPlayerData(Player player) {
-        if (hasIsland(player.getName()) && !hasIslandMembersOnline(player)) {
+        if (hasIsland(player) && !hasIslandMembersOnline(player)) {
             islandLogic.removeIslandFromMemory(getPlayerInfo(player).locationForParty());
         }
         playerLogic.removeActivePlayer(player);
@@ -1268,7 +1284,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     private void setNewPlayerIsland(final PlayerInfo playerInfo, final Location loc) {
         playerInfo.startNewIsland(loc);
-        playerInfo.setHomeLocation(getChestSpawnLoc(loc).add(0.5, 0.1, 0.5));
+        
+        Location chestSpawnLocation = getChestSpawnLoc(loc);
+        if (chestSpawnLocation != null) {
+            playerInfo.setHomeLocation(chestSpawnLocation.add(0.5, 0.1, 0.5));
+        } else {
+            log(Level.SEVERE, "Could not find a safe chest within 30 blocks of the island spawn. Bad schematic!");
+        }
         IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), playerInfo.getPlayerName());
         Player onlinePlayer = playerInfo.getPlayer();
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
@@ -1294,7 +1316,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public IslandInfo getIslandInfo(Player player) {
-        return islandLogic.getIslandInfo(getPlayerInfo(player));
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        return islandLogic.getIslandInfo(playerInfo);
     }
 
     public boolean isPartyLeader(final Player player) {

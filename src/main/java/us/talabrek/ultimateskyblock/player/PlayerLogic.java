@@ -1,7 +1,9 @@
 package us.talabrek.ultimateskyblock.player;
 
+import com.google.common.base.Preconditions;
 import java.util.Map;
 import java.util.Queue;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
@@ -26,53 +28,59 @@ public class PlayerLogic {
         this.plugin = plugin;
     }
 
-    private PlayerInfo loadPlayerInfo(String playerName) {
-        final PlayerInfo playerInfo = new PlayerInfo(playerName);
+    private PlayerInfo loadPlayerInfo(String playerName, UUID playerUUID) {
+        final PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
         activePlayers.put(playerName, playerInfo);
         return playerInfo;
     }
 
-    public PlayerInfo getPlayerInfo(final Player player) {
-        try {
-            locked.add(player.getName());
-            PlayerInfo playerInfo = getPlayerInfo(player.getName());
-            if (playerInfo != null && player.isOnline()) {
-                playerInfo.updatePlayerInfo(player);
-            }
-            return playerInfo;
-        } finally {
-            locked.remove(player.getName());
-        }
+    public PlayerInfo loadPlayerData(Player player) {
+        return loadPlayerData(player.getUniqueId(), player.getName());
     }
 
-    public PlayerInfo getPlayerInfo(String player) {
-        PlayerInfo playerInfo = activePlayers.get(player);
-        if (playerInfo == null && !locked.contains(player)) {
-            playerInfo = loadPlayerInfo(player);
+    public PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {
+        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
+
+        log.log(Level.INFO, "Loading player data for " + playerName);
+
+        PlayerInfo pi = loadPlayerInfo(playerName, playerUUID);
+        
+        // If the online player is null, then it is just a temporary load for commands such as RegisterIslandToPlayer.
+        Player onlinePlayer = Bukkit.getPlayer(playerName);
+        if (onlinePlayer != null && onlinePlayer.isOnline()) {
+            plugin.getPlayerNameChangeManager().checkPlayer(onlinePlayer, pi);
+
+            if (pi.getHasIsland()) {
+                WorldGuardHandler.protectIsland(onlinePlayer, pi);
+                plugin.getIslandLogic().clearFlatland(onlinePlayer, pi.getIslandLocation(), 400);
+                IslandInfo islandInfo = plugin.getIslandInfo(pi);
+                if (islandInfo != null) {
+                    islandInfo.handleMemberLoggedIn(onlinePlayer);
+                }
+            }
+
+            activePlayers.put(playerName, pi);
         }
-        return playerInfo;
+        
+        return pi;
+    }
+
+    public PlayerInfo getPlayerInfo(Player player) {
+        return getPlayerInfo(player.getName());
+    }
+
+    public PlayerInfo getPlayerInfo(String playerName) {
+        return activePlayers.get(playerName);
     }
 
     public boolean isLocked(Player player) {
-        synchronized (locked) {
-            return locked.contains(player.getName());
-        }
+        return isLocked(player.getName());
     }
 
-    public PlayerInfo loadPlayerData(final Player player) {
-        log.log(Level.INFO, "Loading player data for " + player.getName());
-        final PlayerInfo pi = loadPlayerInfo(player.getName());
-        plugin.getPlayerNameChangeManager().checkPlayer(player, pi);
-        if (pi.getHasIsland()) {
-            WorldGuardHandler.protectIsland(player, pi);
-            plugin.getIslandLogic().clearFlatland(player, pi.getIslandLocation(), 400);
-            IslandInfo islandInfo = plugin.getIslandInfo(pi);
-            if (islandInfo != null) {
-                islandInfo.handleMemberLoggedIn(player);
-            }
+    public boolean isLocked(String playerName) {
+        synchronized (locked) {
+            return locked.contains(playerName);
         }
-        activePlayers.put(player.getName(), pi);
-        return pi;
     }
 
     public boolean isActive(Player player) {
@@ -91,26 +99,15 @@ public class PlayerLogic {
         }
     }
 
-    public synchronized PlayerInfo renameTo(PlayerInfo playerInfo, String oldName, String newName) {
-        try {
-            locked.add(oldName);
-            locked.add(newName);
-            playerInfo = playerInfo.renameTo(newName);
-            activePlayers.remove(oldName);
-            activePlayers.put(newName, playerInfo);
-            return playerInfo;
-        } finally {
-            locked.remove(newName);
-            locked.remove(oldName);
-        }
-    }
-
     public void loadPlayerDataAsync(final Player player) {
         locked.add(player.getName());
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
                 try {
+                    if (player == null || !player.isOnline()) {
+                        return;
+                    }
                     loadPlayerData(player);
                 } catch (Exception e) {
                     throw e;

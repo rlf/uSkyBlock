@@ -29,6 +29,6 @@ public enum LocationUtil {;
         if (location == null) {
             return null;
         }
-        return "" + location.getBlockX() + "," + location.getBlockZ();
+        return location.getBlockX() + "," + location.getBlockZ();
     }
 }
