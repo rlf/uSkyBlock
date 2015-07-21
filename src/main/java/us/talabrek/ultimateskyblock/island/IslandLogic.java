@@ -286,15 +286,12 @@ public class IslandLogic {
         islands.remove(islandName);
     }
 
-    public void renamePlayer(PlayerInfo playerInfo, Runnable completion, AsyncPlayerNameChangedEvent change) {
+    public void renamePlayer(PlayerInfo playerInfo, AsyncPlayerNameChangedEvent change) {
         List<String> islands = new ArrayList<>();
         islands.add(playerInfo.locationForParty());
         islands.addAll(playerInfo.getBannedFrom());
         for (String islandName : islands) {
             renamePlayer(islandName, change);
-        }
-        if (completion != null) {
-            completion.run();
         }
     }
 

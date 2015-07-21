@@ -26,6 +26,12 @@ public class PlayerNameChangeManager implements Listener {
         this.plugin = plugin;
         this.playerDB = playerDB;
     }
+    
+    public void shutdown() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            save(player);
+        }
+    }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerQuit(PlayerQuitEvent event) {

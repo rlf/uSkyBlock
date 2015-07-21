@@ -28,12 +28,6 @@ public class PlayerLogic {
         this.plugin = plugin;
     }
 
-    private PlayerInfo loadPlayerInfo(String playerName, UUID playerUUID) {
-        final PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
-        activePlayers.put(playerName, playerInfo);
-        return playerInfo;
-    }
-
     public PlayerInfo loadPlayerData(Player player) {
         return loadPlayerData(player.getUniqueId(), player.getName());
     }
@@ -43,26 +37,23 @@ public class PlayerLogic {
 
         log.log(Level.INFO, "Loading player data for " + playerName);
 
-        PlayerInfo pi = loadPlayerInfo(playerName, playerUUID);
-        
-        // If the online player is null, then it is just a temporary load for commands such as RegisterIslandToPlayer.
+        PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
+
         Player onlinePlayer = Bukkit.getPlayer(playerName);
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
-            plugin.getPlayerNameChangeManager().checkPlayer(onlinePlayer, pi);
+            plugin.getPlayerNameChangeManager().checkPlayer(onlinePlayer, playerInfo);
 
-            if (pi.getHasIsland()) {
-                WorldGuardHandler.protectIsland(onlinePlayer, pi);
-                plugin.getIslandLogic().clearFlatland(onlinePlayer, pi.getIslandLocation(), 400);
-                IslandInfo islandInfo = plugin.getIslandInfo(pi);
+            if (playerInfo.getHasIsland()) {
+                WorldGuardHandler.protectIsland(onlinePlayer, playerInfo);
+                plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
+                IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
                     islandInfo.handleMemberLoggedIn(onlinePlayer);
                 }
             }
-
-            activePlayers.put(playerName, pi);
         }
-        
-        return pi;
+
+        return playerInfo;
     }
 
     public PlayerInfo getPlayerInfo(Player player) {
@@ -70,7 +61,10 @@ public class PlayerLogic {
     }
 
     public PlayerInfo getPlayerInfo(String playerName) {
-        return activePlayers.get(playerName);
+        // Do not return anything if it is converting.
+        if (this.locked.contains(playerName)) return null;
+
+        return this.activePlayers.get(playerName);
     }
 
     public boolean isLocked(Player player) {
@@ -100,7 +94,7 @@ public class PlayerLogic {
     }
 
     public void loadPlayerDataAsync(final Player player) {
-        locked.add(player.getName());
+        this.locked.add(player.getName());
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
@@ -108,11 +102,15 @@ public class PlayerLogic {
                     if (player == null || !player.isOnline()) {
                         return;
                     }
-                    loadPlayerData(player);
-                } catch (Exception e) {
-                    throw e;
+
+                    PlayerInfo loadedInfo = loadPlayerData(player);
+                    if (loadedInfo != null && player != null && player.isOnline()) {
+                        PlayerLogic.this.activePlayers.put(player.getName(), loadedInfo);
+                    }
+                } catch (Exception exception) {
+                    throw exception;
                 } finally {
-                    locked.remove(player.getName());
+                    PlayerLogic.this.locked.remove(player.getName());
 
                     Bukkit.getScheduler().runTask(plugin, new Runnable() {
                         @Override
