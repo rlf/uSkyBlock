@@ -41,11 +41,11 @@ public class PlayerInfo implements Serializable {
     private FileConfiguration playerData;
     private File playerConfigFile;
 
-    public PlayerInfo(final String currentPlayerName, final UUID playerUUID) {
+    public PlayerInfo(String currentPlayerName, UUID playerUUID) {
         this.playerName = currentPlayerName;
-        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
+        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, this.playerName + ".yml");
         if (this.playerConfigFile.exists() || !uSkyBlock.getInstance().getPlayerNameChangeManager().hasNameChanged(playerUUID, currentPlayerName)) {
-            loadPlayer();
+            loadPlayer(true);
         }
     }
     
@@ -189,7 +189,7 @@ public class PlayerInfo implements Serializable {
         }
     }
     
-    private PlayerInfo loadPlayer() {
+    private PlayerInfo loadPlayer(boolean handleIslandRemoval) {
         Player onlinePlayer = getPlayer();
         try {
             log.entering(CN, "loadPlayer:" + this.playerName);
@@ -212,19 +212,14 @@ public class PlayerInfo implements Serializable {
                         playerConfig.getInt("player.homeX") + 0.5, playerConfig.getInt("player.homeY") + 0.2, playerConfig.getInt("player.homeZ") + 0.5,
                         (float) playerConfig.getDouble("player.homeYaw", 0.0),
                         (float) playerConfig.getDouble("player.homePitch", 0.0));
-                
-                IslandInfo loadedIslandInfo = uSkyBlock.getInstance().getIslandInfo(LocationUtil.getIslandName(this.islandLocation));
-                if (loadedIslandInfo == null || !loadedIslandInfo.getMembers().contains(this.playerName)) {
-                    if (onlinePlayer != null && onlinePlayer.isOnline()) {
-                        onlinePlayer.sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
-                    }
-                    
-                    removeFromIsland();
+
+                if (handleIslandRemoval) {
+                    checkIfKickedFromIsland();
                 }
                 
                 buildChallengeList();
                 for (String currentChallenge : challenges.keySet()) {
-                    challenges.put(currentChallenge, new ChallengeCompletion(currentChallenge, playerConfig.getLong("player.challenges." + currentChallenge + ".firstCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
+                    this.challenges.put(currentChallenge, new ChallengeCompletion(currentChallenge, playerConfig.getLong("player.challenges." + currentChallenge + ".firstCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
                 }
                 log.exiting(CN, "loadPlayer");
                 return this;
@@ -240,6 +235,19 @@ public class PlayerInfo implements Serializable {
         }
     }
 
+    private void checkIfKickedFromIsland() {
+        Player onlinePlayer = Bukkit.getPlayer(this.playerName);
+
+        IslandInfo loadedIslandInfo = uSkyBlock.getInstance().getIslandInfo(LocationUtil.getIslandName(this.islandLocation));
+        if (this.hasIsland && loadedIslandInfo != null && !loadedIslandInfo.getMembers().contains(this.playerName)) {
+            if (onlinePlayer != null && onlinePlayer.isOnline()) {
+                onlinePlayer.sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
+            }
+
+            removeFromIsland();
+        }
+    }
+    
     // TODO: 09/12/2014 - R4zorax: All this should be made UUID
     private void reloadPlayerConfig() {
         playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
@@ -341,7 +349,7 @@ public class PlayerInfo implements Serializable {
         return uuid;
     }
 
-    public synchronized PlayerInfo renameFrom(String oldName) {
+    public synchronized void renameFrom(String oldName) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
         
         // Delete the new file if for some reason it already exists.
@@ -361,8 +369,18 @@ public class PlayerInfo implements Serializable {
         if (oldPlayerFile.exists()) {
             oldPlayerFile.delete();
         }
-        loadPlayer();
-        return this;
+
+        // Reload the config.
+        reloadPlayerConfig();
+        
+        // Load the player without checking for island removal.
+        loadPlayer(false);
+    }
+    
+    public synchronized void postRename() {
+        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
+        
+        checkIfKickedFromIsland();
     }
 
     public void banFromIsland(String name) {

@@ -170,18 +170,22 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.purgeActive = false;
     }
 
+    @Override
     public void onDisable() {
         HandlerList.unregisterAll(this);
         Bukkit.getScheduler().cancelTasks(this);
         try {
-            this.unloadPlayerFiles();
-            if (lastIsland != null) {
-                setLastIsland(lastIsland);
+            if (this.lastIsland != null) {
+                setLastIsland(this.lastIsland);
             }
-            skyBlockWorld = null; // Force a reload on config.
+            uSkyBlock.skyBlockWorld = null; // Force a reload on config.
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
+        for (Player player : getServer().getOnlinePlayers()) {
+            unloadPlayerData(player);
+        }
+        this.playerNameChangeManager.shutdown();
         DebugCommand.disableLogging(null);
     }
 
@@ -190,6 +194,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return getFileConfiguration("config.yml");
     }
 
+    @Override
     public void onEnable() {
         skyBlockWorld = null; // Force a re-import or what-ever...
         missingRequirements = null;
@@ -284,15 +289,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public static uSkyBlock getInstance() {
         return uSkyBlock.instance;
-    }
-
-    public void unloadPlayerFiles() {
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if (playerLogic.isActive(player)) {
-                playerLogic.removeActivePlayer(player);
-                notifier.unloadPlayer(player);
-            }
-        }
     }
 
     public void registerEvents(PlayerDB playerDB) {
@@ -961,7 +957,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void unloadPlayerData(Player player) {
-        if (hasIsland(player) && !hasIslandMembersOnline(player)) {
+        if (hasIsland(player) && !hasOtherIslandMembersOnline(player)) {
             islandLogic.removeIslandFromMemory(getPlayerInfo(player).locationForParty());
         }
         playerLogic.removeActivePlayer(player);
@@ -1302,9 +1298,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         playerInfo.save();
     }
 
-    public boolean hasIslandMembersOnline(final Player p) {
-        for (final String member : islandLogic.getIslandInfo(getPlayerInfo(p)).getMembers()) {
-            if (Bukkit.getPlayer(member) != null && !Bukkit.getPlayer(member).isOnline()) {
+    public boolean hasOtherIslandMembersOnline(final Player player) {
+        PlayerInfo playerInfo = getPlayerInfo(player);
+        if (playerInfo == null) return false;
+        IslandInfo islandInfo = islandLogic.getIslandInfo(getPlayerInfo(player));
+        if (islandInfo == null) return false;
+        for (final String member : islandInfo.getMembers()) {
+            if (member.equalsIgnoreCase(player.getName())) {
+                continue;
+            }
+            Player islandMember = Bukkit.getPlayer(member);
+            if (islandMember != null && islandMember.isOnline()) {
                 return true;
             }
         }
