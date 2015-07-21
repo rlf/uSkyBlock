@@ -71,7 +71,7 @@ public class WorldEditRegenTask implements IncrementalTask {
             for (int x = region.getMinimumPoint().getBlockX(); x <= region.getMaximumPoint().getBlockX(); ++x) {
                 for (int y = region.getMinimumPoint().getBlockY(); y <= region.getMaximumPoint().getBlockY(); ++y) {
                     for (int z = region.getMinimumPoint().getBlockZ(); z <= region.getMaximumPoint().getBlockZ(); ++z) {
-                        world.getBlockAt(x, y, x).setTypeIdAndData(0, (byte) 0, false);
+                        world.getBlockAt(x, y, z).setTypeIdAndData(0, (byte) 0, false);
                     }
                 }
             }

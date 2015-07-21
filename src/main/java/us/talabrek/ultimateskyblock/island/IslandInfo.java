@@ -196,7 +196,7 @@ public class IslandInfo {
     public int getMaxPartySize() {
         int maxSize = Settings.general_maxPartySize;
 
-        ConfigurationSection membersSection = config.getConfigurationSection("members");
+        ConfigurationSection membersSection = config.getConfigurationSection("party.members");
         if (membersSection != null) {
             for (String memberName : membersSection.getKeys(false)) {
                 ConfigurationSection memberSection = membersSection.getConfigurationSection(memberName);

@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
+import java.util.ArrayList;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
@@ -13,6 +14,7 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
     private static final byte[] generate = new byte[32768];
     private static final byte[][] blockSections = new byte[16][];
     private static final short[][] extBlockSections = new short[16][];
+    private static final List<BlockPopulator> emptyBlockPopulatorList = new ArrayList<BlockPopulator>();
 
     @Override
     public byte[] generate(World world, Random random, int x, int z) {
@@ -31,7 +33,7 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
 
     @Override
     public List<BlockPopulator> getDefaultPopulators(World world) {
-        return Collections.emptyList();
+        return emptyBlockPopulatorList;
     }
 
     @Override

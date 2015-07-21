@@ -38,7 +38,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new AdminIslandCommand(plugin));
         add(new PurgeCommand(plugin));
         add(new GotoIslandCommand(plugin));
-        add(new AbstractPlayerInfoCommand("info", "usb.admin.info", tr("show player-information")) {
+        add(new AbstractAsyncPlayerInfoCommand("info", "usb.admin.info", tr("show player-information")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo) {
                 sender.sendMessage(playerInfo.toString());
