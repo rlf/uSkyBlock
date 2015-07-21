@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
-import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -25,7 +24,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     public AdminIslandCommand(final uSkyBlock plugin) {
         super("island", "", tr("manage islands"));
         this.plugin = plugin;
-        add(new AbstractIslandInfoCommand("protect", "usb.mod.protect", tr("protects the island")) {
+        add(new AbstractAsyncIslandInfoCommand("protect", "usb.mod.protect", tr("protects the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 protectIsland(sender, islandInfo);
@@ -60,13 +59,13 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 return false;
             }
         });
-        add(new AbstractIslandInfoCommand("remove", "usb.admin.remove", tr("removes the player from the island")) {
+        add(new AbstractAsyncIslandInfoCommand("remove", "usb.admin.remove", tr("removes the player from the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 removePlayerFromIsland(sender, playerInfo, islandInfo);
             }
         });
-        add(new AbstractIslandInfoCommand("info", null, tr("print out info about the island")) {
+        add(new AbstractAsyncIslandInfoCommand("info", null, tr("print out info about the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 sender.sendMessage(islandInfo.toString());
