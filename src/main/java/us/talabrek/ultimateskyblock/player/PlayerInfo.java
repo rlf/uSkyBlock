@@ -56,14 +56,21 @@ public class PlayerInfo implements Serializable {
     }
 
     public void removeFromIsland() {
-        this.hasIsland = false;
-        this.setIslandLocation(null);
-        this.homeLocation = null;
         if (this.uuid != null) {
-            Player player = Bukkit.getPlayer(this.uuid);
-            if (player != null && player.isOnline()) {
-                uSkyBlock.getInstance().spawnTeleport(player);
-            }
+            Player onlinePlayer = Bukkit.getPlayer(this.uuid);
+            if (onlinePlayer != null && onlinePlayer.isOnline()) {
+                this.hasIsland = false;
+                this.setIslandLocation(null);
+                this.homeLocation = null;
+                uSkyBlock.getInstance().clearPlayerInventory(onlinePlayer);
+                uSkyBlock.getInstance().spawnTeleport(onlinePlayer);
+            } 
+            // If the player is not currently online, DO NOT set hasIsland to false.
+            // They will be picked up when they login with checkIfKickedFromIsland().
+        } else {
+            this.hasIsland = false;
+            this.setIslandLocation(null);
+            this.homeLocation = null;
         }
     }
 

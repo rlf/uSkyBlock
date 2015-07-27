@@ -140,7 +140,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private CooldownHandler cooldownHandler;
     private PlayerLogic playerLogic;
 
-    private PlayerNameChangeManager playerNameChangeManager;
+    private PlayerNameChangeManager playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
 
     private Map<String, Biome> validBiomes = new HashMap<String, Biome>() {
         {
@@ -294,7 +294,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public void registerEvents(PlayerDB playerDB) {
         final PluginManager manager = this.getServer().getPluginManager();
         manager.registerEvents(new PlayerNameChangeListener(this), this);
-        manager.registerEvents(this.playerNameChangeManager = new PlayerNameChangeManager(this, playerDB), this);
+        manager.registerEvents(this.playerNameChangeManager, this);
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
         manager.registerEvents(new ExploitEvents(this), this);
