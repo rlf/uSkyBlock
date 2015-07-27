@@ -28,13 +28,24 @@ public class PlayerLogic {
         this.plugin = plugin;
     }
 
+    public PlayerInfo loadPlayerData(String playerName) {
+        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
+        
+        return loadPlayerData((Player) Bukkit.getOfflinePlayer(playerName));
+    }
+
     public PlayerInfo loadPlayerData(Player player) {
+        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
+        
         return loadPlayerData(player.getUniqueId(), player.getName());
     }
 
     public PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
 
+        // Do not return anything if it is loading.
+        if (isLocked(playerName)) return null;
+        
         log.log(Level.INFO, "Loading player data for " + playerName);
 
         PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
@@ -61,8 +72,8 @@ public class PlayerLogic {
     }
 
     public PlayerInfo getPlayerInfo(String playerName) {
-        // Do not return anything if it is converting.
-        if (this.locked.contains(playerName)) return null;
+        // Do not return anything if it is loading.
+        if (isLocked(playerName)) return null;
 
         return this.activePlayers.get(playerName);
     }
