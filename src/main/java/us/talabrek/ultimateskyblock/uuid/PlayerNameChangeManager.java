@@ -45,6 +45,9 @@ public class PlayerNameChangeManager implements Listener {
 
     public void checkPlayer(Player player, PlayerInfo playerInfo) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot be called in the main thread!");
+        Preconditions.checkNotNull(player, "Player cannot be null!");
+        Preconditions.checkState(player.isOnline(), "Player must be online!");
+        Preconditions.checkNotNull(playerInfo, "Player info cannot be null!");
         
         String oldName = playerDB.getName(player.getUniqueId());
         if (hasNameChanged(player.getUniqueId(), player.getName())) {

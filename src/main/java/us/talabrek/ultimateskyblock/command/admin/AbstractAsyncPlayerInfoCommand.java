@@ -4,6 +4,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -28,7 +29,7 @@ public abstract class AbstractAsyncPlayerInfoCommand extends AbstractUSBCommand 
                     if (playerInfo == null) {
                         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
                         if (offlinePlayer != null) {
-                            playerInfo = uSkyBlock.getInstance().getPlayerLogic().loadPlayerData(offlinePlayer.getUniqueId(), playerName);
+                            playerInfo = uSkyBlock.getInstance().getPlayerLogic().loadPlayerData((Player)offlinePlayer);
                         }
                     }
 

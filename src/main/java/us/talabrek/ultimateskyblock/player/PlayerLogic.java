@@ -35,17 +35,20 @@ public class PlayerLogic {
     }
 
     public PlayerInfo loadPlayerData(Player player) {
-        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
-        
         return loadPlayerData(player.getUniqueId(), player.getName());
     }
 
     public PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {
+        return loadPlayerData(playerUUID, playerName, false);
+    }
+    
+    private PlayerInfo loadPlayerData(UUID playerUUID, String playerName, boolean skipIsLockedCheck) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
 
         // Do not return anything if it is loading.
-        if (isLocked(playerName)) return null;
-        
+        // Obey by the skipIsLockedCheck to make sure players joining get loaded.
+        if (!skipIsLockedCheck && isLocked(playerName)) return null;
+
         log.log(Level.INFO, "Loading player data for " + playerName);
 
         PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
@@ -105,23 +108,23 @@ public class PlayerLogic {
     }
 
     public void loadPlayerDataAsync(final Player player) {
-        this.locked.add(player.getName());
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        final String playerName = player.getName();
+        
+        this.locked.add(playerName);
+        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, new Runnable() {
             @Override
             public void run() {
                 try {
-                    if (player == null || !player.isOnline()) {
-                        return;
-                    }
-
-                    PlayerInfo loadedInfo = loadPlayerData(player);
-                    if (loadedInfo != null && player != null && player.isOnline()) {
-                        PlayerLogic.this.activePlayers.put(player.getName(), loadedInfo);
+                    if (player != null && player.isOnline()) {
+                        PlayerInfo loadedInfo = loadPlayerData(player.getUniqueId(), player.getName(), true);
+                        if (loadedInfo != null && player != null && player.isOnline()) {
+                            PlayerLogic.this.activePlayers.put(playerName, loadedInfo);
+                        }
                     }
                 } catch (Exception exception) {
                     throw exception;
                 } finally {
-                    PlayerLogic.this.locked.remove(player.getName());
+                    PlayerLogic.this.locked.remove(playerName);
 
                     Bukkit.getScheduler().runTask(plugin, new Runnable() {
                         @Override
