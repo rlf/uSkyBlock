@@ -140,7 +140,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private CooldownHandler cooldownHandler;
     private PlayerLogic playerLogic;
 
-    private PlayerNameChangeManager playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
+    private PlayerNameChangeManager playerNameChangeManager;
 
     private Map<String, Biome> validBiomes = new HashMap<String, Biome>() {
         {
@@ -1047,7 +1047,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final int pz = loc.getBlockZ();
         for (int x = px - r; x <= px + r; x++) {
             for (int z = pz - r; z <= pz + r; z++) {
-                skyBlockWorld.setBiome(x, z, biome); // World Coords
+                // Set the biome in the world.
+                skyBlockWorld.setBiome(x, z, biome);
+                // Refresh the chunks so players can see it without relogging!
+                skyBlockWorld.refreshChunk(x, z);
             }
         }
     }
@@ -1378,31 +1381,32 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         // Update all of the loaded configs.
         FileUtil.reload();
 
-        playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
-        PlayerUtil.loadConfig(playerDB, getConfig());
-        islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
+        this.playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        PlayerUtil.loadConfig(this.playerDB, getConfig());
+        this.islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
         this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
-        this.menu = new SkyBlockMenu(this, challengeLogic);
+        this.menu = new SkyBlockMenu(this, this.challengeLogic);
         this.levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
-        this.islandLogic = new IslandLogic(this, directoryIslands);
+        this.islandLogic = new IslandLogic(this, this.directoryIslands);
         this.notifier = new PlayerNotifier(getConfig());
         this.playerLogic = new PlayerLogic(this);
-        registerEvents(playerDB);
-        if (autoRecalculateTask != null) {
-            autoRecalculateTask.cancel();
+        this.playerNameChangeManager = new PlayerNameChangeManager(this, this.playerDB);
+        registerEvents(this.playerDB);
+        if (this.autoRecalculateTask != null) {
+            this.autoRecalculateTask.cancel();
         }
         int refreshEveryMinute = getConfig().getInt("options.island.autoRefreshScore", 0);
         if (refreshEveryMinute > 0) {
             int refreshTicks = refreshEveryMinute * 1200; // Ticks per minute
-            autoRecalculateTask = new RecalculateRunnable(this).runTaskTimer(this, refreshTicks, refreshTicks);
+            this.autoRecalculateTask = new RecalculateRunnable(this).runTaskTimer(this, refreshTicks, refreshTicks);
         } else {
-            autoRecalculateTask = null;
+            this.autoRecalculateTask = null;
         }
-        confirmHandler = new ConfirmHandler(this, getConfig().getInt("options.advanced.confirmTimeout", 10));
-        cooldownHandler = new CooldownHandler(this);
-        getCommand("island").setExecutor(new IslandCommand(this, menu));
+        this.confirmHandler = new ConfirmHandler(this, getConfig().getInt("options.advanced.confirmTimeout", 10));
+        this.cooldownHandler = new CooldownHandler(this);
+        getCommand("island").setExecutor(new IslandCommand(this, this.menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
-        getCommand("usb").setExecutor(new AdminCommand(instance));
+        getCommand("usb").setExecutor(new AdminCommand(this.instance));
     }
 
     public boolean isSkyWorld(World world) {
