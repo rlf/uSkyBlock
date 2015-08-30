@@ -29,7 +29,7 @@ public abstract class AbstractAsyncPlayerInfoCommand extends AbstractUSBCommand 
                     if (playerInfo == null) {
                         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
                         if (offlinePlayer != null) {
-                            playerInfo = uSkyBlock.getInstance().getPlayerLogic().loadPlayerData((Player)offlinePlayer);
+                            playerInfo = uSkyBlock.getInstance().getPlayerLogic().loadPlayerData(offlinePlayer);
                         }
                     }
 

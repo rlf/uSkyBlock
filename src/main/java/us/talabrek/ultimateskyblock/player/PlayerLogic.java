@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -30,11 +31,10 @@ public class PlayerLogic {
 
     public PlayerInfo loadPlayerData(String playerName) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
-        
-        return loadPlayerData((Player) Bukkit.getOfflinePlayer(playerName));
+        return loadPlayerData(Bukkit.getOfflinePlayer(playerName));
     }
 
-    public PlayerInfo loadPlayerData(Player player) {
+    public PlayerInfo loadPlayerData(OfflinePlayer player) {
         return loadPlayerData(player.getUniqueId(), player.getName());
     }
 
