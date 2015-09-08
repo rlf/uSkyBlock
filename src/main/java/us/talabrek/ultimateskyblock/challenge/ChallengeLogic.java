@@ -87,6 +87,10 @@ public class ChallengeLogic {
     public boolean completeChallenge(final Player player, final String challengeName) {
         final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         Challenge challenge = getChallenge(challengeName);
+        if (challenge == null) {
+            player.sendMessage(tr("\u00a74No challenge named {0} found", challengeName));
+            return false;
+        }
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (!challenge.getRank().isAvailable(pi) || !pi.challengeExists(challengeName) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));

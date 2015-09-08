@@ -102,6 +102,13 @@ public class Rank {
             if (!missing.isEmpty()) {
                 missing.add("\u00a77to unlock this rank");
             }
+        } else if (defaults.requiresPreviousRank) {
+            if (previousRank != null) {
+                int leeway = previousRank.getLeeway(playerInfo);
+                if (leeway > defaults.rankLeeway) {
+                    missing.add("\u00a77Complete " + (leeway-defaults.rankLeeway) + " more " + previousRank + " challenges");
+                }
+            }
         }
         return missing;
     }

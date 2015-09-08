@@ -103,7 +103,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public void setHomeLocation(final Location l) {
-        this.homeLocation = l != null ? l.clone() : null;
+        this.homeLocation = (l != null ? l.clone() : null);
     }
 
     public Location getHomeLocation() {
