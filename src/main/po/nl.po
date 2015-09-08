@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-30 20:52+0200\n"
+"POT-Creation-Date: 2015-09-08 18:56+0200\n"
 "PO-Revision-Date: 2015-06-08 22:35-0000\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
@@ -1435,7 +1435,7 @@ msgstr ""
 msgid "§cYou were removed from your island since the last time you played!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/player/PlayerLogic.java:137
+#: us/talabrek/ultimateskyblock/player/PlayerLogic.java:139
 msgid ""
 "§cIt seems you logged out in the sky world, however you are not a member of "
 "an island. Teleporting you to spawn."
