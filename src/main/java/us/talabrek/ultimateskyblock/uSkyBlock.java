@@ -54,6 +54,7 @@ import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
+import us.talabrek.ultimateskyblock.command.IslandChatCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
 import us.talabrek.ultimateskyblock.event.ExploitEvents;
@@ -473,7 +474,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         pi.removeFromIsland();
         pi.save();
-        playerLogic.removeActivePlayer(pi);
     }
 
     private void postDelete(final IslandInfo islandInfo) {
@@ -750,11 +750,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 orphaned = new Stack<>();
                 for (int i = 0; i < orphanArray.length; ++i) {
                     final String[] orphanXY = orphanArray[i].split(",");
-                    final Location tempLoc = new Location(
-                            getSkyBlockWorld(), Integer.parseInt(orphanXY[0], 10),
-                            Settings.island_height,
-                            Integer.parseInt(orphanXY[1], 10));
-                    orphaned.push(tempLoc);
+                    if (orphanXY.length == 2) {
+                        final Location tempLoc = new Location(
+                                getSkyBlockWorld(), Integer.parseInt(orphanXY[0].trim(), 10),
+                                Settings.island_height,
+                                Integer.parseInt(orphanXY[1].trim(), 10));
+                        orphaned.push(tempLoc);
+                    }
                 }
             }
         }
@@ -1345,12 +1347,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return menu;
     }
 
-    public static String stripFormatting(String format) {
-        if (format == null || format.trim().isEmpty()) {
-            return "";
-        }
-        return format.replaceAll("(\u00a7|&)[0-9a-fklmor]", "");
-    }
+
 
     public static void log(Level level, String message) {
         log(level, message, null);
@@ -1408,7 +1405,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.cooldownHandler = new CooldownHandler(this);
         getCommand("island").setExecutor(new IslandCommand(this, this.menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
-        getCommand("usb").setExecutor(new AdminCommand(this.instance));
+        getCommand("usb").setExecutor(new AdminCommand(this));
+        getCommand("islandtalk").setExecutor(new IslandChatCommand(this));
     }
 
     public boolean isSkyWorld(World world) {

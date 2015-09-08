@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 // TODO: Move all the texts to resource-files (translatable).
@@ -896,7 +897,7 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 if (event.getCurrentItem().getItemMeta() != null) {
                     String challenge = event.getCurrentItem().getItemMeta().getDisplayName();
-                    String challengeName = uSkyBlock.stripFormatting(challenge);
+                    String challengeName = stripFormatting(challenge);
                     p.performCommand("c c " + challengeName);
                 }
                 p.openInventory(displayChallengeGUI(p, page));

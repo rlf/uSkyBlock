@@ -48,7 +48,7 @@ public class PlayerLogic {
         // Obey by the skipIsLockedCheck to make sure players joining get loaded.
         if (!skipIsLockedCheck && isLocked(playerName)) return null;
 
-        log.log(Level.INFO, "Loading player data for " + playerName);
+        log.log(Level.FINER, "Loading player data for " + playerName);
 
         PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
 
@@ -81,7 +81,9 @@ public class PlayerLogic {
             return activePlayers.get(playerName);
         }
         // Note: We do not put it in the cache on purpose - that is reserved for online players
-        return loadPlayerData(playerName);
+        PlayerInfo playerInfo = loadPlayerData(playerName);
+        activePlayers.put(playerName, playerInfo);
+        return playerInfo;
     }
 
     public boolean isLocked(Player player) {

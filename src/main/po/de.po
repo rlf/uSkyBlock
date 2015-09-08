@@ -2,1425 +2,1524 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+msgid ""
+msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-06 10:57+0100\n"
+"POT-Creation-Date: 2015-09-09 01:19+0200\n"
 "PO-Revision-Date: 2015-06-24 04:55+0100\n"
 "Last-Translator: Notker Taptrevenge@gmail.com\n"
 "Language-Team: DE <LL@li.org>\n"
 "Language: de\n"
-"Plural-Forms: nplurals=2; plural=n!=1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Loco-Source-Locale: de_DE\n"
 "X-Loco-Parser: loco_parse_po\n"
 "X-Loco-Target-Locale: zz_ZZ\n"
 "X-Generator: Poedit 1.8.1\n"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:138
 #, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4Anforderungen werden in {0} Tagen zurückgesetzt."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:141
 #, java-format
 msgid "§4Requirements will reset in {0} hours."
 msgstr "§4Anforderungen werden in {0} Stunden zurückgesetzt."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:144
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Anforderungen werden in {0} Minuten zurückgesetzt."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:149
 msgid "§eThis challenge requires the following:"
 msgstr "§eDiese Aufgabe benötigt das folgende:"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:154
 msgid "§6Item Reward: §a"
 msgstr "§6Gegenstandsbelohnung: §a"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:156
 msgid "§a"
 msgstr "§a"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:159
 #, java-format
 msgid "§6Currency Reward: §a{0}"
 msgstr "§6Währungsbelohnung: §a{0}"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:161
 #, java-format
 msgid "§6Exp Reward: §a{0}"
 msgstr "§6Erfahrungsbelohnung: §a{0}"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/Challenge.java:162
 #, java-format
 msgid "§dTotal times completed: §f{0}"
 msgstr "§dSchon §f{0} mal Abgeschlossen."
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:92
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:91
+#, fuzzy, java-format
+msgid "§4No challenge named {0} found"
+msgstr "§4Keine Aufgabe mit dem Namen {0} wurde Gefunden!"
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:96
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4Diese {0} Aufgarbe kannst du nicht Wiederholen!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:97
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:108
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:101
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:112
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:21
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:24
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:98
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:102
 msgid "§4You don't have enough of the required item(s)!"
 msgstr "§4Du hast nicht genügend von den benötigten Gegenständen!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:104
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:108
 msgid "§4You must be on your island to do that!"
 msgstr "§4Du musst auf deiner Insel sein um das zu tun!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:109
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:113
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
-msgstr "§4Du musst in {0} Blöcke Abstand von den benötigten Gegenständen stehen."
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:115
+msgstr ""
+"§4Du musst in {0} Blöcke Abstand von den benötigten Gegenständen stehen."
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:119
 #, java-format
 msgid "§4Your island must be level {0} to complete this challenge!"
 msgstr "§4Deine Insel muss Stufe {0} haben um die Aufgabe zu beenden!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:153
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:157
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Unbekannte Aufgabe: {0}"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:199
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:203
 #, java-format
 msgid "§eStill the following blocks short: {0}"
 msgstr "§eDir fehlen: {0}"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:251
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:255
 #, java-format
 msgid ""
 "§eStill the following entities short:\n"
 "{0}"
 msgstr "§eDir fehlen: {0}"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:279
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:283
 #, java-format
 msgid "§eYou are the following items short:{0}"
 msgstr "§eDir fehlen:{0}"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:302
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:306
 #, java-format
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aDu hast die {0} Aufgebe beendet!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:338
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:342
 #, java-format
 msgid "§eItem reward(s): §f{0}"
 msgstr "§eGegenstandsbelohnung: §f{0}"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:339
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:343
 #, java-format
 msgid "§eExp reward: §f{0,number,#.#}"
 msgstr "§eErfahnungsbelohnung: §f{0,number,#.#}"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:341
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:345
 #, java-format
 msgid "§eCurrency reward: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
 msgstr "§eWährungsbelohnung: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:359
 msgid "§eYour inventory is §4full§e. Items dropped on the ground."
 msgstr "§eDein Inventar ist §4voll§e. Die Gegenstände fallen auf den Boden!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:383
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:387
 msgid "§e§lClick to complete this challenge."
 msgstr "§e§lKlick hier um die Aufgabe zu beenden!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:385
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:389
 msgid "§4§lYou can't repeat this challenge."
 msgstr "§4§lDu kannst diese Aufgabe nicht wiederholen!"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:441
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:445
 msgid "§fComplete most challenges in"
 msgstr "§fBeende die meisten aufgaben in"
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:442
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:446
 msgid "§fthis rank to unlock the next rank."
 msgstr "§fDiese Stufe um die nächste Stufe Freizuschalten."
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:444
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:448
 msgid "§eClick here to show previous page"
 msgstr "§eKlick hier um zu vorherigen Seite zu gelangen."
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:446
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:450
 msgid "§eClick here to show next page"
 msgstr "§eKlick hier um zur nächsten Seite zu gelangen."
- 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:459
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:463
 msgid "§4§lLocked Challenge"
 msgstr "§4§lGesperrte Aufgabe."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:34
-#: us/talabrek/ultimateskyblock/command/IslandCommand.java:65
 msgid "§4Your island data is being loaded - try again later"
 msgstr "§4Ihre Inseldaten werden geladen - Versuch es Später noch einmal."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:38
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§eAufgabe wurde Deaktiviert. Wende dich an einen Admin."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:43
 #: us/talabrek/ultimateskyblock/command/island/LockUnlockCommand.java:29
 #: us/talabrek/ultimateskyblock/command/island/LockUnlockCommand.java:41
 msgid "§4You don't have access to this command!"
 msgstr "§4Du darfst diesen Befehl nicht ausführen!"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:47
 msgid "§4You can only submit challenges in the skyblock world!"
 msgstr "§4Du kannst nur in der SkyBlock Welt Aufgaben hinzufügen."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:52
 msgid "§4You can only submit challenges when you have an island!"
 msgstr "§4Du kannst nur Aufgaben hinzufügen wenn du eine Insel besitzt."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:62
 msgid "§eUse /c <name> to view information about a challenge."
 msgstr "§eBenutze /c <name> um Informationen über diese Aufgabe zu erhalten."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:63
 msgid "§eUse /c complete <name> to attempt to complete that challenge."
 msgstr "§eBenutze /c complete <name> um die Aufgabe Abzuschliesen."
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:64
 msgid "§eChallenges will have different colors depending on if they are:"
 msgstr "§eAufgaben haben unterschiedliche Farben, abhängig von:"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:71
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr ""
-"§4Du wirst alle Benötigten Gegenstände zerstören wenn du die Aufgabe beendest."
- 
+"§4Du wirst alle Benötigten Gegenstände zerstören wenn du die Aufgabe "
+"beendest."
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:74
 msgid "§4All required items must be placed on your island, within "
 msgstr "§4Alle benötigten Gegenstände musst du auf deiner Insel plazieren in"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:81
 msgid "§4This Challenge is not repeatable!"
 msgstr "§4Diese Aufgabe kannst du nicht wiederholen!"
- 
+
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:92
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Ungültiger Aufgaben Name! Benutze /c help für mehr Informationen."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AbstractIslandInfoCommand.java:42
+
+#: us/talabrek/ultimateskyblock/command/admin/AbstractAsyncIslandInfoCommand.java:42
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eSpieler {0} Hat keine Insel!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AbstractPlayerInfoCommand.java:30
+
+#: us/talabrek/ultimateskyblock/command/admin/AbstractAsyncPlayerInfoCommand.java:41
 #, java-format
 msgid "§eInvalid player {0} supplied."
 msgstr "§eUngültiger Spieler {0} Angegeben!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:23
 msgid "Manage challenges for a player"
 msgstr "Bestimme die Aufgaben für einen Spieler."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:30
 msgid "§4Challenge has already been completed"
 msgstr "§4Aufgabe wurde schon beendet!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:34
 #, java-format
 msgid "§echallenge: {0} has been completed for {1}"
 msgstr "§eAufgabe: {0} Wurde schon {1} mal Abgeschlossen."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:38
 msgid "resets the challenge for the player"
 msgstr "Setzt die Aufgaben für einen Spieler zurück."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:44
 msgid "§4Challenge has never been completed"
 msgstr "§4Aufgabe wurde noch nicht beendet."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:48
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
 msgstr "§eAufgabe: {0} wurde für {1} zurückgesetzt."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:52
 msgid "resets all challenges for the player"
 msgstr "Setzt alle Aufgaben für den Spieler zurück!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:59
 #, java-format
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} Hat alle Aufgaben zurücksetzen lassen."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:94
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Keine Aufgabe mit dem Namen {0} wurde Gefunden!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AdminChallengeCommand.java:97
 #, java-format
 msgid "§4No player named {0} was found!"
 msgstr "§4Kein Spieler mit dem Namen {0} wurde Gefunden!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:26
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:25
 msgid "manage islands"
 msgstr "Bearbeite die Inseln"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:28
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:27
 msgid "protects the island"
 msgstr "Sichere die Inseln ab"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:34
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:33
 msgid "delete the island (removes the blocks)"
 msgstr "Lösche eine Insel (Entfernt auch die Blöcke)"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:51
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:50
 msgid "§9Deleted abandoned island at your current location."
 msgstr "§9Löscht Verlassene Insel an ihrer aktuellen Position"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:56
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:55
 msgid ""
 "§4Island at this location has members!\n"
 "§eUse §9/usb island delete <name>§e to delete it."
 msgstr ""
 "§4Die Insel an ihrem Standort hat Mitglieder!\n"
 "§eBenutze §9/usb island delete <name>§e Um die Insel zu Löschen."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:63
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:62
 msgid "removes the player from the island"
 msgstr "Entfernt Spieler von der Insel."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:69
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:68
 msgid "print out info about the island"
 msgstr "Zeige Informationen zu der Insel."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:75
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:74
 msgid "protects all islands (time consuming)"
 msgstr "Schützt alle Inseln (Zeitaufwändig)"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:82
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:81
 msgid "sets the biome of the island"
 msgstr "Setzt das Biome einer Insel"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:88
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:138
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:87
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:137
 msgid "§4That player has no island."
 msgstr "§4Dieser Spieler hat keine Insel."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:101
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:100
 msgid "§4No valid island at your location"
 msgstr "§4Keine Gültige Insel an ihrer Position."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:116
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:115
 msgid "§4No valid player-name supplied."
 msgstr "§4Kein Gültiger Spielername angegeben."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:119
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:118
 #, java-format
 msgid "Removing {0} from island"
 msgstr "Entferne {0} von der Insel."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:128
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:127
 #, java-format
 msgid "§eChanged biome of {0}s island to {1}."
 msgstr "§eWechsle das Biome von {0}s Insel, zu {1}."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:131
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:130
 #, java-format
 msgid "§eChanged biome of {0}s island to OCEAN."
 msgstr "§eWechsle das Biome von {0}s Insel zu OZEAN."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:133
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:148
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:42
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:47
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:132
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:147
+#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
 msgstr ""
-"§aDu musst eventuell zum Spawn gehen, oder dich neu einloggen um die Aufgaben zu "
-"sehen."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:143
+"§aDu musst eventuell zum Spawn gehen, oder dich neu einloggen um die "
+"Aufgaben zu sehen."
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:142
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
 msgstr "§e{0} Hat ihr Biome geändert zu {1}."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:146
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:145
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} Hat ihr Biome geändert zu OZEAN."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:154
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:153
 msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr "§4Sorry!§e Der Befehl ALLES-SCHÜTZEN läuft bereits. Warte bis er Fertig ist!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:159
+msgstr ""
+"§4Sorry!§e Der Befehl ALLES-SCHÜTZEN läuft bereits. Warte bis er Fertig ist!"
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:158
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr "§eStarte ALLES-SCHÜTZEN. Das wird jetzt etwas dauern..."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:165
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:164
 #, java-format
 msgid "§eRemoving {0}'s island."
 msgstr "§eEntferne {0}'s Insel."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:168
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:167
 msgid "Error: That player does not have an island!"
 msgstr "Fehler: Dieser Spieler hat keine Insel!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:174
-#, java-format
-msgid "§e{0}'s island at {1} has been protected"
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:173
+#, fuzzy, java-format
+msgid "§e{0}s island at {1} has been protected"
 msgstr "§e{0}'s Insel bei {1} wurde Geschützt."
- 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:176
-#, java-format
-msgid "§4{0}'s island at {1} was already protected"
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:175
+#, fuzzy, java-format
+msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}'s Insel bei {1} ist bereits Geschützt."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:24
 msgid "controls the currently running async tasks"
 msgstr "Kontrolliert die laufenden async Aufgaben."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:25
 msgid "lists currently running tasks"
 msgstr "Listet die aktuell laufenden Aufgaben."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:34
 msgid "§cNo running tasks"
 msgstr "§cKeine laufenden Aufgaben."
- 
+
 # ???
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:40
-#, c-format
 msgid "§e[%2d]§7: %s\n"
 msgstr "§e[%2d]§7: %s\n"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:47
 msgid "cancels the task with the given number."
 msgstr "Beendet die Aufgabe mit der gegebenen Nummer."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:53
 msgid "§4Could not cancel "
 msgstr "§4Kann nicht beendet werden."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:80
 msgid "§4A valid number must be supplied as task-id."
 msgstr "§4Eine gültige Nummer muss einegegeben werden als Aufgaben-Id."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:85
 msgid "§4No tasks detected.§e Try §b/usb async list§e first."
 msgstr "§4Keine Aufgabe gefunden.§e Versuche §b/usb async list§e als erstes."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/AsyncCommand.java:93
 msgid "§4A number between 1 and "
 msgstr "§4Eine Zahl zwischen 1 und "
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:26
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:27
 msgid "Controls player-cooldowns"
 msgstr "Kontrolliert Spieler-Abklingzeiten"
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:27
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:28
 msgid "clears the cooldown on a command (* = all)"
 msgstr "Löscht die Abklingzeit von einem Befehl (* = alle)"
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:31
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:32
 msgid "The player is not currently online"
 msgstr "Der Spieler ist Gegenwärtig nicht Online."
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:37
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:38
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
 msgstr "Abklingzeit von {0} für {1} gelöscht."
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:39
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:40
 #, java-format
 msgid "No active cooldown on {0} for {1} detected!"
 msgstr "Keine aktive Abklingzeit bei {0} für {1} gefunden!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:43
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:62
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:44
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:63
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Ungültiger Befehl! Nur Neustart und Biome werden unterstützt!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:48
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:49
 msgid "resets the cooldown on the command"
 msgstr "Setzt die Abklingzeit für den Befehl zurück."
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:52
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:53
 msgid "§eThe player is not currently online"
 msgstr "§eDer Spieler ist im moment nicht Online."
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:59
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:60
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
 msgstr "§eSetzt die Abklingzeit von {0} für {1}§e, zu {2} Sekunden"
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:67
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:68
 msgid "lists all the active cooldowns"
 msgstr "Zeige alle aktiven Abklingzeiten"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:75
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:76
 msgid "§eCmd Cooldown"
 msgstr "§eCmd Cooldown"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:77
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:78
 #, java-format
 msgid "§a{0} §c{1}"
 msgstr "§a{0} §c{1}"
- 
-#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:80
+
+#: us/talabrek/ultimateskyblock/command/admin/CooldownCommand.java:81
 #, java-format
 msgid "§eNo active cooldowns for §9{0}§e found."
 msgstr "§eKeine Aktiven abklingzeiten von §9{0}§e gefunden."
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:32
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:33
 msgid "control debugging"
 msgstr "Steuert Fehlererprüfung"
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:33
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:34
 msgid "set debug-level"
 msgstr "Setzt FehlerPrüfungs-Level"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:43
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:44
 msgid "toggle debug-logging"
 msgstr "toggle debug-logging"
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:51
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:52
 msgid "§4Logging wasn't active, so you can't disable it!"
 msgstr "§4Aufzeichnen ist nicht Aktiv, deshalb kannst du es nicht ausschalten!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:56
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:57
 msgid "flush current content of the logger to file."
 msgstr "Speichert gerade die Aufzeichnungen."
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:61
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:62
 msgid "§eLog-file has been flushed."
 msgstr "§eLog-Datei wurde geleert."
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:63
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:64
 msgid "§4Logging is not enabled, use §d/usb debug enable"
 msgstr "§4Aufzeichnen ist nicht Aktiv, benutze §d/usb debug enable"
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:82
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:83
 msgid "§4Invalid argument, try INFO, FINE, FINER, FINEST"
 msgstr "§4Ungültiges Agumentt, Versuche: INFO, FINE, FINER, FINEST"
- 
-#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:92
+
+#: us/talabrek/ultimateskyblock/command/admin/DebugCommand.java:93
 msgid "§eLogging disabled!"
 msgstr "§eAufzeichnen Ausgeschaltet!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/FlatlandFixCommand.java:24
 msgid "tries to fix the the area of flatland."
 msgstr "Versucht das Flachland zu Reparieren."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/FlatlandFixCommand.java:44
 msgid "§4No valid island found"
 msgstr "§4Keine gültige Insel gefunden"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/FlatlandFixCommand.java:52
 #, java-format
 msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4Kein Flachlang gefunden an {0}'s Insel!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/GenTopTenCommand.java:18
 msgid "manually update the top 10 list"
 msgstr "Aktualisiere manuell die 10 Besten Liste!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/GenTopTenCommand.java:24
 msgid "§eGenerating the Top Ten list"
 msgstr "§eErstellt die 10 Besten liste"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/GenTopTenCommand.java:30
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eDie 10 Bestel Liste erfolgreich erstellt"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:18
 msgid "Teleport to another players island"
 msgstr "Teleportiert zu einer anderen Spieler insel."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:25
 msgid "§4Only supported for players"
 msgstr "§4Nur für Spieler unterstützt"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:29
-#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:34
+#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:50
 #, java-format
 msgid "§aTeleporting to {0}'s island."
 msgstr "§aTeleportiert zu {0}'s Insel."
- 
-#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:38
+
+#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:61
 msgid "§4That player does not have an island!"
 msgstr "§4Dieser Spieler besitzt keine Insel!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/ImportCommand.java:21
 msgid "imports players and islands from other formats"
 msgstr "Importiere Sieler und Inseln aus anderen Formaten"
- 
-#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:22
+
+#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:21
 msgid "transfer leadership to another player"
 msgstr "Übergib die Führung an einen anderen Spieler"
- 
-#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:34
-#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:39
+
+#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:44
+#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:49
 #, java-format
 msgid "§4Player {0} has no island to transfer!"
 msgstr "§4Spieler {0} Hat keine Insel zum Übertragen!"
- 
-#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:43
+
+#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:53
 #, java-format
 msgid ""
-"§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e to "
-"remove him first."
+"§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
+"to remove him first."
 msgstr ""
-"§eSpieler §d{0}§e hat bereits eine Insel.§eBenutze §d/usb island remove <name>§e "
-"um ihn zuerst zu entfernen."
- 
-#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:54
+"§eSpieler §d{0}§e hat bereits eine Insel.§eBenutze §d/usb island remove "
+"<name>§e um ihn zuerst zu entfernen."
+
+#: us/talabrek/ultimateskyblock/command/admin/MakeLeaderCommand.java:64
 #: us/talabrek/ultimateskyblock/command/island/MakeLeaderCommand.java:38
 #, java-format
 msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§bFührung übergeben von {0}§b an {1}"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:18
 msgid "manage orphans"
 msgstr "Handhabe Waise"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:19
 msgid "count orphans"
 msgstr "Zähle Waise"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:22
 #, java-format
 msgid "§e{0} old island locations will be used before new ones."
 msgstr "§e{0} Alte Inselstandorte werden von neuen benutzt."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:26
 msgid "clear orphans"
 msgstr "Lösche Waise"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:29
 msgid "§eClearing all old (empty) island locations."
 msgstr "§eLösche alle alten (Leeren) Insel Standorte."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:34
 msgid "save orphans"
 msgstr "Speichere Waise"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:37
 msgid "§eSaving the orphan list."
 msgstr "§eSpeicher die Waisen Liste."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:42
 msgid "list orphans"
 msgstr "Zeige Waise"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:47
 #, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eWaise: {0}"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/PurgeCommand.java:29
 msgid "purges all abandoned islands"
 msgstr "Löscht alle verlassenen Inseln"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/PurgeCommand.java:36
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Die Säuberung läuft bereits, warte Bitte bis diese zu ende ist."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/PurgeCommand.java:40
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Du musst die Zeit für die Säuberung in Tagen angeben!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/PurgeCommand.java:45
 #, java-format
 msgid "§eMarking all islands inactive for more than {0} days."
 msgstr "§eSetze alle Inseln für {0} Tage inaktive."
- 
-#: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:17
+
+#: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:18
 msgid "set a player's island to your location"
 msgstr "Setze die Insel eines Spielers an deine Position"
- 
-#: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:30
+
+#: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:34
 #, java-format
 msgid "§aSet {0}'s island to the bedrock nearest you."
 msgstr "§aSetzte {0}'s Insel auf das  Grundgestein in deiner nähe."
- 
-#: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:32
+
+#: us/talabrek/ultimateskyblock/command/admin/RegisterIslandToPlayerCommand.java:36
 msgid "§4Bedrock not found: unable to set the island!"
 msgstr "§4Grundgestein nicht gefunden: Nicht möglich die Insel zu setzen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/ReloadCommand.java:17
 msgid "reload configuration from file."
 msgstr "Lade die Einstellungen von einer Datei."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/ReloadCommand.java:23
 msgid "§eConfiguration reloaded from file."
 msgstr "§eEInstellungen geladen von der Datei."
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/VersionCommand.java:20
 msgid "displays version information"
 msgstr "Zeige Versions Informationen"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:21
 msgid "various WorldGuard utilities"
 msgstr "Verschiedene WeltSchutz Vorrichtungen"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:23
 msgid "refreshes the chunks around the player"
 msgstr "Aktualisiere die Chunks um den Spieler"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:27
 msgid "§eResending chunks to the client"
 msgstr "§eChunks werden erneut zum Client gesendet"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:31
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:39
 msgid "load the region chunks"
 msgstr "Lade die Regionalen Chunks"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:35
 #, java-format
 msgid "§eLoading chunks at {0}"
 msgstr "§eLade chunks bei {0}"
- 
+
 #: us/talabrek/ultimateskyblock/command/admin/WGCommand.java:43
 #, java-format
 msgid "§eUnloading chunks at {0}"
 msgstr "§eEntlade chunks bei {0}"
- 
+
 #: us/talabrek/ultimateskyblock/command/AdminCommand.java:21
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimativer SkyBlock Anführer"
- 
+
 #: us/talabrek/ultimateskyblock/command/AdminCommand.java:41
 msgid "show player-information"
 msgstr "Zeige Spieler Informationen"
- 
+
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:36
 msgid ""
-"§4Your island is full, or you have too many pending invites. You can't invite "
-"anyone else."
+"§4Your island is full, or you have too many pending invites. You can't "
+"invite anyone else."
 msgstr ""
-"§4Deine Insel ist Voll, oder du hast zu viele laufende einladungen. Du kannst "
-"keinen mehr einladen."
- 
+"§4Deine Insel ist Voll, oder du hast zu viele laufende einladungen. Du "
+"kannst keinen mehr einladen."
+
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:42
 msgid "§4That player is already leader on another island."
 msgstr "§4Dieser Spiler ist Bereitz Anführer einer anderen Insel."
- 
+
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:43
 #, java-format
 msgid "§e{0}§e tried to invite you, but you are already in a party."
-msgstr "§e{0}§e hat versucht dich einzuladen, aber du bist bereits in deiner gruppe."
- 
+msgstr ""
+"§e{0}§e hat versucht dich einzuladen, aber du bist bereits in deiner gruppe."
+
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:54
 #, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e Hat dich eingeladen auf seiner Insel zu Leben!"
- 
+
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:55
 msgid "§f/island [accept/reject]§e to accept or reject the invite."
-msgstr "§f/island [accept/reject]§e um die Einladung zu Bestätigen oder Abzulehnen."
- 
+msgstr ""
+"§f/island [accept/reject]§e um die Einladung zu Bestätigen oder Abzulehnen."
+
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:56
 msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4WARNUNG: Du verlierst diene Insel wenn du Bestätigst!"
- 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:78
+
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:77
 #, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e Hat diene Einladung Abgelehnt."
- 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:92
+
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:91
 msgid "§4You can't use that command right now. Leave your current party first."
 msgstr ""
-"§4Du kannst diesen Befehl im Moment nicht nutzen. Verlasse zuerst deine Gruppe."
- 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:112
-msgid "§aYou have joined an island! Use /island party to see the other members."
+"§4Du kannst diesen Befehl im Moment nicht nutzen. Verlasse zuerst deine "
+"Gruppe."
+
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:113
+msgid ""
+"§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
-"§aDu bist einer Inselgruppe beigetreten. Benutze /island party um die anderen "
-"Mitglieder zu sehen."
- 
+"§aDu bist einer Inselgruppe beigetreten. Benutze /island party um die "
+"anderen Mitglieder zu sehen."
+
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:147
 #, java-format
 msgid "§b{0}§d has joined your island group."
 msgstr "§b{0}§d ist deiner Inselgruppe Beigetreten."
- 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:168
+
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:172
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."
-msgstr "§eDie Einladung für {0}§e wurde Abgebrochen oder hat zu lange Gedauert."
- 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:172
+msgstr ""
+"§eDie Einladung für {0}§e wurde Abgebrochen oder hat zu lange Gedauert."
+
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:176
 #, java-format
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr ""
 "§eDie Einladung für {0}'s Insel wurde Abgebrochen oder hat zu lange Gedauert."
- 
-#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:14
+
+#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:16
 msgid "accept/reject an invitation."
 msgstr "An/-ablehnen eine Einladung."
- 
-#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:22
+
+#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:24
 msgid "§eYou have rejected the invitation to join an island."
 msgstr "§eDu hast die Einladung einer Insel beizutreten abgelehnt."
- 
-#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:24
-#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:30
+
+#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:26
+#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:32
 msgid "§4You haven't been invited."
 msgstr "§4Du wurdest nicht eingeladen."
- 
-#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:28
+
+#: us/talabrek/ultimateskyblock/command/island/AcceptRejectCommand.java:30
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eDu hast die Inseleinladung angenommen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:14
 msgid "ban/unban a player from your island."
 msgstr "Banne/Entbanne Spieler von deiner Insel."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:20
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eDie folgenden Spieler dürfen sich nicht auf deine insel Warpen:"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:22
 msgid "§eTo ban/unban from your island, use /island ban <player>"
 msgstr ""
-"§eUm einen Spieler von deiner Insel zu Bannen/Entbannen nutze: /island ban <player>"
- 
+"§eUm einen Spieler von deiner Insel zu Bannen/Entbannen nutze: /island ban "
+"<player>"
+
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:27
 msgid "§4You can't ban members. Remove them first!"
 msgstr "§4Du kannst keine Mitglieder Bannen. Entferne Sie zuerst!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:31
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Du hast nicht die Rechte dazu andere zu Kicken/Bannen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:36
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr ""
-"§eDu hast §4{0}§e Verbannt. Diese(r) kann sich nicht mehr auf deine Insel warpen."
- 
+"§eDu hast §4{0}§e Verbannt. Diese(r) kann sich nicht mehr auf deine Insel "
+"warpen."
+
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:39
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr ""
 "§eDu hast §4{0}§e Entbannt. Diese(r) kann sich wieder auf deine Insel warpen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:18
 msgid "change the biome of the island"
 msgstr "Ändere das Biome der Insel"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:26
-msgid "§cYou do not have permission to change the biome of your current island."
+msgid ""
+"§cYou do not have permission to change the biome of your current island."
 msgstr ""
-"§cDu verfügst nicht über die rechte von deiner aktuellen Insel das Biome zu ändern."
- 
+"§cDu verfügst nicht über die rechte von deiner aktuellen Insel das Biome zu "
+"ändern."
+
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:36
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eDu kannst in {0,number,#} Minuten das Biome wieder ändern."
- 
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:41
+
+#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:42
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§aDu hast das Insebiome zu {0} gewechselt"
- 
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
+
+#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:44
 #, java-format
 msgid "{0} changed the island biome to {1}"
 msgstr "{0} Wechselt das Inselbiom zu {1}"
- 
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:46
-msgid "§aYou have misspelled the biome name, changing your biome to OCEAN"
-msgstr "§aDu hast einen ungültigen Biomenamen eingegeben. Ändert das Biome zu OZEAN"
- 
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:48
-#, java-format
-msgid "{0} changed the island biome to OCEAN"
-msgstr "{0} Wechselt das Inselbiome zu OZEAN"
- 
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:51
+
+#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:47
+#, fuzzy
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§4Du hast nicht die Rechte um das Biome der Insel zu ändern!"
+
+#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:50
+#, fuzzy
+msgid "§cYou have misspelled the biome name."
+msgstr ""
+"§aDu hast einen ungültigen Biomenamen eingegeben. Ändert das Biome zu OZEAN"
+
+#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:53
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§eDu musst auf deiner Insel sein um das Biome zu ändern."
- 
-#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:54
+
+#: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:56
 msgid "§4You do not have permission to change the biome of this island!"
 msgstr "§4Du hast nicht die Rechte um das Biome der Insel zu ändern!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:17
 msgid "create an island"
 msgstr "Erstelle eine Insel"
- 
-#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:30
-msgid ""
-"§4Island found!§e You already have an island. If you want a fresh island, type§b /"
-"is restart§e to get one"
+
+#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:27
+msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
-"§4Insel gefunden!§e Du besitzt bereits eine Insel. Willst du neu starten, gib§b /"
-"is restart§e ein für eine neue."
- 
-#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:34
+
+#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:31
+msgid "§cYour island is in the process of restarting, you cannot create now."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:38
+msgid ""
+"§4Island found!§e You already have an island. If you want a fresh island, "
+"type§b /is restart§e to get one"
+msgstr ""
+"§4Insel gefunden!§e Du besitzt bereits eine Insel. Willst du neu starten, "
+"gib§b /is restart§e ein für eine neue."
+
+#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:42
 msgid ""
 "§4Island found!§e You are already a member of an island. To start your own, "
 "first§b /is leave"
 msgstr ""
-"§4Insel gefunden!§e Du bist Mitglied auf einr Insel. Um deine eigene zu starten "
-"gib§b /is leave§e ein."
- 
-#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:39
+"§4Insel gefunden!§e Du bist Mitglied auf einr Insel. Um deine eigene zu "
+"starten gib§b /is leave§e ein."
+
+#: us/talabrek/ultimateskyblock/command/island/CreateCommand.java:47
 #, java-format
 msgid "§eYou can create a new island in {0,number,#} seconds."
 msgstr "§eDu kannst in {0,number,#} Sekunden eine Neue Insel erstellen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/HomeCommand.java:14
 msgid "teleport to the island home"
 msgstr "Teleportiert zum Insel Zuhause"
- 
+
+#: us/talabrek/ultimateskyblock/command/island/HomeCommand.java:20
+msgid ""
+"§cYour island is in the process of generating, you cannot teleport home "
+"right now."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/HomeCommand.java:24
+msgid ""
+"§cYour island is in the process of restarting, you cannot teleport home "
+"right now."
+msgstr ""
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:20
 msgid "check your or anothers island info"
 msgstr "Prüfe deine oder die Inseldaten eines anderen Spielers"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:26
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:26
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Insel Level wurde Deaktiviert, kontaktiere einen Administrator."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:31
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:31
 msgid "§eYou must be on your island to use this command."
 msgstr "§eDu musst auf deiner Insel sein um den Befehl nutzen zu können."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:35
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:35
 msgid "§4You do not have an island!"
 msgstr "§4Du hast keine Insel!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:44
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:44
 msgid "§4You do not have access to that command!"
 msgstr "§4Du hast keinen Zugriff auf diesen Befehl!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:54
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:54
 msgid "§4That player is invalid or does not have an island!"
 msgstr "§4Diser Spieler ist Ungültig oder hat keine Insel!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:71
 #, java-format
 msgid "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
 msgstr "§eBlöcke von {0}s Insel (Seite {1,number} von {2,number}):"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InfoCommand.java:73
 msgid "Score Count Block"
 msgstr "Wert der Gezählten Blöcke"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:19
 msgid "invite a player to your island"
 msgstr "Läd einen Anderen Spieler auf deine Insel ein."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:26
-msgid "§eUse§f /island invite <playername>§e to invite a player to your island."
+msgid ""
+"§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr ""
 "§eBenutze§f /island invite <playername>§eUm einen Spieler auf deine Insel "
 "einzuladen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:31
 msgid "§4Only the island's owner can invite!"
 msgstr "§4Nur der Inselbesitzer kann andere einladen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:36
 #, java-format
 msgid "§aYou can invite {0} more players."
 msgstr "§aDu kannst noch {0} Spieler einladen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:38
 msgid "§4You can't invite any more players."
 msgstr "§4Du kannst keine weiteren Spieler einladen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:44
 msgid "§4You do not have permission to invite others to this island!"
 msgstr "§4Du hast keine Rechte andere auf deine Insel einzuladen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:48
 msgid "§4That player is offline or doesn't exist."
-msgstr "§4Dieser Spiler ist entwerder Offline oder existiert nur in deiner Fantasie."
- 
+msgstr ""
+"§4Dieser Spiler ist entwerder Offline oder existiert nur in deiner Fantasie."
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:52
 msgid "§4You can't invite yourself!"
 msgstr "§4Du kannst dich selber nicht Einladen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:56
 msgid "§4That player is the leader of your island!"
 msgstr "§4Dieser Spieler ist der Anfüher auf deiner Insel!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/InviteCommand.java:60
 #, java-format
 msgid "{0}§d invited {1}"
 msgstr "{0}§d Eingeladen {1}"
- 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:17
+
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:15
 msgid "remove a member from your island."
 msgstr "Entferne einen Spieler von deiner Insel."
- 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:24
+
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:25
 msgid "§4You do not have permission to kick others from this island!"
-msgstr "§4Du hast nicht die Rechte dazu andere Spieler von der Insel zu werfen!"
- 
+msgstr ""
+"§4Du hast nicht die Rechte dazu andere Spieler von der Insel zu werfen!"
+
 #: us/talabrek/ultimateskyblock/command/island/KickCommand.java:30
-msgid "§4That player doesn't exist."
-msgstr "§4Dieser Spieler existiert nicht!"
- 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:34
 msgid "§4You can't remove the leader from the Island!"
 msgstr "§4Du kannst den Anführer der Insel nicht entfernen!"
- 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:38
+
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:34
 msgid "§4Stop kickin' yourself!"
 msgstr "§4Hör auf dich selber raus zu werfen!"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:44
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:54
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:48
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:57
 msgid "§4"
 msgstr "§4"
- 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:48
+
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:51
 #, java-format
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} wurde von der Insel entfernt."
- 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:55
+
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:58
 #, java-format
 msgid "§4{0} has been kicked from the island."
 msgstr "§4{0} wurde von der insel geschmissen."
- 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:57
+
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:60
 msgid "§4That player is not part of your island group, and not on your island!"
-msgstr "§4Dieser Spieler ist nicht in deiner Inselgruppe , und auf deiner Insel!"
- 
+msgstr ""
+"§4Dieser Spieler ist nicht in deiner Inselgruppe , und auf deiner Insel!"
+
 #: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:21
 msgid "leave your party"
 msgstr "Verlasse deine Gruppe"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:28
 msgid ""
 "§4You can't leave your island if you are the only person. Try using /island "
 "restart if you want a new one!"
 msgstr ""
-"§4Du kannst deine Insel nicht Verlassen wenn du die einzige Person auf der Insel "
-"bist. Versuche /island restart falls du eine neue Insel möchtest."
- 
+"§4Du kannst deine Insel nicht Verlassen wenn du die einzige Person auf der "
+"Insel bist. Versuche /island restart falls du eine neue Insel möchtest."
+
 #: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:32
 msgid "§eYou own this island, use /island remove <player> instead."
 msgstr "§eDir gehört die Insel, benutze anstelle /island remove <player>."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:42
 msgid "§eYou have left the island and returned to the player spawn."
 msgstr "§eDu hast die Insel verlassen und kommst zurück zum Spieler Spawn."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:44
 #, java-format
 msgid "§4{0} has left your island!"
 msgstr "§4{0} Hat deine Insel Verlassen."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:48
 msgid "§4You must be in the skyblock world to leave your party!"
 msgstr "§4Du musst in der SkyBlock Welt sein um die Gruppe zu verlassen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:20
 msgid "check your or anothers island level"
 msgstr "Zeige die Stufe deiner oder einer anderen Insel"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:63
 msgid "§eInformation about "
 msgstr "$eInfotmationen über"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:67
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
 msgstr "§aInsel Stufe ist {0,number,###.##}"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:68
 #, java-format
 msgid "§9Rank is {0}"
 msgstr "§9Stufe ist {0}"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LockUnlockCommand.java:16
 msgid "lock your island to non-party members."
 msgstr "Sperrt deine Insel für nicht Mitglieder."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LockUnlockCommand.java:26
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4Du hast nicht die Rechte um die Insel zu Sperren!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LockUnlockCommand.java:38
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Du hast nicht die Rechte um die Insel zu Entsperren!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/LogCommand.java:17
 msgid "display log"
 msgstr "Zeige log"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/MakeLeaderCommand.java:15
 msgid "transfer leadership to another member"
 msgstr "Übertrage die Führerrolle zu einem Anderen Spieler"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/MakeLeaderCommand.java:23
 msgid "§4You can only transfer ownership to party-members!"
 msgstr "§4Du kannst die Führerschaft nur auf Gruppenmitglieder übertragen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/MakeLeaderCommand.java:27
 #, java-format
 msgid "{0}§e is already leader of your island!"
 msgstr "{0}§e ist bereits der Anführer der Insel!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/MakeLeaderCommand.java:31
 msgid "§4Only leader can transfer leadership!"
 msgstr "§4Nur Anführer können die Führerschaft übertragen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/MakeLeaderCommand.java:32
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0} hat versucht die Insel zu übernehmen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:22
 msgid "show party information"
 msgstr "Zeige Gruppen Information"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:25
 msgid "shows information about your party"
 msgstr "Zeigt Informationen über diene Gruppe"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:32
 msgid "show pending invites"
 msgstr "Zeige laufende einladungen"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:38
 msgid "§eNo pending invites"
 msgstr "§eKeine laufenden Einladungen"
- 
-#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:49
+
+#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:45
 msgid "withdraw an invite"
 msgstr "Ziehe eine Einladung zurück"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:55
+#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:54
 msgid "§4You don't have permissions to unvite players."
 msgstr "§4Du hast nicht genügend Rechte um den Spieler auszuladen."
- 
-#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:74
+
+#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:75
 #: us/talabrek/ultimateskyblock/command/island/RequirePlayerCommand.java:29
 msgid "§4This command can only be executed by a player"
 msgstr "§4Dieser Befehl kann nur von Spielern ausgeführt werden"
- 
-#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:80
+
+#: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:81
 #: us/talabrek/ultimateskyblock/command/island/RequireIslandCommand.java:44
+#: us/talabrek/ultimateskyblock/command/IslandChatCommand.java:33
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4Keine Insel. §eBenutze §b/is create§e um eine zu Starten"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:15
 msgid "delete your island and start a new one."
 msgstr "Löscht deine Insel und startet eine neue."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:22
 msgid ""
-"§4Only the owner may restart this island. Leave this island in order to start your "
-"own (/island leave)."
+"§4Only the owner may restart this island. Leave this island in order to "
+"start your own (/island leave)."
 msgstr ""
-"§4Nur der Besitzer kann die Insel neustarten. Um deine eigene Starten zu können "
-"verlasse die Insel mit (/island leave)"
- 
+"§4Nur der Besitzer kann die Insel neustarten. Um deine eigene Starten zu "
+"können verlasse die Insel mit (/island leave)"
+
 #: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:24
 msgid ""
-"§eYou must remove all players from your island before you can restart it (/island "
-"kick <player>). See a list of players currently part of your island using /island "
-"party."
+"§eYou must remove all players from your island before you can restart it (/"
+"island kick <player>). See a list of players currently part of your island "
+"using /island party."
 msgstr ""
 "§eDu musst zuerst alle Spieler mit (/island kick <player>) von der Insel "
-"entfernen. Nutze (/island party) um zu sehen welche Spieler zu deine Insel gehören."
- 
+"entfernen. Nutze (/island party) um zu sehen welche Spieler zu deine Insel "
+"gehören."
+
 #: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:30
-#, java-format
-msgid "§eYou can restart your island in {0} seconds."
+#, fuzzy, java-format
+msgid "§cYou can restart your island in {0} seconds."
 msgstr "§eDu kannst diene Insel in {0} Sekunden Neustarten."
- 
+
+#: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:34
+msgid "§cYour island is already in the process of restarting."
+msgstr ""
+
 #: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:38
+msgid "§cYour island is in the process of generating, you cannot restart now."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/RestartCommand.java:47
 msgid "§eNOTE: Your entire island and all your belongings will be RESET!"
 msgstr ""
-"§eHINWEIS: Deine komplette Insel und alle Errungenschaften werden Zurückgesetzt!"
- 
+"§eHINWEIS: Deine komplette Insel und alle Errungenschaften werden "
+"Zurückgesetzt!"
+
 #: us/talabrek/ultimateskyblock/command/island/SetHomeCommand.java:14
 msgid "set the island-home"
 msgstr "Setze dein Inselzuhause"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:14
 msgid "set your island's warp location"
 msgstr "Setze dein Insel Warp Punkt."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:20
 msgid "§cYou do not have permission to set your island's warp point!"
 msgstr "§cDu hast keine Rechte um einen Insel Warppunkt zu setzen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:22
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr "§cDu musst auf deiner eigenen Insel sein um den Warppunkt zu setzen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/SetWarpCommand.java:25
 #, java-format
 msgid "§b{0}§d changed the island warp location."
 msgstr "§b{0}§d Hat die Position des Warppunkte’s geändert."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/SpawnCommand.java:17
 msgid "teleports you to the skyblock spawn"
 msgstr "Teleportiert dich zum SkyBlock Spawn"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/ToggleWarp.java:14
 msgid "enable/disable warping to your island."
 msgstr "Aktiviere/Deaktiviere Warping zu deiner Insel."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/ToggleWarp.java:22
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr ""
-"§4Deine Insel ist gesperrt. Du musst zuerst entsperren um Warpen frei zu schalten."
- 
+"§4Deine Insel ist gesperrt. Du musst zuerst entsperren um Warpen frei zu "
+"schalten."
+
 #: us/talabrek/ultimateskyblock/command/island/ToggleWarp.java:32
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr ""
-"§cDu verfügst nicht über die rechte um den Insel warppunkt ein-,auszuschalten!"
- 
+"§cDu verfügst nicht über die rechte um den Insel warppunkt ein-,"
+"auszuschalten!"
+
 #: us/talabrek/ultimateskyblock/command/island/TopCommand.java:15
 msgid "display the top10 of islands"
 msgstr "Zeige die top 10 Inseln"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:17
 msgid "trust/untrust a player to help on your island."
 msgstr "Vertraue/Mistraue einen Spieler auf deiner Insel."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:23
 msgid "§eThe following players are trusted on your island:"
 msgstr "§eDu vertraust den folgenden Spielern auf deiner Insel:"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:25
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
 msgstr ""
 "§eUm einen Spieler zu Vertrauen/Mistrauen gib : „/island trust <player>“ ein."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:30
 msgid "§4Members are already trusted!"
 msgstr "§4Mitgliedern wird bereits vertraut!"
- 
-#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:35
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:38
 #, java-format
 msgid "§4Unknown player {0}"
 msgstr "§4Unbekanter Spieler {0}"
- 
-#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:40
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:43
 #, java-format
 msgid "§eYou have trusted §4{0}§e on your island."
 msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
- 
-#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:43
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:46
 #, java-format
 msgid "§eYou have revoked your trust in §a{0}§e on your island."
 msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:18
 msgid "warp to another player's island"
 msgstr "Warpt dich auf die Insel eines anderen Spielers"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:28
 msgid "§aYour incoming warp is active, players may warp to your island."
-msgstr "§aDein Warmpunkt ist aktiv, Spieler können sich zu deiner Insel Warpen."
- 
+msgstr ""
+"§aDein Warmpunkt ist aktiv, Spieler können sich zu deiner Insel Warpen."
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:30
 msgid "§4Your incoming warp is inactive, players may not warp to your island."
 msgstr ""
-"§aDein Warmpunkt ist inaktiv, Spieler können sich nicht zu deiner Insel Warpen."
- 
+"§aDein Warmpunkt ist inaktiv, Spieler können sich nicht zu deiner Insel "
+"Warpen."
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:32
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
 msgstr ""
-"§fSetze den Warmpunkt für die ankommenden Spieler mit §e/island setwarp §fan deine "
-"aktuelle Position."
- 
+"§fSetze den Warmpunkt für die ankommenden Spieler mit §e/island setwarp §fan "
+"deine aktuelle Position."
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:33
 msgid "§fToggle your warp on/off using §e/island togglewarp"
 msgstr "§fSchalte deinen Warp ein/aus mit  §e/island togglewarp§f."
- 
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:35
 msgid "§4You do not have permission to create a warp on your island!"
 msgstr ""
-"§4Du verfügst nicht über die Rechte einen Warppunkt auf deiner Insel zu erstellen!"
- 
+"§4Du verfügst nicht über die Rechte einen Warppunkt auf deiner Insel zu "
+"erstellen!"
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:38
 msgid "§fWarp to another island using §e/island warp <player>"
 msgstr ""
-"§fUm dich auf die Insel eines anderen Spielers zu Warpen nutze §e/island warp "
-"<player>§f."
- 
+"§fUm dich auf die Insel eines anderen Spielers zu Warpen nutze §e/island "
+"warp <player>§f."
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:40
-#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:61
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:79
 msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4Du hast keine Rechte um die auf andere Inseln zu Warpen!"
- 
+
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:47
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:770
+msgid ""
+"§cYour island is in the process of generating, you cannot warp to other "
+"players islands right now."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:51
+msgid ""
+"§cYour island is in the process of restarting, you cannot warp to other "
+"players islands right now."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:57
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:815
 msgid "§4That player does not exist!"
 msgstr "§4Dieser Spieler existiert nicht!"
- 
-#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:52
+
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:62
 msgid "§4That player does not have an active warp."
 msgstr "§4Dieser Spieler besitzt keinen aktiven Warp."
- 
-#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:58
+
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:66
+msgid ""
+"§cThat players island is in the process of generating, you cannot warp to it "
+"right now."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:70
+msgid ""
+"§cThat players island is in the process of restarting, you cannot warp to it "
+"right now."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:76
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Warpen."
- 
+
+#: us/talabrek/ultimateskyblock/command/IslandChatCommand.java:20
+#, fuzzy
+msgid "talk to your party"
+msgstr "Verlasse deine Gruppe"
+
 #: us/talabrek/ultimateskyblock/command/IslandCommand.java:26
 msgid "general island command"
 msgstr "Allgemeine Insel Befehle"
- 
+
+#: us/talabrek/ultimateskyblock/command/IslandCommand.java:68
+#, fuzzy
+msgid "§4Your island data is being loaded, please try again later."
+msgstr "§4Ihre Inseldaten werden geladen - Versuch es Später noch einmal."
+
 #: us/talabrek/ultimateskyblock/event/ExploitEvents.java:47
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr ""
-"§eDu kannst nicht die Portale einer anderen Insel nutzen! Schäme dich - Cheater!"
- 
+"§eDu kannst nicht die Portale einer anderen Insel nutzen! Schäme dich - "
+"Cheater!"
+
 #: us/talabrek/ultimateskyblock/event/ExploitEvents.java:63
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandeln ist auf anderen Inseln nicht erlaubt. Geh heim - Cheater!"
- 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:131
+
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:132
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVerwandelt dein Obsidian wieder in lava. Sei vorsichtig!"
- 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:162
+
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:164
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Es ist eine Schlechte Idee deine Lava zu ersetzen!"
- 
-#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:252
+
+#: us/talabrek/ultimateskyblock/event/PlayerEvents.java:254
 msgid "§4That player has forbidden you from teleporting to their island."
-msgstr "§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Teleportieren."
- 
+msgstr ""
+"§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Teleportieren."
+
 #: us/talabrek/ultimateskyblock/handler/ConfirmHandler.java:42
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7 zeitüberschreitung"
- 
+
 #: us/talabrek/ultimateskyblock/handler/ConfirmHandler.java:46
 #, java-format
 msgid ""
-"§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to accept!"
+"§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
+"accept!"
 msgstr ""
-"§9{0}§e ist §cGefährlich§e. Wiederhole den Befehl innerhalb von §a{1}§e Sekunden "
-"um zu bestätigent!"
- 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:174
+"§9{0}§e ist §cGefährlich§e. Wiederhole den Befehl innerhalb von §a{1}§e "
+"Sekunden um zu bestätigent!"
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:172
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
-"§eDeine Insel ist nun gesperrt. Nur noch Mitglieder deiner Gruppe können eintreten."
- 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:177
+"§eDeine Insel ist nun gesperrt. Nur noch Mitglieder deiner Gruppe können "
+"eintreten."
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:174
 msgid "§4You must be the party leader to lock your island!"
 msgstr "§4Du musst der Gruppenleiter sein um die Insel zu entsperren!"
- 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:208
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:187
 msgid ""
-"§eYour island is unlocked and anyone may enter, however only you and your party "
-"members may build or remove blocks."
+"§eYour island is unlocked and anyone may enter, however only you and your "
+"party members may build or remove blocks."
 msgstr ""
-"§eDeine Insel ist nicht gesperrt, jeder Spieler kann eintreten aber nur du und "
-"Gruppenmitglieder können Blöcke platzieren/abbauen."
- 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:211
+"§eDeine Insel ist nicht gesperrt, jeder Spieler kann eintreten aber nur du "
+"und Gruppenmitglieder können Blöcke platzieren/abbauen."
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:189
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Du musst der Gruppenleiter sein um deine Insel zu entsperren!"
- 
+
 #: us/talabrek/ultimateskyblock/imports/impl/USBImporterExecutor.java:74
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Kein import mit dem Namen §e{0}§4 gefunden"
- 
+
 #: us/talabrek/ultimateskyblock/imports/impl/USBImporterExecutor.java:124
 msgid "§eConverted "
 msgstr "§eUmgewandelt"
- 
-#: us/talabrek/ultimateskyblock/island/IslandInfo.java:245
+
+#: us/talabrek/ultimateskyblock/island/IslandInfo.java:329
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
-msgstr "§4Seit deine Insel gesperrt ist, ist dein ankommender Warmpunkt deaktiviert."
- 
-#: us/talabrek/ultimateskyblock/island/IslandInfo.java:246
+msgstr ""
+"§4Seit deine Insel gesperrt ist, ist dein ankommender Warmpunkt deaktiviert."
+
+#: us/talabrek/ultimateskyblock/island/IslandInfo.java:330
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d hat den Inselwarppunkt Deaktiviert."
- 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:96
+
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:115
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
- 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:154
+msgstr ""
+"§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
+
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:173
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eRuhmeshalle (Seite {0} von{1}):"
- 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:156
+
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:175
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr "§4Top 10 liste ist leer! (vielleicht schlug die Erstellung fehl?)"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:172
-#, c-format
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:191
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
- 
-#: us/talabrek/ultimateskyblock/island/IslandLogic.java:177
+
+#: us/talabrek/ultimateskyblock/island/IslandLogic.java:196
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDeine Stufe ist: §f{0}"
- 
-#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:218
+
+#: us/talabrek/ultimateskyblock/player/PlayerInfo.java:253
 msgid "§cYou were removed from your island since the last time you played!"
-msgstr "§cDu wurdest von der Insel entfernt seit du das letzte mal Online warst."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:36
+msgstr ""
+"§cDu wurdest von der Insel entfernt seit du das letzte mal Online warst."
+
+#: us/talabrek/ultimateskyblock/player/PlayerLogic.java:141
+msgid ""
+"§cIt seems you logged out in the sky world, however you are not a member of "
+"an island. Teleporting you to spawn."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:37
 msgid "Challenge Menu "
 msgstr "Aufgaben Menue"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:64
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:65
 #, java-format
 msgid "{0} <Permissions>"
 msgstr "{0} <Permissions>"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:68
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:69
 msgid "§hPlayer Permissions"
 msgstr "§hSpieler Rechte"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:69
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:70
 msgid ""
 "§eClick here to return to\n"
 "§eyour island group's info."
 msgstr ""
 "§eKlick hier um zu deiner\n"
 "§eInselgruppen info zurückzukehren."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:75
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:76
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"
@@ -1429,12 +1528,12 @@ msgstr ""
 "§eZeige auf ein Icon um die \n"
 "§eRechte zu sehen. Klicke\n"
 "§edarauf um diese zu ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:82
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:83
 msgid "§aChange Biome"
 msgstr "§aÄndert das Biom"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:83
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:84
 msgid ""
 "§fThis player §acan§f change the\n"
 "§fisland's biome. Click here\n"
@@ -1443,12 +1542,12 @@ msgstr ""
 "§fDieser Spieler §akann§f das\n"
 "§fInselbiome ändern. Klicke hier\n"
 "§fum ihm dieses Recht zu nehmen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:85
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:86
 msgid "§cChange Biome"
 msgstr "§cÄndert das Biom"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:86
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:87
 msgid ""
 "§fThis player §ccannot§f change the\n"
 "§fisland's biome. Click here\n"
@@ -1457,12 +1556,12 @@ msgstr ""
 "§fDieser Spieler §ckann nicht§f das\n"
 "§fInselbiome ändern. Klicke hier\n"
 "§fum ihm dieses Recht zu geben."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:94
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:95
 msgid "§aToggle Island Lock"
 msgstr "§aSchalte den Inselschutz Ein/Aus"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:95
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:96
 msgid ""
 "§fThis player §acan§f toggle the\n"
 "§fisland's lock, which prevents\n"
@@ -1473,12 +1572,12 @@ msgstr ""
 "§fDies verhindert das nicht Gruppen\n"
 "§fMitglieder auf die Insel können.\n"
 "§fKlick hier um ihm dieses Recht zu nehmen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:97
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:98
 msgid "§cToggle Island Lock"
 msgstr "§cSchalte den Inselschutz Ein/Aus"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:98
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:99
 msgid ""
 "§fThis player §ccannot§f toggle the\n"
 "§fisland's lock, which prevents\n"
@@ -1489,12 +1588,12 @@ msgstr ""
 "§fDies verhindert das nicht Gruppen\n"
 "§fMitglieder auf die Insel können.\n"
 "§fKlick hier um ihm dieses Recht zu geben."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:106
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:107
 msgid "§aSet Island Warp"
 msgstr "§aSetzt Insel Warppunkt"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:107
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:108
 msgid ""
 "§fThis player §acan§f set the\n"
 "§fisland's warp, which allows\n"
@@ -1507,12 +1606,12 @@ msgstr ""
 "§fNicht-Gruppenmitgliedern sich auf die\n"
 "§fInsel zu teleportieren. Klick hier\n"
 "§fum ihm dieses Recht zu nehmen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:109
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:110
 msgid "§cSet Island Warp"
 msgstr "§cSetzt Insel Warppunkt"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:110
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:111
 msgid ""
 "§fThis player §ccannot§f set the\n"
 "§fisland's warp, which allows\n"
@@ -1525,12 +1624,12 @@ msgstr ""
 "§fNicht-Gruppenmitgliedern sich auf die\n"
 "§fInsel zu teleportieren. Klick hier\n"
 "§fum ihm dieses Recht zu geben."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:118
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:119
 msgid "§aToggle Island Warp"
 msgstr "§aSchalte den Insel Warp Ein/Aus"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:119
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:120
 msgid ""
 "§fThis player §acan§f toggle the\n"
 "§fisland's warp, allowing them\n"
@@ -1542,12 +1641,12 @@ msgstr ""
 "§fWarppunkt der Insel Ein/Ausschalten,\n"
 "§faber §cnicht§f dessen Position ändern.\n"
 "§fKlick hier um ihm dieses Recht zu nehmen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:121
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:122
 msgid "§cToggle Island Warp"
 msgstr "§cSchalte den Insel Warp Ein/Aus"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:122
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:123
 msgid ""
 "§fThis player §ccannot§f toggle the\n"
 "§fisland's warp, allowing them\n"
@@ -1559,12 +1658,12 @@ msgstr ""
 "§fWarppunkt der Insel Ein/Ausschalten,\n"
 "§fund nicht dessen Position ändern.\n"
 "§fKlick hier um ihm dieses Recht zu geben."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:130
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:131
 msgid "§aInvite Players"
 msgstr "§aLade Spieler ein"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:131
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:132
 msgid ""
 "§fThis player §acan§f invite\n"
 "§fother players to the island if\n"
@@ -1576,12 +1675,12 @@ msgstr ""
 "§fSpieler auf die Insel einladen solange\n"
 "§fnoch ein Platz frei ist. Klick hier\n"
 "§fum ihm dies Recht zu nehmen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:133
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:134
 msgid "§cInvite Players"
 msgstr "§cLade Spieler ein"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:134
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:135
 msgid ""
 "§fThis player §ccannot§f invite\n"
 "§fother players to the island.\n"
@@ -1590,12 +1689,12 @@ msgstr ""
 "§fDieser Spieler §ckann keine§f anderen\n"
 "§fSpieler auf die Insel einladen.\n"
 "§fKlick hier um ihm dies Recht zu geben."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:142
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:143
 msgid "§aKick Players"
 msgstr "§aEntferne Spieler"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:143
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:144
 msgid ""
 "§fThis player §acan§f kick\n"
 "§fother players from the island,\n"
@@ -1607,12 +1706,12 @@ msgstr ""
 "§fSpieler von der Insel werfen,\n"
 "§faber §cnicht§f den Anführer. Klick\n"
 "§hier um ihm dieses Recht zu nehmen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:145
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:146
 msgid "§cKick Players"
 msgstr "§cEntferne Spieler"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:146
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:147
 msgid ""
 "§fThis player §ccannot§f kick\n"
 "§fother players from the island.\n"
@@ -1621,25 +1720,25 @@ msgstr ""
 "§fDieser Spieler §ckann keine§f andere\n"
 "§fSpieler von der Insel werfen.\n"
 "§fKlick hier um ihm dieses Recht zu geben."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:163
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:769
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:164
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:770
 msgid "§9Island Group Members"
 msgstr "§9Insel Gruppen Mitglieder\t"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:168
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:169
 msgid "§aGroup Info"
 msgstr "§aGruppen Info"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:171
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:172
 msgid "§aMore players can be invited to this island."
 msgstr "§aMehr Spieler können eingeladen werden."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:173
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:174
 msgid "§cThis island is full."
 msgstr "§cDIese Insel ist voll."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:175
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:176
 msgid ""
 "§eHover over a player's icon to\n"
 "§eview their permissions. The\n"
@@ -1650,8 +1749,8 @@ msgstr ""
 "§eRechte zu sehen. Der Anführer kann\n"
 "§ediese Rechte durch Klicken\n"
 "§eauf das Spieler Icon ändern. "
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:183
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:184
 msgid ""
 "§a§lLeader\n"
 "§aCan §fchange the island's biome.\n"
@@ -1668,98 +1767,98 @@ msgstr ""
 "§fdein Insel Warp Ein-/Ausschalten.\n"
 "§fSpieler auf die Insel einladen.\n"
 "§fSpieler von der Insel werfen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:188
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:189
 msgid "§e§lMember"
 msgstr "§e§lMitglied"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:190
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:191
 msgid "§aCan §fchange the island's biome."
 msgstr "§aKann §das Insel Boome ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:192
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:193
 msgid "§cCannot §fchange the island's biome."
 msgstr "§cKann nicht §fdas Insel Boome ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:195
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:196
 msgid "§aCan §flock/unlock the island."
 msgstr "§aKann §fdie Insel Ent-/Sperren."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:197
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:198
 msgid "§cCannot §flock/unlock the island."
 msgstr "§cKann nicht §fdie Insel Ent-/Sperren."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:200
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:201
 msgid "§aCan §fset the island's warp."
 msgstr "§aKann §fden Insel Warppunkt setzen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:202
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:203
 msgid "§cCannot §fset the island's warp."
 msgstr "§cKann nicht §fden Insel Warppunkt setzen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:205
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:206
 msgid "§aCan §ftoggle the island's warp."
 msgstr "§aKann §den Insel Warmpunkt Ein-/Ausschalten."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:207
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:208
 msgid "§cCannot §ftoggle the island's warp."
 msgstr "§cKann nicht §den Insel Warmpunkt Ein-/Ausschalten."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:210
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:211
 msgid "§aCan §finvite others to the island."
 msgstr "§aKann §Spieler auf die Insel Einladen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:212
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:213
 msgid "§cCannot §finvite others to the island."
 msgstr "§cKann keine §Spieler auf die Insel Einladen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:215
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:216
 msgid "§aCan §fkick others from the island."
 msgstr "§aKann §Spieler von der Insel werfen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:217
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:218
 msgid "§cCannot §fkick others from the island."
 msgstr "§cKann keine §Spieler von der Insel werfen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:220
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:221
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:234
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:917
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:235
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:918
 msgid "§9Island Log"
 msgstr "§9Island Logbuch"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:236
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:237
 msgid "§lIsland Log"
 msgstr "§lInsel Logbuch"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:237
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:260
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:238
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:261
 msgid ""
 "§eClick here to return to\n"
 "§ethe main island screen."
 msgstr ""
 "§eKlick hier um zum Haupt-\n"
 "§eInsel Menü zu gelangen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:244
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:245
 msgid "§e§lIsland Log"
 msgstr "§e§lInsel Logbuch"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:257
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:258
 msgid "§9Island Biome"
 msgstr "§9Insel Biome"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:259
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:260
 msgid "§hIsland Biome"
 msgstr "§hInsel Biome"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:269
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:270
 msgid "§aBiome: Ocean"
 msgstr "§aBiome: Ozean"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:270
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:271
 msgid ""
 "§fThe ocean biome is the basic\n"
 "§fstarting biome for all islands.\n"
@@ -1771,42 +1870,42 @@ msgstr ""
 "§fdas Ozeanbiome. Friedliche Tiere\n"
 "§fwerden nicht Erscheinen. Feindliche\n"
 "§fKreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:272
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:290
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:308
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:326
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:344
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:362
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:380
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:398
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:416
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:434
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:452
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:470
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:273
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:291
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:309
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:327
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:345
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:363
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:381
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:399
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:417
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:435
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:453
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:471
 msgid "§2§lThis is your current biome."
 msgstr "§2§lDas ist dein aktuelles Biome."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:274
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:292
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:310
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:328
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:346
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:364
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:382
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:400
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:418
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:436
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:454
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:472
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:275
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:293
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:311
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:329
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:347
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:365
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:383
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:401
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:419
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:437
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:455
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:473
 msgid "§e§lClick to change to this biome."
 msgstr "§e§lKlicke um zu diesem Biome zu wechseln."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:277
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:278
 msgid "§8Biome: Ocean"
 msgstr "§8Biome: Ozean"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:278
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:279
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The ocean biome is the basic\n"
@@ -1820,12 +1919,12 @@ msgstr ""
 "§7das Ozeanbiome. Friedliche Tiere\n"
 "§7werden nicht erscheinen. Feindliche\n"
 "§7Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:287
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:288
 msgid "§aBiome: Forest"
 msgstr "§aBiome: Wald"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:288
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:289
 msgid ""
 "§fThe forest biome will allow\n"
 "§fyour island to spawn passive.\n"
@@ -1837,12 +1936,12 @@ msgstr ""
 "§fInsel das Friedliche Tiere erscheinen\n"
 "§f(auch Wölfe). Feindliche\n"
 "§fKreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:295
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:296
 msgid "§8Biome: Forest"
 msgstr "§8Biome: Wald"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:296
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:297
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The forest biome will allow\n"
@@ -1856,12 +1955,12 @@ msgstr ""
 "§7Insel das Friedliche Tiere erscheinen\n"
 "§7(auch Wölfe). Feindliche\n"
 "§7Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:305
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:306
 msgid "§aBiome: Desert"
 msgstr "§aBiome: Wüste"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:306
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:307
 msgid ""
 "§fThe desert biome makes it so\n"
 "§fthat there is no rain or snow\n"
@@ -1873,12 +1972,12 @@ msgstr ""
 "§fSchneit es nicht. Friedliche Tiere\n"
 "§fwerden nicht erscheinen. Feindliche\n"
 "§fKreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:313
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:314
 msgid "§8Biome: Desert"
 msgstr "§8Biome: Wüste"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:314
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:315
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The desert biome makes it so\n"
@@ -1892,12 +1991,12 @@ msgstr ""
 "§7Schneit es nicht. Friedliche Tiere\n"
 "§7werden nicht erscheinen. Feindliche\n"
 "§7Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:323
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:324
 msgid "§aBiome: Jungle"
 msgstr "§aBiome: Jungel"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:324
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:325
 msgid ""
 "§fThe jungle biome is bright\n"
 "§fand colorful. Passive mobs\n"
@@ -1909,12 +2008,12 @@ msgstr ""
 "§fund farbenfroh. Friedliche Tiere\n"
 "§f(auch Ozelots) werden erscheinen.\n"
 "§fFeindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:331
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:332
 msgid "§8Biome: Jungle"
 msgstr "§8Biome: Jungel"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:332
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:333
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The jungle biome is bright\n"
@@ -1928,12 +2027,12 @@ msgstr ""
 "§7und farbenfroh. Friedliche Tiere\n"
 "§7(auch Ozelots) werden erscheinen.\n"
 "§7Feindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:341
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:342
 msgid "§aBiome: Swampland"
 msgstr "§aBiome: Sumpf"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:342
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:343
 msgid ""
 "§fThe swamp biome is dark\n"
 "§fand dull. Passive mobs\n"
@@ -1946,12 +2045,12 @@ msgstr ""
 "§fund trist. Friedliche Tiere erscheinen\n"
 "§fNormal. Je nach Mondphase können\n"
 "§fselten in der Nacht Schleime erscheinen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:349
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:350
 msgid "§8Biome: Swampland"
 msgstr "§8Biome: Sumpf"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:350
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:351
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The swamp biome is dark\n"
@@ -1966,12 +2065,12 @@ msgstr ""
 "§7und trist. Friedliche Tiere erscheinen\n"
 "§7Normal. Je nach Mondphase können\n"
 "§7selten in der Nacht Schleime erscheinen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:359
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:360
 msgid "§aBiome: Taiga"
 msgstr "§aBiome: Einöde"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:360
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:361
 msgid ""
 "§fThe taiga biome has snow\n"
 "§finstead of rain. Passive\n"
@@ -1983,12 +2082,12 @@ msgstr ""
 "§fFriedliche Tiere (auch Wölfe)\n"
 "§ferschienen. Feindliche Kreaturen\n"
 "§ferscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:367
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:368
 msgid "§8Biome: Taiga"
 msgstr "§8Biome: Einöde"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:368
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:369
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The taiga biome has snow\n"
@@ -2002,12 +2101,12 @@ msgstr ""
 "§7Friedliche Tiere (auch Wölfe)\n"
 "§7erschienen. Feindliche Kreaturen\n"
 "§7erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:377
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:378
 msgid "§aBiome: Mushroom"
 msgstr "§aBiome: Pilzland"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:378
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:379
 msgid ""
 "§fThe mushroom biome is\n"
 "§fbright and colorful.\n"
@@ -2020,12 +2119,12 @@ msgstr ""
 "§fPilzkühe sind die einzigen Tiere die\n"
 "§ferscheinen. Keine anderen\n"
 "§fKreaturen werden erscheinen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:385
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:386
 msgid "§8Biome: Mushroom"
 msgstr "§8Biome: Pilzland"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:386
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:387
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The mushroom biome is\n"
@@ -2040,12 +2139,12 @@ msgstr ""
 "§7Pilzkühe sind die einzigen Tiere die\n"
 "§7erscheinen. Keine anderen\n"
 "§7Kreaturen werden erscheinen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:395
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:396
 msgid "§aBiome: Hell(Nether)"
 msgstr "§aBiome: Hölle(Nether)"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:396
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:397
 msgid ""
 "§fThe hell biome looks\n"
 "§fdark and dead. Some\n"
@@ -2058,12 +2157,12 @@ msgstr ""
 "§fund Tot aus. Machen Kreaturen\n"
 "§fvom Nether werden erscheinen\n"
 "§f(Keine Ghasts/Lohen)."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:403
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:404
 msgid "§8Biome: Hell(Nether)"
 msgstr "§8Biome: Hölle(Nether)"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:404
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:405
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The hell biome looks\n"
@@ -2078,12 +2177,12 @@ msgstr ""
 "§7und Tot aus. Machen Kreaturen\n"
 "§7vom Nether werden erscheinen\n"
 "§7(Keine Ghasts/Lohen)."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:413
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:414
 msgid "§aBiome: Sky(End)"
 msgstr "§aBiome: End"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:414
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:415
 msgid ""
 "§fThe sky biome gives your\n"
 "§fisland a special dark sky.\n"
@@ -2094,12 +2193,12 @@ msgstr ""
 "§fInsel einen Speziellen Dunklen Himmel.\n"
 "§fNur Endermänner werden in\n"
 "§fdiesem Biome erscheinen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:421
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:422
 msgid "§8Biome: Sky(End)"
 msgstr "§8Biome: End"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:422
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:423
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The sky biome gives your\n"
@@ -2112,12 +2211,12 @@ msgstr ""
 "§7Insel einen Speziellen Dunklen Himmel.\n"
 "§7Nur Endermänner werden in\n"
 "§7diesem Biome erscheinen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:431
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:432
 msgid "§aBiome: Plains"
 msgstr "§aBiome: Flachland"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:432
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:433
 msgid ""
 "§fThe plains biome has rain\n"
 "§finstead of snow. Passive\n"
@@ -2129,12 +2228,12 @@ msgstr ""
 "§fanstelle von Schnee. Friedliche\n"
 "§fTiere (auch Pferde) werden erscheinen.\n"
 "§fFeindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:439
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:440
 msgid "§8Biome: Plains"
 msgstr "§8Biome: Flachland"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:440
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:441
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The plains biome has rain\n"
@@ -2148,12 +2247,12 @@ msgstr ""
 "§7anstelle von Schnee. Friedliche\n"
 "§7Tiere (auch Pferde) werden erscheinen.\n"
 "§7Feindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:449
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:450
 msgid "§aBiome: Extreme Hills"
 msgstr "§aBiome: Extreme Berge"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:450
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:451
 msgid ""
 "§fThe extreme hills biome.\n"
 "§fPassive mobs will spawn \n"
@@ -2163,12 +2262,12 @@ msgstr ""
 "§fHohe Berge Biome\n"
 "§fFriedliche Tiere erscheinen.\n"
 "§fFeindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:457
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:458
 msgid "§8Biome: Extreme Hills"
 msgstr "§8Biome: Extreme Berge"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:458
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:459
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The extreme hills biome.\n"
@@ -2180,12 +2279,12 @@ msgstr ""
 "§7Hohe Berge Biome\n"
 "§7Friedliche Tiere erscheinen.\n"
 "§7Feindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:467
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:468
 msgid "§aBiome: Flower Forest"
 msgstr "§aBiome: Blumenwald"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:468
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:469
 msgid ""
 "§fThe flower forest biome.\n"
 "§fPassive mobs will spawn \n"
@@ -2195,12 +2294,12 @@ msgstr ""
 "§fDas Blumen Biome.\n"
 "§fFriedliche Tiere erscheinen.\n"
 "§fFeindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:475
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:476
 msgid "§8Biome: Flower Forest"
 msgstr "§8Biome: Blumenwald"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:476
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:477
 msgid ""
 "§cYou cannot use this biome.\n"
 "§7The flower forest biome.\n"
@@ -2212,27 +2311,27 @@ msgstr ""
 "§7Das Blumen Biome.\n"
 "§7Friedliche Tiere erscheinen.\n"
 "§7Feindliche Kreaturen erscheinen normal."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:576
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:577
 #, java-format
 msgid "§9Challenge Menu ({0}/{1})"
 msgstr "§9Aufgaben Menü ({0}/{1})"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:585
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:924
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:586
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:925
 msgid "§9Island Menu"
 msgstr "§9Insel Menü"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:588
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:975
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:589
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:976
 msgid "§9Island Create Menu"
 msgstr "§9Insel Erstellung Menü"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:598
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:599
 msgid "§a§lStart an Island"
 msgstr "§a§lStarte eine Insel"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:599
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:600
 msgid ""
 "§fStart your skyblock journey\n"
 "§fby starting your own island.\n"
@@ -2251,12 +2350,12 @@ msgstr ""
 "§fdazu einladen mit die ein\n"
 "§fSkyblock Imperium aufzubauen.\n"
 "§e§lKlick hier um zu starten!"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:606
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:607
 msgid "§a§lJoin an Island"
 msgstr "§a§lTrete einer Insel bei"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:607
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:608
 msgid ""
 "§fWant to join another player's\n"
 "§fisland instead of starting\n"
@@ -2273,12 +2372,12 @@ msgstr ""
 "§e/island accept §feingeben um beizutreten.\n"
 "§e§lKlicke hier um eine Einladung anzunehmen!\n"
 "§e§l(Du musst erst Eingeladen werden)"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:614
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:615
 msgid "§a§lIsland Help"
 msgstr "§a§lInsel Hilfe"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:615
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:616
 msgid ""
 "§fNeed help with skyblock\n"
 "§fconcepts or commands? View\n"
@@ -2290,12 +2389,12 @@ msgstr ""
 "§fBefehlen? Schaue dir\n"
 "§fDetails dazu an.\n"
 "§e§lKlick hier für Hilfe!"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:626
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:627
 msgid "§a§lReturn Home"
 msgstr "§a§lKehre zurück"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:627
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:628
 msgid ""
 "§fReturn to your island's home\n"
 "§fpoint. You can change your home\n"
@@ -2308,12 +2407,12 @@ msgstr ""
 "§fbeliebige Stelle deiner Insel setzen.\n"
 "§fNutze dazu §b/island sethome\n"
 "§e§lKlicke hier um nach Hause zu kommen"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:637
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:638
 msgid "§a§lChallenges"
 msgstr "§a§lAufgaben"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:638
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:639
 msgid ""
 "§fView a list of §9challenges§f that\n"
 "§fyou can complete on your island\n"
@@ -2324,25 +2423,25 @@ msgstr ""
 "§fauf deiner Insel beenden kannst um Geld,\n"
 "§fGegenstände, Erfahrungspunkte und\n"
 "§fTitel zu erhalten."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:640
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:641
 msgid "§e§lClick here to view challenges."
 msgstr "§e§lKlick hier um die Aufgaben zu sehen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:642
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:643
 msgid "§4§lChallenges disabled."
 msgstr "§4§lAufgaben Deaktiviert."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:651
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:652
 msgid "§a§lIsland Level"
 msgstr "§a§lInsel Stufe"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:652
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:653
 #, java-format
 msgid "§eCurrent Level: §a{0,number,##.#}"
 msgstr "§eAktulle Stufe: §a{0,number,##.#}"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:653
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:654
 msgid ""
 "§fGain island levels by expanding\n"
 "§fyour skyblock and completing\n"
@@ -2357,12 +2456,12 @@ msgstr ""
 "§fBlöcke bringen mehr Punkte.\n"
 "§e§lKlick hier zum aktualisieren.\n"
 "§e§l(du musst auf deiner Insel sein)"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:661
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:662
 msgid "§a§lIsland Group"
 msgstr "§a§lInsel Gruppe"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:663
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:664
 msgid ""
 "§fView the members of your island\n"
 "§fgroup and their permissions. If\n"
@@ -2374,12 +2473,12 @@ msgstr ""
 "§fRechte an. Als Inselbesitzer (Anführer)\n"
 "§fkannst du die Rechte der Mitglieder ändern.\n"
 "§e§lKlicke hier zum Anzeigen und ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:671
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:672
 msgid "§a§lChange Island Biome"
 msgstr "§a§lWechsel das Insel Biome"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:673
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:674
 msgid ""
 "§fThe island biome affects things\n"
 "§flike grass color and spawning\n"
@@ -2388,20 +2487,20 @@ msgstr ""
 "§fDas Inselbiome beeinflusst dinge\n"
 "§fwie die Rasenfarbe oder das\n"
 "§ferscheinen von Tieren und Monstern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:675
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:676
 msgid "§e§lClick here to change biomes."
 msgstr "§e§lKlick hier um das Siam zu ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:677
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:678
 msgid "§c§lYou can't change the biome."
 msgstr "§c§lDu kannst das Biome nicht ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:686
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:687
 msgid "§a§lIsland Lock"
 msgstr "§a§lInsel Gesperrt"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:688
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:689
 msgid ""
 "§eLock Status: §aActive\n"
 "§fYour island is currently §clocked.\n"
@@ -2412,17 +2511,17 @@ msgstr ""
 "§fDeine Insel ist zur Zeit §cgesichert.\n"
 "§fNur deine Gruppenmitglieder und\n"
 "§fdu können die Insel betreten."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:690
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:691
 msgid "§e§lClick here to unlock your island."
 msgstr "§e§lKlick hier um deine Insel zu entsperren."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:692
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:699
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:693
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:700
 msgid "§c§lYou can't change the lock."
 msgstr "§c§lDu kannst die Insel nicht Ent,-Sperren"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:695
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:696
 msgid ""
 "§eLock Status: §8Inactive\n"
 "§fYour island is currently §aunlocked.\n"
@@ -2435,17 +2534,17 @@ msgstr ""
 "§fAlle Spieler können deine Insel betreten.\n"
 "§fAber nur deine Gruppenmitglieder und\n"
 "§fdu dürfen auf der Insel Bauen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:697
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:698
 msgid "§e§lClick here to lock your island."
 msgstr "§e§lKlick hier um deine Insel zu sperren."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:710
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:720
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:711
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:721
 msgid "§a§lIsland Warp"
 msgstr "§a§lInsel Warp"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:711
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:712
 msgid ""
 "§eWarp Status: §aActive\n"
 "§fOther players may warp to your\n"
@@ -2456,17 +2555,17 @@ msgstr ""
 "§fandere\tSpieler können sich\n"
 "§fjederzeit zu deinem Inselwarppunkt warpen.\n"
 "§fZum setzen benutze §d/island setwarp§f."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:713
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:714
 msgid "§e§lClick here to deactivate."
 msgstr "§e§lKlick hier zum Deaktivieren."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:715
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:725
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:716
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:726
 msgid "§c§lYou can't change the warp."
 msgstr "§c§lDu kannst den Warppunkt nicht verändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:721
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:722
 msgid ""
 "§eWarp Status: §8Inactive\n"
 "§fOther players can't warp to your\n"
@@ -2479,16 +2578,16 @@ msgstr ""
 "§fBevor du den Warppunkt aktivieren kannst\n"
 "§fmusst du mit §d/island setwarp\n"
 "§feinen erstellen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:723
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:724
 msgid "§e§lClick here to activate."
 msgstr "§e§lKlick hier zum Aktivieren."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:735
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:736
 msgid "§a§lIsland Log"
 msgstr "§a§lInsel Logbuch"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:736
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:737
 msgid ""
 "§fView a log of events from\n"
 "§fyour island such as member,\n"
@@ -2498,12 +2597,12 @@ msgstr ""
 "§fZeigt Einträge von Ereignissen wie:\n"
 "§fMitglieder, Warp oder Biome änderungen.\n"
 "§eKlick hier zum anzeigen."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:744
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:745
 msgid "§a§lChange Home Location"
 msgstr "§a§lWechsel die Heimat Position"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:745
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:746
 msgid ""
 "§fWhen you teleport to your\n"
 "§fisland you will be taken to\n"
@@ -2514,12 +2613,12 @@ msgstr ""
 "§fteleportierst wirst du an\n"
 "§fdiese Stelle gebracht.\n"
 "§e§lKlick hier um zu ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:753
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:754
 msgid "§a§lChange Warp Location"
 msgstr "§a§lÄndere Warppunkt"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:754
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:755
 msgid ""
 "§fWhen your warp is activated,\n"
 "§fother players will be taken to\n"
@@ -2532,136 +2631,147 @@ msgstr ""
 "§fdann zu diesem Punkt \n"
 "§fdeiner Insel Teleportiert.\n"
 "§e§lKlick hier zum ändern."
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:777
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:778
 msgid "§a§lLeader"
 msgstr "§a§lAnführer"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:787
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:788
 msgid "Permissions"
 msgstr "Rechte"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:826
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:827
 msgid "Island Biome"
 msgstr "Insel Biome"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:883
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:884
 msgid "Challenge Menu"
 msgstr "Aufgaben Menue"
- 
-#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:991
+
+#: us/talabrek/ultimateskyblock/SkyBlockMenu.java:992
 msgid "§9SB Island Group Members"
 msgstr "§9SB Gruppenmitglieder der Insel"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:165
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:184
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:623
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:660
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Dieser Spieler gehört bereits zu deiner Insel!"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:735
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:774
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr "§4Du bist kein Teil einer Insel. Kehre zum Spawn zurück!"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:740
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:779
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportiert Dich zu deiner Insel."
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:755
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:794
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:797
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:846
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§aDu wirst in {0} Sekunden Teleportiert."
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:775
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:820
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Es ist nicht möglich Dich zu der Insel von dem Spieler zu Warpen!"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:779
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:824
 msgid "§aTeleporting you to "
 msgstr "§aTeleportiert dich zu"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:811
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:822
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:866
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:880
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Du musst näher zu deiner Insel um dein SkyBlock Zuhause zu setzen!"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:819
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:874
 msgid "§aYour skyblock home has been set to your current location."
 msgstr "§aDein SkyBlock Zuhause wurde an deine aktuelle Stelle gesetzt."
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1059
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:876
+msgid "§4Your current location is not a safe home-location."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1136
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
-"Deine Insel konnte nicht Erschaffenwerden. Bitte kontaktiere einen Admin/Moderator"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1072
+"Deine Insel konnte nicht Erschaffenwerden. Bitte kontaktiere einen Admin/"
+"Moderator"
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1149
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Der Spieler hat keine Insel oder sie ist schon Geschützt."
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1480
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1595
 #, java-format
 msgid "§7Name: §b{0}\n"
 msgstr "§7Name: §b{0}\n"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1481
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1596
 #, java-format
 msgid "§7Version: §b{0}\n"
 msgstr "§7Version: §b{0}\n"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1482
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1597
 #, java-format
 msgid "§7Description: §b{0}\n"
 msgstr "§7Beschreibung: §b{0}\n"
- 
+
 # ???
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1483
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1488
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1493
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1598
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1603
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1608
 msgid "§7------------------------------\n"
 msgstr "§7------------------------------\n"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1484
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1599
 #, java-format
 msgid "§7Server: §e{0} {1}\n"
 msgstr "§7Server: §e{0} {1}\n"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1604
 msgid "§2ENABLED"
 msgstr "§2FREIGEGEBEN"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1604
 msgid "§4DISABLED"
 msgstr "§4GESPERRT"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1489
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1604
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr "§7Name: §d{0} ({1})\n"
- 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1490
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1605
 #, java-format
 msgid "§7Version: §d{0}\n"
 msgstr "§7Version: §d{0}\n"
- 
+
 # ???
 #: us/talabrek/ultimateskyblock/util/TimeUtil.java:18
 msgid "d"
 msgstr "d"
- 
+
 # ???
 #: us/talabrek/ultimateskyblock/util/TimeUtil.java:21
 msgid "h"
 msgstr "h"
- 
+
 # ???
 #: us/talabrek/ultimateskyblock/util/TimeUtil.java:24
 msgid "m"
 msgstr "m"
- 
+
 # ???
 #: us/talabrek/ultimateskyblock/util/TimeUtil.java:27
 msgid "s"
 msgstr "s"
+
+#~ msgid "{0} changed the island biome to OCEAN"
+#~ msgstr "{0} Wechselt das Inselbiome zu OZEAN"
+
+#~ msgid "§4That player doesn't exist."
+#~ msgstr "§4Dieser Spieler existiert nicht!"

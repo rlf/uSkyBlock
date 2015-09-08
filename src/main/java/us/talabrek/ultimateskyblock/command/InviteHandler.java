@@ -141,7 +141,6 @@ public class InviteHandler {
         if (playerInfo == null) {
             return false;
         }
-        
         playerInfo.setJoinParty(island.getIslandLocation());
         island.setupPartyMember(player.getName());
         playerInfo.save();

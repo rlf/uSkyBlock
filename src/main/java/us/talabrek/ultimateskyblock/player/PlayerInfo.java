@@ -103,7 +103,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public void setHomeLocation(final Location l) {
-        this.homeLocation = (l != null ? l.clone() : null);
+        this.homeLocation = l != null ? l.clone() : null;
     }
 
     public Location getHomeLocation() {
@@ -121,6 +121,8 @@ public class PlayerInfo implements Serializable {
     public void setJoinParty(final Location l) {
         this.islandLocation = l != null ? l.clone() : null;
         this.hasIsland = true;
+        // TODO: 09/09/2015 - R4zorax: Use the leaders home instead
+        this.homeLocation = l != null ? l.clone() : null;
     }
 
     public void completeChallenge(final String challenge) {

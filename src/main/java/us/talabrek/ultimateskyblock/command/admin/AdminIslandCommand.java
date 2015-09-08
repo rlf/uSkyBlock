@@ -170,9 +170,9 @@ public class AdminIslandCommand extends CompositeUSBCommand {
 
     private void protectIsland(CommandSender sender, IslandInfo islandInfo) {
         if (WorldGuardHandler.protectIsland(plugin, sender, islandInfo)) {
-            sender.sendMessage(tr("\u00a7e{0}'s island at {1} has been protected", islandInfo.getLeader(), islandInfo.getName()));
+            sender.sendMessage(tr("\u00a7e{0}s island at {1} has been protected", islandInfo.getLeader(), islandInfo.getName()));
         } else {
-            sender.sendMessage(tr("\u00a74{0}'s island at {1} was already protected", islandInfo.getLeader(), islandInfo.getName()));
+            sender.sendMessage(tr("\u00a74{0}s island at {1} was already protected", islandInfo.getLeader(), islandInfo.getName()));
         }
     }
 }

@@ -584,6 +584,27 @@ public class IslandInfo {
         return false;
     }
 
+    public List<Player> getOnlineMembers() {
+        ConfigurationSection members = config.getConfigurationSection("party.members");
+        List<Player> players = new ArrayList<>();
+        if (members != null) {
+            for (String memberName : members.getKeys(false)) {
+                String uuid = members.getString(memberName + ".uuid", null);
+                if (uuid != null) {
+                    Player onlinePlayer = Bukkit.getPlayer(UUIDUtil.fromString(uuid));
+                    if (onlinePlayer != null) {
+                        players.add(onlinePlayer);
+                    }
+                } else {
+                    Player onlinePlayer = Bukkit.getPlayer(memberName);
+                    if (onlinePlayer != null) {
+                        players.add(onlinePlayer);
+                    }
+                }
+            }
+        }
+        return players;
+    }
     public boolean contains(Location loc) {
         return name.equalsIgnoreCase(WorldGuardHandler.getIslandNameAt(loc));
     }

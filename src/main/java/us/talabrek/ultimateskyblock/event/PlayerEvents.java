@@ -26,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -254,18 +255,24 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    private final DecimalFormat islandLevelFormat = new DecimalFormat("#,##0.00");;
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onChat(AsyncPlayerChatEvent event) {
         String format = event.getFormat();
-        if (format.contains("{uskyblock_island_level}")) {
-            Player player = event.getPlayer();
-            IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(player);
-            if (islandInfo != null) {
-                event.setFormat(format.replace("{uskyblock_island_level}", islandLevelFormat.format(islandInfo.getLevel())));
+        Player player = event.getPlayer();
+        if (player == null) {
+            return;
+        }
+        if (format.contains("{uskyblock_island_level}") || format.contains("{uskyblock_island_rank}")) {
+            IslandRank rank = plugin.getIslandRank(player);
+            if (rank != null) {
+                format = format.replaceAll("\\{uskyblock_island_level\\}", String.format("%.0f", rank.getScore()));
+                format = format.replaceAll("\\{uskyblock_island_rank\\}", String.format("%d", rank.getRank()));
             } else {
-                event.setFormat(format.replace("{uskyblock_island_level}", islandLevelFormat.format(0)));
+                IslandInfo islandInfo = plugin.getIslandInfo(player);
+                format = format.replaceAll("\\{uskyblock_island_level\\}", islandInfo != null ? String.format("%.0f", islandInfo.getLevel()) : "?");
+                format = format.replaceAll("\\{uskyblock_island_rank\\}", "?");
             }
+            event.setFormat(format);
         }
     }
 }

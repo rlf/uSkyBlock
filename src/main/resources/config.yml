@@ -160,6 +160,8 @@ options:
   party:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
     invite-timeout: 600
+    # The format used in /istalk chat messages
+    chat-format: '&9{DISPLAYNAME} &f>&e {MESSAGE}'
 
   # This section provide some performance tweaking configs
   advanced:
@@ -188,7 +190,7 @@ options:
     teleportDelay: 20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 18
+version: 19
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

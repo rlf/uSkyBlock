@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+
 /**
  * An incremental (synchroneous) task for protecting all islands.
  */
@@ -73,7 +75,7 @@ public class ProtectAllTask extends BukkitRunnable implements IncrementalTask {
                 if (sender instanceof Player && ((Player)sender).isOnline()) {
                     sender.sendMessage(message);
                 }
-                plugin.log(Level.INFO, plugin.stripFormatting(message));
+                plugin.log(Level.INFO, stripFormatting(message));
                 plugin.setProtectAllActive(false);
             }
         }, 0.2f, 1);
