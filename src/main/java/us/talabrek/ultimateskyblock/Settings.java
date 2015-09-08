@@ -126,7 +126,8 @@ public class Settings {
         island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
         island_useOldIslands = config.getBoolean("options.island.useOldIslands");
         island_topTenTimeout = config.getInt("options.island.topTenTimeout", 7); // Every 7 minutes
-        island_allowPvP = config.getString("options.island.allowPvP", "deny").equalsIgnoreCase("allow");
+        island_allowPvP = config.getString("options.island.allowPvP", "deny").equalsIgnoreCase("allow") ||
+            config.getString("options.island.allowPvP", "false").equalsIgnoreCase("true");
         String loc = config.getString("language", null);
         if (loc != null) {
             locale = new Locale(loc);

@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.uuid;
 
-import com.google.common.base.Preconditions;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -44,11 +43,10 @@ public class PlayerNameChangeManager implements Listener {
     }
 
     public void checkPlayer(Player player, PlayerInfo playerInfo) {
-        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot be called in the main thread!");
-        Preconditions.checkNotNull(player, "Player cannot be null!");
-        Preconditions.checkState(player.isOnline(), "Player must be online!");
-        Preconditions.checkNotNull(playerInfo, "Player info cannot be null!");
-        
+        if (Bukkit.isPrimaryThread() || player == null || !player.isOnline() || playerInfo == null) {
+            // Bail out - no namechange-management in the above cases...
+            return;
+        }
         String oldName = playerDB.getName(player.getUniqueId());
         if (hasNameChanged(player.getUniqueId(), player.getName())) {
             try {

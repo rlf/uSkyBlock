@@ -82,7 +82,6 @@ public class WorldGuardHandler {
                 }
                 regionManager.addRegion(region);
                 plugin.log(Level.INFO, "New protected region created for " + islandConfig.getLeader() + "'s Island by " + sender.getName());
-                save(regionManager);
                 islandConfig.setRegionVersion(VERSION);
                 return true;
             }
@@ -100,7 +99,6 @@ public class WorldGuardHandler {
             regionManager.removeRegion(islandInfo.getName() + "island");
             regionManager.removeRegion(islandInfo.getLeader() + "island");
             regionManager.addRegion(region);
-            save(regionManager);
         } catch (Exception e) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
@@ -172,31 +170,12 @@ public class WorldGuardHandler {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
                 sender.sendMessage(tr("\u00a7eYour island is now locked. Only your party members may enter."));
-                save(regionManager);
             } else {
                 sender.sendMessage(tr("\u00a74You must be the party leader to lock your island!"));
             }
         } catch (Exception ex) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to lock " + islandName + "'s Island (" + sender.getName() + ")", ex);
         }
-    }
-
-    private static void save(final RegionManager regionManager) {
-        if (saveTask != null) {
-            saveTask.cancel();
-            saveTask = null;
-        }
-        saveTask = Bukkit.getScheduler().runTaskLaterAsynchronously(uSkyBlock.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // Shouldn't be needed in WG 6 - seems to be in WG 5.
-                    regionManager.save();
-                } catch (Exception e) {
-                    log.log(Level.WARNING, "Unable to save regions", e);
-                }
-            }
-        }, 100); // Save in 5 secs.
     }
 
     public static void islandUnlock(final CommandSender sender, final String islandName) {
@@ -206,7 +185,6 @@ public class WorldGuardHandler {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
                 sender.sendMessage(tr("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks."));
-                save(regionManager);
             } else {
                 sender.sendMessage(tr("\u00a74You must be the party leader to unlock your island!"));
             }
@@ -236,7 +214,6 @@ public class WorldGuardHandler {
                 }
                 region.setOwners(owners);
                 regionManager.addRegion(region);
-                save(regionManager);
             }
         } catch (Exception e) {
             uSkyBlock.getInstance().log(Level.WARNING, "Error saving island region after removal of " + player);
@@ -296,7 +273,6 @@ public class WorldGuardHandler {
                 global.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
             }
             regionManager.addRegion(global);
-            save(regionManager);
         }
     }
 

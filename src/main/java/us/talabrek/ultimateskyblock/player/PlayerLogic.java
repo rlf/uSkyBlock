@@ -147,6 +147,6 @@ public class PlayerLogic {
     }
 
     private boolean isUnsafe(PlayerInfo playerInfo, Player player) {
-        return (!playerInfo.getHasIsland() && player.getLocation().getWorld().getName().equalsIgnoreCase(uSkyBlock.skyBlockWorld.getName())) || uSkyBlock.getInstance().isSafeLocation(player.getLocation());
+        return plugin.isSkyWorld(player.getLocation().getWorld()) && !playerInfo.getHasIsland();
     }
 }
