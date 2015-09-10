@@ -41,9 +41,15 @@ public class TrustCommand extends RequireIslandCommand {
                     if (alias.equals("trust")) {
                         island.trust(name);
                         player.sendMessage(tr("\u00a7eYou have trusted \u00a74{0}\u00a7e on your island.", name));
+                        if (offlinePlayer.isOnline()) {
+                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}s island.", name));
+                        }
                     } else {
                         island.untrust(name);
                         player.sendMessage(tr("\u00a7eYou have revoked your trust in \u00a7a{0}\u00a7e on your island.", name));
+                        if (offlinePlayer.isOnline()) {
+                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}s island.", name));
+                        }
                     }
                     WorldGuardHandler.updateRegion(player, island);
                 }

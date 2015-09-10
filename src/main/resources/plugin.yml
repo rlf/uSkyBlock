@@ -24,7 +24,7 @@ commands:
             /challenges help for more information
     islandtalk:
         description: Chat with your party
-        aliases: [italk, it]
+        aliases: [istalk, it]
         usage: |
             /it message
 permissions:    
