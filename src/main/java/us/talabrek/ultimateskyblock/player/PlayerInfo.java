@@ -252,7 +252,6 @@ public class PlayerInfo implements Serializable {
             if (onlinePlayer != null && onlinePlayer.isOnline()) {
                 onlinePlayer.sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
             }
-
             removeFromIsland();
         }
     }

@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 20:24+0200\n"
 "PO-Revision-Date: 2015-05-03 00:32+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
@@ -51,7 +50,7 @@ msgstr "§6Erfaring: §a{0}"
 msgid "§dTotal times completed: §f{0}"
 msgstr "§dTotalt antal aflevering: §f{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No challenge named {0} found"
 msgstr "§4Ingen udfordringer med navn {0} fundet!"
 
@@ -422,7 +421,8 @@ msgstr "§eGenererer top 10 listen"
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eBlev færdig med genereringen af top 10"
 
-msgid "Teleport to another players island"
+#, fuzzy
+msgid "teleport to another players island"
 msgstr "Teleporterer til en andens ø"
 
 msgid "§4Only supported for players"

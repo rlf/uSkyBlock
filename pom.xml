@@ -205,6 +205,10 @@
                                     <token>#: .*\n</token>
                                     <value/>
                                 </replacement>
+                                <replacement>
+                                    <token>"POT-Creation-Date:.*\n</token>
+                                    <value/>
+                                </replacement>
                             </replacements>
                         </configuration>
                     </execution>
@@ -353,6 +357,13 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>dist</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report-po-completion</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>

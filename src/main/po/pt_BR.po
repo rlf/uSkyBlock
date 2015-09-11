@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 20:24+0200\n"
 "PO-Revision-Date: 2015-04-27 12:58-0300\n"
 "Last-Translator: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language-Team: _Rodrigo <rodriigosantos11@gmail.com>\n"
@@ -425,7 +424,7 @@ msgid "§eFinished generation of the Top Ten list"
 msgstr "§eA lista top dez foi gerada"
 
 #, fuzzy
-msgid "Teleport to another players island"
+msgid "teleport to another players island"
 msgstr "§aTeleportando você para sua ilha."
 
 msgid "§4Only supported for players"

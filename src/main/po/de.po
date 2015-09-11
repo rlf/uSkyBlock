@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 20:24+0200\n"
 "PO-Revision-Date: 2015-06-24 04:55+0100\n"
 "Last-Translator: Notker Taptrevenge@gmail.com\n"
 "Language-Team: DE <LL@li.org>\n"
@@ -429,7 +428,8 @@ msgstr "§eErstellt die 10 Besten liste"
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eDie 10 Bestel Liste erfolgreich erstellt"
 
-msgid "Teleport to another players island"
+#, fuzzy
+msgid "teleport to another players island"
 msgstr "Teleportiert zu einer anderen Spieler insel."
 
 msgid "§4Only supported for players"

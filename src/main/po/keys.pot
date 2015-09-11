@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 20:24+0200\n"
+"POT-Creation-Date: 2015-09-11 21:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -539,7 +539,7 @@ msgid "§eFinished generation of the Top Ten list"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:18
-msgid "Teleport to another players island"
+msgid "teleport to another players island"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:25
@@ -547,12 +547,12 @@ msgid "§4Only supported for players"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:29
-#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:50
+#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:41
 #, java-format
 msgid "§aTeleporting to {0}'s island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:61
+#: us/talabrek/ultimateskyblock/command/admin/GotoIslandCommand.java:49
 msgid "§4That player does not have an island!"
 msgstr ""
 
@@ -690,11 +690,11 @@ msgstr ""
 msgid "§eUnloading chunks at {0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/AdminCommand.java:27
+#: us/talabrek/ultimateskyblock/command/AdminCommand.java:35
 msgid "Ultimate SkyBlock Admin"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/AdminCommand.java:47
+#: us/talabrek/ultimateskyblock/command/AdminCommand.java:55
 msgid "show player-information"
 msgstr ""
 

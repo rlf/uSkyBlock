@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 20:24+0200\n"
 "PO-Revision-Date: 2015-06-08 22:35-0000\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
@@ -426,7 +425,8 @@ msgstr "§eHet genereren van de Top Tien lijst"
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eHet genereren van de Top Tien lijst is klaar"
 
-msgid "Teleport to another players island"
+#, fuzzy
+msgid "teleport to another players island"
 msgstr "Telepoort naar een eiland van een andere speler"
 
 msgid "§4Only supported for players"
