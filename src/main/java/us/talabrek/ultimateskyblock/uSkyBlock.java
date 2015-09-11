@@ -787,7 +787,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    private void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
+    public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
