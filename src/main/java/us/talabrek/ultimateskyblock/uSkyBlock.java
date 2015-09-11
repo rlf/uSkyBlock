@@ -527,14 +527,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public void deletePlayerIsland(final String player, final Runnable runner) {
         PlayerInfo pi = playerLogic.getPlayerInfo(player);
-        
-        if (pi == null) {
-            if (Bukkit.isPrimaryThread()) {
-                return;
-            }
-            pi = playerLogic.loadPlayerData(Bukkit.getOfflinePlayer(player).getUniqueId(), player);
-        }
         final PlayerInfo finalPI = pi;
+        IslandInfo islandInfo = getIslandInfo(pi);
+        for (String member : islandInfo.getMembers()) {
+            pi = playerLogic.getPlayerInfo(member);
+            pi.removeFromIsland();
+            pi.save();
+        }
         islandLogic.clearIsland(pi.getIslandLocation(), new Runnable() {
             @Override
             public void run() {

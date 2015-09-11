@@ -116,7 +116,6 @@ public class AdminIslandCommand extends CompositeUSBCommand {
             return;
         }
         sender.sendMessage(tr("Removing {0} from island", playerInfo.getPlayerName()));
-        playerInfo.removeFromIsland();
         islandInfo.removeMember(playerInfo);
         playerInfo.save();
     }

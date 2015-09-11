@@ -426,8 +426,8 @@ msgstr "§a将你传送回自己的岛屿."
 msgid "§4Only supported for players"
 msgstr "§4近支持玩家"
 
-#, java-format
-msgid "§aTeleporting to {0}'s island."
+#, fuzzy, java-format
+msgid "§aTeleporting to {0}s island."
 msgstr "§a传送到 {0} 的岛屿"
 
 msgid "§4That player does not have an island!"

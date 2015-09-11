@@ -57,6 +57,7 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
                     Location homeLocation = islandPlayer.getHomeLocation();
                     islandInfo.removeMember(islandPlayer); // Remove leader
                     islandInfo.setupPartyLeader(playerInfo.getPlayerName()); // Promote member
+                    islandInfo.addMember(islandPlayer);
                     playerInfo.setHomeLocation(homeLocation);
                     islandPlayer.save();
                     playerInfo.save();

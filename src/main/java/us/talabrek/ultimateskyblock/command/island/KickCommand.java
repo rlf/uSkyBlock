@@ -42,8 +42,6 @@ public class KickCommand extends RequireIslandCommand {
                         if (targetPlayerInfo == null) {
                             targetPlayerInfo = plugin.getPlayerLogic().loadPlayerData(targetPlayerName);
                         }
-                        targetPlayerInfo.removeFromIsland();
-                        
                         if (onlineTargetPlayer != null && onlineTargetPlayer.isOnline()) {
                             onlineTargetPlayer.sendMessage(tr("\u00a74" + player.getName() + " has removed you from their island!"));
                         }

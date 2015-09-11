@@ -428,8 +428,8 @@ msgstr "Teleporterer til en andens ø"
 msgid "§4Only supported for players"
 msgstr "§4Kun understøttet for spillere"
 
-#, java-format
-msgid "§aTeleporting to {0}'s island."
+#, fuzzy, java-format
+msgid "§aTeleporting to {0}s island."
 msgstr "§aTeleporterer til {0}'s ø."
 
 msgid "§4That player does not have an island!"

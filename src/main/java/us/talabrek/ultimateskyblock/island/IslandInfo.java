@@ -120,8 +120,12 @@ public class IslandInfo {
                 section.set("maxPartySizePermission", maxPartySizePermission);
             }
         }
-
         save();
+    }
+
+    public void addMember(final PlayerInfo playerInfo) {
+        playerInfo.setJoinParty(getIslandLocation());
+        setupPartyMember(playerInfo.getPlayerName());
     }
 
     public void setupPartyMember(final String member) {
@@ -145,7 +149,6 @@ public class IslandInfo {
                 section.set("maxPartySizePermission", maxPartySizePermission);
             }
         }
-
         WorldGuardHandler.addPlayerToOldRegion(name, member);
         save();
     }
@@ -608,4 +611,5 @@ public class IslandInfo {
     public boolean contains(Location loc) {
         return name.equalsIgnoreCase(WorldGuardHandler.getIslandNameAt(loc));
     }
+
 }
