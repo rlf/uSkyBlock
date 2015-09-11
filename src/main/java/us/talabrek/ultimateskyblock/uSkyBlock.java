@@ -43,6 +43,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
+import org.xnap.commons.i18n.I18n;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
@@ -82,6 +83,8 @@ import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
+import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -1592,7 +1595,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public String getVersionInfo() {
         PluginDescriptionFile description = getDescription();
-        String msg = tr("\u00a77Name: \u00a7b{0}\n" + description.getName());
+        String msg = tr("\u00a77Name: \u00a7b{0}\n", description.getName());
         msg += tr("\u00a77Version: \u00a7b{0}\n", description.getVersion());
         msg += tr("\u00a77Description: \u00a7b{0}\n", description.getDescription());
         msg += tr("\u00a77------------------------------\n");
@@ -1606,6 +1609,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
         }
         msg += tr("\u00a77------------------------------\n");
+        msg += tr("\u00a77Language: \u00a7b{0}\n", getConfig().get("language", "en"));
+        msg += tr("\u00a77 - i18n: \u00a7b{0}\n", I18nUtil.getI18n().getLocale());
+        msg += tr("\u00a77 - resource: \u00a7b{0}\n", I18nUtil.getI18n().getResources().getLocale());
         return msg;
     }
 

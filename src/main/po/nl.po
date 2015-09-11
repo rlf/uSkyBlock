@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 18:22+0200\n"
+"POT-Creation-Date: 2015-09-11 20:24+0200\n"
 "PO-Revision-Date: 2015-06-08 22:35-0000\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
@@ -1943,6 +1943,18 @@ msgstr ""
 msgid "§7Version: §d{0}\n"
 msgstr ""
 
+#, java-format
+msgid "§7Language: §b{0}\n"
+msgstr ""
+
+#, java-format
+msgid "§7 - i18n: §b{0}\n"
+msgstr ""
+
+#, java-format
+msgid "§7 - resource: §b{0}\n"
+msgstr ""
+
 msgid "d"
 msgstr "d"
 
@@ -1954,6 +1966,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "changes the language of the plugin"
+#~ msgstr "verander de biome van het eiland"
 
 #~ msgid "{0} changed the island biome to OCEAN"
 #~ msgstr "{0} heeft het eiland biome veranderd naar OCEAN"

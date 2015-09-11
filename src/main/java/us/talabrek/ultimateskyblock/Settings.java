@@ -130,7 +130,15 @@ public class Settings {
             config.getString("options.island.allowPvP", "false").equalsIgnoreCase("true");
         String loc = config.getString("language", null);
         if (loc != null) {
-            locale = new Locale(loc);
+            // Why is this not just standard Java Locale??
+            String[] parts = loc.split("[_\\-]");
+            if (parts.length >= 3) {
+                locale = new Locale(parts[0], parts[1], parts[2]);
+            } else if (parts.length == 2) {
+                locale = new Locale(parts[0], parts[1]);
+            } else {
+                locale = new Locale(parts[0]);
+            }
         }
         return changed;
     }

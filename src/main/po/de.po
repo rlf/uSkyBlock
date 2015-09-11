@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-11 18:22+0200\n"
+"POT-Creation-Date: 2015-09-11 20:24+0200\n"
 "PO-Revision-Date: 2015-06-24 04:55+0100\n"
 "Last-Translator: Notker Taptrevenge@gmail.com\n"
 "Language-Team: DE <LL@li.org>\n"
@@ -2219,6 +2219,18 @@ msgstr "§7Name: §d{0} ({1})\n"
 msgid "§7Version: §d{0}\n"
 msgstr "§7Version: §d{0}\n"
 
+#, fuzzy, java-format
+msgid "§7Language: §b{0}\n"
+msgstr "§7Name: §b{0}\n"
+
+#, fuzzy, java-format
+msgid "§7 - i18n: §b{0}\n"
+msgstr "§7Version: §b{0}\n"
+
+#, fuzzy, java-format
+msgid "§7 - resource: §b{0}\n"
+msgstr "§7Version: §b{0}\n"
+
 # ???
 msgid "d"
 msgstr "d"
@@ -2234,6 +2246,10 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "changes the language of the plugin"
+#~ msgstr "Ändere das Biome der Insel"
 
 #~ msgid "{0} changed the island biome to OCEAN"
 #~ msgstr "{0} Wechselt das Inselbiome zu OZEAN"
