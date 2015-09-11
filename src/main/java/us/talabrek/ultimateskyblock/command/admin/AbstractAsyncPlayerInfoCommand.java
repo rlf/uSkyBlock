@@ -21,27 +21,14 @@ public abstract class AbstractAsyncPlayerInfoCommand extends AbstractUSBCommand 
     @Override
     public boolean execute(final CommandSender sender, String alias, final Map<String, Object> data, final String... args) {
         if (args.length > 0) {
-            Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    String playerName = args[0];
-                    PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(playerName);
-                    if (playerInfo == null) {
-                        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
-                        if (offlinePlayer != null) {
-                            playerInfo = uSkyBlock.getInstance().getPlayerLogic().loadPlayerData(offlinePlayer);
-                        }
-                    }
-
-                    if (playerInfo != null) {
-                        data.put("playerInfo", playerInfo);
-                        doExecute(sender, playerInfo);
-                        return;
-                    }
-                    sender.sendMessage(tr("\u00a7eInvalid player {0} supplied.", args[0]));
-                }
-            });
-            return true;
+            String playerName = args[0];
+            PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(playerName);
+            if (playerInfo != null) {
+                data.put("playerInfo", playerInfo);
+                doExecute(sender, playerInfo);
+                return true;
+            }
+            sender.sendMessage(tr("\u00a7eInvalid player {0} supplied.", args[0]));
         }
         return false;
     }

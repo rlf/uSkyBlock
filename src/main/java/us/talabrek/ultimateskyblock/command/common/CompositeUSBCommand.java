@@ -9,6 +9,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.text.MessageFormat;
 import java.util.*;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Command with nested commandMap inside.
  */
@@ -150,7 +152,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
         String cmdName = arg.toLowerCase();
         USBCommand cmd = aliasMap.get(cmdName);
         if (cmd != null && hasAccess(cmd, sender)) {
-            String msg = "\u00a77Usage: \u00a73/" + name + " \u00a7e";
+            String msg = tr("\u00a77Usage: {0}", name) + " \u00a7e";
             msg += getShortDescription(sender, cmd);
             if (cmd.getUsage() != null && !cmd.getUsage().isEmpty()) {
                 msg += "\u00a77" + cmd.getUsage();
@@ -163,7 +165,7 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
             if (cmds.isEmpty()) {
                 showUsage(sender, 1);
             } else {
-                String msg = "\u00a77Usage: " + getShortDescription(sender, this);
+                String msg = tr("\u00a77Usage: {0}", getShortDescription(sender, this));
                 Collections.sort(cmds);
                 for (String key : cmds) {
                     USBCommand scmd = commandMap.get(key);

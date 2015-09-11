@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-09 01:21+0200\n"
+"POT-Creation-Date: 2015-09-11 18:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -224,7 +224,7 @@ msgstr ""
 msgid "§ePlayer {0} has no island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AbstractAsyncPlayerInfoCommand.java:41
+#: us/talabrek/ultimateskyblock/command/admin/AbstractAsyncPlayerInfoCommand.java:31
 #, java-format
 msgid "§eInvalid player {0} supplied."
 msgstr ""
@@ -696,6 +696,12 @@ msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/AdminCommand.java:41
 msgid "show player-information"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/common/CompositeUSBCommand.java:155
+#: us/talabrek/ultimateskyblock/command/common/CompositeUSBCommand.java:168
+#, java-format
+msgid "§7Usage: {0}"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/InviteHandler.java:36
@@ -1222,9 +1228,19 @@ msgstr ""
 msgid "§eYou have trusted §4{0}§e on your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:46
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:45
+#, java-format
+msgid "§eYou are now trusted on §4{0}s island."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:49
 #, java-format
 msgid "§eYou have revoked your trust in §a{0}§e on your island."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:51
+#, java-format
+msgid "§eYou are no longer trusted on §4{0}s island."
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:18
