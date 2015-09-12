@@ -357,84 +357,21 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
-        Location home = null;
-        if (p.getHomeLocation() != null) {
-            home = p.getHomeLocation();
-        } else if (p.getIslandLocation() != null) {
-            home = p.getIslandLocation();
-        }
-        if (this.isSafeLocation(home)) {
-            return home;
-        }
+        Location home = findNearestSafeLocation(p.getHomeLocation());
         if (home == null) {
-            return null;
+            home = findNearestSafeLocation(p.getIslandLocation());
         }
-        for (int y = home.getBlockY() + 25; y > 0; --y) {
-            final Location n = new Location(home.getWorld(), (double) home.getBlockX(), (double) y, (double) home.getBlockZ());
-            if (this.isSafeLocation(n)) {
-                return n;
-            }
-        }
-        for (int y = home.getBlockY(); y < 255; ++y) {
-            final Location n = new Location(home.getWorld(), (double) home.getBlockX(), (double) y, (double) home.getBlockZ());
-            if (this.isSafeLocation(n)) {
-                return n;
-            }
-        }
-        final Location island = p.getIslandLocation();
-        if (this.isSafeLocation(island)) {
-            return island;
-        }
-        if (island == null) {
-            return null;
-        }
-        for (int y2 = island.getBlockY() + 25; y2 > 0; --y2) {
-            final Location n2 = new Location(island.getWorld(), (double) island.getBlockX(), (double) y2, (double) island.getBlockZ());
-            if (this.isSafeLocation(n2)) {
-                return n2;
-            }
-        }
-        for (int y2 = island.getBlockY(); y2 < 255; ++y2) {
-            final Location n2 = new Location(island.getWorld(), (double) island.getBlockX(), (double) y2, (double) island.getBlockZ());
-            if (this.isSafeLocation(n2)) {
-                return n2;
-            }
-        }
-        return p.getHomeLocation();
+        return home;
     }
 
     public Location getSafeWarpLocation(final PlayerInfo p) {
-        Location warp = null;
-        FileConfiguration island = getTempIslandConfig(p.locationForParty());
-        if (island.getInt("general.warpLocationX") == 0) {
-            if (p.getHomeLocation() == null) {
-                if (p.getIslandLocation() != null) {
-                    warp = p.getIslandLocation();
-                }
-            } else {
-                warp = p.getHomeLocation();
+        IslandInfo islandInfo = getIslandInfo(p);
+        if (islandInfo != null) {
+            Location warp = findNearestSafeLocation(islandInfo.getWarpLocation());
+            if (warp == null) {
+                warp = findNearestSafeLocation(islandInfo.getIslandLocation());
             }
-        } else {
-            warp = new Location(uSkyBlock.skyBlockWorld, (double) island.getInt("general.warpLocationX"), (double) island.getInt("general.warpLocationY"), (double) island.getInt("general.warpLocationZ"));
-        }
-        if (warp == null) {
-            System.out.print("Error warping player to " + p.getPlayerName() + "'s island.");
-            return null;
-        }
-        if (this.isSafeLocation(warp)) {
             return warp;
-        }
-        for (int y = warp.getBlockY() + 25; y > 0; --y) {
-            final Location n = new Location(warp.getWorld(), (double) warp.getBlockX(), (double) y, (double) warp.getBlockZ());
-            if (this.isSafeLocation(n)) {
-                return n;
-            }
-        }
-        for (int y = warp.getBlockY(); y < 255; ++y) {
-            final Location n = new Location(warp.getWorld(), (double) warp.getBlockX(), (double) y, (double) warp.getBlockZ());
-            if (this.isSafeLocation(n)) {
-                return n;
-            }
         }
         return null;
     }
@@ -462,7 +399,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 Entity[] entities;
                 for (int length = (entities = c.getEntities()).length, i = 0; i < length; ++i) {
                     final Entity e = entities[i];
-                    if (e.getType() == EntityType.SPIDER || e.getType() == EntityType.CREEPER || e.getType() == EntityType.ENDERMAN || e.getType() == EntityType.SKELETON || e.getType() == EntityType.ZOMBIE) {
+                    if (e instanceof Monster && e.getCustomName() == null) { // Remove all monsters that are not named
                         e.remove();
                     }
                 }
@@ -475,7 +412,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (islandInfo != null) {
             postDelete(islandInfo);
         }
-        pi.removeFromIsland();
         pi.save();
     }
 
@@ -639,16 +575,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         return null;
     }
-    
+
     public synchronized boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main thread!");
-        
+
         PlayerInfo pi = playerLogic.getPlayerInfo(player);
         if (pi == null) {
             pi = this.playerLogic.loadPlayerData(Bukkit.getOfflinePlayer(player).getUniqueId(), player);
         }
         final PlayerInfo finalPI = pi;
-        
+
         final Location newLoc = findBedrockLocation(l);
         boolean deleteOldIsland = false;
         if (pi.getHasIsland()) {
@@ -1260,6 +1196,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 px += 1; // start one block in the east dir
             }
         }
+        return findNearestSafeLocation(new Location(loc.getWorld(), px, py, pz));
+    }
+
+    Location findNearestSafeLocation(Location loc) {
+        if (loc == null) {
+            return null;
+        }
+        World world = loc.getWorld();
+        int px = loc.getBlockX();
+        int pz = loc.getBlockZ();
+        int py = loc.getBlockY();
         for (int dy = 1; dy <= 30; dy++) {
             for (int dx = 1; dx <= 30; dx++) {
                 for (int dz = 1; dz <= 30; dz++) {
