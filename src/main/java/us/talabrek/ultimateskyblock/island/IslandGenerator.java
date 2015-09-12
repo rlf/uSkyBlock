@@ -45,9 +45,7 @@ public class IslandGenerator {
 
     public class PlayerIslandCreationData {
         private final PlayerInfo playerInfo;
-        private HashSet<String> allowAccessSchematics = new HashSet<String>();
-        private HashSet<String> allowedExtraItemPermissions = new HashSet<String>();
-        private HashSet<String> allowedBiomePermissions = new HashSet<String>();
+        private HashSet<String> perms = new HashSet<>();
 
         public PlayerIslandCreationData(PlayerInfo playerInfo) {
             this.playerInfo = playerInfo;
@@ -57,28 +55,12 @@ public class IslandGenerator {
             return this.playerInfo;
         }
 
-        protected void allowSchematicPermission(String schematic) {
-            this.allowAccessSchematics.add(schematic);
+        protected void addPerm(String schematic) {
+            this.perms.add(schematic);
         }
 
-        protected boolean hasSchematicPermission(String schematic) {
-            return this.allowAccessSchematics.contains(schematic);
-        }
-
-        protected void allowExtraItemPermission(String permission) {
-            this.allowedExtraItemPermissions.add(permission);
-        }
-
-        protected boolean hasExtraItemPermission(String permission) {
-            return this.allowedExtraItemPermissions.contains(permission);
-        }
-
-        protected void allowBiomePermission(String permission) {
-            this.allowedBiomePermissions.add(permission);
-        }
-
-        public boolean hasBiomePermission(String permission) {
-            return this.allowedBiomePermissions.contains(permission);
+        protected boolean hasPerm(String perm) {
+            return perms.contains(perm);
         }
     }
 
@@ -92,59 +74,51 @@ public class IslandGenerator {
                 cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
             }
             if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, uSkyBlock.skyBlockWorld)) {
-                playerIslandCreationData.allowSchematicPermission(cSchem);
+                playerIslandCreationData.addPerm("usb.schematic." + cSchem);
             }
         }
 
         for (String perm : Settings.island_extraPermissions) {
             if (VaultHandler.checkPerk(player.getName(), "usb." + perm, uSkyBlock.skyBlockWorld)) {
-                playerIslandCreationData.allowExtraItemPermission(perm);
+                playerIslandCreationData.addPerm("usb." + perm);
             }
         }
 
         for (String biome : uSkyBlock.getInstance().getValidBiomes().keySet()) {
             if (VaultHandler.checkPerk(player.getName(), "usb.biome." + biome, uSkyBlock.skyBlockWorld)) {
-                playerIslandCreationData.allowBiomePermission(biome);
+                playerIslandCreationData.addPerm("usb.biome." + biome);
             }
         }
 
         return playerIslandCreationData;
     }
 
-    public void createIsland(uSkyBlock plugin, PlayerIslandCreationData playerIslandCreationData, Location next) {
+    public void createIsland(uSkyBlock plugin, final PlayerIslandCreationData playerIslandCreationData, final Location next) {
         log.entering(CN, "createIsland", new Object[]{plugin, playerIslandCreationData.getPlayerInfo().getPlayerName(), next});
         log.fine("creating island for " + playerIslandCreationData.getPlayerInfo().getPlayerName() + " at " + next);
         boolean hasIslandNow = false;
         if (schemFiles.length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
+            File permFile = null;
+            File defaultFile = null;
             for (File schemFile : schemFiles) {
                 // First run-through - try to set the island the player has permission for.
                 String cSchem = schemFile.getName();
                 if (cSchem.lastIndexOf('.') > 0) {
                     cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
                 }
-                if (playerIslandCreationData.hasSchematicPermission(cSchem)
-                        && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, schemFile, next)) {
-                    setChest(next, playerIslandCreationData);
-                    hasIslandNow = true;
-                    log.fine("chose schematic " + cSchem + " due to permission.");
-                    break;
+                if (cSchem.equalsIgnoreCase(Settings.island_schematicName)) {
+                    defaultFile = schemFile;
+                }
+                if (permFile == null && playerIslandCreationData.hasPerm("usb.schematic." + cSchem)) {
+                    permFile = schemFile;
                 }
             }
-            if (!hasIslandNow) {
-                for (File schemFile : schemFiles) {
-                    // 2nd Run through, set the default set schematic (if found).
-                    String cSchem = schemFile.getName();
-                    if (cSchem.lastIndexOf('.') > 0) {
-                        cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
-                    }
-                    if (cSchem.equalsIgnoreCase(Settings.island_schematicName)
-                            && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, schemFile, next)) {
-                        setChest(next, playerIslandCreationData);
-                        hasIslandNow = true;
-                        log.fine("chose schematic " + cSchem);
-                        break;
-                    }
-                }
+            if (permFile != null) {
+                defaultFile = permFile;
+            }
+            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next)) {
+                hasIslandNow = true;
+                log.fine("chose schematic " + defaultFile);
             }
         }
         if (!hasIslandNow) {
@@ -155,8 +129,13 @@ public class IslandGenerator {
                 log.fine("generating a skySMP island");
                 oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerIslandCreationData, uSkyBlock.skyBlockWorld);
             }
-            hasIslandNow = true;
         }
+        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+            @Override
+            public void run() {
+                setChest(next, playerIslandCreationData);
+            }
+        }, plugin.getConfig().getInt("options.advanced.delayChestUpdate", 0));
         next.setY((double) Settings.island_height);
 
         log.exiting(CN, "createIsland");
@@ -214,7 +193,6 @@ public class IslandGenerator {
         blockToChange3.setTypeIdAndData(12, (byte) 0, false);
         blockToChange3 = world.getBlockAt(x + 2, y + 1, z + 3);
         blockToChange3.setTypeIdAndData(12, (byte) 0, false);
-        setChest(chest.getLocation(), playerIslandCreationData);
     }
 
     private void islandLayer1(final int x, final int z, final World world) {
@@ -346,8 +324,6 @@ public class IslandGenerator {
         blockToChange.setTypeIdAndData(18, (byte) 0, false);
         blockToChange = world.getBlockAt(x, Settings.island_height + 5, z + 1);
         blockToChange.setTypeIdAndData(54, (byte) 3, false);
-        final Chest chest = (Chest) blockToChange.getState();
-        setChest(chest.getLocation(), playerIslandCreationData);
     }
 
     public void setChest(final Location loc, final PlayerIslandCreationData playerIslandCreationData) {
@@ -366,7 +342,7 @@ public class IslandGenerator {
                         inventory.setContents(Settings.island_chestItems);
                         if (Settings.island_addExtraItems) {
                             for (String perm : Settings.island_extraPermissions) {
-                                if (playerIslandCreationData.hasExtraItemPermission(perm)) {
+                                if (playerIslandCreationData.hasPerm(perm)) {
                                     String itemString = config.getString("options.island.extraPermissions." + perm);
                                     if (itemString == null || itemString.isEmpty()) {
                                         continue;

@@ -993,6 +993,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 // Set the biome in the world.
                 skyBlockWorld.setBiome(x, z, biome);
                 // Refresh the chunks so players can see it without relogging!
+                // Unfortunately, it doesn't work - though it should (We filed a bug report about it to SPIGOT)
                 skyBlockWorld.refreshChunk(x, z);
             }
         }
