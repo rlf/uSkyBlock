@@ -5,6 +5,7 @@ import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -62,7 +63,7 @@ public class LevelLogic {
         int defaultDR = config.getInt("general.defaultScale", 10000);
         // Per default, let all blocks (regardless of data-value) share limit and score
         for (int b = 0; b < MAX_INDEX; b++) {
-            if ((b << DATA_BITS) == b) {
+            if ((b & DATA_MASK) == 0) {
                 blockValue[b] = defaultValue;
             } else {
                 blockValue[b] = -1; // Share with the blockId:0 block
@@ -150,8 +151,13 @@ public class LevelLogic {
         Region weRegion = new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint());
         final List<ChunkSnapshot> snapshots = new ArrayList<>();
         log.finer("Snapshotting chunks");
-        for (Vector2D chunk : weRegion.getChunks()) {
-            snapshots.add(l.getWorld().getChunkAt(chunk.getBlockX(), chunk.getBlockZ()).getChunkSnapshot());
+        for (Vector2D chunkVector : weRegion.getChunks()) {
+            Chunk chunk = l.getWorld().getChunkAt(chunkVector.getBlockX(), chunkVector.getBlockZ());
+            if (!chunk.isLoaded()) {
+                log.finer("Loading chunk " + chunkVector);
+                chunk.load();
+            }
+            snapshots.add(chunk.getChunkSnapshot(true, false, false));
         }
         log.finer("Done making chunk-snapshots of " + weRegion);
         final int px = l.getBlockX();
@@ -169,8 +175,10 @@ public class LevelLogic {
                         int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
                         for (int y = 0; y <= 255; y++) {
                             int blockId = chunk.getBlockTypeId(cx, y, cz);
-                            blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
-                            addBlockCount(blockId, counts);
+                            if (blockId != 0) { // Ignore AIR
+                                blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
+                                addBlockCount(blockId, counts);
+                            }
                         }
                     }
                 }
@@ -228,7 +236,7 @@ public class LevelLogic {
 
     private void addBlockCount(int blockId, int[] counts) {
         if (blockValue[blockId] == -1) {
-            blockId = blockId & (0xffffffff ^ DATA_MASK); // remove sub-type
+            blockId = blockId & (~DATA_MASK); // remove sub-type
         } else if (blockValue[blockId] < -1) {
             // Direct addressing
             blockId = -(Math.round(blockValue[blockId]) & 0xffffff);
