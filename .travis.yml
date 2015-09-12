@@ -21,6 +21,7 @@ deploy:
   file:
   - target/uSkyBlock.jar
   - target/uSkyBlock-api.jar
+  - target/site/gettext-report.html
   skip_cleanup: true
   on:
     tags: true

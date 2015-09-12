@@ -529,12 +529,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         PlayerInfo pi = playerLogic.getPlayerInfo(player);
         final PlayerInfo finalPI = pi;
         IslandInfo islandInfo = getIslandInfo(pi);
+        Location islandLocation = islandInfo.getIslandLocation();
         for (String member : islandInfo.getMembers()) {
             pi = playerLogic.getPlayerInfo(member);
             pi.removeFromIsland();
             pi.save();
         }
-        islandLogic.clearIsland(pi.getIslandLocation(), new Runnable() {
+        islandLogic.clearIsland(islandLocation, new Runnable() {
             @Override
             public void run() {
                 postDelete(finalPI);

@@ -138,11 +138,7 @@ public class InviteHandler {
 
     public boolean addPlayerToParty(final Player player, final IslandInfo island) {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
-        if (playerInfo == null) {
-            return false;
-        }
-        playerInfo.setJoinParty(island.getIslandLocation());
-        island.setupPartyMember(player.getName());
+        island.addMember(playerInfo);
         playerInfo.save();
         island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has joined your island group.", player.getDisplayName()));
         return true;
