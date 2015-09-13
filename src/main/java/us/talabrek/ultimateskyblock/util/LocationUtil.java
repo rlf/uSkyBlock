@@ -31,4 +31,13 @@ public enum LocationUtil {;
         }
         return location.getBlockX() + "," + location.getBlockZ();
     }
+
+    public static Location centerOnBlock(Location loc) {
+        if (loc == null) {
+            return null;
+        }
+        return new Location(loc.getWorld(),
+                loc.getBlockX() + 0.5, loc.getBlockY() + 0.1, loc.getBlockZ() + 0.5,
+                loc.getYaw(), loc.getPitch());
+    }
 }

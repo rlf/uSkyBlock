@@ -14,7 +14,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class TrustCommand extends RequireIslandCommand {
     public TrustCommand(uSkyBlock plugin) {
-        super(plugin, "trust|untrust", "usb.island.trust", "player", tr("trust/untrust a player to help on your island."));
+        super(plugin, "trust|untrust", "usb.island.trust", "?player", tr("trust/untrust a player to help on your island."));
     }
 
     @Override

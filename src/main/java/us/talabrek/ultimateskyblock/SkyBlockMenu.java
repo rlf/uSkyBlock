@@ -18,6 +18,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -263,223 +264,77 @@ public class SkyBlockMenu {
         sign.setItemMeta(meta4);
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        ItemStack menuItem = new ItemStack(Material.RAW_FISH, 1, (short) 2);
-        meta4 = menuItem.getItemMeta();
+        List<BiomeMenu> biomeMenus = Arrays.asList(
+                new BiomeMenu(new ItemStack(Material.RAW_FISH, 1, (short) 2),
+                        "ocean", tr("Ocean"),
+                        tr("The ocean biome is the basic\nstarting biome for all islands.\npassive mobs like animals will\nnot spawn. Hostile mobs will\nspawn normally.")
+                ),
+                new BiomeMenu(new ItemStack(Material.SAPLING, 1, (short) 1),
+                        "forest", tr("Forest"),
+                        tr("The forest biome will allow\nyour island to spawn passive.\nmobs like animals (including\nwolves). Hostile mobs will\nspawn normally.")
+                ),
+                new BiomeMenu(new ItemStack(Material.SAND, 1),
+                        "desert", tr("Desert"),
+                        tr("The desert biome makes it so\nthat there is no rain or snow\non your island. Passive mobs\nwon't spawn. Hostile mobs will\nspawn normally.")
+                ),
+                new BiomeMenu(new ItemStack(Material.SAPLING, 1, (short) 3),
+                        "jungle", tr("Jungle"),
+                        tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
+                ),
+                new BiomeMenu(new ItemStack(Material.WATER_LILY, 1),
+                        "swampland", tr("Swampland"),
+                        tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
+                ),
+                new BiomeMenu(new ItemStack(Material.SNOW, 1),
+                        "taiga", tr("Taiga"),
+                        tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
+                ),
+                new BiomeMenu(new ItemStack(Material.RED_MUSHROOM, 1),
+                        "mushroom", tr("Mushroom"),
+                        tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
+                ),
+                new BiomeMenu(new ItemStack(Material.NETHER_BRICK, 1),
+                        "hell", tr("Hell"),
+                        tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
+                ),
+                new BiomeMenu(new ItemStack(Material.EYE_OF_ENDER, 1),
+                        "sky", tr("Sky"),
+                        tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
+                ),
+                new BiomeMenu(new ItemStack(Material.LONG_GRASS, 1, (byte) 1),
+                        "plains", tr("Plains"),
+                        tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
+                ),
+                new BiomeMenu(new ItemStack(Material.EMERALD_ORE, 1),
+                        "extreme_hills", tr("Extreme Hills"),
+                        tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+                ),
+                new BiomeMenu(new ItemStack(Material.RED_ROSE, 1, (short) 5),
+                        "flower_forest", tr("Flower Forest"),
+                        tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+                )
+        );
         String currentBiome = skyBlock.getCurrentBiome(player);
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.ocean", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Ocean"));
-            addLore(lores, tr("\u00a7fThe ocean biome is the basic\n\u00a7fstarting biome for all islands.\n\u00a7fpassive mobs like animals will\n\u00a7fnot spawn. Hostile mobs will\n\u00a7fspawn normally."));
-            if ("OCEAN".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
+        for (BiomeMenu biomeMenu : biomeMenus) {
+            ItemStack menuItem = biomeMenu.getIcon();
+            meta4 = menuItem.getItemMeta();
+            if (VaultHandler.checkPerk(player.getName(), "usb.biome." + biomeMenu.getId(), player.getWorld())) {
+                meta4.setDisplayName("\u00a7a" + tr("Biome: {0}", biomeMenu.getTitle()));
+                lores.addAll(biomeMenu.getEnabledDescription());
+                if (biomeMenu.getId().equalsIgnoreCase(currentBiome)) {
+                    addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
+                } else {
+                    addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
+                }
             } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
+                meta4.setDisplayName("\u00a78" + tr("Biome: {0}", biomeMenu.getTitle()));
+                lores.addAll(biomeMenu.getDisabledDescription());
             }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Ocean"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The ocean biome is the basic\n\u00a77starting biome for all islands.\n\u00a77passive mobs like animals will\n\u00a77not spawn. Hostile mobs will\n\u00a77spawn normally."));
+            meta4.setLore(lores);
+            menuItem.setItemMeta(meta4);
+            menu.addItem(menuItem);
+            lores.clear();
         }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.SAPLING, 1, (short) 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.forest", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Forest"));
-            addLore(lores, tr("\u00a7fThe forest biome will allow\n\u00a7fyour island to spawn passive.\n\u00a7fmobs like animals (including\n\u00a7fwolves). Hostile mobs will\n\u00a7fspawn normally."));
-            if ("FOREST".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Forest"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The forest biome will allow\n\u00a77your island to spawn passive.\n\u00a77mobs like animals (including\n\u00a77wolves). Hostile mobs will\n\u00a77spawn normally."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.SAND, 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.desert", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Desert"));
-            addLore(lores, tr("\u00a7fThe desert biome makes it so\n\u00a7fthat there is no rain or snow\n\u00a7fon your island. Passive mobs\n\u00a7fwon't spawn. Hostile mobs will\n\u00a7fspawn normally."));
-            if ("DESERT".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Desert"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The desert biome makes it so\n\u00a77that there is no rain or snow\n\u00a77on your island. Passive mobs\n\u00a77won't spawn. Hostile mobs will\n\u00a77spawn normally."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.SAPLING, 1, (short) 3);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.jungle", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Jungle"));
-            addLore(lores, tr("\u00a7fThe jungle biome is bright\n\u00a7fand colorful. Passive mobs\n\u00a7f(including ocelots) will\n\u00a7fspawn. Hostile mobs will\n\u00a7fspawn normally."));
-            if ("JUNGLE".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Jungle"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The jungle biome is bright\n\u00a77and colorful. Passive mobs\n\u00a77(including ocelots) will\n\u00a77spawn. Hostile mobs will\n\u00a77spawn normally."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.WATER_LILY, 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.swampland", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Swampland"));
-            addLore(lores, tr("\u00a7fThe swamp biome is dark\n\u00a7fand dull. Passive mobs\n\u00a7fwill spawn normally and\n\u00a7fslimes have a small chance\n\u00a7fto spawn at night depending\n\u00a7fon the moon phase."));
-            if ("SWAMPLAND".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Swampland"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The swamp biome is dark\n\u00a77and dull. Passive mobs\n\u00a77will spawn normally and\n\u00a77slimes have a small chance\n\u00a77to spawn at night depending\n\u00a77on the moon phase."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.SNOW, 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.taiga", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Taiga"));
-            addLore(lores, tr("\u00a7fThe taiga biome has snow\n\u00a7finstead of rain. Passive\n\u00a7fmobs will spawn normally\n\u00a7f(including wolves) and\n\u00a7fhostile mobs will spawn."));
-            if ("TAIGA".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Taiga"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The taiga biome has snow\n\u00a77instead of rain. Passive\n\u00a77mobs will spawn normally\n\u00a77(including wolves) and\n\u00a77hostile mobs will spawn."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.RED_MUSHROOM, 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.mushroom", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Mushroom"));
-            addLore(lores, tr("\u00a7fThe mushroom biome is\n\u00a7fbright and colorful.\n\u00a7fMooshrooms are the only\n\u00a7fmobs that will spawn.\n\u00a7fNo other passive or\n\u00a7fhostile mobs will spawn."));
-            if ("MUSHROOM".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Mushroom"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The mushroom biome is\n\u00a77bright and colorful.\n\u00a77Mooshrooms are the only\n\u00a77mobs that will spawn.\n\u00a77No other passive or\n\u00a77hostile mobs will spawn."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.NETHER_BRICK, 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.hell", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Hell(Nether)"));
-            addLore(lores, tr("\u00a7fThe hell biome looks\n\u00a7fdark and dead. Some\n\u00a7fmobs from the nether will\n\u00a7fspawn in this biome\n\u00a7f(excluding ghasts and\n\u00a7fblazes)."));
-            if ("HELL".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Hell(Nether)"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The hell biome looks\n\u00a77dark and dead. Some\n\u00a77mobs from the nether will\n\u00a77spawn in this biome\n\u00a77(excluding ghasts and\n\u00a77blazes)."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.EYE_OF_ENDER, 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.sky", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Sky(End)"));
-            addLore(lores, tr("\u00a7fThe sky biome gives your\n\u00a7fisland a special dark sky.\n\u00a7fOnly endermen will spawn\n\u00a7fin this biome."));
-            if ("SKY".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Sky(End)"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The sky biome gives your\n\u00a77island a special dark sky.\n\u00a77Only endermen will spawn\n\u00a77in this biome."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.LONG_GRASS, 1, (byte) 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.plains", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Plains"));
-            addLore(lores, tr("\u00a7fThe plains biome has rain\n\u00a7finstead of snow. Passive\n\u00a7fmobs will spawn normally\n\u00a7f(including horses) and\n\u00a7fhostile mobs will spawn."));
-            if ("PLAINS".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Plains"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The plains biome has rain\n\u00a77instead of snow. Passive\n\u00a77mobs will spawn normally\n\u00a77(including horses) and\n\u00a77hostile mobs will spawn."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.EMERALD_ORE, 1);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.extreme_hills", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Extreme Hills"));
-            addLore(lores, tr("\u00a7fThe extreme hills biome.\n\u00a7fPassive mobs will spawn \n\u00a7fnormally and hostile\n\u00a7fmobs will spawn."));
-            if ("EXTREME_HILLS".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Extreme Hills"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The extreme hills biome.\n\u00a77Passive mobs will spawn \n\u00a77normally and hostile\n\u00a77mobs will spawn."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.RED_ROSE, 1, (short) 5);
-        meta4 = menuItem.getItemMeta();
-        if (VaultHandler.checkPerk(player.getName(), "usb.biome.flower_forest", player.getWorld())) {
-            meta4.setDisplayName(tr("\u00a7aBiome: Flower Forest"));
-            addLore(lores, tr("\u00a7fThe flower forest biome.\n\u00a7fPassive mobs will spawn \n\u00a7fnormally and hostile\n\u00a7fmobs will spawn."));
-            if ("FLOWER_FOREST".equals(currentBiome)) {
-                addLore(lores, tr("\u00a72\u00a7lThis is your current biome."));
-            } else {
-                addLore(lores, tr("\u00a7e\u00a7lClick to change to this biome."));
-            }
-        } else {
-            meta4.setDisplayName(tr("\u00a78Biome: Flower Forest"));
-            addLore(lores, tr("\u00a7cYou cannot use this biome.\n\u00a77The flower forest biome.\n\u00a77Passive mobs will spawn \n\u00a77normally and hostile\n\u00a77mobs will spawn."));
-        }
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.addItem(menuItem);
-        lores.clear();
         return menu;
     }
 
@@ -1000,6 +855,54 @@ public class SkyBlockMenu {
             } else {
                 p.openInventory(displayPartyPlayerGUI(p, meta.getOwner()));
             }
+        }
+    }
+    private static class BiomeMenu {
+
+        private final ItemStack icon;
+        private final String name;
+        private final String title;
+        private final String description;
+
+        public BiomeMenu(ItemStack icon, String name, String title, String description) {
+            this.icon = icon;
+            this.name = name;
+            this.title = title;
+            this.description = description;
+        }
+
+        public ItemStack getIcon() {
+            return icon;
+        }
+
+        public String getId() {
+            return name;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+        public List<String> getDisabledDescription() {
+            String[] split = description.split("\n");
+
+            List<String> result = new ArrayList<>();
+            result.add("\u00a7c" + tr("You cannot use this biome."));
+            for (int i = 0; i < split.length; i++) {
+                result.add("\u00a77" + split[i]);
+            }
+            return result;
+        }
+        public List<String> getEnabledDescription() {
+            String[] split = description.split("\n");
+            List<String> result = new ArrayList<>();
+            for (int i = 0; i < split.length; i++) {
+                result.add("\u00a7f" + split[i]);
+            }
+            return result;
         }
     }
 }

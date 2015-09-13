@@ -155,7 +155,7 @@ public class WorldEditHandler {
             @Override
             public void run() {
                 long diff = System.currentTimeMillis() - t;
-                uSkyBlock.log(Level.INFO, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+                uSkyBlock.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
                 if (afterDeletion != null) {
                     afterDeletion.run();
                 }

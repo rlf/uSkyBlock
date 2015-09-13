@@ -83,6 +83,7 @@ import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
 
 import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -325,7 +326,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
             MultiverseCoreHandler.importWorld(skyBlockWorld);
             setupWorld(skyBlockWorld);
-
         }
         return uSkyBlock.skyBlockWorld;
     }
@@ -485,7 +485,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         islandGenerator.createIsland(this, playerIslandCreationData, next);
         if (!changePlayerBiome(playerIslandCreationData, "OCEAN")) throw new UnsupportedOperationException();
         WorldEditHandler.unloadRegion(next);
-        next.setY((double) Settings.island_height);
         setNewPlayerIsland(playerIslandCreationData.getPlayerInfo(), next);
         if (player != null && player.isOnline()) {
             getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
@@ -512,10 +511,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (playerInfo != null) {
             playerInfo.setIslandRestarting(true);
         }
-
-        // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
-        clearPlayerInventory(player);
-        clearEntitiesNearPlayer(player);
+        if (isSkyWorld(player.getWorld())) {
+            // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
+            clearPlayerInventory(player);
+            clearEntitiesNearPlayer(player);
+        }
 
         final IslandGenerator.PlayerIslandCreationData playerIslandCreationData = this.islandGenerator.preCreateData(player, getPlayerInfo(player));
         this.islandLogic.clearIsland(next, new Runnable() {
@@ -1196,17 +1196,18 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 px += 1; // start one block in the east dir
             }
         }
-        return findNearestSafeLocation(new Location(loc.getWorld(), px, py, pz));
+        return findNearestSafeLocation(new Location(loc.getWorld(), px, py, pz), loc);
     }
 
     Location findNearestSafeLocation(Location loc) {
+        return findNearestSafeLocation(loc, null);
+    }
+
+    Location findNearestSafeLocation(Location loc, Location lookAt) {
         if (loc == null) {
             return null;
         }
         loadChunkAt(loc);
-        if (isSafeLocation(loc)) {
-            return loc;
-        }
         World world = loc.getWorld();
         int px = loc.getBlockX();
         int pz = loc.getBlockZ();
@@ -1221,9 +1222,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     Location spawnLocation = new Location(world, x, y, z);
                     if (isSafeLocation(spawnLocation)) {
                         // look at the old location
-                        spawnLocation = spawnLocation.add(0.5, 0.1, 0.5);
-                        Location d = loc.clone().subtract(spawnLocation);
-                        spawnLocation.setDirection(d.toVector());
+                        spawnLocation = centerOnBlock(spawnLocation);
+                        if (lookAt != null) {
+                            Location d = centerOnBlock(lookAt).subtract(spawnLocation);
+                            spawnLocation.setDirection(d.toVector());
+                        } else {
+                            spawnLocation.setYaw(loc.getYaw());
+                            spawnLocation.setPitch(loc.getPitch());
+                        }
+                        log(Level.FINER, "found safe location " + spawnLocation + " near " + loc + ", looking at " + lookAt);
                         return spawnLocation;
                     }
                 }
@@ -1550,6 +1557,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         String msg = tr("\u00a77Name: \u00a7b{0}\n", description.getName());
         msg += tr("\u00a77Version: \u00a7b{0}\n", description.getVersion());
         msg += tr("\u00a77Description: \u00a7b{0}\n", description.getDescription());
+        msg += tr("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getResources().getLocale());
         msg += tr("\u00a77------------------------------\n");
         msg += tr("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
         for (String[] dep : depends) {
@@ -1561,9 +1569,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             }
         }
         msg += tr("\u00a77------------------------------\n");
-        msg += tr("\u00a77Language: \u00a7b{0}\n", getConfig().get("language", "en"));
-        msg += tr("\u00a77 - i18n: \u00a7b{0}\n", I18nUtil.getI18n().getLocale());
-        msg += tr("\u00a77 - resource: \u00a7b{0}\n", I18nUtil.getI18n().getResources().getLocale());
         return msg;
     }
 

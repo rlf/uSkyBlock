@@ -1,15 +1,19 @@
 general:
   # pointsPerLevel - number of points needed to advance 1 island level.
   pointsPerLevel: 1000
+
   # default - the default value for blocks not listed in blockValues here.
   default: 10
+
   # useDiminishingReturns - If true, diminishing returns will be used for all blocks using the default scale 
   # (custom scales can be defined in the section below).
   # If useDiminishingReturns is false, the blocks listed in the dimishingReturns section will still be affected.
   useDiminishingReturns: false
+
   # defaultScale - the default value to use for diminishing returns. This is the number of blocks before DR starts to 
   # lower value.
   defaultScale: 10000
+
   # blockValues [ID: VALUE] - the blocks listed below will have custom values instead of the default.
   # Syntax: ID : VALUE
   #  ID := BlockID | BlockID/SubType | BlockID/SubTypeMin-SubTypeMax
@@ -18,9 +22,12 @@ general:
   # '1/1': 20 # Will give 20 points per GRANITE
   # '1/2-6': 25 # Will give 25 points for Polished Granite(2), Andesite(3), Polished Andesite(4), Diorite(5) and 
   # Polished Diorite(6).
-  # '1/0': 10 # Will give 10 points per STONE
-  # '1/1-6': -1 # Will give 10 points for Polished Granite(2), Andesite(3), Polished Andesite(4), Diorite(5) and 
-  # Polished Diorite(6). The -1 here is not used to "disable" as many other plugins use it for.
+  # Special Values:
+  #  -1 means "share everything with the base-block" (subtype 0).
+  #  i.e.
+  #   '35/0': 50
+  #   '35/1-15': -1
+  # means all wool is counted as "wool", instead of having separate limits and values. 
 blockValues:
   '1/0': 10
   '1/1': 12.5
@@ -71,21 +78,19 @@ blockValues:
   '41': 1500
   '42': 300
   '43/0': 10
-  '43/1': 80
+  '43/1': 20
   '43/2-3': 10
   '43/4': 50
-  '43/5': 10
+  '43/5': 15
   '43/6': 20
   '43/7': 100
-  '43/8': 10
-  '43/9': 80
   '44/0': 5
   '44/1': 40
   '44/2': 5
   '44/3': 5
   '44/4': 25
-  '44/5': 5
-  '44/6': 10
+  '44/5': 7
+  '44/6': 20
   '44/7': 50
   '45': 50
   '46': 80
@@ -122,7 +127,7 @@ blockValues:
   '95/0': 25
   '95/1-15': -1
   '96': 30
-  '98': 10
+  '98': 12
   '99': 100
   '100': 100
   '101': 12.5
