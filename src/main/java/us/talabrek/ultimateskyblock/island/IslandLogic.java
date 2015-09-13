@@ -111,7 +111,7 @@ public class IslandLogic {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
             for (Player player : WorldEditHandler.getPlayersInRegion(plugin.getWorld(), region)) {
-                if (player != null && player.isOnline()) {
+                if (player != null && player.isOnline() && plugin.isSkyWorld(player.getWorld())) {
                     player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
                     plugin.spawnTeleport(player, true);
                 }

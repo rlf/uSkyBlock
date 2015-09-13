@@ -727,9 +727,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
-            if (!homeSweetHome.getWorld().isChunkLoaded(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4)) {
-                homeSweetHome.getWorld().loadChunk(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4);
-            }
+            loadChunkAt(homeSweetHome);
             player.teleport(homeSweetHome);
             player.setVelocity(new org.bukkit.util.Vector());
         } else {
@@ -738,13 +736,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 @Override
                 public void run() {
                     player.setVelocity(new org.bukkit.util.Vector());
-                    if (!homeSweetHome.getWorld().isChunkLoaded(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4)) {
-                        homeSweetHome.getWorld().loadChunk(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4);
-                    }
+                    loadChunkAt(homeSweetHome);
                     player.teleport(homeSweetHome);
                     player.setVelocity(new org.bukkit.util.Vector());
                 }
             }, TimeUtil.secondsAsTicks(delay));
+        }
+    }
+
+    private void loadChunkAt(Location homeSweetHome) {
+        if (!homeSweetHome.getWorld().isChunkLoaded(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4)) {
+            homeSweetHome.getWorld().loadChunk(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4);
         }
     }
 
@@ -772,14 +774,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getLogger().entering(CN, "spawnTeleport", new Object[]{player});
 
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
+        final Location spawnLocation = getWorld().getSpawnLocation();
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             if (Settings.extras_sendToSpawn) {
                 execCommand(player, "op:spawn");
             } else {
-                if (!getWorld().isChunkLoaded(getWorld().getSpawnLocation().getBlockX() >> 4, getWorld().getSpawnLocation().getBlockZ() >> 4)) {
-                    getWorld().loadChunk(getWorld().getSpawnLocation().getBlockX() >> 4, getWorld().getSpawnLocation().getBlockZ() >> 4);
-                }
-                player.teleport(getWorld().getSpawnLocation());
+                loadChunkAt(spawnLocation);
+                player.teleport(spawnLocation);
             }
         } else {
             player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", delay));
@@ -789,10 +790,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     if (Settings.extras_sendToSpawn) {
                         execCommand(player, "op:spawn");
                     } else {
-                        if (!getWorld().isChunkLoaded(getWorld().getSpawnLocation().getBlockX() >> 4, getWorld().getSpawnLocation().getBlockZ() >> 4)) {
-                            getWorld().loadChunk(getWorld().getSpawnLocation().getBlockX() >> 4, getWorld().getSpawnLocation().getBlockZ() >> 4);
-                        }
-                        player.teleport(getWorld().getSpawnLocation());
+                        loadChunkAt(spawnLocation);
+                        player.teleport(spawnLocation);
                     }
                 }
             }, TimeUtil.secondsAsTicks(delay));
@@ -1204,6 +1203,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (loc == null) {
             return null;
         }
+        loadChunkAt(loc);
+        if (isSafeLocation(loc)) {
+            return loc;
+        }
         World world = loc.getWorld();
         int px = loc.getBlockX();
         int pz = loc.getBlockZ();
@@ -1218,6 +1221,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     Location spawnLocation = new Location(world, x, y, z);
                     if (isSafeLocation(spawnLocation)) {
                         // look at the old location
+                        spawnLocation = spawnLocation.add(0.5, 0.1, 0.5);
                         Location d = loc.clone().subtract(spawnLocation);
                         spawnLocation.setDirection(d.toVector());
                         return spawnLocation;
@@ -1241,7 +1245,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         
         Location chestSpawnLocation = getChestSpawnLoc(loc);
         if (chestSpawnLocation != null) {
-            playerInfo.setHomeLocation(chestSpawnLocation.add(0.5, 0.1, 0.5));
+            playerInfo.setHomeLocation(chestSpawnLocation);
         } else {
             log(Level.SEVERE, "Could not find a safe chest within 30 blocks of the island spawn. Bad schematic!");
         }

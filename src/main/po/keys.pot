@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-13 01:26+0200\n"
+"POT-Creation-Date: 2015-09-13 02:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -746,17 +746,17 @@ msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:143
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:142
 #, java-format
 msgid "§b{0}§d has joined your island group."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:168
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:167
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/InviteHandler.java:172
+#: us/talabrek/ultimateskyblock/command/InviteHandler.java:171
 #, java-format
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr ""
@@ -1023,16 +1023,16 @@ msgstr ""
 msgid "§eYou own this island, use /island remove <player> instead."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:42
+#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:41
 msgid "§eYou have left the island and returned to the player spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:44
+#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:43
 #, java-format
 msgid "§4{0} has left your island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:48
+#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:47
 msgid "§4You must be in the skyblock world to leave your party!"
 msgstr ""
 
@@ -1289,7 +1289,7 @@ msgid ""
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:57
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:754
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:756
 msgid "§4That player does not exist!"
 msgstr ""
 
@@ -2355,96 +2355,96 @@ msgstr ""
 msgid "§aTeleporting you to your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:736
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:785
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:734
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:786
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:759
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:761
 msgid "§4Unable to warp you to that player's island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:763
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:765
 msgid "§aTeleporting you to "
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:805
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:819
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:804
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:818
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:813
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:812
 msgid "§aYour skyblock home has been set to your current location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:815
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:814
 msgid "§4Your current location is not a safe home-location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1076
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1075
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1089
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1088
 msgid "Player doesn't have an island or it's already protected!"
-msgstr ""
-
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1546
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr ""
-
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1547
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr ""
-
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1548
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr ""
-
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1549
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1554
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1559
-msgid "§7------------------------------\n"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/uSkyBlock.java:1550
 #, java-format
+msgid "§7Name: §b{0}\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1551
+#, java-format
+msgid "§7Version: §b{0}\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1552
+#, java-format
+msgid "§7Description: §b{0}\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1553
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1558
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1563
+msgid "§7------------------------------\n"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1554
+#, java-format
 msgid "§7Server: §e{0} {1}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1555
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1559
 msgid "§2ENABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1555
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1559
 msgid "§4DISABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1555
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1559
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1556
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1560
 #, java-format
 msgid "§7Version: §d{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1560
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1564
 #, java-format
 msgid "§7Language: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1561
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1565
 #, java-format
 msgid "§7 - i18n: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1562
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1566
 #, java-format
 msgid "§7 - resource: §b{0}\n"
 msgstr ""

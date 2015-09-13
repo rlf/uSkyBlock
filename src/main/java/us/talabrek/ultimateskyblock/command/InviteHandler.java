@@ -115,7 +115,6 @@ public class InviteHandler {
                     addPlayerToParty(player, island);
                     plugin.homeTeleport(player, true);
                     plugin.clearPlayerInventory(player);
-                    WorldGuardHandler.addPlayerToOldRegion(island.getName(), player.getName());
                 }
             };
             if (deleteOldIsland) {
