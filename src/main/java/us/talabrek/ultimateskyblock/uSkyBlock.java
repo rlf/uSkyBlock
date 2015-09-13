@@ -30,7 +30,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -43,7 +42,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
-import org.xnap.commons.i18n.I18n;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
@@ -76,12 +74,14 @@ import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
+import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerLogic;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.getLocale;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
 
@@ -529,6 +529,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public void clearPlayerInventory(Player player) {
         getLogger().entering(CN, "clearPlayerInventory", player);
+        if (!isSkyWorld(player.getWorld())) {
+            getLogger().finer("not clearing, since player is not in skyworld");
+            return;
+        }
         if (getConfig().getBoolean("options.restart.clearInventory", true)) {
             player.getInventory().clear();
         }
@@ -539,7 +543,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (getConfig().getBoolean("options.restart.clearEnderChest", true)) {
             player.getEnderChest().clear();
         }
-
         getLogger().exiting(CN, "clearPlayerInventory");
     }
 
@@ -724,6 +727,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
+        log(Level.FINER, "safeTeleport " + player + " to " + homeSweetHome + (force ? " with force" : ""));
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
@@ -761,8 +765,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             player.sendMessage(tr("\u00a74Unable to warp you to that player's island!"));
             return true;
         }
+        player.sendMessage(tr("\u00a7aTeleporting you to {0}'s island.", pi.getDisplayName()));
         safeTeleport(player, warpSweetWarp, force);
-        player.sendMessage(tr("\u00a7aTeleporting you to " + pi.getPlayerName() + "'s island."));
         return true;
     }
 
@@ -1293,10 +1297,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return islandLogic.getIslandInfo(playerInfo);
     }
 
-    public boolean isPartyLeader(final Player player) {
-        return getIslandInfo(player).getLeader().equalsIgnoreCase(player.getName());
-    }
-
     public IslandInfo getIslandInfo(String location) {
         return islandLogic.getIslandInfo(location);
     }
@@ -1339,6 +1339,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
         }
+        I18nUtil.clearCache();
         // Update all of the loaded configs.
         FileUtil.reload();
 

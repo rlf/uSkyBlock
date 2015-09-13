@@ -35,8 +35,6 @@ public class LeaveCommand extends RequireIslandCommand {
             if (!plugin.getConfirmHandler().checkCommand(player, "/is leave")) {
                 return true;
             }
-            player.getInventory().clear();
-            player.getEquipment().clear();
             island.removeMember(pi);
             player.sendMessage(tr("\u00a7eYou have left the island and returned to the player spawn."));
             if (Bukkit.getPlayer(island.getLeader()) != null) {

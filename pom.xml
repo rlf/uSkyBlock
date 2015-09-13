@@ -213,40 +213,6 @@
                             </replacements>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>transform-gettext-report</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.build.directory}/site/gettext-report.html</file>
-                            <outputFile>${project.build.directory}/site/gettext-report.txt</outputFile>
-                            <unescape>true</unescape>
-                            <regex>true</regex>
-                            <regexFlags>
-                                <regexFlag>MULTILINE</regexFlag>
-                            </regexFlags>
-                            <replacements>
-                                <replacement>
-                                    <token>&lt;tr[^&gt;]*&gt;</token>
-                                    <value>ROW:</value>
-                                </replacement>
-                                <replacement>
-                                    <token>&lt;/tr&gt;</token>
-                                    <value><![CDATA[\\n]]></value>
-                                </replacement>
-                                <replacement>
-                                    <token>&lt;td&gt;</token>
-                                    <value>CELL:</value>
-                                </replacement>
-                                <replacement>
-                                    <token>&lt;[^&gt;]*&gt;</token>
-                                    <value/>
-                                </replacement>
-                            </replacements>
-                        </configuration>
-                    </execution>
                 </executions>
 
             </plugin>
@@ -410,6 +376,24 @@
                     <poDirectory>${basedir}/src/main/po</poDirectory>
                     <targetBundle>us.talabrek.ultimateskyblock.i18n.Messages</targetBundle>
                     <outputFormat>properties</outputFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>src/main/po</directory>
+                            <includes>
+                                <include>*~</include>
+                            </includes>
+                            <excludes>
+                                <exclude>*.po</exclude>
+                                <exclude>*.pot</exclude>
+                            </excludes>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
         </plugins>

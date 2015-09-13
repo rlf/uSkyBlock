@@ -41,10 +41,6 @@ public class PlayerNameChangeListener implements Listener {
         // Rename their island data.
         plugin.getIslandLogic().renamePlayer(playerInfo, event);
 
-        // Handle island removal checks after.
-        // This fixes the player island from thinking they were kicked.
-        playerInfo.postRename();
-        
         double t2 = System.currentTimeMillis();
         t2 = (t2 - t1) / 1000d;
         String message = String.format("Renamed player %s to %s in %s seconds.", oldName, player.getName(), t2);

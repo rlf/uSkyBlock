@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-13 15:50+0200\n"
+"PO-Revision-Date: 2015-09-13 20:59+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -296,13 +296,13 @@ msgstr "§eFjerner {0}'s ø."
 msgid "Error: That player does not have an island!"
 msgstr "Fejl: Den spiller har ingen ø!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§e{0}s island at {1} has been protected"
-msgstr "§e{0}'s ø ved {1} er blevet beskyttet"
+msgstr "§e{0}s ø ved {1} er blevet beskyttet"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0}s island at {1} was already protected"
-msgstr "§4{0}''s ø ved {1} var allerede beskyttet"
+msgstr "§4{0}s ø ved {1} var allerede beskyttet"
 
 msgid "controls the currently running async tasks"
 msgstr "håndter aktive asynkrone opgaver"
@@ -421,16 +421,15 @@ msgstr "§eGenererer top 10 listen"
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eBlev færdig med genereringen af top 10"
 
-#, fuzzy
 msgid "teleport to another players island"
 msgstr "Teleporterer til en andens ø"
 
 msgid "§4Only supported for players"
 msgstr "§4Kun understøttet for spillere"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§aTeleporting to {0}s island."
-msgstr "§aTeleporterer til {0}'s ø."
+msgstr "§aTeleporterer til {0}s ø."
 
 msgid "§4That player does not have an island!"
 msgstr "§4Den spiller har ingen ø!"
@@ -500,7 +499,6 @@ msgstr "§4Do skal angive hvor gamle (i dage) øerne til purge skal være!"
 msgid "§eMarking all islands inactive for more than {0} days."
 msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
 
-#, fuzzy
 msgid "set a player's island to your location"
 msgstr "tildeler øen til en spiller"
 
@@ -600,9 +598,8 @@ msgstr "§eInvitationen til {0}§e er udløbet og er blevet annulleret."
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§eInvitationen til {0}'s ø er udløbet og er blevet annulleret."
 
-#, fuzzy
 msgid "accept/reject an invitation."
-msgstr "{0}§e har afvist invitationen."
+msgstr "afvis eller accepter invitationen."
 
 msgid "§eYou have rejected the invitation to join an island."
 msgstr "§eDu har afvist invitationen til en ø"
@@ -613,9 +610,8 @@ msgstr "§4Du er ikke blevet inviteret."
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eDu har accepteret en invitation til at blive medlem af en ø."
 
-#, fuzzy
 msgid "ban/unban a player from your island."
-msgstr "§fandre spillere fra øen."
+msgstr "ban/unban en spiller fra din ø."
 
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eDe følgende spillere er udelukket fra at teleportere til din ø:"
@@ -637,9 +633,8 @@ msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
 
-#, fuzzy
 msgid "change the biome of the island"
-msgstr "§eÆndrede biomen for {0}'s ø til {1}"
+msgstr "ændr øens biome"
 
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
@@ -649,21 +644,19 @@ msgstr "§cDu har ikke tilladelse til at ændre biome for din ø."
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eDu kan ikke ændre biome de næste {0,number,#} minutter."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§aYou have changed your island''s biome to {0}"
-msgstr "§aDu har ændret din ø's biome til {0}"
+msgstr "§aDu har ændret din ø''s biome til {0}"
 
 #, java-format
 msgid "{0} changed the island biome to {1}"
 msgstr "{0} ændrede øens biome til {1}"
 
-#, fuzzy
 msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§4Du har ikke tilladelse til at ændre biome for denne ø!"
+msgstr "§4Du har ikke tilladelse til at ændre til den biome!"
 
-#, fuzzy
 msgid "§cYou have misspelled the biome name."
-msgstr "§aUkendt biome navn, skifter biomen til HAV"
+msgstr "§cUgyldigt biome-navn."
 
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§eDu skal være på din ø, for at ændre biome!"
@@ -671,9 +664,8 @@ msgstr "§eDu skal være på din ø, for at ændre biome!"
 msgid "§4You do not have permission to change the biome of this island!"
 msgstr "§4Du har ikke tilladelse til at ændre biome for denne ø!"
 
-#, fuzzy
 msgid "create an island"
-msgstr "§eøens menu"
+msgstr "opret en ø"
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
@@ -700,9 +692,8 @@ msgstr ""
 msgid "§eYou can create a new island in {0,number,#} seconds."
 msgstr "§eDu kan opette en ny ø om {0,number,#} sekunder."
 
-#, fuzzy
 msgid "teleport to the island home"
-msgstr "§fandre spillere til øen, hvis"
+msgstr "teleporter til øens hjem"
 
 msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
@@ -717,9 +708,8 @@ msgstr ""
 "§cDin ø er ved at blive genstartet, du kan ikke teleportere til den i "
 "øjeblikket."
 
-#, fuzzy
 msgid "check your or anothers island info"
-msgstr "§fandre spillere til øen, hvis"
+msgstr "få information om din eller en andens ø"
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Ø levels er blevet deaktiveret, kontakt en administrator."
@@ -743,9 +733,8 @@ msgstr "§eBlokke på {0}s ø (side {1,number} af {2,number}):"
 msgid "Score Count Block"
 msgstr "Score Antal Blok"
 
-#, fuzzy
 msgid "invite a player to your island"
-msgstr "§fandre spillere til øen."
+msgstr "inviter en spiller til din ø"
 
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
@@ -778,9 +767,8 @@ msgstr "§4Den spiller er leder på din ø!"
 msgid "{0}§d invited {1}"
 msgstr "{0}§d inviterede {1}"
 
-#, fuzzy
 msgid "remove a member from your island."
-msgstr "§fandre spillere fra øen."
+msgstr "fjern et medlem fra din ø."
 
 msgid "§4You do not have permission to kick others from this island!"
 msgstr "§4Du har ikke tilladelse til at eksludere spillere fra denne ø!"
@@ -854,9 +842,8 @@ msgstr "§4Du har ikke tilladelse til at låse din ø op!"
 msgid "display log"
 msgstr "vis aktivitetslog"
 
-#, fuzzy
 msgid "transfer leadership to another member"
-msgstr "§4Du kan kun overføre ejerskab til andre medlemmer!"
+msgstr "overfør ejerskab til et andet medlem"
 
 msgid "§4You can only transfer ownership to party-members!"
 msgstr "§4Du kan kun overføre ejerskab til andre medlemmer!"
@@ -875,13 +862,11 @@ msgstr "{0} forsøgte at overtage øen!"
 msgid "show party information"
 msgstr "vis medlemsinformation"
 
-#, fuzzy
 msgid "shows information about your party"
-msgstr "§eInformation om "
+msgstr "viser informationer om dit selskab"
 
-#, fuzzy
 msgid "show pending invites"
-msgstr "§eIngen udestående invitationer"
+msgstr "vis udestående invitationer"
 
 msgid "§eNo pending invites"
 msgstr "§eIngen udestående invitationer"
@@ -889,7 +874,7 @@ msgstr "§eIngen udestående invitationer"
 msgid "withdraw an invite"
 msgstr "træk en invitation tilbage"
 
-msgid "§4You don't have permissions to unvite players."
+msgid "§4You don't have permissions to uninvite players."
 msgstr "§4Du har ikke tilladelse til at afvise invitationer."
 
 msgid "§4This command can only be executed by a player"
@@ -916,9 +901,9 @@ msgstr ""
 "§eDu skal fjerne alle medlemmer af din ø, før du kan genstarte den (§9/"
 "island kick <spiller>§e).Se en liste af medlemmerne med §9/island party."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cYou can restart your island in {0} seconds."
-msgstr "§eDu kan genstarte din ø om {0} sekunder."
+msgstr "§cDu kan genstarte din ø om {0} sekunder."
 
 msgid "§cYour island is already in the process of restarting."
 msgstr "§cDin ø er allerede ved at blive genstartet."
@@ -932,9 +917,8 @@ msgstr "§eBEMÆRK: Hele din ø, og alle dine ejendele vil blive tabt!"
 msgid "set the island-home"
 msgstr "sæt øens start-position"
 
-#, fuzzy
 msgid "set your island's warp location"
-msgstr "§b{0}§d ændrede øens besøgsportal."
+msgstr "sæt din øs besøgspunkt"
 
 msgid "§cYou do not have permission to set your island's warp point!"
 msgstr "§cDu har ikke tilladelse til at sætte din ø's besøgsportal!"
@@ -949,9 +933,8 @@ msgstr "§b{0}§d ændrede øens besøgsportal."
 msgid "teleports you to the skyblock spawn"
 msgstr "teleporter dig til skyblock spawn"
 
-#, fuzzy
 msgid "enable/disable warping to your island."
-msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
+msgstr "tillad/bloker besøg på din ø"
 
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr ""
@@ -962,48 +945,43 @@ msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr ""
 "§cDu har ikke tilladelse til at aktivere/deaktivere din ø's besøgsportal!"
 
-#, fuzzy
 msgid "display the top10 of islands"
-msgstr "§eViser top 10:"
+msgstr "vis top10 af øer"
 
-#, fuzzy
 msgid "trust/untrust a player to help on your island."
-msgstr "§fandre spillere til øen."
+msgstr "tillad en spiller at hjælpe med på din ø"
 
-#, fuzzy
 msgid "§eThe following players are trusted on your island:"
-msgstr "§eDe følgende spillere er udelukket fra at teleportere til din ø:"
+msgstr "§eDe følgende spillere betroet på din ø:"
 
-#, fuzzy
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
-msgstr "§eFor at udelukke/tilgive spillere, brug §9/is ban <spiller>"
+msgstr "§eFor at betro spillere adgang, brug §9/is trust <spiller>"
 
 msgid "§4Members are already trusted!"
 msgstr "§4Medlemmet er allerede betroet!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Unknown player {0}"
-msgstr "§4Ukendt udfordrings-type: {0}"
+msgstr "§4Ukendt spiller {0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have trusted §4{0}§e on your island."
-msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
+msgstr "§eDu har betroet §4{0}§e til at kunne bygge og farme på din ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou are now trusted on §4{0}s island."
-msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
+msgstr "§eDu er nu betroet på §4{0}§es ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have revoked your trust in §a{0}§e on your island."
-msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
+msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou are no longer trusted on §4{0}s island."
-msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
+msgstr "§eDu er ikke længere betroet på §4{0}§es ø."
 
-#, fuzzy
 msgid "warp to another player's island"
-msgstr "§fandre spillere til øen."
+msgstr "besøg en andens ø"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr "§aDin besøgsportal er aktiv. Spillere kan teleportere til din ø."
@@ -1063,9 +1041,8 @@ msgstr ""
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Den spiller har udelukket dig fra sin ø."
 
-#, fuzzy
 msgid "talk to your party"
-msgstr "forlad dit selskab"
+msgstr "tal til medlemmerne af din ø"
 
 msgid "general island command"
 msgstr "generel ø kommando"
@@ -1147,23 +1124,70 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin position er: §f{0}"
 
-msgid "§cYou were removed from your island since the last time you played!"
-msgstr "§cDu er blevet udvist af din ø, siden du sidst spillede!"
+msgid "Challenge Menu "
+msgstr "Udfordringer "
+
+msgid "change the islands's biome."
+msgstr "skift øens biome"
+
+msgid "toggle the island's lock."
+msgstr "skift øens låse-tilstand"
+
+msgid "set the island's warp."
+msgstr "sæt øens besøgspunkt"
 
 msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
+"set the island's warp,\n"
+"which allows non-group\n"
+"members to teleport to\n"
+" the island"
 msgstr ""
-"§cDet lader til du loggede ud i sky verdenen, men du er ikke mere medlem af "
-"en ø. Teleporterer dig til start."
+"sæt øens besøgspunkt,\n"
+"der tillader ikke-medlemmer\n"
+"at teleportere til øen"
 
-#, fuzzy
-msgid "Challenge Menu "
-msgstr "Udfordringer"
+msgid "toggle the island's warp."
+msgstr "aktiver/deaktiver øens besøgspunkt."
 
-#, fuzzy, java-format
+msgid ""
+"toggle the\n"
+"island's warp, allowing them\n"
+"to turn it on or off at anytime.\n"
+"but not set the location."
+msgstr ""
+"aktiver/deaktiver øens besøgspunkt,\n"
+"tillad dem at deaktivere, men ikke\n"
+"ændre på besøgspunktet."
+
+msgid "invite others to the island."
+msgstr "inviter andre spillere til øen."
+
+msgid ""
+"invite\n"
+"other players to the island if\n"
+"there is enough room for more\n"
+"members"
+msgstr ""
+"inviter andre spillere til\n"
+"øen, hvis der er plads\n"
+"nok."
+
+msgid "kick others from the island."
+msgstr "spark andre af øen."
+
+msgid ""
+"kick\n"
+"other players from the island,\n"
+"but they are unable to kick\n"
+"the island leader."
+msgstr ""
+"kan sparke andre spillere\n"
+"af øen, men kan ikke sparke\n"
+"øens ejer."
+
+#, java-format
 msgid "{0} <Permissions>"
-msgstr "§hSpiller tilladelser"
+msgstr "{0} <Tilladelser>"
 
 msgid "§hPlayer Permissions"
 msgstr "§hSpiller tilladelser"
@@ -1184,182 +1208,30 @@ msgstr ""
 "§efor at se tilladelsen.\n"
 "§eSkift ved at klikke."
 
-msgid "§aChange Biome"
-msgstr "§aSkift Biome"
+msgid "§fThis player §acan"
+msgstr "§fDenne spiller §akan"
 
-msgid ""
-"§fThis player §acan§f change the\n"
-"§fisland's biome. Click here\n"
-"§fto remove this permission."
-msgstr ""
-"§fDenne spiller §akan§f ændre\n"
-"§føens biome. Klik her\n"
-"§ffor at fjerne tilladelsen."
+msgid "Click here to remove this permission."
+msgstr "Klik her for at fjerne tilladelsen."
 
-msgid "§cChange Biome"
-msgstr "§cSkift Biome"
+msgid "§fThis player §ccannot"
+msgstr "§fDenne spiller kan §cikke"
 
-msgid ""
-"§fThis player §ccannot§f change the\n"
-"§fisland's biome. Click here\n"
-"§fto grant this permission."
-msgstr ""
-"§fThis player §ccannot§f change the\n"
-"§fisland's biome. Click here\n"
-"§fto grant this permission."
+msgid "Click here to grant this permission."
+msgstr "§fKlik her for at give tilladelsen."
 
-msgid "§aToggle Island Lock"
-msgstr "§aSkift Øens Lås"
+msgid "Island Group Members"
+msgstr "Øens medlemmer"
 
-msgid ""
-"§fThis player §acan§f toggle the\n"
-"§fisland's lock, which prevents\n"
-"§fnon-group members from entering.\n"
-"§fClick here to remove this permission."
-msgstr ""
-"§fDenne spiller §akan§f ændre\n"
-"§føens lås, der forhindrer\n"
-"§fikke-medlemmer i at være her.\n"
-"§fKlik for at fjerne tilladelsen."
+msgid "Group Info"
+msgstr "Medlems info"
 
-msgid "§cToggle Island Lock"
-msgstr "§cLås Øen"
-
-msgid ""
-"§fThis player §ccannot§f toggle the\n"
-"§fisland's lock, which prevents\n"
-"§fnon-group members from entering.\n"
-"§fClick here to add this permission"
-msgstr ""
-"§fDenne spiller kan §cikke§f ændre\n"
-"§fpå øens lås, der forhindrer\n"
-"§fikke-medlemmer fra øen.\n"
-"§fKlik her for at give tilladelse."
-
-msgid "§aSet Island Warp"
-msgstr "§aSæt gæsteportal"
-
-msgid ""
-"§fThis player §acan§f set the\n"
-"§fisland's warp, which allows\n"
-"§fnon-group members to teleport\n"
-"§fto the island. Click here to\n"
-"§fremove this permission."
-msgstr ""
-"§fDenne spiller §akan§f ændre\n"
-"§føens warp, der tillader\n"
-"§fikke-medlemmer at teleportere\n"
-"§ftil øen.\n"
-"§fKlik for at fjerne tilladelsen."
-
-msgid "§cSet Island Warp"
-msgstr "§cSæt gæsteportal"
-
-msgid ""
-"§fThis player §ccannot§f set the\n"
-"§fisland's warp, which allows\n"
-"§fnon-group members to teleport\n"
-"§fto the island. Click here to\n"
-"§fadd this permission."
-msgstr ""
-"§fDenne spiller kan §cikke§f ændre\n"
-"§fpå øens warp, der tillader\n"
-"§fikke-medlemmer at teleportere\n"
-"§ftil øen.\n"
-"§fKlik for at give tilladelse."
-
-msgid "§aToggle Island Warp"
-msgstr "§aSkift gæsteportal"
-
-msgid ""
-"§fThis player §acan§f toggle the\n"
-"§fisland's warp, allowing them\n"
-"§fto turn it on or off at anytime.\n"
-"§fbut not set the location. Click\n"
-"§fhere to remove this permission."
-msgstr ""
-"§fDenne spiller §akan§f aktivere\n"
-"§føens warp. De kan tænde og\n"
-"§fslukke for warp, men ikke ændre\n"
-"§fpå stedet\n"
-"§fKlik her for at fjerne tilladelsen."
-
-msgid "§cToggle Island Warp"
-msgstr "§cSkift gæsteportal"
-
-msgid ""
-"§fThis player §ccannot§f toggle the\n"
-"§fisland's warp, allowing them\n"
-"§fto turn it on or off at anytime,\n"
-"§fbut not set the location. Click\n"
-"§fhere to add this permission."
-msgstr ""
-"§fDenne spiller kan §cikke§f aktivere\n"
-"§føens warp.\n"
-"§fKlik her for at give tilladelse."
-
-msgid "§aInvite Players"
-msgstr "§aInviter spillere"
-
-msgid ""
-"§fThis player §acan§f invite\n"
-"§fother players to the island if\n"
-"§fthere is enough room for more\n"
-"§fmembers. Click here to remove\n"
-"§fthis permission."
-msgstr ""
-"§fDenne spiller §akan§f invitere\n"
-"§fandre spillere til øen, hvis der\n"
-"§fer plads til flere.\n"
-"§fKlik for at fjerne tilladelsen."
-
-msgid "§cInvite Players"
-msgstr "§cInviter spillere"
-
-msgid ""
-"§fThis player §ccannot§f invite\n"
-"§fother players to the island.\n"
-"§fClick here to add this permission."
-msgstr ""
-"§fDenne spiller kan §cikke§f invitere\n"
-"§fandre spillere til øen.\n"
-"§fKlik her for at give tilladelse."
-
-msgid "§aKick Players"
-msgstr "§aSpark spillere"
-
-msgid ""
-"§fThis player §acan§f kick\n"
-"§fother players from the island,\n"
-"§fbut they are unable to kick\n"
-"§fthe island leader. Click here\n"
-"§fto remove this permission."
-msgstr ""
-"§fDenne spiller §akan§f sparke\n"
-"§fandre spillere af øen,\n"
-"§fmen øens leder er fredet\n"
-"§fKlik her for at fjerne tilladelsen."
-
-msgid "§cKick Players"
-msgstr "§cSpark spillere"
-
-msgid ""
-"§fThis player §ccannot§f kick\n"
-"§fother players from the island.\n"
-"§fClick here to add this permission."
-msgstr ""
-"§fDenne spiller kan §cikke§f spaerke\n"
-"§fandre spillere af øen.\n"
-"§fKlik her for at give tilladelse."
-
-msgid "§9Island Group Members"
-msgstr "§9Øens medlemmer"
-
-msgid "§aGroup Info"
-msgstr "§aMedlems info"
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "Ø medlemmer: §2{0}§7/§e{1}"
 
 msgid "§aMore players can be invited to this island."
-msgstr "§aFlere spillere kan be inviteret til denne ø."
+msgstr "§aFlere spillere kan inviteres til denne ø."
 
 msgid "§cThis island is full."
 msgstr "§cDenne ø er fuld!"
@@ -1375,70 +1247,25 @@ msgstr ""
 "§eØens ejer kan ændre tilladelser\n"
 "§eved at klikke på medlemmernes hoved."
 
-msgid ""
-"§a§lLeader\n"
-"§aCan §fchange the island's biome.\n"
-"§aCan §flock/unlock the island.\n"
-"§aCan §fset the island's warp.\n"
-"§aCan §ftoggle the island's warp.\n"
-"§aCan §finvite others to the island.\n"
-"§aCan §fkick others from the island."
-msgstr ""
-"§a§lEjer\n"
-"§aKan §fændre øens biome\n"
-"§aKan §flåse/åbne øen for besøg\n"
-"§aKan §fsætte øens besøgspunkt\n"
-"§aKan §faktivere besøgspunkt\n"
-"§aKan §finvitere andre til øen\n"
-"§aKan §fsmide folk af øen."
+msgid "Leader"
+msgstr "Ejer"
 
-msgid "§e§lMember"
-msgstr "§e§lMedlem"
+msgid "Member"
+msgstr "Medlem"
 
-msgid "§aCan §fchange the island's biome."
-msgstr "§aKan §fændre øens biome."
+#, java-format
+msgid "Can {0}"
+msgstr "Kan {0}"
 
-msgid "§cCannot §fchange the island's biome."
-msgstr "§cKan ikke §fændre øens biome."
-
-msgid "§aCan §flock/unlock the island."
-msgstr "§aKan §flåse øen."
-
-msgid "§cCannot §flock/unlock the island."
-msgstr "§cKan §flåse øen."
-
-msgid "§aCan §fset the island's warp."
-msgstr "§aKan §fsætte øens gæsteportal."
-
-msgid "§cCannot §fset the island's warp."
-msgstr "§cKan ikke §fændre gæsteportalen."
-
-msgid "§aCan §ftoggle the island's warp."
-msgstr "§aKan §fændre øens gæsteportal."
-
-msgid "§cCannot §ftoggle the island's warp."
-msgstr "§cKan ikke §fændre gæsteportalen."
-
-msgid "§aCan §finvite others to the island."
-msgstr "§aKan §finvitere andre spillere til øen."
-
-msgid "§cCannot §finvite others to the island."
-msgstr "§cKan ikke §finvitere andre til øen."
-
-msgid "§aCan §fkick others from the island."
-msgstr "§aKan §fsparke andre fra øen."
-
-msgid "§cCannot §fkick others from the island."
-msgstr "§cKan ikke §fsparke andre fra øen."
+#, java-format
+msgid "Cannot {0}"
+msgstr "Kan ikke {0}"
 
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<Klik for at ændre tilladelse>"
 
-msgid "§9Island Log"
-msgstr "§9Øens Log"
-
-msgid "§lIsland Log"
-msgstr "§lØens Log"
+msgid "Island Log"
+msgstr "Øens Log"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1450,17 +1277,12 @@ msgstr ""
 msgid "§e§lIsland Log"
 msgstr "§e§lØens Log"
 
-#, fuzzy
-msgid "§9Island Biome"
-msgstr "§hØens Biome"
-
-msgid "§hIsland Biome"
-msgstr "§hØens Biome"
+msgid "Island Biome"
+msgstr "Øens Biome"
 
 msgid "Ocean"
-msgstr ""
+msgstr "Hav"
 
-#, fuzzy
 msgid ""
 "The ocean biome is the basic\n"
 "starting biome for all islands.\n"
@@ -1468,16 +1290,15 @@ msgid ""
 "not spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"§fHAV biomen er den normale\n"
-"§fstart biome for alle øer.\n"
-"§fPassive mobs som dyr vil ikke\n"
-"§fspawne. Fjentlige monstre og dyr\n"
-"§fvil spawne normalt."
+"Hav biomen er den normale\n"
+"start biome for alle øer.\n"
+"Passive mobs som dyr vil ikke\n"
+"spawne. Fjentlige monstre og dyr\n"
+"vil spawne normalt."
 
 msgid "Forest"
-msgstr ""
+msgstr "Skov"
 
-#, fuzzy
 msgid ""
 "The forest biome will allow\n"
 "your island to spawn passive.\n"
@@ -1485,16 +1306,15 @@ msgid ""
 "wolves). Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"§fSkov biomen vil tillade\n"
-"§fat der spawner normale dyr\n"
-"§fpå din ø (inklusive ulve).\n"
-"§fFjentlige monstre/dyr vil\n"
-"§fspawne normalt."
+"Skov biomen vil tillade\n"
+"at der spawner normale dyr\n"
+"på din ø (inklusive ulve).\n"
+"Fjentlige monstre/dyr vil\n"
+"spawne normalt."
 
 msgid "Desert"
-msgstr ""
+msgstr "Ørken"
 
-#, fuzzy
 msgid ""
 "The desert biome makes it so\n"
 "that there is no rain or snow\n"
@@ -1502,16 +1322,15 @@ msgid ""
 "won't spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"§fØrken biomes forhindrer nedbbør\n"
-"§fpå din ø.\n"
-"§fNormale dyr vil ikke spawne.\n"
-"§fFjentlige monstre/dyr vil spawne\n"
-"§fnormalt."
+"Ørken biomes forhindrer nedbbør\n"
+"på din ø.\n"
+"Normale dyr vil ikke spawne.\n"
+"Fjentlige monstre/dyr vil spawne\n"
+"normalt."
 
 msgid "Jungle"
-msgstr ""
+msgstr "Jungle"
 
-#, fuzzy
 msgid ""
 "The jungle biome is bright\n"
 "and colorful. Passive mobs\n"
@@ -1519,16 +1338,14 @@ msgid ""
 "spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"§fJungle biomen er lys og fuld\n"
-"§faf farver. Normale dyr\n"
-"§f(inklusive kattedyr) vil spawne her.\n"
-"§fFjentlige dyr/monstre vil spawne normalt."
+"Jungle biomen er lys og fuld\n"
+"af farver. Normale dyr\n"
+"(inklusive kattedyr) vil spawne her.\n"
+"Fjentlige dyr/monstre vil spawne normalt."
 
-#, fuzzy
 msgid "Swampland"
-msgstr "§aBiome: Sump"
+msgstr "Sump"
 
-#, fuzzy
 msgid ""
 "The swamp biome is dark\n"
 "and dull. Passive mobs\n"
@@ -1537,16 +1354,15 @@ msgid ""
 "to spawn at night depending\n"
 "on the moon phase."
 msgstr ""
-"§fSump biomen er mørk og\n"
-"§fkedelig. Normale dyr vil spawne\n"
-"§fher, og slim med en lille chance\n"
-"§fom natten, afhængigt af månens\n"
-"§ffase."
+"Sump biomen er mørk og\n"
+"kedelig. Normale dyr vil spawne\n"
+"her, og slim med en lille chance\n"
+"om natten, afhængigt af månens\n"
+"fase."
 
 msgid "Taiga"
-msgstr ""
+msgstr "Taiga"
 
-#, fuzzy
 msgid ""
 "The taiga biome has snow\n"
 "instead of rain. Passive\n"
@@ -1554,16 +1370,14 @@ msgid ""
 "(including wolves) and\n"
 "hostile mobs will spawn."
 msgstr ""
-"§fTaiga biome har sne istedet\n"
-"§ffor regn. Normale dyr vil\n"
-"§fspawne her (inclusive ulve) og\n"
-"§ffjentlige monstre/dyr vil spawne normalt."
+"Taiga biome har sne istedet\n"
+"for regn. Normale dyr vil\n"
+"spawne her (inclusive ulve) og\n"
+"fjentlige monstre/dyr vil spawne normalt."
 
-#, fuzzy
 msgid "Mushroom"
-msgstr "§aBiome: Svampe"
+msgstr "Svampe"
 
-#, fuzzy
 msgid ""
 "The mushroom biome is\n"
 "bright and colorful.\n"
@@ -1572,16 +1386,15 @@ msgid ""
 "No other passive or\n"
 "hostile mobs will spawn."
 msgstr ""
-"§fSvampe biome er lys og farverig.\n"
-"§fMooshrooms er de eneste dyr\n"
-"§fder vil spawne her.\n"
-"§fIngen andre venlige eller\n"
-"§ffjentlige mobs vil spawne."
+"Svampe biome er lys og farverig.\n"
+"Mooshrooms er de eneste dyr\n"
+"der vil spawne her.\n"
+"Ingen andre venlige eller\n"
+"fjentlige mobs vil spawne."
 
 msgid "Hell"
-msgstr ""
+msgstr "Helvede"
 
-#, fuzzy
 msgid ""
 "The hell biome looks\n"
 "dark and dead. Some\n"
@@ -1590,31 +1403,29 @@ msgid ""
 "(excluding ghasts and\n"
 "blazes)."
 msgstr ""
-"§fHelvedes biomen ser\n"
-"§fmørk og død ud.\n"
-"§fNogen monstre fra underverdenen\n"
-"§fvil spawne her\n"
-"§f(ingen ghasts eller blazes)."
+"Helvedes biomen ser\n"
+"mørk og død ud.\n"
+"Nogen monstre fra underverdenen\n"
+"vil spawne her\n"
+"(ingen ghasts eller blazes)."
 
 msgid "Sky"
-msgstr ""
+msgstr "Himmel"
 
-#, fuzzy
 msgid ""
 "The sky biome gives your\n"
 "island a special dark sky.\n"
 "Only endermen will spawn\n"
 "in this biome."
 msgstr ""
-"§fEnd biomen giver din ø\n"
-"§fen specielt mørk himmel.\n"
-"§fDer kan kun spawne endermen\n"
-"§fi denne biome."
+"End biomen giver din ø\n"
+"en specielt mørk himmel.\n"
+"Der kan kun spawne endermen\n"
+"i denne biome."
 
 msgid "Plains"
-msgstr ""
+msgstr "Slette"
 
-#, fuzzy
 msgid ""
 "The plains biome has rain\n"
 "instead of snow. Passive\n"
@@ -1622,47 +1433,44 @@ msgid ""
 "(including horses) and\n"
 "hostile mobs will spawn."
 msgstr ""
-"§fSlette biomen har regn\n"
-"§fistedet for sne. Neutrale\n"
-"§fdyr vil spawne normalt\n"
-"§f(inklusive heste) og fjentlige\n"
-"§fmonstre/dyr vil spawne normalt"
+"Slette biomen har regn\n"
+"istedet for sne. Neutrale\n"
+"dyr vil spawne normalt\n"
+"(inklusive heste) og fjentlige\n"
+"monstre/dyr vil spawne normalt"
 
 msgid "Extreme Hills"
-msgstr ""
+msgstr "Bakkeland"
 
-#, fuzzy
 msgid ""
 "The extreme hills biome.\n"
 "Passive mobs will spawn \n"
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"§fTaiga biome har sne istedet\n"
-"§ffor regn. Normale dyr vil\n"
-"§fspawne her (inclusive ulve) og\n"
-"§ffjentlige monstre/dyr vil spawne normalt."
+"Taiga biome har sne istedet\n"
+"for regn. Normale dyr vil\n"
+"spawne her (inclusive ulve) og\n"
+"fjentlige monstre/dyr vil spawne normalt."
 
-#, fuzzy
 msgid "Flower Forest"
-msgstr "§aBiome: Skov"
+msgstr "Blomster Skov"
 
-#, fuzzy
 msgid ""
 "The flower forest biome.\n"
 "Passive mobs will spawn \n"
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"§fSlette biomen har regn\n"
-"§fistedet for sne. Neutrale\n"
-"§fdyr vil spawne normalt\n"
-"§f(inklusive heste) og fjentlige\n"
-"§fmonstre/dyr vil spawne normalt"
+"Slette biomen har regn\n"
+"istedet for sne. Neutrale\n"
+"dyr vil spawne normalt\n"
+"(inklusive heste) og fjentlige\n"
+"monstre/dyr vil spawne normalt"
 
 #, java-format
 msgid "Biome: {0}"
-msgstr ""
+msgstr "Biome: {0}"
 
 msgid "§2§lThis is your current biome."
 msgstr "§2§lDette er din nuværende biome."
@@ -1670,125 +1478,172 @@ msgstr "§2§lDette er din nuværende biome."
 msgid "§e§lClick to change to this biome."
 msgstr "§e§lKlik for at ændre biomen."
 
+msgid "You cannot use this biome."
+msgstr "Du kan ikke bruge denne biome."
+
+msgid "Challenge Menu"
+msgstr "Udfordringer"
+
 #, java-format
-msgid "§9Challenge Menu ({0}/{1})"
-msgstr "§9Udfordringer ({0}/{1}) "
+msgid "{0} ({1}/{2})"
+msgstr "{0} ({1}/{2})"
 
-msgid "§9Island Menu"
-msgstr "§9Hoved menu"
+msgid "Island Menu"
+msgstr "Hoved menu"
 
-msgid "§9Island Create Menu"
-msgstr "§9Start menu"
+msgid "Island Create Menu"
+msgstr "Start menu"
 
 msgid "§a§lStart an Island"
-msgstr ""
+msgstr "§a§lStart en ø"
 
 msgid ""
-"§fStart your skyblock journey\n"
-"§fby starting your own island.\n"
-"§fComplete challenges to earn\n"
-"§fitems and skybucks to help\n"
-"§fexpand your skyblock. You can\n"
-"§finvite others to join in\n"
-"§fbuilding your island empire!\n"
+"Start your skyblock journey\n"
+"by starting your own island.\n"
+"Complete challenges to earn\n"
+"items and skybucks to help\n"
+"expand your skyblock. You can\n"
+"invite others to join in\n"
+"building your island empire!\n"
 "§e§lClick here to start!"
 msgstr ""
+"Start din skyblock rejse\n"
+"ved at oprette din egen ø.\n"
+"Opfyld udfordringer for at\n"
+"tjene materialer og skypenge\n"
+"til at gøre din ø større.\n"
+"Du kan invitere andre til at hjælpe dig\n"
+"bygge dit ø-rige!\n"
+"§e§lKlik her for at starte!"
 
 msgid "§a§lJoin an Island"
-msgstr ""
+msgstr "§a§lHjælp en eksisterende ø"
 
 msgid ""
-"§fWant to join another player's\n"
-"§fisland instead of starting\n"
-"§fyour own? If another player\n"
-"§finvites you to their island\n"
-"§fyou can click here or use\n"
-"§e/island accept §fto join them.\n"
+"Want to join another player's\n"
+"island instead of starting\n"
+"your own? If another player\n"
+"invites you to their island\n"
+"you can click here or use\n"
+"§e/island accept§f to join them.\n"
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
+"Har du lyst til at hjælpe med\n"
+"på en andens ø, istedet for at starte\n"
+"din egen? Hvis en anden inviterer\n"
+"dig til deres ø, kan du klikke her\n"
+"eller bruge §e/island accept§f for at\n"
+"blive medlem af deres ø."
 
 msgid "§a§lIsland Help"
-msgstr ""
+msgstr "§a§lØ Hjælp"
 
 msgid ""
-"§fNeed help with skyblock\n"
-"§fconcepts or commands? View\n"
-"§fdetails about them here.\n"
+"Need help with skyblock\n"
+"concepts or commands? View\n"
+"details about them here.\n"
 "§e§lClick here for help!"
 msgstr ""
+"Har du brug for hjælp\n"
+"til skyblock koncepter\n"
+"eller kommandoer?\n"
+"Se detaljer her.\n"
+"§e§lKlik for at se hjælp."
 
 msgid "§a§lReturn Home"
-msgstr ""
+msgstr "§a§lReturner til hjemmet"
 
 msgid ""
-"§fReturn to your island's home\n"
-"§fpoint. You can change your home\n"
-"§fpoint to any location on your\n"
-"§fisland using §b/island sethome\n"
+"Return to your island's home\n"
+"point. You can change your home\n"
+"point to any location on your\n"
+"island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
+"Returner til din øs hjem.\n"
+"Du kan ændre dit hjem til\n"
+"et andet punkt ved at bruge\n"
+"§b/island sethome\n"
+"§e§lKlik her for at vende hjem."
 
 msgid "§a§lChallenges"
-msgstr ""
+msgstr "§a§lUdfordringer"
 
 msgid ""
-"§fView a list of §9challenges§f that\n"
-"§fyou can complete on your island\n"
-"§fto earn skybucks, items, perks,\n"
-"§fand titles."
+"View a list of §9challenges that\n"
+"you can complete on your island\n"
+"to earn skybucks, items, perks,\n"
+"and titles."
 msgstr ""
+"Se en liste af §9udfordringer\n"
+"du kan udføre på din ø for\n"
+"at tjene skypenge, materialer,\n"
+"perks og titler."
 
 msgid "§e§lClick here to view challenges."
-msgstr ""
+msgstr "§e§lKlik her for at se udfordringer."
 
 msgid "§4§lChallenges disabled."
-msgstr ""
+msgstr "§4§lUdfordringer er deaktiveret."
 
 msgid "§a§lIsland Level"
-msgstr ""
+msgstr "§a§lØens Niveau"
 
 #, java-format
 msgid "§eCurrent Level: §a{0,number,##.#}"
 msgstr "§eØens niveau: §a{0,number,##.#}"
 
 msgid ""
-"§fGain island levels by expanding\n"
-"§fyour skyblock and completing\n"
-"§fcertain challenges. Rarer blocks\n"
-"§fwill add more to your level.\n"
+"Gain island levels by expanding\n"
+"your skyblock and completing\n"
+"certain challenges. Rarer blocks\n"
+"will add more to your level.\n"
 "§e§lClick here to refresh.\n"
 "§e§l(must be on island)"
 msgstr ""
+"Hæv øens niveau ved at\n"
+"bygge øen større. Sjældnere\n"
+"blokke har højere værd.\n"
+"§e§lKlik her for at se niveau.\n"
+"§e§l(kræver du er på øen)"
 
-msgid "§a§lIsland Group"
-msgstr ""
+msgid "Island Group"
+msgstr "Øens beboere"
 
 msgid ""
-"§fView the members of your island\n"
-"§fgroup and their permissions. If\n"
-"§fyou are the island leader, you\n"
-"§fcan change the member permissions.\n"
+"View the members of your island\n"
+"group and their permissions. If\n"
+"you are the island leader, you\n"
+"can change the member permissions.\n"
 "§e§lClick here to view or change."
 msgstr ""
+"Se medlemmerne af din ø og\n"
+"deres tilladelser.\n"
+"Hvis du er ejer kan du også\n"
+"ændre deres tilladelser.\n"
+"§e§lKlik for at se tilladelser"
 
-msgid "§a§lChange Island Biome"
-msgstr ""
+msgid "Change Island Biome"
+msgstr "Skift Øens Biome"
 
 msgid ""
-"§fThe island biome affects things\n"
-"§flike grass color and spawning\n"
-"§fof both animals and monsters."
+"The island biome affects things\n"
+"like grass color and spawning\n"
+"of both animals and monsters."
 msgstr ""
+"Øens biome har indvirkning på\n"
+"hvordan græs og blade ser ud og\n"
+"hvilke dyr og monstre der kan spawne."
 
 msgid "§e§lClick here to change biomes."
-msgstr ""
+msgstr "§e§lKlik her for at ændre biome"
 
 msgid "§c§lYou can't change the biome."
-msgstr ""
+msgstr "§c§lDu har ikke tilladelse til at ændre biome."
 
 msgid "§a§lIsland Lock"
-msgstr ""
+msgstr "§a§lØens Lås"
 
 msgid ""
 "§eLock Status: §aActive\n"
@@ -1796,12 +1651,16 @@ msgid ""
 "§fPlayers outside of your group\n"
 "§fare unable to enter your island."
 msgstr ""
+"§eLåse status: §aAktiv\n"
+"§fDin ø er i øjeblikket §cLåst.\n"
+"§fSpillere der ikke er medlem af\n"
+"§føen, kan ikke besøge den."
 
 msgid "§e§lClick here to unlock your island."
-msgstr ""
+msgstr "§e§lKlik her får at åbne din ø for besøg."
 
 msgid "§c§lYou can't change the lock."
-msgstr ""
+msgstr "§c§lDu har ikke tilladelse til at ændre på øens lås."
 
 msgid ""
 "§eLock Status: §8Inactive\n"
@@ -1810,12 +1669,16 @@ msgid ""
 "§fisland, but only you and your group\n"
 "§fmembers may build there."
 msgstr ""
+"§eLåse status: §8Inaktiv\n"
+"§fDin ø er i øjeblikket §aulåst.\n"
+"§fAlle spillere kan besøge din ø,\n"
+"§fmen kun medlemmer kan bygge."
 
 msgid "§e§lClick here to lock your island."
-msgstr ""
+msgstr "§e§lKlik her for at låse din ø."
 
 msgid "§a§lIsland Warp"
-msgstr ""
+msgstr "§a§lØens Besøgspunkt"
 
 msgid ""
 "§eWarp Status: §aActive\n"
@@ -1823,12 +1686,16 @@ msgid ""
 "§fisland at anytime to the point\n"
 "§fyou set using §d/island setwarp."
 msgstr ""
+"§eBesøgspunkt status: §aAktiv\n"
+"§fAndre spillere kan besøge din ø\n"
+"§fpå det punkt du har sat med\n"
+"§d/island setwarp"
 
 msgid "§e§lClick here to deactivate."
-msgstr ""
+msgstr "§e§lKlik for at deaktivere"
 
 msgid "§c§lYou can't change the warp."
-msgstr ""
+msgstr "§c§lDu kan ikke ændre besøgspunkt."
 
 msgid ""
 "§eWarp Status: §8Inactive\n"
@@ -1836,145 +1703,329 @@ msgid ""
 "§fisland. Set a warp point using\n"
 "§d/island setwarp §fbefore activating."
 msgstr ""
+"§eBesøgspunkt status: §8Inaktiv\n"
+"§fAndre spillere kan §4ikke\n"
+"§fbesøge din ø. Sæt et besøgspunkt\n"
+"§fmed §d/island setwarp§f før du aktiverer det."
 
 msgid "§e§lClick here to activate."
-msgstr ""
+msgstr "§e§lKlik her for at aktivere."
 
 msgid "§a§lIsland Log"
-msgstr ""
+msgstr "§a§lØens Logbog"
 
 msgid ""
-"§fView a log of events from\n"
-"§fyour island such as member,\n"
-"§fbiome, and warp changes.\n"
+"View a log of events from\n"
+"your island such as member,\n"
+"biome, and warp changes.\n"
 "§e§lClick to view the log."
 msgstr ""
+"Se en liste over hændelser på\n"
+"din ø, så som ændringer til\n"
+"medlemmer, biome og besøgspunkt.\n"
+"§e§lKlik for at se logbogen."
 
 msgid "§a§lChange Home Location"
-msgstr ""
+msgstr "§a§lSkift Besøgspunkt"
 
 msgid ""
-"§fWhen you teleport to your\n"
-"§fisland you will be taken to\n"
-"§fthis location.\n"
+"When you teleport to your\n"
+"island you will be taken to\n"
+"this location.\n"
 "§e§lClick here to change."
 msgstr ""
+"Når du teleporterer til din ø\n"
+"vil du blive taget til dette punkt.\n"
+"§e§lKlik for at skifte."
 
 msgid "§a§lChange Warp Location"
-msgstr ""
+msgstr "§a§lSkift Besøgspunkt"
 
 msgid ""
-"§fWhen your warp is activated,\n"
-"§fother players will be taken to\n"
-"§fthis point when they teleport\n"
-"§fto your island.\n"
+"When your warp is activated,\n"
+"other players will be taken to\n"
+"this point when they teleport\n"
+"to your island.\n"
 "§e§lClick here to change."
 msgstr ""
-
-msgid "§a§lLeader"
-msgstr "§a§lLeder"
+"Når dit besøgspunkt er aktivt,\n"
+"vil andre spillere blive taget til dette\n"
+"punkt når de besøger din ø.\n"
+"§e§lKlik for at ændre."
 
 msgid "Permissions"
+msgstr "Tilladelser"
+
+msgid ""
+"§cIt seems you logged out in the sky world, however you are not a member of "
+"an island. Teleporting you to spawn."
 msgstr ""
-
-msgid "Island Biome"
-msgstr ""
-
-msgid "Challenge Menu"
-msgstr "Udfordringer"
-
-msgid "§9SB Island Group Members"
-msgstr "§9Ø Medlemskab"
-
-#, fuzzy
-msgid "You cannot use this biome."
-msgstr "§cDu kan ikke bruge denne biome."
+"§cDet lader til du loggede ud i sky verdenen, men du er ikke mere medlem af "
+"en ø. Teleporterer dig til start."
 
 msgid "Something went wrong saving the island and/or party data!"
-msgstr ""
+msgstr "Der opstod en fejl under gemning af øens data!"
 
 msgid "§4Player is already assigned to this island!"
-msgstr ""
+msgstr "§4Spilleren er allerede del af denne ø!"
 
 msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr ""
+msgstr "§4Du er ikke medlem af en ø. Returnerer dig til startområdet!"
 
 msgid "§aTeleporting you to your island."
-msgstr ""
+msgstr "§aTeleporterer dig til din ø."
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§eDu vil blive teleporteret om {0} sekunder."
 
 msgid "§4Unable to warp you to that player's island!"
-msgstr ""
+msgstr "§4Ude af stand til at teleportere dig til den spillers ø!"
 
-msgid "§aTeleporting you to "
-msgstr ""
+#, java-format
+msgid "§aTeleporting you to {0}'s island."
+msgstr "§aTeleporterer dig til {0}s ø."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
-msgstr ""
+msgstr "§4Du er nødt til at være tættere på din ø, for at sætte dit hjem!"
 
 msgid "§aYour skyblock home has been set to your current location."
-msgstr ""
+msgstr "§aDit hjemsted er blevet sat til din nuværende position."
 
 msgid "§4Your current location is not a safe home-location."
-msgstr ""
+msgstr "§4Din nuværende position er ikke et sikkert hjemsted."
 
 msgid "Could not create your Island. Please contact a server moderator."
-msgstr ""
+msgstr "Kunne ikke oprette din ø. Venligst kontakt en server administrator."
 
 msgid "Player doesn't have an island or it's already protected!"
-msgstr ""
+msgstr "Spilleren har ikke en ø, eller også er den allerede beskyttet!"
 
 #, java-format
 msgid "§7Name: §b{0}\n"
-msgstr ""
+msgstr "§7Navn: §b{0}\n"
 
 #, java-format
 msgid "§7Version: §b{0}\n"
-msgstr ""
+msgstr "§7Version: §b{0}\n"
 
 #, java-format
 msgid "§7Description: §b{0}\n"
-msgstr ""
+msgstr "§7Beskrivelse: §b{0}\n"
 
 #, java-format
 msgid "§7Language: §b{0} ({1})\n"
-msgstr ""
+msgstr "§7Sprog: §b{0} ({1})\n"
 
 msgid "§7------------------------------\n"
-msgstr ""
+msgstr "§7------------------------------\n"
 
 #, java-format
 msgid "§7Server: §e{0} {1}\n"
-msgstr ""
+msgstr "§7Server: §e{0} {1}\n"
 
 msgid "§2ENABLED"
-msgstr ""
+msgstr "§2AKTIV"
 
 msgid "§4DISABLED"
-msgstr ""
+msgstr "§4INAKTIV"
 
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
-msgstr ""
+msgstr "§7Navn: §d{0} ({1})\n"
 
 #, java-format
 msgid "§7Version: §d{0}\n"
-msgstr ""
+msgstr "§7Version: §d{0}\n"
 
 msgid "d"
-msgstr ""
+msgstr "d"
 
 msgid "h"
-msgstr ""
+msgstr "h"
 
 msgid "m"
-msgstr ""
+msgstr "m"
 
 msgid "s"
-msgstr ""
+msgstr "s"
+
+#~ msgid "§cYou were removed from your island since the last time you played!"
+#~ msgstr "§cDu er blevet udvist af din ø, siden du sidst spillede!"
+
+#~ msgid "§a§lLeader"
+#~ msgstr "§a§lLeder"
+
+#~ msgid "§lIsland Log"
+#~ msgstr "§lØens Log"
+
+#~ msgid "§9Island Biome"
+#~ msgstr "§9Øens Biome"
+
+#~ msgid "§hIsland Biome"
+#~ msgstr "§hØens Biome"
+
+#~ msgid "§9Challenge Menu ({0}/{1})"
+#~ msgstr "§9Udfordringer ({0}/{1}) "
+
+#~ msgid "§9SB Island Group Members"
+#~ msgstr "§9Ø Medlemskab"
+
+#~ msgid "§aChange Biome"
+#~ msgstr "§aSkift Biome"
+
+#~ msgid ""
+#~ "§fThis player §acan§f change the\n"
+#~ "§fisland's biome. Click here\n"
+#~ "§fto remove this permission."
+#~ msgstr ""
+#~ "§fDenne spiller §akan§f ændre\n"
+#~ "§føens biome. Klik her\n"
+#~ "§ffor at fjerne tilladelsen."
+
+#~ msgid "§cChange Biome"
+#~ msgstr "§cSkift Biome"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f change the\n"
+#~ "§fisland's biome. Click here\n"
+#~ "§fto grant this permission."
+#~ msgstr ""
+#~ "§fThis player §ccannot§f change the\n"
+#~ "§fisland's biome. Click here\n"
+#~ "§fto grant this permission."
+
+#~ msgid "§aToggle Island Lock"
+#~ msgstr "§aSkift Øens Lås"
+
+#~ msgid ""
+#~ "§fThis player §acan§f toggle the\n"
+#~ "§fisland's lock, which prevents\n"
+#~ "§fnon-group members from entering.\n"
+#~ "§fClick here to remove this permission."
+#~ msgstr ""
+#~ "§fDenne spiller §akan§f ændre\n"
+#~ "§føens lås, der forhindrer\n"
+#~ "§fikke-medlemmer i at være her.\n"
+#~ "§fKlik for at fjerne tilladelsen."
+
+#~ msgid "§cToggle Island Lock"
+#~ msgstr "§cLås Øen"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f toggle the\n"
+#~ "§fisland's lock, which prevents\n"
+#~ "§fnon-group members from entering.\n"
+#~ "§fClick here to add this permission"
+#~ msgstr ""
+#~ "§fDenne spiller kan §cikke§f ændre\n"
+#~ "§fpå øens lås, der forhindrer\n"
+#~ "§fikke-medlemmer fra øen.\n"
+#~ "§fKlik her for at give tilladelse."
+
+#~ msgid "§aSet Island Warp"
+#~ msgstr "§aSæt gæsteportal"
+
+#~ msgid "§cSet Island Warp"
+#~ msgstr "§cSæt gæsteportal"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f set the\n"
+#~ "§fisland's warp, which allows\n"
+#~ "§fnon-group members to teleport\n"
+#~ "§fto the island. Click here to\n"
+#~ "§fadd this permission."
+#~ msgstr ""
+#~ "§fDenne spiller kan §cikke§f ændre\n"
+#~ "§fpå øens warp, der tillader\n"
+#~ "§fikke-medlemmer at teleportere\n"
+#~ "§ftil øen.\n"
+#~ "§fKlik for at give tilladelse."
+
+#~ msgid "§aToggle Island Warp"
+#~ msgstr "§aSkift gæsteportal"
+
+#~ msgid "§cToggle Island Warp"
+#~ msgstr "§cSkift gæsteportal"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f toggle the\n"
+#~ "§fisland's warp, allowing them\n"
+#~ "§fto turn it on or off at anytime,\n"
+#~ "§fbut not set the location. Click\n"
+#~ "§fhere to add this permission."
+#~ msgstr ""
+#~ "§fDenne spiller kan §cikke§f aktivere\n"
+#~ "§føens warp.\n"
+#~ "§fKlik her for at give tilladelse."
+
+#~ msgid "§aInvite Players"
+#~ msgstr "§aInviter spillere"
+
+#~ msgid "§cInvite Players"
+#~ msgstr "§cInviter spillere"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f invite\n"
+#~ "§fother players to the island.\n"
+#~ "§fClick here to add this permission."
+#~ msgstr ""
+#~ "§fDenne spiller kan §cikke§f invitere\n"
+#~ "§fandre spillere til øen.\n"
+#~ "§fKlik her for at give tilladelse."
+
+#~ msgid "§aKick Players"
+#~ msgstr "§aSpark spillere"
+
+#~ msgid "§cKick Players"
+#~ msgstr "§cSpark spillere"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f kick\n"
+#~ "§fother players from the island.\n"
+#~ "§fClick here to add this permission."
+#~ msgstr ""
+#~ "§fDenne spiller kan §cikke§f spaerke\n"
+#~ "§fandre spillere af øen.\n"
+#~ "§fKlik her for at give tilladelse."
+
+#~ msgid ""
+#~ "§a§lLeader\n"
+#~ "§aCan §fchange the island's biome.\n"
+#~ "§aCan §flock/unlock the island.\n"
+#~ "§aCan §fset the island's warp.\n"
+#~ "§aCan §ftoggle the island's warp.\n"
+#~ "§aCan §finvite others to the island.\n"
+#~ "§aCan §fkick others from the island."
+#~ msgstr ""
+#~ "§a§lEjer\n"
+#~ "§aKan §fændre øens biome\n"
+#~ "§aKan §flåse/åbne øen for besøg\n"
+#~ "§aKan §fsætte øens besøgspunkt\n"
+#~ "§aKan §faktivere besøgspunkt\n"
+#~ "§aKan §finvitere andre til øen\n"
+#~ "§aKan §fsmide folk af øen."
+
+#~ msgid "§cCannot §fchange the island's biome."
+#~ msgstr "§cKan ikke §fændre øens biome."
+
+#~ msgid "§aCan §flock/unlock the island."
+#~ msgstr "§aKan §flåse øen."
+
+#~ msgid "§cCannot §flock/unlock the island."
+#~ msgstr "§cKan §flåse øen."
+
+#~ msgid "§cCannot §fset the island's warp."
+#~ msgstr "§cKan ikke §fændre gæsteportalen."
+
+#~ msgid "§cCannot §ftoggle the island's warp."
+#~ msgstr "§cKan ikke §fændre gæsteportalen."
+
+#~ msgid "§cCannot §finvite others to the island."
+#~ msgstr "§cKan ikke §finvitere andre til øen."
+
+#~ msgid "§cCannot §fkick others from the island."
+#~ msgstr "§cKan ikke §fsparke andre fra øen."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBiome: Hav"
@@ -2258,9 +2309,6 @@ msgstr ""
 #~ msgid "§fbut not set the location. Click"
 #~ msgstr "§fmen ikke sætte portalen. Klik"
 
-#~ msgid "§fhere to remove this permission."
-#~ msgstr "§fher for at fjerne tilladelsen."
-
 #~ msgid "§fto turn it on or off at anytime,"
 #~ msgstr "§ffor at skifte tilstand"
 
@@ -2282,20 +2330,11 @@ msgstr ""
 #~ msgid "§fThis player §ccannot§f invite"
 #~ msgstr "§fDenne spiller kan §cikke§f invitere"
 
-#~ msgid "§fClick here to add this permission."
-#~ msgstr "§fKlik her for at tilføje tilladelsen."
-
-#~ msgid "§fThis player §acan§f kick"
-#~ msgstr "§fDenne spiller §akan§f sparke"
-
 #~ msgid "§fbut they are unable to kick"
 #~ msgstr "§fmen ikke øens leder."
 
 #~ msgid "§fthe island leader. Click here"
 #~ msgstr "§fKlik her"
-
-#~ msgid "§fThis player §ccannot§f kick"
-#~ msgstr "§fDenne spiller kan §cikke§f sparke"
 
 #~ msgid "§eHover over a player's icon to"
 #~ msgstr "§eHold musen over et hoved for"

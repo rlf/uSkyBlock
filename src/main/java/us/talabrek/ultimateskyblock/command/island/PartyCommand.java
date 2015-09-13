@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.SkyBlockMenu;
+import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.command.InviteHandler;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
@@ -51,7 +51,7 @@ public class PartyCommand extends CompositeUSBCommand {
                         public void run() {
                             IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
                             if (!islandInfo.isLeader(sender.getName()) || !islandInfo.hasPerm(sender.getName(), "canInviteOthers")) {
-                                sender.sendMessage(tr("\u00a74You don't have permissions to unvite players."));
+                                sender.sendMessage(tr("\u00a74You don't have permissions to uninvite players."));
                                 return;
                             }
                             String playerName = args[0];

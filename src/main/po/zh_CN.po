@@ -1,7 +1,7 @@
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
@@ -874,7 +874,8 @@ msgstr "§e没有等待的邀请"
 msgid "withdraw an invite"
 msgstr ""
 
-msgid "§4You don't have permissions to unvite players."
+#, fuzzy
+msgid "§4You don't have permissions to uninvite players."
 msgstr "§4你没有权限取消发出的邀请"
 
 msgid "§4This command can only be executed by a player"
@@ -1118,16 +1119,85 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§e你的排名是: §f{0}"
 
-msgid "§cYou were removed from your island since the last time you played!"
-msgstr "§c因为你太久未登陆,所以你被从岛屿上移除了"
-
-msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
-msgstr ""
-
 msgid "Challenge Menu "
 msgstr "调整菜单"
+
+#, fuzzy
+msgid "change the islands's biome."
+msgstr "§a可以 §f更改岛屿的生物群系."
+
+#, fuzzy
+msgid "toggle the island's lock."
+msgstr "§a可以 §f切换岛屿的传送点状态"
+
+#, fuzzy
+msgid "set the island's warp."
+msgstr "§a可以 §f设置岛屿的传送点."
+
+#, fuzzy
+msgid ""
+"set the island's warp,\n"
+"which allows non-group\n"
+"members to teleport to\n"
+" the island"
+msgstr ""
+"§f玩家§a可以§f设置岛屿\n"
+"§f的传送点,这将允许\n"
+"§f任意玩家访问你的岛屿.\n"
+"§f点击图标即可移除\n"
+"§f玩家的这项权限."
+
+#, fuzzy
+msgid "toggle the island's warp."
+msgstr "§a可以 §f切换岛屿的传送点状态"
+
+#, fuzzy
+msgid ""
+"toggle the\n"
+"island's warp, allowing them\n"
+"to turn it on or off at anytime.\n"
+"but not set the location."
+msgstr ""
+"§f玩家§a可以§f切换岛屿\n"
+"§f传送点的状态,这将允许\n"
+"§f任意玩家访问你的岛屿,\n"
+"§f不过他们无法设置传送点.\n"
+"§f点击图标即可§c移除\n"
+"§f玩家的这项权限."
+
+#, fuzzy
+msgid "invite others to the island."
+msgstr "§a可以 §f邀请别的玩家加入岛屿."
+
+#, fuzzy
+msgid ""
+"invite\n"
+"other players to the island if\n"
+"there is enough room for more\n"
+"members"
+msgstr ""
+"§f玩家§a可以§f在有足够空闲\n"
+"§f位置的情况下邀请其他\n"
+"§f玩家加入岛屿一起游戏\n"
+"§f点击图标即可§c移除\n"
+"§f玩家的这项权限."
+
+#, fuzzy
+msgid "kick others from the island."
+msgstr "§a可以 §f将玩家从岛屿上踢出."
+
+#, fuzzy
+msgid ""
+"kick\n"
+"other players from the island,\n"
+"but they are unable to kick\n"
+"the island leader."
+msgstr ""
+"§f玩家§a可以§f将岛屿上的\n"
+"§f其他成员踢出岛屿,\n"
+"§f但是他们无法踢出岛主\n"
+"§f点击图标即可§c移除\n"
+"§f玩家的这项权限."
 
 #, fuzzy, java-format
 msgid "{0} <Permissions>"
@@ -1152,187 +1222,32 @@ msgstr ""
 "§e来查看一个权限.点击图标\n"
 "§e即可更改权限状态."
 
-msgid "§aChange Biome"
-msgstr "§a更改生物群系"
+#, fuzzy
+msgid "§fThis player §acan"
+msgstr "§4玩家仍未拥有岛屿。"
 
-msgid ""
-"§fThis player §acan§f change the\n"
-"§fisland's biome. Click here\n"
-"§fto remove this permission."
+#, fuzzy
+msgid "Click here to remove this permission."
+msgstr "§e<点击将更改玩家的权限>"
+
+msgid "§fThis player §ccannot"
 msgstr ""
-"§f玩家 §a可以§f改变\n"
-"§f岛屿的生物群系.点击图标\n"
-"§f将禁止他更改岛屿的生物群系"
 
-msgid "§cChange Biome"
-msgstr "§c更改生物群系"
+#, fuzzy
+msgid "Click here to grant this permission."
+msgstr "§e<点击将更改玩家的权限>"
 
-msgid ""
-"§fThis player §ccannot§f change the\n"
-"§fisland's biome. Click here\n"
-"§fto grant this permission."
-msgstr ""
-"§f玩家 §c无法§f改变\n"
-"§f岛屿的生物群系.点击图标\n"
-"§f将允许他更改岛屿的生物群系"
-
-msgid "§aToggle Island Lock"
-msgstr "§a切换岛屿锁定状态"
-
-msgid ""
-"§fThis player §acan§f toggle the\n"
-"§fisland's lock, which prevents\n"
-"§fnon-group members from entering.\n"
-"§fClick here to remove this permission."
-msgstr ""
-"§f玩家§a可以§f切换岛屿的\n"
-"§f锁定状态,进行开放关闭岛屿\n"
-"§f点击图标即可禁止他更改\n"
-"§f岛屿锁定状态"
-
-msgid "§cToggle Island Lock"
-msgstr "§c切换岛屿的锁定状态"
-
-msgid ""
-"§fThis player §ccannot§f toggle the\n"
-"§fisland's lock, which prevents\n"
-"§fnon-group members from entering.\n"
-"§fClick here to add this permission"
-msgstr ""
-"§f玩家§c无法§f切换岛屿的\n"
-"§f锁定状态,进行开放关闭岛屿\n"
-"§f点击图标即可允许他更改\n"
-"§f岛屿锁定状态"
-
-msgid "§aSet Island Warp"
-msgstr "§a设置岛屿传送点"
-
-msgid ""
-"§fThis player §acan§f set the\n"
-"§fisland's warp, which allows\n"
-"§fnon-group members to teleport\n"
-"§fto the island. Click here to\n"
-"§fremove this permission."
-msgstr ""
-"§f玩家§a可以§f设置岛屿\n"
-"§f的传送点,这将允许\n"
-"§f任意玩家访问你的岛屿.\n"
-"§f点击图标即可移除\n"
-"§f玩家的这项权限."
-
-msgid "§cSet Island Warp"
-msgstr "§c设置岛屿的传送点"
-
-msgid ""
-"§fThis player §ccannot§f set the\n"
-"§fisland's warp, which allows\n"
-"§fnon-group members to teleport\n"
-"§fto the island. Click here to\n"
-"§fadd this permission."
-msgstr ""
-"§f玩家§c无法§f设置岛屿\n"
-"§f的传送点,这将允许\n"
-"§f任意玩家访问你的岛屿.\n"
-"§f点击图标即可添加\n"
-"§f玩家的这项权限."
-
-msgid "§aToggle Island Warp"
-msgstr "§a切换岛屿传送点状态"
-
-msgid ""
-"§fThis player §acan§f toggle the\n"
-"§fisland's warp, allowing them\n"
-"§fto turn it on or off at anytime.\n"
-"§fbut not set the location. Click\n"
-"§fhere to remove this permission."
-msgstr ""
-"§f玩家§a可以§f切换岛屿\n"
-"§f传送点的状态,这将允许\n"
-"§f任意玩家访问你的岛屿,\n"
-"§f不过他们无法设置传送点.\n"
-"§f点击图标即可§c移除\n"
-"§f玩家的这项权限."
-
-msgid "§cToggle Island Warp"
-msgstr "§c切换岛屿传送点状态"
-
-msgid ""
-"§fThis player §ccannot§f toggle the\n"
-"§fisland's warp, allowing them\n"
-"§fto turn it on or off at anytime,\n"
-"§fbut not set the location. Click\n"
-"§fhere to add this permission."
-msgstr ""
-"§f玩家§c无法§f切换岛屿\n"
-"§f传送点的状态,这将允许\n"
-"§f任意玩家访问你的岛屿,\n"
-"§f不过他们无法设置传送点.\n"
-"§f点击图标即可§a增加\n"
-"§f玩家的这项权限."
-
-msgid "§aInvite Players"
-msgstr "§a邀请玩家"
-
-msgid ""
-"§fThis player §acan§f invite\n"
-"§fother players to the island if\n"
-"§fthere is enough room for more\n"
-"§fmembers. Click here to remove\n"
-"§fthis permission."
-msgstr ""
-"§f玩家§a可以§f在有足够空闲\n"
-"§f位置的情况下邀请其他\n"
-"§f玩家加入岛屿一起游戏\n"
-"§f点击图标即可§c移除\n"
-"§f玩家的这项权限."
-
-msgid "§cInvite Players"
-msgstr "§才邀请玩家"
-
-msgid ""
-"§fThis player §ccannot§f invite\n"
-"§fother players to the island.\n"
-"§fClick here to add this permission."
-msgstr ""
-"§f玩家§c无法§f邀请其他\n"
-"§f玩家加入岛屿一起游戏\n"
-"§f点击图标即可§a添加\n"
-"§f玩家的这项权限."
-
-msgid "§aKick Players"
-msgstr "§a踢出玩家"
-
-msgid ""
-"§fThis player §acan§f kick\n"
-"§fother players from the island,\n"
-"§fbut they are unable to kick\n"
-"§fthe island leader. Click here\n"
-"§fto remove this permission."
-msgstr ""
-"§f玩家§a可以§f将岛屿上的\n"
-"§f其他成员踢出岛屿,\n"
-"§f但是他们无法踢出岛主\n"
-"§f点击图标即可§c移除\n"
-"§f玩家的这项权限."
-
-msgid "§cKick Players"
-msgstr "§c踢出玩家"
-
-msgid ""
-"§fThis player §ccannot§f kick\n"
-"§fother players from the island.\n"
-"§fClick here to add this permission."
-msgstr ""
-"§f玩家§c无法§f将岛屿上的\n"
-"§f其他成员踢出岛屿,\n"
-"§f点击图标即可§a增加\n"
-"§f玩家的这项权限."
-
-msgid "§9Island Group Members"
+#, fuzzy
+msgid "Island Group Members"
 msgstr "§9岛屿团队成员"
 
-msgid "§aGroup Info"
+#, fuzzy
+msgid "Group Info"
 msgstr "§a团队信息"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr ""
 
 msgid "§aMore players can be invited to this island."
 msgstr "§a可以邀请更多的玩家加入岛屿."
@@ -1351,70 +1266,28 @@ msgstr ""
 "§e岛屿主人可以点击头像来\n"
 "§e更改他们的权限"
 
-msgid ""
-"§a§lLeader\n"
-"§aCan §fchange the island's biome.\n"
-"§aCan §flock/unlock the island.\n"
-"§aCan §fset the island's warp.\n"
-"§aCan §ftoggle the island's warp.\n"
-"§aCan §finvite others to the island.\n"
-"§aCan §fkick others from the island."
-msgstr ""
-"§a§l岛屿主人\n"
-"§a可以 §f更改岛屿的生物群系.\n"
-"§a可以 §f更改岛屿的锁定状态.\n"
-"§a可以 §f设置岛屿的传送点.\n"
-"§a可以 §f更改岛屿传送点的状态.\n"
-"§a可以 §f邀请其他玩家加入岛屿.\n"
-"§a可以 §f将玩家从岛屿上踢出."
+#, fuzzy
+msgid "Leader"
+msgstr "§a§l岛主"
 
-msgid "§e§lMember"
+#, fuzzy
+msgid "Member"
 msgstr "§e§l成员"
 
-msgid "§aCan §fchange the island's biome."
-msgstr "§a可以 §f更改岛屿的生物群系."
+#, java-format
+msgid "Can {0}"
+msgstr ""
 
-msgid "§cCannot §fchange the island's biome."
-msgstr "§c无法 §f更改岛屿的生物群系."
-
-msgid "§aCan §flock/unlock the island."
-msgstr "§a可以 §f更改岛屿的锁定状态."
-
-msgid "§cCannot §flock/unlock the island."
-msgstr "§c无法 §f更改岛屿的锁定状态."
-
-msgid "§aCan §fset the island's warp."
-msgstr "§a可以 §f设置岛屿的传送点."
-
-msgid "§cCannot §fset the island's warp."
-msgstr "§c无法 §f设置岛屿的传送点."
-
-msgid "§aCan §ftoggle the island's warp."
-msgstr "§a可以 §f切换岛屿的传送点状态"
-
-msgid "§cCannot §ftoggle the island's warp."
-msgstr "§c无法 §f切换岛屿的传送点状态"
-
-msgid "§aCan §finvite others to the island."
-msgstr "§a可以 §f邀请别的玩家加入岛屿."
-
-msgid "§cCannot §finvite others to the island."
-msgstr "§c无法 §f邀请别的玩家加入岛屿."
-
-msgid "§aCan §fkick others from the island."
-msgstr "§a可以 §f将玩家从岛屿上踢出."
-
-msgid "§cCannot §fkick others from the island."
-msgstr "§c无法 §f将玩家从岛屿上踢出."
+#, java-format
+msgid "Cannot {0}"
+msgstr ""
 
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<点击将更改玩家的权限>"
 
-msgid "§9Island Log"
+#, fuzzy
+msgid "Island Log"
 msgstr "§9岛屿日志"
-
-msgid "§lIsland Log"
-msgstr "§l岛屿日志"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1426,12 +1299,8 @@ msgstr ""
 msgid "§e§lIsland Log"
 msgstr "§e§l岛屿日志"
 
-#, fuzzy
-msgid "§9Island Biome"
-msgstr "§a岛屿生物群系"
-
-msgid "§hIsland Biome"
-msgstr "§a岛屿生物群系"
+msgid "Island Biome"
+msgstr "岛屿生物群系"
 
 msgid "Ocean"
 msgstr ""
@@ -1633,27 +1502,38 @@ msgstr "§2§l这是你当前的生物群系."
 msgid "§e§lClick to change to this biome."
 msgstr "§e§l点击将会更改为这个生物群系."
 
-#, fuzzy, java-format
-msgid "§9Challenge Menu ({0}/{1})"
-msgstr "挑战菜单("
+#, fuzzy
+msgid "You cannot use this biome."
+msgstr "§c§l你没有权限更改生物群系."
 
-msgid "§9Island Menu"
+#, fuzzy
+msgid "Challenge Menu"
+msgstr "调整菜单"
+
+#, java-format
+msgid "{0} ({1}/{2})"
+msgstr ""
+
+#, fuzzy
+msgid "Island Menu"
 msgstr "§9岛屿菜单"
 
-msgid "§9Island Create Menu"
+#, fuzzy
+msgid "Island Create Menu"
 msgstr "§9岛屿创建菜单"
 
 msgid "§a§lStart an Island"
 msgstr "§a§l开始岛屿生涯"
 
+#, fuzzy
 msgid ""
-"§fStart your skyblock journey\n"
-"§fby starting your own island.\n"
-"§fComplete challenges to earn\n"
-"§fitems and skybucks to help\n"
-"§fexpand your skyblock. You can\n"
-"§finvite others to join in\n"
-"§fbuilding your island empire!\n"
+"Start your skyblock journey\n"
+"by starting your own island.\n"
+"Complete challenges to earn\n"
+"items and skybucks to help\n"
+"expand your skyblock. You can\n"
+"invite others to join in\n"
+"building your island empire!\n"
 "§e§lClick here to start!"
 msgstr ""
 "§f生成一个属于你自己的岛屿\n"
@@ -1667,13 +1547,14 @@ msgstr ""
 msgid "§a§lJoin an Island"
 msgstr "§a§l加入一个岛屿"
 
+#, fuzzy
 msgid ""
-"§fWant to join another player's\n"
-"§fisland instead of starting\n"
-"§fyour own? If another player\n"
-"§finvites you to their island\n"
-"§fyou can click here or use\n"
-"§e/island accept §fto join them.\n"
+"Want to join another player's\n"
+"island instead of starting\n"
+"your own? If another player\n"
+"invites you to their island\n"
+"you can click here or use\n"
+"§e/island accept§f to join them.\n"
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
@@ -1688,10 +1569,11 @@ msgstr ""
 msgid "§a§lIsland Help"
 msgstr "§a岛屿帮助"
 
+#, fuzzy
 msgid ""
-"§fNeed help with skyblock\n"
-"§fconcepts or commands? View\n"
-"§fdetails about them here.\n"
+"Need help with skyblock\n"
+"concepts or commands? View\n"
+"details about them here.\n"
 "§e§lClick here for help!"
 msgstr ""
 "§f对玩法不了解?\n"
@@ -1702,11 +1584,12 @@ msgstr ""
 msgid "§a§lReturn Home"
 msgstr "§a§l返回你的岛屿"
 
+#, fuzzy
 msgid ""
-"§fReturn to your island's home\n"
-"§fpoint. You can change your home\n"
-"§fpoint to any location on your\n"
-"§fisland using §b/island sethome\n"
+"Return to your island's home\n"
+"point. You can change your home\n"
+"point to any location on your\n"
+"island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
 "§f返回你的岛屿出生点.\n"
@@ -1717,11 +1600,12 @@ msgstr ""
 msgid "§a§lChallenges"
 msgstr "§a§l挑战"
 
+#, fuzzy
 msgid ""
-"§fView a list of §9challenges§f that\n"
-"§fyou can complete on your island\n"
-"§fto earn skybucks, items, perks,\n"
-"§fand titles."
+"View a list of §9challenges that\n"
+"you can complete on your island\n"
+"to earn skybucks, items, perks,\n"
+"and titles."
 msgstr ""
 "§f查询你可以在岛屿上完成的所有§9挑战\n"
 "§f完成挑战你可以获得各种稀有资源哟\n"
@@ -1740,11 +1624,12 @@ msgstr "§a§l岛屿等级"
 msgid "§eCurrent Level: §a{0,number,##.#}"
 msgstr "§e当前岛屿等级: §a{0,number,##.#}"
 
+#, fuzzy
 msgid ""
-"§fGain island levels by expanding\n"
-"§fyour skyblock and completing\n"
-"§fcertain challenges. Rarer blocks\n"
-"§fwill add more to your level.\n"
+"Gain island levels by expanding\n"
+"your skyblock and completing\n"
+"certain challenges. Rarer blocks\n"
+"will add more to your level.\n"
 "§e§lClick here to refresh.\n"
 "§e§l(must be on island)"
 msgstr ""
@@ -1756,14 +1641,16 @@ msgstr ""
 "§e§l点击图标刷新等级.\n"
 "§e§l(必须在自己的岛屿上)"
 
-msgid "§a§lIsland Group"
+#, fuzzy
+msgid "Island Group"
 msgstr "§a§l岛屿团队"
 
+#, fuzzy
 msgid ""
-"§fView the members of your island\n"
-"§fgroup and their permissions. If\n"
-"§fyou are the island leader, you\n"
-"§fcan change the member permissions.\n"
+"View the members of your island\n"
+"group and their permissions. If\n"
+"you are the island leader, you\n"
+"can change the member permissions.\n"
 "§e§lClick here to view or change."
 msgstr ""
 "§f查询岛屿团队的成员\n"
@@ -1772,13 +1659,15 @@ msgstr ""
 "§f你还可以更改他们的权限.\n"
 "§e§l点击图标查询或者更改."
 
-msgid "§a§lChange Island Biome"
+#, fuzzy
+msgid "Change Island Biome"
 msgstr "§a§l更改岛屿生物群系"
 
+#, fuzzy
 msgid ""
-"§fThe island biome affects things\n"
-"§flike grass color and spawning\n"
-"§fof both animals and monsters."
+"The island biome affects things\n"
+"like grass color and spawning\n"
+"of both animals and monsters."
 msgstr ""
 "§f更改岛屿生物群系可以\n"
 "§f使你拥有更多的资源\n"
@@ -1859,10 +1748,11 @@ msgstr "§e§l点击图标更改传送点状态."
 msgid "§a§lIsland Log"
 msgstr "§a§l岛屿日志"
 
+#, fuzzy
 msgid ""
-"§fView a log of events from\n"
-"§fyour island such as member,\n"
-"§fbiome, and warp changes.\n"
+"View a log of events from\n"
+"your island such as member,\n"
+"biome, and warp changes.\n"
 "§e§lClick to view the log."
 msgstr ""
 "§f查询岛屿发生的所有事件.\n"
@@ -1873,10 +1763,11 @@ msgstr ""
 msgid "§a§lChange Home Location"
 msgstr "§a§l更改岛屿家"
 
+#, fuzzy
 msgid ""
-"§fWhen you teleport to your\n"
-"§fisland you will be taken to\n"
-"§fthis location.\n"
+"When you teleport to your\n"
+"island you will be taken to\n"
+"this location.\n"
 "§e§lClick here to change."
 msgstr ""
 "§f设置你传送回岛屿时\n"
@@ -1886,36 +1777,25 @@ msgstr ""
 msgid "§a§lChange Warp Location"
 msgstr "§a§l更改传送点"
 
+#, fuzzy
 msgid ""
-"§fWhen your warp is activated,\n"
-"§fother players will be taken to\n"
-"§fthis point when they teleport\n"
-"§fto your island.\n"
+"When your warp is activated,\n"
+"other players will be taken to\n"
+"this point when they teleport\n"
+"to your island.\n"
 "§e§lClick here to change."
 msgstr ""
 "§f当你岛屿的传送点是激活的时候\n"
 "§f其他玩家可以任意传送到你岛屿设置的传送点.\n"
 "§e§l点击更改岛屿的传送点."
 
-msgid "§a§lLeader"
-msgstr "§a§l岛主"
-
 msgid "Permissions"
 msgstr "权限"
 
-msgid "Island Biome"
-msgstr "岛屿生物群系"
-
-#, fuzzy
-msgid "Challenge Menu"
-msgstr "调整菜单"
-
-msgid "§9SB Island Group Members"
-msgstr "§9岛屿团队成员"
-
-#, fuzzy
-msgid "You cannot use this biome."
-msgstr "§c§l你没有权限更改生物群系."
+msgid ""
+"§cIt seems you logged out in the sky world, however you are not a member of "
+"an island. Teleporting you to spawn."
+msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
@@ -1936,8 +1816,9 @@ msgstr "§a将在 {0} 秒后进行传送."
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4无法传送至玩家的岛屿!"
 
-msgid "§aTeleporting you to "
-msgstr "§a将你传送到"
+#, fuzzy, java-format
+msgid "§aTeleporting you to {0}'s island."
+msgstr "§a传送到 {0} 的岛屿"
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4你必须在岛屿上才能设置你的家!"
@@ -2002,6 +1883,193 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#~ msgid "§cYou were removed from your island since the last time you played!"
+#~ msgstr "§c因为你太久未登陆,所以你被从岛屿上移除了"
+
+#~ msgid "§a§lLeader"
+#~ msgstr "§a§l岛主"
+
+#~ msgid "§lIsland Log"
+#~ msgstr "§l岛屿日志"
+
+#, fuzzy
+#~ msgid "§9Island Biome"
+#~ msgstr "§a岛屿生物群系"
+
+#~ msgid "§hIsland Biome"
+#~ msgstr "§a岛屿生物群系"
+
+#, fuzzy
+#~ msgid "§9Challenge Menu ({0}/{1})"
+#~ msgstr "挑战菜单("
+
+#~ msgid "§9SB Island Group Members"
+#~ msgstr "§9岛屿团队成员"
+
+#~ msgid "§aTeleporting you to "
+#~ msgstr "§a将你传送到"
+
+#~ msgid "§aChange Biome"
+#~ msgstr "§a更改生物群系"
+
+#~ msgid ""
+#~ "§fThis player §acan§f change the\n"
+#~ "§fisland's biome. Click here\n"
+#~ "§fto remove this permission."
+#~ msgstr ""
+#~ "§f玩家 §a可以§f改变\n"
+#~ "§f岛屿的生物群系.点击图标\n"
+#~ "§f将禁止他更改岛屿的生物群系"
+
+#~ msgid "§cChange Biome"
+#~ msgstr "§c更改生物群系"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f change the\n"
+#~ "§fisland's biome. Click here\n"
+#~ "§fto grant this permission."
+#~ msgstr ""
+#~ "§f玩家 §c无法§f改变\n"
+#~ "§f岛屿的生物群系.点击图标\n"
+#~ "§f将允许他更改岛屿的生物群系"
+
+#~ msgid "§aToggle Island Lock"
+#~ msgstr "§a切换岛屿锁定状态"
+
+#~ msgid ""
+#~ "§fThis player §acan§f toggle the\n"
+#~ "§fisland's lock, which prevents\n"
+#~ "§fnon-group members from entering.\n"
+#~ "§fClick here to remove this permission."
+#~ msgstr ""
+#~ "§f玩家§a可以§f切换岛屿的\n"
+#~ "§f锁定状态,进行开放关闭岛屿\n"
+#~ "§f点击图标即可禁止他更改\n"
+#~ "§f岛屿锁定状态"
+
+#~ msgid "§cToggle Island Lock"
+#~ msgstr "§c切换岛屿的锁定状态"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f toggle the\n"
+#~ "§fisland's lock, which prevents\n"
+#~ "§fnon-group members from entering.\n"
+#~ "§fClick here to add this permission"
+#~ msgstr ""
+#~ "§f玩家§c无法§f切换岛屿的\n"
+#~ "§f锁定状态,进行开放关闭岛屿\n"
+#~ "§f点击图标即可允许他更改\n"
+#~ "§f岛屿锁定状态"
+
+#~ msgid "§aSet Island Warp"
+#~ msgstr "§a设置岛屿传送点"
+
+#~ msgid "§cSet Island Warp"
+#~ msgstr "§c设置岛屿的传送点"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f set the\n"
+#~ "§fisland's warp, which allows\n"
+#~ "§fnon-group members to teleport\n"
+#~ "§fto the island. Click here to\n"
+#~ "§fadd this permission."
+#~ msgstr ""
+#~ "§f玩家§c无法§f设置岛屿\n"
+#~ "§f的传送点,这将允许\n"
+#~ "§f任意玩家访问你的岛屿.\n"
+#~ "§f点击图标即可添加\n"
+#~ "§f玩家的这项权限."
+
+#~ msgid "§aToggle Island Warp"
+#~ msgstr "§a切换岛屿传送点状态"
+
+#~ msgid "§cToggle Island Warp"
+#~ msgstr "§c切换岛屿传送点状态"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f toggle the\n"
+#~ "§fisland's warp, allowing them\n"
+#~ "§fto turn it on or off at anytime,\n"
+#~ "§fbut not set the location. Click\n"
+#~ "§fhere to add this permission."
+#~ msgstr ""
+#~ "§f玩家§c无法§f切换岛屿\n"
+#~ "§f传送点的状态,这将允许\n"
+#~ "§f任意玩家访问你的岛屿,\n"
+#~ "§f不过他们无法设置传送点.\n"
+#~ "§f点击图标即可§a增加\n"
+#~ "§f玩家的这项权限."
+
+#~ msgid "§aInvite Players"
+#~ msgstr "§a邀请玩家"
+
+#~ msgid "§cInvite Players"
+#~ msgstr "§才邀请玩家"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f invite\n"
+#~ "§fother players to the island.\n"
+#~ "§fClick here to add this permission."
+#~ msgstr ""
+#~ "§f玩家§c无法§f邀请其他\n"
+#~ "§f玩家加入岛屿一起游戏\n"
+#~ "§f点击图标即可§a添加\n"
+#~ "§f玩家的这项权限."
+
+#~ msgid "§aKick Players"
+#~ msgstr "§a踢出玩家"
+
+#~ msgid "§cKick Players"
+#~ msgstr "§c踢出玩家"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f kick\n"
+#~ "§fother players from the island.\n"
+#~ "§fClick here to add this permission."
+#~ msgstr ""
+#~ "§f玩家§c无法§f将岛屿上的\n"
+#~ "§f其他成员踢出岛屿,\n"
+#~ "§f点击图标即可§a增加\n"
+#~ "§f玩家的这项权限."
+
+#~ msgid ""
+#~ "§a§lLeader\n"
+#~ "§aCan §fchange the island's biome.\n"
+#~ "§aCan §flock/unlock the island.\n"
+#~ "§aCan §fset the island's warp.\n"
+#~ "§aCan §ftoggle the island's warp.\n"
+#~ "§aCan §finvite others to the island.\n"
+#~ "§aCan §fkick others from the island."
+#~ msgstr ""
+#~ "§a§l岛屿主人\n"
+#~ "§a可以 §f更改岛屿的生物群系.\n"
+#~ "§a可以 §f更改岛屿的锁定状态.\n"
+#~ "§a可以 §f设置岛屿的传送点.\n"
+#~ "§a可以 §f更改岛屿传送点的状态.\n"
+#~ "§a可以 §f邀请其他玩家加入岛屿.\n"
+#~ "§a可以 §f将玩家从岛屿上踢出."
+
+#~ msgid "§cCannot §fchange the island's biome."
+#~ msgstr "§c无法 §f更改岛屿的生物群系."
+
+#~ msgid "§aCan §flock/unlock the island."
+#~ msgstr "§a可以 §f更改岛屿的锁定状态."
+
+#~ msgid "§cCannot §flock/unlock the island."
+#~ msgstr "§c无法 §f更改岛屿的锁定状态."
+
+#~ msgid "§cCannot §fset the island's warp."
+#~ msgstr "§c无法 §f设置岛屿的传送点."
+
+#~ msgid "§cCannot §ftoggle the island's warp."
+#~ msgstr "§c无法 §f切换岛屿的传送点状态"
+
+#~ msgid "§cCannot §finvite others to the island."
+#~ msgstr "§c无法 §f邀请别的玩家加入岛屿."
+
+#~ msgid "§cCannot §fkick others from the island."
+#~ msgstr "§c无法 §f将玩家从岛屿上踢出."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§a生物群系: 海洋(Ocean)"

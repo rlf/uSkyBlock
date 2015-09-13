@@ -56,22 +56,9 @@ public class PlayerInfo implements Serializable {
     }
 
     public void removeFromIsland() {
-        if (this.uuid != null) {
-            Player onlinePlayer = Bukkit.getPlayer(this.uuid);
-            if (onlinePlayer != null && onlinePlayer.isOnline()) {
-                this.hasIsland = false;
-                this.setIslandLocation(null);
-                this.homeLocation = null;
-                uSkyBlock.getInstance().clearPlayerInventory(onlinePlayer);
-                uSkyBlock.getInstance().spawnTeleport(onlinePlayer);
-            } 
-            // If the player is not currently online, DO NOT set hasIsland to false.
-            // They will be picked up when they login with checkIfKickedFromIsland().
-        } else {
-            this.hasIsland = false;
-            this.setIslandLocation(null);
-            this.homeLocation = null;
-        }
+        this.hasIsland = false;
+        this.setIslandLocation(null);
+        this.homeLocation = null;
     }
 
     public boolean getHasIsland() {
@@ -222,10 +209,6 @@ public class PlayerInfo implements Serializable {
                         (float) playerConfig.getDouble("player.homeYaw", 0.0),
                         (float) playerConfig.getDouble("player.homePitch", 0.0));
 
-                if (handleIslandRemoval) {
-                    checkIfKickedFromIsland();
-                }
-                
                 buildChallengeList();
                 for (String currentChallenge : challenges.keySet()) {
                     this.challenges.put(currentChallenge, new ChallengeCompletion(currentChallenge, playerConfig.getLong("player.challenges." + currentChallenge + ".firstCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompleted"), playerConfig.getInt("player.challenges." + currentChallenge + ".timesCompletedSinceTimer")));
@@ -241,18 +224,6 @@ public class PlayerInfo implements Serializable {
             if (onlinePlayer != null && onlinePlayer.isOnline()) {
                 updatePlayerInfo(onlinePlayer);
             }
-        }
-    }
-
-    private void checkIfKickedFromIsland() {
-        Player onlinePlayer = Bukkit.getPlayer(this.playerName);
-
-        IslandInfo loadedIslandInfo = uSkyBlock.getInstance().getIslandInfo(LocationUtil.getIslandName(this.islandLocation));
-        if (this.hasIsland && loadedIslandInfo != null && !loadedIslandInfo.getMembers().contains(this.playerName)) {
-            if (onlinePlayer != null && onlinePlayer.isOnline()) {
-                onlinePlayer.sendMessage(tr("\u00a7cYou were removed from your island since the last time you played!"));
-            }
-            removeFromIsland();
         }
     }
     
@@ -385,12 +356,6 @@ public class PlayerInfo implements Serializable {
         loadPlayer(false);
     }
     
-    public synchronized void postRename() {
-        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
-        
-        checkIfKickedFromIsland();
-    }
-
     public void banFromIsland(String name) {
         List<String> bannedFrom = playerData.getStringList("bannedFrom");
         if (bannedFrom != null && !bannedFrom.contains(name)) {

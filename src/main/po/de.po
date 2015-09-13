@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
@@ -898,7 +898,8 @@ msgid "withdraw an invite"
 msgstr "Ziehe eine Einladung zurück"
 
 # ???
-msgid "§4You don't have permissions to unvite players."
+#, fuzzy
+msgid "§4You don't have permissions to uninvite players."
 msgstr "§4Du hast nicht genügend Rechte um den Spieler auszuladen."
 
 msgid "§4This command can only be executed by a player"
@@ -1164,17 +1165,81 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDeine Stufe ist: §f{0}"
 
-msgid "§cYou were removed from your island since the last time you played!"
-msgstr ""
-"§cDu wurdest von der Insel entfernt seit du das letzte mal Online warst."
-
-msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
-msgstr ""
-
 msgid "Challenge Menu "
 msgstr "Aufgaben Menue"
+
+#, fuzzy
+msgid "change the islands's biome."
+msgstr "§aKann §das Insel Boome ändern."
+
+#, fuzzy
+msgid "toggle the island's lock."
+msgstr "§aKann §den Insel Warmpunkt Ein-/Ausschalten."
+
+#, fuzzy
+msgid "set the island's warp."
+msgstr "§aKann §fden Insel Warppunkt setzen."
+
+#, fuzzy
+msgid ""
+"set the island's warp,\n"
+"which allows non-group\n"
+"members to teleport to\n"
+" the island"
+msgstr ""
+"§fDieser Spieler §akann§f den Warppunkt\n"
+"§fder Insel setzen, dies erlaubt\n"
+"§fNicht-Gruppenmitgliedern sich auf die\n"
+"§fInsel zu teleportieren. Klick hier\n"
+"§fum ihm dieses Recht zu nehmen."
+
+#, fuzzy
+msgid "toggle the island's warp."
+msgstr "§aKann §den Insel Warmpunkt Ein-/Ausschalten."
+
+#, fuzzy
+msgid ""
+"toggle the\n"
+"island's warp, allowing them\n"
+"to turn it on or off at anytime.\n"
+"but not set the location."
+msgstr ""
+"§fDieser Spieler §akann§f jederzeit den\n"
+"§fWarppunkt der Insel Ein/Ausschalten,\n"
+"§faber §cnicht§f dessen Position ändern.\n"
+"§fKlick hier um ihm dieses Recht zu nehmen."
+
+#, fuzzy
+msgid "invite others to the island."
+msgstr "§aKann §Spieler auf die Insel Einladen."
+
+#, fuzzy
+msgid ""
+"invite\n"
+"other players to the island if\n"
+"there is enough room for more\n"
+"members"
+msgstr ""
+"§fDieser Spieler §akann§f andere\n"
+"§fSpieler auf die Insel einladen solange\n"
+"§fnoch ein Platz frei ist. Klick hier\n"
+"§fum ihm dies Recht zu nehmen."
+
+#, fuzzy
+msgid "kick others from the island."
+msgstr "§aKann §Spieler von der Insel werfen."
+
+#, fuzzy
+msgid ""
+"kick\n"
+"other players from the island,\n"
+"but they are unable to kick\n"
+"the island leader."
+msgstr ""
+"§fDieser Spieler §akann§f andere\n"
+"§fSpieler von der Insel werfen,\n"
+"§faber §cnicht§f den Anführer. Klick\n"
+"§hier um ihm dieses Recht zu nehmen."
 
 # ???
 #, java-format
@@ -1200,179 +1265,32 @@ msgstr ""
 "§eRechte zu sehen. Klicke\n"
 "§edarauf um diese zu ändern."
 
-msgid "§aChange Biome"
-msgstr "§aÄndert das Biom"
+#, fuzzy
+msgid "§fThis player §acan"
+msgstr "§4Dieser Spieler hat keine Insel."
 
-msgid ""
-"§fThis player §acan§f change the\n"
-"§fisland's biome. Click here\n"
-"§fto remove this permission."
+#, fuzzy
+msgid "Click here to remove this permission."
+msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
+
+msgid "§fThis player §ccannot"
 msgstr ""
-"§fDieser Spieler §akann§f das\n"
-"§fInselbiome ändern. Klicke hier\n"
-"§fum ihm dieses Recht zu nehmen."
 
-msgid "§cChange Biome"
-msgstr "§cÄndert das Biom"
+#, fuzzy
+msgid "Click here to grant this permission."
+msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
 
-msgid ""
-"§fThis player §ccannot§f change the\n"
-"§fisland's biome. Click here\n"
-"§fto grant this permission."
-msgstr ""
-"§fDieser Spieler §ckann nicht§f das\n"
-"§fInselbiome ändern. Klicke hier\n"
-"§fum ihm dieses Recht zu geben."
-
-msgid "§aToggle Island Lock"
-msgstr "§aSchalte den Inselschutz Ein/Aus"
-
-msgid ""
-"§fThis player §acan§f toggle the\n"
-"§fisland's lock, which prevents\n"
-"§fnon-group members from entering.\n"
-"§fClick here to remove this permission."
-msgstr ""
-"§fDieser Spieler §akann§f die Insel Ent-/Sperren.\n"
-"§fDies verhindert das nicht Gruppen\n"
-"§fMitglieder auf die Insel können.\n"
-"§fKlick hier um ihm dieses Recht zu nehmen."
-
-msgid "§cToggle Island Lock"
-msgstr "§cSchalte den Inselschutz Ein/Aus"
-
-msgid ""
-"§fThis player §ccannot§f toggle the\n"
-"§fisland's lock, which prevents\n"
-"§fnon-group members from entering.\n"
-"§fClick here to add this permission"
-msgstr ""
-"§fDieser Spieler §ckann nicht§f die Insel Ent-/Sperren.\n"
-"§fDies verhindert das nicht Gruppen\n"
-"§fMitglieder auf die Insel können.\n"
-"§fKlick hier um ihm dieses Recht zu geben."
-
-msgid "§aSet Island Warp"
-msgstr "§aSetzt Insel Warppunkt"
-
-msgid ""
-"§fThis player §acan§f set the\n"
-"§fisland's warp, which allows\n"
-"§fnon-group members to teleport\n"
-"§fto the island. Click here to\n"
-"§fremove this permission."
-msgstr ""
-"§fDieser Spieler §akann§f den Warppunkt\n"
-"§fder Insel setzen, dies erlaubt\n"
-"§fNicht-Gruppenmitgliedern sich auf die\n"
-"§fInsel zu teleportieren. Klick hier\n"
-"§fum ihm dieses Recht zu nehmen."
-
-msgid "§cSet Island Warp"
-msgstr "§cSetzt Insel Warppunkt"
-
-msgid ""
-"§fThis player §ccannot§f set the\n"
-"§fisland's warp, which allows\n"
-"§fnon-group members to teleport\n"
-"§fto the island. Click here to\n"
-"§fadd this permission."
-msgstr ""
-"§fDieser Spieler §ckann nicht§f den Warppunkt\n"
-"§fder Insel setzen, dies erlaubt\n"
-"§fNicht-Gruppenmitgliedern sich auf die\n"
-"§fInsel zu teleportieren. Klick hier\n"
-"§fum ihm dieses Recht zu geben."
-
-msgid "§aToggle Island Warp"
-msgstr "§aSchalte den Insel Warp Ein/Aus"
-
-msgid ""
-"§fThis player §acan§f toggle the\n"
-"§fisland's warp, allowing them\n"
-"§fto turn it on or off at anytime.\n"
-"§fbut not set the location. Click\n"
-"§fhere to remove this permission."
-msgstr ""
-"§fDieser Spieler §akann§f jederzeit den\n"
-"§fWarppunkt der Insel Ein/Ausschalten,\n"
-"§faber §cnicht§f dessen Position ändern.\n"
-"§fKlick hier um ihm dieses Recht zu nehmen."
-
-msgid "§cToggle Island Warp"
-msgstr "§cSchalte den Insel Warp Ein/Aus"
-
-msgid ""
-"§fThis player §ccannot§f toggle the\n"
-"§fisland's warp, allowing them\n"
-"§fto turn it on or off at anytime,\n"
-"§fbut not set the location. Click\n"
-"§fhere to add this permission."
-msgstr ""
-"§fDieser Spieler §ckann nicht§f den\n"
-"§fWarppunkt der Insel Ein/Ausschalten,\n"
-"§fund nicht dessen Position ändern.\n"
-"§fKlick hier um ihm dieses Recht zu geben."
-
-msgid "§aInvite Players"
-msgstr "§aLade Spieler ein"
-
-msgid ""
-"§fThis player §acan§f invite\n"
-"§fother players to the island if\n"
-"§fthere is enough room for more\n"
-"§fmembers. Click here to remove\n"
-"§fthis permission."
-msgstr ""
-"§fDieser Spieler §akann§f andere\n"
-"§fSpieler auf die Insel einladen solange\n"
-"§fnoch ein Platz frei ist. Klick hier\n"
-"§fum ihm dies Recht zu nehmen."
-
-msgid "§cInvite Players"
-msgstr "§cLade Spieler ein"
-
-msgid ""
-"§fThis player §ccannot§f invite\n"
-"§fother players to the island.\n"
-"§fClick here to add this permission."
-msgstr ""
-"§fDieser Spieler §ckann keine§f anderen\n"
-"§fSpieler auf die Insel einladen.\n"
-"§fKlick hier um ihm dies Recht zu geben."
-
-msgid "§aKick Players"
-msgstr "§aEntferne Spieler"
-
-msgid ""
-"§fThis player §acan§f kick\n"
-"§fother players from the island,\n"
-"§fbut they are unable to kick\n"
-"§fthe island leader. Click here\n"
-"§fto remove this permission."
-msgstr ""
-"§fDieser Spieler §akann§f andere\n"
-"§fSpieler von der Insel werfen,\n"
-"§faber §cnicht§f den Anführer. Klick\n"
-"§hier um ihm dieses Recht zu nehmen."
-
-msgid "§cKick Players"
-msgstr "§cEntferne Spieler"
-
-msgid ""
-"§fThis player §ccannot§f kick\n"
-"§fother players from the island.\n"
-"§fClick here to add this permission."
-msgstr ""
-"§fDieser Spieler §ckann keine§f andere\n"
-"§fSpieler von der Insel werfen.\n"
-"§fKlick hier um ihm dieses Recht zu geben."
-
-msgid "§9Island Group Members"
+#, fuzzy
+msgid "Island Group Members"
 msgstr "§9Insel Gruppen Mitglieder\t"
 
-msgid "§aGroup Info"
+#, fuzzy
+msgid "Group Info"
 msgstr "§aGruppen Info"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr ""
 
 msgid "§aMore players can be invited to this island."
 msgstr "§aMehr Spieler können eingeladen werden."
@@ -1391,70 +1309,28 @@ msgstr ""
 "§ediese Rechte durch Klicken\n"
 "§eauf das Spieler Icon ändern. "
 
-msgid ""
-"§a§lLeader\n"
-"§aCan §fchange the island's biome.\n"
-"§aCan §flock/unlock the island.\n"
-"§aCan §fset the island's warp.\n"
-"§aCan §ftoggle the island's warp.\n"
-"§aCan §finvite others to the island.\n"
-"§aCan §fkick others from the island."
-msgstr ""
-"§a§lDer Anführer kann:\n"
-"§fdas Insel Biome ändern.\n"
-"§fldie Insel Ent-/Sperren \n"
-"§fden Insel Warppunkt setzen.\n"
-"§fdein Insel Warp Ein-/Ausschalten.\n"
-"§fSpieler auf die Insel einladen.\n"
-"§fSpieler von der Insel werfen."
+#, fuzzy
+msgid "Leader"
+msgstr "§a§lAnführer"
 
-msgid "§e§lMember"
+#, fuzzy
+msgid "Member"
 msgstr "§e§lMitglied"
 
-msgid "§aCan §fchange the island's biome."
-msgstr "§aKann §das Insel Boome ändern."
+#, java-format
+msgid "Can {0}"
+msgstr ""
 
-msgid "§cCannot §fchange the island's biome."
-msgstr "§cKann nicht §fdas Insel Boome ändern."
-
-msgid "§aCan §flock/unlock the island."
-msgstr "§aKann §fdie Insel Ent-/Sperren."
-
-msgid "§cCannot §flock/unlock the island."
-msgstr "§cKann nicht §fdie Insel Ent-/Sperren."
-
-msgid "§aCan §fset the island's warp."
-msgstr "§aKann §fden Insel Warppunkt setzen."
-
-msgid "§cCannot §fset the island's warp."
-msgstr "§cKann nicht §fden Insel Warppunkt setzen."
-
-msgid "§aCan §ftoggle the island's warp."
-msgstr "§aKann §den Insel Warmpunkt Ein-/Ausschalten."
-
-msgid "§cCannot §ftoggle the island's warp."
-msgstr "§cKann nicht §den Insel Warmpunkt Ein-/Ausschalten."
-
-msgid "§aCan §finvite others to the island."
-msgstr "§aKann §Spieler auf die Insel Einladen."
-
-msgid "§cCannot §finvite others to the island."
-msgstr "§cKann keine §Spieler auf die Insel Einladen."
-
-msgid "§aCan §fkick others from the island."
-msgstr "§aKann §Spieler von der Insel werfen."
-
-msgid "§cCannot §fkick others from the island."
-msgstr "§cKann keine §Spieler von der Insel werfen."
+#, java-format
+msgid "Cannot {0}"
+msgstr ""
 
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
 
-msgid "§9Island Log"
+#, fuzzy
+msgid "Island Log"
 msgstr "§9Island Logbuch"
-
-msgid "§lIsland Log"
-msgstr "§lInsel Logbuch"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1466,11 +1342,8 @@ msgstr ""
 msgid "§e§lIsland Log"
 msgstr "§e§lInsel Logbuch"
 
-msgid "§9Island Biome"
-msgstr "§9Insel Biome"
-
-msgid "§hIsland Biome"
-msgstr "§hInsel Biome"
+msgid "Island Biome"
+msgstr "Insel Biome"
 
 msgid "Ocean"
 msgstr ""
@@ -1676,27 +1549,37 @@ msgstr "§2§lDas ist dein aktuelles Biome."
 msgid "§e§lClick to change to this biome."
 msgstr "§e§lKlicke um zu diesem Biome zu wechseln."
 
-#, java-format
-msgid "§9Challenge Menu ({0}/{1})"
-msgstr "§9Aufgaben Menü ({0}/{1})"
+#, fuzzy
+msgid "You cannot use this biome."
+msgstr "§c§lDu kannst das Biome nicht ändern."
 
-msgid "§9Island Menu"
+msgid "Challenge Menu"
+msgstr "Aufgaben Menue"
+
+#, java-format
+msgid "{0} ({1}/{2})"
+msgstr ""
+
+#, fuzzy
+msgid "Island Menu"
 msgstr "§9Insel Menü"
 
-msgid "§9Island Create Menu"
+#, fuzzy
+msgid "Island Create Menu"
 msgstr "§9Insel Erstellung Menü"
 
 msgid "§a§lStart an Island"
 msgstr "§a§lStarte eine Insel"
 
+#, fuzzy
 msgid ""
-"§fStart your skyblock journey\n"
-"§fby starting your own island.\n"
-"§fComplete challenges to earn\n"
-"§fitems and skybucks to help\n"
-"§fexpand your skyblock. You can\n"
-"§finvite others to join in\n"
-"§fbuilding your island empire!\n"
+"Start your skyblock journey\n"
+"by starting your own island.\n"
+"Complete challenges to earn\n"
+"items and skybucks to help\n"
+"expand your skyblock. You can\n"
+"invite others to join in\n"
+"building your island empire!\n"
 "§e§lClick here to start!"
 msgstr ""
 "§fStarte dein SkyBlock Abenteuer\n"
@@ -1711,13 +1594,14 @@ msgstr ""
 msgid "§a§lJoin an Island"
 msgstr "§a§lTrete einer Insel bei"
 
+#, fuzzy
 msgid ""
-"§fWant to join another player's\n"
-"§fisland instead of starting\n"
-"§fyour own? If another player\n"
-"§finvites you to their island\n"
-"§fyou can click here or use\n"
-"§e/island accept §fto join them.\n"
+"Want to join another player's\n"
+"island instead of starting\n"
+"your own? If another player\n"
+"invites you to their island\n"
+"you can click here or use\n"
+"§e/island accept§f to join them.\n"
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
@@ -1731,10 +1615,11 @@ msgstr ""
 msgid "§a§lIsland Help"
 msgstr "§a§lInsel Hilfe"
 
+#, fuzzy
 msgid ""
-"§fNeed help with skyblock\n"
-"§fconcepts or commands? View\n"
-"§fdetails about them here.\n"
+"Need help with skyblock\n"
+"concepts or commands? View\n"
+"details about them here.\n"
 "§e§lClick here for help!"
 msgstr ""
 "§fBrauchst du Hilfe bei den\n"
@@ -1746,11 +1631,12 @@ msgstr ""
 msgid "§a§lReturn Home"
 msgstr "§a§lKehre zurück"
 
+#, fuzzy
 msgid ""
-"§fReturn to your island's home\n"
-"§fpoint. You can change your home\n"
-"§fpoint to any location on your\n"
-"§fisland using §b/island sethome\n"
+"Return to your island's home\n"
+"point. You can change your home\n"
+"point to any location on your\n"
+"island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
 "§fKehre zum Insel Zuhause zurück.\n"
@@ -1762,11 +1648,12 @@ msgstr ""
 msgid "§a§lChallenges"
 msgstr "§a§lAufgaben"
 
+#, fuzzy
 msgid ""
-"§fView a list of §9challenges§f that\n"
-"§fyou can complete on your island\n"
-"§fto earn skybucks, items, perks,\n"
-"§fand titles."
+"View a list of §9challenges that\n"
+"you can complete on your island\n"
+"to earn skybucks, items, perks,\n"
+"and titles."
 msgstr ""
 "§fSiehe eine Liste von Aufgaben die du\n"
 "§fauf deiner Insel beenden kannst um Geld,\n"
@@ -1786,11 +1673,12 @@ msgstr "§a§lInsel Stufe"
 msgid "§eCurrent Level: §a{0,number,##.#}"
 msgstr "§eAktulle Stufe: §a{0,number,##.#}"
 
+#, fuzzy
 msgid ""
-"§fGain island levels by expanding\n"
-"§fyour skyblock and completing\n"
-"§fcertain challenges. Rarer blocks\n"
-"§fwill add more to your level.\n"
+"Gain island levels by expanding\n"
+"your skyblock and completing\n"
+"certain challenges. Rarer blocks\n"
+"will add more to your level.\n"
 "§e§lClick here to refresh.\n"
 "§e§l(must be on island)"
 msgstr ""
@@ -1801,14 +1689,16 @@ msgstr ""
 "§e§lKlick hier zum aktualisieren.\n"
 "§e§l(du musst auf deiner Insel sein)"
 
-msgid "§a§lIsland Group"
+#, fuzzy
+msgid "Island Group"
 msgstr "§a§lInsel Gruppe"
 
+#, fuzzy
 msgid ""
-"§fView the members of your island\n"
-"§fgroup and their permissions. If\n"
-"§fyou are the island leader, you\n"
-"§fcan change the member permissions.\n"
+"View the members of your island\n"
+"group and their permissions. If\n"
+"you are the island leader, you\n"
+"can change the member permissions.\n"
 "§e§lClick here to view or change."
 msgstr ""
 "§fZeige die Mitglieder deiner Insel und ihre\n"
@@ -1816,13 +1706,15 @@ msgstr ""
 "§fkannst du die Rechte der Mitglieder ändern.\n"
 "§e§lKlicke hier zum Anzeigen und ändern."
 
-msgid "§a§lChange Island Biome"
+#, fuzzy
+msgid "Change Island Biome"
 msgstr "§a§lWechsel das Insel Biome"
 
+#, fuzzy
 msgid ""
-"§fThe island biome affects things\n"
-"§flike grass color and spawning\n"
-"§fof both animals and monsters."
+"The island biome affects things\n"
+"like grass color and spawning\n"
+"of both animals and monsters."
 msgstr ""
 "§fDas Inselbiome beeinflusst dinge\n"
 "§fwie die Rasenfarbe oder das\n"
@@ -1909,10 +1801,11 @@ msgstr "§e§lKlick hier zum Aktivieren."
 msgid "§a§lIsland Log"
 msgstr "§a§lInsel Logbuch"
 
+#, fuzzy
 msgid ""
-"§fView a log of events from\n"
-"§fyour island such as member,\n"
-"§fbiome, and warp changes.\n"
+"View a log of events from\n"
+"your island such as member,\n"
+"biome, and warp changes.\n"
 "§e§lClick to view the log."
 msgstr ""
 "§fZeigt Einträge von Ereignissen wie:\n"
@@ -1922,10 +1815,11 @@ msgstr ""
 msgid "§a§lChange Home Location"
 msgstr "§a§lWechsel die Heimat Position"
 
+#, fuzzy
 msgid ""
-"§fWhen you teleport to your\n"
-"§fisland you will be taken to\n"
-"§fthis location.\n"
+"When you teleport to your\n"
+"island you will be taken to\n"
+"this location.\n"
 "§e§lClick here to change."
 msgstr ""
 "§fWenn du dich zu deiner Insel\n"
@@ -1936,11 +1830,12 @@ msgstr ""
 msgid "§a§lChange Warp Location"
 msgstr "§a§lÄndere Warppunkt"
 
+#, fuzzy
 msgid ""
-"§fWhen your warp is activated,\n"
-"§fother players will be taken to\n"
-"§fthis point when they teleport\n"
-"§fto your island.\n"
+"When your warp is activated,\n"
+"other players will be taken to\n"
+"this point when they teleport\n"
+"to your island.\n"
 "§e§lClick here to change."
 msgstr ""
 "§fWenn dein InselWarp aktiv ist,\n"
@@ -1949,24 +1844,13 @@ msgstr ""
 "§fdeiner Insel Teleportiert.\n"
 "§e§lKlick hier zum ändern."
 
-msgid "§a§lLeader"
-msgstr "§a§lAnführer"
-
 msgid "Permissions"
 msgstr "Rechte"
 
-msgid "Island Biome"
-msgstr "Insel Biome"
-
-msgid "Challenge Menu"
-msgstr "Aufgaben Menue"
-
-msgid "§9SB Island Group Members"
-msgstr "§9SB Gruppenmitglieder der Insel"
-
-#, fuzzy
-msgid "You cannot use this biome."
-msgstr "§c§lDu kannst das Biome nicht ändern."
+msgid ""
+"§cIt seems you logged out in the sky world, however you are not a member of "
+"an island. Teleporting you to spawn."
+msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
@@ -1987,8 +1871,9 @@ msgstr "§aDu wirst in {0} Sekunden Teleportiert."
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Es ist nicht möglich Dich zu der Insel von dem Spieler zu Warpen!"
 
-msgid "§aTeleporting you to "
-msgstr "§aTeleportiert dich zu"
+#, fuzzy, java-format
+msgid "§aTeleporting you to {0}'s island."
+msgstr "§aTeleportiert zu {0}'s Insel."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Du musst näher zu deiner Insel um dein SkyBlock Zuhause zu setzen!"
@@ -2060,6 +1945,188 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#~ msgid "§cYou were removed from your island since the last time you played!"
+#~ msgstr ""
+#~ "§cDu wurdest von der Insel entfernt seit du das letzte mal Online warst."
+
+#~ msgid "§a§lLeader"
+#~ msgstr "§a§lAnführer"
+
+#~ msgid "§lIsland Log"
+#~ msgstr "§lInsel Logbuch"
+
+#~ msgid "§9Island Biome"
+#~ msgstr "§9Insel Biome"
+
+#~ msgid "§hIsland Biome"
+#~ msgstr "§hInsel Biome"
+
+#~ msgid "§9Challenge Menu ({0}/{1})"
+#~ msgstr "§9Aufgaben Menü ({0}/{1})"
+
+#~ msgid "§9SB Island Group Members"
+#~ msgstr "§9SB Gruppenmitglieder der Insel"
+
+#~ msgid "§aTeleporting you to "
+#~ msgstr "§aTeleportiert dich zu"
+
+#~ msgid "§aChange Biome"
+#~ msgstr "§aÄndert das Biom"
+
+#~ msgid ""
+#~ "§fThis player §acan§f change the\n"
+#~ "§fisland's biome. Click here\n"
+#~ "§fto remove this permission."
+#~ msgstr ""
+#~ "§fDieser Spieler §akann§f das\n"
+#~ "§fInselbiome ändern. Klicke hier\n"
+#~ "§fum ihm dieses Recht zu nehmen."
+
+#~ msgid "§cChange Biome"
+#~ msgstr "§cÄndert das Biom"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f change the\n"
+#~ "§fisland's biome. Click here\n"
+#~ "§fto grant this permission."
+#~ msgstr ""
+#~ "§fDieser Spieler §ckann nicht§f das\n"
+#~ "§fInselbiome ändern. Klicke hier\n"
+#~ "§fum ihm dieses Recht zu geben."
+
+#~ msgid "§aToggle Island Lock"
+#~ msgstr "§aSchalte den Inselschutz Ein/Aus"
+
+#~ msgid ""
+#~ "§fThis player §acan§f toggle the\n"
+#~ "§fisland's lock, which prevents\n"
+#~ "§fnon-group members from entering.\n"
+#~ "§fClick here to remove this permission."
+#~ msgstr ""
+#~ "§fDieser Spieler §akann§f die Insel Ent-/Sperren.\n"
+#~ "§fDies verhindert das nicht Gruppen\n"
+#~ "§fMitglieder auf die Insel können.\n"
+#~ "§fKlick hier um ihm dieses Recht zu nehmen."
+
+#~ msgid "§cToggle Island Lock"
+#~ msgstr "§cSchalte den Inselschutz Ein/Aus"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f toggle the\n"
+#~ "§fisland's lock, which prevents\n"
+#~ "§fnon-group members from entering.\n"
+#~ "§fClick here to add this permission"
+#~ msgstr ""
+#~ "§fDieser Spieler §ckann nicht§f die Insel Ent-/Sperren.\n"
+#~ "§fDies verhindert das nicht Gruppen\n"
+#~ "§fMitglieder auf die Insel können.\n"
+#~ "§fKlick hier um ihm dieses Recht zu geben."
+
+#~ msgid "§aSet Island Warp"
+#~ msgstr "§aSetzt Insel Warppunkt"
+
+#~ msgid "§cSet Island Warp"
+#~ msgstr "§cSetzt Insel Warppunkt"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f set the\n"
+#~ "§fisland's warp, which allows\n"
+#~ "§fnon-group members to teleport\n"
+#~ "§fto the island. Click here to\n"
+#~ "§fadd this permission."
+#~ msgstr ""
+#~ "§fDieser Spieler §ckann nicht§f den Warppunkt\n"
+#~ "§fder Insel setzen, dies erlaubt\n"
+#~ "§fNicht-Gruppenmitgliedern sich auf die\n"
+#~ "§fInsel zu teleportieren. Klick hier\n"
+#~ "§fum ihm dieses Recht zu geben."
+
+#~ msgid "§aToggle Island Warp"
+#~ msgstr "§aSchalte den Insel Warp Ein/Aus"
+
+#~ msgid "§cToggle Island Warp"
+#~ msgstr "§cSchalte den Insel Warp Ein/Aus"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f toggle the\n"
+#~ "§fisland's warp, allowing them\n"
+#~ "§fto turn it on or off at anytime,\n"
+#~ "§fbut not set the location. Click\n"
+#~ "§fhere to add this permission."
+#~ msgstr ""
+#~ "§fDieser Spieler §ckann nicht§f den\n"
+#~ "§fWarppunkt der Insel Ein/Ausschalten,\n"
+#~ "§fund nicht dessen Position ändern.\n"
+#~ "§fKlick hier um ihm dieses Recht zu geben."
+
+#~ msgid "§aInvite Players"
+#~ msgstr "§aLade Spieler ein"
+
+#~ msgid "§cInvite Players"
+#~ msgstr "§cLade Spieler ein"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f invite\n"
+#~ "§fother players to the island.\n"
+#~ "§fClick here to add this permission."
+#~ msgstr ""
+#~ "§fDieser Spieler §ckann keine§f anderen\n"
+#~ "§fSpieler auf die Insel einladen.\n"
+#~ "§fKlick hier um ihm dies Recht zu geben."
+
+#~ msgid "§aKick Players"
+#~ msgstr "§aEntferne Spieler"
+
+#~ msgid "§cKick Players"
+#~ msgstr "§cEntferne Spieler"
+
+#~ msgid ""
+#~ "§fThis player §ccannot§f kick\n"
+#~ "§fother players from the island.\n"
+#~ "§fClick here to add this permission."
+#~ msgstr ""
+#~ "§fDieser Spieler §ckann keine§f andere\n"
+#~ "§fSpieler von der Insel werfen.\n"
+#~ "§fKlick hier um ihm dieses Recht zu geben."
+
+#~ msgid ""
+#~ "§a§lLeader\n"
+#~ "§aCan §fchange the island's biome.\n"
+#~ "§aCan §flock/unlock the island.\n"
+#~ "§aCan §fset the island's warp.\n"
+#~ "§aCan §ftoggle the island's warp.\n"
+#~ "§aCan §finvite others to the island.\n"
+#~ "§aCan §fkick others from the island."
+#~ msgstr ""
+#~ "§a§lDer Anführer kann:\n"
+#~ "§fdas Insel Biome ändern.\n"
+#~ "§fldie Insel Ent-/Sperren \n"
+#~ "§fden Insel Warppunkt setzen.\n"
+#~ "§fdein Insel Warp Ein-/Ausschalten.\n"
+#~ "§fSpieler auf die Insel einladen.\n"
+#~ "§fSpieler von der Insel werfen."
+
+#~ msgid "§cCannot §fchange the island's biome."
+#~ msgstr "§cKann nicht §fdas Insel Boome ändern."
+
+#~ msgid "§aCan §flock/unlock the island."
+#~ msgstr "§aKann §fdie Insel Ent-/Sperren."
+
+#~ msgid "§cCannot §flock/unlock the island."
+#~ msgstr "§cKann nicht §fdie Insel Ent-/Sperren."
+
+#~ msgid "§cCannot §fset the island's warp."
+#~ msgstr "§cKann nicht §fden Insel Warppunkt setzen."
+
+#~ msgid "§cCannot §ftoggle the island's warp."
+#~ msgstr "§cKann nicht §den Insel Warmpunkt Ein-/Ausschalten."
+
+#~ msgid "§cCannot §finvite others to the island."
+#~ msgstr "§cKann keine §Spieler auf die Insel Einladen."
+
+#~ msgid "§cCannot §fkick others from the island."
+#~ msgstr "§cKann keine §Spieler von der Insel werfen."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBiome: Ozean"
