@@ -13,11 +13,14 @@ general:
   # blockValues [ID: VALUE] - the blocks listed below will have custom values instead of the default.
   # Syntax: ID : VALUE
   #  ID := BlockID | BlockID/SubType | BlockID/SubTypeMin-SubTypeMax
-  # I.e.
+  # E.G.
   # '1/0': 10 # Will give 10 points per STONE
   # '1/1': 20 # Will give 20 points per GRANITE
   # '1/2-6': 25 # Will give 25 points for Polished Granite(2), Andesite(3), Polished Andesite(4), Diorite(5) and 
   # Polished Diorite(6).
+  # '1/0': 10 # Will give 10 points per STONE
+  # '1/1-6': -1 # Will give 10 points for Polished Granite(2), Andesite(3), Polished Andesite(4), Diorite(5) and 
+  # Polished Diorite(6). The -1 here is not used to "disable" as many other plugins use it for.
 blockValues:
   '1/0': 10
   '1/1': 12.5
@@ -68,19 +71,21 @@ blockValues:
   '41': 1500
   '42': 300
   '43/0': 10
-  '43/1': 20
+  '43/1': 80
   '43/2-3': 10
   '43/4': 50
-  '43/5': 15
+  '43/5': 10
   '43/6': 20
   '43/7': 100
+  '43/8': 10
+  '43/9': 80
   '44/0': 5
   '44/1': 40
   '44/2': 5
   '44/3': 5
   '44/4': 25
-  '44/5': 7
-  '44/6': 20
+  '44/5': 5
+  '44/6': 10
   '44/7': 50
   '45': 50
   '46': 80
@@ -117,7 +122,7 @@ blockValues:
   '95/0': 25
   '95/1-15': -1
   '96': 30
-  '98': 12
+  '98': 10
   '99': 100
   '100': 100
   '101': 12.5
@@ -285,4 +290,4 @@ diminishingReturns:
   '190': 5000
   '191': 5000
   '192': 5000
-version: 7
+version: 8
