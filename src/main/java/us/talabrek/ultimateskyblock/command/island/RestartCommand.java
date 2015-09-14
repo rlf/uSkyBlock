@@ -30,10 +30,6 @@ public class RestartCommand extends RequireIslandCommand {
             player.sendMessage(tr("\u00a7cYou can restart your island in {0} seconds.", cooldown));
             return true;
         } else {
-            if (pi.isIslandRestarting()) {
-                player.sendMessage(tr("\u00a7cYour island is already in the process of restarting."));
-                return true;
-            }
             if (pi.isIslandGenerating()) {
                 player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot restart now."));
                 return true;

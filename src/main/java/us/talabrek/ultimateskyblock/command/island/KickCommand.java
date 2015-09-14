@@ -56,9 +56,9 @@ public class KickCommand extends RequireIslandCommand {
                             plugin.spawnTeleport(onlineTargetPlayer, true);
                         }
                     } else if (onlineTargetPlayer != null && onlineTargetPlayer.isOnline() && plugin.locationIsOnIsland(player, onlineTargetPlayer.getLocation())) {
-                        plugin.spawnTeleport(onlineTargetPlayer);
                         onlineTargetPlayer.sendMessage(tr("\u00a74" + player.getName() + " has kicked you from their island!"));
                         player.sendMessage(tr("\u00a74{0} has been kicked from the island.", targetPlayerName));
+                        plugin.spawnTeleport(onlineTargetPlayer, true);
                     } else {
                         player.sendMessage(tr("\u00a74That player is not part of your island group, and not on your island!"));
                     }

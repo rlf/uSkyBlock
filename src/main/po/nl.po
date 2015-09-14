@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-13 20:57+0200\n"
+"PO-Revision-Date: 2015-09-14 23:28+0200\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -683,9 +683,6 @@ msgstr "maak een eiland"
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr "§cJe eiland is in het proces van het genereren, kan je nu niets maken."
 
-msgid "§cYour island is in the process of restarting, you cannot create now."
-msgstr "§cJe eiland is in het proces van herstarten, kan je nu niets maken."
-
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -712,13 +709,6 @@ msgid ""
 "right now."
 msgstr ""
 "§cJe eiland is in het proces van het genereren, je kan nu niet naar je home "
-"lokatie teleporteren."
-
-msgid ""
-"§cYour island is in the process of restarting, you cannot teleport home "
-"right now."
-msgstr ""
-"§cJe eiland is in het proces van herstarten, je kan nu niet naar je home "
 "lokatie teleporteren."
 
 msgid "check your or anothers island info"
@@ -896,7 +886,6 @@ msgstr "§eGeen lopende uitnodigingen"
 msgid "withdraw an invite"
 msgstr "uitnodiging terugtrekken"
 
-#, fuzzy
 msgid "§4You don't have permissions to uninvite players."
 msgstr "§4Je hebt geen permissie om uitnodigingen in te trekken."
 
@@ -928,9 +917,6 @@ msgstr ""
 #, java-format
 msgid "§cYou can restart your island in {0} seconds."
 msgstr "§eU kunt een nieuw eiland aanmaken in {0} seconden."
-
-msgid "§cYour island is already in the process of restarting."
-msgstr "§cJe eiland is al in het verloop van een herstarten"
 
 msgid "§cYour island is in the process of generating, you cannot restart now."
 msgstr "§cJe eiland is in het verloop van het genereren, kan je nu herstarten."
@@ -975,21 +961,23 @@ msgid "trust/untrust a player to help on your island."
 msgstr "vertrouw/wantrouw een speler om je te helpen op je eiland."
 
 msgid "§eThe following players are trusted on your island:"
-msgstr ""
+msgstr "§eDe volgende spelers zijn vertrouwd op je eiland:"
 
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
 msgstr ""
+"§eOm spelers te vertrouwen/wantrouwen op je eiland, gebruik dan /island "
+"trust <speler> of /island untrust <speler>"
 
 msgid "§4Members are already trusted!"
-msgstr ""
+msgstr "§4Leden die al vertrouwd zijn!"
 
 #, java-format
 msgid "§4Unknown player {0}"
-msgstr ""
+msgstr "§4Onbekende speler {0}"
 
 #, java-format
 msgid "§eYou have trusted §4{0}§e on your island."
-msgstr ""
+msgstr "§eJe hebt §4{0}§e vertouwen gegeven op je eiland."
 
 #, fuzzy, java-format
 msgid "§eYou are now trusted on §4{0}'s §eisland."
@@ -997,74 +985,70 @@ msgstr "§aTeleporteren naar {0} 's eiland."
 
 #, java-format
 msgid "§eYou have revoked your trust in §a{0}§e on your island."
-msgstr ""
+msgstr "§eJe hebt §a{0}§e het vertouwen afgenomen op je eiland."
 
 #, fuzzy, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§aTeleporteren naar {0} 's eiland."
 
 msgid "warp to another player's island"
-msgstr ""
+msgstr "warp naar een andere speler's eiland"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
-msgstr ""
+msgstr "§aJe inkomende warp is actief, spelers kunnen naar je eiland warpen."
 
 msgid "§4Your incoming warp is inactive, players may not warp to your island."
 msgstr ""
+"§4Je inkomende warp is niet actief, spelers kunnen niet naar je eiland "
+"warpen."
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
-msgstr ""
+msgstr "§fSet je inkomende warp op je huidige lokatie met §e/island setwarp"
 
 msgid "§fToggle your warp on/off using §e/island togglewarp"
-msgstr ""
+msgstr "§fSchakel je waro aan/uit met §e/island togglewarp"
 
 msgid "§4You do not have permission to create a warp on your island!"
-msgstr ""
+msgstr "§4Je hebt geen permissie om een warp te creeren op je eiland!"
 
 msgid "§fWarp to another island using §e/island warp <player>"
-msgstr ""
+msgstr "§fWarp naar een ander eiland met gebruik van §e/island warp <speler>"
 
 msgid "§4You do not have permission to warp to other islands!"
-msgstr ""
+msgstr "§4Je hebt geen permissie om naar andere eilanden te warpen!"
 
 msgid ""
 "§cYour island is in the process of generating, you cannot warp to other "
 "players islands right now."
 msgstr ""
-
-msgid ""
-"§cYour island is in the process of restarting, you cannot warp to other "
-"players islands right now."
-msgstr ""
+"§cJe eiland is in het proces van het genereren, je kan op moment niet naar "
+"andere eilanden warpen."
 
 msgid "§4That player does not exist!"
 msgstr "§4Die speler bestaat niet!"
 
 msgid "§4That player does not have an active warp."
-msgstr ""
+msgstr "§4Die speler heeft geen actieve warp"
 
 msgid ""
 "§cThat players island is in the process of generating, you cannot warp to it "
 "right now."
 msgstr ""
-
-msgid ""
-"§cThat players island is in the process of restarting, you cannot warp to it "
-"right now."
-msgstr ""
+"§cDie spelers eiland is in de proces van genereren, daar kan je nu niet "
+"naartoe warpen."
 
 #, fuzzy, java-format
 msgid "§cWARNING: §9{0}§e is warping to your island!"
 msgstr "§eU heeft §4{0}§e verbannen om naar uw eiland te warpen."
 
 msgid "§4That player has forbidden you from warping to their island."
-msgstr ""
+msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen"
 
 msgid "talk to your party"
-msgstr ""
+msgstr "praat met je leden"
 
 msgid "general island command"
-msgstr ""
+msgstr "algemeen eiland command"
 
 msgid "§4Your island data is being loaded, please try again later."
 msgstr "§4Uw eiland gegevens worden geladen - probeer het later"
@@ -1146,6 +1130,7 @@ msgstr "§eWALL OF FAME (pagina {0} van {1}):"
 
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr ""
+"§4De top 10 lijst is leeg! (waarschijnlijk is de generatie is mislukt?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1160,9 +1145,8 @@ msgstr "Uitdagingen Menu "
 msgid "change the islands's biome."
 msgstr "veranderd het eiland's biome."
 
-#, fuzzy
 msgid "toggle the island's lock."
-msgstr "telepoort naar uw eiland "
+msgstr "schakelaar van het eiland slot"
 
 msgid "set the island's warp."
 msgstr "set de warp van het eiland"
@@ -1175,7 +1159,7 @@ msgid ""
 msgstr ""
 
 msgid "toggle the island's warp."
-msgstr ""
+msgstr "Warp schakelaar van het eiland"
 
 msgid ""
 "toggle the\n"
@@ -1184,9 +1168,8 @@ msgid ""
 "but not set the location."
 msgstr ""
 
-#, fuzzy
 msgid "invite others to the island."
-msgstr "nodig een speler uit naar uw eiland"
+msgstr "nodig andere uit naar het eiland"
 
 msgid ""
 "invite\n"
@@ -1195,9 +1178,8 @@ msgid ""
 "members"
 msgstr ""
 
-#, fuzzy
 msgid "kick others from the island."
-msgstr "verwijderd de speler van het eiland"
+msgstr "verwijder andere van het eiland"
 
 msgid ""
 "kick\n"
@@ -1236,13 +1218,11 @@ msgstr ""
 msgid "Click here to grant this permission."
 msgstr ""
 
-#, fuzzy
 msgid "Island Group Members"
-msgstr "Eiland Biome"
+msgstr "Eiland Groep Leden"
 
-#, fuzzy
 msgid "Group Info"
-msgstr "§aGroep Info"
+msgstr "Groep Info"
 
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
@@ -1265,22 +1245,21 @@ msgid "Leader"
 msgstr "Leider"
 
 msgid "Member"
-msgstr ""
+msgstr "Lid"
 
 #, java-format
 msgid "Can {0}"
-msgstr ""
+msgstr "Kan {0}"
 
 #, java-format
 msgid "Cannot {0}"
-msgstr ""
+msgstr "Kan niet {0}"
 
 msgid "§e<Click to change this player's permissions>"
 msgstr ""
 
-#, fuzzy
 msgid "Island Log"
-msgstr "§9Eiland Log"
+msgstr "Eiland Log"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1294,7 +1273,7 @@ msgid "Island Biome"
 msgstr "Eiland Biome"
 
 msgid "Ocean"
-msgstr ""
+msgstr "Ocean"
 
 msgid ""
 "The ocean biome is the basic\n"
@@ -1305,9 +1284,8 @@ msgid ""
 msgstr ""
 
 msgid "Forest"
-msgstr ""
+msgstr "Forest"
 
-#, fuzzy
 msgid ""
 "The forest biome will allow\n"
 "your island to spawn passive.\n"
@@ -1315,14 +1293,13 @@ msgid ""
 "wolves). Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"§fDe taiga bioom heeft sneeuw\n"
-"i§fn plaats van regen. Passieve\n"
-"§fMobs spawnen normaal\n"
-"§f(Inclusief wolven) net als\n"
-"§fvijandige mobs."
+"De forest biome laat het toe\n"
+"om pasieve mobs op je eiland\n"
+"te spawnen (inclusief wolven).\n"
+"Agressieve mobs spawnen normaal hier."
 
 msgid "Desert"
-msgstr ""
+msgstr "Desert"
 
 msgid ""
 "The desert biome makes it so\n"
@@ -1333,7 +1310,7 @@ msgid ""
 msgstr ""
 
 msgid "Jungle"
-msgstr ""
+msgstr "Jungle"
 
 msgid ""
 "The jungle biome is bright\n"
@@ -1356,9 +1333,8 @@ msgid ""
 msgstr ""
 
 msgid "Taiga"
-msgstr ""
+msgstr "Tiaga"
 
-#, fuzzy
 msgid ""
 "The taiga biome has snow\n"
 "instead of rain. Passive\n"
@@ -1366,11 +1342,11 @@ msgid ""
 "(including wolves) and\n"
 "hostile mobs will spawn."
 msgstr ""
-"§fDe taiga bioom heeft sneeuw\n"
-"i§fn plaats van regen. Passieve\n"
-"§fMobs spawnen normaal\n"
-"§f(Inclusief wolven) net als\n"
-"§fvijandige mobs."
+"De taiga biome heeft sneeuw\n"
+"in plaats van regen. Passieve\n"
+"Mobs spawnen normaal\n"
+"(Inclusief wolven) net als\n"
+"vijandige mobs."
 
 msgid "Mushroom"
 msgstr "Mushroom"
@@ -1385,7 +1361,7 @@ msgid ""
 msgstr ""
 
 msgid "Hell"
-msgstr ""
+msgstr "Hell"
 
 msgid ""
 "The hell biome looks\n"
@@ -1397,7 +1373,7 @@ msgid ""
 msgstr ""
 
 msgid "Sky"
-msgstr ""
+msgstr "Sky"
 
 msgid ""
 "The sky biome gives your\n"
@@ -1407,9 +1383,8 @@ msgid ""
 msgstr ""
 
 msgid "Plains"
-msgstr ""
+msgstr "Plains"
 
-#, fuzzy
 msgid ""
 "The plains biome has rain\n"
 "instead of snow. Passive\n"
@@ -1417,69 +1392,65 @@ msgid ""
 "(including horses) and\n"
 "hostile mobs will spawn."
 msgstr ""
-"§fDe plains bioom heeft regen\n"
-"§fin plaats van sneeuw. Passieve\n"
-"§fmobs spawnen normaal\n"
-"§f(Inclusief paarden) net als\n"
-"§fvijandige mobs."
+"De plains biome heeft regen\n"
+"in plaats van sneeuw. Passieve\n"
+"mobs spawnen normaal\n"
+"(Inclusief paarden) net als\n"
+"vijandige mobs."
 
 msgid "Extreme Hills"
 msgstr "Extreme Hills"
 
-#, fuzzy
 msgid ""
 "The extreme hills biome.\n"
 "Passive mobs will spawn \n"
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"§fDe extrene hills bioom.\n"
-"§fPassieve mobs spawnen\n"
-"§fnormaal net als\n"
-"§fvijandige mobs."
+"De extreme hills biome.\n"
+"Passieve mobs spawnen\n"
+"normaal net als\n"
+"vijandige mobs."
 
 msgid "Flower Forest"
 msgstr "Bloemen Bos"
 
-#, fuzzy
 msgid ""
 "The flower forest biome.\n"
 "Passive mobs will spawn \n"
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"§fDe extrene hills bioom.\n"
-"§fPassieve mobs spawnen\n"
-"§fnormaal net als\n"
-"§fvijandige mobs."
+"De flower forest biome.\n"
+"Passieve mobs spawnen\n"
+"normaal net als\n"
+"vijandige mobs."
 
 #, java-format
 msgid "Biome: {0}"
-msgstr ""
+msgstr "Biome: {0}"
 
 msgid "§2§lThis is your current biome."
-msgstr ""
+msgstr "§2§lDit is je huidige biome."
 
 msgid "§e§lClick to change to this biome."
-msgstr ""
+msgstr "§e§lKlik hier om naar deze biome te veranderen."
 
 msgid "You cannot use this biome."
-msgstr ""
+msgstr "Je kan deze biome niet gebruiken"
 
 msgid "Challenge Menu"
 msgstr "Uitdagingen Menu "
 
 #, java-format
 msgid "{0} ({1}/{2})"
-msgstr ""
+msgstr "{0} ({1}/{2})"
 
-#, fuzzy
 msgid "Island Menu"
-msgstr "§9Eiland Menu"
+msgstr "Eiland Menu"
 
-#, fuzzy
 msgid "Island Create Menu"
-msgstr "§9Eiland Creëer Menu"
+msgstr "Eiland Creëer Menu"
 
 msgid "§a§lStart an Island"
 msgstr "§a§lStart een eiland"
@@ -1562,9 +1533,8 @@ msgid ""
 "§e§l(must be on island)"
 msgstr ""
 
-#, fuzzy
 msgid "Island Group"
-msgstr "Eiland Biome"
+msgstr "Eiland Groep"
 
 msgid ""
 "View the members of your island\n"
@@ -1574,9 +1544,8 @@ msgid ""
 "§e§lClick here to view or change."
 msgstr ""
 
-#, fuzzy
 msgid "Change Island Biome"
-msgstr "Eiland Biome"
+msgstr "Verander Eiland Biome"
 
 msgid ""
 "The island biome affects things\n"
@@ -1591,7 +1560,7 @@ msgid "§c§lYou can't change the biome."
 msgstr ""
 
 msgid "§a§lIsland Lock"
-msgstr ""
+msgstr "§a§lEiland slot"
 
 msgid ""
 "§eLock Status: §aActive\n"
@@ -1628,10 +1597,10 @@ msgid ""
 msgstr ""
 
 msgid "§e§lClick here to deactivate."
-msgstr ""
+msgstr "§e§lKlik hier om te deactiveren."
 
 msgid "§c§lYou can't change the warp."
-msgstr ""
+msgstr "§c§lJe kan de warp niet veranderen."
 
 msgid ""
 "§eWarp Status: §8Inactive\n"
@@ -1641,7 +1610,7 @@ msgid ""
 msgstr ""
 
 msgid "§e§lClick here to activate."
-msgstr ""
+msgstr "§e§lKlik hier om te activeren."
 
 msgid "§a§lIsland Log"
 msgstr "§a§lEiland Log"
@@ -1652,9 +1621,13 @@ msgid ""
 "biome, and warp changes.\n"
 "§e§lClick to view the log."
 msgstr ""
+"Bekijk het log van gebeurtenissen\n"
+"op je eiland zoals leden,\n"
+"biome en warp veranderingen\n"
+"§e§lKlik hier om het log te zien."
 
 msgid "§a§lChange Home Location"
-msgstr ""
+msgstr "§a§lVerander de Thuis Lokatie"
 
 msgid ""
 "When you teleport to your\n"
@@ -1662,9 +1635,13 @@ msgid ""
 "this location.\n"
 "§e§lClick here to change."
 msgstr ""
+"Als je naar je eiland\n"
+"telepoort wordt je naar\n"
+"deze lokatie getelepoorteerd\n"
+"§e§lKlik hier om dat te veranderen."
 
 msgid "§a§lChange Warp Location"
-msgstr ""
+msgstr "§a§lVerander de Warp Lokatie"
 
 msgid ""
 "When your warp is activated,\n"
@@ -1673,6 +1650,11 @@ msgid ""
 "to your island.\n"
 "§e§lClick here to change."
 msgstr ""
+"Als je warp actief is,\n"
+"worden andere spelers naar\n"
+"deze lokatie getelepoorteerd\n"
+"op jouw eiland.\n"
+"§e§lKlik hier om te veranderen."
 
 msgid "Permissions"
 msgstr "Permissions"
@@ -1681,25 +1663,30 @@ msgid ""
 "§cIt seems you logged out in the sky world, however you are not a member of "
 "an island. Teleporting you to spawn."
 msgstr ""
+"§cHet lijkt erop dat je hebt uitgelogged in de skyworld, en je bent geen lid "
+"van een eiland. Je word naar spawn getelepoorteerd."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
+"Er is iets mis gegaan tijdens het opslaan van het eiland en/of party data!"
 
 msgid "§4Player is already assigned to this island!"
-msgstr ""
+msgstr "§4Speler is al toegewezen aan dit eiland!"
 
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr ""
+"§4Je maakt geen deel uit van een eiland. Je word naar de spawn terug "
+"gestuurd!"
 
 msgid "§aTeleporting you to your island."
-msgstr ""
+msgstr "§aJe word getelepoorteerd naar je eiland."
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
-msgstr ""
+msgstr "§aJe zal in {0} seconden getelepoorteerd worden."
 
 msgid "§4Unable to warp you to that player's island!"
-msgstr ""
+msgstr "§4Je kan niet naar die spelers eiland warpen!"
 
 #, java-format
 msgid "§aTeleporting you to {0}'s island."
@@ -1716,6 +1703,9 @@ msgstr "§4Je huidige locatie is niet een veilige thuis-locatie."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
+
+msgid "§eGetting your island ready, please be patient, it can take a while."
+msgstr ""
 
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Die speler heeft geen eiland of het is al beveiligd!"
@@ -1769,8 +1759,41 @@ msgstr "m"
 msgid "s"
 msgstr "s"
 
+#~ msgid ""
+#~ "§cYour island is in the process of restarting, you cannot create now."
+#~ msgstr "§cJe eiland is in het proces van herstarten, kan je nu niets maken."
+
+#~ msgid ""
+#~ "§cYour island is in the process of restarting, you cannot teleport home "
+#~ "right now."
+#~ msgstr ""
+#~ "§cJe eiland is in het proces van herstarten, je kan nu niet naar je home "
+#~ "lokatie teleporteren."
+
+#~ msgid "§cYour island is already in the process of restarting."
+#~ msgstr "§cJe eiland is al in het verloop van een herstarten"
+
+#~ msgid ""
+#~ "§cYour island is in the process of restarting, you cannot warp to other "
+#~ "players islands right now."
+#~ msgstr ""
+#~ "§cYour island is in the process of restarting, you cannot warp to other "
+#~ "players islands right now."
+
+#~ msgid ""
+#~ "§cThat players island is in the process of restarting, you cannot warp to "
+#~ "it right now."
+#~ msgstr ""
+#~ "§cDe spelers eiland is in de proces van herstarten , daar kan je nu niet "
+#~ "naartoe warpen."
+
 #~ msgid "§a§lLeader"
 #~ msgstr "§a§lLeider"
+
+#~ msgid "§cYou were removed from your island since the last time you played!"
+#~ msgstr ""
+#~ "§cJe bent verwijderd van je eiland sinds de laatste keer dat je online "
+#~ "was!"
 
 #~ msgid "§8Biome: Flower Forest"
 #~ msgstr "§8Biome: Bloemen Bos"

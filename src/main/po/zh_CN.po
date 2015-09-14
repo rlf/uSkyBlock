@@ -670,9 +670,6 @@ msgstr ""
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
 
-msgid "§cYour island is in the process of restarting, you cannot create now."
-msgstr ""
-
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -697,11 +694,6 @@ msgstr "§a传送到 {0} 的岛屿"
 
 msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
-"right now."
-msgstr ""
-
-msgid ""
-"§cYour island is in the process of restarting, you cannot teleport home "
 "right now."
 msgstr ""
 
@@ -910,9 +902,6 @@ msgstr ""
 msgid "§cYou can restart your island in {0} seconds."
 msgstr "§e你需要等到{0}秒后才能重新开始你的岛屿."
 
-msgid "§cYour island is already in the process of restarting."
-msgstr ""
-
 msgid "§cYour island is in the process of generating, you cannot restart now."
 msgstr ""
 
@@ -1018,11 +1007,6 @@ msgid ""
 "players islands right now."
 msgstr ""
 
-msgid ""
-"§cYour island is in the process of restarting, you cannot warp to other "
-"players islands right now."
-msgstr ""
-
 msgid "§4That player does not exist!"
 msgstr "§4玩家不存在!"
 
@@ -1031,11 +1015,6 @@ msgstr "§4玩家未拥有激活的传送点."
 
 msgid ""
 "§cThat players island is in the process of generating, you cannot warp to it "
-"right now."
-msgstr ""
-
-msgid ""
-"§cThat players island is in the process of restarting, you cannot warp to it "
 "right now."
 msgstr ""
 
@@ -1853,6 +1832,9 @@ msgstr ""
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "无法为你创建岛屿.请联系管理员."
+
+msgid "§eGetting your island ready, please be patient, it can take a while."
+msgstr ""
 
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "玩家未拥有岛屿,或者已经被保护了!"

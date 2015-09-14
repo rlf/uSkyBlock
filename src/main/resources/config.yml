@@ -194,6 +194,10 @@ options:
     # re-executing it (/is leave, /is restart).
     confirmTimeout: 10
 
+    # [ticks] The number of ticks to wait for the island generation when using AWE
+    # Uncomment line below, and adjust number of ticks accordingly (20 ticks = 1 second)
+    #delayAfterIslandCreation.yourschematicname: 20
+
   # Section about restarting your island (or accepting an invite).
   restart:
     # Clears the player's inventory on island create/restart
@@ -208,7 +212,7 @@ options:
     teleportDelay: 20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 21
+version: 22
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

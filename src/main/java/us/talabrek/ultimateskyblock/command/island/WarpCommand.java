@@ -47,10 +47,6 @@ public class WarpCommand extends RequirePlayerCommand {
                     player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot warp to other players islands right now."));
                     return true;
                 }
-                if (senderPlayerInfo.isIslandRestarting()) {
-                    player.sendMessage(tr("\u00a7cYour island is in the process of restarting, you cannot warp to other players islands right now."));
-                    return true;
-                }
 
                 PlayerInfo targetPlayerInfo = plugin.getPlayerInfo(args[0]);
                 if (targetPlayerInfo == null || !targetPlayerInfo.getHasIsland()) {
@@ -64,10 +60,6 @@ public class WarpCommand extends RequirePlayerCommand {
                 }
                 if (targetPlayerInfo.isIslandGenerating()) {
                     player.sendMessage(tr("\u00a7cThat players island is in the process of generating, you cannot warp to it right now."));
-                    return true;
-                }
-                if (targetPlayerInfo.isIslandRestarting()) {
-                    player.sendMessage(tr("\u00a7cThat players island is in the process of restarting, you cannot warp to it right now."));
                     return true;
                 }
                 if (!island.isBanned(player)) {

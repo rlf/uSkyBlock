@@ -20,10 +20,6 @@ public class HomeCommand extends RequireIslandCommand {
             player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot teleport home right now."));
             return true;
         }
-        if (pi.isIslandRestarting()) {
-            player.sendMessage(tr("\u00a7cYour island is in the process of restarting, you cannot teleport home right now."));
-            return true;
-        }
         if (pi.getHomeLocation() == null) {
             pi.setHomeLocation(pi.getIslandLocation());
         }

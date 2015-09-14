@@ -7,6 +7,7 @@ import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
+import com.sk89q.worldguard.protection.flags.RegionGroup;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
@@ -36,8 +37,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
-    private static final int VERSION = 8;
-    private static BukkitTask saveTask;
+    private static final int VERSION = 9;
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
@@ -112,12 +112,15 @@ public class WorldGuardHandler {
                 getProtectionVectorLeft(islandLocation),
                 getProtectionVectorRight(islandLocation));
         final DefaultDomain owners = new DefaultDomain();
+        DefaultDomain members = new DefaultDomain();
         for (String member : islandConfig.getMembers()) {
             owners.addPlayer(member);
         }
-        DefaultDomain members = new DefaultDomain();
         for (String trust : islandConfig.getTrustees()) {
-            members.addPlayer(trust);
+            owners.addPlayer(trust);
+        }
+        for (String banned : islandConfig.getBans()) {
+            members.addPlayer(banned);
         }
         region.setOwners(owners);
         region.setMembers(members);
@@ -137,6 +140,7 @@ public class WorldGuardHandler {
         } else {
             region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
         }
+        region.setFlag(new StateFlag("entry", false, RegionGroup.MEMBERS), StateFlag.State.DENY);
         return region;
     }
 

@@ -17,6 +17,7 @@ import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 /**
@@ -93,16 +94,17 @@ public class IslandGenerator {
         return playerIslandCreationData;
     }
 
-    public void createIsland(uSkyBlock plugin, final PlayerIslandCreationData playerIslandCreationData, final Location next) {
+    public String createIsland(uSkyBlock plugin, final PlayerIslandCreationData playerIslandCreationData, final Location next) {
         log.entering(CN, "createIsland", new Object[]{plugin, playerIslandCreationData.getPlayerInfo().getPlayerName(), next});
         log.fine("creating island for " + playerIslandCreationData.getPlayerInfo().getPlayerName() + " at " + next);
         boolean hasIslandNow = false;
+        String cSchem = "default";
         if (schemFiles.length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
             File permFile = null;
             File defaultFile = null;
             for (File schemFile : schemFiles) {
                 // First run-through - try to set the island the player has permission for.
-                String cSchem = schemFile.getName();
+                cSchem = schemFile.getName();
                 if (cSchem.lastIndexOf('.') > 0) {
                     cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
                 }
@@ -117,6 +119,7 @@ public class IslandGenerator {
                 defaultFile = permFile;
             }
             if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next)) {
+                cSchem = FileUtil.getBasename(defaultFile);
                 hasIslandNow = true;
                 log.fine("chose schematic " + defaultFile);
             }
@@ -125,20 +128,16 @@ public class IslandGenerator {
             if (!Settings.island_useOldIslands) {
                 log.fine("generating a uSkyBlock default island");
                 generateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerIslandCreationData, uSkyBlock.skyBlockWorld);
+                cSchem = "default";
             } else {
                 log.fine("generating a skySMP island");
                 oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerIslandCreationData, uSkyBlock.skyBlockWorld);
+                cSchem = "skySMP";
             }
         }
-        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-            @Override
-            public void run() {
-                setChest(next, playerIslandCreationData);
-            }
-        }, plugin.getConfig().getInt("options.advanced.delayChestUpdate", 0));
         next.setY((double) Settings.island_height);
-
         log.exiting(CN, "createIsland");
+        return cSchem;
     }
 
     public void generateIslandBlocks(final int x, final int z, final PlayerIslandCreationData playerIslandCreationData, final World world) {
@@ -328,6 +327,7 @@ public class IslandGenerator {
 
     public void setChest(final Location loc, final PlayerIslandCreationData playerIslandCreationData) {
         World world = loc.getWorld();
+        world.loadChunk(loc.getBlockX() >> 4, loc.getBlockZ() >> 4, false);
         for (int dx = 1; dx <= 30; dx++) {
             for (int dy = 1; dy <= 30; dy++) {
                 for (int dz = 1; dz <= 30; dz++) {

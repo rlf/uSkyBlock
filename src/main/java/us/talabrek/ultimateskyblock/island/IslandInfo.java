@@ -263,6 +263,8 @@ public class IslandInfo {
         config.set("general.warpLocationX", loc.getBlockX());
         config.set("general.warpLocationY", loc.getBlockY());
         config.set("general.warpLocationZ", loc.getBlockZ());
+        config.set("general.warpYaw", loc.getYaw());
+        config.set("general.warpPitch", loc.getPitch());
         config.set("general.warpActive", true);
         save();
     }
@@ -362,7 +364,6 @@ public class IslandInfo {
         return isBanned(player.getName());
     }
 
-    // TODO: 19/12/2014 - R4zorax: UUID
     public boolean isBanned(String player) {
         return config.getStringList("banned.list").contains(player);
     }
@@ -487,7 +488,9 @@ public class IslandInfo {
             return new Location(uSkyBlock.getInstance().getSkyBlockWorld(),
                     config.getInt("general.warpLocationX", 0),
                     config.getInt("general.warpLocationY", 0),
-                    config.getInt("general.warpLocationZ", 0));
+                    config.getInt("general.warpLocationZ", 0),
+                    (float) config.getDouble("general.warpYaw", 0),
+                    (float) config.getDouble("general.warpPitch", 0));
         }
         return null;
     }

@@ -1,6 +1,9 @@
 package us.talabrek.ultimateskyblock.command.island;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -34,10 +37,15 @@ public class BanCommand extends RequireIslandCommand {
             if (!island.isBanned(name)) {
                 island.banPlayer(name);
                 player.sendMessage(tr("\u00a7eYou have banned \u00a74{0}\u00a7e from warping to your island.", name));
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
+                if (offlinePlayer != null && offlinePlayer.isOnline() && plugin.locationIsOnIsland(player, offlinePlayer.getPlayer().getLocation())) {
+                    plugin.spawnTeleport(offlinePlayer.getPlayer(), true);
+                }
             } else {
                 island.unbanPlayer(name);
                 player.sendMessage(tr("\u00a7eYou have unbanned \u00a7a{0}\u00a7e from warping to your island.", name));
             }
+            WorldGuardHandler.updateRegion(player, island);
             return true;
         }
         return false;

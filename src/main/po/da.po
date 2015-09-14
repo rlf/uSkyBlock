@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-14 19:14+0200\n"
+"PO-Revision-Date: 2015-09-14 23:26+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -16,7 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -672,9 +671,6 @@ msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
 "§cDin ø er ved at blive re-genereret, det er ikke muligt at oprette nu."
 
-msgid "§cYour island is in the process of restarting, you cannot create now."
-msgstr "§Din ø er ved at blive genstartet, det er ikke muligt at oprette nu."
-
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -701,13 +697,6 @@ msgid ""
 "right now."
 msgstr ""
 "§cDin ø er under konstruktion, du kan ikke teleportere til den i øjeblikket."
-
-msgid ""
-"§cYour island is in the process of restarting, you cannot teleport home "
-"right now."
-msgstr ""
-"§cDin ø er ved at blive genstartet, du kan ikke teleportere til den i "
-"øjeblikket."
 
 msgid "check your or anothers island info"
 msgstr "få information om din eller en andens ø"
@@ -910,9 +899,6 @@ msgstr ""
 msgid "§cYou can restart your island in {0} seconds."
 msgstr "§cDu kan genstarte din ø om {0} sekunder."
 
-msgid "§cYour island is already in the process of restarting."
-msgstr "§cDin ø er allerede ved at blive genstartet."
-
 msgid "§cYour island is in the process of generating, you cannot restart now."
 msgstr "§cDin ø er ved at re-generere, du kan ikke genstarte nu."
 
@@ -1018,11 +1004,6 @@ msgid ""
 msgstr ""
 "§cDin ø er ved at blive re-genereret, du kan ikke bruge warp i øjeblikket."
 
-msgid ""
-"§cYour island is in the process of restarting, you cannot warp to other "
-"players islands right now."
-msgstr "§cDin ø er ved at genstarte, du kan ikke bruge warp i øjeblikket."
-
 msgid "§4That player does not exist!"
 msgstr "§4Ingen spiller fundet!"
 
@@ -1031,13 +1012,6 @@ msgstr "§4Den spiller har ikke en aktiv besøgsportal."
 
 msgid ""
 "§cThat players island is in the process of generating, you cannot warp to it "
-"right now."
-msgstr ""
-"§cDen spillers ø er under konstruktion, du kan ikke warpe til den i "
-"øjeblikket."
-
-msgid ""
-"§cThat players island is in the process of restarting, you cannot warp to it "
 "right now."
 msgstr ""
 "§cDen spillers ø er under konstruktion, du kan ikke warpe til den i "
@@ -1821,6 +1795,10 @@ msgstr "§4Din nuværende position er ikke et sikkert hjemsted."
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kunne ikke oprette din ø. Venligst kontakt en server administrator."
 
+msgid "§eGetting your island ready, please be patient, it can take a while."
+msgstr ""
+"§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
+
 msgid "Player doesn't have an island or it's already protected!"
 msgstr "Spilleren har ikke en ø, eller også er den allerede beskyttet!"
 
@@ -1872,6 +1850,33 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid ""
+#~ "§cYour island is in the process of restarting, you cannot create now."
+#~ msgstr ""
+#~ "§Din ø er ved at blive genstartet, det er ikke muligt at oprette nu."
+
+#~ msgid ""
+#~ "§cYour island is in the process of restarting, you cannot teleport home "
+#~ "right now."
+#~ msgstr ""
+#~ "§cDin ø er ved at blive genstartet, du kan ikke teleportere til den i "
+#~ "øjeblikket."
+
+#~ msgid "§cYour island is already in the process of restarting."
+#~ msgstr "§cDin ø er allerede ved at blive genstartet."
+
+#~ msgid ""
+#~ "§cYour island is in the process of restarting, you cannot warp to other "
+#~ "players islands right now."
+#~ msgstr "§cDin ø er ved at genstarte, du kan ikke bruge warp i øjeblikket."
+
+#~ msgid ""
+#~ "§cThat players island is in the process of restarting, you cannot warp to "
+#~ "it right now."
+#~ msgstr ""
+#~ "§cDen spillers ø er under konstruktion, du kan ikke warpe til den i "
+#~ "øjeblikket."
 
 #~ msgid "§cYou were removed from your island since the last time you played!"
 #~ msgstr "§cDu er blevet udvist af din ø, siden du sidst spillede!"

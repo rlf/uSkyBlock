@@ -36,6 +36,9 @@ public enum I18nUtil {;
     public static void clearCache() {
         try {
             Method clearCache = I18nFactory.class.getMethod("clearCache");
+            if (!clearCache.isAccessible()) {
+                clearCache.setAccessible(true);
+            }
             clearCache.invoke(null);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             // Ignore - at least we tried

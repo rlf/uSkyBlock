@@ -480,36 +480,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         });
     }
 
-    private void postRestart(final Player player, final IslandGenerator.PlayerIslandCreationData playerIslandCreationData, final Location next) {
-        getLogger().log(Level.FINE, "executing postRestart for " + playerIslandCreationData.getPlayerInfo().getPlayerName() + " on " + next);
-        islandGenerator.createIsland(this, playerIslandCreationData, next);
-        if (!changePlayerBiome(playerIslandCreationData, "OCEAN")) throw new UnsupportedOperationException();
-        WorldEditHandler.unloadRegion(next);
-        setNewPlayerIsland(playerIslandCreationData.getPlayerInfo(), next);
-        if (player != null && player.isOnline()) {
-            getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
-            PlayerInfo playerInfo = getPlayerInfo(player);
-            if (playerInfo != null) {
-                playerInfo.setIslandRestarting(false);
-            }
-            getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    getLogger().log(Level.FINE, "porting player back to the island");
-                    homeTeleport(player, true);
-                    WorldEditHandler.loadRegion(next);
-                }
-            }, getConfig().getInt("options.restart.teleportDelay", 20));
-        }
-    }
-
     public boolean restartPlayerIsland(final Player player, final Location next) {
         if (next.getBlockX() == 0 && next.getBlockZ() == 0) {
             return false;
         }
-        PlayerInfo playerInfo = getPlayerInfo(player);
+        final PlayerInfo playerInfo = getPlayerInfo(player);
         if (playerInfo != null) {
-            playerInfo.setIslandRestarting(true);
+            playerInfo.setIslandGenerating(true);
         }
         if (isSkyWorld(player.getWorld())) {
             // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
@@ -521,7 +498,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.islandLogic.clearIsland(next, new Runnable() {
             @Override
             public void run() {
-                postRestart(player, playerIslandCreationData, next);
+                generateIsland(player, playerInfo, next);
             }
         });
         return true;
@@ -1044,37 +1021,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             if (isSkyWorld(player.getWorld())) {
                 spawnTeleport(player, true);
             }
-            PlayerInfo playerInfo = getPlayerInfo(player);
-            if (playerInfo != null) {
-                playerInfo.setIslandGenerating(true);
+            if (pi != null) {
+                pi.setIslandGenerating(true);
             }
-
             final Location last = getLastIsland();
             last.setY((double) Settings.island_height);
             try {
-                Location next = getNextIslandLocation(last);
-                islandGenerator.createIsland(this, islandGenerator.preCreateData(player, pi), next);
-                setNewPlayerIsland(player, next);
-                changePlayerBiome(player, "OCEAN");
-                protectWithWorldGuard(player, player, pi);
-                getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
-                if (playerInfo != null) {
-                    playerInfo.setIslandGenerating(false);
-                }
-
-                // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
-                clearPlayerInventory(player);
-                clearEntitiesNearPlayer(player);
-
-                getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
-                    @Override
-                    public void run() {
-                        if (player != null && player.isOnline()) {
-                            getLogger().log(Level.FINE, "porting player back to the island");
-                            homeTeleport(player, true);
-                        }
-                    }
-                }, getConfig().getInt("options.restart.teleportDelay", 20));
+                final Location next = getNextIslandLocation(last);
+                generateIsland(player, pi, next);
             } catch (Exception ex) {
                 player.sendMessage(tr("Could not create your Island. Please contact a server moderator."));
                 log(Level.SEVERE, "Error creating island", ex);
@@ -1085,6 +1039,41 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } finally {
             getLogger().exiting(CN, "createIsland");
         }
+    }
+
+    private void generateIsland(final Player player, final PlayerInfo pi, final Location next) {
+        final IslandGenerator.PlayerIslandCreationData playerIslandCreationData = islandGenerator.preCreateData(player, pi);
+        player.sendMessage(tr("\u00a7eGetting your island ready, please be patient, it can take a while."));
+        final String schem = islandGenerator.createIsland(this, playerIslandCreationData, next);
+        Bukkit.getScheduler().runTaskLater(this, new Runnable() {
+            @Override
+            public void run() {
+                next.getWorld().loadChunk(next.getBlockX()>>4, next.getBlockZ()>>4, false);
+                islandGenerator.setChest(next, playerIslandCreationData);
+                setNewPlayerIsland(player, next);
+                changePlayerBiome(player, "OCEAN");
+                protectWithWorldGuard(player, player, pi);
+                getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
+
+
+                // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
+                clearPlayerInventory(player);
+                clearEntitiesNearPlayer(player);
+
+                if (pi != null) {
+                    pi.setIslandGenerating(false);
+                }
+                getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
+                    @Override
+                    public void run() {
+                        if (player != null && player.isOnline()) {
+                            getLogger().log(Level.FINE, "porting player back to the island");
+                            homeTeleport(player, true);
+                        }
+                    }
+                }, getConfig().getInt("options.restart.teleportDelay", 20));
+            }
+        }, getConfig().getInt("options.advanced.delayAfterIslandCreation." + schem, 0));
     }
 
     private void protectWithWorldGuard(CommandSender sender, Player player, PlayerInfo pi) {
@@ -1174,6 +1163,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private Location findNearestSpawnLocation(Location loc) {
+        loadChunkAt(loc);
         World world = loc.getWorld();
         int px = loc.getBlockX();
         int pz = loc.getBlockZ();
@@ -1258,7 +1248,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (chestSpawnLocation != null) {
             playerInfo.setHomeLocation(chestSpawnLocation);
         } else {
-            log(Level.SEVERE, "Could not find a safe chest within 30 blocks of the island spawn. Bad schematic!");
+            log(Level.SEVERE, "Could not find a safe chest within 15 blocks of the island spawn. Bad schematic!");
         }
         IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), playerInfo.getPlayerName());
         Player onlinePlayer = playerInfo.getPlayer();

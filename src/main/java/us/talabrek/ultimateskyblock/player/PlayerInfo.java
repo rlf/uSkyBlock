@@ -405,12 +405,4 @@ public class PlayerInfo implements Serializable {
     public void setIslandGenerating(boolean value) {
         this.islandGenerating = value;
     }
-
-    public boolean isIslandRestarting() {
-        return this.islandRestarting;
-    }
-
-    public void setIslandRestarting(boolean value) {
-        this.islandRestarting = value;
-    }
 }
