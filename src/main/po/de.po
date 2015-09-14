@@ -1003,7 +1003,7 @@ msgid "§eYou have trusted §4{0}§e on your island."
 msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
 
 #, fuzzy, java-format
-msgid "§eYou are now trusted on §4{0}s island."
+msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
 
 #, java-format
@@ -1011,7 +1011,7 @@ msgid "§eYou have revoked your trust in §a{0}§e on your island."
 msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
 
 #, fuzzy, java-format
-msgid "§eYou are no longer trusted on §4{0}s island."
+msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
 
 msgid "warp to another player's island"

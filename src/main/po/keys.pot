@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-14 17:24+0200\n"
+"POT-Creation-Date: 2015-09-14 19:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1234,7 +1234,7 @@ msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:45
 #, java-format
-msgid "§eYou are now trusted on §4{0}s island."
+msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:49
@@ -1244,7 +1244,7 @@ msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:51
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}s island."
+msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:18

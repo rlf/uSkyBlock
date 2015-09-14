@@ -992,7 +992,7 @@ msgid "§eYou have trusted §4{0}§e on your island."
 msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
 #, fuzzy, java-format
-msgid "§eYou are now trusted on §4{0}s island."
+msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
 #, fuzzy, java-format
@@ -1000,7 +1000,7 @@ msgid "§eYou have revoked your trust in §a{0}§e on your island."
 msgstr "§eAgora {0} pode teleportar até sua ilha."
 
 #, fuzzy, java-format
-msgid "§eYou are no longer trusted on §4{0}s island."
+msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
 #, fuzzy

@@ -991,16 +991,16 @@ msgstr ""
 msgid "§eYou have trusted §4{0}§e on your island."
 msgstr ""
 
-#, java-format
-msgid "§eYou are now trusted on §4{0}s island."
+#, fuzzy, java-format
+msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§aTeleporteren naar {0} 's eiland."
 
 #, java-format
 msgid "§eYou have revoked your trust in §a{0}§e on your island."
 msgstr ""
 
-#, java-format
-msgid "§eYou are no longer trusted on §4{0}s island."
+#, fuzzy, java-format
+msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§aTeleporteren naar {0} 's eiland."
 
 msgid "warp to another player's island"

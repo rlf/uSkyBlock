@@ -977,7 +977,7 @@ msgid "§eYou have trusted §4{0}§e on your island."
 msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
 
 #, fuzzy, java-format
-msgid "§eYou are now trusted on §4{0}s island."
+msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
 
 #, fuzzy, java-format
@@ -985,7 +985,7 @@ msgid "§eYou have revoked your trust in §a{0}§e on your island."
 msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你的岛屿了."
 
 #, fuzzy, java-format
-msgid "§eYou are no longer trusted on §4{0}s island."
+msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
 
 #, fuzzy

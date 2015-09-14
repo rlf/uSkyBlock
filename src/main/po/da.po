@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-14 17:24+0200\n"
+"PO-Revision-Date: 2015-09-14 19:14+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -973,7 +974,7 @@ msgid "§eYou have trusted §4{0}§e on your island."
 msgstr "§eDu har betroet §4{0}§e til at kunne bygge og farme på din ø."
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}s island."
+msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eDu er nu betroet på §4{0}§es ø."
 
 #, java-format
@@ -981,7 +982,7 @@ msgid "§eYou have revoked your trust in §a{0}§e on your island."
 msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}s island."
+msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eDu er ikke længere betroet på §4{0}§es ø."
 
 msgid "warp to another player's island"
