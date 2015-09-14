@@ -154,25 +154,29 @@ public class IslandInfo {
     }
 
     public void handleMemberLoggedIn(final Player member) {
-        ConfigurationSection section = config.getConfigurationSection("party.members." + member);
+        ConfigurationSection section = config.getConfigurationSection("party.members." + member.getName());
+        boolean dirty = false;
         if (section != null) {
             int maxPartySizePermission = getSpecialMaxPartySizePermission(member);
             if (maxPartySizePermission > 0) {
                 if (section.contains("maxPartySizePermission")) {
                     if (section.getInt("maxPartySizePermission") != maxPartySizePermission) {
                         section.set("maxPartySizePermission", maxPartySizePermission);
-                        save();
+                        dirty = true;
                     }
                 } else {
                     section.set("maxPartySizePermission", maxPartySizePermission);
-                    save();
+                    dirty = true;
                 }
             } else {
                 if (section.contains("maxPartySizePermission")) {
                     section.set("maxPartySizePermission", null);
-                    save();
+                    dirty = true;
                 }
             }
+        }
+        if (dirty) {
+            save();
         }
     }
 
@@ -213,23 +217,24 @@ public class IslandInfo {
                 }
             }
         }
-
         return maxSize;
     }
 
     private int getSpecialMaxPartySizePermission(final Player player) {
         int memberPartySizePermission = -1;
 
-        if (VaultHandler.checkPerk(player.getName(), "usb.extra.partysize", player.getWorld())) {
-            memberPartySizePermission = 8;
-        } else if (VaultHandler.checkPerk(player.getName(), "usb.extra.party3", player.getWorld())) {
-            memberPartySizePermission = 7;
-        } else if (VaultHandler.checkPerk(player.getName(), "usb.extra.party2", player.getWorld())) {
-            memberPartySizePermission = 6;
-        } else if (VaultHandler.checkPerk(player.getName(), "usb.extra.party1", player.getWorld())) {
-            memberPartySizePermission = 5;
+        ConfigurationSection maxParty = uSkyBlock.getInstance().getConfig().getConfigurationSection("options.party.maxPartyPermissions");
+        if (maxParty == null) {
+            return -1;
         }
-
+        for (String permKey : maxParty.getKeys(true)) {
+            if (maxParty.isInt(permKey) && VaultHandler.checkPerm(player, permKey, uSkyBlock.getInstance().getWorld())) {
+                int partySize = maxParty.getInt(permKey, memberPartySizePermission);
+                if (partySize > memberPartySizePermission) {
+                    memberPartySizePermission = partySize;
+                }
+            }
+        }
         return memberPartySizePermission;
     }
 
