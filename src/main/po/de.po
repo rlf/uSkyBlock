@@ -800,13 +800,17 @@ msgstr "§4Du kannst den Anführer der Insel nicht entfernen!"
 msgid "§4Stop kickin' yourself!"
 msgstr "§4Hör auf dich selber raus zu werfen!"
 
-# ???
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} has removed you from their island!"
+msgstr "§4{0} wurde von der Insel entfernt."
 
 #, java-format
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} wurde von der Insel entfernt."
+
+# ???
+msgid "§4"
+msgstr "§4"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1069,6 +1073,12 @@ msgid ""
 "right now."
 msgstr ""
 
+#, fuzzy, java-format
+msgid "§cWARNING: §9{0}§e is warping to your island!"
+msgstr ""
+"§eDu hast §4{0}§e Verbannt. Diese(r) kann sich nicht mehr auf deine Insel "
+"warpen."
+
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Warpen."
 
@@ -1113,6 +1123,14 @@ msgstr ""
 "§9{0}§e ist §cGefährlich§e. Wiederhole den Befehl innerhalb von §a{1}§e "
 "Sekunden um zu bestätigent!"
 
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}'s §disland."
+msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
+
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}'s §disland."
+msgstr "§eEntferne {0}'s Insel."
+
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
 "§eDeine Insel ist nun gesperrt. Nur noch Mitglieder deiner Gruppe können "
@@ -1130,6 +1148,13 @@ msgstr ""
 
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Du musst der Gruppenleiter sein um deine Insel zu entsperren!"
+
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr ""
+
+#, fuzzy
+msgid "§4** You are leaving an abandoned island."
+msgstr "Löscht alle verlassenen Inseln"
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"

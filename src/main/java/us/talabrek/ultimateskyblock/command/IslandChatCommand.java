@@ -41,9 +41,7 @@ public class IslandChatCommand extends AbstractCommandExecutor {
             format = FormatUtil.normalize(format);
             format = format.replaceAll("\\{DISPLAYNAME\\}", player.getDisplayName());
             message = format.replaceAll("\\{MESSAGE\\}", message);
-            for (Player pl : islandInfo.getOnlineMembers()) {
-                pl.sendMessage(message);
-            }
+            islandInfo.sendMessageToOnlineMembers(message);
             return true;
         }
         return false;

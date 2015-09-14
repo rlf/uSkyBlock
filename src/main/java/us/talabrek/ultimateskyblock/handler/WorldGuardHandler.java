@@ -123,9 +123,13 @@ public class WorldGuardHandler {
         region.setMembers(members);
         region.setPriority(100);
         region.setFlag(DefaultFlag.GREET_MESSAGE,
-                DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are entering \u00a7b" + islandConfig.getLeader() + "'s \u00a7disland."));
+                DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender,
+                        tr("\u00a7d** You are entering \u00a7b{0}'s \u00a7disland.", islandConfig.getLeader())
+                ));
         region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
-                DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender, "\u00a7d** You are leaving \u00a7b" + islandConfig.getLeader() + "'s \u00a7disland."));
+                DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender,
+                        tr("\u00a7d** You are leaving \u00a7b{0}'s \u00a7disland.", islandConfig.getLeader())
+                ));
         setVersionSpecificFlags(region);
         region.setFlag(DefaultFlag.PVP, null);
         if (islandConfig.isLocked()) {
@@ -209,8 +213,12 @@ public class WorldGuardHandler {
                 final DefaultDomain owners = region.getOwners();
                 owners.removePlayer(player);
                 if (owners.size() == 0) {
-                    region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(), "\u00a74** You are entering a protected - but abandoned - island area."));
-                    region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(), "\u00a74** You are leaving an abandoned island."));
+                    region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(),
+                            tr("\u00a74** You are entering a protected - but abandoned - island area.")
+                    ));
+                    region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(),
+                            tr("\u00a74** You are leaving an abandoned island.")
+                    ));
                 }
                 region.setOwners(owners);
                 regionManager.addRegion(region);

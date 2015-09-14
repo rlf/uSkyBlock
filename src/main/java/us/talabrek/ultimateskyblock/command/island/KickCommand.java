@@ -39,17 +39,22 @@ public class KickCommand extends RequireIslandCommand {
                     
                     if (island.getMembers().contains(targetPlayerName)) {
                         PlayerInfo targetPlayerInfo = plugin.getPlayerInfo(targetPlayerName);
+                        boolean isOnIsland = false;
                         if (targetPlayerInfo == null) {
                             targetPlayerInfo = plugin.getPlayerLogic().loadPlayerData(targetPlayerName);
                         }
                         if (onlineTargetPlayer != null && onlineTargetPlayer.isOnline()) {
-                            onlineTargetPlayer.sendMessage(tr("\u00a74" + player.getName() + " has removed you from their island!"));
+                            onlineTargetPlayer.sendMessage(tr("\u00a74{0} has removed you from their island!", player.getDisplayName()));
+                            isOnIsland = plugin.playerIsOnIsland(onlineTargetPlayer);
                         }
                         if (Bukkit.getPlayer(island.getLeader()) != null) {
                             Bukkit.getPlayer(island.getLeader()).sendMessage(tr("\u00a74{0} has been removed from the island.", targetPlayerName));
                         }
                         island.removeMember(targetPlayerInfo);
                         uSkyBlock.log(Level.INFO, "Removing from " + island.getLeader() + "'s Island");
+                        if (isOnIsland && onlineTargetPlayer.isOnline()) {
+                            plugin.spawnTeleport(onlineTargetPlayer, true);
+                        }
                     } else if (onlineTargetPlayer != null && onlineTargetPlayer.isOnline() && plugin.locationIsOnIsland(player, onlineTargetPlayer.getLocation())) {
                         plugin.spawnTeleport(onlineTargetPlayer);
                         onlineTargetPlayer.sendMessage(tr("\u00a74" + player.getName() + " has kicked you from their island!"));

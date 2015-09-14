@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-13 22:46+0200\n"
+"POT-Creation-Date: 2015-09-14 17:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -990,22 +990,26 @@ msgstr ""
 msgid "§4Stop kickin' yourself!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:46
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:55
-msgid "§4"
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:47
+#, java-format
+msgid "§4{0} has removed you from their island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:49
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:51
 #, java-format
 msgid "§4{0} has been removed from the island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:56
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:60
+msgid "§4"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:61
 #, java-format
 msgid "§4{0} has been kicked from the island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:58
+#: us/talabrek/ultimateskyblock/command/island/KickCommand.java:63
 msgid "§4That player is not part of your island group, and not on your island!"
 msgstr ""
 
@@ -1023,16 +1027,16 @@ msgstr ""
 msgid "§eYou own this island, use /island remove <player> instead."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:39
+#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:40
 msgid "§eYou have left the island and returned to the player spawn."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:41
+#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:42
 #, java-format
 msgid "§4{0} has left your island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:45
+#: us/talabrek/ultimateskyblock/command/island/LeaveCommand.java:46
 msgid "§4You must be in the skyblock world to leave your party!"
 msgstr ""
 
@@ -1272,7 +1276,7 @@ msgid "§fWarp to another island using §e/island warp <player>"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:40
-#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:79
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:82
 msgid "§4You do not have permission to warp to other islands!"
 msgstr ""
 
@@ -1309,7 +1313,12 @@ msgid ""
 "right now."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:76
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:75
+#, java-format
+msgid "§cWARNING: §9{0}§e is warping to your island!"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:79
 msgid "§4That player has forbidden you from warping to their island."
 msgstr ""
 
@@ -1357,22 +1366,40 @@ msgid ""
 "accept!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:172
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:127
+#, java-format
+msgid "§d** You are entering §b{0}'s §disland."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:131
+#, java-format
+msgid "§d** You are leaving §b{0}'s §disland."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:176
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:174
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:178
 msgid "§4You must be the party leader to lock your island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:187
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:191
 msgid ""
 "§eYour island is unlocked and anyone may enter, however only you and your "
 "party members may build or remove blocks."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:189
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:193
 msgid "§4You must be the party leader to unlock your island!"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:217
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:220
+msgid "§4** You are leaving an abandoned island."
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/imports/impl/USBImporterExecutor.java:74

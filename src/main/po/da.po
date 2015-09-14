@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-13 20:59+0200\n"
+"PO-Revision-Date: 2015-09-14 17:24+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -779,12 +779,16 @@ msgstr "§4Du kan ikke fjerne lederen fra en ø!"
 msgid "§4Stop kickin' yourself!"
 msgstr "§4Stop med at sparke dig selv!"
 
-msgid "§4"
-msgstr "§4"
+#, java-format
+msgid "§4{0} has removed you from their island!"
+msgstr "§4{0} har fjernet dig fra deres ø!"
 
 #, java-format
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} er blevet sparket ud af øen."
+
+msgid "§4"
+msgstr "§4"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1038,6 +1042,10 @@ msgstr ""
 "§cDen spillers ø er under konstruktion, du kan ikke warpe til den i "
 "øjeblikket."
 
+#, java-format
+msgid "§cWARNING: §9{0}§e is warping to your island!"
+msgstr "§cADVARSEL: §9{0}§e kommer på besøg på din ø!"
+
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Den spiller har udelukket dig fra sin ø."
 
@@ -1077,6 +1085,14 @@ msgstr ""
 "§eAt udføre §9{0}§e er §cRISIKABELT§e. Gentag kommandoen inden for §a{1}§e "
 "sekunder for at fortsætte!"
 
+#, java-format
+msgid "§d** You are entering §b{0}'s §disland."
+msgstr "§d** Du ankom til §b{0}'s §disland."
+
+#, java-format
+msgid "§d** You are leaving §b{0}'s §disland."
+msgstr "§d** Du forlader nu §b{0}s §dø."
+
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§eDin ø er nu låst. Kun medlemmer kan teleportere til den."
 
@@ -1092,6 +1108,12 @@ msgstr ""
 
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Kun lederen kan låse din ø op!"
+
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr "§4** Du ankommer nu til en beskyttet - men forladt - ø."
+
+msgid "§4** You are leaving an abandoned island."
+msgstr "§4** Du forlader nu en forladt ø."
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"

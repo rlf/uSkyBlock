@@ -788,12 +788,16 @@ msgstr "§4Você não pode expulsar o líder da ilha!"
 msgid "§4Stop kickin' yourself!"
 msgstr "§4Você não pode expulsar você mesmo!"
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} has removed you from their island!"
+msgstr "§4{0} foi removido da ilha."
 
 #, java-format
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} foi removido da ilha."
+
+msgid "§4"
+msgstr "§4"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1057,6 +1061,10 @@ msgid ""
 "right now."
 msgstr ""
 
+#, fuzzy, java-format
+msgid "§cWARNING: §9{0}§e is warping to your island!"
+msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
+
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Esse jogador proibiu você de teleportar até a ilha dele."
 
@@ -1096,6 +1104,14 @@ msgstr ""
 "§eFazer §9{0}§e é §cARRISCADO§e. Repita esse comando dentro de §a{1}§e "
 "segundos para aceitar!"
 
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}'s §disland."
+msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
+
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}'s §disland."
+msgstr "§eRemovendo a ilha de {0}."
+
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§eAgora sua ilha está trancada. Apenas seu grupo podem entrar."
 
@@ -1111,6 +1127,12 @@ msgstr ""
 
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Você deve ser o líder para destrancar a ilha!"
+
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr ""
+
+msgid "§4** You are leaving an abandoned island."
+msgstr ""
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"

@@ -612,4 +612,9 @@ public class IslandInfo {
         return name.equalsIgnoreCase(WorldGuardHandler.getIslandNameAt(loc));
     }
 
+    public void sendMessageToOnlineMembers(String msg) {
+        for (Player player : getOnlineMembers()) {
+            player.sendMessage(msg);
+        }
+    }
 }

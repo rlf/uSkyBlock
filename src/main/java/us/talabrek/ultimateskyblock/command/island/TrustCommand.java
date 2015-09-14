@@ -18,7 +18,7 @@ public class TrustCommand extends RequireIslandCommand {
     }
 
     @Override
-    protected boolean doExecute(final String alias, final Player player, PlayerInfo pi, final IslandInfo island, Map<String, Object> data, String... args) {
+    protected boolean doExecute(final String alias, final Player player, final PlayerInfo pi, final IslandInfo island, Map<String, Object> data, String... args) {
         if (args.length == 0) {
             player.sendMessage(tr("\u00a7eThe following players are trusted on your island:"));
             player.sendMessage(tr("\u00a74{0}", island.getTrustees()));
@@ -42,13 +42,13 @@ public class TrustCommand extends RequireIslandCommand {
                         island.trust(name);
                         player.sendMessage(tr("\u00a7eYou have trusted \u00a74{0}\u00a7e on your island.", name));
                         if (offlinePlayer.isOnline()) {
-                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}s island.", name));
+                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}s island.", pi.getDisplayName()));
                         }
                     } else {
                         island.untrust(name);
                         player.sendMessage(tr("\u00a7eYou have revoked your trust in \u00a7a{0}\u00a7e on your island.", name));
                         if (offlinePlayer.isOnline()) {
-                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}s island.", name));
+                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}s island.", pi.getDisplayName()));
                         }
                     }
                     WorldGuardHandler.updateRegion(player, island);

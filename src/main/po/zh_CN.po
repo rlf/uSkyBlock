@@ -776,12 +776,16 @@ msgstr "§4你无法将岛屿的主人移除!"
 msgid "§4Stop kickin' yourself!"
 msgstr "§4请不要尝试踢出你自己!"
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} has removed you from their island!"
+msgstr "§4{0}被从当前岛屿上移除."
 
 #, java-format
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0}被从当前岛屿上移除."
+
+msgid "§4"
+msgstr "§4"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1035,6 +1039,10 @@ msgid ""
 "right now."
 msgstr ""
 
+#, fuzzy, java-format
+msgid "§cWARNING: §9{0}§e is warping to your island!"
+msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
+
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
 
@@ -1072,6 +1080,14 @@ msgid ""
 "accept!"
 msgstr "§9{0}§e是§c危险的§e.请等待§a{1}§e秒后在这样做."
 
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}'s §disland."
+msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
+
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}'s §disland."
+msgstr "§e移除了 {0} 的岛屿。"
+
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§e你的岛屿当前处于锁定状态.只有团队成员才能进入."
 
@@ -1087,6 +1103,12 @@ msgstr ""
 
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4你必须得是岛屿的主人才能解锁你的岛屿!"
+
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr ""
+
+msgid "§4** You are leaving an abandoned island."
+msgstr ""
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"

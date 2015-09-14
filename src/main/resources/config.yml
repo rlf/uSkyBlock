@@ -143,20 +143,30 @@ options:
     visitors:
       # Protect visitors from trampling your crop
       trampling: true
+
       # Protect against visitors attacked animals
       kill-animals: true
+
       # Protect against visitors attacking monsters
       kill-monsters: true
+
       # Protect from shearing
       shearing: true
+
       # Protect from villager-trading
       villager-trading: true
+
       # Whether or not visitors are protected from fall damage
       fall: true
+
       # Whether or not visiotrs are protected from fire damage (incl. lava)
       fire-damage: true
+
       # Whether or not visitors should be allowed to drop items
       item-drops: true
+
+      # Warns online members when a player visits the island.
+      warn-on-warp: true
   party:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
     invite-timeout: 600
@@ -190,7 +200,7 @@ options:
     teleportDelay: 20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 19
+version: 20
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
