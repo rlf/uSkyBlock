@@ -1,35 +1,72 @@
 package us.talabrek.ultimateskyblock.player;
 
-import java.util.Map;
-import java.util.Queue;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Holds the active players
  */
 public class PlayerLogic {
     private static final Logger log = Logger.getLogger(PlayerLogic.class.getName());
-    private final Map<String, PlayerInfo> activePlayers = new ConcurrentHashMap<>();
-    private final Queue<String> locked = new ConcurrentLinkedQueue<String>();
+    private final LoadingCache<String, PlayerInfo> playerCache;
     private final uSkyBlock plugin;
-
+    private final BukkitTask saveTask;
     public PlayerLogic(uSkyBlock plugin) {
         this.plugin = plugin;
+        playerCache = CacheBuilder
+                .from(plugin.getConfig().getString("options.advanced.playerCache", "maximumSize=200,expireAfterWrite=15m,expireAfterAccess=10m"))
+                .removalListener(new RemovalListener<String, PlayerInfo>() {
+                    @Override
+                    public void onRemoval(RemovalNotification<String, PlayerInfo> removal) {
+                        PlayerInfo playerInfo = removal.getValue();
+                        if (playerInfo.isDirty()) {
+                            playerInfo.saveToFile();
+                        }
+                    }
+                })
+                .build(new CacheLoader<String, PlayerInfo>() {
+                           @Override
+                           public PlayerInfo load(String s) throws Exception {
+                               return loadPlayerData(s);
+                           }
+                       }
+                );
+        int every = plugin.getConfig().getInt("options.advanced.player.saveEvery", 20*60*2);
+        saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
+            @Override
+            public void run() {
+                saveDirtyToFiles();
+            }
+        }, every, every);
+    }
+
+    private void saveDirtyToFiles() {
+        // asMap.values() should NOT touch the cache.
+        for (PlayerInfo pi : playerCache.asMap().values()) {
+            if (pi.isDirty()) {
+                pi.saveToFile();
+            }
+        }
     }
 
     public PlayerInfo loadPlayerData(String playerName) {
-        //Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
         return loadPlayerData(Bukkit.getOfflinePlayer(playerName));
     }
 
@@ -37,17 +74,7 @@ public class PlayerLogic {
         return loadPlayerData(player.getUniqueId(), player.getName());
     }
 
-    public PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {
-        return loadPlayerData(playerUUID, playerName, false);
-    }
-    
-    private PlayerInfo loadPlayerData(UUID playerUUID, String playerName, boolean skipIsLockedCheck) {
-        //Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
-
-        // Do not return anything if it is loading.
-        // Obey by the skipIsLockedCheck to make sure players joining get loaded.
-        if (!skipIsLockedCheck && isLocked(playerName)) return null;
-
+    private PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {
         log.log(Level.FINER, "Loading player data for " + playerName);
 
         PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
@@ -75,80 +102,28 @@ public class PlayerLogic {
 
     public PlayerInfo getPlayerInfo(String playerName) {
         // Do not return anything if it is loading.
-        if (isLocked(playerName)) return null;
-        // TODO: 30/08/2015 - R4zorax: We have a lot of issues reg. offline players here, and performance if we load it...
-        if (activePlayers.containsKey(playerName)) {
-            return activePlayers.get(playerName);
-        }
-        // Note: We do not put it in the cache on purpose - that is reserved for online players
-        PlayerInfo playerInfo = loadPlayerData(playerName);
-        activePlayers.put(playerName, playerInfo);
-        return playerInfo;
-    }
-
-    public boolean isLocked(Player player) {
-        return isLocked(player.getName());
-    }
-
-    public boolean isLocked(String playerName) {
-        synchronized (locked) {
-            return locked.contains(playerName);
-        }
-    }
-
-    public boolean isActive(Player player) {
-        return player != null && activePlayers.containsKey(player.getName());
-    }
-
-    public void removeActivePlayer(Player player) {
-        if (player != null && player.getName() != null && activePlayers.containsKey(player.getName())) {
-            activePlayers.remove(player.getName());
-        }
-    }
-
-    public void removeActivePlayer(PlayerInfo player) {
-        if (player != null && player.getPlayerName() != null && activePlayers.containsKey(player.getPlayerName())) {
-            activePlayers.remove(player.getPlayerName());
+        try {
+            return playerCache.get(playerName);
+        } catch (ExecutionException e) {
+            throw new IllegalStateException(e); // Escalate - we need it in the server log
         }
     }
 
     public void loadPlayerDataAsync(final Player player) {
-        final String playerName = player.getName();
-        
-        this.locked.add(playerName);
-        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, new Runnable() {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                try {
-                    if (player != null && player.isOnline()) {
-                        PlayerInfo loadedInfo = loadPlayerData(player.getUniqueId(), player.getName(), true);
-                        if (loadedInfo != null && player != null && player.isOnline()) {
-                            PlayerLogic.this.activePlayers.put(playerName, loadedInfo);
-                        }
-                    }
-                } catch (Exception exception) {
-                    throw exception;
-                } finally {
-                    PlayerLogic.this.locked.remove(playerName);
-
-                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (player != null && player.isOnline()) {
-                                PlayerInfo playerInfo = plugin.getPlayerInfo(player);
-                                if (isUnsafe(playerInfo, player)) {
-                                    plugin.spawnTeleport(player, true);
-                                    player.sendMessage(tr("\u00a7cIt seems you logged out in the sky world, however you are not a member of an island. Teleporting you to spawn."));
-                                }
-                            }
-                        }
-                    });
-                }
+                playerCache.refresh(player.getName());
             }
         });
     }
 
-    private boolean isUnsafe(PlayerInfo playerInfo, Player player) {
-        return plugin.isSkyWorld(player.getLocation().getWorld()) && !playerInfo.getHasIsland();
+    public void removeActivePlayer(PlayerInfo pi) {
+        playerCache.invalidate(pi.getPlayerName());
+    }
+
+    public void shutdown() {
+        saveTask.cancel();
+        playerCache.invalidateAll(); // Doing this on the main thread.
     }
 }

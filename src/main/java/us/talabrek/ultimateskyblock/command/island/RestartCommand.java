@@ -35,11 +35,10 @@ public class RestartCommand extends RequireIslandCommand {
                 return true;
             }
 
-            if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
+            if (plugin.getConfig().getBoolean("options.restart.confirmation", true) && plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
                 plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
                 return plugin.restartPlayerIsland(player, pi.getIslandLocation());
             } else {
-                // TODO: 16/04/2015 - R4zorax: Not true for those who changed options.restart.clearInventory etc.
                 player.sendMessage(tr("\u00a7eNOTE: Your entire island and all your belongings will be RESET!"));
                 return true;
             }

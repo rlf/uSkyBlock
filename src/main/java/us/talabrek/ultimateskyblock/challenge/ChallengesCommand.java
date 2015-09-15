@@ -30,10 +30,6 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
         if (!(sender instanceof Player)) {
             return false;
         }
-        if (plugin.getPlayerLogic().isLocked((Player) sender)) {
-            sender.sendMessage(tr("\u00a74Your island data is being loaded - try again later"));
-            return true;
-        }
         if (!plugin.getChallengeLogic().isEnabled()) {
             sender.sendMessage(tr("\u00a7eChallenges has been disabled. Contact an administrator."));
             return false;

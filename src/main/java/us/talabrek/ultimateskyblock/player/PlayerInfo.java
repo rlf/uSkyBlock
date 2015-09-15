@@ -1,25 +1,30 @@
 package us.talabrek.ultimateskyblock.player;
 
 import com.google.common.base.Preconditions;
-import java.nio.file.Files;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.*;
-import org.bukkit.*;
-
-import java.util.*;
-
-import org.bukkit.configuration.file.*;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.*;
-import java.io.*;
-
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlayerInfo implements Serializable {
     private static final String CN = PlayerInfo.class.getName();
@@ -31,15 +36,16 @@ public class PlayerInfo implements Serializable {
     private UUID uuid;
     private boolean hasIsland;
 
-    private boolean islandGenerating = false;
-    private boolean islandRestarting = false;
-
     private Location islandLocation;
-    private Location homeLocation;
 
+    private Location homeLocation;
     private final Map<String, ChallengeCompletion> challenges = new ConcurrentHashMap<>();
+
     private FileConfiguration playerData;
     private File playerConfigFile;
+
+    private boolean islandGenerating = false;
+    private boolean dirty = false;
 
     public PlayerInfo(String currentPlayerName, UUID playerUUID) {
         this.playerName = currentPlayerName;
@@ -246,6 +252,14 @@ public class PlayerInfo implements Serializable {
     }
 
     public void save() {
+        dirty = true;
+    }
+
+    public boolean isDirty() {
+        return dirty;
+    }
+
+    public void saveToFile() {
         // TODO: 11/05/2015 - R4zorax: Instead of saving directly, schedule it for later...
         log.entering(CN, "save", playerName);
         if (playerData == null) {
@@ -296,6 +310,7 @@ public class PlayerInfo implements Serializable {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + playerConfigFile, ex);
         }
         log.exiting(CN, "save");
+        dirty = false;
     }
 
     public Collection<ChallengeCompletion> getChallenges() {

@@ -138,9 +138,6 @@ msgstr "§e§lClique aqui para desativar."
 msgid "§4§lLocked Challenge"
 msgstr "§4§lDesafio trancado"
 
-msgid "§4Your island data is being loaded - try again later"
-msgstr ""
-
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§eDesafios estão desabilitados. Contate a um administrador."
 
@@ -1047,13 +1044,26 @@ msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Esse jogador proibiu você de teleportar até a ilha dele."
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr ""
+
+msgid "But you are Yelling in the wind!"
+msgstr ""
+
+msgid "But your fantasy friends are gone!"
+msgstr ""
+
+msgid "But you are Talking to your self!"
+msgstr ""
+
 msgid "talk to your party"
 msgstr ""
 
-msgid "general island command"
+#, java-format
+msgid "§cSorry! {0}"
 msgstr ""
 
-msgid "§4Your island data is being loaded, please try again later."
+msgid "general island command"
 msgstr ""
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
@@ -1843,11 +1853,6 @@ msgstr ""
 
 msgid "Permissions"
 msgstr "Permissões"
-
-msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
-msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Algo ocorreu mal ao salvar a ilha e informações do grupo!"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-14 23:26+0200\n"
+"PO-Revision-Date: 2015-09-15 22:26+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -135,9 +135,6 @@ msgstr "§fKlik her for næste side."
 
 msgid "§4§lLocked Challenge"
 msgstr "§4§lLåst udfordring"
-
-msgid "§4Your island data is being loaded - try again later"
-msgstr "§4Dine data bliver hentet - prøv igen senere"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§eUdfordringer er deaktiveret. Kontakt en administrator."
@@ -1024,14 +1021,27 @@ msgstr "§cADVARSEL: §9{0}§e kommer på besøg på din ø!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Den spiller har udelukket dig fra sin ø."
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "Men du er helt alene!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "Men du råber i vinden..."
+
+msgid "But your fantasy friends are gone!"
+msgstr "Men dine fantasivenner er smuttet!"
+
+msgid "But you are Talking to your self!"
+msgstr "Men du taler til dig selv!"
+
 msgid "talk to your party"
 msgstr "tal til medlemmerne af din ø"
 
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cUndskyld! {0}"
+
 msgid "general island command"
 msgstr "generel ø kommando"
-
-msgid "§4Your island data is being loaded, please try again later."
-msgstr "§4Din ø er ved at blive hentet, prøv igen senere."
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
@@ -1753,13 +1763,6 @@ msgstr ""
 msgid "Permissions"
 msgstr "Tilladelser"
 
-msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
-msgstr ""
-"§cDet lader til du loggede ud i sky verdenen, men du er ikke mere medlem af "
-"en ø. Teleporterer dig til start."
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Der opstod en fejl under gemning af øens data!"
 
@@ -1850,6 +1853,19 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "§4Your island data is being loaded, please try again later."
+#~ msgstr "§4Din ø er ved at blive hentet, prøv igen senere."
+
+#~ msgid "§4Your island data is being loaded - try again later"
+#~ msgstr "§4Dine data bliver hentet - prøv igen senere"
+
+#~ msgid ""
+#~ "§cIt seems you logged out in the sky world, however you are not a member "
+#~ "of an island. Teleporting you to spawn."
+#~ msgstr ""
+#~ "§cDet lader til du loggede ud i sky verdenen, men du er ikke mere medlem "
+#~ "af en ø. Teleporterer dig til start."
 
 #~ msgid ""
 #~ "§cYour island is in the process of restarting, you cannot create now."

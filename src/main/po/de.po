@@ -139,9 +139,6 @@ msgstr "§eKlick hier um zur nächsten Seite zu gelangen."
 msgid "§4§lLocked Challenge"
 msgstr "§4§lGesperrte Aufgabe."
 
-msgid "§4Your island data is being loaded - try again later"
-msgstr "§4Ihre Inseldaten werden geladen - Versuch es Später noch einmal."
-
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§eAufgabe wurde Deaktiviert. Wende dich an einen Admin."
 
@@ -1061,16 +1058,28 @@ msgstr ""
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Warpen."
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr ""
+
+msgid "But you are Yelling in the wind!"
+msgstr ""
+
+msgid "But your fantasy friends are gone!"
+msgstr ""
+
+msgid "But you are Talking to your self!"
+msgstr ""
+
 #, fuzzy
 msgid "talk to your party"
 msgstr "Verlasse deine Gruppe"
 
+#, java-format
+msgid "§cSorry! {0}"
+msgstr ""
+
 msgid "general island command"
 msgstr "Allgemeine Insel Befehle"
-
-#, fuzzy
-msgid "§4Your island data is being loaded, please try again later."
-msgstr "§4Ihre Inseldaten werden geladen - Versuch es Später noch einmal."
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr ""
@@ -1851,11 +1860,6 @@ msgstr ""
 msgid "Permissions"
 msgstr "Rechte"
 
-msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
-msgstr ""
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
 
@@ -1952,6 +1956,13 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "§4Your island data is being loaded, please try again later."
+#~ msgstr "§4Ihre Inseldaten werden geladen - Versuch es Später noch einmal."
+
+#~ msgid "§4Your island data is being loaded - try again later"
+#~ msgstr "§4Ihre Inseldaten werden geladen - Versuch es Später noch einmal."
 
 #~ msgid "§cYou were removed from your island since the last time you played!"
 #~ msgstr ""

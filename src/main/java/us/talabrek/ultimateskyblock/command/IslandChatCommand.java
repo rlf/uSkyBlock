@@ -8,7 +8,9 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
@@ -17,6 +19,12 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  */
 public class IslandChatCommand extends AbstractCommandExecutor {
     private final uSkyBlock plugin;
+    private final List<String> ALONE = Arrays.asList(
+            tr("But you are ALLLLLLL ALOOOOONE!"),
+            tr("But you are Yelling in the wind!"),
+            tr("But your fantasy friends are gone!"),
+            tr("But you are Talking to your self!")
+    );
 
     public IslandChatCommand(uSkyBlock plugin) {
         super("islandtalk|istalk|it", "usb.party.talk", tr("talk to your party"));
@@ -45,7 +53,7 @@ public class IslandChatCommand extends AbstractCommandExecutor {
             message = format.replaceAll("\\{MESSAGE\\}", message);
             List<Player> onlineMembers = islandInfo.getOnlineMembers();
             if (onlineMembers.size() <= 1) {
-                player.sendMessage("\u00a7cSorry! \u00a9But you are ALLLLLLL ALOOOOONE!");
+                player.sendMessage(tr("\u00a7cSorry! {0}",  "\u00a79" + ALONE.get(((int)Math.round(Math.random() * ALONE.size())) % ALONE.size())));
             } else {
                 islandInfo.sendMessageToOnlineMembers(message);
             }

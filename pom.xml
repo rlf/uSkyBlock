@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
-    <version>2.3.0-SNAPSHOT</version>
+    <version>2.4.0-SNAPSHOT</version>
     <name>Ultimate Skyblock</name>
 
     <properties>
@@ -65,15 +65,6 @@
         </repository>
     </repositories>
     <profiles>
-        <profile>
-            <id>build-num</id>
-            <activation>
-                <property><name>TRAVIS_BUILD_NUMBER</name></property>
-            </activation>
-            <properties>
-                <travis.buildNumber>${env.TRAVIS_BUILD_NUMBER}</travis.buildNumber>
-            </properties>
-        </profile>
         <profile>
             <id>wg5</id>
             <dependencies>
@@ -276,6 +267,7 @@
                             <shadedPattern>us.talabrek.ultimateskyblock.i18n</shadedPattern>
                         </relocation>
                     </relocations>
+
                 </configuration>
                 <executions>
                     <execution>
@@ -463,6 +455,11 @@
             <artifactId>gettext-commons</artifactId>
             <version>0.9.8</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
         </dependency>
         <!-- TESTING -->
         <dependency>

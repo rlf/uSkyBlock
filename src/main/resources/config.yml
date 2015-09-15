@@ -181,6 +181,10 @@ options:
       'usb.extra.partysize3': 7
       'usb.extra.partysize': 8
 
+    leave:
+      # [true/false] Whether to require confirmation (i.e. repeating the command twice).
+      confirmation: true
+
   # This section provide some performance tweaking configs
   advanced:
     # If true, display-name is looked up (might be performance intensive).
@@ -211,8 +215,11 @@ options:
     # on /is restart or /is create (default: 20)
     teleportDelay: 20
 
+    # [true/false] Whether to require confirmation (i.e. repeating the command twice).
+    confirmation: true
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 22
+version: 23
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

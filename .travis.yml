@@ -12,9 +12,9 @@ notifications:
 before_install:
   # Change the maven-version to be the tag (for the API deploy)
   # Skip the 'v'
-  - mvn versions:set -DnewVersion=${TRAVIS_TAG:1}
+  - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 script:
-  - mvn -DskipTests=true install
+  - mvn -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true install
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}

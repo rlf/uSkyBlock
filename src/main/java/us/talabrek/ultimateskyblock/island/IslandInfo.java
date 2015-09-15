@@ -40,6 +40,8 @@ public class IslandInfo {
     private final File file;
     private final FileConfiguration config;
     private final String name;
+    private boolean dirty = false;
+    private boolean toBeDeleted = false;
 
     public IslandInfo(String islandName) {
         config = new YamlConfiguration();
@@ -181,10 +183,22 @@ public class IslandInfo {
     }
 
     public void save() {
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            uSkyBlock.log(Level.SEVERE, "Unable to save island " + file, e);
+        dirty = true;
+    }
+
+    public boolean isDirty() {
+        return dirty || toBeDeleted;
+    }
+
+    public void saveToFile() {
+        if (toBeDeleted) {
+            file.delete();
+        } else {
+            try {
+                config.save(file);
+            } catch (IOException e) {
+                uSkyBlock.log(Level.SEVERE, "Unable to save island " + file, e);
+            }
         }
     }
 
@@ -624,5 +638,9 @@ public class IslandInfo {
         for (Player player : getOnlineMembers()) {
             player.sendMessage(msg);
         }
+    }
+
+    public void delete() {
+        toBeDeleted = true;
     }
 }

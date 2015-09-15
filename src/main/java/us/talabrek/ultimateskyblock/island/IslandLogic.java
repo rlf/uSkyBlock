@@ -1,5 +1,10 @@
 package us.talabrek.ultimateskyblock.island;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -28,8 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,7 +48,7 @@ public class IslandLogic {
     private final uSkyBlock plugin;
     private final File directoryIslands;
 
-    private final Map<String, IslandInfo> islands = new ConcurrentHashMap<>();
+    private final LoadingCache<String, IslandInfo> cache;
     private final boolean showMembers;
     private final boolean flatlandFix;
 
@@ -56,35 +60,48 @@ public class IslandLogic {
         this.directoryIslands = directoryIslands;
         this.showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
         this.flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
+        cache = CacheBuilder
+                .from(plugin.getConfig().getString("options.advanced.islandCache",
+                        "maximumSize=200,expireAfterWrite=15m,expireAfterAccess=10m"))
+                .removalListener(new RemovalListener<String, IslandInfo>() {
+                    @Override
+                    public void onRemoval(RemovalNotification<String, IslandInfo> removal) {
+                        removal.getValue().saveToFile();
+                    }
+                })
+                .build(new CacheLoader<String, IslandInfo>() {
+                    @Override
+                    public IslandInfo load(String islandName) throws Exception {
+                        return new IslandInfo(islandName);
+                    }
+                });
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
         if (islandName == null) {
             return null;
         }
-
-        if (!islands.containsKey(islandName)) {
-            IslandInfo islandInfo = new IslandInfo(islandName);
-            if (islandInfo.exists()) {
-                islands.put(islandName, islandInfo);   
-                return islandInfo;
-            }
-            // We don't load the island if the file did not exist.
-            return null;
+        IslandInfo islandInfo = null;
+        try {
+            islandInfo = cache.get(islandName);
+        } catch (ExecutionException e) {
+            throw new IllegalStateException("Unable to load island", e);
         }
-        return islands.get(islandName);
+        if (islandInfo.exists()) {
+            return islandInfo;
+        }
+        return null;
     }
     
     public synchronized IslandInfo createIslandInfo(String islandName) {
-        IslandInfo islandInfo = getIslandInfo(islandName);
-        if (islandInfo != null) {
-            return islandInfo;
+        if (islandName == null) {
+            return null;
         }
-        
-        if (!islands.containsKey(islandName)) {
-            islands.put(islandName, islandInfo = new IslandInfo(islandName));
+        try {
+            return cache.get(islandName);
+        } catch (ExecutionException e) {
+            throw new IllegalStateException("Unable to create island", e);
         }
-        return islandInfo;
     }
 
     public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
@@ -232,7 +249,7 @@ public class IslandLogic {
         for (String file : listOfFiles) {
             String islandName = FileUtil.getBasename(file);
             try {
-                boolean wasLoaded = islands.containsKey(islandName);
+                boolean wasLoaded = cache.getIfPresent(islandName) != null;
                 IslandInfo islandInfo = getIslandInfo(islandName);
                 double level = islandInfo != null ? islandInfo.getLevel() : 0;
                 if (islandInfo != null && level > 10) {
@@ -240,7 +257,7 @@ public class IslandLogic {
                     topTen.add(islandLevel);
                 }
                 if (!wasLoaded) {
-                    islands.remove(islandName);
+                    cache.invalidate(islandName);
                 }
             } catch (Exception e) {
                 plugin.getLogger().log(Level.WARNING, "Error during rank generation", e);
@@ -272,18 +289,25 @@ public class IslandLogic {
 
     public synchronized IslandInfo createIsland(String location, String player) {
         IslandInfo info = createIslandInfo(location);
+        cache.put(location, info);
         info.resetIslandConfig(player);
         return info;
     }
 
     public synchronized void deleteIslandConfig(final String location) {
-        File file = new File(this.directoryIslands, location + ".yml");
-        file.delete();
-        islands.remove(location);
+        try {
+            IslandInfo islandInfo = cache.get(location);
+            if (islandInfo.exists()) {
+                islandInfo.delete();
+            }
+            cache.invalidate(location);
+        } catch (ExecutionException e) {
+            throw new IllegalStateException("Unable to delete island " + location, e);
+        }
     }
 
     public synchronized void removeIslandFromMemory(String islandName) {
-        islands.remove(islandName);
+        cache.invalidate(islandName);
     }
 
     public void renamePlayer(PlayerInfo playerInfo, AsyncPlayerNameChangedEvent change) {

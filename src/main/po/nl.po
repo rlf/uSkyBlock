@@ -136,9 +136,6 @@ msgstr "§eKlik hier om de volgende pagina te zien"
 msgid "§4§lLocked Challenge"
 msgstr "§4§lGesloten uitdaging"
 
-msgid "§4Your island data is being loaded - try again later"
-msgstr "§4Uw eiland gegevens worden geladen - probeer het later"
-
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr ""
 "§eDe uidagingen zijn uitgeschakeld. Neem contact op met een administrator."
@@ -1044,14 +1041,27 @@ msgstr "§eU heeft §4{0}§e verbannen om naar uw eiland te warpen."
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr ""
+
+msgid "But you are Yelling in the wind!"
+msgstr ""
+
+msgid "But your fantasy friends are gone!"
+msgstr ""
+
+msgid "But you are Talking to your self!"
+msgstr ""
+
 msgid "talk to your party"
 msgstr "praat met je leden"
 
+#, java-format
+msgid "§cSorry! {0}"
+msgstr ""
+
 msgid "general island command"
 msgstr "algemeen eiland command"
-
-msgid "§4Your island data is being loaded, please try again later."
-msgstr "§4Uw eiland gegevens worden geladen - probeer het later"
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr ""
@@ -1659,13 +1669,6 @@ msgstr ""
 msgid "Permissions"
 msgstr "Permissions"
 
-msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
-msgstr ""
-"§cHet lijkt erop dat je hebt uitgelogged in de skyworld, en je bent geen lid "
-"van een eiland. Je word naar spawn getelepoorteerd."
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 "Er is iets mis gegaan tijdens het opslaan van het eiland en/of party data!"
@@ -1758,6 +1761,19 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "§4Your island data is being loaded, please try again later."
+#~ msgstr "§4Uw eiland gegevens worden geladen - probeer het later"
+
+#~ msgid "§4Your island data is being loaded - try again later"
+#~ msgstr "§4Uw eiland gegevens worden geladen - probeer het later"
+
+#~ msgid ""
+#~ "§cIt seems you logged out in the sky world, however you are not a member "
+#~ "of an island. Teleporting you to spawn."
+#~ msgstr ""
+#~ "§cHet lijkt erop dat je hebt uitgelogged in de skyworld, en je bent geen "
+#~ "lid van een eiland. Je word naar spawn getelepoorteerd."
 
 #~ msgid ""
 #~ "§cYour island is in the process of restarting, you cannot create now."

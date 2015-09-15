@@ -73,7 +73,6 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerQuit(final PlayerQuitEvent event) {
-        plugin.unloadPlayerData(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

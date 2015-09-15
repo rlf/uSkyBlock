@@ -165,14 +165,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     };
 
     public uSkyBlock() {
-        this.lastIslandConfig = null;
-        this.orphans = null;
-        this.orphanFile = null;
-        this.lastIslandConfigFile = null;
-        this.orphaned = new Stack<>();
-        this.tempOrphaned = new Stack<>();
-        this.reverseOrphaned = new Stack<>();
-        this.purgeActive = false;
+        lastIslandConfig = null;
+        orphans = null;
+        orphanFile = null;
+        lastIslandConfigFile = null;
+        orphaned = new Stack<>();
+        tempOrphaned = new Stack<>();
+        reverseOrphaned = new Stack<>();
+        purgeActive = false;
     }
 
     @Override
@@ -180,17 +180,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         HandlerList.unregisterAll(this);
         Bukkit.getScheduler().cancelTasks(this);
         try {
-            if (this.lastIsland != null) {
-                setLastIsland(this.lastIsland);
+            if (lastIsland != null) {
+                setLastIsland(lastIsland);
             }
             uSkyBlock.skyBlockWorld = null; // Force a reload on config.
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
-        for (Player player : getServer().getOnlinePlayers()) {
-            unloadPlayerData(player);
-        }
-        this.playerNameChangeManager.shutdown();
+        playerLogic.shutdown();
+        playerNameChangeManager.shutdown();
         DebugCommand.disableLogging(null);
     }
 
@@ -221,15 +219,18 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                         if (!config.contains("options.general.lastIslandX") && getConfig().contains("options.general.lastIslandX")) {
                             FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandX");
                             FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandZ");
-                            config.set("options.general.lastIslandX", getConfig().getInt("options.general.lastIslandX"));
-                            config.set("options.general.lastIslandZ", getConfig().getInt("options.general.lastIslandZ"));
+                            config.set("options.general.lastIslandX", uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"));
+                            config.set("options.general.lastIslandZ", uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
                             saveLastIslandConfig();
                         }
                         setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) config.getInt("options.general.lastIslandZ")));
                     } catch (Exception e) {
-                        setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
+                        setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(),
+                                (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"),
+                                (double) Settings.island_height,
+                                (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
                     }
-                    if (uSkyBlock.this.lastIsland == null) {
+                    if (lastIsland == null) {
                         setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
                     }
                     setupOrphans();
@@ -281,11 +282,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (!getDataFolder().exists()) {
             getDataFolder().mkdirs();
         }
-        this.directoryPlayers = new File(this.getDataFolder() + File.separator + "players");
-        if (!this.directoryPlayers.exists()) {
-            this.directoryPlayers.mkdirs();
+        directoryPlayers = new File(getDataFolder() + File.separator + "players");
+        if (!directoryPlayers.exists()) {
+            directoryPlayers.mkdirs();
         }
-        directoryIslands = new File(this.getDataFolder() + File.separator + "islands");
+        directoryIslands = new File(getDataFolder() + File.separator + "islands");
         if (!directoryIslands.exists()) {
             directoryIslands.mkdirs();
         }
@@ -297,9 +298,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void registerEvents(PlayerDB playerDB) {
-        final PluginManager manager = this.getServer().getPluginManager();
+        final PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(new PlayerNameChangeListener(this), this);
-        manager.registerEvents(this.playerNameChangeManager, this);
+        manager.registerEvents(playerNameChangeManager, this);
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
         manager.registerEvents(new ExploitEvents(this), this);
@@ -351,7 +352,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void clearOrphanedIsland() {
-        while (this.hasOrphanedIsland()) {
+        while (hasOrphanedIsland()) {
             orphaned.pop();
         }
     }
@@ -494,8 +495,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             clearEntitiesNearPlayer(player);
         }
 
-        final IslandGenerator.PlayerIslandCreationData playerIslandCreationData = this.islandGenerator.preCreateData(player, getPlayerInfo(player));
-        this.islandLogic.clearIsland(next, new Runnable() {
+        final IslandGenerator.PlayerIslandCreationData playerIslandCreationData = islandGenerator.preCreateData(player, getPlayerInfo(player));
+        islandLogic.clearIsland(next, new Runnable() {
             @Override
             public void run() {
                 generateIsland(player, playerInfo, next);
@@ -559,11 +560,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public synchronized boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main thread!");
 
-        PlayerInfo pi = playerLogic.getPlayerInfo(player);
-        if (pi == null) {
-            pi = this.playerLogic.loadPlayerData(Bukkit.getOfflinePlayer(player).getUniqueId(), player);
-        }
-        final PlayerInfo finalPI = pi;
+        final PlayerInfo pi = playerLogic.getPlayerInfo(player);
 
         final Location newLoc = findBedrockLocation(l);
         boolean deleteOldIsland = false;
@@ -582,13 +579,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             Runnable resetIsland = new Runnable() {
                 @Override
                 public void run() {
-                    finalPI.setHomeLocation(null);
-                    finalPI.setHasIsland(true);
-                    finalPI.setIslandLocation(newLoc);
-                    finalPI.setHomeLocation(getSafeHomeLocation(finalPI));
-                    IslandInfo island = islandLogic.createIsland(finalPI.locationForParty(), player);
+                    pi.setHomeLocation(null);
+                    pi.setHasIsland(true);
+                    pi.setIslandLocation(newLoc);
+                    pi.setHomeLocation(getSafeHomeLocation(pi));
+                    IslandInfo island = islandLogic.createIsland(pi.locationForParty(), player);
                     WorldGuardHandler.updateRegion(sender, island);
-                    finalPI.save();
+                    pi.save();
                 }
             };
             if (deleteOldIsland) {
@@ -609,15 +606,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (lastIsland != null && isSkyWorld(lastIsland.getWorld())) {
             return lastIsland;
         }
-        this.setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
+        setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
         return new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0);
     }
 
     public void setLastIsland(final Location island) {
-        this.getLastIslandConfig().set("options.general.lastIslandX", island.getBlockX());
-        this.getLastIslandConfig().set("options.general.lastIslandZ", island.getBlockZ());
-        this.saveLastIslandConfig();
-        this.lastIsland = island;
+        getLastIslandConfig().set("options.general.lastIslandX", island.getBlockX());
+        getLastIslandConfig().set("options.general.lastIslandZ", island.getBlockZ());
+        saveLastIslandConfig();
+        lastIsland = island;
     }
 
     public boolean hasOrphanedIsland() {
@@ -629,7 +626,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public Location getOrphanedIsland() {
-        if (this.hasOrphanedIsland()) {
+        if (hasOrphanedIsland()) {
             return orphaned.pop();
         }
         return null;
@@ -647,9 +644,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public void saveOrphans() {
         String fullOrphan = "";
-        this.tempOrphaned = (Stack<Location>) orphaned.clone();
-        while (!this.tempOrphaned.isEmpty()) {
-            reverseOrphaned.push(this.tempOrphaned.pop());
+        tempOrphaned = (Stack<Location>) orphaned.clone();
+        while (!tempOrphaned.isEmpty()) {
+            reverseOrphaned.push(tempOrphaned.pop());
         }
         while (!reverseOrphaned.isEmpty()) {
             final Location tempLoc = reverseOrphaned.pop();
@@ -657,13 +654,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 fullOrphan += tempLoc.getBlockX() + "," + tempLoc.getBlockZ() + ";";
             }
         }
-        this.getOrphans().set("orphans.list", fullOrphan);
-        this.saveOrphansFile();
+        getOrphans().set("orphans.list", fullOrphan);
+        saveOrphansFile();
     }
 
     public void setupOrphans() {
-        if (this.getOrphans().contains("orphans.list")) {
-            final String fullOrphan = this.getOrphans().getString("orphans.list");
+        if (getOrphans().contains("orphans.list")) {
+            final String fullOrphan = getOrphans().getString("orphans.list");
             if (!fullOrphan.isEmpty()) {
                 final String[] orphanArray = fullOrphan.split(";");
                 orphaned = new Stack<>();
@@ -785,7 +782,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             player.sendMessage(tr("\u00a74You must be closer to your island to set your skyblock home!"));
             return true;
         }
-        if (this.playerIsOnIsland(player)) {
+        if (playerIsOnIsland(player)) {
             PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
             if (playerInfo != null && isSafeLocation(player.getLocation())) {
                 playerInfo.setHomeLocation(player.getLocation());
@@ -860,15 +857,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean isPurgeActive() {
-        return this.purgeActive;
+        return purgeActive;
     }
 
     public void activatePurge() {
-        this.purgeActive = true;
+        purgeActive = true;
     }
 
     public void deactivatePurge() {
-        this.purgeActive = false;
+        purgeActive = false;
     }
 
     public PlayerInfo getPlayerInfo(Player player) {
@@ -879,76 +876,63 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return playerLogic.getPlayerInfo(playerName);
     }
 
-    public void unloadPlayerData(Player player) {
-        if (hasIsland(player) && !hasOtherIslandMembersOnline(player)) {
-            islandLogic.removeIslandFromMemory(getPlayerInfo(player).locationForParty());
-        }
-        playerLogic.removeActivePlayer(player);
-        notifier.unloadPlayer(player);
-    }
-
-    public FileConfiguration getTempIslandConfig(final String location) {
-        File islandFile = new File(this.directoryIslands, location + ".yml");
-        return YamlConfiguration.loadConfiguration(islandFile);
-    }
-
     public void reloadLastIslandConfig() {
-        if (this.lastIslandConfigFile == null) {
-            this.lastIslandConfigFile = new File(this.getDataFolder(), "lastIslandConfig.yml");
+        if (lastIslandConfigFile == null) {
+            lastIslandConfigFile = new File(getDataFolder(), "lastIslandConfig.yml");
         }
-        this.lastIslandConfig = YamlConfiguration.loadConfiguration(this.lastIslandConfigFile);
-        final InputStream defConfigStream = this.getResource("lastIslandConfig.yml");
+        lastIslandConfig = YamlConfiguration.loadConfiguration(lastIslandConfigFile);
+        final InputStream defConfigStream = getResource("lastIslandConfig.yml");
         if (defConfigStream != null) {
             final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            this.lastIslandConfig.setDefaults(defConfig);
+            lastIslandConfig.setDefaults(defConfig);
         }
     }
 
     public FileConfiguration getLastIslandConfig() {
-        if (this.lastIslandConfig == null) {
-            this.reloadLastIslandConfig();
+        if (lastIslandConfig == null) {
+            reloadLastIslandConfig();
         }
-        return this.lastIslandConfig;
+        return lastIslandConfig;
     }
 
     public void saveLastIslandConfig() {
-        if (this.lastIslandConfig == null || this.lastIslandConfigFile == null) {
+        if (lastIslandConfig == null || lastIslandConfigFile == null) {
             return;
         }
         try {
-            this.getLastIslandConfig().save(this.lastIslandConfigFile);
+            getLastIslandConfig().save(lastIslandConfigFile);
         } catch (IOException ex) {
-            this.getLogger().log(Level.SEVERE, "Could not save config to " + this.lastIslandConfigFile, ex);
+            getLogger().log(Level.SEVERE, "Could not save config to " + lastIslandConfigFile, ex);
         }
     }
 
     public void reloadOrphans() {
-        if (this.orphanFile == null) {
-            this.orphanFile = new File(this.getDataFolder(), "orphans.yml");
+        if (orphanFile == null) {
+            orphanFile = new File(getDataFolder(), "orphans.yml");
         }
-        this.orphans = YamlConfiguration.loadConfiguration(this.orphanFile);
-        final InputStream defConfigStream = this.getResource("orphans.yml");
+        orphans = YamlConfiguration.loadConfiguration(orphanFile);
+        final InputStream defConfigStream = getResource("orphans.yml");
         if (defConfigStream != null) {
             final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            this.orphans.setDefaults(defConfig);
+            orphans.setDefaults(defConfig);
         }
     }
 
     public FileConfiguration getOrphans() {
-        if (this.orphans == null) {
-            this.reloadOrphans();
+        if (orphans == null) {
+            reloadOrphans();
         }
-        return this.orphans;
+        return orphans;
     }
 
     public void saveOrphansFile() {
-        if (this.orphans == null || this.orphanFile == null) {
+        if (orphans == null || orphanFile == null) {
             return;
         }
         try {
-            this.getOrphans().save(this.orphanFile);
+            getOrphans().save(orphanFile);
         } catch (IOException ex) {
-            this.getLogger().log(Level.SEVERE, "Could not save config to " + this.orphanFile, ex);
+            getLogger().log(Level.SEVERE, "Could not save config to " + orphanFile, ex);
         }
     }
 
@@ -961,7 +945,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public Biome getBiome(String bName) {
         if (bName == null) return null;
-        return this.validBiomes.get(bName.toLowerCase());
+        return validBiomes.get(bName.toLowerCase());
     }
 
     private void setBiome(Location loc, Biome biome) {
@@ -981,7 +965,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public boolean biomeExists(String biomeName) {
         if (biomeName == null) return false;
-        return this.validBiomes.containsKey(biomeName.toLowerCase());
+        return validBiomes.containsKey(biomeName.toLowerCase());
     }
 
     // This method does not check for permissions, since it is only used in the generator.
@@ -1052,13 +1036,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 islandGenerator.setChest(next, playerIslandCreationData);
                 setNewPlayerIsland(player, next);
                 changePlayerBiome(player, "OCEAN");
-                protectWithWorldGuard(player, player, pi);
+                WorldGuardHandler.protectIsland(player, pi);
                 getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
-
-
-                // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
-                clearPlayerInventory(player);
-                clearEntitiesNearPlayer(player);
 
                 if (pi != null) {
                     pi.setIslandGenerating(false);
@@ -1069,6 +1048,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                         if (player != null && player.isOnline()) {
                             getLogger().log(Level.FINE, "porting player back to the island");
                             homeTeleport(player, true);
+                            clearPlayerInventory(player);
+                            clearEntitiesNearPlayer(player);
                         }
                     }
                 }, getConfig().getInt("options.restart.teleportDelay", 20));
@@ -1333,30 +1314,30 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         // Update all of the loaded configs.
         FileUtil.reload();
 
-        this.playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
-        PlayerUtil.loadConfig(this.playerDB, getConfig());
-        this.islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
-        this.challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
-        this.menu = new SkyBlockMenu(this, this.challengeLogic);
-        this.levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
-        this.islandLogic = new IslandLogic(this, this.directoryIslands);
-        this.notifier = new PlayerNotifier(getConfig());
-        this.playerLogic = new PlayerLogic(this);
-        this.playerNameChangeManager = new PlayerNameChangeManager(this, this.playerDB);
-        registerEvents(this.playerDB);
-        if (this.autoRecalculateTask != null) {
-            this.autoRecalculateTask.cancel();
+        playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        PlayerUtil.loadConfig(playerDB, getConfig());
+        islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
+        challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
+        menu = new SkyBlockMenu(this, challengeLogic);
+        levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
+        islandLogic = new IslandLogic(this, directoryIslands);
+        notifier = new PlayerNotifier(getConfig());
+        playerLogic = new PlayerLogic(this);
+        playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
+        registerEvents(playerDB);
+        if (autoRecalculateTask != null) {
+            autoRecalculateTask.cancel();
         }
         int refreshEveryMinute = getConfig().getInt("options.island.autoRefreshScore", 0);
         if (refreshEveryMinute > 0) {
             int refreshTicks = refreshEveryMinute * 1200; // Ticks per minute
-            this.autoRecalculateTask = new RecalculateRunnable(this).runTaskTimer(this, refreshTicks, refreshTicks);
+            autoRecalculateTask = new RecalculateRunnable(this).runTaskTimer(this, refreshTicks, refreshTicks);
         } else {
-            this.autoRecalculateTask = null;
+            autoRecalculateTask = null;
         }
-        this.confirmHandler = new ConfirmHandler(this, getConfig().getInt("options.advanced.confirmTimeout", 10));
-        this.cooldownHandler = new CooldownHandler(this);
-        getCommand("island").setExecutor(new IslandCommand(this, this.menu));
+        confirmHandler = new ConfirmHandler(this, getConfig().getInt("options.advanced.confirmTimeout", 10));
+        cooldownHandler = new CooldownHandler(this);
+        getCommand("island").setExecutor(new IslandCommand(this, menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
         getCommand("usb").setExecutor(new AdminCommand(this));
         getCommand("islandtalk").setExecutor(new IslandChatCommand(this));
@@ -1540,7 +1521,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public synchronized void setProtectAllActive(boolean protectAllActive) {
-        this.protectAllActive = protectAllActive;
+        protectAllActive = protectAllActive;
     }
 
     public String getVersionInfo() {
@@ -1599,6 +1580,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public Map<String, Biome> getValidBiomes() {
-        return this.validBiomes;
+        return validBiomes;
     }
 }

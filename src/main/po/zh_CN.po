@@ -136,9 +136,6 @@ msgstr "§a§l点击图标更改传送点状态."
 msgid "§4§lLocked Challenge"
 msgstr "§4§l挑战锁定"
 
-msgid "§4Your island data is being loaded - try again later"
-msgstr ""
-
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§e挑战不可用,请联系服务器管理员."
 
@@ -1025,13 +1022,26 @@ msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr ""
+
+msgid "But you are Yelling in the wind!"
+msgstr ""
+
+msgid "But your fantasy friends are gone!"
+msgstr ""
+
+msgid "But you are Talking to your self!"
+msgstr ""
+
 msgid "talk to your party"
 msgstr ""
 
-msgid "general island command"
+#, java-format
+msgid "§cSorry! {0}"
 msgstr ""
 
-msgid "§4Your island data is being loaded, please try again later."
+msgid "general island command"
 msgstr ""
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
@@ -1792,11 +1802,6 @@ msgstr ""
 
 msgid "Permissions"
 msgstr "权限"
-
-msgid ""
-"§cIt seems you logged out in the sky world, however you are not a member of "
-"an island. Teleporting you to spawn."
-msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
