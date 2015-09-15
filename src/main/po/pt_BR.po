@@ -962,6 +962,10 @@ msgid "§eThe following players are trusted on your island:"
 msgstr "§eOs seguintes jogadores estão proibidos de teleportar até sua ilha:"
 
 #, fuzzy
+msgid "§eThe following leaders trusts you:"
+msgstr "§eOs seguintes jogadores estão proibidos de teleportar até sua ilha:"
+
+#, fuzzy
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
 msgstr ""
 "§ePara banir/desbanir um jogador da sua ilha, use /island ban <jogador>"
@@ -1056,15 +1060,19 @@ msgstr ""
 msgid "But you are Talking to your self!"
 msgstr ""
 
-msgid "talk to your party"
-msgstr ""
-
 #, java-format
 msgid "§cSorry! {0}"
 msgstr ""
 
 msgid "general island command"
 msgstr ""
+
+msgid "talk to your island (party+trustees)"
+msgstr ""
+
+#, fuzzy
+msgid "talk to your island party"
+msgstr "{0}§e já é o lider da ilha!"
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr "§eVocê não pode usar outros portais na ilha!"

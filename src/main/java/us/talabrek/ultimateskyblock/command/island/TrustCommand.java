@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
@@ -22,6 +24,8 @@ public class TrustCommand extends RequireIslandCommand {
         if (args.length == 0) {
             player.sendMessage(tr("\u00a7eThe following players are trusted on your island:"));
             player.sendMessage(tr("\u00a74{0}", island.getTrustees()));
+            player.sendMessage(tr("\u00a7eThe following leaders trusts you:"));
+            player.sendMessage(tr("\u00a74{0}", getLeaderNames(pi)));
             player.sendMessage(tr("\u00a7eTo trust/untrust from your island, use /island trust <player>"));
             return true;
         } else if (args.length == 1) {
@@ -57,5 +61,17 @@ public class TrustCommand extends RequireIslandCommand {
             return true;
         }
         return false;
+    }
+
+    private List<String> getLeaderNames(PlayerInfo pi) {
+        List<String> trustedOn = pi.getTrustedOn();
+        List<String> leaderNames = new ArrayList<>();
+        for (String islandName : trustedOn) {
+            IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+            if (islandInfo != null && islandInfo.getLeader() != null) {
+                leaderNames.add(islandInfo.getLeader());
+            }
+        }
+        return leaderNames;
     }
 }

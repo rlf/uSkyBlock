@@ -55,6 +55,8 @@ import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.command.IslandChatCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
+import us.talabrek.ultimateskyblock.command.IslandTalkCommand;
+import us.talabrek.ultimateskyblock.command.PartyTalkCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
 import us.talabrek.ultimateskyblock.event.ExploitEvents;
 import us.talabrek.ultimateskyblock.event.GriefEvents;
@@ -1340,7 +1342,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getCommand("island").setExecutor(new IslandCommand(this, menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
         getCommand("usb").setExecutor(new AdminCommand(this));
-        getCommand("islandtalk").setExecutor(new IslandChatCommand(this));
+        getCommand("islandtalk").setExecutor(new IslandTalkCommand(this));
+        getCommand("partytalk").setExecutor(new PartyTalkCommand(this));
     }
 
     public boolean isSkyWorld(World world) {

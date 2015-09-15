@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-15 22:26+0200\n"
+"PO-Revision-Date: 2015-09-15 23:55+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -942,6 +942,9 @@ msgstr "tillad en spiller at hjælpe med på din ø"
 msgid "§eThe following players are trusted on your island:"
 msgstr "§eDe følgende spillere betroet på din ø:"
 
+msgid "§eThe following leaders trusts you:"
+msgstr "§eDe følgende ledere har tiltro til dig:"
+
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
 msgstr "§eFor at betro spillere adgang, brug §9/is trust <spiller>"
 
@@ -1033,15 +1036,18 @@ msgstr "Men dine fantasivenner er smuttet!"
 msgid "But you are Talking to your self!"
 msgstr "Men du taler til dig selv!"
 
-msgid "talk to your party"
-msgstr "tal til medlemmerne af din ø"
-
 #, java-format
 msgid "§cSorry! {0}"
 msgstr "§cUndskyld! {0}"
 
 msgid "general island command"
 msgstr "generel ø kommando"
+
+msgid "talk to your island (party+trustees)"
+msgstr "tal til medlemmerne af din ø (medlemmer og betroede)"
+
+msgid "talk to your island party"
+msgstr "tal til medlemmerne af din ø"
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"

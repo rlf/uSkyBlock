@@ -424,26 +424,26 @@ public class IslandInfo {
         return config.getStringList("trust.list");
     }
 
-    public void trust(String name) {
+    public void trust(String playerName) {
         List<String> trustees = getTrustees();
-        if (!trustees.contains(name)) {
-            trustees.add(name);
+        if (!trustees.contains(playerName)) {
+            trustees.add(playerName);
             config.set("trust.list", trustees);
         }
-        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(name);
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(playerName);
         if (playerInfo != null) {
-            playerInfo.addTrust(name);
+            playerInfo.addTrust(this.name);
         }
         save();
     }
 
-    public void untrust(String name) {
+    public void untrust(String playerName) {
         List<String> trustees = getTrustees();
-        trustees.remove(name);
+        trustees.remove(playerName);
         config.set("trust.list", trustees);
-        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(name);
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(playerName);
         if (playerInfo != null) {
-            playerInfo.removeTrust(name);
+            playerInfo.removeTrust(this.name);
         }
         save();
     }

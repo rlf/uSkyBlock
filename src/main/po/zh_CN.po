@@ -948,6 +948,10 @@ msgid "§eThe following players are trusted on your island:"
 msgstr "§e下列玩家被禁止传送到你的岛屿:"
 
 #, fuzzy
+msgid "§eThe following leaders trusts you:"
+msgstr "§e下列玩家被禁止传送到你的岛屿:"
+
+#, fuzzy
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
 msgstr "§e禁止/允许一个玩家前往你的岛屿，输入§c/island ban §a<玩家名字>"
 
@@ -1034,15 +1038,19 @@ msgstr ""
 msgid "But you are Talking to your self!"
 msgstr ""
 
-msgid "talk to your party"
-msgstr ""
-
 #, java-format
 msgid "§cSorry! {0}"
 msgstr ""
 
 msgid "general island command"
 msgstr ""
+
+msgid "talk to your island (party+trustees)"
+msgstr ""
+
+#, fuzzy
+msgid "talk to your island party"
+msgstr "{0}§e早就是你们岛屿的成员了!"
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"

@@ -327,6 +327,7 @@ public class PlayerInfo implements Serializable {
         str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  LocationUtil.asString(getHomeLocation()) + "\n";
         str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + LocationUtil.asString(getIslandLocation()) + "\n";
         str += ChatColor.GRAY + "  - banned from: " + ChatColor.DARK_AQUA + getBannedFrom() + "\n";
+        str += ChatColor.GRAY + "  - trusted on: " + ChatColor.DARK_AQUA + playerData.getStringList("trustedOn") + "\n";
         // TODO: 28/12/2014 - R4zorax: Some info about challenges?
         return str;
     }
@@ -411,6 +412,10 @@ public class PlayerInfo implements Serializable {
         trustedOn.remove(name);
         playerData.set("trustedOn", trustedOn);
         save();
+    }
+
+    public List<String> getTrustedOn() {
+        return playerData.getStringList("trustedOn");
     }
 
     public boolean isIslandGenerating() {

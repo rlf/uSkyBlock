@@ -23,11 +23,16 @@ commands:
         usage:  |  
             /challenges help for more information
     islandtalk:
-        description: Chat with your party
+        description: Chat with your island
         aliases: [istalk, it]
         usage: |
             /it message
-permissions:    
+    partytalk:
+        description: Chat with your party
+        aliases: [ptalk, pt]
+        usage: |
+            /pt message
+permissions:
   usb.*:
     children:
       usb.island.*:
@@ -48,6 +53,8 @@ permissions:
             description: Let the player use /island warp to warp to an open island.
           usb.island.ban:
             description: Let the player use /island ban to ban players from warping to their island.
+          usb.island.talk:
+            description: Let the player talk to the island (/islandtalk)
 
       usb.biome.*:
         children:
@@ -96,7 +103,7 @@ permissions:
           usb.party.join:
             description: Let a player join another player's party
           usb.party.talk:
-            description: Let the player use the /istalk command.
+            description: Let the player use the /partytalk command.
       usb.mod.*:
         children:
           usb.mod.protect:

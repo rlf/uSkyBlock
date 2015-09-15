@@ -17,7 +17,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 /**
  * The chat command for party messages
  */
-public class IslandChatCommand extends AbstractCommandExecutor {
+public abstract class IslandChatCommand extends AbstractCommandExecutor {
     private final uSkyBlock plugin;
     private final List<String> ALONE = Arrays.asList(
             tr("But you are ALLLLLLL ALOOOOONE!"),
@@ -26,8 +26,8 @@ public class IslandChatCommand extends AbstractCommandExecutor {
             tr("But you are Talking to your self!")
     );
 
-    public IslandChatCommand(uSkyBlock plugin) {
-        super("islandtalk|istalk|it", "usb.party.talk", tr("talk to your party"));
+    public IslandChatCommand(uSkyBlock plugin, String name, String permission, String description) {
+        super(name, permission, description);
         this.plugin = plugin;
     }
 
@@ -47,11 +47,11 @@ public class IslandChatCommand extends AbstractCommandExecutor {
             for (int ix = 1; ix < args.length; ix++) {
                 message += " " + args[ix]; // Java 8 has String.join - not guaranteed here
             }
-            String format = plugin.getConfig().getString("options.party.chat-format", "&9{DISPLAYNAME} &f>&e {MESSAGE}");
+            String format = getFormat();
             format = FormatUtil.normalize(format);
             format = format.replaceAll("\\{DISPLAYNAME\\}", player.getDisplayName());
             message = format.replaceAll("\\{MESSAGE\\}", message);
-            List<Player> onlineMembers = islandInfo.getOnlineMembers();
+            List<Player> onlineMembers = getRecipients(islandInfo);
             if (onlineMembers.size() <= 1) {
                 player.sendMessage(tr("\u00a7cSorry! {0}",  "\u00a79" + ALONE.get(((int)Math.round(Math.random() * ALONE.size())) % ALONE.size())));
             } else {
@@ -61,4 +61,8 @@ public class IslandChatCommand extends AbstractCommandExecutor {
         }
         return false;
     }
+
+    protected abstract String getFormat();
+
+    protected abstract List<Player> getRecipients(IslandInfo islandInfo);
 }

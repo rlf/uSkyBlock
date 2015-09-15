@@ -973,6 +973,10 @@ msgstr "Vertraue/Mistraue einen Spieler auf deiner Insel."
 msgid "§eThe following players are trusted on your island:"
 msgstr "§eDu vertraust den folgenden Spielern auf deiner Insel:"
 
+#, fuzzy
+msgid "§eThe following leaders trusts you:"
+msgstr "§eDu vertraust den folgenden Spielern auf deiner Insel:"
+
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
 msgstr ""
 "§eUm einen Spieler zu Vertrauen/Mistrauen gib : „/island trust <player>“ ein."
@@ -1070,16 +1074,20 @@ msgstr ""
 msgid "But you are Talking to your self!"
 msgstr ""
 
-#, fuzzy
-msgid "talk to your party"
-msgstr "Verlasse deine Gruppe"
-
 #, java-format
 msgid "§cSorry! {0}"
 msgstr ""
 
 msgid "general island command"
 msgstr "Allgemeine Insel Befehle"
+
+#, fuzzy
+msgid "talk to your island (party+trustees)"
+msgstr "Verlasse deine Gruppe"
+
+#, fuzzy
+msgid "talk to your island party"
+msgstr "Verlasse deine Gruppe"
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
 msgstr ""

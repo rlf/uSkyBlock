@@ -94,6 +94,9 @@ options:
     # Note: will make the PlayerJoin event take longer.
     fixFlatland: false
 
+    # The format used in /islandtalk chat messages
+    chat-format: '&9SKY &r{DISPLAYNAME} &f>&d {MESSAGE}'
+
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.
   extra-menus:
@@ -171,8 +174,8 @@ options:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
     invite-timeout: 600
 
-    # The format used in /istalk chat messages
-    chat-format: '&9SKY &r{DISPLAYNAME} &f>&d {MESSAGE}'
+    # The format used in /partytalk chat messages
+    chat-format: '&9PARTY &r{DISPLAYNAME} &f>&b {MESSAGE}'
 
     # List of permissions and their corresponding maxPartySize (overrides maxPartySize)
     maxPartyPermissions:
