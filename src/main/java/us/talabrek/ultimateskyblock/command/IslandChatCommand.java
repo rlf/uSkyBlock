@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
 
+import java.util.List;
+
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
@@ -41,7 +43,12 @@ public class IslandChatCommand extends AbstractCommandExecutor {
             format = FormatUtil.normalize(format);
             format = format.replaceAll("\\{DISPLAYNAME\\}", player.getDisplayName());
             message = format.replaceAll("\\{MESSAGE\\}", message);
-            islandInfo.sendMessageToOnlineMembers(message);
+            List<Player> onlineMembers = islandInfo.getOnlineMembers();
+            if (onlineMembers.size() <= 1) {
+                player.sendMessage("\u00a7cSorry! \u00a9But you are ALLLLLLL ALOOOOONE!");
+            } else {
+                islandInfo.sendMessageToOnlineMembers(message);
+            }
             return true;
         }
         return false;
