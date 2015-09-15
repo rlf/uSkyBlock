@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-15 23:55+0200\n"
+"POT-Creation-Date: 2015-09-16 00:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1114,7 +1114,6 @@ msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/PartyCommand.java:81
 #: us/talabrek/ultimateskyblock/command/island/RequireIslandCommand.java:44
-#: us/talabrek/ultimateskyblock/command/IslandChatCommand.java:43
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr ""
 
@@ -1313,7 +1312,7 @@ msgstr ""
 msgid "But you are Talking to your self!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/IslandChatCommand.java:56
+#: us/talabrek/ultimateskyblock/command/IslandChatCommand.java:52
 #, java-format
 msgid "§cSorry! {0}"
 msgstr ""
@@ -1322,11 +1321,11 @@ msgstr ""
 msgid "general island command"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/IslandTalkCommand.java:20
-msgid "talk to your island (party+trustees)"
+#: us/talabrek/ultimateskyblock/command/IslandTalkCommand.java:21
+msgid "talk to players on your island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/PartyTalkCommand.java:18
+#: us/talabrek/ultimateskyblock/command/PartyTalkCommand.java:19
 msgid "talk to your island party"
 msgstr ""
 
