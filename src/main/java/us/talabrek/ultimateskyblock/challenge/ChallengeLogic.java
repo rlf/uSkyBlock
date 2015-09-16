@@ -3,6 +3,8 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -14,6 +16,7 @@ import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -30,6 +33,7 @@ public class ChallengeLogic {
     public static final int MS_HOUR = 60*MS_MIN;
     public static final long MS_DAY = 24*MS_HOUR;
     public static final int ROWS_OF_RANKS = 6;
+    public static final int CHALLENGE_PAGESIZE = ROWS_OF_RANKS * 9;
 
     private final FileConfiguration config;
     private final uSkyBlock skyBlock;
@@ -337,7 +341,7 @@ public class ChallengeLogic {
         }
         player.giveExp(reward.getXpReward());
         if (defaults.broadcastCompletion && isFirstCompletion) {
-            Bukkit.getServer().broadcastMessage(config.getString("broadcastText") + player.getName() + " has completed the " + challengeName + " challenge!");
+            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("{0} has completed the {1} challenge!", player.getName() , challengeName));
         }
         player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
         player.sendMessage(tr("\u00a7eExp reward: \u00a7f{0,number,#.#}", reward.getXpReward()));
@@ -374,6 +378,7 @@ public class ChallengeLogic {
         Challenge challenge = getChallenge(challengeName);
         ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
         ItemStack currentChallengeItem = challenge.getDisplayItem(completion, defaults.enableEconomyPlugin);
+        /*
         if (completion.getTimesCompleted() == 0) {
             currentChallengeItem.setType(Material.STAINED_GLASS_PANE);
             currentChallengeItem.setDurability((short) 4);
@@ -381,12 +386,16 @@ public class ChallengeLogic {
             currentChallengeItem.setType(Material.STAINED_GLASS_PANE);
             currentChallengeItem.setDurability((short) 13);
         }
+        */
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = meta.getLore();
         if (challenge.isRepeatable() || completion.getTimesCompleted() == 0) {
             lores.add(tr("\u00a7e\u00a7lClick to complete this challenge."));
         } else {
             lores.add(tr("\u00a74\u00a7lYou can't repeat this challenge."));
+        }
+        if (completion.getTimesCompleted() > 0) {
+            meta.addEnchant(new EnchantmentWrapper(0), 0, false);
         }
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
@@ -428,54 +437,87 @@ public class ChallengeLogic {
         List<Rank> ranksOnPage = new ArrayList<>(ranks.values());
         // page 1 = 0-4, 2 = 5-8, ...
         if (page > 0) {
-            ranksOnPage = ranksOnPage.subList(((page-1)* ROWS_OF_RANKS), Math.min(page*ROWS_OF_RANKS, ranksOnPage.size()));
+            ranksOnPage = getRanksForPage(page, ranksOnPage);
         }
         int location = 0;
         for (Rank rank : ranksOnPage) {
-            populateChallengeRank(menu, player, rank, location, pi);
-            location += 9;
+            location = populateChallengeRank(menu, player, rank, location, pi);
+            if ((location % 9) != 0) {
+                location += (9 - (location % 9)); // Skip the rest of that line
+            }
+            if (location >= CHALLENGE_PAGESIZE) {
+                break;
+            }
         }
     }
 
-    public void populateChallengeRank(Inventory menu, final Player player, final Rank rank, int location, final PlayerInfo playerInfo) {
+    private List<Rank> getRanksForPage(int page, List<Rank> ranksOnPage) {
+        int rowsToSkip = (page - 1) * ROWS_OF_RANKS;
+        for (Iterator<Rank> it = ranksOnPage.iterator(); it.hasNext(); ) {
+            Rank rank = it.next();
+            int rowsInRank = (int) Math.ceil(rank.getChallenges().size() / 8f);
+            if (rowsToSkip <= 0 || ((rowsToSkip - rowsInRank) < 0)) {
+                return ranksOnPage;
+            }
+            rowsToSkip -= rowsInRank;
+            it.remove();
+        }
+        return ranksOnPage;
+    }
+
+    private int calculateRows(List<Rank> ranksOnPage) {
+        int row = 0;
+        for (Rank rank : ranksOnPage) {
+            row += Math.ceil(rank.getChallenges().size() / 8f);
+        }
+        return row;
+    }
+
+    public int populateChallengeRank(Inventory menu, final Player player, final Rank rank, int location, final PlayerInfo playerInfo) {
         List<String> lores = new ArrayList<>();
         ItemStack currentChallengeItem = rank.getDisplayItem();
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
-        meta4.setDisplayName("\u00a7e\u00a7lRank: " + rank.getName());
+        meta4.setDisplayName("\u00a7e\u00a7l" + tr("Rank: {0}",  rank.getName()));
         lores.add(tr("\u00a7fComplete most challenges in"));
         lores.add(tr("\u00a7fthis rank to unlock the next rank."));
-        if (location < SkyBlockMenu.CHALLENGE_PAGESIZE/2) {
+        if (location < (CHALLENGE_PAGESIZE/2)) {
             lores.add(tr("\u00a7eClick here to show previous page"));
         } else {
             lores.add(tr("\u00a7eClick here to show next page"));
         }
         meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
-        menu.setItem(location, currentChallengeItem);
+        menu.setItem(location++, currentChallengeItem);
         List<String> missingRequirements = rank.getMissingRequirements(playerInfo);
         for (Challenge challenge : rank.getChallenges()) {
+            if ((location % 9) == 0) {
+                location++; // Skip rank-row
+            }
             lores.clear();
             String challengeName = challenge.getName();
             try {
+                currentChallengeItem = getItemStack(playerInfo, challengeName);
                 if (!missingRequirements.isEmpty()) {
-                    currentChallengeItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
                     meta4 = currentChallengeItem.getItemMeta();
                     meta4.setDisplayName(tr("\u00a74\u00a7lLocked Challenge"));
                     lores.addAll(missingRequirements);
                     meta4.setLore(lores);
                     currentChallengeItem.setItemMeta(meta4);
-                    menu.setItem(++location, currentChallengeItem);
-                } else {
-                    currentChallengeItem = getItemStack(playerInfo, challengeName);
-                    menu.setItem(++location, currentChallengeItem);
                 }
+                menu.setItem(location++, currentChallengeItem);
             } catch (Exception e) {
                 skyBlock.getLogger().log(Level.SEVERE, "Invalid challenge " + challenge, e);
             }
         }
+        return location;
     }
 
     public boolean isResetOnCreate() {
         return config.getBoolean("resetChallengesOnCreate", true);
+    }
+
+    public int getTotalPages() {
+        int totalRows = calculateRows(getRanks());
+        return (int) Math.ceil(1f * totalRows / ROWS_OF_RANKS);
     }
 }

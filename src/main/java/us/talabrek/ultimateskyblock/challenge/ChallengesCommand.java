@@ -58,7 +58,9 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                 player.sendMessage(tr("\u00a7eUse /c <name> to view information about a challenge."));
                 player.sendMessage(tr("\u00a7eUse /c complete <name> to attempt to complete that challenge."));
                 player.sendMessage(tr("\u00a7eChallenges will have different colors depending on if they are:"));
-                player.sendMessage(challengeLogic.defaults.challengeColor + "Incomplete " + challengeLogic.defaults.finishedColor + "Completed (not repeatable) " + challengeLogic.defaults.repeatableColor + "Completed(repeatable) ");
+                player.sendMessage(challengeLogic.defaults.challengeColor + tr("Incomplete") + " "
+                        + challengeLogic.defaults.finishedColor + tr("Completed (not repeatable)") + " "
+                        + challengeLogic.defaults.repeatableColor + tr("Completed(repeatable)"));
             } else if (challenge != null && challenge.getRank().isAvailable(playerInfo)) {
                 player.sendMessage("\u00a7eChallenge Name: " + ChatColor.WHITE + arg.toLowerCase());
                 player.sendMessage("\u00a7e" + challenge.getDescription());
@@ -67,10 +69,10 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                         player.sendMessage(tr("\u00a74You will lose all required items when you complete this challenge!"));
                     }
                 } else if (challenge.getType() == Challenge.Type.ISLAND) {
-                    player.sendMessage(tr("\u00a74All required items must be placed on your island, within " + challenge.getRadius() + " blocks of you."));
+                    player.sendMessage(tr("\u00a74All required items must be placed on your island, within {0} blocks of you.", challenge.getRadius()));
                 }
                 if (challengeLogic.getRanks().size() > 1) {
-                    player.sendMessage("\u00a7eRank: " + ChatColor.WHITE + challenge.getRank());
+                    player.sendMessage(tr("\u00a7eRank: ") + ChatColor.WHITE + challenge.getRank());
                 }
                 ChallengeCompletion completion = playerInfo.getChallenge(arg);
                 if (completion.getTimesCompleted() > 0 && !challenge.isRepeatable()) {
@@ -83,7 +85,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
                         player.sendMessage(lore);
                     }
                 }
-                player.sendMessage("\u00a7eTo complete this challenge, use " + "\u00a7f/c c " + arg.toLowerCase());
+                player.sendMessage(tr("\u00a7eTo complete this challenge, use \u00a7f/c c {0}", arg.toLowerCase()));
             } else {
                 player.sendMessage(tr("\u00a74Invalid challenge name! Use /c help for more information"));
             }

@@ -103,6 +103,10 @@ msgstr "§eDir fehlen:{0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aDu hast die {0} Aufgebe beendet!"
 
+#, fuzzy, java-format
+msgid "{0} has completed the {1} challenge!"
+msgstr "§aDu hast die {0} Aufgebe beendet!"
+
 #, java-format
 msgid "§eItem reward(s): §f{0}"
 msgstr "§eGegenstandsbelohnung: §f{0}"
@@ -123,6 +127,10 @@ msgstr "§e§lKlick hier um die Aufgabe zu beenden!"
 
 msgid "§4§lYou can't repeat this challenge."
 msgstr "§4§lDu kannst diese Aufgabe nicht wiederholen!"
+
+#, fuzzy, java-format
+msgid "Rank: {0}"
+msgstr "§9Stufe ist {0}"
 
 msgid "§fComplete most challenges in"
 msgstr "§fBeende die meisten aufgaben in"
@@ -160,19 +168,51 @@ msgstr "§eBenutze /c complete <name> um die Aufgabe Abzuschliesen."
 msgid "§eChallenges will have different colors depending on if they are:"
 msgstr "§eAufgaben haben unterschiedliche Farben, abhängig von:"
 
+msgid "Incomplete"
+msgstr ""
+
+#, fuzzy
+msgid "Completed (not repeatable)"
+msgstr "§4Diese Aufgabe kannst du nicht wiederholen!"
+
+msgid "Completed(repeatable)"
+msgstr ""
+
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr ""
 "§4Du wirst alle Benötigten Gegenstände zerstören wenn du die Aufgabe "
 "beendest."
 
-msgid "§4All required items must be placed on your island, within "
+#, fuzzy, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
 msgstr "§4Alle benötigten Gegenstände musst du auf deiner Insel plazieren in"
+
+#, fuzzy
+msgid "§eRank: "
+msgstr "§9Stufe ist {0}"
 
 msgid "§4This Challenge is not repeatable!"
 msgstr "§4Diese Aufgabe kannst du nicht wiederholen!"
 
+#, fuzzy, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§e§lKlick hier um die Aufgabe zu beenden!"
+
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Ungültiger Aufgaben Name! Benutze /c help für mehr Informationen."
+
+#, fuzzy, java-format
+msgid "Complete {0} more {1} challenges"
+msgstr "§fBeende die meisten aufgaben in"
+
+#, java-format
+msgid "§7Complete {0}"
+msgstr ""
+
+#, fuzzy
+msgid "to unlock this rank"
+msgstr "§fDiese Stufe um die nächste Stufe Freizuschalten."
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -835,7 +875,8 @@ msgstr "§4Du musst in der SkyBlock Welt sein um die Gruppe zu verlassen!"
 msgid "check your or anothers island level"
 msgstr "Zeige die Stufe deiner oder einer anderen Insel"
 
-msgid "§eInformation about "
+#, fuzzy, java-format
+msgid "§eInformation about {0}'s Island:"
 msgstr "$eInfotmationen über"
 
 #, java-format
@@ -1082,8 +1123,8 @@ msgid "general island command"
 msgstr "Allgemeine Insel Befehle"
 
 #, fuzzy
-msgid "talk to your island (party+trustees)"
-msgstr "Verlasse deine Gruppe"
+msgid "talk to players on your island"
+msgstr "Läd einen Anderen Spieler auf deine Insel ein."
 
 #, fuzzy
 msgid "talk to your island party"
@@ -1186,7 +1227,7 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDeine Stufe ist: §f{0}"
 
-msgid "Challenge Menu "
+msgid "Challenge Menu"
 msgstr "Aufgaben Menue"
 
 #, fuzzy
@@ -1573,9 +1614,6 @@ msgstr "§e§lKlicke um zu diesem Biome zu wechseln."
 #, fuzzy
 msgid "You cannot use this biome."
 msgstr "§c§lDu kannst das Biome nicht ändern."
-
-msgid "Challenge Menu"
-msgstr "Aufgaben Menue"
 
 #, java-format
 msgid "{0} ({1}/{2})"
@@ -1964,6 +2002,13 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#~ msgid "Challenge Menu "
+#~ msgstr "Aufgaben Menue"
+
+#, fuzzy
+#~ msgid "talk to your island (party+trustees)"
+#~ msgstr "Verlasse deine Gruppe"
 
 #, fuzzy
 #~ msgid "§4Your island data is being loaded, please try again later."

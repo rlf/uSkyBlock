@@ -13,9 +13,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,25 +23,25 @@ import java.util.logging.Logger;
  */
 public class PlayerLogic {
     private static final Logger log = Logger.getLogger(PlayerLogic.class.getName());
-    private final LoadingCache<String, PlayerInfo> playerCache;
+    private final LoadingCache<UUID, PlayerInfo> playerCache;
     private final uSkyBlock plugin;
     private final BukkitTask saveTask;
     public PlayerLogic(uSkyBlock plugin) {
         this.plugin = plugin;
         playerCache = CacheBuilder
                 .from(plugin.getConfig().getString("options.advanced.playerCache", "maximumSize=200,expireAfterWrite=15m,expireAfterAccess=10m"))
-                .removalListener(new RemovalListener<String, PlayerInfo>() {
+                .removalListener(new RemovalListener<UUID, PlayerInfo>() {
                     @Override
-                    public void onRemoval(RemovalNotification<String, PlayerInfo> removal) {
+                    public void onRemoval(RemovalNotification<UUID, PlayerInfo> removal) {
                         PlayerInfo playerInfo = removal.getValue();
                         if (playerInfo.isDirty()) {
                             playerInfo.saveToFile();
                         }
                     }
                 })
-                .build(new CacheLoader<String, PlayerInfo>() {
+                .build(new CacheLoader<UUID, PlayerInfo>() {
                            @Override
-                           public PlayerInfo load(String s) throws Exception {
+                           public PlayerInfo load(UUID s) throws Exception {
                                return loadPlayerData(s);
                            }
                        }
@@ -67,7 +65,11 @@ public class PlayerLogic {
     }
 
     public PlayerInfo loadPlayerData(String playerName) {
-        return loadPlayerData(Bukkit.getOfflinePlayer(playerName));
+        return loadPlayerData(Bukkit.getPlayerExact(playerName));
+    }
+
+    public PlayerInfo loadPlayerData(UUID uuid) {
+        return loadPlayerData(Bukkit.getOfflinePlayer(uuid));
     }
 
     public PlayerInfo loadPlayerData(OfflinePlayer player) {
@@ -101,9 +103,13 @@ public class PlayerLogic {
     }
 
     public PlayerInfo getPlayerInfo(String playerName) {
+        OfflinePlayer offlinePlayer = Bukkit.getPlayerExact(playerName);
+        if (offlinePlayer == null) {
+            return null;
+        }
         // Do not return anything if it is loading.
         try {
-            return playerCache.get(playerName);
+            return playerCache.get(offlinePlayer.getUniqueId());
         } catch (ExecutionException e) {
             throw new IllegalStateException(e); // Escalate - we need it in the server log
         }
@@ -113,7 +119,7 @@ public class PlayerLogic {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                playerCache.refresh(player.getName());
+                playerCache.refresh(player.getUniqueId());
             }
         });
     }

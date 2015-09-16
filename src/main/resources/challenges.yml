@@ -187,6 +187,7 @@ ranks:
         type: islandLevel
         requiredItems: '20'
         repeatable: false
+        displayItem: 98
         reward:
           items: '257:1 3:5'
           text: '1 iron pickaxe, 5 dirt'
@@ -291,6 +292,7 @@ ranks:
         description: 'Reach island level 100.'
         type: islandLevel
         requiredItems: '100'
+        displayItem: 45
         reward:
           items: '49:12'
           text: '12 obsidian'
@@ -300,6 +302,7 @@ ranks:
         description: 'Build a house with furnishings.'
         type: onIsland
         requiredItems: '26:1 58:1 20:1 64:1 61:1 47:1 50:1'
+        displayItem: 64
         reward:
           items: '84:1 2267:1 22:10'
           text: '1 jukebox, 1 disk and 10 lapis lazuli'
@@ -314,6 +317,7 @@ ranks:
         description: 'Build a nether portal on your island.'
         type: onIsland
         requiredItems: '49:10 90:1'
+        displayItem: 49
         reward:
           items: '276:1'
           text: '1 diamond sword'
@@ -410,6 +414,7 @@ ranks:
         description: 'Reach island level 250.'
         type: islandLevel
         requiredItems: '250'
+        displayItem: 112
         reward:
           items: '264:1 3:32 12:32'
           text: '1 diamond, 32 dirt, 32 sand'
@@ -540,6 +545,7 @@ ranks:
         description: 'Get an island level of 1000.'
         type: islandLevel
         requiredItems: '1000'
+        displayItem: 120
         reward:
           items: '264:1 120:12'
           text: '1 diamond & 1 end-portal'
@@ -550,7 +556,7 @@ ranks:
            - 'op:effect {party} 10 10'
            - '{d=200}op:effect {player} 8 10'
   Skylord:
-    displayItem: BEACON
+    displayItem: '120:7'
     requires:
       challenges:
       - expertbuilder
@@ -562,6 +568,7 @@ ranks:
         description: 'Build a very expensive beacon.'
         type: onIsland
         radius: 12
+        displayItem: 138
         requiredItems: '138:1 57:1 133:8 41:25 42:49'
         reward:
           items: '174:16 80:4'
@@ -632,6 +639,7 @@ ranks:
         description: 'Obtain a whole village.'
         type: onIsland
         radius: 32
+        displayItem: '383:120'
         requiredEntities:
         - 'Villager:{"Profession":"FARMER"}'
         - 'Villager:{"Profession":"LIBRARIAN"}'
@@ -644,6 +652,7 @@ ranks:
         description: 'Create a mega-farm'
         type: onIsland
         radius: 40
+        displayItem: '383:91'
         requiredEntities:
         - 'Cow:8'
         - 'Pig:8'
@@ -716,4 +725,4 @@ ranks:
           currency: 50
           xp: 50
 # DO NOT CHANGE!
-version: 9
+version: 10

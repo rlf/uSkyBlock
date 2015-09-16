@@ -98,6 +98,10 @@ msgstr "§e你缺少以下物品: {0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§a你完成了挑战:§e {0}"
 
+#, fuzzy, java-format
+msgid "{0} has completed the {1} challenge!"
+msgstr "§a你完成了挑战:§e {0}"
+
 #, java-format
 msgid "§eItem reward(s): §f{0}"
 msgstr "§e物品奖励: §f{0}"
@@ -118,6 +122,10 @@ msgstr "§e§l点击来完成这个挑战。"
 
 msgid "§4§lYou can't repeat this challenge."
 msgstr "§4§l你无法重复完成这个挑战。"
+
+#, fuzzy, java-format
+msgid "Rank: {0}"
+msgstr "§9排名: {0}"
 
 msgid "§fComplete most challenges in"
 msgstr "§f完成大部分挑战在"
@@ -157,17 +165,49 @@ msgstr "§e输入/c complete <name> 来完成一个挑战。"
 msgid "§eChallenges will have different colors depending on if they are:"
 msgstr "§e挑战将会根据不同难度显示不同颜色:"
 
+msgid "Incomplete"
+msgstr ""
+
+#, fuzzy
+msgid "Completed (not repeatable)"
+msgstr "§4当前任务不可重复。"
+
+msgid "Completed(repeatable)"
+msgstr ""
+
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr "§4挑战所需物品将会从你背包内移除。"
 
-msgid "§4All required items must be placed on your island, within "
+#, fuzzy, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
 msgstr "§4所有挑战所需物品必须放在你岛屿上,并且在一定范围内:"
+
+#, fuzzy
+msgid "§eRank: "
+msgstr "§9排名: {0}"
 
 msgid "§4This Challenge is not repeatable!"
 msgstr "§4当前任务不可重复。"
 
+#, fuzzy, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§e§l点击来完成这个挑战。"
+
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4错误的挑战名!输入/c help 获取更多信息"
+
+#, fuzzy, java-format
+msgid "Complete {0} more {1} challenges"
+msgstr "§f完成大部分挑战在"
+
+#, java-format
+msgid "§7Complete {0}"
+msgstr ""
+
+#, fuzzy
+msgid "to unlock this rank"
+msgstr "§f这个难度中，才能解锁下一个等级。"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -809,7 +849,8 @@ msgstr "§4你必须在岛屿世界才能离开你的团队!"
 msgid "check your or anothers island level"
 msgstr ""
 
-msgid "§eInformation about "
+#, fuzzy, java-format
+msgid "§eInformation about {0}'s Island:"
 msgstr "§e相关信息"
 
 #, java-format
@@ -1045,8 +1086,9 @@ msgstr ""
 msgid "general island command"
 msgstr ""
 
-msgid "talk to your island (party+trustees)"
-msgstr ""
+#, fuzzy
+msgid "talk to players on your island"
+msgstr "{0}§e早就是你们岛屿的成员了!"
 
 #, fuzzy
 msgid "talk to your island party"
@@ -1138,7 +1180,8 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§e你的排名是: §f{0}"
 
-msgid "Challenge Menu "
+#, fuzzy
+msgid "Challenge Menu"
 msgstr "调整菜单"
 
 #, fuzzy
@@ -1525,10 +1568,6 @@ msgstr "§e§l点击将会更改为这个生物群系."
 msgid "You cannot use this biome."
 msgstr "§c§l你没有权限更改生物群系."
 
-#, fuzzy
-msgid "Challenge Menu"
-msgstr "调整菜单"
-
 #, java-format
 msgid "{0} ({1}/{2})"
 msgstr ""
@@ -1900,6 +1939,9 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#~ msgid "Challenge Menu "
+#~ msgstr "调整菜单"
 
 #~ msgid "§cYou were removed from your island since the last time you played!"
 #~ msgstr "§c因为你太久未登陆,所以你被从岛屿上移除了"

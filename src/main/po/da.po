@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-15 23:55+0200\n"
+"PO-Revision-Date: 2015-09-16 20:48+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -101,6 +101,10 @@ msgid "§aYou have completed the {0} challenge!"
 msgstr "§aDo you gennemført {0}-udfordringen!"
 
 #, java-format
+msgid "{0} has completed the {1} challenge!"
+msgstr "{0} har gennemført {1} udfordringen!"
+
+#, java-format
 msgid "§eItem reward(s): §f{0}"
 msgstr "§ePræmie: §f{0}"
 
@@ -120,6 +124,10 @@ msgstr "§e§lKlik for at gennemføre udfordringen."
 
 msgid "§4§lYou can't repeat this challenge."
 msgstr "§4§lDu kan ikke gentage denne udfordring."
+
+#, java-format
+msgid "Rank: {0}"
+msgstr "Rank: {0}"
 
 msgid "§fComplete most challenges in"
 msgstr "§fGennemfør de fleste udfordringer"
@@ -157,18 +165,49 @@ msgstr "§eBrug §9/c complete <navn>§e for at gennemføre en udfordring."
 msgid "§eChallenges will have different colors depending on if they are:"
 msgstr "§eUdfordringer har forskellige farver, afhængigt af om de er:"
 
+msgid "Incomplete"
+msgstr "Uafsluttet"
+
+msgid "Completed (not repeatable)"
+msgstr "Gennemførte (engangs)"
+
+msgid "Completed(repeatable)"
+msgstr "Udført (gentagelige)"
+
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr ""
 "§4Du vil miste alle de påkrævede ting, når du gennemfører denne udfordring!"
 
-msgid "§4All required items must be placed on your island, within "
-msgstr "§4Alle de påkrævede elementer skal være på din ø, indenfor "
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4Alle de påkrævede elementer skal være på din ø, indenfor {0} meter fra "
+"dig. "
+
+msgid "§eRank: "
+msgstr "§eRank: "
 
 msgid "§4This Challenge is not repeatable!"
 msgstr "§4Denne udfording er ikke gentagelig!"
 
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§eFor at gennemføre denne udfordring, brug §f/c c {0}"
+
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Forkert udfordringsnavn!§e Brug §9/c help§e for mere info."
+
+#, java-format
+msgid "Complete {0} more {1} challenges"
+msgstr "Gennemfør yderligere {0} {1} udfordringer"
+
+#, java-format
+msgid "§7Complete {0}"
+msgstr "§7Gennemfør {0}"
+
+msgid "to unlock this rank"
+msgstr "for at låse denne rank op"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -810,8 +849,9 @@ msgstr "§4Du skal være i skyblock-verdenen for at forlade din ø!"
 msgid "check your or anothers island level"
 msgstr "check din eller en andens øs niveau"
 
-msgid "§eInformation about "
-msgstr "§eInformation om "
+#, java-format
+msgid "§eInformation about {0}'s Island:"
+msgstr "§eInformation om {0}s ø:"
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
@@ -1043,8 +1083,8 @@ msgstr "§cUndskyld! {0}"
 msgid "general island command"
 msgstr "generel ø kommando"
 
-msgid "talk to your island (party+trustees)"
-msgstr "tal til medlemmerne af din ø (medlemmer og betroede)"
+msgid "talk to players on your island"
+msgstr "snak med spillere på din ø"
 
 msgid "talk to your island party"
 msgstr "tal til medlemmerne af din ø"
@@ -1137,8 +1177,8 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin position er: §f{0}"
 
-msgid "Challenge Menu "
-msgstr "Udfordringer "
+msgid "Challenge Menu"
+msgstr "Udfordringer"
 
 msgid "change the islands's biome."
 msgstr "skift øens biome"
@@ -1493,9 +1533,6 @@ msgstr "§e§lKlik for at ændre biomen."
 
 msgid "You cannot use this biome."
 msgstr "Du kan ikke bruge denne biome."
-
-msgid "Challenge Menu"
-msgstr "Udfordringer"
 
 #, java-format
 msgid "{0} ({1}/{2})"
@@ -1859,6 +1896,12 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "Challenge Menu "
+#~ msgstr "Udfordringer "
+
+#~ msgid "talk to your island (party+trustees)"
+#~ msgstr "tal til medlemmerne af din ø (medlemmer og betroede)"
 
 #~ msgid "§4Your island data is being loaded, please try again later."
 #~ msgstr "§4Din ø er ved at blive hentet, prøv igen senere."

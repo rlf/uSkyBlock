@@ -1,11 +1,8 @@
 package us.talabrek.ultimateskyblock.challenge;
 
-import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
@@ -17,11 +14,12 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.util.ItemStackUtil.createItemStack;
+
 /**
  * Builder for Challenges (Note:
  */
 public class ChallengeFactory {
-    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<sub>[0-9]+))?");
     private static final Pattern ENTITY_PATTERN = Pattern.compile("(?<type>[a-zA-Z0-9]+)(?<meta>:\\{.*\\})?(:(?<count>[0-9]+))?");
     private static Logger log = Logger.getLogger(ChallengeFactory.class.getName());
 
@@ -114,31 +112,6 @@ public class ChallengeFactory {
                 section.getStringList("commands"));
     }
 
-
-    private static ItemStack createItemStack(String displayItem, String name, String description) {
-        Material material = Material.DIRT;
-        short subType = 0;
-        if (displayItem != null) {
-            Matcher matcher = ITEM_PATTERN.matcher(displayItem);
-            if (matcher.matches()) {
-                material = Material.getMaterial(Integer.parseInt(matcher.group("id"), 10));
-                subType = matcher.group("sub") != null ? (short) Integer.parseInt(matcher.group("sub"), 10) : 0;
-            }
-        }
-        if (material == null) {
-            throw new IllegalArgumentException("Unknown material " + displayItem);
-        }
-        ItemStack itemStack = new ItemStack(material, 1, subType);
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.setDisplayName(name);
-        List<String> lore = new ArrayList<>();
-        if (description != null) {
-            lore.add(description);
-        }
-        meta.setLore(lore);
-        itemStack.setItemMeta(meta);
-        return itemStack;
-    }
 
     public static Map<String, Rank> createRankMap(ConfigurationSection ranksSection, ChallengeDefaults defaults) {
         LinkedHashMap<String, Rank> ranks = new LinkedHashMap<>();

@@ -60,7 +60,7 @@ public class LevelCommand extends RequireIslandCommand {
             @Override
             public void run() {
                 if (player != null && player.isOnline() && playerInfo != null) {
-                    player.sendMessage(tr("\u00a7eInformation about " + islandPlayer + "'s Island:"));
+                    player.sendMessage(tr("\u00a7eInformation about {0}'s Island:", islandPlayer));
                     if (cmd.equalsIgnoreCase("level")) {
                         IslandRank rank = plugin.getIslandLogic().getRank(playerInfo.locationForParty());
                         player.sendMessage(new String[]{

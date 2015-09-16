@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.CHALLENGE_PAGESIZE;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
@@ -35,9 +36,8 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  * The UI menu of uSkyBlock (using the inventory UI).
  */
 public class SkyBlockMenu {
-    private static final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
-    private static final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu ") + "\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
-    public static final int CHALLENGE_PAGESIZE = 54;
+    private final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
+    private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock skyBlock;
     private final ChallengeLogic challengeLogic;
     ItemStack pHead = new ItemStack(397, 1, (short) 3);
@@ -378,7 +378,7 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayChallengeGUI(final Player player, int page) {
-        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE, "\u00a79" + tr("{0} ({1}/{2})", tr("Challenge Menu"), page, ((challengeLogic.getRanks().size() / 6) + 1)));
+        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE, "\u00a79" + tr("{0} ({1}/{2})", tr("Challenge Menu"), page, challengeLogic.getTotalPages()));
         final PlayerInfo pi = skyBlock.getPlayerInfo(player);
         challengeLogic.populateChallengeRank(menu, player, pi, page);
         return menu;
@@ -686,7 +686,7 @@ public class SkyBlockMenu {
             event.setCancelled(true);
             Matcher m = CHALLENGE_PAGE_HEADER.matcher(event.getInventory().getName());
             int page = 1;
-            int max = 1;
+            int max = challengeLogic.getTotalPages();
             if (m.find()) {
                 page = Integer.parseInt(m.group("p"));
                 max = Integer.parseInt(m.group("max"));
@@ -704,7 +704,7 @@ public class SkyBlockMenu {
                 p.openInventory(displayChallengeGUI(p, page));
             } else {
                 p.closeInventory();
-                if (event.getSlot() < CHALLENGE_PAGESIZE/2) { // Upper half
+                if (event.getSlot() < (CHALLENGE_PAGESIZE/2)) { // Upper half
                     if (page > 1) {
                         p.openInventory(displayChallengeGUI(p, page - 1));
                     } else {

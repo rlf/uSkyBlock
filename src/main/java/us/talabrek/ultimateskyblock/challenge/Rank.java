@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.challenge;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
@@ -9,6 +10,9 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.ItemStackUtil.createItemStack;
 
 /**
  * Data object of a rank.
@@ -54,12 +58,7 @@ public class Rank {
 
     public ItemStack getDisplayItem() {
         String displayItem = config.getString("displayItem", "DIRT");
-        Material material = Material.getMaterial(displayItem);
-        ItemStack itemStack = new ItemStack(material, 1);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(getName());
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
+        return createItemStack(displayItem, getName(), null);
     }
 
     public String getName() {
@@ -83,7 +82,7 @@ public class Rank {
                 int leeway = previousRank.getLeeway(playerInfo);
                 int rankLeeway = requires.getInt("rankLeeway", defaults.rankLeeway);
                 if (leeway > rankLeeway) {
-                    missing.add("\u00a77Complete " + (leeway-rankLeeway) + " more " + previousRank + " challenges");
+                    missing.add("\u00a77" +tr("Complete {0} more {1} challenges",  (leeway-rankLeeway), previousRank ));
                 }
             }
             for (String challengeName : requires.getStringList("challenges")) {
@@ -96,17 +95,17 @@ public class Rank {
                     sb.append(challengeName);
                 }
                 if (sb.length() > 0) {
-                    missing.add("\u00a77Complete " + sb.toString());
+                    missing.add(tr("\u00a77Complete {0}", sb.toString()));
                 }
             }
             if (!missing.isEmpty()) {
-                missing.add("\u00a77to unlock this rank");
+                missing.add("\u00a77" + tr("to unlock this rank"));
             }
         } else if (defaults.requiresPreviousRank) {
             if (previousRank != null) {
                 int leeway = previousRank.getLeeway(playerInfo);
                 if (leeway > defaults.rankLeeway) {
-                    missing.add("\u00a77Complete " + (leeway-defaults.rankLeeway) + " more " + previousRank + " challenges");
+                    missing.add("\u00a77" +tr("Complete {0} more {1} challenges",  (leeway-defaults.rankLeeway), previousRank ));
                 }
             }
         }

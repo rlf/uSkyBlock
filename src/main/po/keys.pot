@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-16 00:33+0200\n"
+"POT-Creation-Date: 2015-09-16 22:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,18 +59,18 @@ msgstr ""
 msgid "§dTotal times completed: §f{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:91
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:95
 #, java-format
 msgid "§4No challenge named {0} found"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:96
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:100
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:101
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:112
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:105
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:116
 #: us/talabrek/ultimateskyblock/command/island/BanCommand.java:24
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:26
 #: us/talabrek/ultimateskyblock/command/island/TrustCommand.java:28
@@ -78,95 +78,105 @@ msgstr ""
 msgid "§4{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:102
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:106
 msgid "§4You don't have enough of the required item(s)!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:108
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:112
 msgid "§4You must be on your island to do that!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:113
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:117
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:119
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:123
 #, java-format
 msgid "§4Your island must be level {0} to complete this challenge!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:157
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:161
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:203
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:207
 #, java-format
 msgid "§eStill the following blocks short: {0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:255
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:259
 #, java-format
 msgid ""
 "§eStill the following entities short:\n"
 "{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:283
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:287
 #, java-format
 msgid "§eYou are the following items short:{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:306
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:310
 #, java-format
 msgid "§aYou have completed the {0} challenge!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:342
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:344
+#, java-format
+msgid "{0} has completed the {1} challenge!"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:346
 #, java-format
 msgid "§eItem reward(s): §f{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:343
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:347
 #, java-format
 msgid "§eExp reward: §f{0,number,#.#}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:345
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:349
 #, java-format
 msgid "§eCurrency reward: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:359
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:363
 msgid "§eYour inventory is §4full§e. Items dropped on the ground."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:387
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:393
 msgid "§e§lClick to complete this challenge."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:389
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:395
 msgid "§4§lYou can't repeat this challenge."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:445
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:480
+#, java-format
+msgid "Rank: {0}"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:481
 msgid "§fComplete most challenges in"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:446
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:482
 msgid "§fthis rank to unlock the next rank."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:448
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:484
 msgid "§eClick here to show previous page"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:450
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:486
 msgid "§eClick here to show next page"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:463
+#: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:502
 msgid "§4§lLocked Challenge"
 msgstr ""
 
@@ -200,20 +210,58 @@ msgstr ""
 msgid "§eChallenges will have different colors depending on if they are:"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:67
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:61
+msgid "Incomplete"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:62
+msgid "Completed (not repeatable)"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:63
+msgid "Completed(repeatable)"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:69
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:70
-msgid "§4All required items must be placed on your island, within "
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:72
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:77
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:75
+msgid "§eRank: "
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:79
 msgid "§4This Challenge is not repeatable!"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:88
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/ChallengesCommand.java:90
 msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/Rank.java:85
+#: us/talabrek/ultimateskyblock/challenge/Rank.java:108
+#, java-format
+msgid "Complete {0} more {1} challenges"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/Rank.java:98
+#, java-format
+msgid "§7Complete {0}"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/challenge/Rank.java:102
+msgid "to unlock this rank"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/admin/AbstractAsyncIslandInfoCommand.java:42
@@ -1032,7 +1080,8 @@ msgid "check your or anothers island level"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:63
-msgid "§eInformation about "
+#, java-format
+msgid "§eInformation about {0}'s Island:"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/LevelCommand.java:67
@@ -1437,8 +1486,10 @@ msgstr ""
 msgid "§eYour rank is: §f{0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:39
-msgid "Challenge Menu "
+#: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:40
+#: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:381
+#: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:685
+msgid "Challenge Menu"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:53
@@ -1783,11 +1834,6 @@ msgstr ""
 
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:279
 msgid "You cannot use this biome."
-msgstr ""
-
-#: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:381
-#: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:685
-msgid "Challenge Menu"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:381

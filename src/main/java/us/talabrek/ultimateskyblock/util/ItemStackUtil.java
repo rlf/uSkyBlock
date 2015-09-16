@@ -1,6 +1,9 @@
 package us.talabrek.ultimateskyblock.util;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +17,8 @@ import java.util.regex.Pattern;
  */
 public enum ItemStackUtil {;
     private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<id>[0-9]+)(:(?<sub>[0-9]+))?(:(?<meta>\\{.*\\}))?:(?<amount>[0-9]+)");
+    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<sub>[0-9]+))?");
+    private static final Pattern ITEM_NAME_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)(:(?<sub>[0-9]+))?");
 
     public static Map<ItemStack, Double> createItemsWithProbabilty(List<String> items) {
         Map<ItemStack, Double> map = new HashMap<>();
@@ -55,4 +60,33 @@ public enum ItemStackUtil {;
         return createItemList(items).toArray(new ItemStack[0]);
     }
 
+    public static ItemStack createItemStack(String displayItem, String name, String description) {
+        Material material = Material.DIRT;
+        short subType = 0;
+        if (displayItem != null) {
+            Matcher matcher = ITEM_PATTERN.matcher(displayItem);
+            Matcher nameMatcher = ITEM_NAME_PATTERN.matcher(displayItem);
+            if (matcher.matches()) {
+                material = Material.getMaterial(Integer.parseInt(matcher.group("id"), 10));
+                subType = matcher.group("sub") != null ? (short) Integer.parseInt(matcher.group("sub"), 10) : 0;
+            } else if (nameMatcher.matches()) {
+                material = Material.getMaterial(nameMatcher.group("id"));
+                subType = nameMatcher.group("sub") != null ? (short) Integer.parseInt(nameMatcher.group("sub"), 10) : 0;
+            }
+        }
+        if (material == null) {
+            Bukkit.getLogger().warning("Invalid material " + displayItem + " supplied!");
+            material = Material.BARRIER;
+        }
+        ItemStack itemStack = new ItemStack(material, 1, subType);
+        ItemMeta meta = itemStack.getItemMeta();
+        meta.setDisplayName(name);
+        List<String> lore = new ArrayList<>();
+        if (description != null) {
+            lore.add(description);
+        }
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+        return itemStack;
+    }
 }
