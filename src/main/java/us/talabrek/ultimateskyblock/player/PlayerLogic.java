@@ -65,7 +65,7 @@ public class PlayerLogic {
     }
 
     public PlayerInfo loadPlayerData(String playerName) {
-        return loadPlayerData(Bukkit.getPlayerExact(playerName));
+        return loadPlayerData(Bukkit.getOfflinePlayer(playerName));
     }
 
     public PlayerInfo loadPlayerData(UUID uuid) {
@@ -103,7 +103,7 @@ public class PlayerLogic {
     }
 
     public PlayerInfo getPlayerInfo(String playerName) {
-        OfflinePlayer offlinePlayer = Bukkit.getPlayerExact(playerName);
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
         if (offlinePlayer == null) {
             return null;
         }

@@ -509,16 +509,10 @@ msgstr ""
 msgid "§eClearing all old (empty) island locations."
 msgstr "§e清除所有旧(空)的岛屿坐标。"
 
-msgid "save orphans"
-msgstr ""
-
-msgid "§eSaving the orphan list."
-msgstr "§e存储孤岛列表"
-
 msgid "list orphans"
 msgstr ""
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eOrphans: {0}"
 msgstr "§e孤岛: {0}"
 
@@ -531,8 +525,8 @@ msgstr "§4一个清理任务正在进行中,请等待执行结束。"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4你必须指定一个天数来删除。"
 
-#, java-format
-msgid "§eMarking all islands inactive for more than {0} days."
+#, fuzzy, java-format
+msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§e标记所有未活跃天数超过 {0} 天的岛屿。"
 
 #, fuzzy
@@ -552,6 +546,16 @@ msgstr "§e配置重读。"
 
 msgid "§eConfiguration reloaded from file."
 msgstr "§e配置重读。"
+
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr ""
+
+#, java-format
+msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgstr ""
+
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+msgstr ""
 
 msgid "displays version information"
 msgstr ""
@@ -1162,6 +1166,10 @@ msgstr "§4因为你的岛屿处于锁定状态,岛屿传送点也将禁用."
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d禁止了岛屿传送点."
+
+#, fuzzy, java-format
+msgid "§b{0}§d has been removed from the island group."
+msgstr "§4{0}被从当前岛屿上移除."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
@@ -1888,8 +1896,8 @@ msgstr "无法为你创建岛屿.请联系管理员."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-msgid "Player doesn't have an island or it's already protected!"
-msgstr "玩家未拥有岛屿,或者已经被保护了!"
+msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgstr ""
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -1939,6 +1947,12 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#~ msgid "§eSaving the orphan list."
+#~ msgstr "§e存储孤岛列表"
+
+#~ msgid "Player doesn't have an island or it's already protected!"
+#~ msgstr "玩家未拥有岛屿,或者已经被保护了!"
 
 #~ msgid "Challenge Menu "
 #~ msgstr "调整菜单"

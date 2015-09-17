@@ -59,13 +59,12 @@ public class WolfWorkUSBImporter implements USBImporter {
                 Stack<SerializableLocation> stack = (Stack) stackObj;
                 while (!stack.isEmpty()) {
                     SerializableLocation remove = stack.remove(0);
-                    plugin.addOrphan(remove.getLocation());
+                    plugin.getOrphanLogic().addOrphan(remove.getLocation());
                     countOrphan++;
                 }
                 if (!orphanFile.delete()) {
                     orphanFile.deleteOnExit();
                 }
-                plugin.saveOrphans();
                 return countOrphan;
             }
         } catch (IOException | ClassNotFoundException e) {

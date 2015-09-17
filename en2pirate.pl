@@ -6,18 +6,21 @@ use utf8;
 my $filename = 'keys.pot';
 my $arrurl = 'http://isithackday.com/arrpi.php?text=';
 open my $fp, '<:encoding(UTF-8)', $filename or die "Unable to read keys.pot";
-open my $out, '>:encoding(UTF-8)', 'pirate.po' or die "Unable to write to pirate.po";
+open my $out, '>:encoding(UTF-8)', 'xx-pirate.po' or die "Unable to write to pirate.po";
 
 while (my $line = <$fp>) {
     chomp $line;
     if (! ($line =~ m/#: .*$/)) {
+        # Skip line comments
         print $out "$line\n";
     }
     if ($line =~ m/msgid \"(?<txt>.*)\"$/) {
         my $txt = $+{txt};
         while (($line = <$fp>) =~ m/^\"(?<txt>.*)\"$/) {
-          $txt .= "\n" . $+{txt};
-          print $out "\"$+{txt}\"\n";
+          $line = $+{txt};
+          $line =~ s/^Language: \\n$/Language: xx-pirate\\n/g;
+          $txt .= "\n" . $line;
+          print $out "\"$line\"\n";
         }
         $txt = uri_encode($txt);
         $txt =~ s/#/%23/g;

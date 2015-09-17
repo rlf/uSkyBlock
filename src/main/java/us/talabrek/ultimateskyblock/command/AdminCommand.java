@@ -48,7 +48,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new GenTopTenCommand(plugin));
         //add(new RegisterIslandToPlayerCommand());
         add(new AdminChallengeCommand(plugin, challengeCompleter));
-        add(new OrphanCommand());
+        add(new OrphanCommand(plugin));
         add(new AdminIslandCommand(plugin));
         add(new PurgeCommand(plugin));
         add(new GotoIslandCommand(plugin));

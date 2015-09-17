@@ -78,6 +78,6 @@ public class UUIDLeaderImporter implements USBImporter {
 
     @Override
     public void completed(uSkyBlock plugin, int success, int failed) {
-
+        plugin.getOrphanLogic().save();
     }
 }

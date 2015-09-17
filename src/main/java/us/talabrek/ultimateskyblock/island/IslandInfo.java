@@ -192,7 +192,9 @@ public class IslandInfo {
 
     public void saveToFile() {
         if (toBeDeleted) {
+            Bukkit.getLogger().fine("Deleting islandconfig: " + file);
             file.delete();
+            toBeDeleted = false;
         } else {
             try {
                 config.save(file);
@@ -460,7 +462,7 @@ public class IslandInfo {
         config.set("party.members." + playername, null);
         config.set("party.currentSize", getPartySize() - 1);
         save();
-        sendMessageToIslandGroup("\u00a7b" + playername + "\u00a7d has been removed from the island group.");
+        sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has been removed from the island group.", playername));
     }
 
     public void setLevel(double score) {

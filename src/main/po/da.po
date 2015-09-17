@@ -508,16 +508,10 @@ msgstr "nulstil horeunger"
 msgid "§eClearing all old (empty) island locations."
 msgstr "§eFjerner alle gamle (tomme) ø-placering."
 
-msgid "save orphans"
-msgstr "gem horeunger"
-
-msgid "§eSaving the orphan list."
-msgstr "§eGemmer listen af forældreløse."
-
 msgid "list orphans"
 msgstr "list horeunger"
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eForældreløse: {0}"
 
@@ -531,8 +525,8 @@ msgstr ""
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Do skal angive hvor gamle (i dage) øerne til purge skal være!"
 
-#, java-format
-msgid "§eMarking all islands inactive for more than {0} days."
+#, fuzzy, java-format
+msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
 
 msgid "set a player's island to your location"
@@ -550,6 +544,17 @@ msgstr "genindlæs konfigurationen fra fil."
 
 msgid "§eConfiguration reloaded from file."
 msgstr "§eKonfigurationen blev genindlæst fra fil."
+
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4** Du forlader nu en forladt ø."
+
+#, java-format
+msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgstr ""
+
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+msgstr ""
 
 msgid "displays version information"
 msgstr "viser versionsinformationer"
@@ -1159,6 +1164,10 @@ msgstr "§4Da din ø er låst, er din besøgsportal blevet deaktiveret."
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deaktiverede øens besøgsportal."
+
+#, fuzzy, java-format
+msgid "§b{0}§d has been removed from the island group."
+msgstr "§4{0} er blevet sparket ud af øen."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cØen du er på bliver slettet! Du bliver sendt til spawn."
@@ -1845,8 +1854,8 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
-msgid "Player doesn't have an island or it's already protected!"
-msgstr "Spilleren har ikke en ø, eller også er den allerede beskyttet!"
+msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgstr ""
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -1896,6 +1905,15 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "save orphans"
+#~ msgstr "gem horeunger"
+
+#~ msgid "§eSaving the orphan list."
+#~ msgstr "§eGemmer listen af forældreløse."
+
+#~ msgid "Player doesn't have an island or it's already protected!"
+#~ msgstr "Spilleren har ikke en ø, eller også er den allerede beskyttet!"
 
 #~ msgid "Challenge Menu "
 #~ msgstr "Udfordringer "

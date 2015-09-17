@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Stack;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,7 +52,6 @@ import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
-import us.talabrek.ultimateskyblock.command.IslandChatCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.command.IslandTalkCommand;
 import us.talabrek.ultimateskyblock.command.PartyTalkCommand;
@@ -67,7 +65,6 @@ import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
@@ -75,6 +72,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
+import us.talabrek.ultimateskyblock.island.OrphanLogic;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -83,7 +81,6 @@ import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.getLocale;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
 
@@ -112,6 +109,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
+    private OrphanLogic orphanLogic;
     public IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
     private USBImporterExecutor importer;
@@ -120,15 +118,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     private static String pName = "";
     private FileConfiguration lastIslandConfig;
-    private FileConfiguration orphans;
-    private File orphanFile;
     private File lastIslandConfigFile;
     public static volatile World skyBlockWorld;
     private static uSkyBlock instance;
     private Location lastIsland;
-    private Stack<Location> orphaned;
-    private Stack<Location> tempOrphaned;
-    private Stack<Location> reverseOrphaned;
     public File directoryPlayers;
     public File directoryIslands;
 
@@ -168,12 +161,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public uSkyBlock() {
         lastIslandConfig = null;
-        orphans = null;
-        orphanFile = null;
         lastIslandConfigFile = null;
-        orphaned = new Stack<>();
-        tempOrphaned = new Stack<>();
-        reverseOrphaned = new Stack<>();
         purgeActive = false;
     }
 
@@ -235,7 +223,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     if (lastIsland == null) {
                         setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
                     }
-                    setupOrphans();
                 }
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
                 getServer().getScheduler().runTaskLater(instance, new Runnable() {
@@ -353,12 +340,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return getInstance().getWorld();
     }
 
-    public void clearOrphanedIsland() {
-        while (hasOrphanedIsland()) {
-            orphaned.pop();
-        }
-    }
-
     public Location getSafeHomeLocation(final PlayerInfo p) {
         Location home = findNearestSafeLocation(p.getHomeLocation());
         if (home == null) {
@@ -411,18 +392,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private void postDelete(final PlayerInfo pi) {
-        IslandInfo islandInfo = getIslandInfo(pi);
-        if (islandInfo != null) {
-            postDelete(islandInfo);
-        }
+
         pi.save();
     }
 
     private void postDelete(final IslandInfo islandInfo) {
-        addOrphan(islandInfo.getIslandLocation());
         WorldGuardHandler.removeIslandRegion(islandInfo.getName());
         islandLogic.deleteIslandConfig(islandInfo.getName());
-        saveOrphans();
+        orphanLogic.save();
     }
 
     public boolean deleteIsland(String islandName, final Runnable runner) {
@@ -467,17 +444,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public void deletePlayerIsland(final String player, final Runnable runner) {
         PlayerInfo pi = playerLogic.getPlayerInfo(player);
         final PlayerInfo finalPI = pi;
-        IslandInfo islandInfo = getIslandInfo(pi);
+        final IslandInfo islandInfo = getIslandInfo(pi);
         Location islandLocation = islandInfo.getIslandLocation();
         for (String member : islandInfo.getMembers()) {
             pi = playerLogic.getPlayerInfo(member);
-            pi.removeFromIsland();
-            pi.save();
+            islandInfo.removeMember(pi);
         }
         islandLogic.clearIsland(islandLocation, new Runnable() {
             @Override
             public void run() {
                 postDelete(finalPI);
+                postDelete(islandInfo);
                 if (runner != null) runner.run();
             }
         });
@@ -496,8 +473,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             clearPlayerInventory(player);
             clearEntitiesNearPlayer(player);
         }
-
-        final IslandGenerator.PlayerIslandCreationData playerIslandCreationData = islandGenerator.preCreateData(player, getPlayerInfo(player));
         islandLogic.clearIsland(next, new Runnable() {
             @Override
             public void run() {
@@ -585,7 +560,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     pi.setHasIsland(true);
                     pi.setIslandLocation(newLoc);
                     pi.setHomeLocation(getSafeHomeLocation(pi));
-                    IslandInfo island = islandLogic.createIsland(pi.locationForParty(), player);
+                    IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
                     WorldGuardHandler.updateRegion(sender, island);
                     pi.save();
                 }
@@ -598,10 +573,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             return true;
         }
         return false;
-    }
-
-    public int orphanCount() {
-        return orphaned.size();
     }
 
     public Location getLastIsland() {
@@ -617,67 +588,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getLastIslandConfig().set("options.general.lastIslandZ", island.getBlockZ());
         saveLastIslandConfig();
         lastIsland = island;
-    }
-
-    public boolean hasOrphanedIsland() {
-        return !orphaned.empty();
-    }
-
-    public Location checkOrphan() {
-        return orphaned.peek();
-    }
-
-    public Location getOrphanedIsland() {
-        if (hasOrphanedIsland()) {
-            return orphaned.pop();
-        }
-        return null;
-    }
-
-    public void addOrphan(final Location island) {
-        if (!orphaned.contains(island)) {
-            orphaned.push(island);
-        }
-    }
-
-    public void removeNextOrphan() {
-        orphaned.pop();
-    }
-
-    public void saveOrphans() {
-        String fullOrphan = "";
-        tempOrphaned = (Stack<Location>) orphaned.clone();
-        while (!tempOrphaned.isEmpty()) {
-            reverseOrphaned.push(tempOrphaned.pop());
-        }
-        while (!reverseOrphaned.isEmpty()) {
-            final Location tempLoc = reverseOrphaned.pop();
-            if (tempLoc != null) {
-                fullOrphan += tempLoc.getBlockX() + "," + tempLoc.getBlockZ() + ";";
-            }
-        }
-        getOrphans().set("orphans.list", fullOrphan);
-        saveOrphansFile();
-    }
-
-    public void setupOrphans() {
-        if (getOrphans().contains("orphans.list")) {
-            final String fullOrphan = getOrphans().getString("orphans.list");
-            if (!fullOrphan.isEmpty()) {
-                final String[] orphanArray = fullOrphan.split(";");
-                orphaned = new Stack<>();
-                for (int i = 0; i < orphanArray.length; ++i) {
-                    final String[] orphanXY = orphanArray[i].split(",");
-                    if (orphanXY.length == 2) {
-                        final Location tempLoc = new Location(
-                                getSkyBlockWorld(), Integer.parseInt(orphanXY[0].trim(), 10),
-                                Settings.island_height,
-                                Integer.parseInt(orphanXY[1].trim(), 10));
-                        orphaned.push(tempLoc);
-                    }
-                }
-            }
-        }
     }
 
     public boolean homeTeleport(final Player player, boolean force) {
@@ -841,7 +751,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public boolean islandAtLocation(final Location loc) {
         return ((WorldGuardHandler.getIntersectingRegions(loc).size() > 0)
-                || (findBedrockLocation(loc) != null)
+                //|| (findBedrockLocation(loc) != null)
                 || islandLogic.hasIsland(loc)
         );
 
@@ -908,36 +818,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    public void reloadOrphans() {
-        if (orphanFile == null) {
-            orphanFile = new File(getDataFolder(), "orphans.yml");
-        }
-        orphans = YamlConfiguration.loadConfiguration(orphanFile);
-        final InputStream defConfigStream = getResource("orphans.yml");
-        if (defConfigStream != null) {
-            final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            orphans.setDefaults(defConfig);
-        }
-    }
-
-    public FileConfiguration getOrphans() {
-        if (orphans == null) {
-            reloadOrphans();
-        }
-        return orphans;
-    }
-
-    public void saveOrphansFile() {
-        if (orphans == null || orphanFile == null) {
-            return;
-        }
-        try {
-            getOrphans().save(orphanFile);
-        } catch (IOException ex) {
-            getLogger().log(Level.SEVERE, "Could not save config to " + orphanFile, ex);
-        }
-    }
-
     public boolean setBiome(final Location loc, final String bName) {
         Biome biome = getBiome(bName);
         if (biome == null) return false;
@@ -970,21 +850,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return validBiomes.containsKey(biomeName.toLowerCase());
     }
 
-    // This method does not check for permissions, since it is only used in the generator.
-    public boolean changePlayerBiome(IslandGenerator.PlayerIslandCreationData playerIslandCreationData, String bName) {
-        if (!biomeExists(bName)) throw new UnsupportedOperationException();
-
-        PlayerInfo playerInfo = playerIslandCreationData.getPlayerInfo();
-        IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
-
-        if (!setBiome(playerInfo.getIslandLocation(), bName)) {
-            return false;
-        }
-        islandInfo.setBiome(bName);
-        return true;
-    }
-
-    public boolean changePlayerBiome(Player player, String bName) {
+        public boolean changePlayerBiome(Player player, String bName) {
         if (!biomeExists(bName)) throw new UnsupportedOperationException();
 
         if (!VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, skyBlockWorld)) return false;
@@ -1030,11 +896,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private void generateIsland(final Player player, final PlayerInfo pi, final Location next) {
         final IslandGenerator.PlayerIslandCreationData playerIslandCreationData = islandGenerator.preCreateData(player, pi);
         player.sendMessage(tr("\u00a7eGetting your island ready, please be patient, it can take a while."));
-        final String schem = islandGenerator.createIsland(this, playerIslandCreationData, next);
-        Bukkit.getScheduler().runTaskLater(this, new Runnable() {
+        final Runnable generateTask = new Runnable() {
             @Override
             public void run() {
-                next.getWorld().loadChunk(next.getBlockX()>>4, next.getBlockZ()>>4, false);
+                next.getWorld().loadChunk(next.getBlockX() >> 4, next.getBlockZ() >> 4, false);
                 islandGenerator.setChest(next, playerIslandCreationData);
                 setNewPlayerIsland(player, next);
                 changePlayerBiome(player, "OCEAN");
@@ -1056,36 +921,33 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     }
                 }, getConfig().getInt("options.restart.teleportDelay", 20));
             }
-        }, getConfig().getInt("options.advanced.delayAfterIslandCreation." + schem, 0));
-    }
-
-    private void protectWithWorldGuard(CommandSender sender, Player player, PlayerInfo pi) {
-        if (!WorldGuardHandler.protectIsland(player, pi)) {
-            sender.sendMessage(tr("Player doesn't have an island or it's already protected!"));
+        };
+        Runnable createTask = new Runnable() {
+            @Override
+            public void run() {
+                final String schem = islandGenerator.createIsland(uSkyBlock.this, playerIslandCreationData, next);
+                Bukkit.getScheduler().runTaskLater(uSkyBlock.this, generateTask, getConfig().getInt("options.advanced.delayAfterIslandCreation." + schem, 0));
+            }
+        };
+        if (orphanLogic.wasOrphan(next)) {
+            // Create a WG region to be used for deleting it
+            player.sendMessage(tr("\u00a7eYay! We found a vacancy closer to spawn. \u00a79Clearing it for you..."));
+            IslandInfo tempInfo = islandLogic.createIslandInfo(LocationUtil.getIslandName(next), pi.getPlayerName());
+            WorldGuardHandler.protectIsland(this, player, tempInfo);
+            islandLogic.clearIsland(next, createTask);
+        } else {
+            createTask.run();
         }
     }
 
     private synchronized Location getNextIslandLocation(Location last) {
-        // Cleanup orphans
-        while (hasOrphanedIsland() && !isSkyWorld(checkOrphan().getWorld())) {
-            removeNextOrphan();
-        }
-        while (hasOrphanedIsland()) {
-            if (!islandAtLocation(checkOrphan())) {
-                break;
+        Location next = orphanLogic.getNextValidOrphan();
+        if (next == null) {
+            next = last;
+            // Ensure the found location is valid (or find one that is).
+            while (islandInSpawn(next) || islandAtLocation(next)) {
+                next = nextIslandLocation(next);
             }
-            removeNextOrphan();
-        }
-        // Use last island-location (if available)
-        Location next = last;
-        // Scan orphans for a valid "re-use spot"
-        if (hasOrphanedIsland() && !islandAtLocation(checkOrphan())) {
-            next = getOrphanedIsland();
-            saveOrphans();
-        }
-        // Ensure the found location is valid (or find one that is).
-        while (islandInSpawn(next) || islandAtLocation(next)) {
-            next = nextIslandLocation(next);
         }
         setLastIsland(next);
         return next;
@@ -1233,7 +1095,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } else {
             log(Level.SEVERE, "Could not find a safe chest within 15 blocks of the island spawn. Bad schematic!");
         }
-        IslandInfo info = islandLogic.createIsland(playerInfo.locationForParty(), playerInfo.getPlayerName());
+        IslandInfo info = islandLogic.createIslandInfo(playerInfo.locationForParty(), playerInfo.getPlayerName());
         Player onlinePlayer = playerInfo.getPlayer();
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
             info.handleMemberLoggedIn(onlinePlayer);
@@ -1322,7 +1184,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         menu = new SkyBlockMenu(this, challengeLogic);
         levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
-        islandLogic = new IslandLogic(this, directoryIslands);
+        orphanLogic = new OrphanLogic(this);
+        islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
         notifier = new PlayerNotifier(getConfig());
         playerLogic = new PlayerLogic(this);
         playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
@@ -1359,6 +1222,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public IslandLogic getIslandLogic() {
         return islandLogic;
+    }
+
+    public OrphanLogic getOrphanLogic() {
+        return orphanLogic;
     }
 
     public void execCommand(Player player, String command) {
@@ -1524,7 +1391,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public synchronized void setProtectAllActive(boolean protectAllActive) {
-        protectAllActive = protectAllActive;
+        this.protectAllActive = protectAllActive;
     }
 
     public String getVersionInfo() {

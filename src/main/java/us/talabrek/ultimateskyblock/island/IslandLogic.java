@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
@@ -47,6 +48,7 @@ public class IslandLogic {
     private static final Logger log = Logger.getLogger(IslandLogic.class.getName());
     private final uSkyBlock plugin;
     private final File directoryIslands;
+    private final OrphanLogic orphanLogic;
 
     private final LoadingCache<String, IslandInfo> cache;
     private final boolean showMembers;
@@ -55,9 +57,10 @@ public class IslandLogic {
     private volatile long lastGenerate = 0;
     private final List<IslandLevel> ranks = new ArrayList<>();
 
-    public IslandLogic(uSkyBlock plugin, File directoryIslands) {
+    public IslandLogic(uSkyBlock plugin, File directoryIslands, OrphanLogic orphanLogic) {
         this.plugin = plugin;
         this.directoryIslands = directoryIslands;
+        this.orphanLogic = orphanLogic;
         this.showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
         this.flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
         cache = CacheBuilder
@@ -76,6 +79,7 @@ public class IslandLogic {
                     }
                 });
     }
+
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
         if (islandName == null) {
@@ -128,7 +132,7 @@ public class IslandLogic {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
             for (Player player : WorldEditHandler.getPlayersInRegion(plugin.getWorld(), region)) {
-                if (player != null && player.isOnline() && plugin.isSkyWorld(player.getWorld())) {
+                if (player != null && player.isOnline() && plugin.isSkyWorld(player.getWorld()) && !player.isFlying()) {
                     player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
                     plugin.spawnTeleport(player, true);
                 }
@@ -287,7 +291,7 @@ public class IslandLogic {
         return new IslandLevel(islandInfo.getName(), partyLeaderName, names, level);
     }
 
-    public synchronized IslandInfo createIsland(String location, String player) {
+    public synchronized IslandInfo createIslandInfo(String location, String player) {
         IslandInfo info = createIslandInfo(location);
         cache.put(location, info);
         info.resetIslandConfig(player);
@@ -301,6 +305,7 @@ public class IslandLogic {
                 islandInfo.delete();
             }
             cache.invalidate(location);
+            orphanLogic.addOrphan(location);
         } catch (ExecutionException e) {
             throw new IllegalStateException("Unable to delete island " + location, e);
         }

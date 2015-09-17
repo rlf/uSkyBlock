@@ -42,8 +42,8 @@ public class PurgeCommand extends AbstractUSBCommand {
         }
         plugin.activatePurge();
         final int time = Integer.parseInt(args[0], 10) * 24;
-        sender.sendMessage(tr("\u00a7eMarking all islands inactive for more than {0} days.", args[0]));
-        new PurgeScanTask(plugin, plugin.directoryIslands, time).runTask(plugin);
+        sender.sendMessage(tr("\u00a7eFinding all islands that has been abandoned for more than {0} days.", args[0]));
+        new PurgeScanTask(plugin, plugin.directoryIslands, time, sender).runTaskAsynchronously(plugin);
         return true;
     }
 }

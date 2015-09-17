@@ -30,7 +30,7 @@ public abstract class AbstractBalancedExecutor implements BalancedExecutor {
                 task.toString(), loadFactor*100, maxTicks));
         IncrementalExecution execution = new IncrementalExecution(plugin, task, completion, loadFactor, maxTicks);
         tasks.put(task, execution);
-        scheduler.runTask(plugin, execution);
+        scheduler.runTaskAsynchronously(plugin, execution);
     }
 
     protected abstract void doLater(Plugin plugin, Runnable runnable, long delay);

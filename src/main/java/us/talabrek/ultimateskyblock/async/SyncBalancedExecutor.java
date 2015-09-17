@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.async;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
 
 /**
  * A BalancedExecutor that executes tasks synchronously

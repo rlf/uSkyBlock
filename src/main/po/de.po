@@ -517,16 +517,10 @@ msgstr "Lösche Waise"
 msgid "§eClearing all old (empty) island locations."
 msgstr "§eLösche alle alten (Leeren) Insel Standorte."
 
-msgid "save orphans"
-msgstr "Speichere Waise"
-
-msgid "§eSaving the orphan list."
-msgstr "§eSpeicher die Waisen Liste."
-
 msgid "list orphans"
 msgstr "Zeige Waise"
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eWaise: {0}"
 
@@ -539,8 +533,8 @@ msgstr "§4Die Säuberung läuft bereits, warte Bitte bis diese zu ende ist."
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Du musst die Zeit für die Säuberung in Tagen angeben!"
 
-#, java-format
-msgid "§eMarking all islands inactive for more than {0} days."
+#, fuzzy, java-format
+msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eSetze alle Inseln für {0} Tage inaktive."
 
 msgid "set a player's island to your location"
@@ -558,6 +552,17 @@ msgstr "Lade die Einstellungen von einer Datei."
 
 msgid "§eConfiguration reloaded from file."
 msgstr "§eEInstellungen geladen von der Datei."
+
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "Löscht alle verlassenen Inseln"
+
+#, java-format
+msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgstr ""
+
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+msgstr ""
 
 msgid "displays version information"
 msgstr "Zeige Versions Informationen"
@@ -1207,6 +1212,10 @@ msgstr ""
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d hat den Inselwarppunkt Deaktiviert."
+
+#, fuzzy, java-format
+msgid "§b{0}§d has been removed from the island group."
+msgstr "§4{0} wurde von der Insel entfernt."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
@@ -1946,8 +1955,8 @@ msgstr ""
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-msgid "Player doesn't have an island or it's already protected!"
-msgstr "Der Spieler hat keine Insel oder sie ist schon Geschützt."
+msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgstr ""
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -2002,6 +2011,15 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#~ msgid "save orphans"
+#~ msgstr "Speichere Waise"
+
+#~ msgid "§eSaving the orphan list."
+#~ msgstr "§eSpeicher die Waisen Liste."
+
+#~ msgid "Player doesn't have an island or it's already protected!"
+#~ msgstr "Der Spieler hat keine Insel oder sie ist schon Geschützt."
 
 #~ msgid "Challenge Menu "
 #~ msgstr "Aufgaben Menue"

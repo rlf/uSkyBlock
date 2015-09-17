@@ -10,7 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2015-09-16 20:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en\n"
+"Language: xx-pirate\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -503,16 +503,10 @@ msgstr "clear orphans"
 msgid "§eClearing all old (empty) island locations."
 msgstr "§eClearing all old (empty) island locations."
 
-msgid "save orphans"
-msgstr "save orphans"
-
-msgid "§eSaving the orphan list."
-msgstr "§eSaving yonder orphan list."
-
 msgid "list orphans"
 msgstr "list orphans"
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
@@ -525,8 +519,8 @@ msgstr "§4A purge be already running, please wait for it to finish!"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4You must provide thar age in days to purge!"
 
-#, java-format
-msgid "§eMarking all islands inactive for more than {0} days."
+#, fuzzy, java-format
+msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarking all islands inactive for more than {0} days."
 
 msgid "set a player's island to your location"
@@ -544,6 +538,17 @@ msgstr "reload configuration from file."
 
 msgid "§eConfiguration reloaded from file."
 msgstr "§eConfiguration reloaded from file."
+
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4** You be leaving an abandoned island."
+
+#, java-format
+msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgstr ""
+
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+msgstr ""
 
 msgid "displays version information"
 msgstr "displays version information"
@@ -1148,6 +1153,10 @@ msgstr "§4Since ye island be locked, ye incoming warp has been deactivated."
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deactivated yonder island warp."
+
+#, fuzzy, java-format
+msgid "§b{0}§d has been removed from the island group."
+msgstr "§4{0} has been removed from thar island."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cThe island you be on be being deleted! Sending you to spawn."
@@ -1846,8 +1855,8 @@ msgstr "Could not create ye Island. Please contact a server moderator."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGetting ye island ready, please be patient, it can take a while."
 
-msgid "Player doesn't have an island or it's already protected!"
-msgstr "Player doesn't have an island or it's already protected!"
+msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgstr ""
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -1897,6 +1906,15 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "save orphans"
+#~ msgstr "save orphans"
+
+#~ msgid "§eSaving the orphan list."
+#~ msgstr "§eSaving yonder orphan list."
+
+#~ msgid "Player doesn't have an island or it's already protected!"
+#~ msgstr "Player doesn't have an island or it's already protected!"
 
 #~ msgid "Challenge Menu "
 #~ msgstr "Challenge Menu "

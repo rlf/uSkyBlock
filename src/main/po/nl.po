@@ -511,16 +511,10 @@ msgstr "verwijder orphans"
 msgid "§eClearing all old (empty) island locations."
 msgstr "§eOpschonen van alle oude (lege) eiland locaties."
 
-msgid "save orphans"
-msgstr "orphans opslaan"
-
-msgid "§eSaving the orphan list."
-msgstr "§eHet opslaan van de orphan lijst."
-
 msgid "list orphans"
 msgstr "orphan lijst"
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
@@ -533,8 +527,8 @@ msgstr "§4Een purge wordt al uitgevoerd, wacht tot het klaar is!"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Je moet het aantal dagen invoeren om een purge uit te voeren!"
 
-#, java-format
-msgid "§eMarking all islands inactive for more than {0} days."
+#, fuzzy, java-format
+msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr ""
 "§eMarkering van alle eilanden die inactief zijn voor meer dan {0} dagen."
 
@@ -554,6 +548,17 @@ msgstr "herladen van de configuratie van het bestand"
 
 msgid "§eConfiguration reloaded from file."
 msgstr "§eDe Configuratie is herladen"
+
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4** Je verlaat een verlaten eiland."
+
+#, java-format
+msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgstr ""
+
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+msgstr ""
 
 msgid "displays version information"
 msgstr "het weergeven van de versie-informatie"
@@ -1180,6 +1185,10 @@ msgstr "§4Nu je eiland is gesloten is ook je inkomende warp gedeactiveerd."
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
+
+#, fuzzy, java-format
+msgid "§b{0}§d has been removed from the island group."
+msgstr "§4{0} is verwijderd van het eiland."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
@@ -1891,8 +1900,8 @@ msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
-msgid "Player doesn't have an island or it's already protected!"
-msgstr "Die speler heeft geen eiland of het is al beveiligd!"
+msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgstr ""
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -1942,6 +1951,15 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "save orphans"
+#~ msgstr "orphans opslaan"
+
+#~ msgid "§eSaving the orphan list."
+#~ msgstr "§eHet opslaan van de orphan lijst."
+
+#~ msgid "Player doesn't have an island or it's already protected!"
+#~ msgstr "Die speler heeft geen eiland of het is al beveiligd!"
 
 #~ msgid "Challenge Menu "
 #~ msgstr "Uitdagingen Menu "

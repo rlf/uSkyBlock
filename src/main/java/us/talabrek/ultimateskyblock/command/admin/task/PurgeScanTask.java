@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.command.admin.task;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.async.IncrementalTask;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Scans for all players on a list of islands.
  */
@@ -25,10 +28,12 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
     private final long cutOff;
     private final long now;
     private final uSkyBlock plugin;
+    private final CommandSender sender;
     private final double purgeLevel;
 
-    public PurgeScanTask(uSkyBlock plugin, File islandDir, int time) {
+    public PurgeScanTask(uSkyBlock plugin, File islandDir, int time, CommandSender sender) {
         this.plugin = plugin;
+        this.sender = sender;
         now = System.currentTimeMillis();
         this.cutOff = now - (time * 3600000L);
         String[] islandList = islandDir.list(FileUtil.createIslandFilenameFilter());
@@ -46,7 +51,6 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null) {
                 Set<String> members = islandInfo.getMembers();
-                members.add(islandInfo.getLeader());
                 if (islandInfo.getLevel() < purgeLevel && abandonedSince(members)) {
                     purgeList.add(islandName);
                 }
@@ -82,6 +86,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
             public void run() {
                 if (plugin.isPurgeActive()) {
                     plugin.log(Level.INFO, "Finished purging marked inactive islands.");
+                    sender.sendMessage(tr("\u00a74PURGE:\u00a79 Finished purging abandoned islands."));
                     plugin.deactivatePurge();
                 }
             }
@@ -90,9 +95,10 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
             @Override
             public void run() {
                 plugin.log(Level.INFO, "Done scanning - found " + purgeList.size()+ " candidates for purging.");
-                plugin.getExecutor().execute(plugin, new PurgeTask(plugin, purgeList), onPurgeCompletion, 0.3f, 1);
+                sender.sendMessage(tr("\u00a74PURGE:\u00a79 Scanning done, found {0} candidates for purgatory.", purgeList.size()));
+                plugin.getAsyncExecutor().execute(plugin, new PurgeTask(plugin, purgeList, sender), onPurgeCompletion, 0.3f, 1);
             }
         };
-        plugin.getExecutor().execute(plugin, this, onScanCompletion, 0.2f, 1);
+        plugin.getAsyncExecutor().execute(plugin, this, onScanCompletion, 1f, 1);
     }
 }
