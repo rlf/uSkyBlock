@@ -34,20 +34,7 @@ We are working on a feature, that will do this automatically - but until that is
 
 # Building/Compiling
 
-Requirements:
-
-* Maven
-* Java SDK 1.7 or above
-* A local revision of the Spigot build (see http://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8.36598/)
-
-## Configure Environment and Run Maven
-Note: If you are using the same environment, as the one you used to build Spigot, everything should simply compile,
-since all dependencies are already in your local maven repository.
-
-1. Run `mvn install` in the uSkyBlock folder
-2. `target/uSkyBlock.jar` - plugin, ready for installation in Spigot/Bukkit
-3. `target/uSkyBlock-api.jar` - jar-file of the API only, only requirement for integrating against USB.
-
+See (/wiki/Building)
 
 # API
 uSkyBlock has an API (since v2.0.1-RC1.65).
