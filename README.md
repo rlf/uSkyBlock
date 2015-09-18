@@ -32,9 +32,9 @@ They have not been tested as thouroughly as the 1.8 (`master`) releases - so the
 
 We are working on a feature, that will do this automatically - but until that is released, please follow the above procedure.
 
-# Building/Compiling
+## Building/Compiling
 
-See (/wiki/Building)
+See (https://github.com/rlf/uSkyBlock/wiki/Building)
 
 # API
 uSkyBlock has an API (since v2.0.1-RC1.65).
