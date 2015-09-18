@@ -2,22 +2,20 @@ language: java
 sudo: false
 branches:
   only:
-    # Only build (and deploy) pushes tagged with a version number
-    - /^v2.*$/
+  - "/^v2.*$/"
 env:
   global:
-    secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
+  - secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
+  - secure: k1KHndDZjvcLvT0gMDB88SSmeMzkqEl91XDJ6hrsSkGkXdJMOoHWkB21nwN+4UBwTb2je0nRdR12lr8HK4lhiS0NMuK0KeiLHUaG36b/NJORSFumZKjS3Wjhm55zdRaU5rwBHAhHxkQZ+NkOXqIWvjOReVY4wvC6619TTj5bxr+z/Bm71yr7xUBQtj+g2Pen+hNVWyWwt4J1uDwBJSudXTHk4cRcCQFtSaPoglg0mcufy+dGTRCfXMCg1scSlSF0yAptZxQcDPvCOLx7GNasMQgtAHhCw1xb/FOuZLD3+l/HZB+lZttZNo1zB3RtXImtJIYUyLQbHsU6GXdKGDnveReolaKdWsTLAZDmkr684I+409gveYyReuvCJA449brVhU+GEULK+xxt0SYqLaBcY/R0B6vElR4HsnvnTS6XWpzt2C+6uMEp7wYB9tqkfnDIh9SVhUUsR8/gQYlKVE8f+XFDMEnBNmUmpLu5b54Ng+TVKU8hcxGrTevy+jU/PsIXlGseG+Hk5eFJxx0GRwAV7DK9Mx+JFdiXZWt+mWWzHvcMu+o817hAxFRGicJiJAvqv1e4EbyMyrlViDj9fz+jnI+P62TLIS+6tIZ+OKIXV2XTmJgn9S7/fDCUVn0Gf5wy+VUZI0oRKt9h8IIsEC7glYjkjRX5DE9PqypeLFFM5DA=
 notifications:
   email: false
 before_install:
-  # Change the maven-version to be the tag (for the API deploy)
-  # Skip the 'v'
-  - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
+- mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 script:
-  - mvn -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true install
+- mvn -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true install
 deploy:
   provider: releases
-  api-key: ${GITHUB_TOKEN}
+  api-key: "${GITHUB_TOKEN}"
   file:
   - target/uSkyBlock.jar
   - target/uSkyBlock-api.jar
@@ -27,8 +25,7 @@ deploy:
     tags: true
     all_branches: true
 after_success:
-  # Deploy API to the GitHub maven repo
-  - mvn -nsu deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
+- mvn -nsu deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
-  - $HOME/.m2
+  - "$HOME/.m2"
