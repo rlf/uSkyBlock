@@ -14,9 +14,11 @@ This version depends on the following plugins:
 ## Releases 
 [![Build Status](https://api.travis-ci.org/rlf/uSkyBlock.svg)](https://travis-ci.org/rlf/uSkyBlock) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Percentage of issues still open")
 
-Pre-releases will end a date-stamp, and is considered unsafe for production servers.
+https://github.com/rlf/uSkyBlock/releases
 
-Releases have a clean version number, and has been tested, and should be safe for production servers.
+Pre-releases will end in a date-stamp, and is considered **unsafe** for production servers.
+
+Releases have a clean version number, has been tested, and should be safe for production servers.
 
 ### Compatibilty Releases for Bukkit 1.7.9/10
 We have decided to also include `compat` releases, which are compiled to work under Bukkit 1.7.10.
