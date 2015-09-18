@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
 import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
+import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -21,7 +22,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class AdminIslandCommand extends CompositeUSBCommand {
     private final uSkyBlock plugin;
 
-    public AdminIslandCommand(final uSkyBlock plugin) {
+    public AdminIslandCommand(final uSkyBlock plugin, final ConfirmHandler confirmHandler) {
         super("island", "", tr("manage islands"));
         this.plugin = plugin;
         add(new AbstractAsyncIslandInfoCommand("protect", "usb.mod.protect", tr("protects the island")) {
@@ -104,6 +105,36 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                     return true;
                 }
                 return false;
+            }
+        });
+        add(new AbstractUSBCommand("purge", "usb.admin.purge", "?leader", tr("purges the island")) {
+            @Override
+            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
+                String cmd = "/usb island purge";
+                IslandInfo islandInfo = null;
+                if (args.length == 0 && sender instanceof Player) {
+                    Player player = (Player) sender;
+                    String islandName = WorldGuardHandler.getIslandNameAt(player.getLocation());
+                    islandInfo = plugin.getIslandInfo(islandName);
+                } else if (args.length == 1) {
+                    cmd += " " + args[0];
+                    PlayerInfo playerInfo = plugin.getPlayerInfo(args[0]);
+                    islandInfo = plugin.getIslandInfo(playerInfo);
+                }
+                if (islandInfo == null) {
+                    sender.sendMessage(tr("\u00a74Error! \u00a79No valid island found for purging."));
+                    return false;
+                } else {
+                    String islandName = islandInfo.getName();
+                    if (sender instanceof Player && confirmHandler.checkCommand((Player) sender, cmd)) {
+                        plugin.getIslandLogic().purge(islandName);
+                        sender.sendMessage(tr("\u00a7cPURGE: \u00a79Purged island at {0}", islandName));
+                    } else if (!(sender instanceof Player)) {
+                        plugin.getIslandLogic().purge(islandName);
+                        sender.sendMessage(tr("\u00a7cPURGE: \u00a79Purged island at {0}", islandName));
+                    }
+                }
+                return true;
             }
         });
         add(new MakeLeaderCommand(plugin));

@@ -645,4 +645,5 @@ public class IslandInfo {
     public void delete() {
         toBeDeleted = true;
     }
+
 }

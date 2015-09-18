@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-17 23:19+0200\n"
+"POT-Creation-Date: 2015-09-18 12:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -319,111 +319,125 @@ msgstr ""
 msgid "§4No player named {0} was found!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:25
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:26
 msgid "manage islands"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:27
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:28
 msgid "protects the island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:33
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:34
 msgid "delete the island (removes the blocks)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:50
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:51
 msgid "§9Deleted abandoned island at your current location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:55
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:56
 msgid ""
 "§4Island at this location has members!\n"
 "§eUse §9/usb island delete <name>§e to delete it."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:62
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:63
 msgid "removes the player from the island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:68
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:69
 msgid "print out info about the island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:74
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:75
 msgid "protects all islands (time consuming)"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:81
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:82
 msgid "sets the biome of the island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:87
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:136
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:88
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:167
 msgid "§4That player has no island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:100
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:101
 msgid "§4No valid island at your location"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:115
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:110
+msgid "purges the island"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:125
+msgid "§4Error! §9No valid island found for purging."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:131
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:134
+#, java-format
+msgid "§cPURGE: §9Purged island at {0}"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:146
 msgid "§4No valid player-name supplied."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:118
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:149
 #, java-format
 msgid "Removing {0} from island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:126
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:157
 #, java-format
 msgid "§eChanged biome of {0}s island to {1}."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:129
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:160
 #, java-format
 msgid "§eChanged biome of {0}s island to OCEAN."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:131
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:146
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:162
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:177
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:141
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:172
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:144
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:175
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:152
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:183
 msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:157
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:188
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:163
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:194
 #, java-format
 msgid "§eRemoving {0}'s island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:166
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:197
 msgid "Error: That player does not have an island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:172
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:203
 #, java-format
 msgid "§e{0}s island at {1} has been protected"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:174
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:205
 #, java-format
 msgid "§4{0}s island at {1} was already protected"
 msgstr ""
@@ -653,7 +667,11 @@ msgstr ""
 msgid "list orphans"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:39
+#: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:40
+msgid "§eNo orphans currently registered."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/admin/OrphanCommand.java:42
 #, java-format
 msgid "§eOrphans: {0}"
 msgstr ""
@@ -705,7 +723,7 @@ msgstr ""
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/task/PurgeTask.java:53
+#: us/talabrek/ultimateskyblock/command/admin/task/PurgeTask.java:45
 msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
 msgstr ""
 
@@ -740,11 +758,11 @@ msgstr ""
 msgid "§eUnloading chunks at {0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/AdminCommand.java:35
+#: us/talabrek/ultimateskyblock/command/AdminCommand.java:36
 msgid "Ultimate SkyBlock Admin"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/AdminCommand.java:55
+#: us/talabrek/ultimateskyblock/command/AdminCommand.java:56
 msgid "show player-information"
 msgstr ""
 

@@ -36,12 +36,16 @@ public class OrphanCommand extends CompositeUSBCommand {
                 @Override
                 public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                     List<OrphanLogic.Orphan> orphans = plugin.getOrphanLogic().getOrphans();
-                    sender.sendMessage(tr("\u00a7eOrphans: {0}",
-                            orphans.toString()
-                                    .replaceAll(", ", "\u00a77; \u00a75")
-                                    .replaceAll("\\[", "\u00a75")
-                                    .replaceAll("\\]", "")
-                    ));
+                    if (orphans.isEmpty()) {
+                        sender.sendMessage(tr("\u00a7eNo orphans currently registered."));
+                    } else {
+                        sender.sendMessage(tr("\u00a7eOrphans: {0}",
+                                orphans.toString()
+                                        .replaceAll(", ", "\u00a77; \u00a75")
+                                        .replaceAll("\\[", "\u00a75")
+                                        .replaceAll("\\]", "")
+                        ));
+                    }
                     return true;
                 }
             });

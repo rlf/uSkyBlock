@@ -290,6 +290,18 @@ msgstr "§4Die speler heeft geen eiland."
 msgid "§4No valid island at your location"
 msgstr "§4Er is geen geldig eiland op jouw locatie"
 
+#, fuzzy
+msgid "purges the island"
+msgstr "bescherm het eiland"
+
+#, fuzzy
+msgid "§4Error! §9No valid island found for purging."
+msgstr "§4Er is geen geldig eiland gevonden"
+
+#, java-format
+msgid "§cPURGE: §9Purged island at {0}"
+msgstr ""
+
 msgid "§4No valid player-name supplied."
 msgstr "§4Geen geldige spelers-naam ingevoerd"
 
@@ -513,6 +525,9 @@ msgstr "§eOpschonen van alle oude (lege) eiland locaties."
 
 msgid "list orphans"
 msgstr "orphan lijst"
+
+msgid "§eNo orphans currently registered."
+msgstr ""
 
 #, fuzzy, java-format
 msgid "§eOrphans: {0}"

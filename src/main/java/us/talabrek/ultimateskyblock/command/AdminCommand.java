@@ -22,6 +22,7 @@ import us.talabrek.ultimateskyblock.command.completion.AllPlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.BiomeTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.ChallengeTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.OnlinePlayerTabCompleter;
+import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -31,7 +32,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  * The new admin command, alias /usb
  */
 public class AdminCommand extends AbstractCommandExecutor {
-    public AdminCommand(uSkyBlock plugin) {
+    public AdminCommand(uSkyBlock plugin, ConfirmHandler confirmHandler) {
         super("usb", "usb.admin", tr("Ultimate SkyBlock Admin"));
         OnlinePlayerTabCompleter playerCompleter = new OnlinePlayerTabCompleter();
         TabCompleter challengeCompleter = new ChallengeTabCompleter();
@@ -49,7 +50,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         //add(new RegisterIslandToPlayerCommand());
         add(new AdminChallengeCommand(plugin, challengeCompleter));
         add(new OrphanCommand(plugin));
-        add(new AdminIslandCommand(plugin));
+        add(new AdminIslandCommand(plugin, confirmHandler));
         add(new PurgeCommand(plugin));
         add(new GotoIslandCommand(plugin));
         add(new AbstractAsyncPlayerInfoCommand("info", "usb.admin.info", tr("show player-information")) {

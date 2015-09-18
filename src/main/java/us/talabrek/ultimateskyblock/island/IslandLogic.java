@@ -359,4 +359,20 @@ public class IslandLogic {
         }
         return null;
     }
+
+    public boolean purge(String islandName) {
+        IslandInfo islandInfo = getIslandInfo(islandName);
+        if (islandInfo != null) {
+            for (String member : islandInfo.getMembers()) {
+                PlayerInfo pi = plugin.getPlayerInfo(member);
+                if (pi != null) {
+                    islandInfo.removeMember(pi);
+                }
+            }
+            WorldGuardHandler.removeIslandRegion(islandName);
+            deleteIslandConfig(islandName);
+            return true;
+        }
+        return false;
+    }
 }

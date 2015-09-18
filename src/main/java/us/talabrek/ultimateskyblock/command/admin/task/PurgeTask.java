@@ -38,15 +38,7 @@ public class PurgeTask implements IncrementalTask {
         PlayerInfo pi = null;
         for (int i = 0; i < length && !removeList.isEmpty(); i++) {
             final String islandName = removeList.remove(0);
-            IslandInfo islandInfo = skyBlock.getIslandInfo(islandName);
-            for (String member : islandInfo.getMembers()) {
-                pi = skyBlock.getPlayerInfo(member);
-                if (pi != null) {
-                    islandInfo.removeMember(pi);
-                }
-            }
-            WorldGuardHandler.removeIslandRegion(islandInfo.getName());
-            skyBlock.getIslandLogic().deleteIslandConfig(islandName);
+            skyBlock.getIslandLogic().purge(islandName);
             long now = System.currentTimeMillis();
             if (now >= (lastContact + feedbackEvery)) {
                 lastContact = now;

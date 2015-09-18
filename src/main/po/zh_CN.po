@@ -291,6 +291,18 @@ msgstr "§4玩家仍未拥有岛屿。"
 msgid "§4No valid island at your location"
 msgstr "§4无效的岛屿在你的位置上。"
 
+#, fuzzy
+msgid "purges the island"
+msgstr "§a可以 §f切换岛屿的传送点状态"
+
+#, fuzzy
+msgid "§4Error! §9No valid island found for purging."
+msgstr "§4没有找到有效的岛屿"
+
+#, java-format
+msgid "§cPURGE: §9Purged island at {0}"
+msgstr ""
+
 msgid "§4No valid player-name supplied."
 msgstr "§4无效的玩家名"
 
@@ -510,6 +522,9 @@ msgid "§eClearing all old (empty) island locations."
 msgstr "§e清除所有旧(空)的岛屿坐标。"
 
 msgid "list orphans"
+msgstr ""
+
+msgid "§eNo orphans currently registered."
 msgstr ""
 
 #, fuzzy, java-format

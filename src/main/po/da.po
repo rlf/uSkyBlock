@@ -289,6 +289,18 @@ msgstr "§4Den spiller har ingen ø."
 msgid "§4No valid island at your location"
 msgstr "§4Ingen valid ø på din position"
 
+#, fuzzy
+msgid "purges the island"
+msgstr "§fandre spillere til øen."
+
+#, fuzzy
+msgid "§4Error! §9No valid island found for purging."
+msgstr "§4Ingen valid ø fundet"
+
+#, java-format
+msgid "§cPURGE: §9Purged island at {0}"
+msgstr ""
+
 msgid "§4No valid player-name supplied."
 msgstr "§4Intet validt spiller-navn givet."
 
@@ -510,6 +522,9 @@ msgstr "§eFjerner alle gamle (tomme) ø-placering."
 
 msgid "list orphans"
 msgstr "list horeunger"
+
+msgid "§eNo orphans currently registered."
+msgstr ""
 
 #, fuzzy, java-format
 msgid "§eOrphans: {0}"

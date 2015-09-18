@@ -1204,7 +1204,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         cooldownHandler = new CooldownHandler(this);
         getCommand("island").setExecutor(new IslandCommand(this, menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
-        getCommand("usb").setExecutor(new AdminCommand(this));
+        getCommand("usb").setExecutor(new AdminCommand(this, confirmHandler));
         getCommand("islandtalk").setExecutor(new IslandTalkCommand(this));
         getCommand("partytalk").setExecutor(new PartyTalkCommand(this));
     }
