@@ -12,7 +12,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
@@ -131,7 +130,7 @@ public class IslandLogic {
         World skyBlockWorld = plugin.getWorld();
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
-            for (Player player : WorldEditHandler.getPlayersInRegion(plugin.getWorld(), region)) {
+            for (Player player : WorldGuardHandler.getPlayersInRegion(plugin.getWorld(), region)) {
                 if (player != null && player.isOnline() && plugin.isSkyWorld(player.getWorld()) && !player.isFlying()) {
                     player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
                     plugin.spawnTeleport(player, true);
@@ -374,5 +373,9 @@ public class IslandLogic {
             return true;
         }
         return false;
+    }
+
+    public void shutdown() {
+        cache.invalidateAll();
     }
 }

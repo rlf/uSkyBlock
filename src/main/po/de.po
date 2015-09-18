@@ -1168,6 +1168,14 @@ msgid "§4That player has forbidden you from teleporting to their island."
 msgstr ""
 "§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Teleportieren."
 
+#, fuzzy
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
+
+#, fuzzy
+msgid "§eYou can only use spawn-eggs on your own island."
+msgstr "§4Du kannst nur Aufgaben hinzufügen wenn du eine Insel besitzt."
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7 zeitüberschreitung"
@@ -1369,10 +1377,6 @@ msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
 #, fuzzy
 msgid "Island Group Members"
 msgstr "§9Insel Gruppen Mitglieder\t"
-
-#, fuzzy
-msgid "Group Info"
-msgstr "§aGruppen Info"
 
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
@@ -2026,6 +2030,10 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "Group Info"
+#~ msgstr "§aGruppen Info"
 
 #~ msgid "save orphans"
 #~ msgstr "Speichere Waise"

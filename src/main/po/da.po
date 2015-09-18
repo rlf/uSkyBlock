@@ -1124,6 +1124,14 @@ msgstr "§4Det er en dårlig ide at fjerne din lava!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§Den spiller har udelukket dig fra sin ø."
 
+#, fuzzy
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
+
+#, fuzzy
+msgid "§eYou can only use spawn-eggs on your own island."
+msgstr "§4Du kan kun gennemføre udfordringer når du har en ø!"
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7 timede ud"
@@ -1299,9 +1307,6 @@ msgstr "§fKlik her for at give tilladelsen."
 
 msgid "Island Group Members"
 msgstr "Øens medlemmer"
-
-msgid "Group Info"
-msgstr "Medlems info"
 
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
@@ -1920,6 +1925,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "Group Info"
+#~ msgstr "Medlems info"
 
 #~ msgid "save orphans"
 #~ msgstr "gem horeunger"

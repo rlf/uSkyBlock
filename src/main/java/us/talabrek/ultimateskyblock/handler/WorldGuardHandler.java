@@ -17,6 +17,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.Settings;
@@ -25,9 +28,11 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -334,5 +339,40 @@ public class WorldGuardHandler {
         return new ProtectedCuboidRegion(String.format("%d,%dIsland", islandCenter.getBlockX(), islandLocation.getBlockZ()),
                 new BlockVector(islandCenter.subtract(r, 0, r)),
                 new BlockVector(islandCenter.add(r, 255, r)));
+    }
+
+    public static List<Player> getPlayersInRegion(World world, ProtectedRegion region) {
+        // Note: This might be heavy - for large servers...
+        List<Player> players = new ArrayList<>();
+        if (region == null) {
+            return players;
+        }
+        for (Player player : world.getPlayers()) {
+            if (player != null && player.isOnline()) {
+                Location p = player.getLocation();
+                if (region.contains(p.getBlockX(), p.getBlockY(), p.getBlockZ())) {
+                    players.add(player);
+                }
+            }
+        }
+        return players;
+    }
+
+    public static List<Creature> getCreaturesInRegion(World world, ProtectedRegion region) {
+        List<LivingEntity> livingEntities = world.getLivingEntities();
+        List<Creature> creatures = new ArrayList<>();
+        for (LivingEntity e : livingEntities) {
+            if (e instanceof Creature && region.contains(asVector(e.getLocation()))) {
+                creatures.add((Creature) e);
+            }
+        }
+        return creatures;
+    }
+
+    private static Vector asVector(Location location) {
+        if (location == null) {
+            return new Vector(0,0,0);
+        }
+        return new Vector(location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 }

@@ -13,6 +13,7 @@ import us.talabrek.ultimateskyblock.command.admin.GenTopTenCommand;
 import us.talabrek.ultimateskyblock.command.admin.GotoIslandCommand;
 import us.talabrek.ultimateskyblock.command.admin.ImportCommand;
 import us.talabrek.ultimateskyblock.command.admin.OrphanCommand;
+import us.talabrek.ultimateskyblock.command.admin.PerkCommand;
 import us.talabrek.ultimateskyblock.command.admin.PurgeCommand;
 import us.talabrek.ultimateskyblock.command.admin.ReloadCommand;
 import us.talabrek.ultimateskyblock.command.admin.VersionCommand;
@@ -65,5 +66,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new VersionCommand(plugin));
         add(new AsyncCommand(plugin));
         add(new CooldownCommand(plugin));
+        add(new PerkCommand(plugin));
     }
 }

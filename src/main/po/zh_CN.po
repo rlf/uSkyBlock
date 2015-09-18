@@ -1128,6 +1128,14 @@ msgstr "§4替换岩浆真是一个§f'不错'§4的注意呢~"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
 
+#, fuzzy
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你的岛屿了."
+
+#, fuzzy
+msgid "§eYou can only use spawn-eggs on your own island."
+msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7超时"
@@ -1325,10 +1333,6 @@ msgstr "§e<点击将更改玩家的权限>"
 #, fuzzy
 msgid "Island Group Members"
 msgstr "§9岛屿团队成员"
-
-#, fuzzy
-msgid "Group Info"
-msgstr "§a团队信息"
 
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
@@ -1962,6 +1966,10 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#, fuzzy
+#~ msgid "Group Info"
+#~ msgstr "§a团队信息"
 
 #~ msgid "§eSaving the orphan list."
 #~ msgstr "§e存储孤岛列表"

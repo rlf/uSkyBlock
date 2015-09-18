@@ -1113,6 +1113,14 @@ msgstr "§4It's a bad idea to replace ye lava!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4That player has forbidden you from teleporting to their island."
 
+#, fuzzy
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§eYou have revoked ye trust in §a{0}§e on ye island."
+
+#, fuzzy
+msgid "§eYou can only use spawn-eggs on your own island."
+msgstr "§4You can only submit challenges when you have an island!"
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7 timed out"
@@ -1292,9 +1300,6 @@ msgstr "Click here to grant this permission."
 
 msgid "Island Group Members"
 msgstr "Island Group Members"
-
-msgid "Group Info"
-msgstr "Group Info"
 
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
@@ -1921,6 +1926,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "Group Info"
+#~ msgstr "Group Info"
 
 #~ msgid "save orphans"
 #~ msgstr "save orphans"

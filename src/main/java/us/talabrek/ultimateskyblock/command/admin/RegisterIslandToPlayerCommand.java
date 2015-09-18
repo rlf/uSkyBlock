@@ -25,18 +25,13 @@ public class RegisterIslandToPlayerCommand extends AbstractUSBCommand {
         if (args.length < 1) {
             return false;
         }
-        Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                String playerName = args[0];
-                Player player = (Player) sender;
-                if (uSkyBlock.getInstance().devSetPlayerIsland(player, player.getLocation(), playerName)) {
-                    sender.sendMessage(tr("\u00a7aSet {0}'s island to the bedrock nearest you.", playerName));
-                } else {
-                    sender.sendMessage(tr("\u00a74Bedrock not found: unable to set the island!"));
-                }      
-            }
-        });
+        String playerName = args[0];
+        Player player = (Player) sender;
+        if (uSkyBlock.getInstance().devSetPlayerIsland(player, player.getLocation(), playerName)) {
+            sender.sendMessage(tr("\u00a7aSet {0}'s island to the bedrock nearest you.", playerName));
+        } else {
+            sender.sendMessage(tr("\u00a74Bedrock not found: unable to set the island!"));
+        }
         return true;
     }
 }

@@ -140,7 +140,7 @@ public class SkyBlockMenu {
         final Set<String> memberList = islandInfo.getMembers();
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         final ItemMeta meta2 = sign.getItemMeta();
-        meta2.setDisplayName("\u00a7a" + tr("Group Info"));
+        meta2.setDisplayName("\u00a7a" + tr("Island Group Members"));
         lores.add(tr("Group Members: \u00a72{0}\u00a77/\u00a7e{1}", islandInfo.getPartySize(), islandInfo.getMaxPartySize()));
         if (islandInfo.getPartySize() < islandInfo.getMaxPartySize()) {
             addLore(lores, tr("\u00a7aMore players can be invited to this island."));
@@ -571,7 +571,7 @@ public class SkyBlockMenu {
         Player p = (Player) event.getWhoClicked();
         ItemMeta meta = event.getCurrentItem().getItemMeta();
         SkullMeta skull = meta instanceof SkullMeta ? (SkullMeta) meta : null;
-        if (stripFormatting(event.getInventory().getName()).equalsIgnoreCase(tr("Island Group Members"))) {
+        if (stripFormatting(event.getInventory().getTitle()).equalsIgnoreCase(tr("Island Group Members"))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;

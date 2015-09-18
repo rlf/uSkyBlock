@@ -30,6 +30,7 @@ import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -81,26 +82,10 @@ public class PlayerEvents implements Listener {
             Player hungerman = (Player) event.getEntity();
             float randomNum = RANDOM.nextFloat();
             if (plugin.isSkyWorld(hungerman.getWorld()) && hungerman.getFoodLevel() > event.getFoodLevel() && plugin.playerIsOnIsland(hungerman)) {
-                if (VaultHandler.checkPerk(hungerman.getName(), "usb.extra.hunger4", hungerman.getWorld())) {
+                Perk perk = plugin.getPerkLogic().getPerk(hungerman);
+                if (randomNum <= perk.getHungerReduction()) {
                     event.setCancelled(true);
                     return;
-                }
-                if (VaultHandler.checkPerk(hungerman.getName(), "usb.extra.hunger3", hungerman.getWorld())) {
-                    if (randomNum <= 0.75f) {
-                        event.setCancelled(true);
-                        return;
-                    }
-                }
-                if (VaultHandler.checkPerk(hungerman.getName(), "usb.extra.hunger2", hungerman.getWorld())) {
-                    if (randomNum <= 0.50f) {
-                        event.setCancelled(true);
-                        return;
-                    }
-                }
-                if (VaultHandler.checkPerk(hungerman.getName(), "usb.extra.hunger", hungerman.getWorld())) {
-                    if (randomNum <= 0.25f) {
-                        event.setCancelled(true);
-                    }
                 }
             }
         }

@@ -61,6 +61,7 @@ import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
+import us.talabrek.ultimateskyblock.event.SpawnEvents;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
@@ -75,10 +76,13 @@ import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.OrphanLogic;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
+import us.talabrek.ultimateskyblock.player.PerkLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerLogic;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
+
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
@@ -110,8 +114,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
     private OrphanLogic orphanLogic;
+    private PerkLogic perkLogic;
+
     public IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
+
     private USBImporterExecutor importer;
     private BalancedExecutor executor;
     private BalancedExecutor asyncExecutor;
@@ -298,6 +305,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             if (getConfig().getBoolean("options.protection.item-drops", true)) {
                 manager.registerEvents(new ItemDropEvents(this), this);
             }
+        }
+        if (getConfig().getBoolean("options.island.spawn-limits.enabled", true)) {
+            manager.registerEvents(new SpawnEvents(this), this);
         }
     }
 
@@ -535,8 +545,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public synchronized boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
-        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main thread!");
-
         final PlayerInfo pi = playerLogic.getPlayerInfo(player);
 
         final Location newLoc = findBedrockLocation(l);
@@ -894,13 +902,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     private void generateIsland(final Player player, final PlayerInfo pi, final Location next) {
-        final IslandGenerator.PlayerIslandCreationData playerIslandCreationData = islandGenerator.preCreateData(player, pi);
+        final PlayerPerk playerPerk = new PlayerPerk(pi, perkLogic.getPerk(player));
         player.sendMessage(tr("\u00a7eGetting your island ready, please be patient, it can take a while."));
         final Runnable generateTask = new Runnable() {
             @Override
             public void run() {
                 next.getWorld().loadChunk(next.getBlockX() >> 4, next.getBlockZ() >> 4, false);
-                islandGenerator.setChest(next, playerIslandCreationData);
+                islandGenerator.setChest(next, playerPerk);
                 setNewPlayerIsland(player, next);
                 changePlayerBiome(player, "OCEAN");
                 WorldGuardHandler.protectIsland(player, pi);
@@ -925,7 +933,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         Runnable createTask = new Runnable() {
             @Override
             public void run() {
-                final String schem = islandGenerator.createIsland(uSkyBlock.this, playerIslandCreationData, next);
+                final String schem = islandGenerator.createIsland(uSkyBlock.this, playerPerk, next);
                 Bukkit.getScheduler().runTaskLater(uSkyBlock.this, generateTask, getConfig().getInt("options.advanced.delayAfterIslandCreation." + schem, 0));
             }
         };
@@ -1098,7 +1106,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         IslandInfo info = islandLogic.createIslandInfo(playerInfo.locationForParty(), playerInfo.getPlayerName());
         Player onlinePlayer = playerInfo.getPlayer();
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
-            info.handleMemberLoggedIn(onlinePlayer);
+            info.updatePermissionPerks(onlinePlayer, perkLogic.getPerk(onlinePlayer));
         }
         if (challengeLogic.isResetOnCreate()) {
             playerInfo.resetAllChallenges();
@@ -1162,6 +1170,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return levelLogic;
     }
 
+    public PerkLogic getPerkLogic() {
+        return perkLogic;
+    }
+
     @Override
     public void reloadConfig() {
         reloadConfigs();
@@ -1170,6 +1182,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private void reloadConfigs() {
         createFolders();
         HandlerList.unregisterAll(this);
+        if (playerLogic != null) {
+            playerLogic.shutdown();
+        }
+        if (islandLogic != null) {
+            islandLogic.shutdown();
+        }
         VaultHandler.setupEconomy();
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
@@ -1181,6 +1199,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
         PlayerUtil.loadConfig(playerDB, getConfig());
         islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
+        perkLogic = new PerkLogic(this, islandGenerator);
         challengeLogic = new ChallengeLogic(getFileConfiguration("challenges.yml"), this);
         menu = new SkyBlockMenu(this, challengeLogic);
         levelLogic = new LevelLogic(this, getFileConfiguration("levelConfig.yml"));
@@ -1207,6 +1226,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getCommand("usb").setExecutor(new AdminCommand(this, confirmHandler));
         getCommand("islandtalk").setExecutor(new IslandTalkCommand(this));
         getCommand("partytalk").setExecutor(new PartyTalkCommand(this));
+        Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
+            @Override
+            public void run() {
+                for (Player player : getWorld().getPlayers()) {
+                    IslandInfo islandInfo = getIslandInfo(player);
+                }
+            }
+        });
     }
 
     public boolean isSkyWorld(World world) {

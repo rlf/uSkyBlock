@@ -1,7 +1,8 @@
 package us.talabrek.ultimateskyblock.island;
 
 import java.io.File;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -9,13 +10,10 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
@@ -44,59 +42,18 @@ public class IslandGenerator {
         }
     }
 
-    public class PlayerIslandCreationData {
-        private final PlayerInfo playerInfo;
-        private HashSet<String> perms = new HashSet<>();
-
-        public PlayerIslandCreationData(PlayerInfo playerInfo) {
-            this.playerInfo = playerInfo;
+    public List<String> getSchemeNames() {
+        List<String> names = new ArrayList<>();
+        for (File f : schemFiles) {
+            names.add(FileUtil.getBasename(f));
         }
-
-        public PlayerInfo getPlayerInfo() {
-            return this.playerInfo;
-        }
-
-        protected void addPerm(String schematic) {
-            this.perms.add(schematic);
-        }
-
-        protected boolean hasPerm(String perm) {
-            return perms.contains(perm);
-        }
+        return names;
     }
 
-    public PlayerIslandCreationData preCreateData(Player player, PlayerInfo playerInfo) {
-        PlayerIslandCreationData playerIslandCreationData = new PlayerIslandCreationData(playerInfo);
 
-        for (File schemFile : schemFiles) {
-            // First run-through - try to set the island the player has permission for.
-            String cSchem = schemFile.getName();
-            if (cSchem.lastIndexOf('.') > 0) {
-                cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.schematic." + cSchem, uSkyBlock.skyBlockWorld)) {
-                playerIslandCreationData.addPerm("usb.schematic." + cSchem);
-            }
-        }
-
-        for (String perm : Settings.island_extraPermissions) {
-            if (VaultHandler.checkPerk(player.getName(), "usb." + perm, uSkyBlock.skyBlockWorld)) {
-                playerIslandCreationData.addPerm("usb." + perm);
-            }
-        }
-
-        for (String biome : uSkyBlock.getInstance().getValidBiomes().keySet()) {
-            if (VaultHandler.checkPerk(player.getName(), "usb.biome." + biome, uSkyBlock.skyBlockWorld)) {
-                playerIslandCreationData.addPerm("usb.biome." + biome);
-            }
-        }
-
-        return playerIslandCreationData;
-    }
-
-    public String createIsland(uSkyBlock plugin, final PlayerIslandCreationData playerIslandCreationData, final Location next) {
-        log.entering(CN, "createIsland", new Object[]{plugin, playerIslandCreationData.getPlayerInfo().getPlayerName(), next});
-        log.fine("creating island for " + playerIslandCreationData.getPlayerInfo().getPlayerName() + " at " + next);
+    public String createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next) {
+        log.entering(CN, "createIsland", new Object[]{plugin, playerPerk.getPlayerInfo().getPlayerName(), next});
+        log.fine("creating island for " + playerPerk.getPlayerInfo().getPlayerName() + " at " + next);
         boolean hasIslandNow = false;
         String cSchem = "default";
         if (schemFiles.length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
@@ -104,14 +61,11 @@ public class IslandGenerator {
             File defaultFile = null;
             for (File schemFile : schemFiles) {
                 // First run-through - try to set the island the player has permission for.
-                cSchem = schemFile.getName();
-                if (cSchem.lastIndexOf('.') > 0) {
-                    cSchem = cSchem.substring(0, cSchem.lastIndexOf('.'));
-                }
+                cSchem = FileUtil.getBasename(schemFile);
                 if (cSchem.equalsIgnoreCase(Settings.island_schematicName)) {
                     defaultFile = schemFile;
                 }
-                if (permFile == null && playerIslandCreationData.hasPerm("usb.schematic." + cSchem)) {
+                if (permFile == null && playerPerk.getPerk().getSchematics().contains(cSchem)) {
                     permFile = schemFile;
                 }
             }
@@ -127,11 +81,11 @@ public class IslandGenerator {
         if (!hasIslandNow) {
             if (!Settings.island_useOldIslands) {
                 log.fine("generating a uSkyBlock default island");
-                generateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerIslandCreationData, uSkyBlock.skyBlockWorld);
+                generateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerPerk, uSkyBlock.skyBlockWorld);
                 cSchem = "default";
             } else {
                 log.fine("generating a skySMP island");
-                oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerIslandCreationData, uSkyBlock.skyBlockWorld);
+                oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerPerk, uSkyBlock.skyBlockWorld);
                 cSchem = "skySMP";
             }
         }
@@ -140,7 +94,7 @@ public class IslandGenerator {
         return cSchem;
     }
 
-    public void generateIslandBlocks(final int x, final int z, final PlayerIslandCreationData playerIslandCreationData, final World world) {
+    public void generateIslandBlocks(final int x, final int z, final PlayerPerk playerPerk, final World world) {
         final int y = Settings.island_height;
         final Block blockToChange = world.getBlockAt(x, y, z);
         blockToChange.setTypeIdAndData(7, (byte) 0, false);
@@ -148,10 +102,10 @@ public class IslandGenerator {
         this.islandLayer2(x, z, world);
         this.islandLayer3(x, z, world);
         this.islandLayer4(x, z, world);
-        this.islandExtras(x, z, playerIslandCreationData, world);
+        this.islandExtras(x, z, playerPerk, world);
     }
 
-    public void oldGenerateIslandBlocks(final int x, final int z, final PlayerIslandCreationData playerIslandCreationData, final World world) {
+    public void oldGenerateIslandBlocks(final int x, final int z, final PlayerPerk playerPerk, final World world) {
         final int y = Settings.island_height;
         for (int x_operate = x; x_operate < x + 3; ++x_operate) {
             for (int y_operate = y; y_operate < y + 3; ++y_operate) {
@@ -266,7 +220,7 @@ public class IslandGenerator {
         blockToChange.setTypeIdAndData(12, (byte) 0, false);
     }
 
-    private void islandExtras(final int x, final int z, final PlayerIslandCreationData playerIslandCreationData, final World world) {
+    private void islandExtras(final int x, final int z, final PlayerPerk playerPerk, final World world) {
         int y = Settings.island_height;
         Block blockToChange = world.getBlockAt(x, y + 5, z);
         blockToChange.setTypeIdAndData(17, (byte) 0, false);
@@ -325,7 +279,7 @@ public class IslandGenerator {
         blockToChange.setTypeIdAndData(54, (byte) 3, false);
     }
 
-    public void setChest(final Location loc, final PlayerIslandCreationData playerIslandCreationData) {
+    public void setChest(final Location loc, final PlayerPerk playerPerk) {
         World world = loc.getWorld();
         world.loadChunk(loc.getBlockX() >> 4, loc.getBlockZ() >> 4, false);
         for (int dx = 1; dx <= 30; dx++) {
@@ -341,16 +295,7 @@ public class IslandGenerator {
                         inventory.clear();
                         inventory.setContents(Settings.island_chestItems);
                         if (Settings.island_addExtraItems) {
-                            for (String perm : Settings.island_extraPermissions) {
-                                if (playerIslandCreationData.hasPerm(perm)) {
-                                    String itemString = config.getString("options.island.extraPermissions." + perm);
-                                    if (itemString == null || itemString.isEmpty()) {
-                                        continue;
-                                    }
-                                    ItemStack[] itemArray = ItemStackUtil.createItemArray(itemString);
-                                    inventory.addItem(itemArray);
-                                }
-                            }
+                            inventory.addItem(ItemStackUtil.createItemArray(playerPerk.getPerk().getExtraItems()));
                         }
                     }
                 }

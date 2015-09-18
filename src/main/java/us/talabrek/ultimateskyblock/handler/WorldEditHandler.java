@@ -195,20 +195,4 @@ public class WorldEditHandler {
         }
     }
 
-    public static List<Player> getPlayersInRegion(World world, ProtectedRegion region) {
-        // Note: This might be heavy - for large servers...
-        List<Player> players = new ArrayList<>();
-        if (region == null) {
-            return players;
-        }
-        for (Player player : world.getPlayers()) {
-            if (player != null && player.isOnline()) {
-                Location p = player.getLocation();
-                if (region.contains(p.getBlockX(), p.getBlockY(), p.getBlockZ())) {
-                    players.add(player);
-                }
-            }
-        }
-        return players;
-    }
 }

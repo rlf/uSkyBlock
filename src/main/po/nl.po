@@ -1143,6 +1143,14 @@ msgstr "§4Het is een slecht idee om je lava te vervangen!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen."
 
+#, fuzzy
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§eJe hebt §a{0}§e het vertouwen afgenomen op je eiland."
+
+#, fuzzy
+msgid "§eYou can only use spawn-eggs on your own island."
+msgstr "§4Je kan alleen uitdaginged voltooien als je een eiland hebt!"
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "De tijd om §9{0}§7 te accepteren is verlopen."
@@ -1328,9 +1336,6 @@ msgstr "Klik hier om deze permissie te geven."
 
 msgid "Island Group Members"
 msgstr "Eiland Groep Leden"
-
-msgid "Group Info"
-msgstr "Groep Info"
 
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
@@ -1966,6 +1971,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "Group Info"
+#~ msgstr "Groep Info"
 
 #~ msgid "save orphans"
 #~ msgstr "orphans opslaan"

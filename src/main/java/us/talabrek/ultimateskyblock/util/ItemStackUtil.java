@@ -57,7 +57,11 @@ public enum ItemStackUtil {;
     }
 
     public static ItemStack[] createItemArray(String items) {
-        return createItemList(items).toArray(new ItemStack[0]);
+        return createItemArray(createItemList(items));
+    }
+
+    public static ItemStack[] createItemArray(List<ItemStack> items) {
+        return items.toArray(new ItemStack[0]);
     }
 
     public static ItemStack createItemStack(String displayItem, String name, String description) {
@@ -88,5 +92,16 @@ public enum ItemStackUtil {;
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
         return itemStack;
+    }
+
+    public static List<ItemStack> clone(List<ItemStack> items) {
+        if (items == null) {
+            return null;
+        }
+        List<ItemStack> copy = new ArrayList<>();
+        for (ItemStack item : items) {
+            copy.add(item.clone());
+        }
+        return copy;
     }
 }

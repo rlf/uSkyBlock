@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -12,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
+import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -36,14 +35,14 @@ public class ChallengeLogic {
     public static final int CHALLENGE_PAGESIZE = ROWS_OF_RANKS * 9;
 
     private final FileConfiguration config;
-    private final uSkyBlock skyBlock;
+    private final uSkyBlock plugin;
     private final Map<String, Rank> ranks;
 
     public final ChallengeDefaults defaults;
 
-    public ChallengeLogic(FileConfiguration config, uSkyBlock skyBlock) {
+    public ChallengeLogic(FileConfiguration config, uSkyBlock plugin) {
         this.config = config;
-        this.skyBlock = skyBlock;
+        this.plugin = plugin;
         this.defaults = ChallengeFactory.createDefaults(config.getRoot());
         load();
         ranks = ChallengeFactory.createRankMap(config.getConfigurationSection("ranks"), defaults);
@@ -89,7 +88,7 @@ public class ChallengeLogic {
     }
 
     public boolean completeChallenge(final Player player, final String challengeName) {
-        final PlayerInfo pi = skyBlock.getPlayerInfo(player);
+        final PlayerInfo pi = plugin.getPlayerInfo(player);
         Challenge challenge = getChallenge(challengeName);
         if (challenge == null) {
             player.sendMessage(tr("\u00a74No challenge named {0} found", challengeName));
@@ -108,7 +107,7 @@ public class ChallengeLogic {
             }
             return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND) {
-            if (!skyBlock.playerIsOnIsland(player)) {
+            if (!plugin.playerIsOnIsland(player)) {
                 player.sendMessage(tr("\u00a74You must be on your island to do that!"));
                 return false;
             }
@@ -164,7 +163,7 @@ public class ChallengeLogic {
     }
 
     private boolean tryCompleteIslandLevel(Player player, Challenge challenge) {
-        if (skyBlock.getIslandInfo(player).getLevel() >= challenge.getRequiredLevel()) {
+        if (plugin.getIslandInfo(player).getLevel() >= challenge.getRequiredLevel()) {
             giveReward(player, challenge.getName());
             return true;
         }
@@ -263,7 +262,7 @@ public class ChallengeLogic {
 
     private boolean tryCompleteOnPlayer(Player player, String challengeName) {
         Challenge challenge = getChallenge(challengeName);
-        PlayerInfo playerInfo = skyBlock.getPlayerInfo(player);
+        PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
         if (challenge != null && completion != null) {
             StringBuilder sb = new StringBuilder();
@@ -306,9 +305,9 @@ public class ChallengeLogic {
 
     private boolean giveReward(Player player, Challenge challenge) {
         String challengeName = challenge.getName();
-        World skyWorld = skyBlock.getWorld();
+        World skyWorld = plugin.getWorld();
         player.sendMessage(tr("\u00a7aYou have completed the {0} challenge!", challengeName));
-        PlayerInfo playerInfo = skyBlock.getPlayerInfo(player);
+        PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         Reward reward;
         boolean isFirstCompletion = playerInfo.checkChallenge(challengeName) == 0;
         if (isFirstCompletion) {
@@ -318,25 +317,8 @@ public class ChallengeLogic {
         }
         float rewBonus = 1;
         if (defaults.enableEconomyPlugin && VaultHandler.hasEcon()) {
-            // TODO: 10/12/2014 - R4zorax: Move this to some config file
-            if (VaultHandler.checkPerk(player.getName(), "group.memberplus", skyWorld)) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.all", skyWorld)) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.25", skyWorld)) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.50", skyWorld)) {
-                rewBonus += 0.05;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.75", skyWorld)) {
-                rewBonus += 0.1;
-            }
-            if (VaultHandler.checkPerk(player.getName(), "usb.donor.100", skyWorld)) {
-                rewBonus += 0.2;
-            }
+            Perk perk = plugin.getPerkLogic().getPerk(player);
+            rewBonus += perk.getRewBonus();
             VaultHandler.depositPlayer(player.getName(), reward.getCurrencyReward() * rewBonus);
         }
         player.giveExp(reward.getXpReward());
@@ -364,7 +346,7 @@ public class ChallengeLogic {
         }
         for (String cmd : reward.getCommands()) {
             String command = cmd.replaceAll("\\{challenge\\}", challengeName);
-            skyBlock.execCommand(player, command);
+            plugin.execCommand(player, command);
         }
         playerInfo.completeChallenge(challengeName);
         return true;
@@ -506,7 +488,7 @@ public class ChallengeLogic {
                 }
                 menu.setItem(location++, currentChallengeItem);
             } catch (Exception e) {
-                skyBlock.getLogger().log(Level.SEVERE, "Invalid challenge " + challenge, e);
+                plugin.getLogger().log(Level.SEVERE, "Invalid challenge " + challenge, e);
             }
         }
         return location;

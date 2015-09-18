@@ -1,5 +1,22 @@
 package us.talabrek.ultimateskyblock.island;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.player.Perk;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.UUIDUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,24 +28,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.uSkyBlock;
+
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
-import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 /**
  * Data object for an island
@@ -117,10 +119,7 @@ public class IslandInfo {
         Player onlinePlayer = Bukkit.getPlayer(leader);
         // The only time the onlinePlayer will be null is if it is being converted from another skyblock plugin.
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
-            int maxPartySizePermission = getSpecialMaxPartySizePermission(onlinePlayer);
-            if (maxPartySizePermission > 0) {
-                section.set("maxPartySizePermission", maxPartySizePermission);
-            }
+            updatePermissionPerks(onlinePlayer, uSkyBlock.getInstance().getPerkLogic().getPerk(onlinePlayer));
         }
         save();
     }
@@ -146,35 +145,35 @@ public class IslandInfo {
         Player onlinePlayer = Bukkit.getPlayer(member);
         // The only time the onlinePlayer will be null is if it is being converted from another skyblock plugin.
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
-            int maxPartySizePermission = getSpecialMaxPartySizePermission(onlinePlayer);
-            if (maxPartySizePermission > 0) {
-                section.set("maxPartySizePermission", maxPartySizePermission);
-            }
+            updatePermissionPerks(onlinePlayer, uSkyBlock.getInstance().getPerkLogic().getPerk(onlinePlayer));
         }
         WorldGuardHandler.addPlayerToOldRegion(name, member);
         save();
     }
 
-    public void handleMemberLoggedIn(final Player member) {
+    public void updatePermissionPerks(final Player member, Perk perk) {
         ConfigurationSection section = config.getConfigurationSection("party.members." + member.getName());
         boolean dirty = false;
         if (section != null) {
-            int maxPartySizePermission = getSpecialMaxPartySizePermission(member);
-            if (maxPartySizePermission > 0) {
-                if (section.contains("maxPartySizePermission")) {
-                    if (section.getInt("maxPartySizePermission") != maxPartySizePermission) {
-                        section.set("maxPartySizePermission", maxPartySizePermission);
-                        dirty = true;
-                    }
-                } else {
-                    section.set("maxPartySizePermission", maxPartySizePermission);
-                    dirty = true;
-                }
-            } else {
-                if (section.contains("maxPartySizePermission")) {
-                    section.set("maxPartySizePermission", null);
-                    dirty = true;
-                }
+            int maxParty = section.getInt("maxPartySizePermission", Settings.general_maxPartySize);
+            if (perk.getMaxPartySize() != maxParty) {
+                section.set("maxPartySizePermission", perk.getMaxPartySize());
+                dirty = true;
+            }
+            int maxAnimals = section.getInt("maxAnimals", 0);
+            if (perk.getAnimals() != maxAnimals) {
+                section.set("maxAnimals", perk.getAnimals());
+                dirty = true;
+            }
+            int maxMonsters = section.getInt("maxMonsters", 0);
+            if (perk.getMonsters() != maxMonsters) {
+                section.set("maxMonsters", perk.getMonsters());
+                dirty = true;
+            }
+            int maxVillagers = section.getInt("maxVillagers", 0);
+            if (perk.getVillagers() != maxVillagers) {
+                section.set("maxVillagers", perk.getVillagers());
+                dirty = true;
             }
         }
         if (dirty) {
@@ -217,41 +216,38 @@ public class IslandInfo {
     }
 
     public int getMaxPartySize() {
-        int maxSize = Settings.general_maxPartySize;
+        return getMaxPartyIntValue("maxPartySizePermission", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getMaxPartySize());
+    }
 
+    public int getMaxAnimals() {
+        return getMaxPartyIntValue("maxAnimals", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getAnimals());
+    }
+
+    public int getMaxMonsters() {
+        return getMaxPartyIntValue("maxMonsters", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getMonsters());
+    }
+
+    public int getMaxVillagers() {
+        return getMaxPartyIntValue("maxVillagers", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getVillagers());
+    }
+
+    private int getMaxPartyIntValue(String name, int defaultValue) {
+        int value = defaultValue;
         ConfigurationSection membersSection = config.getConfigurationSection("party.members");
         if (membersSection != null) {
             for (String memberName : membersSection.getKeys(false)) {
                 ConfigurationSection memberSection = membersSection.getConfigurationSection(memberName);
                 if (memberSection != null) {
-                    if (memberSection.contains("maxPartySizePermission")) {
-                        int memberMaxPartySizePermission = memberSection.getInt("maxPartySizePermission");
-                        if (memberMaxPartySizePermission > maxSize) {
-                            maxSize = memberMaxPartySizePermission;
+                    if (memberSection.isInt(name)) {
+                        int memberValue = memberSection.getInt(name, value);
+                        if (memberValue > value) {
+                            value = memberValue;
                         }
                     }
                 }
             }
         }
-        return maxSize;
-    }
-
-    private int getSpecialMaxPartySizePermission(final Player player) {
-        int memberPartySizePermission = -1;
-
-        ConfigurationSection maxParty = uSkyBlock.getInstance().getConfig().getConfigurationSection("options.party.maxPartyPermissions");
-        if (maxParty == null) {
-            return -1;
-        }
-        for (String permKey : maxParty.getKeys(true)) {
-            if (maxParty.isInt(permKey) && VaultHandler.checkPerm(player, permKey, uSkyBlock.getInstance().getWorld())) {
-                int partySize = maxParty.getInt(permKey, memberPartySizePermission);
-                if (partySize > memberPartySizePermission) {
-                    memberPartySizePermission = partySize;
-                }
-            }
-        }
-        return memberPartySizePermission;
+        return value;
     }
 
     public String getLeader() {
@@ -532,7 +528,11 @@ public class IslandInfo {
         str += ChatColor.GRAY + "  - leader: " + ChatColor.DARK_AQUA + getLeader() + "\n";
         str += ChatColor.GRAY + "  - members: " + ChatColor.DARK_AQUA + getMembers() + "\n";
         str += ChatColor.GRAY + "  - size: " + ChatColor.DARK_AQUA + getPartySize() + "\n";
-        str += ChatColor.GRAY + "  - max: " + ChatColor.DARK_AQUA + getMaxPartySize() + "\n";
+        str += ChatColor.DARK_AQUA + "Limits:\n";
+        str += ChatColor.GRAY + "  - maxParty: " + ChatColor.DARK_AQUA + getMaxPartySize() + "\n";
+        str += ChatColor.GRAY + "  - animals: " + ChatColor.DARK_AQUA + getMaxAnimals() + "\n";
+        str += ChatColor.GRAY + "  - monsters: " + ChatColor.DARK_AQUA + getMaxMonsters() + "\n";
+        str += ChatColor.GRAY + "  - villagers: " + ChatColor.DARK_AQUA + getMaxVillagers() + "\n";
         str += ChatColor.DARK_AQUA + "Bans:\n";
         for (String ban : getBans()) {
             str += ChatColor.GRAY + "  - " + ban + "\n";

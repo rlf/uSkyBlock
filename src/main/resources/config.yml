@@ -97,6 +97,20 @@ options:
     # The format used in /islandtalk chat messages
     chat-format: '&9SKY &r{DISPLAYNAME} &f>&d {MESSAGE}'
 
+    # Limits the spawning
+    spawn-limits:
+      # [true/false] if true, the limits below will limit spawning
+      enabled: true
+
+      # how many animals can be spawned within an island
+      animals: 48
+
+      # how many monsters can be spawned on an island
+      monsters: 50
+
+      # how many villagers can be spawned on an island
+      villagers: 16
+
   # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
   # Any empty slot can be filled using this format.
   extra-menus:
@@ -177,13 +191,6 @@ options:
     # The format used in /partytalk chat messages
     chat-format: '&9PARTY &r{DISPLAYNAME} &f>&b {MESSAGE}'
 
-    # List of permissions and their corresponding maxPartySize (overrides maxPartySize)
-    maxPartyPermissions:
-      'usb.extra.partysize1': 5
-      'usb.extra.partysize2': 6
-      'usb.extra.partysize3': 7
-      'usb.extra.partysize': 8
-
     leave:
       # [true/false] Whether to require confirmation (i.e. repeating the command twice).
       confirmation: true
@@ -221,8 +228,22 @@ options:
     # [true/false] Whether to require confirmation (i.e. repeating the command twice).
     confirmation: true
 
+# This section allows donors to get specific perks
+#donor-perks:
+#  usb:
+#    donor:
+#      example:
+#        # permission: usb.donor.example will give the below extra items
+#        maxPartySize: 5
+#        schematics: [LargeIsland]
+#        animals: 60
+#        monsters: 100
+#        villagers: 24
+#        rewBonus: 0.5
+#        hungerReduction: 0.5
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 23
+version: 24
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

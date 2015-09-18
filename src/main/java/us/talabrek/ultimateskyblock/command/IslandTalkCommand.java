@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -24,7 +23,7 @@ public class IslandTalkCommand extends IslandChatCommand {
     @Override
     protected List<Player> getRecipients(Player player, IslandInfo islandInfo) {
         if (plugin.isSkyWorld(player.getWorld())) {
-            return WorldEditHandler.getPlayersInRegion(plugin.getWorld(), WorldGuardHandler.getIslandRegionAt(player.getLocation()));
+            return WorldGuardHandler.getPlayersInRegion(plugin.getWorld(), WorldGuardHandler.getIslandRegionAt(player.getLocation()));
         }
         return Collections.emptyList();
     }

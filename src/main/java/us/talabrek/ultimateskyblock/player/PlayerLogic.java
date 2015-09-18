@@ -90,11 +90,10 @@ public class PlayerLogic {
                 plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
                 IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
-                    islandInfo.handleMemberLoggedIn(onlinePlayer);
+                    islandInfo.updatePermissionPerks(onlinePlayer, plugin.getPerkLogic().getPerk(onlinePlayer));
                 }
             }
         }
-
         return playerInfo;
     }
 
