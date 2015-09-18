@@ -28,9 +28,9 @@ They have not been tested as thouroughly as the 1.8 (`master`) releases - so the
 
 ## Config-files
 
-*Note*: Config files might change quite a bit, so before installing the plugin, please move existing config files aside, and manually merge them after the plugin has "installed" it's own versions.
+*Note*: Config files might change quite a bit, and upon activation, the plugin will try to merge the existing ones with the new ones. A backup is kept under the `uSkyBlock/backup` folder.
 
-We are working on a feature, that will do this automatically - but until that is released, please follow the above procedure.
+Please make sure, that the config files are as you expect them to be, before using the plugin or releasing it to "the public".
 
 ## Building/Compiling
 
