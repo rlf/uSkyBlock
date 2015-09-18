@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-18 12:32-0300\n"
-"PO-Revision-Date: 2015-09-18 12:53-0300\n"
+"PO-Revision-Date: 2015-09-18 16:58-0300\n"
 "Last-Translator: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language-Team: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language: pt_BR\n"
@@ -172,11 +172,11 @@ msgstr "§fcategoria, para liberar a próxima."
  
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:484
 msgid "§eClick here to show previous page"
-msgstr "§eClique aqui para ver a página anterior"
+msgstr "§e§lClique aqui para ver a página anterior"
  
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:486
 msgid "§eClick here to show next page"
-msgstr "§eClique aqui para ver a próxima página"
+msgstr "§e§lClique aqui para ver a próxima página"
  
 #: us/talabrek/ultimateskyblock/challenge/ChallengeLogic.java:502
 msgid "§4§lLocked Challenge"
@@ -258,7 +258,7 @@ msgstr "§4Nome de desafio inválido! Use /c help para mais informações"
 #: us/talabrek/ultimateskyblock/challenge/Rank.java:108
 #, java-format
 msgid "Complete {0} more {1} challenges"
-msgstr "Complete mais  {0} {1} desafios"
+msgstr "Complete mais {0} desafios na categoria {1}"
  
 #: us/talabrek/ultimateskyblock/challenge/Rank.java:98
 #, java-format
@@ -410,7 +410,7 @@ msgstr "§eAlterado o bioma da ilha de {0} para OCEANO."
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:177
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
-msgstr "§aVocê precisa ir ao spawn ou relogar para ver as alterações."
+msgstr "§aVocê precisa ir ao spawn ou reconectar para ver as alterações."
  
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:172
 #, java-format
@@ -1476,8 +1476,8 @@ msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§eUsar§9{0}§e é perigoso. Repita esse comando dentro de §a{1}§e segundos "
-"para aceitar!"
+"§4CUIDADO: §aUsar{0}§ é perigoso. Repita esse comando dentro de §a{1}§e "
+"segundos para confirmar!"
  
 #: us/talabrek/ultimateskyblock/handler/WorldGuardHandler.java:130
 #, java-format
@@ -1687,7 +1687,7 @@ msgstr "§eClique para dar essa permissão."
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:574
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:793
 msgid "Island Group Members"
-msgstr "§aMembros no grupo"
+msgstr "§9Membros do grupo"
  
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:143
 msgid "Group Info"
@@ -1696,7 +1696,7 @@ msgstr "Informação do grupo"
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:144
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "Membros do grupo: §2{0}§7/§e{1}"
+msgstr "§2Membros do grupo: §e{0}§7/§e{1}"
  
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:146
 msgid "§aMore players can be invited to this island."
@@ -2272,7 +2272,7 @@ msgstr "§e§lClique aqui para ativar."
  
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:540
 msgid "§a§lIsland Log"
-msgstr "§a§lHistórico da ilha"
+msgstr "§a§lHistórico"
  
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:541
 msgid ""
@@ -2304,7 +2304,7 @@ msgstr ""
  
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:558
 msgid "§a§lChange Warp Location"
-msgstr "§a§lAlterar Localização do Warp"
+msgstr "§a§lAlterar localização do warp"
  
 #: us/talabrek/ultimateskyblock/menu/SkyBlockMenu.java:559
 msgid ""
