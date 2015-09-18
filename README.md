@@ -11,11 +11,14 @@ This version depends on the following plugins:
 * WorldEdit 6.0.0-SNAPSHOT
 * WorldGuard 6.0.0-SNAPSHOT
 
-## Releases [![Build Status](https://api.travis-ci.org/rlf/uSkyBlock.svg)](https://travis-ci.org/rlf/uSkyBlock)
+## Releases 
 
-We have been releasing close to 100 "pre-releases" or "release-candidates" so far, and are getting ready to make our first "official release".
+* Build Status: [![Build Status](https://api.travis-ci.org/rlf/uSkyBlock.svg)](https://travis-ci.org/rlf/uSkyBlock)
+* Issues: [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Percentage of issues still open")
 
-This will be named v2.1.0, and moving forward from this one, we will start to use the micro-versions for release-candidates, the minor version for "official releases", and the major-version to signify changes that might require data-conversion or similar.
+Pre-releases will end a date-stamp, and is considered unsafe for production servers.
+
+Releases have a clean version number, and has been tested, and should be safe for production servers.
 
 ### Compatibilty Releases for Bukkit 1.7.9/10
 We have decided to also include `compat` releases, which are compiled to work under Bukkit 1.7.10.
