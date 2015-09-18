@@ -15,15 +15,15 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
-        <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
-        <url>https://github.com/rlf/uSkyBlock.git</url>
+        <connection>scm:git:git://github.com/dutchy1001/uSkyBlock.git</connection>
+        <developerConnection>scm:git:git://github.com/dutchy1001/uSkyBlock.git</developerConnection>
+        <url>https://github.com/dutchy1001/uSkyBlock.git</url>
     </scm>
 
     <repositories>
         <repository>
             <id>uSkyBlock-mvn-repo</id>
-            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
+            <url>https://raw.github.com/dutchy1001/uSkyBlock/mvn-repo/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -319,7 +319,7 @@
                         <include>**/uSkyBlock*.pom</include>
                     </includes>
                     <repositoryName>uSkyBlock</repositoryName>      <!-- github repo name -->
-                    <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
+                    <repositoryOwner>dutchy1001</repositoryOwner>    <!-- github username  -->
                     <oauth2Token>${GITHUB_TOKEN}</oauth2Token>
                     <merge>true</merge>
                 </configuration>
