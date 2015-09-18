@@ -2,6 +2,8 @@
 
 This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin.
 
+We are on [Spigot](https://www.spigotmc.org/resources/uskyblock.2280/) and [Bukkit](http://dev.bukkit.org/bukkit-plugins/uskyblock/)
+
 # Installation
 
 This version depends on the following plugins:
