@@ -1960,6 +1960,9 @@ msgstr "§2INGESCHAKELT"
 msgid "§4DISABLED"
 msgstr "§4UITGESCHAKELT"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr "§7Naam: §d{0} ({1})\n"

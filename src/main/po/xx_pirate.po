@@ -1915,6 +1915,9 @@ msgstr "§2ENABLED"
 msgid "§4DISABLED"
 msgstr "§4DISABLED"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr "§7Name: §d{0} ({1})\n"

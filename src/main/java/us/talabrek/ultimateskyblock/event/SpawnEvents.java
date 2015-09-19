@@ -16,7 +16,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -34,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.getI18n;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
@@ -120,6 +118,9 @@ public class SpawnEvents implements Listener {
     }
 
     private void checkLimits(Cancellable event, EntityType entityType, Location location) {
+        if (entityType == null) {
+            return; // Only happens on "other-plugins", i.e. EchoPet
+        }
         String islandName = WorldGuardHandler.getIslandNameAt(location);
         if (islandName == null) {
             event.setCancelled(true); // Only allow spawning on active islands...

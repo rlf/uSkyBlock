@@ -104,6 +104,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             new String[]{"Vault", "1.4"},
             new String[]{"WorldEdit", "5.5"},
             new String[]{"WorldGuard", "5.9"},
+            new String[]{"AsyncWorldEdit", "2.0", "optional"},
     };
     private static String missingRequirements = null;
     private static final Random RND = new Random(System.currentTimeMillis());
@@ -245,7 +246,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }
-        log(Level.INFO, getVersionInfo());
+        log(Level.INFO, getVersionInfo(false));
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender) {
@@ -253,6 +254,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             PluginManager pluginManager = getServer().getPluginManager();
             missingRequirements = "";
             for (String[] pluginReq : depends) {
+                if (pluginReq.length > 2 && pluginReq[2].equals("optional")) {
+                    continue;
+                }
                 if (pluginManager.isPluginEnabled(pluginReq[0])) {
                     PluginDescriptionFile desc = pluginManager.getPlugin(pluginReq[0]).getDescription();
                     if (pluginReq[1].compareTo(desc.getVersion()) > 0) {
@@ -1394,7 +1398,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         this.protectAllActive = protectAllActive;
     }
 
-    public String getVersionInfo() {
+    public String getVersionInfo(boolean checkEnabled) {
         PluginDescriptionFile description = getDescription();
         String msg = tr("\u00a77Name: \u00a7b{0}\n", description.getName());
         msg += tr("\u00a77Version: \u00a7b{0}\n", description.getVersion());
@@ -1406,7 +1410,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);
             if (dependency != null) {
                 msg += tr("\u00a77------------------------------\n");
-                msg += tr("\u00a77Name: \u00a7d{0} ({1})\n", dependency.getName(), dependency.isEnabled() ? tr("\u00a72ENABLED") : tr("\u00a74DISABLED"));
+                msg += tr("\u00a77Name: \u00a7d{0} ({1})\n", dependency.getName(),
+                        checkEnabled ? (dependency.isEnabled() ? tr("\u00a72ENABLED") : tr("\u00a74DISABLED")) : tr("N/A"));
                 msg += tr("\u00a77Version: \u00a7d{0}\n", dependency.getDescription().getVersion());
             }
         }

@@ -1928,6 +1928,9 @@ msgstr "§2ATIVADO"
 msgid "§4DISABLED"
 msgstr "§4DESATIVADO"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr "§7Nome: §d{0} ({1})\n"

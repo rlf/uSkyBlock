@@ -1955,6 +1955,9 @@ msgstr ""
 msgid "§4DISABLED"
 msgstr ""
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr ""

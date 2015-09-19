@@ -17,7 +17,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
@@ -109,7 +108,7 @@ public class DebugCommand extends CompositeUSBCommand {
             logHandler.setFormatter(new SingleLineFormatter());
             log.addHandler(logHandler);
             plugin.getLogger().addHandler(logHandler);
-            log.log(log.getLevel(), stripFormatting(plugin.getVersionInfo()));
+            log.log(log.getLevel(), stripFormatting(plugin.getVersionInfo(true)));
             sender.sendMessage("\u00a7eLogging to " + logFile);
         } catch (IOException e) {
             log.log(Level.WARNING, "Unable to enable logging", e);
