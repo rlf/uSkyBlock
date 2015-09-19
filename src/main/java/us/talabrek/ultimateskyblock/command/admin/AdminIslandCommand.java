@@ -4,10 +4,10 @@ import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
+import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -25,7 +25,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
     public AdminIslandCommand(final uSkyBlock plugin, final ConfirmHandler confirmHandler) {
         super("island", "", tr("manage islands"));
         this.plugin = plugin;
-        add(new AbstractAsyncIslandInfoCommand("protect", "usb.mod.protect", tr("protects the island")) {
+        add(new AbstractIslandInfoCommand("protect", "usb.mod.protect", tr("protects the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 protectIsland(sender, islandInfo);
@@ -60,13 +60,13 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 return false;
             }
         });
-        add(new AbstractAsyncIslandInfoCommand("remove", "usb.admin.remove", tr("removes the player from the island")) {
+        add(new AbstractIslandInfoCommand("remove", "usb.admin.remove", tr("removes the player from the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 removePlayerFromIsland(sender, playerInfo, islandInfo);
             }
         });
-        add(new AbstractAsyncIslandInfoCommand("info", null, tr("print out info about the island")) {
+        add(new AbstractIslandInfoCommand("info", null, tr("print out info about the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 sender.sendMessage(islandInfo.toString());
@@ -139,6 +139,19 @@ public class AdminIslandCommand extends CompositeUSBCommand {
         });
         add(new MakeLeaderCommand(plugin));
         add(new RegisterIslandToPlayerCommand());
+        add(new AbstractIslandInfoCommand("ignore", "usb.admin.ignore", tr("toggles the islands ignore status")) {
+            @Override
+            protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
+                if (islandInfo != null) {
+                    islandInfo.setIgnore(!islandInfo.ignore());
+                    if (islandInfo.ignore()) {
+                        sender.sendMessage(tr("\u00a7cSet {0}s island to be ignored on top-ten and purge.", islandInfo.getLeader()));
+                    } else {
+                        sender.sendMessage(tr("\u00a7cRemoved ignore-flag of {0}s island, it will now show up on top-ten and purge.", islandInfo.getLeader()));
+                    }
+                }
+            }
+        });
     }
 
     private void removePlayerFromIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {

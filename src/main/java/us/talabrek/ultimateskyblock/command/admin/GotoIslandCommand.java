@@ -10,7 +10,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 /**
  * Teleports to the player's island.
  */
-public class GotoIslandCommand extends AbstractAsyncPlayerInfoCommand {
+public class GotoIslandCommand extends AbstractPlayerInfoCommand {
     private final uSkyBlock plugin;
 
     public GotoIslandCommand(uSkyBlock plugin) {

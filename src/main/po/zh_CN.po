@@ -303,6 +303,20 @@ msgstr "§4没有找到有效的岛屿"
 msgid "§cPURGE: §9Purged island at {0}"
 msgstr ""
 
+#, fuzzy
+msgid "toggles the islands ignore status"
+msgstr "§a可以 §f切换岛屿的传送点状态"
+
+#, fuzzy, java-format
+msgid "§cSet {0}s island to be ignored on top-ten and purge."
+msgstr "§a设置 {0} 的岛屿的中心点(基岩)在你的附近。"
+
+#, java-format
+msgid ""
+"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
+"purge."
+msgstr ""
+
 msgid "§4No valid player-name supplied."
 msgstr "§4无效的玩家名"
 

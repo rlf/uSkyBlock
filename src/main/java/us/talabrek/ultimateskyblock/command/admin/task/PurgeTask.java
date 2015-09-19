@@ -3,9 +3,6 @@ package us.talabrek.ultimateskyblock.command.admin.task;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.async.IncrementalTask;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.List;
@@ -35,7 +32,6 @@ public class PurgeTask implements IncrementalTask {
 
     @Override
     public boolean execute(Plugin plugin, int offset, int length) {
-        PlayerInfo pi = null;
         for (int i = 0; i < length && !removeList.isEmpty(); i++) {
             final String islandName = removeList.remove(0);
             skyBlock.getIslandLogic().purge(islandName);

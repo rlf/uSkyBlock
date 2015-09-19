@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.command.admin.AbstractAsyncPlayerInfoCommand;
+import us.talabrek.ultimateskyblock.command.admin.AbstractPlayerInfoCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminChallengeCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminIslandCommand;
 import us.talabrek.ultimateskyblock.command.admin.AsyncCommand;
@@ -54,7 +54,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new AdminIslandCommand(plugin, confirmHandler));
         add(new PurgeCommand(plugin));
         add(new GotoIslandCommand(plugin));
-        add(new AbstractAsyncPlayerInfoCommand("info", "usb.admin.info", tr("show player-information")) {
+        add(new AbstractPlayerInfoCommand("info", "usb.admin.info", tr("show player-information")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo) {
                 sender.sendMessage(playerInfo.toString());

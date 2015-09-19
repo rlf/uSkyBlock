@@ -306,6 +306,20 @@ msgstr "§4Keine gültige Insel gefunden"
 msgid "§cPURGE: §9Purged island at {0}"
 msgstr ""
 
+#, fuzzy
+msgid "toggles the islands ignore status"
+msgstr "§aKann §den Insel Warmpunkt Ein-/Ausschalten."
+
+#, fuzzy, java-format
+msgid "§cSet {0}s island to be ignored on top-ten and purge."
+msgstr "§aSetzte {0}'s Insel auf das  Grundgestein in deiner nähe."
+
+#, java-format
+msgid ""
+"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
+"purge."
+msgstr ""
+
 msgid "§4No valid player-name supplied."
 msgstr "§4Kein Gültiger Spielername angegeben."
 

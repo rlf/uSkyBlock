@@ -14,9 +14,9 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 /**
  * Command that lookup island info given the player name.
  */
-public abstract class AbstractAsyncIslandInfoCommand extends AbstractAsyncPlayerInfoCommand {
+public abstract class AbstractIslandInfoCommand extends AbstractPlayerInfoCommand {
 
-    protected AbstractAsyncIslandInfoCommand(String name, String permission, String description) {
+    protected AbstractIslandInfoCommand(String name, String permission, String description) {
         super(name, permission, description);
     }
 

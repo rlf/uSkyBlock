@@ -1,20 +1,19 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
-import java.util.Map;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+
+import java.util.Map;
+
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * Command that has <code>player</code> as first argument, and uses playerInfo.
  */
-public abstract class AbstractAsyncPlayerInfoCommand extends AbstractUSBCommand {
-    protected AbstractAsyncPlayerInfoCommand(String name, String permission, String description) {
+public abstract class AbstractPlayerInfoCommand extends AbstractUSBCommand {
+    protected AbstractPlayerInfoCommand(String name, String permission, String description) {
         super(name, permission, "player", description);
     }
     protected abstract void doExecute(CommandSender sender, PlayerInfo playerInfo);

@@ -526,6 +526,7 @@ public class IslandInfo {
             str += ChatColor.GRAY + "     loc: " + ChatColor.DARK_AQUA + LocationUtil.asString(getWarpLocation()) + "\n";
         }
         str += ChatColor.GRAY + "  - locked: " + ChatColor.DARK_AQUA + isLocked() + "\n";
+        str += ChatColor.GRAY + "  - ignore: " + ChatColor.DARK_AQUA + ignore() + "\n";
         str += ChatColor.DARK_AQUA + "Party:\n";
         str += ChatColor.GRAY + "  - leader: " + ChatColor.DARK_AQUA + getLeader() + "\n";
         str += ChatColor.GRAY + "  - members: " + ChatColor.DARK_AQUA + getMembers() + "\n";
@@ -648,4 +649,12 @@ public class IslandInfo {
         toBeDeleted = true;
     }
 
+    public boolean ignore() {
+        return config.getBoolean("general.ignore", false);
+    }
+
+    public void setIgnore(boolean b) {
+        config.set("general.ignore", b);
+        dirty = true;
+    }
 }

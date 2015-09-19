@@ -302,6 +302,20 @@ msgstr "§4Er is geen geldig eiland gevonden"
 msgid "§cPURGE: §9Purged island at {0}"
 msgstr ""
 
+#, fuzzy
+msgid "toggles the islands ignore status"
+msgstr "het eiland op slot zetten."
+
+#, fuzzy, java-format
+msgid "§cSet {0}s island to be ignored on top-ten and purge."
+msgstr "§aSet {0}'s eiland op het dichtstbijzijnde bedrock block ."
+
+#, java-format
+msgid ""
+"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
+"purge."
+msgstr ""
+
 msgid "§4No valid player-name supplied."
 msgstr "§4Geen geldige spelers-naam ingevoerd"
 

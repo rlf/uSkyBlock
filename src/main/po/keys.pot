@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-19 10:27+0200\n"
+"POT-Creation-Date: 2015-09-19 15:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -264,12 +264,12 @@ msgstr ""
 msgid "to unlock this rank"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AbstractAsyncIslandInfoCommand.java:42
+#: us/talabrek/ultimateskyblock/command/admin/AbstractIslandInfoCommand.java:42
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AbstractAsyncPlayerInfoCommand.java:31
+#: us/talabrek/ultimateskyblock/command/admin/AbstractPlayerInfoCommand.java:31
 #, java-format
 msgid "§eInvalid player {0} supplied."
 msgstr ""
@@ -359,7 +359,7 @@ msgid "sets the biome of the island"
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:88
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:167
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:180
 msgid "§4That player has no island."
 msgstr ""
 
@@ -381,64 +381,80 @@ msgstr ""
 msgid "§cPURGE: §9Purged island at {0}"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:146
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:142
+msgid "toggles the islands ignore status"
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:148
+#, java-format
+msgid "§cSet {0}s island to be ignored on top-ten and purge."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:150
+#, java-format
+msgid ""
+"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
+"purge."
+msgstr ""
+
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:159
 msgid "§4No valid player-name supplied."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:149
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:162
 #, java-format
 msgid "Removing {0} from island"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:157
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:170
 #, java-format
 msgid "§eChanged biome of {0}s island to {1}."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:160
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:173
 #, java-format
 msgid "§eChanged biome of {0}s island to OCEAN."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:162
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:177
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:175
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:190
 #: us/talabrek/ultimateskyblock/command/island/BiomeCommand.java:43
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:172
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:185
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:175
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:188
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:183
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:196
 msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:188
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:201
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:194
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:207
 #, java-format
 msgid "§eRemoving {0}'s island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:197
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:210
 msgid "Error: That player does not have an island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:203
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:216
 #, java-format
 msgid "§e{0}s island at {1} has been protected"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:205
+#: us/talabrek/ultimateskyblock/command/admin/AdminIslandCommand.java:218
 #, java-format
 msgid "§4{0}s island at {1} was already protected"
 msgstr ""
@@ -724,7 +740,7 @@ msgstr ""
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/command/admin/task/PurgeTask.java:45
+#: us/talabrek/ultimateskyblock/command/admin/task/PurgeTask.java:44
 msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
 msgstr ""
 
@@ -1346,7 +1362,7 @@ msgid ""
 msgstr ""
 
 #: us/talabrek/ultimateskyblock/command/island/WarpCommand.java:53
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:655
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:634
 msgid "§4That player does not exist!"
 msgstr ""
 
@@ -1422,12 +1438,12 @@ msgstr ""
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/event/SpawnEvents.java:77
-#: us/talabrek/ultimateskyblock/event/SpawnEvents.java:107
+#: us/talabrek/ultimateskyblock/event/SpawnEvents.java:75
+#: us/talabrek/ultimateskyblock/event/SpawnEvents.java:105
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/event/SpawnEvents.java:101
+#: us/talabrek/ultimateskyblock/event/SpawnEvents.java:99
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr ""
 
@@ -2137,107 +2153,107 @@ msgstr ""
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:562
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:541
 msgid "§4Player is already assigned to this island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:611
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:590
 msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:616
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:595
 msgid "§aTeleporting you to your island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:633
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:685
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:612
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:664
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:660
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:639
 msgid "§4Unable to warp you to that player's island!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:663
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:642
 #, java-format
 msgid "§aTeleporting you to {0}'s island."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:703
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:717
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:682
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:696
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:711
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:690
 msgid "§aYour skyblock home has been set to your current location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:713
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:692
 msgid "§4Your current location is not a safe home-location."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:894
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:873
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:907
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:886
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:943
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:922
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1403
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1382
 #, java-format
 msgid "§7Name: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1404
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1383
 #, java-format
 msgid "§7Version: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1405
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1384
 #, java-format
 msgid "§7Description: §b{0}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1406
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1385
 #, java-format
 msgid "§7Language: §b{0} ({1})\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1407
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1412
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1418
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1386
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1391
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1397
 msgid "§7------------------------------\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1408
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1387
 #, java-format
 msgid "§7Server: §e{0} {1}\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1414
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1393
 msgid "§2ENABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1414
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1393
 msgid "§4DISABLED"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1414
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1393
 msgid "N/A"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1413
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1392
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
 msgstr ""
 
-#: us/talabrek/ultimateskyblock/uSkyBlock.java:1415
+#: us/talabrek/ultimateskyblock/uSkyBlock.java:1394
 #, java-format
 msgid "§7Version: §d{0}\n"
 msgstr ""

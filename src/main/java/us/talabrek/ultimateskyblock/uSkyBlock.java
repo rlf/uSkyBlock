@@ -81,7 +81,6 @@ import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -411,27 +410,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         WorldGuardHandler.removeIslandRegion(islandInfo.getName());
         islandLogic.deleteIslandConfig(islandInfo.getName());
         orphanLogic.save();
-    }
-
-    public boolean deleteIsland(String islandName, final Runnable runner) {
-        final IslandInfo islandInfo = getIslandInfo(islandName);
-        if (islandInfo != null) {
-            for (String member : new ArrayList<>(islandInfo.getMembers())) {
-                islandInfo.removeMember(member);
-            }
-            islandLogic.clearIsland(islandInfo.getIslandLocation(), new Runnable() {
-                @Override
-                public void run() {
-                    postDelete(islandInfo);
-                    if (runner != null) {
-                        runner.run();
-                    }
-                }
-            });
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public boolean deleteEmptyIsland(String islandName, final Runnable runner) {

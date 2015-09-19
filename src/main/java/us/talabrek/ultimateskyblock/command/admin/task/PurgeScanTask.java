@@ -51,7 +51,7 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null) {
                 Set<String> members = islandInfo.getMembers();
-                if (islandInfo.getLevel() < purgeLevel && abandonedSince(members)) {
+                if (!islandInfo.ignore() && islandInfo.getLevel() < purgeLevel && abandonedSince(members)) {
                     purgeList.add(islandName);
                 }
             }

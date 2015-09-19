@@ -255,7 +255,7 @@ public class IslandLogic {
                 boolean wasLoaded = cache.getIfPresent(islandName) != null;
                 IslandInfo islandInfo = getIslandInfo(islandName);
                 double level = islandInfo != null ? islandInfo.getLevel() : 0;
-                if (islandInfo != null && level > 10) {
+                if (islandInfo != null && level > 10 && !islandInfo.ignore()) {
                     IslandLevel islandLevel = createIslandLevel(islandInfo, level);
                     topTen.add(islandLevel);
                 }
@@ -361,7 +361,7 @@ public class IslandLogic {
 
     public boolean purge(String islandName) {
         IslandInfo islandInfo = getIslandInfo(islandName);
-        if (islandInfo != null) {
+        if (islandInfo != null && !islandInfo.ignore()) {
             for (String member : islandInfo.getMembers()) {
                 PlayerInfo pi = plugin.getPlayerInfo(member);
                 if (pi != null) {
