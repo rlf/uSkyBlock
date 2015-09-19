@@ -29,13 +29,13 @@ public class MakeLeaderCommand extends RequireIslandCommand {
             }
             if (!island.isLeader(player)) {
                 player.sendMessage(tr("\u00a74Only leader can transfer leadership!"));
-                island.sendMessageToIslandGroup(tr("{0} tried to take over the island!", member));
+                island.sendMessageToIslandGroup(tr("{0} tried to take over the island!", member), true);
                 return true;
             }
             island.setupPartyLeader(member); // Promote member
             island.setupPartyMember(player.getName()); // Demote leader
             WorldGuardHandler.updateRegion(player, island);
-            island.sendMessageToIslandGroup(tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", player.getDisplayName(), member));
+            island.sendMessageToIslandGroup(tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", player.getDisplayName(), member), true);
             return true;
         }
         return false;

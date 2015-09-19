@@ -1209,6 +1209,14 @@ msgstr "§4Nu je eiland is gesloten is ook je inkomende warp gedeactiveerd."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
 
+#, java-format
+msgid "§cSKY §f> §7 {0}"
+msgstr ""
+
+#, java-format
+msgid "§d[{0}]§7 {1}"
+msgstr ""
+
 #, fuzzy, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} is verwijderd van het eiland."

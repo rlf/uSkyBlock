@@ -101,7 +101,7 @@ public class IslandInfo {
         config.set("version", YML_VERSION);
         config.set("party", null);
         setupPartyLeader(leader);
-        sendMessageToIslandGroup("The island has been created.");
+        sendMessageToIslandGroup("The island has been created.", false);
     }
 
     public void setupPartyLeader(final String leader) {
@@ -345,11 +345,11 @@ public class IslandInfo {
     public void lock(Player player) {
         WorldGuardHandler.islandLock(player, name);
         config.set("general.locked", true);
-        sendMessageToIslandGroup("\u00a7b" + player.getName() + "\u00a7d locked the island.");
+        sendMessageToIslandGroup("\u00a7b" + player.getName() + "\u00a7d locked the island.", true);
         if (hasWarp()) {
             config.set("general.warpActive", false);
             player.sendMessage(tr("\u00a74Since your island is locked, your incoming warp has been deactivated."));
-            sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d deactivated the island warp.", player.getName()));
+            sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d deactivated the island warp.", player.getName()), true);
         }
         save();
     }
@@ -357,19 +357,21 @@ public class IslandInfo {
     public void unlock(Player player) {
         WorldGuardHandler.islandUnlock(player, name);
         config.set("general.locked", false);
-        sendMessageToIslandGroup("\u00a7b" + player.getName() + "\u00a7d unlocked the island.");
+        sendMessageToIslandGroup("\u00a7b" + player.getName() + "\u00a7d unlocked the island.", true);
         save();
     }
 
-    public void sendMessageToIslandGroup(String message) {
+    public void sendMessageToIslandGroup(String message, boolean broadcast) {
         Date date = new Date();
         final String dateTxt = DateFormat.getDateInstance(3).format(date).toString();
-        for (String player : getMembers()) {
-            if (Bukkit.getPlayer(player) != null) {
-                Bukkit.getPlayer(player).sendMessage("\u00a7d[skyblock] " + message);
+        if (broadcast) {
+            for (String player : getMembers()) {
+                if (Bukkit.getPlayer(player) != null) {
+                    Bukkit.getPlayer(player).sendMessage(tr("\u00a7cSKY \u00a7f> \u00a77 {0}", message));
+                }
             }
         }
-        log("\u00a7d[" + dateTxt + "] " + message);
+        log(tr("\u00a7d[{0}]\u00a77 {1}", dateTxt, message));
     }
 
     public boolean isBanned(Player player) {
@@ -458,7 +460,7 @@ public class IslandInfo {
         config.set("party.members." + playername, null);
         config.set("party.currentSize", getPartySize() - 1);
         save();
-        sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has been removed from the island group.", playername));
+        sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has been removed from the island group.", playername), true);
     }
 
     public void setLevel(double score) {

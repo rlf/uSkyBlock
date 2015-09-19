@@ -1,20 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
-import com.google.common.base.Preconditions;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -80,14 +67,8 @@ import us.talabrek.ultimateskyblock.player.PerkLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerLogic;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
-import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
-
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.util.FileUtil;
-import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
-
 import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
@@ -96,6 +77,24 @@ import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
+import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
@@ -209,8 +208,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             @Override
             public void run() {
                 if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vault")) {
-                    log(Level.INFO, "Using vault for permissions");
-                    VaultHandler.setupPermissions();
                     try {
                         FileConfiguration config = getLastIslandConfig();
                         if (!config.contains("options.general.lastIslandX") && getConfig().contains("options.general.lastIslandX")) {
@@ -1114,23 +1111,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         playerInfo.save();
     }
 
-    public boolean hasOtherIslandMembersOnline(final Player player) {
-        PlayerInfo playerInfo = getPlayerInfo(player);
-        if (playerInfo == null) return false;
-        IslandInfo islandInfo = islandLogic.getIslandInfo(getPlayerInfo(player));
-        if (islandInfo == null) return false;
-        for (final String member : islandInfo.getMembers()) {
-            if (member.equalsIgnoreCase(player.getName())) {
-                continue;
-            }
-            Player islandMember = Bukkit.getPlayer(member);
-            if (islandMember != null && islandMember.isOnline()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public String getCurrentBiome(Player p) {
         return getIslandInfo(p).getBiome();
     }
@@ -1189,6 +1169,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             islandLogic.shutdown();
         }
         VaultHandler.setupEconomy();
+        VaultHandler.setupPermissions();
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
         }
@@ -1226,14 +1207,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getCommand("usb").setExecutor(new AdminCommand(this, confirmHandler));
         getCommand("islandtalk").setExecutor(new IslandTalkCommand(this));
         getCommand("partytalk").setExecutor(new PartyTalkCommand(this));
-        Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
-            @Override
-            public void run() {
-                for (Player player : getWorld().getPlayers()) {
-                    IslandInfo islandInfo = getIslandInfo(player);
-                }
-            }
-        });
     }
 
     public boolean isSkyWorld(World world) {

@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.InviteHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -57,7 +56,7 @@ public class InviteCommand extends RequireIslandCommand {
                 return true;
             }
             if (inviteHandler.invite(player, island, otherPlayer)) {
-                island.sendMessageToIslandGroup(tr("{0}\u00a7d invited {1}", player.getDisplayName(), otherPlayer.getDisplayName()));
+                island.sendMessageToIslandGroup(tr("{0}\u00a7d invited {1}", player.getDisplayName(), otherPlayer.getDisplayName()), true);
             }
         }
         return true;

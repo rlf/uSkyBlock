@@ -1188,6 +1188,14 @@ msgstr "§4Da din ø er låst, er din besøgsportal blevet deaktiveret."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deaktiverede øens besøgsportal."
 
+#, java-format
+msgid "§cSKY §f> §7 {0}"
+msgstr ""
+
+#, java-format
+msgid "§d[{0}]§7 {1}"
+msgstr ""
+
 #, fuzzy, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} er blevet sparket ud af øen."

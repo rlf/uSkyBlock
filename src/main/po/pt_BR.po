@@ -1188,6 +1188,14 @@ msgstr "§4O warp da ilha foi desativado, por que a ilha foi trancada."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d desativou o warp até a ilha."
 
+#, java-format
+msgid "§cSKY §f> §7 {0}"
+msgstr ""
+
+#, java-format
+msgid "§d[{0}]§7 {1}"
+msgstr ""
+
 #, fuzzy, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} foi removido da ilha."

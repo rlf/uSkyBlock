@@ -9,7 +9,11 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
@@ -74,7 +78,7 @@ public class InviteHandler {
             }
             IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
             if (island != null) {
-                island.sendMessageToIslandGroup(tr("{0}\u00a7e has rejected the invitation.", player.getDisplayName()));
+                island.sendMessageToIslandGroup(tr("{0}\u00a7e has rejected the invitation.", player.getDisplayName()), true);
             }
             if (waitingInvites.containsKey(invite.getIslandName())) {
                 waitingInvites.get(invite.getIslandName()).remove(player.getUniqueId());
@@ -139,7 +143,7 @@ public class InviteHandler {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         island.addMember(playerInfo);
         playerInfo.save();
-        island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has joined your island group.", player.getDisplayName()));
+        island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has joined your island group.", player.getDisplayName()), true);
         return true;
     }
 
@@ -165,7 +169,7 @@ public class InviteHandler {
                 invite.getTimeoutTask().cancel();
             }
             String msg = tr("\u00a7eInvitation for {0}\u00a7e has timedout or been cancelled.", invite.getDisplayName());
-            islandInfo.sendMessageToIslandGroup(msg);
+            islandInfo.sendMessageToIslandGroup(msg, true);
             Player player = Bukkit.getPlayer(uuid);
             if (player != null && player.isOnline()) {
                 player.sendMessage(tr("\u00a7eInvitation for {0}'s island has timedout or been cancelled.", islandInfo.getLeader()));

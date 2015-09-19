@@ -22,7 +22,7 @@ public class SetWarpCommand extends RequireIslandCommand {
             player.sendMessage(tr("\u00a7cYou need to be on your own island to set the warp!"));
         } else {
             island.setWarpLocation(player.getLocation());
-            island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d changed the island warp location.", player.getName()));
+            island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d changed the island warp location.", player.getName()), true);
         }
         return true;
     }

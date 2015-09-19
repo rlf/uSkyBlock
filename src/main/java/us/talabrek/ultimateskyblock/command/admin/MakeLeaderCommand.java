@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -9,6 +8,9 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+
+import java.util.Map;
+
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
@@ -62,7 +64,7 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
                     islandPlayer.save();
                     playerInfo.save();
                     WorldGuardHandler.updateRegion(sender, islandInfo);
-                    islandInfo.sendMessageToIslandGroup(tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", sender.getName(), playerName));
+                    islandInfo.sendMessageToIslandGroup(tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", sender.getName(), playerName), true);
                 }
             });
             return true;
