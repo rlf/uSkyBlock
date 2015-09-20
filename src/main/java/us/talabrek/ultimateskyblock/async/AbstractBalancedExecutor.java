@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.async;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public abstract class AbstractBalancedExecutor implements BalancedExecutor {
                 task.toString(), loadFactor*100, maxTicks));
         IncrementalExecution execution = new IncrementalExecution(plugin, task, completion, loadFactor, maxTicks);
         tasks.put(task, execution);
-        scheduler.runTaskAsynchronously(plugin, execution);
+        doLater(plugin, execution, 0);
     }
 
     protected abstract void doLater(Plugin plugin, Runnable runnable, long delay);
@@ -65,7 +64,7 @@ public abstract class AbstractBalancedExecutor implements BalancedExecutor {
         return progress;
     }
 
-    private class IncrementalExecution implements Runnable {
+    class IncrementalExecution implements Runnable {
         final int[] offset = new int[] { 0 };
         final int[] length = new int[] { 1 }; // Smallest increment to start with
         final double[] usedTicks = new double[] { 0 };

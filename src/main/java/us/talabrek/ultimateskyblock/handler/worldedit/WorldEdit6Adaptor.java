@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.handler.worldedit;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.WorldEditException;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
@@ -62,11 +61,11 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
                     .to(to)
                     .ignoreAirBlocks(false)
                     .build();
-            Operations.completeLegacy(operation);
+            Operations.completeBlindly(operation);
             editSession.flushQueue();
-            Operation commitOp = editSession.commit();
+            editSession.commit();
             return true;
-        } catch (IOException | WorldEditException e) {
+        } catch (IOException e) {
             uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
         }
         return false;
