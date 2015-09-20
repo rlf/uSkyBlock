@@ -571,7 +571,8 @@ public class SkyBlockMenu {
         Player p = (Player) event.getWhoClicked();
         ItemMeta meta = event.getCurrentItem().getItemMeta();
         SkullMeta skull = meta instanceof SkullMeta ? (SkullMeta) meta : null;
-        if (stripFormatting(event.getInventory().getTitle()).equalsIgnoreCase(tr("Island Group Members"))) {
+        String inventoryName = stripFormatting(event.getInventory().getName());
+        if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Group Members")))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
@@ -583,12 +584,12 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayPartyPlayerGUI(p, skull.getOwner()));
             }
-        } else if (event.getInventory().getName().contains(tr("Permissions"))) {
+        } else if (inventoryName.contains(tr("Permissions"))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            String[] playerPerm = event.getInventory().getName().split(" ");
+            String[] playerPerm = inventoryName.split(" ");
             IslandInfo islandInfo = skyBlock.getIslandInfo(p);
             if (!skyBlock.getIslandInfo(p).isLeader(p)) {
                 p.closeInventory();
@@ -625,7 +626,7 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
             }
-        } else if (event.getInventory().getName().contains(tr("Island Biome"))) {
+        } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Biome")))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
@@ -682,9 +683,9 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));
             }
-        } else if (event.getInventory().getName().contains(tr("Challenge Menu"))) {
+        } else if (inventoryName.contains(stripFormatting(tr("Challenge Menu")))) {
             event.setCancelled(true);
-            Matcher m = CHALLENGE_PAGE_HEADER.matcher(event.getInventory().getName());
+            Matcher m = CHALLENGE_PAGE_HEADER.matcher(inventoryName);
             int page = 1;
             int max = challengeLogic.getTotalPages();
             if (m.find()) {
@@ -716,14 +717,14 @@ public class SkyBlockMenu {
                     p.openInventory(displayIslandGUI(p));
                 }
             }
-        } else if (event.getInventory().getName().contains(tr("Island Log"))) {
+        } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Log")))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
             p.closeInventory();
             p.openInventory(displayIslandGUI(p));
-        } else if (event.getInventory().getName().contains(tr("Island Menu"))) {
+        } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Menu")))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
@@ -774,7 +775,7 @@ public class SkyBlockMenu {
                     p.openInventory(displayIslandGUI(p));
                 }
             }
-        } else if (event.getInventory().getName().contains(tr("Island Create Menu"))) {
+        } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Create Menu")))) {
             event.setCancelled(true);
             if (event.getSlot() == 0) {
                 p.closeInventory();
@@ -790,7 +791,7 @@ public class SkyBlockMenu {
     }
 
     public void onDrag(InventoryDragEvent event) {
-        if (event.getInventory().getName().equalsIgnoreCase(tr("Island Group Members"))) {
+        if (stripFormatting(event.getInventory().getName()).equalsIgnoreCase(stripFormatting(tr("Island Group Members")))) {
             event.setCancelled(true);
             SkullMeta meta = (SkullMeta) event.getCursor().getItemMeta();
             Player p = (Player) event.getWhoClicked();
