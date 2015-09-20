@@ -29,9 +29,9 @@ commands:
             /it message
     partytalk:
         description: Chat with your party
-        aliases: [ptalk, pt]
+        aliases: [ptalk, ptk]
         usage: |
-            /pt message
+            /ptk message
 permissions:
   usb.*:
     children:

@@ -239,7 +239,7 @@ options:
 #        animals: 60
 #        monsters: 100
 #        villagers: 24
-#        rewBonus: 0.5
+#        rewardBonus: 0.5
 #        hungerReduction: 0.5
 
 # DO NOT TOUCH THE FIELDS BELOW

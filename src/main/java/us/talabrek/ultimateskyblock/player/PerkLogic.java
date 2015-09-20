@@ -1,9 +1,5 @@
 package us.talabrek.ultimateskyblock.player;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -17,16 +13,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Responsible for calculating player specific perks based on permissions.
  */
 public class PerkLogic {
     private final uSkyBlock plugin;
-    private final LoadingCache<UUID, Perk> cache;
     private final Perk defaultPerk;
     private Map<String, Perk> donorPerks;
 
@@ -46,14 +39,6 @@ public class PerkLogic {
         addHungerPerms();
         addDonorRewardPerks();
         addSchemePerks(islandGenerator.getSchemeNames());
-        this.cache = CacheBuilder
-                .from(plugin.getConfig().getString("options.advanced.perkCache", "maximumSize=200,expireAfterWrite=15m,expireAfterAccess=10m"))
-                .build(new CacheLoader<UUID, Perk>() {
-                    @Override
-                    public Perk load(UUID uuid) throws Exception {
-                        return createPerk(Bukkit.getPlayer(uuid));
-                    }
-                });
     }
 
     public Perk getDefaultPerk() {
@@ -61,11 +46,7 @@ public class PerkLogic {
     }
 
     public Perk getPerk(Player player) {
-        try {
-            return cache.get(player.getUniqueId());
-        } catch (ExecutionException e) {
-            return defaultPerk;
-        }
+        return createPerk(player);
     }
 
     private Perk createPerk(Player player) {
@@ -93,7 +74,7 @@ public class PerkLogic {
                         config.getInt("animals", defaultPerk.getAnimals()),
                         config.getInt("monsters", defaultPerk.getMonsters()),
                         config.getInt("villagers", defaultPerk.getVillagers()),
-                        config.getDouble("rewBonus", defaultPerk.getRewBonus()),
+                        config.getDouble("rewardBonus", defaultPerk.getRewBonus()),
                         config.getDouble("hungerReduction", defaultPerk.getHungerReduction()),
                         config.getStringList("schematics")));
             }

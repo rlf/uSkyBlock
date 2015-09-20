@@ -912,7 +912,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         Runnable createTask = new Runnable() {
             @Override
             public void run() {
-                final String schem = islandGenerator.createIsland(uSkyBlock.this, playerPerk, next);
+                final String schem = islandGenerator.createIsland(uSkyBlock.this, playerPerk, next, generateTask);
                 Bukkit.getScheduler().runTaskLater(uSkyBlock.this, generateTask, getConfig().getInt("options.advanced.delayAfterIslandCreation." + schem, 0));
             }
         };

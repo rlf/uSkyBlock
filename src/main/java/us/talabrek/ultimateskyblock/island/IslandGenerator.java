@@ -1,9 +1,5 @@
 package us.talabrek.ultimateskyblock.island;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -17,6 +13,11 @@ import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * The factory for creating islands (actual blocks).
@@ -51,7 +52,7 @@ public class IslandGenerator {
     }
 
 
-    public String createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next) {
+    public String createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next, Runnable onCompletion) {
         log.entering(CN, "createIsland", new Object[]{plugin, playerPerk.getPlayerInfo().getPlayerName(), next});
         log.fine("creating island for " + playerPerk.getPlayerInfo().getPlayerName() + " at " + next);
         boolean hasIslandNow = false;

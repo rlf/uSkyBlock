@@ -13,6 +13,11 @@ import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.registry.WorldData;
+import org.bukkit.Location;
+import org.bukkit.World;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,10 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bukkit.Location;
-import org.bukkit.World;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.uSkyBlock;
 
 /**
  * The World Edit 6.0 specific adaptations
@@ -63,7 +64,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
                     .build();
             Operations.completeLegacy(operation);
             editSession.flushQueue();
-            editSession.commit();
+            Operation commitOp = editSession.commit();
             return true;
         } catch (IOException | WorldEditException e) {
             uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);

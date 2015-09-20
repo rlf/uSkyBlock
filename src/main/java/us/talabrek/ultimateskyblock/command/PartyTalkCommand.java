@@ -16,7 +16,7 @@ public class PartyTalkCommand extends IslandChatCommand {
     private final uSkyBlock plugin;
 
     public PartyTalkCommand(uSkyBlock plugin) {
-        super(plugin, "partytalk|ptalk|pt", "usb.party.talk", tr("talk to your island party"));
+        super(plugin, "partytalk|ptalk|ptk", "usb.party.talk", tr("talk to your island party"));
         this.plugin = plugin;
     }
 
