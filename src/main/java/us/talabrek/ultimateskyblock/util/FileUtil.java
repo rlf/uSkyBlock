@@ -14,14 +14,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -223,4 +222,17 @@ public enum FileUtil {;
         }
     }
 
+    public static Properties readProperties(String fileName) {
+        File configFile = getConfigFile(fileName);
+        if (configFile != null && configFile.exists() && configFile.canRead()) {
+            Properties prop = new Properties();
+            try (InputStreamReader in = new InputStreamReader(new FileInputStream(configFile), "UTF-8")) {
+                prop.load(in);
+                return prop;
+            } catch (IOException e) {
+                uSkyBlock.getInstance().getLogger().log(Level.WARNING, "Error reading " + fileName, e);
+            }
+        }
+        return null;
+    }
 }

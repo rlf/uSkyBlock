@@ -1381,7 +1381,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         String msg = tr("\u00a77Name: \u00a7b{0}\n", description.getName());
         msg += tr("\u00a77Version: \u00a7b{0}\n", description.getVersion());
         msg += tr("\u00a77Description: \u00a7b{0}\n", description.getDescription());
-        msg += tr("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getResources().getLocale());
+        msg += tr("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getLocale());
         msg += tr("\u00a77------------------------------\n");
         msg += tr("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
         for (String[] dep : depends) {
