@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-16 22:40+0200\n"
+"PO-Revision-Date: 2015-09-21 23:49+0200\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -290,31 +290,30 @@ msgstr "§4Die speler heeft geen eiland."
 msgid "§4No valid island at your location"
 msgstr "§4Er is geen geldig eiland op jouw locatie"
 
-#, fuzzy
 msgid "purges the island"
-msgstr "bescherm het eiland"
+msgstr "verwijderd het eiland"
 
-#, fuzzy
 msgid "§4Error! §9No valid island found for purging."
-msgstr "§4Er is geen geldig eiland gevonden"
+msgstr "§4Error! §9Er  is geen geldig eiland gevonden om te verwijderen."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr ""
+msgstr "§cVERWIJDER: §9Verwijderd eiland is op {0}"
 
-#, fuzzy
 msgid "toggles the islands ignore status"
 msgstr "het eiland op slot zetten."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§aSet {0}'s eiland op het dichtstbijzijnde bedrock block ."
+msgstr "§cSet {0}'s eiland op de negeer lijst van verwijderen en de top-tien."
 
 #, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
 msgstr ""
+"§cVerwijder de negeer-flag van {0}s eiland, het staat weer op de top-tien "
+"lijst en kan verwijderd worden."
 
 msgid "§4No valid player-name supplied."
 msgstr "§4Geen geldige spelers-naam ingevoerd"
@@ -541,9 +540,9 @@ msgid "list orphans"
 msgstr "orphan lijst"
 
 msgid "§eNo orphans currently registered."
-msgstr ""
+msgstr "§eEr zijn geen orphans geregistreerd."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
@@ -556,10 +555,9 @@ msgstr "§4Een purge wordt al uitgevoerd, wacht tot het klaar is!"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Je moet het aantal dagen invoeren om een purge uit te voeren!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr ""
-"§eMarkering van alle eilanden die inactief zijn voor meer dan {0} dagen."
+msgstr "§eMarkeer alle eilanden die inactief zijn voor meer dan {0} dagen."
 
 msgid "set a player's island to your location"
 msgstr "zet een spelers eiland op mijn lokatie"
@@ -578,16 +576,15 @@ msgstr "herladen van de configuratie van het bestand"
 msgid "§eConfiguration reloaded from file."
 msgstr "§eDe Configuratie is herladen"
 
-#, fuzzy
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4** Je verlaat een verlaten eiland."
+msgstr "§4VERWIJDER:§9 Klaar met verwijderen van inactieve eilanden."
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr ""
+msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
 msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
-msgstr ""
+msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,##,number}"
 
 msgid "displays version information"
 msgstr "het weergeven van de versie-informatie"
@@ -1157,17 +1154,15 @@ msgstr "§4Het is een slecht idee om je lava te vervangen!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen."
 
-#, fuzzy
 msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§eJe hebt §a{0}§e het vertouwen afgenomen op je eiland."
+msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
 
-#, fuzzy
 msgid "§eYou can only use spawn-eggs on your own island."
-msgstr "§4Je kan alleen uitdaginged voltooien als je een eiland hebt!"
+msgstr "§eJe kan alleen spawn-eggs op je eigen eiland gebruiken."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
-msgstr "§eJe kunt een nieuw eiland aanmaken in {0,number,#}  seconden."
+msgstr ""
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1229,15 +1224,15 @@ msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
-msgstr ""
+msgstr "§cSKY §f> §7 {0}"
 
 #, java-format
 msgid "§d[{0}]§7 {1}"
-msgstr ""
+msgstr "§d[{0}]§7 {1}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d has been removed from the island group."
-msgstr "§4{0} is verwijderd van het eiland."
+msgstr "§b{0}§d is verwijderd van het eiland."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
@@ -1948,6 +1943,8 @@ msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
+"§eYay! We hebben een plaats dichter bij de spawn gevonden. §9Ontruimen dit "
+"nu voor je ...."
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -1979,7 +1976,7 @@ msgid "§4DISABLED"
 msgstr "§4UITGESCHAKELT"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
