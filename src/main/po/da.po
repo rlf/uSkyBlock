@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-16 20:48+0200\n"
+"PO-Revision-Date: 2015-09-21 23:38+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -289,31 +290,30 @@ msgstr "§4Den spiller har ingen ø."
 msgid "§4No valid island at your location"
 msgstr "§4Ingen valid ø på din position"
 
-#, fuzzy
 msgid "purges the island"
-msgstr "§fandre spillere til øen."
+msgstr "markerer øen til genbrug"
 
-#, fuzzy
 msgid "§4Error! §9No valid island found for purging."
-msgstr "§4Ingen valid ø fundet"
+msgstr "§4Fejl! §9Ingen valid ø fundet, til genbrug."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr ""
+msgstr "§cOPRYDNING: §9Markede øen ved {0} til genbrug"
 
-#, fuzzy
 msgid "toggles the islands ignore status"
-msgstr "skift øens låse-tilstand"
+msgstr "skift øens ignore-tilstand"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§aSatte {0}'s ø til det nærmeste grundfjeld."
+msgstr "§cIngorer {0}s ø på top 10 og ved genbrug."
 
 #, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
 msgstr ""
+"§cFjernede ignore-flaget på {0}s ø, den vil nu blive vist på top 10 og være "
+"kandidat til oprydning."
 
 msgid "§4No valid player-name supplied."
 msgstr "§4Intet validt spiller-navn givet."
@@ -538,9 +538,9 @@ msgid "list orphans"
 msgstr "list horeunger"
 
 msgid "§eNo orphans currently registered."
-msgstr ""
+msgstr "§eIngen forældreløse øer registreret i øjeblikket."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eForældreløse: {0}"
 
@@ -554,7 +554,7 @@ msgstr ""
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Do skal angive hvor gamle (i dage) øerne til purge skal være!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
 
@@ -574,16 +574,15 @@ msgstr "genindlæs konfigurationen fra fil."
 msgid "§eConfiguration reloaded from file."
 msgstr "§eKonfigurationen blev genindlæst fra fil."
 
-#, fuzzy
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4** Du forlader nu en forladt ø."
+msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr ""
+msgstr "§4OPRYDNING:§9 Skanningen foretaget, fandt {0} kandidater til genbrug."
 
 msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
-msgstr ""
+msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,##,number}"
 
 msgid "displays version information"
 msgstr "viser versionsinformationer"
@@ -1138,17 +1137,15 @@ msgstr "§4Det er en dårlig ide at fjerne din lava!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§Den spiller har udelukket dig fra sin ø."
 
-#, fuzzy
 msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
+msgstr "§eDu har nået din øs spawn-grænse."
 
-#, fuzzy
 msgid "§eYou can only use spawn-eggs on your own island."
-msgstr "§4Du kan kun gennemføre udfordringer når du har en ø!"
+msgstr "§eDu kan kun brug spawn-æg på din egen ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
-msgstr "§eDu kan opette en ny ø om {0,number,#} sekunder."
+msgstr "§cUndskyld forsinkelsen! §9Din ø er nu §e{1,number,##}%§9 færdig..."
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1208,15 +1205,15 @@ msgstr "§b{0}§d deaktiverede øens besøgsportal."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
-msgstr ""
+msgstr "§cSKY §f> §7 {0}"
 
 #, java-format
 msgid "§d[{0}]§7 {1}"
-msgstr ""
+msgstr "§d[{0}]§7 {1}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d has been removed from the island group."
-msgstr "§4{0} er blevet sparket ud af øen."
+msgstr "§b{0}§d er blevet fjernet fra øens medlemsliste."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cØen du er på bliver slettet! Du bliver sendt til spawn."
@@ -1299,9 +1296,9 @@ msgstr ""
 msgid "Permissions"
 msgstr "Tilladelser"
 
-#, fuzzy, java-format
+#, java-format
 msgid "{0} <{1}>"
-msgstr "§a{0} §c{1}"
+msgstr "{0} <{1}>"
 
 msgid "§hPlayer Permissions"
 msgstr "§hSpiller tilladelser"
@@ -1901,7 +1898,7 @@ msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr ""
+msgstr "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -1933,7 +1930,7 @@ msgid "§4DISABLED"
 msgstr "§4INAKTIV"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
