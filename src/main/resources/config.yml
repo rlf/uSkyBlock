@@ -238,8 +238,14 @@ options:
 #        rewardBonus: 0.5
 #        hungerReduction: 0.5
 
+asyncworldedit:
+  # Show progress to the user every 5 seconds
+  progressEveryMs: 5000
+  # Or 20pct (what-ever comes first)
+  progressEveryPct: 20
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 24
+version: 25
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
