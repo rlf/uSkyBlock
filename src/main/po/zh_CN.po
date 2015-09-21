@@ -1,7 +1,7 @@
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
@@ -1150,6 +1150,10 @@ msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
 
+#, fuzzy, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgstr "§e你需要等待{0,number,#}秒才能创建一个新的岛屿."
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7超时"
@@ -1314,9 +1318,12 @@ msgstr ""
 "§f点击图标即可§c移除\n"
 "§f玩家的这项权限."
 
-#, fuzzy, java-format
-msgid "{0} <Permissions>"
+msgid "Permissions"
 msgstr "权限"
+
+#, fuzzy, java-format
+msgid "{0} <{1}>"
+msgstr "§a{0} §c{1}"
 
 msgid "§hPlayer Permissions"
 msgstr "§e玩家权限"
@@ -1896,9 +1903,6 @@ msgstr ""
 "§f其他玩家可以任意传送到你岛屿设置的传送点.\n"
 "§e§l点击更改岛屿的传送点."
 
-msgid "Permissions"
-msgstr "权限"
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
 
@@ -1991,6 +1995,10 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#, fuzzy
+#~ msgid "{0} <Permissions>"
+#~ msgstr "权限"
 
 #, fuzzy
 #~ msgid "Group Info"

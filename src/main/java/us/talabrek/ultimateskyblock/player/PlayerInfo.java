@@ -65,6 +65,7 @@ public class PlayerInfo implements Serializable {
         this.hasIsland = false;
         this.setIslandLocation(null);
         this.homeLocation = null;
+        islandGenerating = false;
     }
 
     public boolean getHasIsland() {

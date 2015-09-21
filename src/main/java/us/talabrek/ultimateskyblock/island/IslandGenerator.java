@@ -73,7 +73,7 @@ public class IslandGenerator {
             if (permFile != null) {
                 defaultFile = permFile;
             }
-            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next)) {
+            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next, playerPerk, onCompletion)) {
                 cSchem = FileUtil.getBasename(defaultFile);
                 hasIslandNow = true;
                 log.fine("chose schematic " + defaultFile);
@@ -89,6 +89,7 @@ public class IslandGenerator {
                 oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerPerk, uSkyBlock.skyBlockWorld);
                 cSchem = "skySMP";
             }
+            Bukkit.getScheduler().runTask(plugin, onCompletion); // The above is done synchronously
         }
         next.setY((double) Settings.island_height);
         log.exiting(CN, "createIsland");

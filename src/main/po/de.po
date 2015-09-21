@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
@@ -1190,6 +1190,10 @@ msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4Du kannst nur Aufgaben hinzufügen wenn du eine Insel besitzt."
 
+#, fuzzy, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgstr "§eDu kannst in {0,number,#} Sekunden eine Neue Insel erstellen."
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7 zeitüberschreitung"
@@ -1357,10 +1361,13 @@ msgstr ""
 "§faber §cnicht§f den Anführer. Klick\n"
 "§hier um ihm dieses Recht zu nehmen."
 
+msgid "Permissions"
+msgstr "Rechte"
+
 # ???
-#, java-format
-msgid "{0} <Permissions>"
-msgstr "{0} <Permissions>"
+#, fuzzy, java-format
+msgid "{0} <{1}>"
+msgstr "§a{0} §c{1}"
 
 msgid "§hPlayer Permissions"
 msgstr "§hSpieler Rechte"
@@ -1953,9 +1960,6 @@ msgstr ""
 "§fdeiner Insel Teleportiert.\n"
 "§e§lKlick hier zum ändern."
 
-msgid "Permissions"
-msgstr "Rechte"
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
 
@@ -2055,6 +2059,10 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+# ???
+#~ msgid "{0} <Permissions>"
+#~ msgstr "{0} <Permissions>"
 
 #, fuzzy
 #~ msgid "Group Info"

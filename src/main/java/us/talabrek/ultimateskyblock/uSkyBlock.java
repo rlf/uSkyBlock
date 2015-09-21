@@ -49,6 +49,7 @@ import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
@@ -185,6 +186,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         playerLogic.shutdown();
         playerNameChangeManager.shutdown();
+        AsyncWorldEditHandler.onDisable(this);
         DebugCommand.disableLogging(null);
     }
 
@@ -207,27 +209,26 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
-                if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vault")) {
-                    try {
-                        FileConfiguration config = getLastIslandConfig();
-                        if (!config.contains("options.general.lastIslandX") && getConfig().contains("options.general.lastIslandX")) {
-                            FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandX");
-                            FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandZ");
-                            config.set("options.general.lastIslandX", uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"));
-                            config.set("options.general.lastIslandZ", uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
-                            saveLastIslandConfig();
-                        }
-                        setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) config.getInt("options.general.lastIslandZ")));
-                    } catch (Exception e) {
-                        setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(),
-                                (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"),
-                                (double) Settings.island_height,
-                                (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
+                try {
+                    FileConfiguration config = getLastIslandConfig();
+                    if (!config.contains("options.general.lastIslandX") && getConfig().contains("options.general.lastIslandX")) {
+                        FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandX");
+                        FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandZ");
+                        config.set("options.general.lastIslandX", uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"));
+                        config.set("options.general.lastIslandZ", uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
+                        saveLastIslandConfig();
                     }
-                    if (lastIsland == null) {
-                        setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
-                    }
+                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) config.getInt("options.general.lastIslandZ")));
+                } catch (Exception e) {
+                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(),
+                            (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"),
+                            (double) Settings.island_height,
+                            (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
                 }
+                if (lastIsland == null) {
+                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
+                }
+                AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
                 getServer().getScheduler().runTaskLater(instance, new Runnable() {
                     @Override
@@ -837,7 +838,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return validBiomes.containsKey(biomeName.toLowerCase());
     }
 
-        public boolean changePlayerBiome(Player player, String bName) {
+    public boolean changePlayerBiome(Player player, String bName) {
         if (!biomeExists(bName)) throw new UnsupportedOperationException();
 
         if (!VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, skyBlockWorld)) return false;
@@ -912,8 +913,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         Runnable createTask = new Runnable() {
             @Override
             public void run() {
-                final String schem = islandGenerator.createIsland(uSkyBlock.this, playerPerk, next, generateTask);
-                Bukkit.getScheduler().runTaskLater(uSkyBlock.this, generateTask, getConfig().getInt("options.advanced.delayAfterIslandCreation." + schem, 0));
+                islandGenerator.createIsland(uSkyBlock.this, playerPerk, next, generateTask);
             }
         };
         if (orphanLogic.wasOrphan(next)) {
@@ -1075,7 +1075,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     private void setNewPlayerIsland(final PlayerInfo playerInfo, final Location loc) {
         playerInfo.startNewIsland(loc);
-        
+
         Location chestSpawnLocation = getChestSpawnLoc(loc);
         if (chestSpawnLocation != null) {
             playerInfo.setHomeLocation(chestSpawnLocation);
@@ -1113,7 +1113,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public SkyBlockMenu getMenu() {
         return menu;
     }
-
 
 
     public static void log(Level level, String message) {

@@ -1165,6 +1165,10 @@ msgstr "§eJe hebt §a{0}§e het vertouwen afgenomen op je eiland."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4Je kan alleen uitdaginged voltooien als je een eiland hebt!"
 
+#, fuzzy, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgstr "§eJe kunt een nieuw eiland aanmaken in {0,number,#}  seconden."
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "De tijd om §9{0}§7 te accepteren is verlopen."
@@ -1319,9 +1323,12 @@ msgstr ""
 "kunnen de eiland eigenaar\n"
 "niet verwijderen."
 
-#, java-format
-msgid "{0} <Permissions>"
-msgstr "{0} <Permissies>"
+msgid "Permissions"
+msgstr "Permissies"
+
+#, fuzzy, java-format
+msgid "{0} <{1}>"
+msgstr "§a{0} §c{1}"
 
 msgid "§hPlayer Permissions"
 msgstr "§hSpeler Permissies"
@@ -1898,9 +1905,6 @@ msgstr ""
 "op jouw eiland.\n"
 "§e§lKlik hier om te veranderen."
 
-msgid "Permissions"
-msgstr "Permissies"
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 "Er is iets mis gegaan tijdens het opslaan van het eiland en/of party data!"
@@ -1996,6 +2000,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "{0} <Permissions>"
+#~ msgstr "{0} <Permissies>"
 
 #~ msgid "Group Info"
 #~ msgstr "Groep Info"

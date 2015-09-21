@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
@@ -1146,6 +1146,10 @@ msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4Du kan kun gennemføre udfordringer når du har en ø!"
 
+#, fuzzy, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgstr "§eDu kan opette en ny ø om {0,number,#} sekunder."
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7 timede ud"
@@ -1292,9 +1296,12 @@ msgstr ""
 "af øen, men kan ikke sparke\n"
 "øens ejer."
 
-#, java-format
-msgid "{0} <Permissions>"
-msgstr "{0} <Tilladelser>"
+msgid "Permissions"
+msgstr "Tilladelser"
+
+#, fuzzy, java-format
+msgid "{0} <{1}>"
+msgstr "§a{0} §c{1}"
 
 msgid "§hPlayer Permissions"
 msgstr "§hSpiller tilladelser"
@@ -1854,9 +1861,6 @@ msgstr ""
 "punkt når de besøger din ø.\n"
 "§e§lKlik for at ændre."
 
-msgid "Permissions"
-msgstr "Tilladelser"
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Der opstod en fejl under gemning af øens data!"
 
@@ -1950,6 +1954,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "{0} <Permissions>"
+#~ msgstr "{0} <Tilladelser>"
 
 #~ msgid "Group Info"
 #~ msgstr "Medlems info"

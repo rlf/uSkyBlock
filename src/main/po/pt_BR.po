@@ -1,7 +1,7 @@
 # Copyright (C) 2015 R4zorax and more
 # This file is distributed under the same license as the PACKAGE package.
 # R4zorax, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
@@ -1145,6 +1145,10 @@ msgstr "§eVocê recuperou a confiança na ilha de §a{0}."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4Você só pode completar desafios se tiver uma ilha!"
 
+#, fuzzy, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgstr "§eVocê pode criar uma nova ilha em {0,number,#} segundos."
+
 #, java-format
 msgid "§9{0}§7 timed out"
 msgstr "§7Tempo esgotado para usar §9{0}"
@@ -1295,9 +1299,12 @@ msgstr ""
 "porém ele não poderá\n"
 "expulsar o líder."
 
-#, java-format
-msgid "{0} <Permissions>"
-msgstr "{0} <Permissões>"
+msgid "Permissions"
+msgstr "Permissões"
+
+#, fuzzy, java-format
+msgid "{0} <{1}>"
+msgstr "§a{0} §c{1}"
 
 msgid "§hPlayer Permissions"
 msgstr "§hPermissões dos jogadores"
@@ -1866,9 +1873,6 @@ msgstr ""
 "a sua ilha.\n"
 "§e§lClique aqui para alterar."
 
-msgid "Permissions"
-msgstr "Permissões"
-
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Algo ocorreu mal ao salvar a ilha e informações do grupo!"
 
@@ -1964,6 +1968,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "{0} <Permissions>"
+#~ msgstr "{0} <Permissões>"
 
 #~ msgid "Group Info"
 #~ msgstr "Informação do grupo"

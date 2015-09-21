@@ -12,9 +12,13 @@ import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.registry.WorldData;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.BufferedInputStream;
@@ -41,7 +45,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
     }
 
     @Override
-    public boolean loadIslandSchematic(World world, File file, Location origin) {
+    public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
         log.finer("Trying to load schematic " + file);
         WorldEdit worldEdit = worldEditPlugin.getWorldEdit();
         try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
@@ -52,7 +56,10 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
             Clipboard clipboard = reader.read(worldData);
             ClipboardHolder holder = new ClipboardHolder(clipboard, worldData);
 
-            EditSession editSession = worldEdit.getEditSessionFactory().getEditSession(bukkitWorld, 255 * Settings.island_protectionRange * Settings.island_protectionRange);
+            Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
+            int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
+            EditSession editSession = worldEdit.getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
+            //EditSession editSession = new EditSession(bukkitWorld, maxBlocks);
             editSession.enableQueue();
             editSession.setFastMode(true);
             Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
@@ -63,6 +70,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
                     .build();
             Operations.completeBlindly(operation);
             editSession.flushQueue();
+            AsyncWorldEditHandler.registerCompletion(player, onCompletion);
             editSession.commit();
             return true;
         } catch (IOException e) {

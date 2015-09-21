@@ -80,7 +80,7 @@ public class SkyBlockMenu {
 
     public Inventory displayPartyPlayerGUI(final Player player, final String pname) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 9, tr("{0} <Permissions>", pname));
+        Inventory menu = Bukkit.createInventory(null, 9, tr("{0} <{1}>", pname, tr("Permissions")));
         final ItemStack pHead = new ItemStack(397, 1, (short) 3);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = sign.getItemMeta();
@@ -584,7 +584,7 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayPartyPlayerGUI(p, skull.getOwner()));
             }
-        } else if (inventoryName.contains(tr("Permissions"))) {
+        } else if (inventoryName.contains(stripFormatting(tr("Permissions")))) {
             event.setCancelled(true);
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;

@@ -3,7 +3,7 @@ package us.talabrek.ultimateskyblock.handler.worldedit;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public interface WorldEditAdaptor {
      * Returns <code>true</code> if successful.
      * @return <code>true</code> if successful.
      */
-    boolean loadIslandSchematic(World world, File file, Location origin);
+    boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion);
 
     public static class Factory {
         private static final Logger log = Logger.getLogger(Factory.class.getName());

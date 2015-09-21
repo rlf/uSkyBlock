@@ -149,7 +149,7 @@ public class PerkLogic {
             return;
         }
         for (String scheme : schemeNames) {
-            String perm = "usb.scheme." + scheme;
+            String perm = "usb.schematic." + scheme;
             donorPerks.put(perm, new PerkBuilder(donorPerks.get(perm))
                     .schematics(scheme)
                     .build());

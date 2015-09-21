@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.handler;
 
-import com.sk89q.worldedit.*;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.CuboidRegion;
@@ -8,19 +9,17 @@ import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.async.CompositeIncrementalTask;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditRegenTask;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegenTask;
 import us.talabrek.ultimateskyblock.handler.worldedit.WorldEditAdaptor;
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +35,8 @@ public class WorldEditHandler {
         return (WorldEditPlugin) plugin;
     }
 
-    public static boolean loadIslandSchematic(final World world, final File file, final Location origin) {
-        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(world, file, origin);
+    public static boolean loadIslandSchematic(final World world, final File file, final Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
+        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(world, file, origin, playerPerk, onCompletion);
     }
 
     /**
