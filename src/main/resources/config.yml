@@ -239,13 +239,15 @@ options:
 #        hungerReduction: 0.5
 
 asyncworldedit:
+  # Supports disabling the detection of AWE
+  enabled: true
   # Show progress to the user every 5 seconds
   progressEveryMs: 5000
   # Or 20pct (what-ever comes first)
   progressEveryPct: 20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 25
+version: 26
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

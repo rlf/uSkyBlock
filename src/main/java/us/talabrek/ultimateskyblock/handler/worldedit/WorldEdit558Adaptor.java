@@ -20,8 +20,10 @@ public class WorldEdit558Adaptor implements WorldEditAdaptor {
     public void init(WorldEditPlugin worldEditPlugin) {
         this.worldEditPlugin = worldEditPlugin;
     }
+
     @Override
     public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
+        // TODO: 22/09/2015 - R4zorax: Perhaps we should actually support this version?
         return false;
     }
 }

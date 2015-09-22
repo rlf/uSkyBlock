@@ -11,23 +11,23 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 public enum AsyncWorldEditHandler {;
 
     public static void onEnable(uSkyBlock plugin) {
-        if (isAWE()) {
+        if (isAWE(plugin)) {
             AsyncWorldEditAdaptor.onEnable(plugin);
         }
     }
 
     public static void onDisable(uSkyBlock plugin) {
-        if (isAWE()) {
+        if (isAWE(plugin)) {
             AsyncWorldEditAdaptor.onDisable(plugin);
         }
     }
 
-    public static boolean isAWE() {
-        return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit");
+    public static boolean isAWE(uSkyBlock plugin) {
+        return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit") && plugin.getConfig().getBoolean("asyncworldedit.enabled", true);
     }
 
     public static void registerCompletion(Player player, Runnable onCompletion) {
-        if (isAWE()) {
+        if (isAWE(uSkyBlock.getInstance())) {
             AsyncWorldEditAdaptor.registerCompletion(player, onCompletion);
         } else {
             Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), onCompletion, 5);
