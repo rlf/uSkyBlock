@@ -38,7 +38,7 @@ public class PurgeTask implements IncrementalTask {
             long now = System.currentTimeMillis();
             if (now >= (lastContact + feedbackEvery)) {
                 lastContact = now;
-                sender.sendMessage(tr("\u00a7cPURGE:\u00a79 Purged {0}/{1} {2,##,number}", offset + i, size, 1f*(offset+i)/size));
+                sender.sendMessage(tr("\u00a7cPURGE:\u00a79 Purged {0}/{1} {2,number,###}%", offset + i, size, 1f*(offset+i)/size));
             }
         }
         skyBlock.getOrphanLogic().save();
