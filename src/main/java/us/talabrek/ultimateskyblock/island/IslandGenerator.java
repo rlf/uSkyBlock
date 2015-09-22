@@ -15,8 +15,11 @@ import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -28,12 +31,19 @@ public class IslandGenerator {
     private static final Logger log = Logger.getLogger(IslandGenerator.class.getName());
     private final FileConfiguration config;
     private final File[] schemFiles;
+    private final File netherSchematic;
 
     public IslandGenerator(File dataFolder, FileConfiguration config) {
         this.config = config;
         File directorySchematics = new File(dataFolder + File.separator + "schematics");
         if (!directorySchematics.exists()) {
             directorySchematics.mkdir();
+        }
+        netherSchematic = new File(directorySchematics, "uSkyBlockNether.schematic");
+        try (InputStream inputStream = uSkyBlock.class.getClassLoader().getResourceAsStream("schematics/uSkyBlockNether.schematic")) {
+            FileUtil.copy(inputStream, netherSchematic);
+        } catch (IOException e) {
+            log.log(Level.WARNING, "Unable to load nether-schematic " + netherSchematic, e);
         }
         this.schemFiles = directorySchematics.listFiles();
         if (this.schemFiles == null) {
@@ -73,7 +83,7 @@ public class IslandGenerator {
             if (permFile != null) {
                 defaultFile = permFile;
             }
-            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next, playerPerk, onCompletion)) {
+            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(defaultFile, next, playerPerk, onCompletion)) {
                 cSchem = FileUtil.getBasename(defaultFile);
                 hasIslandNow = true;
                 log.fine("chose schematic " + defaultFile);
@@ -93,6 +103,13 @@ public class IslandGenerator {
         }
         next.setY((double) Settings.island_height);
         log.exiting(CN, "createIsland");
+        Location netherHome = new Location(uSkyBlock.getInstance().getSkyBlockNetherWorld(), next.getBlockX(), next.getBlockY()/2, next.getBlockZ());
+        WorldEditHandler.loadIslandSchematic(netherSchematic, netherHome, playerPerk, new Runnable() {
+            @Override
+            public void run() {
+                // What to do here? Feedback?
+            }
+        });
         return cSchem;
     }
 

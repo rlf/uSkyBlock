@@ -44,18 +44,10 @@
             <id>sk89q-mvn2</id>
             <url>http://mvn2.sk89q.com/repo</url>
         </repository>
-        <!--
         <repository>
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
         </repository>
-        -->
         <repository>
             <id>Plugin Metrics</id>
             <url>http://repo.mcstats.org/content/repositories/public</url>
@@ -402,6 +394,14 @@
             </resource>
             <resource>
                 <targetPath>.</targetPath>
+                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>schematics/*.schematic</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>.</targetPath>
                 <directory>${basedir}</directory>
                 <includes>
                     <include>README.md</include>
@@ -434,6 +434,19 @@
         <dependency>
             <groupId>com.onarandombox.multiversecore</groupId>
             <artifactId>Multiverse-Core</artifactId>
+            <version>2.5</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.onarandombox.multiverseinventories</groupId>
+            <artifactId>Multiverse-Inventories</artifactId>
             <version>2.5</version>
             <scope>compile</scope>
             <optional>true</optional>

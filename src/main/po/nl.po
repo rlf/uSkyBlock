@@ -583,7 +583,8 @@ msgstr "§4VERWIJDER:§9 Klaar met verwijderen van inactieve eilanden."
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#, fuzzy, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,##,number}"
 
 msgid "displays version information"

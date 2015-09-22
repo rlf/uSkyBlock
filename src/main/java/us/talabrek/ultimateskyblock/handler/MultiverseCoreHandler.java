@@ -10,6 +10,8 @@ import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
+import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
+
 /**
  * Wrapper for the MVCore plugin.
  */
@@ -40,8 +42,9 @@ public enum MultiverseCoreHandler {;
             if (Settings.general_spawnSize > 0) {
                 if (LocationUtil.isEmptyLocation(mvWorld.getSpawnLocation())) {
                     mvWorld.setAdjustSpawn(false);
-                    mvWorld.setSpawnLocation(worldSpawn);
-                    skyWorld.setSpawnLocation(worldSpawn.getBlockX(), worldSpawn.getBlockY(), worldSpawn.getBlockZ());
+                    Location spawn = centerOnBlock(worldSpawn);
+                    mvWorld.setSpawnLocation(spawn);
+                    skyWorld.setSpawnLocation(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ());
                 }
             }
             if (!Settings.extras_sendToSpawn) {
@@ -54,4 +57,31 @@ public enum MultiverseCoreHandler {;
         }
     }
 
+    public static void importNetherWorld(World skyNetherWorld) {
+        MultiverseCore core = getMultiverseCore();
+        if (core != null) {
+            Location worldSpawn = new Location(skyNetherWorld, 0.5, Settings.island_height/2 + 0.1, 0.5);
+            if (!core.getMVWorldManager().isMVWorld(skyNetherWorld)) {
+                core.getMVWorldManager().addWorld(skyNetherWorld.getName(), World.Environment.NETHER, "0", WorldType.NORMAL, false, "uSkyBlock");
+            }
+            MultiverseWorld mvWorld = core.getMVWorldManager().getMVWorld(skyNetherWorld);
+            mvWorld.setEnvironment(World.Environment.NETHER);
+            mvWorld.setScaling(1.0);
+            mvWorld.setGenerator("uSkyBlock");
+            if (Settings.general_spawnSize > 0) {
+                if (LocationUtil.isEmptyLocation(mvWorld.getSpawnLocation())) {
+                    mvWorld.setAdjustSpawn(false);
+                    mvWorld.setSpawnLocation(centerOnBlock(worldSpawn));
+                    skyNetherWorld.setSpawnLocation(worldSpawn.getBlockX(), worldSpawn.getBlockY(), worldSpawn.getBlockZ());
+                }
+            }
+            if (!Settings.extras_sendToSpawn) {
+                mvWorld.setRespawnToWorld(Settings.general_worldName);
+            }
+        } else if (hasMultiverse()) {
+            if (!Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv import " + skyNetherWorld.getName() + " NETHER -g uSkyBlock")) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv import " + skyNetherWorld.getName() + " NETHER uSkyBlock");
+            }
+        }
+    }
 }

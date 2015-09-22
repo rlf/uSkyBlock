@@ -35,8 +35,8 @@ public class WorldEditHandler {
         return (WorldEditPlugin) plugin;
     }
 
-    public static boolean loadIslandSchematic(final World world, final File file, final Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
-        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(world, file, origin, playerPerk, onCompletion);
+    public static boolean loadIslandSchematic(final File file, final Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
+        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(file, origin, playerPerk, onCompletion);
     }
 
     /**

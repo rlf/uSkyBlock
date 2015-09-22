@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
@@ -580,7 +580,8 @@ msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4OPRYDNING:§9 Skanningen foretaget, fandt {0} kandidater til genbrug."
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#, fuzzy, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,##,number}"
 
 msgid "displays version information"

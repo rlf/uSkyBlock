@@ -1,7 +1,7 @@
 # Copyright (C) 2015 R4zorax and more
 # This file is distributed under the same license as the PACKAGE package.
 # R4zorax, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
@@ -578,7 +578,8 @@ msgstr ""
 "§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o "
 "purgatório."
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#, fuzzy, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§cPURGE:§9 Purgado {0}/{1} {2,##,number}"
 
 msgid "displays version information"

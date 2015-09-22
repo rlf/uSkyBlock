@@ -175,11 +175,7 @@ public enum FileUtil {;
         return new File(getDataFolder(), configName);
     }
 
-    private static boolean isPrimaryConfig(String configName) {
-        return configName.equalsIgnoreCase("config.yml");
-    }
-
-    private static void copy(InputStream stream, File file) throws IOException {
+    public static void copy(InputStream stream, File file) throws IOException {
         Files.copy(stream, Paths.get(file.toURI()), StandardCopyOption.REPLACE_EXISTING);
     }
 
@@ -235,4 +231,5 @@ public enum FileUtil {;
         }
         return null;
     }
+
 }

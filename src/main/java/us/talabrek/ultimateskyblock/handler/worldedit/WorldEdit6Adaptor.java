@@ -45,7 +45,8 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
     }
 
     @Override
-    public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
+    public boolean loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
+        World world = origin.getWorld();
         log.finer("Trying to load schematic " + file);
         WorldEdit worldEdit = worldEditPlugin.getWorldEdit();
         try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {

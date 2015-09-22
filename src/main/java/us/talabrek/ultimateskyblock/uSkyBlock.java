@@ -53,6 +53,7 @@ import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
+import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
@@ -91,6 +92,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.Settings.island_height;
 import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
@@ -126,7 +128,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private static String pName = "";
     private FileConfiguration lastIslandConfig;
     private File lastIslandConfigFile;
+
     public static volatile World skyBlockWorld;
+    public static volatile World skyBlockNetherWorld;
+
     private static uSkyBlock instance;
     private Location lastIsland;
     public File directoryPlayers;
@@ -198,6 +203,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     @Override
     public void onEnable() {
         skyBlockWorld = null; // Force a re-import or what-ever...
+        skyBlockNetherWorld = null;
         missingRequirements = null;
         instance = this;
         FileUtil.init(getDataFolder());
@@ -218,15 +224,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                         config.set("options.general.lastIslandZ", uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
                         saveLastIslandConfig();
                     }
-                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) config.getInt("options.general.lastIslandZ")));
+                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) island_height, (double) config.getInt("options.general.lastIslandZ")));
                 } catch (Exception e) {
                     setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(),
                             (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"),
-                            (double) Settings.island_height,
+                            (double) island_height,
                             (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
                 }
                 if (lastIsland == null) {
-                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
+                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) island_height, 0.0));
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
@@ -326,19 +332,35 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 uSkyBlock.skyBlockWorld.save();
             }
             MultiverseCoreHandler.importWorld(skyBlockWorld);
-            setupWorld(skyBlockWorld);
+            setupWorld(skyBlockWorld, island_height);
         }
+        if (uSkyBlock.skyBlockNetherWorld == null) {
+            skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
+            if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() || !(skyBlockNetherWorld.getGenerator() instanceof SkyBlockNetherChunkGenerator)) {
+                uSkyBlock.skyBlockNetherWorld = WorldCreator
+                        .name(Settings.general_worldName + "_nether")
+                        .type(WorldType.NORMAL)
+                        .generateStructures(false)
+                        .environment(World.Environment.NETHER)
+                        .generator(new SkyBlockNetherChunkGenerator())
+                        .createWorld();
+                uSkyBlock.skyBlockNetherWorld.save();
+            }
+            MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
+            setupWorld(skyBlockNetherWorld, island_height/2);
+        }
+        MultiverseInventoriesHandler.linkWorlds(skyBlockWorld, skyBlockNetherWorld);
         return uSkyBlock.skyBlockWorld;
     }
 
-    private void setupWorld(World skyWorld) {
+    private void setupWorld(World world, int island_height) {
         if (Settings.general_spawnSize > 0) {
-            if (LocationUtil.isEmptyLocation(skyWorld.getSpawnLocation())) {
-                skyWorld.setSpawnLocation(0, Settings.island_height, 0);
+            if (LocationUtil.isEmptyLocation(world.getSpawnLocation())) {
+                world.setSpawnLocation(0, island_height, 0);
             }
-            Location worldSpawn = skyWorld.getSpawnLocation();
+            Location worldSpawn = world.getSpawnLocation();
             if (!isSafeLocation(worldSpawn)) {
-                Block spawnBlock = skyWorld.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
+                Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
                 spawnBlock.setType(Material.BEDROCK);
                 Block air1 = spawnBlock.getRelative(BlockFace.UP);
                 air1.setType(Material.AIR);
@@ -349,6 +371,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public static World getSkyBlockWorld() {
         return getInstance().getWorld();
+    }
+
+    public World getSkyBlockNetherWorld() {
+        return skyBlockNetherWorld;
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
@@ -567,8 +593,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (lastIsland != null && isSkyWorld(lastIsland.getWorld())) {
             return lastIsland;
         }
-        setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
-        return new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0);
+        setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) island_height, 0.0));
+        return new Location(getSkyBlockWorld(), 0.0, (double) island_height, 0.0);
     }
 
     public void setLastIsland(final Location island) {
@@ -753,7 +779,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public ChunkGenerator getDefaultWorldGenerator(final String worldName, final String id) {
-        return new SkyBlockChunkGenerator();
+        return (id != null && id.endsWith("nether")) || (worldName != null && worldName.endsWith("nether"))
+                ? new SkyBlockNetherChunkGenerator()
+                : new SkyBlockChunkGenerator();
     }
 
     public boolean isPurgeActive() {
@@ -865,7 +893,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 pi.setIslandGenerating(true);
             }
             final Location last = getLastIsland();
-            last.setY((double) Settings.island_height);
+            last.setY((double) island_height);
             try {
                 final Location next = getNextIslandLocation(last);
                 generateIsland(player, pi, next);
@@ -889,9 +917,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             public void run() {
                 next.getWorld().loadChunk(next.getBlockX() >> 4, next.getBlockZ() >> 4, false);
                 islandGenerator.setChest(next, playerPerk);
-                setNewPlayerIsland(player, next);
+                IslandInfo islandInfo = setNewPlayerIsland(player, next);
                 changePlayerBiome(player, "OCEAN");
                 WorldGuardHandler.protectIsland(player, pi);
+                WorldGuardHandler.protectNetherIsland(uSkyBlock.this, player, islandInfo);
                 getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
                 if (pi != null) {
@@ -1069,11 +1098,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return findNearestSpawnLocation(findChestLocation(loc));
     }
 
-    private void setNewPlayerIsland(final Player player, final Location loc) {
-        setNewPlayerIsland(getPlayerInfo(player), loc);
+    private IslandInfo setNewPlayerIsland(final Player player, final Location loc) {
+        return setNewPlayerIsland(getPlayerInfo(player), loc);
     }
 
-    private void setNewPlayerIsland(final PlayerInfo playerInfo, final Location loc) {
+    private IslandInfo setNewPlayerIsland(final PlayerInfo playerInfo, final Location loc) {
         playerInfo.startNewIsland(loc);
 
         Location chestSpawnLocation = getChestSpawnLoc(loc);
@@ -1091,6 +1120,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             playerInfo.resetAllChallenges();
         }
         playerInfo.save();
+        return info;
     }
 
     public String getCurrentBiome(Player p) {
@@ -1195,6 +1225,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             return false;
         }
         return getSkyBlockWorld().getName().equalsIgnoreCase(world.getName());
+    }
+
+    public boolean isSkyNether(World world) {
+        return world != null && world.getName().equalsIgnoreCase(skyBlockNetherWorld.getName());
     }
 
     public boolean isSkyAssociatedWorld(World world) {

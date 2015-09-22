@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Egor Oldenburger <ERROR-202@MAIL.RU>, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
@@ -577,7 +577,8 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 "§4ОЧИСТКА:§9 Сканирование завершено, найдено {0} кандидатов на очистку."
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#, fuzzy, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§cОЧИСТКА:§9 Очищено {0}/{1} {2,##,number}"
 
 msgid "displays version information"
