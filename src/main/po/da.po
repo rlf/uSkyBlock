@@ -580,8 +580,9 @@ msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4OPRYDNING:§9 Skanningen foretaget, fandt {0} kandidater til genbrug."
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
-msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,##,number}"
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,number,###}%"
 
 msgid "displays version information"
 msgstr "viser versionsinformationer"

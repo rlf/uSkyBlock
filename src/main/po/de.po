@@ -590,7 +590,8 @@ msgstr "Löscht alle verlassenen Inseln"
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr ""
 
 msgid "displays version information"

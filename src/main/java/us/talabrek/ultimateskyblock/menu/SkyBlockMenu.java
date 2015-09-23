@@ -339,7 +339,7 @@ public class SkyBlockMenu {
         }
         Material itemType = currentItem.getType();
         String itemTitle = currentItem.getItemMeta().getDisplayName();
-        World world = skyBlock.getSkyBlockWorld();
+        World world = player.getWorld();
         for (String sIndex : extras.getKeys(false)) {
             ConfigurationSection menuSection = extras.getConfigurationSection(sIndex);
             if (menuSection == null) {

@@ -574,8 +574,9 @@ msgstr "§4** You be leaving an abandoned island."
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
-msgstr ""
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 
 msgid "displays version information"
 msgstr "displays version information"

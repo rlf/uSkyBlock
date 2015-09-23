@@ -578,8 +578,9 @@ msgstr ""
 "§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o "
 "purgatório."
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
-msgstr "§cPURGE:§9 Purgado {0}/{1} {2,##,number}"
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cPURGE:§9 Purgado {0}/{1} {2,number,###}%"
 
 msgid "displays version information"
 msgstr "mostrar informações da versão"
