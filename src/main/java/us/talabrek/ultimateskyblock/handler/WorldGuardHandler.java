@@ -309,6 +309,19 @@ public class WorldGuardHandler {
         return null;
     }
 
+    public static ProtectedRegion getNetherRegionAt(Location location) {
+        WorldGuardPlugin worldGuard = getWorldGuard();
+        RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
+        Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(location);
+        for (ProtectedRegion region : applicableRegions) {
+            String id = region.getId().toLowerCase();
+            if (!id.equalsIgnoreCase("__global__") && id.endsWith("nether")) {
+                return region;
+            }
+        }
+        return null;
+    }
+
     public static void removeIslandRegion(String islandName) {
         RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
         regionManager.removeRegion(islandName + "island");

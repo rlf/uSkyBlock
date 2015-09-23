@@ -14,9 +14,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.async.Callback;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -24,7 +22,6 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -49,12 +46,14 @@ public class LevelLogic {
     private final int blockLimit[] = new int[MAX_INDEX];
     private final int blockDR[] = new int[MAX_INDEX];
     private int pointsPerLevel;
+    private int activateNetherAtLevel;
 
     public LevelLogic(uSkyBlock plugin, FileConfiguration config) {
         this.plugin = plugin;
         this.config = config;
         load();
         pointsPerLevel = config.getInt("general.pointsPerLevel");
+        activateNetherAtLevel = config.getInt("nether.activate-at.level", 100);
     }
 
     public void load() {
@@ -144,22 +143,15 @@ public class LevelLogic {
         log.entering(CN, "calculateScoreAsync");
         // is further threading needed here?
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
-        if (region == null) {
-            log.warning("No WG region found for island at " + LocationUtil.asString(l));
+        final List<ChunkSnapshot> snapshotsOverworld = createChunkSnapshots(l, region);
+        Location netherLoc = l.clone();
+        netherLoc.setWorld(plugin.getSkyBlockNetherWorld());
+        region = WorldGuardHandler.getNetherRegionAt(netherLoc);
+        final List<ChunkSnapshot> snapshotsNether = createChunkSnapshots(netherLoc, region);
+
+        if (snapshotsOverworld == null && snapshotsNether == null) {
             return;
         }
-        Region weRegion = new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint());
-        final List<ChunkSnapshot> snapshots = new ArrayList<>();
-        log.finer("Snapshotting chunks");
-        for (Vector2D chunkVector : weRegion.getChunks()) {
-            Chunk chunk = l.getWorld().getChunkAt(chunkVector.getBlockX(), chunkVector.getBlockZ());
-            if (!chunk.isLoaded()) {
-                log.finer("Loading chunk " + chunkVector);
-                chunk.load();
-            }
-            snapshots.add(chunk.getChunkSnapshot(true, false, false));
-        }
-        log.finer("Done making chunk-snapshots of " + weRegion);
         final int px = l.getBlockX();
         final int pz = l.getBlockZ();
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
@@ -169,7 +161,7 @@ public class LevelLogic {
                 final int[] counts = createBlockCountArray();
                 for (int x = px - radius; x <= px + radius; ++x) {
                     for (int z = pz - radius; z <= pz + radius; ++z) {
-                        ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshots);
+                        ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
                         // Fucking modulo for negative numbers...
                         int cx = x < 0 ? ((x % 16) + 16) % 16 : x % 16;
                         int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
@@ -183,11 +175,50 @@ public class LevelLogic {
                     }
                 }
                 IslandScore islandScore = createIslandScore(counts);
+                if (islandScore.getScore() >= activateNetherAtLevel) {
+                    // Add nether levels
+                    for (int x = px - radius; x <= px + radius; ++x) {
+                        for (int z = pz - radius; z <= pz + radius; ++z) {
+                            ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
+                            // Fucking modulo for negative numbers...
+                            int cx = x < 0 ? ((x % 16) + 16) % 16 : x % 16;
+                            int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
+                            for (int y = 5; y < 120; y++) {
+                                int blockId = chunk.getBlockTypeId(cx, y, cz);
+                                if (blockId != 0) { // Ignore AIR
+                                    blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
+                                    addBlockCount(blockId, counts);
+                                }
+                            }
+                        }
+                    }
+                    islandScore = createIslandScore(counts);
+                }
                 callback.setState(islandScore);
                 Bukkit.getScheduler().runTask(plugin, callback);
                 log.exiting(CN, "calculateScoreAsync");
             }
         });
+    }
+
+    private List<ChunkSnapshot> createChunkSnapshots(Location l, ProtectedRegion region) {
+        final List<ChunkSnapshot> snapshots = new ArrayList<>();
+        if (region == null) {
+            log.warning("No WG region found for island at " + LocationUtil.asString(l));
+            return null;
+        }
+        Region weRegion = new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint());
+        log.finer("Snapshotting chunks");
+        for (Vector2D chunkVector : weRegion.getChunks()) {
+            Chunk chunk = l.getWorld().getChunkAt(chunkVector.getBlockX(), chunkVector.getBlockZ());
+            if (!chunk.isLoaded()) {
+                log.finer("Loading chunk " + chunkVector);
+                chunk.load();
+            }
+            snapshots.add(chunk.getChunkSnapshot(true, false, false));
+        }
+        log.finer("Done making chunk-snapshots of " + weRegion);
+        return snapshots;
     }
 
     private ChunkSnapshot getChunkSnapshot(int x, int z, List<ChunkSnapshot> snapshots) {

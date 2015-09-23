@@ -12,43 +12,45 @@ import java.util.Random;
 
 public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
     private static final byte[] generate = new byte[32768*2];
+
+    public static final byte BEDROCK = (byte) Material.BEDROCK.getId();
+    public static final byte LAVA = (byte) Material.LAVA.getId();
+    public static final byte NETHERRACK = (byte) Material.NETHERRACK.getId();
+
     static {
         // base is lava, bedrock is randomized
-        byte blockId = (byte) Material.LAVA.getId();
         // All the way to y = 32 is LAVA
         for (int y = 0; y <= 32; y++) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    generate[xyzToByte(x, y, z)] = blockId;
+                    generate[xyzToByte(x, y, z)] = LAVA;
                 }
             }
         }
         // Trap for players trying to glitch through the roof.
-        for (int y = 127; y <= 130; y++) {
+        for (int y = 128; y <= 130; y++) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    generate[xyzToByte(x, y, z)] = blockId;
+                    generate[xyzToByte(x, y, z)] = LAVA;
                 }
             }
         }
-        blockId = (byte) Material.BEDROCK.getId();
-        int y = 126;
+        int y = 127;
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                generate[xyzToByte(x, y, z)] = blockId;
+                generate[xyzToByte(x, y, z)] = BEDROCK;
             }
         }
         for (y = 131; y <= 140; y++) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    generate[xyzToByte(x, y, z)] = blockId;
+                    generate[xyzToByte(x, y, z)] = BEDROCK;
                 }
             }
         }
     }
     private static final List<BlockPopulator> emptyBlockPopulatorList = new ArrayList<BlockPopulator>();
-    public static final byte NETHERRACK = (byte) Material.NETHERRACK.getId();
-    public static final byte BEDROCK = (byte) Material.BEDROCK.getId();
+
 
     private static int xyzToByte(int x, int y, int z) {
         return (x * 16 + z) * 256 + y;
@@ -68,6 +70,8 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
                 for (int z = 0; z < 16; z++) {
                     if (random.nextDouble() >= (0.10*y)) { // 10%-50% air
                         blocks[xyzToByte(x, y, z)] = BEDROCK;
+                    } else {
+                        blocks[xyzToByte(x, y, z)] = LAVA;
                     }
                 }
             }
@@ -86,10 +90,10 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
                 blocks[xyzToByte(x, y, z)] = NETHERRACK; // solid
             }
         }
-        for (y = 122; y < 126; y++) {
+        for (y = 123; y <= 126; y++) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    if (random.nextDouble() >= (0.20*(126-y))) { // 20%-100% bedrock
+                    if (random.nextDouble() >= (0.20*(127-y))) { // 20%-100% bedrock
                         blocks[xyzToByte(x, y, z)] = BEDROCK;
                     } else {
                         blocks[xyzToByte(x, y, z)] = NETHERRACK;

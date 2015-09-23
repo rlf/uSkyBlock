@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -1117,6 +1117,11 @@ msgstr "§eYou can not use another islands portals! Shame on you - cheater!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrading isn't allowed on other islands. Go home - cheater!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eChanging ye obsidian back into lava. Be careful!"
 
@@ -1207,6 +1212,12 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} has been removed from yonder island."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cThe island you be on be being deleted! Sending you to spawn."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr "§cThe island you be on be being deleted! Sending you to spawn."
 
 #, java-format

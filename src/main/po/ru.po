@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Egor Oldenburger <ERROR-202@MAIL.RU>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
@@ -1135,6 +1135,11 @@ msgstr "§eВы не можете использовать портал на д�
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eТорговля не разрешена на других островах. Идите домой - читер!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eИзменение вашего обсидиана обратно в лаву. Осторожнее!"
 
@@ -1224,6 +1229,12 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d удален из участников острова."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
 
 #, java-format

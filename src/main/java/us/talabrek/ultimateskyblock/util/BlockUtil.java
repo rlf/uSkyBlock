@@ -19,4 +19,5 @@ public enum BlockUtil {;
     public static boolean isFluid(Block block) {
         return FLUIDS.contains(block.getType());
     }
+
 }

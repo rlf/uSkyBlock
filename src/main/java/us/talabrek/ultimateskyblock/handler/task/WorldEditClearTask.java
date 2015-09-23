@@ -25,62 +25,62 @@ import java.util.logging.Level;
  * Not as fast as WorldEditRegenTask, but more versatile.
  */
 public class WorldEditClearTask extends BukkitRunnable implements IncrementalTask {
-    private static final BaseBlock AIR = new BaseBlock(0);
+                    private static final BaseBlock AIR = new BaseBlock(0);
 
-    private final Set<Region> borderRegions;
-    private final Set<Vector2D> innerChunks;
-    private final int chunks;
-    private final uSkyBlock plugin;
-    private final CommandSender commandSender;
-    private final Region region;
-    private final String format;
-    private final BukkitWorld bukkitWorld;
-    private final int minY;
-    private final int maxY;
-    private final int maxBlocks;
+                    private final Set<Region> borderRegions;
+                    private final Set<Vector2D> innerChunks;
+                    private final int chunks;
+                    private final uSkyBlock plugin;
+                    private final CommandSender commandSender;
+                    private final Region region;
+                    private final String format;
+                    private final BukkitWorld bukkitWorld;
+                    private final int minY;
+                    private final int maxY;
+                    private final int maxBlocks;
 
-    public WorldEditClearTask(uSkyBlock plugin, CommandSender commandSender, Region region, String format) {
-        this.plugin = plugin;
-        this.commandSender = commandSender;
-        this.region = region;
-        this.format = format;
-        innerChunks = WorldEditHandler.getInnerChunks(region);
-        borderRegions = WorldEditHandler.getBorderRegions(region);
-        chunks = innerChunks.size() + borderRegions.size();
-        bukkitWorld = new BukkitWorld(plugin.getWorld());
-        minY = Math.min(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
-        maxY = Math.max(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
-        maxBlocks = 2*Math.max(region.getLength(), region.getWidth())*16*(maxY-minY);
-    }
+                    public WorldEditClearTask(uSkyBlock plugin, CommandSender commandSender, Region region, String format) {
+                        this.plugin = plugin;
+                        this.commandSender = commandSender;
+                        this.region = region;
+                        this.format = format;
+                        innerChunks = WorldEditHandler.getInnerChunks(region);
+                        borderRegions = WorldEditHandler.getBorderRegions(region);
+                        chunks = innerChunks.size() + borderRegions.size();
+                        bukkitWorld = new BukkitWorld(plugin.getWorld());
+                        minY = Math.min(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
+                        maxY = Math.max(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
+                        maxBlocks = 2*Math.max(region.getLength(), region.getWidth())*16*(maxY-minY);
+                    }
 
-    @Override
-    public boolean execute(Plugin plugin, int offset, int length) {
-        Iterator<Vector2D> inner = innerChunks.iterator();
-        Iterator<Region> border = borderRegions.iterator();
-        for (int i = 0; i < length; i++) {
-            EditSession editSession = new EditSession(bukkitWorld, maxBlocks);
-            editSession.setFastMode(true);
-            if (inner.hasNext()) {
-                Vector2D chunk = inner.next();
-                inner.remove();
-                try {
-                    int x = chunk.getBlockX() << 4;
-                    int z = chunk.getBlockZ() << 4;
-                    editSession.setBlocks(new CuboidRegion(bukkitWorld,
-                                    new BlockVector(x, minY, z),
-                                    new BlockVector(x + 15, maxY, z + 15)),
-                            AIR);
-                } catch (MaxChangedBlocksException e) {
-                    plugin.getLogger().log(Level.WARNING, "Unable to clear flat-land", e);
-                }
-            } else if (border.hasNext()) {
-                Region borderRegion = border.next();
-                border.remove();
-                try {
-                    editSession.setBlocks(borderRegion, AIR);
-                } catch (MaxChangedBlocksException e) {
-                    plugin.getLogger().log(Level.WARNING, "Unable to clear flat-land", e);
-                }
+                    @Override
+                    public boolean execute(Plugin plugin, int offset, int length) {
+                        Iterator<Vector2D> inner = innerChunks.iterator();
+                        Iterator<Region> border = borderRegions.iterator();
+                        for (int i = 0; i < length; i++) {
+                            EditSession editSession = new EditSession(bukkitWorld, maxBlocks);
+                            editSession.setFastMode(true);
+                            if (inner.hasNext()) {
+                                Vector2D chunk = inner.next();
+                                inner.remove();
+                                try {
+                                    int x = chunk.getBlockX() << 4;
+                                    int z = chunk.getBlockZ() << 4;
+                                    editSession.setBlocks(new CuboidRegion(bukkitWorld,
+                                                    new BlockVector(x, minY, z),
+                                                    new BlockVector(x + 15, maxY, z + 15)),
+                                            AIR);
+                                } catch (MaxChangedBlocksException e) {
+                                    plugin.getLogger().log(Level.WARNING, "Unable to clear flat-land", e);
+                                }
+                            } else if (border.hasNext()) {
+                                Region borderRegion = border.next();
+                                border.remove();
+                                try {
+                                    editSession.setBlocks(borderRegion, AIR);
+                                } catch (MaxChangedBlocksException e) {
+                                    plugin.getLogger().log(Level.WARNING, "Unable to clear flat-land", e);
+                                }
             }
             editSession.commit();
         }

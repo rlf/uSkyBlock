@@ -246,8 +246,44 @@ asyncworldedit:
   # Or 20pct (what-ever comes first)
   progressEveryPct: 20
 
+
+nether:
+  enabled: true
+
+  # The distance to search for valid terra-form location.
+  terraform-distance: 7
+
+  activate-at:
+    level: 100
+
+  # The probability of forming blocks
+  terraform:
+    NETHERRACK:
+      - '{p=0.7}NETHERRACK'
+      - '{p=0.15}NETHERRACK'
+      - '{p=0.05}QUARTZ_ORE'
+      - '{p=0.05}SOUL_SAND'
+    QUARTZ_ORE:
+      - '{p=0.50}QUARTZ_ORE'
+      - '{p=0.10}QUARTZ_ORE'
+    SOUL_SAND:
+      - '{p=0.70}SOUL_SAND'
+      - '{p=0.10}SOUL_SAND'
+    GRAVEL:
+      - '{p=0.60}GRAVEL'
+      - '{p=0.10}GRAVEL'
+      - '{p=0.05}SOUL_SAND'
+    GLOWSTONE:
+      - '{p=0.85}GLOWSTONE'
+      - '{p=0.15}GLOWSTONE'
+
+  spawn-chances:
+    wither: 0.20
+    skeleton: 0.10
+    blaze: 0.20
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 26
+version: 27
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

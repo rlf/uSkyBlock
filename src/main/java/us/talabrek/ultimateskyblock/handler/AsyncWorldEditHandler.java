@@ -27,6 +27,9 @@ public enum AsyncWorldEditHandler {;
     }
 
     public static void registerCompletion(Player player, Runnable onCompletion) {
+        if (player == null || onCompletion == null) {
+            return;
+        }
         if (isAWE(uSkyBlock.getInstance())) {
             AsyncWorldEditAdaptor.registerCompletion(player, onCompletion);
         } else {

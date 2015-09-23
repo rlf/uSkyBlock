@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -47,6 +46,7 @@ import us.talabrek.ultimateskyblock.event.ExploitEvents;
 import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
+import us.talabrek.ultimateskyblock.event.NetherTerraFormEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
@@ -316,6 +316,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (getConfig().getBoolean("options.island.spawn-limits.enabled", true)) {
             manager.registerEvents(new SpawnEvents(this), this);
         }
+        manager.registerEvents(new NetherTerraFormEvents(this), this);
     }
 
     public World getWorld() {
@@ -724,7 +725,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean playerIsOnIsland(final Player player) {
-        return locationIsOnIsland(player, player.getLocation()) || playerIsTrusted(player);
+        return locationIsOnIsland(player, player.getLocation())
+                || locationIsOnNetherIsland(player, player.getLocation())
+                || playerIsTrusted(player);
     }
 
     private boolean playerIsTrusted(Player player) {
@@ -738,22 +741,34 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return false;
     }
 
-    public boolean locationIsOnIsland(final Player player, final Location loc) {
-        if (!isSkyWorld(player.getWorld())) {
+    public boolean locationIsOnNetherIsland(final Player player, final Location loc) {
+        if (!isSkyNether(loc.getWorld())) {
             return false;
         }
         PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
-        if (playerInfo != null) {
+        if (playerInfo != null && playerInfo.getHasIsland()) {
+            Location p = playerInfo.getIslandNetherLocation();
+            if (p == null) {
+                return false;
+            }
+            ProtectedRegion region = WorldGuardHandler.getNetherRegionAt(p);
+            return region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+        }
+        return false;
+    }
+
+    public boolean locationIsOnIsland(final Player player, final Location loc) {
+        if (!isSkyWorld(loc.getWorld())) {
+            return false;
+        }
+        PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
+        if (playerInfo != null && playerInfo.getHasIsland()) {
             Location p = playerInfo.getIslandLocation();
             if (p == null) {
                 return false;
             }
-            int r = Settings.island_radius;
-            CuboidRegion region = new CuboidRegion(
-                    new Vector(p.getBlockX() - r, 0, p.getBlockZ() - r),
-                    new Vector(p.getBlockX() + r, 255, p.getBlockZ() + r)
-            );
-            return region.contains(new Vector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()));
+            ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(p);
+            return region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
         }
         return false;
     }

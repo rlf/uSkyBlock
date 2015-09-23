@@ -1,7 +1,7 @@
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
@@ -1134,6 +1134,11 @@ msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§e交易无法在别的岛屿上进行.滚回家 - 骗子!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§e已经将你的黑曜石变为岩浆.请务必当心!"
 
@@ -1222,6 +1227,12 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0}被从当前岛屿上移除."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
 
 #, java-format

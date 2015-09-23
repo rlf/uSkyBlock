@@ -25,14 +25,18 @@ public class AsyncWorldEditAdaptor {
         @Override
         public void disableMessage(PlayerEntry playerEntry) {
             if (playerEntry.isUnknown() && playerEntry.getMode() && !pendingJobs.isEmpty()) {
-                Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), pendingJobs.pop().getJob());
+                PlayerJob job = pendingJobs.pop();
+                if (job != null && job.getJob() != null) {
+                    Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), job.getJob());
+                }
             }
-            System.out.println("disableMessage " + asString(playerEntry));
+            System.out.println("disableMessage " + asString(playerEntry) + ", pending jobs: " + pendingJobs.size());
         }
 
         @Override
         public void setMessage(PlayerEntry playerEntry, int jobsCount,
                                int queuedBlocks, int maxQueuedBlocks, double timeLeft, double placingSpeed, double percentage) {
+            System.out.println("setMessage " + asString(playerEntry) + ", pending jobs: " + pendingJobs.size() + ", jobsCount: " + jobsCount);
             if (playerEntry.isUnknown() && playerEntry.getMode()) {
                 if (!pendingJobs.isEmpty()) {
                     PlayerJob peek = pendingJobs.peek();

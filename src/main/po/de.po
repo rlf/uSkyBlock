@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
@@ -1173,6 +1173,11 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandeln ist auf anderen Inseln nicht erlaubt. Geh heim - Cheater!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVerwandelt dein Obsidian wieder in lava. Sei vorsichtig!"
 
@@ -1268,6 +1273,13 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} wurde von der Insel entfernt."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr ""
+"§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr ""
 "§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
 
