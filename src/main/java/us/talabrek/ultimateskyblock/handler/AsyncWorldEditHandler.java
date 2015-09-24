@@ -6,7 +6,10 @@ import us.talabrek.ultimateskyblock.handler.asyncworldedit.AsyncWorldEditAdaptor
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 /**
- * Handles integration with AWE - note must be put done in a way, that can handle if it's not available!
+ * Handles integration with AWE.
+ * Very HACKY and VERY unstable.
+ *
+ * Only kept as a cosmetic measure, to at least try to give the players some feedback.
  */
 public enum AsyncWorldEditHandler {;
 
@@ -26,11 +29,9 @@ public enum AsyncWorldEditHandler {;
         return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit") && plugin.getConfig().getBoolean("asyncworldedit.enabled", true);
     }
 
-    public static void registerCompletion(Player player, Runnable onCompletion) {
+    public static void registerCompletion(Player player) {
         if (isAWE(uSkyBlock.getInstance())) {
-            AsyncWorldEditAdaptor.registerCompletion(player, onCompletion);
-        } else {
-            Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), onCompletion, 5);
+            AsyncWorldEditAdaptor.registerCompletion(player);
         }
     }
 }

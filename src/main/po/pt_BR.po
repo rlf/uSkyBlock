@@ -1,7 +1,7 @@
 # Copyright (C) 2015 R4zorax and more
 # This file is distributed under the same license as the PACKAGE package.
 # R4zorax, 2015.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
@@ -492,6 +492,18 @@ msgstr "§4Esse jogador não tem uma ilha!"
 
 msgid "imports players and islands from other formats"
 msgstr "importar jogadores e ilhas de outros formatos"
+
+#, fuzzy
+msgid "changes the language of the plugin, and reloads"
+msgstr "§eAlterado o bioma da ilha de {0} para {1}."
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr ""
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
+msgstr ""
 
 msgid "transfer leadership to another player"
 msgstr "transferir a liderança para outro jogador"
@@ -1147,7 +1159,11 @@ msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4Você só pode completar desafios se tiver uma ilha!"
 
 #, fuzzy, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§eNível atual: §a{0,number,##.#}"
+
+#, fuzzy, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
 msgstr "§eVocê pode criar uma nova ilha em {0,number,#} segundos."
 
 #, java-format
@@ -1162,12 +1178,12 @@ msgstr ""
 "§4CUIDADO: §aUsar{0}§ é perigoso. Repita esse comando dentro de §a{1}§e "
 "segundos para confirmar!"
 
-#, java-format
-msgid "§d** You are entering §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Você está entrando na ilha de §b{0}."
 
-#, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}''s §disland."
 msgstr "§d** Você está saindo da ilha de §b{0}"
 
 msgid "§eYour island is now locked. Only your party members may enter."
@@ -1913,6 +1929,10 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! Encontramos um local mais perto para o spawn. §9Limpando ele para "
@@ -1969,6 +1989,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "reload the region chunks"
+#~ msgstr "carregar region chunks"
 
 #~ msgid "{0} <Permissions>"
 #~ msgstr "{0} <Permissões>"
@@ -2443,10 +2467,6 @@ msgstr "s"
 #~ "§7Animais passivos e\n"
 #~ "§7monstros irão nascer\n"
 #~ "§7normalmente."
-
-#, fuzzy
-#~ msgid "changes the language of the plugin"
-#~ msgstr "§eAlterado o bioma da ilha de {0} para {1}."
 
 #~ msgid "{0} changed the island biome to OCEAN"
 #~ msgstr "{0} alterou o bioma da ilha para OCEANO"

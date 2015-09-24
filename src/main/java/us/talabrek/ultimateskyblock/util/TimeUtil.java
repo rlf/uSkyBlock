@@ -45,4 +45,8 @@ public enum TimeUtil {;
     public static int millisAsSeconds(long millis) {
         return (int) Math.ceil(millis / 1000f);
     }
+
+    public static long millisAsTicks(int ms) {
+        return ms/50;
+    }
 }

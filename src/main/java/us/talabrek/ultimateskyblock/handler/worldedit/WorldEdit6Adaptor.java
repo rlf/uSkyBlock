@@ -45,7 +45,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
     }
 
     @Override
-    public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
+    public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
         WorldEdit worldEdit = worldEditPlugin.getWorldEdit();
         try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
@@ -69,7 +69,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
                     .build();
             Operations.completeBlindly(operation);
             editSession.flushQueue();
-            AsyncWorldEditHandler.registerCompletion(player, onCompletion);
+            AsyncWorldEditHandler.registerCompletion(player);
             editSession.commit();
             return true;
         } catch (IOException e) {

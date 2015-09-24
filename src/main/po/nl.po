@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-21 23:49+0200\n"
+"PO-Revision-Date: 2015-09-24 21:56+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -498,6 +498,18 @@ msgstr "§4Die speler heeft geen eiland."
 
 msgid "imports players and islands from other formats"
 msgstr "importeerd spelers en eilanden van een ander formaat"
+
+#, fuzzy
+msgid "changes the language of the plugin, and reloads"
+msgstr "verander de biome van het eiland"
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr ""
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
+msgstr ""
 
 msgid "transfer leadership to another player"
 msgstr "overdragen van het leiderschap naar een andere speler"
@@ -1162,8 +1174,13 @@ msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eJe kan alleen spawn-eggs op je eigen eiland gebruiken."
 
 #, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§9Eiland creëren...§e{0,number,###}%"
+
+#, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
 msgstr ""
+"§cSorry voor de vertraging! §9Je eiland is nu §e{0,number,##}%§9 klaar..."
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1178,12 +1195,12 @@ msgstr ""
 "seconden om het te accepteren!"
 
 #, java-format
-msgid "§d** You are entering §b{0}'s §disland."
-msgstr "§d** Je komt bij §b{0}'s §deiland binnen."
+msgid "§d** You are entering §b{0}''s §disland."
+msgstr "§d** Je komt bij §b{0}''s §deiland binnen."
 
 #, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
-msgstr "§d** Je hebt §b{0}'s §deiland verlaten."
+msgid "§d** You are leaving §b{0}''s §disland."
+msgstr "§d** Je hebt §b{0}''s §deiland verlaten."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
@@ -1322,9 +1339,9 @@ msgstr ""
 msgid "Permissions"
 msgstr "Permissies"
 
-#, fuzzy, java-format
+#, java-format
 msgid "{0} <{1}>"
-msgstr "§a{0} §c{1}"
+msgstr "{0} <{1}>"
 
 msgid "§hPlayer Permissions"
 msgstr "§hSpeler Permissies"
@@ -1942,6 +1959,10 @@ msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr "§cWatchdog!§9 Kan geen chest vinden in {0}, process gestopt."
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! We hebben een plaats dichter bij de spawn gevonden. §9Ontruimen dit "
@@ -1998,6 +2019,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "reload the region chunks"
+#~ msgstr "laad de regio chunks"
 
 #~ msgid "{0} <Permissions>"
 #~ msgstr "{0} <Permissies>"

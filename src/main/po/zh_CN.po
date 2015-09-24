@@ -1,7 +1,7 @@
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
@@ -497,6 +497,18 @@ msgid "§4That player does not have an island!"
 msgstr "§4玩家仍未拥有岛屿。"
 
 msgid "imports players and islands from other formats"
+msgstr ""
+
+#, fuzzy
+msgid "changes the language of the plugin, and reloads"
+msgstr "§e将 {0} 的岛屿的生物群系更改为 {1}"
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr ""
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
 msgstr ""
 
 msgid "transfer leadership to another player"
@@ -1152,7 +1164,11 @@ msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
 
 #, fuzzy, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§e当前岛屿等级: §a{0,number,##.#}"
+
+#, fuzzy, java-format
+msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
 msgstr "§e你需要等待{0,number,#}秒才能创建一个新的岛屿."
 
 #, java-format
@@ -1166,11 +1182,11 @@ msgid ""
 msgstr "§9{0}§e是§c危险的§e.请等待§a{1}§e秒后在这样做."
 
 #, fuzzy, java-format
-msgid "§d** You are entering §b{0}'s §disland."
+msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
 
 #, fuzzy, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
+msgid "§d** You are leaving §b{0}''s §disland."
 msgstr "§e移除了 {0} 的岛屿。"
 
 msgid "§eYour island is now locked. Only your party members may enter."
@@ -1942,6 +1958,10 @@ msgstr "无法为你创建岛屿.请联系管理员."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 
@@ -2423,10 +2443,6 @@ msgstr "秒"
 #~ "§7山峦(Extreme Hills)生物群系下.\n"
 #~ "§7中立生物将会正常生成.\n"
 #~ "§7敌对生物将会正常生成."
-
-#, fuzzy
-#~ msgid "changes the language of the plugin"
-#~ msgstr "§e将 {0} 的岛屿的生物群系更改为 {1}"
 
 #~ msgid "{0} changed the island biome to OCEAN"
 #~ msgstr "{0}将岛屿的生物群系变更为 海洋生物群系(OCEAN)"

@@ -46,6 +46,21 @@ public enum I18nUtil {;
         }
     }
 
+    public static Locale getLocale(String lang) {
+        if (lang != null) {
+            // Why is this not just standard Java Locale??
+            String[] parts = lang.split("[_\\-]");
+            if (parts.length >= 3) {
+                return new Locale(parts[0], parts[1], parts[2]);
+            } else if (parts.length == 2) {
+                return new Locale(parts[0], parts[1]);
+            } else {
+                return new Locale(parts[0]);
+            }
+        }
+        return null;
+    }
+
     /**
      * Proxy between uSkyBlock and org.xnap.commons.i18n.I18n
      */
@@ -66,7 +81,7 @@ public enum I18nUtil {;
                     return messages.getProperty(key);
                 }
             }
-            return proxy.tr(key, args);
+            return args.length > 0 ? proxy.tr(key, args) : proxy.tr(key);
         }
 
         public Locale getLocale() {

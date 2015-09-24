@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -491,6 +491,18 @@ msgstr "§4That player does not have an island!"
 
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
+
+#, fuzzy
+msgid "changes the language of the plugin, and reloads"
+msgstr "change yonder biome of yonder island"
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr ""
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
+msgstr ""
 
 msgid "transfer leadership to another player"
 msgstr "transfer leadership to another player"
@@ -1134,8 +1146,12 @@ msgstr "§eYou have revoked ye trust in §a{0}§e on ye island."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4You can only submit challenges when you have an island!"
 
+#, fuzzy, java-format
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§eCurrent Level: §a{0,number,##.#}"
+
 #, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
 msgstr ""
 
 #, java-format
@@ -1150,12 +1166,12 @@ msgstr ""
 "§eDoing §9{0}§e be §cRISKY§e. Repeat ye command within §a{1}§e seconds to "
 "accept!"
 
-#, java-format
-msgid "§d** You are entering §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** You be entering §b{0}'s §disland."
 
-#, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}''s §disland."
 msgstr "§d** You be leaving §b{0}'s §disland."
 
 msgid "§eYour island is now locked. Only your party members may enter."
@@ -1900,6 +1916,10 @@ msgstr "Could not create ye Island. Please contact a server moderator."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGetting ye island ready, please be patient, it can take a while."
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 
@@ -1954,6 +1974,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "reload the region chunks"
+#~ msgstr "load ye region chunks"
 
 #~ msgid "save orphans"
 #~ msgstr "save orphans"

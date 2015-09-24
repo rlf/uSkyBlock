@@ -21,7 +21,6 @@ import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -132,11 +131,11 @@ public class WorldGuardHandler {
         region.setPriority(100);
         region.setFlag(DefaultFlag.GREET_MESSAGE,
                 DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender,
-                        tr("\u00a7d** You are entering \u00a7b{0}'s \u00a7disland.", islandConfig.getLeader())
+                        tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
                 ));
         region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
                 DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender,
-                        tr("\u00a7d** You are leaving \u00a7b{0}'s \u00a7disland.", islandConfig.getLeader())
+                        tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
                 ));
         setVersionSpecificFlags(region);
         region.setFlag(DefaultFlag.PVP, null);
