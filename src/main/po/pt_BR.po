@@ -1,12 +1,12 @@
 # Copyright (C) 2015 R4zorax and more
 # This file is distributed under the same license as the PACKAGE package.
 # R4zorax, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-18 16:58-0300\n"
+"PO-Revision-Date: 2015-09-25 18:17+0100\n"
 "Last-Translator: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language-Team: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language: pt_BR\n"
@@ -141,7 +141,7 @@ msgid "§eClick here to show next page"
 msgstr "§e§lClique aqui para ver a próxima página"
 
 msgid "§4§lLocked Challenge"
-msgstr "§4§lDesafio trancado"
+msgstr "§4§lDesafio bloqueado"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§eDesafios estão desabilitados. Contate a um administrador."
@@ -199,7 +199,9 @@ msgstr "§4Nome de desafio inválido! Use /c help para mais informações"
 
 #, java-format
 msgid "Complete {0} more {1} challenges"
-msgstr "Complete mais {0} desafios na categoria {1}"
+msgstr ""
+"Complete mais {0} desafios\n"
+"na categoria {1}"
 
 #, java-format
 msgid "§7Complete {0}"
@@ -298,19 +300,20 @@ msgstr "§4Erro! §9Nenhuma ilha válida para o purge foi encontrada."
 msgid "§cPURGE: §9Purged island at {0}"
 msgstr "§cPURGE: §9Ilha em {0} foi purgada."
 
-#, fuzzy
 msgid "toggles the islands ignore status"
-msgstr "alterar a proteção da ilha."
+msgstr "alterar o status de ignorado da ilha"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§aDefinir a ilha de {0} para a bedrock perto de você."
+msgstr "§cIgnorar a ilha de {0} no top 10 e no purge."
 
 #, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
 msgstr ""
+"§cA ilha de {0} não é mais ignorada, agora você pode ver ela no purge e no "
+"top 10."
 
 msgid "§4No valid player-name supplied."
 msgstr "§4Nome fornecido é inválido."
@@ -493,17 +496,16 @@ msgstr "§4Esse jogador não tem uma ilha!"
 msgid "imports players and islands from other formats"
 msgstr "importar jogadores e ilhas de outros formatos"
 
-#, fuzzy
 msgid "changes the language of the plugin, and reloads"
-msgstr "§eAlterado o bioma da ilha de {0} para {1}."
+msgstr "altera a linguagem do plugin e recarrega"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr ""
+msgstr "§aLinguagem alterada para §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
-msgstr ""
+msgstr "§cOcorreu um erro ao alterar a linguagem para §e{0}"
 
 msgid "transfer leadership to another player"
 msgstr "transferir a liderança para outro jogador"
@@ -587,8 +589,7 @@ msgstr "§4PURGE:§9 Terminou o processo de purge em ilhas abandonadas."
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
-"§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o "
-"purgatório."
+"§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o purge."
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
@@ -796,7 +797,7 @@ msgstr "§4Esse jogador é inválido ou não tem uma ilha!"
 
 #, java-format
 msgid "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
-msgstr "§eBlocos na ilha de {0} (page {1,number} de {2,number}):"
+msgstr "§eBlocos na ilha de {0} (pagina {1,number} de {2,number}):"
 
 msgid "Score Count Block"
 msgstr "Pontos por bloco"
@@ -897,7 +898,7 @@ msgstr "§eInformações sobre a ilha de {0}':"
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
-msgstr "§aNível da ilha: {0,number,###.##}"
+msgstr "§aNível: {0,number,###.##}"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1111,16 +1112,16 @@ msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Esse jogador proibiu você de teleportar até a ilha dele."
 
 msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "Por que você está TOTALMENTEE SOZINHOOOOO"
+msgstr "Você está sozinho na sua ilha."
 
 msgid "But you are Yelling in the wind!"
-msgstr "Por que você está gritando no vento!"
+msgstr "Não tem mais ninguém na sua ilha."
 
 msgid "But your fantasy friends are gone!"
-msgstr "Por que a fantasia dos seus amigos sumiram!"
+msgstr "Seus amigos sumiram!"
 
 msgid "But you are Talking to your self!"
-msgstr "Por que você está falando com você mesmo!"
+msgstr "Por que você está falando sozinho?"
 
 #, java-format
 msgid "§cSorry! {0}"
@@ -1150,21 +1151,20 @@ msgstr "§4Essa é uma má ideia para substituir sua lava!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Esse jogador proibiu você de teleportar até a ilha dele."
 
-#, fuzzy
 msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§eVocê recuperou a confiança na ilha de §a{0}."
+msgstr "§cVocê chegou no limite de spawn na sua ilha."
 
-#, fuzzy
 msgid "§eYou can only use spawn-eggs on your own island."
-msgstr "§4Você só pode completar desafios se tiver uma ilha!"
+msgstr "§eVocê só pode usar spawn-eggs na sua ilha."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating island...§e{0,number,###}%"
-msgstr "§eNível atual: §a{0,number,##.#}"
+msgstr "§9Criando ilha...§e{0,number,###}%"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
-msgstr "§eVocê pode criar uma nova ilha em {0,number,#} segundos."
+msgstr ""
+"§cDesculpe pela demora! §9Sua ilha agora  §e{0,number,##}%§9 terminado..."
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1178,13 +1178,13 @@ msgstr ""
 "§4CUIDADO: §aUsar{0}§ é perigoso. Repita esse comando dentro de §a{1}§e "
 "segundos para confirmar!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Você está entrando na ilha de §b{0}."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** Você está saindo da ilha de §b{0}"
+msgstr "§d** Você está saindo da ilha de §b{0}."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§eAgora sua ilha está trancada. Apenas seu grupo podem entrar."
@@ -1224,11 +1224,11 @@ msgstr "§b{0}§d desativou o warp até a ilha."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
-msgstr ""
+msgstr "§cINFO §f> §7 {0}"
 
 #, java-format
 msgid "§d[{0}]§7 {1}"
-msgstr ""
+msgstr "§d[{0}]§7 {1}"
 
 #, java-format
 msgid "§b{0}§d has been removed from the island group."
@@ -1319,9 +1319,9 @@ msgstr ""
 msgid "Permissions"
 msgstr "Permissões"
 
-#, fuzzy, java-format
+#, java-format
 msgid "{0} <{1}>"
-msgstr "§a{0} §c{1}"
+msgstr "{0} <{1}>"
 
 msgid "§hPlayer Permissions"
 msgstr "§hPermissões dos jogadores"
@@ -1393,7 +1393,7 @@ msgid "Cannot {0}"
 msgstr "Não pode {0}"
 
 msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Clique para alterar permissões desse jogador>"
+msgstr "§e<Clique para alterar permissões>"
 
 msgid "Island Log"
 msgstr "Histórico da ilha"
@@ -1931,7 +1931,7 @@ msgstr ""
 
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr ""
+msgstr "§cWatchdog!§9 Não foi possível encontrar um báu em {0}.."
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
@@ -1968,7 +1968,7 @@ msgid "§4DISABLED"
 msgstr "§4DESATIVADO"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
@@ -1990,9 +1990,19 @@ msgstr "m"
 msgid "s"
 msgstr "s"
 
-#, fuzzy
-#~ msgid "reload the region chunks"
-#~ msgstr "carregar region chunks"
+#~ msgid ""
+#~ "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+#~ msgstr ""
+#~ "§cDesculpe pelo delay! §9Sua ilha agora é §e{1,number,##}%§9 terminado..."
+
+#~ msgid "§d** You are entering §b{0}'s §disland."
+#~ msgstr "§d** Você está entrando na ilha de §b{0}."
+
+#~ msgid "§d** You are leaving §b{0}'s §disland."
+#~ msgstr "§d** Você está saindo da ilha de §b{0}"
+
+#~ msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#~ msgstr "§cPURGE:§9 Purgado {0}/{1} {2,##,number}"
 
 #~ msgid "{0} <Permissions>"
 #~ msgstr "{0} <Permissões>"
@@ -2467,6 +2477,10 @@ msgstr "s"
 #~ "§7Animais passivos e\n"
 #~ "§7monstros irão nascer\n"
 #~ "§7normalmente."
+
+#, fuzzy
+#~ msgid "changes the language of the plugin"
+#~ msgstr "§eAlterado o bioma da ilha de {0} para {1}."
 
 #~ msgid "{0} changed the island biome to OCEAN"
 #~ msgstr "{0} alterou o bioma da ilha para OCEANO"
