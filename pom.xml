@@ -63,6 +63,10 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>titlemananager-repo</id>
+            <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
+        </repository>
     </repositories>
     <profiles>
         <profile>
@@ -473,6 +477,12 @@
             <artifactId>ActionBarAPI</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>io.puharesource.mc</groupId>
+            <artifactId>TitleManager</artifactId>
+            <version>1.5.11</version>
+        </dependency>
+
         <!-- TESTING -->
         <dependency>
             <groupId>junit</groupId>

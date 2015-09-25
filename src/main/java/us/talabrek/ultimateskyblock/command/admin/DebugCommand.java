@@ -108,7 +108,8 @@ public class DebugCommand extends CompositeUSBCommand {
             logHandler.setFormatter(new SingleLineFormatter());
             log.addHandler(logHandler);
             plugin.getLogger().addHandler(logHandler);
-            log.log(log.getLevel(), stripFormatting(plugin.getVersionInfo(true)));
+            Level level = log.getLevel() != null ? log.getLevel() : Level.FINER;
+            log.log(level, stripFormatting(plugin.getVersionInfo(true)));
             sender.sendMessage("\u00a7eLogging to " + logFile);
         } catch (IOException e) {
             log.log(Level.WARNING, "Unable to enable logging", e);
