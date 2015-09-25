@@ -21,12 +21,12 @@ public class AsyncWorldEditAdaptor {
     private static IProgressDisplay progressDisplay = new IProgressDisplay() {
         @Override
         public String getName() {
-            return "uSkyBlock Progress WatchDog";
+            return "uSkyBlock AWE Progress";
         }
 
         @Override
         public void disableMessage(PlayerEntry playerEntry) {
-            if (playerEntry.isUnknown() && playerEntry.getMode() && !pendingJobs.isEmpty()) {
+            if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getMode() && !pendingJobs.isEmpty()) {
                 pendingJobs.remove(findNextJobToComplete());
             }
         }
@@ -34,7 +34,7 @@ public class AsyncWorldEditAdaptor {
         @Override
         public void setMessage(PlayerEntry playerEntry, int jobsCount,
                                int queuedBlocks, int maxQueuedBlocks, double timeLeft, double placingSpeed, double percentage) {
-            if (playerEntry.isUnknown() && playerEntry.getMode()) {
+            if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getMode()) {
                 synchronized (pendingJobs) {
                     if (!pendingJobs.isEmpty()) {
                         PlayerJob peek = findJob(queuedBlocks, maxQueuedBlocks, percentage);

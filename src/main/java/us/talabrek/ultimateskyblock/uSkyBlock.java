@@ -640,7 +640,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final Location spawnLocation = getWorld().getSpawnLocation();
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             if (Settings.extras_sendToSpawn) {
-                execCommand(player, "op:spawn");
+                execCommand(player, "op:spawn", false);
             } else {
                 LocationUtil.loadChunkAt(spawnLocation);
                 player.teleport(spawnLocation);
@@ -651,7 +651,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 @Override
                 public void run() {
                     if (Settings.extras_sendToSpawn) {
-                        execCommand(player, "op:spawn");
+                        execCommand(player, "op:spawn", false);
                     } else {
                         LocationUtil.loadChunkAt(spawnLocation);
                         player.teleport(spawnLocation);
@@ -1124,11 +1124,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return orphanLogic;
     }
 
-    public void execCommand(Player player, String command) {
+    /**
+     *
+     * @param player    The player executing the command
+     * @param command   The command to execute
+     * @param onlyInSky Whether the command is restricted to a sky-associated world.
+     */
+    public void execCommand(Player player, String command, boolean onlyInSky) {
         if (command == null || player == null) {
             return;
         }
-        if (!isSkyAssociatedWorld(player.getWorld())) {
+        if (onlyInSky && !isSkyAssociatedWorld(player.getWorld())) {
             return;
         }
         command = command
