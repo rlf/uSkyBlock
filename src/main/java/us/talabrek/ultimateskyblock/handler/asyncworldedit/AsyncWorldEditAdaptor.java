@@ -8,13 +8,13 @@ import com.sk89q.worldedit.extension.platform.Actor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.primesoft.asyncworldedit.AsyncWorldEditMain;
-import org.primesoft.asyncworldedit.api.IAsyncWorldEdit;
 import org.primesoft.asyncworldedit.api.progressDisplay.IProgressDisplay;
 import org.primesoft.asyncworldedit.playerManager.PlayerEntry;
 import org.primesoft.asyncworldedit.worldedit.AsyncEditSession;
 import us.talabrek.ultimateskyblock.handler.ActionBarHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +93,7 @@ public class AsyncWorldEditAdaptor {
 
     public static void onEnable(uSkyBlock plugin) {
         if (isAWE()) {
-            IAsyncWorldEdit awe = getAWE();
+            AsyncWorldEditMain awe = getAWE();
             awe.getProgressDisplayManager().registerProgressDisplay(progressDisplay);
             progressEveryMs = plugin.getConfig().getInt("asyncworldedit.progressEveryMs", 3000);
             progressEveryPct = plugin.getConfig().getDouble("asyncworldedit.progressEveryPct", 20);
@@ -102,8 +102,8 @@ public class AsyncWorldEditAdaptor {
 
     public static void onDisable(uSkyBlock plugin) {
         if (isAWE()) {
-            IAsyncWorldEdit awe = getAWE();
-            awe.getProgressDisplayManager().unregisterProgressDisplay(progressDisplay);
+            AsyncWorldEditMain awe = getAWE();
+                awe.getProgressDisplayManager().unregisterProgressDisplay(progressDisplay);
         }
     }
 
@@ -112,7 +112,7 @@ public class AsyncWorldEditAdaptor {
     }
 
     public static boolean isAWE() {
-        return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit");
+        return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit") && VersionUtil.getVersion(getAWE().getDescription().getVersion()).isLT("3");
     }
 
     public static void registerCompletion(Player player) {

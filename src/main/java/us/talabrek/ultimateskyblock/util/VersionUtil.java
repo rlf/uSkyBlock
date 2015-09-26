@@ -55,5 +55,12 @@ public enum VersionUtil {;
                     major >= other.major && minor > other.minor ||
                     major >= other.major && minor >= other.minor && micro >= other.micro;
         }
+
+        public boolean isLT(String version) {
+            Version other = getVersion(version);
+            return major < other.major ||
+                    major <= other.major && minor < other.minor ||
+                    major <= other.major && minor <= other.minor && micro < other.micro;
+        }
     }
 }
