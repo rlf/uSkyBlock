@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-24 22:48+0200\n"
+"PO-Revision-Date: 2015-09-26 21:46+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -498,17 +498,16 @@ msgstr "§4Den spiller har ingen ø!"
 msgid "imports players and islands from other formats"
 msgstr "importer spillere og øer fra andre formater"
 
-#, fuzzy
 msgid "changes the language of the plugin, and reloads"
-msgstr "§eÆndrede biomen for {0}'s ø til {1}"
+msgstr "skifter sprog af pluginnet, og genindlæser det"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr ""
+msgstr "§aSkiftede sprog til §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
-msgstr ""
+msgstr "§cKunne ikke skifte sprog til §e{0}"
 
 msgid "transfer leadership to another player"
 msgstr "overfør ejerskab til en anden spiller"
@@ -710,17 +709,17 @@ msgstr "§4Du har ikke tilladelse til at udelukke spillere."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
+msgstr "§eDu er blevet §cFORVIST§e fra {0}§e''s ø."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
+msgstr "§eDu er blevet §aBENÅDET§e af {0}."
 
 msgid "change the biome of the island"
 msgstr "ændr øens biome"
@@ -1163,13 +1162,12 @@ msgstr "§eDu har nået din øs spawn-grænse."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eDu kan kun brug spawn-æg på din egen ø."
 
-#, fuzzy
 msgid "§cBanned:§e You are banned from this island."
-msgstr "§cKan ikke §fsparke andre fra øen."
+msgstr "§cForvist:§e Du har ikke lov til at komme på denne ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr "§9Bygger øen...§e{0,number,###}%"
+msgstr "§eVenter på din tur §c{0,number,###}%"
 
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"

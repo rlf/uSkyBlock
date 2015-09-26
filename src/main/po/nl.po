@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-24 21:56+0100\n"
+"PO-Revision-Date: 2015-09-26 20:51+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -499,17 +499,16 @@ msgstr "§4Die speler heeft geen eiland."
 msgid "imports players and islands from other formats"
 msgstr "importeerd spelers en eilanden van een ander formaat"
 
-#, fuzzy
 msgid "changes the language of the plugin, and reloads"
-msgstr "verander de biome van het eiland"
+msgstr "verander de taal en herlaad de plugin"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr ""
+msgstr "§aDe taal is met succes veranderd naar §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
-msgstr ""
+msgstr "§cMislukt om de taal te veranderen naar §e{0}"
 
 msgid "transfer leadership to another player"
 msgstr "overdragen van het leiderschap naar een andere speler"
@@ -720,17 +719,17 @@ msgstr "§4Je hebt geen toestemming om leden te verweideren of te verbannen."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eJe hebt §4{0}§e verbannen om naar uw eiland te warpen."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eJe hebt §4{0}§e verbannen om naar uw eiland te warpen."
+msgstr "§eJe bent §cGEBANd §e van {0}§e''s eiland."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eJe hebt §a{0}§e toegang gegeven om weer naar uw eiland te warpen."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eJe hebt §a{0}§e toegang gegeven om weer naar uw eiland te warpen."
+msgstr "§eJe bent §aONTBAND§e van {0}§e''s eiland\v."
 
 msgid "change the biome of the island"
 msgstr "verander de biome van het eiland"
@@ -1181,13 +1180,12 @@ msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eJe kan alleen spawn-eggs op je eigen eiland gebruiken."
 
-#, fuzzy
 msgid "§cBanned:§e You are banned from this island."
-msgstr "§4Speler is al toegewezen aan dit eiland!"
+msgstr "§cVerband:§e Jij bent geband op dit eiland."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr "§9Eiland creëren...§e{0,number,###}%"
+msgstr "§eWachten op je beurt §c{0,number,###}%"
 
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"

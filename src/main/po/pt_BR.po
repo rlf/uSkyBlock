@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-25 18:17+0100\n"
+"PO-Revision-Date: 2015-09-26 20:42+0100\n"
 "Last-Translator: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language-Team: _Rodrigo <rodriigosantos11@gmail.com>\n"
 "Language: pt_BR\n"
@@ -709,17 +709,17 @@ msgstr "§4Você não tem permissão para expulsar/banir jogadores do grupo."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
+msgstr ""
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eAgora {0} pode teleportar até sua ilha."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eAgora {0} pode teleportar até sua ilha."
+msgstr ""
 
 msgid "change the biome of the island"
 msgstr "alterar o bioma da ilha"
@@ -1165,13 +1165,12 @@ msgstr "§cVocê chegou no limite de spawn na sua ilha."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eVocê só pode usar spawn-eggs na sua ilha."
 
-#, fuzzy
 msgid "§cBanned:§e You are banned from this island."
-msgstr "§cNão pode §fexpulsar jogadores da ilha."
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr "§9Criando ilha...§e{0,number,###}%"
+msgstr ""
 
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
@@ -2001,10 +2000,6 @@ msgstr "m"
 msgid "s"
 msgstr "s"
 
-#, fuzzy
-#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
-#~ msgstr "§9Criando ilha...§e{0,number,###}%"
-
 #~ msgid ""
 #~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
 #~ msgstr ""
@@ -2252,6 +2247,9 @@ msgstr "s"
 
 #~ msgid "§cCannot §finvite others to the island."
 #~ msgstr "§cNão pode§f convida jogadres para a ilha."
+
+#~ msgid "§cCannot §fkick others from the island."
+#~ msgstr "§cNão pode §fexpulsar jogadores da ilha."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBioma: Oceano"
