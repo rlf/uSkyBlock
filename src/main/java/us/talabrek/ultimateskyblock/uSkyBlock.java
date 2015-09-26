@@ -231,6 +231,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
+                registerEventsAndCommands();
                 getServer().getScheduler().runTaskLater(instance, new Runnable() {
                     @Override
                     public void run() {
@@ -1085,10 +1086,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         notifier = new PlayerNotifier(getConfig());
         playerLogic = new PlayerLogic(this);
         playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
-        registerEvents(playerDB);
         if (autoRecalculateTask != null) {
             autoRecalculateTask.cancel();
         }
+    }
+
+    public void registerEventsAndCommands() {
+        registerEvents(playerDB);
         int refreshEveryMinute = getConfig().getInt("options.island.autoRefreshScore", 0);
         if (refreshEveryMinute > 0) {
             int refreshTicks = refreshEveryMinute * 1200; // Ticks per minute
