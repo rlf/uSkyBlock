@@ -1164,6 +1164,11 @@ msgstr "§eVous ne pouvez pas utiliser d'autres portails !"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eL'échange entre île n'est pas autorisé ! "
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eObsidienne changé en lave ! Soyez prudent !"
 
@@ -1261,6 +1266,12 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d a été retiré de votre île."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cL'île sur laquelle vous êtes a été supprimé ! "
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr "§cL'île sur laquelle vous êtes a été supprimé ! "
 
 #, java-format

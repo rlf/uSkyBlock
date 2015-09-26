@@ -493,6 +493,28 @@ msgstr "§4Esse jogador não tem uma ilha!"
 msgid "imports players and islands from other formats"
 msgstr "importar jogadores e ilhas de outros formatos"
 
+#, fuzzy
+msgid "changes the language of the plugin, and reloads"
+msgstr "§eAlterado o bioma da ilha de {0} para {1}."
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr ""
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
+msgstr ""
+
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
+msgstr ""
+
 msgid "transfer leadership to another player"
 msgstr "transferir a liderança para outro jogador"
 
@@ -578,7 +600,8 @@ msgstr ""
 "§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o "
 "purgatório."
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#, fuzzy, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§cPURGE:§9 Purgado {0}/{1} {2,##,number}"
 
 msgid "displays version information"
@@ -695,8 +718,16 @@ msgstr "§4Você não tem permissão para expulsar/banir jogadores do grupo."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§eAgora {0} pode teleportar até sua ilha."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§eAgora {0} pode teleportar até sua ilha."
 
 msgid "change the biome of the island"
@@ -1128,6 +1159,11 @@ msgstr "§eVocê não pode usar outros portais na ilha!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrocas não são permitidas em outras ilhas."
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVocê recuperou sua lava."
 
@@ -1145,9 +1181,17 @@ msgstr "§eVocê recuperou a confiança na ilha de §a{0}."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4Você só pode completar desafios se tiver uma ilha!"
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§cNão pode §fexpulsar jogadores da ilha."
+
 #, fuzzy, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
-msgstr "§eVocê pode criar uma nova ilha em {0,number,#} segundos."
+msgid "§eWaiting for our turn §c{0,number,###}%"
+msgstr "§eNível atual: §a{0,number,##.#}"
+
+#, fuzzy, java-format
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§eNível atual: §a{0,number,##.#}"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1161,12 +1205,12 @@ msgstr ""
 "§4CUIDADO: §aUsar{0}§ é perigoso. Repita esse comando dentro de §a{1}§e "
 "segundos para confirmar!"
 
-#, java-format
-msgid "§d** You are entering §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Você está entrando na ilha de §b{0}."
 
-#, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}''s §disland."
 msgstr "§d** Você está saindo da ilha de §b{0}"
 
 msgid "§eYour island is now locked. Only your party members may enter."
@@ -1218,6 +1262,12 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d foi removido do grupo."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
 
 #, java-format
@@ -1912,6 +1962,10 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! Encontramos um local mais perto para o spawn. §9Limpando ele para "
@@ -1968,6 +2022,11 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid ""
+#~ "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
+#~ msgstr "§eVocê pode criar uma nova ilha em {0,number,#} segundos."
 
 #~ msgid "{0} <Permissions>"
 #~ msgstr "{0} <Permissões>"
@@ -2197,9 +2256,6 @@ msgstr "s"
 
 #~ msgid "§cCannot §finvite others to the island."
 #~ msgstr "§cNão pode§f convida jogadres para a ilha."
-
-#~ msgid "§cCannot §fkick others from the island."
-#~ msgstr "§cNão pode §fexpulsar jogadores da ilha."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBioma: Oceano"
@@ -2442,10 +2498,6 @@ msgstr "s"
 #~ "§7Animais passivos e\n"
 #~ "§7monstros irão nascer\n"
 #~ "§7normalmente."
-
-#, fuzzy
-#~ msgid "changes the language of the plugin"
-#~ msgstr "§eAlterado o bioma da ilha de {0} para {1}."
 
 #~ msgid "{0} changed the island biome to OCEAN"
 #~ msgstr "{0} alterou o bioma da ilha para OCEANO"

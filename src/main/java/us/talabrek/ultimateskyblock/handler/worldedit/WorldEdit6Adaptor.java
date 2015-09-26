@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.handler.worldedit;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
@@ -14,7 +13,6 @@ import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
@@ -45,11 +43,10 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
     }
 
     @Override
-    public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk) {
+    public boolean loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
-        WorldEdit worldEdit = worldEditPlugin.getWorldEdit();
         try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
-            BukkitWorld bukkitWorld = new BukkitWorld(world);
+            BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
             ClipboardReader reader = ClipboardFormat.SCHEMATIC.getReader(in);
 
             WorldData worldData = bukkitWorld.getWorldData();

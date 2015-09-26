@@ -93,10 +93,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static us.talabrek.ultimateskyblock.Settings.island_height;
-import static us.talabrek.ultimateskyblock.Settings.island_height;
-import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
@@ -700,7 +699,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         if (playerIsOnIsland(player)) {
             PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
-            if (playerInfo != null && LocationUtil.isSafeLocation(player.getLocation())) {
+            if (playerInfo != null && isSafeLocation(player.getLocation())) {
                 playerInfo.setHomeLocation(player.getLocation());
                 playerInfo.save();
                 player.sendMessage(tr("\u00a7aYour skyblock home has been set to your current location."));
@@ -1080,7 +1079,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     public SkyBlockMenu getMenu() {
         return menu;
     }
-
 
     public static void log(Level level, String message) {
         log(level, message, null);

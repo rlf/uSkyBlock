@@ -492,6 +492,28 @@ msgstr "§4That player does not have an island!"
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
 
+#, fuzzy
+msgid "changes the language of the plugin, and reloads"
+msgstr "change yonder biome of yonder island"
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr ""
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
+msgstr ""
+
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
+msgstr ""
+
 msgid "transfer leadership to another player"
 msgstr "transfer leadership to another player"
 
@@ -574,7 +596,8 @@ msgstr "§4** You be leaving an abandoned island."
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr ""
 
 msgid "displays version information"
@@ -690,8 +713,16 @@ msgstr "§4You do not have permission to kick/ban players."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eYou have banned §4{0}§e from warping to ye island."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eYou have banned §4{0}§e from warping to ye island."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§eYou have unbanned §a{0}§e from warping to ye island."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§eYou have unbanned §a{0}§e from warping to ye island."
 
 msgid "change the biome of the island"
@@ -1116,6 +1147,11 @@ msgstr "§eYou can not use another islands portals! Shame on you - cheater!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrading isn't allowed on other islands. Go home - cheater!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eChanging ye obsidian back into lava. Be careful!"
 
@@ -1133,9 +1169,17 @@ msgstr "§eYou have revoked ye trust in §a{0}§e on ye island."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4You can only submit challenges when you have an island!"
 
-#, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
-msgstr ""
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§4Player be already assigned to this island!"
+
+#, fuzzy, java-format
+msgid "§eWaiting for our turn §c{0,number,###}%"
+msgstr "§eCurrent Level: §a{0,number,##.#}"
+
+#, fuzzy, java-format
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§eCurrent Level: §a{0,number,##.#}"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1149,12 +1193,12 @@ msgstr ""
 "§eDoing §9{0}§e be §cRISKY§e. Repeat ye command within §a{1}§e seconds to "
 "accept!"
 
-#, java-format
-msgid "§d** You are entering §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** You be entering §b{0}'s §disland."
 
-#, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}''s §disland."
 msgstr "§d** You be leaving §b{0}'s §disland."
 
 msgid "§eYour island is now locked. Only your party members may enter."
@@ -1206,6 +1250,12 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} has been removed from yonder island."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cThe island you be on be being deleted! Sending you to spawn."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr "§cThe island you be on be being deleted! Sending you to spawn."
 
 #, java-format
@@ -1898,6 +1948,10 @@ msgstr "Could not create ye Island. Please contact a server moderator."
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGetting ye island ready, please be patient, it can take a while."
+
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""

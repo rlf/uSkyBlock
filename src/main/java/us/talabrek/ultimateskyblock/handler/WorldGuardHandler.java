@@ -125,10 +125,6 @@ public class WorldGuardHandler {
         return false;
     }
 
-    private static String getVersion() {
-        return "" + VERSION + I18nUtil.getLocale();
-    }
-
     public static void updateRegion(CommandSender sender, IslandInfo islandInfo) {
         try {
             ProtectedCuboidRegion region = setRegionFlags(sender, islandInfo);

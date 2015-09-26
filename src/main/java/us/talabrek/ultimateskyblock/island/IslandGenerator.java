@@ -88,7 +88,7 @@ public class IslandGenerator {
             if (permFile != null) {
                 defaultFile = permFile;
             }
-            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next, playerPerk)) {
+            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(defaultFile, next, playerPerk)) {
                 cSchem = FileUtil.getBasename(defaultFile);
                 hasIslandNow = true;
                 log.fine("chose schematic " + defaultFile);
@@ -108,7 +108,7 @@ public class IslandGenerator {
         next.setY((double) Settings.island_height);
         log.exiting(CN, "createIsland");
         Location netherHome = new Location(uSkyBlock.getInstance().getSkyBlockNetherWorld(), next.getBlockX(), next.getBlockY()/2, next.getBlockZ());
-        WorldEditHandler.loadIslandSchematic(netherSchematic, netherHome, playerPerk, null);
+        WorldEditHandler.loadIslandSchematic(netherSchematic, netherHome, playerPerk);
         return cSchem;
     }
 
