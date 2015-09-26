@@ -713,8 +713,16 @@ msgstr "§4у вас недостаточно прав, чтобы выбрас�
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eВы запретили игроку §4{0}§e посещать ваш остров."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eВы запретили игроку §4{0}§e посещать ваш остров."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§eВы разрешили игроку §a{0}§e посещать ваш остров."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§eВы разрешили игроку §a{0}§e посещать ваш остров."
 
 msgid "change the biome of the island"

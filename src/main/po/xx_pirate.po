@@ -703,8 +703,16 @@ msgstr "§4You do not have permission to kick/ban players."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eYou have banned §4{0}§e from warping to ye island."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eYou have banned §4{0}§e from warping to ye island."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§eYou have unbanned §a{0}§e from warping to ye island."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§eYou have unbanned §a{0}§e from warping to ye island."
 
 msgid "change the biome of the island"

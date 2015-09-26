@@ -58,7 +58,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
 
             Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
             int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
-            EditSession editSession = createSession(worldEdit, bukkitWorld, maxBlocks);
+            EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
             editSession.enableQueue();
             editSession.setFastMode(true);
             Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
@@ -78,13 +78,4 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
         return false;
     }
 
-    private EditSession createSession(WorldEdit worldEdit, BukkitWorld bukkitWorld, int maxBlocks) {
-        EditSession editSession;
-        if (AsyncWorldEditHandler.isAWE(uSkyBlock.getInstance())) {
-            editSession = worldEdit.getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
-        } else {
-            editSession = new EditSession(bukkitWorld, maxBlocks);
-        }
-        return editSession;
-    }
 }

@@ -729,8 +729,19 @@ msgstr ""
 "§eDu hast §4{0}§e Verbannt. Diese(r) kann sich nicht mehr auf deine Insel "
 "warpen."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr ""
+"§eDu hast §4{0}§e Verbannt. Diese(r) kann sich nicht mehr auf deine Insel "
+"warpen."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr ""
+"§eDu hast §4{0}§e Entbannt. Diese(r) kann sich wieder auf deine Insel warpen."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr ""
 "§eDu hast §4{0}§e Entbannt. Diese(r) kann sich wieder auf deine Insel warpen."
 

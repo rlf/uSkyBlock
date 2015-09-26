@@ -709,8 +709,16 @@ msgstr "§4Você não tem permissão para expulsar/banir jogadores do grupo."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§eAgora {0} pode teleportar até sua ilha."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§eAgora {0} pode teleportar até sua ilha."
 
 msgid "change the biome of the island"

@@ -709,8 +709,16 @@ msgstr "§4你没有权限踢出/禁止一个玩家"
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你的岛屿了."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你的岛屿了."
 
 #, fuzzy

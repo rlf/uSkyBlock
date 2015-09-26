@@ -472,13 +472,13 @@ public class IslandInfo {
         return getMembers().isEmpty() ? 0 : config.getDouble("general.level");
     }
 
-    public void setRegionVersion(int version) {
+    public void setRegionVersion(String version) {
         config.set("general.regionVersion", version);
         save();
     }
 
-    public int getRegionVersion() {
-        return config.getInt("general.regionVersion", 0);
+    public String getRegionVersion() {
+        return config.getString("general.regionVersion", "");
     }
 
     public List<String> getLog() {

@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.async.IncrementalTask;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -58,7 +59,7 @@ public class WorldEditClearTask extends BukkitRunnable implements IncrementalTas
         Iterator<Vector2D> inner = innerChunks.iterator();
         Iterator<Region> border = borderRegions.iterator();
         for (int i = 0; i < length; i++) {
-            EditSession editSession = new EditSession(bukkitWorld, maxBlocks);
+            EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
             editSession.setFastMode(true);
             if (inner.hasNext()) {
                 Vector2D chunk = inner.next();

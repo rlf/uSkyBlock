@@ -25,6 +25,7 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
-    private static final int VERSION = 9;
+    private static final String VERSION = "10";
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
@@ -86,7 +87,7 @@ public class WorldGuardHandler {
                 }
                 regionManager.addRegion(region);
                 plugin.log(Level.INFO, "New protected region created for " + islandConfig.getLeader() + "'s Island by " + sender.getName());
-                islandConfig.setRegionVersion(VERSION);
+                islandConfig.setRegionVersion(getVersion());
                 return true;
             }
         } catch (Exception ex) {
@@ -94,6 +95,10 @@ public class WorldGuardHandler {
             plugin.log(Level.SEVERE, "ERROR: Failed to protect " + name + "'s Island (" + sender.getName() + ")", ex);
         }
         return false;
+    }
+
+    private static String getVersion() {
+        return VERSION + " " + I18nUtil.getLocale();
     }
 
     public static void updateRegion(CommandSender sender, IslandInfo islandInfo) {
@@ -139,13 +144,19 @@ public class WorldGuardHandler {
                 ));
         setVersionSpecificFlags(region);
         region.setFlag(DefaultFlag.PVP, null);
-        if (islandConfig.isLocked()) {
-            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
-        } else {
-            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
-        }
-        region.setFlag(new StateFlag("entry", false, RegionGroup.MEMBERS), StateFlag.State.DENY);
+        boolean isLocked = islandConfig.isLocked();
+        updateLockStatus(region, isLocked);
         return region;
+    }
+
+    private static void updateLockStatus(ProtectedRegion region, boolean isLocked) {
+        if (isLocked) {
+            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
+            region.setFlag(DefaultFlag.ENTRY.getRegionGroupFlag(), RegionGroup.NON_OWNERS);
+        } else {
+            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
+            region.setFlag(DefaultFlag.ENTRY.getRegionGroupFlag(), RegionGroup.MEMBERS);
+        }
     }
 
     private static void setVersionSpecificFlags(ProtectedCuboidRegion region) {
@@ -172,7 +183,7 @@ public class WorldGuardHandler {
         if (regionManager.getRegion(regionId).getOwners().size() == 0) {
             return true;
         }
-        return island.getRegionVersion() < VERSION;
+        return !island.getRegionVersion().equals(getVersion());
     }
 
     public static void islandLock(final CommandSender sender, final String islandName) {
@@ -180,7 +191,7 @@ public class WorldGuardHandler {
             RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
-                region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
+                updateLockStatus(region, true);
                 sender.sendMessage(tr("\u00a7eYour island is now locked. Only your party members may enter."));
             } else {
                 sender.sendMessage(tr("\u00a74You must be the party leader to lock your island!"));
@@ -195,7 +206,7 @@ public class WorldGuardHandler {
             RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
-                region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
+                updateLockStatus(region, false);
                 sender.sendMessage(tr("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks."));
             } else {
                 sender.sendMessage(tr("\u00a74You must be the party leader to unlock your island!"));

@@ -1,15 +1,24 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.event.extent.EditSessionEvent;
+import com.sk89q.worldedit.extension.platform.Actor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.primesoft.asyncworldedit.AsyncWorldEditMain;
 import org.primesoft.asyncworldedit.api.IAsyncWorldEdit;
 import org.primesoft.asyncworldedit.api.progressDisplay.IProgressDisplay;
 import org.primesoft.asyncworldedit.playerManager.PlayerEntry;
+import org.primesoft.asyncworldedit.worldedit.AsyncEditSession;
 import us.talabrek.ultimateskyblock.handler.ActionBarHandler;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
@@ -26,6 +35,7 @@ public class AsyncWorldEditAdaptor {
 
         @Override
         public void disableMessage(PlayerEntry playerEntry) {
+            //System.out.println("disableMessage: " + playerEntry.getName());
             if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getMode() && !pendingJobs.isEmpty()) {
                 pendingJobs.remove(findNextJobToComplete());
             }
@@ -34,12 +44,22 @@ public class AsyncWorldEditAdaptor {
         @Override
         public void setMessage(PlayerEntry playerEntry, int jobsCount,
                                int queuedBlocks, int maxQueuedBlocks, double timeLeft, double placingSpeed, double percentage) {
+            // Since AWE intercepts WE, we get UNKNOWN, and the job is simply merged.
+            //System.out.println("setMessage: " + playerEntry.getName() + ", jobsCount: " + jobsCount + ", queued: " + queuedBlocks + ", max: " + maxQueuedBlocks + ", pct=" + percentage);
             if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getMode()) {
                 synchronized (pendingJobs) {
-                    if (!pendingJobs.isEmpty()) {
-                        PlayerJob peek = findJob(queuedBlocks, maxQueuedBlocks, percentage);
-                        if (peek != null) {
-                            peek.progress(queuedBlocks, maxQueuedBlocks, percentage);
+                    if (queuedBlocks == maxQueuedBlocks) {
+                        // Either a fresh job, or a new merge
+                        markJobs(maxQueuedBlocks);
+                    }
+                    int rest = maxQueuedBlocks - queuedBlocks;
+                    for (Iterator<PlayerJob> it = pendingJobs.iterator(); it.hasNext(); ) {
+                        PlayerJob job = it.next();
+                        rest = job.progress(rest);
+                        if (rest > 0) {
+                            it.remove();
+                        } else {
+                            break;
                         }
                     }
                 }
@@ -47,39 +67,27 @@ public class AsyncWorldEditAdaptor {
         }
     };
 
-    private static PlayerJob findNextJobToComplete() {
+    private static void markJobs(int maxQueuedBlocks) {
         synchronized (pendingJobs) {
-            long blocksShort = Integer.MAX_VALUE;
-            PlayerJob match = null;
+            int rest = maxQueuedBlocks;
             for (PlayerJob job : pendingJobs) {
-                if (job.getQueuedBlocks() < blocksShort) {
-                    blocksShort = job.getQueuedBlocks();
-                    match = job;
-                }
+                rest -= job.mark(rest);
             }
-            return match;
         }
     }
 
-    /**
-     * Finds the best matching job on the queue.
-     */
-    private static PlayerJob findJob(int queuedBlocks, int maxQueuedBlocks, double percentage) {
+    private static PlayerJob findNextJobToComplete() {
         synchronized (pendingJobs) {
+            double complete = 0;
+            PlayerJob match = null;
             for (PlayerJob job : pendingJobs) {
-                if (job.getMaxQueuedBlocks() == maxQueuedBlocks && job.getPercentage() < percentage && job.getQueuedBlocks() > queuedBlocks) {
-                    // The first on the queue SHOULD be the one that matches... not 100% accurate
-                    return job;
+                if (job.getPercentage() > complete) {
+                    complete = job.getPercentage();
+                    match = job;
                 }
             }
-            // If we get here, nothing matched, try the new ones...
-            for (PlayerJob job : pendingJobs) {
-                if (job.getMaxQueuedBlocks() == 0) {
-                    // The first on the queue SHOULD be the one that matches... not 100% accurate
-                    return job;
-                }
-            }
-            return null;
+            System.out.println("Completed: " + match);
+            return match;
         }
     }
 
@@ -99,8 +107,8 @@ public class AsyncWorldEditAdaptor {
         }
     }
 
-    private static IAsyncWorldEdit getAWE() {
-        return (IAsyncWorldEdit) Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
+    private static AsyncWorldEditMain getAWE() {
+        return (AsyncWorldEditMain) Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
     }
 
     public static boolean isAWE() {
@@ -113,19 +121,30 @@ public class AsyncWorldEditAdaptor {
         }
     }
 
+    public static EditSession createSession(BukkitWorld world, int maxblocks) {
+        AsyncWorldEditMain awe = getAWE();
+        WorldEditPlugin we = WorldEditHandler.getWorldEdit();
+        com.sk89q.worldedit.util.eventbus.EventBus eventBus = we.getWorldEdit().getEventBus();
+        Actor actor = WorldEditHandler.createActor();
+        EditSessionEvent event = new EditSessionEvent(world, actor, maxblocks, EditSession.Stage.BEFORE_HISTORY);
+        return new AsyncEditSession(awe, PlayerEntry.UNKNOWN, eventBus, world, maxblocks, null, event);
+    }
+
     private static class PlayerJob {
         private final Player player;
         private long lastProgressMs;
         private double percentage;
         private double lastProgressPct;
-        private int queuedBlocks;
+
+        private int offset = 0;
+        private int placedBlocks;
         private int maxQueuedBlocks;
 
         private PlayerJob(Player player) {
             this.player = player;
             lastProgressMs = System.currentTimeMillis();
             lastProgressPct = 0;
-            queuedBlocks = 0;
+            placedBlocks = 0;
             maxQueuedBlocks = 0;
             percentage = 0;
         }
@@ -134,22 +153,17 @@ public class AsyncWorldEditAdaptor {
             return percentage;
         }
 
-        public int getQueuedBlocks() {
-            return queuedBlocks;
-        }
-
-        public int getMaxQueuedBlocks() {
-            return maxQueuedBlocks;
+        public int getPlacedBlocks() {
+            return offset + placedBlocks;
         }
 
         public Player getPlayer() {
             return player;
         }
 
-        public void progress(int queuedBlocks, int maxQueuedBlocks, double percentage) {
-            this.queuedBlocks = queuedBlocks;
-            this.maxQueuedBlocks = maxQueuedBlocks;
-            this.percentage = percentage;
+        public int progress(int blocksPlaced) {
+            this.placedBlocks = Math.min(blocksPlaced, (maxQueuedBlocks-offset));
+            this.percentage = (100d*getPlacedBlocks() / maxQueuedBlocks);
             long t = System.currentTimeMillis();
             if (t > (lastProgressMs + progressEveryMs) || percentage > (lastProgressPct + progressEveryPct)) {
                 if (ActionBarHandler.isEnabled()) {
@@ -160,6 +174,27 @@ public class AsyncWorldEditAdaptor {
                 lastProgressMs = t;
                 lastProgressPct = Math.floor(percentage/progressEveryPct) * progressEveryPct;
             }
+            return blocksPlaced-placedBlocks;
+        }
+
+        public int mark(int maxQueuedBlocks) {
+            if (this.maxQueuedBlocks == 0) {
+                this.maxQueuedBlocks = maxQueuedBlocks;
+            } else {
+                this.offset += placedBlocks;
+            }
+            return this.maxQueuedBlocks - this.offset;
+        }
+
+        @Override
+        public String toString() {
+            return "PlayerJob{" +
+                    "player=" + player +
+                    ", percentage=" + percentage +
+                    ", offset=" + offset +
+                    ", placedBlocks=" + placedBlocks +
+                    ", maxQueuedBlocks=" + maxQueuedBlocks +
+                    '}';
         }
     }
 }

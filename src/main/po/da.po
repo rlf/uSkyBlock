@@ -710,8 +710,16 @@ msgstr "§4Du har ikke tilladelse til at udelukke spillere."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
 
 msgid "change the biome of the island"

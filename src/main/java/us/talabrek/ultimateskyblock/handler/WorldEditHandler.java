@@ -4,6 +4,7 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.extension.platform.Actor;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -13,6 +14,7 @@ import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.async.CompositeIncrementalTask;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditRegenTask;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegenTask;
+import us.talabrek.ultimateskyblock.handler.worldedit.USBActor;
 import us.talabrek.ultimateskyblock.handler.worldedit.WorldEditAdaptor;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -26,6 +28,7 @@ import java.util.logging.Logger;
 
 public class WorldEditHandler {
     private static final Logger log = Logger.getLogger(WorldEditHandler.class.getName());
+    private static Actor usbActor = new USBActor();
 
     public static WorldEditPlugin getWorldEdit() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldEdit");
@@ -194,4 +197,7 @@ public class WorldEditHandler {
         }
     }
 
+    public static Actor createActor() {
+        return usbActor;
+    }
 }

@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock.handler;
 
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.asyncworldedit.AsyncWorldEditAdaptor;
@@ -32,6 +34,14 @@ public enum AsyncWorldEditHandler {;
     public static void registerCompletion(Player player) {
         if (isAWE(uSkyBlock.getInstance())) {
             AsyncWorldEditAdaptor.registerCompletion(player);
+        }
+    }
+
+    public static EditSession createEditSession(BukkitWorld world, int maxblocks) {
+        if (isAWE(uSkyBlock.getInstance())) {
+            return AsyncWorldEditAdaptor.createSession(world, maxblocks);
+        } else {
+            return new EditSession(world, maxblocks);
         }
     }
 }

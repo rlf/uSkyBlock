@@ -38,12 +38,19 @@ public class BanCommand extends RequireIslandCommand {
                 island.banPlayer(name);
                 player.sendMessage(tr("\u00a7eYou have banned \u00a74{0}\u00a7e from warping to your island.", name));
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                if (offlinePlayer != null && offlinePlayer.isOnline() && plugin.locationIsOnIsland(player, offlinePlayer.getPlayer().getLocation())) {
-                    plugin.spawnTeleport(offlinePlayer.getPlayer(), true);
+                if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou have been \u00a7cBANNED\u00a7e from {0}\u00a7e''s island.", player.getDisplayName()));
+                    if (plugin.locationIsOnIsland(player, offlinePlayer.getPlayer().getLocation())) {
+                        plugin.spawnTeleport(offlinePlayer.getPlayer(), true);
+                    }
                 }
             } else {
                 island.unbanPlayer(name);
                 player.sendMessage(tr("\u00a7eYou have unbanned \u00a7a{0}\u00a7e from warping to your island.", name));
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
+                if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou have been \u00a7aUNBANNED\u00a7e from {0}\u00a7e''s island.", player.getDisplayName()));
+                }
             }
             WorldGuardHandler.updateRegion(player, island);
             return true;
