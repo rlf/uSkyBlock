@@ -1214,6 +1214,10 @@ msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4Du kannst nur Aufgaben hinzufügen wenn du eine Insel besitzt."
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§cKann keine §Spieler von der Insel werfen."
+
 #, fuzzy, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr "§eAktulle Stufe: §a{0,number,##.#}"
@@ -2305,9 +2309,6 @@ msgstr "s"
 
 #~ msgid "§cCannot §finvite others to the island."
 #~ msgstr "§cKann keine §Spieler auf die Insel Einladen."
-
-#~ msgid "§cCannot §fkick others from the island."
-#~ msgstr "§cKann keine §Spieler von der Insel werfen."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBiome: Ozean"

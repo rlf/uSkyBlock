@@ -1118,6 +1118,9 @@ msgstr ""
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr ""
 
+msgid "§cBanned:§e You are banned from this island."
+msgstr ""
+
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr ""

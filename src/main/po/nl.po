@@ -1181,6 +1181,10 @@ msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eJe kan alleen spawn-eggs op je eigen eiland gebruiken."
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§4Speler is al toegewezen aan dit eiland!"
+
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr "§9Eiland creëren...§e{0,number,###}%"

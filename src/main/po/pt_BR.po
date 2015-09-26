@@ -1165,6 +1165,10 @@ msgstr "§cVocê chegou no limite de spawn na sua ilha."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eVocê só pode usar spawn-eggs na sua ilha."
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§cNão pode §fexpulsar jogadores da ilha."
+
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr "§9Criando ilha...§e{0,number,###}%"
@@ -2240,9 +2244,6 @@ msgstr "s"
 
 #~ msgid "§cCannot §finvite others to the island."
 #~ msgstr "§cNão pode§f convida jogadres para a ilha."
-
-#~ msgid "§cCannot §fkick others from the island."
-#~ msgstr "§cNão pode §fexpulsar jogadores da ilha."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBioma: Oceano"

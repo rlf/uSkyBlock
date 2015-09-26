@@ -1167,6 +1167,10 @@ msgstr "§cVous avez atteint la limite de spawn de votre île"
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eVous pouvez uniquement utiliser les oeufs de spawn sur votre île."
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§4Ce joueur est déjà assigné à une île !"
+
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr "§9Création de l''île....§e{0,number,###}%"

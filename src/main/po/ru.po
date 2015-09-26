@@ -1170,6 +1170,10 @@ msgstr "§cВы достигли предела спавнов на вашем �
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eВы можете использовать спавн-яйца только на своем острове."
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§4Игрок уже прикреплен к острову!"
+
 #, fuzzy, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr "§eТекущий уровень: §a{0,number,##.#}"

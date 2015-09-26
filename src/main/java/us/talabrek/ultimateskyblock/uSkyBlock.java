@@ -47,6 +47,7 @@ import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
+import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
@@ -185,6 +186,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
         playerLogic.shutdown();
+        islandLogic.shutdown();
         playerNameChangeManager.shutdown();
         AsyncWorldEditHandler.onDisable(this);
         DebugCommand.disableLogging(null);
@@ -296,7 +298,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return uSkyBlock.instance;
     }
 
-    public void registerEvents(PlayerDB playerDB) {
+    public void registerEvents() {
         final PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(new PlayerNameChangeListener(this), this);
         manager.registerEvents(playerNameChangeManager, this);
@@ -311,6 +313,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         if (getConfig().getBoolean("options.island.spawn-limits.enabled", true)) {
             manager.registerEvents(new SpawnEvents(this), this);
+        }
+        if (getConfig().getBoolean("options.protection.visitors.block-banned-entry", true)) {
+            manager.registerEvents(new WorldGuardEvents(this), this);
         }
     }
 
@@ -1092,7 +1097,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public void registerEventsAndCommands() {
-        registerEvents(playerDB);
+        registerEvents();
         int refreshEveryMinute = getConfig().getInt("options.island.autoRefreshScore", 0);
         if (refreshEveryMinute > 0) {
             int refreshTicks = refreshEveryMinute * 1200; // Ticks per minute

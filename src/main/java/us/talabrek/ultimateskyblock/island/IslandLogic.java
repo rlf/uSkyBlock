@@ -13,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
@@ -52,6 +53,7 @@ public class IslandLogic {
     private final LoadingCache<String, IslandInfo> cache;
     private final boolean showMembers;
     private final boolean flatlandFix;
+    private final BukkitTask saveTask;
 
     private volatile long lastGenerate = 0;
     private final List<IslandLevel> ranks = new ArrayList<>();
@@ -77,8 +79,23 @@ public class IslandLogic {
                         return new IslandInfo(islandName);
                     }
                 });
+        int every = plugin.getConfig().getInt("options.advanced.island.saveEvery", 20*60*2);
+        saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
+            @Override
+            public void run() {
+                saveDirtyToFiles();
+            }
+        }, every, every);
     }
 
+    private void saveDirtyToFiles() {
+        // asMap.values() should NOT touch the cache.
+        for (IslandInfo islandInfo : cache.asMap().values()) {
+            if (islandInfo.isDirty()) {
+                islandInfo.saveToFile();
+            }
+        }
+    }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
         if (islandName == null) {
@@ -376,6 +393,7 @@ public class IslandLogic {
     }
 
     public void shutdown() {
+        saveTask.cancel();
         cache.invalidateAll();
     }
 }

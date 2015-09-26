@@ -7,7 +7,6 @@ import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
-import com.sk89q.worldguard.protection.flags.RegionGroup;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
@@ -126,22 +125,27 @@ public class WorldGuardHandler {
             owners.addPlayer(member);
         }
         for (String trust : islandConfig.getTrustees()) {
-            owners.addPlayer(trust);
-        }
-        for (String banned : islandConfig.getBans()) {
-            members.addPlayer(banned);
+            members.addPlayer(trust);
         }
         region.setOwners(owners);
         region.setMembers(members);
         region.setPriority(100);
-        region.setFlag(DefaultFlag.GREET_MESSAGE,
-                DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender,
-                        tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
-                ));
-        region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
-                DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender,
-                        tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
-                ));
+        if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.entry-message", true)) {
+            region.setFlag(DefaultFlag.GREET_MESSAGE,
+                    DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender,
+                            tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
+                    ));
+        } else {
+            region.setFlag(DefaultFlag.GREET_MESSAGE, null);
+        }
+        if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.exit-message", true)) {
+            region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
+                    DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender,
+                            tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
+                    ));
+        } else {
+            region.setFlag(DefaultFlag.FAREWELL_MESSAGE, null);
+        }
         setVersionSpecificFlags(region);
         region.setFlag(DefaultFlag.PVP, null);
         boolean isLocked = islandConfig.isLocked();
@@ -152,10 +156,8 @@ public class WorldGuardHandler {
     private static void updateLockStatus(ProtectedRegion region, boolean isLocked) {
         if (isLocked) {
             region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
-            region.setFlag(DefaultFlag.ENTRY.getRegionGroupFlag(), RegionGroup.NON_OWNERS);
         } else {
-            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
-            region.setFlag(DefaultFlag.ENTRY.getRegionGroupFlag(), RegionGroup.MEMBERS);
+            region.setFlag(DefaultFlag.ENTRY, null);
         }
     }
 

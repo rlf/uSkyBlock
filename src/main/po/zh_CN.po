@@ -1171,6 +1171,10 @@ msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§c无法 §f将玩家从岛屿上踢出."
+
 #, fuzzy, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr "§e当前岛屿等级: §a{0,number,##.#}"
@@ -2225,9 +2229,6 @@ msgstr "秒"
 
 #~ msgid "§cCannot §finvite others to the island."
 #~ msgstr "§c无法 §f邀请别的玩家加入岛屿."
-
-#~ msgid "§cCannot §fkick others from the island."
-#~ msgstr "§c无法 §f将玩家从岛屿上踢出."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§a生物群系: 海洋(Ocean)"

@@ -1154,6 +1154,10 @@ msgstr "§eYou have revoked ye trust in §a{0}§e on ye island."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§4You can only submit challenges when you have an island!"
 
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§4Player be already assigned to this island!"
+
 #, fuzzy, java-format
 msgid "§9Creating island...§e{0,number,###}%"
 msgstr "§eCurrent Level: §a{0,number,##.#}"

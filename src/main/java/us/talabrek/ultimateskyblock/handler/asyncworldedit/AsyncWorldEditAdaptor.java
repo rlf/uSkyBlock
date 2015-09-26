@@ -11,7 +11,6 @@ import org.primesoft.asyncworldedit.AsyncWorldEditMain;
 import org.primesoft.asyncworldedit.api.progressDisplay.IProgressDisplay;
 import org.primesoft.asyncworldedit.playerManager.PlayerEntry;
 import org.primesoft.asyncworldedit.worldedit.AsyncEditSession;
-import us.talabrek.ultimateskyblock.handler.ActionBarHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
@@ -21,12 +20,34 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-
 public class AsyncWorldEditAdaptor {
-    private static long progressEveryMs = 3000; // 2 seconds
-    private static double progressEveryPct = 20;
+    static long progressEveryMs = 3000; // 2 seconds
+    static double progressEveryPct = 20;
     private static List<PlayerJob> pendingJobs = Collections.synchronizedList(new ArrayList<PlayerJob>());
+    /**
+     * Apparently, all jobs are merged, when uSkyBlock creates them through WE
+     * <pre>
+     *       setMessage                                   A      B     C
+     * a) Job A added with 10.000 blocks
+     *       queued: 10.000, max: 10.000, pct:  0%        0%     -     -
+     *       queued:  8.000, max: 10.000, pct: 20%       20%     -     -
+     *
+     * b) Job B added with 10.000 blocks
+     *       queued: 18.000, max 18.000, pct:   0%       20%     0%
+     * c)    queued: 15.000, max 18.000, pct:  17%       50%     0%
+     *       queued: 11.000, max 18.000, pct:  39%       90%     0%
+     *
+     * d) Job C added with 5.000 blocks
+     *       queued: 16.000, max 16.000, pct:   0%       90%     0%    0%
+     * e)    queued: 13.000, max 16.000, pct:  19%      100%    10%    0%
+     * f)    queued:  4.000, max 16.000, pct:  75%      100%   100%   20%
+     *
+     * a) A: max: 10.000
+     * b) A: progress: 2.000, B: max: 10.000 -
+     * c) A: progress: 5.000
+     * d) A: progress: 9.000, C: max:  5.000
+     * </pre>
+     */
     private static IProgressDisplay progressDisplay = new IProgressDisplay() {
         @Override
         public String getName() {
@@ -37,7 +58,8 @@ public class AsyncWorldEditAdaptor {
         public void disableMessage(PlayerEntry playerEntry) {
             //System.out.println("disableMessage: " + playerEntry.getName());
             if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getMode() && !pendingJobs.isEmpty()) {
-                pendingJobs.remove(findNextJobToComplete());
+                PlayerJob nextJobToComplete = findNextJobToComplete();
+                pendingJobs.remove(nextJobToComplete);
             }
         }
 
@@ -70,8 +92,11 @@ public class AsyncWorldEditAdaptor {
     private static void markJobs(int maxQueuedBlocks) {
         synchronized (pendingJobs) {
             int rest = maxQueuedBlocks;
+            int startOffset = 0;
             for (PlayerJob job : pendingJobs) {
-                rest -= job.mark(rest);
+                int missing = job.mark(rest, startOffset);
+                rest -= missing;
+                startOffset += missing;
             }
         }
     }
@@ -130,71 +155,4 @@ public class AsyncWorldEditAdaptor {
         return new AsyncEditSession(awe, PlayerEntry.UNKNOWN, eventBus, world, maxblocks, null, event);
     }
 
-    private static class PlayerJob {
-        private final Player player;
-        private long lastProgressMs;
-        private double percentage;
-        private double lastProgressPct;
-
-        private int offset = 0;
-        private int placedBlocks;
-        private int maxQueuedBlocks;
-
-        private PlayerJob(Player player) {
-            this.player = player;
-            lastProgressMs = System.currentTimeMillis();
-            lastProgressPct = 0;
-            placedBlocks = 0;
-            maxQueuedBlocks = 0;
-            percentage = 0;
-        }
-
-        public double getPercentage() {
-            return percentage;
-        }
-
-        public int getPlacedBlocks() {
-            return offset + placedBlocks;
-        }
-
-        public Player getPlayer() {
-            return player;
-        }
-
-        public int progress(int blocksPlaced) {
-            this.placedBlocks = Math.min(blocksPlaced, (maxQueuedBlocks-offset));
-            this.percentage = (100d*getPlacedBlocks() / maxQueuedBlocks);
-            long t = System.currentTimeMillis();
-            if (t > (lastProgressMs + progressEveryMs) || percentage > (lastProgressPct + progressEveryPct)) {
-                if (ActionBarHandler.isEnabled()) {
-                    ActionBarHandler.sendActionBar(player, tr("\u00a79Creating island...\u00a7e{0,number,###}%", percentage));
-                } else {
-                    player.sendMessage(tr("\u00a7cSorry for the delay! \u00a79Your island is now \u00a7e{0,number,##}%\u00a79 done...", percentage));
-                }
-                lastProgressMs = t;
-                lastProgressPct = Math.floor(percentage/progressEveryPct) * progressEveryPct;
-            }
-            return blocksPlaced-placedBlocks;
-        }
-
-        public int mark(int maxQueuedBlocks) {
-            if (this.maxQueuedBlocks == 0) {
-                this.maxQueuedBlocks = maxQueuedBlocks;
-            } else {
-                this.offset += placedBlocks;
-            }
-            return this.maxQueuedBlocks - this.offset;
-        }
-
-        @Override
-        public String toString() {
-            return "PlayerJob{" +
-                    "player=" + player +
-                    ", percentage=" + percentage +
-                    ", offset=" + offset +
-                    ", placedBlocks=" + placedBlocks +
-                    ", maxQueuedBlocks=" + maxQueuedBlocks +
-                    '}';
-        }
-    }
 }
