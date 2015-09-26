@@ -507,6 +507,17 @@ msgstr "§aLinguagem alterada para §e{0}"
 msgid "§cFailed to change language to §e{0}"
 msgstr "§cOcorreu um erro ao alterar a linguagem para §e{0}"
 
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+#, fuzzy
+msgid "§cUnable to locate any languages."
+msgstr "§cOcorreu um erro ao alterar a linguagem para §e{0}"
+
 msgid "transfer leadership to another player"
 msgstr "transferir a liderança para outro jogador"
 
@@ -709,17 +720,17 @@ msgstr "§4Você não tem permissão para expulsar/banir jogadores do grupo."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr ""
+msgstr "§eVocê proibiu §4{0} de teleportar até sua ilha."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eAgora {0} pode teleportar até sua ilha."
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr ""
+msgstr "§eAgora {0} pode teleportar até sua ilha."
 
 msgid "change the biome of the island"
 msgstr "alterar o bioma da ilha"
@@ -921,6 +932,7 @@ msgstr "§4Você não tem permissão para trancar a ilha!"
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Você não tem permissão para destrancar a ilha!"
 
+#, fuzzy
 msgid "display log"
 msgstr "verificar histórico"
 
@@ -1165,12 +1177,13 @@ msgstr "§cVocê chegou no limite de spawn na sua ilha."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eVocê só pode usar spawn-eggs na sua ilha."
 
+#, fuzzy
 msgid "§cBanned:§e You are banned from this island."
-msgstr ""
+msgstr "§cNão pode §fexpulsar jogadores da ilha."
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr ""
+msgstr "§9Criando ilha...§e{0,number,###}%"
 
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
@@ -1326,6 +1339,7 @@ msgstr ""
 "porém ele não poderá\n"
 "expulsar o líder."
 
+#, fuzzy
 msgid "Permissions"
 msgstr "Permissões"
 
@@ -2000,6 +2014,10 @@ msgstr "m"
 msgid "s"
 msgstr "s"
 
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "verificar histórico"
+
 #~ msgid ""
 #~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
 #~ msgstr ""
@@ -2247,9 +2265,6 @@ msgstr "s"
 
 #~ msgid "§cCannot §finvite others to the island."
 #~ msgstr "§cNão pode§f convida jogadres para a ilha."
-
-#~ msgid "§cCannot §fkick others from the island."
-#~ msgstr "§cNão pode §fexpulsar jogadores da ilha."
 
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBioma: Oceano"

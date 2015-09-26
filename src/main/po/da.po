@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-26 21:46+0200\n"
+"PO-Revision-Date: 2015-09-27 00:55+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -508,6 +508,16 @@ msgstr "§aSkiftede sprog til §e{0}"
 #, java-format
 msgid "§cFailed to change language to §e{0}"
 msgstr "§cKunne ikke skifte sprog til §e{0}"
+
+msgid "§9Supported Languages:\n"
+msgstr "§9Understøttede sprog:\n"
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr "§f{0} §7{1} §9 af {2} §7{3}\n"
+
+msgid "§cUnable to locate any languages."
+msgstr "§cKunne ikke finde nogle sprog."
 
 msgid "transfer leadership to another player"
 msgstr "overfør ejerskab til en anden spiller"
@@ -1982,6 +1992,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "vis aktivitetslog"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

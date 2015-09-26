@@ -304,9 +304,9 @@ msgstr "§cNettoyé : §9Ile nettoyé à {0}"
 msgid "toggles the islands ignore status"
 msgstr "activer "
 
-#, java-format
+#, fuzzy, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr ""
+msgstr "§aFixer l''île de {0} à la bedrock la plus proche de vous."
 
 #, java-format
 msgid ""
@@ -509,6 +509,17 @@ msgstr "§aLangage changé avec succé en §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
+msgstr "§cLe langage n''a pas pu être changé en §e{0}"
+
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+#, fuzzy
+msgid "§cUnable to locate any languages."
 msgstr "§cLe langage n''a pas pu être changé en §e{0}"
 
 msgid "transfer leadership to another player"
@@ -924,6 +935,7 @@ msgstr "§4Vous n'avez pas la permission pour vérrouillé votre île !"
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Vous n'avez pas la permission pour dévérouille votre île !"
 
+#, fuzzy
 msgid "display log"
 msgstr "afficher les logs"
 
@@ -1330,6 +1342,7 @@ msgstr ""
 "mais ne peuvent pas kick\n"
 "le chef de l'île"
 
+#, fuzzy
 msgid "Permissions"
 msgstr "Permissions"
 
@@ -1975,6 +1988,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "afficher les logs"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

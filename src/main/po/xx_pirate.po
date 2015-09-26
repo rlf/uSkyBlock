@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2015-09-16 20:49+0200\n"
-"Last-Translator: \n"
+"Last-Translator: R4zorax\n"
 "Language-Team: \n"
 "Language: xx-pirate\n"
 "MIME-Version: 1.0\n"
@@ -306,11 +306,11 @@ msgstr "toggle yonder island's lock."
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
 msgstr "§aSet {0}'s island to ye bedrock nearest you."
 
-#, java-format
+#, fuzzy, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
-msgstr ""
+msgstr "§aSet {0}'s island to ye bedrock nearest you."
 
 msgid "§4No valid player-name supplied."
 msgstr "§4No valid player-name supplied."
@@ -502,6 +502,16 @@ msgstr ""
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
+msgstr ""
+
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
 msgstr ""
 
 msgid "transfer leadership to another player"
@@ -916,6 +926,7 @@ msgstr "§4You do not have permission to lock ye island!"
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4You do not have permission to unlock ye island!"
 
+#, fuzzy
 msgid "display log"
 msgstr "display log"
 
@@ -1316,6 +1327,7 @@ msgstr ""
 "but they be unable to kick\n"
 "yonder island leader."
 
+#, fuzzy
 msgid "Permissions"
 msgstr "Permissions"
 
@@ -1986,6 +1998,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "display log"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

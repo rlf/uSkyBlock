@@ -495,6 +495,16 @@ msgstr ""
 msgid "§cFailed to change language to §e{0}"
 msgstr ""
 
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
+msgstr ""
+
 msgid "transfer leadership to another player"
 msgstr ""
 

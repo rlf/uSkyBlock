@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Egor Oldenburger <ERROR-202@MAIL.RU>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2015-09-21 20:53+0200\n"
-"Last-Translator: \n"
+"Last-Translator: Error203\n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -506,6 +506,16 @@ msgstr ""
 msgid "§cFailed to change language to §e{0}"
 msgstr ""
 
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
+msgstr ""
+
 msgid "transfer leadership to another player"
 msgstr "сделать хозяином другого игрока"
 
@@ -927,6 +937,7 @@ msgstr "§4У вас недостаточно прав для блокировк
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4У вас недостаточно прав для разблокировки вашего острова!"
 
+#, fuzzy
 msgid "display log"
 msgstr "показать журнал"
 
@@ -1333,6 +1344,7 @@ msgstr ""
 "но выкинуть хозяина острова\n"
 "невозможно."
 
+#, fuzzy
 msgid "Permissions"
 msgstr "Права доступа"
 
@@ -1995,6 +2007,10 @@ msgstr "м"
 
 msgid "s"
 msgstr "с"
+
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "показать журнал"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-26 20:51+0100\n"
+"PO-Revision-Date: 2015-09-26 23:22+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -510,6 +510,17 @@ msgstr "§aDe taal is met succes veranderd naar §e{0}"
 msgid "§cFailed to change language to §e{0}"
 msgstr "§cMislukt om de taal te veranderen naar §e{0}"
 
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+#, fuzzy
+msgid "§cUnable to locate any languages."
+msgstr "§cMislukt om de taal te veranderen naar §e{0}"
+
 msgid "transfer leadership to another player"
 msgstr "overdragen van het leiderschap naar een andere speler"
 
@@ -729,7 +740,7 @@ msgstr "§eJe hebt §a{0}§e toegang gegeven om weer naar uw eiland te warpen."
 
 #, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eJe bent §aONTBAND§e van {0}§e''s eiland\v."
+msgstr "§eJe bent weer §aTOEGELATEN§e op {0}§e''s eiland."
 
 msgid "change the biome of the island"
 msgstr "verander de biome van het eiland"

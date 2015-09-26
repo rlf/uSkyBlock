@@ -340,7 +340,7 @@
             <plugin>
                 <groupId>com.googlecode.gettext-commons</groupId>
                 <artifactId>gettext-maven-plugin</artifactId>
-                <version>1.2.4</version>
+                <version>1.2.5-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <id>generate-po-class</id>
@@ -363,6 +363,7 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
                             <msgfmtCmd>${msgfmtCmd}</msgfmtCmd>
                         </configuration>
                     </execution>

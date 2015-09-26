@@ -172,8 +172,9 @@ msgstr ""
 msgid "Completed (not repeatable)"
 msgstr "§4当前任务不可重复。"
 
+#, fuzzy
 msgid "Completed(repeatable)"
-msgstr ""
+msgstr "§4当前任务不可重复。"
 
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr "§4挑战所需物品将会从你背包内移除。"
@@ -227,8 +228,9 @@ msgstr "§4挑战已经完成了"
 msgid "§echallenge: {0} has been completed for {1}"
 msgstr "§e挑战: {0} 已经为玩家 {1} 设置为完成状态"
 
+#, fuzzy
 msgid "resets the challenge for the player"
-msgstr ""
+msgstr "§4你无法将岛屿的主人移除!"
 
 msgid "§4Challenge has never been completed"
 msgstr "§4挑战从未完成过"
@@ -252,14 +254,17 @@ msgstr "§4挑战: {0} 未找到!"
 msgid "§4No player named {0} was found!"
 msgstr "§4没有名字为 {0} 的玩家被找到"
 
+#, fuzzy
 msgid "manage islands"
-msgstr ""
+msgstr "§e存储孤岛列表"
 
+#, fuzzy
 msgid "protects the island"
-msgstr ""
+msgstr "§a可以 §f切换岛屿的传送点状态"
 
+#, fuzzy
 msgid "delete the island (removes the blocks)"
-msgstr ""
+msgstr "§a可以 §f切换岛屿的传送点状态"
 
 msgid "§9Deleted abandoned island at your current location."
 msgstr "§9你当前位置的岛屿已经删除。"
@@ -275,8 +280,9 @@ msgstr ""
 msgid "removes the player from the island"
 msgstr "§4你无法将岛屿的主人移除!"
 
+#, fuzzy
 msgid "print out info about the island"
-msgstr ""
+msgstr "{0}试图接管当前岛屿!"
 
 msgid "protects all islands (time consuming)"
 msgstr ""
@@ -311,11 +317,11 @@ msgstr "§a可以 §f切换岛屿的传送点状态"
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
 msgstr "§a设置 {0} 的岛屿的中心点(基岩)在你的附近。"
 
-#, java-format
+#, fuzzy, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
-msgstr ""
+msgstr "§a设置 {0} 的岛屿的中心点(基岩)在你的附近。"
 
 msgid "§4No valid player-name supplied."
 msgstr "§4无效的玩家名"
@@ -364,8 +370,9 @@ msgstr "§e{0} 的岛屿在 {1} 被保护"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0} 的岛屿在 {1} 早就被保护了"
 
+#, fuzzy
 msgid "controls the currently running async tasks"
-msgstr ""
+msgstr "§c没有运行中的事件"
 
 #, fuzzy
 msgid "lists currently running tasks"
@@ -412,8 +419,9 @@ msgstr "在{0} ~ {1} 之间没有活跃的冷却时间"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "无效的命令,只支持restart 和 biome"
 
+#, fuzzy
 msgid "resets the cooldown on the command"
-msgstr ""
+msgstr "{0}试图接管当前岛屿!"
 
 msgid "§eThe player is not currently online"
 msgstr "§e玩家未在线"
@@ -511,8 +519,19 @@ msgstr ""
 msgid "§cFailed to change language to §e{0}"
 msgstr ""
 
-msgid "transfer leadership to another player"
+msgid "§9Supported Languages:\n"
 msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
+msgstr ""
+
+#, fuzzy
+msgid "transfer leadership to another player"
+msgstr "§4你只能将岛屿主人的权限转移给他们的成员玩家!"
 
 #, java-format
 msgid "§4Player {0} has no island to transfer!"
@@ -534,21 +553,24 @@ msgstr "§b岛屿主人由{0} 变更为{1}"
 msgid "manage orphans"
 msgstr "§e存储孤岛列表"
 
+#, fuzzy
 msgid "count orphans"
-msgstr ""
+msgstr "§e存储孤岛列表"
 
 #, java-format
 msgid "§e{0} old island locations will be used before new ones."
 msgstr "§e{0} 旧的岛屿位置将会被新岛屿所替换。"
 
+#, fuzzy
 msgid "clear orphans"
-msgstr ""
+msgstr "§e存储孤岛列表"
 
 msgid "§eClearing all old (empty) island locations."
 msgstr "§e清除所有旧(空)的岛屿坐标。"
 
+#, fuzzy
 msgid "list orphans"
-msgstr ""
+msgstr "§e存储孤岛列表"
 
 msgid "§eNo orphans currently registered."
 msgstr ""
@@ -557,8 +579,9 @@ msgstr ""
 msgid "§eOrphans: {0}"
 msgstr "§e孤岛: {0}"
 
+#, fuzzy
 msgid "purges all abandoned islands"
-msgstr ""
+msgstr "§a可以 §f切换岛屿的传送点状态"
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4一个清理任务正在进行中,请等待执行结束。"
@@ -690,8 +713,9 @@ msgstr "§4你没有被任何人邀请."
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§e你接受了加入岛屿的邀请."
 
+#, fuzzy
 msgid "ban/unban a player from your island."
-msgstr ""
+msgstr "{0}§e早就是你们岛屿的成员了!"
 
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§e下列玩家被禁止传送到你的岛屿:"
@@ -755,8 +779,9 @@ msgstr "§e你必须在你的岛屿上才能更改生物群系!"
 msgid "§4You do not have permission to change the biome of this island!"
 msgstr "§4你没有权限去变更岛屿的生物群系!"
 
+#, fuzzy
 msgid "create an island"
-msgstr ""
+msgstr "§a可以 §f切换岛屿的传送点状态"
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
@@ -788,8 +813,9 @@ msgid ""
 "right now."
 msgstr ""
 
+#, fuzzy
 msgid "check your or anothers island info"
-msgstr ""
+msgstr "§a将你传送回自己的岛屿."
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4岛屿等级系统未启用,请联系管理员."
@@ -847,8 +873,9 @@ msgstr "§4玩家是你当前所处岛屿的主人!"
 msgid "{0}§d invited {1}"
 msgstr "{0}§d邀请了{1}"
 
+#, fuzzy
 msgid "remove a member from your island."
-msgstr ""
+msgstr "§4你无法将岛屿的主人移除!"
 
 msgid "§4You do not have permission to kick others from this island!"
 msgstr "§4你没有在当前岛屿踢出玩家的权限!"
@@ -900,8 +927,9 @@ msgstr "§4{0}离开了你的岛屿!"
 msgid "§4You must be in the skyblock world to leave your party!"
 msgstr "§4你必须在岛屿世界才能离开你的团队!"
 
+#, fuzzy
 msgid "check your or anothers island level"
-msgstr ""
+msgstr "§a将你传送回自己的岛屿."
 
 #, fuzzy, java-format
 msgid "§eInformation about {0}'s Island:"
@@ -915,8 +943,9 @@ msgstr "§a岛屿等级: {0,number,###.##}"
 msgid "§9Rank is {0}"
 msgstr "§9排名: {0}"
 
+#, fuzzy
 msgid "lock your island to non-party members."
-msgstr ""
+msgstr "{0}§e早就是你们岛屿的成员了!"
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4你没有权限锁定你的岛屿!"
@@ -972,8 +1001,9 @@ msgstr "§4这个指令只能由玩家来执行."
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4未拥有岛屿.§e输入§b/is create§e创建一个岛屿"
 
+#, fuzzy
 msgid "delete your island and start a new one."
-msgstr ""
+msgstr "§b{0}§d更改岛屿传送坐标."
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
@@ -1000,8 +1030,9 @@ msgstr ""
 msgid "§eNOTE: Your entire island and all your belongings will be RESET!"
 msgstr "§e注意: 你所有财产和你的岛屿将被§c§l重置"
 
+#, fuzzy
 msgid "set the island-home"
-msgstr ""
+msgstr "§a传送到 {0} 的岛屿"
 
 #, fuzzy
 msgid "set your island's warp location"
@@ -1031,8 +1062,9 @@ msgstr "§4你的岛屿已经锁定,在启用传送点之前请先解锁."
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr "§c你没有权限启用/禁用岛屿的传送点!"
 
+#, fuzzy
 msgid "display the top10 of islands"
-msgstr ""
+msgstr "{0}§e早就是你们岛屿的成员了!"
 
 #, fuzzy
 msgid "trust/untrust a player to help on your island."
@@ -1220,8 +1252,9 @@ msgstr "§4你必须得是岛屿的主人才能解锁你的岛屿!"
 msgid "§4** You are entering a protected - but abandoned - island area."
 msgstr ""
 
+#, fuzzy
 msgid "§4** You are leaving an abandoned island."
-msgstr ""
+msgstr "§e移除了 {0} 的岛屿。"
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
@@ -1347,6 +1380,7 @@ msgstr ""
 "§f点击图标即可§c移除\n"
 "§f玩家的这项权限."
 
+#, fuzzy
 msgid "Permissions"
 msgstr "权限"
 
@@ -1381,8 +1415,9 @@ msgstr "§4玩家仍未拥有岛屿。"
 msgid "Click here to remove this permission."
 msgstr "§e<点击将更改玩家的权限>"
 
+#, fuzzy
 msgid "§fThis player §ccannot"
-msgstr ""
+msgstr "§4玩家仍未拥有岛屿。"
 
 #, fuzzy
 msgid "Click here to grant this permission."
@@ -1421,13 +1456,13 @@ msgstr "§a§l岛主"
 msgid "Member"
 msgstr "§e§l成员"
 
-#, java-format
+#, fuzzy, java-format
 msgid "Can {0}"
-msgstr ""
+msgstr "§9排名: {0}"
 
-#, java-format
+#, fuzzy, java-format
 msgid "Cannot {0}"
-msgstr ""
+msgstr "§9排名: {0}"
 
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<点击将更改玩家的权限>"
@@ -1465,8 +1500,9 @@ msgstr ""
 "§f中立生物如动物将不会\n"
 "§f生成,怪物将会正常生成"
 
+#, fuzzy
 msgid "Forest"
-msgstr ""
+msgstr "§a生物群系: 森林(Forest)"
 
 #, fuzzy
 msgid ""
@@ -1653,9 +1689,9 @@ msgstr "§e§l点击将会更改为这个生物群系."
 msgid "You cannot use this biome."
 msgstr "§c§l你没有权限更改生物群系."
 
-#, java-format
+#, fuzzy, java-format
 msgid "{0} ({1}/{2})"
-msgstr ""
+msgstr "§a{0} §c{1}"
 
 #, fuzzy
 msgid "Island Menu"

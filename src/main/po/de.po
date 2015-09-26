@@ -175,8 +175,9 @@ msgstr ""
 msgid "Completed (not repeatable)"
 msgstr "§4Diese Aufgabe kannst du nicht wiederholen!"
 
+#, fuzzy
 msgid "Completed(repeatable)"
-msgstr ""
+msgstr "§4Diese Aufgabe kannst du nicht wiederholen!"
 
 msgid "§4You will lose all required items when you complete this challenge!"
 msgstr ""
@@ -314,11 +315,11 @@ msgstr "§aKann §den Insel Warmpunkt Ein-/Ausschalten."
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
 msgstr "§aSetzte {0}'s Insel auf das  Grundgestein in deiner nähe."
 
-#, java-format
+#, fuzzy, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
-msgstr ""
+msgstr "§aSetzte {0}'s Insel auf das  Grundgestein in deiner nähe."
 
 msgid "§4No valid player-name supplied."
 msgstr "§4Kein Gültiger Spielername angegeben."
@@ -518,6 +519,16 @@ msgstr ""
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
+msgstr ""
+
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
 msgstr ""
 
 msgid "transfer leadership to another player"
@@ -954,6 +965,7 @@ msgstr "§4Du hast nicht die Rechte um die Insel zu Sperren!"
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Du hast nicht die Rechte um die Insel zu Entsperren!"
 
+#, fuzzy
 msgid "display log"
 msgstr "Zeige log"
 
@@ -1264,8 +1276,9 @@ msgstr ""
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Du musst der Gruppenleiter sein um deine Insel zu entsperren!"
 
+#, fuzzy
 msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr ""
+msgstr "Löscht alle verlassenen Inseln"
 
 #, fuzzy
 msgid "§4** You are leaving an abandoned island."
@@ -1393,6 +1406,7 @@ msgstr ""
 "§faber §cnicht§f den Anführer. Klick\n"
 "§hier um ihm dieses Recht zu nehmen."
 
+#, fuzzy
 msgid "Permissions"
 msgstr "Rechte"
 
@@ -1428,8 +1442,9 @@ msgstr "§4Dieser Spieler hat keine Insel."
 msgid "Click here to remove this permission."
 msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
 
+#, fuzzy
 msgid "§fThis player §ccannot"
-msgstr ""
+msgstr "§4Dieser Spieler hat keine Insel."
 
 #, fuzzy
 msgid "Click here to grant this permission."
@@ -1468,13 +1483,13 @@ msgstr "§a§lAnführer"
 msgid "Member"
 msgstr "§e§lMitglied"
 
-#, java-format
+#, fuzzy, java-format
 msgid "Can {0}"
-msgstr ""
+msgstr "§9Stufe ist {0}"
 
-#, java-format
+#, fuzzy, java-format
 msgid "Cannot {0}"
-msgstr ""
+msgstr "§9Stufe ist {0}"
 
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
@@ -1512,8 +1527,9 @@ msgstr ""
 "§fwerden nicht Erscheinen. Feindliche\n"
 "§fKreaturen erscheinen normal."
 
+#, fuzzy
 msgid "Forest"
-msgstr ""
+msgstr "§aBiome: Blumenwald"
 
 #, fuzzy
 msgid ""
@@ -1704,9 +1720,10 @@ msgstr "§e§lKlicke um zu diesem Biome zu wechseln."
 msgid "You cannot use this biome."
 msgstr "§c§lDu kannst das Biome nicht ändern."
 
-#, java-format
+# ???
+#, fuzzy, java-format
 msgid "{0} ({1}/{2})"
-msgstr ""
+msgstr "§a{0} §c{1}"
 
 #, fuzzy
 msgid "Island Menu"
@@ -2095,6 +2112,10 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "Zeige log"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
