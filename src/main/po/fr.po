@@ -1171,15 +1171,13 @@ msgstr "§eVous pouvez uniquement utiliser les oeufs de spawn sur votre île."
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§4Ce joueur est déjà assigné à une île !"
 
-#, java-format
-msgid "§9Creating island...§e{0,number,###}%"
+#, fuzzy, java-format
+msgid "§eWaiting for our turn §c{0,number,###}%"
 msgstr "§9Création de l''île....§e{0,number,###}%"
 
 #, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
-msgstr ""
-"§cDésolé pour l''attente ! §9Votre île est maintenant §e{0,number,##}%§9 "
-"terminé.."
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§9Création de l''île....§e{0,number,###}%"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1977,6 +1975,16 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
+#~ msgstr "§9Création de l''île....§e{0,number,###}%"
+
+#~ msgid ""
+#~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
+#~ msgstr ""
+#~ "§cDésolé pour l''attente ! §9Votre île est maintenant §e{0,number,##}%§9 "
+#~ "terminé.."
 
 #~ msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
 #~ msgstr "§cNETTOYAGE:§9 Néttoyé {0}/{1} {2,##,number}"

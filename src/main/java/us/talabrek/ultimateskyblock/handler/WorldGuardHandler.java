@@ -41,7 +41,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
-    private static final String VERSION = "10";
+    private static final String VERSION = "11";
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");

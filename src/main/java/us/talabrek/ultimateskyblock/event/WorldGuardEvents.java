@@ -1,10 +1,12 @@
 package us.talabrek.ultimateskyblock.event;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -34,7 +36,8 @@ public class WorldGuardEvents implements Listener {
         if (islandInfo == null || islandInfo.getBans().isEmpty()) {
             return;
         }
-        if (islandInfo.isBanned(e.getPlayer())) {
+        Player player = e.getPlayer();
+        if (islandInfo.isBanned(e.getPlayer()) && !player.isOp() && !VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld())) {
             e.setCancelled(true);
             Location l = e.getTo().clone();
             l.subtract(islandInfo.getIslandLocation());

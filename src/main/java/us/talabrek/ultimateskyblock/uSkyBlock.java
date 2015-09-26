@@ -908,7 +908,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             public void run() {
                 long now = System.currentTimeMillis();
                 if (timeout == 0) {
-                    timeout = now + getConfig().getLong("asyncworldedit.watchDog.timeoutMs", 45000);
+                    timeout = now + TimeUtil.stringAsMillis(getConfig().getString("asyncworldedit.watchDog.timeout", "5m"));
                 }
                 // Check for completion
                 Location chestLocation = LocationUtil.findChestLocation(next);

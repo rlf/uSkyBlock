@@ -19,8 +19,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class AsyncWorldEditAdaptor {
+    private static final Logger log = Logger.getLogger(AsyncWorldEditAdaptor.class.getName());
+
     static long progressEveryMs = 3000; // 2 seconds
     static double progressEveryPct = 20;
     private static List<PlayerJob> pendingJobs = Collections.synchronizedList(new ArrayList<PlayerJob>());
@@ -56,9 +59,10 @@ public class AsyncWorldEditAdaptor {
 
         @Override
         public void disableMessage(PlayerEntry playerEntry) {
-            //System.out.println("disableMessage: " + playerEntry.getName());
+            log.finer("disableMessage: " + playerEntry.getName());
             if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getMode() && !pendingJobs.isEmpty()) {
                 PlayerJob nextJobToComplete = findNextJobToComplete();
+                log.finer("disable: " + nextJobToComplete);
                 pendingJobs.remove(nextJobToComplete);
             }
         }
@@ -67,32 +71,32 @@ public class AsyncWorldEditAdaptor {
         public void setMessage(PlayerEntry playerEntry, int jobsCount,
                                int queuedBlocks, int maxQueuedBlocks, double timeLeft, double placingSpeed, double percentage) {
             // Since AWE intercepts WE, we get UNKNOWN, and the job is simply merged.
-            //System.out.println("setMessage: " + playerEntry.getName() + ", jobsCount: " + jobsCount + ", queued: " + queuedBlocks + ", max: " + maxQueuedBlocks + ", pct=" + percentage);
+            log.finer("setMessage: " + playerEntry.getName() + ", jobsCount: " + jobsCount + ", queued: " + queuedBlocks + ", max: " + maxQueuedBlocks + ", pct=" + percentage);
             if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getMode()) {
                 synchronized (pendingJobs) {
                     if (queuedBlocks == maxQueuedBlocks) {
                         // Either a fresh job, or a new merge
-                        markJobs(maxQueuedBlocks);
+                        markJobs(maxQueuedBlocks, 0);
                     }
-                    int rest = maxQueuedBlocks - queuedBlocks;
+                    int blocksPlaced = maxQueuedBlocks - queuedBlocks;
+                    boolean isFirst = true;
                     for (Iterator<PlayerJob> it = pendingJobs.iterator(); it.hasNext(); ) {
                         PlayerJob job = it.next();
-                        rest = job.progress(rest);
-                        if (rest > 0) {
+                        if (job.progress(blocksPlaced) > 0 && isFirst && pendingJobs.size() > 1) {
+                            log.finer("remove: " + job);
                             it.remove();
-                        } else {
-                            break;
+                            markJobs(maxQueuedBlocks, queuedBlocks-blocksPlaced);
                         }
+                        isFirst = false;
                     }
                 }
             }
         }
     };
 
-    private static void markJobs(int maxQueuedBlocks) {
+    private static void markJobs(int maxQueuedBlocks, int startOffset) {
         synchronized (pendingJobs) {
             int rest = maxQueuedBlocks;
-            int startOffset = 0;
             for (PlayerJob job : pendingJobs) {
                 int missing = job.mark(rest, startOffset);
                 rest -= missing;
@@ -111,7 +115,7 @@ public class AsyncWorldEditAdaptor {
                     match = job;
                 }
             }
-            System.out.println("Completed: " + match);
+            log.finer("Completed: " + match);
             return match;
         }
     }

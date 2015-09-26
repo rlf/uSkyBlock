@@ -1122,11 +1122,11 @@ msgid "§cBanned:§e You are banned from this island."
 msgstr ""
 
 #, java-format
-msgid "§9Creating island...§e{0,number,###}%"
+msgid "§eWaiting for our turn §c{0,number,###}%"
 msgstr ""
 
 #, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
+msgid "§9Creating island...§e{0,number,###}%"
 msgstr ""
 
 #, java-format

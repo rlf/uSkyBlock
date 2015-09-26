@@ -1167,13 +1167,13 @@ msgstr "§eDu kan kun brug spawn-æg på din egen ø."
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cKan ikke §fsparke andre fra øen."
 
-#, java-format
-msgid "§9Creating island...§e{0,number,###}%"
+#, fuzzy, java-format
+msgid "§eWaiting for our turn §c{0,number,###}%"
 msgstr "§9Bygger øen...§e{0,number,###}%"
 
 #, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
-msgstr "§cUndskyld forsinkelsen! §9Din ø er nu §e{0,number,##}%§9 færdig..."
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§9Bygger øen...§e{0,number,###}%"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1984,6 +1984,14 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
+#~ msgstr "§9Bygger øen...§e{0,number,###}%"
+
+#~ msgid ""
+#~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
+#~ msgstr "§cUndskyld forsinkelsen! §9Din ø er nu §e{0,number,##}%§9 færdig..."
 
 #, fuzzy
 #~ msgid "reload the region chunks"

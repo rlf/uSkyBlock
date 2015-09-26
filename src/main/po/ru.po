@@ -1175,12 +1175,12 @@ msgid "§cBanned:§e You are banned from this island."
 msgstr "§4Игрок уже прикреплен к острову!"
 
 #, fuzzy, java-format
-msgid "§9Creating island...§e{0,number,###}%"
+msgid "§eWaiting for our turn §c{0,number,###}%"
 msgstr "§eТекущий уровень: §a{0,number,##.#}"
 
-#, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
-msgstr ""
+#, fuzzy, java-format
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§eТекущий уровень: §a{0,number,##.#}"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1995,6 +1995,10 @@ msgstr "м"
 
 msgid "s"
 msgstr "с"
+
+#, fuzzy
+#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
+#~ msgstr "§eТекущий уровень: §a{0,number,##.#}"
 
 #, fuzzy
 #~ msgid "reload the region chunks"

@@ -1169,14 +1169,13 @@ msgstr "§eVocê só pode usar spawn-eggs na sua ilha."
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cNão pode §fexpulsar jogadores da ilha."
 
-#, java-format
-msgid "§9Creating island...§e{0,number,###}%"
+#, fuzzy, java-format
+msgid "§eWaiting for our turn §c{0,number,###}%"
 msgstr "§9Criando ilha...§e{0,number,###}%"
 
 #, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
-msgstr ""
-"§cDesculpe pela demora! §9Sua ilha agora  §e{0,number,##}%§9 terminado..."
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§9Criando ilha...§e{0,number,###}%"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -2001,6 +2000,15 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
+#~ msgstr "§9Criando ilha...§e{0,number,###}%"
+
+#~ msgid ""
+#~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
+#~ msgstr ""
+#~ "§cDesculpe pela demora! §9Sua ilha agora  §e{0,number,##}%§9 terminado..."
 
 #~ msgid ""
 #~ "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
