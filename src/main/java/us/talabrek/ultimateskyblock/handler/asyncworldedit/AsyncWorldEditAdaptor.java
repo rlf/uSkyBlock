@@ -112,7 +112,7 @@ public class AsyncWorldEditAdaptor {
     }
 
     public static boolean isAWE() {
-        return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit") && VersionUtil.getVersion(getAWE().getDescription().getVersion()).isLT("3");
+        return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit") && VersionUtil.getVersion(getAWE().getDescription().getVersion()).isLT("3.0");
     }
 
     public static void registerCompletion(Player player) {
