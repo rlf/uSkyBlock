@@ -30,6 +30,7 @@
             </snapshots>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </releases>
         </repository>
         <repository>
