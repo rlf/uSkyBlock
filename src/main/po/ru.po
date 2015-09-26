@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 2.4\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2015-09-21 20:53+0200\n"
-"Last-Translator: \n"
+"Last-Translator: Error203\n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -494,6 +494,28 @@ msgstr "§4Этот игрок не имеет острова!"
 msgid "imports players and islands from other formats"
 msgstr "импортирование игроков и островов в другие форматы"
 
+#, fuzzy
+msgid "changes the language of the plugin, and reloads"
+msgstr "изменение биома острова"
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr ""
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
+msgstr ""
+
+msgid "§9Supported Languages:\n"
+msgstr ""
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr ""
+
+msgid "§cUnable to locate any languages."
+msgstr ""
+
 msgid "transfer leadership to another player"
 msgstr "сделать хозяином другого игрока"
 
@@ -577,8 +599,7 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 "§4ОЧИСТКА:§9 Сканирование завершено, найдено {0} кандидатов на очистку."
 
-#, fuzzy, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
 msgstr "§cОЧИСТКА:§9 Очищено {0}/{1} {2,##,number}"
 
 msgid "displays version information"
@@ -701,8 +722,16 @@ msgstr "§4у вас недостаточно прав, чтобы выбрас�
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eВы запретили игроку §4{0}§e посещать ваш остров."
 
+#, fuzzy, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eВы запретили игроку §4{0}§e посещать ваш остров."
+
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§eВы разрешили игроку §a{0}§e посещать ваш остров."
+
+#, fuzzy, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§eВы разрешили игроку §a{0}§e посещать ваш остров."
 
 msgid "change the biome of the island"
@@ -907,6 +936,7 @@ msgstr "§4У вас недостаточно прав для блокировк
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4У вас недостаточно прав для разблокировки вашего острова!"
 
+#, fuzzy
 msgid "display log"
 msgstr "показать журнал"
 
@@ -1155,9 +1185,17 @@ msgstr "§cВы достигли предела спавнов на вашем �
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eВы можете использовать спавн-яйца только на своем острове."
 
-#, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
-msgstr ""
+#, fuzzy
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§4Игрок уже прикреплен к острову!"
+
+#, fuzzy, java-format
+msgid "§eWaiting for our turn §c{0,number,###}%"
+msgstr "§eТекущий уровень: §a{0,number,##.#}"
+
+#, fuzzy, java-format
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§eТекущий уровень: §a{0,number,##.#}"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1171,12 +1209,12 @@ msgstr ""
 "§eДелать §9{0}§e §cРИСКОВАННО§e. Повторите команду через §a{1}§e сек. для "
 "подтверждения!"
 
-#, java-format
-msgid "§d** You are entering §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Вы вошли на остров игрока §b{0}."
 
-#, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
+#, fuzzy, java-format
+msgid "§d** You are leaving §b{0}''s §disland."
 msgstr "§d** Вы покинули остров игрока §b{0}."
 
 msgid "§eYour island is now locked. Only your party members may enter."
@@ -1316,6 +1354,7 @@ msgstr ""
 "но выкинуть хозяина острова\n"
 "невозможно."
 
+#, fuzzy
 msgid "Permissions"
 msgstr "Права доступа"
 
@@ -1919,6 +1958,10 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eСоздание острова началось, подождите, это может занять некоторое время."
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eО-о-о! Мы нашли вакантное место недалеко от спавна. §9Очищается для вас..."
@@ -1974,6 +2017,18 @@ msgstr "м"
 
 msgid "s"
 msgstr "с"
+
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "показать журнал"
+
+#, fuzzy
+#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
+#~ msgstr "§eТекущий уровень: §a{0,number,##.#}"
+
+#, fuzzy
+#~ msgid "reload the region chunks"
+#~ msgstr "загрузка чанков региона"
 
 #~ msgid "{0} <Permissions>"
 #~ msgstr "{0} <Права>"

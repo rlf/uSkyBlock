@@ -5,7 +5,7 @@ description: Ultimate SkyBlock v${gitTag}-${buildNumber}-${travis.buildNumber}
 author: Talabrek, R4zorax and others
 load: STARTUP
 depend: [Vault, WorldEdit, WorldGuard]
-softdepend: [Multiverse-Core, AsyncWorldEdit]
+softdepend: [Multiverse-Core,ActionBarAPI,TitleManager,AsyncWorldEdit]
 commands:
     island:
         description: Commands to use your island

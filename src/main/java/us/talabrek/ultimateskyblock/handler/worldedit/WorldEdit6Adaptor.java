@@ -45,8 +45,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
     }
 
     @Override
-    public boolean loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
-        World world = origin.getWorld();
+    public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
         WorldEdit worldEdit = worldEditPlugin.getWorldEdit();
         try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
@@ -59,7 +58,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
 
             Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
             int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
-            EditSession editSession = createSession(worldEdit, bukkitWorld, maxBlocks);
+            EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
             editSession.enableQueue();
             editSession.setFastMode(true);
             Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
@@ -70,7 +69,7 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
                     .build();
             Operations.completeBlindly(operation);
             editSession.flushQueue();
-            AsyncWorldEditHandler.registerCompletion(player, onCompletion);
+            AsyncWorldEditHandler.registerCompletion(player);
             editSession.commit();
             return true;
         } catch (IOException e) {
@@ -79,13 +78,4 @@ public class WorldEdit6Adaptor implements WorldEditAdaptor {
         return false;
     }
 
-    private EditSession createSession(WorldEdit worldEdit, BukkitWorld bukkitWorld, int maxBlocks) {
-        EditSession editSession;
-        if (AsyncWorldEditHandler.isAWE(uSkyBlock.getInstance())) {
-            editSession = worldEdit.getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
-        } else {
-            editSession = new EditSession(bukkitWorld, maxBlocks);
-        }
-        return editSession;
-    }
 }

@@ -7,7 +7,6 @@ import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
-import com.sk89q.worldguard.protection.flags.RegionGroup;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
@@ -42,7 +41,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
-    private static final int VERSION = 10;
+    private static final String VERSION = "11";
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
@@ -95,6 +94,10 @@ public class WorldGuardHandler {
             plugin.log(Level.SEVERE, "ERROR: Failed to protect " + name + "'s Island (" + sender.getName() + ")", ex);
         }
         return false;
+    }
+
+    private static String getVersion() {
+        return VERSION + " " + I18nUtil.getLocale();
     }
 
     public static boolean protectNetherIsland(uSkyBlock plugin, CommandSender sender, IslandInfo islandConfig) {
@@ -160,31 +163,40 @@ public class WorldGuardHandler {
             owners.addPlayer(member);
         }
         for (String trust : islandConfig.getTrustees()) {
-            owners.addPlayer(trust);
-        }
-        for (String banned : islandConfig.getBans()) {
-            members.addPlayer(banned);
+            members.addPlayer(trust);
         }
         region.setOwners(owners);
         region.setMembers(members);
         region.setPriority(100);
-        region.setFlag(DefaultFlag.GREET_MESSAGE,
-                DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender,
-                        tr("\u00a7d** You are entering \u00a7b{0}'s \u00a7disland.", islandConfig.getLeader())
-                ));
-        region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
-                DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender,
-                        tr("\u00a7d** You are leaving \u00a7b{0}'s \u00a7disland.", islandConfig.getLeader())
-                ));
+        if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.entry-message", true)) {
+            region.setFlag(DefaultFlag.GREET_MESSAGE,
+                    DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender,
+                            tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
+                    ));
+        } else {
+            region.setFlag(DefaultFlag.GREET_MESSAGE, null);
+        }
+        if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.exit-message", true)) {
+            region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
+                    DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender,
+                            tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
+                    ));
+        } else {
+            region.setFlag(DefaultFlag.FAREWELL_MESSAGE, null);
+        }
         setVersionSpecificFlags(region);
         region.setFlag(DefaultFlag.PVP, null);
-        if (islandConfig.isLocked()) {
+        boolean isLocked = islandConfig.isLocked();
+        updateLockStatus(region, isLocked);
+        return region;
+    }
+
+    private static void updateLockStatus(ProtectedRegion region, boolean isLocked) {
+        if (isLocked) {
             region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
         } else {
-            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
+            region.setFlag(DefaultFlag.ENTRY, null);
         }
-        region.setFlag(new StateFlag("entry", false, RegionGroup.MEMBERS), StateFlag.State.DENY);
-        return region;
     }
 
     private static void setVersionSpecificFlags(ProtectedCuboidRegion region) {
@@ -219,7 +231,7 @@ public class WorldGuardHandler {
             RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
-                region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
+                updateLockStatus(region, true);
                 sender.sendMessage(tr("\u00a7eYour island is now locked. Only your party members may enter."));
             } else {
                 sender.sendMessage(tr("\u00a74You must be the party leader to lock your island!"));
@@ -234,7 +246,7 @@ public class WorldGuardHandler {
             RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
-                region.setFlag(DefaultFlag.ENTRY, StateFlag.State.ALLOW);
+                updateLockStatus(region, false);
                 sender.sendMessage(tr("\u00a7eYour island is unlocked and anyone may enter, however only you and your party members may build or remove blocks."));
             } else {
                 sender.sendMessage(tr("\u00a74You must be the party leader to unlock your island!"));

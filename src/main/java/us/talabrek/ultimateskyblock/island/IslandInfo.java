@@ -478,7 +478,7 @@ public class IslandInfo {
     }
 
     public String getRegionVersion() {
-        return config.getString("general.regionVersion", "0");
+        return config.getString("general.regionVersion", "");
     }
 
     public List<String> getLog() {

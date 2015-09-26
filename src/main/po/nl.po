@@ -583,8 +583,7 @@ msgstr "§4VERWIJDER:§9 Klaar met verwijderen van inactieve eilanden."
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
-#, fuzzy, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
 msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,##,number}"
 
 msgid "displays version information"
@@ -1146,11 +1145,6 @@ msgstr "§eJe kan geen portals van andere eilanden gebruiken!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandelen is niet toegestaan op ander mans eiland!"
 
-msgid ""
-"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
-"that is not allowed."
-msgstr ""
-
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVerander je Obsidian terug naar lava. Wel opletten!"
 
@@ -1241,14 +1235,6 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d is verwijderd van het eiland."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr ""
-"§cHet eiland waar je je op bevind word verwijderd! Je word naar spawn "
-"gestuurd."
-
-#, fuzzy
-msgid ""
-"§cThe island owning this piece of nether is being deleted! Sending you to "
-"spawn."
 msgstr ""
 "§cHet eiland waar je je op bevind word verwijderd! Je word naar spawn "
 "gestuurd."

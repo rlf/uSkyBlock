@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -20,6 +19,7 @@ public class ReloadCommand extends AbstractUSBCommand {
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         uSkyBlock.getInstance().reloadConfig();
+        uSkyBlock.getInstance().registerEvents();
         sender.sendMessage(tr("\u00a7eConfiguration reloaded from file."));
         return true;
     }

@@ -111,37 +111,6 @@ options:
       # how many villagers can be spawned on an island
       villagers: 16
 
-  # Extra menus shown in the main-menu - here we have some donor-menus using chestcommands.
-  # Any empty slot can be filled using this format.
-  extra-menus:
-    # [integer 0-17] The slot your new menu will appear in.
-    7:
-      # [String] The title of your menu.
-      title: '§a§lBuy Perks'
-      # [String] The item to be displayed. Note, this must be an item not used elsewhere in the menu.
-      displayItem: CHEST
-      # [string] List of commands to run when player clicks your menu.
-      commands:
-       - 'chestcommands open perks'
-      # [string] Description of what your menu does.
-      lore:
-       - '§fVisit the perk shop to buy'
-       - '§fspecial abilities for your'
-       - '§fisland and character, as well'
-       - '§fas titles and more.'
-       - '§e§lClick here to open the shop!'
-    16:
-      title: '§a§lBuy Donor Perks'
-      displayItem: ENDER_CHEST
-      commands:
-       - '[group.donor]chestcommands open donor'
-       - '[!group.donor]donate'
-      lore:
-       - '§fThis special perk shop is'
-       - '§fonly available to donors!'
-       - '[group.donor]§e§lClick here to open the shop!'
-       - '[!group.donor]§a§7Click here to become a donor!'
-
   extras:
     # [true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
     # NOTE: Requires EssentialsSpawn or another plugin with the "/spawn" command
@@ -176,7 +145,7 @@ options:
       # Whether or not visitors are protected from fall damage
       fall: true
 
-      # Whether or not visiotrs are protected from fire damage (incl. lava)
+      # Whether or not visitors are protected from fire damage (incl. lava)
       fire-damage: true
 
       # Whether or not visitors should be allowed to drop items
@@ -184,6 +153,10 @@ options:
 
       # Warns online members when a player visits the island.
       warn-on-warp: true
+
+      # Whether or not to actively block banned players from entering an island (by walking/flying).
+      block-banned-entry: true
+
   party:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
     invite-timeout: 600
@@ -241,10 +214,22 @@ options:
 asyncworldedit:
   # Supports disabling the detection of AWE
   enabled: true
+
   # Show progress to the user every 5 seconds
   progressEveryMs: 5000
+
   # Or 20pct (what-ever comes first)
   progressEveryPct: 20
+
+  watchDog:
+    # The maximum time to wait for AWE paste to complete (2m, 3m20s, etc.)
+    timeout: 5m
+    # The number of ms between each heartbeat
+    heartBeatMs: 500
+
+worldguard:
+  entry-message: true
+  exit-message: true
 
 
 nether:
@@ -283,7 +268,7 @@ nether:
     blaze: 0.20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 27
+version: 28
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

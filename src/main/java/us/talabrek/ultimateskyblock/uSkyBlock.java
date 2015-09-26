@@ -20,7 +20,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -49,6 +48,7 @@ import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.NetherTerraFormEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
+import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
@@ -93,10 +93,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static us.talabrek.ultimateskyblock.Settings.island_height;
+import static us.talabrek.ultimateskyblock.Settings.island_height;
 import static us.talabrek.ultimateskyblock.util.BlockUtil.isBreathable;
 import static us.talabrek.ultimateskyblock.util.FileUtil.getFileConfiguration;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
@@ -190,6 +190,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
         playerLogic.shutdown();
+        islandLogic.shutdown();
         playerNameChangeManager.shutdown();
         AsyncWorldEditHandler.onDisable(this);
         DebugCommand.disableLogging(null);
@@ -236,6 +237,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
+                registerEventsAndCommands();
                 getServer().getScheduler().runTaskLater(instance, new Runnable() {
                     @Override
                     public void run() {
@@ -300,7 +302,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return uSkyBlock.instance;
     }
 
-    public void registerEvents(PlayerDB playerDB) {
+    public void registerEvents() {
         final PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(new PlayerNameChangeListener(this), this);
         manager.registerEvents(playerNameChangeManager, this);
@@ -315,6 +317,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         if (getConfig().getBoolean("options.island.spawn-limits.enabled", true)) {
             manager.registerEvents(new SpawnEvents(this), this);
+        }
+        if (getConfig().getBoolean("options.protection.visitors.block-banned-entry", true)) {
+            manager.registerEvents(new WorldGuardEvents(this), this);
         }
         manager.registerEvents(new NetherTerraFormEvents(this), this);
     }
@@ -396,16 +401,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             return warp;
         }
         return null;
-    }
-
-    public boolean isSafeLocation(final Location l) {
-        if (l == null) {
-            return false;
-        }
-        final Block ground = l.getBlock().getRelative(BlockFace.DOWN);
-        final Block air1 = l.getBlock();
-        final Block air2 = l.getBlock().getRelative(BlockFace.UP);
-        return ground.getType().isSolid() && isBreathable(air1) && isBreathable(air2);
     }
 
     public void removeCreatures(final Location l) {
@@ -632,7 +627,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
-            loadChunkAt(homeSweetHome);
+            LocationUtil.loadChunkAt(homeSweetHome);
             player.teleport(homeSweetHome);
             player.setVelocity(new org.bukkit.util.Vector());
         } else {
@@ -641,17 +636,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 @Override
                 public void run() {
                     player.setVelocity(new org.bukkit.util.Vector());
-                    loadChunkAt(homeSweetHome);
+                    LocationUtil.loadChunkAt(homeSweetHome);
                     player.teleport(homeSweetHome);
                     player.setVelocity(new org.bukkit.util.Vector());
                 }
             }, TimeUtil.secondsAsTicks(delay));
-        }
-    }
-
-    private void loadChunkAt(Location homeSweetHome) {
-        if (!homeSweetHome.getWorld().isChunkLoaded(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4)) {
-            homeSweetHome.getWorld().loadChunk(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4);
         }
     }
 
@@ -682,9 +671,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final Location spawnLocation = getWorld().getSpawnLocation();
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             if (Settings.extras_sendToSpawn) {
-                execCommand(player, "op:spawn");
+                execCommand(player, "op:spawn", false);
             } else {
-                loadChunkAt(spawnLocation);
+                LocationUtil.loadChunkAt(spawnLocation);
                 player.teleport(spawnLocation);
             }
         } else {
@@ -693,9 +682,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 @Override
                 public void run() {
                     if (Settings.extras_sendToSpawn) {
-                        execCommand(player, "op:spawn");
+                        execCommand(player, "op:spawn", false);
                     } else {
-                        loadChunkAt(spawnLocation);
+                        LocationUtil.loadChunkAt(spawnLocation);
                         player.teleport(spawnLocation);
                     }
                 }
@@ -711,7 +700,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
         if (playerIsOnIsland(player)) {
             PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
-            if (playerInfo != null && isSafeLocation(player.getLocation())) {
+            if (playerInfo != null && LocationUtil.isSafeLocation(player.getLocation())) {
                 playerInfo.setHomeLocation(player.getLocation());
                 playerInfo.save();
                 player.sendMessage(tr("\u00a7aYour skyblock home has been set to your current location."));
@@ -928,8 +917,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final PlayerPerk playerPerk = new PlayerPerk(pi, perkLogic.getPerk(player));
         player.sendMessage(tr("\u00a7eGetting your island ready, please be patient, it can take a while."));
         final Runnable generateTask = new Runnable() {
+            boolean hasRun = false;
             @Override
             public void run() {
+                if (hasRun) {
+                    return;
+                }
+                hasRun = true;
                 next.getWorld().loadChunk(next.getBlockX() >> 4, next.getBlockZ() >> 4, false);
                 islandGenerator.setChest(next, playerPerk);
                 IslandInfo islandInfo = setNewPlayerIsland(player, next);
@@ -954,10 +948,31 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 }, getConfig().getInt("options.restart.teleportDelay", 20));
             }
         };
+        final long heartBeatTicks = TimeUtil.millisAsTicks(getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 500));
+        final Runnable completionWatchDog = new Runnable() {
+            volatile long timeout = 0;
+            public void run() {
+                long now = System.currentTimeMillis();
+                if (timeout == 0) {
+                    timeout = now + TimeUtil.stringAsMillis(getConfig().getString("asyncworldedit.watchDog.timeout", "5m"));
+                }
+                // Check for completion
+                Location chestLocation = LocationUtil.findChestLocation(next);
+                if (chestLocation == null && now < timeout) {
+                    Bukkit.getScheduler().runTaskLater(uSkyBlock.this, this, heartBeatTicks);
+                } else {
+                    if (player != null && player.isOnline() && now >= timeout) {
+                        player.sendMessage(tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(getConfig().getLong("asyncworldedit.watchDog.timeoutMs", 45000))));
+                    }
+                    generateTask.run();
+                }
+            }
+        };
         Runnable createTask = new Runnable() {
             @Override
             public void run() {
-                islandGenerator.createIsland(uSkyBlock.this, playerPerk, next, generateTask);
+                islandGenerator.createIsland(uSkyBlock.this, playerPerk, next);
+                Bukkit.getScheduler().runTaskLater(uSkyBlock.this, completionWatchDog, 0);
             }
         };
         if (orphanLogic.wasOrphan(next)) {
@@ -1011,106 +1026,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         }
     }
 
-    /**
-     * Finds the nearest block to loc that is a chest.
-     *
-     * @param loc The location to scan for a chest.
-     * @return The location of the chest
-     */
-    public Location findChestLocation(final Location loc) {
-        World world = loc.getWorld();
-        int px = loc.getBlockX();
-        int pz = loc.getBlockZ();
-        int py = loc.getBlockY();
-        for (int dy = 1; dy <= 30; dy++) {
-            for (int dx = 1; dx <= 30; dx++) {
-                for (int dz = 1; dz <= 30; dz++) {
-                    // Scans from the center and out
-                    int x = px + (dx % 2 == 0 ? dx / 2 : -dx / 2);
-                    int z = pz + (dz % 2 == 0 ? dz / 2 : -dz / 2);
-                    int y = py + (dy % 2 == 0 ? dy / 2 : -dy / 2);
-                    if (world.getBlockAt(x, y, z).getType() == Material.CHEST) {
-                        return new Location(world, x, y, z);
-                    }
-                }
-            }
-        }
-        return loc;
-    }
-
-    private Location findNearestSpawnLocation(Location loc) {
-        loadChunkAt(loc);
-        World world = loc.getWorld();
-        int px = loc.getBlockX();
-        int pz = loc.getBlockZ();
-        int py = loc.getBlockY();
-        Block chestBlock = world.getBlockAt(loc);
-        if (chestBlock.getType() == Material.CHEST) {
-            BlockFace primaryDirection = null;
-            // Start by checking in front of the chest.
-            MaterialData data = chestBlock.getState().getData();
-            if (data instanceof org.bukkit.material.Chest) {
-                primaryDirection = ((org.bukkit.material.Chest) data).getFacing();
-            }
-            if (primaryDirection == BlockFace.NORTH) {
-                // Neg Z
-                pz -= 1; // start one block in the north dir.
-            } else if (primaryDirection == BlockFace.SOUTH) {
-                // Pos Z
-                pz += 1; // start one block in the south dir
-            } else if (primaryDirection == BlockFace.WEST) {
-                // Neg X
-                px -= 1; // start one block in the west dir
-            } else if (primaryDirection == BlockFace.EAST) {
-                // Pos X
-                px += 1; // start one block in the east dir
-            }
-        }
-        return findNearestSafeLocation(new Location(loc.getWorld(), px, py, pz), loc);
-    }
-
     Location findNearestSafeLocation(Location loc) {
-        return findNearestSafeLocation(loc, null);
-    }
-
-    Location findNearestSafeLocation(Location loc, Location lookAt) {
-        if (loc == null) {
-            return null;
-        }
-        loadChunkAt(loc);
-        World world = loc.getWorld();
-        int px = loc.getBlockX();
-        int pz = loc.getBlockZ();
-        int py = loc.getBlockY();
-        for (int dy = 1; dy <= 30; dy++) {
-            for (int dx = 1; dx <= 30; dx++) {
-                for (int dz = 1; dz <= 30; dz++) {
-                    // Scans from the center and out
-                    int x = px + (dx % 2 == 0 ? dx / 2 : -dx / 2);
-                    int z = pz + (dz % 2 == 0 ? dz / 2 : -dz / 2);
-                    int y = py + (dy % 2 == 0 ? dy / 2 : -dy / 2);
-                    Location spawnLocation = new Location(world, x, y, z);
-                    if (isSafeLocation(spawnLocation)) {
-                        // look at the old location
-                        spawnLocation = centerOnBlock(spawnLocation);
-                        if (lookAt != null) {
-                            Location d = centerOnBlock(lookAt).subtract(spawnLocation);
-                            spawnLocation.setDirection(d.toVector());
-                        } else {
-                            spawnLocation.setYaw(loc.getYaw());
-                            spawnLocation.setPitch(loc.getPitch());
-                        }
-                        log(Level.FINER, "found safe location " + spawnLocation + " near " + loc + ", looking at " + lookAt);
-                        return spawnLocation;
-                    }
-                }
-            }
-        }
-        return null;
+        return LocationUtil.findNearestSafeLocation(loc, null);
     }
 
     public Location getChestSpawnLoc(final Location loc) {
-        return findNearestSpawnLocation(findChestLocation(loc));
+        Location chestLocation = LocationUtil.findChestLocation(loc);
+        return LocationUtil.findNearestSpawnLocation(chestLocation != null ? chestLocation : loc);
     }
 
     private IslandInfo setNewPlayerIsland(final Player player, final Location loc) {
@@ -1215,10 +1137,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         notifier = new PlayerNotifier(getConfig());
         playerLogic = new PlayerLogic(this);
         playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
-        registerEvents(playerDB);
         if (autoRecalculateTask != null) {
             autoRecalculateTask.cancel();
         }
+    }
+
+    public void registerEventsAndCommands() {
+        registerEvents();
         int refreshEveryMinute = getConfig().getInt("options.island.autoRefreshScore", 0);
         if (refreshEveryMinute > 0) {
             int refreshTicks = refreshEveryMinute * 1200; // Ticks per minute
@@ -1258,11 +1183,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return orphanLogic;
     }
 
-    public void execCommand(Player player, String command) {
+    /**
+     *
+     * @param player    The player executing the command
+     * @param command   The command to execute
+     * @param onlyInSky Whether the command is restricted to a sky-associated world.
+     */
+    public void execCommand(Player player, String command, boolean onlyInSky) {
         if (command == null || player == null) {
             return;
         }
-        if (!isSkyAssociatedWorld(player.getWorld())) {
+        if (onlyInSky && !isSkyAssociatedWorld(player.getWorld())) {
             return;
         }
         command = command

@@ -78,9 +78,7 @@ public class WorldEditRegenTask implements IncrementalTask {
             Region region = regions.remove(0);
             editSession = new EditSession(bukkitWorld, region.getArea()*255);
             editSession.setFastMode(true);
-            editSession.enableQueue();
             bukkitWorld.regenerate(region, editSession);
-            editSession.flushQueue();
             editSession.commit();
         }
         return isComplete();

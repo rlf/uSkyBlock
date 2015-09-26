@@ -578,8 +578,7 @@ msgstr ""
 "§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o "
 "purgatório."
 
-#, fuzzy, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
 msgstr "§cPURGE:§9 Purgado {0}/{1} {2,##,number}"
 
 msgid "displays version information"
@@ -1129,11 +1128,6 @@ msgstr "§eVocê não pode usar outros portais na ilha!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrocas não são permitidas em outras ilhas."
 
-msgid ""
-"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
-"that is not allowed."
-msgstr ""
-
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVocê recuperou sua lava."
 
@@ -1224,12 +1218,6 @@ msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d foi removido do grupo."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
-
-#, fuzzy
-msgid ""
-"§cThe island owning this piece of nether is being deleted! Sending you to "
-"spawn."
 msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
 
 #, java-format

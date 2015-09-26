@@ -77,6 +77,9 @@ public class PlayerLogic {
     }
 
     private PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {
+        if (playerUUID == null || playerName == null) {
+            return null;
+        }
         log.log(Level.FINER, "Loading player data for " + playerName);
 
         PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);

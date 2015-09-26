@@ -1,12 +1,12 @@
 package us.talabrek.ultimateskyblock;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.inventory.*;
-
-import java.util.*;
-
-import org.bukkit.*;
+import org.bukkit.inventory.ItemStack;
+import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+
+import java.util.Locale;
+import java.util.Set;
 
 public class Settings {
     public static int general_maxPartySize;
@@ -128,17 +128,9 @@ public class Settings {
         island_topTenTimeout = config.getInt("options.island.topTenTimeout", 7); // Every 7 minutes
         island_allowPvP = config.getString("options.island.allowPvP", "deny").equalsIgnoreCase("allow") ||
             config.getString("options.island.allowPvP", "false").equalsIgnoreCase("true");
-        String loc = config.getString("language", null);
+        Locale loc = I18nUtil.getLocale(config.getString("language", null));
         if (loc != null) {
-            // Why is this not just standard Java Locale??
-            String[] parts = loc.split("[_\\-]");
-            if (parts.length >= 3) {
-                locale = new Locale(parts[0], parts[1], parts[2]);
-            } else if (parts.length == 2) {
-                locale = new Locale(parts[0], parts[1]);
-            } else {
-                locale = new Locale(parts[0]);
-            }
+            locale = loc;
         }
         return changed;
     }

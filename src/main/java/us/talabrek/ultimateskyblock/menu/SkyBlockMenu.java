@@ -339,7 +339,7 @@ public class SkyBlockMenu {
         }
         Material itemType = currentItem.getType();
         String itemTitle = currentItem.getItemMeta().getDisplayName();
-        World world = skyBlock.getSkyBlockWorld();
+        World world = player.getWorld();
         for (String sIndex : extras.getKeys(false)) {
             ConfigurationSection menuSection = extras.getConfigurationSection(sIndex);
             if (menuSection == null) {
@@ -359,10 +359,10 @@ public class SkyBlockMenu {
                             if (perm != null) {
                                 boolean hasPerm = VaultHandler.checkPerm(player, perm, world);
                                 if ((hasPerm && !not) || (!hasPerm && not)) {
-                                    skyBlock.execCommand(player, cmd);
+                                    skyBlock.execCommand(player, cmd, false);
                                 }
                             } else {
-                                skyBlock.execCommand(player, cmd);
+                                skyBlock.execCommand(player, cmd, false);
                             }
                         } else {
                             uSkyBlock.log(Level.INFO, "\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);

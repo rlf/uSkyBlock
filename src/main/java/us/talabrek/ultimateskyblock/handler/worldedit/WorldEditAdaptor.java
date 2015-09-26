@@ -24,7 +24,7 @@ public interface WorldEditAdaptor {
      * Returns <code>true</code> if successful.
      * @return <code>true</code> if successful.
      */
-    boolean loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion);
+    boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk);
 
     public static class Factory {
         private static final Logger log = Logger.getLogger(Factory.class.getName());

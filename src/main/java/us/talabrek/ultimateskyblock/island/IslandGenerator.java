@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.island;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -13,6 +14,7 @@ import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,9 +64,12 @@ public class IslandGenerator {
     }
 
 
-    public String createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next, Runnable onCompletion) {
+    public String createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next) {
         log.entering(CN, "createIsland", new Object[]{plugin, playerPerk.getPlayerInfo().getPlayerName(), next});
         log.fine("creating island for " + playerPerk.getPlayerInfo().getPlayerName() + " at " + next);
+        // Hacky, but clear the Orphan info
+        next.setYaw(0);
+        next.setPitch(0);
         boolean hasIslandNow = false;
         String cSchem = "default";
         if (schemFiles.length > 0 && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
@@ -83,7 +88,7 @@ public class IslandGenerator {
             if (permFile != null) {
                 defaultFile = permFile;
             }
-            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(defaultFile, next, playerPerk, onCompletion)) {
+            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next, playerPerk)) {
                 cSchem = FileUtil.getBasename(defaultFile);
                 hasIslandNow = true;
                 log.fine("chose schematic " + defaultFile);
@@ -99,7 +104,6 @@ public class IslandGenerator {
                 oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerPerk, uSkyBlock.skyBlockWorld);
                 cSchem = "skySMP";
             }
-            Bukkit.getScheduler().runTask(plugin, onCompletion); // The above is done synchronously
         }
         next.setY((double) Settings.island_height);
         log.exiting(CN, "createIsland");
@@ -293,27 +297,22 @@ public class IslandGenerator {
         blockToChange.setTypeIdAndData(54, (byte) 3, false);
     }
 
-    public void setChest(final Location loc, final PlayerPerk playerPerk) {
-        World world = loc.getWorld();
-        world.loadChunk(loc.getBlockX() >> 4, loc.getBlockZ() >> 4, false);
-        for (int dx = 1; dx <= 30; dx++) {
-            for (int dy = 1; dy <= 30; dy++) {
-                for (int dz = 1; dz <= 30; dz++) {
-                    int x = ((dx % 2) == 0) ? dx / 2 : -dx / 2;
-                    int y = ((dy % 2) == 0) ? dy / 2 : -dy / 2;
-                    int z = ((dz % 2) == 0) ? dz / 2 : -dz / 2;
-                    if (world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).getTypeId() == 54) {
-                        final Block blockToChange = world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
-                        final Chest chest = (Chest) blockToChange.getState();
-                        final Inventory inventory = chest.getInventory();
-                        inventory.clear();
-                        inventory.setContents(Settings.island_chestItems);
-                        if (Settings.island_addExtraItems) {
-                            inventory.addItem(ItemStackUtil.createItemArray(playerPerk.getPerk().getExtraItems()));
-                        }
-                    }
+    public boolean setChest(final Location loc, final PlayerPerk playerPerk) {
+        Location chestLocation = LocationUtil.findChestLocation(loc);
+        if (chestLocation != null) {
+            final Block block = chestLocation.getWorld().getBlockAt(chestLocation);
+            if (block != null && block.getType() == Material.CHEST) {
+                final Chest chest = (Chest) block.getState();
+                final Inventory inventory = chest.getInventory();
+                inventory.clear();
+                inventory.setContents(Settings.island_chestItems);
+                if (Settings.island_addExtraItems) {
+                    inventory.addItem(ItemStackUtil.createItemArray(playerPerk.getPerk().getExtraItems()));
                 }
+                return true;
             }
+
         }
+        return false;
     }
 }

@@ -21,7 +21,7 @@ public class WorldEdit558Adaptor implements WorldEditAdaptor {
     }
 
     @Override
-    public boolean loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk, Runnable onCompletion) {
+    public boolean loadIslandSchematic(World world, File file, Location origin, PlayerPerk playerPerk) {
         // TODO: 22/09/2015 - R4zorax: Perhaps we should actually support this version?
         return false;
     }

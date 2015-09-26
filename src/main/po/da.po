@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-21 23:38+0200\n"
+"PO-Revision-Date: 2015-09-27 00:55+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -498,6 +498,27 @@ msgstr "§4Den spiller har ingen ø!"
 msgid "imports players and islands from other formats"
 msgstr "importer spillere og øer fra andre formater"
 
+msgid "changes the language of the plugin, and reloads"
+msgstr "skifter sprog af pluginnet, og genindlæser det"
+
+#, java-format
+msgid "§aSuccessfully changed language to §e{0}"
+msgstr "§aSkiftede sprog til §e{0}"
+
+#, java-format
+msgid "§cFailed to change language to §e{0}"
+msgstr "§cKunne ikke skifte sprog til §e{0}"
+
+msgid "§9Supported Languages:\n"
+msgstr "§9Understøttede sprog:\n"
+
+#, java-format
+msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr "§f{0} §7{1} §9 af {2} §7{3}\n"
+
+msgid "§cUnable to locate any languages."
+msgstr "§cKunne ikke finde nogle sprog."
+
 msgid "transfer leadership to another player"
 msgstr "overfør ejerskab til en anden spiller"
 
@@ -580,9 +601,9 @@ msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4OPRYDNING:§9 Skanningen foretaget, fandt {0} kandidater til genbrug."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,##,number}"
+msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,number,###}%"
 
 msgid "displays version information"
 msgstr "viser versionsinformationer"
@@ -699,8 +720,16 @@ msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eDu har udelukket §4{0}§e fra at teleportere til din ø."
 
 #, java-format
+msgid "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§eDu er blevet §cFORVIST§e fra {0}§e''s ø."
+
+#, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eDu har tilladt §a{0}§e at teleportere til din ø."
+
+#, java-format
+msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
+msgstr "§eDu er blevet §aBENÅDET§e af {0}."
 
 msgid "change the biome of the island"
 msgstr "ændr øens biome"
@@ -1148,9 +1177,16 @@ msgstr "§eDu har nået din øs spawn-grænse."
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eDu kan kun brug spawn-æg på din egen ø."
 
+msgid "§cBanned:§e You are banned from this island."
+msgstr "§cForvist:§e Du har ikke lov til at komme på denne ø."
+
 #, java-format
-msgid "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
-msgstr "§cUndskyld forsinkelsen! §9Din ø er nu §e{1,number,##}%§9 færdig..."
+msgid "§eWaiting for our turn §c{0,number,###}%"
+msgstr "§eVenter på din tur §c{0,number,###}%"
+
+#, java-format
+msgid "§9Creating island...§e{0,number,###}%"
+msgstr "§9Bygger øen...§e{0,number,###}%"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1165,12 +1201,12 @@ msgstr ""
 "sekunder for at fortsætte!"
 
 #, java-format
-msgid "§d** You are entering §b{0}'s §disland."
+msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Du ankom til §b{0}'s §disland."
 
 #, java-format
-msgid "§d** You are leaving §b{0}'s §disland."
-msgstr "§d** Du forlader nu §b{0}s §dø."
+msgid "§d** You are leaving §b{0}''s §disland."
+msgstr "§d** Du forlader nu §b{0}'s §dø."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§eDin ø er nu låst. Kun medlemmer kan teleportere til den."
@@ -1908,6 +1944,11 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+"§cVagthund!§9 Ude af stand til at finde en kiste inden for {0}, giver op."
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
 
@@ -1955,13 +1996,29 @@ msgid "d"
 msgstr "d"
 
 msgid "h"
-msgstr "h"
+msgstr "t"
 
 msgid "m"
 msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid ".displayName"
+#~ msgstr "vis aktivitetslog"
+
+#, fuzzy
+#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
+#~ msgstr "§9Bygger øen...§e{0,number,###}%"
+
+#~ msgid ""
+#~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
+#~ msgstr "§cUndskyld forsinkelsen! §9Din ø er nu §e{0,number,##}%§9 færdig..."
+
+#, fuzzy
+#~ msgid "reload the region chunks"
+#~ msgstr "load chunks fra regionen"
 
 #~ msgid "{0} <Permissions>"
 #~ msgstr "{0} <Tilladelser>"
@@ -2198,9 +2255,6 @@ msgstr "s"
 #~ msgid "§cCannot §finvite others to the island."
 #~ msgstr "§cKan ikke §finvitere andre til øen."
 
-#~ msgid "§cCannot §fkick others from the island."
-#~ msgstr "§cKan ikke §fsparke andre fra øen."
-
 #~ msgid "§aBiome: Ocean"
 #~ msgstr "§aBiome: Hav"
 
@@ -2400,10 +2454,6 @@ msgstr "s"
 #~ "§7dyr vil spawne normalt\n"
 #~ "§7(inklusive heste) og fjentlige\n"
 #~ "§7monstre/dyr vil spawne normalt"
-
-#, fuzzy
-#~ msgid "changes the language of the plugin"
-#~ msgstr "§eÆndrede biomen for {0}'s ø til {1}"
 
 #~ msgid "{0} changed the island biome to OCEAN"
 #~ msgstr "{0} ændrede øens biome til HAV"

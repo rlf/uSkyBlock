@@ -39,7 +39,7 @@ public class WGCommand extends CompositeUSBCommand {
         add(new RequirePlayerCommand("unload", null, tr("load the region chunks")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
-                WorldEditHandler.unloadRegion(player.getLocation());
+                LocationUtil.loadChunkAt(player.getLocation());
                 player.sendMessage(tr("\u00a7eUnloading chunks at {0}", LocationUtil.asString(player.getLocation())));
                 return true;
             }
