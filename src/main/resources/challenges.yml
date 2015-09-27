@@ -1,6 +1,9 @@
 # [true/false] Enable the use of the challenges command.
 allowChallenges: true
 
+# [island/player] Whether challenges are tracked per player, or per island
+challengeSharing: player
+
 # [true/false] If true, first time challenge completions are broadcast to the whole server.
 broadcastCompletion: true
 
@@ -725,4 +728,4 @@ ranks:
           currency: 50
           xp: 50
 # DO NOT CHANGE!
-version: 10
+version: 11

@@ -21,6 +21,7 @@ import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
-import java.util.regex.Pattern;
 
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
@@ -38,10 +38,9 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
  * The home of challenge business logic.
  */
 public class ChallengeLogic {
-    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(?<id>[0-9]+)(:(?<data>[0-9]+))?:(?<amount>[0-9]+)");
-    public static final int MS_MIN = 60*1000;
-    public static final int MS_HOUR = 60*MS_MIN;
-    public static final long MS_DAY = 24*MS_HOUR;
+    public static final int MS_MIN = 60 * 1000;
+    public static final int MS_HOUR = 60 * MS_MIN;
+    public static final long MS_DAY = 24 * MS_HOUR;
     public static final int ROWS_OF_RANKS = 6;
     public static final int CHALLENGE_PAGESIZE = ROWS_OF_RANKS * 9;
 
@@ -50,6 +49,7 @@ public class ChallengeLogic {
     private final Map<String, Rank> ranks;
 
     public final ChallengeDefaults defaults;
+    public final ChallengeCompletionLogic completionLogic;
 
     public ChallengeLogic(FileConfiguration config, uSkyBlock plugin) {
         this.config = config;
@@ -57,11 +57,13 @@ public class ChallengeLogic {
         this.defaults = ChallengeFactory.createDefaults(config.getRoot());
         load();
         ranks = ChallengeFactory.createRankMap(config.getConfigurationSection("ranks"), defaults);
+        completionLogic = new ChallengeCompletionLogic(plugin, config);
     }
 
     public boolean isEnabled() {
         return config.getBoolean("allowChallenges", true);
     }
+
     private void load() {
         Arrays.asList(config.getString("ranks", "").split(" "));
     }
@@ -106,7 +108,7 @@ public class ChallengeLogic {
             return false;
         }
         ChallengeCompletion completion = pi.getChallenge(challengeName);
-        if (!challenge.getRank().isAvailable(pi) || !pi.challengeExists(challengeName) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
+        if (!challenge.getRank().isAvailable(pi) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));
             return false;
         }
@@ -207,7 +209,8 @@ public class ChallengeLogic {
                 sb.append(" \u00a74" + diffSpecific
                         + " \u00a7b" + VaultHandler.getItemName(item));
                 hasAll = false;
-            } if (diffGeneral > 0) {
+            }
+            if (diffGeneral > 0) {
                 sb.append(" \u00a74" + diffGeneral
                         + " \u00a7b" + VaultHandler.getItemName(item));
                 hasAll = false;
@@ -245,7 +248,7 @@ public class ChallengeLogic {
         List<Entity> nearbyEntities = player.getNearbyEntities(radius, radius, radius);
         for (Entity entity : nearbyEntities) {
             if (matchMap.containsKey(entity.getType())) {
-                for (Iterator<EntityMatch> it = matchMap.get(entity.getType()).iterator(); it.hasNext();) {
+                for (Iterator<EntityMatch> it = matchMap.get(entity.getType()).iterator(); it.hasNext(); ) {
                     EntityMatch match = it.next();
                     if (match.matches(entity)) {
                         int newCount = countMap.get(match) - 1;
@@ -261,7 +264,7 @@ public class ChallengeLogic {
         }
         if (!countMap.isEmpty()) {
             StringBuilder sb = new StringBuilder();
-            for (Map.Entry<EntityMatch,Integer> entry : countMap.entrySet()) {
+            for (Map.Entry<EntityMatch, Integer> entry : countMap.entrySet()) {
                 sb.append("\u00a7e - ");
                 sb.append(" \u00a74" + entry.getValue() + " \u00a7ex");
                 sb.append(" \u00a7b" + entry.getKey() + "\n");
@@ -316,7 +319,6 @@ public class ChallengeLogic {
 
     private boolean giveReward(Player player, Challenge challenge) {
         String challengeName = challenge.getName();
-        World skyWorld = plugin.getWorld();
         player.sendMessage(tr("\u00a7aYou have completed the {0} challenge!", challengeName));
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         Reward reward;
@@ -334,7 +336,7 @@ public class ChallengeLogic {
         }
         player.giveExp(reward.getXpReward());
         if (defaults.broadcastCompletion && isFirstCompletion) {
-            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("{0} has completed the {1} challenge!", player.getName() , challengeName));
+            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("{0} has completed the {1} challenge!", player.getName(), challengeName));
         }
         player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
         player.sendMessage(tr("\u00a7eExp reward: \u00a7f{0,number,#.#}", reward.getXpReward()));
@@ -371,15 +373,6 @@ public class ChallengeLogic {
         Challenge challenge = getChallenge(challengeName);
         ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
         ItemStack currentChallengeItem = challenge.getDisplayItem(completion, defaults.enableEconomyPlugin);
-        /*
-        if (completion.getTimesCompleted() == 0) {
-            currentChallengeItem.setType(Material.STAINED_GLASS_PANE);
-            currentChallengeItem.setDurability((short) 4);
-        } else if (!challenge.isRepeatable()) {
-            currentChallengeItem.setType(Material.STAINED_GLASS_PANE);
-            currentChallengeItem.setDurability((short) 13);
-        }
-        */
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = meta.getLore();
         if (challenge.isRepeatable() || completion.getTimesCompleted() == 0) {
@@ -415,6 +408,7 @@ public class ChallengeLogic {
         words.add(s.substring(jx));
         return words;
     }
+
     public void populateChallenges(Map<String, ChallengeCompletion> challengeMap) {
         for (Rank rank : ranks.values()) {
             for (Challenge challenge : rank.getChallenges()) {
@@ -470,10 +464,10 @@ public class ChallengeLogic {
         List<String> lores = new ArrayList<>();
         ItemStack currentChallengeItem = rank.getDisplayItem();
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
-        meta4.setDisplayName("\u00a7e\u00a7l" + tr("Rank: {0}",  rank.getName()));
+        meta4.setDisplayName("\u00a7e\u00a7l" + tr("Rank: {0}", rank.getName()));
         lores.add(tr("\u00a7fComplete most challenges in"));
         lores.add(tr("\u00a7fthis rank to unlock the next rank."));
-        if (location < (CHALLENGE_PAGESIZE/2)) {
+        if (location < (CHALLENGE_PAGESIZE / 2)) {
             lores.add(tr("\u00a7eClick here to show previous page"));
         } else {
             lores.add(tr("\u00a7eClick here to show next page"));
@@ -512,5 +506,29 @@ public class ChallengeLogic {
     public int getTotalPages() {
         int totalRows = calculateRows(getRanks());
         return (int) Math.ceil(1f * totalRows / ROWS_OF_RANKS);
+    }
+
+    public Collection<ChallengeCompletion> getChallenges(PlayerInfo playerInfo) {
+        return completionLogic.getChallenges(playerInfo).values();
+    }
+
+    public void completeChallenge(PlayerInfo playerInfo, String challengeName) {
+        completionLogic.completeChallenge(playerInfo, challengeName);
+    }
+
+    public void resetChallenge(PlayerInfo playerInfo, String challenge) {
+        completionLogic.resetChallenge(playerInfo, challenge);
+    }
+
+    public int checkChallenge(PlayerInfo playerInfo, String challenge) {
+        return completionLogic.checkChallenge(playerInfo, challenge);
+    }
+
+    public ChallengeCompletion getChallenge(PlayerInfo playerInfo, String challenge) {
+        return completionLogic.getChallenge(playerInfo, challenge);
+    }
+
+    public void resetAllChallenges(PlayerInfo playerInfo) {
+        completionLogic.resetAllChallenges(playerInfo);
     }
 }

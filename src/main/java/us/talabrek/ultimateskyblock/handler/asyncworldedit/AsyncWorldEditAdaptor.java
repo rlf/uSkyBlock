@@ -2,15 +2,11 @@ package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.event.extent.EditSessionEvent;
-import com.sk89q.worldedit.extension.platform.Actor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.primesoft.asyncworldedit.AsyncWorldEditMain;
 import org.primesoft.asyncworldedit.api.progressDisplay.IProgressDisplay;
 import org.primesoft.asyncworldedit.playerManager.PlayerEntry;
-import org.primesoft.asyncworldedit.worldedit.AsyncEditSession;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
@@ -151,12 +147,7 @@ public class AsyncWorldEditAdaptor {
     }
 
     public static EditSession createSession(BukkitWorld world, int maxblocks) {
-        AsyncWorldEditMain awe = getAWE();
-        WorldEditPlugin we = WorldEditHandler.getWorldEdit();
-        com.sk89q.worldedit.util.eventbus.EventBus eventBus = we.getWorldEdit().getEventBus();
-        Actor actor = WorldEditHandler.createActor();
-        EditSessionEvent event = new EditSessionEvent(world, actor, maxblocks, EditSession.Stage.BEFORE_HISTORY);
-        return new AsyncEditSession(awe, PlayerEntry.UNKNOWN, eventBus, world, maxblocks, null, event);
+        return WorldEditHandler.getWorldEdit().getWorldEdit().getEditSessionFactory().getEditSession(world, maxblocks);
     }
 
 }
