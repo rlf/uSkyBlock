@@ -7,7 +7,7 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public enum TimeUtil {
     ;
-    private static final Pattern TIME_PATTERN = Pattern.compile("((?<h>[0-9]+)h)?\\s*((?<m>[0-9]+)m)?\\s*((?<s>[0-9]+)s)?\\s*((?<ms>[0-9]+)ms)?");
+    private static final Pattern TIME_PATTERN = Pattern.compile("((?<d>[0-9]+)d)?\\s*((?<h>[0-9]+)h)?\\s*((?<m>[0-9]+)m)?\\s*((?<s>[0-9]+)s)?\\s*((?<ms>[0-9]+)ms)?");
     private static final long SEC = 1000;
     private static final long MIN = 60 * SEC;
     private static final long HOUR = 60 * MIN;
@@ -17,6 +17,9 @@ public enum TimeUtil {
         Matcher m = TIME_PATTERN.matcher(s);
         if (m.matches()) {
             long t = 0;
+            if (m.group("d") != null) {
+                t += Integer.parseInt(m.group("d"), 10) * DAYS;
+            }
             if (m.group("h") != null) {
                 t += Integer.parseInt(m.group("h"), 10) * HOUR;
             }

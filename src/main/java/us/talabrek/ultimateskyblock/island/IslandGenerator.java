@@ -9,7 +9,7 @@ import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
@@ -54,7 +54,7 @@ public class IslandGenerator {
     }
 
 
-    public String createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next) {
+    public void createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next) {
         log.entering(CN, "createIsland", new Object[]{plugin, playerPerk.getPlayerInfo().getPlayerName(), next});
         log.fine("creating island for " + playerPerk.getPlayerInfo().getPlayerName() + " at " + next);
         // Hacky, but clear the Orphan info
@@ -78,26 +78,23 @@ public class IslandGenerator {
             if (permFile != null) {
                 defaultFile = permFile;
             }
-            if (defaultFile != null && WorldEditHandler.loadIslandSchematic(uSkyBlock.skyBlockWorld, defaultFile, next, playerPerk)) {
-                cSchem = FileUtil.getBasename(defaultFile);
-                hasIslandNow = true;
+            if (defaultFile != null) {
                 log.fine("chose schematic " + defaultFile);
+                AsyncWorldEditHandler.loadIslandSchematic(defaultFile, next, playerPerk);
+                hasIslandNow = true;
             }
         }
         if (!hasIslandNow) {
             if (!Settings.island_useOldIslands) {
                 log.fine("generating a uSkyBlock default island");
                 generateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerPerk, uSkyBlock.skyBlockWorld);
-                cSchem = "default";
             } else {
                 log.fine("generating a skySMP island");
                 oldGenerateIslandBlocks(next.getBlockX(), next.getBlockZ(), playerPerk, uSkyBlock.skyBlockWorld);
-                cSchem = "skySMP";
             }
         }
         next.setY((double) Settings.island_height);
         log.exiting(CN, "createIsland");
-        return cSchem;
     }
 
     public void generateIslandBlocks(final int x, final int z, final PlayerPerk playerPerk, final World world) {

@@ -99,7 +99,7 @@ msgid "§aYou have completed the {0} challenge!"
 msgstr "§a你完成了挑战:§e {0}"
 
 #, fuzzy, java-format
-msgid "{0} has completed the {1} challenge!"
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr "§a你完成了挑战:§e {0}"
 
 #, java-format
@@ -1067,6 +1067,14 @@ msgstr "§a将你传送回自己的岛屿."
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr "§4你的岛屿已经锁定,在启用传送点之前请先解锁."
 
+#, fuzzy, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr "§b{0}§d禁止了岛屿传送点."
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d禁止了岛屿传送点."
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr "§c你没有权限启用/禁用岛屿的传送点!"
 
@@ -1271,24 +1279,32 @@ msgstr "§4输入的名字§e{0}§4未找到"
 msgid "§eConverted "
 msgstr "§e转换"
 
+#, fuzzy
+msgid "The island has been created."
+msgstr "§e{0} 的岛屿在 {1} 被保护"
+
+#, fuzzy, java-format
+msgid "§b{0}§d locked the island."
+msgstr "§b{0}§d禁止了岛屿传送点."
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4因为你的岛屿处于锁定状态,岛屿传送点也将禁用."
 
-#, java-format
-msgid "§b{0}§d deactivated the island warp."
+#, fuzzy, java-format
+msgid "§b{0}§d unlocked the island."
 msgstr "§b{0}§d禁止了岛屿传送点."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
 msgstr ""
 
-#, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr ""
-
 #, fuzzy, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0}被从当前岛屿上移除."
+
+#, java-format
+msgid "§9{1} §7- {0}"
+msgstr ""
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
@@ -2072,6 +2088,10 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#, fuzzy
+#~ msgid "{0}§e completed challenge §9{1}"
+#~ msgstr "§e§l点击来完成这个挑战。"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

@@ -336,7 +336,7 @@ public class ChallengeLogic {
         }
         player.giveExp(reward.getXpReward());
         if (defaults.broadcastCompletion && isFirstCompletion) {
-            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("{0} has completed the {1} challenge!", player.getName(), challengeName));
+            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", player.getName(), challengeName));
         }
         player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
         player.sendMessage(tr("\u00a7eExp reward: \u00a7f{0,number,#.#}", reward.getXpReward()));

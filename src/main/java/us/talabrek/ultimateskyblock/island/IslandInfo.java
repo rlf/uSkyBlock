@@ -15,6 +15,7 @@ import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;
@@ -22,20 +23,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static us.talabrek.ultimateskyblock.util.FileUtil.readConfig;
+import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * Data object for an island
  */
 public class IslandInfo {
+    private static final Pattern OLD_LOG_PATTERN = Pattern.compile("\u00a7d\\[(?<date>[^\\]]+)\\]\u00a77 (?<msg>.*)");
     private static final int YML_VERSION = 1;
     private static File directory = new File(".");
 
@@ -97,11 +103,10 @@ public class IslandInfo {
         config.set("general.warpLocationY", 0);
         config.set("general.warpLocationZ", 0);
         config.set("general.warpActive", false);
-        config.set("log.logPos", 1);
         config.set("version", YML_VERSION);
         config.set("party", null);
         setupPartyLeader(leader);
-        sendMessageToIslandGroup("The island has been created.", false);
+        sendMessageToIslandGroup(false, marktr("The island has been created."));
     }
 
     public void setupPartyLeader(final String leader) {
@@ -302,15 +307,21 @@ public class IslandInfo {
         return config.getString("general.biome", "OCEAN").toUpperCase();
     }
 
-    public void log(String message) {
-        int currentLogPos = config.getInt("log.logPos");
-        config.set("log." + (++currentLogPos), message);
-        if (currentLogPos <= 10) {
-            config.set("log.logPos", currentLogPos);
-        } else {
-            // Wrap around
-            config.set("log.logPos", 1);
+    public void log(String message, Object[] args) {
+        List<String> log = config.getStringList("log");
+        StringBuilder sb = new StringBuilder();
+        sb.append(System.currentTimeMillis());
+        sb.append(";").append(message);
+        for (Object arg : args) {
+            sb.append(";").append(arg);
         }
+        log.add(0, sb.toString());
+        int logSize = uSkyBlock.getInstance().getConfig().getInt("options.island.log-size", 10);
+        if (log.size() > logSize) {
+            log = log.subList(0, logSize);
+        }
+        config.set("log", log);
+        save();
     }
 
     public int getPartySize() {
@@ -345,11 +356,11 @@ public class IslandInfo {
     public void lock(Player player) {
         WorldGuardHandler.islandLock(player, name);
         config.set("general.locked", true);
-        sendMessageToIslandGroup("\u00a7b" + player.getName() + "\u00a7d locked the island.", true);
+        sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d locked the island."), player.getName());
         if (hasWarp()) {
             config.set("general.warpActive", false);
             player.sendMessage(tr("\u00a74Since your island is locked, your incoming warp has been deactivated."));
-            sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d deactivated the island warp.", player.getName()), true);
+            sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d deactivated the island warp."), player.getName());
         }
         save();
     }
@@ -357,21 +368,21 @@ public class IslandInfo {
     public void unlock(Player player) {
         WorldGuardHandler.islandUnlock(player, name);
         config.set("general.locked", false);
-        sendMessageToIslandGroup("\u00a7b" + player.getName() + "\u00a7d unlocked the island.", true);
+        sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d unlocked the island."), player.getName());
         save();
     }
 
-    public void sendMessageToIslandGroup(String message, boolean broadcast) {
+    public void sendMessageToIslandGroup(boolean broadcast, String message, Object... args) {
         Date date = new Date();
         final String dateTxt = DateFormat.getDateInstance(3).format(date).toString();
         if (broadcast) {
             for (String player : getMembers()) {
                 if (Bukkit.getPlayer(player) != null) {
-                    Bukkit.getPlayer(player).sendMessage(tr("\u00a7cSKY \u00a7f> \u00a77 {0}", message));
+                    Bukkit.getPlayer(player).sendMessage(tr("\u00a7cSKY \u00a7f> \u00a77 {0}", tr(message, args)));
                 }
             }
         }
-        log(tr("\u00a7d[{0}]\u00a77 {1}", dateTxt, message));
+        log(message, args);
     }
 
     public boolean isBanned(Player player) {
@@ -460,7 +471,7 @@ public class IslandInfo {
         config.set("party.members." + playername, null);
         config.set("party.currentSize", getPartySize() - 1);
         save();
-        sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has been removed from the island group.", playername), true);
+        sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d has been removed from the island group."), playername);
     }
 
     public void setLevel(double score) {
@@ -483,14 +494,49 @@ public class IslandInfo {
 
     public List<String> getLog() {
         List<String> log = new ArrayList<>();
-        int cLog = config.getInt("log.logPos", 1);
-        for (int i = 0; i < 10; i++) {
-            String msg = config.getString("log." + (((cLog + i) % 10) + 1), "");
-            if (msg != null && !msg.trim().isEmpty()) {
-                log.add(msg);
+        if (config.isInt("log.logPos")) {
+            int cLog = config.getInt("log.logPos", 1);
+            for (int i = 0; i < 10; i++) {
+                String msg = config.getString("log." + (((cLog + i) % 10) + 1), "");
+                if (msg != null && !msg.trim().isEmpty()) {
+                    log.add(msg);
+                }
+            }
+        } else {
+            log.addAll(config.getStringList("log"));
+        }
+        List<String> convertedList = new ArrayList<>();
+        long t = System.currentTimeMillis();
+        for (String logEntry : log) {
+            String[] split = logEntry.split(";");
+            if (split.length >= 2) {
+                long then = Long.parseLong(split[0]);
+                String msg = split[1];
+                Object[] args = new Object[split.length-2];
+                System.arraycopy(split, 2, args, 0, args.length);
+                convertedList.add(tr("\u00a79{1} \u00a77- {0}", TimeUtil.millisAsString(t-then), tr(msg, args)));
+            } else {
+                Matcher m = OLD_LOG_PATTERN.matcher(logEntry);
+                if (m.matches()) {
+                    String date = m.group("date");
+                    Date parsedDate = null;
+                    try {
+                        parsedDate = DateFormat.getDateInstance(3).parse(date);
+                    } catch (ParseException e) {
+                        // Ignore
+                    }
+                    String msg = m.group("msg");
+                    if (parsedDate != null) {
+                        convertedList.add(tr("\u00a79{1} \u00a77- {0}", TimeUtil.millisAsString(t-parsedDate.getTime()), msg));
+                    } else {
+                        convertedList.add(logEntry);
+                    }
+                } else {
+                    convertedList.add(logEntry);
+                }
             }
         }
-        return log;
+        return convertedList;
     }
 
     public boolean isParty() {

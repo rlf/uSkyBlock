@@ -7,6 +7,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class ToggleWarp extends RequireIslandCommand {
@@ -22,10 +23,10 @@ public class ToggleWarp extends RequireIslandCommand {
                     player.sendMessage(tr("\u00a74Your island is locked. You must unlock it before enabling your warp."));
                     return true;
                 }
-                island.sendMessageToIslandGroup("\u00a7b" +player.getName() + "\u00a7d activated the island warp.", true);
+                island.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d activated the island warp."), player.getName());
                 island.setWarpActive(true);
             } else {
-                island.sendMessageToIslandGroup("\u00a7b" +player.getName() + "\u00a7d deactivated the island warp.", true);
+                island.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d deactivated the island warp."), player.getName());
                 island.setWarpActive(false);
             }
         } else {

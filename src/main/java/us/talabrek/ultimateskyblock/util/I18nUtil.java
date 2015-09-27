@@ -22,6 +22,13 @@ public enum I18nUtil {;
         return getI18n().tr(s, args);
     }
 
+    /**
+     * Just used for marking translations (dynamic ones) for .po files.
+     */
+    public static String marktr(String key) {
+        return key;
+    }
+
     public static I18n getI18n() {
         if (i18n == null) {
             i18n = new I18n(I18nFactory.getI18n(I18nUtil.class, getLocale()));

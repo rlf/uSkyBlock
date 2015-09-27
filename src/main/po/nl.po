@@ -100,8 +100,8 @@ msgstr "§eJe komt de volgende items tekort: {0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aJe hebt de {0} uitdaging volbracht!"
 
-#, java-format
-msgid "{0} has completed the {1} challenge!"
+#, fuzzy, java-format
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr "{0} heeft de {1} uitdaging volbracht!"
 
 #, java-format
@@ -1057,6 +1057,14 @@ msgstr ""
 "§4Je eiland is gesloten. Je moet het eerst ongrendelen voordat je de warp "
 "kan aanzetten."
 
+#, fuzzy, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr "§cJe hebt geen toestemming om je eiland warp aan/uit te zetten!"
 
@@ -1261,11 +1269,19 @@ msgstr "§4Geen importuer met de naam §e{0}§4 gevonden"
 msgid "§eConverted "
 msgstr "§eConverted "
 
+#, fuzzy
+msgid "The island has been created."
+msgstr "§e{0}s eiland op {1} is nu beveiliging"
+
+#, fuzzy, java-format
+msgid "§b{0}§d locked the island."
+msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4Nu je eiland is gesloten is ook je inkomende warp gedeactiveerd."
 
-#, java-format
-msgid "§b{0}§d deactivated the island warp."
+#, fuzzy, java-format
+msgid "§b{0}§d unlocked the island."
 msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
 
 #, java-format
@@ -1273,12 +1289,12 @@ msgid "§cSKY §f> §7 {0}"
 msgstr "§cSKY §f> §7 {0}"
 
 #, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr "§d[{0}]§7 {1}"
-
-#, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d is verwijderd van het eiland."
+
+#, fuzzy, java-format
+msgid "§9{1} §7- {0}"
+msgstr "§d[{0}]§7 {1}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
@@ -2047,6 +2063,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "{0}§e completed challenge §9{1}"
+#~ msgstr "§eOm deze uitdaging te voltooien, gebruik  §f/c c {0}"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

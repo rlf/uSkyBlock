@@ -24,6 +24,8 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 public class PlayerInfo implements Serializable {
     private static final String CN = PlayerInfo.class.getName();
     private static final Logger log = Logger.getLogger(CN);
@@ -118,6 +120,10 @@ public class PlayerInfo implements Serializable {
 
     public void completeChallenge(final String challenge) {
         uSkyBlock.getInstance().getChallengeLogic().completeChallenge(this, challenge);
+        IslandInfo island = getIslandInfo();
+        if (island != null) {
+            island.sendMessageToOnlineMembers(tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", getPlayerName(), challenge));
+        }
     }
 
     public void resetChallenge(final String challenge) {

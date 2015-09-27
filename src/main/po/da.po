@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-27 00:55+0200\n"
+"PO-Revision-Date: 2015-09-27 17:34+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -100,8 +100,8 @@ msgstr "§eDu mangler følgende:{0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aDo you gennemført {0}-udfordringen!"
 
-#, java-format
-msgid "{0} has completed the {1} challenge!"
+#, fuzzy, java-format
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr "{0} har gennemført {1} udfordringen!"
 
 #, java-format
@@ -474,12 +474,12 @@ msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4Intet fladland fundet ved {0}'s ø"
 
 msgid "flushes all caches to files"
-msgstr ""
+msgstr "gemmer alle caches til filer"
 
 #, java-format
 msgid ""
 "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
-msgstr ""
+msgstr "§eGemte §a{0} øer§e, §b{1} spillere og §6{2} udfordringer."
 
 msgid "manually update the top 10 list"
 msgstr "opdater top 10 listen manuelt"
@@ -1039,6 +1039,14 @@ msgstr ""
 "§4Din er er låst. Du bliver nødt til at låse den op, før du kan aktivere "
 "besøgsportal."
 
+#, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr "§b{0}§d aktiverede øens besøgsportal."
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d deaktiverede øens besøgsportal."
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr ""
 "§cDu har ikke tilladelse til at aktivere/deaktivere din ø's besøgsportal!"
@@ -1240,24 +1248,31 @@ msgstr "§4Ingen §e{0}§4 importer fundet"
 msgid "§eConverted "
 msgstr "§eKonverterede "
 
+msgid "The island has been created."
+msgstr "Øen blev oprettet"
+
+#, java-format
+msgid "§b{0}§d locked the island."
+msgstr "§b{0}§d låste øen."
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4Da din ø er låst, er din besøgsportal blevet deaktiveret."
 
 #, java-format
-msgid "§b{0}§d deactivated the island warp."
-msgstr "§b{0}§d deaktiverede øens besøgsportal."
+msgid "§b{0}§d unlocked the island."
+msgstr "§b{0}§d låste øen op."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
 msgstr "§cSKY §f> §7 {0}"
 
 #, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr "§d[{0}]§7 {1}"
-
-#, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d er blevet fjernet fra øens medlemsliste."
+
+#, fuzzy, java-format
+msgid "§9{1} §7- {0}"
+msgstr "§7[{0}] §9{1}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cØen du er på bliver slettet! Du bliver sendt til spawn."
@@ -2000,6 +2015,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "{0}§e completed challenge §9{1}"
+#~ msgstr "§eFor at gennemføre denne udfordring, brug §f/c c {0}"
 
 #, fuzzy
 #~ msgid ".displayName"

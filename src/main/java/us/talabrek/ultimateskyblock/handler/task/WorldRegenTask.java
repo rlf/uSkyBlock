@@ -30,7 +30,6 @@ public class WorldRegenTask implements IncrementalTask {
         this.index = offset + length;
         for (int i = offset; i < (offset+length) && i < chunks.size(); i++) {
             Vector2D chunk = chunks.get(i);
-            world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ());
             world.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ());
         }
         return isComplete();

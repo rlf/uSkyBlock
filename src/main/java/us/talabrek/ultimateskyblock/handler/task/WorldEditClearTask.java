@@ -61,6 +61,7 @@ public class WorldEditClearTask extends BukkitRunnable implements IncrementalTas
         for (int i = 0; i < length; i++) {
             EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
             editSession.setFastMode(true);
+            editSession.enableQueue();
             if (inner.hasNext()) {
                 Vector2D chunk = inner.next();
                 inner.remove();
@@ -83,7 +84,7 @@ public class WorldEditClearTask extends BukkitRunnable implements IncrementalTas
                     plugin.getLogger().log(Level.WARNING, "Unable to clear flat-land", e);
                 }
             }
-            editSession.commit();
+            editSession.flushQueue();
         }
         return isComplete();
     }

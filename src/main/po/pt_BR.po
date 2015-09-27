@@ -99,8 +99,8 @@ msgstr "§eVocê deve ter os seguintes items perto: {0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aVocê completou o desafio {0}!"
 
-#, java-format
-msgid "{0} has completed the {1} challenge!"
+#, fuzzy, java-format
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr "{0} completou o desafio {1}!"
 
 #, java-format
@@ -1040,6 +1040,14 @@ msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr ""
 "§4Sua ilha está trancada. Você deve destranca-lá antes de ativar o warp."
 
+#, fuzzy, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr "§b{0}§d desativou o warp até a ilha."
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d desativou o warp até a ilha."
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr "§cVocê não tem permissão para ativar/desativar o warp da ilha!"
 
@@ -1246,11 +1254,19 @@ msgstr "§4Nenhum importador com o nome §e{0}§4 encontrado"
 msgid "§eConverted "
 msgstr "§eConvertido"
 
+#, fuzzy
+msgid "The island has been created."
+msgstr "§eA ilha de {0} em {1} foi protegida"
+
+#, fuzzy, java-format
+msgid "§b{0}§d locked the island."
+msgstr "§b{0}§d desativou o warp até a ilha."
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4O warp da ilha foi desativado, por que a ilha foi trancada."
 
-#, java-format
-msgid "§b{0}§d deactivated the island warp."
+#, fuzzy, java-format
+msgid "§b{0}§d unlocked the island."
 msgstr "§b{0}§d desativou o warp até a ilha."
 
 #, java-format
@@ -1258,12 +1274,12 @@ msgid "§cSKY §f> §7 {0}"
 msgstr "§cINFO §f> §7 {0}"
 
 #, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr "§d[{0}]§7 {1}"
-
-#, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d foi removido do grupo."
+
+#, fuzzy, java-format
+msgid "§9{1} §7- {0}"
+msgstr "§d[{0}]§7 {1}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
@@ -2021,6 +2037,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "{0}§e completed challenge §9{1}"
+#~ msgstr "§ePara completar esse desafio, use §f/c c {0}"
 
 #, fuzzy
 #~ msgid ".displayName"

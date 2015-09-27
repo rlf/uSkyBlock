@@ -7,6 +7,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class SetWarpCommand extends RequireIslandCommand {
@@ -22,7 +23,7 @@ public class SetWarpCommand extends RequireIslandCommand {
             player.sendMessage(tr("\u00a7cYou need to be on your own island to set the warp!"));
         } else {
             island.setWarpLocation(player.getLocation());
-            island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d changed the island warp location.", player.getName()), true);
+            island.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d changed the island warp location."), player.getName());
         }
         return true;
     }

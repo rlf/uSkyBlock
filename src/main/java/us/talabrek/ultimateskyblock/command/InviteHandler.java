@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
@@ -78,7 +79,7 @@ public class InviteHandler {
             }
             IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
             if (island != null) {
-                island.sendMessageToIslandGroup(tr("{0}\u00a7e has rejected the invitation.", player.getDisplayName()), true);
+                island.sendMessageToIslandGroup(true, marktr("{0}\u00a7e has rejected the invitation."), player.getDisplayName());
             }
             if (waitingInvites.containsKey(invite.getIslandName())) {
                 waitingInvites.get(invite.getIslandName()).remove(player.getUniqueId());
@@ -143,7 +144,7 @@ public class InviteHandler {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         island.addMember(playerInfo);
         playerInfo.save();
-        island.sendMessageToIslandGroup(tr("\u00a7b{0}\u00a7d has joined your island group.", player.getDisplayName()), true);
+        island.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d has joined your island group."), player.getDisplayName());
         return true;
     }
 
@@ -168,8 +169,7 @@ public class InviteHandler {
             if (invite != null && invite.getTimeoutTask() != null) {
                 invite.getTimeoutTask().cancel();
             }
-            String msg = tr("\u00a7eInvitation for {0}\u00a7e has timedout or been cancelled.", invite.getDisplayName());
-            islandInfo.sendMessageToIslandGroup(msg, true);
+            islandInfo.sendMessageToIslandGroup(true, marktr("\u00a7eInvitation for {0}\u00a7e has timedout or been cancelled."), invite.getDisplayName());
             Player player = Bukkit.getPlayer(uuid);
             if (player != null && player.isOnline()) {
                 player.sendMessage(tr("\u00a7eInvitation for {0}'s island has timedout or been cancelled.", islandInfo.getLeader()));

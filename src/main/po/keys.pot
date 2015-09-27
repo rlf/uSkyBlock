@@ -98,7 +98,7 @@ msgid "§aYou have completed the {0} challenge!"
 msgstr ""
 
 #, java-format
-msgid "{0} has completed the {1} challenge!"
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr ""
 
 #, java-format
@@ -1002,6 +1002,14 @@ msgstr ""
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr ""
 
+#, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr ""
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr ""
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr ""
 
@@ -1192,11 +1200,18 @@ msgstr ""
 msgid "§eConverted "
 msgstr ""
 
+msgid "The island has been created."
+msgstr ""
+
+#, java-format
+msgid "§b{0}§d locked the island."
+msgstr ""
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr ""
 
 #, java-format
-msgid "§b{0}§d deactivated the island warp."
+msgid "§b{0}§d unlocked the island."
 msgstr ""
 
 #, java-format
@@ -1204,11 +1219,11 @@ msgid "§cSKY §f> §7 {0}"
 msgstr ""
 
 #, java-format
-msgid "§d[{0}]§7 {1}"
+msgid "§b{0}§d has been removed from the island group."
 msgstr ""
 
 #, java-format
-msgid "§b{0}§d has been removed from the island group."
+msgid "§9{1} §7- {0}"
 msgstr ""
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."

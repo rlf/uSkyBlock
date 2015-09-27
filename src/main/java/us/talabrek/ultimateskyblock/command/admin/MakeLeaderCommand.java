@@ -11,6 +11,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
@@ -64,7 +65,7 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
                     islandPlayer.save();
                     playerInfo.save();
                     WorldGuardHandler.updateRegion(sender, islandInfo);
-                    islandInfo.sendMessageToIslandGroup(tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", sender.getName(), playerName), true);
+                    islandInfo.sendMessageToIslandGroup(true, marktr("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
                 }
             });
             return true;

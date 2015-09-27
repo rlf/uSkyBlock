@@ -101,8 +101,8 @@ msgstr "§eУ вас мало предметов:{0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aВы выполнили задание {0} !"
 
-#, java-format
-msgid "{0} has completed the {1} challenge!"
+#, fuzzy, java-format
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr "{0} выполнил задание {1}!"
 
 #, java-format
@@ -1046,6 +1046,14 @@ msgstr ""
 "§4Ваш остров закрыт. Вы должны открыть его перед включением точек "
 "перемещения."
 
+#, fuzzy, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr "§b{0}§d деактивировал точку перемещения на острове."
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d деактивировал точку перемещения на острове."
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr "§cУ вас недостаточно прав для вкл/выкл точек перемещения на острове!"
 
@@ -1251,11 +1259,19 @@ msgstr "§4Не найден импортер с именем §e{0}"
 msgid "§eConverted "
 msgstr "§eКонвертировано"
 
+#, fuzzy
+msgid "The island has been created."
+msgstr "§eОстров {0} в {1} защищен"
+
+#, fuzzy, java-format
+msgid "§b{0}§d locked the island."
+msgstr "§b{0}§d деактивировал точку перемещения на острове."
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4С момента закрытия острова точка перемещения деактивирована."
 
-#, java-format
-msgid "§b{0}§d deactivated the island warp."
+#, fuzzy, java-format
+msgid "§b{0}§d unlocked the island."
 msgstr "§b{0}§d деактивировал точку перемещения на острове."
 
 #, java-format
@@ -1263,12 +1279,12 @@ msgid "§cSKY §f> §7 {0}"
 msgstr "§cSKY §f> §7 {0}"
 
 #, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr "§d[{0}]§7 {1}"
-
-#, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d удален из участников острова."
+
+#, fuzzy, java-format
+msgid "§9{1} §7- {0}"
+msgstr "§d[{0}]§7 {1}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
@@ -2015,6 +2031,10 @@ msgstr "м"
 
 msgid "s"
 msgstr "с"
+
+#, fuzzy
+#~ msgid "{0}§e completed challenge §9{1}"
+#~ msgstr "§eДля завершения задания введите §f/c c {0}"
 
 #, fuzzy
 #~ msgid ".displayName"

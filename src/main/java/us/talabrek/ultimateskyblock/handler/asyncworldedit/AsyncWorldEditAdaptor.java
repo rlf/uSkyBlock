@@ -3,14 +3,20 @@ package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.primesoft.asyncworldedit.AsyncWorldEditMain;
 import org.primesoft.asyncworldedit.api.progressDisplay.IProgressDisplay;
+import org.primesoft.asyncworldedit.injector.classfactory.IJob;
+import org.primesoft.asyncworldedit.injector.core.InjectorCore;
 import org.primesoft.asyncworldedit.playerManager.PlayerEntry;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.worldedit.ConsolePlayer;
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -81,7 +87,7 @@ public class AsyncWorldEditAdaptor {
                         if (job.progress(blocksPlaced) > 0 && isFirst && pendingJobs.size() > 1) {
                             log.finer("remove: " + job);
                             it.remove();
-                            markJobs(maxQueuedBlocks, queuedBlocks-blocksPlaced);
+                            markJobs(maxQueuedBlocks, queuedBlocks - blocksPlaced);
                         }
                         isFirst = false;
                     }
@@ -128,7 +134,7 @@ public class AsyncWorldEditAdaptor {
     public static void onDisable(uSkyBlock plugin) {
         if (isAWE()) {
             AsyncWorldEditMain awe = getAWE();
-                awe.getProgressDisplayManager().unregisterProgressDisplay(progressDisplay);
+            awe.getProgressDisplayManager().unregisterProgressDisplay(progressDisplay);
         }
     }
 
@@ -150,4 +156,45 @@ public class AsyncWorldEditAdaptor {
         return WorldEditHandler.getWorldEdit().getWorldEdit().getEditSessionFactory().getEditSession(world, maxblocks);
     }
 
+    public static void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
+        InjectorCore.getInstance().getClassFactory().getJobProcessor().executeJob(ConsolePlayer.getInstance(), new IJob() {
+            @Override
+            public String getName() {
+                return "loadIslandSchematic";
+            }
+
+            @Override
+            public void execute() {
+                WorldEditHandler.loadIslandSchematic(file, origin, playerPerk);
+                /*
+                log.finer("Trying to load schematic " + file);
+                try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
+                    BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
+                    ClipboardReader reader = ClipboardFormat.SCHEMATIC.getReader(in);
+
+                    WorldData worldData = bukkitWorld.getWorldData();
+                    Clipboard clipboard = reader.read(worldData);
+                    ClipboardHolder holder = new ClipboardHolder(clipboard, worldData);
+
+                    Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
+                    int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
+                    final EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
+                    editSession.enableQueue();
+                    editSession.setFastMode(true);
+                    Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+                    final Operation operation = holder
+                            .createPaste(editSession, worldData)
+                            .to(to)
+                            .ignoreAirBlocks(false)
+                            .build();
+                    Operations.completeBlindly(operation);
+                    AsyncWorldEditHandler.registerCompletion(player);
+                    editSession.flushQueue();
+                } catch (IOException e) {
+                    uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
+                }
+                */
+            }
+        });
+    }
 }

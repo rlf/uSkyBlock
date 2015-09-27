@@ -99,8 +99,8 @@ msgstr "§eYou be ye following items short:{0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aYou have completed yonder {0} challenge!"
 
-#, java-format
-msgid "{0} has completed the {1} challenge!"
+#, fuzzy, java-format
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr "{0} has completed thar {1} challenge!"
 
 #, java-format
@@ -1033,6 +1033,14 @@ msgstr "enable/disable warping to ye island."
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr "§4Your island be locked. You must unlock it before enabling ye warp."
 
+#, fuzzy, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr "§b{0}§d deactivated yonder island warp."
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d deactivated yonder island warp."
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr "§cYou do not have permission to enable/disable ye island's warp!"
 
@@ -1234,24 +1242,32 @@ msgstr "§4No importer named §e{0}§4 found"
 msgid "§eConverted "
 msgstr "§eConverted "
 
+#, fuzzy
+msgid "The island has been created."
+msgstr "§e{0}s island at {1} has been protected"
+
+#, fuzzy, java-format
+msgid "§b{0}§d locked the island."
+msgstr "§b{0}§d deactivated yonder island warp."
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4Since ye island be locked, ye incoming warp has been deactivated."
 
-#, java-format
-msgid "§b{0}§d deactivated the island warp."
+#, fuzzy, java-format
+msgid "§b{0}§d unlocked the island."
 msgstr "§b{0}§d deactivated yonder island warp."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
 msgstr ""
 
-#, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr ""
-
 #, fuzzy, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} has been removed from yonder island."
+
+#, java-format
+msgid "§9{1} §7- {0}"
+msgstr ""
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cThe island you be on be being deleted! Sending you to spawn."
@@ -2006,6 +2022,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "{0}§e completed challenge §9{1}"
+#~ msgstr "§eTo complete this challenge, use §f/c c {0}"
 
 #, fuzzy
 #~ msgid ".displayName"

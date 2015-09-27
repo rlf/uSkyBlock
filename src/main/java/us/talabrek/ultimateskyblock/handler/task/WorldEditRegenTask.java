@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
@@ -9,6 +10,7 @@ import com.sk89q.worldedit.regions.Region;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.async.IncrementalTask;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +24,12 @@ public class WorldEditRegenTask implements IncrementalTask {
     private static final BaseBlock AIR = new BaseBlock(0);
     private static final BaseBlock GLASS = new BaseBlock(20);
     public static final int INCREMENT = 4;
-    private EditSession editSession;
-    private final BukkitWorld bukkitWorld;
     private final List<Region> regions;
     private final int size;
+    private final World world;
 
     public WorldEditRegenTask(World world, Set<Region> borderRegions) {
-        bukkitWorld = new BukkitWorld(world);
+        this.world = world;
         // TODO: 21/09/2015 - R4zorax: Note this will NOT use AWE
         //editSession = new EditSession(bukkitWorld, 255 * Settings.island_protectionRange * Settings.island_protectionRange);
         // This one will get an AWE session...
@@ -75,11 +76,17 @@ public class WorldEditRegenTask implements IncrementalTask {
     public boolean execute(Plugin plugin, int offset, int length) {
         log.log(Level.FINE, "Executing WorldEditRegen of regions " + offset + "-" + (offset+length) + " of " + regions.size() + " regions");
         for (int i = 0; i < length && !regions.isEmpty(); i++) {
-            Region region = regions.remove(0);
-            editSession = new EditSession(bukkitWorld, region.getArea()*255);
+            final Region region = regions.remove(0);
+            final BukkitWorld bukkitWorld = new BukkitWorld(world);
+            final EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, region.getArea() * 255);
             editSession.setFastMode(true);
-            bukkitWorld.regenerate(region, editSession);
-            editSession.commit();
+            editSession.enableQueue();
+            try {
+                editSession.setBlocks(region, AIR);
+            } catch (MaxChangedBlocksException e) {
+                log.log(Level.INFO, "Warning: we got MaxChangedBlocks from WE, please increase it!");
+            }
+            AsyncWorldEditHandler.flushQueue(editSession);
         }
         return isComplete();
     }

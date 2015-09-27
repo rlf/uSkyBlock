@@ -52,7 +52,7 @@ class PlayerJob {
             return blocksPlaced;
         }
         this.placedBlocks = Math.min(blocksPlaced-startOffset, (maxQueuedBlocks-offset));
-        this.percentage = Math.min((100d * getPlacedBlocks() / maxQueuedBlocks), 100);
+        this.percentage = Math.floor(Math.min((100d * getPlacedBlocks() / maxQueuedBlocks), 100));
         showProgress(tr("\u00a79Creating island...\u00a7e{0,number,###}%", percentage));
         log.finer("progress: " + this);
         return blocksPlaced-placedBlocks;

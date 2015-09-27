@@ -104,7 +104,7 @@ msgid "§aYou have completed the {0} challenge!"
 msgstr "§aDu hast die {0} Aufgebe beendet!"
 
 #, fuzzy, java-format
-msgid "{0} has completed the {1} challenge!"
+msgid "§9{0}§f has completed the §9{1}§f challenge!"
 msgstr "§aDu hast die {0} Aufgebe beendet!"
 
 #, java-format
@@ -1078,6 +1078,14 @@ msgstr ""
 "§4Deine Insel ist gesperrt. Du musst zuerst entsperren um Warpen frei zu "
 "schalten."
 
+#, fuzzy, java-format
+msgid "§b{0}§d activated the island warp."
+msgstr "§b{0}§d hat den Inselwarppunkt Deaktiviert."
+
+#, java-format
+msgid "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d hat den Inselwarppunkt Deaktiviert."
+
 msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr ""
 "§cDu verfügst nicht über die rechte um den Insel warppunkt ein-,"
@@ -1299,25 +1307,33 @@ msgstr "§4Kein import mit dem Namen §e{0}§4 gefunden"
 msgid "§eConverted "
 msgstr "§eUmgewandelt"
 
+#, fuzzy
+msgid "The island has been created."
+msgstr "§e{0}'s Insel bei {1} wurde Geschützt."
+
+#, fuzzy, java-format
+msgid "§b{0}§d locked the island."
+msgstr "§b{0}§d hat den Inselwarppunkt Deaktiviert."
+
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr ""
 "§4Seit deine Insel gesperrt ist, ist dein ankommender Warmpunkt deaktiviert."
 
-#, java-format
-msgid "§b{0}§d deactivated the island warp."
+#, fuzzy, java-format
+msgid "§b{0}§d unlocked the island."
 msgstr "§b{0}§d hat den Inselwarppunkt Deaktiviert."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
 msgstr ""
 
-#, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr ""
-
 #, fuzzy, java-format
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§4{0} wurde von der Insel entfernt."
+
+#, java-format
+msgid "§9{1} §7- {0}"
+msgstr ""
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
@@ -2120,6 +2136,10 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#, fuzzy
+#~ msgid "{0}§e completed challenge §9{1}"
+#~ msgstr "§e§lKlick hier um die Aufgabe zu beenden!"
 
 #, fuzzy
 #~ msgid ".displayName"

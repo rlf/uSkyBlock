@@ -9,6 +9,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class InviteCommand extends RequireIslandCommand {
@@ -56,7 +57,7 @@ public class InviteCommand extends RequireIslandCommand {
                 return true;
             }
             if (inviteHandler.invite(player, island, otherPlayer)) {
-                island.sendMessageToIslandGroup(tr("{0}\u00a7d invited {1}", player.getDisplayName(), otherPlayer.getDisplayName()), true);
+                island.sendMessageToIslandGroup(true, marktr("{0}\u00a7d invited {1}"), player.getDisplayName(), otherPlayer.getDisplayName());
             }
         }
         return true;

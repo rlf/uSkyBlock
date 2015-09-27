@@ -903,7 +903,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 }, getConfig().getInt("options.restart.teleportDelay", 20));
             }
         };
-        final long heartBeatTicks = TimeUtil.millisAsTicks(getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 500));
+        final long heartBeatTicks = TimeUtil.millisAsTicks(getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 2000));
         final Runnable completionWatchDog = new Runnable() {
             volatile long timeout = 0;
             public void run() {
@@ -919,6 +919,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                     if (player != null && player.isOnline() && now >= timeout) {
                         player.sendMessage(tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(getConfig().getLong("asyncworldedit.watchDog.timeoutMs", 45000))));
                     }
+                    LocationUtil.loadChunkAt(chestLocation);
                     generateTask.run();
                 }
             }

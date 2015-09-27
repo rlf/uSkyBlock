@@ -97,6 +97,9 @@ options:
     # The format used in /islandtalk chat messages
     chat-format: '&9SKY &r{DISPLAYNAME} &f>&d {MESSAGE}'
 
+    # How many entries to remember in the island-log
+    log-size: 10
+
     # Limits the spawning
     spawn-limits:
       # [true/false] if true, the limits below will limit spawning
@@ -225,14 +228,14 @@ asyncworldedit:
     # The maximum time to wait for AWE paste to complete (2m, 3m20s, etc.)
     timeout: 5m
     # The number of ms between each heartbeat
-    heartBeatMs: 500
+    heartBeatMs: 2000
 
 worldguard:
   entry-message: true
   exit-message: true
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 28
+version: 29
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

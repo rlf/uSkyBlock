@@ -3,9 +3,13 @@ package us.talabrek.ultimateskyblock.handler;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.asyncworldedit.AsyncWorldEditAdaptor;
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+
+import java.io.File;
 
 /**
  * Handles integration with AWE.
@@ -42,6 +46,27 @@ public enum AsyncWorldEditHandler {;
             return AsyncWorldEditAdaptor.createSession(world, maxblocks);
         } else {
             return new EditSession(world, maxblocks);
+        }
+    }
+
+    public static void flushQueue(final EditSession session) {
+        if (session.getClass().getSimpleName().equals("AsyncEditSession")) {
+            Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    session.flushQueue();
+                }
+            });
+        } else {
+            session.flushQueue();
+        }
+    }
+
+    public static void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
+        if (isAWE(uSkyBlock.getInstance())) {
+            AsyncWorldEditAdaptor.loadIslandSchematic(file, origin, playerPerk);
+        } else {
+            WorldEditHandler.loadIslandSchematic(file, origin, playerPerk);
         }
     }
 }
