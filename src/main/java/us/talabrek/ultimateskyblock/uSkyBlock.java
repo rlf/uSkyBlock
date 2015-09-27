@@ -1103,6 +1103,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     @Override
     public void reloadConfig() {
         reloadConfigs();
+        registerEventsAndCommands();
     }
 
     private void reloadConfigs() {
