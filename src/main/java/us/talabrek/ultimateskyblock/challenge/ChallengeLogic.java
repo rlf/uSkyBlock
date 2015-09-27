@@ -531,4 +531,12 @@ public class ChallengeLogic {
     public void resetAllChallenges(PlayerInfo playerInfo) {
         completionLogic.resetAllChallenges(playerInfo);
     }
+
+    public void shutdown() {
+        completionLogic.shutdown();
+    }
+
+    public long flushCache() {
+        return completionLogic.flushCache();
+    }
 }

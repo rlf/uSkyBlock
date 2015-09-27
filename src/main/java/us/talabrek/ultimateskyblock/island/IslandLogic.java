@@ -394,6 +394,12 @@ public class IslandLogic {
 
     public void shutdown() {
         saveTask.cancel();
-        cache.invalidateAll();
+        flushCache();
+    }
+
+    public long flushCache() {
+        long size = cache.size();
+        cache.invalidateAll(); // Flush to files
+        return size;
     }
 }

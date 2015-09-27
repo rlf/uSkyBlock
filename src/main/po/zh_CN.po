@@ -481,6 +481,14 @@ msgstr "§4没有找到有效的岛屿"
 msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4在{0} 的岛上未检测到平地。"
 
+msgid "flushes all caches to files"
+msgstr ""
+
+#, java-format
+msgid ""
+"§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
+msgstr ""
+
 msgid "manually update the top 10 list"
 msgstr ""
 

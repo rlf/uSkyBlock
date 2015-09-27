@@ -469,6 +469,14 @@ msgstr "§4Подходящего острова не найдено"
 msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4Равнина не найдена на острове {0}!"
 
+msgid "flushes all caches to files"
+msgstr ""
+
+#, java-format
+msgid ""
+"§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
+msgstr ""
+
 msgid "manually update the top 10 list"
 msgstr "ручное обновление списка ТОП 10"
 

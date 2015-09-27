@@ -132,6 +132,12 @@ public class PlayerLogic {
 
     public void shutdown() {
         saveTask.cancel();
-        playerCache.invalidateAll(); // Doing this on the main thread.
+        flushCache();
+    }
+
+    public long flushCache() {
+        long size = playerCache.size();
+        playerCache.invalidateAll();
+        return size;
     }
 }

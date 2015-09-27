@@ -185,6 +185,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
+        challengeLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
         playerNameChangeManager.shutdown();
@@ -1065,6 +1066,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private void reloadConfigs() {
         createFolders();
         HandlerList.unregisterAll(this);
+        if (challengeLogic != null) {
+            challengeLogic.shutdown();
+        }
         if (playerLogic != null) {
             playerLogic.shutdown();
         }

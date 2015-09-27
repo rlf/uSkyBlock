@@ -167,4 +167,14 @@ public class ChallengeCompletionLogic {
         plugin.getChallengeLogic().populateChallenges(challengeMap);
         completionCache.put(getCacheId(playerInfo), challengeMap);
     }
+
+    public void shutdown() {
+        flushCache();
+    }
+
+    public long flushCache() {
+        long size = completionCache.size();
+        completionCache.invalidateAll();
+        return size;
+    }
 }

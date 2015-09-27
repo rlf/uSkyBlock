@@ -474,6 +474,14 @@ msgstr "§4Er is geen geldig eiland gevonden"
 msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4Er is geen vlakland gevonden onder {0}'s eiland"
 
+msgid "flushes all caches to files"
+msgstr ""
+
+#, java-format
+msgid ""
+"§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
+msgstr ""
+
 msgid "manually update the top 10 list"
 msgstr "de top 10 lijst handmatig bijwerken"
 

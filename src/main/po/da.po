@@ -473,6 +473,14 @@ msgstr "§4Ingen valid ø fundet"
 msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4Intet fladland fundet ved {0}'s ø"
 
+msgid "flushes all caches to files"
+msgstr ""
+
+#, java-format
+msgid ""
+"§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
+msgstr ""
+
 msgid "manually update the top 10 list"
 msgstr "opdater top 10 listen manuelt"
 
