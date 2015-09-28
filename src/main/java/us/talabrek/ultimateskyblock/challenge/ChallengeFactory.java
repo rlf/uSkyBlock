@@ -9,7 +9,12 @@ import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,11 +58,12 @@ public class ChallengeFactory {
         ItemStack displayItem = createItemStack(
                 section.getString("displayItem", defaults.displayItem),
                 name, description);
+        ItemStack lockedItem = section.isString("lockedDisplayItem") ? createItemStack(section.getString("lockedDisplayItem", "BARRIER"), name, description) : null;
         boolean takeItems = section.getBoolean("takeItems", true);
         int radius = section.getInt("radius", 10);
         Reward reward = createReward(section.getConfigurationSection("reward"));
         Reward repeatReward = createReward(section.getConfigurationSection("repeatReward"));
-        return new Challenge(name, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, takeItems, radius, reward, repeatReward);
+        return new Challenge(name, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, lockedItem, takeItems, radius, reward, repeatReward);
     }
 
     private static List<EntityMatch> createEntities(List<String> requiredEntities) {

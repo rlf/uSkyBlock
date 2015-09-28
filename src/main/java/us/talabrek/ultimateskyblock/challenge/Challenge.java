@@ -38,12 +38,13 @@ public class Challenge {
     private final Rank rank;
     private final int resetInHours;
     private final ItemStack displayItem;
+    private final ItemStack lockedItem;
     private final boolean takeItems;
     private final int radius;
     private final Reward reward;
     private final Reward repeatReward;
 
-    public Challenge(String name, String description, Type type, String requiredItems, List<EntityMatch> requiredEntities, Rank rank, int resetInHours, ItemStack displayItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
+    public Challenge(String name, String description, Type type, String requiredItems, List<EntityMatch> requiredEntities, Rank rank, int resetInHours, ItemStack displayItem, ItemStack lockedItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
         this.name = name;
         this.type = type;
         this.requiredItems = requiredItems;
@@ -51,6 +52,7 @@ public class Challenge {
         this.rank = rank;
         this.resetInHours = resetInHours;
         this.displayItem = displayItem;
+        this.lockedItem = lockedItem;
         this.takeItems = takeItems;
         this.radius = radius;
         this.reward = reward;
@@ -168,6 +170,10 @@ public class Challenge {
     public ItemStack getDisplayItem() {
         // TODO: 10/12/2014 - R4zorax: Incorporate all the other goodies here...
         return new ItemStack(displayItem); // Copy
+    }
+
+    public ItemStack getLockedDisplayItem() {
+        return lockedItem != null ? new ItemStack(lockedItem) : null;
     }
 
     public boolean isTakeItems() {

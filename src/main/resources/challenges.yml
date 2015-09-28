@@ -34,6 +34,9 @@ enableEconomyPlugin: true
 # [true/false] If false, challenges are not reset on island creation (or restart)
 resetChallengesOnCreate: true
 
+# Material to show for locked challenges (i.e. STAINED_GLASS_PANE:14 for a red glass-pane, or 160:14)
+#displayItemForLocked: STAINED_GLASS_PANE:14
+
 ranks:
   Easy:
     displayItem: DIRT

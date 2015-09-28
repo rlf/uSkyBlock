@@ -18,6 +18,7 @@ import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
+import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,6 +51,7 @@ public class ChallengeLogic {
 
     public final ChallengeDefaults defaults;
     public final ChallengeCompletionLogic completionLogic;
+    private final ItemStack lockedItem;
 
     public ChallengeLogic(FileConfiguration config, uSkyBlock plugin) {
         this.config = config;
@@ -58,6 +60,12 @@ public class ChallengeLogic {
         load();
         ranks = ChallengeFactory.createRankMap(config.getConfigurationSection("ranks"), defaults);
         completionLogic = new ChallengeCompletionLogic(plugin, config);
+        String displayItemForLocked = config.getString("lockedDisplayItem", null);
+        if (displayItemForLocked != null) {
+            lockedItem = ItemStackUtil.createItemStack(displayItemForLocked, null, null);
+        } else {
+            lockedItem = null;
+        }
     }
 
     public boolean isEnabled() {
@@ -476,6 +484,14 @@ public class ChallengeLogic {
             try {
                 currentChallengeItem = getItemStack(playerInfo, challengeName);
                 if (!missingRequirements.isEmpty()) {
+                    ItemStack locked = challenge.getLockedDisplayItem();
+                    if (locked != null) {
+                        currentChallengeItem.setType(locked.getType());
+                        currentChallengeItem.setDurability(locked.getDurability());
+                    } else if (lockedItem != null) {
+                        currentChallengeItem.setType(lockedItem.getType());
+                        currentChallengeItem.setDurability(lockedItem.getDurability());
+                    }
                     meta4 = currentChallengeItem.getItemMeta();
                     meta4.setDisplayName(tr("\u00a74\u00a7lLocked Challenge"));
                     lores.addAll(missingRequirements);
