@@ -52,6 +52,9 @@ msgstr "§d总完成次数: §f{0}"
 msgid "§4No challenge named {0} found"
 msgstr "§4挑战: {0} 未找到!"
 
+msgid "§4You must be on your island to do that!"
+msgstr "§4你必须在你的岛屿上才能这样做!"
+
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4挑战:§e{0} §4不可重复完成!"
@@ -59,12 +62,6 @@ msgstr "§4挑战:§e{0} §4不可重复完成!"
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"
-
-msgid "§4You don't have enough of the required item(s)!"
-msgstr "§4你没有足够的所需物品!"
-
-msgid "§4You must be on your island to do that!"
-msgstr "§4你必须在你的岛屿上才能这样做!"
 
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
@@ -2059,6 +2056,9 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#~ msgid "§4You don't have enough of the required item(s)!"
+#~ msgstr "§4你没有足够的所需物品!"
 
 #, fuzzy
 #~ msgid "controls the currently running async tasks"

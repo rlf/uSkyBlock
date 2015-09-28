@@ -4,7 +4,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 /**
@@ -21,10 +20,4 @@ public class MenuEvents implements Listener {
     public void guiClick(final InventoryClickEvent event) {
         plugin.getMenu().onClick(event);
     }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onInventoryDrag(final InventoryDragEvent event) {
-        plugin.getMenu().onDrag(event);
-    }
-
 }

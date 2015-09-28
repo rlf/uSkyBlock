@@ -6,7 +6,6 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -786,21 +785,6 @@ public class SkyBlockMenu {
             } else if (event.getCurrentItem().getType() == Material.SIGN) {
                 p.closeInventory();
                 p.performCommand("chestcommands open island_help");
-            }
-        }
-    }
-
-    public void onDrag(InventoryDragEvent event) {
-        if (stripFormatting(event.getInventory().getName()).equalsIgnoreCase(stripFormatting(tr("Island Group Members")))) {
-            event.setCancelled(true);
-            SkullMeta meta = (SkullMeta) event.getCursor().getItemMeta();
-            Player p = (Player) event.getWhoClicked();
-            p.updateInventory();
-            p.closeInventory();
-            if (meta.getOwner() == null) {
-                p.openInventory(displayPartyGUI(p));
-            } else {
-                p.openInventory(displayPartyPlayerGUI(p, meta.getOwner()));
             }
         }
     }

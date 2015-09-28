@@ -100,43 +100,34 @@ public class ChallengeLogic {
         return ranks.get(rank).getChallenges();
     }
 
-    public boolean completeChallenge(final Player player, final String challengeName) {
+    public void completeChallenge(final Player player, final String challengeName) {
         final PlayerInfo pi = plugin.getPlayerInfo(player);
         Challenge challenge = getChallenge(challengeName);
         if (challenge == null) {
             player.sendMessage(tr("\u00a74No challenge named {0} found", challengeName));
-            return false;
+            return;
+        }
+        if (!plugin.playerIsOnIsland(player)) {
+            player.sendMessage(tr("\u00a74You must be on your island to do that!"));
+            return;
         }
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (!challenge.getRank().isAvailable(pi) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));
-            return false;
+            return;
         }
         if (challenge.getType() == Challenge.Type.PLAYER) {
-            if (!tryComplete(player, challengeName, "onPlayer")) {
-                player.sendMessage(tr("\u00a74{0}", challenge.getDescription()));
-                player.sendMessage(tr("\u00a74You don't have enough of the required item(s)!"));
-                return false;
-            }
-            return true;
+            tryComplete(player, challengeName, "onPlayer");
         } else if (challenge.getType() == Challenge.Type.ISLAND) {
-            if (!plugin.playerIsOnIsland(player)) {
-                player.sendMessage(tr("\u00a74You must be on your island to do that!"));
-                return false;
-            }
             if (!tryComplete(player, challengeName, "onIsland")) {
                 player.sendMessage(tr("\u00a74{0}", challenge.getDescription()));
                 player.sendMessage(tr("\u00a74You must be standing within {0} blocks of all required items.", challenge.getRadius()));
-                return false;
             }
-            return true;
         } else if (challenge.getType() == Challenge.Type.ISLAND_LEVEL) {
             if (!tryCompleteIslandLevel(player, challenge)) {
                 player.sendMessage(tr("\u00a74Your island must be level {0} to complete this challenge!", challenge.getRequiredLevel()));
             }
-            return true;
         }
-        return false;
     }
 
     public Challenge getChallenge(String challengeName) {
@@ -172,7 +163,7 @@ public class ChallengeLogic {
         } else {
             player.sendMessage(tr("\u00a74Unknown type of challenge: {0}", type));
         }
-        return true;
+        return false;
     }
 
     private boolean tryCompleteIslandLevel(Player player, Challenge challenge) {
@@ -300,7 +291,7 @@ public class ChallengeLogic {
                 player.sendMessage(tr("\u00a7eYou are the following items short:{0}", sb.toString()));
             }
         }
-        return true;
+        return false;
     }
 
     private int getCountOf(PlayerInventory inventory, ItemStack required) {

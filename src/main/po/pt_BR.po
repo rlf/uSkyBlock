@@ -53,6 +53,9 @@ msgstr "§dTotal de vezes completado: §f{0}"
 msgid "§4No challenge named {0} found"
 msgstr "§4Nenhum desafio com o nome {0} foi encontrado!"
 
+msgid "§4You must be on your island to do that!"
+msgstr "§4Você precisa estar na sua ilha para fazer isso!"
+
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4O desafio {0} não pode ser repetido!"
@@ -60,12 +63,6 @@ msgstr "§4O desafio {0} não pode ser repetido!"
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"
-
-msgid "§4You don't have enough of the required item(s)!"
-msgstr "§4Você não tem os items necessários!"
-
-msgid "§4You must be on your island to do that!"
-msgstr "§4Você precisa estar na sua ilha para fazer isso!"
 
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
@@ -2010,6 +2007,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "§4You don't have enough of the required item(s)!"
+#~ msgstr "§4Você não tem os items necessários!"
 
 #~ msgid "controls the currently running async tasks"
 #~ msgstr "controlar as tarefas async ocorrendo agora"

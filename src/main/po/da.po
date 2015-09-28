@@ -54,6 +54,9 @@ msgstr "§dTotalt antal aflevering: §f{0}"
 msgid "§4No challenge named {0} found"
 msgstr "§4Ingen udfordringer med navn {0} fundet!"
 
+msgid "§4You must be on your island to do that!"
+msgstr "§4Du skal være på din ø, for at gøre det!"
+
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4{0} udfordringen er ikke gentagelig!"
@@ -61,12 +64,6 @@ msgstr "§4{0} udfordringen er ikke gentagelig!"
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"
-
-msgid "§4You don't have enough of the required item(s)!"
-msgstr "§4Du har ikke nok af de påkrævede ting!"
-
-msgid "§4You must be on your island to do that!"
-msgstr "§4Du skal være på din ø, for at gøre det!"
 
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
@@ -1988,6 +1985,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "§4You don't have enough of the required item(s)!"
+#~ msgstr "§4Du har ikke nok af de påkrævede ting!"
 
 #~ msgid "controls the currently running async tasks"
 #~ msgstr "håndter aktive asynkrone opgaver"
