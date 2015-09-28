@@ -66,12 +66,21 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
     private double lastTick = 0;
 
     public IncrementalRunnable(uSkyBlock plugin) {
-        this(plugin, null, 20, 20, 15);
+        this(plugin, null,
+                plugin.getConfig().getInt("async.maxMs", 22),
+                plugin.getConfig().getInt("async.maxConsecutiveTicks", 20),
+                plugin.getConfig().getInt("async.yieldDelay", 15)
+        );
     }
 
     public IncrementalRunnable(uSkyBlock plugin, Runnable onCompletion) {
-        this(plugin, onCompletion, 20, 20, 15);
+        this(plugin, onCompletion,
+                plugin.getConfig().getInt("async.maxMs", 22),
+                plugin.getConfig().getInt("async.maxConsecutiveTicks", 20),
+                plugin.getConfig().getInt("async.yieldDelay", 15)
+        );
     }
+
     public IncrementalRunnable(uSkyBlock plugin, Runnable onCompletion, int maxMs, int maxConsecutive, int yieldDelay) {
         this.plugin = plugin;
         this.onCompletion = onCompletion;
@@ -136,7 +145,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
      * @return the number of ms the task has been actively executing.
      */
     public double getTimeUsed() {
-        return tUsed + ((tRunning != 0) ? System.nanoTime()*1000d-tRunning : 0);
+        return tUsed + ((tRunning != 0 && lastTick != 0) ? lastTick-tRunning : 0);
     }
 
     public void cancel() {
@@ -146,6 +155,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
     @Override
     public final void run() {
         tRunning = System.nanoTime()*1000d;
+        lastTick = tRunning;
         if (tStart == 0) {
             tStart = tRunning;
         }
