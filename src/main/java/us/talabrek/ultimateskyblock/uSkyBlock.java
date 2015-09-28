@@ -881,12 +881,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 WorldGuardHandler.protectIsland(player, pi);
                 getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
-                if (pi != null) {
-                    pi.setIslandGenerating(false);
-                }
                 getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
                     @Override
                     public void run() {
+                        if (pi != null) {
+                            pi.setIslandGenerating(false);
+                        }
                         if (player != null && player.isOnline()) {
                             getLogger().log(Level.FINE, "porting player back to the island");
                             homeTeleport(player, true);
@@ -894,7 +894,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                             clearEntitiesNearPlayer(player);
                         }
                     }
-                }, getConfig().getInt("options.restart.teleportDelay", 20));
+                }, getConfig().getInt("options.restart.teleportDelay", 40));
             }
         };
         final Runnable completionWatchDog = new LocateChestTask(this, player, next, generateTask);
