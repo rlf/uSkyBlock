@@ -30,10 +30,7 @@ import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
-import us.talabrek.ultimateskyblock.async.AsyncBalancedExecutor;
-import us.talabrek.ultimateskyblock.async.BalancedExecutor;
 import us.talabrek.ultimateskyblock.async.Callback;
-import us.talabrek.ultimateskyblock.async.SyncBalancedExecutor;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
@@ -61,6 +58,7 @@ import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.OrphanLogic;
+import us.talabrek.ultimateskyblock.island.task.LocateChestTask;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PerkLogic;
@@ -118,8 +116,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private PlayerNotifier notifier;
 
     private USBImporterExecutor importer;
-    private BalancedExecutor executor;
-    private BalancedExecutor asyncExecutor;
 
     private static String pName = "";
     private FileConfiguration lastIslandConfig;
@@ -205,8 +201,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         missingRequirements = null;
         instance = this;
         FileUtil.init(getDataFolder());
-        executor = new SyncBalancedExecutor(Bukkit.getScheduler());
-        asyncExecutor = new AsyncBalancedExecutor(Bukkit.getScheduler());
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         reloadConfigs();
 
@@ -903,27 +897,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 }, getConfig().getInt("options.restart.teleportDelay", 20));
             }
         };
-        final long heartBeatTicks = TimeUtil.millisAsTicks(getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 2000));
-        final Runnable completionWatchDog = new Runnable() {
-            volatile long timeout = 0;
-            public void run() {
-                long now = System.currentTimeMillis();
-                if (timeout == 0) {
-                    timeout = now + TimeUtil.stringAsMillis(getConfig().getString("asyncworldedit.watchDog.timeout", "5m"));
-                }
-                // Check for completion
-                Location chestLocation = LocationUtil.findChestLocation(next);
-                if (chestLocation == null && now < timeout) {
-                    Bukkit.getScheduler().runTaskLater(uSkyBlock.this, this, heartBeatTicks);
-                } else {
-                    if (player != null && player.isOnline() && now >= timeout) {
-                        player.sendMessage(tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(getConfig().getLong("asyncworldedit.watchDog.timeoutMs", 45000))));
-                    }
-                    LocationUtil.loadChunkAt(chestLocation);
-                    generateTask.run();
-                }
-            }
-        };
+        final Runnable completionWatchDog = new LocateChestTask(this, player, next, generateTask);
         Runnable createTask = new Runnable() {
             @Override
             public void run() {
@@ -1241,14 +1215,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
      */
     public void notifyPlayer(Player player, String msg) {
         notifier.notifyPlayer(player, msg);
-    }
-
-    public BalancedExecutor getExecutor() {
-        return executor;
-    }
-
-    public BalancedExecutor getAsyncExecutor() {
-        return asyncExecutor;
     }
 
     public static uSkyBlockAPI getAPI() {

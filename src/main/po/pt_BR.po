@@ -363,33 +363,6 @@ msgstr "§eA ilha de {0} em {1} foi protegida"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4A ilha de {0} em {1} já foi protegida"
 
-msgid "controls the currently running async tasks"
-msgstr "controlar as tarefas async ocorrendo agora"
-
-msgid "lists currently running tasks"
-msgstr "mostrar tarefas em andamento"
-
-msgid "§cNo running tasks"
-msgstr "§cNenhuma tarefa em andamento"
-
-msgid "§e[%2d]§7: %s\n"
-msgstr "§e[%2d]§7: %s\n"
-
-msgid "cancels the task with the given number."
-msgstr "cancelar a tarefa com o número dado."
-
-msgid "§4Could not cancel "
-msgstr "§4Não foi possível cancelar"
-
-msgid "§4A valid number must be supplied as task-id."
-msgstr "§4Um número válido precisa ser fornecido como task-id."
-
-msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-msgstr "§4Nenhum tarefa detectada.§e Tente §b/usb async list§e primeiro."
-
-msgid "§4A number between 1 and "
-msgstr "§4Um número entre 1 e"
-
 msgid "Controls player-cooldowns"
 msgstr "Controlar player-cooldowns"
 
@@ -602,17 +575,17 @@ msgstr "recarregar configuração do arquivo."
 msgid "§eConfiguration reloaded from file."
 msgstr "§eConfigurações  recarregadas."
 
-msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4PURGE:§9 Terminou o processo de purge em ilhas abandonadas."
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cPURGE:§9 Purgado {0}/{1} {2,number,###}%"
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 "§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o purge."
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Purgado {0}/{1} {2,number,###}%"
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4PURGE:§9 Terminou o processo de purge em ilhas abandonadas."
 
 msgid "displays version information"
 msgstr "mostrar informações da versão"
@@ -1298,6 +1271,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eSeu rank é: §f{0}"
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr "§cWatchdog!§9 Não foi possível encontrar um báu em {0}.."
+
 msgid "Challenge Menu"
 msgstr "Menu de desafios"
 
@@ -1977,10 +1954,6 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr "§cWatchdog!§9 Não foi possível encontrar um báu em {0}.."
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! Encontramos um local mais perto para o spawn. §9Limpando ele para "
@@ -2037,6 +2010,33 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "controls the currently running async tasks"
+#~ msgstr "controlar as tarefas async ocorrendo agora"
+
+#~ msgid "lists currently running tasks"
+#~ msgstr "mostrar tarefas em andamento"
+
+#~ msgid "§cNo running tasks"
+#~ msgstr "§cNenhuma tarefa em andamento"
+
+#~ msgid "§e[%2d]§7: %s\n"
+#~ msgstr "§e[%2d]§7: %s\n"
+
+#~ msgid "cancels the task with the given number."
+#~ msgstr "cancelar a tarefa com o número dado."
+
+#~ msgid "§4Could not cancel "
+#~ msgstr "§4Não foi possível cancelar"
+
+#~ msgid "§4A valid number must be supplied as task-id."
+#~ msgstr "§4Um número válido precisa ser fornecido como task-id."
+
+#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
+#~ msgstr "§4Nenhum tarefa detectada.§e Tente §b/usb async list§e primeiro."
+
+#~ msgid "§4A number between 1 and "
+#~ msgstr "§4Um número entre 1 e"
 
 #, fuzzy
 #~ msgid "{0}§e completed challenge §9{1}"

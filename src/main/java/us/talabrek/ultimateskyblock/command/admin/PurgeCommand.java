@@ -1,21 +1,11 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.command.admin.task.PurgeScanTask;
-import us.talabrek.ultimateskyblock.command.admin.task.PurgeTask;
 import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FileUtil;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 

@@ -365,33 +365,6 @@ msgstr "§e{0}s ø ved {1} er blevet beskyttet"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}s ø ved {1} var allerede beskyttet"
 
-msgid "controls the currently running async tasks"
-msgstr "håndter aktive asynkrone opgaver"
-
-msgid "lists currently running tasks"
-msgstr "viser igangværende opgaver"
-
-msgid "§cNo running tasks"
-msgstr "§cIngen igangværende opgaver"
-
-msgid "§e[%2d]§7: %s\n"
-msgstr "§e[%2d]§7: %s\n"
-
-msgid "cancels the task with the given number."
-msgstr "afbryder opgaven med det givne nummer"
-
-msgid "§4Could not cancel "
-msgstr "§4Kunne ikke afbryde "
-
-msgid "§4A valid number must be supplied as task-id."
-msgstr "§4Et validt nummer skal angives som opgave-nummer"
-
-msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-msgstr "§4Ingen opgaver fundet.§e Prøv §9/usb async list§e først."
-
-msgid "§4A number between 1 and "
-msgstr "§4et nummer mellem 1 og "
-
 msgid "Controls player-cooldowns"
 msgstr "Håndterer spiller-cooldowns"
 
@@ -602,16 +575,16 @@ msgstr "genindlæs konfigurationen fra fil."
 msgid "§eConfiguration reloaded from file."
 msgstr "§eKonfigurationen blev genindlæst fra fil."
 
-msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,number,###}%"
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4OPRYDNING:§9 Skanningen foretaget, fandt {0} kandidater til genbrug."
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,number,###}%"
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
 
 msgid "displays version information"
 msgstr "viser versionsinformationer"
@@ -1291,6 +1264,11 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin position er: §f{0}"
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+"§cVagthund!§9 Ude af stand til at finde en kiste inden for {0}, giver op."
+
 msgid "Challenge Menu"
 msgstr "Udfordringer"
 
@@ -1956,11 +1934,6 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr ""
-"§cVagthund!§9 Ude af stand til at finde en kiste inden for {0}, giver op."
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
 
@@ -2015,6 +1988,33 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "controls the currently running async tasks"
+#~ msgstr "håndter aktive asynkrone opgaver"
+
+#~ msgid "lists currently running tasks"
+#~ msgstr "viser igangværende opgaver"
+
+#~ msgid "§cNo running tasks"
+#~ msgstr "§cIngen igangværende opgaver"
+
+#~ msgid "§e[%2d]§7: %s\n"
+#~ msgstr "§e[%2d]§7: %s\n"
+
+#~ msgid "cancels the task with the given number."
+#~ msgstr "afbryder opgaven med det givne nummer"
+
+#~ msgid "§4Could not cancel "
+#~ msgstr "§4Kunne ikke afbryde "
+
+#~ msgid "§4A valid number must be supplied as task-id."
+#~ msgstr "§4Et validt nummer skal angives som opgave-nummer"
+
+#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
+#~ msgstr "§4Ingen opgaver fundet.§e Prøv §9/usb async list§e først."
+
+#~ msgid "§4A number between 1 and "
+#~ msgstr "§4et nummer mellem 1 og "
 
 #, fuzzy
 #~ msgid "{0}§e completed challenge §9{1}"

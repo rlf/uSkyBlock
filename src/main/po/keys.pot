@@ -351,33 +351,6 @@ msgstr ""
 msgid "§4{0}s island at {1} was already protected"
 msgstr ""
 
-msgid "controls the currently running async tasks"
-msgstr ""
-
-msgid "lists currently running tasks"
-msgstr ""
-
-msgid "§cNo running tasks"
-msgstr ""
-
-msgid "§e[%2d]§7: %s\n"
-msgstr ""
-
-msgid "cancels the task with the given number."
-msgstr ""
-
-msgid "§4Could not cancel "
-msgstr ""
-
-msgid "§4A valid number must be supplied as task-id."
-msgstr ""
-
-msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-msgstr ""
-
-msgid "§4A number between 1 and "
-msgstr ""
-
 msgid "Controls player-cooldowns"
 msgstr ""
 
@@ -585,15 +558,15 @@ msgstr ""
 msgid "§eConfiguration reloaded from file."
 msgstr ""
 
-msgid "§4PURGE:§9 Finished purging abandoned islands."
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr ""
 
 msgid "displays version information"
@@ -1243,6 +1216,10 @@ msgstr ""
 msgid "§eYour rank is: §f{0}"
 msgstr ""
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "Challenge Menu"
 msgstr ""
 
@@ -1758,10 +1735,6 @@ msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
-msgstr ""
-
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."

@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.handler;
 
+import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
@@ -7,12 +8,12 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
-import us.talabrek.ultimateskyblock.async.CompositeIncrementalTask;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditRegenTask;
-import us.talabrek.ultimateskyblock.handler.task.WorldRegenTask;
+import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
+import us.talabrek.ultimateskyblock.handler.task.WorldRegen;
 import us.talabrek.ultimateskyblock.handler.worldedit.WorldEditAdaptor;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -147,10 +148,8 @@ public class WorldEditHandler {
         final long t = System.currentTimeMillis();
         final Region cube = getRegion(skyWorld, region);
         Set<Vector2D> innerChunks = getInnerChunks(cube);
-        WorldRegenTask worldRegenTask = new WorldRegenTask(skyWorld, innerChunks);
         Set<Region> borderRegions = getBorderRegions(cube);
-        WorldEditRegenTask worldEditTask = new WorldEditRegenTask(skyWorld, borderRegions);
-        uSkyBlock.getInstance().getExecutor().execute(uSkyBlock.getInstance(), new CompositeIncrementalTask(worldEditTask, worldRegenTask), new Runnable() {
+        Runnable onCompletion = new Runnable() {
             @Override
             public void run() {
                 long diff = System.currentTimeMillis() - t;
@@ -159,7 +158,10 @@ public class WorldEditHandler {
                     afterDeletion.run();
                 }
             }
-        }, 0.5f, 1); // 50% load, max. 1 ticks in a row
+        };
+        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
+        WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
+        Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), regen);
     }
 
     private static Region getRegion(World skyWorld, ProtectedRegion region) {
@@ -194,4 +196,7 @@ public class WorldEditHandler {
         }
     }
 
+    public static EditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
+        return new EditSession(bukkitWorld, maxBlocks);
+    }
 }

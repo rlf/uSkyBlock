@@ -370,35 +370,6 @@ msgstr "§e{0} 的岛屿在 {1} 被保护"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0} 的岛屿在 {1} 早就被保护了"
 
-#, fuzzy
-msgid "controls the currently running async tasks"
-msgstr "§c没有运行中的事件"
-
-#, fuzzy
-msgid "lists currently running tasks"
-msgstr "§c没有运行中的事件"
-
-msgid "§cNo running tasks"
-msgstr "§c没有运行中的事件"
-
-msgid "§e[%2d]§7: %s\n"
-msgstr "§e[%2d]§7: %s\n"
-
-msgid "cancels the task with the given number."
-msgstr ""
-
-msgid "§4Could not cancel "
-msgstr "§c无法取消"
-
-msgid "§4A valid number must be supplied as task-id."
-msgstr "§4必须提交一个有效的数字作为事件ID"
-
-msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-msgstr "§4没有任务发现。§e输入§b/usb async list §e获取帮助。"
-
-msgid "§4A number between 1 and "
-msgstr "§4一个数字间于1~"
-
 msgid "Controls player-cooldowns"
 msgstr ""
 
@@ -619,15 +590,15 @@ msgstr "§e配置重读。"
 msgid "§eConfiguration reloaded from file."
 msgstr "§e配置重读。"
 
-msgid "§4PURGE:§9 Finished purging abandoned islands."
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr ""
 
 msgid "displays version information"
@@ -1322,6 +1293,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§e你的排名是: §f{0}"
+
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
 
 #, fuzzy
 msgid "Challenge Menu"
@@ -2030,10 +2005,6 @@ msgstr "无法为你创建岛屿.请联系管理员."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr ""
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 
@@ -2088,6 +2059,32 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#, fuzzy
+#~ msgid "controls the currently running async tasks"
+#~ msgstr "§c没有运行中的事件"
+
+#, fuzzy
+#~ msgid "lists currently running tasks"
+#~ msgstr "§c没有运行中的事件"
+
+#~ msgid "§cNo running tasks"
+#~ msgstr "§c没有运行中的事件"
+
+#~ msgid "§e[%2d]§7: %s\n"
+#~ msgstr "§e[%2d]§7: %s\n"
+
+#~ msgid "§4Could not cancel "
+#~ msgstr "§c无法取消"
+
+#~ msgid "§4A valid number must be supplied as task-id."
+#~ msgstr "§4必须提交一个有效的数字作为事件ID"
+
+#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
+#~ msgstr "§4没有任务发现。§e输入§b/usb async list §e获取帮助。"
+
+#~ msgid "§4A number between 1 and "
+#~ msgstr "§4一个数字间于1~"
 
 #, fuzzy
 #~ msgid "{0}§e completed challenge §9{1}"

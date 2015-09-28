@@ -371,34 +371,6 @@ msgstr "§e{0}'s Insel bei {1} wurde Geschützt."
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}'s Insel bei {1} ist bereits Geschützt."
 
-msgid "controls the currently running async tasks"
-msgstr "Kontrolliert die laufenden async Aufgaben."
-
-msgid "lists currently running tasks"
-msgstr "Listet die aktuell laufenden Aufgaben."
-
-msgid "§cNo running tasks"
-msgstr "§cKeine laufenden Aufgaben."
-
-# ???
-msgid "§e[%2d]§7: %s\n"
-msgstr "§e[%2d]§7: %s\n"
-
-msgid "cancels the task with the given number."
-msgstr "Beendet die Aufgabe mit der gegebenen Nummer."
-
-msgid "§4Could not cancel "
-msgstr "§4Kann nicht beendet werden."
-
-msgid "§4A valid number must be supplied as task-id."
-msgstr "§4Eine gültige Nummer muss einegegeben werden als Aufgaben-Id."
-
-msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-msgstr "§4Keine Aufgabe gefunden.§e Versuche §b/usb async list§e als erstes."
-
-msgid "§4A number between 1 and "
-msgstr "§4Eine Zahl zwischen 1 und "
-
 msgid "Controls player-cooldowns"
 msgstr "Kontrolliert Spieler-Abklingzeiten"
 
@@ -613,17 +585,17 @@ msgstr "Lade die Einstellungen von einer Datei."
 msgid "§eConfiguration reloaded from file."
 msgstr "§eEInstellungen geladen von der Datei."
 
-#, fuzzy
-msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "Löscht alle verlassenen Inseln"
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr ""
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "Löscht alle verlassenen Inseln"
 
 msgid "displays version information"
 msgstr "Zeige Versions Informationen"
@@ -1354,6 +1326,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDeine Stufe ist: §f{0}"
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "Challenge Menu"
 msgstr "Aufgaben Menue"
 
@@ -2073,10 +2049,6 @@ msgstr ""
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr ""
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 
@@ -2136,6 +2108,35 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#~ msgid "controls the currently running async tasks"
+#~ msgstr "Kontrolliert die laufenden async Aufgaben."
+
+#~ msgid "lists currently running tasks"
+#~ msgstr "Listet die aktuell laufenden Aufgaben."
+
+#~ msgid "§cNo running tasks"
+#~ msgstr "§cKeine laufenden Aufgaben."
+
+# ???
+#~ msgid "§e[%2d]§7: %s\n"
+#~ msgstr "§e[%2d]§7: %s\n"
+
+#~ msgid "cancels the task with the given number."
+#~ msgstr "Beendet die Aufgabe mit der gegebenen Nummer."
+
+#~ msgid "§4Could not cancel "
+#~ msgstr "§4Kann nicht beendet werden."
+
+#~ msgid "§4A valid number must be supplied as task-id."
+#~ msgstr "§4Eine gültige Nummer muss einegegeben werden als Aufgaben-Id."
+
+#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
+#~ msgstr ""
+#~ "§4Keine Aufgabe gefunden.§e Versuche §b/usb async list§e als erstes."
+
+#~ msgid "§4A number between 1 and "
+#~ msgstr "§4Eine Zahl zwischen 1 und "
 
 #, fuzzy
 #~ msgid "{0}§e completed challenge §9{1}"

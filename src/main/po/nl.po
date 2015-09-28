@@ -364,35 +364,6 @@ msgstr "§e{0}s eiland op {1} is nu beveiliging"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}s eiland op {1} is al beveiligd"
 
-msgid "controls the currently running async tasks"
-msgstr "regelt de op moment lopende async taken"
-
-msgid "lists currently running tasks"
-msgstr "lijst van de lopende taken"
-
-msgid "§cNo running tasks"
-msgstr "§cEr lopen nu geen taken"
-
-msgid "§e[%2d]§7: %s\n"
-msgstr "§e[%2d]§7: %s\n"
-
-msgid "cancels the task with the given number."
-msgstr "annuleert de taak met het opgegeven nummer."
-
-msgid "§4Could not cancel "
-msgstr "§4Kan niet gestopt worden"
-
-msgid "§4A valid number must be supplied as task-id."
-msgstr "§4Een geldig nummer moet ingevoerd worden als taak-id."
-
-msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-msgstr ""
-"§4Er lopen geen taken op dit moment.§e Probeer eerst het commando §b/usb "
-"async list§e."
-
-msgid "§4A number between 1 and "
-msgstr "§4Een nummer tussen 1 en"
-
 msgid "Controls player-cooldowns"
 msgstr "Beheert de player-cooldowns"
 
@@ -606,16 +577,16 @@ msgstr "herladen van de configuratie van het bestand"
 msgid "§eConfiguration reloaded from file."
 msgstr "§eDe Configuratie is herladen"
 
-msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4VERWIJDER:§9 Klaar met verwijderen van inactieve eilanden."
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,number,###}%"
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,number,###}%"
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4VERWIJDER:§9 Klaar met verwijderen van inactieve eilanden."
 
 msgid "displays version information"
 msgstr "het weergeven van de versie-informatie"
@@ -1316,6 +1287,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eJouw rank is: §f{0}"
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr "§cWatchdog!§9 Kan geen chest vinden in {0}, process gestopt."
+
 msgid "Challenge Menu"
 msgstr "Uitdagingen Menu "
 
@@ -2003,10 +1978,6 @@ msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr "§cWatchdog!§9 Kan geen chest vinden in {0}, process gestopt."
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! We hebben een plaats dichter bij de spawn gevonden. §9Ontruimen dit "
@@ -2063,6 +2034,35 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "controls the currently running async tasks"
+#~ msgstr "regelt de op moment lopende async taken"
+
+#~ msgid "lists currently running tasks"
+#~ msgstr "lijst van de lopende taken"
+
+#~ msgid "§cNo running tasks"
+#~ msgstr "§cEr lopen nu geen taken"
+
+#~ msgid "§e[%2d]§7: %s\n"
+#~ msgstr "§e[%2d]§7: %s\n"
+
+#~ msgid "cancels the task with the given number."
+#~ msgstr "annuleert de taak met het opgegeven nummer."
+
+#~ msgid "§4Could not cancel "
+#~ msgstr "§4Kan niet gestopt worden"
+
+#~ msgid "§4A valid number must be supplied as task-id."
+#~ msgstr "§4Een geldig nummer moet ingevoerd worden als taak-id."
+
+#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
+#~ msgstr ""
+#~ "§4Er lopen geen taken op dit moment.§e Probeer eerst het commando §b/usb "
+#~ "async list§e."
+
+#~ msgid "§4A number between 1 and "
+#~ msgstr "§4Een nummer tussen 1 en"
 
 #, fuzzy
 #~ msgid "{0}§e completed challenge §9{1}"

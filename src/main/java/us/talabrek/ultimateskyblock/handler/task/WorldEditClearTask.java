@@ -9,9 +9,7 @@ import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import us.talabrek.ultimateskyblock.async.IncrementalTask;
+import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -25,29 +23,30 @@ import java.util.logging.Level;
  * A task that chunks up the clearing of a region.
  * Not as fast as WorldEditRegenTask, but more versatile.
  */
-public class WorldEditClearTask extends BukkitRunnable implements IncrementalTask {
+public class WorldEditClearTask extends IncrementalRunnable {
     private static final BaseBlock AIR = new BaseBlock(0);
 
     private final Set<Region> borderRegions;
     private final Set<Vector2D> innerChunks;
-    private final int chunks;
     private final uSkyBlock plugin;
-    private final CommandSender commandSender;
-    private final Region region;
-    private final String format;
     private final BukkitWorld bukkitWorld;
     private final int minY;
     private final int maxY;
     private final int maxBlocks;
 
-    public WorldEditClearTask(uSkyBlock plugin, CommandSender commandSender, Region region, String format) {
+    public WorldEditClearTask(final uSkyBlock plugin, final CommandSender commandSender, final Region region, final String format) {
+        super(plugin);
+        setOnCompletion(new Runnable() {
+            @Override
+            public void run() {
+                String duration = TimeUtil.millisAsString(WorldEditClearTask.this.getTimeElapsed());
+                plugin.log(Level.INFO, String.format("Region %s was cleared in %s", region.toString(), duration));
+                commandSender.sendMessage(String.format(format, duration));
+            }
+        });
         this.plugin = plugin;
-        this.commandSender = commandSender;
-        this.region = region;
-        this.format = format;
         innerChunks = WorldEditHandler.getInnerChunks(region);
         borderRegions = WorldEditHandler.getBorderRegions(region);
-        chunks = innerChunks.size() + borderRegions.size();
         bukkitWorld = new BukkitWorld(plugin.getWorld());
         minY = Math.min(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
         maxY = Math.max(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
@@ -55,10 +54,10 @@ public class WorldEditClearTask extends BukkitRunnable implements IncrementalTas
     }
 
     @Override
-    public boolean execute(Plugin plugin, int offset, int length) {
+    public boolean execute() {
         Iterator<Vector2D> inner = innerChunks.iterator();
         Iterator<Region> border = borderRegions.iterator();
-        for (int i = 0; i < length; i++) {
+        while (!isComplete()) {
             EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
             editSession.setFastMode(true);
             editSession.enableQueue();
@@ -85,30 +84,15 @@ public class WorldEditClearTask extends BukkitRunnable implements IncrementalTas
                 }
             }
             editSession.flushQueue();
+            if (!tick()) {
+                break;
+            }
         }
         return isComplete();
     }
 
-    @Override
-    public int getLength() {
-        return chunks;
-    }
-
-    @Override
     public boolean isComplete() {
         return innerChunks.isEmpty() && borderRegions.isEmpty();
     }
 
-    @Override
-    public void run() {
-        final long tStart = System.currentTimeMillis();
-        plugin.getExecutor().execute(plugin, this, new Runnable() {
-            @Override
-            public void run() {
-                String duration = TimeUtil.millisAsString(System.currentTimeMillis() - tStart);
-                plugin.log(Level.INFO, String.format("Region %s was cleared in %s", region.toString(), duration));
-                commandSender.sendMessage(String.format(format, duration));
-            }
-        }, 0.5f, 1);
-    }
 }

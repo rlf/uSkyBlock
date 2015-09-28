@@ -5,7 +5,6 @@ import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.command.admin.AbstractPlayerInfoCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminChallengeCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminIslandCommand;
-import us.talabrek.ultimateskyblock.command.admin.AsyncCommand;
 import us.talabrek.ultimateskyblock.command.admin.CooldownCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
 import us.talabrek.ultimateskyblock.command.admin.FlatlandFixCommand;
@@ -66,8 +65,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new DebugCommand(plugin));
         add(new WGCommand(plugin));
         add(new VersionCommand(plugin));
-        add(new AsyncCommand(plugin));
-        add(new CooldownCommand(plugin));
+            add(new CooldownCommand(plugin));
         add(new PerkCommand(plugin));
         add(new LanguageCommand(plugin));
         add(new FlushCommand(plugin));

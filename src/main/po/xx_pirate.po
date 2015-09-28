@@ -359,33 +359,6 @@ msgstr "§e{0}s island at {1} has been protected"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}s island at {1} was already protected"
 
-msgid "controls the currently running async tasks"
-msgstr "controls thar currently running async tasks"
-
-msgid "lists currently running tasks"
-msgstr "lists currently running tasks"
-
-msgid "§cNo running tasks"
-msgstr "§cNo running tasks"
-
-msgid "§e[%2d]§7: %s\n"
-msgstr "§e[-]§7: %s\n"
-
-msgid "cancels the task with the given number."
-msgstr "cancels ye task with ye given number."
-
-msgid "§4Could not cancel "
-msgstr "§4Could not cancel "
-
-msgid "§4A valid number must be supplied as task-id."
-msgstr "§4A valid number must be supplied as task-id."
-
-msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-msgstr "§4No tasks detected.§e Try §b/usb async list§e first."
-
-msgid "§4A number between 1 and "
-msgstr "§4A number between 1 and "
-
 msgid "Controls player-cooldowns"
 msgstr "Controls player-cooldowns"
 
@@ -596,17 +569,17 @@ msgstr "reload configuration from file."
 msgid "§eConfiguration reloaded from file."
 msgstr "§eConfiguration reloaded from file."
 
-#, fuzzy
-msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4** You be leaving an abandoned island."
+#, java-format
+msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4** You be leaving an abandoned island."
 
 msgid "displays version information"
 msgstr "displays version information"
@@ -1286,6 +1259,10 @@ msgstr "§a#- §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eYour rank be: §f{0}"
 
+#, java-format
+msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+msgstr ""
+
 msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
@@ -1964,10 +1941,6 @@ msgstr "Could not create ye Island. Please contact a server moderator."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGetting ye island ready, please be patient, it can take a while."
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr ""
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 
@@ -2022,6 +1995,33 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "controls the currently running async tasks"
+#~ msgstr "controls thar currently running async tasks"
+
+#~ msgid "lists currently running tasks"
+#~ msgstr "lists currently running tasks"
+
+#~ msgid "§cNo running tasks"
+#~ msgstr "§cNo running tasks"
+
+#~ msgid "§e[%2d]§7: %s\n"
+#~ msgstr "§e[-]§7: %s\n"
+
+#~ msgid "cancels the task with the given number."
+#~ msgstr "cancels ye task with ye given number."
+
+#~ msgid "§4Could not cancel "
+#~ msgstr "§4Could not cancel "
+
+#~ msgid "§4A valid number must be supplied as task-id."
+#~ msgstr "§4A valid number must be supplied as task-id."
+
+#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
+#~ msgstr "§4No tasks detected.§e Try §b/usb async list§e first."
+
+#~ msgid "§4A number between 1 and "
+#~ msgstr "§4A number between 1 and "
 
 #, fuzzy
 #~ msgid "{0}§e completed challenge §9{1}"

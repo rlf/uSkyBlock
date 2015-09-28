@@ -1,7 +1,15 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.extent.clipboard.Clipboard;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
+import com.sk89q.worldedit.function.operation.Operation;
+import com.sk89q.worldedit.function.operation.Operations;
+import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -10,17 +18,24 @@ import org.primesoft.asyncworldedit.api.progressDisplay.IProgressDisplay;
 import org.primesoft.asyncworldedit.injector.classfactory.IJob;
 import org.primesoft.asyncworldedit.injector.core.InjectorCore;
 import org.primesoft.asyncworldedit.playerManager.PlayerEntry;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.worldedit.ConsolePlayer;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AsyncWorldEditAdaptor {
@@ -165,8 +180,7 @@ public class AsyncWorldEditAdaptor {
 
             @Override
             public void execute() {
-                WorldEditHandler.loadIslandSchematic(file, origin, playerPerk);
-                /*
+                //WorldEditHandler.loadIslandSchematic(file, origin, playerPerk);
                 log.finer("Trying to load schematic " + file);
                 try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
                     BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
@@ -193,7 +207,6 @@ public class AsyncWorldEditAdaptor {
                 } catch (IOException e) {
                     uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
                 }
-                */
             }
         });
     }

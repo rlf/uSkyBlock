@@ -1,9 +1,7 @@
 package us.talabrek.ultimateskyblock.command.admin.task;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import us.talabrek.ultimateskyblock.async.IncrementalTask;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -21,15 +19,16 @@ import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 /**
  * Scans for all players on a list of islands.
  */
-public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
+public class PurgeScanTask extends BukkitRunnable {
     private final List<String> islandList;
     private final List<String> purgeList;
-    private final int size;
     private final long cutOff;
     private final long now;
     private final uSkyBlock plugin;
     private final CommandSender sender;
     private final double purgeLevel;
+    private final int feedbackEvery;
+    private long lastContact;
 
     public PurgeScanTask(uSkyBlock plugin, File islandDir, int time, CommandSender sender) {
         this.plugin = plugin;
@@ -38,14 +37,14 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
         this.cutOff = now - (time * 3600000L);
         String[] islandList = islandDir.list(FileUtil.createIslandFilenameFilter());
         this.islandList = new ArrayList<>(Arrays.asList(islandList));
-        size = islandList.length;
         purgeList = new ArrayList<>();
         purgeLevel = plugin.getConfig().getDouble("options.advanced.purgeLevel", 10);
+        feedbackEvery = plugin.getConfig().getInt("async.feedbackEvery", 5000);
+        lastContact = System.currentTimeMillis();
     }
 
-    @Override
-    public boolean execute(Plugin bukkitPlugin, int offset, int length) {
-        for (int i = 0; i < length && !islandList.isEmpty(); i++) {
+    private void generatePurgeList() {
+        while (!islandList.isEmpty()) {
             String islandFile = islandList.remove(0);
             String islandName = FileUtil.getBasename(islandFile);
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
@@ -56,7 +55,6 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
                 }
             }
         }
-        return isComplete();
     }
 
     private boolean abandonedSince(Set<String> members) {
@@ -69,36 +67,33 @@ public class PurgeScanTask extends BukkitRunnable implements IncrementalTask {
         return true;
     }
 
-    @Override
-    public int getLength() {
-        return size;
-    }
-
-    @Override
-    public boolean isComplete() {
-        return islandList.isEmpty();
+    private void doPurge() {
+        int total = purgeList.size();
+        int cnt = 0;
+        while (!purgeList.isEmpty()) {
+            final String islandName = purgeList.remove(0);
+            plugin.getIslandLogic().purge(islandName);
+            long now = System.currentTimeMillis();
+            if (now >= (lastContact + feedbackEvery)) {
+                lastContact = now;
+                sender.sendMessage(tr("\u00a7cPURGE:\u00a79 Purged {0}/{1} {2,number,###}%", cnt, total, 100f*(cnt)/total));
+            }
+            cnt++;
+        }
+        plugin.getOrphanLogic().save();
     }
 
     @Override
     public void run() {
-        final Runnable onPurgeCompletion = new Runnable() {
-            @Override
-            public void run() {
-                if (plugin.isPurgeActive()) {
-                    plugin.log(Level.INFO, "Finished purging marked inactive islands.");
-                    sender.sendMessage(tr("\u00a74PURGE:\u00a79 Finished purging abandoned islands."));
-                    plugin.deactivatePurge();
-                }
-            }
-        };
-        final Runnable onScanCompletion = new Runnable() {
-            @Override
-            public void run() {
-                plugin.log(Level.INFO, "Done scanning - found " + purgeList.size()+ " candidates for purging.");
-                sender.sendMessage(tr("\u00a74PURGE:\u00a79 Scanning done, found {0} candidates for purgatory.", purgeList.size()));
-                plugin.getAsyncExecutor().execute(plugin, new PurgeTask(plugin, purgeList, sender), onPurgeCompletion, 0.3f, 1);
-            }
-        };
-        plugin.getAsyncExecutor().execute(plugin, this, onScanCompletion, 1f, 1);
+        try {
+            generatePurgeList();
+            plugin.log(Level.INFO, "Done scanning - found " + purgeList.size() + " candidates for purging.");
+            sender.sendMessage(tr("\u00a74PURGE:\u00a79 Scanning done, found {0} candidates for purgatory.", purgeList.size()));
+            doPurge();
+            plugin.log(Level.INFO, "Finished purging marked inactive islands.");
+            sender.sendMessage(tr("\u00a74PURGE:\u00a79 Finished purging abandoned islands."));
+        } finally {
+            plugin.deactivatePurge();
+        }
     }
 }
