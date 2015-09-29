@@ -54,6 +54,7 @@ public class IslandLogic {
     private final boolean showMembers;
     private final boolean flatlandFix;
     private final BukkitTask saveTask;
+    private final double topTenCutoff;
 
     private volatile long lastGenerate = 0;
     private final List<IslandLevel> ranks = new ArrayList<>();
@@ -64,6 +65,7 @@ public class IslandLogic {
         this.orphanLogic = orphanLogic;
         this.showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
         this.flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
+        topTenCutoff = plugin.getConfig().getDouble("options.advanced.topTenCutoff", plugin.getConfig().getDouble("options.advanced.purgeLevel", 10));
         cache = CacheBuilder
                 .from(plugin.getConfig().getString("options.advanced.islandCache",
                         "maximumSize=200,expireAfterWrite=15m,expireAfterAccess=10m"))
@@ -272,7 +274,7 @@ public class IslandLogic {
                 boolean wasLoaded = cache.getIfPresent(islandName) != null;
                 IslandInfo islandInfo = getIslandInfo(islandName);
                 double level = islandInfo != null ? islandInfo.getLevel() : 0;
-                if (islandInfo != null && level > 10 && !islandInfo.ignore()) {
+                if (islandInfo != null && level > topTenCutoff && !islandInfo.ignore()) {
                     IslandLevel islandLevel = createIslandLevel(islandInfo, level);
                     topTen.add(islandLevel);
                 }
