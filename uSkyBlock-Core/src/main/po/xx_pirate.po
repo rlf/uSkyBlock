@@ -362,8 +362,8 @@ msgstr "Controls player-cooldowns"
 msgid "clears the cooldown on a command (* = all)"
 msgstr "clears ye cooldown on a command (* = all)"
 
-msgid "The player is not currently online"
-msgstr "Ye player be not currently online"
+msgid "§eThe player is not currently online"
+msgstr "§eThe player be not currently online"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -376,11 +376,9 @@ msgstr "No active cooldown on {0} for {1} detected!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Invalid command supplied, only restart and biome supported!"
 
-msgid "resets the cooldown on the command"
+#, fuzzy
+msgid "restarts the cooldown on the command"
 msgstr "resets yonder cooldown on thar command"
-
-msgid "§eThe player is not currently online"
-msgstr "§eThe player be not currently online"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -1992,6 +1990,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "The player is not currently online"
+#~ msgstr "Ye player be not currently online"
 
 #~ msgid "§4You don't have enough of the required item(s)!"
 #~ msgstr "§4You don't have enough of yonder required item(s)!"

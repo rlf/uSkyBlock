@@ -366,8 +366,8 @@ msgstr "Controlar player-cooldowns"
 msgid "clears the cooldown on a command (* = all)"
 msgstr "limpar o cooldown em um comando (* = todos)"
 
-msgid "The player is not currently online"
-msgstr "Esse jogador não está online"
+msgid "§eThe player is not currently online"
+msgstr "§eEsse jogador não está online"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -380,11 +380,9 @@ msgstr "Nenhum cooldown em {0} para {1} detectado!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Comando fornecido é inválido, apenas restart e biome é suportado!"
 
-msgid "resets the cooldown on the command"
+#, fuzzy
+msgid "restarts the cooldown on the command"
 msgstr "resetar o cooldown no comando"
-
-msgid "§eThe player is not currently online"
-msgstr "§eEsse jogador não está online"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -2007,6 +2005,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "The player is not currently online"
+#~ msgstr "Esse jogador não está online"
 
 #~ msgid "§4You don't have enough of the required item(s)!"
 #~ msgstr "§4Você não tem os items necessários!"

@@ -5,11 +5,15 @@ import com.sk89q.worldedit.bukkit.BukkitWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.handler.asyncworldedit.AsyncWorldEditAdaptor;
+import org.bukkit.plugin.Plugin;
+import us.talabrek.ultimateskyblock.handler.asyncworldedit.AWEAdaptor;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Handles integration with AWE.
@@ -18,55 +22,77 @@ import java.io.File;
  * Only kept as a cosmetic measure, to at least try to give the players some feedback.
  */
 public enum AsyncWorldEditHandler {;
+    private static final Logger log = Logger.getLogger(AsyncWorldEditHandler.class.getName());
+    private static AWEAdaptor adaptor = null;
 
     public static void onEnable(uSkyBlock plugin) {
-        if (isAWE(plugin)) {
-            AsyncWorldEditAdaptor.onEnable(plugin);
-        }
+        getAWEAdaptor().onEnable(plugin);
     }
 
     public static void onDisable(uSkyBlock plugin) {
-        if (isAWE(plugin)) {
-            AsyncWorldEditAdaptor.onDisable(plugin);
-        }
-    }
-
-    public static boolean isAWE(uSkyBlock plugin) {
-        return Bukkit.getPluginManager().isPluginEnabled("AsyncWorldEdit") && plugin.getConfig().getBoolean("asyncworldedit.enabled", true);
+        getAWEAdaptor().onDisable(plugin);
     }
 
     public static void registerCompletion(Player player) {
-        if (isAWE(uSkyBlock.getInstance())) {
-            AsyncWorldEditAdaptor.registerCompletion(player);
-        }
+        getAWEAdaptor().registerCompletion(player);
     }
 
     public static EditSession createEditSession(BukkitWorld world, int maxblocks) {
-        if (isAWE(uSkyBlock.getInstance())) {
-            return AsyncWorldEditAdaptor.createSession(world, maxblocks);
-        } else {
-            return new EditSession(world, maxblocks);
-        }
-    }
-
-    public static void flushQueue(final EditSession session) {
-        if (session.getClass().getSimpleName().equals("AsyncEditSession")) {
-            Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    session.flushQueue();
-                }
-            });
-        } else {
-            session.flushQueue();
-        }
+        return getAWEAdaptor().createEditSession(world, maxblocks);
     }
 
     public static void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
-        if (isAWE(uSkyBlock.getInstance())) {
-            AsyncWorldEditAdaptor.loadIslandSchematic(file, origin, playerPerk);
-        } else {
+        getAWEAdaptor().loadIslandSchematic(file, origin, playerPerk);
+    }
+
+    public static AWEAdaptor getAWEAdaptor() {
+        if (adaptor == null) {
+            Plugin awe = getAWE();
+            VersionUtil.Version version = VersionUtil.getVersion(awe.getDescription().getVersion());
+            String className = null;
+            if (version.isLT("3.0")) {
+                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE211Adaptor";
+            } else {
+                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE311Adaptor";
+            }
+            try {
+                adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
+            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version);
+                adaptor = NULL_ADAPTOR;
+            }
+        }
+        return adaptor;
+    }
+
+    private static Plugin getAWE() {
+        return Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
+    }
+
+    private static final AWEAdaptor NULL_ADAPTOR = new AWEAdaptor() {
+        @Override
+        public void onEnable(Plugin plugin) {
+
+        }
+
+        @Override
+        public void registerCompletion(Player player) {
+
+        }
+
+        @Override
+        public void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
             WorldEditHandler.loadIslandSchematic(file, origin, playerPerk);
         }
-    }
+
+        @Override
+        public void onDisable(Plugin plugin) {
+
+        }
+
+        @Override
+        public EditSession createEditSession(BukkitWorld world, int maxBlocks) {
+            return WorldEditHandler.createEditSession(world, maxBlocks);
+        }
+    };
 }

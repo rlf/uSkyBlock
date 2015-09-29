@@ -368,8 +368,8 @@ msgstr "Håndterer spiller-cooldowns"
 msgid "clears the cooldown on a command (* = all)"
 msgstr "fjerner et cooldown fra en kommando (* = alle)"
 
-msgid "The player is not currently online"
-msgstr "Spilleren er ikke online"
+msgid "§eThe player is not currently online"
+msgstr "§eDen spiller er ikke online"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -382,11 +382,9 @@ msgstr "Ingen aktiv cooldowns på {0} for {1}!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Forkert kommando givet, kun restart og biome er understøttet!"
 
-msgid "resets the cooldown on the command"
+#, fuzzy
+msgid "restarts the cooldown on the command"
 msgstr "genstart et cooldown på en kommando"
-
-msgid "§eThe player is not currently online"
-msgstr "§eDen spiller er ikke online"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -1985,6 +1983,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "The player is not currently online"
+#~ msgstr "Spilleren er ikke online"
 
 #~ msgid "§4You don't have enough of the required item(s)!"
 #~ msgstr "§4Du har ikke nok af de påkrævede ting!"

@@ -69,8 +69,8 @@ public class WorldEditHandler {
                     .to(to)
                     .ignoreAirBlocks(false)
                     .build();
-            Operations.completeBlindly(operation);
             AsyncWorldEditHandler.registerCompletion(player);
+            Operations.completeBlindly(operation);
             editSession.flushQueue();
         } catch (IOException e) {
             uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);

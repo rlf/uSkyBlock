@@ -364,8 +364,8 @@ msgstr "Controls player-cooldowns"
 msgid "clears the cooldown on a command (* = all)"
 msgstr "clears the cooldown on a command (* = all)"
 
-msgid "The player is not currently online"
-msgstr "Игрок сейчас оффлайн"
+msgid "§eThe player is not currently online"
+msgstr "§eИгрок в оффлайн"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -378,11 +378,9 @@ msgstr "No active cooldown on {0} for {1} detected!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Неверная команда, только перезапуск и биом поддерживаются"
 
-msgid "resets the cooldown on the command"
+#, fuzzy
+msgid "restarts the cooldown on the command"
 msgstr "resets the cooldown on the command"
-
-msgid "§eThe player is not currently online"
-msgstr "§eИгрок в оффлайн"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -2001,6 +1999,9 @@ msgstr "м"
 
 msgid "s"
 msgstr "с"
+
+#~ msgid "The player is not currently online"
+#~ msgstr "Игрок сейчас оффлайн"
 
 #~ msgid "§4You don't have enough of the required item(s)!"
 #~ msgstr "§4У вас недостаточно требуемых предметов!"

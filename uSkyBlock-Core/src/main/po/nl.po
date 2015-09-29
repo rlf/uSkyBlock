@@ -367,8 +367,8 @@ msgstr "Beheert de player-cooldowns"
 msgid "clears the cooldown on a command (* = all)"
 msgstr "reset de cooldown met een commando (* = alle)"
 
-msgid "The player is not currently online"
-msgstr "Die speller is op moment niet online"
+msgid "§eThe player is not currently online"
+msgstr "§eDe speler is niet online"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -381,11 +381,9 @@ msgstr "Geen actieve afkoelperiode gevonden voor {1} op {0}!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Ongeldig commando, alleen opnieuw starten en biome is ondersteund!"
 
-msgid "resets the cooldown on the command"
+#, fuzzy
+msgid "restarts the cooldown on the command"
 msgstr "reset de cooldown met een commando"
-
-msgid "§eThe player is not currently online"
-msgstr "§eDe speler is niet online"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -2031,6 +2029,9 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#~ msgid "The player is not currently online"
+#~ msgstr "Die speller is op moment niet online"
 
 #~ msgid "§4You don't have enough of the required item(s)!"
 #~ msgstr "§4Je hebt niet genoeg van de benodigde item(s)!"

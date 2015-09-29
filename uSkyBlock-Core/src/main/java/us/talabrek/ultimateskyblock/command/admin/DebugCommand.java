@@ -119,14 +119,16 @@ public class DebugCommand extends CompositeUSBCommand {
     public static class SingleLineFormatter extends Formatter {
         @Override
         public String format(LogRecord record) {
+            String sourceClassName = record.getSourceClassName();
+            sourceClassName = sourceClassName.substring(sourceClassName.lastIndexOf(".")+1);
             try {
                 return String.format("%1$d %2$tY-%2$tm-%2$td %2$tH:%2$tM:%2$tS.%2$tL %3$s %4$s %5$s\n",
-                        record.getMillis(), new Date(record.getMillis()), record.getSourceClassName(),
+                        record.getMillis(), new Date(record.getMillis()), sourceClassName,
                         record.getSourceMethodName(),
                         MessageFormat.format(record.getMessage(), record.getParameters()));
             } catch (IllegalArgumentException e) {
                 return String.format("%1$d %2$tY-%2$tm-%2$td %2$tH:%2$tM:%2$tS.%2$tL %3$s %4$s %5$s %6$s\n",
-                        record.getMillis(), new Date(record.getMillis()), record.getSourceClassName(),
+                        record.getMillis(), new Date(record.getMillis()), sourceClassName,
                         record.getSourceMethodName(),
                         record.getMessage(),
                         record.getParameters() != null ? Arrays.toString(record.getParameters()) : "");

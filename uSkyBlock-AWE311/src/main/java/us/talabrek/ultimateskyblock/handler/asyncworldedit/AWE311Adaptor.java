@@ -24,7 +24,6 @@ import org.primesoft.asyncworldedit.worldedit.AsyncEditSessionFactory;
 import org.primesoft.asyncworldedit.worldedit.CancelabeEditSession;
 import org.primesoft.asyncworldedit.worldedit.ThreadSafeEditSession;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 
@@ -42,7 +41,7 @@ import java.util.logging.Logger;
  * Adaptor depending on AWE 3.1.1 classes
  */
 public class AWE311Adaptor implements AWEAdaptor {
-    private static final Logger log = Logger.getLogger(AsyncWorldEditAdaptor.class.getName());
+    private static final Logger log = Logger.getLogger(AWE311Adaptor.class.getName());
     static long progressEveryMs = 3000; // 2 seconds
     static double progressEveryPct = 20;
     private static List<PlayerJob> pendingJobs = Collections.synchronizedList(new ArrayList<PlayerJob>());
@@ -73,13 +72,13 @@ public class AWE311Adaptor implements AWEAdaptor {
     private static IProgressDisplay progressDisplay = new IProgressDisplay() {
         @Override
         public String getName() {
-            return "uSkyBlock AWE Progress";
+            return "uSkyBlock AWE v3 Progress";
         }
 
         @Override
         public void disableMessage(IPlayerEntry playerEntry) {
             log.finer("disableMessage: " + playerEntry.getName());
-            if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getAweMode() && !pendingJobs.isEmpty()) {
+            if (playerEntry != null && playerEntry.isConsole() && playerEntry.getAweMode() && !pendingJobs.isEmpty()) {
                 PlayerJob nextJobToComplete = findNextJobToComplete();
                 log.finer("disable: " + nextJobToComplete);
                 pendingJobs.remove(nextJobToComplete);
@@ -94,7 +93,7 @@ public class AWE311Adaptor implements AWEAdaptor {
             if (maxQueuedBlocks <= 1) {
                 return; // Not the "real" number of blocks... just ignore...
             }
-            if (playerEntry != null && playerEntry.isUnknown() && playerEntry.getAweMode()) {
+            if (playerEntry != null && playerEntry.isConsole() && playerEntry.getAweMode()) {
                 synchronized (pendingJobs) {
                     if (queuedBlocks == maxQueuedBlocks) {
                         // Either a fresh job, or a new merge
@@ -162,21 +161,26 @@ public class AWE311Adaptor implements AWEAdaptor {
     @Override
     public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
         IAsyncWorldEdit awe = getAWE();
-        WorldEdit worldEdit = WorldEditHandler.getWorldEdit().getWorldEdit();
         BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
         Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
         int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
         IPlayerManager pm = awe.getPlayerManager();
-        ThreadSafeEditSession tsSession = ((AsyncEditSessionFactory)worldEdit.getEditSessionFactory()).getThreadSafeEditSession(bukkitWorld, maxBlocks);
+        IPlayerEntry playerEntry = pm.getConsolePlayer();
+        ThreadSafeEditSession tsSession = createEditSession(bukkitWorld, maxBlocks);
         FuncParamEx<Integer, CancelabeEditSession, MaxChangedBlocksException> action = new PasteAction(bukkitWorld, origin, file);
-        AsyncWorldEditHandler.registerCompletion(player);
-        IPlayerEntry playerEntry = pm.getUnknownPlayer();
+        registerCompletion(player);
         awe.getBlockPlacer().performAsAsyncJob(tsSession, playerEntry, "loadIslandSchematic", action);
+    }
+
+    public ThreadSafeEditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
+        WorldEdit worldEdit = WorldEditHandler.getWorldEdit().getWorldEdit();
+        AsyncEditSessionFactory sessionFactory = (AsyncEditSessionFactory) worldEdit.getEditSessionFactory();
+        return sessionFactory.getThreadSafeEditSession(bukkitWorld, maxBlocks);
     }
 
     @Override
     public void onDisable(Plugin plugin) {
-
+        getAWE().getProgressDisplayManager().unregisterProgressDisplay(progressDisplay);
     }
 
     private static class PasteAction implements FuncParamEx<Integer, CancelabeEditSession, MaxChangedBlocksException> {
@@ -209,7 +213,7 @@ public class AWE311Adaptor implements AWEAdaptor {
             } catch (IOException e) {
                 log.log(Level.WARNING, "Error trying to paste " + file, e);
             }
-            return 0;
+            return 32768;
         }
     }
 }

@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
+import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.WorldEdit;
@@ -23,7 +24,6 @@ import org.primesoft.asyncworldedit.worldedit.AsyncEditSessionFactory;
 import org.primesoft.asyncworldedit.worldedit.CancelabeEditSession;
 import org.primesoft.asyncworldedit.worldedit.ThreadSafeEditSession;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 
@@ -41,7 +41,7 @@ import java.util.logging.Logger;
  * AWE 2.1.1 Adaptor
  */
 public class AWE211Adaptor implements AWEAdaptor {
-    private static final Logger log = Logger.getLogger(AsyncWorldEditAdaptor.class.getName());
+    private static final Logger log = Logger.getLogger(AWE211Adaptor.class.getName());
     static long progressEveryMs = 3000; // 2 seconds
     static double progressEveryPct = 20;
     private static List<PlayerJob> pendingJobs = Collections.synchronizedList(new ArrayList<PlayerJob>());
@@ -72,7 +72,7 @@ public class AWE211Adaptor implements AWEAdaptor {
     private static IProgressDisplay progressDisplay = new IProgressDisplay() {
         @Override
         public String getName() {
-            return "uSkyBlock AWE Progress";
+            return "uSkyBlock AWE v2 Progress";
         }
 
         @Override
@@ -156,6 +156,11 @@ public class AWE211Adaptor implements AWEAdaptor {
         awe.getProgressDisplayManager().unregisterProgressDisplay(progressDisplay);
     }
 
+    @Override
+    public EditSession createEditSession(BukkitWorld world, int maxBlocks) {
+        return WorldEditHandler.getWorldEdit().getWorldEdit().getEditSessionFactory().getEditSession(world, maxBlocks);
+    }
+
     public void registerCompletion(Player player) {
         pendingJobs.add(new PlayerJob(player, progressEveryMs, progressEveryPct));
     }
@@ -174,7 +179,7 @@ public class AWE211Adaptor implements AWEAdaptor {
         PlayerEntry playerEntry = PlayerEntry.UNKNOWN;
         ThreadSafeEditSession tsSession = ((AsyncEditSessionFactory) worldEdit.getEditSessionFactory()).getThreadSafeEditSession(bukkitWorld, maxBlocks, null, playerEntry);
         FuncParamEx<Integer, CancelabeEditSession, MaxChangedBlocksException> action = new PasteAction(bukkitWorld, origin, file);
-        AsyncWorldEditHandler.registerCompletion(player);
+        registerCompletion(player);
         awe.getBlockPlacer().performAsAsyncJob(tsSession, playerEntry, "loadIslandSchematic", action);
     }
 

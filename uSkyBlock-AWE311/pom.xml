@@ -10,8 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>uSkyBlock-AWE311</artifactId>
-
-
     <dependencies>
         <dependency>
             <groupId>org.primesoft</groupId>

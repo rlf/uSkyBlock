@@ -374,8 +374,8 @@ msgstr "Kontrolliert Spieler-Abklingzeiten"
 msgid "clears the cooldown on a command (* = all)"
 msgstr "Löscht die Abklingzeit von einem Befehl (* = alle)"
 
-msgid "The player is not currently online"
-msgstr "Der Spieler ist Gegenwärtig nicht Online."
+msgid "§eThe player is not currently online"
+msgstr "§eDer Spieler ist im moment nicht Online."
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -388,11 +388,9 @@ msgstr "Keine aktive Abklingzeit bei {0} für {1} gefunden!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Ungültiger Befehl! Nur Neustart und Biome werden unterstützt!"
 
-msgid "resets the cooldown on the command"
+#, fuzzy
+msgid "restarts the cooldown on the command"
 msgstr "Setzt die Abklingzeit für den Befehl zurück."
-
-msgid "§eThe player is not currently online"
-msgstr "§eDer Spieler ist im moment nicht Online."
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -2105,6 +2103,9 @@ msgstr "m"
 # ???
 msgid "s"
 msgstr "s"
+
+#~ msgid "The player is not currently online"
+#~ msgstr "Der Spieler ist Gegenwärtig nicht Online."
 
 #~ msgid "§4You don't have enough of the required item(s)!"
 #~ msgstr "§4Du hast nicht genügend von den benötigten Gegenständen!"

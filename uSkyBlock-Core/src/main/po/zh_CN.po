@@ -373,8 +373,8 @@ msgstr ""
 msgid "clears the cooldown on a command (* = all)"
 msgstr ""
 
-msgid "The player is not currently online"
-msgstr "玩家未在线"
+msgid "§eThe player is not currently online"
+msgstr "§e玩家未在线"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -388,11 +388,8 @@ msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "无效的命令,只支持restart 和 biome"
 
 #, fuzzy
-msgid "resets the cooldown on the command"
+msgid "restarts the cooldown on the command"
 msgstr "{0}试图接管当前岛屿!"
-
-msgid "§eThe player is not currently online"
-msgstr "§e玩家未在线"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -2056,6 +2053,9 @@ msgstr "分"
 
 msgid "s"
 msgstr "秒"
+
+#~ msgid "The player is not currently online"
+#~ msgstr "玩家未在线"
 
 #~ msgid "§4You don't have enough of the required item(s)!"
 #~ msgstr "§4你没有足够的所需物品!"

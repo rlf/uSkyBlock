@@ -354,7 +354,7 @@ msgstr ""
 msgid "clears the cooldown on a command (* = all)"
 msgstr ""
 
-msgid "The player is not currently online"
+msgid "§eThe player is not currently online"
 msgstr ""
 
 #, java-format
@@ -368,10 +368,7 @@ msgstr ""
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr ""
 
-msgid "resets the cooldown on the command"
-msgstr ""
-
-msgid "§eThe player is not currently online"
+msgid "restarts the cooldown on the command"
 msgstr ""
 
 #, java-format
