@@ -29,7 +29,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 if (completion.getTimesCompleted() > 0) {
                     sender.sendMessage(tr("\u00a74Challenge has already been completed"));
                 } else {
-                    playerInfo.completeChallenge(challenge);
+                    playerInfo.completeChallenge(challenge, true);
                     playerInfo.save();
                     sender.sendMessage(tr("\u00a7echallenge: {0} has been completed for {1}", challenge,  playerInfo.getPlayerName()));
                 }

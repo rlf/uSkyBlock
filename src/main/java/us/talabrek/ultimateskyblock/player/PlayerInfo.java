@@ -118,8 +118,11 @@ public class PlayerInfo implements Serializable {
         this.homeLocation = l != null ? l.clone() : null;
     }
 
-    public void completeChallenge(final String challenge) {
+    public void completeChallenge(final String challenge, boolean silent) {
         uSkyBlock.getInstance().getChallengeLogic().completeChallenge(this, challenge);
+        if (silent) {
+            return;
+        }
         IslandInfo island = getIslandInfo();
         if (island != null) {
             island.sendMessageToOnlineMembers(tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", getPlayerName(), challenge));

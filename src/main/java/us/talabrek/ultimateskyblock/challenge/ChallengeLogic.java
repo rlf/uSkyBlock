@@ -334,8 +334,10 @@ public class ChallengeLogic {
             VaultHandler.depositPlayer(player.getName(), reward.getCurrencyReward() * rewBonus);
         }
         player.giveExp(reward.getXpReward());
+        boolean wasBroadcast = false;
         if (defaults.broadcastCompletion && isFirstCompletion) {
             Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", player.getName(), challengeName));
+            wasBroadcast = true;
         }
         player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
         player.sendMessage(tr("\u00a7eExp reward: \u00a7f{0,number,#.#}", reward.getXpReward()));
@@ -360,7 +362,7 @@ public class ChallengeLogic {
             String command = cmd.replaceAll("\\{challenge\\}", challengeName);
             plugin.execCommand(player, command, true);
         }
-        playerInfo.completeChallenge(challengeName);
+        playerInfo.completeChallenge(challengeName, wasBroadcast);
         return true;
     }
 
