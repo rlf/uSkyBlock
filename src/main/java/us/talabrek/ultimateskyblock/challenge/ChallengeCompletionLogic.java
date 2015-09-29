@@ -90,13 +90,15 @@ public class ChallengeCompletionLogic {
     private Map<String, ChallengeCompletion> loadFromConfiguration(ConfigurationSection root) {
         Map<String, ChallengeCompletion> challengeMap = new ConcurrentHashMap<>();
         plugin.getChallengeLogic().populateChallenges(challengeMap);
-        for (String challengeName : challengeMap.keySet()) {
-            challengeMap.put(challengeName, new ChallengeCompletion(
-                    challengeName,
-                    root.getLong(challengeName + ".firstCompleted", 0),
-                    root.getInt(challengeName + ".timesCompleted", 0),
-                    root.getInt(challengeName + ".timesCompletedSinceTimer", 0)
-                    ));
+        if (root != null) {
+            for (String challengeName : challengeMap.keySet()) {
+                challengeMap.put(challengeName, new ChallengeCompletion(
+                        challengeName,
+                        root.getLong(challengeName + ".firstCompleted", 0),
+                        root.getInt(challengeName + ".timesCompleted", 0),
+                        root.getInt(challengeName + ".timesCompletedSinceTimer", 0)
+                ));
+            }
         }
         return challengeMap;
     }
