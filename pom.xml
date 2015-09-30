@@ -69,18 +69,10 @@
             <id>sk89q-mvn2</id>
             <url>http://mvn2.sk89q.com/repo</url>
         </repository>
-        <!--
         <repository>
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
         </repository>
-        -->
         <repository>
             <id>Plugin Metrics</id>
             <url>http://repo.mcstats.org/content/repositories/public</url>

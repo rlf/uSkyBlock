@@ -605,9 +605,9 @@ msgstr ""
 "§4PURGE:§9 Pesquisa completa, foram encontrados {0} candidatos para o "
 "purgatório."
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Purgado {0}/{1} {2,number,###}%"
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4** Você está saindo da ilha abandonada."
 
 msgid "displays version information"
 msgstr "mostrar informações da versão"
@@ -1273,10 +1273,6 @@ msgstr "§b{0}§d desativou o warp até a ilha."
 #, java-format
 msgid "§cSKY §f> §7 {0}"
 msgstr ""
-
-#, java-format
-msgid "§d[{0}]§7 {1}"
-msgstr "§d[{0}]§7 {1}"
 
 #, java-format
 msgid "§b{0}§d has been removed from the island group."
@@ -1991,10 +1987,6 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr "§cWatchdog!§9 Não foi possível encontrar um báu em {0}.."
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! Encontramos um local mais perto para o spawn. §9Limpando ele para "
@@ -2055,6 +2047,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "§d[{0}]§7 {1}"
+#~ msgstr "§d[{0}]§7 {1}"
 
 #, fuzzy
 #~ msgid "ms"

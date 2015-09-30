@@ -90,6 +90,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.Settings.island_height;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
 
@@ -217,15 +218,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                         config.set("options.general.lastIslandZ", uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
                         saveLastIslandConfig();
                     }
-                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) Settings.island_height, (double) config.getInt("options.general.lastIslandZ")));
+                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) island_height, (double) config.getInt("options.general.lastIslandZ")));
                 } catch (Exception e) {
                     setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(),
                             (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"),
-                            (double) Settings.island_height,
+                            (double) island_height,
                             (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
                 }
                 if (lastIsland == null) {
-                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
+                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) island_height, 0.0));
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
@@ -581,8 +582,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (lastIsland != null && isSkyWorld(lastIsland.getWorld())) {
             return lastIsland;
         }
-        setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0));
-        return new Location(getSkyBlockWorld(), 0.0, (double) Settings.island_height, 0.0);
+        setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) island_height, 0.0));
+        return new Location(getSkyBlockWorld(), 0.0, (double) island_height, 0.0);
     }
 
     public void setLastIsland(final Location island) {
@@ -889,7 +890,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 pi.setIslandGenerating(true);
             }
             final Location last = getLastIsland();
-            last.setY((double) Settings.island_height);
+            last.setY((double) island_height);
             try {
                 final Location next = getNextIslandLocation(last);
                 generateIsland(player, pi, next);

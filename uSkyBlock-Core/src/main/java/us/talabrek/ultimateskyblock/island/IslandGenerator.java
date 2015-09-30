@@ -106,7 +106,7 @@ public class IslandGenerator {
         next.setY((double) Settings.island_height);
         log.exiting(CN, "createIsland");
         Location netherHome = new Location(uSkyBlock.getInstance().getSkyBlockNetherWorld(), next.getBlockX(), next.getBlockY()/2, next.getBlockZ());
-        WorldEditHandler.loadIslandSchematic(netherSchematic, netherHome, playerPerk);
+        AsyncWorldEditHandler.loadIslandSchematic(netherSchematic, netherHome, playerPerk);
     }
 
     public void generateIslandBlocks(final int x, final int z, final PlayerPerk playerPerk, final World world) {

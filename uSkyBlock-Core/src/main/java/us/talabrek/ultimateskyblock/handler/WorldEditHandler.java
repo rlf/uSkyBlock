@@ -75,8 +75,6 @@ public class WorldEditHandler {
         } catch (IOException e) {
             uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
         }
-    public static boolean loadIslandSchematic(final File file, final Location origin, PlayerPerk playerPerk) {
-        return WorldEditAdaptor.Factory.create(getWorldEdit()).loadIslandSchematic(file, origin, playerPerk);
     }
 
     /**

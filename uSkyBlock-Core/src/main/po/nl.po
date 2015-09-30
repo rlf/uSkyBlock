@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-21 23:49+0200\n"
+"PO-Revision-Date: 2015-09-30 21:44+0200\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -607,9 +607,9 @@ msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,number,###}%"
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
-#, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,number,###}%"
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4** Je verlaat een verlaten eiland."
 
 msgid "displays version information"
 msgstr "het weergeven van de versie-informatie"
@@ -2015,10 +2015,6 @@ msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
-#, java-format
-msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr "§cWatchdog!§9 Kan geen chest vinden in {0}, process gestopt."
-
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! We hebben een plaats dichter bij de spawn gevonden. §9Ontruimen dit "
@@ -2075,6 +2071,10 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr ""
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

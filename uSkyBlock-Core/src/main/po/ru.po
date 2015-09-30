@@ -604,9 +604,9 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 "§4ОЧИСТКА:§9 Сканирование завершено, найдено {0} кандидатов на очистку."
 
-#, fuzzy, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cОЧИСТКА:§9 Очищено {0}/{1} {2,number,###}%"
+#, fuzzy
+msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4** Вы покидаете заброшенный остров."
 
 msgid "displays version information"
 msgstr "показать информацию о версии"
