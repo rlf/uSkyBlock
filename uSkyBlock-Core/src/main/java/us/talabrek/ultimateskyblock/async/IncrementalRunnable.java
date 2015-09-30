@@ -23,7 +23,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
  * </pre>
  */
 public abstract class IncrementalRunnable extends BukkitRunnable {
-
     private final uSkyBlock plugin;
     private Runnable onCompletion;
     /**
@@ -37,33 +36,36 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
     /**
      * The time of creation
      */
-    private double tStart;
+    private double tStart = 0;
 
     /**
      * The time of completion.
      */
-    private double tCompleted;
+    private double tCompleted = 0;
 
     /**
      * Millis used in processing.
      */
-    private double tUsed;
+    private double tUsed = 0;
 
     /**
      * The time of the current incremental run.
      */
-    private double tRunning;
+    private double tRunning = 0;
 
     private volatile boolean isCancelled = false;
 
     private int consecutiveRuns = 0;
 
     /**
-     * Number of ticks in total.
+     * Number of iterations in total (calls to tick())
      */
-    private int ticks = 0;
+    private volatile int iterations = 0;
 
-    private double lastTick = 0;
+    /**
+     * Number of server-ticks consumed.
+     */
+    private volatile int ticks = 0;
 
     public IncrementalRunnable(uSkyBlock plugin) {
         this(plugin, null,
@@ -97,8 +99,8 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
      * Used by sub-classes to see how much time they have left.
      * @return The number of ms the current #execute() has been running.
      */
-    protected double millisActive() {
-        return System.nanoTime()*1000d - tRunning;
+    protected long millisActive() {
+        return Math.round(t() - tRunning);
     }
 
     protected double millisLeft() {
@@ -106,7 +108,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
     }
 
     public boolean stillTime() {
-        double millisPerTick = getTimeUsed()/ticks;
+        double millisPerTick = getTimeUsed()/(iterations != 0 ? iterations : 1);
         return millisPerTick < millisLeft();
     }
 
@@ -115,8 +117,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
     }
 
     protected boolean tick() {
-        ticks++;
-        lastTick = System.nanoTime()*1000d;
+        iterations++;
         return stillTime();
     }
 
@@ -131,13 +132,13 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
      * @return the number of ms the task has been active.
      */
     public long getTimeElapsed() {
-        if (tCompleted != 0) {
+        if (tCompleted != 0d) {
             return Math.round(tCompleted - tStart);
         }
         if (tStart == 0) {
             return -1;
         }
-        return Math.round(System.nanoTime()*1000d - tStart);
+        return Math.round(t() - tStart);
     }
 
     /**
@@ -145,7 +146,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
      * @return the number of ms the task has been actively executing.
      */
     public double getTimeUsed() {
-        return tUsed + ((tRunning != 0 && lastTick != 0) ? lastTick-tRunning : 0);
+        return tUsed + (tRunning != 0 ? t()-tRunning : 0);
     }
 
     public void cancel() {
@@ -154,33 +155,46 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
 
     @Override
     public final void run() {
-        tRunning = System.nanoTime()*1000d;
-        lastTick = tRunning;
-        if (tStart == 0) {
+        tRunning = t();
+        if (tStart == 0d) {
             tStart = tRunning;
+            JobManager.addJob(this);
         }
         try {
-            lastTick = tRunning;
             if (!execute() && !isCancelled) {
                 // TODO: 28/09/2015 - R4zorax: Don't run back to back ALL the time
                 Bukkit.getScheduler().runTaskLater(plugin, this, consecutiveRuns < maxConsecutive ? 0 : yieldDelay);
             } else {
-                tCompleted = System.nanoTime()*1000d;
                 if (onCompletion != null && !isCancelled) {
                     Bukkit.getScheduler().runTaskLater(plugin, onCompletion, 0);
                 }
+                complete();
             }
         } finally {
-            tUsed += (System.nanoTime()*1000d - tRunning);
+            tUsed += (t() - tRunning);
             tRunning = 0;
             consecutiveRuns++;
             if (consecutiveRuns > maxConsecutive) {
                 consecutiveRuns = 0;
             }
+            ticks++;
         }
+    }
+
+    private static double t() {
+        return System.nanoTime()/1000000d;
     }
 
     protected void setOnCompletion(Runnable onCompletion) {
         this.onCompletion = onCompletion;
+    }
+
+    private void complete() {
+        tCompleted = t();
+        JobManager.completeJob(this);
+    }
+
+    public int getTicks() {
+        return ticks;
     }
 }

@@ -474,6 +474,34 @@ msgstr "§4Den spiller har ingen ø!"
 msgid "imports players and islands from other formats"
 msgstr "importer spillere og øer fra andre formater"
 
+msgid "§9Job Statistics"
+msgstr ""
+
+#, fuzzy
+msgid "§7----------------"
+msgstr "§7------------------------------\n"
+
+msgid "#"
+msgstr ""
+
+msgid "ms/job"
+msgstr ""
+
+msgid "ms/tick"
+msgstr ""
+
+msgid "ticks"
+msgstr ""
+
+msgid "act"
+msgstr ""
+
+msgid "time"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
 msgid "changes the language of the plugin, and reloads"
 msgstr "skifter sprog af pluginnet, og genindlæser det"
 
@@ -1983,6 +2011,14 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr ""
+
+#, fuzzy
+#~ msgid "ms"
+#~ msgstr "m"
 
 #~ msgid "The player is not currently online"
 #~ msgstr "Spilleren er ikke online"

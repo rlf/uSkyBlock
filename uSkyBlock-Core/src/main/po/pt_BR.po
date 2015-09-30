@@ -472,6 +472,34 @@ msgstr "§4Esse jogador não tem uma ilha!"
 msgid "imports players and islands from other formats"
 msgstr "importar jogadores e ilhas de outros formatos"
 
+msgid "§9Job Statistics"
+msgstr ""
+
+#, fuzzy
+msgid "§7----------------"
+msgstr "§7------------------------------\n"
+
+msgid "#"
+msgstr ""
+
+msgid "ms/job"
+msgstr ""
+
+msgid "ms/tick"
+msgstr ""
+
+msgid "ticks"
+msgstr ""
+
+msgid "act"
+msgstr ""
+
+msgid "time"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
 msgid "changes the language of the plugin, and reloads"
 msgstr "altera a linguagem do plugin e recarrega"
 
@@ -2005,6 +2033,14 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr ""
+
+#, fuzzy
+#~ msgid "ms"
+#~ msgstr "m"
 
 #~ msgid "The player is not currently online"
 #~ msgstr "Esse jogador não está online"

@@ -468,6 +468,34 @@ msgstr "§4That player does not have an island!"
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
 
+msgid "§9Job Statistics"
+msgstr ""
+
+#, fuzzy
+msgid "§7----------------"
+msgstr "§7------------------------------\n"
+
+msgid "#"
+msgstr ""
+
+msgid "ms/job"
+msgstr ""
+
+msgid "ms/tick"
+msgstr ""
+
+msgid "ticks"
+msgstr ""
+
+msgid "act"
+msgstr ""
+
+msgid "time"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
 #, fuzzy
 msgid "changes the language of the plugin, and reloads"
 msgstr "change yonder biome of yonder island"
@@ -1990,6 +2018,14 @@ msgstr "m"
 
 msgid "s"
 msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr ""
+
+#, fuzzy
+#~ msgid "ms"
+#~ msgstr "m"
 
 #~ msgid "The player is not currently online"
 #~ msgstr "Ye player be not currently online"

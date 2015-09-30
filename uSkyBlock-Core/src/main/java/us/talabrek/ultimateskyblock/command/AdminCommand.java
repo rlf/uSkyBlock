@@ -12,6 +12,7 @@ import us.talabrek.ultimateskyblock.command.admin.FlushCommand;
 import us.talabrek.ultimateskyblock.command.admin.GenTopTenCommand;
 import us.talabrek.ultimateskyblock.command.admin.GotoIslandCommand;
 import us.talabrek.ultimateskyblock.command.admin.ImportCommand;
+import us.talabrek.ultimateskyblock.command.admin.JobsCommand;
 import us.talabrek.ultimateskyblock.command.admin.LanguageCommand;
 import us.talabrek.ultimateskyblock.command.admin.OrphanCommand;
 import us.talabrek.ultimateskyblock.command.admin.PerkCommand;
@@ -68,5 +69,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new PerkCommand(plugin));
         add(new LanguageCommand(plugin));
         add(new FlushCommand(plugin));
+        add(new JobsCommand(plugin));
     }
 }

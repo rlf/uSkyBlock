@@ -459,6 +459,33 @@ msgstr ""
 msgid "imports players and islands from other formats"
 msgstr ""
 
+msgid "§9Job Statistics"
+msgstr ""
+
+msgid "§7----------------"
+msgstr ""
+
+msgid "#"
+msgstr ""
+
+msgid "ms/job"
+msgstr ""
+
+msgid "ms/tick"
+msgstr ""
+
+msgid "ticks"
+msgstr ""
+
+msgid "act"
+msgstr ""
+
+msgid "time"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
 msgid "changes the language of the plugin, and reloads"
 msgstr ""
 
@@ -1784,4 +1811,8 @@ msgid "m"
 msgstr ""
 
 msgid "s"
+msgstr ""
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""

@@ -44,7 +44,7 @@ public enum TimeUtil {
         long s = (millis % MIN) / SEC;
         String str = "";
         if (d > 0) {
-            str += d + tr("d");
+            str += " " + d + tr("d");
         }
         if (h > 0) {
             str += " " + h + tr("h");
@@ -56,6 +56,13 @@ public enum TimeUtil {
             str += " " + s + tr("s");
         }
         return str.trim();
+    }
+
+    public static String millisAsShort(long millis) {
+        long m = millis / MIN;
+        long s = (millis % MIN) / SEC;
+        long ms = millis % SEC;
+        return String.format(tr("{0,number,0}:{1,number,00}.{2,number,000}", m, s, ms));
     }
 
     public static String ticksAsString(int ticks) {
