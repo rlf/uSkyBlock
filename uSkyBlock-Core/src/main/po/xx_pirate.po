@@ -78,14 +78,14 @@ msgstr "§4Unknown type of challenge: {0}"
 
 #, java-format
 msgid "§eStill the following blocks short: {0}"
-msgstr "§eStill thar following blocks short: {0}"
+msgstr "§eStill ye following blocks short: {0}"
 
 #, java-format
 msgid ""
 "§eStill the following entities short:\n"
 "{0}"
 msgstr ""
-"§eStill ye following entities short:\n"
+"§eStill yonder following entities short:\n"
 "{0}"
 
 #, java-format
@@ -96,9 +96,9 @@ msgstr "§eYou be ye following items short:{0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aYou have completed yonder {0} challenge!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
-msgstr "{0} has completed thar {1} challenge!"
+msgstr "§9{0}§f has completed thar §9{1}§f challenge!"
 
 #, java-format
 msgid "§eItem reward(s): §f{0}"
@@ -129,7 +129,7 @@ msgid "§fComplete most challenges in"
 msgstr "§fComplete most challenges in"
 
 msgid "§fthis rank to unlock the next rank."
-msgstr "§fthis rank to unlock thar next rank."
+msgstr "§fthis rank to unlock yonder next rank."
 
 msgid "§eClick here to show previous page"
 msgstr "§eClick here to show previous page"
@@ -147,7 +147,7 @@ msgid "§4You don't have access to this command!"
 msgstr "§4You don't have access to this command!"
 
 msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4You can only submit challenges in thar skyblock world!"
+msgstr "§4You can only submit challenges in ye skyblock world!"
 
 msgid "§4You can only submit challenges when you have an island!"
 msgstr "§4You can only submit challenges when you have an island!"
@@ -222,7 +222,7 @@ msgid "§echallenge: {0} has been completed for {1}"
 msgstr "§echallenge: {0} has been completed for {1}"
 
 msgid "resets the challenge for the player"
-msgstr "resets yonder challenge for ye player"
+msgstr "resets thar challenge for thar player"
 
 msgid "§4Challenge has never been completed"
 msgstr "§4Challenge has never been completed"
@@ -253,7 +253,7 @@ msgid "protects the island"
 msgstr "protects yonder island"
 
 msgid "delete the island (removes the blocks)"
-msgstr "delete ye island (removes thar blocks)"
+msgstr "delete yonder island (removes yonder blocks)"
 
 msgid "§9Deleted abandoned island at your current location."
 msgstr "§9Deleted abandoned island at ye current location."
@@ -266,16 +266,16 @@ msgstr ""
 "§eUse §9/usb island delete <name>§e to delete it."
 
 msgid "removes the player from the island"
-msgstr "removes ye player from yonder island"
+msgstr "removes thar player from yonder island"
 
 msgid "print out info about the island"
-msgstr "print out info about ye island"
+msgstr "print out info about yonder island"
 
 msgid "protects all islands (time consuming)"
 msgstr "protects all islands (time consuming)"
 
 msgid "sets the biome of the island"
-msgstr "sets ye biome of ye island"
+msgstr "sets yonder biome of yonder island"
 
 msgid "§4That player has no island."
 msgstr "§4That player has no island."
@@ -283,31 +283,30 @@ msgstr "§4That player has no island."
 msgid "§4No valid island at your location"
 msgstr "§4No valid island at ye location"
 
-#, fuzzy
 msgid "purges the island"
-msgstr "protects yonder island"
+msgstr "purges yonder island"
 
-#, fuzzy
 msgid "§4Error! §9No valid island found for purging."
-msgstr "§4No valid island found"
+msgstr "§4Error! §9No valid island found for purging."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr ""
+msgstr "§cPURGE: §9Purged island at {0}"
 
-#, fuzzy
 msgid "toggles the islands ignore status"
-msgstr "toggle yonder island's lock."
+msgstr "toggles thar islands ignore status"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§aSet {0}'s island to ye bedrock nearest you."
+msgstr "§cSet {0}s island to be ignored on top-ten and purge."
 
-#, fuzzy, java-format
+#, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
-msgstr "§aSet {0}'s island to ye bedrock nearest you."
+msgstr ""
+"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
+"purge."
 
 msgid "§4No valid player-name supplied."
 msgstr "§4No valid player-name supplied."
@@ -376,16 +375,15 @@ msgstr "No active cooldown on {0} for {1} detected!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Invalid command supplied, only restart and biome supported!"
 
-#, fuzzy
 msgid "restarts the cooldown on the command"
-msgstr "resets yonder cooldown on thar command"
+msgstr "restarts ye cooldown on thar command"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
 msgstr "§eReset cooldown on {0} for {1}§e to {2} seconds"
 
 msgid "lists all the active cooldowns"
-msgstr "lists all yonder active cooldowns"
+msgstr "lists all ye active cooldowns"
 
 msgid "§eCmd Cooldown"
 msgstr "§eCmd Cooldown"
@@ -411,7 +409,7 @@ msgid "§4Logging wasn't active, so you can't disable it!"
 msgstr "§4Logging wasn't active, so you can't disable it!"
 
 msgid "flush current content of the logger to file."
-msgstr "flush current content of thar logger to file."
+msgstr "flush current content of yonder logger to file."
 
 msgid "§eLog-file has been flushed."
 msgstr "§eLog-file has been flushed."
@@ -426,7 +424,7 @@ msgid "§eLogging disabled!"
 msgstr "§eLogging disabled!"
 
 msgid "tries to fix the the area of flatland."
-msgstr "tries to fix thar ye area of flatland."
+msgstr "tries to fix thar thar area of flatland."
 
 msgid "§4No valid island found"
 msgstr "§4No valid island found"
@@ -436,18 +434,19 @@ msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4No flatland detected at {0}'s island!"
 
 msgid "flushes all caches to files"
-msgstr ""
+msgstr "flushes all caches to files"
 
 #, java-format
 msgid ""
 "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
 msgstr ""
+"§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
 
 msgid "manually update the top 10 list"
-msgstr "manually update thar top 10 list"
+msgstr "manually update yonder top 10 list"
 
 msgid "§eGenerating the Top Ten list"
-msgstr "§eGenerating thar Top Ten list"
+msgstr "§eGenerating yonder Top Ten list"
 
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eFinished generation of yonder Top Ten list"
@@ -469,54 +468,52 @@ msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
 
 msgid "§9Job Statistics"
-msgstr ""
+msgstr "§9Job Statistics"
 
-#, fuzzy
 msgid "§7----------------"
-msgstr "§7------------------------------\n"
+msgstr "§7----------------"
 
 msgid "#"
-msgstr ""
+msgstr "#"
 
 msgid "ms/job"
-msgstr ""
+msgstr "ms/job"
 
 msgid "ms/tick"
-msgstr ""
+msgstr "ms/tick"
 
 msgid "ticks"
-msgstr ""
+msgstr "ticks"
 
 msgid "act"
-msgstr ""
+msgstr "act"
 
 msgid "time"
-msgstr ""
+msgstr "time"
 
 msgid "name"
-msgstr ""
+msgstr "name"
 
-#, fuzzy
 msgid "changes the language of the plugin, and reloads"
-msgstr "change yonder biome of yonder island"
+msgstr "changes ye language of yonder plugin, and reloads"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr ""
+msgstr "§aSuccessfully changed language to §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
-msgstr ""
+msgstr "§cFailed to change language to §e{0}"
 
 msgid "§9Supported Languages:\n"
-msgstr ""
+msgstr "§9Supported Languages:\n"
 
 #, java-format
 msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
-msgstr ""
+msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 
 msgid "§cUnable to locate any languages."
-msgstr ""
+msgstr "§cUnable to locate any languages."
 
 msgid "transfer leadership to another player"
 msgstr "transfer leadership to another player"
@@ -557,7 +554,7 @@ msgid "list orphans"
 msgstr "list orphans"
 
 msgid "§eNo orphans currently registered."
-msgstr ""
+msgstr "§eNo orphans currently registered."
 
 #, java-format
 msgid "§eOrphans: {0}"
@@ -570,21 +567,21 @@ msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4A purge be already running, please wait for it to finish!"
 
 msgid "§4You must provide the age in days to purge!"
-msgstr "§4You must provide ye age in days to purge!"
+msgstr "§4You must provide yonder age in days to purge!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eMarking all islands inactive for more than {0} days."
+msgstr "§eFinding all islands that has been abandoned for more than {0} days."
 
 msgid "set a player's island to your location"
 msgstr "set a player's island to ye location"
 
 #, java-format
 msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aSet {0}'s island to ye bedrock nearest you."
+msgstr "§aSet {0}'s island to thar bedrock nearest you."
 
 msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4Bedrock not found: unable to set thar island!"
+msgstr "§4Bedrock not found: unable to set yonder island!"
 
 msgid "reload configuration from file."
 msgstr "reload configuration from file."
@@ -598,11 +595,10 @@ msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr ""
+msgstr "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 
-#, fuzzy
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4** You be leaving an abandoned island."
+msgstr "§4PURGE:§9 Finished purging abandoned islands."
 
 msgid "displays version information"
 msgstr "displays version information"
@@ -611,13 +607,13 @@ msgid "various WorldGuard utilities"
 msgstr "various WorldGuard utilities"
 
 msgid "refreshes the chunks around the player"
-msgstr "refreshes ye chunks around thar player"
+msgstr "refreshes yonder chunks around ye player"
 
 msgid "§eResending chunks to the client"
-msgstr "§eResending chunks to thar client"
+msgstr "§eResending chunks to yonder client"
 
 msgid "load the region chunks"
-msgstr "load ye region chunks"
+msgstr "load thar region chunks"
 
 #, java-format
 msgid "§eLoading chunks at {0}"
@@ -663,16 +659,15 @@ msgstr "§4WARNING: You will lose ye current island if you accept!"
 
 #, java-format
 msgid "{0}§e has rejected the invitation."
-msgstr "{0}§e has rejected thar invitation."
+msgstr "{0}§e has rejected ye invitation."
 
 msgid "§4You can't use that command right now. Leave your current party first."
-msgstr ""
-"§4You can't use that command starboard now. Leave ye current party first."
+msgstr "§4You can't use that command starboard now. Leave ye current party first."
 
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
-"§aYou have joined an island! Use /island party to see ye other members."
+"§aYou have joined an island! Use /island party to see yonder other members."
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
@@ -696,7 +691,7 @@ msgid "§4You haven't been invited."
 msgstr "§4You haven't been invited."
 
 msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eYou have accepted ye invitation to join an island."
+msgstr "§eYou have accepted thar invitation to join an island."
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a player from ye island."
@@ -717,25 +712,25 @@ msgstr "§4You do not have permission to kick/ban players."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eYou have banned §4{0}§e from warping to ye island."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eYou have banned §4{0}§e from warping to ye island."
+msgstr "§eYou have been §cBANNED§e from {0}§e''s island."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eYou have unbanned §a{0}§e from warping to ye island."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eYou have unbanned §a{0}§e from warping to ye island."
+msgstr "§eYou have been §aUNBANNED§e from {0}§e''s island."
 
 msgid "change the biome of the island"
-msgstr "change yonder biome of yonder island"
+msgstr "change yonder biome of ye island"
 
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr ""
-"§cYou do not have permission to change yonder biome of ye current island."
+"§cYou do not have permission to change thar biome of ye current island."
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -753,19 +748,19 @@ msgid "§cYou do not have permission to change your biome to that type."
 msgstr "§cYou do not have permission to change ye biome to that type."
 
 msgid "§cYou have misspelled the biome name."
-msgstr "§cYou have misspelled thar biome name."
+msgstr "§cYou have misspelled yonder biome name."
 
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§eYou must be on ye island to change ye biome!"
 
 msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4You do not have permission to change ye biome of this island!"
+msgstr "§4You do not have permission to change thar biome of this island!"
 
 msgid "create an island"
 msgstr "create an island"
 
 msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cYour island be in thar process of generating, you cannot create now."
+msgstr "§cYour island be in yonder process of generating, you cannot create now."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -792,7 +787,7 @@ msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
 "right now."
 msgstr ""
-"§cYour island be in ye process of generating, you cannot teleport home "
+"§cYour island be in thar process of generating, you cannot teleport home "
 "starboard now."
 
 msgid "check your or anothers island info"
@@ -825,10 +820,11 @@ msgstr "invite a player to ye island"
 
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
-msgstr "§eUse§f /island invite <playername>§e to invite a player to ye island."
+msgstr ""
+"§eUse§f /island invite <playername>§e to invite a player to ye island."
 
 msgid "§4Only the island's owner can invite!"
-msgstr "§4Only thar island's owner can invite!"
+msgstr "§4Only ye island's owner can invite!"
 
 #, java-format
 msgid "§aYou can invite {0} more players."
@@ -847,7 +843,7 @@ msgid "§4You can't invite yourself!"
 msgstr "§4You can't invite yourself!"
 
 msgid "§4That player is the leader of your island!"
-msgstr "§4That player be thar leader of ye island!"
+msgstr "§4That player be ye leader of ye island!"
 
 #, java-format
 msgid "{0}§d invited {1}"
@@ -860,7 +856,7 @@ msgid "§4You do not have permission to kick others from this island!"
 msgstr "§4You do not have permission to kick others from this island!"
 
 msgid "§4You can't remove the leader from the Island!"
-msgstr "§4You can't remove yonder leader from yonder Island!"
+msgstr "§4You can't remove ye leader from thar Island!"
 
 msgid "§4Stop kickin' yourself!"
 msgstr "§4Stop kickin' yourself!"
@@ -871,7 +867,7 @@ msgstr "§4{0} has removed you from their island!"
 
 #, java-format
 msgid "§4{0} has been removed from the island."
-msgstr "§4{0} has been removed from yonder island."
+msgstr "§4{0} has been removed from thar island."
 
 msgid "§4"
 msgstr "§4"
@@ -890,21 +886,21 @@ msgid ""
 "§4You can't leave your island if you are the only person. Try using /island "
 "restart if you want a new one!"
 msgstr ""
-"§4You can't leave ye island if you be ye only landlubber. Try using /island "
+"§4You can't leave ye island if you be thar only landlubber. Try using /island "
 "restart if you want a new one!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
 msgstr "§eYou own this island, use /island remove <player> instead."
 
 msgid "§eYou have left the island and returned to the player spawn."
-msgstr "§eYou have port ye island and returned to yonder player spawn."
+msgstr "§eYou have port ye island and returned to ye player spawn."
 
 #, java-format
 msgid "§4{0} has left your island!"
 msgstr "§4{0} has port ye island!"
 
 msgid "§4You must be in the skyblock world to leave your party!"
-msgstr "§4You must be in yonder skyblock world to leave ye party!"
+msgstr "§4You must be in ye skyblock world to leave ye party!"
 
 msgid "check your or anothers island level"
 msgstr "check ye or anothers island level"
@@ -930,7 +926,6 @@ msgstr "§4You do not have permission to lock ye island!"
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4You do not have permission to unlock ye island!"
 
-#, fuzzy
 msgid "display log"
 msgstr "display log"
 
@@ -949,7 +944,7 @@ msgstr "§4Only leader can transfer leadership!"
 
 #, java-format
 msgid "{0} tried to take over the island!"
-msgstr "{0} tried to take over yonder island!"
+msgstr "{0} tried to take over ye island!"
 
 msgid "show party information"
 msgstr "show party information"
@@ -999,7 +994,7 @@ msgid "§cYou can restart your island in {0} seconds."
 msgstr "§cYou can restart ye island in {0} seconds."
 
 msgid "§cYour island is in the process of generating, you cannot restart now."
-msgstr "§cYour island be in ye process of generating, you cannot restart now."
+msgstr "§cYour island be in yonder process of generating, you cannot restart now."
 
 msgid "§eNOTE: Your entire island and all your belongings will be RESET!"
 msgstr "§eNOTE: Ye entire island and all ye belongings will be RESET!"
@@ -1018,10 +1013,10 @@ msgstr "§cYou need to be on ye own island to set yonder warp!"
 
 #, java-format
 msgid "§b{0}§d changed the island warp location."
-msgstr "§b{0}§d changed ye island warp location."
+msgstr "§b{0}§d changed yonder island warp location."
 
 msgid "teleports you to the skyblock spawn"
-msgstr "teleports you to thar skyblock spawn"
+msgstr "teleports you to yonder skyblock spawn"
 
 msgid "enable/disable warping to your island."
 msgstr "enable/disable warping to ye island."
@@ -1029,9 +1024,9 @@ msgstr "enable/disable warping to ye island."
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr "§4Your island be locked. You must unlock it before enabling ye warp."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d activated the island warp."
-msgstr "§b{0}§d deactivated yonder island warp."
+msgstr "§b{0}§d activated ye island warp."
 
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
@@ -1041,7 +1036,7 @@ msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr "§cYou do not have permission to enable/disable ye island's warp!"
 
 msgid "display the top10 of islands"
-msgstr "display ye top10 of islands"
+msgstr "display thar top10 of islands"
 
 msgid "trust/untrust a player to help on your island."
 msgstr "trust/untrust a player to help on ye island."
@@ -1106,7 +1101,7 @@ msgid ""
 "§cYour island is in the process of generating, you cannot warp to other "
 "players islands right now."
 msgstr ""
-"§cYour island be in yonder process of generating, you cannot warp to other "
+"§cYour island be in ye process of generating, you cannot warp to other "
 "players islands starboard now."
 
 msgid "§4That player does not exist!"
@@ -1119,8 +1114,8 @@ msgid ""
 "§cThat players island is in the process of generating, you cannot warp to it "
 "right now."
 msgstr ""
-"§cThat players island be in yonder process of generating, you cannot warp to "
-"it starboard now."
+"§cThat players island be in yonder process of generating, you cannot warp to it "
+"starboard now."
 
 #, java-format
 msgid "§cWARNING: §9{0}§e is warping to your island!"
@@ -1133,7 +1128,7 @@ msgid "But you are ALLLLLLL ALOOOOONE!"
 msgstr "But you be ALLLLLLL ALOOOOONE!"
 
 msgid "But you are Yelling in the wind!"
-msgstr "But you be Yelling in thar wind!"
+msgstr "But you be Yelling in ye wind!"
 
 msgid "But your fantasy friends are gone!"
 msgstr "But ye fantasy crew be gone!"
@@ -1169,25 +1164,22 @@ msgstr "§4It's a bad idea to replace ye lava!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4That player has forbidden you from teleporting to their island."
 
-#, fuzzy
 msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§eYou have revoked ye trust in §a{0}§e on ye island."
+msgstr "§cYou have reached ye spawn-limit for ye island."
 
-#, fuzzy
 msgid "§eYou can only use spawn-eggs on your own island."
-msgstr "§4You can only submit challenges when you have an island!"
+msgstr "§eYou can only use spawn-eggs on ye own island."
 
-#, fuzzy
 msgid "§cBanned:§e You are banned from this island."
-msgstr "§4Player be already assigned to this island!"
+msgstr "§cBanned:§e You be banned from this island."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr "§eCurrent Level: §a{0,number,##.#}"
+msgstr "§eWaiting for our turn §c{0,number,###}%"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating island...§e{0,number,###}%"
-msgstr "§eCurrent Level: §a{0,number,##.#}"
+msgstr "§9Creating island...§e{0,number,###}%"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1198,16 +1190,16 @@ msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§eDoing §9{0}§e be §cRISKY§e. Repeat ye command within §a{1}§e seconds to "
+"§eDoing §9{0}§e be §cRISKY§e. Repeat yonder command within §a{1}§e seconds to "
 "accept!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§d** You are entering §b{0}''s §disland."
-msgstr "§d** You be entering §b{0}'s §disland."
+msgstr "§d** You be entering §b{0}''s §disland."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** You be leaving §b{0}'s §disland."
+msgstr "§d** You be leaving §b{0}''s §disland."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§eYour island be now locked. Only ye party members may enter."
@@ -1223,7 +1215,7 @@ msgstr ""
 "party members may build or remove blocks."
 
 msgid "§4You must be the party leader to unlock your island!"
-msgstr "§4You must be ye party leader to unlock ye island!"
+msgstr "§4You must be thar party leader to unlock ye island!"
 
 msgid "§4** You are entering a protected - but abandoned - island area."
 msgstr "§4** You be entering a protected - but abandoned - island area."
@@ -1238,32 +1230,31 @@ msgstr "§4No importer named §e{0}§4 found"
 msgid "§eConverted "
 msgstr "§eConverted "
 
-#, fuzzy
 msgid "The island has been created."
-msgstr "§e{0}s island at {1} has been protected"
+msgstr "Yonder island has been created."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d locked the island."
-msgstr "§b{0}§d deactivated yonder island warp."
+msgstr "§b{0}§d locked thar island."
 
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4Since ye island be locked, ye incoming warp has been deactivated."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d unlocked the island."
-msgstr "§b{0}§d deactivated yonder island warp."
+msgstr "§b{0}§d unlocked ye island."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
-msgstr ""
+msgstr "§cSKY §f> §7 {0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d has been removed from the island group."
-msgstr "§4{0} has been removed from yonder island."
+msgstr "§b{0}§d has been removed from yonder island group."
 
 #, java-format
 msgid "§9{1} §7- {0}"
-msgstr ""
+msgstr "§9{1} §7- {0}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cThe island you be on be being deleted! Sending you to spawn."
@@ -1273,7 +1264,7 @@ msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eWALL OF FAME (page {0} of {1}):"
 
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
-msgstr "§4Top ten list be empty! (perhaps thar generation failed?)"
+msgstr "§4Top ten list be empty! (perhaps yonder generation failed?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#- §7(%5.2f): §e%s §7%s"
@@ -1284,19 +1275,19 @@ msgstr "§eYour rank be: §f{0}"
 
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr ""
+msgstr "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 
 msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
 msgid "change the islands's biome."
-msgstr "change ye islands's biome."
+msgstr "change yonder islands's biome."
 
 msgid "toggle the island's lock."
-msgstr "toggle yonder island's lock."
+msgstr "toggle ye island's lock."
 
 msgid "set the island's warp."
-msgstr "set ye island's warp."
+msgstr "set yonder island's warp."
 
 msgid ""
 "set the island's warp,\n"
@@ -1321,10 +1312,10 @@ msgstr ""
 "toggle yonder\n"
 "island's warp, allowing them\n"
 "to turn it on or off at anytime.\n"
-"but not set ye location."
+"but not set yonder location."
 
 msgid "invite others to the island."
-msgstr "invite others to thar island."
+msgstr "invite others to ye island."
 
 msgid ""
 "invite\n"
@@ -1333,7 +1324,7 @@ msgid ""
 "members"
 msgstr ""
 "invite\n"
-"other players to thar island if\n"
+"other players to ye island if\n"
 "there be enough room for more\n"
 "members"
 
@@ -1347,17 +1338,16 @@ msgid ""
 "the island leader."
 msgstr ""
 "kick\n"
-"other players from ye island,\n"
+"other players from thar island,\n"
 "but they be unable to kick\n"
 "yonder island leader."
 
-#, fuzzy
 msgid "Permissions"
 msgstr "Permissions"
 
-#, fuzzy, java-format
+#, java-format
 msgid "{0} <{1}>"
-msgstr "§a{0} §c{1}"
+msgstr "{0} <{1}>"
 
 msgid "§hPlayer Permissions"
 msgstr "§hPlayer Permissions"
@@ -1375,7 +1365,7 @@ msgid ""
 "§epermission by clicking it."
 msgstr ""
 "§eHover over an icon to view\n"
-"§ea permission. Change ye\n"
+"§ea permission. Change yonder\n"
 "§epermission by clicking it."
 
 msgid "§fThis player §acan"
@@ -1410,7 +1400,7 @@ msgid ""
 "§eby clicking a player's icon."
 msgstr ""
 "§eHover over a player's icon to\n"
-"§eview their permissions. Thar\n"
+"§eview their permissions. Ye\n"
 "§eleader can change permissions\n"
 "§eby clicking a player's icon."
 
@@ -1457,7 +1447,7 @@ msgid ""
 "not spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"Thar ocean biome be thar basic\n"
+"Thar ocean biome be yonder basic\n"
 "starting biome for all islands.\n"
 "passive mobs like animals will\n"
 "not spawn. Hostile mobs will\n"
@@ -1489,7 +1479,7 @@ msgid ""
 "won't spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"Thar desert biome makes it so\n"
+"Yonder desert biome makes it so\n"
 "that there be no rain or snow\n"
 "on ye island. Passive mobs\n"
 "won't spawn. Hostile mobs will\n"
@@ -1527,7 +1517,7 @@ msgstr ""
 "will spawn normally and\n"
 "slimes have a small chance\n"
 "to spawn at night depending\n"
-"on yonder moon phase."
+"on ye moon phase."
 
 msgid "Taiga"
 msgstr "Taiga"
@@ -1539,7 +1529,7 @@ msgid ""
 "(including wolves) and\n"
 "hostile mobs will spawn."
 msgstr ""
-"Thar taiga biome has snow\n"
+"Ye taiga biome has snow\n"
 "instead of rain. Passive\n"
 "mobs will spawn normally\n"
 "(including wolves) and\n"
@@ -1556,9 +1546,9 @@ msgid ""
 "No other passive or\n"
 "hostile mobs will spawn."
 msgstr ""
-"Thar mushroom biome be\n"
+"Ye mushroom biome be\n"
 "bright and colorful.\n"
-"Mooshrooms be thar only\n"
+"Mooshrooms be ye only\n"
 "mobs that will spawn.\n"
 "No other passive or\n"
 "hostile mobs will spawn."
@@ -1576,7 +1566,7 @@ msgid ""
 msgstr ""
 "Yonder hell biome looks\n"
 "dark and dead. Some\n"
-"mobs from yonder nether will\n"
+"mobs from thar nether will\n"
 "spawn in this biome\n"
 "(excluding ghasts and\n"
 "blazes)."
@@ -1620,7 +1610,7 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"Yonder extreme hills biome.\n"
+"Thar extreme hills biome.\n"
 "Passive mobs will spawn \n"
 "normally and hostile\n"
 "mobs will spawn."
@@ -1790,8 +1780,8 @@ msgid ""
 msgstr ""
 "View ye members of ye island\n"
 "group and their permissions. If\n"
-"you be thar island leader, you\n"
-"can change yonder member permissions.\n"
+"you be yonder island leader, you\n"
+"can change thar member permissions.\n"
 "§e§lClick here to view or change."
 
 msgid "Change Island Biome"
@@ -1810,7 +1800,7 @@ msgid "§e§lClick here to change biomes."
 msgstr "§e§lClick here to change biomes."
 
 msgid "§c§lYou can't change the biome."
-msgstr "§c§lYou can't change thar biome."
+msgstr "§c§lYou can't change yonder biome."
 
 msgid "§a§lIsland Lock"
 msgstr "§a§lIsland Lock"
@@ -1859,14 +1849,14 @@ msgid ""
 msgstr ""
 "§eWarp Status: §aActive\n"
 "§fOther players may warp to ye\n"
-"§fisland at anytime to thar point\n"
+"§fisland at anytime to ye point\n"
 "§fyou set using §d/island setwarp."
 
 msgid "§e§lClick here to deactivate."
 msgstr "§e§lClick here to deactivate."
 
 msgid "§c§lYou can't change the warp."
-msgstr "§c§lYou can't change thar warp."
+msgstr "§c§lYou can't change yonder warp."
 
 msgid ""
 "§eWarp Status: §8Inactive\n"
@@ -1894,7 +1884,7 @@ msgstr ""
 "View a log of events from\n"
 "ye island such as member,\n"
 "biome, and warp changes.\n"
-"§e§lClick to view yonder log."
+"§e§lClick to view ye log."
 
 msgid "§a§lChange Home Location"
 msgstr "§a§lChange Home Location"
@@ -1933,7 +1923,7 @@ msgid "§4Player is already assigned to this island!"
 msgstr "§4Player be already assigned to this island!"
 
 msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4You be not part of an island. Returning you thar spawn area!"
+msgstr "§4You be not part of an island. Returning you yonder spawn area!"
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleporting you to ye island."
@@ -1965,16 +1955,16 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGetting ye island ready, please be patient, it can take a while."
 
 msgid "§aCongratulations! §eYour island has appeared."
-msgstr ""
+msgstr "§aCongratulations! §eYour island has appeared."
 
 msgid "§cNote:§e Construction might still be ongoing."
-msgstr ""
+msgstr "§cNote:§e Construction might still be ongoing."
 
 msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr ""
+msgstr "Use §9/be h§r or yonder §9/be§r menu to go there."
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr ""
+msgstr "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 
 #, java-format
 msgid "§7Name: §b{0}\n"
@@ -2006,7 +1996,7 @@ msgid "§4DISABLED"
 msgstr "§4DISABLED"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
@@ -2030,72 +2020,4 @@ msgstr "s"
 
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr ""
-
-#, fuzzy
-#~ msgid "ms"
-#~ msgstr "m"
-
-#~ msgid "The player is not currently online"
-#~ msgstr "Ye player be not currently online"
-
-#~ msgid "§4You don't have enough of the required item(s)!"
-#~ msgstr "§4You don't have enough of yonder required item(s)!"
-
-#~ msgid "controls the currently running async tasks"
-#~ msgstr "controls thar currently running async tasks"
-
-#~ msgid "lists currently running tasks"
-#~ msgstr "lists currently running tasks"
-
-#~ msgid "§cNo running tasks"
-#~ msgstr "§cNo running tasks"
-
-#~ msgid "§e[%2d]§7: %s\n"
-#~ msgstr "§e[-]§7: %s\n"
-
-#~ msgid "cancels the task with the given number."
-#~ msgstr "cancels ye task with ye given number."
-
-#~ msgid "§4Could not cancel "
-#~ msgstr "§4Could not cancel "
-
-#~ msgid "§4A valid number must be supplied as task-id."
-#~ msgstr "§4A valid number must be supplied as task-id."
-
-#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-#~ msgstr "§4No tasks detected.§e Try §b/usb async list§e first."
-
-#~ msgid "§4A number between 1 and "
-#~ msgstr "§4A number between 1 and "
-
-#, fuzzy
-#~ msgid "{0}§e completed challenge §9{1}"
-#~ msgstr "§eTo complete this challenge, use §f/c c {0}"
-
-#, fuzzy
-#~ msgid ".displayName"
-#~ msgstr "display log"
-
-#, fuzzy
-#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
-#~ msgstr "§eCurrent Level: §a{0,number,##.#}"
-
-#, fuzzy
-#~ msgid "reload the region chunks"
-#~ msgstr "load ye region chunks"
-
-#~ msgid "save orphans"
-#~ msgstr "save orphans"
-
-#~ msgid "§eSaving the orphan list."
-#~ msgstr "§eSaving ye orphan list."
-
-#~ msgid "{0} <Permissions>"
-#~ msgstr "{0} <Permissions>"
-
-#~ msgid "Group Info"
-#~ msgstr "Group Info"
-
-#~ msgid "Player doesn't have an island or it's already protected!"
-#~ msgstr "Player doesn't have an island or it's already protected!"
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"

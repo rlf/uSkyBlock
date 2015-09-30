@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-27 17:34+0200\n"
+"PO-Revision-Date: 2015-09-30 23:11+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -97,9 +97,9 @@ msgstr "§eDu mangler følgende:{0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aDo you gennemført {0}-udfordringen!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
-msgstr "{0} har gennemført {1} udfordringen!"
+msgstr "§9{0}§f har gennemført §9{1}§f udfordringen!"
 
 #, java-format
 msgid "§eItem reward(s): §f{0}"
@@ -382,7 +382,6 @@ msgstr "Ingen aktiv cooldowns på {0} for {1}!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Forkert kommando givet, kun restart og biome er understøttet!"
 
-#, fuzzy
 msgid "restarts the cooldown on the command"
 msgstr "genstart et cooldown på en kommando"
 
@@ -475,32 +474,31 @@ msgid "imports players and islands from other formats"
 msgstr "importer spillere og øer fra andre formater"
 
 msgid "§9Job Statistics"
-msgstr ""
+msgstr "§9Job Statistik"
 
-#, fuzzy
 msgid "§7----------------"
-msgstr "§7------------------------------\n"
+msgstr "§7----------------"
 
 msgid "#"
-msgstr ""
+msgstr "#"
 
 msgid "ms/job"
-msgstr ""
+msgstr "ms/job"
 
 msgid "ms/tick"
-msgstr ""
+msgstr "ms/tick"
 
 msgid "ticks"
-msgstr ""
+msgstr "ticks"
 
 msgid "act"
-msgstr ""
+msgstr "akt"
 
 msgid "time"
-msgstr ""
+msgstr "tid"
 
 msgid "name"
-msgstr ""
+msgstr "navn"
 
 msgid "changes the language of the plugin, and reloads"
 msgstr "skifter sprog af pluginnet, og genindlæser det"
@@ -1266,9 +1264,9 @@ msgstr "§cSKY §f> §7 {0}"
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d er blevet fjernet fra øens medlemsliste."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9{1} §7- {0}"
-msgstr "§7[{0}] §9{1}"
+msgstr "§9{1} §7- {0}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cØen du er på bliver slettet! Du bliver sendt til spawn."
@@ -1958,13 +1956,13 @@ msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
 msgid "§aCongratulations! §eYour island has appeared."
-msgstr ""
+msgstr "§aTillykke! §eDin ø er ankommet."
 
 msgid "§cNote:§e Construction might still be ongoing."
-msgstr ""
+msgstr "§cBemærk:§e Det kan være der stadig arbejdes på den."
 
 msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr ""
+msgstr "Brug §9/is h§r eller §9/is§r menuen til at tage derhen."
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
@@ -2023,7 +2021,7 @@ msgstr "s"
 
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr ""
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, fuzzy
 #~ msgid "ms"

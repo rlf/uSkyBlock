@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-26 23:22+0100\n"
+"PO-Revision-Date: 2015-09-30 22:26+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -12,10 +12,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Loco-Source-Locale: en_GB\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.5\n"
 "X-Poedit-Bookmarks: -1,3,-1,-1,-1,-1,-1,-1,-1,-1\n"
 "X-Loco-Parser: loco_parse_po\n"
 "X-Loco-Target-Locale: nl_NL\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -97,9 +98,9 @@ msgstr "§eJe komt de volgende items tekort: {0}"
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aJe hebt de {0} uitdaging volbracht!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
-msgstr "{0} heeft de {1} uitdaging volbracht!"
+msgstr "§9{0}§fheeft de §9{1}§f uitdaging volbracht!"
 
 #, java-format
 msgid "§eItem reward(s): §f{0}"
@@ -381,9 +382,8 @@ msgstr "Geen actieve afkoelperiode gevonden voor {1} op {0}!"
 msgid "Invalid command supplied, only restart and biome supported!"
 msgstr "Ongeldig commando, alleen opnieuw starten en biome is ondersteund!"
 
-#, fuzzy
 msgid "restarts the cooldown on the command"
-msgstr "reset de cooldown met een commando"
+msgstr "reset de cooldown met het command"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
@@ -441,12 +441,13 @@ msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4Er is geen vlakland gevonden onder {0}'s eiland"
 
 msgid "flushes all caches to files"
-msgstr ""
+msgstr "saved all cashes naar file"
 
 #, java-format
 msgid ""
 "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
 msgstr ""
+"§eFlushed §a{0} eilands§e, §b{1} speler en §6{2} uitdagingen volbrenging."
 
 msgid "manually update the top 10 list"
 msgstr "de top 10 lijst handmatig bijwerken"
@@ -474,32 +475,31 @@ msgid "imports players and islands from other formats"
 msgstr "importeerd spelers en eilanden van een ander formaat"
 
 msgid "§9Job Statistics"
-msgstr ""
+msgstr "§9Job Statistieken"
 
-#, fuzzy
 msgid "§7----------------"
-msgstr "§7------------------------------\n"
+msgstr "§7----------------"
 
 msgid "#"
-msgstr ""
+msgstr "#"
 
 msgid "ms/job"
-msgstr ""
+msgstr "ms/job"
 
 msgid "ms/tick"
-msgstr ""
+msgstr "ms/tick"
 
 msgid "ticks"
-msgstr ""
+msgstr "ticks"
 
 msgid "act"
-msgstr ""
+msgstr "act"
 
 msgid "time"
-msgstr ""
+msgstr "tijd"
 
 msgid "name"
-msgstr ""
+msgstr "naam"
 
 msgid "changes the language of the plugin, and reloads"
 msgstr "verander de taal en herlaad de plugin"
@@ -513,15 +513,14 @@ msgid "§cFailed to change language to §e{0}"
 msgstr "§cMislukt om de taal te veranderen naar §e{0}"
 
 msgid "§9Supported Languages:\n"
-msgstr ""
+msgstr "§9Ondersteunende Talen:\n"
 
 #, java-format
 msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
-msgstr ""
+msgstr "§f{0} §7{1} §9 bij {2} §7{3}\n"
 
-#, fuzzy
 msgid "§cUnable to locate any languages."
-msgstr "§cMislukt om de taal te veranderen naar §e{0}"
+msgstr "§cKan geen talen vinden"
 
 msgid "transfer leadership to another player"
 msgstr "overdragen van het leiderschap naar een andere speler"
@@ -1051,9 +1050,9 @@ msgstr ""
 "§4Je eiland is gesloten. Je moet het eerst ongrendelen voordat je de warp "
 "kan aanzetten."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d activated the island warp."
-msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
+msgstr "§b{0}§d heeft het eiland warp geactiveerd."
 
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
@@ -1263,20 +1262,19 @@ msgstr "§4Geen importuer met de naam §e{0}§4 gevonden"
 msgid "§eConverted "
 msgstr "§eConverted "
 
-#, fuzzy
 msgid "The island has been created."
-msgstr "§e{0}s eiland op {1} is nu beveiliging"
+msgstr "Je eiland is gecreeerd."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d locked the island."
-msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
+msgstr "§b{0}§d heeft het eiland afgesloten."
 
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr "§4Nu je eiland is gesloten is ook je inkomende warp gedeactiveerd."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§b{0}§d unlocked the island."
-msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
+msgstr "§b{0}§d heeft het eiland opengesteld."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
@@ -1286,9 +1284,9 @@ msgstr "§cSKY §f> §7 {0}"
 msgid "§b{0}§d has been removed from the island group."
 msgstr "§b{0}§d is verwijderd van het eiland."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9{1} §7- {0}"
-msgstr "§d[{0}]§7 {1}"
+msgstr "§9{1} §7- {0}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
@@ -2002,13 +2000,13 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
 msgid "§aCongratulations! §eYour island has appeared."
-msgstr ""
+msgstr "§aGefeliciteerd! §eJe eiland is aangemaakt."
 
 msgid "§cNote:§e Construction might still be ongoing."
-msgstr ""
+msgstr "§cLet OP:§e Constructie kan nog bezig zijn."
 
 msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr ""
+msgstr "Gebruik §9/is h§r of het §9/is§r menu om naar je eiland te gaan."
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
@@ -2069,7 +2067,7 @@ msgstr "s"
 
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr ""
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, fuzzy
 #~ msgid "ms"
