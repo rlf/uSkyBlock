@@ -1957,6 +1957,11 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
+msgid ""
+"§aCongratulations! §eYour island is ready. Use §9/is h§e or the §9/is§e menu "
+"to go there."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
 

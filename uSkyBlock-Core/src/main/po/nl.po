@@ -2001,6 +2001,11 @@ msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
+msgid ""
+"§aCongratulations! §eYour island is ready. Use §9/is h§e or the §9/is§e menu "
+"to go there."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! We hebben een plaats dichter bij de spawn gevonden. §9Ontruimen dit "

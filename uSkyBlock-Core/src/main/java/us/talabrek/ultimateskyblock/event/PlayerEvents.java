@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -30,6 +31,7 @@ import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.I18nUtil;
 
@@ -234,17 +236,28 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onTeleport(PlayerTeleportEvent event) {
-        if (!plugin.isSkyWorld(event.getTo().getWorld())) {
+        if (event.isCancelled() || !plugin.isSkyWorld(event.getTo().getWorld())) {
             return;
         }
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
         if (islandInfo != null && islandInfo.isBanned(player.getName())
                 && !player.isOp() && !VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld())) {
             event.setCancelled(true);
             player.sendMessage(I18nUtil.tr("\u00a74That player has forbidden you from teleporting to their island."));
+        }
+        if (!event.isCancelled()) {
+            PlayerInfo playerInfo = plugin.getPlayerInfo(player);
+            if (playerInfo != null && playerInfo.isClearInventoryOnNextEntry()) {
+                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        plugin.clearPlayerInventory(player);
+                    }
+                }, 1);
+            }
         }
     }
 

@@ -1972,6 +1972,11 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eСоздание острова началось, подождите, это может занять некоторое время."
 
+msgid ""
+"§aCongratulations! §eYour island is ready. Use §9/is h§e or the §9/is§e menu "
+"to go there."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eО-о-о! Мы нашли вакантное место недалеко от спавна. §9Очищается для вас..."

@@ -1977,6 +1977,11 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
 
+msgid ""
+"§aCongratulations! §eYour island is ready. Use §9/is h§e or the §9/is§e menu "
+"to go there."
+msgstr ""
+
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eYay! Encontramos um local mais perto para o spawn. §9Limpando ele para "

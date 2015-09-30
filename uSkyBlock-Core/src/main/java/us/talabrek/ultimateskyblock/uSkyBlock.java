@@ -464,9 +464,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public void clearPlayerInventory(Player player) {
         getLogger().entering(CN, "clearPlayerInventory", player);
+        PlayerInfo playerInfo = getPlayerInfo(player);
         if (!isSkyWorld(player.getWorld())) {
-            getLogger().finer("not clearing, since player is not in skyworld");
+            getLogger().finer("not clearing, since player is not in skyworld, marking for clear on next entry");
+            if (playerInfo != null) {
+                playerInfo.setClearInventoryOnNextEntry(true);
+            }
             return;
+        }
+        if (playerInfo != null) {
+            playerInfo.setClearInventoryOnNextEntry(false);
         }
         if (getConfig().getBoolean("options.restart.clearInventory", true)) {
             player.getInventory().clear();
@@ -885,11 +892,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                         if (pi != null) {
                             pi.setIslandGenerating(false);
                         }
+                        clearPlayerInventory(player);
                         if (player != null && player.isOnline()) {
-                            getLogger().log(Level.FINE, "porting player back to the island");
-                            homeTeleport(player, true);
-                            clearPlayerInventory(player);
-                            clearEntitiesNearPlayer(player);
+                            player.sendMessage(tr("\u00a7aCongratulations! \u00a7eYour island is ready. Use \u00a79/is h\u00a7e or the \u00a79/is\u00a7e menu to go there."));
                         }
                     }
                 }, getConfig().getInt("options.restart.teleportDelay", 40));
