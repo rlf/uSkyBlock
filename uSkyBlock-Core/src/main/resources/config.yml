@@ -194,8 +194,11 @@ options:
     clearEnderChest: true
 
     # [ticks] The number of ticks to wait, before porting the player back
-    # on /is restart or /is create (default: 20)
+    # on /is restart or /is create (default: 40)
     teleportDelay: 20
+
+    # [true/false] Whether or not the player should be auto teleported to the island when it's ready
+    teleportWhenReady: true
 
     # [true/false] Whether to require confirmation (i.e. repeating the command twice).
     confirmation: true
@@ -235,7 +238,7 @@ worldguard:
   exit-message: true
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 29
+version: 30
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

@@ -873,6 +873,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         player.sendMessage(tr("\u00a7eGetting your island ready, please be patient, it can take a while."));
         final Runnable generateTask = new Runnable() {
             boolean hasRun = false;
+
             @Override
             public void run() {
                 if (hasRun) {
@@ -887,17 +888,28 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
                 getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
-                    @Override
-                    public void run() {
-                        if (pi != null) {
-                            pi.setIslandGenerating(false);
-                        }
-                        clearPlayerInventory(player);
-                        if (player != null && player.isOnline()) {
-                            player.sendMessage(tr("\u00a7aCongratulations! \u00a7eYour island is ready. Use \u00a79/is h\u00a7e or the \u00a79/is\u00a7e menu to go there."));
-                        }
-                    }
-                }, getConfig().getInt("options.restart.teleportDelay", 40));
+                            @Override
+                            public void run() {
+                                if (pi != null) {
+                                    pi.setIslandGenerating(false);
+                                }
+                                clearPlayerInventory(player);
+                                if (player != null && player.isOnline()) {
+                                    if (getConfig().getBoolean("options.restart.teleportWhenReady", true)) {
+                                        player.sendMessage(new String[]{
+                                                tr("\u00a7aCongratulations! \u00a7eYour island has appeared."),
+                                                tr("\u00a7cNote:\u00a7e Construction might still be ongoing.")});
+                                        homeTeleport(player, true);
+                                    } else {
+                                        player.sendMessage(new String[]{
+                                                tr("\u00a7aCongratulations! \u00a7eYour island has appeared."),
+                                                tr("Use \u00a79/is h\u00a7r or the \u00a79/is\u00a7r menu to go there."),
+                                                tr("\u00a7cNote:\u00a7e Construction might still be ongoing.")});
+                                    }
+                                }
+                            }
+                        }, getConfig().getInt("options.restart.teleportDelay", 40)
+                );
             }
         };
         final Runnable completionWatchDog = new LocateChestTask(this, player, next, generateTask);
@@ -908,13 +920,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 Bukkit.getScheduler().runTaskLater(uSkyBlock.this, completionWatchDog, 0);
             }
         };
-        if (orphanLogic.wasOrphan(next)) {
+        if (orphanLogic.wasOrphan(next))
+
+        {
             // Create a WG region to be used for deleting it
             player.sendMessage(tr("\u00a7eYay! We found a vacancy closer to spawn. \u00a79Clearing it for you..."));
             IslandInfo tempInfo = islandLogic.createIslandInfo(LocationUtil.getIslandName(next), pi.getPlayerName());
             WorldGuardHandler.protectIsland(this, player, tempInfo);
             islandLogic.clearIsland(next, createTask);
-        } else {
+        } else
+
+        {
             createTask.run();
         }
     }
@@ -1117,7 +1133,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     /**
-     *
      * @param player    The player executing the command
      * @param command   The command to execute
      * @param onlyInSky Whether the command is restricted to a sky-associated world.

@@ -2073,9 +2073,13 @@ msgstr ""
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-msgid ""
-"§aCongratulations! §eYour island is ready. Use §9/is h§e or the §9/is§e menu "
-"to go there."
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr ""
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr ""
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
