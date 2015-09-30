@@ -48,17 +48,21 @@ public enum AsyncWorldEditHandler {;
     public static AWEAdaptor getAWEAdaptor() {
         if (adaptor == null) {
             Plugin awe = getAWE();
-            VersionUtil.Version version = VersionUtil.getVersion(awe.getDescription().getVersion());
-            String className = null;
-            if (version.isLT("3.0")) {
-                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE211Adaptor";
+            if (awe != null) {
+                VersionUtil.Version version = VersionUtil.getVersion(awe.getDescription().getVersion());
+                String className = null;
+                if (version.isLT("3.0")) {
+                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE211Adaptor";
+                } else {
+                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE311Adaptor";
+                }
+                try {
+                    adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                    log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version);
+                    adaptor = NULL_ADAPTOR;
+                }
             } else {
-                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE311Adaptor";
-            }
-            try {
-                adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
-            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-                log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version);
                 adaptor = NULL_ADAPTOR;
             }
         }
