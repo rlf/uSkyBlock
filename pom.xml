@@ -7,9 +7,10 @@
     <version>2.4.0-SNAPSHOT</version>
     <name>Ultimate Skyblock</name>
     <modules>
+        <module>uSkyBlock-API</module>
+        <module>uSkyBlock-Core</module>
         <module>uSkyBlock-AWE311</module>
         <module>uSkyBlock-AWE211</module>
-        <module>uSkyBlock-Core</module>
         <module>uSkyBlock-Plugin</module>
     </modules>
 
@@ -176,4 +177,28 @@
             <url>file://${project.build.directory}/mvn-repo</url>
         </repository>
     </distributionManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-API</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-Core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-AWE211</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-AWE311</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

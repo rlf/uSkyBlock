@@ -1,7 +1,5 @@
 package us.talabrek.ultimateskyblock.api.model;
 
-import us.talabrek.ultimateskyblock.island.BlockScore;
-
 import java.util.List;
 
 /**

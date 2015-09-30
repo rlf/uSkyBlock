@@ -4,7 +4,7 @@ import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 
-public class BlockScore implements us.talabrek.ultimateskyblock.api.model.BlockScore {
+public class BlockScoreImpl implements us.talabrek.ultimateskyblock.api.model.BlockScore {
 
     private final ItemStack block;
     private final int count;
@@ -12,11 +12,11 @@ public class BlockScore implements us.talabrek.ultimateskyblock.api.model.BlockS
     private final State state;
     private final String name;
 
-    public BlockScore(ItemStack block, int count, double score, State state) {
+    public BlockScoreImpl(ItemStack block, int count, double score, State state) {
         this(block, count, score, state, null);
     }
 
-    public BlockScore(ItemStack block, int count, double score, State state, String name) {
+    public BlockScoreImpl(ItemStack block, int count, double score, State state, String name) {
         this.block = block;
         this.count = count;
         this.score = score;

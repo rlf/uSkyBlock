@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock.island;
 
+import us.talabrek.ultimateskyblock.api.model.BlockScore;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,7 +16,7 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
     private final List<BlockScore> top;
     private boolean isSorted = false;
 
-    public IslandScore(double score, List<BlockScore> top) {
+    public IslandScore(double score, List<BlockScoreImpl> top) {
         this.score = score;
         this.top = joinTop(top);
     }
@@ -22,8 +24,8 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
     /**
      * Consolidates the top, so scores with the same name is combined.
      */
-    private List<BlockScore> joinTop(List<BlockScore> top) {
-        Map<String,BlockScore> scoreMap = new HashMap<>();
+    private List<BlockScore> joinTop(List<BlockScoreImpl> top) {
+        Map<String, BlockScore> scoreMap = new HashMap<>();
         for (BlockScore score : top) {
             BlockScore existing = scoreMap.get(score.getName());
             if (existing == null) {
@@ -35,12 +37,12 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
         return new ArrayList<>(scoreMap.values());
     }
 
-    private BlockScore add(BlockScore score, BlockScore existing) {
+    private BlockScoreImpl add(BlockScore score, BlockScore existing) {
         BlockScore.State state = score.getState();
         if (score.getState().ordinal() > existing.getState().ordinal()) {
             state = existing.getState();
         }
-        return new BlockScore(existing.getBlock(),
+        return new BlockScoreImpl(existing.getBlock(),
                 score.getCount() + existing.getCount(),
                 score.getScore() + existing.getScore(), state, score.getName());
     }

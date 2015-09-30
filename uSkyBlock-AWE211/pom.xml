@@ -20,7 +20,6 @@
         <dependency>
             <groupId>uSkyBlock</groupId>
             <artifactId>uSkyBlock-Core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

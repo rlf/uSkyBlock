@@ -35,7 +35,7 @@
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <classesDirectory>${project.build.directory}/uSkyBlock-dist</classesDirectory>
+                    <classesDirectory>${project.build.directory}/uSkyBlock-Plugin</classesDirectory>
                 </configuration>
             </plugin>
         </plugins>
@@ -43,18 +43,19 @@
     <dependencies>
         <dependency>
             <groupId>uSkyBlock</groupId>
+            <artifactId>uSkyBlock-API</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uSkyBlock</groupId>
             <artifactId>uSkyBlock-Core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>uSkyBlock</groupId>
             <artifactId>uSkyBlock-AWE211</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>uSkyBlock</groupId>
             <artifactId>uSkyBlock-AWE311</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

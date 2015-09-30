@@ -198,22 +198,22 @@ public class LevelLogic {
 
     public IslandScore createIslandScore(int[] counts) {
         double score = 0;
-        List<BlockScore> blocks = new ArrayList<>();
+        List<BlockScoreImpl> blocks = new ArrayList<>();
         for (int i = 1 << DATA_BITS; i < MAX_BLOCK << DATA_BITS; ++i) {
             int count = counts[i];
             if (count > 0 && blockValue[i] > 0) {
-                BlockScore.State state = BlockScore.State.NORMAL;
+                BlockScoreImpl.State state = BlockScoreImpl.State.NORMAL;
                 double adjustedCount = count;
                 if (count > blockLimit[i] && blockLimit[i] != -1) {
                     adjustedCount = blockLimit[i]; // Hard edge
-                    state = BlockScore.State.LIMIT;
+                    state = BlockScoreImpl.State.LIMIT;
                 } else if (blockDR[i] > 0 && count > blockDR[i]) {
-                    state = BlockScore.State.DIMINISHING;
+                    state = BlockScoreImpl.State.DIMINISHING;
                     adjustedCount = dReturns(count, blockDR[i]);
                 }
                 double blockScore = adjustedCount * blockValue[i];
                 score += blockScore;
-                blocks.add(new BlockScore(new ItemStack(i >> DATA_BITS, 1, (short) (i & DATA_MASK)), count, blockScore / pointsPerLevel, state));
+                blocks.add(new BlockScoreImpl(new ItemStack(i >> DATA_BITS, 1, (short) (i & DATA_MASK)), count, blockScore / pointsPerLevel, state));
             }
         }
         return new IslandScore(score / pointsPerLevel, blocks);
