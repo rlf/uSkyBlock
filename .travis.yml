@@ -19,9 +19,9 @@ deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
   file:
-  - target/uSkyBlock.jar
-  - target/uSkyBlock-api.jar
-  - target/classes/gettext-report.txt
+  - uSkyBlock-Plugin/target/uSkyBlock.jar
+  - uSkyBlock-API/target/uSkyBlock-API.jar
+  - uSkyBlock-Plugin/target/uSkyBlock-Plugin/gettext-report.txt
   skip_cleanup: true
   on:
     tags: true
