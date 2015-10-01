@@ -1241,6 +1241,18 @@ msgstr ""
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
+msgid "Config:"
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "§atrue"
+msgstr ""
+
+msgid "§cfalse"
+msgstr ""
+
 msgid "Challenge Menu"
 msgstr ""
 

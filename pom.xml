@@ -12,6 +12,7 @@
         <module>uSkyBlock-AWE311</module>
         <module>uSkyBlock-AWE211</module>
         <module>uSkyBlock-Plugin</module>
+        <module>bukkit-utils</module>
     </modules>
 
     <properties>

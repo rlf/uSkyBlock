@@ -1,9 +1,9 @@
 package us.talabrek.ultimateskyblock.util;
 
+import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 public enum FileUtil {;
     private static final Logger log = Logger.getLogger(FileUtil.class.getName());
     private static final Collection<String> allwaysOverwrite = Arrays.asList("levelConfig.yml");
-    private static final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
+    private static final Map<String, YmlConfiguration> configFiles = new ConcurrentHashMap<>();
     private static File dataFolder;
 
     public static void readConfig(FileConfiguration config, File file) {
@@ -112,15 +112,15 @@ public enum FileUtil {;
     /**
      * System-encoding agnostic config-reader
      */
-    public static FileConfiguration getFileConfiguration(String configName) {
+    public static YmlConfiguration getFileConfiguration(String configName) {
         // Caching, for your convenience! (and a bigger memory print!)
 
         if (!configFiles.containsKey(configName)) {
-            YamlConfiguration config = new YamlConfiguration();
+            YmlConfiguration config = new YmlConfiguration();
             try {
                 // read from datafolder!
                 File configFile = getConfigFile(configName);
-                YamlConfiguration configJar = new YamlConfiguration();
+                YmlConfiguration configJar = new YmlConfiguration();
                 readConfig(config, configFile);
                 readConfig(configJar, getResource(configName));
                 if (!configFile.exists() || config.getInt("version", 0) < configJar.getInt("version", 0)) {
@@ -186,13 +186,14 @@ public enum FileUtil {;
     /**
      * Merges the important keys from src to destination.
      * @param src The source (containing the new values).
-     * @param dest The destination (containgin old-values).
+     * @param dest The destination (containing old-values).
      */
-    private static YamlConfiguration mergeConfig(YamlConfiguration src, YamlConfiguration dest) {
+    private static YmlConfiguration mergeConfig(YmlConfiguration src, YmlConfiguration dest) {
         int existing = dest.getInt("version");
         int version = src.getInt("version", existing);
         dest.setDefaults(src);
         dest.options().copyDefaults(true);
+        dest.addComments(src.getComments());
         src.options().header("Merge from between jar-file v" + version + " and existing config v" + existing);
         dest.set("version", version);
         ConfigurationSection forceSection = src.getConfigurationSection("force-replace");
@@ -216,7 +217,7 @@ public enum FileUtil {;
     }
 
     public static void reload() {
-        for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()) {
+        for (Map.Entry<String, YmlConfiguration> e : configFiles.entrySet()) {
             File configFile = new File(getDataFolder(), e.getKey());
             readConfig(e.getValue(), configFile);
         }

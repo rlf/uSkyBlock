@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
@@ -114,7 +115,10 @@ public class Settings {
         island_chestItems = ItemStackUtil.createItemArray(chestItemString);
 
         island_schematicName = config.getString("options.island.schematicName");
-        final Set<String> permissionList = config.getConfigurationSection("options.island.extraPermissions").getKeys(true);
+        final Set<String> permissionList = new HashSet<>();
+        if (config.isConfigurationSection("options.island.extraPermissions")) {
+            permissionList.addAll(config.getConfigurationSection("options.island.extraPermissions").getKeys(true));
+        }
         island_addExtraItems = config.getBoolean("options.island.addExtraItems");
         extras_obsidianToLava = config.getBoolean("options.extras.obsidianToLava");
         island_useIslandLevel = config.getBoolean("options.island.useIslandLevel");

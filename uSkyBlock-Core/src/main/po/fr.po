@@ -1301,6 +1301,18 @@ msgstr "§eVotre rang est: §f{0}"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cOh! §9 Impossible de localiser un coffre dans les {0}."
 
+msgid "Config:"
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "§atrue"
+msgstr ""
+
+msgid "§cfalse"
+msgstr ""
+
 msgid "Challenge Menu"
 msgstr "Menu des challenges"
 

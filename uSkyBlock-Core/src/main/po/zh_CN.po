@@ -1319,6 +1319,18 @@ msgstr "§e你的排名是: §f{0}"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
+msgid "Config:"
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "§atrue"
+msgstr ""
+
+msgid "§cfalse"
+msgstr ""
+
 #, fuzzy
 msgid "Challenge Menu"
 msgstr "调整菜单"

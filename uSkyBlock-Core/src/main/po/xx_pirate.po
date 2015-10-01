@@ -662,7 +662,8 @@ msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e has rejected ye invitation."
 
 msgid "§4You can't use that command right now. Leave your current party first."
-msgstr "§4You can't use that command starboard now. Leave ye current party first."
+msgstr ""
+"§4You can't use that command starboard now. Leave ye current party first."
 
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
@@ -760,7 +761,8 @@ msgid "create an island"
 msgstr "create an island"
 
 msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cYour island be in yonder process of generating, you cannot create now."
+msgstr ""
+"§cYour island be in yonder process of generating, you cannot create now."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -820,8 +822,7 @@ msgstr "invite a player to ye island"
 
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
-msgstr ""
-"§eUse§f /island invite <playername>§e to invite a player to ye island."
+msgstr "§eUse§f /island invite <playername>§e to invite a player to ye island."
 
 msgid "§4Only the island's owner can invite!"
 msgstr "§4Only ye island's owner can invite!"
@@ -886,8 +887,8 @@ msgid ""
 "§4You can't leave your island if you are the only person. Try using /island "
 "restart if you want a new one!"
 msgstr ""
-"§4You can't leave ye island if you be thar only landlubber. Try using /island "
-"restart if you want a new one!"
+"§4You can't leave ye island if you be thar only landlubber. Try using /"
+"island restart if you want a new one!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
 msgstr "§eYou own this island, use /island remove <player> instead."
@@ -994,7 +995,8 @@ msgid "§cYou can restart your island in {0} seconds."
 msgstr "§cYou can restart ye island in {0} seconds."
 
 msgid "§cYour island is in the process of generating, you cannot restart now."
-msgstr "§cYour island be in yonder process of generating, you cannot restart now."
+msgstr ""
+"§cYour island be in yonder process of generating, you cannot restart now."
 
 msgid "§eNOTE: Your entire island and all your belongings will be RESET!"
 msgstr "§eNOTE: Ye entire island and all ye belongings will be RESET!"
@@ -1114,8 +1116,8 @@ msgid ""
 "§cThat players island is in the process of generating, you cannot warp to it "
 "right now."
 msgstr ""
-"§cThat players island be in yonder process of generating, you cannot warp to it "
-"starboard now."
+"§cThat players island be in yonder process of generating, you cannot warp to "
+"it starboard now."
 
 #, java-format
 msgid "§cWARNING: §9{0}§e is warping to your island!"
@@ -1190,8 +1192,8 @@ msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§eDoing §9{0}§e be §cRISKY§e. Repeat yonder command within §a{1}§e seconds to "
-"accept!"
+"§eDoing §9{0}§e be §cRISKY§e. Repeat yonder command within §a{1}§e seconds "
+"to accept!"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1276,6 +1278,18 @@ msgstr "§eYour rank be: §f{0}"
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
+
+msgid "Config:"
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "§atrue"
+msgstr ""
+
+msgid "§cfalse"
+msgstr ""
 
 msgid "Challenge Menu"
 msgstr "Challenge Menu"
