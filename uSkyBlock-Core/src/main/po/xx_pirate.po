@@ -34,9 +34,6 @@ msgstr "§eThis challenge requires yonder following:"
 msgid "§6Item Reward: §a"
 msgstr "§6Item Reward: §a"
 
-msgid "§a"
-msgstr "§a"
-
 #, java-format
 msgid "§6Currency Reward: §a{0}"
 msgstr "§6Currency Reward: §a{0}"
@@ -1157,6 +1154,9 @@ msgstr "§eYou can not use another islands portals! Shame on you - cheater!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrading isn't allowed on other islands. Go home - cheater!"
 
+msgid "Config:"
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eChanging ye obsidian back into lava. Be careful!"
 
@@ -1279,16 +1279,73 @@ msgstr "§eYour rank be: §f{0}"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 
-msgid "Config:"
+#, java-format
+msgid "Page {0,number,integer}"
 msgstr ""
 
-msgid "Main"
+msgid "§c-"
 msgstr ""
 
-msgid "§atrue"
+#, fuzzy
+msgid "§a+"
+msgstr "§a"
+
+msgid "§c-1000"
 msgstr ""
 
-msgid "§cfalse"
+msgid "§c-100"
+msgstr ""
+
+msgid "§c-10"
+msgstr ""
+
+msgid "§c-1"
+msgstr ""
+
+msgid "§a+1"
+msgstr ""
+
+msgid "§a+10"
+msgstr ""
+
+msgid "§a+100"
+msgstr ""
+
+msgid "§a+1000"
+msgstr ""
+
+msgid "Return"
+msgstr ""
+
+msgid "§9Integer Editor"
+msgstr ""
+
+msgid "§9Item List Editor"
+msgstr ""
+
+#, fuzzy
+msgid "§eConfiguration saved and reloaded from file."
+msgstr "§eConfiguration reloaded from file."
+
+msgid "§cError! §9Unable to save config file!"
+msgstr ""
+
+msgid "§cSave & Reload config"
+msgstr ""
+
+msgid ""
+"§7Saves the settings to\n"
+"§7file & reloads again.\n"
+"§cNote: §7Use with care!"
+msgstr ""
+
+msgid "§7 (readonly)"
+msgstr ""
+
+msgid "true"
+msgstr ""
+
+msgid "false"
 msgstr ""
 
 msgid "Challenge Menu"
@@ -1929,6 +1986,12 @@ msgstr ""
 "this point when they teleport\n"
 "to ye island.\n"
 "§e§lClick here to change."
+
+msgid "Caps On"
+msgstr ""
+
+msgid "§9Text Editor"
+msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Something went wrong saving ye island and/or party data!"

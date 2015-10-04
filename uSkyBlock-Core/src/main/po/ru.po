@@ -36,9 +36,6 @@ msgstr "§eЭто задание требует:"
 msgid "§6Item Reward: §a"
 msgstr "§6Награда предметами: §a"
 
-msgid "§a"
-msgstr "§a"
-
 #, java-format
 msgid "§6Currency Reward: §a{0}"
 msgstr "§6Награда деньгами: §a{0}"
@@ -1178,6 +1175,9 @@ msgstr "§eВы не можете использовать портал на д�
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eТорговля не разрешена на других островах. Идите домой - читер!"
 
+msgid "Config:"
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eИзменение вашего обсидиана обратно в лаву. Осторожнее!"
 
@@ -1303,16 +1303,73 @@ msgstr "§eВаш ранг: §f{0}"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
-msgid "Config:"
+#, java-format
+msgid "Page {0,number,integer}"
 msgstr ""
 
-msgid "Main"
+msgid "§c-"
 msgstr ""
 
-msgid "§atrue"
+#, fuzzy
+msgid "§a+"
+msgstr "§a"
+
+msgid "§c-1000"
 msgstr ""
 
-msgid "§cfalse"
+msgid "§c-100"
+msgstr ""
+
+msgid "§c-10"
+msgstr ""
+
+msgid "§c-1"
+msgstr ""
+
+msgid "§a+1"
+msgstr ""
+
+msgid "§a+10"
+msgstr ""
+
+msgid "§a+100"
+msgstr ""
+
+msgid "§a+1000"
+msgstr ""
+
+msgid "Return"
+msgstr ""
+
+msgid "§9Integer Editor"
+msgstr ""
+
+msgid "§9Item List Editor"
+msgstr ""
+
+#, fuzzy
+msgid "§eConfiguration saved and reloaded from file."
+msgstr "§eКонфигурация перезагружена из файла."
+
+msgid "§cError! §9Unable to save config file!"
+msgstr ""
+
+msgid "§cSave & Reload config"
+msgstr ""
+
+msgid ""
+"§7Saves the settings to\n"
+"§7file & reloads again.\n"
+"§cNote: §7Use with care!"
+msgstr ""
+
+msgid "§7 (readonly)"
+msgstr ""
+
+msgid "true"
+msgstr ""
+
+msgid "false"
 msgstr ""
 
 msgid "Challenge Menu"
@@ -1943,6 +2000,12 @@ msgstr ""
 "в этом месте, когда телепортируются\n"
 "к вам на остров.\n"
 "§e§lНажмите, чтобы изменить."
+
+msgid "Caps On"
+msgstr ""
+
+msgid "§9Text Editor"
+msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
