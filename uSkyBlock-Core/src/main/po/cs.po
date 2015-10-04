@@ -347,6 +347,9 @@ msgstr ""
 msgid "§4{0}s island at {1} was already protected"
 msgstr ""
 
+msgid "open GUI for config"
+msgstr ""
+
 msgid "Controls player-cooldowns"
 msgstr ""
 
@@ -1292,7 +1295,7 @@ msgstr ""
 msgid "§9Item List Editor"
 msgstr ""
 
-msgid "§eConfiguration saved and reloaded from file."
+msgid "§eConfiguration saved and reloaded."
 msgstr ""
 
 msgid "§cError! §9Unable to save config file!"

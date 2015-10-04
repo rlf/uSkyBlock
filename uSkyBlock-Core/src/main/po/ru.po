@@ -355,6 +355,9 @@ msgstr "§eОстров {0} в {1} защищен"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4Остров {0} в {1} уже был защищен"
 
+msgid "open GUI for config"
+msgstr ""
+
 msgid "Controls player-cooldowns"
 msgstr "Controls player-cooldowns"
 
@@ -1348,7 +1351,7 @@ msgid "§9Item List Editor"
 msgstr ""
 
 #, fuzzy
-msgid "§eConfiguration saved and reloaded from file."
+msgid "§eConfiguration saved and reloaded."
 msgstr "§eКонфигурация перезагружена из файла."
 
 msgid "§cError! §9Unable to save config file!"
@@ -2115,6 +2118,10 @@ msgstr "с"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "§eConfiguration saved, use §9/usb reload§e to activate changes."
+#~ msgstr "§eКонфигурация перезагружена из файла."
 
 #, fuzzy
 #~ msgid "ms"

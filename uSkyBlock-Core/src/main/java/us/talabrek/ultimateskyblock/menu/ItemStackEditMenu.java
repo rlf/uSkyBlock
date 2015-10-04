@@ -82,6 +82,7 @@ public class ItemStackEditMenu extends AbstractConfigMenu implements EditMenu {
         }
         YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
         config.set(path, sb.toString().trim());
+        config.set("dirty", true);
     }
 
     private void handleControlPanelClick(InventoryClickEvent e) {

@@ -358,6 +358,9 @@ msgstr "§e{0}s eiland op {1} is nu beveiliging"
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}s eiland op {1} is al beveiligd"
 
+msgid "open GUI for config"
+msgstr ""
+
 msgid "Controls player-cooldowns"
 msgstr "Beheert de player-cooldowns"
 
@@ -1356,7 +1359,7 @@ msgid "§9Item List Editor"
 msgstr ""
 
 #, fuzzy
-msgid "§eConfiguration saved and reloaded from file."
+msgid "§eConfiguration saved and reloaded."
 msgstr "§eDe Configuratie is herladen"
 
 msgid "§cError! §9Unable to save config file!"
@@ -2142,6 +2145,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, fuzzy
+#~ msgid "§eConfiguration saved, use §9/usb reload§e to activate changes."
+#~ msgstr "§eDe Configuratie is herladen"
 
 #, fuzzy
 #~ msgid "ms"

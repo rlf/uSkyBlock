@@ -121,7 +121,15 @@ public class YmlCommentParser {
         int indentLevel = 0;
         String baseKey = null;
         int lineNum = 1;
+        // First section shares comments with the header - so ignore that one
+        boolean isHeader = true;
         for (String line : ymlPure.split("\n")) {
+            // Skip header
+            Matcher commentM = COMMENT_PATTERN.matcher(line);
+            if (isHeader && (commentM.matches() || line.trim().isEmpty())) {
+                continue; // Skip header
+            }
+            isHeader = false;
             Matcher sectionM = SECTION_PATTERN.matcher(line);
             if (sectionM.matches()) {
                 String name = sectionM.group("name").trim();

@@ -198,6 +198,8 @@ public enum FileUtil {;
         dest.options().copyDefaults(true);
         dest.addComments(src.getComments());
         dest.set("version", version);
+        dest.options().copyHeader(false);
+        src.options().copyHeader(false);
         ConfigurationSection forceSection = src.getConfigurationSection("force-replace");
         if (forceSection != null) {
             for (String key : forceSection.getKeys(true)) {

@@ -42,7 +42,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     @Override
     public boolean onClick(InventoryClickEvent event) {
         String title = stripFormatting(event.getInventory().getTitle());
-        Player player = (Player) event.getWhoClicked();
+        final Player player = (Player) event.getWhoClicked();
         if (!title.contains(".yml")) {
             return false;
         }
@@ -59,8 +59,9 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         } else if (item.getType() == Material.BOOK_AND_QUILL && event.getSlot() == getIndex(5, 0)) {
             ItemStack currentMenu = getCurrentMenu(event);
             String configName = getConfigName(currentMenu);
+            int page = getConfigPage(currentMenu);
             player.closeInventory();
-            saveConfig(player, configName);
+            saveConfig(player, configName, page);
         } else {
             ItemStack currentMenu = getCurrentMenu(event);
             String configName = getConfigName(currentMenu);
@@ -113,16 +114,28 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         return sb.toString();
     }
 
-    private void saveConfig(Player player, String configName) {
-        try {
-            YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
-            config.set("dirty", null);
-            config.save(new File(plugin.getDataFolder(), configName));
-            plugin.reloadConfig();
-            player.sendMessage(tr("\u00a7eConfiguration saved and reloaded from file."));
-        } catch (IOException e) {
-            player.sendMessage(tr("\u00a7cError! \u00a79Unable to save config file!"));
-        }
+    private void saveConfig(final Player player, final String configName, final int page) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
+                    config.set("dirty", null);
+                    config.save(new File(plugin.getDataFolder(), configName));
+                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            plugin.reloadConfig();
+                            player.sendMessage(tr("\u00a7eConfiguration saved and reloaded."));
+                            player.openInventory(createEditMenu(configName, null, page));
+                        }
+                    });
+                } catch (IOException e) {
+                    player.sendMessage(tr("\u00a7cError! \u00a79Unable to save config file!"));
+                }
+            }
+        });
+
     }
 
     private Inventory createFileMenu(String filename, int page) {
