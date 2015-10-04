@@ -112,7 +112,7 @@ public enum FileUtil {;
     /**
      * System-encoding agnostic config-reader
      */
-    public static YmlConfiguration getFileConfiguration(String configName) {
+    public static YmlConfiguration getYmlConfiguration(String configName) {
         // Caching, for your convenience! (and a bigger memory print!)
 
         if (!configFiles.containsKey(configName)) {
@@ -180,6 +180,9 @@ public enum FileUtil {;
     }
 
     private static void copy(InputStream stream, File file) throws IOException {
+        if (stream == null || file == null) {
+            return;
+        }
         Files.copy(stream, Paths.get(file.toURI()), StandardCopyOption.REPLACE_EXISTING);
     }
 
@@ -194,7 +197,6 @@ public enum FileUtil {;
         dest.setDefaults(src);
         dest.options().copyDefaults(true);
         dest.addComments(src.getComments());
-        src.options().header("Merge from between jar-file v" + version + " and existing config v" + existing);
         dest.set("version", version);
         ConfigurationSection forceSection = src.getConfigurationSection("force-replace");
         if (forceSection != null) {
