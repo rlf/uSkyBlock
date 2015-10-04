@@ -389,27 +389,6 @@ public class ChallengeLogic {
         return currentChallengeItem;
     }
 
-    public static List<String> wordWrap(String s, int firstSegment, int lineSize) {
-        List<String> words = new ArrayList<>();
-        int ix = firstSegment;
-        int jx = 0;
-        while (ix < s.length()) {
-            ix = s.indexOf(' ', ix);
-            if (ix != -1) {
-                String subString = s.substring(jx, ix).trim();
-                if (!subString.isEmpty()) {
-                    words.add(subString);
-                }
-            } else {
-                break;
-            }
-            jx = ix + 1;
-            ix += lineSize;
-        }
-        words.add(s.substring(jx));
-        return words;
-    }
-
     public void populateChallenges(Map<String, ChallengeCompletion> challengeMap) {
         for (Rank rank : ranks.values()) {
             for (Challenge challenge : rank.getChallenges()) {

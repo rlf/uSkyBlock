@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 import org.junit.Test;
+import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +21,6 @@ public class ChallengeLogicTest {
                 "but should be broken",
                 "on multiple lines");
 
-        assertThat(ChallengeLogic.wordWrap(test, 8, 15), is(expected));
+        assertThat(FormatUtil.wordWrap(test, 8, 15), is(expected));
     }
 }

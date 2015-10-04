@@ -43,7 +43,7 @@ public class SkyBlockMenu {
     ItemStack sign = new ItemStack(323, 1);
     ItemStack biome = new ItemStack(6, 1, (short) 3);
     ItemStack lock = new ItemStack(101, 1);
-    ItemStack warpset = new ItemStack(90, 1);
+    ItemStack warpset = new ItemStack(120, 1);
     ItemStack warptoggle = new ItemStack(69, 1);
     ItemStack invite = new ItemStack(398, 1);
     ItemStack kick = new ItemStack(301, 1);
@@ -786,6 +786,8 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.performCommand("chestcommands open island_help");
             }
+        } else if (inventoryName.startsWith(stripFormatting(tr("Config:"))) && event.getWhoClicked() instanceof Player) {
+            skyBlock.getConfigMenu().onClick(event);
         }
     }
 }

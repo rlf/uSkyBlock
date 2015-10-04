@@ -34,7 +34,7 @@ import us.talabrek.ultimateskyblock.util.I18nUtil;
  * The new admin command, alias /usb
  */
 public class AdminCommand extends AbstractCommandExecutor {
-    public AdminCommand(uSkyBlock plugin, ConfirmHandler confirmHandler) {
+    public AdminCommand(final uSkyBlock plugin, ConfirmHandler confirmHandler) {
         super("usb", "usb.admin", I18nUtil.tr("Ultimate SkyBlock Admin"));
         OnlinePlayerTabCompleter playerCompleter = new OnlinePlayerTabCompleter();
         TabCompleter challengeCompleter = new ChallengeTabCompleter();
@@ -70,5 +70,19 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new LanguageCommand(plugin));
         add(new FlushCommand(plugin));
         add(new JobsCommand(plugin));
+        /**
+        add(new AbstractUSBCommand("config|c", "usb.admin.config", "open GUI for config") {
+            @Override
+            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
+                if (sender instanceof Player) {
+                    plugin.getConfigMenu().showMenu((Player) sender,
+                            args.length > 0 && args[0].matches("[0-9]*") ? Integer.parseInt(args[0], 10) : 1
+                    );
+                    return true;
+                }
+                return false;
+            }
+        });
+         **/
     }
 }

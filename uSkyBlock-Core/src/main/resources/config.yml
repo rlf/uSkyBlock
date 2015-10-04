@@ -5,12 +5,6 @@ options:
     # [integer] The max number of players allowed in a single party. (including the leader)
     maxPartySize: 4
 
-    # [string] The name of the skyblock world, will be automatically generated if it doesn't exist.
-    worldName: skyworld
-
-    # [integer] Area around 0,0 where islands will not be created to protect spawn.
-    spawnSize: 150
-
     # [integer] The time in seconds before a player can use the /island info command again. (note: cooldowns are reset when the plugin is reloaded)
     cooldownInfo: 20
 
@@ -24,19 +18,29 @@ options:
     # This is used when events are triggered heavily - i.e. item-pickup-prevention, damage-prevention etc.
     maxSpam: 2000
 
+    # [string] The name of the skyblock world, will be automatically generated if it doesn't exist.
+    worldName: skyworld
+
+    # [integer] Area around 0,0 where islands will not be created to protect spawn.
+    spawnSize: 150
+
   island:
-    # [filename] The schematic to use for island generation.
-    # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
-    schematicName: yourschematicname
+    # [integer] The y-coordinate (height) where islands are spawned.
+    height: 150
 
     # [integer] The number of blocks between islands.
     distance: 110
 
+
+    # [integer] The size of the protective region for each island. Can't be higher than 'distance'
+    protectionRange: 105
+
+    # [filename] The schematic to use for island generation.
+    # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
+    schematicName: yourschematicname
+
     # [true/false] If true, remove all hostile mobs when a player teleports back to their island.
     removeCreaturesByTeleport: false
-
-    # [integer] The y-coordinate (height) where islands are spawned.
-    height: 150
 
     # [item list] The list of items to place in the chest when a player starts a new island. ITEM_ID:HOW_MANY.
     # default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign.
@@ -44,21 +48,6 @@ options:
 
     # [true/false] If true, add extra items to a chest when a player starts a new island. (for donors and special players)
     addExtraItems: true
-
-    # [permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
-    # Only checked if 'addExtraItems' is set to true.
-    # [permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY
-    # When granting the permission, prefix it with "usb." so the full permission to add would be usb.smallbonus
-    extraPermissions:
-      smallbonus: '4:16 320:5'
-      mediumbonus: '50:16 327:1'
-      largebonus: '3:5 12:5'
-      giantbonus: '2:1 110:1'
-      extremebonus: '352:8 263:4'
-      donorbonus: '261:1 262:32 272:1'
-
-    # [integer] The size of the protective region for each island. Can't be higher than 'distance'
-    protectionRange: 105
 
     # [integer] The delay in seconds before teleporting to an island. Affects /is home, /is warp, /is spawn
     islandTeleportDelay: 2
@@ -113,6 +102,18 @@ options:
 
       # how many villagers can be spawned on an island
       villagers: 16
+
+    # [permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
+    # Only checked if 'addExtraItems' is set to true.
+    # [permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY
+    # When granting the permission, prefix it with "usb." so the full permission to add would be usb.smallbonus
+    extraPermissions:
+      smallbonus: '4:16 320:5'
+      mediumbonus: '50:16 327:1'
+      largebonus: '3:5 12:5'
+      giantbonus: '2:1 110:1'
+      extremebonus: '352:8 263:4'
+      donorbonus: '261:1 262:32 272:1'
 
   extras:
     # [true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
@@ -238,7 +239,7 @@ worldguard:
   exit-message: true
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 30
+version: 31
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

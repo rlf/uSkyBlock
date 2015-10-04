@@ -60,6 +60,7 @@ import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.OrphanLogic;
 import us.talabrek.ultimateskyblock.island.task.LocateChestTask;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
+import us.talabrek.ultimateskyblock.menu.ConfigMenu;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PerkLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -104,6 +105,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     private static final Random RND = new Random(System.currentTimeMillis());
 
     private SkyBlockMenu menu;
+    private ConfigMenu configMenu;
     private ChallengeLogic challengeLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
@@ -189,7 +191,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     @Override
     public FileConfiguration getConfig() {
-        return FileUtil.getFileConfiguration("config.yml");
+        return FileUtil.getYmlConfiguration("config.yml");
     }
 
     @Override
@@ -714,7 +716,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 return false;
             }
             ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(p);
-            return region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+            return region != null && region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
         }
         return false;
     }
@@ -1030,6 +1032,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         return menu;
     }
 
+    public ConfigMenu getConfigMenu() {
+        return configMenu;
+    }
 
     public static void log(Level level, String message) {
         log(level, message, null);
@@ -1082,9 +1087,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         PlayerUtil.loadConfig(playerDB, getConfig());
         islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
         perkLogic = new PerkLogic(this, islandGenerator);
-        challengeLogic = new ChallengeLogic(FileUtil.getFileConfiguration("challenges.yml"), this);
+        challengeLogic = new ChallengeLogic(FileUtil.getYmlConfiguration("challenges.yml"), this);
         menu = new SkyBlockMenu(this, challengeLogic);
-        levelLogic = new LevelLogic(this, FileUtil.getFileConfiguration("levelConfig.yml"));
+        configMenu = new ConfigMenu(this);
+        levelLogic = new LevelLogic(this, FileUtil.getYmlConfiguration("levelConfig.yml"));
         orphanLogic = new OrphanLogic(this);
         islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
         notifier = new PlayerNotifier(getConfig());

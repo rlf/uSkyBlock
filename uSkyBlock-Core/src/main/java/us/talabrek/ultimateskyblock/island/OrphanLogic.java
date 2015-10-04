@@ -32,7 +32,7 @@ public class OrphanLogic {
     public OrphanLogic(uSkyBlock plugin) {
         this.plugin = plugin;
         configFile = new File(plugin.getDataFolder(), "orphans.yml");
-        config = FileUtil.getFileConfiguration("orphans.yml");
+        config = FileUtil.getYmlConfiguration("orphans.yml");
         readOrphans();
     }
 

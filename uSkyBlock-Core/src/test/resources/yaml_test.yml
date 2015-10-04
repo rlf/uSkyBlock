@@ -1,0 +1,18 @@
+# This file is created to test Yaml config files with comments
+
+# options has comments
+options:
+  # island has comments
+  island:
+    # integer has multi
+    # line comments
+    int-vale: 10
+
+  # contains config for the party
+  partyConfig:
+
+      # Uses different indentation
+      double-value: -3.14
+
+      # with a comment
+      someString: Not sure how this will go down?

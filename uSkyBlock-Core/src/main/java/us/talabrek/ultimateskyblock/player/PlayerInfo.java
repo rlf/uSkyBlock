@@ -203,7 +203,7 @@ public class PlayerInfo implements Serializable {
     }
 
     private void createPlayerConfig() {
-        uSkyBlock.log(Level.INFO, "Creating new player config!");
+        uSkyBlock.log(Level.FINER, "Creating new player config!");
         setupPlayer();
     }
 
@@ -302,7 +302,7 @@ public class PlayerInfo implements Serializable {
 
     public synchronized void renameFrom(String oldName) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
-        
+
         // Delete the new file if for some reason it already exists.
         if (this.playerConfigFile.exists()) {
             this.playerConfigFile.delete();
@@ -323,8 +323,7 @@ public class PlayerInfo implements Serializable {
 
         // Reload the config.
         reloadPlayerConfig();
-        
-        // Load the player without checking for island removal.
+
         loadPlayer();
     }
     

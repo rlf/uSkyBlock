@@ -2,10 +2,14 @@ package us.talabrek.ultimateskyblock.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,5 +120,112 @@ public enum ItemStackUtil {;
             copy.add(item.clone());
         }
         return copy;
+    }
+
+    public static boolean isValidInventoryItem(ItemStack itemStack) {
+        Inventory inventory = Bukkit.createInventory(null, 9);
+        inventory.setItem(0, itemStack);
+        return inventory.getItem(0) != null && inventory.getItem(0).getItemMeta() != null && inventory.getItem(0).getData() != null && inventory.getItem(0).getData().toItemStack() != null;
+    }
+
+    public static Builder builder(ItemStack stack) {
+        return new Builder(stack);
+    }
+
+    public static String asString(ItemStack item) {
+        return item.getTypeId() + (item.getDurability() != 0 ? ":" + item.getDurability() : "") + ":" + item.getAmount();
+    }
+
+    /**
+     * Builder for ItemStack
+     */
+    public static class Builder {
+        private ItemStack itemStack;
+
+        public Builder(ItemStack itemStack) {
+            this.itemStack = itemStack != null ? itemStack.clone() : new ItemStack(0);
+        }
+
+        public Builder type(Material mat) {
+            itemStack.setType(mat);
+            return this;
+        }
+
+        public Builder type(int id) {
+            itemStack.setTypeId(id);
+            return this;
+        }
+
+        public Builder subType(int subType) {
+            itemStack.setDurability((short) subType);
+            return this;
+        }
+
+        public Builder amount(int amount) {
+            itemStack.setAmount(amount);
+            return this;
+        }
+
+        public Builder displayName(String name) {
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName(name);
+            itemStack.setItemMeta(itemMeta);
+            return this;
+        }
+
+        public Builder enchant(Enchantment enchantment, int level) {
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.addEnchant(enchantment, level, false);
+            itemStack.setItemMeta(itemMeta);
+            return this;
+        }
+
+        public Builder select(boolean b) {
+            return b ? select() : deselect();
+        }
+
+        public Builder select() {
+            return enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).add(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        public Builder deselect() {
+            return remove(Enchantment.PROTECTION_ENVIRONMENTAL).remove(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        public Builder add(ItemFlag... flags) {
+            ItemMeta meta = itemStack.getItemMeta();
+            meta.addItemFlags(flags);
+            itemStack.setItemMeta(meta);
+            return this;
+        }
+
+        public Builder remove(ItemFlag... flags) {
+            ItemMeta meta = itemStack.getItemMeta();
+            meta.removeItemFlags(flags);
+            itemStack.setItemMeta(meta);
+            return this;
+        }
+
+        private Builder remove(Enchantment enchantment) {
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.removeEnchant(enchantment);
+            itemStack.setItemMeta(itemMeta);
+            return this;
+        }
+
+        public Builder lore(String lore) {
+            return lore(Collections.singletonList(lore));
+        }
+
+        public Builder lore(List<String> lore) {
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
+            return this;
+        }
+
+        public ItemStack build() {
+            return itemStack;
+        }
     }
 }

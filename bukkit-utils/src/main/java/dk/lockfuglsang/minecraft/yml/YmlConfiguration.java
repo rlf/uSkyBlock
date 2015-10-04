@@ -37,4 +37,5 @@ public class YmlConfiguration extends YamlConfiguration {
         String ymlPure = super.saveToString();
         return commentParser.mergeComments(ymlPure);
     }
+
 }
