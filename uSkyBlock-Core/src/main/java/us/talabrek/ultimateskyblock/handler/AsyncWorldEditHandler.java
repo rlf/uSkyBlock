@@ -58,7 +58,7 @@ public enum AsyncWorldEditHandler {;
                 }
                 try {
                     adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
                     log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version);
                     adaptor = NULL_ADAPTOR;
                 }
