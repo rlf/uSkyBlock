@@ -126,10 +126,16 @@ options:
 
   # Contains flags for enabling PROTECTION of various mechanics.
   protection:
+
     # Whether or not, items dropped on the ground should be limited to party-members.
     item-drops: true
+
     # If true, only creepers targeting party-members will explode
     creepers: true
+
+    # Whether or not the plugin will try to protect the player from accidentally extinguishing lava
+    protect-lava: true
+
     visitors:
       # Protect visitors from trampling your crop
       trampling: true
@@ -160,6 +166,9 @@ options:
 
       # Whether or not to actively block banned players from entering an island (by walking/flying).
       block-banned-entry: true
+
+      # Whether or not visitors can use portals (default: false)
+      use-portals: false
 
   party:
     # The number of ticks before an invite timeouts (20 ticks per sec.)
@@ -239,7 +248,7 @@ worldguard:
   exit-message: true
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 31
+version: 32
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

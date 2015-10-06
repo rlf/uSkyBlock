@@ -66,12 +66,14 @@ public class PlayerEvents implements Listener {
     private final uSkyBlock plugin;
     private final boolean visitorFallProtected;
     private final boolean visitorFireProtected;
+    private final boolean protectLava;
     private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
         visitorFallProtected = plugin.getConfig().getBoolean("options.protection.visitors.fall", true);
         visitorFireProtected = plugin.getConfig().getBoolean("options.protection.visitors.fire-damage", true);
+        protectLava = plugin.getConfig().getBoolean("options.protection.protect-lava", true);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -150,7 +152,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onLavaReplace(BlockPlaceEvent event) {
-        if (event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
+        if (!protectLava || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
             return; // Skip
         }
         if (event.getBlockReplacedState() != null &&
