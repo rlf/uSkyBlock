@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.event;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -10,6 +11,8 @@ import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Squid;
+import org.bukkit.entity.WaterMob;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -24,6 +27,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.EntityUtil;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -65,7 +69,7 @@ public class SpawnEvents implements Listener {
     @EventHandler
     public void onFeedEvent(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
-        if (player == null || !plugin.isSkyWorld(player.getWorld())) {
+        if (player == null || event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
             return; // Bail out, we don't care
         }
         if (Animals.class.isAssignableFrom(event.getRightClicked().getType().getEntityClass()) && player.getItemInHand() != null) {
@@ -89,7 +93,7 @@ public class SpawnEvents implements Listener {
     @EventHandler
     public void onSpawnEggEvent(PlayerInteractEvent event) {
         Player player = event != null ? event.getPlayer() : null;
-        if (player == null || !plugin.isSkyWorld(player.getWorld())) {
+        if (player == null || event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
             return; // Bail out, we don't care
         }
         ItemStack item = event.getItem();
@@ -111,10 +115,19 @@ public class SpawnEvents implements Listener {
 
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
-        if (event == null || event.getLocation() == null || !plugin.isSkyWorld(event.getLocation().getWorld())) {
+        if (event == null || event.isCancelled() || event.getLocation() == null || !plugin.isSkyWorld(event.getLocation().getWorld())) {
             return; // Bail out, we don't care
         }
         checkLimits(event, event.getEntity().getType(), event.getLocation());
+        if (!event.isCancelled() && event.getEntity() instanceof Squid) {
+            Location loc = event.getLocation();
+            int z = loc.getBlockZ();
+            int x = loc.getBlockX();
+            if (loc.getWorld().getBiome(x, z) == Biome.DEEP_OCEAN && LocationUtil.findRoofBlock(loc).getType() == Material.PRISMARINE) {
+                loc.getWorld().spawnEntity(loc, EntityType.GUARDIAN);
+                event.setCancelled(true);
+            }
+        }
     }
 
     private void checkLimits(Cancellable event, EntityType entityType, Location location) {
@@ -139,7 +152,7 @@ public class SpawnEvents implements Listener {
         }
         List<Creature> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorld(), WorldGuardHandler.getIslandRegionAt(islandInfo.getIslandLocation()));
         if (Monster.class.isAssignableFrom(entityType.getEntityClass())) {
-            long currentlySpawned = EntityUtil.getMonsters(creatures).size();
+            long currentlySpawned = EntityUtil.getMonsters(creatures).size() + EntityUtil.getEntity(creatures, WaterMob.class).size();
             if (currentlySpawned >= islandInfo.getMaxMonsters()) {
                 event.setCancelled(true);
                 return;

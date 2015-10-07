@@ -259,8 +259,15 @@ public class SkyBlockMenu {
                 new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
                         "flower_forest", tr("Flower Forest"),
                         tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
-                )
-        );
+                ),
+                new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
+                        "deep_ocean", tr("Deep Ocean"),
+                        tr("The deep-ocean biome is an advanced\n" +
+                                "biome. Passive mobs like animals will\n" +
+                                "not spawn. Hostile mobs \n"+
+                                "(including Guardians) will\n" +
+                                "spawn normally.")
+                ));
         String currentBiome = skyBlock.getCurrentBiome(player);
         for (BiomeMenuItem biomeMenu : biomeMenus) {
             ItemStack menuItem = biomeMenu.getIcon();
@@ -677,6 +684,10 @@ public class SkyBlockMenu {
             } else if (event.getCurrentItem().getType() == Material.RAW_FISH) {
                 p.closeInventory();
                 p.performCommand("island biome ocean");
+                p.openInventory(displayIslandGUI(p));
+            } else if (event.getCurrentItem().getType() == Material.PRISMARINE_SHARD) {
+                p.closeInventory();
+                p.performCommand("island biome deep_ocean");
                 p.openInventory(displayIslandGUI(p));
             } else {
                 p.closeInventory();

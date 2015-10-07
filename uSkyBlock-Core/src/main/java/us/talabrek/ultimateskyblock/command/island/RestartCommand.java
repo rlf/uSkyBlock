@@ -34,7 +34,7 @@ public class RestartCommand extends RequireIslandCommand {
                 return true;
             }
 
-            if (plugin.getConfig().getBoolean("options.restart.confirmation", true) && plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
+            if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
                 plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
                 return plugin.restartPlayerIsland(player, pi.getIslandLocation());
             } else {

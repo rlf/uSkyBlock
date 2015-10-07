@@ -24,6 +24,9 @@ public class ConfirmHandler {
     }
 
     public boolean checkCommand(final Player player, final String cmd) {
+        if (!confirmationsActiveFor(cmd)) {
+            return true;
+        }
         UUID uuid = player.getUniqueId();
         if (confirmMap.containsKey(uuid)) {
             ConfirmCommand confirmCommand = confirmMap.get(uuid);
@@ -44,6 +47,10 @@ public class ConfirmHandler {
         }, TimeUtil.secondsAsTicks(timeout));
         player.sendMessage(I18nUtil.tr("\u00a7eDoing \u00a79{0}\u00a7e is \u00a7cRISKY\u00a7e. Repeat the command within \u00a7a{1}\u00a7e seconds to accept!", cmd, timeout));
         return false;
+    }
+
+    private boolean confirmationsActiveFor(String cmd) {
+        return plugin.getConfig().getBoolean("options.confirmation." + cmd.replaceAll("[^a-z\\ ]", ""), true);
     }
 
     private static class ConfirmCommand {

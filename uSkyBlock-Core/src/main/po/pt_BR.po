@@ -1723,6 +1723,24 @@ msgstr ""
 "§fmonstros irão nascer\n"
 "§fnormalmente."
 
+#, fuzzy
+msgid "Deep Ocean"
+msgstr "Oceano"
+
+#, fuzzy
+msgid ""
+"The deep-ocean biome is an advanced\n"
+"biome. Passive mobs like animals will\n"
+"not spawn. Hostile mobs \n"
+"(including Guardians) will\n"
+"spawn normally."
+msgstr ""
+"O bioma de oceano é o bioma\n"
+"padrão para todas as ilhas.\n"
+"mobs passivos como o porco\n"
+"não irão nascer. Monstros\n"
+"irão nascer normalmente."
+
 #, java-format
 msgid "Biome: {0}"
 msgstr "Bioma: {0}"

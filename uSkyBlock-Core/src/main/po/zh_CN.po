@@ -1767,6 +1767,22 @@ msgstr ""
 "§f中立生物将会正常生成.\n"
 "§f敌对生物将会正常生成."
 
+msgid "Deep Ocean"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The deep-ocean biome is an advanced\n"
+"biome. Passive mobs like animals will\n"
+"not spawn. Hostile mobs \n"
+"(including Guardians) will\n"
+"spawn normally."
+msgstr ""
+"§f海洋生物群系是所有岛屿\n"
+"§f初始默认的生物群系.\n"
+"§f中立生物如动物将不会\n"
+"§f生成,怪物将会正常生成"
+
 #, java-format
 msgid "Biome: {0}"
 msgstr ""

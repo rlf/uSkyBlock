@@ -1802,6 +1802,22 @@ msgstr ""
 "§fFriedliche Tiere erscheinen.\n"
 "§fFeindliche Kreaturen erscheinen normal."
 
+msgid "Deep Ocean"
+msgstr ""
+
+#, fuzzy
+msgid ""
+"The deep-ocean biome is an advanced\n"
+"biome. Passive mobs like animals will\n"
+"not spawn. Hostile mobs \n"
+"(including Guardians) will\n"
+"spawn normally."
+msgstr ""
+"§fDas Startbiome für jede Insel ist\n"
+"§fdas Ozeanbiome. Friedliche Tiere\n"
+"§fwerden nicht Erscheinen. Feindliche\n"
+"§fKreaturen erscheinen normal."
+
 #, java-format
 msgid "Biome: {0}"
 msgstr ""

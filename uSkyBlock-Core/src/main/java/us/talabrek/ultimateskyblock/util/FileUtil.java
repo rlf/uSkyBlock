@@ -16,9 +16,12 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
@@ -200,6 +203,23 @@ public enum FileUtil {;
         dest.set("version", version);
         dest.options().copyHeader(false);
         src.options().copyHeader(false);
+        removeExcludes(dest);
+        moveNodes(src, dest);
+        replaceDefaults(src, dest);
+        return dest;
+    }
+
+    /**
+     * Removes nodes from dest.defaults, that are specifically excluded in the config
+     */
+    private static void removeExcludes(YmlConfiguration dest) {
+        List<String> keys = dest.getStringList("merge-ignore");
+        for (String key : keys) {
+            dest.getDefaults().set(key, null);
+        }
+    }
+
+    private static void replaceDefaults(YmlConfiguration src, YmlConfiguration dest) {
         ConfigurationSection forceSection = src.getConfigurationSection("force-replace");
         if (forceSection != null) {
             for (String key : forceSection.getKeys(true)) {
@@ -212,7 +232,33 @@ public enum FileUtil {;
             }
         }
         dest.set("force-replace", null);
-        return dest;
+        dest.getDefaults().set("force-replace", null);
+    }
+
+    private static void moveNodes(YmlConfiguration src, YmlConfiguration dest) {
+        ConfigurationSection moveSection = src.getConfigurationSection("move-nodes");
+        if (moveSection != null) {
+            List<String> keys = new ArrayList<>(moveSection.getKeys(true));
+            Collections.reverse(keys); // Depth first
+            for (String key : keys) {
+                if (moveSection.isString(key)) {
+                    String srcPath = key;
+                    String tgtPath = moveSection.getString(key, key);
+                    Object value = dest.get(srcPath);
+                    if (value != null) {
+                        dest.set(tgtPath, value);
+                        dest.set(srcPath, null);
+                    }
+                } else if (moveSection.isConfigurationSection(key)) {
+                    // Check to see if dest section should be nuked...
+                    if (dest.isConfigurationSection(key) && dest.getConfigurationSection(key).getKeys(false).isEmpty()) {
+                        dest.set(key, null);
+                    }
+                }
+            }
+        }
+        dest.set("move-nodes", null);
+        dest.getDefaults().set("move-nodes", null);
     }
 
     public static void init(File dataFolder) {

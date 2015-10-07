@@ -160,6 +160,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             put("plains", Biome.PLAINS);
             put("extreme_hills", Biome.EXTREME_HILLS);
             put("flower_forest", Biome.FLOWER_FOREST);
+            put("deep_ocean", Biome.DEEP_OCEAN);
         }
     };
 
@@ -813,11 +814,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         final int pz = loc.getBlockZ();
         for (int x = px - r; x <= px + r; x++) {
             for (int z = pz - r; z <= pz + r; z++) {
+                if ((x % 16) == 0 && (z % 16) == 0) {
+                    skyBlockWorld.loadChunk(x, z);
+                }
                 // Set the biome in the world.
                 skyBlockWorld.setBiome(x, z, biome);
                 // Refresh the chunks so players can see it without relogging!
                 // Unfortunately, it doesn't work - though it should (We filed a bug report about it to SPIGOT)
-                skyBlockWorld.refreshChunk(x, z);
+                //skyBlockWorld.refreshChunk(x, z);
             }
         }
     }

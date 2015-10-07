@@ -28,7 +28,7 @@ public class LeaveCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7eYou own this island, use /island remove <player> instead."));
                 return true;
             }
-            if (plugin.getConfig().getBoolean("options.party.leave.confirmation", true) && plugin.getConfirmHandler().checkCommand(player, "/is leave")) {
+            if (plugin.getConfirmHandler().checkCommand(player, "/is leave")) {
                 island.removeMember(pi);
                 plugin.spawnTeleport(player, true);
                 player.sendMessage(tr("\u00a7eYou have left the island and returned to the player spawn."));

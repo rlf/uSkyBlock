@@ -1706,6 +1706,24 @@ msgstr ""
 "(inklusive heste) og fjentlige\n"
 "monstre/dyr vil spawne normalt"
 
+#, fuzzy
+msgid "Deep Ocean"
+msgstr "Hav"
+
+#, fuzzy
+msgid ""
+"The deep-ocean biome is an advanced\n"
+"biome. Passive mobs like animals will\n"
+"not spawn. Hostile mobs \n"
+"(including Guardians) will\n"
+"spawn normally."
+msgstr ""
+"Hav biomen er den normale\n"
+"start biome for alle øer.\n"
+"Passive mobs som dyr vil ikke\n"
+"spawne. Fjentlige monstre og dyr\n"
+"vil spawne normalt."
+
 #, java-format
 msgid "Biome: {0}"
 msgstr "Biome: {0}"

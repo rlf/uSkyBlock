@@ -1719,6 +1719,23 @@ msgstr ""
 "Мирные мобы появляются \n"
 "нормально, как и монстры."
 
+#, fuzzy
+msgid "Deep Ocean"
+msgstr "Океан"
+
+#, fuzzy
+msgid ""
+"The deep-ocean biome is an advanced\n"
+"biome. Passive mobs like animals will\n"
+"not spawn. Hostile mobs \n"
+"(including Guardians) will\n"
+"spawn normally."
+msgstr ""
+"Биом океана - простой,\n"
+"стандартный биом для всех островов.\n"
+"Мирные мобы не появляются.\n"
+"Монстры появляются нормально."
+
 #, java-format
 msgid "Biome: {0}"
 msgstr "Биом: {0}"

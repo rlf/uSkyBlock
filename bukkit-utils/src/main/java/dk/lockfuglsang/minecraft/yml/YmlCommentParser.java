@@ -81,6 +81,10 @@ public class YmlCommentParser {
                     baseKey = path;
                     isFirstAfterSection = true;
                 }
+            } else if (line.trim().isEmpty()) {
+                // Currently gathered comments are reset - they are "floating", decoupled from sections.
+                comments.setLength(0);
+                comments.trimToSize();
             }
             lineNum++;
         }

@@ -177,10 +177,6 @@ options:
     # The format used in /partytalk chat messages
     chat-format: '&9PARTY &r{DISPLAYNAME} &f>&b {MESSAGE}'
 
-    leave:
-      # [true/false] Whether to require confirmation (i.e. repeating the command twice).
-      confirmation: true
-
   # This section provide some performance tweaking configs
   advanced:
     # If true, display-name is looked up (might be performance intensive).
@@ -210,9 +206,6 @@ options:
     # [true/false] Whether or not the player should be auto teleported to the island when it's ready
     teleportWhenReady: true
 
-    # [true/false] Whether to require confirmation (i.e. repeating the command twice).
-    confirmation: true
-
 # This section allows donors to get specific perks
 #donor-perks:
 #  usb:
@@ -226,6 +219,13 @@ options:
 #        villagers: 24
 #        rewardBonus: 0.5
 #        hungerReduction: 0.5
+
+confirmation:
+  # [true/false] Whether to require confirmation (i.e. repeating the command twice).
+  is leave: true
+
+  # [true/false] Whether to require confirmation (i.e. repeating the command twice).
+  is restart: true
 
 asyncworldedit:
   # Supports disabling the detection of AWE
@@ -248,7 +248,10 @@ worldguard:
   exit-message: true
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 32
+version: 33
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
+move-nodes:
+  options.restart.confirmation: confirmation.is restart
+  options.party.leave.confirmation: confirmation.is leave

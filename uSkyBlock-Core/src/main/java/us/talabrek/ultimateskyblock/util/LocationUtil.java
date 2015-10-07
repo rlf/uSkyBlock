@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.util;
 
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -158,5 +159,31 @@ public enum LocationUtil {;
             }
         }
         return null;
+    }
+
+    /**
+     * Finds the nearest solid block above the location.
+     */
+    public static Block findRoofBlock(Location loc) {
+        if (loc == null) {
+            return null;
+        }
+        loadChunkAt(loc);
+        Location blockLoc = loc.clone();
+        ChunkSnapshot chunkSnapshot = blockLoc.getChunk().getChunkSnapshot();
+        int x = blockLoc.getBlockX();
+        int z = blockLoc.getBlockZ();
+        int cx = x >> 4;
+        int cz = z >> 4;
+        int topBlock = chunkSnapshot.getHighestBlockYAt(cx,cz);
+        int y = blockLoc.getBlockY();
+        while (y <= topBlock && isLiquidOrAir(chunkSnapshot.getBlockTypeId(cx, y, cz))) {
+            y++;
+        }
+        return new Location(blockLoc.getWorld(), x, y, z).getBlock();
+    }
+
+    private static boolean isLiquidOrAir(int blockTypeId) {
+        return BlockUtil.isFluid(blockTypeId) || blockTypeId == Material.AIR.getId();
     }
 }
