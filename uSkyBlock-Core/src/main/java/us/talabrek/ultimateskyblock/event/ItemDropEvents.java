@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Handles the internal item-drop protection.
  */
@@ -36,7 +38,7 @@ public class ItemDropEvents implements Listener {
         }
         if (!visitorsCanDrop && !plugin.playerIsOnIsland(player) && !plugin.playerIsInSpawn(player)) {
             event.setCancelled(true);
-            plugin.notifyPlayer(player, "\u00a7eVisitors can't drop items!");
+            plugin.notifyPlayer(player, tr("\u00a7eVisitors can't drop items!"));
             return;
         }
         addDropInfo(player, event.getItemDrop().getItemStack());
@@ -50,7 +52,7 @@ public class ItemDropEvents implements Listener {
         }
         if (!visitorsCanDrop && !plugin.playerIsOnIsland(player) && !plugin.playerIsInSpawn(player)) {
             event.getDrops().clear();
-            plugin.notifyPlayer(player, "\u00a7eVisitors can't drop items!");
+            plugin.notifyPlayer(player, tr("\u00a7eVisitors can't drop items!"));
             return;
         }
         // Take over the drop, since Bukkit don't do this in a Metadatable format.
@@ -61,27 +63,31 @@ public class ItemDropEvents implements Listener {
 
     private void addDropInfo(Player player, ItemStack stack) {
         ItemMeta meta = stack.getItemMeta();
-        List<String> lore = meta.getLore();
-        if (lore == null) {
-            lore = new ArrayList<>();
+        if (meta != null) {
+            List<String> lore = meta.getLore();
+            if (lore == null) {
+                lore = new ArrayList<>();
+            }
+            lore.add(tr("Owner: {0}", player.getName()));
+            meta.setLore(lore);
+            stack.setItemMeta(meta);
         }
-        lore.add("Dropped by: " + player.getName());
-        meta.setLore(lore);
-        stack.setItemMeta(meta);
     }
 
     private void clearDropInfo(ItemStack stack) {
         ItemMeta meta = stack.getItemMeta();
-        List<String> lore = meta.getLore();
-        if (lore != null && !lore.isEmpty()) {
-            for (Iterator<String> it = lore.iterator(); it.hasNext(); ) {
-                String line = it.next();
-                if (line.startsWith("Dropped by: ")) {
-                    it.remove();
+        if (meta != null) {
+            List<String> lore = meta.getLore();
+            if (lore != null && !lore.isEmpty()) {
+                for (Iterator<String> it = lore.iterator(); it.hasNext(); ) {
+                    String line = it.next();
+                    if (line.contains(tr("Owner: {0}", ""))) {
+                        it.remove();
+                    }
                 }
+                meta.setLore(lore);
+                stack.setItemMeta(meta);
             }
-            meta.setLore(lore);
-            stack.setItemMeta(meta);
         }
     }
 
@@ -114,16 +120,18 @@ public class ItemDropEvents implements Listener {
         }
         // You are on another's island, and the stuff dropped weren't yours.
         event.setCancelled(true);
-        plugin.notifyPlayer(player, "You cannot pick up other players' loot when you are a visitor!");
+        plugin.notifyPlayer(player, tr("You cannot pick up other players' loot when you are a visitor!"));
     }
 
     private boolean wasDroppedBy(Player player, PlayerPickupItemEvent event) {
         ItemStack itemStack = event.getItem().getItemStack();
         ItemMeta meta = itemStack.getItemMeta();
-        List<String> lore = meta.getLore();
-        if (lore != null && !lore.isEmpty()) {
-            String lastLine = lore.get(lore.size()-1);
-            return lastLine.equalsIgnoreCase("Dropped by: " + player.getName());
+        if (meta != null) {
+            List<String> lore = meta.getLore();
+            if (lore != null && !lore.isEmpty()) {
+                String lastLine = lore.get(lore.size() - 1);
+                return lastLine.equalsIgnoreCase(tr("Owner: {0}", player.getName()));
+            }
         }
         return false;
     }
