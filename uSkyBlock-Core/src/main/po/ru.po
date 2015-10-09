@@ -1178,6 +1178,17 @@ msgstr "§eВы не можете использовать портал на д�
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eТорговля не разрешена на других островах. Идите домой - читер!"
 
+msgid "§eVisitors can't drop items!"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "Owner: {0}"
+msgstr "Звание: {0}"
+
+#, fuzzy
+msgid "You cannot pick up other players' loot when you are a visitor!"
+msgstr "§eВы не можете использовать портал на другие острова! Вы - читер!"
+
 msgid "Config:"
 msgstr ""
 

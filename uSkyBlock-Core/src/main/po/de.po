@@ -1220,6 +1220,19 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandeln ist auf anderen Inseln nicht erlaubt. Geh heim - Cheater!"
 
+msgid "§eVisitors can't drop items!"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "Owner: {0}"
+msgstr "§9Stufe ist {0}"
+
+#, fuzzy
+msgid "You cannot pick up other players' loot when you are a visitor!"
+msgstr ""
+"§eDu kannst nicht die Portale einer anderen Insel nutzen! Schäme dich - "
+"Cheater!"
+
 msgid "Config:"
 msgstr ""
 

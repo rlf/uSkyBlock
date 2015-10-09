@@ -83,7 +83,6 @@ public class WorldGuardHandler {
                     }
                 }
                 regionManager.addRegion(region);
-                plugin.log(Level.INFO, "New protected region created for " + islandConfig.getLeader() + "'s Island by " + sender.getName());
                 islandConfig.setRegionVersion(getVersion());
                 return true;
             }

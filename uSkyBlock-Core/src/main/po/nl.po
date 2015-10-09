@@ -1184,6 +1184,17 @@ msgstr "§eJe kan geen portals van andere eilanden gebruiken!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandelen is niet toegestaan op ander mans eiland!"
 
+msgid "§eVisitors can't drop items!"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "Owner: {0}"
+msgstr "Rank: {0}"
+
+#, fuzzy
+msgid "You cannot pick up other players' loot when you are a visitor!"
+msgstr "§eJe kan geen portals van andere eilanden gebruiken!"
+
 msgid "Config:"
 msgstr ""
 

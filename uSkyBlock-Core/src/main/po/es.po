@@ -1176,6 +1176,17 @@ msgstr "§eNo puedes usar los portales de otras islas! Eres un tramposo!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eEl tradeo no esta permitido en otras islas! Ve a tu casa- tramposo!"
 
+msgid "§eVisitors can't drop items!"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "Owner: {0}"
+msgstr "Rank: {0}"
+
+#, fuzzy
+msgid "You cannot pick up other players' loot when you are a visitor!"
+msgstr "§eNo puedes usar los portales de otras islas! Eres un tramposo!"
+
 msgid "Config:"
 msgstr ""
 

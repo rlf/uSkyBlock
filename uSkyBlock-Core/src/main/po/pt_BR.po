@@ -1174,6 +1174,17 @@ msgstr "§eVocê não pode usar outros portais na ilha!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eTrocas não são permitidas em outras ilhas."
 
+msgid "§eVisitors can't drop items!"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "Owner: {0}"
+msgstr "Categoria: {0}"
+
+#, fuzzy
+msgid "You cannot pick up other players' loot when you are a visitor!"
+msgstr "§eVocê não pode usar outros portais na ilha!"
+
 msgid "Config:"
 msgstr ""
 

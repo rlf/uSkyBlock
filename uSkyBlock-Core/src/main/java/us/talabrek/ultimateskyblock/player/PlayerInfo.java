@@ -145,7 +145,6 @@ public class PlayerInfo implements Serializable {
     }
 
     private void setupPlayer() {
-        uSkyBlock.log(Level.INFO, "Creating player config Paths!");
         FileConfiguration playerConfig = getConfig();
         ConfigurationSection pSection = playerConfig.createSection("player");
         pSection.set("hasIsland", false);

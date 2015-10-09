@@ -8,7 +8,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Map;
-import java.util.logging.Level;
 
 @SuppressWarnings("deprecation")
 public class KickCommand extends RequireIslandCommand {
@@ -52,7 +51,6 @@ public class KickCommand extends RequireIslandCommand {
                             Bukkit.getPlayer(island.getLeader()).sendMessage(I18nUtil.tr("\u00a74{0} has been removed from the island.", targetPlayerName));
                         }
                         island.removeMember(targetPlayerInfo);
-                        uSkyBlock.log(Level.INFO, "Removing from " + island.getLeader() + "'s Island");
                         if (isOnIsland && onlineTargetPlayer.isOnline()) {
                             plugin.spawnTeleport(onlineTargetPlayer, true);
                         }

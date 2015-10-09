@@ -19,6 +19,7 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -39,9 +40,9 @@ public class IslandGenerator {
         }
         this.schemFiles = directorySchematics.listFiles();
         if (this.schemFiles == null) {
-            System.out.print("[uSkyBlock] No schematic file loaded.");
+            log.log(Level.INFO, "[uSkyBlock] No schematic file loaded.");
         } else {
-            System.out.print("[uSkyBlock] " + this.schemFiles.length + " schematics loaded.");
+            log.log(Level.INFO, "[uSkyBlock] " + this.schemFiles.length + " schematics loaded.");
         }
     }
 

@@ -1123,6 +1123,16 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr ""
 
+msgid "§eVisitors can't drop items!"
+msgstr ""
+
+#, java-format
+msgid "Owner: {0}"
+msgstr ""
+
+msgid "You cannot pick up other players' loot when you are a visitor!"
+msgstr ""
+
 msgid "Config:"
 msgstr ""
 

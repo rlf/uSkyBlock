@@ -1167,6 +1167,17 @@ msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eDu kan ikke tage andres ting. Gå hjem - snyder!"
 
+msgid "§eVisitors can't drop items!"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "Owner: {0}"
+msgstr "Rank: {0}"
+
+#, fuzzy
+msgid "You cannot pick up other players' loot when you are a visitor!"
+msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
+
 msgid "Config:"
 msgstr ""
 
