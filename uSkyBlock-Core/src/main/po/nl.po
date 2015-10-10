@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-30 22:26+0100\n"
+"PO-Revision-Date: 2015-09-26 23:22+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -501,15 +501,15 @@ msgid "name"
 msgstr "naam"
 
 msgid "changes the language of the plugin, and reloads"
-msgstr "verander de taal en herlaad de plugin"
+msgstr "verander de biome van het eiland"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr "§aDe taal is met succes veranderd naar §e{0}"
+msgstr ""
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
-msgstr "§cMislukt om de taal te veranderen naar §e{0}"
+msgstr ""
 
 msgid "§9Supported Languages:\n"
 msgstr "§9Ondersteunende Talen:\n"
@@ -606,8 +606,9 @@ msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,number,###}%"
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
+#, fuzzy
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4VERWIJDER:§9 Klaar met verwijderen van inactieve eilanden."
+msgstr "§4** Je verlaat een verlaten eiland."
 
 msgid "displays version information"
 msgstr "het weergeven van de versie-informatie"
@@ -730,17 +731,17 @@ msgstr "§4Je hebt geen toestemming om leden te verweideren of te verbannen."
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eJe hebt §4{0}§e verbannen om naar uw eiland te warpen."
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eJe bent §cGEBANd §e van {0}§e''s eiland."
+msgstr "§eJe hebt §4{0}§e verbannen om naar uw eiland te warpen."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
 msgstr "§eJe hebt §a{0}§e toegang gegeven om weer naar uw eiland te warpen."
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eJe bent weer §aTOEGELATEN§e op {0}§e''s eiland."
+msgstr "§eJe hebt §a{0}§e toegang gegeven om weer naar uw eiland te warpen."
 
 msgid "change the biome of the island"
 msgstr "verander de biome van het eiland"
@@ -1184,6 +1185,11 @@ msgstr "§eJe kan geen portals van andere eilanden gebruiken!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandelen is niet toegestaan op ander mans eiland!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1213,16 +1219,17 @@ msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eJe kan alleen spawn-eggs op je eigen eiland gebruiken."
 
+#, fuzzy
 msgid "§cBanned:§e You are banned from this island."
-msgstr "§cVerband:§e Jij bent geband op dit eiland."
+msgstr "§4Speler is al toegewezen aan dit eiland!"
 
-#, java-format
+#, fuzzy, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr "§eWachten op je beurt §c{0,number,###}%"
+msgstr "§eHuidig niveau: §a{0,number,##.#}"
 
-#, java-format
+#, fuzzy, java-format
 msgid "§9Creating island...§e{0,number,###}%"
-msgstr "§9Eiland creëren...§e{0,number,###}%"
+msgstr "§eHuidig niveau: §a{0,number,##.#}"
 
 #, java-format
 msgid "§9{0}§7 timed out"
@@ -1236,13 +1243,13 @@ msgstr ""
 "§eHet commando §9{0}§e is §cRISKANT§e. Herhaal het commando in §a{1}§e "
 "seconden om het te accepteren!"
 
-#, java-format
+#, fuzzy, java-format
 msgid "§d** You are entering §b{0}''s §disland."
-msgstr "§d** Je komt bij §b{0}''s §deiland binnen."
+msgstr "§d** Je komt bij §b{0}'s §deiland binnen."
 
-#, java-format
+#, fuzzy, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** Je hebt §b{0}''s §deiland verlaten."
+msgstr "§d** Je hebt §b{0}'s §deiland verlaten."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
@@ -1302,6 +1309,14 @@ msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr ""
+"§cHet eiland waar je je op bevind word verwijderd! Je word naar spawn "
+"gestuurd."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr ""
 "§cHet eiland waar je je op bevind word verwijderd! Je word naar spawn "
 "gestuurd."
@@ -1461,9 +1476,9 @@ msgstr ""
 msgid "Permissions"
 msgstr "Permissies"
 
-#, java-format
+#, fuzzy, java-format
 msgid "{0} <{1}>"
-msgstr "{0} <{1}>"
+msgstr "§a{0} §c{1}"
 
 msgid "§hPlayer Permissions"
 msgstr "§hSpeler Permissies"

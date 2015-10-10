@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-30 23:11+0200\n"
+"PO-Revision-Date: 2015-09-30 21:32+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -1167,6 +1167,13 @@ msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eDu kan ikke tage andres ting. Gå hjem - snyder!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+"§cIngen adgang! §eDu prøver at komme til taget af §cNETHER§e, det er ikke "
+"tilladt."
+
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1284,6 +1291,12 @@ msgstr "§9{1} §7- {0}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cØen du er på bliver slettet! Du bliver sendt til spawn."
+
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
+msgstr ""
+"§cØen der ejer denne del af nether bliver slettet! Du bliver sendt til spawn."
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
@@ -2129,10 +2142,6 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#, fuzzy
-#~ msgid "§eConfiguration saved, use §9/usb reload§e to activate changes."
-#~ msgstr "§eKonfigurationen blev genindlæst fra fil."
 
 #, fuzzy
 #~ msgid "ms"

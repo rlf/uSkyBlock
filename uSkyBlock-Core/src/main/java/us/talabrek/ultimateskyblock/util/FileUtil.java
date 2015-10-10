@@ -178,10 +178,6 @@ public enum FileUtil {;
         return new File(getDataFolder(), configName);
     }
 
-    private static boolean isPrimaryConfig(String configName) {
-        return configName.equalsIgnoreCase("config.yml");
-    }
-
     private static void copy(InputStream stream, File file) throws IOException {
         if (stream == null || file == null) {
             return;
@@ -286,4 +282,5 @@ public enum FileUtil {;
         }
         return null;
     }
+
 }

@@ -604,8 +604,9 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 "§4ОЧИСТКА:§9 Сканирование завершено, найдено {0} кандидатов на очистку."
 
+#, fuzzy
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4ОЧИСТКА:§9 Очистка заброшенных островов завершена."
+msgstr "§4** Вы покидаете заброшенный остров."
 
 msgid "displays version information"
 msgstr "показать информацию о версии"
@@ -1178,6 +1179,11 @@ msgstr "§eВы не можете использовать портал на д�
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eТорговля не разрешена на других островах. Идите домой - читер!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1297,6 +1303,12 @@ msgid "§9{1} §7- {0}"
 msgstr "§d[{0}]§7 {1}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
 
 #, java-format

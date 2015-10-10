@@ -14,7 +14,7 @@ before_install:
   # Skip the 'v'
   - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 script:
-  - mvn -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true install
+  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true install
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
@@ -28,7 +28,7 @@ deploy:
     all_branches: true
 after_success:
   # Deploy API to the GitHub maven repo
-  - mvn -nsu deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
+  - mvn -nsu -o deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
   - $HOME/.m2

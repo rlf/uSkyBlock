@@ -39,6 +39,9 @@ msgstr "§eDiese Aufgabe benötigt das folgende:"
 msgid "§6Item Reward: §a"
 msgstr "§6Gegenstandsbelohnung: §a"
 
+msgid "§a"
+msgstr "§a"
+
 #, java-format
 msgid "§6Currency Reward: §a{0}"
 msgstr "§6Währungsbelohnung: §a{0}"
@@ -1220,6 +1223,11 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandeln ist auf anderen Inseln nicht erlaubt. Geh heim - Cheater!"
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1348,6 +1356,13 @@ msgid "§9{1} §7- {0}"
 msgstr ""
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr ""
+"§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr ""
 "§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
 

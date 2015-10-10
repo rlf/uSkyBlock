@@ -7,7 +7,7 @@ bin
 *.jar
 *.war
 *.ear
-/target
+**/target
 /lib
 /.classpath
 /.project

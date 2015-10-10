@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-27 12:59+0100\n"
+"PO-Revision-Date: 2015-09-30 21:30+0200\n"
 "Last-Translator: Filip Šandera <MrFiliper@woblex.cz>\n"
 "Language-Team: Woblex <http://www.woblex.cz/>\n"
 "Language: cs\n"
@@ -1128,6 +1128,11 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr ""
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1241,6 +1246,11 @@ msgid "§9{1} §7- {0}"
 msgstr ""
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr ""
+
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr ""
 
 #, java-format

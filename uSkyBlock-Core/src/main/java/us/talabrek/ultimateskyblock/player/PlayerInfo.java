@@ -94,6 +94,15 @@ public class PlayerInfo implements Serializable {
         return islandLocation != null && hasIsland && islandLocation.getBlockY() != 0 ? islandLocation.clone() : null;
     }
 
+    public Location getIslandNetherLocation() {
+        Location l = getIslandLocation();
+        if (l != null) {
+            l.setWorld(uSkyBlock.getInstance().getSkyBlockNetherWorld());
+            l.setY(l.getY()/2);
+        }
+        return l;
+    }
+
     public void setHomeLocation(final Location l) {
         this.homeLocation = l != null ? l.clone() : null;
     }
