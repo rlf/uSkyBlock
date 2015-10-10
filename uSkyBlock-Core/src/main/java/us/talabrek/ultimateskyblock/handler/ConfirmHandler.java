@@ -50,7 +50,7 @@ public class ConfirmHandler {
     }
 
     private boolean confirmationsActiveFor(String cmd) {
-        return plugin.getConfig().getBoolean("options.confirmation." + cmd.replaceAll("[^a-z\\ ]", ""), true);
+        return plugin.getConfig().getBoolean("confirmation." + cmd.replaceAll("[^a-z\\ ]", ""), true);
     }
 
     private static class ConfirmCommand {

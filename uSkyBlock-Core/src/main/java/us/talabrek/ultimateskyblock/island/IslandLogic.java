@@ -20,7 +20,7 @@ import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditClearTask;
+import us.talabrek.ultimateskyblock.handler.task.WorldEditClearFlatlandTask;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
@@ -170,7 +170,7 @@ public class IslandLogic {
                     plugin.spawnTeleport(player, true);
                 }
             }
-            WorldEditHandler.clearIsland(netherIsland.getWorld(), netherRegion, null);
+            WorldEditHandler.clearNetherIsland(netherIsland.getWorld(), netherRegion, null);
         }
     }
 
@@ -198,7 +198,7 @@ public class IslandLogic {
                         || w.getBlockAt(px-radius, py, pz-radius).getType() == BEDROCK)
                 {
                     sender.sendMessage(String.format("\u00a7c-----------------------------------\n\u00a7cFlatland detected under your island!\n\u00a7e Clearing it in %s, stay clear.\n\u00a7c-----------------------------------\n", TimeUtil.ticksAsString(delay)));
-                    new WorldEditClearTask(plugin, sender, new CuboidRegion(new Vector(px-radius, 0, pz-radius),
+                    new WorldEditClearFlatlandTask(plugin, sender, new CuboidRegion(new Vector(px-radius, 0, pz-radius),
                             new Vector(px+radius, 4, pz+radius)),
                             "\u00a7eFlatland was cleared under your island (%s). Take care.").runTaskLater(plugin, delay);
                 }

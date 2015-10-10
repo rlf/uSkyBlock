@@ -277,6 +277,14 @@
                 </includes>
             </resource>
             <resource>
+                <targetPath>schematics</targetPath>
+                <filtering>false</filtering>
+                <directory>src/main/resources/schematics</directory>
+                <includes>
+                    <include>**/*.schematic</include>
+                </includes>
+            </resource>
+            <resource>
                 <targetPath>.</targetPath>
                 <directory>${basedir}</directory>
                 <includes>

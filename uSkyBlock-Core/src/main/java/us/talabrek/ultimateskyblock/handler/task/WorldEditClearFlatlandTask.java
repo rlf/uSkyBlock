@@ -23,7 +23,7 @@ import java.util.logging.Level;
  * A task that chunks up the clearing of a region.
  * Not as fast as WorldEditRegenTask, but more versatile.
  */
-public class WorldEditClearTask extends IncrementalRunnable {
+public class WorldEditClearFlatlandTask extends IncrementalRunnable {
     private static final BaseBlock AIR = new BaseBlock(0);
 
     private final Set<Region> borderRegions;
@@ -34,12 +34,12 @@ public class WorldEditClearTask extends IncrementalRunnable {
     private final int maxY;
     private final int maxBlocks;
 
-    public WorldEditClearTask(final uSkyBlock plugin, final CommandSender commandSender, final Region region, final String format) {
+    public WorldEditClearFlatlandTask(final uSkyBlock plugin, final CommandSender commandSender, final Region region, final String format) {
         super(plugin);
         setOnCompletion(new Runnable() {
             @Override
             public void run() {
-                String duration = TimeUtil.millisAsString(WorldEditClearTask.this.getTimeElapsed());
+                String duration = TimeUtil.millisAsString(WorldEditClearFlatlandTask.this.getTimeElapsed());
                 plugin.log(Level.INFO, String.format("Region %s was cleared in %s", region.toString(), duration));
                 commandSender.sendMessage(String.format(format, duration));
             }

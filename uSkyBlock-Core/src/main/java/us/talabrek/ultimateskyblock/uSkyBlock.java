@@ -338,24 +338,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             MultiverseCoreHandler.importWorld(skyBlockWorld);
             setupWorld(skyBlockWorld, island_height);
         }
-        if (getConfig().getBoolean("nether.enabled", true)) {
-            if (uSkyBlock.skyBlockNetherWorld == null) {
-                skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
-                if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() || !(skyBlockNetherWorld.getGenerator() instanceof SkyBlockNetherChunkGenerator)) {
-                    uSkyBlock.skyBlockNetherWorld = WorldCreator
-                            .name(Settings.general_worldName + "_nether")
-                            .type(WorldType.NORMAL)
-                            .generateStructures(false)
-                            .environment(World.Environment.NETHER)
-                            .generator(new SkyBlockNetherChunkGenerator())
-                            .createWorld();
-                    uSkyBlock.skyBlockNetherWorld.save();
-                }
-                MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
-                setupWorld(skyBlockNetherWorld, island_height / 2);
-            }
-            MultiverseInventoriesHandler.linkWorlds(skyBlockWorld, skyBlockNetherWorld);
-        }
         return uSkyBlock.skyBlockWorld;
     }
 
@@ -380,6 +362,22 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public World getSkyBlockNetherWorld() {
+        if (skyBlockNetherWorld == null && getConfig().getBoolean("nether.enabled", true)) {
+            skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
+            if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() || !(skyBlockNetherWorld.getGenerator() instanceof SkyBlockNetherChunkGenerator)) {
+                uSkyBlock.skyBlockNetherWorld = WorldCreator
+                        .name(Settings.general_worldName + "_nether")
+                        .type(WorldType.NORMAL)
+                        .generateStructures(false)
+                        .environment(World.Environment.NETHER)
+                        .generator(new SkyBlockNetherChunkGenerator())
+                        .createWorld();
+                uSkyBlock.skyBlockNetherWorld.save();
+            }
+            MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
+            setupWorld(skyBlockNetherWorld, island_height / 2);
+            MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
+        }
         return skyBlockNetherWorld;
     }
 

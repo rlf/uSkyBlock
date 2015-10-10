@@ -21,6 +21,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegen;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
@@ -191,6 +192,27 @@ public class WorldEditHandler {
             public void run() {
                 long diff = System.currentTimeMillis() - t;
                 uSkyBlock.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+                if (afterDeletion != null) {
+                    afterDeletion.run();
+                }
+            }
+        };
+        WorldEditClear weRegen = new WorldEditClear(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
+        WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
+        Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), regen);
+    }
+
+    public static void clearNetherIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
+        log.finer("Clearing island " + region);
+        final long t = System.currentTimeMillis();
+        final Region cube = getRegion(skyWorld, region);
+        Set<Vector2D> innerChunks = getInnerChunks(cube);
+        Set<Region> borderRegions = getBorderRegions(cube);
+        Runnable onCompletion = new Runnable() {
+            @Override
+            public void run() {
+                long diff = System.currentTimeMillis() - t;
+                uSkyBlock.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
                 if (afterDeletion != null) {
                     afterDeletion.run();
                 }

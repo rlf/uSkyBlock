@@ -297,7 +297,7 @@ public class WorldGuardHandler {
         Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(location);
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
-            if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
+            if (!id.equalsIgnoreCase("__global__") && (id.endsWith("island") || id.endsWith("nether"))) {
                 return id.substring(0, id.length() - 6);
             }
         }
@@ -307,6 +307,9 @@ public class WorldGuardHandler {
     public static ProtectedRegion getIslandRegionAt(Location location) {
         WorldGuardPlugin worldGuard = getWorldGuard();
         RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
+        if (regionManager == null) {
+            return null;
+        }
         Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(location);
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
@@ -318,8 +321,14 @@ public class WorldGuardHandler {
     }
 
     public static ProtectedRegion getNetherRegionAt(Location location) {
+        if (!uSkyBlock.getInstance().getConfig().getBoolean("nether.enabled", true)) {
+            return null;
+        }
         WorldGuardPlugin worldGuard = getWorldGuard();
         RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
+        if (regionManager == null) {
+            return null;
+        }
         Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(location);
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();

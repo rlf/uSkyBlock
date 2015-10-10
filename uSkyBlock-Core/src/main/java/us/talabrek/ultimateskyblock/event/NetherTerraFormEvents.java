@@ -81,16 +81,19 @@ public class NetherTerraFormEvents implements Listener {
         }
         // TODO: 23/09/2015 - R4zorax: Test that the player is actually on his own island
         if (!terraFormMap.containsKey(block.getType())) {
-            return; // Not a black we terra-form on.
+            return; // Not a block we terra-form on.
         }
         Location playerLocation = player.getLocation();
         Location blockLocation = LocationUtil.centerOnBlock(block.getLocation());
         Vector v = new Vector(blockLocation.getX(), blockLocation.getY(), blockLocation.getZ());
         v.subtract(new Vector(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ()));
         v.normalize();
-        List<Material> yield = getYield(block.getType());
-        for (Material mat : yield) {
-            spawnBlock(mat, blockLocation, v);
+        // Disable spawning above the player... enabling the player to clear a region
+        if (v.getY() <= 0.865) {
+            List<Material> yield = getYield(block.getType());
+            for (Material mat : yield) {
+                spawnBlock(mat, blockLocation, v);
+            }
         }
     }
 

@@ -54,7 +54,7 @@ public class WarpCommand extends RequirePlayerCommand {
                     return true;
                 }
                 IslandInfo island = plugin.getIslandInfo(targetPlayerInfo);
-                if (island == null || !island.hasWarp()) {
+                if (island == null || (!island.hasWarp() && !island.getTrustees().contains(player.getName()))) {
                     player.sendMessage(tr("\u00a74That player does not have an active warp."));
                     return true;
                 }

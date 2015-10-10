@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -42,7 +41,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             player.sendMessage(tr("\u00a74You don't have access to this command!"));
             return true;
         }
-        if (!player.getWorld().getName().equalsIgnoreCase(Settings.general_worldName)) {
+        if (!plugin.isSkyAssociatedWorld(player.getWorld())) {
             player.sendMessage(tr("\u00a74You can only submit challenges in the skyblock world!"));
             return true;
         }

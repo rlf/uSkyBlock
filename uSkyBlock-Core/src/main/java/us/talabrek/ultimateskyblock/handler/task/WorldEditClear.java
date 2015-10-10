@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
@@ -20,8 +21,8 @@ import java.util.logging.Logger;
 /**
  * Runnable that can be run incrementally.
  */
-public class WorldEditRegen extends IncrementalRunnable {
-    private static final Logger log = Logger.getLogger(WorldEditRegen.class.getName());
+public class WorldEditClear extends IncrementalRunnable {
+    private static final Logger log = Logger.getLogger(WorldEditClear.class.getName());
     // The size of the "slices" in regions
     private static final int INCREMENT = 2;
     private static final BaseBlock AIR = new BaseBlock(0);
@@ -29,7 +30,7 @@ public class WorldEditRegen extends IncrementalRunnable {
     private final World world;
     private final List<Region> regions;
 
-    public WorldEditRegen(uSkyBlock plugin, World world, Set<Region> borderRegions, Runnable onCompletion) {
+    public WorldEditClear(uSkyBlock plugin, World world, Set<Region> borderRegions, Runnable onCompletion) {
         super(plugin, onCompletion);
         this.world = world;
         log.log(Level.FINE, "Planning regen of borders: " + borderRegions);
@@ -77,7 +78,11 @@ public class WorldEditRegen extends IncrementalRunnable {
             final EditSession editSession = WorldEditHandler.createEditSession(bukkitWorld, region.getArea() * 255);
             editSession.enableQueue();
             editSession.setFastMode(true);
-            bukkitWorld.regenerate(region, editSession);
+            try {
+                editSession.setBlocks(region, AIR);
+            } catch (MaxChangedBlocksException e) {
+                log.log(Level.INFO, "Warning: we got MaxChangedBlocks from WE, please increase it!");
+            }
             editSession.flushQueue();
             //editSession.commit();
             if (!tick()) {
