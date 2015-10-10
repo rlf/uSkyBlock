@@ -1128,11 +1128,6 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr ""
 
-msgid ""
-"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
-"that is not allowed."
-msgstr ""
-
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1144,6 +1139,11 @@ msgid "You cannot pick up other players' loot when you are a visitor!"
 msgstr ""
 
 msgid "Config:"
+msgstr ""
+
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
 msgstr ""
 
 msgid "§eChanging your obsidian back into lava. Be careful!"

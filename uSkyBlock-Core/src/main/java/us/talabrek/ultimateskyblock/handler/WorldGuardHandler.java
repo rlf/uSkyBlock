@@ -98,6 +98,9 @@ public class WorldGuardHandler {
     }
 
     public static boolean protectNetherIsland(uSkyBlock plugin, CommandSender sender, IslandInfo islandConfig) {
+        if (!plugin.getConfig().getBoolean("nether.enabled", true)) {
+            return false;
+        }
         try {
             WorldGuardPlugin worldGuard = getWorldGuard();
             RegionManager regionManager = worldGuard.getRegionManager(plugin.getSkyBlockNetherWorld());

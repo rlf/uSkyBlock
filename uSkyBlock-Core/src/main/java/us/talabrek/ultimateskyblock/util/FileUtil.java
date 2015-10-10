@@ -178,7 +178,7 @@ public enum FileUtil {;
         return new File(getDataFolder(), configName);
     }
 
-    private static void copy(InputStream stream, File file) throws IOException {
+    public static void copy(InputStream stream, File file) throws IOException {
         if (stream == null || file == null) {
             return;
         }

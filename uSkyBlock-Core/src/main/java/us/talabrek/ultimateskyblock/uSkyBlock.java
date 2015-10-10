@@ -317,7 +317,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (getConfig().getBoolean("options.protection.visitors.block-banned-entry", true)) {
             manager.registerEvents(new WorldGuardEvents(this), this);
         }
-        manager.registerEvents(new NetherTerraFormEvents(this), this);
+        if (getConfig().getBoolean("nether.enabled", true)) {
+            manager.registerEvents(new NetherTerraFormEvents(this), this);
+        }
     }
 
     public World getWorld() {
@@ -336,22 +338,24 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
             MultiverseCoreHandler.importWorld(skyBlockWorld);
             setupWorld(skyBlockWorld, island_height);
         }
-        if (uSkyBlock.skyBlockNetherWorld == null) {
-            skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
-            if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() || !(skyBlockNetherWorld.getGenerator() instanceof SkyBlockNetherChunkGenerator)) {
-                uSkyBlock.skyBlockNetherWorld = WorldCreator
-                        .name(Settings.general_worldName + "_nether")
-                        .type(WorldType.NORMAL)
-                        .generateStructures(false)
-                        .environment(World.Environment.NETHER)
-                        .generator(new SkyBlockNetherChunkGenerator())
-                        .createWorld();
-                uSkyBlock.skyBlockNetherWorld.save();
+        if (getConfig().getBoolean("nether.enabled", true)) {
+            if (uSkyBlock.skyBlockNetherWorld == null) {
+                skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
+                if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() || !(skyBlockNetherWorld.getGenerator() instanceof SkyBlockNetherChunkGenerator)) {
+                    uSkyBlock.skyBlockNetherWorld = WorldCreator
+                            .name(Settings.general_worldName + "_nether")
+                            .type(WorldType.NORMAL)
+                            .generateStructures(false)
+                            .environment(World.Environment.NETHER)
+                            .generator(new SkyBlockNetherChunkGenerator())
+                            .createWorld();
+                    uSkyBlock.skyBlockNetherWorld.save();
+                }
+                MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
+                setupWorld(skyBlockNetherWorld, island_height / 2);
             }
-            MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
-            setupWorld(skyBlockNetherWorld, island_height/2);
+            MultiverseInventoriesHandler.linkWorlds(skyBlockWorld, skyBlockNetherWorld);
         }
-        MultiverseInventoriesHandler.linkWorlds(skyBlockWorld, skyBlockNetherWorld);
         return uSkyBlock.skyBlockWorld;
     }
 
@@ -786,7 +790,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public ChunkGenerator getDefaultWorldGenerator(final String worldName, final String id) {
-        return (id != null && id.endsWith("nether")) || (worldName != null && worldName.endsWith("nether"))
+        return ((id != null && id.endsWith("nether")) || (worldName != null && worldName.endsWith("nether")))
+                && getConfig().getBoolean("nether.enabled", true)
                 ? new SkyBlockNetherChunkGenerator()
                 : new SkyBlockChunkGenerator();
     }
@@ -1177,7 +1182,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean isSkyNether(World world) {
-        return world != null && world.getName().equalsIgnoreCase(skyBlockNetherWorld.getName());
+        return world != null && skyBlockNetherWorld != null && world.getName().equalsIgnoreCase(skyBlockNetherWorld.getName());
     }
 
     public boolean isSkyAssociatedWorld(World world) {

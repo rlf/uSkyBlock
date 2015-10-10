@@ -1194,11 +1194,6 @@ msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§e交易无法在别的岛屿上进行.滚回家 - 骗子!"
 
-msgid ""
-"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
-"that is not allowed."
-msgstr ""
-
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1211,6 +1206,11 @@ msgid "You cannot pick up other players' loot when you are a visitor!"
 msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"
 
 msgid "Config:"
+msgstr ""
+
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
 msgstr ""
 
 msgid "§eChanging your obsidian back into lava. Be careful!"

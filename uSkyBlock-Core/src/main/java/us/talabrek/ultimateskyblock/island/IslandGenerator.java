@@ -31,12 +31,10 @@ import java.util.logging.Logger;
 public class IslandGenerator {
     private static final String CN = IslandGenerator.class.getName();
     private static final Logger log = Logger.getLogger(IslandGenerator.class.getName());
-    private final FileConfiguration config;
     private final File[] schemFiles;
     private final File netherSchematic;
 
     public IslandGenerator(File dataFolder, FileConfiguration config) {
-        this.config = config;
         File directorySchematics = new File(dataFolder + File.separator + "schematics");
         if (!directorySchematics.exists()) {
             directorySchematics.mkdir();
@@ -62,7 +60,6 @@ public class IslandGenerator {
         }
         return names;
     }
-
 
     public void createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next) {
         log.entering(CN, "createIsland", new Object[]{plugin, playerPerk.getPlayerInfo().getPlayerName(), next});

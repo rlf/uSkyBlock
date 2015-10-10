@@ -39,9 +39,6 @@ msgstr "§eDiese Aufgabe benötigt das folgende:"
 msgid "§6Item Reward: §a"
 msgstr "§6Gegenstandsbelohnung: §a"
 
-msgid "§a"
-msgstr "§a"
-
 #, java-format
 msgid "§6Currency Reward: §a{0}"
 msgstr "§6Währungsbelohnung: §a{0}"
@@ -1223,11 +1220,6 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eHandeln ist auf anderen Inseln nicht erlaubt. Geh heim - Cheater!"
 
-msgid ""
-"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
-"that is not allowed."
-msgstr ""
-
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -1242,6 +1234,11 @@ msgstr ""
 "Cheater!"
 
 msgid "Config:"
+msgstr ""
+
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
 msgstr ""
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
@@ -2267,6 +2264,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "§a"
+#~ msgstr "§a"
 
 #, fuzzy
 #~ msgid "§eConfiguration saved, use §9/usb reload§e to activate changes."

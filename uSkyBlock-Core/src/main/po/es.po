@@ -1190,6 +1190,11 @@ msgstr "§eNo puedes usar los portales de otras islas! Eres un tramposo!"
 msgid "Config:"
 msgstr ""
 
+msgid ""
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
+"that is not allowed."
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eConvirtiendo tu obsidiana en lava. TEN MAS CUIDADO!"
 
@@ -1293,6 +1298,13 @@ msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr ""
+"§cLa isla en donde te encuentras se esta borrando! Enviandote al spawn."
+
+#, fuzzy
+msgid ""
+"§cThe island owning this piece of nether is being deleted! Sending you to "
+"spawn."
 msgstr ""
 "§cLa isla en donde te encuentras se esta borrando! Enviandote al spawn."
 
