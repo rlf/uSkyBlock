@@ -1068,20 +1068,20 @@ msgid "§4Unknown player {0}"
 msgstr "§4Ukendt spiller {0}"
 
 #, java-format
-msgid "§eYou have trusted §4{0}§e on your island."
-msgstr "§eDu har betroet §4{0}§e til at kunne bygge og farme på din ø."
-
-#, java-format
 msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eDu er nu betroet på §4{0}§es ø."
 
-#, java-format
-msgid "§eYou have revoked your trust in §a{0}§e on your island."
-msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
+#, fuzzy, java-format
+msgid "§a{0} trusted {1} on the island"
+msgstr "{0} forsøgte at overtage øen!"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eDu er ikke længere betroet på §4{0}§es ø."
+
+#, fuzzy, java-format
+msgid "§c{0} revoked trust in {1} on the island"
+msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
 
 msgid "warp to another player's island"
 msgstr "besøg en andens ø"
@@ -2142,6 +2142,12 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
+#~ msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
+
+#~ msgid "§eYou have trusted §4{0}§e on your island."
+#~ msgstr "§eDu har betroet §4{0}§e til at kunne bygge og farme på din ø."
 
 #, fuzzy
 #~ msgid "ms"

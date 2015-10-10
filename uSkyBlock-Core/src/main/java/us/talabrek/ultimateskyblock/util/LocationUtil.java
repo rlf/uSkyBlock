@@ -50,6 +50,15 @@ public enum LocationUtil {;
                 loc.getYaw(), loc.getPitch());
     }
 
+    public static Location centerInBlock(Location loc) {
+        if (loc == null) {
+            return null;
+        }
+        return new Location(loc.getWorld(),
+                loc.getBlockX() + 0.5, loc.getBlockY() + 0.5, loc.getBlockZ() + 0.5,
+                loc.getYaw(), loc.getPitch());
+    }
+
     public static boolean isSafeLocation(final Location l) {
         if (l == null) {
             return false;

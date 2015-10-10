@@ -1180,7 +1180,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public boolean isSkyNether(World world) {
-        return world != null && skyBlockNetherWorld != null && world.getName().equalsIgnoreCase(skyBlockNetherWorld.getName());
+        World netherWorld = getSkyBlockNetherWorld();
+        return world != null && netherWorld != null && world.getName().equalsIgnoreCase(netherWorld.getName());
     }
 
     public boolean isSkyAssociatedWorld(World world) {

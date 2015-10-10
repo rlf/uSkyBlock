@@ -1086,20 +1086,20 @@ msgid "§4Unknown player {0}"
 msgstr "§4Onbekende speler {0}"
 
 #, java-format
-msgid "§eYou have trusted §4{0}§e on your island."
-msgstr "§eJe hebt §4{0}§e vertouwen gegeven op je eiland."
-
-#, java-format
 msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eJe bent nu vertrouwed op §4{0}'s §eeiland."
 
-#, java-format
-msgid "§eYou have revoked your trust in §a{0}§e on your island."
-msgstr "§eJe hebt §a{0}§e het vertouwen afgenomen op je eiland."
+#, fuzzy, java-format
+msgid "§a{0} trusted {1} on the island"
+msgstr "{0} heeft geprobeerd het eiland over te nemen!"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eJe bent niet meer vertrouwd op §4{0}'s §eeiland."
+
+#, fuzzy, java-format
+msgid "§c{0} revoked trust in {1} on the island"
+msgstr "§eJe hebt §a{0}§e het vertouwen afgenomen op je eiland."
 
 msgid "warp to another player's island"
 msgstr "warp naar een andere speler's eiland"
@@ -2189,6 +2189,12 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
+#~ msgstr "§eJe hebt §a{0}§e het vertouwen afgenomen op je eiland."
+
+#~ msgid "§eYou have trusted §4{0}§e on your island."
+#~ msgstr "§eJe hebt §4{0}§e vertouwen gegeven op je eiland."
 
 #, fuzzy
 #~ msgid "§eConfiguration saved, use §9/usb reload§e to activate changes."

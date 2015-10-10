@@ -1075,20 +1075,20 @@ msgid "§4Unknown player {0}"
 msgstr "§4Jugador desconocido {0}"
 
 #, java-format
-msgid "§eYou have trusted §4{0}§e on your island."
-msgstr "§eHas entregado permiso para construir a §4{0}§e."
-
-#, java-format
 msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eHas recibido permisos para construir en la isla §4{0}'s §e."
 
-#, java-format
-msgid "§eYou have revoked your trust in §a{0}§e on your island."
-msgstr "§eHas quitado los permisos para construir a §a{0}§e."
+#, fuzzy, java-format
+msgid "§a{0} trusted {1} on the island"
+msgstr "{0} ha tratado de apoderarse de la isla!"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eTe han quitado los permisos para construir en la isla §4{0}'s §e."
+
+#, fuzzy, java-format
+msgid "§c{0} revoked trust in {1} on the island"
+msgstr "§eHas quitado los permisos para construir a §a{0}§e."
 
 msgid "warp to another player's island"
 msgstr "telentransportate hacia la isla de otro"
@@ -2166,6 +2166,12 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
+#~ msgstr "§eHas quitado los permisos para construir a §a{0}§e."
+
+#~ msgid "§eYou have trusted §4{0}§e on your island."
+#~ msgstr "§eHas entregado permiso para construir a §4{0}§e."
 
 #, fuzzy
 #~ msgid "§eConfiguration saved, use §9/usb reload§e to activate changes."

@@ -1030,19 +1030,19 @@ msgid "§4Unknown player {0}"
 msgstr ""
 
 #, java-format
-msgid "§eYou have trusted §4{0}§e on your island."
-msgstr ""
-
-#, java-format
 msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr ""
 
 #, java-format
-msgid "§eYou have revoked your trust in §a{0}§e on your island."
+msgid "§a{0} trusted {1} on the island"
 msgstr ""
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
+msgstr ""
+
+#, java-format
+msgid "§c{0} revoked trust in {1} on the island"
 msgstr ""
 
 msgid "warp to another player's island"

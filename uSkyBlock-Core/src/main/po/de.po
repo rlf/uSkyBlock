@@ -1111,21 +1111,21 @@ msgstr "§4Mitgliedern wird bereits vertraut!"
 msgid "§4Unknown player {0}"
 msgstr "§4Unbekanter Spieler {0}"
 
-#, java-format
-msgid "§eYou have trusted §4{0}§e on your island."
-msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
-
 #, fuzzy, java-format
 msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
 
-#, java-format
-msgid "§eYou have revoked your trust in §a{0}§e on your island."
-msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
+#, fuzzy, java-format
+msgid "§a{0} trusted {1} on the island"
+msgstr "{0} hat versucht die Insel zu übernehmen!"
 
 #, fuzzy, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
+
+#, fuzzy, java-format
+msgid "§c{0} revoked trust in {1} on the island"
+msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
 
 msgid "warp to another player's island"
 msgstr "Warpt dich auf die Insel eines anderen Spielers"
@@ -2264,6 +2264,12 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
+#~ msgstr "§eDu misstraust jetzt §a{0}§e auf deiner Insel."
+
+#~ msgid "§eYou have trusted §4{0}§e on your island."
+#~ msgstr "§eDu vertraust nun §4{0}§e auf deiner Insel."
 
 #~ msgid "§a"
 #~ msgstr "§a"

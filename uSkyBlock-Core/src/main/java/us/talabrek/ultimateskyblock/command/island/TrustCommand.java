@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 public class TrustCommand extends RequireIslandCommand {
@@ -34,30 +35,25 @@ public class TrustCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a74Members are already trusted!"));
                 return true;
             }
-            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                    if (offlinePlayer == null) {
-                        player.sendMessage(tr("\u00a74Unknown player {0}", name));
-                        return;
-                    }
-                    if (alias.equals("trust")) {
-                        island.trust(name);
-                        player.sendMessage(tr("\u00a7eYou have trusted \u00a74{0}\u00a7e on your island.", name));
-                        if (offlinePlayer.isOnline()) {
-                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
-                        }
-                    } else {
-                        island.untrust(name);
-                        player.sendMessage(tr("\u00a7eYou have revoked your trust in \u00a7a{0}\u00a7e on your island.", name));
-                        if (offlinePlayer.isOnline()) {
-                            offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
-                        }
-                    }
-                    WorldGuardHandler.updateRegion(player, island);
+            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
+            if (offlinePlayer == null) {
+                player.sendMessage(tr("\u00a74Unknown player {0}", name));
+                return true;
+            }
+            if (alias.equals("trust")) {
+                island.trust(name);
+                if (offlinePlayer.isOnline()) {
+                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
                 }
-            });
+                island.sendMessageToIslandGroup(true, marktr("\u00a7a{0} trusted {1} on the island"), player.getName(), name);
+            } else {
+                island.untrust(name);
+                if (offlinePlayer.isOnline()) {
+                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
+                }
+                island.sendMessageToIslandGroup(true, marktr("\u00a7c{0} revoked trust in {1} on the island"), player.getName(), name);
+            }
+            WorldGuardHandler.updateRegion(player, island);
             return true;
         }
         return false;
