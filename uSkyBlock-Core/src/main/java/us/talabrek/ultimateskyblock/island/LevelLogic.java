@@ -142,26 +142,29 @@ public class LevelLogic {
         // TODO: 10/05/2015 - R4zorax: Ensure no overlapping calls to this one happen...
         log.entering(CN, "calculateScoreAsync");
         // is further threading needed here?
-        ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
+        final ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
         final List<ChunkSnapshot> snapshotsOverworld = createChunkSnapshots(l, region);
         Location netherLoc = l.clone();
         netherLoc.setWorld(plugin.getSkyBlockNetherWorld());
-        region = WorldGuardHandler.getNetherRegionAt(netherLoc);
-        final List<ChunkSnapshot> snapshotsNether = createChunkSnapshots(netherLoc, region);
+        final ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherLoc);
+        final List<ChunkSnapshot> snapshotsNether = createChunkSnapshots(netherLoc, netherRegion);
 
         if (snapshotsOverworld == null && snapshotsNether == null) {
             return;
         }
-        final int px = l.getBlockX();
-        final int pz = l.getBlockZ();
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
                 final int radius = Settings.island_protectionRange / 2;
                 final int[] counts = createBlockCountArray();
-                for (int x = px - radius; x <= px + radius; ++x) {
-                    for (int z = pz - radius; z <= pz + radius; ++z) {
+                for (int x = region.getMinimumPoint().getBlockX(); x <= region.getMaximumPoint().getBlockX(); ++x) {
+                    for (int z = region.getMinimumPoint().getBlockZ(); z <= region.getMaximumPoint().getBlockZ(); ++z) {
                         ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
+                        if (chunk == null) {
+                            // This should NOT happen!
+                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x +"," + z);
+                            continue;
+                        }
                         // Fucking modulo for negative numbers...
                         int cx = x < 0 ? ((x % 16) + 16) % 16 : x % 16;
                         int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
@@ -175,11 +178,16 @@ public class LevelLogic {
                     }
                 }
                 IslandScore islandScore = createIslandScore(counts);
-                if (islandScore.getScore() >= activateNetherAtLevel) {
+                if (islandScore.getScore() >= activateNetherAtLevel && netherRegion != null && snapshotsNether != null) {
                     // Add nether levels
-                    for (int x = px - radius; x <= px + radius; ++x) {
-                        for (int z = pz - radius; z <= pz + radius; ++z) {
+                    for (int x = netherRegion.getMinimumPoint().getBlockX(); x <= netherRegion.getMaximumPoint().getBlockX(); ++x) {
+                        for (int z = netherRegion.getMinimumPoint().getBlockZ(); z <= netherRegion.getMaximumPoint().getBlockZ(); ++z) {
                             ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
+                            if (chunk == null) {
+                                // This should NOT happen!
+                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x +"," + z);
+                                continue;
+                            }
                             // Fucking modulo for negative numbers...
                             int cx = x < 0 ? ((x % 16) + 16) % 16 : x % 16;
                             int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
