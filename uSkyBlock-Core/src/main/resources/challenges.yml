@@ -8,7 +8,7 @@ challengeSharing: player
 broadcastCompletion: true
 
 # [text] The color/formatting of the broadcast text when showing first time completions.
-broadcastText: '§6'
+broadcastText: '&6'
 
 # [true/false] If true, challenges in higher level ranks require challenges in lower level ranks to be completed.
 requirePreviousRank: true
@@ -35,7 +35,7 @@ enableEconomyPlugin: true
 resetChallengesOnCreate: true
 
 # Material to show for locked challenges (i.e. STAINED_GLASS_PANE:14 for a red glass-pane, or 160:14)
-#displayItemForLocked: STAINED_GLASS_PANE:14
+#lockedDisplayItem: STAINED_GLASS_PANE:14
 
 ranks:
   Easy:
@@ -100,13 +100,13 @@ ranks:
         requiredItems: '260:2;+1'
         displayItem: 260
         reward:
-          text: '1 of each sapling, (2 dark oak)'
-          items: '6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:2'
+          text: 'a collection of saplings'
+          items: '6:0:1 6:1:1 6:2:1 6:3:2 6:4:1 6:5:4'
           currency: 10
           xp: 30
         repeatReward:
-          text: '1 of each sapling, (2 dark oak)'
-          items: '6:0:1 6:1:1 6:2:1 6:3:1 6:4:1 6:5:2'
+          text: 'more saplings'
+          items: '6:0:1 6:1:1 6:2:1 6:3:2 6:4:1 6:5:4'
           currency: 2
           xp: 5
       wheatfarmer:
@@ -731,4 +731,4 @@ ranks:
           currency: 50
           xp: 50
 # DO NOT CHANGE!
-version: 11
+version: 13

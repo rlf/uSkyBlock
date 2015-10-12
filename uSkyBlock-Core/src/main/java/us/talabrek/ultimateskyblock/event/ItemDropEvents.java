@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -74,7 +75,8 @@ public class ItemDropEvents implements Listener {
         }
     }
 
-    private void clearDropInfo(ItemStack stack) {
+    private void clearDropInfo(Item item) {
+        ItemStack stack = item.getItemStack();
         ItemMeta meta = stack.getItemMeta();
         if (meta != null) {
             List<String> lore = meta.getLore();
@@ -87,6 +89,7 @@ public class ItemDropEvents implements Listener {
                 }
                 meta.setLore(lore);
                 stack.setItemMeta(meta);
+                item.setItemStack(stack);
             }
         }
     }
@@ -97,7 +100,7 @@ public class ItemDropEvents implements Listener {
             return;
         }
         // I.e. hoppers...
-        clearDropInfo(event.getItem().getItemStack());
+        clearDropInfo(event.getItem());
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -106,17 +109,9 @@ public class ItemDropEvents implements Listener {
         if (!plugin.isSkyWorld(player.getWorld())) {
             return;
         }
-        if (wasDroppedBy(player, event)) {
-            clearDropInfo(event.getItem().getItemStack());
+        if (wasDroppedBy(player, event) || player.hasPermission("usb.mod.bypassprotection") || plugin.playerIsOnIsland(player) || plugin.playerIsInSpawn(player)) {
+            clearDropInfo(event.getItem());
             return; // Allowed
-        }
-        if (player.hasPermission("usb.mod.bypassprotection")) {
-            clearDropInfo(event.getItem().getItemStack());
-            return;
-        }
-        if (plugin.playerIsOnIsland(player) || plugin.playerIsInSpawn(player)) {
-            clearDropInfo(event.getItem().getItemStack());
-            return;
         }
         // You are on another's island, and the stuff dropped weren't yours.
         event.setCancelled(true);
