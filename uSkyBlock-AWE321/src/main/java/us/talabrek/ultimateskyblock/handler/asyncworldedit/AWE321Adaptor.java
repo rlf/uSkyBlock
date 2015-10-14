@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
+import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.WorldEdit;
@@ -19,10 +20,10 @@ import org.primesoft.asyncworldedit.api.IAsyncWorldEdit;
 import org.primesoft.asyncworldedit.api.playerManager.IPlayerEntry;
 import org.primesoft.asyncworldedit.api.playerManager.IPlayerManager;
 import org.primesoft.asyncworldedit.api.progressDisplay.IProgressDisplay;
-import org.primesoft.asyncworldedit.utils.FuncParamEx;
-import org.primesoft.asyncworldedit.worldedit.AsyncEditSessionFactory;
-import org.primesoft.asyncworldedit.worldedit.CancelabeEditSession;
-import org.primesoft.asyncworldedit.worldedit.ThreadSafeEditSession;
+import org.primesoft.asyncworldedit.api.utils.IFuncParamEx;
+import org.primesoft.asyncworldedit.api.worldedit.IAsyncEditSessionFactory;
+import org.primesoft.asyncworldedit.api.worldedit.ICancelabeEditSession;
+import org.primesoft.asyncworldedit.api.worldedit.IThreadSafeEditSession;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
@@ -40,8 +41,8 @@ import java.util.logging.Logger;
 /**
  * Adaptor depending on AWE 3.1.1 classes
  */
-public class AWE311Adaptor implements AWEAdaptor {
-    private static final Logger log = Logger.getLogger(AWE311Adaptor.class.getName());
+public class AWE321Adaptor implements AWEAdaptor {
+    private static final Logger log = Logger.getLogger(AWE321Adaptor.class.getName());
     static long progressEveryMs = 3000; // 2 seconds
     static double progressEveryPct = 20;
     private static List<PlayerJob> pendingJobs = Collections.synchronizedList(new ArrayList<PlayerJob>());
@@ -72,7 +73,7 @@ public class AWE311Adaptor implements AWEAdaptor {
     private static IProgressDisplay progressDisplay = new IProgressDisplay() {
         @Override
         public String getName() {
-            return "uSkyBlock AWE v3.1.1 Progress";
+            return "uSkyBlock AWE v3.2.1 Progress";
         }
 
         @Override
@@ -166,16 +167,16 @@ public class AWE311Adaptor implements AWEAdaptor {
         int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
         IPlayerManager pm = awe.getPlayerManager();
         IPlayerEntry playerEntry = pm.getConsolePlayer();
-        ThreadSafeEditSession tsSession = createEditSession(bukkitWorld, maxBlocks);
-        FuncParamEx<Integer, CancelabeEditSession, MaxChangedBlocksException> action = new PasteAction(bukkitWorld, origin, file);
+        IThreadSafeEditSession tsSession = (IThreadSafeEditSession) createEditSession(bukkitWorld, maxBlocks);
+        IFuncParamEx<Integer, ICancelabeEditSession, MaxChangedBlocksException> action = new PasteAction(bukkitWorld, origin, file);
         registerCompletion(player);
         awe.getBlockPlacer().performAsAsyncJob(tsSession, playerEntry, "loadIslandSchematic", action);
     }
 
-    public ThreadSafeEditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
+    public EditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
         WorldEdit worldEdit = WorldEditHandler.getWorldEdit().getWorldEdit();
-        AsyncEditSessionFactory sessionFactory = (AsyncEditSessionFactory) worldEdit.getEditSessionFactory();
-        return sessionFactory.getThreadSafeEditSession(bukkitWorld, maxBlocks);
+        IAsyncEditSessionFactory sessionFactory = (IAsyncEditSessionFactory) worldEdit.getEditSessionFactory();
+        return (EditSession) sessionFactory.getThreadSafeEditSession(bukkitWorld, maxBlocks);
     }
 
     @Override
@@ -183,7 +184,7 @@ public class AWE311Adaptor implements AWEAdaptor {
         getAWE().getProgressDisplayManager().unregisterProgressDisplay(progressDisplay);
     }
 
-    private static class PasteAction implements FuncParamEx<Integer, CancelabeEditSession, MaxChangedBlocksException> {
+    private static class PasteAction implements IFuncParamEx<Integer, ICancelabeEditSession, MaxChangedBlocksException> {
         private final BukkitWorld bukkitWorld;
         private final Location origin;
         private final File file;
@@ -194,7 +195,7 @@ public class AWE311Adaptor implements AWEAdaptor {
             this.file = file;
         }
 
-        public Integer execute(CancelabeEditSession editSession) throws MaxChangedBlocksException {
+        public Integer execute(ICancelabeEditSession editSession) throws MaxChangedBlocksException {
             try {
                 ClipboardReader reader = ClipboardFormat.SCHEMATIC.getReader(new FileInputStream(file));
                 WorldData worldData = bukkitWorld.getWorldData();

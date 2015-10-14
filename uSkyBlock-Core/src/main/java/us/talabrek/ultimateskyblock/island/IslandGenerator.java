@@ -17,6 +17,7 @@ import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -45,7 +46,12 @@ public class IslandGenerator {
         } catch (IOException e) {
             log.log(Level.WARNING, "Unable to load nether-schematic " + netherSchematic, e);
         }
-        this.schemFiles = directorySchematics.listFiles();
+        this.schemFiles = directorySchematics.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlockNether");
+            }
+        });
         if (this.schemFiles == null) {
             log.log(Level.INFO, "[uSkyBlock] No schematic file loaded.");
         } else {

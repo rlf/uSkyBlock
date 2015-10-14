@@ -8,8 +8,10 @@ import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class Settings {
+    private static final Logger log = Logger.getLogger(Settings.class.getName());
     public static int general_maxPartySize;
     public static String general_worldName;
     public static int island_distance;
@@ -34,6 +36,7 @@ public class Settings {
     public static long island_topTenTimeout;
     public static boolean island_allowPvP;
     public static Locale locale = Locale.getDefault();
+    public static boolean nether_enabled;
 
     public static boolean loadPluginConfig(FileConfiguration config) {
         boolean changed = false;
@@ -135,6 +138,12 @@ public class Settings {
         Locale loc = I18nUtil.getLocale(config.getString("language", null));
         if (loc != null) {
             locale = loc;
+        }
+        nether_enabled = config.getBoolean("nether.enabled", false);
+        if (nether_enabled && (island_distance % 32 != 0 || island_protectionRange % 32 != 0)) {
+            log.warning("Nether DISABLED, since island distance and protectionRange is not divisible by 32!");
+            nether_enabled = false;
+            changed = true;
         }
         return changed;
     }

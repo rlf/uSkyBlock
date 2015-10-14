@@ -53,13 +53,15 @@ public enum AsyncWorldEditHandler {;
                 String className = null;
                 if (version.isLT("3.0")) {
                     className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE211Adaptor";
-                } else {
+                } else if (version.isLT("3.2.0")) {
                     className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE311Adaptor";
+                } else {
+                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE321Adaptor";
                 }
                 try {
                     adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
                 } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
-                    log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version);
+                    log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version + ": " + e);
                     adaptor = NULL_ADAPTOR;
                 }
             } else {

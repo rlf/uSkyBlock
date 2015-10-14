@@ -90,7 +90,7 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
                 blocks[xyzToByte(x, y, z)] = NETHERRACK; // solid
             }
         }
-        for (y = 123; y <= 126; y++) {
+        for (y = 122; y <= 126; y++) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
                     if (random.nextDouble() >= (0.20*(127-y))) { // 20%-100% bedrock

@@ -9,8 +9,9 @@
     <modules>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
-        <module>uSkyBlock-AWE311</module>
         <module>uSkyBlock-AWE211</module>
+        <module>uSkyBlock-AWE311</module>
+        <module>uSkyBlock-AWE321</module>
         <module>uSkyBlock-Plugin</module>
         <module>bukkit-utils</module>
     </modules>
@@ -46,6 +47,18 @@
         </pluginManagement>
     </build>
     <repositories>
+        <repository>
+            <id>AWE-mvn-repo</id>
+            <url>https://raw.github.com/SBPrime/AsyncWorldEdit-Premium/maven-artifact/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
         <repository>
             <id>uSkyBlock-mvn-repo</id>
             <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
@@ -190,6 +203,11 @@
             <dependency>
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-AWE311</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-AWE321</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

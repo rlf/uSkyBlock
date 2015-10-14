@@ -317,7 +317,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         if (getConfig().getBoolean("options.protection.visitors.block-banned-entry", true)) {
             manager.registerEvents(new WorldGuardEvents(this), this);
         }
-        if (getConfig().getBoolean("nether.enabled", true)) {
+        if (Settings.nether_enabled) {
             manager.registerEvents(new NetherTerraFormEvents(this), this);
         }
     }
@@ -362,7 +362,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
     }
 
     public World getSkyBlockNetherWorld() {
-        if (skyBlockNetherWorld == null && getConfig().getBoolean("nether.enabled", true)) {
+        if (skyBlockNetherWorld == null && Settings.nether_enabled) {
             skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
             if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() || !(skyBlockNetherWorld.getGenerator() instanceof SkyBlockNetherChunkGenerator)) {
                 uSkyBlock.skyBlockNetherWorld = WorldCreator
@@ -789,7 +789,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
 
     public ChunkGenerator getDefaultWorldGenerator(final String worldName, final String id) {
         return ((id != null && id.endsWith("nether")) || (worldName != null && worldName.endsWith("nether")))
-                && getConfig().getBoolean("nether.enabled", true)
+                && Settings.nether_enabled
                 ? new SkyBlockNetherChunkGenerator()
                 : new SkyBlockChunkGenerator();
     }

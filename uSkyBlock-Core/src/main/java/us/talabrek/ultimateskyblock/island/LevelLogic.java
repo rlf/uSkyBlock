@@ -8,12 +8,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.model.BlockScore.State;
 import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -35,7 +33,7 @@ public class LevelLogic {
     private static final Logger log = Logger.getLogger(CN);
 
     private static final Pattern KEY_PATTERN = Pattern.compile("(?<id>[0-9]+)([/:](?<sub>(\\*|[0-9]+|[0-9]+-[0-9]+)))?");
-    private static final int MAX_BLOCK = 255;
+    private static final int MAX_BLOCK = 0xfff;
     private static final int DATA_BITS = 4;
     private static final int MAX_INDEX = MAX_BLOCK << DATA_BITS;
     private static final int DATA_MASK = 0xf;
@@ -155,19 +153,21 @@ public class LevelLogic {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                final int radius = Settings.island_protectionRange / 2;
                 final int[] counts = createBlockCountArray();
-                for (int x = region.getMinimumPoint().getBlockX(); x <= region.getMaximumPoint().getBlockX(); ++x) {
-                    for (int z = region.getMinimumPoint().getBlockZ(); z <= region.getMaximumPoint().getBlockZ(); ++z) {
+                int minX = region.getMinimumPoint().getBlockX();
+                int maxX = region.getMaximumPoint().getBlockX();
+                int minZ = region.getMinimumPoint().getBlockZ();
+                int maxZ = region.getMaximumPoint().getBlockZ();
+                for (int x = minX; x <= maxX; ++x) {
+                    for (int z = minZ; z <= maxZ; ++z) {
                         ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
                         if (chunk == null) {
                             // This should NOT happen!
                             log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x +"," + z);
                             continue;
                         }
-                        // Fucking modulo for negative numbers...
-                        int cx = x < 0 ? ((x % 16) + 16) % 16 : x % 16;
-                        int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
+                        int cx = (x & 0xf);
+                        int cz = (z & 0xf);
                         for (int y = 0; y <= 255; y++) {
                             int blockId = chunk.getBlockTypeId(cx, y, cz);
                             if (blockId != 0) { // Ignore AIR
@@ -180,17 +180,20 @@ public class LevelLogic {
                 IslandScore islandScore = createIslandScore(counts);
                 if (islandScore.getScore() >= activateNetherAtLevel && netherRegion != null && snapshotsNether != null) {
                     // Add nether levels
-                    for (int x = netherRegion.getMinimumPoint().getBlockX(); x <= netherRegion.getMaximumPoint().getBlockX(); ++x) {
-                        for (int z = netherRegion.getMinimumPoint().getBlockZ(); z <= netherRegion.getMaximumPoint().getBlockZ(); ++z) {
+                    minX = netherRegion.getMinimumPoint().getBlockX();
+                    maxX = netherRegion.getMaximumPoint().getBlockX();
+                    minZ = netherRegion.getMinimumPoint().getBlockZ();
+                    maxZ = netherRegion.getMaximumPoint().getBlockZ();
+                    for (int x = minX; x <= maxX; ++x) {
+                        for (int z = minZ; z <= maxZ; ++z) {
                             ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
                             if (chunk == null) {
                                 // This should NOT happen!
                                 log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x +"," + z);
                                 continue;
                             }
-                            // Fucking modulo for negative numbers...
-                            int cx = x < 0 ? ((x % 16) + 16) % 16 : x % 16;
-                            int cz = z < 0 ? ((z % 16) + 16) % 16 : z % 16;
+                            int cx = (x & 0xf);
+                            int cz = (z & 0xf);
                             for (int y = 5; y < 120; y++) {
                                 int blockId = chunk.getBlockTypeId(cx, y, cz);
                                 if (blockId != 0) { // Ignore AIR
@@ -244,13 +247,13 @@ public class LevelLogic {
         for (int i = 1 << DATA_BITS; i < MAX_BLOCK << DATA_BITS; ++i) {
             int count = counts[i];
             if (count > 0 && blockValue[i] > 0) {
-                BlockScoreImpl.State state = BlockScoreImpl.State.NORMAL;
+                State state = State.NORMAL;
                 double adjustedCount = count;
                 if (count > blockLimit[i] && blockLimit[i] != -1) {
                     adjustedCount = blockLimit[i]; // Hard edge
-                    state = BlockScoreImpl.State.LIMIT;
+                    state = State.LIMIT;
                 } else if (blockDR[i] > 0 && count > blockDR[i]) {
-                    state = BlockScoreImpl.State.DIMINISHING;
+                    state = State.DIMINISHING;
                     adjustedCount = dReturns(count, blockDR[i]);
                 }
                 double blockScore = adjustedCount * blockValue[i];
@@ -261,30 +264,19 @@ public class LevelLogic {
         return new IslandScore(score / pointsPerLevel, blocks);
     }
 
-    public void addBlockCount(World w, int x, int z, int[] counts) {
-        for (int y = 0; y <= 255; ++y) {
-            Block block = w.getBlockAt(x, y, z);
-            addBlockCount(block, counts);
-        }
-    }
-
-    private void addBlockCount(Block block, int[] counts) {
-        int blockId = getBlockId(block);
-        addBlockCount(blockId, counts);
-    }
-
     private void addBlockCount(int blockId, int[] counts) {
+        if (blockId < 0 || blockId >= MAX_INDEX) {
+            return;
+        }
         if (blockValue[blockId] == -1) {
             blockId = blockId & (~DATA_MASK); // remove sub-type
         } else if (blockValue[blockId] < -1) {
             // Direct addressing
-            blockId = -(Math.round(blockValue[blockId]) & 0xffffff);
+            blockId = -(Math.round(blockValue[blockId]) & 0x7fffffff);
         }
-        counts[blockId] += 1;
-    }
-
-    private int getBlockId(Block block) {
-        return block.getTypeId() << DATA_BITS | (block.getData() & 0xff);
+        if (blockId >= 0 && blockId < MAX_INDEX) {
+            counts[blockId] += 1;
+        }
     }
 
     double dReturns(final double val, final double scale) {

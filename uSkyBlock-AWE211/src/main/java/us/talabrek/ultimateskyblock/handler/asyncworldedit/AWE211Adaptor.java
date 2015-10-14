@@ -72,7 +72,7 @@ public class AWE211Adaptor implements AWEAdaptor {
     private static IProgressDisplay progressDisplay = new IProgressDisplay() {
         @Override
         public String getName() {
-            return "uSkyBlock AWE v2 Progress";
+            return "uSkyBlock AWE v2.1.1 Progress";
         }
 
         @Override
@@ -206,7 +206,7 @@ public class AWE211Adaptor implements AWEAdaptor {
                 final Operation operation = holder
                         .createPaste(editSession, worldData)
                         .to(to)
-                        .ignoreAirBlocks(false)
+                        .ignoreAirBlocks(true)
                         .build();
                 Operations.completeBlindly(operation);
                 editSession.flushQueue();

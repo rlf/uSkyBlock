@@ -143,8 +143,8 @@ public enum FileUtil {;
                             config.save(configFile);
                         }
                     } else {
-                        FileUtil.copy(getResource(configName), configFile);
-                        config = configJar;
+                        config = mergeConfig(configJar, config);
+                        config.save(configFile);
                     }
                 }
             } catch (Exception e) {

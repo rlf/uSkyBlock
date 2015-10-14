@@ -13,6 +13,7 @@
                 <include>uSkyBlock:uSkyBlock-Core</include>
                 <include>uSkyBlock:uSkyBlock-AWE211</include>
                 <include>uSkyBlock:uSkyBlock-AWE311</include>
+                <include>uSkyBlock:uSkyBlock-AWE321</include>
             </includes>
             <unpack>true</unpack>
         </dependencySet>

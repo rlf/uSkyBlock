@@ -69,9 +69,9 @@ public enum LocationUtil {;
         return ground.getType().isSolid() && BlockUtil.isBreathable(air1) && BlockUtil.isBreathable(air2);
     }
 
-    public static void loadChunkAt(Location homeSweetHome) {
-        if (!homeSweetHome.getWorld().isChunkLoaded(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4)) {
-            homeSweetHome.getWorld().loadChunk(homeSweetHome.getBlockX() >> 4, homeSweetHome.getBlockZ() >> 4);
+    public static void loadChunkAt(Location loc) {
+        if (loc != null && !loc.getWorld().isChunkLoaded(loc.getBlockX() >> 4, loc.getBlockZ() >> 4)) {
+            loc.getWorld().loadChunk(loc.getBlockX() >> 4, loc.getBlockZ() >> 4);
         }
     }
 
@@ -87,6 +87,7 @@ public enum LocationUtil {;
         int px = loc.getBlockX();
         int pz = loc.getBlockZ();
         int py = loc.getBlockY();
+        ChunkUtil.Chunks snapshots = ChunkUtil.getSnapshots(loc, 1);
         for (int dy = 1; dy <= 30; dy++) {
             for (int dx = 1; dx <= 30; dx++) {
                 for (int dz = 1; dz <= 30; dz++) {
@@ -94,7 +95,7 @@ public enum LocationUtil {;
                     int x = px + (dx % 2 == 0 ? dx / 2 : -dx / 2);
                     int z = pz + (dz % 2 == 0 ? dz / 2 : -dz / 2);
                     int y = py + (dy % 2 == 0 ? dy / 2 : -dy / 2);
-                    if (world.getBlockAt(x, y, z).getType() == Material.CHEST) {
+                    if (snapshots.getBlockTypeAt(x, y, z) == Material.CHEST) {
                         return new Location(world, x, y, z);
                     }
                 }

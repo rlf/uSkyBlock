@@ -35,7 +35,7 @@ enableEconomyPlugin: true
 resetChallengesOnCreate: true
 
 # Material to show for locked challenges (i.e. STAINED_GLASS_PANE:14 for a red glass-pane, or 160:14)
-#lockedDisplayItem: STAINED_GLASS_PANE:14
+lockedDisplayItem: STAINED_GLASS_PANE:14
 
 ranks:
   Easy:
@@ -731,4 +731,4 @@ ranks:
           currency: 50
           xp: 50
 # DO NOT CHANGE!
-version: 13
+version: 14

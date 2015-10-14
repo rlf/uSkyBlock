@@ -98,7 +98,7 @@ public class WorldGuardHandler {
     }
 
     public static boolean protectNetherIsland(uSkyBlock plugin, CommandSender sender, IslandInfo islandConfig) {
-        if (!plugin.getConfig().getBoolean("nether.enabled", true)) {
+        if (!Settings.nether_enabled) {
             return false;
         }
         try {
@@ -107,6 +107,13 @@ public class WorldGuardHandler {
             String regionName = islandConfig.getName() + "nether";
             if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
                 ProtectedCuboidRegion region = setRegionFlags(sender, islandConfig, regionName);
+                // adjust nether region, so players can't build/break the ceiling
+                BlockVector maximumPoint = region.getMaximumPoint();
+                maximumPoint.setY(119);
+                BlockVector minimumPoint = region.getMinimumPoint();
+                minimumPoint.setY(10);
+                region.setMinimumPoint(minimumPoint);
+                region.setMaximumPoint(maximumPoint);
                 final Iterable<ProtectedRegion> set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
                 for (ProtectedRegion regions : set) {
                     if (!(regions instanceof GlobalProtectedRegion)) {
@@ -253,11 +260,11 @@ public class WorldGuardHandler {
     }
 
     public static BlockVector getProtectionVectorLeft(final Location island) {
-        return new BlockVector(island.getX() + Settings.island_protectionRange / 2, 255.0, island.getZ() + Settings.island_protectionRange / 2);
+        return new BlockVector(island.getX() + Settings.island_radius - 1, 255.0, island.getZ() + Settings.island_radius - 1);
     }
 
     public static BlockVector getProtectionVectorRight(final Location island) {
-        return new BlockVector(island.getX() - Settings.island_protectionRange / 2, 0.0, island.getZ() - Settings.island_protectionRange / 2);
+        return new BlockVector(island.getX() - Settings.island_radius, 0.0, island.getZ() - Settings.island_radius);
     }
 
     public static void removePlayerFromRegion(final String islandName, final String player) {
@@ -321,7 +328,7 @@ public class WorldGuardHandler {
     }
 
     public static ProtectedRegion getNetherRegionAt(Location location) {
-        if (!uSkyBlock.getInstance().getConfig().getBoolean("nether.enabled", true)) {
+        if (!Settings.nether_enabled) {
             return null;
         }
         WorldGuardPlugin worldGuard = getWorldGuard();

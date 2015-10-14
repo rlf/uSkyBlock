@@ -29,11 +29,12 @@ options:
     height: 150
 
     # [integer] The number of blocks between islands.
-    distance: 110
+    distance: 128
 
 
     # [integer] The size of the protective region for each island. Can't be higher than 'distance'
-    protectionRange: 105
+    # and MUST be divisible by 32 if you intend to use nether.
+    protectionRange: 128
 
     # [filename] The schematic to use for island generation.
     # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
@@ -284,7 +285,7 @@ nether:
     blaze: 0.20
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 34
+version: 35
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
