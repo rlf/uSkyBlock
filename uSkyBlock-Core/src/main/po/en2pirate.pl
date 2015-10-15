@@ -49,8 +49,8 @@ sub get_pirate {
         $pirate =~ s/$key/$part_dict{$key}/g;
     }
     if ($pirate =~ m/\{0/) {
-        $pirate =~ s/''/'/g
-        $pirate =~ s/'/''/g
+        $pirate =~ s/''/'/g;
+        $pirate =~ s/'/''/g;
     }
     utf8::decode($pirate);
     return $pirate;

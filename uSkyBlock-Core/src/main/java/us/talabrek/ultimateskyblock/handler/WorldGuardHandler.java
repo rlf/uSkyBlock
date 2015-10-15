@@ -107,13 +107,7 @@ public class WorldGuardHandler {
             String regionName = islandConfig.getName() + "nether";
             if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
                 ProtectedCuboidRegion region = setRegionFlags(sender, islandConfig, regionName);
-                // adjust nether region, so players can't build/break the ceiling
-                BlockVector maximumPoint = region.getMaximumPoint();
-                maximumPoint.setY(119);
-                BlockVector minimumPoint = region.getMinimumPoint();
-                minimumPoint.setY(10);
-                region.setMinimumPoint(minimumPoint);
-                region.setMaximumPoint(maximumPoint);
+
                 final Iterable<ProtectedRegion> set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
                 for (ProtectedRegion regions : set) {
                     if (!(regions instanceof GlobalProtectedRegion)) {
@@ -147,7 +141,6 @@ public class WorldGuardHandler {
         } catch (Exception e) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
-
     }
 
     private static ProtectedCuboidRegion setRegionFlags(CommandSender sender, IslandInfo islandConfig) throws InvalidFlagFormat {
@@ -157,9 +150,13 @@ public class WorldGuardHandler {
 
     private static ProtectedCuboidRegion setRegionFlags(CommandSender sender, IslandInfo islandConfig, String regionName) throws InvalidFlagFormat {
         Location islandLocation = islandConfig.getIslandLocation();
-        ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName,
-                getProtectionVectorLeft(islandLocation),
-                getProtectionVectorRight(islandLocation));
+        BlockVector minPoint = getProtectionVectorRight(islandLocation);
+        BlockVector maxPoint = getProtectionVectorLeft(islandLocation);
+        if (regionName != null && regionName.endsWith("nether")) {
+            minPoint = new BlockVector(minPoint.setY(10));
+            maxPoint = new BlockVector(maxPoint.setY(120));
+        }
+        ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName, minPoint, maxPoint);
         final DefaultDomain owners = new DefaultDomain();
         DefaultDomain members = new DefaultDomain();
         for (String member : islandConfig.getMembers()) {

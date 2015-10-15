@@ -714,7 +714,7 @@ msgstr "§eYe have banned §4{0}§e from warpin'' to yer island."
 
 #, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eYe have been §cBANNED§e from {0}§e''''s island."
+msgstr "§eYe have been §cBANNED§e from {0}§e''s island."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
@@ -722,7 +722,7 @@ msgstr "§eYe have unbanned §a{0}§e from warpin'' to yer island."
 
 #, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eYe have been §aUNBANNED§e from {0}§e''''s island."
+msgstr "§eYe have been §aUNBANNED§e from {0}§e''s island."
 
 msgid "change the biome of the island"
 msgstr "change the biome of the island"
@@ -737,7 +737,7 @@ msgstr "§eYe can change yer biome again in {0,number,#} minutes."
 
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
-msgstr "§aYe have changed yer island''''s biome to {0}"
+msgstr "§aYe have changed yer island''s biome to {0}"
 
 #, java-format
 msgid "{0} changed the island biome to {1}"
@@ -1214,11 +1214,11 @@ msgstr ""
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
-msgstr "§d** Ye be enterin'' §b{0}''''s §disland."
+msgstr "§d** Ye be enterin'' §b{0}''s §disland."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** Ye be leavin'' §b{0}''''s §disland."
+msgstr "§d** Ye be leavin'' §b{0}''s §disland."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§eYer island be now locked. Only yer party members may enter."
