@@ -58,7 +58,7 @@ public class Rank {
     }
 
     public String getName() {
-        return config.getName();
+        return config.getString("name", config.getName());
     }
 
     public Rank getPreviousRank() {

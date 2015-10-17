@@ -233,6 +233,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
+                if (getSkyBlockNetherWorld() != null) {
+                    WorldGuardHandler.setupGlobal(getSkyBlockNetherWorld());
+                }
                 registerEventsAndCommands();
                 getServer().getScheduler().runTaskLater(instance, new Runnable() {
                     @Override

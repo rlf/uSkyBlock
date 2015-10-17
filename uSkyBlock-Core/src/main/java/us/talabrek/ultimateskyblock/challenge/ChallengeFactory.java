@@ -50,6 +50,7 @@ public class ChallengeFactory {
         if (section.getBoolean("disabled", false)) {
             return null; // Skip this challenge
         }
+        String displayName = section.getString("name", name);
         Challenge.Type type = Challenge.Type.from(section.getString("type", "onPlayer"));
         String requiredItems = section.getString("requiredItems", "");
         List<EntityMatch> requiredEntities = createEntities(section.getStringList("requiredEntities"));
@@ -58,12 +59,12 @@ public class ChallengeFactory {
         ItemStack displayItem = createItemStack(
                 section.getString("displayItem", defaults.displayItem),
                 name, description);
-        ItemStack lockedItem = section.isString("lockedDisplayItem") ? createItemStack(section.getString("lockedDisplayItem", "BARRIER"), name, description) : null;
+        ItemStack lockedItem = section.isString("lockedDisplayItem") ? createItemStack(section.getString("lockedDisplayItem", "BARRIER"), displayName, description) : null;
         boolean takeItems = section.getBoolean("takeItems", true);
         int radius = section.getInt("radius", 10);
         Reward reward = createReward(section.getConfigurationSection("reward"));
         Reward repeatReward = createReward(section.getConfigurationSection("repeatReward"));
-        return new Challenge(name, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, lockedItem, takeItems, radius, reward, repeatReward);
+        return new Challenge(name, displayName, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, lockedItem, takeItems, radius, reward, repeatReward);
     }
 
     private static List<EntityMatch> createEntities(List<String> requiredEntities) {

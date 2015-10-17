@@ -31,6 +31,7 @@ public class Challenge {
     }
     private final String name;
     private final String description;
+    private final String displayName;
     private final Type type;
     private final String requiredItems;
     private final List<EntityMatch> requiredEntities;
@@ -43,8 +44,9 @@ public class Challenge {
     private final Reward reward;
     private final Reward repeatReward;
 
-    public Challenge(String name, String description, Type type, String requiredItems, List<EntityMatch> requiredEntities, Rank rank, int resetInHours, ItemStack displayItem, ItemStack lockedItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
+    public Challenge(String name, String displayName, String description, Type type, String requiredItems, List<EntityMatch> requiredEntities, Rank rank, int resetInHours, ItemStack displayItem, ItemStack lockedItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
         this.name = name;
+        this.displayName = displayName;
         this.type = type;
         this.requiredItems = requiredItems;
         this.requiredEntities = requiredEntities;
@@ -65,6 +67,10 @@ public class Challenge {
 
     public String getName() {
         return name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public Type getType() {
