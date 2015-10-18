@@ -976,7 +976,7 @@ msgid "§4This command can only be executed by a player"
 msgstr "§4Denne kommando kan kun udføres af spillere"
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
-msgstr "§4Ingen ø. §e Brug §9/is crete§e for at få en"
+msgstr "§4Ingen ø. §e Brug §9/is create§e for at få en"
 
 msgid "delete your island and start a new one."
 msgstr "slet din ø og start på en ny"
