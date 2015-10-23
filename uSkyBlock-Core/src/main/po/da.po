@@ -1300,7 +1300,7 @@ msgstr ""
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
-msgstr "§eTOP (side {0} af {1}:"
+msgstr "§eTOP (side {0} af {1}):"
 
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
 msgstr "§4Top 10 listen er tom! (Måske fejlede opdateringen?)"
