@@ -1,475 +1,483 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Swedish translation of uSkyBlock
+# Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# maol3 <martin@ntilan.se>, 2015
 # 
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: R4zorax\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: xx-pirate\n"
+"PO-Revision-Date: 2015-10-28 22:22+0100\n"
+"Last-Translator: maol3 martin@ntilan.se\n"
+"Language-Team: SV <LL@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Loco-Source-Locale: sv_SE\n"
+"X-Loco-Parser: loco_parse_po\n"
+"X-Loco-Target-Locale: zz_ZZ\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
-msgstr "§4Requirements will reset in {0} days."
+msgstr "§cKraven kommer att återställas om {0} dagar."
 
 #, java-format
 msgid "§4Requirements will reset in {0} hours."
-msgstr "§4Requirements will reset in {0} hours."
+msgstr "§cKraven kommer att återställas om {0} timmar."
 
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
-msgstr "§4Requirements will reset in {0} minutes."
+msgstr "§cKraven kommer att återställas om {0} minuter."
 
 msgid "§eThis challenge requires the following:"
-msgstr "§eThis challenge requires the followin':"
+msgstr "§eUppdraget kräver följande:"
 
 msgid "§6Item Reward: §a"
-msgstr "§6Item Bounty: §a"
+msgstr "§6Belöning: §a"
 
 #, java-format
 msgid "§6Currency Reward: §a{0}"
-msgstr "§6Currency Bounty: §a{0}"
+msgstr "§6Belöning (valuta): §a{0}"
 
 #, java-format
 msgid "§6Exp Reward: §a{0}"
-msgstr "§6Exp Bounty: §a{0}"
+msgstr "§6Belöning (exp): §a{0}"
 
 #, java-format
 msgid "§dTotal times completed: §f{0}"
-msgstr "§dTotal times completed: §f{0}"
+msgstr "§dAntal gånger genomfört: §f{0}"
 
 #, java-format
 msgid "§4No challenge named {0} found"
-msgstr "§4Nay challenge named {0} found"
+msgstr "§cInget uppdrag kallat {0} hittades"
 
 msgid "§4You must be on your island to do that!"
-msgstr "§4Ye must be on yer island to do that!"
+msgstr "§cDu måste vara på din ö för att göra detta!"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
-msgstr "§4The {0} challenge be not repeatable!"
+msgstr "§cUppdraget {0} är inte repeterbart!"
 
 #, java-format
 msgid "§4{0}"
-msgstr "§4{0}"
+msgstr "§c{0}"
 
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
-msgstr "§4Ye must be standin'' within {0} blocks of all required items."
+msgstr "§cDu måste stå inom minst {0} block ifrån allt krävda material."
 
 #, java-format
 msgid "§4Your island must be level {0} to complete this challenge!"
-msgstr "§4Yer island must be treasure {0} to complete this challenge!"
+msgstr "§cDin skyblock level måste vara minst {0} för att göra detta uppdrag."
 
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
-msgstr "§4Unknown type of challenge: {0}"
+msgstr "§cOkänt typ av uppdrag: {0}"
 
 #, java-format
 msgid "§eStill the following blocks short: {0}"
-msgstr "§eStill the followin'' blocks short: {0}"
+msgstr "§eFöljande block saknas: {0}"
 
 #, java-format
 msgid ""
 "§eStill the following entities short:\n"
 "{0}"
-msgstr ""
-"§eStill the followin'' entities short:\n"
-"{0}"
+msgstr "§eFöljande enheter saknas: {0}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
-msgstr "§eYe be the followin'' items short:{0}"
+msgstr "§eFöljande material saknas: {0}"
 
 #, java-format
 msgid "§aYou have completed the {0} challenge!"
-msgstr "§aYe have completed the {0} challenge!"
+msgstr "§aDu har genomfört uppdraget {0}!"
 
 #, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
-msgstr "§9{0}§f has completed the §9{1}§f challenge!"
+msgstr "§9{0}§f har klarat av uppdraget {1}!"
 
 #, java-format
 msgid "§eItem reward(s): §f{0}"
-msgstr "§eItem bounty(s): §f{0}"
+msgstr "§eBelöning: §f{0}"
 
 #, java-format
 msgid "§eExp reward: §f{0,number,#.#}"
-msgstr "§eExp bounty: §f{0,number,#.#}"
+msgstr "§eBelöning (exp): §f{0,number,#.#}"
 
 #, java-format
 msgid "§eCurrency reward: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
-msgstr "§eCurrency bounty: §f{0,number,###.##} {1} §a ({2,number,##.##})%"
+msgstr "§eBelöning (valuta): §f{0,number,###.##} {1} §a ({2,number,##.##})%"
 
 msgid "§eYour inventory is §4full§e. Items dropped on the ground."
-msgstr "§eYer inventory be §4full§e. Items dropped on the ground."
+msgstr "§eDitt inventarie är fullt. Belöningen kastades ut där du står."
 
 msgid "§e§lClick to complete this challenge."
-msgstr "§e§lClick to complete this challenge."
+msgstr "§e§lKlicka här för att göra detta uppdrag."
 
 msgid "§4§lYou can't repeat this challenge."
-msgstr "§4§lYe can't repeat this challenge."
+msgstr "§c§lDu kan inte repetera detta uppdrag."
 
 #, java-format
 msgid "Rank: {0}"
 msgstr "Rank: {0}"
 
 msgid "§fComplete most challenges in"
-msgstr "§fComplete most challenges in"
+msgstr "§fGenomför de flesta uppdragen i"
 
 msgid "§fthis rank to unlock the next rank."
-msgstr "§fthis rank to unlock the next rank."
+msgstr "§fdenna rank för att låsa upp nästa rank."
 
 msgid "§eClick here to show previous page"
-msgstr "§eClick here to show previous page"
+msgstr "§eKlicka här för att visa föregående sida"
 
 msgid "§eClick here to show next page"
-msgstr "§eClick here to show next page"
+msgstr "§eKlicka här för att visa nästa sida"
 
 msgid "§4§lLocked Challenge"
-msgstr "§4§lLocked Challenge"
+msgstr "§c§lLåst uppdrag"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eChallenges has been disabled. Contact an administrator."
+msgstr "§eUppdrag är inaktiverat. Vänligen kontakta en administratör."
 
 msgid "§4You don't have access to this command!"
-msgstr "§4Ye don't have access to this command!"
+msgstr "§cDu har inte tillgång till det kommandot."
 
 msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4Ye can only submit challenges in the skyblock world!"
+msgstr "§cDu kan endast göra uppdrag i Skyblockvärlden!"
 
 msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4Ye can only submit challenges when ye have an island!"
+msgstr "§cDu kan endast göra uppdrag när du har en ö!"
 
 msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eUse /c <name> to view information about a challenge."
+msgstr "§eAnvänd /c <namn> för att visa information om ett uppdrag."
 
 msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eUse /c complete <name> to attempt to complete that challenge."
+msgstr "§eAnvänd /c complete <namn> för att försöka att genomföra ett uppdrag."
 
 msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eChallenges will have different colors dependin' on if they be:"
+msgstr "§eUppdrag kommer ha olika färger beroende på om de är:"
 
 msgid "Incomplete"
-msgstr "Incomplete"
+msgstr "Ej genomförd"
 
 msgid "Completed (not repeatable)"
-msgstr "Completed (not repeatable)"
+msgstr "Genomförd (ej repeterbar)"
 
 msgid "Completed(repeatable)"
-msgstr "Completed(repeatable)"
+msgstr "Genomförd (repeterbar)"
 
 msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§4Ye will lose all required items when ye complete this challenge!"
+msgstr "§cDu kommer att förlora allt krävda material när du gör detta uppdrag!"
 
 #, java-format
 msgid ""
 "§4All required items must be placed on your island, within {0} blocks of you."
 msgstr ""
-"§4All required items must be placed on yer island, within {0} blocks of ye."
+"§cAllt krävda material måste vara placerat på din ö, minst {0} blocks ifrån "
+"dig."
 
 msgid "§eRank: "
-msgstr "§eRank: "
+msgstr "§eRank:"
 
 msgid "§4This Challenge is not repeatable!"
-msgstr "§4This Challenge be not repeatable!"
+msgstr "§cDetta uppdrag är ej repeterbart!"
 
 #, java-format
 msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§e§lFör att genomföra detta uppdrag, använda §f/c c {0}"
 
 msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4Invalid challenge name! Use /c help for more information"
+msgstr "§cFelaktigt namn på uppdraget! Använd /c help för mer information."
 
 #, java-format
 msgid "Complete {0} more {1} challenges"
-msgstr "Complete {0} more {1} challenges"
+msgstr "Genomför {0} fler {1} uppdrag"
 
 #, java-format
 msgid "§7Complete {0}"
-msgstr "§7Complete {0}"
+msgstr "§7Genomför {0}"
 
 msgid "to unlock this rank"
-msgstr "to unlock this rank"
+msgstr "för att låsa upp denna rank"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
-msgstr "§ePirate {0} has nay island!"
+msgstr "§eSpelaren {0} har ingen ö!"
 
 #, java-format
 msgid "§eInvalid player {0} supplied."
-msgstr "§eInvalid pirate {0} supplied."
+msgstr "§eFelaktigt spelarnamn {0} angivet."
 
 msgid "Manage challenges for a player"
-msgstr "Manage challenges for a pirate"
+msgstr "Hantera uppdrag för en spelare"
 
 msgid "§4Challenge has already been completed"
-msgstr "§4Challenge has already been completed"
+msgstr "§cUppdraget är redan genomfört"
 
 #, java-format
 msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§echallenge: {0} has been completed for {1}"
+msgstr "§euppdrag: {0} redan genomfört för {1}"
 
 msgid "resets the challenge for the player"
-msgstr "resets the challenge for the pirate"
+msgstr "återställer uppdraget för spelaren"
 
 msgid "§4Challenge has never been completed"
-msgstr "§4Challenge has never been completed"
+msgstr "§cUppdraget har aldrig genomförts"
 
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
-msgstr "§echallenge: {0} has been reset for {1}"
+msgstr "§euppdrag: {0} har återställts för {1}"
 
 msgid "resets all challenges for the player"
-msgstr "resets all challenges for the pirate"
+msgstr "återställer alla uppdrag för spelaren"
 
 #, java-format
 msgid "§e{0} has had all challenges reset."
-msgstr "§e{0} has had all challenges reset."
+msgstr "§e{0} har fått alla uppdrag återställda."
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
-msgstr "§4Nay challenge named {0} was found!"
+msgstr "§cInget uppdrag med namnet {0} hittades!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
-msgstr "§4Nay pirate named {0} was found!"
+msgstr "§cIngen spelare med namnet {0} hittades!"
 
 msgid "manage islands"
-msgstr "manage islands"
+msgstr "hantera öar"
 
 msgid "protects the island"
-msgstr "protects the island"
+msgstr "skyddar ön"
 
 msgid "delete the island (removes the blocks)"
-msgstr "delete the island (removes the blocks)"
+msgstr "tar bort ön (endast blocken)"
 
 msgid "§9Deleted abandoned island at your current location."
-msgstr "§9Deleted abandoned island at yer current location."
+msgstr "§9Raderade ön som var kopplad till din nuvarande position."
 
 msgid ""
 "§4Island at this location has members!\n"
 "§eUse §9/usb island delete <name>§e to delete it."
 msgstr ""
-"§4Island at this location has members!\n"
-"§eUse §9/usb island delete <name>§e to delete it."
+"§cÖn vid denna position har medlemmar!\n"
+"§eAnvänd §9/usb island delete <namn>§e för att ta bort den."
 
 msgid "removes the player from the island"
-msgstr "removes the pirate from the island"
+msgstr "tar bort spelaren från ön"
 
 msgid "print out info about the island"
-msgstr "print out info about the island"
+msgstr "skriver ut information om ön"
 
 msgid "protects all islands (time consuming)"
-msgstr "protects all islands (time consumin')"
+msgstr "skyddar alla öar (tar tid)"
 
 msgid "sets the biome of the island"
-msgstr "sets the biome of the island"
+msgstr "sätter öns biome"
 
 msgid "§4That player has no island."
-msgstr "§4That pirate has nay island."
+msgstr "§cDen spelaren har ingen ö."
 
 msgid "§4No valid island at your location"
-msgstr "§4Nay valid island at yer location"
+msgstr "§cIngen giltig ö vid din position"
 
 msgid "purges the island"
-msgstr "purges the island"
+msgstr "rensar ön"
 
 msgid "§4Error! §9No valid island found for purging."
-msgstr "§4Blimey! §9Nay valid island found for purgin'."
+msgstr "§cFel! §9Ingen giltig ö hittades för rensning."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr "§cPURGE: §9Purged island at {0}"
+msgstr "§cRENSNING: §9Rensade ön vid {0}"
 
 msgid "toggles the islands ignore status"
-msgstr "toggles the islands ignore status"
+msgstr "aktiverar eller inaktiverar öns ignoransstatus"
 
 #, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§cSet {0}s island to be ignored on top-ten an'' purge."
+msgstr "§cSätt {0}s ö till att bli ignorerad från topp 10 och från rensning."
 
 #, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
 msgstr ""
-"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten an'' "
-"purge."
+"§cTog bort ignorans-flaggan från {0}s ö, den kommer nu visas i topp 10 och "
+"rensas."
 
 msgid "§4No valid player-name supplied."
-msgstr "§4Nay valid pirate-name supplied."
+msgstr "§cInget giltigt spelarnamn angavs."
 
 #, java-format
 msgid "Removing {0} from island"
-msgstr "Removin'' {0} from island"
+msgstr "Tar bort {0} från ön"
 
 #, java-format
 msgid "§eChanged biome of {0}s island to {1}."
-msgstr "§eChanged biome of {0}s island to {1}."
+msgstr "§eBytte biome på {0}s ö till {1}."
 
 #, java-format
 msgid "§eChanged biome of {0}s island to OCEAN."
-msgstr "§eChanged biome of {0}s island to OCEAN."
+msgstr "§eBytte biome på {0}s ö till OCEAN."
 
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
-msgstr "§aYe may need to go to spawn, or relog, to see the changes."
+msgstr "§aDu måste gå till spawn eller relogga för att se ändringarna."
 
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
-msgstr "§e{0} has had their biome changed to {1}."
+msgstr "§e{0} har fått sitt biome ändrat till {1}."
 
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
-msgstr "§e{0} has had their biome changed to OCEAN."
+msgstr "§e{0} har fått sitt biome ändrat till OCEAN."
 
 msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr "§4Sorry!§e A protect-all be already runnin'. Let it complete first."
+msgstr "§eEn protect-all körs redan, låt den avslutas först."
 
 msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§eStartin' a protect-all task. It will take a while."
+msgstr "§ePåbörjar en protect-all . Detta kan ta en stund."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
-msgstr "§eRemovin'' {0}''s island."
+msgstr "§eTar bort {0}s ö."
 
 msgid "Error: That player does not have an island!"
-msgstr "Blimey: That pirate does not have an island!"
+msgstr "Fel: Den spelaren har ingen ö!"
 
 #, java-format
 msgid "§e{0}s island at {1} has been protected"
-msgstr "§e{0}s island at {1} has been protected"
+msgstr "§e{0}s ö vid {1} har skyddats"
 
 #, java-format
 msgid "§4{0}s island at {1} was already protected"
-msgstr "§4{0}s island at {1} was already protected"
+msgstr "§c{0}s ö vid {1} var redan skyddad"
 
 msgid "open GUI for config"
-msgstr "open GUI for config"
+msgstr "öppna GUI för konfiguration"
 
 msgid "Controls player-cooldowns"
-msgstr "Controls pirate-cooldowns"
+msgstr "Kontrollerar spelare-cooldowns"
 
 msgid "clears the cooldown on a command (* = all)"
-msgstr "clears the cooldown on a command (* = all)"
+msgstr "rensar cooldown för ett kommando (* = alla)"
 
 msgid "§eThe player is not currently online"
-msgstr "§eThe pirate be not currently online"
+msgstr "§eDen spelaren är inte online just nu"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
-msgstr "Cleared cooldown on {0} for {1}"
+msgstr "Tog bort cooldown på {0} för {1}"
 
 #, java-format
 msgid "No active cooldown on {0} for {1} detected!"
-msgstr "Nay active cooldown on {0} for {1} detected!"
+msgstr "Ingen aktiv cooldown på {0} för {1} hittades!"
 
 msgid "Invalid command supplied, only restart and biome supported!"
-msgstr "Invalid command supplied, only restart an' biome supported!"
+msgstr "Felaktigt kommando angivet, endast restart och biome stöds!"
 
 msgid "restarts the cooldown on the command"
-msgstr "restarts the cooldown on the command"
+msgstr "börjar om cooldownen på ett kommando"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
-msgstr "§eReset cooldown on {0} for {1}§e to {2} seconds"
+msgstr "§eÅterställer cooldown på {0} för {1}§e till {2} sekunder"
 
 msgid "lists all the active cooldowns"
-msgstr "lists all the active cooldowns"
+msgstr "listar alla aktiva cooldowns"
 
+# ???
 msgid "§eCmd Cooldown"
 msgstr "§eCmd Cooldown"
 
+# ???
 #, java-format
 msgid "§a{0} §c{1}"
 msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eNo active cooldowns for §9{0}§e found."
-msgstr "§eNay active cooldowns for §9{0}§e found."
+msgstr "§eIngen aktiv cooldown för §9{0}§e hittades."
 
 msgid "control debugging"
-msgstr "control debuggin'"
+msgstr "kontrollera felsökning"
 
 msgid "set debug-level"
-msgstr "set debug-treasure"
+msgstr "sätt felsökningsnivå"
 
+# ???
 msgid "toggle debug-logging"
-msgstr "toggle debug-loggin'"
+msgstr "aktivera eller inaktivera felsökningsloggning"
 
 msgid "§4Logging wasn't active, so you can't disable it!"
-msgstr "§4Loggin' wasn't active, so ye can't disable it!"
+msgstr "§cLoggning var inte aktivt, så du kan inte stänga av det!"
 
 msgid "flush current content of the logger to file."
-msgstr "flush current content of the logger to file."
+msgstr "flytta nuvarande innehåll från loggen till en fil."
 
 msgid "§eLog-file has been flushed."
-msgstr "§eLog-file has been flushed."
+msgstr "§eLogg-fil har blivit skapad."
 
 msgid "§4Logging is not enabled, use §d/usb debug enable"
-msgstr "§4Loggin' be not enabled, use §d/usb debug enable"
+msgstr ""
+"§cLoggning är inte aktivt, använd §d/usb debug enable§4 för att aktivera"
 
 msgid "§4Invalid argument, try INFO, FINE, FINER, FINEST"
-msgstr "§4Invalid argument, try INFO, FINE, FINER, FINEST"
+msgstr "§cFelaktigt argument, prova INFO, FINE, FINER, FINEST"
 
 msgid "§eLogging disabled!"
-msgstr "§eLoggin' disabled!"
+msgstr "§eLoggning inaktiverat!"
 
 msgid "tries to fix the the area of flatland."
-msgstr "tries to fix the the area of flatland."
+msgstr "gör ett försök att fixa arean för flatland."
 
 msgid "§4No valid island found"
-msgstr "§4Nay valid island found"
+msgstr "§cIngen giltig ö hittades"
 
 #, java-format
 msgid "§4No flatland detected at {0}'s island!"
-msgstr "§4Nay flatland detected at {0}''s island!"
+msgstr "§cIngen flatland hittades på {0}s ö!"
 
 msgid "flushes all caches to files"
-msgstr "flushes all caches to files"
+msgstr "flyttade alla caches till en fil"
 
 #, java-format
 msgid ""
 "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
-msgstr ""
-"§eFlushed §a{0} islands§e, §b{1} pirates an'' §6{2} challenge-completions."
+msgstr "§eFlyttade §a{0}s ö§e, §b{1} spelare och §6{2} uppdrag-slutförande."
 
 msgid "manually update the top 10 list"
-msgstr "manually update the top 10 list"
+msgstr "uppdatera topp 10 manuellt"
 
 msgid "§eGenerating the Top Ten list"
-msgstr "§eGeneratin' the Top Ten list"
+msgstr "§eGenererar topp 10 listan"
 
 msgid "§eFinished generation of the Top Ten list"
-msgstr "§eFinished generation of the Top Ten list"
+msgstr "§eSlutförde generation av topp 10 listan"
 
 msgid "teleport to another players island"
-msgstr "teleport to another pirates island"
+msgstr "teleportera till en annan spelares ö"
 
 msgid "§4Only supported for players"
-msgstr "§4Only supported for pirates"
+msgstr "§cStöds endast för spelare"
 
 #, java-format
 msgid "§aTeleporting to {0}s island."
-msgstr "§aTeleportin'' to {0}s island."
+msgstr "§aTeleporterar till {0}s ö."
 
 msgid "§4That player does not have an island!"
-msgstr "§4That pirate does not have an island!"
+msgstr "§cDen spelaren har ingen ö!"
 
 msgid "imports players and islands from other formats"
-msgstr "imports pirates an' islands from other formats"
+msgstr "importerar spelare och öar från andra format"
 
 msgid "§9Job Statistics"
-msgstr "§9Job Statistics"
+msgstr "§9Jobb statistik"
 
+# ???
 msgid "§7----------------"
 msgstr "§7----------------"
 
@@ -486,826 +494,824 @@ msgid "ticks"
 msgstr "ticks"
 
 msgid "act"
-msgstr "act"
+msgstr "akt"
 
 msgid "time"
-msgstr "time"
+msgstr "tid"
 
 msgid "name"
-msgstr "name"
+msgstr "namn"
 
 msgid "changes the language of the plugin, and reloads"
-msgstr "changes the language of the plugin, an' reloads"
+msgstr "byter språk på pluginet och laddar om"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr "§aSuccessfully changed language to §e{0}"
+msgstr "§cBytte språk till §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
-msgstr "§cFailed to change language to §e{0}"
+msgstr "§cMisslyckades att byta språk till §e{0}"
 
 msgid "§9Supported Languages:\n"
-msgstr "§9Supported Languages:\n"
+msgstr "§9Språk som stöds:\n"
 
 #, java-format
 msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
-msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr "§f{0} §7{1} §9 av {2} §7{3}\n"
 
 msgid "§cUnable to locate any languages."
-msgstr "§cUnable to locate any languages."
+msgstr "§cKan inte lokalisera några språk."
 
 msgid "transfer leadership to another player"
-msgstr "transfer leadership to another pirate"
+msgstr "flytta ledarskap till en annan spelare"
 
 #, java-format
 msgid "§4Player {0} has no island to transfer!"
-msgstr "§4Pirate {0} has nay island to transfer!"
+msgstr "§cSpelaren {0} har ingen ö att flytta!"
 
 #, java-format
 msgid ""
 "§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
 "to remove him first."
 msgstr ""
-"§ePirate §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
-"to remove him first."
+"§eSpelaren §f{0}§e har redan en ö. §eAnvänd §f/usb Island remove <namn>§e "
+"för att ta bort spelaren först."
 
 #, java-format
 msgid "§bLeadership transferred by {0}§b to {1}"
-msgstr "§bLeadership transferred by {0}§b to {1}"
+msgstr "§bLedarskap flyttat av {0}§b till {1}"
 
 msgid "manage orphans"
-msgstr "manage orphans"
+msgstr "hantera orphans"
 
 msgid "count orphans"
-msgstr "count orphans"
+msgstr "räkna orphans"
 
 #, java-format
 msgid "§e{0} old island locations will be used before new ones."
-msgstr "§e{0} old island locations will be used before new ones."
+msgstr "§e{0}gamla öars positioner kommer att användas för nya."
 
 msgid "clear orphans"
-msgstr "clear orphans"
+msgstr "rensa orphans"
 
 msgid "§eClearing all old (empty) island locations."
-msgstr "§eClearin' all old (empty) island locations."
+msgstr "§eRensar alla gamla (tomma) öars positioner."
 
 msgid "list orphans"
-msgstr "list orphans"
+msgstr "lista orphans"
 
 msgid "§eNo orphans currently registered."
-msgstr "§eNay orphans currently registered."
+msgstr "§eInga orphans är registrerade."
 
 #, java-format
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
 msgid "purges all abandoned islands"
-msgstr "purges all abandoned islands"
+msgstr "tar bort alla övergivna öar"
 
 msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4A purge be already runnin', please wait for it to finish!"
+msgstr "§cEn rensning pågår redan, vänligen vänta på att den avslutas först!"
 
 msgid "§4You must provide the age in days to purge!"
-msgstr "§4Ye must provide the age in days to purge!"
+msgstr "§cDu måste ange åldern i hur många dagar du vill rensa!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eFindin'' all islands that has been abandoned for more than {0} days."
+msgstr "§eHittar alla öar som har varit övergivna i mer än {0} dagar."
 
 msgid "set a player's island to your location"
-msgstr "set a pirate's island to yer location"
+msgstr "sätt en spelares ö till din nuvarande position"
 
 #, java-format
 msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aSet {0}''s island to the bedrock nearest ye."
+msgstr "§aSätt {0}s ö till din närmaste bedrock."
 
 msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4Bedrock not found: unable to set the island!"
+msgstr "§4Bedrock hittades inte, kan inte ställa in öns position!"
 
 msgid "reload configuration from file."
-msgstr "reload configuration from file."
+msgstr "ladda om konfiguration från filen."
 
 msgid "§eConfiguration reloaded from file."
-msgstr "§eConfiguration reloaded from file."
+msgstr "§eKonfigurationen har laddats om från filen."
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§cRENSNING:§9 Rensade {0}/{1} {2,number,###}%"
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr "§4PURGE:§9 Scannin'' done, found {0} candidates for purgatory."
+msgstr "§cRENSNING:§9 Skanning klart, hittade {0} kandidater för rensning."
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4PURGE:§9 Finished purgin' abandoned islands."
+msgstr "§cRENSNING:§9 Genomförde rensning av övergivna öar."
 
 msgid "displays version information"
-msgstr "displays version information"
+msgstr "visar version information"
 
 msgid "various WorldGuard utilities"
-msgstr "various WorldGuard utilities"
+msgstr "olika WorldGuard verktyg"
 
 msgid "refreshes the chunks around the player"
-msgstr "refreshes the chunks around the pirate"
+msgstr "uppdaterar alla chunks runt spelaren"
 
 msgid "§eResending chunks to the client"
-msgstr "§eResendin' chunks to the client"
+msgstr "§eSkickar alla chunks till klienten på nytt"
 
 msgid "load the region chunks"
-msgstr "load the region chunks"
+msgstr "ladda regionens chunks"
 
 #, java-format
 msgid "§eLoading chunks at {0}"
-msgstr "§eLoadin'' chunks at {0}"
+msgstr "§eLaddar chunks vid {0}"
 
 #, java-format
 msgid "§eUnloading chunks at {0}"
-msgstr "§eUnloadin'' chunks at {0}"
+msgstr "§eAvladdar chunks vid {0}"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
 msgid "show player-information"
-msgstr "show pirate-information"
+msgstr "visa information om spelare"
 
 #, java-format
 msgid "§7Usage: {0}"
-msgstr "§7Usage: {0}"
+msgstr "§7Användande: {0}"
 
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
 msgstr ""
-"§4Yer island be full, or ye have too many pendin' invites. Ye can't invite "
-"anyone else."
+"§cDin ö är full, eller så har du för många väntande inbjudningar. Du kan "
+"inte bjuda in fler just nu."
 
 msgid "§4That player is already leader on another island."
-msgstr "§4That pirate be already captain on another island."
+msgstr "§cDen spelaren är redan ledare för en annan ö."
 
 #, java-format
 msgid "§e{0}§e tried to invite you, but you are already in a party."
-msgstr "§e{0}§e tried to invite ye, but ye be already in a party."
+msgstr "§e{0}§e försökte att bjuda in dig men du är redan med i en grupp."
 
 #, java-format
 msgid "{0}§e has invited you to join their island!"
-msgstr "{0}§e has invited ye to join their island!"
+msgstr "{0}§e har bjudit in dig till att gå med i deras ö!"
 
 msgid "§f/island [accept/reject]§e to accept or reject the invite."
-msgstr "§f/island [accept/reject]§e to accept or reject the invite."
+msgstr "§f/island [accept/reject]§e för att tacka ja eller nej till inbjudan."
 
 msgid "§4WARNING: You will lose your current island if you accept!"
-msgstr "§4WARNING: Ye will lose yer current island if ye accept!"
+msgstr "§cVARNING: Du kommer att förlora din nuvarande ö om du tackar ja!"
 
 #, java-format
 msgid "{0}§e has rejected the invitation."
-msgstr "{0}§e has rejected the invitation."
+msgstr "{0}§e har tackat nej till din inbjudan."
 
 msgid "§4You can't use that command right now. Leave your current party first."
-msgstr "§4Ye can't use that command right now. Leave yer current party first."
+msgstr ""
+"§cDu kan inte använda det kommandot just nu. Lämna din nuvarande grupp först."
 
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
-"§aYe have joined an island! Use /island party to see the other members."
+"§aDu har gått med en ö! Använd /is party för att visa andra gruppmedlemmar."
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
-msgstr "§b{0}§d has joined yer island group."
+msgstr "§b{0}§d har gått med din grupp."
 
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."
-msgstr "§eInvitation for {0}§e has timedout or been cancelled."
+msgstr "§eInbjudan för {0}§e har gjort timeout eller blivit avbruten."
 
 #, java-format
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
-msgstr "§eInvitation for {0}''s island has timedout or been cancelled."
+msgstr "§eInbjudan för {0}s ö har gjort timeout eller blivit avbruten."
 
 msgid "accept/reject an invitation."
-msgstr "accept/reject an invitation."
+msgstr "tacka ja eller nej till en inbjudan."
 
 msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eYe have rejected the invitation to join an island."
+msgstr "§eDu har tackat nej till en inbjudan att gå med i en ö."
 
 msgid "§4You haven't been invited."
-msgstr "§4Ye haven't been invited."
+msgstr "§4Du har inte blivit inbjuden."
 
 msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eYe have accepted the invitation to join an island."
+msgstr "§eDu har tackat ja till en inbjudan att gå med i en ö."
 
 msgid "ban/unban a player from your island."
-msgstr "ban/unban a pirate from yer island."
+msgstr "banna eller unbanna en spelare från din ö."
 
 msgid "§eThe following players are banned from warping to your island:"
-msgstr "§eThe followin' pirates be banned from warpin' to yer island:"
+msgstr "§eFöljande spelare är bannad från att warpa till din ö:"
 
 msgid "§eTo ban/unban from your island, use /island ban <player>"
-msgstr "§eTo ban/unban from yer island, use /island ban <pirate>"
+msgstr "§eFör att banna eller unbanna från din ö, använd /is ban <namn>"
 
 msgid "§4You can't ban members. Remove them first!"
-msgstr "§4Ye can't ban members. Remove 'em first!"
+msgstr "§cDu kan inte banna gruppmedlemmar. Ta bort dem från ön först!"
 
 msgid "§4You do not have permission to kick/ban players."
-msgstr "§4Ye do not have permission to kick/ban pirates."
+msgstr "§cDu saknar rättighet att kicka eller banna spelare."
 
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
-msgstr "§eYe have banned §4{0}§e from warpin'' to yer island."
+msgstr "§eDu har bannat §c{0}§e från att warpa till din ö."
 
 #, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eYe have been §cBANNED§e from {0}§e''s island."
+msgstr "§eDu har blivit bannad från att warpa till {0}s ö."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
-msgstr "§eYe have unbanned §a{0}§e from warpin'' to yer island."
+msgstr "§eDu har unbannat §a{0}§e från att warpa till din ö."
 
 #, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eYe have been §aUNBANNED§e from {0}§e''s island."
+msgstr "§eDu har blivit unbannad från att warpa till {0}s ö."
 
 msgid "change the biome of the island"
-msgstr "change the biome of the island"
+msgstr "byt öns biome"
 
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
-msgstr "§cYe do not have permission to change the biome of yer current island."
+msgstr "§cDu saknar rättighet att byta biome på nuvarande ö."
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
-msgstr "§eYe can change yer biome again in {0,number,#} minutes."
+msgstr "§eDu kan byta biome igen om {0,number,#} minuter."
 
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
-msgstr "§aYe have changed yer island''s biome to {0}"
+msgstr "§aDu har bytt öns biome till {0}"
 
 #, java-format
 msgid "{0} changed the island biome to {1}"
-msgstr "{0} changed the island biome to {1}"
+msgstr "{0} bytte öns biome till {1}"
 
 msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§cYe do not have permission to change yer biome to that type."
+msgstr "§cDu saknar rättighet att byta öns biome till den typen."
 
 msgid "§cYou have misspelled the biome name."
-msgstr "§cYe have misspelled the biome name."
+msgstr "§cDu har felstavat biomets namn."
 
 msgid "§eYou must be on your island to change the biome!"
-msgstr "§eYe must be on yer island to change the biome!"
+msgstr "§eDu måste vara på din ö för att kunna byta biome!"
 
 msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4Ye do not have permission to change the biome of this island!"
+msgstr "§cDu får inte byta biome på denna ö!"
 
 msgid "create an island"
-msgstr "create an island"
+msgstr "skapa en ö"
 
 msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cYer island be in the process of generatin', ye cannot create now."
+msgstr "§cDin ö håller på att genereras, du kan inte skapa en just nu."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
 msgstr ""
-"§4Island found!§e Ye already have an island. If ye want a fresh island, "
-"type§b /is restart§e to get one"
+"§cEn ö hittades!§e Du har redan en ö. Om du vill ha en ny, skriv§b /is "
+"restart§e för att få en."
 
 msgid ""
 "§4Island found!§e You are already a member of an island. To start your own, "
 "first§b /is leave"
 msgstr ""
-"§4Island found!§e Ye be already a mates of an island. To start yer own, "
-"first§b /is leave"
+"§cEn ö hittades!§e Du är redan medlem i en grupp. För att starta en egen, så "
+"måste du först lämna med §b/is leave"
 
 #, java-format
 msgid "§eYou can create a new island in {0,number,#} seconds."
-msgstr "§eYe can create a new island in {0,number,#} seconds."
+msgstr "§eDu kan skapa en ny ö om {0,number,#} sekunder."
 
 msgid "teleport to the island home"
-msgstr "teleport to the island home"
+msgstr "teleportera till ön"
 
 msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
 "right now."
-msgstr ""
-"§cYer island be in the process of generatin', ye cannot teleport home right "
-"now."
+msgstr "§cDin ö håller på att genereras, du kan inte teleportera hem just nu."
 
 msgid "check your or anothers island info"
-msgstr "check yer or anothers island info"
+msgstr "kolla din eller en annans ös info"
 
 msgid "§4Island level has been disabled, contact an administrator."
-msgstr "§4Island treasure has been disabled, contact an administrator."
+msgstr "§cSkyblock level är inaktiverat. Vänligen kontakta en administratör."
 
 msgid "§eYou must be on your island to use this command."
-msgstr "§eYe must be on yer island to use this command."
+msgstr "§eDu måste vara på din ö för att använda detta kommando."
 
 msgid "§4You do not have an island!"
-msgstr "§4Ye do not have an island!"
+msgstr "§cDu har ingen ö!"
 
 msgid "§4You do not have access to that command!"
-msgstr "§4Ye do not have access to that command!"
+msgstr "§cDu har inte tillgång till det kommandot!"
 
 msgid "§4That player is invalid or does not have an island!"
-msgstr "§4That pirate be invalid or does not have an island!"
+msgstr "§cDen spelaren är ogiltig eller har ingen ö!"
 
 #, java-format
 msgid "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
-msgstr "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
+msgstr "§eBlock på {0}s ö (sida {1,number} av {2,number}):"
 
 msgid "Score Count Block"
-msgstr "Score Count Block"
+msgstr "Poäng Antal Blocktyp"
 
 msgid "invite a player to your island"
-msgstr "invite a pirate to yer island"
+msgstr "bjud in en spelare till din ö"
 
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr ""
-"§eUse§f /island invite <playername>§e to invite a pirate to yer island."
+"§eAnvänd§f /Island invite <namn§e för att bjuda in spelaren till din ö."
 
 msgid "§4Only the island's owner can invite!"
-msgstr "§4Only the island's owner can invite!"
+msgstr "§cEndast gruppledaren kan bjuda in spelare till ön!"
 
 #, java-format
 msgid "§aYou can invite {0} more players."
-msgstr "§aYe can invite {0} more pirates."
+msgstr "§aDu kan bjuda in {0} spelare till."
 
 msgid "§4You can't invite any more players."
-msgstr "§4Ye can't invite any more pirates."
+msgstr "§cDu kan inte bjuda in fler spelare."
 
 msgid "§4You do not have permission to invite others to this island!"
-msgstr "§4Ye do not have permission to invite others to this island!"
+msgstr "§cDu saknar rättighet att bjuda in spelare till ön!"
 
 msgid "§4That player is offline or doesn't exist."
-msgstr "§4That pirate be offline or doesn't exist."
+msgstr "§cDen spelaren är inte online just nu."
 
 msgid "§4You can't invite yourself!"
-msgstr "§4Ye can't invite yourself!"
+msgstr "§cDu kan inte bjuda in dig själv!"
 
 msgid "§4That player is the leader of your island!"
-msgstr "§4That pirate be the captain of yer island!"
+msgstr "§cDen spelaren är öns ledare!"
 
 #, java-format
 msgid "{0}§d invited {1}"
-msgstr "{0}§d invited {1}"
+msgstr "{0}§d bjöd in {1}"
 
 msgid "remove a member from your island."
-msgstr "remove a mates from yer island."
+msgstr "ta bort en spelare från ön."
 
 msgid "§4You do not have permission to kick others from this island!"
-msgstr "§4Ye do not have permission to kick others from this island!"
+msgstr "§cDu saknar rättighet att kicka andra från ön!"
 
 msgid "§4You can't remove the leader from the Island!"
-msgstr "§4Ye can't remove the captain from the Island!"
+msgstr "§cDu kan inte ta bort gruppledaren från ön!"
 
 msgid "§4Stop kickin' yourself!"
-msgstr "§4Stop kickin' yourself!"
+msgstr "§cDu kan inte kicka dig själv!"
 
 #, java-format
 msgid "§4{0} has removed you from their island!"
-msgstr "§4{0} has removed ye from their island!"
+msgstr "§c{0} har tagit bort dig från ön!"
 
 #, java-format
 msgid "§4{0} has been removed from the island."
-msgstr "§4{0} has been removed from the island."
+msgstr "§c{0} har tagits bort från ön."
 
+# ???
 msgid "§4"
-msgstr "§4"
+msgstr "§c"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
-msgstr "§4{0} has been kicked from the island."
+msgstr "§c{0} har blivit kickad från ön."
 
 msgid "§4That player is not part of your island group, and not on your island!"
-msgstr "§4That pirate be not part of yer island group, an' not on yer island!"
+msgstr "§cDen spelaren är inte del av din grupp och är inte på din ö!"
 
 msgid "leave your party"
-msgstr "leave yer party"
+msgstr "lämna din grupp"
 
 msgid ""
 "§4You can't leave your island if you are the only person. Try using /island "
 "restart if you want a new one!"
 msgstr ""
-"§4Ye can't leave yer island if ye be the only person. Try usin' /island "
-"restart if ye want a new one!"
+"§cDu kan inte lämna din ö om du är den enda personen. Använd /Island restart "
+"om du vill ha en ny!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
-msgstr "§eYe own this island, use /island remove <pirate> instead."
+msgstr "§eDu är gruppledaren, använd /Island remove <namn> istället."
 
 msgid "§eYou have left the island and returned to the player spawn."
-msgstr "§eYe have left the island an' returned to the pirate spawn."
+msgstr "§eDu har lämnat ön och återvänt till spawnen."
 
 #, java-format
 msgid "§4{0} has left your island!"
-msgstr "§4{0} has left yer island!"
+msgstr "§c{0} har lämnat din ö!"
 
 msgid "§4You must be in the skyblock world to leave your party!"
-msgstr "§4Ye must be in the skyblock world to leave yer party!"
+msgstr "§cDu måste vara i Skyblockvärlden för att lämna din grupp!"
 
 msgid "check your or anothers island level"
-msgstr "check yer or anothers island treasure"
+msgstr "kolla din ös eller någon annans ös skyblock level"
 
 #, java-format
 msgid "§eInformation about {0}'s Island:"
-msgstr "§eInformation about {0}''s Island:"
+msgstr "§eInformation om {0}s ö:"
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
-msgstr "§aIsland treasure be {0,number,###.##}"
+msgstr "§aSkyblock level är {0,number,###,##}"
 
 #, java-format
 msgid "§9Rank is {0}"
-msgstr "§9Rank be {0}"
+msgstr "§9Rank är {0}"
 
 msgid "lock your island to non-party members."
-msgstr "lock yer island to non-party members."
+msgstr "lås din ö för spelare som inte är gruppmedlemmar."
 
 msgid "§4You do not have permission to lock your island!"
-msgstr "§4Ye do not have permission to lock yer island!"
+msgstr "§cDu saknar rättighet att låsa ön!"
 
 msgid "§4You do not have permission to unlock your island!"
-msgstr "§4Ye do not have permission to unlock yer island!"
+msgstr "§cDu saknar rättighet att låsa upp ön!"
 
 msgid "display log"
-msgstr "display log"
+msgstr "visa loggen"
 
 msgid "transfer leadership to another member"
-msgstr "transfer leadership to another mates"
+msgstr "flytta ledarskap till en annan spelare"
 
 msgid "§4You can only transfer ownership to party-members!"
-msgstr "§4Ye can only transfer ownership to party-members!"
+msgstr "§cDu kan endast flytta ledarskapet till gruppmedlemmar!"
 
 #, java-format
 msgid "{0}§e is already leader of your island!"
-msgstr "{0}§e be already captain of yer island!"
+msgstr "{0}§e är redan gruppledare!"
 
 msgid "§4Only leader can transfer leadership!"
-msgstr "§4Only captain can transfer leadership!"
+msgstr "§cEndast gruppledaren kan flytta ledarskapet!"
 
 #, java-format
 msgid "{0} tried to take over the island!"
-msgstr "{0} tried to take over the island!"
+msgstr "{0} försökte att ge sig själv ledarskapet!"
 
 msgid "show party information"
-msgstr "show party information"
+msgstr "visa gruppinformation"
 
 msgid "shows information about your party"
-msgstr "shows information about yer party"
+msgstr "visar information om din grupp"
 
 msgid "show pending invites"
-msgstr "show pendin' invites"
+msgstr "visa väntande inbjudningar"
 
 msgid "§eNo pending invites"
-msgstr "§eNay pendin' invites"
+msgstr "§eInga väntande inbjudningar"
 
 msgid "withdraw an invite"
-msgstr "withdraw an invite"
+msgstr "dra tillbaka en inbjudan"
 
+# ???
 msgid "§4You don't have permissions to uninvite players."
-msgstr "§4Ye don't have permissions to uninvite pirates."
+msgstr "§cDu saknar rättighet att dra tillbaka inbjudningar."
 
 msgid "§4This command can only be executed by a player"
-msgstr "§4This command can only be executed by a pirate"
+msgstr "§cDetta kommando kan endast användas av spelare."
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
-msgstr "§4Nay Island. §eUse §b/is create§e to get one"
+msgstr "§cIngen ö hittades! §eAnvänd §b/is create§e för att få en"
 
 msgid "delete your island and start a new one."
-msgstr "delete yer island an' start a new one."
+msgstr "ta bort din ö och starta en ny."
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
 msgstr ""
-"§4Only the owner may restart this island. Leave this island in order to "
-"start yer own (/island leave)."
+"§cEndast gruppledaren kan starta om ön. Lämna ön för att starta din egna (/"
+"is leave)."
 
 msgid ""
 "§eYou must remove all players from your island before you can restart it (/"
 "island kick <player>). See a list of players currently part of your island "
 "using /island party."
 msgstr ""
-"§eYe must remove all pirates from yer island before ye can restart it (/"
-"island kick <pirate>). See a list of pirates currently part of yer island "
-"usin' /island party."
+"§eDu måste ta bort alla medlemmar från ön innan du kan starta om den (/is "
+"kick <namn>). Visa en lista av gruppmedlemmar med /is party."
 
 #, java-format
 msgid "§cYou can restart your island in {0} seconds."
-msgstr "§cYe can restart yer island in {0} seconds."
+msgstr "§eDu kan starta om din ö om {0} sekunder."
 
 msgid "§cYour island is in the process of generating, you cannot restart now."
-msgstr "§cYer island be in the process of generatin', ye cannot restart now."
+msgstr "§cDin ö håller på att genereras, du kan inte börja om just nu."
 
 msgid "§eNOTE: Your entire island and all your belongings will be RESET!"
-msgstr "§eNOTE: Yer entire island an' all yer belongin's will be RESET!"
+msgstr "§eVIKTIGT: Hela din ö och alla dina ägodelar kommer att ÅTERSTÄLLAS!"
 
 msgid "set the island-home"
-msgstr "set the island-home"
+msgstr "ställer in öns hem"
 
 msgid "set your island's warp location"
-msgstr "set yer island's warp location"
+msgstr "ställer in öns warp position"
 
 msgid "§cYou do not have permission to set your island's warp point!"
-msgstr "§cYe do not have permission to set yer island's warp point!"
+msgstr "§cDu saknar rättighet att ställa in öns warp position!"
 
 msgid "§cYou need to be on your own island to set the warp!"
-msgstr "§cYe need to be on yer own island to set the warp!"
+msgstr "§cDu måste vara på ön för att ställa in öns warp!"
 
 #, java-format
 msgid "§b{0}§d changed the island warp location."
-msgstr "§b{0}§d changed the island warp location."
+msgstr "§b{0}§d flyttade öns warp position."
 
 msgid "teleports you to the skyblock spawn"
-msgstr "teleports ye to the skyblock spawn"
+msgstr "teleporterar dig till skyblock spawnen"
 
 msgid "enable/disable warping to your island."
-msgstr "enable/disable warpin' to yer island."
+msgstr "aktiverar eller inaktiverar warpande till din ö."
 
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
-msgstr "§4Yer island be locked. Ye must unlock it before enablin' yer warp."
+msgstr "§cDin ö är låst. Du måste låsa upp den innan du kan aktivera din warp."
 
 #, java-format
 msgid "§b{0}§d activated the island warp."
-msgstr "§b{0}§d activated the island warp."
+msgstr "§b{0}§d aktiverade öns warp."
 
 #, java-format
 msgid "§b{0}§d deactivated the island warp."
-msgstr "§b{0}§d deactivated the island warp."
+msgstr "§b{0}§d inaktiverade öns warp."
 
 msgid "§cYou do not have permission to enable/disable your island's warp!"
-msgstr "§cYe do not have permission to enable/disable yer island's warp!"
+msgstr "§cDu saknar rättighet att aktivera/inaktivera öns warp!"
 
 msgid "display the top10 of islands"
-msgstr "display the top10 of islands"
+msgstr "visar topp 10 av alla öar"
 
 msgid "trust/untrust a player to help on your island."
-msgstr "trust/untrust a pirate to help on yer island."
+msgstr "litar på en annan spelare att hjälpa dig på ön."
 
 msgid "§eThe following players are trusted on your island:"
-msgstr "§eThe followin' pirates be trusted on yer island:"
+msgstr "§eFöljande spelare är betrodda på ön:"
 
 msgid "§eThe following leaders trusts you:"
-msgstr "§eThe followin' leaders trusts ye:"
+msgstr "§eFöljande ledare litar på dig:"
 
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
-msgstr "§eTo trust/untrust from yer island, use /island trust <pirate>"
+msgstr "§eFör att lita på en annan spelare, använd /is trust <namn>"
 
 msgid "§4Members are already trusted!"
-msgstr "§4Members be already trusted!"
+msgstr "§cSpelarna är redan betrodda!"
 
 #, java-format
 msgid "§4Unknown player {0}"
-msgstr "§4Unknown pirate {0}"
+msgstr "§cOkänd spelare {0}"
 
 #, java-format
 msgid "§eYou are now trusted on §4{0}'s §eisland."
-msgstr "§eYe be now trusted on §4{0}''s §eisland."
+msgstr "§eDu är nu betrodd på §4{0}s ö."
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
-msgstr "§a{0} trusted {1} on the island"
+msgstr "{0} betrodde {1} på ön"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
-msgstr "§eYe be nay longer trusted on §4{0}''s §eisland."
+msgstr "§eDu är inte längre betrodd på §4{0}s ö."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
-msgstr "§c{0} revoked trust in {1} on the island"
+msgstr "§e{0} återkallade förtroendet för {1} på ön"
 
 msgid "warp to another player's island"
-msgstr "warp to another pirate's island"
+msgstr "warpa till en annan spelares ö"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
-msgstr "§aYer incomin' warp be active, pirates may warp to yer island."
+msgstr "§aDin warp är aktiv, spelare kan warpa till din ö."
 
 msgid "§4Your incoming warp is inactive, players may not warp to your island."
-msgstr "§4Yer incomin' warp be inactive, pirates may not warp to yer island."
+msgstr "§cDin warp är inaktiv, spelare kan inte längre arpa till din ö."
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
-msgstr "§fSet incomin' warp to yer current location usin' §e/island setwarp"
+msgstr "§fStäll in warpen till nuvarande position med §e/is setwarp"
 
 msgid "§fToggle your warp on/off using §e/island togglewarp"
-msgstr "§fToggle yer warp on/off usin' §e/island togglewarp"
+msgstr "§fAktivera eller inaktivera öns warp med §e/is togglewarp"
 
 msgid "§4You do not have permission to create a warp on your island!"
-msgstr "§4Ye do not have permission to create a warp on yer island!"
+msgstr "§4Du saknar rättighet att skapa en warp på ön!"
 
 msgid "§fWarp to another island using §e/island warp <player>"
-msgstr "§fWarp to another island usin' §e/island warp <pirate>"
+msgstr "§fWarpa till en annan spelare "
 
 msgid "§4You do not have permission to warp to other islands!"
-msgstr "§4Ye do not have permission to warp to other islands!"
+msgstr "§cDu får inte warpa till andra öar!"
 
 msgid ""
 "§cYour island is in the process of generating, you cannot warp to other "
 "players islands right now."
 msgstr ""
-"§cYer island be in the process of generatin', ye cannot warp to other "
-"pirates islands right now."
+"§cDin ö håller på att generaras, du kan inte warpa till andra öar just nu."
 
 msgid "§4That player does not exist!"
-msgstr "§4That pirate does not exist!"
+msgstr "§cDen spelaren existerar inte."
 
 msgid "§4That player does not have an active warp."
-msgstr "§4That pirate does not have an active warp."
+msgstr "§cDen spelaren har warpen inaktiverad."
 
 msgid ""
 "§cThat players island is in the process of generating, you cannot warp to it "
 "right now."
 msgstr ""
-"§cThat pirates island be in the process of generatin', ye cannot warp to it "
-"right now."
+"§cDen spelarens ö håller på att genereras så du kan inte warpa till den "
+"precis just nu."
 
 #, java-format
 msgid "§cWARNING: §9{0}§e is warping to your island!"
-msgstr "§cWARNING: §9{0}§e be warpin'' to yer island!"
+msgstr "§e{0} warpar till din ö just nu!"
 
 msgid "§4That player has forbidden you from warping to their island."
-msgstr "§4That pirate has forbidden ye from warpin' to their island."
+msgstr "§cDen spelaren har förbjudig dig från att warpa till sin ö."
 
 msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "But ye be ALLLLLLL ALOOOOONE!"
+msgstr "Men du är HELT ENSAM! :("
 
 msgid "But you are Yelling in the wind!"
-msgstr "But ye be Yellin' in the wind!"
+msgstr "Men du ropar i vinden!"
 
 msgid "But your fantasy friends are gone!"
-msgstr "But yer fantasy friends be gone!"
+msgstr "Dina fantasikompisar är inte online!"
 
 msgid "But you are Talking to your self!"
-msgstr "But ye be Talkin' to yer self!"
+msgstr "Men du pratar med dig själv!"
 
 #, java-format
 msgid "§cSorry! {0}"
-msgstr "§cSorry! {0}"
+msgstr "§cLedsen! {0}"
 
 msgid "general island command"
-msgstr "general island command"
+msgstr "allmänt skyblock kommando"
 
 msgid "talk to players on your island"
-msgstr "talk to pirates on yer island"
+msgstr "prata med spelare på ön"
 
 msgid "talk to your island party"
-msgstr "talk to yer island party"
+msgstr "prata med skyblockgruppen"
 
 msgid "§eYou can not use another islands portals! Shame on you - cheater!"
-msgstr "§eYe can not use another islands portals! Shame on ye - cheater!"
+msgstr "§eDu kan inte använda en annan ös portaler! Skäms på dig, fuskare!"
 
 msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
-msgstr "§eTradin' isn't allowed on other islands. Go home - cheater!"
+msgstr "§eHandlande är inte tillåtet på andras öar. Gå hem, fuskare!"
 
 msgid "§eVisitors can't drop items!"
-msgstr "§eVisitors can't drop items!"
+msgstr "§eBesökare kan inte kasta ut saker!"
 
 #, java-format
 msgid "Owner: {0}"
-msgstr "Owner: {0}"
+msgstr "Ägare: {0}"
 
 msgid "You cannot pick up other players' loot when you are a visitor!"
-msgstr "Ye cannot pick up other pirates' loot when ye be a visitor!"
+msgstr "§eDu kan inte ta upp saker när du är en besökare!"
 
 msgid "Config:"
-msgstr "Config:"
+msgstr "Konfiguration:"
 
 msgid ""
 "§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
 "that is not allowed."
 msgstr ""
-"§cNay Access! §eYe be tryin' to teleport to the roof of the §cNETHER§e, that "
-"be not allowed."
+"§eDu försöker att teleportera till taket av Nether, vilket inte är tillåtet."
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
-msgstr "§eChangin' yer obsidian back into lava. Be careful!"
+msgstr "§eOmvandlar din obsidian till lava igen. Var försiktig!"
 
 msgid "§4It's a bad idea to replace your lava!"
-msgstr "§4It's a bad idea to replace yer lava!"
+msgstr "§cDet är en dålig idé att ersätta din lava!"
 
 msgid "§4That player has forbidden you from teleporting to their island."
-msgstr "§4That pirate has forbidden ye from teleportin' to their island."
+msgstr "§cDen spelaren har förbjudit dig från att warpa till sin ö."
 
 msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cYe have reached yer spawn-limit for yer island."
+msgstr "§cDu har nått din spawn-limit för ön."
 
 msgid "§eYou can only use spawn-eggs on your own island."
-msgstr "§eYe can only use spawn-eggs on yer own island."
+msgstr "§eDu kan använda spawnägg endast på din egna ö."
 
 msgid "§cBanned:§e You are banned from this island."
-msgstr "§cBanned:§e Ye be banned from this island."
+msgstr "§cDu är bannad från denna ö."
 
 #, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr "§eWaitin'' for our turn §c{0,number,###}%"
+msgstr "§eWaiting for our turn §c{0,number,###}%"
 
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
-msgstr "§9Creatin'' island...§e{0,number,###}%"
+msgstr "§9Skapar ön... §e{0,number,###}%"
 
 #, java-format
 msgid "§9{0}§7 timed out"
-msgstr "§9{0}§7 timed out"
+msgstr "§9{0}§7 gjorde timeout"
 
 #, java-format
 msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§eDoin'' §9{0}§e be §cRISKY§e. Repeat the command within §a{1}§e seconds to "
-"accept!"
+"§eAnvändande av §9{0}§e är §cRISKFULLT§e. Repetera kommandot inom §a{1}§e "
+"sekunder för att acceptera!"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
-msgstr "§d** Ye be enterin'' §b{0}''s §disland."
+msgstr "§dDu beträder nu §b{0}s §dSkyblock."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** Ye be leavin'' §b{0}''s §disland."
+msgstr "§d** Du lämnar nu §b{0}s §dSkyblock."
 
 msgid "§eYour island is now locked. Only your party members may enter."
-msgstr "§eYer island be now locked. Only yer party members may enter."
+msgstr "§eDin ö är nu låst och endast gruppmedlemmar kan beträda."
 
 msgid "§4You must be the party leader to lock your island!"
-msgstr "§4Ye must be the party captain to lock yer island!"
+msgstr "§cEndast gruppledaren kan låsa ön!"
 
 msgid ""
 "§eYour island is unlocked and anyone may enter, however only you and your "
 "party members may build or remove blocks."
 msgstr ""
-"§eYer island be unlocked an' anyone may enter, however only ye an' yer party "
-"members may build or remove blocks."
+"§eDin ö är olåst och vem som helst kan beträda. Hur som helst så kan endast "
+"du och dina gruppmedlemmar bygga på ön."
 
 msgid "§4You must be the party leader to unlock your island!"
-msgstr "§4Ye must be the party captain to unlock yer island!"
+msgstr "§cEndast gruppledaren kan låsa upp ön!"
 
 msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr "§4** Ye be enterin' a protected - but abandoned - island area."
+msgstr "§c** Du beträder du en skyddad, men övergiven, Skyblock."
 
 msgid "§4** You are leaving an abandoned island."
-msgstr "§4** Ye be leavin' an abandoned island."
+msgstr "§c** Du lämnar nu en övergiven Skyblock."
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
-msgstr "§4Nay importer named §e{0}§4 found"
+msgstr "§cIngen importer kallad §e{0}§4 hittades."
 
 msgid "§eConverted "
-msgstr "§eConverted "
+msgstr "§eKonverterad"
 
 msgid "The island has been created."
-msgstr "The island has been created."
+msgstr "Ön har skapats."
 
 #, java-format
 msgid "§b{0}§d locked the island."
-msgstr "§b{0}§d locked the island."
+msgstr "§b{0}§d låste ön."
 
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
-msgstr "§4Since yer island be locked, yer incomin' warp has been deactivated."
+msgstr "§cEftersom ön är låst så har din warp inaktiverats."
 
 #, java-format
 msgid "§b{0}§d unlocked the island."
-msgstr "§b{0}§d unlocked the island."
+msgstr "§b{0}§d låste upp ön."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
-msgstr "§cSKY §f> §7 {0}"
+msgstr "§c{0}"
 
 #, java-format
 msgid "§b{0}§d has been removed from the island group."
-msgstr "§b{0}§d has been removed from the island group."
+msgstr "§b{0}§d har tagits bort från gruppen."
 
 #, java-format
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cThe island ye be on be bein' deleted! Sendin' ye to spawn."
+msgstr "§cÖn du är på tas bort! Teleporterar dig till spawnen."
 
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr ""
-"§cThe island ownin' this piece of nether be bein' deleted! Sendin' ye to "
-"spawn."
+"§cÖn som äger denna del av Nether tas bort. Teleporterar dig till spawnen."
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
-msgstr "§eWALL OF FAME (page {0} of {1}):"
+msgstr "§eRuhmeshalle (Sida {0} av {1}):"
 
 msgid "§4Top ten list is empty! (perhaps the generation failed?)"
-msgstr "§4Top ten list be empty! (perhaps the generation failed?)"
+msgstr "§cTopp 10 listan är tom!"
 
+# ???
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 
 #, java-format
 msgid "§eYour rank is: §f{0}"
-msgstr "§eYer rank be: §f{0}"
+msgstr "§eDin rank är: §f{0}"
 
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
-msgstr "§cWatchdog!§9 Unable to locate a chest within {0}, bailin'' out."
+msgstr "§cVakthund!§9 Kan inte lokalisera en kista inom {0}."
 
 #, java-format
 msgid "Page {0,number,integer}"
-msgstr "Page {0,number,integer}"
+msgstr "Sida {0,number,integer}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1338,7 +1344,7 @@ msgid "§a+1000"
 msgstr "§a+1000"
 
 msgid "Return"
-msgstr "Return"
+msgstr "Återvänd"
 
 msgid "§9Integer Editor"
 msgstr "§9Integer Editor"
@@ -1347,43 +1353,43 @@ msgid "§9Item List Editor"
 msgstr "§9Item List Editor"
 
 msgid "§eConfiguration saved and reloaded."
-msgstr "§eConfiguration saved an' reloaded."
+msgstr "§eKonfigurationen sparad och omladdad."
 
 msgid "§cError! §9Unable to save config file!"
-msgstr "§cBlimey! §9Unable to save config file!"
+msgstr "§cFel! §9Kan inte spara konfigurationsfilen!"
 
 msgid "§cSave & Reload config"
-msgstr "§cSave & Reload config"
+msgstr "§cSpara & ladda om"
 
 msgid ""
 "§7Saves the settings to\n"
 "§7file & reloads again.\n"
 "§cNote: §7Use with care!"
 msgstr ""
-"§7Saves the settin's to\n"
-"§7file & reloads again.\n"
-"§cNote: §7Use with care!"
+"§7Sparar inställningarna till\n"
+"§7filen och laddar om..\n"
+"§cViktigt: §7Använd försiktigt!"
 
 msgid "§7 (readonly)"
 msgstr "§7 (readonly)"
 
 msgid "true"
-msgstr "true"
+msgstr "sant"
 
 msgid "false"
-msgstr "false"
+msgstr "falskt"
 
 msgid "Challenge Menu"
-msgstr "Challenge Menu"
+msgstr "Uppdragsmeny"
 
 msgid "change the islands's biome."
-msgstr "change the islands's biome."
+msgstr "byt öns biome"
 
 msgid "toggle the island's lock."
-msgstr "toggle the island's lock."
+msgstr "aktivera eller inaktivera öns lås"
 
 msgid "set the island's warp."
-msgstr "set the island's warp."
+msgstr "ställ in öns warp"
 
 msgid ""
 "set the island's warp,\n"
@@ -1391,13 +1397,13 @@ msgid ""
 "members to teleport to\n"
 " the island"
 msgstr ""
-"set the island's warp,\n"
-"which allows non-group\n"
-"members to teleport to\n"
-" the island"
+"ställ in öns warp,\n"
+"vilket tillåter folk utifrån\n"
+"att teleportera till\n"
+" Skyblockön"
 
 msgid "toggle the island's warp."
-msgstr "toggle the island's warp."
+msgstr "aktivera eller inaktivera öns warp"
 
 msgid ""
 "toggle the\n"
@@ -1405,13 +1411,13 @@ msgid ""
 "to turn it on or off at anytime.\n"
 "but not set the location."
 msgstr ""
-"toggle the\n"
-"island's warp, allowin' 'em\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"aktivera eller inaktivera\n"
+"öns warp, tillåter spelare\n"
+"att warpa till den när som helst.\n"
+"men inte ställa in positionen."
 
 msgid "invite others to the island."
-msgstr "invite others to the island."
+msgstr "bjud in andra till ön"
 
 msgid ""
 "invite\n"
@@ -1419,13 +1425,13 @@ msgid ""
 "there is enough room for more\n"
 "members"
 msgstr ""
-"invite\n"
-"other pirates to the island if\n"
-"there be enough room for more\n"
-"members"
+"bjud in\n"
+"andra spelare till ön om\n"
+"det finns tillräckligt med plats för\n"
+"fler spelare"
 
 msgid "kick others from the island."
-msgstr "kick others from the island."
+msgstr "kicka spelare från ön"
 
 msgid ""
 "kick\n"
@@ -1433,61 +1439,62 @@ msgid ""
 "but they are unable to kick\n"
 "the island leader."
 msgstr ""
-"kick\n"
-"other pirates from the island,\n"
-"but they be unable to kick\n"
-"the island captain."
+"kicka\n"
+"andra spelare från ön,\n"
+"men de kan inte kicka\n"
+"gruppledaren."
 
 msgid "Permissions"
-msgstr "Permissions"
+msgstr "Rättigheter"
 
+# ???
 #, java-format
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
 msgid "§hPlayer Permissions"
-msgstr "§hPlayer Permissions"
+msgstr "§hSpelares rättigheter"
 
 msgid ""
 "§eClick here to return to\n"
 "§eyour island group's info."
 msgstr ""
-"§eClick here to return to\n"
-"§eyer island group's info."
+"§eKlicka här för att återvända\n"
+"§etill din gruppinfo."
 
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"
 "§epermission by clicking it."
 msgstr ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clickin' it."
+"§eHovra en ikon för att visa\n"
+"§een rättighet. Ändra den\n"
+"§egenom att klicka på den."
 
 msgid "§fThis player §acan"
-msgstr "§fThis pirate §acan"
+msgstr "§fDenna spelare §akan"
 
 msgid "Click here to remove this permission."
-msgstr "Click here to remove this permission."
+msgstr "Klicka här för att ta bort denna rättighet."
 
 msgid "§fThis player §ccannot"
-msgstr "§fThis pirate §ccannot"
+msgstr "§fDenna spelare §ckan inte"
 
 msgid "Click here to grant this permission."
-msgstr "Click here to grant this permission."
+msgstr "Klicka här för att ge denna rättighet."
 
 msgid "Island Group Members"
-msgstr "Island Group Members"
+msgstr "Gruppmedlemmar"
 
 #, java-format
 msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "Group Members: §2{0}§7/§e{1}"
+msgstr "Gruppmedlemmar: §2{0}§7/§e{1}"
 
 msgid "§aMore players can be invited to this island."
-msgstr "§aMore pirates can be invited to this island."
+msgstr "§aFler spelare kan bli inbjudna till ön."
 
 msgid "§cThis island is full."
-msgstr "§cThis island be full."
+msgstr "§cÖn är full."
 
 msgid ""
 "§eHover over a player's icon to\n"
@@ -1495,43 +1502,43 @@ msgid ""
 "§eleader can change permissions\n"
 "§eby clicking a player's icon."
 msgstr ""
-"§eHover over a pirate's icon to\n"
-"§eview their permissions. The\n"
-"§ecaptain can change permissions\n"
-"§eby clickin' a pirate's icon."
+"§eHovra en spelares ikon för att\n"
+"§evisa deras rättigheter. Endast\n"
+"§eledaren kan ändra rättigheter\n"
+"§egenom att klicka på ikonen."
 
 msgid "Leader"
-msgstr "Captain"
+msgstr "Gruppledare"
 
 msgid "Member"
-msgstr "Mates"
+msgstr "Medlem"
 
 #, java-format
 msgid "Can {0}"
-msgstr "Can {0}"
+msgstr "Kan {0}"
 
 #, java-format
 msgid "Cannot {0}"
-msgstr "Cannot {0}"
+msgstr "Kan inte {0}"
 
 msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Click to change this pirate's permissions>"
+msgstr "§e<Klicka för att ändra denna spelares rättigheter>"
 
 msgid "Island Log"
-msgstr "Island Log"
+msgstr "Skyblock Logg"
 
 msgid ""
 "§eClick here to return to\n"
 "§ethe main island screen."
 msgstr ""
-"§eClick here to return to\n"
-"§ethe main island screen."
+"§eKlicka här för att återvända\n"
+"§etill startsidan."
 
 msgid "§e§lIsland Log"
-msgstr "§e§lIsland Log"
+msgstr "§e§lSkyblock Logg"
 
 msgid "Island Biome"
-msgstr "Island Biome"
+msgstr "Skyblock Biome"
 
 msgid "Ocean"
 msgstr "Ocean"
@@ -1543,11 +1550,11 @@ msgid ""
 "not spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"The ocean biome be the basic\n"
-"startin' biome for all islands.\n"
-"passive mobs like animals will\n"
-"not spawn. Hostile mobs will\n"
-"spawn normally."
+"Biomet ocean är det grund-\n"
+"läggande biomet för alla öar.\n"
+"Passiva mobs som djur kommer\n"
+"inte spawna. Monster spawnar\n"
+"som vanligt."
 
 msgid "Forest"
 msgstr "Forest"
@@ -1559,11 +1566,11 @@ msgid ""
 "wolves). Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"The forest biome will allow\n"
-"yer island to spawn passive.\n"
-"mobs like animals (includin'\n"
-"wolves). Hostile mobs will\n"
-"spawn normally."
+"Biomet forest tillåter din\n"
+"ö att spawna passiva mobs.\n"
+"Mobs som djur, men även\n"
+"vargar kan spawna. Monster\n"
+"spawnar som vanligt."
 
 msgid "Desert"
 msgstr "Desert"
@@ -1575,11 +1582,10 @@ msgid ""
 "won't spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"The desert biome makes it so\n"
-"that there be nay rain or snow\n"
-"on yer island. Passive mobs\n"
-"won't spawn. Hostile mobs will\n"
-"spawn normally."
+"Biomet desert stänger av regn\n"
+"och snö på din ö. Passiva\n"
+"mobs kommer inte att spawna.\n"
+"Monster spawnar som vanligt."
 
 msgid "Jungle"
 msgstr "Jungle"
@@ -1591,11 +1597,11 @@ msgid ""
 "spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"The jungle biome be bright\n"
-"an' colorful. Passive mobs\n"
-"(includin' ocelots) will\n"
-"spawn. Hostile mobs will\n"
-"spawn normally."
+"Biomet jungle är ljust och\n"
+"färgglatt. Passiva mobs som\n"
+"djur och katter kommer att\n"
+"spawna. Monster spawnar\n"
+"som vanligt."
 
 msgid "Swampland"
 msgstr "Swampland"
@@ -1608,12 +1614,11 @@ msgid ""
 "to spawn at night depending\n"
 "on the moon phase."
 msgstr ""
-"The swamp biome be dark\n"
-"an' dull. Passive mobs\n"
-"will spawn normally an'\n"
-"slimes have a small chance\n"
-"to spawn at night dependin'\n"
-"on the moon phase."
+"Biomet swampland är\n"
+"mörkt och dystert. Passiva\n"
+"vanligt och slimes kan spawna\n"
+"på natten beroende på\n"
+"månen."
 
 msgid "Taiga"
 msgstr "Taiga"
@@ -1625,11 +1630,11 @@ msgid ""
 "(including wolves) and\n"
 "hostile mobs will spawn."
 msgstr ""
-"The taiga biome has snow\n"
-"instead of rain. Passive\n"
-"mobs will spawn normally\n"
-"(includin' wolves) an'\n"
-"hostile mobs will spawn."
+"Biomet taiga har snö\n"
+"istället för regn. Passiva\n"
+"mobs spawnar som vanligt\n"
+"(även vargar) och\n"
+"monster spawnar också."
 
 msgid "Mushroom"
 msgstr "Mushroom"
@@ -1642,12 +1647,12 @@ msgid ""
 "No other passive or\n"
 "hostile mobs will spawn."
 msgstr ""
-"The mushroom biome be\n"
-"bright an' colorful.\n"
-"Mooshrooms be the only\n"
-"mobs that will spawn.\n"
-"Nay other passive or\n"
-"hostile mobs will spawn."
+"Mushroom biomet är\n"
+"ljust och färgglatt.\n"
+"Svampkor är de ända\n"
+"mobs som spawnar.\n"
+"Inga andra passiva mobs\n"
+"eller monster spawnar."
 
 msgid "Hell"
 msgstr "Hell"
@@ -1660,12 +1665,10 @@ msgid ""
 "(excluding ghasts and\n"
 "blazes)."
 msgstr ""
-"The hell biome looks\n"
-"dark an' dead. Some\n"
-"mobs from the nether will\n"
-"spawn in this biome\n"
-"(excludin' ghasts an'\n"
-"blazes)."
+"Biomet hell ser mörkt\n"
+"och dött ut. Några mobs\n"
+"från Nether kommer attl\n"
+"spawna i detta biome,"
 
 msgid "Sky"
 msgstr "Sky"
@@ -1676,10 +1679,10 @@ msgid ""
 "Only endermen will spawn\n"
 "in this biome."
 msgstr ""
-"The sky biome gives yer\n"
-"island a special dark sky.\n"
-"Only endermen will spawn\n"
-"in this biome."
+"Biomet sky ger din ö ett\n"
+"speciellt mörker.\n"
+"Endast endermen spawnar\n"
+"i detta biome."
 
 msgid "Plains"
 msgstr "Plains"
@@ -1691,11 +1694,11 @@ msgid ""
 "(including horses) and\n"
 "hostile mobs will spawn."
 msgstr ""
-"The plains biome has rain\n"
-"instead of snow. Passive\n"
-"mobs will spawn normally\n"
-"(includin' horses) an'\n"
-"hostile mobs will spawn."
+"Biomet plains har regn\n"
+"istället för snö. Passiva mobs\n"
+"spawnar som vanligt, även\n"
+"hästar och monster spawnar\n"
+"som vanligt."
 
 msgid "Extreme Hills"
 msgstr "Extreme Hills"
@@ -1706,10 +1709,10 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"The extreme hills biome.\n"
-"Passive mobs will spawn \n"
-"normally an' hostile\n"
-"mobs will spawn."
+"Biomet extreme hills.\n"
+"Passiva mobs spawnar som\n"
+"vanligt och det gör\n"
+"monster också."
 
 msgid "Flower Forest"
 msgstr "Flower Forest"
@@ -1720,10 +1723,12 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally an' hostile\n"
-"mobs will spawn."
+"Biomet flower forest. I detta\n"
+"biome finner du många olika\n"
+"blommor som du inte finner\n"
+"på något annat sätt. Passiva\n"
+"mobs spawnar som vanligt\n"
+"och det gör monster också."
 
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
@@ -1735,37 +1740,38 @@ msgid ""
 "(including Guardians) will\n"
 "spawn normally."
 msgstr ""
-"The deep-ocean biome be an advanced\n"
-"biome. Passive mobs like animals will\n"
-"not spawn. Hostile mobs \n"
-"(includin' Guardians) will\n"
-"spawn normally."
+"Deep ocean är ett advancerat\n"
+"biome. Passiva mobs som djur\n"
+"kommer inte att spawna. Monster\n"
+"(inkluderar Guardians) kommer\n"
+"spawna som vanligt."
 
 #, java-format
 msgid "Biome: {0}"
 msgstr "Biome: {0}"
 
 msgid "§2§lThis is your current biome."
-msgstr "§2§lThis be yer current biome."
+msgstr "§2§lDetta är ditt nuvarande biome."
 
 msgid "§e§lClick to change to this biome."
-msgstr "§e§lClick to change to this biome."
+msgstr "§e§lKlicka här för att byta till detta biome."
 
 msgid "You cannot use this biome."
-msgstr "Ye cannot use this biome."
+msgstr "§c§lDu får inte använda detta biome."
 
+# ???
 #, java-format
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
 msgid "Island Menu"
-msgstr "Island Menu"
+msgstr "Skyblockmeny"
 
 msgid "Island Create Menu"
-msgstr "Island Create Menu"
+msgstr "Skapa ö-meny"
 
 msgid "§a§lStart an Island"
-msgstr "§a§lStart an Island"
+msgstr "§a§lStarta en ö"
 
 msgid ""
 "Start your skyblock journey\n"
@@ -1777,17 +1783,17 @@ msgid ""
 "building your island empire!\n"
 "§e§lClick here to start!"
 msgstr ""
-"Start yer skyblock journey\n"
-"by startin' yer own island.\n"
-"Complete challenges to earn\n"
-"items an' skybucks to help\n"
-"expand yer skyblock. Ye can\n"
-"invite others to join in\n"
-"buildin' yer island empire!\n"
-"§e§lClick here to start!"
+"Starta ditt Skyblock äventyr\n"
+"genom att starta din egna ö.\n"
+"Gör uppdrag för att tjäna\n"
+"saker och pengar för att ut-\n"
+"veckla din ö. Du kan bjuda in\n"
+"andra till att gå med i ön,\n"
+"och bygga erat imperium!\n"
+"§e§lKlicka här för att starta!"
 
 msgid "§a§lJoin an Island"
-msgstr "§a§lJoin an Island"
+msgstr "§a§lGå med i en ö"
 
 msgid ""
 "Want to join another player's\n"
@@ -1799,17 +1805,17 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Want to join another pirate's\n"
-"island instead of startin'\n"
-"yer own? If another pirate\n"
-"invites ye to their island\n"
-"ye can click here or use\n"
-"§e/island accept§f to join 'em.\n"
-"§e§lClick here to accept an invite!\n"
-"§e§l(Ye must be invited first)"
+"Vill du gå med i en annan\n"
+"spelares ö istället för att starta\n"
+"din egna? Om en spelare\n"
+"bjuder in dig till sin ö så\n"
+"klicka här eller använda\n"
+"§e/island accept§f för att gå med.\n"
+"§e§lKlicka här för att tacka ja!\n"
+"§e§l(Du måste bli inbjuden först)"
 
 msgid "§a§lIsland Help"
-msgstr "§a§lIsland Help"
+msgstr "§a§lSkyblock hjälp"
 
 msgid ""
 "Need help with skyblock\n"
@@ -1817,13 +1823,13 @@ msgid ""
 "details about them here.\n"
 "§e§lClick here for help!"
 msgstr ""
-"Need help with skyblock\n"
-"concepts or commands? View\n"
-"details about 'em here.\n"
-"§e§lClick here for help!"
+"Behöver du hjälp med Skyblock\n"
+"koncept eller kommandon? Visa\n"
+"detaljer om dem här.\n"
+"§e§lKlicka här för hjälp!"
 
 msgid "§a§lReturn Home"
-msgstr "§a§lReturn Home"
+msgstr "§a§lÅtervänd hem"
 
 msgid ""
 "Return to your island's home\n"
@@ -1832,14 +1838,14 @@ msgid ""
 "island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
-"Return to yer island's home\n"
-"point. Ye can change yer home\n"
-"point to any location on yer\n"
-"island usin' §b/island sethome\n"
-"§e§lClick here to return home."
+"Återvänd till din Skyblocks\n"
+"hem. Du kan flytta ditt hem\n"
+"till en annan position på ön\n"
+"med §b/island sethome\n"
+"§e§lKlicka här för att återvända hem."
 
 msgid "§a§lChallenges"
-msgstr "§a§lChallenges"
+msgstr "§a§lUppdrag"
 
 msgid ""
 "View a list of §9challenges that\n"
@@ -1847,23 +1853,23 @@ msgid ""
 "to earn skybucks, items, perks,\n"
 "and titles."
 msgstr ""
-"View a list of §9challenges that\n"
-"ye can complete on yer island\n"
-"to earn skybucks, items, perks,\n"
-"an' titles."
+"Visar en lista av §9uppdrag som\n"
+"du kan göra på ön för att\n"
+"tjäna pengar, saker och andra,\n"
+"titlar."
 
 msgid "§e§lClick here to view challenges."
-msgstr "§e§lClick here to view challenges."
+msgstr "§e§lKlicka här för att visa uppdrag."
 
 msgid "§4§lChallenges disabled."
-msgstr "§4§lChallenges disabled."
+msgstr "§4§lUppdrag inaktiverat."
 
 msgid "§a§lIsland Level"
-msgstr "§a§lIsland Treasure"
+msgstr "§a§lSkyblock Level"
 
 #, java-format
 msgid "§eCurrent Level: §a{0,number,##.#}"
-msgstr "§eCurrent Treasure: §a{0,number,##.#}"
+msgstr "§eNuvarande level: §a{0,number,##.#}"
 
 msgid ""
 "Gain island levels by expanding\n"
@@ -1873,15 +1879,15 @@ msgid ""
 "§e§lClick here to refresh.\n"
 "§e§l(must be on island)"
 msgstr ""
-"Gain island treasure by expandin'\n"
-"yer skyblock an' completin'\n"
-"certain challenges. Rarer blocks\n"
-"will add more to yer treasure.\n"
-"§e§lClick here to refresh.\n"
-"§e§l(must be on island)"
+"Tjäna levelar genom att utveckla\n"
+"ön och genomföra olika\n"
+"uppdrag. Sällsynta block ger\n"
+"mer till din Skyblock level.\n"
+"§e§lKlicka här för att uppdatera.\n"
+"§e§l(Måste vara på ön)"
 
 msgid "Island Group"
-msgstr "Island Group"
+msgstr "Skyblockgrupp"
 
 msgid ""
 "View the members of your island\n"
@@ -1890,32 +1896,32 @@ msgid ""
 "can change the member permissions.\n"
 "§e§lClick here to view or change."
 msgstr ""
-"View the members of yer island\n"
-"group an' their permissions. If\n"
-"ye be the island captain, ye\n"
-"can change the mates permissions.\n"
-"§e§lClick here to view or change."
+"Visa öns gruppmedlemmar\n"
+"och deras rättigheter. Om du\n"
+"är gruppledare så kan du också\n"
+"ändra spelares rättigheter.\n"
+"§e§lKlicka här för att visa eller ändra."
 
 msgid "Change Island Biome"
-msgstr "Change Island Biome"
+msgstr "Byt Biome"
 
 msgid ""
 "The island biome affects things\n"
 "like grass color and spawning\n"
 "of both animals and monsters."
 msgstr ""
-"The island biome affects thin's\n"
-"like grass color an' spawnin'\n"
-"of both animals an' monsters."
+"Öns biome påverkar saker som\n"
+"gräsets färg och spawnande av\n"
+"både djur och monster."
 
 msgid "§e§lClick here to change biomes."
-msgstr "§e§lClick here to change biomes."
+msgstr "§e§lKlicka här för att byta biome."
 
 msgid "§c§lYou can't change the biome."
-msgstr "§c§lYe can't change the biome."
+msgstr "§c§lDu får inte byte biome."
 
 msgid "§a§lIsland Lock"
-msgstr "§a§lIsland Lock"
+msgstr "§a§lSkyblock Lås"
 
 msgid ""
 "§eLock Status: §aActive\n"
@@ -1923,16 +1929,16 @@ msgid ""
 "§fPlayers outside of your group\n"
 "§fare unable to enter your island."
 msgstr ""
-"§eLock Status: §aActive\n"
-"§fYer island be currently §clocked.\n"
-"§fPirates outside of yer group\n"
-"§fbe unable to enter yer island."
+"§eLåsstatus: §aAktivt\n"
+"§fDin ör är låst just nu.\n"
+"§fSpelare utanför ön kan inte\n"
+"§fbeträda ön."
 
 msgid "§e§lClick here to unlock your island."
-msgstr "§e§lClick here to unlock yer island."
+msgstr "§e§lKlicka här för att låsa upp ön."
 
 msgid "§c§lYou can't change the lock."
-msgstr "§c§lYe can't change the lock."
+msgstr "§c§lDu kan inte ändra låset."
 
 msgid ""
 "§eLock Status: §8Inactive\n"
@@ -1941,17 +1947,16 @@ msgid ""
 "§fisland, but only you and your group\n"
 "§fmembers may build there."
 msgstr ""
-"§eLock Status: §8Inactive\n"
-"§fYer island be currently §aunlocked.\n"
-"§fAll pirates be able to enter yer\n"
-"§fisland, but only ye an' yer group\n"
-"§fmembers may build there."
+"§eLåsstatus: §aInaktivt\n"
+"§fDin ör är olåst just nu.\n"
+"§fSpelare utanför ön kan\n"
+"§fbeträda ön men inte bygga."
 
 msgid "§e§lClick here to lock your island."
-msgstr "§e§lClick here to lock yer island."
+msgstr "§e§lKlicka här för att låsa ön."
 
 msgid "§a§lIsland Warp"
-msgstr "§a§lIsland Warp"
+msgstr "§a§lSkyblock Warp"
 
 msgid ""
 "§eWarp Status: §aActive\n"
@@ -1959,16 +1964,15 @@ msgid ""
 "§fisland at anytime to the point\n"
 "§fyou set using §d/island setwarp."
 msgstr ""
-"§eWarp Status: §aActive\n"
-"§fOther pirates may warp to yer\n"
-"§fisland at anytime to the point\n"
-"§fye set usin' §d/island setwarp."
+"§eWarpstatus: §aAktivt\n"
+"§fAndra spelare kan warpa till din\n"
+"§fö när som helst."
 
 msgid "§e§lClick here to deactivate."
-msgstr "§e§lClick here to deactivate."
+msgstr "§e§lKlicka här för att inaktivera."
 
 msgid "§c§lYou can't change the warp."
-msgstr "§c§lYe can't change the warp."
+msgstr "§c§lDu kan inte ändra warpen."
 
 msgid ""
 "§eWarp Status: §8Inactive\n"
@@ -1976,16 +1980,15 @@ msgid ""
 "§fisland. Set a warp point using\n"
 "§d/island setwarp §fbefore activating."
 msgstr ""
-"§eWarp Status: §8Inactive\n"
-"§fOther pirates can't warp to yer\n"
-"§fisland. Set a warp point usin'\n"
-"§d/island setwarp §fbefore activatin'."
+"§eWarpstatus: §aInaktivt\n"
+"§fAndra spelare kan inte warpa till\n"
+"§fön eftersom warpen är inaktiverad.."
 
 msgid "§e§lClick here to activate."
-msgstr "§e§lClick here to activate."
+msgstr "§e§lKlicka här för att aktivera."
 
 msgid "§a§lIsland Log"
-msgstr "§a§lIsland Log"
+msgstr "§a§lSkyblock Logg"
 
 msgid ""
 "View a log of events from\n"
@@ -1993,13 +1996,13 @@ msgid ""
 "biome, and warp changes.\n"
 "§e§lClick to view the log."
 msgstr ""
-"View a log of events from\n"
-"yer island such as mates,\n"
-"biome, an' warp changes.\n"
-"§e§lClick to view the log."
+"Visa en logg av events från\n"
+"ön som spelare, biome och,\n"
+"warp ändringar.\n"
+"§e§lKlicka här för att visa loggen."
 
 msgid "§a§lChange Home Location"
-msgstr "§a§lChange Home Location"
+msgstr "§a§lFlytta Hem Position"
 
 msgid ""
 "When you teleport to your\n"
@@ -2007,13 +2010,13 @@ msgid ""
 "this location.\n"
 "§e§lClick here to change."
 msgstr ""
-"When ye teleport to yer\n"
-"island ye will be taken to\n"
-"this location.\n"
-"§e§lClick here to change."
+"När du teleporterar till din\n"
+"ö så teleporteras du till\n"
+"denna position.\n"
+"§e§lKlicka här för att ändra."
 
 msgid "§a§lChange Warp Location"
-msgstr "§a§lChange Warp Location"
+msgstr "§a§lFlytta Warp Position"
 
 msgid ""
 "When your warp is activated,\n"
@@ -2022,71 +2025,71 @@ msgid ""
 "to your island.\n"
 "§e§lClick here to change."
 msgstr ""
-"When yer warp be activated,\n"
-"other pirates will be taken to\n"
-"this point when they teleport\n"
-"to yer island.\n"
-"§e§lClick here to change."
+"När warpen är aktiv så\n"
+"teleporteras andra spelare till\n"
+"denna position när de\n"
+"teleporterar till din ö.\n"
+"§e§lKlicka här för att ändra."
 
 msgid "Caps On"
-msgstr "Caps On"
+msgstr "Caps På"
 
 msgid "§9Text Editor"
-msgstr "§9Text Editor"
+msgstr "§9Textredigerare"
 
 msgid "Something went wrong saving the island and/or party data!"
-msgstr "Somethin' went awry storin' the island an'/or party data!"
+msgstr "Något gick fel när när data skulle sparas!"
 
 msgid "§4Player is already assigned to this island!"
-msgstr "§4Pirate be already assigned to this island!"
+msgstr "§cSpelaren är redan tilldelad denna ö!"
 
 msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4Ye be not part of an island. Returnin' ye the spawn area!"
+msgstr "§cDu är inte medlem på någon ö. Återvänder till spawnen."
 
 msgid "§aTeleporting you to your island."
-msgstr "§aTeleportin' ye to yer island."
+msgstr "§aTeleporterar dig till din ö."
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aYe will be teleported in {0} seconds."
+msgstr "§aDu kommer att teleporteras om {0} sekunder."
 
 msgid "§4Unable to warp you to that player's island!"
-msgstr "§4Unable to warp ye to that pirate's island!"
+msgstr "§4Kan inte warpa till den spelarens ö!"
 
 #, java-format
 msgid "§aTeleporting you to {0}'s island."
-msgstr "§aTeleportin'' ye to {0}''s island."
+msgstr "§aTeleporterar dig till {0}s ö."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
-msgstr "§4Ye must be closer to yer island to set yer skyblock home!"
+msgstr "§cDu måste vara på din ö för att ställa in hemposition."
 
 msgid "§aYour skyblock home has been set to your current location."
-msgstr "§aYer skyblock home has been set to yer current location."
+msgstr "§aDin hemposition har ställts in till nuvarande position."
 
 msgid "§4Your current location is not a safe home-location."
-msgstr "§4Yer current location be not a safe home-location."
+msgstr "§cDin nuvarande position är inte en säker hemposition."
 
 msgid "Could not create your Island. Please contact a server moderator."
-msgstr "Could not create yer Island. Please contact a server moderator."
+msgstr "Kan inte skapa din ö. Vänligen kontakta en administratör."
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
-msgstr "§eGettin' yer island ready, please be patient, it can take a while."
+msgstr "§eFörbereder din ö, vänligen vänta lite..."
 
 msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§aCongratulations! §eYer island has appeared."
+msgstr "§aGrattis! §eDin ö har skapats."
 
 msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§cNote:§e Construction might still be ongoin'."
+msgstr "§cViktigt:§e Konstruktion kan fortfarande pågå."
 
 msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr "Använd §9/is h§r för att komma till ön."
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr "§eYay! We found a vacancy closer to spawn. §9Clearin' it for ye..."
+msgstr "§eVi hittade en plats närmare spawn. §9Fixar den åt dig."
 
 #, java-format
 msgid "§7Name: §b{0}\n"
-msgstr "§7Name: §b{0}\n"
+msgstr "§7Namn: §b{0}\n"
 
 #, java-format
 msgid "§7Version: §b{0}\n"
@@ -2094,12 +2097,13 @@ msgstr "§7Version: §b{0}\n"
 
 #, java-format
 msgid "§7Description: §b{0}\n"
-msgstr "§7Description: §b{0}\n"
+msgstr "§7Beskrivning: §b{0}\n"
 
 #, java-format
 msgid "§7Language: §b{0} ({1})\n"
-msgstr "§7Language: §b{0} ({1})\n"
+msgstr "§7Språk: §b{0} ({1})\n"
 
+# ???
 msgid "§7------------------------------\n"
 msgstr "§7------------------------------\n"
 
@@ -2108,31 +2112,35 @@ msgid "§7Server: §e{0} {1}\n"
 msgstr "§7Server: §e{0} {1}\n"
 
 msgid "§2ENABLED"
-msgstr "§2ENABLED"
+msgstr "§aAKTIVERAD"
 
 msgid "§4DISABLED"
-msgstr "§4DISABLED"
+msgstr "§cINAKTIVERAD"
 
 msgid "N/A"
 msgstr "N/A"
 
 #, java-format
 msgid "§7Name: §d{0} ({1})\n"
-msgstr "§7Name: §d{0} ({1})\n"
+msgstr "§7Namn: §d{0} ({1})\n"
 
 #, java-format
 msgid "§7Version: §d{0}\n"
 msgstr "§7Version: §d{0}\n"
 
+# ???
 msgid "d"
 msgstr "d"
 
+# ???
 msgid "h"
 msgstr "h"
 
+# ???
 msgid "m"
 msgstr "m"
 
+# ???
 msgid "s"
 msgstr "s"
 

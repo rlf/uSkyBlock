@@ -144,6 +144,7 @@ public class LevelLogic {
         final List<ChunkSnapshot> snapshotsOverworld = createChunkSnapshots(l, region);
         Location netherLoc = l.clone();
         netherLoc.setWorld(plugin.getSkyBlockNetherWorld());
+        netherLoc.setY(netherLoc.getY()/2);
         final ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherLoc);
         final List<ChunkSnapshot> snapshotsNether = createChunkSnapshots(netherLoc, netherRegion);
 
@@ -264,7 +265,8 @@ public class LevelLogic {
         return new IslandScore(score / pointsPerLevel, blocks);
     }
 
-    private void addBlockCount(int blockId, int[] counts) {
+    private void addBlockCount(int id, int[] counts) {
+        int blockId = id;
         if (blockId < 0 || blockId >= MAX_INDEX) {
             return;
         }
@@ -272,10 +274,12 @@ public class LevelLogic {
             blockId = blockId & (~DATA_MASK); // remove sub-type
         } else if (blockValue[blockId] < -1) {
             // Direct addressing
-            blockId = -(Math.round(blockValue[blockId]) & 0x7fffffff);
+            blockId = (-Math.round(blockValue[blockId])) << DATA_BITS;
         }
         if (blockId >= 0 && blockId < MAX_INDEX) {
             counts[blockId] += 1;
+        } else {
+            log.warning("Invalid blockId value from levelConfig.yml: " + id + " -> " + blockId);
         }
     }
 

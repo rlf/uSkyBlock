@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.handler;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldType;
@@ -39,7 +38,6 @@ public enum MultiverseCoreHandler {;
             }
             MultiverseWorld mvWorld = core.getMVWorldManager().getMVWorld(skyWorld);
             mvWorld.setEnvironment(World.Environment.NORMAL);
-            mvWorld.setDifficulty(Difficulty.NORMAL);
             mvWorld.setScaling(1);
             mvWorld.setGenerator("uSkyBlock");
             if (Settings.general_spawnSize > 0) {
@@ -69,7 +67,6 @@ public enum MultiverseCoreHandler {;
             }
             MultiverseWorld mvWorld = core.getMVWorldManager().getMVWorld(skyNetherWorld);
             mvWorld.setEnvironment(World.Environment.NETHER);
-            mvWorld.setDifficulty(Difficulty.NORMAL);
             mvWorld.setScaling(1.0);
             mvWorld.setGenerator("uSkyBlock");
             if (Settings.general_spawnSize > 0) {

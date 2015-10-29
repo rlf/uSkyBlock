@@ -39,7 +39,7 @@ import java.util.logging.Logger;
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
     private static final Logger log = Logger.getLogger(CN);
-    private static final String VERSION = "11";
+    private static final String VERSION = "12";
 
     public static WorldGuardPlugin getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
@@ -153,7 +153,7 @@ public class WorldGuardHandler {
         BlockVector minPoint = getProtectionVectorRight(islandLocation);
         BlockVector maxPoint = getProtectionVectorLeft(islandLocation);
         if (regionName != null && regionName.endsWith("nether")) {
-            minPoint = new BlockVector(minPoint.setY(10));
+            minPoint = new BlockVector(minPoint.setY(3));
             maxPoint = new BlockVector(maxPoint.setY(120));
         }
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName, minPoint, maxPoint);
