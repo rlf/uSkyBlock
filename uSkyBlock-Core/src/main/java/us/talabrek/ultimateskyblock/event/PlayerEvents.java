@@ -121,6 +121,7 @@ public class PlayerEvents implements Listener {
                 && plugin.isSkyWorld(player.getWorld())
                 && event.getAction() == Action.RIGHT_CLICK_BLOCK
                 && player.getItemInHand().getType() == Material.BUCKET
+                && player.getItemInHand().getAmount() == 1
                 && block != null
                 && block.getType() == Material.OBSIDIAN
                 && !testForObsidian(block)) {
