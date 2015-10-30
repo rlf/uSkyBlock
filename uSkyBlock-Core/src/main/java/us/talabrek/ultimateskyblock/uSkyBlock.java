@@ -212,6 +212,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
+                if (VaultHandler.setupEconomy()) {
+                    getLogger().log(Level.INFO, "uSkyBlock hooked into Vault Economy");
+                }
+                if (VaultHandler.setupPermissions()) {
+                    getLogger().log(Level.INFO, "uSkyBlock hooked into Vault Permissions");
+                }
                 try {
                     FileConfiguration config = getLastIslandConfig();
                     if (!config.contains("options.general.lastIslandX") && getConfig().contains("options.general.lastIslandX")) {
