@@ -65,7 +65,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 removePlayerFromIsland(sender, playerInfo, islandInfo);
             }
         });
-        add(new AbstractIslandInfoCommand("info", null, I18nUtil.tr("print out info about the island")) {
+        add(new AbstractIslandInfoCommand("info", "usb.admin.info", I18nUtil.tr("print out info about the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 sender.sendMessage(islandInfo.toString());
