@@ -79,7 +79,9 @@ public class SkyBlockMenu {
 
     public Inventory displayPartyPlayerGUI(final Player player, final String pname) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 9, tr("{0} <{1}>", pname, tr("Permissions")));
+        String emptyTitle = tr("{0} <{1}>", "", tr("Permissions"));
+        String title = tr("{0} <{1}>", pname.substring(0, Math.min(32-emptyTitle.length(), pname.length())), tr("Permissions"));
+        Inventory menu = Bukkit.createInventory(null, 9, title);
         final ItemStack pHead = new ItemStack(397, 1, (short) 3);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = sign.getItemMeta();
