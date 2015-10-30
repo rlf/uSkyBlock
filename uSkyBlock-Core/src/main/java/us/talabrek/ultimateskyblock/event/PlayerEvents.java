@@ -120,6 +120,7 @@ public class PlayerEvents implements Listener {
         if (Settings.extras_obsidianToLava && plugin.playerIsOnIsland(player)
                 && plugin.isSkyWorld(player.getWorld())
                 && event.getAction() == Action.RIGHT_CLICK_BLOCK
+                && player.getItemInHand() != null
                 && player.getItemInHand().getType() == Material.BUCKET
                 && player.getItemInHand().getAmount() == 1
                 && block != null
