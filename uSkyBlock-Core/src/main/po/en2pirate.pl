@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-use URI::Encode qw(uri_encode);
 use utf8;
 
 my $filename = 'keys.pot';

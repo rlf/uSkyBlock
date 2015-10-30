@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-09-30 21:32+0200\n"
+"PO-Revision-Date: 2015-10-30 23:22+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -360,7 +360,7 @@ msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}s ø ved {1} var allerede beskyttet"
 
 msgid "open GUI for config"
-msgstr ""
+msgstr "vis konfigurations UI"
 
 msgid "Controls player-cooldowns"
 msgstr "Håndterer spiller-cooldowns"
@@ -1071,17 +1071,17 @@ msgstr "§4Ukendt spiller {0}"
 msgid "§eYou are now trusted on §4{0}'s §eisland."
 msgstr "§eDu er nu betroet på §4{0}§es ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§a{0} trusted {1} on the island"
-msgstr "{0} forsøgte at overtage øen!"
+msgstr "§a{0} tilføjede {1} som ven til øen"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
 msgstr "§eDu er ikke længere betroet på §4{0}§es ø."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§c{0} revoked trust in {1} on the island"
-msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
+msgstr "§c{0} fjernede {1} som ven af øen"
 
 msgid "warp to another player's island"
 msgstr "besøg en andens ø"
@@ -1168,18 +1168,17 @@ msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
 msgstr "§eDu kan ikke tage andres ting. Gå hjem - snyder!"
 
 msgid "§eVisitors can't drop items!"
-msgstr ""
+msgstr "§eBesøgende kan ikke smide ting!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "Owner: {0}"
-msgstr "Rank: {0}"
+msgstr "Ejer: {0}"
 
-#, fuzzy
 msgid "You cannot pick up other players' loot when you are a visitor!"
-msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
+msgstr "Du kan ikke samle en andens ting op, når du er besøgende!"
 
 msgid "Config:"
-msgstr ""
+msgstr "Konfiguration:"
 
 msgid ""
 "§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
@@ -1319,72 +1318,73 @@ msgstr ""
 
 #, java-format
 msgid "Page {0,number,integer}"
-msgstr ""
+msgstr "Side {0,number,integer}"
 
 msgid "§c-"
-msgstr ""
+msgstr "§c-"
 
-#, fuzzy
 msgid "§a+"
-msgstr "§a"
+msgstr "§a+"
 
 msgid "§c-1000"
-msgstr ""
+msgstr "§c-1000"
 
 msgid "§c-100"
-msgstr ""
+msgstr "§c-100"
 
 msgid "§c-10"
-msgstr ""
+msgstr "§c-10"
 
 msgid "§c-1"
-msgstr ""
+msgstr "§c-1"
 
 msgid "§a+1"
-msgstr ""
+msgstr "§a+1"
 
 msgid "§a+10"
-msgstr ""
+msgstr "§a+10"
 
 msgid "§a+100"
-msgstr ""
+msgstr "§a+100"
 
 msgid "§a+1000"
-msgstr ""
+msgstr "§a+1000"
 
 msgid "Return"
-msgstr ""
+msgstr "Tilbage"
 
 msgid "§9Integer Editor"
-msgstr ""
+msgstr "§9Tal Redigering"
 
 msgid "§9Item List Editor"
-msgstr ""
+msgstr "§9Item List Editor"
 
-#, fuzzy
 msgid "§eConfiguration saved and reloaded."
-msgstr "§eKonfigurationen blev genindlæst fra fil."
+msgstr "§eKonfigurationen gemt og genindlæst."
 
 msgid "§cError! §9Unable to save config file!"
-msgstr ""
+msgstr "§cFejl! §9Kunne ikke gemme konfigurationsfilen!"
 
 msgid "§cSave & Reload config"
-msgstr ""
+msgstr "§cGem og genindlæs konfigurationen"
 
 msgid ""
 "§7Saves the settings to\n"
 "§7file & reloads again.\n"
 "§cNote: §7Use with care!"
 msgstr ""
+"§7Gemmer indstillingerne\n"
+"§7& genindlæser pluginnet.\n"
+"§cBemærk: §7Brug på eget ansvar!"
 
 msgid "§7 (readonly)"
-msgstr ""
+msgstr "§7 (låst)"
 
 msgid "true"
-msgstr ""
+msgstr "sand"
 
 msgid "false"
-msgstr ""
+msgstr "falsk"
 
 msgid "Challenge Menu"
 msgstr "Udfordringer"
@@ -1730,11 +1730,9 @@ msgstr ""
 "(inklusive heste) og fjentlige\n"
 "monstre/dyr vil spawne normalt"
 
-#, fuzzy
 msgid "Deep Ocean"
-msgstr "Hav"
+msgstr "Dybhav"
 
-#, fuzzy
 msgid ""
 "The deep-ocean biome is an advanced\n"
 "biome. Passive mobs like animals will\n"
@@ -1742,11 +1740,11 @@ msgid ""
 "(including Guardians) will\n"
 "spawn normally."
 msgstr ""
-"Hav biomen er den normale\n"
-"start biome for alle øer.\n"
-"Passive mobs som dyr vil ikke\n"
-"spawne. Fjentlige monstre og dyr\n"
-"vil spawne normalt."
+"Dybhavs biomen er en avanceret\n"
+"biome. Passive mobs som dyr vil\n"
+"ikke spawne. Fjentlige monstre \n"
+"(inkl. Guardians) vil spawne\n"
+"normalt."
 
 #, java-format
 msgid "Biome: {0}"
@@ -2031,10 +2029,10 @@ msgstr ""
 "§e§lKlik for at ændre."
 
 msgid "Caps On"
-msgstr ""
+msgstr "Caps On"
 
 msgid "§9Text Editor"
-msgstr ""
+msgstr "§9Tekst Redigering"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Der opstod en fejl under gemning af øens data!"

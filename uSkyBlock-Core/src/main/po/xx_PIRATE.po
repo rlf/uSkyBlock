@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -637,8 +637,8 @@ msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
 msgstr ""
-"§4Yer island be full, or ye have too many pendin' invites. Ye can't invite "
-"anyone else."
+"§4Yer island be full, or ye have too many pendin' invites. Ye can't "
+"invite anyone else."
 
 msgid "§4That player is already leader on another island."
 msgstr "§4That pirate be already captain on another island."
@@ -729,7 +729,8 @@ msgstr "change the biome of the island"
 
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
-msgstr "§cYe do not have permission to change the biome of yer current island."
+msgstr ""
+"§cYe do not have permission to change the biome of yer current island."
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -786,8 +787,8 @@ msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
 "right now."
 msgstr ""
-"§cYer island be in the process of generatin', ye cannot teleport home right "
-"now."
+"§cYer island be in the process of generatin', ye cannot teleport home "
+"right now."
 
 msgid "check your or anothers island info"
 msgstr "check yer or anothers island info"
@@ -1171,8 +1172,8 @@ msgid ""
 "§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
 "that is not allowed."
 msgstr ""
-"§cNay Access! §eYe be tryin' to teleport to the roof of the §cNETHER§e, that "
-"be not allowed."
+"§cNay Access! §eYe be tryin' to teleport to the roof of the §cNETHER§e, "
+"that be not allowed."
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eChangin' yer obsidian back into lava. Be careful!"
@@ -1230,8 +1231,8 @@ msgid ""
 "§eYour island is unlocked and anyone may enter, however only you and your "
 "party members may build or remove blocks."
 msgstr ""
-"§eYer island be unlocked an' anyone may enter, however only ye an' yer party "
-"members may build or remove blocks."
+"§eYer island be unlocked an' anyone may enter, however only ye an' yer "
+"party members may build or remove blocks."
 
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Ye must be the party captain to unlock yer island!"
