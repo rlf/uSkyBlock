@@ -250,9 +250,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                             playerLogic.loadPlayerDataAsync(player);
                         }
                     }
-                }, 50L);
+                }, getConfig().getLong("init.loadPlayerDelay", 50L));
             }
-        }, 50L);
+        }, getConfig().getLong("init.initDelay", 50L));
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
