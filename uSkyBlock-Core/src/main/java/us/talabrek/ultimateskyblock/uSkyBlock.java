@@ -984,17 +984,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                 Bukkit.getScheduler().runTaskLater(uSkyBlock.this, completionWatchDog, 0);
             }
         };
-        if (orphanLogic.wasOrphan(next))
-
-        {
+        if (orphanLogic.wasOrphan(next)) {
             // Create a WG region to be used for deleting it
             player.sendMessage(tr("\u00a7eYay! We found a vacancy closer to spawn. \u00a79Clearing it for you..."));
             IslandInfo tempInfo = islandLogic.createIslandInfo(LocationUtil.getIslandName(next), pi.getPlayerName());
             WorldGuardHandler.protectIsland(this, player, tempInfo);
             islandLogic.clearIsland(next, createTask);
-        } else
-
-        {
+        } else {
             createTask.run();
         }
     }

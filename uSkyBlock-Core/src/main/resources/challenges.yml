@@ -39,11 +39,13 @@ lockedDisplayItem: STAINED_GLASS_PANE:14
 
 ranks:
   Easy:
+    name: '&aEasy Challenges'
     displayItem: DIRT
     resetInHours: 20
     challenges:
       #[text] The name of the challenge that shows up when you do /challenges. All challenge names should be lower case.
       cobblestonegenerator:
+        name: '&7Cobble Stone Generator'
         # [text] What the player sees when they do /challenges <challengename>
         description: 'Mine from a cobblestone generator.'
         # [onIsland/onPlayer/islandLevel] This tells whether the required blocks/items should be in the player's inventory or on their island
@@ -731,4 +733,4 @@ ranks:
           currency: 50
           xp: 50
 # DO NOT CHANGE!
-version: 14
+version: 15

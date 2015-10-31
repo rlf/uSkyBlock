@@ -160,8 +160,7 @@ public class IslandLogic {
             log.log(Level.WARNING, "Trying to delete an island - with no WG region! ({0})", LocationUtil.asString(loc));
             afterDeletion.run();
         }
-        Location netherIsland = loc.clone();
-        netherIsland.setWorld(plugin.getSkyBlockNetherWorld());
+        Location netherIsland = getNetherLocation(loc);
         ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherIsland);
         if (netherRegion != null) {
             for (Player player : WorldGuardHandler.getPlayersInRegion(netherIsland.getWorld(), netherRegion)) {
@@ -172,6 +171,13 @@ public class IslandLogic {
             }
             WorldEditHandler.clearNetherIsland(netherIsland.getWorld(), netherRegion, null);
         }
+    }
+
+    private Location getNetherLocation(Location loc) {
+        Location netherIsland = loc.clone();
+        netherIsland.setWorld(plugin.getSkyBlockNetherWorld());
+        loc.setY(loc.getY()/2);
+        return netherIsland;
     }
 
     public boolean clearFlatland(final CommandSender sender, final Location loc, final int delay) {
