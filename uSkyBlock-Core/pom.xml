@@ -360,7 +360,7 @@
         <dependency>
             <groupId>com.googlecode.gettext-commons</groupId>
             <artifactId>gettext-commons</artifactId>
-            <version>0.9.8</version>
+            <version>0.9.9</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

@@ -83,7 +83,7 @@ public enum I18nUtil {;
         public String tr(String key, Object... args) {
             if (messages != null && messages.containsKey(key)) {
                 if (args.length > 0) {
-                    return MessageFormat.format(messages.getProperty(key), args);
+                    return new MessageFormat(messages.getProperty(key), getLocale()).format(args);
                 } else {
                     return messages.getProperty(key);
                 }

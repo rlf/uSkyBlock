@@ -1,14 +1,9 @@
-# Swedish translation of uSkyBlock
-# Copyright (C) 2015
-# This file is distributed under the same license as the PACKAGE package.
-# maol3 <martin@ntilan.se>, 2015
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-10-28 22:22+0100\n"
-"Last-Translator: maol3 martin@ntilan.se\n"
+"PO-Revision-Date: 2015-10-31 23:07+0100\n"
+"Last-Translator: maol3 <martin@ntilan.se> \n"
 "Language-Team: SV <LL@li.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -507,7 +502,7 @@ msgstr "byter språk på pluginet och laddar om"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr "§cBytte språk till §e{0}"
+msgstr "§aSpråket har ändrats till §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
@@ -535,7 +530,7 @@ msgid ""
 "§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
 "to remove him first."
 msgstr ""
-"§eSpelaren §f{0}§e har redan en ö. §eAnvänd §f/usb Island remove <namn>§e "
+"§eSpelaren §f{0}§e har redan en ö. §eAnvänd §f/usb island remove <namn>§e "
 "för att ta bort spelaren först."
 
 #, java-format
@@ -660,7 +655,8 @@ msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e har bjudit in dig till att gå med i deras ö!"
 
 msgid "§f/island [accept/reject]§e to accept or reject the invite."
-msgstr "§f/island [accept/reject]§e för att tacka ja eller nej till inbjudan."
+msgstr ""
+"§f/jatack§e eller §f/nejtack§e för att tacka ja eller nej till inbjudan."
 
 msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§cVARNING: Du kommer att förlora din nuvarande ö om du tackar ja!"
@@ -676,7 +672,7 @@ msgstr ""
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
-"§aDu har gått med en ö! Använd /is party för att visa andra gruppmedlemmar."
+"§aDu har gått med en ö! Använd /lista för att visa andra gruppmedlemmar."
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
@@ -709,7 +705,7 @@ msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eFöljande spelare är bannad från att warpa till din ö:"
 
 msgid "§eTo ban/unban from your island, use /island ban <player>"
-msgstr "§eFör att banna eller unbanna från din ö, använd /is ban <namn>"
+msgstr "§eFör att banna eller unbanna från din ö, använd /banna <namn>"
 
 msgid "§4You can't ban members. Remove them first!"
 msgstr "§cDu kan inte banna gruppmedlemmar. Ta bort dem från ön först!"
@@ -774,15 +770,15 @@ msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
 msgstr ""
-"§cEn ö hittades!§e Du har redan en ö. Om du vill ha en ny, skriv§b /is "
-"restart§e för att få en."
+"§cEn ö hittades!§e Du har redan en ö. Om du vill ha en ny, skriv§b /reset§e "
+"för att få en."
 
 msgid ""
 "§4Island found!§e You are already a member of an island. To start your own, "
 "first§b /is leave"
 msgstr ""
 "§cEn ö hittades!§e Du är redan medlem i en grupp. För att starta en egen, så "
-"måste du först lämna med §b/is leave"
+"måste du först lämna med §b/lämna"
 
 #, java-format
 msgid "§eYou can create a new island in {0,number,#} seconds."
@@ -826,8 +822,7 @@ msgstr "bjud in en spelare till din ö"
 
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
-msgstr ""
-"§eAnvänd§f /Island invite <namn§e för att bjuda in spelaren till din ö."
+msgstr "§eAnvänd§f /bjudin <namn§e för att bjuda in spelaren till din ö."
 
 msgid "§4Only the island's owner can invite!"
 msgstr "§cEndast gruppledaren kan bjuda in spelare till ön!"
@@ -893,11 +888,11 @@ msgid ""
 "§4You can't leave your island if you are the only person. Try using /island "
 "restart if you want a new one!"
 msgstr ""
-"§cDu kan inte lämna din ö om du är den enda personen. Använd /Island restart "
-"om du vill ha en ny!"
+"§cDu kan inte lämna din ö om du är den enda personen. Använd /reset om du "
+"vill ha en ny!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
-msgstr "§eDu är gruppledaren, använd /Island remove <namn> istället."
+msgstr "§eDu är gruppledaren, använd /kicka <namn> istället."
 
 msgid "§eYou have left the island and returned to the player spawn."
 msgstr "§eDu har lämnat ön och återvänt till spawnen."
@@ -918,7 +913,7 @@ msgstr "§eInformation om {0}s ö:"
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
-msgstr "§aSkyblock level är {0,number,0.##}"
+msgstr "§aSkyblock level är {0,number,###.##}"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -976,7 +971,7 @@ msgid "§4This command can only be executed by a player"
 msgstr "§cDetta kommando kan endast användas av spelare."
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
-msgstr "§cIngen ö hittades! §eAnvänd §b/is create§e för att få en"
+msgstr "§cIngen ö hittades! §eAnvänd §b/skapa§e för att få en"
 
 msgid "delete your island and start a new one."
 msgstr "ta bort din ö och starta en ny."
@@ -986,15 +981,15 @@ msgid ""
 "start your own (/island leave)."
 msgstr ""
 "§cEndast gruppledaren kan starta om ön. Lämna ön för att starta din egna (/"
-"is leave)."
+"lämna)."
 
 msgid ""
 "§eYou must remove all players from your island before you can restart it (/"
 "island kick <player>). See a list of players currently part of your island "
 "using /island party."
 msgstr ""
-"§eDu måste ta bort alla medlemmar från ön innan du kan starta om den (/is "
-"kick <namn>). Visa en lista av gruppmedlemmar med /is party."
+"§eDu måste ta bort alla medlemmar från ön innan du kan starta om den (/kicka "
+"<namn>). Visa en lista av gruppmedlemmar med /is party."
 
 #, java-format
 msgid "§cYou can restart your island in {0} seconds."
@@ -1070,7 +1065,7 @@ msgstr "§eDu är nu betrodd på §4{0}s ö."
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
-msgstr "{0} betrodde {1} på ön"
+msgstr "§a{0} betrodde {1} på ön"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
@@ -1090,10 +1085,10 @@ msgid "§4Your incoming warp is inactive, players may not warp to your island."
 msgstr "§cDin warp är inaktiv, spelare kan inte längre arpa till din ö."
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
-msgstr "§fStäll in warpen till nuvarande position med §e/is setwarp"
+msgstr "§fStäll in warpen till nuvarande position med §e/sättwarp"
 
 msgid "§fToggle your warp on/off using §e/island togglewarp"
-msgstr "§fAktivera eller inaktivera öns warp med §e/is togglewarp"
+msgstr "§fAktivera eller inaktivera öns warp med §e/warp"
 
 msgid "§4You do not have permission to create a warp on your island!"
 msgstr "§4Du saknar rättighet att skapa en warp på ön!"
@@ -1227,7 +1222,7 @@ msgstr ""
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
-msgstr "§dDu beträder nu §b{0}s §dSkyblock."
+msgstr "§d** Du beträder nu §b{0}s §dSkyblock."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."

@@ -72,6 +72,16 @@
             </releases>
         </repository>
         <repository>
+            <id>gettext-commons-mvn-repo</id>
+            <url>https://raw.github.com/rlf/gettext-commons/mvn-repo/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
             <id>spigotmc.org</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
         </repository>

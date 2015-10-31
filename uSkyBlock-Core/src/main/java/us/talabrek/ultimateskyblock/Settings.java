@@ -138,7 +138,6 @@ public class Settings {
         Locale loc = I18nUtil.getLocale(config.getString("language", null));
         if (loc != null) {
             locale = loc;
-            Locale.setDefault(locale);
         }
         nether_enabled = config.getBoolean("nether.enabled", false);
         if (nether_enabled && (island_distance % 32 != 0 || island_protectionRange % 32 != 0)) {
