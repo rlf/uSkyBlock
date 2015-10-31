@@ -176,7 +176,7 @@ public class IslandLogic {
     private Location getNetherLocation(Location loc) {
         Location netherIsland = loc.clone();
         netherIsland.setWorld(plugin.getSkyBlockNetherWorld());
-        loc.setY(loc.getY()/2);
+        netherIsland.setY(loc.getY()/2);
         return netherIsland;
     }
 
