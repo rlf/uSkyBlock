@@ -1207,6 +1207,10 @@ msgstr "§4Плохая идея переместить вашу лаву!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Этот игрок запретил вам телепортироваться на свой остров."
 
+#, fuzzy
+msgid "§4That island is §clocked.§e No teleporting to the island."
+msgstr "§4Этот игрок запретил вам телепортироваться на свой остров."
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cВы достигли предела спавнов на вашем острове."
 
@@ -1216,6 +1220,9 @@ msgstr "§eВы можете использовать спавн-яйца тол
 #, fuzzy
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§4Игрок уже прикреплен к острову!"
+
+msgid "§cLocked:§e That island is locked! No entry allowed."
+msgstr ""
 
 #, fuzzy, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
@@ -2049,6 +2056,10 @@ msgstr ""
 
 msgid "§9Text Editor"
 msgstr ""
+
+#, fuzzy
+msgid "§eSending you to spawn."
+msgstr "§aТелепортация на ваш остров."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""

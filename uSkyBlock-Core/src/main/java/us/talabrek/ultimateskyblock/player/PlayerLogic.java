@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+
 /**
  * Holds the active players
  */
@@ -26,6 +28,7 @@ public class PlayerLogic {
     private final LoadingCache<UUID, PlayerInfo> playerCache;
     private final uSkyBlock plugin;
     private final BukkitTask saveTask;
+
     public PlayerLogic(uSkyBlock plugin) {
         this.plugin = plugin;
         playerCache = CacheBuilder
@@ -46,7 +49,7 @@ public class PlayerLogic {
                            }
                        }
                 );
-        int every = plugin.getConfig().getInt("options.advanced.player.saveEvery", 20*60*2);
+        int every = plugin.getConfig().getInt("options.advanced.player.saveEvery", 20 * 60 * 2);
         saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
@@ -84,7 +87,7 @@ public class PlayerLogic {
 
         PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
 
-        Player onlinePlayer = Bukkit.getPlayer(playerName);
+        final Player onlinePlayer = Bukkit.getPlayer(playerName);
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
             plugin.getPlayerNameChangeManager().checkPlayer(onlinePlayer, playerInfo);
 
@@ -96,6 +99,24 @@ public class PlayerLogic {
                     islandInfo.updatePermissionPerks(onlinePlayer, plugin.getPerkLogic().getPerk(onlinePlayer));
                 }
             }
+            Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            if (plugin.isSkyAssociatedWorld(onlinePlayer.getWorld()) && !plugin.playerIsOnIsland(onlinePlayer)) {
+                                // Check if banned
+                                String islandName = WorldGuardHandler.getIslandNameAt(onlinePlayer.getLocation());
+                                IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+                                if (islandInfo != null && islandInfo.isBanned(onlinePlayer)) {
+                                    onlinePlayer.sendMessage(new String[]{
+                                            tr("\u00a7eYou have been §cBANNED§e from {0}§e''s island.", islandInfo.getLeader()),
+                                            tr("\u00a7eSending you to spawn.")
+                                    });
+                                    plugin.spawnTeleport(onlinePlayer, true);
+                                }
+                            }
+                        }
+                    }
+            );
         }
         return playerInfo;
     }

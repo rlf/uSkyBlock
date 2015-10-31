@@ -1223,6 +1223,10 @@ msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
 
 #, fuzzy
+msgid "§4That island is §clocked.§e No teleporting to the island."
+msgstr "§4玩家禁止你传送到他们的岛屿上."
+
+#, fuzzy
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§e你解除了玩家§a{0}§e的封禁状态，现在他可以访问你的岛屿了."
 
@@ -1233,6 +1237,9 @@ msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
 #, fuzzy
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§c无法 §f将玩家从岛屿上踢出."
+
+msgid "§cLocked:§e That island is locked! No entry allowed."
+msgstr ""
 
 #, fuzzy, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
@@ -2103,6 +2110,10 @@ msgstr ""
 
 msgid "§9Text Editor"
 msgstr ""
+
+#, fuzzy
+msgid "§eSending you to spawn."
+msgstr "§a将你传送回自己的岛屿."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"

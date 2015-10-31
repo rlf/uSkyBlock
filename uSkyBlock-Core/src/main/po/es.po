@@ -1204,6 +1204,10 @@ msgstr "§4Es una mala idea reemplazar tu lava!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Ese jugador ha prohibido tu teletransporte hacia su isla."
 
+#, fuzzy
+msgid "§4That island is §clocked.§e No teleporting to the island."
+msgstr "§4Ese jugador ha prohibido tu teletransporte hacia su isla."
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cHas llegado a tu limite de spawn en tu isla!"
 
@@ -1212,6 +1216,9 @@ msgstr "§eSolo puedes usar huevos de spawn en tu isla!"
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cBaneado:§e Has sido baneado de la isla!"
+
+msgid "§cLocked:§e That island is locked! No entry allowed."
+msgstr ""
 
 #, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
@@ -2058,6 +2065,10 @@ msgstr ""
 
 msgid "§9Text Editor"
 msgstr ""
+
+#, fuzzy
+msgid "§eSending you to spawn."
+msgstr "§aTeletransportandote hacia tu isla!"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Algo salio mal al guardar los datos de la isla y/o party!"

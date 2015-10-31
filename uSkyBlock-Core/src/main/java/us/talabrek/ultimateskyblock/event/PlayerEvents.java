@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -246,11 +247,15 @@ public class PlayerEvents implements Listener {
             return;
         }
         final Player player = event.getPlayer();
+        boolean isAdmin = player.isOp() || VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld());
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
-        if (islandInfo != null && islandInfo.isBanned(player.getName())
-                && !player.isOp() && !VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld())) {
+        if (!isAdmin && islandInfo != null && islandInfo.isBanned(player.getName())) {
             event.setCancelled(true);
             player.sendMessage(I18nUtil.tr("\u00a74That player has forbidden you from teleporting to their island."));
+        }
+        if (!isAdmin && islandInfo != null && islandInfo.isLocked() && !islandInfo.getMembers().contains(player.getName()) && !islandInfo.getTrustees().contains(player.getName())) {
+            event.setCancelled(true);
+            player.sendMessage(I18nUtil.tr("\u00a74That island is \u00a7clocked.\u00a7e No teleporting to the island."));
         }
         if (!event.isCancelled()) {
             PlayerInfo playerInfo = plugin.getPlayerInfo(player);
@@ -309,5 +314,23 @@ public class PlayerEvents implements Listener {
             }
         }
         return false;
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void onLeafBreak(BlockBreakEvent event) {
+        if (event == null || event.isCancelled() || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
+            return;
+        }
+        if (event.getBlock().getType() != Material.LEAVES || (event.getBlock().getData() & 0x3) != 0) {
+            return;
+        }
+        // Ok, a player broke an OAK LEAF in the Skyworld
+        String islandName = WorldGuardHandler.getIslandNameAt(event.getPlayer().getLocation());
+        IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+        if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
+            // Add an oak-sapling
+            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.SAPLING, 1));
+            islandInfo.setLeafBreaks(islandInfo.getLeafBreaks()+1);
+        }
     }
 }

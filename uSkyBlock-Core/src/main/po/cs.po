@@ -1155,6 +1155,9 @@ msgstr ""
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr ""
 
+msgid "§4That island is §clocked.§e No teleporting to the island."
+msgstr ""
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr ""
 
@@ -1162,6 +1165,9 @@ msgid "§eYou can only use spawn-eggs on your own island."
 msgstr ""
 
 msgid "§cBanned:§e You are banned from this island."
+msgstr ""
+
+msgid "§cLocked:§e That island is locked! No entry allowed."
 msgstr ""
 
 #, java-format
@@ -1835,6 +1841,10 @@ msgstr ""
 
 msgid "§9Text Editor"
 msgstr ""
+
+#, fuzzy
+msgid "§eSending you to spawn."
+msgstr "§aTeleportuji vás na váš ostrov."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""

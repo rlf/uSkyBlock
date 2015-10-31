@@ -1201,6 +1201,10 @@ msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Esse jogador proibiu você de teleportar até a ilha dele."
 
 #, fuzzy
+msgid "§4That island is §clocked.§e No teleporting to the island."
+msgstr "§4Esse jogador proibiu você de teleportar até a ilha dele."
+
+#, fuzzy
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§eVocê recuperou a confiança na ilha de §a{0}."
 
@@ -1211,6 +1215,9 @@ msgstr "§4Você só pode completar desafios se tiver uma ilha!"
 #, fuzzy
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cNão pode §fexpulsar jogadores da ilha."
+
+msgid "§cLocked:§e That island is locked! No entry allowed."
+msgstr ""
 
 #, fuzzy, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
@@ -2054,6 +2061,10 @@ msgstr ""
 
 msgid "§9Text Editor"
 msgstr ""
+
+#, fuzzy
+msgid "§eSending you to spawn."
+msgstr "§aTeleportando você para sua ilha."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Algo ocorreu mal ao salvar a ilha e informações do grupo!"

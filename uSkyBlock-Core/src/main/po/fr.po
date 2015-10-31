@@ -1204,6 +1204,10 @@ msgstr "§4C'est une mauvaise idée de remplacer votre lave !"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Ce joueur vous a interdit de se téléporter à son île."
 
+#, fuzzy
+msgid "§4That island is §clocked.§e No teleporting to the island."
+msgstr "§4Ce joueur vous a interdit de se téléporter à son île."
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cVous avez atteint la limite de spawn de votre île"
 
@@ -1213,6 +1217,9 @@ msgstr "§eVous pouvez uniquement utiliser les oeufs de spawn sur votre île."
 #, fuzzy
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§4Ce joueur est déjà assigné à une île !"
+
+msgid "§cLocked:§e That island is locked! No entry allowed."
+msgstr ""
 
 #, fuzzy, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
@@ -2028,6 +2035,10 @@ msgstr ""
 
 msgid "§9Text Editor"
 msgstr ""
+
+#, fuzzy
+msgid "§eSending you to spawn."
+msgstr "§aTéléporté à votre île."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""

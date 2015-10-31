@@ -1213,6 +1213,10 @@ msgstr "§4Het is een slecht idee om je lava te vervangen!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen."
 
+#, fuzzy
+msgid "§4That island is §clocked.§e No teleporting to the island."
+msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen."
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
 
@@ -1221,6 +1225,9 @@ msgstr "§eJe kan alleen spawn-eggs op je eigen eiland gebruiken."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cVerbannen:§e je bent verbannen van dit eiland."
+
+msgid "§cLocked:§e That island is locked! No entry allowed."
+msgstr ""
 
 #, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
@@ -2075,6 +2082,10 @@ msgstr "Caps On"
 
 msgid "§9Text Editor"
 msgstr "§9Text Editor"
+
+#, fuzzy
+msgid "§eSending you to spawn."
+msgstr "§aJe word getelepoorteerd naar je eiland."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""

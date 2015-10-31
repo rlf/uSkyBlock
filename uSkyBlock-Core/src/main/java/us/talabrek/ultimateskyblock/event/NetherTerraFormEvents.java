@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -12,6 +13,7 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -69,9 +71,9 @@ public class NetherTerraFormEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onBlockBreak(BlockBreakEvent event) {
-        if (event == null) {
+        if (event == null || event.isCancelled()) {
             return;
         }
         Block block = event.getBlock();
@@ -79,7 +81,9 @@ public class NetherTerraFormEvents implements Listener {
         if (block == null || player == null || !plugin.isSkyNether(block.getWorld()) || !plugin.isSkyNether(player.getWorld())) {
             return; // Bail out, not our problem
         }
-        // TODO: 23/09/2015 - R4zorax: Test that the player is actually on his own island
+        if (player.getGameMode() != GameMode.SURVIVAL) {
+            return;
+        }
         if (!terraFormMap.containsKey(block.getType())) {
             return; // Not a block we terra-form on.
         }

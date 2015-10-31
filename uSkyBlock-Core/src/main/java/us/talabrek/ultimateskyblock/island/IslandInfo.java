@@ -103,6 +103,7 @@ public class IslandInfo {
         config.set("general.warpLocationY", 0);
         config.set("general.warpLocationZ", 0);
         config.set("general.warpActive", false);
+        config.set("blocks.leafBreaks", 0);
         config.set("version", YML_VERSION);
         config.set("party", null);
         setupPartyLeader(leader);
@@ -700,6 +701,15 @@ public class IslandInfo {
 
     public void setIgnore(boolean b) {
         config.set("general.ignore", b);
+        dirty = true;
+    }
+
+    public int getLeafBreaks() {
+        return config.getInt("blocks.leafBreaks", 0);
+    }
+
+    public void setLeafBreaks(int breaks) {
+        config.set("blocks.leafBreaks", breaks);
         dirty = true;
     }
 }

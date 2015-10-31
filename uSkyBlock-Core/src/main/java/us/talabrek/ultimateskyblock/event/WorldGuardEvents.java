@@ -37,15 +37,25 @@ public class WorldGuardEvents implements Listener {
             return;
         }
         Player player = e.getPlayer();
-        if (islandInfo.isBanned(e.getPlayer()) && !player.isOp() && !VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld())) {
+        if (!player.isOp() && !VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld()) && isBlockedFromEntry(player, islandInfo)) {
             e.setCancelled(true);
             Location l = e.getTo().clone();
             l.subtract(islandInfo.getIslandLocation());
             Vector v = new Vector(l.getX(), l.getY(), l.getZ());
             v.normalize();
             v.multiply(1.5); // Bounce
-            e.getPlayer().setVelocity(v);
-            plugin.notifyPlayer(e.getPlayer(), tr("\u00a7cBanned:\u00a7e You are banned from this island."));
+            player.setVelocity(v);
+            if (islandInfo.isBanned(player)) {
+                plugin.notifyPlayer(player, tr("\u00a7cBanned:\u00a7e You are banned from this island."));
+            } else {
+                plugin.notifyPlayer(player, tr("\u00a7cLocked:\u00a7e That island is locked! No entry allowed."));
+            }
         }
+    }
+
+    private boolean isBlockedFromEntry(Player player, IslandInfo islandInfo) {
+        return islandInfo.isBanned(player) || (islandInfo.isLocked() && !(
+                islandInfo.getMembers().contains(player.getName()) || islandInfo.getTrustees().contains(player.getName())
+                ));
     }
 }
