@@ -5,6 +5,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import us.talabrek.ultimateskyblock.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.io.IOException;
@@ -58,7 +59,7 @@ public class ChallengeFactory {
         String description = section.getString("description");
         ItemStack displayItem = createItemStack(
                 section.getString("displayItem", defaults.displayItem),
-                name, description);
+                FormatUtil.normalize(displayName), description);
         ItemStack lockedItem = section.isString("lockedDisplayItem") ? createItemStack(section.getString("lockedDisplayItem", "BARRIER"), displayName, description) : null;
         boolean takeItems = section.getBoolean("takeItems", true);
         int radius = section.getInt("radius", 10);

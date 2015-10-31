@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
@@ -58,7 +59,7 @@ public class Rank {
     }
 
     public String getName() {
-        return config.getString("name", config.getName());
+        return FormatUtil.normalize(config.getString("name", config.getName()));
     }
 
     public Rank getPreviousRank() {
