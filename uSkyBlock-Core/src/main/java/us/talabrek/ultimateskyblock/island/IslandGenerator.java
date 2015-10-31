@@ -41,10 +41,12 @@ public class IslandGenerator {
             directorySchematics.mkdir();
         }
         netherSchematic = new File(directorySchematics, "uSkyBlockNether.schematic");
-        try (InputStream inputStream = uSkyBlock.class.getClassLoader().getResourceAsStream("schematics/uSkyBlockNether.schematic")) {
-            FileUtil.copy(inputStream, netherSchematic);
-        } catch (IOException e) {
-            log.log(Level.WARNING, "Unable to load nether-schematic " + netherSchematic, e);
+        if (!netherSchematic.exists()) {
+            try (InputStream inputStream = uSkyBlock.class.getClassLoader().getResourceAsStream("schematics/uSkyBlockNether.schematic")) {
+                FileUtil.copy(inputStream, netherSchematic);
+            } catch (IOException e) {
+                log.log(Level.WARNING, "Unable to load nether-schematic " + netherSchematic, e);
+            }
         }
         this.schemFiles = directorySchematics.listFiles(new FilenameFilter() {
             @Override
