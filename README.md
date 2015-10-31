@@ -22,6 +22,12 @@ Pre-releases will end in a date-stamp, and is considered **unsafe** for producti
 
 Releases have a clean version number, has been tested, and should be safe for production servers.
 
+### Bukkit/Spigot 1.7.9/10 Releases
+
+We provide pre-compiled versions (no support) here:
+
+* [2.4.9 for Bukkit 1.7.10](http://rlf.github.io/uSkyBlock/releases/bukkit-1.7.10/uSkyBlock-2.4.9.jar)
+
 ## Config-files
 
 *Note*: Config files might change quite a bit, and upon activation, the plugin will try to merge the existing ones with the new ones. A backup is kept under the `uSkyBlock/backup` folder.
