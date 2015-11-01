@@ -8,6 +8,7 @@ import com.google.common.cache.RemovalNotification;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FileUtil;
@@ -77,6 +78,15 @@ public class ChallengeCompletionLogic {
 
     private Map<String, ChallengeCompletion> loadFromFile(String id) {
         File configFile = new File(storageFolder, id + ".yml");
+        if (!configFile.exists() && storeOnIsland) {
+            IslandInfo islandInfo = plugin.getIslandInfo(id);
+            if (islandInfo != null && islandInfo.getLeader() != null && islandInfo.getLeaderUniqueId() != null) {
+                File leaderFile = new File(storageFolder, islandInfo.getLeaderUniqueId().toString() + ".yml");
+                if (leaderFile.exists()) {
+                    leaderFile.renameTo(configFile);
+                }
+            }
+        }
         if (configFile.exists()) {
             FileConfiguration fileConfiguration = new YamlConfiguration();
             FileUtil.readConfig(fileConfiguration, configFile);

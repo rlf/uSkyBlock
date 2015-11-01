@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.island;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -29,6 +30,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -258,6 +260,17 @@ public class IslandInfo {
 
     public String getLeader() {
         return config.getString("party.leader", "");
+    }
+
+    public UUID getLeaderUniqueId() {
+        String uuid = config.getString("party.leader-uuid", null);
+        if (uuid == null) {
+            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(getLeader());
+            if (offlinePlayer != null) {
+                uuid = offlinePlayer.getUniqueId().toString();
+            }
+        }
+        return UUIDUtil.fromString(uuid);
     }
 
     public boolean hasPerm(Player player, String perm) {
