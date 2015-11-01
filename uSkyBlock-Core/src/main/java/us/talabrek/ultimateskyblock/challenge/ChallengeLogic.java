@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
 import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
@@ -108,7 +109,7 @@ public class ChallengeLogic {
         return ranks.get(rank).getChallenges();
     }
 
-    public void completeChallenge(final Player player, final String challengeName) {
+    public void completeChallenge(final Player player, String challengeName) {
         final PlayerInfo pi = plugin.getPlayerInfo(player);
         Challenge challenge = getChallenge(challengeName);
         if (challenge == null) {
@@ -119,6 +120,7 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a74You must be on your island to do that!"));
             return;
         }
+        challengeName = challenge.getName();
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (!challenge.getRank().isAvailable(pi) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));
@@ -142,6 +144,8 @@ public class ChallengeLogic {
         for (Rank rank : ranks.values()) {
             for (Challenge challenge : rank.getChallenges()) {
                 if (challenge.getName().equalsIgnoreCase(challengeName)) {
+                    return challenge;
+                } else if (stripFormatting(challenge.getDisplayName()).equalsIgnoreCase(challengeName)) {
                     return challenge;
                 }
             }

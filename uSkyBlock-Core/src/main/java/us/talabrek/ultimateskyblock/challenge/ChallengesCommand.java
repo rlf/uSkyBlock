@@ -91,8 +91,12 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             } else {
                 player.sendMessage(tr("\u00a74Invalid challenge name! Use /c help for more information"));
             }
-        } else if (split.length == 2 && (split[0].equalsIgnoreCase("complete") || split[0].equalsIgnoreCase("c"))) {
-            challengeLogic.completeChallenge(player, split[1]);
+        } else if (split.length >= 2 && (split[0].equalsIgnoreCase("complete") || split[0].equalsIgnoreCase("c"))) {
+            StringBuffer challengeName = new StringBuffer(split[1]);
+            for (int i = 2; i < split.length; i++) {
+                challengeName.append(" ").append(split[i]);
+            }
+            challengeLogic.completeChallenge(player, challengeName.toString());
         }
         return true;
     }
