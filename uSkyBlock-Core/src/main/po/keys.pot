@@ -260,6 +260,22 @@ msgstr ""
 msgid "removes the player from the island"
 msgstr ""
 
+msgid "adds the player to the island"
+msgstr ""
+
+#, java-format
+msgid "§b{0}§d has joined your island group."
+msgstr ""
+
+#, java-format
+msgid "§4No player named {0} found!"
+msgstr ""
+
+msgid ""
+"§4No valid island provided, either stand within one, or provide an island "
+"name"
+msgstr ""
+
 msgid "print out info about the island"
 msgstr ""
 
@@ -654,10 +670,6 @@ msgstr ""
 
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
-msgstr ""
-
-#, java-format
-msgid "§b{0}§d has joined your island group."
 msgstr ""
 
 #, java-format

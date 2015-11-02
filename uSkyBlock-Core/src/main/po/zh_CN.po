@@ -275,6 +275,23 @@ msgid "removes the player from the island"
 msgstr "§4你无法将岛屿的主人移除!"
 
 #, fuzzy
+msgid "adds the player to the island"
+msgstr "§4你无法将岛屿的主人移除!"
+
+#, java-format
+msgid "§b{0}§d has joined your island group."
+msgstr "§b{0}§d加入了你的岛屿团队。"
+
+#, fuzzy, java-format
+msgid "§4No player named {0} found!"
+msgstr "§4没有名字为 {0} 的玩家被找到"
+
+msgid ""
+"§4No valid island provided, either stand within one, or provide an island "
+"name"
+msgstr ""
+
+#, fuzzy
 msgid "print out info about the island"
 msgstr "{0}试图接管当前岛屿!"
 
@@ -687,10 +704,6 @@ msgstr "§4你无法使用当前命令。请先离开你当前的团队。"
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr "§a你加入了一个岛屿!输入/island party 来查看团队成员。"
-
-#, java-format
-msgid "§b{0}§d has joined your island group."
-msgstr "§b{0}§d加入了你的岛屿团队。"
 
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."

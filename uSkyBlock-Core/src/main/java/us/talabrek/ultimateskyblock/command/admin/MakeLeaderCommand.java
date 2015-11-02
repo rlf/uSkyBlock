@@ -50,7 +50,7 @@ public class MakeLeaderCommand extends AbstractUSBCommand {
                         sender.sendMessage(I18nUtil.tr("\u00a74Player {0} has no island to transfer!", islandPlayerName));
                         return;
                     }
-                    if (playerInfo != null && playerInfo.getHasIsland()) {
+                    if (playerInfo != null && playerInfo.getHasIsland() && !playerInfo.locationForParty().equals(islandInfo.getName())) {
                         sender.sendMessage(I18nUtil.tr("\u00a7ePlayer \u00a7d{0}\u00a7e already has an island.\u00a7eUse \u00a7d/usb island remove <name>\u00a7e to remove him first.", playerName));
                         return;
                     }

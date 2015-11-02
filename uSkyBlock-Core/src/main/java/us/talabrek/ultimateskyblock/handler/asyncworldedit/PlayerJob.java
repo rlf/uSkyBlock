@@ -101,4 +101,14 @@ class PlayerJob {
                 ", percentage=" + percentage +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof PlayerJob && ((PlayerJob)o).getPlayer().getUniqueId().equals(player.getUniqueId());
+    }
+
+    @Override
+    public int hashCode() {
+        return player != null ? player.getUniqueId().hashCode() : 0;
+    }
 }

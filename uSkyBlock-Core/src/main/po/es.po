@@ -267,6 +267,23 @@ msgstr ""
 msgid "removes the player from the island"
 msgstr "borra un jugador de la isla"
 
+#, fuzzy
+msgid "adds the player to the island"
+msgstr "borra un jugador de la isla"
+
+#, java-format
+msgid "§b{0}§d has joined your island group."
+msgstr "§b{0}§d ha entrado a tu grupo."
+
+#, fuzzy, java-format
+msgid "§4No player named {0} found!"
+msgstr "§4No se ha encontrado un jugador llamado {0} !"
+
+msgid ""
+"§4No valid island provided, either stand within one, or provide an island "
+"name"
+msgstr ""
+
 msgid "print out info about the island"
 msgstr "mostrar informacion sobre la isla"
 
@@ -678,10 +695,6 @@ msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
 "§aHas entrado a una isla! Utiliza /island party para ver a los otros miembros"
-
-#, java-format
-msgid "§b{0}§d has joined your island group."
-msgstr "§b{0}§d ha entrado a tu grupo."
 
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."
