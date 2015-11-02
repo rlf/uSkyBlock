@@ -46,6 +46,14 @@ public class POParserTest {
         verifyProps("valid_emptylines_str.po");
     }
 
+    @Test
+    public void testNotClosingIn() throws Exception {
+        try (InputStream in = getClass().getClassLoader().getResourceAsStream("valid_da.po")) {
+            Properties properties = POParser.asProperties(in);
+            in.close(); // asserts that we can close the stream
+        }
+    }
+
     private void verifyProps(String name) throws IOException {
         POParser parser = new POParser();
         try (InputStream in = getClass().getClassLoader().getResourceAsStream(name)) {
@@ -66,4 +74,5 @@ public class POParserTest {
             assertThat(properties.getProperty(key), is(value));
         }
     }
+
 }

@@ -105,9 +105,6 @@ public enum I18nUtil {;
                             props.add(i18nProps);
                         }
                     }
-                    if (nextEntry != null) {
-                        zin.closeEntry();
-                    }
                 } while (nextEntry != null);
             } catch (IOException e) {
                 log.info("Unable to load translations from i18n.zip!" + locale + ".po: "+ e);
