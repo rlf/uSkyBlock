@@ -85,15 +85,13 @@ public class PlayerLogic {
         }
         log.log(Level.FINER, "Loading player data for " + playerName);
 
-        PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
+        final PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
 
         final Player onlinePlayer = Bukkit.getPlayer(playerName);
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
             plugin.getPlayerNameChangeManager().checkPlayer(onlinePlayer, playerInfo);
 
             if (playerInfo.getHasIsland()) {
-                WorldGuardHandler.protectIsland(onlinePlayer, playerInfo);
-                plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
                 IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
                     islandInfo.updatePermissionPerks(onlinePlayer, plugin.getPerkLogic().getPerk(onlinePlayer));
@@ -102,6 +100,10 @@ public class PlayerLogic {
             Bukkit.getScheduler().runTask(plugin, new Runnable() {
                         @Override
                         public void run() {
+                            if (playerInfo.getHasIsland()) {
+                                WorldGuardHandler.protectIsland(onlinePlayer, playerInfo);
+                                plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
+                            }
                             if (plugin.isSkyAssociatedWorld(onlinePlayer.getWorld()) && !plugin.playerIsOnIsland(onlinePlayer)) {
                                 // Check if banned
                                 String islandName = WorldGuardHandler.getIslandNameAt(onlinePlayer.getLocation());

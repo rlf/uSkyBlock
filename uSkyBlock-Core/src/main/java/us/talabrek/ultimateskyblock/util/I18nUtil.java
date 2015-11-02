@@ -8,12 +8,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Convenience util for supporting static imports.
@@ -88,13 +91,26 @@ public enum I18nUtil {;
         }
 
         private void addPropsFromJar() {
-            try (InputStream in = getClass().getClassLoader().getResourceAsStream("i18n/" + locale + ".po")) {
-                Properties i18nProps = POParser.asProperties(in);
-                if (i18nProps != null && !i18nProps.isEmpty()) {
-                    props.add(i18nProps);
-                }
+            // We zip the .po files, since they are currently half the footprint of the jar.
+            try (
+                    InputStream in = getClass().getClassLoader().getResourceAsStream("i18n.zip");
+                    ZipInputStream zin = in != null ? new ZipInputStream(in, Charset.forName("UTF-8")) : null
+            ) {
+                ZipEntry nextEntry = null;
+                do {
+                    nextEntry = zin != null ? zin.getNextEntry() : null;
+                    if (nextEntry != null && nextEntry.getName().equalsIgnoreCase(locale + ".po")) {
+                        Properties i18nProps = POParser.asProperties(zin);
+                        if (i18nProps != null && !i18nProps.isEmpty()) {
+                            props.add(i18nProps);
+                        }
+                    }
+                    if (nextEntry != null) {
+                        zin.closeEntry();
+                    }
+                } while (nextEntry != null);
             } catch (IOException e) {
-                log.info("Unable to load translations from jar:i18n/" + locale + ".po: "+ e);
+                log.info("Unable to load translations from i18n.zip!" + locale + ".po: "+ e);
             }
         }
 
@@ -107,7 +123,7 @@ public enum I18nUtil {;
                         props.add(i18nProps);
                     }
                 } catch (IOException e) {
-                    log.info("Unable to load translations from plugin:i18n/" + locale + ".po: " + e);
+                    log.info("Unable to load translations from i18n/" + locale + ".po: " + e);
                 }
             }
         }
