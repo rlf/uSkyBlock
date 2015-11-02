@@ -1,6 +1,6 @@
-# bukkit-utils
+# po-utils
 
-This module holds general Bukkit Utilities not necesarily tied to uSkyBlock.
+This module holds general PO Utilities not necesarily tied to uSkyBlock.
 
 # License
 

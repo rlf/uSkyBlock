@@ -14,6 +14,7 @@
         <module>uSkyBlock-AWE321</module>
         <module>uSkyBlock-Plugin</module>
         <module>bukkit-utils</module>
+        <module>po-utils</module>
     </modules>
 
     <properties>
