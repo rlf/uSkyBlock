@@ -127,7 +127,7 @@ public class PlayerLogic {
 
     public PlayerInfo getPlayerInfo(String playerName) {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
-        if (offlinePlayer == null) {
+        if (offlinePlayer == null || offlinePlayer.getUniqueId() == null || offlinePlayer.getName() == null) {
             return null;
         }
         // Do not return anything if it is loading.

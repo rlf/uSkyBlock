@@ -233,8 +233,7 @@ public class IslandLogic {
                 sender.sendMessage(tr("\u00a74Top ten list is empty! (perhaps the generation failed?)"));
             }
             int place = 1;
-            String playerName = sender instanceof Player ? ((Player)sender).getDisplayName() : sender.getName();
-            PlayerInfo playerInfo = plugin.getPlayerInfo(playerName);
+            PlayerInfo playerInfo = plugin.getPlayerInfo(sender.getName());
             IslandRank rank = null;
             if (playerInfo != null && playerInfo.getHasIsland()) {
                 rank = getRank(playerInfo.locationForParty());
