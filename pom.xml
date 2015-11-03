@@ -66,18 +66,6 @@
             </releases>
         </repository>
         <repository>
-            <id>uSkyBlock-mvn-repo</id>
-            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-        </repository>
-        <repository>
             <id>gettext-commons-mvn-repo</id>
             <url>https://raw.github.com/rlf/gettext-commons/mvn-repo/</url>
             <snapshots>
@@ -113,6 +101,17 @@
         <repository>
             <id>titlemananager-repo</id>
             <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
+            <id>uSkyBlock-mvn-repo</id>
+            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
     </repositories>
     <pluginRepositories>
