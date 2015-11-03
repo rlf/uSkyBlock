@@ -2,25 +2,7 @@ package us.talabrek.ultimateskyblock.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.command.admin.AbstractPlayerInfoCommand;
-import us.talabrek.ultimateskyblock.command.admin.AdminChallengeCommand;
-import us.talabrek.ultimateskyblock.command.admin.AdminIslandCommand;
-import us.talabrek.ultimateskyblock.command.admin.ConfigGUICommand;
-import us.talabrek.ultimateskyblock.command.admin.CooldownCommand;
-import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
-import us.talabrek.ultimateskyblock.command.admin.FlatlandFixCommand;
-import us.talabrek.ultimateskyblock.command.admin.FlushCommand;
-import us.talabrek.ultimateskyblock.command.admin.GenTopTenCommand;
-import us.talabrek.ultimateskyblock.command.admin.GotoIslandCommand;
-import us.talabrek.ultimateskyblock.command.admin.ImportCommand;
-import us.talabrek.ultimateskyblock.command.admin.JobsCommand;
-import us.talabrek.ultimateskyblock.command.admin.LanguageCommand;
-import us.talabrek.ultimateskyblock.command.admin.OrphanCommand;
-import us.talabrek.ultimateskyblock.command.admin.PerkCommand;
-import us.talabrek.ultimateskyblock.command.admin.PurgeCommand;
-import us.talabrek.ultimateskyblock.command.admin.ReloadCommand;
-import us.talabrek.ultimateskyblock.command.admin.VersionCommand;
-import us.talabrek.ultimateskyblock.command.admin.WGCommand;
+import us.talabrek.ultimateskyblock.command.admin.*;
 import us.talabrek.ultimateskyblock.command.common.AbstractCommandExecutor;
 import us.talabrek.ultimateskyblock.command.completion.AllPlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.BiomeTabCompleter;
@@ -72,5 +54,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new FlushCommand(plugin));
         add(new JobsCommand(plugin));
         add(new ConfigGUICommand(plugin));
+        add(new DocumentCommand(plugin));
     }
 }

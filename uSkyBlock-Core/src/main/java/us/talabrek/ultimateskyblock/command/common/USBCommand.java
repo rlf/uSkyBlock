@@ -66,4 +66,10 @@ public interface USBCommand {
      * @param parent
      */
     void setParent(CompositeUSBCommand parent);
+
+    /**
+     * Visitor pattern.
+     * @param visitor A visitor for this node.
+     */
+    void accept(CommandVisitor visitor);
 }

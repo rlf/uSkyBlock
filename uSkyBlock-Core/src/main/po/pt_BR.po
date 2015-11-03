@@ -443,6 +443,17 @@ msgstr "§4Argumento inválido, tente INFO, FINE, FINER, FINEST"
 msgid "§eLogging disabled!"
 msgstr "§eLogging desativado!"
 
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
 msgid "tries to fix the the area of flatland."
 msgstr "tentar reparar a área de flatland."
 
@@ -658,6 +669,26 @@ msgstr "mostrar informações do jogador"
 #, java-format
 msgid "§7Usage: {0}"
 msgstr "§7Use: {0}"
+
+#, fuzzy
+msgid "Command"
+msgstr "Pode {0}"
+
+#, fuzzy
+msgid "Description"
+msgstr "§7Descrição: §b{0}\n"
+
+#, fuzzy
+msgid "Permission"
+msgstr "Permissões"
+
+#, java-format
+msgid " [{0}]"
+msgstr ""
+
+#, java-format
+msgid " <{0}>"
+msgstr ""
 
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
@@ -2187,6 +2218,26 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "  alias: {0}"
+#~ msgstr "Bioma: {0}"
+
+#, fuzzy
+#~ msgid "   perm: {0}"
+#~ msgstr "Categoria: {0}"
+
+#, fuzzy
+#~ msgid "-------------"
+#~ msgstr "§7------------------------------\n"
+
+#, fuzzy
+#~ msgid "Usage: {0}"
+#~ msgstr "§7Use: {0}"
+
+#, fuzzy
+#~ msgid "Permission: {0}"
+#~ msgstr "Permissões"
 
 #~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
 #~ msgstr "§eVocê recuperou a confiança na ilha de §a{0}."

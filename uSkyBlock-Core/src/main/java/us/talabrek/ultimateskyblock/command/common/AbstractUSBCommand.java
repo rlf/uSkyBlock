@@ -77,4 +77,12 @@ public abstract class AbstractUSBCommand implements USBCommand {
     public void setParent(CompositeUSBCommand parent) {
         this.parent = parent;
     }
+
+    @Override
+    public void accept(CommandVisitor visitor) {
+        if (visitor != null) {
+            visitor.visit(this);
+        }
+    }
+
 }

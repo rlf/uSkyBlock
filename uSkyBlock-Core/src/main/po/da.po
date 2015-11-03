@@ -447,6 +447,17 @@ msgstr "§4Forkert argument, prøv INFO, FINE, FINER, FINEST"
 msgid "§eLogging disabled!"
 msgstr "§eLogning deaktiveret!"
 
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
 msgid "tries to fix the the area of flatland."
 msgstr "forsøger at fjerne flatland under øen"
 
@@ -656,6 +667,26 @@ msgstr "vis spiller-information"
 #, java-format
 msgid "§7Usage: {0}"
 msgstr "§7Brug: {0}"
+
+#, fuzzy
+msgid "Command"
+msgstr "Kan {0}"
+
+#, fuzzy
+msgid "Description"
+msgstr "§7Beskrivelse: §b{0}\n"
+
+#, fuzzy
+msgid "Permission"
+msgstr "Tilladelser"
+
+#, java-format
+msgid " [{0}]"
+msgstr ""
+
+#, java-format
+msgid " <{0}>"
+msgstr ""
 
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
@@ -2164,6 +2195,26 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, fuzzy
+#~ msgid "  alias: {0}"
+#~ msgstr "Biome: {0}"
+
+#, fuzzy
+#~ msgid "   perm: {0}"
+#~ msgstr "Ejer: {0}"
+
+#, fuzzy
+#~ msgid "-------------"
+#~ msgstr "§7----------------"
+
+#, fuzzy
+#~ msgid "Usage: {0}"
+#~ msgstr "§7Brug: {0}"
+
+#, fuzzy
+#~ msgid "Permission: {0}"
+#~ msgstr "Tilladelser"
 
 #~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
 #~ msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."

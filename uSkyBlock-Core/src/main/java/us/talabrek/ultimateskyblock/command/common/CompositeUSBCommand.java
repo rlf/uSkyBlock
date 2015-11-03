@@ -291,4 +291,20 @@ public class CompositeUSBCommand extends AbstractTabCompleter implements USBComm
     public void setParent(CompositeUSBCommand parent) {
         this.parent = parent;
     }
+
+    public List<USBCommand> getChildren() {
+        ArrayList<USBCommand> list = new ArrayList<>(commandMap.values());
+        Collections.sort(list, new USBCommandComparator());
+        return Collections.unmodifiableList(list);
+    }
+
+    @Override
+    public void accept(CommandVisitor visitor) {
+        if (visitor != null) {
+            visitor.visit(this);
+            for (USBCommand child : getChildren()) {
+                child.accept(visitor);
+            }
+        }
+    }
 }

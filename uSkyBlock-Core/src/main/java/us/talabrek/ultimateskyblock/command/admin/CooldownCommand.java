@@ -68,7 +68,7 @@ public class CooldownCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractUSBCommand("list|l", "?player", tr("lists all the active cooldowns")) {
+        add(new AbstractUSBCommand("list|l", null, "?player", tr("lists all the active cooldowns")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length < 1) {

@@ -19,7 +19,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
     private final uSkyBlock plugin;
 
     public AdminChallengeCommand(final uSkyBlock plugin, TabCompleter challengeCompleter) {
-        super("challenge", "usb.mod.challenges", "player", I18nUtil.tr("Manage challenges for a player"));
+        super("challenge|ch", "usb.mod.challenges", "player", I18nUtil.tr("Manage challenges for a player"));
         this.plugin = plugin;
         add(new ChallengeCommand("complete", null, "completes the challenge for the player") {
             @Override
