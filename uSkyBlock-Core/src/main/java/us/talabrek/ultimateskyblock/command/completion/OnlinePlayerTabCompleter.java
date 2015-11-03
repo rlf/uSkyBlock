@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.command.completion;
 
+import dk.lockfuglsang.minecraft.command.completion.AbstractTabCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -1,19 +1,19 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.imports.impl.ImportTabCompleter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Command for importing external formats.
  */
-public class ImportCommand extends AbstractUSBCommand {
+public class ImportCommand extends AbstractCommand {
 
     private final ImportTabCompleter completer;
 

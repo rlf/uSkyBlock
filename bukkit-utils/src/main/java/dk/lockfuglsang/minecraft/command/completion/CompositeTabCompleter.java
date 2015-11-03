@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command.completion;
+package dk.lockfuglsang.minecraft.command.completion;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

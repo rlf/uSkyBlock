@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Responsible for forming the correct blocks in nether on block-breaks.

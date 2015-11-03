@@ -1,17 +1,17 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Re-generates the topten.
  */
-public class GenTopTenCommand extends AbstractUSBCommand {
+public class GenTopTenCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public GenTopTenCommand(uSkyBlock plugin) {

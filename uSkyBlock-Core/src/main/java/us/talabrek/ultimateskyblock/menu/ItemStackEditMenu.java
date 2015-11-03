@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.menu;
 
+import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -8,14 +9,13 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.builder;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.isValidInventoryItem;
 

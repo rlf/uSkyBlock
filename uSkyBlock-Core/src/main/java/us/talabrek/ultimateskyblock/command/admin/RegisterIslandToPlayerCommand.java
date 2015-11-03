@@ -1,17 +1,17 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Map;
 
 /**
  * Registers an island to a player.
  */
-public class RegisterIslandToPlayerCommand extends AbstractUSBCommand {
+public class RegisterIslandToPlayerCommand extends AbstractCommand {
     public RegisterIslandToPlayerCommand() {
         super("register", "usb.admin.register", "player", I18nUtil.tr("set a player's island to your location"));
     }

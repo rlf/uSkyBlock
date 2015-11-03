@@ -1,16 +1,16 @@
 package us.talabrek.ultimateskyblock.command.island;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Map;
 
 /**
  * Common command for all those that require a Player as CommandSender.
  */
-public abstract class RequirePlayerCommand extends AbstractUSBCommand {
+public abstract class RequirePlayerCommand extends AbstractCommand {
 
     public RequirePlayerCommand(String name, String permission, String params, String description) {
         super(name, permission, params, description);

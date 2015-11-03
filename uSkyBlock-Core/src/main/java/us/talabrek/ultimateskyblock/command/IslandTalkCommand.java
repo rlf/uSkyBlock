@@ -8,7 +8,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.Collections;
 import java.util.List;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Island Talk

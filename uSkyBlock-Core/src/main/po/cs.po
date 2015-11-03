@@ -434,17 +434,6 @@ msgstr ""
 msgid "§eLogging disabled!"
 msgstr ""
 
-msgid "saves documentation of the commands to a file"
-msgstr ""
-
-#, java-format
-msgid "Wrote documentation to {0}"
-msgstr ""
-
-#, java-format
-msgid "§4Error writing documentation: {0}"
-msgstr ""
-
 msgid "tries to fix the the area of flatland."
 msgstr ""
 
@@ -647,30 +636,6 @@ msgid "Ultimate SkyBlock Admin"
 msgstr ""
 
 msgid "show player-information"
-msgstr ""
-
-#, java-format
-msgid "§7Usage: {0}"
-msgstr ""
-
-#, fuzzy
-msgid "Command"
-msgstr "Může {0}"
-
-#, fuzzy
-msgid "Description"
-msgstr "§7Popis: §b{0}\n"
-
-#, fuzzy
-msgid "Permission"
-msgstr "§7Verze: §b{0}\n"
-
-#, java-format
-msgid " [{0}]"
-msgstr ""
-
-#, java-format
-msgid " <{0}>"
 msgstr ""
 
 msgid ""
@@ -1995,6 +1960,18 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Command"
+#~ msgstr "Může {0}"
+
+#, fuzzy
+#~ msgid "Description"
+#~ msgstr "§7Popis: §b{0}\n"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "§7Verze: §b{0}\n"
 
 #, fuzzy
 #~ msgid "  alias: {0}"

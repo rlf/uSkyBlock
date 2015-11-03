@@ -453,17 +453,6 @@ msgstr "§4未知参数，请尝试 INFO, FINE, FINER, FINEST"
 msgid "§eLogging disabled!"
 msgstr "§e记录已经关闭"
 
-msgid "saves documentation of the commands to a file"
-msgstr ""
-
-#, java-format
-msgid "Wrote documentation to {0}"
-msgstr ""
-
-#, java-format
-msgid "§4Error writing documentation: {0}"
-msgstr ""
-
 msgid "tries to fix the the area of flatland."
 msgstr ""
 
@@ -677,29 +666,6 @@ msgid "Ultimate SkyBlock Admin"
 msgstr ""
 
 msgid "show player-information"
-msgstr ""
-
-#, java-format
-msgid "§7Usage: {0}"
-msgstr ""
-
-#, fuzzy
-msgid "Command"
-msgstr "§9排名: {0}"
-
-msgid "Description"
-msgstr ""
-
-#, fuzzy
-msgid "Permission"
-msgstr "权限"
-
-#, java-format
-msgid " [{0}]"
-msgstr ""
-
-#, java-format
-msgid " <{0}>"
 msgstr ""
 
 msgid ""
@@ -2263,6 +2229,14 @@ msgstr "秒"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Command"
+#~ msgstr "§9排名: {0}"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "权限"
 
 #, fuzzy
 #~ msgid "   perm: {0}"

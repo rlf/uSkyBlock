@@ -1,12 +1,12 @@
 package us.talabrek.ultimateskyblock.imports.name2uuid;
 
+import dk.lockfuglsang.minecraft.file.FileUtil;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;

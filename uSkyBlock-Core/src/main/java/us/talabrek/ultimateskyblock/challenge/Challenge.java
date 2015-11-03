@@ -1,12 +1,12 @@
 package us.talabrek.ultimateskyblock.challenge;
 
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.ArrayList;
 import java.util.List;

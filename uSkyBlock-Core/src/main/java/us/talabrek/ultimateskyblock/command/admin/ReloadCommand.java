@@ -1,16 +1,16 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Map;
 
 /**
  * Reloads the config-files for USB.
  */
-public class ReloadCommand extends AbstractUSBCommand {
+public class ReloadCommand extends AbstractCommand {
     public ReloadCommand() {
         super("reload", "usb.admin.reload", I18nUtil.tr("reload configuration from file."));
     }

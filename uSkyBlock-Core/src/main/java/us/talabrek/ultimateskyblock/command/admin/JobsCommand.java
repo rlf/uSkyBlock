@@ -1,9 +1,9 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.async.JobManager;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 
@@ -12,26 +12,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Command for reporting and controlling async jobs.
  */
-public class JobsCommand extends CompositeUSBCommand {
+public class JobsCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public JobsCommand(uSkyBlock plugin) {
         super("jobs|j", "usb.admin.jobs", "controls async jobs");
         this.plugin = plugin;
         /*
-        add(new AbstractUSBCommand("list|l", "usb.admin.jobs.list", "list all jobs") {
+        add(new AbstractCommand("list|l", "usb.admin.jobs.list", "list all jobs") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 return false;
             }
         });
         */
-        add(new AbstractUSBCommand("stats|s", "usb.admin.jobs.stats", "show statistics") {
+        add(new AbstractCommand("stats|s", "usb.admin.jobs.stats", "show statistics") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 StringBuilder sb = new StringBuilder();
@@ -58,7 +58,7 @@ public class JobsCommand extends CompositeUSBCommand {
             }
         });
         /*
-        add(new AbstractUSBCommand("report|r", "usb.admin.jobs.report", "dump report to file") {
+        add(new AbstractCommand("report|r", "usb.admin.jobs.report", "dump report to file") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 return false;

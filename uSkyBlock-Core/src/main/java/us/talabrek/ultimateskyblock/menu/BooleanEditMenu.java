@@ -1,9 +1,9 @@
 package us.talabrek.ultimateskyblock.menu;
 
+import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import us.talabrek.ultimateskyblock.util.FileUtil;
 
 /**
  * Simple menu-less editor for boolean values.

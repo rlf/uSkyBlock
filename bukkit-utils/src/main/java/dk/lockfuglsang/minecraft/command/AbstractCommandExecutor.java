@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command.common;
+package dk.lockfuglsang.minecraft.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,8 +9,7 @@ import java.util.HashMap;
 /**
  * Command delegator.
  */
-// TODO: 27/12/2014 - R4zorax: Add pagination to help
-public class AbstractCommandExecutor extends CompositeUSBCommand implements CommandExecutor {
+public class AbstractCommandExecutor extends CompositeCommand implements CommandExecutor {
 
     public AbstractCommandExecutor(String name, String permission, String description) {
         super(name, permission, description);

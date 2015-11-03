@@ -1,20 +1,20 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Map;
 
 /**
  * The challenge admin command.
  */
-public class AdminChallengeCommand extends CompositeUSBCommand {
+public class AdminChallengeCommand extends CompositeCommand {
 
     private final uSkyBlock plugin;
 
@@ -48,7 +48,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractUSBCommand("resetall", null, I18nUtil.tr("resets all challenges for the player")) {
+        add(new AbstractCommand("resetall", null, I18nUtil.tr("resets all challenges for the player")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 PlayerInfo playerInfo = (PlayerInfo) data.get("playerInfo");
@@ -75,7 +75,7 @@ public class AdminChallengeCommand extends CompositeUSBCommand {
         return super.execute(sender, alias, data, args);
     }
 
-    private abstract class ChallengeCommand extends AbstractUSBCommand {
+    private abstract class ChallengeCommand extends AbstractCommand {
         public ChallengeCommand(String name, String permission, String description) {
             super(name, permission, "challenge", description);
         }

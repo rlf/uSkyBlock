@@ -1,20 +1,20 @@
-package us.talabrek.ultimateskyblock.command.common;
+package dk.lockfuglsang.minecraft.command;
 
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 /**
- * Convenience implementation of the USBCommand
+ * Convenience implementation of the Command
  */
-public abstract class AbstractUSBCommand implements USBCommand {
+public abstract class AbstractCommand implements Command {
     private final String[] aliases;
     private final String permission;
     private final String description;
     private final String usage;
     private final String[] params;
-    private CompositeUSBCommand parent;
+    private CompositeCommand parent;
 
-    public AbstractUSBCommand(String name, String permission, String params, String description, String usage) {
+    public AbstractCommand(String name, String permission, String params, String description, String usage) {
         this.aliases = name.split("\\|");
         this.permission = permission;
         this.description = I18nUtil.tr(description);
@@ -22,15 +22,15 @@ public abstract class AbstractUSBCommand implements USBCommand {
         this.params = params != null && !params.trim().isEmpty() ? params.split(" ") : new String[0];
     }
 
-    public AbstractUSBCommand(String name, String permission, String params, String description) {
+    public AbstractCommand(String name, String permission, String params, String description) {
         this(name, permission, params, description, null);
     }
 
-    public AbstractUSBCommand(String name, String permission, String description) {
+    public AbstractCommand(String name, String permission, String description) {
         this(name, permission, null, description, null);
     }
 
-    public AbstractUSBCommand(String name, String description) {
+    public AbstractCommand(String name, String description) {
         this(name, null, null, description, null);
     }
 
@@ -69,12 +69,12 @@ public abstract class AbstractUSBCommand implements USBCommand {
     }
 
     @Override
-    public CompositeUSBCommand getParent() {
+    public CompositeCommand getParent() {
         return parent;
     }
 
     @Override
-    public void setParent(CompositeUSBCommand parent) {
+    public void setParent(CompositeCommand parent) {
         this.parent = parent;
     }
 

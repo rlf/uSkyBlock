@@ -33,8 +33,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * The home of challenge business logic.

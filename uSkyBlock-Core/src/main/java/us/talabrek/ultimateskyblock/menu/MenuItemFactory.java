@@ -8,8 +8,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 
 /**
  * A convenience factory for creating the itemstacks used in menus.

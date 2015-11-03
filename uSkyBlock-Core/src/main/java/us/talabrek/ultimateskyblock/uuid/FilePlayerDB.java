@@ -1,8 +1,8 @@
 package us.talabrek.ultimateskyblock.uuid;
 
+import dk.lockfuglsang.minecraft.file.FileUtil;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.util.FileUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;

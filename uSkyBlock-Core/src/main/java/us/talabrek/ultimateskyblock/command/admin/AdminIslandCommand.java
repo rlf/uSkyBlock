@@ -1,12 +1,12 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -15,17 +15,17 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * The island moderator command.
  */
-public class AdminIslandCommand extends CompositeUSBCommand {
+public class AdminIslandCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public AdminIslandCommand(final uSkyBlock plugin, final ConfirmHandler confirmHandler) {
-        super("island", "", tr("manage islands"));
+        super("island|is", "", tr("manage islands"));
         this.plugin = plugin;
         add(new AbstractIslandInfoCommand("protect", "usb.mod.protect", tr("protects the island")) {
             @Override
@@ -33,7 +33,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 protectIsland(sender, islandInfo);
             }
         });
-        add(new AbstractUSBCommand("delete", "usb.admin.delete", "?leader", tr("delete the island (removes the blocks)")) {
+        add(new AbstractCommand("delete", "usb.admin.delete", "?leader", tr("delete the island (removes the blocks)")) {
             @Override
             public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
@@ -68,7 +68,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 removePlayerFromIsland(sender, playerInfo, islandInfo);
             }
         });
-        add(new AbstractUSBCommand("addmember|add", "usb.admin.addmember", "player ?island", tr("adds the player to the island")) {
+        add(new AbstractCommand("addmember|add", "usb.admin.addmember", "player ?island", tr("adds the player to the island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = null;
@@ -100,14 +100,14 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 sender.sendMessage(islandInfo.toString());
             }
         });
-        add(new AbstractUSBCommand("protectall", "usb.admin.protectall", tr("protects all islands (time consuming)")) {
+        add(new AbstractCommand("protectall", "usb.admin.protectall", tr("protects all islands (time consuming)")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 protectAll(plugin, sender);
                 return true;
             }
         });
-        add(new AbstractUSBCommand("setbiome", "usb.admin.setbiome", "?leader biome", tr("sets the biome of the island")) {
+        add(new AbstractCommand("setbiome", "usb.admin.setbiome", "?leader biome", tr("sets the biome of the island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 2) {
@@ -135,7 +135,7 @@ public class AdminIslandCommand extends CompositeUSBCommand {
                 return false;
             }
         });
-        add(new AbstractUSBCommand("purge", "usb.admin.purge", "?leader", tr("purges the island")) {
+        add(new AbstractCommand("purge", "usb.admin.purge", "?leader", tr("purges the island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 String cmd = "/usb island purge";

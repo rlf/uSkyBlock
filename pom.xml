@@ -201,6 +201,16 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>dk.lockfuglsang.minecraft</groupId>
+                <artifactId>bukkit-utils</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>dk.lockfuglsang.minecraft</groupId>
+                <artifactId>po-utils</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-API</artifactId>
                 <version>${project.version}</version>

@@ -1,10 +1,10 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,12 +13,12 @@ import java.io.InputStreamReader;
 import java.util.Locale;
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Supports setting the language.
  */
-public class LanguageCommand extends AbstractUSBCommand {
+public class LanguageCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public LanguageCommand(uSkyBlock plugin) {

@@ -457,17 +457,6 @@ msgstr "§4Ungültiges Agumentt, Versuche: INFO, FINE, FINER, FINEST"
 msgid "§eLogging disabled!"
 msgstr "§eAufzeichnen Ausgeschaltet!"
 
-msgid "saves documentation of the commands to a file"
-msgstr ""
-
-#, java-format
-msgid "Wrote documentation to {0}"
-msgstr ""
-
-#, java-format
-msgid "§4Error writing documentation: {0}"
-msgstr ""
-
 msgid "tries to fix the the area of flatland."
 msgstr "Versucht das Flachland zu Reparieren."
 
@@ -677,30 +666,6 @@ msgstr "Ultimativer SkyBlock Anführer"
 
 msgid "show player-information"
 msgstr "Zeige Spieler Informationen"
-
-#, java-format
-msgid "§7Usage: {0}"
-msgstr ""
-
-#, fuzzy
-msgid "Command"
-msgstr "§9Stufe ist {0}"
-
-#, fuzzy
-msgid "Description"
-msgstr "§7Beschreibung: §b{0}\n"
-
-#, fuzzy
-msgid "Permission"
-msgstr "Rechte"
-
-#, java-format
-msgid " [{0}]"
-msgstr ""
-
-#, java-format
-msgid " <{0}>"
-msgstr ""
 
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
@@ -2320,6 +2285,18 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Command"
+#~ msgstr "§9Stufe ist {0}"
+
+#, fuzzy
+#~ msgid "Description"
+#~ msgstr "§7Beschreibung: §b{0}\n"
+
+#, fuzzy
+#~ msgid "Permission"
+#~ msgstr "Rechte"
 
 #, fuzzy
 #~ msgid "   perm: {0}"

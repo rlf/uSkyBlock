@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command.common;
+package dk.lockfuglsang.minecraft.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -9,7 +9,7 @@ import java.util.Map;
  * An abstraction for supporting nesting of commands.
  * This is a light-weight version of the BukkitCommand abstraction.
  */
-public interface USBCommand {
+public interface Command {
     /**
      * Returns the name of the sub-command.
      */
@@ -59,13 +59,13 @@ public interface USBCommand {
      * Returns the parent command (if one such is available).
      * May return <code>null</code>.
      */
-    CompositeUSBCommand getParent();
+    CompositeCommand getParent();
 
     /**
      * Assigns a parent command.
      * @param parent
      */
-    void setParent(CompositeUSBCommand parent);
+    void setParent(CompositeCommand parent);
 
     /**
      * Visitor pattern.

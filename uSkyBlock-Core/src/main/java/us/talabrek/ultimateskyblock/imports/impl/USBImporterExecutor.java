@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.logging.Level;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Delegates and batches the import.

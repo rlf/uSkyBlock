@@ -13,7 +13,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.Map;
 import java.util.logging.Level;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class InfoCommand extends RequireIslandCommand {
     public InfoCommand(uSkyBlock plugin) {

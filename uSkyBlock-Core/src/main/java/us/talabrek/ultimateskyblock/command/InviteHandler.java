@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Responsible for holding out-standing invites, and carrying out a transfer of invitation.

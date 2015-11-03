@@ -1,8 +1,4 @@
-package us.talabrek.ultimateskyblock.util;
-
-import dk.lockfuglsang.minecraft.po.POParser;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.uSkyBlock;
+package dk.lockfuglsang.minecraft.po;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +20,9 @@ import java.util.zip.ZipInputStream;
 public enum I18nUtil {;
     private static final Logger log = Logger.getLogger(I18nUtil.class.getName());
     private static I18n i18n;
+    private static Locale locale;
+    private static File dataFolder = new File(".");
+
     public static String tr(String s) {
         return getI18n().tr(s);
     }
@@ -46,7 +45,17 @@ public enum I18nUtil {;
     }
 
     public static Locale getLocale() {
-        return Settings.locale;
+        return locale != null ? locale : Locale.ENGLISH;
+    }
+
+    public static void setLocale(Locale locale) {
+        I18nUtil.locale = locale;
+        clearCache();
+    }
+
+    public static void setDataFolder(File folder) {
+        dataFolder = folder;
+        clearCache();
     }
 
     public static void clearCache() {
@@ -78,16 +87,8 @@ public enum I18nUtil {;
         I18n(Locale locale) {
             this.locale = locale;
             props = new ArrayList<>();
-            addPropsFromPropertiesFile();
             addPropsFromPluginFolder();
             addPropsFromJar();
-        }
-
-        private void addPropsFromPropertiesFile() {
-            Properties messages = FileUtil.readProperties("messages.properties");
-            if (messages != null) {
-                props.add(messages);
-            }
         }
 
         private void addPropsFromJar() {
@@ -112,7 +113,7 @@ public enum I18nUtil {;
         }
 
         private void addPropsFromPluginFolder() {
-            File poFile = new File(uSkyBlock.getInstance().getDataFolder(), "i18n/" + locale + ".po");
+            File poFile = new File(dataFolder, "i18n/" + locale + ".po");
             if (poFile.exists()) {
                 try (InputStream in = new FileInputStream(poFile)) {
                     Properties i18nProps = POParser.asProperties(in);

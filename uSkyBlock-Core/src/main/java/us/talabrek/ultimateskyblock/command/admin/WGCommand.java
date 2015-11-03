@@ -1,21 +1,21 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.command.island.RequirePlayerCommand;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Some hooks into the WG Handler
  */
-public class WGCommand extends CompositeUSBCommand {
+public class WGCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public WGCommand(uSkyBlock plugin) {

@@ -1,8 +1,8 @@
 package us.talabrek.ultimateskyblock.imports.update;
 
+import dk.lockfuglsang.minecraft.file.FileUtil;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FileUtil;
 
 import java.io.File;
 

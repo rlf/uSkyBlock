@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.marktr;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class TrustCommand extends RequireIslandCommand {
     public TrustCommand(uSkyBlock plugin) {

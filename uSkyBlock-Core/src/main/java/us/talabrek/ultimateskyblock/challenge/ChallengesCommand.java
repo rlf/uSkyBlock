@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class ChallengesCommand implements CommandExecutor, TabCompleter {
     private final uSkyBlock plugin;
@@ -26,7 +26,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
     }
 
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] split) {
-        if (!plugin.isRequirementsMet(sender)) {
+        if (!plugin.isRequirementsMet(sender, null)) {
             return false;
         }
         if (!(sender instanceof Player)) {

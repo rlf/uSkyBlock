@@ -1,12 +1,12 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
+import dk.lockfuglsang.minecraft.command.completion.AbstractTabCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
-import us.talabrek.ultimateskyblock.command.completion.AbstractTabCompleter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 
@@ -14,15 +14,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Manages player cooldowns
  */
-public class CooldownCommand extends CompositeUSBCommand {
+public class CooldownCommand extends CompositeCommand {
     public CooldownCommand(final uSkyBlock plugin) {
         super("cooldown|cd", "usb.admin.cooldown", tr("Controls player-cooldowns"));
-        add(new AbstractUSBCommand("clear|c", null, "player command", tr("clears the cooldown on a command (* = all)")) {
+        add(new AbstractCommand("clear|c", null, "player command", tr("clears the cooldown on a command (* = all)")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length < 2) {
@@ -46,7 +46,7 @@ public class CooldownCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractUSBCommand("restart|r", null, "player", tr("restarts the cooldown on the command")) {
+        add(new AbstractCommand("restart|r", null, "player", tr("restarts the cooldown on the command")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length < 2) {
@@ -68,7 +68,7 @@ public class CooldownCommand extends CompositeUSBCommand {
                 }
             }
         });
-        add(new AbstractUSBCommand("list|l", null, "?player", tr("lists all the active cooldowns")) {
+        add(new AbstractCommand("list|l", null, "?player", tr("lists all the active cooldowns")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length < 1) {

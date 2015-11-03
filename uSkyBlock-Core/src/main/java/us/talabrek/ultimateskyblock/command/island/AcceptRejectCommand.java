@@ -1,8 +1,8 @@
 package us.talabrek.ultimateskyblock.command.island;
 
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.InviteHandler;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Map;
 

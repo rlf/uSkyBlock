@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.command.common;
+package dk.lockfuglsang.minecraft.command;
 
 import org.bukkit.command.CommandExecutor;
 
@@ -6,10 +6,10 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
- * Simple visitor for generating plain-text documentation of an USBCommand-hierarchy.
+ * Simple visitor for generating plain-text documentation of an Command-hierarchy.
  */
 public class PlainTextCommandVisitor implements CommandVisitor {
     private final List<Row> rows = new ArrayList<>();
@@ -53,7 +53,7 @@ public class PlainTextCommandVisitor implements CommandVisitor {
     }
 
     @Override
-    public void visit(USBCommand cmd) {
+    public void visit(Command cmd) {
         if (cmd instanceof CommandExecutor) {
             rows.add(null); // separator
         }
@@ -67,12 +67,12 @@ public class PlainTextCommandVisitor implements CommandVisitor {
         rows.add(new Row(commandPath, cmd.getDescription(), cmd.getPermission()));
     }
 
-    private String getCommandPath(USBCommand cmd) {
+    private String getCommandPath(Command cmd) {
         String path = cmd.getParent() != null ? getCommandPath(cmd.getParent()) + " " : "";
         return path + getShortestCmd(cmd) + getParams(cmd);
     }
 
-    private String getShortestCmd(USBCommand cmd) {
+    private String getShortestCmd(Command cmd) {
         String cmdName = cmd.getName();
         for (String alias : cmd.getAliases()) {
             if (alias.length() < cmdName.length()) {
@@ -82,7 +82,7 @@ public class PlainTextCommandVisitor implements CommandVisitor {
         return cmdName;
     }
 
-    private String getAliases(USBCommand cmd) {
+    private String getAliases(Command cmd) {
         String aliases = "";
         for (int i = 1; i < cmd.getAliases().length; i++) {
             aliases += "|" + cmd.getAliases()[i];
@@ -90,7 +90,7 @@ public class PlainTextCommandVisitor implements CommandVisitor {
         return aliases;
     }
 
-    private String getParams(USBCommand cmd) {
+    private String getParams(Command cmd) {
         String msg = "";
         for (String param : cmd.getParams()) {
             if (param.startsWith("?")) {

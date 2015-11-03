@@ -1,20 +1,20 @@
 package us.talabrek.ultimateskyblock.command.island;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.InviteHandler;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Collection;
 import java.util.Map;
 
-public class PartyCommand extends CompositeUSBCommand {
+public class PartyCommand extends CompositeCommand {
     private final uSkyBlock plugin;
     private final SkyBlockMenu menu;
 
@@ -22,14 +22,14 @@ public class PartyCommand extends CompositeUSBCommand {
         super("party", "usb.island.create", I18nUtil.tr("show party information"));
         this.plugin = plugin;
         this.menu = menu;
-        add(new AbstractUSBCommand("info", I18nUtil.tr("shows information about your party")) {
+        add(new AbstractCommand("info", I18nUtil.tr("shows information about your party")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 sender.sendMessage(plugin.getIslandInfo((Player) sender).toString());
                 return true;
             }
         });
-        add(new AbstractUSBCommand("invites", I18nUtil.tr("show pending invites")) {
+        add(new AbstractCommand("invites", I18nUtil.tr("show pending invites")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
@@ -42,7 +42,7 @@ public class PartyCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new AbstractUSBCommand("uninvite", null, "player", I18nUtil.tr("withdraw an invite")) {
+        add(new AbstractCommand("uninvite", null, "player", I18nUtil.tr("withdraw an invite")) {
             @Override
             public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, final String... args) {
                 if (args.length == 1) {

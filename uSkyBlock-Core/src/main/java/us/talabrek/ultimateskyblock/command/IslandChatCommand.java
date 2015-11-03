@@ -1,13 +1,13 @@
 package us.talabrek.ultimateskyblock.command;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommandExecutor;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.command.common.AbstractCommandExecutor;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Arrays;
 import java.util.List;

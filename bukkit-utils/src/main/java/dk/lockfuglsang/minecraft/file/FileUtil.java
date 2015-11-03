@@ -1,10 +1,9 @@
-package us.talabrek.ultimateskyblock.util;
+package dk.lockfuglsang.minecraft.file;
 
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,6 +35,7 @@ public enum FileUtil {;
     private static final Logger log = Logger.getLogger(FileUtil.class.getName());
     private static final Collection<String> allwaysOverwrite = Arrays.asList("levelConfig.yml");
     private static final Map<String, YmlConfiguration> configFiles = new ConcurrentHashMap<>();
+    private static Locale locale = Locale.getDefault();
     private static File dataFolder;
 
     public static void readConfig(FileConfiguration config, File file) {
@@ -110,7 +111,7 @@ public enum FileUtil {;
         return file;
     }
     private static File getDataFolder() {
-        return dataFolder != null ? dataFolder : uSkyBlock.getInstance().getDataFolder();
+        return dataFolder != null ? dataFolder : new File(".");
     }
     /**
      * System-encoding agnostic config-reader
@@ -167,7 +168,7 @@ public enum FileUtil {;
 
     private static String getLocaleName(String fileName) {
         String baseName = getBasename(fileName);
-        return baseName + "_" + I18nUtil.getLocale() + fileName.substring(baseName.length());
+        return baseName + "_" + locale + fileName.substring(baseName.length());
     }
 
     private static File getConfigFile(String configName) {
@@ -257,11 +258,14 @@ public enum FileUtil {;
         dest.getDefaults().set("move-nodes", null);
     }
 
-    public static void init(File dataFolder) {
+    public static void setDataFolder(File dataFolder) {
         FileUtil.dataFolder = dataFolder;
         configFiles.clear();
     }
 
+    public static void setLocale(Locale loc) {
+        locale = loc != null ? loc : locale;
+    }
     public static void reload() {
         for (Map.Entry<String, YmlConfiguration> e : configFiles.entrySet()) {
             File configFile = new File(getDataFolder(), e.getKey());
@@ -277,7 +281,7 @@ public enum FileUtil {;
                 prop.load(in);
                 return prop;
             } catch (IOException e) {
-                uSkyBlock.getInstance().getLogger().log(Level.WARNING, "Error reading " + fileName, e);
+                log.log(Level.WARNING, "Error reading " + fileName, e);
             }
         }
         return null;

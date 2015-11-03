@@ -1,21 +1,21 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
-public class PerkCommand extends CompositeUSBCommand {
+public class PerkCommand extends CompositeCommand {
     public PerkCommand(final uSkyBlock plugin) {
         super("perk", "usb.admin.perk", "shows perk-information");
-        add(new AbstractUSBCommand("list", "lists all perks") {
+        add(new AbstractCommand("list", "lists all perks") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 StringBuilder sb = new StringBuilder();
@@ -28,7 +28,7 @@ public class PerkCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new AbstractUSBCommand("player", "", "player", "shows a specific players perks") {
+        add(new AbstractCommand("player", "", "player", "shows a specific players perks") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {

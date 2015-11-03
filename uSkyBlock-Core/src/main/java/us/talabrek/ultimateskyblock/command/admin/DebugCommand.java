@@ -1,11 +1,11 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
-import us.talabrek.ultimateskyblock.command.common.CompositeUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,13 +23,13 @@ import java.util.logging.Logger;
 /**
  * Debug control.
  */
-public class DebugCommand extends CompositeUSBCommand {
+public class DebugCommand extends CompositeCommand {
     public static final Logger log = Logger.getLogger("us.talabrek.ultimateskyblock");
     private static Handler logHandler = null;
 
     public DebugCommand(final uSkyBlock plugin) {
         super("debug", "usb.admin.debug", I18nUtil.tr("control debugging"));
-        add(new AbstractUSBCommand("setlevel", null, "level", I18nUtil.tr("set debug-level")) {
+        add(new AbstractCommand("setlevel", null, "level", I18nUtil.tr("set debug-level")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
@@ -39,7 +39,7 @@ public class DebugCommand extends CompositeUSBCommand {
                 return false;
             }
         });
-        add(new AbstractUSBCommand("enable|disable", null, I18nUtil.tr("toggle debug-logging")) {
+        add(new AbstractCommand("enable|disable", null, I18nUtil.tr("toggle debug-logging")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (logHandler != null && alias.equals("disable")) {
@@ -52,7 +52,7 @@ public class DebugCommand extends CompositeUSBCommand {
                 return true;
             }
         });
-        add(new AbstractUSBCommand("flush", null, I18nUtil.tr("flush current content of the logger to file.")) {
+        add(new AbstractCommand("flush", null, I18nUtil.tr("flush current content of the logger to file.")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (logHandler != null) {

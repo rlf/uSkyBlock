@@ -1,16 +1,16 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.command.common.AbstractUSBCommand;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 
 import java.util.Map;
 
 /**
  * Displays detailed version information.
  */
-public class VersionCommand extends AbstractUSBCommand {
+public class VersionCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public VersionCommand(uSkyBlock plugin) {

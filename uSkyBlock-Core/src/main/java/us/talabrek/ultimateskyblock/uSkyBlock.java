@@ -1,6 +1,10 @@
 package us.talabrek.ultimateskyblock;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import dk.lockfuglsang.minecraft.command.Command;
+import dk.lockfuglsang.minecraft.command.CommandManager;
+import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -69,8 +73,6 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerLogic;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
-import us.talabrek.ultimateskyblock.util.FileUtil;
-import us.talabrek.ultimateskyblock.util.I18nUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -91,11 +93,11 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.Settings.island_height;
-import static us.talabrek.ultimateskyblock.util.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
 
-public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
+public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManager.RequirementChecker {
 
 
     private static final String CN = uSkyBlock.class.getName();
@@ -205,7 +207,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         skyBlockNetherWorld = null;
         missingRequirements = null;
         instance = this;
-        FileUtil.init(getDataFolder());
+        CommandManager.registerRequirements(this);
+        FileUtil.setDataFolder(getDataFolder());
+        I18nUtil.setDataFolder(getDataFolder());
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         reloadConfigs();
 
@@ -250,9 +254,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
                             playerLogic.loadPlayerDataAsync(player);
                         }
                     }
-                }, getConfig().getLong("init.loadPlayerDelay", 50L));
+                }, getConfig().getLong("setDataFolder.loadPlayerDelay", 50L));
             }
-        }, getConfig().getLong("init.initDelay", 50L));
+        }, getConfig().getLong("setDataFolder.initDelay", 50L));
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
@@ -262,7 +266,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI {
         log(Level.INFO, getVersionInfo(false));
     }
 
-    public synchronized boolean isRequirementsMet(CommandSender sender) {
+    public synchronized boolean isRequirementsMet(CommandSender sender, Command command) {
         if (missingRequirements == null) {
             PluginManager pluginManager = getServer().getPluginManager();
             missingRequirements = "";
