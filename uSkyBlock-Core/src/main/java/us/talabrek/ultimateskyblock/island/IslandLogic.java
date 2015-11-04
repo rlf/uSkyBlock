@@ -25,6 +25,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditClearFlatlandTask;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -285,7 +286,7 @@ public class IslandLogic {
     public void generateTopTen(final CommandSender sender) {
         List<IslandLevel> topTen = new ArrayList<>();
         final File folder = directoryIslands;
-        final String[] listOfFiles = folder.list(FileUtil.createIslandFilenameFilter());
+        final String[] listOfFiles = folder.list(IslandUtil.createIslandFilenameFilter());
         for (String file : listOfFiles) {
             String islandName = FileUtil.getBasename(file);
             try {

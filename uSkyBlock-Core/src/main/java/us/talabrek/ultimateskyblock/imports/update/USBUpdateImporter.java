@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.imports.update;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
 
 import java.io.File;
 
@@ -31,7 +32,7 @@ public class USBUpdateImporter implements USBImporter {
 
     @Override
     public File[] getFiles(uSkyBlock plugin) {
-        return plugin.directoryIslands.listFiles(FileUtil.createIslandFilenameFilter());
+        return plugin.directoryIslands.listFiles(IslandUtil.createIslandFilenameFilter());
     }
 
     @Override

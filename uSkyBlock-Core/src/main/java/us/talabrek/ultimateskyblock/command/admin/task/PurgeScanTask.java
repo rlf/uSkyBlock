@@ -7,6 +7,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class PurgeScanTask extends BukkitRunnable {
         this.sender = sender;
         now = System.currentTimeMillis();
         this.cutOff = now - (time * 3600000L);
-        String[] islandList = islandDir.list(FileUtil.createIslandFilenameFilter());
+        String[] islandList = islandDir.list(IslandUtil.createIslandFilenameFilter());
         this.islandList = new ArrayList<>(Arrays.asList(islandList));
         purgeList = new ArrayList<>();
         purgeLevel = plugin.getConfig().getDouble("options.advanced.purgeLevel", 10);

@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class ProtectAllTask extends IncrementalRunnable {
 
     private void init() {
         if (islandNames == null) {
-            String[] list = getPlugin().directoryIslands.list(FileUtil.createIslandFilenameFilter());
+            String[] list = getPlugin().directoryIslands.list(IslandUtil.createIslandFilenameFilter());
             islandNames = new ArrayList<>(Arrays.asList(list));
         }
     }

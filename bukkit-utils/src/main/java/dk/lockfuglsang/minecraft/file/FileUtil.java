@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -33,10 +32,16 @@ import java.util.logging.Logger;
  */
 public enum FileUtil {;
     private static final Logger log = Logger.getLogger(FileUtil.class.getName());
-    private static final Collection<String> allwaysOverwrite = Arrays.asList("levelConfig.yml");
+    private static final Collection<String> allwaysOverwrite = new ArrayList<>();
     private static final Map<String, YmlConfiguration> configFiles = new ConcurrentHashMap<>();
     private static Locale locale = Locale.getDefault();
     private static File dataFolder;
+
+    public static void setAllwaysOverwrite(String s) {
+        if (!allwaysOverwrite.contains(s)) {
+            allwaysOverwrite.add(s);
+        }
+    }
 
     public static void readConfig(FileConfiguration config, File file) {
         if (file == null) {
@@ -84,18 +89,6 @@ public enum FileUtil {;
             @Override
             public boolean accept(File dir, String name) {
                 return name != null && name.endsWith(".yml");
-            }
-        };
-    }
-
-    public static FilenameFilter createIslandFilenameFilter() {
-        return new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name != null
-                        && name.matches("-?[0-9]+,-?[0-9]+.yml")
-                        && !"null.yml".equalsIgnoreCase(name)
-                        && !"0,0.yml".equalsIgnoreCase(name);
             }
         };
     }
