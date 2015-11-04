@@ -209,7 +209,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         instance = this;
         CommandManager.registerRequirements(this);
         FileUtil.setDataFolder(getDataFolder());
-        FileUtil.addAllwaysOverwrite("levelConfig.yml");
+        FileUtil.setAllwaysOverwrite("levelConfig.yml");
         I18nUtil.setDataFolder(getDataFolder());
 
         uSkyBlock.pName = "[" + getDescription().getName() + "] ";
