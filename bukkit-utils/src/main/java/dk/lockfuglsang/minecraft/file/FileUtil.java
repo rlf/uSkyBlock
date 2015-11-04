@@ -106,8 +106,25 @@ public enum FileUtil {;
     private static File getDataFolder() {
         return dataFolder != null ? dataFolder : new File(".");
     }
+
     /**
      * System-encoding agnostic config-reader
+     * Reads and returns the configuration found in:
+     * <pre>
+     *   a) the datafolder
+     *
+     *     a.1) if a config named "config_en.yml" exists - that is read.
+     *
+     *     a.2) otherwise "config.yml" is read (created if need be).
+     *
+     *   b) if the version differs from the same resource on the classpath
+     *
+     *      b.1) all nodes in the jar-file-version is merged* into the local-file
+     *
+     *      b.2) unless the configName is in the allwaysOverwrite - then the jar-version wins
+     *
+     * *merged: using data-conversion of special nodes.
+     * </pre>
      */
     public static YmlConfiguration getYmlConfiguration(String configName) {
         // Caching, for your convenience! (and a bigger memory print!)
