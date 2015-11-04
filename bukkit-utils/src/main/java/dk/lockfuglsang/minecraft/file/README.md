@@ -1,6 +1,6 @@
 # File Utilities
 
-The `FileUtil´ class simplifies resource reading for Bukkit plugins.
+The `FileUtil` class simplifies resource reading for Bukkit plugins.
 
 ## Features
 
@@ -29,3 +29,19 @@ The utility supports the following features:
     }
   }
 ```
+
+The `config` in the above example is created the following way:
+  * Read `config.yml` from the data-folder
+    * if a `config_en.yml` exists - read it
+    * else if a `config.yml` exist - read it
+  * Read `config.yml` from the jar-file (classpath)
+    * if a 'config_en.yml` exists - read it
+    * else if a `config.yml` exsits - read it
+  * Compare `version` read from both configs
+    * if `config.yml` is listed in `allwaysOverwrite` - just use the jar-file
+    * else if jar-version > file-version or file-version does not exist
+      * merge nodes from jar into config - preserving node-comments
+        * ignore nodes listed in `merge-ignore` from the existing config-file
+        * move nodes listed in `move-nodes` from the jar-file
+        * replace nodes listed in `replace-nodes` from the jar-file, if they have default values
+        * set `version` to the jar-file version
