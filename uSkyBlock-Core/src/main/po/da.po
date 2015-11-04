@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-10-30 23:22+0100\n"
+"PO-Revision-Date: 2015-11-04 01:05+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.6\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -114,7 +115,7 @@ msgid "§eYour inventory is §4full§e. Items dropped on the ground."
 msgstr "§eDine tasker ef §4fulde§e. Tingene er faldet på jorden."
 
 msgid "§e§lClick to complete this challenge."
-msgstr "§e§lKlik for at gennemføre udfordringen."
+msgstr "§e§lKlik for at gennemføre."
 
 msgid "§4§lYou can't repeat this challenge."
 msgstr "§4§lDu kan ikke gentage denne udfordring."
@@ -268,22 +269,21 @@ msgstr ""
 msgid "removes the player from the island"
 msgstr "fjerner spilleren fra øen"
 
-#, fuzzy
 msgid "adds the player to the island"
-msgstr "fjerner spilleren fra øen"
+msgstr "tilføjer spilleren til øen"
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
 msgstr "§b{0}§d er blevet medlem af øen."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No player named {0} found!"
 msgstr "§4Ingen spiller med navn {0} fundet!"
 
 msgid ""
 "§4No valid island provided, either stand within one, or provide an island "
 "name"
-msgstr ""
+msgstr "§4Ingen valid ø fundet, enten stå på en ø, eller skriv et navn"
 
 msgid "print out info about the island"
 msgstr "vis informationer om øen"
@@ -1205,9 +1205,8 @@ msgstr "§4Det er en dårlig ide at fjerne din lava!"
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§Den spiller har udelukket dig fra sin ø."
 
-#, fuzzy
 msgid "§4That island is §clocked.§e No teleporting to the island."
-msgstr "§Den spiller har udelukket dig fra sin ø."
+msgstr "§Den ø er låst.§e Ikke muligt at teleportere til den."
 
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§eDu har nået din øs spawn-grænse."
@@ -1219,7 +1218,7 @@ msgid "§cBanned:§e You are banned from this island."
 msgstr "§cForvist:§e Du har ikke lov til at komme på denne ø."
 
 msgid "§cLocked:§e That island is locked! No entry allowed."
-msgstr ""
+msgstr "§cLåst:§e Den ø er låst! Ingen adgang."
 
 #, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
@@ -2050,9 +2049,8 @@ msgstr "Caps On"
 msgid "§9Text Editor"
 msgstr "§9Tekst Redigering"
 
-#, fuzzy
 msgid "§eSending you to spawn."
-msgstr "§aTeleporterer dig til din ø."
+msgstr "§aTeleporterer dig til spawn."
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Der opstod en fejl under gemning af øens data!"
@@ -2137,9 +2135,9 @@ msgstr "§4INAKTIV"
 msgid "N/A"
 msgstr "N/A"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr "§7Navn: §d{0} ({1})\n"
+msgstr "§7Navn: §d{0} ({1}§d)\n"
 
 #, java-format
 msgid "§7Version: §d{0}\n"
