@@ -50,16 +50,19 @@ public class SpawnEvents implements Listener {
             CreatureSpawnEvent.SpawnReason.BUILD_IRONGOLEM, CreatureSpawnEvent.SpawnReason.BUILD_SNOWMAN,
             CreatureSpawnEvent.SpawnReason.BUILD_WITHER
     ));
-    private static final Map<EntityType, Set<Material>> FODDER = new HashMap<>();
+    private static final Map<Short, Set<Material>> FODDER = new HashMap<>();
+
+    public static final short RABBIT_ID = 101;
+
     static {
-        FODDER.put(EntityType.PIG, Collections.singleton(Material.CARROT_ITEM));
-        FODDER.put(EntityType.COW, Collections.singleton(Material.WHEAT));
-        FODDER.put(EntityType.SHEEP, Collections.singleton(Material.WHEAT));
-        FODDER.put(EntityType.CHICKEN, Collections.singleton(Material.SEEDS));
-        FODDER.put(EntityType.OCELOT, Collections.singleton(Material.RAW_FISH));
-        FODDER.put(EntityType.WOLF, Collections.singleton(Material.RAW_BEEF));
-        FODDER.put(EntityType.HORSE, new HashSet<>(Arrays.asList(Material.GOLDEN_APPLE, Material.GOLDEN_CARROT)));
-        FODDER.put(EntityType.RABBIT, new HashSet<>(Arrays.asList(Material.CARROT, Material.GOLDEN_CARROT, Material.YELLOW_FLOWER)));
+        FODDER.put(EntityType.PIG.getTypeId(), Collections.singleton(Material.CARROT_ITEM));
+        FODDER.put(EntityType.COW.getTypeId(), Collections.singleton(Material.WHEAT));
+        FODDER.put(EntityType.SHEEP.getTypeId(), Collections.singleton(Material.WHEAT));
+        FODDER.put(EntityType.CHICKEN.getTypeId(), Collections.singleton(Material.SEEDS));
+        FODDER.put(EntityType.OCELOT.getTypeId(), Collections.singleton(Material.RAW_FISH));
+        FODDER.put(EntityType.WOLF.getTypeId(), Collections.singleton(Material.RAW_BEEF));
+        FODDER.put(EntityType.HORSE.getTypeId(), new HashSet<>(Arrays.asList(Material.GOLDEN_APPLE, Material.GOLDEN_CARROT)));
+        FODDER.put(RABBIT_ID, new HashSet<>(Arrays.asList(Material.CARROT, Material.GOLDEN_CARROT, Material.YELLOW_FLOWER)));
     }
     private final uSkyBlock plugin;
 
@@ -87,7 +90,7 @@ public class SpawnEvents implements Listener {
         if (entity == null || entity.getType() == null || item == null && item.getType() == null) {
             return false;
         }
-        Set<Material> acceptedFodder = FODDER.get(entity.getType());
+        Set<Material> acceptedFodder = FODDER.get(entity.getType().getTypeId());
         return acceptedFodder != null && acceptedFodder.contains(item.getType());
     }
 

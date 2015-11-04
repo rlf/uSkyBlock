@@ -146,6 +146,12 @@ public class Settings {
             nether_enabled = false;
             changed = true;
         }
+        nether_enabled = config.getBoolean("nether.enabled", false);
+        if (nether_enabled && (island_distance % 32 != 0 || island_protectionRange % 32 != 0)) {
+            log.warning("Nether DISABLED, since island distance and protectionRange is not divisible by 32!");
+            nether_enabled = false;
+            changed = true;
+        }
         return changed;
     }
 
