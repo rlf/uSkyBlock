@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.event;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
@@ -139,7 +140,7 @@ public class SpawnEvents implements Listener {
             event.setCancelled(true); // Only allow spawning on active islands...
             return;
         }
-        if (entityType.getEntityClass().isAssignableFrom(Ghast.class)) {
+        if (entityType.getEntityClass().isAssignableFrom(Ghast.class) && location.getWorld().getEnvironment() != World.Environment.NETHER) {
             // Disallow ghasts for now...
             event.setCancelled(true);
             return;
