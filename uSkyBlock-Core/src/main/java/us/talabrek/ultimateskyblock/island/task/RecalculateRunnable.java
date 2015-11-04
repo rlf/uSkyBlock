@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.island.task;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
@@ -25,12 +24,13 @@ public class RecalculateRunnable extends BukkitRunnable {
             }
         }
         if (!recalcIslands.isEmpty()) {
-            Bukkit.getScheduler().runTask(plugin, new RecalculateTopTen(plugin, recalcIslands, new Runnable() {
+            RecalculateTopTen runnable = new RecalculateTopTen(plugin, recalcIslands, new Runnable() {
                 @Override
                 public void run() {
                     plugin.fireChangeEvent(new uSkyBlockEvent(null, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
                 }
-            }));
+            });
+            runnable.runTask(plugin);
         }
     }
 }

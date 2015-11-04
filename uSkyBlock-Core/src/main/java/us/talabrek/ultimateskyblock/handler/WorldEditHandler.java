@@ -199,7 +199,7 @@ public class WorldEditHandler {
         };
         WorldEditClear weRegen = new WorldEditClear(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
         WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
-        Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), regen);
+        regen.runTask(uSkyBlock.getInstance());
     }
 
     public static void clearNetherIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
@@ -220,7 +220,7 @@ public class WorldEditHandler {
             };
         WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
         WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
-        Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), regen);
+        regen.runTask(uSkyBlock.getInstance());
     }
 
     private static Region getRegion(World skyWorld, ProtectedRegion region) {
