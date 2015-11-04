@@ -6,12 +6,14 @@ import net.milkbowl.vault.item.Items;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static us.talabrek.ultimateskyblock.util.FormatUtil.prefix;
+import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
 
 /**
  * The data-object for a challenge
@@ -134,7 +136,7 @@ public class Challenge {
         ItemStack currentChallengeItem = getDisplayItem();
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = new ArrayList<>();
-        lores.add("\u00a77" + getDescription());
+        lores.addAll(prefix(wordWrap(getDescription(), 30, 30), "\u00a77"));
         int timesCompleted = completion.getTimesCompletedSinceTimer();
         Reward reward = getReward();
         if (completion.getTimesCompleted() > 0 && isRepeatable()) {
@@ -157,7 +159,7 @@ public class Challenge {
         for (ItemStack item : getRequiredItems(timesCompleted)) {
             lores.add(item.getItemMeta().getDisplayName());
         }
-        List<String> lines = FormatUtil.wordWrap("\u00a7a" + reward.getRewardText(), 20, 30);
+        List<String> lines = wordWrap("\u00a7a" + reward.getRewardText(), 20, 30);
         lores.add(I18nUtil.tr("\u00a76Item Reward: \u00a7a") + lines.get(0));
         for (String line : lines.subList(1, lines.size())) {
             lores.add(line);

@@ -1380,7 +1380,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);
             if (dependency != null) {
                 msg += tr("\u00a77------------------------------\n");
-                msg += tr("\u00a77Name: \u00a7d{0} ({1})\n", dependency.getName(),
+                msg += tr("\u00a77Name: \u00a7d{0} ({1}\u00a7d)\n", dependency.getName(),
                         checkEnabled ? (dependency.isEnabled() ? tr("\u00a72ENABLED") : tr("\u00a74DISABLED")) : tr("N/A"));
                 msg += tr("\u00a77Version: \u00a7d{0}\n", dependency.getDescription().getVersion());
             }

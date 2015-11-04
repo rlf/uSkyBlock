@@ -2207,7 +2207,7 @@ msgid "N/A"
 msgstr ""
 
 #, java-format
-msgid "§7Name: §d{0} ({1})\n"
+msgid "§7Name: §d{0} ({1}§d)\n"
 msgstr ""
 
 #, java-format
