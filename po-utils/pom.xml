@@ -6,7 +6,7 @@
 
     <groupId>dk.lockfuglsang.minecraft</groupId>
     <artifactId>po-utils</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 
     <properties>
         <GITHUB_TOKEN>invalid</GITHUB_TOKEN>

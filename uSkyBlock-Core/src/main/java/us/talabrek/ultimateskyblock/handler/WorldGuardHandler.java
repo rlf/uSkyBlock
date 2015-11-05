@@ -103,7 +103,12 @@ public class WorldGuardHandler {
         }
         try {
             WorldGuardPlugin worldGuard = getWorldGuard();
-            RegionManager regionManager = worldGuard.getRegionManager(plugin.getSkyBlockNetherWorld());
+            World nether = plugin.getSkyBlockNetherWorld();
+            if (nether == null) {
+                log.log(Level.INFO, "Nether is enabled, but no skyworld_nether was found!");
+                return false;
+            }
+            RegionManager regionManager = worldGuard.getRegionManager(nether);
             String regionName = islandConfig.getName() + "nether";
             if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
                 ProtectedCuboidRegion region = setRegionFlags(sender, islandConfig, regionName);
@@ -135,9 +140,12 @@ public class WorldGuardHandler {
             regionManager.addRegion(region);
             String netherName = islandInfo.getName() + "nether";
             region = setRegionFlags(sender, islandInfo, netherName);
-            regionManager = getWorldGuard().getRegionManager(uSkyBlock.getInstance().getSkyBlockNetherWorld());
-            regionManager.removeRegion(netherName);
-            regionManager.addRegion(region);
+            World netherWorld = uSkyBlock.getInstance().getSkyBlockNetherWorld();
+            if (netherWorld != null) {
+                regionManager = getWorldGuard().getRegionManager(netherWorld);
+                regionManager.removeRegion(netherName);
+                regionManager.addRegion(region);
+            }
         } catch (Exception e) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
@@ -325,7 +333,7 @@ public class WorldGuardHandler {
     }
 
     public static ProtectedRegion getNetherRegionAt(Location location) {
-        if (!Settings.nether_enabled) {
+        if (!Settings.nether_enabled || location == null) {
             return null;
         }
         WorldGuardPlugin worldGuard = getWorldGuard();
