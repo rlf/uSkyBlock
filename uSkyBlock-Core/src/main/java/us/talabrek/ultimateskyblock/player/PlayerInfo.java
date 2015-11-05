@@ -5,6 +5,7 @@ import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -96,8 +97,12 @@ public class PlayerInfo implements Serializable {
 
     public Location getIslandNetherLocation() {
         Location l = getIslandLocation();
+        World nether = uSkyBlock.getInstance().getSkyBlockNetherWorld();
+        if (nether == null) {
+            return null;
+        }
         if (l != null) {
-            l.setWorld(uSkyBlock.getInstance().getSkyBlockNetherWorld());
+            l.setWorld(nether);
             l.setY(l.getY()/2);
         }
         return l;

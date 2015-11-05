@@ -142,9 +142,7 @@ public class LevelLogic {
         // is further threading needed here?
         final ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
         final List<ChunkSnapshot> snapshotsOverworld = createChunkSnapshots(l, region);
-        Location netherLoc = l.clone();
-        netherLoc.setWorld(plugin.getSkyBlockNetherWorld());
-        netherLoc.setY(netherLoc.getY()/2);
+        Location netherLoc = getNetherLocation(l);
         final ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherLoc);
         final List<ChunkSnapshot> snapshotsNether = createChunkSnapshots(netherLoc, netherRegion);
 
@@ -213,10 +211,17 @@ public class LevelLogic {
         });
     }
 
+    private Location getNetherLocation(Location l) {
+        Location netherLoc = l.clone();
+        netherLoc.setWorld(plugin.getSkyBlockNetherWorld());
+        netherLoc.setY(netherLoc.getY()/2);
+        return netherLoc;
+    }
+
     private List<ChunkSnapshot> createChunkSnapshots(Location l, ProtectedRegion region) {
         final List<ChunkSnapshot> snapshots = new ArrayList<>();
         if (region == null) {
-            log.warning("No WG region found for island at " + LocationUtil.asString(l));
+            log.finer("No WG region found for island at " + LocationUtil.asString(l));
             return null;
         }
         Region weRegion = new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint());
