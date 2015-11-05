@@ -1740,23 +1740,6 @@ msgstr ""
 "Spawn de mob \n"
 "passifs et hostiles."
 
-#, fuzzy
-msgid "Deep Ocean"
-msgstr "Ocean"
-
-#, fuzzy
-msgid ""
-"The deep-ocean biome is an advanced\n"
-"biome. Passive mobs like animals will\n"
-"not spawn. Hostile mobs \n"
-"(including Guardians) will\n"
-"spawn normally."
-msgstr ""
-"Biome Ocean\n"
-"Biome par défaut\n"
-"Spawn de mob \n"
-"passifs et hostiles."
-
 #, java-format
 msgid "Biome: {0}"
 msgstr "Biome: {0}"
@@ -2158,6 +2141,23 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Deep Ocean"
+#~ msgstr "Ocean"
+
+#, fuzzy
+#~ msgid ""
+#~ "The deep-ocean biome is an advanced\n"
+#~ "biome. Passive mobs like animals will\n"
+#~ "not spawn. Hostile mobs \n"
+#~ "(including Guardians) will\n"
+#~ "spawn normally."
+#~ msgstr ""
+#~ "Biome Ocean\n"
+#~ "Biome par défaut\n"
+#~ "Spawn de mob \n"
+#~ "passifs et hostiles."
 
 #~ msgid "§7Usage: {0}"
 #~ msgstr "§7Utilisation: {0}"
