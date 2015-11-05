@@ -2,7 +2,7 @@
 allowChallenges: true
 
 # [island/player] Whether challenges are tracked per player, or per island
-challengeSharing: player
+challengeSharing: island
 
 # [true/false] If true, first time challenge completions are broadcast to the whole server.
 broadcastCompletion: true
@@ -296,6 +296,16 @@ ranks:
           text: '2 redstone, 1 bucket'
           currency: 5
           xp: 15
+      homeowner:
+        description: 'Build a house with furnishings.'
+        type: onIsland
+        requiredItems: '26:1 58:1 20:1 64:1 61:1 47:1 50:1'
+        displayItem: 324
+        reward:
+          items: '84:1 2267:1 22:10'
+          text: '1 jukebox, 1 disk and 10 lapis lazuli'
+          currency: 100
+          xp: 100
       adeptbuilder:
         description: 'Reach island level 100.'
         type: islandLevel
@@ -306,20 +316,10 @@ ranks:
           text: '12 obsidian'
           currency: 75
           xp: 75
-      homeowner:
-        description: 'Build a house with furnishings.'
-        type: onIsland
-        requiredItems: '26:1 58:1 20:1 64:1 61:1 47:1 50:1'
-        displayItem: 64
-        reward:
-          items: '84:1 2267:1 22:10'
-          text: '1 jukebox, 1 disk and 10 lapis lazuli'
-          currency: 100
-          xp: 100
   Hard:
     displayItem: GOLD_BLOCK
     requires:
-      completedChallenges: 14
+      rankLeeway: 2
     challenges:
       netherportal:
         description: 'Build a nether portal on your island.'
@@ -346,18 +346,6 @@ ranks:
           text: '1 gold ingot, 1 blaze rod'
           currency: 25
           xp: 15
-      brickleveler:
-        description: 'Place 50 island levels worth of stone brick on your island.'
-        type: onIsland
-        radius: 35
-        requiredItems: '98:0:2500'
-        repeatable: false
-        displayItem: 98
-        reward:
-          items: '98:0:320'
-          text: '320 stone brick'
-          currency: 50
-          xp: 50
       slimefarmer:
         description: 'Collect slimeballs from slimes.'
         type: onPlayer
@@ -418,6 +406,17 @@ ranks:
           text: '64 rails, 1 iron, 1 tag, 5 emerald'
           currency: 25
           xp: 20
+      netherfortress:
+        description: 'Build a netherfortress.'
+        type: onIsland
+        radius: 50
+        requiredItems: '112:512 44:6:64 113:64 114:64'
+        displayItem: 113
+        reward:
+          items: '264:3 322:2'
+          text: 'some diamonds'
+          currency: 50
+          xp: 50
       expertbuilder:
         description: 'Reach island level 250.'
         type: islandLevel
