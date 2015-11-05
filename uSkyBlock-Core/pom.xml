@@ -163,18 +163,14 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.mcstats.*:*</include>
-                                    <include>com.googlecode.gettext-commons:*</include>
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
+                                    <include>dk.lockfuglsang.minecraft:po-utils</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>org.mcstats</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.xnap.commons.i18n</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.i18n</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>dk.lockfuglsang.minecraft</pattern>
@@ -290,6 +286,9 @@
     <profiles>
         <profile>
             <id>shadeGuava</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -327,7 +326,7 @@
         <profile>
             <id>1.8</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->
@@ -342,7 +341,7 @@
         <profile>
             <id>1.7.9</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->
