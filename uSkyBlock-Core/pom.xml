@@ -384,14 +384,14 @@
                                     <goal>report</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${project.build.directory}/classes</outputDirectory>
                                     <msgfmtCmd>${msgfmtCmd}</msgfmtCmd>
                                 </configuration>
                             </execution>
                         </executions>
                         <configuration>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
                             <javaVersion>2</javaVersion>
-                            <poDirectory>src/main/po</poDirectory>
+                            <poDirectory>${project.basedir}/src/main/po</poDirectory>
                             <targetBundle>us.talabrek.ultimateskyblock.i18n.Messages</targetBundle>
                             <outputFormat>properties</outputFormat>
                         </configuration>

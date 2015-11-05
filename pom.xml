@@ -13,8 +13,8 @@
         <module>uSkyBlock-AWE311</module>
         <module>uSkyBlock-AWE321</module>
         <module>uSkyBlock-Plugin</module>
-        <module>bukkit-utils</module>
         <module>po-utils</module>
+        <module>bukkit-utils</module>
     </modules>
 
     <properties>
