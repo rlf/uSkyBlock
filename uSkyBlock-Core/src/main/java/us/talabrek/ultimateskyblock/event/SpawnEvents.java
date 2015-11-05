@@ -127,10 +127,12 @@ public class SpawnEvents implements Listener {
             Location loc = event.getLocation();
             int z = loc.getBlockZ();
             int x = loc.getBlockX();
+            /*
             if (loc.getWorld().getBiome(x, z) == Biome.DEEP_OCEAN && LocationUtil.findRoofBlock(loc).getType() == Material.PRISMARINE) {
                 loc.getWorld().spawnEntity(loc, EntityType.GUARDIAN);
                 event.setCancelled(true);
             }
+            */
         }
     }
 

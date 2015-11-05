@@ -429,7 +429,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 Entity[] entities;
                 for (int length = (entities = c.getEntities()).length, i = 0; i < length; ++i) {
                     final Entity e = entities[i];
-                    if (e instanceof Monster && e.getCustomName() == null) { // Remove all monsters that are not named
+                    if (e instanceof Monster) { // Remove all monsters
                         e.remove();
                     }
                 }

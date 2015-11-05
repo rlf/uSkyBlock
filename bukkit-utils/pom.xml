@@ -12,6 +12,24 @@
         <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>spigotmc.org</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
+        </repository>
+        <repository>
+            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
+            <id>uSkyBlock-mvn-repo</id>
+            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -65,13 +83,6 @@
         </plugins>
     </build>
     <dependencies>
-        <dependency> <!-- Bukkit implementation -->
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
-            <optional>true</optional>
-            <scope>compile</scope>
-        </dependency>
         <dependency>
             <groupId>dk.lockfuglsang.minecraft</groupId>
             <artifactId>po-utils</artifactId>
@@ -90,4 +101,37 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <profiles>
+        <profile>
+            <id>1.8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency> <!-- Bukkit implementation -->
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.8-R0.1-SNAPSHOT</version>
+                    <optional>true</optional>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>1.7.9</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency> <!-- Bukkit implementation -->
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.7.9-R0.2</version>
+                    <optional>true</optional>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
 </project>

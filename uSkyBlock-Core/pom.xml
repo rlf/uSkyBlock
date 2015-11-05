@@ -137,6 +137,7 @@
                         <includes>
                             <include>org.mcstats.*:*</include>
                             <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
+                            <include>dk.lockfuglsang.minecraft:po-utils</include>
                         </includes>
                     </artifactSet>
                     <relocations>
@@ -146,7 +147,7 @@
                         </relocation>
                         <relocation>
                             <pattern>dk.lockfuglsang.minecraft</pattern>
-                            <shadedPattern>us.talabrek.ultimateskyblock.utils.yml</shadedPattern>
+                            <shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

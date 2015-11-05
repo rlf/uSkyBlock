@@ -208,7 +208,7 @@ public class ItemStackEditMenu extends AbstractConfigMenu implements EditMenu {
         menu.setItem(decBaseIndex, builder(down).lore("" + baseItem.getTypeId()).build());
         menu.setItem(decSubIndex, builder(down).lore("" + subItem.getDurability()).build());
         menu.setItem(decAmountIndex, builder(down).lore("" + selectedItem.getAmount()).build());
-        menu.setItem(deleteIndex, new ItemStack(Material.BARRIER));
+        menu.setItem(deleteIndex, new ItemStack(Material.BEDROCK));
         menu.setItem(addIndex, createItem(PLUS));
     }
 

@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -52,7 +51,7 @@ public enum ItemStackUtil {;
                 return material.getId();
             }
         }
-        return Material.BARRIER.getId();
+        return Material.BEDROCK.getId();
     }
 
     public static List<ItemStack> createItemList(String items) {
@@ -97,7 +96,7 @@ public enum ItemStackUtil {;
         }
         if (material == null) {
             Bukkit.getLogger().warning("Invalid material " + displayItem + " supplied!");
-            material = Material.BARRIER;
+            material = Material.BEDROCK;
         }
         ItemStack itemStack = new ItemStack(material, 1, subType);
         ItemMeta meta = itemStack.getItemMeta();
@@ -185,25 +184,11 @@ public enum ItemStackUtil {;
         }
 
         public Builder select() {
-            return enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).add(ItemFlag.HIDE_ENCHANTS);
+            return enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         }
 
         public Builder deselect() {
-            return remove(Enchantment.PROTECTION_ENVIRONMENTAL).remove(ItemFlag.HIDE_ENCHANTS);
-        }
-
-        public Builder add(ItemFlag... flags) {
-            ItemMeta meta = itemStack.getItemMeta();
-            meta.addItemFlags(flags);
-            itemStack.setItemMeta(meta);
-            return this;
-        }
-
-        public Builder remove(ItemFlag... flags) {
-            ItemMeta meta = itemStack.getItemMeta();
-            meta.removeItemFlags(flags);
-            itemStack.setItemMeta(meta);
-            return this;
+            return remove(Enchantment.PROTECTION_ENVIRONMENTAL);
         }
 
         private Builder remove(Enchantment enchantment) {
