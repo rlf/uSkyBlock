@@ -49,6 +49,21 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>2.6</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.github.github</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>0.12</version>
+                    <configuration>
+                        <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
+                        <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
+                        <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
+                        <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
+                        <repositoryName>uSkyBlock</repositoryName>      <!-- github repo name -->
+                        <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
+                        <oauth2Token>${GITHUB_TOKEN}</oauth2Token>
+                        <merge>true</merge>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

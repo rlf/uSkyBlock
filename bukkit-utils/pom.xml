@@ -11,6 +11,11 @@
     <properties>
         <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
     </properties>
+    <scm>
+        <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
+        <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
+        <url>https://github.com/rlf/uSkyBlock.git</url>
+    </scm>
 
     <repositories>
         <repository>
