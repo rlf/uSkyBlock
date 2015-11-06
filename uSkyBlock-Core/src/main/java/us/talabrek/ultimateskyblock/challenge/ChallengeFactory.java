@@ -65,7 +65,7 @@ public class ChallengeFactory {
         int radius = section.getInt("radius", 10);
         Reward reward = createReward(section.getConfigurationSection("reward"));
         Reward repeatReward = createReward(section.getConfigurationSection("repeatReward"));
-        return new Challenge(name, displayName, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, lockedItem, takeItems, radius, reward, repeatReward);
+        return new Challenge(name, displayName, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, section.getString("tool", null), lockedItem, takeItems, radius, reward, repeatReward);
     }
 
     private static List<EntityMatch> createEntities(List<String> requiredEntities) {

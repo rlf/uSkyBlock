@@ -57,6 +57,10 @@ msgstr "§4Você precisa estar na sua ilha para fazer isso!"
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4O desafio {0} não pode ser repetido!"
 
+#, fuzzy, java-format
+msgid "§eTrying to complete challenge §a{0}"
+msgstr "§ePara completar esse desafio, use §f/c c {0}"
+
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"
@@ -2268,10 +2272,6 @@ msgstr ""
 
 #~ msgid "§4A number between 1 and "
 #~ msgstr "§4Um número entre 1 e"
-
-#, fuzzy
-#~ msgid "{0}§e completed challenge §9{1}"
-#~ msgstr "§ePara completar esse desafio, use §f/c c {0}"
 
 #, fuzzy
 #~ msgid ""

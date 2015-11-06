@@ -58,6 +58,10 @@ msgstr "§4Je moet op je eiland zijn om dat te doen!"
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4De {0} uitdaging kan niet herhaald worden!"
 
+#, fuzzy, java-format
+msgid "§eTrying to complete challenge §a{0}"
+msgstr "§eOm deze uitdaging te voltooien, gebruik  §f/c c {0}"
+
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"
@@ -2290,10 +2294,6 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "§4A number between 1 and "
 #~ msgstr "§4Een nummer tussen 1 en"
-
-#, fuzzy
-#~ msgid "{0}§e completed challenge §9{1}"
-#~ msgstr "§eOm deze uitdaging te voltooien, gebruik  §f/c c {0}"
 
 #, fuzzy
 #~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"

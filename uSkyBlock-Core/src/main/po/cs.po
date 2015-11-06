@@ -58,6 +58,10 @@ msgstr "§4Musíte být na svém ostrově, aby jste mohli toto udělat."
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4Úkol {0} nelze opakovat!"
 
+#, fuzzy, java-format
+msgid "§eTrying to complete challenge §a{0}"
+msgstr "§ePro splnění tohoto úkolu použijte §f/c c {0}"
+
 #, java-format
 msgid "§4{0}"
 msgstr "§4{0}"

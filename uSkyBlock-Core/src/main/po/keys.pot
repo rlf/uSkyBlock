@@ -58,6 +58,10 @@ msgid "§4The {0} challenge is not repeatable!"
 msgstr ""
 
 #, java-format
+msgid "§eTrying to complete challenge §a{0}"
+msgstr ""
+
+#, java-format
 msgid "§4{0}"
 msgstr ""
 

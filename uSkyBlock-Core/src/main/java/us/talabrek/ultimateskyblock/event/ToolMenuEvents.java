@@ -24,7 +24,7 @@ public class ToolMenuEvents implements Listener {
 
     private final uSkyBlock plugin;
     private final ItemStack tool;
-    private final Map<Material,String> commandMap = new HashMap<>();
+    private final Map<String,String> commandMap = new HashMap<>();
 
     public ToolMenuEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -39,7 +39,7 @@ public class ToolMenuEvents implements Listener {
             for (String block : section.getKeys(false)) {
                 ItemStack item = ItemStackUtil.createItemStack(block);
                 if (item.getType().isBlock() && section.isString(block)) {
-                    commandMap.put(item.getType(), section.getString(block));
+                    commandMap.put(ItemStackUtil.asString(item), section.getString(block));
                 }
             }
         }
@@ -49,8 +49,11 @@ public class ToolMenuEvents implements Listener {
         for (String challengeName : plugin.getChallengeLogic().getAllChallengeNames()) {
             Challenge challenge = plugin.getChallengeLogic().getChallenge(challengeName);
             ItemStack displayItem = challenge != null ? challenge.getDisplayItem() : null;
-            if (displayItem != null && displayItem.getType() != null && displayItem.getType().isBlock()) {
-                commandMap.put(displayItem.getType(), "challenges complete " + challengeName);
+            ItemStack toolItem = challenge != null && challenge.getTool() != null ? ItemStackUtil.createItemStack(challenge.getTool()) : null;
+            if (toolItem != null) {
+                commandMap.put(ItemStackUtil.asString(toolItem), "challenges complete " + challengeName);
+            } else if (displayItem != null && displayItem.getType() != null && displayItem.getType().isBlock()) {
+                commandMap.put(ItemStackUtil.asString(displayItem), "challenges complete " + challengeName);
             }
         }
     }
@@ -67,8 +70,18 @@ public class ToolMenuEvents implements Listener {
         }
         // We are in a skyworld, a block has been hit, with the tool
         Material block = e.getClickedBlock().getType();
-        if (commandMap.containsKey(block)) {
-            plugin.execCommand(player, commandMap.get(block), false);
+        short data = e.getClickedBlock().getData();
+        String itemId = ItemStackUtil.asString(new ItemStack(block, 1, data));
+        if (commandMap.containsKey(itemId)) {
+            e.setCancelled(true);
+            plugin.execCommand(player, commandMap.get(itemId), false);
+            return;
+        }
+        itemId = ItemStackUtil.asString(new ItemStack(block, 1));
+        if (commandMap.containsKey(itemId)) {
+            e.setCancelled(true);
+            plugin.execCommand(player, commandMap.get(itemId), false);
+            return;
         }
     }
 

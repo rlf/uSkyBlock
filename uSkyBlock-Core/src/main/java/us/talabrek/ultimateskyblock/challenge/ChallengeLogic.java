@@ -126,6 +126,7 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));
             return;
         }
+        player.sendMessage(tr("\u00a7eTrying to complete challenge \u00a7a{0}", challengeName));
         if (challenge.getType() == Challenge.Type.PLAYER) {
             tryComplete(player, challengeName, "onPlayer");
         } else if (challenge.getType() == Challenge.Type.ISLAND) {

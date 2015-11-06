@@ -148,6 +148,7 @@ ranks:
         type: onPlayer
         requiredItems: '338:64;+4'
         displayItem: 338
+        tool: SUGAR_CANE_BLOCK
         reward:
           items: '3:5 82:15'
           text: '5 dirt, 15 clay'
@@ -165,6 +166,7 @@ ranks:
         type: onPlayer
         requiredItems: '360:128;+8'
         displayItem: 360
+        tool: MELON_BLOCK
         reward:
           items: '3:5'
           text: '5 dirt'
@@ -301,6 +303,7 @@ ranks:
         type: onIsland
         requiredItems: '26:1 58:1 20:1 64:1 61:1 47:1 50:1'
         displayItem: 324
+        tool: 64
         reward:
           items: '84:1 2267:1 22:10'
           text: '1 jukebox, 1 disk and 10 lapis lazuli'
@@ -732,4 +735,4 @@ ranks:
           currency: 50
           xp: 50
 # DO NOT CHANGE!
-version: 16
+version: 17

@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -55,6 +55,10 @@ msgstr "§4Ye must be in yer hideout to do that!"
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4The {0} challenge be not repeatable!"
+
+#, fuzzy, java-format
+msgid "§eTrying to complete challenge §a{0}"
+msgstr "§eTo complete this challenge, use §f/c c {0}"
 
 #, java-format
 msgid "§4{0}"

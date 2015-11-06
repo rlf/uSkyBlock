@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-11-04 01:05+0100\n"
+"PO-Revision-Date: 2015-11-06 22:01+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -57,6 +57,10 @@ msgstr "§4Du skal være på din ø, for at gøre det!"
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4{0} udfordringen er ikke gentagelig!"
+
+#, java-format
+msgid "§eTrying to complete challenge §a{0}"
+msgstr "§eForsøger at gennemføre §a{0}"
 
 #, java-format
 msgid "§4{0}"
@@ -2046,7 +2050,7 @@ msgid "Caps On"
 msgstr "Caps On"
 
 msgid "§9Text Editor"
-msgstr "§9Tekst Redigering"
+msgstr "§9Tekst Editor"
 
 msgid "§eSending you to spawn."
 msgstr "§aTeleporterer dig til spawn."
@@ -2235,10 +2239,6 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "§4A number between 1 and "
 #~ msgstr "§4et nummer mellem 1 og "
-
-#, fuzzy
-#~ msgid "{0}§e completed challenge §9{1}"
-#~ msgstr "§eFor at gennemføre denne udfordring, brug §f/c c {0}"
 
 #, fuzzy
 #~ msgid ".displayName"
