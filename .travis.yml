@@ -13,6 +13,7 @@ before_install:
   # Change the maven-version to be the tag (for the API deploy)
   # Skip the 'v'
   - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
+install: true
 script:
   - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,shadeGuava,-1.8,1.7.9 deploy
 deploy:
