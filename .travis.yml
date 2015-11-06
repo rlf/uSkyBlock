@@ -14,7 +14,7 @@ before_install:
   # Skip the 'v'
   - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 script:
-  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DGITHUB_TOKEN=${GITHUB_TOKEN} -DskipTests=true -Pi18n,shadeGuava,-1.8,1.7.9 deploy
+  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,shadeGuava,-1.8,1.7.9 install
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
@@ -26,6 +26,9 @@ deploy:
   on:
     tags: true
     all_branches: true
+after_success:
+  # Deploy API to the GitHub maven repo
+  - mvn -nsu -o deploy -DGITHUB_TOKEN=${GITHUB_TOKEN} -pl uSkyBlock-API -pl po-utils -pl bukkit-utils
 cache:
   directories:
   - $HOME/.m2
