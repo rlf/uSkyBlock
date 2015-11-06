@@ -284,8 +284,15 @@ nether:
     skeleton: 0.10
     blaze: 0.20
 
+tool-menu:
+  enabled: true
+  tool: SAPLING
+  commands:
+    CHEST: 'island'
+    BEDROCK: 'island spawn'
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 35
+version: 36
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

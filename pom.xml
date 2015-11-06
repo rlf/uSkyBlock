@@ -56,24 +56,10 @@
         <repository>
             <id>AWE-mvn-repo</id>
             <url>https://raw.github.com/SBPrime/AsyncWorldEdit-Premium/maven-artifact/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
         </repository>
         <repository>
             <id>gettext-commons-mvn-repo</id>
             <url>https://raw.github.com/rlf/gettext-commons/mvn-repo/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
         </repository>
         <repository>
             <id>spigotmc.org</id>
@@ -118,14 +104,6 @@
         <pluginRepository>
             <id>uSkyBlock-mvn-repo</id>
             <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
         </pluginRepository>
     </pluginRepositories>
     <profiles>

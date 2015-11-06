@@ -49,6 +49,7 @@ import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.NetherTerraFormEvents;
 import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
+import us.talabrek.ultimateskyblock.event.ToolMenuEvents;
 import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
@@ -334,6 +335,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         if (Settings.nether_enabled) {
             manager.registerEvents(new NetherTerraFormEvents(this), this);
+        }
+        if (getConfig().getBoolean("tool-menu.enabled", true)) {
+            manager.registerEvents(new ToolMenuEvents(this), this);
         }
     }
 

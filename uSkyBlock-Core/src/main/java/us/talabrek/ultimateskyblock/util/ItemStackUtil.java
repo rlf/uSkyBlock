@@ -81,6 +81,10 @@ public enum ItemStackUtil {;
         return items.toArray(new ItemStack[0]);
     }
 
+    public static ItemStack createItemStack(String displayItem) {
+        return createItemStack(displayItem, null, null);
+    }
+
     public static ItemStack createItemStack(String displayItem, String name, String description) {
         Material material = Material.DIRT;
         short subType = 0;
