@@ -207,6 +207,11 @@ options:
     # [true/false] Whether or not the player should be auto teleported to the island when it's ready
     teleportWhenReady: true
 
+    # list of commands to execute after island-creation
+    # i.e.
+    # - me Jumps with &ajoy
+    extra-commands: []
+
 # This section allows donors to get specific perks
 #donor-perks:
 #  usb:

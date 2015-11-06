@@ -981,6 +981,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                                                 tr("\u00a7cNote:\u00a7e Construction might still be ongoing.")});
                                     }
                                 }
+                                for (String command : getConfig().getStringList("options.restart.extra-commands")) {
+                                    execCommand(player, command, true);
+                                }
                             }
                         }, getConfig().getInt("options.restart.teleportDelay", 40)
                 );
@@ -1226,7 +1229,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         command = command
                 .replaceAll("\\{player\\}", player.getName())
                 .replaceAll("\\{playerName\\}", player.getDisplayName())
-                .replaceAll("\\{position\\}", player.getLocation().toString()); // Figure out what this should be
+                .replaceAll("\\{position\\}", LocationUtil.asString(player.getLocation())); // Figure out what this should be
         Matcher m = Pattern.compile("^\\{p=(?<prob>0?\\.[0-9]+)\\}(.*)$").matcher(command);
         if (m.matches()) {
             double p = Double.parseDouble(m.group("prob"));
