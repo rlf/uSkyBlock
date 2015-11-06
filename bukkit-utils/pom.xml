@@ -11,6 +11,7 @@
     <properties>
         <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
     </properties>
+
     <scm>
         <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
         <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
@@ -61,7 +62,7 @@
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
-                <version>0.10</version>
+                <version>0.12</version>
                 <configuration>
                     <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
                     <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
