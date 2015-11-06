@@ -27,11 +27,14 @@ my %dict = (
     'leader' => 'captain',
     'saving' => "storin'",
     'reward' => 'bounty',
-    'level' => 'treasure',
-    'levels' => 'treasure',
+    #'level' => 'treasure',
+    #'levels' => 'treasure',
+    '\sisland' => ' hideout',
 );
 my %part_dict = (
-    'ing' => "in'"
+    'ing' => "in'",
+    'on yer hideout' => 'in yer hideout',
+    'an hideout' => 'a hideout',
 );
 sub get_pirate {
     my ($txt) = @_;
