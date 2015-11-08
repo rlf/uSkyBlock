@@ -255,7 +255,7 @@ worldguard:
 
 
 nether:
-  enabled: false
+  enabled: true
 
   # The distance to search for valid terra-form location.
   terraform-distance: 7
@@ -298,7 +298,7 @@ tool-menu:
     WORKBENCH: 'challenges'
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 37
+version: 38
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

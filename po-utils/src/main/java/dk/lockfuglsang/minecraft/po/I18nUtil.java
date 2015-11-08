@@ -128,7 +128,7 @@ public enum I18nUtil {;
 
         public String tr(String key, Object... args) {
             for (Properties prop : props) {
-                if (prop != null && prop.containsKey(key)) {
+                if (prop != null && prop.containsKey(key) && !prop.getProperty(key).isEmpty()) {
                     if (args.length > 0) {
                         return new MessageFormat(prop.getProperty(key), getLocale()).format(args);
                     } else {

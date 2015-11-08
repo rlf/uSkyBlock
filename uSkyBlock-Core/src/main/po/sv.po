@@ -1,9 +1,14 @@
+# Swedish translation of uSkyBlock
+# Copyright (C) 2015
+# This file is distributed under the same license as the PACKAGE package.
+# maol3 <martin@ntilan.se>, 2015
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-10-31 23:07+0100\n"
-"Last-Translator: maol3 <martin@ntilan.se> \n"
+"PO-Revision-Date: 2015-11-08 09:14+0100\n"
+"Last-Translator: maol3 <martin@ntilan.se>\n"
 "Language-Team: SV <LL@li.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -672,8 +677,7 @@ msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e har bjudit in dig till att gå med i deras ö!"
 
 msgid "§f/island [accept/reject]§e to accept or reject the invite."
-msgstr ""
-"§f/jatack§e eller §f/nejtack§e för att tacka ja eller nej till inbjudan."
+msgstr "§f/island [accept/reject]§e för att tacka ja eller nej till inbjudan."
 
 msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§cVARNING: Du kommer att förlora din nuvarande ö om du tackar ja!"
@@ -689,7 +693,8 @@ msgstr ""
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
-"§aDu har gått med en ö! Använd /lista för att visa andra gruppmedlemmar."
+"§aDu har gått med en ö! Använd /island party för att visa andra "
+"gruppmedlemmar."
 
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."
@@ -718,7 +723,7 @@ msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eFöljande spelare är bannad från att warpa till din ö:"
 
 msgid "§eTo ban/unban from your island, use /island ban <player>"
-msgstr "§eFör att banna eller unbanna från din ö, använd /banna <namn>"
+msgstr "§eFör att banna eller unbanna från din ö, använd /island ban <namn>"
 
 msgid "§4You can't ban members. Remove them first!"
 msgstr "§cDu kan inte banna gruppmedlemmar. Ta bort dem från ön först!"
@@ -783,15 +788,15 @@ msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
 msgstr ""
-"§cEn ö hittades!§e Du har redan en ö. Om du vill ha en ny, skriv§b /reset§e "
-"för att få en."
+"§cEn ö hittades!§e Du har redan en ö. Om du vill ha en ny, skriv§b /island "
+"reset§e för att få en."
 
 msgid ""
 "§4Island found!§e You are already a member of an island. To start your own, "
 "first§b /is leave"
 msgstr ""
 "§cEn ö hittades!§e Du är redan medlem i en grupp. För att starta en egen, så "
-"måste du först lämna med §b/lämna"
+"måste du först lämna med §b/island leave"
 
 #, java-format
 msgid "§eYou can create a new island in {0,number,#} seconds."
@@ -835,7 +840,8 @@ msgstr "bjud in en spelare till din ö"
 
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
-msgstr "§eAnvänd§f /bjudin <namn§e för att bjuda in spelaren till din ö."
+msgstr ""
+"§eAnvänd§f /island invite <namn§e för att bjuda in spelaren till din ö."
 
 msgid "§4Only the island's owner can invite!"
 msgstr "§cEndast gruppledaren kan bjuda in spelare till ön!"
@@ -905,7 +911,7 @@ msgstr ""
 "vill ha en ny!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
-msgstr "§eDu är gruppledaren, använd /kicka <namn> istället."
+msgstr "§eDu är gruppledaren, använd /island kick <namn> istället."
 
 msgid "§eYou have left the island and returned to the player spawn."
 msgstr "§eDu har lämnat ön och återvänt till spawnen."
@@ -984,7 +990,7 @@ msgid "§4This command can only be executed by a player"
 msgstr "§cDetta kommando kan endast användas av spelare."
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
-msgstr "§cIngen ö hittades! §eAnvänd §b/skapa§e för att få en"
+msgstr "§cIngen ö hittades! §eAnvänd §b/island create§e för att få en"
 
 msgid "delete your island and start a new one."
 msgstr "ta bort din ö och starta en ny."
@@ -994,15 +1000,15 @@ msgid ""
 "start your own (/island leave)."
 msgstr ""
 "§cEndast gruppledaren kan starta om ön. Lämna ön för att starta din egna (/"
-"lämna)."
+"island leave)."
 
 msgid ""
 "§eYou must remove all players from your island before you can restart it (/"
 "island kick <player>). See a list of players currently part of your island "
 "using /island party."
 msgstr ""
-"§eDu måste ta bort alla medlemmar från ön innan du kan starta om den (/kicka "
-"<namn>). Visa en lista av gruppmedlemmar med /is party."
+"§eDu måste ta bort alla medlemmar från ön innan du kan starta om den (/"
+"island kick <namn>). Visa en lista av gruppmedlemmar med /is party."
 
 #, java-format
 msgid "§cYou can restart your island in {0} seconds."
@@ -1063,7 +1069,7 @@ msgid "§eThe following leaders trusts you:"
 msgstr "§eFöljande ledare litar på dig:"
 
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
-msgstr "§eFör att lita på en annan spelare, använd /is trust <namn>"
+msgstr "§eFör att lita på en annan spelare, använd /island trust <namn>"
 
 msgid "§4Members are already trusted!"
 msgstr "§cSpelarna är redan betrodda!"
@@ -2169,36 +2175,3 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "§7Usage: {0}"
 #~ msgstr "§7Användande: {0}"
-
-#, fuzzy
-#~ msgid "Command"
-#~ msgstr "Kan {0}"
-
-#, fuzzy
-#~ msgid "Description"
-#~ msgstr "§7Beskrivning: §b{0}\n"
-
-#, fuzzy
-#~ msgid "Permission"
-#~ msgstr "Rättigheter"
-
-#, fuzzy
-#~ msgid "  alias: {0}"
-#~ msgstr "Biome: {0}"
-
-#, fuzzy
-#~ msgid "   perm: {0}"
-#~ msgstr "Ägare: {0}"
-
-# ???
-#, fuzzy
-#~ msgid "-------------"
-#~ msgstr "§7----------------"
-
-#, fuzzy
-#~ msgid "Usage: {0}"
-#~ msgstr "§7Användande: {0}"
-
-#, fuzzy
-#~ msgid "Permission: {0}"
-#~ msgstr "Rättigheter"

@@ -21,7 +21,8 @@ public class MenuEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void guiClick(final InventoryClickEvent event) {
-        if (stripFormatting(event.getInventory().getTitle()).startsWith(stripFormatting(tr("Config:")))) {
+        String prefix = stripFormatting(tr("Config:"));
+        if (!prefix.isEmpty() && stripFormatting(event.getInventory().getTitle()).startsWith(prefix)) {
             plugin.getConfigMenu().onClick(event);
         } else {
             plugin.getMenu().onClick(event);

@@ -956,9 +956,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 next.getWorld().loadChunk(next.getBlockX() >> 4, next.getBlockZ() >> 4, false);
                 islandGenerator.setChest(next, playerPerk);
                 IslandInfo islandInfo = setNewPlayerIsland(player, next);
-                changePlayerBiome(player, "OCEAN");
                 WorldGuardHandler.protectIsland(player, pi);
                 WorldGuardHandler.protectNetherIsland(uSkyBlock.this, player, islandInfo);
+                changePlayerBiome(player, "OCEAN");
                 getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
                 getServer().getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
