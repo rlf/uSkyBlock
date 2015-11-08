@@ -105,14 +105,7 @@ public class Settings {
             config.set("options.general.spawnSize", 50);
             changed = true;
         }
-        try {
-            general_spawnSize = config.getInt("options.general.spawnSize");
-            if (general_spawnSize < 50) {
-                general_spawnSize = 50;
-            }
-        } catch (Exception e) {
-            general_spawnSize = 50;
-        }
+        general_spawnSize = config.getInt("options.general.spawnSize", 50);
         // TODO: 06/12/2014 - R4zorax: Null pointer protection
         String chestItemString = config.getString("options.island.chestItems", "");
         island_chestItems = ItemStackUtil.createItemArray(chestItemString);
