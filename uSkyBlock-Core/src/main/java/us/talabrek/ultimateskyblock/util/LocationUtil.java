@@ -183,8 +183,8 @@ public enum LocationUtil {;
         ChunkSnapshot chunkSnapshot = blockLoc.getChunk().getChunkSnapshot();
         int x = blockLoc.getBlockX();
         int z = blockLoc.getBlockZ();
-        int cx = x >> 4;
-        int cz = z >> 4;
+        int cx = x & 0xF;
+        int cz = z & 0xF;
         int topBlock = chunkSnapshot.getHighestBlockYAt(cx,cz);
         int y = blockLoc.getBlockY();
         while (y <= topBlock && isLiquidOrAir(chunkSnapshot.getBlockTypeId(cx, y, cz))) {
