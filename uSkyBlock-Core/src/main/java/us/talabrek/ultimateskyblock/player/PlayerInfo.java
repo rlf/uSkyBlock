@@ -229,6 +229,9 @@ public class PlayerInfo implements Serializable {
 
     public void save() {
         dirty = true;
+        if (!playerConfigFile.exists()) {
+            saveToFile();
+        }
     }
 
     public boolean isDirty() {
@@ -236,6 +239,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public void saveToFile() {
+        log.fine("Saving player-info for " + playerName + " to file");
         // TODO: 11/05/2015 - R4zorax: Instead of saving directly, schedule it for later...
         log.entering(CN, "save", playerName);
         if (playerData == null) {

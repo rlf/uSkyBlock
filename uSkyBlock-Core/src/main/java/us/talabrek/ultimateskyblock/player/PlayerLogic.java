@@ -36,6 +36,7 @@ public class PlayerLogic {
                 .removalListener(new RemovalListener<UUID, PlayerInfo>() {
                     @Override
                     public void onRemoval(RemovalNotification<UUID, PlayerInfo> removal) {
+                        log.fine("Removing player-info for " + removal.getKey() + " from cache");
                         PlayerInfo playerInfo = removal.getValue();
                         if (playerInfo.isDirty()) {
                             playerInfo.saveToFile();
@@ -45,6 +46,7 @@ public class PlayerLogic {
                 .build(new CacheLoader<UUID, PlayerInfo>() {
                            @Override
                            public PlayerInfo load(UUID s) throws Exception {
+                               log.fine("Loading player-info from " + s + " into cache!");
                                return loadPlayerData(s);
                            }
                        }

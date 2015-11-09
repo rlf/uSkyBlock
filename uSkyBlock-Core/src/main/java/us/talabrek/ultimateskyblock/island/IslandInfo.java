@@ -78,6 +78,8 @@ public class IslandInfo {
             if (config.getInt("version", 0) < YML_VERSION) {
                 updateConfig();
             }
+        } else {
+            log.fine("No file for " + islandName + " found, creating a fresh island!");
         }
     }
 
@@ -194,7 +196,7 @@ public class IslandInfo {
     public void save() {
         dirty = true;
         if (!file.exists()) {
-            saveToFile();
+            saveToFile(); // We use the file-existense a lot, so we need to touch it!
         }
     }
 
