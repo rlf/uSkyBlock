@@ -20,7 +20,6 @@ deploy:
   api-key: ${GITHUB_TOKEN}
   file:
   - uSkyBlock-Plugin/target/uSkyBlock.jar
-  - uSkyBlock-API/target/uSkyBlock-API.jar
   - uSkyBlock-Plugin/target/uSkyBlock-Plugin/gettext-report.txt
   skip_cleanup: true
   on:
