@@ -8,14 +8,14 @@
     <name>Ultimate Skyblock</name>
 
     <modules>
+        <module>bukkit-utils</module>
+        <module>po-utils</module>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-AWE211</module>
         <module>uSkyBlock-AWE311</module>
         <module>uSkyBlock-AWE321</module>
         <module>uSkyBlock-Plugin</module>
-        <module>po-utils</module>
-        <module>bukkit-utils</module>
     </modules>
 
     <properties>
