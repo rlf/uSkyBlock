@@ -107,29 +107,13 @@ public class IslandLogic {
         if (islandName == null) {
             return null;
         }
-        IslandInfo islandInfo = null;
-        try {
-            islandInfo = cache.get(islandName);
-        } catch (ExecutionException e) {
-            throw new IllegalStateException("Unable to load island", e);
-        }
-        if (islandInfo.exists()) {
-            return islandInfo;
-        }
-        return null;
-    }
-    
-    public synchronized IslandInfo createIslandInfo(String islandName) {
-        if (islandName == null) {
-            return null;
-        }
         try {
             return cache.get(islandName);
         } catch (ExecutionException e) {
-            throw new IllegalStateException("Unable to create island", e);
+            throw new IllegalStateException("Unable to load island", e);
         }
     }
-
+    
     public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
         if (playerInfo != null && playerInfo.getHasIsland()) {
             return getIslandInfo(playerInfo.locationForParty());
@@ -331,8 +315,7 @@ public class IslandLogic {
     }
 
     public synchronized IslandInfo createIslandInfo(String location, String player) {
-        IslandInfo info = createIslandInfo(location);
-        cache.put(location, info);
+        IslandInfo info = getIslandInfo(location);
         info.resetIslandConfig(player);
         return info;
     }
