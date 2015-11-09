@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,6 +44,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  * Data object for an island
  */
 public class IslandInfo {
+    private static final Logger log = Logger.getLogger(IslandInfo.class.getName());
     private static final Pattern OLD_LOG_PATTERN = Pattern.compile("\u00a7d\\[(?<date>[^\\]]+)\\]\u00a77 (?<msg>.*)");
     private static final int YML_VERSION = 1;
     private static File directory = new File(".");
@@ -191,6 +193,9 @@ public class IslandInfo {
 
     public void save() {
         dirty = true;
+        if (!file.exists()) {
+            saveToFile();
+        }
     }
 
     public boolean isDirty() {
@@ -199,11 +204,12 @@ public class IslandInfo {
 
     public void saveToFile() {
         if (toBeDeleted) {
-            Bukkit.getLogger().fine("Deleting islandconfig: " + file);
+            log.fine("Deleting islandconfig: " + file);
             file.delete();
             toBeDeleted = false;
         } else {
             try {
+                log.fine("Saving island-config: " + file);
                 config.save(file);
             } catch (IOException e) {
                 uSkyBlock.log(Level.SEVERE, "Unable to save island " + file, e);

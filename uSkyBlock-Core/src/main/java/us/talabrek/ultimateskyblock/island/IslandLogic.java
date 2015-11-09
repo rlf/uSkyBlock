@@ -74,12 +74,14 @@ public class IslandLogic {
                 .removalListener(new RemovalListener<String, IslandInfo>() {
                     @Override
                     public void onRemoval(RemovalNotification<String, IslandInfo> removal) {
+                        log.fine("Removing island-info " + removal.getKey() + " from cache");
                         removal.getValue().saveToFile();
                     }
                 })
                 .build(new CacheLoader<String, IslandInfo>() {
                     @Override
                     public IslandInfo load(String islandName) throws Exception {
+                        log.fine("Loading island-info " + islandName + " to cache!");
                         return new IslandInfo(islandName);
                     }
                 });
