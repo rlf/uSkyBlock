@@ -4,7 +4,6 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -27,14 +26,6 @@ public enum VaultHandler {;
 
     public static void addPerk(final Player player, final String perk) {
         perms.playerAdd((String) null, player.getName(), perk);
-    }
-
-    public static void removePerk(final Player player, final String perk) {
-        perms.playerRemove((String) null, player.getName(), perk);
-    }
-
-    public static void addGroup(final Player player, final String perk) {
-        perms.playerAddGroup((String) null, player.getName(), perk);
     }
 
     public static boolean checkPerk(final String player, final String perk, final World world) {
@@ -71,28 +62,13 @@ public enum VaultHandler {;
 
     public static String getItemName(ItemStack stack) {
         if (stack != null) {
+            if (stack.getItemMeta() != null && stack.getItemMeta().getDisplayName() != null) {
+                return stack.getItemMeta().getDisplayName();
+            }
             ItemInfo itemInfo = Items.itemByStack(stack);
             return itemInfo != null ? itemInfo.getName() : "" + stack.getType();
         }
         return null;
-    }
-
-    public static String getItemName(Material material) {
-        if (material != null) {
-            ItemInfo itemInfo = Items.itemByType(material);
-            return itemInfo != null ? itemInfo.getName() : material.name();
-        }
-        return null;
-    }
-
-    public static String getItemName(int blockId) {
-        ItemInfo itemInfo = Items.itemById(blockId);
-        if (itemInfo != null && itemInfo.getName() != null) {
-            return itemInfo.getName();
-        } else {
-            Material material = Material.getMaterial(blockId);
-            return material != null ? material.name() : null;
-        }
     }
 
     public static boolean hasEcon() {

@@ -75,7 +75,7 @@ options:
 
     # [integer] The time in minutes for refreshing/recalculating the score for players on their island
     # set to 0 to disabled
-    autoRefreshScore: 5
+    autoRefreshScore: 0
 
     # [true/false] Whether or not to include island-members on the top-ten scoreboard
     topTenShowMembers: true
@@ -298,7 +298,7 @@ tool-menu:
     WORKBENCH: 'challenges'
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 38
+version: 39
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

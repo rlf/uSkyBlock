@@ -287,10 +287,9 @@ public class ChallengeLogic {
             boolean hasAll = true;
             List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedSinceTimer());
             for (ItemStack required : requiredItems) {
-                required.setItemMeta(null);
+                String name = VaultHandler.getItemName(required);
                 if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
-                    sb.append(" \u00a74" + (required.getAmount() - getCountOf(player.getInventory(), required))
-                            + " \u00a7b" + VaultHandler.getItemName(required));
+                    sb.append(tr(" \u00a74{0} \u00a7b{1}", (required.getAmount() - getCountOf(player.getInventory(), required)), name));
                     hasAll = false;
                 }
             }
@@ -310,6 +309,7 @@ public class ChallengeLogic {
     private int getCountOf(PlayerInventory inventory, ItemStack required) {
         int count = 0;
         for (ItemStack invItem : inventory.all(required.getType()).values()) {
+            // TODO: 12/11/2015 - R4zorax: Should also test displayname...
             if (invItem.getDurability() == required.getDurability()) {
                 count += invItem.getAmount();
             }

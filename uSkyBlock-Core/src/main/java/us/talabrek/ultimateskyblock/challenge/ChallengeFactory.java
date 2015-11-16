@@ -53,7 +53,7 @@ public class ChallengeFactory {
         }
         String displayName = section.getString("name", name);
         Challenge.Type type = Challenge.Type.from(section.getString("type", "onPlayer"));
-        String requiredItems = section.getString("requiredItems", "");
+        List<String> requiredItems = section.isList("requiredItems") ? section.getStringList("requiredItems") : Arrays.asList(section.getString("requiredItems", "").split(" "));
         List<EntityMatch> requiredEntities = createEntities(section.getStringList("requiredEntities"));
         int resetInHours = section.getInt("resetInHours", rank.getResetInHours());
         String description = section.getString("description");
