@@ -100,6 +100,9 @@ public class SpawnEvents implements Listener {
         if (player == null || event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
             return; // Bail out, we don't care
         }
+        if (player.hasPermission("usb.mod.bypassprotection") || player.isOp()) {
+            return;
+        }
         ItemStack item = event.getItem();
         if (RIGHT_CLICKS.contains(event.getAction()) && item != null && item.getType() == Material.MONSTER_EGG && item.getData() instanceof SpawnEgg) {
             if (!plugin.playerIsOnIsland(player)) {
