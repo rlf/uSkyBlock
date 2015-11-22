@@ -765,7 +765,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 return false;
             }
             ProtectedRegion region = WorldGuardHandler.getNetherRegionAt(p);
-            return region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+            return region != null && region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
         }
         return false;
     }
