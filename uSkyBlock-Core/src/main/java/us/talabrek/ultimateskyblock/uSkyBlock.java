@@ -1353,6 +1353,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 : null;
     }
 
+    @Override
+    public IslandRank getIslandRank(Location location) {
+        String islandNameAt = WorldGuardHandler.getIslandNameAt(location);
+        if (islandNameAt != null && islandLogic != null) {
+            return islandLogic.getRank(islandNameAt);
+        }
+        return null;
+    }
+
     public void fireChangeEvent(CommandSender sender, uSkyBlockEvent.Cause cause) {
         Player player = (sender instanceof Player) ? (Player) sender : null;
         final uSkyBlockEvent event = new uSkyBlockEvent(player, this, cause);

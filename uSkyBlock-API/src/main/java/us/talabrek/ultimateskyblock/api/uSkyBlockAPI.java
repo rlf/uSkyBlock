@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.api;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -55,4 +56,12 @@ public interface uSkyBlockAPI extends Plugin {
      * @since v2.1.0
      */
     List<IslandLevel> getTopTen();
+
+    /**
+     * Returns the island (or <code>null</code>) of the location supplied.
+     * @param location A location in the skyworld.
+     * @return The IslandRank or <code>null</code> of the given location.
+     * @since v2.5.5
+     */
+    IslandRank getIslandRank(Location location);
 }
