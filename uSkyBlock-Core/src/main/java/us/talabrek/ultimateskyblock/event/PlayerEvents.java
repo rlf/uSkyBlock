@@ -226,7 +226,7 @@ public class PlayerEvents implements Listener {
         IslandInfo is1 = plugin.getIslandInfo(p1);
         IslandInfo is2 = plugin.getIslandInfo(p2);
         if (is1 != null && is2 != null && is1.getName().equals(is2.getName())) {
-            plugin.notifyPlayer (I18nUtil.tr(p1, "\u00a7eYou cannot hurt island-members."));
+            plugin.notifyPlayer(p1, I18nUtil.tr("\u00a7eYou cannot hurt island-members."));
             event.setCancelled(true);
         }
     }
