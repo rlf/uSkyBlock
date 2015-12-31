@@ -27,6 +27,10 @@ msgstr "§4Los requisitos se reiniciaran en {0} minutos."
 msgid "§eThis challenge requires the following:"
 msgstr "§eEste challenge requiere lo siguiente:"
 
+#, fuzzy, java-format
+msgid "§f{0} §7{1}"
+msgstr "§a{0} §c{1}"
+
 msgid "§6Item Reward: §a"
 msgstr "§6Item de premio: §a"
 
@@ -86,6 +90,10 @@ msgid ""
 msgstr ""
 "§eTe faltan los siguientes mobs:\n"
 "{0}"
+
+#, fuzzy, java-format
+msgid " §4{0} §b{1}"
+msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -1925,6 +1933,10 @@ msgstr ""
 msgid "Island Group"
 msgstr "Grupo"
 
+#, fuzzy, java-format
+msgid "§eMembers: §2{0}/{1}"
+msgstr "Miembros: §2{0}§7/§e{1}"
+
 msgid ""
 "View the members of your island\n"
 "group and their permissions. If\n"
@@ -2135,46 +2147,6 @@ msgstr ""
 "§eSI! Encontramos una isla vacia mas cerca del spawn. §9Limpiandola para "
 "ti..."
 
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr "§7Nombre: §b{0}\n"
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr "§7Version: §b{0}\n"
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr "§7Descripcion: §b{0}\n"
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr "§7Idioma: §b{0} ({1})\n"
-
-msgid "§7------------------------------\n"
-msgstr "§7------------------------------\n"
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr "§7Server: §e{0} {1}\n"
-
-msgid "§2ENABLED"
-msgstr "§2ACTIVADO"
-
-msgid "§4DISABLED"
-msgstr "§4DESACTIVADO"
-
-msgid "N/A"
-msgstr "N/A"
-
-#, fuzzy, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr "§7Nombre: §d{0} ({1})\n"
-
-#, java-format
-msgid "§7Version: §d{0}\n"
-msgstr "§7Version: §d{0}\n"
-
 msgid "d"
 msgstr "d"
 
@@ -2190,6 +2162,40 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§7Name: §b{0}\n"
+#~ msgstr "§7Nombre: §b{0}\n"
+
+#~ msgid "§7Version: §b{0}\n"
+#~ msgstr "§7Version: §b{0}\n"
+
+#~ msgid "§7Description: §b{0}\n"
+#~ msgstr "§7Descripcion: §b{0}\n"
+
+#~ msgid "§7Language: §b{0} ({1})\n"
+#~ msgstr "§7Idioma: §b{0} ({1})\n"
+
+#~ msgid "§7------------------------------\n"
+#~ msgstr "§7------------------------------\n"
+
+#~ msgid "§7Server: §e{0} {1}\n"
+#~ msgstr "§7Server: §e{0} {1}\n"
+
+#~ msgid "§2ENABLED"
+#~ msgstr "§2ACTIVADO"
+
+#~ msgid "§4DISABLED"
+#~ msgstr "§4DESACTIVADO"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#, fuzzy
+#~ msgid "§7Name: §d{0} ({1}§d)\n"
+#~ msgstr "§7Nombre: §d{0} ({1})\n"
+
+#~ msgid "§7Version: §d{0}\n"
+#~ msgstr "§7Version: §d{0}\n"
 
 #~ msgid "§7Usage: {0}"
 #~ msgstr "§7Uso correcto: {0}"

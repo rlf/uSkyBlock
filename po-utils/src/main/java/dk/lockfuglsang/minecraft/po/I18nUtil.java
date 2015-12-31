@@ -37,6 +37,13 @@ public enum I18nUtil {;
         return key;
     }
 
+    public static String pre(String s, Object... args) {
+        if (s != null && !s.isEmpty()) {
+            return new MessageFormat(s, i18n.getLocale()).format(s, args);
+        }
+        return "";
+    }
+
     public static I18n getI18n() {
         if (i18n == null) {
             i18n = new I18n(getLocale());

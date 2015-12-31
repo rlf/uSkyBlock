@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Egor Oldenburger <ERROR-202@MAIL.RU>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
@@ -32,6 +32,10 @@ msgstr "§4Требования будут сброшены через {0} ми�
 
 msgid "§eThis challenge requires the following:"
 msgstr "§eЭто задание требует:"
+
+#, fuzzy, java-format
+msgid "§f{0} §7{1}"
+msgstr "§a{0} §c{1}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6Награда предметами: §a"
@@ -90,6 +94,10 @@ msgid ""
 msgstr ""
 "§eПо прежнему мало существ:\n"
 "{0}"
+
+#, fuzzy, java-format
+msgid " §4{0} §b{1}"
+msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -1921,6 +1929,10 @@ msgstr ""
 msgid "Island Group"
 msgstr "Группа островов"
 
+#, fuzzy, java-format
+msgid "§eMembers: §2{0}/{1}"
+msgstr "Участники группыs: §2{0}§7/§e{1}"
+
 msgid ""
 "View the members of your island\n"
 "group and their permissions. If\n"
@@ -2127,46 +2139,6 @@ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr ""
 "§eО-о-о! Мы нашли вакантное место недалеко от спавна. §9Очищается для вас..."
 
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr "§7Название: §b{0}\n"
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr "§7Версия: §b{0}\n"
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr "§7Описание: §b{0}\n"
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr "§7Язык: §b{0} ({1})\n"
-
-msgid "§7------------------------------\n"
-msgstr "§7------------------------------\n"
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr "§7Сервер: §e{0} {1}\n"
-
-msgid "§2ENABLED"
-msgstr "§2ВКЛЮЧЕНО"
-
-msgid "§4DISABLED"
-msgstr "§4ОТКЛЮЧЕНО"
-
-msgid "N/A"
-msgstr "N/A"
-
-#, fuzzy, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr "§7Название: §d{0} ({1})\n"
-
-#, java-format
-msgid "§7Version: §d{0}\n"
-msgstr "§7Версия: §d{0}\n"
-
 msgid "d"
 msgstr "д"
 
@@ -2182,6 +2154,40 @@ msgstr "с"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "§7Name: §b{0}\n"
+#~ msgstr "§7Название: §b{0}\n"
+
+#~ msgid "§7Version: §b{0}\n"
+#~ msgstr "§7Версия: §b{0}\n"
+
+#~ msgid "§7Description: §b{0}\n"
+#~ msgstr "§7Описание: §b{0}\n"
+
+#~ msgid "§7Language: §b{0} ({1})\n"
+#~ msgstr "§7Язык: §b{0} ({1})\n"
+
+#~ msgid "§7------------------------------\n"
+#~ msgstr "§7------------------------------\n"
+
+#~ msgid "§7Server: §e{0} {1}\n"
+#~ msgstr "§7Сервер: §e{0} {1}\n"
+
+#~ msgid "§2ENABLED"
+#~ msgstr "§2ВКЛЮЧЕНО"
+
+#~ msgid "§4DISABLED"
+#~ msgstr "§4ОТКЛЮЧЕНО"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#, fuzzy
+#~ msgid "§7Name: §d{0} ({1}§d)\n"
+#~ msgstr "§7Название: §d{0} ({1})\n"
+
+#~ msgid "§7Version: §d{0}\n"
+#~ msgstr "§7Версия: §d{0}\n"
 
 #~ msgid "§7Usage: {0}"
 #~ msgstr "§7Введите: {0}"

@@ -1,7 +1,7 @@
 # Copyright (C) 2015 R4zorax and more
 # This file is distributed under the same license as the PACKAGE package.
 # R4zorax, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: uSkyBlock v2.3\n"
@@ -30,6 +30,10 @@ msgstr "§4Requisitos irão resetar em {0} minutos."
 
 msgid "§eThis challenge requires the following:"
 msgstr "§eEsse desafio requer o seguinte:"
+
+#, fuzzy, java-format
+msgid "§f{0} §7{1}"
+msgstr "§a{0} §c{1}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6Prêmio em item: §a"
@@ -88,6 +92,10 @@ msgid ""
 msgstr ""
 "§eMantenha os seguintes items por perto:\n"
 "{0}"
+
+#, fuzzy, java-format
+msgid " §4{0} §b{1}"
+msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -1915,6 +1923,10 @@ msgstr ""
 msgid "Island Group"
 msgstr "Grupo"
 
+#, fuzzy, java-format
+msgid "§eMembers: §2{0}/{1}"
+msgstr "§2Membros do grupo: §e{0}§7/§e{1}"
+
 msgid ""
 "View the members of your island\n"
 "group and their permissions. If\n"
@@ -2122,46 +2134,6 @@ msgstr ""
 "§eYay! Encontramos um local mais perto para o spawn. §9Limpando ele para "
 "você..."
 
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr "§7Nome: §b{0}\n"
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr "§7Versão: §b{0}\n"
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr "§7Descrição: §b{0}\n"
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr "§7Linguagem: §b{0} ({1})\n"
-
-msgid "§7------------------------------\n"
-msgstr "§7------------------------------\n"
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr "§7Servidor: §e{0} {1}\n"
-
-msgid "§2ENABLED"
-msgstr "§2ATIVADO§d"
-
-msgid "§4DISABLED"
-msgstr "§4DESATIVADO"
-
-msgid "N/A"
-msgstr "N/A"
-
-#, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr "§7Nome: §d{0} ({1}§d)\n"
-
-#, java-format
-msgid "§7Version: §d{0}\n"
-msgstr "§7Versão: §d{0}\n"
-
 msgid "d"
 msgstr "d"
 
@@ -2177,6 +2149,39 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§7Name: §b{0}\n"
+#~ msgstr "§7Nome: §b{0}\n"
+
+#~ msgid "§7Version: §b{0}\n"
+#~ msgstr "§7Versão: §b{0}\n"
+
+#~ msgid "§7Description: §b{0}\n"
+#~ msgstr "§7Descrição: §b{0}\n"
+
+#~ msgid "§7Language: §b{0} ({1})\n"
+#~ msgstr "§7Linguagem: §b{0} ({1})\n"
+
+#~ msgid "§7------------------------------\n"
+#~ msgstr "§7------------------------------\n"
+
+#~ msgid "§7Server: §e{0} {1}\n"
+#~ msgstr "§7Servidor: §e{0} {1}\n"
+
+#~ msgid "§2ENABLED"
+#~ msgstr "§2ATIVADO§d"
+
+#~ msgid "§4DISABLED"
+#~ msgstr "§4DESATIVADO"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "§7Name: §d{0} ({1}§d)\n"
+#~ msgstr "§7Nome: §d{0} ({1}§d)\n"
+
+#~ msgid "§7Version: §d{0}\n"
+#~ msgstr "§7Versão: §d{0}\n"
 
 #~ msgid "Command"
 #~ msgstr "Comando"

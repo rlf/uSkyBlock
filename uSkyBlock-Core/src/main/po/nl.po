@@ -32,6 +32,10 @@ msgstr "§4De vereisten worden teruggezet in {0} minuten."
 msgid "§eThis challenge requires the following:"
 msgstr "§eVoor deze uitdaging heb je het volgende nodig:"
 
+#, fuzzy, java-format
+msgid "§f{0} §7{1}"
+msgstr "§a{0} §c{1}"
+
 msgid "§6Item Reward: §a"
 msgstr "§6Item beloning: §a"
 
@@ -89,6 +93,10 @@ msgid ""
 msgstr ""
 "§eJe komt de volgende entiteiten tekort:\n"
 " {0}"
+
+#, fuzzy, java-format
+msgid " §4{0} §b{1}"
+msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -1940,6 +1948,10 @@ msgstr ""
 msgid "Island Group"
 msgstr "Eiland Groep"
 
+#, fuzzy, java-format
+msgid "§eMembers: §2{0}/{1}"
+msgstr "Groep Leden: §2{0}§7/§e{1}"
+
 msgid ""
 "View the members of your island\n"
 "group and their permissions. If\n"
@@ -2155,46 +2167,6 @@ msgstr ""
 "§eYay! We hebben een plaats dichter bij de spawn gevonden. §9Ontruimen dit "
 "nu voor je ...."
 
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr "§7Naam: §b{0}\n"
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr "§7Versie: §b{0}\n"
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr "§7Beschrijving: §b{0}\n"
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr "§7Taal: §b{0} ({1})\n"
-
-msgid "§7------------------------------\n"
-msgstr "§7------------------------------\n"
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr "§7Server: §e{0} {1}\n"
-
-msgid "§2ENABLED"
-msgstr "§2INGESCHAKELT"
-
-msgid "§4DISABLED"
-msgstr "§4UITGESCHAKELT"
-
-msgid "N/A"
-msgstr "N/A"
-
-#, fuzzy, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr "§7Naam: §d{0} ({1})\n"
-
-#, java-format
-msgid "§7Version: §d{0}\n"
-msgstr "§7Versie: §d{0}\n"
-
 msgid "d"
 msgstr "d"
 
@@ -2210,6 +2182,40 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§7Name: §b{0}\n"
+#~ msgstr "§7Naam: §b{0}\n"
+
+#~ msgid "§7Version: §b{0}\n"
+#~ msgstr "§7Versie: §b{0}\n"
+
+#~ msgid "§7Description: §b{0}\n"
+#~ msgstr "§7Beschrijving: §b{0}\n"
+
+#~ msgid "§7Language: §b{0} ({1})\n"
+#~ msgstr "§7Taal: §b{0} ({1})\n"
+
+#~ msgid "§7------------------------------\n"
+#~ msgstr "§7------------------------------\n"
+
+#~ msgid "§7Server: §e{0} {1}\n"
+#~ msgstr "§7Server: §e{0} {1}\n"
+
+#~ msgid "§2ENABLED"
+#~ msgstr "§2INGESCHAKELT"
+
+#~ msgid "§4DISABLED"
+#~ msgstr "§4UITGESCHAKELT"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#, fuzzy
+#~ msgid "§7Name: §d{0} ({1}§d)\n"
+#~ msgstr "§7Naam: §d{0} ({1})\n"
+
+#~ msgid "§7Version: §d{0}\n"
+#~ msgstr "§7Versie: §d{0}\n"
 
 #~ msgid "§7Usage: {0}"
 #~ msgstr "§7Gebruik: {0}"

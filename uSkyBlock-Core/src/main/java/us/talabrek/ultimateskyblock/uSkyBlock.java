@@ -94,6 +94,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.Settings.island_height;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
@@ -107,6 +108,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             new String[]{"WorldEdit", "5.5"},
             new String[]{"WorldGuard", "5.9"},
             new String[]{"AsyncWorldEdit", "2.0", "optional"},
+            new String[]{"Multiverse-Core", "2.5", "optional"},
+            new String[]{"Multiverse-Portals", "2.5", "optional"},
+            new String[]{"Multiverse-NetherPortals", "2.5", "optional"},
     };
     private static String missingRequirements = null;
     private static final Random RND = new Random(System.currentTimeMillis());
@@ -1388,22 +1392,22 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public String getVersionInfo(boolean checkEnabled) {
         PluginDescriptionFile description = getDescription();
-        String msg = tr("\u00a77Name: \u00a7b{0}\n", description.getName());
-        msg += tr("\u00a77Version: \u00a7b{0}\n", description.getVersion());
-        msg += tr("\u00a77Description: \u00a7b{0}\n", description.getDescription());
-        msg += tr("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getLocale());
-        msg += tr("\u00a77------------------------------\n");
-        msg += tr("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
+        String msg = pre("\u00a77Name: \u00a7b{0}\n", description.getName());
+        msg += pre("\u00a77Version: \u00a7b{0}\n", description.getVersion());
+        msg += pre("\u00a77Description: \u00a7b{0}\n", description.getDescription());
+        msg += pre("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getLocale());
+        msg += pre("\u00a77------------------------------\n");
+        msg += pre("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
         for (String[] dep : depends) {
             Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);
             if (dependency != null) {
-                msg += tr("\u00a77------------------------------\n");
-                msg += tr("\u00a77Name: \u00a7d{0} ({1}\u00a7d)\n", dependency.getName(),
-                        checkEnabled ? (dependency.isEnabled() ? tr("\u00a72ENABLED") : tr("\u00a74DISABLED")) : tr("N/A"));
-                msg += tr("\u00a77Version: \u00a7d{0}\n", dependency.getDescription().getVersion());
+                msg += pre("\u00a77------------------------------\n");
+                msg += pre("\u00a77\u00a7d{0} \u00a7f{1} \u00a77({1}\u00a77)\n", dependency.getName(),
+                        dependency.getDescription().getVersion(),
+                        checkEnabled ? (dependency.isEnabled() ? pre("\u00a72ENABLED") : pre("\u00a74DISABLED")) : pre("N/A"));
             }
         }
-        msg += tr("\u00a77------------------------------\n");
+        msg += pre("\u00a77------------------------------\n");
         return msg;
     }
 

@@ -31,6 +31,10 @@ msgstr ""
 msgid "§eThis challenge requires the following:"
 msgstr ""
 
+#, java-format
+msgid "§f{0} §7{1}"
+msgstr ""
+
 msgid "§6Item Reward: §a"
 msgstr ""
 
@@ -85,6 +89,10 @@ msgstr ""
 msgid ""
 "§eStill the following entities short:\n"
 "{0}"
+msgstr ""
+
+#, java-format
+msgid " §4{0} §b{1}"
 msgstr ""
 
 #, java-format
@@ -1732,6 +1740,10 @@ msgstr ""
 msgid "Island Group"
 msgstr ""
 
+#, java-format
+msgid "§eMembers: §2{0}/{1}"
+msgstr ""
+
 msgid ""
 "View the members of your island\n"
 "group and their permissions. If\n"
@@ -1896,46 +1908,6 @@ msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr ""
-
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr ""
-
-msgid "§7------------------------------\n"
-msgstr ""
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr ""
-
-msgid "§2ENABLED"
-msgstr ""
-
-msgid "§4DISABLED"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
-#, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr ""
-
-#, java-format
-msgid "§7Version: §d{0}\n"
 msgstr ""
 
 msgid "d"

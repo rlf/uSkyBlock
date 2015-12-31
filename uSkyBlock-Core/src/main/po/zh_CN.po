@@ -1,7 +1,7 @@
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.3-HF3\n"
@@ -29,6 +29,10 @@ msgstr "§4需求将在 {0} 分钟后重置"
 
 msgid "§eThis challenge requires the following:"
 msgstr "§e当前挑战需要达成以下条件:"
+
+#, fuzzy, java-format
+msgid "§f{0} §7{1}"
+msgstr "§a{0} §c{1}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6物品奖励:"
@@ -87,6 +91,10 @@ msgid ""
 msgstr ""
 "§e任然缺少以下物品:\n"
 "{0}"
+
+#, fuzzy, java-format
+msgid " §4{0} §b{1}"
+msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -1974,6 +1982,10 @@ msgstr ""
 msgid "Island Group"
 msgstr "§a§l岛屿团队"
 
+#, java-format
+msgid "§eMembers: §2{0}/{1}"
+msgstr ""
+
 #, fuzzy
 msgid ""
 "View the members of your island\n"
@@ -2176,46 +2188,6 @@ msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr ""
-
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr ""
-
-msgid "§7------------------------------\n"
-msgstr ""
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr ""
-
-msgid "§2ENABLED"
-msgstr ""
-
-msgid "§4DISABLED"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
-#, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr ""
-
-#, java-format
-msgid "§7Version: §d{0}\n"
 msgstr ""
 
 msgid "d"

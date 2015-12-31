@@ -123,10 +123,10 @@ public class ChallengeLogic {
         challengeName = challenge.getName();
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (!challenge.getRank().isAvailable(pi) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
-            player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));
+            player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challenge.getDisplayName()));
             return;
         }
-        player.sendMessage(tr("\u00a7eTrying to complete challenge \u00a7a{0}", challengeName));
+        player.sendMessage(tr("\u00a7eTrying to complete challenge \u00a7a{0}", challenge.getDisplayName()));
         if (challenge.getType() == Challenge.Type.PLAYER) {
             tryComplete(player, challengeName, "onPlayer");
         } else if (challenge.getType() == Challenge.Type.ISLAND) {
@@ -323,7 +323,7 @@ public class ChallengeLogic {
 
     private boolean giveReward(Player player, Challenge challenge) {
         String challengeName = challenge.getName();
-        player.sendMessage(tr("\u00a7aYou have completed the {0} challenge!", challengeName));
+        player.sendMessage(tr("\u00a7aYou have completed the {0} challenge!", challenge.getDisplayName()));
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         Reward reward;
         boolean isFirstCompletion = playerInfo.checkChallenge(challengeName) == 0;
@@ -341,7 +341,7 @@ public class ChallengeLogic {
         player.giveExp(reward.getXpReward());
         boolean wasBroadcast = false;
         if (defaults.broadcastCompletion && isFirstCompletion) {
-            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", player.getName(), challengeName));
+            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", player.getName(), challenge.getDisplayName()));
             wasBroadcast = true;
         }
         player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
@@ -364,7 +364,8 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a7eYour inventory is \u00a74full\u00a7e. Items dropped on the ground."));
         }
         for (String cmd : reward.getCommands()) {
-            String command = cmd.replaceAll("\\{challenge\\}", challengeName);
+            String command = cmd.replaceAll("\\{challenge\\}", challenge.getName());
+            command = command.replaceAll("\\{challengeName\\}", challenge.getDisplayName());
             plugin.execCommand(player, command, true);
         }
         playerInfo.completeChallenge(challengeName, wasBroadcast);
