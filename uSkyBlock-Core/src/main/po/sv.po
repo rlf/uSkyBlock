@@ -662,6 +662,18 @@ msgstr "§eLaddar chunks vid {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eAvladdar chunks vid {0}"
 
+#, fuzzy
+msgid "update the WG regions"
+msgstr "ladda regionens chunks"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§cIngen giltig ö vid din position"
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
@@ -1312,14 +1324,14 @@ msgstr "§b{0}§d har tagits bort från gruppen."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cÖn du är på tas bort! Teleporterar dig till spawnen."
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr ""
 "§cÖn som äger denna del av Nether tas bort. Teleporterar dig till spawnen."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cÖn du är på tas bort! Teleporterar dig till spawnen."
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
@@ -2076,6 +2088,17 @@ msgstr "§9Textredigerare"
 msgid "§eSending you to spawn."
 msgstr "§aTeleporterar dig till din ö."
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "Ön har skapats."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aDu kommer att teleporteras om {0} sekunder."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Något gick fel när när data skulle sparas!"
 
@@ -2087,10 +2110,6 @@ msgstr "§cDu är inte medlem på någon ö. Återvänder till spawnen."
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleporterar dig till din ö."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aDu kommer att teleporteras om {0} sekunder."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Kan inte warpa till den spelarens ö!"

@@ -675,6 +675,18 @@ msgstr "§eLade chunks bei {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eEntlade chunks bei {0}"
 
+#, fuzzy
+msgid "update the WG regions"
+msgstr "Lade die Regionalen Chunks"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4Keine Gültige Insel an ihrer Position."
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimativer SkyBlock Anführer"
 
@@ -1383,14 +1395,14 @@ msgstr "§4{0} wurde von der Insel entfernt."
 msgid "§9{1} §7- {0}"
 msgstr ""
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr ""
-"§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
-
 #, fuzzy
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
+msgstr ""
+"§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
 "§cDie Insel auf der du warst wurde Gelöscht! Du wirst zum Shawn gesendet."
 
@@ -2191,6 +2203,17 @@ msgstr ""
 msgid "§eSending you to spawn."
 msgstr "§aTeleportiert Dich zu deiner Insel."
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "§e{0}'s Insel bei {1} wurde Geschützt."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aDu wirst in {0} Sekunden Teleportiert."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
 
@@ -2202,10 +2225,6 @@ msgstr "§4Du bist kein Teil einer Insel. Kehre zum Spawn zurück!"
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportiert Dich zu deiner Insel."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aDu wirst in {0} Sekunden Teleportiert."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Es ist nicht möglich Dich zu der Insel von dem Spieler zu Warpen!"

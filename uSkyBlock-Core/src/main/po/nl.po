@@ -661,6 +661,18 @@ msgstr "§eHet laden van de chunks op {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eHet ontladen van de chunks op {0}"
 
+#, fuzzy
+msgid "update the WG regions"
+msgstr "laad de regio chunks"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4Er is geen geldig eiland op jouw locatie"
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
@@ -1335,17 +1347,17 @@ msgstr "§b{0}§d is verwijderd van het eiland."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr ""
-"§cHet eiland waar je je op bevind word verwijderd! Je word naar spawn "
-"gestuurd."
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr ""
 "§cHet eiland wat bij dit stukje Nether hoort wordt nu verwijdert! Je word "
 "naar spawn gestuurd."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr ""
+"§cHet eiland waar je je op bevind word verwijderd! Je word naar spawn "
+"gestuurd."
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
@@ -2112,6 +2124,17 @@ msgstr "§9Text Editor"
 msgid "§eSending you to spawn."
 msgstr "§aJe word getelepoorteerd naar je eiland."
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "Je eiland is gecreeerd."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aJe zal in {0} seconden getelepoorteerd worden."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 "Er is iets mis gegaan tijdens het opslaan van het eiland en/of party data!"
@@ -2126,10 +2149,6 @@ msgstr ""
 
 msgid "§aTeleporting you to your island."
 msgstr "§aJe word getelepoorteerd naar je eiland."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aJe zal in {0} seconden getelepoorteerd worden."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Je kan niet naar die spelers eiland warpen!"

@@ -659,6 +659,18 @@ msgstr "§eCargando chunks en {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eDescargando chunks en {0}"
 
+#, fuzzy
+msgid "update the WG regions"
+msgstr "cargar los chunks de la region"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4No se encuentra ninguna isla en tu ubicacion!"
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
@@ -1325,14 +1337,14 @@ msgstr "§b{0}§d ha sido removido de la isla."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr ""
-"§cLa isla en donde te encuentras se esta borrando! Enviandote al spawn."
-
 #, fuzzy
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
+msgstr ""
+"§cLa isla en donde te encuentras se esta borrando! Enviandote al spawn."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
 "§cLa isla en donde te encuentras se esta borrando! Enviandote al spawn."
 
@@ -2095,6 +2107,17 @@ msgstr ""
 msgid "§eSending you to spawn."
 msgstr "§aTeletransportandote hacia tu isla!"
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "La isla ha sido creada."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aSeras teletransportado en {0} segundos."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Algo salio mal al guardar los datos de la isla y/o party!"
 
@@ -2106,10 +2129,6 @@ msgstr "§4No eres parte de esta isla. Enviandote hacia el spawn!"
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeletransportandote hacia tu isla!"
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aSeras teletransportado en {0} segundos."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4No se ha podido teletransportar hacia la isla de ese jugador!"

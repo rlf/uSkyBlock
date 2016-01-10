@@ -674,6 +674,17 @@ msgstr "§e加载区块在{0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§e卸载区块在{0}"
 
+msgid "update the WG regions"
+msgstr ""
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4无效的岛屿在你的位置上。"
+
 msgid "Ultimate SkyBlock Admin"
 msgstr ""
 
@@ -1345,13 +1356,13 @@ msgstr "§4{0}被从当前岛屿上移除."
 msgid "§9{1} §7- {0}"
 msgstr ""
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
-
 #, fuzzy
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
+msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
 
 #, java-format
@@ -2140,6 +2151,17 @@ msgstr ""
 msgid "§eSending you to spawn."
 msgstr "§a将你传送回自己的岛屿."
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "§e{0} 的岛屿在 {1} 被保护"
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§a将在 {0} 秒后进行传送."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
 
@@ -2151,10 +2173,6 @@ msgstr "§4你不是岛屿的一员.将你传送回出生点!"
 
 msgid "§aTeleporting you to your island."
 msgstr "§a将你传送回自己的岛屿."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§a将在 {0} 秒后进行传送."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4无法传送至玩家的岛屿!"

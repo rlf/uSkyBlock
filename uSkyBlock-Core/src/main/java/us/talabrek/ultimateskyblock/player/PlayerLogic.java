@@ -116,6 +116,12 @@ public class PlayerLogic {
                                             tr("\u00a7eSending you to spawn.")
                                     });
                                     plugin.spawnTeleport(onlinePlayer, true);
+                                } else if (islandInfo != null && islandInfo.isLocked()) {
+                                    onlinePlayer.sendMessage(new String[]{
+                                            tr("\u00a7eThe island has been §cLOCKED§e.", islandInfo.getLeader()),
+                                            tr("\u00a7eSending you to spawn.")
+                                    });
+                                    plugin.spawnTeleport(onlinePlayer, true);
                                 }
                             }
                         }

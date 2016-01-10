@@ -660,6 +660,18 @@ msgstr "§eЗагрузка чанков у {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eВыгрузка чанков у {0}"
 
+#, fuzzy
+msgid "update the WG regions"
+msgstr "загрузка чанков региона"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4В этом месте нет подходящих островов"
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
@@ -1330,13 +1342,13 @@ msgstr "§b{0}§d удален из участников острова."
 msgid "§9{1} §7- {0}"
 msgstr "§d[{0}]§7 {1}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
-
 #, fuzzy
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
+msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§cОстров, на котором вы находитесь - удален! Телепортация на спавн."
 
 #, java-format
@@ -2086,6 +2098,17 @@ msgstr ""
 msgid "§eSending you to spawn."
 msgstr "§aТелепортация на ваш остров."
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "§eОстров {0} в {1} защищен"
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aВы будете телепортированы через {0} сек."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 "Что-то пошло не так, при сохранении острова и/или данных по участникам "
@@ -2098,10 +2121,6 @@ msgstr "§4Вы не участник острова. Возврат в на с�
 
 msgid "§aTeleporting you to your island."
 msgstr "§aТелепортация на ваш остров."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aВы будете телепортированы через {0} сек."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Невозможно переместить вас на остров этого игрока!"

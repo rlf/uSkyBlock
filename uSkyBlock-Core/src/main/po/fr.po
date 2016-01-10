@@ -2,7 +2,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2015-12-31 13:28+0100\n"
 "Last-Translator: Wura <wura59@gmail.com>\n"
 "Language-Team: Wura <wura59@gmail.com>\n"
@@ -31,6 +30,10 @@ msgstr "§4Conditions remis à zéro dans {0} minutes."
 
 msgid "§eThis challenge requires the following:"
 msgstr "§eCe challenge requiert les élements suivants:"
+
+#, fuzzy, java-format
+msgid "§f{0} §7{1}"
+msgstr "§a{0} §c{1}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6Item reçu : §a"
@@ -90,6 +93,10 @@ msgid ""
 msgstr ""
 "§eIl vous manque ces entités:\n"
 "{0}"
+
+#, fuzzy, java-format
+msgid " §4{0} §b{1}"
+msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -654,6 +661,18 @@ msgstr "§eChunks chargés à {0}"
 #, java-format
 msgid "§eUnloading chunks at {0}"
 msgstr "§eChunks déchargés à {0}"
+
+#, fuzzy
+msgid "update the WG regions"
+msgstr "charger les chunks de la région"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4Ile invalide à votre position"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate Skyblock Admin"
@@ -1318,13 +1337,13 @@ msgstr "§b{0}§d a été retiré de votre île."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cL'île sur laquelle vous êtes a été supprimé ! "
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr "§cL'île a été supprimé. Téléportation au spawn."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cL'île sur laquelle vous êtes a été supprimé ! "
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
@@ -1896,6 +1915,10 @@ msgstr ""
 msgid "Island Group"
 msgstr "Groupe de l'île"
 
+#, fuzzy, java-format
+msgid "§eMembers: §2{0}/{1}"
+msgstr "Membres du groupe: §2{0}§7/§e{1}"
+
 msgid ""
 "View the members of your island\n"
 "group and their permissions. If\n"
@@ -2049,6 +2072,17 @@ msgstr "§9Editeur de texte"
 msgid "§eSending you to spawn."
 msgstr "§aTéléportation au spawn"
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "L'île a bien été crée."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aVous serez téléporté dans {0} secondes."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 "Quelque chose a mal sauvegardé les données de l'île et / ou de la partie!"
@@ -2061,10 +2095,6 @@ msgstr "§4Vous ne faites pas partit d'une île. Téléportation au spawn !"
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTéléportation à votre île"
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aVous serez téléporté dans {0} secondes."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Impossible d'utiliser le warp de cette île !"
@@ -2101,46 +2131,6 @@ msgstr "Utilise §9/is h§r ou le menu §9/is§r pour y aller."
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 msgstr "§eNous avez trouvé un emplacement près du spawn. §9Parfait pour vous.."
 
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr "§7Nom: §b{0}\n"
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr "§7Version: §b{0}\n"
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr "§7Description: §b{0}\n"
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr "§7Language: §b{0} ({1})\n"
-
-msgid "§7------------------------------\n"
-msgstr "§7------------------------------\n"
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr "§7Serveur: §e{0} {1}\n"
-
-msgid "§2ENABLED"
-msgstr "§2ACTIVE"
-
-msgid "§4DISABLED"
-msgstr "§4DESACTIVE"
-
-msgid "N/A"
-msgstr "N/A"
-
-#, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr "§7Nom: §d{0} ({1})\n"
-
-#, java-format
-msgid "§7Version: §d{0}\n"
-msgstr "§7Version: §d{0}\n"
-
 msgid "d"
 msgstr "j"
 
@@ -2156,6 +2146,39 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§7Name: §b{0}\n"
+#~ msgstr "§7Nom: §b{0}\n"
+
+#~ msgid "§7Version: §b{0}\n"
+#~ msgstr "§7Version: §b{0}\n"
+
+#~ msgid "§7Description: §b{0}\n"
+#~ msgstr "§7Description: §b{0}\n"
+
+#~ msgid "§7Language: §b{0} ({1})\n"
+#~ msgstr "§7Language: §b{0} ({1})\n"
+
+#~ msgid "§7------------------------------\n"
+#~ msgstr "§7------------------------------\n"
+
+#~ msgid "§7Server: §e{0} {1}\n"
+#~ msgstr "§7Serveur: §e{0} {1}\n"
+
+#~ msgid "§2ENABLED"
+#~ msgstr "§2ACTIVE"
+
+#~ msgid "§4DISABLED"
+#~ msgstr "§4DESACTIVE"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "§7Name: §d{0} ({1}§d)\n"
+#~ msgstr "§7Nom: §d{0} ({1})\n"
+
+#~ msgid "§7Version: §d{0}\n"
+#~ msgstr "§7Version: §d{0}\n"
 
 #~ msgid "§7Usage: {0}"
 #~ msgstr "§7Utilisation: {0}"

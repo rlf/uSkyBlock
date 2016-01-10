@@ -652,6 +652,18 @@ msgstr "§eLoadin'' chunks at {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eUnloadin'' chunks at {0}"
 
+#, fuzzy
+msgid "update the WG regions"
+msgstr "load the region chunks"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4Nay valid hideout at yer location"
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
@@ -1304,15 +1316,15 @@ msgstr "§b{0}§d has been removed from the hideout group."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cThe hideout ye be on be bein' deleted! Sendin' ye to spawn."
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr ""
 "§cThe hideout ownin' this piece of nether be bein' deleted! Sendin' ye to "
 "spawn."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cThe hideout ye be on be bein' deleted! Sendin' ye to spawn."
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
@@ -2070,6 +2082,17 @@ msgstr "§9Text Editor"
 msgid "§eSending you to spawn."
 msgstr "§eSendin' ye to spawn."
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "The hideout has been created."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aYe will be teleported in {0} seconds."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Somethin' went awry storin' the hideout an'/or party data!"
 
@@ -2081,10 +2104,6 @@ msgstr "§4Ye be not part of a hideout. Returnin' ye the spawn area!"
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportin' ye to yer hideout."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aYe will be teleported in {0} seconds."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Unable to warp ye to that pirate's hideout!"

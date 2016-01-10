@@ -644,6 +644,16 @@ msgstr ""
 msgid "§eUnloading chunks at {0}"
 msgstr ""
 
+msgid "update the WG regions"
+msgstr ""
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+msgid "§eNo island found at your location!"
+msgstr ""
+
 msgid "Ultimate SkyBlock Admin"
 msgstr ""
 
@@ -1271,12 +1281,12 @@ msgstr ""
 msgid "§9{1} §7- {0}"
 msgstr ""
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr ""
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
+msgstr ""
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
 
 #, java-format
@@ -1870,6 +1880,16 @@ msgstr ""
 msgid "§eSending you to spawn."
 msgstr "§aTeleportuji vás na váš ostrov."
 
+msgid "§eThe island has been §cLOCKED§e."
+msgstr ""
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr ""
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 
@@ -1881,10 +1901,6 @@ msgstr ""
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportuji vás na váš ostrov."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr ""
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr ""

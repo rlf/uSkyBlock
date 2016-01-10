@@ -135,19 +135,11 @@ public enum I18nUtil {;
 
         public String tr(String key, Object... args) {
             for (Properties prop : props) {
-                if (prop != null && prop.containsKey(key) && !prop.getProperty(key).isEmpty()) {
-                    if (args.length > 0) {
-                        return new MessageFormat(prop.getProperty(key), getLocale()).format(args);
-                    } else {
-                        return prop.getProperty(key);
-                    }
+                if (prop != null && prop.containsKey(key) && !prop.getProperty(key).trim().isEmpty()) {
+                    return new MessageFormat(prop.getProperty(key), getLocale()).format(args);
                 }
             }
-            if (args.length > 0) {
-                return new MessageFormat(key, getLocale()).format(args);
-            } else {
-                return key;
-            }
+            return new MessageFormat(key, getLocale()).format(args);
         }
 
         public Locale getLocale() {

@@ -84,6 +84,9 @@ public class NetherTerraFormEvents implements Listener {
         if (player.getGameMode() != GameMode.SURVIVAL) {
             return;
         }
+        if (!plugin.playerIsOnIsland(player)) {
+            return;
+        }
         if (!terraFormMap.containsKey(block.getType())) {
             return; // Not a block we terra-form on.
         }

@@ -132,8 +132,26 @@ public class IslandLogic {
         }
     }
 
-    public void clearIsland(Location loc, Runnable afterDeletion) {
+    public void clearIsland(final Location loc, final Runnable afterDeletion) {
         log.log(Level.FINE, "clearing island at {0}", loc);
+        Runnable clearNether = new Runnable() {
+            @Override
+            public void run() {
+                Location netherIsland = getNetherLocation(loc);
+                ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherIsland);
+                if (netherRegion != null) {
+                    for (Player player : WorldGuardHandler.getPlayersInRegion(netherIsland.getWorld(), netherRegion)) {
+                        if (player != null && player.isOnline() && plugin.isSkyNether(player.getWorld()) && !player.isFlying()) {
+                            player.sendMessage(tr("\u00a7cThe island owning this piece of nether is being deleted! Sending you to spawn."));
+                            plugin.spawnTeleport(player, true);
+                        }
+                    }
+                    WorldEditHandler.clearNetherIsland(netherIsland.getWorld(), netherRegion, afterDeletion);
+                } else {
+                    afterDeletion.run();
+                }
+            }
+        };
         World skyBlockWorld = plugin.getWorld();
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
@@ -143,21 +161,10 @@ public class IslandLogic {
                     plugin.spawnTeleport(player, true);
                 }
             }
-            WorldEditHandler.clearIsland(skyBlockWorld, region, afterDeletion);
+            WorldEditHandler.clearIsland(skyBlockWorld, region, clearNether);
         } else {
             log.log(Level.WARNING, "Trying to delete an island - with no WG region! ({0})", LocationUtil.asString(loc));
-            afterDeletion.run();
-        }
-        Location netherIsland = getNetherLocation(loc);
-        ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherIsland);
-        if (netherRegion != null) {
-            for (Player player : WorldGuardHandler.getPlayersInRegion(netherIsland.getWorld(), netherRegion)) {
-                if (player != null && player.isOnline() && plugin.isSkyNether(player.getWorld()) && !player.isFlying()) {
-                    player.sendMessage(tr("\u00a7cThe island owning this piece of nether is being deleted! Sending you to spawn."));
-                    plugin.spawnTeleport(player, true);
-                }
-            }
-            WorldEditHandler.clearNetherIsland(netherIsland.getWorld(), netherRegion, null);
+            clearNether.run();
         }
     }
 

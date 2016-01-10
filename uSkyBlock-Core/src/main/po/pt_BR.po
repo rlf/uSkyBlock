@@ -656,6 +656,18 @@ msgstr "§eCarregando chunks em {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eRemovendo chunks em {0}"
 
+#, fuzzy
+msgid "update the WG regions"
+msgstr "carregar region chunks"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+#, fuzzy
+msgid "§eNo island found at your location!"
+msgstr "§4Não tem uma ilha válida na sua localização"
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
@@ -1317,13 +1329,13 @@ msgstr "§b{0}§d foi removido do grupo."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr "§cA ilha original está sendo deletada! Enviando você para o spawn."
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
 
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
@@ -2081,6 +2093,17 @@ msgstr "§9Editor de texto"
 msgid "§eSending you to spawn."
 msgstr "§eEnviando você para o spawn."
 
+#, fuzzy
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "A ilha foi criada."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§aVocê vai ser teleportado em {0} segundos."
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Algo ocorreu mal ao salvar a ilha e informações do grupo!"
 
@@ -2092,10 +2115,6 @@ msgstr "§4Você não faz parte dessa ilha. Retornando você para o spawn!"
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportando você para sua ilha."
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aVocê vai ser teleportado em {0} segundos."
 
 msgid "§4Unable to warp you to that player's island!"
 msgstr "§4Impossível de teletransportar você para ilha do jogador!"

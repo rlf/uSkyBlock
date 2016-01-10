@@ -74,6 +74,7 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerLogic;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
+import us.talabrek.ultimateskyblock.player.TeleportLogic;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -122,6 +123,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private IslandLogic islandLogic;
     private OrphanLogic orphanLogic;
     private PerkLogic perkLogic;
+    private TeleportLogic teleportLogic;
 
     public IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
@@ -651,25 +653,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
-        log(Level.FINER, "safeTeleport " + player + " to " + homeSweetHome + (force ? " with force" : ""));
-        int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
-        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
-            player.setVelocity(new org.bukkit.util.Vector());
-            LocationUtil.loadChunkAt(homeSweetHome);
-            player.teleport(homeSweetHome);
-            player.setVelocity(new org.bukkit.util.Vector());
-        } else {
-            player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", delay));
-            getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    player.setVelocity(new org.bukkit.util.Vector());
-                    LocationUtil.loadChunkAt(homeSweetHome);
-                    player.teleport(homeSweetHome);
-                    player.setVelocity(new org.bukkit.util.Vector());
-                }
-            }, TimeUtil.secondsAsTicks(delay));
-        }
+        teleportLogic.safeTeleport(player, homeSweetHome, force);
     }
 
     public boolean warpTeleport(final Player player, final PlayerInfo pi, boolean force) {
@@ -693,32 +677,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public void spawnTeleport(final Player player, boolean force) {
-        getLogger().entering(CN, "spawnTeleport", new Object[]{player});
-
-        int delay = getConfig().getInt("options.island.islandTeleportDelay", 5);
-        final Location spawnLocation = getWorld().getSpawnLocation();
-        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
-            if (Settings.extras_sendToSpawn) {
-                execCommand(player, "op:spawn", false);
-            } else {
-                LocationUtil.loadChunkAt(spawnLocation);
-                player.teleport(spawnLocation);
-            }
-        } else {
-            player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", delay));
-            getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    if (Settings.extras_sendToSpawn) {
-                        execCommand(player, "op:spawn", false);
-                    } else {
-                        LocationUtil.loadChunkAt(spawnLocation);
-                        player.teleport(spawnLocation);
-                    }
-                }
-            }, TimeUtil.secondsAsTicks(delay));
-        }
-        getLogger().exiting(CN, "spawnTeleport");
+        teleportLogic.spawnTeleport(player, force);
     }
 
     public boolean homeSet(final Player player) {
@@ -950,7 +909,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         player.sendMessage(tr("\u00a7eGetting your island ready, please be patient, it can take a while."));
         final Runnable generateTask = new Runnable() {
             boolean hasRun = false;
-
             @Override
             public void run() {
                 if (hasRun) {
@@ -1159,6 +1117,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         FileUtil.reload();
 
         playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
         islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
         perkLogic = new PerkLogic(this, islandGenerator);
@@ -1448,5 +1407,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public Map<String, Biome> getValidBiomes() {
         return validBiomes;
+    }
+
+    public TeleportLogic getTeleportLogic() {
+        return teleportLogic;
     }
 }
