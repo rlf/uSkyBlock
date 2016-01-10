@@ -260,6 +260,7 @@ nether:
   # The distance to search for valid terra-form location.
   terraform-distance: 7
 
+  height: 75
   activate-at:
     level: 100
 
@@ -298,7 +299,7 @@ tool-menu:
     WORKBENCH: 'challenges'
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 39
+version: 40
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
