@@ -28,7 +28,7 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4필요 조건이 {0} 분 후에 리셋됩니다."
 
 msgid "§eThis challenge requires the following:"
-msgstr "§e이 도전과제는 다음의 것들을 요구합니다.':"
+msgstr "§e이 도전과제는 다음의 것들을 요구합니다:"
 
 #, fuzzy, java-format
 msgid "§f{0} §7{1}"
