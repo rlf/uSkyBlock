@@ -62,7 +62,7 @@ msgstr "§4{0} 반복할 수 없는 도전과제입니다!"
 
 #, fuzzy, java-format
 msgid "§eTrying to complete challenge §a{0}"
-msgstr "§e이 도전과제를 완료하려면, §a{0}를 사용하세요"
+msgstr "§e도전과제를 완료하려면, §a{0}를 사용하세요"
 
 #, java-format
 msgid "§4{0}"
@@ -74,7 +74,7 @@ msgstr "§4당신은 모든 요구된 아이템의 {0} 블록 안에 서있어�
 
 #, java-format
 msgid "§4Your island must be level {0} to complete this challenge!"
-msgstr "§4이 도전과제를 완료하려면 당신의 섬의 레벨이 {0} 여야 합니다!"
+msgstr "§4도전과제를 완료하려면 당신의 섬의 레벨이 {0} 여야 합니다!"
 
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
@@ -124,7 +124,7 @@ msgid "§eYour inventory is §4full§e. Items dropped on the ground."
 msgstr "§e당신의 인벤토리가 §4가득 찼습니다§e. 아이템이 섬에 떨어졌습니다."
 
 msgid "§e§lClick to complete this challenge."
-msgstr "§e§l이 도전과제를 완료하려면 클릭하세요."
+msgstr "§e§l도전과제를 완료하려면 클릭하세요."
 
 msgid "§4§lYou can't repeat this challenge."
 msgstr "§4§l이 도전과제는 반복할 수 없습니다."
@@ -195,7 +195,7 @@ msgstr "§4반복할 수 없는 도전과제입니다!"
 
 #, java-format
 msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§e이 도전과제를 완료하려면 §f/c c {0}를 사용하세요"
+msgstr "§e도전과제를 완료하려면 §f/c c {0}를 사용하세요"
 
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4유효하지 않은 도전과제 이름입니다! 더 많은 정보가 필요하면 /c help를 이용하세요"
