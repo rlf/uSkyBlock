@@ -1896,7 +1896,7 @@ msgstr "섬 그룹"
 
 #, fuzzy, java-format
 msgid "§eMembers: §2{0}/{1}"
-msgstr "멤버들: §2{0}§7/§e{1}"
+msgstr "§e멤버들: §2{0}§7/§e{1}"
 
 msgid ""
 "View the members of your island\n"
