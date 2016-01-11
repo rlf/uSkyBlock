@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock;
 
+import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dk.lockfuglsang.minecraft.command.Command;
 import dk.lockfuglsang.minecraft.command.CommandManager;
@@ -839,19 +840,22 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     private void setBiome(Location loc, Biome biome) {
-        int r = Settings.island_radius;
-        final int px = loc.getBlockX();
-        final int pz = loc.getBlockZ();
-        for (int x = px - r; x <= px + r; x++) {
-            for (int z = pz - r; z <= pz + r; z++) {
-                if ((x % 16) == 0 && (z % 16) == 0) {
-                    skyBlockWorld.loadChunk(x, z);
+        ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
+        if (region != null) {
+            BlockVector minP = region.getMinimumPoint();
+            BlockVector maxP = region.getMaximumPoint();
+            for (int x = minP.getBlockX(); x <= maxP.getBlockX(); x++) {
+                for (int z = minP.getBlockZ(); z <= maxP.getBlockZ(); z++) {
+                    if ((x % 16) == 0 && (z % 16) == 0) {
+                        skyBlockWorld.loadChunk(x, z);
+                    }
+                    // Set the biome in the world.
+                    skyBlockWorld.setBiome(x, z, biome);
+                    // Refresh the chunks so players can see it without relogging!
+                    // Unfortunately, it doesn't work - though it should (We filed a bug report about it to SPIGOT)
+                    // See https://hub.spigotmc.org/jira/browse/SPIGOT-457
+                    //skyBlockWorld.refreshChunk(x, z);
                 }
-                // Set the biome in the world.
-                skyBlockWorld.setBiome(x, z, biome);
-                // Refresh the chunks so players can see it without relogging!
-                // Unfortunately, it doesn't work - though it should (We filed a bug report about it to SPIGOT)
-                //skyBlockWorld.refreshChunk(x, z);
             }
         }
     }
@@ -864,7 +868,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public boolean changePlayerBiome(Player player, String bName) {
         if (!biomeExists(bName)) throw new UnsupportedOperationException();
 
-        if (!VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, skyBlockWorld)) return false;
+        if (!bName.equalsIgnoreCase("ocean") && !VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, skyBlockWorld)) {
+            return false;
+        }
 
         PlayerInfo playerInfo = getPlayerInfo(player);
         IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
@@ -918,8 +924,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 next.getWorld().loadChunk(next.getBlockX() >> 4, next.getBlockZ() >> 4, false);
                 islandGenerator.setChest(next, playerPerk);
                 IslandInfo islandInfo = setNewPlayerIsland(player, next);
-                WorldGuardHandler.protectIsland(player, pi);
-                WorldGuardHandler.protectNetherIsland(uSkyBlock.this, player, islandInfo);
+                WorldGuardHandler.updateRegion(player, islandInfo);
                 changePlayerBiome(player, "OCEAN");
                 getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
@@ -983,31 +988,57 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return next;
     }
 
-    private Location nextIslandLocation(final Location lastIsland) {
-        final int x = (int) lastIsland.getX();
-        final int z = (int) lastIsland.getZ();
+    /**
+     * <pre>
+     *                            z
+     *   x = -z                   ^                    x = z
+     *        \        -x < z     |     x < z         /
+     *           \                |                /
+     *              \             |             /
+     *                 \          |          /
+     *                    \       |       /          x > z
+     *        -x > z         \    |    /
+     *                          \ | /
+     *     -----------------------+-----------------------------> x
+     *                          / | \
+     *        -x > -z        /    |    \
+     *        (x < z)     /       |       \          x > -z
+     *                 /          |          \
+     *              /             |             \
+     *           /     -x < -z    |   x < -z       \
+     *       x = z                |                x = -z
+     *                            |
+     *                            v
+     * </pre>
+     * @param lastIsland
+     * @return
+     */
+    static Location nextIslandLocation(final Location lastIsland) {
+        int x = lastIsland.getBlockX();
+        int z = lastIsland.getBlockZ();
+        int d = Settings.island_distance;
         if (x < z) {
             if (-1 * x < z) {
-                lastIsland.setX(lastIsland.getX() + Settings.island_distance);
-                return lastIsland;
+                x += d;
+            } else {
+                z += d;
             }
-            lastIsland.setZ(lastIsland.getZ() + Settings.island_distance);
-            return lastIsland;
         } else if (x > z) {
             if (-1 * x >= z) {
-                lastIsland.setX(lastIsland.getX() - Settings.island_distance);
-                return lastIsland;
+                x -= d;
+            } else {
+                z -= d;
             }
-            lastIsland.setZ(lastIsland.getZ() - Settings.island_distance);
-            return lastIsland;
-        } else {
+        } else { // x == z
             if (x <= 0) {
-                lastIsland.setZ(lastIsland.getZ() + Settings.island_distance);
-                return lastIsland;
+                z += d;
+            } else {
+                z -= d;
             }
-            lastIsland.setZ(lastIsland.getZ() - Settings.island_distance);
-            return lastIsland;
         }
+        lastIsland.setX(x);
+        lastIsland.setZ(z);
+        return lastIsland;
     }
 
     Location findNearestSafeLocation(Location loc) {
