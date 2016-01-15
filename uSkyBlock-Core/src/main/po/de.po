@@ -54,7 +54,7 @@ msgstr "§6Erfahrungsbelohnung: §a{0}"
 
 #, java-format
 msgid "§dTotal times completed: §f{0}"
-msgstr "§dSchon §f{0} mal Abgeschlossen."
+msgstr "§dSchon §f{0} mal abgeschlossen."
 
 #, fuzzy, java-format
 msgid "§4No challenge named {0} found"
@@ -156,7 +156,7 @@ msgid "§4§lLocked Challenge"
 msgstr "§4§lGesperrte Aufgabe."
 
 msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eAufgaben wurden Deaktiviert. Wende dich an einen Admin."
+msgstr "§eAufgaben wurden deaktiviert. Wende dich an einen Admin."
 
 msgid "§4You don't have access to this command!"
 msgstr "§4Du darfst diesen Befehl nicht ausführen!"
@@ -171,7 +171,7 @@ msgid "§eUse /c <name> to view information about a challenge."
 msgstr "§eBenutze /c <name> um Informationen über diese Aufgabe zu erhalten."
 
 msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eBenutze /c complete <name> um die Aufgabe Abzuschliesen."
+msgstr "§eBenutze /c complete <name> um die Aufgabe abzuschliesen."
 
 msgid "§eChallenges will have different colors depending on if they are:"
 msgstr "§eAufgaben haben unterschiedliche Farben, abhängig von:"
@@ -316,7 +316,7 @@ msgid "§4That player has no island."
 msgstr "§4Dieser Spieler hat keine Insel."
 
 msgid "§4No valid island at your location"
-msgstr "§4Keine Gültige Insel an ihrer Position."
+msgstr "§4Keine gültige Insel an deiner Position."
 
 #, fuzzy
 msgid "purges the island"
@@ -364,15 +364,15 @@ msgstr ""
 
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
-msgstr "§e{0} Hat ihr Biome geändert zu {1}."
+msgstr "§e{0} Hat ihr Biom geändert zu {1}."
 
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
-msgstr "§e{0} Hat ihr Biome geändert zu OZEAN."
+msgstr "§e{0} Hat ihr Biom geändert zu OZEAN."
 
 msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
 msgstr ""
-"§4Sorry!§e Der Befehl ALLES-SCHÜTZEN läuft bereits. Warte bis er Fertig ist!"
+"§4Sorry!§e Der Befehl ALLES-SCHÜTZEN läuft bereits. Warte bis er fertig ist!"
 
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr "§eStarte ALLES-SCHÜTZEN. Das wird jetzt etwas dauern..."
