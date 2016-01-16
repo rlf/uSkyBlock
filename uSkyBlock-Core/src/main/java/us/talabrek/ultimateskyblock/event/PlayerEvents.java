@@ -48,6 +48,8 @@ import java.util.WeakHashMap;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
 public class PlayerEvents implements Listener {
     private static final String CN = PlayerEvents.class.getName();
     private static final Logger log = Logger.getLogger(CN);
@@ -115,7 +117,7 @@ public class PlayerEvents implements Listener {
         Block block = event.getClickedBlock();
         Long lastClick = obsidianClick.get(player.getUniqueId());
         if (lastClick != null && (lastClick + OBSIDIAN_SPAM) >= now) {
-            plugin.notifyPlayer(player, "\u00a74You can only convert obsidian once every 10 seconds");
+            plugin.notifyPlayer(player, tr("\u00a74You can only convert obsidian once every 10 seconds"));
             return;
         }
         if (Settings.extras_obsidianToLava && plugin.playerIsOnIsland(player)
@@ -128,7 +130,7 @@ public class PlayerEvents implements Listener {
                 && block.getType() == Material.OBSIDIAN
                 && !testForObsidian(block)) {
             obsidianClick.put(player.getUniqueId(), now);
-            player.sendMessage(I18nUtil.tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
+            player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
             inventory.setItem(inventory.getHeldItemSlot(), new ItemStack(Material.LAVA_BUCKET, 1));
             player.updateInventory();
             block.setType(Material.AIR);
@@ -160,7 +162,7 @@ public class PlayerEvents implements Listener {
         }
         if (event.getBlockReplacedState() != null &&
                 isLavaSource(event.getBlockReplacedState().getType(), event.getBlockReplacedState().getRawData())) {
-            plugin.notifyPlayer(event.getPlayer(), I18nUtil.tr("\u00a74It's a bad idea to replace your lava!"));
+            plugin.notifyPlayer(event.getPlayer(), tr("\u00a74It's a bad idea to replace your lava!"));
             event.setCancelled(true);
         }
     }
@@ -226,7 +228,7 @@ public class PlayerEvents implements Listener {
         IslandInfo is1 = plugin.getIslandInfo(p1);
         IslandInfo is2 = plugin.getIslandInfo(p2);
         if (is1 != null && is2 != null && is1.getName().equals(is2.getName())) {
-            plugin.notifyPlayer(p1, "\u00a7eYou cannot hurt island-members.");
+            plugin.notifyPlayer(p1, tr("\u00a7eYou cannot hurt island-members."));
             event.setCancelled(true);
         }
     }
@@ -251,11 +253,11 @@ public class PlayerEvents implements Listener {
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
         if (!isAdmin && islandInfo != null && islandInfo.isBanned(player.getName())) {
             event.setCancelled(true);
-            player.sendMessage(I18nUtil.tr("\u00a74That player has forbidden you from teleporting to their island."));
+            player.sendMessage(tr("\u00a74That player has forbidden you from teleporting to their island."));
         }
         if (!isAdmin && islandInfo != null && islandInfo.isLocked() && !islandInfo.getMembers().contains(player.getName()) && !islandInfo.getTrustees().contains(player.getName())) {
             event.setCancelled(true);
-            player.sendMessage(I18nUtil.tr("\u00a74That island is \u00a7clocked.\u00a7e No teleporting to the island."));
+            player.sendMessage(tr("\u00a74That island is \u00a7clocked.\u00a7e No teleporting to the island."));
         }
         if (!event.isCancelled()) {
             PlayerInfo playerInfo = plugin.getPlayerInfo(player);

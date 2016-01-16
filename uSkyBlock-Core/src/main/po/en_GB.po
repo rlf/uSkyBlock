@@ -1221,11 +1221,19 @@ msgstr ""
 "§4* No Access! §7You are trying to teleport to the roof of the §4NETHER§7, "
 "that is not allowed."
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§4* §7You can restart your island in §4{0} §7seconds."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§9* §7Changing your obsidian back into lava. Be careful!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4* §7It's a bad idea to replace your lava!"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "You cannot use this biome."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr ""
@@ -1957,6 +1965,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Change Island Biome"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Currency Reward: §a{0}"
 
 msgid ""
 "The island biome affects things\n"

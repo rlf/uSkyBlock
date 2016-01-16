@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -38,17 +39,23 @@ public class LocateChestTask extends BukkitRunnable {
             tStart = now;
         }
         // Check for completion
-        Location chestLocation = LocationUtil.findChestLocation(islandLocation);
-        if (chestLocation == null && now < timeout) {
-            Bukkit.getScheduler().runTaskLater(plugin, this, heartBeatTicks);
-        } else {
-            if (player != null && player.isOnline() && now >= timeout) {
-                player.sendMessage(I18nUtil.tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(timeout)));
+        Callback<Location> callback = new Callback<Location>() {
+            @Override
+            public void run() {
+                Location chestLocation = getState();
+                long now = System.currentTimeMillis();
+                if (chestLocation == null && now < timeout) {
+                    LocateChestTask.this.runTaskLater(plugin, heartBeatTicks);
+                } else {
+                    if (chestLocation == null && player != null && player.isOnline()) {
+                        player.sendMessage(I18nUtil.tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(timeout)));
+                    }
+                    if (onCompletion != null) {
+                        Bukkit.getScheduler().runTask(plugin, onCompletion);
+                    }
+                }
             }
-            LocationUtil.loadChunkAt(chestLocation);
-            if (onCompletion != null) {
-                onCompletion.run();
-            }
-        }
+        };
+        LocationUtil.findChestLocationAsync(plugin, islandLocation, callback);
     }
 }

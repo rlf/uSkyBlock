@@ -1209,11 +1209,19 @@ msgstr ""
 "§cNay Access! §eYe be tryin' to teleport to the roof of the §cNETHER§e, that "
 "be not allowed."
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§cYe can restart yer hideout in {0} seconds."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eChangin' yer obsidian back into lava. Be careful!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4It's a bad idea to replace yer lava!"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "Ye cannot use this biome."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4That pirate has forbidden ye from teleportin' to their hideout."
@@ -1943,6 +1951,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Change Island Biome"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Currency Bounty: §a{0}"
 
 msgid ""
 "The island biome affects things\n"

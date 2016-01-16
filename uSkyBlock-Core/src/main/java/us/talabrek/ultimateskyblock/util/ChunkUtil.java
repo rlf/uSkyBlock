@@ -27,6 +27,20 @@ public enum ChunkUtil {;
         return new Chunks(snapshots);
     }
 
+    public static Chunks getSnapshots4x4(Location loc) {
+        if (loc == null) {
+            return null;
+        }
+        int cx = loc.getBlockX() >> 4;
+        int cz = loc.getBlockZ() >> 4;
+        Map<String,ChunkSnapshot> snapshots = new HashMap<>();
+        snapshots.put("" + cx +"," + cz, loc.getWorld().getChunkAt(cx, cz).getChunkSnapshot(false, false, false));
+        snapshots.put("" + (cx-1) +"," + cz, loc.getWorld().getChunkAt(cx-1, cz).getChunkSnapshot(false, false, false));
+        snapshots.put("" + cx +"," + (cz-1), loc.getWorld().getChunkAt(cx, cz-1).getChunkSnapshot(false, false, false));
+        snapshots.put("" + (cx-1) +"," + (cz-1), loc.getWorld().getChunkAt(cx-1, cz-1).getChunkSnapshot(false, false, false));
+        return new Chunks(snapshots);
+    }
+
     public static final class Chunks {
         private final Map<String, ChunkSnapshot> snapshots;
 

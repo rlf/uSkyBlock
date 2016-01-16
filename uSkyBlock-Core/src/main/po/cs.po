@@ -1176,11 +1176,18 @@ msgid ""
 "that is not allowed."
 msgstr ""
 
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr ""
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr ""
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "Nemůžete použít tento biom."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr ""
@@ -1773,6 +1780,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Změnit ostrovní biom"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Získáte Wobounů: §a{0}"
 
 msgid ""
 "The island biome affects things\n"

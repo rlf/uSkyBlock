@@ -1229,11 +1229,19 @@ msgstr ""
 "§cAccés interdit !§e Vous avez essayé de vous téléporter sur le toît du "
 "§cNETHER§c, ce n'est pas autorisé."
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§cVous pouvez remettre à zéro votre île dans {0} secondes."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eObsidienne changé en lave ! Soyez prudent !"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4C'est une mauvaise idée de remplacer votre lave !"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "Vous ne pouvez pas utiliser ce biome"
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Ce joueur vous a interdit de se téléporter à son île."
@@ -1934,6 +1942,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Changer le biome de l'île"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Argent reçu : §a{0}"
 
 msgid ""
 "The island biome affects things\n"

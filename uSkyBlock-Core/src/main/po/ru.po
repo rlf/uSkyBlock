@@ -1231,11 +1231,19 @@ msgid ""
 "that is not allowed."
 msgstr ""
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§cВы можете перезапустить свой остров через {0} сек."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eИзменение вашего обсидиана обратно в лаву. Осторожнее!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Плохая идея переместить вашу лаву!"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "Вы не можете использовать этот биом."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Этот игрок запретил вам телепортироваться на свой остров."
@@ -1960,6 +1968,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Изменить биом острова"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Награда деньгами: §a{0}"
 
 msgid ""
 "The island biome affects things\n"

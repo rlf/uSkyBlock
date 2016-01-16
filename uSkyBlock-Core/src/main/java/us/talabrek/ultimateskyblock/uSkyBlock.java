@@ -625,8 +625,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public void setLastIsland(final Location island) {
-        getLastIslandConfig().set("options.general.lastIslandX", island.getBlockX());
-        getLastIslandConfig().set("options.general.lastIslandZ", island.getBlockZ());
+        int x = island.getBlockX();
+        int z = island.getBlockZ();
+        // Make sure last island is always aligned with distance.
+        if ((x % Settings.island_distance) != 0) {
+            x -= (x % Settings.island_distance);
+        }
+        if ((z % Settings.island_distance) != 0) {
+            z -= (z % Settings.island_distance);
+        }
+        getLastIslandConfig().set("options.general.lastIslandX", x);
+        getLastIslandConfig().set("options.general.lastIslandZ", z);
         saveLastIslandConfig();
         lastIsland = island;
     }
@@ -920,8 +929,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 if (hasRun) {
                     return;
                 }
-                hasRun = true;
-                next.getWorld().loadChunk(next.getBlockX() >> 4, next.getBlockZ() >> 4, false);
+                next.getChunk().load();
                 islandGenerator.setChest(next, playerPerk);
                 IslandInfo islandInfo = setNewPlayerIsland(player, next);
                 WorldGuardHandler.updateRegion(player, islandInfo);

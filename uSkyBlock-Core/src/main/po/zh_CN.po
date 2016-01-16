@@ -1245,11 +1245,19 @@ msgid ""
 "that is not allowed."
 msgstr ""
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§e你需要等到{0}秒后才能重新开始你的岛屿."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§e已经将你的黑曜石变为岩浆.请务必当心!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4替换岩浆真是一个§f'不错'§4的注意呢~"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "§c§l你没有权限更改生物群系."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
@@ -2014,6 +2022,10 @@ msgstr ""
 #, fuzzy
 msgid "Change Island Biome"
 msgstr "§a§l更改岛屿生物群系"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6货币奖励: §a{0}"
 
 #, fuzzy
 msgid ""

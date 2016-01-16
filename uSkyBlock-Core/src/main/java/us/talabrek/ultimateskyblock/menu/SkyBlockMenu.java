@@ -482,7 +482,7 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.SAPLING, 1, (short) 3);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7l" + tr("Change Island Biome"));
-        lores.add("\u00a7eCurrent Biome: \u00a7b" + islandInfo.getBiome());
+        lores.add(tr("\u00a7eCurrent Biome: \u00a7b{0}", islandInfo.getBiome()));
         addLore(lores, "\u00a7f", tr("The island biome affects things\nlike grass color and spawning\nof both animals and monsters."));
         if (islandInfo.hasPerm(player, "canChangeBiome")) {
             addLore(lores, tr("\u00a7e\u00a7lClick here to change biomes."));

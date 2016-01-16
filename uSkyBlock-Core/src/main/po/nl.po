@@ -1236,11 +1236,19 @@ msgstr ""
 "§cGeen Toegang! §eJe probeert om naar het dak van de §cNETHER§e te "
 "teleporteren, dat is niet toegestaan."
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§eJe kunt een nieuw eiland aanmaken in {0} seconden."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVerander je Obsidian terug naar lava. Wel opletten!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Het is een slecht idee om je lava te vervangen!"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "Je kan deze biome niet gebruiken"
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen."
@@ -1977,6 +1985,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Verander Eiland Biome"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Geld beloning: §a {0}"
 
 msgid ""
 "The island biome affects things\n"
