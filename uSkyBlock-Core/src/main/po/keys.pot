@@ -726,6 +726,14 @@ msgid "§4You do not have permission to kick/ban players."
 msgstr ""
 
 #, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr ""
+
+#, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr ""
+
+#, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr ""
 
@@ -878,7 +886,16 @@ msgstr ""
 msgid "§4{0} has been removed from the island."
 msgstr ""
 
-msgid "§4"
+#, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr ""
+
+#, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr ""
+
+#, java-format
+msgid "§4{0} has kicked you from their island!"
 msgstr ""
 
 #, java-format
@@ -1147,10 +1164,13 @@ msgstr ""
 msgid "talk to your island party"
 msgstr ""
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+msgid "§eYou can not use another islands portals!"
 msgstr ""
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
+msgstr ""
+
+msgid "§eYou cannot access containers on this island."
 msgstr ""
 
 msgid "§eVisitors can't drop items!"

@@ -34,9 +34,14 @@ public class BanCommand extends RequireIslandCommand {
                 return true;
             }
             if (!island.isBanned(name)) {
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
+                if (offlinePlayer.isOnline() && offlinePlayer.getPlayer().hasPermission("usb.island.ban.exempt")) {
+                    offlinePlayer.getPlayer().sendMessage(I18nUtil.tr("\u00a74{0} tried to ban you from their island!", player.getName()));
+                    player.sendMessage(I18nUtil.tr("\u00a74{0} is exempt from being banned.", name));
+                    return true;
+                }
                 island.banPlayer(name);
                 player.sendMessage(I18nUtil.tr("\u00a7eYou have banned \u00a74{0}\u00a7e from warping to your island.", name));
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
                 if (offlinePlayer != null && offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(I18nUtil.tr("\u00a7eYou have been \u00a7cBANNED\u00a7e from {0}\u00a7e''s island.", player.getDisplayName()));
                     if (plugin.locationIsOnIsland(player, offlinePlayer.getPlayer().getLocation())) {

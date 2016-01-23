@@ -758,6 +758,14 @@ msgstr "§4Je kunt geen leden verbannen. Verwijder ze eerst van de party!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Je hebt geen toestemming om leden te verweideren of te verbannen."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} heeft je verwijderd van zijn eiland."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} is verwijderd van het eiland."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eJe hebt §4{0}§e verbannen om naar uw eiland te warpen."
@@ -921,8 +929,17 @@ msgstr "§4{0} heeft je verwijderd van zijn eiland."
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} is verwijderd van het eiland."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} heeft je verwijderd van zijn eiland."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} is verwijderd van het eiland."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} heeft je verwijderd van zijn eiland."
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1210,11 +1227,17 @@ msgstr "praat met spelers op je eiland"
 msgid "talk to your island party"
 msgstr "praat met je party leden"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§eJe kan geen portals van andere eilanden gebruiken!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandelen is niet toegestaan op ander mans eiland!"
+
+#, fuzzy
+msgid "§eYou cannot access containers on this island."
+msgstr "§4Je hebt geen toestemming om andere spelers uit te nodigen!"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eGasten kunnen geen items laten vallen!"
@@ -2241,6 +2264,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Naam: §b{0}\n"

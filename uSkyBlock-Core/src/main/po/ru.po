@@ -757,6 +757,14 @@ msgstr "§4Вы не можете заблокировать участника.
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4у вас недостаточно прав, чтобы выбрасывать или блокировать игроков."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} удалил вас со своего острова!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} удален с острова."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eВы запретили игроку §4{0}§e посещать ваш остров."
@@ -918,8 +926,17 @@ msgstr "§4{0} удалил вас со своего острова!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} удален с острова."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} удалил вас со своего острова!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} удален с острова."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} удалил вас со своего острова!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1206,11 +1223,17 @@ msgstr "говорить с игроками на своем острове"
 msgid "talk to your island party"
 msgstr "говорить с участниками вашего острова"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§eВы не можете использовать портал на другие острова! Вы - читер!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eТорговля не разрешена на других островах. Идите домой - читер!"
+
+#, fuzzy
+msgid "§eYou cannot access containers on this island."
+msgstr "§4У вас недостаточно прав для приглашения других на остров!"
 
 msgid "§eVisitors can't drop items!"
 msgstr ""
@@ -2217,6 +2240,9 @@ msgstr "с"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Название: §b{0}\n"

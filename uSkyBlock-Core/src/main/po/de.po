@@ -776,6 +776,14 @@ msgstr "§4Du kannst keine Mitglieder bannen. Entferne sie zuerst!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Du hast nicht die Rechte dazu andere zu kicken/bannen."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} wurde von der Insel entfernt."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} wurde von der Insel entfernt."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr ""
@@ -948,9 +956,17 @@ msgstr "§4{0} wurde von der Insel entfernt."
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} wurde von der Insel entfernt."
 
-# ???
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} wurde von der Insel entfernt."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} wurde von der Insel entfernt."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} wurde von der Insel entfernt."
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1251,13 +1267,19 @@ msgstr "Läd einen Anderen Spieler auf deine Insel ein."
 msgid "talk to your island party"
 msgstr "Verlasse deine Gruppe"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr ""
 "§eDu kannst nicht die Portale einer anderen Insel nutzen! Schäme dich - "
 "Cheater!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandeln ist auf anderen Inseln nicht erlaubt. Geh heim - Cheater!"
+
+#, fuzzy
+msgid "§eYou cannot access containers on this island."
+msgstr "§4Du hast keine Rechte andere auf deine Insel einzuladen!"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesucher können keine Items droppen"
@@ -2328,6 +2350,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+# ???
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Name: §b{0}\n"

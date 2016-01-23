@@ -741,6 +741,14 @@ msgstr "§4Ye can't ban members. Remove 'em first!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Ye do not have permission to kick/ban pirates."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} has removed ye from their hideout!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} has been removed from the hideout."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eYe have banned §4{0}§e from warpin'' to yer hideout."
@@ -902,8 +910,17 @@ msgstr "§4{0} has removed ye from their hideout!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} has been removed from the hideout."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} has removed ye from their hideout!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} has been removed from the hideout."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} has removed ye from their hideout!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1183,11 +1200,17 @@ msgstr "talk to pirates in yer hideout"
 msgid "talk to your island party"
 msgstr "talk to yer hideout party"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§eYe can not use another islands portals! Shame on ye - cheater!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eTradin' isn't allowed on other islands. Go home - cheater!"
+
+#, fuzzy
+msgid "§eYou cannot access containers on this island."
+msgstr "§4Ye do not have permission to invite others to this hideout!"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eVisitors can't drop items!"
@@ -2198,6 +2221,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Name: §b{0}\n"

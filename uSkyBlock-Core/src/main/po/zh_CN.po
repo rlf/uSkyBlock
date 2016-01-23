@@ -761,6 +761,14 @@ msgstr "§4你无法封禁玩家.请先将他们从你的岛屿上移除!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4你没有权限踢出/禁止一个玩家"
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0}被从当前岛屿上移除."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0}被从当前岛屿上移除."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
@@ -926,8 +934,17 @@ msgstr "§4{0}被从当前岛屿上移除."
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0}被从当前岛屿上移除."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0}被从当前岛屿上移除."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0}被从当前岛屿上移除."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0}被从当前岛屿上移除."
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1220,11 +1237,17 @@ msgstr "{0}§e早就是你们岛屿的成员了!"
 msgid "talk to your island party"
 msgstr "{0}§e早就是你们岛屿的成员了!"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e交易无法在别的岛屿上进行.滚回家 - 骗子!"
+
+#, fuzzy
+msgid "§eYou cannot access containers on this island."
+msgstr "§4你没有在这个岛屿上邀请别人的权限!"
 
 msgid "§eVisitors can't drop items!"
 msgstr ""
@@ -2267,6 +2290,9 @@ msgstr "秒"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #, fuzzy
 #~ msgid "Command"

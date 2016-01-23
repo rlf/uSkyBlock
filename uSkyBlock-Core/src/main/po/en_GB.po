@@ -745,6 +745,14 @@ msgstr "§4You can't ban members. Remove them first!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4You do not have permission to kick/ban players."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4* §6{0} §7has removed you from their island!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4* §6{0} §7has been removed from the island."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eYou have banned §4{0}§e from warping to your island."
@@ -907,8 +915,17 @@ msgstr "§4* §6{0} §7has removed you from their island!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4* §6{0} §7has been removed from the island."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4* §6{0} §7has removed you from their island!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4* §6{0} §7has been removed from the island."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4* §6{0} §7has removed you from their island!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1195,11 +1212,17 @@ msgstr "talk to players on your island"
 msgid "talk to your island party"
 msgstr "talk to your island party"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§9* §7You can not use another islands portals!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Trading isn't allowed on other islands."
+
+#, fuzzy
+msgid "§eYou cannot access containers on this island."
+msgstr "§4* §7You do not have permission to invite others to this island!"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§9* §7Visitors can't drop items!"
@@ -2214,6 +2237,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #, fuzzy
 #~ msgid "Error: {0}"
