@@ -157,26 +157,8 @@ public class SpawnEvents implements Listener {
             event.setCancelled(true);
             return;
         }
-        List<Creature> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorld(), WorldGuardHandler.getIslandRegionAt(islandInfo.getIslandLocation()));
-        if (Monster.class.isAssignableFrom(entityType.getEntityClass())) {
-            long currentlySpawned = EntityUtil.getMonsters(creatures).size() + EntityUtil.getEntity(creatures, WaterMob.class).size();
-            if (currentlySpawned >= islandInfo.getMaxMonsters()) {
-                event.setCancelled(true);
-                return;
-            }
-        } else if (Animals.class.isAssignableFrom(entityType.getEntityClass())) {
-            long currentlySpawned = EntityUtil.getAnimals(creatures).size();
-            if (currentlySpawned >= islandInfo.getMaxAnimals()) {
-                event.setCancelled(true);
-                return;
-            }
-        } else if (NPC.class.isAssignableFrom(entityType.getEntityClass())) {
-            long currentlySpawned = EntityUtil.getNPCs(creatures).size();
-            if (currentlySpawned >= islandInfo.getMaxVillagers()) {
-                event.setCancelled(true);
-                return;
-            }
+        if (!plugin.getLimitLogic().canSpawn(entityType, islandInfo)) {
+            event.setCancelled(true);
         }
     }
-
 }

@@ -1348,6 +1348,29 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eYer rank be: §f{0}"
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cWatchdog!§9 Unable to locate a chest within {0}, bailin'' out."
@@ -2107,6 +2130,15 @@ msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Somethin' went awry storin' the hideout an'/or party data!"
+
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr ""
 
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Pirate be already assigned to this hideout!"

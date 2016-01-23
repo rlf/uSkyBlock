@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 public enum VersionUtil {;
     private static final Pattern VERSION_PATTERN = Pattern.compile("v?(?<major>[0-9]+)\\.(?<minor>[0-9]+)(?:\\.(?<micro>[0-9]+))?(?<sub>.*)");
     public static Version getVersion(String versionString) {
-        int[] versions = new int[3];
         Matcher m = VERSION_PATTERN.matcher(versionString);
         if (m.matches()) {
             int major = Integer.parseInt(m.group("major"));

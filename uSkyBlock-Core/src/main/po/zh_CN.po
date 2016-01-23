@@ -1387,6 +1387,29 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§e你的排名是: §f{0}"
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
@@ -2176,6 +2199,15 @@ msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
+
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr ""
 
 msgid "§4Player is already assigned to this island!"
 msgstr "§4玩家早就已经分配给这个岛屿了!"

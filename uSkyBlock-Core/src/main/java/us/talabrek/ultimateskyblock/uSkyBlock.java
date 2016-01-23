@@ -65,6 +65,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
+import us.talabrek.ultimateskyblock.island.LimitLogic;
 import us.talabrek.ultimateskyblock.island.OrphanLogic;
 import us.talabrek.ultimateskyblock.island.task.LocateChestTask;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
@@ -79,6 +80,7 @@ import us.talabrek.ultimateskyblock.player.TeleportLogic;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
+import us.talabrek.ultimateskyblock.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
@@ -106,9 +108,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private static final String CN = uSkyBlock.class.getName();
     private static final String[][] depends = new String[][]{
-            new String[]{"Vault", "1.4"},
-            new String[]{"WorldEdit", "5.5"},
-            new String[]{"WorldGuard", "5.9"},
+            new String[]{"Vault", "1.5"},
+            new String[]{"WorldEdit", "6.0"},
+            new String[]{"WorldGuard", "6.0"},
             new String[]{"AsyncWorldEdit", "2.0", "optional"},
             new String[]{"Multiverse-Core", "2.5", "optional"},
             new String[]{"Multiverse-Portals", "2.5", "optional"},
@@ -125,6 +127,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private OrphanLogic orphanLogic;
     private PerkLogic perkLogic;
     private TeleportLogic teleportLogic;
+    private LimitLogic limitLogic;
 
     public IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
@@ -286,11 +289,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 }
                 if (pluginManager.isPluginEnabled(pluginReq[0])) {
                     PluginDescriptionFile desc = pluginManager.getPlugin(pluginReq[0]).getDescription();
-                    if (pluginReq[1].compareTo(desc.getVersion()) > 0) {
-                        missingRequirements += "\u00a7buSkyBlock\u00a7e depends on \u00a79" + pluginReq[0] + "\u00a7e >= \u00a7av" + pluginReq[1] + "\u00a7e but only \u00a7cv" + desc.getVersion() + "\u00a7e was found!\n";
+                    if (VersionUtil.getVersion(desc.getVersion()).isLT(pluginReq[1])) {
+                        missingRequirements += tr("\u00a7buSkyBlock\u00a7e depends on \u00a79{0}\u00a7e >= \u00a7av{1}\u00a7e but only \u00a7cv{2}\u00a7e was found!\n", pluginReq[0], pluginReq[1], desc.getVersion());
                     }
                 } else {
-                    missingRequirements += "\u00a7buSkyBlock\u00a7e depends on \u00a79" + pluginReq[0] + "\u00a7e >= \u00a7av" + pluginReq[1];
+                    missingRequirements += tr("\u00a7buSkyBlock\u00a7e depends on \u00a79{0}\u00a7e >= \u00a7av{1}",  pluginReq[0], pluginReq[1]);
                 }
             }
         }
@@ -1166,6 +1169,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         levelLogic = new LevelLogic(this, FileUtil.getYmlConfiguration("levelConfig.yml"));
         orphanLogic = new OrphanLogic(this);
         islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
+        limitLogic = new LimitLogic(this);
         notifier = new PlayerNotifier(getConfig());
         playerLogic = new PlayerLogic(this);
         playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
@@ -1396,13 +1400,24 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         msg += pre("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getLocale());
         msg += pre("\u00a77------------------------------\n");
         msg += pre("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
+        msg += pre("\u00a77------------------------------\n");
         for (String[] dep : depends) {
             Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);
             if (dependency != null) {
-                msg += pre("\u00a77------------------------------\n");
-                msg += pre("\u00a77\u00a7d{0} \u00a7f{1} \u00a77({1}\u00a77)\n", dependency.getName(),
-                        dependency.getDescription().getVersion(),
-                        checkEnabled ? (dependency.isEnabled() ? pre("\u00a72ENABLED") : pre("\u00a74DISABLED")) : pre("N/A"));
+                String status = pre("N/A");
+                if (checkEnabled) {
+                    if (dependency.isEnabled()) {
+                        if (VersionUtil.getVersion(dependency.getDescription().getVersion()).isLT(dep[1])) {
+                            status = pre("\u00a7eWRONG-VERSION");
+                        } else {
+                            status = pre("\u00a72ENABLED");
+                        }
+                    } else {
+                        status = pre("\u00a74DISABLED");
+                    }
+                }
+                msg += pre("\u00a77\u00a7d{0} \u00a7f{1} \u00a77({2}\u00a77)\n", dependency.getName(),
+                        dependency.getDescription().getVersion(), status);
             }
         }
         msg += pre("\u00a77------------------------------\n");
@@ -1450,5 +1465,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public TeleportLogic getTeleportLogic() {
         return teleportLogic;
+    }
+
+    public LimitLogic getLimitLogic() {
+        return limitLogic;
     }
 }

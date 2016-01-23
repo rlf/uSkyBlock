@@ -187,6 +187,11 @@ public class IslandInfo {
                 section.set("maxVillagers", perk.getVillagers());
                 dirty = true;
             }
+            int maxGolems = section.getInt("maxGolems", 0);
+            if (perk.getGolems() != maxGolems) {
+                section.set("maxGolems", perk.getGolems());
+                dirty = true;
+            }
         }
         if (dirty) {
             save();
@@ -245,6 +250,10 @@ public class IslandInfo {
 
     public int getMaxVillagers() {
         return getMaxPartyIntValue("maxVillagers", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getVillagers());
+    }
+
+    public int getMaxGolems() {
+        return getMaxPartyIntValue("maxGolems", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getGolems());
     }
 
     private int getMaxPartyIntValue(String name, int defaultValue) {

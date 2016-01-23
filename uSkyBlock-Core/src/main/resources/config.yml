@@ -104,6 +104,9 @@ options:
       # how many villagers can be spawned on an island
       villagers: 16
 
+      # how many snowmen and iron-golems can be spawned on an island
+      golems: 5
+
     # [permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
     # Only checked if 'addExtraItems' is set to true.
     # [permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY

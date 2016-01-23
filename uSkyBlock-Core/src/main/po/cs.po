@@ -1310,6 +1310,29 @@ msgstr ""
 msgid "§eYour rank is: §f{0}"
 msgstr "§aVaše hodnost: §f{0}"
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
@@ -1902,6 +1925,15 @@ msgid "§7Teleport cancelled"
 msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
+msgstr ""
+
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
 msgid "§4Player is already assigned to this island!"
