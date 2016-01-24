@@ -29,6 +29,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
@@ -1000,12 +1001,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 );
             }
         };
-        final Runnable completionWatchDog = new LocateChestTask(this, player, next, generateTask);
+        final int heartBeatTicks = (int) TimeUtil.millisAsTicks(getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 2000));
+        final BukkitRunnable completionWatchDog = new LocateChestTask(this, player, next, generateTask);
         Runnable createTask = new Runnable() {
             @Override
             public void run() {
                 islandGenerator.createIsland(uSkyBlock.this, playerPerk, next);
-                Bukkit.getScheduler().runTaskLater(uSkyBlock.this, completionWatchDog, 0);
+                completionWatchDog.runTaskTimer(uSkyBlock.this, 0, heartBeatTicks);
             }
         };
         if (orphanLogic.wasOrphan(next)) {
