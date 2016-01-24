@@ -1277,10 +1277,6 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandeln ist auf anderen Inseln nicht erlaubt. Geh heim - Cheater!"
 
-#, fuzzy
-msgid "§eYou cannot access containers on this island."
-msgstr "§4Du hast keine Rechte andere auf deine Insel einzuladen!"
-
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesucher können keine Items droppen"
 
@@ -2350,6 +2346,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4Du hast keine Rechte andere auf deine Insel einzuladen!"
 
 # ???
 #~ msgid "§4"

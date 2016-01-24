@@ -40,7 +40,7 @@ public class IslandGenerator {
         if (!directorySchematics.exists()) {
             directorySchematics.mkdir();
         }
-        netherSchematic = new File(directorySchematics, "uSkyBlockNether.schematic");
+        netherSchematic = new File(directorySchematics, config.getString("nether.schematicName", "uSkyBlockNether") + ".schematic");
         if (!netherSchematic.exists()) {
             try (InputStream inputStream = uSkyBlock.class.getClassLoader().getResourceAsStream("schematics/uSkyBlockNether.schematic")) {
                 FileUtil.copy(inputStream, netherSchematic);

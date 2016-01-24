@@ -140,6 +140,9 @@ options:
     # Whether or not the plugin will try to protect the player from accidentally extinguishing lava
     protect-lava: true
 
+    # Whether or not portalling to the nether roof should be blocked.
+    nether-roof: true
+
     visitors:
       # Protect visitors from trampling your crop
       trampling: true
@@ -260,12 +263,17 @@ worldguard:
 nether:
   enabled: true
 
+  terraform-enabled: true
+
   # The distance to search for valid terra-form location.
   terraform-distance: 7
 
   height: 75
+
   activate-at:
     level: 100
+
+  schematicName: uSkyBlockNether
 
   # The probability of forming blocks
   terraform:
@@ -289,6 +297,7 @@ nether:
       - '{p=0.15}GLOWSTONE'
 
   spawn-chances:
+    enabled: true
     wither: 0.20
     skeleton: 0.10
     blaze: 0.20
@@ -302,7 +311,7 @@ tool-menu:
     WORKBENCH: 'challenges'
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 40
+version: 41
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

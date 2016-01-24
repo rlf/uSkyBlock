@@ -1170,9 +1170,6 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr ""
 
-msgid "§eYou cannot access containers on this island."
-msgstr ""
-
 msgid "§eVisitors can't drop items!"
 msgstr ""
 

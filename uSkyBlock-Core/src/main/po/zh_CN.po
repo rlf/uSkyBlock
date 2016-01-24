@@ -1245,10 +1245,6 @@ msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e交易无法在别的岛屿上进行.滚回家 - 骗子!"
 
-#, fuzzy
-msgid "§eYou cannot access containers on this island."
-msgstr "§4你没有在这个岛屿上邀请别人的权限!"
-
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -2290,6 +2286,10 @@ msgstr "秒"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4你没有在这个岛屿上邀请别人的权限!"
 
 #~ msgid "§4"
 #~ msgstr "§4"

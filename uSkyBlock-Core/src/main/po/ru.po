@@ -1231,10 +1231,6 @@ msgstr "§eВы не можете использовать портал на д�
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eТорговля не разрешена на других островах. Идите домой - читер!"
 
-#, fuzzy
-msgid "§eYou cannot access containers on this island."
-msgstr "§4У вас недостаточно прав для приглашения других на остров!"
-
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
@@ -2240,6 +2236,10 @@ msgstr "с"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4У вас недостаточно прав для приглашения других на остров!"
 
 #~ msgid "§4"
 #~ msgstr "§4"

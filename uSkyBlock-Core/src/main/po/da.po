@@ -1216,10 +1216,6 @@ msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eDu kan ikke tage andres ting. Gå hjem - snyder!"
 
-#, fuzzy
-msgid "§eYou cannot access containers on this island."
-msgstr "§4Du har ikke tilladelse til at invite flere til din ø!"
-
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesøgende kan ikke smide ting!"
 
@@ -2216,6 +2212,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4Du har ikke tilladelse til at invite flere til din ø!"
 
 #~ msgid "§4"
 #~ msgstr "§4"

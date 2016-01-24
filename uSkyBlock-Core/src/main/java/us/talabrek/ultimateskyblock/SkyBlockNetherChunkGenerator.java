@@ -127,6 +127,6 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
-        return new Location(world, 0, Settings.island_height/2, 0);
+        return  new Location(world, 0,  Settings.nether_height, 0);
     }
 }
