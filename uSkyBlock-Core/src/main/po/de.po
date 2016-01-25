@@ -1958,6 +1958,13 @@ msgstr "§c§lDu kannst das Biome nicht ändern."
 msgid "{0} ({1}/{2})"
 msgstr "§a{0} §c{1}"
 
+msgid "§7Current page"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "Benutzung {0}"
+
 #, fuzzy
 msgid "Island Menu"
 msgstr "§9Insel Menü"
@@ -2409,10 +2416,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "-------------"
 #~ msgstr "§7------------------------------\n"
-
-#, fuzzy
-#~ msgid "Usage: {0}"
-#~ msgstr "Benutzung {0}"
 
 #, fuzzy
 #~ msgid "Permission: {0}"

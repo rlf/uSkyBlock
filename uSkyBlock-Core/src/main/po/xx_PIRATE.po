@@ -1850,6 +1850,13 @@ msgstr "Ye cannot use this biome."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Complete {0}"
+
 msgid "Island Menu"
 msgstr "Island Menu"
 

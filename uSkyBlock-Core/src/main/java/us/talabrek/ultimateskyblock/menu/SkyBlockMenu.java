@@ -16,6 +16,7 @@ import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,7 @@ import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.CHALLENGE_PAGESIZE;
+import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.COLS_PER_ROW;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
 
 // TODO: Move all the texts to resource-files (translatable).
@@ -386,9 +388,20 @@ public class SkyBlockMenu {
     }
 
     public Inventory displayChallengeGUI(final Player player, int page) {
-        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE, "\u00a79" + tr("{0} ({1}/{2})", tr("Challenge Menu"), page, challengeLogic.getTotalPages()));
+        int total = challengeLogic.getTotalPages();
+        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + tr("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
         final PlayerInfo pi = plugin.getPlayerInfo(player);
         challengeLogic.populateChallengeRank(menu, player, pi, page);
+        for (int i = 1; i <= total; i++) {
+            ItemStack pageItem = null;
+            if (i == page) {
+                pageItem = ItemStackUtil.createItemStack("BOOK_AND_QUILL", tr("\u00a77Current page"), null);
+            } else {
+                pageItem = ItemStackUtil.createItemStack("BOOK", tr("\u00a77Page {0}", i), null);
+            }
+            pageItem.setAmount(i);
+            menu.setItem(i + CHALLENGE_PAGESIZE - 1, pageItem);
+        }
         return menu;
     }
 
@@ -704,6 +717,11 @@ public class SkyBlockMenu {
             if (m.find()) {
                 page = Integer.parseInt(m.group("p"));
                 max = Integer.parseInt(m.group("max"));
+            }
+            if (event.getSlot() >= CHALLENGE_PAGESIZE && (event.getSlot()-CHALLENGE_PAGESIZE) < max) {
+                p.closeInventory();
+                p.openInventory(displayChallengeGUI(p, event.getSlot()-CHALLENGE_PAGESIZE+1));
+                return;
             }
             if (event.getSlot() < 0 || event.getSlot() > CHALLENGE_PAGESIZE) {
                 return;

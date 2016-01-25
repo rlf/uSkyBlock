@@ -1861,6 +1861,13 @@ msgstr "Você não pode usar esse bioma."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Use: {0}"
+
 msgid "Island Menu"
 msgstr "Menu da ilha"
 
@@ -2296,9 +2303,6 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "Permission: {0}"
 #~ msgstr "Permissão: {0}"
-
-#~ msgid "§7Usage: {0}"
-#~ msgstr "§7Use: {0}"
 
 #~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
 #~ msgstr "§eVocê recuperou a confiança na ilha de §a{0}."

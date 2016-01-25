@@ -1867,6 +1867,13 @@ msgstr "Вы не можете использовать этот биом."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Введите: {0}"
+
 msgid "Island Menu"
 msgstr "Меню острова"
 
@@ -2278,9 +2285,6 @@ msgstr ""
 
 #~ msgid "§7Version: §d{0}\n"
 #~ msgstr "§7Версия: §d{0}\n"
-
-#~ msgid "§7Usage: {0}"
-#~ msgstr "§7Введите: {0}"
 
 #, fuzzy
 #~ msgid "Command"

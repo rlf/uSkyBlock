@@ -1913,6 +1913,13 @@ msgstr "§c§l你没有权限更改生物群系."
 msgid "{0} ({1}/{2})"
 msgstr "§a{0} §c{1}"
 
+msgid "§7Current page"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§9排名: {0}"
+
 #, fuzzy
 msgid "Island Menu"
 msgstr "§9岛屿菜单"
@@ -2305,10 +2312,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "   perm: {0}"
-#~ msgstr "§9排名: {0}"
-
-#, fuzzy
-#~ msgid "Usage: {0}"
 #~ msgstr "§9排名: {0}"
 
 #, fuzzy

@@ -1845,6 +1845,13 @@ msgstr "Vous ne pouvez pas utiliser ce biome"
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Utilisation: {0}"
+
 msgid "Island Menu"
 msgstr "Menu de l'île"
 
@@ -2251,9 +2258,6 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "§7Version: §d{0}\n"
 #~ msgstr "§7Version: §d{0}\n"
-
-#~ msgid "§7Usage: {0}"
-#~ msgstr "§7Utilisation: {0}"
 
 #, fuzzy
 #~ msgid "Command"

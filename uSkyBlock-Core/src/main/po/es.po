@@ -1881,6 +1881,13 @@ msgstr "No puedes usar este bioma."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Completa el reto {0}"
+
 msgid "Island Menu"
 msgstr "Menú de Isla"
 
