@@ -105,10 +105,10 @@ public enum ItemStackUtil {;
         }
         ItemStack itemStack = new ItemStack(material, 1, subType);
         ItemMeta meta = itemStack.getItemMeta();
-        meta.setDisplayName(name);
+        meta.setDisplayName(FormatUtil.normalize(name));
         List<String> lore = new ArrayList<>();
         if (description != null) {
-            lore.add(description);
+            lore.add(FormatUtil.normalize(description));
         }
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
