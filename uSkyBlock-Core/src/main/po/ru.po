@@ -1382,7 +1382,8 @@ msgstr "§cОстров, на котором вы находитесь - уда�
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eWALL OF FAME (страница {0} из {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4Список ТОП 10 пуст! (возможно ошибка генерации?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"

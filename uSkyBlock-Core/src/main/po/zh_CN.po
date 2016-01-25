@@ -1396,7 +1396,8 @@ msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§e荣誉墙 (页数 {0} - {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4前十名单是控的!(可能统计出错?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"

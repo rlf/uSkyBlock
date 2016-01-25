@@ -1363,7 +1363,8 @@ msgstr "§cÖn du är på tas bort! Teleporterar dig till spawnen."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eRuhmeshalle (Sida {0} av {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§cTopp 10 listan är tom!"
 
 # ???

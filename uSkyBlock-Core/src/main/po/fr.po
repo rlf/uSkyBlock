@@ -1376,7 +1376,8 @@ msgstr "§cL'île sur laquelle vous êtes a été supprimé ! "
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eTableau des meilleurs joueurs (page {0} de {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4La top liste est vide ! "
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"

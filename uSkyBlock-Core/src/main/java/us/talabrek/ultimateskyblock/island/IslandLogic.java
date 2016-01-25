@@ -224,7 +224,11 @@ public class IslandLogic {
             }
             sender.sendMessage(tr("\u00a7eWALL OF FAME (page {0} of {1}):", page, maxpage));
             if (ranks == null || ranks.isEmpty()) {
-                sender.sendMessage(tr("\u00a74Top ten list is empty! (perhaps the generation failed?)"));
+                if (Settings.island_useTopTen) {
+                    sender.sendMessage(tr("\u00a74Top ten list is empty! Only islands above level {0} is considered.", topTenCutoff));
+                } else {
+                    sender.sendMessage(tr("\u00a74Island level has been disabled, contact an administrator."));
+                }
             }
             int place = 1;
             PlayerInfo playerInfo = plugin.getPlayerInfo(sender.getName());

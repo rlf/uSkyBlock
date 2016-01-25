@@ -1383,7 +1383,8 @@ msgstr ""
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eTop de Islas (página {0} de {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4¡La lista de Top Ten está vacía! (¿quizás la generación falló?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
