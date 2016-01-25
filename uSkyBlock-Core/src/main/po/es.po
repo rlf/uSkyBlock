@@ -391,6 +391,10 @@ msgstr "§4La isla de {0} en {1} ya estaba protegida."
 msgid "open GUI for config"
 msgstr "abrir el menú para configuración"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "recargar la configuración de archivo."
+
 msgid "Controls player-cooldowns"
 msgstr "Controla los cooldowns de jugadores"
 
@@ -1421,9 +1425,9 @@ msgstr "§f{0} §7{1} §9 por {2} §7{3}\n"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§9Incapaz de localizar un cofre en {0} bloques."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Página {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Completa el reto {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1469,6 +1473,14 @@ msgstr "§eConfiguración guardada y recargada."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cError! §9Incapaz de guardar el archivo de configuración!"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Completa el reto {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Completa el reto {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§cGuarda & Recarga la configuración"
@@ -1884,10 +1896,6 @@ msgstr "{0} ({1}/{2})"
 msgid "§7Current page"
 msgstr ""
 
-#, fuzzy, java-format
-msgid "§7Page {0}"
-msgstr "§7Completa el reto {0}"
-
 msgid "§7First Page"
 msgstr ""
 
@@ -2266,6 +2274,13 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Página {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Completa el reto {0}"
 
 #, fuzzy
 #~ msgid "§eYou cannot access containers on this island."

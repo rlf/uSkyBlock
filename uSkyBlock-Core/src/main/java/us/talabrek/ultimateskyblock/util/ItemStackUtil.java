@@ -223,7 +223,13 @@ public enum ItemStackUtil {;
 
         public Builder lore(List<String> lore) {
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setLore(lore);
+            if (itemMeta.getLore() == null) {
+                itemMeta.setLore(lore);
+            } else {
+                List<String> oldLore = itemMeta.getLore();
+                oldLore.addAll(lore);
+                itemMeta.setLore(oldLore);
+            }
             itemStack.setItemMeta(itemMeta);
             return this;
         }

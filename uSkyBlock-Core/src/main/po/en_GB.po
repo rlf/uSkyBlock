@@ -387,6 +387,10 @@ msgstr "§4{0}s island at {1} was already protected"
 msgid "open GUI for config"
 msgstr "open GUI for config"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "reload configuration from file."
+
 msgid "Controls player-cooldowns"
 msgstr "Controls player-cooldowns"
 
@@ -1409,9 +1413,9 @@ msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§4* Watchdog!§7 Unable to locate a chest within §4{0}§7, bailing out."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Page {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Usage: {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1457,6 +1461,14 @@ msgstr "§4* §7Configuration saved and reloaded."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§4* Error! §9Unable to save config file!"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Usage: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Usage: {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§4* Save & Reload config"
@@ -1867,10 +1879,6 @@ msgstr "{0} ({1}/{2})"
 msgid "§7Current page"
 msgstr ""
 
-#, fuzzy, java-format
-msgid "§7Page {0}"
-msgstr "§7Usage: {0}"
-
 msgid "§7First Page"
 msgstr ""
 
@@ -2248,6 +2256,13 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Page {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Usage: {0}"
 
 #, fuzzy
 #~ msgid "§eYou cannot access containers on this island."

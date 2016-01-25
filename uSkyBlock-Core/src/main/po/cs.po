@@ -378,6 +378,9 @@ msgstr ""
 msgid "open GUI for config"
 msgstr ""
 
+msgid "§eInvalid configuration name"
+msgstr ""
+
 msgid "Controls player-cooldowns"
 msgstr ""
 
@@ -1356,9 +1359,9 @@ msgstr ""
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr ""
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "Hodnost: {0}"
 
 msgid "§c-"
 msgstr ""
@@ -1405,6 +1408,14 @@ msgstr ""
 
 msgid "§cError! §9Unable to save config file!"
 msgstr ""
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "Hodnost: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "Hodnost: {0}"
 
 msgid "§cSave & Reload config"
 msgstr ""
@@ -1721,10 +1732,6 @@ msgstr "{0} ({1}/{2})"
 msgid "§7Current page"
 msgstr ""
 
-#, fuzzy, java-format
-msgid "§7Page {0}"
-msgstr "Hodnost: {0}"
-
 msgid "§7First Page"
 msgstr ""
 
@@ -2028,6 +2035,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "Hodnost: {0}"
 
 #, fuzzy
 #~ msgid "§eYou cannot access containers on this island."

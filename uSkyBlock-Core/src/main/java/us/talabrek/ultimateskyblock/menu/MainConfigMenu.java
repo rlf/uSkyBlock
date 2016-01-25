@@ -14,6 +14,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +27,7 @@ import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.builder;
 
 /**
- * Created by R4zorax on 03/10/2015.
+ * The primary config menu.
  */
 public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     private final uSkyBlock plugin;
@@ -50,13 +52,19 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         if (item == null) {
             return true;
         }
-        if (item.getType() == Material.BOOK) {
-            String[] parts = item.getItemMeta().getDisplayName().split(":");
-            String configName = parts[0];
-            int page = Integer.parseInt(parts[1], 10);
+        if (event.getSlot() % 9 == 0 && (item.getType() == Material.BOOK || item.getType() == Material.BOOK_AND_QUILL)) {
+            String configName = getConfigName(item);
+            int page = getConfigPage(item);
+            if (event.isShiftClick()) {
+                if (event.getSlot() == getIndex(1,0) && page > 10) {
+                    page -= 10;
+                } else if (event.getSlot() == getIndex(3,0)) {
+                    page += 10;
+                }
+            }
             Inventory menu = createFileMenu(configName, page);
             player.openInventory(menu);
-        } else if (item.getType() == Material.BOOK_AND_QUILL && event.getSlot() == getIndex(5, 0)) {
+        } else if (event.getSlot() == getIndex(5, 0) && item.getType() == Material.ENDER_CHEST) {
             ItemStack currentMenu = getCurrentMenu(event);
             String configName = getConfigName(currentMenu);
             int page = getConfigPage(currentMenu);
@@ -149,6 +157,12 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
             }
         }
         int maxPages = (int) Math.ceil(menuList.size() / 54d);
+        if (page < 1) {
+            page = 1;
+        }
+        if (page > maxPages) {
+            page = maxPages;
+        }
         Inventory menu = Bukkit.createInventory(null, 6 * 9, tr("Config:") + " " + filename + " " + page + "/" + maxPages);
         menu.setMaxStackSize(MenuItemFactory.MAX_INT_VALUE);
         int startOffset = (page-1)*54;
@@ -176,14 +190,30 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
                 menu.setItem(i-startOffset, itemStack);
             }
         }
-        for (int i = 1; i <= maxPages; i++) {
-            ItemStack itemStack = builder(new ItemStack(Material.BOOK, i))
-                    .select(i == page)
-                    .displayName(filename + ":" + i)
-                    .build();
-            menu.setItem((i-1) * 9, itemStack);
+        menu.setItem(0, builder(new ItemStack(page == 1 ? Material.BOOK_AND_QUILL : Material.BOOK, 1))
+                .displayName(filename)
+                .lore(tr("\u00a77Page {0}", 1))
+                .lore(tr("\u00a73First Page"))
+                .build());
+        int offset = 2;
+        if (page > 3) {
+            offset = page-1;
         }
-        ItemStack itemStack = builder(new ItemStack(Material.BOOK_AND_QUILL, 1))
+        if (offset > maxPages-3 && maxPages > 5) {
+            offset = maxPages-3;
+        }
+        for (int i = offset; maxPages > offset && i <= Math.min(offset+2, maxPages-1); i++) {
+            menu.setItem((1 + i - offset) * 9, builder(new ItemStack(page == i ? Material.BOOK_AND_QUILL : Material.BOOK, i))
+                    .displayName(filename)
+                    .lore(tr("\u00a77Page {0}", i))
+                    .build());
+        }
+        menu.setItem(getIndex(4,0), builder(new ItemStack(page == maxPages ? Material.BOOK_AND_QUILL : Material.BOOK, maxPages))
+                .displayName(filename)
+                .lore(tr("\u00a77Page {0}", maxPages))
+                .lore(tr("\u00a73Last Page"))
+                .build());
+        ItemStack itemStack = builder(new ItemStack(Material.ENDER_CHEST, 1))
                 .displayName(tr("\u00a7cSave & Reload config"))
                 .lore(Arrays.asList(tr("\u00a77Saves the settings to\n\u00a77file & reloads again.\n\u00a7cNote: \u00a77Use with care!").split("\n")))
                 .select(config.getBoolean("dirty", false))
@@ -193,24 +223,31 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     }
 
     private String getConfigName(ItemStack currentMenu) {
-        if (currentMenu != null && !currentMenu.getItemMeta().getEnchants().isEmpty()) {
-            String[] parts = currentMenu.getItemMeta().getDisplayName().split(":");
-            return parts[0];
+        if (currentMenu != null && currentMenu.getItemMeta().getDisplayName() != null) {
+            return stripFormatting(currentMenu.getItemMeta().getDisplayName());
         }
         return "config.yml";
     }
 
     private int getConfigPage(ItemStack currentMenu) {
-        if (currentMenu != null && !currentMenu.getItemMeta().getEnchants().isEmpty()) {
-            String[] parts = currentMenu.getItemMeta().getDisplayName().split(":");
-            return Integer.parseInt(parts[1], 10);
+        if (currentMenu != null && currentMenu.getItemMeta() != null
+                && currentMenu.getItemMeta().getLore() != null
+                && !currentMenu.getItemMeta().getLore().isEmpty()) {
+            try {
+                Object[] parts = new MessageFormat(tr("\u00a77Page {0}")).parse(currentMenu.getItemMeta().getLore().get(0));
+                if (parts != null && parts.length == 1) {
+                    return Integer.parseInt("" + parts[0]);
+                }
+            } catch (ParseException e) {
+                // Ignore
+            }
         }
         return 1;
     }
     private ItemStack getCurrentMenu(InventoryClickEvent event) {
         int index = 0;
         ItemStack currentMenu = event.getInventory().getItem(index);
-        while (currentMenu != null && currentMenu.getItemMeta().getEnchants().isEmpty()) {
+        while (currentMenu != null && currentMenu.getType() != Material.BOOK_AND_QUILL) {
             index += 9;
             currentMenu = event.getInventory().getItem(index);
         }

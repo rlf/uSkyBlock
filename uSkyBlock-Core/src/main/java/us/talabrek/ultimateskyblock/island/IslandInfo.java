@@ -224,18 +224,6 @@ public class IslandInfo {
         }
     }
 
-    public void reload() {
-        final InputStream defConfigStream = getClass().getClassLoader().getResourceAsStream("island.yml");
-        if (defConfigStream != null) {
-            try {
-                config.load(new InputStreamReader(defConfigStream, "UTF-8"));
-            } catch (IOException | InvalidConfigurationException e) {
-                uSkyBlock.log(Level.SEVERE, "Unable to read island-defaults", e);
-            }
-        }
-        save();
-    }
-
     public int getMaxPartySize() {
         return getMaxPartyIntValue("maxPartySizePermission", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getMaxPartySize());
     }

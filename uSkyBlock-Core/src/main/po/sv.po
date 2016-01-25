@@ -390,6 +390,10 @@ msgstr "§c{0}s ö vid {1} var redan skyddad"
 msgid "open GUI for config"
 msgstr "öppna GUI för konfiguration"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "ladda om konfiguration från filen."
+
 msgid "Controls player-cooldowns"
 msgstr "Kontrollerar spelare-cooldowns"
 
@@ -1402,9 +1406,9 @@ msgstr "§f{0} §7{1} §9 av {2} §7{3}\n"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cVakthund!§9 Kan inte lokalisera en kista inom {0}."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Sida {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Användande: {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1450,6 +1454,14 @@ msgstr "§eKonfigurationen sparad och omladdad."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cFel! §9Kan inte spara konfigurationsfilen!"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Användande: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Användande: {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§cSpara & ladda om"
@@ -1860,10 +1872,6 @@ msgstr "{0} ({1}/{2})"
 msgid "§7Current page"
 msgstr ""
 
-#, fuzzy, java-format
-msgid "§7Page {0}"
-msgstr "§7Användande: {0}"
-
 msgid "§7First Page"
 msgstr ""
 
@@ -2241,6 +2249,13 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Sida {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Användande: {0}"
 
 #, fuzzy
 #~ msgid "§eYou cannot access containers on this island."

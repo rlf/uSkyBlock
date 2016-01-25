@@ -376,6 +376,9 @@ msgstr ""
 msgid "open GUI for config"
 msgstr ""
 
+msgid "§eInvalid configuration name"
+msgstr ""
+
 msgid "Controls player-cooldowns"
 msgstr ""
 
@@ -1348,7 +1351,7 @@ msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
 #, java-format
-msgid "Page {0,number,integer}"
+msgid "§7Page {0}"
 msgstr ""
 
 msgid "§c-"
@@ -1394,6 +1397,12 @@ msgid "§eConfiguration saved and reloaded."
 msgstr ""
 
 msgid "§cError! §9Unable to save config file!"
+msgstr ""
+
+msgid "§3First Page"
+msgstr ""
+
+msgid "§3Last Page"
 msgstr ""
 
 msgid "§cSave & Reload config"
@@ -1708,10 +1717,6 @@ msgid "{0} ({1}/{2})"
 msgstr ""
 
 msgid "§7Current page"
-msgstr ""
-
-#, java-format
-msgid "§7Page {0}"
 msgstr ""
 
 msgid "§7First Page"

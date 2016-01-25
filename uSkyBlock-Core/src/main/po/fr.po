@@ -395,6 +395,10 @@ msgstr "§4L''île de {0} à {1} est déjà protégé"
 msgid "open GUI for config"
 msgstr "ouvrir l'interface pour la config"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "recharher la configuration à partir du fichier."
+
 msgid "Controls player-cooldowns"
 msgstr "Gérer le cooldown (délai) des joueurs"
 
@@ -1414,9 +1418,9 @@ msgstr "§f{0} §7{1} §9 par {2} §7{3}\n"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cOh! §9 Impossible de localiser un coffre dans les {0}."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Page {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Utilisation: {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1462,6 +1466,14 @@ msgstr "§eConfiguration sauvegardé et rechargé."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cErreure ! §9Impossible de sauvegarder le fichier de config !"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Utilisation: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Utilisation: {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§cSauvegarder et recharger la config"
@@ -1848,10 +1860,6 @@ msgstr "{0} ({1}/{2})"
 msgid "§7Current page"
 msgstr ""
 
-#, fuzzy, java-format
-msgid "§7Page {0}"
-msgstr "§7Utilisation: {0}"
-
 msgid "§7First Page"
 msgstr ""
 
@@ -2224,6 +2232,13 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Page {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Utilisation: {0}"
 
 #, fuzzy
 #~ msgid "§eYou cannot access containers on this island."

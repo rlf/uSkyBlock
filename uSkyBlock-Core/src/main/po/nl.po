@@ -391,6 +391,10 @@ msgstr "§4{0}s eiland op {1} is al beveiligd"
 msgid "open GUI for config"
 msgstr "open de GUI voor de config"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "herladen van de configuratie van het bestand"
+
 msgid "Controls player-cooldowns"
 msgstr "Beheert de player-cooldowns"
 
@@ -1427,9 +1431,9 @@ msgstr "§f{0} §7{1} §9 bij {2} §7{3}\n"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cWatchdog!§9 Kan geen chest vinden in {0}, process gestopt."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Pagina {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Gebruik: {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1475,6 +1479,14 @@ msgstr "§eDe Configuratie is opgeslagen en herladen."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cError! §9Kan de configuratie niet opslaan!"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Gebruik: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Gebruik: {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§cOpslaan & Herlaad de config"
@@ -1885,10 +1897,6 @@ msgstr "{0} ({1}/{2})"
 msgid "§7Current page"
 msgstr ""
 
-#, fuzzy, java-format
-msgid "§7Page {0}"
-msgstr "§7Gebruik: {0}"
-
 msgid "§7First Page"
 msgstr ""
 
@@ -2275,6 +2283,13 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Pagina {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Gebruik: {0}"
 
 #, fuzzy
 #~ msgid "§eYou cannot access containers on this island."
