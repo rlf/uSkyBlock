@@ -391,16 +391,37 @@ public class SkyBlockMenu {
         int total = challengeLogic.getTotalPages();
         Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + tr("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
         final PlayerInfo pi = plugin.getPlayerInfo(player);
-        challengeLogic.populateChallengeRank(menu, player, pi, page);
-        for (int i = 1; i <= total; i++) {
-            ItemStack pageItem = null;
-            if (i == page) {
-                pageItem = ItemStackUtil.createItemStack("BOOK_AND_QUILL", tr("\u00a77Current page"), null);
-            } else {
-                pageItem = ItemStackUtil.createItemStack("BOOK", tr("\u00a77Page {0}", i), null);
+        challengeLogic.populateChallengeRank(menu, pi, page);
+        int pages[] = new int[9];
+        pages[0] = 1;
+        pages[8] = total;
+        int startOffset = 2;
+        if (page > 5) {
+            startOffset = (int) ((Math.round(page/2d)) - 1);
+            if (startOffset > total-7) {
+                startOffset = total-7;
             }
-            pageItem.setAmount(i);
-            menu.setItem(i + CHALLENGE_PAGESIZE - 1, pageItem);
+        }
+        for (int i = 0; i < 7; i++) {
+            pages[i+1] = startOffset+i;
+        }
+        for (int i = 0; i < pages.length; i++) {
+            int p = pages[i];
+            if (p >= 1 && p <= total) {
+                ItemStack pageItem = null;
+                if (p == page) {
+                    pageItem = ItemStackUtil.createItemStack("BOOK_AND_QUILL", tr("\u00a77Current page"), null);
+                } else {
+                    pageItem = ItemStackUtil.createItemStack("BOOK", tr("\u00a77Page {0}", p), null);
+                }
+                if (i == 0) {
+                    pageItem = ItemStackUtil.builder(pageItem).displayName(tr("\u00a77First Page")).build();
+                } else if (i == 8) {
+                    pageItem = ItemStackUtil.builder(pageItem).displayName(tr("\u00a77Last Page")).build();
+                }
+                pageItem.setAmount(p);
+                menu.setItem(i + CHALLENGE_PAGESIZE, pageItem);
+            }
         }
         return menu;
     }
@@ -587,11 +608,12 @@ public class SkyBlockMenu {
     }
 
     public void onClick(InventoryClickEvent event) {
-        if (event == null || event.getCurrentItem() == null || event.getWhoClicked() == null || event.getSlotType() != InventoryType.SlotType.CONTAINER) {
+        ItemStack currentItem = event != null ? event.getCurrentItem() : null;
+        if (event == null || currentItem == null || event.getWhoClicked() == null || event.getSlotType() != InventoryType.SlotType.CONTAINER) {
             return; // Bail out, nothing we can do anyway
         }
         Player p = (Player) event.getWhoClicked();
-        ItemMeta meta = event.getCurrentItem().getItemMeta();
+        ItemMeta meta = currentItem.getItemMeta();
         SkullMeta skull = meta instanceof SkullMeta ? (SkullMeta) meta : null;
         String inventoryName = stripFormatting(event.getInventory().getName());
         if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Group Members")))) {
@@ -599,7 +621,7 @@ public class SkyBlockMenu {
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            if (meta == null || event.getCurrentItem().getType() == Material.SIGN) {
+            if (meta == null || currentItem.getType() == Material.SIGN) {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));
             } else if (skull != null && plugin.getIslandInfo(p).isLeader(p)) {
@@ -617,31 +639,31 @@ public class SkyBlockMenu {
                 p.closeInventory();
                 p.openInventory(displayPartyGUI(p));
             }
-            if (event.getCurrentItem().getTypeId() == 6) {
+            if (currentItem.getTypeId() == 6) {
                 p.closeInventory();
                 islandInfo.togglePerm(playerPerm[0], "canChangeBiome");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 101) {
+            } else if (currentItem.getTypeId() == 101) {
                 p.closeInventory();
                 islandInfo.togglePerm(playerPerm[0], "canToggleLock");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 90) {
+            } else if (currentItem.getTypeId() == 90) {
                 p.closeInventory();
                 islandInfo.togglePerm(playerPerm[0], "canChangeWarp");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 69) {
+            } else if (currentItem.getTypeId() == 69) {
                 p.closeInventory();
                 islandInfo.togglePerm(playerPerm[0], "canToggleWarp");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 398) {
+            } else if (currentItem.getTypeId() == 398) {
                 p.closeInventory();
                 islandInfo.togglePerm(playerPerm[0], "canInviteOthers");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 301) {
+            } else if (currentItem.getTypeId() == 301) {
                 p.closeInventory();
                 islandInfo.togglePerm(playerPerm[0], "canKickOthers");
                 p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-            } else if (event.getCurrentItem().getTypeId() == 323) {
+            } else if (currentItem.getTypeId() == 323) {
                 p.closeInventory();
                 p.openInventory(displayPartyGUI(p));
             } else {
@@ -653,55 +675,55 @@ public class SkyBlockMenu {
             if (event.getSlot() < 0 || event.getSlot() > 35) {
                 return;
             }
-            if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 3) {
+            if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 3) {
                 p.closeInventory();
                 p.performCommand("island biome jungle");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 1) {
+            } else if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 1) {
                 p.closeInventory();
                 p.performCommand("island biome forest");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.SAND) {
+            } else if (currentItem.getType() == Material.SAND) {
                 p.closeInventory();
                 p.performCommand("island biome desert");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.SNOW) {
+            } else if (currentItem.getType() == Material.SNOW) {
                 p.closeInventory();
                 p.performCommand("island biome taiga");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.EYE_OF_ENDER) {
+            } else if (currentItem.getType() == Material.EYE_OF_ENDER) {
                 p.closeInventory();
                 p.performCommand("island biome sky");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.WATER_LILY) {
+            } else if (currentItem.getType() == Material.WATER_LILY) {
                 p.closeInventory();
                 p.performCommand("island biome swampland");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.NETHER_BRICK) {
+            } else if (currentItem.getType() == Material.NETHER_BRICK) {
                 p.closeInventory();
                 p.performCommand("island biome hell");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.RED_MUSHROOM) {
+            } else if (currentItem.getType() == Material.RED_MUSHROOM) {
                 p.closeInventory();
                 p.performCommand("island biome mushroom");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.LONG_GRASS) {
+            } else if (currentItem.getType() == Material.LONG_GRASS) {
                 p.closeInventory();
                 p.performCommand("island biome plains");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.EMERALD_ORE) {
+            } else if (currentItem.getType() == Material.EMERALD_ORE) {
                 p.closeInventory();
                 p.performCommand("island biome extreme_hills");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.RED_ROSE && event.getCurrentItem().getDurability() == 5) {
+            } else if (currentItem.getType() == Material.RED_ROSE && currentItem.getDurability() == 5) {
                 p.closeInventory();
                 p.performCommand("island biome flower_forest");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.RAW_FISH) {
+            } else if (currentItem.getType() == Material.RAW_FISH) {
                 p.closeInventory();
                 p.performCommand("island biome ocean");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.PRISMARINE_SHARD) {
+            } else if (currentItem.getType() == Material.PRISMARINE_SHARD) {
                 p.closeInventory();
                 p.performCommand("island biome deep_ocean");
                 p.openInventory(displayIslandGUI(p));
@@ -718,9 +740,9 @@ public class SkyBlockMenu {
                 page = Integer.parseInt(m.group("p"));
                 max = Integer.parseInt(m.group("max"));
             }
-            if (event.getSlot() >= CHALLENGE_PAGESIZE && (event.getSlot()-CHALLENGE_PAGESIZE) < max) {
+            if (event.getSlot() >= CHALLENGE_PAGESIZE) { // Pagination
                 p.closeInventory();
-                p.openInventory(displayChallengeGUI(p, event.getSlot()-CHALLENGE_PAGESIZE+1));
+                p.openInventory(displayChallengeGUI(p, currentItem.getAmount()));
                 return;
             }
             if (event.getSlot() < 0 || event.getSlot() > CHALLENGE_PAGESIZE) {
@@ -728,8 +750,8 @@ public class SkyBlockMenu {
             }
             if ((event.getSlot() % 9) > 0) { // 0,9... are the rank-headers...
                 p.closeInventory();
-                if (event.getCurrentItem().getItemMeta() != null) {
-                    String challenge = event.getCurrentItem().getItemMeta().getDisplayName();
+                if (currentItem.getItemMeta() != null) {
+                    String challenge = currentItem.getItemMeta().getDisplayName();
                     String challengeName = stripFormatting(challenge);
                     p.performCommand("c c " + challengeName);
                 }
@@ -762,46 +784,46 @@ public class SkyBlockMenu {
             }
             PlayerInfo playerInfo = plugin.getPlayerInfo(p);
             IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
-            if (event.getCurrentItem().getType() == Material.SAPLING && event.getCurrentItem().getDurability() == 3) {
+            if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 3) {
                 p.closeInventory();
                 p.performCommand("island biome");
-            } else if (event.getCurrentItem().getType() == Material.SKULL_ITEM) {
+            } else if (currentItem.getType() == Material.SKULL_ITEM) {
                 p.closeInventory();
                 p.performCommand("island party");
-            } else if (event.getCurrentItem().getType() == Material.BED) {
+            } else if (currentItem.getType() == Material.BED) {
                 p.closeInventory();
                 p.performCommand("island sethome");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.HOPPER) {
+            } else if (currentItem.getType() == Material.HOPPER) {
                 p.closeInventory();
                 p.performCommand("island setwarp");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.BOOK_AND_QUILL) {
+            } else if (currentItem.getType() == Material.BOOK_AND_QUILL) {
                 p.closeInventory();
                 p.performCommand("island log");
-            } else if (event.getCurrentItem().getType() == Material.WOOD_DOOR) {
+            } else if (currentItem.getType() == Material.WOOD_DOOR) {
                 p.closeInventory();
                 p.performCommand("island home");
-            } else if (event.getCurrentItem().getType() == Material.EXP_BOTTLE) {
+            } else if (currentItem.getType() == Material.EXP_BOTTLE) {
                 p.closeInventory();
                 p.performCommand("island level");
-            } else if (event.getCurrentItem().getType() == Material.DIAMOND_ORE) {
+            } else if (currentItem.getType() == Material.DIAMOND_ORE) {
                 p.closeInventory();
                 p.performCommand("c");
-            } else if (event.getCurrentItem().getType() == Material.ENDER_STONE || event.getCurrentItem().getType() == Material.ENDER_PORTAL_FRAME) {
+            } else if (currentItem.getType() == Material.ENDER_STONE || currentItem.getType() == Material.ENDER_PORTAL_FRAME) {
                 p.closeInventory();
                 p.performCommand("island togglewarp");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && islandInfo.isLocked()) {
+            } else if (currentItem.getType() == Material.IRON_FENCE && islandInfo.isLocked()) {
                 p.closeInventory();
                 p.performCommand("island unlock");
                 p.openInventory(displayIslandGUI(p));
-            } else if (event.getCurrentItem().getType() == Material.IRON_FENCE && !islandInfo.isLocked()) {
+            } else if (currentItem.getType() == Material.IRON_FENCE && !islandInfo.isLocked()) {
                 p.closeInventory();
                 p.performCommand("island lock");
                 p.openInventory(displayIslandGUI(p));
             } else {
-                if (!isExtraMenuAction(p, event.getCurrentItem())) {
+                if (!isExtraMenuAction(p, currentItem)) {
                     p.closeInventory();
                     p.openInventory(displayIslandGUI(p));
                 }
@@ -811,10 +833,10 @@ public class SkyBlockMenu {
             if (event.getSlot() == 0) {
                 p.closeInventory();
                 p.performCommand("island create");
-            } else if (event.getCurrentItem().getType() == Material.SKULL_ITEM) {
+            } else if (currentItem.getType() == Material.SKULL_ITEM) {
                 p.closeInventory();
                 p.performCommand("island accept");
-            } else if (event.getCurrentItem().getType() == Material.SIGN) {
+            } else if (currentItem.getType() == Material.SIGN) {
                 p.closeInventory();
                 p.performCommand("chestcommands open island_help");
             }

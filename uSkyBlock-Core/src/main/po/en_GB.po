@@ -1871,6 +1871,13 @@ msgstr ""
 msgid "§7Page {0}"
 msgstr "§7Usage: {0}"
 
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§7Usage: {0}"
+
 msgid "Island Menu"
 msgstr "Island Menu"
 

@@ -1714,6 +1714,12 @@ msgstr ""
 msgid "§7Page {0}"
 msgstr ""
 
+msgid "§7First Page"
+msgstr ""
+
+msgid "§7Last Page"
+msgstr ""
+
 msgid "Island Menu"
 msgstr ""
 

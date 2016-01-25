@@ -1855,6 +1855,13 @@ msgstr ""
 msgid "§7Page {0}"
 msgstr "§7Brug: {0}"
 
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§7Brug: {0}"
+
 msgid "Island Menu"
 msgstr "Hoved menu"
 

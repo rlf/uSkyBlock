@@ -1920,6 +1920,13 @@ msgstr ""
 msgid "§7Page {0}"
 msgstr "§9排名: {0}"
 
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§9排名: {0}"
+
 #, fuzzy
 msgid "Island Menu"
 msgstr "§9岛屿菜单"

@@ -407,7 +407,7 @@ public class ChallengeLogic {
         }
     }
 
-    public void populateChallengeRank(Inventory menu, Player player, PlayerInfo pi, int page) {
+    public void populateChallengeRank(Inventory menu, PlayerInfo pi, int page) {
         List<Rank> ranksOnPage = new ArrayList<>(ranks.values());
         // page 1 = 0-4, 2 = 5-8, ...
         if (page > 0) {
