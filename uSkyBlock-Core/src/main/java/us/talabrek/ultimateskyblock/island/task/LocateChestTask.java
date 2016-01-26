@@ -42,7 +42,7 @@ public class LocateChestTask extends BukkitRunnable {
         } else {
             cancel();
             if (chestLocation == null && player != null && player.isOnline()) {
-                player.sendMessage(I18nUtil.tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(timeout)));
+                player.sendMessage(I18nUtil.tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(timeout-tStart)));
             }
             if (onCompletion != null) {
                 Bukkit.getScheduler().runTask(plugin, onCompletion);

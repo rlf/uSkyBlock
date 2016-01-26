@@ -22,6 +22,7 @@ public class FilePlayerDB implements PlayerDB {
     private static final Logger log = Logger.getLogger(FilePlayerDB.class.getName());
     private final YamlConfiguration config;
     private final File file;
+    private boolean isShuttingDown = false;
 
     public FilePlayerDB(File file) {
         this.file = file;
@@ -29,6 +30,11 @@ public class FilePlayerDB implements PlayerDB {
         if (file.exists()) {
             FileUtil.readConfig(config, file);
         }
+    }
+
+    @Override
+    public void shutdown() {
+        isShuttingDown = true;
     }
 
     @Override
@@ -65,24 +71,30 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public synchronized void updatePlayer(Player player) throws IOException {
+    public synchronized void updatePlayer(Player player) {
         updatePlayerAsync(player.getUniqueId(), player.getName(), player.getDisplayName());
     }
 
-    @Override
     public void updatePlayerAsync(final UUID id, final String name, final String displayName) {
-        Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 try {
-                    String uuid = UUIDUtil.asString(id);
-                    config.set(uuid + ".name", name);
-                    config.set(uuid + ".displayName", displayName);
+                    synchronized (FilePlayerDB.this) {
+                        String uuid = UUIDUtil.asString(id);
+                        config.set(uuid + ".name", name);
+                        config.set(uuid + ".displayName", displayName);
+                    }
                     config.save(file);
                 } catch (IOException e) {
                     log.log(Level.INFO, "Error saving playerdb", e);
                 }
             }
-        });
+        };
+        if (isShuttingDown) {
+            runnable.run();
+        } else {
+            Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), runnable);
+        }
     }
 }

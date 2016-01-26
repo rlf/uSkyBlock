@@ -41,7 +41,7 @@ public interface PlayerDB {
      * Stores a new name in the DB.
      * @param name The current name.
      */
-    void updatePlayer(Player name) throws IOException;
+    void updatePlayer(Player name);
 
-    void updatePlayerAsync(UUID uuid, String name, String displayName);
+    void shutdown();
 }

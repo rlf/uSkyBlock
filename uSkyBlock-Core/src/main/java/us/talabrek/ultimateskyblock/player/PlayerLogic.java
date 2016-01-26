@@ -91,8 +91,6 @@ public class PlayerLogic {
 
         final Player onlinePlayer = Bukkit.getPlayer(playerName);
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
-            plugin.getPlayerNameChangeManager().checkPlayer(onlinePlayer, playerInfo);
-
             if (playerInfo.getHasIsland()) {
                 IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
