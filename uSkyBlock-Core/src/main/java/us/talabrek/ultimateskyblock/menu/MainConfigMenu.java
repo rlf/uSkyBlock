@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.menu.MenuItemFactory.READONLY;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
@@ -163,7 +164,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         if (page > maxPages) {
             page = maxPages;
         }
-        Inventory menu = Bukkit.createInventory(null, 6 * 9, tr("Config:") + " " + filename + " " + page + "/" + maxPages);
+        Inventory menu = Bukkit.createInventory(null, 6 * 9, tr("Config:") + " " + pre("{0} ({1}/{2})", filename, page, maxPages));
         menu.setMaxStackSize(MenuItemFactory.MAX_INT_VALUE);
         int startOffset = (page-1)*54;
         // Add section markers on top line

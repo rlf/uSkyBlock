@@ -1869,10 +1869,6 @@ msgstr "§e§lClique para usar esse bioma."
 msgid "You cannot use this biome."
 msgstr "Você não pode usar esse bioma."
 
-#, java-format
-msgid "{0} ({1}/{2})"
-msgstr "{0} ({1}/{2})"
-
 msgid "§7Current page"
 msgstr ""
 
@@ -2254,6 +2250,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "{0} ({1}/{2})"
+#~ msgstr "{0} ({1}/{2})"
 
 #~ msgid "Page {0,number,integer}"
 #~ msgstr "Página {0,number,integer}"

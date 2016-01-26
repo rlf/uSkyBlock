@@ -1712,10 +1712,6 @@ msgstr ""
 msgid "You cannot use this biome."
 msgstr ""
 
-#, java-format
-msgid "{0} ({1}/{2})"
-msgstr ""
-
 msgid "§7Current page"
 msgstr ""
 
