@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.5.7\n"
+"Project-Id-Version: 2.5.10\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-11 15:16+0900\n"
+"PO-Revision-Date: 2016-01-26 13:16+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: Protocodyne Korean Translation Team <github@protocodyne.com>\n"
 "Language: Ko-kr\n"
@@ -237,7 +237,7 @@ msgstr "§4도전과제가 전혀 완료되지 않았습니다"
 
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
-msgstr "§echallenge: {0} has been reset for {1}"
+msgstr "§e도전과제: {0} has been reset for {1}"
 
 msgid "resets all challenges for the player"
 msgstr "모든 도전과제를 리셋합니다"
@@ -320,7 +320,7 @@ msgid "§cPURGE: §9Purged island at {0}"
 msgstr "§c정화: §9{0}에 정화된 섬"
 
 msgid "toggles the islands ignore status"
-msgstr "toggles the islands ignore status"
+msgstr "섬 상태 무시 버튼"
 
 #, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
@@ -383,14 +383,18 @@ msgstr "§4{1}에 있는 {0}의 섬은 이미 보호받고 있습니다"
 msgid "open GUI for config"
 msgstr "키 변경을 위해 GUI를 여세요"
 
+#, java-format
+msgid "§eInvalid configuration name"
+msgstr "§e설정파일 이름이 올바르지 않습니다"
+
 msgid "Controls player-cooldowns"
 msgstr "플레이어 대기시간을 컨트롤 합니다"
 
 msgid "clears the cooldown on a command (* = all)"
-msgstr "clears the cooldown on a command (* = all)"
+msgstr "커맨드로 쿨타임을 초기화 합니다 (* = all)"
 
 msgid "§eThe player is not currently online"
-msgstr "§e플레이어가 현제 온라인 상태가 아닙니다"
+msgstr "§e플레이어가 현재 온라인상태가 아닙니다"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -431,13 +435,13 @@ msgid "set debug-level"
 msgstr "디버그 레벨을 지정합니다"
 
 msgid "toggle debug-logging"
-msgstr "toggle debug-loggin'"
+msgstr "디버그 로깅 버튼'"
 
 msgid "§4Logging wasn't active, so you can't disable it!"
 msgstr "§4로그 기능이 활성화 되지 않았습니다. 해당 기능을 비활성화 할 수 없습니다!"
 
 msgid "flush current content of the logger to file."
-msgstr "flush current content of the logger to file."
+msgstr "현재 월드 상태에 관한 로그파일을 파일에서 제거합니다."
 
 msgid "§eLog-file has been flushed."
 msgstr "§e기록 파일이 작성되었습니다 ."
@@ -635,7 +639,7 @@ msgid "various WorldGuard utilities"
 msgstr "여러가지 WorldGuard 기능"
 
 msgid "refreshes the chunks around the player"
-msgstr "플레이어 주변의 덩어리들을 청소합니다"
+msgstr "플레이어 주변의 창크를 청소합니다"
 
 msgid "§eResending chunks to the client"
 msgstr "§e의뢰인에게 덩어리들을 다시보내는 중입니다"
@@ -650,6 +654,17 @@ msgstr "§e{0}에 Chunks을 로딩하는 중입니다"
 #, java-format
 msgid "§eUnloading chunks at {0}"
 msgstr "§e{0}에 Chunks들을 언로딩하는 중입니다"
+
+#, java-format
+msgid "update the WG regions"
+msgstr "월드가드 지역을 업데이트합니다"
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr "§e{0}를 위하여 섬의 월드가드 지역이 업데이트 되었습니다."
+
+msgid "§eNo island found at your location!"
+msgstr "§e당신의 위치에서 어떠한 섬도 발견하지 못했습니다!"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -726,6 +741,14 @@ msgstr "§4당신은 멤버들을 차단할 수 없습니다. 먼저 그들을 �
 
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4당신은 플레이어를 차단/퇴장 시킬 권한이 없습니다."
+
+#, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} 가 당신을 그들의 섬에서 벤하려 시도했습니다!"
+
+#, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} 는 벤에서 면제되었습니다."
 
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
@@ -888,8 +911,17 @@ msgstr "§4{0}가 당신을 그들의 섬으로부터 제거하였습니다!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0}가 섬에서 제거되었습니다."
 
-msgid "§4"
-msgstr "§4"
+#, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} 가 그들의 섬에서 당신을 추방하려 시도했습니다."
+
+#, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} 는 추방에서 면제되었습니다."
+
+#, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} 가 당신을 그들의 섬에서 추방 했습니다.!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1167,11 +1199,11 @@ msgstr "당신의 섬에 있는 플레이어에게 말을 겁니다"
 msgid "talk to your island party"
 msgstr "당신의 섬의 파티에게 말을 겁니다"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
-msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다! 부끄러운줄 알아라 - 사기꾼!"
+msgid "§eYou can not use another islands portals!"
+msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
-msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 집에나 가 - 사기꾼!"
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
+msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 스폰으로 이동하여 주세요"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§e방문자들은 아이템을 떨굴 수 없습니다!"
@@ -1298,21 +1330,21 @@ msgstr "§b{0}§d이 섬의 그룹에서 제거되었습니다."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr "§c당신이 밟고 있는 섬이 삭제되고 있습니다! 당신을 스폰으로 보내는 중입니다."
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr ""
 "§c지하의 조각을 가진 섬이 삭제되는 중입니다! 당신을 "spawn"으로 보내는 중입니다."
 
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
+msgstr "§c당신이 밟고 있는 섬이 삭제되고 있습니다! 당신을 스폰으로 보내는 중입니다."
+
 #, java-format
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§e명예의 벽 (page {0} of {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
-msgstr "§4Top 10 리스트가 비었습니다! (아마 생성 오류인듯 하군요?)"
+msgid "§4Top ten list is empty! Only islands above level {0} is considered.""
+msgstr "§4Top 10 리스트가 비었습니다! 오직 {0} 레벨 이하의 섬들만 고려되었습니다"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1320,6 +1352,29 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§e당신의 랭크는: §f{0}"
+
+msgid "UNKNOWN"
+msgstr "UNKNOWN"
+
+msgid "ANIMAL"
+msgstr "동물"
+
+msgid "MONSTER"
+msgstr "몬스터"
+
+msgid "VILLAGER"
+msgstr "섬원"
+
+msgid "GOLEM"
+msgstr "골렘"
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
@@ -1373,6 +1428,12 @@ msgstr "§e조작 설정이 저장 및 리로드 되었습니다."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§c오류! §9컨피그 파일 저장 불가!"
+
+msgid "§3First Page"
+msgstr "§3첫번째 페이지"
+
+msgid "§3Last Page"
+msgstr "§3마지막 페이지"
 
 msgid "§cSave & Reload config"
 msgstr "§c저장 & 리로드 조작"
@@ -1770,6 +1831,15 @@ msgstr "당신은 이 생태계를 쓸 수 없습니다."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr "현재 페이지"
+
+msgid "§7First Page"
+msgstr "첫번째 페이지"
+
+msgid "§7Last Page"
+msgstr "§7마지막 페이지"
+
 msgid "Island Menu"
 msgstr "섬 메뉴 (Protocodyne PTK팀 번역)"
 
@@ -1983,7 +2053,7 @@ msgid "§e§lClick here to deactivate."
 msgstr "§e§l여기를 눌러 비활성화하세요."
 
 msgid "§c§lYou can't change the warp."
-msgstr "§c§l당신은 워프를 바꿀 수 없습ㄴ다."
+msgstr "§c§l당신은 워프를 바꿀 수 없습니다."
 
 msgid ""
 "§eWarp Status: §8Inactive\n"
@@ -2049,10 +2119,29 @@ msgid "§9Text Editor"
 msgstr "§9텍스트 에디터"
 
 msgid "§eSending you to spawn."
-msgstr "§eSendin' ye to spawn."
+msgstr "§e스폰으로 이동 중 입니다."
+
+msgid "§eThe island has been §cLOCKED§e."
+msgstr "§e해당섬 은 §c잠금§e 되어있습니다."
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr "§a{0}초 후에 당신은 이동될 것 입니다.."
+
+msgid "§7Teleport cancelled"
+msgstr "이동이 취소되었습니다."
 
 msgid "Something went wrong saving the island and/or party data!"
-msgstr "섬과 파티 데이터를 저장하느데 뭔가 잘못되었습니다!"
+msgstr "섬 그리고/혹은 파티 데이터를 저장하는중에 오류가 발생하였습니다!"
+
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}
 
 msgid "§4Player is already assigned to this island!"
 msgstr "§4플레이어는 이미 이 섬에 배정되었습니다!"
@@ -2063,16 +2152,12 @@ msgstr "§4당신은 이 섬의 일원이 아닙니다. 스폰 지역으로 되�
 msgid "§aTeleporting you to your island."
 msgstr "§a당신을 당신의 섬으로 텔레포트 하는 중입니다."
 
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
-msgstr "§a당신은 {0}초 후에 텔레포트 됩니다"
-
 msgid "§4Unable to warp you to that player's island!"
-msgstr "§4그 플레이어의 섬으로 워프하실 수 없습니다!"
+msgstr "§4해당플레이어의 섬으로 워프 할 수 없습니다!"
 
 #, java-format
 msgid "§aTeleporting you to {0}'s island."
-msgstr "§a{0}의 섬으로 당신을 텔레포트하는 중입니다."
+msgstr "§a당신은 {0}초 후에 텔레포트 됩니다"
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4당신의 skyblock 집에 지정하려면 당신의 섬에 더 가까워야 합니다!"
@@ -2116,6 +2201,18 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Page {0,number,integer}"
+
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Complete {0}"
+
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4당신은 이 섬의 컨테이너에 접근권한이 없습니다."
+
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Name: §b{0}\n"
