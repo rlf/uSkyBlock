@@ -1360,7 +1360,7 @@ msgid "ANIMAL"
 msgstr "동물"
 
 msgid "MONSTER"
-msgstr "몬수터"
+msgstr "몬스터"
 
 msgid "VILLAGER"
 msgstr "섬원"
