@@ -12,11 +12,14 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * PlayerDB backed by a simple yml-file.
  */
 public class FilePlayerDB implements PlayerDB {
+    private static final Logger log = Logger.getLogger(FilePlayerDB.class.getName());
     private final YamlConfiguration config;
     private final File file;
 
@@ -77,7 +80,7 @@ public class FilePlayerDB implements PlayerDB {
                     config.set(uuid + ".displayName", displayName);
                     config.save(file);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.log(Level.INFO, "Error saving playerdb", e);
                 }
             }
         });
