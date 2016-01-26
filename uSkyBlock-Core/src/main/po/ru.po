@@ -387,6 +387,10 @@ msgstr "§4Остров {0} в {1} уже был защищен"
 msgid "open GUI for config"
 msgstr ""
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "перезагрузка конфигурации из файла"
+
 msgid "Controls player-cooldowns"
 msgstr "Controls player-cooldowns"
 
@@ -757,6 +761,14 @@ msgstr "§4Вы не можете заблокировать участника.
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4у вас недостаточно прав, чтобы выбрасывать или блокировать игроков."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} удалил вас со своего острова!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} удален с острова."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eВы запретили игроку §4{0}§e посещать ваш остров."
@@ -918,8 +930,17 @@ msgstr "§4{0} удалил вас со своего острова!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} удален с острова."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} удалил вас со своего острова!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} удален с острова."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} удалил вас со своего острова!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1206,10 +1227,12 @@ msgstr "говорить с игроками на своем острове"
 msgid "talk to your island party"
 msgstr "говорить с участниками вашего острова"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§eВы не можете использовать портал на другие острова! Вы - читер!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eТорговля не разрешена на других островах. Идите домой - читер!"
 
 msgid "§eVisitors can't drop items!"
@@ -1231,11 +1254,19 @@ msgid ""
 "that is not allowed."
 msgstr ""
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§cВы можете перезапустить свой остров через {0} сек."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eИзменение вашего обсидиана обратно в лаву. Осторожнее!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Плохая идея переместить вашу лаву!"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "Вы не можете использовать этот биом."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Этот игрок запретил вам телепортироваться на свой остров."
@@ -1355,7 +1386,8 @@ msgstr "§cОстров, на котором вы находитесь - уда�
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eWALL OF FAME (страница {0} из {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4Список ТОП 10 пуст! (возможно ошибка генерации?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1365,13 +1397,36 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eВаш ранг: §f{0}"
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr ""
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Введите: {0}"
 
 msgid "§c-"
 msgstr ""
@@ -1419,6 +1474,14 @@ msgstr "§eКонфигурация перезагружена из файла."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr ""
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Введите: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Введите: {0}"
 
 msgid "§cSave & Reload config"
 msgstr ""
@@ -1816,6 +1879,16 @@ msgstr "Вы не можете использовать этот биом."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§7Введите: {0}"
+
 msgid "Island Menu"
 msgstr "Меню острова"
 
@@ -1960,6 +2033,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Изменить биом острова"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Награда деньгами: §a{0}"
 
 msgid ""
 "The island biome affects things\n"
@@ -2113,6 +2190,15 @@ msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 "Что-то пошло не так, при сохранении острова и/или данных по участникам "
 
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr ""
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Игрок уже прикреплен к острову!"
 
@@ -2174,6 +2260,17 @@ msgstr "с"
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
 
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Введите: {0}"
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4У вас недостаточно прав для приглашения других на остров!"
+
+#~ msgid "§4"
+#~ msgstr "§4"
+
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Название: §b{0}\n"
 
@@ -2207,9 +2304,6 @@ msgstr ""
 
 #~ msgid "§7Version: §d{0}\n"
 #~ msgstr "§7Версия: §d{0}\n"
-
-#~ msgid "§7Usage: {0}"
-#~ msgstr "§7Введите: {0}"
 
 #, fuzzy
 #~ msgid "Command"

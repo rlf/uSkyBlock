@@ -16,19 +16,12 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
     public static final byte BEDROCK = (byte) Material.BEDROCK.getId();
     public static final byte LAVA = (byte) Material.LAVA.getId();
     public static final byte NETHERRACK = (byte) Material.NETHERRACK.getId();
+    public static final int LAVA_LEVEL = 7;
 
     static {
         // base is lava, bedrock is randomized
         // All the way to y = 32 is LAVA
-        for (int y = 0; y <= 32; y++) {
-            for (int x = 0; x < 16; x++) {
-                for (int z = 0; z < 16; z++) {
-                    generate[xyzToByte(x, y, z)] = LAVA;
-                }
-            }
-        }
-        // Trap for players trying to glitch through the roof.
-        for (int y = 128; y <= 130; y++) {
+        for (int y = 0; y <= LAVA_LEVEL; y++) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
                     generate[xyzToByte(x, y, z)] = LAVA;
@@ -73,6 +66,13 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
                     } else {
                         blocks[xyzToByte(x, y, z)] = LAVA;
                     }
+                }
+            }
+        }
+        for (y = 6; y <= Settings.nether_lava_level; y++) {
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
+                    blocks[xyzToByte(x, y, z)] = LAVA;
                 }
             }
         }
@@ -127,6 +127,6 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
-        return new Location(world, 0, Settings.island_height/2, 0);
+        return  new Location(world, 0,  Settings.nether_height, 0);
     }
 }

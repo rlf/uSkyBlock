@@ -376,6 +376,9 @@ msgstr ""
 msgid "open GUI for config"
 msgstr ""
 
+msgid "§eInvalid configuration name"
+msgstr ""
+
 msgid "Controls player-cooldowns"
 msgstr ""
 
@@ -726,6 +729,14 @@ msgid "§4You do not have permission to kick/ban players."
 msgstr ""
 
 #, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr ""
+
+#, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr ""
+
+#, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr ""
 
@@ -878,7 +889,16 @@ msgstr ""
 msgid "§4{0} has been removed from the island."
 msgstr ""
 
-msgid "§4"
+#, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr ""
+
+#, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr ""
+
+#, java-format
+msgid "§4{0} has kicked you from their island!"
 msgstr ""
 
 #, java-format
@@ -1147,10 +1167,10 @@ msgstr ""
 msgid "talk to your island party"
 msgstr ""
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+msgid "§eYou can not use another islands portals!"
 msgstr ""
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr ""
 
 msgid "§eVisitors can't drop items!"
@@ -1171,10 +1191,16 @@ msgid ""
 "that is not allowed."
 msgstr ""
 
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr ""
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr ""
 
 msgid "§4It's a bad idea to replace your lava!"
+msgstr ""
+
+msgid "§eYou cannot hurt island-members."
 msgstr ""
 
 msgid "§4That player has forbidden you from teleporting to their island."
@@ -1286,7 +1312,8 @@ msgstr ""
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr ""
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr ""
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1296,12 +1323,35 @@ msgstr ""
 msgid "§eYour rank is: §f{0}"
 msgstr ""
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
 #, java-format
-msgid "Page {0,number,integer}"
+msgid "§7Page {0}"
 msgstr ""
 
 msgid "§c-"
@@ -1347,6 +1397,12 @@ msgid "§eConfiguration saved and reloaded."
 msgstr ""
 
 msgid "§cError! §9Unable to save config file!"
+msgstr ""
+
+msgid "§3First Page"
+msgstr ""
+
+msgid "§3Last Page"
 msgstr ""
 
 msgid "§cSave & Reload config"
@@ -1660,6 +1716,15 @@ msgstr ""
 msgid "{0} ({1}/{2})"
 msgstr ""
 
+msgid "§7Current page"
+msgstr ""
+
+msgid "§7First Page"
+msgstr ""
+
+msgid "§7Last Page"
+msgstr ""
+
 msgid "Island Menu"
 msgstr ""
 
@@ -1763,6 +1828,10 @@ msgid ""
 msgstr ""
 
 msgid "Change Island Biome"
+msgstr ""
+
+#, java-format
+msgid "§eCurrent Biome: §b{0}"
 msgstr ""
 
 msgid ""
@@ -1881,6 +1950,15 @@ msgid "§7Teleport cancelled"
 msgstr ""
 
 msgid "Something went wrong saving the island and/or party data!"
+msgstr ""
+
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
 msgid "§4Player is already assigned to this island!"

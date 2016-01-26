@@ -37,6 +37,8 @@ public class Settings {
     public static boolean island_allowPvP;
     public static Locale locale = Locale.getDefault();
     public static boolean nether_enabled;
+    public static int nether_lava_level;
+    public static int nether_height;
 
     public static boolean loadPluginConfig(FileConfiguration config) {
         boolean changed = false;
@@ -145,6 +147,8 @@ public class Settings {
             nether_enabled = false;
             changed = true;
         }
+        nether_lava_level = config.getInt("nether.lava_level", 32);
+        nether_height = config.getInt("nether.height", island_height/2);
         return changed;
     }
 

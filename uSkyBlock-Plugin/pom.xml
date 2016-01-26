@@ -42,7 +42,7 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>uSkyBlock</groupId>
+            <groupId>com.github.rlf</groupId>
             <artifactId>uSkyBlock-API</artifactId>
         </dependency>
         <dependency>

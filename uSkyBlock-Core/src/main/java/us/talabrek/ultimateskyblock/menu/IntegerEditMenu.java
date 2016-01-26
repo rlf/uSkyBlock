@@ -142,7 +142,7 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
         ItemStack pointer = createItem(Material.CARPET, subType, value < 0 ? "\u00a7c" : "\u00a7a" + value, valueItem.getItemMeta().getLore());
         menu.setItem(getIndex(4, slot), pointer);
         menu.setItem(getIndex(5, 0), createItem(Material.WOOD_DOOR, "\u00a79" + tr("Return"),
-                Arrays.asList(configName, path, tr("Page {0,number,integer}", page))));
+                Arrays.asList(configName, path, tr("\u00a77Page {0}", page))));
         return menu;
     }
 

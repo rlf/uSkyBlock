@@ -45,10 +45,16 @@ public class NetherTerraFormEvents implements Listener {
     private final double chanceWither;
     private final double chanceSkeleton;
     private final double chanceBlaze;
+    private final boolean terraformEnabled;
+    private final boolean spawnEnabled;
+    private final boolean netherRoof;
 
     public NetherTerraFormEvents(uSkyBlock plugin) {
         this.plugin = plugin;
         // TODO: 23/09/2015 - R4zorax: Allow this to be perk-based?
+        terraformEnabled = plugin.getConfig().getBoolean("nether.terraform-enabled", true);
+        spawnEnabled = plugin.getConfig().getBoolean("nether.spawn-chances.enabled", true);
+        netherRoof = plugin.getConfig().getBoolean("options.protection.nether-roof", true);
         ConfigurationSection config = plugin.getConfig().getConfigurationSection("nether.terraform");
         if (config != null) {
             for (String key : config.getKeys(false)) {
@@ -73,7 +79,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onBlockBreak(BlockBreakEvent event) {
-        if (event == null || event.isCancelled()) {
+        if (event == null || event.isCancelled() || !terraformEnabled) {
             return;
         }
         Block block = event.getBlock();
@@ -190,6 +196,7 @@ public class NetherTerraFormEvents implements Listener {
         }
         return copy;
     }
+
     @EventHandler
     public void onGhastExplode(EntityExplodeEvent event) {
         if (event == null || event.getEntity() == null || !plugin.isSkyNether(event.getEntity().getWorld())) {
@@ -206,7 +213,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent e) {
-        if (e == null || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL || e.getEntity() == null) {
+        if (!spawnEnabled ||e == null || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL || e.getEntity() == null) {
             return;
         }
         if (!plugin.isSkyNether(e.getLocation().getWorld())) {
@@ -249,7 +256,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
-        if (e == null || e.getPlayer() == null || e.getTo() == null || !plugin.isSkyNether(e.getTo().getWorld())) {
+        if (!netherRoof || e == null || e.getPlayer() == null || e.getTo() == null || !plugin.isSkyNether(e.getTo().getWorld())) {
             return; // Bail out.
         }
         if (e.getTo().getBlockY() > 127) {

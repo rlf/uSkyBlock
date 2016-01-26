@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,8 +8,12 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.material.MaterialData;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
 /**
@@ -87,7 +92,13 @@ public enum LocationUtil {;
         int px = loc.getBlockX();
         int pz = loc.getBlockZ();
         int py = loc.getBlockY();
-        ChunkUtil.Chunks snapshots = ChunkUtil.getSnapshots(loc, 1);
+        ChunkUtil.Chunks snapshots;
+        if (px % 16 == 0 && pz % 16 == 0) {
+            // chunk aligned
+            snapshots = ChunkUtil.getSnapshots4x4(loc);
+        } else {
+            snapshots = ChunkUtil.getSnapshots(loc, 1);
+        }
         for (int dy = 1; dy <= 30; dy++) {
             for (int dx = 1; dx <= 30; dx++) {
                 for (int dz = 1; dz <= 30; dz++) {
@@ -102,6 +113,23 @@ public enum LocationUtil {;
             }
         }
         return null;
+    }
+
+    /**
+     * Finds the nearest block to loc that is a chest.
+     *
+     * @param loc The location to scan for a chest.
+     * @return The location of the chest
+     */
+    public static void findChestLocationAsync(final JavaPlugin plugin, final Location loc, final Callback<Location> callback) {
+        ChunkUtil.Chunks snapshots;
+        if (loc.getBlockX() % 16 == 0 && loc.getBlockZ() % 16 == 0) {
+            // chunk aligned
+            snapshots = ChunkUtil.getSnapshots4x4(loc);
+        } else {
+            snapshots = ChunkUtil.getSnapshots(loc, 1);
+        }
+        new ScanChest(loc, callback, snapshots).runTaskAsynchronously(plugin);
     }
 
     public static Location findNearestSpawnLocation(Location loc) {
@@ -195,5 +223,42 @@ public enum LocationUtil {;
 
     private static boolean isLiquidOrAir(int blockTypeId) {
         return BlockUtil.isFluid(blockTypeId) || blockTypeId == Material.AIR.getId();
+    }
+
+    public static class ScanChest extends BukkitRunnable {
+        private final Location loc;
+        private final Callback<Location> callback;
+        private final ChunkUtil.Chunks snapshots;
+
+        public ScanChest(Location loc, Callback<Location> callback, ChunkUtil.Chunks snapshots) {
+            this.loc = loc;
+            this.callback = callback;
+            this.snapshots = snapshots;
+        }
+
+        @Override
+        public void run() {
+            try {
+                int px = loc.getBlockX();
+                int py = loc.getBlockY();
+                int pz = loc.getBlockZ();
+                for (int dy = 1; dy <= 30; dy++) {
+                    for (int dx = 1; dx <= 30; dx++) {
+                        for (int dz = 1; dz <= 30; dz++) {
+                            // Scans from the center and out
+                            int x = px + (dx % 2 == 0 ? dx / 2 : -dx / 2);
+                            int z = pz + (dz % 2 == 0 ? dz / 2 : -dz / 2);
+                            int y = py + (dy % 2 == 0 ? dy / 2 : -dy / 2);
+                            if (snapshots.getBlockTypeAt(x, y, z) == Material.CHEST) {
+                                callback.setState(new Location(loc.getWorld(), x, y, z));
+                                return;
+                            }
+                        }
+                    }
+                }
+            } finally {
+                callback.run();
+            }
+        }
     }
 }

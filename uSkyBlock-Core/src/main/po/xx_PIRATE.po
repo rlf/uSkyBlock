@@ -384,6 +384,10 @@ msgstr "§4{0}s hideout at {1} was already protected"
 msgid "open GUI for config"
 msgstr "open GUI for config"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "reload configuration from file."
+
 msgid "Controls player-cooldowns"
 msgstr "Controls pirate-cooldowns"
 
@@ -741,6 +745,14 @@ msgstr "§4Ye can't ban members. Remove 'em first!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Ye do not have permission to kick/ban pirates."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} has removed ye from their hideout!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} has been removed from the hideout."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eYe have banned §4{0}§e from warpin'' to yer hideout."
@@ -902,8 +914,17 @@ msgstr "§4{0} has removed ye from their hideout!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} has been removed from the hideout."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} has removed ye from their hideout!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} has been removed from the hideout."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} has removed ye from their hideout!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1183,10 +1204,12 @@ msgstr "talk to pirates in yer hideout"
 msgid "talk to your island party"
 msgstr "talk to yer hideout party"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§eYe can not use another islands portals! Shame on ye - cheater!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eTradin' isn't allowed on other islands. Go home - cheater!"
 
 msgid "§eVisitors can't drop items!"
@@ -1209,11 +1232,19 @@ msgstr ""
 "§cNay Access! §eYe be tryin' to teleport to the roof of the §cNETHER§e, that "
 "be not allowed."
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§cYe can restart yer hideout in {0} seconds."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eChangin' yer obsidian back into lava. Be careful!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4It's a bad idea to replace yer lava!"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "Ye cannot use this biome."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4That pirate has forbidden ye from teleportin' to their hideout."
@@ -1330,7 +1361,8 @@ msgstr "§cThe hideout ye be on be bein' deleted! Sendin' ye to spawn."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eWALL OF FAME (page {0} of {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4Top ten list be empty! (perhaps the generation failed?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1340,13 +1372,36 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eYer rank be: §f{0}"
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cWatchdog!§9 Unable to locate a chest within {0}, bailin'' out."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Page {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Complete {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1392,6 +1447,14 @@ msgstr "§eConfiguration saved an' reloaded."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cBlimey! §9Unable to save config file!"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Complete {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Complete {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§cSave & Reload config"
@@ -1799,6 +1862,16 @@ msgstr "Ye cannot use this biome."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§7Complete {0}"
+
 msgid "Island Menu"
 msgstr "Island Menu"
 
@@ -1943,6 +2016,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Change Island Biome"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Currency Bounty: §a{0}"
 
 msgid ""
 "The island biome affects things\n"
@@ -2096,6 +2173,15 @@ msgstr ""
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Somethin' went awry storin' the hideout an'/or party data!"
 
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr ""
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Pirate be already assigned to this hideout!"
 
@@ -2154,6 +2240,20 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Page {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Complete {0}"
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4Ye do not have permission to invite others to this hideout!"
+
+#~ msgid "§4"
+#~ msgstr "§4"
 
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Name: §b{0}\n"

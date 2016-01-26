@@ -390,6 +390,10 @@ msgstr "§c{0}s ö vid {1} var redan skyddad"
 msgid "open GUI for config"
 msgstr "öppna GUI för konfiguration"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "ladda om konfiguration från filen."
+
 msgid "Controls player-cooldowns"
 msgstr "Kontrollerar spelare-cooldowns"
 
@@ -753,6 +757,14 @@ msgstr "§cDu kan inte banna gruppmedlemmar. Ta bort dem från ön först!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§cDu saknar rättighet att kicka eller banna spelare."
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§c{0} har tagit bort dig från ön!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§c{0} har tagits bort från ön."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§eDu har bannat §c{0}§e från att warpa till din ö."
@@ -911,9 +923,17 @@ msgstr "§c{0} har tagit bort dig från ön!"
 msgid "§4{0} has been removed from the island."
 msgstr "§c{0} har tagits bort från ön."
 
-# ???
-msgid "§4"
-msgstr "§c"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§c{0} har tagit bort dig från ön!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§c{0} har tagits bort från ön."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§c{0} har tagit bort dig från ön!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1191,10 +1211,12 @@ msgstr "prata med spelare på ön"
 msgid "talk to your island party"
 msgstr "prata med skyblockgruppen"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§eDu kan inte använda en annan ös portaler! Skäms på dig, fuskare!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandlande är inte tillåtet på andras öar. Gå hem, fuskare!"
 
 msgid "§eVisitors can't drop items!"
@@ -1216,11 +1238,19 @@ msgid ""
 msgstr ""
 "§eDu försöker att teleportera till taket av Nether, vilket inte är tillåtet."
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§eDu kan starta om din ö om {0} sekunder."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eOmvandlar din obsidian till lava igen. Var försiktig!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§cDet är en dålig idé att ersätta din lava!"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "§c§lDu får inte använda detta biome."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§cDen spelaren har förbjudit dig från att warpa till sin ö."
@@ -1337,7 +1367,8 @@ msgstr "§cÖn du är på tas bort! Teleporterar dig till spawnen."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eRuhmeshalle (Sida {0} av {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§cTopp 10 listan är tom!"
 
 # ???
@@ -1348,13 +1379,36 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin rank är: §f{0}"
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr "§f{0} §7{1} §9 av {2} §7{3}\n"
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cVakthund!§9 Kan inte lokalisera en kista inom {0}."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Sida {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Användande: {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1400,6 +1454,14 @@ msgstr "§eKonfigurationen sparad och omladdad."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cFel! §9Kan inte spara konfigurationsfilen!"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Användande: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Användande: {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§cSpara & ladda om"
@@ -1807,6 +1869,16 @@ msgstr "§c§lDu får inte använda detta biome."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§7Användande: {0}"
+
 msgid "Island Menu"
 msgstr "Skyblockmeny"
 
@@ -1951,6 +2023,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Byt Biome"
+
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6Belöning (valuta): §a{0}"
 
 msgid ""
 "The island biome affects things\n"
@@ -2102,6 +2178,15 @@ msgstr ""
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Något gick fel när när data skulle sparas!"
 
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr ""
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§cSpelaren är redan tilldelad denna ö!"
 
@@ -2165,6 +2250,21 @@ msgstr "s"
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Sida {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Användande: {0}"
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§cDu saknar rättighet att bjuda in spelare till ön!"
+
+# ???
+#~ msgid "§4"
+#~ msgstr "§c"
+
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Namn: §b{0}\n"
 
@@ -2199,6 +2299,3 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "§7Version: §d{0}\n"
 #~ msgstr "§7Version: §d{0}\n"
-
-#~ msgid "§7Usage: {0}"
-#~ msgstr "§7Användande: {0}"

@@ -396,6 +396,10 @@ msgstr "§4{0} 的岛屿在 {1} 早就被保护了"
 msgid "open GUI for config"
 msgstr ""
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "§e配置重读。"
+
 msgid "Controls player-cooldowns"
 msgstr ""
 
@@ -761,6 +765,14 @@ msgstr "§4你无法封禁玩家.请先将他们从你的岛屿上移除!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4你没有权限踢出/禁止一个玩家"
 
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0}被从当前岛屿上移除."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0}被从当前岛屿上移除."
+
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
 msgstr "§e你禁止了玩家§4{0}§e前往你的岛屿上."
@@ -926,8 +938,17 @@ msgstr "§4{0}被从当前岛屿上移除."
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0}被从当前岛屿上移除."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0}被从当前岛屿上移除."
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0}被从当前岛屿上移除."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0}被从当前岛屿上移除."
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1220,10 +1241,12 @@ msgstr "{0}§e早就是你们岛屿的成员了!"
 msgid "talk to your island party"
 msgstr "{0}§e早就是你们岛屿的成员了!"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§e你无法使用另一个岛屿的传送门!真丢脸 - 骗子!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e交易无法在别的岛屿上进行.滚回家 - 骗子!"
 
 msgid "§eVisitors can't drop items!"
@@ -1245,11 +1268,19 @@ msgid ""
 "that is not allowed."
 msgstr ""
 
+#, fuzzy
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§e你需要等到{0}秒后才能重新开始你的岛屿."
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§e已经将你的黑曜石变为岩浆.请务必当心!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4替换岩浆真是一个§f'不错'§4的注意呢~"
+
+#, fuzzy
+msgid "§eYou cannot hurt island-members."
+msgstr "§c§l你没有权限更改生物群系."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4玩家禁止你传送到他们的岛屿上."
@@ -1369,7 +1400,8 @@ msgstr "§c你所处的岛屿正在被删除!将你传送到出生点."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§e荣誉墙 (页数 {0} - {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4前十名单是控的!(可能统计出错?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1379,13 +1411,36 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§e你的排名是: §f{0}"
 
+msgid "UNKNOWN"
+msgstr ""
+
+msgid "ANIMAL"
+msgstr ""
+
+msgid "MONSTER"
+msgstr ""
+
+msgid "VILLAGER"
+msgstr ""
+
+msgid "GOLEM"
+msgstr ""
+
+#, java-format
+msgid "§c{0}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr ""
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§9排名: {0}"
 
 msgid "§c-"
 msgstr ""
@@ -1433,6 +1488,14 @@ msgstr "§e配置重读。"
 
 msgid "§cError! §9Unable to save config file!"
 msgstr ""
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§9排名: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§9排名: {0}"
 
 msgid "§cSave & Reload config"
 msgstr ""
@@ -1862,6 +1925,16 @@ msgstr "§c§l你没有权限更改生物群系."
 msgid "{0} ({1}/{2})"
 msgstr "§a{0} §c{1}"
 
+msgid "§7Current page"
+msgstr ""
+
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§9排名: {0}"
+
 #, fuzzy
 msgid "Island Menu"
 msgstr "§9岛屿菜单"
@@ -2015,6 +2088,10 @@ msgstr ""
 msgid "Change Island Biome"
 msgstr "§a§l更改岛屿生物群系"
 
+#, fuzzy, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§6货币奖励: §a{0}"
+
 #, fuzzy
 msgid ""
 "The island biome affects things\n"
@@ -2165,6 +2242,15 @@ msgstr ""
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "在存储岛屿或者团队记录的时候发生了一些错误!"
 
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr ""
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4玩家早就已经分配给这个岛屿了!"
 
@@ -2225,6 +2311,17 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
 
 #, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§9排名: {0}"
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4你没有在这个岛屿上邀请别人的权限!"
+
+#~ msgid "§4"
+#~ msgstr "§4"
+
+#, fuzzy
 #~ msgid "Command"
 #~ msgstr "§9排名: {0}"
 
@@ -2234,10 +2331,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "   perm: {0}"
-#~ msgstr "§9排名: {0}"
-
-#, fuzzy
-#~ msgid "Usage: {0}"
 #~ msgstr "§9排名: {0}"
 
 #, fuzzy
