@@ -42,4 +42,6 @@ public interface PlayerDB {
      * @param name The current name.
      */
     void updatePlayer(Player name) throws IOException;
+
+    void updatePlayerAsync(UUID uuid, String name, String displayName);
 }

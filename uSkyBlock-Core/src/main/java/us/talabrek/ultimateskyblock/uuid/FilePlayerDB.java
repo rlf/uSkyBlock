@@ -1,8 +1,10 @@
 package us.talabrek.ultimateskyblock.uuid;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;
@@ -61,9 +63,23 @@ public class FilePlayerDB implements PlayerDB {
 
     @Override
     public synchronized void updatePlayer(Player player) throws IOException {
-        String uuid = UUIDUtil.asString(player.getUniqueId());
-        config.set(uuid + ".name", player.getName());
-        config.set(uuid + ".displayName", player.getDisplayName());
-        config.save(file);
+        updatePlayerAsync(player.getUniqueId(), player.getName(), player.getDisplayName());
+    }
+
+    @Override
+    public void updatePlayerAsync(final UUID id, final String name, final String displayName) {
+        Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String uuid = UUIDUtil.asString(id);
+                    config.set(uuid + ".name", name);
+                    config.set(uuid + ".displayName", displayName);
+                    config.save(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
