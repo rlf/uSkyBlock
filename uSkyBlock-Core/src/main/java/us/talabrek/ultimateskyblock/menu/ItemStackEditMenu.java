@@ -292,7 +292,7 @@ public class ItemStackEditMenu extends AbstractConfigMenu implements EditMenu {
             index++;
         }
         menu.setItem(getIndex(5, 0), createItem(Material.WOOD_DOOR, "\u00a79" + tr("Return"),
-                Arrays.asList(configName, path, tr("Page {0,number,integer}", page))));
+                Arrays.asList(configName, path, tr("\u00a77Page {0}", page))));
         return menu;
     }
 

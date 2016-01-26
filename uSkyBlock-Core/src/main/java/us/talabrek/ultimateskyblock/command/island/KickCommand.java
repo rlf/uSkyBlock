@@ -56,7 +56,12 @@ public class KickCommand extends RequireIslandCommand {
                     && (plugin.locationIsOnIsland(player, onlineTargetPlayer.getLocation())
                     || plugin.locationIsOnNetherIsland(player, onlineTargetPlayer.getLocation()))
                     ) {
-                onlineTargetPlayer.sendMessage(I18nUtil.tr("\u00a74" + player.getName() + " has kicked you from their island!"));
+                if (onlineTargetPlayer.hasPermission("usb.party.kick.exempt")) {
+                    onlineTargetPlayer.sendMessage(I18nUtil.tr("\u00a74{0} tried to kick you from their island!",  player.getName()));
+                    player.sendMessage(I18nUtil.tr("\u00a74{0} is exempt from being kicked.", targetPlayerName));
+                    return true;
+                }
+                onlineTargetPlayer.sendMessage(I18nUtil.tr("\u00a74{0} has kicked you from their island!",  player.getName()));
                 player.sendMessage(I18nUtil.tr("\u00a74{0} has been kicked from the island.", targetPlayerName));
                 plugin.spawnTeleport(onlineTargetPlayer, true);
             } else {

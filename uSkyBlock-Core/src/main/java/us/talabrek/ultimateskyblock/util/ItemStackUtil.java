@@ -24,8 +24,8 @@ public enum ItemStackUtil {;
     private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?");
     private static final Pattern ITEM_NAME_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)(:(?<sub>[0-9]+))?");
 
-    public static Map<ItemStack, Double> createItemsWithProbabilty(List<String> items) {
-        Map<ItemStack, Double> map = new HashMap<>();
+    public static List<ItemProbability> createItemsWithProbabilty(List<String> items) {
+        List<ItemProbability> itemProbs = new ArrayList<>();
             for (String reward : items) {
                 Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
                 if (m.matches()) {
@@ -34,12 +34,12 @@ public enum ItemStackUtil {;
                     short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
                     int amount = Integer.parseInt(m.group("amount"), 10);
                     ItemStack itemStack = new ItemStack(id, amount, sub);
-                    map.put(itemStack, p);
+                    itemProbs.add(new ItemProbability(p, itemStack));
                 } else {
                     throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
                 }
         }
-        return map;
+        return itemProbs;
     }
 
     private static int getItemId(Matcher m) {
@@ -105,10 +105,10 @@ public enum ItemStackUtil {;
         }
         ItemStack itemStack = new ItemStack(material, 1, subType);
         ItemMeta meta = itemStack.getItemMeta();
-        meta.setDisplayName(name);
+        meta.setDisplayName(FormatUtil.normalize(name));
         List<String> lore = new ArrayList<>();
         if (description != null) {
-            lore.add(description);
+            lore.add(FormatUtil.normalize(description));
         }
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
@@ -223,13 +223,37 @@ public enum ItemStackUtil {;
 
         public Builder lore(List<String> lore) {
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setLore(lore);
+            if (itemMeta.getLore() == null) {
+                itemMeta.setLore(lore);
+            } else {
+                List<String> oldLore = itemMeta.getLore();
+                oldLore.addAll(lore);
+                itemMeta.setLore(oldLore);
+            }
             itemStack.setItemMeta(itemMeta);
             return this;
         }
 
         public ItemStack build() {
             return itemStack;
+        }
+    }
+
+    public static class ItemProbability {
+        private final double probability;
+        private final ItemStack item;
+
+        public ItemProbability(double probability, ItemStack item) {
+            this.probability = probability;
+            this.item = item;
+        }
+
+        public double getProbability() {
+            return probability;
+        }
+
+        public ItemStack getItem() {
+            return item;
         }
     }
 }

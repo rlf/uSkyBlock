@@ -9,7 +9,7 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>uSkyBlock:uSkyBlock-API</include>
+                <include>com.github.rlf:uSkyBlock-API</include>
                 <include>uSkyBlock:uSkyBlock-Core</include>
                 <include>uSkyBlock:uSkyBlock-AWE211</include>
                 <include>uSkyBlock:uSkyBlock-AWE311</include>

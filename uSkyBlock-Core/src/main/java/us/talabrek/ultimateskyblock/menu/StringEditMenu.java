@@ -137,7 +137,7 @@ public class StringEditMenu extends AbstractConfigMenu implements EditMenu {
         }
         ItemStack returnItem = menu.getItem(0).clone();
         ItemMeta meta = returnItem.getItemMeta();
-        meta.setLore(Arrays.asList(configName, path, tr("Page {0,number,integer}", page)));
+        meta.setLore(Arrays.asList(configName, path, tr("\u00a77Page {0}", page)));
         returnItem.setItemMeta(meta);
         menu.setItem(0, returnItem);
 

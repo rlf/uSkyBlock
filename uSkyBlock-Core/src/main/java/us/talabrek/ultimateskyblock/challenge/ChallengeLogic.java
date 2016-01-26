@@ -43,8 +43,9 @@ public class ChallengeLogic {
     public static final int MS_MIN = 60 * 1000;
     public static final int MS_HOUR = 60 * MS_MIN;
     public static final long MS_DAY = 24 * MS_HOUR;
-    public static final int ROWS_OF_RANKS = 6;
-    public static final int CHALLENGE_PAGESIZE = ROWS_OF_RANKS * 9;
+    public static final int COLS_PER_ROW = 9;
+    public static final int ROWS_OF_RANKS = 5;
+    public static final int CHALLENGE_PAGESIZE = ROWS_OF_RANKS * COLS_PER_ROW;
 
     private final FileConfiguration config;
     private final uSkyBlock plugin;
@@ -406,7 +407,7 @@ public class ChallengeLogic {
         }
     }
 
-    public void populateChallengeRank(Inventory menu, Player player, PlayerInfo pi, int page) {
+    public void populateChallengeRank(Inventory menu, PlayerInfo pi, int page) {
         List<Rank> ranksOnPage = new ArrayList<>(ranks.values());
         // page 1 = 0-4, 2 = 5-8, ...
         if (page > 0) {
@@ -414,7 +415,7 @@ public class ChallengeLogic {
         }
         int location = 0;
         for (Rank rank : ranksOnPage) {
-            location = populateChallengeRank(menu, player, rank, location, pi);
+            location = populateChallengeRank(menu, rank, location, pi);
             if ((location % 9) != 0) {
                 location += (9 - (location % 9)); // Skip the rest of that line
             }
@@ -446,7 +447,7 @@ public class ChallengeLogic {
         return row;
     }
 
-    public int populateChallengeRank(Inventory menu, final Player player, final Rank rank, int location, final PlayerInfo playerInfo) {
+    public int populateChallengeRank(Inventory menu, final Rank rank, int location, final PlayerInfo playerInfo) {
         List<String> lores = new ArrayList<>();
         ItemStack currentChallengeItem = rank.getDisplayItem();
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
@@ -465,6 +466,9 @@ public class ChallengeLogic {
         for (Challenge challenge : rank.getChallenges()) {
             if ((location % 9) == 0) {
                 location++; // Skip rank-row
+            }
+            if (location >= CHALLENGE_PAGESIZE) {
+                break;
             }
             lores.clear();
             String challengeName = challenge.getName();

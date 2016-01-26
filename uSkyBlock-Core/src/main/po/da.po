@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2015-11-06 22:01+0100\n"
+"PO-Revision-Date: 2016-01-22 18:23+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -32,9 +32,9 @@ msgstr "§4Kravene vil nulstilles om {0} minutter."
 msgid "§eThis challenge requires the following:"
 msgstr "§eDenne udfordring kræver følgende:"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§f{0} §7{1}"
-msgstr "§a{0} §c{1}"
+msgstr "§f{0} §7{1}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6Ting: §a"
@@ -94,9 +94,9 @@ msgstr ""
 "§eDu mangler stadig følgende elementer:\n"
 "{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid " §4{0} §b{1}"
-msgstr "§a{0} §c{1}"
+msgstr " §4{0} §b{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -390,6 +390,10 @@ msgstr "§4{0}s ø ved {1} var allerede beskyttet"
 msgid "open GUI for config"
 msgstr "vis konfigurations UI"
 
+#, fuzzy
+msgid "§eInvalid configuration name"
+msgstr "genindlæs konfigurationen fra fil."
+
 msgid "Controls player-cooldowns"
 msgstr "Håndterer spiller-cooldowns"
 
@@ -658,15 +662,13 @@ msgstr "§eHenter chunks ved {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eFrigiver chunks ved {0}"
 
-#, fuzzy
 msgid "update the WG regions"
-msgstr "load chunks fra regionen"
+msgstr "opdater world-guard regioner"
 
 #, java-format
 msgid "§eIsland world-guard regions updated for {0}"
-msgstr ""
+msgstr "§eØens world-guard region opdateret for {0}"
 
-#, fuzzy
 msgid "§eNo island found at your location!"
 msgstr "§4Ingen valid ø på din position"
 
@@ -748,6 +750,14 @@ msgstr "§4Du kan ikke udelukke medlemmer. Fjern dem først!"
 
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Du har ikke tilladelse til at udelukke spillere."
+
+#, fuzzy, java-format
+msgid "§4{0} tried to ban you from their island!"
+msgstr "§4{0} har fjernet dig fra deres ø!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being banned."
+msgstr "§4{0} er blevet sparket ud af øen."
 
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
@@ -909,8 +919,17 @@ msgstr "§4{0} har fjernet dig fra deres ø!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} er blevet sparket ud af øen."
 
-msgid "§4"
-msgstr "§4"
+#, fuzzy, java-format
+msgid "§4{0} tried to kick you from their island!"
+msgstr "§4{0} har fjernet dig fra deres ø!"
+
+#, fuzzy, java-format
+msgid "§4{0} is exempt from being kicked."
+msgstr "§4{0} er blevet sparket ud af øen."
+
+#, fuzzy, java-format
+msgid "§4{0} has kicked you from their island!"
+msgstr "§4{0} har fjernet dig fra deres ø!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1193,10 +1212,12 @@ msgstr "snak med spillere på din ø"
 msgid "talk to your island party"
 msgstr "tal til medlemmerne af din ø"
 
-msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#, fuzzy
+msgid "§eYou can not use another islands portals!"
 msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
 
-msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#, fuzzy
+msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eDu kan ikke tage andres ting. Gå hjem - snyder!"
 
 msgid "§eVisitors can't drop items!"
@@ -1219,11 +1240,17 @@ msgstr ""
 "§cIngen adgang! §eDu prøver at komme til taget af §cNETHER§e, det er ikke "
 "tilladt."
 
+msgid "§4You can only convert obsidian once every 10 seconds"
+msgstr "§4Do kan kun konvertere obsidian en gang hvert 10. sekund"
+
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eSkifter din obsidian tilbage til lava. Vær forsigtig!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Det er en dårlig ide at fjerne din lava!"
+
+msgid "§eYou cannot hurt island-members."
+msgstr "§eDu kan ikke skade medlemmer af øen."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§Den spiller har udelukket dig fra sin ø."
@@ -1339,7 +1366,8 @@ msgstr "§cØen du er på bliver slettet! Du bliver sendt til spawn."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eTOP (side {0} af {1}):"
 
-msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#, fuzzy, java-format
+msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr "§4Top 10 listen er tom! (Måske fejlede opdateringen?)"
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1349,14 +1377,37 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin position er: §f{0}"
 
+msgid "UNKNOWN"
+msgstr "Ukendt"
+
+msgid "ANIMAL"
+msgstr "dyr"
+
+msgid "MONSTER"
+msgstr "monster"
+
+msgid "VILLAGER"
+msgstr "by-boer"
+
+msgid "GOLEM"
+msgstr "golem"
+
+#, java-format
+msgid "§c{0}"
+msgstr "§c{0}"
+
+#, java-format
+msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr "§7{0} §a{1}§7 (max. {2})"
+
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 "§cVagthund!§9 Ude af stand til at finde en kiste inden for {0}, giver op."
 
-#, java-format
-msgid "Page {0,number,integer}"
-msgstr "Side {0,number,integer}"
+#, fuzzy, java-format
+msgid "§7Page {0}"
+msgstr "§7Brug: {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1402,6 +1453,14 @@ msgstr "§eKonfigurationen gemt og genindlæst."
 
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cFejl! §9Kunne ikke gemme konfigurationsfilen!"
+
+#, fuzzy
+msgid "§3First Page"
+msgstr "§7Brug: {0}"
+
+#, fuzzy
+msgid "§3Last Page"
+msgstr "§7Brug: {0}"
 
 msgid "§cSave & Reload config"
 msgstr "§cGem og genindlæs konfigurationen"
@@ -1801,6 +1860,16 @@ msgstr "Du kan ikke bruge denne biome."
 msgid "{0} ({1}/{2})"
 msgstr "{0} ({1}/{2})"
 
+msgid "§7Current page"
+msgstr ""
+
+msgid "§7First Page"
+msgstr ""
+
+#, fuzzy
+msgid "§7Last Page"
+msgstr "§7Brug: {0}"
+
 msgid "Island Menu"
 msgstr "Hoved menu"
 
@@ -1924,9 +1993,9 @@ msgstr ""
 msgid "Island Group"
 msgstr "Øens beboere"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eMembers: §2{0}/{1}"
-msgstr "Ø medlemmer: §2{0}§7/§e{1}"
+msgstr "§eMedlemmer: §2{0}/{1}"
 
 msgid ""
 "View the members of your island\n"
@@ -1943,6 +2012,10 @@ msgstr ""
 
 msgid "Change Island Biome"
 msgstr "Skift Øens Biome"
+
+#, java-format
+msgid "§eCurrent Biome: §b{0}"
+msgstr "§eBiome: §b{0}"
 
 msgid ""
 "The island biome affects things\n"
@@ -2079,19 +2152,29 @@ msgstr "§9Tekst Editor"
 msgid "§eSending you to spawn."
 msgstr "§aTeleporterer dig til spawn."
 
-#, fuzzy
 msgid "§eThe island has been §cLOCKED§e."
-msgstr "Øen blev oprettet"
+msgstr "§eØen er blevet §cLÅST§e."
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§eDu vil blive teleporteret om {0} sekunder."
 
 msgid "§7Teleport cancelled"
-msgstr ""
+msgstr "§7Teleport afbrudt"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Der opstod en fejl under gemning af øens data!"
+
+#, java-format
+msgid ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr ""
+"§buSkyBlock§e afhænger af §9{0}§e >= §av{1}§e men kun §cv{2}§e blev fundet!\n"
+"\n"
+
+#, java-format
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
+msgstr "§buSkyBlock§e afhænger af §9{0}§e >= §av{1}"
 
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Spilleren er allerede del af denne ø!"
@@ -2153,6 +2236,20 @@ msgstr "s"
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Side {0,number,integer}"
+
+#, fuzzy
+#~ msgid "z7Page {0}"
+#~ msgstr "§7Brug: {0}"
+
+#, fuzzy
+#~ msgid "§eYou cannot access containers on this island."
+#~ msgstr "§4Du har ikke tilladelse til at invite flere til din ø!"
+
+#~ msgid "§4"
+#~ msgstr "§4"
+
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Navn: §b{0}\n"
 
@@ -2185,9 +2282,6 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "§7Version: §d{0}\n"
 #~ msgstr "§7Version: §d{0}\n"
-
-#~ msgid "§7Usage: {0}"
-#~ msgstr "§7Brug: {0}"
 
 #, fuzzy
 #~ msgid "Command"

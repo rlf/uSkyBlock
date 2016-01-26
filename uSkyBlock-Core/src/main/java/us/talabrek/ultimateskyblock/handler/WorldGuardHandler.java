@@ -75,14 +75,7 @@ public class WorldGuardHandler {
             RegionManager regionManager = worldGuard.getRegionManager(plugin.getWorld());
             String regionName = islandConfig.getName() + "island";
             if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
-                ProtectedCuboidRegion region = setRegionFlags(sender, islandConfig, regionName);
-                final Iterable<ProtectedRegion> set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
-                for (ProtectedRegion regions : set) {
-                    if (!(regions instanceof GlobalProtectedRegion)) {
-                        regionManager.removeRegion(regions.getId());
-                    }
-                }
-                regionManager.addRegion(region);
+                updateRegion(sender, islandConfig);
                 islandConfig.setRegionVersion(getVersion());
                 return true;
             }
@@ -95,40 +88,6 @@ public class WorldGuardHandler {
 
     private static String getVersion() {
         return VERSION + " " + I18nUtil.getLocale();
-    }
-
-    public static boolean protectNetherIsland(uSkyBlock plugin, CommandSender sender, IslandInfo islandConfig) {
-        if (!Settings.nether_enabled) {
-            return false;
-        }
-        try {
-            WorldGuardPlugin worldGuard = getWorldGuard();
-            World nether = plugin.getSkyBlockNetherWorld();
-            if (nether == null) {
-                log.log(Level.INFO, "Nether is enabled, but no skyworld_nether was found!");
-                return false;
-            }
-            RegionManager regionManager = worldGuard.getRegionManager(nether);
-            String regionName = islandConfig.getName() + "nether";
-            if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
-                ProtectedCuboidRegion region = setRegionFlags(sender, islandConfig, regionName);
-
-                final Iterable<ProtectedRegion> set = regionManager.getApplicableRegions(islandConfig.getIslandLocation());
-                for (ProtectedRegion regions : set) {
-                    if (!(regions instanceof GlobalProtectedRegion)) {
-                        regionManager.removeRegion(regions.getId());
-                    }
-                }
-                regionManager.addRegion(region);
-                plugin.log(Level.INFO, "New protected region created for " + islandConfig.getLeader() + "'s Island by " + sender.getName());
-                islandConfig.setRegionVersion(getVersion());
-                return true;
-            }
-        } catch (Exception ex) {
-            String name = islandConfig != null ? islandConfig.getLeader() : "Unknown";
-            plugin.log(Level.SEVERE, "ERROR: Failed to protect " + name + "'s Island (" + sender.getName() + ")", ex);
-        }
-        return false;
     }
 
     public static void updateRegion(CommandSender sender, IslandInfo islandInfo) {
@@ -146,6 +105,7 @@ public class WorldGuardHandler {
                 regionManager.removeRegion(netherName);
                 regionManager.addRegion(region);
             }
+            islandInfo.setRegionVersion(getVersion());
         } catch (Exception e) {
             uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
@@ -325,7 +285,7 @@ public class WorldGuardHandler {
         Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(location);
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
-            if (!id.equalsIgnoreCase("__global__") && id.endsWith("island")) {
+            if (!id.equalsIgnoreCase("__global__") && (id.endsWith("island") || id.endsWith("nether"))) {
                 return region;
             }
         }
@@ -416,9 +376,10 @@ public class WorldGuardHandler {
     private static ProtectedCuboidRegion getIslandRegion(Location islandLocation) {
         int r = Settings.island_radius;
         Vector islandCenter = new Vector(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
-        return new ProtectedCuboidRegion(String.format("%d,%dIsland", islandCenter.getBlockX(), islandLocation.getBlockZ()),
-                new BlockVector(islandCenter.subtract(r, 0, r)),
-                new BlockVector(islandCenter.add(r, 255, r)));
+        return new ProtectedCuboidRegion(
+                String.format("%d,%disland", islandCenter.getBlockX(), islandLocation.getBlockZ()),
+                getProtectionVectorLeft(islandLocation),
+                getProtectionVectorRight(islandLocation));
     }
 
     public static List<Player> getPlayersInRegion(World world, ProtectedRegion region) {

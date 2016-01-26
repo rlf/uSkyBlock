@@ -33,8 +33,8 @@ public class ConfigMenu {
         editMenus.add(mainMenu); // mainMenu goes last (catch all)
     }
 
-    public void showMenu(Player player, int page) {
-        player.openInventory(mainMenu.createEditMenu("config.yml", null, page));
+    public void showMenu(Player player, String configName, int page) {
+        player.openInventory(mainMenu.createEditMenu(configName, null, page));
     }
 
     public void onClick(InventoryClickEvent event) {

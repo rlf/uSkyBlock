@@ -187,6 +187,11 @@ public class IslandInfo {
                 section.set("maxVillagers", perk.getVillagers());
                 dirty = true;
             }
+            int maxGolems = section.getInt("maxGolems", 0);
+            if (perk.getGolems() != maxGolems) {
+                section.set("maxGolems", perk.getGolems());
+                dirty = true;
+            }
         }
         if (dirty) {
             save();
@@ -219,18 +224,6 @@ public class IslandInfo {
         }
     }
 
-    public void reload() {
-        final InputStream defConfigStream = getClass().getClassLoader().getResourceAsStream("island.yml");
-        if (defConfigStream != null) {
-            try {
-                config.load(new InputStreamReader(defConfigStream, "UTF-8"));
-            } catch (IOException | InvalidConfigurationException e) {
-                uSkyBlock.log(Level.SEVERE, "Unable to read island-defaults", e);
-            }
-        }
-        save();
-    }
-
     public int getMaxPartySize() {
         return getMaxPartyIntValue("maxPartySizePermission", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getMaxPartySize());
     }
@@ -245,6 +238,10 @@ public class IslandInfo {
 
     public int getMaxVillagers() {
         return getMaxPartyIntValue("maxVillagers", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getVillagers());
+    }
+
+    public int getMaxGolems() {
+        return getMaxPartyIntValue("maxGolems", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getGolems());
     }
 
     private int getMaxPartyIntValue(String name, int defaultValue) {

@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.util.Arrays;
 import java.util.List;
@@ -62,10 +63,16 @@ public class AbstractConfigMenu {
     }
 
     protected int getPage(String s) {
-        String format = tr("Page {0,number,integer}");
-        MessageFormat messageFormat = new MessageFormat(format);
-        Object[] parsed = messageFormat.parse(s, new ParsePosition(0));
-        return parsed.length == 1 && parsed[0] instanceof Number ? ((Number) parsed[0]).intValue() : 1;
+        String format = tr("\u00a77Page {0}");
+        try {
+            Object[] parsed = new MessageFormat(format).parse(s);
+            if (parsed != null && parsed.length > 0) {
+                return Integer.parseInt("" + parsed[0]);
+            }
+        } catch (ParseException e) {
+            // Ignore
+        }
+        return 1;
     }
 
     protected ItemStack createItem(String item) {

@@ -18,6 +18,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerInventoryEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -127,4 +128,5 @@ public class GriefEvents implements Listener {
             event.setCancelled(true);
         }
     }
+
 }

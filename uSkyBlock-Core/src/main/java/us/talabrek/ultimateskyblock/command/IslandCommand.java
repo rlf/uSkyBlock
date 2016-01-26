@@ -58,6 +58,7 @@ public class IslandCommand extends AbstractCommandExecutor {
         add(new MakeLeaderCommand(plugin));
         add(new SpawnCommand(plugin));
         add(new TrustCommand(plugin));
+        add(new MobLimitCommand(plugin));
     }
 
     @Override

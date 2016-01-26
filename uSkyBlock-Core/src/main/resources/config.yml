@@ -104,6 +104,9 @@ options:
       # how many villagers can be spawned on an island
       villagers: 16
 
+      # how many snowmen and iron-golems can be spawned on an island
+      golems: 5
+
     # [permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
     # Only checked if 'addExtraItems' is set to true.
     # [permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY
@@ -136,6 +139,9 @@ options:
 
     # Whether or not the plugin will try to protect the player from accidentally extinguishing lava
     protect-lava: true
+
+    # Whether or not portalling to the nether roof should be blocked.
+    nether-roof: true
 
     visitors:
       # Protect visitors from trampling your crop
@@ -245,7 +251,7 @@ asyncworldedit:
 
   watchDog:
     # The maximum time to wait for AWE paste to complete (2m, 3m20s, etc.)
-    timeout: 5m
+    timeout: 15s
     # The number of ms between each heartbeat
     heartBeatMs: 2000
 
@@ -257,12 +263,17 @@ worldguard:
 nether:
   enabled: true
 
+  terraform-enabled: true
+
   # The distance to search for valid terra-form location.
   terraform-distance: 7
 
   height: 75
+
   activate-at:
     level: 100
+
+  schematicName: uSkyBlockNether
 
   # The probability of forming blocks
   terraform:
@@ -286,6 +297,7 @@ nether:
       - '{p=0.15}GLOWSTONE'
 
   spawn-chances:
+    enabled: true
     wither: 0.20
     skeleton: 0.10
     blaze: 0.20
@@ -299,7 +311,7 @@ tool-menu:
     WORKBENCH: 'challenges'
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 40
+version: 41
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

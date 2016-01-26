@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +76,7 @@ public class Challenge {
     }
 
     public String getDisplayName() {
-        return displayName;
+        return FormatUtil.normalize(displayName);
     }
 
     public Type getType() {
