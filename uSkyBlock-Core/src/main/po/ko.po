@@ -98,11 +98,11 @@ msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
-msgstr "§e당신은 다음의 아이템이 부족합니다:{0}"
+msgstr "§e당신은 다음의 아이템이 부족합니다: {0}개의"
 
 #, java-format
 msgid "§aYou have completed the {0} challenge!"
-msgstr "§a당신은{0} 도전과제를 완료했습니다!"
+msgstr "§a당신은 {0} 도전과제를 완료했습니다!"
 
 #, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
@@ -871,7 +871,7 @@ msgstr "플레이어를 당신의 섬으로 초대합니다"
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr ""
-"§e만약§f 플레이어를 당신의 섬으로 초대하려면 /island invite <playername>§e "
+"§e만약 플레이어를 당신의 섬으로 초대하려면§f /island invite <playername>§e "
 "를 쓰세요 ."
 
 msgid "§4Only the island's owner can invite!"
@@ -947,7 +947,7 @@ msgid ""
 "restart if you want a new one!"
 msgstr ""
 "§4만약 당신이 혼자라면 당신의 섬을 떠날 수 없습니다!. 만약 당신이 새 섬을 원"
-"하면 /island restart를 사용하여당신만의 섬을 가지세요!"
+"하면 /island restart를 사용하여 당신만의 섬을 가지세요!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
 msgstr ""
@@ -1150,7 +1150,7 @@ msgstr ""
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
 msgstr ""
-"§f§e/island setwarp을 이용해서 당신의 현재 위치에 들어오는 워프를 지정하세요"
+"§e/island setwarp§f을 이용해서 당신의 현재 위치에 들어오는 워프를 지정하세요"
 
 msgid "§fToggle your warp on/off using §e/island togglewarp"
 msgstr "§f다음 명령어를 사용해 워프 기능을 온오프 하세요 §e/island togglewarp"
@@ -1159,7 +1159,7 @@ msgid "§4You do not have permission to create a warp on your island!"
 msgstr "§4당신의 섬에 워프를 만들 권한이 없습니다!"
 
 msgid "§fWarp to another island using §e/island warp <player>"
-msgstr "§f§e/island warp <플레이어>를 써서 다른 섬으로 워프하세요"
+msgstr "§e/island warp§f <플레이어>를 써서 다른 섬으로 워프하세요"
 
 msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4다른 섬으로 워프할 권한이 없습니다!"
@@ -1239,10 +1239,9 @@ msgid ""
 "§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
 "that is not allowed."
 msgstr ""
-"§c엑세스 안됨! §e 당신은 §cNETHER§e의 지붕으로 텔레포트하려 했다만, 그것은 불"
+"§c엑세스 안됨! §e 당신은 §cNETHER§e의 지붕으로 텔레포트하려 했지만, 그것은 불"
 "가능합니다."
 
-#, fuzzy
 msgid "§4You can only convert obsidian once every 10 seconds"
 msgstr "§c당신은 {0}초 후에 재시작 할 수 있습니다."
 
@@ -1252,7 +1251,6 @@ msgstr "§e당신의 옵시디언을 용암으로 되돌리는 중입니다. 조
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4당신의 용암을 대체하는건 좋은 생각이 아닌거 같네요!"
 
-#, fuzzy
 msgid "§eYou cannot hurt island-members."
 msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
 
@@ -1304,7 +1302,7 @@ msgstr "§d** 당신은 §b{0}의 §d섬을 떠나는 중입니다."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
-"§e당신의 섬은 이제 봉인되었습니다. 오직 당신의 파티 멤버만 들어올 수 있슴돠."
+"§e당신의 섬은 이제 봉인되었습니다. 오직 당신의 파티 멤버만 들어올 수 있습니다."
 
 msgid "§4You must be the party leader to lock your island!"
 msgstr "§4파티의 리더여야 당신의 섬을 잠글 수 있습니다!"
@@ -1412,9 +1410,9 @@ msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§c감시견!§9 {0}개 내로 상자를 놓을 수 없음, 돈 내고 풀려나는 중."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Page {0}"
-msgstr "§7Complete {0}"
+msgstr "§7페이지 {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1912,7 +1910,7 @@ msgstr ""
 "바라나요? 만약 다른 플레이어가\n"
 "그들의 섬으로 당신을 초대한다면\n"
 "당신은 여기를 클릭하거나\n"
-"§e/그들과 어울리려면 island accept§f을 쓸 수 있어요.\n"
+"그들과 어울리려면 §e/island accept§f을 쓸 수 있어요.\n"
 "§e§l초대를 승낙하려면 여기를 누르세요\n"
 "§e§l(당신은 먼저 초대받아야 합니다)"
 
@@ -2010,9 +2008,9 @@ msgstr ""
 msgid "Change Island Biome"
 msgstr "섬 생태계 변환"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eCurrent Biome: §b{0}"
-msgstr "§6돈 보상: §a{0}"
+msgstr "§6현재 생태계: §a{0}"
 
 msgid ""
 "The island biome affects things\n"
@@ -2204,13 +2202,13 @@ msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 �
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
-"§e당신의 섬을 준비하는 중입니다, 좀만 참아주세요, 조금 시간이 걸림니다."
+"§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
 
 msgid "§aCongratulations! §eYour island has appeared."
 msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
 
 msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§cNote:§e 건설이 아마 아직 진행중입니다'."
+msgstr "§cNote:§e 건설이 아직 진행중입니다'."
 
 msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr "Use §9/is h§r or the §9/is§r menu to go there."
