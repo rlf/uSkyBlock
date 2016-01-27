@@ -134,10 +134,10 @@ msgid "Rank: {0}"
 msgstr "랭크: {0}"
 
 msgid "§fComplete most challenges in"
-msgstr "§f대부분의 도전과제를 완료하였음"
+msgstr "§f대부분의 도전과제를 완료하였습니다"
 
 msgid "§fthis rank to unlock the next rank."
-msgstr "§f다음 랭크를 해제하기 위한 랭크."
+msgstr "§f이 랭크는 다음 랭크를 해제하기 위한 랭크 입니다."
 
 msgid "§eClick here to show previous page"
 msgstr "§e전 페이지를 보려면 여기를 클릭하세요"
@@ -1243,7 +1243,7 @@ msgstr ""
 "가능합니다."
 
 msgid "§4You can only convert obsidian once every 10 seconds"
-msgstr "§c당신은 {0}초 후에 재시작 할 수 있습니다."
+msgstr "§당신은 오직 10초마다 옵시디언을 변환 할 수 있습니다."
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§e당신의 옵시디언을 용암으로 되돌리는 중입니다. 조심하세요!"
@@ -1252,7 +1252,7 @@ msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4당신의 용암을 대체하는건 좋은 생각이 아닌거 같네요!"
 
 msgid "§eYou cannot hurt island-members."
-msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
+msgstr "§e당신은 섬원을 해칠 수 없습니다."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4그 플레이어가 그들의 섬으로 당신이 텔레포트하는 것을 금지했습니다."
