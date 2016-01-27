@@ -801,7 +801,7 @@ msgid "§cYou have misspelled the biome name."
 msgstr "§c생태계의 이름을 잘못적으셨습니다."
 
 msgid "§eYou must be on your island to change the biome!"
-msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
+msgstr "§e생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
 
 msgid "§4You do not have permission to change the biome of this island!"
 msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
