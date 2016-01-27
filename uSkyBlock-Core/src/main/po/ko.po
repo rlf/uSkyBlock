@@ -206,14 +206,14 @@ msgstr ""
 
 #, java-format
 msgid "Complete {0} more {1} challenges"
-msgstr "Complete {0} more {1} challenges"
+msgstr "{0}개의  {1} challenges"
 
 #, java-format
 msgid "§7Complete {0}"
-msgstr "§7완료함 {0}"
+msgstr "§7를 완료하여 {0} 랭크를"
 
 msgid "to unlock this rank"
-msgstr "이 랭크를 활성화 하려면"
+msgstr "잠금해제 하세요"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
