@@ -1875,10 +1875,6 @@ msgstr "§e§lНажмите, чтобы изменить биом."
 msgid "You cannot use this biome."
 msgstr "Вы не можете использовать этот биом."
 
-#, java-format
-msgid "{0} ({1}/{2})"
-msgstr "{0} ({1}/{2})"
-
 msgid "§7Current page"
 msgstr ""
 
@@ -2259,6 +2255,9 @@ msgstr "с"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "{0} ({1}/{2})"
+#~ msgstr "{0} ({1}/{2})"
 
 #, fuzzy
 #~ msgid "z7Page {0}"

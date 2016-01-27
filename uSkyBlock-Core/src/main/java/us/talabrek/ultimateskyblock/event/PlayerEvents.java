@@ -80,18 +80,6 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerJoin(final PlayerJoinEvent event) {
-        log.entering(CN, "onPlayerJoin", event);
-        Player player = event.getPlayer();
-        plugin.getPlayerLogic().loadPlayerDataAsync(player);
-        log.exiting(CN, "onPlayerJoin");
-    }
-
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerQuit(final PlayerQuitEvent event) {
-    }
-
-    @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerFoodChange(final FoodLevelChangeEvent event) {
         if (event.getEntity() instanceof Player && plugin.isSkyWorld(event.getEntity().getWorld())) {
             Player hungerman = (Player) event.getEntity();

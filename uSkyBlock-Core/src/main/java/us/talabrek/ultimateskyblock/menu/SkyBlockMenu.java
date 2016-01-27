@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.CHALLENGE_PAGESIZE;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.COLS_PER_ROW;
@@ -389,7 +390,7 @@ public class SkyBlockMenu {
 
     public Inventory displayChallengeGUI(final Player player, int page) {
         int total = challengeLogic.getTotalPages();
-        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + tr("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
+        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + pre("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
         final PlayerInfo pi = plugin.getPlayerInfo(player);
         challengeLogic.populateChallengeRank(menu, pi, page);
         int pages[] = new int[9];
