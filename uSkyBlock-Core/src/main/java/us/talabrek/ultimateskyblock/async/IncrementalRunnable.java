@@ -69,17 +69,17 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
 
     public IncrementalRunnable(uSkyBlock plugin) {
         this(plugin, null,
-                plugin.getConfig().getInt("async.maxMs", 22),
+                plugin.getConfig().getInt("async.maxMs", 15),
                 plugin.getConfig().getInt("async.maxConsecutiveTicks", 20),
-                plugin.getConfig().getInt("async.yieldDelay", 15)
+                plugin.getConfig().getInt("async.yieldDelay", 2)
         );
     }
 
     public IncrementalRunnable(uSkyBlock plugin, Runnable onCompletion) {
         this(plugin, onCompletion,
-                plugin.getConfig().getInt("async.maxMs", 22),
+                plugin.getConfig().getInt("async.maxMs", 15),
                 plugin.getConfig().getInt("async.maxConsecutiveTicks", 20),
-                plugin.getConfig().getInt("async.yieldDelay", 15)
+                plugin.getConfig().getInt("async.yieldDelay", 2)
         );
     }
 

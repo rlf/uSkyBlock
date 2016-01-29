@@ -23,7 +23,6 @@ public class Settings {
     public static ItemStack[] island_chestItems;
     public static boolean island_addExtraItems;
     public static String[] island_extraPermissions;
-    public static boolean island_useOldIslands;
     public static boolean island_allowIslandLock;
     public static boolean island_useIslandLevel;
     public static boolean island_useTopTen;
@@ -113,6 +112,11 @@ public class Settings {
         island_chestItems = ItemStackUtil.createItemArray(chestItemString);
 
         island_schematicName = config.getString("options.island.schematicName");
+        if ("yourschematicname".equals(island_schematicName) || island_schematicName == null) {
+            island_schematicName = "uSkyBlockDefault";
+            config.set("options.island.schematicName", "uSkyBlockDefault");
+            changed = true;
+        }
         final Set<String> permissionList = new HashSet<>();
         if (config.isConfigurationSection("options.island.extraPermissions")) {
             permissionList.addAll(config.getConfigurationSection("options.island.extraPermissions").getKeys(true));
@@ -126,7 +130,6 @@ public class Settings {
         general_worldName = config.getString("options.general.worldName", "skyworld");
         island_removeCreaturesByTeleport = config.getBoolean("options.island.removeCreaturesByTeleport");
         island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
-        island_useOldIslands = config.getBoolean("options.island.useOldIslands");
         island_topTenTimeout = config.getInt("options.island.topTenTimeout", 7); // Every 7 minutes
         island_allowPvP = config.getString("options.island.allowPvP", "deny").equalsIgnoreCase("allow") ||
             config.getString("options.island.allowPvP", "false").equalsIgnoreCase("true");

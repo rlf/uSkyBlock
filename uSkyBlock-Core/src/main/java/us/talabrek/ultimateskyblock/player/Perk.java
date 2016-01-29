@@ -4,7 +4,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Perk is an immutable object holding all the perks,
@@ -16,7 +18,7 @@ public class Perk {
     private final List<ItemStack> extraItems;
     private final double rewBonus;
     private final double hungerReduction;
-    private final List<String> schematics;
+    private final Set<String> schematics;
     private final int villagers;
     private final int golems;
 
@@ -29,7 +31,7 @@ public class Perk {
         this.extraItems = extraItems != null ? extraItems : Collections.<ItemStack>emptyList();
         this.rewBonus = rewBonus >= 0 ? rewBonus : 0;
         this.hungerReduction = hungerReduction >= 0 && hungerReduction <= 1 ? hungerReduction : 0;
-        this.schematics = schematics != null ? new ArrayList<>(schematics) : Collections.<String>emptyList();
+        this.schematics = schematics != null ? new HashSet<>(schematics) : Collections.<String>emptySet();
     }
 
     public int getMaxPartySize() {
@@ -64,8 +66,8 @@ public class Perk {
         return hungerReduction;
     }
 
-    public List<String> getSchematics() {
-        return Collections.unmodifiableList(schematics);
+    public Set<String> getSchematics() {
+        return Collections.unmodifiableSet(schematics);
     }
 
     public Perk combine(Perk other) {

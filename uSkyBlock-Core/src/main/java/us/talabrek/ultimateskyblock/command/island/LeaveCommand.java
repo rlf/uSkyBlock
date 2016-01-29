@@ -14,7 +14,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 public class LeaveCommand extends RequireIslandCommand {
 
     public LeaveCommand(uSkyBlock plugin) {
-        super(plugin, "leave", "usb.party.join", tr("leave your party"));
+        super(plugin, "leave", "usb.party.leave", tr("leave your party"));
     }
 
     @Override

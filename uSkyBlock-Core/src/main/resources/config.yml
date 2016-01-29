@@ -59,10 +59,6 @@ options:
     #[true/false] Allow players to completely lock their islands so non-party members can't enter. (locking still requires permission usb.lock)
     allowIslandLock: true
 
-    # [true/false] Use old SkySMP style island generation. Set this to true if you want to use the old
-    # island style, or set to false if you want to use the new style island generation. Only affects new islands.
-    useOldIslands: false
-
     # [true/false] If true, use island levels/ranks (/island info) - may have a slight impact on performance
     # Set to false if you have performance issues
     useIslandLevel: true
@@ -218,6 +214,24 @@ options:
     # - me Jumps with &ajoy
     extra-commands: []
 
+
+# List of selections for /is create and /is restart
+island-schemes:
+  uSkyBlockDefault:
+    permission: usb.island.create
+    name: Default
+    displayItem: SAPLING
+    extraItems: ''
+    maxPartySize: 4
+    animals: 48
+    monsters: 50
+    villagers: 16
+    golems: 5
+  uSkyBlockSkySMP:
+    permission: usb.schematic.skysmp
+    name: SkySMP
+    displayItem: GRASS
+
 # This section allows donors to get specific perks
 #donor-perks:
 #  usb:
@@ -270,6 +284,8 @@ nether:
 
   height: 75
 
+  lava-level: 32
+
   activate-at:
     level: 100
 
@@ -311,10 +327,11 @@ tool-menu:
     WORKBENCH: 'challenges'
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 41
+version: 43
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
+  options.island.useOldIslands: false
 move-nodes:
   options.restart.confirmation: confirmation.is restart
   options.party.leave.confirmation: confirmation.is leave

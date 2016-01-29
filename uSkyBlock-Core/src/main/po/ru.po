@@ -792,6 +792,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§cУ вас недостаточно прав для изменения биома вашего текущего острова."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4У вас недостаточно прав для изменения биома острова!"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§eДля изменения биома вы должны быть на своем острове!"
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§cНеверно указано название биома."
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eВы сможете изменить биом снова через {0,number,#} мин."
@@ -806,15 +816,6 @@ msgstr "{0} изменил биом острова на {1}"
 
 msgid "§cYou do not have permission to change your biome to that type."
 msgstr "§cУ вас недостаточно прав для изменения биома острова на указанный."
-
-msgid "§cYou have misspelled the biome name."
-msgstr "§cНеверно указано название биома."
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§eДля изменения биома вы должны быть на своем острове!"
-
-msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4У вас недостаточно прав для изменения биома острова!"
 
 msgid "create an island"
 msgstr "создание острова"
@@ -1418,6 +1419,19 @@ msgstr ""
 
 #, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
+#, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr ""
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr ""
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 #, java-format
@@ -2195,6 +2209,10 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4У вас нет доступа к этой команде!"
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Игрок уже прикреплен к острову!"
 
@@ -2220,6 +2238,12 @@ msgstr "§aТочка дома на вашем острове установле
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Ваше текущее место не безопасно для точки дома."
 
+#, java-format
+msgid ""
+"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Невозможно создать остров. Свяжитесь с администратором сервера."
 
@@ -2227,18 +2251,8 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eСоздание острова началось, подождите, это может занять некоторое время."
 
-msgid "§aCongratulations! §eYour island has appeared."
+msgid "§9Clearing an area for you..."
 msgstr ""
-
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr ""
-
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr ""
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr ""
-"§eО-о-о! Мы нашли вакантное место недалеко от спавна. §9Очищается для вас..."
 
 msgid "d"
 msgstr "д"
@@ -2255,6 +2269,11 @@ msgstr "с"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+#~ msgstr ""
+#~ "§eО-о-о! Мы нашли вакантное место недалеко от спавна. §9Очищается для "
+#~ "вас..."
 
 #~ msgid "{0} ({1}/{2})"
 #~ msgstr "{0} ({1}/{2})"

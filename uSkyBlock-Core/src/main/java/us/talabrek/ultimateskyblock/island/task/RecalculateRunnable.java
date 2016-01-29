@@ -24,13 +24,8 @@ public class RecalculateRunnable extends BukkitRunnable {
             }
         }
         if (!recalcIslands.isEmpty()) {
-            RecalculateTopTen runnable = new RecalculateTopTen(plugin, recalcIslands, new Runnable() {
-                @Override
-                public void run() {
-                    plugin.fireChangeEvent(new uSkyBlockEvent(null, plugin, uSkyBlockEvent.Cause.RANK_UPDATED));
-                }
-            });
-            runnable.runTask(plugin);
+            RecalculateTopTen runnable = new RecalculateTopTen(plugin, recalcIslands);
+            runnable.runTaskAsynchronously(plugin);
         }
     }
 }

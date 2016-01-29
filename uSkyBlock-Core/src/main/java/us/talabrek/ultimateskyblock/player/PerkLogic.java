@@ -9,10 +9,13 @@ import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -22,6 +25,7 @@ public class PerkLogic {
     private final uSkyBlock plugin;
     private final Perk defaultPerk;
     private Map<String, Perk> donorPerks;
+    private Map<String, Perk> islandPerks;
 
     public PerkLogic(uSkyBlock plugin, IslandGenerator islandGenerator) {
         this.plugin = plugin;
@@ -39,7 +43,30 @@ public class PerkLogic {
         addPartyPermissionPerks(null, plugin.getConfig().getConfigurationSection("options.party.maxPartyPermissions"));
         addHungerPerms();
         addDonorRewardPerks();
-        addSchemePerks(islandGenerator.getSchemeNames());
+        List<String> schemeNames = islandGenerator.getSchemeNames();
+        addSchemePerks(schemeNames);
+        islandPerks = new ConcurrentHashMap<>();
+        for (String schemeName : schemeNames) {
+            islandPerks.put("usb.schematic." + schemeName, new PerkBuilder(defaultPerk).schematics(schemeName).build());
+        }
+        ConfigurationSection islandSchemes = plugin.getConfig().getConfigurationSection("island-schemes");
+        if (islandSchemes != null) {
+            for (String schemeName : islandSchemes.getKeys(false)) {
+                ConfigurationSection config = islandSchemes.getConfigurationSection(schemeName);
+                String perm = config.getString("permission", "usb.schematic." + schemeName);
+                Perk perk = islandPerks.containsKey(perm) ? islandPerks.get(perm) : defaultPerk;
+                perk = new PerkBuilder(perk).schematics(schemeName)
+                        .maxPartySize(config.getInt("maxPartySize", 0))
+                        .animals(config.getInt("animals", 0))
+                        .monsters(config.getInt("monsters", 0))
+                        .villagers(config.getInt("villagers", 0))
+                        .golems(config.getInt("golems", 0))
+                        .rewBonus(config.getInt("rewardBonus", 0))
+                        .hungerReduction(config.getInt("hungerReduction", 0))
+                        .build();
+                islandPerks.put(perm, perk);
+            }
+        }
     }
 
     public Perk getDefaultPerk() {
@@ -48,6 +75,16 @@ public class PerkLogic {
 
     public Perk getPerk(Player player) {
         return createPerk(player);
+    }
+
+    public Set<String> getSchemes(Player player) {
+        Set<String> schemes = new LinkedHashSet<>();
+        for (String perm : islandPerks.keySet()) {
+            if (player.hasPermission(perm)) {
+                schemes.addAll(islandPerks.get(perm).getSchematics());
+            }
+        }
+        return schemes;
     }
 
     private Perk createPerk(Player player) {
@@ -195,6 +232,11 @@ public class PerkLogic {
 
         public PerkBuilder villagers(int villagers) {
             perk = perk.combine(new Perk(null, 0, 0, 0, villagers, 0, 0, 0, null));
+            return this;
+        }
+
+        public PerkBuilder golems(int golems) {
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, golems, 0, 0, null));
             return this;
         }
 

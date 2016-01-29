@@ -1,21 +1,19 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.sk89q.worldedit.Vector2D;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.model.BlockScore.State;
 import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.island.task.ChunkSnapShotTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,101 +139,87 @@ public class LevelLogic {
         log.entering(CN, "calculateScoreAsync");
         // is further threading needed here?
         final ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
-        final List<ChunkSnapshot> snapshotsOverworld = createChunkSnapshots(l, region);
-        Location netherLoc = getNetherLocation(l);
-        final ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherLoc);
-        final List<ChunkSnapshot> snapshotsNether = createChunkSnapshots(netherLoc, netherRegion);
-
-        if (snapshotsOverworld == null && snapshotsNether == null) {
-            return;
-        }
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        new ChunkSnapShotTask(plugin, l, region, new Callback<List<ChunkSnapshot>>() {
             @Override
             public void run() {
-                final int[] counts = createBlockCountArray();
-                int minX = region.getMinimumPoint().getBlockX();
-                int maxX = region.getMaximumPoint().getBlockX();
-                int minZ = region.getMinimumPoint().getBlockZ();
-                int maxZ = region.getMaximumPoint().getBlockZ();
-                for (int x = minX; x <= maxX; ++x) {
-                    for (int z = minZ; z <= maxZ; ++z) {
-                        ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
-                        if (chunk == null) {
-                            // This should NOT happen!
-                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x +"," + z);
-                            continue;
-                        }
-                        int cx = (x & 0xf);
-                        int cz = (z & 0xf);
-                        for (int y = 0; y <= 255; y++) {
-                            int blockId = chunk.getBlockTypeId(cx, y, cz);
-                            if (blockId != 0) { // Ignore AIR
-                                blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
-                                addBlockCount(blockId, counts);
-                            }
-                        }
-                    }
-                }
-                IslandScore islandScore = createIslandScore(counts);
-                if (islandScore.getScore() >= activateNetherAtLevel && netherRegion != null && snapshotsNether != null) {
-                    // Add nether levels
-                    minX = netherRegion.getMinimumPoint().getBlockX();
-                    maxX = netherRegion.getMaximumPoint().getBlockX();
-                    minZ = netherRegion.getMinimumPoint().getBlockZ();
-                    maxZ = netherRegion.getMaximumPoint().getBlockZ();
-                    for (int x = minX; x <= maxX; ++x) {
-                        for (int z = minZ; z <= maxZ; ++z) {
-                            ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
-                            if (chunk == null) {
-                                // This should NOT happen!
-                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x +"," + z);
-                                continue;
-                            }
-                            int cx = (x & 0xf);
-                            int cz = (z & 0xf);
-                            for (int y = 5; y < 120; y++) {
-                                int blockId = chunk.getBlockTypeId(cx, y, cz);
-                                if (blockId != 0) { // Ignore AIR
-                                    blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
-                                    addBlockCount(blockId, counts);
+                final List<ChunkSnapshot> snapshotsOverworld = getState();
+                Location netherLoc = getNetherLocation(l);
+                final ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherLoc);
+                new ChunkSnapShotTask(plugin, netherLoc, netherRegion, new Callback<List<ChunkSnapshot>>() {
+                    @Override
+                    public void run() {
+                        final List<ChunkSnapshot> snapshotsNether = getState();
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                final int[] counts = createBlockCountArray();
+                                int minX = region.getMinimumPoint().getBlockX();
+                                int maxX = region.getMaximumPoint().getBlockX();
+                                int minZ = region.getMinimumPoint().getBlockZ();
+                                int maxZ = region.getMaximumPoint().getBlockZ();
+                                for (int x = minX; x <= maxX; ++x) {
+                                    for (int z = minZ; z <= maxZ; ++z) {
+                                        ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
+                                        if (chunk == null) {
+                                            // This should NOT happen!
+                                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x +"," + z);
+                                            continue;
+                                        }
+                                        int cx = (x & 0xf);
+                                        int cz = (z & 0xf);
+                                        for (int y = 0; y <= 255; y++) {
+                                            int blockId = chunk.getBlockTypeId(cx, y, cz);
+                                            if (blockId != 0) { // Ignore AIR
+                                                blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
+                                                addBlockCount(blockId, counts);
+                                            }
+                                        }
+                                    }
                                 }
+                                IslandScore islandScore = createIslandScore(counts);
+                                if (islandScore.getScore() >= activateNetherAtLevel && netherRegion != null && snapshotsNether != null) {
+                                    // Add nether levels
+                                    minX = netherRegion.getMinimumPoint().getBlockX();
+                                    maxX = netherRegion.getMaximumPoint().getBlockX();
+                                    minZ = netherRegion.getMinimumPoint().getBlockZ();
+                                    maxZ = netherRegion.getMaximumPoint().getBlockZ();
+                                    for (int x = minX; x <= maxX; ++x) {
+                                        for (int z = minZ; z <= maxZ; ++z) {
+                                            ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
+                                            if (chunk == null) {
+                                                // This should NOT happen!
+                                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x +"," + z);
+                                                continue;
+                                            }
+                                            int cx = (x & 0xf);
+                                            int cz = (z & 0xf);
+                                            for (int y = 5; y < 120; y++) {
+                                                int blockId = chunk.getBlockTypeId(cx, y, cz);
+                                                if (blockId != 0) { // Ignore AIR
+                                                    blockId = blockId << DATA_BITS | (chunk.getBlockData(cx, y, cz) & 0xff);
+                                                    addBlockCount(blockId, counts);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    islandScore = createIslandScore(counts);
+                                }
+                                callback.setState(islandScore);
+                                Bukkit.getScheduler().runTask(plugin, callback);
+                                log.exiting(CN, "calculateScoreAsync");
                             }
-                        }
+                        }.runTaskAsynchronously(plugin);
                     }
-                    islandScore = createIslandScore(counts);
-                }
-                callback.setState(islandScore);
-                Bukkit.getScheduler().runTask(plugin, callback);
-                log.exiting(CN, "calculateScoreAsync");
+                }).runTask(plugin);
             }
-        });
+        }).runTask(plugin);
     }
 
     private Location getNetherLocation(Location l) {
         Location netherLoc = l.clone();
         netherLoc.setWorld(plugin.getSkyBlockNetherWorld());
-        netherLoc.setY(netherLoc.getY()/2);
+        netherLoc.setY(Settings.nether_height);
         return netherLoc;
-    }
-
-    private List<ChunkSnapshot> createChunkSnapshots(Location l, ProtectedRegion region) {
-        final List<ChunkSnapshot> snapshots = new ArrayList<>();
-        if (region == null) {
-            log.finer("No WG region found for island at " + LocationUtil.asString(l));
-            return null;
-        }
-        Region weRegion = new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint());
-        log.finer("Snapshotting chunks");
-        for (Vector2D chunkVector : weRegion.getChunks()) {
-            Chunk chunk = l.getWorld().getChunkAt(chunkVector.getBlockX(), chunkVector.getBlockZ());
-            if (!chunk.isLoaded()) {
-                log.finer("Loading chunk " + chunkVector);
-                chunk.load();
-            }
-            snapshots.add(chunk.getChunkSnapshot(true, false, false));
-        }
-        log.finer("Done making chunk-snapshots of " + weRegion);
-        return snapshots;
     }
 
     private ChunkSnapshot getChunkSnapshot(int x, int z, List<ChunkSnapshot> snapshots) {

@@ -819,6 +819,17 @@ msgstr ""
 "§cDu verfügst nicht über die Rechte um von deiner aktuellen Insel das Biom "
 "zu ändern."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4Du hast nicht die Rechte um das Biom der Insel zu ändern!"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§eDu musst auf deiner Insel sein um das Biom zu ändern."
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr ""
+"§aDu hast einen ungültigen Biomnamen eingegeben. Ändert das Biom zu OZEAN"
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eDu kannst in {0,number,#} Minuten das Biom wieder ändern."
@@ -833,17 +844,6 @@ msgstr "{0} Wechselte das Inselbiom zu {1}"
 
 #, fuzzy
 msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§4Du hast nicht die Rechte um das Biom der Insel zu ändern!"
-
-#, fuzzy
-msgid "§cYou have misspelled the biome name."
-msgstr ""
-"§aDu hast einen ungültigen Biomnamen eingegeben. Ändert das Biom zu OZEAN"
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§eDu musst auf deiner Insel sein um das Biom zu ändern."
-
-msgid "§4You do not have permission to change the biome of this island!"
 msgstr "§4Du hast nicht die Rechte um das Biom der Insel zu ändern!"
 
 msgid "create an island"
@@ -1471,6 +1471,19 @@ msgstr ""
 
 #, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
+#, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr "§aGlückwunsch! §eDeine Insel wurde erstellt"
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr "Bitte Warten"
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 #, java-format
@@ -2294,6 +2307,10 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4Du hast keinen Zugriff auf diesen Befehl!"
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Dieser Spieler gehört bereits zu deiner Insel!"
 
@@ -2319,6 +2336,12 @@ msgstr "§aDein SkyBlock Home wurde an deine aktuelle Stelle gesetzt."
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Deine jetztige Home-Position ist nicht sicher"
 
+#, java-format
+msgid ""
+"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 "Deine Insel konnte nicht erschaffen werden. Bitte kontaktiere einen Admin/"
@@ -2327,16 +2350,7 @@ msgstr ""
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eDeine Insel wird erstellt. Habe einen Moment Geduld"
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§aGlückwunsch! §eDeine Insel wurde erstellt"
-
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr "Bitte Warten"
-
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr ""
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "§9Clearing an area for you..."
 msgstr ""
 
 # ???

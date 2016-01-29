@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.uuid;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -20,13 +21,13 @@ import java.util.logging.Logger;
  */
 public class FilePlayerDB implements PlayerDB {
     private static final Logger log = Logger.getLogger(FilePlayerDB.class.getName());
-    private final YamlConfiguration config;
+    private final YmlConfiguration config;
     private final File file;
     private boolean isShuttingDown = false;
 
     public FilePlayerDB(File file) {
         this.file = file;
-        config = new YamlConfiguration();
+        config = new YmlConfiguration();
         if (file.exists()) {
             FileUtil.readConfig(config, file);
         }
@@ -76,25 +77,33 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     public void updatePlayerAsync(final UUID id, final String name, final String displayName) {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    synchronized (FilePlayerDB.this) {
-                        String uuid = UUIDUtil.asString(id);
-                        config.set(uuid + ".name", name);
-                        config.set(uuid + ".displayName", displayName);
-                    }
-                    config.save(file);
-                } catch (IOException e) {
-                    log.log(Level.INFO, "Error saving playerdb", e);
-                }
-            }
-        };
         if (isShuttingDown) {
-            runnable.run();
+            saveToFile(id, name, displayName);
         } else {
-            Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), runnable);
+            Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    saveToFile(id, name, displayName);
+                }
+            });
+        }
+    }
+
+    private void saveToFile(UUID id, String name, String displayName) {
+        try {
+            YmlConfiguration copy;
+            synchronized (this) {
+                String uuid = UUIDUtil.asString(id);
+                config.set(uuid + ".name", name);
+                config.set(uuid + ".displayName", displayName);
+                copy = new YmlConfiguration();
+                copy.setDefaults(config);
+                copy.options().copyDefaults(true);
+                copy.addComments(config.getComments());
+            }
+            copy.save(file);
+        } catch (IOException e) {
+            log.log(Level.INFO, "Error saving playerdb", e);
         }
     }
 }

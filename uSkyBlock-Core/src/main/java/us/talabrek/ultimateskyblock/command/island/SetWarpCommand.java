@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class SetWarpCommand extends RequireIslandCommand {
     public SetWarpCommand(uSkyBlock plugin) {
-        super(plugin, "setwarp|warpset", "usb.extra.addwarp", I18nUtil.tr("set your island's warp location"));
+        super(plugin, "setwarp|warpset", "usb.island.setwarp", I18nUtil.tr("set your island's warp location"));
     }
 
     @Override

@@ -55,7 +55,6 @@ public class InfoCommand extends RequireIslandCommand {
             return false;
         }
         final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(islandPlayer);
-        plugin.getIslandLogic().loadIslandChunks(playerInfo.getIslandLocation(), Settings.island_radius);
         final Callback<IslandScore> showInfo = new Callback<IslandScore>() {
             @Override
             public void run() {

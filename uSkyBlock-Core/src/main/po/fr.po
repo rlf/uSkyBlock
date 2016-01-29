@@ -790,6 +790,16 @@ msgid ""
 msgstr ""
 "§cVous n'avez pas la permission pour changer le biome de l'île actuelle."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4Vous n'avez pas la permission pour changer le biome de l'île !"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§eVous devez être sur votre île pour changer le biome !"
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§cVous avez mal orthographié le nom du biome."
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eVous ne pouvez pas changer le biome avant {0,number,#} minutes."
@@ -804,15 +814,6 @@ msgstr "{0} a changé le biome de l''île en {1}"
 
 msgid "§cYou do not have permission to change your biome to that type."
 msgstr "§cVous n'êtes pas autorisé à changer votre biome à ce type."
-
-msgid "§cYou have misspelled the biome name."
-msgstr "§cVous avez mal orthographié le nom du biome."
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§eVous devez être sur votre île pour changer le biome !"
-
-msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4Vous n'avez pas la permission pour changer le biome de l'île !"
 
 msgid "create an island"
 msgstr "créer une île"
@@ -1413,6 +1414,19 @@ msgstr ""
 #, fuzzy, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
 msgstr "§f{0} §7{1} §9 par {2} §7{3}\n"
+
+#, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr "§aFécilicitation ! §eVotre île est apparu"
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr "§cNote:§e La création peut être encore en cours."
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr "Utilise §9/is h§r ou le menu §9/is§r pour y aller."
 
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
@@ -2169,6 +2183,10 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4Vous n'avez pas accés à cette commande :"
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Ce joueur est déjà assigné à une île !"
 
@@ -2194,6 +2212,12 @@ msgstr "§aVotre home a été modifié à votre position acutelle."
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Votre position acutelle n'est pas un home protégé."
 
+#, java-format
+msgid ""
+"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Vous ne pouvez pas créer d'île. Contactez un administrateur."
 
@@ -2201,17 +2225,8 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eVotre île est prête, soyez patient cela peut prendre un certain temps.."
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§aFécilicitation ! §eVotre île est apparu"
-
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§cNote:§e La création peut être encore en cours."
-
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr "Utilise §9/is h§r ou le menu §9/is§r pour y aller."
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr "§eNous avez trouvé un emplacement près du spawn. §9Parfait pour vous.."
+msgid "§9Clearing an area for you..."
+msgstr ""
 
 msgid "d"
 msgstr "j"
@@ -2228,6 +2243,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+#~ msgstr ""
+#~ "§eNous avez trouvé un emplacement près du spawn. §9Parfait pour vous.."
 
 #~ msgid "{0} ({1}/{2})"
 #~ msgstr "{0} ({1}/{2})"

@@ -7,13 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5.10\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-26 13:16+0900\n"
+"PO-Revision-Date: 2016-01-27 00:18+0100\n"
 "Last-Translator: swan201\n"
 "Language-Team: Protocodyne Korean Translation Team <github@protocodyne.com>\n"
-"Language: Ko-kr\n"
+"Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -782,6 +783,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§c당신의 현재 섬의 생태계를 바꿀 권한이 없습니다."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§c생태계의 이름을 잘못적으셨습니다."
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§e당신은 생태계를 {0,number,#}분 후에 다시 바꿀 수 있습니다."
@@ -796,15 +807,6 @@ msgstr "{0}가 섬의 생태계를 {1}로 바꾸었습니다"
 
 msgid "§cYou do not have permission to change your biome to that type."
 msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다.."
-
-msgid "§cYou have misspelled the biome name."
-msgstr "§c생태계의 이름을 잘못적으셨습니다."
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§e생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
-
-msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
 
 msgid "create an island"
 msgstr "섬을 만듭니다"
@@ -1407,6 +1409,19 @@ msgid "§7{0}: §a{1}§7 (max. {2})"
 msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 
 #, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr "§cNote:§e 건설이 아마 아직 진행중입니다'."
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr "Use §9/is h§r or the §9/is§r menu to go there."
+
+#, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§c감시견!§9 {0}개 내로 상자를 놓을 수 없음, 돈 내고 풀려나는 중."
 
@@ -1674,7 +1689,7 @@ msgid ""
 msgstr ""
 "숲 생태계는 당신의 섬이 (늑대를 포함한)\n"
 "동물같은 수동적인 몬스터들은 스폰될 수 있습니다.\n"
-"또한 사나운 몬스터들은 일반적으로 출현합니다\n"
+"또한 사나운 몬스터들은 일반적으로 출현합니다"
 
 msgid "Desert"
 msgstr "사막"
@@ -1689,7 +1704,7 @@ msgstr ""
 "사막 생태계는 당신의 섬에\n"
 "비나 눈이 내리지 않게 합니다\n"
 "수동적인 몬스터들은 스폰되지 않습니다\n"
-"적대적인 몬스터들은 일반적으로 스폰됩니다.\n"
+"적대적인 몬스터들은 일반적으로 스폰됩니다."
 
 msgid "Jungle"
 msgstr "정글"
@@ -1722,7 +1737,7 @@ msgstr ""
 "음산합니다. 수동적인 몬스터들\n"
 "이 일반적으로 스폰되고 \n"
 "슬라임이 적은 확률로\n"
-"달의 모양에 따라 밤에 스폰됩니다\n"
+"달의 모양에 따라 밤에 스폰됩니다"
 
 msgid "Taiga"
 msgstr "타이가"
@@ -1737,7 +1752,7 @@ msgstr ""
 "타이가 생태계는 눈이 비 대신 옵니다.\n"
 "(늑대를 포함한) 수동적인\n"
 "몬스터들이 일반적으로 스폰되고\n"
-"적대적인 몬스터들이 스폰됩니다.\n"
+"적대적인 몬스터들이 스폰됩니다."
 
 msgid "Mushroom"
 msgstr "버섯"
@@ -1768,7 +1783,7 @@ msgstr ""
 "지옥 생태계는 어둡고 죽은 듯해 보입니다.\n"
 "몇몇의 지하로부터의 몬스터들이\n"
 "이 지역에서 스폰됩니다\n"
-"(gahsts와 blazes는 제외합니다)\n"
+"(gahsts와 blazes는 제외합니다)"
 
 msgid "Sky"
 msgstr "하늘"
@@ -1797,7 +1812,7 @@ msgstr ""
 "초원 생태계는 눈 대신\n"
 "비가 옵니다. (말을 포함한)\n"
 "수동적인 몬스터들이 일반적으로\n"
-"스폰되며 적대적인 몬스터들도 스폰됩니다 \n"
+"스폰되며 적대적인 몬스터들도 스폰됩니다 "
 
 msgid "Extreme Hills"
 msgstr "절벽"
@@ -1840,7 +1855,7 @@ msgstr ""
 "심해 생태계는 진화된\n"
 "생태계입니다. 동물같은 수동적인 몬스터들은\n"
 "스폰되지 않습니다. 적대적인 몬스터들\n"
-"(Guardians 포함)이 일반적으로 스폰됩니다.\n"
+"(Guardians 포함)이 일반적으로 스폰됩니다."
 
 #, java-format
 msgid "Biome: {0}"
@@ -2172,6 +2187,10 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4그 커맨드의 권한이 없습니다!"
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4플레이어는 이미 이 섬에 배정되었습니다!"
 
@@ -2197,6 +2216,12 @@ msgstr "§a당신의 skyblock집이 당신의 현제 지점에 지정되었습�
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"
 
+#, java-format
+msgid ""
+"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."
 
@@ -2204,19 +2229,8 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
-
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§cNote:§e 건설이 아직 진행중입니다'."
-
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr "Use §9/is h§r or the §9/is§r menu to go there."
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "§9Clearing an area for you..."
 msgstr ""
-"§e야호! 스폰지역에서 가까운 빈터를 발견했습니다. §9당신을 위해서 치우는 중입"
-"니다..."
 
 msgid "d"
 msgstr "d"
@@ -2233,6 +2247,11 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+#~ msgstr ""
+#~ "§e야호! 스폰지역에서 가까운 빈터를 발견했습니다. §9당신을 위해서 치우는 중"
+#~ "입니다..."
 
 #~ msgid "Page {0,number,integer}"
 #~ msgstr "페이지 {0,number,integer}"

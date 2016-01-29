@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
 /**
  * Command with nested commandMap inside.
  */
@@ -111,10 +113,10 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
                 data.put(p, args[ix++]);
             }
             if (!hasAccess(cmd, sender)) {
-                if (cmd != null && sender.isOp()) {
-                    sender.sendMessage(MessageFormat.format("\u00a7eYou do not have access (\u00a74{0}\u00a7e)", cmd.getPermission()));
+                if (cmd != null) {
+                    sender.sendMessage(tr("\u00a7eYou do not have access (\u00a74{0}\u00a7e)", cmd.getPermission()));
                 } else {
-                    sender.sendMessage("\u00a7eYou do not have access");
+                    sender.sendMessage(tr("\u00a7eInvalid command: {0}", cmdName));
                 }
                 showUsage(sender, args[0]);
             } else if (!cmd.execute(sender, cmdName, data, subArgs)) {
@@ -126,7 +128,7 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
         return true;
     }
     private void showUsage(CommandSender sender, int page) {
-        String msg = "\u00a77Usage: " + getShortDescription(sender, this);
+        String msg = tr("\u00a77Usage: {0}", getShortDescription(sender, this));
         List<String> cmds = new ArrayList<>(commandMap.keySet());
         Collections.sort(cmds);
         int realPage = 0;
@@ -143,9 +145,9 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
             msg += "  " + getShortDescription(sender, cmd);
         }
         if (realPage > 0 && maxPage > realPage) {
-            msg += "\u00a77Use \u00a73/" + getName() + " ? " + (realPage+1) + " \u00a77 to display next page\n";
+            msg += tr("\u00a77Use \u00a73/{0} ? {1}\u00a77 to display next page\n", getName(), (realPage+1));
         } else if (realPage > 0 && maxPage == realPage) {
-            msg += "\u00a77Use \u00a73/" + getName() + " ? " + (realPage-1) + " \u00a77 to display previous page\n";
+            msg += tr("\u00a77Use \u00a73/{0} ? {1} \u00a77 to display previous page\n", getName(), (realPage-1));
         }
         sender.sendMessage(msg.split("\n"));
     }
@@ -154,7 +156,7 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
         String cmdName = arg.toLowerCase();
         Command cmd = aliasMap.get(cmdName);
         if (cmd != null && hasAccess(cmd, sender)) {
-            String msg = I18nUtil.tr("\u00a77Usage: {0}", name) + " \u00a7e";
+            String msg = tr("\u00a77Usage: {0}", name) + " \u00a7e";
             msg += getShortDescription(sender, cmd);
             if (cmd.getUsage() != null && !cmd.getUsage().isEmpty()) {
                 msg += "\u00a77" + cmd.getUsage();
@@ -167,7 +169,7 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
             if (cmds.isEmpty()) {
                 showUsage(sender, 1);
             } else {
-                String msg = I18nUtil.tr("\u00a77Usage: {0}", getShortDescription(sender, this));
+                String msg = tr("\u00a77Usage: {0}", getShortDescription(sender, this));
                 Collections.sort(cmds);
                 for (String key : cmds) {
                     Command scmd = commandMap.get(key);
@@ -210,7 +212,24 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
     }
 
     public boolean hasAccess(Command cmd, CommandSender sender) {
-        return cmd != null && (cmd.getPermission() == null || sender.hasPermission(cmd.getPermission()));
+        return cmd != null && (cmd.getPermission() == null || hasPermission(sender, cmd.getPermission()));
+    }
+
+    private boolean hasPermission(CommandSender sender, String perm) {
+        // This is ONLY needed, because some shitty perm-systems don't understand the .* perm.
+        if (sender.hasPermission(perm)) {
+            return true;
+        } else if (sender.hasPermission("-" + perm)) {
+            return false;
+        }
+        String p = perm;
+        if (perm.endsWith(".*")) {
+            p = perm.substring(0, perm.length() - 2);
+        }
+        if (p.contains(".")) {
+            return hasPermission(sender, p.substring(0, p.lastIndexOf(".")) + ".*");
+        }
+        return false;
     }
 
     @Override
