@@ -326,7 +326,7 @@
                     <plugin>
                         <groupId>com.github.rlf</groupId>
                         <artifactId>gettext-maven-plugin</artifactId>
-                        <version>1.2.7</version>
+                        <version>1.2.8</version>
                         <executions>
                             <execution>
                                 <id>find-msgids</id>
@@ -360,6 +360,9 @@
                                         <arg>--empty</arg>
                                         <arg>--no-obsolete</arg>
                                     </extraArgs>
+                                    <excludes>
+                                        <exclude>xx_PIRATE.po</exclude>
+                                    </excludes>
                                 </configuration>
                             </execution>
                             <execution>
