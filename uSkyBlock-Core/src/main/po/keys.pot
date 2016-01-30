@@ -206,7 +206,7 @@ msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr ""
 
 #, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
+msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
 
 #, java-format
@@ -214,10 +214,6 @@ msgid "§7Complete {0}"
 msgstr ""
 
 msgid "to unlock this rank"
-msgstr ""
-
-#, java-format
-msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
 
 #, java-format
@@ -1775,7 +1771,9 @@ msgid "§aClick to create!"
 msgstr ""
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
 
 msgid "§a§lJoin an Island"
@@ -1990,12 +1988,6 @@ msgstr ""
 msgid "§aClick to restart!"
 msgstr ""
 
-#, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
-msgstr ""
-
 msgid "Caps On"
 msgstr ""
 
@@ -2077,13 +2069,13 @@ msgstr ""
 msgid "North-East"
 msgstr ""
 
-msgid "Eeast"
+msgid "East"
 msgstr ""
 
 msgid "South-East"
 msgstr ""
 
-msgid "Sout"
+msgid "South"
 msgstr ""
 
 msgid "South-West"

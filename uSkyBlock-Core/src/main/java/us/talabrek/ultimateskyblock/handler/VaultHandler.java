@@ -29,18 +29,6 @@ public enum VaultHandler {;
         perms.playerAdd((String) null, player.getName(), perk);
     }
 
-    public static boolean checkPerk(final String player, final String perk, final World world) {
-        return perms.has((String) null, player, perk) || perms.has(world, player, perk);
-    }
-
-    public static boolean checkPerm(final Player player, final String perm, final World world) {
-        if (perm == null || perm.trim().isEmpty()) {
-            return true;
-        }
-        // TODO: UUID aware
-        return perms.has(player, perm) || perms.has(world, player.getName(), perm);
-    }
-
     public static boolean setupPermissions() {
         final RegisteredServiceProvider<Permission> rsp = (RegisteredServiceProvider<Permission>) uSkyBlock.getInstance().getServer().getServicesManager().getRegistration((Class) Permission.class);
         if (rsp.getProvider() != null) {

@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class WarpCommand extends RequirePlayerCommand {
@@ -23,7 +24,7 @@ public class WarpCommand extends RequirePlayerCommand {
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         if (args.length == 0) {
             IslandInfo island = plugin.getIslandInfo(player);
-            if (island != null && VaultHandler.checkPerk(player.getName(), "usb.island.setwarp", player.getWorld())) {
+            if (island != null && hasPermission(player, "usb.island.setwarp")) {
                 if (island.hasWarp()) {
                     player.sendMessage(tr("\u00a7aYour incoming warp is active, players may warp to your island."));
                 } else {
@@ -34,14 +35,14 @@ public class WarpCommand extends RequirePlayerCommand {
             } else {
                 player.sendMessage(tr("\u00a74You do not have permission to create a warp on your island!"));
             }
-            if (VaultHandler.checkPerk(player.getName(), "usb.island.warp", player.getWorld())) {
+            if (hasPermission(player, "usb.island.warp")) {
                 player.sendMessage(tr("\u00a7fWarp to another island using \u00a7e/island warp <player>"));
             } else {
                 player.sendMessage(tr("\u00a74You do not have permission to warp to other islands!"));
             }
             return true;
         } else if (args.length == 1) {
-            if (VaultHandler.checkPerk(player.getName(), "usb.island.warp", player.getWorld())) {
+            if (hasPermission(player, "usb.island.warp")) {
                 PlayerInfo senderPlayerInfo = plugin.getPlayerInfo(player);
                 if (senderPlayerInfo.isIslandGenerating()) {
                     player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot warp to other players islands right now."));

@@ -11,6 +11,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -38,7 +39,7 @@ public class WorldGuardEvents implements Listener {
             return;
         }
         Player player = e.getPlayer();
-        if (!player.isOp() && !VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld()) && isBlockedFromEntry(player, islandInfo)) {
+        if (!player.isOp() && !hasPermission(player, "usb.mod.bypassprotection") && isBlockedFromEntry(player, islandInfo)) {
             e.setCancelled(true);
             Location l = e.getTo().clone();
             l.subtract(islandInfo.getIslandLocation());

@@ -215,7 +215,7 @@ msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Nom de challenge invalide ! Utilise /c help pour plus d'informations"
 
 #, fuzzy, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
+msgid "§7Complete {0} more {1} §7challenges"
 msgstr "Complete le challenge {0} dans la catégorie {1}"
 
 #, java-format
@@ -224,10 +224,6 @@ msgstr "§7Completez {0}"
 
 msgid "to unlock this rank"
 msgstr "pour débloquer ce rang"
-
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "Complete le challenge {0} dans la catégorie {1}"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -1927,7 +1923,9 @@ msgid "§aClick to create!"
 msgstr "§e§lClique ici pour activer"
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
 
 msgid "§a§lJoin an Island"
@@ -2208,12 +2206,6 @@ msgstr "§e§lClique ici pour activer"
 msgid "§aClick to restart!"
 msgstr "§e§lClique ici pour activer"
 
-#, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
-msgstr ""
-
 msgid "Caps On"
 msgstr "Majuscule activé"
 
@@ -2299,13 +2291,13 @@ msgstr ""
 msgid "North-East"
 msgstr ""
 
-msgid "Eeast"
+msgid "East"
 msgstr ""
 
 msgid "South-East"
 msgstr ""
 
-msgid "Sout"
+msgid "South"
 msgstr ""
 
 msgid "South-West"
@@ -2332,6 +2324,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, fuzzy
+#~ msgid "§7Complete {0} more {1}§7 challenges"
+#~ msgstr "Complete le challenge {0} dans la catégorie {1}"
 
 #~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 #~ msgstr ""

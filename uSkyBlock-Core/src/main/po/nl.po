@@ -213,7 +213,7 @@ msgstr ""
 "§4De uitdagings naam is ongeldig! Gebruik / c help voor meer informatie"
 
 #, fuzzy, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
+msgid "§7Complete {0} more {1} §7challenges"
 msgstr "Voltooi {0} meer {1} uitdagingen"
 
 #, java-format
@@ -222,10 +222,6 @@ msgstr "§7Voltooi {0}"
 
 msgid "to unlock this rank"
 msgstr "om de volgende rang te openen"
-
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "Voltooi {0} meer {1} uitdagingen"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -1957,7 +1953,9 @@ msgid "§aClick to create!"
 msgstr "§e§lKlik hier om te activeren."
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
 
 msgid "§a§lJoin an Island"
@@ -2247,12 +2245,6 @@ msgstr "§e§lKlik hier om te activeren."
 msgid "§aClick to restart!"
 msgstr "§e§lKlik hier om te activeren."
 
-#, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
-msgstr ""
-
 msgid "Caps On"
 msgstr "Caps On"
 
@@ -2342,13 +2334,13 @@ msgstr ""
 msgid "North-East"
 msgstr ""
 
-msgid "Eeast"
+msgid "East"
 msgstr ""
 
 msgid "South-East"
 msgstr ""
 
-msgid "Sout"
+msgid "South"
 msgstr ""
 
 msgid "South-West"
@@ -2375,6 +2367,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, fuzzy
+#~ msgid "§7Complete {0} more {1}§7 challenges"
+#~ msgstr "Voltooi {0} meer {1} uitdagingen"
 
 #~ msgid "§9Clearing an area for you..."
 #~ msgstr "§9We ruimen een gebied voor je op..."

@@ -9,7 +9,6 @@ import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -17,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 
 /**
  * Responsible for calculating player specific perks based on permissions.
@@ -91,7 +92,7 @@ public class PerkLogic {
     public Set<String> getSchemes(Player player) {
         Set<String> schemes = new LinkedHashSet<>();
         for (IslandPerk islandPerk : islandPerks.values()) {
-            if (player.hasPermission(islandPerk.getPermission())) {
+            if (hasPermission(player, islandPerk.getPermission())) {
                 schemes.add(islandPerk.getSchemeName());
             }
         }
@@ -108,7 +109,7 @@ public class PerkLogic {
     private Perk createPerk(Player player) {
         PerkBuilder builder = new PerkBuilder(defaultPerk);
         for (String perm : donorPerks.keySet()) {
-            if (VaultHandler.checkPerm(player, perm, plugin.getWorld())) {
+            if (hasPermission(player, perm)) {
                 builder.combine(donorPerks.get(perm));
             }
         }

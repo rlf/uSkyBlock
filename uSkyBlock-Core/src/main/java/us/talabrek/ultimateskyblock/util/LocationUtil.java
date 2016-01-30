@@ -29,9 +29,9 @@ public enum LocationUtil {
     private static final String[] CARDINAL_DIRECTION = {
             I18nUtil.marktr("North"),
             I18nUtil.marktr("North-East"),
-            I18nUtil.marktr("Eeast"),
+            I18nUtil.marktr("East"),
             I18nUtil.marktr("South-East"),
-            I18nUtil.marktr("Sout"),
+            I18nUtil.marktr("South"),
             I18nUtil.marktr("South-West"),
             I18nUtil.marktr("West"),
             I18nUtil.marktr("North-West")

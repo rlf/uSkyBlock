@@ -13,6 +13,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.Map;
 import java.util.logging.Level;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class InfoCommand extends RequireIslandCommand {
@@ -38,7 +39,7 @@ public class InfoCommand extends RequireIslandCommand {
             }
             return true;
         } else if (args.length == 1 || (args.length == 2 && args[1].matches("\\d*"))) {
-            if (player.hasPermission("usb.island.info.other")) {
+            if (hasPermission(player, "usb.island.info.other")) {
                 getIslandInfo(player, args[0], alias, args.length == 2 ? Integer.parseInt(args[1], 10) : 1);
             } else {
                 player.sendMessage(tr("\u00a74You do not have access to that command!"));

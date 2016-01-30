@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.5.10\n"
+"Project-Id-Version: 2.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-27 00:18+0100\n"
+"PO-Revision-Date: 2016-01-30 22:34+0100\n"
 "Last-Translator: swan201\n"
 "Language-Team: Protocodyne Korean Translation Team <github@protocodyne.com>\n"
 "Language: ko_KR\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 #, fuzzy, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§a{0} §c{1}"
+msgstr "§f{0} §7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -100,9 +100,9 @@ msgstr ""
 "§e여전의 다음의 엔티티가 부족합니다:\n"
 "{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid " §4{0} §b{1}"
-msgstr "§a{0} §c{1}"
+msgstr " §4{0} §b{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -213,7 +213,7 @@ msgstr ""
 "세요"
 
 #, fuzzy, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
+msgid "§7Complete {0} more {1} §7challenges"
 msgstr "{0}개의  {1} challenges"
 
 #, java-format
@@ -222,10 +222,6 @@ msgstr "§7를 완료하여 {0} 랭크를"
 
 msgid "to unlock this rank"
 msgstr "잠금해제 하세요"
-
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "{0}개의  {1} challenges"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -809,9 +805,10 @@ msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
-msgstr "§c생태계의 이름을 잘못적으셨습니다."
+msgstr ""
+"§c당신은 생태계 이름을 잘못 적었습니다. 반드시 {0} 들중 하나여야 합니다. "
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -1423,15 +1420,15 @@ msgstr "골렘"
 
 #, java-format
 msgid "§c{0}"
-msgstr ""
+msgstr "§c{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
-msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr "§7{0}: §a{1}§7 (max. {2})"
 
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
-msgstr ""
+msgstr "schematic {0}를 적용 할 수 없습니다, 서버어드민에게 연락하세요"
 
 msgid "§aCongratulations! §eYour island has appeared."
 msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
@@ -1931,7 +1928,9 @@ msgid "§aClick to create!"
 msgstr "§e§l여기를 눌러서 활성화하세요."
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
 
 msgid "§a§lJoin an Island"
@@ -2198,26 +2197,18 @@ msgstr ""
 msgid "Island Restart Menu"
 msgstr "섬 생성 매뉴"
 
-#, fuzzy
 msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4그 커맨드의 권한이 없습니다!"
+msgstr "§4당신은 해당 island-schematic에 접근할 권한이 없습니다!!"
 
 #, fuzzy
 msgid "§a§lReturn to the main menu"
 msgstr "§a§l집으로 귀환"
 
-#, fuzzy, java-format
-msgid "§cClick within §9{0}§c to restart!"
-msgstr "§e§l여기를 눌러서 활성화하세요."
-
-#, fuzzy
-msgid "§aClick to restart!"
-msgstr "§e§l여기를 눌러서 활성화하세요."
-
 #, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
+msgid "§cClick within §9{0}§c to restart!"
+msgstr ""
+
+msgid "§aClick to restart!"
 msgstr ""
 
 msgid "Caps On"
@@ -2277,11 +2268,13 @@ msgstr "§a당신의 skyblock집이 당신의 현제 지점에 지정되었습�
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"
 
-#, java-format
+#, fuzzy, java-format
 msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
+"§7당신의 섬 생태계를 §9{0}§7로 바꾸느라 pixes가 매우 바쁩니다, 조금만 기다려"
+"주세요"
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."
@@ -2294,9 +2287,9 @@ msgstr ""
 msgid "§9Creating an island at your location"
 msgstr "§4당신의 위치에 유효한 섬이 없습니다"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§e당신의 위치에서 어떠한 섬도 발견하지 못했습니다!"
+msgstr ""
 
 msgid "North"
 msgstr ""
@@ -2304,13 +2297,13 @@ msgstr ""
 msgid "North-East"
 msgstr ""
 
-msgid "Eeast"
+msgid "East"
 msgstr ""
 
 msgid "South-East"
 msgstr ""
 
-msgid "Sout"
+msgid "South"
 msgstr ""
 
 msgid "South-West"
@@ -2337,6 +2330,13 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, fuzzy
+#~ msgid "§7Complete {0} more {1}§7 challenges"
+#~ msgstr "{0}개의  {1} challenges"
+
+#~ msgid "§9Clearing an area for you..."
+#~ msgstr "§9당신을 위해 해당 장소를 치우는 중입니다..."
 
 #~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 #~ msgstr ""

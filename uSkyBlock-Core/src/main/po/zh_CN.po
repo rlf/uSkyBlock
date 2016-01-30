@@ -212,7 +212,7 @@ msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4错误的挑战名!输入/c help 获取更多信息"
 
 #, fuzzy, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
+msgid "§7Complete {0} more {1} §7challenges"
 msgstr "§f完成大部分挑战在"
 
 #, java-format
@@ -222,10 +222,6 @@ msgstr ""
 #, fuzzy
 msgid "to unlock this rank"
 msgstr "§f这个难度中，才能解锁下一个等级。"
-
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "§f完成大部分挑战在"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -1996,7 +1992,9 @@ msgid "§aClick to create!"
 msgstr "§e§l点击图标更改传送点状态."
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
 
 msgid "§a§lJoin an Island"
@@ -2285,12 +2283,6 @@ msgstr "§e§l点击图标更改传送点状态."
 msgid "§aClick to restart!"
 msgstr "§e§l点击图标更改传送点状态."
 
-#, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
-msgstr ""
-
 msgid "Caps On"
 msgstr ""
 
@@ -2375,13 +2367,13 @@ msgstr ""
 msgid "North-East"
 msgstr ""
 
-msgid "Eeast"
+msgid "East"
 msgstr ""
 
 msgid "South-East"
 msgstr ""
 
-msgid "Sout"
+msgid "South"
 msgstr ""
 
 msgid "South-West"
@@ -2408,6 +2400,10 @@ msgstr "秒"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, fuzzy
+#~ msgid "§7Complete {0} more {1}§7 challenges"
+#~ msgstr "§f完成大部分挑战在"
 
 #, fuzzy
 #~ msgid "{0} ({1}/{2})"

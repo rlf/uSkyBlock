@@ -100,6 +100,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.Settings.island_height;
@@ -908,7 +909,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (!biomeExists(bName)) throw new UnsupportedOperationException();
 
         callback.setState(false);
-        if (bName.equalsIgnoreCase("ocean") || VaultHandler.checkPerk(player.getName(), "usb.biome." + bName, skyBlockWorld)) {
+        if (bName.equalsIgnoreCase("ocean") || hasPermission(player, "usb.biome." + bName)) {
             PlayerInfo playerInfo = getPlayerInfo(player);
             final IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
             if (islandInfo.hasPerm(player.getName(), "canChangeBiome")) {
@@ -970,7 +971,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 return location;
             }
             Vector v = player.getLocation().getDirection().normalize();
-            location = location.add(v.multiply(Settings.island_distance*1.5));
+            location = LocationUtil.alignToDistance(location.add(v.multiply(Settings.island_distance)), Settings.island_distance);
             if (isAvailableLocation(location)) {
                 player.sendMessage(tr("\u00a79Creating an island \u00a77{0}\u00a79 of you", LocationUtil.getCardinalDirection(player.getLocation().getYaw())));
                 return location;
