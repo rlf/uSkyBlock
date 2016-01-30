@@ -15,6 +15,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
@@ -573,9 +574,7 @@ public class IslandInfo {
     }
 
     public Location getIslandLocation() {
-        World world = uSkyBlock.getInstance().getWorld();
-        String[] cords = name.split(",");
-        return new Location(world, Long.parseLong(cords[0], 10), Settings.island_height, Long.parseLong(cords[1], 10));
+        return IslandUtil.getIslandLocation(name);
     }
 
     @Override

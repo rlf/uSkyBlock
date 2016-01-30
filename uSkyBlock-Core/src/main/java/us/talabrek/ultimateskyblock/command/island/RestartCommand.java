@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class RestartCommand extends RequireIslandCommand {
     public RestartCommand(uSkyBlock plugin) {
-        super(plugin, "restart|reset", I18nUtil.tr("delete your island and start a new one."));
+        super(plugin, "restart|reset", "usb.island.restart", "?schematic", I18nUtil.tr("delete your island and start a new one."));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class RestartCommand extends RequireIslandCommand {
 
             if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
                 plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
-                return plugin.restartPlayerIsland(player, pi.getIslandLocation());
+                return plugin.restartPlayerIsland(player, pi.getIslandLocation(), args != null && args.length > 0 ? args[0] : Settings.island_schematicName);
             } else {
                 player.sendMessage(I18nUtil.tr("\u00a7eNOTE: Your entire island and all your belongings will be RESET!"));
                 return true;

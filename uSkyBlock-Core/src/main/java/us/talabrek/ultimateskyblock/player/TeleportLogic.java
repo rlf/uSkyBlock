@@ -35,10 +35,13 @@ public class TeleportLogic {
 
     public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
         log.log(Level.FINER, "safeTeleport " + player + " to " + homeSweetHome + (force ? " with force" : ""));
+        final Location targetLoc = homeSweetHome.clone();
+        targetLoc.setX(targetLoc.getBlockX() + 0.5d);
+        targetLoc.setZ(targetLoc.getBlockZ() + 0.5d);
         if (player.hasPermission("usb.mod.bypassteleport") || (teleportDelay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
-            LocationUtil.loadChunkAt(homeSweetHome);
-            player.teleport(homeSweetHome);
+            LocationUtil.loadChunkAt(targetLoc);
+            player.teleport(targetLoc);
             player.setVelocity(new org.bukkit.util.Vector());
         } else {
             player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", teleportDelay));
@@ -47,8 +50,8 @@ public class TeleportLogic {
                 public void run() {
                     pendingTPs.remove(player.getUniqueId());
                     player.setVelocity(new Vector());
-                    LocationUtil.loadChunkAt(homeSweetHome);
-                    player.teleport(homeSweetHome);
+                    LocationUtil.loadChunkAt(targetLoc);
+                    player.teleport(targetLoc);
                     player.setVelocity(new Vector());
                 }
             }, TimeUtil.secondsAsTicks(teleportDelay));

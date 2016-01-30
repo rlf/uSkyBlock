@@ -679,55 +679,42 @@ public class SkyBlockMenu {
             if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 3) {
                 p.closeInventory();
                 p.performCommand("island biome jungle");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 1) {
                 p.closeInventory();
                 p.performCommand("island biome forest");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.SAND) {
                 p.closeInventory();
                 p.performCommand("island biome desert");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.SNOW) {
                 p.closeInventory();
                 p.performCommand("island biome taiga");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.EYE_OF_ENDER) {
                 p.closeInventory();
                 p.performCommand("island biome sky");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.WATER_LILY) {
                 p.closeInventory();
                 p.performCommand("island biome swampland");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.NETHER_BRICK) {
                 p.closeInventory();
                 p.performCommand("island biome hell");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.RED_MUSHROOM) {
                 p.closeInventory();
                 p.performCommand("island biome mushroom");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.LONG_GRASS) {
                 p.closeInventory();
                 p.performCommand("island biome plains");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.EMERALD_ORE) {
                 p.closeInventory();
                 p.performCommand("island biome extreme_hills");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.RED_ROSE && currentItem.getDurability() == 5) {
                 p.closeInventory();
                 p.performCommand("island biome flower_forest");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.RAW_FISH) {
                 p.closeInventory();
                 p.performCommand("island biome ocean");
-                p.openInventory(displayIslandGUI(p));
             } else if (currentItem.getType() == Material.PRISMARINE_SHARD) {
                 p.closeInventory();
                 p.performCommand("island biome deep_ocean");
-                p.openInventory(displayIslandGUI(p));
             } else {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));

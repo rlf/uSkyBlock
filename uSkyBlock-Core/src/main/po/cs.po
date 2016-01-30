@@ -764,6 +764,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr ""
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr ""
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr ""
+
+#, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr ""
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr ""
@@ -777,15 +787,6 @@ msgid "{0} changed the island biome to {1}"
 msgstr ""
 
 msgid "§cYou do not have permission to change your biome to that type."
-msgstr ""
-
-msgid "§cYou have misspelled the biome name."
-msgstr ""
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr ""
-
-msgid "§4You do not have permission to change the biome of this island!"
 msgstr ""
 
 msgid "create an island"
@@ -1353,6 +1354,19 @@ msgstr ""
 
 #, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
+#, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr ""
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr ""
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 #, java-format
@@ -1972,6 +1986,10 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4Nemáte práva pro použití tohoto příkazu!"
+
 msgid "§4Player is already assigned to this island!"
 msgstr ""
 
@@ -1998,22 +2016,19 @@ msgstr "§aVáš SkyBlock domov byl nastaven na vaši aktuální pozici."
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Vaše aktuální lokace není vhodná pro založení SkyBlock domova."
 
+#, java-format
+msgid ""
+"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr ""
-
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr ""
-
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr ""
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "§9Clearing an area for you..."
 msgstr ""
 
 msgid "d"

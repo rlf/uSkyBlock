@@ -12,7 +12,7 @@ public class TopCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public TopCommand(uSkyBlock plugin) {
-        super("top", "usb.island.topten", "?page", tr("display the top10 of islands"));
+        super("top", "usb.island.top", "?page", tr("display the top10 of islands"));
         this.plugin = plugin;
     }
 

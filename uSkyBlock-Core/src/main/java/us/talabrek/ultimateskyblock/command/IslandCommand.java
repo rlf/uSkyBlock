@@ -9,6 +9,7 @@ import us.talabrek.ultimateskyblock.command.completion.AllPlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.BiomeTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.MemberTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.OnlinePlayerTabCompleter;
+import us.talabrek.ultimateskyblock.command.completion.SchematicTabCompleter;
 import us.talabrek.ultimateskyblock.command.island.*;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -34,6 +35,7 @@ public class IslandCommand extends AbstractCommandExecutor {
         addTab("oplayer", onlinePlayerTabCompleter);
         addTab("biome", new BiomeTabCompleter());
         addTab("member", new MemberTabCompleter(plugin));
+        addTab("schematic", new SchematicTabCompleter(plugin));
         add(new RestartCommand(plugin));
         add(new LogCommand(plugin, menu));
         add(new CreateCommand(plugin));

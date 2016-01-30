@@ -191,7 +191,7 @@ public enum FileUtil {;
 
     public static void copy(InputStream stream, File file) throws IOException {
         if (stream == null || file == null) {
-            return;
+            throw new IOException("Invalid resource for " + file);
         }
         Files.copy(stream, Paths.get(file.toURI()), StandardCopyOption.REPLACE_EXISTING);
     }

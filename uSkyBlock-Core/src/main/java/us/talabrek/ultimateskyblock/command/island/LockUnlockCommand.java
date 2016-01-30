@@ -13,13 +13,13 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LockUnlockCommand extends RequireIslandCommand {
     public LockUnlockCommand(uSkyBlock plugin) {
-        super(plugin, "lock|unlock", "usb.lock", tr("lock your island to non-party members."));
+        super(plugin, "lock|unlock", "usb.island.lock", tr("lock your island to non-party members."));
     }
 
     @Override
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
         if (alias.equalsIgnoreCase("lock") && pi.getHasIsland()) {
-            if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
+            if (Settings.island_allowIslandLock) {
                 if (island.hasPerm(player, "canToggleLock")) {
                     island.lock(player);
                 } else {
@@ -31,7 +31,7 @@ public class LockUnlockCommand extends RequireIslandCommand {
             return true;
         }
         if (alias.equalsIgnoreCase("unlock") && pi.getHasIsland()) {
-            if (Settings.island_allowIslandLock && VaultHandler.checkPerk(player.getName(), "usb.lock", player.getWorld())) {
+            if (Settings.island_allowIslandLock) {
                 if (island.hasPerm(player, "canToggleLock")) {
                     island.unlock(player);
                 } else {

@@ -14,7 +14,7 @@ public class LogCommand extends RequireIslandCommand {
     private final SkyBlockMenu menu;
 
     public LogCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super(plugin, "log|l", "usb.island.create", tr("display log"));
+        super(plugin, "log|l", "usb.island.log", tr("display log"));
         this.menu = menu;
     }
 

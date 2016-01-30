@@ -797,6 +797,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§c你没有权限更改你当前岛屿的生物群系."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4你没有权限去变更岛屿的生物群系!"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§e你必须在你的岛屿上才能更改生物群系!"
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§a你输入的生物群系名称有误，岛屿生物群系变更为 海洋生物群系(OCEAN)"
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§e你需要等待{0,number,#}分钟才能再次更改生物群系."
@@ -811,16 +821,6 @@ msgstr "{0}将岛屿的生物群系更改为{1}"
 
 #, fuzzy
 msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§4你没有权限去变更岛屿的生物群系!"
-
-#, fuzzy
-msgid "§cYou have misspelled the biome name."
-msgstr "§a你输入的生物群系名称有误，岛屿生物群系变更为 海洋生物群系(OCEAN)"
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§e你必须在你的岛屿上才能更改生物群系!"
-
-msgid "§4You do not have permission to change the biome of this island!"
 msgstr "§4你没有权限去变更岛屿的生物群系!"
 
 #, fuzzy
@@ -1432,6 +1432,19 @@ msgstr ""
 
 #, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
+msgstr ""
+
+#, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr ""
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr ""
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 #, java-format
@@ -2247,6 +2260,10 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4你没有权限使用这个指令!"
+
 msgid "§4Player is already assigned to this island!"
 msgstr "§4玩家早就已经分配给这个岛屿了!"
 
@@ -2272,22 +2289,19 @@ msgstr "§a你岛屿家的位置已经设置在你当前位置."
 msgid "§4Your current location is not a safe home-location."
 msgstr ""
 
+#, java-format
+msgid ""
+"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "无法为你创建岛屿.请联系管理员."
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr ""
-
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr ""
-
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr ""
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "§9Clearing an area for you..."
 msgstr ""
 
 msgid "d"

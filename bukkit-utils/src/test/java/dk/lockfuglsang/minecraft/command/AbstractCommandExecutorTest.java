@@ -43,7 +43,9 @@ public class AbstractCommandExecutorTest {
     public void testNoPermissions() {
         CommandSender sender = createCommandSender();
         mycmd.onCommand(sender, null, "mycmd", new String[]{"mycmd", "h", "your", "momma"});
-        assertThat(getMessages(), is("§eYou do not have access\n§7Usage: §3mycmd§a [command|help]§7 - §emain myplugin command\n  §3hello§7 | h§a§7 - §esay hello to the player"));
+        assertThat(getMessages(), is("§eInvalid command: mycmd\n" +
+                "§7Usage: §3mycmd§a [command|help]§7 - §emain myplugin command\n" +
+                "  §3hello§7 | h§a§7 - §esay hello to the player"));
     }
 
     private String getMessages() {

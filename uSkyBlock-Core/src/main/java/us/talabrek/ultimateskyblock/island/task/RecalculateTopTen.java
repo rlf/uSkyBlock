@@ -1,8 +1,9 @@
 package us.talabrek.ultimateskyblock.island.task;
 
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.async.Callback;
-import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -11,33 +12,29 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by R4zorax on 28/09/2015.
  */
-public class RecalculateTopTen extends IncrementalRunnable {
+public class RecalculateTopTen extends BukkitRunnable {
     private final List<String> locations;
-    private final Runnable onCompletion;
+    private final uSkyBlock plugin;
 
-    public RecalculateTopTen(uSkyBlock plugin, Set<String> locations, Runnable onCompletion) {
-        super(plugin, onCompletion);
+    public RecalculateTopTen(uSkyBlock plugin, Set<String> locations) {
+        this.plugin = plugin;
         this.locations = new ArrayList<>(locations);
-        this.onCompletion = onCompletion;
     }
 
     @Override
-    protected boolean execute() {
-        while (!locations.isEmpty()) {
-            getPlugin().calculateScoreAsync(null, locations.remove(0), new Callback<IslandScore>() {
+    public void run() {
+        if (!locations.isEmpty()) {
+            String islandName = locations.remove(0);
+            plugin.calculateScoreAsync(null, islandName, new Callback<IslandScore>() {
                 @Override
                 public void run() {
-                    if (locations.isEmpty()) {
-                        getPlugin().fireChangeEvent(new uSkyBlockEvent(null, getPlugin().getAPI(), uSkyBlockEvent.Cause.RANK_UPDATED));
-                    }
+                    // We use the deprecated on purpose (the other would fail).
+                    Bukkit.getScheduler().runTaskAsynchronously(plugin, RecalculateTopTen.this);
                 }
             });
-            if (!tick()) {
-                return false;
-            }
+        } else {
+            plugin.fireChangeEvent(new uSkyBlockEvent(null, plugin.getAPI(), uSkyBlockEvent.Cause.RANK_UPDATED));
         }
-        return true;
     }
 }

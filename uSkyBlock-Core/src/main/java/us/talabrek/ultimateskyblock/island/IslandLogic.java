@@ -256,7 +256,7 @@ public class IslandLogic {
 
     public void showTopTen(final CommandSender sender, final int page) {
         long t = System.currentTimeMillis();
-        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || (sender.hasPermission("usb.admin.topten") || sender.isOp() || sender instanceof ConsoleCommandSender)) {
+        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || (sender.hasPermission("usb.admin.topten") || sender.isOp())) {
             lastGenerate = t;
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override

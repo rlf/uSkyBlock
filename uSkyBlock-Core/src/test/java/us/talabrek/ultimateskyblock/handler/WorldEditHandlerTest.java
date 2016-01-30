@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import org.junit.Test;
@@ -169,6 +170,6 @@ public class WorldEditHandlerTest {
                 new CuboidRegion(new Vector(16,0,32), new Vector(31,15,32))
         ));
         verifySame(borderRegions, expected);
+        Set<Vector2D> innerChunks = WorldEditHandler.getInnerChunks(region);
     }
-
 }

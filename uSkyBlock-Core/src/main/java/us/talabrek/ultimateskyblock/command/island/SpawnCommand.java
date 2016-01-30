@@ -13,7 +13,7 @@ public class SpawnCommand extends RequirePlayerCommand {
     private final uSkyBlock plugin;
 
     public SpawnCommand(uSkyBlock plugin) {
-        super("spawn", null, I18nUtil.tr("teleports you to the skyblock spawn"));
+        super("spawn", "usb.island.spawn", I18nUtil.tr("teleports you to the skyblock spawn"));
         this.plugin = plugin;
     }
 
