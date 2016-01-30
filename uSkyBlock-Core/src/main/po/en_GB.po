@@ -35,9 +35,9 @@ msgstr "§eThis challenge requires the following:"
 msgid "§7and more..."
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§f{0} §7{1}"
+msgstr ""
 
 #, java-format
 msgid "§7{0}"
@@ -213,9 +213,9 @@ msgstr "§a* §7To complete this challenge, use §a/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4* §7Invalid challenge name! Use §a/c §7help for more information"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Complete {0} more {1} §7challenges"
-msgstr "Complete {0} more {1} challenges"
+msgstr ""
 
 #, java-format
 msgid "§7Complete {0}"
@@ -252,17 +252,16 @@ msgstr "resets all challenges for the player"
 msgid "§e{0} has had all challenges reset."
 msgstr "§a* §6{0} §7has had all challenges reset."
 
-#, fuzzy
 msgid "complete all challenges in the rank"
-msgstr "§fComplete most challenges in"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr "§4* §7Challenge has already been completed"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§a* challenge§7: §a{0} §7has been completed for §6{1}"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -272,9 +271,9 @@ msgstr "§4* §7No challenge named §a{0} §7was found!"
 msgid "§4No player named {0} was found!"
 msgstr "§4* §7No player named §6{0} §7was found!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§4* §7No player named §6{0} §7was found!"
+msgstr ""
 
 msgid "manage islands"
 msgstr "manage islands"
@@ -1597,9 +1596,8 @@ msgstr "Permissions"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-#, fuzzy
 msgid "§9Player Permissions"
-msgstr "§9Player Permissions"
+msgstr ""
 
 msgid ""
 "§eClick here to return to\n"
@@ -1941,9 +1939,8 @@ msgstr ""
 "building your island empire!\n"
 "§e§lClick here to start!"
 
-#, fuzzy
 msgid "§aClick to create!"
-msgstr "§e§lClick here to activate."
+msgstr ""
 
 #, java-format
 msgid ""
@@ -2204,33 +2201,29 @@ msgstr ""
 "to your island.\n"
 "§e§lClick here to change."
 
-#, fuzzy
 msgid "§c§lRestart Island"
-msgstr "§a§lStart an Island"
+msgstr ""
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 
-#, fuzzy
 msgid "Island Restart Menu"
-msgstr "Island Create Menu"
+msgstr ""
 
 msgid "§eYou do not have access to that island-schematic!"
 msgstr "§4* §7You do not have access to that island-schematic!"
 
-#, fuzzy
 msgid "§a§lReturn to the main menu"
-msgstr "§a§lReturn Home"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cClick within §9{0}§c to restart!"
-msgstr "§e§lClick here to activate."
+msgstr ""
 
-#, fuzzy
 msgid "§aClick to restart!"
-msgstr "§e§lClick here to activate."
+msgstr ""
 
 msgid "Caps On"
 msgstr "Caps On"
@@ -2289,13 +2282,11 @@ msgstr "§9* §7Your skyblock home has been set to your current location."
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4* §7Your current location is not a safe home-location."
 
-#, fuzzy, java-format
+#, java-format
 msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
-"§a* §7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "§4* §7Could not create your Island. Please contact a server moderator."
@@ -2304,13 +2295,12 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§9* §7Getting your island ready, please be patient, it can take a while."
 
-#, fuzzy
 msgid "§9Creating an island at your location"
-msgstr "§4* §7No valid island at your location"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§4* §7No island found at your location!"
+msgstr ""
 
 msgid "North"
 msgstr ""
@@ -2351,71 +2341,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#, fuzzy
-#~ msgid "§7Complete {0} more {1}§7 challenges"
-#~ msgstr "Complete {0} more {1} challenges"
-
-#~ msgid "§9Clearing an area for you..."
-#~ msgstr "§9* §7Clearing an area for you..."
-
-#~ msgid "§cYou have misspelled the biome name."
-#~ msgstr "§cYou have misspelled the biome name."
-
-#~ msgid "§4"
-#~ msgstr "§4"
-
-#~ msgid "§eYou can not use another islands portals! Shame on you - cheater!"
-#~ msgstr "§9* §7You can not use another islands portals!"
-
-#~ msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
-#~ msgstr "§9* §7Trading isn't allowed on other islands."
-
-#~ msgid "§4Top ten list is empty! (perhaps the generation failed?)"
-#~ msgstr "§4Top ten list is empty! (perhaps the generation failed?)"
-
-#~ msgid "Page {0,number,integer}"
-#~ msgstr "Page {0,number,integer}"
-
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
-
-#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-#~ msgstr ""
-#~ "§9* §7Yay! We found a vacancy closer to spawn. §9Clearing it for you..."
-
-#~ msgid "§7Usage: {0}"
-#~ msgstr "§7Usage: {0}"
-
-#~ msgid "§7Name: §b{0}\n"
-#~ msgstr "§7Name: §b{0}\n"
-
-#~ msgid "§7Version: §b{0}\n"
-#~ msgstr "§7Version: §b{0}\n"
-
-#~ msgid "§7Description: §b{0}\n"
-#~ msgstr "§7Description: §b{0}\n"
-
-#~ msgid "§7Language: §b{0} ({1})\n"
-#~ msgstr "§7Language: §b{0} ({1})\n"
-
-#~ msgid "§7------------------------------\n"
-#~ msgstr "§7------------------------------\n"
-
-#~ msgid "§7Server: §e{0} {1}\n"
-#~ msgstr "§7Server: §e{0} {1}\n"
-
-#~ msgid "§2ENABLED"
-#~ msgstr "§2ENABLED"
-
-#~ msgid "§4DISABLED"
-#~ msgstr "§4DISABLED"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#~ msgid "§7Name: §d{0} ({1})\n"
-#~ msgstr "§7Name: §d{0} ({1})\n"
-
-#~ msgid "§7Version: §d{0}\n"
-#~ msgstr "§7Version: §d{0}\n"

@@ -69,9 +69,9 @@ msgstr "§4Musíte být na svém ostrově, aby jste mohli toto udělat."
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4Úkol {0} nelze opakovat!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eTrying to complete challenge §a{0}"
-msgstr "§ePro splnění tohoto úkolu použijte §f/c c {0}"
+msgstr ""
 
 #, java-format
 msgid "§4{0}"
@@ -99,9 +99,9 @@ msgid ""
 "{0}"
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid " §4{0} §b{1}"
-msgstr "§4{0}"
+msgstr ""
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -111,9 +111,9 @@ msgstr ""
 msgid "§aYou have completed the {0} challenge!"
 msgstr "§aSplnili jste úkol {0}!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
-msgstr "{0} splnil úkol {1}!"
+msgstr ""
 
 #, java-format
 msgid "§eItem reward(s): §f{0}"
@@ -207,9 +207,9 @@ msgstr "§ePro splnění tohoto úkolu použijte §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Neplatný název úkolu! Použijte /c help pro více informací."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Complete {0} more {1} §7challenges"
-msgstr "Splňte {0} dalších úkolů z hodnosti {1},"
+msgstr ""
 
 #, java-format
 msgid "§7Complete {0}"
@@ -249,13 +249,13 @@ msgstr ""
 msgid "complete all challenges in the rank"
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr "§4Tento SkyBlock úkol již byl splněn"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§4Tento SkyBlock úkol již byl splněn"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -265,9 +265,9 @@ msgstr "§4SkyBlock úkol s názvem {0} nebyl nalezen!"
 msgid "§4No player named {0} was found!"
 msgstr "§4Hráč s jménem {0} nebyl nalezen!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§4Hráč s jménem {0} nebyl nalezen!"
+msgstr ""
 
 msgid "manage islands"
 msgstr ""
@@ -296,9 +296,9 @@ msgstr ""
 msgid "§b{0}§d has joined your island group."
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No player named {0} found!"
-msgstr "§4Hráč s jménem {0} nebyl nalezen!"
+msgstr ""
 
 msgid ""
 "§4No valid island provided, either stand within one, or provide an island "
@@ -510,9 +510,8 @@ msgstr ""
 msgid "§9Job Statistics"
 msgstr ""
 
-#, fuzzy
 msgid "§7----------------"
-msgstr "§7------------------------------\n"
+msgstr ""
 
 msgid "#"
 msgstr ""
@@ -1188,9 +1187,8 @@ msgstr ""
 msgid "talk to your island party"
 msgstr ""
 
-#, fuzzy
 msgid "§eYou can not use another islands portals!"
-msgstr "Nemůžete použít tento biom."
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr ""
@@ -1198,9 +1196,9 @@ msgstr ""
 msgid "§eVisitors can't drop items!"
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "Owner: {0}"
-msgstr "Hodnost: {0}"
+msgstr ""
 
 msgid "You cannot pick up other players' loot when you are a visitor!"
 msgstr ""
@@ -1222,9 +1220,8 @@ msgstr ""
 msgid "§4It's a bad idea to replace your lava!"
 msgstr ""
 
-#, fuzzy
 msgid "§eYou cannot hurt island-members."
-msgstr "Nemůžete použít tento biom."
+msgstr ""
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr ""
@@ -1388,16 +1385,15 @@ msgstr ""
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Page {0}"
-msgstr "Hodnost: {0}"
+msgstr ""
 
 msgid "§c-"
 msgstr ""
 
-#, fuzzy
 msgid "§a+"
-msgstr "§a"
+msgstr ""
 
 msgid "§c-1000"
 msgstr ""
@@ -1438,13 +1434,11 @@ msgstr ""
 msgid "§cError! §9Unable to save config file!"
 msgstr ""
 
-#, fuzzy
 msgid "§3First Page"
-msgstr "Hodnost: {0}"
+msgstr ""
 
-#, fuzzy
 msgid "§3Last Page"
-msgstr "Hodnost: {0}"
+msgstr ""
 
 msgid "§cSave & Reload config"
 msgstr ""
@@ -1520,9 +1514,8 @@ msgstr ""
 msgid "{0} <{1}>"
 msgstr ""
 
-#, fuzzy
 msgid "§9Player Permissions"
-msgstr "§hPráva hráče"
+msgstr ""
 
 msgid ""
 "§eClick here to return to\n"
@@ -1730,9 +1723,8 @@ msgid ""
 "mobs will spawn."
 msgstr ""
 
-#, fuzzy
 msgid "Deep Ocean"
-msgstr "Oceán"
+msgstr ""
 
 msgid ""
 "The deep-ocean biome is an advanced\n"
@@ -1761,9 +1753,8 @@ msgstr ""
 msgid "§7First Page"
 msgstr ""
 
-#, fuzzy
 msgid "§7Last Page"
-msgstr "Hodnost: {0}"
+msgstr ""
 
 msgid "Island Create Menu"
 msgstr "Ostrovní menu - Začátek"
@@ -1879,9 +1870,9 @@ msgstr ""
 msgid "Change Island Biome"
 msgstr "Změnit ostrovní biom"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eCurrent Biome: §b{0}"
-msgstr "§6Získáte Wobounů: §a{0}"
+msgstr ""
 
 msgid ""
 "The island biome affects things\n"
@@ -1979,26 +1970,22 @@ msgid ""
 "§e§lClick here to change."
 msgstr ""
 
-#, fuzzy
 msgid "§c§lRestart Island"
-msgstr "§a§lVytvořit ostrov"
+msgstr ""
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 
-#, fuzzy
 msgid "Island Restart Menu"
-msgstr "Ostrovní menu - Začátek"
+msgstr ""
 
-#, fuzzy
 msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4Nemáte práva pro použití tohoto příkazu!"
+msgstr ""
 
-#, fuzzy
 msgid "§a§lReturn to the main menu"
-msgstr "§a§lZpět domů"
+msgstr ""
 
 #, java-format
 msgid "§cClick within §9{0}§c to restart!"
@@ -2013,9 +2000,8 @@ msgstr ""
 msgid "§9Text Editor"
 msgstr ""
 
-#, fuzzy
 msgid "§eSending you to spawn."
-msgstr "§aTeleportuji vás na váš ostrov."
+msgstr ""
 
 msgid "§eThe island has been §cLOCKED§e."
 msgstr ""
@@ -2123,89 +2109,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
-
-#, fuzzy
-#~ msgid "§7Complete {0} more {1}§7 challenges"
-#~ msgstr "Splňte {0} dalších úkolů z hodnosti {1},"
-
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
-
-#, fuzzy
-#~ msgid "z7Page {0}"
-#~ msgstr "Hodnost: {0}"
-
-#, fuzzy
-#~ msgid "§eYou cannot access containers on this island."
-#~ msgstr "§4Nemáte práva pro použití tohoto příkazu!"
-
-#~ msgid "§7Name: §b{0}\n"
-#~ msgstr "§7Název: §b{0}\n"
-
-#~ msgid "§7Version: §b{0}\n"
-#~ msgstr "§7Verze: §b{0}\n"
-
-#~ msgid "§7Description: §b{0}\n"
-#~ msgstr "§7Popis: §b{0}\n"
-
-#~ msgid "§7Language: §b{0} ({1})\n"
-#~ msgstr "§7Jazyk: §b{0} ({1})\n"
-
-#~ msgid "§7------------------------------\n"
-#~ msgstr "§7------------------------------\n"
-
-#~ msgid "§7Server: §e{0} {1}\n"
-#~ msgstr "§7Server: §e{0} {1}\n"
-
-#~ msgid "§2ENABLED"
-#~ msgstr "§2ENABLED"
-
-#~ msgid "§4DISABLED"
-#~ msgstr "§4DISABLED"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#, fuzzy
-#~ msgid "§7Name: §d{0} ({1}§d)\n"
-#~ msgstr "§7Název: §d{0} ({1})\n"
-
-#~ msgid "§7Version: §d{0}\n"
-#~ msgstr "§7Verze: §d{0}\n"
-
-#, fuzzy
-#~ msgid "Command"
-#~ msgstr "Může {0}"
-
-#, fuzzy
-#~ msgid "Description"
-#~ msgstr "§7Popis: §b{0}\n"
-
-#, fuzzy
-#~ msgid "Permission"
-#~ msgstr "§7Verze: §b{0}\n"
-
-#, fuzzy
-#~ msgid "  alias: {0}"
-#~ msgstr "Biom: {0}"
-
-#, fuzzy
-#~ msgid "   perm: {0}"
-#~ msgstr "Hodnost: {0}"
-
-#, fuzzy
-#~ msgid "-------------"
-#~ msgstr "§7------------------------------\n"
-
-#, fuzzy
-#~ msgid "ms"
-#~ msgstr "m"
-
-#~ msgid "§4You don't have enough of the required item(s)!"
-#~ msgstr "§4Nemáte všechny požadované položky pro splnění úkolu!"
-
-#~ msgid "§d** You are leaving §b{0}'s §disland."
-#~ msgstr "§eVycházíte z chráněného ostrovního území hráče {0}"
-
-#~ msgid "§d** You are entering §b{0}'s §disland."
-#~ msgstr "§eVcházíte do chráněného ostrovního území hráče §6{0}"

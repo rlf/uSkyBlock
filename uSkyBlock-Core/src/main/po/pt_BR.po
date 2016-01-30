@@ -34,9 +34,9 @@ msgstr "§eEsse desafio requer o seguinte:"
 msgid "§7and more..."
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§a{0} §c{1}"
+msgstr ""
 
 #, java-format
 msgid "§7{0}"
@@ -100,9 +100,9 @@ msgstr ""
 "§eMantenha os seguintes items por perto:\n"
 "{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid " §4{0} §b{1}"
-msgstr "§a{0} §c{1}"
+msgstr ""
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -210,9 +210,9 @@ msgstr "§ePara completar esse desafio, use §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Nome de desafio inválido! Use /c help para mais informações"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Complete {0} more {1} §7challenges"
-msgstr "Complete mais {0} desafios na categoria {1}"
+msgstr ""
 
 #, java-format
 msgid "§7Complete {0}"
@@ -249,17 +249,16 @@ msgstr "resetar todos os desafios do jogador"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0}  teve todos os desafios resetados."
 
-#, fuzzy
 msgid "complete all challenges in the rank"
-msgstr "§fComplete mais desafios nessa"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr "§4Desafio já foi concluído"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§edesafio: {0} foi completado por {1}"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -269,9 +268,9 @@ msgstr "§4Desafio {0} não foi encontrado!"
 msgid "§4No player named {0} was found!"
 msgstr "§4Não foi encontrado nenhum jogador com o nome {0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§4Não foi encontrado nenhum jogador com o nome {0}"
+msgstr ""
 
 msgid "manage islands"
 msgstr "controle de ilhas"
@@ -402,9 +401,8 @@ msgstr "§4A ilha de {0} em {1} já foi protegida"
 msgid "open GUI for config"
 msgstr "abrir menu de configuração"
 
-#, fuzzy
 msgid "§eInvalid configuration name"
-msgstr "recarregar configuração do arquivo."
+msgstr ""
 
 msgid "Controls player-cooldowns"
 msgstr "Controlar player-cooldowns"
@@ -676,17 +674,15 @@ msgstr "§eCarregando chunks em {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eRemovendo chunks em {0}"
 
-#, fuzzy
 msgid "update the WG regions"
-msgstr "carregar region chunks"
+msgstr ""
 
 #, java-format
 msgid "§eIsland world-guard regions updated for {0}"
 msgstr ""
 
-#, fuzzy
 msgid "§eNo island found at your location!"
-msgstr "§4Não tem uma ilha válida na sua localização"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -768,13 +764,13 @@ msgstr "§4Você não pode banir membros. Expulse-os primeiro!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Você não tem permissão para expulsar/banir jogadores do grupo."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to ban you from their island!"
-msgstr "§4{0} te expulsou da ilha dele!"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being banned."
-msgstr "§4{0} foi removido da ilha."
+msgstr ""
 
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
@@ -805,9 +801,9 @@ msgstr "§4Você não tem permissão para alterar o bioma da ilha!"
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§eVocê deve estar na sua ilha para alterar o bioma!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
-msgstr "§cNome de bioma não encontrado."
+msgstr ""
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -936,17 +932,17 @@ msgstr "§4{0} te expulsou da ilha dele!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} foi removido da ilha."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to kick you from their island!"
-msgstr "§4{0} te expulsou da ilha dele!"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being kicked."
-msgstr "§4{0} foi removido da ilha."
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} has kicked you from their island!"
-msgstr "§4{0} te expulsou da ilha dele!"
+msgstr ""
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1233,13 +1229,11 @@ msgstr "falar com jogadores na sua ilha"
 msgid "talk to your island party"
 msgstr "falar com jogadores no seu grupo"
 
-#, fuzzy
 msgid "§eYou can not use another islands portals!"
-msgstr "§eVocê não pode usar outros portais na ilha!"
+msgstr ""
 
-#, fuzzy
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
-msgstr "§eTrocas não são permitidas em outras ilhas."
+msgstr ""
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eVisitantes não podem dropar items!"
@@ -1262,9 +1256,8 @@ msgstr ""
 "§cSem acesso! §eVocê está tentando se teletransportar para o topo do "
 "§cNETHER§e, isso não é permitido."
 
-#, fuzzy
 msgid "§4You can only convert obsidian once every 10 seconds"
-msgstr "§cVocê pode reiniciar a ilha em {0} segundos."
+msgstr ""
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVocê recuperou sua lava."
@@ -1272,9 +1265,8 @@ msgstr "§eVocê recuperou sua lava."
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Essa é uma má ideia para substituir sua lava!"
 
-#, fuzzy
 msgid "§eYou cannot hurt island-members."
-msgstr "Você não pode usar esse bioma."
+msgstr ""
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4Esse jogador proibiu você de teletransportar até a ilha dele."
@@ -1389,9 +1381,9 @@ msgstr "§cEssa ilha está sendo deletada! Enviando você para o spawn."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "PAREDE DA FAMA (página {0} de {1}):"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Top ten list is empty! Only islands above level {0} is considered."
-msgstr "§4A lista Top dez está vazia! (perhaps the generation failed?)"
+msgstr ""
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1419,9 +1411,9 @@ msgstr ""
 msgid "§c{0}"
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
-msgstr "§f{0} §7{1} §9 por {2} §7{3}\n"
+msgstr ""
 
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
@@ -1440,9 +1432,9 @@ msgstr "Use §9/is h§r ou o §9/is§r menu para vir aqui."
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cWatchdog!§9 Não foi possível encontrar um báu em {0}.."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Page {0}"
-msgstr "§7Use: {0}"
+msgstr ""
 
 msgid "§c-"
 msgstr "§c-"
@@ -1489,13 +1481,11 @@ msgstr "§eConfiguração salva e recarregada."
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cErro! §9Erro ao salvar o arquivo!"
 
-#, fuzzy
 msgid "§3First Page"
-msgstr "§7Use: {0}"
+msgstr ""
 
-#, fuzzy
 msgid "§3Last Page"
-msgstr "§7Use: {0}"
+msgstr ""
 
 msgid "§cSave & Reload config"
 msgstr "§cSalva e recarrega a configuração"
@@ -1590,9 +1580,8 @@ msgstr "Permissões"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-#, fuzzy
 msgid "§9Player Permissions"
-msgstr "§hPermissões dos jogadores"
+msgstr ""
 
 msgid ""
 "§eClick here to return to\n"
@@ -1906,9 +1895,8 @@ msgstr ""
 msgid "§7First Page"
 msgstr ""
 
-#, fuzzy
 msgid "§7Last Page"
-msgstr "§7Use: {0}"
+msgstr ""
 
 msgid "Island Create Menu"
 msgstr "Menu de nova ilha"
@@ -1935,9 +1923,8 @@ msgstr ""
 "ajudar a construir a ilha!\n"
 "§e§lClique aqui para iniciar!"
 
-#, fuzzy
 msgid "§aClick to create!"
-msgstr "§e§lClique aqui para ativar."
+msgstr ""
 
 #, java-format
 msgid ""
@@ -2045,9 +2032,9 @@ msgstr ""
 msgid "Island Group"
 msgstr "Grupo"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eMembers: §2{0}/{1}"
-msgstr "§2Membros do grupo: §e{0}§7/§e{1}"
+msgstr ""
 
 msgid ""
 "View the members of your island\n"
@@ -2065,9 +2052,9 @@ msgstr ""
 msgid "Change Island Biome"
 msgstr "Alterar bioma"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eCurrent Biome: §b{0}"
-msgstr "§6Prêmio em dinheiro: §a{0}"
+msgstr ""
 
 msgid ""
 "The island biome affects things\n"
@@ -2198,34 +2185,29 @@ msgstr ""
 "a sua ilha.\n"
 "§e§lClique aqui para alterar."
 
-#, fuzzy
 msgid "§c§lRestart Island"
-msgstr "§a§lCriar uma ilha"
+msgstr ""
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 
-#, fuzzy
 msgid "Island Restart Menu"
-msgstr "Menu de nova ilha"
+msgstr ""
 
-#, fuzzy
 msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4Você não tem acesso a esse comando!"
+msgstr ""
 
-#, fuzzy
 msgid "§a§lReturn to the main menu"
-msgstr "§a§lIr até sua ilha"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cClick within §9{0}§c to restart!"
-msgstr "§e§lClique aqui para ativar."
+msgstr ""
 
-#, fuzzy
 msgid "§aClick to restart!"
-msgstr "§e§lClique aqui para ativar."
+msgstr ""
 
 msgid "Caps On"
 msgstr "Caps On"
@@ -2236,9 +2218,8 @@ msgstr "§9Editor de texto"
 msgid "§eSending you to spawn."
 msgstr "§eEnviando você para o spawn."
 
-#, fuzzy
 msgid "§eThe island has been §cLOCKED§e."
-msgstr "A ilha foi criada."
+msgstr ""
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
@@ -2297,13 +2278,12 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
 
-#, fuzzy
 msgid "§9Creating an island at your location"
-msgstr "§4Não tem uma ilha válida na sua localização"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§4Não tem uma ilha válida na sua localização"
+msgstr ""
 
 msgid "North"
 msgstr ""
@@ -2344,655 +2324,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#, fuzzy
-#~ msgid "§7Complete {0} more {1}§7 challenges"
-#~ msgstr "Complete mais {0} desafios na categoria {1}"
-
-#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-#~ msgstr ""
-#~ "§eYay! Encontramos um local mais perto para o spawn. §9Limpando ele para "
-#~ "você..."
-
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
-
-#~ msgid "Page {0,number,integer}"
-#~ msgstr "Página {0,number,integer}"
-
-#, fuzzy
-#~ msgid "z7Page {0}"
-#~ msgstr "§7Use: {0}"
-
-#, fuzzy
-#~ msgid "§eYou cannot access containers on this island."
-#~ msgstr "§4Você não tem permissão para convidar outro jogadores para a ilha!"
-
-#~ msgid "§4"
-#~ msgstr "§4"
-
-#~ msgid "§7Name: §b{0}\n"
-#~ msgstr "§7Nome: §b{0}\n"
-
-#~ msgid "§7Version: §b{0}\n"
-#~ msgstr "§7Versão: §b{0}\n"
-
-#~ msgid "§7Description: §b{0}\n"
-#~ msgstr "§7Descrição: §b{0}\n"
-
-#~ msgid "§7Language: §b{0} ({1})\n"
-#~ msgstr "§7Linguagem: §b{0} ({1})\n"
-
-#~ msgid "§7------------------------------\n"
-#~ msgstr "§7------------------------------\n"
-
-#~ msgid "§7Server: §e{0} {1}\n"
-#~ msgstr "§7Servidor: §e{0} {1}\n"
-
-#~ msgid "§2ENABLED"
-#~ msgstr "§2ATIVADO§d"
-
-#~ msgid "§4DISABLED"
-#~ msgstr "§4DESATIVADO"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#~ msgid "§7Name: §d{0} ({1}§d)\n"
-#~ msgstr "§7Nome: §d{0} ({1}§d)\n"
-
-#~ msgid "§7Version: §d{0}\n"
-#~ msgstr "§7Versão: §d{0}\n"
-
-#~ msgid "Command"
-#~ msgstr "Comando"
-
-#~ msgid "Description"
-#~ msgstr "Descrição"
-
-#~ msgid "Permission"
-#~ msgstr "Permissão"
-
-#~ msgid "  alias: {0}"
-#~ msgstr "  aliases: {0}"
-
-#~ msgid "   perm: {0}"
-#~ msgstr "  permissão: {0}"
-
-#~ msgid "-------------"
-#~ msgstr "-------------"
-
-#~ msgid "Usage: {0}"
-#~ msgstr "Use: {0}"
-
-#~ msgid "Permission: {0}"
-#~ msgstr "Permissão: {0}"
-
-#~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
-#~ msgstr "§eVocê recuperou a confiança na ilha de §a{0}."
-
-#~ msgid "§eYou have trusted §4{0}§e on your island."
-#~ msgstr "§eVocê confiou §4{0}§e na sua ilha."
-
-#~ msgid "§eConfiguration saved, use §9/usb reload§e to activate changes."
-#~ msgstr "§eConfiguração salva, use §9/usb reload§e para ativar as mudanças."
-
-#~ msgid "§d[{0}]§7 {1}"
-#~ msgstr "§d[{0}]§7 {1}"
-
-#~ msgid "ms"
-#~ msgstr "ms"
-
-#~ msgid "The player is not currently online"
-#~ msgstr "Esse jogador não está online"
-
-#~ msgid "§4You don't have enough of the required item(s)!"
-#~ msgstr "§4Você não tem os items necessários!"
-
-#~ msgid "controls the currently running async tasks"
-#~ msgstr "controlar as tarefas async ocorrendo agora"
-
-#~ msgid "lists currently running tasks"
-#~ msgstr "mostrar tarefas em andamento"
-
-#~ msgid "§cNo running tasks"
-#~ msgstr "§cNenhuma tarefa em andamento"
-
-#~ msgid "§e[%2d]§7: %s\n"
-#~ msgstr "§e[%2d]§7: %s\n"
-
-#~ msgid "cancels the task with the given number."
-#~ msgstr "cancelar a tarefa com o número dado."
-
-#~ msgid "§4Could not cancel "
-#~ msgstr "§4Não foi possível cancelar"
-
-#~ msgid "§4A valid number must be supplied as task-id."
-#~ msgstr "§4Um número válido precisa ser fornecido como task-id."
-
-#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-#~ msgstr "§4Nenhum tarefa detectada.§e Tente §b/usb async list§e primeiro."
-
-#~ msgid "§4A number between 1 and "
-#~ msgstr "§4Um número entre 1 e"
-
-#~ msgid ""
-#~ "§cSorry for the delay! §9Your island is now §e{1,number,##}%§9 done..."
-#~ msgstr ""
-#~ "§cDesculpe pelo delay! §9Sua ilha agora é §e{1,number,##}%§9 terminado..."
-
-#~ msgid "{0} <Permissions>"
-#~ msgstr "{0} <Permissões>"
-
-#~ msgid "Group Info"
-#~ msgstr "Informação do grupo"
-
-#~ msgid "save orphans"
-#~ msgstr "salvar orphans"
-
-#~ msgid "§eSaving the orphan list."
-#~ msgstr "§eSalvando a lista de orphan."
-
-#~ msgid "§eMarking all islands inactive for more than {0} days."
-#~ msgstr "§eMarcando todas as ilhas inativas por mais de {0} dias."
-
-#~ msgid "Player doesn't have an island or it's already protected!"
-#~ msgstr "Jogador não tem uma ilha ou já está protegida!"
-
-#~ msgid "§4All required items must be placed on your island, within "
-#~ msgstr ""
-#~ "§4Todos os items necessários deverão ser colocados na sua ilha, dentro"
-
-#~ msgid "§eInformation about "
-#~ msgstr "§eInformação sobre"
-
-#~ msgid "Challenge Menu "
-#~ msgstr "Menu de desafios"
-
-#~ msgid "§4Your island data is being loaded - try again later"
-#~ msgstr ""
-#~ "Informações da sua ilha estão sendo carregadas - tente novamente mais "
-#~ "tarde"
-
-#~ msgid "talk to your party"
-#~ msgstr "falar com o seu grupo"
-
-#~ msgid "§4Your island data is being loaded, please try again later."
-#~ msgstr ""
-#~ "§4As informações da sua ilha estão sendo carregadas, tente novamente "
-#~ "depois."
-
-#~ msgid ""
-#~ "§cIt seems you logged out in the sky world, however you are not a member "
-#~ "of an island. Teleporting you to spawn."
-#~ msgstr ""
-#~ "§cParece que você foi desconectado do mundo dos ceús, e não faz mais "
-#~ "parte de um grupo. Teleportando você até o spawn."
-
-#~ msgid "§cYou were removed from your island since the last time you played!"
-#~ msgstr "§cVocê foi expulso da sua ilha desde a última vez que você entrou!"
-
-#~ msgid "§a§lLeader"
-#~ msgstr "§a§lLíder"
-
-#~ msgid "§lIsland Log"
-#~ msgstr "§lHistórico da ilha"
-
-#, fuzzy
-#~ msgid "§9Island Biome"
-#~ msgstr "§gBioma da ilha"
-
-#~ msgid "§hIsland Biome"
-#~ msgstr "§gBioma da ilha"
-
-#, fuzzy
-#~ msgid "§9Challenge Menu ({0}/{1})"
-#~ msgstr "Menu de desafios ("
-
-#~ msgid "§9SB Island Group Members"
-#~ msgstr "§9SB Membros do grupo"
-
-#~ msgid "§aTeleporting you to "
-#~ msgstr "§aTeleportando você para"
-
-#~ msgid "§aChange Biome"
-#~ msgstr "§aAlterar Bioma"
-
-#~ msgid ""
-#~ "§fThis player §acan§f change the\n"
-#~ "§fisland's biome. Click here\n"
-#~ "§fto remove this permission."
-#~ msgstr ""
-#~ "§fEsse jogador §apode§f alterar o\n"
-#~ "§fbioma da ilha. Clique aqui\n"
-#~ "§fpara remover essa permissão."
-
-#~ msgid "§cChange Biome"
-#~ msgstr "§cAlterar Bioma"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f change the\n"
-#~ "§fisland's biome. Click here\n"
-#~ "§fto grant this permission."
-#~ msgstr ""
-#~ "§fEsse jogador §cnão pode§f alterar o\n"
-#~ "§fbioma da ilha. Clique aqui\n"
-#~ "§fpara dar essa permissão."
-
-#~ msgid "§aToggle Island Lock"
-#~ msgstr "§aAlterar Proteção da ilha"
-
-#~ msgid ""
-#~ "§fThis player §acan§f toggle the\n"
-#~ "§fisland's lock, which prevents\n"
-#~ "§fnon-group members from entering.\n"
-#~ "§fClick here to remove this permission."
-#~ msgstr ""
-#~ "§fEsse jogador §apode§f alterar a\n"
-#~ "§fproteção, o que impede jogadores\n"
-#~ "§ffora do seu grupo de entrar na ilha.\n"
-#~ "§fClique aqui para remover essa permissão."
-
-#~ msgid "§cToggle Island Lock"
-#~ msgstr "§cAlterar Proteção da ilha"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f toggle the\n"
-#~ "§fisland's lock, which prevents\n"
-#~ "§fnon-group members from entering.\n"
-#~ "§fClick here to add this permission"
-#~ msgstr ""
-#~ "§fEsse jogador §cnão pode§f alterar a\n"
-#~ "§fproteção, o que impede jogadores\n"
-#~ "§ffora do seu grupo de entrar na ilha.\n"
-#~ "§fClique aqui para adicionar essa permissão."
-
-#~ msgid "§aSet Island Warp"
-#~ msgstr "§aDefinir Ponto de teleporte"
-
-#~ msgid "§cSet Island Warp"
-#~ msgstr "§cDefinir Ponto de teleporte"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f set the\n"
-#~ "§fisland's warp, which allows\n"
-#~ "§fnon-group members to teleport\n"
-#~ "§fto the island. Click here to\n"
-#~ "§fadd this permission."
-#~ msgstr ""
-#~ "§fEsse jogador §cnão pode§f definir o\n"
-#~ "§fponto de teleporte da ilha.\n"
-#~ "§fO que permite jogadores fora do\n"
-#~ "§fgrupo de teleportar até a ilha.\n"
-#~ "§fClique para adicionar permissão."
-
-#~ msgid "§aToggle Island Warp"
-#~ msgstr "§aLigar/desligar o Teleporte"
-
-#~ msgid "§cToggle Island Warp"
-#~ msgstr "§cLigar/desligar o Teleporte"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f toggle the\n"
-#~ "§fisland's warp, allowing them\n"
-#~ "§fto turn it on or off at anytime,\n"
-#~ "§fbut not set the location. Click\n"
-#~ "§fhere to add this permission."
-#~ msgstr ""
-#~ "§fEsse jogador §cnão pode§f escolher o\n"
-#~ "§fteleporte da ilha, podendo ligar\n"
-#~ "§fe desligar a qualquer momento.\n"
-#~ "§fmas não pode definir a posição.\n"
-#~ "§fClique aqui para adicionar essa permissão."
-
-#~ msgid "§aInvite Players"
-#~ msgstr "§aConvidar Jogadores"
-
-#~ msgid "§cInvite Players"
-#~ msgstr "§cConvidar Jogadores"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f invite\n"
-#~ "§fother players to the island.\n"
-#~ "§fClick here to add this permission."
-#~ msgstr ""
-#~ "§fEsse jogador §cnão pode§f convidar\n"
-#~ "§foutros jogadores para a ilha.\n"
-#~ "§fClique aqui para adicionar essa permissão."
-
-#~ msgid "§aKick Players"
-#~ msgstr "§aExpulsar Jogadores"
-
-#~ msgid "§cKick Players"
-#~ msgstr "§cExpulsar Jogadores"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f kick\n"
-#~ "§fother players from the island.\n"
-#~ "§fClick here to add this permission."
-#~ msgstr ""
-#~ "§fEsse jogador §cnão pode§f expulsar\n"
-#~ "§foutros jogadores da ilha.\n"
-#~ "§fClique aqui para adicionar essa permissão."
-
-#~ msgid ""
-#~ "§a§lLeader\n"
-#~ "§aCan §fchange the island's biome.\n"
-#~ "§aCan §flock/unlock the island.\n"
-#~ "§aCan §fset the island's warp.\n"
-#~ "§aCan §ftoggle the island's warp.\n"
-#~ "§aCan §finvite others to the island.\n"
-#~ "§aCan §fkick others from the island."
-#~ msgstr ""
-#~ "§a§lLíder\n"
-#~ "§aPode §falterar o bioma da ilha.\n"
-#~ "§aPode §ftrancar/destrancar a ilha.\n"
-#~ "§aPode §fdefinir o ponto de teleporte.\n"
-#~ "§aPode §fligar e desligar o teleporte.\n"
-#~ "§aPode §fconvidar jogadores para a ilha.\n"
-#~ "§aPode §fexpulsar jogadores da ilha."
-
-#~ msgid "§cCannot §fchange the island's biome."
-#~ msgstr "§cNão pode §falterar o bioma da ilha."
-
-#~ msgid "§aCan §flock/unlock the island."
-#~ msgstr "§aPode §ftrancar/destrancar a ilha."
-
-#~ msgid "§cCannot §flock/unlock the island."
-#~ msgstr "§cNão pode §ftrancar/destrancar a ilha."
-
-#~ msgid "§cCannot §fset the island's warp."
-#~ msgstr "§cNão pode §fdefinir o ponto de teleporte."
-
-#~ msgid "§cCannot §ftoggle the island's warp."
-#~ msgstr "§cNão pode §fligar ou desligar o teleporte."
-
-#~ msgid "§cCannot §finvite others to the island."
-#~ msgstr "§cNão pode§f convida jogadres para a ilha."
-
-#~ msgid "§aBiome: Ocean"
-#~ msgstr "§aBioma: Oceano"
-
-#~ msgid "§8Biome: Ocean"
-#~ msgstr "§8Bioma: Oceano"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The ocean biome is the basic\n"
-#~ "§7starting biome for all islands.\n"
-#~ "§7passive mobs like animals will\n"
-#~ "§7not spawn. Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma de oceano é o bioma\n"
-#~ "§7básico para todas as ilhas.\n"
-#~ "§7mobs passivos como o porco\n"
-#~ "§7não irão nascer. Monstros\n"
-#~ "§7irão nascer normalmente."
-
-#~ msgid "§aBiome: Forest"
-#~ msgstr "§aBioma: Floresta"
-
-#~ msgid "§8Biome: Forest"
-#~ msgstr "§8Bioma: Floresta"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The forest biome will allow\n"
-#~ "§7your island to spawn passive.\n"
-#~ "§7mobs like animals (including\n"
-#~ "§7wolves). Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma de floresta permite\n"
-#~ "§7que nascam animais passivos.\n"
-#~ "§7como o porco (incluindo\n"
-#~ "§7lobos). Monstros\n"
-#~ "§7irão nascer normalmente."
-
-#~ msgid "§aBiome: Desert"
-#~ msgstr "§aBioma: Deserto"
-
-#~ msgid "§8Biome: Desert"
-#~ msgstr "§8Bioma: Deserto"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The desert biome makes it so\n"
-#~ "§7that there is no rain or snow\n"
-#~ "§7on your island. Passive mobs\n"
-#~ "§7won't spawn. Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma de deserto remove\n"
-#~ "§7chuvas e neve da sua ilha.\n"
-#~ "§7Animais passivos não irão nascer\n"
-#~ "§7Monstros irão nascer\n"
-#~ "§7normalmente."
-
-#~ msgid "§aBiome: Jungle"
-#~ msgstr "§aBioma: Selva"
-
-#~ msgid "§8Biome: Jungle"
-#~ msgstr "§8Bioma: Selva"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The jungle biome is bright\n"
-#~ "§7and colorful. Passive mobs\n"
-#~ "§7(including ocelots) will\n"
-#~ "§7spawn. Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§fO bioma de selva é brilhante\n"
-#~ "§fe colorido. Animais passivos\n"
-#~ "§f(incluindo jaguatiricas) irão\n"
-#~ "§fnascer. Monstros\n"
-#~ "§firão nascer normalmente."
-
-#~ msgid "§8Biome: Swampland"
-#~ msgstr "§8Bioma: Pantano"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The swamp biome is dark\n"
-#~ "§7and dull. Passive mobs\n"
-#~ "§7will spawn normally and\n"
-#~ "§7slimes have a small chance\n"
-#~ "§7to spawn at night depending\n"
-#~ "§7on the moon phase."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma de pantano é escuro\n"
-#~ "§7e parado. Animais passivos\n"
-#~ "§7irão nascer normalmente\n"
-#~ "§7slimes tem uma pequena chance\n"
-#~ "§7de nascer de noite dependendo\n"
-#~ "§7da fase da lua."
-
-#~ msgid "§aBiome: Taiga"
-#~ msgstr "§aBioma: Taiga"
-
-#~ msgid "§8Biome: Taiga"
-#~ msgstr "§8Bioma: Taiga"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The taiga biome has snow\n"
-#~ "§7instead of rain. Passive\n"
-#~ "§7mobs will spawn normally\n"
-#~ "§7(including wolves) and\n"
-#~ "§7hostile mobs will spawn."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma de taiga tem neve\n"
-#~ "§7no lugar de gelo. Animais\n"
-#~ "§7passivos irão nascer normalmente\n"
-#~ "§7(incluindo lobos) e\n"
-#~ "§7monstros nascerão normalmente."
-
-#~ msgid "§8Biome: Mushroom"
-#~ msgstr "§8Bioma: Cogumelos"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The mushroom biome is\n"
-#~ "§7bright and colorful.\n"
-#~ "§7Mooshrooms are the only\n"
-#~ "§7mobs that will spawn.\n"
-#~ "§7No other passive or\n"
-#~ "§7hostile mobs will spawn."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma\n"
-#~ "§7O bioma de cogumelo é\n"
-#~ "§7silencioso e colorido.\n"
-#~ "§7Apenas coguvacas irão\n"
-#~ "§7nascer.\n"
-#~ "§7Nenhum outro animal ou\n"
-#~ "§7monstro irá nascer."
-
-#~ msgid "§aBiome: Hell(Nether)"
-#~ msgstr "§aBioma: Inferno(Nether)"
-
-#~ msgid "§8Biome: Hell(Nether)"
-#~ msgstr "§8Bioma: Inferno(Nether)"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The hell biome looks\n"
-#~ "§7dark and dead. Some\n"
-#~ "§7mobs from the nether will\n"
-#~ "§7spawn in this biome\n"
-#~ "§7(excluding ghasts and\n"
-#~ "§7blazes)."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma do nether é\n"
-#~ "§7escuro e morto. Apenas\n"
-#~ "§7monstros do nether irão\n"
-#~ "§7nascer.\n"
-#~ "§7(excluindo ghasts e\n"
-#~ "§7blazes)."
-
-#~ msgid "§aBiome: Sky(End)"
-#~ msgstr "§aBioma: Céu(End)"
-
-#~ msgid "§8Biome: Sky(End)"
-#~ msgstr "§8Bioma: Céu(End)"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The sky biome gives your\n"
-#~ "§7island a special dark sky.\n"
-#~ "§7Only endermen will spawn\n"
-#~ "§7in this biome."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma do end dá a sua ilha um\n"
-#~ "§7toque especial com céu escuro.\n"
-#~ "§7Apenas enderman irá nascer\n"
-#~ "§7nesse bioma."
-
-#~ msgid "§aBiome: Plains"
-#~ msgstr "§aBioma: Planície"
-
-#~ msgid "§8Biome: Plains"
-#~ msgstr "§8Bioma: Planície"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The plains biome has rain\n"
-#~ "§7instead of snow. Passive\n"
-#~ "§7mobs will spawn normally\n"
-#~ "§7(including horses) and\n"
-#~ "§7hostile mobs will spawn."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7O bioma de planície tem\n"
-#~ "§7chuva no lugar de neve. Animais\n"
-#~ "§7passivos irão nascer normalmente\n"
-#~ "§7(incluindo cavalos) e\n"
-#~ "§7monstros também nascerão."
-
-#~ msgid "§8Biome: Extreme Hills"
-#~ msgstr "§8Bioma: Extreme Hills"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The extreme hills biome.\n"
-#~ "§7Passive mobs will spawn \n"
-#~ "§7normally and hostile\n"
-#~ "§7mobs will spawn."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7Bioma Extreme Hills.\n"
-#~ "§7Animais passivos e\n"
-#~ "§7monstros irão nascer\n"
-#~ "§7normalmente."
-
-#, fuzzy
-#~ msgid "§8Biome: Flower Forest"
-#~ msgstr "§8Bioma: Floresta"
-
-#, fuzzy
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The flower forest biome.\n"
-#~ "§7Passive mobs will spawn \n"
-#~ "§7normally and hostile\n"
-#~ "§7mobs will spawn."
-#~ msgstr ""
-#~ "§cVocê não pode usar esse bioma.\n"
-#~ "§7Bioma Extreme Hills.\n"
-#~ "§7Animais passivos e\n"
-#~ "§7monstros irão nascer\n"
-#~ "§7normalmente."
-
-#~ msgid "{0} changed the island biome to OCEAN"
-#~ msgstr "{0} alterou o bioma da ilha para OCEANO"
-
-#~ msgid "§4That player doesn't exist."
-#~ msgstr "§4Essse jogador não existe."
-
-#~ msgid "§7Name: §d{0} ({1})\n"
-#~ msgstr "§7Nome: §d{0} ({1})\n"
-
-#~ msgid "{0}§e completed challenge §9{1}"
-#~ msgstr "{0}§e completou o desafio §9{1}"
-
-#~ msgid ".displayName"
-#~ msgstr ".displayName"
-
-#~ msgid ""
-#~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
-#~ msgstr ""
-#~ "§cDesculpe pela demora! §9Sua ilha agora  §e{0,number,##}%§9 terminado..."
-
-#~ msgid "§d** You are entering §b{0}'s §disland."
-#~ msgstr "§d** Você está entrando na ilha de §b{0}."
-
-#~ msgid "§d** You are leaving §b{0}'s §disland."
-#~ msgstr "§d** Você está saindo da ilha de §b{0}"
-
-#~ msgid "§cPURGE:§9 Purged {0}/{1} {2,##,number}"
-#~ msgstr "§cPURGE:§9 Purgado {0}/{1} {2,##,number}"
-
-#, fuzzy
-#~ msgid "changes the language of the plugin"
-#~ msgstr "§eAlterado o bioma da ilha de {0} para {1}."
-
-#~ msgid "§a"
-#~ msgstr "§a"
-
-#~ msgid "{0} has completed the {1} challenge!"
-#~ msgstr "{0} completou o desafio {1}!"
-
-#~ msgid "resets the cooldown on the command"
-#~ msgstr "resetar o cooldown no comando"
-
-#~ msgid "§cCannot §fkick others from the island."
-#~ msgstr "§cNão pode §fexpulsar jogadores da ilha."
