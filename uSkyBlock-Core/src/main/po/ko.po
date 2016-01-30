@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.5.10\n"
+"Project-Id-Version: 2.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-27 00:18+0100\n"
+"PO-Revision-Date: 2016-01-30 17:10+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: Protocodyne Korean Translation Team <github@protocodyne.com>\n"
 "Language: ko_KR\n"
@@ -789,9 +789,9 @@ msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
-msgstr "§c생태계의 이름을 잘못적으셨습니다."
+msgstr "§c당신은 생태계 이름을 잘못 적었습니다. 반드시 {0} 들중 하나여야 합니다. "
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -1410,7 +1410,7 @@ msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
-msgstr ""
+msgstr "schematic {0}를 적용 할 수 없습니다, 서버어드민에게 연락하세요"
 
 msgid "§aCongratulations! §eYour island has appeared."
 msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
@@ -1418,6 +1418,7 @@ msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
 msgid "§cNote:§e Construction might still be ongoing."
 msgstr "§cNote:§e 건설이 아마 아직 진행중입니다'."
 
+#~ translate later line, need to check
 msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr "Use §9/is h§r or the §9/is§r menu to go there."
 
@@ -2187,9 +2188,8 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 
-#, fuzzy
 msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4그 커맨드의 권한이 없습니다!"
+msgstr "§4당신은 해당 island-schematic에 접근할 권한이 없습니다!!"
 
 msgid "§4Player is already assigned to this island!"
 msgstr "§4플레이어는 이미 이 섬에 배정되었습니다!"
@@ -2220,7 +2220,7 @@ msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"
 msgid ""
 "§7The pixes are busy changing the biome of your island to §9{0}§7, be "
 "patient."
-msgstr ""
+msgstr "당신의 섬 생태계를 §9{0}§7로 바꾸느라 pixes가 매우 바쁩니다, 조금만 기다려주세요"
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."
@@ -2230,7 +2230,7 @@ msgstr ""
 "§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
 
 msgid "§9Clearing an area for you..."
-msgstr ""
+msgstr "§9당신을 위해 해당 장소를 치우는 중입니다..."
 
 msgid "d"
 msgstr "d"
