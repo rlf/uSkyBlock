@@ -1,0 +1,151 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.rlf</groupId>
+  <artifactId>gettext-maven-plugin</artifactId>
+  <packaging>maven-plugin</packaging>
+  <version>1.2.7</version>
+  <name>Maven Gettext Plugin</name>
+  <url>http://gettext-commons.googlecode.com/svn/maven2-plugins-site/index.html</url>
+  <description>Generate messages templates and deploy messages bundles</description>
+  <licenses>
+    <license>
+      <name>GNU Library or Lesser General Public License (LGPL)</name>
+      <url>http://www.gnu.org/licenses/lgpl.html</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>vanto</id>
+      <name>Tammo van Lessen</name>
+      <url>http://www.taval.de</url>
+      <organization>XNap Commons Team</organization>
+      <roles>
+        <role>Project Manager</role>
+        <role>Developer</role>
+        <role>Creator</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>squig</id>
+      <name>Steffen Pingel</name>
+      <url>http://steffenpingel.de</url>
+      <organization>Gettext Commons Team</organization>
+      <roles>
+        <role>Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>bergerfx</id>
+      <name>Felix Berger</name>
+      <url>http://github.com/fberger/</url>
+      <organization>Gettext Commons Team</organization>
+      <roles>
+        <role>Developer</role>
+        <role>Maintainer</role>
+      </roles>
+    </developer>
+  </developers>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+    <!-- <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+	  <version>1.0.5</version>
+    </dependency> -->
+    <!-- <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+	  <version>1.0.5</version>
+    </dependency> -->
+    <dependency>
+      <groupId>org.apache.maven.reporting</groupId>
+      <artifactId>maven-reporting-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.reporting</groupId>
+      <artifactId>maven-reporting-impl</artifactId>
+      <version>2.0</version>
+    </dependency>
+  </dependencies>
+  <scm>
+    <connection>scm:svn:http://gettext-commons.googlecode.com/svn/maven2-plugins/trunk/</connection>
+    <developerConnection>scm:svn:https://gettext-commons.googlecode.com/svn/maven2-plugins/trunk/</developerConnection>
+    <url>http://gettext-commons.googlecode.com/svn/maven2-plugins/trunk/</url>
+  </scm>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-eclipse-plugin</artifactId>
+          <configuration>
+            <projectnatures>
+              <java.lang.String>org.eclipse.jdt.core.javanature</java.lang.String>
+            </projectnatures>
+            <buildcommands>
+              <java.lang.String>org.eclipse.jdt.core.javabuilder</java.lang.String>
+            </buildcommands>
+            <!--  <outputDirectory>/target/eclipse-classes</outputDirectory> -->
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.14</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>3.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <version>2.9</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>changes-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
