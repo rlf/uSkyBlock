@@ -1418,7 +1418,6 @@ msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
 msgid "§cNote:§e Construction might still be ongoing."
 msgstr "§cNote:§e 건설이 아마 아직 진행중입니다'."
 
-#~ translate later line, need to check
 msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr "Use §9/is h§r or the §9/is§r menu to go there."
 
