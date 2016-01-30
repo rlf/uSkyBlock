@@ -2220,7 +2220,7 @@ msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"
 msgid ""
 "§7The pixes are busy changing the biome of your island to §9{0}§7, be "
 "patient."
-msgstr "당신의 섬 생태계를 §9{0}§7로 바꾸느라 pixes가 매우 바쁩니다, 조금만 기다려주세요"
+msgstr "§7당신의 섬 생태계를 §9{0}§7로 바꾸느라 pixes가 매우 바쁩니다, 조금만 기다려주세요"
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."
