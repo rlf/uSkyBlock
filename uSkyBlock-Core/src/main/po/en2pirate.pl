@@ -1,9 +1,9 @@
-use strict;
 use warnings;
+use strict;
 use utf8;
-
+binmode STDOUT, "utf8";
 my $filename = 'keys.pot';
-open my $fp, '<:encoding(utf8)', $filename or die "Unable to read keys.pot";
+open my $fp, '<:utf8', $filename or die "Unable to read keys.pot";
 open my $out, '>:encoding(utf8)', 'xx_PIRATE.po' or die "Unable to write to pirate.po";
 
 my %dict = (
@@ -62,7 +62,7 @@ while (my $line = <$fp>) {
     chomp $line;
     if (! ($line =~ m/#: .*$/)) {
         # Skip line comments
-        $line =~ s/^\"Language: \\n/\"Language: xx-pirate\\n/g;
+        $line =~ s/^\"Language: \\n/\"Language: xx-PIRATE\\n/g;
         $line =~ s/^\"Last-Translator: FULL NAME <EMAIL\@ADDRESS>\\n/\"Last-Translator: R4zorax\\n/g;
         print $out "$line\n";
     }
