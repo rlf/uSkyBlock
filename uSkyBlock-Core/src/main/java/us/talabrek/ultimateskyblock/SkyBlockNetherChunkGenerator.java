@@ -59,9 +59,10 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
         }
         // Bedrock with holes in it
         for (y = 1; y <= 5; y++) {
+            double yThreshold = 0.10 * y;
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    if (random.nextDouble() >= (0.10*y)) { // 10%-50% air
+                    if (random.nextDouble() >= yThreshold) { // 10%-50% air
                         blocks[xyzToByte(x, y, z)] = BEDROCK;
                     } else {
                         blocks[xyzToByte(x, y, z)] = LAVA;
@@ -91,9 +92,10 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
             }
         }
         for (y = 122; y <= 126; y++) {
+            double yThreashold = 0.20 * (127 - y);
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    if (random.nextDouble() >= (0.20*(127-y))) { // 20%-100% bedrock
+                    if (random.nextDouble() >= yThreashold) { // 20%-100% bedrock
                         blocks[xyzToByte(x, y, z)] = BEDROCK;
                     } else {
                         blocks[xyzToByte(x, y, z)] = NETHERRACK;
@@ -105,7 +107,8 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
 
     @Override
     public byte[] generate(World world, Random random, int x, int z) {
-        byte[] blocks = generate.clone();
+        byte[] blocks = new byte[generate.length];
+        System.arraycopy(generate, 0, blocks, 0, generate.length);
         generateRandomBlocks(blocks, random);
         return blocks;
     }

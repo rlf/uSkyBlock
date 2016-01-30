@@ -33,9 +33,16 @@ msgstr "§4§4Los requerimientos se reiniciarán en {0} minutos."
 msgid "§eThis challenge requires the following:"
 msgstr "§7Este reto requiere lo siguiente:"
 
-#, java-format
-msgid "§f{0} §7{1}"
+msgid "§7and more..."
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§f{0}x§7{1}"
 msgstr "§f{0} §7{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6Recompensa de Items: §a"
@@ -206,8 +213,8 @@ msgstr "§ePara completar este reto, usa §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4¡Nombre de reto inválido! Usa  §b/c help §b4 para más información."
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
 msgstr "Completa {0} {1}§7 más"
 
 #, java-format
@@ -216,6 +223,10 @@ msgstr "§7Completa el reto {0}"
 
 msgid "to unlock this rank"
 msgstr "para desbloquear este rango"
+
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "Completa {0} {1}§7 más"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -227,13 +238,6 @@ msgstr "§eJugador  {0} inválido."
 
 msgid "Manage challenges for a player"
 msgstr "Administrar retos para un jugador"
-
-msgid "§4Challenge has already been completed"
-msgstr "§4Este reto ya ha sido completado"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§ereto: {0} ha sido completado para {1}"
 
 msgid "resets the challenge for the player"
 msgstr "reinicia el reto para el jugador"
@@ -252,12 +256,28 @@ msgstr "reinicia todos los retos para un jugador"
 msgid "§e{0} has had all challenges reset."
 msgstr "§eSe le han reiniciado todos los retos a {0} ."
 
+#, fuzzy
+msgid "complete all challenges in the rank"
+msgstr "§fCompleta la mayoría de los retos en"
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4Este reto ya ha sido completado"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§ereto: {0} ha sido completado para {1}"
+
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§§4¡Ningún reto llamado {0} fue encontrado!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
+msgstr "§4¡Ningún jugador llamado {0} fue encontrado!"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
 msgstr "§4¡Ningún jugador llamado {0} fue encontrado!"
 
 msgid "manage islands"
@@ -785,6 +805,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§cNo tienes permiso para cambiar el bioma de esa isla."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4¡No tienes permiso para cambiar el bioma de tu isla!"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§e¡Debes estar en tu isla para cambiar el bioma!"
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§cHas escrito mal el nombre del bioma."
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§ePodrás cambiar el bioma de tu isla de nuevo en {0,number,#} minutos."
@@ -799,15 +829,6 @@ msgstr "{0} cambio el bioma de la isla a {1}"
 
 msgid "§cYou do not have permission to change your biome to that type."
 msgstr "§No tienes permiso para cambiar a ese bioma."
-
-msgid "§cYou have misspelled the biome name."
-msgstr "§cHas escrito mal el nombre del bioma."
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§e¡Debes estar en tu isla para cambiar el bioma!"
-
-msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4¡No tienes permiso para cambiar el bioma de tu isla!"
 
 msgid "create an island"
 msgstr "crear una isla"
@@ -1422,6 +1443,19 @@ msgid "§7{0}: §a{1}§7 (max. {2})"
 msgstr "§f{0} §7{1} §9 por {2} §7{3}\n"
 
 #, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr "§aEnhorabuena! §eTu isla ha aparecido!"
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr "§cNota:§e Es posible que la construcción siga en proceso."
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr "Usa §9/is h§r o el menú de §9/is§r para ir allí."
+
+#, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§9Incapaz de localizar un cofre en {0} bloques."
 
@@ -1575,7 +1609,8 @@ msgstr "Permisos"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-msgid "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
 msgstr "§hPermisos de Jugadores"
 
 msgid ""
@@ -1899,9 +1934,6 @@ msgstr ""
 msgid "§7Last Page"
 msgstr "§7Completa el reto {0}"
 
-msgid "Island Menu"
-msgstr "Menú de Isla"
-
 msgid "Island Create Menu"
 msgstr "Menú de Creación de Isla"
 
@@ -1925,6 +1957,14 @@ msgstr ""
 "tu isla. ¡Puedes invitar a otros\n"
 "a tu isla y formar un imperio!\n"
 "§e§l¡Click aquí para comenzar!"
+
+#, fuzzy
+msgid "§aClick to create!"
+msgstr "§e§lClick aquí para activar."
+
+#, java-format
+msgid "§cNo access!§7({0})"
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lUnirse a una Isla"
@@ -1960,6 +2000,9 @@ msgstr ""
 "o conceptos de skyblock? Mira\n"
 "detalles sobre ellos aquí.\n"
 "§e§l¡Click aquí para ayuda!"
+
+msgid "Island Menu"
+msgstr "Menú de Isla"
 
 msgid "§a§lReturn Home"
 msgstr "§a§lVolver a tu Isla"
@@ -2178,6 +2221,41 @@ msgstr ""
 "teletransportados aquí.\n"
 "§e§lClick aquí para cambiarla."
 
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§lComenzar una isla"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "Menú de Creación de Isla"
+
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4¡No tienes acceso a ese comando!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lVolver a tu Isla"
+
+#, fuzzy, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§e§lClick aquí para activar."
+
+#, fuzzy
+msgid "§aClick to restart!"
+msgstr "§e§lClick aquí para activar."
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
+
 msgid "Caps On"
 msgstr "Mayúsculas Encendidas"
 
@@ -2235,6 +2313,12 @@ msgstr "§aEl hogar de tu isla ha sido establecido a tu ubicación actual."
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4La actual localización de tu hogar no es segura."
 
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "No se pudo crear tu isla. Por favor contacta con alguien del staff."
 
@@ -2242,18 +2326,37 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eDejando tu isla lista, por favor sé paciente, esto puede tomar un rato."
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§aEnhorabuena! §eTu isla ha aparecido!"
+#, fuzzy
+msgid "§9Creating an island at your location"
+msgstr "§4No hay una isla válida en tu ubicación"
 
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§cNota:§e Es posible que la construcción siga en proceso."
+#, fuzzy, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§eNo se encontro isla en tu localización!"
 
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr "Usa §9/is h§r o el menú de §9/is§r para ir allí."
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "North"
 msgstr ""
-"§e¡Hurra! Encontramos un espacio más cerca del spawn. §9Limpiándolo por ti..."
+
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
+msgstr ""
 
 msgid "d"
 msgstr "d"
@@ -2270,6 +2373,11 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+#~ msgstr ""
+#~ "§e¡Hurra! Encontramos un espacio más cerca del spawn. §9Limpiándolo por "
+#~ "ti..."
 
 #~ msgid "{0} ({1}/{2})"
 #~ msgstr "{0} ({1}/{2})"

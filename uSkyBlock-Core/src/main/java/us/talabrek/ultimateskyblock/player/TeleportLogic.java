@@ -35,10 +35,11 @@ public class TeleportLogic {
 
     public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
         log.log(Level.FINER, "safeTeleport " + player + " to " + homeSweetHome + (force ? " with force" : ""));
+        final Location targetLoc = LocationUtil.centerOnBlock(homeSweetHome.clone());
         if (player.hasPermission("usb.mod.bypassteleport") || (teleportDelay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
-            LocationUtil.loadChunkAt(homeSweetHome);
-            player.teleport(homeSweetHome);
+            LocationUtil.loadChunkAt(targetLoc);
+            player.teleport(targetLoc);
             player.setVelocity(new org.bukkit.util.Vector());
         } else {
             player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", teleportDelay));
@@ -47,8 +48,8 @@ public class TeleportLogic {
                 public void run() {
                     pendingTPs.remove(player.getUniqueId());
                     player.setVelocity(new Vector());
-                    LocationUtil.loadChunkAt(homeSweetHome);
-                    player.teleport(homeSweetHome);
+                    LocationUtil.loadChunkAt(targetLoc);
+                    player.teleport(targetLoc);
                     player.setVelocity(new Vector());
                 }
             }, TimeUtil.secondsAsTicks(teleportDelay));
@@ -58,7 +59,7 @@ public class TeleportLogic {
 
     public void spawnTeleport(final Player player, boolean force) {
         int delay = teleportDelay;
-        final Location spawnLocation = plugin.getWorld().getSpawnLocation();
+        final Location spawnLocation = LocationUtil.centerOnBlock(plugin.getWorld().getSpawnLocation());
         if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             if (Settings.extras_sendToSpawn) {
                 plugin.execCommand(player, "op:spawn", false);

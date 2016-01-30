@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-10 00:36+0100\n"
+"PO-Revision-Date: 2016-01-30 16:54+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -19,22 +19,29 @@ msgstr ""
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
-msgstr "§4* §7Requirements will reset in {0} days."
+msgstr "§4* §7Requirements will reset in §c{0} §7days."
 
 #, java-format
 msgid "§4Requirements will reset in {0} hours."
-msgstr "§4* §7Requirements will reset in {0} hours."
+msgstr "§4* §7Requirements will reset in §c{0} §7hours."
 
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
-msgstr "§4* §7Requirements will reset in {0} minutes."
+msgstr "§4* §7Requirements will reset in §c{0} §7minutes."
 
 msgid "§eThis challenge requires the following:"
 msgstr "§eThis challenge requires the following:"
 
-#, java-format
-msgid "§f{0} §7{1}"
+msgid "§7and more..."
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§f{0}x§7{1}"
 msgstr "§f{0} §7{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6Item Reward: §a"
@@ -60,7 +67,7 @@ msgstr "§4* §7You must be on your island to do that!"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
-msgstr "§4* §7The {0} challenge is not repeatable!"
+msgstr "§4* §7The §a{0} §7challenge is not repeatable!"
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -73,7 +80,7 @@ msgstr "§4{0}"
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
 msgstr ""
-"§4* §7You must be standing within §4{0} §7blocks of all required items."
+"§4* §7You must be standing within §c{0} §7blocks of all required items."
 
 #, java-format
 msgid "§4Your island must be level {0} to complete this challenge!"
@@ -81,7 +88,7 @@ msgstr "§4* §7Your island must be level §4{0} §7to complete this challenge!"
 
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
-msgstr "§4* §7Unknown type of challenge: {0}"
+msgstr "§4* §7Unknown type of challenge: §4{0}"
 
 #, java-format
 msgid "§eStill the following blocks short: {0}"
@@ -101,15 +108,15 @@ msgstr " §4{0} §b{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
-msgstr "§a* §7You are the following items short:{0}"
+msgstr "§a* §7You are the following items short:§4{0}"
 
 #, java-format
 msgid "§aYou have completed the {0} challenge!"
-msgstr "§a* §7You have completed the {0} challenge!"
+msgstr "§a* §7You have completed the §a{0} §7challenge!"
 
 #, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
-msgstr "§6{0}§7 has completed the §9{1}§7 challenge!"
+msgstr "§a* §6{0}§7 has completed the §a{1}§7 challenge!"
 
 #, java-format
 msgid "§eItem reward(s): §f{0}"
@@ -152,25 +159,26 @@ msgid "§4§lLocked Challenge"
 msgstr "§4§lLocked Challenge"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eChallenges has been disabled. Contact an administrator."
+msgstr "§4* §7Challenges has been disabled. Contact an administrator."
 
 msgid "§4You don't have access to this command!"
-msgstr "§4You don't have access to this command!"
+msgstr "§4* §7You don't have access to this command!"
 
 msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4You can only submit challenges in the skyblock world!"
+msgstr "§4* §7You can only submit challenges in the skyblock world!"
 
 msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4You can only submit challenges when you have an island!"
+msgstr "§4* §7You can only submit challenges when you have an island!"
 
 msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eUse /c <name> to view information about a challenge."
+msgstr "§a* §7Use §a/c <name> §7to view information about a challenge."
 
 msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eUse /c complete <name> to attempt to complete that challenge."
+msgstr ""
+"§a* §7Use §a/c complete <name> §7to attempt to complete that challenge."
 
 msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eChallenges will have different colors depending on if they are:"
+msgstr "§a* §7Challenges will have different colors depending on if they are:"
 
 msgid "Incomplete"
 msgstr "Incomplete"
@@ -182,13 +190,15 @@ msgid "Completed(repeatable)"
 msgstr "Completed(repeatable)"
 
 msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§4You will lose all required items when you complete this challenge!"
+msgstr ""
+"§4* §7You will lose all required items when you complete this challenge!"
 
 #, java-format
 msgid ""
 "§4All required items must be placed on your island, within {0} blocks of you."
 msgstr ""
-"§4All required items must be placed on your island, within {0} blocks of you."
+"§4* §7All required items must be placed on your island, within §c{0} "
+"§7blocks of you."
 
 msgid "§eRank: "
 msgstr "§eRank: "
@@ -198,39 +208,36 @@ msgstr "§4This Challenge is not repeatable!"
 
 #, java-format
 msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§a* §7To complete this challenge, use §a/c c {0}"
 
 msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4* §7Invalid challenge name! Use §a/c §7help for more information"
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
 msgstr "Complete {0} more {1} challenges"
 
 #, java-format
 msgid "§7Complete {0}"
-msgstr "§7Complete §a{0}"
+msgstr "§a* §7Complete §a{0}"
 
 msgid "to unlock this rank"
 msgstr "to unlock this rank"
 
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "Complete {0} more {1} challenges"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
-msgstr "§9* §7Player §9{0} §7has no island!"
+msgstr "§9* §7Player §6{0} §7has no island!"
 
 #, java-format
 msgid "§eInvalid player {0} supplied."
-msgstr "§4* §7Invalid player §9{0} supplied."
+msgstr "§4* §7Invalid player §6{0} §7supplied."
 
 msgid "Manage challenges for a player"
 msgstr "Manage challenges for a player"
-
-msgid "§4Challenge has already been completed"
-msgstr "§4* §7Challenge has already been completed"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§a* §7challenge: §a{0} has been completed for §9{1}"
 
 msgid "resets the challenge for the player"
 msgstr "resets the challenge for the player"
@@ -240,14 +247,26 @@ msgstr "§4* §7Challenge has never been completed"
 
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
-msgstr "§a* §7challenge: §a{0} has been reset for §9{1}"
+msgstr "§a* §7challenge: §a{0} has been reset for §6{1}"
 
 msgid "resets all challenges for the player"
 msgstr "resets all challenges for the player"
 
 #, java-format
 msgid "§e{0} has had all challenges reset."
-msgstr "§e{0} has had all challenges reset."
+msgstr "§a* §6{0} §7has had all challenges reset."
+
+#, fuzzy
+msgid "complete all challenges in the rank"
+msgstr "§fComplete most challenges in"
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4* §7Challenge has already been completed"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§a* challenge§7: §a{0} §7has been completed for §6{1}"
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -255,7 +274,11 @@ msgstr "§4* §7No challenge named §a{0} §7was found!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
-msgstr "§4* §7No player named §9{0} §7was found!"
+msgstr "§4* §7No player named §6{0} §7was found!"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
+msgstr "§4* §7No player named §6{0} §7was found!"
 
 msgid "manage islands"
 msgstr "manage islands"
@@ -274,7 +297,7 @@ msgid ""
 "§eUse §9/usb island delete <name>§e to delete it."
 msgstr ""
 "§4* §7Island at this location has members!\n"
-"§4* §7Use §9/usb island delete <name>§7 to delete it."
+"§4* §7Use §a/usb island delete <name>§7 to delete it."
 
 msgid "removes the player from the island"
 msgstr "removes the player from the island"
@@ -284,7 +307,7 @@ msgstr "adds the player to the island"
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
-msgstr "§b{0}§d has joined your island group."
+msgstr "§6* §6{0} §7has joined your island group."
 
 #, java-format
 msgid "§4No player named {0} found!"
@@ -307,89 +330,88 @@ msgid "sets the biome of the island"
 msgstr "sets the biome of the island"
 
 msgid "§4That player has no island."
-msgstr "§4That player has no island."
+msgstr "§4* §7That player has no island."
 
 msgid "§4No valid island at your location"
-msgstr "§4No valid island at your location"
+msgstr "§4* §7No valid island at your location"
 
 msgid "purges the island"
 msgstr "purges the island"
 
 msgid "§4Error! §9No valid island found for purging."
-msgstr "§4Error! §9No valid island found for purging."
+msgstr "§4* Error! §7No valid island found for purging."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr "§cPURGE: §9Purged island at {0}"
+msgstr "§4* PURGE: §7Purged island at {0}"
 
 msgid "toggles the islands ignore status"
 msgstr "toggles the islands ignore status"
 
 #, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§cSet {0}s island to be ignored on top-ten and purge."
+msgstr "§4* §7Set §4 {0}s §7island to be ignored on top-ten and purge."
 
 #, java-format
 msgid ""
 "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
 "purge."
 msgstr ""
-"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
-"purge."
+"§4* §7Removed ignore-flag of §4{0}s §7island, it will now show up on top-ten "
+"and purge."
 
 msgid "§4No valid player-name supplied."
-msgstr "§4No valid player-name supplied."
+msgstr "§4* §7No valid player-name supplied."
 
 #, java-format
 msgid "Removing {0} from island"
-msgstr "Removing {0} from island"
+msgstr "§4* §7Removing §6{0} §7from island"
 
 #, java-format
 msgid "§eChanged biome of {0}s island to {1}."
-msgstr "§eChanged biome of {0}s island to {1}."
+msgstr "§9* §7Changed biome of §6{0}s §7island to {1}."
 
 #, java-format
 msgid "§eChanged biome of {0}s island to OCEAN."
-msgstr "§eChanged biome of {0}s island to OCEAN."
+msgstr "§9* §7Changed biome of §6{0}s §7island to OCEAN."
 
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
-msgstr "§aYou may need to go to spawn, or relog, to see the changes."
+msgstr "§9* §7You may need to go to spawn, or relog, to see the changes."
 
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
-msgstr "§e{0} has had their biome changed to {1}."
+msgstr "§9* §6{0} §7has had their biome changed to {1}."
 
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
-msgstr "§e{0} has had their biome changed to OCEAN."
+msgstr "§9* §6{0} §7has had their biome changed to OCEAN."
 
 msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr "§4Sorry!§e A protect-all is already running. Let it complete first."
+msgstr "§4* Sorry!§7 A protect-all is already running. Let it complete first."
 
 msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§eStarting a protect-all task. It will take a while."
+msgstr "§4* §7Starting a protect-all task. It will take a while."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
-msgstr "§eRemoving {0}'s island."
+msgstr "§4* §7Removing §6{0}'s §7island."
 
 msgid "Error: That player does not have an island!"
 msgstr "Error: That player does not have an island!"
 
 #, java-format
 msgid "§e{0}s island at {1} has been protected"
-msgstr "§e{0}s island at {1} has been protected"
+msgstr "§4* §6{0}s §7island at {1} has been protected"
 
 #, java-format
 msgid "§4{0}s island at {1} was already protected"
-msgstr "§4{0}s island at {1} was already protected"
+msgstr "§4* §6{0}s §7island at {1} was already protected"
 
 msgid "open GUI for config"
 msgstr "open GUI for config"
 
-#, fuzzy
 msgid "§eInvalid configuration name"
-msgstr "reload configuration from file."
+msgstr "§4* §7Invalid configuration name"
 
 msgid "Controls player-cooldowns"
 msgstr "Controls player-cooldowns"
@@ -398,7 +420,7 @@ msgid "clears the cooldown on a command (* = all)"
 msgstr "clears the cooldown on a command (* = all)"
 
 msgid "§eThe player is not currently online"
-msgstr "§eThe player is not currently online"
+msgstr "§4* §7The player is not currently online"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
@@ -416,13 +438,13 @@ msgstr "restarts the cooldown on the command"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
-msgstr "§eReset cooldown on {0} for {1}§e to {2} seconds"
+msgstr "§4* §7Reset cooldown on {0} for {1}§7 to {2} seconds"
 
 msgid "lists all the active cooldowns"
 msgstr "lists all the active cooldowns"
 
 msgid "§eCmd Cooldown"
-msgstr "§eCmd Cooldown"
+msgstr "§9* §7Cmd Cooldown"
 
 #, java-format
 msgid "§a{0} §c{1}"
@@ -430,7 +452,7 @@ msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eNo active cooldowns for §9{0}§e found."
-msgstr "§eNo active cooldowns for §9{0}§e found."
+msgstr "§4* §7No active cooldowns for §6{0}§7 found."
 
 msgid "control debugging"
 msgstr "control debugging"
@@ -442,32 +464,32 @@ msgid "toggle debug-logging"
 msgstr "toggle debug-logging"
 
 msgid "§4Logging wasn't active, so you can't disable it!"
-msgstr "§4Logging wasn't active, so you can't disable it!"
+msgstr "§4* §7Logging wasn't active, so you can't disable it!"
 
 msgid "flush current content of the logger to file."
 msgstr "flush current content of the logger to file."
 
 msgid "§eLog-file has been flushed."
-msgstr "§eLog-file has been flushed."
+msgstr "§4* §7Log-file has been flushed."
 
 msgid "§4Logging is not enabled, use §d/usb debug enable"
-msgstr "§4Logging is not enabled, use §d/usb debug enable"
+msgstr "§4* §7Logging is not enabled, use §a/usb debug §7enable"
 
 msgid "§4Invalid argument, try INFO, FINE, FINER, FINEST"
-msgstr "§4Invalid argument, try INFO, FINE, FINER, FINEST"
+msgstr "§4* §7Invalid argument, try §eINFO§7, §6FINE§7, §cFINER§7, §4FINEST"
 
 msgid "§eLogging disabled!"
-msgstr "§eLogging disabled!"
+msgstr "§4* §7Logging disabled!"
 
 msgid "tries to fix the the area of flatland."
 msgstr "tries to fix the the area of flatland."
 
 msgid "§4No valid island found"
-msgstr "§4No valid island found"
+msgstr "§4* §7No valid island found"
 
 #, java-format
 msgid "§4No flatland detected at {0}'s island!"
-msgstr "§4No flatland detected at {0}'s island!"
+msgstr "§4* §7No flatland detected at §6{0}'s §7island!"
 
 msgid "flushes all caches to files"
 msgstr "flushes all caches to files"
@@ -476,35 +498,35 @@ msgstr "flushes all caches to files"
 msgid ""
 "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
 msgstr ""
-"§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
+"§9* §7Flushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
 
 msgid "manually update the top 10 list"
 msgstr "manually update the top 10 list"
 
 msgid "§eGenerating the Top Ten list"
-msgstr "§eGenerating the Top Ten list"
+msgstr "§9* §7Generating the Top Ten list"
 
 msgid "§eFinished generation of the Top Ten list"
-msgstr "§eFinished generation of the Top Ten list"
+msgstr "§4* §7Finished generation of the Top Ten list"
 
 msgid "teleport to another players island"
 msgstr "teleport to another players island"
 
 msgid "§4Only supported for players"
-msgstr "§4Only supported for players"
+msgstr "§4* §7Only supported for players"
 
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§9* §7Teleporting to §6{0}''s §7island."
 
 msgid "§4That player does not have an island!"
-msgstr "§4That player does not have an island!"
+msgstr "§4* §7That player does not have an island!"
 
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
 
 msgid "§9Job Statistics"
-msgstr "§9Job Statistics"
+msgstr "§9* §7Job Statistics"
 
 msgid "§7----------------"
 msgstr "§7----------------"
@@ -535,40 +557,40 @@ msgstr "changes the language of the plugin, and reloads"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr "§aSuccessfully changed language to §e{0}"
+msgstr "§4* §7Successfully changed language to §4{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
-msgstr "§cFailed to change language to §e{0}"
+msgstr "§4* §7Failed to change language to §4{0}"
 
 msgid "§9Supported Languages:\n"
-msgstr "§9Supported Languages:\n"
+msgstr "§9* §7Supported Languages:\n"
 
 #, java-format
 msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
 msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 
 msgid "§cUnable to locate any languages."
-msgstr "§cUnable to locate any languages."
+msgstr "§4* §7Unable to locate any languages."
 
 msgid "transfer leadership to another player"
 msgstr "transfer leadership to another player"
 
 #, java-format
 msgid "§4Player {0} has no island to transfer!"
-msgstr "§4Player {0} has no island to transfer!"
+msgstr "§4* §6Player {0} §7has no island to transfer!"
 
 #, java-format
 msgid ""
 "§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
 "to remove him first."
 msgstr ""
-"§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
-"to remove him first."
+"§4* §7Player §6{0} §7already has an island. §7Use §a/usb island remove "
+"<name>§7 to remove him first."
 
 #, java-format
 msgid "§bLeadership transferred by {0}§b to {1}"
-msgstr "§bLeadership transferred by {0}§b to {1}"
+msgstr "§4* §7Leadership transferred by §4{0} §7to §a{1}"
 
 msgid "manage orphans"
 msgstr "manage orphans"
@@ -578,46 +600,47 @@ msgstr "count orphans"
 
 #, java-format
 msgid "§e{0} old island locations will be used before new ones."
-msgstr "§e{0} old island locations will be used before new ones."
+msgstr "§4* §7{0} old island locations will be used before new ones."
 
 msgid "clear orphans"
 msgstr "clear orphans"
 
 msgid "§eClearing all old (empty) island locations."
-msgstr "§eClearing all old (empty) island locations."
+msgstr "§4* §7Clearing all old (empty) island locations."
 
 msgid "list orphans"
 msgstr "list orphans"
 
 msgid "§eNo orphans currently registered."
-msgstr "§eNo orphans currently registered."
+msgstr "§4* §7No orphans currently registered."
 
 #, java-format
 msgid "§eOrphans: {0}"
-msgstr "§eOrphans: {0}"
+msgstr "§4* §7Orphans: §f{0}"
 
 msgid "purges all abandoned islands"
 msgstr "purges all abandoned islands"
 
 msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4A purge is already running, please wait for it to finish!"
+msgstr "§4* §7A purge is already running, please wait for it to finish!"
 
 msgid "§4You must provide the age in days to purge!"
-msgstr "§4You must provide the age in days to purge!"
+msgstr "§4* §7You must provide the age in days to purge!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eFinding all islands that has been abandoned for more than {0} days."
+msgstr ""
+"§4* §7Finding all islands that has been abandoned for more than §c{0} §7days."
 
 msgid "set a player's island to your location"
 msgstr "set a player's island to your location"
 
 #, java-format
 msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aSet {0}'s island to the bedrock nearest you."
+msgstr "§4* §7Set §6{0}'s §7island to the bedrock nearest you."
 
 msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4Bedrock not found: unable to set the island!"
+msgstr "§4* §7Bedrock not found: unable to set the island!"
 
 msgid "reload configuration from file."
 msgstr "reload configuration from file."
@@ -627,14 +650,14 @@ msgstr "§4* §7Configuration reloaded from file."
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgstr "§4* PURGE§7: Purged {0}/{1} {2,number,###}%"
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgstr "§4* PURGE§7: Scanning done, found §c{0} §7candidates for purgatory."
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4PURGE:§9 Finished purging abandoned islands."
+msgstr "§4* PURGE:§7 Finished purging abandoned islands."
 
 msgid "displays version information"
 msgstr "displays version information"
@@ -646,30 +669,28 @@ msgid "refreshes the chunks around the player"
 msgstr "refreshes the chunks around the player"
 
 msgid "§eResending chunks to the client"
-msgstr "§eResending chunks to the client"
+msgstr "§4* §7Resending chunks to the client"
 
 msgid "load the region chunks"
 msgstr "load the region chunks"
 
 #, java-format
 msgid "§eLoading chunks at {0}"
-msgstr "§eLoading chunks at {0}"
+msgstr "§4* §7Loading chunks at {0}"
 
 #, java-format
 msgid "§eUnloading chunks at {0}"
-msgstr "§eUnloading chunks at {0}"
+msgstr "§4* §7Unloading chunks at {0}"
 
-#, fuzzy
 msgid "update the WG regions"
-msgstr "load the region chunks"
+msgstr "§4* §7update the WG regions"
 
 #, java-format
 msgid "§eIsland world-guard regions updated for {0}"
-msgstr ""
+msgstr "§4* §7Island world-guard regions updated for {0}"
 
-#, fuzzy
 msgid "§eNo island found at your location!"
-msgstr "§4No valid island at your location"
+msgstr "§4* §7No island found at your location!"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -681,97 +702,100 @@ msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
 msgstr ""
-"§4Your island is full, or you have too many pending invites. You can't "
+"§4* §7Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
 
 msgid "§4That player is already leader on another island."
-msgstr "§4That player is already leader on another island."
+msgstr "§4* §7That player is already leader on another island."
 
 #, java-format
 msgid "§e{0}§e tried to invite you, but you are already in a party."
-msgstr "§e{0}§e tried to invite you, but you are already in a party."
+msgstr "§9* §{0}§7 tried to invite you, but you are already in a party."
 
 #, java-format
 msgid "{0}§e has invited you to join their island!"
-msgstr "{0}§e has invited you to join their island!"
+msgstr "§9* §6{0} §7has invited you to join their island!"
 
 msgid "§f/island [accept/reject]§e to accept or reject the invite."
-msgstr "§f/island [accept/reject]§e to accept or reject the invite."
+msgstr "§9* §f/island [accept/reject]§7 to §aaccept or §4reject §7the invite."
 
 msgid "§4WARNING: You will lose your current island if you accept!"
-msgstr "§4WARNING: You will lose your current island if you accept!"
+msgstr "§4* WARNING§7: You will lose your current island if you accept!"
 
 #, java-format
 msgid "{0}§e has rejected the invitation."
-msgstr "{0}§e has rejected the invitation."
+msgstr "§9* §6{0} §7has §4rejected §7the invitation."
 
 msgid "§4You can't use that command right now. Leave your current party first."
 msgstr ""
-"§4You can't use that command right now. Leave your current party first."
+"§4* §7You can't use that command right now. Leave your current party first."
 
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
 msgstr ""
-"§aYou have joined an island! Use /island party to see the other members."
+"§9* §7You have joined an island! Use §a/island party §7to see the other "
+"members."
 
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."
-msgstr "§eInvitation for {0}§e has timedout or been cancelled."
+msgstr "§9* §7Invitation for §6{0} §7has timed out or been cancelled."
 
 #, java-format
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
-msgstr "§eInvitation for {0}'s island has timedout or been cancelled."
+msgstr "§9* §7Invitation for §6{0}'s §7island has timed out or been cancelled."
 
 msgid "accept/reject an invitation."
 msgstr "accept/reject an invitation."
 
 msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eYou have rejected the invitation to join an island."
+msgstr "§9* §7You have §4rejected §7the invitation to join an island."
 
 msgid "§4You haven't been invited."
-msgstr "§4You haven't been invited."
+msgstr "§9* §7You haven't been invited."
 
 msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eYou have accepted the invitation to join an island."
+msgstr "§9* §7You have §aaccepted §7the invitation to join an island."
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a player from your island."
 
 msgid "§eThe following players are banned from warping to your island:"
-msgstr "§eThe following players are banned from warping to your island:"
+msgstr ""
+"§4* §7The following players are §4banned §7from warping to your island:"
 
 msgid "§eTo ban/unban from your island, use /island ban <player>"
-msgstr "§eTo ban/unban from your island, use /island ban <player>"
+msgstr ""
+"§9* §7To §4ban§7/§aunban §7from your island, use §a/island ban <player>"
 
 msgid "§4You can't ban members. Remove them first!"
-msgstr "§4You can't ban members. Remove them first!"
+msgstr "§4* §7You can't ban members. §4Remove §7them first!"
 
 msgid "§4You do not have permission to kick/ban players."
-msgstr "§4You do not have permission to kick/ban players."
+msgstr "§4* §7You do not have permission to kick/ban players."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to ban you from their island!"
-msgstr "§4* §6{0} §7has removed you from their island!"
+msgstr "§4* §7{0} tried to §4ban §7you from their island!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being banned."
-msgstr "§4* §6{0} §7has been removed from the island."
+msgstr "§4* §7{0} is exempt from being banned."
 
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
-msgstr "§eYou have banned §4{0}§e from warping to your island."
+msgstr "§4* §7You have banned §4{0}§7 from warping to your island."
 
 #, java-format
 msgid "§eYou have been §cBANNED§e from {0}§e''s island."
-msgstr "§eYou have been §cBANNED§e from {0}§e''s island."
+msgstr "§4* §7You have been §4BANNED§7 from §6{0}''s §7island."
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
-msgstr "§eYou have unbanned §a{0}§e from warping to your island."
+msgstr "§9* §7You have §aunbanned §6{0} §7from warping to your island."
 
 #, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
-msgstr "§eYou have been §aUNBANNED§e from {0}§e''s island."
+msgstr "§9* §7You have been §aUNBANNED§7 from §6{0}''s §7island."
 
 msgid "change the biome of the island"
 msgstr "change the biome of the island"
@@ -779,31 +803,32 @@ msgstr "change the biome of the island"
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr ""
-"§cYou do not have permission to change the biome of your current island."
+"§4* §7You do not have permission to change the biome of your current island."
 
-#, java-format
-msgid "§eYou can change your biome again in {0,number,#} minutes."
-msgstr "§eYou can change your biome again in {0,number,#} minutes."
-
-#, java-format
-msgid "§aYou have changed your island''s biome to {0}"
-msgstr "§aYou have changed your island''s biome to {0}"
-
-#, java-format
-msgid "{0} changed the island biome to {1}"
-msgstr "{0} changed the island biome to {1}"
-
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§cYou do not have permission to change your biome to that type."
-
-msgid "§cYou have misspelled the biome name."
-msgstr "§cYou have misspelled the biome name."
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4* §7You do not have permission to change the biome of this island!"
 
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§4* §7You must be on your island to change the biome!"
 
-msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4* §7You do not have permission to change the biome of this island!"
+#, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§4* §7You have misspelled the biome name. Must be one of {0}"
+
+#, java-format
+msgid "§eYou can change your biome again in {0,number,#} minutes."
+msgstr "§9* §7You can change your biome again in §c{0,number,#} §7minutes."
+
+#, java-format
+msgid "§aYou have changed your island''s biome to {0}"
+msgstr "§9* §7You have changed your island''s biome to §a{0}"
+
+#, java-format
+msgid "{0} changed the island biome to {1}"
+msgstr "§9* §6{0} §7changed the island biome to §a{1}"
+
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§4* §7You do not have permission to change your biome to that type."
 
 msgid "create an island"
 msgstr "create an island"
@@ -816,19 +841,19 @@ msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
 msgstr ""
-"§4Island found!§e You already have an island. If you want a fresh island, "
-"type§b /is restart§e to get one"
+"§4* Island found!§7 You already have an island. If you want a fresh island, "
+"type§a /is restart§7 to get one"
 
 msgid ""
 "§4Island found!§e You are already a member of an island. To start your own, "
 "first§b /is leave"
 msgstr ""
-"§4Island found!§e You are already a member of an island. To start your own, "
-"first§b /is leave"
+"§4* Island found!§7 You are already a member of an island. To start your "
+"own, first§a /is leave"
 
 #, java-format
 msgid "§eYou can create a new island in {0,number,#} seconds."
-msgstr "§eYou can create a new island in {0,number,#} seconds."
+msgstr "§9* §7You can create a new island in §c{0,number,#} §7seconds."
 
 msgid "teleport to the island home"
 msgstr "teleport to the island home"
@@ -837,14 +862,14 @@ msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
 "right now."
 msgstr ""
-"§cYour island is in the process of generating, you cannot teleport home "
+"§4 §7Your island is in the process of generating, you cannot teleport home "
 "right now."
 
 msgid "check your or anothers island info"
 msgstr "check your or anothers island info"
 
 msgid "§4Island level has been disabled, contact an administrator."
-msgstr "§4Island level has been disabled, contact an administrator."
+msgstr "§4* §7Island level has been disabled, contact an administrator."
 
 msgid "§eYou must be on your island to use this command."
 msgstr "§4* §7You must be on your island to use this command."
@@ -871,17 +896,17 @@ msgstr "invite a player to your island"
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr ""
-"§eUse§f /island invite <playername>§e to invite a player to your island."
+"§9* §7Use§a /island invite <playername>§7 to invite a player to your island."
 
 msgid "§4Only the island's owner can invite!"
-msgstr "§4Only the island's owner can invite!"
+msgstr "§4* §7Only the island's owner can invite!"
 
 #, java-format
 msgid "§aYou can invite {0} more players."
-msgstr "§aYou can invite {0} more players."
+msgstr "§9* §7You can invite §c{0} §7more players."
 
 msgid "§4You can't invite any more players."
-msgstr "§4You can't invite any more players."
+msgstr "§4* §7You §4can't §7invite any more players."
 
 msgid "§4You do not have permission to invite others to this island!"
 msgstr "§4* §7You do not have permission to invite others to this island!"
@@ -897,13 +922,13 @@ msgstr "§4* §7That player is the leader of your island!"
 
 #, java-format
 msgid "{0}§d invited {1}"
-msgstr "{0}§d invited {1}"
+msgstr "{0}§a invited {1}"
 
 msgid "remove a member from your island."
 msgstr "remove a member from your island."
 
 msgid "§4You do not have permission to kick others from this island!"
-msgstr "§4You do not have permission to kick others from this island!"
+msgstr "§4* §7You do §4not §7have permission to kick others from this island!"
 
 msgid "§4You can't remove the leader from the Island!"
 msgstr "§4* §7You can't remove the leader from the Island!"
@@ -919,17 +944,17 @@ msgstr "§4* §6{0} §7has removed you from their island!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4* §6{0} §7has been removed from the island."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to kick you from their island!"
-msgstr "§4* §6{0} §7has removed you from their island!"
+msgstr "§4* §7{0} tried to §4kick §7you from their island!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being kicked."
-msgstr "§4* §6{0} §7has been removed from the island."
+msgstr "§4* §6{0} §7is exempt from being kicked."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} has kicked you from their island!"
-msgstr "§4* §6{0} §7has removed you from their island!"
+msgstr "§4* §7{0} has §4kicked §7you from their island!"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -946,11 +971,11 @@ msgid ""
 "§4You can't leave your island if you are the only person. Try using /island "
 "restart if you want a new one!"
 msgstr ""
-"§4* §7You can't leave your island if you are the only person. Try using /"
-"island restart if you want a new one!"
+"§4* §7You can't leave your island if you are the only person. Try using §a/"
+"island restart §7if you want a new one!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
-msgstr "§9* §7You own this island, use §9/island remove <player> §7instead."
+msgstr "§9* §7You own this island, use §a/island remove <player> §7instead."
 
 msgid "§eYou have left the island and returned to the player spawn."
 msgstr "§9* §7You have left the island and returned to the player spawn."
@@ -997,14 +1022,14 @@ msgstr "§4* §7You can only transfer ownership to party-members!"
 
 #, java-format
 msgid "{0}§e is already leader of your island!"
-msgstr "{0}§e is already leader of your island!"
+msgstr "§6{0}§7 is already leader of your island!"
 
 msgid "§4Only leader can transfer leadership!"
 msgstr "§4* §7Only leader can transfer leadership!"
 
 #, java-format
 msgid "{0} tried to take over the island!"
-msgstr "{0} tried to take over the island!"
+msgstr "§c{0} §7tried to take over the island!"
 
 msgid "show party information"
 msgstr "show party information"
@@ -1028,7 +1053,7 @@ msgid "§4This command can only be executed by a player"
 msgstr "§4* §7This command can only be executed by a player"
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
-msgstr "§4* §7No Island. §eUse §b/is create§e to get one"
+msgstr "§4* No Island. §7Use §a/is create§7 to get one"
 
 msgid "delete your island and start a new one."
 msgstr "delete your island and start a new one."
@@ -1038,7 +1063,7 @@ msgid ""
 "start your own (/island leave)."
 msgstr ""
 "§4* §7Only the owner may restart this island. Leave this island in order to "
-"§7start your own (/island leave)."
+"§7start your own (§a/island leave§7)."
 
 msgid ""
 "§eYou must remove all players from your island before you can restart it (/"
@@ -1046,12 +1071,12 @@ msgid ""
 "using /island party."
 msgstr ""
 "§4* §7You must remove all players from your island before you can restart it "
-"(/island kick <player>). See a list of players currently part of your island "
-"using /island party."
+"(§a/island kick <player>§7). See a list of players currently part of your "
+"island using §a/island party."
 
 #, java-format
 msgid "§cYou can restart your island in {0} seconds."
-msgstr "§4* §7You can restart your island in §4{0} §7seconds."
+msgstr "§4* §7You can restart your island in §c{0} §7seconds."
 
 msgid "§cYour island is in the process of generating, you cannot restart now."
 msgstr ""
@@ -1084,7 +1109,8 @@ msgstr "enable/disable warping to your island."
 
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr ""
-"§4* §7Your island is locked. You must unlock it before enabling your warp."
+"§4* §7Your island is §4locked§7. You must §aunlock §7it before enabling your "
+"warp."
 
 #, java-format
 msgid "§b{0}§d activated the island warp."
@@ -1095,7 +1121,9 @@ msgid "§b{0}§d deactivated the island warp."
 msgstr "§6{0}§4 deactivated §7the island warp."
 
 msgid "§cYou do not have permission to enable/disable your island's warp!"
-msgstr "§4* §7You do not have permission to enable/disable your island's warp!"
+msgstr ""
+"§4* §7You do not have permission to §aenable§7/§4disable §7your island's "
+"warp!"
 
 msgid "display the top10 of islands"
 msgstr "display the top10 of islands"
@@ -1111,7 +1139,7 @@ msgstr "§9* §7The following leaders §atrusts §7you:"
 
 msgid "§eTo trust/untrust from your island, use /island trust <player>"
 msgstr ""
-"§9* §7To §atrust§7/§4untrust §7from your island, use §9/island trust <player>"
+"§9* §7To §atrust§7/§4untrust §7from your island, use §a/island trust <player>"
 
 msgid "§4Members are already trusted!"
 msgstr "§4* §7Members are already §atrusted§7!"
@@ -1134,7 +1162,7 @@ msgstr "§4* §7You are no longer §4trusted §7on §6{0}'s §7island."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
-msgstr "§6{0} §7revoked trust in §4{1} §7on the island"
+msgstr "§6{0} §crevoked §7trust in §6{1} §7on the island"
 
 msgid "warp to another player's island"
 msgstr "warp to another player's island"
@@ -1150,16 +1178,16 @@ msgstr ""
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
 msgstr ""
-"§9* §7Set incoming warp to your current location using §9/island setwarp"
+"§9* §7Set incoming warp to your current location using §a/island setwarp"
 
 msgid "§fToggle your warp on/off using §e/island togglewarp"
-msgstr "§9* §7Toggle your warp on/off using §9/island togglewarp"
+msgstr "§9* §7Toggle your warp on/off using §a/island togglewarp"
 
 msgid "§4You do not have permission to create a warp on your island!"
 msgstr "§4* §7You do not have permission to create a warp on your island!"
 
 msgid "§fWarp to another island using §e/island warp <player>"
-msgstr "§9* §7Warp to another island using §9/island warp <player>"
+msgstr "§9* §7Warp to another island using §a/island warp <player>"
 
 msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4* §7You do not have permission to warp to other islands!"
@@ -1192,16 +1220,16 @@ msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4* §7That player has forbidden you from warping to their island."
 
 msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "But you are ALLLLLLL ALOOOOONE!"
+msgstr "§9* §7But you are ALLLLLLL ALOOOOONE!"
 
 msgid "But you are Yelling in the wind!"
-msgstr "But you are Yelling in the wind!"
+msgstr "§9* §7But you are Yelling in the wind!"
 
 msgid "But your fantasy friends are gone!"
-msgstr "But your fantasy friends are gone!"
+msgstr "§9* §7But your fantasy friends are gone!"
 
 msgid "But you are Talking to your self!"
-msgstr "But you are Talking to your self!"
+msgstr "§9* §7But you are Talking to your self!"
 
 #, java-format
 msgid "§cSorry! {0}"
@@ -1216,13 +1244,11 @@ msgstr "talk to players on your island"
 msgid "talk to your island party"
 msgstr "talk to your island party"
 
-#, fuzzy
 msgid "§eYou can not use another islands portals!"
 msgstr "§9* §7You can not use another islands portals!"
 
-#, fuzzy
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
-msgstr "§9* §7Trading isn't allowed on other islands."
+msgstr "§9* §7Trading isn't allowed on other islands. Do it in spawn."
 
 msgid "§eVisitors can't drop items!"
 msgstr "§9* §7Visitors can't drop items!"
@@ -1244,9 +1270,8 @@ msgstr ""
 "§4* No Access! §7You are trying to teleport to the roof of the §4NETHER§7, "
 "that is not allowed."
 
-#, fuzzy
 msgid "§4You can only convert obsidian once every 10 seconds"
-msgstr "§4* §7You can restart your island in §4{0} §7seconds."
+msgstr "§4* §7You can only convert obsidian once every 10 seconds"
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§9* §7Changing your obsidian back into lava. Be careful!"
@@ -1254,9 +1279,8 @@ msgstr "§9* §7Changing your obsidian back into lava. Be careful!"
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4* §7It's a bad idea to replace your lava!"
 
-#, fuzzy
 msgid "§eYou cannot hurt island-members."
-msgstr "You cannot use this biome."
+msgstr "§4* §7You cannot hurt island-members."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr ""
@@ -1275,26 +1299,26 @@ msgid "§cBanned:§e You are banned from this island."
 msgstr "§4* §lBanned§r§4:§7 You are banned from this island."
 
 msgid "§cLocked:§e That island is locked! No entry allowed."
-msgstr "§4* Locked:§7 That island is locked! No entry allowed."
+msgstr "§4* Locked:§7 That island is §4locked! §7No entry allowed."
 
 #, java-format
 msgid "§eWaiting for our turn §c{0,number,###}%"
-msgstr "§eWaiting for our turn §c{0,number,###}%"
+msgstr "§4* §7Waiting for our turn §c{0,number,###}%"
 
 #, java-format
 msgid "§9Creating island...§e{0,number,###}%"
-msgstr "§9* §7Creating island...§9{0,number,###}%"
+msgstr "§9* §7Creating island...§c{0,number,###}%"
 
 #, java-format
 msgid "§9{0}§7 timed out"
-msgstr "§9{0}§7 timed out"
+msgstr "§9* {0}§7 timed out"
 
 #, java-format
 msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§4* §7Doing §9{0}§7 is §4RISKY§7. Repeat the command within §4{1}§7 seconds "
+"§4* §7Doing §a{0}§7 is §4RISKY§7. Repeat the command within §4{1}§7 seconds "
 "to accept!"
 
 #, java-format
@@ -1306,7 +1330,8 @@ msgid "§d** You are leaving §b{0}''s §disland."
 msgstr "§9* §7You are leaving §6{0}''s §7island."
 
 msgid "§eYour island is now locked. Only your party members may enter."
-msgstr "§eYour island is now locked. Only your party members may enter."
+msgstr ""
+"§4* §7Your island is now §4locked§7. Only your party members may enter."
 
 msgid "§4You must be the party leader to lock your island!"
 msgstr "§4* §7You must be the party leader to lock your island!"
@@ -1339,15 +1364,16 @@ msgstr "The island has been created."
 
 #, java-format
 msgid "§b{0}§d locked the island."
-msgstr "§9* §6{0}§7 locked the island."
+msgstr "§9* §6{0} §4locked §7the island."
 
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr ""
-"§4* §7Since your island is locked, your incoming warp has been deactivated."
+"§4* §7Since your island is §4locked§7, your incoming warp has been "
+"§4deactivated§7."
 
 #, java-format
 msgid "§b{0}§d unlocked the island."
-msgstr "§6{0}§7 unlocked the island."
+msgstr "§9* §6{0}§a unlocked §7the island."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
@@ -1355,7 +1381,7 @@ msgstr "§4Sky §9Message §4: §7 {0}"
 
 #, java-format
 msgid "§b{0}§d has been removed from the island group."
-msgstr "§4{0}§7 has been removed from the island group."
+msgstr "§4* {0}§7 has been removed from the island group."
 
 #, java-format
 msgid "§9{1} §7- {0}"
@@ -1365,8 +1391,8 @@ msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
 msgstr ""
-"§cThe island owning this piece of nether is being deleted! Sending you to "
-"spawn."
+"§4* §7The island owning this piece of nether is being deleted! Sending you "
+"to spawn."
 
 msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr "§4* §7The island you are on is being deleted! Sending you to spawn."
@@ -1375,9 +1401,10 @@ msgstr "§4* §7The island you are on is being deleted! Sending you to spawn."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eWALL OF FAME (page {0} of {1}):"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Top ten list is empty! Only islands above level {0} is considered."
-msgstr "§4Top ten list is empty! (perhaps the generation failed?)"
+msgstr ""
+"§4* §7Top ten list is empty! Only islands above level §a{0} §7is considered."
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1387,35 +1414,48 @@ msgid "§eYour rank is: §f{0}"
 msgstr "§9* §7Your rank is: §f{0}"
 
 msgid "UNKNOWN"
-msgstr ""
+msgstr "UNKNOWN"
 
 msgid "ANIMAL"
-msgstr ""
+msgstr "ANIMAL"
 
 msgid "MONSTER"
-msgstr ""
+msgstr "MONSTER"
 
 msgid "VILLAGER"
-msgstr ""
+msgstr "VILLAGER"
 
 msgid "GOLEM"
-msgstr ""
+msgstr "GOLEM"
 
 #, java-format
 msgid "§c{0}"
-msgstr ""
+msgstr "§c{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
-msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr "§9* §7{0}: §a{1}§7 (max. {2})"
+
+#, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr "§4* §7Unable to locate schematic §c{0}§7, contact a server-admin"
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr "§9* §7Congratulations! §9Your island has appeared."
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr "§4* Note:§7 Construction might still be ongoing."
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr "§9* §7Use §a/is h§7 or the §a/is§7 GUI menu to go there."
 
 #, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§4* Watchdog!§7 Unable to locate a chest within §4{0}§7, bailing out."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Page {0}"
-msgstr "§7Usage: {0}"
+msgstr "§7Page {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1462,13 +1502,11 @@ msgstr "§4* §7Configuration saved and reloaded."
 msgid "§cError! §9Unable to save config file!"
 msgstr "§4* Error! §9Unable to save config file!"
 
-#, fuzzy
 msgid "§3First Page"
-msgstr "§7Usage: {0}"
+msgstr "§3First Page"
 
-#, fuzzy
 msgid "§3Last Page"
-msgstr "§7Usage: {0}"
+msgstr "§3Last Page"
 
 msgid "§cSave & Reload config"
 msgstr "§4* Save & Reload config"
@@ -1563,8 +1601,9 @@ msgstr "Permissions"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-msgid "§hPlayer Permissions"
-msgstr "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
+msgstr "§9Player Permissions"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1602,10 +1641,10 @@ msgid "Group Members: §2{0}§7/§e{1}"
 msgstr "Group Members: §2{0}§7/§e{1}"
 
 msgid "§aMore players can be invited to this island."
-msgstr "§aMore players can be invited to this island."
+msgstr "§9* §7More players can be invited to this island."
 
 msgid "§cThis island is full."
-msgstr "§cThis island is full."
+msgstr "§4* §7This island is full."
 
 msgid ""
 "§eHover over a player's icon to\n"
@@ -1873,17 +1912,13 @@ msgid "You cannot use this biome."
 msgstr "You cannot use this biome."
 
 msgid "§7Current page"
-msgstr ""
+msgstr "§7Current page"
 
 msgid "§7First Page"
-msgstr ""
+msgstr "§7First Page"
 
-#, fuzzy
 msgid "§7Last Page"
-msgstr "§7Usage: {0}"
-
-msgid "Island Menu"
-msgstr "Island Menu"
+msgstr "§7Last Page"
 
 msgid "Island Create Menu"
 msgstr "Island Create Menu"
@@ -1909,6 +1944,14 @@ msgstr ""
 "invite others to join in\n"
 "building your island empire!\n"
 "§e§lClick here to start!"
+
+#, fuzzy
+msgid "§aClick to create!"
+msgstr "§e§lClick here to activate."
+
+#, java-format
+msgid "§cNo access!§7({0})"
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lJoin an Island"
@@ -1946,6 +1989,9 @@ msgstr ""
 "details about them here.\n"
 "§e§lClick here for help!"
 
+msgid "Island Menu"
+msgstr "Island Menu"
+
 msgid "§a§lReturn Home"
 msgstr "§a§lReturn Home"
 
@@ -1971,7 +2017,7 @@ msgid ""
 "to earn skybucks, items, perks,\n"
 "and titles."
 msgstr ""
-"View a list of §9challenges that\n"
+"View a list of §9challenges §rthat\n"
 "you can complete on your island\n"
 "to earn skybucks, items, perks,\n"
 "and titles."
@@ -2027,9 +2073,9 @@ msgstr ""
 msgid "Change Island Biome"
 msgstr "Change Island Biome"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eCurrent Biome: §b{0}"
-msgstr "§6Currency Reward: §a{0}"
+msgstr "§eCurrent Biome: §b{0}"
 
 msgid ""
 "The island biome affects things\n"
@@ -2160,6 +2206,40 @@ msgstr ""
 "to your island.\n"
 "§e§lClick here to change."
 
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§lStart an Island"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "Island Create Menu"
+
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4* §7You do not have access to that island-schematic!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lReturn Home"
+
+#, fuzzy, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§e§lClick here to activate."
+
+#, fuzzy
+msgid "§aClick to restart!"
+msgstr "§e§lClick here to activate."
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
+
 msgid "Caps On"
 msgstr "Caps On"
 
@@ -2169,16 +2249,15 @@ msgstr "§9Text Editor"
 msgid "§eSending you to spawn."
 msgstr "§9* §7Sending you to spawn."
 
-#, fuzzy
 msgid "§eThe island has been §cLOCKED§e."
-msgstr "The island has been created."
+msgstr "§9* §7The island has been §4LOCKED§7."
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
 msgstr "§9* §7You will be teleported in §4{0} §7seconds."
 
 msgid "§7Teleport cancelled"
-msgstr ""
+msgstr "§4* §7Teleport cancelled"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Something went wrong saving the island and/or party data!"
@@ -2187,16 +2266,17 @@ msgstr "Something went wrong saving the island and/or party data!"
 msgid ""
 "§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
 msgstr ""
+"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
 
 #, java-format
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
-msgstr ""
+msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 
 msgid "§4Player is already assigned to this island!"
-msgstr "§4Player is already assigned to this island!"
+msgstr "§4* §7Player is already assigned to this island!"
 
 msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4You are not part of an island. Returning you the spawn area!"
+msgstr "§4* §7You are not part of an island. Returning you the spawn area!"
 
 msgid "§aTeleporting you to your island."
 msgstr "§9* §7Teleporting you to your island."
@@ -2209,13 +2289,21 @@ msgid "§aTeleporting you to {0}'s island."
 msgstr "§9* §7Teleporting you to §6{0}'s §7island."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
-msgstr "§4You must be closer to your island to set your skyblock home!"
+msgstr "§4* §7You must be closer to your island to set your skyblock home!"
 
 msgid "§aYour skyblock home has been set to your current location."
-msgstr "§aYour skyblock home has been set to your current location."
+msgstr "§9* §7Your skyblock home has been set to your current location."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4* §7Your current location is not a safe home-location."
+
+#, fuzzy, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+"§a* §7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "§4* §7Could not create your Island. Please contact a server moderator."
@@ -2224,18 +2312,37 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§9* §7Getting your island ready, please be patient, it can take a while."
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§9* §7Congratulations! §9Your island has appeared."
+#, fuzzy
+msgid "§9Creating an island at your location"
+msgstr "§4* §7No valid island at your location"
 
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§4* Note:§7 Construction might still be ongoing."
+#, fuzzy, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§4* §7No island found at your location!"
 
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr "Use §9/is h§r or the §9/is§r menu to go there."
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "North"
 msgstr ""
-"§9* §7Yay! We found a vacancy closer to spawn. §9Clearing it for you..."
+
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
+msgstr ""
 
 msgid "d"
 msgstr "d"
@@ -2253,30 +2360,36 @@ msgstr "s"
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
+#~ msgid "§9Clearing an area for you..."
+#~ msgstr "§9* §7Clearing an area for you..."
 
-#~ msgid "Page {0,number,integer}"
-#~ msgstr "Page {0,number,integer}"
-
-#, fuzzy
-#~ msgid "z7Page {0}"
-#~ msgstr "§7Usage: {0}"
-
-#, fuzzy
-#~ msgid "§eYou cannot access containers on this island."
-#~ msgstr "§4* §7You do not have permission to invite others to this island!"
+#~ msgid "§cYou have misspelled the biome name."
+#~ msgstr "§cYou have misspelled the biome name."
 
 #~ msgid "§4"
 #~ msgstr "§4"
 
-#, fuzzy
-#~ msgid "Error: {0}"
-#~ msgstr "Owner: {0}"
+#~ msgid "§eYou can not use another islands portals! Shame on you - cheater!"
+#~ msgstr "§9* §7You can not use another islands portals!"
 
-#, fuzzy
-#~ msgid "Renamed player {0} to {1} in {2} seconds."
-#~ msgstr "§eReset cooldown on {0} for {1}§e to {2} seconds"
+#~ msgid "§eTrading isn't allowed on other islands. Go home - cheater!"
+#~ msgstr "§9* §7Trading isn't allowed on other islands."
+
+#~ msgid "§4Top ten list is empty! (perhaps the generation failed?)"
+#~ msgstr "§4Top ten list is empty! (perhaps the generation failed?)"
+
+#~ msgid "Page {0,number,integer}"
+#~ msgstr "Page {0,number,integer}"
+
+#~ msgid "{0} ({1}/{2})"
+#~ msgstr "{0} ({1}/{2})"
+
+#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+#~ msgstr ""
+#~ "§9* §7Yay! We found a vacancy closer to spawn. §9Clearing it for you..."
+
+#~ msgid "§7Usage: {0}"
+#~ msgstr "§7Usage: {0}"
 
 #~ msgid "§7Name: §b{0}\n"
 #~ msgstr "§7Name: §b{0}\n"

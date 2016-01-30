@@ -23,6 +23,17 @@ public class ConfirmHandler {
         this.timeout = timeout;
     }
 
+    public long millisLeft(final Player player, final String cmd) {
+        UUID uuid = player.getUniqueId();
+        if (confirmMap.containsKey(uuid)) {
+            ConfirmCommand command = confirmMap.get(uuid);
+            if (command != null && command.isValid(cmd, timeout)) {
+                return TimeUtil.secondsAsMillis(timeout) - (System.currentTimeMillis() - command.tstamp);
+            }
+        }
+        return -1;
+    }
+
     public boolean checkCommand(final Player player, final String cmd) {
         if (!confirmationsActiveFor(cmd)) {
             return true;

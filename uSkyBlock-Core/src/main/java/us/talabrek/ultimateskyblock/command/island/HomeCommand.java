@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class HomeCommand extends RequireIslandCommand {
     public HomeCommand(uSkyBlock plugin) {
-        super(plugin, "home|h", "usb.island.sethome", I18nUtil.tr("teleport to the island home"));
+        super(plugin, "home|h", "usb.island.home", I18nUtil.tr("teleport to the island home"));
     }
 
     @Override

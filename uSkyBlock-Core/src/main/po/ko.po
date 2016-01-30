@@ -7,13 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5.10\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-26 13:16+0900\n"
+"PO-Revision-Date: 2016-01-27 00:18+0100\n"
 "Last-Translator: swan201\n"
 "Language-Team: Protocodyne Korean Translation Team <github@protocodyne.com>\n"
-"Language: Ko-kr\n"
+"Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -30,9 +31,16 @@ msgstr "§4필요 조건이 {0} 분 후에 리셋됩니다."
 msgid "§eThis challenge requires the following:"
 msgstr "§e이 도전과제는 다음의 것들을 요구합니다:"
 
+msgid "§7and more..."
+msgstr ""
+
 #, fuzzy, java-format
-msgid "§f{0} §7{1}"
+msgid "§f{0}x§7{1}"
 msgstr "§a{0} §c{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6아이템 보상: §a"
@@ -98,11 +106,11 @@ msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
-msgstr "§e당신은 다음의 아이템이 부족합니다:{0}"
+msgstr "§e당신은 다음의 아이템이 부족합니다: {0}개의"
 
 #, java-format
 msgid "§aYou have completed the {0} challenge!"
-msgstr "§a당신은{0} 도전과제를 완료했습니다!"
+msgstr "§a당신은 {0} 도전과제를 완료했습니다!"
 
 #, java-format
 msgid "§9{0}§f has completed the §9{1}§f challenge!"
@@ -134,10 +142,10 @@ msgid "Rank: {0}"
 msgstr "랭크: {0}"
 
 msgid "§fComplete most challenges in"
-msgstr "§f대부분의 도전과제를 완료하였음"
+msgstr "§f대부분의 도전과제를 완료하였습니다"
 
 msgid "§fthis rank to unlock the next rank."
-msgstr "§f다음 랭크를 해제하기 위한 랭크."
+msgstr "§f이 랭크는 다음 랭크를 해제하기 위한 랭크 입니다."
 
 msgid "§eClick here to show previous page"
 msgstr "§e전 페이지를 보려면 여기를 클릭하세요"
@@ -204,16 +212,20 @@ msgstr ""
 "§4유효하지 않은 도전과제 이름입니다! 더 많은 정보가 필요하면 /c help를 이용하"
 "세요"
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
-msgstr "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
+msgstr "{0}개의  {1} challenges"
 
 #, java-format
 msgid "§7Complete {0}"
-msgstr "§7완료함 {0}"
+msgstr "§7를 완료하여 {0} 랭크를"
 
 msgid "to unlock this rank"
-msgstr "이 랭크를 활성화 하려면"
+msgstr "잠금해제 하세요"
+
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "{0}개의  {1} challenges"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -225,13 +237,6 @@ msgstr "§e유효하지 않은 플레이어 {0}가 공급하였습니다."
 
 msgid "Manage challenges for a player"
 msgstr "도전과제를 관리하세요"
-
-msgid "§4Challenge has already been completed"
-msgstr "§4도전과제는 이미 완료되었습니다"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§e도전과제: {0}이 {1}를 완료했습니다"
 
 msgid "resets the challenge for the player"
 msgstr "해당 플레이어의 도전과제를 리셋합니다"
@@ -250,12 +255,28 @@ msgstr "모든 도전과제를 리셋합니다"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0}는 모든 도전과제를 리셋했습니다."
 
+#, fuzzy
+msgid "complete all challenges in the rank"
+msgstr "§f대부분의 도전과제를 완료하였습니다"
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4도전과제는 이미 완료되었습니다"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§e도전과제: {0}이 {1}를 완료했습니다"
+
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4{0}란 이름의 도전과제를 찾지 못했습니다!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
+msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
 msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
 
 msgid "manage islands"
@@ -782,6 +803,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§c당신의 현재 섬의 생태계를 바꿀 권한이 없습니다."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§c생태계의 이름을 잘못적으셨습니다."
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§e당신은 생태계를 {0,number,#}분 후에 다시 바꿀 수 있습니다."
@@ -796,15 +827,6 @@ msgstr "{0}가 섬의 생태계를 {1}로 바꾸었습니다"
 
 msgid "§cYou do not have permission to change your biome to that type."
 msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다.."
-
-msgid "§cYou have misspelled the biome name."
-msgstr "§c생태계의 이름을 잘못적으셨습니다."
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
-
-msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
 
 msgid "create an island"
 msgstr "섬을 만듭니다"
@@ -871,7 +893,7 @@ msgstr "플레이어를 당신의 섬으로 초대합니다"
 msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr ""
-"§e만약§f 플레이어를 당신의 섬으로 초대하려면 /island invite <playername>§e "
+"§e만약 플레이어를 당신의 섬으로 초대하려면§f /island invite <playername>§e "
 "를 쓰세요 ."
 
 msgid "§4Only the island's owner can invite!"
@@ -947,7 +969,7 @@ msgid ""
 "restart if you want a new one!"
 msgstr ""
 "§4만약 당신이 혼자라면 당신의 섬을 떠날 수 없습니다!. 만약 당신이 새 섬을 원"
-"하면 /island restart를 사용하여당신만의 섬을 가지세요!"
+"하면 /island restart를 사용하여 당신만의 섬을 가지세요!"
 
 msgid "§eYou own this island, use /island remove <player> instead."
 msgstr ""
@@ -1150,7 +1172,7 @@ msgstr ""
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
 msgstr ""
-"§f§e/island setwarp을 이용해서 당신의 현재 위치에 들어오는 워프를 지정하세요"
+"§e/island setwarp§f을 이용해서 당신의 현재 위치에 들어오는 워프를 지정하세요"
 
 msgid "§fToggle your warp on/off using §e/island togglewarp"
 msgstr "§f다음 명령어를 사용해 워프 기능을 온오프 하세요 §e/island togglewarp"
@@ -1159,7 +1181,7 @@ msgid "§4You do not have permission to create a warp on your island!"
 msgstr "§4당신의 섬에 워프를 만들 권한이 없습니다!"
 
 msgid "§fWarp to another island using §e/island warp <player>"
-msgstr "§f§e/island warp <플레이어>를 써서 다른 섬으로 워프하세요"
+msgstr "§e/island warp§f <플레이어>를 써서 다른 섬으로 워프하세요"
 
 msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4다른 섬으로 워프할 권한이 없습니다!"
@@ -1239,12 +1261,11 @@ msgid ""
 "§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
 "that is not allowed."
 msgstr ""
-"§c엑세스 안됨! §e 당신은 §cNETHER§e의 지붕으로 텔레포트하려 했다만, 그것은 불"
+"§c엑세스 안됨! §e 당신은 §cNETHER§e의 지붕으로 텔레포트하려 했지만, 그것은 불"
 "가능합니다."
 
-#, fuzzy
 msgid "§4You can only convert obsidian once every 10 seconds"
-msgstr "§c당신은 {0}초 후에 재시작 할 수 있습니다."
+msgstr "§4당신은 오직 10초마다 옵시디언을 변환 할 수 있습니다."
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§e당신의 옵시디언을 용암으로 되돌리는 중입니다. 조심하세요!"
@@ -1252,9 +1273,8 @@ msgstr "§e당신의 옵시디언을 용암으로 되돌리는 중입니다. 조
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4당신의 용암을 대체하는건 좋은 생각이 아닌거 같네요!"
 
-#, fuzzy
 msgid "§eYou cannot hurt island-members."
-msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
+msgstr "§e당신은 섬원을 해칠 수 없습니다."
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§4그 플레이어가 그들의 섬으로 당신이 텔레포트하는 것을 금지했습니다."
@@ -1304,7 +1324,8 @@ msgstr "§d** 당신은 §b{0}의 §d섬을 떠나는 중입니다."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
-"§e당신의 섬은 이제 봉인되었습니다. 오직 당신의 파티 멤버만 들어올 수 있슴돠."
+"§e당신의 섬은 이제 봉인되었습니다. 오직 당신의 파티 멤버만 들어올 수 있습니"
+"다."
 
 msgid "§4You must be the party leader to lock your island!"
 msgstr "§4파티의 리더여야 당신의 섬을 잠글 수 있습니다!"
@@ -1409,12 +1430,25 @@ msgid "§7{0}: §a{1}§7 (max. {2})"
 msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
 
 #, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr "§cNote:§e 건설이 아마 아직 진행중입니다'."
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr "Use §9/is h§r or the §9/is§r menu to go there."
+
+#, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§c감시견!§9 {0}개 내로 상자를 놓을 수 없음, 돈 내고 풀려나는 중."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Page {0}"
-msgstr "§7Complete {0}"
+msgstr "§7페이지 {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1560,7 +1594,8 @@ msgstr "권한"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-msgid "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
 msgstr "§h플레이어 권한"
 
 msgid ""
@@ -1676,7 +1711,7 @@ msgid ""
 msgstr ""
 "숲 생태계는 당신의 섬이 (늑대를 포함한)\n"
 "동물같은 수동적인 몬스터들은 스폰될 수 있습니다.\n"
-"또한 사나운 몬스터들은 일반적으로 출현합니다\n"
+"또한 사나운 몬스터들은 일반적으로 출현합니다"
 
 msgid "Desert"
 msgstr "사막"
@@ -1691,7 +1726,7 @@ msgstr ""
 "사막 생태계는 당신의 섬에\n"
 "비나 눈이 내리지 않게 합니다\n"
 "수동적인 몬스터들은 스폰되지 않습니다\n"
-"적대적인 몬스터들은 일반적으로 스폰됩니다.\n"
+"적대적인 몬스터들은 일반적으로 스폰됩니다."
 
 msgid "Jungle"
 msgstr "정글"
@@ -1724,7 +1759,7 @@ msgstr ""
 "음산합니다. 수동적인 몬스터들\n"
 "이 일반적으로 스폰되고 \n"
 "슬라임이 적은 확률로\n"
-"달의 모양에 따라 밤에 스폰됩니다\n"
+"달의 모양에 따라 밤에 스폰됩니다"
 
 msgid "Taiga"
 msgstr "타이가"
@@ -1739,7 +1774,7 @@ msgstr ""
 "타이가 생태계는 눈이 비 대신 옵니다.\n"
 "(늑대를 포함한) 수동적인\n"
 "몬스터들이 일반적으로 스폰되고\n"
-"적대적인 몬스터들이 스폰됩니다.\n"
+"적대적인 몬스터들이 스폰됩니다."
 
 msgid "Mushroom"
 msgstr "버섯"
@@ -1770,7 +1805,7 @@ msgstr ""
 "지옥 생태계는 어둡고 죽은 듯해 보입니다.\n"
 "몇몇의 지하로부터의 몬스터들이\n"
 "이 지역에서 스폰됩니다\n"
-"(gahsts와 blazes는 제외합니다)\n"
+"(gahsts와 blazes는 제외합니다)"
 
 msgid "Sky"
 msgstr "하늘"
@@ -1799,7 +1834,7 @@ msgstr ""
 "초원 생태계는 눈 대신\n"
 "비가 옵니다. (말을 포함한)\n"
 "수동적인 몬스터들이 일반적으로\n"
-"스폰되며 적대적인 몬스터들도 스폰됩니다 \n"
+"스폰되며 적대적인 몬스터들도 스폰됩니다 "
 
 msgid "Extreme Hills"
 msgstr "절벽"
@@ -1842,7 +1877,7 @@ msgstr ""
 "심해 생태계는 진화된\n"
 "생태계입니다. 동물같은 수동적인 몬스터들은\n"
 "스폰되지 않습니다. 적대적인 몬스터들\n"
-"(Guardians 포함)이 일반적으로 스폰됩니다.\n"
+"(Guardians 포함)이 일반적으로 스폰됩니다."
 
 #, java-format
 msgid "Biome: {0}"
@@ -1865,9 +1900,6 @@ msgstr "첫번째 페이지"
 
 msgid "§7Last Page"
 msgstr "§7마지막 페이지"
-
-msgid "Island Menu"
-msgstr "섬 메뉴 (Protocodyne PTK팀 번역)"
 
 msgid "Island Create Menu"
 msgstr "섬 생성 매뉴"
@@ -1894,6 +1926,14 @@ msgstr ""
 "다른사람들을 초대할 수 있습니다!\n"
 "§e§l여기를 눌러 시작하세요!"
 
+#, fuzzy
+msgid "§aClick to create!"
+msgstr "§e§l여기를 눌러서 활성화하세요."
+
+#, java-format
+msgid "§cNo access!§7({0})"
+msgstr ""
+
 msgid "§a§lJoin an Island"
 msgstr "§a§l섬에 참여하기"
 
@@ -1912,7 +1952,7 @@ msgstr ""
 "바라나요? 만약 다른 플레이어가\n"
 "그들의 섬으로 당신을 초대한다면\n"
 "당신은 여기를 클릭하거나\n"
-"§e/그들과 어울리려면 island accept§f을 쓸 수 있어요.\n"
+"그들과 어울리려면 §e/island accept§f을 쓸 수 있어요.\n"
 "§e§l초대를 승낙하려면 여기를 누르세요\n"
 "§e§l(당신은 먼저 초대받아야 합니다)"
 
@@ -1929,6 +1969,9 @@ msgstr ""
 "도움이 필요하세요? 여기서\n"
 "그것들에 대한 디테일을 보세요\n"
 "§e§l도움이 필요하면 여기를 누르세요!"
+
+msgid "Island Menu"
+msgstr "섬 메뉴 (Protocodyne PTK팀 번역)"
 
 msgid "§a§lReturn Home"
 msgstr "§a§l집으로 귀환"
@@ -2010,9 +2053,9 @@ msgstr ""
 msgid "Change Island Biome"
 msgstr "섬 생태계 변환"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eCurrent Biome: §b{0}"
-msgstr "§6돈 보상: §a{0}"
+msgstr "§6현재 생태계: §a{0}"
 
 msgid ""
 "The island biome affects things\n"
@@ -2057,7 +2100,7 @@ msgid ""
 "§fmembers may build there."
 msgstr ""
 "§e잠금 설정: §8비활성화\n"
-"§f당신의 섬은 현재 §aUnlock되어있습니다.\n"
+"§f당신의 섬은 현재 §aUnlock§f 되어있습니다.\n"
 "§f모든 플레이어들은 당신의 섬에 입장할\n"
 "§f수 있습니다, 하지만 오직 당신과 당신의 그룹\n"
 "§f멤버들만이 건축할 수 있습니다."
@@ -2075,7 +2118,7 @@ msgid ""
 "§fyou set using §d/island setwarp."
 msgstr ""
 "§e워프 상태: §a활성화\n"
-"§f다른 플레이어들은 §d/island setwarp를\n"
+"§f다른 플레이어들은 §d/island setwarp§f를\n"
 "§f이용해서 섬의 당신이 지정한 포인트로 언제든지\n"
 "§f워프할 수 있습니다."
 
@@ -2094,7 +2137,7 @@ msgstr ""
 "§e워프 상태: §8비활성화\n"
 "§f다른 플레이어들은 당신의 섬으로\n"
 "§f워프할 수 없습니다 §f활성화하기 전에. \n"
-"§d/island setwarp을 사용하여 워프포인트를 지정하세요."
+"§d/island setwarp§f을 사용하여 워프포인트를 지정하세요."
 
 msgid "§e§lClick here to activate."
 msgstr "§e§l여기를 눌러서 활성화하세요."
@@ -2141,6 +2184,41 @@ msgstr ""
 "다른 플레이어들이 당신의 섬으로 텔레포트 할 때\n"
 "그들은 이 지점으로 오게 될 것입니다\n"
 "§e§l여기를 눌러서 바꾸세요."
+
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§l섬 시작"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "섬 생성 매뉴"
+
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4그 커맨드의 권한이 없습니다!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§l집으로 귀환"
+
+#, fuzzy, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§e§l여기를 눌러서 활성화하세요."
+
+#, fuzzy
+msgid "§aClick to restart!"
+msgstr "§e§l여기를 눌러서 활성화하세요."
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
 
 msgid "Caps On"
 msgstr "Caps On"
@@ -2199,26 +2277,50 @@ msgstr "§a당신의 skyblock집이 당신의 현제 지점에 지정되었습�
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"
 
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
-"§e당신의 섬을 준비하는 중입니다, 좀만 참아주세요, 조금 시간이 걸림니다."
+"§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
+#, fuzzy
+msgid "§9Creating an island at your location"
+msgstr "§4당신의 위치에 유효한 섬이 없습니다"
 
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§cNote:§e 건설이 아마 아직 진행중입니다'."
+#, fuzzy, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§e당신의 위치에서 어떠한 섬도 발견하지 못했습니다!"
 
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr "Use §9/is h§r or the §9/is§r menu to go there."
-
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "North"
 msgstr ""
-"§e야호! 스폰지역에서 가까운 빈터를 발견했습니다. §9당신을 위해서 치우는 중입"
-"니다..."
+
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
+msgstr ""
 
 msgid "d"
 msgstr "d"
@@ -2235,6 +2337,11 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+#~ msgstr ""
+#~ "§e야호! 스폰지역에서 가까운 빈터를 발견했습니다. §9당신을 위해서 치우는 중"
+#~ "입니다..."
 
 #~ msgid "Page {0,number,integer}"
 #~ msgstr "페이지 {0,number,integer}"

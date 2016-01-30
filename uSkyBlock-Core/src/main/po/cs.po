@@ -32,8 +32,15 @@ msgstr "§4Požadavek bude restartován za {0} minut."
 msgid "§eThis challenge requires the following:"
 msgstr "§ePro splnění tohoto úkolu potřebujete:"
 
+msgid "§7and more..."
+msgstr ""
+
 #, java-format
-msgid "§f{0} §7{1}"
+msgid "§f{0}x§7{1}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}"
 msgstr ""
 
 msgid "§6Item Reward: §a"
@@ -200,8 +207,8 @@ msgstr "§ePro splnění tohoto úkolu použijte §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Neplatný název úkolu! Použijte /c help pro více informací."
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
 msgstr "Splňte {0} dalších úkolů z hodnosti {1},"
 
 #, java-format
@@ -210,6 +217,10 @@ msgstr "§7Splňte {0}"
 
 msgid "to unlock this rank"
 msgstr "aby jste odemkli tento úkol a hodnost."
+
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "Splňte {0} dalších úkolů z hodnosti {1},"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -220,13 +231,6 @@ msgid "§eInvalid player {0} supplied."
 msgstr ""
 
 msgid "Manage challenges for a player"
-msgstr ""
-
-msgid "§4Challenge has already been completed"
-msgstr "§4Tento SkyBlock úkol již byl splněn"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
 msgstr ""
 
 msgid "resets the challenge for the player"
@@ -246,12 +250,27 @@ msgstr ""
 msgid "§e{0} has had all challenges reset."
 msgstr ""
 
+msgid "complete all challenges in the rank"
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4Tento SkyBlock úkol již byl splněn"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§4Tento SkyBlock úkol již byl splněn"
+
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4SkyBlock úkol s názvem {0} nebyl nalezen!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
+msgstr "§4Hráč s jménem {0} nebyl nalezen!"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
 msgstr "§4Hráč s jménem {0} nebyl nalezen!"
 
 msgid "manage islands"
@@ -764,6 +783,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr ""
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr ""
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr ""
+
+#, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr ""
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr ""
@@ -777,15 +806,6 @@ msgid "{0} changed the island biome to {1}"
 msgstr ""
 
 msgid "§cYou do not have permission to change your biome to that type."
-msgstr ""
-
-msgid "§cYou have misspelled the biome name."
-msgstr ""
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr ""
-
-msgid "§4You do not have permission to change the biome of this island!"
 msgstr ""
 
 msgid "create an island"
@@ -1356,6 +1376,19 @@ msgid "§7{0}: §a{1}§7 (max. {2})"
 msgstr ""
 
 #, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr ""
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr ""
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr ""
+
+#, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 
@@ -1491,7 +1524,8 @@ msgstr ""
 msgid "{0} <{1}>"
 msgstr ""
 
-msgid "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
 msgstr "§hPráva hráče"
 
 msgid ""
@@ -1735,9 +1769,6 @@ msgstr ""
 msgid "§7Last Page"
 msgstr "Hodnost: {0}"
 
-msgid "Island Menu"
-msgstr "Ostrovní menu"
-
 msgid "Island Create Menu"
 msgstr "Ostrovní menu - Začátek"
 
@@ -1753,6 +1784,13 @@ msgid ""
 "invite others to join in\n"
 "building your island empire!\n"
 "§e§lClick here to start!"
+msgstr ""
+
+msgid "§aClick to create!"
+msgstr ""
+
+#, java-format
+msgid "§cNo access!§7({0})"
 msgstr ""
 
 msgid "§a§lJoin an Island"
@@ -1778,6 +1816,9 @@ msgid ""
 "details about them here.\n"
 "§e§lClick here for help!"
 msgstr ""
+
+msgid "Island Menu"
+msgstr "Ostrovní menu"
 
 msgid "§a§lReturn Home"
 msgstr "§a§lZpět domů"
@@ -1940,6 +1981,40 @@ msgid ""
 "§e§lClick here to change."
 msgstr ""
 
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§lVytvořit ostrov"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "Ostrovní menu - Začátek"
+
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4Nemáte práva pro použití tohoto příkazu!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lZpět domů"
+
+#, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr ""
+
+msgid "§aClick to restart!"
+msgstr ""
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
+
 msgid "Caps On"
 msgstr ""
 
@@ -1998,22 +2073,47 @@ msgstr "§aVáš SkyBlock domov byl nastaven na vaši aktuální pozici."
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Vaše aktuální lokace není vhodná pro založení SkyBlock domova."
 
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 
-msgid "§aCongratulations! §eYour island has appeared."
+msgid "§9Creating an island at your location"
 msgstr ""
 
-msgid "§cNote:§e Construction might still be ongoing."
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
 msgstr ""
 
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgid "North"
 msgstr ""
 
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
 msgstr ""
 
 msgid "d"

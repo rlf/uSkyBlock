@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.util.FormatUtil.join;
+
 /**
  * Conversion to ItemStack from strings.
  */
@@ -53,6 +55,17 @@ public enum ItemStackUtil {;
             }
         }
         return Material.BARRIER.getId();
+    }
+
+    public static List<ItemStack> createItemList(String items, List<String> items2) {
+        StringBuilder sb = new StringBuilder();
+        if (items != null) {
+            sb.append(items + " ");
+        }
+        if (items2 != null && !items2.isEmpty()) {
+            sb.append(join(items2, " "));
+        }
+        return createItemList(sb.toString());
     }
 
     public static List<ItemStack> createItemList(String items) {
@@ -108,7 +121,7 @@ public enum ItemStackUtil {;
         meta.setDisplayName(FormatUtil.normalize(name));
         List<String> lore = new ArrayList<>();
         if (description != null) {
-            lore.add(FormatUtil.normalize(description));
+            lore.addAll(FormatUtil.wordWrap(FormatUtil.normalize(description), 30, 30));
         }
         meta.setLore(lore);
         itemStack.setItemMeta(meta);

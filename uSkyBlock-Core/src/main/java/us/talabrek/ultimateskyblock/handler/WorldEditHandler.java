@@ -82,18 +82,38 @@ public class WorldEditHandler {
      * Returns all the chunks that are fully contained within the region.
      */
     public static Set<Vector2D> getInnerChunks(Region region) {
-        Set<Vector2D> chunks = region.getChunks();
-        int by = (region.getMaximumPoint().getBlockY() + region.getMinimumPoint().getBlockY())/2;
-        for (Iterator<Vector2D> it = chunks.iterator(); it.hasNext(); ) {
-            Vector2D chunk = it.next();
-            int bx = chunk.getBlockX()*16;
-            int bz = chunk.getBlockZ()*16;
-            Vector v1 = new Vector(bx, by, bz);
-            Vector v2 = new Vector(bx+15, by, bz);
-            Vector v3 = new Vector(bx+15, by, bz+15);
-            Vector v4 = new Vector(bx, by, bz+15);
-            if (!region.contains(v1) || !region.contains(v2) || !region.contains(v3) || !region.contains(v4)) {
-                it.remove();
+        Set<Vector2D> chunks = new HashSet<>();
+        int minX = region.getMinimumPoint().getBlockX();
+        int minZ = region.getMinimumPoint().getBlockZ();
+        int maxX = region.getMaximumPoint().getBlockX();
+        int maxZ = region.getMaximumPoint().getBlockZ();
+        int cx = minX & 0xF;
+        int cz = minZ & 0xF;
+        minX = minX - cx + 16;
+        minZ = minZ - cz + 16;
+        for (int x = minX; x <= maxX; x+=16) {
+            for (int z = minZ; z <= maxZ; z+=16) {
+                chunks.add(new Vector2D(x >> 4, z >> 4));
+            }
+        }
+        return chunks;
+    }
+
+    public static Set<Vector2D> getChunks(Region region) {
+        Set<Vector2D> chunks = new HashSet<>();
+        int minX = region.getMinimumPoint().getBlockX();
+        int minZ = region.getMinimumPoint().getBlockZ();
+        int maxX = region.getMaximumPoint().getBlockX();
+        int maxZ = region.getMaximumPoint().getBlockZ();
+        int cx = minX & 0xF;
+        int cz = minZ & 0xF;
+        minX = (minX - cx) >> 4;
+        minZ = (minZ - cz) >> 4;
+        maxX = (maxX - (maxX & 0xF) + 16) >> 4;
+        maxZ = (maxZ - (maxZ & 0xF) + 16) >> 4;
+        for (int x = minX; x <= maxX; x++) {
+            for (int z = minZ; z <= maxZ; z++) {
+                chunks.add(new Vector2D(x, z));
             }
         }
         return chunks;

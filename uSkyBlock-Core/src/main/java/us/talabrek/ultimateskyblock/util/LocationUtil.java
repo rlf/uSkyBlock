@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.util;
 
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
@@ -10,16 +11,32 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
 /**
  * Responsible for various transformations and queries of locations.
  */
-public enum LocationUtil {;
+public enum LocationUtil {
+    ;
+    private static final String[] CARDINAL_DIRECTION = {
+            I18nUtil.marktr("North"),
+            I18nUtil.marktr("North-East"),
+            I18nUtil.marktr("Eeast"),
+            I18nUtil.marktr("South-East"),
+            I18nUtil.marktr("Sout"),
+            I18nUtil.marktr("South-West"),
+            I18nUtil.marktr("West"),
+            I18nUtil.marktr("North-West")
+    };
+
     public static String asString(Location loc) {
         if (loc == null) {
             return null;
@@ -199,6 +216,15 @@ public enum LocationUtil {;
         return null;
     }
 
+    public static Location alignToDistance(Location loc, int distance) {
+        int x = (int) (Math.round(loc.getX() / distance) * distance);
+        int z = (int) (Math.round(loc.getZ() / distance) * distance);
+        loc.setX(x);
+        loc.setY(Settings.island_height);
+        loc.setZ(z);
+        return loc;
+    }
+
     /**
      * Finds the nearest solid block above the location.
      */
@@ -213,7 +239,7 @@ public enum LocationUtil {;
         int z = blockLoc.getBlockZ();
         int cx = x & 0xF;
         int cz = z & 0xF;
-        int topBlock = chunkSnapshot.getHighestBlockYAt(cx,cz);
+        int topBlock = chunkSnapshot.getHighestBlockYAt(cx, cz);
         int y = blockLoc.getBlockY();
         while (y <= topBlock && isLiquidOrAir(chunkSnapshot.getBlockTypeId(cx, y, cz))) {
             y++;
@@ -223,6 +249,10 @@ public enum LocationUtil {;
 
     private static boolean isLiquidOrAir(int blockTypeId) {
         return BlockUtil.isFluid(blockTypeId) || blockTypeId == Material.AIR.getId();
+    }
+
+    public static String getCardinalDirection(float yaw) {
+        return tr(CARDINAL_DIRECTION[((int) Math.round((((int)yaw + 360) % 360) / 45d))]);
     }
 
     public static class ScanChest extends BukkitRunnable {

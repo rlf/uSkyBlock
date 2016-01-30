@@ -107,7 +107,7 @@ public class ChallengeLogic {
     }
 
     public List<Challenge> getChallengesForRank(String rank) {
-        return ranks.get(rank).getChallenges();
+        return ranks.containsKey(rank) ? ranks.get(rank).getChallenges() : Collections.<Challenge>emptyList();
     }
 
     public void completeChallenge(final Player player, String challengeName) {
@@ -272,7 +272,7 @@ public class ChallengeLogic {
             for (Map.Entry<EntityMatch, Integer> entry : countMap.entrySet()) {
                 sb.append("\u00a7e - ");
                 sb.append(" \u00a74" + entry.getValue() + " \u00a7ex");
-                sb.append(" \u00a7b" + entry.getKey() + "\n");
+                sb.append(" \u00a7b" + entry.getKey().getDisplayName() + "\n");
             }
             player.sendMessage(tr("\u00a7eStill the following entities short:\n{0}", sb.toString()).split("\n"));
         }

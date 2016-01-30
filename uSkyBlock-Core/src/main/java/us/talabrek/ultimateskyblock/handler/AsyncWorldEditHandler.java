@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.handler.asyncworldedit.AWEAdaptor;
+import us.talabrek.ultimateskyblock.handler.task.WEPasteSchematic;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
@@ -42,7 +43,7 @@ public enum AsyncWorldEditHandler {;
     }
 
     public static void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
-        getAWEAdaptor().loadIslandSchematic(file, origin, playerPerk);
+        new WEPasteSchematic(file, origin, playerPerk).runTask(uSkyBlock.getInstance());
     }
 
     public static AWEAdaptor getAWEAdaptor() {
@@ -69,6 +70,11 @@ public enum AsyncWorldEditHandler {;
             }
         }
         return adaptor;
+    }
+
+    public static boolean isAWE() {
+        Plugin awe = getAWE();
+        return awe != null && awe.isEnabled();
     }
 
     private static Plugin getAWE() {

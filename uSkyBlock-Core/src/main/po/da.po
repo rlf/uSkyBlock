@@ -32,9 +32,16 @@ msgstr "§4Kravene vil nulstilles om {0} minutter."
 msgid "§eThis challenge requires the following:"
 msgstr "§eDenne udfordring kræver følgende:"
 
-#, java-format
-msgid "§f{0} §7{1}"
+msgid "§7and more..."
+msgstr ""
+
+#, fuzzy, java-format
+msgid "§f{0}x§7{1}"
 msgstr "§f{0} §7{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6Ting: §a"
@@ -204,8 +211,8 @@ msgstr "§eFor at gennemføre denne udfordring, brug §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Forkert udfordringsnavn!§e Brug §9/c help§e for mere info."
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
 msgstr "Gennemfør yderligere {0} {1} udfordringer"
 
 #, java-format
@@ -214,6 +221,10 @@ msgstr "§7Gennemfør {0}"
 
 msgid "to unlock this rank"
 msgstr "for at låse denne rank op"
+
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "Gennemfør yderligere {0} {1} udfordringer"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -225,13 +236,6 @@ msgstr "§eForkert spiller-navn {0} givet."
 
 msgid "Manage challenges for a player"
 msgstr "Hånter udfordringer for en spiller"
-
-msgid "§4Challenge has already been completed"
-msgstr "§4Udfordringen er allerede blevet gennemført"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§eudfordring: {0} er blevet gennemført af {1}"
 
 msgid "resets the challenge for the player"
 msgstr "nulstiller udfordringer for spilleren"
@@ -250,12 +254,28 @@ msgstr "nulstiller alle spillerens udfordringer"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} har fået alle udfordringer nulstillet."
 
+#, fuzzy
+msgid "complete all challenges in the rank"
+msgstr "§fGennemfør de fleste udfordringer"
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4Udfordringen er allerede blevet gennemført"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§eudfordring: {0} er blevet gennemført af {1}"
+
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Ingen udfordringer med navn {0} fundet!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
+msgstr "§4Ingen spiller med navn {0} fundet!"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
 msgstr "§4Ingen spiller med navn {0} fundet!"
 
 msgid "manage islands"
@@ -782,6 +802,16 @@ msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§cDu har ikke tilladelse til at ændre biome for din ø."
 
+msgid "§4You do not have permission to change the biome of this island!"
+msgstr "§4Du har ikke tilladelse til at ændre biome for denne ø!"
+
+msgid "§eYou must be on your island to change the biome!"
+msgstr "§eDu skal være på din ø, for at ændre biome!"
+
+#, fuzzy, java-format
+msgid "§cYou have misspelled the biome name. Must be one of {0}"
+msgstr "§cUgyldigt biome-navn."
+
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eDu kan ikke ændre biome de næste {0,number,#} minutter."
@@ -796,15 +826,6 @@ msgstr "{0} ændrede øens biome til {1}"
 
 msgid "§cYou do not have permission to change your biome to that type."
 msgstr "§4Du har ikke tilladelse til at ændre til den biome!"
-
-msgid "§cYou have misspelled the biome name."
-msgstr "§cUgyldigt biome-navn."
-
-msgid "§eYou must be on your island to change the biome!"
-msgstr "§eDu skal være på din ø, for at ændre biome!"
-
-msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4Du har ikke tilladelse til at ændre biome for denne ø!"
 
 msgid "create an island"
 msgstr "opret en ø"
@@ -1401,6 +1422,19 @@ msgid "§7{0}: §a{1}§7 (max. {2})"
 msgstr "§7{0} §a{1}§7 (max. {2})"
 
 #, java-format
+msgid "Unable to locate schematic {0}, contact a server-admin"
+msgstr ""
+
+msgid "§aCongratulations! §eYour island has appeared."
+msgstr "§aTillykke! §eDin ø er ankommet."
+
+msgid "§cNote:§e Construction might still be ongoing."
+msgstr "§cBemærk:§e Det kan være der stadig arbejdes på den."
+
+msgid "Use §9/is h§r or the §9/is§r menu to go there."
+msgstr "Brug §9/is h§r eller §9/is§r menuen til at tage derhen."
+
+#, java-format
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 "§cVagthund!§9 Ude af stand til at finde en kiste inden for {0}, giver op."
@@ -1551,7 +1585,8 @@ msgstr "Tilladelser"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-msgid "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
 msgstr "§hSpiller tilladelser"
 
 msgid ""
@@ -1866,9 +1901,6 @@ msgstr ""
 msgid "§7Last Page"
 msgstr "§7Brug: {0}"
 
-msgid "Island Menu"
-msgstr "Hoved menu"
-
 msgid "Island Create Menu"
 msgstr "Start menu"
 
@@ -1893,6 +1925,14 @@ msgstr ""
 "Du kan invitere andre til at hjælpe dig\n"
 "bygge dit ø-rige!\n"
 "§e§lKlik her for at starte!"
+
+#, fuzzy
+msgid "§aClick to create!"
+msgstr "§e§lKlik her for at aktivere."
+
+#, java-format
+msgid "§cNo access!§7({0})"
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lHjælp en eksisterende ø"
@@ -1928,6 +1968,9 @@ msgstr ""
 "eller kommandoer?\n"
 "Se detaljer her.\n"
 "§e§lKlik for at se hjælp."
+
+msgid "Island Menu"
+msgstr "Hoved menu"
 
 msgid "§a§lReturn Home"
 msgstr "§a§lReturner til hjemmet"
@@ -2139,6 +2182,41 @@ msgstr ""
 "punkt når de besøger din ø.\n"
 "§e§lKlik for at ændre."
 
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§lStart en ø"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "Start menu"
+
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4Du har ikke adgang til den kommando!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lReturner til hjemmet"
+
+#, fuzzy, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§e§lKlik her for at aktivere."
+
+#, fuzzy
+msgid "§aClick to restart!"
+msgstr "§e§lKlik her for at aktivere."
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
+
 msgid "Caps On"
 msgstr "Caps On"
 
@@ -2197,6 +2275,12 @@ msgstr "§aDit hjemsted er blevet sat til din nuværende position."
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Din nuværende position er ikke et sikkert hjemsted."
 
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kunne ikke oprette din ø. Venligst kontakt en server administrator."
 
@@ -2204,17 +2288,37 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
-msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§aTillykke! §eDin ø er ankommet."
+#, fuzzy
+msgid "§9Creating an island at your location"
+msgstr "§4Ingen valid ø på din position"
 
-msgid "§cNote:§e Construction might still be ongoing."
-msgstr "§cBemærk:§e Det kan være der stadig arbejdes på den."
+#, fuzzy, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§4Ingen valid ø på din position"
 
-msgid "Use §9/is h§r or the §9/is§r menu to go there."
-msgstr "Brug §9/is h§r eller §9/is§r menuen til at tage derhen."
+msgid "North"
+msgstr ""
 
-msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
+msgstr ""
 
 msgid "d"
 msgstr "d"
@@ -2231,6 +2335,10 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
+#~ msgstr ""
+#~ "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
 
 #~ msgid "{0} ({1}/{2})"
 #~ msgstr "{0} ({1}/{2})"

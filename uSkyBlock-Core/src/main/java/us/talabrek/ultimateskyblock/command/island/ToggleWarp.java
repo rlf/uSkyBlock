@@ -12,7 +12,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class ToggleWarp extends RequireIslandCommand {
     public ToggleWarp(uSkyBlock plugin) {
-        super(plugin, "togglewarp|tw", "usb.extra.addwarp", tr("enable/disable warping to your island."));
+        super(plugin, "togglewarp|tw", "usb.island.togglewarp", tr("enable/disable warping to your island."));
     }
 
     @Override

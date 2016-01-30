@@ -15,6 +15,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
@@ -225,23 +226,23 @@ public class IslandInfo {
     }
 
     public int getMaxPartySize() {
-        return getMaxPartyIntValue("maxPartySizePermission", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getMaxPartySize());
+        return getMaxPartyIntValue("maxPartySizePermission", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getMaxPartySize());
     }
 
     public int getMaxAnimals() {
-        return getMaxPartyIntValue("maxAnimals", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getAnimals());
+        return getMaxPartyIntValue("maxAnimals", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getAnimals());
     }
 
     public int getMaxMonsters() {
-        return getMaxPartyIntValue("maxMonsters", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getMonsters());
+        return getMaxPartyIntValue("maxMonsters", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getMonsters());
     }
 
     public int getMaxVillagers() {
-        return getMaxPartyIntValue("maxVillagers", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getVillagers());
+        return getMaxPartyIntValue("maxVillagers", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getVillagers());
     }
 
     public int getMaxGolems() {
-        return getMaxPartyIntValue("maxGolems", uSkyBlock.getInstance().getPerkLogic().getDefaultPerk().getGolems());
+        return getMaxPartyIntValue("maxGolems", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getGolems());
     }
 
     private int getMaxPartyIntValue(String name, int defaultValue) {
@@ -573,9 +574,7 @@ public class IslandInfo {
     }
 
     public Location getIslandLocation() {
-        World world = uSkyBlock.getInstance().getWorld();
-        String[] cords = name.split(",");
-        return new Location(world, Long.parseLong(cords[0], 10), Settings.island_height, Long.parseLong(cords[1], 10));
+        return IslandUtil.getIslandLocation(name);
     }
 
     @Override
@@ -584,6 +583,7 @@ public class IslandInfo {
         str += ChatColor.GRAY + "  - level: " + ChatColor.DARK_AQUA + String.format("%5.2f", getLevel()) + "\n";
         str += ChatColor.GRAY + "  - location: " + ChatColor.DARK_AQUA + name + "\n";
         str += ChatColor.GRAY + "  - biome: " + ChatColor.DARK_AQUA + getBiome() + "\n";
+        str += ChatColor.GRAY + "  - schematic: " + ChatColor.DARK_AQUA + getSchematicName() + "\n";
         str += ChatColor.GRAY + "  - warp: " + ChatColor.DARK_AQUA + hasWarp() + "\n";
         if (hasWarp()) {
             str += ChatColor.GRAY + "     loc: " + ChatColor.DARK_AQUA + LocationUtil.asString(getWarpLocation()) + "\n";
@@ -728,6 +728,15 @@ public class IslandInfo {
 
     public void setLeafBreaks(int breaks) {
         config.set("blocks.leafBreaks", breaks);
+        dirty = true;
+    }
+
+    public String getSchematicName() {
+        return config.getString("general.schematicName", Settings.island_schematicName);
+    }
+
+    public void setSchematicName(String schematicName) {
+        config.set("general.schematicName", schematicName);
         dirty = true;
     }
 }

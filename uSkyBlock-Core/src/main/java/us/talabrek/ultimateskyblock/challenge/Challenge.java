@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.FormatUtil.join;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.prefix;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
 
@@ -22,6 +23,7 @@ import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
  */
 public class Challenge {
     public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?(?<meta>\\{.*\\})?");
+    public static final int MAX_DETAILS = 11;
 
     enum Type { PLAYER, ISLAND, ISLAND_LEVEL;
         static Type from(String s) {
@@ -194,10 +196,34 @@ public class Challenge {
             }
             reward = getRepeatReward();
         }
-        lores.add(tr("\u00a7eThis challenge requires the following:"));
-        for (ItemStack item : getRequiredItems(timesCompleted)) {
-            lores.add(tr("\u00a7f{0} \u00a77{1}", item.getAmount(), VaultHandler.getItemName(item)));
+        List<ItemStack> reqItems = getRequiredItems(timesCompleted);
+        if ((reqItems != null && !reqItems.isEmpty()) || (requiredEntities != null && !requiredEntities.isEmpty())) {
+            lores.add(tr("\u00a7eThis challenge requires the following:"));
         }
+        List<String> details = new ArrayList<>();
+        if (reqItems != null && !reqItems.isEmpty()) {
+            for (ItemStack item : reqItems) {
+                if (wrappedDetails(details).size() >= MAX_DETAILS) {
+                    details.add(tr("\u00a77and more..."));
+                    break;
+                }
+                details.add(item.getAmount() > 1
+                        ? tr("\u00a7f{0}x\u00a77{1}", item.getAmount(), VaultHandler.getItemName(item))
+                        : tr("\u00a77{0}", VaultHandler.getItemName(item)));
+            }
+        }
+        if (requiredEntities != null && !requiredEntities.isEmpty() && wrappedDetails(details).size() < MAX_DETAILS) {
+            for (EntityMatch entityMatch : requiredEntities) {
+                if (wrappedDetails(details).size() >= MAX_DETAILS) {
+                    details.add(tr("\u00a77and more..."));
+                    break;
+                }
+                details.add(entityMatch.getCount() > 1
+                        ? tr("\u00a7f{0}x\u00a77{1}", entityMatch.getCount(), entityMatch.getDisplayName())
+                        : tr("\u00a77{0}", entityMatch.getDisplayName()));
+            }
+        }
+        lores.addAll(wrappedDetails(details));
         List<String> lines = wordWrap("\u00a7a" + reward.getRewardText(), 20, 30);
         lores.add(tr("\u00a76Item Reward: \u00a7a") + lines.get(0));
         for (String line : lines.subList(1, lines.size())) {
@@ -211,6 +237,10 @@ public class Challenge {
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
         return currentChallengeItem;
+    }
+
+    private List<String> wrappedDetails(List<String> details) {
+        return wordWrap(join(details, ", "), 30, 30);
     }
 
     public ItemStack getDisplayItem() {

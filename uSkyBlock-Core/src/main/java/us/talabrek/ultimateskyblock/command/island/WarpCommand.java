@@ -23,7 +23,7 @@ public class WarpCommand extends RequirePlayerCommand {
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         if (args.length == 0) {
             IslandInfo island = plugin.getIslandInfo(player);
-            if (island != null && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", player.getWorld())) {
+            if (island != null && VaultHandler.checkPerk(player.getName(), "usb.island.setwarp", player.getWorld())) {
                 if (island.hasWarp()) {
                     player.sendMessage(tr("\u00a7aYour incoming warp is active, players may warp to your island."));
                 } else {

@@ -5,6 +5,7 @@ import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.World;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -83,4 +84,5 @@ public enum VaultHandler {;
     public static Economy getEcon() {
         return econ;
     }
+
 }
