@@ -36,7 +36,8 @@ public class RestartCommand extends RequireIslandCommand {
 
             if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
                 plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
-                return plugin.restartPlayerIsland(player, pi.getIslandLocation(), args != null && args.length > 0 ? args[0] : Settings.island_schematicName);
+                String cSchem = args != null && args.length > 0 ? args[0] : island.getSchematicName();
+                return plugin.restartPlayerIsland(player, pi.getIslandLocation(), cSchem);
             } else {
                 player.sendMessage(I18nUtil.tr("\u00a7eNOTE: Your entire island and all your belongings will be RESET!"));
                 return true;

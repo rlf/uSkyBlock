@@ -50,7 +50,7 @@ lockedDisplayItem: STAINED_GLASS_PANE:14
 
 ranks:
   ChallengeGroup1:
-    name: '&aDefault Challenges'
+    name: '&aDefault'
     displayItem: 4
     resetInHours: 20
     challenges:
@@ -177,7 +177,7 @@ ranks:
 #===============================================
 
   ChallengeGroup2:
-    name: '&aFarmer Challenges'
+    name: '&aFarmer'
     displayItem: 290
     resetInHours: 20
     requires:
@@ -367,7 +367,7 @@ ranks:
 #===============================================
 
   ChallengeGroup3:
-    name: '&aBuilders Challenges'
+    name: '&aBuilders'
     displayItem: '98:2'
     resetInHours: 20
     requires:
@@ -538,7 +538,7 @@ ranks:
 #===============================================
 
   ChallengeGroup4:
-    name: '&aNether Challenges'
+    name: '&aNether'
     displayItem: '153'
     resetInHours: 20
     requires:
@@ -630,7 +630,7 @@ ranks:
 #===============================================
 
   ChallengeGroup5:
-    name: '&aFarmer II Challenges'
+    name: '&aFarmer II'
     displayItem: 292
     resetInHours: 48
     requires:
@@ -762,8 +762,8 @@ ranks:
         type: onIsland
         radius: 40
         requiredEntities:
-        - Cow: 8
-        - Pig: 8
+        - 'Cow:8'
+        - 'Pig:8'
         - Sheep:{"Color":0}
         - Sheep:{"Color":1}
         - Sheep:{"Color":2}
@@ -780,7 +780,7 @@ ranks:
         - Sheep:{"Color":13}
         - Sheep:{"Color":14}
         - Sheep:{"Color":15}
-        - Chicken: 16
+        - 'Chicken:16'
         repeatable: true
         displayItem: '85'
         takeItems: true
@@ -1014,7 +1014,7 @@ ranks:
 #===============================================
 
   ChallengeGroup7:
-    name: '&a Miscellaneous Challenges'
+    name: '&a Miscellaneous'
     displayItem: 32
     resetInHours: 20
     requires:
@@ -1209,7 +1209,7 @@ ranks:
 #===============================================
 
   ChallengeGroup8:
-    name: '&aExtreme Challenges'
+    name: '&aExtreme'
     displayItem: '264'
     resetInHours: 20
     requires:
@@ -1394,4 +1394,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 18
+version: 19

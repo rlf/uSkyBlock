@@ -28,6 +28,7 @@ import us.talabrek.ultimateskyblock.command.completion.AllPlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.BiomeTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.ChallengeTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.OnlinePlayerTabCompleter;
+import us.talabrek.ultimateskyblock.command.completion.RankTabCompleter;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -48,6 +49,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         addTab("leader", allPlayerCompleter);
         addTab("challenge", challengeCompleter);
         addTab("biome", biomeCompleter);
+        addTab("rank", new RankTabCompleter(plugin));
         add(new ReloadCommand());
         add(new ImportCommand());
         add(new GenTopTenCommand(plugin));

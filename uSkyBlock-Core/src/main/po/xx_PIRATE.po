@@ -30,9 +30,16 @@ msgstr "§4Requirements will reset in {0} minutes."
 msgid "§eThis challenge requires the following:"
 msgstr "§eThis challenge requires the followin':"
 
+msgid "§7and more..."
+msgstr ""
+
 #, fuzzy, java-format
-msgid "§f{0} §7{1}"
+msgid "§f{0}x§7{1}"
 msgstr "§a{0} §c{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6Item Bounty: §a"
@@ -200,8 +207,8 @@ msgstr "§eTo complete this challenge, use §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Invalid challenge name! Use /c help for more information"
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
 msgstr "Complete {0} more {1} challenges"
 
 #, java-format
@@ -210,6 +217,10 @@ msgstr "§7Complete {0}"
 
 msgid "to unlock this rank"
 msgstr "to unlock this rank"
+
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "Complete {0} more {1} challenges"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -221,13 +232,6 @@ msgstr "§eInvalid pirate {0} supplied."
 
 msgid "Manage challenges for a player"
 msgstr "Manage challenges for a pirate"
-
-msgid "§4Challenge has already been completed"
-msgstr "§4Challenge has already been completed"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§echallenge: {0} has been completed for {1}"
 
 msgid "resets the challenge for the player"
 msgstr "resets the challenge for the pirate"
@@ -246,12 +250,28 @@ msgstr "resets all challenges for the pirate"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} has had all challenges reset."
 
+#, fuzzy
+msgid "complete all challenges in the rank"
+msgstr "§fComplete most challenges in"
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4Challenge has already been completed"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§echallenge: {0} has been completed for {1}"
+
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Nay challenge named {0} was found!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
+msgstr "§4Nay pirate named {0} was found!"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
 msgstr "§4Nay pirate named {0} was found!"
 
 msgid "manage islands"
@@ -1563,7 +1583,8 @@ msgstr "Permissions"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-msgid "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
 msgstr "§hPlayer Permissions"
 
 msgid ""
@@ -1882,9 +1903,6 @@ msgstr ""
 msgid "§7Last Page"
 msgstr "§7Complete {0}"
 
-msgid "Island Menu"
-msgstr "Island Menu"
-
 msgid "Island Create Menu"
 msgstr "Island Create Menu"
 
@@ -1909,6 +1927,14 @@ msgstr ""
 "invite others to join in\n"
 "buildin' yer hideout empire!\n"
 "§e§lClick here to start!"
+
+#, fuzzy
+msgid "§aClick to create!"
+msgstr "§e§lClick here to activate."
+
+#, java-format
+msgid "§cNo access!§7({0})"
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lJoin an Island"
@@ -1945,6 +1971,9 @@ msgstr ""
 "concepts or commands? View\n"
 "details about 'em here.\n"
 "§e§lClick here for help!"
+
+msgid "Island Menu"
+msgstr "Island Menu"
 
 msgid "§a§lReturn Home"
 msgstr "§a§lReturn Home"
@@ -2160,6 +2189,41 @@ msgstr ""
 "to yer hideout.\n"
 "§e§lClick here to change."
 
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§lStart an Island"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "Island Create Menu"
+
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4Ye do not have access to that command!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lReturn Home"
+
+#, fuzzy, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§e§lClick here to activate."
+
+#, fuzzy
+msgid "§aClick to restart!"
+msgstr "§e§lClick here to activate."
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
+
 msgid "Caps On"
 msgstr "Caps On"
 
@@ -2192,10 +2256,6 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
-#, fuzzy
-msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4Ye do not have access to that command!"
-
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Pirate be already assigned to this hideout!"
 
@@ -2223,7 +2283,7 @@ msgstr "§4Yer current location be not a safe home-location."
 
 #, java-format
 msgid ""
-"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
 
@@ -2233,7 +2293,36 @@ msgstr "Could not create yer Island. Please contact a server moderator."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGettin' yer hideout ready, please be patient, it can take a while."
 
-msgid "§9Clearing an area for you..."
+#, fuzzy
+msgid "§9Creating an island at your location"
+msgstr "§4Nay valid hideout at yer location"
+
+#, fuzzy, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§4Nay valid hideout at yer location"
+
+msgid "North"
+msgstr ""
+
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
 msgstr ""
 
 msgid "d"

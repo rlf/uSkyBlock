@@ -29,10 +29,10 @@ public class CreateIslandTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (!plugin.getIslandGenerator().createIsland(plugin, playerPerk, next, cSchem)) {
+        if (!plugin.getIslandGenerator().createIsland(playerPerk, next, cSchem)) {
             player.sendMessage(tr("Unable to locate schematic {0}, contact a server-admin", cSchem));
         }
-        BukkitRunnable generateTask = new GenerateTask(plugin, player, playerPerk.getPlayerInfo(), next, playerPerk);
+        BukkitRunnable generateTask = new GenerateTask(plugin, player, playerPerk.getPlayerInfo(), next, playerPerk, cSchem);
         final int heartBeatTicks = (int) TimeUtil.millisAsTicks(plugin.getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 2000));
         final BukkitRunnable completionWatchDog = new LocateChestTask(plugin, player, next, generateTask);
         completionWatchDog.runTaskTimer(plugin, 0, heartBeatTicks);

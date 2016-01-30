@@ -112,9 +112,9 @@ public class Settings {
         island_chestItems = ItemStackUtil.createItemArray(chestItemString);
 
         island_schematicName = config.getString("options.island.schematicName");
-        if ("yourschematicname".equals(island_schematicName) || island_schematicName == null) {
-            island_schematicName = "uSkyBlockDefault";
-            config.set("options.island.schematicName", "uSkyBlockDefault");
+        if ("yourschematicname".equals(island_schematicName) || "uSkyBlockDefault".equals(island_schematicName) || island_schematicName == null) {
+            island_schematicName = "default";
+            config.set("options.island.schematicName", island_schematicName);
             changed = true;
         }
         final Set<String> permissionList = new HashSet<>();

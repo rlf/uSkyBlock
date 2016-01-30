@@ -3,6 +3,8 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.json.simple.JSONObject;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.util.EntityUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +16,7 @@ import java.util.Map;
  * Data object holding values for matching an entity against a challenge.
  */
 public class EntityMatch {
+    private static final String[] COLOR_KEYS = {"Color", "color"};
     private final EntityType type;
     private final Map<String,Object> meta;
     private final int count;
@@ -88,5 +91,37 @@ public class EntityMatch {
     @Override
     public String toString() {
         return type.name() + (meta.isEmpty() ? "" : ":" + JSONObject.toJSONString(meta));
+    }
+
+    public String getDisplayName() {
+        StringBuilder sb = new StringBuilder();
+        String name = EntityUtil.getEntityDisplayName(type);
+        String color = getColorCode(meta);
+        sb.append(color);
+        sb.append(name);
+        Map<String,Object> extra = new HashMap<>(meta);
+        for (String key : COLOR_KEYS) {
+            extra.remove(key);
+        }
+        if (!extra.isEmpty()) {
+            sb.append(":").append(JSONObject.toJSONString(extra));
+        }
+        return sb.toString();
+    }
+
+    private String getColorCode(Map<String, Object> meta) {
+        // TODO: 30/01/2016 - R4zorax: Support more entities?
+        for (String key : COLOR_KEYS) {
+            if (meta.containsKey(key)) {
+                try {
+                    int colorcode = Integer.parseInt("" + meta.get(key));
+                    // for some reason, the color-scale is inverted.
+                    return "\u00a7" + Integer.toHexString(0xf ^ colorcode);
+                } catch (NumberFormatException e) {
+                    // ignore
+                }
+            }
+        }
+        return "";
     }
 }

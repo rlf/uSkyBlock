@@ -33,9 +33,16 @@ msgstr "§4Требования будут сброшены через {0} ми�
 msgid "§eThis challenge requires the following:"
 msgstr "§eЭто задание требует:"
 
+msgid "§7and more..."
+msgstr ""
+
 #, fuzzy, java-format
-msgid "§f{0} §7{1}"
+msgid "§f{0}x§7{1}"
 msgstr "§a{0} §c{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6Награда предметами: §a"
@@ -203,8 +210,8 @@ msgstr "§eДля завершения задания введите §f/c c {0}
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Неверное название задания! Введите /c help для подробной информации"
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
 msgstr "Выполнено {0} более {1} заданий"
 
 #, java-format
@@ -213,6 +220,10 @@ msgstr "§7Выполнено {0}"
 
 msgid "to unlock this rank"
 msgstr "для разблокировки звания"
+
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "Выполнено {0} более {1} заданий"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -224,13 +235,6 @@ msgstr "§eНекорректный игрок {0}."
 
 msgid "Manage challenges for a player"
 msgstr "Управлять заданиями для игрока"
-
-msgid "§4Challenge has already been completed"
-msgstr "§4Задание уже выполнено"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§eзадание: {0} выполнено игроком {1}"
 
 msgid "resets the challenge for the player"
 msgstr "сбросить задание для игрока"
@@ -249,12 +253,28 @@ msgstr "сбросить все задания для игрока"
 msgid "§e{0} has had all challenges reset."
 msgstr "§eУ игрока {0} сброшены все задания."
 
+#, fuzzy
+msgid "complete all challenges in the rank"
+msgstr "§fЗавершено большинство заданий в"
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4Задание уже выполнено"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§eзадание: {0} выполнено игроком {1}"
+
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Задание с названием {0} не найдено!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
+msgstr "§4Игрок с именем {0} не найден!"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
 msgstr "§4Игрок с именем {0} не найден!"
 
 msgid "manage islands"
@@ -1588,7 +1608,8 @@ msgstr "Права доступа"
 msgid "{0} <{1}>"
 msgstr "§a{0} §c{1}"
 
-msgid "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
 msgstr "§hПрава игрока"
 
 msgid ""
@@ -1899,9 +1920,6 @@ msgstr ""
 msgid "§7Last Page"
 msgstr "§7Введите: {0}"
 
-msgid "Island Menu"
-msgstr "Меню острова"
-
 msgid "Island Create Menu"
 msgstr "Меню создания острова"
 
@@ -1926,6 +1944,14 @@ msgstr ""
 "приглашать других присоединиться к\n"
 "строительству вашей островной империи!\n"
 "§e§lНажмите для старта!"
+
+#, fuzzy
+msgid "§aClick to create!"
+msgstr "§e§lНажмите, чтобы включить."
+
+#, java-format
+msgid "§cNo access!§7({0})"
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lПрисоединиться к острову"
@@ -1962,6 +1988,9 @@ msgstr ""
 "концепции или командам? Смотрите\n"
 "подробнее об этом здесь.\n"
 "§e§lНажмите для помощи!"
+
+msgid "Island Menu"
+msgstr "Меню острова"
 
 msgid "§a§lReturn Home"
 msgstr "§a§lВернуться домой"
@@ -2175,6 +2204,41 @@ msgstr ""
 "к вам на остров.\n"
 "§e§lНажмите, чтобы изменить."
 
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§lСоздать остров"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "Меню создания острова"
+
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4У вас нет доступа к этой команде!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lВернуться домой"
+
+#, fuzzy, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§e§lНажмите, чтобы включить."
+
+#, fuzzy
+msgid "§aClick to restart!"
+msgstr "§e§lНажмите, чтобы включить."
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
+
 msgid "Caps On"
 msgstr ""
 
@@ -2209,10 +2273,6 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
-#, fuzzy
-msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4У вас нет доступа к этой команде!"
-
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Игрок уже прикреплен к острову!"
 
@@ -2240,7 +2300,7 @@ msgstr "§4Ваше текущее место не безопасно для т�
 
 #, java-format
 msgid ""
-"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
 
@@ -2251,7 +2311,36 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eСоздание острова началось, подождите, это может занять некоторое время."
 
-msgid "§9Clearing an area for you..."
+#, fuzzy
+msgid "§9Creating an island at your location"
+msgstr "§4В этом месте нет подходящих островов"
+
+#, fuzzy, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§4В этом месте нет подходящих островов"
+
+msgid "North"
+msgstr ""
+
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
 msgstr ""
 
 msgid "d"

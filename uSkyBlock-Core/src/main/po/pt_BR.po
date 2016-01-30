@@ -31,9 +31,16 @@ msgstr "§4Requisitos irão resetar em {0} minutos."
 msgid "§eThis challenge requires the following:"
 msgstr "§eEsse desafio requer o seguinte:"
 
+msgid "§7and more..."
+msgstr ""
+
 #, fuzzy, java-format
-msgid "§f{0} §7{1}"
+msgid "§f{0}x§7{1}"
 msgstr "§a{0} §c{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6Prêmio em item: §a"
@@ -203,8 +210,8 @@ msgstr "§ePara completar esse desafio, use §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Nome de desafio inválido! Use /c help para mais informações"
 
-#, java-format
-msgid "Complete {0} more {1} challenges"
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1}§7 challenges"
 msgstr "Complete mais {0} desafios na categoria {1}"
 
 #, java-format
@@ -213,6 +220,10 @@ msgstr "§7Complete {0}"
 
 msgid "to unlock this rank"
 msgstr "para desbloquear essa categoria"
+
+#, fuzzy, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "Complete mais {0} desafios na categoria {1}"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -224,13 +235,6 @@ msgstr "§eJogador  {0}  é inválido."
 
 msgid "Manage challenges for a player"
 msgstr "Gerenciar desafios para um jogador"
-
-msgid "§4Challenge has already been completed"
-msgstr "§4Desafio já foi concluído"
-
-#, java-format
-msgid "§echallenge: {0} has been completed for {1}"
-msgstr "§edesafio: {0} foi completado por {1}"
 
 msgid "resets the challenge for the player"
 msgstr "redefinir o desafio para o jogador"
@@ -249,12 +253,28 @@ msgstr "resetar todos os desafios do jogador"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0}  teve todos os desafios resetados."
 
+#, fuzzy
+msgid "complete all challenges in the rank"
+msgstr "§fComplete mais desafios nessa"
+
+#, fuzzy, java-format
+msgid "§4Challenge {0} has already been completed"
+msgstr "§4Desafio já foi concluído"
+
+#, fuzzy, java-format
+msgid "§eChallenge {0} has been completed for {1}"
+msgstr "§edesafio: {0} foi completado por {1}"
+
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Desafio {0} não foi encontrado!"
 
 #, java-format
 msgid "§4No player named {0} was found!"
+msgstr "§4Não foi encontrado nenhum jogador com o nome {0}"
+
+#, fuzzy, java-format
+msgid "§4No rank named {0} was found!"
 msgstr "§4Não foi encontrado nenhum jogador com o nome {0}"
 
 msgid "manage islands"
@@ -1574,7 +1594,8 @@ msgstr "Permissões"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-msgid "§hPlayer Permissions"
+#, fuzzy
+msgid "§9Player Permissions"
 msgstr "§hPermissões dos jogadores"
 
 msgid ""
@@ -1893,9 +1914,6 @@ msgstr ""
 msgid "§7Last Page"
 msgstr "§7Use: {0}"
 
-msgid "Island Menu"
-msgstr "Menu da ilha"
-
 msgid "Island Create Menu"
 msgstr "Menu de nova ilha"
 
@@ -1920,6 +1938,14 @@ msgstr ""
 "pode convidar amigos para te\n"
 "ajudar a construir a ilha!\n"
 "§e§lClique aqui para iniciar!"
+
+#, fuzzy
+msgid "§aClick to create!"
+msgstr "§e§lClique aqui para ativar."
+
+#, java-format
+msgid "§cNo access!§7({0})"
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lEntrar em um grupo"
@@ -1956,6 +1982,9 @@ msgstr ""
 "Não sabe oque fazer?\n"
 "Nós podemos te ajudar.\n"
 "§e§lClique para ver um tutorial!"
+
+msgid "Island Menu"
+msgstr "Menu da ilha"
 
 msgid "§a§lReturn Home"
 msgstr "§a§lIr até sua ilha"
@@ -2171,6 +2200,41 @@ msgstr ""
 "a sua ilha.\n"
 "§e§lClique aqui para alterar."
 
+#, fuzzy
+msgid "§c§lRestart Island"
+msgstr "§a§lCriar uma ilha"
+
+msgid ""
+"Restarts your island.\n"
+"§4WARNING! §cwill remove your items and island!"
+msgstr ""
+
+#, fuzzy
+msgid "Island Restart Menu"
+msgstr "Menu de nova ilha"
+
+#, fuzzy
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§4Você não tem acesso a esse comando!"
+
+#, fuzzy
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lIr até sua ilha"
+
+#, fuzzy, java-format
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§e§lClique aqui para ativar."
+
+#, fuzzy
+msgid "§aClick to restart!"
+msgstr "§e§lClique aqui para ativar."
+
+#, java-format
+msgid ""
+"§cNo access!\n"
+"§7({0})"
+msgstr ""
+
 msgid "Caps On"
 msgstr "Caps On"
 
@@ -2203,10 +2267,6 @@ msgstr ""
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgstr ""
 
-#, fuzzy
-msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4Você não tem acesso a esse comando!"
-
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Jogador já faz parte dessa ilha!"
 
@@ -2234,7 +2294,7 @@ msgstr "§4Sua localização atual não é segura."
 
 #, java-format
 msgid ""
-"§7The pixes are busy changing the biome of your island to §9{0}§7, be "
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
 
@@ -2245,7 +2305,36 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
 
-msgid "§9Clearing an area for you..."
+#, fuzzy
+msgid "§9Creating an island at your location"
+msgstr "§4Não tem uma ilha válida na sua localização"
+
+#, fuzzy, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§4Não tem uma ilha válida na sua localização"
+
+msgid "North"
+msgstr ""
+
+msgid "North-East"
+msgstr ""
+
+msgid "Eeast"
+msgstr ""
+
+msgid "South-East"
+msgstr ""
+
+msgid "Sout"
+msgstr ""
+
+msgid "South-West"
+msgstr ""
+
+msgid "West"
+msgstr ""
+
+msgid "North-West"
 msgstr ""
 
 msgid "d"

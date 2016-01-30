@@ -22,7 +22,7 @@ options:
     worldName: skyworld
 
     # [integer] Area around 0,0 where islands will not be created to protect spawn.
-    spawnSize: 150
+    spawnSize: 64
 
   island:
     # [integer] The y-coordinate (height) where islands are spawned.
@@ -31,14 +31,13 @@ options:
     # [integer] The number of blocks between islands.
     distance: 128
 
-
     # [integer] The size of the protective region for each island. Can't be higher than 'distance'
     # and MUST be divisible by 32 if you intend to use nether.
     protectionRange: 128
 
     # [filename] The schematic to use for island generation.
     # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.
-    schematicName: yourschematicname
+    schematicName: default
 
     # [true/false] If true, remove all hostile mobs when a player teleports back to their island.
     removeCreaturesByTeleport: false
@@ -216,10 +215,11 @@ options:
 
 
 # List of selections for /is create and /is restart
+# the nodes under island-schemes must match the schematic-names from the schematics folder.
 island-schemes:
-  uSkyBlockDefault:
+  default:
     permission: usb.island.create
-    name: Default
+    description: The default uSkyBlock island
     displayItem: SAPLING
     extraItems: ''
     maxPartySize: 4
@@ -227,10 +227,11 @@ island-schemes:
     monsters: 50
     villagers: 16
     golems: 5
-  uSkyBlockSkySMP:
+  skySMP:
     permission: usb.schematic.skysmp
-    name: SkySMP
+    description: The original SkySMP island
     displayItem: GRASS
+    extraItems: 'OBSIDIAN:14 FLINT_AND_STEEL:1'
 
 # This section allows donors to get specific perks
 #donor-perks:
@@ -327,11 +328,12 @@ tool-menu:
     WORKBENCH: 'challenges'
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 43
+version: 44
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
   options.island.useOldIslands: false
+  options.island.schematicName: yourschematichere
 move-nodes:
   options.restart.confirmation: confirmation.is restart
   options.party.leave.confirmation: confirmation.is leave

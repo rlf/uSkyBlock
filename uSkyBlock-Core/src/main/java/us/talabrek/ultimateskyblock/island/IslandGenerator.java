@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
+import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.apache.commons.multiverse.io.FilenameUtils.getBaseName;
+
 /**
  * The factory for creating islands (actual blocks).
  */
@@ -34,8 +37,8 @@ import java.util.logging.Logger;
 public class IslandGenerator {
     private static final List<String> USB_SCHEMATICS = Arrays.asList(
             "uSkyBlockNether",
-            "uSkyBlockDefault",
-            "uSkyBlockSkySMP"
+            "default",
+            "skySMP"
     );
     private static final Logger log = Logger.getLogger(IslandGenerator.class.getName());
     private final File[] schemFiles;
@@ -61,7 +64,7 @@ public class IslandGenerator {
         this.schemFiles = directorySchematics.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlockNether");
+                return name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlock") && !getBaseName(name).toLowerCase().endsWith("nether");
             }
         });
         if (this.schemFiles == null) {
@@ -80,18 +83,22 @@ public class IslandGenerator {
         return names;
     }
 
-    public boolean createIsland(uSkyBlock plugin, final PlayerPerk playerPerk, final Location next, String cSchem) {
+    public boolean createIsland(final PlayerPerk playerPerk, final Location next, String cSchem) {
         // Hacky, but clear the Orphan info
         next.setYaw(0);
         next.setPitch(0);
         next.setY((double) Settings.island_height);
-        File schemFile = new File(directorySchematics, (cSchem != null ? cSchem : "uSkyBlockDefault") + ".schematic");
+        File schemFile = new File(directorySchematics, (cSchem != null ? cSchem : "default") + ".schematic");
+        File netherFile = new File(directorySchematics, (cSchem != null ? cSchem + "Nether" : "uSkyBlockNether") + ".schematic");
+        if (!netherFile.exists()) {
+            netherFile = netherSchematic;
+        }
         if (schemFile.exists() && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
             AsyncWorldEditHandler.loadIslandSchematic(schemFile, next, playerPerk);
             World skyBlockNetherWorld = uSkyBlock.getInstance().getSkyBlockNetherWorld();
             if (skyBlockNetherWorld != null) {
                 Location netherHome = new Location(skyBlockNetherWorld, next.getBlockX(), Settings.nether_height, next.getBlockZ());
-                AsyncWorldEditHandler.loadIslandSchematic(netherSchematic, netherHome, playerPerk);
+                AsyncWorldEditHandler.loadIslandSchematic(netherFile, netherHome, playerPerk);
             }
             return true;
         } else {
@@ -99,7 +106,7 @@ public class IslandGenerator {
         }
     }
 
-    public boolean setChest(final Location loc, final PlayerPerk playerPerk) {
+    public boolean setChest(final Location loc, final Perk perk) {
         Location chestLocation = LocationUtil.findChestLocation(loc);
         if (chestLocation != null) {
             final Block block = chestLocation.getWorld().getBlockAt(chestLocation);
@@ -108,7 +115,7 @@ public class IslandGenerator {
                 final Inventory inventory = chest.getInventory();
                 inventory.addItem(Settings.island_chestItems);
                 if (Settings.island_addExtraItems) {
-                    inventory.addItem(ItemStackUtil.createItemArray(playerPerk.getPerk().getExtraItems()));
+                    inventory.addItem(ItemStackUtil.createItemArray(perk.getExtraItems()));
                 }
                 return true;
             }

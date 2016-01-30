@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -23,13 +24,16 @@ public class GenerateTask extends BukkitRunnable {
     private final PlayerInfo pi;
     private final Location next;
     private final PlayerPerk playerPerk;
+    private final String schematicName;
     boolean hasRun = false;
-    public GenerateTask(uSkyBlock plugin, final Player player, final PlayerInfo pi, final Location next, PlayerPerk playerPerk) {
+
+    public GenerateTask(uSkyBlock plugin, final Player player, final PlayerInfo pi, final Location next, PlayerPerk playerPerk, String schematicName) {
         this.plugin = plugin;
         this.player = player;
         this.pi = pi;
         this.next = next;
         this.playerPerk = playerPerk;
+        this.schematicName = schematicName;
     }
     @Override
     public void run() {
@@ -37,8 +41,11 @@ public class GenerateTask extends BukkitRunnable {
             return;
         }
         next.getChunk().load();
-        plugin.getIslandGenerator().setChest(next, playerPerk);
+        Perk perk = plugin.getPerkLogic().getIslandPerk(schematicName).getPerk();
+        perk = perk.combine(playerPerk.getPerk());
+        plugin.getIslandGenerator().setChest(next, perk);
         IslandInfo islandInfo = plugin.setNewPlayerIsland(pi, next);
+        islandInfo.setSchematicName(schematicName);
         WorldGuardHandler.updateRegion(player, islandInfo);
         plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 

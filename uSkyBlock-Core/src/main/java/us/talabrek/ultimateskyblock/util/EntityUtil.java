@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.util;
 
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.NPC;
 
@@ -33,5 +34,9 @@ public enum EntityUtil {;
             }
         }
         return list;
+    }
+
+    public static String getEntityDisplayName(EntityType entityType) {
+        return FormatUtil.capitalize(entityType.name());
     }
 }
