@@ -36,7 +36,7 @@ msgstr "§7그리고 더..."
 
 #, fuzzy, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§a{0} §c{1}"
+msgstr "§f{0} §7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -102,7 +102,7 @@ msgstr ""
 
 #, fuzzy, java-format
 msgid " §4{0} §b{1}"
-msgstr "§a{0} §c{1}"
+msgstr "§4{0} §b{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -213,7 +213,7 @@ msgstr ""
 "세요"
 
 #, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
+msgid "§7Complete {0} more {1} §7challenges"
 msgstr "{0}개의  {1}§7 challenges"
 
 #, java-format
@@ -223,9 +223,6 @@ msgstr "§7를 완료하여 {0} 랭크를"
 msgid "to unlock this rank"
 msgstr "잠금해제 하세요"
 
-#, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "{0}개의  {1} §7challenges"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -810,7 +807,8 @@ msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
 
 #, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
-msgstr "§c생태계의 이름을 잘못적으셨습니다. 반드시 {0}중 하나여야 합니다"
+msgstr ""
+"§c당신은 생태계 이름을 잘못 적었습니다. 반드시 {0} 들중 하나여야 합니다." 
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -1422,11 +1420,11 @@ msgstr "골렘"
 
 #, java-format
 msgid "§c{0}"
-msgstr ""
+msgstr "§c{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
-msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr "§7{0}: §a{1}§7 (max. {2})"
 
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
@@ -1928,8 +1926,12 @@ msgid "§aClick to create!"
 msgstr "§a눌러서 생성하기"
 
 #, java-format
-msgid "§cNo access!§7({0})"
-msgstr "§c엑세스 불가!§7({0})"
+msgid ""  
+"§cNo access!\n"  
+"§7({0})"  
+msgstr ""
+"§c엑세스 불가!\n"
+"§7({0})"
 
 msgid "§a§lJoin an Island"
 msgstr "§a§l섬에 참여하기"
@@ -2208,14 +2210,6 @@ msgstr "§cClick within §9{0}§c to restart!."
 msgid "§aClick to restart!"
 msgstr "§a눌러서 재시작!"
 
-#, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
-msgstr ""
-"§c엑세스 거부!\n"
-"§7({0})"
-
 msgid "Caps On"
 msgstr "Caps On"
 
@@ -2334,6 +2328,13 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, fuzzy  
+#~ msgid "§7Complete {0} more {1}§7 challenges"  
+#~ msgstr "{0}개의  {1} challenges"  
+
+#~ msgid "§9Clearing an area for you..."  
+#~ msgstr "§9당신을 위해 해당 장소를 치우는 중입니다..."  
 
 #~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
 #~ msgstr ""
