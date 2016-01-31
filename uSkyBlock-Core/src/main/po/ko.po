@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-31 06:59+0900\n"
+"PO-Revision-Date: 2016-01-31 23:54+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: Protocodyne Korean Translation Team <github@protocodyne.com>\n"
 "Language: ko_KR\n"
@@ -36,7 +36,7 @@ msgstr "§7그리고 더..."
 
 #, java-format
 msgid "§f{0}x§7{1}"
-msgstr ""
+msgstr "§f{0}x§7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -102,7 +102,7 @@ msgstr ""
 
 #, java-format
 msgid " §4{0} §b{1}"
-msgstr ""
+msgstr " §4{0} §b{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -1307,8 +1307,8 @@ msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§eDoin'' §9{0}§e는 §c허벌나게 위험합니다§e. 승낙!하려면 §a{1}§e초 내로 커맨드"
-"를 반복하세요"
+"§e명령어 §9{0}§e 사용은 §c허벌나게 위험합니다§e. 승낙하려면 §a{1}§e초 내로 커"
+"맨드를 반복하세요"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1316,7 +1316,7 @@ msgstr "§d** 당신은 §b{0}의 §d섬에 입장하는 중입니다."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** 당신은 §b{0}의 §d섬을 떠나는 중입니다."
+msgstr "§d** 당신은 §b{0}'' §d의 섬을 떠나는 중입니다."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
@@ -2204,7 +2204,7 @@ msgstr "§a§l메인 메뉴로 돌아가기"
 
 #, java-format
 msgid "§cClick within §9{0}§c to restart!"
-msgstr ""
+msgstr "재시작 하기위하여 §9{0}§c안에 §c클릭 해 주세요!"
 
 msgid "§aClick to restart!"
 msgstr "§a눌러서 재시작!"
@@ -2286,7 +2286,7 @@ msgstr "§9당신의 위치에 섬을 생성 합니다"
 
 #, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr ""
+msgstr "당신의 §7{0}§9 §9섬 만들기"
 
 msgid "North"
 msgstr "북쪽"
