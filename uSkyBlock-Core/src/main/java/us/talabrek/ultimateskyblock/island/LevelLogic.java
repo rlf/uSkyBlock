@@ -139,6 +139,9 @@ public class LevelLogic {
         log.entering(CN, "calculateScoreAsync");
         // is further threading needed here?
         final ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
+        if (region == null) {
+            return;
+        }
         new ChunkSnapShotTask(plugin, l, region, new Callback<List<ChunkSnapshot>>() {
             @Override
             public void run() {

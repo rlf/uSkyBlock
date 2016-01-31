@@ -324,9 +324,9 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.googlecode.gettext-commons</groupId>
+                        <groupId>com.github.rlf</groupId>
                         <artifactId>gettext-maven-plugin</artifactId>
-                        <version>1.2.5</version>
+                        <version>1.2.8</version>
                         <executions>
                             <execution>
                                 <id>find-msgids</id>
@@ -341,6 +341,29 @@
                                 <goals>
                                     <goal>merge</goal>
                                 </goals>
+                                <configuration>
+                                    <msgmergeCmd>${msgmergeCmd}</msgmergeCmd>
+                                    <extraArgs>
+                                        <arg>-N</arg>
+                                    </extraArgs>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>clear-fuzzy</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>attrib</goal>
+                                </goals>
+                                <configuration>
+                                    <extraArgs>
+                                        <arg>--clear-fuzzy</arg>
+                                        <arg>--empty</arg>
+                                        <arg>--no-obsolete</arg>
+                                    </extraArgs>
+                                    <excludes>
+                                        <exclude>xx_PIRATE.po</exclude>
+                                    </excludes>
+                                </configuration>
                             </execution>
                             <execution>
                                 <id>report-po-completion</id>

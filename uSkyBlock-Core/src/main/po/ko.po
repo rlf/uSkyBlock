@@ -34,9 +34,9 @@ msgstr "§e이 도전과제는 다음의 것들을 요구합니다:"
 msgid "§7and more..."
 msgstr "§7그리고 더..."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§f{0} §7{1}"
+msgstr ""
 
 #, java-format
 msgid "§7{0}"
@@ -100,9 +100,9 @@ msgstr ""
 "§e여전의 다음의 엔티티가 부족합니다:\n"
 "{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid " §4{0} §b{1}"
-msgstr "§4{0} §b{1}"
+msgstr ""
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -222,7 +222,6 @@ msgstr "§7를 완료하여 {0} 랭크를"
 
 msgid "to unlock this rank"
 msgstr "잠금해제 하세요"
-
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -808,7 +807,7 @@ msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
 #, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
 msgstr ""
-"§c당신은 생태계 이름을 잘못 적었습니다. 반드시 {0} 들중 하나여야 합니다." 
+"§c당신은 생태계 이름을 잘못 적었습니다. 반드시 {0} 들중 하나여야 합니다."
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -1926,9 +1925,9 @@ msgid "§aClick to create!"
 msgstr "§a눌러서 생성하기"
 
 #, java-format
-msgid ""  
-"§cNo access!\n"  
-"§7({0})"  
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
 "§c엑세스 불가!\n"
 "§7({0})"
@@ -2203,9 +2202,9 @@ msgstr "§e당신은 해당 island-schematic에 접근할 권한이 없습니다
 msgid "§a§lReturn to the main menu"
 msgstr "§a§l메인 메뉴로 돌아가기"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cClick within §9{0}§c to restart!"
-msgstr "§cClick within §9{0}§c to restart!."
+msgstr ""
 
 msgid "§aClick to restart!"
 msgstr "§a눌러서 재시작!"
@@ -2285,9 +2284,9 @@ msgstr ""
 msgid "§9Creating an island at your location"
 msgstr "§9당신의 위치에 섬을 생성 합니다"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§9Creating an island §7{0}§9 of you"
+msgstr ""
 
 msgid "North"
 msgstr "북쪽"
@@ -2328,60 +2327,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#, fuzzy  
-#~ msgid "§7Complete {0} more {1}§7 challenges"  
-#~ msgstr "{0}개의  {1} challenges"  
-
-#~ msgid "§9Clearing an area for you..."  
-#~ msgstr "§9당신을 위해 해당 장소를 치우는 중입니다..."  
-
-#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-#~ msgstr ""
-#~ "§e야호! 스폰지역에서 가까운 빈터를 발견했습니다. §9당신을 위해서 치우는 중"
-#~ "입니다..."
-
-#~ msgid "Page {0,number,integer}"
-#~ msgstr "페이지 {0,number,integer}"
-
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
-
-#~ msgid "§eYou cannot access containers on this island."
-#~ msgstr "§4당신은 이 섬의 컨테이너에 접근권한이 없습니다."
-
-#~ msgid "§4"
-#~ msgstr "§4"
-
-#~ msgid "§7Name: §b{0}\n"
-#~ msgstr "§7Name: §b{0}\n"
-
-#~ msgid "§7Version: §b{0}\n"
-#~ msgstr "§7Version: §b{0}\n"
-
-#~ msgid "§7Description: §b{0}\n"
-#~ msgstr "§7Description: §b{0}\n"
-
-#~ msgid "§7Language: §b{0} ({1})\n"
-#~ msgstr "§7Language: §b{0} ({1})\n"
-
-#~ msgid "§7------------------------------\n"
-#~ msgstr "§7------------------------------\n"
-
-#~ msgid "§7Server: §e{0} {1}\n"
-#~ msgstr "§7Server: §e{0} {1}\n"
-
-#~ msgid "§2ENABLED"
-#~ msgstr "§2ENABLED"
-
-#~ msgid "§4DISABLED"
-#~ msgstr "§4DISABLED"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#~ msgid "§7Name: §d{0} ({1}§d)\n"
-#~ msgstr "§7Name: §d{0} ({1}§d)\n"
-
-#~ msgid "§7Version: §d{0}\n"
-#~ msgstr "§7Version: §d{0}\n"

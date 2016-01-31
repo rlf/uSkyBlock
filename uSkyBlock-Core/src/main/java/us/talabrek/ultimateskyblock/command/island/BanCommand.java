@@ -11,6 +11,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
+
 public class BanCommand extends RequireIslandCommand {
     public BanCommand(uSkyBlock plugin) {
         super(plugin, "ban|unban", "usb.island.ban", "player", I18nUtil.tr("ban/unban a player from your island."));
@@ -35,7 +37,7 @@ public class BanCommand extends RequireIslandCommand {
             }
             if (!island.isBanned(name)) {
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                if (offlinePlayer.isOnline() && offlinePlayer.getPlayer().hasPermission("usb.island.ban.exempt")) {
+                if (offlinePlayer.isOnline() && hasPermission(offlinePlayer.getPlayer(), "usb.island.ban.exempt")) {
                     offlinePlayer.getPlayer().sendMessage(I18nUtil.tr("\u00a74{0} tried to ban you from their island!", player.getName()));
                     player.sendMessage(I18nUtil.tr("\u00a74{0} is exempt from being banned.", name));
                     return true;

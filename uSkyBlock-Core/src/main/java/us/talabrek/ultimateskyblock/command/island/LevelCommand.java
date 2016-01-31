@@ -12,6 +12,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LevelCommand extends RequireIslandCommand {
@@ -37,7 +38,7 @@ public class LevelCommand extends RequireIslandCommand {
             }
             return true;
         } else if (args.length == 1) {
-            if (player.hasPermission("usb.island.level.other")) {
+            if (hasPermission(player, "usb.island.level.other")) {
                 getIslandLevel(player, args[0], alias);
             } else {
                 player.sendMessage(I18nUtil.tr("\u00a74You do not have access to that command!"));
@@ -54,7 +55,7 @@ public class LevelCommand extends RequireIslandCommand {
             return false;
         }
         final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(islandPlayer);
-        final boolean shouldRecalculate = player.getName().equals(playerInfo.getPlayerName()) || player.hasPermission("usb.admin.island");
+        final boolean shouldRecalculate = player.getName().equals(playerInfo.getPlayerName()) || hasPermission(player, "usb.admin.island");
         final Runnable showInfo = new Runnable() {
             @Override
             public void run() {

@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.CHALLENGE_PAGESIZE;
@@ -280,7 +281,7 @@ public class SkyBlockMenu {
         for (BiomeMenuItem biomeMenu : biomeMenus) {
             ItemStack menuItem = biomeMenu.getIcon();
             meta4 = menuItem.getItemMeta();
-            if (VaultHandler.checkPerk(player.getName(), "usb.biome." + biomeMenu.getId(), player.getWorld())) {
+            if (hasPermission(player, "usb.biome." + biomeMenu.getId())) {
                 meta4.setDisplayName("\u00a7a" + tr("Biome: {0}", biomeMenu.getTitle()));
                 addLore(lores, "\u00a7f", biomeMenu.getDescription());
                 if (biomeMenu.getId().equalsIgnoreCase(currentBiome)) {
@@ -324,7 +325,7 @@ public class SkyBlockMenu {
                         String lore = matcher.group("value");
                         boolean not = matcher.group("not") != null;
                         if (perm != null) {
-                            boolean hasPerm = VaultHandler.checkPerm(player, perm, world);
+                            boolean hasPerm = hasPermission(player, perm);
                             if ((hasPerm && !not) || (!hasPerm && not)) {
                                 lores.add(lore);
                             }
@@ -371,7 +372,7 @@ public class SkyBlockMenu {
                             String cmd = matcher.group("value");
                             boolean not = matcher.group("not") != null;
                             if (perm != null) {
-                                boolean hasPerm = VaultHandler.checkPerm(player, perm, world);
+                                boolean hasPerm = hasPermission(player, perm);
                                 if ((hasPerm && !not) || (!hasPerm && not)) {
                                     plugin.execCommand(player, cmd, false);
                                 }
@@ -465,7 +466,7 @@ public class SkyBlockMenu {
             if (player.hasPermission(islandPerk.getPermission())) {
                 addLore(lores, tr("\u00a7aClick to create!"));
             } else {
-                addLore(lores, tr("\u00a7cNo access!\u00a77({0})", islandPerk.getPermission()));
+                addLore(lores, tr("\u00a7cNo access!\n\u00a77({0})", islandPerk.getPermission()));
             }
             meta.setLore(lores);
             menuItem.setItemMeta(meta);
@@ -583,7 +584,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a7aActive\n\u00a7fOther players may warp to your\n\u00a7fisland at anytime to the point\n\u00a7fyou set using \u00a7d/island setwarp."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", plugin.getSkyBlockWorld())) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.extra.addwarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to deactivate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
@@ -593,7 +594,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a78Inactive\n\u00a7fOther players can't warp to your\n\u00a7fisland. Set a warp point using\n\u00a7d/island setwarp \u00a7fbefore activating."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && VaultHandler.checkPerk(player.getName(), "usb.extra.addwarp", plugin.getSkyBlockWorld())) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.extra.addwarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to activate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));

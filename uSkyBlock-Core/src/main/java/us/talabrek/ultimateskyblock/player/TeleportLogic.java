@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -36,7 +37,7 @@ public class TeleportLogic {
     public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
         log.log(Level.FINER, "safeTeleport " + player + " to " + homeSweetHome + (force ? " with force" : ""));
         final Location targetLoc = LocationUtil.centerOnBlock(homeSweetHome.clone());
-        if (player.hasPermission("usb.mod.bypassteleport") || (teleportDelay == 0) || force) {
+        if (hasPermission(player, "usb.mod.bypassteleport") || (teleportDelay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
             LocationUtil.loadChunkAt(targetLoc);
             player.teleport(targetLoc);
@@ -60,7 +61,7 @@ public class TeleportLogic {
     public void spawnTeleport(final Player player, boolean force) {
         int delay = teleportDelay;
         final Location spawnLocation = LocationUtil.centerOnBlock(plugin.getWorld().getSpawnLocation());
-        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
+        if (hasPermission(player, "usb.mod.bypassteleport") || (delay == 0) || force) {
             if (Settings.extras_sendToSpawn) {
                 plugin.execCommand(player, "op:spawn", false);
             } else {

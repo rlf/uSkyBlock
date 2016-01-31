@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-22 18:23+0100\n"
+"PO-Revision-Date: 2016-01-30 23:00+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -33,15 +33,15 @@ msgid "§eThis challenge requires the following:"
 msgstr "§eDenne udfordring kræver følgende:"
 
 msgid "§7and more..."
-msgstr ""
+msgstr "§7og flere..."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§f{0} §7{1}"
+msgstr "§f{0}x§7{1}"
 
 #, java-format
 msgid "§7{0}"
-msgstr ""
+msgstr "§7{0}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6Ting: §a"
@@ -211,9 +211,9 @@ msgstr "§eFor at gennemføre denne udfordring, brug §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Forkert udfordringsnavn!§e Brug §9/c help§e for mere info."
 
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
-msgstr "Gennemfør yderligere {0} {1} udfordringer"
+#, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "§7Gennemfør yderligere {0} {1} §7udfordringer"
 
 #, java-format
 msgid "§7Complete {0}"
@@ -221,10 +221,6 @@ msgstr "§7Gennemfør {0}"
 
 msgid "to unlock this rank"
 msgstr "for at låse denne rank op"
-
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "Gennemfør yderligere {0} {1} udfordringer"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -254,17 +250,16 @@ msgstr "nulstiller alle spillerens udfordringer"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} har fået alle udfordringer nulstillet."
 
-#, fuzzy
 msgid "complete all challenges in the rank"
-msgstr "§fGennemfør de fleste udfordringer"
+msgstr "gennemfør alle udfordringerne i kategorien"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr "§4Udfordringen er allerede blevet gennemført"
+msgstr "§4Udfordringen {0} er allerede blevet gennemført"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§eudfordring: {0} er blevet gennemført af {1}"
+msgstr "§eUdfordring {0} er blevet gennemført af {1}"
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -274,9 +269,9 @@ msgstr "§4Ingen udfordringer med navn {0} fundet!"
 msgid "§4No player named {0} was found!"
 msgstr "§4Ingen spiller med navn {0} fundet!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§4Ingen spiller med navn {0} fundet!"
+msgstr "§4Ingen kategori med navnet {0} findes!"
 
 msgid "manage islands"
 msgstr "håndter øer"
@@ -410,9 +405,8 @@ msgstr "§4{0}s ø ved {1} var allerede beskyttet"
 msgid "open GUI for config"
 msgstr "vis konfigurations UI"
 
-#, fuzzy
 msgid "§eInvalid configuration name"
-msgstr "genindlæs konfigurationen fra fil."
+msgstr "§eForkert konfiguraionsnavn"
 
 msgid "Controls player-cooldowns"
 msgstr "Håndterer spiller-cooldowns"
@@ -771,13 +765,13 @@ msgstr "§4Du kan ikke udelukke medlemmer. Fjern dem først!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Du har ikke tilladelse til at udelukke spillere."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to ban you from their island!"
-msgstr "§4{0} har fjernet dig fra deres ø!"
+msgstr "§4{0} forsøgte at udelukke dig fra deres ø!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being banned."
-msgstr "§4{0} er blevet sparket ud af øen."
+msgstr "§4{0} kan ikke bannes."
 
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
@@ -808,9 +802,9 @@ msgstr "§4Du har ikke tilladelse til at ændre biome for denne ø!"
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§eDu skal være på din ø, for at ændre biome!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
-msgstr "§cUgyldigt biome-navn."
+msgstr "§cDu har stavet biomen forkert. Skal være en af {0}"
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -940,15 +934,15 @@ msgstr "§4{0} har fjernet dig fra deres ø!"
 msgid "§4{0} has been removed from the island."
 msgstr "§4{0} er blevet sparket ud af øen."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to kick you from their island!"
-msgstr "§4{0} har fjernet dig fra deres ø!"
+msgstr "§4{0} førsøgte at fjerne dig fra deres ø!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being kicked."
-msgstr "§4{0} er blevet sparket ud af øen."
+msgstr "§4{0} kan ikke sparkes."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} has kicked you from their island!"
 msgstr "§4{0} har fjernet dig fra deres ø!"
 
@@ -1233,13 +1227,11 @@ msgstr "snak med spillere på din ø"
 msgid "talk to your island party"
 msgstr "tal til medlemmerne af din ø"
 
-#, fuzzy
 msgid "§eYou can not use another islands portals!"
-msgstr "§eDu kan ikke bruge en anden ø's portaler! Skam dig! Din snyder!"
+msgstr "§eDu kan ikke bruge en anden ø's portaler!"
 
-#, fuzzy
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
-msgstr "§eDu kan ikke tage andres ting. Gå hjem - snyder!"
+msgstr "§eDu kan ikke handle på øer. Gør det i spawn."
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesøgende kan ikke smide ting!"
@@ -1387,9 +1379,9 @@ msgstr "§cØen du er på bliver slettet! Du bliver sendt til spawn."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eTOP (side {0} af {1}):"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Top ten list is empty! Only islands above level {0} is considered."
-msgstr "§4Top 10 listen er tom! (Måske fejlede opdateringen?)"
+msgstr "§4Top 10 listen er tom! Kun øer over niveau {0} er på listen."
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1424,6 +1416,7 @@ msgstr "§7{0} §a{1}§7 (max. {2})"
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
 msgstr ""
+"Ude af stand til at finde skabelon {0}, kontakt en server-administrator"
 
 msgid "§aCongratulations! §eYour island has appeared."
 msgstr "§aTillykke! §eDin ø er ankommet."
@@ -1439,9 +1432,9 @@ msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr ""
 "§cVagthund!§9 Ude af stand til at finde en kiste inden for {0}, giver op."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Page {0}"
-msgstr "§7Brug: {0}"
+msgstr "§7Side {0}"
 
 msgid "§c-"
 msgstr "§c-"
@@ -1488,13 +1481,11 @@ msgstr "§eKonfigurationen gemt og genindlæst."
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cFejl! §9Kunne ikke gemme konfigurationsfilen!"
 
-#, fuzzy
 msgid "§3First Page"
-msgstr "§7Brug: {0}"
+msgstr "§7Første side"
 
-#, fuzzy
 msgid "§3Last Page"
-msgstr "§7Brug: {0}"
+msgstr "§3Sidste side"
 
 msgid "§cSave & Reload config"
 msgstr "§cGem og genindlæs konfigurationen"
@@ -1585,9 +1576,8 @@ msgstr "Tilladelser"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-#, fuzzy
 msgid "§9Player Permissions"
-msgstr "§hSpiller tilladelser"
+msgstr "§9Spiller tilladelser"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1892,14 +1882,13 @@ msgid "You cannot use this biome."
 msgstr "Du kan ikke bruge denne biome."
 
 msgid "§7Current page"
-msgstr ""
+msgstr "§7Denne side"
 
 msgid "§7First Page"
-msgstr ""
+msgstr "§7Første side"
 
-#, fuzzy
 msgid "§7Last Page"
-msgstr "§7Brug: {0}"
+msgstr "§7Sidste side"
 
 msgid "Island Create Menu"
 msgstr "Start menu"
@@ -1926,13 +1915,16 @@ msgstr ""
 "bygge dit ø-rige!\n"
 "§e§lKlik her for at starte!"
 
-#, fuzzy
 msgid "§aClick to create!"
-msgstr "§e§lKlik her for at aktivere."
+msgstr "§a§lKlik for at oprette!"
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
+"§cIngen adgang!\n"
+"§7({0})"
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lHjælp en eksisterende ø"
@@ -2182,40 +2174,31 @@ msgstr ""
 "punkt når de besøger din ø.\n"
 "§e§lKlik for at ændre."
 
-#, fuzzy
 msgid "§c§lRestart Island"
-msgstr "§a§lStart en ø"
+msgstr "§c§lGenstart Øen"
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
+"Genstarter din ø.\n"
+"§4ADVARSEL! §cdette vil fjerne alle dine ting og din ø!"
 
-#, fuzzy
 msgid "Island Restart Menu"
-msgstr "Start menu"
+msgstr "Ø Genstarts Menu"
 
-#, fuzzy
 msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4Du har ikke adgang til den kommando!"
+msgstr "§4Du har ikke adgang til den ø-type!"
 
-#, fuzzy
 msgid "§a§lReturn to the main menu"
-msgstr "§a§lReturner til hjemmet"
-
-#, fuzzy, java-format
-msgid "§cClick within §9{0}§c to restart!"
-msgstr "§e§lKlik her for at aktivere."
-
-#, fuzzy
-msgid "§aClick to restart!"
-msgstr "§e§lKlik her for at aktivere."
+msgstr "§a§lReturner til hovedmenuen"
 
 #, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
-msgstr ""
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "§cKlik inden for §9{0} for at genstarte!"
+
+msgid "§aClick to restart!"
+msgstr "§a§lKlik for at genstarte!"
 
 msgid "Caps On"
 msgstr "Caps On"
@@ -2280,6 +2263,8 @@ msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
+"§7Feerne har travlt med at ændre biomen for din ø til §9{0}§7, vær venligst "
+"tålmodig."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kunne ikke oprette din ø. Venligst kontakt en server administrator."
@@ -2288,37 +2273,36 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
-#, fuzzy
 msgid "§9Creating an island at your location"
-msgstr "§4Ingen valid ø på din position"
+msgstr "§9Opretter en ø på din nuværende position"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§4Ingen valid ø på din position"
+msgstr "§9Opretter en ø §7{0}§9 for dig"
 
 msgid "North"
-msgstr ""
+msgstr "Nord"
 
 msgid "North-East"
-msgstr ""
+msgstr "Nord-Øst"
 
-msgid "Eeast"
-msgstr ""
+msgid "East"
+msgstr "Øst"
 
 msgid "South-East"
-msgstr ""
+msgstr "Syd-Øst"
 
-msgid "Sout"
-msgstr ""
+msgid "South"
+msgstr "Syd"
 
 msgid "South-West"
-msgstr ""
+msgstr "Syd-Vest"
 
 msgid "West"
-msgstr ""
+msgstr "Vest"
 
 msgid "North-West"
-msgstr ""
+msgstr "Nord-Vest"
 
 msgid "d"
 msgstr "d"
@@ -2335,721 +2319,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-#~ msgstr ""
-#~ "§eHurra!§9 Vi fandt en ø tættere på centrum. §eRydder den for dig..."
-
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
-
-#~ msgid "Page {0,number,integer}"
-#~ msgstr "Side {0,number,integer}"
-
-#, fuzzy
-#~ msgid "z7Page {0}"
-#~ msgstr "§7Brug: {0}"
-
-#, fuzzy
-#~ msgid "§eYou cannot access containers on this island."
-#~ msgstr "§4Du har ikke tilladelse til at invite flere til din ø!"
-
-#~ msgid "§4"
-#~ msgstr "§4"
-
-#~ msgid "§7Name: §b{0}\n"
-#~ msgstr "§7Navn: §b{0}\n"
-
-#~ msgid "§7Version: §b{0}\n"
-#~ msgstr "§7Version: §b{0}\n"
-
-#~ msgid "§7Description: §b{0}\n"
-#~ msgstr "§7Beskrivelse: §b{0}\n"
-
-#~ msgid "§7Language: §b{0} ({1})\n"
-#~ msgstr "§7Sprog: §b{0} ({1})\n"
-
-#~ msgid "§7------------------------------\n"
-#~ msgstr "§7------------------------------\n"
-
-#~ msgid "§7Server: §e{0} {1}\n"
-#~ msgstr "§7Server: §e{0} {1}\n"
-
-#~ msgid "§2ENABLED"
-#~ msgstr "§2AKTIV"
-
-#~ msgid "§4DISABLED"
-#~ msgstr "§4INAKTIV"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#~ msgid "§7Name: §d{0} ({1}§d)\n"
-#~ msgstr "§7Navn: §d{0} ({1}§d)\n"
-
-#~ msgid "§7Version: §d{0}\n"
-#~ msgstr "§7Version: §d{0}\n"
-
-#, fuzzy
-#~ msgid "Command"
-#~ msgstr "Kan {0}"
-
-#, fuzzy
-#~ msgid "Description"
-#~ msgstr "§7Beskrivelse: §b{0}\n"
-
-#, fuzzy
-#~ msgid "Permission"
-#~ msgstr "Tilladelser"
-
-#, fuzzy
-#~ msgid "  alias: {0}"
-#~ msgstr "Biome: {0}"
-
-#, fuzzy
-#~ msgid "   perm: {0}"
-#~ msgstr "Ejer: {0}"
-
-#, fuzzy
-#~ msgid "-------------"
-#~ msgstr "§7----------------"
-
-#, fuzzy
-#~ msgid "Usage: {0}"
-#~ msgstr "§7Brug: {0}"
-
-#, fuzzy
-#~ msgid "Permission: {0}"
-#~ msgstr "Tilladelser"
-
-#~ msgid "§eYou have revoked your trust in §a{0}§e on your island."
-#~ msgstr "§eDu har fjernet betroet-status fra §a{0}§e på din ø."
-
-#~ msgid "§eYou have trusted §4{0}§e on your island."
-#~ msgstr "§eDu har betroet §4{0}§e til at kunne bygge og farme på din ø."
-
-#, fuzzy
-#~ msgid "ms"
-#~ msgstr "m"
-
-#~ msgid "The player is not currently online"
-#~ msgstr "Spilleren er ikke online"
-
-#~ msgid "§4You don't have enough of the required item(s)!"
-#~ msgstr "§4Du har ikke nok af de påkrævede ting!"
-
-#~ msgid "controls the currently running async tasks"
-#~ msgstr "håndter aktive asynkrone opgaver"
-
-#~ msgid "lists currently running tasks"
-#~ msgstr "viser igangværende opgaver"
-
-#~ msgid "§cNo running tasks"
-#~ msgstr "§cIngen igangværende opgaver"
-
-#~ msgid "§e[%2d]§7: %s\n"
-#~ msgstr "§e[%2d]§7: %s\n"
-
-#~ msgid "cancels the task with the given number."
-#~ msgstr "afbryder opgaven med det givne nummer"
-
-#~ msgid "§4Could not cancel "
-#~ msgstr "§4Kunne ikke afbryde "
-
-#~ msgid "§4A valid number must be supplied as task-id."
-#~ msgstr "§4Et validt nummer skal angives som opgave-nummer"
-
-#~ msgid "§4No tasks detected.§e Try §b/usb async list§e first."
-#~ msgstr "§4Ingen opgaver fundet.§e Prøv §9/usb async list§e først."
-
-#~ msgid "§4A number between 1 and "
-#~ msgstr "§4et nummer mellem 1 og "
-
-#, fuzzy
-#~ msgid ".displayName"
-#~ msgstr "vis aktivitetslog"
-
-#, fuzzy
-#~ msgid "§eIn queue, §cwaiting...§e{0,number,###}%"
-#~ msgstr "§9Bygger øen...§e{0,number,###}%"
-
-#~ msgid ""
-#~ "§cSorry for the delay! §9Your island is now §e{0,number,##}%§9 done..."
-#~ msgstr "§cUndskyld forsinkelsen! §9Din ø er nu §e{0,number,##}%§9 færdig..."
-
-#, fuzzy
-#~ msgid "reload the region chunks"
-#~ msgstr "load chunks fra regionen"
-
-#~ msgid "{0} <Permissions>"
-#~ msgstr "{0} <Tilladelser>"
-
-#~ msgid "Group Info"
-#~ msgstr "Medlems info"
-
-#~ msgid "save orphans"
-#~ msgstr "gem horeunger"
-
-#~ msgid "§eSaving the orphan list."
-#~ msgstr "§eGemmer listen af forældreløse."
-
-#~ msgid "Player doesn't have an island or it's already protected!"
-#~ msgstr "Spilleren har ikke en ø, eller også er den allerede beskyttet!"
-
-#~ msgid "Challenge Menu "
-#~ msgstr "Udfordringer "
-
-#~ msgid "talk to your island (party+trustees)"
-#~ msgstr "tal til medlemmerne af din ø (medlemmer og betroede)"
-
-#~ msgid "§4Your island data is being loaded, please try again later."
-#~ msgstr "§4Din ø er ved at blive hentet, prøv igen senere."
-
-#~ msgid "§4Your island data is being loaded - try again later"
-#~ msgstr "§4Dine data bliver hentet - prøv igen senere"
-
-#~ msgid ""
-#~ "§cIt seems you logged out in the sky world, however you are not a member "
-#~ "of an island. Teleporting you to spawn."
-#~ msgstr ""
-#~ "§cDet lader til du loggede ud i sky verdenen, men du er ikke mere medlem "
-#~ "af en ø. Teleporterer dig til start."
-
-#~ msgid ""
-#~ "§cYour island is in the process of restarting, you cannot create now."
-#~ msgstr ""
-#~ "§Din ø er ved at blive genstartet, det er ikke muligt at oprette nu."
-
-#~ msgid ""
-#~ "§cYour island is in the process of restarting, you cannot teleport home "
-#~ "right now."
-#~ msgstr ""
-#~ "§cDin ø er ved at blive genstartet, du kan ikke teleportere til den i "
-#~ "øjeblikket."
-
-#~ msgid "§cYour island is already in the process of restarting."
-#~ msgstr "§cDin ø er allerede ved at blive genstartet."
-
-#~ msgid ""
-#~ "§cYour island is in the process of restarting, you cannot warp to other "
-#~ "players islands right now."
-#~ msgstr "§cDin ø er ved at genstarte, du kan ikke bruge warp i øjeblikket."
-
-#~ msgid ""
-#~ "§cThat players island is in the process of restarting, you cannot warp to "
-#~ "it right now."
-#~ msgstr ""
-#~ "§cDen spillers ø er under konstruktion, du kan ikke warpe til den i "
-#~ "øjeblikket."
-
-#~ msgid "§cYou were removed from your island since the last time you played!"
-#~ msgstr "§cDu er blevet udvist af din ø, siden du sidst spillede!"
-
-#~ msgid "§a§lLeader"
-#~ msgstr "§a§lLeder"
-
-#~ msgid "§lIsland Log"
-#~ msgstr "§lØens Log"
-
-#~ msgid "§9Island Biome"
-#~ msgstr "§9Øens Biome"
-
-#~ msgid "§hIsland Biome"
-#~ msgstr "§hØens Biome"
-
-#~ msgid "§9Challenge Menu ({0}/{1})"
-#~ msgstr "§9Udfordringer ({0}/{1}) "
-
-#~ msgid "§9SB Island Group Members"
-#~ msgstr "§9Ø Medlemskab"
-
-#~ msgid "§aChange Biome"
-#~ msgstr "§aSkift Biome"
-
-#~ msgid ""
-#~ "§fThis player §acan§f change the\n"
-#~ "§fisland's biome. Click here\n"
-#~ "§fto remove this permission."
-#~ msgstr ""
-#~ "§fDenne spiller §akan§f ændre\n"
-#~ "§føens biome. Klik her\n"
-#~ "§ffor at fjerne tilladelsen."
-
-#~ msgid "§cChange Biome"
-#~ msgstr "§cSkift Biome"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f change the\n"
-#~ "§fisland's biome. Click here\n"
-#~ "§fto grant this permission."
-#~ msgstr ""
-#~ "§fThis player §ccannot§f change the\n"
-#~ "§fisland's biome. Click here\n"
-#~ "§fto grant this permission."
-
-#~ msgid "§aToggle Island Lock"
-#~ msgstr "§aSkift Øens Lås"
-
-#~ msgid ""
-#~ "§fThis player §acan§f toggle the\n"
-#~ "§fisland's lock, which prevents\n"
-#~ "§fnon-group members from entering.\n"
-#~ "§fClick here to remove this permission."
-#~ msgstr ""
-#~ "§fDenne spiller §akan§f ændre\n"
-#~ "§føens lås, der forhindrer\n"
-#~ "§fikke-medlemmer i at være her.\n"
-#~ "§fKlik for at fjerne tilladelsen."
-
-#~ msgid "§cToggle Island Lock"
-#~ msgstr "§cLås Øen"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f toggle the\n"
-#~ "§fisland's lock, which prevents\n"
-#~ "§fnon-group members from entering.\n"
-#~ "§fClick here to add this permission"
-#~ msgstr ""
-#~ "§fDenne spiller kan §cikke§f ændre\n"
-#~ "§fpå øens lås, der forhindrer\n"
-#~ "§fikke-medlemmer fra øen.\n"
-#~ "§fKlik her for at give tilladelse."
-
-#~ msgid "§aSet Island Warp"
-#~ msgstr "§aSæt gæsteportal"
-
-#~ msgid "§cSet Island Warp"
-#~ msgstr "§cSæt gæsteportal"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f set the\n"
-#~ "§fisland's warp, which allows\n"
-#~ "§fnon-group members to teleport\n"
-#~ "§fto the island. Click here to\n"
-#~ "§fadd this permission."
-#~ msgstr ""
-#~ "§fDenne spiller kan §cikke§f ændre\n"
-#~ "§fpå øens warp, der tillader\n"
-#~ "§fikke-medlemmer at teleportere\n"
-#~ "§ftil øen.\n"
-#~ "§fKlik for at give tilladelse."
-
-#~ msgid "§aToggle Island Warp"
-#~ msgstr "§aSkift gæsteportal"
-
-#~ msgid "§cToggle Island Warp"
-#~ msgstr "§cSkift gæsteportal"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f toggle the\n"
-#~ "§fisland's warp, allowing them\n"
-#~ "§fto turn it on or off at anytime,\n"
-#~ "§fbut not set the location. Click\n"
-#~ "§fhere to add this permission."
-#~ msgstr ""
-#~ "§fDenne spiller kan §cikke§f aktivere\n"
-#~ "§føens warp.\n"
-#~ "§fKlik her for at give tilladelse."
-
-#~ msgid "§aInvite Players"
-#~ msgstr "§aInviter spillere"
-
-#~ msgid "§cInvite Players"
-#~ msgstr "§cInviter spillere"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f invite\n"
-#~ "§fother players to the island.\n"
-#~ "§fClick here to add this permission."
-#~ msgstr ""
-#~ "§fDenne spiller kan §cikke§f invitere\n"
-#~ "§fandre spillere til øen.\n"
-#~ "§fKlik her for at give tilladelse."
-
-#~ msgid "§aKick Players"
-#~ msgstr "§aSpark spillere"
-
-#~ msgid "§cKick Players"
-#~ msgstr "§cSpark spillere"
-
-#~ msgid ""
-#~ "§fThis player §ccannot§f kick\n"
-#~ "§fother players from the island.\n"
-#~ "§fClick here to add this permission."
-#~ msgstr ""
-#~ "§fDenne spiller kan §cikke§f spaerke\n"
-#~ "§fandre spillere af øen.\n"
-#~ "§fKlik her for at give tilladelse."
-
-#~ msgid ""
-#~ "§a§lLeader\n"
-#~ "§aCan §fchange the island's biome.\n"
-#~ "§aCan §flock/unlock the island.\n"
-#~ "§aCan §fset the island's warp.\n"
-#~ "§aCan §ftoggle the island's warp.\n"
-#~ "§aCan §finvite others to the island.\n"
-#~ "§aCan §fkick others from the island."
-#~ msgstr ""
-#~ "§a§lEjer\n"
-#~ "§aKan §fændre øens biome\n"
-#~ "§aKan §flåse/åbne øen for besøg\n"
-#~ "§aKan §fsætte øens besøgspunkt\n"
-#~ "§aKan §faktivere besøgspunkt\n"
-#~ "§aKan §finvitere andre til øen\n"
-#~ "§aKan §fsmide folk af øen."
-
-#~ msgid "§cCannot §fchange the island's biome."
-#~ msgstr "§cKan ikke §fændre øens biome."
-
-#~ msgid "§aCan §flock/unlock the island."
-#~ msgstr "§aKan §flåse øen."
-
-#~ msgid "§cCannot §flock/unlock the island."
-#~ msgstr "§cKan §flåse øen."
-
-#~ msgid "§cCannot §fset the island's warp."
-#~ msgstr "§cKan ikke §fændre gæsteportalen."
-
-#~ msgid "§cCannot §ftoggle the island's warp."
-#~ msgstr "§cKan ikke §fændre gæsteportalen."
-
-#~ msgid "§cCannot §finvite others to the island."
-#~ msgstr "§cKan ikke §finvitere andre til øen."
-
-#~ msgid "§aBiome: Ocean"
-#~ msgstr "§aBiome: Hav"
-
-#~ msgid "§8Biome: Ocean"
-#~ msgstr "§8Biome: Hav"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The ocean biome is the basic\n"
-#~ "§7starting biome for all islands.\n"
-#~ "§7passive mobs like animals will\n"
-#~ "§7not spawn. Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cDu har ikke adgang til denne biome.\n"
-#~ "§7HAV biomen er den normale\n"
-#~ "§7start biome for alle øer.\n"
-#~ "§7Passive mobs som dyr vil ikke\n"
-#~ "§7spawne. Fjentlige monstre og dyr\n"
-#~ "§7vil spawne normalt."
-
-#~ msgid "§8Biome: Forest"
-#~ msgstr "§8Biome: Skov"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The forest biome will allow\n"
-#~ "§7your island to spawn passive.\n"
-#~ "§7mobs like animals (including\n"
-#~ "§7wolves). Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Skov biomen vil tillade\n"
-#~ "§7at der spawner normale dyr\n"
-#~ "§7på din ø (inklusive ulve).\n"
-#~ "§7Fjentlige monstre/dyr vil\n"
-#~ "§7spawne normalt."
-
-#~ msgid "§aBiome: Desert"
-#~ msgstr "§aBiome: Ørken"
-
-#~ msgid "§8Biome: Desert"
-#~ msgstr "§8Biome: Ørken"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The desert biome makes it so\n"
-#~ "§7that there is no rain or snow\n"
-#~ "§7on your island. Passive mobs\n"
-#~ "§7won't spawn. Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Ørken biomes forhindrer nedbbør\n"
-#~ "§7på din ø.\n"
-#~ "§7Normale dyr vil ikke spawne.\n"
-#~ "§7Fjentlige monstre/dyr vil spawne\n"
-#~ "§7normalt."
-
-#~ msgid "§aBiome: Jungle"
-#~ msgstr "§aBiome: Jungle"
-
-#~ msgid "§8Biome: Jungle"
-#~ msgstr "§8Biome: Jungle"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The jungle biome is bright\n"
-#~ "§7and colorful. Passive mobs\n"
-#~ "§7(including ocelots) will\n"
-#~ "§7spawn. Hostile mobs will\n"
-#~ "§7spawn normally."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Jungle biomen er lys og fuld\n"
-#~ "§7af farver. Normale dyr\n"
-#~ "§7(inklusive kattedyr) vil spawne her.\n"
-#~ "§7Fjentlige dyr/monstre vil spawne normalt."
-
-#~ msgid "§8Biome: Swampland"
-#~ msgstr "§8Biome: Sump"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The swamp biome is dark\n"
-#~ "§7and dull. Passive mobs\n"
-#~ "§7will spawn normally and\n"
-#~ "§7slimes have a small chance\n"
-#~ "§7to spawn at night depending\n"
-#~ "§7on the moon phase."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Sump biomen er mørk og\n"
-#~ "§7kedelig. Normale dyr vil spawne\n"
-#~ "§7her, og slim med en lille chance\n"
-#~ "§7om natten, afhængigt af månens\n"
-#~ "§7fase."
-
-#~ msgid "§aBiome: Taiga"
-#~ msgstr "§aBiome: Taiga"
-
-#~ msgid "§8Biome: Taiga"
-#~ msgstr "§8Biome: Taiga"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The taiga biome has snow\n"
-#~ "§7instead of rain. Passive\n"
-#~ "§7mobs will spawn normally\n"
-#~ "§7(including wolves) and\n"
-#~ "§7hostile mobs will spawn."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Taiga biome har sne istedet\n"
-#~ "§7for regn. Normale dyr vil\n"
-#~ "§7spawne her (inclusive ulve) og\n"
-#~ "§7fjentlige monstre/dyr vil spawne normalt."
-
-#~ msgid "§8Biome: Mushroom"
-#~ msgstr "§8Biome: Svampe"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The mushroom biome is\n"
-#~ "§7bright and colorful.\n"
-#~ "§7Mooshrooms are the only\n"
-#~ "§7mobs that will spawn.\n"
-#~ "§7No other passive or\n"
-#~ "§7hostile mobs will spawn."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Svampe biome er lys og farverig.\n"
-#~ "§7Mooshrooms er de eneste dyr\n"
-#~ "§7der vil spawne her.\n"
-#~ "§7Ingen andre venlige eller\n"
-#~ "§7fjentlige mobs vil spawne."
-
-#~ msgid "§aBiome: Hell(Nether)"
-#~ msgstr "§aBiome: Helvede"
-
-#~ msgid "§8Biome: Hell(Nether)"
-#~ msgstr "§8Biome: Helvede"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The hell biome looks\n"
-#~ "§7dark and dead. Some\n"
-#~ "§7mobs from the nether will\n"
-#~ "§7spawn in this biome\n"
-#~ "§7(excluding ghasts and\n"
-#~ "§7blazes)."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Helvedes biomen ser\n"
-#~ "§7mørk og død ud.\n"
-#~ "§7Nogen monstre fra underverdenen\n"
-#~ "§7vil spawne her\n"
-#~ "§7(ingen ghasts eller blazes)."
-
-#~ msgid "§aBiome: Sky(End)"
-#~ msgstr "§aBiome: End"
-
-#~ msgid "§8Biome: Sky(End)"
-#~ msgstr "§8Biome: End"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The sky biome gives your\n"
-#~ "§7island a special dark sky.\n"
-#~ "§7Only endermen will spawn\n"
-#~ "§7in this biome."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7End biomen giver din ø\n"
-#~ "§7en specielt mørk himmel.\n"
-#~ "§7Der kan kun spawne endermen\n"
-#~ "§7i denne biome."
-
-#~ msgid "§aBiome: Plains"
-#~ msgstr "§aBiome: Slette"
-
-#~ msgid "§8Biome: Plains"
-#~ msgstr "§8Biome: Slette"
-
-#~ msgid ""
-#~ "§cYou cannot use this biome.\n"
-#~ "§7The plains biome has rain\n"
-#~ "§7instead of snow. Passive\n"
-#~ "§7mobs will spawn normally\n"
-#~ "§7(including horses) and\n"
-#~ "§7hostile mobs will spawn."
-#~ msgstr ""
-#~ "§cDu kan ikke bruge denne biome.\n"
-#~ "§7Slette biomen har regn\n"
-#~ "§7istedet for sne. Neutrale\n"
-#~ "§7dyr vil spawne normalt\n"
-#~ "§7(inklusive heste) og fjentlige\n"
-#~ "§7monstre/dyr vil spawne normalt"
-
-#~ msgid "{0} changed the island biome to OCEAN"
-#~ msgstr "{0} ændrede øens biome til HAV"
-
-#~ msgid "§4That player doesn't exist."
-#~ msgstr "§4Den spiller eksisterer ikke."
-
-#~ msgid "§eYou can use that command again in {0,number,##.#} seconds."
-#~ msgstr "§eDu kan ikke bruge den kommando igen i {0,number,##.#} sekunder."
-
-#~ msgid "§eYou can use that command again in {0} seconds."
-#~ msgstr "§eDu kan ikke bruge den kommando igen de næste {0} sekunder."
-
-#~ msgid "§eHover over an icon to view"
-#~ msgstr "§eHold musen over et ikon for"
-
-#~ msgid "§ea permission. Change the"
-#~ msgstr "§eat se tilladelser. Skift"
-
-#~ msgid "§epermission by clicking it."
-#~ msgstr "§etilladelse ved at klikke."
-
-#~ msgid "§fThis player §acan§f change the"
-#~ msgstr "§fDenne spiller §akan§f skifte"
-
-#~ msgid "§fisland's biome. Click here"
-#~ msgstr "§føens biome. Klik her"
-
-#~ msgid "§fto remove this permission."
-#~ msgstr "§ffor at ændre tilladelse."
-
-#~ msgid "§fThis player §ccannot§f change the"
-#~ msgstr "§fDenne spiller kan §cikke§f skifte"
-
-#~ msgid "§fto grant this permission."
-#~ msgstr "§ffor at tillade."
-
-#~ msgid "§fThis player §acan§f toggle the"
-#~ msgstr "§fDenne spiller §akan§f skifte"
-
-#~ msgid "§fisland's lock, which prevents"
-#~ msgstr "§føens lås, der blokerer"
-
-#~ msgid "§fnon-group members from entering."
-#~ msgstr "§fgæster fra at komme på besøg."
-
-#~ msgid "§fThis player §ccannot§f toggle the"
-#~ msgstr "§fDenne spiller kan §cikke§f skifte"
-
-#~ msgid "§fThis player §acan§f set the"
-#~ msgstr "§fDenne spiller §akan§f sætte"
-
-#~ msgid "§fisland's warp, which allows"
-#~ msgstr "§føens gæsteportal, der tillader"
-
-#~ msgid "§fnon-group members to teleport"
-#~ msgstr "§fgæster at besøge øen."
-
-#~ msgid "§fto the island. Click here to"
-#~ msgstr "§fKlik her for at"
-
-#~ msgid "§fremove this permission."
-#~ msgstr "§ffjerne tilladelsen."
-
-#~ msgid "§fThis player §ccannot§f set the"
-#~ msgstr "§fDenne spiller kan §cikke§f sætte"
-
-#~ msgid "§fadd this permission."
-#~ msgstr "§ftilføj denne tilladelse"
-
-#~ msgid "§fisland's warp, allowing them"
-#~ msgstr "§føens gæsteportal, der tillader"
-
-#~ msgid "§fto turn it on or off at anytime."
-#~ msgstr "§ffor at skifte tilstand"
-
-#~ msgid "§fbut not set the location. Click"
-#~ msgstr "§fmen ikke sætte portalen. Klik"
-
-#~ msgid "§fto turn it on or off at anytime,"
-#~ msgstr "§ffor at skifte tilstand"
-
-#~ msgid "§fhere to add this permission."
-#~ msgstr "§fher for at tilføje tilladelsen."
-
-#~ msgid "§fThis player §acan§f invite"
-#~ msgstr "§fDenne spiller §akan§f invitere"
-
-#~ msgid "§fthere is enough room for more"
-#~ msgstr "§fder er plads til flere"
-
-#~ msgid "§fmembers. Click here to remove"
-#~ msgstr "§fmedlemmer. Klik her for at fjerne"
-
-#~ msgid "§fthis permission."
-#~ msgstr "§fdenne tilladelse."
-
-#~ msgid "§fThis player §ccannot§f invite"
-#~ msgstr "§fDenne spiller kan §cikke§f invitere"
-
-#~ msgid "§fbut they are unable to kick"
-#~ msgstr "§fmen ikke øens leder."
-
-#~ msgid "§fthe island leader. Click here"
-#~ msgstr "§fKlik her"
-
-#~ msgid "§eHover over a player's icon to"
-#~ msgstr "§eHold musen over et hoved for"
-
-#~ msgid "§eview their permissions. The"
-#~ msgstr "§eat se deres tilladelser."
-
-#~ msgid "§eleader can change permissions"
-#~ msgstr "§eLederen kan ændre tilladelser"
-
-#~ msgid "§eby clicking a player's icon."
-#~ msgstr "§eved at klikke."
-
-#~ msgid "§fThe ocean biome is the basic"
-#~ msgstr "§fHav biome er den basale"
-
-#~ msgid "§fstarting biome for all islands."
-#~ msgstr "§fbiome for alle øer."
-
-#~ msgid "§fpassive mobs like animals will"
-#~ msgstr "§fpassive væsener, som dyr,"
-
-#~ msgid "§fnot spawn. Hostile mobs will"
-#~ msgstr "§fvil ikke spawne. Aggresive monstre vil"
-
-#~ msgid "§fspawn normally."
-#~ msgstr "§fspawne normalt."
-
-#~ msgid "§7The ocean biome is the basic"
-#~ msgstr "§7Hav biomen er den basale"
-
-#~ msgid "§7starting biome for all islands."
-#~ msgstr "§7biome for alle øer."

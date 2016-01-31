@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -213,23 +214,6 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
 
     public boolean hasAccess(Command cmd, CommandSender sender) {
         return cmd != null && (cmd.getPermission() == null || hasPermission(sender, cmd.getPermission()));
-    }
-
-    private boolean hasPermission(CommandSender sender, String perm) {
-        // This is ONLY needed, because some shitty perm-systems don't understand the .* perm.
-        if (sender.hasPermission(perm)) {
-            return true;
-        } else if (sender.hasPermission("-" + perm)) {
-            return false;
-        }
-        String p = perm;
-        if (perm.endsWith(".*")) {
-            p = perm.substring(0, perm.length() - 2);
-        }
-        if (p.contains(".")) {
-            return hasPermission(sender, p.substring(0, p.lastIndexOf(".")) + ".*");
-        }
-        return false;
     }
 
     @Override
