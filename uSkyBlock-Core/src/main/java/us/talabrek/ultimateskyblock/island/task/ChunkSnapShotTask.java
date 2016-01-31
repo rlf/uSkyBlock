@@ -25,7 +25,11 @@ public class ChunkSnapShotTask extends IncrementalRunnable {
     public ChunkSnapShotTask(uSkyBlock plugin, Location location, ProtectedRegion region, final Callback<List<ChunkSnapshot>> callback) {
         super(plugin, callback);
         this.location = location;
-        chunks = new ArrayList<>(WorldEditHandler.getChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint())));
+        if (region != null) {
+            chunks = new ArrayList<>(WorldEditHandler.getChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint())));
+        } else {
+            chunks = new ArrayList<>();
+        }
         callback.setState(snapshots);
     }
 
