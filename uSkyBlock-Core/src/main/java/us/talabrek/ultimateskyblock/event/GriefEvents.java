@@ -23,6 +23,8 @@ import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
+
 /**
  * Handling of mob-related events.
  */
@@ -73,7 +75,7 @@ public class GriefEvents implements Listener {
         if (!shearingEnabled || !plugin.isSkyWorld(player.getWorld())) {
             return; // Not our concern
         }
-        if (player.hasPermission("usb.mod.bypassprotection")) {
+        if (hasPermission(player, "usb.mod.bypassprotection")) {
             return;
         }
         if (!plugin.playerIsOnIsland(player)) {
@@ -91,7 +93,7 @@ public class GriefEvents implements Listener {
         }
         if (event.getDamager() instanceof Player
                 && !plugin.playerIsOnIsland((Player)event.getDamager())) {
-            if (((Player) event.getDamager()).hasPermission("usb.mod.bypassprotection")) {
+            if (hasPermission(event.getDamager(), "usb.mod.bypassprotection")) {
                 return;
             }
             cancelMobDamage(event);
@@ -101,7 +103,7 @@ public class GriefEvents implements Listener {
                 return;
             }
             Player player = (Player) shooter;
-            if (player.hasPermission("usb.mod.bypassprotection") || plugin.playerIsOnIsland(player)) {
+            if (hasPermission(player, "usb.mod.bypassprotection") || plugin.playerIsOnIsland(player)) {
                 return;
             }
             cancelMobDamage(event);

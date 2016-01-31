@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
 
@@ -352,7 +353,7 @@ public class ChallengeLogic {
         }
         if (reward.getPermissionReward() != null) {
             for (String perm : reward.getPermissionReward().split(" ")) {
-                if (!VaultHandler.checkPerm(player, perm, player.getWorld())) {
+                if (!hasPermission(player, perm)) {
                     VaultHandler.addPerk(player, perm);
                 }
             }

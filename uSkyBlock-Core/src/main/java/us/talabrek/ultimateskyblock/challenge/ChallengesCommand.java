@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class ChallengesCommand implements CommandExecutor, TabCompleter {
@@ -37,7 +38,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             return false;
         }
         final Player player = (Player)sender;
-        if (!VaultHandler.checkPerk(player.getName(), "usb.island.challenges", player.getWorld())) {
+        if (!hasPermission(player, "usb.island.challenges")) {
             player.sendMessage(tr("\u00a74You don't have access to this command!"));
             return true;
         }

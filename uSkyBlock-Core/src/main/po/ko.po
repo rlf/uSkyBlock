@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.5.10\n"
+"Project-Id-Version: 2.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-27 00:18+0100\n"
+"PO-Revision-Date: 2016-01-31 23:54+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: Protocodyne Korean Translation Team <github@protocodyne.com>\n"
 "Language: ko_KR\n"
@@ -32,15 +32,15 @@ msgid "§eThis challenge requires the following:"
 msgstr "§e이 도전과제는 다음의 것들을 요구합니다:"
 
 msgid "§7and more..."
-msgstr ""
+msgstr "§7그리고 더..."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§a{0} §c{1}"
+msgstr "§f{0}x§7{1}"
 
 #, java-format
 msgid "§7{0}"
-msgstr ""
+msgstr "§7{0}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6아이템 보상: §a"
@@ -100,9 +100,9 @@ msgstr ""
 "§e여전의 다음의 엔티티가 부족합니다:\n"
 "{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid " §4{0} §b{1}"
-msgstr "§a{0} §c{1}"
+msgstr " §4{0} §b{1}"
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -212,9 +212,9 @@ msgstr ""
 "§4유효하지 않은 도전과제 이름입니다! 더 많은 정보가 필요하면 /c help를 이용하"
 "세요"
 
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
-msgstr "{0}개의  {1} challenges"
+#, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr "{0}개의  {1}§7 challenges"
 
 #, java-format
 msgid "§7Complete {0}"
@@ -222,10 +222,6 @@ msgstr "§7를 완료하여 {0} 랭크를"
 
 msgid "to unlock this rank"
 msgstr "잠금해제 하세요"
-
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "{0}개의  {1} challenges"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -255,15 +251,14 @@ msgstr "모든 도전과제를 리셋합니다"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0}는 모든 도전과제를 리셋했습니다."
 
-#, fuzzy
 msgid "complete all challenges in the rank"
-msgstr "§f대부분의 도전과제를 완료하였습니다"
+msgstr "이 랭크의 모든 도전과제를 완료하였습니다"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr "§4도전과제는 이미 완료되었습니다"
+msgstr "§4도전과제 {0}는 이미 완료되었습니다"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eChallenge {0} has been completed for {1}"
 msgstr "§e도전과제: {0}이 {1}를 완료했습니다"
 
@@ -275,9 +270,9 @@ msgstr "§4{0}란 이름의 도전과제를 찾지 못했습니다!"
 msgid "§4No player named {0} was found!"
 msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
+msgstr "§4{0}란 이름의 랭크를 찾지 못했습니다!"
 
 msgid "manage islands"
 msgstr "섬 관리"
@@ -592,7 +587,7 @@ msgstr ""
 
 #, java-format
 msgid "§bLeadership transferred by {0}§b to {1}"
-msgstr "리더 권한이 §b{0}§b에서 {1}로 전달되었습니다"
+msgstr "§b리더 권한이 {0}§b에서 {1}로 전달되었습니다"
 
 msgid "manage orphans"
 msgstr "고아들을 관리합니다"
@@ -809,9 +804,10 @@ msgstr "§4당신은 이섬의 생태계를 바꿀 권한이 없습니다!"
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§생태계를 바꾸려면 꼭 자신의 섬에 있어야 합니다!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
-msgstr "§c생태계의 이름을 잘못적으셨습니다."
+msgstr ""
+"§c당신은 생태계 이름을 잘못 적었습니다. 반드시 {0} 들중 하나여야 합니다."
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -1311,8 +1307,8 @@ msgid ""
 "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 msgstr ""
-"§eDoin'' §9{0}§e는 §c허벌나게 위험합니다§e. 승낙!하려면 §a{1}§e초 내로 커맨드"
-"를 반복하세요"
+"§e명령어 §9{0}§e 사용은 §c허벌나게 위험합니다§e. 승낙하려면 §a{1}§e초 내로 커"
+"맨드를 반복하세요"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1320,7 +1316,7 @@ msgstr "§d** 당신은 §b{0}의 §d섬에 입장하는 중입니다."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** 당신은 §b{0}의 §d섬을 떠나는 중입니다."
+msgstr "§d** 당신은 §b{0}'' §d의 섬을 떠나는 중입니다."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
@@ -1423,15 +1419,15 @@ msgstr "골렘"
 
 #, java-format
 msgid "§c{0}"
-msgstr ""
+msgstr "§c{0}"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
-msgstr "§f{0} §7{1} §9 by {2} §7{3}\n"
+msgstr "§7{0}: §a{1}§7 (max. {2})"
 
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
-msgstr ""
+msgstr "schematic {0}를 적용 할 수 없습니다, 서버 어드민에게 연락하세요"
 
 msgid "§aCongratulations! §eYour island has appeared."
 msgstr "§a축하드립니다! §e당신의 섬이 등장하였습니다."
@@ -1594,9 +1590,8 @@ msgstr "권한"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-#, fuzzy
 msgid "§9Player Permissions"
-msgstr "§h플레이어 권한"
+msgstr "§9플레이어 권한"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1926,13 +1921,16 @@ msgstr ""
 "다른사람들을 초대할 수 있습니다!\n"
 "§e§l여기를 눌러 시작하세요!"
 
-#, fuzzy
 msgid "§aClick to create!"
-msgstr "§e§l여기를 눌러서 활성화하세요."
+msgstr "§a눌러서 생성하기"
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
+"§c엑세스 불가!\n"
+"§7({0})"
 
 msgid "§a§lJoin an Island"
 msgstr "§a§l섬에 참여하기"
@@ -2185,40 +2183,31 @@ msgstr ""
 "그들은 이 지점으로 오게 될 것입니다\n"
 "§e§l여기를 눌러서 바꾸세요."
 
-#, fuzzy
 msgid "§c§lRestart Island"
-msgstr "§a§l섬 시작"
+msgstr "§c§l섬 재시작"
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
+"당신의 섬을 재시작 합니다.\n"
+"§4경고! §c당신의 섬과 아이템이 제거됩니다!"
 
-#, fuzzy
 msgid "Island Restart Menu"
-msgstr "섬 생성 매뉴"
+msgstr "섬 재생성 매뉴"
 
-#, fuzzy
 msgid "§eYou do not have access to that island-schematic!"
-msgstr "§4그 커맨드의 권한이 없습니다!"
+msgstr "§e당신은 해당 island-schematic에 접근할 권한이 없습니다!"
 
-#, fuzzy
 msgid "§a§lReturn to the main menu"
-msgstr "§a§l집으로 귀환"
-
-#, fuzzy, java-format
-msgid "§cClick within §9{0}§c to restart!"
-msgstr "§e§l여기를 눌러서 활성화하세요."
-
-#, fuzzy
-msgid "§aClick to restart!"
-msgstr "§e§l여기를 눌러서 활성화하세요."
+msgstr "§a§l메인 메뉴로 돌아가기"
 
 #, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
-msgstr ""
+msgid "§cClick within §9{0}§c to restart!"
+msgstr "재시작 하기위하여 §9{0}§c안에 §c클릭 해 주세요!"
+
+msgid "§aClick to restart!"
+msgstr "§a눌러서 재시작!"
 
 msgid "Caps On"
 msgstr "Caps On"
@@ -2282,6 +2271,8 @@ msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
+"§7작은요정들이 당신 섬의 생태계를 §9{0}§7로 바꾸고 있어 바쁩니다, 조금만 기다"
+"려주세요."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."
@@ -2290,37 +2281,36 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
 
-#, fuzzy
 msgid "§9Creating an island at your location"
-msgstr "§4당신의 위치에 유효한 섬이 없습니다"
+msgstr "§9당신의 위치에 섬을 생성 합니다"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§e당신의 위치에서 어떠한 섬도 발견하지 못했습니다!"
+msgstr "당신의 §7{0}§9 §9섬 만들기"
 
 msgid "North"
-msgstr ""
+msgstr "북쪽"
 
 msgid "North-East"
-msgstr ""
+msgstr "북동쪽"
 
-msgid "Eeast"
-msgstr ""
+msgid "East"
+msgstr "동쪽"
 
 msgid "South-East"
-msgstr ""
+msgstr "남동쪽"
 
-msgid "Sout"
-msgstr ""
+msgid "South"
+msgstr "남쪽"
 
 msgid "South-West"
-msgstr ""
+msgstr "남서쪽"
 
 msgid "West"
-msgstr ""
+msgstr "서쪽"
 
 msgid "North-West"
-msgstr ""
+msgstr "북서쪽"
 
 msgid "d"
 msgstr "d"
@@ -2337,53 +2327,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-#~ msgstr ""
-#~ "§e야호! 스폰지역에서 가까운 빈터를 발견했습니다. §9당신을 위해서 치우는 중"
-#~ "입니다..."
-
-#~ msgid "Page {0,number,integer}"
-#~ msgstr "페이지 {0,number,integer}"
-
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
-
-#~ msgid "§eYou cannot access containers on this island."
-#~ msgstr "§4당신은 이 섬의 컨테이너에 접근권한이 없습니다."
-
-#~ msgid "§4"
-#~ msgstr "§4"
-
-#~ msgid "§7Name: §b{0}\n"
-#~ msgstr "§7Name: §b{0}\n"
-
-#~ msgid "§7Version: §b{0}\n"
-#~ msgstr "§7Version: §b{0}\n"
-
-#~ msgid "§7Description: §b{0}\n"
-#~ msgstr "§7Description: §b{0}\n"
-
-#~ msgid "§7Language: §b{0} ({1})\n"
-#~ msgstr "§7Language: §b{0} ({1})\n"
-
-#~ msgid "§7------------------------------\n"
-#~ msgstr "§7------------------------------\n"
-
-#~ msgid "§7Server: §e{0} {1}\n"
-#~ msgstr "§7Server: §e{0} {1}\n"
-
-#~ msgid "§2ENABLED"
-#~ msgstr "§2ENABLED"
-
-#~ msgid "§4DISABLED"
-#~ msgstr "§4DISABLED"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#~ msgid "§7Name: §d{0} ({1}§d)\n"
-#~ msgstr "§7Name: §d{0} ({1}§d)\n"
-
-#~ msgid "§7Version: §d{0}\n"
-#~ msgstr "§7Version: §d{0}\n"

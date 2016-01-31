@@ -48,6 +48,7 @@ import java.util.WeakHashMap;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class PlayerEvents implements Listener {
@@ -237,7 +238,7 @@ public class PlayerEvents implements Listener {
             return;
         }
         final Player player = event.getPlayer();
-        boolean isAdmin = player.isOp() || VaultHandler.checkPerm(player, "usb.mod.bypassprotection", plugin.getWorld());
+        boolean isAdmin = player.isOp() || hasPermission(player, "usb.mod.bypassprotection");
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
         if (!isAdmin && islandInfo != null && islandInfo.isBanned(player.getName())) {
             event.setCancelled(true);

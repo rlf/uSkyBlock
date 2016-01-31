@@ -40,9 +40,9 @@ msgid "§7and more..."
 msgstr ""
 
 # ???
-#, fuzzy, java-format
+#, java-format
 msgid "§f{0}x§7{1}"
-msgstr "§a{0} §c{1}"
+msgstr ""
 
 #, java-format
 msgid "§7{0}"
@@ -74,9 +74,9 @@ msgstr "§cDu måste vara på din ö för att göra detta!"
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§cUppdraget {0} är inte repeterbart!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eTrying to complete challenge §a{0}"
-msgstr "§e§lFör att genomföra detta uppdrag, använda §f/c c {0}"
+msgstr ""
 
 #, java-format
 msgid "§4{0}"
@@ -105,9 +105,9 @@ msgid ""
 msgstr "§eFöljande enheter saknas: {0}"
 
 # ???
-#, fuzzy, java-format
+#, java-format
 msgid " §4{0} §b{1}"
-msgstr "§a{0} §c{1}"
+msgstr ""
 
 #, java-format
 msgid "§eYou are the following items short:{0}"
@@ -214,9 +214,9 @@ msgstr "§e§lFör att genomföra detta uppdrag, använda §f/c c {0}"
 msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§cFelaktigt namn på uppdraget! Använd /c help för mer information."
 
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1}§7 challenges"
-msgstr "Genomför {0} fler {1} uppdrag"
+#, java-format
+msgid "§7Complete {0} more {1} §7challenges"
+msgstr ""
 
 #, java-format
 msgid "§7Complete {0}"
@@ -224,10 +224,6 @@ msgstr "§7Genomför {0}"
 
 msgid "to unlock this rank"
 msgstr "för att låsa upp denna rank"
-
-#, fuzzy, java-format
-msgid "§7Complete {0} more {1} §7challenges"
-msgstr "Genomför {0} fler {1} uppdrag"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -257,17 +253,16 @@ msgstr "återställer alla uppdrag för spelaren"
 msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} har fått alla uppdrag återställda."
 
-#, fuzzy
 msgid "complete all challenges in the rank"
-msgstr "§fGenomför de flesta uppdragen i"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr "§cUppdraget är redan genomfört"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§euppdrag: {0} redan genomfört för {1}"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -277,9 +272,9 @@ msgstr "§cInget uppdrag med namnet {0} hittades!"
 msgid "§4No player named {0} was found!"
 msgstr "§cIngen spelare med namnet {0} hittades!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§cIngen spelare med namnet {0} hittades!"
+msgstr ""
 
 msgid "manage islands"
 msgstr "hantera öar"
@@ -303,17 +298,16 @@ msgstr ""
 msgid "removes the player from the island"
 msgstr "tar bort spelaren från ön"
 
-#, fuzzy
 msgid "adds the player to the island"
-msgstr "tar bort spelaren från ön"
+msgstr ""
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
 msgstr "§b{0}§d har gått med din grupp."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4No player named {0} found!"
-msgstr "§cIngen spelare med namnet {0} hittades!"
+msgstr ""
 
 msgid ""
 "§4No valid island provided, either stand within one, or provide an island "
@@ -410,9 +404,8 @@ msgstr "§c{0}s ö vid {1} var redan skyddad"
 msgid "open GUI for config"
 msgstr "öppna GUI för konfiguration"
 
-#, fuzzy
 msgid "§eInvalid configuration name"
-msgstr "ladda om konfiguration från filen."
+msgstr ""
 
 msgid "Controls player-cooldowns"
 msgstr "Kontrollerar spelare-cooldowns"
@@ -686,17 +679,15 @@ msgstr "§eLaddar chunks vid {0}"
 msgid "§eUnloading chunks at {0}"
 msgstr "§eAvladdar chunks vid {0}"
 
-#, fuzzy
 msgid "update the WG regions"
-msgstr "ladda regionens chunks"
+msgstr ""
 
 #, java-format
 msgid "§eIsland world-guard regions updated for {0}"
 msgstr ""
 
-#, fuzzy
 msgid "§eNo island found at your location!"
-msgstr "§cIngen giltig ö vid din position"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -777,13 +768,13 @@ msgstr "§cDu kan inte banna gruppmedlemmar. Ta bort dem från ön först!"
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§cDu saknar rättighet att kicka eller banna spelare."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to ban you from their island!"
-msgstr "§c{0} har tagit bort dig från ön!"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being banned."
-msgstr "§c{0} har tagits bort från ön."
+msgstr ""
 
 #, java-format
 msgid "§eYou have banned §4{0}§e from warping to your island."
@@ -814,9 +805,9 @@ msgstr "§cDu får inte byta biome på denna ö!"
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§eDu måste vara på din ö för att kunna byta biome!"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§cYou have misspelled the biome name. Must be one of {0}"
-msgstr "§cDu har felstavat biomets namn."
+msgstr ""
 
 #, java-format
 msgid "§eYou can change your biome again in {0,number,#} minutes."
@@ -944,17 +935,17 @@ msgstr "§c{0} har tagit bort dig från ön!"
 msgid "§4{0} has been removed from the island."
 msgstr "§c{0} har tagits bort från ön."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} tried to kick you from their island!"
-msgstr "§c{0} har tagit bort dig från ön!"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} is exempt from being kicked."
-msgstr "§c{0} har tagits bort från ön."
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4{0} has kicked you from their island!"
-msgstr "§c{0} har tagit bort dig från ön!"
+msgstr ""
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1232,13 +1223,11 @@ msgstr "prata med spelare på ön"
 msgid "talk to your island party"
 msgstr "prata med skyblockgruppen"
 
-#, fuzzy
 msgid "§eYou can not use another islands portals!"
-msgstr "§eDu kan inte använda en annan ös portaler! Skäms på dig, fuskare!"
+msgstr ""
 
-#, fuzzy
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
-msgstr "§eHandlande är inte tillåtet på andras öar. Gå hem, fuskare!"
+msgstr ""
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesökare kan inte kasta ut saker!"
@@ -1259,9 +1248,8 @@ msgid ""
 msgstr ""
 "§eDu försöker att teleportera till taket av Nether, vilket inte är tillåtet."
 
-#, fuzzy
 msgid "§4You can only convert obsidian once every 10 seconds"
-msgstr "§eDu kan starta om din ö om {0} sekunder."
+msgstr ""
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eOmvandlar din obsidian till lava igen. Var försiktig!"
@@ -1269,16 +1257,14 @@ msgstr "§eOmvandlar din obsidian till lava igen. Var försiktig!"
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§cDet är en dålig idé att ersätta din lava!"
 
-#, fuzzy
 msgid "§eYou cannot hurt island-members."
-msgstr "§c§lDu får inte använda detta biome."
+msgstr ""
 
 msgid "§4That player has forbidden you from teleporting to their island."
 msgstr "§cDen spelaren har förbjudit dig från att warpa till sin ö."
 
-#, fuzzy
 msgid "§4That island is §clocked.§e No teleporting to the island."
-msgstr "§cDen spelaren har förbjudit dig från att warpa till sin ö."
+msgstr ""
 
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cDu har nått din spawn-limit för ön."
@@ -1388,9 +1374,9 @@ msgstr "§cÖn du är på tas bort! Teleporterar dig till spawnen."
 msgid "§eWALL OF FAME (page {0} of {1}):"
 msgstr "§eRuhmeshalle (Sida {0} av {1}):"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§4Top ten list is empty! Only islands above level {0} is considered."
-msgstr "§cTopp 10 listan är tom!"
+msgstr ""
 
 # ???
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -1419,9 +1405,9 @@ msgstr ""
 msgid "§c{0}"
 msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
-msgstr "§f{0} §7{1} §9 av {2} §7{3}\n"
+msgstr ""
 
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
@@ -1440,9 +1426,9 @@ msgstr "Använd §9/is h§r för att komma till ön."
 msgid "§cWatchdog!§9 Unable to locate a chest within {0}, bailing out."
 msgstr "§cVakthund!§9 Kan inte lokalisera en kista inom {0}."
 
-#, fuzzy, java-format
+#, java-format
 msgid "§7Page {0}"
-msgstr "§7Användande: {0}"
+msgstr ""
 
 msgid "§c-"
 msgstr "§c-"
@@ -1489,13 +1475,11 @@ msgstr "§eKonfigurationen sparad och omladdad."
 msgid "§cError! §9Unable to save config file!"
 msgstr "§cFel! §9Kan inte spara konfigurationsfilen!"
 
-#, fuzzy
 msgid "§3First Page"
-msgstr "§7Användande: {0}"
+msgstr ""
 
-#, fuzzy
 msgid "§3Last Page"
-msgstr "§7Användande: {0}"
+msgstr ""
 
 msgid "§cSave & Reload config"
 msgstr "§cSpara & ladda om"
@@ -1591,9 +1575,8 @@ msgstr "Rättigheter"
 msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
-#, fuzzy
 msgid "§9Player Permissions"
-msgstr "§hSpelares rättigheter"
+msgstr ""
 
 msgid ""
 "§eClick here to return to\n"
@@ -1905,9 +1888,8 @@ msgstr ""
 msgid "§7First Page"
 msgstr ""
 
-#, fuzzy
 msgid "§7Last Page"
-msgstr "§7Användande: {0}"
+msgstr ""
 
 msgid "Island Create Menu"
 msgstr "Skapa ö-meny"
@@ -1934,12 +1916,13 @@ msgstr ""
 "och bygga erat imperium!\n"
 "§e§lKlicka här för att starta!"
 
-#, fuzzy
 msgid "§aClick to create!"
-msgstr "§e§lKlicka här för att aktivera."
+msgstr ""
 
 #, java-format
-msgid "§cNo access!§7({0})"
+msgid ""
+"§cNo access!\n"
+"§7({0})"
 msgstr ""
 
 msgid "§a§lJoin an Island"
@@ -2042,9 +2025,9 @@ msgstr ""
 msgid "Island Group"
 msgstr "Skyblockgrupp"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eMembers: §2{0}/{1}"
-msgstr "Gruppmedlemmar: §2{0}§7/§e{1}"
+msgstr ""
 
 msgid ""
 "View the members of your island\n"
@@ -2062,9 +2045,9 @@ msgstr ""
 msgid "Change Island Biome"
 msgstr "Byt Biome"
 
-#, fuzzy, java-format
+#, java-format
 msgid "§eCurrent Biome: §b{0}"
-msgstr "§6Belöning (valuta): §a{0}"
+msgstr ""
 
 msgid ""
 "The island biome affects things\n"
@@ -2192,39 +2175,28 @@ msgstr ""
 "teleporterar till din ö.\n"
 "§e§lKlicka här för att ändra."
 
-#, fuzzy
 msgid "§c§lRestart Island"
-msgstr "§a§lStarta en ö"
+msgstr ""
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 
-#, fuzzy
 msgid "Island Restart Menu"
-msgstr "Skapa ö-meny"
+msgstr ""
 
-#, fuzzy
 msgid "§eYou do not have access to that island-schematic!"
-msgstr "§cDu har inte tillgång till det kommandot!"
+msgstr ""
 
-#, fuzzy
 msgid "§a§lReturn to the main menu"
-msgstr "§a§lÅtervänd hem"
-
-#, fuzzy, java-format
-msgid "§cClick within §9{0}§c to restart!"
-msgstr "§e§lKlicka här för att aktivera."
-
-#, fuzzy
-msgid "§aClick to restart!"
-msgstr "§e§lKlicka här för att aktivera."
+msgstr ""
 
 #, java-format
-msgid ""
-"§cNo access!\n"
-"§7({0})"
+msgid "§cClick within §9{0}§c to restart!"
+msgstr ""
+
+msgid "§aClick to restart!"
 msgstr ""
 
 msgid "Caps On"
@@ -2233,13 +2205,11 @@ msgstr "Caps På"
 msgid "§9Text Editor"
 msgstr "§9Textredigerare"
 
-#, fuzzy
 msgid "§eSending you to spawn."
-msgstr "§aTeleporterar dig till din ö."
+msgstr ""
 
-#, fuzzy
 msgid "§eThe island has been §cLOCKED§e."
-msgstr "Ön har skapats."
+msgstr ""
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
@@ -2297,13 +2267,12 @@ msgstr "Kan inte skapa din ö. Vänligen kontakta en administratör."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eFörbereder din ö, vänligen vänta lite..."
 
-#, fuzzy
 msgid "§9Creating an island at your location"
-msgstr "§cIngen giltig ö vid din position"
+msgstr ""
 
-#, fuzzy, java-format
+#, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§cIngen giltig ö vid din position"
+msgstr ""
 
 msgid "North"
 msgstr ""
@@ -2311,13 +2280,13 @@ msgstr ""
 msgid "North-East"
 msgstr ""
 
-msgid "Eeast"
+msgid "East"
 msgstr ""
 
 msgid "South-East"
 msgstr ""
 
-msgid "Sout"
+msgid "South"
 msgstr ""
 
 msgid "South-West"
@@ -2348,60 +2317,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#~ msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-#~ msgstr "§eVi hittade en plats närmare spawn. §9Fixar den åt dig."
-
-# ???
-#~ msgid "{0} ({1}/{2})"
-#~ msgstr "{0} ({1}/{2})"
-
-#~ msgid "Page {0,number,integer}"
-#~ msgstr "Sida {0,number,integer}"
-
-#, fuzzy
-#~ msgid "z7Page {0}"
-#~ msgstr "§7Användande: {0}"
-
-#, fuzzy
-#~ msgid "§eYou cannot access containers on this island."
-#~ msgstr "§cDu saknar rättighet att bjuda in spelare till ön!"
-
-# ???
-#~ msgid "§4"
-#~ msgstr "§c"
-
-#~ msgid "§7Name: §b{0}\n"
-#~ msgstr "§7Namn: §b{0}\n"
-
-#~ msgid "§7Version: §b{0}\n"
-#~ msgstr "§7Version: §b{0}\n"
-
-#~ msgid "§7Description: §b{0}\n"
-#~ msgstr "§7Beskrivning: §b{0}\n"
-
-#~ msgid "§7Language: §b{0} ({1})\n"
-#~ msgstr "§7Språk: §b{0} ({1})\n"
-
-# ???
-#~ msgid "§7------------------------------\n"
-#~ msgstr "§7------------------------------\n"
-
-#~ msgid "§7Server: §e{0} {1}\n"
-#~ msgstr "§7Server: §e{0} {1}\n"
-
-#~ msgid "§2ENABLED"
-#~ msgstr "§aAKTIVERAD"
-
-#~ msgid "§4DISABLED"
-#~ msgstr "§cINAKTIVERAD"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#, fuzzy
-#~ msgid "§7Name: §d{0} ({1}§d)\n"
-#~ msgstr "§7Namn: §d{0} ({1})\n"
-
-#~ msgid "§7Version: §d{0}\n"
-#~ msgstr "§7Version: §d{0}\n"

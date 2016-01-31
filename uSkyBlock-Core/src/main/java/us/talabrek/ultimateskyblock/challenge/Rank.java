@@ -78,7 +78,7 @@ public class Rank {
                 int leeway = previousRank.getLeeway(playerInfo);
                 int rankLeeway = requires.getInt("rankLeeway", defaults.rankLeeway);
                 if (leeway > rankLeeway) {
-                    missing.add(tr("\u00a77Complete {0} more {1}\u00a77 challenges", (leeway - rankLeeway), previousRank));
+                    missing.add(tr("\u00a77Complete {0} more {1} \u00a77challenges", (leeway - rankLeeway), previousRank));
                 }
             }
             for (String challengeName : requires.getStringList("challenges")) {
