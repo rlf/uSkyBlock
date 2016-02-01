@@ -1311,7 +1311,7 @@ msgstr ""
 "맨드를 반복하세요"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -2197,15 +2197,17 @@ msgstr ""
 "§4경고! §c당신의 섬과 아이템이 제거됩니다!"
 
 msgid "§c§lLeave Island"
-msgstr ""
+msgstr "§c§l섬 나가기"
 
 msgid ""
 "Leaves your island.\n"
 "§4WARNING! §cwill remove all your items!"
 msgstr ""
+"당신의 섬을 떠납니다.\n"
+"§4경고! §c당신의 모든 아이템이 제거됩니다!"
 
 msgid "§cClick to leave"
-msgstr ""
+msgstr "§c클릭하여 떠나기"
 
 msgid "Island Restart Menu"
 msgstr "섬 재생성 매뉴"
@@ -2215,7 +2217,7 @@ msgstr "§e당신은 해당 island-schematic에 접근할 권한이 없습니다
 
 #, java-format
 msgid "§cClick within §9{0}§c to leave!"
-msgstr ""
+msgstr "떠나기 위하여 §9{0}§c내에 클릭하세요!"
 
 msgid "§a§lReturn to the main menu"
 msgstr "§a§l메인 메뉴로 돌아가기"
