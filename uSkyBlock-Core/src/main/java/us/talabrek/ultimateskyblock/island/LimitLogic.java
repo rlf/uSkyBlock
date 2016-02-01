@@ -14,6 +14,7 @@ import org.bukkit.entity.WaterMob;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -40,6 +41,9 @@ public class LimitLogic {
 
     public Map<CreatureType, Integer> getCreatureCount(IslandInfo islandInfo) {
         Map<CreatureType, Integer> mapCount = new HashMap<>();
+        for (CreatureType type : CreatureType.values()) {
+            mapCount.put(type, 0);
+        }
         Location islandLocation = islandInfo.getIslandLocation();
         ProtectedRegion islandRegionAt = WorldGuardHandler.getIslandRegionAt(islandLocation);
         // Nether and Overworld regions are more or less equal (same x,z coords)

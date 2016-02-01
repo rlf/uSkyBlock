@@ -96,6 +96,11 @@
             <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
         </repository>
         <repository>
+            <id>mvdw-software</id>
+            <name>MVdW Public Repositories</name>
+            <url>http://repo.mvdw-software.be/content/groups/public/</url>
+        </repository>
+        <repository>
             <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
             <id>uSkyBlock-mvn-repo</id>
             <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>

@@ -1322,6 +1322,9 @@ msgstr ""
 "§eHet commando §9{0}§e is §cRISKANT§e. Herhaal het commando in §a{1}§e "
 "seconden om het te accepteren!"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Je komt bij §b{0}''s §deiland binnen."
@@ -2222,11 +2225,26 @@ msgid ""
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 
+msgid "§c§lLeave Island"
+msgstr ""
+
+msgid ""
+"Leaves your island.\n"
+"§4WARNING! §cwill remove all your items!"
+msgstr ""
+
+msgid "§cClick to leave"
+msgstr ""
+
 msgid "Island Restart Menu"
 msgstr ""
 
 msgid "§eYou do not have access to that island-schematic!"
 msgstr "§eJe hebt geen toegang to dat eiland-schematic"
+
+#, java-format
+msgid "§cClick within §9{0}§c to leave!"
+msgstr ""
 
 msgid "§a§lReturn to the main menu"
 msgstr ""

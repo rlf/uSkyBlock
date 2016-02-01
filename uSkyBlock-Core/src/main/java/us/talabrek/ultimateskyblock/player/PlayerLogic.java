@@ -138,9 +138,12 @@ public class PlayerLogic {
         if (offlinePlayer == null || offlinePlayer.getUniqueId() == null || offlinePlayer.getName() == null) {
             return null;
         }
-        // Do not return anything if it is loading.
+        return getPlayerInfo(offlinePlayer.getUniqueId());
+    }
+
+    public PlayerInfo getPlayerInfo(UUID uuid) {
         try {
-            return playerCache.get(offlinePlayer.getUniqueId());
+            return playerCache.get(uuid);
         } catch (ExecutionException e) {
             throw new IllegalStateException(e); // Escalate - we need it in the server log
         }

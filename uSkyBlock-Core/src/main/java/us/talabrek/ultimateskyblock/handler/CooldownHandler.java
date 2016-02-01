@@ -32,7 +32,7 @@ public class CooldownHandler {
      * @return
      */
     public int getCooldown(org.bukkit.entity.Player player, String cmd) {
-        if (hasPermission(player, "usb.mod.bypasscooldowns") || hasPermission(player, "usb.exempt." + cmd + "Cooldown")) {
+        if (hasPermission(player, "usb.mod.bypasscooldowns") || hasPermission(player, "usb.exempt.cooldown." + cmd)) {
             return 0;
         }
         Map<String, Long> map = cooldowns.get(player.getUniqueId());

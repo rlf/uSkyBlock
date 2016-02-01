@@ -1294,6 +1294,9 @@ msgstr ""
 "§eDoin'' §9{0}§e be §cRISKY§e. Repeat the command within §a{1}§e seconds to "
 "accept!"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Ye be enterin'' §b{0}''s §disland."
@@ -2187,11 +2190,26 @@ msgstr ""
 "Restarts yer hideout.\n"
 "§4WARNING! §cwill remove yer items an' hideout!"
 
+msgid "§c§lLeave Island"
+msgstr ""
+
+msgid ""
+"Leaves your island.\n"
+"§4WARNING! §cwill remove all your items!"
+msgstr ""
+
+msgid "§cClick to leave"
+msgstr ""
+
 msgid "Island Restart Menu"
 msgstr "Island Restart Menu"
 
 msgid "§eYou do not have access to that island-schematic!"
 msgstr "§eYe do not have access to that hideout-schematic!"
+
+#, java-format
+msgid "§cClick within §9{0}§c to leave!"
+msgstr ""
 
 msgid "§a§lReturn to the main menu"
 msgstr "§a§lReturn to the main menu"

@@ -60,6 +60,7 @@ import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -137,7 +138,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private USBImporterExecutor importer;
 
-    private static String pName = "";
     private FileConfiguration lastIslandConfig;
     private File lastIslandConfigFile;
 
@@ -227,7 +227,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         FileUtil.setAllwaysOverwrite("levelConfig.yml");
         I18nUtil.setDataFolder(getDataFolder());
 
-        uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         reloadConfigs();
 
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
@@ -353,6 +352,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (getConfig().getBoolean("tool-menu.enabled", true)) {
             manager.registerEvents(new ToolMenuEvents(this), this);
         }
+        PlaceholderHandler.register(this);
     }
 
     public World getWorld() {

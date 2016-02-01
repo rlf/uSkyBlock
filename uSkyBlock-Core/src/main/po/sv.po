@@ -1298,6 +1298,9 @@ msgstr ""
 "§eAnvändande av §9{0}§e är §cRISKFULLT§e. Repetera kommandot inom §a{1}§e "
 "sekunder för att acceptera!"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Du beträder nu §b{0}s §dSkyblock."
@@ -2183,10 +2186,25 @@ msgid ""
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 
+msgid "§c§lLeave Island"
+msgstr ""
+
+msgid ""
+"Leaves your island.\n"
+"§4WARNING! §cwill remove all your items!"
+msgstr ""
+
+msgid "§cClick to leave"
+msgstr ""
+
 msgid "Island Restart Menu"
 msgstr ""
 
 msgid "§eYou do not have access to that island-schematic!"
+msgstr ""
+
+#, java-format
+msgid "§cClick within §9{0}§c to leave!"
 msgstr ""
 
 msgid "§a§lReturn to the main menu"

@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -631,16 +630,30 @@ public class SkyBlockMenu {
         menuItem.setItemMeta(meta4);
         menu.setItem(15, menuItem);
         lores.clear();
-        addExtraMenus(player, menu);
-
-        menuItem = new ItemStack(Material.DIRT, 1, (byte)2);
-        meta4 = menuItem.getItemMeta();
-        meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
-        addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.setItem(17, menuItem);
-        lores.clear();
+        if (islandInfo.isLeader(player)) {
+            menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
+            meta4 = menuItem.getItemMeta();
+            meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
+            addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
+            meta4.setLore(lores);
+            menuItem.setItemMeta(meta4);
+            menu.setItem(17, menuItem);
+            lores.clear();
+        } else {
+            menuItem = new ItemStack(Material.IRON_DOOR, 1);
+            meta4 = menuItem.getItemMeta();
+            meta4.setDisplayName(tr("\u00a7c\u00a7lLeave Island"));
+            addLore(lores, "\u00a7f", tr("Leaves your island.\n\u00a74WARNING! \u00a7cwill remove all your items!"));
+            addLore(lores, tr("\u00a7cClick to leave"));
+            meta4.setLore(lores);
+            menuItem.setItemMeta(meta4);
+            menu.setItem(17, menuItem);
+            lores.clear();
+            long millisLeft = plugin.getConfirmHandler().millisLeft(player, "/is leave");
+            if (millisLeft > 0) {
+                updateLeaveMenuItemTimer(player, menu, menuItem);
+            }
+        }
         addExtraMenus(player, menu);
         return menu;
     }
@@ -704,7 +717,7 @@ public class SkyBlockMenu {
                 if (inventory.getViewers().contains(p)) {
                     updateRestartMenu(inventory, p, plugin.getIslandGenerator().getSchemeNames());
                 }
-                if (plugin.getConfirmHandler().millisLeft(p, "/is restart") <= 0) {
+                if (plugin.getConfirmHandler().millisLeft(p, "/is restart") <= 0 || !inventory.getViewers().contains(p)) {
                     if (hackySharing.length > 0 && hackySharing[0] != null) {
                         hackySharing[0].cancel();
                     }
@@ -781,14 +794,58 @@ public class SkyBlockMenu {
             p.performCommand("island lock");
             p.openInventory(displayIslandGUI(p));
         } else if (slotIndex == 17) {
-            p.closeInventory();
-            p.openInventory(createRestartGUI(p));
+            if (islandInfo.isLeader(p)) {
+                p.closeInventory();
+                p.openInventory(createRestartGUI(p));
+            } else {
+                if (plugin.getConfirmHandler().millisLeft(p, "/is leave") > 0) {
+                    p.closeInventory();
+                    p.performCommand("island leave");
+                } else {
+                    p.performCommand("island leave");
+                    updateLeaveMenuItemTimer(p, event.getInventory(), currentItem);
+                }
+            }
         } else {
             if (!isExtraMenuAction(p, currentItem)) {
                 p.closeInventory();
                 p.openInventory(displayIslandGUI(p));
             }
         }
+    }
+
+    private void updateLeaveMenuItemTimer(final Player p, final Inventory inventory, final ItemStack currentItem) {
+        final BukkitTask[] hackySharing = new BukkitTask[1];
+        hackySharing[0] = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+            @Override
+            public void run() {
+                long millisLeft = plugin.getConfirmHandler().millisLeft(p, "/is leave");
+                if (inventory.getViewers().contains(p)) {
+                    updateLeaveMenuItem(inventory, currentItem, millisLeft);
+                }
+                if (millisLeft <= 0 || !inventory.getViewers().contains(p)) {
+                    if (hackySharing.length > 0 && hackySharing[0] != null) {
+                        hackySharing[0].cancel();
+                    }
+                }
+            }
+        }, 0, TimeUtil.secondsAsTicks(1));
+    }
+
+    private void updateLeaveMenuItem(Inventory inventory, ItemStack currentItem, long millisLeft) {
+        if (currentItem == null || currentItem.getItemMeta() == null ||currentItem.getItemMeta().getLore() == null) {
+            return;
+        }
+        ItemMeta meta = currentItem.getItemMeta();
+        List<String> lore = meta.getLore();
+        if (millisLeft >= 0) {
+            lore.set(lore.size()-1, tr("\u00a7cClick within \u00a79{0}\u00a7c to leave!", TimeUtil.millisAsString(millisLeft)));
+        } else {
+            lore.set(lore.size()-1, tr("\u00a7cClick to leave"));
+        }
+        meta.setLore(lore);
+        currentItem.setItemMeta(meta);
+        inventory.setItem(17, currentItem);
     }
 
     private Inventory createRestartGUI(Player player) {
