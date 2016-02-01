@@ -106,7 +106,7 @@ public enum FileUtil {;
 
     public static String getExtension(String fileName) {
         if (fileName != null && !fileName.isEmpty()) {
-            return fileName.substring(getBasename(fileName).length());
+            return fileName.substring(getBasename(fileName).length()+1);
         }
         return "";
     }

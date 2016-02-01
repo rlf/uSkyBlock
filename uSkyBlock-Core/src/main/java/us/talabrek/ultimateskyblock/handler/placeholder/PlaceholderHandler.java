@@ -14,7 +14,7 @@ public class PlaceholderHandler {
         PlaceholderReplacerImpl placeholderReplacer = new PlaceholderReplacerImpl(plugin);
         for (String className : ADAPTORS) {
             String baseName = FileUtil.getExtension(className);
-            if (plugin.getConfig().getBoolean("placeholder." + baseName.toLowerCase() + ".enabled", false)) {
+            if (plugin.getConfig().getBoolean("placeholder." + baseName.toLowerCase(), false)) {
                 try {
                     Class<?> aClass = Class.forName(className);
                     Object o = aClass.newInstance();
