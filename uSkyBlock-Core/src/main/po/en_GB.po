@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-30 16:54+0100\n"
+"PO-Revision-Date: 2016-01-31 21:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -33,15 +33,15 @@ msgid "§eThis challenge requires the following:"
 msgstr "§eThis challenge requires the following:"
 
 msgid "§7and more..."
-msgstr ""
+msgstr "§9* §7and more..."
 
 #, java-format
 msgid "§f{0}x§7{1}"
-msgstr ""
+msgstr "§f{0}x§7{1}"
 
 #, java-format
 msgid "§7{0}"
-msgstr ""
+msgstr "§7{0}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6Item Reward: §a"
@@ -215,7 +215,7 @@ msgstr "§4* §7Invalid challenge name! Use §a/c §7help for more information"
 
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
-msgstr ""
+msgstr "§7Complete {0} more {1} §7challenges"
 
 #, java-format
 msgid "§7Complete {0}"
@@ -253,15 +253,15 @@ msgid "§e{0} has had all challenges reset."
 msgstr "§a* §6{0} §7has had all challenges reset."
 
 msgid "complete all challenges in the rank"
-msgstr ""
+msgstr "complete all challenges in the rank"
 
 #, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr ""
+msgstr "§4Challenge {0} has already been completed"
 
 #, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr ""
+msgstr "§eChallenge {0} has been completed for {1}"
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -273,7 +273,7 @@ msgstr "§4* §7No player named §6{0} §7was found!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
-msgstr ""
+msgstr "§4* §7No rank named §a{0} §7was found!"
 
 msgid "manage islands"
 msgstr "manage islands"
@@ -1149,7 +1149,7 @@ msgstr "§4* §7You are now §atrusted on §6{0}'s §7island."
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
-msgstr "§9* §6{0} §atrusted §6{1} §7on the island"
+msgstr "§6{0} §atrusted §6{1} §7on the island"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
@@ -1315,6 +1315,9 @@ msgid ""
 msgstr ""
 "§4* §7Doing §a{0}§7 is §4RISKY§7. Repeat the command within §4{1}§7 seconds "
 "to accept!"
+
+msgid "N/A"
+msgstr ""
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1597,7 +1600,7 @@ msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
 msgid "§9Player Permissions"
-msgstr ""
+msgstr "§9* §7Player Permissions"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1940,13 +1943,15 @@ msgstr ""
 "§e§lClick here to start!"
 
 msgid "§aClick to create!"
-msgstr ""
+msgstr "§9* §7Click to create!"
 
 #, java-format
 msgid ""
 "§cNo access!\n"
 "§7({0})"
 msgstr ""
+"§4& No access!\n"
+"§4* §7({0})"
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lJoin an Island"
@@ -2202,28 +2207,45 @@ msgstr ""
 "§e§lClick here to change."
 
 msgid "§c§lRestart Island"
-msgstr ""
+msgstr "§c§lRestart Island"
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
+"Restarts your island.\n"
+"§4WARNING! §7will remove your items and island!"
+
+msgid "§c§lLeave Island"
+msgstr ""
+
+msgid ""
+"Leaves your island.\n"
+"§4WARNING! §cwill remove all your items!"
+msgstr ""
+
+msgid "§cClick to leave"
+msgstr ""
 
 msgid "Island Restart Menu"
-msgstr ""
+msgstr "Island Restart Menu"
 
 msgid "§eYou do not have access to that island-schematic!"
 msgstr "§4* §7You do not have access to that island-schematic!"
 
-msgid "§a§lReturn to the main menu"
+#, java-format
+msgid "§cClick within §9{0}§c to leave!"
 msgstr ""
+
+msgid "§a§lReturn to the main menu"
+msgstr "§a§lReturn to the main menu"
 
 #, java-format
 msgid "§cClick within §9{0}§c to restart!"
-msgstr ""
+msgstr "§cClick within §9{0}§c to restart!"
 
 msgid "§aClick to restart!"
-msgstr ""
+msgstr "§aClick to restart!"
 
 msgid "Caps On"
 msgstr "Caps On"
@@ -2287,6 +2309,8 @@ msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
+"§a* §7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "§4* §7Could not create your Island. Please contact a server moderator."
@@ -2296,35 +2320,35 @@ msgstr ""
 "§9* §7Getting your island ready, please be patient, it can take a while."
 
 msgid "§9Creating an island at your location"
-msgstr ""
+msgstr "§9* §7Creating an island at your location"
 
 #, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr ""
+msgstr "§9* §7Creating an island §9{0}§7 of you"
 
 msgid "North"
-msgstr ""
+msgstr "North"
 
 msgid "North-East"
-msgstr ""
+msgstr "North-East"
 
 msgid "East"
-msgstr ""
+msgstr "East"
 
 msgid "South-East"
-msgstr ""
+msgstr "South-East"
 
 msgid "South"
-msgstr ""
+msgstr "South"
 
 msgid "South-West"
-msgstr ""
+msgstr "South-West"
 
 msgid "West"
-msgstr ""
+msgstr "West"
 
 msgid "North-West"
-msgstr ""
+msgstr "North-West"
 
 msgid "d"
 msgstr "d"

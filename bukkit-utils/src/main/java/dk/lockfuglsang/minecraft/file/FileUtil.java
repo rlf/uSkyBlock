@@ -103,6 +103,14 @@ public enum FileUtil {;
         }
         return file;
     }
+
+    public static String getExtension(String fileName) {
+        if (fileName != null && !fileName.isEmpty()) {
+            return fileName.substring(getBasename(fileName).length());
+        }
+        return "";
+    }
+
     private static File getDataFolder() {
         return dataFolder != null ? dataFolder : new File(".");
     }

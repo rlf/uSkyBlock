@@ -1306,6 +1306,9 @@ msgstr ""
 "§4CUIDADO: §aUsar{0}§ é perigoso. Repita esse comando dentro de §a{1}§e "
 "segundos para confirmar!"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Você está entrando na ilha de §b{0}."
@@ -2193,10 +2196,25 @@ msgid ""
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 
+msgid "§c§lLeave Island"
+msgstr ""
+
+msgid ""
+"Leaves your island.\n"
+"§4WARNING! §cwill remove all your items!"
+msgstr ""
+
+msgid "§cClick to leave"
+msgstr ""
+
 msgid "Island Restart Menu"
 msgstr ""
 
 msgid "§eYou do not have access to that island-schematic!"
+msgstr ""
+
+#, java-format
+msgid "§cClick within §9{0}§c to leave!"
 msgstr ""
 
 msgid "§a§lReturn to the main menu"

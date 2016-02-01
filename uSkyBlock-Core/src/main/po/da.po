@@ -1303,6 +1303,9 @@ msgstr ""
 "§eAt udføre §9{0}§e er §cRISIKABELT§e. Gentag kommandoen inden for §a{1}§e "
 "sekunder for at fortsætte!"
 
+msgid "N/A"
+msgstr ""
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Du ankom til §b{0}'s §disland."
@@ -2184,11 +2187,26 @@ msgstr ""
 "Genstarter din ø.\n"
 "§4ADVARSEL! §cdette vil fjerne alle dine ting og din ø!"
 
+msgid "§c§lLeave Island"
+msgstr ""
+
+msgid ""
+"Leaves your island.\n"
+"§4WARNING! §cwill remove all your items!"
+msgstr ""
+
+msgid "§cClick to leave"
+msgstr ""
+
 msgid "Island Restart Menu"
 msgstr "Ø Genstarts Menu"
 
 msgid "§eYou do not have access to that island-schematic!"
 msgstr "§4Du har ikke adgang til den ø-type!"
+
+#, java-format
+msgid "§cClick within §9{0}§c to leave!"
+msgstr ""
 
 msgid "§a§lReturn to the main menu"
 msgstr "§a§lReturner til hovedmenuen"
