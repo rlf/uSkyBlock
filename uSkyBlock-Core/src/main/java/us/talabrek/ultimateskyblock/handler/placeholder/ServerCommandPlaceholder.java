@@ -20,7 +20,7 @@ public class ServerCommandPlaceholder extends TextPlaceholder implements Listene
     @EventHandler
     public void onCmd(ServerCommandEvent e) {
         String cmd = e.getCommand();
-        String replacement = replacePlaceholders(e.getSender() instanceof Player ? (Player) e.getSender() : null, cmd);
+        String replacement = PlaceholderHandler.replacePlaceholders(e.getSender() instanceof Player ? (Player) e.getSender() : null, cmd);
         if (replacement != null && !cmd.equals(replacement)) {
             e.setCommand(cmd);
         }

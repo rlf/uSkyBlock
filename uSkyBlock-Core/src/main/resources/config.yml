@@ -337,14 +337,14 @@ tool-menu:
 # usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_villagers
 placeholder:
   # Hooks into MVdWPlaceholderAPI
-  mwdvplaceholderapi: false
+  mvdwplaceholderapi: false
   # uSkyBlock native placeholders for chat messages and format
   chatplaceholder: false
   # uSkyBlock native placeholders for server-commands
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 46
+version: 47
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

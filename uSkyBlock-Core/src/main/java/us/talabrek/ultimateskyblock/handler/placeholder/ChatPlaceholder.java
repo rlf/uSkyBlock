@@ -24,7 +24,7 @@ public class ChatPlaceholder extends TextPlaceholder implements Listener {
         if (result != null) {
             e.setFormat(result);
         }
-        result = replacePlaceholders(player, e.getMessage());
+        result = PlaceholderHandler.replacePlaceholders(player, e.getMessage());
         if (result != null) {
             e.setMessage(result);
         }

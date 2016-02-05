@@ -50,19 +50,23 @@ public class LevelCommand extends RequireIslandCommand {
 
     public boolean getIslandLevel(final Player player, final String islandPlayer, final String cmd) {
         final PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
-        if (info == null || !info.getHasIsland() && !plugin.getIslandInfo(info).isParty()) {
+        if (info == null || !info.getHasIsland()) {
             player.sendMessage(I18nUtil.tr("\u00a74That player is invalid or does not have an island!"));
             return false;
         }
-        final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(islandPlayer);
-        final boolean shouldRecalculate = player.getName().equals(playerInfo.getPlayerName()) || hasPermission(player, "usb.admin.island");
+        final IslandInfo islandInfo = plugin.getIslandInfo(info);
+        if (islandInfo == null || islandInfo.getIslandLocation() == null) {
+            player.sendMessage(I18nUtil.tr("\u00a74That player is invalid or does not have an island!"));
+            return false;
+        }
+        final boolean shouldRecalculate = player.getName().equals(info.getPlayerName()) || hasPermission(player, "usb.admin.island");
         final Runnable showInfo = new Runnable() {
             @Override
             public void run() {
-                if (player != null && player.isOnline() && playerInfo != null) {
+                if (player != null && player.isOnline() && info != null) {
                     player.sendMessage(I18nUtil.tr("\u00a7eInformation about {0}'s Island:", islandPlayer));
                     if (cmd.equalsIgnoreCase("level")) {
-                        IslandRank rank = plugin.getIslandLogic().getRank(playerInfo.locationForParty());
+                        IslandRank rank = plugin.getIslandLogic().getRank(info.locationForParty());
                         player.sendMessage(new String[]{
                                 tr("\u00a7aIsland level is {0,number,###.##}", rank.getScore()),
                                 tr("\u00a79Rank is {0}", rank.getRank())
@@ -75,7 +79,7 @@ public class LevelCommand extends RequireIslandCommand {
             plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    plugin.calculateScoreAsync(player, playerInfo.locationForParty(), new Callback<IslandScore>() {
+                    plugin.calculateScoreAsync(player, info.locationForParty(), new Callback<IslandScore>() {
                         @Override
                         public void run() {
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 10L);

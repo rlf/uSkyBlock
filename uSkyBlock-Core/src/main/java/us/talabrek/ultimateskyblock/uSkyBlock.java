@@ -202,6 +202,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
+        PlaceholderHandler.unregister(this);
         challengeLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
@@ -620,7 +621,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 @Override
                 public void run() {
                     pi.setHomeLocation(null);
-                    pi.setHasIsland(true);
                     pi.setIslandLocation(newLoc);
                     pi.setHomeLocation(getSafeHomeLocation(pi));
                     IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
@@ -1140,6 +1140,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (islandLogic != null) {
             islandLogic.shutdown();
         }
+        PlaceholderHandler.unregister(this);
         VaultHandler.setupEconomy();
         VaultHandler.setupPermissions();
         if (Settings.loadPluginConfig(getConfig())) {

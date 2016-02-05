@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by R4zorax on 01/02/2016.
+ * Common PlaceholderAPI for internal placeholders.
  */
 public class TextPlaceholder implements PlaceholderAPI {
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\{(?<placeholder>usb_[^}]*)\\}");
@@ -21,7 +21,11 @@ public class TextPlaceholder implements PlaceholderAPI {
         return true;
     }
 
-    protected String replacePlaceholders(Player player, String message) {
+    public String replacePlaceholders(Player player, String message) {
+        return replacePlaceholdersInternal(player, message);
+    }
+
+    private String replacePlaceholdersInternal(Player player, String message) {
         String result = null;
         Matcher matcher = PLACEHOLDER_PATTERN.matcher(message);
         if (matcher.find()) {
@@ -43,5 +47,10 @@ public class TextPlaceholder implements PlaceholderAPI {
             result = sb.toString();
         }
         return result;
+    }
+
+    @Override
+    public void unregisterPlaceholder(uSkyBlock plugin, PlaceholderReplacer placeholderReplacer) {
+        // Not needed, since the plugin will unregister all handlers
     }
 }
