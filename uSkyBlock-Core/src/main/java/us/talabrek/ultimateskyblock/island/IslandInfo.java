@@ -44,7 +44,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 /**
  * Data object for an island
  */
-public class IslandInfo {
+public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     private static final Logger log = Logger.getLogger(IslandInfo.class.getName());
     private static final Pattern OLD_LOG_PATTERN = Pattern.compile("\u00a7d\\[(?<date>[^\\]]+)\\]\u00a77 (?<msg>.*)");
     private static final int YML_VERSION = 1;
@@ -225,22 +225,27 @@ public class IslandInfo {
         }
     }
 
+    @Override
     public int getMaxPartySize() {
         return getMaxPartyIntValue("maxPartySizePermission", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getMaxPartySize());
     }
 
+    @Override
     public int getMaxAnimals() {
         return getMaxPartyIntValue("maxAnimals", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getAnimals());
     }
 
+    @Override
     public int getMaxMonsters() {
         return getMaxPartyIntValue("maxMonsters", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getMonsters());
     }
 
+    @Override
     public int getMaxVillagers() {
         return getMaxPartyIntValue("maxVillagers", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getVillagers());
     }
 
+    @Override
     public int getMaxGolems() {
         return getMaxPartyIntValue("maxGolems", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getGolems());
     }
@@ -264,6 +269,7 @@ public class IslandInfo {
         return value;
     }
 
+    @Override
     public String getLeader() {
         return config.getString("party.leader", "");
     }
@@ -318,11 +324,13 @@ public class IslandInfo {
         save();
     }
 
+    @Override
     public Set<String> getMembers() {
         ConfigurationSection memberSection = config.getConfigurationSection("party.members");
         return memberSection != null ? memberSection.getKeys(false) : Collections.<String>emptySet();
     }
 
+    @Override
     public String getBiome() {
         return config.getString("general.biome", "OCEAN").toUpperCase();
     }
@@ -344,10 +352,12 @@ public class IslandInfo {
         save();
     }
 
+    @Override
     public int getPartySize() {
         return config.getInt("party.currentSize", 1);
     }
 
+    @Override
     public boolean isLeader(Player player) {
         return isLeader(player.getName());
     }
@@ -403,6 +413,7 @@ public class IslandInfo {
         log(message, args);
     }
 
+    @Override
     public boolean isBanned(Player player) {
         return isBanned(player.getName());
     }
@@ -445,10 +456,12 @@ public class IslandInfo {
         }
     }
 
+    @Override
     public List<String> getBans() {
         return config.getStringList("banned.list");
     }
 
+    @Override
     public List<String> getTrustees() {
         return config.getStringList("trust.list");
     }
@@ -497,6 +510,7 @@ public class IslandInfo {
         save();
     }
 
+    @Override
     public double getLevel() {
         return getMembers().isEmpty() ? 0 : config.getDouble("general.level");
     }
@@ -510,6 +524,7 @@ public class IslandInfo {
         return config.getString("general.regionVersion", "");
     }
 
+    @Override
     public List<String> getLog() {
         List<String> log = new ArrayList<>();
         if (config.isInt("log.logPos")) {
@@ -557,10 +572,12 @@ public class IslandInfo {
         return convertedList;
     }
 
+    @Override
     public boolean isParty() {
         return getMembers().size() > 1;
     }
 
+    @Override
     public Location getWarpLocation() {
         if (hasWarp()) {
             return new Location(uSkyBlock.getInstance().getSkyBlockWorld(),
@@ -573,6 +590,7 @@ public class IslandInfo {
         return null;
     }
 
+    @Override
     public Location getIslandLocation() {
         return IslandUtil.getIslandLocation(name);
     }
@@ -656,6 +674,7 @@ public class IslandInfo {
         }
     }
 
+    @Override
     public boolean hasOnlineMembers() {
         ConfigurationSection members = config.getConfigurationSection("party.members");
         if (members != null) {
@@ -677,6 +696,7 @@ public class IslandInfo {
         return false;
     }
 
+    @Override
     public List<Player> getOnlineMembers() {
         ConfigurationSection members = config.getConfigurationSection("party.members");
         List<Player> players = new ArrayList<>();
@@ -698,6 +718,7 @@ public class IslandInfo {
         }
         return players;
     }
+    @Override
     public boolean contains(Location loc) {
         return name.equalsIgnoreCase(WorldGuardHandler.getIslandNameAt(loc));
     }
@@ -731,6 +752,7 @@ public class IslandInfo {
         dirty = true;
     }
 
+    @Override
     public String getSchematicName() {
         return config.getString("general.schematicName", Settings.island_schematicName);
     }

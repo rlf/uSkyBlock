@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.command;
 
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Collections;
@@ -20,7 +19,7 @@ public class PartyTalkCommand extends IslandChatCommand {
     }
 
     @Override
-    protected List<Player> getRecipients(Player player, IslandInfo islandInfo) {
+    protected List<Player> getRecipients(Player player, us.talabrek.ultimateskyblock.api.IslandInfo islandInfo) {
         return islandInfo != null ? islandInfo.getOnlineMembers() : Collections.singletonList(player);
     }
 

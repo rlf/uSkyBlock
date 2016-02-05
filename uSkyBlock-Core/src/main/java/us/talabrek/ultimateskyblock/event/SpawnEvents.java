@@ -5,15 +5,11 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Animals;
-import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Squid;
-import org.bukkit.entity.WaterMob;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -25,16 +21,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.SpawnEgg;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.EntityUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -152,7 +145,7 @@ public class SpawnEvents implements Listener {
             event.setCancelled(true);
             return;
         }
-        IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+        us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(islandName);
         if (islandInfo == null) {
             // Disallow spawns on inactive islands
             event.setCancelled(true);

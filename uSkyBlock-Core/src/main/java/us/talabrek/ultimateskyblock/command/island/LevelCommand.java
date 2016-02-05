@@ -54,7 +54,7 @@ public class LevelCommand extends RequireIslandCommand {
             player.sendMessage(I18nUtil.tr("\u00a74That player is invalid or does not have an island!"));
             return false;
         }
-        final IslandInfo islandInfo = plugin.getIslandInfo(info);
+        final us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(info);
         if (islandInfo == null || islandInfo.getIslandLocation() == null) {
             player.sendMessage(I18nUtil.tr("\u00a74That player is invalid or does not have an island!"));
             return false;
