@@ -7,7 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-31 21:40+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-02-08 22:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -19,21 +20,21 @@ msgstr ""
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
-msgstr "§4* §7Requirements will reset in §c{0} §7days."
+msgstr "§7Requirements will reset in §4{0} §7days."
 
 #, java-format
 msgid "§4Requirements will reset in {0} hours."
-msgstr "§4* §7Requirements will reset in §c{0} §7hours."
+msgstr "§7Requirements will reset in §4{0} §7hours."
 
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
-msgstr "§4* §7Requirements will reset in §c{0} §7minutes."
+msgstr "§7Requirements will reset in §4{0} §7minutes."
 
 msgid "§eThis challenge requires the following:"
 msgstr "§eThis challenge requires the following:"
 
 msgid "§7and more..."
-msgstr "§9* §7and more..."
+msgstr "§7and more..."
 
 #, java-format
 msgid "§f{0}x§7{1}"
@@ -261,7 +262,7 @@ msgstr "§4Challenge {0} has already been completed"
 
 #, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§eChallenge {0} has been completed for {1}"
+msgstr "§a& §7Challenge §a{0} §7has been completed for §6{1}"
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -1317,7 +1318,7 @@ msgstr ""
 "to accept!"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1439,7 +1440,7 @@ msgid "Unable to locate schematic {0}, contact a server-admin"
 msgstr "§4* §7Unable to locate schematic §c{0}§7, contact a server-admin"
 
 msgid "§aCongratulations! §eYour island has appeared."
-msgstr "§9* §7Congratulations! §9Your island has appeared."
+msgstr "§9* Congratulations! §7Your island has appeared."
 
 msgid "§cNote:§e Construction might still be ongoing."
 msgstr "§4* Note:§7 Construction might still be ongoing."
@@ -2217,15 +2218,17 @@ msgstr ""
 "§4WARNING! §7will remove your items and island!"
 
 msgid "§c§lLeave Island"
-msgstr ""
+msgstr "§c§lLeave Island"
 
 msgid ""
 "Leaves your island.\n"
 "§4WARNING! §cwill remove all your items!"
 msgstr ""
+"Leaves your island.\n"
+"§4WARNING! §cwill remove all your items!"
 
 msgid "§cClick to leave"
-msgstr ""
+msgstr "§cClick to leave"
 
 msgid "Island Restart Menu"
 msgstr "Island Restart Menu"
@@ -2235,7 +2238,7 @@ msgstr "§4* §7You do not have access to that island-schematic!"
 
 #, java-format
 msgid "§cClick within §9{0}§c to leave!"
-msgstr ""
+msgstr "§cClick within §9{0}§c to leave!"
 
 msgid "§a§lReturn to the main menu"
 msgstr "§a§lReturn to the main menu"
