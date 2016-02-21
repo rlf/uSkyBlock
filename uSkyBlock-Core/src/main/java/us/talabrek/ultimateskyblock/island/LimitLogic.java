@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Animals;
@@ -38,8 +37,11 @@ public class LimitLogic {
         this.plugin = plugin;
     }
 
-    public Map<CreatureType, Integer> getCreatureCount(IslandInfo islandInfo) {
+    public Map<CreatureType, Integer> getCreatureCount(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo) {
         Map<CreatureType, Integer> mapCount = new HashMap<>();
+        for (CreatureType type : CreatureType.values()) {
+            mapCount.put(type, 0);
+        }
         Location islandLocation = islandInfo.getIslandLocation();
         ProtectedRegion islandRegionAt = WorldGuardHandler.getIslandRegionAt(islandLocation);
         // Nether and Overworld regions are more or less equal (same x,z coords)
@@ -58,7 +60,7 @@ public class LimitLogic {
         return mapCount;
     }
 
-    public Map<CreatureType, Integer> getCreatureMax(IslandInfo islandInfo) {
+    public Map<CreatureType, Integer> getCreatureMax(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo) {
         Map<CreatureType, Integer> max = new LinkedHashMap<>();
         for (CreatureType creatureType : CreatureType.values()) {
             max.put(creatureType, getMax(islandInfo, creatureType));
@@ -92,7 +94,7 @@ public class LimitLogic {
         return CreatureType.UNKNOWN;
     }
 
-    public boolean canSpawn(EntityType entityType, IslandInfo islandInfo) {
+    public boolean canSpawn(EntityType entityType, us.talabrek.ultimateskyblock.api.IslandInfo islandInfo) {
         Map<CreatureType, Integer> creatureCount = getCreatureCount(islandInfo);
         CreatureType creatureType = getCreatureType(entityType);
         int max = getMax(islandInfo, creatureType);
@@ -102,7 +104,7 @@ public class LimitLogic {
         return true;
     }
 
-    private int getMax(IslandInfo islandInfo, CreatureType creatureType) {
+    private int getMax(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo, CreatureType creatureType) {
         switch (creatureType) {
             case ANIMAL: return islandInfo.getMaxAnimals();
             case MONSTER: return islandInfo.getMaxMonsters();
@@ -112,7 +114,7 @@ public class LimitLogic {
         return 0;
     }
 
-    public String getSummary(IslandInfo islandInfo) {
+    public String getSummary(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo) {
         Map<LimitLogic.CreatureType, Integer> creatureMax = getCreatureMax(islandInfo);
         Map<LimitLogic.CreatureType, Integer> count = getCreatureCount(islandInfo);
         StringBuilder sb = new StringBuilder();

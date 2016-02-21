@@ -37,7 +37,7 @@ public class BanCommand extends RequireIslandCommand {
             }
             if (!island.isBanned(name)) {
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                if (offlinePlayer.isOnline() && hasPermission(offlinePlayer.getPlayer(), "usb.island.ban.exempt")) {
+                if (offlinePlayer.isOnline() && hasPermission(offlinePlayer.getPlayer(), "usb.exempt.ban")) {
                     offlinePlayer.getPlayer().sendMessage(I18nUtil.tr("\u00a74{0} tried to ban you from their island!", player.getName()));
                     player.sendMessage(I18nUtil.tr("\u00a74{0} is exempt from being banned.", name));
                     return true;

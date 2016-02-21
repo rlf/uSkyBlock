@@ -63,7 +63,7 @@ public class TrustCommand extends RequireIslandCommand {
         List<String> trustedOn = pi.getTrustedOn();
         List<String> leaderNames = new ArrayList<>();
         for (String islandName : trustedOn) {
-            IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+            us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null && islandInfo.getLeader() != null) {
                 leaderNames.add(islandInfo.getLeader());
             }

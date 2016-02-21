@@ -68,7 +68,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public boolean getHasIsland() {
-        return this.hasIsland;
+        return getIslandLocation() != null;
     }
 
     public String locationForParty() {
@@ -81,10 +81,6 @@ public class PlayerInfo implements Serializable {
 
     public String getPlayerName() {
         return this.playerName;
-    }
-
-    public void setHasIsland(final boolean b) {
-        this.hasIsland = b;
     }
 
     public void setIslandLocation(final Location l) {

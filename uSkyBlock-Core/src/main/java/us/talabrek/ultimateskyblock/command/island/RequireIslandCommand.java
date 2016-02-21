@@ -39,10 +39,11 @@ public abstract class RequireIslandCommand extends RequirePlayerCommand {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         if (playerInfo != null && playerInfo.getHasIsland()) {
             IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
-            return doExecute(alias, player, playerInfo, islandInfo, data, args);
-        } else {
-            player.sendMessage(tr("\u00a74No Island. \u00a7eUse \u00a7b/is create\u00a7e to get one"));
+            if (islandInfo != null) {
+                return doExecute(alias, player, playerInfo, islandInfo, data, args);
+            }
         }
+        player.sendMessage(tr("\u00a74No Island. \u00a7eUse \u00a7b/is create\u00a7e to get one"));
         return false;
     }
 }

@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -30,7 +29,7 @@ public class CreateCommand extends RequirePlayerCommand {
             }
             plugin.createIsland(player, pi, args != null && args.length > 0 ? args[0] : Settings.island_schematicName);
         } else if (pi.getHasIsland()) {
-            IslandInfo island = plugin.getIslandInfo(pi);
+            us.talabrek.ultimateskyblock.api.IslandInfo island = plugin.getIslandInfo(pi);
             if (island.isLeader(player)) {
                 player.sendMessage(tr("\u00a74Island found!" +
                         "\u00a7e You already have an island. If you want a fresh island, type" +

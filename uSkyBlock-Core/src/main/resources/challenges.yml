@@ -67,7 +67,7 @@ ranks:
           text: 3 leather, 20% chance to get a book
           items:
           - '334:3'
-          - '{p=0.02}340:1'
+          - '{p=0.2}340:1'
           permission: none
           currency: 10
           xp: 10
@@ -77,7 +77,7 @@ ranks:
           text: 1 leather, 10% chance to get a book
           items:
           - '334:1'
-          - '{p=0.01}340:1'
+          - '{p=0.1}340:1'
           currency: 5
           xp: 5
        
@@ -572,16 +572,16 @@ ranks:
         displayItem: 87
         takeItems: true
         reward:
-          text: 1 bow, 32 arrows
+          text: 1 bow, 64 arrows
           items:
           - '261:1'
-          - '262:32'
+          - '262:64'
           permission: none
           currency: 40
           xp: 40
           commands:
         repeatReward:
-          text: 64 arrows
+          text: 32 arrows
           items:
           - '262:32'
           currency: 20
@@ -764,6 +764,7 @@ ranks:
         requiredEntities:
         - 'Cow:8'
         - 'Pig:8'
+        - 'Chicken:16'
         - Sheep:{"Color":0}
         - Sheep:{"Color":1}
         - Sheep:{"Color":2}
@@ -780,10 +781,9 @@ ranks:
         - Sheep:{"Color":13}
         - Sheep:{"Color":14}
         - Sheep:{"Color":15}
-        - 'Chicken:16'
         repeatable: true
         displayItem: '85'
-        takeItems: true
+        takeItems: false
         reward:
           text: 1 horse, 1 iron horse armor, 5% chance on diamond horse armor
           items:

@@ -327,8 +327,24 @@ tool-menu:
     BEDROCK: 'island spawn'
     WORKBENCH: 'challenges'
 
+# Placeholders - enable these to get placeholder substitution
+# usb_version
+# usb_island_level, usb_island_rank, usb_island_partysize_max, usb_island_partysize
+# usb_island_leader, usb_island_bans, usb_island_members, usb_island_trustees
+# usb_island_biome, usb_island_schematic
+# usb_island_location, usb_island_location_x, usb_island_location_y, usb_island_location_z
+# usb_island_golems_max, usb_island_monsters_max, usb_island_animals_max, usb_island_villagers_max,
+# usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_villagers
+placeholder:
+  # Hooks into MVdWPlaceholderAPI
+  mvdwplaceholderapi: false
+  # uSkyBlock native placeholders for chat messages and format
+  chatplaceholder: false
+  # uSkyBlock native placeholders for server-commands
+  servercommandplaceholder: false
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 44
+version: 47
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

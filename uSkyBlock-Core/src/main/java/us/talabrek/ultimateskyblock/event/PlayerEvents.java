@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.event;
 
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,54 +17,36 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.api.IslandRank;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class PlayerEvents implements Listener {
     private static final String CN = PlayerEvents.class.getName();
-    private static final Logger log = Logger.getLogger(CN);
     private static final Set<EntityDamageEvent.DamageCause> FIRE_TRAP = new HashSet<>(
             Arrays.asList(EntityDamageEvent.DamageCause.LAVA, EntityDamageEvent.DamageCause.FIRE, EntityDamageEvent.DamageCause.FIRE_TICK));
     private static final Random RANDOM = new Random();
     private static final int OBSIDIAN_SPAM = 10000; // Max once every 10 seconds.
-
-    private static final List<String> LEVEL_PLACEHOLDER = Arrays.asList("{uskyblock_island_level}", "{usb_level}");
-    private static final List<String> RANK_PLACEHOLDER = Arrays.asList("{uskyblock_island_rank}", "{usb_rank}");
-    private static final List<String> PLACEHOLDERS = new ArrayList<>();
-    static {
-        PLACEHOLDERS.addAll(LEVEL_PLACEHOLDER);
-        PLACEHOLDERS.addAll(RANK_PLACEHOLDER);
-    }
 
     private final uSkyBlock plugin;
     private final boolean visitorFallProtected;
@@ -259,52 +240,6 @@ public class PlayerEvents implements Listener {
                 }, 1);
             }
         }
-    }
-
-    // We want to run LAST!
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onChat(AsyncPlayerChatEvent event) {
-        String format = event.getFormat();
-        Player player = event.getPlayer();
-        if (player == null) {
-            return;
-        }
-        if (hasPlaceholder(format)) {
-            IslandRank rank = plugin.getIslandRank(player);
-            String levelValue = "?";
-            String rankValue = "?";
-            if (rank != null) {
-                levelValue = String.format("%.0f", rank.getScore());
-                rankValue = String.format("%d", rank.getRank());
-            } else {
-                IslandInfo islandInfo = plugin.getIslandInfo(player);
-                levelValue = islandInfo != null ? String.format("%.0f", islandInfo.getLevel()) : "?";
-            }
-            format = replaceValues(format, levelValue, rankValue);
-            event.setFormat(format);
-        }
-    }
-
-    private String replaceValues(String source, String levelValue, String rankValue) {
-        String result = source;
-        for (String placeholder : LEVEL_PLACEHOLDER) {
-            result = result.replaceAll(Pattern.quote(placeholder), levelValue);
-        }
-        for (String placeholder : RANK_PLACEHOLDER) {
-            result = result.replaceAll(Pattern.quote(placeholder), rankValue);
-        }
-        return result;
-    }
-
-    private boolean hasPlaceholder(String... strs) {
-        for (String str : strs) {
-            for (String placeholder : PLACEHOLDERS) {
-                if (str.contains(placeholder)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @EventHandler(priority = EventPriority.LOW)

@@ -475,6 +475,11 @@
             <artifactId>TitleManager</artifactId>
             <version>1.5.11</version>
         </dependency>
+        <dependency>
+            <groupId>be.maximvdw</groupId>
+            <artifactId>MVdWPlaceholderAPI</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- TESTING -->
         <dependency>

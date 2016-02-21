@@ -80,7 +80,6 @@ public class WolfWorkUSBImporter implements USBImporter {
     private us.talabrek.ultimateskyblock.player.PlayerInfo importPlayerInfo(uSkyBlock plugin, PlayerInfo playerInfo) {
         // Copy PlayerInfo
         us.talabrek.ultimateskyblock.player.PlayerInfo pi = plugin.getPlayerInfo(playerInfo.getPlayerName());
-        pi.setHasIsland(playerInfo.getHasIsland());
         if (playerInfo.getIslandLocation() != null) {
             pi.setIslandLocation(playerInfo.getIslandLocation());
         } else if (playerInfo.getPartyIslandLocation() != null) {

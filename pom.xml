@@ -25,7 +25,7 @@
         <travis.buildNumber>dev</travis.buildNumber>
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
-        <api.version>2.5.5</api.version>
+        <api.version>2.6.2</api.version>
     </properties>
 
     <scm>
@@ -94,6 +94,11 @@
         <repository>
             <id>titlemananager-repo</id>
             <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>mvdw-software</id>
+            <name>MVdW Public Repositories</name>
+            <url>http://repo.mvdw-software.be/content/groups/public/</url>
         </repository>
         <repository>
             <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->

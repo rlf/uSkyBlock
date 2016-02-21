@@ -60,6 +60,7 @@ import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -137,7 +138,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private USBImporterExecutor importer;
 
-    private static String pName = "";
     private FileConfiguration lastIslandConfig;
     private File lastIslandConfigFile;
 
@@ -202,6 +202,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
+        PlaceholderHandler.unregister(this);
         challengeLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
@@ -227,7 +228,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         FileUtil.setAllwaysOverwrite("levelConfig.yml");
         I18nUtil.setDataFolder(getDataFolder());
 
-        uSkyBlock.pName = "[" + getDescription().getName() + "] ";
         reloadConfigs();
 
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
@@ -353,6 +353,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (getConfig().getBoolean("tool-menu.enabled", true)) {
             manager.registerEvents(new ToolMenuEvents(this), this);
         }
+        PlaceholderHandler.register(this);
     }
 
     public World getWorld() {
@@ -430,7 +431,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public Location getSafeWarpLocation(final PlayerInfo p) {
-        IslandInfo islandInfo = getIslandInfo(p);
+        us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = getIslandInfo(p);
         if (islandInfo != null) {
             Location warp = findNearestSafeLocation(islandInfo.getWarpLocation());
             if (warp == null) {
@@ -620,7 +621,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 @Override
                 public void run() {
                     pi.setHomeLocation(null);
-                    pi.setHasIsland(true);
                     pi.setIslandLocation(newLoc);
                     pi.setHomeLocation(getSafeHomeLocation(pi));
                     IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
@@ -741,7 +741,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private boolean playerIsTrusted(Player player) {
         String islandName = WorldGuardHandler.getIslandNameAt(player.getLocation());
         if (islandName != null) {
-            IslandInfo islandInfo = islandLogic.getIslandInfo(islandName);
+            us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = islandLogic.getIslandInfo(islandName);
             if (islandInfo != null && islandInfo.getTrustees().contains(player.getName())) {
                 return true;
             }
@@ -1086,6 +1086,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return islandLogic.getIslandInfo(playerInfo);
     }
 
+    @Override
+    public boolean isGTE(String versionNumber) {
+        return VersionUtil.getVersion(getDescription().getVersion()).isGTE(versionNumber);
+    }
+
     public IslandInfo getIslandInfo(String location) {
         return islandLogic.getIslandInfo(location);
     }
@@ -1140,6 +1145,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (islandLogic != null) {
             islandLogic.shutdown();
         }
+        PlaceholderHandler.unregister(this);
         VaultHandler.setupEconomy();
         VaultHandler.setupPermissions();
         if (Settings.loadPluginConfig(getConfig())) {
@@ -1334,7 +1340,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public double getIslandLevel(Player player) {
         PlayerInfo info = getPlayerInfo(player);
         if (info != null) {
-            IslandInfo islandInfo = getIslandInfo(info);
+            us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = getIslandInfo(info);
             if (islandInfo != null) {
                 return islandInfo.getLevel();
             }

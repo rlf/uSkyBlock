@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.apache.commons.multiverse.io.FilenameUtils.getBaseName;
-
 /**
  * The factory for creating islands (actual blocks).
  */
@@ -64,7 +62,7 @@ public class IslandGenerator {
         this.schemFiles = directorySchematics.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlock") && !getBaseName(name).toLowerCase().endsWith("nether");
+                return name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlock") && !FileUtil.getBasename(name).toLowerCase().endsWith("nether");
             }
         });
         if (this.schemFiles == null) {

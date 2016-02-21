@@ -112,7 +112,7 @@ public class Settings {
         island_chestItems = ItemStackUtil.createItemArray(chestItemString);
 
         island_schematicName = config.getString("options.island.schematicName");
-        if ("yourschematicname".equals(island_schematicName) || "uSkyBlockDefault".equals(island_schematicName) || island_schematicName == null) {
+        if (island_schematicName == null || "yourschematicname".equals(island_schematicName) || "uSkyBlockDefault".equals(island_schematicName)) {
             island_schematicName = "default";
             config.set("options.island.schematicName", island_schematicName);
             changed = true;
