@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-02-08 22:30+0000\n"
+"PO-Revision-Date: 2016-02-24 13:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, java-format
@@ -220,7 +220,7 @@ msgstr "§7Complete {0} more {1} §7challenges"
 
 #, java-format
 msgid "§7Complete {0}"
-msgstr "§a* §7Complete §a{0}"
+msgstr "§7Complete §a{0}"
 
 msgid "to unlock this rank"
 msgstr "to unlock this rank"
@@ -734,7 +734,7 @@ msgstr ""
 
 #, java-format
 msgid "§eInvitation for {0}§e has timedout or been cancelled."
-msgstr "§9* §7Invitation for §6{0} §7has timed out or been cancelled."
+msgstr "§7Invitation for §6{0} §7has timed out or been cancelled."
 
 #, java-format
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
@@ -918,7 +918,7 @@ msgstr "§4* §7That player is the leader of your island!"
 
 #, java-format
 msgid "{0}§d invited {1}"
-msgstr "{0}§a invited {1}"
+msgstr "§6{0}§a invited §6{1}"
 
 msgid "remove a member from your island."
 msgstr "remove a member from your island."
