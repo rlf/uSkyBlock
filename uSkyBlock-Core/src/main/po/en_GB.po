@@ -1433,7 +1433,7 @@ msgstr "§c{0}"
 
 #, java-format
 msgid "§7{0}: §a{1}§7 (max. {2})"
-msgstr "§9* §7{0}: §a{1}§7 (max. {2})"
+msgstr "§7{0}: §a{1}§7 (max. {2})"
 
 #, java-format
 msgid "Unable to locate schematic {0}, contact a server-admin"
