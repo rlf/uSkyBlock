@@ -442,7 +442,7 @@ public class SkyBlockMenu {
 
     private Inventory createInitMenu(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
-        int menuSize = (int) Math.ceil((schemeNames.size() + 3) / 9d)*9;
+        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
         Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Create Menu"));
         List<String> lores = new ArrayList<>();
         ItemStack menuItem = new ItemStack(Material.GRASS, 1);
@@ -457,6 +457,11 @@ public class SkyBlockMenu {
         int index = 1;
         for (String schemeName : schemeNames) {
             IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+            boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
+            if (!enabled) {
+                continue; // Skip
+            }
+            index = plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index);
             menuItem = islandPerk.getDisplayItem();
             meta = menuItem.getItemMeta();
             lores = meta.getLore();
@@ -491,6 +496,19 @@ public class SkyBlockMenu {
         menu.setItem(menuSize-1, menuItem);
         lores.clear();
         return menu;
+    }
+
+    private int getMaxSchemeIndex(List<String> schemeNames) {
+        int index = 1;
+        for (String schemeName : schemeNames) {
+            int nextIndex = plugin.getConfig().getInt("island-schemes." + schemeName + ".index", index);
+            if (nextIndex > index) {
+                index = nextIndex;
+            } else {
+                index++;
+            }
+        }
+        return index + 2;
     }
 
     private Inventory createMainMenu(Player player) {
@@ -852,7 +870,7 @@ public class SkyBlockMenu {
 
     private Inventory createRestartGUI(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
-        int menuSize = (int) Math.ceil((schemeNames.size() + 2) / 9d)*9;
+        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
         Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Restart Menu"));
         List<String> lores = new ArrayList<>();
         ItemStack menuItem = new ItemStack(Material.SIGN, 1);
@@ -877,6 +895,11 @@ public class SkyBlockMenu {
         int index = 1;
         for (String schemeName : schemeNames) {
             IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+            boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
+            if (!enabled) {
+                continue; // Skip
+            }
+            index = plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index);
             menuItem = islandPerk.getDisplayItem();
             meta = menuItem.getItemMeta();
             lores = meta.getLore();

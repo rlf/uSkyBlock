@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2016-02-24 13:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,8 +36,8 @@ msgid "§7and more..."
 msgstr "§7and more..."
 
 #, java-format
-msgid "§f{0}x§7{1}"
-msgstr "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
+msgstr ""
 
 #, java-format
 msgid "§7{0}"
@@ -511,12 +510,12 @@ msgstr "teleport to another players island"
 msgid "§4Only supported for players"
 msgstr "§4* §7Only supported for players"
 
+msgid "§4That player does not have an island!"
+msgstr "§4* §7That player does not have an island!"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§9* §7Teleporting to §6{0}''s §7island."
-
-msgid "§4That player does not have an island!"
-msgstr "§4* §7That player does not have an island!"
 
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"

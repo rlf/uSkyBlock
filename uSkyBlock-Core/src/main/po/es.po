@@ -37,7 +37,7 @@ msgid "§7and more..."
 msgstr ""
 
 #, java-format
-msgid "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
 msgstr ""
 
 #, java-format
@@ -510,12 +510,12 @@ msgstr "teletransportarse a la isla de otros jugadores"
 msgid "§4Only supported for players"
 msgstr "§4sólo soportado para jugadores"
 
+msgid "§4That player does not have an island!"
+msgstr "§4¡Ese jugador no tiene una isla!"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§aTeletransportándose a la isla de {0}"
-
-msgid "§4That player does not have an island!"
-msgstr "§4¡Ese jugador no tiene una isla!"
 
 msgid "imports players and islands from other formats"
 msgstr "importa jugadores e islas de otros formatos"
