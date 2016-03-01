@@ -15,6 +15,7 @@
         <module>uSkyBlock-AWE211</module>
         <module>uSkyBlock-AWE311</module>
         <module>uSkyBlock-AWE321</module>
+        <module>uSkyBlock-AWE330</module>
         <module>uSkyBlock-Plugin</module>
     </modules>
 
@@ -223,6 +224,11 @@
             <dependency>
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-AWE321</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-AWE330</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

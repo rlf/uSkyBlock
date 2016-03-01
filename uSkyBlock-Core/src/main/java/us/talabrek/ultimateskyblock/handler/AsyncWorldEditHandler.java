@@ -56,8 +56,10 @@ public enum AsyncWorldEditHandler {;
                     className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE211Adaptor";
                 } else if (version.isLT("3.2.0")) {
                     className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE311Adaptor";
-                } else {
+                } else if (version.isLT("3.3.0")) {
                     className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE321Adaptor";
+                } else { // Just HOPE to GOD it soon becomes backward compatible...
+                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE330Adaptor";
                 }
                 try {
                     adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();

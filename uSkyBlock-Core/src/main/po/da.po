@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-30 23:00+0100\n"
+"PO-Revision-Date: 2016-03-01 21:59+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -37,7 +37,7 @@ msgstr "§7og flere..."
 
 #, java-format
 msgid "§f{0}x §7{1}"
-msgstr ""
+msgstr "§f{0}x §7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -1304,7 +1304,7 @@ msgstr ""
 "sekunder for at fortsætte!"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -2173,15 +2173,17 @@ msgstr ""
 "§4ADVARSEL! §cdette vil fjerne alle dine ting og din ø!"
 
 msgid "§c§lLeave Island"
-msgstr ""
+msgstr "§c§lForlad Ø"
 
 msgid ""
 "Leaves your island.\n"
 "§4WARNING! §cwill remove all your items!"
 msgstr ""
+"Forlader din ø.\n"
+"§4ADVARSEL! §cdu vil miste alle dine ting!"
 
 msgid "§cClick to leave"
-msgstr ""
+msgstr "§cKlik for at forlade"
 
 msgid "Island Restart Menu"
 msgstr "Ø Genstarts Menu"
@@ -2191,7 +2193,7 @@ msgstr "§4Du har ikke adgang til den ø-type!"
 
 #, java-format
 msgid "§cClick within §9{0}§c to leave!"
-msgstr ""
+msgstr "§cKlik indenfor §9{0}§c for at forlade!"
 
 msgid "§a§lReturn to the main menu"
 msgstr "§a§lReturner til hovedmenuen"
