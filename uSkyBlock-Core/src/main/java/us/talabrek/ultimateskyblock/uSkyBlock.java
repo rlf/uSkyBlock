@@ -179,7 +179,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             put("forest", Biome.FOREST);
             put("plains", Biome.PLAINS);
             put("extreme_hills", Biome.EXTREME_HILLS);
-            put("flower_forest", Biome.FLOWER_FOREST);
             put("deep_ocean", Biome.DEEP_OCEAN);
         }
     };

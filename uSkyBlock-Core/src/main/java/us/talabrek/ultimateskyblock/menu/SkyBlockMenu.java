@@ -264,10 +264,12 @@ public class SkyBlockMenu {
                         "extreme_hills", tr("Extreme Hills"),
                         tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
                 ),
+                /* Not part of Bukkit 1.9
                 new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
                         "flower_forest", tr("Flower Forest"),
                         tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
                 ),
+                */
                 new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
                         "deep_ocean", tr("Deep Ocean"),
                         tr("The deep-ocean biome is an advanced\n" +

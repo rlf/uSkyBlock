@@ -1866,20 +1866,6 @@ msgstr ""
 "normally and hostile\n"
 "mobs will spawn."
 
-msgid "Flower Forest"
-msgstr "Flower Forest"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
 

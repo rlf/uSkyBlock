@@ -1849,20 +1849,6 @@ msgstr ""
 "monstros irão nascer\n"
 "normalmente."
 
-msgid "Flower Forest"
-msgstr "Floresta de flores"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"§fBioma floresta de flores.\n"
-"§fAnimais passivos e\n"
-"§fmonstros irão nascer\n"
-"§fnormalmente."
-
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
 

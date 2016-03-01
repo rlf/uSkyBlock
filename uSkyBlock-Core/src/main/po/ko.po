@@ -1848,20 +1848,6 @@ msgstr ""
 "스폰되고 적대적인\n"
 "몬스터들이 스폰됩니다."
 
-msgid "Flower Forest"
-msgstr "꽃 숲"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"꽃 숲 생태계.\n"
-"수동적인 몬스터들이 일반적으로\n"
-"스폰되고, 적대적인\n"
-"몬스터들이 스폰됩니다."
-
 msgid "Deep Ocean"
 msgstr "심해"
 

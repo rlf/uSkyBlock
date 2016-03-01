@@ -1872,20 +1872,6 @@ msgstr ""
 "normaal net als\n"
 "vijandige mobs."
 
-msgid "Flower Forest"
-msgstr "Flower Forest"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"De flower forest biome.\n"
-"Passieve mobs spawnen\n"
-"normaal net als\n"
-"vijandige mobs."
-
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
 

@@ -1868,23 +1868,6 @@ msgstr ""
 "pasivos y los hostiles\n"
 "spawnearán normalmente."
 
-msgid "Flower Forest"
-msgstr "Bosque de Flores"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"En el bosque de flores,\n"
-"tanto los mobs pasivos\n"
-"como los mobs hostiles\n"
-"spawnearán normalmente.\n"
-"Además, si aplicas polvo de\n"
-"hueso, ¡crecerá una gran\n"
-"variedad de flores!"
-
 msgid "Deep Ocean"
 msgstr "Océano Profundo"
 

@@ -1839,20 +1839,6 @@ msgstr ""
 "normally an' hostile\n"
 "mobs will spawn."
 
-msgid "Flower Forest"
-msgstr "Flower Forest"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally an' hostile\n"
-"mobs will spawn."
-
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
 
@@ -2338,3 +2324,17 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "Flower Forest"
+#~ msgstr "Flower Forest"
+
+#~ msgid ""
+#~ "The flower forest biome.\n"
+#~ "Passive mobs will spawn \n"
+#~ "normally and hostile\n"
+#~ "mobs will spawn."
+#~ msgstr ""
+#~ "The flower forest biome.\n"
+#~ "Passive mobs will spawn \n"
+#~ "normally an' hostile\n"
+#~ "mobs will spawn."

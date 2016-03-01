@@ -1834,19 +1834,6 @@ msgstr ""
 "Spawn de mob \n"
 "passifs et hostiles."
 
-msgid "Flower Forest"
-msgstr "Forêt de fleurs"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"Biome Forêt de fleurs\n"
-"Spawn de mob \n"
-"passifs et hostiles."
-
 msgid "Deep Ocean"
 msgstr "Ocean monument"
 

@@ -1841,19 +1841,6 @@ msgstr ""
 "Мирные мобы появляются \n"
 "нормально, как и монстры."
 
-msgid "Flower Forest"
-msgstr "Цветочный лес"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"Биом цветочного леса.\n"
-"Мирные мобы появляются \n"
-"нормально, как и монстры."
-
 msgid "Deep Ocean"
 msgstr ""
 

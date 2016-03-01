@@ -1840,21 +1840,6 @@ msgstr ""
 "spawne her (inclusive ulve) og\n"
 "fjentlige monstre/dyr vil spawne normalt."
 
-msgid "Flower Forest"
-msgstr "Blomster Skov"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"Slette biomen har regn\n"
-"istedet for sne. Neutrale\n"
-"dyr vil spawne normalt\n"
-"(inklusive heste) og fjentlige\n"
-"monstre/dyr vil spawne normalt"
-
 msgid "Deep Ocean"
 msgstr "Dybhav"
 

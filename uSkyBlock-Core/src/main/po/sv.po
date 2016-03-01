@@ -1840,22 +1840,6 @@ msgstr ""
 "vanligt och det gör\n"
 "monster också."
 
-msgid "Flower Forest"
-msgstr "Flower Forest"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"Biomet flower forest. I detta\n"
-"biome finner du många olika\n"
-"blommor som du inte finner\n"
-"på något annat sätt. Passiva\n"
-"mobs spawnar som vanligt\n"
-"och det gör monster också."
-
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
 
