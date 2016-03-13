@@ -7,8 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-02-24 13:51+0000\n"
+"PO-Revision-Date: 2016-03-13 23:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -17,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -37,8 +37,8 @@ msgid "§7and more..."
 msgstr "§7and more..."
 
 #, java-format
-msgid "§f{0}x§7{1}"
-msgstr "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
+msgstr "§f{0}x §7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -303,7 +303,7 @@ msgstr "adds the player to the island"
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
-msgstr "§6* §6{0} §7has joined your island group."
+msgstr "§6{0} §7has joined your island group."
 
 #, java-format
 msgid "§4No player named {0} found!"
@@ -511,12 +511,12 @@ msgstr "teleport to another players island"
 msgid "§4Only supported for players"
 msgstr "§4* §7Only supported for players"
 
+msgid "§4That player does not have an island!"
+msgstr "§4* §7That player does not have an island!"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§9* §7Teleporting to §6{0}''s §7island."
-
-msgid "§4That player does not have an island!"
-msgstr "§4* §7That player does not have an island!"
 
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
@@ -1639,7 +1639,7 @@ msgid "Group Members: §2{0}§7/§e{1}"
 msgstr "Group Members: §2{0}§7/§e{1}"
 
 msgid "§aMore players can be invited to this island."
-msgstr "§9* §7More players can be invited to this island."
+msgstr "§7More players can be invited to this island."
 
 msgid "§cThis island is full."
 msgstr "§4* §7This island is full."
@@ -1866,20 +1866,6 @@ msgstr ""
 "normally and hostile\n"
 "mobs will spawn."
 
-msgid "Flower Forest"
-msgstr "Flower Forest"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
 
@@ -1944,7 +1930,7 @@ msgstr ""
 "§e§lClick here to start!"
 
 msgid "§aClick to create!"
-msgstr "§9* §7Click to create!"
+msgstr "§7Click to create!"
 
 #, java-format
 msgid ""
