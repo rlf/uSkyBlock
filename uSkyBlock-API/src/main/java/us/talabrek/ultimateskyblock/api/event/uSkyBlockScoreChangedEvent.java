@@ -20,7 +20,7 @@ public class uSkyBlockScoreChangedEvent extends uSkyBlockEvent {
 
     /**
      * Returns the score that changed.
-     * @return
+     * @return the score that changed.
      */
     public IslandScore getScore() {
         return score;
