@@ -1086,6 +1086,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     @Override
+    public us.talabrek.ultimateskyblock.api.IslandInfo getIslandInfo(Location location) {
+        return getIslandInfo(WorldGuardHandler.getIslandNameAt(location));
+    }
+
+    @Override
     public boolean isGTE(String versionNumber) {
         return VersionUtil.getVersion(getDescription().getVersion()).isGTE(versionNumber);
     }

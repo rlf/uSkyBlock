@@ -90,4 +90,12 @@ public interface uSkyBlockAPI extends Plugin {
      * @since 2.6.2
      */
     boolean isGTE(String versionNumber);
+
+    /**
+     * Returns the island-information for the supplied location, or <code>null</code> if none exist.
+     * @param location The location to test for the existence of an island.
+     * @since 2.6.4
+     * @return the island-information for the supplied location, or <code>null</code> if none exist.
+     */
+    IslandInfo getIslandInfo(Location location);
 }

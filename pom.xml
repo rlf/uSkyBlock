@@ -4,7 +4,7 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.5.0-SNAPSHOT</version>
+    <version>2.6.0-SNAPSHOT</version>
     <name>Ultimate Skyblock</name>
 
     <modules>
@@ -26,7 +26,7 @@
         <travis.buildNumber>dev</travis.buildNumber>
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
-        <api.version>2.6.2</api.version>
+        <api.version>2.6.4</api.version>
     </properties>
 
     <scm>
