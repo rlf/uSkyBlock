@@ -34,7 +34,7 @@ msgid "§7and more..."
 msgstr ""
 
 #, java-format
-msgid "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
 msgstr ""
 
 #, java-format
@@ -498,12 +498,12 @@ msgstr ""
 msgid "§4Only supported for players"
 msgstr "§4近支持玩家"
 
+msgid "§4That player does not have an island!"
+msgstr "§4玩家仍未拥有岛屿。"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr ""
-
-msgid "§4That player does not have an island!"
-msgstr "§4玩家仍未拥有岛屿。"
 
 msgid "imports players and islands from other formats"
 msgstr ""
@@ -1733,16 +1733,6 @@ msgstr ""
 
 msgid ""
 "The extreme hills biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-
-msgid "Flower Forest"
-msgstr ""
-
-msgid ""
-"The flower forest biome.\n"
 "Passive mobs will spawn \n"
 "normally and hostile\n"
 "mobs will spawn."

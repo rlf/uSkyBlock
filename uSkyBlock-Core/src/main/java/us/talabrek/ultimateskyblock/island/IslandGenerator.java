@@ -43,7 +43,7 @@ public class IslandGenerator {
     private final File netherSchematic;
     private final File directorySchematics;
 
-    public IslandGenerator(File dataFolder, FileConfiguration config) {
+    public IslandGenerator(File dataFolder, final FileConfiguration config) {
         directorySchematics = new File(dataFolder + File.separator + "schematics");
         if (!directorySchematics.exists()) {
             directorySchematics.mkdir();
@@ -62,7 +62,9 @@ public class IslandGenerator {
         this.schemFiles = directorySchematics.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlock") && !FileUtil.getBasename(name).toLowerCase().endsWith("nether");
+                String basename = FileUtil.getBasename(name);
+                boolean enabled = config.getBoolean("island-schemes." + basename + ".enabled", true);
+                return enabled && name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlock") && !basename.toLowerCase().endsWith("nether");
             }
         });
         if (this.schemFiles == null) {

@@ -44,7 +44,7 @@ public interface BlockScore {
 
     /**
      * User displayable name of the block.
-     * <p/>
+     * <br>
      * I.e. "Diamond Block".
      *
      * @return User displayable name of the block.
@@ -54,14 +54,12 @@ public interface BlockScore {
 
     /**
      * The possible states of a BlockScore.
-     * <p/>
+     * <br>
      * <dl>
      * <dt>NORMAL</dt>
      * <dd>No special restrictions, each block added to the island will increase the score.</dd>
-     * <p/>
      * <dt>DIMINISHING</dt>
      * <dd>The upper limit has been reached, so additional blocks will only contribute a fraction to the score.</dd>
-     * <p/>
      * <dt>LIMIT</dt>
      * <dd>The hard-limit has been reached, so additional blocks will have no effect on the score.</dd>
      * </dl>

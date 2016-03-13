@@ -35,8 +35,8 @@ msgid "§7and more..."
 msgstr "§7그리고 더..."
 
 #, java-format
-msgid "§f{0}x§7{1}"
-msgstr "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
+msgstr ""
 
 #, java-format
 msgid "§7{0}"
@@ -512,12 +512,12 @@ msgstr "다른 플레이어 섬으로 텔레포트한다"
 msgid "§4Only supported for players"
 msgstr "§4오직 플레이어들에게만 지원됨"
 
+msgid "§4That player does not have an island!"
+msgstr "§4그 플레이어는 가진 섬이 없습니다!"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§a{0}의 섬으로 텔레포트 하는 중."
-
-msgid "§4That player does not have an island!"
-msgstr "§4그 플레이어는 가진 섬이 없습니다!"
 
 msgid "imports players and islands from other formats"
 msgstr "다른 형식으로 부터 플레이어와 섬을 수입합니다"
@@ -1846,20 +1846,6 @@ msgstr ""
 "절벽 생태계.\n"
 "수동적인 몬스터들이 일반적으로\n"
 "스폰되고 적대적인\n"
-"몬스터들이 스폰됩니다."
-
-msgid "Flower Forest"
-msgstr "꽃 숲"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"꽃 숲 생태계.\n"
-"수동적인 몬스터들이 일반적으로\n"
-"스폰되고, 적대적인\n"
 "몬스터들이 스폰됩니다."
 
 msgid "Deep Ocean"

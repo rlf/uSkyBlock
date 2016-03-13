@@ -39,9 +39,8 @@ msgstr "§eUppdraget kräver följande:"
 msgid "§7and more..."
 msgstr ""
 
-# ???
 #, java-format
-msgid "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
 msgstr ""
 
 #, java-format
@@ -512,12 +511,12 @@ msgstr "teleportera till en annan spelares ö"
 msgid "§4Only supported for players"
 msgstr "§cStöds endast för spelare"
 
+msgid "§4That player does not have an island!"
+msgstr "§cDen spelaren har ingen ö!"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§aTeleporterar till {0}s ö."
-
-msgid "§4That player does not have an island!"
-msgstr "§cDen spelaren har ingen ö!"
 
 msgid "imports players and islands from other formats"
 msgstr "importerar spelare och öar från andra format"
@@ -1839,22 +1838,6 @@ msgstr ""
 "Passiva mobs spawnar som\n"
 "vanligt och det gör\n"
 "monster också."
-
-msgid "Flower Forest"
-msgstr "Flower Forest"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"Biomet flower forest. I detta\n"
-"biome finner du många olika\n"
-"blommor som du inte finner\n"
-"på något annat sätt. Passiva\n"
-"mobs spawnar som vanligt\n"
-"och det gör monster också."
 
 msgid "Deep Ocean"
 msgstr "Deep Ocean"

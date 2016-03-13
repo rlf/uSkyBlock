@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock.api;
 
+import com.avaje.ebean.validation.NotNull;
+
 import java.util.List;
 
 /**

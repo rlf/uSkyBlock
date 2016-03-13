@@ -4,7 +4,7 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.5.0-SNAPSHOT</version>
+    <version>2.6.0-SNAPSHOT</version>
     <name>Ultimate Skyblock</name>
 
     <modules>
@@ -15,6 +15,7 @@
         <module>uSkyBlock-AWE211</module>
         <module>uSkyBlock-AWE311</module>
         <module>uSkyBlock-AWE321</module>
+        <module>uSkyBlock-AWE330</module>
         <module>uSkyBlock-Plugin</module>
     </modules>
 
@@ -25,7 +26,7 @@
         <travis.buildNumber>dev</travis.buildNumber>
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
-        <api.version>2.6.2</api.version>
+        <api.version>2.6.4</api.version>
     </properties>
 
     <scm>
@@ -223,6 +224,11 @@
             <dependency>
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-AWE321</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-AWE330</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

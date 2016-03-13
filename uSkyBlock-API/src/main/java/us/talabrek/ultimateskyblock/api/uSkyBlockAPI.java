@@ -75,7 +75,7 @@ public interface uSkyBlockAPI extends Plugin {
 
     /**
      * Convenience method to test the API version.
-     * Note: This will ofc. NOT work, if the deployed version is < 2.6.2 :)
+     * Note: This will ofc. NOT work, if the deployed version is &lt; 2.6.2 :)
      * Usage:
      * <pre>{@code
      *     uSkyBlockAPI api = Bukkit.getPluginManager().getPlugin("uSkyBlock");
@@ -85,9 +85,17 @@ public interface uSkyBlockAPI extends Plugin {
      *         // Complain here
      *     }
      * }</pre>
-     * @param versionNumber
-     * @return
+     * @param versionNumber The version number to test against.
+     * @return Whether or not this version is Greather-Than-or-Equal to the version supplied.
      * @since 2.6.2
      */
     boolean isGTE(String versionNumber);
+
+    /**
+     * Returns the island-information for the supplied location, or <code>null</code> if none exist.
+     * @param location The location to test for the existence of an island.
+     * @since 2.6.4
+     * @return the island-information for the supplied location, or <code>null</code> if none exist.
+     */
+    IslandInfo getIslandInfo(Location location);
 }

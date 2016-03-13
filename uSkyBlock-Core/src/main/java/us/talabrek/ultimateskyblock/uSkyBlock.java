@@ -179,7 +179,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             put("forest", Biome.FOREST);
             put("plains", Biome.PLAINS);
             put("extreme_hills", Biome.EXTREME_HILLS);
-            put("flower_forest", Biome.FLOWER_FOREST);
             put("deep_ocean", Biome.DEEP_OCEAN);
         }
     };
@@ -1087,6 +1086,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     @Override
+    public us.talabrek.ultimateskyblock.api.IslandInfo getIslandInfo(Location location) {
+        return getIslandInfo(WorldGuardHandler.getIslandNameAt(location));
+    }
+
+    @Override
     public boolean isGTE(String versionNumber) {
         return VersionUtil.getVersion(getDescription().getVersion()).isGTE(versionNumber);
     }
@@ -1168,8 +1172,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
         limitLogic = new LimitLogic(this);
         notifier = new PlayerNotifier(getConfig());
-        playerLogic = new PlayerLogic(this);
         playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
+        playerLogic = new PlayerLogic(this);
         if (autoRecalculateTask != null) {
             autoRecalculateTask.cancel();
         }

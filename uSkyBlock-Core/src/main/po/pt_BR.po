@@ -35,7 +35,7 @@ msgid "§7and more..."
 msgstr ""
 
 #, java-format
-msgid "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
 msgstr ""
 
 #, java-format
@@ -505,12 +505,12 @@ msgstr "teletransportar para a ilha de outros jogadores"
 msgid "§4Only supported for players"
 msgstr "§4Apenas suportado para jogadores"
 
+msgid "§4That player does not have an island!"
+msgstr "§4Esse jogador não tem uma ilha!"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§aTeleportando para a ilha de {0}."
-
-msgid "§4That player does not have an island!"
-msgstr "§4Esse jogador não tem uma ilha!"
 
 msgid "imports players and islands from other formats"
 msgstr "importar jogadores e ilhas de outros formatos"
@@ -1848,20 +1848,6 @@ msgstr ""
 "Animais passivos e\n"
 "monstros irão nascer\n"
 "normalmente."
-
-msgid "Flower Forest"
-msgstr "Floresta de flores"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"§fBioma floresta de flores.\n"
-"§fAnimais passivos e\n"
-"§fmonstros irão nascer\n"
-"§fnormalmente."
 
 msgid "Deep Ocean"
 msgstr "Deep Ocean"

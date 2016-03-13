@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-30 23:00+0100\n"
+"PO-Revision-Date: 2016-03-01 21:59+0100\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -36,8 +36,8 @@ msgid "§7and more..."
 msgstr "§7og flere..."
 
 #, java-format
-msgid "§f{0}x§7{1}"
-msgstr "§f{0}x§7{1}"
+msgid "§f{0}x §7{1}"
+msgstr "§f{0}x §7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -509,12 +509,12 @@ msgstr "Teleporterer til en andens ø"
 msgid "§4Only supported for players"
 msgstr "§4Kun understøttet for spillere"
 
+msgid "§4That player does not have an island!"
+msgstr "§4Den spiller har ingen ø!"
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§aTeleporterer til {0}s ø."
-
-msgid "§4That player does not have an island!"
-msgstr "§4Den spiller har ingen ø!"
 
 msgid "imports players and islands from other formats"
 msgstr "importer spillere og øer fra andre formater"
@@ -1304,7 +1304,7 @@ msgstr ""
 "sekunder for at fortsætte!"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1840,21 +1840,6 @@ msgstr ""
 "spawne her (inclusive ulve) og\n"
 "fjentlige monstre/dyr vil spawne normalt."
 
-msgid "Flower Forest"
-msgstr "Blomster Skov"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"Slette biomen har regn\n"
-"istedet for sne. Neutrale\n"
-"dyr vil spawne normalt\n"
-"(inklusive heste) og fjentlige\n"
-"monstre/dyr vil spawne normalt"
-
 msgid "Deep Ocean"
 msgstr "Dybhav"
 
@@ -2188,15 +2173,17 @@ msgstr ""
 "§4ADVARSEL! §cdette vil fjerne alle dine ting og din ø!"
 
 msgid "§c§lLeave Island"
-msgstr ""
+msgstr "§c§lForlad Ø"
 
 msgid ""
 "Leaves your island.\n"
 "§4WARNING! §cwill remove all your items!"
 msgstr ""
+"Forlader din ø.\n"
+"§4ADVARSEL! §cdu vil miste alle dine ting!"
 
 msgid "§cClick to leave"
-msgstr ""
+msgstr "§cKlik for at forlade"
 
 msgid "Island Restart Menu"
 msgstr "Ø Genstarts Menu"
@@ -2206,7 +2193,7 @@ msgstr "§4Du har ikke adgang til den ø-type!"
 
 #, java-format
 msgid "§cClick within §9{0}§c to leave!"
-msgstr ""
+msgstr "§cKlik indenfor §9{0}§c for at forlade!"
 
 msgid "§a§lReturn to the main menu"
 msgstr "§a§lReturner til hovedmenuen"
