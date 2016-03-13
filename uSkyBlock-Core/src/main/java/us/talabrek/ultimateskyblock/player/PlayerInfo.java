@@ -47,6 +47,7 @@ public class PlayerInfo implements Serializable {
     private boolean dirty = false;
 
     public PlayerInfo(String currentPlayerName, UUID playerUUID) {
+        this.uuid = playerUUID;
         this.playerName = currentPlayerName;
         this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, this.playerName + ".yml");
         if (this.playerConfigFile.exists() || !uSkyBlock.getInstance().getPlayerNameChangeManager().hasNameChanged(playerUUID, currentPlayerName)) {

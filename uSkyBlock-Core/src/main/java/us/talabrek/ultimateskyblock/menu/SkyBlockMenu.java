@@ -717,7 +717,8 @@ public class SkyBlockMenu {
             p.openInventory(createMainMenu(p));
         } else if (currentItem != null && meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
-            if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
+            IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+            if (plugin.getPerkLogic().getSchemes(p).contains(schemeName) && p.hasPermission(islandPerk.getPermission())) {
                 if (plugin.getConfirmHandler().millisLeft(p, "/is restart") > 0) {
                     p.closeInventory();
                     p.performCommand("island restart " + schemeName);
@@ -868,7 +869,7 @@ public class SkyBlockMenu {
         inventory.setItem(17, currentItem);
     }
 
-    private Inventory createRestartGUI(Player player) {
+    public Inventory createRestartGUI(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
         int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
         Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Restart Menu"));
