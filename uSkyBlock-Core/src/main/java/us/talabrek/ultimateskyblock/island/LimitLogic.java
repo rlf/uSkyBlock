@@ -7,6 +7,7 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Golem;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.WaterMob;
@@ -45,12 +46,12 @@ public class LimitLogic {
         Location islandLocation = islandInfo.getIslandLocation();
         ProtectedRegion islandRegionAt = WorldGuardHandler.getIslandRegionAt(islandLocation);
         // Nether and Overworld regions are more or less equal (same x,z coords)
-        List<Creature> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorld(), islandRegionAt);
+        List<LivingEntity> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorld(), islandRegionAt);
         World nether = plugin.getSkyBlockNetherWorld();
         if (nether != null) {
             creatures.addAll(WorldGuardHandler.getCreaturesInRegion(nether, islandRegionAt));
         }
-        for (Creature creature : creatures) {
+        for (LivingEntity creature : creatures) {
             CreatureType key = getCreatureType(creature);
             if (!mapCount.containsKey(key)) {
                 mapCount.put(key, 0);
@@ -68,7 +69,7 @@ public class LimitLogic {
         return max;
     }
 
-    public CreatureType getCreatureType(Creature creature) {
+    public CreatureType getCreatureType(LivingEntity creature) {
         if (creature instanceof Monster || creature instanceof WaterMob) {
             return CreatureType.MONSTER;
         } else if (creature instanceof Animals) {
@@ -82,7 +83,7 @@ public class LimitLogic {
     }
 
     public CreatureType getCreatureType(EntityType entityType) {
-        if (Monster.class.isAssignableFrom(entityType.getEntityClass())) {
+        if (Monster.class.isAssignableFrom(entityType.getEntityClass()) || WaterMob.class.isAssignableFrom(entityType.getEntityClass())) {
             return CreatureType.MONSTER;
         } else if (Animals.class.isAssignableFrom(entityType.getEntityClass())) {
             return CreatureType.ANIMAL;

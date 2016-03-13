@@ -399,12 +399,12 @@ public class WorldGuardHandler {
         return players;
     }
 
-    public static List<Creature> getCreaturesInRegion(World world, ProtectedRegion region) {
+    public static List<LivingEntity> getCreaturesInRegion(World world, ProtectedRegion region) {
         List<LivingEntity> livingEntities = world.getLivingEntities();
-        List<Creature> creatures = new ArrayList<>();
+        List<LivingEntity> creatures = new ArrayList<>();
         for (LivingEntity e : livingEntities) {
-            if (e instanceof Creature && region.contains(asVector(e.getLocation()))) {
-                creatures.add((Creature) e);
+            if (region.contains(asVector(e.getLocation()))) {
+                creatures.add(e);
             }
         }
         return creatures;

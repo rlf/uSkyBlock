@@ -44,6 +44,9 @@ public class SpawnEvents implements Listener {
             CreatureSpawnEvent.SpawnReason.BUILD_IRONGOLEM, CreatureSpawnEvent.SpawnReason.BUILD_SNOWMAN,
             CreatureSpawnEvent.SpawnReason.BUILD_WITHER
     ));
+    private static final Set<CreatureSpawnEvent.SpawnReason> ADMIN_INITIATED = new HashSet<>(Arrays.asList(
+            CreatureSpawnEvent.SpawnReason.SPAWNER, CreatureSpawnEvent.SpawnReason.SPAWNER_EGG, CreatureSpawnEvent.SpawnReason.DISPENSE_EGG
+    ));
     private static final Map<Short, Set<Material>> FODDER = new HashMap<>();
 
     public static final short RABBIT_ID = 101;
@@ -118,6 +121,9 @@ public class SpawnEvents implements Listener {
     public void onCreatureSpawn(CreatureSpawnEvent event) {
         if (event == null || event.isCancelled() || event.getLocation() == null || !plugin.isSkyWorld(event.getLocation().getWorld())) {
             return; // Bail out, we don't care
+        }
+        if (!event.isCancelled() && ADMIN_INITIATED.contains(event.getSpawnReason())) {
+            return; // Allow it, the above method would have blocked it if it should be blocked.
         }
         checkLimits(event, event.getEntity().getType(), event.getLocation());
         if (!event.isCancelled() && event.getEntity() instanceof Squid) {
