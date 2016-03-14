@@ -7,7 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-02-24 13:51+0000\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-03-14 00:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -37,7 +38,7 @@ msgstr "§7and more..."
 
 #, java-format
 msgid "§f{0}x §7{1}"
-msgstr ""
+msgstr "§f{0}x §7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -302,7 +303,7 @@ msgstr "adds the player to the island"
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
-msgstr "§6* §6{0} §7has joined your island group."
+msgstr "§6{0} §7has joined your island group."
 
 #, java-format
 msgid "§4No player named {0} found!"
@@ -1362,7 +1363,7 @@ msgstr "The island has been created."
 
 #, java-format
 msgid "§b{0}§d locked the island."
-msgstr "§9* §6{0} §4locked §7the island."
+msgstr "§6{0} §4locked §7the island."
 
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr ""
@@ -1371,7 +1372,7 @@ msgstr ""
 
 #, java-format
 msgid "§b{0}§d unlocked the island."
-msgstr "§9* §6{0}§a unlocked §7the island."
+msgstr "§6{0}§a unlocked §7the island."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
@@ -1379,7 +1380,7 @@ msgstr "§4Sky §9Message §4: §7 {0}"
 
 #, java-format
 msgid "§b{0}§d has been removed from the island group."
-msgstr "§4* {0}§7 has been removed from the island group."
+msgstr "{0}§7 has been removed from the island group."
 
 #, java-format
 msgid "§9{1} §7- {0}"
@@ -1600,7 +1601,7 @@ msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
 msgid "§9Player Permissions"
-msgstr "§9* §7Player Permissions"
+msgstr "§7Player Permissions"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1638,7 +1639,7 @@ msgid "Group Members: §2{0}§7/§e{1}"
 msgstr "Group Members: §2{0}§7/§e{1}"
 
 msgid "§aMore players can be invited to this island."
-msgstr "§9* §7More players can be invited to this island."
+msgstr "§7More players can be invited to this island."
 
 msgid "§cThis island is full."
 msgstr "§4* §7This island is full."
@@ -1929,15 +1930,15 @@ msgstr ""
 "§e§lClick here to start!"
 
 msgid "§aClick to create!"
-msgstr "§9* §7Click to create!"
+msgstr "§7Click to create!"
 
 #, java-format
 msgid ""
 "§cNo access!\n"
 "§7({0})"
 msgstr ""
-"§4& No access!\n"
-"§4* §7({0})"
+"§4 No access!\n"
+"§7({0})"
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lJoin an Island"
