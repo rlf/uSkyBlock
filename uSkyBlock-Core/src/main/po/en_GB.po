@@ -7,7 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-03-13 23:09+0000\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-03-14 00:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -16,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -1363,7 +1363,7 @@ msgstr "The island has been created."
 
 #, java-format
 msgid "§b{0}§d locked the island."
-msgstr "§9* §6{0} §4locked §7the island."
+msgstr "§6{0} §4locked §7the island."
 
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
 msgstr ""
@@ -1372,7 +1372,7 @@ msgstr ""
 
 #, java-format
 msgid "§b{0}§d unlocked the island."
-msgstr "§9* §6{0}§a unlocked §7the island."
+msgstr "§6{0}§a unlocked §7the island."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
@@ -1380,7 +1380,7 @@ msgstr "§4Sky §9Message §4: §7 {0}"
 
 #, java-format
 msgid "§b{0}§d has been removed from the island group."
-msgstr "§4* {0}§7 has been removed from the island group."
+msgstr "{0}§7 has been removed from the island group."
 
 #, java-format
 msgid "§9{1} §7- {0}"
@@ -1601,7 +1601,7 @@ msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
 msgid "§9Player Permissions"
-msgstr "§9* §7Player Permissions"
+msgstr "§7Player Permissions"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1937,8 +1937,8 @@ msgid ""
 "§cNo access!\n"
 "§7({0})"
 msgstr ""
-"§4& No access!\n"
-"§4* §7({0})"
+"§4 No access!\n"
+"§7({0})"
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lJoin an Island"
