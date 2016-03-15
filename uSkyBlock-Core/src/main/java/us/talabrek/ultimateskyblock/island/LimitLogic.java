@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
@@ -71,7 +72,10 @@ public class LimitLogic {
     }
 
     public CreatureType getCreatureType(LivingEntity creature) {
-        if (creature instanceof Monster || creature instanceof WaterMob || creature instanceof Slime) {
+        if (creature instanceof Monster
+                || creature instanceof WaterMob
+                || creature instanceof Slime
+                || creature instanceof Ghast) {
             return CreatureType.MONSTER;
         } else if (creature instanceof Animals) {
             return CreatureType.ANIMAL;
@@ -86,7 +90,9 @@ public class LimitLogic {
     public CreatureType getCreatureType(EntityType entityType) {
         if (Monster.class.isAssignableFrom(entityType.getEntityClass())
                 || WaterMob.class.isAssignableFrom(entityType.getEntityClass())
-                || Slime.class.isAssignableFrom(entityType.getEntityClass())) {
+                || Slime.class.isAssignableFrom(entityType.getEntityClass())
+                || Ghast.class.isAssignableFrom(entityType.getEntityClass())
+                ) {
             return CreatureType.MONSTER;
         } else if (Animals.class.isAssignableFrom(entityType.getEntityClass())) {
             return CreatureType.ANIMAL;
