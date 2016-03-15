@@ -408,6 +408,6 @@ public class PlayerInfo implements Serializable {
     }
 
     public boolean isClearInventoryOnNextEntry() {
-        return playerData.getBoolean("clearInventoryOnNextEntry", false);
+        return playerData != null && playerData.getBoolean("clearInventoryOnNextEntry", false);
     }
 }
