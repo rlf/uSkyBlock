@@ -9,6 +9,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
+import org.bukkit.entity.Slime;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.WaterMob;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -70,7 +71,7 @@ public class LimitLogic {
     }
 
     public CreatureType getCreatureType(LivingEntity creature) {
-        if (creature instanceof Monster || creature instanceof WaterMob) {
+        if (creature instanceof Monster || creature instanceof WaterMob || creature instanceof Slime) {
             return CreatureType.MONSTER;
         } else if (creature instanceof Animals) {
             return CreatureType.ANIMAL;
@@ -83,7 +84,9 @@ public class LimitLogic {
     }
 
     public CreatureType getCreatureType(EntityType entityType) {
-        if (Monster.class.isAssignableFrom(entityType.getEntityClass()) || WaterMob.class.isAssignableFrom(entityType.getEntityClass())) {
+        if (Monster.class.isAssignableFrom(entityType.getEntityClass())
+                || WaterMob.class.isAssignableFrom(entityType.getEntityClass())
+                || Slime.class.isAssignableFrom(entityType.getEntityClass())) {
             return CreatureType.MONSTER;
         } else if (Animals.class.isAssignableFrom(entityType.getEntityClass())) {
             return CreatureType.ANIMAL;
