@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -10,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Squid;
+import org.bukkit.entity.Wither;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -20,6 +22,8 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.SpawnEgg;
+import org.bukkit.metadata.FixedMetadataValue;
+import us.talabrek.ultimateskyblock.api.IslandInfo;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -133,6 +137,13 @@ public class SpawnEvents implements Listener {
             if (loc.getWorld().getBiome(x, z) == Biome.DEEP_OCEAN && LocationUtil.findRoofBlock(loc).getType() == Material.PRISMARINE) {
                 loc.getWorld().spawnEntity(loc, EntityType.GUARDIAN);
                 event.setCancelled(true);
+            }
+        }
+        if (!event.isCancelled() && event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.BUILD_WITHER && event.getEntity() instanceof Wither) {
+            IslandInfo islandInfo = plugin.getIslandInfo(event.getLocation());
+            if (islandInfo != null && islandInfo.getLeader() != null) {
+                event.getEntity().setCustomName(I18nUtil.tr("{0}''s Wither", islandInfo.getLeader()));
+                event.getEntity().setMetadata("fromIsland", new FixedMetadataValue(plugin, islandInfo.getName()));
             }
         }
     }

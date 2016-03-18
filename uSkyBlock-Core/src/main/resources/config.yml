@@ -132,6 +132,9 @@ options:
     # If true, only creepers targeting party-members will explode
     creepers: true
 
+    # If true, Withers will be limited to harming island-members/island blocks.
+    withers: true
+
     # Whether or not the plugin will try to protect the player from accidentally extinguishing lava
     protect-lava: true
 

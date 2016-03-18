@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock.event;
 
+import dk.lockfuglsang.minecraft.po.I18nUtil;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -7,21 +9,32 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.TNTPrimed;
+import org.bukkit.entity.Wither;
+import org.bukkit.entity.WitherSkull;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerInventoryEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+
+import java.text.MessageFormat;
+import java.text.ParseException;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 
@@ -36,11 +49,13 @@ public class GriefEvents implements Listener {
     private final boolean killMonstersEnabled;
     private final boolean killAnimalsEnabled;
     private final boolean tramplingEnabled;
+    private final boolean witherEnabled;
 
     public GriefEvents(uSkyBlock plugin) {
         this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
         creeperEnabled = config.getBoolean("options.protection.creepers", true);
+        witherEnabled = config.getBoolean("options.protection.withers", true);
         shearingEnabled = config.getBoolean("options.protection.visitors.shearing", true);
         killMonstersEnabled = config.getBoolean("options.protection.visitors.kill-monsters", true);
         killAnimalsEnabled = config.getBoolean("options.protection.visitors.kill-animals", true);
@@ -131,4 +146,53 @@ public class GriefEvents implements Listener {
         }
     }
 
+    @EventHandler
+    public void onTargeting(EntityTargetLivingEntityEvent e) {
+        if (!witherEnabled || e == null || e.isCancelled() || !plugin.isSkyAssociatedWorld(e.getEntity().getWorld())) {
+            return;
+        }
+        if (e.getEntity() instanceof Wither && e.getTarget() != null) {
+            handleWitherRampage(e, (Wither) e.getEntity(), e.getTarget().getLocation());
+        }
+    }
+
+    @EventHandler
+    public void onWitherSkullExplosion(EntityDamageByEntityEvent e) {
+        if (!witherEnabled || e == null || !(e.getEntity() instanceof WitherSkull) || !plugin.isSkyAssociatedWorld(e.getEntity().getWorld())) {
+            return;
+        }
+        // Find owner
+        ProjectileSource shooter = ((WitherSkull) e.getEntity()).getShooter();
+        if (shooter instanceof Wither) {
+            handleWitherRampage(e, (Wither) shooter, e.getDamager().getLocation());
+        }
+    }
+
+    private void handleWitherRampage(Cancellable e, Wither shooter, Location targetLocation) {
+        String islandName = getOwningIsland(shooter);
+        String targetIsland = WorldGuardHandler.getIslandNameAt(targetLocation);
+        if (targetIsland == null || !targetIsland.equals(islandName)) {
+            e.setCancelled(true);
+            shooter.remove();
+            IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+            if (islandInfo != null) {
+                islandInfo.sendMessageToOnlineMembers(I18nUtil.tr("\u00a7cWither Despawned!\u00a7e It wandered too far from your island."));
+            }
+        }
+    }
+
+    private String getOwningIsland(Wither wither) {
+        if (wither.hasMetadata("fromIsland")) {
+            return wither.getMetadata("fromIsland").get(0).asString();
+        }
+        try {
+            Object[] parse = new MessageFormat(I18nUtil.marktr("{0}''s Wither")).parse(wither.getCustomName());
+            if (parse != null && parse.length == 1 && parse[0] instanceof String) {
+                return (String) parse[0];
+            }
+        } catch (ParseException e) {
+            // Ignore
+        }
+        return null;
+    }
 }

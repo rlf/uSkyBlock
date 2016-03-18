@@ -80,6 +80,8 @@ public interface IslandInfo {
      */
     boolean isLeader(Player player);
 
+    String getName();
+
     /**
      * True iff the player has been banned from this island.
      * @param player The player to query for

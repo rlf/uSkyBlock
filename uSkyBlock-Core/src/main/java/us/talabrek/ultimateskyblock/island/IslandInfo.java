@@ -374,6 +374,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         return config.getBoolean("general.locked");
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -761,4 +762,5 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("general.schematicName", schematicName);
         dirty = true;
     }
+
 }
