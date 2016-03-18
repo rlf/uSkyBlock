@@ -388,10 +388,11 @@ ranks:
           items:
           - '73:4'
           - '15:4'
-          - '383:95:1'
           permission: none
           currency: 30
           xp: 30
+          commands:
+          - 'console: give {player} 383:95 1'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -413,10 +414,11 @@ ranks:
           items:
           - '73:4'
           - '15:4'
-          - '383:92:1'
           permission: none
           currency: 30
           xp: 30
+          commands:
+          - 'console: give {player} 383:92 1'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -438,11 +440,12 @@ ranks:
           items:
           - '73:4'
           - '15:4'
-          - '383:90:1'
           permission: none
           currency: 30
           xp: 30
-       
+          commands:
+          - 'console: give {player} 383:90 1'
+
       carpenter:
         name: '&aCarpenter'
         description: Collect all types of wood items.
@@ -456,10 +459,11 @@ ranks:
           items:
           - '73:4'
           - '15:4'
-          - '383:91:1'
           permission: none
           currency: 30
           xp: 30
+          commands:
+          - 'console: give {player} 383:91 1'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -481,10 +485,11 @@ ranks:
           items:
           - '73:4'
           - '15:4'
-          - '383:93:1'
           permission: none
           currency: 30
           xp: 30
+          commands:
+          - 'console: give {player} 383:93 1'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -674,10 +679,11 @@ ranks:
           text: 5 baked potatos, 1 cow
           items:
           - '393:5'
-          - '383:92:1'
           permission: none
           currency: 50
           xp: 50
+          commands:
+          - 'console: give {player} 383:92 1'
         repeatReward:
           text: 1 baked potato
           items:
@@ -696,11 +702,12 @@ ranks:
         reward:
           text: 1 pig, 1 saddle
           items:
-          - '383:90:1'
           - '329:1'
           permission: none
           currency: 50
           xp: 50
+          commands:
+          - 'console: give {player} 383:90 1'
         repeatReward:
           text: 1 golden carrot
           items:
@@ -720,10 +727,11 @@ ranks:
           text: 1 bucket, 1 sheep
           items:
           - '325:1'
-          - '383:91:1'
           permission: none
           currency: 50
           xp: 50
+          commands:
+          - 'console: give {player} 383:91 1'
         repeatReward:
           text: 1 bucket
           items:
@@ -742,12 +750,13 @@ ranks:
         reward:
           text: 1 horse, 1 iron horse armor, 5% chance on diamond horse armor
           items:
-          - '383:100:1'
           - '417:1'
           - '{p=0.05}419:1'
           permission: none
           currency: 50
           xp: 50
+          commands:
+          - 'console: give {player} 383:100 1'
         repeatReward:
           text: 1 redstone ore, 1 emerald
           items:
@@ -787,12 +796,13 @@ ranks:
         reward:
           text: 1 horse, 1 iron horse armor, 5% chance on diamond horse armor
           items:
-          - '383:100:1'
           - '417:1'
           - '{p=0.05}419:1'
           permission: none
           currency: 50
           xp: 50
+          commands:
+          - 'console: give {player} 383:100 1'
         repeatReward:
           text: 1 redstone ore, 1 emerald
           items:
@@ -853,16 +863,15 @@ ranks:
           items:
           - '346:1'
           - '421:2'
-          - '383:98:1'
           currency: 60
           xp: 60
           commands:
+          - 'console: give {player} 383:98:1'
           - 'console: msg {player} &9https://en.wikipedia.org/wiki/Danish_cuisine &2Click the link for more info'
         repeatReward:
-          text: 1 emerald, 20% chance on 2 ocelot
+          text: 1 emerald
           items:
           - '388:1'
-          - '{p=0.2}383:98:2'
           currency: 30
           xp: 30
           commands:
@@ -970,6 +979,7 @@ ranks:
           currency: 60
           xp: 60
           commands:
+          - 'console: give {player} 383:101 2'
           - 'console: msg {player} &9https://en.wikipedia.org/wiki/Pasta &2Click the link for more info'
         repeatReward:
           text: 30% chance on 1 disk, 1 emerald
@@ -1229,9 +1239,10 @@ ranks:
           text: 2 diamond, 1 mooshroom,
           items:
           - '264:2'
-          - '383:96:1'
           currency: 80
           xp: 80
+          commands:
+          - 'console: give {player} 383:96 1'
         repeatReward:
           text: nothing yet
           items:
