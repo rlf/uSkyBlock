@@ -173,6 +173,13 @@ public class GriefEvents implements Listener {
         String targetIsland = WorldGuardHandler.getIslandNameAt(targetLocation);
         if (targetIsland == null || !targetIsland.equals(islandName)) {
             e.setCancelled(true);
+            checkWitherLeash(shooter, islandName);
+        }
+    }
+
+    private void checkWitherLeash(Wither shooter, String islandName) {
+        String currentIsland = WorldGuardHandler.getIslandNameAt(shooter.getLocation());
+        if (currentIsland == null || !currentIsland.equals(islandName)) {
             shooter.remove();
             IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null) {

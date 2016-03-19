@@ -1240,6 +1240,13 @@ msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 스폰으로 이동하여 주세요"
 
+msgid "§cWither Despawned!§e It wandered too far from your island."
+msgstr ""
+
+#, java-format
+msgid "{0}''s Wither"
+msgstr ""
+
 msgid "§eVisitors can't drop items!"
 msgstr "§e방문자들은 아이템을 떨굴 수 없습니다!"
 

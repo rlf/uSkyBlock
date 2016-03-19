@@ -1228,6 +1228,13 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr ""
 
+msgid "§cWither Despawned!§e It wandered too far from your island."
+msgstr ""
+
+#, java-format
+msgid "{0}''s Wither"
+msgstr ""
+
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesökare kan inte kasta ut saker!"
 
