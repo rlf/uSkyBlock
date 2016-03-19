@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-01-30 12:01+0100\n"
+"PO-Revision-Date: 2016-03-14 00:04+0000\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Loco-Source-Locale: en_GB\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-Bookmarks: -1,3,-1,-1,-1,-1,-1,-1,-1,-1\n"
 "X-Loco-Parser: loco_parse_po\n"
 "X-Loco-Target-Locale: nl_NL\n"
@@ -33,15 +33,15 @@ msgid "§eThis challenge requires the following:"
 msgstr "§eVoor deze uitdaging heb je het volgende nodig:"
 
 msgid "§7and more..."
-msgstr ""
+msgstr "§7en meer..."
 
 #, java-format
-msgid "§f{0}x§7{1}"
-msgstr ""
+msgid "§f{0}x §7{1}"
+msgstr "§f{0}x §7{1}"
 
 #, java-format
 msgid "§7{0}"
-msgstr ""
+msgstr "§7{0}"
 
 msgid "§6Item Reward: §a"
 msgstr "§6Item beloning: §a"
@@ -214,7 +214,7 @@ msgstr ""
 
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
-msgstr ""
+msgstr "§7Voltooi nog {0} {1} §7uitdagingen"
 
 #, java-format
 msgid "§7Complete {0}"
@@ -252,15 +252,15 @@ msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} heeft al zijn uitdagingen laten resetten."
 
 msgid "complete all challenges in the rank"
-msgstr ""
+msgstr "Voltooi alle uitdagingen in deze groep"
 
 #, java-format
 msgid "§4Challenge {0} has already been completed"
-msgstr ""
+msgstr "§4De {0} uitdaging is al voltooid"
 
 #, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr ""
+msgstr "§eDe {0} uitdaging is volbracht door {1}"
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -272,7 +272,7 @@ msgstr "§4De speler met de naam {0} kan niet worden gevonden!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
-msgstr ""
+msgstr "§4Geen ranking naam {0} gevonden!"
 
 msgid "manage islands"
 msgstr "beheer de eilanden"
@@ -511,12 +511,12 @@ msgstr "Telepoort naar een eiland van een andere speler"
 msgid "§4Only supported for players"
 msgstr "§4Alleen ondersteund voor spelers"
 
+msgid "§4That player does not have an island!"
+msgstr "§4Die speler heeft geen eiland."
+
 #, java-format
 msgid "§aTeleporting to {0}s island."
 msgstr "§aTeleporteren naar {0} 's eiland."
-
-msgid "§4That player does not have an island!"
-msgstr "§4Die speler heeft geen eiland."
 
 msgid "imports players and islands from other formats"
 msgstr "importeerd spelers en eilanden van een ander formaat"
@@ -1252,6 +1252,13 @@ msgstr "§eJe kan alleen portals gebruiken op je eigen eiland!"
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandelen in niet toegestaan op andere eilanden. Doe het op spawn."
 
+msgid "§cWither Despawned!§e It wandered too far from your island."
+msgstr ""
+
+#, java-format
+msgid "{0}''s Wither"
+msgstr ""
+
 msgid "§eVisitors can't drop items!"
 msgstr "§eGasten kunnen geen items laten vallen!"
 
@@ -1323,7 +1330,7 @@ msgstr ""
 "seconden om het te accepteren!"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1605,7 +1612,7 @@ msgid "{0} <{1}>"
 msgstr "{0} <{1}>"
 
 msgid "§9Player Permissions"
-msgstr ""
+msgstr "§9Speler Permissions"
 
 msgid ""
 "§eClick here to return to\n"
@@ -1871,20 +1878,6 @@ msgstr ""
 "normaal net als\n"
 "vijandige mobs."
 
-msgid "Flower Forest"
-msgstr "Flower Forest"
-
-msgid ""
-"The flower forest biome.\n"
-"Passive mobs will spawn \n"
-"normally and hostile\n"
-"mobs will spawn."
-msgstr ""
-"De flower forest biome.\n"
-"Passieve mobs spawnen\n"
-"normaal net als\n"
-"vijandige mobs."
-
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
 
@@ -1950,13 +1943,15 @@ msgstr ""
 "§e§lKlik hier om te starten!"
 
 msgid "§aClick to create!"
-msgstr ""
+msgstr "§aKlik om te creeeren!"
 
 #, java-format
 msgid ""
 "§cNo access!\n"
 "§7({0})"
 msgstr ""
+"§cGeen toegang!\n"
+"§7({0})"
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lLid worden van een eiland"
@@ -2218,43 +2213,47 @@ msgstr ""
 "§e§lKlik hier om te veranderen."
 
 msgid "§c§lRestart Island"
-msgstr ""
+msgstr "§c§lHerstarten Eiland"
 
 msgid ""
 "Restarts your island.\n"
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
+"Hersytart je eiland.\n"
+"§4WAARSCHUWING! §cdit verweiderd je items en eiland!"
 
 msgid "§c§lLeave Island"
-msgstr ""
+msgstr "§c§lVerlaat het eiland"
 
 msgid ""
 "Leaves your island.\n"
 "§4WARNING! §cwill remove all your items!"
 msgstr ""
+"Verlaat je eiland.\n"
+"§4WAARSCHUWING! §cdit verwijderd al je items!"
 
 msgid "§cClick to leave"
-msgstr ""
+msgstr "§cKlik om te verlaten"
 
 msgid "Island Restart Menu"
-msgstr ""
+msgstr "Eiland Herstart Menu"
 
 msgid "§eYou do not have access to that island-schematic!"
 msgstr "§eJe hebt geen toegang to dat eiland-schematic"
 
 #, java-format
 msgid "§cClick within §9{0}§c to leave!"
-msgstr ""
+msgstr "§cKlik binnen §9{0}§c om te verlaten!"
 
 msgid "§a§lReturn to the main menu"
-msgstr ""
+msgstr "§a§lTerug naar het hoofdmenu"
 
 #, java-format
 msgid "§cClick within §9{0}§c to restart!"
-msgstr ""
+msgstr "§cKlik binnen §9{0}§c om te herstarten!"
 
 msgid "§aClick to restart!"
-msgstr ""
+msgstr "§aKlik voor herstart!"
 
 msgid "Caps On"
 msgstr "Caps On"
@@ -2322,6 +2321,7 @@ msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
+"§7De elfjes zijn bezig je eiland biome te veranderen  §9{0}§7, heb gedult."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
@@ -2330,35 +2330,35 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
 msgid "§9Creating an island at your location"
-msgstr ""
+msgstr "§9Creëren van het eiland op jouw locatie"
 
 #, java-format
 msgid "§9Creating an island §7{0}§9 of you"
-msgstr ""
+msgstr "§9Eiland creëren §7{0}§9 van jouw"
 
 msgid "North"
-msgstr ""
+msgstr "Noord"
 
 msgid "North-East"
-msgstr ""
+msgstr "Noord-Oost"
 
 msgid "East"
-msgstr ""
+msgstr "Oost"
 
 msgid "South-East"
-msgstr ""
+msgstr "Zuid-Oost"
 
 msgid "South"
-msgstr ""
+msgstr "Zuid"
 
 msgid "South-West"
-msgstr ""
+msgstr "Zuid-West"
 
 msgid "West"
-msgstr ""
+msgstr "West"
 
 msgid "North-West"
-msgstr ""
+msgstr "Noord-West"
 
 msgid "d"
 msgstr "d"

@@ -9,6 +9,7 @@ import java.util.List;
 public interface IslandScore {
     /**
      * Returns the calculated score.
+     * @return the calculated score.
      * @since v2.1.2
      */
     double getScore();
@@ -23,6 +24,7 @@ public interface IslandScore {
 
     /**
      * Returns an ordered list of the BlockScore influencing the score-calculation.
+     * @param offset the offset (for paged queries).
      * @param num The number of entries to return.
      * @return an ordered list of the BlockScore influencing the score-calculation.
      * @since v2.3-HF3

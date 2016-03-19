@@ -42,7 +42,7 @@ public class InviteHandler {
             return false;
         }
         if (oPi.getHasIsland()) {
-            IslandInfo oIsland = plugin.getIslandInfo(oPi);
+            us.talabrek.ultimateskyblock.api.IslandInfo oIsland = plugin.getIslandInfo(oPi);
             if (oIsland.isParty() && oIsland.isLeader(otherPlayer)) {
                 player.sendMessage(tr("\u00a74That player is already leader on another island."));
                 otherPlayer.sendMessage(tr("\u00a7e{0}\u00a7e tried to invite you, but you are already in a party.", player.getDisplayName()));
@@ -91,7 +91,7 @@ public class InviteHandler {
 
     public synchronized boolean accept(final Player player) {
         UUID uuid = player.getUniqueId();
-        IslandInfo oldIsland = plugin.getIslandInfo(player);
+        us.talabrek.ultimateskyblock.api.IslandInfo oldIsland = plugin.getIslandInfo(player);
         if (oldIsland != null && oldIsland.isParty()) {
             player.sendMessage(tr("\u00a74You can't use that command right now. Leave your current party first."));
             return false;

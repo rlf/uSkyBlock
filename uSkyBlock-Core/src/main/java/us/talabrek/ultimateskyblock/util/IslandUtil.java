@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 /**
- * Created by R4zorax on 04/11/2015.
+ * Various Island centered utilities
  */
 public enum IslandUtil {;
 
@@ -20,7 +20,7 @@ public enum IslandUtil {;
                 return name != null
                         && name.matches("-?[0-9]+,-?[0-9]+.yml")
                         && !"null.yml".equalsIgnoreCase(name)
-                        && !"0,0.yml".equalsIgnoreCase(name);
+                        && (Settings.general_spawnSize == 0  || !"0,0.yml".equalsIgnoreCase(name));
             }
         };
     }

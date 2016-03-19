@@ -47,6 +47,7 @@ public class PlayerInfo implements Serializable {
     private boolean dirty = false;
 
     public PlayerInfo(String currentPlayerName, UUID playerUUID) {
+        this.uuid = playerUUID;
         this.playerName = currentPlayerName;
         this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, this.playerName + ".yml");
         if (this.playerConfigFile.exists() || !uSkyBlock.getInstance().getPlayerNameChangeManager().hasNameChanged(playerUUID, currentPlayerName)) {
@@ -68,7 +69,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public boolean getHasIsland() {
-        return this.hasIsland;
+        return getIslandLocation() != null;
     }
 
     public String locationForParty() {
@@ -81,10 +82,6 @@ public class PlayerInfo implements Serializable {
 
     public String getPlayerName() {
         return this.playerName;
-    }
-
-    public void setHasIsland(final boolean b) {
-        this.hasIsland = b;
     }
 
     public void setIslandLocation(final Location l) {
@@ -411,6 +408,6 @@ public class PlayerInfo implements Serializable {
     }
 
     public boolean isClearInventoryOnNextEntry() {
-        return playerData.getBoolean("clearInventoryOnNextEntry", false);
+        return playerData != null && playerData.getBoolean("clearInventoryOnNextEntry", false);
     }
 }

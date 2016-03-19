@@ -64,4 +64,38 @@ public interface uSkyBlockAPI extends Plugin {
      * @since v2.5.5
      */
     IslandRank getIslandRank(Location location);
+
+    /**
+     * Returns the island-information for the player, or <code>null</code> if none exist.
+     * @param player The player to query island-info for.
+     * @return the island-information for the player, or <code>null</code> if none exist.
+     * @since 2.6.2
+     */
+    IslandInfo getIslandInfo(Player player);
+
+    /**
+     * Convenience method to test the API version.
+     * Note: This will ofc. NOT work, if the deployed version is &lt; 2.6.2 :)
+     * Usage:
+     * <pre>{@code
+     *     uSkyBlockAPI api = Bukkit.getPluginManager().getPlugin("uSkyBlock");
+     *     if (api != null && api.isEnabled() && api.isGTE("2.6.2")) {
+     *         // Access the api here...
+     *     } else {
+     *         // Complain here
+     *     }
+     * }</pre>
+     * @param versionNumber The version number to test against.
+     * @return Whether or not this version is Greather-Than-or-Equal to the version supplied.
+     * @since 2.6.2
+     */
+    boolean isGTE(String versionNumber);
+
+    /**
+     * Returns the island-information for the supplied location, or <code>null</code> if none exist.
+     * @param location The location to test for the existence of an island.
+     * @since 2.6.4
+     * @return the island-information for the supplied location, or <code>null</code> if none exist.
+     */
+    IslandInfo getIslandInfo(Location location);
 }

@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -36,7 +35,7 @@ public class FlatlandFixCommand extends AbstractCommand {
             }
         } else if (args.length == 0 && sender instanceof Player) {
             String islandName = WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation());
-            IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+            us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(islandName);
             if (islandInfo != null) {
                 islandLocation = islandInfo.getIslandLocation();
             }

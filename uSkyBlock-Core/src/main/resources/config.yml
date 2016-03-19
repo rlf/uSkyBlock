@@ -132,6 +132,9 @@ options:
     # If true, only creepers targeting party-members will explode
     creepers: true
 
+    # If true, Withers will be limited to harming island-members/island blocks.
+    withers: true
+
     # Whether or not the plugin will try to protect the player from accidentally extinguishing lava
     protect-lava: true
 
@@ -218,6 +221,12 @@ options:
 # the nodes under island-schemes must match the schematic-names from the schematics folder.
 island-schemes:
   default:
+    # optional, default true
+    enabled: true
+
+    # optional, must be listed in ascending order
+    index: 2
+
     permission: usb.island.create
     description: The default uSkyBlock island
     displayItem: SAPLING
@@ -327,8 +336,24 @@ tool-menu:
     BEDROCK: 'island spawn'
     WORKBENCH: 'challenges'
 
+# Placeholders - enable these to get placeholder substitution
+# usb_version
+# usb_island_level, usb_island_rank, usb_island_partysize_max, usb_island_partysize
+# usb_island_leader, usb_island_bans, usb_island_members, usb_island_trustees
+# usb_island_biome, usb_island_schematic
+# usb_island_location, usb_island_location_x, usb_island_location_y, usb_island_location_z
+# usb_island_golems_max, usb_island_monsters_max, usb_island_animals_max, usb_island_villagers_max,
+# usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_villagers
+placeholder:
+  # Hooks into MVdWPlaceholderAPI
+  mvdwplaceholderapi: false
+  # uSkyBlock native placeholders for chat messages and format
+  chatplaceholder: false
+  # uSkyBlock native placeholders for server-commands
+  servercommandplaceholder: false
+
 # DO NOT TOUCH THE FIELDS BELOW
-version: 44
+version: 49
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

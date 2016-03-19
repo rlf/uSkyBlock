@@ -264,10 +264,12 @@ public class SkyBlockMenu {
                         "extreme_hills", tr("Extreme Hills"),
                         tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
                 ),
+                /* Not part of Bukkit 1.9
                 new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
                         "flower_forest", tr("Flower Forest"),
                         tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
                 ),
+                */
                 new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
                         "deep_ocean", tr("Deep Ocean"),
                         tr("The deep-ocean biome is an advanced\n" +
@@ -440,7 +442,7 @@ public class SkyBlockMenu {
 
     private Inventory createInitMenu(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
-        int menuSize = (int) Math.ceil((schemeNames.size() + 3) / 9d)*9;
+        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
         Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Create Menu"));
         List<String> lores = new ArrayList<>();
         ItemStack menuItem = new ItemStack(Material.GRASS, 1);
@@ -455,6 +457,11 @@ public class SkyBlockMenu {
         int index = 1;
         for (String schemeName : schemeNames) {
             IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+            boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
+            if (!enabled) {
+                continue; // Skip
+            }
+            index = plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index);
             menuItem = islandPerk.getDisplayItem();
             meta = menuItem.getItemMeta();
             lores = meta.getLore();
@@ -489,6 +496,19 @@ public class SkyBlockMenu {
         menu.setItem(menuSize-1, menuItem);
         lores.clear();
         return menu;
+    }
+
+    private int getMaxSchemeIndex(List<String> schemeNames) {
+        int index = 1;
+        for (String schemeName : schemeNames) {
+            int nextIndex = plugin.getConfig().getInt("island-schemes." + schemeName + ".index", index);
+            if (nextIndex > index) {
+                index = nextIndex;
+            } else {
+                index++;
+            }
+        }
+        return index + 2;
     }
 
     private Inventory createMainMenu(Player player) {
@@ -697,7 +717,8 @@ public class SkyBlockMenu {
             p.openInventory(createMainMenu(p));
         } else if (currentItem != null && meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
-            if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
+            IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+            if (plugin.getPerkLogic().getSchemes(p).contains(schemeName) && p.hasPermission(islandPerk.getPermission())) {
                 if (plugin.getConfirmHandler().millisLeft(p, "/is restart") > 0) {
                     p.closeInventory();
                     p.performCommand("island restart " + schemeName);
@@ -848,9 +869,9 @@ public class SkyBlockMenu {
         inventory.setItem(17, currentItem);
     }
 
-    private Inventory createRestartGUI(Player player) {
+    public Inventory createRestartGUI(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
-        int menuSize = (int) Math.ceil((schemeNames.size() + 2) / 9d)*9;
+        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
         Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Restart Menu"));
         List<String> lores = new ArrayList<>();
         ItemStack menuItem = new ItemStack(Material.SIGN, 1);
@@ -875,6 +896,11 @@ public class SkyBlockMenu {
         int index = 1;
         for (String schemeName : schemeNames) {
             IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+            boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
+            if (!enabled) {
+                continue; // Skip
+            }
+            index = plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index);
             menuItem = islandPerk.getDisplayItem();
             meta = menuItem.getItemMeta();
             lores = meta.getLore();

@@ -179,7 +179,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             put("forest", Biome.FOREST);
             put("plains", Biome.PLAINS);
             put("extreme_hills", Biome.EXTREME_HILLS);
-            put("flower_forest", Biome.FLOWER_FOREST);
             put("deep_ocean", Biome.DEEP_OCEAN);
         }
     };
@@ -202,6 +201,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
+        PlaceholderHandler.unregister(this);
         challengeLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
@@ -430,7 +430,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public Location getSafeWarpLocation(final PlayerInfo p) {
-        IslandInfo islandInfo = getIslandInfo(p);
+        us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = getIslandInfo(p);
         if (islandInfo != null) {
             Location warp = findNearestSafeLocation(islandInfo.getWarpLocation());
             if (warp == null) {
@@ -620,7 +620,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 @Override
                 public void run() {
                     pi.setHomeLocation(null);
-                    pi.setHasIsland(true);
                     pi.setIslandLocation(newLoc);
                     pi.setHomeLocation(getSafeHomeLocation(pi));
                     IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
@@ -741,7 +740,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private boolean playerIsTrusted(Player player) {
         String islandName = WorldGuardHandler.getIslandNameAt(player.getLocation());
         if (islandName != null) {
-            IslandInfo islandInfo = islandLogic.getIslandInfo(islandName);
+            us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = islandLogic.getIslandInfo(islandName);
             if (islandInfo != null && islandInfo.getTrustees().contains(player.getName())) {
                 return true;
             }
@@ -1086,6 +1085,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return islandLogic.getIslandInfo(playerInfo);
     }
 
+    @Override
+    public us.talabrek.ultimateskyblock.api.IslandInfo getIslandInfo(Location location) {
+        return getIslandInfo(WorldGuardHandler.getIslandNameAt(location));
+    }
+
+    @Override
+    public boolean isGTE(String versionNumber) {
+        return VersionUtil.getVersion(getDescription().getVersion()).isGTE(versionNumber);
+    }
+
     public IslandInfo getIslandInfo(String location) {
         return islandLogic.getIslandInfo(location);
     }
@@ -1140,6 +1149,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (islandLogic != null) {
             islandLogic.shutdown();
         }
+        PlaceholderHandler.unregister(this);
         VaultHandler.setupEconomy();
         VaultHandler.setupPermissions();
         if (Settings.loadPluginConfig(getConfig())) {
@@ -1162,8 +1172,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
         limitLogic = new LimitLogic(this);
         notifier = new PlayerNotifier(getConfig());
-        playerLogic = new PlayerLogic(this);
         playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
+        playerLogic = new PlayerLogic(this);
         if (autoRecalculateTask != null) {
             autoRecalculateTask.cancel();
         }
@@ -1334,7 +1344,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public double getIslandLevel(Player player) {
         PlayerInfo info = getPlayerInfo(player);
         if (info != null) {
-            IslandInfo islandInfo = getIslandInfo(info);
+            us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = getIslandInfo(info);
             if (islandInfo != null) {
                 return islandInfo.getLevel();
             }

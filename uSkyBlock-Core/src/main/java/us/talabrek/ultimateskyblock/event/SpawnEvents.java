@@ -1,19 +1,17 @@
 package us.talabrek.ultimateskyblock.event;
 
+import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Animals;
-import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Squid;
-import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.Wither;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -24,17 +22,16 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.SpawnEgg;
+import org.bukkit.metadata.FixedMetadataValue;
+import us.talabrek.ultimateskyblock.api.IslandInfo;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.EntityUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -50,6 +47,9 @@ public class SpawnEvents implements Listener {
             CreatureSpawnEvent.SpawnReason.BREEDING,
             CreatureSpawnEvent.SpawnReason.BUILD_IRONGOLEM, CreatureSpawnEvent.SpawnReason.BUILD_SNOWMAN,
             CreatureSpawnEvent.SpawnReason.BUILD_WITHER
+    ));
+    private static final Set<CreatureSpawnEvent.SpawnReason> ADMIN_INITIATED = new HashSet<>(Arrays.asList(
+            CreatureSpawnEvent.SpawnReason.SPAWNER, CreatureSpawnEvent.SpawnReason.SPAWNER_EGG, CreatureSpawnEvent.SpawnReason.DISPENSE_EGG
     ));
     private static final Map<Short, Set<Material>> FODDER = new HashMap<>();
 
@@ -126,6 +126,9 @@ public class SpawnEvents implements Listener {
         if (event == null || event.isCancelled() || event.getLocation() == null || !plugin.isSkyWorld(event.getLocation().getWorld())) {
             return; // Bail out, we don't care
         }
+        if (!event.isCancelled() && ADMIN_INITIATED.contains(event.getSpawnReason())) {
+            return; // Allow it, the above method would have blocked it if it should be blocked.
+        }
         checkLimits(event, event.getEntity().getType(), event.getLocation());
         if (!event.isCancelled() && event.getEntity() instanceof Squid) {
             Location loc = event.getLocation();
@@ -134,6 +137,13 @@ public class SpawnEvents implements Listener {
             if (loc.getWorld().getBiome(x, z) == Biome.DEEP_OCEAN && LocationUtil.findRoofBlock(loc).getType() == Material.PRISMARINE) {
                 loc.getWorld().spawnEntity(loc, EntityType.GUARDIAN);
                 event.setCancelled(true);
+            }
+        }
+        if (!event.isCancelled() && event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.BUILD_WITHER && event.getEntity() instanceof Wither) {
+            IslandInfo islandInfo = plugin.getIslandInfo(event.getLocation());
+            if (islandInfo != null && islandInfo.getLeader() != null) {
+                event.getEntity().setCustomName(I18nUtil.tr("{0}''s Wither", islandInfo.getLeader()));
+                event.getEntity().setMetadata("fromIsland", new FixedMetadataValue(plugin, islandInfo.getName()));
             }
         }
     }
@@ -152,7 +162,7 @@ public class SpawnEvents implements Listener {
             event.setCancelled(true);
             return;
         }
-        IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+        us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(islandName);
         if (islandInfo == null) {
             // Disallow spawns on inactive islands
             event.setCancelled(true);

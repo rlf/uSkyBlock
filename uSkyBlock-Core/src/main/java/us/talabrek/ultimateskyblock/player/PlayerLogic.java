@@ -25,6 +25,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class PlayerLogic {
     private static final Logger log = Logger.getLogger(PlayerLogic.class.getName());
+    private static final PlayerInfo UNKNOWN_PLAYER = new PlayerInfo("__UNKNOWN__", UUID.fromString("c1fc3ace-e6b2-37ed-a575-03e0d777d7f1"));
     private final LoadingCache<UUID, PlayerInfo> playerCache;
     private final uSkyBlock plugin;
     private final BukkitTask saveTask;
@@ -74,6 +75,9 @@ public class PlayerLogic {
     }
 
     public PlayerInfo loadPlayerData(UUID uuid) {
+        if (UNKNOWN_PLAYER.getUniqueId().equals(uuid)) {
+            return UNKNOWN_PLAYER;
+        }
         return loadPlayerData(Bukkit.getOfflinePlayer(uuid));
     }
 

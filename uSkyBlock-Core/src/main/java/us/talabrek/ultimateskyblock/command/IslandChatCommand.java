@@ -5,7 +5,6 @@ import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
 
@@ -36,7 +35,7 @@ public abstract class IslandChatCommand extends AbstractCommandExecutor {
             if (args == null || args.length == 0) {
                 return false;
             }
-            IslandInfo islandInfo = plugin.getIslandInfo(player);
+            us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(player);
             String message = args[0];
             for (int ix = 1; ix < args.length; ix++) {
                 message += " " + args[ix]; // Java 8 has String.join - not guaranteed here
@@ -60,5 +59,5 @@ public abstract class IslandChatCommand extends AbstractCommandExecutor {
 
     protected abstract String getFormat();
 
-    protected abstract List<Player> getRecipients(Player player, IslandInfo islandInfo);
+    protected abstract List<Player> getRecipients(Player player, us.talabrek.ultimateskyblock.api.IslandInfo islandInfo);
 }

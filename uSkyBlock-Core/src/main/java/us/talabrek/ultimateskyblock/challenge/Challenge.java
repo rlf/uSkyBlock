@@ -208,7 +208,7 @@ public class Challenge {
                     break;
                 }
                 details.add(item.getAmount() > 1
-                        ? tr("\u00a7f{0}x\u00a77{1}", item.getAmount(), VaultHandler.getItemName(item))
+                        ? tr("\u00a7f{0}x \u00a77{1}", item.getAmount(), VaultHandler.getItemName(item))
                         : tr("\u00a77{0}", VaultHandler.getItemName(item)));
             }
         }
@@ -219,7 +219,7 @@ public class Challenge {
                     break;
                 }
                 details.add(entityMatch.getCount() > 1
-                        ? tr("\u00a7f{0}x\u00a77{1}", entityMatch.getCount(), entityMatch.getDisplayName())
+                        ? tr("\u00a7f{0}x \u00a77{1}", entityMatch.getCount(), entityMatch.getDisplayName())
                         : tr("\u00a77{0}", entityMatch.getDisplayName()));
             }
         }

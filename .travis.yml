@@ -14,13 +14,15 @@ before_install:
   # Skip the 'v'
   - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 script:
-  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,1.8 install
+  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,1.9 install
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
+  file_glob: true
   file:
   - uSkyBlock-Plugin/target/uSkyBlock.jar
   - uSkyBlock-Plugin/target/uSkyBlock-Plugin/gettext-report.txt
+  - uSkyBlock-API/target/uSkyBlock-API-*.jar
   skip_cleanup: true
   on:
     tags: true
