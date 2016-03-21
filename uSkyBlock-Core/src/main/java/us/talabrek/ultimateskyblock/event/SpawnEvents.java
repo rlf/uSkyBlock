@@ -126,9 +126,6 @@ public class SpawnEvents implements Listener {
         if (event == null || event.isCancelled() || event.getLocation() == null || !plugin.isSkyWorld(event.getLocation().getWorld())) {
             return; // Bail out, we don't care
         }
-        if (!event.isCancelled() && ADMIN_INITIATED.contains(event.getSpawnReason())) {
-            return; // Allow it, the above method would have blocked it if it should be blocked.
-        }
         checkLimits(event, event.getEntity().getType(), event.getLocation());
         if (!event.isCancelled() && event.getEntity() instanceof Squid) {
             Location loc = event.getLocation();
