@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2016-03-14 00:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1245,6 +1244,13 @@ msgstr "§9* §7You can not use another islands portals!"
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Trading isn't allowed on other islands. Do it in spawn."
+
+msgid "§cWither Despawned!§e It wandered too far from your island."
+msgstr ""
+
+#, java-format
+msgid "{0}''s Wither"
+msgstr ""
 
 msgid "§eVisitors can't drop items!"
 msgstr "§9* §7Visitors can't drop items!"
