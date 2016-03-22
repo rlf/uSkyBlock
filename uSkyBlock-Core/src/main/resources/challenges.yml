@@ -392,7 +392,7 @@ ranks:
           currency: 30
           xp: 30
           commands:
-          - 'console: give {player} 383:95 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Wolf"}}'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -418,7 +418,7 @@ ranks:
           currency: 30
           xp: 30
           commands:
-          - 'console: give {player} 383:92 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Cow"}}'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -444,7 +444,7 @@ ranks:
           currency: 30
           xp: 30
           commands:
-          - 'console: give {player} 383:90 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Pig"}}'
 
       carpenter:
         name: '&aCarpenter'
@@ -463,7 +463,7 @@ ranks:
           currency: 30
           xp: 30
           commands:
-          - 'console: give {player} 383:91 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Sheep"}}'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -489,7 +489,7 @@ ranks:
           currency: 30
           xp: 30
           commands:
-          - 'console: give {player} 383:93 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Chicken"}}'
         repeatReward:
           text: 1 redstone ore, 1 iron ore
           items:
@@ -683,7 +683,7 @@ ranks:
           currency: 50
           xp: 50
           commands:
-          - 'console: give {player} 383:92 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Cow"}}'
         repeatReward:
           text: 1 baked potato
           items:
@@ -707,7 +707,7 @@ ranks:
           currency: 50
           xp: 50
           commands:
-          - 'console: give {player} 383:90 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Pig"}}'
         repeatReward:
           text: 1 golden carrot
           items:
@@ -731,7 +731,7 @@ ranks:
           currency: 50
           xp: 50
           commands:
-          - 'console: give {player} 383:91 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Sheep"}}'
         repeatReward:
           text: 1 bucket
           items:
@@ -756,7 +756,7 @@ ranks:
           currency: 50
           xp: 50
           commands:
-          - 'console: give {player} 383:100 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Horse"}}'
         repeatReward:
           text: 1 redstone ore, 1 emerald
           items:
@@ -802,7 +802,7 @@ ranks:
           currency: 50
           xp: 50
           commands:
-          - 'console: give {player} 383:100 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Horse"}}'
         repeatReward:
           text: 1 redstone ore, 1 emerald
           items:
@@ -859,14 +859,14 @@ ranks:
         displayItem: '350:1'
         takeItems: true
         reward:
-          text: 1 rod, 2 name tags, 1 ocelot
+          text: 1 rod, 2 name tags, 2 ocelots
           items:
           - '346:1'
           - '421:2'
           currency: 60
           xp: 60
           commands:
-          - 'console: give {player} 383:98:1'
+          - 'op:minecraft:give {player} spawn_egg 2 0 {EntityTag:{id:"Ocelot"}}'
           - 'console: msg {player} &9https://en.wikipedia.org/wiki/Danish_cuisine &2Click the link for more info'
         repeatReward:
           text: 1 emerald
@@ -979,7 +979,7 @@ ranks:
           currency: 60
           xp: 60
           commands:
-          - 'console: give {player} 383:101 2'
+          - 'op:minecraft:give {player} spawn_egg 2 0 {EntityTag:{id:"Rabbit"}}'
           - 'console: msg {player} &9https://en.wikipedia.org/wiki/Pasta &2Click the link for more info'
         repeatReward:
           text: 30% chance on 1 disk, 1 emerald
@@ -1242,7 +1242,7 @@ ranks:
           currency: 80
           xp: 80
           commands:
-          - 'console: give {player} 383:96 1'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Mooshroom"}}'
         repeatReward:
           text: nothing yet
           items:
