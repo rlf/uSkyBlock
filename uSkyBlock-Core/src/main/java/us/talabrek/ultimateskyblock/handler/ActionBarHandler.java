@@ -22,10 +22,17 @@ public enum ActionBarHandler {;
     }
 
     public static void sendActionBar(Player player, String message) {
-        if (isActionBarAPI()) {
-            ActionBarAPIAdaptor.sendActionBar(player, message);
-        } else if (isTitleManager()) {
-            TitleManagerAdaptor.sendActionBar(player, message);
+        try {
+            if (isActionBarAPI()) {
+                ActionBarAPIAdaptor.sendActionBar(player, message);
+            } else if (isTitleManager()) {
+                TitleManagerAdaptor.sendActionBar(player, message);
+            }
+        } catch (Exception e) {
+            // Suppress incompatibilities - this is just a "best-effort" approach.
+            if (player != null) {
+                player.sendMessage(message);
+            }
         }
     }
 }
