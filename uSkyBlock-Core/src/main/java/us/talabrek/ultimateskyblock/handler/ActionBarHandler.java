@@ -27,12 +27,18 @@ public enum ActionBarHandler {;
                 ActionBarAPIAdaptor.sendActionBar(player, message);
             } else if (isTitleManager()) {
                 TitleManagerAdaptor.sendActionBar(player, message);
+            } else {
+                sendFallback(player, message);
             }
         } catch (Exception e) {
             // Suppress incompatibilities - this is just a "best-effort" approach.
-            if (player != null) {
-                player.sendMessage(message);
-            }
+            sendFallback(player, message);
+        }
+    }
+
+    private static void sendFallback(Player player, String message) {
+        if (player != null) {
+            player.sendMessage(message);
         }
     }
 }

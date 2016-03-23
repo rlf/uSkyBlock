@@ -65,11 +65,7 @@ class PlayerJob {
     private void showProgress(String message) {
         long t = System.currentTimeMillis();
         if (t > (lastProgressMs + progressEveryMs) || percentage > (lastProgressPct + progressEveryPct)) {
-            if (ActionBarHandler.isEnabled()) {
-                ActionBarHandler.sendActionBar(player, message);
-            } else {
-                player.sendMessage(message);
-            }
+            ActionBarHandler.sendActionBar(player, message);
             lastProgressMs = t;
             lastProgressPct = Math.floor(percentage/ progressEveryPct) * progressEveryPct;
         }
