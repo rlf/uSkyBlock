@@ -65,7 +65,7 @@ public class Settings {
                 island_protectionRange = island_distance;
             }
         } catch (Exception e) {
-            island_protectionRange = 100;
+            island_protectionRange = 128;
         }
         island_radius = island_protectionRange / 2;
         try {
