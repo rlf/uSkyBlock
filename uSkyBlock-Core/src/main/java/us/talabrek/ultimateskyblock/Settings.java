@@ -3,6 +3,8 @@ package us.talabrek.ultimateskyblock;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.HashSet;
@@ -139,14 +141,8 @@ public class Settings {
             I18nUtil.setLocale(locale);
         }
         nether_enabled = config.getBoolean("nether.enabled", false);
-        if (nether_enabled && (island_distance % 32 != 0 || island_protectionRange % 32 != 0)) {
-            log.warning("Nether DISABLED, since island distance and protectionRange is not divisible by 32!");
-            nether_enabled = false;
-            changed = true;
-        }
-        nether_enabled = config.getBoolean("nether.enabled", false);
-        if (nether_enabled && (island_distance % 32 != 0 || island_protectionRange % 32 != 0)) {
-            log.warning("Nether DISABLED, since island distance and protectionRange is not divisible by 32!");
+        if (nether_enabled && !WorldEditHandler.isOuterPossible()) {
+            log.warning("Nether DISABLED, since islands cannot be chunk-aligned!");
             nether_enabled = false;
             changed = true;
         }
