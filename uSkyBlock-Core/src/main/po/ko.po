@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.6.1\n"
+"Project-Id-Version: 2.6.7\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-01-31 23:54+0900\n"
 "Last-Translator: swan201\n"
@@ -66,7 +66,7 @@ msgstr "§4그 일을 하려면 당신의 섬에 있어야 합니다!"
 
 #, java-format
 msgid "§4The {0} challenge is not available yet!"
-msgstr ""
+msgstr "§4도전과제 {0}는 아직 사용이 불가능합니다!"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
@@ -1245,11 +1245,11 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 스폰으로 이동하여 주세요"
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
-msgstr ""
+msgstr "§c!마녀 소환이 취소되었습니다!§e 당신의 섬에서 너무 멀리 있습니다."
 
 #, java-format
 msgid "{0}''s Wither"
-msgstr ""
+msgstr "{0}''의 마녀"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§e방문자들은 아이템을 떨굴 수 없습니다!"
