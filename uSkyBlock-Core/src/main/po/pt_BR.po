@@ -65,6 +65,10 @@ msgid "§4You must be on your island to do that!"
 msgstr "§4Você precisa estar na sua ilha para fazer isso!"
 
 #, java-format
+msgid "§4The {0} challenge is not available yet!"
+msgstr ""
+
+#, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4O desafio {0} não pode ser repetido!"
 

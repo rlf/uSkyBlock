@@ -24,7 +24,6 @@ public class WorldEditRegen extends IncrementalRunnable {
     private static final Logger log = Logger.getLogger(WorldEditRegen.class.getName());
     // The size of the "slices" in regions
     private static final int INCREMENT = 2;
-    private static final BaseBlock AIR = new BaseBlock(0);
 
     private final World world;
     private final List<Region> regions;

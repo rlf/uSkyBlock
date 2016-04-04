@@ -122,9 +122,13 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a74You must be on your island to do that!"));
             return;
         }
+        if (!challenge.getRank().isAvailable(pi)) {
+            player.sendMessage(tr("\u00a74The {0} challenge is not available yet!", challenge.getDisplayName()));
+            return;
+        }
         challengeName = challenge.getName();
         ChallengeCompletion completion = pi.getChallenge(challengeName);
-        if (!challenge.getRank().isAvailable(pi) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
+        if (completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challenge.getDisplayName()));
             return;
         }

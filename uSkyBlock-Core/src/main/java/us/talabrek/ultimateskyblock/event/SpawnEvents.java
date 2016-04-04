@@ -49,7 +49,7 @@ public class SpawnEvents implements Listener {
             CreatureSpawnEvent.SpawnReason.BUILD_WITHER
     ));
     private static final Set<CreatureSpawnEvent.SpawnReason> ADMIN_INITIATED = new HashSet<>(Arrays.asList(
-            CreatureSpawnEvent.SpawnReason.SPAWNER, CreatureSpawnEvent.SpawnReason.SPAWNER_EGG, CreatureSpawnEvent.SpawnReason.DISPENSE_EGG
+            CreatureSpawnEvent.SpawnReason.SPAWNER_EGG
     ));
     private static final Map<Short, Set<Material>> FODDER = new HashMap<>();
 

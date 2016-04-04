@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-03-01 21:59+0100\n"
+"PO-Revision-Date: 2016-04-04 16:54+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.6\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -64,6 +65,10 @@ msgstr "§4Ingen udfordringer med navn {0} fundet!"
 
 msgid "§4You must be on your island to do that!"
 msgstr "§4Du skal være på din ø, for at gøre det!"
+
+#, java-format
+msgid "§4The {0} challenge is not available yet!"
+msgstr "§4{0} udfordringen er ikke tilgængelig endnu"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
@@ -1234,11 +1239,11 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eDu kan ikke handle på øer. Gør det i spawn."
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
-msgstr ""
+msgstr "§cWither Despawnede!§e Den vandrede for langt fra din ø."
 
 #, java-format
 msgid "{0}''s Wither"
-msgstr ""
+msgstr "{0}''s Wither"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesøgende kan ikke smide ting!"
