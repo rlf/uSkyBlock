@@ -1371,6 +1371,13 @@ msgstr "§b{0}§d has been removed from the hideout group."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
+msgid "§9Creating an island at your location"
+msgstr "§9Creatin' a hideout at yer location"
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§9Creatin'' a hideout §7{0}§9 of ye"
+
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
@@ -2288,13 +2295,6 @@ msgstr "Could not create yer Island. Please contact a server moderator."
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGettin' yer hideout ready, please be patient, it can take a while."
-
-msgid "§9Creating an island at your location"
-msgstr "§9Creatin' a hideout at yer location"
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§9Creatin'' a hideout §7{0}§9 of ye"
 
 msgid "North"
 msgstr "North"

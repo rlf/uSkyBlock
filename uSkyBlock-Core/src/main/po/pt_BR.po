@@ -1383,6 +1383,13 @@ msgstr "§b{0}§d foi removido do grupo."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
+msgid "§9Creating an island at your location"
+msgstr ""
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr ""
+
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
@@ -2292,13 +2299,6 @@ msgstr "Não foi possível criar sua ilha. Por favor contate a um administrador.
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eGerando nova ilha, por favor seja paciente, isso pode levar alguns minutos."
-
-msgid "§9Creating an island at your location"
-msgstr ""
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr ""
 
 msgid "North"
 msgstr ""

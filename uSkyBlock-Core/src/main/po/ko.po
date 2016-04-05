@@ -1389,6 +1389,13 @@ msgstr "§b{0}§d이 섬의 그룹에서 제거되었습니다."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
+msgid "§9Creating an island at your location"
+msgstr "§9당신의 위치에 섬을 생성 합니다"
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "당신의 §7{0}§9 §9섬 만들기"
+
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
@@ -2297,13 +2304,6 @@ msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 �
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
-
-msgid "§9Creating an island at your location"
-msgstr "§9당신의 위치에 섬을 생성 합니다"
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr "당신의 §7{0}§9 §9섬 만들기"
 
 msgid "North"
 msgstr "북쪽"

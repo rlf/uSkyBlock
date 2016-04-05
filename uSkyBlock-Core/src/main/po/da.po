@@ -16,7 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.6\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -1381,6 +1380,13 @@ msgstr "§b{0}§d er blevet fjernet fra øens medlemsliste."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
+msgid "§9Creating an island at your location"
+msgstr "§9Opretter en ø på din nuværende position"
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§9Opretter en ø §7{0}§9 for dig"
+
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
@@ -2289,13 +2295,6 @@ msgstr "Kunne ikke oprette din ø. Venligst kontakt en server administrator."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
-
-msgid "§9Creating an island at your location"
-msgstr "§9Opretter en ø på din nuværende position"
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§9Opretter en ø §7{0}§9 for dig"
 
 msgid "North"
 msgstr "Nord"

@@ -1336,6 +1336,13 @@ msgstr ""
 msgid "§9{1} §7- {0}"
 msgstr ""
 
+msgid "§9Creating an island at your location"
+msgstr ""
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr ""
+
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
@@ -2080,13 +2087,6 @@ msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
-msgstr ""
-
-msgid "§9Creating an island at your location"
-msgstr ""
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
 msgstr ""
 
 msgid "North"

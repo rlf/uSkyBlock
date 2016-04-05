@@ -1386,6 +1386,13 @@ msgstr "§b{0}§d удален из участников острова."
 msgid "§9{1} §7- {0}"
 msgstr ""
 
+msgid "§9Creating an island at your location"
+msgstr ""
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr ""
+
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
@@ -2278,13 +2285,6 @@ msgstr "Невозможно создать остров. Свяжитесь с 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eСоздание острова началось, подождите, это может занять некоторое время."
-
-msgid "§9Creating an island at your location"
-msgstr ""
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr ""
 
 msgid "North"
 msgstr ""

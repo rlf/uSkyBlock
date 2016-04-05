@@ -1401,6 +1401,13 @@ msgstr "§b{0}§d is verwijderd van het eiland."
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
 
+msgid "§9Creating an island at your location"
+msgstr "§9Creëren van het eiland op jouw locatie"
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§9Eiland creëren §7{0}§9 van jouw"
+
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
@@ -2332,13 +2339,6 @@ msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
-
-msgid "§9Creating an island at your location"
-msgstr "§9Creëren van het eiland op jouw locatie"
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§9Eiland creëren §7{0}§9 van jouw"
 
 msgid "North"
 msgstr "Noord"
