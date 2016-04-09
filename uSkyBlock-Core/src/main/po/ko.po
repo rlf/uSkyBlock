@@ -1277,6 +1277,9 @@ msgstr "§4당신은 오직 10초마다 옵시디언을 변환 할 수 있습니
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§e당신의 옵시디언을 용암으로 되돌리는 중입니다. 조심하세요!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4당신의 용암을 대체하는건 좋은 생각이 아닌거 같네요!"
 

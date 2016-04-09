@@ -1286,6 +1286,9 @@ msgstr ""
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eCambiando tu obsidiana de nuevo a lava. ¡Ten cuidado la próxima!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4¡Es una mala idea reemplazar tu lava!"
 

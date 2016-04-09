@@ -118,7 +118,7 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a74No challenge named {0} found", challengeName));
             return;
         }
-        if (!plugin.playerIsOnIsland(player)) {
+        if (!plugin.playerIsOnOwnIsland(player)) {
             player.sendMessage(tr("\u00a74You must be on your island to do that!"));
             return;
         }

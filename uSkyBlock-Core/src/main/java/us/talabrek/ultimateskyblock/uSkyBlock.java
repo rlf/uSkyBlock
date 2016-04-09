@@ -661,7 +661,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             player.sendMessage(tr("\u00a74You must be closer to your island to set your skyblock home!"));
             return true;
         }
-        if (playerIsOnIsland(player)) {
+        if (playerIsOnOwnIsland(player)) {
             PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
             if (playerInfo != null && isSafeLocation(player.getLocation())) {
                 playerInfo.setHomeLocation(player.getLocation());
@@ -677,9 +677,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean playerIsOnIsland(final Player player) {
-        return locationIsOnIsland(player, player.getLocation())
-                || locationIsOnNetherIsland(player, player.getLocation())
+        return playerIsOnOwnIsland(player)
                 || playerIsTrusted(player);
+    }
+
+    public boolean playerIsOnOwnIsland(Player player) {
+        return locationIsOnIsland(player, player.getLocation())
+                || locationIsOnNetherIsland(player, player.getLocation());
     }
 
     private boolean playerIsTrusted(Player player) {

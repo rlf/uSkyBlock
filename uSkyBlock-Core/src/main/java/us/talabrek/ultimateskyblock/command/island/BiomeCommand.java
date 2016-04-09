@@ -37,7 +37,7 @@ public class BiomeCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a74You do not have permission to change the biome of this island!"));
                 return true;
             }
-            if (!plugin.playerIsOnIsland(player)) {
+            if (!plugin.playerIsOnOwnIsland(player)) {
                 player.sendMessage(tr("\u00a7eYou must be on your island to change the biome!"));
                 return true;
             }

@@ -1282,6 +1282,9 @@ msgstr "§4* §7You can only convert obsidian once every 10 seconds"
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§9* §7Changing your obsidian back into lava. Be careful!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4* §7It's a bad idea to replace your lava!"
 

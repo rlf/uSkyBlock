@@ -1270,6 +1270,9 @@ msgstr "§4Do kan kun konvertere obsidian en gang hvert 10. sekund"
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eSkifter din obsidian tilbage til lava. Vær forsigtig!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr "§eDer skal være plads i dine tasker!"
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Det er en dårlig ide at fjerne din lava!"
 

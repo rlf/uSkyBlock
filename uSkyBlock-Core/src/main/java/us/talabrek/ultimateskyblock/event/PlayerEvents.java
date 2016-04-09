@@ -101,9 +101,8 @@ public class PlayerEvents implements Listener {
             if (inventory.firstEmpty() != -1) {
                 obsidianClick.put(player.getUniqueId(), now);
                 player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
-                ItemStack is = inventory.getItem(inventory.getHeldItemSlot()); //Get number of buckets
-                is.setAmount(is.getAmount() - 1);
-                inventory.setItem(inventory.firstEmpty(), new ItemStack(Material.LAVA_BUCKET, 1));
+                inventory.remove(new ItemStack(Material.BUCKET, 1));
+                inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
                 player.updateInventory();
                 block.setType(Material.AIR);
                 event.setCancelled(true); // Don't execute the click anymore (since that would re-place the lava).
