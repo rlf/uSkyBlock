@@ -2,7 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-03-14 00:04+0000\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-04-12 19:37+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -67,7 +68,7 @@ msgstr "§4Je moet op je eiland zijn om dat te doen!"
 
 #, java-format
 msgid "§4The {0} challenge is not available yet!"
-msgstr ""
+msgstr "§4DE {0} uitdaging is nog niet beschikbaar!"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
@@ -1257,11 +1258,11 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandelen in niet toegestaan op andere eilanden. Doe het op spawn."
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
-msgstr ""
+msgstr "§cWither verwijderd!§e Hij ging te ver we van je eiland."
 
 #, java-format
 msgid "{0}''s Wither"
-msgstr ""
+msgstr "{0}''s Wither"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eGasten kunnen geen items laten vallen!"
@@ -1290,7 +1291,7 @@ msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVerander je Obsidian terug naar lava. Wel opletten!"
 
 msgid "§eYour inventory must have another empty space!"
-msgstr ""
+msgstr "§eJe inventaris moet tenminsten 1 lege plek hebben!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Het is een slecht idee om je lava te vervangen!"

@@ -756,7 +756,7 @@ ranks:
           currency: 50
           xp: 50
           commands:
-          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Horse"}}'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"EntityHorse"}}'
         repeatReward:
           text: 1 redstone ore, 1 emerald
           items:
@@ -802,7 +802,7 @@ ranks:
           currency: 50
           xp: 50
           commands:
-          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"Horse"}}'
+          - 'op:minecraft:give {player} spawn_egg 1 0 {EntityTag:{id:"EntityHorse"}}'
         repeatReward:
           text: 1 redstone ore, 1 emerald
           items:
