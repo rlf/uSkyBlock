@@ -76,7 +76,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+        @EventHandler(priority = EventPriority.NORMAL)
     public void onClickOnObsidian(final PlayerInteractEvent event) {
         if (!plugin.isSkyWorld(event.getPlayer().getWorld())) {
             return;
@@ -95,19 +95,22 @@ public class PlayerEvents implements Listener {
                 && event.getAction() == Action.RIGHT_CLICK_BLOCK
                 && player.getItemInHand() != null
                 && player.getItemInHand().getType() == Material.BUCKET
-                && player.getItemInHand().getAmount() == 1
                 && block != null
                 && block.getType() == Material.OBSIDIAN
                 && !testForObsidian(block)) {
-            obsidianClick.put(player.getUniqueId(), now);
-            player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
-            inventory.setItem(inventory.getHeldItemSlot(), new ItemStack(Material.LAVA_BUCKET, 1));
-            player.updateInventory();
-            block.setType(Material.AIR);
-            event.setCancelled(true); // Don't execute the click anymore (since that would re-place the lava).
+            if (inventory.firstEmpty() != -1) {
+                obsidianClick.put(player.getUniqueId(), now);
+                player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
+                inventory.remove(new ItemStack(Material.BUCKET, 1));
+                inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
+                player.updateInventory();
+                block.setType(Material.AIR);
+                event.setCancelled(true); // Don't execute the click anymore (since that would re-place the lava).
+            } else {
+                player.sendMessage(tr("\u00a7eYour inventory must have another empty space!"));
+            }
         }
-    }
-
+    }   
     /**
      * Tests for more than one obsidian close by.
      */

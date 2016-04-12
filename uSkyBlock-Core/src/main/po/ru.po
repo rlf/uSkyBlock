@@ -1275,6 +1275,9 @@ msgstr ""
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eИзменение вашего обсидиана обратно в лаву. Осторожнее!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Плохая идея переместить вашу лаву!"
 
@@ -1384,6 +1387,13 @@ msgstr "§b{0}§d удален из участников острова."
 
 #, java-format
 msgid "§9{1} §7- {0}"
+msgstr ""
+
+msgid "§9Creating an island at your location"
+msgstr ""
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
 msgstr ""
 
 msgid ""
@@ -2278,13 +2288,6 @@ msgstr "Невозможно создать остров. Свяжитесь с 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eСоздание острова началось, подождите, это может занять некоторое время."
-
-msgid "§9Creating an island at your location"
-msgstr ""
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr ""
 
 msgid "North"
 msgstr ""

@@ -1289,6 +1289,9 @@ msgstr "§4Je kunt alleen obsidiaan omzetten eens per 10 seconden"
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVerander je Obsidian terug naar lava. Wel opletten!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Het is een slecht idee om je lava te vervangen!"
 
@@ -1400,6 +1403,13 @@ msgstr "§b{0}§d is verwijderd van het eiland."
 #, java-format
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
+
+msgid "§9Creating an island at your location"
+msgstr "§9Creëren van het eiland op jouw locatie"
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§9Eiland creëren §7{0}§9 van jouw"
 
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
@@ -2332,13 +2342,6 @@ msgstr "Kan je eiland niet creeren. Kontakt een server moderator"
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
-
-msgid "§9Creating an island at your location"
-msgstr "§9Creëren van het eiland op jouw locatie"
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§9Eiland creëren §7{0}§9 van jouw"
 
 msgid "North"
 msgstr "Noord"

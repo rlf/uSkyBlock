@@ -121,7 +121,7 @@ public class LimitLogic {
             case VILLAGER: return islandInfo.getMaxVillagers();
             case GOLEM: return islandInfo.getMaxGolems();
         }
-        return 0;
+        return Integer.MAX_VALUE;
     }
 
     public String getSummary(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo) {

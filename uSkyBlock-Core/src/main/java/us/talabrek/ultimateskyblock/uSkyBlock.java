@@ -17,7 +17,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -30,7 +29,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
@@ -64,6 +62,7 @@ import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.island.IslandLocatorLogic;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.island.LevelLogic;
@@ -90,8 +89,6 @@ import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -138,14 +135,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private USBImporterExecutor importer;
 
-    private FileConfiguration lastIslandConfig;
-    private File lastIslandConfigFile;
-
     public static volatile World skyBlockWorld;
     public static volatile World skyBlockNetherWorld;
 
     private static uSkyBlock instance;
-    private Location lastIsland;
     public File directoryPlayers;
     public File directoryIslands;
 
@@ -153,11 +146,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private volatile boolean protectAllActive;
 
     private BukkitTask autoRecalculateTask;
-
     static {
         uSkyBlock.skyBlockWorld = null;
     }
 
+    private IslandLocatorLogic islandLocatorLogic;
     private PlayerDB playerDB;
     private ConfirmHandler confirmHandler;
 
@@ -184,8 +177,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     };
 
     public uSkyBlock() {
-        lastIslandConfig = null;
-        lastIslandConfigFile = null;
         purgeActive = false;
     }
 
@@ -194,9 +185,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         HandlerList.unregisterAll(this);
         Bukkit.getScheduler().cancelTasks(this);
         try {
-            if (lastIsland != null) {
-                setLastIsland(lastIsland);
-            }
             uSkyBlock.skyBlockWorld = null; // Force a reload on config.
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
@@ -237,25 +225,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 }
                 if (VaultHandler.setupPermissions()) {
                     getLogger().log(Level.INFO, "uSkyBlock hooked into Vault Permissions");
-                }
-                try {
-                    FileConfiguration config = getLastIslandConfig();
-                    if (!config.contains("options.general.lastIslandX") && getConfig().contains("options.general.lastIslandX")) {
-                        FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandX");
-                        FileConfiguration.createPath(config.getConfigurationSection("options.general"), "lastIslandZ");
-                        config.set("options.general.lastIslandX", uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"));
-                        config.set("options.general.lastIslandZ", uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ"));
-                        saveLastIslandConfig();
-                    }
-                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), (double) config.getInt("options.general.lastIslandX"), (double) island_height, (double) config.getInt("options.general.lastIslandZ")));
-                } catch (Exception e) {
-                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(),
-                            (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandX"),
-                            (double) island_height,
-                            (double) uSkyBlock.this.getConfig().getInt("options.general.lastIslandZ")));
-                }
-                if (lastIsland == null) {
-                    setLastIsland(new Location(uSkyBlock.getSkyBlockWorld(), 0.0, (double) island_height, 0.0));
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
@@ -637,30 +606,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return false;
     }
 
-    public Location getLastIsland() {
-        if (lastIsland != null && isSkyWorld(lastIsland.getWorld())) {
-            return LocationUtil.alignToDistance(lastIsland, Settings.island_distance);
-        }
-        setLastIsland(new Location(getSkyBlockWorld(), 0.0, (double) island_height, 0.0));
-        return new Location(getSkyBlockWorld(), 0.0, (double) island_height, 0.0);
-    }
-
-    public void setLastIsland(final Location island) {
-        int x = island.getBlockX();
-        int z = island.getBlockZ();
-        // Make sure last island is always aligned with distance.
-        if ((x % Settings.island_distance) != 0) {
-            x -= (x % Settings.island_distance);
-        }
-        if ((z % Settings.island_distance) != 0) {
-            z -= (z % Settings.island_distance);
-        }
-        getLastIslandConfig().set("options.general.lastIslandX", x);
-        getLastIslandConfig().set("options.general.lastIslandZ", z);
-        saveLastIslandConfig();
-        lastIsland = island;
-    }
-
     public boolean homeTeleport(final Player player, boolean force) {
         getLogger().entering(CN, "homeTeleport", player);
         try {
@@ -716,7 +661,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             player.sendMessage(tr("\u00a74You must be closer to your island to set your skyblock home!"));
             return true;
         }
-        if (playerIsOnIsland(player)) {
+        if (playerIsOnOwnIsland(player)) {
             PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
             if (playerInfo != null && isSafeLocation(player.getLocation())) {
                 playerInfo.setHomeLocation(player.getLocation());
@@ -732,9 +677,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean playerIsOnIsland(final Player player) {
-        return locationIsOnIsland(player, player.getLocation())
-                || locationIsOnNetherIsland(player, player.getLocation())
+        return playerIsOnOwnIsland(player)
                 || playerIsTrusted(player);
+    }
+
+    public boolean playerIsOnOwnIsland(Player player) {
+        return locationIsOnIsland(player, player.getLocation())
+                || locationIsOnNetherIsland(player, player.getLocation());
     }
 
     private boolean playerIsTrusted(Player player) {
@@ -853,36 +802,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return playerLogic.getPlayerInfo(playerName);
     }
 
-    public void reloadLastIslandConfig() {
-        if (lastIslandConfigFile == null) {
-            lastIslandConfigFile = new File(getDataFolder(), "lastIslandConfig.yml");
-        }
-        lastIslandConfig = YamlConfiguration.loadConfiguration(lastIslandConfigFile);
-        final InputStream defConfigStream = getResource("lastIslandConfig.yml");
-        if (defConfigStream != null) {
-            final YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            lastIslandConfig.setDefaults(defConfig);
-        }
-    }
-
-    public FileConfiguration getLastIslandConfig() {
-        if (lastIslandConfig == null) {
-            reloadLastIslandConfig();
-        }
-        return lastIslandConfig;
-    }
-
-    public void saveLastIslandConfig() {
-        if (lastIslandConfig == null || lastIslandConfigFile == null) {
-            return;
-        }
-        try {
-            getLastIslandConfig().save(lastIslandConfigFile);
-        } catch (IOException ex) {
-            getLogger().log(Level.SEVERE, "Could not save config to " + lastIslandConfigFile, ex);
-        }
-    }
-
     public boolean setBiome(final Location loc, final String bName) {
         Biome biome = getBiome(bName);
         if (biome == null) return false;
@@ -936,7 +855,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             pi.setIslandGenerating(true);
         }
         try {
-            Location next = getNextIslandLocation(player);
+            Location next = getIslandLocatorLogic().getNextIslandLocation(player);
             if (isSkyWorld(player.getWorld())) {
                 spawnTeleport(player, true);
             }
@@ -951,6 +870,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private void generateIsland(final Player player, final PlayerInfo pi, final Location next, final String cSchem) {
         if (!perkLogic.getSchemes(player).contains(cSchem)) {
             player.sendMessage(tr("\u00a7eYou do not have access to that island-schematic!"));
+            orphanLogic.addOrphan(next);
             return;
         }
         final PlayerPerk playerPerk = new PlayerPerk(pi, perkLogic.getPerk(player));
@@ -959,91 +879,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         IslandInfo tempInfo = islandLogic.createIslandInfo(LocationUtil.getIslandName(next), pi.getPlayerName());
         WorldGuardHandler.protectIsland(this, player, tempInfo);
         islandLogic.clearIsland(next, createTask);
-    }
-
-    private synchronized Location getNextIslandLocation(Player player) {
-        Location last = getLastIsland();
-        if (isSkyWorld(player.getWorld()) && !islandInSpawn(player.getLocation())) {
-            Location location = LocationUtil.alignToDistance(player.getLocation(), Settings.island_distance);
-            if (isAvailableLocation(location)) {
-                player.sendMessage(tr("\u00a79Creating an island at your location"));
-                return location;
-            }
-            Vector v = player.getLocation().getDirection().normalize();
-            location = LocationUtil.alignToDistance(location.add(v.multiply(Settings.island_distance)), Settings.island_distance);
-            if (isAvailableLocation(location)) {
-                player.sendMessage(tr("\u00a79Creating an island \u00a77{0}\u00a79 of you", LocationUtil.getCardinalDirection(player.getLocation().getYaw())));
-                return location;
-            }
-        }
-        Location next = orphanLogic.getNextValidOrphan();
-        if (next == null) {
-            next = last;
-            // Ensure the found location is valid (or find one that is).
-            while (!isAvailableLocation(next)) {
-                next = nextIslandLocation(next);
-            }
-        }
-        setLastIsland(next);
-        return next;
-    }
-
-    public boolean isAvailableLocation(Location next) {
-        return !(islandInSpawn(next) || islandAtLocation(next));
-    }
-
-    /**
-     * <pre>
-     *                            z
-     *   x = -z                   ^                    x = z
-     *        \        -x < z     |     x < z         /
-     *           \                |                /
-     *              \             |             /
-     *                 \          |          /
-     *                    \       |       /          x > z
-     *        -x > z         \    |    /
-     *                          \ | /
-     *     -----------------------+-----------------------------> x
-     *                          / | \
-     *        -x > -z        /    |    \
-     *        (x < z)     /       |       \          x > -z
-     *                 /          |          \
-     *              /             |             \
-     *           /     -x < -z    |   x < -z       \
-     *       x = z                |                x = -z
-     *                            |
-     *                            v
-     * </pre>
-     * @param lastIsland
-     * @return
-     */
-    static Location nextIslandLocation(final Location lastIsland) {
-        int d = Settings.island_distance;
-        LocationUtil.alignToDistance(lastIsland, d);
-        int x = lastIsland.getBlockX();
-        int z = lastIsland.getBlockZ();
-        if (x < z) {
-            if (-1 * x < z) {
-                x += d;
-            } else {
-                z += d;
-            }
-        } else if (x > z) {
-            if (-1 * x >= z) {
-                x -= d;
-            } else {
-                z -= d;
-            }
-        } else { // x == z
-            if (x <= 0) {
-                z += d;
-            } else {
-                z -= d;
-            }
-        }
-        lastIsland.setX(x);
-        lastIsland.setZ(z);
-        return lastIsland;
     }
 
     Location findNearestSafeLocation(Location loc) {
@@ -1131,6 +966,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return perkLogic;
     }
 
+    public IslandLocatorLogic getIslandLocatorLogic() {
+        return islandLocatorLogic;
+    }
+
     @Override
     public void reloadConfig() {
         reloadConfigs();
@@ -1169,6 +1008,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         configMenu = new ConfigMenu(this);
         levelLogic = new LevelLogic(this, FileUtil.getYmlConfiguration("levelConfig.yml"));
         orphanLogic = new OrphanLogic(this);
+        islandLocatorLogic = new IslandLocatorLogic(this);
         islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
         limitLogic = new LimitLogic(this);
         notifier = new PlayerNotifier(getConfig());

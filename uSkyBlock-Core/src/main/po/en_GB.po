@@ -1282,6 +1282,9 @@ msgstr "§4* §7You can only convert obsidian once every 10 seconds"
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§9* §7Changing your obsidian back into lava. Be careful!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4* §7It's a bad idea to replace your lava!"
 
@@ -1395,6 +1398,13 @@ msgstr "{0}§7 has been removed from the island group."
 #, java-format
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
+
+msgid "§9Creating an island at your location"
+msgstr "§9* §7Creating an island at your location"
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr "§9* §7Creating an island §9{0}§7 of you"
 
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
@@ -2317,13 +2327,6 @@ msgstr "§4* §7Could not create your Island. Please contact a server moderator.
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§9* §7Getting your island ready, please be patient, it can take a while."
-
-msgid "§9Creating an island at your location"
-msgstr "§9* §7Creating an island at your location"
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr "§9* §7Creating an island §9{0}§7 of you"
 
 msgid "North"
 msgstr "North"

@@ -1224,6 +1224,9 @@ msgstr ""
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr ""
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr ""
 
@@ -1328,6 +1331,13 @@ msgstr ""
 
 #, java-format
 msgid "§9{1} §7- {0}"
+msgstr ""
+
+msgid "§9Creating an island at your location"
+msgstr ""
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
 msgstr ""
 
 msgid ""
@@ -2073,13 +2083,6 @@ msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
-msgstr ""
-
-msgid "§9Creating an island at your location"
-msgstr ""
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
 msgstr ""
 
 msgid "North"

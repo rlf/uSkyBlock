@@ -1286,6 +1286,9 @@ msgstr ""
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eCambiando tu obsidiana de nuevo a lava. ¡Ten cuidado la próxima!"
 
+msgid "§eYour inventory must have another empty space!"
+msgstr ""
+
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4¡Es una mala idea reemplazar tu lava!"
 
@@ -1396,6 +1399,13 @@ msgstr "§4{0}§4 ha sido quitado del grupo de la isla."
 #, java-format
 msgid "§9{1} §7- {0}"
 msgstr "§9{1} §7- {0}"
+
+msgid "§9Creating an island at your location"
+msgstr ""
+
+#, java-format
+msgid "§9Creating an island §7{0}§9 of you"
+msgstr ""
 
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
@@ -2313,13 +2323,6 @@ msgstr "No se pudo crear tu isla. Por favor contacta con alguien del staff."
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§eDejando tu isla lista, por favor sé paciente, esto puede tomar un rato."
-
-msgid "§9Creating an island at your location"
-msgstr ""
-
-#, java-format
-msgid "§9Creating an island §7{0}§9 of you"
-msgstr ""
 
 msgid "North"
 msgstr ""

@@ -91,7 +91,7 @@ public class OrphanLogic {
                 if (candidate != null) {
                     it.remove();
                     Location loc = new Location(world, candidate.getX(), Settings.island_height, candidate.getZ(), ORPHAN_YAW, ORPHAN_PITCH);
-                    if (plugin.isAvailableLocation(loc)) {
+                    if (plugin.getIslandLocatorLogic().isAvailableLocation(loc)) {
                         return loc;
                     }
                 }

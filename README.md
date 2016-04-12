@@ -8,7 +8,7 @@ We are on [Spigot](https://www.spigotmc.org/resources/uskyblock.2280/) and [Bukk
 
 This version depends on the following plugins:
 
-* Bukkit/Spigot 1.8-R0.1-SNAPSHOT
+* Bukkit/Spigot 1.9-R0.1-SNAPSHOT
 * Vault 1.5.x
 * WorldEdit 6.0.0-SNAPSHOT
 * WorldGuard 6.0.0-SNAPSHOT
@@ -24,7 +24,7 @@ Releases have a clean version number, has been tested, and should be safe for pr
 
 ### Bukkit/Spigot 1.7.9/10 Releases
 
-We provide pre-compiled versions (no support) here:
+We provide pre-compiled versions (no support) [here](http://rlf.github.io/uSkyBlock):
 
 * [2.4.9 for Bukkit 1.7.10](http://rlf.github.io/uSkyBlock/releases/bukkit-1.7.10/uSkyBlock-2.4.9.jar)
 
