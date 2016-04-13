@@ -7,7 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-03-14 00:03+0000\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-04-12 19:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -67,7 +68,7 @@ msgstr "§4* §7You must be on your island to do that!"
 
 #, java-format
 msgid "§4The {0} challenge is not available yet!"
-msgstr ""
+msgstr "§a* §7The {0} challenge is §4not §7available yet!"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
@@ -1250,11 +1251,11 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Trading isn't allowed on other islands. Do it in spawn."
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
-msgstr ""
+msgstr "§9* §7Wither §4despawned!§7 It wandered too far from your island."
 
 #, java-format
 msgid "{0}''s Wither"
-msgstr ""
+msgstr "{0}''s Wither"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§9* §7Visitors can't drop items!"
@@ -1283,7 +1284,7 @@ msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§9* §7Changing your obsidian back into lava. Be careful!"
 
 msgid "§eYour inventory must have another empty space!"
-msgstr ""
+msgstr "§4* §7Your inventory must have another empty space!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4* §7It's a bad idea to replace your lava!"

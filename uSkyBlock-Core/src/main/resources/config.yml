@@ -220,16 +220,19 @@ options:
 # List of selections for /is create and /is restart
 # the nodes under island-schemes must match the schematic-names from the schematics folder.
 island-schemes:
+  # name of the schematic
   default:
+    # permission needed to use island
+    permission: usb.island.create
+    # small discription of the island
+    description: The default uSkyBlock island
+    # item to display in the GUI
+    displayItem: SAPLING
     # optional, default true
     enabled: true
-
     # optional, must be listed in ascending order
     index: 2
-
-    permission: usb.island.create
-    description: The default uSkyBlock island
-    displayItem: SAPLING
+    # optional extra's that can be given per island
     extraItems: ''
     maxPartySize: 4
     animals: 48
