@@ -326,8 +326,9 @@ public class IslandLogic {
 	                names.add(displayName);
 	            }
         	}
+        } else {
+        	names = memberList;
         }
-        else names = memberList;
         return new IslandLevel(islandInfo.getName(), partyLeaderName, names, level);
     }
 
