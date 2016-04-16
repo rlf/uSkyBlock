@@ -55,6 +55,7 @@ public class IslandLogic {
     private final LoadingCache<String, IslandInfo> cache;
     private final boolean showMembers;
     private final boolean flatlandFix;
+    private final boolean useDisplayNames;
     private final BukkitTask saveTask;
     private final double topTenCutoff;
 
@@ -67,6 +68,7 @@ public class IslandLogic {
         this.orphanLogic = orphanLogic;
         this.showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
         this.flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
+        this.useDisplayNames = plugin.getConfig().getBoolean("options.advanced.useDisplayNames", false);
         topTenCutoff = plugin.getConfig().getDouble("options.advanced.topTenCutoff", plugin.getConfig().getDouble("options.advanced.purgeLevel", 10));
         cache = CacheBuilder
                 .from(plugin.getConfig().getString("options.advanced.islandCache",
@@ -312,15 +314,20 @@ public class IslandLogic {
 
     private IslandLevel createIslandLevel(IslandInfo islandInfo, double level) {
         String partyLeader = islandInfo.getLeader();
-        String partyLeaderName = PlayerUtil.getPlayerDisplayName(partyLeader);
+        String partyLeaderName = partyLeader;
         List<String> memberList = new ArrayList<>(islandInfo.getMembers());
         memberList.remove(partyLeader);
         List<String> names = new ArrayList<>();
-        for (String name : memberList) {
-            String displayName = PlayerUtil.getPlayerDisplayName(name);
-            if (displayName != null) {
-                names.add(displayName);
-            }
+        if (useDisplayNames) {
+        	partyLeaderName = PlayerUtil.getPlayerDisplayName(partyLeader);
+        	for (String name : memberList) {
+	            String displayName = PlayerUtil.getPlayerDisplayName(name);
+	            if (displayName != null) {
+	                names.add(displayName);
+	            }
+        	}
+        } else {
+        	names = memberList;
         }
         return new IslandLevel(islandInfo.getName(), partyLeaderName, names, level);
     }
