@@ -167,9 +167,9 @@ public class ChallengeLogic {
             case '-':
                 return amount - inc * timesCompleted; // Why?
             case '*':
-                return amount * Math.pow(inc, timesCompleted); // Oh, my god! Just do the time m8!
+                return amount * (int)Math.pow(inc, timesCompleted); // Oh, my god! Just do the time m8!
             case '/':
-                return amount / Math.pow(inc, timesCompleted); // Yay! Free stuff!!!
+                return amount / (int)Math.pow(inc, timesCompleted); // Yay! Free stuff!!!
         }
         return amount;
     }
