@@ -160,10 +160,12 @@ public enum FileUtil {;
                         } else {
                             config = mergeConfig(configJar, config);
                             config.save(configFile);
+                            config.load(configFile);
                         }
                     } else {
                         config = mergeConfig(configJar, config);
                         config.save(configFile);
+                        config.load(configFile);
                     }
                 }
             } catch (Exception e) {

@@ -173,10 +173,12 @@
                                     <pattern>org.mcstats</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
                                 </relocation>
+                                <!--
                                 <relocation>
                                     <pattern>dk.lockfuglsang.minecraft</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>
                                 </relocation>
+                                -->
                             </relocations>
                         </configuration>
                     </execution>
