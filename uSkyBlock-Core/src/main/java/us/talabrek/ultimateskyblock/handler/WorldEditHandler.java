@@ -278,7 +278,7 @@ public class WorldEditHandler {
     }
 
     public static boolean isOuterPossible() {
-        return Settings.island_distance > Settings.island_protectionRange &&
+        return Settings.island_distance >= Settings.island_protectionRange &&
                 (Settings.island_distance % 32 == 0 || Settings.island_distance - Settings.island_protectionRange > 32);
     }
 
