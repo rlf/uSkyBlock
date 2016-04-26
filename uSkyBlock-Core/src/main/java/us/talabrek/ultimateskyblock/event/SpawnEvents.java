@@ -53,7 +53,10 @@ public class SpawnEvents implements Listener {
     ));
     private static final Map<Short, Set<Material>> FODDER = new HashMap<>();
 
-    public static final short RABBIT_ID = 101;
+    /**
+     * Enable building on pre 1.8 code
+     */
+    private static final short RABBIT_ID = 101;
 
     static {
         FODDER.put(EntityType.PIG.getTypeId(), Collections.singleton(Material.CARROT_ITEM));

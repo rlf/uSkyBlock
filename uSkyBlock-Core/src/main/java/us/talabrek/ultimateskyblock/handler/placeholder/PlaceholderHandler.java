@@ -55,6 +55,9 @@ public class PlaceholderHandler {
     }
 
     public static String replacePlaceholders(Player player, String message) {
+        if (message == null) {
+            return null;
+        }
         String msg = message;
         for (PlaceholderAPI api : apis) {
             msg = api.replacePlaceholders(player, msg);

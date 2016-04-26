@@ -76,7 +76,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-        @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onClickOnObsidian(final PlayerInteractEvent event) {
         if (!plugin.isSkyWorld(event.getPlayer().getWorld())) {
             return;
@@ -110,7 +110,8 @@ public class PlayerEvents implements Listener {
                 player.sendMessage(tr("\u00a7eYour inventory must have another empty space!"));
             }
         }
-    }   
+    }
+
     /**
      * Tests for more than one obsidian close by.
      */
@@ -169,7 +170,7 @@ public class PlayerEvents implements Listener {
                 && ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
                 || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
                 && event.getEntity() instanceof Player
-                && !plugin.playerIsOnIsland((Player)event.getEntity())) {
+                && !plugin.playerIsOnIsland((Player) event.getEntity())) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);
         }
@@ -259,7 +260,7 @@ public class PlayerEvents implements Listener {
         if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
             // Add an oak-sapling
             event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.SAPLING, 1));
-            islandInfo.setLeafBreaks(islandInfo.getLeafBreaks()+1);
+            islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
     }
 }
