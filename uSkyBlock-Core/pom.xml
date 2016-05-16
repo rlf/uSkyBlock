@@ -379,6 +379,7 @@
                                     </extraArgs>
                                     <excludes>
                                         <exclude>xx_PIRATE.po</exclude>
+                                        <exclude>xx_lol_US.po.po</exclude>
                                     </excludes>
                                 </configuration>
                             </execution>
