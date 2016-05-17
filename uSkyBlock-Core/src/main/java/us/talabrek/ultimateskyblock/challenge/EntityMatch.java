@@ -16,6 +16,27 @@ import java.util.Map;
  * Data object holding values for matching an entity against a challenge.
  */
 public class EntityMatch {
+    /**
+     * @see @link http://minecraft.gamepedia.com/Data_values#Wool.2C_Stained_Clay.2C_Stained_Glass_and_Carpet
+     */
+    private static final byte[] DV_2_COLOR_MAP = {
+            0xf, // 0 -> white
+            0x6, // 1 -> orange (gold)
+            0xd, // 2 -> magenta (light purple)
+            0x9, // 3 -> light blue
+            0xe, // 4 -> yellow
+            0xa, // 5 -> lime
+            0xc, // 6 -> pink (red)
+            0x8, // 7 -> gray (dark gray)
+            0x7, // 8 -> light gray (gray)
+            0xb, // 9 -> cyan (aqua)
+            0x5, // 10 -> purple (dark purple)
+            0x1, // 11 -> blue (dark blue)
+            0x6, // 12 -> brown (no brown! we re-use gold)
+            0x2, // 13 -> green (dark green)
+            0x4, // 14 -> red (dark red)
+            0x0  // 15 -> black
+    };
     private static final String[] COLOR_KEYS = {"Color", "color"};
     private final EntityType type;
     private final Map<String,Object> meta;
@@ -115,13 +136,16 @@ public class EntityMatch {
             if (meta.containsKey(key)) {
                 try {
                     int colorcode = Integer.parseInt("" + meta.get(key));
-                    // for some reason, the color-scale is inverted.
-                    return "\u00a7" + Integer.toHexString(0xf ^ colorcode);
+                    return  dataValueToFormattingCode(colorcode);
                 } catch (NumberFormatException e) {
                     // ignore
                 }
             }
         }
         return "";
+    }
+
+    private String dataValueToFormattingCode(int colorcode) {
+        return "\u00a7" + Integer.toHexString(DV_2_COLOR_MAP[colorcode & 0xf]);
     }
 }
