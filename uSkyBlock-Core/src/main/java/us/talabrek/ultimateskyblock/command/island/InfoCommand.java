@@ -76,7 +76,7 @@ public class InfoCommand extends RequireIslandCommand {
                                     score.getScore(), score.getCount(),
                                     VaultHandler.getItemName(score.getBlock())));
                         }
-                        player.sendMessage(String.format(tr("\u00a7aIsland level is %5.2f", getState().getScore())));
+                        player.sendMessage (tr(String.format("\u00a7aIsland level is %5.2f", getState().getScore())));
                     }
                 }
             }
