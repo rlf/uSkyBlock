@@ -115,8 +115,27 @@ public class EntityMatch {
             if (meta.containsKey(key)) {
                 try {
                     int colorcode = Integer.parseInt("" + meta.get(key));
-                    // for some reason, the color-scale is inverted.
-                    return "\u00a7" + Integer.toHexString(0xf ^ colorcode);
+                    int textcolor = 0;
+		    switch (colorcode)
+			{
+			case 0: textcolor =  15; break;    //white
+			case 1: textcolor =  6;  break;    // orange -> gold
+                        case 2: textcolor =  13; break;    //magenta->light purple
+                        case 3: textcolor =  11; break;    //light blue -> aqua
+                        case 4: textcolor =  14; break;    //yellow
+                        case 5: textcolor =  10; break;    //lime -> green
+                        case 6: textcolor =  12; break;    //pink -> lt red
+                        case 7: textcolor =  8;  break;      //grey-> dark grey
+                        case 8: textcolor =  7; break;    //lt grey -> grey
+                        case 9: textcolor =  3; break;    //cyan -> dark aqua
+                        case 10: textcolor = 5; break;    //purple
+                        case 11: textcolor = 9; break;    //blue 
+                        case 12: textcolor = 9; break;    //brown -> dark blue
+                        case 13: textcolor = 2; break;    //green ->dark green
+                        case 14: textcolor = 4; break;    //red -> dark red
+                        case 15: textcolor = 0; break;    //black
+			}
+                    return "\u00a7" + Integer.toHexString(textcolor);
                 } catch (NumberFormatException e) {
                     // ignore
                 }
