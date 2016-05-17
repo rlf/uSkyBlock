@@ -1321,7 +1321,6 @@ ranks:
 #      rankLeeway: 8
 #      # [integer] The amount of challenges that has to be completed before this group will show in the Challenges GUI.
 #      # This can be random between any challenges group aslong the amount is made.
-#      # temporally disabled
 #      #completedChallenges: 14 (This is temporally disabled)
 #      # [text] Challenges that has to be completed before this group will show in the Challenges GUI
 #      challenges:
