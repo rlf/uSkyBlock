@@ -146,7 +146,7 @@ public class Settings {
             nether_enabled = false;
             changed = true;
         }
-        nether_lava_level = config.getInt("nether.lava_level", 32);
+        nether_lava_level = config.getInt("nether.lava_level", config.getInt("nether.lava-level", 32));
         nether_height = config.getInt("nether.height", island_height/2);
         return changed;
     }

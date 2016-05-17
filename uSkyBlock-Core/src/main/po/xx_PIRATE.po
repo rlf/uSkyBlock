@@ -36,7 +36,7 @@ msgstr "§7an' more..."
 
 #, java-format
 msgid "§f{0}x §7{1}"
-msgstr ""
+msgstr "§f{0}x §7{1}"
 
 #, java-format
 msgid "§7{0}"
@@ -66,7 +66,7 @@ msgstr "§4Ye must be in yer hideout to do that!"
 
 #, java-format
 msgid "§4The {0} challenge is not available yet!"
-msgstr ""
+msgstr "§4The {0} challenge be not available yet!"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
@@ -1229,11 +1229,11 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eTradin' isn't allowed on other islands. Do it in spawn."
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
-msgstr ""
+msgstr "§cWither Despawned!§e It wandered too far from yer hideout."
 
 #, java-format
 msgid "{0}''s Wither"
-msgstr ""
+msgstr "{0}''s Wither"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eVisitors can't drop items!"
@@ -1262,7 +1262,7 @@ msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eChangin' yer obsidian back into lava. Be careful!"
 
 msgid "§eYour inventory must have another empty space!"
-msgstr ""
+msgstr "§eYer inventory must have another empty space!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4It's a bad idea to replace yer lava!"
@@ -1309,7 +1309,7 @@ msgstr ""
 "accept!"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
@@ -1345,8 +1345,31 @@ msgstr "§4** Ye be leavin' an abandoned hideout."
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Nay importer named §e{0}§4 found"
 
-msgid "§eConverted "
-msgstr "§eConverted "
+#, java-format
+msgid "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
+msgstr "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
+
+#, java-format
+msgid "§eConverted {0}/{1} files"
+msgstr "§eConverted {0}/{1} files"
+
+#, java-format
+msgid "Found {0} names to lookup from Mojang"
+msgstr "Found {0} names to lookup from Mojang"
+
+#, java-format
+msgid "Done updating the PlayerDB in {0}"
+msgstr "Done updatin'' the PlayerDB in {0}"
+
+#, java-format
+msgid ""
+"Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
+msgstr ""
+"Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
+
+#, java-format
+msgid "Error: {0}"
+msgstr "Blimey: {0}"
 
 msgid "The island has been created."
 msgstr "The hideout has been created."
@@ -2198,15 +2221,17 @@ msgstr ""
 "§4WARNING! §cwill remove yer items an' hideout!"
 
 msgid "§c§lLeave Island"
-msgstr ""
+msgstr "§c§lLeave Island"
 
 msgid ""
 "Leaves your island.\n"
 "§4WARNING! §cwill remove all your items!"
 msgstr ""
+"Leaves yer hideout.\n"
+"§4WARNING! §cwill remove all yer items!"
 
 msgid "§cClick to leave"
-msgstr ""
+msgstr "§cClick to leave"
 
 msgid "Island Restart Menu"
 msgstr "Island Restart Menu"
@@ -2216,7 +2241,7 @@ msgstr "§eYe do not have access to that hideout-schematic!"
 
 #, java-format
 msgid "§cClick within §9{0}§c to leave!"
-msgstr ""
+msgstr "§cClick within §9{0}§c to leave!"
 
 msgid "§a§lReturn to the main menu"
 msgstr "§a§lReturn to the main menu"
@@ -2233,6 +2258,10 @@ msgstr "Caps On"
 
 msgid "§9Text Editor"
 msgstr "§9Text Editor"
+
+#, java-format
+msgid "Too many requests for Mojangs API, sleeping {0}"
+msgstr "Too many requests for Mojangs API, sleepin'' {0}"
 
 msgid "§eSending you to spawn."
 msgstr "§eSendin' ye to spawn."
@@ -2339,19 +2368,12 @@ msgstr "s"
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
-#~ msgid "§f{0}x§7{1}"
-#~ msgstr "§f{0}x§7{1}"
+#, java-format
+msgid "Renamed player {0} to {1} in {2} seconds."
+msgstr "Renamed pirate {0} to {1} in {2} seconds."
 
-#~ msgid "Flower Forest"
-#~ msgstr "Flower Forest"
-
-#~ msgid ""
-#~ "The flower forest biome.\n"
-#~ "Passive mobs will spawn \n"
-#~ "normally and hostile\n"
-#~ "mobs will spawn."
-#~ msgstr ""
-#~ "The flower forest biome.\n"
-#~ "Passive mobs will spawn \n"
-#~ "normally an' hostile\n"
-#~ "mobs will spawn."
+#, java-format
+msgid ""
+"§9It took §a{0}§9 seconds to rename your uSkyBlock presence from §a{1}§9."
+msgstr ""
+"§9It took §a{0}§9 seconds to rename yer uSkyBlock presence from §a{1}§9."
