@@ -134,12 +134,24 @@ public enum I18nUtil {;
         }
 
         public String tr(String key, Object... args) {
+            if (key == null || key.trim().isEmpty()) {
+                return "";
+            }
             for (Properties prop : props) {
-                if (prop != null && prop.containsKey(key) && !prop.getProperty(key).trim().isEmpty()) {
-                    return new MessageFormat(prop.getProperty(key), getLocale()).format(args);
+                String propKey = prop.getProperty(key);
+                if (prop != null && prop.containsKey(key) && !propKey.trim().isEmpty()) {
+                    return format(propKey, args);
                 }
             }
-            return new MessageFormat(key, getLocale()).format(args);
+            return format(key, args);
+        }
+
+        private String format(String propKey, Object[] args) {
+            try {
+                return new MessageFormat(propKey, getLocale()).format(args);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Problem with: '" + propKey + "'", e);
+            }
         }
 
         public Locale getLocale() {

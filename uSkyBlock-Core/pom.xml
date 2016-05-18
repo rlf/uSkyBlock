@@ -297,7 +297,7 @@
                 <dependency> <!-- Bukkit implementation -->
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
-                    <version>1.9-R0.1-SNAPSHOT</version>
+                    <version>1.9.2-R0.1-SNAPSHOT</version>
                     <optional>true</optional>
                     <scope>compile</scope>
                 </dependency>
@@ -379,7 +379,7 @@
                                     </extraArgs>
                                     <excludes>
                                         <exclude>xx_PIRATE.po</exclude>
-                                        <exclude>xx_lol_US.po.po</exclude>
+                                        <exclude>xx_lol_US.po</exclude>
                                     </excludes>
                                 </configuration>
                             </execution>

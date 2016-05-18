@@ -59,7 +59,7 @@
     <repositories>
         <repository>
             <id>AWE-mvn-repo</id>
-            <url>https://raw.github.com/SBPrime/AsyncWorldEdit-Premium/maven-artifact/</url>
+            <url>https://raw.github.com/SBPrime/AsyncWorldEdit-API/maven-artifact/</url>
         </repository>
         <repository>
             <id>gettext-commons-mvn-repo</id>
