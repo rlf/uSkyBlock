@@ -297,7 +297,7 @@ nether:
 
   height: 75
 
-  lava-level: 32
+  lava_level: 7
 
   activate-at:
     level: 100
