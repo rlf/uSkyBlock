@@ -58,6 +58,8 @@ For further details regarding the API, visit the Wiki page: https://github.com/r
 
 Fork-away, and create pull-requests - we review and accept almost any changes.
 
+But *please* conform with the (https://github.com/rlf/uSkyBlock/wiki/Coding-Guidelines)
+
 ## License
 
 TL;DR - This is licensed under GPLv3
