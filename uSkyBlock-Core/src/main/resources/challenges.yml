@@ -1319,9 +1319,6 @@ ranks:
 #      # with a rankLeeway of 1, a player would only need to complete 3 to advance to the next rank.
 #      # A rankLeeway of 0 would require them all.
 #      rankLeeway: 8
-#      # [integer] The amount of challenges that has to be completed before this group will show in the Challenges GUI.
-#      # This can be random between any challenges group aslong the amount is made.
-#      completedChallenges: 14
 #      # [text] Challenges that has to be completed before this group will show in the Challenges GUI
 #      challenges:
 #      - a challenge name

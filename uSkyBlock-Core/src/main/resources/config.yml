@@ -228,7 +228,7 @@ island-schemes:
     description: The default uSkyBlock island
     # item to display in the GUI
     displayItem: SAPLING
-    # optional, default true
+    # optional, default true (true enabled in GUI, false disabled in GUI)
     enabled: true
     # optional, must be listed in ascending order
     index: 2
@@ -297,7 +297,7 @@ nether:
 
   height: 75
 
-  lava-level: 32
+  lava_level: 7
 
   activate-at:
     level: 100
