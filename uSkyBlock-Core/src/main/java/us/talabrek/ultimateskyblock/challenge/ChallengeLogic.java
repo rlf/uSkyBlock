@@ -41,8 +41,8 @@ import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
  * The home of challenge business logic.
  */
 public class ChallengeLogic {
-    public static final int MS_MIN = 60 * 1000;
-    public static final int MS_HOUR = 60 * MS_MIN;
+    public static final long MS_MIN = 60 * 1000;
+    public static final long MS_HOUR = 60 * MS_MIN;
     public static final long MS_DAY = 24 * MS_HOUR;
     public static final int COLS_PER_ROW = 9;
     public static final int ROWS_OF_RANKS = 5;
