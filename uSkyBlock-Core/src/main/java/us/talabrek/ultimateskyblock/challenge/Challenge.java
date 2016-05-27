@@ -187,7 +187,7 @@ public class Challenge {
                     final int days = (int) (cooldown / ChallengeLogic.MS_DAY);
                     lores.add(tr("\u00a74Requirements will reset in {0} days.", days));
                 } else if (cooldown >= ChallengeLogic.MS_HOUR) {
-                    final int hours = (int) cooldown / ChallengeLogic.MS_HOUR;
+                    final int hours = (int) (cooldown / ChallengeLogic.MS_HOUR);
                     lores.add(tr("\u00a74Requirements will reset in {0} hours.", hours));
                 } else {
                     final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
