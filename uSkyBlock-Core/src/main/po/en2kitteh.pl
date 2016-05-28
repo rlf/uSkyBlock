@@ -79,7 +79,7 @@ while (my $line = <$fp>) {
     chomp $line;
     if (! ($line =~ m/#: .*$/)) {
         # Skip line comments
-        $line =~ s/^\"Language: \\n/\"Language: xx-lol_US\\n/g;
+        $line =~ s/^\"Language: \\n/\"Language: xx_lol_US\\n/g;
         $line =~ s/^\"Last-Translator: FULL NAME <EMAIL\@ADDRESS>\\n/\"Last-Translator: Woolwind\\n/g;
         print $out "$line\n";
     }
