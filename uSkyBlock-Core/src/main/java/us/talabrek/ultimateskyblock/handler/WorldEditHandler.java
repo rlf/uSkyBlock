@@ -89,8 +89,8 @@ public class WorldEditHandler {
         int maxZ = region.getMaximumPoint().getBlockZ();
         int cx = minX & 0xF;
         int cz = minZ & 0xF;
-        minX = minX - cx + 16;
-        minZ = minZ - cz + 16;
+        minX = cx != 0 ? minX - cx + 16 : minX;
+        minZ = cz != 0 ? minZ - cz + 16 : minZ;
         for (int x = minX; x <= maxX; x+=16) {
             for (int z = minZ; z <= maxZ; z+=16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));
@@ -107,10 +107,14 @@ public class WorldEditHandler {
         int maxZ = region.getMaximumPoint().getBlockZ();
         int cx = minX & 0xF;
         int cz = minZ & 0xF;
-        minX = minX - cx - 16;
-        minZ = minZ - cz - 16;
-        for (int x = minX; x <= maxX+16; x+=16) {
-            for (int z = minZ; z <= maxZ+16; z+=16) {
+        minX = minX - cx;
+        minZ = minZ - cz;
+        cx = maxX & 0xF;
+        cz = maxZ & 0xF;
+        maxX = cx != 15 ? maxX - cx + 16 : maxX;
+        maxZ = cz != 15 ? maxZ - cz + 16 : maxZ;
+        for (int x = minX; x < maxX; x+=16) {
+            for (int z = minZ; z < maxZ; z+=16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));
             }
         }
@@ -226,7 +230,11 @@ public class WorldEditHandler {
         Set<Vector2D> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
-            innerChunks = getOuterChunks(cube);
+            if (Settings.island_protectionRange == Settings.island_distance) {
+                innerChunks = getInnerChunks(cube);
+            } else {
+                innerChunks = getOuterChunks(cube);
+            }
         } else {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
@@ -253,7 +261,11 @@ public class WorldEditHandler {
         Set<Vector2D> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
-            innerChunks = getOuterChunks(cube);
+            if (Settings.island_protectionRange == Settings.island_distance) {
+                innerChunks = getInnerChunks(cube);
+            } else {
+                innerChunks = getOuterChunks(cube);
+            }
         } else {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
@@ -279,7 +291,7 @@ public class WorldEditHandler {
 
     public static boolean isOuterPossible() {
         return Settings.island_distance >= Settings.island_protectionRange &&
-                (Settings.island_distance % 32 == 0 || Settings.island_distance - Settings.island_protectionRange > 32);
+                ((Settings.island_distance % 32) == 0 || (Settings.island_distance - Settings.island_protectionRange) > 32);
     }
 
     public static void loadRegion(Location location) {
