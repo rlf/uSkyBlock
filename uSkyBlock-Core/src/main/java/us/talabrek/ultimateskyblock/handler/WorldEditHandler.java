@@ -91,6 +91,10 @@ public class WorldEditHandler {
         int cz = minZ & 0xF;
         minX = cx != 0 ? minX - cx + 16 : minX;
         minZ = cz != 0 ? minZ - cz + 16 : minZ;
+        cx = maxX & 0xF;
+        cz = maxZ & 0xF;
+        maxX = cx != 15 ? maxX - (16-cx) : maxX;
+        maxZ = cz != 15 ? maxZ - (16-cz) : maxZ;
         for (int x = minX; x <= maxX; x+=16) {
             for (int z = minZ; z <= maxZ; z+=16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));

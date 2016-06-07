@@ -198,17 +198,29 @@ public class WorldEditHandlerTest {
 
     @Test
     public void testGetBorderRegionsUnaligned4Quadrants() throws Exception {
-        Region region = new CuboidRegion(new Vector(-64,0,-64), new Vector(63, 15, 63));
+        Region region = new CuboidRegion(new Vector(-31,0,-31), new Vector(32, 15, 32));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
-        Set<Region> expectedBorder = new HashSet<>(Arrays.<Region>asList());
+        Set<Region> expectedBorder = new HashSet<>(Arrays.<Region>asList(
+                new CuboidRegion(new Vector(-16,0,32), new Vector(31,15,32)),
+                new CuboidRegion(new Vector(-16,0,-31), new Vector(31,15,-17)),
+                new CuboidRegion(new Vector(-31,0,-31), new Vector(-17,15,32)),
+                new CuboidRegion(new Vector(32,0,-31), new Vector(32,15,32))
+                ));
         Set<Vector2D> expectedInner = new HashSet<>();
-        for (int x = -4; x <= 3; x++) {
-            for (int z = -4; z <= 3; z++) {
+        for (int x = -1; x <= 1; x++) {
+            for (int z = -1; z <= 1; z++) {
                 expectedInner.add(new Vector2D(x, z));
             }
         }
+        Set<Vector2D> expectedOuter = new HashSet<>();
+        for (int x = -2; x <= 2; x++) {
+            for (int z = -2; z <= 2; z++) {
+                expectedOuter.add(new Vector2D(x, z));
+            }
+        }
+
         verifySame(borderRegions, expectedBorder);
-        Set<Vector2D> innerChunks = WorldEditHandler.getInnerChunks(region);
-        assertThat(innerChunks, is(expectedInner));
+        assertThat(WorldEditHandler.getInnerChunks(region), is(expectedInner));
+        assertThat(WorldEditHandler.getOuterChunks(region), is(expectedOuter));
     }
 }
