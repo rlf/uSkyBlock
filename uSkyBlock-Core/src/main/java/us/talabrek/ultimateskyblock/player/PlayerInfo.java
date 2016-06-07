@@ -35,7 +35,6 @@ public class PlayerInfo implements Serializable {
     private String playerName;
     private String displayName;
     private UUID uuid;
-    private boolean hasIsland;
 
     private Location islandLocation;
 
@@ -57,13 +56,11 @@ public class PlayerInfo implements Serializable {
     }
     
     public void startNewIsland(final Location l) {
-        this.hasIsland = true;
         this.setIslandLocation(l);
         this.homeLocation = null;
     }
 
     public void removeFromIsland() {
-        this.hasIsland = false;
         this.setIslandLocation(null);
         this.homeLocation = null;
         islandGenerating = false;
@@ -90,7 +87,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public Location getIslandLocation() {
-        return islandLocation != null && hasIsland && islandLocation.getBlockY() != 0 ? islandLocation.clone() : null;
+        return islandLocation != null && islandLocation.getBlockY() != 0 ? islandLocation.clone() : null;
     }
 
     public Location getIslandNetherLocation() {
@@ -124,7 +121,6 @@ public class PlayerInfo implements Serializable {
 
     public void setJoinParty(final Location l) {
         this.islandLocation = l != null ? l.clone() : null;
-        this.hasIsland = true;
         // TODO: 09/09/2015 - R4zorax: Use the leaders home instead
         this.homeLocation = l != null ? l.clone() : null;
     }
@@ -176,7 +172,6 @@ public class PlayerInfo implements Serializable {
             log.entering(CN, "loadPlayer:" + this.playerName);
             FileConfiguration playerConfig = getConfig();
             if (!playerConfig.contains("player.hasIsland")) {
-                this.hasIsland = false;
                 this.islandLocation = null;
                 this.homeLocation = null;
                 createPlayerConfig();
@@ -185,7 +180,6 @@ public class PlayerInfo implements Serializable {
             try {
                 this.displayName = playerConfig.getString("player.displayName", playerName);
                 this.uuid = UUIDUtil.fromString(playerConfig.getString("player.uuid", null));
-                this.hasIsland = playerConfig.getBoolean("player.hasIsland");
                 this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
                         playerConfig.getInt("player.islandX"), playerConfig.getInt("player.islandY"), playerConfig.getInt("player.islandZ"));
                 this.homeLocation = new Location(uSkyBlock.getSkyBlockWorld(),
@@ -245,7 +239,7 @@ public class PlayerInfo implements Serializable {
         }
         FileConfiguration playerConfig = playerData;
         playerConfig.set("version", YML_VERSION);
-        playerConfig.set("player.hasIsland", getHasIsland());
+        playerConfig.set("player.hasIsland", null); // Remove it (deprecated)
         playerConfig.set("player.displayName", displayName);
         playerConfig.set("player.uuid", UUIDUtil.asString(uuid));
         Location location = this.getIslandLocation();
@@ -396,7 +390,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public IslandInfo getIslandInfo() {
-        if (hasIsland && locationForParty() != null) {
+        if (getHasIsland() && locationForParty() != null) {
             return uSkyBlock.getInstance().getIslandInfo(this);
         }
         return null;

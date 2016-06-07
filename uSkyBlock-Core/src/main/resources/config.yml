@@ -14,6 +14,9 @@ options:
     # [integer] The time in seconds before a player can use the /island biome command again.
     biomeChange: 180
 
+    # [string] The default biome assigned to new islands
+    defaultBiome: OCEAN
+
     # [integer] The number of milliseconds between the same notification is sent to the player.
     # This is used when events are triggered heavily - i.e. item-pickup-prevention, damage-prevention etc.
     maxSpam: 2000
@@ -356,7 +359,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 49
+version: 50
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
