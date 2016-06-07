@@ -34,6 +34,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.CHALLENGE_PAGESIZE;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.COLS_PER_ROW;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 // TODO: Move all the texts to resource-files (translatable).
 
@@ -343,7 +344,7 @@ public class SkyBlockMenu {
                 item.setItemMeta(meta);
                 menu.setItem(index, item);
             } catch (Exception e) {
-                uSkyBlock.log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
+                log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
             }
         }
     }
@@ -381,13 +382,13 @@ public class SkyBlockMenu {
                                 plugin.execCommand(player, cmd, false);
                             }
                         } else {
-                            uSkyBlock.log(Level.INFO, "\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
+                            log(Level.INFO, "\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
                         }
                     }
                     return true;
                 }
             } catch (Exception e) {
-                uSkyBlock.log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
+                log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
             }
         }
         return false;

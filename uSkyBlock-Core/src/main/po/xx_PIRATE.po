@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -878,6 +878,10 @@ msgstr "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
 msgid "Score Count Block"
 msgstr "Score Count Block"
 
+#, java-format
+msgid "§aIsland level is {0,number,###.##}"
+msgstr "§aIsland level be {0,number,###.##}"
+
 msgid "invite a player to your island"
 msgstr "invite a pirate to yer hideout"
 
@@ -981,10 +985,6 @@ msgstr "check yer or anothers hideout level"
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§eInformation about {0}''s Island:"
-
-#, java-format
-msgid "§aIsland level is {0,number,###.##}"
-msgstr "§aIsland level be {0,number,###.##}"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1345,31 +1345,8 @@ msgstr "§4** Ye be leavin' an abandoned hideout."
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Nay importer named §e{0}§4 found"
 
-#, java-format
-msgid "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
-msgstr "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
-
-#, java-format
-msgid "§eConverted {0}/{1} files"
-msgstr "§eConverted {0}/{1} files"
-
-#, java-format
-msgid "Found {0} names to lookup from Mojang"
-msgstr "Found {0} names to lookup from Mojang"
-
-#, java-format
-msgid "Done updating the PlayerDB in {0}"
-msgstr "Done updatin'' the PlayerDB in {0}"
-
-#, java-format
-msgid ""
-"Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
+msgid "§eConverted "
 msgstr ""
-"Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
-
-#, java-format
-msgid "Error: {0}"
-msgstr "Blimey: {0}"
 
 msgid "The island has been created."
 msgstr "The hideout has been created."
@@ -2259,10 +2236,6 @@ msgstr "Caps On"
 msgid "§9Text Editor"
 msgstr "§9Text Editor"
 
-#, java-format
-msgid "Too many requests for Mojangs API, sleeping {0}"
-msgstr "Too many requests for Mojangs API, sleepin'' {0}"
-
 msgid "§eSending you to spawn."
 msgstr "§eSendin' ye to spawn."
 
@@ -2368,12 +2341,33 @@ msgstr "s"
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
-#, java-format
-msgid "Renamed player {0} to {1} in {2} seconds."
-msgstr "Renamed pirate {0} to {1} in {2} seconds."
+#~ msgid "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
+#~ msgstr "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
 
-#, java-format
-msgid ""
-"§9It took §a{0}§9 seconds to rename your uSkyBlock presence from §a{1}§9."
-msgstr ""
-"§9It took §a{0}§9 seconds to rename yer uSkyBlock presence from §a{1}§9."
+#~ msgid "§eConverted {0}/{1} files"
+#~ msgstr "§eConverted {0}/{1} files"
+
+#~ msgid "Found {0} names to lookup from Mojang"
+#~ msgstr "Found {0} names to lookup from Mojang"
+
+#~ msgid "Done updating the PlayerDB in {0}"
+#~ msgstr "Done updatin'' the PlayerDB in {0}"
+
+#~ msgid ""
+#~ "Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
+#~ msgstr ""
+#~ "Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
+
+#~ msgid "Error: {0}"
+#~ msgstr "Blimey: {0}"
+
+#~ msgid "Too many requests for Mojangs API, sleeping {0}"
+#~ msgstr "Too many requests for Mojangs API, sleepin'' {0}"
+
+#~ msgid "Renamed player {0} to {1} in {2} seconds."
+#~ msgstr "Renamed pirate {0} to {1} in {2} seconds."
+
+#~ msgid ""
+#~ "§9It took §a{0}§9 seconds to rename your uSkyBlock presence from §a{1}§9."
+#~ msgstr ""
+#~ "§9It took §a{0}§9 seconds to rename yer uSkyBlock presence from §a{1}§9."

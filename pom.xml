@@ -5,7 +5,7 @@
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
     <version>2.6.0-SNAPSHOT</version>
-    <name>Ultimate Skyblock</name>
+    <name>Ultimate SkyBlock</name>
 
     <modules>
         <module>bukkit-utils</module>
@@ -17,6 +17,8 @@
         <module>uSkyBlock-AWE321</module>
         <module>uSkyBlock-AWE330</module>
         <module>uSkyBlock-Plugin</module>
+        <module>uSkyBlock-FAWE</module>
+        <module>uSkyBlock-FAWE350</module>
     </modules>
 
     <properties>
@@ -229,6 +231,16 @@
             <dependency>
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-AWE330</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-FAWE</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-FAWE350</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

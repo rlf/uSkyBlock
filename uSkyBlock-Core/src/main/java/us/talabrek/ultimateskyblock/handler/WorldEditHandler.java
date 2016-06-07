@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.handler;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
@@ -26,6 +27,7 @@ import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegen;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -74,7 +76,7 @@ public class WorldEditHandler {
             Operations.completeBlindly(operation);
             editSession.flushQueue();
         } catch (IOException e) {
-            uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
+            LogUtil.log(Level.WARNING, "Unable to load schematic " + file, e);
         }
     }
 
@@ -93,10 +95,10 @@ public class WorldEditHandler {
         minZ = cz != 0 ? minZ - cz + 16 : minZ;
         cx = maxX & 0xF;
         cz = maxZ & 0xF;
-        maxX = cx != 15 ? maxX - (16-cx) : maxX;
-        maxZ = cz != 15 ? maxZ - (16-cz) : maxZ;
-        for (int x = minX; x <= maxX; x+=16) {
-            for (int z = minZ; z <= maxZ; z+=16) {
+        maxX = cx != 15 ? maxX - cx : maxX;
+        maxZ = cz != 15 ? maxZ - cz : maxZ;
+        for (int x = minX; x < maxX; x+=16) {
+            for (int z = minZ; z < maxZ; z+=16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));
             }
         }
@@ -247,7 +249,7 @@ public class WorldEditHandler {
             @Override
             public void run() {
                 long diff = System.currentTimeMillis() - t;
-                uSkyBlock.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+                LogUtil.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
                 if (afterDeletion != null) {
                     afterDeletion.run();
                 }
@@ -278,7 +280,7 @@ public class WorldEditHandler {
             @Override
             public void run() {
                 long diff = System.currentTimeMillis() - t;
-                uSkyBlock.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+                LogUtil.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
                 if (afterDeletion != null) {
                     afterDeletion.run();
                 }
@@ -326,7 +328,7 @@ public class WorldEditHandler {
         }
     }
 
-    public static EditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
-        return new EditSession(bukkitWorld, maxBlocks);
+    public static EditSession createEditSession(com.sk89q.worldedit.world.World bukkitWorld, int maxBlocks) {
+        return WorldEdit.getInstance().getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
     }
 }

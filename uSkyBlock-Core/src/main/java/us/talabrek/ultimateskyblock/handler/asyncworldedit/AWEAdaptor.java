@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
 import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.world.World;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -21,5 +21,5 @@ public interface AWEAdaptor {
 
     void onDisable(Plugin plugin);
 
-    EditSession createEditSession(BukkitWorld world, int maxBlocks);
+    EditSession createEditSession(World world, int maxBlocks);
 }

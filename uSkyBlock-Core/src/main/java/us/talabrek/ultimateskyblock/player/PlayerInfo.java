@@ -14,6 +14,7 @@ import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;
@@ -195,8 +196,7 @@ public class PlayerInfo implements Serializable {
                 log.exiting(CN, "loadPlayer");
                 return this;
             } catch (Exception e) {
-                e.printStackTrace();
-                uSkyBlock.log(Level.INFO, "Returning null while loading, not good!");
+                LogUtil.log(Level.INFO, "Returning null while loading, not good!");
                 return null;
             }
         } finally {
@@ -213,7 +213,7 @@ public class PlayerInfo implements Serializable {
     }
 
     private void createPlayerConfig() {
-        uSkyBlock.log(Level.FINER, "Creating new player config!");
+        LogUtil.log(Level.FINER, "Creating new player config!");
         setupPlayer();
     }
 
@@ -240,7 +240,7 @@ public class PlayerInfo implements Serializable {
         // TODO: 11/05/2015 - R4zorax: Instead of saving directly, schedule it for later...
         log.entering(CN, "save", playerName);
         if (playerData == null) {
-            uSkyBlock.log(Level.INFO, "Can't save player data!");
+            LogUtil.log(Level.INFO, "Can't save player data!");
             return;
         }
         FileConfiguration playerConfig = playerData;
@@ -275,7 +275,7 @@ public class PlayerInfo implements Serializable {
         playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
         try {
             playerConfig.save(playerConfigFile);
-            uSkyBlock.log(Level.FINEST, "Player data saved!");
+            LogUtil.log(Level.FINEST, "Player data saved!");
         } catch (IOException ex) {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + playerConfigFile, ex);
         }

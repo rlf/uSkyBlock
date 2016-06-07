@@ -20,6 +20,7 @@ import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 /**
  * Responsible for various transformations and queries of locations.
@@ -207,7 +208,7 @@ public enum LocationUtil {
                             spawnLocation.setYaw(loc.getYaw());
                             spawnLocation.setPitch(loc.getPitch());
                         }
-                        uSkyBlock.log(Level.FINER, "found safe location " + spawnLocation + " near " + loc + ", looking at " + lookAt);
+                        log(Level.FINER, "found safe location " + spawnLocation + " near " + loc + ", looking at " + lookAt);
                         return spawnLocation;
                     }
                 }

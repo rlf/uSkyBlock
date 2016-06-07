@@ -9,6 +9,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ProtectAllTask extends IncrementalRunnable {
                 if (sender instanceof Player && ((Player)sender).isOnline()) {
                     sender.sendMessage(message);
                 }
-                plugin.log(Level.INFO, FormatUtil.stripFormatting(message));
+                LogUtil.log(Level.INFO, FormatUtil.stripFormatting(message));
                 plugin.setProtectAllActive(false);
             }
         });

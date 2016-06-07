@@ -15,6 +15,8 @@ import java.io.ObjectInputStream;
 import java.util.Stack;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
+
 /**
  * An importer for the wolfwork branch.
  */
@@ -40,7 +42,7 @@ public class WolfWorkUSBImporter implements USBImporter {
             }
             return true;
         } catch (Exception e) {
-            plugin.log(Level.WARNING, "Unable to import " + file, e);
+            log(Level.WARNING, "Unable to import " + file, e);
             return false;
         }
     }
@@ -72,7 +74,7 @@ public class WolfWorkUSBImporter implements USBImporter {
                 return countOrphan;
             }
         } catch (IOException | ClassNotFoundException e) {
-            plugin.log(Level.WARNING, "Unable to read the orphanedIslands.bin file", e);
+            log(Level.WARNING, "Unable to read the orphanedIslands.bin file", e);
         }
         return 0;
     }

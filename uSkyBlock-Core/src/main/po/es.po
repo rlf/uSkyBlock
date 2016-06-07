@@ -1,9 +1,9 @@
 # uSkyBlock Localization for Spanish.
-#
-#
-#
-#
-#
+# 
+# 
+# 
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
@@ -887,6 +887,10 @@ msgstr "§eBloques en la isla de {0} (página {1,number} de {2,number}):"
 msgid "Score Count Block"
 msgstr "Recuento de Puntuación de Bloques"
 
+#, java-format
+msgid "§aIsland level is {0,number,###.##}"
+msgstr "§aEl nivel de tu isla es {0,number,###.##}"
+
 msgid "invite a player to your island"
 msgstr "invitar a un jugador a tu isla"
 
@@ -991,10 +995,6 @@ msgstr "verifica el nivel de tu isla o la de otros"
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§eInformación sobre la isla de {0}:"
-
-#, java-format
-msgid "§aIsland level is {0,number,###.##}"
-msgstr "§aEl nivel de tu isla es {0,number,###.##}"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1371,29 +1371,7 @@ msgstr "§4** Estás saliendo de una isla abandonada."
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4No se encontró importador llamado §e{0}§4"
 
-#, java-format
-msgid "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
-msgstr ""
-
-#, java-format
-msgid "§eConverted {0}/{1} files"
-msgstr ""
-
-#, java-format
-msgid "Found {0} names to lookup from Mojang"
-msgstr ""
-
-#, java-format
-msgid "Done updating the PlayerDB in {0}"
-msgstr ""
-
-#, java-format
-msgid ""
-"Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
-msgstr ""
-
-#, java-format
-msgid "Error: {0}"
+msgid "§eConverted "
 msgstr ""
 
 msgid "The island has been created."
@@ -2282,10 +2260,6 @@ msgstr "Mayúsculas Encendidas"
 msgid "§9Text Editor"
 msgstr "§9Editor de Texto"
 
-#, java-format
-msgid "Too many requests for Mojangs API, sleeping {0}"
-msgstr ""
-
 msgid "§eSending you to spawn."
 msgstr "§eEnviándote al spawn."
 
@@ -2389,12 +2363,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#, java-format
-msgid "Renamed player {0} to {1} in {2} seconds."
-msgstr ""
-
-#, java-format
-msgid ""
-"§9It took §a{0}§9 seconds to rename your uSkyBlock presence from §a{1}§9."
-msgstr ""

@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
+
 /**
  * Scans for all players on a list of islands.
  */
@@ -87,10 +89,10 @@ public class PurgeScanTask extends BukkitRunnable {
     public void run() {
         try {
             generatePurgeList();
-            plugin.log(Level.INFO, "Done scanning - found " + purgeList.size() + " candidates for purging.");
+            log(Level.INFO, "Done scanning - found " + purgeList.size() + " candidates for purging.");
             sender.sendMessage(I18nUtil.tr("\u00a74PURGE:\u00a79 Scanning done, found {0} candidates for purgatory.", purgeList.size()));
             doPurge();
-            plugin.log(Level.INFO, "Finished purging marked inactive islands.");
+            log(Level.INFO, "Finished purging marked inactive islands.");
             sender.sendMessage(I18nUtil.tr("\u00a74PURGE:\u00a79 Finished purging abandoned islands."));
         } finally {
             plugin.deactivatePurge();

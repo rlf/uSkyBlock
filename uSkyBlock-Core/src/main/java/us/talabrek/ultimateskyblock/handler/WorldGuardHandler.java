@@ -25,6 +25,7 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class WorldGuardHandler {
             }
         } catch (Exception ex) {
             String name = islandConfig != null ? islandConfig.getLeader() : "Unknown";
-            plugin.log(Level.SEVERE, "ERROR: Failed to protect " + name + "'s Island (" + sender.getName() + ")", ex);
+            LogUtil.log(Level.SEVERE, "ERROR: Failed to protect " + name + "'s Island (" + sender.getName() + ")", ex);
         }
         return false;
     }
@@ -107,7 +108,7 @@ public class WorldGuardHandler {
             }
             islandInfo.setRegionVersion(getVersion());
         } catch (Exception e) {
-            uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
+            LogUtil.log(Level.SEVERE, "ERROR: Failed to update region for " + islandInfo.getName(), e);
         }
     }
 
@@ -205,7 +206,7 @@ public class WorldGuardHandler {
                 sender.sendMessage(I18nUtil.tr("\u00a74You must be the party leader to lock your island!"));
             }
         } catch (Exception ex) {
-            uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to lock " + islandName + "'s Island (" + sender.getName() + ")", ex);
+            LogUtil.log(Level.SEVERE, "ERROR: Failed to lock " + islandName + "'s Island (" + sender.getName() + ")", ex);
         }
     }
 
@@ -220,7 +221,7 @@ public class WorldGuardHandler {
                 sender.sendMessage(I18nUtil.tr("\u00a74You must be the party leader to unlock your island!"));
             }
         } catch (Exception ex) {
-            uSkyBlock.getInstance().log(Level.SEVERE, "ERROR: Failed to unlock " + islandName + "'s Island (" + sender.getName() + ")", ex);
+            LogUtil.log(Level.SEVERE, "ERROR: Failed to unlock " + islandName + "'s Island (" + sender.getName() + ")", ex);
         }
     }
 
@@ -251,7 +252,7 @@ public class WorldGuardHandler {
                 regionManager.addRegion(region);
             }
         } catch (Exception e) {
-            uSkyBlock.getInstance().log(Level.WARNING, "Error saving island region after removal of " + player);
+            LogUtil.log(Level.WARNING, "Error saving island region after removal of " + player);
         }
     }
 

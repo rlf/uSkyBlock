@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.world.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -16,6 +17,8 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
+
 /**
  * Handles integration with AWE.
  * Very HACKY and VERY unstable.
@@ -23,7 +26,6 @@ import java.util.logging.Logger;
  * Only kept as a cosmetic measure, to at least try to give the players some feedback.
  */
 public enum AsyncWorldEditHandler {;
-    private static final Logger log = Logger.getLogger(AsyncWorldEditHandler.class.getName());
     private static AWEAdaptor adaptor = null;
 
     public static void onEnable(uSkyBlock plugin) {
@@ -32,6 +34,7 @@ public enum AsyncWorldEditHandler {;
 
     public static void onDisable(uSkyBlock plugin) {
         getAWEAdaptor().onDisable(plugin);
+        adaptor = null;
     }
 
     public static void registerCompletion(Player player) {
@@ -48,10 +51,28 @@ public enum AsyncWorldEditHandler {;
 
     public static AWEAdaptor getAWEAdaptor() {
         if (adaptor == null) {
+            if (!uSkyBlock.getInstance().getConfig().getBoolean("asyncworldedit.enabled", true)) {
+                return NULL_ADAPTOR;
+            }
+            Plugin fawe = getFAWE();
             Plugin awe = getAWE();
-            if (awe != null) {
+            String className = null;
+            if (fawe != null) {
+                VersionUtil.Version version = VersionUtil.getVersion(fawe.getDescription().getVersion());
+                if (version.isLT("3.5.0")) {
+                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWEAdaptor";
+                } else {
+                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWE350Adaptor";
+                }
+                try {
+                    adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
+                    log(Level.INFO, "Hooked into FAWE " + version);
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
+                    log(Level.WARNING, "Unable to locate FAWE adaptor for version " + version + ": " + e);
+                    adaptor = NULL_ADAPTOR;
+                }
+            } else if (awe != null) {
                 VersionUtil.Version version = VersionUtil.getVersion(awe.getDescription().getVersion());
-                String className = null;
                 if (version.isLT("3.0")) {
                     className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE211Adaptor";
                 } else if (version.isLT("3.2.0")) {
@@ -63,8 +84,9 @@ public enum AsyncWorldEditHandler {;
                 }
                 try {
                     adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
+                    log(Level.INFO, "Hooked into AWE " + version);
                 } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
-                    log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version + ": " + e);
+                    log(Level.WARNING, "Unable to locate AWE adaptor for version " + version + ": " + e);
                     adaptor = NULL_ADAPTOR;
                 }
             } else {
@@ -75,8 +97,11 @@ public enum AsyncWorldEditHandler {;
     }
 
     public static boolean isAWE() {
-        Plugin awe = getAWE();
-        return awe != null && awe.isEnabled();
+        return getAWEAdaptor() != NULL_ADAPTOR;
+    }
+
+    private static Plugin getFAWE() {
+        return Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit");
     }
 
     private static Plugin getAWE() {
@@ -105,7 +130,7 @@ public enum AsyncWorldEditHandler {;
         }
 
         @Override
-        public EditSession createEditSession(BukkitWorld world, int maxBlocks) {
+        public EditSession createEditSession(World world, int maxBlocks) {
             return WorldEditHandler.createEditSession(world, maxBlocks);
         }
     };

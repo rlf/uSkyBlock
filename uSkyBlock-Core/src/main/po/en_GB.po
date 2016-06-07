@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -889,6 +889,10 @@ msgstr "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
 msgid "Score Count Block"
 msgstr "Score Count Block"
 
+#, java-format
+msgid "§aIsland level is {0,number,###.##}"
+msgstr "§9* §7Island level is §a{0,number,###.##}"
+
 msgid "invite a player to your island"
 msgstr "invite a player to your island"
 
@@ -992,10 +996,6 @@ msgstr "check your or anothers island level"
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§9* §7Information about §6{0}''s §7Island:"
-
-#, java-format
-msgid "§aIsland level is {0,number,###.##}"
-msgstr "§9* §7Island level is §a{0,number,###.##}"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1368,29 +1368,7 @@ msgstr "§4* §7You are leaving an abandoned island."
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4* §7No importer named §6{0}§7 found"
 
-#, java-format
-msgid "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
-msgstr ""
-
-#, java-format
-msgid "§eConverted {0}/{1} files"
-msgstr ""
-
-#, java-format
-msgid "Found {0} names to lookup from Mojang"
-msgstr ""
-
-#, java-format
-msgid "Done updating the PlayerDB in {0}"
-msgstr ""
-
-#, java-format
-msgid ""
-"Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
-msgstr ""
-
-#, java-format
-msgid "Error: {0}"
+msgid "§eConverted "
 msgstr ""
 
 msgid "The island has been created."
@@ -2284,10 +2262,6 @@ msgstr "Caps On"
 msgid "§9Text Editor"
 msgstr "§9Text Editor"
 
-#, java-format
-msgid "Too many requests for Mojangs API, sleeping {0}"
-msgstr ""
-
 msgid "§eSending you to spawn."
 msgstr "§9* §7Sending you to spawn."
 
@@ -2393,12 +2367,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#, java-format
-msgid "Renamed player {0} to {1} in {2} seconds."
-msgstr ""
-
-#, java-format
-msgid ""
-"§9It took §a{0}§9 seconds to rename your uSkyBlock presence from §a{1}§9."
-msgstr ""

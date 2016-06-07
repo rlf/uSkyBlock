@@ -14,6 +14,7 @@ import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.task.ChunkSnapShotTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +103,7 @@ public class LevelLogic {
             }
             return ids;
         } else {
-            uSkyBlock.log(Level.WARNING, "Invalid key '" + blockKey + "' in levelConfig");
+            LogUtil.log(Level.WARNING, "Invalid key '" + blockKey + "' in levelConfig");
         }
         return new int[0];
     }

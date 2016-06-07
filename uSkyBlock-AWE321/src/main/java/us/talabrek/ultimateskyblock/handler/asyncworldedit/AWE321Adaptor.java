@@ -11,6 +11,7 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -139,7 +140,7 @@ public class AWE321Adaptor implements AWEAdaptor {
         }, 10, 10);
     }
 
-    public EditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
+    public EditSession createEditSession(World bukkitWorld, int maxBlocks) {
         WorldEdit worldEdit = WorldEditHandler.getWorldEdit().getWorldEdit();
         IAsyncEditSessionFactory sessionFactory = (IAsyncEditSessionFactory) worldEdit.getEditSessionFactory();
         return (EditSession) sessionFactory.getThreadSafeEditSession(bukkitWorld, maxBlocks, null, getAWE().getPlayerManager().getUnknownPlayer());

@@ -16,6 +16,7 @@ import java.util.ServiceLoader;
 import java.util.logging.Level;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 /**
  * Delegates and batches the import.
@@ -83,13 +84,13 @@ public class USBImporterExecutor {
     private void doImport(CommandSender sender, USBImporter importer) {
         String msg = "Imported " + importer.importOrphans(plugin, plugin.getDataFolder()) + " orphans";
         sender.sendMessage("\u00a7e" + msg);
-        plugin.log(Level.INFO, msg);
+        log(Level.INFO, msg);
         countSuccess = 0;
         countFailed = 0;
         final File[] files = importer.getFiles(plugin);
         int chunkSize = plugin.getConfig().getInt("general.import.maxChunk", 100);
         int delay = plugin.getConfig().getInt("general.import.delay", 15);
-        plugin.log(Level.INFO, "Importing " + files.length + " players in chunks of " + chunkSize);
+        log(Level.INFO, "Importing " + files.length + " players in chunks of " + chunkSize);
         if (files.length > 0) {
             doImport(sender, importer, files, 0, chunkSize, delay);
         }
@@ -105,10 +106,10 @@ public class USBImporterExecutor {
                     File playerFile = files[i];
                     if (importer.importFile(plugin, playerFile)) {
                         count++;
-                        plugin.log(Level.FINE, "Successfully imported player-file " + playerFile);
+                        log(Level.FINE, "Successfully imported player-file " + playerFile);
                     } else {
                         failed++;
-                        plugin.log(Level.WARNING, "Could not import player-file " + playerFile);
+                        log(Level.WARNING, "Could not import player-file " + playerFile);
                     }
                 }
                 countSuccess += count;

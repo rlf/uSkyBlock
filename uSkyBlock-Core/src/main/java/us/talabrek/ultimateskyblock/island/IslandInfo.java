@@ -17,6 +17,7 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
@@ -220,7 +221,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                 log.fine("Saving island-config: " + file);
                 config.save(file);
             } catch (IOException e) {
-                uSkyBlock.log(Level.SEVERE, "Unable to save island " + file, e);
+                LogUtil.log(Level.SEVERE, "Unable to save island " + file, e);
             }
         }
     }

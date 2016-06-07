@@ -10,6 +10,7 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -172,7 +173,7 @@ public class AWE311Adaptor implements AWEAdaptor {
         awe.getBlockPlacer().performAsAsyncJob(tsSession, playerEntry, "loadIslandSchematic", action);
     }
 
-    public ThreadSafeEditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
+    public ThreadSafeEditSession createEditSession(World bukkitWorld, int maxBlocks) {
         WorldEdit worldEdit = WorldEditHandler.getWorldEdit().getWorldEdit();
         AsyncEditSessionFactory sessionFactory = (AsyncEditSessionFactory) worldEdit.getEditSessionFactory();
         return sessionFactory.getThreadSafeEditSession(bukkitWorld, maxBlocks);

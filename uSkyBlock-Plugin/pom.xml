@@ -65,5 +65,13 @@
             <groupId>uSkyBlock</groupId>
             <artifactId>uSkyBlock-AWE330</artifactId>
         </dependency>
+        <dependency>
+            <groupId>uSkyBlock</groupId>
+            <artifactId>uSkyBlock-FAWE</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uSkyBlock</groupId>
+            <artifactId>uSkyBlock-FAWE350</artifactId>
+        </dependency>
     </dependencies>
 </project>

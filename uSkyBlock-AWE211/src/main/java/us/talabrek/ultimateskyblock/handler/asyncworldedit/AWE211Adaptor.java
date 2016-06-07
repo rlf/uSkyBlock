@@ -11,6 +11,7 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -157,7 +158,7 @@ public class AWE211Adaptor implements AWEAdaptor {
     }
 
     @Override
-    public EditSession createEditSession(BukkitWorld world, int maxBlocks) {
+    public EditSession createEditSession(World world, int maxBlocks) {
         return WorldEditHandler.getWorldEdit().getWorldEdit().getEditSessionFactory().getEditSession(world, maxBlocks);
     }
 

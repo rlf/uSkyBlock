@@ -9,6 +9,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -87,7 +88,7 @@ public class InfoCommand extends RequireIslandCommand {
                 try {
                     plugin.calculateScoreAsync(player, playerInfo.locationForParty(), showInfo);
                 } catch (Exception e) {
-                    uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
+                    LogUtil.log(Level.SEVERE, "Error while calculating Island Level", e);
                 }
             }
         }, 1L);

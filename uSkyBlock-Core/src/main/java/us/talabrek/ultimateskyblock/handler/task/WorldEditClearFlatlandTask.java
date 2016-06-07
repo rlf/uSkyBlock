@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
+
 /**
  * A task that chunks up the clearing of a region.
  * Not as fast as WorldEditRegenTask, but more versatile.
@@ -40,7 +42,7 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
             @Override
             public void run() {
                 String duration = TimeUtil.millisAsString(WorldEditClearFlatlandTask.this.getTimeElapsed());
-                plugin.log(Level.INFO, String.format("Region %s was cleared in %s", region.toString(), duration));
+                log(Level.INFO, String.format("Region %s was cleared in %s", region.toString(), duration));
                 commandSender.sendMessage(String.format(format, duration));
             }
         });

@@ -103,6 +103,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.Settings.island_height;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManager.RequirementChecker {
 
@@ -221,10 +222,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             @Override
             public void run() {
                 if (VaultHandler.setupEconomy()) {
-                    getLogger().log(Level.INFO, "uSkyBlock hooked into Vault Economy");
+                    log(Level.INFO, "Hooked into Vault Economy");
                 }
                 if (VaultHandler.setupPermissions()) {
-                    getLogger().log(Level.INFO, "uSkyBlock hooked into Vault Permissions");
+                    log(Level.INFO, "Hooked into Vault Permissions");
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getSkyBlockWorld());
@@ -944,14 +945,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public ConfigMenu getConfigMenu() {
         return configMenu;
-    }
-
-    public static void log(Level level, String message) {
-        log(level, message, null);
-    }
-
-    public static void log(Level level, String message, Throwable t) {
-        getInstance().getLogger().log(level, message, t);
     }
 
     public ChallengeLogic getChallengeLogic() {

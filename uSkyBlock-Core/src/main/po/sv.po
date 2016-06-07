@@ -2,7 +2,7 @@
 # Copyright (C) 2015
 # This file is distributed under the same license as the PACKAGE package.
 # maol3 <martin@ntilan.se>, 2015
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
@@ -884,6 +884,10 @@ msgstr "§eBlock på {0}s ö (sida {1,number} av {2,number}):"
 msgid "Score Count Block"
 msgstr "Poäng Antal Blocktyp"
 
+#, java-format
+msgid "§aIsland level is {0,number,###.##}"
+msgstr "§aSkyblock level är {0,number,###.##}"
+
 msgid "invite a player to your island"
 msgstr "bjud in en spelare till din ö"
 
@@ -986,10 +990,6 @@ msgstr "kolla din ös eller någon annans ös skyblock level"
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§eInformation om {0}s ö:"
-
-#, java-format
-msgid "§aIsland level is {0,number,###.##}"
-msgstr "§aSkyblock level är {0,number,###.##}"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1348,29 +1348,7 @@ msgstr "§c** Du lämnar nu en övergiven Skyblock."
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§cIngen importer kallad §e{0}§4 hittades."
 
-#, java-format
-msgid "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
-msgstr ""
-
-#, java-format
-msgid "§eConverted {0}/{1} files"
-msgstr ""
-
-#, java-format
-msgid "Found {0} names to lookup from Mojang"
-msgstr ""
-
-#, java-format
-msgid "Done updating the PlayerDB in {0}"
-msgstr ""
-
-#, java-format
-msgid ""
-"Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
-msgstr ""
-
-#, java-format
-msgid "Error: {0}"
+msgid "§eConverted "
 msgstr ""
 
 msgid "The island has been created."
@@ -2249,10 +2227,6 @@ msgstr "Caps På"
 msgid "§9Text Editor"
 msgstr "§9Textredigerare"
 
-#, java-format
-msgid "Too many requests for Mojangs API, sleeping {0}"
-msgstr ""
-
 msgid "§eSending you to spawn."
 msgstr ""
 
@@ -2358,12 +2332,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#, java-format
-msgid "Renamed player {0} to {1} in {2} seconds."
-msgstr ""
-
-#, java-format
-msgid ""
-"§9It took §a{0}§9 seconds to rename your uSkyBlock presence from §a{1}§9."
-msgstr ""
