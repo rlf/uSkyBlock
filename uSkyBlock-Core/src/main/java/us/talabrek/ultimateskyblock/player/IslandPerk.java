@@ -10,12 +10,20 @@ public class IslandPerk {
     private String permission;
     private ItemStack displayItem;
     private Perk perk;
+    private final double scoreMultiply;
+    private final double scoreOffset;
 
     public IslandPerk(String schemeName, String permission, ItemStack displayItem, Perk perk) {
+        this(schemeName, permission, displayItem, perk, 1d, 0d);
+    }
+
+    public IslandPerk(String schemeName, String permission, ItemStack displayItem, Perk perk, double scoreMultiply, double scoreOffset) {
         this.schemeName = schemeName;
         this.permission = permission;
         this.displayItem = displayItem;
         this.perk = perk;
+        this.scoreMultiply = scoreMultiply;
+        this.scoreOffset = scoreOffset;
     }
 
     public String getSchemeName() {
@@ -32,5 +40,9 @@ public class IslandPerk {
 
     public Perk getPerk() {
         return perk;
+    }
+
+    public double adjustScore(double score) {
+        return score*scoreMultiply + scoreOffset;
     }
 }

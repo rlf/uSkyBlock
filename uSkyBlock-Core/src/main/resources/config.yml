@@ -247,6 +247,10 @@ island-schemes:
     description: The original SkySMP island
     displayItem: GRASS
     extraItems: 'OBSIDIAN:14 FLINT_AND_STEEL:1'
+    # Only get 90% of the normal score
+    scoreMultiply: 0.9
+    # But start with an offset of 40
+    scoreOffset: 40
 
 # This section allows donors to get specific perks
 #donor-perks:
@@ -359,7 +363,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 50
+version: 51
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

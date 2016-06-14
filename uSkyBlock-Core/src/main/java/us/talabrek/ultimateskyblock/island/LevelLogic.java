@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.model.BlockScore;
 import us.talabrek.ultimateskyblock.api.model.BlockScore.State;
 import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -166,7 +167,7 @@ public class LevelLogic {
                                         ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
                                         if (chunk == null) {
                                             // This should NOT happen!
-                                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x +"," + z);
+                                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x + "," + z);
                                             continue;
                                         }
                                         int cx = (x & 0xf);
@@ -192,7 +193,7 @@ public class LevelLogic {
                                             ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
                                             if (chunk == null) {
                                                 // This should NOT happen!
-                                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x +"," + z);
+                                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x + "," + z);
                                                 continue;
                                             }
                                             int cx = (x & 0xf);
@@ -237,7 +238,7 @@ public class LevelLogic {
 
     public IslandScore createIslandScore(int[] counts) {
         double score = 0;
-        List<BlockScoreImpl> blocks = new ArrayList<>();
+        List<BlockScore> blocks = new ArrayList<>();
         for (int i = 1 << DATA_BITS; i < MAX_BLOCK << DATA_BITS; ++i) {
             int count = counts[i];
             if (count > 0 && blockValue[i] > 0) {

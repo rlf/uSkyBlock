@@ -73,6 +73,7 @@ import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.island.task.SetBiomeTask;
 import us.talabrek.ultimateskyblock.menu.ConfigMenu;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
+import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PerkLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerLogic;
@@ -1267,6 +1268,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             @Override
             public void run() {
                 IslandScore score = getState();
+                IslandPerk islandPerk = perkLogic.getIslandPerk(islandInfo.getSchematicName());
+                score = new IslandScore(islandPerk.adjustScore(score.getScore()), score.getTop());
                 callback.setState(score);
                 islandInfo.setLevel(score.getScore());
                 getIslandLogic().updateRank(islandInfo, score);
