@@ -69,7 +69,7 @@ public class FAWEAdaptor implements AWEAdaptor {
         try {
             editSession.getQueue().setProgressTracker(new FAWEProgressTracker(playerPerk, progressEveryMs, progressEveryPct));
         } catch (Throwable e) {
-            log.info("Warning: Incompatible version of FAWE, no progress-tracking (" + e + ")");
+            log.finest("Warning: Incompatible version of FAWE, no progress-tracking (" + e + ")");
         }
     }
 
