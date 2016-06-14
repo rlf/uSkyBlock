@@ -56,13 +56,21 @@ public class FAWEAdaptor implements AWEAdaptor {
                     SchematicFormat.getFormat(file)
                             .load(file)
                             .paste(editSession, to, noAir, entities);
-                    editSession.getQueue().setProgressTracker(new FAWEProgressTracker(playerPerk, progressEveryMs, progressEveryPct));
+                    attachProgressTracker(editSession, playerPerk);
                     editSession.flushQueue();
                 } catch (MaxChangedBlocksException | IOException | DataException e) {
                     log.log(Level.INFO, "Unable to paste schematic " + file, e);
                 }
             }
         });
+    }
+
+    private void attachProgressTracker(EditSession editSession, PlayerPerk playerPerk) {
+        try {
+            editSession.getQueue().setProgressTracker(new FAWEProgressTracker(playerPerk, progressEveryMs, progressEveryPct));
+        } catch (Throwable e) {
+            log.info("Warning: Incompatible version of FAWE, no progress-tracking (" + e + ")");
+        }
     }
 
     public EditSession createEditSession(World bukkitWorld, int maxBlocks) {
