@@ -59,11 +59,7 @@ public enum AsyncWorldEditHandler {;
             String className = null;
             if (fawe != null) {
                 VersionUtil.Version version = VersionUtil.getVersion(fawe.getDescription().getVersion());
-                if (version.isLT("3.5.0")) {
-                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWEAdaptor";
-                } else {
-                    className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWE350Adaptor";
-                }
+                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWEAdaptor";
                 try {
                     adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
                     log(Level.INFO, "Hooked into FAWE " + version);

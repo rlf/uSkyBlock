@@ -16,7 +16,6 @@
                 <include>uSkyBlock:uSkyBlock-AWE321</include>
                 <include>uSkyBlock:uSkyBlock-AWE330</include>
                 <include>uSkyBlock:uSkyBlock-FAWE</include>
-                <include>uSkyBlock:uSkyBlock-FAWE350</include>
             </includes>
             <unpack>true</unpack>
         </dependencySet>

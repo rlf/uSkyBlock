@@ -14,7 +14,7 @@ before_install:
   # Skip the 'v'
   - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 script:
-  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,1.9 install
+  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,1.10 install
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}

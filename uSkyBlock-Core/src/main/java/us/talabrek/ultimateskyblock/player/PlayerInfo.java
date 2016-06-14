@@ -155,7 +155,6 @@ public class PlayerInfo implements Serializable {
     private void setupPlayer() {
         FileConfiguration playerConfig = getConfig();
         ConfigurationSection pSection = playerConfig.createSection("player");
-        pSection.set("hasIsland", false);
         pSection.set("islandX", 0);
         pSection.set("islandY", 0);
         pSection.set("islandZ", 0);
@@ -171,7 +170,7 @@ public class PlayerInfo implements Serializable {
         try {
             log.entering(CN, "loadPlayer:" + this.playerName);
             FileConfiguration playerConfig = getConfig();
-            if (!playerConfig.contains("player.hasIsland")) {
+            if (!playerConfig.contains("player.islandY") || playerConfig.getInt("player.islandY", 0) == 0) {
                 this.islandLocation = null;
                 this.homeLocation = null;
                 createPlayerConfig();

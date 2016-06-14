@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
-import com.boydti.fawe.FaweAPI;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
@@ -21,16 +20,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Adaptor depending on FAWE 3.5.0 classes
+ * Adaptor depending on FAWE (FastAsyncWorldEdit).
  */
 public class FAWEAdaptor implements AWEAdaptor {
     private static final Logger log = Logger.getLogger(FAWEAdaptor.class.getName());
-    private FaweAPI fawe;
     private Plugin plugin;
+    private int progressEveryMs;
+    private double progressEveryPct;
 
     @Override
     public void onEnable(Plugin plugin) {
         this.plugin = plugin;
+        progressEveryMs = plugin.getConfig().getInt("asyncworldedit.progressEveryMs", 3000);
+        progressEveryPct = plugin.getConfig().getDouble("asyncworldedit.progressEveryPct", 20);
     }
 
     @Override
@@ -54,6 +56,7 @@ public class FAWEAdaptor implements AWEAdaptor {
                     SchematicFormat.getFormat(file)
                             .load(file)
                             .paste(editSession, to, noAir, entities);
+                    editSession.getQueue().setProgressTracker(new FAWEProgressTracker(playerPerk, progressEveryMs, progressEveryPct));
                     editSession.flushQueue();
                 } catch (MaxChangedBlocksException | IOException | DataException e) {
                     log.log(Level.INFO, "Unable to paste schematic " + file, e);
@@ -64,16 +67,5 @@ public class FAWEAdaptor implements AWEAdaptor {
 
     public EditSession createEditSession(World bukkitWorld, int maxBlocks) {
         return WorldEdit.getInstance().getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
-    }
-
-    private FaweAPI getAPI() {
-        Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("FastAsyncWorldEdit");
-        if (plugin != null && plugin.isEnabled()) {
-            if (fawe == null) {
-                fawe = new FaweAPI();
-            }
-            return fawe;
-        }
-        return null;
     }
 }
