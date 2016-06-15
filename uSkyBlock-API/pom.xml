@@ -38,6 +38,12 @@
             </plugins>
         </pluginManagement>
     </build>
+    <repositories>
+        <repository>
+            <id>spigotmc.org</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
+        </repository>
+    </repositories>
     <profiles>
         <profile>
             <id>1.7.9</id>

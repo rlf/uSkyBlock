@@ -114,6 +114,8 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("blocks.leafBreaks", 0);
         config.set("version", YML_VERSION);
         config.set("party", null);
+        config.set("general.scoreMultiply", null);
+        config.set("general.scoreOffset", null);
         setupPartyLeader(leader);
         sendMessageToIslandGroup(false, marktr("The island has been created."));
     }
