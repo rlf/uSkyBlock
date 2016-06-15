@@ -42,7 +42,11 @@ public class IslandPerk {
         return perk;
     }
 
-    public double adjustScore(double score) {
-        return score*scoreMultiply + scoreOffset;
+    public double getScoreMultiply() {
+        return scoreMultiply;
+    }
+
+    public double getScoreOffset() {
+        return scoreOffset;
     }
 }

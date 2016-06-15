@@ -114,7 +114,7 @@ public class WolfWorkUSBImporter implements USBImporter {
             for (String member : playerInfo.getMembers()) {
                 islandInfo.setupPartyMember(member);
             }
-            islandInfo.setWarpActive(playerInfo.isWarpActive());
+            islandInfo.setWarp(playerInfo.isWarpActive());
             islandInfo.setWarpLocation(playerInfo.getWarpLocation());
             for (String banned : playerInfo.getBanned()) {
                 islandInfo.banPlayer(banned);

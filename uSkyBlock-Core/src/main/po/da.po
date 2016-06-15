@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-04-04 16:54+0200\n"
+"PO-Revision-Date: 2016-06-15 21:08+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -507,6 +507,21 @@ msgstr "§eGenererer top 10 listen"
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eBlev færdig med genereringen af top 10"
 
+msgid "advanced command for getting island-data"
+msgstr "avanceret kommando til at læse ø-data"
+
+#, java-format
+msgid "§eCurrent value for {0} is ''{1}''"
+msgstr "§eNuværende værdi for {0} er ''{1}''"
+
+#, java-format
+msgid "§cUnable to get state for {0}"
+msgstr "§cKan ikke læse tilstand for {0}"
+
+#, java-format
+msgid "§eValid fields are {0}"
+msgstr "§eFelter {0}"
+
 msgid "teleport to another players island"
 msgstr "Teleporterer til en andens ø"
 
@@ -645,6 +660,25 @@ msgstr "genindlæs konfigurationen fra fil."
 
 msgid "§eConfiguration reloaded from file."
 msgstr "§eKonfigurationen blev genindlæst fra fil."
+
+msgid "advanced command for setting island-data"
+msgstr "avanceret kommando til at sætte ø-data"
+
+#, java-format
+msgid "§c{0} was set to ''{1}''"
+msgstr "§c{0} blev sat til ''{1}''"
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}''"
+msgstr "§cKan ikke sætte {0} til ''{1}''"
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
+msgstr "§cKan ikke sætte {0} til ''{1}'', det skal være et tal"
+
+#, java-format
+msgid "§cInvalid field {0}"
+msgstr "§cUkendt felt {0}"
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
@@ -1355,7 +1389,7 @@ msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Ingen §e{0}§4 importer fundet"
 
 msgid "§eConverted "
-msgstr ""
+msgstr "§eKonverteret "
 
 msgid "The island has been created."
 msgstr "Øen blev oprettet"

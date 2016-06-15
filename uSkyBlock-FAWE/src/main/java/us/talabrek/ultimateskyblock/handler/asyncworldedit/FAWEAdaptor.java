@@ -33,10 +33,12 @@ public class FAWEAdaptor implements AWEAdaptor {
         this.plugin = plugin;
         progressEveryMs = plugin.getConfig().getInt("asyncworldedit.progressEveryMs", 3000);
         progressEveryPct = plugin.getConfig().getDouble("asyncworldedit.progressEveryPct", 20);
+        log.finer("- FAWE debugging: Location of WorldEdit EditSession: " + EditSession.class.getResource('/' + EditSession.class.getName().replace('.', '/') + ".class"));
     }
 
     @Override
     public void onDisable(Plugin plugin) {
+        this.plugin = null;
     }
 
     @Override

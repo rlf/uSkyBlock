@@ -27,7 +27,7 @@
         <travis.buildNumber>dev</travis.buildNumber>
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
-        <api.version>2.6.4</api.version>
+        <api.version>2.6.13</api.version>
     </properties>
 
     <scm>

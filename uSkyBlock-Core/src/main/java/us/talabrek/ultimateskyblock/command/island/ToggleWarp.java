@@ -24,10 +24,10 @@ public class ToggleWarp extends RequireIslandCommand {
                     return true;
                 }
                 island.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d activated the island warp."), player.getName());
-                island.setWarpActive(true);
+                island.setWarp(true);
             } else {
                 island.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d deactivated the island warp."), player.getName());
-                island.setWarpActive(false);
+                island.setWarp(false);
             }
         } else {
             player.sendMessage(tr("\u00a7cYou do not have permission to enable/disable your island's warp!"));

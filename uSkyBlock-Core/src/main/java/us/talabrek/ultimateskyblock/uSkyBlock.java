@@ -1262,14 +1262,19 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return playerDB;
     }
 
+    private IslandScore adjustScore(IslandScore score, IslandInfo islandInfo) {
+        IslandPerk islandPerk = perkLogic.getIslandPerk(islandInfo.getSchematicName());
+        double blockScore = score.getScore();
+        blockScore = blockScore*islandPerk.getScoreMultiply()*islandInfo.getScoreMultiplier() + islandPerk.getScoreOffset()+islandInfo.getScoreOffset();
+        return new IslandScore(blockScore, score.getTop());
+    }
+
     public void calculateScoreAsync(final Player player, String islandName, final Callback<IslandScore> callback) {
         final IslandInfo islandInfo = getIslandInfo(islandName);
         getLevelLogic().calculateScoreAsync(islandInfo.getIslandLocation(), new Callback<IslandScore>() {
             @Override
             public void run() {
-                IslandScore score = getState();
-                IslandPerk islandPerk = perkLogic.getIslandPerk(islandInfo.getSchematicName());
-                score = new IslandScore(islandPerk.adjustScore(score.getScore()), score.getTop());
+                IslandScore score = adjustScore(getState(), islandInfo);
                 callback.setState(score);
                 islandInfo.setLevel(score.getScore());
                 getIslandLogic().updateRank(islandInfo, score);
