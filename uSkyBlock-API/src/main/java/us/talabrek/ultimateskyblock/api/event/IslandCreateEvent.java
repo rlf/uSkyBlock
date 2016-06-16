@@ -33,5 +33,5 @@ public class IslandCreateEvent extends uSkyBlockEvent {
       */ 
     public static HandlerList getHandlerList() { 
         return handlers; 
-    } 
+    }
 } 
