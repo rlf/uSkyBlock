@@ -176,4 +176,9 @@ public class PlayerLogic {
         playerCache.invalidateAll();
         return size;
     }
+
+    public int getSize() {
+        String[] list = plugin.directoryPlayers.list();
+        return list != null ? list.length : 0;
+    }
 }

@@ -90,12 +90,15 @@ public class WolfWorkUSBImporter implements USBImporter {
         pi.setHomeLocation(playerInfo.getHomeLocation());
         // Challenges
         long now = System.currentTimeMillis();
-        for (ChallengeCompletion challenge : pi.getChallenges()) {
-            if (playerInfo.checkChallenge(challenge.getName())) {
-                challenge.setFirstCompleted(now);
-                challenge.setTimesCompleted(1);
-            } else {
-                challenge.setTimesCompleted(0);
+        for (us.talabrek.ultimateskyblock.api.ChallengeCompletion challengeApi : pi.getChallenges()) {
+            if (challengeApi instanceof ChallengeCompletion) {
+                ChallengeCompletion challenge = (ChallengeCompletion) challengeApi;
+                if (playerInfo.checkChallenge(challenge.getName())) {
+                    challenge.setCooldownUntil(now);
+                    challenge.setTimesCompleted(1);
+                } else {
+                    challenge.setTimesCompleted(0);
+                }
             }
         }
         pi.save();

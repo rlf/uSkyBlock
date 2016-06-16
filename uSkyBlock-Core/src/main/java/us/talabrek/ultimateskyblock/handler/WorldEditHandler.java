@@ -22,7 +22,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegen;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
@@ -35,7 +34,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -255,7 +253,7 @@ public class WorldEditHandler {
                 }
             }
         };
-        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
+        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
         WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
         regen.runTask(uSkyBlock.getInstance());
     }
@@ -286,7 +284,7 @@ public class WorldEditHandler {
                 }
             }
         };
-        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
+        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
         WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
         regen.runTask(uSkyBlock.getInstance());
     }

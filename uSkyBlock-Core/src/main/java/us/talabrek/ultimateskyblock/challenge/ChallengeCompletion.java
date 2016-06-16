@@ -1,64 +1,68 @@
 package us.talabrek.ultimateskyblock.challenge;
 
-public class ChallengeCompletion {
+public class ChallengeCompletion implements us.talabrek.ultimateskyblock.api.ChallengeCompletion {
     private String name;
-    private long firstCompleted;
+    private long cooldownUntil;
     private int timesCompleted;
-    private int timesCompletedSinceTimer;
+    private int timesCompletedInCooldown;
 
     public ChallengeCompletion(final String name) {
         super();
         this.name = name;
-        this.firstCompleted = 0L;
+        this.cooldownUntil = 0L;
         this.timesCompleted = 0;
     }
 
-    public ChallengeCompletion(final String name, final long firstCompleted, final int timesCompleted, final int timesCompletedSinceTimer) {
+    public ChallengeCompletion(final String name, final long cooldownUntil, final int timesCompleted, final int timesCompletedInCooldown) {
         super();
         this.name = name;
-        this.firstCompleted = firstCompleted;
+        this.cooldownUntil = cooldownUntil;
         this.timesCompleted = timesCompleted;
-        this.timesCompletedSinceTimer = timesCompletedSinceTimer;
+        this.timesCompletedInCooldown = timesCompletedInCooldown;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
-    public long getFirstCompleted() {
-        return this.firstCompleted;
+    public long getCooldownUntil() {
+        return this.cooldownUntil;
     }
 
+    @Override
     public boolean isOnCooldown() {
-        return firstCompleted > System.currentTimeMillis();
+        return cooldownUntil > System.currentTimeMillis();
     }
 
+    @Override
     public long getCooldownInMillis() {
         long now = System.currentTimeMillis();
-        return firstCompleted > now ? firstCompleted - now : 0;
+        return cooldownUntil > now ? cooldownUntil - now : 0;
     }
 
+    @Override
     public int getTimesCompleted() {
         return this.timesCompleted;
     }
 
-    public int getTimesCompletedSinceTimer() {
-        return isOnCooldown() ? this.timesCompletedSinceTimer : timesCompleted > 0 ? 1 : 0;
+    public int getTimesCompletedInCooldown() {
+        return isOnCooldown() ? this.timesCompletedInCooldown : timesCompleted > 0 ? 1 : 0;
     }
 
-    public void setFirstCompleted(final long newCompleted) {
-        this.firstCompleted = newCompleted;
-        this.timesCompletedSinceTimer = 0;
+    public void setCooldownUntil(final long newCompleted) {
+        this.cooldownUntil = newCompleted;
+        this.timesCompletedInCooldown = 0;
     }
 
     public void setTimesCompleted(final int newCompleted) {
         this.timesCompleted = newCompleted;
-        this.timesCompletedSinceTimer = newCompleted;
+        this.timesCompletedInCooldown = newCompleted;
     }
 
     public void addTimesCompleted() {
         ++this.timesCompleted;
-        ++this.timesCompletedSinceTimer;
+        ++this.timesCompletedInCooldown;
     }
 
     public void setName(final String name) {

@@ -98,4 +98,12 @@ public interface uSkyBlockAPI extends Plugin {
      * @return the island-information for the supplied location, or <code>null</code> if none exist.
      */
     IslandInfo getIslandInfo(Location location);
+
+    /**
+     * Returns a PlayerInfo object for the player.
+     * @param player The player to get a PlayerInfo for.
+     * @return a PlayerInfo object for the player.
+     * @since 2.7.0
+     */
+    PlayerInfo getPlayerInfo(Player player);
 }

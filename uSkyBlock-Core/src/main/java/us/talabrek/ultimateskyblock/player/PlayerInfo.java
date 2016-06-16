@@ -21,13 +21,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PlayerInfo implements Serializable {
+public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.api.PlayerInfo {
     private static final String CN = PlayerInfo.class.getName();
     private static final Logger log = Logger.getLogger(CN);
     private static final long serialVersionUID = 1L;
@@ -66,6 +68,7 @@ public class PlayerInfo implements Serializable {
         islandGenerating = false;
     }
 
+    @Override
     public boolean getHasIsland() {
         return getIslandLocation() != null;
     }
@@ -74,10 +77,15 @@ public class PlayerInfo implements Serializable {
         return LocationUtil.getIslandName(this.islandLocation);
     }
 
+    @Override
     public Player getPlayer() {
+        if (uuid != null) {
+            return Bukkit.getPlayer(uuid);
+        }
         return Bukkit.getPlayer(this.playerName);
     }
 
+    @Override
     public String getPlayerName() {
         return this.playerName;
     }
@@ -86,10 +94,12 @@ public class PlayerInfo implements Serializable {
         this.islandLocation = l != null ? l.clone() : null;
     }
 
+    @Override
     public Location getIslandLocation() {
         return islandLocation != null && islandLocation.getBlockY() != 0 ? islandLocation.clone() : null;
     }
 
+    @Override
     public Location getIslandNetherLocation() {
         Location l = getIslandLocation();
         World nether = uSkyBlock.getInstance().getSkyBlockNetherWorld();
@@ -107,10 +117,12 @@ public class PlayerInfo implements Serializable {
         this.homeLocation = l != null ? l.clone() : null;
     }
 
+    @Override
     public Location getHomeLocation() {
         return homeLocation != null ? homeLocation.clone() : null;
     }
 
+    @Override
     public String getDisplayName() {
         return displayName != null ? displayName : playerName;
     }
@@ -276,8 +288,11 @@ public class PlayerInfo implements Serializable {
         dirty = false;
     }
 
-    public Collection<ChallengeCompletion> getChallenges() {
-        return uSkyBlock.getInstance().getChallengeLogic().getChallenges(this);
+    @Override
+    public Collection<us.talabrek.ultimateskyblock.api.ChallengeCompletion> getChallenges() {
+        Collection<us.talabrek.ultimateskyblock.api.ChallengeCompletion> copy = new ArrayList<>();
+        copy.addAll(uSkyBlock.getInstance().getChallengeLogic().getChallenges(this));
+        return copy;
     }
 
     @Override
@@ -303,6 +318,7 @@ public class PlayerInfo implements Serializable {
         }
     }
 
+    @Override
     public UUID getUniqueId() {
         return uuid;
     }
@@ -352,6 +368,7 @@ public class PlayerInfo implements Serializable {
         }
     }
 
+    @Override
     public List<String> getBannedFrom() {
         return playerData.getStringList("bannedFrom");
     }
@@ -376,6 +393,7 @@ public class PlayerInfo implements Serializable {
         save();
     }
 
+    @Override
     public List<String> getTrustedOn() {
         return playerData.getStringList("trustedOn");
     }
@@ -388,6 +406,7 @@ public class PlayerInfo implements Serializable {
         this.islandGenerating = value;
     }
 
+    @Override
     public IslandInfo getIslandInfo() {
         if (getHasIsland() && locationForParty() != null) {
             return uSkyBlock.getInstance().getIslandInfo(this);

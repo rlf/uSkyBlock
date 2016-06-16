@@ -1,14 +1,10 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
-import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.blocks.BaseBlock;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import org.bukkit.World;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
@@ -23,16 +19,17 @@ import java.util.logging.Logger;
 public class WorldEditRegen extends IncrementalRunnable {
     private static final Logger log = Logger.getLogger(WorldEditRegen.class.getName());
     // The size of the "slices" in regions
-    private static final int INCREMENT = 2;
+    private static final int INCREMENT = AsyncWorldEditHandler.getFAWE() != null ? 128 : 2;
 
-    private final World world;
     private final List<Region> regions;
+    private final int tasksToComplete;
+    private volatile int tasksCompleted = 0;
 
-    public WorldEditRegen(uSkyBlock plugin, World world, Set<Region> borderRegions, Runnable onCompletion) {
+    public WorldEditRegen(uSkyBlock plugin, Set<Region> borderRegions, Runnable onCompletion) {
         super(plugin, onCompletion);
-        this.world = world;
         log.log(Level.FINE, "Planning regen of borders: " + borderRegions);
         regions = createRegions(borderRegions);
+        tasksToComplete = regions.size();
         log.log(Level.FINE, "Planning regen of regions: " + regions);
     }
 
@@ -48,7 +45,7 @@ public class WorldEditRegen extends IncrementalRunnable {
                 while (pt.getBlockZ() < max.getBlockZ()) {
                     int dz = Math.min(INCREMENT, Math.abs(max.getBlockZ()-pt.getBlockZ()));
                     pt = pt.add(0, 0, dz);
-                    list.add(new CuboidRegion(min, pt));
+                    list.add(new CuboidRegion(region.getWorld(), min, pt));
                     min = min.setZ(pt.getZ());
                 }
             } else {
@@ -60,7 +57,7 @@ public class WorldEditRegen extends IncrementalRunnable {
                 while (pt.getBlockX() < max.getBlockX()) {
                     int dx = Math.min(INCREMENT, Math.abs(max.getBlockX()-pt.getBlockX()));
                     pt = pt.add(dx, 0, 0);
-                    list.add(new CuboidRegion(min, pt));
+                    list.add(new CuboidRegion(region.getWorld(), min, pt));
                     min = min.setX(pt.getX());
                 }
             }
@@ -72,17 +69,16 @@ public class WorldEditRegen extends IncrementalRunnable {
     protected boolean execute() {
         while (!regions.isEmpty()) {
             final Region region = regions.remove(0);
-            final BukkitWorld bukkitWorld = new BukkitWorld(world);
-            final EditSession editSession = WorldEditHandler.createEditSession(bukkitWorld, region.getArea() * 255);
-            editSession.enableQueue();
-            editSession.setFastMode(true);
-            bukkitWorld.regenerate(region, editSession);
-            editSession.flushQueue();
-            //editSession.commit();
+            AsyncWorldEditHandler.regenerate(region, new Runnable() {
+                @Override
+                public void run() {
+                    tasksCompleted++;
+                }
+            });
             if (!tick()) {
                 break;
             }
         }
-        return regions.isEmpty();
+        return regions.isEmpty() && tasksCompleted >= tasksToComplete;
     }
 }
