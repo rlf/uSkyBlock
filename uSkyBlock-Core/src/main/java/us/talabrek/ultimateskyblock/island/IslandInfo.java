@@ -114,6 +114,8 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("blocks.leafBreaks", 0);
         config.set("version", YML_VERSION);
         config.set("party", null);
+        config.set("general.scoreMultiply", null);
+        config.set("general.scoreOffset", null);
         setupPartyLeader(leader);
         sendMessageToIslandGroup(false, marktr("The island has been created."));
     }
@@ -380,7 +382,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         return name;
     }
 
-    public void setWarpActive(boolean active) {
+    public void setWarp(boolean active) {
         config.set("general.warpActive", active);
         save();
     }
@@ -764,4 +766,23 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         dirty = true;
     }
 
+    @Override
+    public double getScoreMultiplier() {
+        return config.getDouble("general.scoreMultiply", 1d);
+    }
+
+    public void setScoreMultiplier(Double d) {
+        config.set("general.scoreMultiply", d);
+        save();
+    }
+
+    @Override
+    public double getScoreOffset() {
+        return config.getDouble("general.scoreOffset", 0d);
+    }
+
+    public void setScoreOffset(Double d) {
+        config.set("general.scoreOffset", d);
+        save();
+    }
 }

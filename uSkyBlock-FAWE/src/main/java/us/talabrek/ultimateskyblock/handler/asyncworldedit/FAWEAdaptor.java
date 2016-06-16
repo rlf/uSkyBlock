@@ -16,6 +16,9 @@ import us.talabrek.ultimateskyblock.player.PlayerPerk;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,20 +30,26 @@ public class FAWEAdaptor implements AWEAdaptor {
     private Plugin plugin;
     private int progressEveryMs;
     private double progressEveryPct;
+    private final Map<UUID, PlayerProgressTracker> activeSessions = new ConcurrentHashMap<>();
 
     @Override
     public void onEnable(Plugin plugin) {
         this.plugin = plugin;
         progressEveryMs = plugin.getConfig().getInt("asyncworldedit.progressEveryMs", 3000);
         progressEveryPct = plugin.getConfig().getDouble("asyncworldedit.progressEveryPct", 20);
+        log.finer("- FAWE debugging: Location of WorldEdit EditSession: " + EditSession.class.getResource('/' + EditSession.class.getName().replace('.', '/') + ".class"));
     }
 
     @Override
     public void onDisable(Plugin plugin) {
+        this.plugin = null;
     }
 
     @Override
-    public void registerCompletion(Player player) {
+    public synchronized void registerCompletion(Player player) {
+        if (player != null) {
+            activeSessions.remove(player.getUniqueId());
+        }
     }
 
     @Override
@@ -51,18 +60,41 @@ public class FAWEAdaptor implements AWEAdaptor {
                 boolean noAir = false;
                 boolean entities = true;
                 Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
-                EditSession editSession = createEditSession(BukkitUtil.getLocalWorld(origin.getWorld()), -1);
+                EditSession editSession = getEditSession(playerPerk, origin);
                 try {
                     SchematicFormat.getFormat(file)
                             .load(file)
                             .paste(editSession, to, noAir, entities);
-                    editSession.getQueue().setProgressTracker(new FAWEProgressTracker(playerPerk, progressEveryMs, progressEveryPct));
                     editSession.flushQueue();
                 } catch (MaxChangedBlocksException | IOException | DataException e) {
                     log.log(Level.INFO, "Unable to paste schematic " + file, e);
                 }
             }
         });
+    }
+
+    private synchronized EditSession getEditSession(PlayerPerk playerPerk, Location origin) {
+        EditSession editSession = createEditSession(BukkitUtil.getLocalWorld(origin.getWorld()), -1);
+        attachProgressTracker(editSession, playerPerk);
+        return editSession;
+    }
+
+    private void attachProgressTracker(EditSession editSession, PlayerPerk playerPerk) {
+        try {
+            PlayerProgressTracker parentTracker = getPlayerTracker(playerPerk);
+            editSession.getQueue().setProgressTracker(new FAWEProgressTracker(parentTracker));
+        } catch (Throwable e) {
+            log.finest("Warning: Incompatible version of FAWE, no progress-tracking (" + e + ")");
+            activeSessions.remove(playerPerk.getPlayerInfo().getUniqueId());
+        }
+    }
+
+    private synchronized PlayerProgressTracker getPlayerTracker(PlayerPerk playerPerk) {
+        if (!activeSessions.containsKey(playerPerk.getPlayerInfo().getUniqueId())) {
+            PlayerProgressTracker tracker = new PlayerProgressTracker(this, playerPerk, progressEveryMs, progressEveryPct);
+            activeSessions.put(playerPerk.getPlayerInfo().getUniqueId(), tracker);
+        }
+        return activeSessions.get(playerPerk.getPlayerInfo().getUniqueId());
     }
 
     public EditSession createEditSession(World bukkitWorld, int maxBlocks) {

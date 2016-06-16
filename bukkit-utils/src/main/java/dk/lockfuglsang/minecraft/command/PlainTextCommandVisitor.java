@@ -23,11 +23,11 @@ public class PlainTextCommandVisitor implements CommandVisitor {
                 if (row.getCommand().length() > colWidths[0]) {
                     colWidths[0] = row.getCommand().length();
                 }
-                if (row.getDescription().length() > colWidths[1]) {
-                    colWidths[1] = row.getDescription().length();
+                if (row.getPermission().length() > colWidths[1]) {
+                    colWidths[1] = row.getPermission().length();
                 }
-                if (row.getPermission().length() > colWidths[2]) {
-                    colWidths[2] = row.getPermission().length();
+                if (row.getDescription().length() > colWidths[2]) {
+                    colWidths[2] = row.getDescription().length();
                 }
             }
         }
@@ -42,12 +42,12 @@ public class PlainTextCommandVisitor implements CommandVisitor {
             rowFormat += "%-" + colWidths[i] + "s";
             separator += String.format("%" + colWidths[i] + "s", "").replaceAll(" ", "-");
         }
-        out.println(String.format(rowFormat, tr("Command"), tr("Description"), tr("Permission")));
+        out.println(String.format(rowFormat, tr("Command"), tr("Permission"), tr("Description")));
         for (Row row : rows) {
             if (row == null) {
                 out.println(separator);
             } else {
-                out.println(String.format(rowFormat, "/" + row.getCommand(), row.getDescription(), row.getPermission()));
+                out.println(String.format(rowFormat, "/" + row.getCommand(), row.getPermission(), row.getDescription()));
             }
         }
     }

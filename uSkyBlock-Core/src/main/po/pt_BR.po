@@ -503,6 +503,21 @@ msgstr "§eGerando a lista top dez"
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eA lista top dez foi gerada"
 
+msgid "advanced command for getting island-data"
+msgstr ""
+
+#, java-format
+msgid "§eCurrent value for {0} is ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to get state for {0}"
+msgstr ""
+
+#, java-format
+msgid "§eValid fields are {0}"
+msgstr ""
+
 msgid "teleport to another players island"
 msgstr "teletransportar para a ilha de outros jogadores"
 
@@ -642,6 +657,25 @@ msgstr "recarregar configuração do arquivo."
 
 msgid "§eConfiguration reloaded from file."
 msgstr "§eConfigurações  recarregadas."
+
+msgid "advanced command for setting island-data"
+msgstr ""
+
+#, java-format
+msgid "§c{0} was set to ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid field {0}"
+msgstr ""
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"

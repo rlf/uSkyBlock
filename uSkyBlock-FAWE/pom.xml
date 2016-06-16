@@ -11,10 +11,16 @@
 
     <artifactId>uSkyBlock-FAWE</artifactId>
 
+    <repositories>
+        <repository>
+            <id>empcraft</id>
+            <url>http://empcraft.com/maven2</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>com.boydti.fawe</groupId>
-            <artifactId>FastAsyncWorldEdit-API</artifactId>
+            <artifactId>fawe</artifactId>
             <version>3.5.0</version>
         </dependency>
         <dependency>

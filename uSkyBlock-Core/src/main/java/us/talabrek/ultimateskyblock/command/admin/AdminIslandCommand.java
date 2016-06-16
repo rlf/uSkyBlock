@@ -5,6 +5,7 @@ import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
@@ -180,6 +181,8 @@ public class AdminIslandCommand extends CompositeCommand {
                 }
             }
         });
+        add(new SetIslandDataCommand(plugin));
+        add(new GetIslandDataCommand());
     }
 
     private void removePlayerFromIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {

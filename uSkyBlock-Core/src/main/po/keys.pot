@@ -493,6 +493,21 @@ msgstr ""
 msgid "§eFinished generation of the Top Ten list"
 msgstr ""
 
+msgid "advanced command for getting island-data"
+msgstr ""
+
+#, java-format
+msgid "§eCurrent value for {0} is ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to get state for {0}"
+msgstr ""
+
+#, java-format
+msgid "§eValid fields are {0}"
+msgstr ""
+
 msgid "teleport to another players island"
 msgstr ""
 
@@ -627,6 +642,25 @@ msgid "reload configuration from file."
 msgstr ""
 
 msgid "§eConfiguration reloaded from file."
+msgstr ""
+
+msgid "advanced command for setting island-data"
+msgstr ""
+
+#, java-format
+msgid "§c{0} was set to ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid field {0}"
 msgstr ""
 
 #, java-format
