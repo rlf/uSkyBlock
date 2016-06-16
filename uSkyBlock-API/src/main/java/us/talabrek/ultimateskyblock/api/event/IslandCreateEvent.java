@@ -10,18 +10,21 @@ public class IslandCreateEvent extends uSkyBlockEvent {
    
     private static final HandlerList handlers = new HandlerList(); 
  
-     private final IslandInfo island; 
+    private final IslandInfo island; 
  
-     public IslandCreateEvent(Player player, uSkyBlockAPI api, IslandInfo island) { 
-         super(player, api, Cause.OTHER); 
-         this.island = island; 
-     } 
+    public IslandCreateEvent(Player player, uSkyBlockAPI api, IslandInfo island) { 
+        super(player, api, Cause.OTHER); 
+        this.island = island; 
+    } 
+    
+   	public IslandInfo getIsland() {
+   		return island;
+   	}
 
-     @Override 
+    @Override 
     public HandlerList getHandlers() { 
         return handlers; 
     } 
-
  
      /** 
       * Returns the handlers listening to this event. 
