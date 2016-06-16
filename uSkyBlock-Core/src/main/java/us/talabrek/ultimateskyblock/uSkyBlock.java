@@ -51,6 +51,7 @@ import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
 import us.talabrek.ultimateskyblock.event.ToolMenuEvents;
 import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
+import us.talabrek.ultimateskyblock.event.uSkyBlockEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
@@ -299,6 +300,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public void registerEvents() {
         final PluginManager manager = getServer().getPluginManager();
+        manager.registerEvents(new uSkyBlockEvents(this), this);
         manager.registerEvents(new PlayerNameChangeListener(this), this);
         manager.registerEvents(playerNameChangeManager, this);
         manager.registerEvents(new PlayerEvents(this), this);
@@ -847,7 +849,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         callback.run();
     }
 
-    public void createIsland(final Player player, final PlayerInfo pi, String cSchem) {
+    public void createIsland(final Player player, String cSchem) {
+        PlayerInfo pi = getPlayerInfo(player);
+        if (pi.isIslandGenerating()) {
+            player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot create now."));
+            return;
+        }
         if (!perkLogic.getSchemes(player).contains(cSchem)) {
             player.sendMessage(tr("\u00a7eYou do not have access to that island-schematic!"));
             return;

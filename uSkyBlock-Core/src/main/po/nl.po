@@ -763,6 +763,10 @@ msgstr ""
 "§4WAARSCHUWING: Je zult je eiland verliezen als je de uitnodiging accepteerd!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d uitgenodigd {1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e heeft de uitnodiging geweigerd."
 
@@ -784,18 +788,18 @@ msgstr "§eDe uitnodiging van {0}§e is verlopen of geannuleerd."
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§eDe uitnodiging van {0}'s eiland  is verlopen of geannuleerd."
 
-msgid "accept/reject an invitation."
-msgstr "accepteren/weiger een uitnodiging."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eJe hebt de uitnodoging geannuleerd."
+msgid "§eYou have accepted the invitation to join an island."
+msgstr ""
+"§eJe hebt een uitnodiging geaccepteerd om lid te worden van een eiland."
 
 msgid "§4You haven't been invited."
 msgstr "§4Je bent niet uitgenodigd."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr ""
-"§eJe hebt een uitnodiging geaccepteerd om lid te worden van een eiland."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§eJe hebt de uitnodoging geannuleerd."
+
+msgid "accept/reject an invitation."
+msgstr "accepteren/weiger een uitnodiging."
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban een speler van uw eiland."
@@ -873,9 +877,6 @@ msgstr "§cJe hebt geen toestemming om de biome te veranderen van dit eiland!"
 
 msgid "create an island"
 msgstr "Creeer een eiland"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cJe eiland is in het proces van het genereren, kan je nu niets maken."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -964,10 +965,6 @@ msgstr "§4Je kan jezelf niet uitnodigen!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4Die speler is de leider van je eiland!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d uitgenodigd {1}"
 
 msgid "remove a member from your island."
 msgstr "verwijder een speler van je eiland."
@@ -2370,6 +2367,9 @@ msgid ""
 "patient."
 msgstr ""
 "§7De elfjes zijn bezig je eiland biome te veranderen  §9{0}§7, heb gedult."
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr "§cJe eiland is in het proces van het genereren, kan je nu niets maken."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kan je eiland niet creeren. Kontakt een server moderator"

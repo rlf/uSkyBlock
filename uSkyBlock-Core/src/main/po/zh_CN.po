@@ -741,6 +741,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4警告: 你当前的岛屿将会被清空,如果你接受请求的话。"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d邀请了{1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e拒绝了邀请"
 
@@ -759,17 +763,17 @@ msgstr "§e来自{0}§e的邀请已经过时或被取消。"
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§e来自{0}§e岛屿的邀请已经过时或被取消。"
 
-msgid "accept/reject an invitation."
-msgstr ""
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§e你拒接了加入岛屿的邀请"
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§e你接受了加入岛屿的邀请."
 
 msgid "§4You haven't been invited."
 msgstr "§4你没有被任何人邀请."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§e你接受了加入岛屿的邀请."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§e你拒接了加入岛屿的邀请"
+
+msgid "accept/reject an invitation."
+msgstr ""
 
 msgid "ban/unban a player from your island."
 msgstr ""
@@ -843,9 +847,6 @@ msgid "§cYou do not have permission to change your biome to that type."
 msgstr ""
 
 msgid "create an island"
-msgstr ""
-
-msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
 
 msgid ""
@@ -931,10 +932,6 @@ msgstr "§4你无法邀请你自己!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4玩家是你当前所处岛屿的主人!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d邀请了{1}"
 
 msgid "remove a member from your island."
 msgstr ""
@@ -2152,6 +2149,9 @@ msgstr ""
 msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
+msgstr ""
+
+msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
 
 msgid "Could not create your Island. Please contact a server moderator."

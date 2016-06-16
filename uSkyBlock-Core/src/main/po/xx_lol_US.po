@@ -750,6 +750,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4WARNING: You will lose yoor current cathouz if you accept!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d invited {1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e haz rejected teh invitashun."
 
@@ -770,17 +774,17 @@ msgstr "§eInvitashun for {0}§e haz timedout or been cancelled."
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§eInvitashun for {0}''s cathouz haz timedout or been cancelled."
 
-msgid "accept/reject an invitation."
-msgstr "accept/reject an invitashun."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eYou have rejected teh invitashun to join a cathouz."
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§eYou have accepted teh invitashun to join a cathouz."
 
 msgid "§4You haven't been invited."
 msgstr "§4You haven't been invited."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eYou have accepted teh invitashun to join a cathouz."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§eYou have rejected teh invitashun to join a cathouz."
+
+msgid "accept/reject an invitation."
+msgstr "accept/reject an invitashun."
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a kitteh from yoor cathouz."
@@ -856,10 +860,6 @@ msgstr "§cYou do not have permission to change yoor baium to that type."
 
 msgid "create an island"
 msgstr "create a cathouz"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr ""
-"§cYoor cathouz  iz in teh process of generating, you cannot create now."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -947,10 +947,6 @@ msgstr "§4You can't invite yourself!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4That kitteh  iz teh top cat of yoor cathouz!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d invited {1}"
 
 msgid "remove a member from your island."
 msgstr "remove a cats from yoor cathouz."
@@ -2334,6 +2330,10 @@ msgid ""
 msgstr ""
 "§7Teh pixies be busy changing teh baium of yoor cathouz to §9{0}§7, be "
 "patient."
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr ""
+"§cYoor cathouz  iz in teh process of generating, you cannot create now."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Could not create yoor Island. Please contact a server moderator."

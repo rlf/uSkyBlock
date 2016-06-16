@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.event.CreateIslandEvent;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -23,11 +24,8 @@ public class CreateCommand extends RequirePlayerCommand {
         PlayerInfo pi = plugin.getPlayerInfo(player);
         int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
         if (LocationUtil.isEmptyLocation(pi.getIslandLocation()) && cooldown == 0) {
-            if (pi.isIslandGenerating()) {
-                player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot create now."));
-                return true;
-            }
-            plugin.createIsland(player, pi, args != null && args.length > 0 ? args[0] : Settings.island_schematicName);
+            String cSchem = args != null && args.length > 0 ? args[0] : Settings.island_schematicName;
+            plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem));
         } else if (pi.getHasIsland()) {
             us.talabrek.ultimateskyblock.api.IslandInfo island = plugin.getIslandInfo(pi);
             if (island.isLeader(player)) {

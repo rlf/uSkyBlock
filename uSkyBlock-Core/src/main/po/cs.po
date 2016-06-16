@@ -740,6 +740,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4Varování: Při potvrzení pozvánky se vám smaže ostrov!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr ""
 
@@ -758,16 +762,16 @@ msgstr ""
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr ""
 
-msgid "accept/reject an invitation."
-msgstr ""
-
-msgid "§eYou have rejected the invitation to join an island."
+msgid "§eYou have accepted the invitation to join an island."
 msgstr ""
 
 msgid "§4You haven't been invited."
 msgstr ""
 
-msgid "§eYou have accepted the invitation to join an island."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr ""
+
+msgid "accept/reject an invitation."
 msgstr ""
 
 msgid "ban/unban a player from your island."
@@ -842,9 +846,6 @@ msgid "§cYou do not have permission to change your biome to that type."
 msgstr ""
 
 msgid "create an island"
-msgstr ""
-
-msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
 
 msgid ""
@@ -925,10 +926,6 @@ msgid "§4You can't invite yourself!"
 msgstr ""
 
 msgid "§4That player is the leader of your island!"
-msgstr ""
-
-#, java-format
-msgid "{0}§d invited {1}"
 msgstr ""
 
 msgid "remove a member from your island."
@@ -2118,6 +2115,9 @@ msgstr "§4Vaše aktuální lokace není vhodná pro založení SkyBlock domova.
 msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
+msgstr ""
+
+msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
 
 msgid "Could not create your Island. Please contact a server moderator."

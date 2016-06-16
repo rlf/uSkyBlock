@@ -755,6 +755,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4ADVARSEL: Du vil miste din nuværende ø hvis du accepterer!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d inviterede {1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e har afvist invitationen."
 
@@ -776,17 +780,17 @@ msgstr "§eInvitationen til {0}§e er udløbet og er blevet annulleret."
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§eInvitationen til {0}'s ø er udløbet og er blevet annulleret."
 
-msgid "accept/reject an invitation."
-msgstr "afvis eller accepter invitationen."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eDu har afvist invitationen til en ø"
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§eDu har accepteret en invitation til at blive medlem af en ø."
 
 msgid "§4You haven't been invited."
 msgstr "§4Du er ikke blevet inviteret."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eDu har accepteret en invitation til at blive medlem af en ø."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§eDu har afvist invitationen til en ø"
+
+msgid "accept/reject an invitation."
+msgstr "afvis eller accepter invitationen."
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban en spiller fra din ø."
@@ -861,10 +865,6 @@ msgstr "§4Du har ikke tilladelse til at ændre til den biome!"
 
 msgid "create an island"
 msgstr "opret en ø"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr ""
-"§cDin ø er ved at blive re-genereret, det er ikke muligt at oprette nu."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -951,10 +951,6 @@ msgstr "§4Du kan ikke invitere dig selv!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4Den spiller er leder på din ø!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d inviterede {1}"
 
 msgid "remove a member from your island."
 msgstr "fjern et medlem fra din ø."
@@ -2325,6 +2321,10 @@ msgid ""
 msgstr ""
 "§7Feerne har travlt med at ændre biomen for din ø til §9{0}§7, vær venligst "
 "tålmodig."
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr ""
+"§cDin ø er ved at blive re-genereret, det er ikke muligt at oprette nu."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kunne ikke oprette din ø. Venligst kontakt en server administrator."

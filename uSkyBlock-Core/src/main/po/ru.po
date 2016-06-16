@@ -755,6 +755,10 @@ msgstr ""
 "присоединиться!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d приглашен игроком {1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e отклонил предложение."
 
@@ -777,17 +781,17 @@ msgstr "§eПриглашение для {0}§e было просрочено и
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§eПриглашение на остров игрока {0} было просрочено или отменено."
 
-msgid "accept/reject an invitation."
-msgstr "принять/отклонить приглашение."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eВы отклонили предложение о присоединении к острову"
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§eВы приняли приглашения о присоединении к острову."
 
 msgid "§4You haven't been invited."
 msgstr "§4Вы не были приглашены."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eВы приняли приглашения о присоединении к острову."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§eВы отклонили предложение о присоединении к острову"
+
+msgid "accept/reject an invitation."
+msgstr "принять/отклонить приглашение."
 
 msgid "ban/unban a player from your island."
 msgstr "блокировать/разблокировать игрока на вашем острове."
@@ -864,9 +868,6 @@ msgstr "§cУ вас недостаточно прав для изменения
 
 msgid "create an island"
 msgstr "создание острова"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cВаш остров в процессе создания. Вы не можете создать сейчас."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -955,10 +956,6 @@ msgstr "§4Вы не можете пригласить себя!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4Этот игрок - лидер вашего острова!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d приглашен игроком {1}"
 
 msgid "remove a member from your island."
 msgstr "удаление участников острова."
@@ -2315,6 +2312,9 @@ msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr "§cВаш остров в процессе создания. Вы не можете создать сейчас."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Невозможно создать остров. Свяжитесь с администратором сервера."

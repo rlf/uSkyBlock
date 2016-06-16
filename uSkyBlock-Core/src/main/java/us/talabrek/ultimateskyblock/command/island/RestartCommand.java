@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.command.island;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.event.RestartIslandEvent;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -40,7 +41,8 @@ public class RestartCommand extends RequireIslandCommand {
             if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
                 plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
                 String cSchem = args != null && args.length > 0 ? args[0] : island.getSchematicName();
-                return plugin.restartPlayerIsland(player, pi.getIslandLocation(), cSchem);
+                plugin.getServer().getPluginManager().callEvent(new RestartIslandEvent(player, pi.getIslandLocation(), cSchem));
+                return true;
             } else {
                 player.sendMessage(I18nUtil.tr("\u00a7eNOTE: Your entire island and all your belongings will be RESET!"));
                 return true;

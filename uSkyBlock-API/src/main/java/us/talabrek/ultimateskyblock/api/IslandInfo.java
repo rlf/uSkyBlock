@@ -171,4 +171,5 @@ public interface IslandInfo {
      * @since v2.6.13
      */
     double getScoreOffset();
+
 }

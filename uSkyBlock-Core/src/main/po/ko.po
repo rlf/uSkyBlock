@@ -757,6 +757,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4경고: 승낙하면 당신은 현재 섬을 잃게 됩니다 !"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d가 {1}를 초대했습니다"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e가 초대를 거절하였습니다."
 
@@ -778,17 +782,17 @@ msgstr "§e{0}§e에게 한 초대가 시간초과 되었거나 취소되었습�
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§e{0}의 섬으로의 초대가 시간초과 되었거나 취소되었습니다 ."
 
-msgid "accept/reject an invitation."
-msgstr "초대에 accept/reject 하세요."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§e당신은 섬에 참여하라는 초대를 거절하였습니다."
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§e당신은 섬에 참여하는 초대를 승낙했습니다."
 
 msgid "§4You haven't been invited."
 msgstr "§4초대받은 것이 없습니다."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§e당신은 섬에 참여하는 초대를 승낙했습니다."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§e당신은 섬에 참여하라는 초대를 거절하였습니다."
+
+msgid "accept/reject an invitation."
+msgstr "초대에 accept/reject 하세요."
 
 msgid "ban/unban a player from your island."
 msgstr "당신의 섬에서 플레이어를 차단/차단 취소 하세요."
@@ -864,9 +868,6 @@ msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다
 
 msgid "create an island"
 msgstr "섬을 만듭니다"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§c당신의 섬은 생성과정 중에 있습니다, 당신은 지금 만들 수 없습니다."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -955,10 +956,6 @@ msgstr "§4자신을 초대할 수 없습니다!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4그 플레이어가 당신 섬의 리더입니다!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d가 {1}를 초대했습니다"
 
 msgid "remove a member from your island."
 msgstr "당신의 섬에서 멤버를 제거합니다."
@@ -2334,6 +2331,9 @@ msgid ""
 msgstr ""
 "§7작은요정들이 당신 섬의 생태계를 §9{0}§7로 바꾸고 있어 바쁩니다, 조금만 기다"
 "려주세요."
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr "§c당신의 섬은 생성과정 중에 있습니다, 당신은 지금 만들 수 없습니다."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."

@@ -764,6 +764,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4WARNUNG: Du verlierst deine Insel wenn du bestätigst!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d Eingeladen {1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e Hat deine Einladung abgelehnt."
 
@@ -787,17 +791,17 @@ msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr ""
 "§eDie Einladung für {0}'s Insel wurde abgebrochen oder ist ausgelaufen."
 
-msgid "accept/reject an invitation."
-msgstr "An/-ablehnen einer Einladung."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eDu hast die Einladung einer Insel beizutreten abgelehnt."
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§eDu hast die Inseleinladung angenommen."
 
 msgid "§4You haven't been invited."
 msgstr "§4Du wurdest nicht eingeladen."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eDu hast die Inseleinladung angenommen."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§eDu hast die Einladung einer Insel beizutreten abgelehnt."
+
+msgid "accept/reject an invitation."
+msgstr "An/-ablehnen einer Einladung."
 
 msgid "ban/unban a player from your island."
 msgstr "Banne/Entbanne Spieler von deiner Insel."
@@ -879,9 +883,6 @@ msgstr "§cDu kannst Dein InselBiom nicht zu diesem Biom ändern."
 
 msgid "create an island"
 msgstr "Erstelle eine Insel"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cDeine Insel wird gerade generiert. Du kannst keine neue erstellen"
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -970,10 +971,6 @@ msgstr "§4Du kannst dich nicht selber einladen!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4Dieser Spieler ist der Anfüher auf deiner Insel!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d Eingeladen {1}"
 
 msgid "remove a member from your island."
 msgstr "Entferne einen Spieler von deiner Insel."
@@ -2355,6 +2352,9 @@ msgid ""
 "patient."
 msgstr ""
 "§7Das Biom deiner Insel wird zu §9{0}§7 geändert, habe ein wenig Geduld."
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr "§cDeine Insel wird gerade generiert. Du kannst keine neue erstellen"
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr ""

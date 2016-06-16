@@ -756,6 +756,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4* WARNING§7: You will lose your current island if you accept!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "§6{0}§a invited §6{1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "§9* §6{0} §7has §4rejected §7the invitation."
 
@@ -777,17 +781,17 @@ msgstr "§7Invitation for §6{0} §7has timed out or been cancelled."
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§9* §7Invitation for §6{0}'s §7island has timed out or been cancelled."
 
-msgid "accept/reject an invitation."
-msgstr "accept/reject an invitation."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§9* §7You have §4rejected §7the invitation to join an island."
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§9* §7You have §aaccepted §7the invitation to join an island."
 
 msgid "§4You haven't been invited."
 msgstr "§9* §7You haven't been invited."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§9* §7You have §aaccepted §7the invitation to join an island."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§9* §7You have §4rejected §7the invitation to join an island."
+
+msgid "accept/reject an invitation."
+msgstr "accept/reject an invitation."
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a player from your island."
@@ -865,10 +869,6 @@ msgstr "§4* §7You do not have permission to change your biome to that type."
 
 msgid "create an island"
 msgstr "create an island"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr ""
-"§4* §7Your island is in the process of generating, you cannot create now."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -956,10 +956,6 @@ msgstr "§4* §7You can't invite yourself!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4* §7That player is the leader of your island!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "§6{0}§a invited §6{1}"
 
 msgid "remove a member from your island."
 msgstr "remove a member from your island."
@@ -2354,6 +2350,10 @@ msgid ""
 msgstr ""
 "§a* §7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr ""
+"§4* §7Your island is in the process of generating, you cannot create now."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "§4* §7Could not create your Island. Please contact a server moderator."

@@ -757,6 +757,10 @@ msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§cVARNING: Du kommer att förlora din nuvarande ö om du tackar ja!"
 
 #, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d bjöd in {1}"
+
+#, java-format
 msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e har tackat nej till din inbjudan."
 
@@ -778,17 +782,17 @@ msgstr "§eInbjudan för {0}§e har gjort timeout eller blivit avbruten."
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§eInbjudan för {0}s ö har gjort timeout eller blivit avbruten."
 
-msgid "accept/reject an invitation."
-msgstr "tacka ja eller nej till en inbjudan."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§eDu har tackat nej till en inbjudan att gå med i en ö."
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§eDu har tackat ja till en inbjudan att gå med i en ö."
 
 msgid "§4You haven't been invited."
 msgstr "§4Du har inte blivit inbjuden."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§eDu har tackat ja till en inbjudan att gå med i en ö."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§eDu har tackat nej till en inbjudan att gå med i en ö."
+
+msgid "accept/reject an invitation."
+msgstr "tacka ja eller nej till en inbjudan."
 
 msgid "ban/unban a player from your island."
 msgstr "banna eller unbanna en spelare från din ö."
@@ -863,9 +867,6 @@ msgstr "§cDu saknar rättighet att byta öns biome till den typen."
 
 msgid "create an island"
 msgstr "skapa en ö"
-
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cDin ö håller på att genereras, du kan inte skapa en just nu."
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -951,10 +952,6 @@ msgstr "§cDu kan inte bjuda in dig själv!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§cDen spelaren är öns ledare!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d bjöd in {1}"
 
 msgid "remove a member from your island."
 msgstr "ta bort en spelare från ön."
@@ -2316,6 +2313,9 @@ msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
+
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr "§cDin ö håller på att genereras, du kan inte skapa en just nu."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Kan inte skapa din ö. Vänligen kontakta en administratör."
