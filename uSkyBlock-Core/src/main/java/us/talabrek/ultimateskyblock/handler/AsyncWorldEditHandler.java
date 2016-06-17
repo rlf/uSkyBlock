@@ -140,12 +140,15 @@ public enum AsyncWorldEditHandler {;
             Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), new Runnable() {
                 @Override
                 public void run() {
-                    final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
-                    editSession.enableQueue();
-                    editSession.setFastMode(true);
-                    region.getWorld().regenerate(region, editSession);
-                    editSession.flushQueue();
-                    onCompletion.run();
+                    try {
+                        final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
+                        editSession.enableQueue();
+                        editSession.setFastMode(true);
+                        region.getWorld().regenerate(region, editSession);
+                        editSession.flushQueue();
+                    } finally {
+                        onCompletion.run();
+                    }
                 }
             });
         }

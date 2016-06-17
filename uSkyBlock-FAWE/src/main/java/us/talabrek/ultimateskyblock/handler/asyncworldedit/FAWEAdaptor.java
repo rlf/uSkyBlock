@@ -109,10 +109,13 @@ public class FAWEAdaptor implements AWEAdaptor {
         Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
             @Override
             public void run() {
-                EditSession editSession = createEditSession(region.getWorld(), -1);
-                region.getWorld().regenerate(region, editSession);
-                editSession.flushQueue();
-                onCompletion.run();
+                try {
+                    EditSession editSession = createEditSession(region.getWorld(), -1);
+                    editSession.getWorld().regenerate(region, editSession);
+                    editSession.flushQueue();
+                } finally {
+                    onCompletion.run();
+                }
             }
         });
     }

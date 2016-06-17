@@ -36,14 +36,14 @@ public class WorldEditRegen extends IncrementalRunnable {
     private List<Region> createRegions(Set<Region> borderRegions) {
         List<Region> list = new ArrayList<>();
         for (Region region : borderRegions) {
-            if (region.getLength() > region.getWidth())  {
+            if (region.getLength() > region.getWidth()) {
                 // Z-axis
                 Vector min = region.getMinimumPoint();
                 Vector max = region.getMaximumPoint();
                 Vector pt = new Vector(max);
                 pt = pt.setZ(min.getBlockZ());
                 while (pt.getBlockZ() < max.getBlockZ()) {
-                    int dz = Math.min(INCREMENT, Math.abs(max.getBlockZ()-pt.getBlockZ()));
+                    int dz = Math.min(INCREMENT, Math.abs(max.getBlockZ() - pt.getBlockZ()));
                     pt = pt.add(0, 0, dz);
                     list.add(new CuboidRegion(region.getWorld(), min, pt));
                     min = min.setZ(pt.getZ());
@@ -55,7 +55,7 @@ public class WorldEditRegen extends IncrementalRunnable {
                 Vector pt = new Vector(max);
                 pt = pt.setX(min.getBlockX());
                 while (pt.getBlockX() < max.getBlockX()) {
-                    int dx = Math.min(INCREMENT, Math.abs(max.getBlockX()-pt.getBlockX()));
+                    int dx = Math.min(INCREMENT, Math.abs(max.getBlockX() - pt.getBlockX()));
                     pt = pt.add(dx, 0, 0);
                     list.add(new CuboidRegion(region.getWorld(), min, pt));
                     min = min.setX(pt.getX());
@@ -72,13 +72,17 @@ public class WorldEditRegen extends IncrementalRunnable {
             AsyncWorldEditHandler.regenerate(region, new Runnable() {
                 @Override
                 public void run() {
-                    tasksCompleted++;
+                    synchronized (WorldEditRegen.this) {
+                        tasksCompleted++;
+                        log.finer(Thread.currentThread().getName() + ": Completed " + tasksCompleted + " of " + tasksToComplete);
+                    }
                 }
             });
             if (!tick()) {
                 break;
             }
         }
+        // TODO: 17/06/2016 - R4zorax: Additional bail-out needed
         return regions.isEmpty() && tasksCompleted >= tasksToComplete;
     }
 }
