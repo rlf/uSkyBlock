@@ -162,7 +162,6 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
         }
         try {
             if (!execute() && !isCancelled) {
-                // TODO: 28/09/2015 - R4zorax: Don't run back to back ALL the time
                 Bukkit.getScheduler().runTaskLater(plugin, this, consecutiveRuns < maxConsecutive ? 0 : yieldDelay);
             } else {
                 if (onCompletion != null && !isCancelled) {

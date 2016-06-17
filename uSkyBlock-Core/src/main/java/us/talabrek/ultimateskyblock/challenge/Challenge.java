@@ -178,7 +178,7 @@ public class Challenge {
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = new ArrayList<>();
         lores.addAll(prefix(wordWrap(getDescription(), 30, 30), "\u00a77"));
-        int timesCompleted = completion.getTimesCompletedSinceTimer();
+        int timesCompleted = completion.getTimesCompletedInCooldown();
         Reward reward = getReward();
         if (completion.getTimesCompleted() > 0 && isRepeatable()) {
             if (completion.isOnCooldown()) {

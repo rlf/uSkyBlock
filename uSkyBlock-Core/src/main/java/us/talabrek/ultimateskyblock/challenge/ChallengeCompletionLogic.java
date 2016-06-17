@@ -70,9 +70,9 @@ public class ChallengeCompletionLogic {
             String challengeName = entry.getKey();
             ChallengeCompletion completion = entry.getValue();
             ConfigurationSection section = configuration.createSection(challengeName);
-            section.set("firstCompleted", completion.getFirstCompleted());
+            section.set("firstCompleted", completion.getCooldownUntil());
             section.set("timesCompleted", completion.getTimesCompleted());
-            section.set("timesCompletedSinceTimer", completion.getTimesCompletedSinceTimer());
+            section.set("timesCompletedSinceTimer", completion.getTimesCompletedInCooldown());
         }
     }
 
@@ -147,7 +147,7 @@ public class ChallengeCompletionLogic {
             ChallengeCompletion completion = challenges.get(challengeName);
             if (!completion.isOnCooldown()) {
                 long now = System.currentTimeMillis();
-                completion.setFirstCompleted(now + uSkyBlock.getInstance().getChallengeLogic().getResetInMillis(challengeName));
+                completion.setCooldownUntil(now + uSkyBlock.getInstance().getChallengeLogic().getResetInMillis(challengeName));
             }
             completion.addTimesCompleted();
         }
@@ -157,7 +157,7 @@ public class ChallengeCompletionLogic {
         Map<String, ChallengeCompletion> challenges = getChallenges(playerInfo);
         if (challenges.containsKey(challenge)) {
             challenges.get(challenge).setTimesCompleted(0);
-            challenges.get(challenge).setFirstCompleted(0L);
+            challenges.get(challenge).setCooldownUntil(0L);
         }
     }
 

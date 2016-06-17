@@ -426,4 +426,9 @@ public class IslandLogic {
         cache.invalidateAll(); // Flush to files
         return size;
     }
+
+    public int getSize() {
+        String[] list = directoryIslands.list();
+        return list != null ? list.length : 0;
+    }
 }

@@ -1239,6 +1239,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         msg += pre("\u00a77Version: \u00a7b{0}\n", description.getVersion());
         msg += pre("\u00a77Description: \u00a7b{0}\n", description.getDescription());
         msg += pre("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getLocale());
+        msg += pre("\u00a79  d={0}, r={1}, i={2}, p={3}, n={4}\n", Settings.island_distance, Settings.island_radius,
+                islandLogic.getSize(), playerLogic.getSize(),
+                Settings.nether_enabled);
         msg += pre("\u00a77------------------------------\n");
         msg += pre("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
         msg += pre("\u00a77------------------------------\n");

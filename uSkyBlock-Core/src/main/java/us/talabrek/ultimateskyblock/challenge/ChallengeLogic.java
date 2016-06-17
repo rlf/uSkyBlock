@@ -291,7 +291,7 @@ public class ChallengeLogic {
         if (challenge != null && completion != null) {
             StringBuilder sb = new StringBuilder();
             boolean hasAll = true;
-            List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedSinceTimer());
+            List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
             for (ItemStack required : requiredItems) {
                 String name = VaultHandler.getItemName(required);
                 if (!player.getInventory().containsAtLeast(required, required.getAmount())) {

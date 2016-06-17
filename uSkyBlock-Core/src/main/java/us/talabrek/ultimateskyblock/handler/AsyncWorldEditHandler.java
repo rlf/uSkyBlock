@@ -2,11 +2,13 @@ package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.handler.asyncworldedit.AWEAdaptor;
 import us.talabrek.ultimateskyblock.handler.task.WEPasteSchematic;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
@@ -15,7 +17,6 @@ import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.io.File;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
@@ -47,6 +48,10 @@ public enum AsyncWorldEditHandler {;
 
     public static void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
         new WEPasteSchematic(file, origin, playerPerk).runTask(uSkyBlock.getInstance());
+    }
+
+    public static void regenerate(Region region, Runnable onCompletion) {
+        getAWEAdaptor().regenerate(region, onCompletion);
     }
 
     public static AWEAdaptor getAWEAdaptor() {
@@ -96,15 +101,15 @@ public enum AsyncWorldEditHandler {;
         return getAWEAdaptor() != NULL_ADAPTOR;
     }
 
-    private static Plugin getFAWE() {
+    public static Plugin getFAWE() {
         return Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit");
     }
 
-    private static Plugin getAWE() {
+    public static Plugin getAWE() {
         return Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
     }
 
-    private static final AWEAdaptor NULL_ADAPTOR = new AWEAdaptor() {
+    public static final AWEAdaptor NULL_ADAPTOR = new AWEAdaptor() {
         @Override
         public void onEnable(Plugin plugin) {
 
@@ -129,5 +134,25 @@ public enum AsyncWorldEditHandler {;
         public EditSession createEditSession(World world, int maxBlocks) {
             return WorldEditHandler.createEditSession(world, maxBlocks);
         }
+
+        @Override
+        public void regenerate(final Region region, final Runnable onCompletion) {
+            Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
+                        editSession.enableQueue();
+                        editSession.setFastMode(true);
+                        region.getWorld().regenerate(region, editSession);
+                        editSession.flushQueue();
+                    } finally {
+                        onCompletion.run();
+                    }
+                }
+            });
+        }
     };
+
+
 }

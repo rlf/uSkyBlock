@@ -6,6 +6,7 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Bukkit;
@@ -13,6 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,5 +101,22 @@ public class FAWEAdaptor implements AWEAdaptor {
 
     public EditSession createEditSession(World bukkitWorld, int maxBlocks) {
         return WorldEdit.getInstance().getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
+    }
+
+    @Override
+    public void regenerate(final Region region, final Runnable onCompletion) {
+        // NOTE: Running this asynchronous MIGHT be a bit dangereous! Since pasting could interfere
+        Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EditSession editSession = createEditSession(region.getWorld(), -1);
+                    editSession.getWorld().regenerate(region, editSession);
+                    editSession.flushQueue();
+                } finally {
+                    onCompletion.run();
+                }
+            }
+        });
     }
 }
