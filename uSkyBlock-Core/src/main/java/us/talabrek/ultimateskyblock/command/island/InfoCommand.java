@@ -33,7 +33,7 @@ public class InfoCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7eYou must be on your island to use this command."));
                 return true;
             }
-            if (!island.isParty() && !pi.getHasIsland()) {
+            if (!island.isParty() && !pi.hasIsland()) {
                 player.sendMessage(tr("\u00a74You do not have an island!"));
             } else {
                 getIslandInfo(player, player.getName(), alias, args.length == 1 ? Integer.parseInt(args[0], 10) : 1);
@@ -52,7 +52,7 @@ public class InfoCommand extends RequireIslandCommand {
 
     public boolean getIslandInfo(final Player player, final String islandPlayer, final String cmd, final int page) {
         PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
-        if (info == null || !info.getHasIsland()) {
+        if (info == null || !info.hasIsland()) {
             player.sendMessage(tr("\u00a74That player is invalid or does not have an island!"));
             return false;
         }

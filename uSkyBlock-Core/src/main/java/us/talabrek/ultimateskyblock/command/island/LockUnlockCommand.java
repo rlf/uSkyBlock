@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -18,7 +17,7 @@ public class LockUnlockCommand extends RequireIslandCommand {
 
     @Override
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
-        if (alias.equalsIgnoreCase("lock") && pi.getHasIsland()) {
+        if (alias.equalsIgnoreCase("lock") && pi.hasIsland()) {
             if (Settings.island_allowIslandLock) {
                 if (island.hasPerm(player, "canToggleLock")) {
                     island.lock(player);
@@ -30,7 +29,7 @@ public class LockUnlockCommand extends RequireIslandCommand {
             }
             return true;
         }
-        if (alias.equalsIgnoreCase("unlock") && pi.getHasIsland()) {
+        if (alias.equalsIgnoreCase("unlock") && pi.hasIsland()) {
             if (Settings.island_allowIslandLock) {
                 if (island.hasPerm(player, "canToggleLock")) {
                     island.unlock(player);
