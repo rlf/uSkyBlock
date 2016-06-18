@@ -649,6 +649,55 @@ msgstr "§4Vous devez fournir un nombre en jour pour nettoyer !"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eTrouver toutes les îles qui sont abandonnés dans les {0} jours."
 
+msgid "region manipulations"
+msgstr ""
+
+msgid "shows the borders of the current island"
+msgstr ""
+
+msgid "§eNo island found at your current location"
+msgstr ""
+
+msgid "§eCan only be executed as a player"
+msgstr ""
+
+msgid "hides the regions again"
+msgstr ""
+
+msgid "§eStopped displaying regions"
+msgstr ""
+
+msgid "§eNo currently shown regions for this player"
+msgstr ""
+
+#, java-format
+msgid "§eParticle changed to {0}."
+msgstr ""
+
+msgid "§eParticle must be a valid Bukkit Particle."
+msgstr ""
+
+#, java-format
+msgid "§eParticle-count changed to {0}."
+msgstr ""
+
+msgid "§eParticle-count must be a valid integer."
+msgstr ""
+
+#, java-format
+msgid "§eAnimation-dash changed to {0}."
+msgstr ""
+
+msgid "§eAnimation-dash must be a valid integer."
+msgstr ""
+
+#, java-format
+msgid "§eAnimation-tick changed to {0}."
+msgstr ""
+
+msgid "§eAnimation-tick must be a valid integer."
+msgstr ""
+
 msgid "set a player's island to your location"
 msgstr "fixer l'île d'un joueur à votre position"
 

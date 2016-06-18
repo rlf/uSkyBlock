@@ -647,6 +647,55 @@ msgstr "§4당신은 청소하기위해 나이를 제공해야 합니다!"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§e{0}일 이상 버려진 모든 섬을 찾는 중 입니다."
 
+msgid "region manipulations"
+msgstr ""
+
+msgid "shows the borders of the current island"
+msgstr ""
+
+msgid "§eNo island found at your current location"
+msgstr ""
+
+msgid "§eCan only be executed as a player"
+msgstr ""
+
+msgid "hides the regions again"
+msgstr ""
+
+msgid "§eStopped displaying regions"
+msgstr ""
+
+msgid "§eNo currently shown regions for this player"
+msgstr ""
+
+#, java-format
+msgid "§eParticle changed to {0}."
+msgstr ""
+
+msgid "§eParticle must be a valid Bukkit Particle."
+msgstr ""
+
+#, java-format
+msgid "§eParticle-count changed to {0}."
+msgstr ""
+
+msgid "§eParticle-count must be a valid integer."
+msgstr ""
+
+#, java-format
+msgid "§eAnimation-dash changed to {0}."
+msgstr ""
+
+msgid "§eAnimation-dash must be a valid integer."
+msgstr ""
+
+#, java-format
+msgid "§eAnimation-tick changed to {0}."
+msgstr ""
+
+msgid "§eAnimation-tick must be a valid integer."
+msgstr ""
+
 msgid "set a player's island to your location"
 msgstr "당신의 위치에 플레이어의 섬을 지정합니다"
 
