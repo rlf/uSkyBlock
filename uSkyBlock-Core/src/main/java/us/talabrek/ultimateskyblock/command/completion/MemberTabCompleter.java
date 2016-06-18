@@ -24,7 +24,7 @@ public class MemberTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (sender instanceof Player) {
             PlayerInfo playerInfo = plugin.getPlayerInfo((Player) sender);
-            if (playerInfo != null && playerInfo.getHasIsland()) {
+            if (playerInfo != null && playerInfo.hasIsland()) {
                 us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
                     String member = args.length > 0 ? args[args.length-1] : "";

@@ -31,7 +31,7 @@ public class FlatlandFixCommand extends AbstractCommand {
         if (args.length == 1) {
             PlayerInfo playerInfo = plugin.getPlayerInfo(args[0]);
             if (playerInfo != null) {
-                islandLocation = playerInfo.getHasIsland() ? playerInfo.getIslandLocation() : null;
+                islandLocation = playerInfo.hasIsland() ? playerInfo.getIslandLocation() : null;
             }
         } else if (args.length == 0 && sender instanceof Player) {
             String islandName = WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation());

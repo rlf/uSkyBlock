@@ -1,10 +1,6 @@
 package us.talabrek.ultimateskyblock.challenge;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
+import com.google.common.cache.*;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -114,7 +110,7 @@ public class ChallengeCompletionLogic {
     }
 
     public Map<String, ChallengeCompletion> getChallenges(PlayerInfo playerInfo) {
-        if (playerInfo == null || !playerInfo.getHasIsland() || playerInfo.locationForParty() == null) {
+        if (playerInfo == null || !playerInfo.hasIsland() || playerInfo.locationForParty() == null) {
             return new ConcurrentHashMap<>();
         }
         String id = getCacheId(playerInfo);

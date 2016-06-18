@@ -31,7 +31,7 @@ public class LevelCommand extends RequireIslandCommand {
                 player.sendMessage(I18nUtil.tr("\u00a7eYou must be on your island to use this command."));
                 return true;
             }
-            if (!island.isParty() && !pi.getHasIsland()) {
+            if (!island.isParty() && !pi.hasIsland()) {
                 player.sendMessage(I18nUtil.tr("\u00a74You do not have an island!"));
             } else {
                 getIslandLevel(player, player.getName(), alias);
@@ -50,7 +50,7 @@ public class LevelCommand extends RequireIslandCommand {
 
     public boolean getIslandLevel(final Player player, final String islandPlayer, final String cmd) {
         final PlayerInfo info = plugin.getPlayerInfo(islandPlayer);
-        if (info == null || !info.getHasIsland()) {
+        if (info == null || !info.hasIsland()) {
             player.sendMessage(I18nUtil.tr("\u00a74That player is invalid or does not have an island!"));
             return false;
         }

@@ -26,7 +26,7 @@ public class CreateCommand extends RequirePlayerCommand {
         if (LocationUtil.isEmptyLocation(pi.getIslandLocation()) && cooldown == 0) {
             String cSchem = args != null && args.length > 0 ? args[0] : Settings.island_schematicName;
             plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem));
-        } else if (pi.getHasIsland()) {
+        } else if (pi.hasIsland()) {
             us.talabrek.ultimateskyblock.api.IslandInfo island = plugin.getIslandInfo(pi);
             if (island.isLeader(player)) {
                 player.sendMessage(tr("\u00a74Island found!" +

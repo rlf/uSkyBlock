@@ -16,11 +16,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -48,7 +44,7 @@ public class InviteHandler implements Listener {
             player.sendMessage(tr("\u00a74Your island is full, or you have too many pending invites. You can't invite anyone else."));
             return;
         }
-        if (oPi.getHasIsland()) {
+        if (oPi.hasIsland()) {
             us.talabrek.ultimateskyblock.api.IslandInfo oIsland = plugin.getIslandInfo(oPi);
             if (oIsland.isParty() && oIsland.isLeader(otherPlayer)) {
                 player.sendMessage(tr("\u00a74That player is already leader on another island."));
@@ -111,7 +107,7 @@ public class InviteHandler implements Listener {
             PlayerInfo pi = plugin.getPlayerInfo(player);
             final IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
             boolean deleteOldIsland = false;
-            if (pi.getHasIsland() && pi.getIslandLocation() != null) {
+            if (pi.hasIsland() && pi.getIslandLocation() != null) {
                 String islandName = WorldGuardHandler.getIslandNameAt(pi.getIslandLocation());
                 deleteOldIsland = !island.getName().equals(islandName);
             }

@@ -37,7 +37,7 @@ public abstract class RequireIslandCommand extends RequirePlayerCommand {
     @Override
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
-        if (playerInfo != null && playerInfo.getHasIsland()) {
+        if (playerInfo != null && playerInfo.hasIsland()) {
             IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
             if (islandInfo != null) {
                 return doExecute(alias, player, playerInfo, islandInfo, data, args);

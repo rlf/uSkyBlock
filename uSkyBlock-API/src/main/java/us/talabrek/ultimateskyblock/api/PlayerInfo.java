@@ -18,7 +18,7 @@ public interface PlayerInfo {
 
     UUID getUniqueId();
 
-    boolean getHasIsland();
+    boolean hasIsland();
 
     Location getIslandLocation();
 
@@ -35,6 +35,4 @@ public interface PlayerInfo {
     List<String> getTrustedOn();
 
     IslandInfo getIslandInfo();
-
-    void createIsland(String schematic);
 }

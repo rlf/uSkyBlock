@@ -25,7 +25,7 @@ public class GotoIslandCommand extends AbstractPlayerInfoCommand {
             sender.sendMessage(I18nUtil.tr("\u00a74Only supported for players"));
         }
         final Player player = (Player) sender;
-        if (!playerInfo.getHasIsland()) {
+        if (!playerInfo.hasIsland()) {
             sender.sendMessage(I18nUtil.tr("\u00a74That player does not have an island!"));
         } else if (playerInfo.getHomeLocation() != null) {
             sender.sendMessage(tr("\u00a7aTeleporting to {0}s island.", playerInfo.getPlayerName()));
