@@ -645,6 +645,18 @@ msgstr ""
 msgid "§eCan only be executed as a player"
 msgstr ""
 
+msgid "shows the borders of the current chunk"
+msgstr ""
+
+msgid "shows the borders of the inner-chunks"
+msgstr ""
+
+msgid "shows the borders of the outer-borders"
+msgstr ""
+
+msgid "shows the borders of the outer-chunks"
+msgstr ""
+
 msgid "hides the regions again"
 msgstr ""
 

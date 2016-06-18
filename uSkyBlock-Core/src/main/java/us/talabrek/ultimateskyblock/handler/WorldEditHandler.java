@@ -1,11 +1,14 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.LocalWorld;
+import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
@@ -13,6 +16,7 @@ import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.registry.WorldData;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -52,27 +56,18 @@ public class WorldEditHandler {
     public static void loadIslandSchematic(final File file, final Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
         try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
-            BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
-            ClipboardReader reader = ClipboardFormat.SCHEMATIC.getReader(in);
-
-            WorldData worldData = bukkitWorld.getWorldData();
-            Clipboard clipboard = reader.read(worldData);
-            ClipboardHolder holder = new ClipboardHolder(clipboard, worldData);
-
-            Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
-            int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
-            final EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
-            editSession.enableQueue();
-            editSession.setFastMode(true);
+            boolean noAir = false;
+            boolean entities = true;
             Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
-            final Operation operation = holder
-                    .createPaste(editSession, worldData)
-                    .to(to)
-                    .ignoreAirBlocks(true)
-                    .build();
-            AsyncWorldEditHandler.registerCompletion(player);
-            Operations.completeBlindly(operation);
-            editSession.flushQueue();
+            EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
+            try {
+                SchematicFormat.getFormat(file)
+                        .load(file)
+                        .paste(editSession, to, noAir, entities);
+                editSession.flushQueue();
+            } catch (MaxChangedBlocksException | IOException | DataException e) {
+                log.log(Level.INFO, "Unable to paste schematic " + file, e);
+            }
         } catch (IOException e) {
             LogUtil.log(Level.WARNING, "Unable to load schematic " + file, e);
         }

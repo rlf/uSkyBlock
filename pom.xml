@@ -140,7 +140,7 @@
         <profile>
             <id>wg6</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -154,9 +154,31 @@
             </dependencies>
         </profile>
         <profile>
-            <id>we5</id>
+            <id>wg611</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q</groupId>
+                    <artifactId>worldguard</artifactId>
+                    <version>6.1.1-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>worldedit</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we5</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -172,13 +194,45 @@
         <profile>
             <id>we6</id>
             <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>6.0.0-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we611</id>
+            <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>com.sk89q</groupId>
-                    <artifactId>worldedit</artifactId>
-                    <version>6.0.0-SNAPSHOT</version>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>6.1.1-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we613</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>6.1.3-SNAPSHOT</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>

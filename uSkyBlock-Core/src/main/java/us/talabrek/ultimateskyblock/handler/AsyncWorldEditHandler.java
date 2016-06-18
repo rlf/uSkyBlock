@@ -1,14 +1,15 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.regions.Regions;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.handler.asyncworldedit.AWEAdaptor;
 import us.talabrek.ultimateskyblock.handler.task.WEPasteSchematic;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
@@ -42,7 +43,7 @@ public enum AsyncWorldEditHandler {;
         getAWEAdaptor().registerCompletion(player);
     }
 
-    public static EditSession createEditSession(BukkitWorld world, int maxblocks) {
+    public static EditSession createEditSession(World world, int maxblocks) {
         return getAWEAdaptor().createEditSession(world, maxblocks);
     }
 
@@ -144,7 +145,7 @@ public enum AsyncWorldEditHandler {;
                         final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
                         editSession.enableQueue();
                         editSession.setFastMode(true);
-                        region.getWorld().regenerate(region, editSession);
+                        editSession.getWorld().regenerate(region, editSession);
                         editSession.flushQueue();
                     } finally {
                         onCompletion.run();
