@@ -23,7 +23,6 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -421,5 +420,10 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
 
     public boolean isClearInventoryOnNextEntry() {
         return playerData != null && playerData.getBoolean("clearInventoryOnNextEntry", false);
+    }
+
+    @Override
+    public void createIsland(String schematic) {
+        uSkyBlock.getInstance().createIsland(this.getPlayer(), schematic);
     }
 }
