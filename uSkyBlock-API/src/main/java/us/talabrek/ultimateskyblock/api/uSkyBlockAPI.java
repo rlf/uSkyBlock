@@ -106,4 +106,11 @@ public interface uSkyBlockAPI extends Plugin {
      * @since 2.7.0
      */
     PlayerInfo getPlayerInfo(Player player);
+
+    /**
+     * @param player The player to create an island for.
+     * @param schematic The schematic to create an island with.
+     * @since 2.7.0
+     */
+    void createIsland(Player player, String schematic);
 }

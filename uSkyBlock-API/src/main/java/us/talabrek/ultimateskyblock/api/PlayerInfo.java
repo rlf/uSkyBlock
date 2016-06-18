@@ -18,7 +18,7 @@ public interface PlayerInfo {
 
     UUID getUniqueId();
 
-    boolean getHasIsland();
+    boolean hasIsland();
 
     Location getIslandLocation();
 

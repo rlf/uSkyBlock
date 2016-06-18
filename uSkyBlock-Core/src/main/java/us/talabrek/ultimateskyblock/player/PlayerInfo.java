@@ -23,7 +23,6 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -69,7 +68,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     }
 
     @Override
-    public boolean getHasIsland() {
+    public boolean hasIsland() {
         return getIslandLocation() != null;
     }
 
@@ -301,7 +300,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         String str = "\u00a7bPlayer Info:\n";
         str += ChatColor.GRAY + "  - name: " + ChatColor.DARK_AQUA + getPlayerName() + "\n";
         str += ChatColor.GRAY + "  - nick: " + ChatColor.DARK_AQUA + getDisplayName() + "\n";
-        str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA +  getHasIsland() + "\n";
+        str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA +  hasIsland() + "\n";
         str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  LocationUtil.asString(getHomeLocation()) + "\n";
         str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + LocationUtil.asString(getIslandLocation()) + "\n";
         str += ChatColor.GRAY + "  - banned from: " + ChatColor.DARK_AQUA + getBannedFrom() + "\n";
@@ -408,7 +407,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
 
     @Override
     public IslandInfo getIslandInfo() {
-        if (getHasIsland() && locationForParty() != null) {
+        if (hasIsland() && locationForParty() != null) {
             return uSkyBlock.getInstance().getIslandInfo(this);
         }
         return null;

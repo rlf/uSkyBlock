@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -50,7 +49,7 @@ public class WarpCommand extends RequirePlayerCommand {
                 }
 
                 PlayerInfo targetPlayerInfo = plugin.getPlayerInfo(args[0]);
-                if (targetPlayerInfo == null || !targetPlayerInfo.getHasIsland()) {
+                if (targetPlayerInfo == null || !targetPlayerInfo.hasIsland()) {
                     player.sendMessage(tr("\u00a74That player does not exist!"));
                     return true;
                 }

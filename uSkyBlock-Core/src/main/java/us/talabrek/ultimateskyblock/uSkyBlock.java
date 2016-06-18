@@ -5,13 +5,7 @@ import dk.lockfuglsang.minecraft.command.Command;
 import dk.lockfuglsang.minecraft.command.CommandManager;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -42,45 +36,17 @@ import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.command.IslandTalkCommand;
 import us.talabrek.ultimateskyblock.command.PartyTalkCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
-import us.talabrek.ultimateskyblock.event.ExploitEvents;
-import us.talabrek.ultimateskyblock.event.GriefEvents;
-import us.talabrek.ultimateskyblock.event.ItemDropEvents;
-import us.talabrek.ultimateskyblock.event.MenuEvents;
-import us.talabrek.ultimateskyblock.event.NetherTerraFormEvents;
-import us.talabrek.ultimateskyblock.event.PlayerEvents;
-import us.talabrek.ultimateskyblock.event.SpawnEvents;
-import us.talabrek.ultimateskyblock.event.ToolMenuEvents;
-import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
-import us.talabrek.ultimateskyblock.event.uSkyBlockEvents;
-import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
-import us.talabrek.ultimateskyblock.handler.CooldownHandler;
-import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
-import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.event.*;
+import us.talabrek.ultimateskyblock.handler.*;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
 import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
-import us.talabrek.ultimateskyblock.island.IslandGenerator;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.island.IslandLocatorLogic;
-import us.talabrek.ultimateskyblock.island.IslandLogic;
-import us.talabrek.ultimateskyblock.island.IslandScore;
-import us.talabrek.ultimateskyblock.island.LevelLogic;
-import us.talabrek.ultimateskyblock.island.LimitLogic;
-import us.talabrek.ultimateskyblock.island.OrphanLogic;
+import us.talabrek.ultimateskyblock.island.*;
 import us.talabrek.ultimateskyblock.island.task.CreateIslandTask;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.island.task.SetBiomeTask;
 import us.talabrek.ultimateskyblock.menu.ConfigMenu;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
-import us.talabrek.ultimateskyblock.player.IslandPerk;
-import us.talabrek.ultimateskyblock.player.PerkLogic;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.player.PlayerLogic;
-import us.talabrek.ultimateskyblock.player.PlayerNotifier;
-import us.talabrek.ultimateskyblock.player.PlayerPerk;
-import us.talabrek.ultimateskyblock.player.TeleportLogic;
+import us.talabrek.ultimateskyblock.player.*;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
@@ -91,11 +57,7 @@ import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
 import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -576,7 +538,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         // Align to appropriate coordinates
         LocationUtil.alignToDistance(newLoc, Settings.island_distance);
         boolean deleteOldIsland = false;
-        if (pi.getHasIsland()) {
+        if (pi.hasIsland()) {
             Location oldLoc = pi.getIslandLocation();
             if (newLoc != null && oldLoc != null
                     && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ())) {
@@ -705,7 +667,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             return false;
         }
         PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
-        if (playerInfo != null && playerInfo.getHasIsland()) {
+        if (playerInfo != null && playerInfo.hasIsland()) {
             Location p = playerInfo.getIslandNetherLocation();
             if (p == null) {
                 return false;
@@ -721,7 +683,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             return false;
         }
         PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
-        if (playerInfo != null && playerInfo.getHasIsland()) {
+        if (playerInfo != null && playerInfo.hasIsland()) {
             Location p = playerInfo.getIslandLocation();
             if (p == null) {
                 return false;
@@ -734,7 +696,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public boolean hasIsland(final Player player) {
         PlayerInfo playerInfo = getPlayerInfo(player);
-        return playerInfo != null && playerInfo.getHasIsland();
+        return playerInfo != null && playerInfo.hasIsland();
     }
 
     public boolean islandAtLocation(final Location loc) {
@@ -1195,7 +1157,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     @Override
     public IslandRank getIslandRank(Player player) {
         PlayerInfo playerInfo = getPlayerInfo(player);
-        return islandLogic != null && playerInfo != null && playerInfo.getHasIsland() ?
+        return islandLogic != null && playerInfo != null && playerInfo.hasIsland() ?
                 islandLogic.getRank(playerInfo.locationForParty())
                 : null;
     }
