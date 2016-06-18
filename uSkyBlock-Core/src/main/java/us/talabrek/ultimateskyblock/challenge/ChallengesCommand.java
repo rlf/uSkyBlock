@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -47,7 +46,7 @@ public class ChallengesCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
-        if (!playerInfo.getHasIsland()) {
+        if (!playerInfo.hasIsland()) {
             player.sendMessage(tr("\u00a74You can only submit challenges when you have an island!"));
             return true;
         }

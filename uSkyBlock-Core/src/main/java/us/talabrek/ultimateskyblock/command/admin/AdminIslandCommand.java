@@ -5,7 +5,6 @@ import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
@@ -113,7 +112,7 @@ public class AdminIslandCommand extends CompositeCommand {
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 2) {
                     PlayerInfo playerInfo = plugin.getPlayerInfo(args[0]);
-                    if (playerInfo == null || !playerInfo.getHasIsland()) {
+                    if (playerInfo == null || !playerInfo.hasIsland()) {
                         sender.sendMessage(tr("\u00a74That player has no island."));
                         return false;
                     }
@@ -207,7 +206,7 @@ public class AdminIslandCommand extends CompositeCommand {
     }
 
     private void setBiome(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String biome) {
-        if (playerInfo == null || !playerInfo.getHasIsland()) {
+        if (playerInfo == null || !playerInfo.hasIsland()) {
             sender.sendMessage(tr("\u00a74That player has no island."));
             return;
         }

@@ -1,10 +1,6 @@
 package us.talabrek.ultimateskyblock.player;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
+import com.google.common.cache.*;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -95,7 +91,7 @@ public class PlayerLogic {
 
         final Player onlinePlayer = Bukkit.getPlayer(playerName);
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
-            if (playerInfo.getHasIsland()) {
+            if (playerInfo.hasIsland()) {
                 IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
                     islandInfo.updatePermissionPerks(onlinePlayer, plugin.getPerkLogic().getPerk(onlinePlayer));
@@ -104,7 +100,7 @@ public class PlayerLogic {
             Bukkit.getScheduler().runTask(plugin, new Runnable() {
                         @Override
                         public void run() {
-                            if (playerInfo.getHasIsland()) {
+                            if (playerInfo.hasIsland()) {
                                 WorldGuardHandler.protectIsland(onlinePlayer, playerInfo);
                                 plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
                             }

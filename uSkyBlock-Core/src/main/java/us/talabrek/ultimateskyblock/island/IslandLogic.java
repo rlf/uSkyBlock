@@ -1,10 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
+import com.google.common.cache.*;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -117,7 +113,7 @@ public class IslandLogic {
     }
     
     public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
-        if (playerInfo != null && playerInfo.getHasIsland()) {
+        if (playerInfo != null && playerInfo.hasIsland()) {
             return getIslandInfo(playerInfo.locationForParty());
         }
         return null;
@@ -235,7 +231,7 @@ public class IslandLogic {
             int place = 1;
             PlayerInfo playerInfo = plugin.getPlayerInfo(sender.getName());
             IslandRank rank = null;
-            if (playerInfo != null && playerInfo.getHasIsland()) {
+            if (playerInfo != null && playerInfo.hasIsland()) {
                 rank = getRank(playerInfo.locationForParty());
             }
             int offset = (page-1) * 10;

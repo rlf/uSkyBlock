@@ -421,9 +421,4 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     public boolean isClearInventoryOnNextEntry() {
         return playerData != null && playerData.getBoolean("clearInventoryOnNextEntry", false);
     }
-
-    @Override
-    public void createIsland(String schematic) {
-        uSkyBlock.getInstance().createIsland(this.getPlayer(), schematic);
-    }
 }
