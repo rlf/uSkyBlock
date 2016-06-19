@@ -30,6 +30,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
+import dk.lockfuglsang.minecraft.animation.AnimationHandler;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
@@ -155,6 +156,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private IslandLocatorLogic islandLocatorLogic;
     private PlayerDB playerDB;
     private ConfirmHandler confirmHandler;
+    private AnimationHandler animationHandler;
 
     private CooldownHandler cooldownHandler;
     private PlayerLogic playerLogic;
@@ -192,6 +194,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
         PlaceholderHandler.unregister(this);
+        if (animationHandler != null) {
+            animationHandler.stop();
+        }
         challengeLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
@@ -1030,9 +1035,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         confirmHandler = new ConfirmHandler(this, getConfig().getInt("options.advanced.confirmTimeout", 10));
         cooldownHandler = new CooldownHandler(this);
+        animationHandler = new AnimationHandler(this);
         getCommand("island").setExecutor(new IslandCommand(this, menu));
         getCommand("challenges").setExecutor(new ChallengesCommand(this));
-        getCommand("usb").setExecutor(new AdminCommand(this, confirmHandler));
+        getCommand("usb").setExecutor(new AdminCommand(this, confirmHandler, animationHandler));
         getCommand("islandtalk").setExecutor(new IslandTalkCommand(this));
         getCommand("partytalk").setExecutor(new PartyTalkCommand(this));
     }

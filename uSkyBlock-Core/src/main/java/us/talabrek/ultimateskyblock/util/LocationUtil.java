@@ -253,7 +253,7 @@ public enum LocationUtil {
     }
 
     public static String getCardinalDirection(float yaw) {
-        return tr(CARDINAL_DIRECTION[((int) Math.round((((int)yaw + 360) % 360) / 45d))]);
+        return tr(CARDINAL_DIRECTION[((int) Math.round((((int)yaw + 360) % 360) / 45d)) % CARDINAL_DIRECTION.length]);
     }
 
     public static class ScanChest extends BukkitRunnable {

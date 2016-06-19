@@ -667,7 +667,7 @@ msgstr ""
 msgid "shows the borders of the inner-chunks"
 msgstr ""
 
-msgid "shows the borders of the outer-borders"
+msgid "shows the non-chunk-aligned borders"
 msgstr ""
 
 msgid "shows the borders of the outer-chunks"
@@ -680,27 +680,6 @@ msgid "§eStopped displaying regions"
 msgstr ""
 
 msgid "§eNo currently shown regions for this player"
-msgstr ""
-
-#, java-format
-msgid "§eParticle changed to {0}."
-msgstr ""
-
-msgid "§eParticle must be a valid Bukkit Particle."
-msgstr ""
-
-#, java-format
-msgid "§eParticle-count changed to {0}."
-msgstr ""
-
-msgid "§eParticle-count must be a valid integer."
-msgstr ""
-
-#, java-format
-msgid "§eAnimation-dash changed to {0}."
-msgstr ""
-
-msgid "§eAnimation-dash must be a valid integer."
 msgstr ""
 
 #, java-format

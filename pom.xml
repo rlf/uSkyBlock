@@ -9,7 +9,7 @@
 
     <properties>
         <api.version>2.7.0</api.version>
-        <bukkit-utils.version>1.4</bukkit-utils.version>
+        <bukkit-utils.version>1.5</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

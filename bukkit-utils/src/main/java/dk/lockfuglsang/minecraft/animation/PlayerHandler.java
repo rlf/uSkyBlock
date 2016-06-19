@@ -1,7 +1,8 @@
-package us.talabrek.ultimateskyblock.handler;
+package dk.lockfuglsang.minecraft.animation;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 
@@ -10,10 +11,10 @@ import java.lang.reflect.Method;
 import java.util.logging.Logger;
 
 /**
- * Common handler across servers for sending particles to a player.
+ * Common handler across servers for sending particles and other packages to a player.
  */
-public enum ParticleHandler {;
-    private static final Logger log = Logger.getLogger(ParticleHandler.class.getName());
+public enum PlayerHandler {;
+    private static final Logger log = Logger.getLogger(PlayerHandler.class.getName());
 
     public static boolean spawnParticle(Player player, Particle particle, Location loc, int count) {
         try {
@@ -23,7 +24,20 @@ public enum ParticleHandler {;
                 return true;
             }
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            log.finest("Unable to playEffect for player " + player + ": " + e);
+            log.finest("Unable to spawnParticle for player " + player + ": " + e);
+        }
+        return false;
+    }
+
+    public static boolean sendBlockChange(Player player, Location location, Material material, byte data) {
+        try {
+            Method method = getMethod(player, "sendBlockChange", new Class<?>[]{Location.class, Material.class, Byte.TYPE});
+            if (method != null) {
+                method.invoke(player, location, material, data);
+                return true;
+            }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            log.finest("Unable to sendBlockChange to player " + player + ": " + e);
         }
         return false;
     }

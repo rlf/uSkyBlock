@@ -5,6 +5,7 @@ import dk.lockfuglsang.minecraft.command.DocumentCommand;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import dk.lockfuglsang.minecraft.animation.AnimationHandler;
 import us.talabrek.ultimateskyblock.command.admin.*;
 import us.talabrek.ultimateskyblock.command.completion.AllPlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.BiomeTabCompleter;
@@ -19,7 +20,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
  * The new admin command, alias /usb
  */
 public class AdminCommand extends AbstractCommandExecutor {
-    public AdminCommand(final uSkyBlock plugin, ConfirmHandler confirmHandler) {
+    public AdminCommand(final uSkyBlock plugin, ConfirmHandler confirmHandler, AnimationHandler animationHandler) {
         super("usb", "usb.admin", I18nUtil.tr("Ultimate SkyBlock Admin"));
         OnlinePlayerTabCompleter playerCompleter = new OnlinePlayerTabCompleter();
         TabCompleter challengeCompleter = new ChallengeTabCompleter();
@@ -58,6 +59,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new JobsCommand(plugin));
         add(new ConfigGUICommand(plugin));
         add(new DocumentCommand(plugin, "doc", "usb.admin.doc"));
-        add(new RegionCommand(plugin));
+        add(new RegionCommand(plugin, animationHandler));
     }
 }

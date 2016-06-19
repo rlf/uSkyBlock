@@ -14,9 +14,18 @@ import java.util.regex.Pattern;
 /**
  * Functions for working with Materials
  */
-public enum MaterialUtil {;
+public enum MaterialUtil {
+    ;
     private static final Pattern MATERIAL_PROBABILITY = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?\\s*(?<id>[A-Z_0-9]+)");
     private static final Collection<Material> SANDS = Arrays.asList(Material.SAND, Material.GRAVEL);
+
+    public static Material getMaterial(String name, Material fallback) {
+        try {
+            return Material.valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return fallback;
+        }
+    }
 
     public static boolean isFallingMaterial(Material mat) {
         return SANDS.contains(mat);
@@ -31,7 +40,7 @@ public enum MaterialUtil {;
                 double p = m.group("prob") != null ? Double.parseDouble(m.group("prob")) : 1;
                 list.add(new MaterialProbability(mat, p));
             } else {
-                Bukkit.getLogger().log(Level.WARNING, "Misconfigured list of materials: "+ line);
+                Bukkit.getLogger().log(Level.WARNING, "Misconfigured list of materials: " + line);
             }
         }
         return list;

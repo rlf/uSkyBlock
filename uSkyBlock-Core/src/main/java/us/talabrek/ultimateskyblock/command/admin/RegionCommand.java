@@ -3,36 +3,31 @@ package us.talabrek.ultimateskyblock.command.admin;
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+import dk.lockfuglsang.minecraft.animation.Animation;
+import dk.lockfuglsang.minecraft.animation.AnimationHandler;
+import dk.lockfuglsang.minecraft.animation.BlockAnimation;
+import dk.lockfuglsang.minecraft.animation.ParticleAnimation;
 import us.talabrek.ultimateskyblock.command.completion.ParticleTabCompleter;
-import us.talabrek.ultimateskyblock.handler.ParticleHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
@@ -40,19 +35,18 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  * Command to show the regions of interest.
  */
 public class RegionCommand extends CompositeCommand {
-    private final uSkyBlock plugin;
 
-    private final Map<UUID, Set<Animation>> animations = new ConcurrentHashMap<>();
-    private AnimationTask animationTask;
+    private final AnimationHandler animationHandler;
+    private int dash;
+    private int animCount;
+    private String animType;
+    private Particle particle;
+    private Material material;
+    private byte material_data;
 
-    private int animCount = 10;
-    private Particle particle = Particle.REDSTONE;
-    private int animTick = 20;
-    private int dash = 1;
-
-    public RegionCommand(uSkyBlock plugin) {
+    public RegionCommand(uSkyBlock plugin, final AnimationHandler animationHandler) {
         super("region|rg", "usb.admin.region", tr("region manipulations"));
-        this.plugin = plugin;
+        this.animationHandler = animationHandler;
         addTab("particle", new ParticleTabCompleter());
         add(new AbstractCommand("show", tr("shows the borders of the current island")) {
             @Override
@@ -61,6 +55,9 @@ public class RegionCommand extends CompositeCommand {
                     Player player = (Player) sender;
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
+                        setAnimType("block");
+                        dash = 3;
+                        setMaterial(Material.BRICK, (byte) 0);
                         showRegion(player, region);
                     } else {
                         sender.sendMessage(tr("\u00a7eNo island found at your current location"));
@@ -79,6 +76,9 @@ public class RegionCommand extends CompositeCommand {
                     Player player = (Player) sender;
                     Chunk chunk = player.getLocation().getChunk();
                     Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
+                    setAnimType("block");
+                    dash = 4;
+                    setMaterial(Material.STAINED_GLASS, (byte) 4);
                     showChunk(player, chunkCoords);
                     return true;
                 } else {
@@ -95,6 +95,9 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getInnerChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
+                        setAnimType("block");
+                        dash = 3;
+                        setMaterial(Material.STAINED_GLASS, (byte) 11);
                         for (Vector2D v : borderRegions) {
                             showChunk(player, v);
                         }
@@ -111,7 +114,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("border", tr("shows the borders of the outer-borders")) {
+        add(new AbstractCommand("border", tr("shows the non-chunk-aligned borders")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -119,15 +122,15 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
+                        setAnimType("block");
+                        dash = 3;
+                        setMaterial(Material.STAINED_GLASS, (byte) 3);
                         for (Region rg : borderRegions) {
                             showRegion(player, rg);
                         }
                     } else {
                         sender.sendMessage(tr("\u00a7eNo island found at your current location"));
                     }
-                    Chunk chunk = player.getLocation().getChunk();
-                    Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
-                    showChunk(player, chunkCoords);
                     return true;
                 } else {
                     sender.sendMessage(tr("\u00a7eCan only be executed as a player"));
@@ -143,6 +146,9 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getOuterChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
+                        setAnimType("block");
+                        dash = 4;
+                        setMaterial(Material.STAINED_GLASS, (byte) 15);
                         for (Vector2D v : borderRegions) {
                             showChunk(player, v);
                         }
@@ -164,11 +170,7 @@ public class RegionCommand extends CompositeCommand {
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
-                    if (animations.containsKey(player.getUniqueId())) {
-                        animations.remove(player.getUniqueId());
-                        if (animations.isEmpty()) {
-                            stopAnimations();
-                        }
+                    if (RegionCommand.this.animationHandler.removeAnimations(player)) {
                         sender.sendMessage(tr("\u00a7eStopped displaying regions"));
                     } else {
                         sender.sendMessage(tr("\u00a7eNo currently shown regions for this player"));
@@ -180,57 +182,15 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("particle", null, "particle", "set the particle used in animations") {
-            @Override
-            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                try {
-                    if (args.length == 1 && Particle.valueOf(args[0].toUpperCase()) != null) {
-                        particle = Particle.valueOf(args[0].toUpperCase());
-                        sender.sendMessage(tr("\u00a7eParticle changed to {0}.", particle.name()));
-                        return true;
-                    } else if (args.length == 1) {
-                        sender.sendMessage(tr("\u00a7eParticle must be a valid Bukkit Particle."));
-                    }
-                } catch (IllegalArgumentException e) {
-                    sender.sendMessage(tr("\u00a7eParticle must be a valid Bukkit Particle."));
-                }
-                return false;
-            }
-        });
-        add(new AbstractCommand("count", null, "integer", "set the count of particles") {
-            @Override
-            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                if (args.length == 1 && args[0].matches("[0-9]+")) {
-                    animCount = Integer.parseInt(args[0]);
-                    sender.sendMessage(tr("\u00a7eParticle-count changed to {0}.", animCount));
-                    return true;
-                } else if (args.length == 1) {
-                    sender.sendMessage(tr("\u00a7eParticle-count must be a valid integer."));
-                }
-                return false;
-            }
-        });
-        add(new AbstractCommand("dash", null, "integer", "set the dash-size of animation") {
-            @Override
-            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                if (args.length == 1 && args[0].matches("[0-9]+")) {
-                    dash = Integer.parseInt(args[0]);
-                    sender.sendMessage(tr("\u00a7eAnimation-dash changed to {0}.", dash));
-                    return true;
-                } else if (args.length == 1) {
-                    sender.sendMessage(tr("\u00a7eAnimation-dash must be a valid integer."));
-                }
-                return false;
-            }
-        });
         add(new AbstractCommand("tick", null, "integer", "set the ticks between animations") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1 && args[0].matches("[0-9]+")) {
-                    animTick = Integer.parseInt(args[0]);
+                    int animTick = Integer.parseInt(args[0]);
+                    RegionCommand.this.animationHandler.setAnimTick(animTick);
                     sender.sendMessage(tr("\u00a7eAnimation-tick changed to {0}.", animTick));
-                    stopAnimations();
-                    startAnimations();
+                    RegionCommand.this.animationHandler.stop();
+                    RegionCommand.this.animationHandler.start();
                     return true;
                 } else if (args.length == 1) {
                     sender.sendMessage(tr("\u00a7eAnimation-tick must be a valid integer."));
@@ -238,10 +198,14 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        animCount = plugin.getConfig().getInt("animations.count", 1);
-        particle = Particle.valueOf(plugin.getConfig().getString("animations.particle", "DRIP_LAVA"));
-        animTick = plugin.getConfig().getInt("animations.tick", 20);
-        dash = plugin.getConfig().getInt("animations.dash", 3);
+        add(new AbstractCommand("refresh", "refreshes the existing animations") {
+            @Override
+            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
+                animationHandler.stop();
+                animationHandler.start();
+                return true;
+            }
+        });
     }
 
     private void showChunk(Player player, Vector2D chunk) {
@@ -252,17 +216,17 @@ public class RegionCommand extends CompositeCommand {
         int pz = chunk.getBlockZ() << 4;
         for (int x = 0; x <= 15; x+=dash) {
             points.add(new Location(world, px+x+0.5d, y, pz+0.5d));
-            points.add(new Location(world, px+x+0.5d, y, pz+15+0.5d));
         }
         for (int z = 0; z <= 15; z+=dash) {
-            points.add(new Location(world, px+0.5d, y, pz+z+0.5d));
             points.add(new Location(world, px+15+0.5d, y, pz+z+0.5d));
         }
-        if (animations.get(player.getUniqueId()) == null) {
-            animations.put(player.getUniqueId(), new HashSet<Animation>());
+        for (int x = 15; x >= 0; x-=dash) {
+            points.add(new Location(world, px+x+0.5d, y, pz+15+0.5d));
         }
-        animations.get(player.getUniqueId()).add(new Animation(player, particle, points));
-        startAnimations();
+        for (int z = 15; z >= 0; z-=dash) {
+            points.add(new Location(world, px+0.5d, y, pz+z+0.5d));
+        }
+        addAnimation(player, points);
     }
 
     private void showRegion(Player player, Region region) {
@@ -277,17 +241,17 @@ public class RegionCommand extends CompositeCommand {
         List<Location> points = new ArrayList<>();
         for (int x = minP.getBlockX(); x <= maxP.getBlockX(); x+=dash) {
             points.add(new Location(world, x+0.5d, y, minP.getBlockZ()+0.5d));
-            points.add(new Location(world, x+0.5d, y, maxP.getBlockZ()+0.5d));
         }
         for (int z = minP.getBlockZ(); z <= maxP.getBlockZ(); z+=dash) {
-            points.add(new Location(world, minP.getBlockX()+0.5d, y, z+0.5d));
             points.add(new Location(world, maxP.getBlockX()+0.5d, y, z+0.5d));
         }
-        if (animations.get(player.getUniqueId()) == null) {
-            animations.put(player.getUniqueId(), new HashSet<Animation>());
+        for (int x = maxP.getBlockX(); x >= minP.getBlockX(); x-=dash) {
+            points.add(new Location(world, x+0.5d, y, maxP.getBlockZ()+0.5d));
         }
-        animations.get(player.getUniqueId()).add(new Animation(player, particle, points));
-        startAnimations();
+        for (int z = maxP.getBlockZ(); z >= minP.getBlockZ(); z-=dash) {
+            points.add(new Location(world, minP.getBlockX()+0.5d, y, z+0.5d));
+        }
+        addAnimation(player, points);
     }
 
     private void showRegion(Player player, ProtectedRegion region) {
@@ -297,63 +261,36 @@ public class RegionCommand extends CompositeCommand {
         showRegion(player, y, minP, maxP);
     }
 
-    private void startAnimations() {
-        if (animationTask == null && !animations.isEmpty()) {
-            animationTask = new AnimationTask();
-            animationTask.runTaskTimerAsynchronously(plugin, 0, animTick);
-        }
+    public void setAnimType(String animType) {
+        this.animType = animType;
+    }
+    
+    public void setAnimCount(int animCount) {
+        this.animCount = animCount;
     }
 
-    private void stopAnimations() {
-        if (animationTask != null) {
-            animationTask.cancel();
-            animationTask = null;
+    public void setParticle(Particle particle) {
+        if (particle == null) {
+            throw new IllegalArgumentException("particle cannot be null");
         }
+        this.particle = particle;
     }
 
-    private class AnimationTask extends BukkitRunnable {
-        @Override
-        public void run() {
-            Collection<Set<Animation>> anims = animations.values();
-            for (Set<Animation> animSet : anims) {
-                for (Animation animation : animSet) {
-                    if (!animation.show()) {
-                        UUID uuid = animation.getPlayer().getUniqueId();
-                        animations.get(uuid).remove(animation);
-                        if (animations.get(uuid).isEmpty()) {
-                            animations.remove(uuid);
-                        }
-                    }
-                }
-            }
+    public void setMaterial(Material material, byte data) {
+        if (material == null) {
+            throw new IllegalArgumentException("material cannot be null");
         }
+        this.material = material;
+        this.material_data = data;
     }
 
-    private class Animation {
-        private final Player player;
-        private final Particle particle;
-        private final List<Location> points;
-
-        Animation(Player player, Particle particle, List<Location> points) {
-            this.player = player;
-            this.particle = particle;
-            this.points = points;
+    public synchronized void addAnimation(Player player, List<Location> points) {
+        Animation animation = null;
+        if (animType.equalsIgnoreCase("block")) {
+            animation = new BlockAnimation(player, points, material, material_data);
+        } else {
+            animation = new ParticleAnimation(player, points, particle, animCount);
         }
-
-        boolean show() {
-            if (!player.isOnline()) {
-                return false;
-            }
-            for (Location loc : points) {
-                if (!ParticleHandler.spawnParticle(player, particle, loc, animCount)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public Player getPlayer() {
-            return player;
-        }
+        animationHandler.addAnimation(animation);
     }
 }
