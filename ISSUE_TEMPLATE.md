@@ -1,6 +1,6 @@
 _Please paste the output from `/usb version` below_
 ```
-version goes here
+paste it here please (replace this text)
 ```
 
 _What steps will reproduce the problem?_
