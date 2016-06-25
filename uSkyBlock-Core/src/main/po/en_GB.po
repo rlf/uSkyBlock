@@ -2,19 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-04-12 19:44+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-06-25 18:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, java-format
@@ -509,19 +510,19 @@ msgid "§eFinished generation of the Top Ten list"
 msgstr "§4* §7Finished generation of the Top Ten list"
 
 msgid "advanced command for getting island-data"
-msgstr ""
+msgstr "advanced command for getting island-data"
 
 #, java-format
 msgid "§eCurrent value for {0} is ''{1}''"
-msgstr ""
+msgstr "§4* §7Current value for {0} is ''{1}''"
 
 #, java-format
 msgid "§cUnable to get state for {0}"
-msgstr ""
+msgstr "§4* §7Unable to get state for {0}"
 
 #, java-format
 msgid "§eValid fields are {0}"
-msgstr ""
+msgstr "§4* §7Valid fields are {0}"
 
 msgid "teleport to another players island"
 msgstr "teleport to another players island"
@@ -647,44 +648,44 @@ msgstr ""
 "§4* §7Finding all islands that has been abandoned for more than §c{0} §7days."
 
 msgid "region manipulations"
-msgstr ""
+msgstr "region manipulations"
 
 msgid "shows the borders of the current island"
-msgstr ""
+msgstr "shows the borders of the current island"
 
 msgid "§eNo island found at your current location"
-msgstr ""
+msgstr "§4* §7No island found at your current location"
 
 msgid "§eCan only be executed as a player"
-msgstr ""
+msgstr "§4* §7Can only be executed as a player"
 
 msgid "shows the borders of the current chunk"
-msgstr ""
+msgstr "shows the borders of the current chunk"
 
 msgid "shows the borders of the inner-chunks"
-msgstr ""
+msgstr "shows the borders of the inner-chunks"
 
 msgid "shows the non-chunk-aligned borders"
-msgstr ""
+msgstr "shows the non-chunk-aligned borders"
 
 msgid "shows the borders of the outer-chunks"
-msgstr ""
+msgstr "shows the borders of the outer-chunks"
 
 msgid "hides the regions again"
-msgstr ""
+msgstr "hides the regions again"
 
 msgid "§eStopped displaying regions"
-msgstr ""
+msgstr "§4* §7Stopped displaying regions"
 
 msgid "§eNo currently shown regions for this player"
-msgstr ""
+msgstr "§4* §7No currently shown regions for this player"
 
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
-msgstr ""
+msgstr "§4* §7Animation-tick changed to {0}."
 
 msgid "§eAnimation-tick must be a valid integer."
-msgstr ""
+msgstr "§4* §7Animation-tick must be a valid integer."
 
 msgid "set a player's island to your location"
 msgstr "set a player's island to your location"
@@ -703,23 +704,23 @@ msgid "§eConfiguration reloaded from file."
 msgstr "§4* §7Configuration reloaded from file."
 
 msgid "advanced command for setting island-data"
-msgstr ""
+msgstr "advanced command for setting island-data"
 
 #, java-format
 msgid "§c{0} was set to ''{1}''"
-msgstr ""
+msgstr "§4* §7{0} was set to ''{1}''"
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}''"
-msgstr ""
+msgstr "§4* §7Unable to set field {0} to ''{1}''"
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
-msgstr ""
+msgstr "§4* §7Unable to set field {0} to ''{1}'', a number was expected"
 
 #, java-format
 msgid "§cInvalid field {0}"
-msgstr ""
+msgstr "§4* §7Invalid field {0}"
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
@@ -1439,7 +1440,7 @@ msgid "§4No importer named §e{0}§4 found"
 msgstr "§4* §7No importer named §6{0}§7 found"
 
 msgid "§eConverted "
-msgstr ""
+msgstr "§4* §7Converted "
 
 msgid "The island has been created."
 msgstr "The island has been created."
