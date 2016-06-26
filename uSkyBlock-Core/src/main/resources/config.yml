@@ -235,6 +235,12 @@ island-schemes:
     enabled: true
     # optional, must be listed in ascending order
     index: 2
+    # Only get 90% of the normal score (1=100%, 0.1=10%)
+    ## Uncomment next line to activate.
+    #scoreMultiply: 0.9
+    # But start with an offset of 40 (meaning 40 levelpoints on top of the default island level)
+    ## Uncomment next line to activate.
+    #scoreOffset: 40
     # optional extra's that can be given per island
     extraItems: ''
     maxPartySize: 4
@@ -246,11 +252,18 @@ island-schemes:
     permission: usb.schematic.skysmp
     description: The original SkySMP island
     displayItem: GRASS
-    extraItems: 'OBSIDIAN:14 FLINT_AND_STEEL:1'
+    enabled: true
+    index: 3
     # Only get 90% of the normal score
     scoreMultiply: 0.9
     # But start with an offset of 40
     scoreOffset: 40
+    extraItems: 'OBSIDIAN:14 FLINT_AND_STEEL:1'
+    maxPartySize: 4
+    animals: 48
+    monsters: 50
+    villagers: 16
+    golems: 5
 
 # This section allows donors to get specific perks
 #donor-perks:
