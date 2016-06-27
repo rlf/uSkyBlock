@@ -6,6 +6,8 @@ import org.bukkit.command.CommandSender;
 
 import java.util.HashMap;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
 /**
  * Command delegator.
  */
@@ -16,7 +18,18 @@ public class AbstractCommandExecutor extends CompositeCommand implements Command
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String alias, String[] args) {
-        return super.execute(commandSender, alias, new HashMap<String, Object>(), args);
+    public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+        dk.lockfuglsang.minecraft.command.Command cmd = this;
+        if (!hasAccess(cmd, sender)) {
+            if (cmd != null) {
+                sender.sendMessage(tr("\u00a7eYou do not have access (\u00a74{0}\u00a7e)", cmd.getPermission()));
+            } else {
+                sender.sendMessage(tr("\u00a7eInvalid command: {0}", alias));
+            }
+            showUsage(sender, 1);
+        } else {
+            return super.execute(sender, alias, new HashMap<String, Object>(), args);
+        }
+        return true;
     }
 }

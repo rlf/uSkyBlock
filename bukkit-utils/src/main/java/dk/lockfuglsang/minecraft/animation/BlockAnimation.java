@@ -26,11 +26,11 @@ public class BlockAnimation implements Animation {
 
     @Override
     public boolean show() {
-        if (!player.isOnline()) {
-            return false;
-        }
         if (shown) {
             return true;
+        }
+        if (!player.isOnline()) {
+            return false;
         }
         for (Location loc : points) {
             if (!PlayerHandler.sendBlockChange(player, loc, material, data)) {

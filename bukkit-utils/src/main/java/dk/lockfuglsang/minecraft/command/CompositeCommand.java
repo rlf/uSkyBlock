@@ -104,11 +104,11 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
             showUsage(sender, 1);
         } else if (args.length > 1 && args[0].matches(HELP_PATTERN)) {
             showUsage(sender, args[1]);
-        } else if (args.length > params.length) {
+        } else if (args.length > params.length && hasAccess(this, sender)) {
             String cmdName = args[params.length].toLowerCase();
             Command cmd = aliasMap.get(cmdName);
-            String[] subArgs = new String[args.length-1-params.length];
-            System.arraycopy(args, 1+params.length, subArgs, 0, subArgs.length);
+            String[] subArgs = new String[args.length - 1 - params.length];
+            System.arraycopy(args, 1 + params.length, subArgs, 0, subArgs.length);
             int ix = 0;
             for (String p : params) {
                 data.put(p, args[ix++]);
@@ -128,34 +128,41 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
         }
         return true;
     }
-    private void showUsage(CommandSender sender, int page) {
+
+    public void showUsage(CommandSender sender, int page) {
         String msg = tr("\u00a77Usage: {0}", getShortDescription(sender, this));
+        if (!hasAccess(this, sender)) {
+            sender.sendMessage(msg.split("\n"));
+            return;
+        }
         List<String> cmds = new ArrayList<>(commandMap.keySet());
         Collections.sort(cmds);
         int realPage = 0;
         int maxPage = 0;
         if (cmds.size() > MAX_PER_PAGE) {
-            msg = msg.substring(0, msg.length()-1); // Remove \n
+            msg = msg.substring(0, msg.length() - 1); // Remove \n
             maxPage = (int) Math.round(Math.ceil(cmds.size() * 1f / MAX_PER_PAGE));
             realPage = Math.max(1, Math.min(maxPage, page));
             msg += " \u00a77[" + realPage + "/" + maxPage + "]\n";
-            cmds = cmds.subList((realPage-1)*MAX_PER_PAGE, Math.min(realPage*MAX_PER_PAGE, cmds.size()));
+            cmds = cmds.subList((realPage - 1) * MAX_PER_PAGE, Math.min(realPage * MAX_PER_PAGE, cmds.size()));
         }
         for (String key : cmds) {
             Command cmd = commandMap.get(key);
-            msg += "  " + getShortDescription(sender, cmd);
+            if (hasAccess(cmd, sender)) {
+                msg += "  " + getShortDescription(sender, cmd);
+            }
         }
         if (realPage > 0 && maxPage > realPage) {
-            msg += tr("\u00a77Use \u00a73/{0} ? {1}\u00a77 to display next page\n", getName(), (realPage+1));
+            msg += tr("\u00a77Use \u00a73/{0} ? {1}\u00a77 to display next page\n", getName(), (realPage + 1));
         } else if (realPage > 0 && maxPage == realPage) {
-            msg += tr("\u00a77Use \u00a73/{0} ? {1} \u00a77 to display previous page\n", getName(), (realPage-1));
+            msg += tr("\u00a77Use \u00a73/{0} ? {1} \u00a77 to display previous page\n", getName(), (realPage - 1));
         }
         sender.sendMessage(msg.split("\n"));
     }
 
-    private void showUsage(CommandSender sender, String arg) {
+    protected void showUsage(CommandSender sender, String arg) {
         String cmdName = arg.toLowerCase();
-        Command cmd = aliasMap.get(cmdName);
+        Command cmd = cmdName.isEmpty() ? this : aliasMap.get(cmdName);
         if (cmd != null && hasAccess(cmd, sender)) {
             String msg = tr("\u00a77Usage: {0}", name) + " \u00a7e";
             msg += getShortDescription(sender, cmd);
@@ -171,11 +178,13 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
                 showUsage(sender, 1);
             } else {
                 String msg = tr("\u00a77Usage: {0}", getShortDescription(sender, this));
-                Collections.sort(cmds);
-                for (String key : cmds) {
-                    Command scmd = commandMap.get(key);
-                    if (scmd != null) {
-                        msg += "  " + getShortDescription(sender, scmd);
+                if (hasAccess(this, sender)) {
+                    Collections.sort(cmds);
+                    for (String key : cmds) {
+                        Command scmd = commandMap.get(key);
+                        if (scmd != null && hasAccess(scmd, sender)) {
+                            msg += "  " + getShortDescription(sender, scmd);
+                        }
                     }
                 }
                 sender.sendMessage(msg.split("\n"));
@@ -252,19 +261,19 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
 
     @Override
     public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String alias, String[] args) {
-        if (args.length <=  params.length && args.length > 0) {
-            TabCompleter tab = getTabCompleter(this, args.length-1);
+        if (args.length <= params.length && args.length > 0) {
+            TabCompleter tab = getTabCompleter(this, args.length - 1);
             if (tab != null && tab != this) {
                 return tab.onTabComplete(sender, command, alias, args);
             } else if (tab == this) {
-                return getTabList(sender, args[args.length-1]);
+                return getTabList(sender, args[args.length - 1]);
             }
-        } else if (args.length > params.length+1) { // Sub-commands
+        } else if (args.length > params.length + 1) { // Sub-commands
             String cmdName = args[params.length].toLowerCase();
             Command cmd = aliasMap.get(cmdName);
             if (cmd != null && (args.length - params.length) > 1) { // Go deeper
-                String[] subArgs = new String[args.length-1-params.length];
-                System.arraycopy(args, 1+params.length, subArgs, 0, subArgs.length);
+                String[] subArgs = new String[args.length - 1 - params.length];
+                System.arraycopy(args, 1 + params.length, subArgs, 0, subArgs.length);
                 TabCompleter tab = getTabCompleter(cmd, subArgs.length - 1);
                 if (tab != null) {
                     return tab.onTabComplete(sender, command, alias, subArgs);
