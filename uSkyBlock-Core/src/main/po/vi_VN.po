@@ -6,15 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-06-27 20:45+0200\n"
-"Last-Translator: \n"
-"Language-Team: CraftVN\n"
-"Language: vi_VN\n"
+"PO-Revision-Date: 2016-06-27 20:06+0100\n"
+"Last-Translator: Banbeucmas\n"
+"Language-Team: Banbeucmas\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: \n"
 "X-Generator: Poedit 1.8.8\n"
+"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"Language: vi_VN\n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -82,9 +84,7 @@ msgstr ""
 
 #, java-format
 msgid "§4You must be standing within {0} blocks of all required items."
-msgstr ""
-"§4Bạn phải đứng trong phạm vi {0} block đối với những nguyên liệu của nhiệm "
-"vụ."
+msgstr "§4Bạn phải đứng trong phạm vi {0} block đối với những nguyên liệu của nhiệm vụ."
 
 #, java-format
 msgid "§4Your island must be level {0} to complete this challenge!"
@@ -196,11 +196,8 @@ msgid "§4You will lose all required items when you complete this challenge!"
 msgstr "§4Bạn sẽ mất những món đồ sau khi hoàn thành!"
 
 #, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4Tất cả món đồ phải đươc đặt trong skyblock của bạn trong bán kính {0} "
-"blocks."
+msgid "§4All required items must be placed on your island, within {0} blocks of you."
+msgstr "§4Tất cả món đồ phải đươc đặt trong skyblock của bạn trong bán kính {0} blocks."
 
 msgid "§eRank: "
 msgstr "§eXếp hạng: "
@@ -310,12 +307,9 @@ msgstr "§b{0}§d đã tham gia skyblock của bạn"
 msgid "§4No player named {0} found!"
 msgstr "§4Không tìm thấy người chơi tên {0} !"
 
-msgid ""
-"§4No valid island provided, either stand within one, or provide an island "
-"name"
+msgid "§4No valid island provided, either stand within one, or provide an island name"
 msgstr ""
-"§4Không tìm thấy skyblock hợp lê, hay đứng trên 1 cái, hoắc đưa ra tên gọi "
-"của skyblock"
+"§4Không tìm thấy skyblock hợp lê, hay đứng trên 1 cái, hoắc đưa ra tên gọi của skyblock"
 
 msgid "print out info about the island"
 msgstr "xem thông tin về skyblock đó"
@@ -350,12 +344,9 @@ msgid "§cSet {0}s island to be ignored on top-ten and purge."
 msgstr "§cĐưa skyblock của {0} được phớt lờ bởi bộ lọc và danh sách top 10."
 
 #, java-format
-msgid ""
-"§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and "
-"purge."
+msgid "§cRemoved ignore-flag of {0}s island, it will now show up on top-ten and purge."
 msgstr ""
-"§cBỏ trạng thái phơt lờ cho đảo của {0} nó sẽ được liệt vào danh sách top 10 "
-"và bộ lọc."
+"§cBỏ trạng thái phơt lờ cho đảo của {0} nó sẽ được liệt vào danh sách top 10 và bộ lọc."
 
 msgid "§4No valid player-name supplied."
 msgstr "§4Tên người chơi không đúng."
@@ -373,8 +364,7 @@ msgid "§eChanged biome of {0}s island to OCEAN."
 msgstr "§eĐã chuyển môi trường đảo của {0} sang OCEAN."
 
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
-msgstr ""
-"§aBạn có thể phải ra spawn server hoặc vào lại server để thấy sự thay đổi."
+msgstr "§aBạn có thể phải ra spawn server hoặc vào lại server để thấy sự thay đổi."
 
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
@@ -385,8 +375,7 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} đã chuyển môi trường đảo sang OCEAN"
 
 msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr ""
-"§4Xin lỗi!§e 1 cuộc bảo vệ toàn bộ đang diễn ra. Hãy để nó hoàn thành trước."
+msgstr "§4Xin lỗi!§e 1 cuộc bảo vệ toàn bộ đang diễn ra. Hãy để nó hoàn thành trước."
 
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr "§eĐang tiến hành bảo vệ toàn bộ. Sẽ mất 1 chút thời gian."
@@ -494,10 +483,8 @@ msgid "flushes all caches to files"
 msgstr "Xả toàn bộ cache vào files"
 
 #, java-format
-msgid ""
-"§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
-msgstr ""
-"§eĐã xả đảo của §a{0} §e, §b{1} người chơi §6{2} và thông tin nhiệm vụ."
+msgid "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
+msgstr "§eĐã xả đảo của §a{0} §e, §b{1} người chơi §6{2} và thông tin nhiệm vụ."
 
 msgid "manually update the top 10 list"
 msgstr "Cập nhật danh sách top 10 1 cách thủ công"
@@ -596,11 +583,11 @@ msgstr "§eNgười chơi {0} không có đảo!"
 
 #, java-format
 msgid ""
-"§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e "
-"to remove him first."
+"§ePlayer §d{0}§e already has an island.§eUse §d/usb island remove <name>§e to remove him "
+"first."
 msgstr ""
-"§eNgười chơi §d{0}§e Đã có đảo.§eDùng lệnh §d/usb island remove <name>§e để "
-"xóa người chơi khỏi đảo."
+"§eNgười chơi §d{0}§e Đã có đảo.§eDùng lệnh §d/usb island remove <name>§e để xóa người chơi "
+"khỏi đảo."
 
 #, java-format
 msgid "§bLeadership transferred by {0}§b to {1}"
@@ -771,8 +758,7 @@ msgid "show player-information"
 msgstr "xem thông tin người chơi"
 
 msgid ""
-"§4Your island is full, or you have too many pending invites. You can't "
-"invite anyone else."
+"§4Your island is full, or you have too many pending invites. You can't invite anyone else."
 msgstr "§4Đảo đã đầy, hoặc có quá nhiều lời mời đang chờ"
 
 msgid "§4That player is already leader on another island."
@@ -803,8 +789,7 @@ msgstr "{0}§e đã từ chối lời mời."
 msgid "§4You can't use that command right now. Leave your current party first."
 msgstr "§4Không dung được command, hãy rời đảo trước"
 
-msgid ""
-"§aYou have joined an island! Use /island party to see the other members."
+msgid "§aYou have joined an island! Use /island party to see the other members."
 msgstr "§aBạn đã tham gia đảo! Gõ /island party để xem những thành viên khác."
 
 #, java-format
@@ -860,8 +845,7 @@ msgstr "§eBạn bị §cCấm§e tại đảo của {0}"
 
 #, java-format
 msgid "§eYou have unbanned §a{0}§e from warping to your island."
-msgstr ""
-"§eBạn bỏ lệnh cấm §a{0}§e, người chơi có thể dịch chuyển đến đảo của bạn."
+msgstr "§eBạn bỏ lệnh cấm §a{0}§e, người chơi có thể dịch chuyển đến đảo của bạn."
 
 #, java-format
 msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
@@ -870,8 +854,7 @@ msgstr "§eBạn được §abỏ lệnh cấm§e tại đảo của {0}"
 msgid "change the biome of the island"
 msgstr "chuyển vùng"
 
-msgid ""
-"§cYou do not have permission to change the biome of your current island."
+msgid "§cYou do not have permission to change the biome of your current island."
 msgstr "§cBạn không có quyền chuyển vùng đảo hiện tại."
 
 msgid "§4You do not have permission to change the biome of this island!"
@@ -903,13 +886,13 @@ msgid "create an island"
 msgstr "tạo đảo mới"
 
 msgid ""
-"§4Island found!§e You already have an island. If you want a fresh island, "
-"type§b /is restart§e to get one"
+"§4Island found!§e You already have an island. If you want a fresh island, type§b /is "
+"restart§e to get one"
 msgstr "§4Tìm thấy đảo!§e Bạn đã có đảo. Để tạo mới, dùng /is restart."
 
 msgid ""
-"§4Island found!§e You are already a member of an island. To start your own, "
-"first§b /is leave"
+"§4Island found!§e You are already a member of an island. To start your own, first§b /is "
+"leave"
 msgstr ""
 "§4Tìm thấy đảo!§e Bạn đã là thành viên của một đảo.\n"
 "Để tạo đảo, đầu tiên hãy dùng§b /is leave"
@@ -921,9 +904,7 @@ msgstr "§eBạn khởi tạo đảo mới tron {0,number,#} giây."
 msgid "teleport to the island home"
 msgstr "hồi chuyển về nhà"
 
-msgid ""
-"§cYour island is in the process of generating, you cannot teleport home "
-"right now."
+msgid "§cYour island is in the process of generating, you cannot teleport home right now."
 msgstr "§cĐảo của bạn đang khởi tạo, bạn không thể hồi chuyển về nhà."
 
 msgid "check your or anothers island info"
@@ -958,8 +939,7 @@ msgstr "§aCấp đảo là {0,number,###.##}"
 msgid "invite a player to your island"
 msgstr "mời người chơi vào đảo của bạn"
 
-msgid ""
-"§eUse§f /island invite <playername>§e to invite a player to your island."
+msgid "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr "§eDùng§f /island invite <tên người chơi>§e để mời người chơi vào đảo."
 
 msgid "§4Only the island's owner can invite!"
@@ -1027,15 +1007,14 @@ msgid "leave your party"
 msgstr "rời khỏi nhóm"
 
 msgid ""
-"§4You can't leave your island if you are the only person. Try using /island "
-"restart if you want a new one!"
+"§4You can't leave your island if you are the only person. Try using /island restart if you "
+"want a new one!"
 msgstr ""
 "§4Bạn không thể rời đảo chỉ có 1 thành viên. Thử dùng /island restart\n"
 "§4để khởi tạo đảo mới"
 
 msgid "§eYou own this island, use /island remove <player> instead."
-msgstr ""
-"§eBạn sở hữu đảo này, thay vào đó dùng /island remove <tên người chơi>."
+msgstr "§eBạn sở hữu đảo này, thay vào đó dùng /island remove <tên người chơi>."
 
 msgid "§eYou have left the island and returned to the player spawn."
 msgstr "§eBạn đã rời khỏi đào và hồi chuyển về khu vực chung."
@@ -1115,19 +1094,17 @@ msgid "delete your island and start a new one."
 msgstr "xoá đảo của bạn và khởi tạo đảo mới"
 
 msgid ""
-"§4Only the owner may restart this island. Leave this island in order to "
-"start your own (/island leave)."
+"§4Only the owner may restart this island. Leave this island in order to start your own (/"
+"island leave)."
 msgstr ""
 "§4Chỉ quản lý có thể khởi tạo lại đảo.\n"
 "§4Rời khỏi đảo để có thể tạo đảo riêng (/island leave)"
 
 msgid ""
-"§eYou must remove all players from your island before you can restart it (/"
-"island kick <player>). See a list of players currently part of your island "
-"using /island party."
+"§eYou must remove all players from your island before you can restart it (/island kick "
+"<player>). See a list of players currently part of your island using /island party."
 msgstr ""
-"§eBạn phải trục xuất tất cả thành viên trước khi khởi tạo lại đảo(/island "
-"kick player)\n"
+"§eBạn phải trục xuất tất cả thành viên trước khi khởi tạo lại đảo(/island kick player)\n"
 "Xem danh sách thành viên bằng /is party"
 
 #, java-format
@@ -1204,7 +1181,7 @@ msgstr "§eBạn được tín nhiệm trên đảo của {0}"
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
-msgstr "§a{0} tín nhiệm bạn {1}"
+msgstr "§a{0} tín nhiệm bạn{1}"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}'s §eisland."
@@ -1221,9 +1198,7 @@ msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr "§aĐiểm dịch chuyển đã hoạt động, người chơi có thể dịch chuyển đến"
 
 msgid "§4Your incoming warp is inactive, players may not warp to your island."
-msgstr ""
-"§4Điểm dịch chuyển không hoạt động, người chơi không thể dịch chuyển đến đảo "
-"của bạn"
+msgstr "§4Điểm dịch chuyển không hoạt động, người chơi không thể dịch chuyển đến đảo của bạn"
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
 msgstr "§fThiết đặt điểm dịch chuyển tại vị trí của bạn dùng §e/island setwarp"
@@ -1241,8 +1216,8 @@ msgid "§4You do not have permission to warp to other islands!"
 msgstr "§4Không có quyền dịch chuyển tới đảo khác"
 
 msgid ""
-"§cYour island is in the process of generating, you cannot warp to other "
-"players islands right now."
+"§cYour island is in the process of generating, you cannot warp to other players islands "
+"right now."
 msgstr "§cĐảo của bạn đang khởi tạo, không thể dịch chuyển đến nơi khác"
 
 msgid "§4That player does not exist!"
@@ -1252,8 +1227,7 @@ msgid "§4That player does not have an active warp."
 msgstr "§4Người chơi không kích hoạt điểm dịch chuyển"
 
 msgid ""
-"§cThat players island is in the process of generating, you cannot warp to it "
-"right now."
+"§cThat players island is in the process of generating, you cannot warp to it right now."
 msgstr "§cĐảo của người đang khởi tạo, dịch chuyển vô hiệu"
 
 #, java-format
@@ -1315,8 +1289,8 @@ msgid "Config:"
 msgstr "Tuỳ chỉnh:"
 
 msgid ""
-"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
-"that is not allowed."
+"§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, that is not "
+"allowed."
 msgstr "§cKhông thể dịch chuyển vượt giới hạn độ cao §cĐịa ngục"
 
 msgid "§4You can only convert obsidian once every 10 seconds"
@@ -1365,10 +1339,8 @@ msgid "§9{0}§7 timed out"
 msgstr "§9{0}§7 hết giờ"
 
 #, java-format
-msgid ""
-"§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to "
-"accept!"
-msgstr "§eLặp lại lệnh {0} trong §a{1}§e giây để chấp nhận!"
+msgid "§eDoing §9{0}§e is §cRISKY§e. Repeat the command within §a{1}§e seconds to accept!"
+msgstr "§eLặp lại lệnh trong §a{1}§e giây để chấp nhận! {0}"
 
 msgid "N/A"
 msgstr "Không xác định"
@@ -1388,8 +1360,8 @@ msgid "§4You must be the party leader to lock your island!"
 msgstr "§4Bạn phải là quản lý đảo để khoá đảo"
 
 msgid ""
-"§eYour island is unlocked and anyone may enter, however only you and your "
-"party members may build or remove blocks."
+"§eYour island is unlocked and anyone may enter, however only you and your party members "
+"may build or remove blocks."
 msgstr ""
 "§eĐảo của bạn đã mở khoá và mọi người có thể vào,\n"
 "dù sao thì chỉ thành viên trong đảo có thể xây hay phá khối"
@@ -1443,9 +1415,7 @@ msgstr "§Khởi tạo đảo tại vị trí của bạn"
 msgid "§9Creating an island §7{0}§9 of you"
 msgstr "§9Khởi tạo đảo §7{0} của bạn"
 
-msgid ""
-"§cThe island owning this piece of nether is being deleted! Sending you to "
-"spawn."
+msgid "§cThe island owning this piece of nether is being deleted! Sending you to spawn."
 msgstr ""
 "§cĐảo ảnh hướng đến khu vực này vừa bị xoá! Hồi chuyển về \n"
 "khu vực chung"
@@ -1745,8 +1715,7 @@ msgid ""
 "spawn normally."
 msgstr ""
 "Đại dương là cung cơ bản khi khởi tạo.\n"
-"Các loài động vật không xuất hiện ở đây.\\Nhưng quái vật thì không cần ăn "
-"cũng sống."
+"Các loài động vật không xuất hiện ở đây.\\Nhưng quái vật thì không cần ăn cũng sống."
 
 msgid "Forest"
 msgstr "Rừng lá thấp"
@@ -1759,8 +1728,7 @@ msgid ""
 "spawn normally."
 msgstr ""
 "Rừng lá thấp sẽ cho phép đảo của bạn\n"
-"Xuất hiện bò, heo, gà thậm chí cả sói,\\Và dĩ nhiên cũng kèm theo đó là quái "
-"vật."
+"Xuất hiện bò, heo, gà thậm chí cả sói,\\Và dĩ nhiên cũng kèm theo đó là quái vật."
 
 msgid "Desert"
 msgstr "Sa mạc"
@@ -2257,11 +2225,8 @@ msgid "Something went wrong saving the island and/or party data!"
 msgstr "Lỗi phát sinh khi lưu trữ thông tin đảo/nhóm"
 
 #, java-format
-msgid ""
-"§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
-msgstr ""
-"buSkyBlock phụ thuộc vào §9{0}§e >= §av{1}§e nhưng chỉ có §cv{2}§e được tìm "
-"thấy!\n"
+msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
+msgstr "buSkyBlock phụ thuộc vào §9{0}§e >= §av{1}§e nhưng chỉ có §cv{2}§e được tìm thấy!\n"
 
 #, java-format
 msgid "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
@@ -2293,9 +2258,7 @@ msgid "§4Your current location is not a safe home-location."
 msgstr "§4Vị trí hiện tại không an toàn."
 
 #, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
+msgid "§7The pixies are busy changing the biome of your island to §9{0}§7, be patient."
 msgstr "§7Đang chuyển vùng thành §9{0}§7, hãy kiên nhẫn."
 
 msgid "§cYour island is in the process of generating, you cannot create now."
