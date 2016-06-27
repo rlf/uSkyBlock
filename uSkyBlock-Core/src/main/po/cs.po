@@ -159,58 +159,6 @@ msgstr "§eKliknutím zobrazíte další stranu."
 msgid "§4§lLocked Challenge"
 msgstr "§4§lUzamknutý úkol"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eÚkoly byly zakázány. Kontaktujte realizační tým."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4Nemáte práva pro použití tohoto příkazu!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4SkyBlock úkoly lze splnit pouze ve SkyBlock světě!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4SkyBlock úkoly lze splnit pouze pokud jste na vašem ostrově!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr ""
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr ""
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr ""
-
-msgid "Incomplete"
-msgstr ""
-
-msgid "Completed (not repeatable)"
-msgstr "Hotový (nelze opakovat)"
-
-msgid "Completed(repeatable)"
-msgstr "Hotový (lze opakovat)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr ""
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4Všechny požadované itemy musíte položit vedle sebe na ostrově do {0} bloků."
-
-msgid "§eRank: "
-msgstr "§eHodnost: "
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4Tento úkol nelze opakovat!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§ePro splnění tohoto úkolu použijte §f/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4Neplatný název úkolu! Použijte /c help pro více informací."
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
@@ -755,6 +703,49 @@ msgstr ""
 msgid "show player-information"
 msgstr ""
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§eHodnost: "
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4Tento úkol nelze opakovat!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr ""
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4Všechny požadované itemy musíte položit vedle sebe na ostrově do {0} bloků."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§ePro splnění tohoto úkolu použijte §f/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4Neplatný název úkolu! Použijte /c help pro více informací."
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§eÚkoly byly zakázány. Kontaktujte realizační tým."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4SkyBlock úkoly lze splnit pouze ve SkyBlock světě!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4SkyBlock úkoly lze splnit pouze pokud jste na vašem ostrově!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1044,6 +1035,9 @@ msgstr ""
 
 msgid "§4You do not have permission to lock your island!"
 msgstr ""
+
+msgid "§4You don't have access to this command!"
+msgstr "§4Nemáte práva pro použití tohoto příkazu!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr ""

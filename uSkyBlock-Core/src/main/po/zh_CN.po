@@ -159,57 +159,6 @@ msgstr ""
 msgid "§4§lLocked Challenge"
 msgstr "§4§l挑战锁定"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§e挑战不可用,请联系服务器管理员."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4你无法使用当前指令。"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4你只能在空岛世界提交挑战。"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§e输入/c <name> 查询一个挑战的详情信息。"
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§e输入/c complete <name> 来完成一个挑战。"
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§e挑战将会根据不同难度显示不同颜色:"
-
-msgid "Incomplete"
-msgstr ""
-
-msgid "Completed (not repeatable)"
-msgstr ""
-
-msgid "Completed(repeatable)"
-msgstr ""
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§4挑战所需物品将会从你背包内移除。"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-
-msgid "§eRank: "
-msgstr ""
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4当前任务不可重复。"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr ""
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4错误的挑战名!输入/c help 获取更多信息"
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
@@ -758,6 +707,48 @@ msgstr ""
 msgid "show player-information"
 msgstr ""
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr ""
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4当前任务不可重复。"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr "§4挑战所需物品将会从你背包内移除。"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr ""
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4错误的挑战名!输入/c help 获取更多信息"
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§e挑战不可用,请联系服务器管理员."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4你只能在空岛世界提交挑战。"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4你只能在拥有一个岛屿的情况下提交挑战。"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1051,6 +1042,9 @@ msgstr ""
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4你没有权限锁定你的岛屿!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4你无法使用当前指令。"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4你没有权限解锁你的岛屿!"

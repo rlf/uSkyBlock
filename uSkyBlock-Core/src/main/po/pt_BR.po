@@ -160,60 +160,6 @@ msgstr "§e§lClique aqui para ver a próxima página"
 msgid "§4§lLocked Challenge"
 msgstr "§4§lDesafio bloqueado"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eDesafios estão desabilitados. Contate a um administrador."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4Você não tem acesso a esse comando!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4Você só pode completar desafios na sua ilha!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4Você só pode completar desafios se tiver uma ilha!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eUse /c <nome> para ver informações sobre um desafio."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eUse /c complete <nome> para completar um desafio."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eDesafios irão ter diferentes cores dependendo se eles são:"
-
-msgid "Incomplete"
-msgstr "Incompleto"
-
-msgid "Completed (not repeatable)"
-msgstr "Completado (não repetível)"
-
-msgid "Completed(repeatable)"
-msgstr "Completado (repetível)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr ""
-"§4Você irá perder todos os items necessários quando completar esse desafio!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4Todos os items necessários devem ser colocados na sua ilha, com até {0} "
-"blocos de distância de você."
-
-msgid "§eRank: "
-msgstr "§eCategoria: "
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4Esse desafio não pode ser repetido!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§ePara completar esse desafio, use §f/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4Nome de desafio inválido! Use /c help para mais informações"
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
@@ -768,6 +714,51 @@ msgstr "Ultimate SkyBlock Admin"
 msgid "show player-information"
 msgstr "mostrar informações do jogador"
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§eCategoria: "
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4Esse desafio não pode ser repetido!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr ""
+"§4Você irá perder todos os items necessários quando completar esse desafio!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4Todos os items necessários devem ser colocados na sua ilha, com até {0} "
+"blocos de distância de você."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§ePara completar esse desafio, use §f/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4Nome de desafio inválido! Use /c help para mais informações"
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§eDesafios estão desabilitados. Contate a um administrador."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4Você só pode completar desafios na sua ilha!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4Você só pode completar desafios se tiver uma ilha!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1069,6 +1060,9 @@ msgstr "trancar sua ilha para jogadores fora do seu grupo."
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4Você não tem permissão para trancar a ilha!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4Você não tem acesso a esse comando!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Você não tem permissão para destrancar a ilha!"

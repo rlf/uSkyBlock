@@ -161,60 +161,6 @@ msgstr "§fKlik her for næste side."
 msgid "§4§lLocked Challenge"
 msgstr "§4§lLåst udfordring"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eUdfordringer er deaktiveret. Kontakt en administrator."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4Du har ikke adgang til denne kommando!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4Du kan kun gennemføre udfordringer i skyblock verdenen!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4Du kan kun gennemføre udfordringer når du har en ø!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eBrug §9/c <navn>§e til at se info om en udfordring."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eBrug §9/c complete <navn>§e for at gennemføre en udfordring."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eUdfordringer har forskellige farver, afhængigt af om de er:"
-
-msgid "Incomplete"
-msgstr "Uafsluttet"
-
-msgid "Completed (not repeatable)"
-msgstr "Gennemførte (engangs)"
-
-msgid "Completed(repeatable)"
-msgstr "Udført (gentagelige)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr ""
-"§4Du vil miste alle de påkrævede ting, når du gennemfører denne udfordring!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4Alle de påkrævede elementer skal være på din ø, indenfor {0} meter fra "
-"dig. "
-
-msgid "§eRank: "
-msgstr "§eRank: "
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4Denne udfording er ikke gentagelig!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§eFor at gennemføre denne udfordring, brug §f/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4Forkert udfordringsnavn!§e Brug §9/c help§e for mere info."
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr "§7Gennemfør yderligere {0} {1} §7udfordringer"
@@ -770,6 +716,51 @@ msgstr "Ultimate SkyBlock Admin"
 msgid "show player-information"
 msgstr "vis spiller-information"
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§eRank: "
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4Denne udfording er ikke gentagelig!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr ""
+"§4Du vil miste alle de påkrævede ting, når du gennemfører denne udfordring!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4Alle de påkrævede elementer skal være på din ø, indenfor {0} meter fra "
+"dig. "
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§eFor at gennemføre denne udfordring, brug §f/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4Forkert udfordringsnavn!§e Brug §9/c help§e for mere info."
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§eUdfordringer er deaktiveret. Kontakt en administrator."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4Du kan kun gennemføre udfordringer i skyblock verdenen!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4Du kan kun gennemføre udfordringer når du har en ø!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1070,6 +1061,9 @@ msgstr "lås din ø for ikke-medlemmer"
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4Du har ikke tilladelse til at låse din ø!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4Du har ikke adgang til denne kommando!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Du har ikke tilladelse til at låse din ø op!"

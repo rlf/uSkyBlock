@@ -162,58 +162,6 @@ msgstr "§eНажмите для просмотра следующей стра�
 msgid "§4§lLocked Challenge"
 msgstr "§4§lЗадание заблокировано"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eЗадания выключены. Свяжитесь с администратором."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4У вас недостаточно прав для выполнения этой команды!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4Отправить задания возможно только в мире skyblock!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4Отправить задание можно только если у вас есть остров!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eВведите /c <name> для просмотра информации по заданию."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eВведите /c complete <name> для подтверждения выполения задания."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eЗадания будут разноцветными, если они:"
-
-msgid "Incomplete"
-msgstr "Не завершено"
-
-msgid "Completed (not repeatable)"
-msgstr "Завершено (не повторяемо)"
-
-msgid "Completed(repeatable)"
-msgstr "Завершено(повторяемо)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§4У вас заберут все необходимые предметы, если вы завершите задание!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4Все требуемые предметы должны быть размещены на вашем острове в {0} блоках."
-
-msgid "§eRank: "
-msgstr "§eЗвание: "
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4Это задание нельзя повторить!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§eДля завершения задания введите §f/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4Неверное название задания! Введите /c help для подробной информации"
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
@@ -767,6 +715,49 @@ msgstr "Ultimate SkyBlock Admin"
 msgid "show player-information"
 msgstr "показать информацию по игроку"
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§eЗвание: "
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4Это задание нельзя повторить!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr "§4У вас заберут все необходимые предметы, если вы завершите задание!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4Все требуемые предметы должны быть размещены на вашем острове в {0} блоках."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§eДля завершения задания введите §f/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4Неверное название задания! Введите /c help для подробной информации"
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§eЗадания выключены. Свяжитесь с администратором."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4Отправить задания возможно только в мире skyblock!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4Отправить задание можно только если у вас есть остров!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1075,6 +1066,9 @@ msgstr "блокировать остров от посторонних игро
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4У вас недостаточно прав для блокировки вашего острова!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4У вас недостаточно прав для выполнения этой команды!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4У вас недостаточно прав для разблокировки вашего острова!"

@@ -37,8 +37,8 @@ import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
 import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
-import us.talabrek.ultimateskyblock.challenge.ChallengesCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
+import us.talabrek.ultimateskyblock.command.ChallengeCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.command.IslandTalkCommand;
 import us.talabrek.ultimateskyblock.command.PartyTalkCommand;
@@ -1037,7 +1037,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         cooldownHandler = new CooldownHandler(this);
         animationHandler = new AnimationHandler(this);
         getCommand("island").setExecutor(new IslandCommand(this, menu));
-        getCommand("challenges").setExecutor(new ChallengesCommand(this));
+        getCommand("challenges").setExecutor(new ChallengeCommand(this));
         getCommand("usb").setExecutor(new AdminCommand(this, confirmHandler, animationHandler));
         getCommand("islandtalk").setExecutor(new IslandTalkCommand(this));
         getCommand("partytalk").setExecutor(new PartyTalkCommand(this));

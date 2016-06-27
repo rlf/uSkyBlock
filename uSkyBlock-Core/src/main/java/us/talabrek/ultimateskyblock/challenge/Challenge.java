@@ -25,7 +25,7 @@ public class Challenge {
     public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?(?<meta>\\{.*\\})?");
     public static final int MAX_DETAILS = 11;
 
-    enum Type { PLAYER, ISLAND, ISLAND_LEVEL;
+    public enum Type { PLAYER, ISLAND, ISLAND_LEVEL;
         static Type from(String s) {
             if (s == null || s.trim().isEmpty() || s.trim().toLowerCase().equals("onplayer")) {
                 return PLAYER;

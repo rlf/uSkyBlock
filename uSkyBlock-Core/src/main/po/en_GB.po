@@ -162,61 +162,6 @@ msgstr "§eClick here to show next page"
 msgid "§4§lLocked Challenge"
 msgstr "§4§lLocked Challenge"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§4* §7Challenges has been disabled. Contact an administrator."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4* §7You don't have access to this command!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4* §7You can only submit challenges in the skyblock world!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4* §7You can only submit challenges when you have an island!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§a* §7Use §a/c <name> §7to view information about a challenge."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr ""
-"§a* §7Use §a/c complete <name> §7to attempt to complete that challenge."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§a* §7Challenges will have different colors depending on if they are:"
-
-msgid "Incomplete"
-msgstr "Incomplete"
-
-msgid "Completed (not repeatable)"
-msgstr "Completed (not repeatable)"
-
-msgid "Completed(repeatable)"
-msgstr "Completed(repeatable)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr ""
-"§4* §7You will lose all required items when you complete this challenge!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4* §7All required items must be placed on your island, within §c{0} "
-"§7blocks of you."
-
-msgid "§eRank: "
-msgstr "§eRank: "
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4This Challenge is not repeatable!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§a* §7To complete this challenge, use §a/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4* §7Invalid challenge name! Use §a/c §7help for more information"
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr "§7Complete {0} more {1} §7challenges"
@@ -771,6 +716,51 @@ msgstr "Ultimate SkyBlock Admin"
 msgid "show player-information"
 msgstr "show player-information"
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§eRank: "
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4This Challenge is not repeatable!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr ""
+"§4* §7You will lose all required items when you complete this challenge!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4* §7All required items must be placed on your island, within §c{0} "
+"§7blocks of you."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§a* §7To complete this challenge, use §a/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4* §7Invalid challenge name! Use §a/c §7help for more information"
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§4* §7Challenges has been disabled. Contact an administrator."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4* §7You can only submit challenges in the skyblock world!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4* §7You can only submit challenges when you have an island!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1076,6 +1066,9 @@ msgstr "lock your island to non-party members."
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4* §7You do not have permission to lock your island!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4* §7You don't have access to this command!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4* §7You do not have permission to unlock your island!"

@@ -164,59 +164,6 @@ msgstr "§eKlicka här för att visa nästa sida"
 msgid "§4§lLocked Challenge"
 msgstr "§c§lLåst uppdrag"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eUppdrag är inaktiverat. Vänligen kontakta en administratör."
-
-msgid "§4You don't have access to this command!"
-msgstr "§cDu har inte tillgång till det kommandot."
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§cDu kan endast göra uppdrag i Skyblockvärlden!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§cDu kan endast göra uppdrag när du har en ö!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eAnvänd /c <namn> för att visa information om ett uppdrag."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eAnvänd /c complete <namn> för att försöka att genomföra ett uppdrag."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eUppdrag kommer ha olika färger beroende på om de är:"
-
-msgid "Incomplete"
-msgstr "Ej genomförd"
-
-msgid "Completed (not repeatable)"
-msgstr "Genomförd (ej repeterbar)"
-
-msgid "Completed(repeatable)"
-msgstr "Genomförd (repeterbar)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§cDu kommer att förlora allt krävda material när du gör detta uppdrag!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§cAllt krävda material måste vara placerat på din ö, minst {0} blocks ifrån "
-"dig."
-
-msgid "§eRank: "
-msgstr "§eRank:"
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§cDetta uppdrag är ej repeterbart!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§e§lFör att genomföra detta uppdrag, använda §f/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§cFelaktigt namn på uppdraget! Använd /c help för mer information."
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
@@ -772,6 +719,50 @@ msgstr "Ultimate SkyBlock Admin"
 msgid "show player-information"
 msgstr "visa information om spelare"
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§eRank:"
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§cDetta uppdrag är ej repeterbart!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr "§cDu kommer att förlora allt krävda material när du gör detta uppdrag!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§cAllt krävda material måste vara placerat på din ö, minst {0} blocks ifrån "
+"dig."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§e§lFör att genomföra detta uppdrag, använda §f/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§cFelaktigt namn på uppdraget! Använd /c help för mer information."
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§eUppdrag är inaktiverat. Vänligen kontakta en administratör."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§cDu kan endast göra uppdrag i Skyblockvärlden!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§cDu kan endast göra uppdrag när du har en ö!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1071,6 +1062,9 @@ msgstr "lås din ö för spelare som inte är gruppmedlemmar."
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§cDu saknar rättighet att låsa ön!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§cDu har inte tillgång till det kommandot."
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§cDu saknar rättighet att låsa upp ön!"

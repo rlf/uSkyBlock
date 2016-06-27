@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -159,58 +159,6 @@ msgstr "§eClick here to show next page"
 
 msgid "§4§lLocked Challenge"
 msgstr "§4§lLocked Challenge"
-
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eChallenges has been disabled. Contact an administrator."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4Ye don't have access to this command!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4Ye can only submit challenges in the skyblock world!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4Ye can only submit challenges when ye have a hideout!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eUse /c <name> to view information about a challenge."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eUse /c complete <name> to attempt to complete that challenge."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eChallenges will have different colors dependin' on if they be:"
-
-msgid "Incomplete"
-msgstr "Incomplete"
-
-msgid "Completed (not repeatable)"
-msgstr "Completed (not repeatable)"
-
-msgid "Completed(repeatable)"
-msgstr "Completed(repeatable)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§4Ye will lose all required items when ye complete this challenge!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4All required items must be placed in yer hideout, within {0} blocks of ye."
-
-msgid "§eRank: "
-msgstr "§eRank: "
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4This Challenge be not repeatable!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§eTo complete this challenge, use §f/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr "§4Invalid challenge name! Use /c help for more information"
 
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
@@ -504,19 +452,19 @@ msgid "§eFinished generation of the Top Ten list"
 msgstr "§eFinished generation of the Top Ten list"
 
 msgid "advanced command for getting island-data"
-msgstr ""
+msgstr "advanced command for gettin' hideout-data"
 
 #, java-format
 msgid "§eCurrent value for {0} is ''{1}''"
-msgstr ""
+msgstr "§eCurrent value for {0} is ''{1}''"
 
 #, java-format
 msgid "§cUnable to get state for {0}"
-msgstr ""
+msgstr "§cUnable to get state for {0}"
 
 #, java-format
 msgid "§eValid fields are {0}"
-msgstr ""
+msgstr "§eValid fields be {0}"
 
 msgid "teleport to another players island"
 msgstr "teleport to another pirates hideout"
@@ -641,44 +589,44 @@ msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eFindin'' all islands that has been abandoned for more than {0} days."
 
 msgid "region manipulations"
-msgstr ""
+msgstr "region manipulations"
 
 msgid "shows the borders of the current island"
-msgstr ""
+msgstr "shows the borders of the current hideout"
 
 msgid "§eNo island found at your current location"
-msgstr ""
+msgstr "§eNay hideout found at yer current location"
 
 msgid "§eCan only be executed as a player"
-msgstr ""
+msgstr "§eCan only be executed as a pirate"
 
 msgid "shows the borders of the current chunk"
-msgstr ""
+msgstr "shows the borders of the current chunk"
 
 msgid "shows the borders of the inner-chunks"
-msgstr ""
+msgstr "shows the borders of the inner-chunks"
 
 msgid "shows the non-chunk-aligned borders"
-msgstr ""
+msgstr "shows the non-chunk-aligned borders"
 
 msgid "shows the borders of the outer-chunks"
-msgstr ""
+msgstr "shows the borders of the outer-chunks"
 
 msgid "hides the regions again"
-msgstr ""
+msgstr "hides the regions again"
 
 msgid "§eStopped displaying regions"
-msgstr ""
+msgstr "§eStopped displayin' regions"
 
 msgid "§eNo currently shown regions for this player"
-msgstr ""
+msgstr "§eNay currently shown regions for this pirate"
 
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
-msgstr ""
+msgstr "§eAnimation-tick changed to {0}."
 
 msgid "§eAnimation-tick must be a valid integer."
-msgstr ""
+msgstr "§eAnimation-tick must be a valid integer."
 
 msgid "set a player's island to your location"
 msgstr "set a pirate's hideout to yer location"
@@ -697,23 +645,23 @@ msgid "§eConfiguration reloaded from file."
 msgstr "§eConfiguration reloaded from file."
 
 msgid "advanced command for setting island-data"
-msgstr ""
+msgstr "advanced command for settin' hideout-data"
 
 #, java-format
 msgid "§c{0} was set to ''{1}''"
-msgstr ""
+msgstr "§c{0} was set to ''{1}''"
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}''"
-msgstr ""
+msgstr "§cUnable to set field {0} to ''{1}''"
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
-msgstr ""
+msgstr "§cUnable to set field {0} to ''{1}'', a number was expected"
 
 #, java-format
 msgid "§cInvalid field {0}"
-msgstr ""
+msgstr "§cInvalid field {0}"
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
@@ -765,12 +713,55 @@ msgstr "Ultimate SkyBlock Admin"
 msgid "show player-information"
 msgstr "show pirate-information"
 
+msgid "try to complete a challenge"
+msgstr "try to complete a challenge"
+
+msgid "§cCommand only available for players."
+msgstr "§cCommand only available for pirates."
+
+msgid "show information about the challenge"
+msgstr "show information about the challenge"
+
+msgid "§eRank: "
+msgstr "§eRank: "
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4This Challenge be not repeatable!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr "§4Ye will lose all required items when ye complete this challenge!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4All required items must be placed in yer hideout, within {0} blocks of ye."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§eTo complete this challenge, use §f/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr "§4Invalid challenge name! Use /c help for more information"
+
+msgid "complete and list challenges"
+msgstr "complete an' list challenges"
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§eChallenges has been disabled. Contact an administrator."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4Ye can only submit challenges in the skyblock world!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4Ye can only submit challenges when ye have a hideout!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
 msgstr ""
-"§4Yer hideout be full, or ye have too many pendin' invites. Ye can't invite "
-"anyone else."
+"§4Yer hideout be full, or ye have too many pendin' invites. Ye can't "
+"invite anyone else."
 
 msgid "§4That player is already leader on another island."
 msgstr "§4That pirate be already captain on another hideout."
@@ -925,8 +916,8 @@ msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
 "right now."
 msgstr ""
-"§cYer hideout be in the process of generatin', ye cannot teleport home right "
-"now."
+"§cYer hideout be in the process of generatin', ye cannot teleport home "
+"right now."
 
 msgid "check your or anothers island info"
 msgstr "check yer or anothers hideout info"
@@ -1024,8 +1015,7 @@ msgid "§4{0} has been kicked from the island."
 msgstr "§4{0} has been kicked from the hideout."
 
 msgid "§4That player is not part of your island group, and not on your island!"
-msgstr ""
-"§4That pirate be not part of yer hideout group, an' not in yer hideout!"
+msgstr "§4That pirate be not part of yer hideout group, an' not in yer hideout!"
 
 msgid "leave your party"
 msgstr "leave yer party"
@@ -1066,6 +1056,9 @@ msgstr "lock yer hideout to non-party members."
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4Ye do not have permission to lock yer hideout!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4Ye don't have access to this command!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Ye do not have permission to unlock yer hideout!"
@@ -1323,8 +1316,8 @@ msgid ""
 "§cNo Access! §eYou are trying to teleport to the roof of the §cNETHER§e, "
 "that is not allowed."
 msgstr ""
-"§cNay Access! §eYe be tryin' to teleport to the roof of the §cNETHER§e, that "
-"be not allowed."
+"§cNay Access! §eYe be tryin' to teleport to the roof of the §cNETHER§e, "
+"that be not allowed."
 
 msgid "§4You can only convert obsidian once every 10 seconds"
 msgstr "§4Ye can only convert obsidian once every 10 seconds"
@@ -1417,7 +1410,7 @@ msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Nay importer named §e{0}§4 found"
 
 msgid "§eConverted "
-msgstr ""
+msgstr "§eConverted "
 
 msgid "The island has been created."
 msgstr "The hideout has been created."
@@ -1625,8 +1618,7 @@ msgid ""
 "to turn it on or off at anytime.\n"
 "but not set the location."
 msgstr ""
-"toggle the\n"
-" hideout's warp, allowin' 'em\n"
+"toggle the\n hideout's warp, allowin' 'em\n"
 "to turn it on or off at anytime.\n"
 "but not set the location."
 
@@ -1896,8 +1888,7 @@ msgid ""
 "Only endermen will spawn\n"
 "in this biome."
 msgstr ""
-"The sky biome gives yer\n"
-" hideout a special dark sky.\n"
+"The sky biome gives yer\n hideout a special dark sky.\n"
 "Only endermen will spawn\n"
 "in this biome."
 
@@ -2018,8 +2009,7 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Want to join another pirate's\n"
-" hideout instead of startin'\n"
+"Want to join another pirate's\n hideout instead of startin'\n"
 "yer own? If another pirate\n"
 "invites ye to their hideout\n"
 "ye can click here or use\n"
@@ -2056,8 +2046,7 @@ msgid ""
 msgstr ""
 "Return to yer hideout's home\n"
 "point. Ye can change yer home\n"
-"point to any location on yer\n"
-" hideout usin' §b/island sethome\n"
+"point to any location on yer\n hideout usin' §b/island sethome\n"
 "§e§lClick here to return home."
 
 msgid "§a§lChallenges"
@@ -2237,8 +2226,7 @@ msgid ""
 "this location.\n"
 "§e§lClick here to change."
 msgstr ""
-"When ye teleport to yer\n"
-" hideout ye will be taken to\n"
+"When ye teleport to yer\n hideout ye will be taken to\n"
 "this location.\n"
 "§e§lClick here to change."
 
@@ -2266,7 +2254,7 @@ msgid ""
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 "Restarts yer hideout.\n"
-"§4WARNING! §cwill remove yer items an' hideout!"
+"§4WARNING! §cwill remove yer items an' island!"
 
 msgid "§c§lLeave Island"
 msgstr "§c§lLeave Island"
@@ -2414,34 +2402,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#~ msgid "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
-#~ msgstr "§eProgress: {0,number,#}% ({1}/{2} - success:{3}, failed:{4})"
-
-#~ msgid "§eConverted {0}/{1} files"
-#~ msgstr "§eConverted {0}/{1} files"
-
-#~ msgid "Found {0} names to lookup from Mojang"
-#~ msgstr "Found {0} names to lookup from Mojang"
-
-#~ msgid "Done updating the PlayerDB in {0}"
-#~ msgstr "Done updatin'' the PlayerDB in {0}"
-
-#~ msgid ""
-#~ "Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
-#~ msgstr ""
-#~ "Import progress ({0}): {1}/{3} ({4,number,##}%, {2} failed, elapsed {5})"
-
-#~ msgid "Error: {0}"
-#~ msgstr "Blimey: {0}"
-
-#~ msgid "Too many requests for Mojangs API, sleeping {0}"
-#~ msgstr "Too many requests for Mojangs API, sleepin'' {0}"
-
-#~ msgid "Renamed player {0} to {1} in {2} seconds."
-#~ msgstr "Renamed pirate {0} to {1} in {2} seconds."
-
-#~ msgid ""
-#~ "§9It took §a{0}§9 seconds to rename your uSkyBlock presence from §a{1}§9."
-#~ msgstr ""
-#~ "§9It took §a{0}§9 seconds to rename yer uSkyBlock presence from §a{1}§9."

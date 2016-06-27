@@ -161,61 +161,6 @@ msgstr "§eKlik hier om de volgende pagina te zien"
 msgid "§4§lLocked Challenge"
 msgstr "§4§lGesloten uitdaging"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr ""
-"§eDe uidagingen zijn uitgeschakeld. Neem contact op met een administrator."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4Je hebt geen toegang tot dit commando!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4Je kan alleen uitdaginged voltooien in de skyblock wereld!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4Je kan alleen uitdaginged voltooien als je een eiland hebt!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§eGebruik /c <naam> om informatie over een uitdaging te zien."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr "§eGebruik /c complete <naam> om te proberen de uitdaging te voltooien."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§eUitdagingen hebben verschillende kleuren afhankelijk van:"
-
-msgid "Incomplete"
-msgstr "Niet voltooid"
-
-msgid "Completed (not repeatable)"
-msgstr "Voltooid (niet herhaalbaar)"
-
-msgid "Completed(repeatable)"
-msgstr "Voltooid (herhaalbaar)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§4Je verliest alle benodigde items wanneer je deze uitdaging voltooid!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4Alle benodigde items moeten op je eiland geplaatst zijn, binnen een bereik "
-"van {0} bij jouw vandaan."
-
-msgid "§eRank: "
-msgstr "§eRank:"
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4Deze uitdaging kan niet herhaald worden!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§eOm deze uitdaging te voltooien, gebruik  §f/c c {0}"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr ""
-"§4De uitdagings naam is ongeldig! Gebruik / c help voor meer informatie"
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr "§7Voltooi nog {0} {1} §7uitdagingen"
@@ -775,6 +720,52 @@ msgstr "Ultimate SkyBlock Admin"
 msgid "show player-information"
 msgstr "laat speler-informatie zien"
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§eRank:"
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4Deze uitdaging kan niet herhaald worden!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr "§4Je verliest alle benodigde items wanneer je deze uitdaging voltooid!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4Alle benodigde items moeten op je eiland geplaatst zijn, binnen een bereik "
+"van {0} bij jouw vandaan."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§eOm deze uitdaging te voltooien, gebruik  §f/c c {0}"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr ""
+"§4De uitdagings naam is ongeldig! Gebruik / c help voor meer informatie"
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr ""
+"§eDe uidagingen zijn uitgeschakeld. Neem contact op met een administrator."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4Je kan alleen uitdaginged voltooien in de skyblock wereld!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4Je kan alleen uitdaginged voltooien als je een eiland hebt!"
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1089,6 +1080,9 @@ msgstr "sluit het eiland af voor niet-party leden"
 msgid "§4You do not have permission to lock your island!"
 msgstr ""
 "§4Je hebt geen toestemming om je eiland af te sluiten voor andere spelers!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4Je hebt geen toegang tot dit commando!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4Je hebt geen toestemming om je eiland te openen voor andere spelers!"

@@ -158,57 +158,6 @@ msgstr ""
 msgid "§4§lLocked Challenge"
 msgstr ""
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr ""
-
-msgid "§4You don't have access to this command!"
-msgstr ""
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr ""
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr ""
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr ""
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr ""
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr ""
-
-msgid "Incomplete"
-msgstr ""
-
-msgid "Completed (not repeatable)"
-msgstr ""
-
-msgid "Completed(repeatable)"
-msgstr ""
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr ""
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-
-msgid "§eRank: "
-msgstr ""
-
-msgid "§4This Challenge is not repeatable!"
-msgstr ""
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr ""
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr ""
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr ""
@@ -753,6 +702,48 @@ msgstr ""
 msgid "show player-information"
 msgstr ""
 
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr ""
+
+msgid "§4This Challenge is not repeatable!"
+msgstr ""
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr ""
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr ""
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr ""
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr ""
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr ""
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr ""
+
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
 "invite anyone else."
@@ -1039,6 +1030,9 @@ msgid "lock your island to non-party members."
 msgstr ""
 
 msgid "§4You do not have permission to lock your island!"
+msgstr ""
+
+msgid "§4You don't have access to this command!"
 msgstr ""
 
 msgid "§4You do not have permission to unlock your island!"
