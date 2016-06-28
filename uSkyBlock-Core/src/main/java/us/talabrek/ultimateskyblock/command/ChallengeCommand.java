@@ -28,8 +28,8 @@ public class ChallengeCommand extends AbstractCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-        if (!plugin.isRequirementsMet(sender, null)) {
-            return false;
+        if (!plugin.isRequirementsMet(sender, this, args)) {
+            return true;
         }
         if (!(sender instanceof Player)) {
             sender.sendMessage(tr("\u00a7cCommand only available for players."));

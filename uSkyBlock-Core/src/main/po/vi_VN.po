@@ -667,6 +667,19 @@ msgstr "§cKhông thê chỉnh {0} sang ''{1}'', cần 1 con số"
 msgid "§cInvalid field {0}"
 msgstr "§cField {0} không hợp lệ"
 
+msgid "toggles maintenance mode"
+msgstr ""
+
+msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
+msgstr ""
+
+msgid ""
+"§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
+msgstr ""
+
+msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§cPURGE:§9 Đã lọc {0}/{1} {2,number,###}%"
@@ -2250,6 +2263,9 @@ msgstr "§7Huỷ bỏ dịch chuyển"
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Lỗi phát sinh khi lưu trữ thông tin đảo/nhóm"
 
+msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
+msgstr ""
+
 #, java-format
 msgid ""
 "§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
@@ -2300,6 +2316,9 @@ msgstr "Tạo đảo không thành công. Liên lạc với quản trị viên �
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eKhởi tạo đảo, xin vui lòng chờ trong giây lát."
+
+msgid "§cCommand is currently disabled!"
+msgstr ""
 
 msgid "North"
 msgstr "Bắc"

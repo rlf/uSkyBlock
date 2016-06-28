@@ -43,6 +43,7 @@ import us.talabrek.ultimateskyblock.command.IslandCommand;
 import us.talabrek.ultimateskyblock.command.IslandTalkCommand;
 import us.talabrek.ultimateskyblock.command.PartyTalkCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
+import us.talabrek.ultimateskyblock.command.admin.SetMaintenanceCommand;
 import us.talabrek.ultimateskyblock.event.ExploitEvents;
 import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
@@ -229,6 +230,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
+                if (!isRequirementsMet(Bukkit.getConsoleSender(), null)) {
+                    return;
+                }
                 if (VaultHandler.setupEconomy()) {
                     log(Level.INFO, "Hooked into Vault Economy");
                 }
@@ -260,10 +264,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         log(Level.INFO, getVersionInfo(false));
     }
 
-    public synchronized boolean isRequirementsMet(CommandSender sender, Command command) {
+    public synchronized boolean isRequirementsMet(CommandSender sender, Command command, String... args) {
         // TODO: 28/06/2016 - R4zorax: Allow admin-maintenance methods to get through?
-        if (maintenanceMode) {
-            sender.sendMessage(tr("\u00a7cMAINTENANCE:\u00a7e uSkyBlock is currently in maintenance mode, all commands are disabled"));
+        if (maintenanceMode && !(
+                (command instanceof AdminCommand && args != null && args.length > 0 && args[0].equals("maintenance")) ||
+                command instanceof SetMaintenanceCommand)) {
+            sender.sendMessage(tr("\u00a7cMAINTENANCE:\u00a7e uSkyBlock is currently in maintenance mode"));
             return false;
         }
         if (missingRequirements == null) {
@@ -1032,6 +1038,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public void registerEventsAndCommands() {
+        if (!isRequirementsMet(Bukkit.getConsoleSender(), null)) {
+            return;
+        }
         registerEvents();
         int refreshEveryMinute = getConfig().getInt("options.island.autoRefreshScore", 0);
         if (refreshEveryMinute > 0) {
@@ -1350,5 +1359,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
      */
     public void setMaintenanceMode(boolean maintenanceMode) {
         this.maintenanceMode = maintenanceMode;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
+        if (!isRequirementsMet(sender, null, args)) {
+            sender.sendMessage(tr("\u00a7cCommand is currently disabled!"));
+        }
+        return true;
     }
 }

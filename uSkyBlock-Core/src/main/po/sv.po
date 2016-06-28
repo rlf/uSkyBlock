@@ -669,6 +669,19 @@ msgstr ""
 msgid "§cInvalid field {0}"
 msgstr ""
 
+msgid "toggles maintenance mode"
+msgstr ""
+
+msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
+msgstr ""
+
+msgid ""
+"§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
+msgstr ""
+
+msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§cRENSNING:§9 Rensade {0}/{1} {2,number,###}%"
@@ -2308,6 +2321,9 @@ msgstr ""
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Något gick fel när när data skulle sparas!"
 
+msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
+msgstr ""
+
 #, java-format
 msgid ""
 "§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
@@ -2356,6 +2372,9 @@ msgstr "Kan inte skapa din ö. Vänligen kontakta en administratör."
 
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eFörbereder din ö, vänligen vänta lite..."
+
+msgid "§cCommand is currently disabled!"
+msgstr ""
 
 msgid "North"
 msgstr ""

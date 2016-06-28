@@ -28,8 +28,12 @@ public abstract class IslandChatCommand extends AbstractCommandExecutor {
         this.plugin = plugin;
     }
 
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String alias, String[] args) {
+        if (!plugin.isRequirementsMet(commandSender, this, args)) {
+            return true;
+        }
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
             if (args == null || args.length == 0) {

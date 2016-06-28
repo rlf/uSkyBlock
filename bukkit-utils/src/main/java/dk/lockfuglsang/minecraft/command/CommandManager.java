@@ -12,9 +12,9 @@ public enum CommandManager {;
         checker = reqs;
     }
 
-    public static boolean isRequirementsMet(CommandSender sender, Command command) {
+    public static boolean isRequirementsMet(CommandSender sender, Command command, String... args) {
         if (checker != null) {
-            return checker.isRequirementsMet(sender, command);
+            return checker.isRequirementsMet(sender, command, args);
         }
         return true;
     }
@@ -23,8 +23,9 @@ public enum CommandManager {;
         /**
          * Checks whether the requirements for the command has been met.
          * @param sender A sender to send detailed feedback to.
+         * @param args
          * @return <code>true</code> iff the command can proceed.
          */
-        boolean isRequirementsMet(CommandSender sender, Command command);
+        boolean isRequirementsMet(CommandSender sender, Command command, String... args);
     }
 }

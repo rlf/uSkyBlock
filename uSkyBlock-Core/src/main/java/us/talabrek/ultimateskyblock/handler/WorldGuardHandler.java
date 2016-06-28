@@ -238,12 +238,16 @@ public class WorldGuardHandler {
                 final DefaultDomain owners = region.getOwners();
                 owners.removePlayer(player);
                 if (owners.size() == 0) {
-                    region.setFlag(DefaultFlag.GREET_MESSAGE, DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(),
-                            I18nUtil.tr("\u00a74** You are entering a protected - but abandoned - island area.")
-                    ));
-                    region.setFlag(DefaultFlag.FAREWELL_MESSAGE, DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), Bukkit.getConsoleSender(),
-                            I18nUtil.tr("\u00a74** You are leaving an abandoned island.")
-                    ));
+                    if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.entry-message", true)) {
+                        region.setFlag(DefaultFlag.GREET_MESSAGE, I18nUtil.tr("\u00a74** You are entering a protected - but abandoned - island area."));
+                    } else {
+                        region.setFlag(DefaultFlag.GREET_MESSAGE, null);
+                    }
+                    if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.exit-message", true)) {
+                        region.setFlag(DefaultFlag.FAREWELL_MESSAGE, I18nUtil.tr("\u00a74** You are leaving an abandoned island."));
+                    } else {
+                        region.setFlag(DefaultFlag.FAREWELL_MESSAGE, null);
+                    }
                 }
                 region.setOwners(owners);
                 regionManager.addRegion(region);

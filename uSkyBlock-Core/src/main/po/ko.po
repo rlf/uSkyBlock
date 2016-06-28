@@ -666,6 +666,19 @@ msgstr ""
 msgid "§cInvalid field {0}"
 msgstr ""
 
+msgid "toggles maintenance mode"
+msgstr ""
+
+msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
+msgstr ""
+
+msgid ""
+"§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
+msgstr ""
+
+msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 msgstr "§c청소:§9 청소됨 {0}/{1} {2,number,###}%"
@@ -2322,6 +2335,9 @@ msgstr "이동이 취소되었습니다."
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "섬 그리고/혹은 파티 데이터를 저장하는중에 오류가 발생하였습니다!"
 
+msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
+msgstr ""
+
 #, java-format
 msgid ""
 "§buSkyBlock§e depends on §9{0}§e >= §av{1}§e but only §cv{2}§e was found!\n"
@@ -2374,6 +2390,9 @@ msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 �
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
+
+msgid "§cCommand is currently disabled!"
+msgstr ""
 
 msgid "North"
 msgstr "북쪽"

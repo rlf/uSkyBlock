@@ -1,11 +1,9 @@
 package dk.lockfuglsang.minecraft.command;
 
 import dk.lockfuglsang.minecraft.command.completion.AbstractTabCompleter;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -97,8 +95,8 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
 
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-        if (!CommandManager.isRequirementsMet(sender, this)) {
-            return false;
+        if (!CommandManager.isRequirementsMet(sender, this, args)) {
+            return true;
         }
         if (args.length == 0 || (args.length == 1 && args[0].matches(HELP_PATTERN))) {
             showUsage(sender, 1);

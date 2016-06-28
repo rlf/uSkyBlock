@@ -66,6 +66,9 @@ public class IslandCommand extends AbstractCommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+        if (!plugin.isRequirementsMet(sender, this, args)) {
+            return true;
+        }
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 0) {

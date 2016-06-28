@@ -145,6 +145,7 @@
                                     <include>com.googlecode.gettext-commons:*</include>
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>dk.lockfuglsang.minecraft:po-utils</include>
+                                    <include>uSkyBlock:uSkyBlock-FAWE</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
