@@ -37,7 +37,7 @@ public class FAWEProgressTracker extends RunnableVal2<FaweQueue.ProgressType, In
         }
         try {
             tracker.tick();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             // Never allow this to throw errors in the FAWE thread
             log.warning("Error showing progress!\n" + e);
         }
