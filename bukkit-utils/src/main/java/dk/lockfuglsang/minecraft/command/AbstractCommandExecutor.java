@@ -19,6 +19,10 @@ public class AbstractCommandExecutor extends CompositeCommand implements Command
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+        if (!CommandManager.isRequirementsMet(sender, this)) {
+            tr("\u00a7cCommand is currently disabled!");
+            return false;
+        }
         dk.lockfuglsang.minecraft.command.Command cmd = this;
         if (!hasAccess(cmd, sender)) {
             if (cmd != null) {

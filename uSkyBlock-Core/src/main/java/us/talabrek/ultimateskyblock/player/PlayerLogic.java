@@ -70,10 +70,6 @@ public class PlayerLogic {
         }
     }
 
-    public PlayerInfo loadPlayerData(String playerName) {
-        return loadPlayerData(Bukkit.getOfflinePlayer(playerName));
-    }
-
     public PlayerInfo loadPlayerData(UUID uuid) {
         if (UNKNOWN_PLAYER.getUniqueId().equals(uuid)) {
             return UNKNOWN_PLAYER;
@@ -146,6 +142,9 @@ public class PlayerLogic {
     }
 
     public PlayerInfo getPlayerInfo(UUID uuid) {
+        if (plugin.isMaintenanceMode()) {
+            return null;
+        }
         try {
             return playerCache.get(uuid);
         } catch (ExecutionException e) {

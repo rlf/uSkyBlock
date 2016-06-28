@@ -19,7 +19,7 @@ public enum CommandManager {;
         return true;
     }
 
-    public static interface RequirementChecker {
+    public interface RequirementChecker {
         /**
          * Checks whether the requirements for the command has been met.
          * @param sender A sender to send detailed feedback to.

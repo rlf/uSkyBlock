@@ -32,15 +32,8 @@ public class MakeLeaderCommand extends AbstractCommand {
                     String islandPlayerName = args[0];
                     String playerName = args[1];
                     PlayerInfo islandPlayer = plugin.getPlayerInfo(islandPlayerName);
-                    if (islandPlayer == null) {
-                        islandPlayer = plugin.getPlayerLogic().loadPlayerData(islandPlayerName);
-                    }
-                    
                     PlayerInfo playerInfo = plugin.getPlayerInfo(playerName);
-                    if (playerInfo == null) {
-                        playerInfo = plugin.getPlayerLogic().loadPlayerData(playerName);
-                    }
-                    
+
                     if (islandPlayer == null || !islandPlayer.getHasIsland()) {
                         sender.sendMessage(I18nUtil.tr("\u00a74Player {0} has no island to transfer!", islandPlayerName));
                         return;

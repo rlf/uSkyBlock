@@ -138,17 +138,15 @@ public class WorldGuardHandler {
         region.setPriority(100);
         if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.entry-message", true)) {
             region.setFlag(DefaultFlag.GREET_MESSAGE,
-                    DefaultFlag.GREET_MESSAGE.parseInput(getWorldGuard(), sender,
-                            I18nUtil.tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
-                    ));
+                    I18nUtil.tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
+            );
         } else {
             region.setFlag(DefaultFlag.GREET_MESSAGE, null);
         }
         if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.exit-message", true)) {
             region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
-                    DefaultFlag.FAREWELL_MESSAGE.parseInput(getWorldGuard(), sender,
-                            I18nUtil.tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
-                    ));
+                    I18nUtil.tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader())
+            );
         } else {
             region.setFlag(DefaultFlag.FAREWELL_MESSAGE, null);
         }
@@ -412,7 +410,7 @@ public class WorldGuardHandler {
 
     private static Vector asVector(Location location) {
         if (location == null) {
-            return new Vector(0,0,0);
+            return new Vector(0, 0, 0);
         }
         return new Vector(location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }

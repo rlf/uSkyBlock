@@ -133,15 +133,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private TeleportLogic teleportLogic;
     private LimitLogic limitLogic;
 
-    public IslandGenerator islandGenerator;
+    private IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
 
     private USBImporterExecutor importer;
 
-    public static volatile World skyBlockWorld;
-    public static volatile World skyBlockNetherWorld;
+    private static volatile World skyBlockWorld;
+    private static volatile World skyBlockNetherWorld;
 
     private static uSkyBlock instance;
+    // TODO: 28/06/2016 - R4zorax: These two should probably be moved to the proper classes
     public File directoryPlayers;
     public File directoryIslands;
 
@@ -162,6 +163,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private PlayerLogic playerLogic;
 
     private PlayerNameChangeManager playerNameChangeManager;
+    private volatile boolean maintenanceMode = false;
 
     private Map<String, Biome> validBiomes = new HashMap<String, Biome>() {
         {
@@ -259,6 +261,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender, Command command) {
+        // TODO: 28/06/2016 - R4zorax: Allow admin-maintenance methods to get through?
+        if (maintenanceMode) {
+            sender.sendMessage(tr("\u00a7cMAINTENANCE:\u00a7e uSkyBlock is currently in maintenance mode, all commands are disabled"));
+            return false;
+        }
         if (missingRequirements == null) {
             PluginManager pluginManager = getServer().getPluginManager();
             missingRequirements = "";
@@ -1330,5 +1337,18 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public IslandGenerator getIslandGenerator() {
         return islandGenerator;
+    }
+
+    public boolean isMaintenanceMode() {
+        return maintenanceMode;
+    }
+
+    /**
+     * CAUTION! If anyone calls this with true, they MUST ensure it is later called with false,
+     * or the plugin will effectively be in a locked state.
+     * @param maintenanceMode whether or not to enable maintenance-mode.
+     */
+    public void setMaintenanceMode(boolean maintenanceMode) {
+        this.maintenanceMode = maintenanceMode;
     }
 }

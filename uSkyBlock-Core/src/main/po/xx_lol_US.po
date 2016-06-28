@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -789,7 +789,8 @@ msgid "{0}§e has rejected the invitation."
 msgstr "{0}§e haz rejected teh invitashun."
 
 msgid "§4You can't use that command right now. Leave your current party first."
-msgstr "§4You can't use that command right now. Leave yoor current party first."
+msgstr ""
+"§4You can't use that command right now. Leave yoor current party first."
 
 msgid ""
 "§aYou have joined an island! Use /island party to see the other members."
@@ -1015,7 +1016,8 @@ msgid "§4{0} has been kicked from the island."
 msgstr "§4{0} haz been kicked from teh cathouz."
 
 msgid "§4That player is not part of your island group, and not on your island!"
-msgstr "§4That kitteh  iz not part of yoor cathouz group, an' not on yoor cathouz!"
+msgstr ""
+"§4That kitteh  iz not part of yoor cathouz group, an' not on yoor cathouz!"
 
 msgid "leave your party"
 msgstr "leave yoor party"
@@ -1131,7 +1133,8 @@ msgid "§cYou can restart your island in {0} seconds."
 msgstr "§cYou can restart yoor cathouz in {0} seconds."
 
 msgid "§cYour island is in the process of generating, you cannot restart now."
-msgstr "§cYoor cathouz  iz in teh process of generating, you cannot restart now."
+msgstr ""
+"§cYoor cathouz  iz in teh process of generating, you cannot restart now."
 
 msgid "§eNOTE: Your entire island and all your belongings will be RESET!"
 msgstr "§eNOTE: Yoor entire cathouz an' all yoor belongings will be RESET!"
@@ -1159,7 +1162,8 @@ msgid "enable/disable warping to your island."
 msgstr "enable/disable warping to yoor cathouz."
 
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
-msgstr "§4Yoor cathouz  iz locked. You must unlock it before enabling yoor warp."
+msgstr ""
+"§4Yoor cathouz  iz locked. You must unlock it before enabling yoor warp."
 
 #, java-format
 msgid "§b{0}§d activated the island warp."
@@ -1217,7 +1221,8 @@ msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr "§aYoor incoming warp  iz active, kittehs may warp to yoor cathouz."
 
 msgid "§4Your incoming warp is inactive, players may not warp to your island."
-msgstr "§4Yoor incoming warp  iz inactive, kittehs may not warp to yoor cathouz."
+msgstr ""
+"§4Yoor incoming warp  iz inactive, kittehs may not warp to yoor cathouz."
 
 msgid "§fSet incoming warp to your current location using §e/island setwarp"
 msgstr "§fSet incoming warp to yoor current location using §e/island setwarp"
@@ -1251,8 +1256,8 @@ msgid ""
 "§cThat players island is in the process of generating, you cannot warp to it "
 "right now."
 msgstr ""
-"§cThat kittehs cathouz  iz in teh process of generating, you cannot warp to it "
-"right now."
+"§cThat kittehs cathouz  iz in teh process of generating, you cannot warp to "
+"it right now."
 
 #, java-format
 msgid "§cWARNING: §9{0}§e is warping to your island!"
@@ -1420,7 +1425,8 @@ msgid "§b{0}§d locked the island."
 msgstr "§b{0}§d locked teh cathouz."
 
 msgid "§4Since your island is locked, your incoming warp has been deactivated."
-msgstr "§4Since yoor cathouz  iz locked, yoor incoming warp haz been deactivated."
+msgstr ""
+"§4Since yoor cathouz  iz locked, yoor incoming warp haz been deactivated."
 
 #, java-format
 msgid "§b{0}§d unlocked the island."
@@ -1618,7 +1624,8 @@ msgid ""
 "to turn it on or off at anytime.\n"
 "but not set the location."
 msgstr ""
-"toggle teh\n cathouz's warp, allowing 'dem\n"
+"toggle teh\n"
+" cathouz's warp, allowing 'dem\n"
 "to turn it on or off at anytime.\n"
 "but not set teh location."
 
@@ -1888,7 +1895,8 @@ msgid ""
 "Only endermen will spawn\n"
 "in this biome."
 msgstr ""
-"Teh sky baium gives yoor\n cathouz a special dark sky.\n"
+"Teh sky baium gives yoor\n"
+" cathouz a special dark sky.\n"
 "Only endermen will spawn\n"
 "in this baium."
 
@@ -2009,7 +2017,8 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Want to join another kitteh's\n cathouz instead of starting\n"
+"Want to join another kitteh's\n"
+" cathouz instead of starting\n"
 "yoor own? If another kitteh\n"
 "invites you to their cathouz\n"
 "you can click here or use\n"
@@ -2046,7 +2055,8 @@ msgid ""
 msgstr ""
 "Return to yoor cathouz's home\n"
 "point. You can change yoor home\n"
-"point to any location on yoor\n cathouz using §b/island sethome\n"
+"point to any location on yoor\n"
+" cathouz using §b/island sethome\n"
 "§e§lClick here to return home."
 
 msgid "§a§lChallenges"
@@ -2226,7 +2236,8 @@ msgid ""
 "this location.\n"
 "§e§lClick here to change."
 msgstr ""
-"When you teleport to yoor\n cathouz you will be taken to\n"
+"When you teleport to yoor\n"
+" cathouz you will be taken to\n"
 "this location.\n"
 "§e§lClick here to change."
 
@@ -2355,7 +2366,8 @@ msgstr ""
 "patient."
 
 msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§cYoor cathouz  iz in teh process of generating, you cannot create now."
+msgstr ""
+"§cYoor cathouz  iz in teh process of generating, you cannot create now."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "Could not create yoor Island. Please contact a server moderator."

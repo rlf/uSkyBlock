@@ -106,7 +106,7 @@ public class IslandLogic {
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
-        if (islandName == null) {
+        if (islandName == null || plugin.isMaintenanceMode()) {
             return null;
         }
         try {
