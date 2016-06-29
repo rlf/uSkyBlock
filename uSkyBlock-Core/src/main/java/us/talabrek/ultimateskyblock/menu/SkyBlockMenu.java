@@ -697,7 +697,7 @@ public class SkyBlockMenu {
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Biome")))) {
             onClickBiomeMenu(event, currentItem, p, slotIndex);
         } else if (inventoryName.contains(stripFormatting(tr("Challenge Menu")))) {
-            onClickChallengeMenu(event, currentItem, p, inventoryName, slotIndex);
+            onClickChallengeMenu(event, currentItem, p, inventoryName);
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Log")))) {
             onClickLogMenu(event, p, slotIndex);
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Menu")))) {
@@ -933,7 +933,8 @@ public class SkyBlockMenu {
         p.openInventory(displayIslandGUI(p));
     }
 
-    private void onClickChallengeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, String inventoryName, int slotIndex) {
+    private void onClickChallengeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, String inventoryName) {
+        int slotIndex = event.getRawSlot();
         event.setCancelled(true);
         Matcher m = CHALLENGE_PAGE_HEADER.matcher(inventoryName);
         int page = 1;
@@ -942,12 +943,17 @@ public class SkyBlockMenu {
             page = Integer.parseInt(m.group("p"));
             max = Integer.parseInt(m.group("max"));
         }
-        if (slotIndex >= CHALLENGE_PAGESIZE) { // Pagination
+        // Last row is pagination
+        if (slotIndex >= CHALLENGE_PAGESIZE && slotIndex < CHALLENGE_PAGESIZE + COLS_PER_ROW
+                && currentItem != null && currentItem.getType() != Material.AIR)
+        {
+            // Pagination
             p.closeInventory();
             p.openInventory(displayChallengeGUI(p, currentItem.getAmount()));
             return;
         }
-        if (slotIndex < 0 || slotIndex > CHALLENGE_PAGESIZE) {
+        // If in action bar or anywhere else, just bail out
+        if (slotIndex < 0 || slotIndex > CHALLENGE_PAGESIZE || isAirOrLocked(currentItem)) {
             return;
         }
         if ((slotIndex % 9) > 0) { // 0,9... are the rank-headers...
@@ -972,6 +978,11 @@ public class SkyBlockMenu {
                 p.openInventory(displayIslandGUI(p));
             }
         }
+    }
+
+    private boolean isAirOrLocked(ItemStack currentItem) {
+        return currentItem != null && currentItem.getType() == Material.AIR ||
+                currentItem != null && currentItem.getItemMeta() != null && currentItem.getItemMeta().getDisplayName().equals(tr("\u00a74\u00a7lLocked Challenge"));
     }
 
     private void onClickBiomeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, int slotIndex) {
