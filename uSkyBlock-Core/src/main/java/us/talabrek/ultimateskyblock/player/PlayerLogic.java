@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -29,9 +30,11 @@ public class PlayerLogic {
     private final LoadingCache<UUID, PlayerInfo> playerCache;
     private final uSkyBlock plugin;
     private final BukkitTask saveTask;
+    private final PlayerDB playerDB;
 
     public PlayerLogic(uSkyBlock plugin) {
         this.plugin = plugin;
+        playerDB = plugin.getPlayerDB();
         playerCache = CacheBuilder
                 .from(plugin.getConfig().getString("options.advanced.playerCache", "maximumSize=200,expireAfterWrite=15m,expireAfterAccess=10m"))
                 .removalListener(new RemovalListener<UUID, PlayerInfo>() {
@@ -70,15 +73,11 @@ public class PlayerLogic {
         }
     }
 
-    public PlayerInfo loadPlayerData(UUID uuid) {
+    private PlayerInfo loadPlayerData(UUID uuid) {
         if (UNKNOWN_PLAYER.getUniqueId().equals(uuid)) {
             return UNKNOWN_PLAYER;
         }
-        return loadPlayerData(Bukkit.getOfflinePlayer(uuid));
-    }
-
-    public PlayerInfo loadPlayerData(OfflinePlayer player) {
-        return loadPlayerData(player.getUniqueId(), player.getName());
+        return loadPlayerData(uuid, playerDB.getName(uuid));
     }
 
     private PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {

@@ -169,7 +169,7 @@ public class SkyBlockMenu {
                 addLore(lores, "\u00a7e\u00a7l", tr("Member"));
             }
             for (PartyPermissionMenuItem perm : permissionMenuItems) {
-                if (isLeader ||islandInfo.hasPerm(temp, perm.getPerm())) {
+                if (isLeader || islandInfo.hasPerm(temp, perm.getPerm())) {
                     lores.add("\u00a7a" + tr("Can {0}", "\u00a7f" + perm.getShortDescription()));
                 } else {
                     lores.add("\u00a7c" + tr("Cannot {0}", "\u00a7f" + perm.getShortDescription()));

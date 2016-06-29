@@ -89,8 +89,6 @@ import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
-import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeListener;
-import us.talabrek.ultimateskyblock.uuid.PlayerNameChangeManager;
 
 import java.io.File;
 import java.util.Collections;
@@ -98,6 +96,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -163,7 +162,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private CooldownHandler cooldownHandler;
     private PlayerLogic playerLogic;
 
-    private PlayerNameChangeManager playerNameChangeManager;
     private volatile boolean maintenanceMode = false;
 
     private Map<String, Biome> validBiomes = new HashMap<String, Biome>() {
@@ -204,7 +202,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         playerLogic.shutdown();
         islandLogic.shutdown();
         playerDB.shutdown(); // Must be before playerNameChangeManager!!
-        playerNameChangeManager.shutdown();
         AsyncWorldEditHandler.onDisable(this);
         DebugCommand.disableLogging(null);
     }
@@ -245,14 +242,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     WorldGuardHandler.setupGlobal(getSkyBlockNetherWorld());
                 }
                 registerEventsAndCommands();
-                getServer().getScheduler().runTaskLater(instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        for (Player player : getServer().getOnlinePlayers()) {
-                            playerLogic.loadPlayerDataAsync(player);
-                        }
-                    }
-                }, getConfig().getLong("setDataFolder.loadPlayerDelay", 50L));
+                if (!getConfig().getBoolean("importer.name2uuid.imported", false)) {
+                    Bukkit.getConsoleSender().sendMessage(tr("Converting data to UUID, this make take a while!"));
+                    getImporter().importUSB(Bukkit.getConsoleSender(), "name2uuid");
+                }
             }
         }, getConfig().getLong("setDataFolder.initDelay", 50L));
         try {
@@ -319,8 +312,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public void registerEvents() {
         final PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(new uSkyBlockEvents(this), this);
-        manager.registerEvents(new PlayerNameChangeListener(this), this);
-        manager.registerEvents(playerNameChangeManager, this);
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
         manager.registerEvents(new ExploitEvents(this), this);
@@ -613,7 +604,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     pi.setIslandLocation(newLoc);
                     pi.setHomeLocation(getSafeHomeLocation(pi));
                     IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
-                    WorldGuardHandler.updateRegion(sender, island);
+                    WorldGuardHandler.updateRegion(island);
                     pi.save();
                 }
             };
@@ -636,8 +627,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 homeSweetHome = getSafeHomeLocation(playerInfo);
             }
             if (homeSweetHome == null) {
-                player.sendMessage(tr("\u00a74You are not part of an island. Returning you the spawn area!"));
-                spawnTeleport(player);
+                player.sendMessage(tr("\u00a74Unable to find a safe home-location on your island!"));
+                if (player.isFlying()) {
+                    player.sendMessage(tr("\u00a7cWARNING: \u00a7eTeleporting you to mid-air."));
+                    player.teleport(playerInfo.getIslandLocation());
+                }
                 return true;
             }
             removeCreatures(homeSweetHome);
@@ -819,6 +813,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return playerLogic.getPlayerInfo(player);
     }
 
+    public PlayerInfo getPlayerInfo(UUID uuid) {
+        return playerLogic.getPlayerInfo(uuid);
+    }
+
     public PlayerInfo getPlayerInfo(String playerName) {
         return playerLogic.getPlayerInfo(playerName);
     }
@@ -851,7 +849,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (bName.equalsIgnoreCase("ocean") || hasPermission(player, "usb.biome." + bName)) {
             PlayerInfo playerInfo = getPlayerInfo(player);
             final IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
-            if (islandInfo.hasPerm(player.getName(), "canChangeBiome")) {
+            if (islandInfo.hasPerm(player, "canChangeBiome")) {
                 player.sendMessage(tr("\u00a77The pixies are busy changing the biome of your island to \u00a79{0}\u00a77, be patient.", bName));
                 new SetBiomeTask(this, playerInfo.getIslandLocation(), getBiome(bName), new Runnable() {
                     @Override
@@ -1017,6 +1015,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         FileUtil.reload();
 
         playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        getServer().getPluginManager().registerEvents(playerDB, this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
         islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
@@ -1030,7 +1029,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
         limitLogic = new LimitLogic(this);
         notifier = new PlayerNotifier(getConfig());
-        playerNameChangeManager = new PlayerNameChangeManager(this, playerDB);
         playerLogic = new PlayerLogic(this);
         if (autoRecalculateTask != null) {
             autoRecalculateTask.cancel();
@@ -1163,7 +1161,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
     }
 
-    public USBImporterExecutor getPlayerImporter() {
+    public USBImporterExecutor getImporter() {
         if (importer == null) {
             importer = new USBImporterExecutor(this);
         }
@@ -1328,10 +1326,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return playerLogic;
     }
 
-    public PlayerNameChangeManager getPlayerNameChangeManager() {
-        return playerNameChangeManager;
-    }
-
     public Map<String, Biome> getValidBiomes() {
         return validBiomes;
     }
@@ -1359,6 +1353,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
      */
     public void setMaintenanceMode(boolean maintenanceMode) {
         this.maintenanceMode = maintenanceMode;
+        if (maintenanceMode) {
+            if (playerLogic != null) {
+                playerLogic.flushCache();
+            }
+            if (islandLogic != null) {
+                islandLogic.flushCache();
+            }
+        }
     }
 
     @Override

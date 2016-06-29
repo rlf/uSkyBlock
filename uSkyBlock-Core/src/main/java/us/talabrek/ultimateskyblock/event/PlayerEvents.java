@@ -225,7 +225,7 @@ public class PlayerEvents implements Listener {
         final Player player = event.getPlayer();
         boolean isAdmin = player.isOp() || hasPermission(player, "usb.mod.bypassprotection");
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
-        if (!isAdmin && islandInfo != null && islandInfo.isBanned(player.getName())) {
+        if (!isAdmin && islandInfo != null && islandInfo.isBanned(player.getUniqueId())) {
             event.setCancelled(true);
             player.sendMessage(tr("\u00a74That player has forbidden you from teleporting to their island."));
         }

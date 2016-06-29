@@ -45,12 +45,12 @@ public class PartyCommand extends CompositeCommand {
         add(new AbstractCommand("uninvite", null, "player", I18nUtil.tr("withdraw an invite")) {
             @Override
             public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, final String... args) {
-                if (args.length == 1) {
+                if (args.length == 1 && sender instanceof Player) {
                     plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                         @Override
                         public void run() {
                             IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
-                            if (!islandInfo.isLeader(sender.getName()) || !islandInfo.hasPerm(sender.getName(), "canInviteOthers")) {
+                            if (!islandInfo.isLeader((Player) sender) || !islandInfo.hasPerm(sender.getName(), "canInviteOthers")) {
                                 sender.sendMessage(I18nUtil.tr("\u00a74You don't have permissions to uninvite players."));
                                 return;
                             }

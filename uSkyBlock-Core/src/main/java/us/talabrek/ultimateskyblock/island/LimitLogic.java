@@ -47,18 +47,20 @@ public class LimitLogic {
         }
         Location islandLocation = islandInfo.getIslandLocation();
         ProtectedRegion islandRegionAt = WorldGuardHandler.getIslandRegionAt(islandLocation);
-        // Nether and Overworld regions are more or less equal (same x,z coords)
-        List<LivingEntity> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorld(), islandRegionAt);
-        World nether = plugin.getSkyBlockNetherWorld();
-        if (nether != null) {
-            creatures.addAll(WorldGuardHandler.getCreaturesInRegion(nether, islandRegionAt));
-        }
-        for (LivingEntity creature : creatures) {
-            CreatureType key = getCreatureType(creature);
-            if (!mapCount.containsKey(key)) {
-                mapCount.put(key, 0);
+        if (islandRegionAt != null) {
+            // Nether and Overworld regions are more or less equal (same x,z coords)
+            List<LivingEntity> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorld(), islandRegionAt);
+            World nether = plugin.getSkyBlockNetherWorld();
+            if (nether != null) {
+                creatures.addAll(WorldGuardHandler.getCreaturesInRegion(nether, islandRegionAt));
             }
-            mapCount.put(key, mapCount.get(key) + 1);
+            for (LivingEntity creature : creatures) {
+                CreatureType key = getCreatureType(creature);
+                if (!mapCount.containsKey(key)) {
+                    mapCount.put(key, 0);
+                }
+                mapCount.put(key, mapCount.get(key) + 1);
+            }
         }
         return mapCount;
     }

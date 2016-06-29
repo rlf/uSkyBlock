@@ -98,6 +98,7 @@ public interface IslandInfo {
     /**
      * List of players trusted on this island.
      * @return List of players trusted on this island.
+     * @deprecated Use #getTrusteeUUIDs instead
      */
     List<String> getTrustees();
 

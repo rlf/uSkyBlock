@@ -51,8 +51,13 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     public PlayerInfo(String currentPlayerName, UUID playerUUID) {
         this.uuid = playerUUID;
         this.playerName = currentPlayerName;
-        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, this.playerName + ".yml");
-        if (this.playerConfigFile.exists() || !uSkyBlock.getInstance().getPlayerNameChangeManager().hasNameChanged(playerUUID, currentPlayerName)) {
+        // Prefer UUID over Name
+        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, UUIDUtil.asString(playerUUID) + ".yml");
+        File nameFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
+        if (!playerConfigFile.exists() && nameFile.exists()) {
+            nameFile.renameTo(playerConfigFile);
+        }
+        if (playerConfigFile.exists()) {
             loadPlayer();
         }
     }
@@ -213,7 +218,6 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     
     // TODO: 09/12/2014 - R4zorax: All this should be made UUID
     private void reloadPlayerConfig() {
-        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
         playerData = YamlConfiguration.loadConfiguration(playerConfigFile);
     }
 
@@ -277,7 +281,6 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
             playerConfig.set("player.homeYaw", 0);
             playerConfig.set("player.homePitch", 0);
         }
-        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
         try {
             playerConfig.save(playerConfigFile);
             LogUtil.log(Level.FINEST, "Player data saved!");

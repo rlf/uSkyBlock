@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-06-15 21:08+0200\n"
+"PO-Revision-Date: 2016-06-29 20:30+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -592,44 +592,44 @@ msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
 
 msgid "region manipulations"
-msgstr ""
+msgstr "region manipulationer"
 
 msgid "shows the borders of the current island"
-msgstr ""
+msgstr "viser kanterne for den nuværende ø"
 
 msgid "§eNo island found at your current location"
-msgstr ""
+msgstr "§eIngen ø fundet ved din nuværende position"
 
 msgid "§eCan only be executed as a player"
-msgstr ""
+msgstr "§eKan kun udføres som spiller"
 
 msgid "shows the borders of the current chunk"
-msgstr ""
+msgstr "viser kanterne i den nuværende chunk"
 
 msgid "shows the borders of the inner-chunks"
-msgstr ""
+msgstr "viser de indre chunks"
 
 msgid "shows the non-chunk-aligned borders"
-msgstr ""
+msgstr "viser de ikke-chunk-tilrettede kanter"
 
 msgid "shows the borders of the outer-chunks"
-msgstr ""
+msgstr "viser kanterne for de ydre chunks"
 
 msgid "hides the regions again"
-msgstr ""
+msgstr "skjuler regionerne igen"
 
 msgid "§eStopped displaying regions"
-msgstr ""
+msgstr "§eStoppede med at vise regioner"
 
 msgid "§eNo currently shown regions for this player"
-msgstr ""
+msgstr "§eIngen regioner at vise for denne spiller"
 
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
-msgstr ""
+msgstr "§eAnimations-tick ændret til {0}."
 
 msgid "§eAnimation-tick must be a valid integer."
-msgstr ""
+msgstr "§eAnimations-tick skal være et validt heltal."
 
 msgid "set a player's island to your location"
 msgstr "tildeler øen til en spiller"
@@ -667,17 +667,18 @@ msgid "§cInvalid field {0}"
 msgstr "§cUkendt felt {0}"
 
 msgid "toggles maintenance mode"
-msgstr ""
+msgstr "skifter vedligeholdelsestilstand"
 
 msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
 msgstr ""
+"§cVEDLIGEHOLDELSE: §aAktiveret§e all uSkyBlock funktioner er deaktiveret."
 
 msgid ""
 "§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
-msgstr ""
+msgstr "§cVEDLIGEHOLDELSE: §4Deaktiveret§e alle funktioner operationelle igen."
 
 msgid "§cMaintenance mode can only be changed from console!"
-msgstr ""
+msgstr "§cVedligeholdelsestilstand kan kun ændres fra konsollen!"
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
@@ -730,13 +731,13 @@ msgid "show player-information"
 msgstr "vis spiller-information"
 
 msgid "try to complete a challenge"
-msgstr ""
+msgstr "forsøg at aflever en udfordring"
 
 msgid "§cCommand only available for players."
-msgstr ""
+msgstr "§cKommandoen er kun tilgængelig for spillere."
 
 msgid "show information about the challenge"
-msgstr ""
+msgstr "vis informationer om udfordringer"
 
 msgid "§eRank: "
 msgstr "§eRank: "
@@ -763,7 +764,7 @@ msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Forkert udfordringsnavn!§e Brug §9/c help§e for mere info."
 
 msgid "complete and list challenges"
-msgstr ""
+msgstr "aflever og se udfordringer"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§eUdfordringer er deaktiveret. Kontakt en administrator."
@@ -850,6 +851,10 @@ msgstr "§4Du kan ikke udelukke medlemmer. Fjern dem først!"
 
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Du har ikke tilladelse til at udelukke spillere."
+
+#, java-format
+msgid "§eUnable to ban unknown player {0}"
+msgstr "§eUde af stand til at banne ukende spiller {0}"
 
 #, java-format
 msgid "§4{0} tried to ban you from their island!"
@@ -1397,9 +1402,15 @@ msgstr ""
 msgid "N/A"
 msgstr "N/A"
 
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr "§4** Du ankommer nu til en beskyttet - men forladt - ø."
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Du ankom til §b{0}'s §disland."
+
+msgid "§4** You are leaving an abandoned island."
+msgstr "§4** Du forlader nu en forladt ø."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
@@ -1421,18 +1432,18 @@ msgstr ""
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Kun lederen kan låse din ø op!"
 
-msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr "§4** Du ankommer nu til en beskyttet - men forladt - ø."
-
-msgid "§4** You are leaving an abandoned island."
-msgstr "§4** Du forlader nu en forladt ø."
-
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Ingen §e{0}§4 importer fundet"
 
-msgid "§eConverted "
-msgstr "§eKonverteret "
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})"
+msgstr "§eFremskridt: {0,number,##}% ({1}/{2} - ok:{3}, fejl:{4}, skipped:{5})"
+
+#, java-format
+msgid "§eConverted {0}/{1} files"
+msgstr "§eKonverterede {0}/{1} filer"
 
 msgid "The island has been created."
 msgstr "Øen blev oprettet"
@@ -2325,8 +2336,11 @@ msgstr "§7Teleport afbrudt"
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Der opstod en fejl under gemning af øens data!"
 
+msgid "Converting data to UUID, this make take a while!"
+msgstr "Konverterer data til UUID, dette kan godt tage noget tid!"
+
 msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
-msgstr ""
+msgstr "§cVEDLIGEHOLDELSE:§e uSkyBlock er i vedligeholdelsestilstand"
 
 #, java-format
 msgid ""
@@ -2342,8 +2356,11 @@ msgstr "§buSkyBlock§e afhænger af §9{0}§e >= §av{1}"
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Spilleren er allerede del af denne ø!"
 
-msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4Du er ikke medlem af en ø. Returnerer dig til startområdet!"
+msgid "§4Unable to find a safe home-location on your island!"
+msgstr "§4Ude af stand til at finde et sikkert sted på din ø!"
+
+msgid "§cWARNING: §eTeleporting you to mid-air."
+msgstr "§cADVARSEL:§e Teleporterer dig op i luften."
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleporterer dig til din ø."
@@ -2384,7 +2401,7 @@ msgstr ""
 "§eForbereder din ø til dig, venligst vær tålmodig, det kan tage noget tid."
 
 msgid "§cCommand is currently disabled!"
-msgstr ""
+msgstr "§cKommando er utilgængelig i øjeblikket!"
 
 msgid "North"
 msgstr "Nord"

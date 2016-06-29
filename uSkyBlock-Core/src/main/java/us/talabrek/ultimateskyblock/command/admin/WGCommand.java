@@ -54,13 +54,13 @@ public class WGCommand extends CompositeCommand {
                 if (island != null) {
                     IslandInfo islandInfo = plugin.getIslandInfo(island);
                     if (islandInfo != null) {
-                        WorldGuardHandler.updateRegion(null, islandInfo);
+                        WorldGuardHandler.updateRegion(islandInfo);
                         player.sendMessage(tr("\u00a7eIsland world-guard regions updated for {0}", island));
                     } else {
                         player.sendMessage(tr("\u00a7eNo island found at your location!"));
                     }
                 }
-                return false;
+                return true;
             }
         });
     }

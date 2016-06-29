@@ -1,14 +1,13 @@
 package us.talabrek.ultimateskyblock.uuid;
 
-import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
-import java.io.IOException;
 import java.util.UUID;
 
 /**
  * Simple abstraction, allowing for future DB support
  */
-public interface PlayerDB {
+public interface PlayerDB extends Listener {
     /**
      * Returns the UUID (if found) for the player we currently thinks has that name
      * @param name The name (not displayName) of a player.
@@ -39,9 +38,8 @@ public interface PlayerDB {
 
     /**
      * Stores a new name in the DB.
-     * @param name The current name.
      */
-    void updatePlayer(Player name);
+    void updatePlayer(UUID uuid, String name, String displayName);
 
     void shutdown();
 }

@@ -55,7 +55,7 @@ public class MakeLeaderCommand extends AbstractCommand {
                     playerInfo.setHomeLocation(homeLocation);
                     islandPlayer.save();
                     playerInfo.save();
-                    WorldGuardHandler.updateRegion(sender, islandInfo);
+                    WorldGuardHandler.updateRegion(islandInfo);
                     islandInfo.sendMessageToIslandGroup(true, I18nUtil.marktr("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
                 }
             });

@@ -30,7 +30,7 @@ public class ImportCommand extends AbstractCommand {
     @Override
     public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
         if (args.length == 1) {
-            uSkyBlock.getInstance().getPlayerImporter().importUSB(sender, args[args.length - 1]);
+            uSkyBlock.getInstance().getImporter().importUSB(sender, args[args.length - 1]);
             return true;
         }
         return false;

@@ -853,6 +853,10 @@ msgid "§4You do not have permission to kick/ban players."
 msgstr "§4당신은 플레이어를 차단/퇴장 시킬 권한이 없습니다."
 
 #, java-format
+msgid "§eUnable to ban unknown player {0}"
+msgstr ""
+
+#, java-format
 msgid "§4{0} tried to ban you from their island!"
 msgstr "§4{0} 가 당신을 그들의 섬에서 벤하려 시도했습니다!"
 
@@ -1404,9 +1408,15 @@ msgstr ""
 msgid "N/A"
 msgstr "N/A"
 
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr "§4** 당신은 보호받는 - 하지만 버려진 - 섬의 지역에 입장하는 중입니다."
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** 당신은 §b{0}의 §d섬에 입장하는 중입니다."
+
+msgid "§4** You are leaving an abandoned island."
+msgstr "§4** 당신은 버려진 섬에서 나오는 중입니다."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
@@ -1430,17 +1440,17 @@ msgstr ""
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4파티의 리더여야 당신의 섬을 해제 할 수 있습니다!"
 
-msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr "§4** 당신은 보호받는 - 하지만 버려진 - 섬의 지역에 입장하는 중입니다."
-
-msgid "§4** You are leaving an abandoned island."
-msgstr "§4** 당신은 버려진 섬에서 나오는 중입니다."
-
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4§e{0}§4란 이름의 수입업자를 찾지 못했습니다 "
 
-msgid "§eConverted "
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})"
+msgstr ""
+
+#, java-format
+msgid "§eConverted {0}/{1} files"
 msgstr ""
 
 msgid "The island has been created."
@@ -2335,6 +2345,9 @@ msgstr "이동이 취소되었습니다."
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "섬 그리고/혹은 파티 데이터를 저장하는중에 오류가 발생하였습니다!"
 
+msgid "Converting data to UUID, this make take a while!"
+msgstr ""
+
 msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
 msgstr ""
 
@@ -2351,8 +2364,11 @@ msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgid "§4Player is already assigned to this island!"
 msgstr "§4플레이어는 이미 이 섬에 배정되었습니다!"
 
-msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4당신은 이 섬의 일원이 아닙니다. 스폰 지역으로 되돌아갑니다!"
+msgid "§4Unable to find a safe home-location on your island!"
+msgstr ""
+
+msgid "§cWARNING: §eTeleporting you to mid-air."
+msgstr ""
 
 msgid "§aTeleporting you to your island."
 msgstr "§a당신을 당신의 섬으로 텔레포트 하는 중입니다."

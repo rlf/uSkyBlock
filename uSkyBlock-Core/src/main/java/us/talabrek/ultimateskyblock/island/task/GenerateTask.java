@@ -46,7 +46,7 @@ public class GenerateTask extends BukkitRunnable {
         plugin.getIslandGenerator().setChest(next, perk);
         IslandInfo islandInfo = plugin.setNewPlayerIsland(pi, next);
         islandInfo.setSchematicName(schematicName);
-        WorldGuardHandler.updateRegion(player, islandInfo);
+        WorldGuardHandler.updateRegion(islandInfo);
         plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
         Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {

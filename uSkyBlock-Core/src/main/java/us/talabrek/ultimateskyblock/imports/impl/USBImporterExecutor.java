@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
 import us.talabrek.ultimateskyblock.imports.fixuuidleader.UUIDLeaderImporter;
+import us.talabrek.ultimateskyblock.imports.name2uuid.Name2UUIDImporter;
 import us.talabrek.ultimateskyblock.imports.update.USBUpdateImporter;
 import us.talabrek.ultimateskyblock.imports.wolfwork.WolfWorkUSBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -21,15 +22,19 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 /**
  * Delegates and batches the import.
  */
-// TODO: 04/01/2015 - R4zorax: Support BarAPI
 public class USBImporterExecutor {
     private final uSkyBlock plugin;
+    private final double progressEveryPct;
+    private final long progressEveryMs;
     private List<USBImporter> importers;
     private volatile int countSuccess;
+    private volatile int countSkip;
     private volatile int countFailed;
 
     public USBImporterExecutor(uSkyBlock plugin) {
         this.plugin = plugin;
+        progressEveryPct = plugin.getConfig().getDouble("importer.progressEveryPct", 10);
+        progressEveryMs = plugin.getConfig().getLong("importer.progressEveryMs", 5000);
     }
 
     public List<String> getImporterNames() {
@@ -46,7 +51,7 @@ public class USBImporterExecutor {
             importers.add(new WolfWorkUSBImporter());
             importers.add(new UUIDLeaderImporter());
             importers.add(new USBUpdateImporter());
-            //importers.add(new Name2UUIDImporter());
+            importers.add(new Name2UUIDImporter());
             ServiceLoader serviceLoader = ServiceLoader.load(USBImporter.class, getClass().getClassLoader());
             for (Iterator<USBImporter> it = serviceLoader.iterator(); it.hasNext(); ) {
                 importers.add(it.next());
@@ -82,47 +87,62 @@ public class USBImporterExecutor {
     }
 
     private void doImport(CommandSender sender, USBImporter importer) {
-        String msg = "Imported " + importer.importOrphans(plugin, plugin.getDataFolder()) + " orphans";
-        sender.sendMessage("\u00a7e" + msg);
-        log(Level.INFO, msg);
+        importer.init(plugin);
         countSuccess = 0;
         countFailed = 0;
-        final File[] files = importer.getFiles(plugin);
-        int chunkSize = plugin.getConfig().getInt("general.import.maxChunk", 100);
-        int delay = plugin.getConfig().getInt("general.import.delay", 15);
-        log(Level.INFO, "Importing " + files.length + " players in chunks of " + chunkSize);
+        final File[] files = importer.getFiles();
+        log(Level.INFO, "Importing " + files.length + " files");
         if (files.length > 0) {
-            doImport(sender, importer, files, 0, chunkSize, delay);
+            doImport(sender, importer, files);
+        } else {
+            complete(sender, importer);
         }
     }
 
-    private void doImport(final CommandSender sender, final USBImporter importer, final File[] files, final int offset, final int chunkSize, final int delay) {
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
-            @Override
-            public void run() {
-                int count = 0;
-                int failed = 0;
-                for (int i = offset; i < files.length && i < offset+chunkSize; i++) {
-                    File playerFile = files[i];
-                    if (importer.importFile(plugin, playerFile)) {
-                        count++;
-                        log(Level.FINE, "Successfully imported player-file " + playerFile);
+    private void doImport(final CommandSender sender, final USBImporter importer, final File[] files) {
+        float lastProgressPct = 0;
+        long lastProgressTime = 0;
+        float pct = 0;
+        long now = 0;
+        try {
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                try {
+                    Boolean status = importer.importFile(file);
+                    if (status == null) {
+                        countSkip++;
+                        log(Level.FINE, "Successfully skipped file " + file);
+                    } else if (status) {
+                        countSuccess++;
+                        log(Level.FINE, "Successfully imported file " + file);
                     } else {
-                        failed++;
-                        log(Level.WARNING, "Could not import player-file " + playerFile);
+                        countFailed++;
+                        log(Level.WARNING, "Could not import file " + file);
                     }
+                } catch (Throwable t) {
+                    countFailed++;
+                    log(Level.WARNING, "Could not import file " + file, t);
                 }
-                countSuccess += count;
-                countFailed += failed;
-                float progress = 100f*(countSuccess+countFailed)/files.length;
-                sender.sendMessage(String.format("\u00a7eProgress: %02f%% (%d/%d - success:%d, failed:%d)", progress, countFailed+countSuccess, files.length, countSuccess, countFailed));
-                if (offset+chunkSize < files.length) {
-                    doImport(sender, importer, files, offset + chunkSize, chunkSize, delay);
-                } else {
-                    importer.completed(plugin, countSuccess, countFailed);
-                    sender.sendMessage(tr("\u00a7eConverted " + countSuccess + "/" + (countSuccess + countFailed) + " players"));
+                now = System.currentTimeMillis();
+                pct = 100f * (countSuccess + countFailed + countSkip) / files.length;
+                if (now > (lastProgressTime + progressEveryMs) || pct > (lastProgressPct + progressEveryPct)) {
+                    lastProgressPct = pct;
+                    lastProgressTime = now;
+                    sender.sendMessage(tr("\u00a7eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})", pct,
+                            countFailed + countSuccess, files.length, countSuccess, countFailed, countSkip));
                 }
             }
-        }, delay);
+        } finally {
+            complete(sender, importer);
+        }
+    }
+
+    private void complete(CommandSender sender, USBImporter importer) {
+        importer.completed(countSuccess, countFailed, countSkip);
+        sender.sendMessage(tr("\u00a7eConverted {0}/{1} files", countSuccess, (countSuccess + countFailed)));
+        if (countFailed == 0) {
+            plugin.getConfig().set("importer." + importer.getName() + ".imported", true);
+            plugin.saveConfig();
+        }
     }
 }

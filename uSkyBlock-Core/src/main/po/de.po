@@ -865,6 +865,10 @@ msgid "§4You do not have permission to kick/ban players."
 msgstr "§4Du hast nicht die Rechte dazu andere zu kicken/bannen."
 
 #, java-format
+msgid "§eUnable to ban unknown player {0}"
+msgstr ""
+
+#, java-format
 msgid "§4{0} tried to ban you from their island!"
 msgstr "§4{0} hat Dich versucht von seiner Insel zu bannen."
 
@@ -1429,9 +1433,15 @@ msgstr ""
 msgid "N/A"
 msgstr "N/A"
 
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr "§4** Du hast eine geschütze aber verlassenen Insel betreten"
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** Du betrittst §b{0}''s §dInsel."
+
+msgid "§4** You are leaving an abandoned island."
+msgstr "§4** Du hast eine verlassenen Insel verlassen"
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
@@ -1455,17 +1465,17 @@ msgstr ""
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Du musst der Gruppenleiter sein um deine Insel zu entsperren!"
 
-msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr "§4** Du hast eine geschütze aber verlassenen Insel betreten"
-
-msgid "§4** You are leaving an abandoned island."
-msgstr "§4** Du hast eine verlassenen Insel verlassen"
-
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Kein import mit dem Namen §e{0}§4 gefunden"
 
-msgid "§eConverted "
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})"
+msgstr ""
+
+#, java-format
+msgid "§eConverted {0}/{1} files"
 msgstr ""
 
 msgid "The island has been created."
@@ -2356,6 +2366,9 @@ msgstr "§7Teleport abgebrochen"
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
 
+msgid "Converting data to UUID, this make take a while!"
+msgstr ""
+
 msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
 msgstr ""
 
@@ -2372,8 +2385,11 @@ msgstr "§buSkyBlock§e braucht §9{0}§e >= §av{1}"
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Dieser Spieler gehört bereits zu deiner Insel!"
 
-msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4Du bist kein Teil einer Insel. Kehre zum Spawn zurück!"
+msgid "§4Unable to find a safe home-location on your island!"
+msgstr ""
+
+msgid "§cWARNING: §eTeleporting you to mid-air."
+msgstr ""
 
 msgid "§aTeleporting you to your island."
 msgstr "§aDu wirst zu Deiner Insel teleportiert."

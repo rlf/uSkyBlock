@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -664,17 +664,19 @@ msgid "§cInvalid field {0}"
 msgstr "§cInvalid field {0}"
 
 msgid "toggles maintenance mode"
-msgstr ""
+msgstr "toggles maintenance mode"
 
 msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
 msgstr ""
+"§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
 
 msgid ""
 "§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
 msgstr ""
+"§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
 
 msgid "§cMaintenance mode can only be changed from console!"
-msgstr ""
+msgstr "§cMaintenance mode can only be changed from console!"
 
 #, java-format
 msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
@@ -844,6 +846,10 @@ msgstr "§4You can't ban members. Remove 'dem first!"
 
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4You do not have permission to kick/ban kittehs."
+
+#, java-format
+msgid "§eUnable to ban unknown player {0}"
+msgstr "§eUnable to ban unknown kitteh {0}"
 
 #, java-format
 msgid "§4{0} tried to ban you from their island!"
@@ -1393,9 +1399,15 @@ msgstr ""
 msgid "N/A"
 msgstr "N/A"
 
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr "§4** You be entering a protected - but abandoned - island area."
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** You be entering §b{0}''s §disland."
+
+msgid "§4** You are leaving an abandoned island."
+msgstr "§4** You be leaving an abandoned cathouz."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
@@ -1417,18 +1429,19 @@ msgstr ""
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4You must be teh party top cat to unlock yoor cathouz!"
 
-msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr "§4** You be entering a protected - but abandoned - island area."
-
-msgid "§4** You are leaving an abandoned island."
-msgstr "§4** You be leaving an abandoned cathouz."
-
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Noe importer named §e{0}§4 found"
 
-msgid "§eConverted "
-msgstr "§eConverted "
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})"
+msgstr ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})"
+
+#, java-format
+msgid "§eConverted {0}/{1} files"
+msgstr "§eConverted {0}/{1} files"
 
 msgid "The island has been created."
 msgstr "Teh cathouz haz been created."
@@ -2278,7 +2291,7 @@ msgid ""
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 "Restarts yoor cathouz.\n"
-"§4WARNING! §cwill remove yoor items an' island!"
+"§4WARNING! §cwill remove yoor items an' cathouz!"
 
 msgid "§c§lLeave Island"
 msgstr "§c§lLeave Island"
@@ -2335,8 +2348,11 @@ msgstr "§7Teleport cancelled"
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Something went awry storin' teh cathouz an'/or party data!"
 
+msgid "Converting data to UUID, this make take a while!"
+msgstr "Converting data to UUID, this make take a while!"
+
 msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
-msgstr ""
+msgstr "§cMAINTENANCE:§e uSkyBlock  iz currently in maintenance mode"
 
 #, java-format
 msgid ""
@@ -2351,8 +2367,11 @@ msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgid "§4Player is already assigned to this island!"
 msgstr "§4Kitteh  iz already assigned to this cathouz!"
 
-msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4You be not part of a cathouz. Returning you teh spawn area!"
+msgid "§4Unable to find a safe home-location on your island!"
+msgstr "§4Unable to find a safe home-location on yoor cathouz!"
+
+msgid "§cWARNING: §eTeleporting you to mid-air."
+msgstr "§cWARNING: §eTeleporting you to mid-air."
 
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleporting you to yoor cathouz."
@@ -2392,7 +2411,7 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eGetting yoor cathouz ready, please be patient, it can take a while."
 
 msgid "§cCommand is currently disabled!"
-msgstr ""
+msgstr "§cCommand  iz currently disabled!"
 
 msgid "North"
 msgstr "North"

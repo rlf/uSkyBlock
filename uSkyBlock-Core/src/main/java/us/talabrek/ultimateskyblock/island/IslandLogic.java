@@ -28,7 +28,6 @@ import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
-import us.talabrek.ultimateskyblock.uuid.AsyncPlayerNameChangedEvent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -353,25 +352,6 @@ public class IslandLogic {
 
     public synchronized void removeIslandFromMemory(String islandName) {
         cache.invalidate(islandName);
-    }
-
-    public void renamePlayer(PlayerInfo playerInfo, AsyncPlayerNameChangedEvent change) {
-        List<String> islands = new ArrayList<>();
-        islands.add(playerInfo.locationForParty());
-        islands.addAll(playerInfo.getBannedFrom());
-        for (String islandName : islands) {
-            renamePlayer(islandName, change);
-        }
-    }
-
-    public void renamePlayer(String islandName, AsyncPlayerNameChangedEvent e) {
-        IslandInfo islandInfo = getIslandInfo(islandName);
-        if (islandInfo != null) {
-            islandInfo.renamePlayer(e.getPlayer(), e.getOldName());
-            if (!islandInfo.hasOnlineMembers()) {
-                removeIslandFromMemory(islandInfo.getName());
-            }
-        }
     }
 
     public void updateRank(IslandInfo islandInfo, IslandScore score) {

@@ -3,8 +3,11 @@ package us.talabrek.ultimateskyblock.uuid;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
@@ -24,6 +27,8 @@ public class FilePlayerDB implements PlayerDB {
     private final YmlConfiguration config;
     private final File file;
     private boolean isShuttingDown = false;
+    private BukkitTask saveTask;
+    private long saveDelay;
 
     public FilePlayerDB(File file) {
         this.file = file;
@@ -31,11 +36,16 @@ public class FilePlayerDB implements PlayerDB {
         if (file.exists()) {
             FileUtil.readConfig(config, file);
         }
+        saveDelay = uSkyBlock.getInstance().getConfig().getInt("playerdb.saveDelay", 20);
     }
 
     @Override
     public void shutdown() {
         isShuttingDown = true;
+        if (saveTask != null) {
+            saveTask.cancel();
+        }
+        saveToFile();
     }
 
     @Override
@@ -47,13 +57,26 @@ public class FilePlayerDB implements PlayerDB {
                 return UUIDUtil.fromString(uuidStr);
             }
         }
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
+        if (offlinePlayer != null) {
+            updatePlayer(offlinePlayer.getUniqueId(), offlinePlayer.getName(), offlinePlayer.getName());
+            return offlinePlayer.getUniqueId();
+        }
         return null;
     }
 
     @Override
     public synchronized String getName(UUID uuid) {
         String uuidStr = UUIDUtil.asString(uuid);
-        return config.getString(uuidStr + ".name", config.getString(uuidStr, null));
+        String name = config.getString(uuidStr + ".name", config.getString(uuidStr, null));
+        if (name == null) {
+            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+            if (offlinePlayer != null) {
+                updatePlayer(offlinePlayer.getUniqueId(), offlinePlayer.getName(), offlinePlayer.getName());
+                return offlinePlayer.getName();
+            }
+        }
+        return name;
     }
 
     @Override
@@ -72,38 +95,43 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public synchronized void updatePlayer(Player player) {
-        updatePlayerAsync(player.getUniqueId(), player.getName(), player.getDisplayName());
-    }
-
-    public void updatePlayerAsync(final UUID id, final String name, final String displayName) {
+    public void updatePlayer(final UUID id, final String name, final String displayName) {
+        addEntry(id, name, displayName);
         if (isShuttingDown) {
-            saveToFile(id, name, displayName);
+            saveToFile();
         } else {
-            Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+            if (saveTask != null) {
+                saveTask.cancel();
+            }
+            saveTask = Bukkit.getScheduler().runTaskLaterAsynchronously(uSkyBlock.getInstance(), new Runnable() {
                 @Override
                 public void run() {
-                    saveToFile(id, name, displayName);
+                    saveToFile();
                 }
-            });
+            }, saveDelay);
         }
     }
 
-    private void saveToFile(UUID id, String name, String displayName) {
+    private void saveToFile() {
         try {
-            YmlConfiguration copy;
             synchronized (this) {
-                String uuid = UUIDUtil.asString(id);
-                config.set(uuid + ".name", name);
-                config.set(uuid + ".displayName", displayName);
-                copy = new YmlConfiguration();
-                copy.setDefaults(config);
-                copy.options().copyDefaults(true);
-                copy.addComments(config.getComments());
+                config.save(file);
             }
-            copy.save(file);
         } catch (IOException e) {
             log.log(Level.INFO, "Error saving playerdb", e);
+        } finally {
+            saveTask = null;
         }
+    }
+
+    private synchronized void addEntry(UUID id, String name, String displayName) {
+        String uuid = UUIDUtil.asString(id);
+        config.set(uuid + ".name", name);
+        config.set(uuid + ".displayName", displayName);
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void onPlayerJoin(PlayerJoinEvent e) {
+        updatePlayer(e.getPlayer().getUniqueId(), e.getPlayer().getName(), e.getPlayer().getDisplayName());
     }
 }
