@@ -72,7 +72,7 @@ ranks:
           currency: 10
           xp: 10
           commands:
-          - op:effect {playername} 10
+          - op:effect {playername} regeneration
         repeatReward:
           text: 1 leather, 10% chance to get a book
           items:
@@ -100,8 +100,8 @@ ranks:
           currency: 20
           xp: 20
           commands:
-          - op:effect {party} 10
-       
+          - op:effect {party} regeneration
+
       adeptbuilder:
         name: '&aAdept Builder'
         description: Reach island level 100.
@@ -1402,4 +1402,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 19
+version: 20

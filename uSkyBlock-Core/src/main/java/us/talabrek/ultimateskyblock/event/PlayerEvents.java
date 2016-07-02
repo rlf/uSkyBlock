@@ -160,7 +160,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onVisitorDamage(final EntityDamageEvent event) {
         if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
             return;
@@ -207,7 +207,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (Settings.extras_sendToSpawn) {
             return;

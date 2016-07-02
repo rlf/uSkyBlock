@@ -9,7 +9,6 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -22,11 +21,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerInventoryEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -50,6 +48,7 @@ public class GriefEvents implements Listener {
     private final boolean killAnimalsEnabled;
     private final boolean tramplingEnabled;
     private final boolean witherEnabled;
+    private final boolean hatchingEnabled;
 
     public GriefEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -60,6 +59,7 @@ public class GriefEvents implements Listener {
         killMonstersEnabled = config.getBoolean("options.protection.visitors.kill-monsters", true);
         killAnimalsEnabled = config.getBoolean("options.protection.visitors.kill-animals", true);
         tramplingEnabled = config.getBoolean("options.protection.visitors.trampling", true);
+        hatchingEnabled = config.getBoolean("options.protection.visitors.hatching", true);
     }
 
     @EventHandler
@@ -87,7 +87,7 @@ public class GriefEvents implements Listener {
     @EventHandler
     public void onShearEvent(PlayerShearEntityEvent event) {
         Player player = event.getPlayer();
-        if (!shearingEnabled || !plugin.isSkyWorld(player.getWorld())) {
+        if (!shearingEnabled || !plugin.isSkyAssociatedWorld(player.getWorld())) {
             return; // Not our concern
         }
         if (hasPermission(player, "usb.mod.bypassprotection")) {
@@ -100,7 +100,7 @@ public class GriefEvents implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if ((!killAnimalsEnabled && !killMonstersEnabled) || !plugin.isSkyWorld(event.getDamager().getWorld())) {
+        if ((!killAnimalsEnabled && !killMonstersEnabled) || !plugin.isSkyAssociatedWorld(event.getDamager().getWorld())) {
             return;
         }
         if (!(event.getEntity() instanceof Creature)) {
@@ -135,7 +135,7 @@ public class GriefEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onTrampling(PlayerInteractEvent event) {
-        if (!tramplingEnabled || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
+        if (!tramplingEnabled || !plugin.isSkyAssociatedWorld(event.getPlayer().getWorld())) {
             return;
         }
         if (event.getAction() == Action.PHYSICAL
@@ -201,5 +201,15 @@ public class GriefEvents implements Listener {
             // Ignore
         }
         return null;
+    }
+
+    @EventHandler
+    public void onEgg(PlayerEggThrowEvent e) {
+        if (!hatchingEnabled || e.getPlayer() == null || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())) {
+            return;
+        }
+        if (!plugin.playerIsOnIsland(e.getPlayer())) {
+            e.setHatching(false);
+        }
     }
 }

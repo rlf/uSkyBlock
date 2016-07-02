@@ -51,7 +51,7 @@ public class SignEvents implements Listener {
         logic.signClicked(e.getPlayer(), e.getClickedBlock().getLocation());
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onSignChanged(SignChangeEvent e) {
         if (e.isCancelled() || e.getPlayer() == null
                 || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())
