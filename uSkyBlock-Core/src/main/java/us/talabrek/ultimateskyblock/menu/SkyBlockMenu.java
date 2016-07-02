@@ -486,14 +486,6 @@ public class SkyBlockMenu {
         addLore(lores, "\u00a7f", tr("Want to join another player's\nisland instead of starting\nyour own? If another player\ninvites you to their island\nyou can click here or use\n\u00a7e/island accept\u00a7f to join them.\n\u00a7e\u00a7lClick here to accept an invite!\n\u00a7e\u00a7l(You must be invited first)"));
         meta2.setLore(lores);
         menuItem.setItemMeta(meta2);
-        menu.setItem(menuSize-2, menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.SIGN, 1);
-        meta = menuItem.getItemMeta();
-        meta.setDisplayName(tr("\u00a7a\u00a7lIsland Help"));
-        addLore(lores, "\u00a7f", tr("Need help with skyblock\nconcepts or commands? View\ndetails about them here.\n\u00a7e\u00a7lClick here for help!"));
-        meta.setLore(lores);
-        menuItem.setItemMeta(meta);
         menu.setItem(menuSize-1, menuItem);
         lores.clear();
         return menu;
@@ -753,12 +745,9 @@ public class SkyBlockMenu {
         if (slotIndex == 0) {
             p.closeInventory();
             p.performCommand("island create");
-        } else if (slotIndex == menuSize-2) {
-            p.closeInventory();
-            p.performCommand("island accept");
         } else if (slotIndex == menuSize-1) {
             p.closeInventory();
-            p.performCommand("chestcommands open island_help");
+            p.performCommand("island accept");
         } else if (meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
             if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {

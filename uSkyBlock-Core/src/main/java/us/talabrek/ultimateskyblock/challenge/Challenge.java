@@ -4,19 +4,18 @@ import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.FormatUtil.*;
-import static us.talabrek.ultimateskyblock.util.MetaUtil.createMap;
 
 /**
  * The data-object for a challenge
@@ -41,6 +40,7 @@ public class Challenge {
     private final Type type;
     private final List<String> requiredItems;
     private final List<EntityMatch> requiredEntities;
+    private final List<String> requiredChallenges;
     private final Rank rank;
     private final int resetInHours;
     private final ItemStack displayItem;
@@ -51,12 +51,13 @@ public class Challenge {
     private final Reward reward;
     private final Reward repeatReward;
 
-    public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems, List<EntityMatch> requiredEntities, Rank rank, int resetInHours, ItemStack displayItem, String tool, ItemStack lockedItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
+    public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems, List<EntityMatch> requiredEntities, List<String> requiredChallenges, Rank rank, int resetInHours, ItemStack displayItem, String tool, ItemStack lockedItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
         this.name = name;
         this.displayName = displayName;
         this.type = type;
         this.requiredItems = requiredItems;
         this.requiredEntities = requiredEntities;
+        this.requiredChallenges = requiredChallenges;
         this.rank = rank;
         this.resetInHours = resetInHours;
         this.displayItem = displayItem;
@@ -123,6 +124,10 @@ public class Challenge {
 
     public List<EntityMatch> getRequiredEntities() {
         return requiredEntities;
+    }
+
+    public List<String> getRequiredChallenges() {
+        return requiredChallenges;
     }
 
     public Rank getRank() {
@@ -204,7 +209,6 @@ public class Challenge {
     }
 
     public ItemStack getDisplayItem() {
-        // TODO: 10/12/2014 - R4zorax: Incorporate all the other goodies here...
         return new ItemStack(displayItem); // Copy
     }
 
@@ -226,6 +230,28 @@ public class Challenge {
 
     public Reward getRepeatReward() {
         return repeatReward;
+    }
+
+    public List<String> getMissingRequirements(PlayerInfo playerInfo) {
+        List<String> missing = new ArrayList<>();
+        for (String challengeName : requiredChallenges) {
+            ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
+            if (completion != null && completion.getTimesCompleted() <= 0) {
+                String name = completion.getName();
+                Challenge challenge = uSkyBlock.getInstance().getChallengeLogic().getChallenge(name);
+                if (challenge != null) {
+                    missing.add(challenge.getDisplayName());
+                } else {
+                    missing.add(name);
+                }
+            }
+        }
+        if (missing.isEmpty()) {
+            return Collections.emptyList();
+        }
+        String missingList = "" + missing;
+        missingList = missingList.substring(1, missingList.length()-1);
+        return Collections.singletonList(tr("\u00a77Requires {0}\u00a77 to unlock", missingList));
     }
 
     @Override

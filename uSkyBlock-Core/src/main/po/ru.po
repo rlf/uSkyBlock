@@ -60,6 +60,10 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dПолное время выполнения: §f{0}"
 
 #, java-format
+msgid "§7Requires {0} to unlock"
+msgstr ""
+
+#, java-format
 msgid "§4No challenge named {0} found"
 msgstr "§4Не найдено задание {0}"
 
@@ -2113,20 +2117,6 @@ msgstr ""
 "§e/island accept§f для присоединения к нему.\n"
 "§e§lНажмите, чтобы принять приглашение!\n"
 "§e§l(Вас должны сначала пригласить)"
-
-msgid "§a§lIsland Help"
-msgstr "§a§lПомощь"
-
-msgid ""
-"Need help with skyblock\n"
-"concepts or commands? View\n"
-"details about them here.\n"
-"§e§lClick here for help!"
-msgstr ""
-"Нужна помощь по\n"
-"концепции или командам? Смотрите\n"
-"подробнее об этом здесь.\n"
-"§e§lНажмите для помощи!"
 
 msgid "Island Menu"
 msgstr "Меню острова"

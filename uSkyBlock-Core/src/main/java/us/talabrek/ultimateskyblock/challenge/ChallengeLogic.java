@@ -473,7 +473,7 @@ public class ChallengeLogic {
         meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
         menu.setItem(location++, currentChallengeItem);
-        List<String> missingRequirements = rank.getMissingRequirements(playerInfo);
+        List<String> missingRankRequirements = rank.getMissingRequirements(playerInfo);
         for (Challenge challenge : rank.getChallenges()) {
             if ((location % 9) == 0) {
                 location++; // Skip rank-row
@@ -485,7 +485,8 @@ public class ChallengeLogic {
             String challengeName = challenge.getName();
             try {
                 currentChallengeItem = getItemStack(playerInfo, challengeName);
-                if (!missingRequirements.isEmpty()) {
+                List<String> missingReqs = challenge.getMissingRequirements(playerInfo);
+                if (!missingRankRequirements.isEmpty() || !missingReqs.isEmpty()) {
                     ItemStack locked = challenge.getLockedDisplayItem();
                     if (locked != null) {
                         currentChallengeItem.setType(locked.getType());
@@ -496,7 +497,8 @@ public class ChallengeLogic {
                     }
                     meta4 = currentChallengeItem.getItemMeta();
                     meta4.setDisplayName(tr("\u00a74\u00a7lLocked Challenge"));
-                    lores.addAll(missingRequirements);
+                    lores.addAll(missingReqs);
+                    lores.addAll(missingRankRequirements);
                     meta4.setLore(lores);
                     currentChallengeItem.setItemMeta(meta4);
                 }

@@ -8,7 +8,7 @@ challengeSharing: island
 broadcastCompletion: true
 
 # [text] The color/formatting of the broadcast text when showing first time completions.
-broadcastText: §6
+broadcastText: '&6'
 
 # [true/false] If true, challenges in higher level ranks require challenges in lower level ranks to be completed.
 requirePreviousRank: true
@@ -22,13 +22,13 @@ rankLeeway: 1
 defaultResetInHours: 20
 
 #[color code] The color to use for uncompleted challenges in the list.
-challengeColor: §e
+challengeColor: '&e'
 
 #[color code] The color to use for completed challenges in the list. (non-repeatable)
-finishedColor: §2
+finishedColor: '&2'
 
 #[color code] The color to use for completed challenges in the list. (repeatable)
-repeatableColor: §a
+repeatableColor: '&a'
 
 #[true/false] If true, enables vault to handle currency rewards.
 enableEconomyPlugin: true
@@ -59,7 +59,6 @@ ranks:
         description: Mine from a cobblestone generator.
         type: onPlayer
         requiredItems: '4:64;+2'
-        repeatable: true
         displayItem: 1
         resetInHours: 12
         takeItems: true
@@ -86,7 +85,6 @@ ranks:
         description: Reach island level 20.
         type: islandLevel
         requiredItems: '20'
-        repeatable: false
         displayItem: 16
         takeItems: false
         takeItems: false
@@ -107,7 +105,6 @@ ranks:
         description: Reach island level 100.
         type: islandLevel
         requiredItems: '100'
-        repeatable: false
         displayItem: 15
         takeItems: false
         reward:
@@ -124,7 +121,6 @@ ranks:
         description: Reach island level 250.
         type: islandLevel
         requiredItems: '250'
-        repeatable: true
         displayItem: 14
         takeItems: true
         reward:
@@ -142,7 +138,6 @@ ranks:
         description: Reach island level 500.
         type: islandLevel
         requiredItems: '500'
-        repeatable: true
         displayItem: 56
         takeItems: true
         reward:
@@ -160,7 +155,6 @@ ranks:
         description: Reach island level 1000.
         type: islandLevel
         requiredItems: '1000'
-        repeatable: true
         displayItem: 129
         takeItems: true
         reward:
@@ -190,7 +184,6 @@ ranks:
         description: Collect apples from trees.
         type: onPlayer
         requiredItems: '260:2;+1'
-        repeatable: true
         displayItem: 260
         resetInHours: 6
         takeItems: true
@@ -225,7 +218,6 @@ ranks:
         description: Harvest cacti from a farm.
         type: onPlayer
         requiredItems: '81:64;+16'
-        repeatable: true
         displayItem: 81
         takeItems: true
         reward:
@@ -250,7 +242,6 @@ ranks:
         description: Harvest pumpkins from a farm.
         type: onPlayer
         requiredItems: '86:64;+4'
-        repeatable: true
         displayItem: 86
         takeItems: true
         reward:
@@ -274,7 +265,6 @@ ranks:
         description: Harvest sugarcane from a farm.
         type: onPlayer
         requiredItems: '338:64;+16'
-        repeatable: true
         displayItem: 338
         takeItems: true
         reward:
@@ -298,7 +288,6 @@ ranks:
         description: Collect red and brown mushrooms.
         type: onPlayer
         requiredItems: '39:64;+4 40:64;+4'
-        repeatable: true
         displayItem: 40
         takeItems: true
         reward:
@@ -323,9 +312,7 @@ ranks:
         description: Harvest wheat from a farm.
         type: onPlayer
         requiredItems: '296:64;+16'
-        repeatable: true
         displayItem: 296
-        repeatable: true
         takeItems: true
         reward:
           text: 8 dirt
@@ -347,7 +334,6 @@ ranks:
         description: Harvest slices of melon from a farm.
         type: onPlayer
         requiredItems: '360:128;+8'
-        repeatable: true
         displayItem: 360
         takeItems: true
         reward:
@@ -380,7 +366,6 @@ ranks:
         description: Collect all types of wood logs.
         type: onPlayer
         requiredItems: '17:0:16;+2 17:1:16;+2 17:2:16;+2 17:3:16;+2 162:0:16;+2 162:1:16;+2'
-        repeatable: true
         displayItem: 17
         takeItems: true
         reward:
@@ -406,7 +391,6 @@ ranks:
         description: Make 128 torches.
         type: onPlayer
         requiredItems: '50:128;+32'
-        repeatable: true
         displayItem: 50
         takeItems: true
         reward:
@@ -432,7 +416,6 @@ ranks:
         description: Make all stone tools
         type: onPlayer
         requiredItems: '273:1 274:1 275:1 291:1'
-        repeatable: false
         displayItem: 275
         takeItems: true
         reward:
@@ -451,7 +434,6 @@ ranks:
         description: Collect all types of wood items.
         type: onPlayer
         requiredItems: '136:16;+8 427:1;+1 186:2;+2 192:30;+15 65:30;+15 96:4;+2 72:2;+1'
-        repeatable: true
         displayItem: 58
         takeItems: true
         reward:
@@ -477,7 +459,6 @@ ranks:
         description: Make 64 Stone Bricks.
         type: onPlayer
         requiredItems: '98:64;+8 44:5:30;+6 98:3:30;+6 109:16;+4'
-        repeatable: true
         displayItem: 98
         takeItems: true
         reward:
@@ -503,7 +484,6 @@ ranks:
         description: Build a mob farm and collect mob loot.
         type: onPlayer
         requiredItems: '367:64;+4 287:32;+2 262:32;+2 352:32;+2 289:16;+1 375:5'
-        repeatable: true
         displayItem: 367
         takeItems: true
         reward:
@@ -556,7 +536,6 @@ ranks:
         description: Build a nether portal on your island.
         type: onIsland
         requiredItems: '49:10 90:1'
-        repeatable: false
         displayItem: 49
         takeItems: false
         reward:
@@ -573,7 +552,6 @@ ranks:
         description: Mine from your Nether island.
         type: onPlayer
         requiredItems: '87:64;+2 88:16;+2 13:32;+2 406:32;+2'
-        repeatable: true
         displayItem: 87
         takeItems: true
         reward:
@@ -598,7 +576,6 @@ ranks:
         type: onIsland
         radius: 50
         requiredItems: '112:512 44:6:64 113:64 114:64'
-        repeatable: false
         displayItem: 113
         takeItems: true
         reward:
@@ -615,7 +592,6 @@ ranks:
         description: Collect some Wither Skeleton skulls.
         type: onPlayer
         requiredItems: '397:1:10;+1'
-        repeatable: true
         displayItem: '397:1'
         takeItems: true
         reward:
@@ -648,7 +624,6 @@ ranks:
         description: Catch different types of fish.
         type: onPlayer
         requiredItems: '349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1'
-        repeatable: true
         displayItem: 349
         takeItems: true
         reward:
@@ -672,7 +647,6 @@ ranks:
         description: Harvest potato's from a farm.
         type: onPlayer
         requiredItems: '392:64;+16'
-        repeatable: true
         displayItem: 392
         takeItems: true
         reward:
@@ -696,7 +670,6 @@ ranks:
         description: Harvest carrot's from a farm.
         type: onPlayer
         requiredItems: '391:64;+16'
-        repeatable: true
         displayItem: 391
         takeItems: true
         reward:
@@ -720,7 +693,6 @@ ranks:
         description: Harvest many different farming resources.
         type: onPlayer
         requiredItems: '360:256;+2 353:128;+2 296:128;+2 392:128;+2 391:128;+2 86:128;+2 81:128;+2'
-        repeatable: true
         displayItem: 292
         takeItems: true
         reward:
@@ -744,7 +716,6 @@ ranks:
         description: Get hay bales for the horses.
         type: onPlayer
         requiredItems: '170:32;+4 420:8;+2 398:1 359:1'
-        repeatable: true
         displayItem: 170
         takeItems: true
         reward:
@@ -790,7 +761,6 @@ ranks:
         - Sheep:{"Color":13}
         - Sheep:{"Color":14}
         - Sheep:{"Color":15}
-        repeatable: true
         displayItem: '85'
         takeItems: false
         reward:
@@ -827,7 +797,6 @@ ranks:
         description: Create the famous English Fish & Chips.
         type: onPlayer
         requiredItems: '350:32;+8 393:32;+8'
-        repeatable: true
         displayItem: 350
         takeItems: true
         reward:
@@ -855,7 +824,6 @@ ranks:
         description: Create the famous Danish smørrebrød.
         type: onPlayer
         requiredItems: '297:16;+4 350:1:8;+4 349:2:2;+1 320:8;+4 364:8;+4'
-        repeatable: true
         displayItem: '350:1'
         takeItems: true
         reward:
@@ -882,7 +850,6 @@ ranks:
         description: Create the famous Dutch hutspot.
         type: onPlayer
         requiredItems: '392:64;+8 391:64;+8'
-        repeatable: true
         displayItem: 396
         takeItems: true
         reward:
@@ -910,7 +877,6 @@ ranks:
         description: Create the famous German apfelstrudel.
         type: onPlayer
         requiredItems: '260:8;+5 296:16;+5 353:16;+5 335:1'
-        repeatable: true
         displayItem: 322
         takeItems: true
         reward:
@@ -939,7 +905,6 @@ ranks:
         description: Create the famous American brownies.
         type: onPlayer
         requiredItems: '296:16;+5 353:16;+5 344:16;+5 351:3:16;+5 335:1'
-        repeatable: true
         displayItem: '126:5'
         takeItems: true
         reward:
@@ -968,7 +933,6 @@ ranks:
         description: Create the famous Italian Pasta Funghi.
         type: onPlayer
         requiredItems: '296:32;+8 344:32;+8 39:16;+4 40:16;+4 335:1'
-        repeatable: true
         displayItem: 100
         takeItems: true
         reward:
@@ -996,7 +960,6 @@ ranks:
         description: Create the famous belgian chocolate.
         type: onPlayer
         requiredItems: '353:16;+5 351:3:16;+5 335:1'
-        repeatable: true
         displayItem: '383:120'
         takeItems: true
         reward:
@@ -1037,7 +1000,6 @@ ranks:
         description: Collect enderpearls from endermen.
         type: onPlayer
         requiredItems: '368:10;+4'
-        repeatable: true
         displayItem: 368
         takeItems: true
         reward:
@@ -1062,7 +1024,6 @@ ranks:
         description: Collect slimeballs from slimes.
         type: onPlayer
         requiredItems: '341:64;+4'
-        repeatable: true
         displayItem: 341
         takeItems: true
         reward:
@@ -1086,7 +1047,6 @@ ranks:
         description: Collect some of every type of redstone equipment.
         type: onPlayer
         requiredItems: '331:64;+16 76:32;+4 356:5;+1 404:3;+1 33:2;+1 29:2;+1 69:1;+1 77:1;+1 70:1;+1 154:1;+1 23:1;+1 158:1;+1 151:1;+1'
-        repeatable: true
         displayItem: 331
         takeItems: true
         reward:
@@ -1112,7 +1072,6 @@ ranks:
         description: Collect every color of wool.
         type: onPlayer
         requiredItems: '35:0:8;+1 35:1:8;+1 35:2:8;+1 35:3:8;+1 35:4:8;+1 35:5:8;+1 35:6:8;+1 35:7:8;+1 35:8:8;+1 35:9:8;+1 35:10:8;+1 35:11:8;+1 35:12:8;+1 35:13:8;+1 35:14:8;+1 35:15:8;+1'
-        repeatable: true
         displayItem: 35
         takeItems: true
         reward:
@@ -1141,7 +1100,6 @@ ranks:
         description: Collect every color of stained glass panes.
         type: onPlayer
         requiredItems: '160:0:16;+2 160:1:16;+2 160:2:16;+2 160:3:16;+2 160:4:16;+2 160:5:16;+2 160:6:16;+2 160:7:16;+2 160:8:16;+2 160:9:16;+2 160:10:16;+2 160:11:16;+2 160:12:16;+2 160:13:16;+2 160:14:16;+2 160:15:16;+2'
-        repeatable: true
         displayItem: 160
         takeItems: true
         reward:
@@ -1168,7 +1126,6 @@ ranks:
         description: Make a jukebox and collect all music discs.
         type: onPlayer
         requiredItems: '2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1'
-        repeatable: true
         displayItem: 84
         takeItems: true
         reward:
@@ -1193,7 +1150,6 @@ ranks:
         description: Collect emeralds.
         type: onPlayer
         requiredItems: '388:60;+10'
-        repeatable: false
         displayItem: 388
         takeItems: true
         reward:
@@ -1232,7 +1188,6 @@ ranks:
         description: Collect every kind of edible food.
         type: onPlayer
         requiredItems: '393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1'
-        repeatable: true
         displayItem: 391
         takeItems: true
         reward:
@@ -1256,7 +1211,6 @@ ranks:
         description: Make cookies and a bucket of milk.
         type: onPlayer
         requiredItems: '357:128;+4 335:1'
-        repeatable: true
         displayItem: 357
         takeItems: true
         reward:
@@ -1280,7 +1234,6 @@ ranks:
         description: Bake cakes, pumpkin pies, and cookies.
         type: onPlayer
         requiredItems: '354:5;+1 400:5;+1 357:128;+4'
-        repeatable: true
         displayItem: 354
         takeItems: true
         reward:
@@ -1342,7 +1295,6 @@ ranks:
 #        # [itemid list] The itemid:count of the items required for the challenge.
 #        requiredItems: ''
 #        # [true/false] If the challenge can repeated or not.
-#        repeatable: true
 #        # [itemid] The itemid of the item to be displayed in the challenge menu for complete challenges.
 #        displayItem:
 ##        tool:

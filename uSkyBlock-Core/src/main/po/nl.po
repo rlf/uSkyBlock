@@ -59,6 +59,10 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dHet aantal keer dat je de uitdaging hebt voltooid: §f{0}"
 
 #, java-format
+msgid "§7Requires {0} to unlock"
+msgstr ""
+
+#, java-format
 msgid "§4No challenge named {0} found"
 msgstr "§4De uitdaging met de naam {0} kan niet worden gevonden!"
 
@@ -2151,20 +2155,6 @@ msgstr ""
 "§e/island accept§f Om de uitnodiging te accepteren.\n"
 "§e§lKlik hier om een uitnodiging te accepteren!\n"
 "§e§l(je moet wel eerst uitgenodigd zijn dan)"
-
-msgid "§a§lIsland Help"
-msgstr "§a§lEiland Help"
-
-msgid ""
-"Need help with skyblock\n"
-"concepts or commands? View\n"
-"details about them here.\n"
-"§e§lClick here for help!"
-msgstr ""
-"Help nodig met skyblock\n"
-"concept of commando's?\n"
-"Bekijk details over hen hier.\n"
-"§e§lKlik hier voor hulp!"
 
 msgid "Island Menu"
 msgstr "Eiland Menu"

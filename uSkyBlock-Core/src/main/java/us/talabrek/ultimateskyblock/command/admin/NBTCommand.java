@@ -23,14 +23,15 @@ public class NBTCommand extends CompositeCommand {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
-                    Player player = (Player)sender;
+                    Player player = (Player) sender;
                     ItemStack itemStack = player.getInventory().getItemInMainHand();
                     if (itemStack != null) {
-                        String msg = "";
-                        msg += tr("\u00a7eInfo for \u00a79{0}", ItemStackUtil.asString(itemStack)) + "\n";
-                        msg += tr("\u00a77 - name: \u00a79{0}", VaultHandler.getItemName(itemStack)) + "\n";
-                        msg += tr("\u00a77 - nbttag: \u00a79{0}", NBTUtil.getNBTTag(itemStack)) + "\n";
-                        player.sendMessage(msg.trim().split("\n"));
+                        String[] msgs = new String[]{
+                                tr("\u00a7eInfo for \u00a79{0}", ItemStackUtil.asString(itemStack)),
+                                tr("\u00a77 - name: \u00a79{0}", VaultHandler.getItemName(itemStack)),
+                                tr("\u00a77 - nbttag: \u00a79{0}", NBTUtil.getNBTTag(itemStack))
+                        };
+                        player.sendMessage(msgs);
                     } else {
                         player.sendMessage(tr("\u00a7cNo item in hand!"));
                     }

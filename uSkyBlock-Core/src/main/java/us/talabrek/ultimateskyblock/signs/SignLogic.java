@@ -164,6 +164,7 @@ public class SignLogic {
                     PlayerInfo playerInfo = plugin.getPlayerInfo(islandInfo.getLeaderUniqueId());
                     if (playerInfo != null) {
                         isChallengeAvailable = challenge.getRank().isAvailable(playerInfo);
+                        isChallengeAvailable &= challenge.getMissingRequirements(playerInfo).isEmpty();
                     }
                 }
             }

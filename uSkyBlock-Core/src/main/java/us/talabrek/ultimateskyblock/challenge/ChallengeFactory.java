@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static us.talabrek.ultimateskyblock.util.FormatUtil.normalize;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.createItemStack;
 
 /**
@@ -34,9 +35,9 @@ public class ChallengeFactory {
         return new ChallengeDefaults(
                 section.getInt("defaultResetInHours", 144),
                 section.getBoolean("requiresPreviousRank", true),
-                section.getString("repeatableColor", "\u00a7a"),
-                section.getString("finishedColor", "\u00a72"),
-                section.getString("challengeColor", "\u00a7e"),
+                normalize(section.getString("repeatableColor", "&a")),
+                normalize(section.getString("finishedColor", "&2")),
+                normalize(section.getString("challengeColor", "&e")),
                 section.getInt("rankLeeway", 1),
                 section.getBoolean("enableEconomyPlugin", true),
                 section.getBoolean("broadcastCompletion", true),
@@ -56,13 +57,20 @@ public class ChallengeFactory {
         String description = section.getString("description");
         ItemStack displayItem = createItemStack(
                 section.getString("displayItem", defaults.displayItem),
-                FormatUtil.normalize(displayName), description);
+                normalize(displayName), description);
         ItemStack lockedItem = section.isString("lockedDisplayItem") ? createItemStack(section.getString("lockedDisplayItem", "BARRIER"), displayName, description) : null;
         boolean takeItems = section.getBoolean("takeItems", true);
         int radius = section.getInt("radius", 10);
         Reward reward = createReward(section.getConfigurationSection("reward"));
         Reward repeatReward = createReward(section.getConfigurationSection("repeatReward"));
-        return new Challenge(name, displayName, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, section.getString("tool", null), lockedItem, takeItems, radius, reward, repeatReward);
+        if (repeatReward == null && section.getBoolean("repeatable", false)) {
+            repeatReward = reward;
+        }
+        List<String> requiredChallenges = section.getStringList("requiredChallenges");
+        return new Challenge(name, displayName, description, type,
+                requiredItems, requiredEntities, requiredChallenges, rank,
+                resetInHours, displayItem, section.getString("tool", null), lockedItem, takeItems,
+                radius, reward, repeatReward);
     }
 
     private static List<EntityMatch> createEntities(List<String> requiredEntities) {
@@ -75,7 +83,7 @@ public class ChallengeFactory {
                 String countStr = m.group("count");
                 int count = countStr != null ? Integer.parseInt(countStr, 10) : 1;
                 EntityType entityType = EntityType.fromName(type);
-                Map<String,Object> map = meta != null ? MetaUtil.createMap(meta.substring(1)) : new HashMap<String,Object>(); // skip the leading ':'
+                Map<String, Object> map = meta != null ? MetaUtil.createMap(meta.substring(1)) : new HashMap<String, Object>(); // skip the leading ':'
                 if (entityType != null && map != null) {
                     entities.add(new EntityMatch(entityType, map, count));
                 } else {

@@ -58,6 +58,10 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§d완료된 전체 횟수: §f{0}"
 
 #, java-format
+msgid "§7Requires {0} to unlock"
+msgstr ""
+
+#, java-format
 msgid "§4No challenge named {0} found"
 msgstr "§4{0}란 이름의 도전과제를 찾지 못했습니다"
 
@@ -2125,20 +2129,6 @@ msgstr ""
 "그들과 어울리려면 §e/island accept§f을 쓸 수 있어요.\n"
 "§e§l초대를 승낙하려면 여기를 누르세요\n"
 "§e§l(당신은 먼저 초대받아야 합니다)"
-
-msgid "§a§lIsland Help"
-msgstr "§a§l섬 도움"
-
-msgid ""
-"Need help with skyblock\n"
-"concepts or commands? View\n"
-"details about them here.\n"
-"§e§lClick here for help!"
-msgstr ""
-"skyblock의 컨셉과 커맨드에 대해\n"
-"도움이 필요하세요? 여기서\n"
-"그것들에 대한 디테일을 보세요\n"
-"§e§l도움이 필요하면 여기를 누르세요!"
 
 msgid "Island Menu"
 msgstr "섬 메뉴 (Protocodyne PTK팀 번역)"
