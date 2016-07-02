@@ -149,7 +149,7 @@ public class Challenge {
                 } else if (cooldown >= ChallengeLogic.MS_HOUR) {
                     final int hours = (int) (cooldown / ChallengeLogic.MS_HOUR);
                     lores.add(tr("\u00a74Requirements will reset in {0} hours.", hours));
-                } else {
+                } else if (cooldown >= 0) {
                     final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
                     lores.add(tr("\u00a74Requirements will reset in {0} minutes.", minutes));
                 }

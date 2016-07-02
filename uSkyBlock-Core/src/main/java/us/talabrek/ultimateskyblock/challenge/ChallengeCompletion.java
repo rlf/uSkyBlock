@@ -32,11 +32,14 @@ public class ChallengeCompletion implements us.talabrek.ultimateskyblock.api.Cha
 
     @Override
     public boolean isOnCooldown() {
-        return cooldownUntil > System.currentTimeMillis();
+        return cooldownUntil < 0 || cooldownUntil > System.currentTimeMillis();
     }
 
     @Override
     public long getCooldownInMillis() {
+        if (cooldownUntil < 0) {
+            return -1;
+        }
         long now = System.currentTimeMillis();
         return cooldownUntil > now ? cooldownUntil - now : 0;
     }

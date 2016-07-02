@@ -157,8 +157,13 @@ public class ChallengeCompletionLogic {
         if (challenges.containsKey(challengeName)) {
             ChallengeCompletion completion = challenges.get(challengeName);
             if (!completion.isOnCooldown()) {
-                long now = System.currentTimeMillis();
-                completion.setCooldownUntil(now + uSkyBlock.getInstance().getChallengeLogic().getResetInMillis(challengeName));
+                long resetInMillis = uSkyBlock.getInstance().getChallengeLogic().getResetInMillis(challengeName);
+                if (resetInMillis >= 0) {
+                    long now = System.currentTimeMillis();
+                    completion.setCooldownUntil(now + resetInMillis);
+                } else {
+                    completion.setCooldownUntil(resetInMillis);
+                }
             }
             completion.addTimesCompleted();
         }
