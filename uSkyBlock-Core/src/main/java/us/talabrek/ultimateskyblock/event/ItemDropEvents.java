@@ -46,15 +46,14 @@ public class ItemDropEvents implements Listener {
         addDropInfo(player, event.getItemDrop().getItemStack());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
         if (!plugin.isSkyWorld(player.getWorld())) {
             return;
         }
         if (!visitorsCanDrop && !plugin.playerIsOnIsland(player) && !plugin.playerIsInSpawn(player)) {
-            event.getDrops().clear();
-            plugin.notifyPlayer(player, tr("\u00a7eVisitors can't drop items!"));
+            event.setKeepInventory(true);
             return;
         }
         // Take over the drop, since Bukkit don't do this in a Metadatable format.
