@@ -16,6 +16,14 @@ public interface PlayerDB extends Listener {
     UUID getUUIDFromName(String name);
 
     /**
+     * Returns the UUID (if found) for the player we currently thinks has that name
+     * @param name The name (not displayName) of a player.
+     * @param lookup Whether or not to ask Mojang for the UUID.
+     * @return
+     */
+    UUID getUUIDFromName(String name, boolean lookup);
+
+    /**
      * Returns the current name from the DB.
      * @param uuid The UUID of the player.
      * @return the current name from the DB.

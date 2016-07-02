@@ -549,6 +549,44 @@ msgstr ""
 msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§bХозяин изменен у {0}§b на {1}"
 
+msgid "advanced info about NBT stuff"
+msgstr ""
+
+msgid "shows the NBTTag for the currently held item"
+msgstr ""
+
+#, java-format
+msgid "§eInfo for §9{0}"
+msgstr ""
+
+#, java-format
+msgid "§7 - name: §9{0}"
+msgstr ""
+
+#, java-format
+msgid "§7 - nbttag: §9{0}"
+msgstr ""
+
+msgid "§cNo item in hand!"
+msgstr ""
+
+msgid "§eCan only be executed as a player"
+msgstr ""
+
+msgid "sets the NBTTag on the currently held item"
+msgstr ""
+
+#, java-format
+msgid "§eSet §9{0}§e to §c{1}"
+msgstr ""
+
+msgid "adds the NBTTag on the currently held item"
+msgstr ""
+
+#, java-format
+msgid "§eAdded §9{0}§e to §c{1}"
+msgstr ""
+
 msgid "manage orphans"
 msgstr "управления сиротами"
 
@@ -596,9 +634,6 @@ msgid "shows the borders of the current island"
 msgstr ""
 
 msgid "§eNo island found at your current location"
-msgstr ""
-
-msgid "§eCan only be executed as a player"
 msgstr ""
 
 msgid "shows the borders of the current chunk"
@@ -1439,16 +1474,53 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Вы должны быть хозяином острова, чтобы открыть его!"
 
 #, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+
+#, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4Не найден импортер с именем §e{0}"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})"
+msgid "§eConverted {0}/{1} files in {2}"
 msgstr ""
 
 #, java-format
-msgid "§eConverted {0}/{1} files"
+msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
+msgstr ""
+
+#, java-format
+msgid "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
+#, java-format
+msgid "§7PlayerDB: Filtered {0} names"
+msgstr ""
+
+#, java-format
+msgid ""
+"§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
+"{6}"
+msgstr ""
+
+#, java-format
+msgid "§7MojangAPI: Trying to fetch {0} players from Mojang"
+msgstr ""
+
+msgid "SUCCESS"
+msgstr ""
+
+msgid "FAILED"
+msgstr ""
+
+#, java-format
+msgid "§7 - MojangAPI:§aCOMPLETED: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr ""
 
 msgid "The island has been created."
@@ -2311,6 +2383,10 @@ msgid "Caps On"
 msgstr ""
 
 msgid "§9Text Editor"
+msgstr ""
+
+#, java-format
+msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr ""
 
 msgid "§eSending you to spawn."

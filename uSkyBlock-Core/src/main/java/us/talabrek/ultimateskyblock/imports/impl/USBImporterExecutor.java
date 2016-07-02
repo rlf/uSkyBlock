@@ -8,6 +8,8 @@ import us.talabrek.ultimateskyblock.imports.name2uuid.Name2UUIDImporter;
 import us.talabrek.ultimateskyblock.imports.update.USBUpdateImporter;
 import us.talabrek.ultimateskyblock.imports.wolfwork.WolfWorkUSBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.ProgressTracker;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.logging.Level;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
@@ -24,17 +27,18 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
  */
 public class USBImporterExecutor {
     private final uSkyBlock plugin;
-    private final double progressEveryPct;
-    private final long progressEveryMs;
+    private final ProgressTracker progressTracker;
     private List<USBImporter> importers;
+    private volatile long tStart;
     private volatile int countSuccess;
     private volatile int countSkip;
     private volatile int countFailed;
 
     public USBImporterExecutor(uSkyBlock plugin) {
         this.plugin = plugin;
-        progressEveryPct = plugin.getConfig().getDouble("importer.progressEveryPct", 10);
-        progressEveryMs = plugin.getConfig().getLong("importer.progressEveryMs", 5000);
+        double progressEveryPct = plugin.getConfig().getDouble("importer.progressEveryPct", 10);
+        long progressEveryMs = plugin.getConfig().getLong("importer.progressEveryMs", 10000);
+        progressTracker = new ProgressTracker(Bukkit.getConsoleSender(), marktr("\u00a7eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) ~ {6}"), progressEveryPct, progressEveryMs);
     }
 
     public List<String> getImporterNames() {
@@ -87,6 +91,7 @@ public class USBImporterExecutor {
     }
 
     private void doImport(CommandSender sender, USBImporter importer) {
+        tStart = System.currentTimeMillis();
         importer.init(plugin);
         countSuccess = 0;
         countFailed = 0;
@@ -100,10 +105,6 @@ public class USBImporterExecutor {
     }
 
     private void doImport(final CommandSender sender, final USBImporter importer, final File[] files) {
-        float lastProgressPct = 0;
-        long lastProgressTime = 0;
-        float pct = 0;
-        long now = 0;
         try {
             for (int i = 0; i < files.length; i++) {
                 File file = files[i];
@@ -123,14 +124,9 @@ public class USBImporterExecutor {
                     countFailed++;
                     log(Level.WARNING, "Could not import file " + file, t);
                 }
-                now = System.currentTimeMillis();
-                pct = 100f * (countSuccess + countFailed + countSkip) / files.length;
-                if (now > (lastProgressTime + progressEveryMs) || pct > (lastProgressPct + progressEveryPct)) {
-                    lastProgressPct = pct;
-                    lastProgressTime = now;
-                    sender.sendMessage(tr("\u00a7eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5})", pct,
-                            countFailed + countSuccess, files.length, countSuccess, countFailed, countSkip));
-                }
+                progressTracker.progressUpdate(countSuccess + countFailed + countSkip, files.length,
+                        countSuccess, countFailed, countSkip,
+                        TimeUtil.millisAsString(System.currentTimeMillis()-tStart));
             }
         } finally {
             complete(sender, importer);
@@ -139,7 +135,8 @@ public class USBImporterExecutor {
 
     private void complete(CommandSender sender, USBImporter importer) {
         importer.completed(countSuccess, countFailed, countSkip);
-        sender.sendMessage(tr("\u00a7eConverted {0}/{1} files", countSuccess, (countSuccess + countFailed)));
+        sender.sendMessage(tr("\u00a7eConverted {0}/{1} files in {2}",
+                countSuccess, (countSuccess + countFailed), TimeUtil.millisAsString(System.currentTimeMillis()-tStart)));
         if (countFailed == 0) {
             plugin.getConfig().set("importer." + importer.getName() + ".imported", true);
             plugin.saveConfig();

@@ -308,7 +308,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  LocationUtil.asString(getHomeLocation()) + "\n";
         str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + LocationUtil.asString(getIslandLocation()) + "\n";
         str += ChatColor.GRAY + "  - banned from: " + ChatColor.DARK_AQUA + getBannedFrom() + "\n";
-        str += ChatColor.GRAY + "  - trusted on: " + ChatColor.DARK_AQUA + playerData.getStringList("trustedOn") + "\n";
+        str += ChatColor.GRAY + "  - trusted on: " + ChatColor.DARK_AQUA + getConfig().getStringList("trustedOn") + "\n";
         // TODO: 28/12/2014 - R4zorax: Some info about challenges?
         return str;
     }
@@ -354,26 +354,26 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     }
     
     public void banFromIsland(String name) {
-        List<String> bannedFrom = playerData.getStringList("bannedFrom");
+        List<String> bannedFrom = getConfig().getStringList("bannedFrom");
         if (bannedFrom != null && !bannedFrom.contains(name)) {
             bannedFrom.add(name);
-            playerData.set("bannedFrom", bannedFrom);
+            getConfig().set("bannedFrom", bannedFrom);
             save();
         }
     }
 
     public void unbanFromIsland(String name) {
-        List<String> bannedFrom = playerData.getStringList("bannedFrom");
+        List<String> bannedFrom = getConfig().getStringList("bannedFrom");
         if (bannedFrom != null && bannedFrom.contains(name)) {
             bannedFrom.remove(name);
-            playerData.set("bannedFrom", bannedFrom);
+            getConfig().set("bannedFrom", bannedFrom);
             save();
         }
     }
 
     @Override
     public List<String> getBannedFrom() {
-        return playerData.getStringList("bannedFrom");
+        return getConfig().getStringList("bannedFrom");
     }
 
     public long getLastSaved() {
@@ -381,18 +381,18 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     }
 
     public void addTrust(String name) {
-        List<String> trustedOn = playerData.getStringList("trustedOn");
+        List<String> trustedOn = getConfig().getStringList("trustedOn");
         if (!trustedOn.contains(name)) {
             trustedOn.add(name);
-            playerData.set("trustedOn", trustedOn);
+            getConfig().set("trustedOn", trustedOn);
         }
         save();
     }
 
     public void removeTrust(String name) {
-        List<String> trustedOn = playerData.getStringList("trustedOn");
+        List<String> trustedOn = getConfig().getStringList("trustedOn");
         trustedOn.remove(name);
-        playerData.set("trustedOn", trustedOn);
+        getConfig().set("trustedOn", trustedOn);
         save();
     }
 
@@ -418,11 +418,11 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     }
 
     public void setClearInventoryOnNextEntry(boolean b) {
-        playerData.set("clearInventoryOnNextEntry", b ? b : null);
+        getConfig().set("clearInventoryOnNextEntry", b ? b : null);
         save();
     }
 
     public boolean isClearInventoryOnNextEntry() {
-        return playerData != null && playerData.getBoolean("clearInventoryOnNextEntry", false);
+        return getConfig().getBoolean("clearInventoryOnNextEntry", false);
     }
 }

@@ -61,5 +61,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new DocumentCommand(plugin, "doc", "usb.admin.doc"));
         add(new RegionCommand(plugin, animationHandler));
         add(new SetMaintenanceCommand(plugin));
+        add(new NBTCommand());
     }
 }

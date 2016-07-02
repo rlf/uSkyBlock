@@ -3,13 +3,10 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import us.talabrek.ultimateskyblock.util.MetaUtil;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,7 +17,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.createItemStack;
 
 /**
@@ -79,7 +75,7 @@ public class ChallengeFactory {
                 String countStr = m.group("count");
                 int count = countStr != null ? Integer.parseInt(countStr, 10) : 1;
                 EntityType entityType = EntityType.fromName(type);
-                Map<String,Object> map = meta != null ? createMap(meta.substring(1)) : new HashMap<String,Object>(); // skip the leading ':'
+                Map<String,Object> map = meta != null ? MetaUtil.createMap(meta.substring(1)) : new HashMap<String,Object>(); // skip the leading ':'
                 if (entityType != null && map != null) {
                     entities.add(new EntityMatch(entityType, map, count));
                 } else {
@@ -88,18 +84,6 @@ public class ChallengeFactory {
             }
         }
         return entities;
-    }
-
-    private static Map<String,Object> createMap(String mapString) {
-        try {
-            Object parse = new JSONParser().parse(new StringReader(mapString));
-            if (parse instanceof Map) {
-                return (Map<String,Object>)parse;
-            }
-        } catch (IOException | ParseException e) {
-            throw new IllegalArgumentException("Not a valid map: " + mapString, e);
-        }
-        throw new IllegalArgumentException("Not a map: " + mapString);
     }
 
     private static Reward createReward(ConfigurationSection section) {

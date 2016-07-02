@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.util;
 
+import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -22,9 +23,9 @@ import static us.talabrek.ultimateskyblock.util.FormatUtil.join;
  * Conversion to ItemStack from strings.
  */
 public enum ItemStackUtil {;
-    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?(:(?<meta>\\{.*\\}))?:(?<amount>[0-9]+)");
+    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?:(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
     private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?");
-    private static final Pattern ITEM_NAME_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)(:(?<sub>[0-9]+))?");
+    private static final Pattern ITEM_NAME_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)(:(?<sub>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
 
     public static List<ItemProbability> createItemsWithProbabilty(List<String> items) {
         List<ItemProbability> itemProbs = new ArrayList<>();
@@ -36,6 +37,7 @@ public enum ItemStackUtil {;
                     short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
                     int amount = Integer.parseInt(m.group("amount"), 10);
                     ItemStack itemStack = new ItemStack(id, amount, sub);
+                    itemStack = NBTUtil.addNBTTag(itemStack, m.group("meta"));
                     itemProbs.add(new ItemProbability(p, itemStack));
                 } else {
                     throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
@@ -101,6 +103,7 @@ public enum ItemStackUtil {;
     public static ItemStack createItemStack(String displayItem, String name, String description) {
         Material material = Material.DIRT;
         short subType = 0;
+        String metaStr = null;
         if (displayItem != null) {
             Matcher matcher = ITEM_PATTERN.matcher(displayItem);
             Matcher nameMatcher = ITEM_NAME_PATTERN.matcher(displayItem);
@@ -110,6 +113,7 @@ public enum ItemStackUtil {;
             } else if (nameMatcher.matches()) {
                 material = Material.getMaterial(nameMatcher.group("id"));
                 subType = nameMatcher.group("sub") != null ? (short) Integer.parseInt(nameMatcher.group("sub"), 10) : 0;
+                metaStr = nameMatcher.group("meta");
             }
         }
         if (material == null) {
@@ -125,6 +129,7 @@ public enum ItemStackUtil {;
         }
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
+        itemStack = NBTUtil.addNBTTag(itemStack, metaStr);
         return itemStack;
     }
 

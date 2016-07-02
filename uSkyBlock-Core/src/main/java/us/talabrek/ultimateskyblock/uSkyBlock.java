@@ -1014,7 +1014,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         // Update all of the loaded configs.
         FileUtil.reload();
 
-        playerDB = new FilePlayerDB(new File(getDataFolder(), "uuid2name.yml"));
+        playerDB = new FilePlayerDB(getDataFolder());
         getServer().getPluginManager().registerEvents(playerDB, this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());

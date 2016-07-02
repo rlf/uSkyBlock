@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.challenge;
 
+import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -315,8 +316,7 @@ public class ChallengeLogic {
     private int getCountOf(PlayerInventory inventory, ItemStack required) {
         int count = 0;
         for (ItemStack invItem : inventory.all(required.getType()).values()) {
-            // TODO: 12/11/2015 - R4zorax: Should also test displayname...
-            if (invItem.getDurability() == required.getDurability()) {
+            if (invItem.getDurability() == required.getDurability() && NBTUtil.getNBTTag(invItem).equals(NBTUtil.getNBTTag(required))) {
                 count += invItem.getAmount();
             }
         }

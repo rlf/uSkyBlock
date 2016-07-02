@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.challenge;
 
+import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
@@ -7,22 +8,21 @@ import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.join;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.prefix;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
+import static us.talabrek.ultimateskyblock.util.FormatUtil.*;
+import static us.talabrek.ultimateskyblock.util.MetaUtil.createMap;
 
 /**
  * The data-object for a challenge
  */
 public class Challenge {
-    public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?(?<meta>\\{.*\\})?");
+    public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))\\s*?(?<meta>\\{.*\\})?");
     public static final int MAX_DETAILS = 11;
 
     public enum Type { PLAYER, ISLAND, ISLAND_LEVEL;
@@ -110,55 +110,15 @@ public class Challenge {
                 int amount = Integer.parseInt(m.group("amount"), 10);
                 char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
                 int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc"), 10) : 0;
-                Map<String,String> metaMap = createMetaMap(m.group("meta"));
                 amount = ChallengeLogic.calcAmount(amount, op, inc, timesCompleted);
                 ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
                 ItemMeta meta = mat.getItemMeta();
-                meta.setDisplayName(getItemName(mat, metaMap));
-                meta.setLore(getLore(mat, metaMap));
                 mat.setItemMeta(meta);
+                mat = NBTUtil.addNBTTag(mat, m.group("meta"));
                 items.add(mat);
             }
         }
         return items;
-    }
-
-    private List<String> getLore(ItemStack mat, Map<String, String> metaMap) {
-        List<String> lore = mat.getItemMeta().getLore();
-        if (lore == null) {
-            lore = new ArrayList<>();
-        }
-        if (metaMap.containsKey("lore")) {
-            lore.addAll(Arrays.asList(metaMap.get("lore").split("\\\\n")));
-        }
-        return lore;
-    }
-
-    private Map<String, String> createMetaMap(String meta) {
-        HashMap<String, String> map = new HashMap<>();
-        if (meta != null && meta.startsWith("{") && meta.endsWith("}")) {
-            meta = meta.substring(1, meta.length()-1);
-            // NOTE: very simple parsing - but doable for the most basic meta
-            String[] keyValues = meta.split(",");
-            for (String keyValue : keyValues) {
-                int ix = keyValue.indexOf(":");
-                if (ix >= 0) {
-                    String key = keyValue.substring(0, ix);
-                    String value = keyValue.substring(ix+1);
-                    map.put(key.trim().toLowerCase(), value.trim());
-                }
-            }
-        }
-        return map;
-    }
-
-    private String getItemName(ItemStack mat, Map<String, String> meta) {
-        if (meta.containsKey("name")) {
-            return meta.get("name");
-        } else if (mat.getItemMeta().getDisplayName() != null) {
-            return mat.getItemMeta().getDisplayName();
-        }
-        return null;
     }
 
     public List<EntityMatch> getRequiredEntities() {

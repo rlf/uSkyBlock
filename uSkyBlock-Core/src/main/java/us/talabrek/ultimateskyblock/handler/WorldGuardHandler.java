@@ -287,6 +287,7 @@ public class WorldGuardHandler {
     public static void removeIslandRegion(String islandName) {
         RegionManager regionManager = getWorldGuard().getRegionManager(uSkyBlock.getSkyBlockWorld());
         regionManager.removeRegion(islandName + "island");
+        regionManager.removeRegion(islandName + "nether");
     }
 
     public static void setupGlobal(World world) {
