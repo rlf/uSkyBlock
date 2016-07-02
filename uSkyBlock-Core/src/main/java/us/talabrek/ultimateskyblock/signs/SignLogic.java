@@ -146,11 +146,11 @@ public class SignLogic {
         for (String signLoc : signList) {
             String challengeName = config.getString("signs." + signLoc + ".challenge", null);
             if (challengeName == null) {
-                return;
+                continue;
             }
             final Challenge challenge = challengeLogic.getChallenge(challengeName);
             if (challenge == null || challenge.getType() != Challenge.Type.PLAYER) {
-                return;
+                continue;
             }
             final List<ItemStack> requiredItems = new ArrayList<>();
             boolean isChallengeAvailable = false;
@@ -224,7 +224,7 @@ public class SignLogic {
             } else {
                 sign.setLine(3, "");
             }
-            if (!sign.update(true, true)) {
+            if (!sign.update()) {
                 log.info("Unable to update sign at " + LocationUtil.asString(signLoc));
             }
         }
