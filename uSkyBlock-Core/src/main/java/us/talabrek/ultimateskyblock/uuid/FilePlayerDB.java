@@ -14,6 +14,8 @@ import us.talabrek.ultimateskyblock.util.UUIDUtil;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -129,6 +131,19 @@ public class FilePlayerDB implements PlayerDB {
             return getDisplayName(uuid);
         }
         return playerName;
+    }
+
+    @Override
+    public Set<String> getNames(String search) {
+        HashSet<String> names = new HashSet<>(uuid2nameCache.values());
+        String lowerSearch = search != null ? search.toLowerCase() : null;
+        for (Iterator<String> it = names.iterator(); it.hasNext(); ) {
+            String name = it.next();
+            if (name == null || (search != null && !name.toLowerCase().startsWith(lowerSearch))) {
+                it.remove();
+            }
+        }
+        return names;
     }
 
     @Override

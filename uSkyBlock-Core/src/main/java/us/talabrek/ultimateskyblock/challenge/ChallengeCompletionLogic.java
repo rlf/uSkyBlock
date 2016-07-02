@@ -113,6 +113,17 @@ public class ChallengeCompletionLogic {
         return challengeMap;
     }
 
+    public Map<String, ChallengeCompletion> getIslandChallenges(String islandName) {
+        if (storeOnIsland && islandName != null) {
+            try {
+                return completionCache.get(islandName);
+            } catch (ExecutionException e) {
+                plugin.getLogger().log(Level.WARNING, "Error fetching challenge-completion for id " + islandName);
+            }
+        }
+        return new ConcurrentHashMap<>();
+    }
+
     public Map<String, ChallengeCompletion> getChallenges(PlayerInfo playerInfo) {
         if (playerInfo == null || !playerInfo.getHasIsland() || playerInfo.locationForParty() == null) {
             return new ConcurrentHashMap<>();
@@ -188,5 +199,9 @@ public class ChallengeCompletionLogic {
         long size = completionCache.size();
         completionCache.invalidateAll();
         return size;
+    }
+
+    public boolean isIslandSharing() {
+        return storeOnIsland;
     }
 }

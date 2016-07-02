@@ -149,14 +149,20 @@ public class ChallengeLogic {
     }
 
     public Challenge getChallenge(String challengeName) {
+        List<Challenge> partialMatch = new ArrayList<>();
         for (Rank rank : ranks.values()) {
             for (Challenge challenge : rank.getChallenges()) {
                 if (challenge.getName().equalsIgnoreCase(challengeName)) {
                     return challenge;
                 } else if (stripFormatting(challenge.getDisplayName()).equalsIgnoreCase(challengeName)) {
                     return challenge;
+                } else if (challenge.getName().startsWith(challengeName)) {
+                    partialMatch.add(challenge);
                 }
             }
+        }
+        if (partialMatch.size() == 1) {
+            return partialMatch.get(0);
         }
         return null;
     }
@@ -313,7 +319,7 @@ public class ChallengeLogic {
         return false;
     }
 
-    private int getCountOf(PlayerInventory inventory, ItemStack required) {
+    public int getCountOf(Inventory inventory, ItemStack required) {
         int count = 0;
         for (ItemStack invItem : inventory.all(required.getType()).values()) {
             if (invItem.getDurability() == required.getDurability() && NBTUtil.getNBTTag(invItem).equals(NBTUtil.getNBTTag(required))) {
@@ -531,6 +537,24 @@ public class ChallengeLogic {
         return completionLogic.getChallenge(playerInfo, challenge);
     }
 
+    public ChallengeCompletion getIslandCompletion(String islandName, String challengeName) {
+        Map<String, ChallengeCompletion> challenges = completionLogic.getIslandChallenges(islandName);
+        if (challenges.containsKey(challengeName)) {
+            return challenges.get(challengeName);
+        } else {
+            ChallengeCompletion chal = null;
+            for (String k : challenges.keySet()) {
+                if (k.startsWith(challengeName)) {
+                    if (chal != null) {
+                        return null;
+                    }
+                    chal = challenges.get(k);
+                }
+            }
+            return chal;
+        }
+    }
+
     public void resetAllChallenges(PlayerInfo playerInfo) {
         completionLogic.resetAllChallenges(playerInfo);
     }
@@ -541,5 +565,9 @@ public class ChallengeLogic {
 
     public long flushCache() {
         return completionLogic.flushCache();
+    }
+
+    public boolean isIslandSharing() {
+        return completionLogic.isIslandSharing();
     }
 }

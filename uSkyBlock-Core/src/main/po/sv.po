@@ -2404,6 +2404,16 @@ msgstr "§aDu kommer att teleporteras om {0} sekunder."
 msgid "§7Teleport cancelled"
 msgstr ""
 
+msgid "READY"
+msgstr ""
+
+msgid ""
+"§cWARNING:§e Could not transfer all the required items to your inventory!"
+msgstr ""
+
+msgid "§cNot enough items in chest to complete challenge!"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Något gick fel när när data skulle sparas!"
 

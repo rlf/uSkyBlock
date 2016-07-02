@@ -2346,6 +2346,16 @@ msgstr "§aBạn sẽ dịch chuyển trong {0} giây"
 msgid "§7Teleport cancelled"
 msgstr "§7Huỷ bỏ dịch chuyển"
 
+msgid "READY"
+msgstr ""
+
+msgid ""
+"§cWARNING:§e Could not transfer all the required items to your inventory!"
+msgstr ""
+
+msgid "§cNot enough items in chest to complete challenge!"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Lỗi phát sinh khi lưu trữ thông tin đảo/nhóm"
 

@@ -2439,6 +2439,16 @@ msgstr "§aDu wirst in {0} Sekunden Teleportiert."
 msgid "§7Teleport cancelled"
 msgstr "§7Teleport abgebrochen"
 
+msgid "READY"
+msgstr ""
+
+msgid ""
+"§cWARNING:§e Could not transfer all the required items to your inventory!"
+msgstr ""
+
+msgid "§cNot enough items in chest to complete challenge!"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
 

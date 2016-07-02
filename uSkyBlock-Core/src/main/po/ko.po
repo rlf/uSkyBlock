@@ -2418,6 +2418,16 @@ msgstr "§a{0}초 후에 당신은 이동될 것 입니다.."
 msgid "§7Teleport cancelled"
 msgstr "이동이 취소되었습니다."
 
+msgid "READY"
+msgstr ""
+
+msgid ""
+"§cWARNING:§e Could not transfer all the required items to your inventory!"
+msgstr ""
+
+msgid "§cNot enough items in chest to complete challenge!"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "섬 그리고/혹은 파티 데이터를 저장하는중에 오류가 발생하였습니다!"
 

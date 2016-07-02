@@ -2437,6 +2437,16 @@ msgstr "§9* §7You will be teleported in §4{0} §7seconds."
 msgid "§7Teleport cancelled"
 msgstr "§4* §7Teleport cancelled"
 
+msgid "READY"
+msgstr ""
+
+msgid ""
+"§cWARNING:§e Could not transfer all the required items to your inventory!"
+msgstr ""
+
+msgid "§cNot enough items in chest to complete challenge!"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Something went wrong saving the island and/or party data!"
 

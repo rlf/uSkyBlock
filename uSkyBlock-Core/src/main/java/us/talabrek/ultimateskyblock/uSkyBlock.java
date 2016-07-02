@@ -83,6 +83,8 @@ import us.talabrek.ultimateskyblock.player.PlayerLogic;
 import us.talabrek.ultimateskyblock.player.PlayerNotifier;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.player.TeleportLogic;
+import us.talabrek.ultimateskyblock.signs.SignEvents;
+import us.talabrek.ultimateskyblock.signs.SignLogic;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
@@ -332,6 +334,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         if (getConfig().getBoolean("tool-menu.enabled", true)) {
             manager.registerEvents(new ToolMenuEvents(this), this);
+        }
+        if (getConfig().getBoolean("signs.enabled", true)) {
+            manager.registerEvents(new SignEvents(this, new SignLogic(this)), this);
         }
         PlaceholderHandler.register(this);
     }

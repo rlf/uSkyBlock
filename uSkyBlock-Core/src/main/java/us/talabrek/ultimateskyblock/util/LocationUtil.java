@@ -18,6 +18,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.util.LogUtil.log;
@@ -27,6 +29,7 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
  */
 public enum LocationUtil {
     ;
+    private static final Pattern LOCATION_PATTERN = Pattern.compile("((?<world>[^:]+):)?(?<x>[\\-0-9\\.]+),(?<y>[\\-0-9\\.]+),(?<z>[\\-0-9\\.]+)(:(?<yaw>[\\-0-9\\.]+):(?<pitch>[\\-0-9\\.]+))?");
     private static final String[] CARDINAL_DIRECTION = {
             I18nUtil.marktr("North"),
             I18nUtil.marktr("North-East"),
@@ -46,11 +49,32 @@ public enum LocationUtil {
         if (loc.getWorld() != null && loc.getWorld().getName() != null) {
             s += loc.getWorld().getName() + ":";
         }
-        s += String.format("%5.2f,%5.2f,%5.2f", loc.getX(), loc.getY(), loc.getZ());
+        s += String.format("%.2f,%.2f,%.2f", loc.getX(), loc.getY(), loc.getZ());
         if (loc.getYaw() != 0f || loc.getPitch() != 0f) {
-            s += String.format(":%3.2f:%3.2f", loc.getYaw(), loc.getPitch());
+            s += String.format(":%.2f:%.2f", loc.getYaw(), loc.getPitch());
         }
         return s;
+    }
+
+    public static String asKey(Location loc) {
+        return asString(loc).replaceAll(":", "-").replaceAll("\\.", "_");
+    }
+
+    public static Location fromString(String locString) {
+        if (locString == null || locString.isEmpty()) {
+            return null;
+        }
+        Matcher m = LOCATION_PATTERN.matcher(locString);
+        if (m.matches()) {
+            return new Location(Bukkit.getWorld(m.group("world")),
+                    Double.parseDouble(m.group("x")),
+                    Double.parseDouble(m.group("y")),
+                    Double.parseDouble(m.group("z")),
+                    m.group("yaw") != null ? Float.parseFloat(m.group("yaw")) : 0,
+                    m.group("pitch") != null ? Float.parseFloat(m.group("pitch")) : 0
+                    );
+        }
+        return null;
     }
 
     public static boolean isEmptyLocation(Location location) {

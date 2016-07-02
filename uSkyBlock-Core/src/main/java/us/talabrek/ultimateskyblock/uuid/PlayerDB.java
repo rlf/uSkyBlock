@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.uuid;
 
 import org.bukkit.event.Listener;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -44,6 +45,7 @@ public interface PlayerDB extends Listener {
      */
     String getDisplayName(String playerName);
 
+    Set<String> getNames(String search);
     /**
      * Stores a new name in the DB.
      */
