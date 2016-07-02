@@ -849,6 +849,9 @@ msgstr ""
 msgid "accept/reject an invitation."
 msgstr ""
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr ""
 

@@ -854,6 +854,9 @@ msgstr "§e你拒接了加入岛屿的邀请"
 msgid "accept/reject an invitation."
 msgstr ""
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr ""
 

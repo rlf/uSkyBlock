@@ -881,6 +881,9 @@ msgstr "§eJe hebt de uitnodoging geannuleerd."
 msgid "accept/reject an invitation."
 msgstr "accepteren/weiger een uitnodiging."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "ban/unban een speler van uw eiland."
 

@@ -872,6 +872,9 @@ msgstr "§eDu har afvist invitationen til en ø"
 msgid "accept/reject an invitation."
 msgstr "afvis eller accepter invitationen."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "ban/unban en spiller fra din ø."
 

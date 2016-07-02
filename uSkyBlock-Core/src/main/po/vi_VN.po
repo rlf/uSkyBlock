@@ -866,6 +866,9 @@ msgstr "§eBạn từ chơi lời mời gia nhập đảo"
 msgid "accept/reject an invitation."
 msgstr "chấp nhận/từ chối lời mời."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "(bỏ) cấm người chơi."
 

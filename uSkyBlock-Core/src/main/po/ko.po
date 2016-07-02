@@ -872,6 +872,9 @@ msgstr "§e당신은 섬에 참여하라는 초대를 거절하였습니다."
 msgid "accept/reject an invitation."
 msgstr "초대에 accept/reject 하세요."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "당신의 섬에서 플레이어를 차단/차단 취소 하세요."
 

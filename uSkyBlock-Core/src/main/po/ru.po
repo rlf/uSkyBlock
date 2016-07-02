@@ -872,6 +872,9 @@ msgstr "§eВы отклонили предложение о присоедин�
 msgid "accept/reject an invitation."
 msgstr "принять/отклонить приглашение."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "блокировать/разблокировать игрока на вашем острове."
 

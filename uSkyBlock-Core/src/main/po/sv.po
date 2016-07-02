@@ -873,6 +873,9 @@ msgstr "§eDu har tackat nej till en inbjudan att gå med i en ö."
 msgid "accept/reject an invitation."
 msgstr "tacka ja eller nej till en inbjudan."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "banna eller unbanna en spelare från din ö."
 

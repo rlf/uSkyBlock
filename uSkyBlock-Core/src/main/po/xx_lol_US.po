@@ -867,6 +867,9 @@ msgstr "§eYou have rejected teh invitashun to join a cathouz."
 msgid "accept/reject an invitation."
 msgstr "accept/reject an invitashun."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a kitteh from yoor cathouz."
 

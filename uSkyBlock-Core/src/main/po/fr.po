@@ -876,6 +876,9 @@ msgstr "§eVous avez rejeté l'invitation pour rejoindre l'île."
 msgid "accept/reject an invitation."
 msgstr "accepter/rejeter une invitation."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "bannir/débannir un joueur de votre île."
 

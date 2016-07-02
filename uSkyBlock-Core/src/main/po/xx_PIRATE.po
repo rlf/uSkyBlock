@@ -866,6 +866,9 @@ msgstr "§eYe have rejected the invitation to join a hideout."
 msgid "accept/reject an invitation."
 msgstr "accept/reject an invitation."
 
+msgid "teleports you to your island (or create one)"
+msgstr ""
+
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a pirate from yer hideout."
 

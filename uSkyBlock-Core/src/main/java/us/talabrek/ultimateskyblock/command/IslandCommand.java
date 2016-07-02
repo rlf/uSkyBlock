@@ -39,9 +39,11 @@ public class IslandCommand extends AbstractCommandExecutor {
         addTab("schematic", new SchematicTabCompleter(plugin));
         add(new RestartCommand(plugin));
         add(new LogCommand(plugin, menu));
-        add(new CreateCommand(plugin));
+        CreateCommand createCommand = new CreateCommand(plugin);
+        add(createCommand);
         add(new SetHomeCommand(plugin));
-        add(new HomeCommand(plugin));
+        HomeCommand homeCommand = new HomeCommand(plugin);
+        add(homeCommand);
         add(new SetWarpCommand(plugin));
         add(new WarpCommand(plugin));
         add(new ToggleWarp(plugin));
@@ -62,6 +64,7 @@ public class IslandCommand extends AbstractCommandExecutor {
         add(new SpawnCommand(plugin));
         add(new TrustCommand(plugin));
         add(new MobLimitCommand(plugin));
+        add(new AutoCommand(plugin, createCommand, homeCommand));
     }
 
     @Override

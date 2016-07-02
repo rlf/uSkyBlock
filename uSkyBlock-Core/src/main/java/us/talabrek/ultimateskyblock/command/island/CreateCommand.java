@@ -23,7 +23,7 @@ public class CreateCommand extends RequirePlayerCommand {
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         PlayerInfo pi = plugin.getPlayerInfo(player);
         int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
-        if (LocationUtil.isEmptyLocation(pi.getIslandLocation()) && cooldown == 0) {
+        if (!pi.getHasIsland() && cooldown == 0) {
             String cSchem = args != null && args.length > 0 ? args[0] : Settings.island_schematicName;
             plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem));
         } else if (pi.getHasIsland()) {
