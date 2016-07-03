@@ -24,7 +24,7 @@ import static us.talabrek.ultimateskyblock.util.FormatUtil.join;
  */
 public enum ItemStackUtil {;
     private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?:(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
-    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?");
+    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
     private static final Pattern ITEM_NAME_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)(:(?<sub>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
 
     public static List<ItemProbability> createItemsWithProbabilty(List<String> items) {
@@ -79,7 +79,11 @@ public enum ItemStackUtil {;
                     int id = getItemId(m);
                     short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
                     int amount = Integer.parseInt(m.group("amount"), 10);
-                    itemList.add(new ItemStack(id, amount, sub));
+                    ItemStack itemStack = new ItemStack(id, amount, sub);
+                    if (m.group("meta") != null) {
+                        itemStack = NBTUtil.setNBTTag(itemStack, m.group("meta"));
+                    }
+                    itemList.add(itemStack);
                 } else if (!reward.isEmpty()) {
                     throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
                 }
@@ -110,6 +114,7 @@ public enum ItemStackUtil {;
             if (matcher.matches()) {
                 material = Material.getMaterial(getItemId(matcher));
                 subType = matcher.group("sub") != null ? (short) Integer.parseInt(matcher.group("sub"), 10) : 0;
+                metaStr = matcher.group("meta");
             } else if (nameMatcher.matches()) {
                 material = Material.getMaterial(nameMatcher.group("id"));
                 subType = nameMatcher.group("sub") != null ? (short) Integer.parseInt(nameMatcher.group("sub"), 10) : 0;
