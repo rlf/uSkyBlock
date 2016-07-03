@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -22,26 +23,27 @@ import static us.talabrek.ultimateskyblock.util.FormatUtil.join;
 /**
  * Conversion to ItemStack from strings.
  */
-public enum ItemStackUtil {;
+public enum ItemStackUtil {
+    ;
     private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?:(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
     private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
     private static final Pattern ITEM_NAME_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)(:(?<sub>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
 
     public static List<ItemProbability> createItemsWithProbabilty(List<String> items) {
         List<ItemProbability> itemProbs = new ArrayList<>();
-            for (String reward : items) {
-                Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
-                if (m.matches()) {
-                    double p = m.group("prob") != null ? Double.parseDouble(m.group("prob")) : 1;
-                    int id = getItemId(m);
-                    short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
-                    int amount = Integer.parseInt(m.group("amount"), 10);
-                    ItemStack itemStack = new ItemStack(id, amount, sub);
-                    itemStack = NBTUtil.addNBTTag(itemStack, m.group("meta"));
-                    itemProbs.add(new ItemProbability(p, itemStack));
-                } else {
-                    throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
-                }
+        for (String reward : items) {
+            Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
+            if (m.matches()) {
+                double p = m.group("prob") != null ? Double.parseDouble(m.group("prob")) : 1;
+                int id = getItemId(m);
+                short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
+                int amount = Integer.parseInt(m.group("amount"), 10);
+                ItemStack itemStack = new ItemStack(id, amount, sub);
+                itemStack = NBTUtil.addNBTTag(itemStack, m.group("meta"));
+                itemProbs.add(new ItemProbability(p, itemStack));
+            } else {
+                throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
+            }
         }
         return itemProbs;
     }
@@ -60,14 +62,31 @@ public enum ItemStackUtil {;
     }
 
     public static List<ItemStack> createItemList(String items, List<String> items2) {
-        StringBuilder sb = new StringBuilder();
+        List<String> itemStrList = new ArrayList<>(items2 != null ? items2 : Collections.<String>emptyList());
         if (items != null) {
-            sb.append(items + " ");
+            itemStrList.addAll(Arrays.asList(items.split(" ")));
         }
-        if (items2 != null && !items2.isEmpty()) {
-            sb.append(join(items2, " "));
+        return createItemList(itemStrList);
+    }
+
+    public static List<ItemStack> createItemList(List<String> items) {
+        List<ItemStack> itemList = new ArrayList<>();
+        for (String reward : items) {
+            Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
+            if (m.matches()) {
+                int id = getItemId(m);
+                short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
+                int amount = Integer.parseInt(m.group("amount"), 10);
+                ItemStack itemStack = new ItemStack(id, amount, sub);
+                if (m.group("meta") != null) {
+                    itemStack = NBTUtil.setNBTTag(itemStack, m.group("meta"));
+                }
+                itemList.add(itemStack);
+            } else if (!reward.isEmpty()) {
+                throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
+            }
         }
-        return createItemList(sb.toString());
+        return itemList;
     }
 
     public static List<ItemStack> createItemList(String items) {

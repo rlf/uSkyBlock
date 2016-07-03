@@ -7,7 +7,9 @@ import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -109,9 +111,10 @@ public class Settings {
             changed = true;
         }
         general_spawnSize = config.getInt("options.general.spawnSize", 50);
-        // TODO: 06/12/2014 - R4zorax: Null pointer protection
-        String chestItemString = config.getString("options.island.chestItems", "");
-        island_chestItems = ItemStackUtil.createItemArray(chestItemString);
+        island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
+                config.getString("options.island.chestItems", null),
+                config.getStringList("options.island.chestItems")
+        ));
 
         island_schematicName = config.getString("options.island.schematicName");
         if (island_schematicName == null || "yourschematicname".equals(island_schematicName) || "uSkyBlockDefault".equals(island_schematicName)) {
