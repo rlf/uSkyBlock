@@ -159,13 +159,13 @@ public class SignLogic {
                 if (completion != null) {
                     requiredItems.addAll(challenge.getRequiredItems(completion.getTimesCompletedInCooldown()));
                 }
-                IslandInfo islandInfo = plugin.getIslandInfo(islandName);
-                if (islandInfo != null && islandInfo.getLeaderUniqueId() != null) {
-                    PlayerInfo playerInfo = plugin.getPlayerInfo(islandInfo.getLeaderUniqueId());
-                    if (playerInfo != null) {
-                        isChallengeAvailable = challenge.getRank().isAvailable(playerInfo);
-                        isChallengeAvailable &= challenge.getMissingRequirements(playerInfo).isEmpty();
-                    }
+            }
+            IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+            if (islandInfo != null && islandInfo.getLeaderUniqueId() != null) {
+                PlayerInfo playerInfo = plugin.getPlayerInfo(islandInfo.getLeaderUniqueId());
+                if (playerInfo != null) {
+                    isChallengeAvailable = challenge.getRank().isAvailable(playerInfo);
+                    isChallengeAvailable &= challenge.getMissingRequirements(playerInfo).isEmpty();
                 }
             }
             String signLocString = config.getString("signs." + signLoc + ".location", null);

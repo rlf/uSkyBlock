@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.imports.name2uuid;
 
-import com.sk89q.worldguard.util.task.progress.Progress;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -222,7 +221,7 @@ public class Name2UUIDImporter implements USBImporter {
         log.info("Importing " + file);
         FileConfiguration config = new YamlConfiguration();
         FileUtil.readConfig(config, file);
-        if (config.getInt("version", 0) >= 2) {
+        if (config.getInt("version", 0) >= 3) {
             log.info("- island already converted, version is " + config.getInt("version"));
             return null;
         }
@@ -268,7 +267,7 @@ public class Name2UUIDImporter implements USBImporter {
             }
         }
         config.set("trust.list", newTrusts);
-        config.set("version", 2);
+        config.set("version", 3);
         try {
             config.save(file);
             return true;

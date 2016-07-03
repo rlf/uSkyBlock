@@ -60,7 +60,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dПолное время выполнения: §f{0}"
 
 #, java-format
-msgid "§7Requires {0} to unlock"
+msgid "§7Requires {0}§7 to unlock"
 msgstr ""
 
 #, java-format
@@ -621,15 +621,21 @@ msgstr "§eСироты: {0}"
 msgid "purges all abandoned islands"
 msgstr "очистка всех заброшенных островов"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4Очистка уже запущена, дождитесь завершения!"
-
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Вам нужно указать возраст в днях для очистки!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eПоиск всех островов, которые заброшены более {0} дней."
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr "§4Очистка уже запущена, дождитесь завершения!"
 
 msgid "region manipulations"
 msgstr ""
@@ -717,7 +723,10 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr ""
 
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
 msgstr ""
 
 #, java-format
@@ -725,7 +734,18 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 "§4ОЧИСТКА:§9 Сканирование завершено, найдено {0} кандидатов на очистку."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+#, java-format
+msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
+msgstr ""
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
 msgstr ""
 
 msgid "displays version information"

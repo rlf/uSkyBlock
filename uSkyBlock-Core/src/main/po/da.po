@@ -59,7 +59,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dTotalt antal aflevering: §f{0}"
 
 #, java-format
-msgid "§7Requires {0} to unlock"
+msgid "§7Requires {0}§7 to unlock"
 msgstr ""
 
 #, java-format
@@ -622,16 +622,22 @@ msgstr "§eForældreløse: {0}"
 msgid "purges all abandoned islands"
 msgstr "fjerner alle forladte øer"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr ""
-"§4En purge er allerede igangværende. Vent venligst til den er afsluttet!"
-
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Do skal angive hvor gamle (i dage) øerne til purge skal være!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr ""
+"§4En purge er allerede igangværende. Vent venligst til den er afsluttet!"
 
 msgid "region manipulations"
 msgstr "region manipulationer"
@@ -720,15 +726,29 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr "§cVedligeholdelsestilstand kan kun ændres fra konsollen!"
 
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cOPRYDNING:§9 Genbrugte {0}/{1} {2,number,###}%"
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4OPRYDNING:§9 Skanningen foretaget, fandt {0} kandidater til genbrug."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+#, java-format
+msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
+msgstr ""
 
 msgid "displays version information"
 msgstr "viser versionsinformationer"

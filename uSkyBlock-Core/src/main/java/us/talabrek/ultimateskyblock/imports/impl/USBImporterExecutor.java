@@ -95,6 +95,7 @@ public class USBImporterExecutor {
         importer.init(plugin);
         countSuccess = 0;
         countFailed = 0;
+        countSkip = 0;
         final File[] files = importer.getFiles();
         log(Level.INFO, "Importing " + files.length + " files");
         if (files.length > 0) {
@@ -136,10 +137,8 @@ public class USBImporterExecutor {
     private void complete(CommandSender sender, USBImporter importer) {
         importer.completed(countSuccess, countFailed, countSkip);
         sender.sendMessage(tr("\u00a7eConverted {0}/{1} files in {2}",
-                countSuccess, (countSuccess + countFailed), TimeUtil.millisAsString(System.currentTimeMillis()-tStart)));
-        if (countFailed == 0) {
-            plugin.getConfig().set("importer." + importer.getName() + ".imported", true);
-            plugin.saveConfig();
-        }
+                countSuccess, (countSuccess + countFailed), TimeUtil.millisAsString(System.currentTimeMillis() - tStart)));
+        plugin.getConfig().set("importer." + importer.getName() + ".imported", true);
+        plugin.saveConfig();
     }
 }

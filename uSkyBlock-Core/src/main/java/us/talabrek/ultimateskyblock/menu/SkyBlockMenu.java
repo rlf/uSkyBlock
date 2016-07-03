@@ -462,7 +462,7 @@ public class SkyBlockMenu {
             if (!enabled) {
                 continue; // Skip
             }
-            index = plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index);
+            index = Math.max(plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index), 1);
             menuItem = islandPerk.getDisplayItem();
             meta = menuItem.getItemMeta();
             lores = meta.getLore();
@@ -480,6 +480,7 @@ public class SkyBlockMenu {
             menu.setItem(index++, menuItem);
         }
 
+        lores.clear();
         menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
         meta2.setDisplayName(tr("\u00a7a\u00a7lJoin an Island"));
@@ -487,7 +488,6 @@ public class SkyBlockMenu {
         meta2.setLore(lores);
         menuItem.setItemMeta(meta2);
         menu.setItem(menuSize-1, menuItem);
-        lores.clear();
         return menu;
     }
 
@@ -1035,31 +1035,15 @@ public class SkyBlockMenu {
             p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         }
-        if (currentItem.getTypeId() == 6) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canChangeBiome");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 101) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canToggleLock");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 90) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canChangeWarp");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 69) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canToggleWarp");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 398) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canInviteOthers");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 301) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canKickOthers");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 323) {
+        for (PartyPermissionMenuItem item : permissionMenuItems) {
+            if (currentItem.getType() == item.getIcon().getType()) {
+                p.closeInventory();
+                islandInfo.togglePerm(playerPerm[0], item.getPerm());
+                p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
+                return;
+            }
+        }
+        if (currentItem.getType() == Material.SIGN) {
             p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         } else {

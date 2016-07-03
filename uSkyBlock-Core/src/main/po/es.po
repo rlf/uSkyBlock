@@ -60,7 +60,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dCantidad de veces completado: §f{0}"
 
 #, java-format
-msgid "§7Requires {0} to unlock"
+msgid "§7Requires {0}§7 to unlock"
 msgstr ""
 
 #, java-format
@@ -624,9 +624,6 @@ msgstr "§eIslas huérfanas: {0}"
 msgid "purges all abandoned islands"
 msgstr "purga todas las islas abandonadas"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4Una purga ya está en proceso, ¡por favor espera que termine!"
-
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4¡Debes proporcionar la edad en días para purgar!"
 
@@ -634,6 +631,15 @@ msgstr "§4¡Debes proporcionar la edad en días para purgar!"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr ""
 "§eEncontrando todas las islas que fueron abandonadas por más de {0} días."
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr "§4Una purga ya está en proceso, ¡por favor espera que termine!"
 
 msgid "region manipulations"
 msgstr ""
@@ -721,15 +727,29 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr ""
 
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGA:§9 Purgadas {0}/{1} {2,number,###}%"
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4PURGE: §9Escaneo hecho, encontrados {0} candidatos para purgar."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+#, java-format
+msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGA:§9 Terminado de purgar las islas abandonadas."
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
+msgstr ""
 
 msgid "displays version information"
 msgstr "muestra información de la versión"

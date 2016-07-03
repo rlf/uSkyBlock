@@ -58,7 +58,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§d완료된 전체 횟수: §f{0}"
 
 #, java-format
-msgid "§7Requires {0} to unlock"
+msgid "§7Requires {0}§7 to unlock"
 msgstr ""
 
 #, java-format
@@ -623,15 +623,21 @@ msgstr "§e고아들: {0}"
 msgid "purges all abandoned islands"
 msgstr "모든 버려진 섬들을 청소합니다"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4A 청소가 이미 진행중입니다', 끝날 때까지 기다려주세요!"
-
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4당신은 청소하기위해 나이를 제공해야 합니다!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§e{0}일 이상 버려진 모든 섬을 찾는 중 입니다."
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr "§4A 청소가 이미 진행중입니다', 끝날 때까지 기다려주세요!"
 
 msgid "region manipulations"
 msgstr ""
@@ -719,15 +725,29 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr ""
 
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§c청소:§9 청소됨 {0}/{1} {2,number,###}%"
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4PURGE:§9 스캔 완료, {0}명의 처벌 후보자를 찾았습니다."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+#, java-format
+msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 버려진 섬의 청소를 마쳤습니다."
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
+msgstr ""
 
 msgid "displays version information"
 msgstr "버전 정보를 보여줍니다"

@@ -43,6 +43,12 @@ public enum FileUtil {;
         }
     }
 
+    public static YmlConfiguration loadConfig(File file) {
+        YmlConfiguration config = new YmlConfiguration();
+        readConfig(config, file);
+        return config;
+    }
+
     public static void readConfig(FileConfiguration config, File file) {
         if (file == null) {
             log.log(Level.INFO, "No "  + file + " found, it will be created");
@@ -286,6 +292,7 @@ public enum FileUtil {;
     public static void setLocale(Locale loc) {
         locale = loc != null ? loc : locale;
     }
+
     public static void reload() {
         for (Map.Entry<String, YmlConfiguration> e : configFiles.entrySet()) {
             File configFile = new File(getDataFolder(), e.getKey());

@@ -133,11 +133,8 @@ public class PlayerLogic {
     }
 
     public PlayerInfo getPlayerInfo(String playerName) {
-        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
-        if (offlinePlayer == null || offlinePlayer.getUniqueId() == null || offlinePlayer.getName() == null) {
-            return null;
-        }
-        return getPlayerInfo(offlinePlayer.getUniqueId());
+        UUID uuid = playerDB.getUUIDFromName(playerName);
+        return getPlayerInfo(uuid);
     }
 
     public PlayerInfo getPlayerInfo(UUID uuid) {

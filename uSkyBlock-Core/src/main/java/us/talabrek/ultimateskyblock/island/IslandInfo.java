@@ -44,7 +44,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     private static final Logger log = Logger.getLogger(IslandInfo.class.getName());
     private static final Pattern OLD_LOG_PATTERN = Pattern.compile("\u00a7d\\[(?<date>[^\\]]+)\\]\u00a77 (?<msg>.*)");
-    private static final int YML_VERSION = 2;
+    private static final int YML_VERSION = 3;
     private static File directory = new File(".");
 
     private final File file;
@@ -228,7 +228,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
             log.fine("Deleting islandconfig: " + file);
             file.delete();
             toBeDeleted = false;
-        } else {
+        } else if (dirty) {
             try {
                 log.fine("Saving island-config: " + file);
                 config.save(file);
@@ -288,16 +288,16 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     }
 
     public UUID getLeaderUniqueId() {
-        String uuid = config.getString("party.leader-uuid", null);
-        if (uuid == null) {
-            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(getLeader());
-            if (offlinePlayer != null) {
-                uuid = UUIDUtil.asString(offlinePlayer.getUniqueId());
-                config.set("party.leader-uuid", uuid);
+        String uuidStr = config.getString("party.leader-uuid", null);
+        if (uuidStr == null) {
+            UUID uuid = uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(getLeader());
+            if (uuid != null) {
+                uuidStr = uuid.toString();
+                config.set("party.leader-uuid", uuidStr);
                 dirty = true;
             }
         }
-        return UUIDUtil.fromString(uuid);
+        return UUIDUtil.fromString(uuidStr);
     }
 
     public boolean hasPerm(Player player, String perm) {
@@ -332,10 +332,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
     public void togglePerm(final String playername, final String perm) {
         String uuidString = UUIDUtil.asString(uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(playername));
-        if (!config.contains("party.members." + uuidString + "." + perm)) {
-            return;
-        }
-        if (config.getBoolean("party.members." + uuidString + "." + perm)) {
+        if (config.getBoolean("party.members." + uuidString + "." + perm, false)) {
             config.set("party.members." + uuidString + "." + perm, false);
         } else {
             config.set("party.members." + uuidString + "." + perm, true);
@@ -360,7 +357,11 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         Set<UUID> members = new HashSet<>();
         if (memberSection != null) {
             for (String uuid : memberSection.getKeys(false)) {
-                members.add(UUIDUtil.fromString(uuid));
+                try {
+                    members.add(UUIDUtil.fromString(uuid));
+                } catch (IllegalArgumentException e) {
+                    log.info("Island " + name + " has invalid member-section " + uuid);
+                }
             }
         }
         return members;

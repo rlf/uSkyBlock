@@ -58,7 +58,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dTổng số lần hoàn thành: §f{0}"
 
 #, java-format
-msgid "§7Requires {0} to unlock"
+msgid "§7Requires {0}§7 to unlock"
 msgstr ""
 
 #, java-format
@@ -624,15 +624,21 @@ msgstr ""
 msgid "purges all abandoned islands"
 msgstr "Lọc toàn bộ đảo bị bỏ hoang"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4Quá trình lọc đang diễn ra, hay đợi nó hoàn thành!"
-
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Bạn phải cung cấp số ngày để lọc!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eĐang tìm đảo đã bị bỏ haong hơn {0} ngày."
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr "§4Quá trình lọc đang diễn ra, hay đợi nó hoàn thành!"
 
 msgid "region manipulations"
 msgstr ""
@@ -720,15 +726,29 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr ""
 
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Đã lọc {0}/{1} {2,number,###}%"
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4PURGE:§9 Đã quét, tìm thấy {0} đối tượng để lọc."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+#, java-format
+msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Lọc hoàn tất"
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
+msgstr ""
 
 msgid "displays version information"
 msgstr "Hiện thông tin phiên bản"

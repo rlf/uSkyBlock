@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,7 +77,6 @@ public class IslandLogic {
                     @Override
                     public void onRemoval(RemovalNotification<String, IslandInfo> removal) {
                         log.fine("Removing island-info " + removal.getKey() + " from cache");
-                        removal.getValue().saveToFile();
                     }
                 })
                 .build(new CacheLoader<String, IslandInfo>() {
@@ -86,7 +86,7 @@ public class IslandLogic {
                         return new IslandInfo(islandName);
                     }
                 });
-        int every = plugin.getConfig().getInt("options.advanced.island.saveEvery", 20*60*2);
+        long every = TimeUtil.secondsAsTicks(plugin.getConfig().getInt("options.advanced.island.saveEvery", 30));
         saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
@@ -383,7 +383,7 @@ public class IslandLogic {
     public boolean purge(String islandName) {
         IslandInfo islandInfo = getIslandInfo(islandName);
         if (islandInfo != null && !islandInfo.ignore()) {
-            for (String member : islandInfo.getMembers()) {
+            for (UUID member : islandInfo.getMemberUUIDs()) {
                 PlayerInfo pi = plugin.getPlayerInfo(member);
                 if (pi != null) {
                     islandInfo.removeMember(pi);
@@ -399,6 +399,7 @@ public class IslandLogic {
     public void shutdown() {
         saveTask.cancel();
         flushCache();
+        saveDirtyToFiles();
     }
 
     public long flushCache() {

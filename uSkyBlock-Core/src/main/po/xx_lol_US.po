@@ -58,7 +58,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dTotal times completed: §f{0}"
 
 #, java-format
-msgid "§7Requires {0} to unlock"
+msgid "§7Requires {0}§7 to unlock"
 msgstr ""
 
 #, java-format
@@ -620,15 +620,21 @@ msgstr "§eOrfanz: {0}"
 msgid "purges all abandoned islands"
 msgstr "purges all abandoned islands"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4A purrrge  iz already running, please wait for it to finish!"
-
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4You must provide teh age in dais to purrrge!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eFinding all islands that haz been abandoned for moar than {0} dais."
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr "§4A purrrge  iz already running, please wait for it to finish!"
 
 msgid "region manipulations"
 msgstr "region manipulations"
@@ -718,15 +724,29 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr "§cMaintenance mode can only be changed from console!"
 
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+#, java-format
+msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Finished purging abandoned islands."
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
+msgstr ""
 
 msgid "displays version information"
 msgstr "displays version information"
@@ -2530,6 +2550,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+#~ msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 
 #~ msgid "§a§lIsland Help"
 #~ msgstr "§a§lIsland Help"

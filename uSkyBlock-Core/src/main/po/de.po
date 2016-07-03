@@ -63,7 +63,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dSchon §f{0} §dmal abgeschlossen."
 
 #, java-format
-msgid "§7Requires {0} to unlock"
+msgid "§7Requires {0}§7 to unlock"
 msgstr ""
 
 #, java-format
@@ -628,15 +628,21 @@ msgstr "§eVerlassene Inseln: {0}"
 msgid "purges all abandoned islands"
 msgstr "Löscht alle verlassenen Inseln"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4Die Säuberung läuft bereits, warte Bitte bis diese zu Ende ist."
-
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Du musst die Zeit für die Säuberung in Tagen angeben!"
 
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eSuche Inseln die mehr als {0} Tage verlassen sind."
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr "§4Die Säuberung läuft bereits, warte Bitte bis diese zu Ende ist."
 
 msgid "region manipulations"
 msgstr ""
@@ -724,16 +730,30 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr ""
 
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§cPURGE:§9 Entfernte {0}/{1} {2,number,###}%"
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 "§4SÄUBERUNG:§9 Scannen abgeschlossen. Es wurden {0} verwaiste Insel gefunden"
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+#, java-format
+msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Verlassene Inseln wurde entfernt."
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
+msgstr ""
 
 msgid "displays version information"
 msgstr "Zeige Versions Informationen"
