@@ -62,5 +62,6 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new RegionCommand(plugin, animationHandler));
         add(new SetMaintenanceCommand(plugin));
         add(new NBTCommand());
+        add(new ProtectAllCommand(plugin));
     }
 }

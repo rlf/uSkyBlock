@@ -86,10 +86,15 @@ public class ChallengeLogic {
 
     public List<String> getAvailableChallengeNames(PlayerInfo playerInfo) {
         List<String> list = new ArrayList<>();
+        if (playerInfo == null || !playerInfo.getHasIsland()) {
+            return list;
+        }
         for (Rank rank : ranks.values()) {
             if (rank.isAvailable(playerInfo)) {
                 for (Challenge challenge : rank.getChallenges()) {
-                    list.add(challenge.getName());
+                    if (challenge.getMissingRequirements(playerInfo).isEmpty()) {
+                        list.add(challenge.getName());
+                    }
                 }
             } else {
                 break;

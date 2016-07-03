@@ -272,9 +272,6 @@ msgstr "§4Keine gültige Insel angegeben. Stehe auf einer oder gib eine an."
 msgid "print out info about the island"
 msgstr "Zeige Informationen zu der Insel."
 
-msgid "protects all islands (time consuming)"
-msgstr "Schützt alle Inseln (Zeitaufwändig)"
-
 msgid "sets the biome of the island"
 msgstr "Setzt das Biome einer Insel"
 
@@ -334,13 +331,6 @@ msgstr "§e{0} Hat ihr Biom geändert zu {1}."
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} Hat ihr Biom geändert zu OZEAN."
-
-msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr ""
-"§4Sorry!§e Der Befehl ALLES-SCHÜTZEN läuft bereits. Warte bis er fertig ist!"
-
-msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§eStarte ALLES-SCHÜTZEN. Das wird jetzt etwas dauern..."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
@@ -625,6 +615,20 @@ msgstr "§eDerzeit sind keine verwaisten Inseln registriert"
 msgid "§eOrphans: {0}"
 msgstr "§eVerlassene Inseln: {0}"
 
+msgid "protects all islands (time consuming)"
+msgstr "Schützt alle Inseln (Zeitaufwändig)"
+
+msgid "§cTrying to abort protect-all task."
+msgstr ""
+
+msgid ""
+"§4Sorry!§e A protect-all is already running. Let it complete first, or use "
+"§9usb protectall §cstop"
+msgstr ""
+
+msgid "§eStarting a protect-all task. It will take a while."
+msgstr "§eStarte ALLES-SCHÜTZEN. Das wird jetzt etwas dauern..."
+
 msgid "purges all abandoned islands"
 msgstr "Löscht alle verlassenen Inseln"
 
@@ -727,6 +731,13 @@ msgid ""
 msgstr ""
 
 msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
+msgid "§cABORTED:§e Protect-All was aborted!"
+msgstr ""
+
+#, java-format
+msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
 msgstr ""
 
 #, java-format

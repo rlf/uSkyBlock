@@ -269,9 +269,6 @@ msgstr ""
 msgid "print out info about the island"
 msgstr "print out info about the hideout"
 
-msgid "protects all islands (time consuming)"
-msgstr "protects all islands (time consumin')"
-
 msgid "sets the biome of the island"
 msgstr "sets the biome of the hideout"
 
@@ -331,12 +328,6 @@ msgstr "§e{0} has had their biome changed to {1}."
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} has had their biome changed to OCEAN."
-
-msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr "§4Sorry!§e A protect-all be already runnin'. Let it complete first."
-
-msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§eStartin' a protect-all task. It will take a while."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
@@ -617,6 +608,20 @@ msgstr "§eNay orphans currently registered."
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
+msgid "protects all islands (time consuming)"
+msgstr "protects all islands (time consumin')"
+
+msgid "§cTrying to abort protect-all task."
+msgstr ""
+
+msgid ""
+"§4Sorry!§e A protect-all is already running. Let it complete first, or use "
+"§9usb protectall §cstop"
+msgstr ""
+
+msgid "§eStarting a protect-all task. It will take a while."
+msgstr "§eStartin' a protect-all task. It will take a while."
+
 msgid "purges all abandoned islands"
 msgstr "purges all abandoned islands"
 
@@ -722,6 +727,13 @@ msgstr ""
 
 msgid "§cMaintenance mode can only be changed from console!"
 msgstr "§cMaintenance mode can only be changed from console!"
+
+msgid "§cABORTED:§e Protect-All was aborted!"
+msgstr ""
+
+#, java-format
+msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
+msgstr ""
 
 #, java-format
 msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
@@ -2544,6 +2556,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
+#~ msgstr "§4Sorry!§e A protect-all be already runnin'. Let it complete first."
 
 #~ msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
 #~ msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"

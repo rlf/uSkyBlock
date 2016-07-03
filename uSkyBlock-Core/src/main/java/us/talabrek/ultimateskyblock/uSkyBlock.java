@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import dk.lockfuglsang.minecraft.animation.AnimationHandler;
 import dk.lockfuglsang.minecraft.command.Command;
 import dk.lockfuglsang.minecraft.command.CommandManager;
 import dk.lockfuglsang.minecraft.file.FileUtil;
@@ -30,7 +31,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
-import dk.lockfuglsang.minecraft.animation.AnimationHandler;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
@@ -148,9 +148,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public File directoryPlayers;
     public File directoryIslands;
 
-    private volatile boolean purgeActive;
-    private volatile boolean protectAllActive;
-
     private BukkitTask autoRecalculateTask;
     static {
         uSkyBlock.skyBlockWorld = null;
@@ -184,7 +181,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     };
 
     public uSkyBlock() {
-        purgeActive = false;
     }
 
     @Override
@@ -802,18 +798,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return new SkyBlockNetherChunkGenerator();
     }
 
-    public boolean isPurgeActive() {
-        return purgeActive;
-    }
-
-    public void activatePurge() {
-        purgeActive = true;
-    }
-
-    public void deactivatePurge() {
-        purgeActive = false;
-    }
-
     public PlayerInfo getPlayerInfo(Player player) {
         return playerLogic.getPlayerInfo(player);
     }
@@ -1248,14 +1232,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     }
                 }
         );
-    }
-
-    public synchronized boolean isProtectAllActive() {
-        return protectAllActive;
-    }
-
-    public synchronized void setProtectAllActive(boolean protectAllActive) {
-        this.protectAllActive = protectAllActive;
     }
 
     public String getVersionInfo(boolean checkEnabled) {

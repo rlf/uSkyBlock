@@ -526,7 +526,10 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         List<String> list = config.getStringList("trust.list");
         List<UUID> uuidList = new ArrayList<>();
         for (String uuid : list) {
-            uuidList.add(UUIDUtil.fromString(uuid));
+            UUID id = UUIDUtil.fromString(uuid);
+            if (id != null) {
+                uuidList.add(id);
+            }
         }
         return uuidList;
     }

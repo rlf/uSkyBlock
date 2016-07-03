@@ -11,6 +11,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.challenge.Challenge;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 public class ToolMenuEvents implements Listener {
 
+    public static final String COMPLETE_CHALLENGE_CMD = "challenges complete ";
     private final uSkyBlock plugin;
     private final ItemStack tool;
     private final Map<String,String> commandMap = new HashMap<>();
@@ -51,9 +53,9 @@ public class ToolMenuEvents implements Listener {
             ItemStack displayItem = challenge != null ? challenge.getDisplayItem() : null;
             ItemStack toolItem = challenge != null && challenge.getTool() != null ? ItemStackUtil.createItemStack(challenge.getTool()) : null;
             if (toolItem != null) {
-                commandMap.put(ItemStackUtil.asString(toolItem), "challenges complete " + challengeName);
+                commandMap.put(ItemStackUtil.asString(toolItem), COMPLETE_CHALLENGE_CMD + challengeName);
             } else if (displayItem != null && displayItem.getType() != null && displayItem.getType().isBlock()) {
-                commandMap.put(ItemStackUtil.asString(displayItem), "challenges complete " + challengeName);
+                commandMap.put(ItemStackUtil.asString(displayItem), COMPLETE_CHALLENGE_CMD + challengeName);
             }
         }
     }
@@ -73,15 +75,27 @@ public class ToolMenuEvents implements Listener {
         short data = e.getClickedBlock().getData();
         String itemId = ItemStackUtil.asString(new ItemStack(block, 1, data));
         if (commandMap.containsKey(itemId)) {
-            e.setCancelled(true);
-            plugin.execCommand(player, commandMap.get(itemId), false);
-            return;
+            doCmd(e, player, itemId);
         }
-        itemId = ItemStackUtil.asString(new ItemStack(block, 1));
-        if (commandMap.containsKey(itemId)) {
+        if (!e.isCancelled()) {
+            itemId = ItemStackUtil.asString(new ItemStack(block, 1));
+            if (commandMap.containsKey(itemId)) {
+                doCmd(e, player, itemId);
+            }
+        }
+    }
+
+    private void doCmd(PlayerInteractEvent e, Player player, String itemId) {
+        String command = commandMap.get(itemId);
+        if (command.startsWith(COMPLETE_CHALLENGE_CMD)) {
+            String challengeName = command.substring(COMPLETE_CHALLENGE_CMD.length());
+            if (plugin.getChallengeLogic().getAvailableChallengeNames(plugin.getPlayerInfo(player)).contains(challengeName)) {
+                e.setCancelled(true);
+                plugin.execCommand(player, command, true);
+            }
+        } else {
             e.setCancelled(true);
-            plugin.execCommand(player, commandMap.get(itemId), false);
-            return;
+            plugin.execCommand(player, command, false);
         }
     }
 

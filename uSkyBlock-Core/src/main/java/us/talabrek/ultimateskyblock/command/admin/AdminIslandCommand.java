@@ -101,13 +101,6 @@ public class AdminIslandCommand extends CompositeCommand {
                 sender.sendMessage(islandInfo.toString());
             }
         });
-        add(new AbstractCommand("protectall", "usb.admin.protectall", tr("protects all islands (time consuming)")) {
-            @Override
-            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                protectAll(plugin, sender);
-                return true;
-            }
-        });
         add(new AbstractCommand("setbiome", "usb.admin.setbiome", "?leader biome", tr("sets the biome of the island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
@@ -219,18 +212,6 @@ public class AdminIslandCommand extends CompositeCommand {
             sender.sendMessage(tr("\u00a7e{0} has had their biome changed to OCEAN.", playerInfo.getPlayerName()));
         }
         sender.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
-    }
-
-    private void protectAll(uSkyBlock plugin, CommandSender sender) {
-        synchronized (plugin) {
-            if (plugin.isProtectAllActive()) {
-                sender.sendMessage(tr("\u00a74Sorry!\u00a7e A protect-all is already running. Let it complete first."));
-                return;
-            }
-            plugin.setProtectAllActive(true);
-        }
-        sender.sendMessage(tr("\u00a7eStarting a protect-all task. It will take a while."));
-        new ProtectAllTask(plugin, sender).runTask(plugin);
     }
 
     private void deleteIsland(CommandSender sender, PlayerInfo playerInfo) {

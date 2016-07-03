@@ -266,9 +266,6 @@ msgstr ""
 msgid "print out info about the island"
 msgstr ""
 
-msgid "protects all islands (time consuming)"
-msgstr ""
-
 msgid "sets the biome of the island"
 msgstr ""
 
@@ -326,12 +323,6 @@ msgstr "§e{0} 将他们的生物群系更改为了 {1}"
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} 将他们的生物群系更改为了 OCEAN(海洋生物群系)"
-
-msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr "§4抱歉!§e 正在执行 全局保护，请等待完成。"
-
-msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§e开始执行 全局保护,将会花费一定时间。"
 
 #, java-format
 msgid "§eRemoving {0}'s island."
@@ -611,6 +602,20 @@ msgstr ""
 msgid "§eOrphans: {0}"
 msgstr ""
 
+msgid "protects all islands (time consuming)"
+msgstr ""
+
+msgid "§cTrying to abort protect-all task."
+msgstr ""
+
+msgid ""
+"§4Sorry!§e A protect-all is already running. Let it complete first, or use "
+"§9usb protectall §cstop"
+msgstr ""
+
+msgid "§eStarting a protect-all task. It will take a while."
+msgstr "§e开始执行 全局保护,将会花费一定时间。"
+
 msgid "purges all abandoned islands"
 msgstr ""
 
@@ -713,6 +718,13 @@ msgid ""
 msgstr ""
 
 msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
+msgid "§cABORTED:§e Protect-All was aborted!"
+msgstr ""
+
+#, java-format
+msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
 msgstr ""
 
 #, java-format

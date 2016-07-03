@@ -26,6 +26,7 @@ public class GenerateTask extends BukkitRunnable {
     private final PlayerPerk playerPerk;
     private final String schematicName;
     boolean hasRun = false;
+    private Location chestLocation;
 
     public GenerateTask(uSkyBlock plugin, final Player player, final PlayerInfo pi, final Location next, PlayerPerk playerPerk, String schematicName) {
         this.plugin = plugin;
@@ -34,7 +35,13 @@ public class GenerateTask extends BukkitRunnable {
         this.next = next;
         this.playerPerk = playerPerk;
         this.schematicName = schematicName;
+        chestLocation = null;
     }
+
+    public void setChestLocation(Location chestLocation) {
+        this.chestLocation = chestLocation;
+    }
+
     @Override
     public void run() {
         if (hasRun) {
@@ -43,7 +50,11 @@ public class GenerateTask extends BukkitRunnable {
         next.getChunk().load();
         Perk perk = plugin.getPerkLogic().getIslandPerk(schematicName).getPerk();
         perk = perk.combine(playerPerk.getPerk());
-        plugin.getIslandGenerator().setChest(next, perk);
+        if (chestLocation != null) {
+            plugin.getIslandGenerator().setChest(chestLocation, perk);
+        } else {
+            plugin.getIslandGenerator().findAndSetChest(next, perk);
+        }
         IslandInfo islandInfo = plugin.setNewPlayerIsland(pi, next);
         islandInfo.setSchematicName(schematicName);
         WorldGuardHandler.updateRegion(islandInfo);

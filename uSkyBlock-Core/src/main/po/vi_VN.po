@@ -271,9 +271,6 @@ msgstr ""
 msgid "print out info about the island"
 msgstr "xem thông tin về skyblock đó"
 
-msgid "protects all islands (time consuming)"
-msgstr "bảo vệ toàn bộ skyblock (Tốn thời gian)"
-
 msgid "sets the biome of the island"
 msgstr "chuyển môi trường (biome) cua skyblock"
 
@@ -334,13 +331,6 @@ msgstr "§e{0} đã chuyển môi trường đảo sang {1}."
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} đã chuyển môi trường đảo sang OCEAN"
-
-msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr ""
-"§4Xin lỗi!§e 1 cuộc bảo vệ toàn bộ đang diễn ra. Hãy để nó hoàn thành trước."
-
-msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§eĐang tiến hành bảo vệ toàn bộ. Sẽ mất 1 chút thời gian."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
@@ -621,6 +611,20 @@ msgstr ""
 msgid "§eOrphans: {0}"
 msgstr ""
 
+msgid "protects all islands (time consuming)"
+msgstr "bảo vệ toàn bộ skyblock (Tốn thời gian)"
+
+msgid "§cTrying to abort protect-all task."
+msgstr ""
+
+msgid ""
+"§4Sorry!§e A protect-all is already running. Let it complete first, or use "
+"§9usb protectall §cstop"
+msgstr ""
+
+msgid "§eStarting a protect-all task. It will take a while."
+msgstr "§eĐang tiến hành bảo vệ toàn bộ. Sẽ mất 1 chút thời gian."
+
 msgid "purges all abandoned islands"
 msgstr "Lọc toàn bộ đảo bị bỏ hoang"
 
@@ -723,6 +727,13 @@ msgid ""
 msgstr ""
 
 msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
+msgid "§cABORTED:§e Protect-All was aborted!"
+msgstr ""
+
+#, java-format
+msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
 msgstr ""
 
 #, java-format

@@ -268,9 +268,6 @@ msgstr "§4Ingen valid ø fundet, enten stå på en ø, eller skriv et navn"
 msgid "print out info about the island"
 msgstr "vis informationer om øen"
 
-msgid "protects all islands (time consuming)"
-msgstr "beskytter alle øer (tidskrævende)"
-
 msgid "sets the biome of the island"
 msgstr "sætter øens biome"
 
@@ -332,14 +329,6 @@ msgstr "§e{0} har fået deres biome ændret til {1}."
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} har fået deres biome ændret til HAV."
-
-msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr ""
-"§4Undskyld!§e Der er allerede en igangværende kørsel af protect-all. Lad den "
-"afslutte først."
-
-msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§eStarter en kørsel af protect-all. Det vil tage et stykke tid."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
@@ -619,6 +608,20 @@ msgstr "§eIngen forældreløse øer registreret i øjeblikket."
 msgid "§eOrphans: {0}"
 msgstr "§eForældreløse: {0}"
 
+msgid "protects all islands (time consuming)"
+msgstr "beskytter alle øer (tidskrævende)"
+
+msgid "§cTrying to abort protect-all task."
+msgstr ""
+
+msgid ""
+"§4Sorry!§e A protect-all is already running. Let it complete first, or use "
+"§9usb protectall §cstop"
+msgstr ""
+
+msgid "§eStarting a protect-all task. It will take a while."
+msgstr "§eStarter en kørsel af protect-all. Det vil tage et stykke tid."
+
 msgid "purges all abandoned islands"
 msgstr "fjerner alle forladte øer"
 
@@ -724,6 +727,13 @@ msgstr "§cVEDLIGEHOLDELSE: §4Deaktiveret§e alle funktioner operationelle igen
 
 msgid "§cMaintenance mode can only be changed from console!"
 msgstr "§cVedligeholdelsestilstand kan kun ændres fra konsollen!"
+
+msgid "§cABORTED:§e Protect-All was aborted!"
+msgstr ""
+
+#, java-format
+msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
+msgstr ""
 
 #, java-format
 msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"

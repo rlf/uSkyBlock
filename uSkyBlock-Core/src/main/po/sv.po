@@ -271,9 +271,6 @@ msgstr ""
 msgid "print out info about the island"
 msgstr "skriver ut information om ön"
 
-msgid "protects all islands (time consuming)"
-msgstr "skyddar alla öar (tar tid)"
-
 msgid "sets the biome of the island"
 msgstr "sätter öns biome"
 
@@ -333,12 +330,6 @@ msgstr "§e{0} har fått sitt biome ändrat till {1}."
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} har fått sitt biome ändrat till OCEAN."
-
-msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr "§eEn protect-all körs redan, låt den avslutas först."
-
-msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§ePåbörjar en protect-all . Detta kan ta en stund."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
@@ -623,6 +614,20 @@ msgstr "§eInga orphans är registrerade."
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
+msgid "protects all islands (time consuming)"
+msgstr "skyddar alla öar (tar tid)"
+
+msgid "§cTrying to abort protect-all task."
+msgstr ""
+
+msgid ""
+"§4Sorry!§e A protect-all is already running. Let it complete first, or use "
+"§9usb protectall §cstop"
+msgstr ""
+
+msgid "§eStarting a protect-all task. It will take a while."
+msgstr "§ePåbörjar en protect-all . Detta kan ta en stund."
+
 msgid "purges all abandoned islands"
 msgstr "tar bort alla övergivna öar"
 
@@ -725,6 +730,13 @@ msgid ""
 msgstr ""
 
 msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
+msgid "§cABORTED:§e Protect-All was aborted!"
+msgstr ""
+
+#, java-format
+msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
 msgstr ""
 
 #, java-format

@@ -16,12 +16,12 @@ public class LocateChestTask extends BukkitRunnable {
     private final uSkyBlock plugin;
     private final Player player;
     private final Location islandLocation;
-    private final Runnable onCompletion;
+    private final GenerateTask onCompletion;
     private final long timeout;
 
     private long tStart;
 
-    public LocateChestTask(uSkyBlock plugin, Player player, Location islandLocation, Runnable onCompletion) {
+    public LocateChestTask(uSkyBlock plugin, Player player, Location islandLocation, GenerateTask onCompletion) {
         this.plugin = plugin;
         this.player = player;
         this.islandLocation = islandLocation;
@@ -44,6 +44,7 @@ public class LocateChestTask extends BukkitRunnable {
                 player.sendMessage(I18nUtil.tr("\u00a7cWatchdog!\u00a79 Unable to locate a chest within {0}, bailing out.", TimeUtil.millisAsString(timeout-tStart)));
             }
             if (onCompletion != null) {
+                onCompletion.setChestLocation(chestLocation);
                 Bukkit.getScheduler().runTask(plugin, onCompletion);
             }
         }
