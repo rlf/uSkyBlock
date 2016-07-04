@@ -242,6 +242,9 @@ public enum LocationUtil {
     }
 
     public static Location alignToDistance(Location loc, int distance) {
+        if (loc == null) {
+            return null;
+        }
         int x = (int) (Math.round(loc.getX() / distance) * distance);
         int z = (int) (Math.round(loc.getZ() / distance) * distance);
         loc.setX(x);

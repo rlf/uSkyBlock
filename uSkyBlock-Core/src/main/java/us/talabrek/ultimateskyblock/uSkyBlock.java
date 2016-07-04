@@ -88,6 +88,7 @@ import us.talabrek.ultimateskyblock.signs.SignLogic;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
@@ -1350,5 +1351,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             sender.sendMessage(tr("\u00a7cCommand is currently disabled!"));
         }
         return true;
+    }
+
+    public void async(Runnable runnable) {
+        Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
+    }
+
+    public void async(Runnable runnable, long delayMs) {
+        Bukkit.getScheduler().runTaskLaterAsynchronously(this, runnable, TimeUtil.millisAsTicks(delayMs));
     }
 }
