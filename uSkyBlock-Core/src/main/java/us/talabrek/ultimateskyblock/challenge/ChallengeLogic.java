@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -381,8 +382,8 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a7eYour inventory is \u00a74full\u00a7e. Items dropped on the ground."));
         }
         for (String cmd : reward.getCommands()) {
-            String command = cmd.replaceAll("\\{challenge\\}", challenge.getName());
-            command = command.replaceAll("\\{challengeName\\}", challenge.getDisplayName());
+            String command = cmd.replaceAll("\\{challenge\\}", Matcher.quoteReplacement(challenge.getName()));
+            command = command.replaceAll("\\{challengeName\\}", Matcher.quoteReplacement(challenge.getDisplayName()));
             plugin.execCommand(player, command, true);
         }
         playerInfo.completeChallenge(challengeName, wasBroadcast);

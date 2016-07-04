@@ -153,7 +153,9 @@ public class YmlCommentParser {
                 String path = getPath(baseKey, name);
                 String comment = getComment(path);
                 if (comment != null) {
-                    sb.append("\n" + comment.replaceAll("^#", indent + "#").replaceAll("\n#", "\n" + indent + "#"));
+                    sb.append("\n" + comment
+                            .replaceAll("^#", Matcher.quoteReplacement(indent + "#"))
+                            .replaceAll("\n#", Matcher.quoteReplacement("\n" + indent + "#")));
                 }
                 if (value != null && !value.trim().isEmpty()) {
                     // Scalar with value

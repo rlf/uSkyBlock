@@ -1084,9 +1084,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             return;
         }
         command = command
-                .replaceAll("\\{player\\}", player.getName())
-                .replaceAll("\\{playerName\\}", player.getDisplayName())
-                .replaceAll("\\{position\\}", LocationUtil.asString(player.getLocation())); // Figure out what this should be
+                .replaceAll("\\{player\\}", Matcher.quoteReplacement(player.getName()))
+                .replaceAll("\\{playerName\\}", Matcher.quoteReplacement(player.getDisplayName()))
+                .replaceAll("\\{position\\}", Matcher.quoteReplacement(LocationUtil.asString(player.getLocation()))); // Figure out what this should be
         Matcher m = Pattern.compile("^\\{p=(?<prob>0?\\.[0-9]+)\\}(.*)$").matcher(command);
         if (m.matches()) {
             double p = Double.parseDouble(m.group("prob"));
@@ -1104,7 +1104,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (command.contains("{party}")) {
             PlayerInfo playerInfo = getPlayerInfo(player);
             for (String member : getIslandInfo(playerInfo).getMembers()) {
-                doExecCommand(player, command.replaceAll("\\{party\\}", member), delay);
+                doExecCommand(player, command.replaceAll("\\{party\\}", Matcher.quoteReplacement(member)), delay);
             }
         } else {
             doExecCommand(player, command, delay);

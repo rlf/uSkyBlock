@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.command;
 
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.command.AbstractCommandExecutor;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.Command;
@@ -10,6 +11,7 @@ import us.talabrek.ultimateskyblock.util.FormatUtil;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
 
 /**
  * The chat command for party messages
@@ -40,14 +42,11 @@ public abstract class IslandChatCommand extends AbstractCommandExecutor {
                 return false;
             }
             us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(player);
-            String message = args[0];
-            for (int ix = 1; ix < args.length; ix++) {
-                message += " " + args[ix]; // Java 8 has String.join - not guaranteed here
-            }
+            String message = AbstractCommand.join(args);
             String format = getFormat();
             format = FormatUtil.normalize(format);
-            format = format.replaceAll("\\{DISPLAYNAME\\}", player.getDisplayName());
-            message = format.replaceAll("\\{MESSAGE\\}", message);
+            format = format.replaceAll("\\{DISPLAYNAME\\}", Matcher.quoteReplacement(player.getDisplayName()));
+            message = format.replaceAll("\\{MESSAGE\\}", Matcher.quoteReplacement(message));
             List<Player> onlineMembers = getRecipients(player, islandInfo);
             if (onlineMembers.size() <= 1) {
                 player.sendMessage(I18nUtil.tr("\u00a7cSorry! {0}", "\u00a79" + ALONE.get(((int) Math.round(Math.random() * ALONE.size())) % ALONE.size())));
