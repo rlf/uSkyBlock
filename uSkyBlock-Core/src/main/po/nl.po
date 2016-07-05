@@ -2,7 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-06-25 18:26+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-07-05 22:53+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -60,7 +61,7 @@ msgstr "§dHet aantal keer dat je de uitdaging hebt voltooid: §f{0}"
 
 #, java-format
 msgid "§7Requires {0}§7 to unlock"
-msgstr ""
+msgstr "§7Vereist {0}§7 om te ontgrendelen"
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -547,42 +548,42 @@ msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§bEiland eigenaar overgedragen van {0}§b naar {1}"
 
 msgid "advanced info about NBT stuff"
-msgstr ""
+msgstr "geavanceerde informatie over NBT materiaal"
 
 msgid "shows the NBTTag for the currently held item"
-msgstr ""
+msgstr "toont de NBTTag voor het item momenteel in handen"
 
 #, java-format
 msgid "§eInfo for §9{0}"
-msgstr ""
+msgstr "§eInfo voor §9{0}"
 
 #, java-format
 msgid "§7 - name: §9{0}"
-msgstr ""
+msgstr "§7 - naam: §9{0}"
 
 #, java-format
 msgid "§7 - nbttag: §9{0}"
-msgstr ""
+msgstr "§7 - nbttag: §9{0}"
 
 msgid "§cNo item in hand!"
-msgstr ""
+msgstr "§cJe hand is leeg!"
 
 msgid "§eCan only be executed as a player"
 msgstr "§eKan alleen als speller worden uitgevoerd"
 
 msgid "sets the NBTTag on the currently held item"
-msgstr ""
+msgstr "zet de NBTTag voor het item in je hand"
 
 #, java-format
 msgid "§eSet §9{0}§e to §c{1}"
-msgstr ""
+msgstr "§eZet §9{0}§e naar §c{1}"
 
 msgid "adds the NBTTag on the currently held item"
-msgstr ""
+msgstr "voegt de NBTTag aan op je huidige item"
 
 #, java-format
 msgid "§eAdded §9{0}§e to §c{1}"
-msgstr ""
+msgstr "§eVoegt §9{0}§e aan §c{1}"
 
 msgid "manage orphans"
 msgstr "beheer orphans"
@@ -616,12 +617,14 @@ msgid "protects all islands (time consuming)"
 msgstr "beschermd alle eilanden (dit kan veel tijd inbeslag nemen)"
 
 msgid "§cTrying to abort protect-all task."
-msgstr ""
+msgstr "§cProberen om protect-all taak af te breken."
 
 msgid ""
 "§4Sorry!§e A protect-all is already running. Let it complete first, or use "
 "§9usb protectall §cstop"
 msgstr ""
+"§4Sorry!§e Een protect-all is al bezig. Laat dit z'n gang gaan, of gebruik "
+"§9usb protectall §cstop"
 
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr "§eBegin van de opdracht protect-all. Dit kan een tijdje gaan duren."
@@ -637,10 +640,10 @@ msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarkeer alle eilanden die inactief zijn voor meer dan {0} dagen."
 
 msgid "§4Trying to abort purge"
-msgstr ""
+msgstr "§4probeert de purge te stoppen"
 
 msgid "§4Starting purge..."
-msgstr ""
+msgstr "§4Starten van de purge..."
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Een purge wordt al uitgevoerd, wacht tot het klaar is!"
@@ -720,31 +723,33 @@ msgid "§cInvalid field {0}"
 msgstr "§cOngeldig veld {0}"
 
 msgid "toggles maintenance mode"
-msgstr ""
+msgstr "Onderhoud-modus schakel command"
 
 msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
 msgstr ""
+"§cONDERHOUD: §eAlle uSkyBlock functies zijn momenteel  §auitgeschakeld§e."
 
 msgid ""
 "§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
 msgstr ""
+"§cONDERHOUD: §4§eAlle uSkyBlock functies kunnen weer  §agebruikt§e worden."
 
 msgid "§cMaintenance mode can only be changed from console!"
-msgstr ""
+msgstr "§cOnderhoud modus kan alleen worden veranderd in het console!"
 
 msgid "§cABORTED:§e Protect-All was aborted!"
-msgstr ""
+msgstr "§cAFGEBROKEN:§e Protect-All was gestopped!"
 
 #, java-format
 msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
-msgstr ""
+msgstr "§eVolbracht protect-all in {0}, {1} nieuwe regio's zijn gecreeerd!"
 
 #, java-format
 msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
-msgstr ""
+msgstr "§7- SCANNING: {0,number,##}% ({1}/{2} mislukt: {3}) ~ {4}"
 
 msgid "§4PURGE:§9 Scanning aborted."
-msgstr ""
+msgstr "§4PURGE:§9 Scanning gestopped."
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
@@ -752,17 +757,17 @@ msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr ""
+msgstr "§4PURGE:§e Herhaal de commando in {0} om te accepteren."
 
 #, java-format
 msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr ""
+msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Klaar met verwijderen van verlaten eilanden."
 
 msgid "§4PURGE:§9 Aborted purging abandoned islands."
-msgstr ""
+msgstr "§4PURGE:§9 Verweideren van verlaten eilanden is gestopped."
 
 msgid "displays version information"
 msgstr "het weergeven van de versie-informatie"
@@ -804,13 +809,13 @@ msgid "show player-information"
 msgstr "laat speler-informatie zien"
 
 msgid "try to complete a challenge"
-msgstr ""
+msgstr "probeer om een uitdaging the voltooien"
 
 msgid "§cCommand only available for players."
-msgstr ""
+msgstr "§cCommando is alleen voor spelers."
 
 msgid "show information about the challenge"
-msgstr ""
+msgstr "laat de informative zien van een uitdaging"
 
 msgid "§eRank: "
 msgstr "§eRank:"
@@ -837,7 +842,7 @@ msgstr ""
 "§4De uitdagings naam is ongeldig! Gebruik / c help voor meer informatie"
 
 msgid "complete and list challenges"
-msgstr ""
+msgstr "compleet en vermelde uitdagingen"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr ""
@@ -917,7 +922,7 @@ msgid "accept/reject an invitation."
 msgstr "accepteren/weiger een uitnodiging."
 
 msgid "teleports you to your island (or create one)"
-msgstr ""
+msgstr "teleporteert je naar je eiland (of maakt er een aan)"
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban een speler van uw eiland."
@@ -938,7 +943,7 @@ msgstr "§4Je hebt geen toestemming om leden te verweideren of te verbannen."
 
 #, java-format
 msgid "§eUnable to ban unknown player {0}"
-msgstr ""
+msgstr "§eKan geen onbekende speller verbannen{0}"
 
 #, java-format
 msgid "§4{0} tried to ban you from their island!"
@@ -1532,6 +1537,8 @@ msgid ""
 "§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
 "~ {6}"
 msgstr ""
+"§eVoortgang: {0,number,##}% ({1}/{2} - succes:{3}, mislukt:{4}, overgeslage:"
+"{5}) ~ {6}"
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
@@ -1539,43 +1546,45 @@ msgstr "§4Geen importuer met de naam §e{0}§4 gevonden"
 
 #, java-format
 msgid "§eConverted {0}/{1} files in {2}"
-msgstr ""
+msgstr "§eConverted {0}/{1} files in {2}"
 
 #, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
-msgstr ""
+msgstr "§7PlayerDB: Filtering {0} spelers van uuid2name.yml"
 
 #, java-format
 msgid "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr ""
+msgstr "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
 
 #, java-format
 msgid "§7PlayerDB: Filtered {0} names"
-msgstr ""
+msgstr "§7PlayerDB: Filtered {0} names"
 
 #, java-format
 msgid ""
 "§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
 "{6}"
 msgstr ""
+"§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, mislukt:{3} ~ {5,number,##}%), "
+"{6}"
 
 #, java-format
 msgid "§7MojangAPI: Trying to fetch {0} players from Mojang"
-msgstr ""
+msgstr "§7MojangAPI: Probeert om {0} spelers op te halen van Mojang"
 
 msgid "SUCCESS"
-msgstr ""
+msgstr "SUCCES"
 
 msgid "FAILED"
-msgstr ""
+msgstr "MISLUKT"
 
 #, java-format
 msgid "§7 - MojangAPI:§aCOMPLETED: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§aVOLTOOID: {0}"
 
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§cERROR: {0}"
 
 msgid "The island has been created."
 msgstr "Je eiland is gecreeerd."
@@ -2462,7 +2471,7 @@ msgstr "§9Text Editor"
 
 #, java-format
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
-msgstr ""
+msgstr "Te veel verzoeken naar Mojangs API ({0} binnen {1}), pause {2}"
 
 msgid "§eSending you to spawn."
 msgstr "§eJe wordt naar spawn gestuurd."
@@ -2478,24 +2487,26 @@ msgid "§7Teleport cancelled"
 msgstr "§7Telepoort geannuleerd "
 
 msgid "READY"
-msgstr ""
+msgstr "KLAAR"
 
 msgid ""
 "§cWARNING:§e Could not transfer all the required items to your inventory!"
 msgstr ""
+"§cWAARSCHUWING:§e Kon niet alle vereiste items naar je inventaris over te "
+"dragen!"
 
 msgid "§cNot enough items in chest to complete challenge!"
-msgstr ""
+msgstr "§cNiet genoeg items in je kist te om de uitdaging te voltooien!"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 "Er is iets mis gegaan tijdens het opslaan van het eiland en/of party data!"
 
 msgid "Converting data to UUID, this make take a while!"
-msgstr ""
+msgstr "Het omzetten van gegevens naar UUID, dit kan een tijdje duren!"
 
 msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
-msgstr ""
+msgstr "§cONDERHOUD:§e uSkyBlock is op moment in onderhoud modus"
 
 #, java-format
 msgid ""
@@ -2512,10 +2523,10 @@ msgid "§4Player is already assigned to this island!"
 msgstr "§4Speler is al toegewezen aan dit eiland!"
 
 msgid "§4Unable to find a safe home-location on your island!"
-msgstr ""
+msgstr "§4Niet in staat om een veilig thuis-lokatie te vinden op je eiland!"
 
 msgid "§cWARNING: §eTeleporting you to mid-air."
-msgstr ""
+msgstr "§cWAARSCHUWING: §eJe wordt in ergens in de lucht geteleporteerd."
 
 msgid "§aTeleporting you to your island."
 msgstr "§aJe word getelepoorteerd naar je eiland."
@@ -2553,7 +2564,7 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eJe eiland word gereed gemaakt, heb geduld, dit kan even duren."
 
 msgid "§cCommand is currently disabled!"
-msgstr ""
+msgstr "§cCommando is op moment gedeactiveerd!"
 
 msgid "North"
 msgstr "Noord"
@@ -2594,3 +2605,32 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
+#~ msgstr ""
+#~ "§4Sorry!§e Een Protect-all wordt al uitgevoerd. Laat het eerst voltooien."
+
+#~ msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
+#~ msgstr "§cVERWIJDER:§9 Verwijderd {0}/{1} {2,number,###}%"
+
+#~ msgid "§eConverted "
+#~ msgstr "§eConverted "
+
+#~ msgid "§a§lIsland Help"
+#~ msgstr "§a§lEiland Help"
+
+#~ msgid ""
+#~ "Need help with skyblock\n"
+#~ "concepts or commands? View\n"
+#~ "details about them here.\n"
+#~ "§e§lClick here for help!"
+#~ msgstr ""
+#~ "Help nodig met skyblock\n"
+#~ "concept of commando's?\n"
+#~ "Bekijk details over hen hier.\n"
+#~ "§e§lKlik hier voor hulp!"
+
+#~ msgid "§4You are not part of an island. Returning you the spawn area!"
+#~ msgstr ""
+#~ "§4Je maakt geen deel uit van een eiland. Je word naar de spawn terug "
+#~ "gestuurd!"
