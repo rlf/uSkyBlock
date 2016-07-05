@@ -10,10 +10,10 @@
 package us.talabrek.ultimateskyblock.mojang;
 
 
-import com.google.common.base.Charsets;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,6 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +72,9 @@ public class MojangAPI {
     }
 
     public void fetchUUIDs(List<String> names, NameUUIDConsumer consumer, ProgressCallback callback) {
+        if (consumer == null) {
+            throw new IllegalArgumentException("consumer cannot be null");
+        }
         if (isOnlineMode()) {
             try {
                 fetchCurrent(names, consumer, callback);
@@ -86,33 +90,26 @@ public class MojangAPI {
 
     private boolean isOnlineMode() {
         // Strictly speaking, we don't know if this is online-mode
-        return Bukkit.getOnlineMode() || isBungeeMode;
+        return Bukkit.getOnlineMode();
     }
 
     private void fetchOfflineMode(List<String> names, NameUUIDConsumer consumer, ProgressCallback callback) {
-        int requests = (int) Math.ceil(names.size() / PROFILES_PER_REQUEST);
         int failed = 0;
-        for (int i = 0; i < requests; i++) {
-            int fromIndex = i * PROFILES_PER_REQUEST;
-            int toIndex = Math.min((i + 1) * 100, names.size());
-            List<String> segment = names.subList(fromIndex, toIndex);
-            Map<String, UUID> tempMap = new HashMap<>();
-
-            for (String name : segment) {
-                // TODO: 04/01/2016 - R4zorax: Name validation as in Spigot?
-                // Spigot way: Note! Case sensitive (online mode isn't).
-                tempMap.put(name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
-            }
-            int missing = segment.size() - tempMap.size();
-            consumer.success(tempMap);
-            if (missing > 0) {
-                List<String> unknown = new ArrayList<>(segment);
-                unknown.removeAll(tempMap.keySet());
-                consumer.unknown(unknown);
+        int success = 0;
+        int total = names.size();
+        for (String name : names) {
+            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
+            if (offlinePlayer == null) {
+                consumer.unknown(Collections.singletonList(name));
+                failed++;
+            } else {
+                Map<String, UUID> map = new HashMap<>();
+                map.put(offlinePlayer.getName(), offlinePlayer.getUniqueId());
+                consumer.success(map);
+                success++;
             }
             if (callback != null) {
-                failed += missing;
-                callback.progress(toIndex, failed, names.size(), "OfflineMode");
+                callback.progress(success+failed, failed, total, "OfflineMode");
             }
         }
         if (callback != null) {
