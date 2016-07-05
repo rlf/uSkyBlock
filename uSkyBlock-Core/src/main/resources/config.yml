@@ -185,8 +185,8 @@ options:
       use-portals: false
 
   party:
-    # The number of ticks before an invite timeouts (20 ticks per sec.)
-    invite-timeout: 600
+    # The number of ms before an invite timeouts (1000 ms per second)
+    invite-timeout: 30000
 
     # The format used in /partytalk chat messages
     chat-format: '&9PARTY &r{DISPLAYNAME} &f>&b {MESSAGE}'
@@ -213,9 +213,9 @@ options:
     # Clears the player's enderchest on island create/restart
     clearEnderChest: true
 
-    # [ticks] The number of ticks to wait, before porting the player back
-    # on /is restart or /is create (default: 40)
-    teleportDelay: 20
+    # [ms] The number of ms to wait, before porting the player back
+    # on /is restart or /is create (default: 1000)
+    teleportDelay: 1000
 
     # [true/false] Whether or not the player should be auto teleported to the island when it's ready
     teleportWhenReady: true

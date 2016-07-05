@@ -138,7 +138,7 @@ public enum AsyncWorldEditHandler {;
 
         @Override
         public void regenerate(final Region region, final Runnable onCompletion) {
-            Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), new Runnable() {
+            uSkyBlock.getInstance().sync(new Runnable() {
                 @Override
                 public void run() {
                     try {

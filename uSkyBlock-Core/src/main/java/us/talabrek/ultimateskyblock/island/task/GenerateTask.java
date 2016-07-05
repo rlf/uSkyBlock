@@ -60,7 +60,7 @@ public class GenerateTask extends BukkitRunnable {
         WorldGuardHandler.updateRegion(islandInfo);
         plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
-        Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
+        plugin.sync(new Runnable() {
                     @Override
                     public void run() {
                         if (pi != null) {
@@ -85,7 +85,7 @@ public class GenerateTask extends BukkitRunnable {
                             plugin.execCommand(player, command, true);
                         }
                     }
-                }, plugin.getConfig().getInt("options.restart.teleportDelay", 40)
+                }, plugin.getConfig().getInt("options.restart.teleportDelay", 2000)
         );
     }
 }

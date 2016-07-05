@@ -725,7 +725,7 @@ public class SkyBlockMenu {
 
     private void updateRestartMenuTimer(final Player p, final Inventory inventory) {
         final BukkitTask[] hackySharing = new BukkitTask[1];
-        hackySharing[0] = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+        hackySharing[0] = plugin.sync(new Runnable() {
             @Override
             public void run() {
                 if (inventory.getViewers().contains(p)) {
@@ -737,7 +737,7 @@ public class SkyBlockMenu {
                     }
                 }
             }
-        }, 0, TimeUtil.secondsAsTicks(1));
+        }, 0, 1000);
     }
 
     private void onClickCreateMenu(InventoryClickEvent event, Player p, ItemMeta meta, int slotIndex, int menuSize) {
@@ -827,7 +827,7 @@ public class SkyBlockMenu {
 
     private void updateLeaveMenuItemTimer(final Player p, final Inventory inventory, final ItemStack currentItem) {
         final BukkitTask[] hackySharing = new BukkitTask[1];
-        hackySharing[0] = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+        hackySharing[0] = plugin.sync(new Runnable() {
             @Override
             public void run() {
                 long millisLeft = plugin.getConfirmHandler().millisLeft(p, "/is leave");
@@ -840,7 +840,7 @@ public class SkyBlockMenu {
                     }
                 }
             }
-        }, 0, TimeUtil.secondsAsTicks(1));
+        }, 0, 1000);
     }
 
     private void updateLeaveMenuItem(Inventory inventory, ItemStack currentItem, long millisLeft) {

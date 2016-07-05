@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.command.admin;
 
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -26,7 +25,7 @@ public class MakeLeaderCommand extends AbstractCommand {
     @Override
     public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, final String... args) {
         if (args.length == 2) {
-            Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+            plugin.async(new Runnable() {
                 @Override
                 public void run() {
                     String islandPlayerName = args[0];

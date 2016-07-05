@@ -9,7 +9,6 @@ import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldedit.world.World;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -29,14 +28,14 @@ import java.util.logging.Logger;
  */
 public class FAWEAdaptor implements AWEAdaptor {
     private static final Logger log = Logger.getLogger(FAWEAdaptor.class.getName());
-    private Plugin plugin;
+    private uSkyBlock plugin;
     private int progressEveryMs;
     private double progressEveryPct;
     private final Map<UUID, PlayerProgressTracker> activeSessions = new ConcurrentHashMap<>();
 
     @Override
     public void onEnable(Plugin plugin) {
-        this.plugin = plugin;
+        this.plugin = (uSkyBlock) plugin;
         progressEveryMs = plugin.getConfig().getInt("asyncworldedit.progressEveryMs", 3000);
         progressEveryPct = plugin.getConfig().getDouble("asyncworldedit.progressEveryPct", 20);
         log.finer("- FAWE debugging: Location of WorldEdit EditSession: " + EditSession.class.getResource('/' + EditSession.class.getName().replace('.', '/') + ".class"));
@@ -56,7 +55,7 @@ public class FAWEAdaptor implements AWEAdaptor {
 
     @Override
     public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 boolean noAir = false;
@@ -106,7 +105,7 @@ public class FAWEAdaptor implements AWEAdaptor {
     @Override
     public void regenerate(final Region region, final Runnable onCompletion) {
         // NOTE: Running this asynchronous MIGHT be a bit dangereous! Since pasting could interfere
-        Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 try {

@@ -85,4 +85,8 @@ public enum TimeUtil {
     public static long millisAsTicks(long ms) {
         return ms / 50;
     }
+
+    public static long ticksAsMillis(int ticks) {
+        return ticks * 50;
+    }
 }

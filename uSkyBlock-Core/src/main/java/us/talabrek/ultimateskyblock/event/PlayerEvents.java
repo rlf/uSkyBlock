@@ -236,12 +236,12 @@ public class PlayerEvents implements Listener {
         if (!event.isCancelled()) {
             PlayerInfo playerInfo = plugin.getPlayerInfo(player);
             if (playerInfo != null && playerInfo.isClearInventoryOnNextEntry()) {
-                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                plugin.sync(new Runnable() {
                     @Override
                     public void run() {
                         plugin.clearPlayerInventory(player);
                     }
-                }, 1);
+                }, 50);
             }
         }
     }

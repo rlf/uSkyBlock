@@ -1,8 +1,8 @@
 package us.talabrek.ultimateskyblock.async;
 
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 /**
  * Convenience template class for executing heavy tasks on the main thread.
@@ -162,10 +162,10 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
         }
         try {
             if (!execute() && !isCancelled) {
-                Bukkit.getScheduler().runTaskLater(plugin, this, consecutiveRuns < maxConsecutive ? 0 : yieldDelay);
+                plugin.sync(this, TimeUtil.ticksAsMillis(consecutiveRuns < maxConsecutive ? 0 : yieldDelay));
             } else {
                 if (onCompletion != null && !isCancelled) {
-                    Bukkit.getScheduler().runTaskLater(plugin, onCompletion, 0);
+                    plugin.sync(onCompletion);
                 }
                 complete();
             }

@@ -124,14 +124,14 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     }
 
     private void saveConfig(final Player player, final String configName, final int page) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 try {
                     YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
                     config.set("dirty", null);
                     config.save(new File(plugin.getDataFolder(), configName));
-                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                    plugin.sync(new Runnable() {
                         @Override
                         public void run() {
                             plugin.reloadConfig();

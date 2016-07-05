@@ -15,6 +15,7 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -67,8 +68,8 @@ public class InviteHandler implements Listener {
                 tr("\u00a7f/island [accept/reject]\u00a7e to accept or reject the invite."),
                 tr("\u00a74WARNING: You will lose your current island if you accept!")
         });
-        int timeout = plugin.getConfig().getInt("options.party.invite-timeout", 100);
-        BukkitTask timeoutTask = plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
+        long timeout = TimeUtil.secondsAsMillis(plugin.getConfig().getInt("options.party.invite-timeout", 30));
+        BukkitTask timeoutTask = plugin.async(new Runnable() {
             @Override
             public void run() {
                 uninvite(island, uniqueId);

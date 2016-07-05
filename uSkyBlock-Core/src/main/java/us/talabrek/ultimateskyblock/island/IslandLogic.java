@@ -86,8 +86,8 @@ public class IslandLogic {
                         return new IslandInfo(islandName);
                     }
                 });
-        long every = TimeUtil.secondsAsTicks(plugin.getConfig().getInt("options.advanced.island.saveEvery", 30));
-        saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
+        long every = TimeUtil.secondsAsMillis(plugin.getConfig().getInt("options.advanced.island.saveEvery", 30));
+        saveTask = plugin.async(new Runnable() {
             @Override
             public void run() {
                 saveDirtyToFiles();
@@ -209,7 +209,7 @@ public class IslandLogic {
         if (Bukkit.isPrimaryThread()) {
             runnable.run();
         } else {
-            Bukkit.getScheduler().runTask(plugin, runnable);
+            plugin.sync(runnable);
         }
         return false;
     }

@@ -6,12 +6,12 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.util.UUID;
@@ -55,8 +55,8 @@ public class PlayerLogic {
                            }
                        }
                 );
-        int every = plugin.getConfig().getInt("options.advanced.player.saveEvery", 20 * 60 * 2);
-        saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
+        long every = TimeUtil.secondsAsMillis(plugin.getConfig().getInt("options.advanced.player.saveEvery", 2*60));
+        saveTask = plugin.async(new Runnable() {
             @Override
             public void run() {
                 saveDirtyToFiles();
@@ -96,7 +96,7 @@ public class PlayerLogic {
                     islandInfo.updatePermissionPerks(onlinePlayer, plugin.getPerkLogic().getPerk(onlinePlayer));
                 }
             }
-            Bukkit.getScheduler().runTask(plugin, new Runnable() {
+            plugin.sync(new Runnable() {
                         @Override
                         public void run() {
                             if (playerInfo.getHasIsland()) {
@@ -149,7 +149,7 @@ public class PlayerLogic {
     }
 
     public void loadPlayerDataAsync(final Player player) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 playerCache.refresh(player.getUniqueId());

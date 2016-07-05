@@ -123,7 +123,7 @@ public class AWE330Adaptor implements AWEAdaptor {
         if (timerTask != null) {
             timerTask.cancel();
         }
-        timerTask = Bukkit.getScheduler().runTaskTimerAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+        timerTask = uSkyBlock.getInstance().async(new Runnable() {
             int maxSize = -1;
             @Override
             public void run() {
@@ -139,7 +139,7 @@ public class AWE330Adaptor implements AWEAdaptor {
                     timerTask.cancel();
                 }
             }
-        }, 10, 10);
+        }, 500, 500);
     }
 
     public EditSession createEditSession(World bukkitWorld, int maxBlocks) {

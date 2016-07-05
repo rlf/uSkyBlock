@@ -1004,7 +1004,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         // Update all of the loaded configs.
         FileUtil.reload();
 
-        playerDB = new FilePlayerDB(getDataFolder());
+        playerDB = new FilePlayerDB(this);
         getServer().getPluginManager().registerEvents(playerDB, this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
@@ -1113,14 +1113,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private void doExecCommand(final Player player, final String command, int delay) {
         if (delay == 0) {
-            Bukkit.getScheduler().runTask(this, new Runnable() {
+            sync(new Runnable() {
                 @Override
                 public void run() {
                     doExecCommand(player, command);
                 }
             });
         } else if (delay > 0) {
-            Bukkit.getScheduler().runTaskLater(this, new Runnable() {
+            sync(new Runnable() {
                 @Override
                 public void run() {
                     doExecCommand(player, command);
@@ -1353,11 +1353,33 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return true;
     }
 
-    public void async(Runnable runnable) {
-        Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
+    public BukkitTask async(Runnable runnable) {
+        return Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
     }
 
-    public void async(Runnable runnable, long delayMs) {
-        Bukkit.getScheduler().runTaskLaterAsynchronously(this, runnable, TimeUtil.millisAsTicks(delayMs));
+    public BukkitTask async(Runnable runnable, long delayMs) {
+        return Bukkit.getScheduler().runTaskLaterAsynchronously(this, runnable,
+                TimeUtil.millisAsTicks(delayMs));
+    }
+
+    public BukkitTask async(Runnable runnable, long delay, long every) {
+        return Bukkit.getScheduler().runTaskTimerAsynchronously(this, runnable,
+                TimeUtil.millisAsTicks(delay),
+                TimeUtil.millisAsTicks(every));
+    }
+
+    public BukkitTask sync(Runnable runnable) {
+        return Bukkit.getScheduler().runTask(this, runnable);
+    }
+
+    public BukkitTask sync(Runnable runnable, long delayMs) {
+        return Bukkit.getScheduler().runTaskLater(this, runnable,
+                TimeUtil.millisAsTicks(delayMs));
+    }
+
+    public BukkitTask sync(Runnable runnable, long delay, long every) {
+        return Bukkit.getScheduler().runTaskTimer(this, runnable,
+                TimeUtil.millisAsTicks(delay),
+                TimeUtil.millisAsTicks(every));
     }
 }

@@ -45,7 +45,7 @@ public class LocateChestTask extends BukkitRunnable {
             }
             if (onCompletion != null) {
                 onCompletion.setChestLocation(chestLocation);
-                Bukkit.getScheduler().runTask(plugin, onCompletion);
+                plugin.sync(onCompletion);
             }
         }
     }

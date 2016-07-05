@@ -65,6 +65,7 @@ public class PurgeCommand extends AbstractCommand {
             sender.sendMessage(tr("\u00a74Starting purge..."));
             purgeTask = new PurgeTask(plugin, scanTask.getPurgeList(), sender);
             purgeTask.runTaskAsynchronously(plugin);
+            scanTask.stop(); // Mark as inactive
         } else {
             sender.sendMessage(tr("\u00a74A purge is already running, please wait for it to finish!"));
         }

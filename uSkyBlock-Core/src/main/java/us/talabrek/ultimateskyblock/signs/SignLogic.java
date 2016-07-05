@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.signs;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -77,7 +76,7 @@ public class SignLogic {
     }
 
     public void removeSign(final Location loc) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 removeSignAsync(loc);
@@ -101,7 +100,7 @@ public class SignLogic {
     }
 
     public void removeChest(final Location loc) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 removeChestAsync(loc);
@@ -120,7 +119,7 @@ public class SignLogic {
     }
 
     public void updateSigns(final Location... containerLocations) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 for (Location loc : containerLocations) {
@@ -172,7 +171,7 @@ public class SignLogic {
             final Location signLocation = LocationUtil.fromString(signLocString);
             final boolean challengeLocked = !isChallengeAvailable;
             // Back to sync
-            Bukkit.getScheduler().runTask(plugin, new Runnable() {
+            plugin.sync(new Runnable() {
                 @Override
                 public void run() {
                     updateSignFromChestSync(loc, signLocation, challenge, requiredItems, challengeLocked);
@@ -232,7 +231,7 @@ public class SignLogic {
     }
 
     private void saveAsync() {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 save();
@@ -251,7 +250,7 @@ public class SignLogic {
     }
 
     public void signClicked(final Player player, final Location location) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 tryCompleteAsync(player, location);
@@ -279,7 +278,7 @@ public class SignLogic {
                     player.sendMessage(tr("\u00a74The {0} challenge is not available yet!", challenge.getDisplayName()));
                     return;
                 }
-                Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                plugin.sync(new Runnable() {
                     @Override
                     public void run() {
                         tryComplete(player, chestLoc, challenge);

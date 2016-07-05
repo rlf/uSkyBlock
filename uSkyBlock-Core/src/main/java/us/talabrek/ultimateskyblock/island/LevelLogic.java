@@ -210,7 +210,7 @@ public class LevelLogic {
                                     islandScore = createIslandScore(counts);
                                 }
                                 callback.setState(islandScore);
-                                Bukkit.getScheduler().runTask(plugin, callback);
+                                plugin.sync(callback);
                                 log.exiting(CN, "calculateScoreAsync");
                             }
                         }.runTaskAsynchronously(plugin);

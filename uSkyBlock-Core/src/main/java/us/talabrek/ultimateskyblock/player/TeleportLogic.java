@@ -31,7 +31,7 @@ public class TeleportLogic {
 
     public TeleportLogic(uSkyBlock plugin) {
         this.plugin = plugin;
-        teleportDelay = plugin.getConfig().getInt("options.island.islandTeleportDelay", 5);
+        teleportDelay = plugin.getConfig().getInt("options.island.islandTeleportDelay", 2);
     }
 
     public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
@@ -44,7 +44,7 @@ public class TeleportLogic {
             player.setVelocity(new org.bukkit.util.Vector());
         } else {
             player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", teleportDelay));
-            BukkitTask tpTask = Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+            BukkitTask tpTask = plugin.sync(new Runnable() {
                 @Override
                 public void run() {
                     pendingTPs.remove(player.getUniqueId());
@@ -53,7 +53,7 @@ public class TeleportLogic {
                     player.teleport(targetLoc);
                     player.setVelocity(new Vector());
                 }
-            }, TimeUtil.secondsAsTicks(teleportDelay));
+            }, TimeUtil.secondsAsMillis(teleportDelay));
             pendingTPs.put(player.getUniqueId(), tpTask);
         }
     }
@@ -70,7 +70,7 @@ public class TeleportLogic {
             }
         } else {
             player.sendMessage(tr("\u00a7aYou will be teleported in {0} seconds.", delay));
-            BukkitTask tpTask = Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+            BukkitTask tpTask = plugin.sync(new Runnable() {
                 @Override
                 public void run() {
                     pendingTPs.remove(player.getUniqueId());
@@ -81,7 +81,7 @@ public class TeleportLogic {
                         player.teleport(spawnLocation);
                     }
                 }
-            }, TimeUtil.secondsAsTicks(delay));
+            }, TimeUtil.secondsAsMillis(delay));
             pendingTPs.put(player.getUniqueId(), tpTask);
         }
     }

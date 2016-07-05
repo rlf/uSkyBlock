@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.handler;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -55,7 +54,7 @@ public class CooldownHandler {
             return;
         }
         cooldowns.get(uuid).put(cmd, System.currentTimeMillis() + TimeUtil.secondsAsMillis(cooldownSecs));
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 Map<String, Long> cmdMap = cooldowns.get(player.getUniqueId());
@@ -63,7 +62,7 @@ public class CooldownHandler {
                     cmdMap.remove(cmd);
                 }
             }
-        }, TimeUtil.secondsAsTicks(cooldownSecs));
+        }, TimeUtil.secondsAsMillis(cooldownSecs));
     }
 
     public boolean clearCooldown(Player player, String cmd) {

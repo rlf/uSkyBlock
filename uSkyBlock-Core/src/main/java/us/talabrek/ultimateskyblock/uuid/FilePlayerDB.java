@@ -31,6 +31,7 @@ public class FilePlayerDB implements PlayerDB {
 
     private final File uuid2NameFile;
     private final YmlConfiguration uuid2NameConfig;
+    private final uSkyBlock plugin;
 
     private boolean isShuttingDown = false;
     private volatile BukkitTask saveTask;
@@ -40,15 +41,16 @@ public class FilePlayerDB implements PlayerDB {
     private final Map<String, UUID> name2uuidCache = new HashMap<>();
     private final Map<UUID, String> uuid2nameCache = new HashMap<>();
 
-    public FilePlayerDB(File dataFolder) {
-        uuid2NameFile = new File(dataFolder, "uuid2name.yml");
+    public FilePlayerDB(uSkyBlock plugin) {
+        this.plugin = plugin;
+        uuid2NameFile = new File(plugin.getDataFolder(), "uuid2name.yml");
         uuid2NameConfig = new YmlConfiguration();
         if (uuid2NameFile.exists()) {
             FileUtil.readConfig(uuid2NameConfig, uuid2NameFile);
         }
         // Save max every 10 seconds
-        saveDelay = uSkyBlock.getInstance().getConfig().getInt("playerdb.saveDelay", 20 * 10);
-        Bukkit.getScheduler().runTaskAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+        saveDelay = plugin.getConfig().getInt("playerdb.saveDelay", 10000);
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 Set<String> uuids = uuid2NameConfig.getKeys(false);
@@ -154,7 +156,7 @@ public class FilePlayerDB implements PlayerDB {
         } else {
             if (saveTask == null) {
                 // Only have one pending save-task at a time
-                saveTask = Bukkit.getScheduler().runTaskLaterAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+                saveTask = plugin.async(new Runnable() {
                     @Override
                     public void run() {
                         saveToFile();

@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import dk.lockfuglsang.minecraft.po.I18nUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
@@ -47,7 +46,7 @@ public class ConfirmHandler {
             }
         }
         confirmMap.put(uuid, new ConfirmCommand(cmd));
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 ConfirmCommand confirmCommand = confirmMap.remove(player.getUniqueId());
@@ -55,7 +54,7 @@ public class ConfirmHandler {
                     player.sendMessage(I18nUtil.tr("\u00a79{0}\u00a77 timed out", cmd));
                 }
             }
-        }, TimeUtil.secondsAsTicks(timeout));
+        }, TimeUtil.secondsAsMillis(timeout));
         player.sendMessage(I18nUtil.tr("\u00a7eDoing \u00a79{0}\u00a7e is \u00a7cRISKY\u00a7e. Repeat the command within \u00a7a{1}\u00a7e seconds to accept!", cmd, timeout));
         return false;
     }
