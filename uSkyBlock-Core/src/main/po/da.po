@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-06-29 20:30+0200\n"
+"PO-Revision-Date: 2016-07-05 21:51+0200\n"
 "Last-Translator: R4zorax\n"
 "Language-Team: da <LL@li.org>\n"
 "Language: da_DK\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.8\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -60,7 +61,7 @@ msgstr "§dTotalt antal aflevering: §f{0}"
 
 #, java-format
 msgid "§7Requires {0}§7 to unlock"
-msgstr ""
+msgstr "§7Kræver {0}"
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -545,42 +546,42 @@ msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§bEjerskab overført af {0}§b til {1}"
 
 msgid "advanced info about NBT stuff"
-msgstr ""
+msgstr "avanceret info om NBT"
 
 msgid "shows the NBTTag for the currently held item"
-msgstr ""
+msgstr "viser NBTTag for den ting du har i hånden"
 
 #, java-format
 msgid "§eInfo for §9{0}"
-msgstr ""
+msgstr "§eInfo for §9{0}"
 
 #, java-format
 msgid "§7 - name: §9{0}"
-msgstr ""
+msgstr "§7 - navn: §9{0}"
 
 #, java-format
 msgid "§7 - nbttag: §9{0}"
-msgstr ""
+msgstr "§7 - nbttag: §9{0}"
 
 msgid "§cNo item in hand!"
-msgstr ""
+msgstr "§cDu har tomme hænder!"
 
 msgid "§eCan only be executed as a player"
 msgstr "§eKan kun udføres som spiller"
 
 msgid "sets the NBTTag on the currently held item"
-msgstr ""
+msgstr "sætter NBTTagget på tingen i din hånd"
 
 #, java-format
 msgid "§eSet §9{0}§e to §c{1}"
-msgstr ""
+msgstr "§eSatte §9{0}§e til §c{1}"
 
 msgid "adds the NBTTag on the currently held item"
-msgstr ""
+msgstr "tilføjer NBTTags til tingen i din hånd"
 
 #, java-format
 msgid "§eAdded §9{0}§e to §c{1}"
-msgstr ""
+msgstr "§eTilføjede §9{0}§e til §c{1}"
 
 msgid "manage orphans"
 msgstr "håndter forældreløse."
@@ -612,12 +613,14 @@ msgid "protects all islands (time consuming)"
 msgstr "beskytter alle øer (tidskrævende)"
 
 msgid "§cTrying to abort protect-all task."
-msgstr ""
+msgstr "§cForsøger at afbryde protect-all opgaven."
 
 msgid ""
 "§4Sorry!§e A protect-all is already running. Let it complete first, or use "
 "§9usb protectall §cstop"
 msgstr ""
+"§4Undskyld!§e En protect-all er allerede igangværende. Vent til den er "
+"færdig, eller brug §9usb protectall §cstop"
 
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr "§eStarter en kørsel af protect-all. Det vil tage et stykke tid."
@@ -633,10 +636,10 @@ msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
 
 msgid "§4Trying to abort purge"
-msgstr ""
+msgstr "§4Forsøger at afbryde oprydning"
 
 msgid "§4Starting purge..."
-msgstr ""
+msgstr "§4Starter oprydning..."
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr ""
@@ -729,18 +732,18 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr "§cVedligeholdelsestilstand kan kun ændres fra konsollen!"
 
 msgid "§cABORTED:§e Protect-All was aborted!"
-msgstr ""
+msgstr "§cAFBRUDT:§e Protect-All blev afbrudt!"
 
 #, java-format
 msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
-msgstr ""
+msgstr "§eFuldførte protect-all på {0}, {1} nye regioner blev oprettet!"
 
 #, java-format
 msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
-msgstr ""
+msgstr "§7- SKANNER: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
 
 msgid "§4PURGE:§9 Scanning aborted."
-msgstr ""
+msgstr "§4OPRYDNING:§9 Skanning afbrudt."
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
@@ -748,17 +751,17 @@ msgstr "§4OPRYDNING:§9 Skanningen foretaget, fandt {0} kandidater til genbrug.
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr ""
+msgstr "§4OPRYDNING:§e Gentag kommandoen inden for {0} for at acceptere."
 
 #, java-format
 msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr ""
+msgstr "- OPRYDNING: {0,number,##}% ({1}/{2}) ~ {3}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4OPRYDNING:§9 Forladte øer er nu blevet sendt til genbrug."
 
 msgid "§4PURGE:§9 Aborted purging abandoned islands."
-msgstr ""
+msgstr "§4OPRYDNING:§9 Afbrød oprydning af forladte øer."
 
 msgid "displays version information"
 msgstr "viser versionsinformationer"
@@ -907,7 +910,7 @@ msgid "accept/reject an invitation."
 msgstr "afvis eller accepter invitationen."
 
 msgid "teleports you to your island (or create one)"
-msgstr ""
+msgstr "teleporterer dig til din ø (eller opretter en ny)"
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban en spiller fra din ø."
@@ -1509,6 +1512,7 @@ msgid ""
 "§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
 "~ {6}"
 msgstr ""
+"§eProgress: {0,number,##}% ({1}/{2} - ok:{3}, fejl:{4}, skipped:{5}) ~ {6}"
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
@@ -1516,43 +1520,45 @@ msgstr "§4Ingen §e{0}§4 importer fundet"
 
 #, java-format
 msgid "§eConverted {0}/{1} files in {2}"
-msgstr ""
+msgstr "§eKonverterede {0}/{1} filer på {2}"
 
 #, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
-msgstr ""
+msgstr "§7PlayerDB: Filtrerer {0} spillere vha. uuid2name.yml"
 
 #, java-format
 msgid "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr ""
+msgstr "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
 
 #, java-format
 msgid "§7PlayerDB: Filtered {0} names"
-msgstr ""
+msgstr "§7PlayerDB: Filtrerede {0} navne"
 
 #, java-format
 msgid ""
 "§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
 "{6}"
 msgstr ""
+"§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
+"{6}"
 
 #, java-format
 msgid "§7MojangAPI: Trying to fetch {0} players from Mojang"
-msgstr ""
+msgstr "§7MojangAPI: Forsøger at hente {0} spillere fra Mojang"
 
 msgid "SUCCESS"
-msgstr ""
+msgstr "SUCCESS"
 
 msgid "FAILED"
-msgstr ""
+msgstr "FEJLEDE"
 
 #, java-format
 msgid "§7 - MojangAPI:§aCOMPLETED: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§aFULDFØRT: {0}"
 
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§cFEJL: {0}"
 
 msgid "The island has been created."
 msgstr "Øen blev oprettet"
@@ -2416,7 +2422,7 @@ msgstr "§9Tekst Editor"
 
 #, java-format
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
-msgstr ""
+msgstr "For mange forespørgsler til Mojang ({0} inden for {1}), venter {2}"
 
 msgid "§eSending you to spawn."
 msgstr "§aTeleporterer dig til spawn."
@@ -2432,14 +2438,14 @@ msgid "§7Teleport cancelled"
 msgstr "§7Teleport afbrudt"
 
 msgid "READY"
-msgstr ""
+msgstr "KLAR"
 
 msgid ""
 "§cWARNING:§e Could not transfer all the required items to your inventory!"
-msgstr ""
+msgstr "§cADVARSEL:§e Kunne ikke overføre de nødvendige ting til din taske!"
 
 msgid "§cNot enough items in chest to complete challenge!"
-msgstr ""
+msgstr "§cIkke nok ting i kisten til at fuldføre udfordringen!"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Der opstod en fejl under gemning af øens data!"
