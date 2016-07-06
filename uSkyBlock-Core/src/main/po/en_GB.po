@@ -2,12 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2016-07-05 23:28+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: dutchy1001\n"
@@ -2590,30 +2589,3 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#~ msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-#~ msgstr ""
-#~ "§4* Sorry!§7 A protect-all is already running. Let it complete first."
-
-#~ msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-#~ msgstr "§4* PURGE§7: Purged {0}/{1} {2,number,###}%"
-
-#~ msgid "§eConverted "
-#~ msgstr "§4* §7Converted "
-
-#~ msgid "§a§lIsland Help"
-#~ msgstr "§a§lIsland Help"
-
-#~ msgid ""
-#~ "Need help with skyblock\n"
-#~ "concepts or commands? View\n"
-#~ "details about them here.\n"
-#~ "§e§lClick here for help!"
-#~ msgstr ""
-#~ "Need help with skyblock\n"
-#~ "concepts or commands? View\n"
-#~ "details about them here.\n"
-#~ "§e§lClick here for help!"
-
-#~ msgid "§4You are not part of an island. Returning you the spawn area!"
-#~ msgstr "§4* §7You are not part of an island. Returning you the spawn area!"

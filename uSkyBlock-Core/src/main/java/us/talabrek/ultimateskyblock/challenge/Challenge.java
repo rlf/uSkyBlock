@@ -21,7 +21,7 @@ import static us.talabrek.ultimateskyblock.util.FormatUtil.*;
  * The data-object for a challenge
  */
 public class Challenge {
-    public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))\\s*?(?<meta>\\{.*\\})?");
+    public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
     public static final int MAX_DETAILS = 11;
 
     public enum Type { PLAYER, ISLAND, ISLAND_LEVEL;

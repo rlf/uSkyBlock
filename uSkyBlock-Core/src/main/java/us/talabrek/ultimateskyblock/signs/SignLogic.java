@@ -123,6 +123,9 @@ public class SignLogic {
             @Override
             public void run() {
                 for (Location loc : containerLocations) {
+                    if (loc == null) {
+                        continue;
+                    }
                     long x1 = (long) Math.floor(loc.getX());
                     long x2 = Math.round(loc.getX());
                     long z1 = (long) Math.floor(loc.getZ());
