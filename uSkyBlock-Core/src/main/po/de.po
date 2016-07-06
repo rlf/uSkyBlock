@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-03-21 05:57+0100\n"
-"Last-Translator: Jonathan jonthanfriedrich@live.de\n"
+"PO-Revision-Date: 2016-07-06 02:07+0200\n"
+"Last-Translator: I9hdkill I9hdkill@spigotmc.org\n"
 "Language-Team: DE <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,8 @@ msgstr ""
 "X-Loco-Source-Locale: de_DE\n"
 "X-Loco-Parser: loco_parse_po\n"
 "X-Loco-Target-Locale: zz_ZZ\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.8\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -64,7 +65,7 @@ msgstr "§dSchon §f{0} §dmal abgeschlossen."
 
 #, java-format
 msgid "§7Requires {0}§7 to unlock"
-msgstr ""
+msgstr "§7Benötigt {0}§7 zum freischalten"
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -75,7 +76,7 @@ msgstr "§4Du musst auf deiner Insel sein um das zu tun!"
 
 #, java-format
 msgid "§4The {0} challenge is not available yet!"
-msgstr ""
+msgstr "§4Die Aufgabe {0} ist noch nicht verfügbar!"
 
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
@@ -453,19 +454,19 @@ msgid "§eFinished generation of the Top Ten list"
 msgstr "§eDie 10 Besten Liste wurde erfolgreich erstellt"
 
 msgid "advanced command for getting island-data"
-msgstr ""
+msgstr "erweitertes Kommando für Insel Infos"
 
 #, java-format
 msgid "§eCurrent value for {0} is ''{1}''"
-msgstr ""
+msgstr "§eDerzeitiger Wert für {0} ist ''{1}''"
 
 #, java-format
 msgid "§cUnable to get state for {0}"
-msgstr ""
+msgstr "§cKonnte den Status von {0} §cnicht ermitteln"
 
 #, java-format
 msgid "§eValid fields are {0}"
-msgstr ""
+msgstr "§eGültige Werte sind: {0}"
 
 msgid "teleport to another players island"
 msgstr "zu einer anderen Insel teleportieren"
@@ -486,7 +487,6 @@ msgstr "Importiere Spieler und Inseln aus anderen Formaten"
 msgid "§9Job Statistics"
 msgstr "§9Aufgaben Statistiken"
 
-# ???
 msgid "§7----------------"
 msgstr "§7----------------"
 
@@ -552,42 +552,42 @@ msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§bFührung übergeben von {0}§b an {1}"
 
 msgid "advanced info about NBT stuff"
-msgstr ""
+msgstr "Genauere Infos über NBT Tags"
 
 msgid "shows the NBTTag for the currently held item"
-msgstr ""
+msgstr "zeigt den NBT Tag für das Item in der Hand"
 
 #, java-format
 msgid "§eInfo for §9{0}"
-msgstr ""
+msgstr "§eInfo für §9{0}"
 
 #, java-format
 msgid "§7 - name: §9{0}"
-msgstr ""
+msgstr "§7 - Name: §9{0}"
 
 #, java-format
 msgid "§7 - nbttag: §9{0}"
-msgstr ""
+msgstr "§7 - NBT Tag: §9{0}"
 
 msgid "§cNo item in hand!"
-msgstr ""
+msgstr "§cKein Item in der Hand!"
 
 msgid "§eCan only be executed as a player"
-msgstr ""
+msgstr "§eKann nur als Spieler ausgeführt werden"
 
 msgid "sets the NBTTag on the currently held item"
-msgstr ""
+msgstr "setzt den NBT Tag auf das Item in der Hand"
 
 #, java-format
 msgid "§eSet §9{0}§e to §c{1}"
-msgstr ""
+msgstr "eSetzt §9{0}§e zu §c{1}"
 
 msgid "adds the NBTTag on the currently held item"
-msgstr ""
+msgstr "fügt den NBT Tag zum Item in der Hand hinzu"
 
 #, java-format
 msgid "§eAdded §9{0}§e to §c{1}"
-msgstr ""
+msgstr "§9{0}§e zu §c{1} §ehinzugefügt"
 
 msgid "manage orphans"
 msgstr "Handhabe Waise"
@@ -619,12 +619,14 @@ msgid "protects all islands (time consuming)"
 msgstr "Schützt alle Inseln (Zeitaufwändig)"
 
 msgid "§cTrying to abort protect-all task."
-msgstr ""
+msgstr "§cVersuche den \"Protect-all\" Task zu unterbrechen."
 
 msgid ""
 "§4Sorry!§e A protect-all is already running. Let it complete first, or use "
 "§9usb protectall §cstop"
 msgstr ""
+"§4Sorry!§e Ein Protect-all läuft bereits. Warte bis es fertig ist oder "
+"breche es mit §9usb protectall §cstop $eab"
 
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr "§eStarte ALLES-SCHÜTZEN. Das wird jetzt etwas dauern..."
@@ -640,50 +642,50 @@ msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eSuche Inseln die mehr als {0} Tage verlassen sind."
 
 msgid "§4Trying to abort purge"
-msgstr ""
+msgstr "§4Versuche Purge abzubrechen"
 
 msgid "§4Starting purge..."
-msgstr ""
+msgstr "§4Starte Purge"
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Die Säuberung läuft bereits, warte Bitte bis diese zu Ende ist."
 
 msgid "region manipulations"
-msgstr ""
+msgstr "Regions Veränderungen"
 
 msgid "shows the borders of the current island"
-msgstr ""
+msgstr "zeigt die Grenze dieser Insel"
 
 msgid "§eNo island found at your current location"
-msgstr ""
+msgstr "§eEs wurde keine Insel an Deiner Position gefunden"
 
 msgid "shows the borders of the current chunk"
-msgstr ""
+msgstr "zeigt die Grenze des derzeitigen Chunks"
 
 msgid "shows the borders of the inner-chunks"
-msgstr ""
+msgstr "zeigt die Grenze des inneren Chunks"
 
 msgid "shows the non-chunk-aligned borders"
-msgstr ""
+msgstr "zeigt die Grenzen die sich nicht an Chunks befinden"
 
 msgid "shows the borders of the outer-chunks"
-msgstr ""
+msgstr "zeigt die Grenzen von den äußeren Chunks"
 
 msgid "hides the regions again"
-msgstr ""
+msgstr "versteckt die Region wieder"
 
 msgid "§eStopped displaying regions"
-msgstr ""
+msgstr "§eAnzeigen von Regionen gestoppt"
 
 msgid "§eNo currently shown regions for this player"
-msgstr ""
+msgstr "§eFür diesen Spieler werden derzeit keine Regionen gezeigt"
 
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
-msgstr ""
+msgstr "§eAnimation-tick wurde zu {0} §egeändert."
 
 msgid "§eAnimation-tick must be a valid integer."
-msgstr ""
+msgstr "§eAnimation-tick muss ein gültiger Integer sein."
 
 msgid "set a player's island to your location"
 msgstr "Setze die Insel eines Spielers an deine Position"
@@ -702,69 +704,77 @@ msgid "§eConfiguration reloaded from file."
 msgstr "§eEInstellungen geladen von der Datei."
 
 msgid "advanced command for setting island-data"
-msgstr ""
+msgstr "fortgeschrittenes Kommando um Insel Einstellungen festzulegen"
 
 #, java-format
 msgid "§c{0} was set to ''{1}''"
-msgstr ""
+msgstr "§c{0} wurde zu ''{1}'' §cgesetzt"
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}''"
-msgstr ""
+msgstr "§cKonnte Wert {0} nicht zu ''{1}'' §c setzen"
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
-msgstr ""
+msgstr "§cKonnte Wert {0} nicht zu ''{1}'' §csetzen, da es keine Zahl ist"
 
 #, java-format
 msgid "§cInvalid field {0}"
-msgstr ""
+msgstr "§cUngültiger Wert {0}"
 
 msgid "toggles maintenance mode"
-msgstr ""
+msgstr "schaltet den Wartungsmodus and und aus"
 
 msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
 msgstr ""
+"§cWARTUNGSMODUS: §aAktiviert§e Alle uSkyBlock Features sind derzeit "
+"deaktiviert."
 
 msgid ""
 "§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
 msgstr ""
+"§cWARTUNGSMODUS: §4Deaktiviert§e Alle uSkyBlock Features funktionieren "
+"wieder normal."
 
 msgid "§cMaintenance mode can only be changed from console!"
 msgstr ""
+"§cDer Wartungsmodus kann nur in der Konsole aktiviert und deaktivert werden"
 
 msgid "§cABORTED:§e Protect-All was aborted!"
-msgstr ""
+msgstr "§cABGEBROCHEN:§e Protect-All wurde unterbrochen!"
 
 #, java-format
 msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
 msgstr ""
+"§eCompleted wurde in {0} $eabgeschlossen, {1} neue Regionen wurden erstellt!"
 
 #, java-format
 msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
-msgstr ""
+msgstr "§7- DURCHSUCHE: {0,number,##}% ({1}/{2} fehlgeschlagen: {3}) ~ {4}"
 
 msgid "§4PURGE:§9 Scanning aborted."
-msgstr ""
+msgstr "§4SÄUBERUNG:§9 Durchsuchen abgebrochen."
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
-"§4SÄUBERUNG:§9 Scannen abgeschlossen. Es wurden {0} verwaiste Insel gefunden"
+"§4SÄUBERUNG:§9 Durchsuchen abgeschlossen. Es wurden {0} verwaiste Insel "
+"gefunden"
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
 msgstr ""
+"§4SÄUBERUNG:§e Wiederhole das Kommando innerhalb von {0} um zu akzeptieren."
 
 #, java-format
 msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr ""
+msgstr "- SÄUEBERN: {0,number,##}% ({1}/{2}) ~ {3}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Verlassene Inseln wurde entfernt."
 
 msgid "§4PURGE:§9 Aborted purging abandoned islands."
-msgstr ""
+msgstr "§4SÄUBERUNG:§9 Das säubern von verlassenen Inseln wurde abgebrochen."
 
 msgid "displays version information"
 msgstr "Zeige Versions Informationen"
@@ -806,13 +816,13 @@ msgid "show player-information"
 msgstr "Zeige Spieler Informationen"
 
 msgid "try to complete a challenge"
-msgstr ""
+msgstr "versucht eine Aufgabe abzuschliessen"
 
 msgid "§cCommand only available for players."
-msgstr ""
+msgstr "§cDieses Kommando ist nur für Spieler verfügbar"
 
 msgid "show information about the challenge"
-msgstr ""
+msgstr "zeigt Informationen über die Aufgabe"
 
 msgid "§eRank: "
 msgstr "§eRang: "
@@ -840,7 +850,7 @@ msgid "§4Invalid challenge name! Use /c help for more information"
 msgstr "§4Ungültiger Aufgaben Name! Benutze /c für mehr Informationen."
 
 msgid "complete and list challenges"
-msgstr ""
+msgstr "vervollständige und zeige Aufgaben an"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
 msgstr "§eAufgaben wurden deaktiviert. Wende dich an einen Admin."
@@ -918,7 +928,7 @@ msgid "accept/reject an invitation."
 msgstr "An/-ablehnen einer Einladung."
 
 msgid "teleports you to your island (or create one)"
-msgstr ""
+msgstr "teleportiert Dich zu Deiner Insel (oder erstellt eine)"
 
 msgid "ban/unban a player from your island."
 msgstr "Banne/Entbanne Spieler von deiner Insel."
@@ -939,7 +949,7 @@ msgstr "§4Du hast nicht die Rechte dazu andere zu kicken/bannen."
 
 #, java-format
 msgid "§eUnable to ban unknown player {0}"
-msgstr ""
+msgstr "§eKonnte den folgenden unbekannten Spieler nicht bannen: {0}"
 
 #, java-format
 msgid "§4{0} tried to ban you from their island!"
@@ -1455,7 +1465,7 @@ msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eVerwandelt dein Obsidian wieder in Lava. Sei vorsichtig!"
 
 msgid "§eYour inventory must have another empty space!"
-msgstr ""
+msgstr "$eDein Inventar muss mehr freie Plätze haben!"
 
 msgid "§4It's a bad idea to replace your lava!"
 msgstr "§4Es ist eine schlechte Idee deine Lava zu ersetzen!"
@@ -1543,6 +1553,8 @@ msgid ""
 "§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
 "~ {6}"
 msgstr ""
+"§eFortschritt: {0,number,##}% ({1}/{2} - Erfolgreich:{3}, Fehlgeschlagen:"
+"{4}, Übersprungen:{5}) ~ {6}"
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
@@ -1550,43 +1562,45 @@ msgstr "§4Kein import mit dem Namen §e{0}§4 gefunden"
 
 #, java-format
 msgid "§eConverted {0}/{1} files in {2}"
-msgstr ""
+msgstr "§eKonvertierte {0}/{1} Dateien in {2}"
 
 #, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
-msgstr ""
+msgstr "§7PlayerDB: Filtert {0}  Spieler von uuid2name.yml"
 
 #, java-format
 msgid "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr ""
+msgstr "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
 
 #, java-format
 msgid "§7PlayerDB: Filtered {0} names"
-msgstr ""
+msgstr "§7PlayerDB: Filterte {0} names"
 
 #, java-format
 msgid ""
 "§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
 "{6}"
 msgstr ""
+"§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, Fehlgeschlagen:{3} ~ "
+"{5,number,##}%), {6}"
 
 #, java-format
 msgid "§7MojangAPI: Trying to fetch {0} players from Mojang"
-msgstr ""
+msgstr "§7MojangAPI: Versuche {0} Spieler von Mojang abzufragen"
 
 msgid "SUCCESS"
-msgstr ""
+msgstr "ERFOLGREICH"
 
 msgid "FAILED"
-msgstr ""
+msgstr "FEHLGESCHLAGEN"
 
 #, java-format
 msgid "§7 - MojangAPI:§aCOMPLETED: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§aABGESCHLOSSEN: {0}"
 
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§cFEHLER: {0}"
 
 msgid "The island has been created."
 msgstr "Die Insel wurde erstellt"
@@ -2449,7 +2463,7 @@ msgstr "§9Text Editor"
 
 #, java-format
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
-msgstr ""
+msgstr "Zu viele Anfragen an die Mojang API ({0} innerhalb von {1}), warte {2}"
 
 msgid "§eSending you to spawn."
 msgstr "§eDu wirst zum Spawn gesendet"
@@ -2465,23 +2479,28 @@ msgid "§7Teleport cancelled"
 msgstr "§7Teleport abgebrochen"
 
 msgid "READY"
-msgstr ""
+msgstr "BEREIT"
 
 msgid ""
 "§cWARNING:§e Could not transfer all the required items to your inventory!"
 msgstr ""
+"§cWARNUNG§e Es konnten nicht alle benötigten Gegenstände in dein Inventar "
+"gelegt werden!"
 
 msgid "§cNot enough items in chest to complete challenge!"
 msgstr ""
+"§cEs befinden sich nicht gneug Gegenstände in der Kiste um die Aufgabe "
+"abzuschliessen!"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
 
 msgid "Converting data to UUID, this make take a while!"
 msgstr ""
+"Die Daten werden in das UUID Format konvertiert. Dies kann lange dauern!"
 
 msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
-msgstr ""
+msgstr "§cWARTUNGSMODUS:§e uSkyBlock ist derzeit im Wartungsmodus"
 
 #, java-format
 msgid ""
@@ -2497,10 +2516,10 @@ msgid "§4Player is already assigned to this island!"
 msgstr "§4Dieser Spieler gehört bereits zu deiner Insel!"
 
 msgid "§4Unable to find a safe home-location on your island!"
-msgstr ""
+msgstr "§4Es konnte kein sicherer Ort für dein Home gefunden werden!"
 
 msgid "§cWARNING: §eTeleporting you to mid-air."
-msgstr ""
+msgstr "§cWARNUNG: §eDu wirst in die Luft geportet."
 
 msgid "§aTeleporting you to your island."
 msgstr "§aDu wirst zu Deiner Insel teleportiert."
@@ -2542,7 +2561,7 @@ msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr "§eDeine Insel wird erstellt. Habe einen Moment Geduld"
 
 msgid "§cCommand is currently disabled!"
-msgstr ""
+msgstr "§cDieses Kommando ist derzeit deaktiviert!"
 
 msgid "North"
 msgstr "Norden"
