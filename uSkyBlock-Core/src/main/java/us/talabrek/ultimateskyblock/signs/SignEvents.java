@@ -39,7 +39,7 @@ public class SignEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerHitSign(PlayerInteractEvent e) {
         if (e.isCancelled()
-                || (e.getAction() != Action.LEFT_CLICK_BLOCK && e.getAction() != Action.RIGHT_CLICK_BLOCK)
+                || e.getAction() != Action.RIGHT_CLICK_BLOCK
                 || e.getClickedBlock() == null || e.getClickedBlock().getType() != Material.WALL_SIGN
                 || !(e.getClickedBlock().getState() instanceof Sign)
                 || !hasPermission(e.getPlayer(), "usb.island.signs.use")
@@ -95,7 +95,7 @@ public class SignEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onSignBreak(BlockBreakEvent e) {
+    public void onSignOrChestBreak(BlockBreakEvent e) {
         if (e.isCancelled()
                 || e.getBlock() == null
                 || (e.getBlock().getType() != Material.WALL_SIGN && e.getBlock().getType() != Material.CHEST)

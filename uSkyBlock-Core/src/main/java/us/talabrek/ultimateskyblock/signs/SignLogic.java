@@ -123,7 +123,29 @@ public class SignLogic {
             @Override
             public void run() {
                 for (Location loc : containerLocations) {
-                    updateSignAsync(loc);
+                    long x1 = (long) Math.floor(loc.getX());
+                    long x2 = Math.round(loc.getX());
+                    long z1 = (long) Math.floor(loc.getZ());
+                    long z2 = Math.round(loc.getZ());
+                    if (x1 != x2) {
+                        // Double Chest!
+                        Location loc1 = loc.clone();
+                        loc1.setX(x1);
+                        Location loc2 = loc.clone();
+                        loc2.setX(x2);
+                        updateSignAsync(loc1);
+                        updateSignAsync(loc2);
+                    } else if (z1 != z2) {
+                        // Double Chest!
+                        Location loc1 = loc.clone();
+                        loc1.setZ(z1);
+                        Location loc2 = loc.clone();
+                        loc2.setZ(z2);
+                        updateSignAsync(loc1);
+                        updateSignAsync(loc2);
+                    } else {
+                        updateSignAsync(loc);
+                    }
                 }
             }
         });
