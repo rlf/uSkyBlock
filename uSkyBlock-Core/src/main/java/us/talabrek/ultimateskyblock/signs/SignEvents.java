@@ -1,8 +1,9 @@
 package us.talabrek.ultimateskyblock.signs;
 
+import dk.lockfuglsang.minecraft.reflection.ReflectionUtil;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
@@ -12,10 +13,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.material.MaterialData;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 
@@ -39,7 +38,7 @@ public class SignEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerHitSign(PlayerInteractEvent e) {
         if (e.isCancelled()
-                || e.getAction() != Action.RIGHT_CLICK_BLOCK
+                || (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.LEFT_CLICK_BLOCK)
                 || e.getClickedBlock() == null || e.getClickedBlock().getType() != Material.WALL_SIGN
                 || !(e.getClickedBlock().getState() instanceof Sign)
                 || !hasPermission(e.getPlayer(), "usb.island.signs.use")
@@ -48,7 +47,11 @@ public class SignEvents implements Listener {
                 ) {
             return;
         }
-        logic.signClicked(e.getPlayer(), e.getClickedBlock().getLocation());
+        if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
+            logic.updateSign(e.getClickedBlock().getLocation());
+        } else {
+            logic.signClicked(e.getPlayer(), e.getClickedBlock().getLocation());
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -73,15 +76,18 @@ public class SignEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onChestChanged(InventoryMoveItemEvent e) {
-        if (e.isCancelled()
-                || e.getSource() == null || e.getSource().getLocation() == null
-                || e.getDestination() == null || e.getDestination().getLocation() == null
-                || !plugin.isSkyAssociatedWorld(e.getSource().getLocation().getWorld())
-                || !plugin.isSkyAssociatedWorld(e.getDestination().getLocation().getWorld())
+        if (e.isCancelled() || e.getSource() == null || e.getDestination() == null) {
+            return;
+        }
+        Location srcLoc = ReflectionUtil.exec(e.getSource(), "getLocation");
+        Location dstLoc = ReflectionUtil.exec(e.getDestination(), "getLocation");
+        if (srcLoc == null || dstLoc == null
+                || !plugin.isSkyAssociatedWorld(srcLoc.getWorld())
+                || !plugin.isSkyAssociatedWorld(dstLoc.getWorld())
                 ) {
             return;
         }
-        logic.updateSigns(e.getSource().getLocation(), e.getDestination().getLocation());
+        logic.updateSignsOnContainer(srcLoc, dstLoc);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -91,7 +97,10 @@ public class SignEvents implements Listener {
                 ) {
             return;
         }
-        logic.updateSigns(e.getInventory().getLocation());
+        Location loc = ReflectionUtil.exec(e.getInventory(), "getLocation");
+        if (loc != null) {
+            logic.updateSignsOnContainer(loc);
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

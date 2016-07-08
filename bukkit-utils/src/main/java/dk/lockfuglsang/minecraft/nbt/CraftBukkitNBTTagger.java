@@ -1,15 +1,12 @@
 package dk.lockfuglsang.minecraft.nbt;
 
-import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static dk.lockfuglsang.minecraft.reflection.ReflectionUtil.*;
 
 /**
  * An NBTItemStackTagger using reflection for CraftBukkit based servers.
@@ -103,87 +100,5 @@ public class CraftBukkitNBTTagger implements NBTItemStackTagger {
         return null;
     }
 
-    private static String getCraftBukkitVersion() {
-        return Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-    }
 
-    private static String getNMSVersion(Object nmsObject) {
-        return nmsObject != null ? nmsObject.getClass().getPackage().getName().split("\\.")[3] : "";
-    }
-
-    private static String getPackageName(Object nmsObject) {
-        return nmsObject != null ? nmsObject.getClass().getPackage().getName() : "";
-    }
-
-    private static Class<?> getBukkitClass(Object arg) {
-        Class clazz = arg != null ? arg.getClass() : null;
-        while (clazz != null && clazz.getCanonicalName().contains(".craftbukkit.")) {
-            clazz = clazz.getSuperclass();
-        }
-        return clazz;
-    }
-
-    /**
-     * Uses reflection to execute the named method on the supplied class giving the arguments.
-     * Sinks all exceptions, but log an entry and returns <code>null</code>
-     * @param clazz         The class on which to invoke the method
-     * @param methodName    The name of the method to invoke
-     * @param args          The arguments to supply to the method
-     * @return <code>null</code> or the return-object from the method.
-     */
-    private static <T> T execStatic(Class<?> clazz, String methodName, Object... args) {
-        try {
-            Class[] argTypes = new Class[args.length];
-            int ix = 0;
-            for (Object arg : args) {
-                argTypes[ix++] = getBukkitClass(arg);
-            }
-            Method method = clazz.getDeclaredMethod(methodName, argTypes);
-            boolean wasAccessible = method.isAccessible();
-            method.setAccessible(true);
-            try {
-                return (T) method.invoke(null, args);
-            } finally {
-                method.setAccessible(wasAccessible);
-            }
-        } catch (NoSuchMethodException e) {
-            log.info("Unable to locate method " + methodName + " on " + clazz);
-        } catch (InvocationTargetException | IllegalAccessException e) {
-            log.log(Level.INFO, "Calling " + methodName + " on " + clazz + " threw an exception", e);
-        }
-        return null;
-    }
-
-    private static <T> T exec(Object obj, String methodName, Class[] argTypes, Object... args) {
-        if (obj == null) {
-            return null;
-        }
-        try {
-            Method method = obj.getClass().getDeclaredMethod(methodName, argTypes);
-            boolean wasAccessible = method.isAccessible();
-            method.setAccessible(true);
-            try {
-                return (T) method.invoke(obj, args);
-            } finally {
-                method.setAccessible(wasAccessible);
-            }
-        } catch (NoSuchMethodException e) {
-            log.info("Unable to locate method " + methodName + "(" + Arrays.asList(argTypes) + ") on " + obj.getClass());
-        } catch (InvocationTargetException | IllegalAccessException e) {
-            log.log(Level.INFO, "Calling " + methodName + " on " + obj + " threw an exception", e);
-        }
-        return null;
-    }
-
-    private static <T> T exec(Object obj, String methodName, Object... args) {
-        if (obj == null) {
-            return null;
-        }
-        Class[] argTypes = new Class[args.length];
-        int ix = 0;
-        for (Object arg : args) {
-            argTypes[ix++] = arg != null ? arg.getClass() : null;
-        }
-        return exec(obj, methodName, argTypes, args);
-    }
 }

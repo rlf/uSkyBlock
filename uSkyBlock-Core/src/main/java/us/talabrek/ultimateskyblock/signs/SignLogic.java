@@ -72,7 +72,7 @@ public class SignLogic {
         }
         chests.set(chestPath, signList);
         saveAsync();
-        updateSigns(chest.getLocation());
+        updateSignsOnContainer(chest.getLocation());
     }
 
     public void removeSign(final Location loc) {
@@ -118,7 +118,7 @@ public class SignLogic {
         save();
     }
 
-    public void updateSigns(final Location... containerLocations) {
+    public void updateSignsOnContainer(final Location... containerLocations) {
         plugin.async(new Runnable() {
             @Override
             public void run() {
@@ -154,55 +154,68 @@ public class SignLogic {
         });
     }
 
-    private void updateSignAsync(final Location loc) {
-        if (loc == null || !plugin.isSkyAssociatedWorld(loc.getWorld())) {
+    public void updateSign(Location signLocation) {
+        String signString = LocationUtil.asKey(signLocation);
+        String chestLocStr = config.getString("signs." + signString + ".chest", null);
+        Location chestLoc = LocationUtil.fromString(chestLocStr);
+        if (chestLoc != null) {
+            updateSignAsync(chestLoc);
+        }
+    }
+
+    private void updateSignAsync(final Location chestLoc) {
+        if (chestLoc == null || !plugin.isSkyAssociatedWorld(chestLoc.getWorld())) {
             return;
         }
-        String locString = LocationUtil.asKey(loc);
+        String locString = LocationUtil.asKey(chestLoc);
         List<String> signList = config.getStringList("chests." + locString);
         if (signList.isEmpty()) {
             return;
         }
-        String islandName = WorldGuardHandler.getIslandNameAt(loc);
+        String islandName = WorldGuardHandler.getIslandNameAt(chestLoc);
         if (islandName == null) {
             return;
         }
         for (String signLoc : signList) {
-            String challengeName = config.getString("signs." + signLoc + ".challenge", null);
-            if (challengeName == null) {
-                continue;
-            }
-            final Challenge challenge = challengeLogic.getChallenge(challengeName);
-            if (challenge == null || challenge.getType() != Challenge.Type.PLAYER) {
-                continue;
-            }
-            final List<ItemStack> requiredItems = new ArrayList<>();
-            boolean isChallengeAvailable = false;
-            if (challengeLogic.isIslandSharing()) {
-                final ChallengeCompletion completion = challengeLogic.getIslandCompletion(islandName, challengeName);
-                if (completion != null) {
-                    requiredItems.addAll(challenge.getRequiredItems(completion.getTimesCompletedInCooldown()));
-                }
-            }
-            IslandInfo islandInfo = plugin.getIslandInfo(islandName);
-            if (islandInfo != null && islandInfo.getLeaderUniqueId() != null) {
-                PlayerInfo playerInfo = plugin.getPlayerInfo(islandInfo.getLeaderUniqueId());
-                if (playerInfo != null) {
-                    isChallengeAvailable = challenge.getRank().isAvailable(playerInfo);
-                    isChallengeAvailable &= challenge.getMissingRequirements(playerInfo).isEmpty();
-                }
-            }
-            String signLocString = config.getString("signs." + signLoc + ".location", null);
-            final Location signLocation = LocationUtil.fromString(signLocString);
-            final boolean challengeLocked = !isChallengeAvailable;
-            // Back to sync
-            plugin.sync(new Runnable() {
-                @Override
-                public void run() {
-                    updateSignFromChestSync(loc, signLocation, challenge, requiredItems, challengeLocked);
-                }
-            });
+            updateSignAsync(chestLoc, islandName, signLoc);
         }
+    }
+
+    private void updateSignAsync(final Location chestLoc, String islandName, String signLoc) {
+        String challengeName = config.getString("signs." + signLoc + ".challenge", null);
+        if (challengeName == null) {
+            return;
+        }
+        final Challenge challenge = challengeLogic.getChallenge(challengeName);
+        if (challenge == null || challenge.getType() != Challenge.Type.PLAYER) {
+            return;
+        }
+        final List<ItemStack> requiredItems = new ArrayList<>();
+        boolean isChallengeAvailable = false;
+        if (challengeLogic.isIslandSharing()) {
+            final ChallengeCompletion completion = challengeLogic.getIslandCompletion(islandName, challengeName);
+            if (completion != null) {
+                requiredItems.addAll(challenge.getRequiredItems(completion.getTimesCompletedInCooldown()));
+            }
+        }
+        IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+        if (islandInfo != null && islandInfo.getLeaderUniqueId() != null) {
+            PlayerInfo playerInfo = plugin.getPlayerInfo(islandInfo.getLeaderUniqueId());
+            if (playerInfo != null) {
+                isChallengeAvailable = challenge.getRank().isAvailable(playerInfo);
+                isChallengeAvailable &= challenge.getMissingRequirements(playerInfo).isEmpty();
+            }
+        }
+        String signLocString = config.getString("signs." + signLoc + ".location", null);
+        final Location signLocation = LocationUtil.fromString(signLocString);
+        final boolean challengeLocked = !isChallengeAvailable;
+        // Back to sync
+        plugin.sync(new Runnable() {
+            @Override
+            public void run() {
+                updateSignFromChestSync(chestLoc, signLocation, challenge, requiredItems, challengeLocked);
+            }
+        });
     }
 
     private void updateSignFromChestSync(Location chestLoc, Location signLoc, Challenge challenge, List<ItemStack> requiredItems, boolean challengeLocked) {
@@ -354,7 +367,7 @@ public class SignLogic {
                 chest.getInventory().addItem(leftOvers.values().toArray(new ItemStack[leftOvers.size()]));
                 player.sendMessage(tr("\u00a7cWARNING:\u00a7e Could not transfer all the required items to your inventory!"));
             }
-            updateSigns(chest.getLocation());
+            updateSignsOnContainer(chest.getLocation());
         } else {
             player.sendMessage(tr("\u00a7cNot enough items in chest to complete challenge!"));
         }
