@@ -83,7 +83,7 @@ public class ReflectionUtil {
                 method.setAccessible(wasAccessible);
             }
         } catch (NoSuchMethodException e) {
-            log.info("Unable to locate method " + methodName + " on " + clazz);
+            log.fine("Unable to locate method " + methodName + " on " + clazz);
         } catch (InvocationTargetException | IllegalAccessException e) {
             log.log(Level.INFO, "Calling " + methodName + " on " + clazz + " threw an exception", e);
         }
@@ -114,7 +114,7 @@ public class ReflectionUtil {
                 method.setAccessible(wasAccessible);
             }
         } catch (NoSuchMethodException e) {
-            log.info("Unable to locate method " + methodName + "(" + Arrays.asList(argTypes) + ") on " + obj.getClass());
+            log.fine("Unable to locate method " + methodName + "(" + Arrays.asList(argTypes) + ") on " + obj.getClass());
         } catch (InvocationTargetException | IllegalAccessException e) {
             log.log(Level.INFO, "Calling " + methodName + " on " + obj + " threw an exception", e);
         }
