@@ -24,7 +24,7 @@ public class NBTCommand extends CompositeCommand {
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
-                    ItemStack itemStack = player.getInventory().getItemInMainHand();
+                    ItemStack itemStack = player.getInventory().getItemInHand();
                     if (itemStack != null) {
                         String[] msgs = new String[]{
                                 tr("\u00a7eInfo for \u00a79{0}", ItemStackUtil.asString(itemStack)),
@@ -47,11 +47,11 @@ public class NBTCommand extends CompositeCommand {
                 if (sender instanceof Player) {
                     if (args.length > 0) {
                         Player player = (Player) sender;
-                        ItemStack itemStack = player.getInventory().getItemInMainHand();
+                        ItemStack itemStack = player.getInventory().getItemInHand();
                         if (itemStack != null) {
                             String nbtTag = join(args);
                             itemStack = NBTUtil.setNBTTag(itemStack, nbtTag);
-                            player.getInventory().setItemInMainHand(itemStack);
+                            player.getInventory().setItemInHand(itemStack);
                             player.sendMessage(tr("\u00a7eSet \u00a79{0}\u00a7e to \u00a7c{1}", nbtTag, itemStack));
                         } else {
                             player.sendMessage(tr("\u00a7cNo item in hand!"));
@@ -69,11 +69,11 @@ public class NBTCommand extends CompositeCommand {
                 if (sender instanceof Player) {
                     if (args.length > 0) {
                         Player player = (Player) sender;
-                        ItemStack itemStack = player.getInventory().getItemInMainHand();
+                        ItemStack itemStack = player.getInventory().getItemInHand();
                         if (itemStack != null) {
                             String nbtTag = join(args);
                             itemStack = NBTUtil.addNBTTag(itemStack, nbtTag);
-                            player.getInventory().setItemInMainHand(itemStack);
+                            player.getInventory().setItemInHand(itemStack);
                             player.sendMessage(tr("\u00a7eAdded \u00a79{0}\u00a7e to \u00a7c{1}", nbtTag, itemStack));
                         } else {
                             player.sendMessage(tr("\u00a7cNo item in hand!"));

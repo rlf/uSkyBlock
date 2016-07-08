@@ -26,7 +26,7 @@ public enum FormatUtil {;
 
     public static List<String> wordWrap(String s, int firstSegment, int lineSize) {
         String format = getFormat(s);
-        if (format == null) {
+        if (format == null || !s.startsWith(format)) {
             format = "";
         }
         List<String> words = new ArrayList<>();

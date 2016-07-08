@@ -12,13 +12,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static us.talabrek.ultimateskyblock.util.FormatUtil.join;
 
 /**
  * Conversion to ItemStack from strings.
@@ -27,7 +24,6 @@ public enum ItemStackUtil {
     ;
     private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?:(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
     private static final Pattern ITEM_PATTERN = Pattern.compile("(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
-    private static final Pattern ITEM_NAME_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)(:(?<sub>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
 
     public static List<ItemProbability> createItemsWithProbabilty(List<String> items) {
         List<ItemProbability> itemProbs = new ArrayList<>();
@@ -62,9 +58,12 @@ public enum ItemStackUtil {
     }
 
     public static List<ItemStack> createItemList(String items, List<String> items2) {
-        List<String> itemStrList = new ArrayList<>(items2 != null ? items2 : Collections.<String>emptyList());
+        List<String> itemStrList = new ArrayList<>();
         if (items != null) {
             itemStrList.addAll(Arrays.asList(items.split(" ")));
+        }
+        if (items2 != null && !items2.isEmpty()) {
+            itemStrList.addAll(items2);
         }
         return createItemList(itemStrList);
     }
@@ -72,51 +71,42 @@ public enum ItemStackUtil {
     public static List<ItemStack> createItemList(List<String> items) {
         List<ItemStack> itemList = new ArrayList<>();
         for (String reward : items) {
-            Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
-            if (m.matches()) {
-                int id = getItemId(m);
-                short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
-                int amount = Integer.parseInt(m.group("amount"), 10);
-                ItemStack itemStack = new ItemStack(id, amount, sub);
-                if (m.group("meta") != null) {
-                    itemStack = NBTUtil.setNBTTag(itemStack, m.group("meta"));
-                }
-                itemList.add(itemStack);
-            } else if (!reward.isEmpty()) {
-                throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
+            if (reward != null && !reward.isEmpty()) {
+                itemList.add(createItemStackAmount(reward));
             }
         }
         return itemList;
+    }
+
+    private static ItemStack createItemStackAmount(String reward) {
+        if (reward == null || reward.isEmpty()) {
+            return null;
+        }
+        Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
+        if (m.matches()) {
+            int id = getItemId(m);
+            short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
+            int amount = Integer.parseInt(m.group("amount"), 10);
+            ItemStack itemStack = new ItemStack(id, amount, sub);
+            if (m.group("meta") != null) {
+                itemStack = NBTUtil.addNBTTag(itemStack, m.group("meta"));
+            }
+            return itemStack;
+        } else {
+            throw new IllegalArgumentException("Unknown item: '" + reward + "'");
+        }
     }
 
     public static List<ItemStack> createItemList(String items) {
         List<ItemStack> itemList = new ArrayList<>();
         if (items != null && !items.trim().isEmpty()) {
-            for (String reward : items.split(" ")) {
-                Matcher m = ITEM_AMOUNT_PATTERN.matcher(reward);
-                if (m.matches()) {
-                    int id = getItemId(m);
-                    short sub = m.group("sub") != null ? (short) Integer.parseInt(m.group("sub"), 10) : 0;
-                    int amount = Integer.parseInt(m.group("amount"), 10);
-                    ItemStack itemStack = new ItemStack(id, amount, sub);
-                    if (m.group("meta") != null) {
-                        itemStack = NBTUtil.setNBTTag(itemStack, m.group("meta"));
-                    }
-                    itemList.add(itemStack);
-                } else if (!reward.isEmpty()) {
-                    throw new IllegalArgumentException("Unknown item: '" + reward + "' in '" + items + "'");
-                }
-            }
+            return createItemList(Arrays.asList(items.split(" ")));
         }
         return itemList;
     }
 
-    public static ItemStack[] createItemArray(String items) {
-        return createItemArray(createItemList(items));
-    }
-
     public static ItemStack[] createItemArray(List<ItemStack> items) {
-        return items.toArray(new ItemStack[0]);
+        return items != null ? items.toArray(new ItemStack[items.size()]) : new ItemStack[0];
     }
 
     public static ItemStack createItemStack(String displayItem) {
@@ -129,15 +119,10 @@ public enum ItemStackUtil {
         String metaStr = null;
         if (displayItem != null) {
             Matcher matcher = ITEM_PATTERN.matcher(displayItem);
-            Matcher nameMatcher = ITEM_NAME_PATTERN.matcher(displayItem);
             if (matcher.matches()) {
                 material = Material.getMaterial(getItemId(matcher));
                 subType = matcher.group("sub") != null ? (short) Integer.parseInt(matcher.group("sub"), 10) : 0;
                 metaStr = matcher.group("meta");
-            } else if (nameMatcher.matches()) {
-                material = Material.getMaterial(nameMatcher.group("id"));
-                subType = nameMatcher.group("sub") != null ? (short) Integer.parseInt(nameMatcher.group("sub"), 10) : 0;
-                metaStr = nameMatcher.group("meta");
             }
         }
         if (material == null) {
@@ -146,13 +131,15 @@ public enum ItemStackUtil {
         }
         ItemStack itemStack = new ItemStack(material, 1, subType);
         ItemMeta meta = itemStack.getItemMeta();
-        meta.setDisplayName(FormatUtil.normalize(name));
-        List<String> lore = new ArrayList<>();
-        if (description != null) {
-            lore.addAll(FormatUtil.wordWrap(FormatUtil.normalize(description), 30, 30));
+        if (meta != null) {
+            meta.setDisplayName(FormatUtil.normalize(name));
+            List<String> lore = new ArrayList<>();
+            if (description != null) {
+                lore.addAll(FormatUtil.wordWrap(FormatUtil.normalize(description), 30, 30));
+            }
+            meta.setLore(lore);
+            itemStack.setItemMeta(meta);
         }
-        meta.setLore(lore);
-        itemStack.setItemMeta(meta);
         itemStack = NBTUtil.addNBTTag(itemStack, metaStr);
         return itemStack;
     }
@@ -296,6 +283,28 @@ public enum ItemStackUtil {
 
         public ItemStack getItem() {
             return item;
+        }
+
+        @Override
+        public String toString() {
+            return "ItemProbability{" +
+                    "probability=" + probability +
+                    ", item=" + item +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ItemProbability that = (ItemProbability) o;
+            return Double.compare(that.probability, probability) == 0 &&
+                    Objects.equals(item, that.item);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(probability, item);
         }
     }
 }

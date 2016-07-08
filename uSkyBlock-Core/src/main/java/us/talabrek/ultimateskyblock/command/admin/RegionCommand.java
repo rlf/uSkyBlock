@@ -6,20 +6,16 @@ import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import dk.lockfuglsang.minecraft.animation.AnimationHandler;
+import dk.lockfuglsang.minecraft.animation.BlockAnimation;
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import dk.lockfuglsang.minecraft.animation.Animation;
-import dk.lockfuglsang.minecraft.animation.AnimationHandler;
-import dk.lockfuglsang.minecraft.animation.BlockAnimation;
-import dk.lockfuglsang.minecraft.animation.ParticleAnimation;
-import us.talabrek.ultimateskyblock.command.completion.ParticleTabCompleter;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -38,16 +34,12 @@ public class RegionCommand extends CompositeCommand {
 
     private final AnimationHandler animationHandler;
     private int dash;
-    private int animCount;
-    private String animType;
-    private Particle particle;
     private Material material;
     private byte material_data;
 
     public RegionCommand(uSkyBlock plugin, final AnimationHandler animationHandler) {
         super("region|rg", "usb.admin.region", tr("region manipulations"));
         this.animationHandler = animationHandler;
-        addTab("particle", new ParticleTabCompleter());
         add(new AbstractCommand("show", tr("shows the borders of the current island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
@@ -55,7 +47,6 @@ public class RegionCommand extends CompositeCommand {
                     Player player = (Player) sender;
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
-                        setAnimType("block");
                         dash = 3;
                         setMaterial(Material.BRICK, (byte) 0);
                         showRegion(player, region);
@@ -76,7 +67,6 @@ public class RegionCommand extends CompositeCommand {
                     Player player = (Player) sender;
                     Chunk chunk = player.getLocation().getChunk();
                     Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
-                    setAnimType("block");
                     dash = 4;
                     setMaterial(Material.STAINED_GLASS, (byte) 4);
                     showChunk(player, chunkCoords);
@@ -95,7 +85,6 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getInnerChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
-                        setAnimType("block");
                         dash = 3;
                         setMaterial(Material.STAINED_GLASS, (byte) 11);
                         for (Vector2D v : borderRegions) {
@@ -122,7 +111,6 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
-                        setAnimType("block");
                         dash = 3;
                         setMaterial(Material.STAINED_GLASS, (byte) 3);
                         for (Region rg : borderRegions) {
@@ -146,7 +134,6 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getOuterChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
-                        setAnimType("block");
                         dash = 4;
                         setMaterial(Material.STAINED_GLASS, (byte) 15);
                         for (Vector2D v : borderRegions) {
@@ -261,21 +248,6 @@ public class RegionCommand extends CompositeCommand {
         showRegion(player, y, minP, maxP);
     }
 
-    public void setAnimType(String animType) {
-        this.animType = animType;
-    }
-    
-    public void setAnimCount(int animCount) {
-        this.animCount = animCount;
-    }
-
-    public void setParticle(Particle particle) {
-        if (particle == null) {
-            throw new IllegalArgumentException("particle cannot be null");
-        }
-        this.particle = particle;
-    }
-
     public void setMaterial(Material material, byte data) {
         if (material == null) {
             throw new IllegalArgumentException("material cannot be null");
@@ -285,12 +257,6 @@ public class RegionCommand extends CompositeCommand {
     }
 
     public synchronized void addAnimation(Player player, List<Location> points) {
-        Animation animation = null;
-        if (animType.equalsIgnoreCase("block")) {
-            animation = new BlockAnimation(player, points, material, material_data);
-        } else {
-            animation = new ParticleAnimation(player, points, particle, animCount);
-        }
-        animationHandler.addAnimation(animation);
+        animationHandler.addAnimation(new BlockAnimation(player, points, material, material_data));
     }
 }
