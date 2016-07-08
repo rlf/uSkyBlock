@@ -22,7 +22,7 @@ before_install:
 script:
   - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,${MC},we613,wg611 clean install
 before_deploy:
-  - mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-${MC}.jar
+  - mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-bukkit${MC}.jar
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
