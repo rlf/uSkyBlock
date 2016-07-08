@@ -7,6 +7,10 @@ branches:
 env:
   global:
     secure: dGzZ9hl0ezUCYs72+Z4LUgtny0qsUn3HibpBKo4hriRPMY8EQqaJfi1ZDQTKr3ctjJMtQtcgnlC0BujEV+1W2tObjSJsCAdEbzKYZijwRXSK5jT1sua3EQScKYelpv0z4fd9LIYJJ95xwXMNMmAFSjdu3fRDkxtGgIIKbka8YiE=
+env:
+  - MC=1.10
+  - MC=1.9
+  - MC=1.8
 notifications:
   email: false
 before_install:
@@ -16,13 +20,15 @@ before_install:
   - cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
   - cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
 script:
-  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,1.10,we613,wg611 install
+  - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,${MC},we613,wg611 clean install
+after_install:
+  - mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-${MC}.jar
 deploy:
   provider: releases
   api-key: ${GITHUB_TOKEN}
   file_glob: true
   file:
-  - uSkyBlock-Plugin/target/uSkyBlock.jar
+  - uSkyBlock-Plugin/target/uSkyBlock*.jar
   - uSkyBlock-Plugin/target/uSkyBlock-Plugin/gettext-report.txt
   - uSkyBlock-API/target/uSkyBlock-API-*.jar
   skip_cleanup: true
