@@ -18,7 +18,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -40,6 +43,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 public class NetherTerraFormEvents implements Listener {
     private final uSkyBlock plugin;
     private final Map<Material,List<MaterialUtil.MaterialProbability>> terraFormMap = new HashMap<>();
+    private final Map<String, Double> toolWeights = new HashMap<>();
     private static final Random RND = new Random(System.currentTimeMillis());
     private final double maxScan;
     private final double chanceWither;
@@ -62,6 +66,12 @@ public class NetherTerraFormEvents implements Listener {
                 if (mat != null) {
                     terraFormMap.put(mat, MaterialUtil.createProbabilityList(config.getStringList(key)));
                 }
+            }
+        }
+        config = plugin.getConfig().getConfigurationSection("nether.terraform-weight");
+        if (config != null) {
+            for (String tool : config.getKeys(false)) {
+                toolWeights.put(tool, config.getDouble(tool, 1d));
             }
         }
         maxScan = plugin.getConfig().getInt("nether.terraform-distance", 7);
@@ -96,6 +106,12 @@ public class NetherTerraFormEvents implements Listener {
         if (!terraFormMap.containsKey(block.getType())) {
             return; // Not a block we terra-form on.
         }
+        // TODO: 10/07/2016 - R4zorax: Handle dual-wielding (would break 1.8 compatibility)
+        ItemStack tool = event.getPlayer().getItemInHand();
+        if (tool == null || event.getBlock().getDrops(tool).isEmpty()) {
+            return; // Only terra-form when stuff is mined correctly
+        }
+        double toolWeight = getToolWeight(tool);
         Location playerLocation = player.getEyeLocation();
         Location blockLocation = LocationUtil.centerInBlock(block.getLocation());
         Vector v = new Vector(blockLocation.getX(), blockLocation.getY(), blockLocation.getZ());
@@ -103,11 +119,17 @@ public class NetherTerraFormEvents implements Listener {
         v.normalize();
         // Disable spawning above the player... enabling the player to clear a region
         if (v.getY() <= 0.76) {
-            List<Material> yield = getYield(block.getType());
+            List<Material> yield = getYield(block.getType(), toolWeight);
             for (Material mat : yield) {
                 spawnBlock(mat, blockLocation, v);
             }
         }
+    }
+
+    private Double getToolWeight(ItemStack tool) {
+        String toolType = MaterialUtil.getToolType(tool.getType());
+        Double d = toolWeights.get(toolType);
+        return d != null ? d : 1d;
     }
 
     private void spawnBlock(Material type, Location location, Vector v) {
@@ -187,10 +209,10 @@ public class NetherTerraFormEvents implements Listener {
         return locs;
     }
 
-    public List<Material> getYield(Material material) {
+    public List<Material> getYield(Material material, double toolWeight) {
         List<Material> copy = new ArrayList<>();
         for (MaterialUtil.MaterialProbability e : terraFormMap.get(material)) {
-            if (RND.nextDouble() < e.getProbability()) {
+            if (RND.nextDouble() < e.getProbability()*toolWeight) {
                 copy.add(e.getMaterial());
             }
         }
@@ -211,20 +233,23 @@ public class NetherTerraFormEvents implements Listener {
         }
     }
 
-    @EventHandler
+    /**
+     * Comes AFTER the SpawnEvents{@link #onCreatureSpawn(CreatureSpawnEvent)} - so cancelled will have effect
+     * @param e
+     */
+    @EventHandler(priority = EventPriority.HIGH)
     public void onCreatureSpawn(CreatureSpawnEvent e) {
-        if (!spawnEnabled ||e == null || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL || e.getEntity() == null) {
+        if (!spawnEnabled || e == null || e.isCancelled() || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL || e.getEntity() == null) {
             return;
         }
         if (!plugin.isSkyNether(e.getLocation().getWorld())) {
             return;
         }
-        if (e.getLocation().getBlockY() > 127) {
+        if (e.getLocation().getBlockY() > plugin.getSkyBlockNetherWorld().getMaxHeight()) {
             // Block spawning above nether...
             e.setCancelled(true);
             return;
         }
-        // TODO: 23/09/2015 - R4zorax: obey the spawn-limits
         if (e.getEntity() instanceof PigZombie) {
             Block block = e.getLocation().getBlock().getRelative(BlockFace.DOWN);
             if (isNetherFortressWalkway(block)) {
@@ -234,6 +259,7 @@ public class NetherTerraFormEvents implements Listener {
                     // Spawn Wither.
                     Skeleton mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.SKELETON);
                     mob.setSkeletonType(Skeleton.SkeletonType.WITHER);
+                    mob.getEquipment().setItemInHand(new ItemStack(Material.STONE_SWORD, 1));
                 } else if (p <= chanceWither+chanceBlaze) {
                     // Spawn Blaze
                     Blaze mob = (Blaze) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.BLAZE);

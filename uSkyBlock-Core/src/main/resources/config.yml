@@ -338,6 +338,15 @@ nether:
       - '{p=0.85}GLOWSTONE'
       - '{p=0.15}GLOWSTONE'
 
+  # Weights that is applied to the above terraform chances depending on the tool used
+  terraform-weight:
+    WOOD: 1.1
+    STONE: 1.0
+    IRON: 0.9
+    GOLD: 0
+    DIAMOND: 0.5
+
+  # The chances of changing a pigzombie when spawned on a netherbrick
   spawn-chances:
     enabled: true
     wither: 0.20
@@ -369,7 +378,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 52
+version: 53
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
