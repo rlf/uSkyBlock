@@ -330,9 +330,10 @@ nether:
     SOUL_SAND:
       - '{p=0.70}SOUL_SAND'
       - '{p=0.10}SOUL_SAND'
+      - '{p=0.05}GRAVEL'
     GRAVEL:
-      - '{p=0.60}GRAVEL'
-      - '{p=0.10}GRAVEL'
+      - '{p=0.15}GRAVEL'
+      - '{p=0.05}GRAVEL'
       - '{p=0.05}SOUL_SAND'
     GLOWSTONE:
       - '{p=0.85}GLOWSTONE'

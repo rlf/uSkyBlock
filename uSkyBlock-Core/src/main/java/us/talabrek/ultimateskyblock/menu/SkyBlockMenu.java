@@ -56,15 +56,15 @@ public class SkyBlockMenu {
     ItemStack kick = new ItemStack(301, 1);
     private List<PartyPermissionMenuItem> permissionMenuItems = Arrays.asList(
             new PartyPermissionMenuItem(biome, "canChangeBiome", "Change Biome",
-                    tr("change the islands's biome.")),
+                    tr("change the island's biome.")),
             new PartyPermissionMenuItem(lock, "canToggleLock", "Toggle Island Lock",
                     tr("toggle the island's lock.")),
             new PartyPermissionMenuItem(warpset, "canChangeWarp", "Set Island Warp",
                     tr("set the island's warp."),
-                    tr("set the island's warp,\nwhich allows non-group\nmembers to teleport to\n the island")),
+                    tr("set the island's warp,\nwhich allows non-group\nmembers to teleport to\nthe island.")),
             new PartyPermissionMenuItem(warptoggle, "canToggleWarp", "Toggle Island Warp",
                     tr("toggle the island's warp."),
-                    tr("toggle the\nisland's warp, allowing them\nto turn it on or off at anytime.\nbut not set the location.")),
+                    tr("toggle the island's warp,\nallowing them to turn it\non or off at anytime, but\nnot set the location.")),
             new PartyPermissionMenuItem(invite, "canInviteOthers", "Invite Players",
                     tr("invite others to the island."),
                     tr("invite\n" +
