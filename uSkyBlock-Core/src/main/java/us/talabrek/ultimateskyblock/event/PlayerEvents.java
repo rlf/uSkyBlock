@@ -234,15 +234,8 @@ public class PlayerEvents implements Listener {
             player.sendMessage(tr("\u00a74That island is \u00a7clocked.\u00a7e No teleporting to the island."));
         }
         if (!event.isCancelled()) {
-            PlayerInfo playerInfo = plugin.getPlayerInfo(player);
-            if (playerInfo != null && playerInfo.isClearInventoryOnNextEntry()) {
-                plugin.sync(new Runnable() {
-                    @Override
-                    public void run() {
-                        plugin.clearPlayerInventory(player);
-                    }
-                }, 50);
-            }
+            final PlayerInfo playerInfo = plugin.getPlayerInfo(player);
+            playerInfo.onTeleport(player);
         }
     }
 

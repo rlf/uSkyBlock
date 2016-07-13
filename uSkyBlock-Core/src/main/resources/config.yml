@@ -191,6 +191,14 @@ options:
     # The format used in /partytalk chat messages
     chat-format: '&9PARTY &r{DISPLAYNAME} &f>&b {MESSAGE}'
 
+    # Extra commands to execute when players join an island
+    join-commands:
+    - op:playsound block.enderchest.open block @p
+
+    # Extra commands to execute when players leave an island
+    leave-commands:
+    - op:playsound block.enderchest.close block @p
+
   # This section provide some performance tweaking configs
   advanced:
     # If true, display-name is looked up (might be performance intensive).
@@ -385,7 +393,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 54
+version: 55
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

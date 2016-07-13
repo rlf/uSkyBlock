@@ -124,7 +124,6 @@ public class InviteHandler implements Listener {
                 @Override
                 public void run() {
                     player.sendMessage(tr("\u00a7aYou have joined an island! Use /island party to see the other members."));
-                    // TODO: 29/12/2014 - R4zorax: Perhaps these steps should belong somewhere else?
                     addPlayerToParty(player, island);
                     plugin.homeTeleport(player, true);
                     plugin.clearPlayerInventory(player);

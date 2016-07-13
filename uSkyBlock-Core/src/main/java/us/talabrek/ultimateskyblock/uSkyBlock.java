@@ -1386,4 +1386,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 TimeUtil.millisAsTicks(delay),
                 TimeUtil.millisAsTicks(every));
     }
+
+    public void execCommands(Player player, List<String> cmdList) {
+        for (String cmd : cmdList) {
+            execCommand(player, cmd, false);
+        }
+    }
 }

@@ -373,4 +373,38 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     public boolean isClearInventoryOnNextEntry() {
         return playerData.getBoolean("clearInventoryOnNextEntry", false);
     }
+
+    public void onTeleport(final Player player) {
+        if (isClearInventoryOnNextEntry()) {
+            uSkyBlock.getInstance().sync(new Runnable() {
+                @Override
+                public void run() {
+                    uSkyBlock.getInstance().clearPlayerInventory(player);
+                }
+            }, 50);
+        }
+        List<String> pending = playerData.getStringList("pending-commands");
+        if (!pending.isEmpty()) {
+            uSkyBlock.getInstance().execCommands(player, pending);
+            playerData.set("pending-commands", null);
+            save();
+        }
+    }
+
+    public boolean execCommands(List<String> commands) {
+        if (commands == null || commands.isEmpty()) {
+            return true;
+        }
+        Player player = getPlayer();
+        if (player != null && player.isOnline()) {
+            uSkyBlock.getInstance().execCommands(player, commands);
+            return true;
+        } else {
+            List<String> pending = playerData.getStringList("pending-commands");
+            pending.addAll(commands);
+            playerData.set("pending-commands", pending);
+            save();
+            return false;
+        }
+    }
 }
