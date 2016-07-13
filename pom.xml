@@ -11,6 +11,7 @@
         <api.version>2.7.0</api.version>
         <bukkit-utils.version>1.7</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
+        <deluxechat.version>1.6</deluxechat.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
@@ -293,6 +294,11 @@
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-FAWE</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.clip.deluxechat</groupId>
+                <artifactId>DeluxeChatPlaceholderAPI</artifactId>
+                <version>${deluxechat.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -485,6 +485,10 @@
             <artifactId>MVdWPlaceholderAPI</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>me.clip.deluxechat</groupId>
+            <artifactId>DeluxeChatPlaceholderAPI</artifactId>
+        </dependency>
 
         <!-- TESTING -->
         <dependency>
