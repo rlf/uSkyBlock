@@ -176,6 +176,52 @@ msgstr "§7Gennemfør {0}"
 msgid "to unlock this rank"
 msgstr "for at låse denne rank op"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "Men du er helt alene!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "Men du råber i vinden..."
+
+msgid "But your fantasy friends are gone!"
+msgstr "Men dine fantasivenner er smuttet!"
+
+msgid "But you are Talking to your self!"
+msgstr "Men du taler til dig selv!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cUndskyld! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "snak med spillere på din ø"
+
+msgid "talk to your island party"
+msgstr "tal til medlemmerne af din ø"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eSpiller {0} har ingen ø!"
@@ -1362,30 +1408,8 @@ msgstr "§cADVARSEL: §9{0}§e kommer på besøg på din ø!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Den spiller har udelukket dig fra sin ø."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "Men du er helt alene!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "Men du råber i vinden..."
-
-msgid "But your fantasy friends are gone!"
-msgstr "Men dine fantasivenner er smuttet!"
-
-msgid "But you are Talking to your self!"
-msgstr "Men du taler til dig selv!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cUndskyld! {0}"
-
 msgid "general island command"
 msgstr "generel ø kommando"
-
-msgid "talk to players on your island"
-msgstr "snak med spillere på din ø"
-
-msgid "talk to your island party"
-msgstr "tal til medlemmerne af din ø"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eDu kan ikke bruge en anden ø's portaler!"
@@ -1737,8 +1761,8 @@ msgstr "falsk"
 msgid "Challenge Menu"
 msgstr "Udfordringer"
 
-msgid "change the islands's biome."
-msgstr "skift øens biome"
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "skift øens låse-tilstand"
@@ -1750,24 +1774,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"sæt øens besøgspunkt,\n"
-"der tillader ikke-medlemmer\n"
-"at teleportere til øen"
 
 msgid "toggle the island's warp."
 msgstr "aktiver/deaktiver øens besøgspunkt."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"aktiver/deaktiver øens besøgspunkt,\n"
-"tillad dem at deaktivere, men ikke\n"
-"ændre på besøgspunktet."
 
 msgid "invite others to the island."
 msgstr "inviter andre spillere til øen."

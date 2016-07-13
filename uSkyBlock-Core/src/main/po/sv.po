@@ -179,6 +179,52 @@ msgstr "§7Genomför {0}"
 msgid "to unlock this rank"
 msgstr "för att låsa upp denna rank"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "Men du är HELT ENSAM! :("
+
+msgid "But you are Yelling in the wind!"
+msgstr "Men du ropar i vinden!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "Dina fantasikompisar är inte online!"
+
+msgid "But you are Talking to your self!"
+msgstr "Men du pratar med dig själv!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cLedsen! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "prata med spelare på ön"
+
+msgid "talk to your island party"
+msgstr "prata med skyblockgruppen"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eSpelaren {0} har ingen ö!"
@@ -1357,30 +1403,8 @@ msgstr "§e{0} warpar till din ö just nu!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§cDen spelaren har förbjudig dig från att warpa till sin ö."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "Men du är HELT ENSAM! :("
-
-msgid "But you are Yelling in the wind!"
-msgstr "Men du ropar i vinden!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "Dina fantasikompisar är inte online!"
-
-msgid "But you are Talking to your self!"
-msgstr "Men du pratar med dig själv!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cLedsen! {0}"
-
 msgid "general island command"
 msgstr "allmänt skyblock kommando"
-
-msgid "talk to players on your island"
-msgstr "prata med spelare på ön"
-
-msgid "talk to your island party"
-msgstr "prata med skyblockgruppen"
 
 msgid "§eYou can not use another islands portals!"
 msgstr ""
@@ -1727,8 +1751,8 @@ msgstr "falskt"
 msgid "Challenge Menu"
 msgstr "Uppdragsmeny"
 
-msgid "change the islands's biome."
-msgstr "byt öns biome"
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "aktivera eller inaktivera öns lås"
@@ -1740,26 +1764,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"ställ in öns warp,\n"
-"vilket tillåter folk utifrån\n"
-"att teleportera till\n"
-" Skyblockön"
 
 msgid "toggle the island's warp."
 msgstr "aktivera eller inaktivera öns warp"
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"aktivera eller inaktivera\n"
-"öns warp, tillåter spelare\n"
-"att warpa till den när som helst.\n"
-"men inte ställa in positionen."
 
 msgid "invite others to the island."
 msgstr "bjud in andra till ön"

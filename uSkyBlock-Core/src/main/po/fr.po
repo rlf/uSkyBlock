@@ -176,6 +176,52 @@ msgstr "§7Completez {0}"
 msgid "to unlock this rank"
 msgstr "pour débloquer ce rang"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "Mais vous êtes tout seul !"
+
+msgid "But you are Yelling in the wind!"
+msgstr "Mais vous criez dans le vent !"
+
+msgid "But your fantasy friends are gone!"
+msgstr "Mais vos amis fantastiques sont partis !"
+
+msgid "But you are Talking to your self!"
+msgstr "Mais vous parlez à vous-même !"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cDésolé ! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "parler aux membres de votre île"
+
+msgid "talk to your island party"
+msgstr "parler aux membres de votre groupe"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eLe joueur {0} n'a pas d'île !"
@@ -1368,30 +1414,8 @@ msgstr "§cATTENTION: §9{0}§e a été téléporte à votre île !"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Ce jour vous a interdit de vous téléporter à son île."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "Mais vous êtes tout seul !"
-
-msgid "But you are Yelling in the wind!"
-msgstr "Mais vous criez dans le vent !"
-
-msgid "But your fantasy friends are gone!"
-msgstr "Mais vos amis fantastiques sont partis !"
-
-msgid "But you are Talking to your self!"
-msgstr "Mais vous parlez à vous-même !"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cDésolé ! {0}"
-
 msgid "general island command"
 msgstr "commandes générales"
-
-msgid "talk to players on your island"
-msgstr "parler aux membres de votre île"
-
-msgid "talk to your island party"
-msgstr "parler aux membres de votre groupe"
 
 msgid "§eYou can not use another islands portals!"
 msgstr ""
@@ -1740,8 +1764,8 @@ msgstr "faux"
 msgid "Challenge Menu"
 msgstr "Menu des challenges"
 
-msgid "change the islands's biome."
-msgstr "changer le biome de l'île"
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "activer le vérrouillage de l'île"
@@ -1753,26 +1777,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"définir le warp de l'île\n"
-"qui permet au membres\n"
-"qui ne font pas partit de l'île\n"
-"de se téléporter"
 
 msgid "toggle the island's warp."
 msgstr "activer le warp de l'île"
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"activer le\n"
-"warp de l'île, autoriser de\n"
-"l'activer ou désactiver mais\n"
-"ne peuvent définir l'emplacement."
 
 msgid "invite others to the island."
 msgstr "inviter d'autres joueurs sur l'île"

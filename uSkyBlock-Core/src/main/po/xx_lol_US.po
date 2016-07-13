@@ -175,6 +175,52 @@ msgstr "§7Complete {0}"
 msgid "to unlock this rank"
 msgstr "to unlock this rank"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "But you be ALLLLLLL ALOOOOONE!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "But you be Yelling in teh wind!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "But yoor fantasy friends be gone!"
+
+msgid "But you are Talking to your self!"
+msgstr "But you be Talking to yoor self!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cSorry! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "talk to kittehs on yoor cathouz"
+
+msgid "talk to your island party"
+msgstr "talk to yoor cathouz party"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eKitteh {0} haz noe cathouz!"
@@ -1359,30 +1405,8 @@ msgstr "§cWARNING: §9{0}§e  iz warping to yoor cathouz!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4That kitteh haz forbidden you from warping to their cathouz."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "But you be ALLLLLLL ALOOOOONE!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "But you be Yelling in teh wind!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "But yoor fantasy friends be gone!"
-
-msgid "But you are Talking to your self!"
-msgstr "But you be Talking to yoor self!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cSorry! {0}"
-
 msgid "general island command"
 msgstr "general cathouz command"
-
-msgid "talk to players on your island"
-msgstr "talk to kittehs on yoor cathouz"
-
-msgid "talk to your island party"
-msgstr "talk to yoor cathouz party"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eYou can not use another islands portals!"
@@ -1731,8 +1755,8 @@ msgstr "false"
 msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
-msgid "change the islands's biome."
-msgstr "change teh islands's baium."
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "toggle teh cathouz's lock."
@@ -1744,26 +1768,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"set teh cathouz's warp,\n"
-"which allows non-group\n"
-"members to teleport to\n"
-" teh cathouz"
 
 msgid "toggle the island's warp."
 msgstr "toggle teh cathouz's warp."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"toggle teh\n"
-" cathouz's warp, allowing 'dem\n"
-"to turn it on or off at anytime.\n"
-"but not set teh location."
 
 msgid "invite others to the island."
 msgstr "invite others to teh cathouz."
@@ -2562,6 +2578,31 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "change the islands's biome."
+#~ msgstr "change teh islands's baium."
+
+#~ msgid ""
+#~ "set the island's warp,\n"
+#~ "which allows non-group\n"
+#~ "members to teleport to\n"
+#~ " the island"
+#~ msgstr ""
+#~ "set teh cathouz's warp,\n"
+#~ "which allows non-group\n"
+#~ "members to teleport to\n"
+#~ " teh cathouz"
+
+#~ msgid ""
+#~ "toggle the\n"
+#~ "island's warp, allowing them\n"
+#~ "to turn it on or off at anytime.\n"
+#~ "but not set the location."
+#~ msgstr ""
+#~ "toggle teh\n"
+#~ " cathouz's warp, allowing 'dem\n"
+#~ "to turn it on or off at anytime.\n"
+#~ "but not set teh location."
 
 #~ msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
 #~ msgstr ""

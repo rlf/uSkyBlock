@@ -177,6 +177,52 @@ msgstr "§7Выполнено {0}"
 msgid "to unlock this rank"
 msgstr "для разблокировки звания"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "Но вы в полном одиночестве!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "Но вы кричите ветру!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "Но ваши придуманные друзья ушли!"
+
+msgid "But you are Talking to your self!"
+msgstr "Но вы разговариваете сами с собой!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cИзвините! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "говорить с игроками на своем острове"
+
+msgid "talk to your island party"
+msgstr "говорить с участниками вашего острова"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eИгрок {0} не имеет острова!"
@@ -1369,30 +1415,8 @@ msgstr "§cВНИМАНИЕ: §9{0}§e переместился на ваш ос
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Этот игрок запретил вам перемещаться на свой остров."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "Но вы в полном одиночестве!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "Но вы кричите ветру!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "Но ваши придуманные друзья ушли!"
-
-msgid "But you are Talking to your self!"
-msgstr "Но вы разговариваете сами с собой!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cИзвините! {0}"
-
 msgid "general island command"
 msgstr "основные команды острова"
-
-msgid "talk to players on your island"
-msgstr "говорить с игроками на своем острове"
-
-msgid "talk to your island party"
-msgstr "говорить с участниками вашего острова"
 
 msgid "§eYou can not use another islands portals!"
 msgstr ""
@@ -1734,8 +1758,8 @@ msgstr ""
 msgid "Challenge Menu"
 msgstr "Меню заданий"
 
-msgid "change the islands's biome."
-msgstr "изменять биом острова"
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "переключать блокировку острова."
@@ -1747,26 +1771,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"Установка точки перемещения,\n"
-"которая позволит приходить\n"
-"игрокам - не участникам\n"
-"острова"
 
 msgid "toggle the island's warp."
 msgstr "переключать точку перемещения."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"переключение\n"
-"точки перемещения возможно\n"
-"выключать и включать в любое время,\n"
-"но не устанавливать место перемещения."
 
 msgid "invite others to the island."
 msgstr "приглашать других на остров"

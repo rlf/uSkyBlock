@@ -173,6 +173,52 @@ msgstr ""
 msgid "to unlock this rank"
 msgstr ""
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr ""
+
+msgid "But you are Yelling in the wind!"
+msgstr ""
+
+msgid "But your fantasy friends are gone!"
+msgstr ""
+
+msgid "But you are Talking to your self!"
+msgstr ""
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr ""
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr ""
+
+msgid "talk to your island party"
+msgstr ""
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr ""
@@ -1318,29 +1364,7 @@ msgstr ""
 msgid "§4That player has forbidden you from warping to their island."
 msgstr ""
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr ""
-
-msgid "But you are Yelling in the wind!"
-msgstr ""
-
-msgid "But your fantasy friends are gone!"
-msgstr ""
-
-msgid "But you are Talking to your self!"
-msgstr ""
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr ""
-
 msgid "general island command"
-msgstr ""
-
-msgid "talk to players on your island"
-msgstr ""
-
-msgid "talk to your island party"
 msgstr ""
 
 msgid "§eYou can not use another islands portals!"
@@ -1678,7 +1702,7 @@ msgstr ""
 msgid "Challenge Menu"
 msgstr ""
 
-msgid "change the islands's biome."
+msgid "change the island's biome."
 msgstr ""
 
 msgid "toggle the island's lock."
@@ -1691,17 +1715,17 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
 
 msgid "toggle the island's warp."
 msgstr ""
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
 
 msgid "invite others to the island."

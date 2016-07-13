@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -176,6 +176,52 @@ msgstr "§7Complete §a{0}"
 
 msgid "to unlock this rank"
 msgstr "to unlock this rank"
+
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "§9* §7But you are ALLLLLLL ALOOOOONE!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "§9* §7But you are Yelling in the wind!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "§9* §7But your fantasy friends are gone!"
+
+msgid "But you are Talking to your self!"
+msgstr "§9* §7But you are Talking to your self!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§4* §7Sorry! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "talk to players on your island"
+
+msgid "talk to your island party"
+msgstr "talk to your island party"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -1376,30 +1422,8 @@ msgstr "§4* WARNING: §6{0}§7 is warping to your island!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4* §7That player has forbidden you from warping to their island."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "§9* §7But you are ALLLLLLL ALOOOOONE!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "§9* §7But you are Yelling in the wind!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "§9* §7But your fantasy friends are gone!"
-
-msgid "But you are Talking to your self!"
-msgstr "§9* §7But you are Talking to your self!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§4* §7Sorry! {0}"
-
 msgid "general island command"
 msgstr "general island command"
-
-msgid "talk to players on your island"
-msgstr "talk to players on your island"
-
-msgid "talk to your island party"
-msgstr "talk to your island party"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§9* §7You can not use another islands portals!"
@@ -1756,8 +1780,8 @@ msgstr "false"
 msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
-msgid "change the islands's biome."
-msgstr "change the island's biome."
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "toggle the island's lock."
@@ -1769,26 +1793,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"set the island's warp,\n"
-"which allows non-group\n"
-"members to teleport to\n"
-"the island"
 
 msgid "toggle the island's warp."
 msgstr "toggle the island's warp."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
-msgstr ""
 "toggle the island's warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
+msgstr ""
 
 msgid "invite others to the island."
 msgstr "invite others to the island."

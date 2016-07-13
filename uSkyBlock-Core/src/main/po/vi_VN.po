@@ -177,6 +177,52 @@ msgstr "§7Hoàn thành nhiệm vụ {0}"
 msgid "to unlock this rank"
 msgstr "Để mở mốc này"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "Bạn vẫn CÔÔÔÔÔÔÔÔ ĐƠNNNNNNNNNN"
+
+msgid "But you are Yelling in the wind!"
+msgstr "Gào thét trong cùng cuồng phong"
+
+msgid "But your fantasy friends are gone!"
+msgstr "Người bạn thú vị của bạn đã rời khỏi"
+
+msgid "But you are Talking to your self!"
+msgstr "Bạn đang độc thoại"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cXin lỗi! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "trò chuyện với người chơi trên đảo"
+
+msgid "talk to your island party"
+msgstr "trò chuyện với thành viên trong đảo"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eNgười chơi {0} không có đảo!"
@@ -1347,30 +1393,8 @@ msgstr "§cCảnh báoL §9{0}§e đang dịch chuyển tới đảo của bạn
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Bạn bị người chơi này cấm dịch chuyển tơi đảo này"
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "Bạn vẫn CÔÔÔÔÔÔÔÔ ĐƠNNNNNNNNNN"
-
-msgid "But you are Yelling in the wind!"
-msgstr "Gào thét trong cùng cuồng phong"
-
-msgid "But your fantasy friends are gone!"
-msgstr "Người bạn thú vị của bạn đã rời khỏi"
-
-msgid "But you are Talking to your self!"
-msgstr "Bạn đang độc thoại"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cXin lỗi! {0}"
-
 msgid "general island command"
 msgstr "lệnh thông thường"
-
-msgid "talk to players on your island"
-msgstr "trò chuyện với người chơi trên đảo"
-
-msgid "talk to your island party"
-msgstr "trò chuyện với thành viên trong đảo"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eBạn không thể dùng cổng dịch chuyển ở đảo khác"
@@ -1713,8 +1737,8 @@ msgstr "sai"
 msgid "Challenge Menu"
 msgstr "Danh sách thử thách"
 
-msgid "change the islands's biome."
-msgstr "chuyển vùng"
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "bật tắt khoá đảo"
@@ -1726,24 +1750,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"thiết đặt điểm dịch chuyển của đảo,\n"
-"cho phép người ngoài đảo dịch chuyến đến."
 
 msgid "toggle the island's warp."
 msgstr "bật tắt điểm dịch chuyển của đảo"
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"bật tắt điểm dịch chuyển,\n"
-"cho phép bạn kích hoạt hoặc vô hiệu\n"
-"chức năng này.\n"
-"Nhưng không thiết đặt vị trí"
 
 msgid "invite others to the island."
 msgstr "mời người chơi khác vào đảo"

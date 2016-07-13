@@ -175,6 +175,52 @@ msgstr "§7를 완료하여 {0} 랭크를"
 msgid "to unlock this rank"
 msgstr "잠금해제 하세요"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "하지만 당신은 와아아아아안전 호오오온자!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "하지만 당신은 바람 속에서 외칩니다!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "하지만 당신의 상상속 친구들은 가버렸죠!"
+
+msgid "But you are Talking to your self!"
+msgstr "하지만 당신은 자신한테 말을 걸고 있어요!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§c죄송합니다! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "당신의 섬에 있는 플레이어에게 말을 겁니다"
+
+msgid "talk to your island party"
+msgstr "당신의 섬의 파티에게 말을 겁니다"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§e플레이어 {0}는 섬이 없습니다!"
@@ -1366,30 +1412,8 @@ msgstr "§c경고: §9{0}§e이 당신의 섬으로 워프하는 중입니다!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4그 플레이어가 당신이 그들의 섬으로 워프하는 것을 금지했습니다."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "하지만 당신은 와아아아아안전 호오오온자!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "하지만 당신은 바람 속에서 외칩니다!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "하지만 당신의 상상속 친구들은 가버렸죠!"
-
-msgid "But you are Talking to your self!"
-msgstr "하지만 당신은 자신한테 말을 걸고 있어요!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§c죄송합니다! {0}"
-
 msgid "general island command"
 msgstr "일반적인 섬 커맨드"
-
-msgid "talk to players on your island"
-msgstr "당신의 섬에 있는 플레이어에게 말을 겁니다"
-
-msgid "talk to your island party"
-msgstr "당신의 섬의 파티에게 말을 겁니다"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
@@ -1741,8 +1765,8 @@ msgstr "거짓"
 msgid "Challenge Menu"
 msgstr "도전과제 메뉴"
 
-msgid "change the islands's biome."
-msgstr "섬의 생태계를 바꿉니다."
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "섬의 자물쇠를 토글합니다."
@@ -1754,26 +1778,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"그룹 아닌 멤버들을,\n"
-"섬으로 텔레포트하게 하는\n"
-"섬의 워프를\n"
-"지정하세요"
 
 msgid "toggle the island's warp."
 msgstr "섬의 워프를 토글합니다."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"위치를 지정하지 않고\n"
-"그들이 언제나 켰다 껐다 할수 있는\n"
-"섬의 워프를\n"
-"토글합니다."
 
 msgid "invite others to the island."
 msgstr "다른사람을 섬으로 초대합니다."

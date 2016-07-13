@@ -176,6 +176,52 @@ msgstr "§7Voltooi {0}"
 msgid "to unlock this rank"
 msgstr "om de volgende rang te openen"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "Maar je bent HELEMAAAAAL ALLEEEEEEN!!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "Maar je Schreeuwen tegen de wind in!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "Maar je fantasie vrienden zijn verdwenen!"
+
+msgid "But you are Talking to your self!"
+msgstr "Maar je Praat alleen tegen jezelf!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cSorry! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "praat met spelers op je eiland"
+
+msgid "talk to your island party"
+msgstr "praat met je party leden"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§eSpeler {0} heeft geen eiland!"
@@ -1385,30 +1431,8 @@ msgstr "§cLET OP: §9{0}§e warped naar je eiland!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen"
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "Maar je bent HELEMAAAAAL ALLEEEEEEN!!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "Maar je Schreeuwen tegen de wind in!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "Maar je fantasie vrienden zijn verdwenen!"
-
-msgid "But you are Talking to your self!"
-msgstr "Maar je Praat alleen tegen jezelf!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cSorry! {0}"
-
 msgid "general island command"
 msgstr "algemeen eiland command"
-
-msgid "talk to players on your island"
-msgstr "praat met spelers op je eiland"
-
-msgid "talk to your island party"
-msgstr "praat met je party leden"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eJe kan alleen portals gebruiken op je eigen eiland!"
@@ -1764,8 +1788,8 @@ msgstr "false"
 msgid "Challenge Menu"
 msgstr "Uitdagingen Menu "
 
-msgid "change the islands's biome."
-msgstr "de biome veranderen op het eiland."
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "het eiland op slot zetten."
@@ -1777,26 +1801,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"set het eiland's warp,\n"
-"hiermee kunnen niet-party\n"
-"leden teleporteren naar\n"
-"je eiland."
 
 msgid "toggle the island's warp."
 msgstr "de warp aan en uit zetten."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"eiland schakelaar van de\n"
-"warp, hiermee kunt je de\n"
-"warp aan en uit zetten, maar\n"
-"niet de lokatie van de warp."
 
 msgid "invite others to the island."
 msgstr "andere spelers uitnodigen."

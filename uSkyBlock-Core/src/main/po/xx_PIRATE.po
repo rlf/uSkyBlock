@@ -175,6 +175,52 @@ msgstr "§7Complete {0}"
 msgid "to unlock this rank"
 msgstr "to unlock this rank"
 
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "But ye be ALLLLLLL ALOOOOONE!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "But ye be Yellin' in the wind!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "But yer fantasy friends be gone!"
+
+msgid "But you are Talking to your self!"
+msgstr "But ye be Talkin' to yer self!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§cSorry! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "talk to pirates in yer hideout"
+
+msgid "talk to your island party"
+msgstr "talk to yer hideout party"
+
 #, java-format
 msgid "§ePlayer {0} has no island!"
 msgstr "§ePirate {0} has nay hideout!"
@@ -1355,30 +1401,8 @@ msgstr "§cWARNING: §9{0}§e be warpin'' to yer hideout!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4That pirate has forbidden ye from warpin' to their hideout."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "But ye be ALLLLLLL ALOOOOONE!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "But ye be Yellin' in the wind!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "But yer fantasy friends be gone!"
-
-msgid "But you are Talking to your self!"
-msgstr "But ye be Talkin' to yer self!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§cSorry! {0}"
-
 msgid "general island command"
 msgstr "general hideout command"
-
-msgid "talk to players on your island"
-msgstr "talk to pirates in yer hideout"
-
-msgid "talk to your island party"
-msgstr "talk to yer hideout party"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eYe can not use another islands portals!"
@@ -1726,8 +1750,8 @@ msgstr "false"
 msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
-msgid "change the islands's biome."
-msgstr "change the islands's biome."
+msgid "change the island's biome."
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "toggle the hideout's lock."
@@ -1739,26 +1763,18 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"set the hideout's warp,\n"
-"which allows non-group\n"
-"members to teleport to\n"
-" the hideout"
 
 msgid "toggle the island's warp."
 msgstr "toggle the hideout's warp."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"toggle the\n"
-" hideout's warp, allowin' 'em\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
 
 msgid "invite others to the island."
 msgstr "invite others to the hideout."
@@ -2556,6 +2572,31 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "change the islands's biome."
+#~ msgstr "change the islands's biome."
+
+#~ msgid ""
+#~ "set the island's warp,\n"
+#~ "which allows non-group\n"
+#~ "members to teleport to\n"
+#~ " the island"
+#~ msgstr ""
+#~ "set the hideout's warp,\n"
+#~ "which allows non-group\n"
+#~ "members to teleport to\n"
+#~ " the hideout"
+
+#~ msgid ""
+#~ "toggle the\n"
+#~ "island's warp, allowing them\n"
+#~ "to turn it on or off at anytime.\n"
+#~ "but not set the location."
+#~ msgstr ""
+#~ "toggle the\n"
+#~ " hideout's warp, allowin' 'em\n"
+#~ "to turn it on or off at anytime.\n"
+#~ "but not set the location."
 
 #~ msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
 #~ msgstr "§4Sorry!§e A protect-all be already runnin'. Let it complete first."

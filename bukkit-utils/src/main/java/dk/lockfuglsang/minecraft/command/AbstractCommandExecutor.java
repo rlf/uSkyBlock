@@ -17,6 +17,10 @@ public class AbstractCommandExecutor extends CompositeCommand implements Command
         super(name, permission, description);
     }
 
+    public AbstractCommandExecutor(String name, String permission, String params, String description) {
+        super(name, permission, params, description);
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
         if (!CommandManager.isRequirementsMet(sender, this, args)) {
@@ -31,7 +35,7 @@ public class AbstractCommandExecutor extends CompositeCommand implements Command
             }
             showUsage(sender, 1);
         } else {
-            return super.execute(sender, alias, new HashMap<String, Object>(), args);
+            return execute(sender, alias, new HashMap<String, Object>(), args);
         }
         return true;
     }

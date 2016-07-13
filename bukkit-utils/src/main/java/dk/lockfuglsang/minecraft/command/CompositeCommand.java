@@ -133,6 +133,9 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
             sender.sendMessage(msg.split("\n"));
             return;
         }
+        if (getUsage() != null && !getUsage().isEmpty()) {
+            msg += "\u00a77" + getUsage();
+        }
         List<String> cmds = new ArrayList<>(commandMap.keySet());
         Collections.sort(cmds);
         int realPage = 0;
