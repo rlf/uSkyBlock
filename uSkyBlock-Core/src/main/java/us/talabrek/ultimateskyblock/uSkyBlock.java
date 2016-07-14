@@ -90,6 +90,7 @@ import us.talabrek.ultimateskyblock.signs.SignLogic;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
+import us.talabrek.ultimateskyblock.util.ServerUtil;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
@@ -1248,8 +1249,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         msg += pre("\u00a79  State: d={0}, r={1}, i={2}, p={3}, n={4}, awe={5}\n", Settings.island_distance, Settings.island_radius,
                 islandLogic.getSize(), playerLogic.getSize(),
                 Settings.nether_enabled, AsyncWorldEditHandler.isAWE());
-        msg += pre("\u00a77------------------------------\n");
         msg += pre("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
+        msg += pre("\u00a79  State: online={0}, bungee={1}\n", getServer().getOnlineMode(), ServerUtil.isBungeeEnabled());
         msg += pre("\u00a77------------------------------\n");
         for (String[] dep : depends) {
             Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);

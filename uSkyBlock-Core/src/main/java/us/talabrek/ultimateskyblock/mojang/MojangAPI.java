@@ -10,8 +10,6 @@
 package us.talabrek.ultimateskyblock.mojang;
 
 
-import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.json.simple.JSONArray;
@@ -20,7 +18,6 @@ import org.json.simple.parser.JSONParser;
 import us.talabrek.ultimateskyblock.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -59,16 +56,7 @@ public class MojangAPI {
     private int failuresInRow = 0;
     private long lastFailure = 0;
 
-    private boolean isBungeeMode;
-
     public MojangAPI() {
-        isBungeeMode = false;
-        File spigotYml = new File(".", "spigot.yml");
-        if (spigotYml.exists()) {
-            YmlConfiguration spigotConfig = new YmlConfiguration();
-            FileUtil.readConfig(spigotConfig, spigotYml);
-            isBungeeMode = spigotConfig.getBoolean("settings.bungeecord", false);
-        }
     }
 
     public void fetchUUIDs(List<String> names, NameUUIDConsumer consumer, ProgressCallback callback) {
@@ -89,7 +77,6 @@ public class MojangAPI {
     }
 
     private boolean isOnlineMode() {
-        // Strictly speaking, we don't know if this is online-mode
         return Bukkit.getOnlineMode();
     }
 
