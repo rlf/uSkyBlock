@@ -4,6 +4,8 @@ This is a continually updated and custom version of Talabrek's Ultimate SkyBlock
 
 We are on [Spigot](https://www.spigotmc.org/resources/uskyblock.2280/) and [Bukkit](http://dev.bukkit.org/bukkit-plugins/uskyblock/)
 
+Currently [Open Issues](https://github.com/rlf/uSkyBlock/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22T%20ready%20for%20test%22%20-label%3A%22T%20tested%20awaiting%20reporter%22)
+
 # Installation
 
 This version depends on the following plugins:
