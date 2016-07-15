@@ -16,6 +16,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 public class BanCommand extends RequireIslandCommand {
     public BanCommand(uSkyBlock plugin) {
         super(plugin, "ban|unban", "usb.island.ban", "player", tr("ban/unban a player from your island."));
+        addFeaturePermission("usb.exempt.ban", tr("exempts user from being banned"));
     }
 
     @Override

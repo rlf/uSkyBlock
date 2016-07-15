@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.util;
 
 import dk.lockfuglsang.minecraft.nbt.NBTUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -8,6 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Conversion to ItemStack from strings.
@@ -167,6 +171,23 @@ public enum ItemStackUtil {
 
     public static String asString(ItemStack item) {
         return item.getTypeId() + (item.getDurability() != 0 ? ":" + item.getDurability() : "") + ":" + item.getAmount();
+    }
+
+    public static String asShortString(List<ItemStack> items) {
+        List<String> shorts = new ArrayList<>();
+        for (ItemStack item : items) {
+            shorts.add(asShortString(item));
+        }
+        return  "[" + FormatUtil.join(shorts, ", ") + "]";
+    }
+
+    public static String asShortString(ItemStack item) {
+        if (item == null) {
+            return "";
+        }
+        return item.getAmount() > 1
+                ? tr("\u00a7f{0}x \u00a77{1}", item.getAmount(), VaultHandler.getItemName(item))
+                : tr("\u00a77{0}", VaultHandler.getItemName(item));
     }
 
     /**

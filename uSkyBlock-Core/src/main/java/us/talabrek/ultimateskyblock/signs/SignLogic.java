@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.wordWrap;
 
 /**
  * Responsible for keeping track of signs.

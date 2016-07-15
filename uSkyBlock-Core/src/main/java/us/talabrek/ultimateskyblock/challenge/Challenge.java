@@ -6,7 +6,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,13 +15,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.*;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.*;
 
 /**
  * The data-object for a challenge
  */
 public class Challenge {
-    public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*])(?<inc>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
+    public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
     public static final int MAX_DETAILS = 11;
 
     public enum Type { PLAYER, ISLAND, ISLAND_LEVEL;

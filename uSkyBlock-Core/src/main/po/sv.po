@@ -660,6 +660,10 @@ msgstr "§eInga orphans är registrerade."
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
+#, java-format
+msgid "adds perks: {0}"
+msgstr ""
+
 msgid "protects all islands (time consuming)"
 msgstr "skyddar alla öar (tar tid)"
 
@@ -961,6 +965,9 @@ msgstr ""
 msgid "ban/unban a player from your island."
 msgstr "banna eller unbanna en spelare från din ö."
 
+msgid "exempts user from being banned"
+msgstr ""
+
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eFöljande spelare är bannad från att warpa till din ö:"
 
@@ -1004,6 +1011,13 @@ msgstr "§eDu har blivit unbannad från att warpa till {0}s ö."
 msgid "change the biome of the island"
 msgstr "byt öns biome"
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§cDu saknar rättighet att byta biome på nuvarande ö."
@@ -1036,6 +1050,9 @@ msgstr "§cDu saknar rättighet att byta öns biome till den typen."
 msgid "create an island"
 msgstr "skapa en ö"
 
+msgid "exempt player from create-cooldown"
+msgstr ""
+
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -1064,6 +1081,9 @@ msgstr "§cDin ö håller på att genereras, du kan inte teleportera hem just nu
 
 msgid "check your or anothers island info"
 msgstr "kolla din eller en annans ös info"
+
+msgid "allows user to see others island info"
+msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§cSkyblock level är inaktiverat. Vänligen kontakta en administratör."
@@ -1186,6 +1206,9 @@ msgstr "§cDu måste vara i Skyblockvärlden för att lämna din grupp!"
 msgid "check your or anothers island level"
 msgstr "kolla din ös eller någon annans ös skyblock level"
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§eInformation om {0}s ö:"
@@ -1254,6 +1277,9 @@ msgstr "§cIngen ö hittades! §eAnvänd §b/island create§e för att få en"
 msgid "delete your island and start a new one."
 msgstr "ta bort din ö och starta en ny."
 
+msgid "exempt player from restart-cooldown"
+msgstr ""
+
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
@@ -1317,6 +1343,9 @@ msgstr "§cDu saknar rättighet att aktivera/inaktivera öns warp!"
 
 msgid "display the top10 of islands"
 msgstr "visar topp 10 av alla öar"
+
+msgid "enables user to all-ways generate top-ten (no caching)"
+msgstr ""
 
 msgid "trust/untrust a player to help on your island."
 msgstr "litar på en annan spelare att hjälpa dig på ön."
@@ -1405,6 +1434,21 @@ msgstr "§cDen spelaren har förbjudig dig från att warpa till sin ö."
 
 msgid "general island command"
 msgstr "allmänt skyblock kommando"
+
+msgid "allows user to bypass cooldowns"
+msgstr ""
+
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
+msgstr ""
 
 msgid "§eYou can not use another islands portals!"
 msgstr ""

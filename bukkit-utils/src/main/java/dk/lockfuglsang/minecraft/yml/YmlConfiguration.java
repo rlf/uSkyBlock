@@ -22,6 +22,9 @@ public class YmlConfiguration extends YamlConfiguration {
         return commentParser.getCommentMap();
     }
 
+    public void addComment(String path, String comment) {
+        commentParser.addComment(path, comment);
+    }
     public void addComments(Map<String,String> comments) {
         commentParser.addComments(comments);
     }

@@ -7,7 +7,7 @@ import us.talabrek.ultimateskyblock.api.event.IslandChatEvent;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 
 import java.util.Arrays;
 import java.util.Collections;

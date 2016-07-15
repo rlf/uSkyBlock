@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.player;
 
 import org.bukkit.inventory.ItemStack;
+import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,7 +97,7 @@ public class Perk {
                 (monsters > 0 ? "monsters:" + monsters +"\n" : "") +
                 (villagers > 0 ? "villagers:" + villagers + "\n" : "") +
                 (golems > 0 ? "golems:" + golems + "\n" : "") +
-                (!extraItems.isEmpty() ? "extraItems:" + extraItems +"\n" : "") +
+                (!extraItems.isEmpty() ? "extraItems:" + ItemStackUtil.asShortString(extraItems) +"\n" : "") +
                 (rewBonus > 0 ? "rewBonus:" + rewBonus +"\n" : "") +
                 (hungerReduction > 0 ? "hungerReduction:" + hungerReduction +"\n" : "") +
                 (!schematics.isEmpty() ? "schematics:" + schematics +"\n" : "");

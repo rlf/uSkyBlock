@@ -3,7 +3,7 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import javax.annotation.Nullable;

@@ -12,13 +12,12 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ import java.util.regex.Matcher;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 /**
  * The home of challenge business logic.
@@ -180,6 +179,7 @@ public class ChallengeLogic {
             case '-':
                 return amount - inc * timesCompleted; // Why?
             case '*':
+            case '^':
                 return amount * (int)Math.pow(inc, timesCompleted); // Oh, my god! Just do the time m8!
             case '/':
                 return amount / (int)Math.pow(inc, timesCompleted); // Yay! Free stuff!!!

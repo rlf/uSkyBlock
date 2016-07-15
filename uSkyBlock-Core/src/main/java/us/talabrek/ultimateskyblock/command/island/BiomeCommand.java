@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.command.island;
 
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.async.Callback;
@@ -8,18 +9,38 @@ import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class BiomeCommand extends RequireIslandCommand {
+    public static final Map<String, Biome> BIOMES = new HashMap<String, Biome>() {
+        {
+            put("ocean", Biome.OCEAN);
+            put("jungle", Biome.JUNGLE);
+            put("hell", Biome.HELL);
+            put("sky", Biome.SKY);
+            put("mushroom", Biome.MUSHROOM_ISLAND);
+            put("swampland", Biome.SWAMPLAND);
+            put("taiga", Biome.TAIGA);
+            put("desert", Biome.DESERT);
+            put("forest", Biome.FOREST);
+            put("plains", Biome.PLAINS);
+            put("extreme_hills", Biome.EXTREME_HILLS);
+            put("deep_ocean", Biome.DEEP_OCEAN);
+        }
+    };
     private final SkyBlockMenu menu;
 
     public BiomeCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super(plugin, "biome|b", null, "biome", tr("change the biome of the island"));
+        super(plugin, "biome|b", "usb.biome", "biome", tr("change the biome of the island"));
         this.menu = menu;
+        addFeaturePermission("usb.exempt.cooldown.biome", tr("exempt player from biome-cooldown"));
+        for (String biome : BIOMES.keySet()) {
+            addFeaturePermission("usb.biome." + biome, tr("Let the player change their islands biome to {0}", biome.toUpperCase()));
+        }
     }
 
     @Override
@@ -41,8 +62,8 @@ public class BiomeCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7eYou must be on your island to change the biome!"));
                 return true;
             }
-            if (!plugin.biomeExists(biome)) {
-                player.sendMessage(tr("\u00a7cYou have misspelled the biome name. Must be one of {0}", plugin.getValidBiomes().keySet()));
+            if (!biomeExists(biome)) {
+                player.sendMessage(tr("\u00a7cYou have misspelled the biome name. Must be one of {0}", BIOMES.keySet()));
                 return true;
             }
             int cooldown = plugin.getCooldownHandler().getCooldown(player, "biome");
@@ -65,5 +86,12 @@ public class BiomeCommand extends RequireIslandCommand {
             });
         }
         return true;
+    }
+
+    public static boolean biomeExists(String biomeName) {
+        if (biomeName == null) {
+            return false;
+        }
+        return BIOMES.containsKey(biomeName.toLowerCase());
     }
 }

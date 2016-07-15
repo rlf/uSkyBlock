@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 import org.junit.Test;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 
 import java.util.Arrays;
 import java.util.List;

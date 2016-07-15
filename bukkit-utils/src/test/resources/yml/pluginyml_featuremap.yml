@@ -1,0 +1,50 @@
+commands:
+  cmd:
+    description: some description
+    aliases: [c]
+    permission: plugin.cmd
+permissions:
+  #
+  # Permission Groups
+  # =================
+  plugin.*:
+    children:
+      plugin.cmd: true
+      plugin.cmd.other: true
+      plugin.feature: true
+      plugin.feature.a: true
+      plugin.feature.b: true
+      plugin.featuresub: true
+      plugin.sub: true
+
+  plugin.cmd.*:
+    children:
+      plugin.cmd.other: true
+
+  plugin.feature.*:
+    children:
+      plugin.feature.a: true
+      plugin.feature.b: true
+
+  #
+  # Permission Descriptions
+  # =======================
+  plugin.cmd:
+    description: Grants access to /cmd - some description
+
+  plugin.cmd.other:
+    description: Grants access to /cmd other - some other command
+
+  plugin.feature.a:
+    description: enables A
+
+  plugin.feature.b:
+    description: enables B
+
+  plugin.featuresub:
+    description: standalone feature
+
+  plugin.sub:
+    description: Grants access to /cmd sub - some sub description
+
+

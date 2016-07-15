@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.util;
+package dk.lockfuglsang.minecraft.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,24 @@ public enum FormatUtil {;
         return format.replaceAll("(\u00a7|&)([0-9a-fklmor])", "\u00a7$2");
     }
 
+    public static List<String> wordWrap(String s, int lineSize) {
+        return wordWrap(s, lineSize, lineSize);
+    }
+
+    /**
+     * Wraps the string rather lazyly around the linesize (over).
+     *
+     * I.e.
+     * <pre>
+     *   this is a line of words
+     * </pre>
+     * Will break into the following with linesize of 11:
+     * <pre>
+     *   this is a line
+     *   of words
+     * </pre>
+     * Note that the first line is longer than 11 (14).
+     */
     public static List<String> wordWrap(String s, int firstSegment, int lineSize) {
         String format = getFormat(s);
         if (format == null || !s.startsWith(format)) {
@@ -55,6 +73,48 @@ public enum FormatUtil {;
         }
         words.add(withFormat(format, s.substring(jx).trim()));
         return words;
+    }
+
+    public static List<String> wordWrapStrict(String s, int lineLength) {
+        List<String> lines = new ArrayList<>();
+        String format = getFormat(s);
+        if (format == null || !s.startsWith(format)) {
+            format = "";
+        }
+        String[] words = s.split(" ");
+        String line = "";
+        for (String word: words) {
+            String test = stripFormatting(line + " " + word).trim();
+            if (test.length() <= lineLength) {
+                // add word
+                line += (line.isEmpty() ? "" : " ") + word;
+            } else if (line.isEmpty() || stripFormatting(word).length() > lineLength) {
+                // add word truncated
+                String f = getFormat(word);
+                String strip = stripFormatting(word);
+                do {
+                    int len = Math.min(strip.length(), lineLength-line.length()-1);
+                    lines.add(withFormat(format, line + (line.isEmpty() ? "" : " ") + strip.substring(0, len)));
+                    strip = strip.substring(len);
+                    if (f != null) {
+                        format = f;
+                    }
+                } while (strip.length() > lineLength);
+                line = strip;
+            } else {
+                // add line, then start a new
+                lines.add(withFormat(format, line));
+                String f = getFormat(line);
+                if (f != null) {
+                    format = f;
+                }
+                line = word;
+            }
+        }
+        if (!line.isEmpty()) {
+            lines.add(withFormat(format, line));
+        }
+        return lines;
     }
 
     private static String withFormat(String format, String subString) {
@@ -93,7 +153,7 @@ public enum FormatUtil {;
         return prefixed;
     }
 
-    public static String capitalize(String name) {
+    public static String camelcase(String name) {
         if (name == null || name.isEmpty()) {
             return "";
         }

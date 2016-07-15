@@ -3,6 +3,10 @@ package dk.lockfuglsang.minecraft.command;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.TabCompleter;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Convenience implementation of the Command
  */
@@ -13,6 +17,7 @@ public abstract class AbstractCommand implements Command {
     private final String usage;
     private final String[] params;
     private CompositeCommand parent;
+    private final Map<String, String> featurePerms = new HashMap<>();
 
     public AbstractCommand(String name, String permission, String params, String description, String usage) {
         this.aliases = name.split("\\|");
@@ -85,6 +90,15 @@ public abstract class AbstractCommand implements Command {
         }
     }
 
+    public void addFeaturePermission(String perm, String description) {
+        featurePerms.put(perm, description);
+    }
+
+    @Override
+    public Map<String, String> getFeaturePermissions() {
+        return Collections.unmodifiableMap(featurePerms);
+    }
+
     /**
      * Convenience method until we can fully rely on everybody running JRE 8.
      * @param args  A list of arguments
@@ -104,4 +118,5 @@ public abstract class AbstractCommand implements Command {
     public static String join(String[] args) {
         return join(args, " ");
     }
+
 }

@@ -655,6 +655,10 @@ msgstr "§eСироты не зарегистрированы."
 msgid "§eOrphans: {0}"
 msgstr "§eСироты: {0}"
 
+#, java-format
+msgid "adds perks: {0}"
+msgstr ""
+
 msgid "protects all islands (time consuming)"
 msgstr "защита всех островов (затратно по времени)"
 
@@ -960,6 +964,9 @@ msgstr ""
 msgid "ban/unban a player from your island."
 msgstr "блокировать/разблокировать игрока на вашем острове."
 
+msgid "exempts user from being banned"
+msgstr ""
+
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eУказанным игрокам запрещено появляться на вашем острове:"
 
@@ -1005,6 +1012,13 @@ msgstr ""
 msgid "change the biome of the island"
 msgstr "изменение биома острова"
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§cУ вас недостаточно прав для изменения биома вашего текущего острова."
@@ -1037,6 +1051,9 @@ msgstr "§cУ вас недостаточно прав для изменения
 msgid "create an island"
 msgstr "создание острова"
 
+msgid "exempt player from create-cooldown"
+msgstr ""
+
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -1067,6 +1084,9 @@ msgstr ""
 
 msgid "check your or anothers island info"
 msgstr "проверить информацию вашего или другого острова"
+
+msgid "allows user to see others island info"
+msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Уровень острова отключен, свяжитесь с администратором."
@@ -1190,6 +1210,9 @@ msgstr "§4Чтобы отказаться от членства на остро
 msgid "check your or anothers island level"
 msgstr "проверка уровня своего и чужого острова"
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§eИнформация об острове {0}:"
@@ -1257,6 +1280,9 @@ msgstr "§4Нет острова. §eВведите §b/is create§e для со
 msgid "delete your island and start a new one."
 msgstr "удаление вашего острова и создание нового"
 
+msgid "exempt player from restart-cooldown"
+msgstr ""
+
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
@@ -1323,6 +1349,9 @@ msgstr "§cУ вас недостаточно прав для вкл/выкл т
 
 msgid "display the top10 of islands"
 msgstr "показать ТОП 10 островов"
+
+msgid "enables user to all-ways generate top-ten (no caching)"
+msgstr ""
 
 msgid "trust/untrust a player to help on your island."
 msgstr "доверять/не доверять игроку на вашем острове"
@@ -1417,6 +1446,21 @@ msgstr "§4Этот игрок запретил вам перемещаться 
 
 msgid "general island command"
 msgstr "основные команды острова"
+
+msgid "allows user to bypass cooldowns"
+msgstr ""
+
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
+msgstr ""
 
 msgid "§eYou can not use another islands portals!"
 msgstr ""

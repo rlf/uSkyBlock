@@ -27,6 +27,12 @@ public class IslandCommand extends AbstractCommandExecutor {
         super("island|is", "usb.island.create", tr("general island command"));
         this.plugin = plugin;
         this.menu = menu;
+        addFeaturePermission("usb.mod.bypasscooldowns", tr("allows user to bypass cooldowns"));
+        addFeaturePermission("usb.mod.bypassprotection", tr("allows user to bypass visitor-protections"));
+        addFeaturePermission("usb.mod.bypassteleport", tr("allows user to bypass teleport-delay"));
+        addFeaturePermission("usb.signs.use", tr("allows user to use [usb] signs"));
+        addFeaturePermission("usb.signs.place", tr("allows user to place [usb] signs"));
+
         InviteHandler inviteHandler = new InviteHandler(plugin);
         plugin.getServer().getPluginManager().registerEvents(inviteHandler, plugin);
         OnlinePlayerTabCompleter onlinePlayerTabCompleter = new OnlinePlayerTabCompleter();

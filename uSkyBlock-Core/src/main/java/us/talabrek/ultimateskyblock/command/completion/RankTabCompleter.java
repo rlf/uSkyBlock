@@ -8,7 +8,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.ArrayList;
 import java.util.List;
 
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 /**
  * Rank name tab completer

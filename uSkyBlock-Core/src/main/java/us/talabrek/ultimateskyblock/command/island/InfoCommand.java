@@ -20,6 +20,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 public class InfoCommand extends RequireIslandCommand {
     public InfoCommand(uSkyBlock plugin) {
         super(plugin, "info", "usb.island.info", "?island", tr("check your or anothers island info"));
+        addFeaturePermission("usb.island.info.other", tr("allows user to see others island info"));
     }
 
     @Override

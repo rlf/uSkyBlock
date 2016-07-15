@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 import us.talabrek.ultimateskyblock.util.MetaUtil;
 
@@ -17,7 +16,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static us.talabrek.ultimateskyblock.util.FormatUtil.normalize;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.normalize;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.createItemStack;
 
 /**

@@ -15,7 +15,7 @@ public class InviteCommand extends RequireIslandCommand {
     private final InviteHandler inviteHandler;
 
     public InviteCommand(uSkyBlock plugin, InviteHandler inviteHandler) {
-        super(plugin, "invite", "usb.party.create", "oplayer", I18nUtil.tr("invite a player to your island"));
+        super(plugin, "invite", "usb.party.invite", "oplayer", I18nUtil.tr("invite a player to your island"));
         this.inviteHandler = inviteHandler;
     }
 

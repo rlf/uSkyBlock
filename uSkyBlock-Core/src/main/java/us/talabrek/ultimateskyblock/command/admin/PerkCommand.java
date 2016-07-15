@@ -11,6 +11,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 public class PerkCommand extends CompositeCommand {
     public PerkCommand(final uSkyBlock plugin) {
@@ -48,5 +49,8 @@ public class PerkCommand extends CompositeCommand {
                 return false;
             }
         });
+        for (Map.Entry<String, Perk> entry : plugin.getPerkLogic().getPerkMap().entrySet()) {
+            addFeaturePermission(entry.getKey(), tr("adds perks: {0}", stripFormatting(entry.getValue().toString().trim().replaceAll("\\n", ","))));
+        }
     }
 }

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.builder;
 import static us.talabrek.ultimateskyblock.util.ItemStackUtil.isValidInventoryItem;
 

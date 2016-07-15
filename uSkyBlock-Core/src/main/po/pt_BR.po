@@ -652,6 +652,10 @@ msgstr "§eNenhum orphan registrado atualmente."
 msgid "§eOrphans: {0}"
 msgstr "§eOrphans: {0}"
 
+#, java-format
+msgid "adds perks: {0}"
+msgstr ""
+
 msgid "protects all islands (time consuming)"
 msgstr "proteger todas as ilhas (consome tempo)"
 
@@ -955,6 +959,9 @@ msgstr ""
 msgid "ban/unban a player from your island."
 msgstr "banir/desbanir um jogador da sua ilha."
 
+msgid "exempts user from being banned"
+msgstr ""
+
 msgid "§eThe following players are banned from warping to your island:"
 msgstr ""
 "§eOs seguintes jogadores estão proibidos de teletransportar até sua ilha:"
@@ -1000,6 +1007,13 @@ msgstr "§eVocê foi §aDESBANIDO§e da ilha de {0}."
 msgid "change the biome of the island"
 msgstr "alterar o bioma da ilha"
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§cVocê não tem permissão para alterar o bioma da ilha."
@@ -1032,6 +1046,9 @@ msgstr "§cVocê não tem permissão para alterar o bioma da ilha para esse tipo
 msgid "create an island"
 msgstr "criar uma ilha"
 
+msgid "exempt player from create-cooldown"
+msgstr ""
+
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -1060,6 +1077,9 @@ msgstr ""
 
 msgid "check your or anothers island info"
 msgstr "verificar informações da sua ilha ou de outros jogadores"
+
+msgid "allows user to see others island info"
+msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr ""
@@ -1183,6 +1203,9 @@ msgstr "§4Você deve estar na sua ilha para sair do seu grupo!"
 msgid "check your or anothers island level"
 msgstr "verificar informações do nível da sua ilha ou de outros jogadores"
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§eInformações sobre a ilha de {0}':"
@@ -1250,6 +1273,9 @@ msgstr "§4Você não tem uma ilha.§e Use §b/is create§e para criar uma"
 msgid "delete your island and start a new one."
 msgstr "deletar sua ilha e iniciar uma nova."
 
+msgid "exempt player from restart-cooldown"
+msgstr ""
+
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
@@ -1315,6 +1341,9 @@ msgstr "§cVocê não tem permissão para ativar/desativar o warp da ilha!"
 
 msgid "display the top10 of islands"
 msgstr "mostrar o top10 das ilhas"
+
+msgid "enables user to all-ways generate top-ten (no caching)"
+msgstr ""
 
 msgid "trust/untrust a player to help on your island."
 msgstr "confiar/remover confiança de um jogador para ajudar na sua ilha."
@@ -1411,6 +1440,21 @@ msgstr "§4Esse jogador proibiu você de teletransportar até a ilha dele."
 
 msgid "general island command"
 msgstr "comandos geral da ilha"
+
+msgid "allows user to bypass cooldowns"
+msgstr ""
+
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
+msgstr ""
 
 msgid "§eYou can not use another islands portals!"
 msgstr ""

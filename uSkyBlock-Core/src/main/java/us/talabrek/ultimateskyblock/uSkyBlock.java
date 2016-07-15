@@ -46,6 +46,7 @@ import us.talabrek.ultimateskyblock.chat.IslandTalkCommand;
 import us.talabrek.ultimateskyblock.chat.PartyTalkCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
 import us.talabrek.ultimateskyblock.command.admin.SetMaintenanceCommand;
+import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.event.ExploitEvents;
 import us.talabrek.ultimateskyblock.event.GriefEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
@@ -167,22 +168,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private ChatLogic chatLogic;
 
     private volatile boolean maintenanceMode = false;
-    private Map<String, Biome> validBiomes = new HashMap<String, Biome>() {
-        {
-            put("ocean", Biome.OCEAN);
-            put("jungle", Biome.JUNGLE);
-            put("hell", Biome.HELL);
-            put("sky", Biome.SKY);
-            put("mushroom", Biome.MUSHROOM_ISLAND);
-            put("swampland", Biome.SWAMPLAND);
-            put("taiga", Biome.TAIGA);
-            put("desert", Biome.DESERT);
-            put("forest", Biome.FOREST);
-            put("plains", Biome.PLAINS);
-            put("extreme_hills", Biome.EXTREME_HILLS);
-            put("deep_ocean", Biome.DEEP_OCEAN);
-        }
-    };
 
     public uSkyBlock() {
     }
@@ -824,21 +809,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public Biome getBiome(String bName) {
         if (bName == null) return null;
-        return validBiomes.get(bName.toLowerCase());
+        return BiomeCommand.BIOMES.get(bName.toLowerCase());
     }
 
     private void setBiome(Location loc, Biome biome) {
         new SetBiomeTask(this, loc, biome, null).runTask(this);
     }
 
-    public boolean biomeExists(String biomeName) {
-        if (biomeName == null) return false;
-        return validBiomes.containsKey(biomeName.toLowerCase());
-    }
-
     public void changePlayerBiome(Player player, final String bName, final Callback<Boolean> callback) {
-        if (!biomeExists(bName)) throw new UnsupportedOperationException();
-
         callback.setState(false);
         if (bName.equalsIgnoreCase("ocean") || hasPermission(player, "usb.biome." + bName)) {
             PlayerInfo playerInfo = getPlayerInfo(player);
@@ -1311,10 +1289,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public PlayerLogic getPlayerLogic() {
         return playerLogic;
-    }
-
-    public Map<String, Biome> getValidBiomes() {
-        return validBiomes;
     }
 
     public TeleportLogic getTeleportLogic() {

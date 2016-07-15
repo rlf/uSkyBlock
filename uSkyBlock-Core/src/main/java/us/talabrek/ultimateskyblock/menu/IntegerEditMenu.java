@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 /**
  * Editor for integer nodes.

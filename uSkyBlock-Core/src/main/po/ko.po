@@ -655,6 +655,10 @@ msgstr "§e현재 어느 고아도 등록하지 않았습니다."
 msgid "§eOrphans: {0}"
 msgstr "§e고아들: {0}"
 
+#, java-format
+msgid "adds perks: {0}"
+msgstr ""
+
 msgid "protects all islands (time consuming)"
 msgstr "모든 섬을 보호합니다 (시간을 소모함)"
 
@@ -958,6 +962,9 @@ msgstr ""
 msgid "ban/unban a player from your island."
 msgstr "당신의 섬에서 플레이어를 차단/차단 취소 하세요."
 
+msgid "exempts user from being banned"
+msgstr ""
+
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§e다음의 플레이어는 당신의 섬에서 워프하는 것이 금지되었습니다:"
 
@@ -1001,6 +1008,13 @@ msgstr "§e당신은{0}§e''의 섬에서 §a차단 해제§e 되었습니다 ."
 msgid "change the biome of the island"
 msgstr "섬의 생태계를 바꿉니다"
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§c당신의 현재 섬의 생태계를 바꿀 권한이 없습니다."
@@ -1034,6 +1048,9 @@ msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다
 msgid "create an island"
 msgstr "섬을 만듭니다"
 
+msgid "exempt player from create-cooldown"
+msgstr ""
+
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -1064,6 +1081,9 @@ msgstr ""
 
 msgid "check your or anothers island info"
 msgstr "당신 또는 다른 사람의 섬 정보를 확인합니다"
+
+msgid "allows user to see others island info"
+msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4섬 레벨이 작동하지 않습니다, 관리자에게 문의하세요."
@@ -1188,6 +1208,9 @@ msgstr "§4당신은 파티를 떠나려면 skyblock 월드에 있어야 합니�
 msgid "check your or anothers island level"
 msgstr "당신 또는 다른 사람의 섬 레벨을 확인합니다"
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§e{0}의 섬에 대한 정보:"
@@ -1255,6 +1278,9 @@ msgstr "§4섬 없음. §e다음명령어 §b/is create§e 를 사용해 생성�
 msgid "delete your island and start a new one."
 msgstr "섬을 삭제하고 새로 시작합니다."
 
+msgid "exempt player from restart-cooldown"
+msgstr ""
+
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
@@ -1319,6 +1345,9 @@ msgstr "§c당신 섬에 워프를 온/오프 할 권한이 없습니다!"
 
 msgid "display the top10 of islands"
 msgstr "섬들의 top 10을 보여줍니다"
+
+msgid "enables user to all-ways generate top-ten (no caching)"
+msgstr ""
 
 msgid "trust/untrust a player to help on your island."
 msgstr "당신의 섬에서 도우려는 플레이어를 믿으시겠습니까/믿지 않겠습니까."
@@ -1414,6 +1443,21 @@ msgstr "§4그 플레이어가 당신이 그들의 섬으로 워프하는 것을
 
 msgid "general island command"
 msgstr "일반적인 섬 커맨드"
+
+msgid "allows user to bypass cooldowns"
+msgstr ""
+
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
+msgstr ""
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"

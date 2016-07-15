@@ -33,7 +33,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.CHALLENGE_PAGESIZE;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.COLS_PER_ROW;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 // TODO: Move all the texts to resource-files (translatable).
@@ -596,7 +596,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a7aActive\n\u00a7fOther players may warp to your\n\u00a7fisland at anytime to the point\n\u00a7fyou set using \u00a7d/island setwarp."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.extra.addwarp")) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.island.togglewarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to deactivate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
@@ -606,7 +606,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a78Inactive\n\u00a7fOther players can't warp to your\n\u00a7fisland. Set a warp point using\n\u00a7d/island setwarp \u00a7fbefore activating."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.extra.addwarp")) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.island.togglewarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to activate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));

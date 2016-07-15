@@ -660,6 +660,10 @@ msgstr "§eDerzeit sind keine verwaisten Inseln registriert"
 msgid "§eOrphans: {0}"
 msgstr "§eVerlassene Inseln: {0}"
 
+#, java-format
+msgid "adds perks: {0}"
+msgstr ""
+
 msgid "protects all islands (time consuming)"
 msgstr "Schützt alle Inseln (Zeitaufwändig)"
 
@@ -978,6 +982,9 @@ msgstr "teleportiert Dich zu Deiner Insel (oder erstellt eine)"
 msgid "ban/unban a player from your island."
 msgstr "Banne/Entbanne Spieler von deiner Insel."
 
+msgid "exempts user from being banned"
+msgstr ""
+
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eDie folgenden Spieler dürfen sich nicht auf deine insel warpen:"
 
@@ -1026,6 +1033,13 @@ msgstr "§eDu wurdest von {0}§e''s Insel §aENTBANNT§e."
 msgid "change the biome of the island"
 msgstr "Ändere das Biome der Insel"
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr ""
@@ -1060,6 +1074,9 @@ msgstr "§cDu kannst Dein InselBiom nicht zu diesem Biom ändern."
 msgid "create an island"
 msgstr "Erstelle eine Insel"
 
+msgid "exempt player from create-cooldown"
+msgstr ""
+
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -1090,6 +1107,9 @@ msgstr ""
 
 msgid "check your or anothers island info"
 msgstr "Prüfe deine oder die Inseldaten eines anderen Spielers"
+
+msgid "allows user to see others island info"
+msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Insel Level wurde deaktiviert, kontaktiere einen Administrator."
@@ -1214,6 +1234,9 @@ msgstr "§4Du musst in der SkyBlock Welt sein um die Gruppe zu verlassen!"
 msgid "check your or anothers island level"
 msgstr "Zeige die Stufe deiner oder einer anderen Insel"
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§eInformationen über {0}'s Insel"
@@ -1281,6 +1304,9 @@ msgstr "§4Keine Insel. §eBenutze §b/is create§e um eine zu starten"
 
 msgid "delete your island and start a new one."
 msgstr "Löscht deine Insel und startet eine neue."
+
+msgid "exempt player from restart-cooldown"
+msgstr ""
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
@@ -1352,6 +1378,9 @@ msgstr ""
 
 msgid "display the top10 of islands"
 msgstr "Zeige die top 10 Inseln"
+
+msgid "enables user to all-ways generate top-ten (no caching)"
+msgstr ""
 
 msgid "trust/untrust a player to help on your island."
 msgstr "Vertraue/Mistraue einen Spieler auf deiner Insel."
@@ -1446,6 +1475,21 @@ msgstr "§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Warpen."
 
 msgid "general island command"
 msgstr "Allgemeine Insel Befehle"
+
+msgid "allows user to bypass cooldowns"
+msgstr ""
+
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
+msgstr ""
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eDu kannst die Portale auf anderen Inseln nicht nutzen!"

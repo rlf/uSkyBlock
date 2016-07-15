@@ -657,6 +657,10 @@ msgstr ""
 msgid "§eOrphans: {0}"
 msgstr ""
 
+#, java-format
+msgid "adds perks: {0}"
+msgstr ""
+
 msgid "protects all islands (time consuming)"
 msgstr "bảo vệ toàn bộ skyblock (Tốn thời gian)"
 
@@ -953,6 +957,9 @@ msgstr ""
 msgid "ban/unban a player from your island."
 msgstr "(bỏ) cấm người chơi."
 
+msgid "exempts user from being banned"
+msgstr ""
+
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eNhững người chơi cấm bạn đến đảo của họ:"
 
@@ -997,6 +1004,13 @@ msgstr "§eBạn được §abỏ lệnh cấm§e tại đảo của {0}"
 msgid "change the biome of the island"
 msgstr "chuyển vùng"
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§cBạn không có quyền chuyển vùng đảo hiện tại."
@@ -1029,6 +1043,9 @@ msgstr "§cBạn không có quyền chuyển đến vùng này."
 msgid "create an island"
 msgstr "tạo đảo mới"
 
+msgid "exempt player from create-cooldown"
+msgstr ""
+
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -1055,6 +1072,9 @@ msgstr "§cĐảo của bạn đang khởi tạo, bạn không thể hồi chuy�
 
 msgid "check your or anothers island info"
 msgstr "kiểm tra thông tin đảo của bạn hoặc người khác"
+
+msgid "allows user to see others island info"
+msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Cấp đảo bị vô hiệu hoá, liên lạc với quản trị viên."
@@ -1177,6 +1197,9 @@ msgstr "§4Bạn phải trong thể giới của uSkyblock để rời khỏi nh
 msgid "check your or anothers island level"
 msgstr "kiểm tra cấp đảo của bạn hoặc người khác"
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§Thông tin đảo của {0}:"
@@ -1244,6 +1267,9 @@ msgstr "§4Không có đảo. §eDùng §b/is create §e để khởi tạo"
 msgid "delete your island and start a new one."
 msgstr "xoá đảo của bạn và khởi tạo đảo mới"
 
+msgid "exempt player from restart-cooldown"
+msgstr ""
+
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
@@ -1308,6 +1334,9 @@ msgstr "§cBạn không có quyền bật/tắt điểm dịch chuyển"
 
 msgid "display the top10 of islands"
 msgstr "hiện 10 đảo thứ hạng cao nhất"
+
+msgid "enables user to all-ways generate top-ten (no caching)"
+msgstr ""
 
 msgid "trust/untrust a player to help on your island."
 msgstr "(không) tín nhiệm người chơi để giúp bạn xây dựng đảo"
@@ -1395,6 +1424,21 @@ msgstr "§4Bạn bị người chơi này cấm dịch chuyển tơi đảo này
 
 msgid "general island command"
 msgstr "lệnh thông thường"
+
+msgid "allows user to bypass cooldowns"
+msgstr ""
+
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
+msgstr ""
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eBạn không thể dùng cổng dịch chuyển ở đảo khác"

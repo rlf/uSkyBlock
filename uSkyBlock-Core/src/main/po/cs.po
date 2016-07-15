@@ -644,6 +644,10 @@ msgstr ""
 msgid "§eOrphans: {0}"
 msgstr ""
 
+#, java-format
+msgid "adds perks: {0}"
+msgstr ""
+
 msgid "protects all islands (time consuming)"
 msgstr ""
 
@@ -941,6 +945,9 @@ msgstr ""
 msgid "ban/unban a player from your island."
 msgstr ""
 
+msgid "exempts user from being banned"
+msgstr ""
+
 msgid "§eThe following players are banned from warping to your island:"
 msgstr ""
 
@@ -984,6 +991,13 @@ msgstr ""
 msgid "change the biome of the island"
 msgstr ""
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr ""
@@ -1016,6 +1030,9 @@ msgstr ""
 msgid "create an island"
 msgstr ""
 
+msgid "exempt player from create-cooldown"
+msgstr ""
+
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
 "type§b /is restart§e to get one"
@@ -1039,6 +1056,9 @@ msgid ""
 msgstr ""
 
 msgid "check your or anothers island info"
+msgstr ""
+
+msgid "allows user to see others island info"
 msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
@@ -1159,6 +1179,9 @@ msgstr ""
 msgid "check your or anothers island level"
 msgstr ""
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr ""
@@ -1226,6 +1249,9 @@ msgstr ""
 msgid "delete your island and start a new one."
 msgstr ""
 
+msgid "exempt player from restart-cooldown"
+msgstr ""
+
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
 "start your own (/island leave)."
@@ -1284,6 +1310,9 @@ msgid "§cYou do not have permission to enable/disable your island's warp!"
 msgstr ""
 
 msgid "display the top10 of islands"
+msgstr ""
+
+msgid "enables user to all-ways generate top-ten (no caching)"
 msgstr ""
 
 msgid "trust/untrust a player to help on your island."
@@ -1369,6 +1398,21 @@ msgid "§4That player has forbidden you from warping to their island."
 msgstr ""
 
 msgid "general island command"
+msgstr ""
+
+msgid "allows user to bypass cooldowns"
+msgstr ""
+
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
 msgstr ""
 
 msgid "§eYou can not use another islands portals!"

@@ -17,6 +17,7 @@ public class CreateCommand extends RequirePlayerCommand {
     public CreateCommand(uSkyBlock plugin) {
         super("create|c", "usb.island.create", "?schematic", tr("create an island"));
         this.plugin = plugin;
+        addFeaturePermission("usb.exempt.cooldown.create", tr("exempt player from create-cooldown"));
     }
 
     @Override

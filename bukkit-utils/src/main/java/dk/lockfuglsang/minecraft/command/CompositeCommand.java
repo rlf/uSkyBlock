@@ -31,6 +31,7 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
     private final Map<String, Command> commandMap;
     private final Map<String, Command> aliasMap;
     private final Map<String, TabCompleter> tabMap;
+    private final Map<String, String> featurePerms;
 
     public CompositeCommand(String name, String permission, String description) {
         this(name, permission, null, description);
@@ -45,6 +46,7 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
         commandMap = new HashMap<>();
         aliasMap = new HashMap<>();
         tabMap = new HashMap<>();
+        featurePerms = new HashMap<>();
     }
 
     public CompositeCommand add(Command... cmds) {
@@ -317,5 +319,14 @@ public class CompositeCommand extends AbstractTabCompleter implements Command, T
                 child.accept(visitor);
             }
         }
+    }
+
+    public void addFeaturePermission(String perm, String description) {
+        featurePerms.put(perm, description);
+    }
+
+    @Override
+    public Map<String, String> getFeaturePermissions() {
+        return Collections.unmodifiableMap(featurePerms);
     }
 }

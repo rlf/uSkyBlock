@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.util;
 
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -37,6 +38,6 @@ public enum EntityUtil {;
     }
 
     public static String getEntityDisplayName(EntityType entityType) {
-        return FormatUtil.capitalize(entityType.name());
+        return FormatUtil.camelcase(entityType.name());
     }
 }

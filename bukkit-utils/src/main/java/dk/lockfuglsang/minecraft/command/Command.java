@@ -72,4 +72,10 @@ public interface Command {
      * @param visitor A visitor for this node.
      */
     void accept(CommandVisitor visitor);
+
+    /**
+     * Returns a map of feature-toggling permissions supporte by this command.
+     * @return A map of permission-node as key, and description as value.
+     */
+    Map<String,String> getFeaturePermissions();
 }

@@ -30,6 +30,11 @@ public class YmlCommentParser {
         return Collections.unmodifiableMap(commentMap);
     }
 
+
+    public void addComment(String path, String comment) {
+        commentMap.put(path, comment);
+    }
+
     public void addComments(Map<String,String> comments) {
         commentMap.putAll(comments);
     }
@@ -153,7 +158,7 @@ public class YmlCommentParser {
                 String path = getPath(baseKey, name);
                 String comment = getComment(path);
                 if (comment != null) {
-                    sb.append("\n" + comment
+                    sb.append((lineNum > 1 ? "\n" : "") + comment
                             .replaceAll("^#", Matcher.quoteReplacement(indent + "#"))
                             .replaceAll("\n#", Matcher.quoteReplacement("\n" + indent + "#")));
                 }
@@ -170,7 +175,7 @@ public class YmlCommentParser {
             lineNum++;
             sb.append(line + "\n");
         }
-        return sb.toString();
+        return sb.toString().replaceAll("\n", "\r\n");
     }
 
     public void load(Reader reader) throws IOException {
@@ -184,6 +189,7 @@ public class YmlCommentParser {
             throw new IllegalStateException("Unable to read from string", e);
         }
     }
+
 
     private static class Section {
         private int indentation;
