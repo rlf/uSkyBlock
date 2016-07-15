@@ -155,8 +155,8 @@
                                 </relocation>
                                 <relocation>
                                     <pattern>dk.lockfuglsang.minecraft</pattern>
-                                    <shadedPattern>dk.lockfuglsang.minecraft</shadedPattern>
-                                    <!--<shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>-->
+                                    <!--<shadedPattern>dk.lockfuglsang.minecraft</shadedPattern>-->
+                                    <shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
