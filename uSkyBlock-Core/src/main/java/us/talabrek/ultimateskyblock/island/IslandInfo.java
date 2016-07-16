@@ -347,7 +347,12 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         Set<String> members = new HashSet<>();
         if (memberSection != null) {
             for (String uuid : memberSection.getKeys(false)) {
-                members.add(uSkyBlock.getInstance().getPlayerDB().getName(UUIDUtil.fromString(uuid)));
+                UUID id = UUIDUtil.fromString(uuid);
+                if (id != null) {
+                    members.add(uSkyBlock.getInstance().getPlayerDB().getName(id));
+                } else {
+                    log.info("Island " + name + " has invalid member-section " + uuid);
+                }
             }
         }
         return members;
@@ -359,7 +364,11 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         if (memberSection != null) {
             for (String uuid : memberSection.getKeys(false)) {
                 try {
-                    members.add(UUIDUtil.fromString(uuid));
+                    UUID id = UUIDUtil.fromString(uuid);
+                    if (id == null) {
+                        throw new IllegalArgumentException();
+                    }
+                    members.add(id);
                 } catch (IllegalArgumentException e) {
                     log.info("Island " + name + " has invalid member-section " + uuid);
                 }
@@ -506,8 +515,13 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         List<String> uuidList = config.getStringList("banned.list");
         List<String> nameList = new ArrayList<>();
         for (String uuid : uuidList) {
-            String name = uSkyBlock.getInstance().getPlayerDB().getName(UUIDUtil.fromString(uuid));
-            nameList.add(name);
+            UUID id = UUIDUtil.fromString(uuid);
+            if (id != null) {
+                String name = uSkyBlock.getInstance().getPlayerDB().getName(id);
+                nameList.add(name);
+            } else {
+                log.info("Island " + name + " has invalid ban-value " + uuid);
+            }
         }
         return nameList;
     }
@@ -518,7 +532,12 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         List<String> uuidList = config.getStringList("trust.list");
         List<String> nameList = new ArrayList<>();
         for (String uuid : uuidList) {
-            nameList.add(uSkyBlock.getInstance().getPlayerDB().getName(UUIDUtil.fromString(uuid)));
+            UUID id = UUIDUtil.fromString(uuid);
+            if (id != null) {
+                nameList.add(uSkyBlock.getInstance().getPlayerDB().getName(id));
+            } else {
+                log.info("Island " + name + " has invalid trustee-value " + uuid);
+            }
         }
         return nameList;
     }
@@ -530,6 +549,8 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
             UUID id = UUIDUtil.fromString(uuid);
             if (id != null) {
                 uuidList.add(id);
+            } else {
+                log.info("Island " + name + " has invalid trustee-value " + uuid);
             }
         }
         return uuidList;
@@ -702,9 +723,12 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         if (members != null) {
             for (String uuid : members.getKeys(false)) {
                 if (uuid != null) {
-                    Player onlinePlayer = Bukkit.getPlayer(UUIDUtil.fromString(uuid));
-                    if (onlinePlayer != null) {
-                        return true;
+                    UUID id = UUIDUtil.fromString(uuid);
+                    if (id != null) {
+                        Player onlinePlayer = Bukkit.getPlayer(id);
+                        if (onlinePlayer != null) {
+                            return true;
+                        }
                     }
                 } else {
                     Player onlinePlayer = Bukkit.getPlayer(uuid);
@@ -724,15 +748,17 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         if (members != null) {
             for (String uuid : members.getKeys(false)) {
                 if (uuid != null) {
-                    Player onlinePlayer = Bukkit.getPlayer(UUIDUtil.fromString(uuid));
-                    if (onlinePlayer != null) {
-                        players.add(onlinePlayer);
+                    UUID id = UUIDUtil.fromString(uuid);
+                    if (id != null) {
+                        Player onlinePlayer = Bukkit.getPlayer(id);
+                        if (onlinePlayer != null) {
+                            players.add(onlinePlayer);
+                        }
+                    } else {
+                        log.info("Island " + name + " has invalid member-section: " + uuid);
                     }
                 } else {
-                    Player onlinePlayer = Bukkit.getPlayer(uuid);
-                    if (onlinePlayer != null) {
-                        players.add(onlinePlayer);
-                    }
+                    log.info("Island " + name + " has invalid member-section: " + uuid);
                 }
             }
         }
