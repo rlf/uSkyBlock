@@ -43,7 +43,8 @@ public class DocumentCommand extends AbstractCommand {
             int lineWidth = args.length > 1 && args[1].matches("\\d+") ? Integer.parseInt(args[1], 10) : 130;
             return writeToFile(sender, new PlainTextCommandVisitor(lineWidth), getName() + ".txt");
         } else if (args[0].equalsIgnoreCase("yml")) {
-            return writeToFile(sender, new PluginYamlCommandVisitor(), getName() + ".yml");
+            int groupDepth = args.length > 1 && args[1].matches("\\d+") ? Integer.parseInt(args[1], 10) : 2;
+            return writeToFile(sender, new PluginYamlCommandVisitor(groupDepth), getName() + ".yml");
         }
         return false;
     }

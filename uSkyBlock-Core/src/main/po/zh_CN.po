@@ -649,7 +649,7 @@ msgid "§eOrphans: {0}"
 msgstr ""
 
 #, java-format
-msgid "adds perks: {0}"
+msgid "additional perks {0}"
 msgstr ""
 
 msgid "protects all islands (time consuming)"
@@ -2272,8 +2272,10 @@ msgid ""
 "When your warp is activated,\n"
 "other players will be taken to\n"
 "this point when they teleport\n"
-"to your island.\n"
-"§e§lClick here to change."
+"to your island."
+msgstr ""
+
+msgid "§e§lClick here to change."
 msgstr ""
 
 msgid "§c§lRestart Island"

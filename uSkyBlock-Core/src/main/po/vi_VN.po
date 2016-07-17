@@ -658,7 +658,7 @@ msgid "§eOrphans: {0}"
 msgstr ""
 
 #, java-format
-msgid "adds perks: {0}"
+msgid "additional perks {0}"
 msgstr ""
 
 msgid "protects all islands (time consuming)"
@@ -2360,13 +2360,11 @@ msgid ""
 "When your warp is activated,\n"
 "other players will be taken to\n"
 "this point when they teleport\n"
-"to your island.\n"
-"§e§lClick here to change."
+"to your island."
 msgstr ""
-"Khi diểm dịch chuyển được khởi động,\n"
-"người chơi khác sẽ xuất hiện tại đây,\n"
-"dịch chuyển tới đảo của bạn.\n"
-"§e§lNhấp vào đây để thây đổi"
+
+msgid "§e§lClick here to change."
+msgstr ""
 
 msgid "§c§lRestart Island"
 msgstr "§c§lTại khởi tạo đảo"

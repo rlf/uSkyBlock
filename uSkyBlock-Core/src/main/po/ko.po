@@ -656,7 +656,7 @@ msgid "§eOrphans: {0}"
 msgstr "§e고아들: {0}"
 
 #, java-format
-msgid "adds perks: {0}"
+msgid "additional perks {0}"
 msgstr ""
 
 msgid "protects all islands (time consuming)"
@@ -2427,13 +2427,11 @@ msgid ""
 "When your warp is activated,\n"
 "other players will be taken to\n"
 "this point when they teleport\n"
-"to your island.\n"
-"§e§lClick here to change."
+"to your island."
 msgstr ""
-"당신의 워프가 활성화 되었을 때\n"
-"다른 플레이어들이 당신의 섬으로 텔레포트 할 때\n"
-"그들은 이 지점으로 오게 될 것입니다\n"
-"§e§l여기를 눌러서 바꾸세요."
+
+msgid "§e§lClick here to change."
+msgstr ""
 
 msgid "§c§lRestart Island"
 msgstr "§c§l섬 재시작"

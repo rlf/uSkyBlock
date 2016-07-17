@@ -1069,6 +1069,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         command = command
                 .replaceAll("\\{player\\}", Matcher.quoteReplacement(player.getName()))
                 .replaceAll("\\{playerName\\}", Matcher.quoteReplacement(player.getDisplayName()))
+                .replaceAll("\\{playername\\}", Matcher.quoteReplacement(player.getDisplayName()))
                 .replaceAll("\\{position\\}", Matcher.quoteReplacement(LocationUtil.asString(player.getLocation()))); // Figure out what this should be
         Matcher m = Pattern.compile("^\\{p=(?<prob>0?\\.[0-9]+)\\}(.*)$").matcher(command);
         if (m.matches()) {

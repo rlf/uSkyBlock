@@ -658,7 +658,7 @@ msgid "§eOrphans: {0}"
 msgstr "§eIslas huérfanas: {0}"
 
 #, java-format
-msgid "adds perks: {0}"
+msgid "additional perks {0}"
 msgstr ""
 
 msgid "protects all islands (time consuming)"
@@ -2450,14 +2450,11 @@ msgid ""
 "When your warp is activated,\n"
 "other players will be taken to\n"
 "this point when they teleport\n"
-"to your island.\n"
-"§e§lClick here to change."
+"to your island."
 msgstr ""
-"Cuando el teletransporte esta\n"
-"activo, los demás jugadores\n"
-"que lo utilicen serán\n"
-"teletransportados aquí.\n"
-"§e§lClick aquí para cambiarla."
+
+msgid "§e§lClick here to change."
+msgstr ""
 
 msgid "§c§lRestart Island"
 msgstr ""

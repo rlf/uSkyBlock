@@ -21,7 +21,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
  */
 public class AdminCommand extends AbstractCommandExecutor {
     public AdminCommand(final uSkyBlock plugin, ConfirmHandler confirmHandler, AnimationHandler animationHandler) {
-        super("usb", "usb.admin", I18nUtil.tr("Ultimate SkyBlock Admin"));
+        super("usb", null, I18nUtil.tr("Ultimate SkyBlock Admin"));
         OnlinePlayerTabCompleter playerCompleter = new OnlinePlayerTabCompleter();
         TabCompleter challengeCompleter = new ChallengeTabCompleter();
         TabCompleter allPlayerCompleter = new AllPlayerTabCompleter(playerCompleter);
@@ -52,7 +52,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new DebugCommand(plugin));
         add(new WGCommand(plugin));
         add(new VersionCommand(plugin));
-            add(new CooldownCommand(plugin));
+        add(new CooldownCommand(plugin));
         add(new PerkCommand(plugin));
         add(new LanguageCommand(plugin));
         add(new FlushCommand(plugin));

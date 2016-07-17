@@ -1,6 +1,6 @@
 commands:
   cmd:
-    description: some description
+    description: 'some description'
     aliases: [c]
     permission: plugin.cmd
 permissions:
@@ -30,21 +30,21 @@ permissions:
   # Permission Descriptions
   # =======================
   plugin.cmd:
-    description: Grants access to /cmd - some description
+    description: 'Grants access to /cmd - some description'
 
   plugin.cmd.other:
-    description: Grants access to /cmd other - some other command
+    description: 'Grants access to /cmd other - some other command'
 
   plugin.feature.a:
-    description: enables A
+    description: 'enables A'
 
   plugin.feature.b:
-    description: enables B
+    description: 'enables B'
 
   plugin.featuresub:
-    description: standalone feature
+    description: 'standalone feature'
 
   plugin.sub:
-    description: Grants access to /cmd sub - some sub description
+    description: 'Grants access to /cmd sub - some sub description'
 
 

@@ -71,7 +71,7 @@ ranks:
           currency: 10
           xp: 10
           commands:
-          - op:effect {playername} regeneration
+          - op:effect {player} regeneration
         repeatReward:
           text: 1 leather, 10% chance to get a book
           items:
@@ -1354,4 +1354,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 20
+version: 21

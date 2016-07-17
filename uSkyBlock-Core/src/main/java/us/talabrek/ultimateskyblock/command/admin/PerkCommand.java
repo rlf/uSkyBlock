@@ -50,7 +50,7 @@ public class PerkCommand extends CompositeCommand {
             }
         });
         for (Map.Entry<String, Perk> entry : plugin.getPerkLogic().getPerkMap().entrySet()) {
-            addFeaturePermission(entry.getKey(), tr("adds perks: {0}", stripFormatting(entry.getValue().toString().trim().replaceAll("\\n", ","))));
+            addFeaturePermission(entry.getKey(), tr("additional perks {0}", stripFormatting(entry.getValue().toString().trim().replaceAll("\\n", ","))));
         }
     }
 }

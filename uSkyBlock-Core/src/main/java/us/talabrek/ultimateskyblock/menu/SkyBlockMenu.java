@@ -573,14 +573,14 @@ public class SkyBlockMenu {
         meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Lock"));
         if (plugin.getIslandInfo(player).isLocked()) {
             addLore(lores, tr("\u00a7eLock Status: \u00a7aActive\n\u00a7fYour island is currently \u00a7clocked.\n\u00a7fPlayers outside of your group\n\u00a7fare unable to enter your island."));
-            if (islandInfo.hasPerm(player, "canToggleLock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock") && hasPermission(player, "usb.island.lock")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to unlock your island."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the lock."));
             }
         } else {
             addLore(lores, tr("\u00a7eLock Status: \u00a78Inactive\n\u00a7fYour island is currently \u00a7aunlocked.\n\u00a7fAll players are able to enter your\n\u00a7fisland, but only you and your group\n\u00a7fmembers may build there."));
-            if (islandInfo.hasPerm(player, "canToggleLock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock") && hasPermission(player, "usb.island.lock")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to lock your island."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the lock."));
@@ -638,7 +638,12 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.HOPPER, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lChange Warp Location"));
-        addLore(lores, "\u00a7f", tr("When your warp is activated,\nother players will be taken to\nthis point when they teleport\nto your island.\n\u00a7e\u00a7lClick here to change."));
+        addLore(lores, "\u00a7f", tr("When your warp is activated,\nother players will be taken to\nthis point when they teleport\nto your island."));
+        if (islandInfo.hasPerm(player, "canChangeWarp") && hasPermission(player, "usb.island.setwarp")) {
+            addLore(lores, tr("\u00a7e\u00a7lClick here to change."));
+        } else {
+            addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
+        }
         meta4.setLore(lores);
         menuItem.setItemMeta(meta4);
         menu.setItem(15, menuItem);

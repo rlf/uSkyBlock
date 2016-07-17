@@ -19,7 +19,7 @@ public class PartyCommand extends CompositeCommand {
     private final SkyBlockMenu menu;
 
     public PartyCommand(final uSkyBlock plugin, SkyBlockMenu menu, final InviteHandler inviteHandler) {
-        super("party", "usb.party", I18nUtil.tr("show party information"));
+        super("party", null, I18nUtil.tr("show party information"));
         this.plugin = plugin;
         this.menu = menu;
         add(new AbstractCommand("info", "usb.party.info", I18nUtil.tr("shows information about your party")) {

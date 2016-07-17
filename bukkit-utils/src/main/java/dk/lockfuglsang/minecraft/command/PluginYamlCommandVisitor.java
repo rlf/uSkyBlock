@@ -14,10 +14,17 @@ import java.util.Map;
  * @since 1.8
  */
 public class PluginYamlCommandVisitor implements DocumentWriter {
+    private final int groupDepth;
+
     List<Command> topLevel = new ArrayList<>();
     PermissionNode rootNode;
 
     PluginYamlCommandVisitor() {
+        this(2);
+    }
+
+    PluginYamlCommandVisitor(int groupDepth) {
+        this.groupDepth = groupDepth;
         rootNode = new PermissionNode("");
     }
 
@@ -25,7 +32,7 @@ public class PluginYamlCommandVisitor implements DocumentWriter {
         out.println("commands:");
         for (Command cmd : topLevel) {
             out.println("  " + cmd.getName() + ":");
-            out.println("    description: " + cmd.getDescription());
+            out.println("    description: '" + cmd.getDescription().replaceAll("'", "''") + "'");
             if (cmd.getAliases().length > 1) {
                 String[] copy = new String[cmd.getAliases().length-1];
                 System.arraycopy(cmd.getAliases(), 1, copy, 0, copy.length);
@@ -41,6 +48,9 @@ public class PluginYamlCommandVisitor implements DocumentWriter {
         out.println("  # =================");
         for (PermissionNode node : rootNode.getRoots()) {
             if (!node.permission.isEmpty()) {
+                if (node.permission.split("\\.").length > groupDepth) {
+                    continue; // Skip
+                }
                 out.println("  " + node.permission + ".*:");
                 out.println("    children:");
                 for (String p : node.getChildPermissions()) {
@@ -218,10 +228,10 @@ public class PluginYamlCommandVisitor implements DocumentWriter {
 
         String getDescription() {
             if (description != null) {
-                return description;
+                return "'" + description + "'";
             }
             if (commands.size() == 1) {
-                return "Grants access to " + getCmdDescription(commands.get(0));
+                return "'Grants access to " + getCmdDescription(commands.get(0)) + "'";
             } else if (commands.size() > 1) {
                 String desc = "|\r\n";
                 desc += "      Grants access to " + getCmdDescription(commands.get(0));
