@@ -1,9 +1,9 @@
 # uSkyBlock Localization for Spanish.
-# 
-# 
-# 
-# 
-# 
+#
+#
+#
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
