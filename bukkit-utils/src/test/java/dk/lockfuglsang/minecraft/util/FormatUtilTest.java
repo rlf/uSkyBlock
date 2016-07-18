@@ -58,4 +58,10 @@ public class FormatUtilTest {
         assertThat(camelcase("SHEEP"), is("Sheep"));
         assertThat(camelcase("ender chest"), is("EnderChest"));
     }
+
+    @Test
+    public void testEscape() throws Exception {
+        String text = "\u00a7eHello World\r\n\u00a7aThis is a \u00a7kmagic\r\n\u00a7lhej";
+        assertThat(escape(text), is("&eHello World\r\n&aThis is a &kmagic\r\n&lhej"));
+    }
 }

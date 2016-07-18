@@ -1,10 +1,5 @@
 package dk.lockfuglsang.minecraft.util;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -168,5 +163,18 @@ public enum FormatUtil {;
             sb.append(part.substring(1).toLowerCase());
         }
         return sb.toString();
+    }
+
+    /**
+     * Escapes formatting by "denormalizing" back to using &amp; instead of §.
+     * @param formatString A formatstring (formerly normalized).
+     * @return A non-format string using &amp; instead of §.
+     * @since 1.10
+     */
+    public static String escape(String formatString) {
+        String escaped = normalize(formatString);
+        escaped = escaped
+                .replaceAll("\u00a7", "&");
+        return escaped;
     }
 }
