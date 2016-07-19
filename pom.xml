@@ -22,8 +22,6 @@
     </properties>
 
     <modules>
-        <module>bukkit-utils</module>
-        <module>po-utils</module>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-AWE211</module>
