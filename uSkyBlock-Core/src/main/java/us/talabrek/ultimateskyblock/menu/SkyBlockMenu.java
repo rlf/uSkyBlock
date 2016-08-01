@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
+import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -265,12 +266,10 @@ public class SkyBlockMenu {
                         "extreme_hills", tr("Extreme Hills"),
                         tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
                 ),
-                /* Not part of Bukkit 1.9
                 new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
                         "flower_forest", tr("Flower Forest"),
                         tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
                 ),
-                */
                 new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
                         "deep_ocean", tr("Deep Ocean"),
                         tr("The deep-ocean biome is an advanced\n" +
@@ -278,9 +277,17 @@ public class SkyBlockMenu {
                                 "not spawn. Hostile mobs \n"+
                                 "(including Guardians) will\n" +
                                 "spawn normally.")
-                ));
+                ),
+                new BiomeMenuItem(new ItemStack(Material.PACKED_ICE, 1),
+                        "ice_plains", tr("Ice Plains"),
+                        tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
+                )
+        );
         String currentBiome = plugin.getCurrentBiome(player);
         for (BiomeMenuItem biomeMenu : biomeMenus) {
+            if (!BiomeCommand.biomeExists(biomeMenu.getId())) {
+                continue; // Skip it
+            }
             ItemStack menuItem = biomeMenu.getIcon();
             meta4 = menuItem.getItemMeta();
             if (hasPermission(player, "usb.biome." + biomeMenu.getId())) {

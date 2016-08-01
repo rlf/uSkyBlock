@@ -2147,6 +2147,16 @@ msgstr ""
 "pasivos y los hostiles\n"
 "spawnearán normalmente."
 
+msgid "Flower Forest"
+msgstr ""
+
+msgid ""
+"The flower forest biome.\n"
+"Passive mobs will spawn \n"
+"normally and hostile\n"
+"mobs will spawn."
+msgstr ""
+
 msgid "Deep Ocean"
 msgstr "Océano Profundo"
 
@@ -2162,6 +2172,15 @@ msgstr ""
 "mobs pasivos como animales\n"
 "no spawnearán, pero los hostiles\n"
 "(incluyendo Guardianes) si lo harán."
+
+msgid "Ice Plains"
+msgstr ""
+
+msgid ""
+"The ice-plains biome is an advanced biome.\n"
+"Mobs will spawn naturally.\n"
+"including polar-bears"
+msgstr ""
 
 #, java-format
 msgid "Biome: {0}"

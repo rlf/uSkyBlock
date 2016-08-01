@@ -2004,6 +2004,16 @@ msgid ""
 "mobs will spawn."
 msgstr ""
 
+msgid "Flower Forest"
+msgstr ""
+
+msgid ""
+"The flower forest biome.\n"
+"Passive mobs will spawn \n"
+"normally and hostile\n"
+"mobs will spawn."
+msgstr ""
+
 msgid "Deep Ocean"
 msgstr ""
 
@@ -2013,6 +2023,15 @@ msgid ""
 "not spawn. Hostile mobs \n"
 "(including Guardians) will\n"
 "spawn normally."
+msgstr ""
+
+msgid "Ice Plains"
+msgstr ""
+
+msgid ""
+"The ice-plains biome is an advanced biome.\n"
+"Mobs will spawn naturally.\n"
+"including polar-bears"
 msgstr ""
 
 #, java-format

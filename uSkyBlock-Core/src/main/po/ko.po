@@ -2125,6 +2125,16 @@ msgstr ""
 "스폰되고 적대적인\n"
 "몬스터들이 스폰됩니다."
 
+msgid "Flower Forest"
+msgstr ""
+
+msgid ""
+"The flower forest biome.\n"
+"Passive mobs will spawn \n"
+"normally and hostile\n"
+"mobs will spawn."
+msgstr ""
+
 msgid "Deep Ocean"
 msgstr "심해"
 
@@ -2139,6 +2149,15 @@ msgstr ""
 "생태계입니다. 동물같은 수동적인 몬스터들은\n"
 "스폰되지 않습니다. 적대적인 몬스터들\n"
 "(Guardians 포함)이 일반적으로 스폰됩니다."
+
+msgid "Ice Plains"
+msgstr ""
+
+msgid ""
+"The ice-plains biome is an advanced biome.\n"
+"Mobs will spawn naturally.\n"
+"including polar-bears"
+msgstr ""
 
 #, java-format
 msgid "Biome: {0}"

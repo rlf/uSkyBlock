@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.BiomeUtil.getBiome;
 
 public class BiomeCommand extends RequireIslandCommand {
     public static final Map<String, Biome> BIOMES = new HashMap<String, Biome>() {
@@ -30,6 +31,14 @@ public class BiomeCommand extends RequireIslandCommand {
             put("plains", Biome.PLAINS);
             put("extreme_hills", Biome.EXTREME_HILLS);
             put("deep_ocean", Biome.DEEP_OCEAN);
+            Biome b = getBiome("ICE_PLAINS");
+            if (b != null) {
+                put("ice_plains", b);
+            }
+            b = getBiome("FLOWER_FOREST");
+            if (b != null) {
+                put("flower_forest", b);
+            }
         }
     };
     private final SkyBlockMenu menu;
