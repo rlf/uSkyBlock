@@ -29,6 +29,8 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
 public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.api.PlayerInfo {
     private static final String CN = PlayerInfo.class.getName();
     private static final Logger log = Logger.getLogger(CN);
@@ -54,7 +56,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         // Prefer UUID over Name
         playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, UUIDUtil.asString(playerUUID) + ".yml");
         File nameFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
-        if (!playerConfigFile.exists() && nameFile.exists()) {
+        if (!playerConfigFile.exists() && nameFile.exists() && !currentPlayerName.equals(tr("Unknown Player"))) {
             nameFile.renameTo(playerConfigFile);
         }
         playerData = new YmlConfiguration();
@@ -155,7 +157,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         }
         IslandInfo island = getIslandInfo();
         if (island != null) {
-            island.sendMessageToOnlineMembers(I18nUtil.tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", getPlayerName(), challenge));
+            island.sendMessageToOnlineMembers(tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", getPlayerName(), challenge));
         }
     }
 
