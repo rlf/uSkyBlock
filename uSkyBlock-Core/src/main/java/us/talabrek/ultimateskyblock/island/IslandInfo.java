@@ -349,7 +349,12 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
             for (String uuid : memberSection.getKeys(false)) {
                 UUID id = UUIDUtil.fromString(uuid);
                 if (id != null) {
-                    members.add(uSkyBlock.getInstance().getPlayerDB().getName(id));
+                    String nm = uSkyBlock.getInstance().getPlayerDB().getName(id);
+                    if (nm != null) {
+                        members.add(nm);
+                    } else {
+                        log.info("Island " + name + " has invalid member-section " + uuid);
+                    }
                 } else {
                     log.info("Island " + name + " has invalid member-section " + uuid);
                 }

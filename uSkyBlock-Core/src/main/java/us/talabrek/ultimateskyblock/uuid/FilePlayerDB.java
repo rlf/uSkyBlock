@@ -211,6 +211,7 @@ public class FilePlayerDB implements PlayerDB {
 
     private synchronized void addEntry(UUID id, String name, String displayName) {
         String uuid = UUIDUtil.asString(id);
+        UUID oldUUID = name2uuidCache.get(name);
         if (name != null) {
             uuid2nameCache.put(id, name);
             name2uuidCache.put(name, id);
@@ -230,6 +231,10 @@ public class FilePlayerDB implements PlayerDB {
         uuid2NameConfig.set(uuid + ".updated", System.currentTimeMillis());
         if (displayName != null) {
             uuid2NameConfig.set(uuid + ".displayName", displayName);
+        }
+        if (oldUUID != null && !oldUUID.equals(id)) {
+            // Cleanup, remove all references to the new name for the old UUID
+            uuid2NameConfig.set(UUIDUtil.asString(oldUUID), null);
         }
     }
 
