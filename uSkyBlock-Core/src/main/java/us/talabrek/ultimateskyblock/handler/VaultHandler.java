@@ -4,8 +4,6 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.World;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -20,13 +18,12 @@ public enum VaultHandler {;
         econ = null;
     }
 
-    public static void init(Permission perms, Economy econ) {
-        VaultHandler.perms = perms;
-        VaultHandler.econ = econ;
+    public static void addPerk(final Player player, final String perk) {
+        perms.playerAdd(player, perk);
     }
 
-    public static void addPerk(final Player player, final String perk) {
-        perms.playerAdd((String) null, player.getName(), perk);
+    public static void removePerk(final Player player, final String perk) {
+        perms.playerRemove(player, perk);
     }
 
     public static boolean setupPermissions() {
@@ -64,9 +61,8 @@ public enum VaultHandler {;
         return econ != null;
     }
 
-    // TODO: UUID aware
-    public static void depositPlayer(String name, double v) {
-        econ.depositPlayer(name, v);
+    public static void depositPlayer(Player player, double v) {
+        econ.depositPlayer(player, v);
     }
 
     public static Economy getEcon() {

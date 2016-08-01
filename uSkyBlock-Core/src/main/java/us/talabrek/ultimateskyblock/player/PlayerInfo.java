@@ -11,6 +11,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -84,10 +86,14 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
 
     @Override
     public Player getPlayer() {
+        Player player = null;
         if (uuid != null) {
-            return Bukkit.getPlayer(uuid);
+            player = uSkyBlock.getInstance().getPlayerDB().getPlayer(uuid);
         }
-        return Bukkit.getPlayer(this.playerName);
+        if (player == null && playerName != null) {
+            player = uSkyBlock.getInstance().getPlayerDB().getPlayer(playerName);
+        }
+        return player;
     }
 
     @Override
@@ -180,6 +186,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         pSection.set("homeZ", 0);
         pSection.set("homeYaw", 0);
         pSection.set("homePitch", 0);
+        pSection.set("perms", null);
     }
 
     private PlayerInfo loadPlayer() {
@@ -405,6 +412,26 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
             playerData.set("pending-commands", pending);
             save();
             return false;
+        }
+    }
+
+    public void addPermission(String perm) {
+        VaultHandler.addPerk(getPlayer(), perm);
+        List<String> permList = playerData.getStringList("player.perms");
+        permList.addAll(Arrays.asList(perm.split(" ")));
+        playerData.set("player.perms", permList);
+        save();
+    }
+
+    public void clearPerms(Player player) {
+        // Also clear perms
+        final List<String> perms = playerData.getStringList("player.perms");
+        if (perms != null && !perms.isEmpty()) {
+            for (String perm : perms) {
+                VaultHandler.removePerk(player, perm);
+            }
+            playerData.set("player.perms", null);
+            save();
         }
     }
 }

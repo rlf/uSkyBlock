@@ -33,7 +33,7 @@ public class PerkCommand extends CompositeCommand {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
-                    Player player = Bukkit.getPlayer(args[0]);
+                    Player player = plugin.getPlayerDB().getPlayer(args[0]);
                     if (player != null) {
                         StringBuilder sb = new StringBuilder();
                         Perk perk = plugin.getPerkLogic().getPerk(player);

@@ -4,6 +4,7 @@ import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -164,6 +165,34 @@ public class FilePlayerDB implements PlayerDB {
                 }, saveDelay);
             }
         }
+    }
+
+    @Override
+    public Player getPlayer(UUID uuid) {
+        if (uuid != null) {
+            Player player = Bukkit.getPlayer(uuid);
+            if (player != null) {
+                updatePlayer(player.getUniqueId(), player.getName(), player.getDisplayName());
+            }
+            return player;
+        }
+        return null;
+    }
+
+    @Override
+    public Player getPlayer(String name) {
+        if (name != null) {
+            UUID uuid = getUUIDFromName(name);
+            if (uuid != null) {
+                return getPlayer(uuid);
+            }
+            Player player = Bukkit.getPlayer(name);
+            if (player != null) {
+                updatePlayer(player.getUniqueId(), player.getName(), player.getDisplayName());
+            }
+            return player;
+        }
+        return null;
     }
 
     private void saveToFile() {

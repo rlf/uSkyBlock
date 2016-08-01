@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.uuid;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import java.util.Set;
@@ -50,6 +51,9 @@ public interface PlayerDB extends Listener {
      * Stores a new name in the DB.
      */
     void updatePlayer(UUID uuid, String name, String displayName);
+
+    Player getPlayer(UUID uuid);
+    Player getPlayer(String name);
 
     void shutdown();
 }

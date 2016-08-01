@@ -88,7 +88,7 @@ public class PlayerLogic {
 
         final PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
 
-        final Player onlinePlayer = Bukkit.getPlayer(playerName);
+        final Player onlinePlayer = uSkyBlock.getInstance().getPlayerDB().getPlayer(playerUUID);
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
             if (playerInfo.getHasIsland()) {
                 IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);

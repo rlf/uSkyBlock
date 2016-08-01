@@ -521,6 +521,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (getConfig().getBoolean("options.restart.clearInventory", true)) {
             player.getInventory().clear();
         }
+        if (getConfig().getBoolean("options.restart.clearPerms", true)) {
+            playerInfo.clearPerms(player);
+        }
         if (getConfig().getBoolean("options.restart.clearArmor", true)) {
             ItemStack[] armor = player.getEquipment().getArmorContents();
             player.getEquipment().setArmorContents(new ItemStack[armor.length]);
@@ -1087,7 +1090,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         if (command.contains("{party}")) {
             PlayerInfo playerInfo = getPlayerInfo(player);
-            for (String member : getIslandInfo(playerInfo).getMembers()) {
+            IslandInfo islandInfo = getIslandInfo(playerInfo);
+            for (String member : islandInfo.getMembers()) {
                 doExecCommand(player, command.replaceAll("\\{party\\}", Matcher.quoteReplacement(member)), delay);
             }
         } else {

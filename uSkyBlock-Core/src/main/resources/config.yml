@@ -220,6 +220,8 @@ options:
     clearArmor: true
     # Clears the player's enderchest on island create/restart
     clearEnderChest: true
+    # Clears the permissions the player has been granted from rewards
+    clearPerms: true
 
     # [ms] The number of ms to wait, before porting the player back
     # on /is restart or /is create (default: 1000)
@@ -393,7 +395,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 55
+version: 56
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

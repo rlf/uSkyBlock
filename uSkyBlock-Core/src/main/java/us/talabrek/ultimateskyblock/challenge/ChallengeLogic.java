@@ -354,7 +354,7 @@ public class ChallengeLogic {
         if (defaults.enableEconomyPlugin && VaultHandler.hasEcon()) {
             Perk perk = plugin.getPerkLogic().getPerk(player);
             rewBonus += perk.getRewBonus();
-            VaultHandler.depositPlayer(player.getName(), reward.getCurrencyReward() * rewBonus);
+            VaultHandler.depositPlayer(player, reward.getCurrencyReward() * rewBonus);
         }
         player.giveExp(reward.getXpReward());
         boolean wasBroadcast = false;
@@ -370,7 +370,7 @@ public class ChallengeLogic {
         if (reward.getPermissionReward() != null) {
             for (String perm : reward.getPermissionReward().split(" ")) {
                 if (!hasPermission(player, perm)) {
-                    VaultHandler.addPerk(player, perm);
+                    playerInfo.addPermission(perm);
                 }
             }
         }

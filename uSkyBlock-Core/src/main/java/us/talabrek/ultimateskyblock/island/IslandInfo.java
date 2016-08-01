@@ -131,7 +131,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         section.set("canBanOthers", true);
         config.set("party.currentSize", getMembers().size());
 
-        Player onlinePlayer = Bukkit.getPlayer(leader);
+        Player onlinePlayer = uSkyBlock.getInstance().getPlayerDB().getPlayer(uuid);
         // The only time the onlinePlayer will be null is if it is being converted from another skyblock plugin.
         if (onlinePlayer != null && onlinePlayer.isOnline()) {
             updatePermissionPerks(onlinePlayer, uSkyBlock.getInstance().getPerkLogic().getPerk(onlinePlayer));
@@ -452,10 +452,10 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
     public void sendMessageToIslandGroup(boolean broadcast, String message, Object... args) {
         if (broadcast) {
-            for (String player : getMembers()) {
-                // TODO: 28/06/2016 - R4zorax: Inefficient - double lookup
-                if (Bukkit.getPlayer(player) != null) {
-                    Bukkit.getPlayer(player).sendMessage(tr("\u00a7cSKY \u00a7f> \u00a77 {0}", tr(message, args)));
+            for (UUID uuid : getMemberUUIDs()) {
+                Player player = uSkyBlock.getInstance().getPlayerDB().getPlayer(uuid);
+                if (player != null && player.isOnline()) {
+                    player.sendMessage(tr("\u00a7cSKY \u00a7f> \u00a77 {0}", tr(message, args)));
                 }
             }
         }
@@ -725,15 +725,10 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                 if (uuid != null) {
                     UUID id = UUIDUtil.fromString(uuid);
                     if (id != null) {
-                        Player onlinePlayer = Bukkit.getPlayer(id);
+                        Player onlinePlayer = uSkyBlock.getInstance().getPlayerDB().getPlayer(id);
                         if (onlinePlayer != null) {
                             return true;
                         }
-                    }
-                } else {
-                    Player onlinePlayer = Bukkit.getPlayer(uuid);
-                    if (onlinePlayer != null) {
-                        return true;
                     }
                 }
             }
@@ -750,7 +745,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                 if (uuid != null) {
                     UUID id = UUIDUtil.fromString(uuid);
                     if (id != null) {
-                        Player onlinePlayer = Bukkit.getPlayer(id);
+                        Player onlinePlayer = uSkyBlock.getInstance().getPlayerDB().getPlayer(id);
                         if (onlinePlayer != null) {
                             players.add(onlinePlayer);
                         }

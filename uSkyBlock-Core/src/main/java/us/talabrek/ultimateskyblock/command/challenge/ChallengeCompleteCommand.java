@@ -26,6 +26,9 @@ public class ChallengeCompleteCommand extends AbstractCommand {
             sender.sendMessage(tr("\u00a7cCommand only available for players."));
             return false;
         }
+        if (args == null || args.length == 0) {
+            return false;
+        }
         String challengeName = "";
         for (String arg : args) {
             challengeName += " " + arg;
