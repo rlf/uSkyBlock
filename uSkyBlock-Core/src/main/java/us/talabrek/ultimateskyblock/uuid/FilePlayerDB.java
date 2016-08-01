@@ -58,12 +58,14 @@ public class FilePlayerDB implements PlayerDB {
                 for (String uuid : uuids) {
                     UUID id = UUIDUtil.fromString(uuid);
                     String name = uuid2NameConfig.getString(uuid + ".name", null);
-                    uuid2nameCache.put(id, name);
-                    name2uuidCache.put(name, id);
-                    List<String> akas = uuid2NameConfig.getStringList(uuid + ".aka");
-                    for (String aka : akas) {
-                        if (!name2uuidCache.containsKey(aka)) {
-                            name2uuidCache.put(aka, id);
+                    if (name != null) {
+                        uuid2nameCache.put(id, name);
+                        name2uuidCache.put(name, id);
+                        List<String> akas = uuid2NameConfig.getStringList(uuid + ".aka");
+                        for (String aka : akas) {
+                            if (!name2uuidCache.containsKey(aka)) {
+                                name2uuidCache.put(aka, id);
+                            }
                         }
                     }
                 }
@@ -209,8 +211,10 @@ public class FilePlayerDB implements PlayerDB {
 
     private synchronized void addEntry(UUID id, String name, String displayName) {
         String uuid = UUIDUtil.asString(id);
-        uuid2nameCache.put(id, name);
-        name2uuidCache.put(name, id);
+        if (name != null) {
+            uuid2nameCache.put(id, name);
+            name2uuidCache.put(name, id);
+        }
         String oldName = uuid2NameConfig.getString(uuid + ".name", name);
         if (uuid2NameConfig.contains(uuid) && !oldName.equals(name)) {
             List<String> stringList = uuid2NameConfig.getStringList(uuid + ".aka");
