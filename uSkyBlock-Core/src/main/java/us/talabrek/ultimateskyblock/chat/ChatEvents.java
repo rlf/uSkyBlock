@@ -33,7 +33,7 @@ public class ChatEvents implements Listener {
         logic.sendMessage(e.getPlayer(), e.getType(), e.getMessage());
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onChatEvent(AsyncPlayerChatEvent e) {
         if (e.isCancelled()
                 || e.getMessage() == null
