@@ -10,6 +10,9 @@ import java.util.UUID;
  * Simple abstraction, allowing for future DB support
  */
 public interface PlayerDB extends Listener {
+    UUID UNKNOWN_PLAYER_UUID = UUID.fromString("c1fc3ace-e6b2-37ed-a575-03e0d777d7f1");
+    String UNKNOWN_PLAYER_NAME = "__UNKNOWN__";
+
     /**
      * Returns the UUID (if found) for the player we currently thinks has that name
      * @param name The name (not displayName) of a player.

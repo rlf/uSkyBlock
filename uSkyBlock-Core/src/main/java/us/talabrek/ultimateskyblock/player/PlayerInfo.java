@@ -17,6 +17,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.LogUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
+import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         // Prefer UUID over Name
         playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, UUIDUtil.asString(playerUUID) + ".yml");
         File nameFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
-        if (!playerConfigFile.exists() && nameFile.exists() && !currentPlayerName.equals(tr("Unknown Player"))) {
+        if (!playerConfigFile.exists() && nameFile.exists() && !currentPlayerName.equals(PlayerDB.UNKNOWN_PLAYER_NAME)) {
             nameFile.renameTo(playerConfigFile);
         }
         playerData = new YmlConfiguration();

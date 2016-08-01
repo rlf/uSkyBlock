@@ -106,6 +106,9 @@ public class FilePlayerDB implements PlayerDB {
 
     @Override
     public synchronized String getName(UUID uuid) {
+        if (UNKNOWN_PLAYER_UUID.equals(uuid)) {
+            return UNKNOWN_PLAYER_NAME;
+        }
         if (uuid2nameCache.containsKey(uuid)) {
             return uuid2nameCache.get(uuid);
         }

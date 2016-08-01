@@ -5,7 +5,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -26,7 +25,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class PlayerLogic {
     private static final Logger log = Logger.getLogger(PlayerLogic.class.getName());
-    private static final PlayerInfo UNKNOWN_PLAYER = new PlayerInfo("__UNKNOWN__", UUID.fromString("c1fc3ace-e6b2-37ed-a575-03e0d777d7f1"));
+    private static final PlayerInfo UNKNOWN_PLAYER = new PlayerInfo(PlayerDB.UNKNOWN_PLAYER_NAME, PlayerDB.UNKNOWN_PLAYER_UUID);
     private final LoadingCache<UUID, PlayerInfo> playerCache;
     private final uSkyBlock plugin;
     private final BukkitTask saveTask;
@@ -82,10 +81,10 @@ public class PlayerLogic {
 
     private PlayerInfo loadPlayerData(UUID playerUUID, String playerName) {
         if (playerUUID == null) {
-            return null;
+            playerUUID = PlayerDB.UNKNOWN_PLAYER_UUID;
         }
         if (playerName == null) {
-            playerName = tr("Unknown Player");
+            playerName = "__UNKNOWN__";
         }
         log.log(Level.FINER, "Loading player data for " + playerUUID + "/" + playerName);
 
