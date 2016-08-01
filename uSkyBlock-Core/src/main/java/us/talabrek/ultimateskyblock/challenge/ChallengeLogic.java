@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 import dk.lockfuglsang.minecraft.nbt.NBTUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -10,14 +11,17 @@ import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.ArrayList;
@@ -31,17 +35,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 /**
  * The home of challenge business logic.
  */
-public class ChallengeLogic {
+public class ChallengeLogic implements Listener {
     public static final long MS_MIN = 60 * 1000;
     public static final long MS_HOUR = 60 * MS_MIN;
     public static final long MS_DAY = 24 * MS_HOUR;
@@ -69,6 +73,9 @@ public class ChallengeLogic {
             lockedItem = ItemStackUtil.createItemStack(displayItemForLocked, null, null);
         } else {
             lockedItem = null;
+        }
+        if (completionLogic.isIslandSharing()) {
+            plugin.getServer().getPluginManager().registerEvents(this, plugin);
         }
     }
 
@@ -180,9 +187,9 @@ public class ChallengeLogic {
                 return amount - inc * timesCompleted; // Why?
             case '*':
             case '^':
-                return amount * (int)Math.pow(inc, timesCompleted); // Oh, my god! Just do the time m8!
+                return amount * (int) Math.pow(inc, timesCompleted); // Oh, my god! Just do the time m8!
             case '/':
-                return amount / (int)Math.pow(inc, timesCompleted); // Yay! Free stuff!!!
+                return amount / (int) Math.pow(inc, timesCompleted); // Yay! Free stuff!!!
         }
         return amount;
     }
@@ -368,10 +375,22 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a7eCurrency reward: \u00a7f{0,number,###.##} {1} \u00a7a ({2,number,##.##})%", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
         }
         if (reward.getPermissionReward() != null) {
-            for (String perm : reward.getPermissionReward().split(" ")) {
-                if (!hasPermission(player, perm)) {
-                    playerInfo.addPermission(perm);
+            List<String> perms = Arrays.asList(reward.getPermissionReward().trim().split(" "));
+            if (challenge.getType() != Challenge.Type.PLAYER && isIslandSharing()) {
+                // Give all members
+                IslandInfo islandInfo = playerInfo.getIslandInfo();
+                for (UUID memberUUID : islandInfo.getMemberUUIDs()) {
+                    if (memberUUID == null) {
+                        continue;
+                    }
+                    PlayerInfo pi = plugin.getPlayerInfo(memberUUID);
+                    if (pi != null) {
+                        pi.addPermissions(perms);
+                    }
                 }
+            } else {
+                // Give only player
+                playerInfo.addPermissions(perms);
             }
         }
         HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(reward.getItemReward().toArray(new ItemStack[0]));
@@ -577,5 +596,26 @@ public class ChallengeLogic {
 
     public boolean isIslandSharing() {
         return completionLogic.isIslandSharing();
+    }
+
+    @EventHandler
+    public void onMemberJoinedEvent(MemberJoinedEvent e) {
+        if (!completionLogic.isIslandSharing() || !(e.getPlayerInfo() instanceof PlayerInfo)) {
+            return;
+        }
+        PlayerInfo playerInfo = (PlayerInfo) e.getPlayerInfo();
+        Map<String, ChallengeCompletion> completions = completionLogic.getIslandChallenges(e.getIslandInfo().getName());
+        List<String> permissions = new ArrayList<>();
+        for (Map.Entry<String, ChallengeCompletion> entry : completions.entrySet()) {
+            if (entry.getValue().getTimesCompleted() > 0) {
+                Challenge challenge = getChallenge(entry.getKey());
+                if (challenge.getType() != Challenge.Type.PLAYER && challenge.getReward().getPermissionReward() != null) {
+                    permissions.addAll(Arrays.asList(challenge.getReward().getPermissionReward().split(" ")));
+                }
+            }
+        }
+        if (!permissions.isEmpty()) {
+            playerInfo.addPermissions(permissions);
+        }
     }
 }

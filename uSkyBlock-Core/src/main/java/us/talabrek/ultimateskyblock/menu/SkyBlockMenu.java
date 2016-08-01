@@ -909,7 +909,7 @@ public class SkyBlockMenu {
             if (lores == null) {
                 lores = new ArrayList<>();
             }
-            if (player.hasPermission(islandPerk.getPermission())) {
+            if (hasPermission(player, islandPerk.getPermission())) {
                 long millisLeft = plugin.getConfirmHandler().millisLeft(player, "/is restart");
                 if (millisLeft > 0) {
                     addLore(lores, tr("\u00a7cClick within \u00a79{0}\u00a7c to restart!", TimeUtil.millisAsString(millisLeft)));
@@ -923,6 +923,7 @@ public class SkyBlockMenu {
             menuItem.setItemMeta(meta);
             menu.setItem(index++, menuItem);
         }
+        player.updateInventory();
     }
 
     private void onClickLogMenu(InventoryClickEvent event, Player p, int slotIndex) {

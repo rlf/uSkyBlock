@@ -1,11 +1,12 @@
 package us.talabrek.ultimateskyblock.player;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
+import net.milkbowl.vault.Vault;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -418,11 +419,18 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         }
     }
 
-    public void addPermission(String perm) {
-        VaultHandler.addPerk(getPlayer(), perm);
+    public void addPermissions(List<String> perms) {
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+        if (offlinePlayer == null) {
+            return;
+        }
         List<String> permList = playerData.getStringList("player.perms");
-        permList.addAll(Arrays.asList(perm.split(" ")));
-        playerData.set("player.perms", permList);
+        for (String perm : perms) {
+            if (!VaultHandler.hasPermission(offlinePlayer, perm)) {
+                permList.add(perm);
+                VaultHandler.addPermission(offlinePlayer, perm);
+            }
+        }
         save();
     }
 
@@ -431,7 +439,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         final List<String> perms = playerData.getStringList("player.perms");
         if (perms != null && !perms.isEmpty()) {
             for (String perm : perms) {
-                VaultHandler.removePerk(player, perm);
+                VaultHandler.removePermission(player, perm);
             }
             playerData.set("player.perms", null);
             save();

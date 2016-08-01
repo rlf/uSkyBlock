@@ -209,4 +209,5 @@ public class ChallengeCompletionLogic {
     public boolean isIslandSharing() {
         return storeOnIsland;
     }
+
 }

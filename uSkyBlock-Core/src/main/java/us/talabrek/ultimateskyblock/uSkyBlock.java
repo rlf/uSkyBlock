@@ -33,6 +33,8 @@ import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
+import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
+import us.talabrek.ultimateskyblock.api.event.MemberLeftEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
 import us.talabrek.ultimateskyblock.async.Callback;
@@ -56,7 +58,7 @@ import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
 import us.talabrek.ultimateskyblock.event.ToolMenuEvents;
 import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
-import us.talabrek.ultimateskyblock.event.uSkyBlockEvents;
+import us.talabrek.ultimateskyblock.event.InternalEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
@@ -99,9 +101,7 @@ import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -298,7 +298,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public void registerEvents() {
         final PluginManager manager = getServer().getPluginManager();
-        manager.registerEvents(new uSkyBlockEvents(this), this);
+        manager.registerEvents(new InternalEvents(this), this);
         manager.registerEvents(new PlayerEvents(this), this);
         manager.registerEvents(new MenuEvents(this), this);
         manager.registerEvents(new ExploitEvents(this), this);
@@ -1371,5 +1371,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         for (String cmd : cmdList) {
             execCommand(player, cmd, false);
         }
+    }
+
+    public void fireMemberJoinedEvent(IslandInfo islandInfo, PlayerInfo playerInfo) {
+        getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo));
+    }
+
+    public void fireMemberLeftEvent(IslandInfo islandInfo, PlayerInfo member) {
+        getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member));
     }
 }
