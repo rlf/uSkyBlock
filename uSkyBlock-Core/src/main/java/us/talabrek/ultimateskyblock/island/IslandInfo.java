@@ -35,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.file.FileUtil.readConfig;
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
@@ -469,7 +470,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
     @Override
     public boolean isBanned(Player player) {
-        return isBanned(player.getUniqueId());
+        return isBanned(player.getUniqueId()) && !hasPermission(player, "usb.mod.bypassprotection");
     }
 
     public boolean isBanned(String name) {

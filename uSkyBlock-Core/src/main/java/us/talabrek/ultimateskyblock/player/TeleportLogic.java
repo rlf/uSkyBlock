@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.player;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
