@@ -330,24 +330,24 @@ nether:
   # The probability of forming blocks
   terraform:
     NETHERRACK:
-      - '{p=0.7}NETHERRACK'
-      - '{p=0.15}NETHERRACK'
-      - '{p=0.05}QUARTZ_ORE'
-      - '{p=0.05}SOUL_SAND'
+    - '{p=0.7}NETHERRACK'
+    - '{p=0.15}NETHERRACK'
+    - '{p=0.05}QUARTZ_ORE'
+    - '{p=0.05}SOUL_SAND'
     QUARTZ_ORE:
-      - '{p=0.50}QUARTZ_ORE'
-      - '{p=0.10}QUARTZ_ORE'
+    - '{p=0.50}QUARTZ_ORE'
+    - '{p=0.10}QUARTZ_ORE'
     SOUL_SAND:
-      - '{p=0.70}SOUL_SAND'
-      - '{p=0.10}SOUL_SAND'
-      - '{p=0.05}GRAVEL'
+    - '{p=0.70}SOUL_SAND'
+    - '{p=0.10}SOUL_SAND'
+    - '{p=0.05}GRAVEL'
     GRAVEL:
-      - '{p=0.15}GRAVEL'
-      - '{p=0.05}GRAVEL'
-      - '{p=0.05}SOUL_SAND'
+    - '{p=0.15}GRAVEL'
+    - '{p=0.05}GRAVEL'
+    - '{p=0.05}SOUL_SAND'
     GLOWSTONE:
-      - '{p=0.85}GLOWSTONE'
-      - '{p=0.15}GLOWSTONE'
+    - '{p=0.85}GLOWSTONE'
+    - '{p=0.15}GLOWSTONE'
 
   # Weights that is applied to the above terraform chances depending on the tool used
   terraform-weight:

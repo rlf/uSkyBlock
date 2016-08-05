@@ -60,6 +60,7 @@ public class ChallengeLogic implements Listener {
     public final ChallengeDefaults defaults;
     public final ChallengeCompletionLogic completionLogic;
     private final ItemStack lockedItem;
+    private final Map<Challenge.Type, ItemStack> lockedItemMap = new HashMap<>();
 
     public ChallengeLogic(FileConfiguration config, uSkyBlock plugin) {
         this.config = config;
@@ -70,9 +71,17 @@ public class ChallengeLogic implements Listener {
         completionLogic = new ChallengeCompletionLogic(plugin, config);
         String displayItemForLocked = config.getString("lockedDisplayItem", null);
         if (displayItemForLocked != null) {
-            lockedItem = ItemStackUtil.createItemStack(displayItemForLocked, null, null);
+            lockedItem = ItemStackUtil.createItemStack(displayItemForLocked);
         } else {
             lockedItem = null;
+        }
+        for (Challenge.Type type : Challenge.Type.values()) {
+            String itemName = config.getString(type.name() + ".lockedDisplayItem", null);
+            if (itemName != null) {
+                lockedItemMap.put(type, ItemStackUtil.createItemStack(itemName));
+            } else {
+                lockedItemMap.put(type, lockedItem);
+            }
         }
         if (completionLogic.isIslandSharing()) {
             plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -376,7 +385,7 @@ public class ChallengeLogic implements Listener {
         }
         if (reward.getPermissionReward() != null) {
             List<String> perms = Arrays.asList(reward.getPermissionReward().trim().split(" "));
-            if (challenge.getType() != Challenge.Type.PLAYER && isIslandSharing()) {
+            if (isIslandSharing()) {
                 // Give all members
                 IslandInfo islandInfo = playerInfo.getIslandInfo();
                 for (UUID memberUUID : islandInfo.getMemberUUIDs()) {
@@ -425,7 +434,7 @@ public class ChallengeLogic implements Listener {
             lores.add(tr("\u00a74\u00a7lYou can't repeat this challenge."));
         }
         if (completion.getTimesCompleted() > 0) {
-            meta.addEnchant(new EnchantmentWrapper(0), 0, false);
+            meta.addEnchant(new EnchantmentWrapper(0), 0, true);
         }
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
@@ -478,7 +487,11 @@ public class ChallengeLogic implements Listener {
     private int calculateRows(List<Rank> ranksOnPage) {
         int row = 0;
         for (Rank rank : ranksOnPage) {
-            row += Math.ceil(rank.getChallenges().size() / 8f);
+            int rankSize = 0;
+            for (Challenge challenge : rank.getChallenges()) {
+                rankSize += challenge.getOffset() + 1;
+            }
+            row += Math.ceil(rankSize / 8f);
         }
         return row;
     }
@@ -497,9 +510,13 @@ public class ChallengeLogic implements Listener {
         }
         meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
-        menu.setItem(location++, currentChallengeItem);
+        menu.setItem(location, currentChallengeItem);
         List<String> missingRankRequirements = rank.getMissingRequirements(playerInfo);
         for (Challenge challenge : rank.getChallenges()) {
+            if (challenge.getOffset() == -1 && !currentChallengeItem.getItemMeta().hasEnchants()) {
+                continue; // skip
+            }
+            location += challenge.getOffset() + 1;
             if ((location % 9) == 0) {
                 location++; // Skip rank-row
             }
@@ -513,6 +530,9 @@ public class ChallengeLogic implements Listener {
                 List<String> missingReqs = challenge.getMissingRequirements(playerInfo);
                 if (!missingRankRequirements.isEmpty() || !missingReqs.isEmpty()) {
                     ItemStack locked = challenge.getLockedDisplayItem();
+                    if (locked == null) {
+                        locked = lockedItemMap.get(challenge.getType());
+                    }
                     if (locked != null) {
                         currentChallengeItem.setType(locked.getType());
                         currentChallengeItem.setDurability(locked.getDurability());
@@ -521,13 +541,16 @@ public class ChallengeLogic implements Listener {
                         currentChallengeItem.setDurability(lockedItem.getDurability());
                     }
                     meta4 = currentChallengeItem.getItemMeta();
+                    if (defaults.showLockedChallengeName) {
+                        lores.add(meta4.getDisplayName());
+                    }
                     meta4.setDisplayName(tr("\u00a74\u00a7lLocked Challenge"));
                     lores.addAll(missingReqs);
                     lores.addAll(missingRankRequirements);
                     meta4.setLore(lores);
                     currentChallengeItem.setItemMeta(meta4);
                 }
-                menu.setItem(location++, currentChallengeItem);
+                menu.setItem(location, currentChallengeItem);
             } catch (Exception e) {
                 plugin.getLogger().log(Level.SEVERE, "Invalid challenge " + challenge, e);
             }
@@ -609,7 +632,7 @@ public class ChallengeLogic implements Listener {
         for (Map.Entry<String, ChallengeCompletion> entry : completions.entrySet()) {
             if (entry.getValue().getTimesCompleted() > 0) {
                 Challenge challenge = getChallenge(entry.getKey());
-                if (challenge.getType() != Challenge.Type.PLAYER && challenge.getReward().getPermissionReward() != null) {
+                if (challenge.getReward().getPermissionReward() != null) {
                     permissions.addAll(Arrays.asList(challenge.getReward().getPermissionReward().split(" ")));
                 }
             }

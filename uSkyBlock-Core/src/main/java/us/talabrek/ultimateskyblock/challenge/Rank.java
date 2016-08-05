@@ -50,7 +50,7 @@ public class Rank {
 
     public ItemStack getDisplayItem() {
         String displayItem = config.getString("displayItem", "DIRT");
-        return ItemStackUtil.createItemStack(displayItem, getName(), null);
+        return ItemStackUtil.asDisplayItem(ItemStackUtil.createItemStack(displayItem, getName(), null));
     }
 
     public String getName() {

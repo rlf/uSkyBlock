@@ -42,6 +42,13 @@ msgstr "§f{0}x §7{1}"
 msgid "§7{0}"
 msgstr "§7{0}"
 
+msgid "§eItems will be traded for reward."
+msgstr ""
+
+#, java-format
+msgid "§eMust be within {0} meters."
+msgstr ""
+
 msgid "§6Item Reward: §a"
 msgstr "§6Item reçu : §a"
 
@@ -518,8 +525,8 @@ msgid "§4That player does not have an island!"
 msgstr "§4Ce joueur n'a pas d'île !"
 
 #, java-format
-msgid "§aTeleporting to {0}s island."
-msgstr "§aTéleporté à l''île de {0}."
+msgid "§aTeleporting to {0}''s island."
+msgstr ""
 
 msgid "imports players and islands from other formats"
 msgstr "importer les joueurs et les îles depuis un autre format"

@@ -42,6 +42,13 @@ msgstr ""
 msgid "§7{0}"
 msgstr "§7{0}"
 
+msgid "§eItems will be traded for reward."
+msgstr ""
+
+#, java-format
+msgid "§eMust be within {0} meters."
+msgstr ""
+
 msgid "§6Item Reward: §a"
 msgstr "§6아이템 보상: §a"
 
@@ -518,8 +525,8 @@ msgid "§4That player does not have an island!"
 msgstr "§4그 플레이어는 가진 섬이 없습니다!"
 
 #, java-format
-msgid "§aTeleporting to {0}s island."
-msgstr "§a{0}의 섬으로 텔레포트 하는 중."
+msgid "§aTeleporting to {0}''s island."
+msgstr ""
 
 msgid "imports players and islands from other formats"
 msgstr "다른 형식으로 부터 플레이어와 섬을 수입합니다"

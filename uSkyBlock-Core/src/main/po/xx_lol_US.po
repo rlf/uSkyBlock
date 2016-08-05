@@ -42,6 +42,13 @@ msgstr "§f{0}x §7{1}"
 msgid "§7{0}"
 msgstr "§7{0}"
 
+msgid "§eItems will be traded for reward."
+msgstr ""
+
+#, java-format
+msgid "§eMust be within {0} meters."
+msgstr ""
+
 msgid "§6Item Reward: §a"
 msgstr "§6stuffs Kitteh treet: §a"
 
@@ -517,8 +524,8 @@ msgid "§4That player does not have an island!"
 msgstr "§4That kitteh does not have a cathouz!"
 
 #, java-format
-msgid "§aTeleporting to {0}s island."
-msgstr "§aTeleporting to {0}s cathouz."
+msgid "§aTeleporting to {0}''s island."
+msgstr ""
 
 msgid "imports players and islands from other formats"
 msgstr "imports kittehs an' islands from other formats"
@@ -2638,6 +2645,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§aTeleporting to {0}s island."
+#~ msgstr "§aTeleporting to {0}s cathouz."
 
 #~ msgid ""
 #~ "When your warp is activated,\n"

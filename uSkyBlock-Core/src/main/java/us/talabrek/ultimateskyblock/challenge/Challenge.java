@@ -7,6 +7,7 @@ import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
+import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,7 @@ import static dk.lockfuglsang.minecraft.util.FormatUtil.*;
 public class Challenge {
     public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
     public static final int MAX_DETAILS = 11;
+    public static final int MAX_LINE = 30;
 
     public enum Type { PLAYER, ISLAND, ISLAND_LEVEL;
         static Type from(String s) {
@@ -46,12 +48,16 @@ public class Challenge {
     private final ItemStack displayItem;
     private final String tool;
     private final ItemStack lockedItem;
+    private final int offset;
     private final boolean takeItems;
     private final int radius;
     private final Reward reward;
     private final Reward repeatReward;
 
-    public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems, List<EntityMatch> requiredEntities, List<String> requiredChallenges, Rank rank, int resetInHours, ItemStack displayItem, String tool, ItemStack lockedItem, boolean takeItems, int radius, Reward reward, Reward repeatReward) {
+    public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems,
+                     List<EntityMatch> requiredEntities, List<String> requiredChallenges, Rank rank, int resetInHours,
+                     ItemStack displayItem, String tool, ItemStack lockedItem, int offset, boolean takeItems,
+                     int radius, Reward reward, Reward repeatReward) {
         this.name = name;
         this.displayName = displayName;
         this.type = type;
@@ -63,6 +69,7 @@ public class Challenge {
         this.displayItem = displayItem;
         this.tool = tool;
         this.lockedItem = lockedItem;
+        this.offset = offset;
         this.takeItems = takeItems;
         this.radius = radius;
         this.reward = reward;
@@ -87,7 +94,7 @@ public class Challenge {
     }
 
     public String getDescription() {
-        return description;
+        return description != null ? description : "";
     }
 
     public int getRadius() {
@@ -142,10 +149,11 @@ public class Challenge {
         ItemStack currentChallengeItem = getDisplayItem();
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = new ArrayList<>();
-        lores.addAll(prefix(wordWrap(getDescription(), 30, 30), "\u00a77"));
+        lores.addAll(prefix(wordWrap(getDescription(), MAX_LINE), "\u00a77"));
         int timesCompleted = completion.getTimesCompletedInCooldown();
         Reward reward = getReward();
         if (completion.getTimesCompleted() > 0 && isRepeatable()) {
+            currentChallengeItem.setAmount(completion.getTimesCompleted());
             if (completion.isOnCooldown()) {
                 long cooldown = completion.getCooldownInMillis();
                 if (cooldown >= ChallengeLogic.MS_DAY) {
@@ -189,7 +197,14 @@ public class Challenge {
             }
         }
         lores.addAll(wrappedDetails(details));
-        List<String> lines = wordWrap("\u00a7a" + reward.getRewardText(), 20, 30);
+        if (type == Challenge.Type.PLAYER) {
+            if (takeItems) {
+                lores.add(tr("\u00a7eItems will be traded for reward."));
+            }
+        } else if (type == Challenge.Type.ISLAND) {
+            lores.add(tr("\u00a7eMust be within {0} meters.", getRadius()));
+        }
+        List<String> lines = wordWrap("\u00a7a" + reward.getRewardText(), 20, MAX_LINE);
         lores.add(tr("\u00a76Item Reward: \u00a7a") + lines.get(0));
         for (String line : lines.subList(1, lines.size())) {
             lores.add(line);
@@ -199,17 +214,22 @@ public class Challenge {
         }
         lores.add(tr("\u00a76Exp Reward: \u00a7a{0}", reward.getXpReward()));
         lores.add(tr("\u00a7dTotal times completed: \u00a7f{0}", completion.getTimesCompleted()));
+
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
         return currentChallengeItem;
     }
 
+    public int getOffset() {
+        return offset;
+    }
+
     private List<String> wrappedDetails(List<String> details) {
-        return wordWrap(join(details, ", "), 30, 30);
+        return wordWrap(join(details, ", "), MAX_LINE);
     }
 
     public ItemStack getDisplayItem() {
-        return new ItemStack(displayItem); // Copy
+        return ItemStackUtil.asDisplayItem(displayItem); // Copy
     }
 
     public String getTool() {
@@ -251,7 +271,7 @@ public class Challenge {
         }
         String missingList = "" + missing;
         missingList = missingList.substring(1, missingList.length()-1);
-        return Collections.singletonList(tr("\u00a77Requires {0}\u00a77 to unlock", missingList));
+        return wordWrap(tr("\u00a77Requires {0}\u00a77 to unlock", missingList), MAX_LINE);
     }
 
     @Override

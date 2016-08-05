@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.util;
 
 import dk.lockfuglsang.minecraft.nbt.NBTUtil;
+import dk.lockfuglsang.minecraft.reflection.ReflectionUtil;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -188,6 +189,21 @@ public enum ItemStackUtil {
         return item.getAmount() > 1
                 ? tr("\u00a7f{0}x \u00a77{1}", item.getAmount(), VaultHandler.getItemName(item))
                 : tr("\u00a77{0}", VaultHandler.getItemName(item));
+    }
+
+    public static ItemStack asDisplayItem(ItemStack item) {
+        ItemStack copy = new ItemStack(item);
+        ItemMeta itemMeta = copy.getItemMeta();
+        // Hide all enchants (if possible).
+        try {
+            Class<?> aClass = Class.forName("org.bukkit.inventory.ItemFlag");
+            Object allValues = ReflectionUtil.execStatic(aClass, "values");
+            ReflectionUtil.exec(itemMeta, "addItemFlags", allValues);
+        } catch (ClassNotFoundException e) {
+            // Ignore - only available for 1.9 and above
+        }
+        copy.setItemMeta(itemMeta);
+        return copy;
     }
 
     /**

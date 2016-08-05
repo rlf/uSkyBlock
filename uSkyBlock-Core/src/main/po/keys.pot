@@ -42,6 +42,13 @@ msgstr ""
 msgid "§7{0}"
 msgstr ""
 
+msgid "§eItems will be traded for reward."
+msgstr ""
+
+#, java-format
+msgid "§eMust be within {0} meters."
+msgstr ""
+
 msgid "§6Item Reward: §a"
 msgstr ""
 
@@ -508,7 +515,7 @@ msgid "§4That player does not have an island!"
 msgstr ""
 
 #, java-format
-msgid "§aTeleporting to {0}s island."
+msgid "§aTeleporting to {0}''s island."
 msgstr ""
 
 msgid "imports players and islands from other formats"

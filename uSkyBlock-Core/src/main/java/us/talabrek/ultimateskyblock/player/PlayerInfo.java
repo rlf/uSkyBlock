@@ -431,6 +431,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
                 VaultHandler.addPermission(offlinePlayer, perm);
             }
         }
+        playerData.set("player.perms", permList);
         save();
     }
 
