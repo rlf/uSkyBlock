@@ -220,7 +220,7 @@ public class FilePlayerDB implements PlayerDB {
             name2uuidCache.put(name, id);
         }
         String oldName = uuid2NameConfig.getString(uuid + ".name", name);
-        if (uuid2NameConfig.contains(uuid) && !oldName.equals(name)) {
+        if (uuid2NameConfig.contains(uuid) && (oldName == null || !oldName.equals(name))) {
             List<String> stringList = uuid2NameConfig.getStringList(uuid + ".aka");
             if (!stringList.contains(oldName)) {
                 stringList.add(oldName);
