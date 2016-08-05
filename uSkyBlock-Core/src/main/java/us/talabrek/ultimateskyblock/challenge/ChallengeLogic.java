@@ -474,7 +474,7 @@ public class ChallengeLogic implements Listener {
         int rowsToSkip = (page - 1) * ROWS_OF_RANKS;
         for (Iterator<Rank> it = ranksOnPage.iterator(); it.hasNext(); ) {
             Rank rank = it.next();
-            int rowsInRank = (int) Math.ceil(rank.getChallenges().size() / 8f);
+            int rowsInRank = getRows(rank);
             if (rowsToSkip <= 0 || ((rowsToSkip - rowsInRank) < 0)) {
                 return ranksOnPage;
             }
@@ -487,13 +487,17 @@ public class ChallengeLogic implements Listener {
     private int calculateRows(List<Rank> ranksOnPage) {
         int row = 0;
         for (Rank rank : ranksOnPage) {
-            int rankSize = 0;
-            for (Challenge challenge : rank.getChallenges()) {
-                rankSize += challenge.getOffset() + 1;
-            }
-            row += Math.ceil(rankSize / 8f);
+            row += getRows(rank);
         }
         return row;
+    }
+
+    private int getRows(Rank rank) {
+        int rankSize = 0;
+        for (Challenge challenge : rank.getChallenges()) {
+            rankSize += challenge.getOffset() + 1;
+        }
+        return (int) Math.ceil(rankSize / 8f);
     }
 
     public int populateChallengeRank(Inventory menu, final Rank rank, int location, final PlayerInfo playerInfo) {

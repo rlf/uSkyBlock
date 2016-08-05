@@ -29,8 +29,8 @@ msgstr "§4De vereisten worden teruggezet in {0} uur."
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4De vereisten worden teruggezet in {0} minuten."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§eVoor deze uitdaging heb je het volgende nodig:"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr "§7en meer..."
@@ -66,8 +66,8 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dHet aantal keer dat je de uitdaging hebt voltooid: §f{0}"
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
-msgstr "§7Vereist {0}§7 om te ontgrendelen"
+msgid "§7Requires {0}"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -857,6 +857,9 @@ msgstr "§eEiland world-guard regio is bijgewerkt voor {0}"
 
 msgid "§eNo island found at your location!"
 msgstr "§eEr is geen eiland gevonden op je locatie!"
+
+msgid "refreshes the chunk around the player"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"

@@ -33,8 +33,8 @@ msgstr "§cKraven kommer att återställas om {0} timmar."
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§cKraven kommer att återställas om {0} minuter."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§eUppdraget kräver följande:"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr ""
@@ -70,7 +70,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dAntal gånger genomfört: §f{0}"
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
+msgid "§7Requires {0}"
 msgstr ""
 
 #, java-format
@@ -852,6 +852,9 @@ msgid "§eIsland world-guard regions updated for {0}"
 msgstr ""
 
 msgid "§eNo island found at your location!"
+msgstr ""
+
+msgid "refreshes the chunk around the player"
 msgstr ""
 
 msgid "Ultimate SkyBlock Admin"

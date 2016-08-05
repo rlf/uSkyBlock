@@ -12,6 +12,7 @@ import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +23,7 @@ import static dk.lockfuglsang.minecraft.util.FormatUtil.*;
  * The data-object for a challenge
  */
 public class Challenge {
-    public static final Pattern REQ_PATTERN = Pattern.compile("(?<type>[0-9]+)(:(?<subtype>[0-9]+))?:(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?\\s*(?<meta>\\{.*\\})?");
+    public static final Pattern REQ_PATTERN = Pattern.compile("(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?(?<meta>\\{.*\\})?):(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?");
     public static final int MAX_DETAILS = 11;
     public static final int MAX_LINE = 30;
 
@@ -111,19 +112,23 @@ public class Challenge {
     public List<ItemStack> getRequiredItems(int timesCompleted) {
         List<ItemStack> items = new ArrayList<>();
         for (String item : requiredItems) {
+            if (item == null || item.trim().isEmpty()) {
+                continue; // Just skip it
+            }
             Matcher m = REQ_PATTERN.matcher(item);
             if (m.matches()) {
-                int reqItem = Integer.parseInt(m.group("type"), 10);
-                int subType = m.group("subtype") != null ? Integer.parseInt(m.group("subtype"), 10) : 0;
                 int amount = Integer.parseInt(m.group("amount"), 10);
                 char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
                 int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc"), 10) : 0;
                 amount = ChallengeLogic.calcAmount(amount, op, inc, timesCompleted);
-                ItemStack mat = new ItemStack(reqItem, amount, (short) subType);
+                ItemStack mat = ItemStackUtil.createItemStack(m.group("itemstack"));
+                mat.setAmount(amount);
                 ItemMeta meta = mat.getItemMeta();
                 mat.setItemMeta(meta);
                 mat = NBTUtil.addNBTTag(mat, m.group("meta"));
                 items.add(mat);
+            } else if (!item.matches("[0-9]+") && type != Type.ISLAND_LEVEL) {
+                uSkyBlock.getInstance().getLogger().log(Level.INFO, "Malformed challenge " + name + ", item: " + item + " is not a valid required item");
             }
         }
         return items;
@@ -171,7 +176,7 @@ public class Challenge {
         }
         List<ItemStack> reqItems = getRequiredItems(timesCompleted);
         if ((reqItems != null && !reqItems.isEmpty()) || (requiredEntities != null && !requiredEntities.isEmpty())) {
-            lores.add(tr("\u00a7eThis challenge requires the following:"));
+            lores.add(tr("\u00a7eThis challenge requires:"));
         }
         List<String> details = new ArrayList<>();
         if (reqItems != null && !reqItems.isEmpty()) {
@@ -271,7 +276,7 @@ public class Challenge {
         }
         String missingList = "" + missing;
         missingList = missingList.substring(1, missingList.length()-1);
-        return wordWrap(tr("\u00a77Requires {0}\u00a77 to unlock", missingList), MAX_LINE);
+        return wordWrap(tr("\u00a77Requires {0}", missingList), MAX_LINE);
     }
 
     @Override

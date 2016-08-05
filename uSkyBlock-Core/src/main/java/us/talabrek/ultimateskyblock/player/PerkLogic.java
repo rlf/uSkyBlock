@@ -16,8 +16,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
-
 /**
  * Responsible for calculating player specific perks based on permissions.
  */
@@ -94,7 +92,7 @@ public class PerkLogic {
     public Set<String> getSchemes(Player player) {
         Set<String> schemes = new LinkedHashSet<>();
         for (IslandPerk islandPerk : islandPerks.values()) {
-            if (hasPermission(player, islandPerk.getPermission())) {
+            if (player.hasPermission(islandPerk.getPermission())) {
                 schemes.add(islandPerk.getSchemeName());
             }
         }
@@ -112,7 +110,7 @@ public class PerkLogic {
     private Perk createPerk(Player player) {
         PerkBuilder builder = new PerkBuilder(defaultPerk);
         for (String perm : donorPerks.keySet()) {
-            if (hasPermission(player, perm)) {
+            if (player.hasPermission(perm)) {
                 builder.combine(donorPerks.get(perm));
             }
         }

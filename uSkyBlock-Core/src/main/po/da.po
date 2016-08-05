@@ -29,8 +29,8 @@ msgstr "§4Kravene vil nulstilles om {0} timer."
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Kravene vil nulstilles om {0} minutter."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§eDenne udfordring kræver følgende:"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr "§7og flere..."
@@ -66,8 +66,8 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dTotalt antal aflevering: §f{0}"
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
-msgstr "§7Kræver {0}"
+msgid "§7Requires {0}"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -851,6 +851,9 @@ msgstr "§eØens world-guard region opdateret for {0}"
 
 msgid "§eNo island found at your location!"
 msgstr "§4Ingen valid ø på din position"
+
+msgid "refreshes the chunk around the player"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"

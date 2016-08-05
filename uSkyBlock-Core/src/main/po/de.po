@@ -33,8 +33,8 @@ msgstr "§4Anforderungen werden in {0} Stunden zurückgesetzt."
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Anforderungen werden in {0} Minuten zurückgesetzt."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§eDiese Aufgabe benötigt das folgende:"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr "§7und mehr..."
@@ -70,8 +70,8 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dSchon §f{0} §dmal abgeschlossen."
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
-msgstr "§7Benötigt {0}§7 zum freischalten"
+msgid "§7Requires {0}"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -864,6 +864,9 @@ msgstr "§eWorldGuard Regionen wurden für {0} aktualisiert"
 
 msgid "§eNo island found at your location!"
 msgstr "§eEs wurden keine Inseln an deiner Position gefunden!"
+
+msgid "refreshes the chunk around the player"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"

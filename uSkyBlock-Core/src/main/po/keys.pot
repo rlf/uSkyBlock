@@ -28,7 +28,7 @@ msgstr ""
 msgid "§4Requirements will reset in {0} minutes."
 msgstr ""
 
-msgid "§eThis challenge requires the following:"
+msgid "§eThis challenge requires:"
 msgstr ""
 
 msgid "§7and more..."
@@ -65,7 +65,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr ""
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
+msgid "§7Requires {0}"
 msgstr ""
 
 #, java-format
@@ -835,6 +835,9 @@ msgid "§eIsland world-guard regions updated for {0}"
 msgstr ""
 
 msgid "§eNo island found at your location!"
+msgstr ""
+
+msgid "refreshes the chunk around the player"
 msgstr ""
 
 msgid "Ultimate SkyBlock Admin"

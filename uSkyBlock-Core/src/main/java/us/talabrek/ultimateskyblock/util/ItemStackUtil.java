@@ -137,7 +137,9 @@ public enum ItemStackUtil {
         ItemStack itemStack = new ItemStack(material, 1, subType);
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(FormatUtil.normalize(name));
+            if (name != null) {
+                meta.setDisplayName(FormatUtil.normalize(name));
+            }
             List<String> lore = new ArrayList<>();
             if (description != null) {
                 lore.addAll(FormatUtil.wordWrap(FormatUtil.normalize(description), 30, 30));

@@ -28,8 +28,8 @@ msgstr "§4Requirements will reset in {0} hours."
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Requirements will reset in {0} minutes."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§eThis challenge requires the followin':"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr "§7an' more..."
@@ -65,7 +65,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dTotal times completed: §f{0}"
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
+msgid "§7Requires {0}"
 msgstr ""
 
 #, java-format
@@ -849,6 +849,9 @@ msgstr "§eIsland world-guard regions updated for {0}"
 
 msgid "§eNo island found at your location!"
 msgstr "§eNay hideout found at yer location!"
+
+msgid "refreshes the chunk around the player"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -2639,6 +2642,9 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#~ msgid "§eThis challenge requires the following:"
+#~ msgstr "§eThis challenge requires the followin':"
 
 #~ msgid "§aTeleporting to {0}s island."
 #~ msgstr "§aTeleportin'' to {0}s hideout."

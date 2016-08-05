@@ -28,8 +28,8 @@ msgstr "§4Điều kiện hoàn thành sẽ được thiếp lập lại trong {
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Điều kiện hoàn thành sẽ được thiếp lập lại trong {0} phút."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§eNguyên liệu cần có để hoàn thành:"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr "§7và còn nữa"
@@ -65,7 +65,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§dTổng số lần hoàn thành: §f{0}"
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
+msgid "§7Requires {0}"
 msgstr ""
 
 #, java-format
@@ -850,6 +850,9 @@ msgstr ""
 
 msgid "§eNo island found at your location!"
 msgstr "§eKhông tìm thấy đảo tại vị trí của bạn"
+
+msgid "refreshes the chunk around the player"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"

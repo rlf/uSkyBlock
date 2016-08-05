@@ -28,8 +28,8 @@ msgstr "§4필요 조건이 {0} 시간 후에 리셋됩니다."
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4필요 조건이 {0} 분 후에 리셋됩니다."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§e이 도전과제는 다음의 것들을 요구합니다:"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr "§7그리고 더..."
@@ -65,7 +65,7 @@ msgid "§dTotal times completed: §f{0}"
 msgstr "§d완료된 전체 횟수: §f{0}"
 
 #, java-format
-msgid "§7Requires {0}§7 to unlock"
+msgid "§7Requires {0}"
 msgstr ""
 
 #, java-format
@@ -848,6 +848,9 @@ msgstr "§e{0}를 위하여 섬의 월드가드 지역이 업데이트 되었습
 
 msgid "§eNo island found at your location!"
 msgstr "§e당신의 위치에서 어떠한 섬도 발견하지 못했습니다!"
+
+msgid "refreshes the chunk around the player"
+msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
