@@ -1044,6 +1044,26 @@ msgstr ""
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§e당신은 생태계를 {0,number,#}분 후에 다시 바꿀 수 있습니다."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다.."
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+"§7작은요정들이 당신 섬의 생태계를 §9{0}§7로 바꾸고 있어 바쁩니다, 조금만 기다"
+"려주세요."
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§a당신은 섬의 생태계를 {0}로 바꿨습니다"
@@ -1052,8 +1072,13 @@ msgstr "§a당신은 섬의 생태계를 {0}로 바꿨습니다"
 msgid "{0} changed the island biome to {1}"
 msgstr "{0}가 섬의 생태계를 {1}로 바꾸었습니다"
 
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다.."
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
+msgstr ""
 
 msgid "create an island"
 msgstr "섬을 만듭니다"
@@ -1744,35 +1769,25 @@ msgstr "§c감시견!§9 {0}개 내로 상자를 놓을 수 없음, 돈 내고 �
 msgid "§7Page {0}"
 msgstr "§7페이지 {0}"
 
-msgid "§c-"
-msgstr "§c-"
+#, java-format
+msgid "§c{0,number,#}"
+msgstr ""
 
-msgid "§a+"
-msgstr "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
+msgstr ""
 
-msgid "§c-1000"
-msgstr "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
+msgstr ""
 
-msgid "§c-100"
-msgstr "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
+msgstr ""
 
-msgid "§c-10"
-msgstr "§c-10"
-
-msgid "§c-1"
-msgstr "§c-1"
-
-msgid "§a+1"
-msgstr "§a+1"
-
-msgid "§a+10"
-msgstr "§a+10"
-
-msgid "§a+100"
-msgstr "§a+100"
-
-msgid "§a+1000"
-msgstr "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
+msgstr ""
 
 msgid "Return"
 msgstr "Return"
@@ -1872,101 +1887,6 @@ msgstr ""
 "강퇴합니다\n"
 "하지만 그들은 섬 리더를\n"
 "강퇴할 수 없습니다."
-
-msgid "Permissions"
-msgstr "권한"
-
-#, java-format
-msgid "{0} <{1}>"
-msgstr "{0} <{1}>"
-
-msgid "§9Player Permissions"
-msgstr "§9플레이어 권한"
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§e당신의 섬 그룹의 정보로 돌아오려면\n"
-"§e여기를 클릭하세요."
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§e권한을 보려면 아이콘 주변을\n"
-"§e흔드세요. 그걸 클릭해서\n"
-"§e권한을 바꾸세요."
-
-msgid "§fThis player §acan"
-msgstr "§f이 플레이어는§a 할 수 있습니다"
-
-msgid "Click here to remove this permission."
-msgstr "이 권한을 없애려면 여기를 클릭하세요."
-
-msgid "§fThis player §ccannot"
-msgstr "§f이 플레이어는 §c할 수 없습니다"
-
-msgid "Click here to grant this permission."
-msgstr "이 권한을 주려면 여기를 클릭하세요"
-
-msgid "Island Group Members"
-msgstr "섬 그룹 멤버들"
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "그룹 멤버: §2{0}§7/§e{1}"
-
-msgid "§aMore players can be invited to this island."
-msgstr "§a이 섬으로 더 많은 플레이어들이 초대받을 수 있습니다."
-
-msgid "§cThis island is full."
-msgstr "§c이 섬은 꽉 찼습니다."
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§e그들의 권한을 보려면\n"
-"§e플레이어의 아이콘을 흔드세요\n"
-"§e리더는 플레이어의 아이콘을 클릭해서\n"
-"§e권한을 바꿀 수 있습니다."
-
-msgid "Leader"
-msgstr "리더"
-
-msgid "Member"
-msgstr "멤버"
-
-#, java-format
-msgid "Can {0}"
-msgstr "할 수 있음 {0}"
-
-#, java-format
-msgid "Cannot {0}"
-msgstr "할 수 없음 {0}"
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<이 플레이어의 권한을 바꾸려면 클릭하세요>"
-
-msgid "Island Log"
-msgstr "섬 기록"
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr ""
-"§e메인 섬 화면으로 돌아가려면\n"
-"§e여기를 클릭하세요."
-
-msgid "§e§lIsland Log"
-msgstr "§e§l섬 기록"
-
-msgid "Island Biome"
-msgstr "섬 생태계"
 
 msgid "Ocean"
 msgstr "바다"
@@ -2168,6 +2088,101 @@ msgid ""
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+
+msgid "Permissions"
+msgstr "권한"
+
+#, java-format
+msgid "{0} <{1}>"
+msgstr "{0} <{1}>"
+
+msgid "§9Player Permissions"
+msgstr "§9플레이어 권한"
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§e당신의 섬 그룹의 정보로 돌아오려면\n"
+"§e여기를 클릭하세요."
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§e권한을 보려면 아이콘 주변을\n"
+"§e흔드세요. 그걸 클릭해서\n"
+"§e권한을 바꾸세요."
+
+msgid "§fThis player §acan"
+msgstr "§f이 플레이어는§a 할 수 있습니다"
+
+msgid "Click here to remove this permission."
+msgstr "이 권한을 없애려면 여기를 클릭하세요."
+
+msgid "§fThis player §ccannot"
+msgstr "§f이 플레이어는 §c할 수 없습니다"
+
+msgid "Click here to grant this permission."
+msgstr "이 권한을 주려면 여기를 클릭하세요"
+
+msgid "Island Group Members"
+msgstr "섬 그룹 멤버들"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "그룹 멤버: §2{0}§7/§e{1}"
+
+msgid "§aMore players can be invited to this island."
+msgstr "§a이 섬으로 더 많은 플레이어들이 초대받을 수 있습니다."
+
+msgid "§cThis island is full."
+msgstr "§c이 섬은 꽉 찼습니다."
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§e그들의 권한을 보려면\n"
+"§e플레이어의 아이콘을 흔드세요\n"
+"§e리더는 플레이어의 아이콘을 클릭해서\n"
+"§e권한을 바꿀 수 있습니다."
+
+msgid "Leader"
+msgstr "리더"
+
+msgid "Member"
+msgstr "멤버"
+
+#, java-format
+msgid "Can {0}"
+msgstr "할 수 있음 {0}"
+
+#, java-format
+msgid "Cannot {0}"
+msgstr "할 수 없음 {0}"
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<이 플레이어의 권한을 바꾸려면 클릭하세요>"
+
+msgid "Island Log"
+msgstr "섬 기록"
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr ""
+"§e메인 섬 화면으로 돌아가려면\n"
+"§e여기를 클릭하세요."
+
+msgid "§e§lIsland Log"
+msgstr "§e§l섬 기록"
+
+msgid "Island Biome"
+msgstr "섬 생태계"
 
 #, java-format
 msgid "Biome: {0}"
@@ -2584,14 +2599,6 @@ msgstr "§a당신의 skyblock집이 당신의 현제 지점에 지정되었습�
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"
-
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
-msgstr ""
-"§7작은요정들이 당신 섬의 생태계를 §9{0}§7로 바꾸고 있어 바쁩니다, 조금만 기다"
-"려주세요."
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr "§c당신의 섬은 생성과정 중에 있습니다, 당신은 지금 만들 수 없습니다."

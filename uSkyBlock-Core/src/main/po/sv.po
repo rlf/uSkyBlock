@@ -1046,6 +1046,24 @@ msgstr ""
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eDu kan byta biome igen om {0,number,#} minuter."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§cDu saknar rättighet att byta öns biome till den typen."
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§aDu har bytt öns biome till {0}"
@@ -1054,8 +1072,13 @@ msgstr "§aDu har bytt öns biome till {0}"
 msgid "{0} changed the island biome to {1}"
 msgstr "{0} bytte öns biome till {1}"
 
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§cDu saknar rättighet att byta öns biome till den typen."
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
+msgstr ""
 
 msgid "create an island"
 msgstr "skapa en ö"
@@ -1730,35 +1753,25 @@ msgstr "§cVakthund!§9 Kan inte lokalisera en kista inom {0}."
 msgid "§7Page {0}"
 msgstr ""
 
-msgid "§c-"
-msgstr "§c-"
+#, java-format
+msgid "§c{0,number,#}"
+msgstr ""
 
-msgid "§a+"
-msgstr "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
+msgstr ""
 
-msgid "§c-1000"
-msgstr "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
+msgstr ""
 
-msgid "§c-100"
-msgstr "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
+msgstr ""
 
-msgid "§c-10"
-msgstr "§c-10"
-
-msgid "§c-1"
-msgstr "§c-1"
-
-msgid "§a+1"
-msgstr "§a+1"
-
-msgid "§a+10"
-msgstr "§a+10"
-
-msgid "§a+100"
-msgstr "§a+100"
-
-msgid "§a+1000"
-msgstr "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
+msgstr ""
 
 msgid "Return"
 msgstr "Återvänd"
@@ -1858,102 +1871,6 @@ msgstr ""
 "andra spelare från ön,\n"
 "men de kan inte kicka\n"
 "gruppledaren."
-
-msgid "Permissions"
-msgstr "Rättigheter"
-
-# ???
-#, java-format
-msgid "{0} <{1}>"
-msgstr "{0} <{1}>"
-
-msgid "§9Player Permissions"
-msgstr ""
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§eKlicka här för att återvända\n"
-"§etill din gruppinfo."
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§eHovra en ikon för att visa\n"
-"§een rättighet. Ändra den\n"
-"§egenom att klicka på den."
-
-msgid "§fThis player §acan"
-msgstr "§fDenna spelare §akan"
-
-msgid "Click here to remove this permission."
-msgstr "Klicka här för att ta bort denna rättighet."
-
-msgid "§fThis player §ccannot"
-msgstr "§fDenna spelare §ckan inte"
-
-msgid "Click here to grant this permission."
-msgstr "Klicka här för att ge denna rättighet."
-
-msgid "Island Group Members"
-msgstr "Gruppmedlemmar"
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "Gruppmedlemmar: §2{0}§7/§e{1}"
-
-msgid "§aMore players can be invited to this island."
-msgstr "§aFler spelare kan bli inbjudna till ön."
-
-msgid "§cThis island is full."
-msgstr "§cÖn är full."
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§eHovra en spelares ikon för att\n"
-"§evisa deras rättigheter. Endast\n"
-"§eledaren kan ändra rättigheter\n"
-"§egenom att klicka på ikonen."
-
-msgid "Leader"
-msgstr "Gruppledare"
-
-msgid "Member"
-msgstr "Medlem"
-
-#, java-format
-msgid "Can {0}"
-msgstr "Kan {0}"
-
-#, java-format
-msgid "Cannot {0}"
-msgstr "Kan inte {0}"
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Klicka för att ändra denna spelares rättigheter>"
-
-msgid "Island Log"
-msgstr "Skyblock Logg"
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr ""
-"§eKlicka här för att återvända\n"
-"§etill startsidan."
-
-msgid "§e§lIsland Log"
-msgstr "§e§lSkyblock Logg"
-
-msgid "Island Biome"
-msgstr "Skyblock Biome"
 
 msgid "Ocean"
 msgstr "Ocean"
@@ -2163,6 +2080,102 @@ msgid ""
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+
+msgid "Permissions"
+msgstr "Rättigheter"
+
+# ???
+#, java-format
+msgid "{0} <{1}>"
+msgstr "{0} <{1}>"
+
+msgid "§9Player Permissions"
+msgstr ""
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§eKlicka här för att återvända\n"
+"§etill din gruppinfo."
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§eHovra en ikon för att visa\n"
+"§een rättighet. Ändra den\n"
+"§egenom att klicka på den."
+
+msgid "§fThis player §acan"
+msgstr "§fDenna spelare §akan"
+
+msgid "Click here to remove this permission."
+msgstr "Klicka här för att ta bort denna rättighet."
+
+msgid "§fThis player §ccannot"
+msgstr "§fDenna spelare §ckan inte"
+
+msgid "Click here to grant this permission."
+msgstr "Klicka här för att ge denna rättighet."
+
+msgid "Island Group Members"
+msgstr "Gruppmedlemmar"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "Gruppmedlemmar: §2{0}§7/§e{1}"
+
+msgid "§aMore players can be invited to this island."
+msgstr "§aFler spelare kan bli inbjudna till ön."
+
+msgid "§cThis island is full."
+msgstr "§cÖn är full."
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§eHovra en spelares ikon för att\n"
+"§evisa deras rättigheter. Endast\n"
+"§eledaren kan ändra rättigheter\n"
+"§egenom att klicka på ikonen."
+
+msgid "Leader"
+msgstr "Gruppledare"
+
+msgid "Member"
+msgstr "Medlem"
+
+#, java-format
+msgid "Can {0}"
+msgstr "Kan {0}"
+
+#, java-format
+msgid "Cannot {0}"
+msgstr "Kan inte {0}"
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<Klicka för att ändra denna spelares rättigheter>"
+
+msgid "Island Log"
+msgstr "Skyblock Logg"
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr ""
+"§eKlicka här för att återvända\n"
+"§etill startsidan."
+
+msgid "§e§lIsland Log"
+msgstr "§e§lSkyblock Logg"
+
+msgid "Island Biome"
+msgstr "Skyblock Biome"
 
 #, java-format
 msgid "Biome: {0}"
@@ -2570,12 +2583,6 @@ msgstr "§aDin hemposition har ställts in till nuvarande position."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§cDin nuvarande position är inte en säker hemposition."
-
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
-msgstr ""
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr "§cDin ö håller på att genereras, du kan inte skapa en just nu."

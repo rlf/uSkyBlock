@@ -1027,6 +1027,24 @@ msgstr ""
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§e你需要等待{0,number,#}分钟才能再次更改生物群系."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr ""
@@ -1035,7 +1053,12 @@ msgstr ""
 msgid "{0} changed the island biome to {1}"
 msgstr "{0}将岛屿的生物群系更改为{1}"
 
-msgid "§cYou do not have permission to change your biome to that type."
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
 msgstr ""
 
 msgid "create an island"
@@ -1701,34 +1724,24 @@ msgstr ""
 msgid "§7Page {0}"
 msgstr ""
 
-msgid "§c-"
+#, java-format
+msgid "§c{0,number,#}"
 msgstr ""
 
-msgid "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
 msgstr ""
 
-msgid "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
 msgstr ""
 
-msgid "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
 msgstr ""
 
-msgid "§c-10"
-msgstr ""
-
-msgid "§c-1"
-msgstr ""
-
-msgid "§a+1"
-msgstr ""
-
-msgid "§a+10"
-msgstr ""
-
-msgid "§a+100"
-msgstr ""
-
-msgid "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
 msgstr ""
 
 msgid "Return"
@@ -1818,101 +1831,6 @@ msgid ""
 "but they are unable to kick\n"
 "the island leader."
 msgstr ""
-
-msgid "Permissions"
-msgstr ""
-
-#, java-format
-msgid "{0} <{1}>"
-msgstr ""
-
-msgid "§9Player Permissions"
-msgstr ""
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§e点击这里返回\n"
-"§e岛屿团队信息."
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§e将鼠标移动到一个图标上\n"
-"§e来查看一个权限.点击图标\n"
-"§e即可更改权限状态."
-
-msgid "§fThis player §acan"
-msgstr ""
-
-msgid "Click here to remove this permission."
-msgstr ""
-
-msgid "§fThis player §ccannot"
-msgstr ""
-
-msgid "Click here to grant this permission."
-msgstr ""
-
-msgid "Island Group Members"
-msgstr ""
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr ""
-
-msgid "§aMore players can be invited to this island."
-msgstr "§a可以邀请更多的玩家加入岛屿."
-
-msgid "§cThis island is full."
-msgstr "§c岛屿已满."
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§e将鼠标悬停到一个玩家的头像上\n"
-"§e即可查询他们的权限.\n"
-"§e岛屿主人可以点击头像来\n"
-"§e更改他们的权限"
-
-msgid "Leader"
-msgstr ""
-
-msgid "Member"
-msgstr ""
-
-#, java-format
-msgid "Can {0}"
-msgstr ""
-
-#, java-format
-msgid "Cannot {0}"
-msgstr ""
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<点击将更改玩家的权限>"
-
-msgid "Island Log"
-msgstr ""
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr ""
-"§e点击图标返回\n"
-"§e快捷帮助主界面."
-
-msgid "§e§lIsland Log"
-msgstr "§e§l岛屿日志"
-
-msgid "Island Biome"
-msgstr "岛屿生物群系"
 
 msgid "Ocean"
 msgstr ""
@@ -2065,6 +1983,101 @@ msgid ""
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+
+msgid "Permissions"
+msgstr ""
+
+#, java-format
+msgid "{0} <{1}>"
+msgstr ""
+
+msgid "§9Player Permissions"
+msgstr ""
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§e点击这里返回\n"
+"§e岛屿团队信息."
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§e将鼠标移动到一个图标上\n"
+"§e来查看一个权限.点击图标\n"
+"§e即可更改权限状态."
+
+msgid "§fThis player §acan"
+msgstr ""
+
+msgid "Click here to remove this permission."
+msgstr ""
+
+msgid "§fThis player §ccannot"
+msgstr ""
+
+msgid "Click here to grant this permission."
+msgstr ""
+
+msgid "Island Group Members"
+msgstr ""
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr ""
+
+msgid "§aMore players can be invited to this island."
+msgstr "§a可以邀请更多的玩家加入岛屿."
+
+msgid "§cThis island is full."
+msgstr "§c岛屿已满."
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§e将鼠标悬停到一个玩家的头像上\n"
+"§e即可查询他们的权限.\n"
+"§e岛屿主人可以点击头像来\n"
+"§e更改他们的权限"
+
+msgid "Leader"
+msgstr ""
+
+msgid "Member"
+msgstr ""
+
+#, java-format
+msgid "Can {0}"
+msgstr ""
+
+#, java-format
+msgid "Cannot {0}"
+msgstr ""
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<点击将更改玩家的权限>"
+
+msgid "Island Log"
+msgstr ""
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr ""
+"§e点击图标返回\n"
+"§e快捷帮助主界面."
+
+msgid "§e§lIsland Log"
+msgstr "§e§l岛屿日志"
+
+msgid "Island Biome"
+msgstr "岛屿生物群系"
 
 #, java-format
 msgid "Biome: {0}"
@@ -2423,12 +2436,6 @@ msgid "§aYour skyblock home has been set to your current location."
 msgstr "§a你岛屿家的位置已经设置在你当前位置."
 
 msgid "§4Your current location is not a safe home-location."
-msgstr ""
-
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
 msgstr ""
 
 msgid "§cYour island is in the process of generating, you cannot create now."

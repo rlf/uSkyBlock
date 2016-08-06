@@ -205,6 +205,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         missingRequirements = null;
         instance = this;
         CommandManager.registerRequirements(this);
+        ServerUtil.init(this);
         FileUtil.setDataFolder(getDataFolder());
         FileUtil.setAllwaysOverwrite("levelConfig.yml");
         I18nUtil.setDataFolder(getDataFolder());
@@ -1233,7 +1234,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 islandLogic.getSize(), playerLogic.getSize(),
                 Settings.nether_enabled, AsyncWorldEditHandler.isAWE());
         msg += pre("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
-        msg += pre("\u00a79  State: online={0}, bungee={1}\n", getServer().getOnlineMode(), ServerUtil.isBungeeEnabled());
+        msg += pre("\u00a79  State: online={0}, bungee={1}\n", ServerUtil.isOnlineMode(),
+                ServerUtil.isBungeeEnabled());
         msg += pre("\u00a77------------------------------\n");
         for (String[] dep : depends) {
             Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);

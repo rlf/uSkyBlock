@@ -16,7 +16,7 @@ public class BiomeMenuItem {
     }
 
     public ItemStack getIcon() {
-        return icon;
+        return icon.clone();
     }
 
     public String getId() {

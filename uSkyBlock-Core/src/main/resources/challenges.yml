@@ -599,22 +599,29 @@ ranks:
         name: '&5Fisherman'
         description: Catch different types of fish.
         type: onPlayer
-        requiredItems: '349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1'
+        requiredItems:
+        - '349:0:5;+1'
+        - '349:1:5;+1'
+        - '349:3:3;+1'
+        - '349:2:1;+1'
+        - '351:5;+5'
         displayItem: 349
         lockedDisplayItem: STAINED_GLASS_PANE:10
         reward:
-          text: 10 lapis lazuli, 20 prismarine, deep-ocean
+          text: 10 lapis blocks, 20 prismarine, deep-ocean
           items:
           - '22:10'
           - '168:20'
+          - '{p=0.20}410:5'
           permission: usb.biome.deep_ocean
           currency: 50
           xp: 50
         repeatReward:
-          text: 2 redstone, 2 inksac
+          text: 2 lapis, 5 prismarine, chance at prismarine crystals
           items:
-          - '331:2'
-          - '351:2'
+          - '351:4:2'
+          - '168:5'
+          - '{p=0.20}410:5'
           currency: 25
           xp: 25
 
