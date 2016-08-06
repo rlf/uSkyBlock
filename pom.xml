@@ -12,6 +12,7 @@
         <bukkit-utils.version>1.11</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
+        <vault.version>1.5.6</vault.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
@@ -74,7 +75,7 @@
         </repository>
         <repository>
             <id>vault-repo</id>
-            <url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
+            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository>
             <id>sk89q-maven</id>
@@ -257,6 +258,12 @@
                 <groupId>dk.lockfuglsang.minecraft</groupId>
                 <artifactId>po-utils</artifactId>
                 <version>${po-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.milkbowl.vault</groupId>
+                <artifactId>Vault</artifactId>
+                <optional>true</optional>
+                <version>${vault.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.rlf</groupId>

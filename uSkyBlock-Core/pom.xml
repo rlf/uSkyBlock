@@ -416,7 +416,6 @@
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
-            <version>1.5.4</version>
             <optional>true</optional>
         </dependency>
         <dependency>
