@@ -26,12 +26,17 @@ public enum ServerUtil {;
     }
 
     public static boolean isOnlineMode() {
-        return Bukkit.getServer().getOnlineMode() || getOfflinePlayer().getUniqueId().equals(ONLINE_UUID);
+        return Bukkit.getServer().getOnlineMode() ||
+                (getOfflinePlayer() != null && getOfflinePlayer().getUniqueId().equals(ONLINE_UUID));
     }
 
     private static OfflinePlayer getOfflinePlayer() {
         if (offlinePlayer == null) {
-            offlinePlayer = Bukkit.getOfflinePlayer(ONLINE_NAME);
+            try {
+                offlinePlayer = Bukkit.getOfflinePlayer(ONLINE_NAME);
+            } catch (Throwable ignored) {
+                // Ignored
+            }
         }
         return offlinePlayer;
     }
@@ -40,10 +45,7 @@ public enum ServerUtil {;
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
-                OfflinePlayer player = plugin.getServer().getOfflinePlayer(ONLINE_NAME);
-                if (player != null) {
-                    offlinePlayer = player;
-                }
+                getOfflinePlayer(); // Just trigger caching
             }
         });
     }
