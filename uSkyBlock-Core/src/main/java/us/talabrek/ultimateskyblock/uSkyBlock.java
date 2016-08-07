@@ -532,6 +532,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (getConfig().getBoolean("options.restart.clearEnderChest", true)) {
             player.getEnderChest().clear();
         }
+        if (getConfig().getBoolean("options.restart.clearCurrency", false) && VaultHandler.hasEcon()) {
+            VaultHandler.getEcon().withdrawPlayer(player, VaultHandler.getEcon().getBalance(player));
+        }
         getLogger().exiting(CN, "clearPlayerInventory");
     }
 

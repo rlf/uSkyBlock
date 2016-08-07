@@ -222,6 +222,8 @@ options:
     clearEnderChest: true
     # Clears the permissions the player has been granted from rewards
     clearPerms: true
+    # Clears the users balance (set to 0)
+    clearCurrency: false
 
     # [ms] The number of ms to wait, before porting the player back
     # on /is restart or /is create (default: 1000)
@@ -395,7 +397,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 56
+version: 57
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
