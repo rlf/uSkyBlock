@@ -234,19 +234,18 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     Bukkit.getConsoleSender().sendMessage(tr("Converting data to UUID, this make take a while!"));
                     getImporter().importUSB(Bukkit.getConsoleSender(), "name2uuid");
                 }
+                log(Level.INFO, getVersionInfo(false));
             }
-        }, getConfig().getLong("setDataFolder.initDelay", 50L));
+        }, getConfig().getLong("init.initDelay", 50L));
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }
-        log(Level.INFO, getVersionInfo(false));
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender, Command command, String... args) {
-        // TODO: 28/06/2016 - R4zorax: Allow admin-maintenance methods to get through?
         if (maintenanceMode && !(
                 (command instanceof AdminCommand && args != null && args.length > 0 && args[0].equals("maintenance")) ||
                 command instanceof SetMaintenanceCommand)) {
