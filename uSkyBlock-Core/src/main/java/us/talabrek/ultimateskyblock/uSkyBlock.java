@@ -1050,7 +1050,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public boolean isSkyAssociatedWorld(World world) {
         return world.getName().startsWith(skyBlockWorld.getName())
-                && !(world.getEnvironment() == World.Environment.NETHER && !Settings.nether_enabled);
+                && !(world.getEnvironment() == World.Environment.NETHER && !Settings.nether_enabled)
+                && !(world.getEnvironment() == World.Environment.THE_END);
     }
 
     public IslandLogic getIslandLogic() {
