@@ -205,7 +205,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         missingRequirements = null;
         instance = this;
         CommandManager.registerRequirements(this);
-        ServerUtil.init(this);
         FileUtil.setDataFolder(getDataFolder());
         FileUtil.setAllwaysOverwrite("levelConfig.yml");
         I18nUtil.setDataFolder(getDataFolder());
@@ -215,6 +214,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
+                ServerUtil.init(uSkyBlock.this);
                 if (!isRequirementsMet(Bukkit.getConsoleSender(), null)) {
                     return;
                 }
