@@ -1380,10 +1380,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public void fireMemberJoinedEvent(IslandInfo islandInfo, PlayerInfo playerInfo) {
-        getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo));
+        async(() -> { getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo)); });
     }
 
     public void fireMemberLeftEvent(IslandInfo islandInfo, PlayerInfo member) {
-        getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member));
+        async(() -> { getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member)); });
     }
 }
