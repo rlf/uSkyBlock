@@ -29,7 +29,6 @@ public class WorldGuardEvents implements Listener {
         if (e == null || e.getTo() == null || e.getPlayer() == null || !plugin.isSkyAssociatedWorld(e.getTo().getWorld())) {
             return;
         }
-        plugin.getTeleportLogic().cancelTeleport(e.getPlayer());
         String islandNameAt = WorldGuardHandler.getIslandNameAt(e.getTo());
         if (islandNameAt == null) {
             return;

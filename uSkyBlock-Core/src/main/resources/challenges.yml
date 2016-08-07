@@ -61,7 +61,7 @@ showLockedChallengeName: true
 ranks:
   Tier1:
     name: '&7Novice'
-    displayItem: WOOD_PICKAXE
+    displayItem: 'HARD_CLAY:9'
     resetInHours: 20
     challenges:
       cobblestonegenerator:
@@ -330,7 +330,7 @@ ranks:
 
   Tier2:
     name: '&aAdept'
-    displayItem: 290
+    displayItem: 'HARD_CLAY:5'
     resetInHours: 20
     requires:
       rankLeeway: 99 # means disabled in effect
@@ -519,7 +519,7 @@ ranks:
 
   Tier3:
     name: '&eExpert'
-    displayItem: 'IRON_PICKAXE'
+    displayItem: 'HARD_CLAY:4'
     resetInHours: 20
     requires:
       challenges:
@@ -529,6 +529,7 @@ ranks:
         name: '&3Tool Maker'
         description: Make all stone tools
         type: onPlayer
+        requiredChallenges: [lumberjack]
         requiredItems: '273:1 274:1 275:1 291:1'
         displayItem: 275
         lockedDisplayItem: STAINED_GLASS_PANE:9
@@ -545,6 +546,7 @@ ranks:
         name: '&3Torch Maker'
         description: Make 128 torches.
         type: onPlayer
+        requiredChallenges: [lumberjack]
         requiredItems: '50:128;+32'
         displayItem: 50
         lockedDisplayItem: STAINED_GLASS_PANE:9
@@ -754,7 +756,7 @@ ranks:
 #===============================================
   Tier4:
     name: '&cMaster'
-    displayItem: '153'
+    displayItem: 'HARD_CLAY:1'
     resetInHours: 20
     requires:
       rankLeeway: 99 # disabled
@@ -1014,7 +1016,7 @@ ranks:
 #===============================================
   Tier5:
     name: '&4Sky Lord'
-    displayItem: 292
+    displayItem: 'HARD_CLAY:14'
     resetInHours: 48
     requires:
       challenges:
