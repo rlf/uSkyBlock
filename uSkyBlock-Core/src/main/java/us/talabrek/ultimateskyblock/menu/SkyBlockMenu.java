@@ -462,29 +462,31 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
-        int index = 1;
-        for (String schemeName : schemeNames) {
-            IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
-            boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
-            if (!enabled) {
-                continue; // Skip
+        if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+            int index = 1;
+            for (String schemeName : schemeNames) {
+                IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+                boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
+                if (!enabled) {
+                    continue; // Skip
+                }
+                index = Math.max(plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index), 1);
+                menuItem = islandPerk.getDisplayItem();
+                meta = menuItem.getItemMeta();
+                lores = meta.getLore();
+                if (lores == null) {
+                    lores = new ArrayList<>();
+                }
+                // TODO: 30/01/2016 - R4zorax: Add the extra items?
+                if (player.hasPermission(islandPerk.getPermission())) {
+                    addLore(lores, tr("\u00a7aClick to create!"));
+                } else {
+                    addLore(lores, tr("\u00a7cNo access!\n\u00a77({0})", islandPerk.getPermission()));
+                }
+                meta.setLore(lores);
+                menuItem.setItemMeta(meta);
+                menu.setItem(index++, menuItem);
             }
-            index = Math.max(plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index), 1);
-            menuItem = islandPerk.getDisplayItem();
-            meta = menuItem.getItemMeta();
-            lores = meta.getLore();
-            if (lores == null) {
-                lores = new ArrayList<>();
-            }
-            // TODO: 30/01/2016 - R4zorax: Add the extra items?
-            if (player.hasPermission(islandPerk.getPermission())) {
-                addLore(lores, tr("\u00a7aClick to create!"));
-            } else {
-                addLore(lores, tr("\u00a7cNo access!\n\u00a77({0})", islandPerk.getPermission()));
-            }
-            meta.setLore(lores);
-            menuItem.setItemMeta(meta);
-            menu.setItem(index++, menuItem);
         }
 
         lores.clear();
@@ -656,14 +658,16 @@ public class SkyBlockMenu {
         menu.setItem(15, menuItem);
         lores.clear();
         if (islandInfo.isLeader(player)) {
-            menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
-            meta4 = menuItem.getItemMeta();
-            meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
-            addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
-            meta4.setLore(lores);
-            menuItem.setItemMeta(meta4);
-            menu.setItem(17, menuItem);
-            lores.clear();
+            if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+                menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
+                meta4 = menuItem.getItemMeta();
+                meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
+                addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
+                meta4.setLore(lores);
+                menuItem.setItemMeta(meta4);
+                menu.setItem(17, menuItem);
+                lores.clear();
+            }
         } else {
             menuItem = new ItemStack(Material.IRON_DOOR, 1);
             meta4 = menuItem.getItemMeta();
@@ -817,7 +821,7 @@ public class SkyBlockMenu {
             p.performCommand("island lock");
             p.openInventory(displayIslandGUI(p));
         } else if (slotIndex == 17) {
-            if (islandInfo.isLeader(p)) {
+            if (islandInfo.isLeader(p) && plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
                 p.closeInventory();
                 p.openInventory(createRestartGUI(p));
             } else {

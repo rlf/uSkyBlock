@@ -238,6 +238,9 @@ options:
     extra-commands: []
 
 
+# Whether or not to show the UI for create/restart
+island-schemes-enabled: true
+
 # List of selections for /is create and /is restart
 # the nodes under island-schemes must match the schematic-names from the schematics folder.
 island-schemes:
@@ -397,7 +400,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 57
+version: 58
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
