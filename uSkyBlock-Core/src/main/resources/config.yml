@@ -318,10 +318,6 @@ worldguard:
 nether:
   enabled: true
 
-  terraform-enabled: true
-
-  # The distance to search for valid terra-form location.
-  terraform-distance: 7
 
   height: 75
 
@@ -331,6 +327,17 @@ nether:
     level: 100
 
   schematicName: uSkyBlockNether
+
+  terraform-enabled: true
+
+  # The distance to search for valid terra-form location.
+  terraform-distance: 7
+
+  # In what range of pitch (vertical aim) will terraforming be enabled
+  # -90 is looking directly upwards
+  # 90 is looking directly down
+  terraform-min-pitch: -70.0
+  terraform-max-pitch: 90.0
 
   # The probability of forming blocks
   terraform:

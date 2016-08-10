@@ -817,10 +817,11 @@ ranks:
         displayItem: 58
         lockedDisplayItem: STAINED_GLASS_PANE:9
         reward:
-          text: 4 redstone ore, 4 iron ore
+          text: 4 redstone ore, jukebox, 4 iron ore
           items:
           - '73:4'
           - '15:4'
+          - '84:1'
           currency: 30
           xp: 30
         repeatReward:
@@ -828,6 +829,7 @@ ranks:
           items:
           - '73:1'
           - '15:1'
+          - '{p=0.25}84:1'
           currency: 15
           xp: 15
 
@@ -840,17 +842,19 @@ ranks:
         displayItem: 357
         lockedDisplayItem: STAINED_GLASS_PANE:4
         reward:
-          text: 4 redstone ore, 1 cocoa
+          text: 4 redstone ore, 1 diamond
           items:
           - '73:4'
-          - '351:3:1'
+          - 'DIAMOND:1'
           currency: 80
           xp: 80
         repeatReward:
-          text: 1 cocoa, 5 clay
+          text: 1 iron ore, 5 clay
           items:
-          - '351:3:1'
+          - '15:1'
           - '82:5'
+          - '{p=0.4}82:3'
+          - '{p=0.3}15:2'
           currency: 40
           xp: 40
 
