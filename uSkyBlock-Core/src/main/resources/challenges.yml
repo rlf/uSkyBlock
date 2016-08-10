@@ -258,6 +258,7 @@ ranks:
           - '3:8'
           - '12:8'
           - '388:5'
+          - 'DIAMOND:1'
           currency: 20
           xp: 20
           commands:
@@ -271,10 +272,11 @@ ranks:
         displayItem: IRON_ORE
         offset: -1
         reward:
-          text: 10 obsidian, 5 emeralds
+          text: 10 obsidian, 2 diamonds, 5 emeralds
           items:
           - '49:10'
           - '388:5'
+          - 'DIAMOND:2'
           currency: 100
           xp: 100
 
@@ -286,11 +288,12 @@ ranks:
         displayItem: GOLD_ORE
         offset: -1
         reward:
-          text: 16 dirt, 16 sand, 5 emeralds
+          text: 16 dirt, 16 sand, 3 diamonds, 5 emeralds
           items:
           - '3:16'
           - '12:16'
           - '388:5'
+          - 'DIAMOND:3'
           currency: 250
           xp: 250
 
@@ -302,11 +305,12 @@ ranks:
         displayItem: DIAMOND_ORE
         offset: -1
         reward:
-          text: 32 dirt, 32 sand, 5 emeralds
+          text: 32 dirt, 32 sand, 4 diamonds, 5 emeralds
           items:
           - '3:32'
           - '12:32'
           - '388:5'
+          - 'DIAMOND:4'
           currency: 500
           xp: 500
 
@@ -318,11 +322,11 @@ ranks:
         displayItem: EMERALD_ORE
         offset: -1
         reward:
-          text: 64 dirt, 64 sand, 1 diamond, 5 emeralds
+          text: 64 dirt, 64 sand, 5 diamond, 5 emeralds
           items:
           - '3:64'
           - '12:64'
-          - '264:1'
+          - '264:5'
           - '388:5'
           currency: 1000
           xp: 1000
@@ -417,12 +421,13 @@ ranks:
         displayItem: 391
         lockedDisplayItem: STAINED_GLASS_PANE:12
         reward:
-          text: 1 pig, 1 saddle
+          text: a pig with saddle and a potato
           items:
           - '329:1'
+          - 'POTATO_ITEM:1'
+          - '383:1 {EntityTag:{id:"Pig"}}'
           - '{p=0.05}SAND:1:1'
           - '{p=0.01}DIAMOND:1'
-          - '383:1 {EntityTag:{id:"Pig"}}'
           currency: 50
           xp: 50
         repeatReward:
