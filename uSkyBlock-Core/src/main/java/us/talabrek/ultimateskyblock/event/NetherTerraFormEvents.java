@@ -52,6 +52,8 @@ public class NetherTerraFormEvents implements Listener {
     private final boolean terraformEnabled;
     private final boolean spawnEnabled;
     private final boolean netherRoof;
+    private final double minPitch;
+    private final double maxPitch;
 
     public NetherTerraFormEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -59,6 +61,8 @@ public class NetherTerraFormEvents implements Listener {
         terraformEnabled = plugin.getConfig().getBoolean("nether.terraform-enabled", true);
         spawnEnabled = plugin.getConfig().getBoolean("nether.spawn-chances.enabled", true);
         netherRoof = plugin.getConfig().getBoolean("options.protection.nether-roof", true);
+        minPitch = plugin.getConfig().getDouble("nether.terraform-min-pitch", -70d);
+        maxPitch = plugin.getConfig().getDouble("nether.terraform-max-pitch", 90d);
         ConfigurationSection config = plugin.getConfig().getConfigurationSection("nether.terraform");
         if (config != null) {
             for (String key : config.getKeys(false)) {
@@ -118,7 +122,7 @@ public class NetherTerraFormEvents implements Listener {
         v.subtract(new Vector(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ()));
         v.normalize();
         // Disable spawning above the player... enabling the player to clear a region
-        if (v.getY() <= 0.76) {
+        if (playerLocation.getPitch() >= minPitch && playerLocation.getPitch() <= maxPitch) {
             List<Material> yield = getYield(block.getType(), toolWeight);
             for (Material mat : yield) {
                 spawnBlock(mat, blockLocation, v);

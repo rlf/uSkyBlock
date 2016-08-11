@@ -1051,6 +1051,26 @@ msgstr "§4* §7You have misspelled the biome name. Must be one of {0}"
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§9* §7You can change your biome again in §c{0,number,#} §7minutes."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§4* §7You do not have permission to change your biome to that type."
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+"§a* §7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§9* §7You have changed your island''s biome to §a{0}"
@@ -1059,8 +1079,13 @@ msgstr "§9* §7You have changed your island''s biome to §a{0}"
 msgid "{0} changed the island biome to {1}"
 msgstr "§9* §6{0} §7changed the island biome to §a{1}"
 
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§4* §7You do not have permission to change your biome to that type."
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
+msgstr ""
 
 msgid "create an island"
 msgstr "create an island"
@@ -1759,35 +1784,25 @@ msgstr "§4* Watchdog!§7 Unable to locate a chest within §4{0}§7, bailing out
 msgid "§7Page {0}"
 msgstr "§7Page {0}"
 
-msgid "§c-"
-msgstr "§c-"
+#, java-format
+msgid "§c{0,number,#}"
+msgstr ""
 
-msgid "§a+"
-msgstr "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
+msgstr ""
 
-msgid "§c-1000"
-msgstr "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
+msgstr ""
 
-msgid "§c-100"
-msgstr "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
+msgstr ""
 
-msgid "§c-10"
-msgstr "§c-10"
-
-msgid "§c-1"
-msgstr "§c-1"
-
-msgid "§a+1"
-msgstr "§a+1"
-
-msgid "§a+10"
-msgstr "§a+10"
-
-msgid "§a+100"
-msgstr "§a+100"
-
-msgid "§a+1000"
-msgstr "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
+msgstr ""
 
 msgid "Return"
 msgstr "Return"
@@ -1887,101 +1902,6 @@ msgstr ""
 "other players from the island,\n"
 "but they are unable to kick\n"
 "the island leader."
-
-msgid "Permissions"
-msgstr "Permissions"
-
-#, java-format
-msgid "{0} <{1}>"
-msgstr "{0} <{1}>"
-
-msgid "§9Player Permissions"
-msgstr "§7Player Permissions"
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-
-msgid "§fThis player §acan"
-msgstr "§fThis player §acan"
-
-msgid "Click here to remove this permission."
-msgstr "Click here to remove this permission."
-
-msgid "§fThis player §ccannot"
-msgstr "§fThis player §ccannot"
-
-msgid "Click here to grant this permission."
-msgstr "Click here to grant this permission."
-
-msgid "Island Group Members"
-msgstr "Island Group Members"
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "Group Members: §2{0}§7/§e{1}"
-
-msgid "§aMore players can be invited to this island."
-msgstr "§7More players can be invited to this island."
-
-msgid "§cThis island is full."
-msgstr "§4* §7This island is full."
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-
-msgid "Leader"
-msgstr "Leader"
-
-msgid "Member"
-msgstr "Member"
-
-#, java-format
-msgid "Can {0}"
-msgstr "Can {0}"
-
-#, java-format
-msgid "Cannot {0}"
-msgstr "Cannot {0}"
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Click to change this player's permissions>"
-
-msgid "Island Log"
-msgstr "Island Log"
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-
-msgid "§e§lIsland Log"
-msgstr "§e§lIsland Log"
-
-msgid "Island Biome"
-msgstr "Island Biome"
 
 msgid "Ocean"
 msgstr "Ocean"
@@ -2195,6 +2115,101 @@ msgid ""
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+
+msgid "Permissions"
+msgstr "Permissions"
+
+#, java-format
+msgid "{0} <{1}>"
+msgstr "{0} <{1}>"
+
+msgid "§9Player Permissions"
+msgstr "§7Player Permissions"
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+
+msgid "§fThis player §acan"
+msgstr "§fThis player §acan"
+
+msgid "Click here to remove this permission."
+msgstr "Click here to remove this permission."
+
+msgid "§fThis player §ccannot"
+msgstr "§fThis player §ccannot"
+
+msgid "Click here to grant this permission."
+msgstr "Click here to grant this permission."
+
+msgid "Island Group Members"
+msgstr "Island Group Members"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "Group Members: §2{0}§7/§e{1}"
+
+msgid "§aMore players can be invited to this island."
+msgstr "§7More players can be invited to this island."
+
+msgid "§cThis island is full."
+msgstr "§4* §7This island is full."
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+
+msgid "Leader"
+msgstr "Leader"
+
+msgid "Member"
+msgstr "Member"
+
+#, java-format
+msgid "Can {0}"
+msgstr "Can {0}"
+
+#, java-format
+msgid "Cannot {0}"
+msgstr "Cannot {0}"
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<Click to change this player's permissions>"
+
+msgid "Island Log"
+msgstr "Island Log"
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+
+msgid "§e§lIsland Log"
+msgstr "§e§lIsland Log"
+
+msgid "Island Biome"
+msgstr "Island Biome"
 
 #, java-format
 msgid "Biome: {0}"
@@ -2613,14 +2628,6 @@ msgstr "§9* §7Your skyblock home has been set to your current location."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4* §7Your current location is not a safe home-location."
-
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
-msgstr ""
-"§a* §7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""

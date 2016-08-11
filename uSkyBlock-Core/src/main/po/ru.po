@@ -1047,6 +1047,24 @@ msgstr ""
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eВы сможете изменить биом снова через {0,number,#} мин."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§cУ вас недостаточно прав для изменения биома острова на указанный."
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§aВы изменили биом острова на {0}"
@@ -1055,8 +1073,13 @@ msgstr "§aВы изменили биом острова на {0}"
 msgid "{0} changed the island biome to {1}"
 msgstr "{0} изменил биом острова на {1}"
 
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§cУ вас недостаточно прав для изменения биома острова на указанный."
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
+msgstr ""
 
 msgid "create an island"
 msgstr "создание острова"
@@ -1740,34 +1763,24 @@ msgstr ""
 msgid "§7Page {0}"
 msgstr ""
 
-msgid "§c-"
+#, java-format
+msgid "§c{0,number,#}"
 msgstr ""
 
-msgid "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
 msgstr ""
 
-msgid "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
 msgstr ""
 
-msgid "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
 msgstr ""
 
-msgid "§c-10"
-msgstr ""
-
-msgid "§c-1"
-msgstr ""
-
-msgid "§a+1"
-msgstr ""
-
-msgid "§a+10"
-msgstr ""
-
-msgid "§a+100"
-msgstr ""
-
-msgid "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
 msgstr ""
 
 msgid "Return"
@@ -1865,101 +1878,6 @@ msgstr ""
 "других игроков с острова,\n"
 "но выкинуть хозяина острова\n"
 "невозможно."
-
-msgid "Permissions"
-msgstr ""
-
-#, java-format
-msgid "{0} <{1}>"
-msgstr ""
-
-msgid "§9Player Permissions"
-msgstr ""
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§eНажмите для возврата\n"
-"§eк информации о группе острова."
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§eНаведите на иконку для просмотра\n"
-"§eправ. Изменить их\n"
-"§eможно по клику."
-
-msgid "§fThis player §acan"
-msgstr "§fИгрок §aможет"
-
-msgid "Click here to remove this permission."
-msgstr "Нажмите для запрещения"
-
-msgid "§fThis player §ccannot"
-msgstr "§fИгрок §cне может"
-
-msgid "Click here to grant this permission."
-msgstr "Нажмите для разрешения"
-
-msgid "Island Group Members"
-msgstr "Участники группы островов"
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "Участники группыs: §2{0}§7/§e{1}"
-
-msgid "§aMore players can be invited to this island."
-msgstr "§aМожно пригласить еще участников."
-
-msgid "§cThis island is full."
-msgstr "§cОстров заполнен."
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§eНаведите на иконку игрока\n"
-"§eдля просмотра его прав.\n"
-"§eВладелец острова может изменять\n"
-"§eих по клику на иконке игрока."
-
-msgid "Leader"
-msgstr "Хозяин"
-
-msgid "Member"
-msgstr "Участник"
-
-#, java-format
-msgid "Can {0}"
-msgstr "Может {0}"
-
-#, java-format
-msgid "Cannot {0}"
-msgstr "Не может {0}"
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<нажмите для изменения прав игрока>"
-
-msgid "Island Log"
-msgstr "Журнал острова"
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr ""
-"§eНажмите для возврата\n"
-"§eв главное меню острова."
-
-msgid "§e§lIsland Log"
-msgstr "§e§lЖурнал острова"
-
-msgid "Island Biome"
-msgstr "Биом острова"
 
 msgid "Ocean"
 msgstr "Океан"
@@ -2160,6 +2078,101 @@ msgid ""
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+
+msgid "Permissions"
+msgstr ""
+
+#, java-format
+msgid "{0} <{1}>"
+msgstr ""
+
+msgid "§9Player Permissions"
+msgstr ""
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§eНажмите для возврата\n"
+"§eк информации о группе острова."
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§eНаведите на иконку для просмотра\n"
+"§eправ. Изменить их\n"
+"§eможно по клику."
+
+msgid "§fThis player §acan"
+msgstr "§fИгрок §aможет"
+
+msgid "Click here to remove this permission."
+msgstr "Нажмите для запрещения"
+
+msgid "§fThis player §ccannot"
+msgstr "§fИгрок §cне может"
+
+msgid "Click here to grant this permission."
+msgstr "Нажмите для разрешения"
+
+msgid "Island Group Members"
+msgstr "Участники группы островов"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "Участники группыs: §2{0}§7/§e{1}"
+
+msgid "§aMore players can be invited to this island."
+msgstr "§aМожно пригласить еще участников."
+
+msgid "§cThis island is full."
+msgstr "§cОстров заполнен."
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§eНаведите на иконку игрока\n"
+"§eдля просмотра его прав.\n"
+"§eВладелец острова может изменять\n"
+"§eих по клику на иконке игрока."
+
+msgid "Leader"
+msgstr "Хозяин"
+
+msgid "Member"
+msgstr "Участник"
+
+#, java-format
+msgid "Can {0}"
+msgstr "Может {0}"
+
+#, java-format
+msgid "Cannot {0}"
+msgstr "Не может {0}"
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<нажмите для изменения прав игрока>"
+
+msgid "Island Log"
+msgstr "Журнал острова"
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr ""
+"§eНажмите для возврата\n"
+"§eв главное меню острова."
+
+msgid "§e§lIsland Log"
+msgstr "§e§lЖурнал острова"
+
+msgid "Island Biome"
+msgstr "Биом острова"
 
 #, java-format
 msgid "Biome: {0}"
@@ -2569,12 +2582,6 @@ msgstr "§aТочка дома на вашем острове установле
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Ваше текущее место не безопасно для точки дома."
-
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
-msgstr ""
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr "§cВаш остров в процессе создания. Вы не можете создать сейчас."

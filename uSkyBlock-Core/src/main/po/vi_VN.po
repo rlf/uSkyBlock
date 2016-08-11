@@ -1039,6 +1039,24 @@ msgstr "§cBạn chọn sai tên vùng. Phải là một trong {0}"
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eBạn có thể chuyển vùng lần nữa trong {0,number,#} phút."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§cBạn không có quyền chuyển đến vùng này."
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr "§7Đang chuyển vùng thành §9{0}§7, hãy kiên nhẫn."
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§aBạn chuyển vùng đến {0}"
@@ -1047,8 +1065,13 @@ msgstr "§aBạn chuyển vùng đến {0}"
 msgid "{0} changed the island biome to {1}"
 msgstr "{0} chuyền vùng đến {1}"
 
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§cBạn không có quyền chuyển đến vùng này."
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
+msgstr ""
 
 msgid "create an island"
 msgstr "tạo đảo mới"
@@ -1717,35 +1740,25 @@ msgstr "§cCẩn thận!§9 Không thể đặt rương với {0}."
 msgid "§7Page {0}"
 msgstr "§7 Trang {0}"
 
-msgid "§c-"
-msgstr "§c-"
+#, java-format
+msgid "§c{0,number,#}"
+msgstr ""
 
-msgid "§a+"
-msgstr "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
+msgstr ""
 
-msgid "§c-1000"
-msgstr "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
+msgstr ""
 
-msgid "§c-100"
-msgstr "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
+msgstr ""
 
-msgid "§c-10"
-msgstr "§c-10"
-
-msgid "§c-1"
-msgstr "§c-1"
-
-msgid "§a+1"
-msgstr "§a+1"
-
-msgid "§a+10"
-msgstr "§a+10"
-
-msgid "§a+100"
-msgstr "§a+100"
-
-msgid "§a+1000"
-msgstr "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
+msgstr ""
 
 msgid "Return"
 msgstr "Trở về"
@@ -1838,100 +1851,6 @@ msgid ""
 "but they are unable to kick\n"
 "the island leader."
 msgstr "trục xuất người chơi\\,nnhưng không thể trục xuất quản lý"
-
-msgid "Permissions"
-msgstr "Quyền hạn"
-
-#, java-format
-msgid "{0} <{1}>"
-msgstr "{0} <{1}>"
-
-msgid "§9Player Permissions"
-msgstr "§9Quyền hạn"
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§eNhấp để trở về\n"
-"§etrang thông tin đảo"
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§eXem quyền hạn người chơi\n"
-"§ethông qua hình đại diện.\n"
-"§eNhấp vào để thay đổi quyền hạn."
-
-msgid "§fThis player §acan"
-msgstr "§fNgười chơi §acó thể"
-
-msgid "Click here to remove this permission."
-msgstr "Nhấp để xoá bỏ quyền hạn"
-
-msgid "§fThis player §ccannot"
-msgstr "§fNgười chơi §ckhông thể"
-
-msgid "Click here to grant this permission."
-msgstr "Nhấp để thay đổi quyền hạn"
-
-msgid "Island Group Members"
-msgstr "Thành viên trong nhóm"
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "Thành viên nhóm: §2{0}§7/§e{1}"
-
-msgid "§aMore players can be invited to this island."
-msgstr "§aCó thể mời thêm nhiều người chơi nữa vào đảo."
-
-msgid "§cThis island is full."
-msgstr "§cĐảo đã đủ người."
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§eXem quyền hạn người chơi\n"
-"§ethông qua hình ảnh đại diện.\n"
-"§eQuản lý có thể thay đổi quyền hạn\n"
-"§ethành viên bằng cách nhấp vào\n"
-"§ehình đại diện"
-
-msgid "Leader"
-msgstr "Quản lý"
-
-msgid "Member"
-msgstr "Thành viên"
-
-#, java-format
-msgid "Can {0}"
-msgstr "Có thể {0}"
-
-#, java-format
-msgid "Cannot {0}"
-msgstr "Không thể {0}"
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Nhấp để thay đổi quyền hạn người chơi>"
-
-msgid "Island Log"
-msgstr "Lịch sử đảo"
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr "§eNhấp để trờ về trình đơn chính."
-
-msgid "§e§lIsland Log"
-msgstr "§e§lLịch sử đảo"
-
-msgid "Island Biome"
-msgstr "Phân vùng"
 
 msgid "Ocean"
 msgstr "Đại dương"
@@ -2120,6 +2039,100 @@ msgid ""
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+
+msgid "Permissions"
+msgstr "Quyền hạn"
+
+#, java-format
+msgid "{0} <{1}>"
+msgstr "{0} <{1}>"
+
+msgid "§9Player Permissions"
+msgstr "§9Quyền hạn"
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§eNhấp để trở về\n"
+"§etrang thông tin đảo"
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§eXem quyền hạn người chơi\n"
+"§ethông qua hình đại diện.\n"
+"§eNhấp vào để thay đổi quyền hạn."
+
+msgid "§fThis player §acan"
+msgstr "§fNgười chơi §acó thể"
+
+msgid "Click here to remove this permission."
+msgstr "Nhấp để xoá bỏ quyền hạn"
+
+msgid "§fThis player §ccannot"
+msgstr "§fNgười chơi §ckhông thể"
+
+msgid "Click here to grant this permission."
+msgstr "Nhấp để thay đổi quyền hạn"
+
+msgid "Island Group Members"
+msgstr "Thành viên trong nhóm"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "Thành viên nhóm: §2{0}§7/§e{1}"
+
+msgid "§aMore players can be invited to this island."
+msgstr "§aCó thể mời thêm nhiều người chơi nữa vào đảo."
+
+msgid "§cThis island is full."
+msgstr "§cĐảo đã đủ người."
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§eXem quyền hạn người chơi\n"
+"§ethông qua hình ảnh đại diện.\n"
+"§eQuản lý có thể thay đổi quyền hạn\n"
+"§ethành viên bằng cách nhấp vào\n"
+"§ehình đại diện"
+
+msgid "Leader"
+msgstr "Quản lý"
+
+msgid "Member"
+msgstr "Thành viên"
+
+#, java-format
+msgid "Can {0}"
+msgstr "Có thể {0}"
+
+#, java-format
+msgid "Cannot {0}"
+msgstr "Không thể {0}"
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<Nhấp để thay đổi quyền hạn người chơi>"
+
+msgid "Island Log"
+msgstr "Lịch sử đảo"
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr "§eNhấp để trờ về trình đơn chính."
+
+msgid "§e§lIsland Log"
+msgstr "§e§lLịch sử đảo"
+
+msgid "Island Biome"
+msgstr "Phân vùng"
 
 #, java-format
 msgid "Biome: {0}"
@@ -2518,12 +2531,6 @@ msgstr "§aNhà chính đã được đặt tại vị trí hiện tại."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Vị trí hiện tại không an toàn."
-
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
-msgstr "§7Đang chuyển vùng thành §9{0}§7, hãy kiên nhẫn."
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr "§cĐảo đang trong quá trình khởi tạo, không thể tạo mới ngay bây giờ."

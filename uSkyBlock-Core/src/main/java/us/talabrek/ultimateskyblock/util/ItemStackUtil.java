@@ -286,19 +286,21 @@ public enum ItemStackUtil {
         }
 
         public Builder lore(String lore) {
-            return lore(Collections.singletonList(lore));
+            return lore(Collections.singletonList(FormatUtil.normalize(lore)));
         }
 
         public Builder lore(List<String> lore) {
             ItemMeta itemMeta = itemStack.getItemMeta();
-            if (itemMeta.getLore() == null) {
-                itemMeta.setLore(lore);
-            } else {
-                List<String> oldLore = itemMeta.getLore();
-                oldLore.addAll(lore);
-                itemMeta.setLore(oldLore);
+            if (itemMeta != null) {
+                if (itemMeta.getLore() == null) {
+                    itemMeta.setLore(lore);
+                } else {
+                    List<String> oldLore = itemMeta.getLore();
+                    oldLore.addAll(lore);
+                    itemMeta.setLore(oldLore);
+                }
+                itemStack.setItemMeta(itemMeta);
             }
-            itemStack.setItemMeta(itemMeta);
             return this;
         }
 

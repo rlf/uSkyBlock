@@ -79,6 +79,68 @@ public class SkyBlockMenu {
                     "but they are unable to kick\n" +
                     "the island leader."))
     );
+    private List<BiomeMenuItem> biomeMenus = Arrays.asList(
+            new BiomeMenuItem(new ItemStack(Material.RAW_FISH, 1, (short) 2),
+                    "ocean", tr("Ocean"),
+                    tr("The ocean biome is the basic\nstarting biome for all islands.\npassive mobs like animals will\nnot spawn. Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 1),
+                    "forest", tr("Forest"),
+                    tr("The forest biome will allow\nyour island to spawn passive.\nmobs like animals (including\nwolves). Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SAND, 1),
+                    "desert", tr("Desert"),
+                    tr("The desert biome makes it so\nthat there is no rain or snow\non your island. Passive mobs\nwon't spawn. Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 3),
+                    "jungle", tr("Jungle"),
+                    tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.WATER_LILY, 1),
+                    "swampland", tr("Swampland"),
+                    tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SNOW, 1),
+                    "taiga", tr("Taiga"),
+                    tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.RED_MUSHROOM, 1),
+                    "mushroom", tr("Mushroom"),
+                    tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.NETHER_BRICK, 1),
+                    "hell", tr("Hell"),
+                    tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.EYE_OF_ENDER, 1),
+                    "sky", tr("Sky"),
+                    tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.LONG_GRASS, 1, (byte) 1),
+                    "plains", tr("Plains"),
+                    tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.EMERALD_ORE, 1),
+                    "extreme_hills", tr("Extreme Hills"),
+                    tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
+                    "flower_forest", tr("Flower Forest"),
+                    tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
+                    "deep_ocean", tr("Deep Ocean"),
+                    tr("The deep-ocean biome is an advanced\n" +
+                            "biome. Passive mobs like animals will\n" +
+                            "not spawn. Hostile mobs \n"+
+                            "(including Guardians) will\n" +
+                            "spawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.PACKED_ICE, 1),
+                    "ice_plains", tr("Ice Plains"),
+                    tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
+            )
+    );
 
     public SkyBlockMenu(uSkyBlock plugin, ChallengeLogic challengeLogic) {
         this.plugin = plugin;
@@ -221,68 +283,6 @@ public class SkyBlockMenu {
         sign.setItemMeta(meta4);
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        List<BiomeMenuItem> biomeMenus = Arrays.asList(
-                new BiomeMenuItem(new ItemStack(Material.RAW_FISH, 1, (short) 2),
-                        "ocean", tr("Ocean"),
-                        tr("The ocean biome is the basic\nstarting biome for all islands.\npassive mobs like animals will\nnot spawn. Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 1),
-                        "forest", tr("Forest"),
-                        tr("The forest biome will allow\nyour island to spawn passive.\nmobs like animals (including\nwolves). Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SAND, 1),
-                        "desert", tr("Desert"),
-                        tr("The desert biome makes it so\nthat there is no rain or snow\non your island. Passive mobs\nwon't spawn. Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 3),
-                        "jungle", tr("Jungle"),
-                        tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.WATER_LILY, 1),
-                        "swampland", tr("Swampland"),
-                        tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SNOW, 1),
-                        "taiga", tr("Taiga"),
-                        tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.RED_MUSHROOM, 1),
-                        "mushroom", tr("Mushroom"),
-                        tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.NETHER_BRICK, 1),
-                        "hell", tr("Hell"),
-                        tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.EYE_OF_ENDER, 1),
-                        "sky", tr("Sky"),
-                        tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.LONG_GRASS, 1, (byte) 1),
-                        "plains", tr("Plains"),
-                        tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.EMERALD_ORE, 1),
-                        "extreme_hills", tr("Extreme Hills"),
-                        tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
-                        "flower_forest", tr("Flower Forest"),
-                        tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
-                        "deep_ocean", tr("Deep Ocean"),
-                        tr("The deep-ocean biome is an advanced\n" +
-                                "biome. Passive mobs like animals will\n" +
-                                "not spawn. Hostile mobs \n"+
-                                "(including Guardians) will\n" +
-                                "spawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.PACKED_ICE, 1),
-                        "ice_plains", tr("Ice Plains"),
-                        tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
-                )
-        );
         String currentBiome = plugin.getCurrentBiome(player);
         for (BiomeMenuItem biomeMenu : biomeMenus) {
             if (!BiomeCommand.biomeExists(biomeMenu.getId())) {
@@ -462,29 +462,31 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
-        int index = 1;
-        for (String schemeName : schemeNames) {
-            IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
-            boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
-            if (!enabled) {
-                continue; // Skip
+        if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+            int index = 1;
+            for (String schemeName : schemeNames) {
+                IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+                boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
+                if (!enabled) {
+                    continue; // Skip
+                }
+                index = Math.max(plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index), 1);
+                menuItem = islandPerk.getDisplayItem();
+                meta = menuItem.getItemMeta();
+                lores = meta.getLore();
+                if (lores == null) {
+                    lores = new ArrayList<>();
+                }
+                // TODO: 30/01/2016 - R4zorax: Add the extra items?
+                if (player.hasPermission(islandPerk.getPermission())) {
+                    addLore(lores, tr("\u00a7aClick to create!"));
+                } else {
+                    addLore(lores, tr("\u00a7cNo access!\n\u00a77({0})", islandPerk.getPermission()));
+                }
+                meta.setLore(lores);
+                menuItem.setItemMeta(meta);
+                menu.setItem(index++, menuItem);
             }
-            index = Math.max(plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index), 1);
-            menuItem = islandPerk.getDisplayItem();
-            meta = menuItem.getItemMeta();
-            lores = meta.getLore();
-            if (lores == null) {
-                lores = new ArrayList<>();
-            }
-            // TODO: 30/01/2016 - R4zorax: Add the extra items?
-            if (player.hasPermission(islandPerk.getPermission())) {
-                addLore(lores, tr("\u00a7aClick to create!"));
-            } else {
-                addLore(lores, tr("\u00a7cNo access!\n\u00a77({0})", islandPerk.getPermission()));
-            }
-            meta.setLore(lores);
-            menuItem.setItemMeta(meta);
-            menu.setItem(index++, menuItem);
         }
 
         lores.clear();
@@ -656,14 +658,16 @@ public class SkyBlockMenu {
         menu.setItem(15, menuItem);
         lores.clear();
         if (islandInfo.isLeader(player)) {
-            menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
-            meta4 = menuItem.getItemMeta();
-            meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
-            addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
-            meta4.setLore(lores);
-            menuItem.setItemMeta(meta4);
-            menu.setItem(17, menuItem);
-            lores.clear();
+            if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+                menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
+                meta4 = menuItem.getItemMeta();
+                meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
+                addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
+                meta4.setLore(lores);
+                menuItem.setItemMeta(meta4);
+                menu.setItem(17, menuItem);
+                lores.clear();
+            }
         } else {
             menuItem = new ItemStack(Material.IRON_DOOR, 1);
             meta4 = menuItem.getItemMeta();
@@ -817,7 +821,7 @@ public class SkyBlockMenu {
             p.performCommand("island lock");
             p.openInventory(displayIslandGUI(p));
         } else if (slotIndex == 17) {
-            if (islandInfo.isLeader(p)) {
+            if (islandInfo.isLeader(p) && plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
                 p.closeInventory();
                 p.openInventory(createRestartGUI(p));
             } else {
@@ -992,48 +996,18 @@ public class SkyBlockMenu {
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 3) {
-            p.closeInventory();
-            p.performCommand("island biome jungle");
-        } else if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 1) {
-            p.closeInventory();
-            p.performCommand("island biome forest");
-        } else if (currentItem.getType() == Material.SAND) {
-            p.closeInventory();
-            p.performCommand("island biome desert");
-        } else if (currentItem.getType() == Material.SNOW) {
-            p.closeInventory();
-            p.performCommand("island biome taiga");
-        } else if (currentItem.getType() == Material.EYE_OF_ENDER) {
-            p.closeInventory();
-            p.performCommand("island biome sky");
-        } else if (currentItem.getType() == Material.WATER_LILY) {
-            p.closeInventory();
-            p.performCommand("island biome swampland");
-        } else if (currentItem.getType() == Material.NETHER_BRICK) {
-            p.closeInventory();
-            p.performCommand("island biome hell");
-        } else if (currentItem.getType() == Material.RED_MUSHROOM) {
-            p.closeInventory();
-            p.performCommand("island biome mushroom");
-        } else if (currentItem.getType() == Material.LONG_GRASS) {
-            p.closeInventory();
-            p.performCommand("island biome plains");
-        } else if (currentItem.getType() == Material.EMERALD_ORE) {
-            p.closeInventory();
-            p.performCommand("island biome extreme_hills");
-        } else if (currentItem.getType() == Material.RED_ROSE && currentItem.getDurability() == 5) {
-            p.closeInventory();
-            p.performCommand("island biome flower_forest");
-        } else if (currentItem.getType() == Material.RAW_FISH) {
-            p.closeInventory();
-            p.performCommand("island biome ocean");
-        } else if (currentItem.getType() == Material.PRISMARINE_SHARD) {
-            p.closeInventory();
-            p.performCommand("island biome deep_ocean");
-        } else {
+        if (slotIndex == 0 && currentItem.getType() == Material.SIGN) {
             p.closeInventory();
             p.openInventory(displayIslandGUI(p));
+            return;
+        }
+        for (BiomeMenuItem biomeMenu : biomeMenus) {
+            ItemStack menuIcon = biomeMenu.getIcon();
+            if (currentItem.getType() == menuIcon.getType() && currentItem.getDurability() == menuIcon.getDurability()) {
+                p.closeInventory();
+                p.performCommand("island biome " + biomeMenu.getId());
+                return;
+            }
         }
     }
 

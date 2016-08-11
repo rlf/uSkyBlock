@@ -6,6 +6,13 @@ package us.talabrek.ultimateskyblock.island;
 public class OrphanComparator implements java.util.Comparator<OrphanLogic.Orphan> {
     @Override
     public int compare(OrphanLogic.Orphan o1, OrphanLogic.Orphan o2) {
-        return o1.distanceSquared() - o2.distanceSquared();
+        int cmp = o1.distanceSquared() - o2.distanceSquared();
+        if (cmp == 0) {
+            cmp = o1.getX() - o2.getX();
+        }
+        if (cmp == 0) {
+            cmp = o1.getZ() - o2.getZ();
+        }
+        return cmp;
     }
 }

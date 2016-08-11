@@ -36,9 +36,11 @@ public class RestartCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot restart now."));
                 return true;
             }
-            if (args == null || args.length == 0) {
-                player.openInventory(plugin.getMenu().createRestartGUI(player));
-                return true;
+            if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+                if (args == null || args.length == 0) {
+                    player.openInventory(plugin.getMenu().createRestartGUI(player));
+                    return true;
+                }
             }
             if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
                 plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);

@@ -17,7 +17,7 @@ public enum BiomeUtil {;
 
     public static Biome getBiome(String name) {
         try {
-            return Biome.valueOf(name);
+            return Biome.valueOf(name.toUpperCase());
         } catch (IllegalArgumentException e) {
             if (biomeAlias.containsKey(name)) {
                 return getBiome(biomeAlias.get(name));

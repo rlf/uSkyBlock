@@ -64,7 +64,7 @@ showLockedChallengeName: true
 ranks:
   Tier1:
     name: '&7Novice'
-    displayItem: WOOD_PICKAXE
+    displayItem: 'HARD_CLAY:9'
     resetInHours: 20
     challenges:
       cobblestonegenerator:
@@ -261,6 +261,7 @@ ranks:
           - '3:8'
           - '12:8'
           - '388:5'
+          - 'DIAMOND:1'
           currency: 20
           xp: 20
           commands:
@@ -274,10 +275,11 @@ ranks:
         displayItem: IRON_ORE
         offset: -1
         reward:
-          text: 10 obsidian, 5 emeralds
+          text: 10 obsidian, 2 diamonds, 5 emeralds
           items:
           - '49:10'
           - '388:5'
+          - 'DIAMOND:2'
           currency: 100
           xp: 100
 
@@ -289,11 +291,12 @@ ranks:
         displayItem: GOLD_ORE
         offset: -1
         reward:
-          text: 16 dirt, 16 sand, 5 emeralds
+          text: 16 dirt, 16 sand, 3 diamonds, 5 emeralds
           items:
           - '3:16'
           - '12:16'
           - '388:5'
+          - 'DIAMOND:3'
           currency: 250
           xp: 250
 
@@ -305,11 +308,12 @@ ranks:
         displayItem: DIAMOND_ORE
         offset: -1
         reward:
-          text: 32 dirt, 32 sand, 5 emeralds
+          text: 32 dirt, 32 sand, 4 diamonds, 5 emeralds
           items:
           - '3:32'
           - '12:32'
           - '388:5'
+          - 'DIAMOND:4'
           currency: 500
           xp: 500
 
@@ -321,11 +325,11 @@ ranks:
         displayItem: EMERALD_ORE
         offset: -1
         reward:
-          text: 64 dirt, 64 sand, 1 diamond, 5 emeralds
+          text: 64 dirt, 64 sand, 5 diamond, 5 emeralds
           items:
           - '3:64'
           - '12:64'
-          - '264:1'
+          - '264:5'
           - '388:5'
           currency: 1000
           xp: 1000
@@ -333,7 +337,7 @@ ranks:
 
   Tier2:
     name: '&aAdept'
-    displayItem: 290
+    displayItem: 'HARD_CLAY:5'
     resetInHours: 20
     requires:
       rankLeeway: 99 # means disabled in effect
@@ -420,12 +424,13 @@ ranks:
         displayItem: 391
         lockedDisplayItem: STAINED_GLASS_PANE:12
         reward:
-          text: 1 pig, 1 saddle
+          text: a pig with saddle and a potato
           items:
           - '329:1'
+          - 'POTATO_ITEM:1'
+          - '383:1 {EntityTag:{id:"Pig"}}'
           - '{p=0.05}SAND:1:1'
           - '{p=0.01}DIAMOND:1'
-          - '383:1 {EntityTag:{id:"Pig"}}'
           currency: 50
           xp: 50
         repeatReward:
@@ -522,7 +527,7 @@ ranks:
 
   Tier3:
     name: '&eExpert'
-    displayItem: 'IRON_PICKAXE'
+    displayItem: 'HARD_CLAY:4'
     resetInHours: 20
     requires:
       challenges:
@@ -532,6 +537,7 @@ ranks:
         name: '&3Tool Maker'
         description: Make all stone tools
         type: onPlayer
+        requiredChallenges: [lumberjack]
         requiredItems: '273:1 274:1 275:1 291:1'
         displayItem: 275
         lockedDisplayItem: STAINED_GLASS_PANE:9
@@ -548,6 +554,7 @@ ranks:
         name: '&3Torch Maker'
         description: Make 128 torches.
         type: onPlayer
+        requiredChallenges: [lumberjack]
         requiredItems: '50:128;+32'
         displayItem: 50
         lockedDisplayItem: STAINED_GLASS_PANE:9
@@ -602,22 +609,29 @@ ranks:
         name: '&5Fisherman'
         description: Catch different types of fish.
         type: onPlayer
-        requiredItems: '349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1'
+        requiredItems:
+        - '349:0:5;+1'
+        - '349:1:5;+1'
+        - '349:3:3;+1'
+        - '349:2:1;+1'
+        - '351:5;+5'
         displayItem: 349
         lockedDisplayItem: STAINED_GLASS_PANE:10
         reward:
-          text: 10 lapis lazuli, 20 prismarine, deep-ocean
+          text: 10 lapis blocks, 20 prismarine, deep-ocean
           items:
           - '22:10'
           - '168:20'
+          - '{p=0.20}410:5'
           permission: usb.biome.deep_ocean
           currency: 50
           xp: 50
         repeatReward:
-          text: 2 redstone, 2 inksac
+          text: 2 lapis, 5 prismarine, chance at prismarine crystals
           items:
-          - '331:2'
-          - '351:2'
+          - '351:4:2'
+          - '168:5'
+          - '{p=0.20}410:5'
           currency: 25
           xp: 25
 
@@ -750,7 +764,7 @@ ranks:
 #===============================================
   Tier4:
     name: '&cMaster'
-    displayItem: '153'
+    displayItem: 'HARD_CLAY:1'
     resetInHours: 20
     requires:
       rankLeeway: 99 # disabled
@@ -811,10 +825,11 @@ ranks:
         displayItem: 58
         lockedDisplayItem: STAINED_GLASS_PANE:9
         reward:
-          text: 4 redstone ore, 4 iron ore
+          text: 4 redstone ore, jukebox, 4 iron ore
           items:
           - '73:4'
           - '15:4'
+          - '84:1'
           currency: 30
           xp: 30
         repeatReward:
@@ -822,6 +837,7 @@ ranks:
           items:
           - '73:1'
           - '15:1'
+          - '{p=0.25}84:1'
           currency: 15
           xp: 15
 
@@ -834,17 +850,19 @@ ranks:
         displayItem: 357
         lockedDisplayItem: STAINED_GLASS_PANE:4
         reward:
-          text: 4 redstone ore, 1 cocoa
+          text: 4 redstone ore, 1 diamond
           items:
           - '73:4'
-          - '351:3:1'
+          - 'DIAMOND:1'
           currency: 80
           xp: 80
         repeatReward:
-          text: 1 cocoa, 5 clay
+          text: 1 iron ore, 5 clay
           items:
-          - '351:3:1'
+          - '15:1'
           - '82:5'
+          - '{p=0.4}82:3'
+          - '{p=0.3}15:2'
           currency: 40
           xp: 40
 
@@ -1010,7 +1028,7 @@ ranks:
 #===============================================
   Tier5:
     name: '&4Sky Lord'
-    displayItem: 292
+    displayItem: 'HARD_CLAY:14'
     resetInHours: 48
     requires:
       challenges:

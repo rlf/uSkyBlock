@@ -18,9 +18,19 @@ config.yml:
     - options.island.height
     - nether.enabled
 
-  # icons contains icon-overrides for specific paths
-  # syntax: path:<MATERIAL>:<subtype>
-  icons:
+integer-menu:
+  increment:
+    '-1000': 'EMERALD'
+    '-100': 'DIAMOND'
+    '-10': 'GOLD_INGOT'
+    '-1': 'IRON_INGOT'
+    '1': 'IRON_INGOT'
+    '10': 'GOLD_INGOT'
+    '100': 'DIAMOND'
+    '1000': 'EMERALD'
+  number-items:
+    0: 'ENDER_PEARL'
+    1: 'LEVER'
 
 keyboard:
   en:

@@ -54,7 +54,7 @@ if (plugin instanceof uSkyBlockAPI && plugin.isEnabled()) {
   ));
 }
 ```
-For further details regarding the API, visit the Wiki page: https://github.com/rlf/uSkyBlock/wiki/API
+For further details regarding the API, visit the Wiki page: https://github.com/rlf/uSkyBlock/wiki/uSkyBlock-API
 
 ## Contributing
 

@@ -214,6 +214,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         getServer().getScheduler().runTaskLater(getInstance(), new Runnable() {
             @Override
             public void run() {
+                ServerUtil.init(uSkyBlock.this);
                 if (!isRequirementsMet(Bukkit.getConsoleSender(), null)) {
                     return;
                 }
@@ -233,19 +234,18 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     Bukkit.getConsoleSender().sendMessage(tr("Converting data to UUID, this make take a while!"));
                     getImporter().importUSB(Bukkit.getConsoleSender(), "name2uuid");
                 }
+                log(Level.INFO, getVersionInfo(false));
             }
-        }, getConfig().getLong("setDataFolder.initDelay", 50L));
+        }, getConfig().getLong("init.initDelay", 50L));
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }
-        log(Level.INFO, getVersionInfo(false));
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender, Command command, String... args) {
-        // TODO: 28/06/2016 - R4zorax: Allow admin-maintenance methods to get through?
         if (maintenanceMode && !(
                 (command instanceof AdminCommand && args != null && args.length > 0 && args[0].equals("maintenance")) ||
                 command instanceof SetMaintenanceCommand)) {
@@ -530,6 +530,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         if (getConfig().getBoolean("options.restart.clearEnderChest", true)) {
             player.getEnderChest().clear();
+        }
+        if (getConfig().getBoolean("options.restart.clearCurrency", false) && VaultHandler.hasEcon()) {
+            VaultHandler.getEcon().withdrawPlayer(player, VaultHandler.getEcon().getBalance(player));
         }
         getLogger().exiting(CN, "clearPlayerInventory");
     }
@@ -1046,7 +1049,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean isSkyAssociatedWorld(World world) {
-        return world.getName().startsWith(skyBlockWorld.getName());
+        return world.getName().startsWith(skyBlockWorld.getName())
+                && !(world.getEnvironment() == World.Environment.NETHER && !Settings.nether_enabled)
+                && !(world.getEnvironment() == World.Environment.THE_END);
     }
 
     public IslandLogic getIslandLogic() {
@@ -1233,7 +1238,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 islandLogic.getSize(), playerLogic.getSize(),
                 Settings.nether_enabled, AsyncWorldEditHandler.isAWE());
         msg += pre("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());
-        msg += pre("\u00a79  State: online={0}, bungee={1}\n", getServer().getOnlineMode(), ServerUtil.isBungeeEnabled());
+        msg += pre("\u00a79  State: online={0}, bungee={1}\n", ServerUtil.isOnlineMode(),
+                ServerUtil.isBungeeEnabled());
         msg += pre("\u00a77------------------------------\n");
         for (String[] dep : depends) {
             Plugin dependency = getServer().getPluginManager().getPlugin(dep[0]);
@@ -1374,10 +1380,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public void fireMemberJoinedEvent(IslandInfo islandInfo, PlayerInfo playerInfo) {
-        getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo));
+        async(() -> { getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo)); });
     }
 
     public void fireMemberLeftEvent(IslandInfo islandInfo, PlayerInfo member) {
-        getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member));
+        async(() -> { getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member)); });
     }
 }

@@ -1045,6 +1045,26 @@ msgstr "§cDu har stavet biomen forkert. Skal være en af {0}"
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eDu kan ikke ændre biome de næste {0,number,#} minutter."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§4Du har ikke tilladelse til at ændre til den biome!"
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+"§7Feerne har travlt med at ændre biomen for din ø til §9{0}§7, vær venligst "
+"tålmodig."
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§aDu har ændret din ø''s biome til {0}"
@@ -1053,8 +1073,13 @@ msgstr "§aDu har ændret din ø''s biome til {0}"
 msgid "{0} changed the island biome to {1}"
 msgstr "{0} ændrede øens biome til {1}"
 
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§4Du har ikke tilladelse til at ændre til den biome!"
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
+msgstr ""
 
 msgid "create an island"
 msgstr "opret en ø"
@@ -1740,35 +1765,25 @@ msgstr ""
 msgid "§7Page {0}"
 msgstr "§7Side {0}"
 
-msgid "§c-"
-msgstr "§c-"
+#, java-format
+msgid "§c{0,number,#}"
+msgstr ""
 
-msgid "§a+"
-msgstr "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
+msgstr ""
 
-msgid "§c-1000"
-msgstr "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
+msgstr ""
 
-msgid "§c-100"
-msgstr "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
+msgstr ""
 
-msgid "§c-10"
-msgstr "§c-10"
-
-msgid "§c-1"
-msgstr "§c-1"
-
-msgid "§a+1"
-msgstr "§a+1"
-
-msgid "§a+10"
-msgstr "§a+10"
-
-msgid "§a+100"
-msgstr "§a+100"
-
-msgid "§a+1000"
-msgstr "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
+msgstr ""
 
 msgid "Return"
 msgstr "Tilbage"
@@ -1866,101 +1881,6 @@ msgstr ""
 "kan sparke andre spillere\n"
 "af øen, men kan ikke sparke\n"
 "øens ejer."
-
-msgid "Permissions"
-msgstr "Tilladelser"
-
-#, java-format
-msgid "{0} <{1}>"
-msgstr "{0} <{1}>"
-
-msgid "§9Player Permissions"
-msgstr "§9Spiller tilladelser"
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§eKlik her for at vende tilbage\n"
-"§etil din ø's medlemsmenu."
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§eHold musen over et ikon\n"
-"§efor at se tilladelsen.\n"
-"§eSkift ved at klikke."
-
-msgid "§fThis player §acan"
-msgstr "§fDenne spiller §akan"
-
-msgid "Click here to remove this permission."
-msgstr "Klik her for at fjerne tilladelsen."
-
-msgid "§fThis player §ccannot"
-msgstr "§fDenne spiller kan §cikke"
-
-msgid "Click here to grant this permission."
-msgstr "§fKlik her for at give tilladelsen."
-
-msgid "Island Group Members"
-msgstr "Øens medlemmer"
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "Ø medlemmer: §2{0}§7/§e{1}"
-
-msgid "§aMore players can be invited to this island."
-msgstr "§aFlere spillere kan inviteres til denne ø."
-
-msgid "§cThis island is full."
-msgstr "§cDenne ø er fuld!"
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§eHold musen over en spillers\n"
-"§ebillede, for at se deres tilladelser\n"
-"§eØens ejer kan ændre tilladelser\n"
-"§eved at klikke på medlemmernes hoved."
-
-msgid "Leader"
-msgstr "Ejer"
-
-msgid "Member"
-msgstr "Medlem"
-
-#, java-format
-msgid "Can {0}"
-msgstr "Kan {0}"
-
-#, java-format
-msgid "Cannot {0}"
-msgstr "Kan ikke {0}"
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Klik for at ændre tilladelse>"
-
-msgid "Island Log"
-msgstr "Øens Log"
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr ""
-"§eKlik her og returner til\n"
-"§eøens hovedmenu."
-
-msgid "§e§lIsland Log"
-msgstr "§e§lØens Log"
-
-msgid "Island Biome"
-msgstr "Øens Biome"
 
 msgid "Ocean"
 msgstr "Hav"
@@ -2169,6 +2089,101 @@ msgid ""
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+
+msgid "Permissions"
+msgstr "Tilladelser"
+
+#, java-format
+msgid "{0} <{1}>"
+msgstr "{0} <{1}>"
+
+msgid "§9Player Permissions"
+msgstr "§9Spiller tilladelser"
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§eKlik her for at vende tilbage\n"
+"§etil din ø's medlemsmenu."
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§eHold musen over et ikon\n"
+"§efor at se tilladelsen.\n"
+"§eSkift ved at klikke."
+
+msgid "§fThis player §acan"
+msgstr "§fDenne spiller §akan"
+
+msgid "Click here to remove this permission."
+msgstr "Klik her for at fjerne tilladelsen."
+
+msgid "§fThis player §ccannot"
+msgstr "§fDenne spiller kan §cikke"
+
+msgid "Click here to grant this permission."
+msgstr "§fKlik her for at give tilladelsen."
+
+msgid "Island Group Members"
+msgstr "Øens medlemmer"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "Ø medlemmer: §2{0}§7/§e{1}"
+
+msgid "§aMore players can be invited to this island."
+msgstr "§aFlere spillere kan inviteres til denne ø."
+
+msgid "§cThis island is full."
+msgstr "§cDenne ø er fuld!"
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§eHold musen over en spillers\n"
+"§ebillede, for at se deres tilladelser\n"
+"§eØens ejer kan ændre tilladelser\n"
+"§eved at klikke på medlemmernes hoved."
+
+msgid "Leader"
+msgstr "Ejer"
+
+msgid "Member"
+msgstr "Medlem"
+
+#, java-format
+msgid "Can {0}"
+msgstr "Kan {0}"
+
+#, java-format
+msgid "Cannot {0}"
+msgstr "Kan ikke {0}"
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<Klik for at ændre tilladelse>"
+
+msgid "Island Log"
+msgstr "Øens Log"
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr ""
+"§eKlik her og returner til\n"
+"§eøens hovedmenu."
+
+msgid "§e§lIsland Log"
+msgstr "§e§lØens Log"
+
+msgid "Island Biome"
+msgstr "Øens Biome"
 
 #, java-format
 msgid "Biome: {0}"
@@ -2582,14 +2597,6 @@ msgstr "§aDit hjemsted er blevet sat til din nuværende position."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Din nuværende position er ikke et sikkert hjemsted."
-
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
-msgstr ""
-"§7Feerne har travlt med at ændre biomen for din ø til §9{0}§7, vær venligst "
-"tålmodig."
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr ""
