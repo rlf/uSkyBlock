@@ -2,7 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-07-05 22:53+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-08-12 00:12+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -30,7 +31,7 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4De vereisten worden teruggezet in {0} minuten."
 
 msgid "§eThis challenge requires:"
-msgstr ""
+msgstr "§eDeze uitdaging vereist:"
 
 msgid "§7and more..."
 msgstr "§7en meer..."
@@ -44,11 +45,11 @@ msgid "§7{0}"
 msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
-msgstr ""
+msgstr "§eItems worden verhandeld voor een beloning."
 
 #, java-format
 msgid "§eMust be within {0} meters."
-msgstr ""
+msgstr "§eMoet binnen {0} meter zijn."
 
 msgid "§6Item Reward: §a"
 msgstr "§6Item beloning: §a"
@@ -67,7 +68,7 @@ msgstr "§dHet aantal keer dat je de uitdaging hebt voltooid: §f{0}"
 
 #, java-format
 msgid "§7Requires {0}"
-msgstr ""
+msgstr "§7Vereist {0}"
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -200,28 +201,28 @@ msgid "§cSorry! {0}"
 msgstr "§cSorry! {0}"
 
 msgid "Either send a message directly to your group, or toggle it on/off."
-msgstr ""
+msgstr "Stuur een bericht direct naar uw groep, of schakelen het aan/uit."
 
 msgid "party"
-msgstr ""
+msgstr "party"
 
 msgid "island"
-msgstr ""
+msgstr "eiland"
 
 #, java-format
 msgid "§cToggled chat to {0} §aON"
-msgstr ""
+msgstr "§cSchakel chat {0} §aAAN"
 
 #, java-format
 msgid "§cRepeat §9{0}§c to toggle it off"
-msgstr ""
+msgstr "§cHerhaal §9{0}§c om het uit te schakelen."
 
 #, java-format
 msgid "§aToggled chat §cOFF§a for {0}"
-msgstr ""
+msgstr "§aSchakel chat §cUIT§a voor {0}"
 
 msgid "§cCommand only available to players"
-msgstr ""
+msgstr "§cCommando alleen voor spelers"
 
 msgid "talk to players on your island"
 msgstr "praat met spelers op je eiland"
@@ -527,7 +528,7 @@ msgstr "§4Die speler heeft geen eiland."
 
 #, java-format
 msgid "§aTeleporting to {0}''s island."
-msgstr ""
+msgstr "§aTeleporting naar {0}''s eiland."
 
 msgid "imports players and islands from other formats"
 msgstr "importeerd spelers en eilanden van een ander formaat"
@@ -667,7 +668,7 @@ msgstr "§eOrphans: {0}"
 
 #, java-format
 msgid "additional perks {0}"
-msgstr ""
+msgstr "extra perks {0}"
 
 msgid "protects all islands (time consuming)"
 msgstr "beschermd alle eilanden (dit kan veel tijd inbeslag nemen)"
@@ -859,7 +860,7 @@ msgid "§eNo island found at your location!"
 msgstr "§eEr is geen eiland gevonden op je locatie!"
 
 msgid "refreshes the chunk around the player"
-msgstr ""
+msgstr "verfrist de chunk rond de speler"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -987,7 +988,7 @@ msgid "ban/unban a player from your island."
 msgstr "ban/unban een speler van uw eiland."
 
 msgid "exempts user from being banned"
-msgstr ""
+msgstr "stelt de speler vrij van verbannen"
 
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eDe volgende spelers zijn geblokkeert om naar uw eiland te warpen:"
@@ -1035,11 +1036,11 @@ msgid "change the biome of the island"
 msgstr "verander de biome van het eiland"
 
 msgid "exempt player from biome-cooldown"
-msgstr ""
+msgstr "Stelt speller vrij van biome-cooldown"
 
 #, java-format
 msgid "Let the player change their islands biome to {0}"
-msgstr ""
+msgstr "Laat de speller zijn biome veranderen naar {0}"
 
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
@@ -1067,6 +1068,8 @@ msgstr "§cJe hebt geen toestemming om de biome te veranderen van dit eiland!"
 msgid ""
 "§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
 msgstr ""
+"§7De Pixies zijn bezig met het veranderen van de biome bij jou naar §9{0}§7, "
+"heb geduld."
 
 #, java-format
 msgid ""
@@ -1077,7 +1080,7 @@ msgstr ""
 
 #, java-format
 msgid "§eInvalid biome {0} supplied!"
-msgstr ""
+msgstr "§eOngeldige biome {0} ingevoerd!"
 
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
@@ -1089,17 +1092,17 @@ msgstr "{0} heeft het eiland biome veranderd naar {1}"
 
 #, java-format
 msgid "§aYou have changed {0} blocks around you to the {1} biome"
-msgstr ""
+msgstr "§aJe hebt {0} blokken veranderd naar de {1} biome"
 
 #, java-format
 msgid "{0} created an area with {1} biome"
-msgstr ""
+msgstr "{0} creëerde een gebied met {1} biome"
 
 msgid "create an island"
 msgstr "Creeer een eiland"
 
 msgid "exempt player from create-cooldown"
-msgstr ""
+msgstr "stelt speller vrij van create-cooldown"
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -1133,7 +1136,7 @@ msgid "check your or anothers island info"
 msgstr "controleer jouw of iemand anders z'n eiland informatie"
 
 msgid "allows user to see others island info"
-msgstr ""
+msgstr "Laat de gebruiker anderen eiland info zien"
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Eiland niveau is uitgeschakeld, neem contact op met een beheerder."
@@ -1261,7 +1264,7 @@ msgid "check your or anothers island level"
 msgstr "Controleer je eigen of iemand anders z'n eiland niveau"
 
 msgid "allows user to query for others levels"
-msgstr ""
+msgstr "laat de speler andere spelers levels opvragen"
 
 #, java-format
 msgid "§eInformation about {0}'s Island:"
@@ -1332,7 +1335,7 @@ msgid "delete your island and start a new one."
 msgstr "verwijder je eiland en start een nieuwe."
 
 msgid "exempt player from restart-cooldown"
-msgstr ""
+msgstr "stelt de speler vrij van herstart-cooldown"
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
@@ -1403,6 +1406,7 @@ msgstr "laat de top 10 van alle eilanden zien"
 
 msgid "enables user to all-ways generate top-ten (no caching)"
 msgstr ""
+"Laat een speler altijd het opnieuw genereren van de top-ten (no caching)"
 
 msgid "trust/untrust a player to help on your island."
 msgstr "vertrouw/wantrouw een speler om je te helpen op je eiland."
@@ -1498,19 +1502,19 @@ msgid "general island command"
 msgstr "algemeen eiland command"
 
 msgid "allows user to bypass cooldowns"
-msgstr ""
+msgstr "laat de speler altijd cooldowns omzeilen"
 
 msgid "allows user to bypass visitor-protections"
-msgstr ""
+msgstr "laat de speler de bezoekers-beveiliging omzeilen"
 
 msgid "allows user to bypass teleport-delay"
-msgstr ""
+msgstr "laat de speler de teleport-vertraging omzeilen"
 
 msgid "allows user to use [usb] signs"
-msgstr ""
+msgstr "Hiermee kan de gebruiker [USB] borden gebruiken"
 
 msgid "allows user to place [usb] signs"
-msgstr ""
+msgstr "Hiermee kan de gebruiker [USB] borden te plaatsen"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eJe kan alleen portals gebruiken op je eigen eiland!"
@@ -1793,23 +1797,23 @@ msgstr "§7Pagina {0}"
 
 #, java-format
 msgid "§c{0,number,#}"
-msgstr ""
+msgstr "§c{0,number,#}"
 
 #, java-format
 msgid "§a+{0,number,#}"
-msgstr ""
+msgstr "§a+{0,number,#}"
 
 #, java-format
 msgid "§a{0,number,#}"
-msgstr ""
+msgstr "§a{0,number,#}"
 
 #, java-format
 msgid "&aLeft:&7 Increment with {0}"
-msgstr ""
+msgstr "&aLinks:&7 Verhogen met {0}"
 
 #, java-format
 msgid "&cRight-Click:&7 Set to {0}"
-msgstr ""
+msgstr "&cRechter-Klik:&7 Zet naar {0}"
 
 msgid "Return"
 msgstr "Terug"
@@ -1857,7 +1861,7 @@ msgid "Challenge Menu"
 msgstr "Uitdagingen Menu "
 
 msgid "change the island's biome."
-msgstr ""
+msgstr "verander het eiland''s biome"
 
 msgid "toggle the island's lock."
 msgstr "het eiland op slot zetten."
@@ -1871,6 +1875,9 @@ msgid ""
 "members to teleport to\n"
 "the island."
 msgstr ""
+"set het eiland's warp,\n"
+"voor non leden, om naar\n"
+"het eiland te teleporteren."
 
 msgid "toggle the island's warp."
 msgstr "de warp aan en uit zetten."
@@ -1881,6 +1888,10 @@ msgid ""
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
+"toggle het eiland's warp,\n"
+"hiermee kan het aan of uit\n"
+"gezet mee worden, maar kan\n"
+"niet de locatie mee gezet worden."
 
 msgid "invite others to the island."
 msgstr "andere spelers uitnodigen."
@@ -2086,7 +2097,7 @@ msgstr ""
 "vijandige mobs."
 
 msgid "Flower Forest"
-msgstr ""
+msgstr "Flower Forest"
 
 msgid ""
 "The flower forest biome.\n"
@@ -2094,6 +2105,10 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
+"De Flower Forest biome.\n"
+"Passieve  en agressieve\n"
+"mobs spawnen hier\n"
+"normal."
 
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
@@ -2112,13 +2127,16 @@ msgstr ""
 "hier normaal."
 
 msgid "Ice Plains"
-msgstr ""
+msgstr "Ice Plains"
 
 msgid ""
 "The ice-plains biome is an advanced biome.\n"
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+"De ice-Plains is een geavanceerde biome.\n"
+"Mobs spawnen natuurlijk,\n"
+"inclusieve polar bears."
 
 msgid "Permissions"
 msgstr "Permissies"
@@ -2515,9 +2533,12 @@ msgid ""
 "this point when they teleport\n"
 "to your island."
 msgstr ""
+"Als je warp is geactiveerd is\n"
+"kunnen andere spelers naar \n"
+"je eiland teleporteren."
 
 msgid "§e§lClick here to change."
-msgstr ""
+msgstr "§e§lKlik hier on the veranderen."
 
 msgid "§c§lRestart Island"
 msgstr "§c§lHerstarten Eiland"
