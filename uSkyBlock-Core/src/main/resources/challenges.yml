@@ -50,7 +50,10 @@ ISLAND_LEVEL:
 # Whether or not to show the name of locked challenges
 showLockedChallengeName: true
 
-# this will ignore any future updates to challenges
+# When creating your own challenges you will have
+# to uncomment the section below or the default challenges
+# will be re-added on every server restart. When altering
+# the default challenges this should be fine to leave.
 #merge-ignore:
 #  - 'ranks'
 #
