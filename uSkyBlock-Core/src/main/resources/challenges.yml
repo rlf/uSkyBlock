@@ -50,7 +50,10 @@ ISLAND_LEVEL:
 # Whether or not to show the name of locked challenges
 showLockedChallengeName: true
 
-# this will ignore any future updates to challenges
+# When creating your own challenges you will have
+# to uncomment the section below or the default challenges
+# will be re-added on every server restart. When altering
+# the default challenges this should be fine to leave.
 #merge-ignore:
 #  - 'ranks'
 #
@@ -61,7 +64,7 @@ showLockedChallengeName: true
 ranks:
   Tier1:
     name: '&7Novice'
-    displayItem: 'HARD_CLAY:9'
+    displayItem: 'STAINED_CLAY:9'
     resetInHours: 20
     challenges:
       cobblestonegenerator:
@@ -334,7 +337,7 @@ ranks:
 
   Tier2:
     name: '&aAdept'
-    displayItem: 'HARD_CLAY:5'
+    displayItem: 'STAINED_CLAY:5'
     resetInHours: 20
     requires:
       rankLeeway: 99 # means disabled in effect
@@ -524,7 +527,7 @@ ranks:
 
   Tier3:
     name: '&eExpert'
-    displayItem: 'HARD_CLAY:4'
+    displayItem: 'STAINED_CLAY:4'
     resetInHours: 20
     requires:
       challenges:
@@ -761,7 +764,7 @@ ranks:
 #===============================================
   Tier4:
     name: '&cMaster'
-    displayItem: 'HARD_CLAY:1'
+    displayItem: 'STAINED_CLAY:1'
     resetInHours: 20
     requires:
       rankLeeway: 99 # disabled
@@ -1025,7 +1028,7 @@ ranks:
 #===============================================
   Tier5:
     name: '&4Sky Lord'
-    displayItem: 'HARD_CLAY:14'
+    displayItem: 'STAINED_CLAY:14'
     resetInHours: 48
     requires:
       challenges:
@@ -1230,7 +1233,7 @@ ranks:
 #===============================================
   Tier6:
     name: '&aWorld Foods'
-    displayItem: 297
+    displayItem: 'STAINED_CLAY:8'
     resetInHours: 20
     requires:
       challenges:

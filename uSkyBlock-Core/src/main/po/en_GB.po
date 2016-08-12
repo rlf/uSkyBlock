@@ -7,7 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-07-05 23:28+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-08-11 23:17+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: dutchy1001\n"
 "Language: en_GB\n"
@@ -30,7 +31,7 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§7Requirements will reset in §4{0} §7minutes."
 
 msgid "§eThis challenge requires:"
-msgstr ""
+msgstr "§eThis challenge requires:"
 
 msgid "§7and more..."
 msgstr "§7and more..."
@@ -44,11 +45,11 @@ msgid "§7{0}"
 msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
-msgstr ""
+msgstr "§a* §7Items will be traded for reward."
 
 #, java-format
 msgid "§eMust be within {0} meters."
-msgstr ""
+msgstr "§a* §7Must be within {0} meters."
 
 msgid "§6Item Reward: §a"
 msgstr "§6Item Reward: §a"
@@ -67,7 +68,7 @@ msgstr "§dTotal times completed: §f{0}"
 
 #, java-format
 msgid "§7Requires {0}"
-msgstr ""
+msgstr "§7Requires {0}"
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -202,27 +203,28 @@ msgstr "§4* §7Sorry! {0}"
 
 msgid "Either send a message directly to your group, or toggle it on/off."
 msgstr ""
+"§6* §7Either send a message directly to your group, or toggle it on/off."
 
 msgid "party"
-msgstr ""
+msgstr "party"
 
 msgid "island"
-msgstr ""
+msgstr "island"
 
 #, java-format
 msgid "§cToggled chat to {0} §aON"
-msgstr ""
+msgstr "§6* §7Toggled chat to {0} §aON"
 
 #, java-format
 msgid "§cRepeat §9{0}§c to toggle it off"
-msgstr ""
+msgstr "§6* §7Repeat §9{0}§7 to toggle it §4OFF"
 
 #, java-format
 msgid "§aToggled chat §cOFF§a for {0}"
-msgstr ""
+msgstr "§6* §7Toggled chat §4OFF§7 for {0}"
 
 msgid "§cCommand only available to players"
-msgstr ""
+msgstr "§4* §7Command only available to players"
 
 msgid "talk to players on your island"
 msgstr "talk to players on your island"
@@ -527,7 +529,7 @@ msgstr "§4* §7That player does not have an island!"
 
 #, java-format
 msgid "§aTeleporting to {0}''s island."
-msgstr ""
+msgstr "§9* §7Teleporting to {0}''s island."
 
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
@@ -665,7 +667,7 @@ msgstr "§4* §7Orphans: §f{0}"
 
 #, java-format
 msgid "additional perks {0}"
-msgstr ""
+msgstr "additional perks {0}"
 
 msgid "protects all islands (time consuming)"
 msgstr "protects all islands (time consuming)"
@@ -856,7 +858,7 @@ msgid "§eNo island found at your location!"
 msgstr "§4* §7No island found at your location!"
 
 msgid "refreshes the chunk around the player"
-msgstr ""
+msgstr "§4* §7refreshes the chunk around the player"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -978,7 +980,7 @@ msgid "ban/unban a player from your island."
 msgstr "ban/unban a player from your island."
 
 msgid "exempts user from being banned"
-msgstr ""
+msgstr "§4* §7exempts user from being banned"
 
 msgid "§eThe following players are banned from warping to your island:"
 msgstr ""
@@ -1023,14 +1025,14 @@ msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§9* §7You have been §aUNBANNED§7 from §6{0}''s §7island."
 
 msgid "change the biome of the island"
-msgstr "change the biome of the island"
+msgstr "§2* §7change the biome of the island"
 
 msgid "exempt player from biome-cooldown"
-msgstr ""
+msgstr "§4* §7exempt player from biome-cooldown"
 
 #, java-format
 msgid "Let the player change their islands biome to {0}"
-msgstr ""
+msgstr "§2* §7Let the player change their islands biome to {0}"
 
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
@@ -1058,6 +1060,7 @@ msgstr "§4* §7You do not have permission to change your biome to that type."
 msgid ""
 "§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
 msgstr ""
+"§2* §7The pixies are busy changing the biome near you to §9{0}§7, be patient."
 
 #, java-format
 msgid ""
@@ -1069,7 +1072,7 @@ msgstr ""
 
 #, java-format
 msgid "§eInvalid biome {0} supplied!"
-msgstr ""
+msgstr "§4* §7Invalid biome {0} supplied!"
 
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
@@ -1077,21 +1080,21 @@ msgstr "§9* §7You have changed your island''s biome to §a{0}"
 
 #, java-format
 msgid "{0} changed the island biome to {1}"
-msgstr "§9* §6{0} §7changed the island biome to §a{1}"
+msgstr "§2* §6{0} §7changed the island biome to §2{1}"
 
 #, java-format
 msgid "§aYou have changed {0} blocks around you to the {1} biome"
-msgstr ""
+msgstr "§2* §7You have changed §9{0} §7blocks around you to the §2{1} §7biome"
 
 #, java-format
 msgid "{0} created an area with {1} biome"
-msgstr ""
+msgstr "§2* §7{0} created an area with §2{1} §7biome"
 
 msgid "create an island"
 msgstr "create an island"
 
 msgid "exempt player from create-cooldown"
-msgstr ""
+msgstr "§4* §7exempt player from create-cooldown"
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -1125,7 +1128,7 @@ msgid "check your or anothers island info"
 msgstr "check your or anothers island info"
 
 msgid "allows user to see others island info"
-msgstr ""
+msgstr "§9* §7allows user to see others island info"
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4* §7Island level has been disabled, contact an administrator."
@@ -1250,7 +1253,7 @@ msgid "check your or anothers island level"
 msgstr "check your or anothers island level"
 
 msgid "allows user to query for others levels"
-msgstr ""
+msgstr "§9* §7allows user to query for others levels"
 
 #, java-format
 msgid "§eInformation about {0}'s Island:"
@@ -1320,7 +1323,7 @@ msgid "delete your island and start a new one."
 msgstr "delete your island and start a new one."
 
 msgid "exempt player from restart-cooldown"
-msgstr ""
+msgstr "§4* §7exempt player from restart-cooldown"
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
@@ -1393,7 +1396,7 @@ msgid "display the top10 of islands"
 msgstr "display the top10 of islands"
 
 msgid "enables user to all-ways generate top-ten (no caching)"
-msgstr ""
+msgstr "§9* §7enables user to all-ways generate top-ten (no caching)"
 
 msgid "trust/untrust a player to help on your island."
 msgstr "trust/untrust a player to help on your island."
@@ -1490,19 +1493,19 @@ msgid "general island command"
 msgstr "general island command"
 
 msgid "allows user to bypass cooldowns"
-msgstr ""
+msgstr "§9* §7allows user to bypass cooldowns"
 
 msgid "allows user to bypass visitor-protections"
-msgstr ""
+msgstr "§9* §7allows user to bypass visitor-protections"
 
 msgid "allows user to bypass teleport-delay"
-msgstr ""
+msgstr "§9* §7allows user to bypass teleport-delay"
 
 msgid "allows user to use [usb] signs"
-msgstr ""
+msgstr "§9* §7allows user to use [usb] signs"
 
 msgid "allows user to place [usb] signs"
-msgstr ""
+msgstr "§9* §7allows user to place §9[usb] §7signs"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§9* §7You can not use another islands portals!"
@@ -1786,23 +1789,23 @@ msgstr "§7Page {0}"
 
 #, java-format
 msgid "§c{0,number,#}"
-msgstr ""
+msgstr "§c{0,number,#}"
 
 #, java-format
 msgid "§a+{0,number,#}"
-msgstr ""
+msgstr "§a+{0,number,#}"
 
 #, java-format
 msgid "§a{0,number,#}"
-msgstr ""
+msgstr "§a{0,number,#}"
 
 #, java-format
 msgid "&aLeft:&7 Increment with {0}"
-msgstr ""
+msgstr "&aLeft:&7 Increment with {0}"
 
 #, java-format
 msgid "&cRight-Click:&7 Set to {0}"
-msgstr ""
+msgstr "&cRight-Click:&7 Set to {0}"
 
 msgid "Return"
 msgstr "Return"
@@ -1850,7 +1853,7 @@ msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
 msgid "change the island's biome."
-msgstr ""
+msgstr "§2* §7change the island's biome."
 
 msgid "toggle the island's lock."
 msgstr "toggle the island's lock."
@@ -1864,6 +1867,10 @@ msgid ""
 "members to teleport to\n"
 "the island."
 msgstr ""
+"set the island's warp,\n"
+"which allows non-group\n"
+"members to teleport to\n"
+"the island."
 
 msgid "toggle the island's warp."
 msgstr "toggle the island's warp."
@@ -1874,6 +1881,10 @@ msgid ""
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 
 msgid "invite others to the island."
 msgstr "invite others to the island."
@@ -2082,7 +2093,7 @@ msgstr ""
 "mobs will spawn."
 
 msgid "Flower Forest"
-msgstr ""
+msgstr "Flower Forest"
 
 msgid ""
 "The flower forest biome.\n"
@@ -2090,6 +2101,10 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
+"The flower forest biome.\n"
+"Passive mobs will spawn \n"
+"normally and hostile\n"
+"mobs will spawn."
 
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
@@ -2108,13 +2123,17 @@ msgstr ""
 "spawn normally."
 
 msgid "Ice Plains"
-msgstr ""
+msgstr "Ice Plains"
 
 msgid ""
 "The ice-plains biome is an advanced biome.\n"
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+"The ice-plains biome is an\n"
+"advanced biome. Mobs will\n"
+"spawn naturally including\n"
+"polar-bears."
 
 msgid "Permissions"
 msgstr "Permissions"
@@ -2501,9 +2520,13 @@ msgid ""
 "this point when they teleport\n"
 "to your island."
 msgstr ""
+"When your warp is activated,\n"
+"other players will be taken to\n"
+"this point when they teleport\n"
+"to your island."
 
 msgid "§e§lClick here to change."
-msgstr ""
+msgstr "§e§lClick here to change."
 
 msgid "§c§lRestart Island"
 msgstr "§c§lRestart Island"
@@ -2572,7 +2595,7 @@ msgid "§7Teleport cancelled"
 msgstr "§4* §7Teleport cancelled"
 
 msgid "READY"
-msgstr "§a* §7READY"
+msgstr "READY"
 
 msgid ""
 "§cWARNING:§e Could not transfer all the required items to your inventory!"
