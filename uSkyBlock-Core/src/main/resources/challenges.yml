@@ -897,9 +897,9 @@ ranks:
         displayItem: 341
         lockedDisplayItem: STAINED_GLASS_PANE:10
         reward:
-          text: 4 slime blocks, 1 emeralds, swampland
+          text: 1 diamond, 1 emeralds, swampland
           items:
-          - '165:4'
+          - 'DIAMOND:1'
           - '388:1'
           permission: usb.biome.swampland
           currency: 70
