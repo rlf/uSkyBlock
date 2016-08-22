@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,8 +40,8 @@ public class FilePlayerDB implements PlayerDB {
     private long saveDelay;
 
     // These caches should NOT be guavaCaches, we need them alive most of the time
-    private final Map<String, UUID> name2uuidCache = new HashMap<>();
-    private final Map<UUID, String> uuid2nameCache = new HashMap<>();
+    private final Map<String, UUID> name2uuidCache = new ConcurrentHashMap<>();
+    private final Map<UUID, String> uuid2nameCache = new ConcurrentHashMap<>();
 
     public FilePlayerDB(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -54,17 +55,19 @@ public class FilePlayerDB implements PlayerDB {
         plugin.async(new Runnable() {
             @Override
             public void run() {
-                Set<String> uuids = uuid2NameConfig.getKeys(false);
-                for (String uuid : uuids) {
-                    UUID id = UUIDUtil.fromString(uuid);
-                    String name = uuid2NameConfig.getString(uuid + ".name", null);
-                    if (name != null) {
-                        uuid2nameCache.put(id, name);
-                        name2uuidCache.put(name, id);
-                        List<String> akas = uuid2NameConfig.getStringList(uuid + ".aka");
-                        for (String aka : akas) {
-                            if (!name2uuidCache.containsKey(aka)) {
-                                name2uuidCache.put(aka, id);
+                synchronized (uuid2NameConfig) {
+                    Set<String> uuids = uuid2NameConfig.getKeys(false);
+                    for (String uuid : uuids) {
+                        UUID id = UUIDUtil.fromString(uuid);
+                        String name = uuid2NameConfig.getString(uuid + ".name", null);
+                        if (name != null) {
+                            uuid2nameCache.put(id, name);
+                            name2uuidCache.put(name, id);
+                            List<String> akas = uuid2NameConfig.getStringList(uuid + ".aka");
+                            for (String aka : akas) {
+                                if (!name2uuidCache.containsKey(aka)) {
+                                    name2uuidCache.put(aka, id);
+                                }
                             }
                         }
                     }
@@ -83,12 +86,12 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public synchronized UUID getUUIDFromName(String name) {
+    public UUID getUUIDFromName(String name) {
         return getUUIDFromName(name, true);
     }
 
     @Override
-    public synchronized UUID getUUIDFromName(String name, boolean lookup) {
+    public UUID getUUIDFromName(String name, boolean lookup) {
         if (name2uuidCache.containsKey(name)) {
             return name2uuidCache.get(name);
         }
@@ -105,20 +108,18 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public synchronized String getName(UUID uuid) {
+    public String getName(UUID uuid) {
         if (UNKNOWN_PLAYER_UUID.equals(uuid)) {
             return UNKNOWN_PLAYER_NAME;
         }
         if (uuid2nameCache.containsKey(uuid)) {
             return uuid2nameCache.get(uuid);
         }
-        String uuidStr = UUIDUtil.asString(uuid);
         String name = null;
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         if (offlinePlayer != null) {
             updatePlayer(offlinePlayer.getUniqueId(), offlinePlayer.getName(), offlinePlayer.getName());
             name = offlinePlayer.getName();
-            uuid2NameConfig.set(uuidStr, name);
         }
         if (name != null) {
             uuid2nameCache.put(uuid, name);
@@ -127,13 +128,15 @@ public class FilePlayerDB implements PlayerDB {
     }
 
     @Override
-    public synchronized String getDisplayName(UUID uuid) {
+    public String getDisplayName(UUID uuid) {
         String uuidStr = UUIDUtil.asString(uuid);
-        return uuid2NameConfig.getString(uuidStr + ".displayName", null);
+        synchronized (uuid2NameConfig) {
+            return uuid2NameConfig.getString(uuidStr + ".displayName", null);
+        }
     }
 
     @Override
-    public synchronized String getDisplayName(String playerName) {
+    public String getDisplayName(String playerName) {
         UUID uuid = getUUIDFromName(playerName);
         if (uuid != null) {
             return getDisplayName(uuid);
@@ -202,7 +205,7 @@ public class FilePlayerDB implements PlayerDB {
 
     private void saveToFile() {
         try {
-            synchronized (this) {
+            synchronized (uuid2NameConfig) {
                 uuid2NameConfig.save(uuid2NameFile);
             }
         } catch (IOException e) {
@@ -212,32 +215,34 @@ public class FilePlayerDB implements PlayerDB {
         }
     }
 
-    private synchronized void addEntry(UUID id, String name, String displayName) {
+    private void addEntry(UUID id, String name, String displayName) {
         String uuid = UUIDUtil.asString(id);
         UUID oldUUID = name2uuidCache.get(name);
         if (name != null) {
             uuid2nameCache.put(id, name);
             name2uuidCache.put(name, id);
         }
-        String oldName = uuid2NameConfig.getString(uuid + ".name", name);
-        if (uuid2NameConfig.contains(uuid) && oldName != null && !oldName.equals(name)) {
-            List<String> stringList = uuid2NameConfig.getStringList(uuid + ".aka");
-            if (!stringList.contains(oldName)) {
-                stringList.add(oldName);
-                uuid2NameConfig.set(uuid + ".aka", stringList);
-                if (!name2uuidCache.containsKey(oldName)) {
-                    name2uuidCache.put(oldName, id);
+        synchronized (uuid2NameConfig) {
+            String oldName = uuid2NameConfig.getString(uuid + ".name", name);
+            if (uuid2NameConfig.contains(uuid) && oldName != null && !oldName.equals(name)) {
+                List<String> stringList = uuid2NameConfig.getStringList(uuid + ".aka");
+                if (!stringList.contains(oldName)) {
+                    stringList.add(oldName);
+                    uuid2NameConfig.set(uuid + ".aka", stringList);
+                    if (!name2uuidCache.containsKey(oldName)) {
+                        name2uuidCache.put(oldName, id);
+                    }
                 }
             }
-        }
-        uuid2NameConfig.set(uuid + ".name", name);
-        uuid2NameConfig.set(uuid + ".updated", System.currentTimeMillis());
-        if (displayName != null) {
-            uuid2NameConfig.set(uuid + ".displayName", displayName);
-        }
-        if (oldUUID != null && !oldUUID.equals(id)) {
-            // Cleanup, remove all references to the new name for the old UUID
-            uuid2NameConfig.set(UUIDUtil.asString(oldUUID), null);
+            uuid2NameConfig.set(uuid + ".name", name);
+            uuid2NameConfig.set(uuid + ".updated", System.currentTimeMillis());
+            if (displayName != null) {
+                uuid2NameConfig.set(uuid + ".displayName", displayName);
+            }
+            if (oldUUID != null && !oldUUID.equals(id)) {
+                // Cleanup, remove all references to the new name for the old UUID
+                uuid2NameConfig.set(UUIDUtil.asString(oldUUID), null);
+            }
         }
     }
 
