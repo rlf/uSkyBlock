@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-08-11 23:17+0100\n"
+"PO-Revision-Date: 2016-08-23 13:05+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: uSkyblock-dev team\n"
 "Language: en_GB\n"
@@ -602,10 +602,10 @@ msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§4* §7Leadership transferred by §4{0} §7to §a{1}"
 
 msgid "advanced info about NBT stuff"
-msgstr "§9* §7advanced info about NBT stuff"
+msgstr "§7advanced info about NBT stuff"
 
 msgid "shows the NBTTag for the currently held item"
-msgstr "§9* §7shows the NBTTag for the currently held item"
+msgstr "§7shows the NBTTag for the currently held item"
 
 #, java-format
 msgid "§eInfo for §9{0}"
@@ -626,14 +626,14 @@ msgid "§eCan only be executed as a player"
 msgstr "§4* §7Can only be executed as a player"
 
 msgid "sets the NBTTag on the currently held item"
-msgstr "§9* §7sets the NBTTag on the currently held item"
+msgstr "§7sets the NBTTag on the currently held item"
 
 #, java-format
 msgid "§eSet §9{0}§e to §c{1}"
 msgstr "§e* §7Set §9{0}§e to §c{1}"
 
 msgid "adds the NBTTag on the currently held item"
-msgstr "§9* §7adds the NBTTag on the currently held item"
+msgstr "§7adds the NBTTag on the currently held item"
 
 #, java-format
 msgid "§eAdded §9{0}§e to §c{1}"
