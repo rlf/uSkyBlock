@@ -256,4 +256,13 @@ public class PlayerEvents implements Listener {
             islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
     }
+    
+@EventHandler
+public void onHopperPlace(BlockPlaceEvent event) {
+    if (Material.HOPPER.equals(event.getBlock().getType())){
+    
+ }
+     
 }
+}
+

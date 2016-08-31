@@ -53,7 +53,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     private final String name;
     private boolean dirty = false;
     private boolean toBeDeleted = false;
-
+    
     public IslandInfo(String islandName) {
         config = new YamlConfiguration();
         file = new File(directory, islandName + ".yml");
@@ -113,6 +113,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("party", null);
         config.set("general.scoreMultiply", null);
         config.set("general.scoreOffset", null);
+        config.set("blocks.hopperCount", 0);
         setupPartyLeader(leader);
         sendMessageToIslandGroup(false, marktr("The island has been created."));
     }
@@ -829,4 +830,13 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("general.scoreOffset", d);
         save();
     }
+    
+    public int getHopperCount() {
+        return config.getInt("blocks.hopperCount", 0);
+    }
+    public void setHopperCount(int i) {
+        config.set("blocks.hopperCount", i);
+        save();
+    }
 }
+
