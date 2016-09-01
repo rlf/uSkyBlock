@@ -831,6 +831,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         save();
     }
     
+    
     public int getHopperCount() {
         return config.getInt("blocks.hopperCount", 0);
     }

@@ -43,6 +43,7 @@ public class LevelLogic {
     private final float blockValue[] = new float[MAX_INDEX];
     private final int blockLimit[] = new int[MAX_INDEX];
     private final int blockDR[] = new int[MAX_INDEX];
+    private final int blockNV[] = new int[MAX_INDEX];
     private int pointsPerLevel;
     private int activateNetherAtLevel;
 
@@ -89,6 +90,14 @@ public class LevelLogic {
             int value = diminishingReturnSection.getInt(blockKey, defaultDR);
             for (int blockId : blockIds) {
                 blockDR[blockId] = value;
+            }
+        }
+        ConfigurationSection negativeReturnSection = config.getConfigurationSection("negativeReturns");
+        for (String blockKey : negativeReturnSection.getKeys(false)){
+            int[] blockIds = getBlockIds(blockKey);
+            int value = negativeReturnSection.getInt(blockKey, 0);
+            for (int blockId: blockIds) {
+                blockNV[blockId] = value;
             }
         }
     }
@@ -250,6 +259,10 @@ public class LevelLogic {
                 } else if (blockDR[i] > 0 && count > blockDR[i]) {
                     state = State.DIMINISHING;
                     adjustedCount = dReturns(count, blockDR[i]);
+                }
+                else if (blockNV[i] > 0 && count > blockNV[i]){
+                    state = State.NEGATIVE;
+                    adjustedCount = 2 * blockNV[i] - count;   
                 }
                 double blockScore = adjustedCount * blockValue[i];
                 score += blockScore;

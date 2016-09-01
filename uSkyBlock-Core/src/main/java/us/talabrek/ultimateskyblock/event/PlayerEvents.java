@@ -40,6 +40,7 @@ import java.util.WeakHashMap;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import org.bukkit.ChatColor;
 
 public class PlayerEvents implements Listener {
     private static final String CN = PlayerEvents.class.getName();
@@ -257,12 +258,25 @@ public class PlayerEvents implements Listener {
         }
     }
     
-@EventHandler
-public void onHopperPlace(BlockPlaceEvent event) {
-    if (Material.HOPPER.equals(event.getBlock().getType())){
-    
+    @EventHandler
+    public void onHopperPlace(BlockPlaceEvent event) {
+        if (Material.HOPPER.equals(event.getBlock().getType())){
+            IslandInfo isInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+            if(isInfo.getHopperCount() > 5){
+                    event.setCancelled(true);
+                    event.getPlayer().sendMessage(ChatColor.DARK_RED + "You've hit the hopper limit! You can't have more hoppers!");
+            }
+            else{
+                isInfo.setHopperCount(isInfo.getHopperCount() + 1);
+            }
  }
-     
 }
+    @EventHandler
+    public void onHopperDestroy(BlockBreakEvent event){
+        if (Material.HOPPER.equals(event.getBlock().getType())){
+            IslandInfo isInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+            isInfo.setHopperCount(isInfo.getHopperCount() - 1);
+        }
+    }
 }
 

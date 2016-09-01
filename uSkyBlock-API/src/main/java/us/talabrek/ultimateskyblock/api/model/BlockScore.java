@@ -62,12 +62,14 @@ public interface BlockScore {
      * <dd>The upper limit has been reached, so additional blocks will only contribute a fraction to the score.</dd>
      * <dt>LIMIT</dt>
      * <dd>The hard-limit has been reached, so additional blocks will have no effect on the score.</dd>
+     * <dt>NEGATIVE</dt?>
+     * <dd>After the limit has been reached and passed for existing islands, additional items will contribute a negative score.</dd>
      * </dl>
      *
      * @since v2.1.2
      */
     public enum State {
-        NORMAL(ChatColor.AQUA), DIMINISHING(ChatColor.YELLOW), LIMIT(ChatColor.RED);
+        NORMAL(ChatColor.AQUA), DIMINISHING(ChatColor.YELLOW), LIMIT(ChatColor.RED), NEGATIVE(ChatColor.DARK_PURPLE);
         private final ChatColor color;
 
         State(ChatColor color) {
