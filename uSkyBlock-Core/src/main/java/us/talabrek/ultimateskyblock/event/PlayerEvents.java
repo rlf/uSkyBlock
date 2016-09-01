@@ -54,13 +54,14 @@ public class PlayerEvents implements Listener {
     private final boolean visitorFireProtected;
     private final boolean protectLava;
     private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
-    private final int hopperlimit = 5;
+    private final int hopperlimit;
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
         visitorFallProtected = plugin.getConfig().getBoolean("options.protection.visitors.fall", true);
         visitorFireProtected = plugin.getConfig().getBoolean("options.protection.visitors.fire-damage", true);
         protectLava = plugin.getConfig().getBoolean("options.protection.protect-lava", true);
+        hopperlimit = plugin.getConfig().getInt("options.island.hopperlimit", 10);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

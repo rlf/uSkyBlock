@@ -87,6 +87,9 @@ options:
 
     # How many entries to remember in the island-log
     log-size: 10
+    
+    # How many hoppers are allowed to be placed down on an island
+    hopperlimit: 50
 
     # Limits the spawning
     spawn-limits:
