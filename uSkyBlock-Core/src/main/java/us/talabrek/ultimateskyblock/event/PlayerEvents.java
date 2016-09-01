@@ -54,6 +54,7 @@ public class PlayerEvents implements Listener {
     private final boolean visitorFireProtected;
     private final boolean protectLava;
     private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
+    private final int hopperlimit = 5;
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -262,7 +263,7 @@ public class PlayerEvents implements Listener {
     public void onHopperPlace(BlockPlaceEvent event) {
         if (Material.HOPPER.equals(event.getBlock().getType())){
             IslandInfo isInfo = plugin.getIslandInfo(event.getBlock().getLocation());
-            if(isInfo.getHopperCount() > 5){
+            if(isInfo.getHopperCount() > hopperlimit){
                     event.setCancelled(true);
                     event.getPlayer().sendMessage(ChatColor.DARK_RED + "You've hit the hopper limit! You can't have more hoppers!");
             }
