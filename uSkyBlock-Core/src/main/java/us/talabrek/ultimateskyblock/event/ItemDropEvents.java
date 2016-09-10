@@ -32,8 +32,11 @@ public class ItemDropEvents implements Listener {
         visitorsCanDrop = plugin.getConfig().getBoolean("options.protection.visitors.item-drops", true);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onDropEvent(PlayerDropItemEvent event) {
+        if (event.isCancelled() || event.getPlayer() == null) {
+            return;
+        }
         Player player = event.getPlayer();
         if (!plugin.isSkyWorld(player.getWorld())) {
             return;
@@ -69,7 +72,10 @@ public class ItemDropEvents implements Listener {
             if (lore == null) {
                 lore = new ArrayList<>();
             }
-            lore.add(tr("Owner: {0}", player.getName()));
+            String ownerTag = tr("Owner: {0}", player.getName());
+            if (!lore.contains(ownerTag)) {
+                lore.add(ownerTag);
+            }
             meta.setLore(lore);
             stack.setItemMeta(meta);
         }
@@ -94,7 +100,7 @@ public class ItemDropEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPickupInventoryEvent(InventoryPickupItemEvent event) {
         if (!plugin.isSkyWorld(event.getItem().getWorld())) {
             return;
@@ -103,10 +109,11 @@ public class ItemDropEvents implements Listener {
         clearDropInfo(event.getItem());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPickupEvent(PlayerPickupItemEvent event) {
         Player player = event.getPlayer();
-        if (!plugin.isSkyWorld(player.getWorld())) {
+        if (event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
+            clearDropInfo(event.getItem());
             return;
         }
         if (wasDroppedBy(player, event) || hasPermission(player, "usb.mod.bypassprotection") || plugin.playerIsOnIsland(player) || plugin.playerIsInSpawn(player)) {
