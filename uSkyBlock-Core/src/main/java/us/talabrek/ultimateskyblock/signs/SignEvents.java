@@ -69,9 +69,15 @@ public class SignEvents implements Listener {
         Sign sign = (Sign) e.getBlock().getState();
         org.bukkit.material.Sign data = (org.bukkit.material.Sign) sign.getData();
         Block wallBlock = sign.getBlock().getRelative(data.getAttachedFace());
-        if (wallBlock != null && wallBlock.getType() == Material.CHEST && wallBlock.getState() instanceof Chest) {
+        if (isChest(wallBlock)) {
             logic.addSign(sign, e.getLines(), (Chest) wallBlock.getState());
         }
+    }
+
+    private boolean isChest(Block wallBlock) {
+        return wallBlock != null
+                && (wallBlock.getType() == Material.CHEST || wallBlock.getType() == Material.TRAPPED_CHEST)
+                && wallBlock.getState() instanceof Chest;
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -107,16 +113,16 @@ public class SignEvents implements Listener {
     public void onSignOrChestBreak(BlockBreakEvent e) {
         if (e.isCancelled()
                 || e.getBlock() == null
-                || (e.getBlock().getType() != Material.WALL_SIGN && e.getBlock().getType() != Material.CHEST)
+                || (e.getBlock().getType() != Material.WALL_SIGN && !(e.getBlock().getType() == Material.CHEST || e.getBlock().getType() == Material.TRAPPED_CHEST))
                 || e.getBlock().getLocation() == null
                 || !plugin.isSkyAssociatedWorld(e.getBlock().getLocation().getWorld())
                 ) {
             return;
         }
-        if (e.getBlock().getType() == Material.CHEST) {
-            logic.removeChest(e.getBlock().getLocation());
-        } else {
+        if (e.getBlock().getType() == Material.SIGN) {
             logic.removeSign(e.getBlock().getLocation());
+        } else {
+            logic.removeChest(e.getBlock().getLocation());
         }
     }
 }

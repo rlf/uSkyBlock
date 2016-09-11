@@ -222,7 +222,7 @@ public class SignLogic {
         Block chestBlock = chestLoc.getBlock();
         Block signBlock = signLoc != null ? signLoc.getBlock() : null;
         if (chestBlock != null && signBlock != null
-                && chestBlock.getType() == Material.CHEST && chestBlock.getState() instanceof Chest
+                && isChest(chestBlock)
                 && signBlock.getType() == Material.WALL_SIGN && signBlock.getState() instanceof Sign
                 ) {
             Sign sign = (Sign) signBlock.getState();
@@ -232,7 +232,8 @@ public class SignLogic {
                 missing = 0;
                 for (ItemStack required : requiredItems) {
                     if (!chest.getInventory().containsAtLeast(required, required.getAmount())) {
-                        missing += required.getAmount() - plugin.getChallengeLogic().getCountOf(chest.getInventory(), required);
+                        // Max shouldn't be needed, provided containsAtLeast matches getCountOf... but it might not
+                        missing += Math.max(0, required.getAmount() - plugin.getChallengeLogic().getCountOf(chest.getInventory(), required));
                     }
                 }
             }
@@ -266,6 +267,10 @@ public class SignLogic {
                 log.info("Unable to update sign at " + LocationUtil.asString(signLoc));
             }
         }
+    }
+
+    private boolean isChest(Block chestBlock) {
+        return (chestBlock.getType() == Material.CHEST || chestBlock.getType() == Material.TRAPPED_CHEST) && chestBlock.getState() instanceof Chest;
     }
 
     private void saveAsync() {
