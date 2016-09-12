@@ -45,7 +45,7 @@ msgid "§7{0}"
 msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
-msgstr "§a* §7Items will be traded for reward."
+msgstr "§eItems will be traded for reward."
 
 #, java-format
 msgid "§eMust be within {0} meters."
