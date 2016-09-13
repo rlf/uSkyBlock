@@ -1092,17 +1092,17 @@ ranks:
         displayItem: 391
         lockedDisplayItem: STAINED_GLASS_PANE:4
         reward:
-          text: 2 diamond, 1 mooshroom,
+          text: 2 diamond, 1 mooshroom
           items:
           - '264:2'
           - '383:1 {EntityTag:{id:"Mooshroom"}}'
           currency: 80
           xp: 80
         repeatReward:
-          text: nothing yet
+          text: 1 diamond, 1 mooshroom
           items:
-          - '264:2'
-          - '383:96:1'
+          - '264:1'
+          - '383:1 {EntityTag:{id:"Mooshroom"}}'
           currency: 40
           xp: 40
 
@@ -1386,7 +1386,6 @@ ranks:
         reward:
           text: 2 rabbits, 1 bucket
           items:
-          - '383:101:2'
           - '325:1'
           - '383:2 {EntityTag:{id:"Rabbit"}}'
           currency: 60
