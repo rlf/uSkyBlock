@@ -9,7 +9,7 @@
 
     <properties>
         <api.version>2.7.3</api.version>
-        <bukkit-utils.version>1.13</bukkit-utils.version>
+        <bukkit-utils.version>LATEST</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.5.6</vault.version>
@@ -23,6 +23,7 @@
     </properties>
 
     <modules>
+        <module>bukkit-utils</module>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-AWE211</module>
@@ -108,19 +109,13 @@
         <repository>
             <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
             <id>uSkyBlock-mvn-repo</id>
-            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>uSkyBlock-mvn-repo</id>
-            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
+            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </pluginRepository>
     </pluginRepositories>
     <profiles>

@@ -11,9 +11,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.challenge.Challenge;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.HashMap;
 import java.util.Map;

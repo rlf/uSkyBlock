@@ -17,6 +17,70 @@ msgstr ""
 "X-Loco-Target-Locale: fr_FR\n"
 
 #, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr "§f{0}x §7{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr "§7{0}"
+
+msgid "d"
+msgstr "j"
+
+msgid "h"
+msgstr "h"
+
+msgid "m"
+msgstr "m"
+
+msgid "s"
+msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4Conditions remis à zéro dans {0} jours."
 
@@ -33,14 +97,6 @@ msgstr ""
 
 msgid "§7and more..."
 msgstr "§7et plus..."
-
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr "§f{0}x §7{1}"
-
-#, java-format
-msgid "§7{0}"
-msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
 msgstr ""
@@ -694,14 +750,18 @@ msgstr "§4Vous devez fournir un nombre en jour pour nettoyer !"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eTrouver toutes les îles qui sont abandonnés dans les {0} jours."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr "§4PURGE:§e Répétez la commande dans {0} pour accepter."
+
 msgid "§4Trying to abort purge"
 msgstr "§4Essayer d'interrompre la purge"
 
-msgid "§4Starting purge..."
-msgstr "§4Commencement de la purge..."
-
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Un nettoyage est déjà en cours, attendez qu'il finisse !"
+
+msgid "§4Starting purge..."
+msgstr "§4Commencement de la purge..."
 
 msgid "region manipulations"
 msgstr "manipulations des régions"
@@ -813,12 +873,9 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4NETTOYAGE:§9 Scan finit , trouvé {0} candidats pour la purge."
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr "§4PURGE:§e Répétez la commande dans {0} pour accepter."
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr "- PURGATION: {0,number,##}% ({1}/{2}) ~ {3}"
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
+msgstr ""
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4 NETTOYAGE: Finit , îles abandonnés nétoyés."
@@ -1851,11 +1908,20 @@ msgstr "faux"
 msgid "Challenge Menu"
 msgstr "Menu des challenges"
 
+msgid "Change Biome"
+msgstr ""
+
 msgid "change the island's biome."
 msgstr "changer le biome de l'île"
 
+msgid "Toggle Island Lock"
+msgstr ""
+
 msgid "toggle the island's lock."
 msgstr "activer le vérrouillage de l'île"
+
+msgid "Set Island Warp"
+msgstr ""
 
 msgid "set the island's warp."
 msgstr "définir le warp de l'île"
@@ -1869,6 +1935,9 @@ msgstr ""
 "définir le warp de l'île,\n"
 "qui permet à ceux qui ne sont pas de l'île\n"
 "de se téléporter sur l'île."
+
+msgid "Toggle Island Warp"
+msgstr ""
 
 msgid "toggle the island's warp."
 msgstr "activer le warp de l'île"
@@ -1884,6 +1953,9 @@ msgstr ""
 "désactiver à tout moment le warp de l'île\n"
 "mais pas de modifier la position."
 
+msgid "Invite Players"
+msgstr ""
+
 msgid "invite others to the island."
 msgstr "inviter d'autres joueurs sur l'île"
 
@@ -1897,6 +1969,9 @@ msgstr ""
 "d'autres joueurs sur l'île si\n"
 "il y a assez de place pour\n"
 "d'autres membres"
+
+msgid "Kick Players"
+msgstr ""
 
 msgid "kick others from the island."
 msgstr "kick d'autres joueurs de l'île"
@@ -2651,19 +2726,3 @@ msgstr "Ouest"
 
 msgid "North-West"
 msgstr "Nord-Ouest"
-
-msgid "d"
-msgstr "j"
-
-msgid "h"
-msgstr "h"
-
-msgid "m"
-msgstr "m"
-
-msgid "s"
-msgstr "s"
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr "{0,number,0}:{1,number,00}.{2,number,000}"

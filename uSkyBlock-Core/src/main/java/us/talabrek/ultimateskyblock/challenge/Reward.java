@@ -1,11 +1,10 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**

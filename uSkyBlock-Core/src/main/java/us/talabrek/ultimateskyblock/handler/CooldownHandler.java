@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.handler;
 
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.Collections;
 import java.util.Map;

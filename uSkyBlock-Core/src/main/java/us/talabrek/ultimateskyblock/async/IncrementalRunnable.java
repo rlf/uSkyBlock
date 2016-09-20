@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.async;
 
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 /**
  * Convenience template class for executing heavy tasks on the main thread.

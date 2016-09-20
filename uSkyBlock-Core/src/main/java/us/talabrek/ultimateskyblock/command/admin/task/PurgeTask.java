@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ProgressTracker;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -31,7 +31,7 @@ public class PurgeTask extends BukkitRunnable {
         this.purgeList = purgeList;
         tStart = System.currentTimeMillis();
         feedbackEvery = plugin.getConfig().getInt("async.long.feedbackEvery", 30000);
-        tracker = new ProgressTracker(sender, marktr("- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"), 25, feedbackEvery);
+        tracker = new ProgressTracker(sender, marktr("- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"), 25, feedbackEvery);
         active = true;
     }
 
@@ -45,7 +45,9 @@ public class PurgeTask extends BukkitRunnable {
             final String islandName = purgeList.remove(0);
             plugin.getIslandLogic().purge(islandName);
             cnt++;
-            tracker.progressUpdate(cnt, total, TimeUtil.millisAsString(System.currentTimeMillis()-tStart));
+            long elapsed = System.currentTimeMillis() - tStart;
+            long eta = (elapsed/cnt) * (total-cnt);
+            tracker.progressUpdate(cnt, total, TimeUtil.millisAsString(elapsed), TimeUtil.millisAsString(eta));
         }
         plugin.getOrphanLogic().save();
     }

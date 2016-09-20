@@ -12,7 +12,7 @@ import us.talabrek.ultimateskyblock.mojang.NameUUIDConsumer;
 import us.talabrek.ultimateskyblock.mojang.ProgressCallback;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ProgressTracker;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 

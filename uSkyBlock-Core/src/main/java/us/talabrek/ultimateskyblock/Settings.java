@@ -4,12 +4,9 @@ import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Logger;

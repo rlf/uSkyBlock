@@ -17,6 +17,70 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 
 #, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}"
+msgstr "§7{0}"
+
+msgid "d"
+msgstr "d"
+
+msgid "h"
+msgstr "h"
+
+msgid "m"
+msgstr "m"
+
+msgid "s"
+msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4필요 조건이 {0} 일 후에 리셋됩니다."
 
@@ -33,14 +97,6 @@ msgstr ""
 
 msgid "§7and more..."
 msgstr "§7그리고 더..."
-
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr ""
-
-#, java-format
-msgid "§7{0}"
-msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
 msgstr ""
@@ -690,14 +746,18 @@ msgstr "§4당신은 청소하기위해 나이를 제공해야 합니다!"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§e{0}일 이상 버려진 모든 섬을 찾는 중 입니다."
 
-msgid "§4Trying to abort purge"
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
 msgstr ""
 
-msgid "§4Starting purge..."
+msgid "§4Trying to abort purge"
 msgstr ""
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4A 청소가 이미 진행중입니다', 끝날 때까지 기다려주세요!"
+
+msgid "§4Starting purge..."
+msgstr ""
 
 msgid "region manipulations"
 msgstr ""
@@ -803,11 +863,8 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4PURGE:§9 스캔 완료, {0}명의 처벌 후보자를 찾았습니다."
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr ""
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 msgstr ""
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
@@ -1834,11 +1891,20 @@ msgstr "거짓"
 msgid "Challenge Menu"
 msgstr "도전과제 메뉴"
 
+msgid "Change Biome"
+msgstr ""
+
 msgid "change the island's biome."
+msgstr ""
+
+msgid "Toggle Island Lock"
 msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "섬의 자물쇠를 토글합니다."
+
+msgid "Set Island Warp"
+msgstr ""
 
 msgid "set the island's warp."
 msgstr "섬의 워프를 지정합니다."
@@ -1850,6 +1916,9 @@ msgid ""
 "the island."
 msgstr ""
 
+msgid "Toggle Island Warp"
+msgstr ""
+
 msgid "toggle the island's warp."
 msgstr "섬의 워프를 토글합니다."
 
@@ -1858,6 +1927,9 @@ msgid ""
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
+msgstr ""
+
+msgid "Invite Players"
 msgstr ""
 
 msgid "invite others to the island."
@@ -1873,6 +1945,9 @@ msgstr ""
 "있다면 다른 플레이어들을\n"
 "섬으로\n"
 "초대합니다"
+
+msgid "Kick Players"
+msgstr ""
 
 msgid "kick others from the island."
 msgstr "섬으로부터 다른사람을 강퇴합니다."
@@ -2636,19 +2711,3 @@ msgstr "서쪽"
 
 msgid "North-West"
 msgstr "북서쪽"
-
-msgid "d"
-msgstr "d"
-
-msgid "h"
-msgstr "h"
-
-msgid "m"
-msgstr "m"
-
-msgid "s"
-msgstr "s"
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr "{0,number,0}:{1,number,00}.{2,number,000}"

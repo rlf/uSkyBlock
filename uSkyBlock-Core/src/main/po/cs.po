@@ -17,6 +17,70 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 
 #, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
+
+msgid "d"
+msgstr "d"
+
+msgid "h"
+msgstr "h"
+
+msgid "m"
+msgstr "m"
+
+msgid "s"
+msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr ""
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4Za  {0} dni se obnovi zadani ukolu."
 
@@ -691,6 +755,10 @@ msgstr "§4Napis pocet dnu kdy se stane sirotkem!"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eVyhledavam vsechny sirotky starsi :  {0}  dnu."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
 msgid "§4Trying to abort purge"
 msgstr "§4Snazim se prerusit cisteni"
 
@@ -699,6 +767,9 @@ msgstr "§4Zacinam cisteni..."
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Cisteni jiz bezi, prosim vyckejte az se dokonci!"
+
+msgid "§4Starting purge..."
+msgstr ""
 
 msgid "region manipulations"
 msgstr "Manipulace s regiony"
@@ -805,12 +876,9 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4PURGE:§9 Skenovani dokonceno, nalezeno {0} polozek k ociste."
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr "§4CISTENI:§e Opakuj prikaz behem {0} pro prijmuti."
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
+msgstr ""
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Ocista zapomenutych ostrovu dokoncena."
@@ -1832,11 +1900,20 @@ msgstr "ne"
 msgid "Challenge Menu"
 msgstr "Seznam ukolu"
 
+msgid "Change Biome"
+msgstr ""
+
 msgid "change the island's biome."
+msgstr ""
+
+msgid "Toggle Island Lock"
 msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "Prepinat uzamceni ostrova"
+
+msgid "Set Island Warp"
+msgstr ""
 
 msgid "set the island's warp."
 msgstr "Nastavovani warpu na ostrove"
@@ -1848,6 +1925,9 @@ msgid ""
 "the island."
 msgstr ""
 
+msgid "Toggle Island Warp"
+msgstr ""
+
 msgid "toggle the island's warp."
 msgstr "Prepinat moznost teleportace"
 
@@ -1856,6 +1936,9 @@ msgid ""
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
+msgstr ""
+
+msgid "Invite Players"
 msgstr ""
 
 msgid "invite others to the island."
@@ -1871,6 +1954,9 @@ msgstr ""
 "Moznost zasilani pozvanek jinym\n"
 "hracum, aby se stali spolumajiteli\n"
 "tveho ostrova."
+
+msgid "Kick Players"
+msgstr ""
 
 msgid "kick others from the island."
 msgstr "Vykopnuti hrace ze spoluvlastnictvi"

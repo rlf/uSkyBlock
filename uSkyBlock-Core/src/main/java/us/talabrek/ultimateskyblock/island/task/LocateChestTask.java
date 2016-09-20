@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 /**
  * A task that looks for a chest at an island location.

@@ -14,9 +14,73 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
+
+msgid "d"
+msgstr "д"
+
+msgid "h"
+msgstr "ч"
+
+msgid "m"
+msgstr "м"
+
+msgid "s"
+msgstr "с"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr ""
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -34,14 +98,6 @@ msgid "§eThis challenge requires:"
 msgstr ""
 
 msgid "§7and more..."
-msgstr ""
-
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr ""
-
-#, java-format
-msgid "§7{0}"
 msgstr ""
 
 msgid "§eItems will be traded for reward."
@@ -693,14 +749,18 @@ msgstr "§4Вам нужно указать возраст в днях для о
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eПоиск всех островов, которые заброшены более {0} дней."
 
-msgid "§4Trying to abort purge"
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
 msgstr ""
 
-msgid "§4Starting purge..."
+msgid "§4Trying to abort purge"
 msgstr ""
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Очистка уже запущена, дождитесь завершения!"
+
+msgid "§4Starting purge..."
+msgstr ""
 
 msgid "region manipulations"
 msgstr ""
@@ -807,11 +867,8 @@ msgstr ""
 "§4ОЧИСТКА:§9 Сканирование завершено, найдено {0} кандидатов на очистку."
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr ""
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 msgstr ""
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
@@ -1837,11 +1894,20 @@ msgstr "ложный"
 msgid "Challenge Menu"
 msgstr "Меню заданий"
 
+msgid "Change Biome"
+msgstr ""
+
 msgid "change the island's biome."
+msgstr ""
+
+msgid "Toggle Island Lock"
 msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "переключать блокировку острова."
+
+msgid "Set Island Warp"
+msgstr ""
 
 msgid "set the island's warp."
 msgstr "устанавливать точку перемещения."
@@ -1853,6 +1919,9 @@ msgid ""
 "the island."
 msgstr ""
 
+msgid "Toggle Island Warp"
+msgstr ""
+
 msgid "toggle the island's warp."
 msgstr "переключать точку перемещения."
 
@@ -1861,6 +1930,9 @@ msgid ""
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
+msgstr ""
+
+msgid "Invite Players"
 msgstr ""
 
 msgid "invite others to the island."
@@ -1876,6 +1948,9 @@ msgstr ""
 "других игроков на остров, если\n"
 "хватает места для новых\n"
 "участников"
+
+msgid "Kick Players"
+msgstr ""
 
 msgid "kick others from the island."
 msgstr "выкидывать других с острова"

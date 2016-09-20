@@ -25,7 +25,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.menu.MenuItemFactory.READONLY;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.wordWrap;
-import static us.talabrek.ultimateskyblock.util.ItemStackUtil.builder;
+import static dk.lockfuglsang.minecraft.util.ItemStackUtil.builder;
 
 /**
  * The primary config menu.

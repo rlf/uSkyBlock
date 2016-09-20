@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.Arrays;
 import java.util.Collections;

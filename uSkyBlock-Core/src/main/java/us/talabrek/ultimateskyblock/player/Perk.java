@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.player;
 
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

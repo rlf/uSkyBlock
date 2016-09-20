@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.util.UUID;

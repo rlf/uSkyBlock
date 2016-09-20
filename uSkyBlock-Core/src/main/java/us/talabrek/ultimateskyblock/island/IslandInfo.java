@@ -14,7 +14,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.LogUtil;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.File;
@@ -352,7 +352,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                     if (nm != null) {
                         members.add(nm);
                     } else {
-                        log.info("Island " + name + " has invalid member-section " + uuid);
+                        log.info("Island " + name + " has unknown member-section " + uuid);
                     }
                 } else {
                     log.info("Island " + name + " has invalid member-section " + uuid);

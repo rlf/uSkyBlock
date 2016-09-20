@@ -17,6 +17,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}"
+msgstr ""
+
+msgid "d"
+msgstr ""
+
+msgid "h"
+msgstr ""
+
+msgid "m"
+msgstr ""
+
+msgid "s"
+msgstr ""
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr ""
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr ""
 
@@ -32,14 +96,6 @@ msgid "§eThis challenge requires:"
 msgstr ""
 
 msgid "§7and more..."
-msgstr ""
-
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr ""
-
-#, java-format
-msgid "§7{0}"
 msgstr ""
 
 msgid "§eItems will be traded for reward."
@@ -678,13 +734,17 @@ msgstr ""
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr ""
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
 msgid "§4Trying to abort purge"
 msgstr ""
 
-msgid "§4Starting purge..."
+msgid "§4A purge is already running, please wait for it to finish!"
 msgstr ""
 
-msgid "§4A purge is already running, please wait for it to finish!"
+msgid "§4Starting purge..."
 msgstr ""
 
 msgid "region manipulations"
@@ -791,11 +851,8 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr ""
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 msgstr ""
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
@@ -1769,10 +1826,19 @@ msgstr ""
 msgid "Challenge Menu"
 msgstr ""
 
+msgid "Change Biome"
+msgstr ""
+
 msgid "change the island's biome."
 msgstr ""
 
+msgid "Toggle Island Lock"
+msgstr ""
+
 msgid "toggle the island's lock."
+msgstr ""
+
+msgid "Set Island Warp"
 msgstr ""
 
 msgid "set the island's warp."
@@ -1785,6 +1851,9 @@ msgid ""
 "the island."
 msgstr ""
 
+msgid "Toggle Island Warp"
+msgstr ""
+
 msgid "toggle the island's warp."
 msgstr ""
 
@@ -1795,6 +1864,9 @@ msgid ""
 "not set the location."
 msgstr ""
 
+msgid "Invite Players"
+msgstr ""
+
 msgid "invite others to the island."
 msgstr ""
 
@@ -1803,6 +1875,9 @@ msgid ""
 "other players to the island if\n"
 "there is enough room for more\n"
 "members"
+msgstr ""
+
+msgid "Kick Players"
 msgstr ""
 
 msgid "kick others from the island."
@@ -2431,20 +2506,4 @@ msgid "West"
 msgstr ""
 
 msgid "North-West"
-msgstr ""
-
-msgid "d"
-msgstr ""
-
-msgid "h"
-msgstr ""
-
-msgid "m"
-msgstr ""
-
-msgid "s"
-msgstr ""
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""

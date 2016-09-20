@@ -18,8 +18,8 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,23 +56,23 @@ public class SkyBlockMenu {
     ItemStack invite = new ItemStack(398, 1);
     ItemStack kick = new ItemStack(301, 1);
     private List<PartyPermissionMenuItem> permissionMenuItems = Arrays.asList(
-            new PartyPermissionMenuItem(biome, "canChangeBiome", "Change Biome",
+            new PartyPermissionMenuItem(biome, "canChangeBiome", tr("Change Biome"),
                     tr("change the island's biome.")),
-            new PartyPermissionMenuItem(lock, "canToggleLock", "Toggle Island Lock",
+            new PartyPermissionMenuItem(lock, "canToggleLock", tr("Toggle Island Lock"),
                     tr("toggle the island's lock.")),
-            new PartyPermissionMenuItem(warpset, "canChangeWarp", "Set Island Warp",
+            new PartyPermissionMenuItem(warpset, "canChangeWarp", tr("Set Island Warp"),
                     tr("set the island's warp."),
                     tr("set the island's warp,\nwhich allows non-group\nmembers to teleport to\nthe island.")),
-            new PartyPermissionMenuItem(warptoggle, "canToggleWarp", "Toggle Island Warp",
+            new PartyPermissionMenuItem(warptoggle, "canToggleWarp", tr("Toggle Island Warp"),
                     tr("toggle the island's warp."),
                     tr("toggle the island's warp,\nallowing them to turn it\non or off at anytime, but\nnot set the location.")),
-            new PartyPermissionMenuItem(invite, "canInviteOthers", "Invite Players",
+            new PartyPermissionMenuItem(invite, "canInviteOthers", tr("Invite Players"),
                     tr("invite others to the island."),
                     tr("invite\n" +
                     "other players to the island if\n" +
                     "there is enough room for more\n" +
                     "members")),
-            new PartyPermissionMenuItem(kick, "canKickOthers", "Kick Players",
+            new PartyPermissionMenuItem(kick, "canKickOthers", tr("Kick Players"),
                     tr("kick others from the island."),
                     tr("kick\n" +
                     "other players from the island,\n" +

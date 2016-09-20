@@ -22,6 +22,74 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 
 #, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr "§f{0}x §7{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr "§7{0}"
+
+# ???
+msgid "d"
+msgstr "d"
+
+# ???
+msgid "h"
+msgstr "h"
+
+# ???
+msgid "m"
+msgstr "m"
+
+# ???
+msgid "s"
+msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4Anforderungen werden in {0} Tagen zurückgesetzt."
 
@@ -38,14 +106,6 @@ msgstr ""
 
 msgid "§7and more..."
 msgstr "§7und mehr..."
-
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr "§f{0}x §7{1}"
-
-#, java-format
-msgid "§7{0}"
-msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
 msgstr ""
@@ -697,14 +757,19 @@ msgstr "§4Du musst die Zeit für die Säuberung in Tagen angeben!"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eSuche Inseln die mehr als {0} Tage verlassen sind."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+"§4SÄUBERUNG:§e Wiederhole das Kommando innerhalb von {0} um zu akzeptieren."
+
 msgid "§4Trying to abort purge"
 msgstr "§4Versuche Purge abzubrechen"
 
-msgid "§4Starting purge..."
-msgstr "§4Starte Purge"
-
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Die Säuberung läuft bereits, warte Bitte bis diese zu Ende ist."
+
+msgid "§4Starting purge..."
+msgstr "§4Starte Purge"
 
 msgid "region manipulations"
 msgstr "Regions Veränderungen"
@@ -818,13 +883,9 @@ msgstr ""
 "gefunden"
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 msgstr ""
-"§4SÄUBERUNG:§e Wiederhole das Kommando innerhalb von {0} um zu akzeptieren."
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr "- SÄUEBERN: {0,number,##}% ({1}/{2}) ~ {3}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Verlassene Inseln wurde entfernt."
@@ -1873,11 +1934,20 @@ msgstr "false"
 msgid "Challenge Menu"
 msgstr "Aufgaben Menü"
 
+msgid "Change Biome"
+msgstr ""
+
 msgid "change the island's biome."
+msgstr ""
+
+msgid "Toggle Island Lock"
 msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "kann die Insel Sperre aktivieren und deaktivieren"
+
+msgid "Set Island Warp"
+msgstr ""
 
 msgid "set the island's warp."
 msgstr "kann den Insel Warp festlegen"
@@ -1889,6 +1959,9 @@ msgid ""
 "the island."
 msgstr ""
 
+msgid "Toggle Island Warp"
+msgstr ""
+
 msgid "toggle the island's warp."
 msgstr "kann den Insel Warp aktivieren und deaktivieren"
 
@@ -1897,6 +1970,9 @@ msgid ""
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
+msgstr ""
+
+msgid "Invite Players"
 msgstr ""
 
 msgid "invite others to the island."
@@ -1911,6 +1987,9 @@ msgstr ""
 "Lade noch andere Spieler\n"
 "auf Deine Insel ein\n"
 "Es ist noch mehr Platz!"
+
+msgid "Kick Players"
+msgstr ""
 
 msgid "kick others from the island."
 msgstr "kann andere von der Insel entfernen"
@@ -2678,23 +2757,3 @@ msgstr "Westen"
 
 msgid "North-West"
 msgstr "Nord-Westen"
-
-# ???
-msgid "d"
-msgstr "d"
-
-# ???
-msgid "h"
-msgstr "h"
-
-# ???
-msgid "m"
-msgstr "m"
-
-# ???
-msgid "s"
-msgstr "s"
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr "{0,number,0}:{1,number,00}.{2,number,000}"

@@ -10,7 +10,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LogUtil;
 import us.talabrek.ultimateskyblock.util.ProgressTracker;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

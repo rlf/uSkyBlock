@@ -9,7 +9,7 @@ import us.talabrek.ultimateskyblock.imports.update.USBUpdateImporter;
 import us.talabrek.ultimateskyblock.imports.wolfwork.WolfWorkUSBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ProgressTracker;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.io.File;
 import java.util.ArrayList;

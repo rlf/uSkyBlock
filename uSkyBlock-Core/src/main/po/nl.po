@@ -18,6 +18,70 @@ msgstr ""
 "X-Loco-Target-Locale: nl_NL\n"
 
 #, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr "§f{0}x §7{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr "§7{0}"
+
+msgid "d"
+msgstr "d"
+
+msgid "h"
+msgstr "u"
+
+msgid "m"
+msgstr "m"
+
+msgid "s"
+msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4De vereisten worden teruggezet in {0} dag(en)."
 
@@ -34,14 +98,6 @@ msgstr "§eDeze uitdaging vereist:"
 
 msgid "§7and more..."
 msgstr "§7en meer..."
-
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr "§f{0}x §7{1}"
-
-#, java-format
-msgid "§7{0}"
-msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
 msgstr "§eItems worden verhandeld voor een beloning."
@@ -695,14 +751,18 @@ msgstr "§4Je moet het aantal dagen invoeren om een purge uit te voeren!"
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§eMarkeer alle eilanden die inactief zijn voor meer dan {0} dagen."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr "§4PURGE:§e Herhaal de commando in {0} om te accepteren."
+
 msgid "§4Trying to abort purge"
 msgstr "§4probeert de purge te stoppen"
 
-msgid "§4Starting purge..."
-msgstr "§4Starten van de purge..."
-
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Een purge wordt al uitgevoerd, wacht tot het klaar is!"
+
+msgid "§4Starting purge..."
+msgstr "§4Starten van de purge..."
 
 msgid "region manipulations"
 msgstr "regio manipulaties"
@@ -812,12 +872,9 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr "§4PURGE:§e Herhaal de commando in {0} om te accepteren."
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
+msgstr ""
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Klaar met verwijderen van verlaten eilanden."
@@ -1859,11 +1916,20 @@ msgstr "false"
 msgid "Challenge Menu"
 msgstr "Uitdagingen Menu "
 
+msgid "Change Biome"
+msgstr ""
+
 msgid "change the island's biome."
 msgstr "verander het eiland''s biome"
 
+msgid "Toggle Island Lock"
+msgstr ""
+
 msgid "toggle the island's lock."
 msgstr "het eiland op slot zetten."
+
+msgid "Set Island Warp"
+msgstr ""
 
 msgid "set the island's warp."
 msgstr "de warp van het eiland veranderen."
@@ -1877,6 +1943,9 @@ msgstr ""
 "set het eiland's warp,\n"
 "voor non leden, om naar\n"
 "het eiland te teleporteren."
+
+msgid "Toggle Island Warp"
+msgstr ""
 
 msgid "toggle the island's warp."
 msgstr "de warp aan en uit zetten."
@@ -1892,6 +1961,9 @@ msgstr ""
 "gezet mee worden, maar kan\n"
 "niet de locatie mee gezet worden."
 
+msgid "Invite Players"
+msgstr ""
+
 msgid "invite others to the island."
 msgstr "andere spelers uitnodigen."
 
@@ -1904,6 +1976,9 @@ msgstr ""
 "nodig andere spelers\n"
 "uit als er nog plaats is\n"
 "voor meer leden"
+
+msgid "Kick Players"
+msgstr ""
 
 msgid "kick others from the island."
 msgstr "andere spelers verwijderen."
@@ -2701,19 +2776,3 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "Noord-West"
-
-msgid "d"
-msgstr "d"
-
-msgid "h"
-msgstr "u"
-
-msgid "m"
-msgstr "m"
-
-msgid "s"
-msgstr "s"
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr "{0,number,0}:{1,number,00}.{2,number,000}"

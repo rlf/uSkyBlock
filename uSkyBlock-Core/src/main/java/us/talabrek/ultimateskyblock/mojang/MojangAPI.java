@@ -15,7 +15,7 @@ import org.bukkit.OfflinePlayer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
 
 import java.io.IOException;

@@ -4,7 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

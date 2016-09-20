@@ -337,14 +337,29 @@
                     <plugin>
                         <groupId>com.github.rlf</groupId>
                         <artifactId>gettext-maven-plugin</artifactId>
-                        <version>1.2.8</version>
+                        <version>1.2.9</version>
                         <executions>
+                            <execution>
+                                <id>find-bukkit-utils-msgids</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>gettext</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceDirectory>${project.parent.basedir}/bukkit-utils/src/main/java</sourceDirectory>
+                                </configuration>
+                            </execution>
                             <execution>
                                 <id>find-msgids</id>
                                 <phase>generate-sources</phase>
                                 <goals>
                                     <goal>gettext</goal>
                                 </goals>
+                                <configuration>
+                                    <extraArgs>
+                                        <arg>-j</arg>
+                                    </extraArgs>
+                                </configuration>
                             </execution>
                             <execution>
                                 <id>update-po-files</id>
@@ -394,6 +409,10 @@
                             <poDirectory>${project.basedir}/src/main/po</poDirectory>
                             <targetBundle>us.talabrek.ultimateskyblock.i18n.Messages</targetBundle>
                             <outputFormat>properties</outputFormat>
+                            <extraArgs>
+                                <arg>--no-location</arg>
+                                <arg>-j</arg>
+                            </extraArgs>
                         </configuration>
                     </plugin>
                 </plugins>

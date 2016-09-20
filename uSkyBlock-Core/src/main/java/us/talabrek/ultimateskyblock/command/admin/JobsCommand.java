@@ -5,7 +5,7 @@ import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.async.JobManager;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
