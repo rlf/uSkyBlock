@@ -7,7 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-23 13:05+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-09-21 17:24+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: uSkyblock-dev team\n"
 "Language: en_GB\n"
@@ -16,6 +17,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr "§4* §7You do not have access (§4{0}§7)"
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr "§4* §7Invalid command: {0}"
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr "§7Usage: {0}"
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr "§7Use §3/{0} ? {1}§7 to display next page\n"
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr "§7Use §3/{0} ? {1} §7 to display previous page\n"
+
+msgid "saves documentation of the commands to a file"
+msgstr "§4* §7saves documentation of the commands to a file"
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr "§4* §7Wrote documentation to {0}"
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr "§4* §7Error writing documentation: {0}"
+
+msgid "Command"
+msgstr "Command"
+
+msgid "Permission"
+msgstr "Permission"
+
+msgid "Description"
+msgstr "Description"
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr "§f{0}x §7{1}"
+
+#, java-format
+msgid "§7{0}"
+msgstr "§7{0}"
+
+msgid "d"
+msgstr "d"
+
+msgid "h"
+msgstr "h"
+
+msgid "m"
+msgstr "m"
+
+msgid "s"
+msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -34,14 +99,6 @@ msgstr "§eThis challenge requires:"
 
 msgid "§7and more..."
 msgstr "§7and more..."
-
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr "§f{0}x §7{1}"
-
-#, java-format
-msgid "§7{0}"
-msgstr "§7{0}"
 
 msgid "§eItems will be traded for reward."
 msgstr "§eItems will be traded for reward."
@@ -695,14 +752,18 @@ msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr ""
 "§4* §7Finding all islands that has been abandoned for more than §c{0} §7days."
 
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr "§4* PURGE:§7 Repeat the command within §4{0} §7to accept."
+
 msgid "§4Trying to abort purge"
 msgstr "§4* §7Trying to abort purge"
 
-msgid "§4Starting purge..."
-msgstr "§4* §7Starting purge..."
-
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4* §7A purge is already running, please wait for it to finish!"
+
+msgid "§4Starting purge..."
+msgstr "§4* §7Starting purge..."
 
 msgid "region manipulations"
 msgstr "region manipulations"
@@ -810,12 +871,10 @@ msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4* PURGE§7: Scanning done, found §c{0} §7candidates for purgatory."
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr "§4* PURGE:§7 Repeat the command within §4{0} §7to accept."
-
-#, java-format
-msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
+msgstr ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4* PURGE:§7 Finished purging abandoned islands."
@@ -1851,11 +1910,20 @@ msgstr "false"
 msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
+msgid "Change Biome"
+msgstr "Change Biome"
+
 msgid "change the island's biome."
 msgstr "§2* §7change the island's biome."
 
+msgid "Toggle Island Lock"
+msgstr "Toggle Island Lock"
+
 msgid "toggle the island's lock."
 msgstr "toggle the island's lock."
+
+msgid "Set Island Warp"
+msgstr "Set Island Warp"
 
 msgid "set the island's warp."
 msgstr "set the island's warp."
@@ -1871,6 +1939,9 @@ msgstr ""
 "members to teleport to\n"
 "the island."
 
+msgid "Toggle Island Warp"
+msgstr "Toggle Island Warp"
+
 msgid "toggle the island's warp."
 msgstr "toggle the island's warp."
 
@@ -1885,6 +1956,9 @@ msgstr ""
 "on or off at anytime, but\n"
 "not set the location."
 
+msgid "Invite Players"
+msgstr "Invite Players"
+
 msgid "invite others to the island."
 msgstr "invite others to the island."
 
@@ -1898,6 +1972,9 @@ msgstr ""
 "other players to the island if\n"
 "there is enough room for more\n"
 "members"
+
+msgid "Kick Players"
+msgstr "Kick Players"
 
 msgid "kick others from the island."
 msgstr "kick others from the island."
@@ -2150,6 +2227,10 @@ msgid ""
 msgstr ""
 "§eClick here to return to\n"
 "§eyour island group's info."
+
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr "§e{0}''§9s Permissions"
 
 msgid ""
 "§eHover over an icon to view\n"
@@ -2689,18 +2770,5 @@ msgstr "West"
 msgid "North-West"
 msgstr "North-West"
 
-msgid "d"
-msgstr "d"
-
-msgid "h"
-msgstr "h"
-
-msgid "m"
-msgstr "m"
-
-msgid "s"
-msgstr "s"
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+#~ msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+#~ msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
