@@ -2182,6 +2182,10 @@ msgstr ""
 "§eKlik her for at vende tilbage\n"
 "§etil din ø's medlemsmenu."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr "§e{0}''§9s tilladelser"
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

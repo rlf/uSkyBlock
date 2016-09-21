@@ -161,7 +161,8 @@ public class SkyBlockMenu {
         sign.setItemMeta(meta2);
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        meta3.setDisplayName(pname + "'s Permissions");
+        meta3.setOwner(pname);
+        meta3.setDisplayName(tr("\u00a7e{0}''\u00a79s Permissions", pname));
         addLore(lores, tr("\u00a7eHover over an icon to view\n\u00a7ea permission. Change the\n\u00a7epermission by clicking it."));
         meta3.setLore(lores);
         pHead.setItemMeta(meta3);

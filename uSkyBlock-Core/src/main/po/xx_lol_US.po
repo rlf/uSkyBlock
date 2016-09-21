@@ -2183,6 +2183,10 @@ msgstr ""
 "§eClick here to return to\n"
 "§eyoor cathouz group's info."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

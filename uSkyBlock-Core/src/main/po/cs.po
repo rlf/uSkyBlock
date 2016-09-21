@@ -98,10 +98,6 @@ msgstr ""
 msgid "§7and more..."
 msgstr "§7a vice..."
 
-#, java-format
-msgid "§f{0}x §7{1}"
-msgstr "§f{0}x §7{1}"
-
 msgid "§eItems will be traded for reward."
 msgstr ""
 
@@ -758,11 +754,11 @@ msgstr ""
 msgid "§4Trying to abort purge"
 msgstr "§4Snazim se prerusit cisteni"
 
-msgid "§4Starting purge..."
-msgstr "§4Zacinam cisteni..."
-
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Cisteni jiz bezi, prosim vyckejte az se dokonci!"
+
+msgid "§4Starting purge..."
+msgstr "§4Zacinam cisteni..."
 
 msgid "region manipulations"
 msgstr "Manipulace s regiony"
@@ -2188,6 +2184,10 @@ msgstr ""
 "§eKlikni zde pro navrat na\n"
 "§ehlavni nabidku ostrova."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"
@@ -2723,80 +2723,3 @@ msgstr "Zapad"
 
 msgid "North-West"
 msgstr "Severozapad"
-
-#~ msgid "§eThis challenge requires the following:"
-#~ msgstr "§ePro tento ukol potrebujes:"
-
-#~ msgid "§7Requires {0}§7 to unlock"
-#~ msgstr "§7Potrebujes {0}§7 pro odemknuti ukolu."
-
-#~ msgid "§aTeleporting to {0}s island."
-#~ msgstr "§aNa ostrov te teleportuji za {0} sekund."
-
-#~ msgid "§c-"
-#~ msgstr "§c-"
-
-#~ msgid "§a+"
-#~ msgstr "§a+"
-
-#~ msgid "§c-1000"
-#~ msgstr "§c-1000"
-
-#~ msgid "§c-100"
-#~ msgstr "§c-100"
-
-#~ msgid "§c-10"
-#~ msgstr "§c-10"
-
-#~ msgid "§c-1"
-#~ msgstr "§c-1"
-
-#~ msgid "§a+1"
-#~ msgstr "§a+1"
-
-#~ msgid "§a+10"
-#~ msgstr "§a+10"
-
-#~ msgid "§a+100"
-#~ msgstr "§a+100"
-
-#~ msgid "§a+1000"
-#~ msgstr "§a+1000"
-
-#~ msgid "change the islands's biome."
-#~ msgstr "Zmena biomu na ostrove"
-
-#~ msgid ""
-#~ "set the island's warp,\n"
-#~ "which allows non-group\n"
-#~ "members to teleport to\n"
-#~ " the island"
-#~ msgstr ""
-#~ "Nastavi warp na ostrove,\n"
-#~ "kam se hraci z jinych\n"
-#~ "ostrovu muzou portovat\n"
-#~ "pomoci prikazu:\n"
-#~ "/warp <nick>"
-
-#~ msgid ""
-#~ "toggle the\n"
-#~ "island's warp, allowing them\n"
-#~ "to turn it on or off at anytime.\n"
-#~ "but not set the location."
-#~ msgstr ""
-#~ "Prepina moznost zda se ostatni\n"
-#~ "hraci muzou portnout na tvuj\n"
-#~ "ostrov."
-
-#~ msgid ""
-#~ "When your warp is activated,\n"
-#~ "other players will be taken to\n"
-#~ "this point when they teleport\n"
-#~ "to your island.\n"
-#~ "§e§lClick here to change."
-#~ msgstr ""
-#~ "Kdyz je tvuj port aktivni\n"
-#~ "ostatni hraci se premisti\n"
-#~ "na toto misto když se naportuji\n"
-#~ "na tvuj ostrov.\n"
-#~ "§e§lKlikni zde pro zmenu."

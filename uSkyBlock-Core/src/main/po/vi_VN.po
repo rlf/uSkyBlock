@@ -2132,6 +2132,10 @@ msgstr ""
 "§eNhấp để trở về\n"
 "§etrang thông tin đảo"
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

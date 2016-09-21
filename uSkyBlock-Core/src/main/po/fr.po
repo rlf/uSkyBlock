@@ -2197,6 +2197,10 @@ msgstr ""
 "§eClique ici pour retourner à\n"
 "§ela page du groupe."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

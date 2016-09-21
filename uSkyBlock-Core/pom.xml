@@ -411,7 +411,6 @@
                             <outputFormat>properties</outputFormat>
                             <extraArgs>
                                 <arg>--no-location</arg>
-                                <arg>-j</arg>
                             </extraArgs>
                         </configuration>
                     </plugin>

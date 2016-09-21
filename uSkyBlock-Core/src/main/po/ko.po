@@ -2181,6 +2181,10 @@ msgstr ""
 "§e당신의 섬 그룹의 정보로 돌아오려면\n"
 "§e여기를 클릭하세요."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

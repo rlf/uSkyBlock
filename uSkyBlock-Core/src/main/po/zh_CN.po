@@ -2076,6 +2076,10 @@ msgstr ""
 "§e点击这里返回\n"
 "§e岛屿团队信息."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

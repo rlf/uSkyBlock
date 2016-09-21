@@ -2186,6 +2186,10 @@ msgstr ""
 "§eНажмите для возврата\n"
 "§eк информации о группе острова."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

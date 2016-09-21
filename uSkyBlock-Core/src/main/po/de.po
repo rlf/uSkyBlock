@@ -2218,6 +2218,10 @@ msgstr ""
 "§eKlick hier um zu Deiner\n"
 "§eInselgruppen Info zurückzukehren."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"

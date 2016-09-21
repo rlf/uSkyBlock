@@ -2229,6 +2229,10 @@ msgstr ""
 "§eKlik hier om terug te gaan\n"
 "§enaar je eilands groep's info."
 
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
 msgid ""
 "§eHover over an icon to view\n"
 "§ea permission. Change the\n"
