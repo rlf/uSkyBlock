@@ -2,7 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-08-12 00:12+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-09-21 17:40+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: Debocraft\n"
 "Language: nl\n"
@@ -19,43 +20,43 @@ msgstr ""
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
-msgstr ""
+msgstr "§eJe hebt geen toegang tot (§4{0}§e)"
 
 #, java-format
 msgid "§eInvalid command: {0}"
-msgstr ""
+msgstr "§eOngeldige commando: {0}"
 
 #, java-format
 msgid "§7Usage: {0}"
-msgstr ""
+msgstr "§7Gebruik: {0}"
 
 #, java-format
 msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
-msgstr ""
+msgstr "§7gebruik §3/{0} ? {1}§7 om de volgende pagina weer te geven\n"
 
 #, java-format
 msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
-msgstr ""
+msgstr "§7gebruik §3/{0} ? {1}§7 om de vorige pagina weer te geven\n"
 
 msgid "saves documentation of the commands to a file"
-msgstr ""
+msgstr "slaat de documentatie van het commando op naar een bestand"
 
 #, java-format
 msgid "Wrote documentation to {0}"
-msgstr ""
+msgstr "Opgelagen documentatie naar {0} geschreven"
 
 #, java-format
 msgid "§4Error writing documentation: {0}"
-msgstr ""
+msgstr "§4Error met opslaan van de documentatie: {0}"
 
 msgid "Command"
-msgstr ""
+msgstr "Commando"
 
 msgid "Permission"
-msgstr ""
+msgstr "Eigenschappen"
 
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 #, java-format
 msgid "§f{0}x §7{1}"
@@ -875,6 +876,8 @@ msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
 msgid ""
 "- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 msgstr ""
+"- PURGING: {0,number,##}% ({1}/{2}), verstreken {3}, Naar schatting "
+"voltooiing ~{4}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Klaar met verwijderen van verlaten eilanden."
@@ -1917,19 +1920,19 @@ msgid "Challenge Menu"
 msgstr "Uitdagingen Menu "
 
 msgid "Change Biome"
-msgstr ""
+msgstr "Verander Biome"
 
 msgid "change the island's biome."
 msgstr "verander het eiland''s biome"
 
 msgid "Toggle Island Lock"
-msgstr ""
+msgstr "Schakel Island Lock"
 
 msgid "toggle the island's lock."
 msgstr "het eiland op slot zetten."
 
 msgid "Set Island Warp"
-msgstr ""
+msgstr "Set Island Warp"
 
 msgid "set the island's warp."
 msgstr "de warp van het eiland veranderen."
@@ -1945,7 +1948,7 @@ msgstr ""
 "het eiland te teleporteren."
 
 msgid "Toggle Island Warp"
-msgstr ""
+msgstr "Schakel Island Warp"
 
 msgid "toggle the island's warp."
 msgstr "de warp aan en uit zetten."
@@ -1962,7 +1965,7 @@ msgstr ""
 "niet de locatie mee gezet worden."
 
 msgid "Invite Players"
-msgstr ""
+msgstr "Genodigde Spelers"
 
 msgid "invite others to the island."
 msgstr "andere spelers uitnodigen."
@@ -1978,7 +1981,7 @@ msgstr ""
 "voor meer leden"
 
 msgid "Kick Players"
-msgstr ""
+msgstr "Kick Players"
 
 msgid "kick others from the island."
 msgstr "andere spelers verwijderen."
@@ -2231,7 +2234,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
-msgstr ""
+msgstr "§e{0}''§9s Eigenschappen"
 
 msgid ""
 "§eHover over an icon to view\n"
@@ -2780,3 +2783,6 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "Noord-West"
+
+#~ msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
+#~ msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
