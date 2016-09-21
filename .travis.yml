@@ -13,9 +13,14 @@ env:
     - MC=1.10
     - MC=1.9
     - MC=1.8
+git:
+    submodules: false
 notifications:
   email: false
 before_install:
+  # change from ssh to https to allow travis to fetch sources
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
   # Change the maven-version to be the tag (for the API deploy)
   # Skip the 'v'
   - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
