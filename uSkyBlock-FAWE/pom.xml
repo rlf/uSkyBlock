@@ -14,14 +14,21 @@
     <repositories>
         <repository>
             <id>empcraft</id>
-            <url>http://empcraft.com/maven2</url>
+            <url>http://ci.athion.net/job/FastAsyncWorldEdit/ws/mvn/</url>
         </repository>
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>com.boydti.fawe</groupId>
-            <artifactId>fawe</artifactId>
-            <version>3.5.0</version>
+            <groupId>com.boydti</groupId>
+            <artifactId>fawe-api</artifactId>
+            <version>16.09.21-b2ef1cb-294</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>uSkyBlock</groupId>

@@ -102,10 +102,6 @@ msgstr "§7a vice..."
 msgid "§f{0}x §7{1}"
 msgstr "§f{0}x §7{1}"
 
-#, java-format
-msgid "§7{0}"
-msgstr "§7{0}"
-
 msgid "§eItems will be traded for reward."
 msgstr ""
 
@@ -767,9 +763,6 @@ msgstr "§4Zacinam cisteni..."
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4Cisteni jiz bezi, prosim vyckejte az se dokonci!"
-
-msgid "§4Starting purge..."
-msgstr ""
 
 msgid "region manipulations"
 msgstr "Manipulace s regiony"
@@ -2730,22 +2723,6 @@ msgstr "Zapad"
 
 msgid "North-West"
 msgstr "Severozapad"
-
-msgid "d"
-msgstr "d"
-
-msgid "h"
-msgstr "h"
-
-msgid "m"
-msgstr "m"
-
-msgid "s"
-msgstr "s"
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #~ msgid "§eThis challenge requires the following:"
 #~ msgstr "§ePro tento ukol potrebujes:"
