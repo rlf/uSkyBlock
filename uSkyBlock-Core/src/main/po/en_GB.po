@@ -973,7 +973,7 @@ msgid "accept/reject an invitation."
 msgstr "accept/reject an invitation."
 
 msgid "teleports you to your island (or create one)"
-msgstr "§9* §7teleports you to your island (or create one)"
+msgstr "teleports you to your island (or create one)"
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a player from your island."
@@ -1024,7 +1024,7 @@ msgid "§eYou have been §aUNBANNED§e from {0}§e''s island."
 msgstr "§9* §7You have been §aUNBANNED§7 from §6{0}''s §7island."
 
 msgid "change the biome of the island"
-msgstr "§2* §7change the biome of the island"
+msgstr "change the biome of the island"
 
 msgid "exempt player from biome-cooldown"
 msgstr "§4* §7exempt player from biome-cooldown"
