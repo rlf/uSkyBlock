@@ -225,7 +225,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
         for (String temp : memberList) {
-            meta3.setDisplayName("\u00a7f" + temp);
+            meta3.setDisplayName(tr("\u00a7e{0}''\u00a79s Permissions", temp));
             boolean isLeader = islandInfo.isLeader(temp);
             if (isLeader) {
                 addLore(lores, "\u00a7a\u00a7l", tr("Leader"));
