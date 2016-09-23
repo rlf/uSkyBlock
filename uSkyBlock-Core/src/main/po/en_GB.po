@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-09-21 17:24+0100\n"
+"PO-Revision-Date: 2016-09-23 08:12+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: uSkyblock-dev team\n"
 "Language: en_GB\n"
@@ -1212,7 +1212,7 @@ msgstr "Score Count Block"
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
-msgstr "§9* §7Island level is §a{0,number,###.##}"
+msgstr "§9- §7Island level is §a{0,number,###.##}"
 
 msgid "invite a player to your island"
 msgstr "invite a player to your island"
@@ -1319,7 +1319,7 @@ msgstr "§9* §7Information about §6{0}''s §7Island:"
 
 #, java-format
 msgid "§9Rank is {0}"
-msgstr "§9* §7Rank is §9{0}"
+msgstr "§9- §7Rank is §9{0}"
 
 msgid "lock your island to non-party members."
 msgstr "lock your island to non-party members."
@@ -1914,7 +1914,7 @@ msgid "Change Biome"
 msgstr "Change Biome"
 
 msgid "change the island's biome."
-msgstr "§2* §7change the island's biome."
+msgstr "change the island's biome."
 
 msgid "Toggle Island Lock"
 msgstr "Toggle Island Lock"
@@ -1968,10 +1968,9 @@ msgid ""
 "there is enough room for more\n"
 "members"
 msgstr ""
-"invite\n"
-"other players to the island if\n"
-"there is enough room for more\n"
-"members"
+"invite other players to the\n"
+"island if there is enough\n"
+"room for more members"
 
 msgid "Kick Players"
 msgstr "Kick Players"
@@ -1985,10 +1984,9 @@ msgid ""
 "but they are unable to kick\n"
 "the island leader."
 msgstr ""
-"kick\n"
-"other players from the island,\n"
-"but they are unable to kick\n"
-"the island leader."
+"kick other players from the\n"
+"island, but they are unable\n"
+"to kick the island leader."
 
 msgid "Ocean"
 msgstr "Ocean"
@@ -2230,7 +2228,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
-msgstr "§e{0}''§9s Permissions"
+msgstr "§7{0}''s Permissions"
 
 msgid ""
 "§eHover over an icon to view\n"
@@ -2245,13 +2243,13 @@ msgid "§fThis player §acan"
 msgstr "§fThis player §acan"
 
 msgid "Click here to remove this permission."
-msgstr "Click here to remove this permission."
+msgstr "§eClick here to remove this permission."
 
 msgid "§fThis player §ccannot"
 msgstr "§fThis player §ccannot"
 
 msgid "Click here to grant this permission."
-msgstr "Click here to grant this permission."
+msgstr "§eClick here to grant this permission."
 
 msgid "Island Group Members"
 msgstr "Island Group Members"
@@ -2292,7 +2290,7 @@ msgid "Cannot {0}"
 msgstr "Cannot {0}"
 
 msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Click to change this player's permissions>"
+msgstr "§eClick to change this player's permissions"
 
 msgid "Island Log"
 msgstr "Island Log"
