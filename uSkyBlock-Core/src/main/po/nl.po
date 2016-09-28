@@ -2234,7 +2234,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
-msgstr "§e{0}''§9s Eigenschappen"
+msgstr "§e{0}''s§9 Eigenschappen"
 
 msgid ""
 "§eHover over an icon to view\n"
