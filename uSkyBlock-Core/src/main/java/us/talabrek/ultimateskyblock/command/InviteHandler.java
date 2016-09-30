@@ -62,7 +62,7 @@ public class InviteHandler implements Listener {
         final Invite invite = new Invite(island.getName(), uniqueId, player.getDisplayName());
         inviteMap.put(uniqueId, invite);
         waitingInvites.put(island.getName(), invites);
-        player.sendMessage(tr("\u00a7aInvite sent to " + otherPlayer.getDisplayName()));
+        player.sendMessage(tr("\u00a7aInvite sent to {0}", otherPlayer.getDisplayName()));
         otherPlayer.sendMessage(new String[]{
                 tr("{0}\u00a7e has invited you to join their island!", player.getDisplayName()),
                 tr("\u00a7f/island [accept/reject]\u00a7e to accept or reject the invite."),
