@@ -181,15 +181,6 @@ permissions:
       usb.biome.swampland: true
       usb.biome.taiga: true
 
-  usb.donor.*:
-    default: false
-    children:
-      usb.donor.100: true
-      usb.donor.25: true
-      usb.donor.50: true
-      usb.donor.75: true
-      usb.donor.all: true
-
   usb.exempt.*:
     children:
       usb.exempt.ban: true
@@ -197,18 +188,6 @@ permissions:
       usb.exempt.cooldown.biome: true
       usb.exempt.cooldown.create: true
       usb.exempt.cooldown.restart: true
-
-  usb.extra.*:
-    default: false
-    children:
-      usb.extra.hunger: true
-      usb.extra.hunger2: true
-      usb.extra.hunger3: true
-      usb.extra.hunger4: true
-      usb.extra.partysize: true
-      usb.extra.partysize1: true
-      usb.extra.partysize2: true
-      usb.extra.partysize3: true
 
   usb.island.*:
     children:
@@ -266,9 +245,6 @@ permissions:
   #
   # Permission Descriptions
   # =======================
-  group.memberplus:
-    description: 'adds perks: rewBonus:0.05'
-
   usb.admin.addmember:
     description: 'Grants access to /usb island addmember - adds the player to the island'
 
@@ -401,24 +377,31 @@ permissions:
       /usb wg update - update the WG regions
 
   usb.biome.deep_ocean:
+    default: false
     description: 'Let the player change their islands biome to DEEP_OCEAN'
 
   usb.biome.desert:
+    default: false
     description: 'Let the player change their islands biome to DESERT'
 
   usb.biome.extreme_hills:
+    default: false
     description: 'Let the player change their islands biome to EXTREME_HILLS'
 
   usb.biome.forest:
+    default: false
     description: 'Let the player change their islands biome to FOREST'
 
   usb.biome.hell:
+    default: false
     description: 'Let the player change their islands biome to HELL'
 
   usb.biome.jungle:
+    default: false
     description: 'Let the player change their islands biome to JUNGLE'
 
   usb.biome.mushroom:
+    default: false
     description: 'Let the player change their islands biome to MUSHROOM'
 
   usb.biome.ocean:
@@ -426,15 +409,19 @@ permissions:
     description: 'Let the player change their islands biome to OCEAN'
 
   usb.biome.plains:
+    default: false
     description: 'Let the player change their islands biome to PLAINS'
 
   usb.biome.sky:
+    default: false
     description: 'Let the player change their islands biome to SKY'
 
   usb.biome.swampland:
+    default: false
     description: 'Let the player change their islands biome to SWAMPLAND'
 
   usb.biome.taiga:
+    default: false
     description: 'Let the player change their islands biome to TAIGA'
 
   usb.donor.100:
@@ -460,6 +447,11 @@ permissions:
   usb.donorbonus:
     default: false
     description: 'adds perks: extraItems:[Bow, 32x Arrow, Stone Sword]'
+
+  group.memberplus:
+    default: false
+    description: 'adds perks: rewBonus:0.05'
+
 
   usb.exempt.ban:
     description: 'exempts user from being banned'
@@ -504,14 +496,6 @@ permissions:
   usb.extra.partysize3:
     default: false
     description: 'adds perks: maxPartySize:7'
-
-  usb.extremebonus:
-    default: false
-    description: 'adds perks: extraItems:[8x Bone, 4x Coal]'
-
-  usb.giantbonus:
-    default: false
-    description: 'adds perks: extraItems:[Grass, Mycelium]'
 
   usb.island.ban:
     description: 'Grants access to /island ban - ban/unban a player from your island.'
@@ -589,12 +573,6 @@ permissions:
   usb.island.warp:
     description: 'Grants access to /island warp - warp to another players island'
 
-  usb.largebonus:
-    description: 'adds perks: extraItems:[5x Dirt, 5x Sand]'
-
-  usb.mediumbonus:
-    description: 'adds perks: extraItems:[16x Torch, Lava Bucket]'
-
   usb.mod.bypasscooldowns:
     description: 'allows user to bypass cooldowns'
 
@@ -649,4 +627,21 @@ permissions:
     description: 'adds perks: schematics:[skySMP]'
 
   usb.smallbonus:
+    default: false
     description: 'adds perks: extraItems:[16x Cobblestone, 5x Cooked Porkchop]'
+
+  usb.largebonus:
+    default: false
+    description: 'adds perks: extraItems:[5x Dirt, 5x Sand]'
+
+  usb.mediumbonus:
+    default: false
+    description: 'adds perks: extraItems:[16x Torch, Lava Bucket]'
+
+  usb.extremebonus:
+    default: false
+    description: 'adds perks: extraItems:[8x Bone, 4x Coal]'
+
+  usb.giantbonus:
+    default: false
+    description: 'adds perks: extraItems:[Grass, Mycelium]'
