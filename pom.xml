@@ -12,7 +12,7 @@
         <bukkit-utils.version>1.14</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
-        <vault.version>1.5.6</vault.version>
+        <vault.version>1.6</vault.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
@@ -93,22 +93,6 @@
         <repository>
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>Plugin Metrics</id>
-            <url>http://repo.mcstats.org/content/repositories/public</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>titlemananager-repo</id>
-            <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
-        </repository>
-        <repository>
-            <id>mvdw-software</id>
-            <name>MVdW Public Repositories</name>
-            <url>http://repo.mvdw-software.be/content/groups/public/</url>
         </repository>
     </repositories>
     <pluginRepositories>
