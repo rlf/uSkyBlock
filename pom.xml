@@ -62,6 +62,11 @@
     </build>
     <repositories>
         <repository>
+            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
+            <id>rlf-mvn-repo</id>
+            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
+        </repository>
+        <repository>
             <id>AWE-mvn-repo</id>
             <url>https://raw.github.com/SBPrime/AsyncWorldEdit-API/maven-artifact/</url>
         </repository>
@@ -104,15 +109,6 @@
             <id>mvdw-software</id>
             <name>MVdW Public Repositories</name>
             <url>http://repo.mvdw-software.be/content/groups/public/</url>
-        </repository>
-        <repository>
-            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
-            <id>rlf-mvn-repo</id>
-            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -259,7 +255,7 @@
             </dependency>
             <dependency>
                 <groupId>net.milkbowl.vault</groupId>
-                <artifactId>Vault</artifactId>
+                <artifactId>VaultAPI</artifactId>
                 <optional>true</optional>
                 <version>${vault.version}</version>
             </dependency>

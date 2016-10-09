@@ -1,25 +1,20 @@
 package us.talabrek.ultimateskyblock.command.admin.task;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.ProgressTracker;
-import dk.lockfuglsang.minecraft.util.TimeUtil;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
@@ -103,8 +98,8 @@ public class PurgeScanTask extends BukkitRunnable {
 
     private boolean abandonedSince(Set<UUID> members) {
         for (UUID member : members) {
-            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(member);
-            if (offlinePlayer != null && offlinePlayer.getLastPlayed() > cutOff) {
+            Player player = playerDB.getPlayer(member);
+            if (player != null && player.getLastPlayed() > cutOff) {
                 return false;
             }
         }

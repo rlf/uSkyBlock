@@ -431,15 +431,16 @@
             <groupId>com.github.rlf</groupId>
             <artifactId>uSkyBlock-API</artifactId>
         </dependency>
+        <!--
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <optional>true</optional>
         </dependency>
+        -->
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
-            <version>1.5</version>
             <optional>true</optional>
         </dependency>
 
@@ -502,6 +503,12 @@
             <groupId>be.maximvdw</groupId>
             <artifactId>MVdWPlaceholderAPI</artifactId>
             <version>1.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>*</artifactId>
+                    <groupId>*</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>me.clip.deluxechat</groupId>

@@ -9,6 +9,7 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -77,6 +78,7 @@ public class IslandLogic {
                     @Override
                     public void onRemoval(RemovalNotification<String, IslandInfo> removal) {
                         log.fine("Removing island-info " + removal.getKey() + " from cache");
+                        removal.getValue().saveToFile();
                     }
                 })
                 .build(new CacheLoader<String, IslandInfo>() {

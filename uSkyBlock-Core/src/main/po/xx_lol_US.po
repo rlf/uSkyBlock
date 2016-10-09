@@ -2719,6 +2719,21 @@ msgstr "West"
 msgid "North-West"
 msgstr "North-West"
 
+#~ msgid "d"
+#~ msgstr "d"
+
+#~ msgid "h"
+#~ msgstr "h"
+
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgid "s"
+#~ msgstr "s"
+
+#~ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+#~ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
 #~ msgid "§c-1000"
 #~ msgstr "§c-1000"
 
