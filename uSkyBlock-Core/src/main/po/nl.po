@@ -989,6 +989,10 @@ msgstr ""
 "eiland."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e heeft je uitgenodigd om lid te worden van zijn/haar eiland!"
 
@@ -2283,6 +2287,10 @@ msgstr ""
 "§everanderen doormiddel van\n"
 "§eop de spelers icoon te klikken."
 
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
+
 msgid "Leader"
 msgstr "Leider"
 
@@ -2782,6 +2790,3 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "Noord-West"
-
-#~ msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-#~ msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"

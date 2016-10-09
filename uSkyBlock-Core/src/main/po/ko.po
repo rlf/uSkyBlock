@@ -976,6 +976,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§e가 당신을 초대하려 했지만 당신은 이미 파티에 들어가 있습니다."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e가 당신을 그들의 섬으로 초대하였습니다!"
 
@@ -2229,6 +2233,10 @@ msgstr ""
 "§e플레이어의 아이콘을 흔드세요\n"
 "§e리더는 플레이어의 아이콘을 클릭해서\n"
 "§e권한을 바꿀 수 있습니다."
+
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
 
 msgid "Leader"
 msgstr "리더"

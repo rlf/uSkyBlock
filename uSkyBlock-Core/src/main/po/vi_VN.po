@@ -974,6 +974,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§e đã mời bạn, nhưng bạn đã ở trong 1 đảo"
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e mời bạn vào đảo"
 
@@ -2181,6 +2185,10 @@ msgstr ""
 "§eQuản lý có thể thay đổi quyền hạn\n"
 "§ethành viên bằng cách nhấp vào\n"
 "§ehình đại diện"
+
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
 
 msgid "Leader"
 msgstr "Quản lý"

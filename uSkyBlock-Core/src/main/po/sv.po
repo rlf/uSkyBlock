@@ -988,6 +988,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§e försökte att bjuda in dig men du är redan med i en grupp."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e har bjudit in dig till att gå med i deras ö!"
 
@@ -2234,6 +2238,10 @@ msgstr ""
 "§eledaren kan ändra rättigheter\n"
 "§egenom att klicka på ikonen."
 
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
+
 msgid "Leader"
 msgstr "Gruppledare"
 
@@ -2713,4 +2721,3 @@ msgstr "Väst"
 
 msgid "North-West"
 msgstr "Nordväst"
-

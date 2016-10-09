@@ -983,6 +983,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§9* §{0}§7 tried to invite you, but you are already in a party."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "§9* §6{0} §7has invited you to join their island!"
 
@@ -2274,6 +2278,10 @@ msgstr ""
 "§eleader can change permissions\n"
 "§eby clicking a player's icon."
 
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
+
 msgid "Leader"
 msgstr "Leader"
 
@@ -2766,6 +2774,3 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "North-West"
-
-#~ msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-#~ msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"

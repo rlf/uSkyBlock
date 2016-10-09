@@ -977,6 +977,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§e intentó invitarte, pero ya estas en un grupo."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "§e¡§e{0}§e te ha invitado a unirse a su isla!"
 
@@ -2250,6 +2254,10 @@ msgstr ""
 "§fun jugador para ver sus permisos.\n"
 "§eEl líder puede cambiar los permisos\n"
 "§eclickeando sobre el ícono del jugador."
+
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
 
 msgid "Leader"
 msgstr "Líder"

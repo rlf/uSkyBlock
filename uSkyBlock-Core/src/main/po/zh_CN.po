@@ -963,6 +963,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§e 尝试邀请你加入他的岛屿,但是你早就在其他团队了。"
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e邀请你加入他们的岛屿。"
 
@@ -2124,6 +2128,10 @@ msgstr ""
 "§e即可查询他们的权限.\n"
 "§e岛屿主人可以点击头像来\n"
 "§e更改他们的权限"
+
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
 
 msgid "Leader"
 msgstr ""

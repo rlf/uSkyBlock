@@ -976,6 +976,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§ se te snazi pozvat, ale ty jsi uz v parte."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e tep pozval aby ses pridal na jeho ostrov!"
 
@@ -2233,6 +2237,10 @@ msgstr ""
 "§eVudce ostrova muze tyto opravneni zmenit\n"
 "§ekliknutim na ikonu hrace."
 
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
+
 msgid "Leader"
 msgstr "Vedouci"
 
@@ -2723,84 +2731,3 @@ msgstr "Zapad"
 
 msgid "North-West"
 msgstr "Severozapad"
-
-#~ msgid "§eThis challenge requires the following:"
-#~ msgstr "§ePro tento ukol potrebujes:"
-
-#~ msgid "§7Requires {0}§7 to unlock"
-#~ msgstr "§7Potrebujes {0}§7 pro odemknuti ukolu."
-
-#~ msgid "§aTeleporting to {0}s island."
-#~ msgstr "§aNa ostrov te teleportuji za {0} sekund."
-
-#~ msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-#~ msgstr "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-
-#~ msgid "§c-"
-#~ msgstr "§c-"
-
-#~ msgid "§a+"
-#~ msgstr "§a+"
-
-#~ msgid "§c-1000"
-#~ msgstr "§c-1000"
-
-#~ msgid "§c-100"
-#~ msgstr "§c-100"
-
-#~ msgid "§c-10"
-#~ msgstr "§c-10"
-
-#~ msgid "§c-1"
-#~ msgstr "§c-1"
-
-#~ msgid "§a+1"
-#~ msgstr "§a+1"
-
-#~ msgid "§a+10"
-#~ msgstr "§a+10"
-
-#~ msgid "§a+100"
-#~ msgstr "§a+100"
-
-#~ msgid "§a+1000"
-#~ msgstr "§a+1000"
-
-#~ msgid "change the islands's biome."
-#~ msgstr "Zmena biomu na ostrove"
-
-#~ msgid ""
-#~ "set the island's warp,\n"
-#~ "which allows non-group\n"
-#~ "members to teleport to\n"
-#~ " the island"
-#~ msgstr ""
-#~ "Nastavi warp na ostrove,\n"
-#~ "kam se hraci z jinych\n"
-#~ "ostrovu muzou portovat\n"
-#~ "pomoci prikazu:\n"
-#~ "/warp <nick>"
-
-#~ msgid ""
-#~ "toggle the\n"
-#~ "island's warp, allowing them\n"
-#~ "to turn it on or off at anytime.\n"
-#~ "but not set the location."
-#~ msgstr ""
-#~ "Prepina moznost zda se ostatni\n"
-#~ "hraci muzou portnout na tvuj\n"
-#~ "ostrov."
-
-#~ msgid ""
-#~ "When your warp is activated,\n"
-#~ "other players will be taken to\n"
-#~ "this point when they teleport\n"
-#~ "to your island.\n"
-#~ "§e§lClick here to change."
-#~ msgstr ""
-#~ "Kdyz je tvuj port aktivni\n"
-#~ "ostatni hraci se premisti\n"
-#~ "na toto misto když se naportuji\n"
-#~ "na tvuj ostrov.\n"
-#~ "§e§lKlikni zde pro zmenu."
-

@@ -94,6 +94,10 @@
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
+        <repository>
+            <id>titlemananager-repo</id>
+            <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>

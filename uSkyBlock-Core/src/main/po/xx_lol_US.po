@@ -18,43 +18,43 @@ msgstr ""
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
-msgstr ""
+msgstr "§eYou do not have access (§4{0}§e)"
 
 #, java-format
 msgid "§eInvalid command: {0}"
-msgstr ""
+msgstr "§eInvalid command: {0}"
 
 #, java-format
 msgid "§7Usage: {0}"
-msgstr ""
+msgstr "§7Usage: {0}"
 
 #, java-format
 msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
-msgstr ""
+msgstr "§7Use §3/{0} ? {1}§7 to display next page\n"
 
 #, java-format
 msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
-msgstr ""
+msgstr "§7Use §3/{0} ? {1} §7 to display previous page\n"
 
 msgid "saves documentation of the commands to a file"
-msgstr ""
+msgstr "saves documentation of teh commands to a file"
 
 #, java-format
 msgid "Wrote documentation to {0}"
-msgstr ""
+msgstr "Wrote documentation to {0}"
 
 #, java-format
 msgid "§4Error writing documentation: {0}"
-msgstr ""
+msgstr "§4Yikes writing documentation: {0}"
 
 msgid "Command"
-msgstr ""
+msgstr "Command"
 
 msgid "Permission"
-msgstr ""
+msgstr "Permission"
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #, java-format
 msgid "§f{0}x §7{1}"
@@ -93,17 +93,17 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Stuffs needed will reset in {0} minutes."
 
 msgid "§eThis challenge requires:"
-msgstr ""
+msgstr "§eThis challenge rekwirz:"
 
 msgid "§7and more..."
 msgstr "§7an' moar..."
 
 msgid "§eItems will be traded for reward."
-msgstr ""
+msgstr "§eItems will be traded for kitteh treet."
 
 #, java-format
 msgid "§eMust be within {0} meters."
-msgstr ""
+msgstr "§eMust be wiffin {0} meters."
 
 msgid "§6Item Reward: §a"
 msgstr "§6stuffs Kitteh treet: §a"
@@ -122,7 +122,7 @@ msgstr "§dTotal times completed: §f{0}"
 
 #, java-format
 msgid "§7Requires {0}"
-msgstr ""
+msgstr "§7Rekwirz {0}"
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -255,28 +255,28 @@ msgid "§cSorry! {0}"
 msgstr "§cSorry! {0}"
 
 msgid "Either send a message directly to your group, or toggle it on/off."
-msgstr ""
+msgstr "Either send a message directly to yoor group, or toggle it on/off."
 
 msgid "party"
-msgstr ""
+msgstr "party"
 
 msgid "island"
-msgstr ""
+msgstr "island"
 
 #, java-format
 msgid "§cToggled chat to {0} §aON"
-msgstr ""
+msgstr "§cToggled chat to {0} §aON"
 
 #, java-format
 msgid "§cRepeat §9{0}§c to toggle it off"
-msgstr ""
+msgstr "§cRepeat §9{0}§c to toggle it off"
 
 #, java-format
 msgid "§aToggled chat §cOFF§a for {0}"
-msgstr ""
+msgstr "§aToggled chat §cOFF§a for {0}"
 
 msgid "§cCommand only available to players"
-msgstr ""
+msgstr "§cCommand only available to kittehs"
 
 msgid "talk to players on your island"
 msgstr "talk to kittehs on yoor cathouz"
@@ -581,7 +581,7 @@ msgstr "§4That kitteh does not have a cathouz!"
 
 #, java-format
 msgid "§aTeleporting to {0}''s island."
-msgstr ""
+msgstr "§aTeleporting to {0}''s cathouz."
 
 msgid "imports players and islands from other formats"
 msgstr "imports kittehs an' islands from other formats"
@@ -654,42 +654,42 @@ msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§bLeadership transferred by {0}§b to {1}"
 
 msgid "advanced info about NBT stuff"
-msgstr ""
+msgstr "advanced info about NBT stuff"
 
 msgid "shows the NBTTag for the currently held item"
-msgstr ""
+msgstr "shows teh NBTTag for teh currently held item"
 
 #, java-format
 msgid "§eInfo for §9{0}"
-msgstr ""
+msgstr "§eInfo for §9{0}"
 
 #, java-format
 msgid "§7 - name: §9{0}"
-msgstr ""
+msgstr "§7 - name: §9{0}"
 
 #, java-format
 msgid "§7 - nbttag: §9{0}"
-msgstr ""
+msgstr "§7 - nbttag: §9{0}"
 
 msgid "§cNo item in hand!"
-msgstr ""
+msgstr "§cNoe item in hand!"
 
 msgid "§eCan only be executed as a player"
 msgstr "§eCan only be executed as a kitteh"
 
 msgid "sets the NBTTag on the currently held item"
-msgstr ""
+msgstr "sets teh NBTTag on teh currently held item"
 
 #, java-format
 msgid "§eSet §9{0}§e to §c{1}"
-msgstr ""
+msgstr "§eSet §9{0}§e to §c{1}"
 
 msgid "adds the NBTTag on the currently held item"
-msgstr ""
+msgstr "adds teh NBTTag on teh currently held item"
 
 #, java-format
 msgid "§eAdded §9{0}§e to §c{1}"
-msgstr ""
+msgstr "§eAdded §9{0}§e to §c{1}"
 
 msgid "manage orphans"
 msgstr "manage orfanz"
@@ -719,18 +719,20 @@ msgstr "§eOrfanz: {0}"
 
 #, java-format
 msgid "additional perks {0}"
-msgstr ""
+msgstr "additional perks {0}"
 
 msgid "protects all islands (time consuming)"
 msgstr "proteks all islands (time consuming)"
 
 msgid "§cTrying to abort protect-all task."
-msgstr ""
+msgstr "§cTrying to abort protect-all task."
 
 msgid ""
 "§4Sorry!§e A protect-all is already running. Let it complete first, or use "
 "§9usb protectall §cstop"
 msgstr ""
+"§4Sorry!§e A protect-all  iz already running. Let it complete first, or use "
+"§9usb protectall §cstop"
 
 msgid "§eStarting a protect-all task. It will take a while."
 msgstr "§eStarting a protect-all task. It will take a while."
@@ -747,16 +749,16 @@ msgstr "§eFinding all islands that haz been abandoned for moar than {0} dais."
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr ""
+msgstr "§4PURGE:§e Repeat teh command wiffin {0} to accept."
 
 msgid "§4Trying to abort purge"
-msgstr ""
+msgstr "§4Trying to abort purrrge"
 
 msgid "§4A purge is already running, please wait for it to finish!"
 msgstr "§4A purrrge  iz already running, please wait for it to finish!"
 
 msgid "§4Starting purge..."
-msgstr ""
+msgstr "§4Starting purrrge..."
 
 msgid "region manipulations"
 msgstr "region manipulations"
@@ -846,18 +848,18 @@ msgid "§cMaintenance mode can only be changed from console!"
 msgstr "§cMaintenance mode can only be changed from console!"
 
 msgid "§cABORTED:§e Protect-All was aborted!"
-msgstr ""
+msgstr "§cABORTED:§e Protect-All wuz aborted!"
 
 #, java-format
 msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
-msgstr ""
+msgstr "§eCompleted protect-all in {0}, {1} new regions were created!"
 
 #, java-format
 msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
-msgstr ""
+msgstr "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
 
 msgid "§4PURGE:§9 Scanning aborted."
-msgstr ""
+msgstr "§4PURGE:§9 Scanning aborted."
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
@@ -867,12 +869,13 @@ msgstr "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgid ""
 "- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 msgstr ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 Finished purging abandoned islands."
 
 msgid "§4PURGE:§9 Aborted purging abandoned islands."
-msgstr ""
+msgstr "§4PURGE:§9 Aborted purging abandoned islands."
 
 msgid "displays version information"
 msgstr "displays version information"
@@ -908,7 +911,7 @@ msgid "§eNo island found at your location!"
 msgstr "§eNoe cathouz found at yoor location!"
 
 msgid "refreshes the chunk around the player"
-msgstr ""
+msgstr "refreshes teh chunk around teh kitteh"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -974,6 +977,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§e tried to invite you, but you be already in a party."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr "§aInvite sent to {0}"
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e haz invited you to join their cathouz!"
 
@@ -1021,13 +1028,13 @@ msgid "accept/reject an invitation."
 msgstr "accept/reject an invitashun."
 
 msgid "teleports you to your island (or create one)"
-msgstr ""
+msgstr "teleports you to yoor cathouz (or create one)"
 
 msgid "ban/unban a player from your island."
 msgstr "ban/unban a kitteh from yoor cathouz."
 
 msgid "exempts user from being banned"
-msgstr ""
+msgstr "exempts user from being banned"
 
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§eTeh following kittehs be banned from warping to yoor cathouz:"
@@ -1073,11 +1080,11 @@ msgid "change the biome of the island"
 msgstr "change teh baium of teh cathouz"
 
 msgid "exempt player from biome-cooldown"
-msgstr ""
+msgstr "exempt kitteh from baium-cooldown"
 
 #, java-format
 msgid "Let the player change their islands biome to {0}"
-msgstr ""
+msgstr "Let teh kitteh change their islands baium to {0}"
 
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
@@ -1105,6 +1112,7 @@ msgstr "§cYou do not have permission to change yoor baium to that type."
 msgid ""
 "§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
 msgstr ""
+"§7Teh pixies be busy changing teh baium near you to §9{0}§7, be patient."
 
 #, java-format
 msgid ""
@@ -1116,7 +1124,7 @@ msgstr ""
 
 #, java-format
 msgid "§eInvalid biome {0} supplied!"
-msgstr ""
+msgstr "§eInvalid baium {0} supplied!"
 
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
@@ -1128,17 +1136,17 @@ msgstr "{0} changed teh cathouz baium to {1}"
 
 #, java-format
 msgid "§aYou have changed {0} blocks around you to the {1} biome"
-msgstr ""
+msgstr "§aYou have changed {0} bloks around you to teh {1} baium"
 
 #, java-format
 msgid "{0} created an area with {1} biome"
-msgstr ""
+msgstr "{0} created an area with {1} baium"
 
 msgid "create an island"
 msgstr "create a cathouz"
 
 msgid "exempt player from create-cooldown"
-msgstr ""
+msgstr "exempt kitteh from create-cooldown"
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -1172,7 +1180,7 @@ msgid "check your or anothers island info"
 msgstr "check yoor or anothers cathouz info"
 
 msgid "allows user to see others island info"
-msgstr ""
+msgstr "allows user to see others cathouz info"
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Island level haz been disabled, contact an administrator."
@@ -1297,7 +1305,7 @@ msgid "check your or anothers island level"
 msgstr "check yoor or anothers cathouz level"
 
 msgid "allows user to query for others levels"
-msgstr ""
+msgstr "allows user to query for others levels"
 
 #, java-format
 msgid "§eInformation about {0}'s Island:"
@@ -1367,7 +1375,7 @@ msgid "delete your island and start a new one."
 msgstr "delete yoor cathouz an' start a new one."
 
 msgid "exempt player from restart-cooldown"
-msgstr ""
+msgstr "exempt kitteh from restart-cooldown"
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
@@ -1437,7 +1445,7 @@ msgid "display the top10 of islands"
 msgstr "display teh top10 of islands"
 
 msgid "enables user to all-ways generate top-ten (no caching)"
-msgstr ""
+msgstr "enables user to all-ways generate top-ten (noe caching)"
 
 msgid "trust/untrust a player to help on your island."
 msgstr "trust/untrust a kitteh to help on yoor cathouz."
@@ -1530,19 +1538,19 @@ msgid "general island command"
 msgstr "general cathouz command"
 
 msgid "allows user to bypass cooldowns"
-msgstr ""
+msgstr "allows user to bypass cooldowns"
 
 msgid "allows user to bypass visitor-protections"
-msgstr ""
+msgstr "allows user to bypass visitor-protections"
 
 msgid "allows user to bypass teleport-delay"
-msgstr ""
+msgstr "allows user to bypass teleport-delay"
 
 msgid "allows user to use [usb] signs"
-msgstr ""
+msgstr "allows user to use [usb] signs"
 
 msgid "allows user to place [usb] signs"
-msgstr ""
+msgstr "allows user to place [usb] signs"
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§eYou can not use another islands portals!"
@@ -1668,6 +1676,8 @@ msgid ""
 "§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
 "~ {6}"
 msgstr ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
@@ -1675,43 +1685,45 @@ msgstr "§4Noe importer named §e{0}§4 found"
 
 #, java-format
 msgid "§eConverted {0}/{1} files in {2}"
-msgstr ""
+msgstr "§eConverted {0}/{1} files in {2}"
 
 #, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
-msgstr ""
+msgstr "§7PlayerDB: Filtering {0} kittehs from uuid2name.yml"
 
 #, java-format
 msgid "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
-msgstr ""
+msgstr "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
 
 #, java-format
 msgid "§7PlayerDB: Filtered {0} names"
-msgstr ""
+msgstr "§7PlayerDB: Filtered {0} names"
 
 #, java-format
 msgid ""
 "§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
 "{6}"
 msgstr ""
+"§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
+"{6}"
 
 #, java-format
 msgid "§7MojangAPI: Trying to fetch {0} players from Mojang"
-msgstr ""
+msgstr "§7MojangAPI: Trying to fetch {0} kittehs from Mojang"
 
 msgid "SUCCESS"
-msgstr ""
+msgstr "SUCCESS"
 
 msgid "FAILED"
-msgstr ""
+msgstr "FAILED"
 
 #, java-format
 msgid "§7 - MojangAPI:§aCOMPLETED: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§aCOMPLETED: {0}"
 
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
-msgstr ""
+msgstr "§7 - MojangAPI:§cERROR: {0}"
 
 msgid "The island has been created."
 msgstr "Teh cathouz haz been created."
@@ -1818,23 +1830,23 @@ msgstr "§7Page {0}"
 
 #, java-format
 msgid "§c{0,number,#}"
-msgstr ""
+msgstr "§c{0,number,#}"
 
 #, java-format
 msgid "§a+{0,number,#}"
-msgstr ""
+msgstr "§a+{0,number,#}"
 
 #, java-format
 msgid "§a{0,number,#}"
-msgstr ""
+msgstr "§a{0,number,#}"
 
 #, java-format
 msgid "&aLeft:&7 Increment with {0}"
-msgstr ""
+msgstr "&aLeft:&7 Increment with {0}"
 
 #, java-format
 msgid "&cRight-Click:&7 Set to {0}"
-msgstr ""
+msgstr "&cRight-Click:&7 Set to {0}"
 
 msgid "Return"
 msgstr "Return"
@@ -1882,19 +1894,19 @@ msgid "Challenge Menu"
 msgstr "Challenge Menu"
 
 msgid "Change Biome"
-msgstr ""
+msgstr "Change Baium"
 
 msgid "change the island's biome."
-msgstr ""
+msgstr "change teh cathouz's baium."
 
 msgid "Toggle Island Lock"
-msgstr ""
+msgstr "Toggle Island Lock"
 
 msgid "toggle the island's lock."
 msgstr "toggle teh cathouz's lock."
 
 msgid "Set Island Warp"
-msgstr ""
+msgstr "Set Island Warp"
 
 msgid "set the island's warp."
 msgstr "set teh cathouz's warp."
@@ -1905,9 +1917,13 @@ msgid ""
 "members to teleport to\n"
 "the island."
 msgstr ""
+"set teh cathouz's warp,\n"
+"which allows non-group\n"
+"members to teleport to\n"
+"teh cathouz."
 
 msgid "Toggle Island Warp"
-msgstr ""
+msgstr "Toggle Island Warp"
 
 msgid "toggle the island's warp."
 msgstr "toggle teh cathouz's warp."
@@ -1918,9 +1934,13 @@ msgid ""
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
+"toggle teh cathouz's warp,\n"
+"allowing 'dem to turn it\n"
+"on or off at anytime, but\n"
+"not set teh location."
 
 msgid "Invite Players"
-msgstr ""
+msgstr "Invite Kittehs"
 
 msgid "invite others to the island."
 msgstr "invite others to teh cathouz."
@@ -1937,7 +1957,7 @@ msgstr ""
 "members"
 
 msgid "Kick Players"
-msgstr ""
+msgstr "Kick Kittehs"
 
 msgid "kick others from the island."
 msgstr "kick others from teh cathouz."
@@ -2132,7 +2152,7 @@ msgstr ""
 "mobs will spawn."
 
 msgid "Flower Forest"
-msgstr ""
+msgstr "Flower Forest"
 
 msgid ""
 "The flower forest biome.\n"
@@ -2140,6 +2160,10 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
+"Teh flower forest baium.\n"
+"Passive mobs will spawn \n"
+"normally an' hostile\n"
+"mobs will spawn."
 
 msgid "Deep Ocean"
 msgstr "Deep Ocean"
@@ -2158,13 +2182,16 @@ msgstr ""
 "spawn normally."
 
 msgid "Ice Plains"
-msgstr ""
+msgstr "Ice Plains"
 
 msgid ""
 "The ice-plains biome is an advanced biome.\n"
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+"Teh ice-plains baium  iz an advanced baium.\n"
+"Mobs will spawn naturally.\n"
+"including polar-bears"
 
 msgid "Permissions"
 msgstr "Permissions"
@@ -2185,7 +2212,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
-msgstr ""
+msgstr "§e{0}''§9s Permissions"
 
 msgid ""
 "§eHover over an icon to view\n"
@@ -2231,6 +2258,10 @@ msgstr ""
 "§eview their permissions. Teh\n"
 "§etop cat can change permissions\n"
 "§eby clicking a kitteh's icon."
+
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr "§e{0}''s§9 Permissions"
 
 msgid "Leader"
 msgstr "Top cat"
@@ -2555,9 +2586,13 @@ msgid ""
 "this point when they teleport\n"
 "to your island."
 msgstr ""
+"When yoor warp  iz activated,\n"
+"other kittehs will be taken to\n"
+"this point when they teleport\n"
+"to yoor cathouz."
 
 msgid "§e§lClick here to change."
-msgstr ""
+msgstr "§e§lClick here to change."
 
 msgid "§c§lRestart Island"
 msgstr "§c§lRestart Island"
@@ -2567,7 +2602,7 @@ msgid ""
 "§4WARNING! §cwill remove your items and island!"
 msgstr ""
 "Restarts yoor cathouz.\n"
-"§4WARNING! §cwill remove yoor items an' cathouz!"
+"§4WARNING! §cwill remove yoor items an' island!"
 
 msgid "§c§lLeave Island"
 msgstr "§c§lLeave Island"
@@ -2610,7 +2645,7 @@ msgstr "§9Text Editor"
 
 #, java-format
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
-msgstr ""
+msgstr "Too many requests for Mojangs API ({0} wiffin {1}), sleeping {2}"
 
 msgid "§eSending you to spawn."
 msgstr "§eSending you to spawn."
@@ -2626,14 +2661,15 @@ msgid "§7Teleport cancelled"
 msgstr "§7Teleport cancelled"
 
 msgid "READY"
-msgstr ""
+msgstr "READY"
 
 msgid ""
 "§cWARNING:§e Could not transfer all the required items to your inventory!"
 msgstr ""
+"§cWARNING:§e Could not transfer all teh required items to yoor inventory!"
 
 msgid "§cNot enough items in chest to complete challenge!"
-msgstr ""
+msgstr "§cNot enough items in chest to complete challenge!"
 
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "Something went awry storin' teh cathouz an'/or party data!"
@@ -2718,123 +2754,3 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "North-West"
-
-#~ msgid "d"
-#~ msgstr "d"
-
-#~ msgid "h"
-#~ msgstr "h"
-
-#~ msgid "m"
-#~ msgstr "m"
-
-#~ msgid "s"
-#~ msgstr "s"
-
-#~ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-#~ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
-
-#~ msgid "§c-1000"
-#~ msgstr "§c-1000"
-
-#~ msgid "§c-100"
-#~ msgstr "§c-100"
-
-#~ msgid "§c-10"
-#~ msgstr "§c-10"
-
-#~ msgid "§c-1"
-#~ msgstr "§c-1"
-
-#~ msgid "§a+1"
-#~ msgstr "§a+1"
-
-#~ msgid "§a+10"
-#~ msgstr "§a+10"
-
-#~ msgid "§a+100"
-#~ msgstr "§a+100"
-
-#~ msgid "§a+1000"
-#~ msgstr "§a+1000"
-
-#~ msgid "§c-"
-#~ msgstr "§c-"
-
-#~ msgid "§a+"
-#~ msgstr "§a+"
-
-#~ msgid "§eThis challenge requires the following:"
-#~ msgstr "§eThis challenge rekwirz teh following:"
-
-#~ msgid "§aTeleporting to {0}s island."
-#~ msgstr "§aTeleporting to {0}s cathouz."
-
-#~ msgid ""
-#~ "When your warp is activated,\n"
-#~ "other players will be taken to\n"
-#~ "this point when they teleport\n"
-#~ "to your island.\n"
-#~ "§e§lClick here to change."
-#~ msgstr ""
-#~ "When yoor warp  iz activated,\n"
-#~ "other kittehs will be taken to\n"
-#~ "this point when they teleport\n"
-#~ "to yoor cathouz.\n"
-#~ "§e§lClick here to change."
-
-#~ msgid "change the islands's biome."
-#~ msgstr "change teh islands's baium."
-
-#~ msgid ""
-#~ "set the island's warp,\n"
-#~ "which allows non-group\n"
-#~ "members to teleport to\n"
-#~ " the island"
-#~ msgstr ""
-#~ "set teh cathouz's warp,\n"
-#~ "which allows non-group\n"
-#~ "members to teleport to\n"
-#~ " teh cathouz"
-
-#~ msgid ""
-#~ "toggle the\n"
-#~ "island's warp, allowing them\n"
-#~ "to turn it on or off at anytime.\n"
-#~ "but not set the location."
-#~ msgstr ""
-#~ "toggle teh\n"
-#~ " cathouz's warp, allowing 'dem\n"
-#~ "to turn it on or off at anytime.\n"
-#~ "but not set teh location."
-
-#~ msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-#~ msgstr ""
-#~ "§4Sorry!§e A protect-all  iz already running. Let it complete first."
-
-#~ msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-#~ msgstr "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-
-#~ msgid "§a§lIsland Help"
-#~ msgstr "§a§lIsland Help"
-
-#~ msgid ""
-#~ "Need help with skyblock\n"
-#~ "concepts or commands? View\n"
-#~ "details about them here.\n"
-#~ "§e§lClick here for help!"
-#~ msgstr ""
-#~ "Need help with skyblock\n"
-#~ "concepts or commands? View\n"
-#~ "details about 'dem here.\n"
-#~ "§e§lClick here for help!"
-
-#~ msgid "§eConverted {0}/{1} files"
-#~ msgstr "§eConverted {0}/{1} files"
-
-#~ msgid ""
-#~ "§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:"
-#~ "{5})"
-#~ msgstr ""
-#~ "§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:"
-#~ "{5})"
