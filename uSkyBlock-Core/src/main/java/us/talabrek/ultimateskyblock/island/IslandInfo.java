@@ -351,6 +351,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                         // Remove broken UUID from island file
                         config.set("party.members." + uuid, null);
                         config.set("party.currentSize", getPartySize() - 1);
+                        save();
                     }
                 } else {
                     log.info("Island " + name + " has invalid member-section " + uuid);
