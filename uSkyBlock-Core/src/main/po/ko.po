@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.7\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-10-21 14:57+0900\n"
+"PO-Revision-Date: 2016-10-21 15:28+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: swan201 <bmr0621@swiftnode.cloud>\n"
 "Language: ko_KR\n"
@@ -824,7 +824,7 @@ msgstr "§c{0} 를 ''{1}'로 지정'"
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}''"
-msgstr "§c필드{0} 를 ''{1}'로 지정할 수 없습니다."
+msgstr "§c필드{0} 를 ''{1}''로 지정할 수 없습니다."
 
 #, java-format
 msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
