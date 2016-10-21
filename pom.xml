@@ -4,12 +4,25 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.6.0-SNAPSHOT</version>
-    <name>Ultimate Skyblock</name>
+    <version>2.7.0-SNAPSHOT</version>
+    <name>Ultimate SkyBlock</name>
+
+    <properties>
+        <api.version>2.7.3</api.version>
+        <bukkit-utils.version>1.14</bukkit-utils.version>
+        <po-utils.version>1.2</po-utils.version>
+        <deluxechat.version>1.6</deluxechat.version>
+        <vault.version>1.6</vault.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <finalName>${project.artifactId}</finalName>
+        <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
+        <travis.buildNumber>dev</travis.buildNumber>
+        <msgfmtCmd>msgfmt</msgfmtCmd>
+        <msgmergeCmd>msgmerge</msgmergeCmd>
+    </properties>
 
     <modules>
-        <module>bukkit-utils</module>
-        <module>po-utils</module>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-AWE211</module>
@@ -17,17 +30,8 @@
         <module>uSkyBlock-AWE321</module>
         <module>uSkyBlock-AWE330</module>
         <module>uSkyBlock-Plugin</module>
+        <module>uSkyBlock-FAWE</module>
     </modules>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <finalName>${project.artifactId}</finalName>
-        <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
-        <travis.buildNumber>dev</travis.buildNumber>
-        <msgfmtCmd>msgfmt</msgfmtCmd>
-        <msgmergeCmd>msgmerge</msgmergeCmd>
-        <api.version>2.6.4</api.version>
-    </properties>
 
     <scm>
         <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
@@ -58,8 +62,13 @@
     </build>
     <repositories>
         <repository>
+            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
+            <id>rlf-mvn-repo</id>
+            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
+        </repository>
+        <repository>
             <id>AWE-mvn-repo</id>
-            <url>https://raw.github.com/SBPrime/AsyncWorldEdit-Premium/maven-artifact/</url>
+            <url>https://raw.github.com/SBPrime/AsyncWorldEdit-API/maven-artifact/</url>
         </repository>
         <repository>
             <id>gettext-commons-mvn-repo</id>
@@ -71,7 +80,7 @@
         </repository>
         <repository>
             <id>vault-repo</id>
-            <url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
+            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository>
             <id>sk89q-maven</id>
@@ -86,37 +95,14 @@
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
         <repository>
-            <id>Plugin Metrics</id>
-            <url>http://repo.mcstats.org/content/repositories/public</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>titlemananager-repo</id>
             <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
-        </repository>
-        <repository>
-            <id>mvdw-software</id>
-            <name>MVdW Public Repositories</name>
-            <url>http://repo.mvdw-software.be/content/groups/public/</url>
-        </repository>
-        <repository>
-            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
-            <id>uSkyBlock-mvn-repo</id>
-            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>uSkyBlock-mvn-repo</id>
-            <url>https://raw.github.com/rlf/uSkyBlock/mvn-repo/</url>
+            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </pluginRepository>
     </pluginRepositories>
     <profiles>
@@ -136,7 +122,7 @@
         <profile>
             <id>wg6</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -150,9 +136,31 @@
             </dependencies>
         </profile>
         <profile>
-            <id>we5</id>
+            <id>wg611</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q</groupId>
+                    <artifactId>worldguard</artifactId>
+                    <version>6.1.1-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>worldedit</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we5</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -168,13 +176,45 @@
         <profile>
             <id>we6</id>
             <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>6.0.0-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we611</id>
+            <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>com.sk89q</groupId>
-                    <artifactId>worldedit</artifactId>
-                    <version>6.0.0-SNAPSHOT</version>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>6.1.1-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we613</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>6.1.3-SNAPSHOT</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>
@@ -194,12 +234,18 @@
             <dependency>
                 <groupId>dk.lockfuglsang.minecraft</groupId>
                 <artifactId>bukkit-utils</artifactId>
-                <version>1.2</version>
+                <version>${bukkit-utils.version}</version>
             </dependency>
             <dependency>
                 <groupId>dk.lockfuglsang.minecraft</groupId>
                 <artifactId>po-utils</artifactId>
-                <version>1.2</version>
+                <version>${po-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.milkbowl.vault</groupId>
+                <artifactId>VaultAPI</artifactId>
+                <optional>true</optional>
+                <version>${vault.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.rlf</groupId>
@@ -230,6 +276,16 @@
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-AWE330</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-FAWE</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.clip.deluxechat</groupId>
+                <artifactId>DeluxeChatPlaceholderAPI</artifactId>
+                <version>${deluxechat.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

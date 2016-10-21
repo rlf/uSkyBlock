@@ -4,145 +4,644 @@ version: ${project.version}
 description: Ultimate SkyBlock v${gitTag}-${buildNumber}-${travis.buildNumber}
 author: Talabrek, R4zorax and others
 load: STARTUP
-depend: [Vault, WorldEdit, WorldGuard]
-softdepend: [Multiverse-Core,ActionBarAPI,TitleManager,AsyncWorldEdit,MVdWPlaceholderAPI]
-commands:
-    island:
-        description: Commands to use your island
-        aliases: [is, skyblock, sb]
-        usage:  |
-             /island [restart/sethome/info/level/lock/unlock/top/party]
-    usb:
-        description: admin commands
-        aliases: [dev]
-        usage:  |
-            /usb for more info
-    challenges:
-        description: skyblock challenges
-        aliases: [c, challenge]
-        usage:  |  
-            /challenges help for more information
-    islandtalk:
-        description: Chat with your island
-        aliases: [istalk, it]
-        usage: |
-            /it message
-    partytalk:
-        description: Chat with your party
-        aliases: [ptalk, ptk]
-        usage: |
-            /ptk message
-permissions:
-  usb.*:
-    children:
-      usb.island.*:
-        children:
-          usb.island.create:
-            description: Let the player use the /island command
-          usb.island.info:
-            description: Let the player check their island info(level make-up)
-          usb.island.level:
-            description: Let the player check their island level
-          usb.island.topten:
-            description: Let the player see the top ten list
-          usb.island.sethome:
-            description: Let the player set their island teleport point
-          usb.island.challenges:
-            description: Let the player use the /challenges command
-          usb.island.warp:
-            description: Let the player use /island warp to warp to an open island.
-          usb.island.ban:
-            description: Let the player use /island ban to ban players from warping to their island.
-          usb.island.talk:
-            description: Let the player talk to the island (/islandtalk)
+softdepend:
+ # mandatory dependencies
+ - Vault
+ - WorldEdit
+ - WorldGuard
+ - Multiverse-Core
+ # optional dependencies
+ - ActionBarAPI
+ - TitleManager
+ # WE/AWE
+ - FastAsyncWorldEdit
+ - AsyncWorldEdit
+ # placeholders
+ - MVdWPlaceholderAPI
 
-      usb.biome.*:
-        children:
-          usb.biome.ocean:
-            description: Let the player change their islands biome to OCEAN.
-          usb.biome.jungle:
-            description: Let the player change their islands biome to JUNGLE.
-          usb.biome.hell:
-            description: Let the player change their islands biome to HELL.
-          usb.biome.sky:
-            description: Let the player change their islands biome to SKY.
-          usb.biome.desert:
-            description: Let the player change their islands biome to DESERT.
-          usb.biome.forest:
-            description: Let the player change their islands biome to FOREST.
-          usb.biome.swampland:
-            description: Let the player change their islands biome to SWAMPLAND.
-          usb.biome.mushroom:
-            description: Let the player change their islands biome to MUSHROOM_ISLAND.
-          usb.biome.taiga:
-            description: Let the player change their islands biome to TAIGA.
-          usb.biome.plains:
-            description: Let the player change their islands biome to PLAINS.
-          usb.biome.extreme_hills:
-            description: Let the player change their islands biome to EXTREME_HILLS.
-      usb.extra.*:
-        children:
-          usb.extra.hunger:
-            description: The player will lose hunger 25 percent slower.
-          usb.extra.hunger2:
-            description: The player will lose hunger 50 percent slower.
-          usb.extra.hunger3:
-            description: The player will lose hunger 75 percent slower.
-          usb.extra.hunger4:
-            description: The player won't lose hunger on their island.
-          usb.extra.partysize:
-            description: The player can have 8 total members on their island, which is double the default.
-          usb.extra.addwarp:
-            description: The player can open his island allowing other players to warp there.
-      usb.party.*:
-        children:
-          usb.party.create:
-            description: Let a player invite other players to join a party
-          usb.party.kick:
-            description: Let a player kick other players
-          usb.party.join:
-            description: Let a player join another player's party
-          usb.party.talk:
-            description: Let the player use the /partytalk command.
-      usb.mod.*:
-        children:
-          usb.mod.protect:
-            description: Let a player add protection to another player's island
-          usb.mod.protectall:
-            description: Let a player try to add protection to all unprotected islands
-          usb.mod.topten:
-            description: Let a player manually update the top ten list
-          usb.mod.goto:
-            description: Let a player teleport to another player's island
-          usb.mod.party:
-            description: Let a player access the moderator party commands
-          usb.mod.challenges:
-            description: Let a player access the moderator challenge commands to complete and reset another player's challenges. 
-          usb.mod.bypasscooldowns:
-            description: Let a player bypass the cooldowns for the /island info and /island restart commands
-          usb.mod.bypassprotection:
-            description: Let a player bypass the built in island protection
-          usb.mod.bypassteleport:
-            description: Let a player bypass the teleport wait time
-          usb.mod.setbiome:
-            description: Let a player set another players biome.
-      usb.admin.*:
-        children:
-          usb.admin.reload:
-            description: Let a player reload the config.yml
-          usb.admin.delete:
-            description: Let a player completely remove a player's island (including blocks)
-          usb.admin.remove:
-            description: Let a player remove another player's ownership of an island (island blocks remain)
-          usb.admin.register:
-            description: Let a player register the nearest island (using the bedrock) to another player.
-          usb.admin.bypassspawnprotection:
-            description: Let a player bypass the built in spawn protection.
-          usb.admin.purge:
-            description: Let a player purge old islands.
-          usb.admin.import:
-            description: Let a player import other-formats (players, islands, orphans).
-          usb.admin.topten:
-            description: Let a player force top-ten regeneration.
-          usb.admin.orphan:
-            description: Let a player check and modify the orphan list
+commands:
+  challenges:
+    description: 'complete and list challenges'
+    aliases: [c]
+    permission: usb.island.challenges
+  island:
+    description: 'general island command'
+    aliases: [is]
+    permission: usb.island.create
+  islandtalk:
+    description: 'talk to players on your island'
+    aliases: [istalk, it]
+    permission: usb.island.talk
+  partytalk:
+    description: 'talk to your island party'
+    aliases: [ptalk, ptk]
+    permission: usb.party.talk
+  usb:
+    description: 'Ultimate SkyBlock Admin'
+
+permissions:
+  #
+  # Permission Groups
+  # =================
+  usb.use:
+    description: The default group for normal uSkyBlock usage
+    default: true
+    children:
+      usb.island.challenges: true
+      usb.island.create: true
+      usb.island.home: true
+      usb.island.info: true
+      usb.island.level: true
+      usb.island.limit: true
+      usb.island.log: true
+      usb.island.restart: true
+      usb.island.sethome: true
+      usb.island.signs.place: true
+      usb.island.signs.use: true
+      usb.island.spawn: true
+      usb.island.top: true
+      usb.biome.ocean: true
+      usb.party.join: true
+      usb.party.talk: true
+
+  usb.social:
+    description: The advanced social group for uSkyBlock usage (adds party and stuff)
+    default: false
+    children:
+      usb.island.ban: true
+      usb.island.info.other: true
+      usb.island.level.other: true
+      usb.island.lock: true
+      usb.island.makeleader: true
+      usb.island.setwarp: true
+      usb.island.talk: true
+      usb.island.togglewarp: true
+      usb.island.trust: true
+      usb.island.warp: true
+      usb.party.info: true
+      usb.party.invite: true
+      usb.party.invites: true
+      usb.party.kick: true
+      usb.party.leave: true
+      usb.party.talk: true
+      usb.party.uninvite: true
+
+  usb.mod:
+    description: The default group for moderator uSkyBlock usage
+    default: false
+    children:
+      usb.mod.bypasscooldowns: true
+      usb.mod.bypassprotection: true
+      usb.mod.bypassteleport: true
+      usb.mod.challenges: true
+      usb.mod.goto: true
+      usb.mod.topten: true
+
+  usb.admin:
+    description: The default group for administrator uSkyBlock usage
+    default: false
+    children:
+      usb.admin.addmember: true
+      usb.admin.cooldown: true
+      usb.admin.delete: true
+      usb.admin.doc: true
+      usb.admin.import: true
+      usb.admin.ignore: true
+      usb.admin.info: true
+      usb.admin.lang: true
+      usb.admin.maintenance: true
+      usb.admin.makeleader: true
+      usb.admin.orphan: true
+      usb.admin.perk: true
+      usb.admin.protect: true
+      usb.admin.protectall: true
+      usb.admin.purge: true
+      usb.admin.region: true
+      usb.admin.register: true
+      usb.admin.reload: true
+      usb.admin.remove: true
+      usb.admin.setbiome: true
+      usb.admin.topten: true
+      usb.admin.version: true
+      usb.exempt.ban: true
+      usb.exempt.cooldown.biome: true
+      usb.exempt.cooldown.create: true
+      usb.exempt.cooldown.restart: true
+
+  # Generic Groups
+  # --------------
+  usb.admin.*:
+    default: op # default-value, redundant
+    children:
+      usb.admin.addmember: true
+      usb.admin.cache: true
+      usb.admin.config: true
+      usb.admin.cooldown: true
+      usb.admin.debug: true
+      usb.admin.delete: true
+      usb.admin.doc: true
+      usb.admin.get: true
+      usb.admin.ignore: true
+      usb.admin.import: true
+      usb.admin.info: true
+      usb.admin.jobs: true
+      usb.admin.jobs.stats: true
+      usb.admin.lang: true
+      usb.admin.maintenance: true
+      usb.admin.makeleader: true
+      usb.admin.nbt: true
+      usb.admin.orphan: true
+      usb.admin.perk: true
+      usb.admin.protect: true
+      usb.admin.protectall: true
+      usb.admin.purge: true
+      usb.admin.region: true
+      usb.admin.register: true
+      usb.admin.reload: true
+      usb.admin.remove: true
+      usb.admin.set: true
+      usb.admin.setbiome: true
+      usb.admin.topten: true
+      usb.admin.version: true
+      usb.admin.wg: true
+
+  usb.biome.*:
+    default: false
+    children:
+      usb.biome.deep_ocean: true
+      usb.biome.desert: true
+      usb.biome.extreme_hills: true
+      usb.biome.forest: true
+      usb.biome.hell: true
+      usb.biome.jungle: true
+      usb.biome.mushroom: true
+      usb.biome.ocean: false # default: true
+      usb.biome.plains: true
+      usb.biome.sky: true
+      usb.biome.swampland: true
+      usb.biome.taiga: true
+
+  usb.exempt.*:
+    children:
+      usb.exempt.ban: true
+      usb.exempt.cooldown: true
+      usb.exempt.cooldown.biome: true
+      usb.exempt.cooldown.create: true
+      usb.exempt.cooldown.restart: true
+
+  usb.island.*:
+    children:
+      usb.island.ban: true
+      usb.island.challenges: true
+      usb.island.create: true
+      usb.island.home: true
+      usb.island.info: true
+      usb.island.info.other: true
+      usb.island.level: true
+      usb.island.level.other: true
+      usb.island.limit: true
+      usb.island.lock: true
+      usb.island.log: true
+      usb.island.makeleader: true
+      usb.island.restart: true
+      usb.island.sethome: true
+      usb.island.setwarp: true
+      usb.island.signs: true
+      usb.island.signs.place: true
+      usb.island.signs.use: true
+      usb.island.spawn: true
+      usb.island.talk: true
+      usb.island.togglewarp: true
+      usb.island.top: true
+      usb.island.trust: true
+      usb.island.warp: true
+
+  usb.mod.*:
+    children:
+      usb.mod.bypasscooldowns: true
+      usb.mod.bypassprotection: true
+      usb.mod.bypassteleport: true
+      usb.mod.challenges: true
+      usb.mod.goto: true
+      usb.mod.topten: true
+
+  usb.party.*:
+    children:
+      usb.party.info: true
+      usb.party.invite: true
+      usb.party.invites: true
+      usb.party.join: true
+      usb.party.kick: true
+      usb.party.leave: true
+      usb.party.talk: true
+      usb.party.uninvite: true
+
+  usb.schematic.*:
+    default: false
+    children:
+      usb.schematic.default: false # default: true
+      usb.schematic.skySMP: true
+
+  #
+  # Permission Descriptions
+  # =======================
+  usb.admin.addmember:
+    description: 'Grants access to /usb island addmember - adds the player to the island'
+
+  usb.admin.cache:
+    description: 'Grants access to /usb flush - flushes all caches to files'
+
+  usb.admin.config:
+    description: 'Grants access to /usb config - open GUI for config'
+
+  usb.admin.cooldown:
+    description: |
+      Grants access to /usb cooldown - Controls player-cooldowns
+      /usb cooldown clear - clears the cooldown on a command (* = all)
+      /usb cooldown list - lists all the active cooldowns
+      /usb cooldown restart - restarts the cooldown on the command
+
+  usb.admin.debug:
+    description: |
+      Grants access to /usb debug - control debugging
+      /usb debug enable - toggle debug-logging
+      /usb debug flush - flush current content of the logger to file.
+      /usb debug setlevel - set debug-level
+
+  usb.admin.delete:
+    description: 'Grants access to /usb island delete - delete the island (removes the blocks)'
+
+  usb.admin.doc:
+    description: 'Grants access to /usb doc - saves documentation of the commands to a file'
+
+  usb.admin.get:
+    description: 'Grants access to /usb island get - advanced command for getting island-data'
+
+  usb.admin.ignore:
+    description: 'Grants access to /usb island ignore - toggles the islands ignore status'
+
+  usb.admin.import:
+    description: 'Grants access to /usb import - imports players and islands from other formats'
+
+  usb.admin.info:
+    description: |
+      Grants access to /usb info - show player-information
+      /usb island info - print out info about the island
+
+  usb.admin.jobs:
+    description: 'Grants access to /usb jobs - controls async jobs'
+
+  usb.admin.jobs.stats:
+    description: 'Grants access to /usb jobs stats - show statistics'
+
+  usb.admin.lang:
+    description: 'Grants access to /usb lang - changes the language of the plugin, and reloads'
+
+  usb.admin.maintenance:
+    description: 'Grants access to /usb maintenance - toggles maintenance mode'
+
+  usb.admin.makeleader:
+    description: 'Grants access to /usb island makeleader - transfer leadership to another player'
+
+  usb.admin.nbt:
+    description: |
+      Grants access to /usb nbt - advanced info about NBT stuff
+      /usb nbt add - adds the NBTTag on the currently held item
+      /usb nbt info - shows the NBTTag for the currently held item
+      /usb nbt set - sets the NBTTag on the currently held item
+
+  usb.admin.orphan:
+    description: |
+      Grants access to /usb orphan - manage orphans
+      /usb orphan clear - clear orphans
+      /usb orphan count - count orphans
+      /usb orphan list - list orphans
+
+  usb.admin.perk:
+    description: |
+      Grants access to /usb perk - shows perk-information
+      /usb perk list - lists all perks
+
+  usb.admin.protect:
+    description: 'Grants access to /usb island protect - protects the island'
+
+  usb.admin.protectall:
+    description: 'Grants access to /usb protectall - protects all islands (time consuming)'
+
+  usb.admin.purge:
+    description: |
+      Grants access to /usb island purge - purges the island
+      /usb purge - purges all abandoned islands
+
+  usb.admin.region:
+    description: |
+      Grants access to /usb region - region manipulations
+      /usb region border - shows the non-chunk-aligned borders
+      /usb region chunk - shows the borders of the current chunk
+      /usb region hide - hides the regions again
+      /usb region inner - shows the borders of the inner-chunks
+      /usb region outer - shows the borders of the outer-chunks
+      /usb region refresh - refreshes the existing animations
+      /usb region show - shows the borders of the current island
+      /usb region tick - set the ticks between animations
+
+  usb.admin.register:
+    description: 'Grants access to /usb island register - set a players island to your location'
+
+  usb.admin.reload:
+    description: 'Grants access to /usb reload - reload configuration from file.'
+
+  usb.admin.remove:
+    description: |
+      Grants access to /usb fix-flatland - tries to fix the the area of flatland.
+      /usb island remove - removes the player from the island
+
+  usb.admin.set:
+    description: 'Grants access to /usb island set - advanced command for setting island-data'
+
+  usb.admin.setbiome:
+    description: 'Grants access to /usb island setbiome - sets the biome of the island'
+
+  usb.admin.topten:
+    description: 'enables user to all-ways generate top-ten (no caching)'
+
+  usb.admin.version:
+    description: 'Grants access to /usb version - displays version information'
+
+  usb.admin.wg:
+    description: |
+      Grants access to /usb wg - various WorldGuard utilities
+      /usb wg load - load the region chunks
+      /usb wg refresh - refreshes the chunks around the player
+      /usb wg unload - load the region chunks
+      /usb wg update - update the WG regions
+
+  usb.biome.deep_ocean:
+    default: false
+    description: 'Let the player change their islands biome to DEEP_OCEAN'
+
+  usb.biome.desert:
+    default: false
+    description: 'Let the player change their islands biome to DESERT'
+
+  usb.biome.extreme_hills:
+    default: false
+    description: 'Let the player change their islands biome to EXTREME_HILLS'
+
+  usb.biome.forest:
+    default: false
+    description: 'Let the player change their islands biome to FOREST'
+
+  usb.biome.hell:
+    default: false
+    description: 'Let the player change their islands biome to HELL'
+
+  usb.biome.jungle:
+    default: false
+    description: 'Let the player change their islands biome to JUNGLE'
+
+  usb.biome.mushroom:
+    default: false
+    description: 'Let the player change their islands biome to MUSHROOM'
+
+  usb.biome.ocean:
+    default: true
+    description: 'Let the player change their islands biome to OCEAN'
+
+  usb.biome.plains:
+    default: false
+    description: 'Let the player change their islands biome to PLAINS'
+
+  usb.biome.sky:
+    default: false
+    description: 'Let the player change their islands biome to SKY'
+
+  usb.biome.swampland:
+    default: false
+    description: 'Let the player change their islands biome to SWAMPLAND'
+
+  usb.biome.taiga:
+    default: false
+    description: 'Let the player change their islands biome to TAIGA'
+
+  usb.donor.100:
+    default: false
+    description: 'adds perks: rewBonus:0.5'
+
+  usb.donor.25:
+    default: false
+    description: 'adds perks: rewBonus:0.15'
+
+  usb.donor.50:
+    default: false
+    description: 'adds perks: rewBonus:0.2'
+
+  usb.donor.75:
+    default: false
+    description: 'adds perks: rewBonus:0.3'
+
+  usb.donor.all:
+    default: false
+    description: 'adds perks: rewBonus:0.1'
+
+  usb.donorbonus:
+    default: false
+    description: 'adds perks: extraItems:[Bow, 32x Arrow, Stone Sword]'
+
+  group.memberplus:
+    default: false
+    description: 'adds perks: rewBonus:0.05'
+
+
+  usb.exempt.ban:
+    description: 'exempts user from being banned'
+
+  usb.exempt.cooldown.biome:
+    description: 'exempt player from biome-cooldown'
+
+  usb.exempt.cooldown.create:
+    description: 'exempt player from create-cooldown'
+
+  usb.exempt.cooldown.restart:
+    description: 'exempt player from restart-cooldown'
+
+  usb.extra.hunger:
+    default: false
+    description: 'adds perks: hungerReduction:0.25'
+
+  usb.extra.hunger2:
+    default: false
+    description: 'adds perks: hungerReduction:0.5'
+
+  usb.extra.hunger3:
+    default: false
+    description: 'adds perks: hungerReduction:0.75'
+
+  usb.extra.hunger4:
+    default: false
+    description: 'adds perks: hungerReduction:1.0'
+
+  usb.extra.partysize:
+    default: false
+    description: 'adds perks: maxPartySize:8'
+
+  usb.extra.partysize1:
+    default: false
+    description: 'adds perks: maxPartySize:5'
+
+  usb.extra.partysize2:
+    default: false
+    description: 'adds perks: maxPartySize:6'
+
+  usb.extra.partysize3:
+    default: false
+    description: 'adds perks: maxPartySize:7'
+
+  usb.island.ban:
+    description: 'Grants access to /island ban - ban/unban a player from your island.'
+
+  usb.island.challenges:
+    description: |
+      Grants access to /challenges - complete and list challenges
+      /challenges complete - try to complete a challenge
+      /challenges info - show information about the challenge
+
+  usb.island.create:
+    description: |
+      Grants access to /island - general island command
+      /island auto - teleports you to your island (or create one)
+      /island create - create an island
+      /island party - show party information
+
+  usb.island.home:
+    description: 'Grants access to /island home - teleport to the island home'
+
+  usb.island.info:
+    description: 'Grants access to /island info - check your or anothers island info'
+
+  usb.island.info.other:
+    description: 'allows user to see others island info'
+
+  usb.island.level:
+    description: 'Grants access to /island level - check your or anothers island level'
+
+  usb.island.level.other:
+    description: 'allows user to query for others levels'
+
+  usb.island.limit:
+    description: 'Grants access to /island limits - show the islands limits'
+
+  usb.island.lock:
+    description: 'Grants access to /island lock - lock your island to non-party members.'
+
+  usb.island.log:
+    description: 'Grants access to /island log - display log'
+
+  usb.island.makeleader:
+    description: 'Grants access to /island makeleader - transfer leadership to another member'
+
+  usb.island.restart:
+    description: 'Grants access to /island restart - delete your island and start a new one.'
+
+  usb.island.sethome:
+    description: 'Grants access to /island sethome - set the island-home'
+
+  usb.island.setwarp:
+    description: 'Grants access to /island setwarp - set your islands warp location'
+
+  usb.island.signs.place:
+    description: 'allows user to place [usb] signs'
+
+  usb.island.signs.use:
+    description: 'allows user to use [usb] signs'
+
+  usb.island.spawn:
+    description: 'Grants access to /island spawn - teleports you to the skyblock spawn'
+
+  usb.island.talk:
+    description: 'Grants access to /islandtalk - talk to players on your island'
+
+  usb.island.togglewarp:
+    description: 'Grants access to /island togglewarp - enable/disable warping to your island.'
+
+  usb.island.top:
+    description: 'Grants access to /island top - display the top10 of islands'
+
+  usb.island.trust:
+    description: 'Grants access to /island trust - trust/untrust a player to help on your island.'
+
+  usb.island.warp:
+    description: 'Grants access to /island warp - warp to another players island'
+
+  usb.mod.bypasscooldowns:
+    description: 'allows user to bypass cooldowns'
+
+  usb.mod.bypassprotection:
+    description: 'allows user to bypass visitor-protections'
+
+  usb.mod.bypassteleport:
+    description: 'allows user to bypass teleport-delay'
+
+  usb.mod.challenges:
+    description: |
+      Grants access to /usb challenge - Manage challenges for a player
+      /usb challenge complete - completes the challenge for the player
+      /usb challenge rank - complete all challenges in the rank
+      /usb challenge reset - resets the challenge for the player
+      /usb challenge resetall - resets all challenges for the player
+
+  usb.mod.goto:
+    description: 'Grants access to /usb goto - teleport to another players island'
+
+  usb.mod.topten:
+    description: 'Grants access to /usb topten - manually update the top 10 list'
+
+  usb.party.info:
+    description: 'Grants access to /island party info - shows information about your party'
+
+  usb.party.invite:
+    description: 'Grants access to /island invite - invite a player to your island'
+
+  usb.party.invites:
+    description: 'Grants access to /island party invites - show pending invites'
+
+  usb.party.join:
+    description: 'Grants access to /island accept - accept/reject an invitation.'
+
+  usb.party.kick:
+    description: 'Grants access to /island kick - remove a member from your island.'
+
+  usb.party.leave:
+    description: 'Grants access to /island leave - leave your party'
+
+  usb.party.talk:
+    description: 'Grants access to /partytalk - talk to your island party'
+
+  usb.party.uninvite:
+    description: 'Grants access to /island party uninvite - withdraw an invite'
+
+  usb.schematic.default:
+    description: 'adds perks: schematics:[default]'
+
+  usb.schematic.skySMP:
+    description: 'adds perks: schematics:[skySMP]'
+
+  usb.smallbonus:
+    default: false
+    description: 'adds perks: extraItems:[16x Cobblestone, 5x Cooked Porkchop]'
+
+  usb.largebonus:
+    default: false
+    description: 'adds perks: extraItems:[5x Dirt, 5x Sand]'
+
+  usb.mediumbonus:
+    default: false
+    description: 'adds perks: extraItems:[16x Torch, Lava Bucket]'
+
+  usb.extremebonus:
+    default: false
+    description: 'adds perks: extraItems:[8x Bone, 4x Coal]'
+
+  usb.giantbonus:
+    default: false
+    description: 'adds perks: extraItems:[Grass, Mycelium]'

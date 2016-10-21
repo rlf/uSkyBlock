@@ -4,10 +4,9 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 
 /**
  * Responsible for calculating player specific perks based on permissions.
@@ -70,13 +67,16 @@ public class PerkLogic {
                         schemeName,
                         config.getString("description", null)
                 );
-                islandPerks.put(schemeName, new IslandPerk(schemeName, perm, itemStack, perk));
+                islandPerks.put(schemeName, new IslandPerk(schemeName, perm, itemStack, perk,
+                        config.getDouble("scoreMultiply", 1d), config.getDouble("scoreOffset", 0d)));
             }
         }
         for (String schemeName : schemeNames) {
             Perk perk = new PerkBuilder(defaultPerk).schematics(schemeName).build();
             if (!islandPerks.containsKey(schemeName)) {
-                islandPerks.put(schemeName, new IslandPerk(schemeName, "usb.schematic." + schemeName, ItemStackUtil.createItemStack("GRASS", schemeName, null), perk));
+                islandPerks.put(schemeName, new IslandPerk(schemeName, "usb.schematic." + schemeName,
+                        ItemStackUtil.createItemStack("GRASS", schemeName, null), perk,
+                        1d, 0d));
             }
         }
     }
@@ -92,7 +92,7 @@ public class PerkLogic {
     public Set<String> getSchemes(Player player) {
         Set<String> schemes = new LinkedHashSet<>();
         for (IslandPerk islandPerk : islandPerks.values()) {
-            if (hasPermission(player, islandPerk.getPermission())) {
+            if (player.hasPermission(islandPerk.getPermission())) {
                 schemes.add(islandPerk.getSchemeName());
             }
         }
@@ -103,13 +103,14 @@ public class PerkLogic {
         if (islandPerks.containsKey(schemeName)) {
             return islandPerks.get(schemeName);
         }
-        return new IslandPerk(schemeName, "usb.schematic." + schemeName, ItemStackUtil.createItemStack("GRASS", schemeName, null), defaultPerk);
+        return new IslandPerk(schemeName, "usb.schematic." + schemeName,
+                ItemStackUtil.createItemStack("GRASS", schemeName, null), defaultPerk);
     }
 
     private Perk createPerk(Player player) {
         PerkBuilder builder = new PerkBuilder(defaultPerk);
         for (String perm : donorPerks.keySet()) {
-            if (hasPermission(player, perm)) {
+            if (player.hasPermission(perm)) {
                 builder.combine(donorPerks.get(perm));
             }
         }

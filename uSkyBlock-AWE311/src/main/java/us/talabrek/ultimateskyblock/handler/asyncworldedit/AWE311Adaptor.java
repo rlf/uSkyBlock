@@ -9,7 +9,9 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
+import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -24,6 +26,7 @@ import org.primesoft.asyncworldedit.worldedit.AsyncEditSessionFactory;
 import org.primesoft.asyncworldedit.worldedit.CancelabeEditSession;
 import org.primesoft.asyncworldedit.worldedit.ThreadSafeEditSession;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 
@@ -172,10 +175,15 @@ public class AWE311Adaptor implements AWEAdaptor {
         awe.getBlockPlacer().performAsAsyncJob(tsSession, playerEntry, "loadIslandSchematic", action);
     }
 
-    public ThreadSafeEditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
+    public ThreadSafeEditSession createEditSession(World bukkitWorld, int maxBlocks) {
         WorldEdit worldEdit = WorldEditHandler.getWorldEdit().getWorldEdit();
         AsyncEditSessionFactory sessionFactory = (AsyncEditSessionFactory) worldEdit.getEditSessionFactory();
         return sessionFactory.getThreadSafeEditSession(bukkitWorld, maxBlocks);
+    }
+
+    @Override
+    public void regenerate(Region region, Runnable onCompletion) {
+        AsyncWorldEditHandler.NULL_ADAPTOR.regenerate(region, onCompletion);
     }
 
     @Override

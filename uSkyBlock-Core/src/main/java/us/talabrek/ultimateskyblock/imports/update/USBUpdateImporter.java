@@ -12,13 +12,20 @@ import java.io.File;
  * file updating.
  */
 public class USBUpdateImporter implements USBImporter {
+    private uSkyBlock plugin;
+
     @Override
     public String getName() {
         return "update-islands";
     }
 
     @Override
-    public boolean importFile(uSkyBlock plugin, File file) {
+    public void init(uSkyBlock plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public Boolean importFile(File file) {
         String islandName = FileUtil.getBasename(file.getName());
         plugin.getIslandLogic().getIslandInfo(islandName);
         plugin.getIslandLogic().removeIslandFromMemory(islandName);
@@ -26,17 +33,12 @@ public class USBUpdateImporter implements USBImporter {
     }
 
     @Override
-    public int importOrphans(uSkyBlock plugin, File configFolder) {
-        return 0;
-    }
-
-    @Override
-    public File[] getFiles(uSkyBlock plugin) {
+    public File[] getFiles() {
         return plugin.directoryIslands.listFiles(IslandUtil.createIslandFilenameFilter());
     }
 
     @Override
-    public void completed(uSkyBlock plugin, int success, int failed) {
+    public void completed(int success, int failed, int skipped) {
         // Do nothing
     }
 }

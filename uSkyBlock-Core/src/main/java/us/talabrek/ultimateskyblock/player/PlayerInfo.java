@@ -1,32 +1,37 @@
 package us.talabrek.ultimateskyblock.player;
 
-import com.google.common.base.Preconditions;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
+import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 import us.talabrek.ultimateskyblock.util.UUIDUtil;
+import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PlayerInfo implements Serializable {
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
+public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.api.PlayerInfo {
     private static final String CN = PlayerInfo.class.getName();
     private static final Logger log = Logger.getLogger(CN);
     private static final long serialVersionUID = 1L;
@@ -34,13 +39,12 @@ public class PlayerInfo implements Serializable {
     private String playerName;
     private String displayName;
     private UUID uuid;
-    private boolean hasIsland;
 
     private Location islandLocation;
 
     private Location homeLocation;
 
-    private FileConfiguration playerData;
+    private volatile FileConfiguration playerData;
     private File playerConfigFile;
 
     private boolean islandGenerating = false;
@@ -49,25 +53,31 @@ public class PlayerInfo implements Serializable {
     public PlayerInfo(String currentPlayerName, UUID playerUUID) {
         this.uuid = playerUUID;
         this.playerName = currentPlayerName;
-        this.playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, this.playerName + ".yml");
-        if (this.playerConfigFile.exists() || !uSkyBlock.getInstance().getPlayerNameChangeManager().hasNameChanged(playerUUID, currentPlayerName)) {
-            loadPlayer();
+        // Prefer UUID over Name
+        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, UUIDUtil.asString(playerUUID) + ".yml");
+        File nameFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
+        if (!playerConfigFile.exists() && nameFile.exists() && !currentPlayerName.equals(PlayerDB.UNKNOWN_PLAYER_NAME)) {
+            nameFile.renameTo(playerConfigFile);
         }
+        playerData = new YmlConfiguration();
+        if (playerConfigFile.exists()) {
+            FileUtil.readConfig(playerData, playerConfigFile);
+        }
+        loadPlayer();
     }
-    
+
     public void startNewIsland(final Location l) {
-        this.hasIsland = true;
         this.setIslandLocation(l);
         this.homeLocation = null;
     }
 
     public void removeFromIsland() {
-        this.hasIsland = false;
         this.setIslandLocation(null);
         this.homeLocation = null;
         islandGenerating = false;
     }
 
+    @Override
     public boolean getHasIsland() {
         return getIslandLocation() != null;
     }
@@ -76,10 +86,19 @@ public class PlayerInfo implements Serializable {
         return LocationUtil.getIslandName(this.islandLocation);
     }
 
+    @Override
     public Player getPlayer() {
-        return Bukkit.getPlayer(this.playerName);
+        Player player = null;
+        if (uuid != null) {
+            player = uSkyBlock.getInstance().getPlayerDB().getPlayer(uuid);
+        }
+        if (player == null && playerName != null) {
+            player = uSkyBlock.getInstance().getPlayerDB().getPlayer(playerName);
+        }
+        return player;
     }
 
+    @Override
     public String getPlayerName() {
         return this.playerName;
     }
@@ -88,10 +107,12 @@ public class PlayerInfo implements Serializable {
         this.islandLocation = l != null ? l.clone() : null;
     }
 
+    @Override
     public Location getIslandLocation() {
-        return islandLocation != null && hasIsland && islandLocation.getBlockY() != 0 ? islandLocation.clone() : null;
+        return islandLocation != null && islandLocation.getBlockY() != 0 ? islandLocation.clone() : null;
     }
 
+    @Override
     public Location getIslandNetherLocation() {
         Location l = getIslandLocation();
         World nether = uSkyBlock.getInstance().getSkyBlockNetherWorld();
@@ -100,7 +121,7 @@ public class PlayerInfo implements Serializable {
         }
         if (l != null) {
             l.setWorld(nether);
-            l.setY(l.getY()/2);
+            l.setY(l.getY() / 2);
         }
         return l;
     }
@@ -109,10 +130,12 @@ public class PlayerInfo implements Serializable {
         this.homeLocation = l != null ? l.clone() : null;
     }
 
+    @Override
     public Location getHomeLocation() {
         return homeLocation != null ? homeLocation.clone() : null;
     }
 
+    @Override
     public String getDisplayName() {
         return displayName != null ? displayName : playerName;
     }
@@ -123,7 +146,6 @@ public class PlayerInfo implements Serializable {
 
     public void setJoinParty(final Location l) {
         this.islandLocation = l != null ? l.clone() : null;
-        this.hasIsland = true;
         // TODO: 09/09/2015 - R4zorax: Use the leaders home instead
         this.homeLocation = l != null ? l.clone() : null;
     }
@@ -135,7 +157,7 @@ public class PlayerInfo implements Serializable {
         }
         IslandInfo island = getIslandInfo();
         if (island != null) {
-            island.sendMessageToOnlineMembers(I18nUtil.tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", getPlayerName(), challenge));
+            island.sendMessageToOnlineMembers(tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", getPlayerName(), challenge));
         }
     }
 
@@ -156,9 +178,8 @@ public class PlayerInfo implements Serializable {
     }
 
     private void setupPlayer() {
-        FileConfiguration playerConfig = getConfig();
+        FileConfiguration playerConfig = playerData;
         ConfigurationSection pSection = playerConfig.createSection("player");
-        pSection.set("hasIsland", false);
         pSection.set("islandX", 0);
         pSection.set("islandY", 0);
         pSection.set("islandZ", 0);
@@ -167,60 +188,40 @@ public class PlayerInfo implements Serializable {
         pSection.set("homeZ", 0);
         pSection.set("homeYaw", 0);
         pSection.set("homePitch", 0);
+        pSection.set("perms", null);
     }
-    
-    private PlayerInfo loadPlayer() {
-        Player onlinePlayer = getPlayer();
-        try {
-            log.entering(CN, "loadPlayer:" + this.playerName);
-            FileConfiguration playerConfig = getConfig();
-            if (!playerConfig.contains("player.hasIsland")) {
-                this.hasIsland = false;
-                this.islandLocation = null;
-                this.homeLocation = null;
-                createPlayerConfig();
-                return this;
-            }
-            try {
-                this.displayName = playerConfig.getString("player.displayName", playerName);
-                this.uuid = UUIDUtil.fromString(playerConfig.getString("player.uuid", null));
-                this.hasIsland = playerConfig.getBoolean("player.hasIsland");
-                this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
-                        playerConfig.getInt("player.islandX"), playerConfig.getInt("player.islandY"), playerConfig.getInt("player.islandZ"));
-                this.homeLocation = new Location(uSkyBlock.getSkyBlockWorld(),
-                        playerConfig.getInt("player.homeX") + 0.5, playerConfig.getInt("player.homeY") + 0.2, playerConfig.getInt("player.homeZ") + 0.5,
-                        (float) playerConfig.getDouble("player.homeYaw", 0.0),
-                        (float) playerConfig.getDouble("player.homePitch", 0.0));
 
-                log.exiting(CN, "loadPlayer");
-                return this;
-            } catch (Exception e) {
-                e.printStackTrace();
-                uSkyBlock.log(Level.INFO, "Returning null while loading, not good!");
-                return null;
-            }
-        } finally {
-            if (onlinePlayer != null && onlinePlayer.isOnline()) {
-                updatePlayerInfo(onlinePlayer);
-            }
+    private PlayerInfo loadPlayer() {
+        if (!playerData.contains("player.islandY") || playerData.getInt("player.islandY", 0) == 0) {
+            this.islandLocation = null;
+            this.homeLocation = null;
+            createPlayerConfig();
+            return this;
         }
-    }
-    
-    // TODO: 09/12/2014 - R4zorax: All this should be made UUID
-    private void reloadPlayerConfig() {
-        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
-        playerData = YamlConfiguration.loadConfiguration(playerConfigFile);
+        try {
+            this.displayName = playerData.getString("player.displayName", playerName);
+            this.uuid = UUIDUtil.fromString(playerData.getString("player.uuid", null));
+            this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
+                    playerData.getInt("player.islandX"), playerData.getInt("player.islandY"), playerData.getInt("player.islandZ"));
+            this.homeLocation = new Location(uSkyBlock.getSkyBlockWorld(),
+                    playerData.getInt("player.homeX") + 0.5, playerData.getInt("player.homeY") + 0.2, playerData.getInt("player.homeZ") + 0.5,
+                    (float) playerData.getDouble("player.homeYaw", 0.0),
+                    (float) playerData.getDouble("player.homePitch", 0.0));
+
+            log.exiting(CN, "loadPlayer");
+            return this;
+        } catch (Exception e) {
+            LogUtil.log(Level.INFO, "Returning null while loading, not good!");
+            return null;
+        }
     }
 
     private void createPlayerConfig() {
-        uSkyBlock.log(Level.FINER, "Creating new player config!");
+        LogUtil.log(Level.FINER, "Creating new player config!");
         setupPlayer();
     }
 
     public FileConfiguration getConfig() {
-        if (playerData == null) {
-            reloadPlayerConfig();
-        }
         return playerData;
     }
 
@@ -240,12 +241,12 @@ public class PlayerInfo implements Serializable {
         // TODO: 11/05/2015 - R4zorax: Instead of saving directly, schedule it for later...
         log.entering(CN, "save", playerName);
         if (playerData == null) {
-            uSkyBlock.log(Level.INFO, "Can't save player data!");
+            LogUtil.log(Level.INFO, "Can't save player data! (" + playerName + ", " + uuid + ", " + playerConfigFile + ")");
             return;
         }
         FileConfiguration playerConfig = playerData;
         playerConfig.set("version", YML_VERSION);
-        playerConfig.set("player.hasIsland", getHasIsland());
+        playerConfig.set("player.hasIsland", null); // Remove it (deprecated)
         playerConfig.set("player.displayName", displayName);
         playerConfig.set("player.uuid", UUIDUtil.asString(uuid));
         Location location = this.getIslandLocation();
@@ -272,10 +273,9 @@ public class PlayerInfo implements Serializable {
             playerConfig.set("player.homeYaw", 0);
             playerConfig.set("player.homePitch", 0);
         }
-        playerConfigFile = new File(uSkyBlock.getInstance().directoryPlayers, playerName + ".yml");
         try {
             playerConfig.save(playerConfigFile);
-            uSkyBlock.log(Level.FINEST, "Player data saved!");
+            LogUtil.log(Level.FINEST, "Player data saved!");
         } catch (IOException ex) {
             uSkyBlock.getInstance().getLogger().log(Level.SEVERE, "Could not save config to " + playerConfigFile, ex);
         }
@@ -283,8 +283,11 @@ public class PlayerInfo implements Serializable {
         dirty = false;
     }
 
-    public Collection<ChallengeCompletion> getChallenges() {
-        return uSkyBlock.getInstance().getChallengeLogic().getChallenges(this);
+    @Override
+    public Collection<us.talabrek.ultimateskyblock.api.ChallengeCompletion> getChallenges() {
+        Collection<us.talabrek.ultimateskyblock.api.ChallengeCompletion> copy = new ArrayList<>();
+        copy.addAll(uSkyBlock.getInstance().getChallengeLogic().getChallenges(this));
+        return copy;
     }
 
     @Override
@@ -293,8 +296,8 @@ public class PlayerInfo implements Serializable {
         String str = "\u00a7bPlayer Info:\n";
         str += ChatColor.GRAY + "  - name: " + ChatColor.DARK_AQUA + getPlayerName() + "\n";
         str += ChatColor.GRAY + "  - nick: " + ChatColor.DARK_AQUA + getDisplayName() + "\n";
-        str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA +  getHasIsland() + "\n";
-        str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA +  LocationUtil.asString(getHomeLocation()) + "\n";
+        str += ChatColor.GRAY + "  - hasIsland: " + ChatColor.DARK_AQUA + getHasIsland() + "\n";
+        str += ChatColor.GRAY + "  - home: " + ChatColor.DARK_AQUA + LocationUtil.asString(getHomeLocation()) + "\n";
         str += ChatColor.GRAY + "  - island: " + ChatColor.DARK_AQUA + LocationUtil.asString(getIslandLocation()) + "\n";
         str += ChatColor.GRAY + "  - banned from: " + ChatColor.DARK_AQUA + getBannedFrom() + "\n";
         str += ChatColor.GRAY + "  - trusted on: " + ChatColor.DARK_AQUA + playerData.getStringList("trustedOn") + "\n";
@@ -302,45 +305,11 @@ public class PlayerInfo implements Serializable {
         return str;
     }
 
-    public void updatePlayerInfo(Player player) {
-        if (!player.getDisplayName().equals(displayName) || !player.getUniqueId().equals(uuid)) {
-            setDisplayName(player.getDisplayName());
-            uuid = player.getUniqueId();
-            save();
-        }
-    }
-
+    @Override
     public UUID getUniqueId() {
         return uuid;
     }
 
-    public synchronized void renameFrom(String oldName) {
-        Preconditions.checkState(!Bukkit.isPrimaryThread(), "This method cannot run in the main server thread!");
-
-        // Delete the new file if for some reason it already exists.
-        if (this.playerConfigFile.exists()) {
-            this.playerConfigFile.delete();
-        }
-        File oldPlayerFile = new File(this.playerConfigFile.getParent(), oldName + ".yml");
-        if (oldPlayerFile.exists()) {
-            // Copy the old file to the new file.
-            try {
-                Files.move(oldPlayerFile.toPath(), this.playerConfigFile.toPath());
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-        // Delete the old player file if it still exists.
-        if (oldPlayerFile.exists()) {
-            oldPlayerFile.delete();
-        }
-
-        // Reload the config.
-        reloadPlayerConfig();
-
-        loadPlayer();
-    }
-    
     public void banFromIsland(String name) {
         List<String> bannedFrom = playerData.getStringList("bannedFrom");
         if (bannedFrom != null && !bannedFrom.contains(name)) {
@@ -359,6 +328,7 @@ public class PlayerInfo implements Serializable {
         }
     }
 
+    @Override
     public List<String> getBannedFrom() {
         return playerData.getStringList("bannedFrom");
     }
@@ -383,6 +353,7 @@ public class PlayerInfo implements Serializable {
         save();
     }
 
+    @Override
     public List<String> getTrustedOn() {
         return playerData.getStringList("trustedOn");
     }
@@ -395,8 +366,9 @@ public class PlayerInfo implements Serializable {
         this.islandGenerating = value;
     }
 
+    @Override
     public IslandInfo getIslandInfo() {
-        if (hasIsland && locationForParty() != null) {
+        if (getHasIsland() && locationForParty() != null) {
             return uSkyBlock.getInstance().getIslandInfo(this);
         }
         return null;
@@ -408,6 +380,68 @@ public class PlayerInfo implements Serializable {
     }
 
     public boolean isClearInventoryOnNextEntry() {
-        return playerData != null && playerData.getBoolean("clearInventoryOnNextEntry", false);
+        return playerData.getBoolean("clearInventoryOnNextEntry", false);
+    }
+
+    public void onTeleport(final Player player) {
+        if (isClearInventoryOnNextEntry()) {
+            uSkyBlock.getInstance().sync(new Runnable() {
+                @Override
+                public void run() {
+                    uSkyBlock.getInstance().clearPlayerInventory(player);
+                }
+            }, 50);
+        }
+        List<String> pending = playerData.getStringList("pending-commands");
+        if (!pending.isEmpty()) {
+            uSkyBlock.getInstance().execCommands(player, pending);
+            playerData.set("pending-commands", null);
+            save();
+        }
+    }
+
+    public boolean execCommands(List<String> commands) {
+        if (commands == null || commands.isEmpty()) {
+            return true;
+        }
+        Player player = getPlayer();
+        if (player != null && player.isOnline()) {
+            uSkyBlock.getInstance().execCommands(player, commands);
+            return true;
+        } else {
+            List<String> pending = playerData.getStringList("pending-commands");
+            pending.addAll(commands);
+            playerData.set("pending-commands", pending);
+            save();
+            return false;
+        }
+    }
+
+    public void addPermissions(List<String> perms) {
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+        if (offlinePlayer == null) {
+            return;
+        }
+        List<String> permList = playerData.getStringList("player.perms");
+        for (String perm : perms) {
+            if (!VaultHandler.hasPermission(offlinePlayer, perm)) {
+                permList.add(perm);
+                VaultHandler.addPermission(offlinePlayer, perm);
+            }
+        }
+        playerData.set("player.perms", permList);
+        save();
+    }
+
+    public void clearPerms(Player player) {
+        // Also clear perms
+        final List<String> perms = playerData.getStringList("player.perms");
+        if (perms != null && !perms.isEmpty()) {
+            for (String perm : perms) {
+                VaultHandler.removePermission(player, perm);
+            }
+            playerData.set("player.perms", null);
+            save();
+        }
     }
 }

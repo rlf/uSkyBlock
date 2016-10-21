@@ -19,17 +19,17 @@ public class PartyCommand extends CompositeCommand {
     private final SkyBlockMenu menu;
 
     public PartyCommand(final uSkyBlock plugin, SkyBlockMenu menu, final InviteHandler inviteHandler) {
-        super("party", "usb.island.create", I18nUtil.tr("show party information"));
+        super("party", null, I18nUtil.tr("show party information"));
         this.plugin = plugin;
         this.menu = menu;
-        add(new AbstractCommand("info", I18nUtil.tr("shows information about your party")) {
+        add(new AbstractCommand("info", "usb.party.info", I18nUtil.tr("shows information about your party")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 sender.sendMessage(plugin.getIslandInfo((Player) sender).toString());
                 return true;
             }
         });
-        add(new AbstractCommand("invites", I18nUtil.tr("show pending invites")) {
+        add(new AbstractCommand("invites", "usb.party.invites", I18nUtil.tr("show pending invites")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
@@ -42,15 +42,15 @@ public class PartyCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new AbstractCommand("uninvite", null, "player", I18nUtil.tr("withdraw an invite")) {
+        add(new AbstractCommand("uninvite", "usb.party.uninvite", "player", I18nUtil.tr("withdraw an invite")) {
             @Override
             public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, final String... args) {
-                if (args.length == 1) {
+                if (args.length == 1 && sender instanceof Player) {
                     plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                         @Override
                         public void run() {
                             IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
-                            if (!islandInfo.isLeader(sender.getName()) || !islandInfo.hasPerm(sender.getName(), "canInviteOthers")) {
+                            if (!islandInfo.isLeader((Player) sender) || !islandInfo.hasPerm(sender.getName(), "canInviteOthers")) {
                                 sender.sendMessage(I18nUtil.tr("\u00a74You don't have permissions to uninvite players."));
                                 return;
                             }

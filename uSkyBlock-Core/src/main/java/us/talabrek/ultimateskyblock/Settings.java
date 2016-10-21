@@ -4,8 +4,7 @@ import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.HashSet;
 import java.util.Locale;
@@ -109,9 +108,10 @@ public class Settings {
             changed = true;
         }
         general_spawnSize = config.getInt("options.general.spawnSize", 50);
-        // TODO: 06/12/2014 - R4zorax: Null pointer protection
-        String chestItemString = config.getString("options.island.chestItems", "");
-        island_chestItems = ItemStackUtil.createItemArray(chestItemString);
+        island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
+                config.getString("options.island.chestItems", null),
+                config.getStringList("options.island.chestItems")
+        ));
 
         island_schematicName = config.getString("options.island.schematicName");
         if (island_schematicName == null || "yourschematicname".equals(island_schematicName) || "uSkyBlockDefault".equals(island_schematicName)) {
@@ -146,7 +146,7 @@ public class Settings {
             nether_enabled = false;
             changed = true;
         }
-        nether_lava_level = config.getInt("nether.lava_level", 32);
+        nether_lava_level = config.getInt("nether.lava_level", config.getInt("nether.lava-level", 32));
         nether_height = config.getInt("nether.height", island_height/2);
         return changed;
     }

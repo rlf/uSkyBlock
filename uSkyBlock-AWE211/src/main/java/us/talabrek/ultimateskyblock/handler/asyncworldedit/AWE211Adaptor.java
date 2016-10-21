@@ -10,7 +10,9 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
+import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -24,6 +26,7 @@ import org.primesoft.asyncworldedit.worldedit.AsyncEditSessionFactory;
 import org.primesoft.asyncworldedit.worldedit.CancelabeEditSession;
 import org.primesoft.asyncworldedit.worldedit.ThreadSafeEditSession;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 
@@ -157,8 +160,13 @@ public class AWE211Adaptor implements AWEAdaptor {
     }
 
     @Override
-    public EditSession createEditSession(BukkitWorld world, int maxBlocks) {
+    public EditSession createEditSession(World world, int maxBlocks) {
         return WorldEditHandler.getWorldEdit().getWorldEdit().getEditSessionFactory().getEditSession(world, maxBlocks);
+    }
+
+    @Override
+    public void regenerate(Region region, Runnable onCompletion) {
+        AsyncWorldEditHandler.NULL_ADAPTOR.regenerate(region, onCompletion);
     }
 
     public void registerCompletion(Player player) {

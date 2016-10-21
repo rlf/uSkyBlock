@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.island.task;
 
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.async.Callback;
@@ -30,7 +29,7 @@ public class RecalculateTopTen extends BukkitRunnable {
                 @Override
                 public void run() {
                     // We use the deprecated on purpose (the other would fail).
-                    Bukkit.getScheduler().runTaskAsynchronously(plugin, RecalculateTopTen.this);
+                    plugin.async(RecalculateTopTen.this);
                 }
             });
         } else {

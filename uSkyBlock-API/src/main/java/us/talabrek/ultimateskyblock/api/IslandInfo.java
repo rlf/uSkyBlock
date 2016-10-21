@@ -98,6 +98,7 @@ public interface IslandInfo {
     /**
      * List of players trusted on this island.
      * @return List of players trusted on this island.
+     * @deprecated Use #getTrusteeUUIDs instead
      */
     List<String> getTrustees();
 
@@ -157,4 +158,19 @@ public interface IslandInfo {
      * @return Returns the current schematic-name for the island).
      */
     String getSchematicName();
+
+    /**
+     * Returns a score-multiplier for this island
+     * @return a score-multiplier for this island (default 1).
+     * @since v2.6.13
+     */
+    double getScoreMultiplier();
+
+    /**
+     * Returns a score-offset for this island
+     * @return a score-offset for this island (default 1).
+     * @since v2.6.13
+     */
+    double getScoreOffset();
+
 }

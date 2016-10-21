@@ -1,33 +1,30 @@
 package us.talabrek.ultimateskyblock.command.island;
 
 import dk.lockfuglsang.minecraft.po.I18nUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.api.event.AcceptEvent;
+import us.talabrek.ultimateskyblock.api.event.RejectEvent;
 import us.talabrek.ultimateskyblock.command.InviteHandler;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
 public class AcceptRejectCommand extends RequirePlayerCommand {
-    private final InviteHandler inviteHandler;
 
-    public AcceptRejectCommand(InviteHandler inviteHandler) {
+    private final uSkyBlock plugin;
+
+    public AcceptRejectCommand(uSkyBlock plugin) {
         super("accept|reject", "usb.party.join", I18nUtil.tr("accept/reject an invitation."));
-        this.inviteHandler = inviteHandler;
+        this.plugin = plugin;
     }
 
     @Override
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
         if (alias.equalsIgnoreCase("reject")) {
-            if (inviteHandler.reject(player)) {
-                player.sendMessage(I18nUtil.tr("\u00a7eYou have rejected the invitation to join an island."));
-            } else {
-                player.sendMessage(I18nUtil.tr("\u00a74You haven't been invited."));
-            }
+            plugin.getServer().getPluginManager().callEvent(new RejectEvent(player));
         } else if (alias.equalsIgnoreCase("accept")) {
-            if (inviteHandler.accept(player)) {
-                player.sendMessage(I18nUtil.tr("\u00a7eYou have accepted the invitation to join an island."));
-            } else {
-                player.sendMessage(I18nUtil.tr("\u00a74You haven't been invited."));
-            }
+            plugin.getServer().getPluginManager().callEvent(new AcceptEvent(player));
         }
         return true;
     }

@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 public class uSkyBlockTest {
 

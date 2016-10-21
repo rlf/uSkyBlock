@@ -1,7 +1,11 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.regions.Regions;
+import com.sk89q.worldedit.world.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -14,7 +18,8 @@ import us.talabrek.ultimateskyblock.util.VersionUtil;
 
 import java.io.File;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 /**
  * Handles integration with AWE.
@@ -23,7 +28,6 @@ import java.util.logging.Logger;
  * Only kept as a cosmetic measure, to at least try to give the players some feedback.
  */
 public enum AsyncWorldEditHandler {;
-    private static final Logger log = Logger.getLogger(AsyncWorldEditHandler.class.getName());
     private static AWEAdaptor adaptor = null;
 
     public static void onEnable(uSkyBlock plugin) {
@@ -32,13 +36,14 @@ public enum AsyncWorldEditHandler {;
 
     public static void onDisable(uSkyBlock plugin) {
         getAWEAdaptor().onDisable(plugin);
+        adaptor = null;
     }
 
     public static void registerCompletion(Player player) {
         getAWEAdaptor().registerCompletion(player);
     }
 
-    public static EditSession createEditSession(BukkitWorld world, int maxblocks) {
+    public static EditSession createEditSession(World world, int maxblocks) {
         return getAWEAdaptor().createEditSession(world, maxblocks);
     }
 
@@ -46,12 +51,30 @@ public enum AsyncWorldEditHandler {;
         new WEPasteSchematic(file, origin, playerPerk).runTask(uSkyBlock.getInstance());
     }
 
+    public static void regenerate(Region region, Runnable onCompletion) {
+        getAWEAdaptor().regenerate(region, onCompletion);
+    }
+
     public static AWEAdaptor getAWEAdaptor() {
         if (adaptor == null) {
+            if (!uSkyBlock.getInstance().getConfig().getBoolean("asyncworldedit.enabled", true)) {
+                return NULL_ADAPTOR;
+            }
+            Plugin fawe = getFAWE();
             Plugin awe = getAWE();
-            if (awe != null) {
+            String className = null;
+            if (fawe != null) {
+                VersionUtil.Version version = VersionUtil.getVersion(fawe.getDescription().getVersion());
+                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWEAdaptor";
+                try {
+                    adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
+                    log(Level.INFO, "Hooked into FAWE " + version);
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
+                    log(Level.WARNING, "Unable to locate FAWE adaptor for version " + version + ": " + e);
+                    adaptor = NULL_ADAPTOR;
+                }
+            } else if (awe != null) {
                 VersionUtil.Version version = VersionUtil.getVersion(awe.getDescription().getVersion());
-                String className = null;
                 if (version.isLT("3.0")) {
                     className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE211Adaptor";
                 } else if (version.isLT("3.2.0")) {
@@ -63,8 +86,9 @@ public enum AsyncWorldEditHandler {;
                 }
                 try {
                     adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
+                    log(Level.INFO, "Hooked into AWE " + version);
                 } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
-                    log.log(Level.WARNING, "Unable to locate AWE adaptor for version " + version + ": " + e);
+                    log(Level.WARNING, "Unable to locate AWE adaptor for version " + version + ": " + e);
                     adaptor = NULL_ADAPTOR;
                 }
             } else {
@@ -75,15 +99,18 @@ public enum AsyncWorldEditHandler {;
     }
 
     public static boolean isAWE() {
-        Plugin awe = getAWE();
-        return awe != null && awe.isEnabled();
+        return getAWEAdaptor() != NULL_ADAPTOR;
     }
 
-    private static Plugin getAWE() {
+    public static Plugin getFAWE() {
+        return Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit");
+    }
+
+    public static Plugin getAWE() {
         return Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
     }
 
-    private static final AWEAdaptor NULL_ADAPTOR = new AWEAdaptor() {
+    public static final AWEAdaptor NULL_ADAPTOR = new AWEAdaptor() {
         @Override
         public void onEnable(Plugin plugin) {
 
@@ -105,8 +132,28 @@ public enum AsyncWorldEditHandler {;
         }
 
         @Override
-        public EditSession createEditSession(BukkitWorld world, int maxBlocks) {
+        public EditSession createEditSession(World world, int maxBlocks) {
             return WorldEditHandler.createEditSession(world, maxBlocks);
         }
+
+        @Override
+        public void regenerate(final Region region, final Runnable onCompletion) {
+            uSkyBlock.getInstance().sync(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
+                        editSession.enableQueue();
+                        editSession.setFastMode(true);
+                        editSession.getWorld().regenerate(region, editSession);
+                        editSession.flushQueue();
+                    } finally {
+                        onCompletion.run();
+                    }
+                }
+            });
+        }
     };
+
+
 }

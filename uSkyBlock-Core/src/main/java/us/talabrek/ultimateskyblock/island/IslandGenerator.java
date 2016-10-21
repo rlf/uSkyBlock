@@ -14,7 +14,7 @@ import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.io.File;
@@ -106,8 +106,12 @@ public class IslandGenerator {
         }
     }
 
-    public boolean setChest(final Location loc, final Perk perk) {
+    public boolean findAndSetChest(final Location loc, final Perk perk) {
         Location chestLocation = LocationUtil.findChestLocation(loc);
+        return setChest(chestLocation, perk);
+    }
+
+    public boolean setChest(Location chestLocation, Perk perk) {
         if (chestLocation != null) {
             final Block block = chestLocation.getWorld().getBlockAt(chestLocation);
             if (block != null && block.getType() == Material.CHEST) {
@@ -119,7 +123,6 @@ public class IslandGenerator {
                 }
                 return true;
             }
-
         }
         return false;
     }

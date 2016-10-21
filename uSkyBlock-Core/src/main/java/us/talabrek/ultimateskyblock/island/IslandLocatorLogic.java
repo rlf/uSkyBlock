@@ -1,12 +1,7 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -16,6 +11,8 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -28,8 +25,9 @@ public class IslandLocatorLogic {
     private final uSkyBlock plugin;
     private final File configFile;
     private final YmlConfiguration config;
-    private final Cache<String, Location> reservations;
+    private final Map<String, Long> reservations = new ConcurrentHashMap<>();
     private Location lastIsland = null;
+    private long reservationTimeout;
 
     public IslandLocatorLogic(final uSkyBlock plugin) {
         this.plugin = plugin;
@@ -43,18 +41,7 @@ public class IslandLocatorLogic {
             plugin.getConfig().set("options.general.lastIslandX", null);
             plugin.getConfig().set("options.general.lastIslandZ", null);
         }
-        // Lazy loading of lastIsland
-        reservations = CacheBuilder
-                .from(plugin.getConfig().getString("options.advanced.lastIslandCache", "maximumSize=1000,expireAfterWrite=5m"))
-                .removalListener(new RemovalListener<String, Location>() {
-                    @Override
-                    public void onRemoval(RemovalNotification<String, Location> removal) {
-                        if (!plugin.islandAtLocation(removal.getValue())) {
-                            // If an island has not been created within the timeout - we add the island to the orphans
-                            plugin.getOrphanLogic().addOrphan(removal.getValue());
-                        }
-                    }})
-                .build();
+        reservationTimeout = plugin.getConfig().getLong("options.island.reservationTimeout", 5 * 60000);
     }
 
     private Location getLastIsland() {
@@ -69,11 +56,24 @@ public class IslandLocatorLogic {
     public synchronized Location getNextIslandLocation(Player player) {
         Location islandLocation = getNext(player);
         reserve(islandLocation);
-        return islandLocation;
+        return islandLocation.clone();
     }
 
     private void reserve(Location islandLocation) {
-        reservations.put(LocationUtil.getIslandName(islandLocation), islandLocation);
+        final String islandName = LocationUtil.getIslandName(islandLocation);
+        final long tstamp = System.currentTimeMillis();
+        reservations.put(islandName, tstamp);
+        plugin.async(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (reservations) {
+                    Long tReserved = reservations.get(islandName);
+                    if (tReserved != null && tReserved == tstamp) {
+                        reservations.remove(islandName);
+                    }
+                }
+            }
+        }, reservationTimeout);
     }
 
     private synchronized Location getNext(Player player) {
@@ -106,7 +106,7 @@ public class IslandLocatorLogic {
 
     private void save() {
         final Location locationToSave = lastIsland;
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -125,7 +125,7 @@ public class IslandLocatorLogic {
     }
 
     private boolean isReserved(Location next) {
-        return reservations.getIfPresent(LocationUtil.getIslandName(next)) != null;
+        return reservations.containsKey(LocationUtil.getIslandName(next));
     }
 
     /**

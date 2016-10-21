@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.imports.wolfwork;
 
-import org.bukkit.Bukkit;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
@@ -12,13 +11,19 @@ import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 import java.util.logging.Level;
+
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 /**
  * An importer for the wolfwork branch.
  */
 public class WolfWorkUSBImporter implements USBImporter {
+
+    private uSkyBlock plugin;
 
     @Override
     public String getName() {
@@ -26,8 +31,20 @@ public class WolfWorkUSBImporter implements USBImporter {
     }
 
     @Override
-    public boolean importFile(uSkyBlock plugin, File file) {
+    public void init(uSkyBlock plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public Boolean importFile(File file) {
         try {
+            if (file != null && file.getName().equals("orphanedIslands.bin")) {
+                if (file.exists()) {
+                    importOrphanedIslands(plugin, file);
+                    return true;
+                }
+                return false;
+            }
             PlayerInfo playerInfo = readPlayerInfo(file);
             if (playerInfo == null) {
                 return false;
@@ -40,19 +57,9 @@ public class WolfWorkUSBImporter implements USBImporter {
             }
             return true;
         } catch (Exception e) {
-            plugin.log(Level.WARNING, "Unable to import " + file, e);
+            log(Level.WARNING, "Unable to import " + file, e);
             return false;
         }
-    }
-
-    @Override
-    public int importOrphans(uSkyBlock plugin, File configFolder) {
-        int orphanCount = 0;
-        File orphans = new File(configFolder, "orphanedIslands.bin");
-        if (orphans.exists()) {
-            orphanCount += importOrphanedIslands(plugin, orphans);
-        }
-        return orphanCount;
     }
 
     private int importOrphanedIslands(uSkyBlock plugin, File orphanFile) {
@@ -72,7 +79,7 @@ public class WolfWorkUSBImporter implements USBImporter {
                 return countOrphan;
             }
         } catch (IOException | ClassNotFoundException e) {
-            plugin.log(Level.WARNING, "Unable to read the orphanedIslands.bin file", e);
+            log(Level.WARNING, "Unable to read the orphanedIslands.bin file", e);
         }
         return 0;
     }
@@ -88,12 +95,15 @@ public class WolfWorkUSBImporter implements USBImporter {
         pi.setHomeLocation(playerInfo.getHomeLocation());
         // Challenges
         long now = System.currentTimeMillis();
-        for (ChallengeCompletion challenge : pi.getChallenges()) {
-            if (playerInfo.checkChallenge(challenge.getName())) {
-                challenge.setFirstCompleted(now);
-                challenge.setTimesCompleted(1);
-            } else {
-                challenge.setTimesCompleted(0);
+        for (us.talabrek.ultimateskyblock.api.ChallengeCompletion challengeApi : pi.getChallenges()) {
+            if (challengeApi instanceof ChallengeCompletion) {
+                ChallengeCompletion challenge = (ChallengeCompletion) challengeApi;
+                if (playerInfo.checkChallenge(challenge.getName())) {
+                    challenge.setCooldownUntil(now);
+                    challenge.setTimesCompleted(1);
+                } else {
+                    challenge.setTimesCompleted(0);
+                }
             }
         }
         pi.save();
@@ -110,18 +120,18 @@ public class WolfWorkUSBImporter implements USBImporter {
                 islandInfo.setupPartyLeader(playerInfo.getPlayerName());
             }
             for (String member : playerInfo.getMembers()) {
-                islandInfo.setupPartyMember(member);
+                islandInfo.setupPartyMember(uSkyBlock.getInstance().getPlayerInfo(member));
             }
-            islandInfo.setWarpActive(playerInfo.isWarpActive());
+            islandInfo.setWarp(playerInfo.isWarpActive());
             islandInfo.setWarpLocation(playerInfo.getWarpLocation());
             for (String banned : playerInfo.getBanned()) {
-                islandInfo.banPlayer(banned);
+                islandInfo.banPlayer(plugin.getPlayerDB().getUUIDFromName(banned));
             }
             // Not really that important - since it's most likely different!
             islandInfo.setLevel(playerInfo.getIslandLevel());
             islandInfo.setBiome("OCEAN");
             islandInfo.save();
-            WorldGuardHandler.updateRegion(Bukkit.getConsoleSender(), islandInfo);
+            WorldGuardHandler.updateRegion(islandInfo);
         }
     }
 
@@ -138,17 +148,20 @@ public class WolfWorkUSBImporter implements USBImporter {
     }
 
     @Override
-    public File[] getFiles(uSkyBlock plugin) {
-        return plugin.directoryPlayers.listFiles(new FilenameFilter() {
+    public File[] getFiles() {
+        ArrayList<File> fileList = new ArrayList<>();
+        fileList.add(new File(plugin.getDataFolder(), "orphanedIslands.bin"));
+        fileList.addAll(Arrays.asList(plugin.directoryPlayers.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name != null && !name.endsWith(".yml");
             }
-        });
+        })));
+        return fileList.toArray(new File[fileList.size()]);
     }
 
     @Override
-    public void completed(uSkyBlock plugin, int success, int failed) {
+    public void completed(int success, int failed, int skipped) {
         // Do nothing
     }
 }

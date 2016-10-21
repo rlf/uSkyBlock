@@ -10,7 +10,9 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
+import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.registry.WorldData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -26,6 +28,7 @@ import org.primesoft.asyncworldedit.api.worldedit.IAsyncEditSessionFactory;
 import org.primesoft.asyncworldedit.api.worldedit.ICancelabeEditSession;
 import org.primesoft.asyncworldedit.api.worldedit.IThreadSafeEditSession;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -120,7 +123,7 @@ public class AWE330Adaptor implements AWEAdaptor {
         if (timerTask != null) {
             timerTask.cancel();
         }
-        timerTask = Bukkit.getScheduler().runTaskTimerAsynchronously(uSkyBlock.getInstance(), new Runnable() {
+        timerTask = uSkyBlock.getInstance().async(new Runnable() {
             int maxSize = -1;
             @Override
             public void run() {
@@ -136,13 +139,18 @@ public class AWE330Adaptor implements AWEAdaptor {
                     timerTask.cancel();
                 }
             }
-        }, 10, 10);
+        }, 500, 500);
     }
 
-    public EditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
+    public EditSession createEditSession(World bukkitWorld, int maxBlocks) {
         WorldEdit worldEdit = WorldEditHandler.getWorldEdit().getWorldEdit();
         IAsyncEditSessionFactory sessionFactory = (IAsyncEditSessionFactory) worldEdit.getEditSessionFactory();
         return (EditSession) sessionFactory.getThreadSafeEditSession(bukkitWorld, maxBlocks, null, getAWE().getPlayerManager().getUnknownPlayer());
+    }
+
+    @Override
+    public void regenerate(Region region, Runnable onCompletion) {
+        AsyncWorldEditHandler.NULL_ADAPTOR.regenerate(region, onCompletion);
     }
 
     @Override

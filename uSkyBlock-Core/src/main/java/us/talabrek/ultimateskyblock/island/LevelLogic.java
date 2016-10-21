@@ -9,11 +9,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.model.BlockScore;
 import us.talabrek.ultimateskyblock.api.model.BlockScore.State;
 import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.task.ChunkSnapShotTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +104,7 @@ public class LevelLogic {
             }
             return ids;
         } else {
-            uSkyBlock.log(Level.WARNING, "Invalid key '" + blockKey + "' in levelConfig");
+            LogUtil.log(Level.WARNING, "Invalid key '" + blockKey + "' in levelConfig");
         }
         return new int[0];
     }
@@ -165,7 +167,7 @@ public class LevelLogic {
                                         ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
                                         if (chunk == null) {
                                             // This should NOT happen!
-                                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x +"," + z);
+                                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x + "," + z);
                                             continue;
                                         }
                                         int cx = (x & 0xf);
@@ -191,7 +193,7 @@ public class LevelLogic {
                                             ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
                                             if (chunk == null) {
                                                 // This should NOT happen!
-                                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x +"," + z);
+                                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x + "," + z);
                                                 continue;
                                             }
                                             int cx = (x & 0xf);
@@ -208,7 +210,7 @@ public class LevelLogic {
                                     islandScore = createIslandScore(counts);
                                 }
                                 callback.setState(islandScore);
-                                Bukkit.getScheduler().runTask(plugin, callback);
+                                plugin.sync(callback);
                                 log.exiting(CN, "calculateScoreAsync");
                             }
                         }.runTaskAsynchronously(plugin);
@@ -236,7 +238,7 @@ public class LevelLogic {
 
     public IslandScore createIslandScore(int[] counts) {
         double score = 0;
-        List<BlockScoreImpl> blocks = new ArrayList<>();
+        List<BlockScore> blocks = new ArrayList<>();
         for (int i = 1 << DATA_BITS; i < MAX_BLOCK << DATA_BITS; ++i) {
             int count = counts[i];
             if (count > 0 && blockValue[i] > 0) {

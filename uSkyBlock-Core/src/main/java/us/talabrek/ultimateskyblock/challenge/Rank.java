@@ -3,8 +3,8 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class Rank {
 
     public ItemStack getDisplayItem() {
         String displayItem = config.getString("displayItem", "DIRT");
-        return ItemStackUtil.createItemStack(displayItem, getName(), null);
+        return ItemStackUtil.asDisplayItem(ItemStackUtil.createItemStack(displayItem, getName(), null));
     }
 
     public String getName() {

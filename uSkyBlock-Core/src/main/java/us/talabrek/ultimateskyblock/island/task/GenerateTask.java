@@ -26,6 +26,7 @@ public class GenerateTask extends BukkitRunnable {
     private final PlayerPerk playerPerk;
     private final String schematicName;
     boolean hasRun = false;
+    private Location chestLocation;
 
     public GenerateTask(uSkyBlock plugin, final Player player, final PlayerInfo pi, final Location next, PlayerPerk playerPerk, String schematicName) {
         this.plugin = plugin;
@@ -34,7 +35,13 @@ public class GenerateTask extends BukkitRunnable {
         this.next = next;
         this.playerPerk = playerPerk;
         this.schematicName = schematicName;
+        chestLocation = null;
     }
+
+    public void setChestLocation(Location chestLocation) {
+        this.chestLocation = chestLocation;
+    }
+
     @Override
     public void run() {
         if (hasRun) {
@@ -43,13 +50,17 @@ public class GenerateTask extends BukkitRunnable {
         next.getChunk().load();
         Perk perk = plugin.getPerkLogic().getIslandPerk(schematicName).getPerk();
         perk = perk.combine(playerPerk.getPerk());
-        plugin.getIslandGenerator().setChest(next, perk);
+        if (chestLocation != null) {
+            plugin.getIslandGenerator().setChest(chestLocation, perk);
+        } else {
+            plugin.getIslandGenerator().findAndSetChest(next, perk);
+        }
         IslandInfo islandInfo = plugin.setNewPlayerIsland(pi, next);
         islandInfo.setSchematicName(schematicName);
-        WorldGuardHandler.updateRegion(player, islandInfo);
+        WorldGuardHandler.updateRegion(islandInfo);
         plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
 
-        Bukkit.getScheduler().runTaskLater(uSkyBlock.getInstance(), new Runnable() {
+        plugin.sync(new Runnable() {
                     @Override
                     public void run() {
                         if (pi != null) {
@@ -74,7 +85,7 @@ public class GenerateTask extends BukkitRunnable {
                             plugin.execCommand(player, command, true);
                         }
                     }
-                }, plugin.getConfig().getInt("options.restart.teleportDelay", 40)
+                }, plugin.getConfig().getInt("options.restart.teleportDelay", 2000)
         );
     }
 }

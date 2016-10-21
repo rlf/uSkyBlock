@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
@@ -32,7 +32,7 @@ public class CreateIslandTask extends BukkitRunnable {
         if (!plugin.getIslandGenerator().createIsland(playerPerk, next, cSchem)) {
             player.sendMessage(tr("Unable to locate schematic {0}, contact a server-admin", cSchem));
         }
-        BukkitRunnable generateTask = new GenerateTask(plugin, player, playerPerk.getPlayerInfo(), next, playerPerk, cSchem);
+        GenerateTask generateTask = new GenerateTask(plugin, player, playerPerk.getPlayerInfo(), next, playerPerk, cSchem);
         final int heartBeatTicks = (int) TimeUtil.millisAsTicks(plugin.getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 2000));
         final BukkitRunnable completionWatchDog = new LocateChestTask(plugin, player, next, generateTask);
         completionWatchDog.runTaskTimer(plugin, 0, heartBeatTicks);

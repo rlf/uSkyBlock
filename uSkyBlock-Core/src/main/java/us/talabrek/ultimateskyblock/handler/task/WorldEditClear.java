@@ -1,9 +1,11 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.LocalWorld;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.blocks.BaseBlock;
+import com.sk89q.worldedit.bukkit.BukkitUtil;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
@@ -74,8 +76,8 @@ public class WorldEditClear extends IncrementalRunnable {
     protected boolean execute() {
         while (!regions.isEmpty()) {
             final Region region = regions.remove(0);
-            final BukkitWorld bukkitWorld = new BukkitWorld(world);
-            final EditSession editSession = WorldEditHandler.createEditSession(bukkitWorld, region.getArea() * 255);
+            LocalWorld localWorld = BukkitUtil.getLocalWorld(world);
+            final EditSession editSession = WorldEditHandler.createEditSession(localWorld, region.getArea() * 255);
             editSession.enableQueue();
             editSession.setFastMode(true);
             try {

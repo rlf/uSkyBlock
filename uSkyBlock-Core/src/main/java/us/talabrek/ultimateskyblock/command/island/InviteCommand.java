@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.command.island;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.api.event.InviteEvent;
 import us.talabrek.ultimateskyblock.command.InviteHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -14,7 +15,7 @@ public class InviteCommand extends RequireIslandCommand {
     private final InviteHandler inviteHandler;
 
     public InviteCommand(uSkyBlock plugin, InviteHandler inviteHandler) {
-        super(plugin, "invite", "usb.party.create", "oplayer", I18nUtil.tr("invite a player to your island"));
+        super(plugin, "invite", "usb.party.invite", "oplayer", I18nUtil.tr("invite a player to your island"));
         this.inviteHandler = inviteHandler;
     }
 
@@ -54,9 +55,7 @@ public class InviteCommand extends RequireIslandCommand {
                 player.sendMessage(I18nUtil.tr("\u00a74That player is the leader of your island!"));
                 return true;
             }
-            if (inviteHandler.invite(player, island, otherPlayer)) {
-                island.sendMessageToIslandGroup(true, I18nUtil.marktr("{0}\u00a7d invited {1}"), player.getDisplayName(), otherPlayer.getDisplayName());
-            }
+            plugin.getServer().getPluginManager().callEvent(new InviteEvent(player, island, otherPlayer));
         }
         return true;
     }

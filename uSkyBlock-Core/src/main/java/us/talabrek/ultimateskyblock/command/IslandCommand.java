@@ -27,7 +27,14 @@ public class IslandCommand extends AbstractCommandExecutor {
         super("island|is", "usb.island.create", tr("general island command"));
         this.plugin = plugin;
         this.menu = menu;
+        addFeaturePermission("usb.mod.bypasscooldowns", tr("allows user to bypass cooldowns"));
+        addFeaturePermission("usb.mod.bypassprotection", tr("allows user to bypass visitor-protections"));
+        addFeaturePermission("usb.mod.bypassteleport", tr("allows user to bypass teleport-delay"));
+        addFeaturePermission("usb.island.signs.use", tr("allows user to use [usb] signs"));
+        addFeaturePermission("usb.island.signs.place", tr("allows user to place [usb] signs"));
+
         InviteHandler inviteHandler = new InviteHandler(plugin);
+        plugin.getServer().getPluginManager().registerEvents(inviteHandler, plugin);
         OnlinePlayerTabCompleter onlinePlayerTabCompleter = new OnlinePlayerTabCompleter();
         AllPlayerTabCompleter playerTabCompleter = new AllPlayerTabCompleter(onlinePlayerTabCompleter);
         addTab("island", playerTabCompleter);
@@ -38,9 +45,11 @@ public class IslandCommand extends AbstractCommandExecutor {
         addTab("schematic", new SchematicTabCompleter(plugin));
         add(new RestartCommand(plugin));
         add(new LogCommand(plugin, menu));
-        add(new CreateCommand(plugin));
+        CreateCommand createCommand = new CreateCommand(plugin);
+        add(createCommand);
         add(new SetHomeCommand(plugin));
-        add(new HomeCommand(plugin));
+        HomeCommand homeCommand = new HomeCommand(plugin);
+        add(homeCommand);
         add(new SetWarpCommand(plugin));
         add(new WarpCommand(plugin));
         add(new ToggleWarp(plugin));
@@ -53,7 +62,7 @@ public class IslandCommand extends AbstractCommandExecutor {
         add(new LevelCommand(plugin));
         add(new InfoCommand(plugin));
         add(new InviteCommand(plugin, inviteHandler));
-        add(new AcceptRejectCommand(inviteHandler));
+        add(new AcceptRejectCommand(plugin));
         add(new LeaveCommand(plugin));
         add(new KickCommand(plugin));
         add(new PartyCommand(plugin, menu, inviteHandler));
@@ -61,10 +70,14 @@ public class IslandCommand extends AbstractCommandExecutor {
         add(new SpawnCommand(plugin));
         add(new TrustCommand(plugin));
         add(new MobLimitCommand(plugin));
+        add(new AutoCommand(plugin, createCommand, homeCommand));
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+        if (!plugin.isRequirementsMet(sender, this, args)) {
+            return true;
+        }
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 0) {

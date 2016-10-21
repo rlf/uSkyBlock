@@ -5,7 +5,7 @@ import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 
 import java.io.File;
 import java.io.IOException;

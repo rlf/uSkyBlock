@@ -9,15 +9,15 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
-import static us.talabrek.ultimateskyblock.util.ItemStackUtil.builder;
-import static us.talabrek.ultimateskyblock.util.ItemStackUtil.isValidInventoryItem;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.ItemStackUtil.builder;
+import static dk.lockfuglsang.minecraft.util.ItemStackUtil.isValidInventoryItem;
 
 /**
  *

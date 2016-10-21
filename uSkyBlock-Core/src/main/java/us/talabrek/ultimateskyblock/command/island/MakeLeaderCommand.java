@@ -34,8 +34,8 @@ public class MakeLeaderCommand extends RequireIslandCommand {
                 return true;
             }
             island.setupPartyLeader(member); // Promote member
-            island.setupPartyMember(player.getName()); // Demote leader
-            WorldGuardHandler.updateRegion(player, island);
+            island.setupPartyMember(pi); // Demote leader
+            WorldGuardHandler.updateRegion(island);
             island.sendMessageToIslandGroup(true, tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", player.getDisplayName(), member));
             return true;
         }

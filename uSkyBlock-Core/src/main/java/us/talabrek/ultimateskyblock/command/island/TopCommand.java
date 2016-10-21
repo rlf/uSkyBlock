@@ -14,6 +14,7 @@ public class TopCommand extends AbstractCommand {
     public TopCommand(uSkyBlock plugin) {
         super("top", "usb.island.top", "?page", tr("display the top10 of islands"));
         this.plugin = plugin;
+        addFeaturePermission("usb.admin.topten", tr("enables user to all-ways generate top-ten (no caching)"));
     }
 
     @Override

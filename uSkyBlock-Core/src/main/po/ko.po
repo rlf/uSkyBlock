@@ -17,6 +17,70 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 
 #, java-format
+msgid "§eYou do not have access (§4{0}§e)"
+msgstr ""
+
+#, java-format
+msgid "§eInvalid command: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Usage: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
+msgstr ""
+
+#, java-format
+msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
+msgstr ""
+
+msgid "saves documentation of the commands to a file"
+msgstr ""
+
+#, java-format
+msgid "Wrote documentation to {0}"
+msgstr ""
+
+#, java-format
+msgid "§4Error writing documentation: {0}"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+#, java-format
+msgid "§f{0}x §7{1}"
+msgstr ""
+
+#, java-format
+msgid "§7{0}"
+msgstr "§7{0}"
+
+msgid "d"
+msgstr "d"
+
+msgid "h"
+msgstr "h"
+
+msgid "m"
+msgstr "m"
+
+msgid "s"
+msgstr "s"
+
+#, java-format
+msgid "{0,number,0}:{1,number,00}.{2,number,000}"
+msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4필요 조건이 {0} 일 후에 리셋됩니다."
 
@@ -28,19 +92,18 @@ msgstr "§4필요 조건이 {0} 시간 후에 리셋됩니다."
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4필요 조건이 {0} 분 후에 리셋됩니다."
 
-msgid "§eThis challenge requires the following:"
-msgstr "§e이 도전과제는 다음의 것들을 요구합니다:"
+msgid "§eThis challenge requires:"
+msgstr ""
 
 msgid "§7and more..."
 msgstr "§7그리고 더..."
 
-#, java-format
-msgid "§f{0}x §7{1}"
+msgid "§eItems will be traded for reward."
 msgstr ""
 
 #, java-format
-msgid "§7{0}"
-msgstr "§7{0}"
+msgid "§eMust be within {0} meters."
+msgstr ""
 
 msgid "§6Item Reward: §a"
 msgstr "§6아이템 보상: §a"
@@ -56,6 +119,10 @@ msgstr "§6경험치 보상: §a{0}"
 #, java-format
 msgid "§dTotal times completed: §f{0}"
 msgstr "§d완료된 전체 횟수: §f{0}"
+
+#, java-format
+msgid "§7Requires {0}"
+msgstr ""
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -160,62 +227,6 @@ msgstr "§e다음 페이지를 보려면 여기를 클릭하세요"
 msgid "§4§lLocked Challenge"
 msgstr "§4§l잠긴 도전과제"
 
-msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§e도전과제가 실행되지 않았습니다. 관리자에게 문의하세요."
-
-msgid "§4You don't have access to this command!"
-msgstr "§4당신은 이 커멘드에 접근할 권한이 없습니다!"
-
-msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4당신은 오직 skyblock 월드의 도전과제만을 할 수 있습니다!"
-
-msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4당신이 섬을 가졌을 때에만 도전과제를 할 수 있습니다!"
-
-msgid "§eUse /c <name> to view information about a challenge."
-msgstr "§e도전과제에 대한 정보를 보려면 /c <name>을 쓰세요 ."
-
-msgid "§eUse /c complete <name> to attempt to complete that challenge."
-msgstr ""
-"§e그 도전과제를 완료하려면 명령어 /c를 사용해 완료된 <name>을 사용하세요."
-
-msgid "§eChallenges will have different colors depending on if they are:"
-msgstr "§e도전과제는 조건에 따라 다른 색깔을 가지게 됩니다"
-
-msgid "Incomplete"
-msgstr "완료되지 못함"
-
-msgid "Completed (not repeatable)"
-msgstr "완료됨 (반복 불가능)"
-
-msgid "Completed(repeatable)"
-msgstr "완료됨(반복 가능)"
-
-msgid "§4You will lose all required items when you complete this challenge!"
-msgstr "§4이 도전과제를 완료되었을때 모든 필요한 아이템들을 잃게 됩니다!"
-
-#, java-format
-msgid ""
-"§4All required items must be placed on your island, within {0} blocks of you."
-msgstr ""
-"§4All 필요한 아이템들은 무조건 당신의 섬에서 당신의 {0} 블록 안팎으로 놓여져"
-"야 합니다."
-
-msgid "§eRank: "
-msgstr "§e랭크: "
-
-msgid "§4This Challenge is not repeatable!"
-msgstr "§4반복할 수 없는 도전과제입니다!"
-
-#, java-format
-msgid "§eTo complete this challenge, use §f/c c {0}"
-msgstr "§e도전과제를 완료하려면 §f/c c {0}를 사용하세요"
-
-msgid "§4Invalid challenge name! Use /c help for more information"
-msgstr ""
-"§4유효하지 않은 도전과제 이름입니다! 더 많은 정보가 필요하면 /c help를 이용하"
-"세요"
-
 #, java-format
 msgid "§7Complete {0} more {1} §7challenges"
 msgstr "{0}개의  {1}§7 challenges"
@@ -226,6 +237,52 @@ msgstr "§7를 완료하여 {0} 랭크를"
 
 msgid "to unlock this rank"
 msgstr "잠금해제 하세요"
+
+msgid "But you are ALLLLLLL ALOOOOONE!"
+msgstr "하지만 당신은 와아아아아안전 호오오온자!"
+
+msgid "But you are Yelling in the wind!"
+msgstr "하지만 당신은 바람 속에서 외칩니다!"
+
+msgid "But your fantasy friends are gone!"
+msgstr "하지만 당신의 상상속 친구들은 가버렸죠!"
+
+msgid "But you are Talking to your self!"
+msgstr "하지만 당신은 자신한테 말을 걸고 있어요!"
+
+#, java-format
+msgid "§cSorry! {0}"
+msgstr "§c죄송합니다! {0}"
+
+msgid "Either send a message directly to your group, or toggle it on/off."
+msgstr ""
+
+msgid "party"
+msgstr ""
+
+msgid "island"
+msgstr ""
+
+#, java-format
+msgid "§cToggled chat to {0} §aON"
+msgstr ""
+
+#, java-format
+msgid "§cRepeat §9{0}§c to toggle it off"
+msgstr ""
+
+#, java-format
+msgid "§aToggled chat §cOFF§a for {0}"
+msgstr ""
+
+msgid "§cCommand only available to players"
+msgstr ""
+
+msgid "talk to players on your island"
+msgstr "당신의 섬에 있는 플레이어에게 말을 겁니다"
+
+msgid "talk to your island party"
+msgstr "당신의 섬의 파티에게 말을 겁니다"
 
 #, java-format
 msgid "§ePlayer {0} has no island!"
@@ -321,9 +378,6 @@ msgstr ""
 msgid "print out info about the island"
 msgstr "섬에 대한 정보를 보여줍니다"
 
-msgid "protects all islands (time consuming)"
-msgstr "모든 섬을 보호합니다 (시간을 소모함)"
-
 msgid "sets the biome of the island"
 msgstr "섬의 생태계를 지정합니다"
 
@@ -382,14 +436,6 @@ msgstr "§e{0}은 {1}로 변한 생태계를 가졌습니다."
 #, java-format
 msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0}은 바다로 변한 생태계를 가졌습니다."
-
-msgid "§4Sorry!§e A protect-all is already running. Let it complete first."
-msgstr ""
-"§4죄송합니다!§e 모든 방어는 이미 작동중입니다'. 먼저 완료될 때까지 기다려주세"
-"요."
-
-msgid "§eStarting a protect-all task. It will take a while."
-msgstr "§e모든 보호 작업이 시작되는 중입니다. 몇분의 시간의 소요됩니다."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
@@ -510,6 +556,21 @@ msgstr "§eTop 10 리스트 생성중"
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eTop 10 리스트 생성 완료"
 
+msgid "advanced command for getting island-data"
+msgstr ""
+
+#, java-format
+msgid "§eCurrent value for {0} is ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to get state for {0}"
+msgstr ""
+
+#, java-format
+msgid "§eValid fields are {0}"
+msgstr ""
+
 msgid "teleport to another players island"
 msgstr "다른 플레이어 섬으로 텔레포트한다"
 
@@ -520,8 +581,8 @@ msgid "§4That player does not have an island!"
 msgstr "§4그 플레이어는 가진 섬이 없습니다!"
 
 #, java-format
-msgid "§aTeleporting to {0}s island."
-msgstr "§a{0}의 섬으로 텔레포트 하는 중."
+msgid "§aTeleporting to {0}''s island."
+msgstr ""
 
 msgid "imports players and islands from other formats"
 msgstr "다른 형식으로 부터 플레이어와 섬을 수입합니다"
@@ -593,6 +654,44 @@ msgstr ""
 msgid "§bLeadership transferred by {0}§b to {1}"
 msgstr "§b리더 권한이 {0}§b에서 {1}로 전달되었습니다"
 
+msgid "advanced info about NBT stuff"
+msgstr ""
+
+msgid "shows the NBTTag for the currently held item"
+msgstr ""
+
+#, java-format
+msgid "§eInfo for §9{0}"
+msgstr ""
+
+#, java-format
+msgid "§7 - name: §9{0}"
+msgstr ""
+
+#, java-format
+msgid "§7 - nbttag: §9{0}"
+msgstr ""
+
+msgid "§cNo item in hand!"
+msgstr ""
+
+msgid "§eCan only be executed as a player"
+msgstr ""
+
+msgid "sets the NBTTag on the currently held item"
+msgstr ""
+
+#, java-format
+msgid "§eSet §9{0}§e to §c{1}"
+msgstr ""
+
+msgid "adds the NBTTag on the currently held item"
+msgstr ""
+
+#, java-format
+msgid "§eAdded §9{0}§e to §c{1}"
+msgstr ""
+
 msgid "manage orphans"
 msgstr "고아들을 관리합니다"
 
@@ -619,11 +718,26 @@ msgstr "§e현재 어느 고아도 등록하지 않았습니다."
 msgid "§eOrphans: {0}"
 msgstr "§e고아들: {0}"
 
+#, java-format
+msgid "additional perks {0}"
+msgstr ""
+
+msgid "protects all islands (time consuming)"
+msgstr "모든 섬을 보호합니다 (시간을 소모함)"
+
+msgid "§cTrying to abort protect-all task."
+msgstr ""
+
+msgid ""
+"§4Sorry!§e A protect-all is already running. Let it complete first, or use "
+"§9usb protectall §cstop"
+msgstr ""
+
+msgid "§eStarting a protect-all task. It will take a while."
+msgstr "§e모든 보호 작업이 시작되는 중입니다. 몇분의 시간의 소요됩니다."
+
 msgid "purges all abandoned islands"
 msgstr "모든 버려진 섬들을 청소합니다"
-
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4A 청소가 이미 진행중입니다', 끝날 때까지 기다려주세요!"
 
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4당신은 청소하기위해 나이를 제공해야 합니다!"
@@ -631,6 +745,56 @@ msgstr "§4당신은 청소하기위해 나이를 제공해야 합니다!"
 #, java-format
 msgid "§eFinding all islands that has been abandoned for more than {0} days."
 msgstr "§e{0}일 이상 버려진 모든 섬을 찾는 중 입니다."
+
+#, java-format
+msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgstr ""
+
+msgid "§4Trying to abort purge"
+msgstr ""
+
+msgid "§4A purge is already running, please wait for it to finish!"
+msgstr "§4A 청소가 이미 진행중입니다', 끝날 때까지 기다려주세요!"
+
+msgid "§4Starting purge..."
+msgstr ""
+
+msgid "region manipulations"
+msgstr ""
+
+msgid "shows the borders of the current island"
+msgstr ""
+
+msgid "§eNo island found at your current location"
+msgstr ""
+
+msgid "shows the borders of the current chunk"
+msgstr ""
+
+msgid "shows the borders of the inner-chunks"
+msgstr ""
+
+msgid "shows the non-chunk-aligned borders"
+msgstr ""
+
+msgid "shows the borders of the outer-chunks"
+msgstr ""
+
+msgid "hides the regions again"
+msgstr ""
+
+msgid "§eStopped displaying regions"
+msgstr ""
+
+msgid "§eNo currently shown regions for this player"
+msgstr ""
+
+#, java-format
+msgid "§eAnimation-tick changed to {0}."
+msgstr ""
+
+msgid "§eAnimation-tick must be a valid integer."
+msgstr ""
 
 msgid "set a player's island to your location"
 msgstr "당신의 위치에 플레이어의 섬을 지정합니다"
@@ -648,16 +812,66 @@ msgstr "파일로 부터 외형을 리로드합니다."
 msgid "§eConfiguration reloaded from file."
 msgstr "§e파일로부터 리로드된 외형."
 
+msgid "advanced command for setting island-data"
+msgstr ""
+
 #, java-format
-msgid "§cPURGE:§9 Purged {0}/{1} {2,number,###}%"
-msgstr "§c청소:§9 청소됨 {0}/{1} {2,number,###}%"
+msgid "§c{0} was set to ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}''"
+msgstr ""
+
+#, java-format
+msgid "§cUnable to set field {0} to ''{1}'', a number was expected"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid field {0}"
+msgstr ""
+
+msgid "toggles maintenance mode"
+msgstr ""
+
+msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
+msgstr ""
+
+msgid ""
+"§cMAINTENANCE: §4Deactivated§e all uSkyBlock features back to operational."
+msgstr ""
+
+msgid "§cMaintenance mode can only be changed from console!"
+msgstr ""
+
+msgid "§cABORTED:§e Protect-All was aborted!"
+msgstr ""
+
+#, java-format
+msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
+msgstr ""
+
+#, java-format
+msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
+msgstr ""
+
+msgid "§4PURGE:§9 Scanning aborted."
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
 msgstr "§4PURGE:§9 스캔 완료, {0}명의 처벌 후보자를 찾았습니다."
 
+#, java-format
+msgid ""
+"- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
+msgstr ""
+
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4PURGE:§9 버려진 섬의 청소를 마쳤습니다."
+
+msgid "§4PURGE:§9 Aborted purging abandoned islands."
+msgstr ""
 
 msgid "displays version information"
 msgstr "버전 정보를 보여줍니다"
@@ -692,11 +906,60 @@ msgstr "§e{0}를 위하여 섬의 월드가드 지역이 업데이트 되었습
 msgid "§eNo island found at your location!"
 msgstr "§e당신의 위치에서 어떠한 섬도 발견하지 못했습니다!"
 
+msgid "refreshes the chunk around the player"
+msgstr ""
+
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
 
 msgid "show player-information"
 msgstr "플레이어 정보를 보여줍니다"
+
+msgid "try to complete a challenge"
+msgstr ""
+
+msgid "§cCommand only available for players."
+msgstr ""
+
+msgid "show information about the challenge"
+msgstr ""
+
+msgid "§eRank: "
+msgstr "§e랭크: "
+
+msgid "§4This Challenge is not repeatable!"
+msgstr "§4반복할 수 없는 도전과제입니다!"
+
+msgid "§4You will lose all required items when you complete this challenge!"
+msgstr "§4이 도전과제를 완료되었을때 모든 필요한 아이템들을 잃게 됩니다!"
+
+#, java-format
+msgid ""
+"§4All required items must be placed on your island, within {0} blocks of you."
+msgstr ""
+"§4All 필요한 아이템들은 무조건 당신의 섬에서 당신의 {0} 블록 안팎으로 놓여져"
+"야 합니다."
+
+#, java-format
+msgid "§eTo complete this challenge, use §f/c c {0}"
+msgstr "§e도전과제를 완료하려면 §f/c c {0}를 사용하세요"
+
+msgid "§4Invalid challenge name! Use /c help for more information"
+msgstr ""
+"§4유효하지 않은 도전과제 이름입니다! 더 많은 정보가 필요하면 /c help를 이용하"
+"세요"
+
+msgid "complete and list challenges"
+msgstr ""
+
+msgid "§eChallenges has been disabled. Contact an administrator."
+msgstr "§e도전과제가 실행되지 않았습니다. 관리자에게 문의하세요."
+
+msgid "§4You can only submit challenges in the skyblock world!"
+msgstr "§4당신은 오직 skyblock 월드의 도전과제만을 할 수 있습니다!"
+
+msgid "§4You can only submit challenges when you have an island!"
+msgstr "§4당신이 섬을 가졌을 때에만 도전과제를 할 수 있습니다!"
 
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't "
@@ -713,6 +976,10 @@ msgid "§e{0}§e tried to invite you, but you are already in a party."
 msgstr "§e{0}§e가 당신을 초대하려 했지만 당신은 이미 파티에 들어가 있습니다."
 
 #, java-format
+msgid "§aInvite sent to {0}"
+msgstr ""
+
+#, java-format
 msgid "{0}§e has invited you to join their island!"
 msgstr "{0}§e가 당신을 그들의 섬으로 초대하였습니다!"
 
@@ -721,6 +988,10 @@ msgstr "§f/island [accept/reject]§e 초대를 승낙/거절 하세요."
 
 msgid "§4WARNING: You will lose your current island if you accept!"
 msgstr "§4경고: 승낙하면 당신은 현재 섬을 잃게 됩니다 !"
+
+#, java-format
+msgid "{0}§d invited {1}"
+msgstr "{0}§d가 {1}를 초대했습니다"
 
 #, java-format
 msgid "{0}§e has rejected the invitation."
@@ -744,20 +1015,26 @@ msgstr "§e{0}§e에게 한 초대가 시간초과 되었거나 취소되었습�
 msgid "§eInvitation for {0}'s island has timedout or been cancelled."
 msgstr "§e{0}의 섬으로의 초대가 시간초과 되었거나 취소되었습니다 ."
 
-msgid "accept/reject an invitation."
-msgstr "초대에 accept/reject 하세요."
-
-msgid "§eYou have rejected the invitation to join an island."
-msgstr "§e당신은 섬에 참여하라는 초대를 거절하였습니다."
+msgid "§eYou have accepted the invitation to join an island."
+msgstr "§e당신은 섬에 참여하는 초대를 승낙했습니다."
 
 msgid "§4You haven't been invited."
 msgstr "§4초대받은 것이 없습니다."
 
-msgid "§eYou have accepted the invitation to join an island."
-msgstr "§e당신은 섬에 참여하는 초대를 승낙했습니다."
+msgid "§eYou have rejected the invitation to join an island."
+msgstr "§e당신은 섬에 참여하라는 초대를 거절하였습니다."
+
+msgid "accept/reject an invitation."
+msgstr "초대에 accept/reject 하세요."
+
+msgid "teleports you to your island (or create one)"
+msgstr ""
 
 msgid "ban/unban a player from your island."
 msgstr "당신의 섬에서 플레이어를 차단/차단 취소 하세요."
+
+msgid "exempts user from being banned"
+msgstr ""
 
 msgid "§eThe following players are banned from warping to your island:"
 msgstr "§e다음의 플레이어는 당신의 섬에서 워프하는 것이 금지되었습니다:"
@@ -770,6 +1047,10 @@ msgstr "§4당신은 멤버들을 차단할 수 없습니다. 먼저 그들을 �
 
 msgid "§4You do not have permission to kick/ban players."
 msgstr "§4당신은 플레이어를 차단/퇴장 시킬 권한이 없습니다."
+
+#, java-format
+msgid "§eUnable to ban unknown player {0}"
+msgstr ""
 
 #, java-format
 msgid "§4{0} tried to ban you from their island!"
@@ -798,6 +1079,13 @@ msgstr "§e당신은{0}§e''의 섬에서 §a차단 해제§e 되었습니다 ."
 msgid "change the biome of the island"
 msgstr "섬의 생태계를 바꿉니다"
 
+msgid "exempt player from biome-cooldown"
+msgstr ""
+
+#, java-format
+msgid "Let the player change their islands biome to {0}"
+msgstr ""
+
 msgid ""
 "§cYou do not have permission to change the biome of your current island."
 msgstr "§c당신의 현재 섬의 생태계를 바꿀 권한이 없습니다."
@@ -817,6 +1105,26 @@ msgstr ""
 msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§e당신은 생태계를 {0,number,#}분 후에 다시 바꿀 수 있습니다."
 
+msgid "§cYou do not have permission to change your biome to that type."
+msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다.."
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
+msgstr ""
+
+#, java-format
+msgid ""
+"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
+"patient."
+msgstr ""
+"§7작은요정들이 당신 섬의 생태계를 §9{0}§7로 바꾸고 있어 바쁩니다, 조금만 기다"
+"려주세요."
+
+#, java-format
+msgid "§eInvalid biome {0} supplied!"
+msgstr ""
+
 #, java-format
 msgid "§aYou have changed your island''s biome to {0}"
 msgstr "§a당신은 섬의 생태계를 {0}로 바꿨습니다"
@@ -825,14 +1133,19 @@ msgstr "§a당신은 섬의 생태계를 {0}로 바꿨습니다"
 msgid "{0} changed the island biome to {1}"
 msgstr "{0}가 섬의 생태계를 {1}로 바꾸었습니다"
 
-msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§c당신은 생태계를 그 타입으로 바꿀 권한이 없습니다.."
+#, java-format
+msgid "§aYou have changed {0} blocks around you to the {1} biome"
+msgstr ""
+
+#, java-format
+msgid "{0} created an area with {1} biome"
+msgstr ""
 
 msgid "create an island"
 msgstr "섬을 만듭니다"
 
-msgid "§cYour island is in the process of generating, you cannot create now."
-msgstr "§c당신의 섬은 생성과정 중에 있습니다, 당신은 지금 만들 수 없습니다."
+msgid "exempt player from create-cooldown"
+msgstr ""
 
 msgid ""
 "§4Island found!§e You already have an island. If you want a fresh island, "
@@ -865,6 +1178,9 @@ msgstr ""
 msgid "check your or anothers island info"
 msgstr "당신 또는 다른 사람의 섬 정보를 확인합니다"
 
+msgid "allows user to see others island info"
+msgstr ""
+
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4섬 레벨이 작동하지 않습니다, 관리자에게 문의하세요."
 
@@ -886,6 +1202,10 @@ msgstr "§e{0}의 섬의 블록들(page {1,number} of {2,number}):"
 
 msgid "Score Count Block"
 msgstr "점수 카운트 블록"
+
+#, java-format
+msgid "§aIsland level is {0,number,###.##}"
+msgstr "§a섬의 레벨은 {0,number,###.##}입니다"
 
 msgid "invite a player to your island"
 msgstr "플레이어를 당신의 섬으로 초대합니다"
@@ -917,10 +1237,6 @@ msgstr "§4자신을 초대할 수 없습니다!"
 
 msgid "§4That player is the leader of your island!"
 msgstr "§4그 플레이어가 당신 섬의 리더입니다!"
-
-#, java-format
-msgid "{0}§d invited {1}"
-msgstr "{0}§d가 {1}를 초대했습니다"
 
 msgid "remove a member from your island."
 msgstr "당신의 섬에서 멤버를 제거합니다."
@@ -988,13 +1304,12 @@ msgstr "§4당신은 파티를 떠나려면 skyblock 월드에 있어야 합니�
 msgid "check your or anothers island level"
 msgstr "당신 또는 다른 사람의 섬 레벨을 확인합니다"
 
+msgid "allows user to query for others levels"
+msgstr ""
+
 #, java-format
 msgid "§eInformation about {0}'s Island:"
 msgstr "§e{0}의 섬에 대한 정보:"
-
-#, java-format
-msgid "§aIsland level is {0,number,###.##}"
-msgstr "§a섬의 레벨은 {0,number,###.##}입니다"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1005,6 +1320,9 @@ msgstr "파티 멤버가 아닌 사람에게 당신의 섬을 잠그세요."
 
 msgid "§4You do not have permission to lock your island!"
 msgstr "§4자신의 섬을 잠글 권한이 없습니다!"
+
+msgid "§4You don't have access to this command!"
+msgstr "§4당신은 이 커멘드에 접근할 권한이 없습니다!"
 
 msgid "§4You do not have permission to unlock your island!"
 msgstr "§4자신의 섬을 해금할 권한이 없습니다!"
@@ -1055,6 +1373,9 @@ msgstr "§4섬 없음. §e다음명령어 §b/is create§e 를 사용해 생성�
 
 msgid "delete your island and start a new one."
 msgstr "섬을 삭제하고 새로 시작합니다."
+
+msgid "exempt player from restart-cooldown"
+msgstr ""
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
@@ -1120,6 +1441,9 @@ msgstr "§c당신 섬에 워프를 온/오프 할 권한이 없습니다!"
 
 msgid "display the top10 of islands"
 msgstr "섬들의 top 10을 보여줍니다"
+
+msgid "enables user to all-ways generate top-ten (no caching)"
+msgstr ""
 
 msgid "trust/untrust a player to help on your island."
 msgstr "당신의 섬에서 도우려는 플레이어를 믿으시겠습니까/믿지 않겠습니까."
@@ -1213,30 +1537,23 @@ msgstr "§c경고: §9{0}§e이 당신의 섬으로 워프하는 중입니다!"
 msgid "§4That player has forbidden you from warping to their island."
 msgstr "§4그 플레이어가 당신이 그들의 섬으로 워프하는 것을 금지했습니다."
 
-msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "하지만 당신은 와아아아아안전 호오오온자!"
-
-msgid "But you are Yelling in the wind!"
-msgstr "하지만 당신은 바람 속에서 외칩니다!"
-
-msgid "But your fantasy friends are gone!"
-msgstr "하지만 당신의 상상속 친구들은 가버렸죠!"
-
-msgid "But you are Talking to your self!"
-msgstr "하지만 당신은 자신한테 말을 걸고 있어요!"
-
-#, java-format
-msgid "§cSorry! {0}"
-msgstr "§c죄송합니다! {0}"
-
 msgid "general island command"
 msgstr "일반적인 섬 커맨드"
 
-msgid "talk to players on your island"
-msgstr "당신의 섬에 있는 플레이어에게 말을 겁니다"
+msgid "allows user to bypass cooldowns"
+msgstr ""
 
-msgid "talk to your island party"
-msgstr "당신의 섬의 파티에게 말을 겁니다"
+msgid "allows user to bypass visitor-protections"
+msgstr ""
+
+msgid "allows user to bypass teleport-delay"
+msgstr ""
+
+msgid "allows user to use [usb] signs"
+msgstr ""
+
+msgid "allows user to place [usb] signs"
+msgstr ""
 
 msgid "§eYou can not use another islands portals!"
 msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
@@ -1327,9 +1644,15 @@ msgstr ""
 msgid "N/A"
 msgstr "N/A"
 
+msgid "§4** You are entering a protected - but abandoned - island area."
+msgstr "§4** 당신은 보호받는 - 하지만 버려진 - 섬의 지역에 입장하는 중입니다."
+
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
 msgstr "§d** 당신은 §b{0}의 §d섬에 입장하는 중입니다."
+
+msgid "§4** You are leaving an abandoned island."
+msgstr "§4** 당신은 버려진 섬에서 나오는 중입니다."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
@@ -1353,18 +1676,55 @@ msgstr ""
 msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4파티의 리더여야 당신의 섬을 해제 할 수 있습니다!"
 
-msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr "§4** 당신은 보호받는 - 하지만 버려진 - 섬의 지역에 입장하는 중입니다."
-
-msgid "§4** You are leaving an abandoned island."
-msgstr "§4** 당신은 버려진 섬에서 나오는 중입니다."
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
 
 #, java-format
 msgid "§4No importer named §e{0}§4 found"
 msgstr "§4§e{0}§4란 이름의 수입업자를 찾지 못했습니다 "
 
-msgid "§eConverted "
-msgstr "§e변환됨 "
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr ""
+
+#, java-format
+msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
+msgstr ""
+
+#, java-format
+msgid "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
+msgstr ""
+
+#, java-format
+msgid "§7PlayerDB: Filtered {0} names"
+msgstr ""
+
+#, java-format
+msgid ""
+"§7 - MojangAPI:{4}: {0,number,##}% ({1}/{2}, failed:{3} ~ {5,number,##}%), "
+"{6}"
+msgstr ""
+
+#, java-format
+msgid "§7MojangAPI: Trying to fetch {0} players from Mojang"
+msgstr ""
+
+msgid "SUCCESS"
+msgstr ""
+
+msgid "FAILED"
+msgstr ""
+
+#, java-format
+msgid "§7 - MojangAPI:§aCOMPLETED: {0}"
+msgstr ""
+
+#, java-format
+msgid "§7 - MojangAPI:§cERROR: {0}"
+msgstr ""
 
 msgid "The island has been created."
 msgstr "이 섬이 생성되었습니다."
@@ -1470,35 +1830,25 @@ msgstr "§c감시견!§9 {0}개 내로 상자를 놓을 수 없음, 돈 내고 �
 msgid "§7Page {0}"
 msgstr "§7페이지 {0}"
 
-msgid "§c-"
-msgstr "§c-"
+#, java-format
+msgid "§c{0,number,#}"
+msgstr ""
 
-msgid "§a+"
-msgstr "§a+"
+#, java-format
+msgid "§a+{0,number,#}"
+msgstr ""
 
-msgid "§c-1000"
-msgstr "§c-1000"
+#, java-format
+msgid "§a{0,number,#}"
+msgstr ""
 
-msgid "§c-100"
-msgstr "§c-100"
+#, java-format
+msgid "&aLeft:&7 Increment with {0}"
+msgstr ""
 
-msgid "§c-10"
-msgstr "§c-10"
-
-msgid "§c-1"
-msgstr "§c-1"
-
-msgid "§a+1"
-msgstr "§a+1"
-
-msgid "§a+10"
-msgstr "§a+10"
-
-msgid "§a+100"
-msgstr "§a+100"
-
-msgid "§a+1000"
-msgstr "§a+1000"
+#, java-format
+msgid "&cRight-Click:&7 Set to {0}"
+msgstr ""
 
 msgid "Return"
 msgstr "Return"
@@ -1545,11 +1895,20 @@ msgstr "거짓"
 msgid "Challenge Menu"
 msgstr "도전과제 메뉴"
 
-msgid "change the islands's biome."
-msgstr "섬의 생태계를 바꿉니다."
+msgid "Change Biome"
+msgstr ""
+
+msgid "change the island's biome."
+msgstr ""
+
+msgid "Toggle Island Lock"
+msgstr ""
 
 msgid "toggle the island's lock."
 msgstr "섬의 자물쇠를 토글합니다."
+
+msgid "Set Island Warp"
+msgstr ""
 
 msgid "set the island's warp."
 msgstr "섬의 워프를 지정합니다."
@@ -1558,26 +1917,24 @@ msgid ""
 "set the island's warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
-" the island"
+"the island."
 msgstr ""
-"그룹 아닌 멤버들을,\n"
-"섬으로 텔레포트하게 하는\n"
-"섬의 워프를\n"
-"지정하세요"
+
+msgid "Toggle Island Warp"
+msgstr ""
 
 msgid "toggle the island's warp."
 msgstr "섬의 워프를 토글합니다."
 
 msgid ""
-"toggle the\n"
-"island's warp, allowing them\n"
-"to turn it on or off at anytime.\n"
-"but not set the location."
+"toggle the island's warp,\n"
+"allowing them to turn it\n"
+"on or off at anytime, but\n"
+"not set the location."
 msgstr ""
-"위치를 지정하지 않고\n"
-"그들이 언제나 켰다 껐다 할수 있는\n"
-"섬의 워프를\n"
-"토글합니다."
+
+msgid "Invite Players"
+msgstr ""
 
 msgid "invite others to the island."
 msgstr "다른사람을 섬으로 초대합니다."
@@ -1593,6 +1950,9 @@ msgstr ""
 "섬으로\n"
 "초대합니다"
 
+msgid "Kick Players"
+msgstr ""
+
 msgid "kick others from the island."
 msgstr "섬으로부터 다른사람을 강퇴합니다."
 
@@ -1606,101 +1966,6 @@ msgstr ""
 "강퇴합니다\n"
 "하지만 그들은 섬 리더를\n"
 "강퇴할 수 없습니다."
-
-msgid "Permissions"
-msgstr "권한"
-
-#, java-format
-msgid "{0} <{1}>"
-msgstr "{0} <{1}>"
-
-msgid "§9Player Permissions"
-msgstr "§9플레이어 권한"
-
-msgid ""
-"§eClick here to return to\n"
-"§eyour island group's info."
-msgstr ""
-"§e당신의 섬 그룹의 정보로 돌아오려면\n"
-"§e여기를 클릭하세요."
-
-msgid ""
-"§eHover over an icon to view\n"
-"§ea permission. Change the\n"
-"§epermission by clicking it."
-msgstr ""
-"§e권한을 보려면 아이콘 주변을\n"
-"§e흔드세요. 그걸 클릭해서\n"
-"§e권한을 바꾸세요."
-
-msgid "§fThis player §acan"
-msgstr "§f이 플레이어는§a 할 수 있습니다"
-
-msgid "Click here to remove this permission."
-msgstr "이 권한을 없애려면 여기를 클릭하세요."
-
-msgid "§fThis player §ccannot"
-msgstr "§f이 플레이어는 §c할 수 없습니다"
-
-msgid "Click here to grant this permission."
-msgstr "이 권한을 주려면 여기를 클릭하세요"
-
-msgid "Island Group Members"
-msgstr "섬 그룹 멤버들"
-
-#, java-format
-msgid "Group Members: §2{0}§7/§e{1}"
-msgstr "그룹 멤버: §2{0}§7/§e{1}"
-
-msgid "§aMore players can be invited to this island."
-msgstr "§a이 섬으로 더 많은 플레이어들이 초대받을 수 있습니다."
-
-msgid "§cThis island is full."
-msgstr "§c이 섬은 꽉 찼습니다."
-
-msgid ""
-"§eHover over a player's icon to\n"
-"§eview their permissions. The\n"
-"§eleader can change permissions\n"
-"§eby clicking a player's icon."
-msgstr ""
-"§e그들의 권한을 보려면\n"
-"§e플레이어의 아이콘을 흔드세요\n"
-"§e리더는 플레이어의 아이콘을 클릭해서\n"
-"§e권한을 바꿀 수 있습니다."
-
-msgid "Leader"
-msgstr "리더"
-
-msgid "Member"
-msgstr "멤버"
-
-#, java-format
-msgid "Can {0}"
-msgstr "할 수 있음 {0}"
-
-#, java-format
-msgid "Cannot {0}"
-msgstr "할 수 없음 {0}"
-
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<이 플레이어의 권한을 바꾸려면 클릭하세요>"
-
-msgid "Island Log"
-msgstr "섬 기록"
-
-msgid ""
-"§eClick here to return to\n"
-"§ethe main island screen."
-msgstr ""
-"§e메인 섬 화면으로 돌아가려면\n"
-"§e여기를 클릭하세요."
-
-msgid "§e§lIsland Log"
-msgstr "§e§l섬 기록"
-
-msgid "Island Biome"
-msgstr "섬 생태계"
 
 msgid "Ocean"
 msgstr "바다"
@@ -1869,6 +2134,16 @@ msgstr ""
 "스폰되고 적대적인\n"
 "몬스터들이 스폰됩니다."
 
+msgid "Flower Forest"
+msgstr ""
+
+msgid ""
+"The flower forest biome.\n"
+"Passive mobs will spawn \n"
+"normally and hostile\n"
+"mobs will spawn."
+msgstr ""
+
 msgid "Deep Ocean"
 msgstr "심해"
 
@@ -1883,6 +2158,118 @@ msgstr ""
 "생태계입니다. 동물같은 수동적인 몬스터들은\n"
 "스폰되지 않습니다. 적대적인 몬스터들\n"
 "(Guardians 포함)이 일반적으로 스폰됩니다."
+
+msgid "Ice Plains"
+msgstr ""
+
+msgid ""
+"The ice-plains biome is an advanced biome.\n"
+"Mobs will spawn naturally.\n"
+"including polar-bears"
+msgstr ""
+
+msgid "Permissions"
+msgstr "권한"
+
+#, java-format
+msgid "{0} <{1}>"
+msgstr "{0} <{1}>"
+
+msgid "§9Player Permissions"
+msgstr "§9플레이어 권한"
+
+msgid ""
+"§eClick here to return to\n"
+"§eyour island group's info."
+msgstr ""
+"§e당신의 섬 그룹의 정보로 돌아오려면\n"
+"§e여기를 클릭하세요."
+
+#, java-format
+msgid "§e{0}''§9s Permissions"
+msgstr ""
+
+msgid ""
+"§eHover over an icon to view\n"
+"§ea permission. Change the\n"
+"§epermission by clicking it."
+msgstr ""
+"§e권한을 보려면 아이콘 주변을\n"
+"§e흔드세요. 그걸 클릭해서\n"
+"§e권한을 바꾸세요."
+
+msgid "§fThis player §acan"
+msgstr "§f이 플레이어는§a 할 수 있습니다"
+
+msgid "Click here to remove this permission."
+msgstr "이 권한을 없애려면 여기를 클릭하세요."
+
+msgid "§fThis player §ccannot"
+msgstr "§f이 플레이어는 §c할 수 없습니다"
+
+msgid "Click here to grant this permission."
+msgstr "이 권한을 주려면 여기를 클릭하세요"
+
+msgid "Island Group Members"
+msgstr "섬 그룹 멤버들"
+
+#, java-format
+msgid "Group Members: §2{0}§7/§e{1}"
+msgstr "그룹 멤버: §2{0}§7/§e{1}"
+
+msgid "§aMore players can be invited to this island."
+msgstr "§a이 섬으로 더 많은 플레이어들이 초대받을 수 있습니다."
+
+msgid "§cThis island is full."
+msgstr "§c이 섬은 꽉 찼습니다."
+
+msgid ""
+"§eHover over a player's icon to\n"
+"§eview their permissions. The\n"
+"§eleader can change permissions\n"
+"§eby clicking a player's icon."
+msgstr ""
+"§e그들의 권한을 보려면\n"
+"§e플레이어의 아이콘을 흔드세요\n"
+"§e리더는 플레이어의 아이콘을 클릭해서\n"
+"§e권한을 바꿀 수 있습니다."
+
+#, java-format
+msgid "§e{0}''s§9 Permissions"
+msgstr ""
+
+msgid "Leader"
+msgstr "리더"
+
+msgid "Member"
+msgstr "멤버"
+
+#, java-format
+msgid "Can {0}"
+msgstr "할 수 있음 {0}"
+
+#, java-format
+msgid "Cannot {0}"
+msgstr "할 수 없음 {0}"
+
+msgid "§e<Click to change this player's permissions>"
+msgstr "§e<이 플레이어의 권한을 바꾸려면 클릭하세요>"
+
+msgid "Island Log"
+msgstr "섬 기록"
+
+msgid ""
+"§eClick here to return to\n"
+"§ethe main island screen."
+msgstr ""
+"§e메인 섬 화면으로 돌아가려면\n"
+"§e여기를 클릭하세요."
+
+msgid "§e§lIsland Log"
+msgstr "§e§l섬 기록"
+
+msgid "Island Biome"
+msgstr "섬 생태계"
 
 #, java-format
 msgid "Biome: {0}"
@@ -1963,20 +2350,6 @@ msgstr ""
 "그들과 어울리려면 §e/island accept§f을 쓸 수 있어요.\n"
 "§e§l초대를 승낙하려면 여기를 누르세요\n"
 "§e§l(당신은 먼저 초대받아야 합니다)"
-
-msgid "§a§lIsland Help"
-msgstr "§a§l섬 도움"
-
-msgid ""
-"Need help with skyblock\n"
-"concepts or commands? View\n"
-"details about them here.\n"
-"§e§lClick here for help!"
-msgstr ""
-"skyblock의 컨셉과 커맨드에 대해\n"
-"도움이 필요하세요? 여기서\n"
-"그것들에 대한 디테일을 보세요\n"
-"§e§l도움이 필요하면 여기를 누르세요!"
 
 msgid "Island Menu"
 msgstr "섬 메뉴 (Protocodyne PTK팀 번역)"
@@ -2185,13 +2558,11 @@ msgid ""
 "When your warp is activated,\n"
 "other players will be taken to\n"
 "this point when they teleport\n"
-"to your island.\n"
-"§e§lClick here to change."
+"to your island."
 msgstr ""
-"당신의 워프가 활성화 되었을 때\n"
-"다른 플레이어들이 당신의 섬으로 텔레포트 할 때\n"
-"그들은 이 지점으로 오게 될 것입니다\n"
-"§e§l여기를 눌러서 바꾸세요."
+
+msgid "§e§lClick here to change."
+msgstr ""
 
 msgid "§c§lRestart Island"
 msgstr "§c§l섬 재시작"
@@ -2242,6 +2613,10 @@ msgstr "Caps On"
 msgid "§9Text Editor"
 msgstr "§9텍스트 에디터"
 
+#, java-format
+msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
+msgstr ""
+
 msgid "§eSending you to spawn."
 msgstr "§e스폰으로 이동 중 입니다."
 
@@ -2255,8 +2630,24 @@ msgstr "§a{0}초 후에 당신은 이동될 것 입니다.."
 msgid "§7Teleport cancelled"
 msgstr "이동이 취소되었습니다."
 
+msgid "READY"
+msgstr ""
+
+msgid ""
+"§cWARNING:§e Could not transfer all the required items to your inventory!"
+msgstr ""
+
+msgid "§cNot enough items in chest to complete challenge!"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr "섬 그리고/혹은 파티 데이터를 저장하는중에 오류가 발생하였습니다!"
+
+msgid "Converting data to UUID, this make take a while!"
+msgstr ""
+
+msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
+msgstr ""
 
 #, java-format
 msgid ""
@@ -2271,8 +2662,11 @@ msgstr "§buSkyBlock§e depends on §9{0}§e >= §av{1}"
 msgid "§4Player is already assigned to this island!"
 msgstr "§4플레이어는 이미 이 섬에 배정되었습니다!"
 
-msgid "§4You are not part of an island. Returning you the spawn area!"
-msgstr "§4당신은 이 섬의 일원이 아닙니다. 스폰 지역으로 되돌아갑니다!"
+msgid "§4Unable to find a safe home-location on your island!"
+msgstr ""
+
+msgid "§cWARNING: §eTeleporting you to mid-air."
+msgstr ""
 
 msgid "§aTeleporting you to your island."
 msgstr "§a당신을 당신의 섬으로 텔레포트 하는 중입니다."
@@ -2293,13 +2687,8 @@ msgstr "§a당신의 skyblock집이 당신의 현제 지점에 지정되었습�
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"
 
-#, java-format
-msgid ""
-"§7The pixies are busy changing the biome of your island to §9{0}§7, be "
-"patient."
-msgstr ""
-"§7작은요정들이 당신 섬의 생태계를 §9{0}§7로 바꾸고 있어 바쁩니다, 조금만 기다"
-"려주세요."
+msgid "§cYour island is in the process of generating, you cannot create now."
+msgstr "§c당신의 섬은 생성과정 중에 있습니다, 당신은 지금 만들 수 없습니다."
 
 msgid "Could not create your Island. Please contact a server moderator."
 msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 문의하세요."
@@ -2307,6 +2696,9 @@ msgstr "당신의 섬을 생성할 수 없었습니다. 서버 관리자에게 �
 msgid "§eGetting your island ready, please be patient, it can take a while."
 msgstr ""
 "§e당신의 섬을 준비하는 중입니다, 조금만 참아주세요, 조금 시간이 걸립니다."
+
+msgid "§cCommand is currently disabled!"
+msgstr ""
 
 msgid "North"
 msgstr "북쪽"
@@ -2331,19 +2723,3 @@ msgstr "서쪽"
 
 msgid "North-West"
 msgstr "북서쪽"
-
-msgid "d"
-msgstr "d"
-
-msgid "h"
-msgstr "h"
-
-msgid "m"
-msgstr "m"
-
-msgid "s"
-msgstr "s"
-
-#, java-format
-msgid "{0,number,0}:{1,number,00}.{2,number,000}"
-msgstr "{0,number,0}:{1,number,00}.{2,number,000}"

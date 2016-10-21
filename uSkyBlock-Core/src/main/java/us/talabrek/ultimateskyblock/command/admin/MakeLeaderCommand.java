@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.command.admin;
 
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -26,21 +25,14 @@ public class MakeLeaderCommand extends AbstractCommand {
     @Override
     public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, final String... args) {
         if (args.length == 2) {
-            Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+            plugin.async(new Runnable() {
                 @Override
                 public void run() {
                     String islandPlayerName = args[0];
                     String playerName = args[1];
                     PlayerInfo islandPlayer = plugin.getPlayerInfo(islandPlayerName);
-                    if (islandPlayer == null) {
-                        islandPlayer = plugin.getPlayerLogic().loadPlayerData(islandPlayerName);
-                    }
-                    
                     PlayerInfo playerInfo = plugin.getPlayerInfo(playerName);
-                    if (playerInfo == null) {
-                        playerInfo = plugin.getPlayerLogic().loadPlayerData(playerName);
-                    }
-                    
+
                     if (islandPlayer == null || !islandPlayer.getHasIsland()) {
                         sender.sendMessage(I18nUtil.tr("\u00a74Player {0} has no island to transfer!", islandPlayerName));
                         return;
@@ -62,7 +54,7 @@ public class MakeLeaderCommand extends AbstractCommand {
                     playerInfo.setHomeLocation(homeLocation);
                     islandPlayer.save();
                     playerInfo.save();
-                    WorldGuardHandler.updateRegion(sender, islandInfo);
+                    WorldGuardHandler.updateRegion(islandInfo);
                     islandInfo.sendMessageToIslandGroup(true, I18nUtil.marktr("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
                 }
             });

@@ -20,14 +20,7 @@ public class ChatPlaceholder extends TextPlaceholder implements Listener {
     @EventHandler
     public void onChatEvent(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
-        String result = replacePlaceholders(player, e.getFormat());
-        if (result != null) {
-            e.setFormat(result);
-        }
-        result = PlaceholderHandler.replacePlaceholders(player, e.getMessage());
-        if (result != null) {
-            e.setMessage(result);
-        }
+        e.setFormat(PlaceholderHandler.replacePlaceholders(player, e.getFormat()));
+        e.setMessage(PlaceholderHandler.replacePlaceholders(player, e.getMessage()));
     }
-
 }

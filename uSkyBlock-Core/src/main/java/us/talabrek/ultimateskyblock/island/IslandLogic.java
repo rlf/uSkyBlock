@@ -9,6 +9,7 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -27,14 +28,14 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
-import us.talabrek.ultimateskyblock.uuid.AsyncPlayerNameChangedEvent;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +56,7 @@ public class IslandLogic {
     private final LoadingCache<String, IslandInfo> cache;
     private final boolean showMembers;
     private final boolean flatlandFix;
+    private final boolean useDisplayNames;
     private final BukkitTask saveTask;
     private final double topTenCutoff;
 
@@ -67,6 +69,7 @@ public class IslandLogic {
         this.orphanLogic = orphanLogic;
         this.showMembers = plugin.getConfig().getBoolean("options.island.topTenShowMembers", true);
         this.flatlandFix = plugin.getConfig().getBoolean("options.island.fixFlatland", false);
+        this.useDisplayNames = plugin.getConfig().getBoolean("options.advanced.useDisplayNames", false);
         topTenCutoff = plugin.getConfig().getDouble("options.advanced.topTenCutoff", plugin.getConfig().getDouble("options.advanced.purgeLevel", 10));
         cache = CacheBuilder
                 .from(plugin.getConfig().getString("options.advanced.islandCache",
@@ -85,8 +88,8 @@ public class IslandLogic {
                         return new IslandInfo(islandName);
                     }
                 });
-        int every = plugin.getConfig().getInt("options.advanced.island.saveEvery", 20*60*2);
-        saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
+        long every = TimeUtil.secondsAsMillis(plugin.getConfig().getInt("options.advanced.island.saveEvery", 30));
+        saveTask = plugin.async(new Runnable() {
             @Override
             public void run() {
                 saveDirtyToFiles();
@@ -104,7 +107,7 @@ public class IslandLogic {
     }
 
     public synchronized IslandInfo getIslandInfo(String islandName) {
-        if (islandName == null) {
+        if (islandName == null || plugin.isMaintenanceMode()) {
             return null;
         }
         try {
@@ -208,7 +211,7 @@ public class IslandLogic {
         if (Bukkit.isPrimaryThread()) {
             runnable.run();
         } else {
-            Bukkit.getScheduler().runTask(plugin, runnable);
+            plugin.sync(runnable);
         }
         return false;
     }
@@ -312,15 +315,20 @@ public class IslandLogic {
 
     private IslandLevel createIslandLevel(IslandInfo islandInfo, double level) {
         String partyLeader = islandInfo.getLeader();
-        String partyLeaderName = PlayerUtil.getPlayerDisplayName(partyLeader);
+        String partyLeaderName = partyLeader;
         List<String> memberList = new ArrayList<>(islandInfo.getMembers());
         memberList.remove(partyLeader);
         List<String> names = new ArrayList<>();
-        for (String name : memberList) {
-            String displayName = PlayerUtil.getPlayerDisplayName(name);
-            if (displayName != null) {
-                names.add(displayName);
-            }
+        if (useDisplayNames) {
+        	partyLeaderName = PlayerUtil.getPlayerDisplayName(partyLeader);
+        	for (String name : memberList) {
+	            String displayName = PlayerUtil.getPlayerDisplayName(name);
+	            if (displayName != null) {
+	                names.add(displayName);
+	            }
+        	}
+        } else {
+        	names = memberList;
         }
         return new IslandLevel(islandInfo.getName(), partyLeaderName, names, level);
     }
@@ -346,25 +354,6 @@ public class IslandLogic {
 
     public synchronized void removeIslandFromMemory(String islandName) {
         cache.invalidate(islandName);
-    }
-
-    public void renamePlayer(PlayerInfo playerInfo, AsyncPlayerNameChangedEvent change) {
-        List<String> islands = new ArrayList<>();
-        islands.add(playerInfo.locationForParty());
-        islands.addAll(playerInfo.getBannedFrom());
-        for (String islandName : islands) {
-            renamePlayer(islandName, change);
-        }
-    }
-
-    public void renamePlayer(String islandName, AsyncPlayerNameChangedEvent e) {
-        IslandInfo islandInfo = getIslandInfo(islandName);
-        if (islandInfo != null) {
-            islandInfo.renamePlayer(e.getPlayer(), e.getOldName());
-            if (!islandInfo.hasOnlineMembers()) {
-                removeIslandFromMemory(islandInfo.getName());
-            }
-        }
     }
 
     public void updateRank(IslandInfo islandInfo, IslandScore score) {
@@ -396,7 +385,7 @@ public class IslandLogic {
     public boolean purge(String islandName) {
         IslandInfo islandInfo = getIslandInfo(islandName);
         if (islandInfo != null && !islandInfo.ignore()) {
-            for (String member : islandInfo.getMembers()) {
+            for (UUID member : islandInfo.getMemberUUIDs()) {
                 PlayerInfo pi = plugin.getPlayerInfo(member);
                 if (pi != null) {
                     islandInfo.removeMember(pi);
@@ -412,11 +401,17 @@ public class IslandLogic {
     public void shutdown() {
         saveTask.cancel();
         flushCache();
+        saveDirtyToFiles();
     }
 
     public long flushCache() {
         long size = cache.size();
         cache.invalidateAll(); // Flush to files
         return size;
+    }
+
+    public int getSize() {
+        String[] list = directoryIslands.list();
+        return list != null ? list.length : 0;
     }
 }

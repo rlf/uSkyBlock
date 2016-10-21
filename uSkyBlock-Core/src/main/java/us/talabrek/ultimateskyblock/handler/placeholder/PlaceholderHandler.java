@@ -14,7 +14,8 @@ public class PlaceholderHandler {
     private static final String[] ADAPTORS = {
             ChatPlaceholder.class.getName(),
             ServerCommandPlaceholder.class.getName(),
-            "us.talabrek.ultimateskyblock.handler.placeholder.MVdWPlaceholderAPI"
+            "us.talabrek.ultimateskyblock.handler.placeholder.MVdWPlaceholderAPI",
+            "us.talabrek.ultimateskyblock.handler.placeholder.DeluxeChatPlaceholderAPI"
     };
 
     private static PlaceholderAPI.PlaceholderReplacer replacer;
@@ -37,7 +38,7 @@ public class PlaceholderHandler {
                             plugin.getLogger().info("uSkyBlock failed to hook into " + baseName);
                         }
                     }
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                } catch (Throwable e) {
                     // Ignore
                     plugin.getLogger().info("uSkyBlock failed to hook into " + baseName);
                 }
@@ -55,6 +56,9 @@ public class PlaceholderHandler {
     }
 
     public static String replacePlaceholders(Player player, String message) {
+        if (message == null) {
+            return null;
+        }
         String msg = message;
         for (PlaceholderAPI api : apis) {
             msg = api.replacePlaceholders(player, msg);

@@ -76,7 +76,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-        @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onClickOnObsidian(final PlayerInteractEvent event) {
         if (!plugin.isSkyWorld(event.getPlayer().getWorld())) {
             return;
@@ -110,7 +110,8 @@ public class PlayerEvents implements Listener {
                 player.sendMessage(tr("\u00a7eYour inventory must have another empty space!"));
             }
         }
-    }   
+    }
+
     /**
      * Tests for more than one obsidian close by.
      */
@@ -159,7 +160,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onVisitorDamage(final EntityDamageEvent event) {
         if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
             return;
@@ -169,7 +170,7 @@ public class PlayerEvents implements Listener {
                 && ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
                 || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
                 && event.getEntity() instanceof Player
-                && !plugin.playerIsOnIsland((Player)event.getEntity())) {
+                && !plugin.playerIsOnIsland((Player) event.getEntity())) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);
         }
@@ -206,7 +207,7 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (Settings.extras_sendToSpawn) {
             return;
@@ -224,7 +225,7 @@ public class PlayerEvents implements Listener {
         final Player player = event.getPlayer();
         boolean isAdmin = player.isOp() || hasPermission(player, "usb.mod.bypassprotection");
         IslandInfo islandInfo = uSkyBlock.getInstance().getIslandInfo(WorldGuardHandler.getIslandNameAt(event.getTo()));
-        if (!isAdmin && islandInfo != null && islandInfo.isBanned(player.getName())) {
+        if (!isAdmin && islandInfo != null && islandInfo.isBanned(player.getUniqueId())) {
             event.setCancelled(true);
             player.sendMessage(tr("\u00a74That player has forbidden you from teleporting to their island."));
         }
@@ -233,15 +234,8 @@ public class PlayerEvents implements Listener {
             player.sendMessage(tr("\u00a74That island is \u00a7clocked.\u00a7e No teleporting to the island."));
         }
         if (!event.isCancelled()) {
-            PlayerInfo playerInfo = plugin.getPlayerInfo(player);
-            if (playerInfo != null && playerInfo.isClearInventoryOnNextEntry()) {
-                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        plugin.clearPlayerInventory(player);
-                    }
-                }, 1);
-            }
+            final PlayerInfo playerInfo = plugin.getPlayerInfo(player);
+            playerInfo.onTeleport(player);
         }
     }
 
@@ -259,7 +253,7 @@ public class PlayerEvents implements Listener {
         if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
             // Add an oak-sapling
             event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.SAPLING, 1));
-            islandInfo.setLeafBreaks(islandInfo.getLeafBreaks()+1);
+            islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
     }
 }

@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.island;
 
 import us.talabrek.ultimateskyblock.api.model.BlockScore;
+import us.talabrek.ultimateskyblock.player.IslandPerk;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +17,7 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
     private final List<BlockScore> top;
     private boolean isSorted = false;
 
-    public IslandScore(double score, List<BlockScoreImpl> top) {
+    public IslandScore(double score, List<BlockScore> top) {
         this.score = score;
         this.top = joinTop(top);
     }
@@ -24,7 +25,7 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
     /**
      * Consolidates the top, so scores with the same name is combined.
      */
-    private List<BlockScore> joinTop(List<BlockScoreImpl> top) {
+    private List<BlockScore> joinTop(List<BlockScore> top) {
         Map<String, BlockScore> scoreMap = new HashMap<>();
         for (BlockScore score : top) {
             BlockScore existing = scoreMap.get(score.getName());
@@ -53,6 +54,10 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
         return score;
     }
 
+    public List<BlockScore> getTop() {
+        return top;
+    }
+
     @Override
     public List<BlockScore> getTop(int num) {
         return getTop(0, num);
@@ -77,4 +82,5 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
     public int getSize() {
         return top.size();
     }
+
 }

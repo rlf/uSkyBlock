@@ -57,7 +57,7 @@ public class OrphanLogic {
 
     public void save() {
         // TODO: 17/09/2015 - R4zorax: Perhaps not save to file EVERY time?
-        ArrayList<Object> value = new ArrayList<>();
+        List<String> value = new ArrayList<>();
         for (Orphan orphan : new ArrayList<>(orphaned)) {
             value.add(orphan.toString());
         }

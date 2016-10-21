@@ -5,6 +5,7 @@ import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
@@ -27,7 +28,7 @@ public class AdminIslandCommand extends CompositeCommand {
     public AdminIslandCommand(final uSkyBlock plugin, final ConfirmHandler confirmHandler) {
         super("island|is", "", tr("manage islands"));
         this.plugin = plugin;
-        add(new AbstractIslandInfoCommand("protect", "usb.mod.protect", tr("protects the island")) {
+        add(new AbstractIslandInfoCommand("protect", "usb.admin.protect", tr("protects the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 protectIsland(sender, islandInfo);
@@ -98,13 +99,6 @@ public class AdminIslandCommand extends CompositeCommand {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 sender.sendMessage(islandInfo.toString());
-            }
-        });
-        add(new AbstractCommand("protectall", "usb.admin.protectall", tr("protects all islands (time consuming)")) {
-            @Override
-            public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                protectAll(plugin, sender);
-                return true;
             }
         });
         add(new AbstractCommand("setbiome", "usb.admin.setbiome", "?leader biome", tr("sets the biome of the island")) {
@@ -180,6 +174,8 @@ public class AdminIslandCommand extends CompositeCommand {
                 }
             }
         });
+        add(new SetIslandDataCommand(plugin));
+        add(new GetIslandDataCommand());
     }
 
     private void removePlayerFromIsland(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo) {
@@ -216,18 +212,6 @@ public class AdminIslandCommand extends CompositeCommand {
             sender.sendMessage(tr("\u00a7e{0} has had their biome changed to OCEAN.", playerInfo.getPlayerName()));
         }
         sender.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
-    }
-
-    private void protectAll(uSkyBlock plugin, CommandSender sender) {
-        synchronized (plugin) {
-            if (plugin.isProtectAllActive()) {
-                sender.sendMessage(tr("\u00a74Sorry!\u00a7e A protect-all is already running. Let it complete first."));
-                return;
-            }
-            plugin.setProtectAllActive(true);
-        }
-        sender.sendMessage(tr("\u00a7eStarting a protect-all task. It will take a while."));
-        new ProtectAllTask(plugin, sender).runTask(plugin);
     }
 
     private void deleteIsland(CommandSender sender, PlayerInfo playerInfo) {

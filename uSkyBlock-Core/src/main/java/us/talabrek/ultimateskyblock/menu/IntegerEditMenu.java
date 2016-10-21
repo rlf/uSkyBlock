@@ -4,29 +4,48 @@ import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 /**
  * Editor for integer nodes.
  */
 public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
+    private static final String DEFAULT_NUMBER_ICON = "STAINED_GLASS_PANE:11";
     private final YmlConfiguration menuConfig;
     private final MenuItemFactory factory;
     private final EditMenu parent;
+
+    private final Map<String, ItemStack> increments = new LinkedHashMap<>();
 
     public IntegerEditMenu(YmlConfiguration menuConfig, MenuItemFactory factory, EditMenu parent) {
         super(menuConfig);
         this.menuConfig = menuConfig;
         this.factory = factory;
         this.parent = parent;
+        ConfigurationSection incSection = menuConfig.getConfigurationSection("integer-menu.increment");
+        if (incSection != null) {
+            for (String inc : incSection.getKeys(false)) {
+                int incValue = Integer.parseInt(inc, 10);
+                increments.put(inc, ItemStackUtil.createItemStack(incSection.getString(inc, "IRON_INGOT"),
+                        incValue < 0 ? tr("\u00a7c{0,number,#}", incValue) : tr("\u00a7a+{0,number,#}", incValue),
+                        null));
+            }
+        }
     }
 
     @Override
@@ -35,6 +54,9 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
                 !stripFormatting(event.getInventory().getTitle()).contains(stripFormatting(getTitle()))) {
             return false;
         }
+        if (event.getSlotType() != InventoryType.SlotType.CONTAINER) {
+            return true;
+        }
         Player player = (Player) event.getWhoClicked();
         Inventory menu = event.getInventory();
         ItemStack returnItem = menu.getItem(getIndex(5, 0));
@@ -42,21 +64,20 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
         String path = returnItem.getItemMeta().getLore().get(1);
         int page = getPage(returnItem.getItemMeta().getLore().get(2));
         int slot = event.getSlot();
+        int row = slot / 9;
+        int col = slot % 9;
+        ItemStack clickedItem = event.getCurrentItem();
         if (slot >= getIndex(3, 0) && slot <= getIndex(3, 8)) {
             // increment buttons
-            int col = slot - getIndex(3, 0);
             YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
             int value = config.getInt(path, 0);
-            int increment = (int) Math.round((Math.signum(col - 4) * Math.pow(10, Math.abs(col - 4)))) / 10;
-            value += increment;
+            int increment = getDisplayNameAsInt(clickedItem);
+            if (event.getClick() == ClickType.LEFT) {
+                value += increment;
+            } else if (event.getClick() == ClickType.RIGHT) {
+                value = increment;
+            }
             config.set(path, value);
-            config.set("dirty", true);
-        } else if (slot >= getIndex(4,0) && slot <= getIndex(4,8)) {
-            // direct slider
-            int col = slot - getIndex(4, 0);
-            YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
-            int increment = (int) Math.round((Math.signum(col - 4) * Math.pow(10, Math.abs(col - 4)))) / 10;
-            config.set(path, increment);
             config.set("dirty", true);
         }
         if (slot != getIndex(5,0)) {
@@ -65,6 +86,10 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
             player.openInventory(parent.createEditMenu(configName, path, page));
         }
         return true;
+    }
+
+    private int getDisplayNameAsInt(ItemStack clickedItem) {
+        return Integer.parseInt(stripFormatting(clickedItem.getItemMeta().getDisplayName()).replaceAll("[^0-9\\-]+", ""), 10);
     }
 
     /**
@@ -96,51 +121,45 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
         int value = config.getInt(path, 0);
         Inventory menu = Bukkit.createInventory(null, 6 * 9, getTitle());
         menu.setMaxStackSize(MenuItemFactory.MAX_INT_VALUE);
-        ItemStack redWool = createItem(Material.WOOL, (short) 14, tr("\u00a7c-"), null);
-        menu.setItem(getIndex(1, 0), redWool);
-        menu.setItem(getIndex(1, 1), redWool);
-        menu.setItem(getIndex(1, 2), redWool);
-        ItemStack greenWool = createItem(Material.WOOL, (short) 5, tr("\u00a7a+"), null);
-        menu.setItem(getIndex(0, 7), greenWool);
-        menu.setItem(getIndex(1, 7), greenWool);
-        menu.setItem(getIndex(2, 7), greenWool);
-        menu.setItem(getIndex(1, 6), greenWool);
-        menu.setItem(getIndex(1, 8), greenWool);
-
-        ItemStack frameItem = createItem(Material.STAINED_GLASS_PANE, (short) 8, "\u00a77" + configName, null);
-        for (int r = 0; r <= 2; r++) {
-            for (int c = 3; c <= 5; c++) {
-                menu.setItem(getIndex(r, c), frameItem);
+        ItemStack frame = createItem(Material.STAINED_GLASS_PANE, (short) 15, null, null);
+        for (int i = 0; i < 27; i++) {
+            menu.setItem(i, frame);
+        }
+        int nvalue = Math.abs(value);
+        int col = 7;
+        do {
+            int tenValue = nvalue % 10;
+            String specificIcon = menuConfig.getString("integer-menu.number-items." + tenValue, null);
+            ItemStack numberItem = specificIcon != null ? ItemStackUtil.createItemStack(specificIcon) : ItemStackUtil.createItemStack(DEFAULT_NUMBER_ICON);
+            ItemStackUtil.Builder builder = ItemStackUtil.builder(numberItem);
+            if (specificIcon == null) {
+                builder.amount(tenValue);
             }
+            builder.displayName(value < 0 ? tr("\u00a7c{0,number,#}", value) : tr("\u00a7a{0,number,#}", value));
+            menu.setItem(getIndex(1, col), builder.build());
+            nvalue = (nvalue - tenValue) / 10;
+            col--;
+        } while (nvalue != 0 && col > 0);
+        if (value < 0) {
+            menu.setItem(getIndex(1, col), createItem(Material.CARPET, (short) 14, factory.INT + value, null));
         }
         ItemStack valueItem = factory.createIntegerItem(value, path, config, false);
-        menu.setItem(getIndex(1, 4), valueItem);
-        menu.setItem(getIndex(3, 0), createItem(Material.EMERALD, tr("\u00a7c-1000"), valueItem.getItemMeta().getLore()));
-        menu.setItem(getIndex(3, 1), createItem(Material.DIAMOND, tr("\u00a7c-100"), valueItem.getItemMeta().getLore()));
-        menu.setItem(getIndex(3, 2), createItem(Material.GOLD_INGOT, tr("\u00a7c-10"), valueItem.getItemMeta().getLore()));
-        menu.setItem(getIndex(3, 3), createItem(Material.IRON_INGOT, tr("\u00a7c-1"), valueItem.getItemMeta().getLore()));
-
-        menu.setItem(getIndex(3, 5), createItem(Material.IRON_INGOT, tr("\u00a7a+1"), valueItem.getItemMeta().getLore()));
-        menu.setItem(getIndex(3, 6), createItem(Material.GOLD_INGOT, tr("\u00a7a+10"), valueItem.getItemMeta().getLore()));
-        menu.setItem(getIndex(3, 7), createItem(Material.DIAMOND, tr("\u00a7a+100"), valueItem.getItemMeta().getLore()));
-        menu.setItem(getIndex(3, 8), createItem(Material.EMERALD, tr("\u00a7a+1000"), valueItem.getItemMeta().getLore()));
-        int slot = value <= -1000 ? 0
-                : value <= -100 ? 1
-                : value <= -10 ? 2
-                : value < 0 ? 3
-                : value == 0 ? 4
-                : value < 10 ? 5
-                : value < 100 ? 6
-                : value < 1000 ? 7
-                : 8;
-        double ratio = Math.signum(slot - 4) * Math.pow(10, Math.abs(slot - 4));
-        double score = value / ratio; // 0-1
-        short subType = (short) (score <= 0.25 ? 0 // white
-                : score <= 0.50 ? 8 // light gray
-                : score <= 0.75 ? 7 // gray
-                : 15); // black
-        ItemStack pointer = createItem(Material.CARPET, subType, value < 0 ? "\u00a7c" : "\u00a7a" + value, valueItem.getItemMeta().getLore());
-        menu.setItem(getIndex(4, slot), pointer);
+        List<String> lore = valueItem.getItemMeta().getLore();
+        menu.setItem(getIndex(3, 4), valueItem);
+        col = 0;
+        for (ItemStack inc : increments.values()) {
+            if (col == 4) { // Skip center
+                col++;
+            }
+            int incValue = getDisplayNameAsInt(inc);
+            ItemStack icon = ItemStackUtil.builder(inc)
+                    .lore(tr("&aLeft:&7 Increment with {0}", inc.getItemMeta().getDisplayName()))
+                    .lore(tr("&cRight-Click:&7 Set to {0}", incValue))
+                    .lore(lore)
+                    .build();
+            menu.setItem(getIndex(3, col), icon);
+            col++;
+        }
         menu.setItem(getIndex(5, 0), createItem(Material.WOOD_DOOR, "\u00a79" + tr("Return"),
                 Arrays.asList(configName, path, tr("\u00a77Page {0}", page))));
         return menu;

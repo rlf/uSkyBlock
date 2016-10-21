@@ -23,9 +23,9 @@ import java.util.List;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.menu.MenuItemFactory.READONLY;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.wordWrap;
-import static us.talabrek.ultimateskyblock.util.ItemStackUtil.builder;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.wordWrap;
+import static dk.lockfuglsang.minecraft.util.ItemStackUtil.builder;
 
 /**
  * The primary config menu.
@@ -124,14 +124,14 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     }
 
     private void saveConfig(final Player player, final String configName, final int page) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+        plugin.async(new Runnable() {
             @Override
             public void run() {
                 try {
                     YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
                     config.set("dirty", null);
                     config.save(new File(plugin.getDataFolder(), configName));
-                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                    plugin.sync(new Runnable() {
                         @Override
                         public void run() {
                             plugin.reloadConfig();

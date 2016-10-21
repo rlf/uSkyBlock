@@ -26,18 +26,26 @@ public class TextPlaceholder implements PlaceholderAPI {
     }
 
     private String replacePlaceholdersInternal(Player player, String message) {
-        String result = null;
+        if (message == null) {
+            return null;
+        }
+        String result = message;
         Matcher matcher = PLACEHOLDER_PATTERN.matcher(message);
         if (matcher.find()) {
             int ix = 0;
             StringBuilder sb = new StringBuilder();
             do {
                 sb.append(message.substring(ix, matcher.start()));
-                String replacement = replacer.replace(null, player, matcher.group("placeholder"));
-                if (replacement != null) {
-                    sb.append(replacement);
+                String placeholderString = matcher.group("placeholder");
+                if (placeholderString != null && replacer.getPlaceholders().contains(placeholderString)) {
+                    String replacement = replacer.replace(null, player, placeholderString);
+                    if (replacement != null) {
+                        sb.append(replacement);
+                    } else {
+                        sb.append(message.substring(matcher.start(), matcher.end()));
+                    }
                 } else {
-                    sb.append(message.substring(matcher.start(), matcher.end()));
+                    sb.append("{" + placeholderString + "}");
                 }
                 ix = matcher.end();
             } while (matcher.find());

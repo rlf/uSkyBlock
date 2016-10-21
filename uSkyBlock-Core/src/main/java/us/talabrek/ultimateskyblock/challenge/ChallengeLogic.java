@@ -1,5 +1,7 @@
 package us.talabrek.ultimateskyblock.challenge;
 
+import dk.lockfuglsang.minecraft.nbt.NBTUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -9,16 +11,18 @@ import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.FormatUtil;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,18 +35,19 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 /**
  * The home of challenge business logic.
  */
-public class ChallengeLogic {
-    public static final int MS_MIN = 60 * 1000;
-    public static final int MS_HOUR = 60 * MS_MIN;
+public class ChallengeLogic implements Listener {
+    public static final long MS_MIN = 60 * 1000;
+    public static final long MS_HOUR = 60 * MS_MIN;
     public static final long MS_DAY = 24 * MS_HOUR;
     public static final int COLS_PER_ROW = 9;
     public static final int ROWS_OF_RANKS = 5;
@@ -55,6 +60,7 @@ public class ChallengeLogic {
     public final ChallengeDefaults defaults;
     public final ChallengeCompletionLogic completionLogic;
     private final ItemStack lockedItem;
+    private final Map<Challenge.Type, ItemStack> lockedItemMap = new HashMap<>();
 
     public ChallengeLogic(FileConfiguration config, uSkyBlock plugin) {
         this.config = config;
@@ -65,9 +71,20 @@ public class ChallengeLogic {
         completionLogic = new ChallengeCompletionLogic(plugin, config);
         String displayItemForLocked = config.getString("lockedDisplayItem", null);
         if (displayItemForLocked != null) {
-            lockedItem = ItemStackUtil.createItemStack(displayItemForLocked, null, null);
+            lockedItem = ItemStackUtil.createItemStack(displayItemForLocked);
         } else {
             lockedItem = null;
+        }
+        for (Challenge.Type type : Challenge.Type.values()) {
+            String itemName = config.getString(type.name() + ".lockedDisplayItem", null);
+            if (itemName != null) {
+                lockedItemMap.put(type, ItemStackUtil.createItemStack(itemName));
+            } else {
+                lockedItemMap.put(type, lockedItem);
+            }
+        }
+        if (completionLogic.isIslandSharing()) {
+            plugin.getServer().getPluginManager().registerEvents(this, plugin);
         }
     }
 
@@ -85,10 +102,15 @@ public class ChallengeLogic {
 
     public List<String> getAvailableChallengeNames(PlayerInfo playerInfo) {
         List<String> list = new ArrayList<>();
+        if (playerInfo == null || !playerInfo.getHasIsland()) {
+            return list;
+        }
         for (Rank rank : ranks.values()) {
             if (rank.isAvailable(playerInfo)) {
                 for (Challenge challenge : rank.getChallenges()) {
-                    list.add(challenge.getName());
+                    if (challenge.getMissingRequirements(playerInfo).isEmpty()) {
+                        list.add(challenge.getName());
+                    }
                 }
             } else {
                 break;
@@ -148,14 +170,20 @@ public class ChallengeLogic {
     }
 
     public Challenge getChallenge(String challengeName) {
+        List<Challenge> partialMatch = new ArrayList<>();
         for (Rank rank : ranks.values()) {
             for (Challenge challenge : rank.getChallenges()) {
                 if (challenge.getName().equalsIgnoreCase(challengeName)) {
                     return challenge;
                 } else if (stripFormatting(challenge.getDisplayName()).equalsIgnoreCase(challengeName)) {
                     return challenge;
+                } else if (challenge.getName().startsWith(challengeName)) {
+                    partialMatch.add(challenge);
                 }
             }
+        }
+        if (partialMatch.size() == 1) {
+            return partialMatch.get(0);
         }
         return null;
     }
@@ -167,9 +195,10 @@ public class ChallengeLogic {
             case '-':
                 return amount - inc * timesCompleted; // Why?
             case '*':
-                return amount * inc * timesCompleted; // Oh, my god! Just do the time m8!
+            case '^':
+                return amount * (int) Math.pow(inc, timesCompleted); // Oh, my god! Just do the time m8!
             case '/':
-                return amount / (inc * timesCompleted); // Yay! Free stuff!!!
+                return amount / (int) Math.pow(inc, timesCompleted); // Yay! Free stuff!!!
         }
         return amount;
     }
@@ -291,7 +320,7 @@ public class ChallengeLogic {
         if (challenge != null && completion != null) {
             StringBuilder sb = new StringBuilder();
             boolean hasAll = true;
-            List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedSinceTimer());
+            List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
             for (ItemStack required : requiredItems) {
                 String name = VaultHandler.getItemName(required);
                 if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
@@ -312,11 +341,10 @@ public class ChallengeLogic {
         return false;
     }
 
-    private int getCountOf(PlayerInventory inventory, ItemStack required) {
+    public int getCountOf(Inventory inventory, ItemStack required) {
         int count = 0;
         for (ItemStack invItem : inventory.all(required.getType()).values()) {
-            // TODO: 12/11/2015 - R4zorax: Should also test displayname...
-            if (invItem.getDurability() == required.getDurability()) {
+            if (invItem.getDurability() == required.getDurability() && NBTUtil.getNBTTag(invItem).equals(NBTUtil.getNBTTag(required))) {
                 count += invItem.getAmount();
             }
         }
@@ -342,7 +370,7 @@ public class ChallengeLogic {
         if (defaults.enableEconomyPlugin && VaultHandler.hasEcon()) {
             Perk perk = plugin.getPerkLogic().getPerk(player);
             rewBonus += perk.getRewBonus();
-            VaultHandler.depositPlayer(player.getName(), reward.getCurrencyReward() * rewBonus);
+            VaultHandler.depositPlayer(player, reward.getCurrencyReward() * rewBonus);
         }
         player.giveExp(reward.getXpReward());
         boolean wasBroadcast = false;
@@ -356,10 +384,22 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a7eCurrency reward: \u00a7f{0,number,###.##} {1} \u00a7a ({2,number,##.##})%", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
         }
         if (reward.getPermissionReward() != null) {
-            for (String perm : reward.getPermissionReward().split(" ")) {
-                if (!hasPermission(player, perm)) {
-                    VaultHandler.addPerk(player, perm);
+            List<String> perms = Arrays.asList(reward.getPermissionReward().trim().split(" "));
+            if (isIslandSharing()) {
+                // Give all members
+                IslandInfo islandInfo = playerInfo.getIslandInfo();
+                for (UUID memberUUID : islandInfo.getMemberUUIDs()) {
+                    if (memberUUID == null) {
+                        continue;
+                    }
+                    PlayerInfo pi = plugin.getPlayerInfo(memberUUID);
+                    if (pi != null) {
+                        pi.addPermissions(perms);
+                    }
                 }
+            } else {
+                // Give only player
+                playerInfo.addPermissions(perms);
             }
         }
         HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(reward.getItemReward().toArray(new ItemStack[0]));
@@ -370,8 +410,8 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a7eYour inventory is \u00a74full\u00a7e. Items dropped on the ground."));
         }
         for (String cmd : reward.getCommands()) {
-            String command = cmd.replaceAll("\\{challenge\\}", challenge.getName());
-            command = command.replaceAll("\\{challengeName\\}", challenge.getDisplayName());
+            String command = cmd.replaceAll("\\{challenge\\}", Matcher.quoteReplacement(challenge.getName()));
+            command = command.replaceAll("\\{challengeName\\}", Matcher.quoteReplacement(challenge.getDisplayName()));
             plugin.execCommand(player, command, true);
         }
         playerInfo.completeChallenge(challengeName, wasBroadcast);
@@ -394,7 +434,7 @@ public class ChallengeLogic {
             lores.add(tr("\u00a74\u00a7lYou can't repeat this challenge."));
         }
         if (completion.getTimesCompleted() > 0) {
-            meta.addEnchant(new EnchantmentWrapper(0), 0, false);
+            meta.addEnchant(new EnchantmentWrapper(0), 0, true);
         }
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
@@ -434,7 +474,7 @@ public class ChallengeLogic {
         int rowsToSkip = (page - 1) * ROWS_OF_RANKS;
         for (Iterator<Rank> it = ranksOnPage.iterator(); it.hasNext(); ) {
             Rank rank = it.next();
-            int rowsInRank = (int) Math.ceil(rank.getChallenges().size() / 8f);
+            int rowsInRank = getRows(rank);
             if (rowsToSkip <= 0 || ((rowsToSkip - rowsInRank) < 0)) {
                 return ranksOnPage;
             }
@@ -447,9 +487,17 @@ public class ChallengeLogic {
     private int calculateRows(List<Rank> ranksOnPage) {
         int row = 0;
         for (Rank rank : ranksOnPage) {
-            row += Math.ceil(rank.getChallenges().size() / 8f);
+            row += getRows(rank);
         }
         return row;
+    }
+
+    private int getRows(Rank rank) {
+        int rankSize = 0;
+        for (Challenge challenge : rank.getChallenges()) {
+            rankSize += challenge.getOffset() + 1;
+        }
+        return (int) Math.ceil(rankSize / 8f);
     }
 
     public int populateChallengeRank(Inventory menu, final Rank rank, int location, final PlayerInfo playerInfo) {
@@ -466,9 +514,13 @@ public class ChallengeLogic {
         }
         meta4.setLore(lores);
         currentChallengeItem.setItemMeta(meta4);
-        menu.setItem(location++, currentChallengeItem);
-        List<String> missingRequirements = rank.getMissingRequirements(playerInfo);
+        menu.setItem(location, currentChallengeItem);
+        List<String> missingRankRequirements = rank.getMissingRequirements(playerInfo);
         for (Challenge challenge : rank.getChallenges()) {
+            if (challenge.getOffset() == -1 && !currentChallengeItem.getItemMeta().hasEnchants()) {
+                continue; // skip
+            }
+            location += challenge.getOffset() + 1;
             if ((location % 9) == 0) {
                 location++; // Skip rank-row
             }
@@ -479,8 +531,12 @@ public class ChallengeLogic {
             String challengeName = challenge.getName();
             try {
                 currentChallengeItem = getItemStack(playerInfo, challengeName);
-                if (!missingRequirements.isEmpty()) {
+                List<String> missingReqs = challenge.getMissingRequirements(playerInfo);
+                if (!missingRankRequirements.isEmpty() || !missingReqs.isEmpty()) {
                     ItemStack locked = challenge.getLockedDisplayItem();
+                    if (locked == null) {
+                        locked = lockedItemMap.get(challenge.getType());
+                    }
                     if (locked != null) {
                         currentChallengeItem.setType(locked.getType());
                         currentChallengeItem.setDurability(locked.getDurability());
@@ -489,12 +545,16 @@ public class ChallengeLogic {
                         currentChallengeItem.setDurability(lockedItem.getDurability());
                     }
                     meta4 = currentChallengeItem.getItemMeta();
+                    if (defaults.showLockedChallengeName) {
+                        lores.add(meta4.getDisplayName());
+                    }
                     meta4.setDisplayName(tr("\u00a74\u00a7lLocked Challenge"));
-                    lores.addAll(missingRequirements);
+                    lores.addAll(missingReqs);
+                    lores.addAll(missingRankRequirements);
                     meta4.setLore(lores);
                     currentChallengeItem.setItemMeta(meta4);
                 }
-                menu.setItem(location++, currentChallengeItem);
+                menu.setItem(location, currentChallengeItem);
             } catch (Exception e) {
                 plugin.getLogger().log(Level.SEVERE, "Invalid challenge " + challenge, e);
             }
@@ -531,6 +591,24 @@ public class ChallengeLogic {
         return completionLogic.getChallenge(playerInfo, challenge);
     }
 
+    public ChallengeCompletion getIslandCompletion(String islandName, String challengeName) {
+        Map<String, ChallengeCompletion> challenges = completionLogic.getIslandChallenges(islandName);
+        if (challenges.containsKey(challengeName)) {
+            return challenges.get(challengeName);
+        } else {
+            ChallengeCompletion chal = null;
+            for (String k : challenges.keySet()) {
+                if (k.startsWith(challengeName)) {
+                    if (chal != null) {
+                        return null;
+                    }
+                    chal = challenges.get(k);
+                }
+            }
+            return chal;
+        }
+    }
+
     public void resetAllChallenges(PlayerInfo playerInfo) {
         completionLogic.resetAllChallenges(playerInfo);
     }
@@ -541,5 +619,30 @@ public class ChallengeLogic {
 
     public long flushCache() {
         return completionLogic.flushCache();
+    }
+
+    public boolean isIslandSharing() {
+        return completionLogic.isIslandSharing();
+    }
+
+    @EventHandler
+    public void onMemberJoinedEvent(MemberJoinedEvent e) {
+        if (!completionLogic.isIslandSharing() || !(e.getPlayerInfo() instanceof PlayerInfo)) {
+            return;
+        }
+        PlayerInfo playerInfo = (PlayerInfo) e.getPlayerInfo();
+        Map<String, ChallengeCompletion> completions = completionLogic.getIslandChallenges(e.getIslandInfo().getName());
+        List<String> permissions = new ArrayList<>();
+        for (Map.Entry<String, ChallengeCompletion> entry : completions.entrySet()) {
+            if (entry.getValue().getTimesCompleted() > 0) {
+                Challenge challenge = getChallenge(entry.getKey());
+                if (challenge.getReward().getPermissionReward() != null) {
+                    permissions.addAll(Arrays.asList(challenge.getReward().getPermissionReward().split(" ")));
+                }
+            }
+        }
+        if (!permissions.isEmpty()) {
+            playerInfo.addPermissions(permissions);
+        }
     }
 }

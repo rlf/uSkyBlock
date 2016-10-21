@@ -1,10 +1,14 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.LocalWorld;
+import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
@@ -12,6 +16,7 @@ import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldedit.world.registry.WorldData;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -26,6 +31,7 @@ import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegen;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -33,7 +39,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,29 +57,20 @@ public class WorldEditHandler {
     public static void loadIslandSchematic(final File file, final Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
         try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
-            BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
-            ClipboardReader reader = ClipboardFormat.SCHEMATIC.getReader(in);
-
-            WorldData worldData = bukkitWorld.getWorldData();
-            Clipboard clipboard = reader.read(worldData);
-            ClipboardHolder holder = new ClipboardHolder(clipboard, worldData);
-
-            Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
-            int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
-            final EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
-            editSession.enableQueue();
-            editSession.setFastMode(true);
+            boolean noAir = false;
+            boolean entities = true;
             Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
-            final Operation operation = holder
-                    .createPaste(editSession, worldData)
-                    .to(to)
-                    .ignoreAirBlocks(true)
-                    .build();
-            AsyncWorldEditHandler.registerCompletion(player);
-            Operations.completeBlindly(operation);
-            editSession.flushQueue();
+            EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
+            try {
+                SchematicFormat.getFormat(file)
+                        .load(file)
+                        .paste(editSession, to, noAir, entities);
+                editSession.flushQueue();
+            } catch (MaxChangedBlocksException | IOException | DataException e) {
+                log.log(Level.INFO, "Unable to paste schematic " + file, e);
+            }
         } catch (IOException e) {
-            uSkyBlock.log(Level.WARNING, "Unable to load schematic " + file, e);
+            LogUtil.log(Level.WARNING, "Unable to load schematic " + file, e);
         }
     }
 
@@ -89,10 +85,14 @@ public class WorldEditHandler {
         int maxZ = region.getMaximumPoint().getBlockZ();
         int cx = minX & 0xF;
         int cz = minZ & 0xF;
-        minX = minX - cx + 16;
-        minZ = minZ - cz + 16;
-        for (int x = minX; x <= maxX; x+=16) {
-            for (int z = minZ; z <= maxZ; z+=16) {
+        minX = cx != 0 ? minX - cx + 16 : minX;
+        minZ = cz != 0 ? minZ - cz + 16 : minZ;
+        cx = maxX & 0xF;
+        cz = maxZ & 0xF;
+        maxX = cx != 15 ? maxX - cx : maxX;
+        maxZ = cz != 15 ? maxZ - cz : maxZ;
+        for (int x = minX; x < maxX; x+=16) {
+            for (int z = minZ; z < maxZ; z+=16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));
             }
         }
@@ -107,10 +107,14 @@ public class WorldEditHandler {
         int maxZ = region.getMaximumPoint().getBlockZ();
         int cx = minX & 0xF;
         int cz = minZ & 0xF;
-        minX = minX - cx - 16;
-        minZ = minZ - cz - 16;
-        for (int x = minX; x <= maxX+16; x+=16) {
-            for (int z = minZ; z <= maxZ+16; z+=16) {
+        minX = minX - cx;
+        minZ = minZ - cz;
+        cx = maxX & 0xF;
+        cz = maxZ & 0xF;
+        maxX = cx != 15 ? maxX - cx + 16 : maxX;
+        maxZ = cz != 15 ? maxZ - cz + 16 : maxZ;
+        for (int x = minX; x < maxX; x+=16) {
+            for (int z = minZ; z < maxZ; z+=16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));
             }
         }
@@ -226,7 +230,11 @@ public class WorldEditHandler {
         Set<Vector2D> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
-            innerChunks = getOuterChunks(cube);
+            if (Settings.island_protectionRange == Settings.island_distance) {
+                innerChunks = getInnerChunks(cube);
+            } else {
+                innerChunks = getOuterChunks(cube);
+            }
         } else {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
@@ -235,13 +243,15 @@ public class WorldEditHandler {
             @Override
             public void run() {
                 long diff = System.currentTimeMillis() - t;
-                uSkyBlock.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+                LogUtil.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
                 if (afterDeletion != null) {
                     afterDeletion.run();
                 }
             }
         };
-        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
+        // This stopped performing
+        //WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
+        WorldEditClear weRegen = new WorldEditClear(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
         WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
         regen.runTask(uSkyBlock.getInstance());
     }
@@ -253,7 +263,11 @@ public class WorldEditHandler {
         Set<Vector2D> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
-            innerChunks = getOuterChunks(cube);
+            if (Settings.island_protectionRange == Settings.island_distance) {
+                innerChunks = getInnerChunks(cube);
+            } else {
+                innerChunks = getOuterChunks(cube);
+            }
         } else {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
@@ -262,13 +276,13 @@ public class WorldEditHandler {
             @Override
             public void run() {
                 long diff = System.currentTimeMillis() - t;
-                uSkyBlock.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+                LogUtil.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
                 if (afterDeletion != null) {
                     afterDeletion.run();
                 }
             }
         };
-        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
+        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
         WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
         regen.runTask(uSkyBlock.getInstance());
     }
@@ -278,8 +292,8 @@ public class WorldEditHandler {
     }
 
     public static boolean isOuterPossible() {
-        return Settings.island_distance > Settings.island_protectionRange &&
-                (Settings.island_distance % 32 == 0 || Settings.island_distance - Settings.island_protectionRange > 32);
+        return Settings.island_distance >= Settings.island_protectionRange &&
+                ((Settings.island_distance % 32) == 0 || (Settings.island_distance - Settings.island_protectionRange) > 32);
     }
 
     public static void loadRegion(Location location) {
@@ -310,7 +324,7 @@ public class WorldEditHandler {
         }
     }
 
-    public static EditSession createEditSession(BukkitWorld bukkitWorld, int maxBlocks) {
-        return new EditSession(bukkitWorld, maxBlocks);
+    public static EditSession createEditSession(com.sk89q.worldedit.world.World bukkitWorld, int maxBlocks) {
+        return WorldEdit.getInstance().getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
     }
 }

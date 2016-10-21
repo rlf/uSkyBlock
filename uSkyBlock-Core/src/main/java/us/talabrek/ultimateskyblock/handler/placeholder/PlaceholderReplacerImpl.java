@@ -28,6 +28,7 @@ public class PlaceholderReplacerImpl implements PlaceholderAPI.PlaceholderReplac
     private static final Set<String> PLACEHOLDERS = new HashSet<>(Arrays.asList(
             "usb_version",
             "usb_island_level",
+            "usb_island_level_int",
             "usb_island_rank",
             "usb_island_leader",
             "usb_island_golems_max",
@@ -95,6 +96,7 @@ public class PlaceholderReplacerImpl implements PlaceholderAPI.PlaceholderReplac
     private String lookup(IslandInfo islandInfo, String placeholder) {
         switch (placeholder) {
             case "usb_island_level": return pre("{0,number,##.#}", islandInfo.getLevel());
+            case "usb_island_level_int": return pre("{0,number,#}", islandInfo.getLevel());
             case "usb_island_rank": return getRank(islandInfo);
             case "usb_island_leader": return islandInfo.getLeader();
             case "usb_island_golems_max": return "" + islandInfo.getMaxGolems();

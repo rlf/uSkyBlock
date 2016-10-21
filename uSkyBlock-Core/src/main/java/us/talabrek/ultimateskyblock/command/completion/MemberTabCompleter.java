@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class MemberTabCompleter implements TabCompleter {
                 us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
                     String member = args.length > 0 ? args[args.length-1] : "";
-                    return AbstractTabCompleter.filter(islandInfo.getMembers(), member);
+                    return AbstractTabCompleter.filter(new ArrayList<>(islandInfo.getMembers()), member);
                 }
             }
         }

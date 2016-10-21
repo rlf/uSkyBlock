@@ -23,15 +23,16 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
 
     @Override
     public short[][] generateExtBlockSections(World world, Random random, int cx, int cz, BiomeGrid biomes) {
-        setOcean(biomes);
+        setDefaultBiome(biomes);
         return extBlockSections;
     }
 
-    private void setOcean(BiomeGrid biomes) {
+    private void setDefaultBiome(BiomeGrid biomes) {
         if (biomes != null) {
+            Biome biome = Biome.valueOf(uSkyBlock.getInstance().getConfig().getString("options.general.defaultBiome", "OCEAN"));
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
-                    biomes.setBiome(x,z, Biome.OCEAN);
+                    biomes.setBiome(x,z, biome);
                 }
             }
         }
@@ -39,7 +40,7 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
 
     @Override
     public byte[][] generateBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
-        setOcean(biomes);
+        setDefaultBiome(biomes);
         return blockSections;
     }
 

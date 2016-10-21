@@ -13,12 +13,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
+import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.ItemStackUtil;
-import us.talabrek.ultimateskyblock.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +34,8 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.CHALLENGE_PAGESIZE;
 import static us.talabrek.ultimateskyblock.challenge.ChallengeLogic.COLS_PER_ROW;
-import static us.talabrek.ultimateskyblock.util.FormatUtil.stripFormatting;
+import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
+import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 // TODO: Move all the texts to resource-files (translatable).
 
@@ -54,28 +56,90 @@ public class SkyBlockMenu {
     ItemStack invite = new ItemStack(398, 1);
     ItemStack kick = new ItemStack(301, 1);
     private List<PartyPermissionMenuItem> permissionMenuItems = Arrays.asList(
-            new PartyPermissionMenuItem(biome, "canChangeBiome", "Change Biome",
-                    tr("change the islands's biome.")),
-            new PartyPermissionMenuItem(lock, "canToggleLock", "Toggle Island Lock",
+            new PartyPermissionMenuItem(biome, "canChangeBiome", tr("Change Biome"),
+                    tr("change the island's biome.")),
+            new PartyPermissionMenuItem(lock, "canToggleLock", tr("Toggle Island Lock"),
                     tr("toggle the island's lock.")),
-            new PartyPermissionMenuItem(warpset, "canChangeWarp", "Set Island Warp",
+            new PartyPermissionMenuItem(warpset, "canChangeWarp", tr("Set Island Warp"),
                     tr("set the island's warp."),
-                    tr("set the island's warp,\nwhich allows non-group\nmembers to teleport to\n the island")),
-            new PartyPermissionMenuItem(warptoggle, "canToggleWarp", "Toggle Island Warp",
+                    tr("set the island's warp,\nwhich allows non-group\nmembers to teleport to\nthe island.")),
+            new PartyPermissionMenuItem(warptoggle, "canToggleWarp", tr("Toggle Island Warp"),
                     tr("toggle the island's warp."),
-                    tr("toggle the\nisland's warp, allowing them\nto turn it on or off at anytime.\nbut not set the location.")),
-            new PartyPermissionMenuItem(invite, "canInviteOthers", "Invite Players",
+                    tr("toggle the island's warp,\nallowing them to turn it\non or off at anytime, but\nnot set the location.")),
+            new PartyPermissionMenuItem(invite, "canInviteOthers", tr("Invite Players"),
                     tr("invite others to the island."),
                     tr("invite\n" +
                     "other players to the island if\n" +
                     "there is enough room for more\n" +
                     "members")),
-            new PartyPermissionMenuItem(kick, "canKickOthers", "Kick Players",
+            new PartyPermissionMenuItem(kick, "canKickOthers", tr("Kick Players"),
                     tr("kick others from the island."),
                     tr("kick\n" +
                     "other players from the island,\n" +
                     "but they are unable to kick\n" +
                     "the island leader."))
+    );
+    private List<BiomeMenuItem> biomeMenus = Arrays.asList(
+            new BiomeMenuItem(new ItemStack(Material.RAW_FISH, 1, (short) 2),
+                    "ocean", tr("Ocean"),
+                    tr("The ocean biome is the basic\nstarting biome for all islands.\npassive mobs like animals will\nnot spawn. Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 1),
+                    "forest", tr("Forest"),
+                    tr("The forest biome will allow\nyour island to spawn passive.\nmobs like animals (including\nwolves). Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SAND, 1),
+                    "desert", tr("Desert"),
+                    tr("The desert biome makes it so\nthat there is no rain or snow\non your island. Passive mobs\nwon't spawn. Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 3),
+                    "jungle", tr("Jungle"),
+                    tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.WATER_LILY, 1),
+                    "swampland", tr("Swampland"),
+                    tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.SNOW, 1),
+                    "taiga", tr("Taiga"),
+                    tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.RED_MUSHROOM, 1),
+                    "mushroom", tr("Mushroom"),
+                    tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.NETHER_BRICK, 1),
+                    "hell", tr("Hell"),
+                    tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.EYE_OF_ENDER, 1),
+                    "sky", tr("Sky"),
+                    tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.LONG_GRASS, 1, (byte) 1),
+                    "plains", tr("Plains"),
+                    tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.EMERALD_ORE, 1),
+                    "extreme_hills", tr("Extreme Hills"),
+                    tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
+                    "flower_forest", tr("Flower Forest"),
+                    tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
+                    "deep_ocean", tr("Deep Ocean"),
+                    tr("The deep-ocean biome is an advanced\n" +
+                            "biome. Passive mobs like animals will\n" +
+                            "not spawn. Hostile mobs \n"+
+                            "(including Guardians) will\n" +
+                            "spawn normally.")
+            ),
+            new BiomeMenuItem(new ItemStack(Material.PACKED_ICE, 1),
+                    "ice_plains", tr("Ice Plains"),
+                    tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
+            )
     );
 
     public SkyBlockMenu(uSkyBlock plugin, ChallengeLogic challengeLogic) {
@@ -97,7 +161,8 @@ public class SkyBlockMenu {
         sign.setItemMeta(meta2);
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        meta3.setDisplayName(pname + "'s Permissions");
+        meta3.setOwner(pname);
+        meta3.setDisplayName(tr("\u00a7e{0}''\u00a79s Permissions", pname));
         addLore(lores, tr("\u00a7eHover over an icon to view\n\u00a7ea permission. Change the\n\u00a7epermission by clicking it."));
         meta3.setLore(lores);
         pHead.setItemMeta(meta3);
@@ -160,7 +225,7 @@ public class SkyBlockMenu {
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
         for (String temp : memberList) {
-            meta3.setDisplayName("\u00a7f" + temp);
+            meta3.setDisplayName(tr("\u00a7e{0}''s\u00a79 Permissions", temp));
             boolean isLeader = islandInfo.isLeader(temp);
             if (isLeader) {
                 addLore(lores, "\u00a7a\u00a7l", tr("Leader"));
@@ -168,7 +233,7 @@ public class SkyBlockMenu {
                 addLore(lores, "\u00a7e\u00a7l", tr("Member"));
             }
             for (PartyPermissionMenuItem perm : permissionMenuItems) {
-                if (isLeader ||islandInfo.hasPerm(temp, perm.getPerm())) {
+                if (isLeader || islandInfo.hasPerm(temp, perm.getPerm())) {
                     lores.add("\u00a7a" + tr("Can {0}", "\u00a7f" + perm.getShortDescription()));
                 } else {
                     lores.add("\u00a7c" + tr("Cannot {0}", "\u00a7f" + perm.getShortDescription()));
@@ -219,67 +284,11 @@ public class SkyBlockMenu {
         sign.setItemMeta(meta4);
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        List<BiomeMenuItem> biomeMenus = Arrays.asList(
-                new BiomeMenuItem(new ItemStack(Material.RAW_FISH, 1, (short) 2),
-                        "ocean", tr("Ocean"),
-                        tr("The ocean biome is the basic\nstarting biome for all islands.\npassive mobs like animals will\nnot spawn. Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 1),
-                        "forest", tr("Forest"),
-                        tr("The forest biome will allow\nyour island to spawn passive.\nmobs like animals (including\nwolves). Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SAND, 1),
-                        "desert", tr("Desert"),
-                        tr("The desert biome makes it so\nthat there is no rain or snow\non your island. Passive mobs\nwon't spawn. Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SAPLING, 1, (short) 3),
-                        "jungle", tr("Jungle"),
-                        tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.WATER_LILY, 1),
-                        "swampland", tr("Swampland"),
-                        tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.SNOW, 1),
-                        "taiga", tr("Taiga"),
-                        tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.RED_MUSHROOM, 1),
-                        "mushroom", tr("Mushroom"),
-                        tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.NETHER_BRICK, 1),
-                        "hell", tr("Hell"),
-                        tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.EYE_OF_ENDER, 1),
-                        "sky", tr("Sky"),
-                        tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.LONG_GRASS, 1, (byte) 1),
-                        "plains", tr("Plains"),
-                        tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
-                ),
-                new BiomeMenuItem(new ItemStack(Material.EMERALD_ORE, 1),
-                        "extreme_hills", tr("Extreme Hills"),
-                        tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
-                ),
-                /* Not part of Bukkit 1.9
-                new BiomeMenuItem(new ItemStack(Material.RED_ROSE, 1, (short) 5),
-                        "flower_forest", tr("Flower Forest"),
-                        tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
-                ),
-                */
-                new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
-                        "deep_ocean", tr("Deep Ocean"),
-                        tr("The deep-ocean biome is an advanced\n" +
-                                "biome. Passive mobs like animals will\n" +
-                                "not spawn. Hostile mobs \n"+
-                                "(including Guardians) will\n" +
-                                "spawn normally.")
-                ));
         String currentBiome = plugin.getCurrentBiome(player);
         for (BiomeMenuItem biomeMenu : biomeMenus) {
+            if (!BiomeCommand.biomeExists(biomeMenu.getId())) {
+                continue; // Skip it
+            }
             ItemStack menuItem = biomeMenu.getIcon();
             meta4 = menuItem.getItemMeta();
             if (hasPermission(player, "usb.biome." + biomeMenu.getId())) {
@@ -343,7 +352,7 @@ public class SkyBlockMenu {
                 item.setItemMeta(meta);
                 menu.setItem(index, item);
             } catch (Exception e) {
-                uSkyBlock.log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
+                log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to add extra-menu " + sIndex + ": " + e);
             }
         }
     }
@@ -381,13 +390,13 @@ public class SkyBlockMenu {
                                 plugin.execCommand(player, cmd, false);
                             }
                         } else {
-                            uSkyBlock.log(Level.INFO, "\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
+                            log(Level.INFO, "\u00a7a[uSkyBlock] Malformed menu " + title + ", invalid command : " + command);
                         }
                     }
                     return true;
                 }
             } catch (Exception e) {
-                uSkyBlock.log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
+                log(Level.INFO, "\u00a79[uSkyBlock]\u00a7r Unable to execute commands for extra-menu " + sIndex + ": " + e);
             }
         }
         return false;
@@ -454,47 +463,41 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
-        int index = 1;
-        for (String schemeName : schemeNames) {
-            IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
-            boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
-            if (!enabled) {
-                continue; // Skip
+        if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+            int index = 1;
+            for (String schemeName : schemeNames) {
+                IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+                boolean enabled = plugin.getConfig().getBoolean("island-schemes." + islandPerk.getSchemeName() + ".enabled", true);
+                if (!enabled) {
+                    continue; // Skip
+                }
+                index = Math.max(plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index), 1);
+                menuItem = islandPerk.getDisplayItem();
+                meta = menuItem.getItemMeta();
+                lores = meta.getLore();
+                if (lores == null) {
+                    lores = new ArrayList<>();
+                }
+                // TODO: 30/01/2016 - R4zorax: Add the extra items?
+                if (player.hasPermission(islandPerk.getPermission())) {
+                    addLore(lores, tr("\u00a7aClick to create!"));
+                } else {
+                    addLore(lores, tr("\u00a7cNo access!\n\u00a77({0})", islandPerk.getPermission()));
+                }
+                meta.setLore(lores);
+                menuItem.setItemMeta(meta);
+                menu.setItem(index++, menuItem);
             }
-            index = plugin.getConfig().getInt("island-schemes." + islandPerk.getSchemeName() + ".index", index);
-            menuItem = islandPerk.getDisplayItem();
-            meta = menuItem.getItemMeta();
-            lores = meta.getLore();
-            if (lores == null) {
-                lores = new ArrayList<>();
-            }
-            // TODO: 30/01/2016 - R4zorax: Add the extra items?
-            if (player.hasPermission(islandPerk.getPermission())) {
-                addLore(lores, tr("\u00a7aClick to create!"));
-            } else {
-                addLore(lores, tr("\u00a7cNo access!\n\u00a77({0})", islandPerk.getPermission()));
-            }
-            meta.setLore(lores);
-            menuItem.setItemMeta(meta);
-            menu.setItem(index++, menuItem);
         }
 
+        lores.clear();
         menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
         meta2.setDisplayName(tr("\u00a7a\u00a7lJoin an Island"));
         addLore(lores, "\u00a7f", tr("Want to join another player's\nisland instead of starting\nyour own? If another player\ninvites you to their island\nyou can click here or use\n\u00a7e/island accept\u00a7f to join them.\n\u00a7e\u00a7lClick here to accept an invite!\n\u00a7e\u00a7l(You must be invited first)"));
         meta2.setLore(lores);
         menuItem.setItemMeta(meta2);
-        menu.setItem(menuSize-2, menuItem);
-        lores.clear();
-        menuItem = new ItemStack(Material.SIGN, 1);
-        meta = menuItem.getItemMeta();
-        meta.setDisplayName(tr("\u00a7a\u00a7lIsland Help"));
-        addLore(lores, "\u00a7f", tr("Need help with skyblock\nconcepts or commands? View\ndetails about them here.\n\u00a7e\u00a7lClick here for help!"));
-        meta.setLore(lores);
-        menuItem.setItemMeta(meta);
         menu.setItem(menuSize-1, menuItem);
-        lores.clear();
         return menu;
     }
 
@@ -580,14 +583,14 @@ public class SkyBlockMenu {
         meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Lock"));
         if (plugin.getIslandInfo(player).isLocked()) {
             addLore(lores, tr("\u00a7eLock Status: \u00a7aActive\n\u00a7fYour island is currently \u00a7clocked.\n\u00a7fPlayers outside of your group\n\u00a7fare unable to enter your island."));
-            if (islandInfo.hasPerm(player, "canToggleLock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock") && hasPermission(player, "usb.island.lock")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to unlock your island."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the lock."));
             }
         } else {
             addLore(lores, tr("\u00a7eLock Status: \u00a78Inactive\n\u00a7fYour island is currently \u00a7aunlocked.\n\u00a7fAll players are able to enter your\n\u00a7fisland, but only you and your group\n\u00a7fmembers may build there."));
-            if (islandInfo.hasPerm(player, "canToggleLock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock") && hasPermission(player, "usb.island.lock")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to lock your island."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the lock."));
@@ -603,7 +606,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a7aActive\n\u00a7fOther players may warp to your\n\u00a7fisland at anytime to the point\n\u00a7fyou set using \u00a7d/island setwarp."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.extra.addwarp")) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.island.togglewarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to deactivate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
@@ -613,7 +616,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a78Inactive\n\u00a7fOther players can't warp to your\n\u00a7fisland. Set a warp point using\n\u00a7d/island setwarp \u00a7fbefore activating."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.extra.addwarp")) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && hasPermission(player, "usb.island.togglewarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to activate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
@@ -645,20 +648,27 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.HOPPER, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lChange Warp Location"));
-        addLore(lores, "\u00a7f", tr("When your warp is activated,\nother players will be taken to\nthis point when they teleport\nto your island.\n\u00a7e\u00a7lClick here to change."));
+        addLore(lores, "\u00a7f", tr("When your warp is activated,\nother players will be taken to\nthis point when they teleport\nto your island."));
+        if (islandInfo.hasPerm(player, "canChangeWarp") && hasPermission(player, "usb.island.setwarp")) {
+            addLore(lores, tr("\u00a7e\u00a7lClick here to change."));
+        } else {
+            addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
+        }
         meta4.setLore(lores);
         menuItem.setItemMeta(meta4);
         menu.setItem(15, menuItem);
         lores.clear();
         if (islandInfo.isLeader(player)) {
-            menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
-            meta4 = menuItem.getItemMeta();
-            meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
-            addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
-            meta4.setLore(lores);
-            menuItem.setItemMeta(meta4);
-            menu.setItem(17, menuItem);
-            lores.clear();
+            if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+                menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
+                meta4 = menuItem.getItemMeta();
+                meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
+                addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
+                meta4.setLore(lores);
+                menuItem.setItemMeta(meta4);
+                menu.setItem(17, menuItem);
+                lores.clear();
+            }
         } else {
             menuItem = new ItemStack(Material.IRON_DOOR, 1);
             meta4 = menuItem.getItemMeta();
@@ -696,7 +706,7 @@ public class SkyBlockMenu {
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Biome")))) {
             onClickBiomeMenu(event, currentItem, p, slotIndex);
         } else if (inventoryName.contains(stripFormatting(tr("Challenge Menu")))) {
-            onClickChallengeMenu(event, currentItem, p, inventoryName, slotIndex);
+            onClickChallengeMenu(event, currentItem, p, inventoryName);
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Log")))) {
             onClickLogMenu(event, p, slotIndex);
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Menu")))) {
@@ -732,7 +742,7 @@ public class SkyBlockMenu {
 
     private void updateRestartMenuTimer(final Player p, final Inventory inventory) {
         final BukkitTask[] hackySharing = new BukkitTask[1];
-        hackySharing[0] = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+        hackySharing[0] = plugin.sync(new Runnable() {
             @Override
             public void run() {
                 if (inventory.getViewers().contains(p)) {
@@ -744,7 +754,7 @@ public class SkyBlockMenu {
                     }
                 }
             }
-        }, 0, TimeUtil.secondsAsTicks(1));
+        }, 0, 1000);
     }
 
     private void onClickCreateMenu(InventoryClickEvent event, Player p, ItemMeta meta, int slotIndex, int menuSize) {
@@ -752,12 +762,9 @@ public class SkyBlockMenu {
         if (slotIndex == 0) {
             p.closeInventory();
             p.performCommand("island create");
-        } else if (slotIndex == menuSize-2) {
-            p.closeInventory();
-            p.performCommand("island accept");
         } else if (slotIndex == menuSize-1) {
             p.closeInventory();
-            p.performCommand("chestcommands open island_help");
+            p.performCommand("island accept");
         } else if (meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
             if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
@@ -815,7 +822,7 @@ public class SkyBlockMenu {
             p.performCommand("island lock");
             p.openInventory(displayIslandGUI(p));
         } else if (slotIndex == 17) {
-            if (islandInfo.isLeader(p)) {
+            if (islandInfo.isLeader(p) && plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
                 p.closeInventory();
                 p.openInventory(createRestartGUI(p));
             } else {
@@ -837,7 +844,7 @@ public class SkyBlockMenu {
 
     private void updateLeaveMenuItemTimer(final Player p, final Inventory inventory, final ItemStack currentItem) {
         final BukkitTask[] hackySharing = new BukkitTask[1];
-        hackySharing[0] = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+        hackySharing[0] = plugin.sync(new Runnable() {
             @Override
             public void run() {
                 long millisLeft = plugin.getConfirmHandler().millisLeft(p, "/is leave");
@@ -850,7 +857,7 @@ public class SkyBlockMenu {
                     }
                 }
             }
-        }, 0, TimeUtil.secondsAsTicks(1));
+        }, 0, 1000);
     }
 
     private void updateLeaveMenuItem(Inventory inventory, ItemStack currentItem, long millisLeft) {
@@ -907,7 +914,7 @@ public class SkyBlockMenu {
             if (lores == null) {
                 lores = new ArrayList<>();
             }
-            if (player.hasPermission(islandPerk.getPermission())) {
+            if (hasPermission(player, islandPerk.getPermission())) {
                 long millisLeft = plugin.getConfirmHandler().millisLeft(player, "/is restart");
                 if (millisLeft > 0) {
                     addLore(lores, tr("\u00a7cClick within \u00a79{0}\u00a7c to restart!", TimeUtil.millisAsString(millisLeft)));
@@ -921,6 +928,7 @@ public class SkyBlockMenu {
             menuItem.setItemMeta(meta);
             menu.setItem(index++, menuItem);
         }
+        player.updateInventory();
     }
 
     private void onClickLogMenu(InventoryClickEvent event, Player p, int slotIndex) {
@@ -932,7 +940,8 @@ public class SkyBlockMenu {
         p.openInventory(displayIslandGUI(p));
     }
 
-    private void onClickChallengeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, String inventoryName, int slotIndex) {
+    private void onClickChallengeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, String inventoryName) {
+        int slotIndex = event.getRawSlot();
         event.setCancelled(true);
         Matcher m = CHALLENGE_PAGE_HEADER.matcher(inventoryName);
         int page = 1;
@@ -941,12 +950,17 @@ public class SkyBlockMenu {
             page = Integer.parseInt(m.group("p"));
             max = Integer.parseInt(m.group("max"));
         }
-        if (slotIndex >= CHALLENGE_PAGESIZE) { // Pagination
+        // Last row is pagination
+        if (slotIndex >= CHALLENGE_PAGESIZE && slotIndex < CHALLENGE_PAGESIZE + COLS_PER_ROW
+                && currentItem != null && currentItem.getType() != Material.AIR)
+        {
+            // Pagination
             p.closeInventory();
             p.openInventory(displayChallengeGUI(p, currentItem.getAmount()));
             return;
         }
-        if (slotIndex < 0 || slotIndex > CHALLENGE_PAGESIZE) {
+        // If in action bar or anywhere else, just bail out
+        if (slotIndex < 0 || slotIndex > CHALLENGE_PAGESIZE || isAirOrLocked(currentItem)) {
             return;
         }
         if ((slotIndex % 9) > 0) { // 0,9... are the rank-headers...
@@ -973,53 +987,28 @@ public class SkyBlockMenu {
         }
     }
 
+    private boolean isAirOrLocked(ItemStack currentItem) {
+        return currentItem != null && currentItem.getType() == Material.AIR ||
+                currentItem != null && currentItem.getItemMeta() != null && currentItem.getItemMeta().getDisplayName().equals(tr("\u00a74\u00a7lLocked Challenge"));
+    }
+
     private void onClickBiomeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, int slotIndex) {
         event.setCancelled(true);
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 3) {
-            p.closeInventory();
-            p.performCommand("island biome jungle");
-        } else if (currentItem.getType() == Material.SAPLING && currentItem.getDurability() == 1) {
-            p.closeInventory();
-            p.performCommand("island biome forest");
-        } else if (currentItem.getType() == Material.SAND) {
-            p.closeInventory();
-            p.performCommand("island biome desert");
-        } else if (currentItem.getType() == Material.SNOW) {
-            p.closeInventory();
-            p.performCommand("island biome taiga");
-        } else if (currentItem.getType() == Material.EYE_OF_ENDER) {
-            p.closeInventory();
-            p.performCommand("island biome sky");
-        } else if (currentItem.getType() == Material.WATER_LILY) {
-            p.closeInventory();
-            p.performCommand("island biome swampland");
-        } else if (currentItem.getType() == Material.NETHER_BRICK) {
-            p.closeInventory();
-            p.performCommand("island biome hell");
-        } else if (currentItem.getType() == Material.RED_MUSHROOM) {
-            p.closeInventory();
-            p.performCommand("island biome mushroom");
-        } else if (currentItem.getType() == Material.LONG_GRASS) {
-            p.closeInventory();
-            p.performCommand("island biome plains");
-        } else if (currentItem.getType() == Material.EMERALD_ORE) {
-            p.closeInventory();
-            p.performCommand("island biome extreme_hills");
-        } else if (currentItem.getType() == Material.RED_ROSE && currentItem.getDurability() == 5) {
-            p.closeInventory();
-            p.performCommand("island biome flower_forest");
-        } else if (currentItem.getType() == Material.RAW_FISH) {
-            p.closeInventory();
-            p.performCommand("island biome ocean");
-        } else if (currentItem.getType() == Material.PRISMARINE_SHARD) {
-            p.closeInventory();
-            p.performCommand("island biome deep_ocean");
-        } else {
+        if (slotIndex == 0 && currentItem.getType() == Material.SIGN) {
             p.closeInventory();
             p.openInventory(displayIslandGUI(p));
+            return;
+        }
+        for (BiomeMenuItem biomeMenu : biomeMenus) {
+            ItemStack menuIcon = biomeMenu.getIcon();
+            if (currentItem.getType() == menuIcon.getType() && currentItem.getDurability() == menuIcon.getDurability()) {
+                p.closeInventory();
+                p.performCommand("island biome " + biomeMenu.getId());
+                return;
+            }
         }
     }
 
@@ -1034,31 +1023,15 @@ public class SkyBlockMenu {
             p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         }
-        if (currentItem.getTypeId() == 6) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canChangeBiome");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 101) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canToggleLock");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 90) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canChangeWarp");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 69) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canToggleWarp");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 398) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canInviteOthers");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 301) {
-            p.closeInventory();
-            islandInfo.togglePerm(playerPerm[0], "canKickOthers");
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
-        } else if (currentItem.getTypeId() == 323) {
+        for (PartyPermissionMenuItem item : permissionMenuItems) {
+            if (currentItem.getType() == item.getIcon().getType()) {
+                p.closeInventory();
+                islandInfo.togglePerm(playerPerm[0], item.getPerm());
+                p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
+                return;
+            }
+        }
+        if (currentItem.getType() == Material.SIGN) {
             p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         } else {

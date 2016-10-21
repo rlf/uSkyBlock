@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.command.admin;
 
 import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.command.island.RequirePlayerCommand;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
@@ -54,13 +55,22 @@ public class WGCommand extends CompositeCommand {
                 if (island != null) {
                     IslandInfo islandInfo = plugin.getIslandInfo(island);
                     if (islandInfo != null) {
-                        WorldGuardHandler.updateRegion(null, islandInfo);
+                        WorldGuardHandler.updateRegion(islandInfo);
                         player.sendMessage(tr("\u00a7eIsland world-guard regions updated for {0}", island));
                     } else {
                         player.sendMessage(tr("\u00a7eNo island found at your location!"));
                     }
                 }
-                return false;
+                return true;
+            }
+        });
+        add(new RequirePlayerCommand("chunk", null, I18nUtil.tr("refreshes the chunk around the player")) {
+            @Override
+            protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
+                World world = player.getWorld();
+                world.refreshChunk(player.getLocation().getChunk().getX(), player.getLocation().getChunk().getZ());
+                player.sendMessage(I18nUtil.tr("\u00a7eResending chunks to the client"));
+                return true;
             }
         });
     }

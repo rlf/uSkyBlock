@@ -70,9 +70,9 @@ public class ChallengeCompletionLogic {
             String challengeName = entry.getKey();
             ChallengeCompletion completion = entry.getValue();
             ConfigurationSection section = configuration.createSection(challengeName);
-            section.set("firstCompleted", completion.getFirstCompleted());
+            section.set("firstCompleted", completion.getCooldownUntil());
             section.set("timesCompleted", completion.getTimesCompleted());
-            section.set("timesCompletedSinceTimer", completion.getTimesCompletedSinceTimer());
+            section.set("timesCompletedSinceTimer", completion.getTimesCompletedInCooldown());
         }
     }
 
@@ -113,6 +113,17 @@ public class ChallengeCompletionLogic {
         return challengeMap;
     }
 
+    public Map<String, ChallengeCompletion> getIslandChallenges(String islandName) {
+        if (storeOnIsland && islandName != null) {
+            try {
+                return completionCache.get(islandName);
+            } catch (ExecutionException e) {
+                plugin.getLogger().log(Level.WARNING, "Error fetching challenge-completion for id " + islandName);
+            }
+        }
+        return new ConcurrentHashMap<>();
+    }
+
     public Map<String, ChallengeCompletion> getChallenges(PlayerInfo playerInfo) {
         if (playerInfo == null || !playerInfo.getHasIsland() || playerInfo.locationForParty() == null) {
             return new ConcurrentHashMap<>();
@@ -146,8 +157,13 @@ public class ChallengeCompletionLogic {
         if (challenges.containsKey(challengeName)) {
             ChallengeCompletion completion = challenges.get(challengeName);
             if (!completion.isOnCooldown()) {
-                long now = System.currentTimeMillis();
-                completion.setFirstCompleted(now + uSkyBlock.getInstance().getChallengeLogic().getResetInMillis(challengeName));
+                long resetInMillis = uSkyBlock.getInstance().getChallengeLogic().getResetInMillis(challengeName);
+                if (resetInMillis >= 0) {
+                    long now = System.currentTimeMillis();
+                    completion.setCooldownUntil(now + resetInMillis);
+                } else {
+                    completion.setCooldownUntil(resetInMillis);
+                }
             }
             completion.addTimesCompleted();
         }
@@ -157,7 +173,7 @@ public class ChallengeCompletionLogic {
         Map<String, ChallengeCompletion> challenges = getChallenges(playerInfo);
         if (challenges.containsKey(challenge)) {
             challenges.get(challenge).setTimesCompleted(0);
-            challenges.get(challenge).setFirstCompleted(0L);
+            challenges.get(challenge).setCooldownUntil(0L);
         }
     }
 
@@ -189,4 +205,9 @@ public class ChallengeCompletionLogic {
         completionCache.invalidateAll();
         return size;
     }
+
+    public boolean isIslandSharing() {
+        return storeOnIsland;
+    }
+
 }

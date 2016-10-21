@@ -22,12 +22,19 @@ import java.util.logging.Logger;
  */
 public class UUIDLeaderImporter implements USBImporter {
     private static final Logger log = Logger.getLogger(UUIDLeaderImporter.class.getName());
+    private uSkyBlock plugin;
+
     public String getName() {
         return "fix-leader-uuid";
     }
 
     @Override
-    public boolean importFile(uSkyBlock plugin, File file) {
+    public void init(uSkyBlock plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public Boolean importFile(File file) {
         File dir = file.getParentFile();
         String ymlFile = FileUtil.getBasename(file.getName());
         String islandName = FileUtil.getBasename(ymlFile);
@@ -62,12 +69,7 @@ public class UUIDLeaderImporter implements USBImporter {
     }
 
     @Override
-    public int importOrphans(uSkyBlock plugin, File configFolder) {
-        return 0;
-    }
-
-    @Override
-    public File[] getFiles(uSkyBlock plugin) {
+    public File[] getFiles() {
         return plugin.directoryIslands.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -77,7 +79,7 @@ public class UUIDLeaderImporter implements USBImporter {
     }
 
     @Override
-    public void completed(uSkyBlock plugin, int success, int failed) {
+    public void completed(int success, int failed, int skipped) {
         plugin.getOrphanLogic().save();
     }
 }

@@ -9,6 +9,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 public class InfoCommand extends RequireIslandCommand {
     public InfoCommand(uSkyBlock plugin) {
         super(plugin, "info", "usb.island.info", "?island", tr("check your or anothers island info"));
+        addFeaturePermission("usb.island.info.other", tr("allows user to see others island info"));
     }
 
     @Override
@@ -76,7 +78,7 @@ public class InfoCommand extends RequireIslandCommand {
                                     score.getScore(), score.getCount(),
                                     VaultHandler.getItemName(score.getBlock())));
                         }
-                        player.sendMessage(String.format("\u00a7aIsland level is %5.2f", getState().getScore()));
+                        player.sendMessage(tr("\u00a7aIsland level is {0,number,###.##}", getState().getScore()));
                     }
                 }
             }
@@ -87,7 +89,7 @@ public class InfoCommand extends RequireIslandCommand {
                 try {
                     plugin.calculateScoreAsync(player, playerInfo.locationForParty(), showInfo);
                 } catch (Exception e) {
-                    uSkyBlock.log(Level.SEVERE, "Error while calculating Island Level", e);
+                    LogUtil.log(Level.SEVERE, "Error while calculating Island Level", e);
                 }
             }
         }, 1L);

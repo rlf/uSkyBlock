@@ -4,8 +4,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.World;
-import org.bukkit.entity.EntityType;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -20,13 +19,20 @@ public enum VaultHandler {;
         econ = null;
     }
 
-    public static void init(Permission perms, Economy econ) {
-        VaultHandler.perms = perms;
-        VaultHandler.econ = econ;
+    public static void addPermission(final Player player, final String perk) {
+        perms.playerAdd(player, perk);
     }
 
-    public static void addPerk(final Player player, final String perk) {
-        perms.playerAdd((String) null, player.getName(), perk);
+    public static void addPermission(final OfflinePlayer player, final String perk) {
+        perms.playerAdd(null, player, perk);
+    }
+
+    public static void removePermission(final OfflinePlayer player, final String perk) {
+        perms.playerRemove(null, player, perk);
+    }
+
+    public static boolean hasPermission(OfflinePlayer player, String perk) {
+        return perms.playerHas(null, player, perk);
     }
 
     public static boolean setupPermissions() {
@@ -64,9 +70,8 @@ public enum VaultHandler {;
         return econ != null;
     }
 
-    // TODO: UUID aware
-    public static void depositPlayer(String name, double v) {
-        econ.depositPlayer(name, v);
+    public static void depositPlayer(Player player, double v) {
+        econ.depositPlayer(player, v);
     }
 
     public static Economy getEcon() {

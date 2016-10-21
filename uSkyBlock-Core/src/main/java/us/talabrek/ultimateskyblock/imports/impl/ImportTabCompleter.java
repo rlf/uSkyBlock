@@ -12,6 +12,6 @@ import java.util.List;
 public class ImportTabCompleter extends AbstractTabCompleter {
     @Override
     protected List<String> getTabList(CommandSender commandSender, String term) {
-        return uSkyBlock.getInstance().getPlayerImporter().getImporterNames();
+        return uSkyBlock.getInstance().getImporter().getImporterNames();
     }
 }

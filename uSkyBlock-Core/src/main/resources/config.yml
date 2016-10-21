@@ -14,6 +14,9 @@ options:
     # [integer] The time in seconds before a player can use the /island biome command again.
     biomeChange: 180
 
+    # [string] The default biome assigned to new islands
+    defaultBiome: OCEAN
+
     # [integer] The number of milliseconds between the same notification is sent to the player.
     # This is used when events are triggered heavily - i.e. item-pickup-prevention, damage-prevention etc.
     maxSpam: 2000
@@ -141,6 +144,9 @@ options:
     # Whether or not portalling to the nether roof should be blocked.
     nether-roof: true
 
+    # Generally protections against griefers
+    # If the flag is true, it generally means the protection is active
+    # (meaning the action is blocked)
     visitors:
       # Protect visitors from trampling your crop
       trampling: true
@@ -153,6 +159,9 @@ options:
 
       # Protect from shearing
       shearing: true
+
+      # Protect from begin bombarded with eggs that hatch
+      hatching: true
 
       # Protect from villager-trading
       villager-trading: true
@@ -176,11 +185,19 @@ options:
       use-portals: false
 
   party:
-    # The number of ticks before an invite timeouts (20 ticks per sec.)
-    invite-timeout: 600
+    # The number of ms before an invite timeouts (1000 ms per second)
+    invite-timeout: 30000
 
     # The format used in /partytalk chat messages
     chat-format: '&9PARTY &r{DISPLAYNAME} &f>&b {MESSAGE}'
+
+    # Extra commands to execute when players join an island
+    join-commands:
+    - op:playsound block.enderchest.open block @p
+
+    # Extra commands to execute when players leave an island
+    leave-commands:
+    - op:playsound block.enderchest.close block @p
 
   # This section provide some performance tweaking configs
   advanced:
@@ -203,10 +220,14 @@ options:
     clearArmor: true
     # Clears the player's enderchest on island create/restart
     clearEnderChest: true
+    # Clears the permissions the player has been granted from rewards
+    clearPerms: true
+    # Clears the users balance (set to 0)
+    clearCurrency: false
 
-    # [ticks] The number of ticks to wait, before porting the player back
-    # on /is restart or /is create (default: 40)
-    teleportDelay: 20
+    # [ms] The number of ms to wait, before porting the player back
+    # on /is restart or /is create (default: 1000)
+    teleportDelay: 1000
 
     # [true/false] Whether or not the player should be auto teleported to the island when it's ready
     teleportWhenReady: true
@@ -217,19 +238,25 @@ options:
     extra-commands: []
 
 
+# Whether or not to show the UI for create/restart
+island-schemes-enabled: true
+
 # List of selections for /is create and /is restart
 # the nodes under island-schemes must match the schematic-names from the schematics folder.
 island-schemes:
+  # name of the schematic
   default:
-    # optional, default true
+    # permission needed to use island
+    permission: usb.island.create
+    # small discription of the island
+    description: The default uSkyBlock island
+    # item to display in the GUI
+    displayItem: SAPLING
+    # optional, default true (true enabled in GUI, false disabled in GUI)
     enabled: true
-
     # optional, must be listed in ascending order
     index: 2
-
-    permission: usb.island.create
-    description: The default uSkyBlock island
-    displayItem: SAPLING
+    # optional extra's that can be given per island
     extraItems: ''
     maxPartySize: 4
     animals: 48
@@ -241,6 +268,10 @@ island-schemes:
     description: The original SkySMP island
     displayItem: GRASS
     extraItems: 'OBSIDIAN:14 FLINT_AND_STEEL:1'
+    # Only get 90% of the normal score
+    scoreMultiply: 0.9
+    # But start with an offset of 40
+    scoreOffset: 40
 
 # This section allows donors to get specific perks
 #donor-perks:
@@ -287,41 +318,58 @@ worldguard:
 nether:
   enabled: true
 
-  terraform-enabled: true
-
-  # The distance to search for valid terra-form location.
-  terraform-distance: 7
 
   height: 75
 
-  lava-level: 32
+  lava_level: 7
 
   activate-at:
     level: 100
 
   schematicName: uSkyBlockNether
 
+  terraform-enabled: true
+
+  # The distance to search for valid terra-form location.
+  terraform-distance: 7
+
+  # In what range of pitch (vertical aim) will terraforming be enabled
+  # -90 is looking directly upwards
+  # 90 is looking directly down
+  terraform-min-pitch: -70.0
+  terraform-max-pitch: 90.0
+
   # The probability of forming blocks
   terraform:
     NETHERRACK:
-      - '{p=0.7}NETHERRACK'
-      - '{p=0.15}NETHERRACK'
-      - '{p=0.05}QUARTZ_ORE'
-      - '{p=0.05}SOUL_SAND'
+    - '{p=0.7}NETHERRACK'
+    - '{p=0.15}NETHERRACK'
+    - '{p=0.05}QUARTZ_ORE'
+    - '{p=0.05}SOUL_SAND'
     QUARTZ_ORE:
-      - '{p=0.50}QUARTZ_ORE'
-      - '{p=0.10}QUARTZ_ORE'
+    - '{p=0.50}QUARTZ_ORE'
+    - '{p=0.10}QUARTZ_ORE'
     SOUL_SAND:
-      - '{p=0.70}SOUL_SAND'
-      - '{p=0.10}SOUL_SAND'
+    - '{p=0.70}SOUL_SAND'
+    - '{p=0.10}SOUL_SAND'
+    - '{p=0.05}GRAVEL'
     GRAVEL:
-      - '{p=0.60}GRAVEL'
-      - '{p=0.10}GRAVEL'
-      - '{p=0.05}SOUL_SAND'
+    - '{p=0.15}GRAVEL'
+    - '{p=0.05}GRAVEL'
+    - '{p=0.05}SOUL_SAND'
     GLOWSTONE:
-      - '{p=0.85}GLOWSTONE'
-      - '{p=0.15}GLOWSTONE'
+    - '{p=0.85}GLOWSTONE'
+    - '{p=0.15}GLOWSTONE'
 
+  # Weights that is applied to the above terraform chances depending on the tool used
+  terraform-weight:
+    WOOD: 1.1
+    STONE: 1.0
+    IRON: 0.9
+    GOLD: 0
+    DIAMOND: 0.5
+
+  # The chances of changing a pigzombie when spawned on a netherbrick
   spawn-chances:
     enabled: true
     wither: 0.20
@@ -338,22 +386,28 @@ tool-menu:
 
 # Placeholders - enable these to get placeholder substitution
 # usb_version
-# usb_island_level, usb_island_rank, usb_island_partysize_max, usb_island_partysize
+# usb_island_level, usb_island_level_int
+# usb_island_rank, usb_island_partysize_max, usb_island_partysize
 # usb_island_leader, usb_island_bans, usb_island_members, usb_island_trustees
 # usb_island_biome, usb_island_schematic
 # usb_island_location, usb_island_location_x, usb_island_location_y, usb_island_location_z
 # usb_island_golems_max, usb_island_monsters_max, usb_island_animals_max, usb_island_villagers_max,
 # usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_villagers
 placeholder:
+  # Hooks directly into DeluxeChatPlaceholderAPI
+  deluxechatplaceholderapi: false
+
   # Hooks into MVdWPlaceholderAPI
   mvdwplaceholderapi: false
+
   # uSkyBlock native placeholders for chat messages and format
   chatplaceholder: false
+
   # uSkyBlock native placeholders for server-commands
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 49
+version: 58
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

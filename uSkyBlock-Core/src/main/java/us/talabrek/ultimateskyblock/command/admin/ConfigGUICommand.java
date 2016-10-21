@@ -18,7 +18,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class ConfigGUICommand extends AbstractCommand {
     private final uSkyBlock plugin;
-    public static final List<String> CONFIGS = Arrays.asList("config", "levelConfig", "challenges");
+    public static final List<String> CONFIGS = Arrays.asList("config", "levelConfig", "challenges", "signs");
 
     public ConfigGUICommand(uSkyBlock plugin) {
         super("config|c", "usb.admin.config", "?config", tr("open GUI for config"));
