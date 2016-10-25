@@ -263,11 +263,22 @@ island-schemes:
     monsters: 50
     villagers: 16
     golems: 5
+    # Get 100% of the normal score
+    scoreMultiply: 1.0
+    # But start with no offset
+    scoreOffset: 0
   skySMP:
     permission: usb.schematic.skysmp
     description: The original SkySMP island
     displayItem: GRASS
+    enabled: true
+    index: 3
     extraItems: 'OBSIDIAN:14 FLINT_AND_STEEL:1'
+    maxPartySize: 4
+    animals: 48
+    monsters: 50
+    villagers: 16
+    golems: 5
     # Only get 90% of the normal score
     scoreMultiply: 0.9
     # But start with an offset of 40
