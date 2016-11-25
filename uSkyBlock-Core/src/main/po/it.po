@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2016-11-22 19:26+0000\n"
 "Last-Translator: Leomixer17\n"
 "Language-Team: Rublitio\n"
@@ -2786,42 +2785,3 @@ msgstr "Ovest"
 
 msgid "North-West"
 msgstr "Nord-Ovest"
-
-#~ msgid "§eThis challenge requires the following:"
-#~ msgstr "§eQuesta sfida richiede:"
-
-#~ msgid "§7Requires {0}§7 to unlock"
-#~ msgstr "§a* §7Richiede {0}§7 per essere sbloccata"
-
-#~ msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-#~ msgstr "- PULIZIA: {0,number,##}% ({1}/{2}) ~ {3}"
-
-#~ msgid "§c-"
-#~ msgstr "§c-"
-
-#~ msgid "§a+"
-#~ msgstr "§a+"
-
-#~ msgid "§c-1000"
-#~ msgstr "§c-1000"
-
-#~ msgid "§c-100"
-#~ msgstr "§c-100"
-
-#~ msgid "§c-10"
-#~ msgstr "§c-10"
-
-#~ msgid "§c-1"
-#~ msgstr "§c-1"
-
-#~ msgid "§a+1"
-#~ msgstr "§a+1"
-
-#~ msgid "§a+10"
-#~ msgstr "§a+10"
-
-#~ msgid "§a+100"
-#~ msgstr "§a+100"
-
-#~ msgid "§a+1000"
-#~ msgstr "§a+1000"
