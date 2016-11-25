@@ -212,6 +212,11 @@ options:
     # re-executing it (/is leave, /is restart).
     confirmTimeout: 10
 
+    # Controls advanced behaviour reg. the internal playerdb
+    playerdb:
+      # valid values are: yml, memory
+      storage: memory
+
   # Section about restarting your island (or accepting an invite).
   restart:
     # Clears the player's inventory on island create/restart
@@ -418,7 +423,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 58
+version: 59
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
