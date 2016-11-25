@@ -1559,6 +1559,12 @@ msgstr "§eDu får inte använda portalen på en annan ö!"
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eDu får inte byta saker på andras öar!"
 
+msgid "§eRiding is only allowed on your own island!"
+msgstr ""
+
+msgid "§eYou cannot break vehicles while being a visitor!"
+msgstr ""
+
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr "§cWither har despawnat! §eDen gick för långt ifrån din ö."
 

@@ -1596,6 +1596,12 @@ msgstr "§eDu kannst die Portale auf anderen Inseln nicht nutzen!"
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandeln ist auf fremden Inseln nicht erlaubt. Handel am Spawn"
 
+msgid "§eRiding is only allowed on your own island!"
+msgstr ""
+
+msgid "§eYou cannot break vehicles while being a visitor!"
+msgstr ""
+
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr ""
 "§cDer Wither ist despawned! §eEr hat sich zu weit von Deiner Insel entfernt."
