@@ -184,6 +184,12 @@ options:
       # Whether or not visitors can use portals (default: false)
       use-portals: false
 
+      # Wheter or not visitors can mount vehicles
+      vehicle-enter: false
+
+      # Wheter or not visitors can break vehicles
+      vehicle-damage: false
+
   party:
     # The number of ms before an invite timeouts (1000 ms per second)
     invite-timeout: 30000
@@ -423,7 +429,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 59
+version: 60
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
