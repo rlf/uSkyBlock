@@ -792,11 +792,11 @@ public class SkyBlockMenu {
         } else if (currentItem.getType() == Material.BED) {
             p.closeInventory();
             p.performCommand("island sethome");
-            p.openInventory(displayIslandGUI(p));
+            p.performCommand("island");
         } else if (currentItem.getType() == Material.HOPPER) {
             p.closeInventory();
             p.performCommand("island setwarp");
-            p.openInventory(displayIslandGUI(p));
+            p.performCommand("island");
         } else if (currentItem.getType() == Material.BOOK_AND_QUILL) {
             p.closeInventory();
             p.performCommand("island log");
@@ -812,15 +812,15 @@ public class SkyBlockMenu {
         } else if (currentItem.getType() == Material.ENDER_STONE || currentItem.getType() == Material.ENDER_PORTAL_FRAME) {
             p.closeInventory();
             p.performCommand("island togglewarp");
-            p.openInventory(displayIslandGUI(p));
+            p.performCommand("island");
         } else if (currentItem.getType() == Material.IRON_FENCE && islandInfo.isLocked()) {
             p.closeInventory();
             p.performCommand("island unlock");
-            p.openInventory(displayIslandGUI(p));
+            p.performCommand("island");
         } else if (currentItem.getType() == Material.IRON_FENCE && !islandInfo.isLocked()) {
             p.closeInventory();
             p.performCommand("island lock");
-            p.openInventory(displayIslandGUI(p));
+            p.performCommand("island");
         } else if (slotIndex == 17) {
             if (islandInfo.isLeader(p) && plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
                 p.closeInventory();
@@ -837,7 +837,7 @@ public class SkyBlockMenu {
         } else {
             if (!isExtraMenuAction(p, currentItem)) {
                 p.closeInventory();
-                p.openInventory(displayIslandGUI(p));
+                p.performCommand("island");
             }
         }
     }
@@ -937,7 +937,7 @@ public class SkyBlockMenu {
             return;
         }
         p.closeInventory();
-        p.openInventory(displayIslandGUI(p));
+        p.performCommand("island");
     }
 
     private void onClickChallengeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, String inventoryName) {
@@ -977,12 +977,12 @@ public class SkyBlockMenu {
                 if (page > 1) {
                     p.openInventory(displayChallengeGUI(p, page - 1));
                 } else {
-                    p.openInventory(displayIslandGUI(p));
+                    p.performCommand("island");
                 }
             } else if (page < max) {
                 p.openInventory(displayChallengeGUI(p, page + 1));
             } else {
-                p.openInventory(displayIslandGUI(p));
+                p.performCommand("island");
             }
         }
     }
@@ -999,7 +999,7 @@ public class SkyBlockMenu {
         }
         if (slotIndex == 0 && currentItem.getType() == Material.SIGN) {
             p.closeInventory();
-            p.openInventory(displayIslandGUI(p));
+            p.performCommand("island");
             return;
         }
         for (BiomeMenuItem biomeMenu : biomeMenus) {
@@ -1047,7 +1047,7 @@ public class SkyBlockMenu {
         }
         if (meta == null || currentItem.getType() == Material.SIGN) {
             p.closeInventory();
-            p.openInventory(displayIslandGUI(p));
+            p.performCommand("island");
         } else if (skull != null && plugin.getIslandInfo(p).isLeader(p)) {
             p.closeInventory();
             p.openInventory(displayPartyPlayerGUI(p, skull.getOwner()));
