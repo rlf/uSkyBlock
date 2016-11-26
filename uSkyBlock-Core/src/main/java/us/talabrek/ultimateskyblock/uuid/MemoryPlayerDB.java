@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 public class MemoryPlayerDB implements PlayerDB {
     private final LoadingCache<String, OfflinePlayer> nameCache;
     private final LoadingCache<UUID, OfflinePlayer> uuidCache;
+    private static final OfflinePlayer NULL_PLAYER = NullPlayer.INSTANCE;
 
     public MemoryPlayerDB(FileConfiguration config) {
         nameCache = CacheBuilder
@@ -32,7 +33,7 @@ public class MemoryPlayerDB implements PlayerDB {
                             uuidCache.put(offlinePlayer.getUniqueId(), offlinePlayer);
                             return offlinePlayer;
                         }
-                        return null;
+                        return NULL_PLAYER;
                     }
                 });
         uuidCache = CacheBuilder
@@ -45,7 +46,7 @@ public class MemoryPlayerDB implements PlayerDB {
                             nameCache.put(offlinePlayer.getName(), offlinePlayer);
                             return offlinePlayer;
                         }
-                        return null;
+                        return NULL_PLAYER;
                     }
                 });
     }
