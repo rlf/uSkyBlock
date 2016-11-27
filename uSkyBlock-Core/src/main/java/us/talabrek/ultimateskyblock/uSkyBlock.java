@@ -97,6 +97,7 @@ import us.talabrek.ultimateskyblock.util.ServerUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import us.talabrek.ultimateskyblock.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
+import us.talabrek.ultimateskyblock.uuid.MemoryPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.io.File;
@@ -992,7 +993,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         // Update all of the loaded configs.
         FileUtil.reload();
 
-        playerDB = new FilePlayerDB(this);
+        String playerDbStorage = getConfig().getString("options.advanced.playerdb.storage", "yml");
+        if (playerDbStorage.equalsIgnoreCase("yml")) {
+            playerDB = new FilePlayerDB(this);
+        } else {
+            playerDB = new MemoryPlayerDB(getConfig());
+        }
         getServer().getPluginManager().registerEvents(playerDB, this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());

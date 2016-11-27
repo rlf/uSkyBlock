@@ -16,7 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -1574,6 +1573,12 @@ msgstr "§9* §7You can not use another islands portals!"
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Trading isn't allowed on other islands. Do it in spawn."
+
+msgid "§eRiding is only allowed on your own island!"
+msgstr ""
+
+msgid "§eYou cannot break vehicles while being a visitor!"
+msgstr ""
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr "§9* §7Wither §4despawned!§7 It wandered too far from your island."

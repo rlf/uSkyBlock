@@ -1560,6 +1560,12 @@ msgstr "§eNemuzes pouzit porty na ostatních ostrovech!"
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eObchodovani na ostrovech není povoleno, pouze na spawnu."
 
+msgid "§eRiding is only allowed on your own island!"
+msgstr ""
+
+msgid "§eYou cannot break vehicles while being a visitor!"
+msgstr ""
+
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr ""
 
