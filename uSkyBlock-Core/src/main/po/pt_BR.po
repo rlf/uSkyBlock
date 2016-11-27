@@ -1556,6 +1556,12 @@ msgstr ""
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr ""
 
+msgid "§eRiding is only allowed on your own island!"
+msgstr ""
+
+msgid "§eYou cannot break vehicles while being a visitor!"
+msgstr ""
+
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr ""
 

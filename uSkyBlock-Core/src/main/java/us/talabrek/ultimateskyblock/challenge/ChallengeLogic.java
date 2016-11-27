@@ -248,8 +248,7 @@ public class ChallengeLogic implements Listener {
                 sb.append(" \u00a74" + diffSpecific
                         + " \u00a7b" + VaultHandler.getItemName(item));
                 hasAll = false;
-            }
-            if (diffGeneral > 0) {
+            } else if (diffGeneral > 0) {
                 sb.append(" \u00a74" + diffGeneral
                         + " \u00a7b" + VaultHandler.getItemName(item));
                 hasAll = false;

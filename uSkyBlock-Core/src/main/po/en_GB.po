@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-09-23 08:12+0100\n"
+"PO-Revision-Date: 2016-10-14 14:32+0100\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: uSkyblock-dev team\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, java-format
@@ -984,7 +984,7 @@ msgstr "§9* §{0}§7 tried to invite you, but you are already in a party."
 
 #, java-format
 msgid "§aInvite sent to {0}"
-msgstr ""
+msgstr "§9* §7Invite sent to {0}"
 
 #, java-format
 msgid "{0}§e has invited you to join their island!"
@@ -1573,6 +1573,12 @@ msgstr "§9* §7You can not use another islands portals!"
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Trading isn't allowed on other islands. Do it in spawn."
+
+msgid "§eRiding is only allowed on your own island!"
+msgstr ""
+
+msgid "§eYou cannot break vehicles while being a visitor!"
+msgstr ""
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr "§9* §7Wither §4despawned!§7 It wandered too far from your island."
@@ -2280,7 +2286,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
-msgstr ""
+msgstr "§e{0}''s§9 Permissions"
 
 msgid "Leader"
 msgstr "Leader"

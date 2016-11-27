@@ -725,7 +725,7 @@ ranks:
         - '64:30'
         requiredEntities:
         - 'Villager:10'
-        - 'VillagerGolem:1'
+        - 'IRON_GOLEM:1'
         reward:
           text: 2 gold blocks, 1 diamond block
           items:
@@ -1095,14 +1095,14 @@ ranks:
           text: 2 diamond, 1 mooshroom
           items:
           - '264:2'
-          - '383:1 {EntityTag:{id:"Mooshroom"}}'
+          - '383:1 {EntityTag:{id:"MushroomCow"}}'
           currency: 80
           xp: 80
         repeatReward:
           text: 1 diamond, 1 mooshroom
           items:
           - '264:1'
-          - '383:1 {EntityTag:{id:"Mooshroom"}}'
+          - '383:1 {EntityTag:{id:"MushroomCow"}}'
           currency: 40
           xp: 40
 

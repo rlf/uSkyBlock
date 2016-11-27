@@ -15,7 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -1564,6 +1563,12 @@ msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 스폰으로 이동하여 주세요"
+
+msgid "§eRiding is only allowed on your own island!"
+msgstr ""
+
+msgid "§eYou cannot break vehicles while being a visitor!"
+msgstr ""
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr "§c!마녀 소환이 취소되었습니다!§e 당신의 섬에서 너무 멀리 있습니다."
