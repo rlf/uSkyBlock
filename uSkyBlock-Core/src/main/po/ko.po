@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.7\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-10-25 00:54+0900\n"
+"PO-Revision-Date: 2016-11-27 14:25+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: swan201 <bmr0621@swiftnode.cloud>\n"
 "Language: ko_KR\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -831,10 +832,10 @@ msgstr "§c필드{0} 를 ''{1}'로 지정할 수 없습니다. a number was expe
 
 #, java-format
 msgid "§cInvalid field {0}"
-msgstr "§c올바르지 않은 필ㄷ {0}"
+msgstr "§c올바르지 않은 필드 {0}"
 
 msgid "toggles maintenance mode"
-msgstr "관리모드로 전호"
+msgstr "관리모드로 전환"
 
 msgid "§cMAINTENANCE: §aActivated§e all uSkyBlock features currently disabled."
 msgstr "§c관리모드: §a활성화§e 모든 uSkyBlock 기능이 현재 비활성화 되었습니다."
@@ -1565,10 +1566,10 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 스폰으로 이동하여 주세요"
 
 msgid "§eRiding is only allowed on your own island!"
-msgstr ""
+msgstr "§e탑승은 오직 당신의 섬에서만 가능합니다!"
 
 msgid "§eYou cannot break vehicles while being a visitor!"
-msgstr ""
+msgstr "§e당신은 방문자의 탑승물을 때릴 수 없습니다."
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr "§c!마녀 소환이 취소되었습니다!§e 당신의 섬에서 너무 멀리 있습니다."
