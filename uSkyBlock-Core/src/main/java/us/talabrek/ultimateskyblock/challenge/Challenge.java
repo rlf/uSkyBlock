@@ -155,7 +155,7 @@ public class Challenge {
     public ItemStack getDisplayItem(ChallengeCompletion completion, boolean withCurrency) {
         int timesCompleted = completion.getTimesCompletedInCooldown();
         ItemStack currentChallengeItem;
-        if (timesCompleted < getRepeatLimit())
+        if (timesCompleted < getRepeatLimit() || getRepeatLimit() <= 0)
         {
             currentChallengeItem = getDisplayItem();
         }else
@@ -170,8 +170,12 @@ public class Challenge {
             currentChallengeItem.setAmount(completion.getTimesCompleted());
             if (completion.isOnCooldown()) {
                 long cooldown = completion.getCooldownInMillis();
-                if (timesCompleted < getRepeatLimit())
+                if (timesCompleted < getRepeatLimit() || getRepeatLimit() <= 0)
                 {
+                    if (getRepeatLimit() > 0)
+                    {
+                        lores.add(tr("\u00a74You can complete this {0} more time(s).", getRepeatLimit() - timesCompleted));
+                    }
                     if (cooldown >= ChallengeLogic.MS_DAY) {
                         final int days = (int) (cooldown / ChallengeLogic.MS_DAY);
                         lores.add(tr("\u00a74Requirements will reset in {0} days.", days));
