@@ -154,14 +154,7 @@ public class Challenge {
 
     public ItemStack getDisplayItem(ChallengeCompletion completion, boolean withCurrency) {
         int timesCompleted = completion.getTimesCompletedInCooldown();
-        ItemStack currentChallengeItem;
-        if (timesCompleted < getRepeatLimit() || getRepeatLimit() <= 0)
-        {
-            currentChallengeItem = getDisplayItem();
-        }else
-        {
-            currentChallengeItem = getLockedDisplayItem();
-        }
+        ItemStack currentChallengeItem = getDisplayItem();
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = new ArrayList<>();
         lores.addAll(prefix(wordWrap(getDescription(), MAX_LINE), "\u00a77"));
