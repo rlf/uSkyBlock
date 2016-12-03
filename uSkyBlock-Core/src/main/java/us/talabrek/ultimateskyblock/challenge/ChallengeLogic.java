@@ -154,7 +154,7 @@ public class ChallengeLogic implements Listener {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challenge.getDisplayName()));
             return;
         }
-        if (completion.getTimesCompletedInCooldown() >= challenge.getRepeatLimit() && challenge.getRepeatLimit() > 0) {
+        if (completion.isOnCooldown() && completion.getTimesCompletedInCooldown() >= challenge.getRepeatLimit() && challenge.getRepeatLimit() > 0) {
             player.sendMessage(tr("\u00a74You cannot complete the {0} challenge again yet!", challenge.getDisplayName()));
             return;
         }
