@@ -261,9 +261,18 @@ public class NetherTerraFormEvents implements Listener {
                 double p = RND.nextDouble();
                 if (p <= chanceWither) {
                     // Spawn Wither.
-                    Skeleton mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.SKELETON);
-                    mob.setSkeletonType(Skeleton.SkeletonType.WITHER);
-                    mob.getEquipment().setItemInHand(new ItemStack(Material.STONE_SWORD, 1));
+                    String packageName = plugin.getServer().getClass().getPackage().getName();
+                    String version = packageName.substring(packageName.lastIndexOf('.') + 1);
+                    version = (version.split("_"))[1];
+                    int majorVersion = Integer.parseInt(version);
+                    Skeleton mob;
+                    if (majorVersion > 11) {
+                        mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.fromId(5));
+                    } else {
+                        mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.SKELETON);
+                        mob.setSkeletonType(Skeleton.SkeletonType.WITHER);
+                    }
+                    mob.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_SWORD, 1));
                 } else if (p <= chanceWither+chanceBlaze) {
                     // Spawn Blaze
                     Blaze mob = (Blaze) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.BLAZE);
