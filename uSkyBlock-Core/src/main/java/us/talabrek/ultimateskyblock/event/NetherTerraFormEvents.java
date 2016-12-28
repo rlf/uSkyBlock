@@ -266,7 +266,7 @@ public class NetherTerraFormEvents implements Listener {
                     version = (version.split("_"))[1];
                     int majorVersion = Integer.parseInt(version);
                     Skeleton mob;
-                    if (majorVersion > 11) {
+                    if (majorVersion >= 11) {
                         mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.fromId(5));
                     } else {
                         mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.SKELETON);
