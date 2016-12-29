@@ -66,7 +66,6 @@ public class ChallengeLogic implements Listener {
         this.config = config;
         this.plugin = plugin;
         this.defaults = ChallengeFactory.createDefaults(config.getRoot());
-        load();
         ranks = ChallengeFactory.createRankMap(config.getConfigurationSection("ranks"), defaults);
         completionLogic = new ChallengeCompletionLogic(plugin, config);
         String displayItemForLocked = config.getString("lockedDisplayItem", null);
@@ -84,16 +83,12 @@ public class ChallengeLogic implements Listener {
             }
         }
         if (completionLogic.isIslandSharing()) {
-            plugin.getServer().getPluginManager().registerEvents(this, plugin);
+            Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         }
     }
 
     public boolean isEnabled() {
         return config.getBoolean("allowChallenges", true);
-    }
-
-    private void load() {
-        Arrays.asList(config.getString("ranks", "").split(" "));
     }
 
     public List<Rank> getRanks() {
