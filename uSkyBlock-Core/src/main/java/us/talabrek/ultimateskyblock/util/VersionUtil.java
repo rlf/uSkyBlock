@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * Utility methods for versions
  */
 public enum VersionUtil {;
-    private static final Pattern VERSION_PATTERN = Pattern.compile("v?(?<major>[0-9]+)\\.(?<minor>[0-9]+)(?:\\.(?<micro>[0-9]+))?(?<sub>.*)");
+    private static final Pattern VERSION_PATTERN = Pattern.compile("v?(?<major>[0-9]+)[\\._](?<minor>[0-9]+)(?:[\\._](?<micro>[0-9]+))?(?<sub>.*)");
     public static Version getVersion(String versionString) {
         Matcher m = VERSION_PATTERN.matcher(versionString);
         if (m.matches()) {
