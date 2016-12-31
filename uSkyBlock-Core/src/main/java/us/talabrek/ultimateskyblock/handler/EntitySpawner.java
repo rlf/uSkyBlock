@@ -24,7 +24,7 @@ public class EntitySpawner {
             mob = (Skeleton) location.getWorld().spawnEntity(location, EntityType.SKELETON);
             mob.setSkeletonType(Skeleton.SkeletonType.WITHER);
         }
-        mob.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_SWORD, 1));
+        mob.getEquipment().setItemInHand(new ItemStack(Material.STONE_SWORD, 1));
         return mob;
     }
 
