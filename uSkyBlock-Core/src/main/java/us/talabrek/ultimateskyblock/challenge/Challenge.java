@@ -158,7 +158,7 @@ public class Challenge {
         int timesCompleted = completion.getTimesCompletedInCooldown();
         Reward reward = getReward();
         if (completion.getTimesCompleted() > 0 && isRepeatable()) {
-            currentChallengeItem.setAmount(completion.getTimesCompleted());
+            currentChallengeItem.setAmount(completion.getTimesCompleted() < currentChallengeItem.getMaxStackSize() ? completion.getTimesCompleted() : currentChallengeItem.getMaxStackSize());
             if (completion.isOnCooldown()) {
                 long cooldown = completion.getCooldownInMillis();
                 if (cooldown >= ChallengeLogic.MS_DAY) {
