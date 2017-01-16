@@ -80,18 +80,18 @@ public class SignEvents implements Listener {
                 && wallBlock.getState() instanceof Chest;
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onChestClosed(InventoryCloseEvent e) {
-        if (e.getPlayer() == null || e.getPlayer().getLocation() == null
-                || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
-                ) {
-            return;
-        }
-        Location loc = ReflectionUtil.exec(e.getInventory(), "getLocation");
-        if (loc != null) {
-            logic.updateSignsOnContainer(loc);
-        }
-    }
+    //@EventHandler(priority = EventPriority.MONITOR)
+    //public void onChestClosed(InventoryCloseEvent e) {
+    //    if (e.getPlayer() == null || e.getPlayer().getLocation() == null
+    //            || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
+    //            ) {
+    //        return;
+    //    }
+    //    Location loc = ReflectionUtil.exec(e.getInventory(), "getLocation");
+    //    if (loc != null) {
+    //        logic.updateSignsOnContainer(loc);
+    //    }
+    //}
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onSignOrChestBreak(BlockBreakEvent e) {
