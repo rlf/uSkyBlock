@@ -329,9 +329,9 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     public void togglePerm(final String playername, final String perm) {
         String uuidString = UUIDUtil.asString(uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(playername));
         if (config.getBoolean("party.members." + uuidString + "." + perm, false)) {
-            config.set("party.members." + uuidString + "." + perm, false);
-        } else {
             config.set("party.members." + uuidString + "." + perm, true);
+        } else if (config.getBoolean("party.members." + uuidString + "." + perm, true)) {
+            config.set("party.members." + uuidString + "." + perm, false);
         }
         save();
     }
