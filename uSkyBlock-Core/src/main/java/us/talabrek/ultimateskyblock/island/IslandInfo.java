@@ -328,12 +328,16 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
     public void togglePerm(final String playername, final String perm) {
         String uuidString = UUIDUtil.asString(uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(playername));
-        if (config.getBoolean("party.members." + uuidString + "." + perm, false)) {
-            config.set("party.members." + uuidString + "." + perm, true);
-        } else if (config.getBoolean("party.members." + uuidString + "." + perm, true)) {
-            config.set("party.members." + uuidString + "." + perm, false);
-        }
-        save();
+        try {
+          if (config.getBoolean("party.members." + uuidString + "." + perm)) {
+              config.set("party.members." + uuidString + "." + perm, false);
+          } else if (!config.getBoolean("party.members." + uuidString + "." + perm)) {
+              config.set("party.members." + uuidString + "." + perm, true);
+          }
+          save();
+        } catch (NullPointerException e) {
+            log.info("Perms for " + playername + " failed to toggle because player is not a part of that island!");
+          }
     }
 
     @Override
