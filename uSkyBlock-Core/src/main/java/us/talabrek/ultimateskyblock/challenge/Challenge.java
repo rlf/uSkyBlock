@@ -27,7 +27,9 @@ public class Challenge {
     public static final int MAX_DETAILS = 11;
     public static final int MAX_LINE = 30;
 
-    public enum Type { PLAYER, ISLAND, ISLAND_LEVEL;
+    public enum Type {
+        PLAYER, ISLAND, ISLAND_LEVEL;
+
         static Type from(String s) {
             if (s == null || s.trim().isEmpty() || s.trim().toLowerCase().equals("onplayer")) {
                 return PLAYER;
@@ -37,6 +39,7 @@ public class Challenge {
             return ISLAND;
         }
     }
+
     private final String name;
     private final String description;
     private final String displayName;
@@ -163,10 +166,8 @@ public class Challenge {
             currentChallengeItem.setAmount(completion.getTimesCompleted() < currentChallengeItem.getMaxStackSize() ? completion.getTimesCompleted() : currentChallengeItem.getMaxStackSize());
             if (completion.isOnCooldown()) {
                 long cooldown = completion.getCooldownInMillis();
-                if (timesCompleted < getRepeatLimit() || getRepeatLimit() <= 0)
-                {
-                    if (getRepeatLimit() > 0)
-                    {
+                if (timesCompleted < getRepeatLimit() || getRepeatLimit() <= 0) {
+                    if (getRepeatLimit() > 0) {
                         lores.add(tr("\u00a74You can complete this {0} more time(s).", getRepeatLimit() - timesCompleted));
                     }
                     if (cooldown >= ChallengeLogic.MS_DAY) {
@@ -179,8 +180,7 @@ public class Challenge {
                         final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
                         lores.add(tr("\u00a74Requirements will reset in {0} minutes.", minutes));
                     }
-                }else
-                {
+                } else {
                     lores.add(tr("\u00a74This challenge is currently unavailable."));
                     if (cooldown >= ChallengeLogic.MS_DAY) {
                         final int days = (int) (cooldown / ChallengeLogic.MS_DAY);
@@ -278,7 +278,7 @@ public class Challenge {
     public Reward getRepeatReward() {
         return repeatReward;
     }
-    
+
     public int getRepeatLimit() {
         return repeatLimit;
     }
@@ -301,7 +301,7 @@ public class Challenge {
             return Collections.emptyList();
         }
         String missingList = "" + missing;
-        missingList = missingList.substring(1, missingList.length()-1);
+        missingList = missingList.substring(1, missingList.length() - 1);
         return wordWrap(tr("\u00a77Requires {0}", missingList), MAX_LINE);
     }
 

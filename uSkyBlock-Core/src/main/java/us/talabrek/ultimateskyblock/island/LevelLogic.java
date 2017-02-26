@@ -94,12 +94,14 @@ public class LevelLogic {
         }
         
         ConfigurationSection negativeReturnSection = config.getConfigurationSection("negativeReturns");
-        for (String blockKey : negativeReturnSection.getKeys(false)){
-        	int[] blockIds = getBlockIds(blockKey);
-        	int value = negativeReturnSection.getInt(blockKey, 0);
-        	for (int blockId: blockIds) {
-        		blockNV[blockId] = value;
-        	}
+        if (negativeReturnSection != null) {
+            for (String blockKey : negativeReturnSection.getKeys(false)) {
+                int[] blockIds = getBlockIds(blockKey);
+                int value = negativeReturnSection.getInt(blockKey, 0);
+                for (int blockId : blockIds) {
+                    blockNV[blockId] = value;
+                }
+            }
         }
     }
 
