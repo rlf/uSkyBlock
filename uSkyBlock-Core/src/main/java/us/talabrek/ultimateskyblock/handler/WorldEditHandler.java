@@ -23,6 +23,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
@@ -326,5 +327,11 @@ public class WorldEditHandler {
 
     public static EditSession createEditSession(com.sk89q.worldedit.world.World bukkitWorld, int maxBlocks) {
         return WorldEdit.getInstance().getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
+    }
+
+    public static void clearEntities(World world, Location center) {
+        for (Entity entity : world.getNearbyEntities(center, Settings.island_radius, 255, Settings.island_radius)) {
+            entity.remove();
+        }
     }
 }

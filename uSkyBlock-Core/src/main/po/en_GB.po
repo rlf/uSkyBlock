@@ -82,6 +82,10 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid "§4You can complete this {0} more time(s)."
+msgstr ""
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§7Requirements will reset in §4{0} §7days."
 
@@ -92,6 +96,21 @@ msgstr "§7Requirements will reset in §4{0} §7hours."
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§7Requirements will reset in §4{0} §7minutes."
+
+msgid "§4This challenge is currently unavailable."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} days."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} hours."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} minutes."
+msgstr ""
 
 msgid "§eThis challenge requires:"
 msgstr "§eThis challenge requires:"
@@ -139,6 +158,10 @@ msgstr "§a* §7The {0} challenge is §4not §7available yet!"
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4* §7The §a{0} §7challenge is not repeatable!"
+
+#, java-format
+msgid "§4You cannot complete the {0} challenge again yet!"
+msgstr ""
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"

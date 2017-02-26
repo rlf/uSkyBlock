@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-01-07 14:03+0000\n"
 "Last-Translator: Leomixer17\n"
 "Language-Team: Rublitio\n"
@@ -83,6 +82,10 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid "§4You can complete this {0} more time(s)."
+msgstr ""
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§7I requisiti saranno resettati tra §4{0} §7giorni."
 
@@ -93,6 +96,21 @@ msgstr "§7I requisiti saranno resettati tra §4{0} §7ore."
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§7I requisiti saranno resettati tra §4{0} §7minuti."
+
+msgid "§4This challenge is currently unavailable."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} days."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} hours."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} minutes."
+msgstr ""
 
 msgid "§eThis challenge requires:"
 msgstr ""
@@ -140,6 +158,10 @@ msgstr "§a* §7La sfida {0} §4non §7è ancora disponibile!"
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4* §7La sfida §a{0} §7non si può ripetere!"
+
+#, java-format
+msgid "§4You cannot complete the {0} challenge again yet!"
+msgstr ""
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -2800,45 +2822,3 @@ msgstr "Ovest"
 
 msgid "North-West"
 msgstr "Nord-Ovest"
-
-#~ msgid "§eThis challenge requires the following:"
-#~ msgstr "§eQuesta sfida richiede:"
-
-#~ msgid "§7Requires {0}§7 to unlock"
-#~ msgstr "§a* §7Richiede {0}§7 per essere sbloccata"
-
-#~ msgid "§aTeleporting to {0}s island."
-#~ msgstr "§9* §7Teletrasporto all''isola di §6{0}§7."
-
-#~ msgid "- PURGING: {0,number,##}% ({1}/{2}) ~ {3}"
-#~ msgstr "- PULIZIA: {0,number,##}% ({1}/{2}) ~ {3}"
-
-#~ msgid "§c-"
-#~ msgstr "§c-"
-
-#~ msgid "§a+"
-#~ msgstr "§a+"
-
-#~ msgid "§c-1000"
-#~ msgstr "§c-1000"
-
-#~ msgid "§c-100"
-#~ msgstr "§c-100"
-
-#~ msgid "§c-10"
-#~ msgstr "§c-10"
-
-#~ msgid "§c-1"
-#~ msgstr "§c-1"
-
-#~ msgid "§a+1"
-#~ msgstr "§a+1"
-
-#~ msgid "§a+10"
-#~ msgstr "§a+10"
-
-#~ msgid "§a+100"
-#~ msgstr "§a+100"
-
-#~ msgid "§a+1000"
-#~ msgstr "§a+1000"
