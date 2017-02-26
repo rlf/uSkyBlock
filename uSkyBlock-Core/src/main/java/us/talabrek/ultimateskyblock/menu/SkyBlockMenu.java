@@ -159,14 +159,14 @@ public class SkyBlockMenu {
         addLore(lores, tr("\u00a7eClick here to return to\n\u00a7eyour island group's info."));
         meta2.setLore(lores);
         sign.setItemMeta(meta2);
-        menu.addItem(new ItemStack[]{sign});
+        menu.addItem(sign);
         lores.clear();
         meta3.setOwner(pname);
         meta3.setDisplayName(tr("\u00a7e{0}''\u00a79s Permissions", pname));
         addLore(lores, tr("\u00a7eHover over an icon to view\n\u00a7ea permission. Change the\n\u00a7epermission by clicking it."));
         meta3.setLore(lores);
         pHead.setItemMeta(meta3);
-        menu.addItem(new ItemStack[]{pHead});
+        menu.addItem(pHead);
         lores.clear();
         IslandInfo islandInfo = plugin.getIslandInfo(player);
         boolean isLeader = islandInfo.isLeader(player);
@@ -190,7 +190,7 @@ public class SkyBlockMenu {
             }
             meta2.setLore(lores);
             itemStack.setItemMeta(meta2);
-            menu.addItem(new ItemStack[]{itemStack});
+            menu.addItem(itemStack);
             lores.clear();
         }
         return menu;
