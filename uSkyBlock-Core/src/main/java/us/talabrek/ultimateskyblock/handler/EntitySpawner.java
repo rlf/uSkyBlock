@@ -7,7 +7,7 @@ import org.bukkit.entity.Blaze;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.util.VersionUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
 
 /**
  * Abstraction for spawning entities (cross-version-support)

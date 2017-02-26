@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.handler;
 
+import com.sk89q.worldedit.BlockVector2D;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
@@ -12,6 +13,8 @@ import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import dk.lockfuglsang.minecraft.reflection.ReflectionUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -29,7 +32,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -320,8 +325,21 @@ public class WorldEditHandler {
     }
 
     public static void clearEntities(World world, Location center) {
-        for (Entity entity : world.getNearbyEntities(center, Settings.island_radius, 255, Settings.island_radius)) {
-            entity.remove();
+        Collection<Entity> entities;
+        if (VersionUtil.getVersion(dk.lockfuglsang.minecraft.reflection.ReflectionUtil.getCraftBukkitVersion()).isGTE("1.9")) {
+            entities = ReflectionUtil.exec(world, "getNearbyEntities",
+                    new Class[]{World.class, Integer.TYPE, Integer.TYPE, Integer.TYPE}, world, Settings.island_radius, 255, Settings.island_radius);
+            for (Entity entity : entities) {
+                entity.remove();
+            }
+        } else {
+            entities = world.getEntities();
+            ProtectedRegion islandRegion = WorldGuardHandler.getIslandRegionAt(center);
+            for (Entity entity : entities) {
+                if (entity != null && entity.getLocation() != null && islandRegion.contains(entity.getLocation().getBlockX(), entity.getLocation().getBlockY(), entity.getLocation().getBlockZ())) {
+                    entity.remove();
+                }
+            }
         }
     }
 }

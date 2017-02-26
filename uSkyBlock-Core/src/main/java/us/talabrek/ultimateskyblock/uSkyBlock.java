@@ -95,7 +95,7 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.ServerUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
-import us.talabrek.ultimateskyblock.util.VersionUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.BukkitPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.MemoryPlayerDB;

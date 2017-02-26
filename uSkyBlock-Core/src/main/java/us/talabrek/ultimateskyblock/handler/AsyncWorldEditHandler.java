@@ -1,10 +1,7 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.bukkit.BukkitUtil;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.regions.Regions;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,7 +11,7 @@ import us.talabrek.ultimateskyblock.handler.asyncworldedit.AWEAdaptor;
 import us.talabrek.ultimateskyblock.handler.task.WEPasteSchematic;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.VersionUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
 
 import java.io.File;
 import java.util.logging.Level;
