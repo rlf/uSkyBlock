@@ -106,6 +106,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("party", null);
         config.set("general.scoreMultiply", null);
         config.set("general.scoreOffset", null);
+        config.set("blocks.hopperCount", 0);
         setupPartyLeader(leader);
         sendMessageToIslandGroup(false, marktr("The island has been created."));
     }
@@ -327,12 +328,21 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
     public void togglePerm(final String playername, final String perm) {
         String uuidString = UUIDUtil.asString(uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(playername));
-        if (config.getBoolean("party.members." + uuidString + "." + perm, false)) {
-            config.set("party.members." + uuidString + "." + perm, false);
-        } else {
-            config.set("party.members." + uuidString + "." + perm, true);
-        }
-        save();
+        ConfigurationSection memberSection = config.getConfigurationSection("party.members." + uuidString + ".name");
+        try {
+          if (memberSection == null) {
+              log.info("Perms for " + playername + " failed to toggle because player is not a part of that island!");
+              return;
+          }
+          if (config.getBoolean("party.members." + uuidString + "." + perm)) {
+              config.set("party.members." + uuidString + "." + perm, false);
+          } else if (!config.getBoolean("party.members." + uuidString + "." + perm)) {
+              config.set("party.members." + uuidString + "." + perm, true);
+          }
+          save();
+        } catch (NullPointerException e) {
+            log.info("Perms for " + playername + " failed to toggle because player is not a part of that island!");
+          }
     }
 
     @Override
@@ -348,6 +358,10 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                         members.add(nm);
                     } else {
                         log.info("Island " + name + " has unknown member-section " + uuid);
+                        // Remove broken UUID from island file
+                        config.set("party.members." + uuid, null);
+                        config.set("party.currentSize", getPartySize() - 1);
+                        save();
                     }
                 } else {
                     log.info("Island " + name + " has invalid member-section " + uuid);
@@ -822,4 +836,14 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("general.scoreOffset", d);
         save();
     }
+    
+    public int getHopperCount() 
+    {
+    	return config.getInt("blocks.hopperCount", 0);
+    }
+    public void setHopperCount(int i) 
+    {
+    	config.set("blocks.hopperCount", i);
+    	save();
+    }	  
 }

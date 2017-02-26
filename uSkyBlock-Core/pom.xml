@@ -515,15 +515,15 @@
             <version>1.5.11</version>
         </dependency>
         <dependency>
-            <groupId>be.maximvdw</groupId>
-            <artifactId>MVdWPlaceholderAPI</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>*</groupId>
-                </exclusion>
-            </exclusions>
+        <groupId>be.maximvdw</groupId>		
+            <artifactId>MVdWPlaceholderAPI</artifactId>		
+            <version>1.0.1-SNAPSHOT</version>		
+            <exclusions>		
+                <exclusion>		
+                    <artifactId>*</artifactId>		
+                    <groupId>*</groupId>		
+                </exclusion>		
+            </exclusions>		
         </dependency>
         <dependency>
             <groupId>me.clip.deluxechat</groupId>
