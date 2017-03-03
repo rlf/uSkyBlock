@@ -326,9 +326,9 @@ public class WorldEditHandler {
 
     public static void clearEntities(World world, Location center) {
         Collection<Entity> entities;
-        if (VersionUtil.getVersion(dk.lockfuglsang.minecraft.reflection.ReflectionUtil.getCraftBukkitVersion()).isGTE("1.9")) {
+        if (VersionUtil.getVersion(dk.lockfuglsang.minecraft.reflection.ReflectionUtil.getCraftBukkitVersion()).isGTE("1.10")) {
             entities = ReflectionUtil.exec(world, "getNearbyEntities",
-                    new Class[]{World.class, Integer.TYPE, Integer.TYPE, Integer.TYPE}, world, Settings.island_radius, 255, Settings.island_radius);
+                    new Class[]{Location.class, Double.TYPE, Double.TYPE, Double.TYPE}, center, Settings.island_radius, 255, Settings.island_radius);
             for (Entity entity : entities) {
                 entity.remove();
             }
