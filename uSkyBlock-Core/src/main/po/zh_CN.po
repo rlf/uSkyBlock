@@ -1370,6 +1370,35 @@ msgstr "§4这个指令只能由玩家来执行."
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4未拥有岛屿.§e输入§b/is create§e创建一个岛屿"
 
+msgid "changes a members island-permissions"
+msgstr ""
+
+#, java-format
+msgid "§ePermissions for §9{0}§e:"
+msgstr ""
+
+msgid "§aON"
+msgstr ""
+
+msgid "§cOFF"
+msgstr ""
+
+#, java-format
+msgid "§7 - §6{0}§7 : {1}"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid permission {0}. Must be one of {1}"
+msgstr ""
+
+#, java-format
+msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
+msgstr ""
+
+#, java-format
+msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
+msgstr ""
+
 msgid "delete your island and start a new one."
 msgstr ""
 

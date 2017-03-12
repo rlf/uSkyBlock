@@ -47,7 +47,6 @@ public class SkyBlockMenu {
     private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock plugin;
     private final ChallengeLogic challengeLogic;
-    ItemStack pHead = new ItemStack(397, 1, (short) 3);
     ItemStack sign = new ItemStack(323, 1);
     ItemStack biome = new ItemStack(6, 1, (short) 3);
     ItemStack lock = new ItemStack(101, 1);
@@ -152,7 +151,7 @@ public class SkyBlockMenu {
         String emptyTitle = tr("{0} <{1}>", "", tr("Permissions"));
         String title = tr("{0} <{1}>", pname.substring(0, Math.min(32-emptyTitle.length(), pname.length())), tr("Permissions"));
         Inventory menu = Bukkit.createInventory(null, 9, title);
-        final ItemStack pHead = new ItemStack(397, 1, (short) 3);
+        final ItemStack pHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = sign.getItemMeta();
         meta2.setDisplayName(tr("\u00a79Player Permissions"));
@@ -210,7 +209,6 @@ public class SkyBlockMenu {
         Inventory menu = Bukkit.createInventory(null, 18, "\u00a79" + tr("Island Group Members"));
         IslandInfo islandInfo = plugin.getIslandInfo(player);
         final Set<String> memberList = islandInfo.getMembers();
-        final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         final ItemMeta meta2 = sign.getItemMeta();
         meta2.setDisplayName("\u00a7a" + tr("Island Group Members"));
         lores.add(tr("Group Members: \u00a72{0}\u00a77/\u00a7e{1}", islandInfo.getPartySize(), islandInfo.getMaxPartySize()));
@@ -222,10 +220,13 @@ public class SkyBlockMenu {
         addLore(lores, tr("\u00a7eHover over a player's icon to\n\u00a7eview their permissions. The\n\u00a7eleader can change permissions\n\u00a7eby clicking a player's icon."));
         meta2.setLore(lores);
         sign.setItemMeta(meta2);
-        menu.addItem(new ItemStack[]{sign});
+        menu.addItem(sign.clone());
         lores.clear();
         for (String temp : memberList) {
+            ItemStack headItem = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+            SkullMeta meta3 = (SkullMeta) headItem.getItemMeta();
             meta3.setDisplayName(tr("\u00a7e{0}''s\u00a79 Permissions", temp));
+            meta3.setOwner(temp);
             boolean isLeader = islandInfo.isLeader(temp);
             if (isLeader) {
                 addLore(lores, "\u00a7a\u00a7l", tr("Leader"));
@@ -242,10 +243,9 @@ public class SkyBlockMenu {
             if (islandInfo.isLeader(player.getName())) {
                 addLore(lores, tr("\u00a7e<Click to change this player's permissions>"));
             }
-            meta3.setOwner(temp);
             meta3.setLore(lores);
-            pHead.setItemMeta(meta3);
-            menu.addItem(pHead.clone());
+            headItem.setItemMeta(meta3);
+            menu.addItem(headItem);
             lores.clear();
         }
         return menu;
@@ -1017,17 +1017,25 @@ public class SkyBlockMenu {
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        String[] playerPerm = inventoryName.split(" ");
         IslandInfo islandInfo = plugin.getIslandInfo(p);
         if (!plugin.getIslandInfo(p).isLeader(p)) {
             p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         }
+        String[] playerPerm = inventoryName.split(" ");
+        String pname = playerPerm[0];
+        ItemStack skullItem = event.getInventory().getItem(1);
+        if (skullItem != null && skullItem.getType().equals(Material.SKULL_ITEM)) {
+            ItemMeta meta = skullItem.getItemMeta();
+            if (meta instanceof SkullMeta) {
+                pname = ((SkullMeta) meta).getOwner();
+            }
+        }
         for (PartyPermissionMenuItem item : permissionMenuItems) {
             if (currentItem.getType() == item.getIcon().getType()) {
                 p.closeInventory();
-                islandInfo.togglePerm(playerPerm[0], item.getPerm());
-                p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
+                islandInfo.togglePerm(pname, item.getPerm());
+                p.openInventory(displayPartyPlayerGUI(p, pname));
                 return;
             }
         }
@@ -1036,7 +1044,7 @@ public class SkyBlockMenu {
             p.openInventory(displayPartyGUI(p));
         } else {
             p.closeInventory();
-            p.openInventory(displayPartyPlayerGUI(p, playerPerm[0]));
+            p.openInventory(displayPartyPlayerGUI(p, pname));
         }
     }
 
@@ -1052,5 +1060,9 @@ public class SkyBlockMenu {
             p.closeInventory();
             p.openInventory(displayPartyPlayerGUI(p, skull.getOwner()));
         }
+    }
+
+    public List<PartyPermissionMenuItem> getPermissionMenuItems() {
+        return permissionMenuItems;
     }
 }

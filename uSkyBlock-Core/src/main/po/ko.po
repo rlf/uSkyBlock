@@ -1397,6 +1397,35 @@ msgstr "§4이 커맨드는 오직 플레이어에 의해서만 실행됩니다"
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4섬 없음. §e다음명령어 §b/is create§e 를 사용해 생성하세요"
 
+msgid "changes a members island-permissions"
+msgstr ""
+
+#, java-format
+msgid "§ePermissions for §9{0}§e:"
+msgstr ""
+
+msgid "§aON"
+msgstr ""
+
+msgid "§cOFF"
+msgstr ""
+
+#, java-format
+msgid "§7 - §6{0}§7 : {1}"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid permission {0}. Must be one of {1}"
+msgstr ""
+
+#, java-format
+msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
+msgstr ""
+
+#, java-format
+msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
+msgstr ""
+
 msgid "delete your island and start a new one."
 msgstr "섬을 삭제하고 새로 시작합니다."
 

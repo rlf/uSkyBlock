@@ -904,7 +904,9 @@ msgstr ""
 #, java-format
 msgid ""
 "- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
-msgstr "- PULIZIA: {0,number,##}% ({1}/{2}), trascorso {3}, stimato per completamento ~{4}"
+msgstr ""
+"- PULIZIA: {0,number,##}% ({1}/{2}), trascorso {3}, stimato per "
+"completamento ~{4}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
 msgstr "§4* PULIZIA:§7 Finito di ripulire le isole abbandonate."
@@ -1152,7 +1154,9 @@ msgstr "§4* §7Non hai il permesso di cambiare il tuo bioma in quel tipo."
 #, java-format
 msgid ""
 "§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
-msgstr "§2* §7I pixie sono impegnati a cambiare il bioma vicino a te a §9{0}§7, sii paziente."
+msgstr ""
+"§2* §7I pixie sono impegnati a cambiare il bioma vicino a te a §9{0}§7, sii "
+"paziente."
 
 #, java-format
 msgid ""
@@ -1414,6 +1418,35 @@ msgstr "§4* §7Questo comando può essere eseguito solo da un giocatore"
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4* Nessuna Isola. §7Usa §a/is create§7 per ottenerne una"
+
+msgid "changes a members island-permissions"
+msgstr ""
+
+#, java-format
+msgid "§ePermissions for §9{0}§e:"
+msgstr ""
+
+msgid "§aON"
+msgstr ""
+
+msgid "§cOFF"
+msgstr ""
+
+#, java-format
+msgid "§7 - §6{0}§7 : {1}"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid permission {0}. Must be one of {1}"
+msgstr ""
+
+#, java-format
+msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
+msgstr ""
+
+#, java-format
+msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
+msgstr ""
 
 msgid "delete your island and start a new one."
 msgstr "cancella la tua isola e avviane una nuova."
