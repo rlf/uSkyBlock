@@ -1420,33 +1420,33 @@ msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4* Nessuna Isola. §7Usa §a/is create§7 per ottenerne una"
 
 msgid "changes a members island-permissions"
-msgstr ""
+msgstr "cambia i permessi-isola dei membri"
 
 #, java-format
 msgid "§ePermissions for §9{0}§e:"
-msgstr ""
+msgstr "§ePermessi per §9{0}§e:"
 
 msgid "§aON"
-msgstr ""
+msgstr "§aON"
 
 msgid "§cOFF"
-msgstr ""
+msgstr "§cOFF"
 
 #, java-format
 msgid "§7 - §6{0}§7 : {1}"
-msgstr ""
+msgstr "§7 - §6{0}§7 : {1}"
 
 #, java-format
 msgid "§cInvalid permission {0}. Must be one of {1}"
-msgstr ""
+msgstr "§cPermesso {0} non valido. Deve essere uno tra {1}"
 
 #, java-format
 msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
-msgstr ""
+msgstr "§eCommutato il permesso §9{0}§e per §9{1}§e a {2}"
 
 #, java-format
 msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
-msgstr ""
+msgstr "§eImpossibile commutare il permesso §9{0}§e per §9{1}"
 
 msgid "delete your island and start a new one."
 msgstr "cancella la tua isola e avviane una nuova."
