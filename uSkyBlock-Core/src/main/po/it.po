@@ -422,7 +422,7 @@ msgstr "§4* Errore! §7Nessuna isola valida trovata per la pulizia."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr "§4* PURGE: §7Ripulita l''isola a {0}"
+msgstr "§4* PULIZIA: §7Ripulita l''isola a {0}"
 
 msgid "toggles the islands ignore status"
 msgstr "cambia lo stato delle isole di ignorato"
@@ -948,7 +948,7 @@ msgid "§eNo island found at your location!"
 msgstr "§4* §7Nessuna isola trovata alla tua posizione!"
 
 msgid "refreshes the chunk around the player"
-msgstr ""
+msgstr "ricarica il chunk attorno al giocatore"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -1017,7 +1017,7 @@ msgstr "§9* §{0}§7 ha provato ad invitarti, ma sei già in un party."
 
 #, java-format
 msgid "§aInvite sent to {0}"
-msgstr ""
+msgstr "§9* §7Invito inviato a {0}"
 
 #, java-format
 msgid "{0}§e has invited you to join their island!"
@@ -1393,7 +1393,7 @@ msgstr "§4* §7Solo il leader può trasferire la leadership!"
 
 #, java-format
 msgid "{0} tried to take over the island!"
-msgstr "§c{0} §7tried to take over the island!"
+msgstr "§c{0} §7ha provato a rilevare l''isola!"
 
 msgid "show party information"
 msgstr "mostra le informazioni del party"
@@ -1933,15 +1933,15 @@ msgstr "§7Pagina {0}"
 
 #, java-format
 msgid "§c{0,number,#}"
-msgstr ""
+msgstr "§c{0,number,#}"
 
 #, java-format
 msgid "§a+{0,number,#}"
-msgstr ""
+msgstr "§a+{0,number,#}"
 
 #, java-format
 msgid "§a{0,number,#}"
-msgstr ""
+msgstr "§a{0,number,#}"
 
 #, java-format
 msgid "&aLeft:&7 Increment with {0}"
@@ -2315,7 +2315,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
-msgstr ""
+msgstr "§7Permessi di {0}"
 
 msgid ""
 "§eHover over an icon to view\n"
@@ -2364,7 +2364,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
-msgstr ""
+msgstr "§9Permessi di §e{0}"
 
 msgid "Leader"
 msgstr "Capo"
@@ -2378,7 +2378,7 @@ msgstr "Può {0}"
 
 #, java-format
 msgid "Cannot {0}"
-msgstr "Cannot {0}"
+msgstr "Non può {0}"
 
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<Clicca per cambiare i permessi di questo giocatore>"
