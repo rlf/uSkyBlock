@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-10-14 14:32+0100\n"
+"PO-Revision-Date: 2017-03-12 22:29+0000\n"
 "Last-Translator: dutchy1001\n"
 "Language-Team: uSkyblock-dev team\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -82,6 +83,10 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid "§4You can complete this {0} more time(s)."
+msgstr "§4You can complete this {0} more time(s)."
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§7Requirements will reset in §4{0} §7days."
 
@@ -92,6 +97,21 @@ msgstr "§7Requirements will reset in §4{0} §7hours."
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§7Requirements will reset in §4{0} §7minutes."
+
+msgid "§4This challenge is currently unavailable."
+msgstr "§a* §7This challenge is currently unavailable."
+
+#, java-format
+msgid "§4You can complete this again in {0} days."
+msgstr "§a* §7You can complete this again in {0} days."
+
+#, java-format
+msgid "§4You can complete this again in {0} hours."
+msgstr "§a* §7You can complete this again in {0} hours."
+
+#, java-format
+msgid "§4You can complete this again in {0} minutes."
+msgstr "§a* §7You can complete this again in {0} minutes."
 
 msgid "§eThis challenge requires:"
 msgstr "§eThis challenge requires:"
@@ -139,6 +159,10 @@ msgstr "§a* §7The {0} challenge is §4not §7available yet!"
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4* §7The §a{0} §7challenge is not repeatable!"
+
+#, java-format
+msgid "§4You cannot complete the {0} challenge again yet!"
+msgstr "§a* §7You cannot complete the {0} challenge again yet!"
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -241,16 +265,16 @@ msgid "to unlock this rank"
 msgstr "to unlock this rank"
 
 msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "§9* §7But you are ALLLLLLL ALOOOOONE!"
+msgstr "§7But you are ALLLLLLL ALOOOOONE!"
 
 msgid "But you are Yelling in the wind!"
-msgstr "§9* §7But you are Yelling in the wind!"
+msgstr "§7But you are Yelling in the wind!"
 
 msgid "But your fantasy friends are gone!"
-msgstr "§9* §7But your fantasy friends are gone!"
+msgstr "§7But your fantasy friends are gone!"
 
 msgid "But you are Talking to your self!"
-msgstr "§9* §7But you are Talking to your self!"
+msgstr "§7But you are Talking to your self!"
 
 #, java-format
 msgid "§cSorry! {0}"
@@ -302,7 +326,7 @@ msgid "resets the challenge for the player"
 msgstr "resets the challenge for the player"
 
 msgid "§4Challenge has never been completed"
-msgstr "§4* §7Challenge has never been completed"
+msgstr "§a* §7Challenge has never been completed"
 
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
@@ -1380,6 +1404,35 @@ msgstr "§4* §7This command can only be executed by a player"
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4* No Island. §7Use §a/is create§7 to get one"
 
+msgid "changes a members island-permissions"
+msgstr "changes a members island-permissions"
+
+#, java-format
+msgid "§ePermissions for §9{0}§e:"
+msgstr "§9* §7Permissions for §6{0}§7:"
+
+msgid "§aON"
+msgstr "§aON"
+
+msgid "§cOFF"
+msgstr "§cOFF"
+
+#, java-format
+msgid "§7 - §6{0}§7 : {1}"
+msgstr "§7 - §6{0}§7 : {1}"
+
+#, java-format
+msgid "§cInvalid permission {0}. Must be one of {1}"
+msgstr "§4* §7Invalid permission {0}. Must be one of {1}"
+
+#, java-format
+msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
+msgstr "§9* §7Toggled permission §9{0}§7 for §9{1}§7 to {2}"
+
+#, java-format
+msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
+msgstr "§4* §7Unable to toggle permission §9{0}§7 for §9{1}"
+
 msgid "delete your island and start a new one."
 msgstr "delete your island and start a new one."
 
@@ -1575,10 +1628,10 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Trading isn't allowed on other islands. Do it in spawn."
 
 msgid "§eRiding is only allowed on your own island!"
-msgstr ""
+msgstr "§4* §7Riding is only allowed on your own island!"
 
 msgid "§eYou cannot break vehicles while being a visitor!"
-msgstr ""
+msgstr "§4* §7You cannot break vehicles while being a visitor!"
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr "§9* §7Wither §4despawned!§7 It wandered too far from your island."

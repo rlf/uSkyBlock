@@ -70,7 +70,7 @@ public class MemoryPlayerDB implements PlayerDB {
             } else {
                 offlinePlayer = nameCache.get(name);
             }
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             offlinePlayer = null;
         }
         return offlinePlayer;
@@ -86,7 +86,7 @@ public class MemoryPlayerDB implements PlayerDB {
         OfflinePlayer offlinePlayer;
         try {
             offlinePlayer = uuidCache.get(uuid);
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             offlinePlayer = null;
         }
         return offlinePlayer;

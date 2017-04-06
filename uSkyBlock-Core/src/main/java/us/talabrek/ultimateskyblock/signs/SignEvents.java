@@ -80,34 +80,18 @@ public class SignEvents implements Listener {
                 && wallBlock.getState() instanceof Chest;
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onChestChanged(InventoryMoveItemEvent e) {
-        if (e.isCancelled() || e.getSource() == null || e.getDestination() == null) {
-            return;
-        }
-        Location srcLoc = ReflectionUtil.exec(e.getSource(), "getLocation");
-        Location dstLoc = ReflectionUtil.exec(e.getDestination(), "getLocation");
-        if (srcLoc == null || dstLoc == null
-                || !plugin.isSkyAssociatedWorld(srcLoc.getWorld())
-                || !plugin.isSkyAssociatedWorld(dstLoc.getWorld())
-                ) {
-            return;
-        }
-        logic.updateSignsOnContainer(srcLoc, dstLoc);
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onChestClosed(InventoryCloseEvent e) {
-        if (e.getPlayer() == null || e.getPlayer().getLocation() == null
-                || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
-                ) {
-            return;
-        }
-        Location loc = ReflectionUtil.exec(e.getInventory(), "getLocation");
-        if (loc != null) {
-            logic.updateSignsOnContainer(loc);
-        }
-    }
+    //@EventHandler(priority = EventPriority.MONITOR)
+    //public void onChestClosed(InventoryCloseEvent e) {
+    //    if (e.getPlayer() == null || e.getPlayer().getLocation() == null
+    //            || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
+    //            ) {
+    //        return;
+    //    }
+    //    Location loc = ReflectionUtil.exec(e.getInventory(), "getLocation");
+    //    if (loc != null) {
+    //        logic.updateSignsOnContainer(loc);
+    //    }
+    //}
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onSignOrChestBreak(BlockBreakEvent e) {

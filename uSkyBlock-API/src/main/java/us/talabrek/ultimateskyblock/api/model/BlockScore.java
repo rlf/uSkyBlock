@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
  * @since v2.1.2
  */
 public interface BlockScore {
-
     /**
      * The type of block.
      *
@@ -66,8 +65,14 @@ public interface BlockScore {
      *
      * @since v2.1.2
      */
-    public enum State {
-        NORMAL(ChatColor.AQUA), DIMINISHING(ChatColor.YELLOW), LIMIT(ChatColor.RED);
+    enum State {
+        NORMAL(ChatColor.AQUA),
+        DIMINISHING(ChatColor.YELLOW),
+        LIMIT(ChatColor.RED),
+        /**
+         * @since v2.7.4
+         */
+        NEGATIVE(ChatColor.DARK_PURPLE);
         private final ChatColor color;
 
         State(ChatColor color) {

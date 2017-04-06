@@ -15,7 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -82,6 +81,10 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid "§4You can complete this {0} more time(s)."
+msgstr ""
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4필요 조건이 {0} 일 후에 리셋됩니다."
 
@@ -92,6 +95,21 @@ msgstr "§4필요 조건이 {0} 시간 후에 리셋됩니다."
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4필요 조건이 {0} 분 후에 리셋됩니다."
+
+msgid "§4This challenge is currently unavailable."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} days."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} hours."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} minutes."
+msgstr ""
 
 msgid "§eThis challenge requires:"
 msgstr "§e도전과제의 필요항목:"
@@ -139,6 +157,10 @@ msgstr "§4도전과제 {0}는 아직 사용이 불가능합니다!"
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4{0} 반복할 수 없는 도전과제입니다!"
+
+#, java-format
+msgid "§4You cannot complete the {0} challenge again yet!"
+msgstr ""
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -1374,6 +1396,35 @@ msgstr "§4이 커맨드는 오직 플레이어에 의해서만 실행됩니다"
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4섬 없음. §e다음명령어 §b/is create§e 를 사용해 생성하세요"
+
+msgid "changes a members island-permissions"
+msgstr ""
+
+#, java-format
+msgid "§ePermissions for §9{0}§e:"
+msgstr ""
+
+msgid "§aON"
+msgstr ""
+
+msgid "§cOFF"
+msgstr ""
+
+#, java-format
+msgid "§7 - §6{0}§7 : {1}"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid permission {0}. Must be one of {1}"
+msgstr ""
+
+#, java-format
+msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
+msgstr ""
+
+#, java-format
+msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
+msgstr ""
 
 msgid "delete your island and start a new one."
 msgstr "섬을 삭제하고 새로 시작합니다."

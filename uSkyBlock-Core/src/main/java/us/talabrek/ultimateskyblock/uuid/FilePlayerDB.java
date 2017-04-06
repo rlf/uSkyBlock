@@ -60,7 +60,7 @@ public class FilePlayerDB implements PlayerDB {
                     for (String uuid : uuids) {
                         UUID id = UUIDUtil.fromString(uuid);
                         String name = uuid2NameConfig.getString(uuid + ".name", null);
-                        if (name != null) {
+                        if (name != null && id != null) {
                             uuid2nameCache.put(id, name);
                             name2uuidCache.put(name, id);
                             List<String> akas = uuid2NameConfig.getStringList(uuid + ".aka");
@@ -217,8 +217,9 @@ public class FilePlayerDB implements PlayerDB {
 
     private void addEntry(UUID id, String name, String displayName) {
         String uuid = UUIDUtil.asString(id);
-        UUID oldUUID = name2uuidCache.get(name);
+        UUID oldUUID = null;
         if (name != null) {
+            oldUUID = name2uuidCache.get(name);
             uuid2nameCache.put(id, name);
             name2uuidCache.put(name, id);
         }

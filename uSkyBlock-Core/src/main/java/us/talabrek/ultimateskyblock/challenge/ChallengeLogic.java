@@ -66,7 +66,6 @@ public class ChallengeLogic implements Listener {
         this.config = config;
         this.plugin = plugin;
         this.defaults = ChallengeFactory.createDefaults(config.getRoot());
-        load();
         ranks = ChallengeFactory.createRankMap(config.getConfigurationSection("ranks"), defaults);
         completionLogic = new ChallengeCompletionLogic(plugin, config);
         String displayItemForLocked = config.getString("lockedDisplayItem", null);
@@ -84,16 +83,12 @@ public class ChallengeLogic implements Listener {
             }
         }
         if (completionLogic.isIslandSharing()) {
-            plugin.getServer().getPluginManager().registerEvents(this, plugin);
+            Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         }
     }
 
     public boolean isEnabled() {
         return config.getBoolean("allowChallenges", true);
-    }
-
-    private void load() {
-        Arrays.asList(config.getString("ranks", "").split(" "));
     }
 
     public List<Rank> getRanks() {
@@ -152,6 +147,10 @@ public class ChallengeLogic implements Listener {
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
             player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challenge.getDisplayName()));
+            return;
+        }
+        if (completion.isOnCooldown() && completion.getTimesCompletedInCooldown() >= challenge.getRepeatLimit() && challenge.getRepeatLimit() > 0) {
+            player.sendMessage(tr("\u00a74You cannot complete the {0} challenge again yet!", challenge.getDisplayName()));
             return;
         }
         player.sendMessage(tr("\u00a7eTrying to complete challenge \u00a7a{0}", challenge.getDisplayName()));

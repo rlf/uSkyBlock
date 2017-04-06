@@ -9,4 +9,6 @@ _What steps will reproduce the problem?_
 3.
 
 _If you have any log-files, please paste them to [pastebin.com](http://pastebin.com)_
-* server-log: link-to-pastebin 
+* server-log: link-to-pastebin
+
+(Not following the template will result in closing the issue.)
