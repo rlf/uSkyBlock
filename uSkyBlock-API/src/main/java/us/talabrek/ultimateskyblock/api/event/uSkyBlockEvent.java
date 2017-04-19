@@ -71,5 +71,5 @@ public class uSkyBlockEvent extends Event {
         return handlers;
     }
 
-    public enum Cause { RANK_UPDATED, SCORE_CHANGED }
+    public enum Cause { RANK_UPDATED, SCORE_CHANGED, OTHER }
 }
