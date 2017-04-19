@@ -444,4 +444,9 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
             save();
         }
     }
+
+    @Override
+    public void createIsland(String schematic) {
+        uSkyBlock.getInstance().createIsland(this.getPlayer(), schematic);
+    }
 }

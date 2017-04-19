@@ -35,4 +35,6 @@ public interface PlayerInfo {
     List<String> getTrustedOn();
 
     IslandInfo getIslandInfo();
+
+    void createIsland(String schematic);
 }
