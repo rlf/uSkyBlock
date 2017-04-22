@@ -269,7 +269,7 @@ public class PlayerEvents implements Listener {
             if(isInfo.getHopperCount() > hopperlimit)
             {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage(ChatColor.DARK_RED + "You've hit the hopper limit! You can't have more hoppers!");
+                event.getPlayer().sendMessage(tr("\u00a74You've hit the hopper limit! You can't have more hoppers!"));
             }
             else
             {
