@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2017-01-07 14:03+0000\n"
+"PO-Revision-Date: 2017-03-26 17:50+0100\n"
 "Last-Translator: Leomixer17\n"
 "Language-Team: Rublitio\n"
 "Language: it\n"
@@ -98,19 +98,19 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§7I requisiti saranno resettati tra §4{0} §7minuti."
 
 msgid "§4This challenge is currently unavailable."
-msgstr "§4Questa sfida è attualmente non disponibile."
+msgstr "§a* §7Questa sfida è attualmente non disponibile."
 
 #, java-format
 msgid "§4You can complete this again in {0} days."
-msgstr "§4Potrai completare questo ancora tra {0} giorni."
+msgstr "§a* §7Potrai completare questo ancora tra {0} giorni."
 
 #, java-format
 msgid "§4You can complete this again in {0} hours."
-msgstr "§4Potrai completare questo ancora tra {0} ore."
+msgstr "§a* §7Potrai completare questo ancora tra {0} ore."
 
 #, java-format
 msgid "§4You can complete this again in {0} minutes."
-msgstr "§4Potrai completare questo ancora tra {0} minuti."
+msgstr "§a* §7Potrai completare questo ancora tra {0} minuti."
 
 msgid "§eThis challenge requires:"
 msgstr "§eQuesta sfida richiede:"
@@ -161,7 +161,7 @@ msgstr "§4* §7La sfida §a{0} §7non si può ripetere!"
 
 #, java-format
 msgid "§4You cannot complete the {0} challenge again yet!"
-msgstr "§4Non puoi completare di nuovo la sfida {0} ancora!"
+msgstr "§a* §7Non puoi completare di nuovo la sfida {0} ancora!"
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -266,16 +266,16 @@ msgid "to unlock this rank"
 msgstr "per sbloccare questo rango"
 
 msgid "But you are ALLLLLLL ALOOOOONE!"
-msgstr "§9* §7Ma sei SOLLLLLLL SOOOOOLO!"
+msgstr "§7Ma sei SOLLLLLLL SOOOOOLO!"
 
 msgid "But you are Yelling in the wind!"
-msgstr "§9* §7Ma stai Parlando al vento!"
+msgstr "§7Ma stai Parlando al vento!"
 
 msgid "But your fantasy friends are gone!"
-msgstr "§9* §7Ma i tuoi amici di fantasia sono andati!"
+msgstr "§7Ma i tuoi amici di fantasia sono andati!"
 
 msgid "But you are Talking to your self!"
-msgstr "§9* §7Ma stai Parlando con te stesso!"
+msgstr "§7Ma stai Parlando a te stesso!"
 
 #, java-format
 msgid "§cSorry! {0}"
@@ -326,7 +326,7 @@ msgid "resets the challenge for the player"
 msgstr "resetta la sfide per il giocatore"
 
 msgid "§4Challenge has never been completed"
-msgstr "§4* §7La sfida non è mai stata completata"
+msgstr "§a* §7La sfida non è mai stata completata"
 
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
@@ -422,7 +422,7 @@ msgstr "§4* Errore! §7Nessuna isola valida trovata per la pulizia."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr "§4* PURGE: §7Ripulita l''isola a {0}"
+msgstr "§4* PULIZIA: §7Ripulita l''isola a {0}"
 
 msgid "toggles the islands ignore status"
 msgstr "cambia lo stato delle isole di ignorato"
@@ -948,7 +948,7 @@ msgid "§eNo island found at your location!"
 msgstr "§4* §7Nessuna isola trovata alla tua posizione!"
 
 msgid "refreshes the chunk around the player"
-msgstr ""
+msgstr "ricarica il chunk attorno al giocatore"
 
 msgid "Ultimate SkyBlock Admin"
 msgstr "Ultimate SkyBlock Admin"
@@ -1017,7 +1017,7 @@ msgstr "§9* §{0}§7 ha provato ad invitarti, ma sei già in un party."
 
 #, java-format
 msgid "§aInvite sent to {0}"
-msgstr ""
+msgstr "§9* §7Invito inviato a {0}"
 
 #, java-format
 msgid "{0}§e has invited you to join their island!"
@@ -1393,7 +1393,7 @@ msgstr "§4* §7Solo il leader può trasferire la leadership!"
 
 #, java-format
 msgid "{0} tried to take over the island!"
-msgstr "§c{0} §7tried to take over the island!"
+msgstr "§c{0} §7ha provato a rilevare l''isola!"
 
 msgid "show party information"
 msgstr "mostra le informazioni del party"
@@ -1420,33 +1420,33 @@ msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4* Nessuna Isola. §7Usa §a/is create§7 per ottenerne una"
 
 msgid "changes a members island-permissions"
-msgstr ""
+msgstr "cambia i permessi-isola dei membri"
 
 #, java-format
 msgid "§ePermissions for §9{0}§e:"
-msgstr ""
+msgstr "§9* §7Permessi per §6{0}§7:"
 
 msgid "§aON"
-msgstr ""
+msgstr "§aON"
 
 msgid "§cOFF"
-msgstr ""
+msgstr "§cOFF"
 
 #, java-format
 msgid "§7 - §6{0}§7 : {1}"
-msgstr ""
+msgstr "§7 - §6{0}§7 : {1}"
 
 #, java-format
 msgid "§cInvalid permission {0}. Must be one of {1}"
-msgstr ""
+msgstr "§4* §7Permesso {0} non valido. Deve essere uno tra {1}"
 
 #, java-format
 msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
-msgstr ""
+msgstr "§9* §7Commutato il permesso §9{0}§7 per §9{1}§7 a {2}"
 
 #, java-format
 msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
-msgstr ""
+msgstr "§4* §7Impossibile commutare il permesso §9{0}§7 per §9{1}"
 
 msgid "delete your island and start a new one."
 msgstr "cancella la tua isola e avviane una nuova."
@@ -1645,10 +1645,10 @@ msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Il commercio non è consentito su altre isole. Fallo nello spawn."
 
 msgid "§eRiding is only allowed on your own island!"
-msgstr "§eCavalcare è consentito solo nella tua isola!"
+msgstr "§4* §7Cavalcare è consentito solo nella tua isola!"
 
 msgid "§eYou cannot break vehicles while being a visitor!"
-msgstr "§eNon puoi rompere veicoli mentre sei un visitatore!"
+msgstr "§4* §7Non puoi rompere veicoli mentre sei un visitatore!"
 
 msgid "§cWither Despawned!§e It wandered too far from your island."
 msgstr ""
@@ -1933,15 +1933,15 @@ msgstr "§7Pagina {0}"
 
 #, java-format
 msgid "§c{0,number,#}"
-msgstr ""
+msgstr "§c{0,number,#}"
 
 #, java-format
 msgid "§a+{0,number,#}"
-msgstr ""
+msgstr "§a+{0,number,#}"
 
 #, java-format
 msgid "§a{0,number,#}"
-msgstr ""
+msgstr "§a{0,number,#}"
 
 #, java-format
 msgid "&aLeft:&7 Increment with {0}"
@@ -2315,7 +2315,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
-msgstr ""
+msgstr "§7Permessi di {0}"
 
 msgid ""
 "§eHover over an icon to view\n"
@@ -2364,7 +2364,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
-msgstr ""
+msgstr "§9Permessi di §e{0}"
 
 msgid "Leader"
 msgstr "Capo"
@@ -2378,7 +2378,7 @@ msgstr "Può {0}"
 
 #, java-format
 msgid "Cannot {0}"
-msgstr "Cannot {0}"
+msgstr "Non può {0}"
 
 msgid "§e<Click to change this player's permissions>"
 msgstr "§e<Clicca per cambiare i permessi di questo giocatore>"
