@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.7\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2017-02-27 22:52+0900\n"
+"PO-Revision-Date: 2017-04-06 19:30+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: swan201 <bmr0621@swiftnode.cloud>\n"
 "Language: ko_KR\n"
@@ -191,7 +191,7 @@ msgid ""
 "§eStill the following entities short:\n"
 "{0}"
 msgstr ""
-"§e여전의 다음의 엔티티가 부족합니다:\n"
+"§e여전히 다음의 엔티티가 부족합니다:\n"
 "{0}"
 
 #, java-format
@@ -1002,7 +1002,7 @@ msgstr "§e{0}§e가 당신을 초대하려 했지만 당신은 이미 파티에
 
 #, java-format
 msgid "§aInvite sent to {0}"
-msgstr "§a{0} 애개 초대장 발ㅅ"
+msgstr "§a{0} 에게 초대장 발송"
 
 #, java-format
 msgid "{0}§e has invited you to join their island!"
