@@ -104,7 +104,7 @@ public class PlayerEvents implements Listener {
             if (inventory.firstEmpty() != -1) {
                 obsidianClick.put(player.getUniqueId(), now);
                 player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
-                inventory.remove(new ItemStack(Material.BUCKET, 1));
+                inventory.removeItem(new ItemStack(Material.BUCKET, 1));
                 inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
                 player.updateInventory();
                 block.setType(Material.AIR);
