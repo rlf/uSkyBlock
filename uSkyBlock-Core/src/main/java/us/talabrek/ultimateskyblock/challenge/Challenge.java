@@ -130,16 +130,8 @@ public class Challenge {
                 ItemMeta meta = mat.getItemMeta();
                 mat.setItemMeta(meta);
                 mat = NBTUtil.addNBTTag(mat, m.group("meta"));
-                while (amount > mat.getMaxStackSize()) {
-                    ItemStack clone = mat.clone();
-                    clone.setAmount(mat.getMaxStackSize());
-                    items.add(clone);
-                    amount -= mat.getMaxStackSize();
-                }
-                if (amount > 0) {
-                    mat.setAmount(amount);
-                    items.add(mat);
-                }
+                mat.setAmount(amount);
+                items.add(mat);
             } else if (!item.matches("[0-9]+") && type != Type.ISLAND_LEVEL) {
                 uSkyBlock.getInstance().getLogger().log(Level.INFO, "Malformed challenge " + name + ", item: " + item + " is not a valid required item");
             }
