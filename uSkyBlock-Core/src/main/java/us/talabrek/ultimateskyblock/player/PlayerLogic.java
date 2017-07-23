@@ -1,10 +1,6 @@
 package us.talabrek.ultimateskyblock.player;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
+import com.google.common.cache.*;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -37,6 +33,7 @@ public class PlayerLogic {
                     @Override
                     public void onRemoval(RemovalNotification<UUID, PlayerInfo> removal) {
                         PlayerInfo playerInfo = removal.getValue();
+                        assert playerInfo != null;
                         if (playerInfo.isDirty()) {
                             playerInfo.saveToFile();
                         }
@@ -111,6 +108,12 @@ public class PlayerLogic {
                                 if (islandInfo != null && islandInfo.isBanned(onlinePlayer)) {
                                     onlinePlayer.sendMessage(new String[]{
                                             tr("\u00a7eYou have been §cBANNED§e from {0}§e''s island.", islandInfo.getLeader()),
+                                            tr("\u00a7eSending you to spawn.")
+                                    });
+                                    plugin.spawnTeleport(onlinePlayer, true);
+                                } else if (islandInfo != null && islandInfo.isLocked()) {
+                                    onlinePlayer.sendMessage(new String[]{
+                                            tr("\u00a7eThe island has been §cLOCKED§e.", islandInfo.getLeader()),
                                             tr("\u00a7eSending you to spawn.")
                                     });
                                     plugin.spawnTeleport(onlinePlayer, true);

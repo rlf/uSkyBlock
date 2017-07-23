@@ -1,10 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,18 +21,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.file.FileUtil.readConfig;
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marker;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -109,7 +100,7 @@ public class IslandInfo {
         config.set("version", YML_VERSION);
         config.set("party", null);
         setupPartyLeader(leader);
-        sendMessageToIslandGroup(false, marktr("The island has been created."));
+        sendMessageToIslandGroup(false, marker("The island has been created."));
     }
 
     public void setupPartyLeader(final String leader) {
@@ -370,11 +361,11 @@ public class IslandInfo {
     public void lock(Player player) {
         WorldGuardHandler.islandLock(player, name);
         config.set("general.locked", true);
-        sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d locked the island."), player.getName());
+        sendMessageToIslandGroup(true, marker("\u00a7b{0}\u00a7d locked the island."), player.getName());
         if (hasWarp()) {
             config.set("general.warpActive", false);
             player.sendMessage(tr("\u00a74Since your island is locked, your incoming warp has been deactivated."));
-            sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d deactivated the island warp."), player.getName());
+            sendMessageToIslandGroup(true, marker("\u00a7b{0}\u00a7d deactivated the island warp."), player.getName());
         }
         save();
     }
@@ -382,7 +373,7 @@ public class IslandInfo {
     public void unlock(Player player) {
         WorldGuardHandler.islandUnlock(player, name);
         config.set("general.locked", false);
-        sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d unlocked the island."), player.getName());
+        sendMessageToIslandGroup(true, marker("\u00a7b{0}\u00a7d unlocked the island."), player.getName());
         save();
     }
 
@@ -483,7 +474,7 @@ public class IslandInfo {
         config.set("party.members." + playername, null);
         config.set("party.currentSize", getPartySize() - 1);
         save();
-        sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d has been removed from the island group."), playername);
+        sendMessageToIslandGroup(true, marker("\u00a7b{0}\u00a7d has been removed from the island group."), playername);
     }
 
     public void setLevel(double score) {

@@ -10,12 +10,7 @@ import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,7 +48,7 @@ public class ChallengeFactory {
         }
         String displayName = section.getString("name", name);
         Challenge.Type type = Challenge.Type.from(section.getString("type", "onPlayer"));
-        String requiredItems = section.getString("requiredItems", "");
+        List<String> requiredItems = section.isList("requiredItems") ? section.getStringList("requiredItems") : Arrays.asList(section.getString("requiredItems", "").split(" "));
         List<EntityMatch> requiredEntities = createEntities(section.getStringList("requiredEntities"));
         int resetInHours = section.getInt("resetInHours", rank.getResetInHours());
         String description = section.getString("description");
@@ -65,7 +60,7 @@ public class ChallengeFactory {
         int radius = section.getInt("radius", 10);
         Reward reward = createReward(section.getConfigurationSection("reward"));
         Reward repeatReward = createReward(section.getConfigurationSection("repeatReward"));
-        return new Challenge(name, displayName, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, lockedItem, takeItems, radius, reward, repeatReward);
+        return new Challenge(name, displayName, description, type, requiredItems, requiredEntities, rank, resetInHours, displayItem, section.getString("tool", null), lockedItem, takeItems, radius, reward, repeatReward);
     }
 
     private static List<EntityMatch> createEntities(List<String> requiredEntities) {
@@ -92,9 +87,7 @@ public class ChallengeFactory {
     private static Map<String,Object> createMap(String mapString) {
         try {
             Object parse = new JSONParser().parse(new StringReader(mapString));
-            if (parse instanceof Map) {
-                return (Map<String,Object>)parse;
-            }
+            if (parse instanceof Map) return (Map<String, Object>) parse;
         } catch (IOException | ParseException e) {
             throw new IllegalArgumentException("Not a valid map: " + mapString, e);
         }

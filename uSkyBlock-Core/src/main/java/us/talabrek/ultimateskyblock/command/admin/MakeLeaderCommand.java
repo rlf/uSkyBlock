@@ -54,6 +54,7 @@ public class MakeLeaderCommand extends AbstractCommand {
                         sender.sendMessage(I18nUtil.tr("\u00a7ePlayer \u00a7d{0}\u00a7e already has an island.\u00a7eUse \u00a7d/usb island remove <name>\u00a7e to remove him first.", playerName));
                         return;
                     }
+                    assert playerInfo != null;
                     playerInfo.setJoinParty(islandInfo.getIslandLocation());
                     Location homeLocation = islandPlayer.getHomeLocation();
                     islandInfo.removeMember(islandPlayer); // Remove leader
@@ -63,7 +64,7 @@ public class MakeLeaderCommand extends AbstractCommand {
                     islandPlayer.save();
                     playerInfo.save();
                     WorldGuardHandler.updateRegion(sender, islandInfo);
-                    islandInfo.sendMessageToIslandGroup(true, I18nUtil.marktr("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
+                    islandInfo.sendMessageToIslandGroup(true, I18nUtil.marker("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
                 }
             });
             return true;

@@ -1,10 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
+import com.google.common.cache.*;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -146,7 +142,26 @@ public class IslandLogic {
         }
     }
 
-    public void clearIsland(Location loc, Runnable afterDeletion) {
+    public void clearIsland(final Location loc, final Runnable afterDeletion) {
+        log.log(Level.FINE, "clearing island at {0}", loc);
+        Runnable clearNether = new Runnable() {
+            @Override
+            public void run() {
+                Location netherIsland = getNetherLocation(loc);
+                ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherIsland);
+                if (netherRegion != null) {
+                    for (Player player : WorldGuardHandler.getPlayersInRegion(netherIsland.getWorld(), netherRegion)) {
+                        if (player != null && player.isOnline() && plugin.isSkyNether(player.getWorld()) && !player.isFlying()) {
+                            player.sendMessage(tr("\u00a7cThe island owning this piece of nether is being deleted! Sending you to spawn."));
+                            plugin.spawnTeleport(player, true);
+                        }
+                    }
+                    WorldEditHandler.clearNetherIsland(netherIsland.getWorld(), netherRegion, afterDeletion);
+                } else {
+                    afterDeletion.run();
+                }
+            }
+        };
         log.log(Level.FINE, "clearing island at {0}", loc);
         World skyBlockWorld = plugin.getWorld();
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);

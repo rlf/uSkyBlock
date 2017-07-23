@@ -9,13 +9,9 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marker;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -79,7 +75,7 @@ public class InviteHandler {
             }
             IslandInfo island = plugin.getIslandInfo(invite.getIslandName());
             if (island != null) {
-                island.sendMessageToIslandGroup(true, marktr("{0}\u00a7e has rejected the invitation."), player.getDisplayName());
+                island.sendMessageToIslandGroup(true, marker("{0}\u00a7e has rejected the invitation."), player.getDisplayName());
             }
             if (waitingInvites.containsKey(invite.getIslandName())) {
                 waitingInvites.get(invite.getIslandName()).remove(player.getUniqueId());
@@ -144,7 +140,7 @@ public class InviteHandler {
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         island.addMember(playerInfo);
         playerInfo.save();
-        island.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d has joined your island group."), player.getDisplayName());
+        island.sendMessageToIslandGroup(true, marker("\u00a7b{0}\u00a7d has joined your island group."), player.getDisplayName());
         return true;
     }
 
@@ -169,7 +165,8 @@ public class InviteHandler {
             if (invite != null && invite.getTimeoutTask() != null) {
                 invite.getTimeoutTask().cancel();
             }
-            islandInfo.sendMessageToIslandGroup(true, marktr("\u00a7eInvitation for {0}\u00a7e has timedout or been cancelled."), invite.getDisplayName());
+            assert invite != null;
+            islandInfo.sendMessageToIslandGroup(true, marker("\u00a7eInvitation for {0}\u00a7e has timedout or been cancelled."), invite.getDisplayName());
             Player player = Bukkit.getPlayer(uuid);
             if (player != null && player.isOnline()) {
                 player.sendMessage(tr("\u00a7eInvitation for {0}'s island has timedout or been cancelled.", islandInfo.getLeader()));

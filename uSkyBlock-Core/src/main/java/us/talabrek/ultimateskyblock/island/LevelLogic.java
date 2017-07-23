@@ -153,6 +153,7 @@ public class LevelLogic {
             @Override
             public void run() {
                 final int[] counts = createBlockCountArray();
+                assert region != null;
                 int minX = region.getMinimumPoint().getBlockX();
                 int maxX = region.getMaximumPoint().getBlockX();
                 int minZ = region.getMinimumPoint().getBlockZ();
