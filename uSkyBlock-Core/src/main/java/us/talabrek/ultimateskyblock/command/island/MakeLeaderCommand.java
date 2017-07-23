@@ -8,7 +8,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marker;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class MakeLeaderCommand extends RequireIslandCommand {
@@ -30,7 +30,7 @@ public class MakeLeaderCommand extends RequireIslandCommand {
             }
             if (!island.isLeader(player)) {
                 player.sendMessage(tr("\u00a74Only leader can transfer leadership!"));
-                island.sendMessageToIslandGroup(true, marktr("{0} tried to take over the island!"), member);
+                island.sendMessageToIslandGroup(true, marker("{0} tried to take over the island!"), member);
                 return true;
             }
             island.setupPartyLeader(member); // Promote member

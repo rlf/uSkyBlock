@@ -33,8 +33,13 @@ public enum I18nUtil {;
     /**
      * Just used for marking translations (dynamic ones) for .po files.
      */
-    public static String marktr(String key) {
+    public static String marker(String key) {
         return key;
+    }
+
+    public static String pre(String s, Object... args) {
+        if (s != null && !s.isEmpty()) return new MessageFormat(s, i18n.getLocale()).format(s, args);
+        return "";
     }
 
     public static I18n getI18n() {
@@ -97,7 +102,7 @@ public enum I18nUtil {;
                     InputStream in = getClass().getClassLoader().getResourceAsStream("i18n.zip");
                     ZipInputStream zin = in != null ? new ZipInputStream(in, Charset.forName("UTF-8")) : null
             ) {
-                ZipEntry nextEntry = null;
+                ZipEntry nextEntry;
                 do {
                     nextEntry = zin != null ? zin.getNextEntry() : null;
                     if (nextEntry != null && nextEntry.getName().equalsIgnoreCase(locale + ".po")) {
@@ -128,7 +133,7 @@ public enum I18nUtil {;
 
         public String tr(String key, Object... args) {
             for (Properties prop : props) {
-                if (prop != null && prop.containsKey(key)) {
+                if (prop != null && prop.containsKey(key) && !prop.getProperty(key).isEmpty()) {
                     if (args.length > 0) {
                         return new MessageFormat(prop.getProperty(key), getLocale()).format(args);
                     } else {

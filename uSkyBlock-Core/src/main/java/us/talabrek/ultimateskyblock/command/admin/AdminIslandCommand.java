@@ -15,7 +15,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marker;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -83,7 +83,7 @@ public class AdminIslandCommand extends CompositeCommand {
                     if (playerInfo != null) {
                         islandInfo.addMember(playerInfo);
                         playerInfo.save();
-                        islandInfo.sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d has joined your island group."), playerInfo.getDisplayName());
+                        islandInfo.sendMessageToIslandGroup(true, marker("\u00a7b{0}\u00a7d has joined your island group."), playerInfo.getDisplayName());
                         return true;
                     } else {
                         sender.sendMessage(tr("\u00a74No player named {0} found!", args[0]));

@@ -8,7 +8,7 @@ challengeSharing: island
 broadcastCompletion: true
 
 # [text] The color/formatting of the broadcast text when showing first time completions.
-broadcastText: '&6'
+broadcastText: §6
 
 # [true/false] If true, challenges in higher level ranks require challenges in lower level ranks to be completed.
 requirePreviousRank: true
@@ -22,11 +22,13 @@ rankLeeway: 1
 defaultResetInHours: 20
 
 #[color code] The color to use for uncompleted challenges in the list.
-challengeColor: '§e'
+challengeColor: §e
+
 #[color code] The color to use for completed challenges in the list. (non-repeatable)
-finishedColor: '§2'
+finishedColor: §2
+
 #[color code] The color to use for completed challenges in the list. (repeatable)
-repeatableColor: '§a'
+repeatableColor: §a
 
 #[true/false] If true, enables vault to handle currency rewards.
 enableEconomyPlugin: true
@@ -37,699 +39,1359 @@ resetChallengesOnCreate: true
 # Material to show for locked challenges (i.e. STAINED_GLASS_PANE:14 for a red glass-pane, or 160:14)
 lockedDisplayItem: STAINED_GLASS_PANE:14
 
+# this will ignore a the challenges from updating
+#merge-ignore:
+#  - 'ranks'
+    
+#===============================================
+# An explanation to setup your own challenges 
+# can be found at the bottom of this file.
+#===============================================
+
 ranks:
-  Easy:
-    name: '&aEasy Challenges'
-    displayItem: DIRT
+  ChallengeGroup1:
+    name: '&aDefault Challenges'
+    displayItem: 4
     resetInHours: 20
     challenges:
-      #[text] The name of the challenge that shows up when you do /challenges. All challenge names should be lower case.
       cobblestonegenerator:
-        name: '&7Cobble Stone Generator'
-        # [text] What the player sees when they do /challenges <challengename>
-        description: 'Mine from a cobblestone generator.'
-        # [onIsland/onPlayer/islandLevel] This tells whether the required blocks/items should be in the player's inventory or on their island
-        # When using onIsland, the player must be 10 blocks away from the required blocks on his island.
-        # When using islandLevel, the 'requiredItems' field should be the island level required. The player must use /island level first to update his level.
+        name: '&aCobble Stone Generator'
+        description: Mine from a cobblestone generator.
         type: onPlayer
-        # [itemid list] The itemid:count of the items required for the challenge (data values are not supported for required items)
         requiredItems: '4:64;+2'
-        # [integer] The time in hours before required items reset to default.
-        resetInHours: 20
-        # [itemid] The itemid of the item to be displayed in the challenge menu for complete challenges.
-        displayItem: 4
-        # [true/false] Take required items on completing a challenge.
+        repeatable: true
+        displayItem: 1
+        resetInHours: 12
         takeItems: true
         reward:
-          # [text] Description of the reward. If omitted §4Unknown will be shown.
-          text: '3 leather'
-          # [itemid list] The itemid:<datavalue>:count of the reward to give the player for completing the challenge.
-          items: '334:3'
-          # [permission node] A permission granted for completion. Multiple permissions are space-separated, i.e. - "test.1 test.2" (use none to not give a permission)
+          text: 3 leather, 20% chance to get a book
+          items:
+          - '334:3'
+          - '{p=0.02}340:1'
           permission: none
-          # [integer] How much currency to give for the first time completion. (requires an economy plugin)
           currency: 10
-          # [integer] How much xp to give to the player for the first time completion.
-          xp: 30
-          # Executes the given command upon completion. Prepend with "op" or "console" to run the commands as OP or from the Console. Examples:
-          # commands:
-          # - 'op: me are the GOD of things'
-          # - 'console: give {party} aweseomestuff 32'
-          # Possible command arguments are:
-          # {player}     - The name of the player
-          # {playerName} - The display name of the player
-          # {challenge}  - The name of the challenge
-          # {position}   - The position of the player
-          # {party}      - Execute the command once for each member of the party (substituting the name)
+          xp: 10
           commands:
-            - 'op:effect {party} 10'
-
+          - op:effect {playername} 10
         repeatReward:
-          # [text] The text name of the reward (to display to the player).
-          text: '1 leather'
-          # [itemid list] The itemid:count of the reward to give the player for completing the challenge after the first time.
+          text: 1 leather, 10% chance to get a book
           items:
           - '334:1'
-          - '{p=0.02}340:1'
-          # [integer] How much currency to give when the challenge is repeated (requires an economy plugin)
-          currency: 2
-          # [integer] How much xp to give to the player for the repeat completions.
+          - '{p=0.01}340:1'
+          currency: 5
           xp: 5
-
-      applecollector:
-        description: 'Collect apples from trees.'
-        type: onPlayer
-        requiredItems: '260:2;+1'
-        displayItem: 260
-        reward:
-          text: 'a collection of saplings'
-          items: '6:0:1 6:1:1 6:2:1 6:3:2 6:4:1 6:5:4'
-          currency: 10
-          xp: 30
-        repeatReward:
-          text: 'more saplings'
-          items: '6:0:1 6:1:1 6:2:1 6:3:2 6:4:1 6:5:4'
-          currency: 2
-          xp: 5
-      wheatfarmer:
-        description: 'Harvest wheat from a farm.'
-        type: onPlayer
-        requiredItems: '296:64;+4'
-        displayItem: 296
-        reward:
-          text: '5 dirt'
-          items: '3:5'
-          currency: 10
-          xp: 30
-        repeatReward:
-          text: '1 dirt'
-          items:
-          - '3:1'
-          - '{p=0.2}352:1'
-          currency: 2
-          xp: 5
-      cactusfarmer:
-        description: 'Harvest cacti from a farm.'
-        type: onPlayer
-        requiredItems: '81:64;+4'
-        displayItem: 81
-        reward:
-          items: '12:10'
-          text: '10 sand'
-          currency: 15
-          xp: 30
-        repeatReward:
-          items: '12:1'
-          text: '1 sand'
-          currency: 2
-          xp: 5
-      sugarfarmer:
-        description: 'Harvest sugarcane from a farm.'
-        type: onPlayer
-        requiredItems: '338:64;+4'
-        displayItem: 338
-        reward:
-          items: '3:5 82:15'
-          text: '5 dirt, 15 clay'
-          currency: 15
-          xp: 30
-        repeatReward:
-          items:
-          - '82:1'
-          - '{p=0.05}3:1'
-          text: '1 clay'
-          currency: 2
-          xp: 3
-      melonfarmer:
-        description: 'Harvest slices of melon from a farm.'
-        type: onPlayer
-        requiredItems: '360:128;+8'
-        displayItem: 360
-        reward:
-          items: '3:5'
-          text: '5 dirt'
-          currency: 15
-          xp: 30
-        repeatReward:
-          items: '3:1'
-          text: '1 dirt'
-          currency: 2
-          xp: 3
-      pumpkinfarmer:
-        description: 'Harvest pumpkins from a farm.'
-        type: onPlayer
-        requiredItems: '86:64;+4'
-        displayItem: 86
-        reward:
-          items: '3:5'
-          text: '5 dirt'
-          currency: 15
-          xp: 30
-        repeatReward:
-          items: '3:1'
-          text: '1 dirt'
-          currency: 2
-          xp: 10
+       
       novicebuilder:
-        description: 'Reach island level 20.'
+        name: '&aNovice Builder'
+        description: Reach island level 20.
         type: islandLevel
         requiredItems: '20'
         repeatable: false
-        displayItem: 98
+        displayItem: 16
+        takeItems: false
+        takeItems: false
         reward:
-          items: '257:1 3:5'
-          text: '1 iron pickaxe, 5 dirt'
-          currency: 50
-          xp: 50
-  Medium:
-    displayItem: IRON_BLOCK
+          text: 8 dirt, 8 sand, 5 emeralds
+          items:
+          - '3:8'
+          - '12:8'
+          - '388:5'
+          permission: none
+          currency: 20
+          xp: 20
+          commands:
+          - op:effect {party} 10
+       
+      adeptbuilder:
+        name: '&aAdept Builder'
+        description: Reach island level 100.
+        type: islandLevel
+        requiredItems: '100'
+        repeatable: false
+        displayItem: 15
+        takeItems: false
+        reward:
+          text: 10 obsidian, 5 emeralds
+          items:
+          - '49:10'
+          - '388:5'
+          currency: 100
+          xp: 100
+          commands:
+       
+      expertbuilder:
+        name: '&aExpert Builder'
+        description: Reach island level 250.
+        type: islandLevel
+        requiredItems: '250'
+        repeatable: true
+        displayItem: 14
+        takeItems: true
+        reward:
+          text: 16 dirt,16 sand, 5 emeralds
+          items:
+          - '3:16'
+          - '12:16'
+          - '388:5'
+          permission: none
+          currency: 250
+          xp: 250
+       
+      masterbuilder:
+        name: '&aMaster Builder'
+        description: Reach island level 500.
+        type: islandLevel
+        requiredItems: '500'
+        repeatable: true
+        displayItem: 56
+        takeItems: true
+        reward:
+          text: 32 dirt, 32 sand, 5 emeralds
+          items:
+          - '3:32'
+          - '12:32'
+          - '388:5'
+          permission: none
+          currency: 500
+          xp: 500
+       
+      skylord:
+        name: '&aSky Lord'
+        description: Reach island level 1000.
+        type: islandLevel
+        requiredItems: '1000'
+        repeatable: true
+        displayItem: 129
+        takeItems: true
+        reward:
+          text: 64 dirt, 64 sand, 1 diamond, 5 emeralds
+          items:
+          - '3:64'
+          - '12:64'
+          - '264:1'
+          - '388:5'
+          permission: none
+          currency: 1000
+          xp: 1000
+    
+#===============================================
+
+  ChallengeGroup2:
+    name: '&aFarmer Challenges'
+    displayItem: 290
+    resetInHours: 20
     requires:
-      rankLeeway: 2
+      rankLeeway: 5
+      challenges:
+      - cobblestonegenerator
     challenges:
+      applecollector:
+        name: '&aApple Collector'
+        description: Collect apples from trees.
+        type: onPlayer
+        requiredItems: '260:2;+1'
+        repeatable: true
+        displayItem: 260
+        resetInHours: 6
+        takeItems: true
+        reward:
+          text: 1 of each sapling, (4 dark oak)
+          items:
+          - '6:0:1'
+          - '6:1:1'
+          - '6:2:1'
+          - '6:3:1'
+          - '6:4:1'
+          - '6:5:4'
+          - '{p=0.2}6:3:3'
+          permission: none
+          currency: 20
+          xp: 20
+        repeatReward:
+          text: 1 of each sapling (4 dark oak)
+          items:
+          - '6:0:1'
+          - '6:1:1'
+          - '6:2:1'
+          - '6:3:1'
+          - '6:4:1'
+          - '6:5:4'
+          - '{p=0.1}6:3:3'
+          currency: 10
+          xp: 10
+       
+      cactusfarmer:
+        name: '&aCactus Farmer'
+        description: Harvest cacti from a farm.
+        type: onPlayer
+        requiredItems: '81:64;+16'
+        repeatable: true
+        displayItem: 81
+        takeItems: true
+        reward:
+          text: 8 sand, 20% chance to get a bone
+          items:
+          - '12:8'
+          - '{p=0.2}352:1'
+          - '{p=0.1}290:1'
+          permission: none
+          currency: 20
+          xp: 20
+        repeatReward:
+          text: 4 sand
+          items:
+          - '12:4'
+          - '{p=0.1}352:1'
+          currency: 10
+          xp: 10
+           
+      pumpkinfarmer:
+        name: '&aPumpkin Farmer'
+        description: Harvest pumpkins from a farm.
+        type: onPlayer
+        requiredItems: '86:64;+4'
+        repeatable: true
+        displayItem: 86
+        takeItems: true
+        reward:
+          text: 8 dirt
+          items:
+          - '3:8'
+          - '{p=0.3}91:1'
+          permission: none
+          currency: 20
+          xp: 20
+        repeatReward:
+          text: 4 dirt
+          items:
+          - '3:4'
+          - '{p=0.05}91:1'
+          currency: 10
+          xp: 10
+           
+      sugarfarmer:
+        name: '&aSugar Farmer'
+        description: Harvest sugarcane from a farm.
+        type: onPlayer
+        requiredItems: '338:64;+16'
+        repeatable: true
+        displayItem: 338
+        takeItems: true
+        reward:
+          text: 8 dirt
+          items:
+          - '3:8'
+          - '{p=0.1}352:1'
+          permission: none
+          currency: 20
+          xp: 20
+        repeatReward:
+          text: 4 dirt
+          items:
+          - '3:4'
+          - '{p=0.05}3:4'
+          currency: 10
+          xp: 10
+       
       shroompicker:
-        description: 'Collect red and brown mushrooms.'
+        name: '&aShroom Picker'
+        description: Collect red and brown mushrooms.
         type: onPlayer
         requiredItems: '39:64;+4 40:64;+4'
+        repeatable: true
         displayItem: 40
+        takeItems: true
         reward:
-          items: '110:1'
-          text: '1 mycelium'
-          currency: 15
+          text: 8 mycelium, 4 podzol
+          items:
+          - '110:8'
+          - '3:2:4'
+          permission: none
+          currency: 30
           xp: 30
         repeatReward:
-          items: '110:1 3:2:2'
-          text: '1 mycelium, 2 podzol'
-          currency: 5
+          text: 4 mycelium
+          items:
+          - '110:4'
+          - '{p=0.02}110:4'
+          - '{p=0.02}3:2:2'
+          currency: 15
+          xp: 15
+           
+      wheatfarmer:
+        name: '&aWheat Farmer'
+        description: Harvest wheat from a farm.
+        type: onPlayer
+        requiredItems: '296:64;+16'
+        repeatable: true
+        displayItem: 296
+        repeatable: true
+        takeItems: true
+        reward:
+          text: 8 dirt
+          items:
+          - '3:8'
+          permission: none
+          currency: 20
+          xp: 20
+        repeatReward:
+          text: 4 dirt
+          items:
+          - '3:4'
+          - '{p=0.2}352:1'
+          currency: 10
           xp: 10
-      monsterslayer:
-        description: 'Kill monsters and collect their parts.'
+           
+      melonfarmer:
+        name: '&aMelon Farmer'
+        description: Harvest slices of melon from a farm.
         type: onPlayer
-        requiredItems: '367:64;+4 287:32;+2 289:16;+1 262:32;+2 352:32;+2 375:5'
-        displayItem: 367
+        requiredItems: '360:128;+8'
+        repeatable: true
+        displayItem: 360
+        takeItems: true
         reward:
-          items: '331:16 15:5 318:1'
-          text: '16 redstone, 1 flint, 5 iron'
-          currency: 75
-          xp: 75
+          text: 8 dirt
+          items:
+          - '3:8'
+          permission: none
+          currency: 20
+          xp: 20
         repeatReward:
-          items: '331:2 15:1 318:1'
-          text: '2 redstone, 1 flint, 1 iron'
+          text: 4 dirt
+          items:
+          - '3:4'
           currency: 10
-          xp: 15
-      expertfarmer:
-        description: 'Harvest many different farming resources.'
-        type: onPlayer
-        requiredItems: '360:64;+2 353:64;+2 296:64;+2 392:64;+2 391:64;+2 86:64;+2 81:64;+2'
-        displayItem: 292
-        reward:
-          items: '331:16 351:3:1 383:90:1 383:92:1 383:93:1'
-          text: '16 redstone, 1 cocoa, 3 animals'
-          currency: 75
-          xp: 75
-        repeatReward:
-          items: '351:3:1 383:90:1 383:92:1 383:93:1 82:5'
-          text: '1 cocoa, 3 animals, 5 clay'
-          currency: 30
-          xp: 25
-      fisherman:
-        description: 'Catch different types of fish.'
-        type: onPlayer
-        requiredItems: '349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1'
-        displayItem: 349
-        reward:
-          items: '331:16 15:5 351:5'
-          text: '16 redstone, 5 inksac, 5 iron'
-          currency: 75
-          xp: 75
-        repeatReward:
-          items: '331:2 351:2'
-          text: '2 redstone, 2 inksac'
-          currency: 10
-          xp: 15
+          xp: 10
+    
+#===============================================
+
+  ChallengeGroup3:
+    name: '&aBuilders Challenges'
+    displayItem: '98:2'
+    resetInHours: 20
+    requires:
+      rankLeeway: 0
+      challenges:
+      - novicebuilder
+    challenges: 
       lumberjack:
-        description: 'Collect all types of wood logs.'
+        name: '&aLumberjack'
+        description: Collect all types of wood logs.
         type: onPlayer
         requiredItems: '17:0:16;+2 17:1:16;+2 17:2:16;+2 17:3:16;+2 162:0:16;+2 162:1:16;+2'
+        repeatable: true
         displayItem: 17
+        takeItems: true
         reward:
-          items: '331:16 15:5 383:95:1'
-          text: '16 redstone, 5 iron, 1 wolf'
-          currency: 75
-          xp: 75
+          text: 4 redstone ore, 4 iron ore, 1 wolf
+          items:
+          - '73:4'
+          - '15:4'
+          - '383:95:1'
+          permission: none
+          currency: 30
+          xp: 30
         repeatReward:
-          items: '331:2 15:1'
-          text: '2 redstone, 1 iron'
-          currency: 20
+          text: 1 redstone ore, 1 iron ore
+          items:
+          - '73:1'
+          - '15:1'
+          currency: 15
           xp: 15
-      cookielover:
-        description: 'Make cookies and a bucket of milk.'
+       
+      torchmaker:
+        name: '&aTorch Maker'
+        description: Make 128 torches.
         type: onPlayer
-        requiredItems: '335:1 357:128;+4'
-        displayItem: 357
+        requiredItems: '50:128;+32'
+        repeatable: true
+        displayItem: 50
+        takeItems: true
         reward:
-          items: '331:16 15:5 325:1'
-          text: '16 redstone, 5 iron, 1 bucket'
-          currency: 75
-          xp: 75
+          text: 4 redstone ore, 4 iron ore, 1 cow
+          items:
+          - '73:4'
+          - '15:4'
+          - '383:92:1'
+          permission: none
+          currency: 30
+          xp: 30
         repeatReward:
-          items: '331:2 325:1'
-          text: '2 redstone, 1 bucket'
-          currency: 5
+          text: 1 redstone ore, 1 iron ore
+          items:
+          - '73:1'
+          - '15:1'
+          currency: 15
           xp: 15
+       
+      toolmaker:
+        name: '&aTool Maker'
+        description: Make all stone tools
+        type: onPlayer
+        requiredItems: '273:1 274:1 275:1 291:1'
+        repeatable: false
+        displayItem: 275
+        takeItems: true
+        reward:
+          text: 4 redstone ore, 4 iron, 1 pig
+          items:
+          - '73:4'
+          - '15:4'
+          - '383:90:1'
+          permission: none
+          currency: 30
+          xp: 30
+       
+      carpenter:
+        name: '&aCarpenter'
+        description: Collect all types of wood items.
+        type: onPlayer
+        requiredItems: '136:16;+8 427:1;+1 186:2;+2 192:30;+15 65:30;+15 96:4;+2 72:2;+1'
+        repeatable: true
+        displayItem: 58
+        takeItems: true
+        reward:
+          text: 4 redstone ore, 4 iron ore, 1 sheep
+          items:
+          - '73:4'
+          - '15:4'
+          - '383:91:1'
+          permission: none
+          currency: 30
+          xp: 30
+        repeatReward:
+          text: 1 redstone ore, 1 iron ore
+          items:
+          - '73:1'
+          - '15:1'
+          currency: 15
+          xp: 15
+       
+      stonebrickmaker:
+        name: '&aStone Brick Maker'
+        description: Make 64 Stone Bricks.
+        type: onPlayer
+        requiredItems: '98:64;+8 44:5:30;+6 98:3:30;+6 109:16;+4'
+        repeatable: true
+        displayItem: 98
+        takeItems: true
+        reward:
+          text: 4 redstone ore, 4 iron ore, 1 chicken
+          items:
+          - '73:4'
+          - '15:4'
+          - '383:93:1'
+          permission: none
+          currency: 30
+          xp: 30
+        repeatReward:
+          text: 1 redstone ore, 1 iron ore
+          items:
+          - '73:1'
+          - '15:1'
+          currency: 15
+          xp: 15
+       
+      monsterfarm:
+        name: '&aMonster Farm'
+        description: Build a mob farm and collect mob loot.
+        type: onPlayer
+        requiredItems: '367:64;+4 287:32;+2 262:32;+2 352:32;+2 289:16;+1 375:5'
+        repeatable: true
+        displayItem: 367
+        takeItems: true
+        reward:
+          text: 4 redstone ore, 4 iron ore, 1 flint
+          items:
+          - '73:4'
+          - '15:4'
+          - '318:1'
+          permission: none
+          currency: 30
+          xp: 30
+        repeatReward:
+          text: 1 redstone ore, 1 iron ore, 1 flint
+          items:
+          - '73:1'
+          - '15:4'
+          - '318:1'
+          currency: 15
+          xp: 15
+       
       homeowner:
-        description: 'Build a house with furnishings.'
+        name: '&aHome Owner'
+        description: Build a house with furnishings.
         type: onIsland
         requiredItems: '26:1 58:1 20:1 64:1 61:1 47:1 50:1'
         displayItem: 324
+        takeItems: false
         reward:
-          items: '84:1 2267:1 22:10'
-          text: '1 jukebox, 1 disk and 10 lapis lazuli'
-          currency: 100
-          xp: 100
-      adeptbuilder:
-        description: 'Reach island level 100.'
-        type: islandLevel
-        requiredItems: '100'
-        displayItem: 45
-        reward:
-          items: '49:12'
-          text: '12 obsidian'
-          currency: 75
-          xp: 75
-  Hard:
-    displayItem: GOLD_BLOCK
+          text: 4 redstone ore, 5 inksac, 4 iron ore
+          items:
+          - '73:4'
+          - '15:4'
+          - '351:5'
+          currency: 40
+          xp: 40
+     
+#===============================================
+
+  ChallengeGroup4:
+    name: '&aNether Challenges'
+    displayItem: '153'
+    resetInHours: 20
     requires:
-      rankLeeway: 2
+      rankLeeway: 0
+      challenges:
+      - adeptbuilder
     challenges:
       netherportal:
-        description: 'Build a nether portal on your island.'
+        name: '&aNether Portal'
+        description: Build a nether portal on your island.
         type: onIsland
         requiredItems: '49:10 90:1'
+        repeatable: false
         displayItem: 49
+        takeItems: false
         reward:
-          items: '276:1'
-          text: '1 diamond sword'
-          currency: 100
-          xp: 100
-      pearlcollector:
-        description: 'Collect enderpearls from endermen.'
+          text: 1 iron pickaxe, 1 iron shovel
+          items:
+          - '256:1'
+          - '257:1'
+          permission: none
+          currency: 40
+          xp: 40
+       
+      netherrack:
+        name: '&aNether Mining'
+        description: Mine from your Nether island.
         type: onPlayer
-        requiredItems: '368:10;+1'
-        displayItem: 368
+        requiredItems: '87:64;+2 88:16;+2 13:32;+2 406:32;+2'
+        repeatable: true
+        displayItem: 87
+        takeItems: true
         reward:
-          items: '266:5 369:1'
-          text: '5 gold ingots, 1 blaze rod'
-          currency: 50
-          xp: 100
+          text: 1 bow, 32 arrows
+          items:
+          - '261:1'
+          - '262:32'
+          permission: none
+          currency: 40
+          xp: 40
+          commands:
         repeatReward:
-          items: '266:1 369:1'
-          text: '1 gold ingot, 1 blaze rod'
-          currency: 25
-          xp: 15
-      slimefarmer:
-        description: 'Collect slimeballs from slimes.'
-        type: onPlayer
-        requiredItems: '341:64;+4'
-        displayItem: 341
-        reward:
-          items: '266:5 388:5'
-          text: '5 gold ingots, 5 emeralds'
-          currency: 50
-          xp: 100
-        repeatReward:
-          items: '331:2 388:1'
-          text: '2 redstone, 1 emerald'
-          currency: 5
-          xp: 5
-      baker:
-        description: 'Bake cakes, pumpkin pies, and cookies.'
-        type: onPlayer
-        requiredItems: '354:5;+1 400:5;+1 357:128;+4'
-        displayItem: 354
-        reward:
-          items: '266:5 264:1'
-          text: '5 gold ingots, 1 diamond'
-          currency: 50
-          xp: 100
-        repeatReward:
-          items: '15:2 266:1'
-          text: '2 iron, 1 gold ingot'
-          currency: 30
-          xp: 15
-      technician:
-        description: 'Collect some of every type of redstone equipment.'
-        type: onPlayer
-        requiredItems: '331:128;+16 76:32;+4 356:5;+1 404:3;+1 33:2;+1 29:2;+1 69:1;+1 77:1;+1 70:1;+1 154:1;+1 23:1;+1 158:1;+1 151:1;+1'
-        displayItem: 331
-        reward:
-          items: '152:16 25:8 131:4'
-          text: '16 redstone blocks, 8 noteblocks and 4 tripwire hooks'
-          currency: 75
-          xp: 75
-        repeatReward:
-          items: '152:1 131:1'
-          text: '1 redstone block and 1 tripwire hook'
-          currency: 15
-          xp: 15
-      explorer:
-        description: 'Collect items for exploration, nether items.'
-        type: onPlayer
-        requiredItems: '87:64 88:16 370:1 395:1 345:1 347:1'
-        displayItem: 370
-        reward:
-          items: '27:32 66:256 264:1 383:98:1'
-          text: '288 rails, 1 diamond, 1 ocelot'
-          currency: 100
-          xp: 100
-        repeatReward:
-          items: '66:64 15:1 421:1 388:5'
-          text: '64 rails, 1 iron, 1 tag, 5 emerald'
-          currency: 25
+          text: 64 arrows
+          items:
+          - '262:32'
+          currency: 20
           xp: 20
+        
       netherfortress:
-        description: 'Build a netherfortress.'
+        name: '&aNether Fortress'
+        description: Build a netherfortress.
         type: onIsland
         radius: 50
         requiredItems: '112:512 44:6:64 113:64 114:64'
-        displayItem: 113
-        reward:
-          items: '264:3 322:2'
-          text: 'some diamonds'
-          currency: 50
-          xp: 50
-      expertbuilder:
-        description: 'Reach island level 250.'
-        type: islandLevel
-        requiredItems: '250'
-        displayItem: 112
-        reward:
-          items: '264:1 3:32 12:32'
-          text: '1 diamond, 32 dirt, 32 sand'
-          currency: 150
-          xp: 150
-  Master:
-    displayItem: DIAMOND_BLOCK
-    requires:
-      challenges:
-      - novicebuilder
-      - adeptbuilder
-      - expertbuilder
-      rankLeeway: 2
-    challenges:
-      woolcollector:
-        description: 'Collect every color of wool.'
-        type: onPlayer
-        requiredItems: '35:0:5;+1 35:1:5;+1 35:2:5;+1 35:3:5;+1 35:4:5;+1 35:5:5;+1 35:6:5;+1 35:7:5;+1 35:8:5;+1 35:9:5;+1 35:10:5;+1 35:11:5;+1 35:12:5;+1 35:13:5;+1 35:14:5;+1 35:15:5;+1'
-        displayItem: 35
-        reward:
-          items: '264:2 2262:1 2263:1 2261:1 383:91:1 388:5'
-          text: '2 diamonds, 3 disks, 1 sheep, 5 emeralds'
-          currency: 200
-          xp: 200
-        repeatReward:
-          items: '388:5 383:91:1'
-          text: '5 emeralds, 1 sheep'
-          currency: 50
-          xp: 20
-      glassmaker:
-        description: 'Collect every color of stained glass panes.'
-        type: onPlayer
-        requiredItems: '160:0:16;+2 160:1:16;+2 160:2:16;+2 160:3:16;+2 160:4:16;+2 160:5:16;+2 160:6:16;+2 160:7:16;+2 160:8:16;+2 160:9:16;+2 160:10:16;+2 160:11:16;+2 160:12:16;+2 160:13:16;+2 160:14:16;+2 160:15:16;+2'
-        displayItem: 160
-        reward:
-          items: '264:2 2262:1 2263:1 2261:1 383:100:1 388:5'
-          text: '2 diamond, 3 disk, 1 horse, 5 emerald'
-          currency: 200
-          xp: 200
-        repeatReward:
-          items: '388:5 383:100:1'
-          text: '1 horse, 5 emeralds'
-          currency: 50
-          xp: 20
-      masterfarmer:
-        description: 'Collect a large amount of farmed items.'
-        type: onPlayer
-        requiredItems: '360:128;+1 353:128;+1 296:128;+1 392:128;+1 391:128;+1 86:128;+1 81:128;+1 396:1;+1 322:0:1;+1'
-        displayItem: 293
-        reward:
-          resetInHours: 5
-          items: '264:3 388:5'
-          text: '3 diamonds, 5 emeralds'
-          currency: 200
-          xp: 200
-        repeatReward:
-          items:
-          - '388:5'
-          - '266:2'
-          - '{p=0.05}264:1'
-          text: '5 emeralds, 2 gold ingots'
-          currency: 50
-          xp: 20
-      topchef:
-        description: Collect every kind of edible food.
-        type: onPlayer
-        requiredItems: 393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1
-        displayItem: 391
-        reward:
-          items: 264:2 2257:1 2258:1 2260:1 383:96:1 388:5
-          text: 2 diamond, 3 disk, 1 mooshroom, 5 emerald
-          currency: 200
-          xp: 200
-        repeatReward:
-          items: 266:3 383:96:1 388:5
-          text: 3 gold ingots, 1 mooshroom, 5 emeralds
-          currency: 50
-          xp: 20
-      maestro:
-        description: 'Make a jukebox and collect all music discs.'
-        type: onPlayer
-        requiredItems: '2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1'
-        displayItem: 2256
-        reward:
-          items: '264:3 388:10'
-          text: '3 diamonds, 10 emeralds'
-          currency: 200
-          xp: 200
-        repeatReward:
-          items:
-          - '266:2'
-          - '264:1'
-          - '{p=0.2}264:1'
-          text: '2 gold ingots, 1 diamond'
-          currency: 50
-          xp: 20
-      emeraldcollector:
-        description: 'Collect emeralds.'
-        type: onPlayer
-        requiredItems: '388:50;+10'
-        displayItem: 388
-        reward:
-          items: '264:2'
-          text: '2 diamonds'
-          currency: 200
-          xp: 200
-        repeatReward:
-          items: '264:1'
-          text: '1 diamond'
-          currency: 50
-          xp: 20
-      topchef:
-        description: 'Collect every kind of edible food.'
-        type: onPlayer
-        requiredItems: '393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1'
-        displayItem: 391
-        reward:
-          items: '264:2 2257:1 2258:1 2260:1 383:96:1 388:5'
-          text: '2 diamond, 3 disk, 1 mooshroom, 5 emerald'
-          currency: 200
-          xp: 200
-        repeatReward:
-          items: '266:3 383:96:1 388:5'
-          text: '3 gold ingots, 1 mooshroom, 5 emeralds'
-          currency: 50
-          xp: 20
-      skylord:
-        description: 'Get an island level of 1000.'
-        type: islandLevel
-        requiredItems: '1000'
-        displayItem: 120
-        reward:
-          items: '264:1 120:12'
-          text: '1 diamond & 1 end-portal'
-          currency: 250
-          xp: 250
-          commands:
-          # Regen for 10 seconds, then jump-boost for another 10
-           - 'op:effect {party} 10 10'
-           - '{d=200}op:effect {player} 8 10'
-  Skylord:
-    displayItem: '120:7'
-    requires:
-      challenges:
-      - expertbuilder
-      - emeraldcollector
-      - netherportal
-      rankLeeway: 1
-    challenges:
-      beaconator:
-        description: 'Build a very expensive beacon.'
-        type: onIsland
-        radius: 12
-        displayItem: 138
-        requiredItems: '138:1 57:1 133:8 41:25 42:49'
-        reward:
-          items: '174:16 80:4'
-          text: 'Packed ice and snow'
-          currency: 4000
-          xp: 1000
-      firefighter:
-        description: 'Collect some blaze rods.'
-        type: onPlayer
-        requiredItems: '369:128;+4'
-        displayItem: 369 
-        reward:
-          items: '264:2 49:15'
-          text: '2 diamonds and 15 obsidian'
-          currency: 100
-          xp: 100
-        repeatReward:
-          items: '49:3'
-          text: '3 obsidian'
-          currency: 15
-          xp: 15
-      goldfinger:
-        description: 'Gather some gold bars.'
-        type: onPlayer
-        requiredItems: '266:128'
-        displayItem: 266
-        reward:
-          items: '264:1 383:100:1 329:1 420:1'
-          text: '1 diamond, 1 horse egg, 1 saddle, 1 lead'
-          currency: 250
-          xp: 250
-        repeatReward:
-          items: '388:4'
-          text: '4 emeralds'
-          currency: 50
-          xp: 50
-      torchbearer:
-        description: 'Place at least 15,000 torches on your island.'
-        type: onIsland
-        radius: 52
-        requiredItems: '50:15000'
         repeatable: false
-        displayItem: 50
+        displayItem: 113
+        takeItems: true
         reward:
-          items: '123:15 73:15'
-          text: '15 redstone lamp and 15 redstone ore'
-          currency: 500
-          xp: 500
+          text: enchantment table, brewing stand
+          items:
+          - '116:1'
+          - '379:1'
+          permission: none
+          currency: 40
+          xp: 40
+       
       witherhunter:
-        description: 'Collect some Wither Skeleton skulls.'
+        name: '&aWither Hunter'
+        description: Collect some Wither Skeleton skulls.
         type: onPlayer
         requiredItems: '397:1:10;+1'
+        repeatable: true
         displayItem: '397:1'
+        takeItems: true
         reward:
-          items: '264:5'
-          text: '5 diamonds'
-          currency: 275 
-          xp: 300
+          text: 5 diamonds
+          items:
+          - '264:5'
+          permission: none
+          currency: 40
+          xp: 40
         repeatReward:
-          items: '266:2'
-          text: '2 gold ingots'
-          currency: 50
-          xp: 75
-  Collector:
-    displayItem: SKULL_ITEM
+          text: 2 gold ore
+          items:
+          - '14:2'
+          currency: 20
+          xp: 20
+   
+#===============================================
+
+  ChallengeGroup5:
+    name: '&aFarmer II Challenges'
+    displayItem: 292
+    resetInHours: 48
+    requires:
+      rankLeeway: 2
+      challenges:
+      - expertbuilder
     challenges:
-      village-people:
-        description: 'Obtain a whole village.'
-        type: onIsland
-        radius: 32
-        displayItem: '383:120'
-        requiredEntities:
-        - 'Villager:{"Profession":"FARMER"}'
-        - 'Villager:{"Profession":"LIBRARIAN"}'
-        - 'Villager:{"Profession":"PRIEST"}'
-        - 'Villager:{"Profession":3}'
-        - 'Villager:{"Profession":"BUTCHER"}'
-        reward:
-          items: '56:16'
-      industrial-farmer:
-        description: 'Create a mega-farm'
-        type: onIsland
-        radius: 40
-        displayItem: '383:91'
-        requiredEntities:
-        - 'Cow:8'
-        - 'Pig:8'
-        - 'Sheep:{"Color":0}'
-        - 'Sheep:{"Color":1}'
-        - 'Sheep:{"Color":2}'
-        - 'Sheep:{"Color":3}'
-        - 'Sheep:{"Color":4}'
-        - 'Sheep:{"Color":5}'
-        - 'Sheep:{"Color":6}'
-        - 'Sheep:{"Color":7}'
-        - 'Sheep:{"Color":8}'
-        - 'Sheep:{"Color":9}'
-        - 'Sheep:{"Color":10}'
-        - 'Sheep:{"Color":11}'
-        - 'Sheep:{"Color":12}'
-        - 'Sheep:{"Color":13}'
-        - 'Sheep:{"Color":14}'
-        - 'Sheep:{"Color":15}'
-        - 'Chicken:16'
-        reward:
-          items: '410:20 409:64'
-      greenthumb:
-        description: 'Collect some grass.'
+      fisherman:
+        name: '&aFisherman'
+        description: Catch different types of fish.
         type: onPlayer
-        requiredItems: '2:64;+4'
-        displayItem: 2
+        requiredItems: '349:0:5;+1 349:1:5;+1 349:3:3;+1 349:2:1;+1'
+        repeatable: true
+        displayItem: 349
+        takeItems: true
         reward:
-          items: '48:10 98:1:10'
-          text: '10 mossy cobblestone and 10 mossy stone brick'
-          currency: 125
-          xp: 125
+          text: 1 disk and 10 lapis lazuli
+          items:
+          - '2267:1'
+          - '22:10'
+          permission: none
+          currency: 50
+          xp: 50
         repeatReward:
-          items: '48:2 98:1:2'
-          text: '2 mossy cobblestone and 2 mossy stone brick'
+          text: 2 redstone, 2 inksac
+          items:
+          - '331:2'
+          - '351:2'
           currency: 25
           xp: 25
-      seacaptain:
-        description: 'Catch a plethora of pufferfish.'
+           
+      potatofarmer:
+        name: '&aPotato Farmer'
+        description: Harvest potato's from a farm.
         type: onPlayer
-        requiredItems: '349:3:25;+1'
-        displayItem: 349
+        requiredItems: '392:64;+16'
+        repeatable: true
+        displayItem: 392
+        takeItems: true
         reward:
-          items: '264:1 373:8269:15'
-          text: '1 diamond and 15 extended water-breathing potions'
-          currency: 50
-          xp: 50
-        repeatReward:
-          items: '373:8269:1'
-          text: '1 extended water-breathing potion'
-          currency: 10
-          xp: 10
-      ironforge:
-        description: 'Gather a load of iron bars.'
-        type: onPlayer
-        requiredItems: '265:256'
-        displayItem: 265
-        reward:
-          items: '264:1 312:1'
-          text: '1 diamond and a pair of diamond leggings'
-          currency: 300
-          xp: 300
-        repeatReward:
+          text: 5 baked potatos, 1 cow
           items:
-          - '388:4'
-          - '{p=0.1}264:1'
-          - '{p=0.01}264:1'
-          - '{p=0.005}264:1'
-          text: '4 emeralds & chance of dia'
+          - '393:5'
+          - '383:92:1'
+          permission: none
           currency: 50
           xp: 50
+        repeatReward:
+          text: 1 baked potato
+          items:
+          - '393:1'
+          currency: 25
+          xp: 25
+           
+      carrotfarmer:
+        name: '&aCarrot Farmer'
+        description: Harvest carrot's from a farm.
+        type: onPlayer
+        requiredItems: '391:64;+16'
+        repeatable: true
+        displayItem: 391
+        takeItems: true
+        reward:
+          text: 1 pig, 1 saddle
+          items:
+          - '383:90:1'
+          - '329:1'
+          permission: none
+          currency: 50
+          xp: 50
+        repeatReward:
+          text: 1 golden carrot
+          items:
+          - '396:1'
+          currency: 25
+          xp: 25
+       
+      expertfarmer:
+        name: '&aExpert Farmer'
+        description: Harvest many different farming resources.
+        type: onPlayer
+        requiredItems: '360:256;+2 353:128;+2 296:128;+2 392:128;+2 391:128;+2 86:128;+2 81:128;+2'
+        repeatable: true
+        displayItem: 292
+        takeItems: true
+        reward:
+          text: 1 bucket, 1 sheep
+          items:
+          - '325:1'
+          - '383:91:1'
+          permission: none
+          currency: 50
+          xp: 50
+        repeatReward:
+          text: 1 bucket
+          items:
+          - '325:1'
+          currency: 25
+          xp: 25
+
+      horsingaround:
+        name: '&aHorsing Around'
+        description: Get hay bales for the horses.
+        type: onPlayer
+        requiredItems: '170:32;+4 420:8;+2 398:1 359:1'
+        repeatable: true
+        displayItem: 170
+        takeItems: true
+        reward:
+          text: 1 horse, 1 iron horse armor, 5% chance on diamond horse armor
+          items:
+          - '383:100:1'
+          - '417:1'
+          - '{p=0.05}419:1'
+          permission: none
+          currency: 50
+          xp: 50
+        repeatReward:
+          text: 1 redstone ore, 1 emerald
+          items:
+          - '331:1'
+          - '388:1'
+          currency: 25
+          xp: 25
+
+      animalfarm:
+        name: '&aAnimal Farm'
+        description: Create an animal farm.
+        type: onIsland
+        radius: 40
+        requiredEntities:
+        - Cow: 8
+        - Pig: 8
+        - Sheep:{"Color":0}
+        - Sheep:{"Color":1}
+        - Sheep:{"Color":2}
+        - Sheep:{"Color":3}
+        - Sheep:{"Color":4}
+        - Sheep:{"Color":5}
+        - Sheep:{"Color":6}
+        - Sheep:{"Color":7}
+        - Sheep:{"Color":8}
+        - Sheep:{"Color":9}
+        - Sheep:{"Color":10}
+        - Sheep:{"Color":11}
+        - Sheep:{"Color":12}
+        - Sheep:{"Color":13}
+        - Sheep:{"Color":14}
+        - Sheep:{"Color":15}
+        - Chicken: 16
+        repeatable: true
+        displayItem: '85'
+        takeItems: true
+        reward:
+          text: 1 horse, 1 iron horse armor, 5% chance on diamond horse armor
+          items:
+          - '383:100:1'
+          - '417:1'
+          - '{p=0.05}419:1'
+          permission: none
+          currency: 50
+          xp: 50
+        repeatReward:
+          text: 1 redstone ore, 1 emerald
+          items:
+          - '331:1'
+          - '388:1'
+          currency: 25
+          xp: 25
+   
+#===============================================
+
+  ChallengeGroup6:
+    name: '&aWorld Food'
+    displayItem: 297
+    resetInHours: 20
+    requires:
+      rankLeeway: 0
+      challenges:
+      - masterbuilder
+    challenges:
+      fishandchips:
+        name: '&aFish & Chips'
+        description: Create the famous English Fish & Chips.
+        type: onPlayer
+        requiredItems: '350:32;+8 393:32;+8'
+        repeatable: true
+        displayItem: 350
+        takeItems: true
+        reward:
+          text: 16 baked potatos, 1 disk, 4 emerald
+          items:
+          - '393:16'
+          - '2256:1'
+          - '388:4'
+          currency: 60
+          xp: 60
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Fish_and_chips &2Click the link for more info'
+        repeatReward:
+          text: 30% chance on 1 disk, 1 emerald
+          items:
+          - '388:1'
+          - '{p=0.3}2256:1'
+          currency: 30
+          xp: 30
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Fish_and_chips &2Click the link for more info'
+          
+      smorrebrod:
+        name: '&aSmørrebrød'
+        description: Create the famous Danish smørrebrød.
+        type: onPlayer
+        requiredItems: '297:16;+4 350:1:8;+4 349:2:2;+1 320:8;+4 364:8;+4'
+        repeatable: true
+        displayItem: '350:1'
+        takeItems: true
+        reward:
+          text: 1 rod, 2 name tags, 1 ocelot
+          items:
+          - '346:1'
+          - '421:2'
+          - '383:98:1'
+          currency: 60
+          xp: 60
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Danish_cuisine &2Click the link for more info'
+        repeatReward:
+          text: 1 emerald, 20% chance on 2 ocelot
+          items:
+          - '388:1'
+          - '{p=0.2}383:98:2'
+          currency: 30
+          xp: 30
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Danish_cuisine &2Click the link for more info'
+        
+      hutspot:
+        name: '&aHutspot'
+        description: Create the famous Dutch hutspot.
+        type: onPlayer
+        requiredItems: '392:64;+8 391:64;+8'
+        repeatable: true
+        displayItem: 396
+        takeItems: true
+        reward:
+          text: 1 golden carrot, 1 disk, 4 emerald
+          items:
+          - '396:1'
+          - '2257:1'
+          - '388:4'
+          currency: 60
+          xp: 60
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Hutspot &2Click the link for more info'
+        repeatReward:
+          text: 30% chance on 1 disk, 1 emerald
+          items:
+          - '388:1'
+          - '{p=0.3}2257:1'
+          currency: 30
+          xp: 30
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Hutspot &2Click the link for more info'
+       
+      apfelstrudel:
+        name: '&aApfelstrudele'
+        description: Create the famous German apfelstrudel.
+        type: onPlayer
+        requiredItems: '260:8;+5 296:16;+5 353:16;+5 335:1'
+        repeatable: true
+        displayItem: 322
+        takeItems: true
+        reward:
+          text: 1 bucket, 1 disk, 4 emerald
+          items:
+          - '325:1'
+          - '388:4'
+          - '2258:1'
+          currency: 60
+          xp: 60
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Apple_strudel &2Click the link for more info'
+        repeatReward:
+          text: 1 bucket, 30% chance on 1 disk, 1 emerald
+          items:
+          - '325:1'
+          - '388:1'
+          - '{p=0.3}2258:1'
+          currency: 30
+          xp: 30
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Apple_strudel &2Click the link for more info'
+       
+      brownies:
+        name: '&aBrownies'
+        description: Create the famous American brownies.
+        type: onPlayer
+        requiredItems: '296:16;+5 353:16;+5 344:16;+5 351:3:16;+5 335:1'
+        repeatable: true
+        displayItem: '126:5'
+        takeItems: true
+        reward:
+          text: 1 bucket, 1 disk, 4 emerald
+          items:
+          - '325:1'
+          - '388:4'
+          - '2260:1'
+          currency: 60
+          xp: 60
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Chocolate_brownie &2Click the link for more info'
+        repeatReward:
+          text: 1 bucket, 30% chance on 1 disk, 1 emerald
+          items:
+          - '325:1'
+          - '388:1'
+          - '{p=0.3}2260:1'
+          currency: 30
+          xp: 30
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Chocolate_brownie &2Click the link for more info'
+          
+      pastafunghi:
+        name: '&aPasta Funghi'
+        description: Create the famous Italian Pasta Funghi.
+        type: onPlayer
+        requiredItems: '296:32;+8 344:32;+8 39:16;+4 40:16;+4 335:1'
+        repeatable: true
+        displayItem: 100
+        takeItems: true
+        reward:
+          text: 2 rabbits, 1 bucket
+          items:
+          - '383:101:2'
+          - '325:1'
+          currency: 60
+          xp: 60
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Pasta &2Click the link for more info'
+        repeatReward:
+          text: 30% chance on 1 disk, 1 emerald
+          items:
+          - '388:1'
+          - '{p=0.3}2256:1'
+          currency: 30
+          xp: 30
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Pasta &2Click the link for more info'
+       
+      chocolate:
+        name: '&aBelgian chocolate'
+        description: Create the famous belgian chocolate.
+        type: onPlayer
+        requiredItems: '353:16;+5 351:3:16;+5 335:1'
+        repeatable: true
+        displayItem: '383:120'
+        takeItems: true
+        reward:
+          text: 1 bucket, 1 disk, 4 emeralds
+          items:
+          - '325:1'
+          - '388:4'
+          - '2261:1'
+          currency: 60
+          xp: 60
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Belgian_chocolate &2Click the link for more info'
+        repeatReward:
+          text: 1 bucket, 30% chance on 1 disk, 1 emerald
+          items:
+          - '325:1'
+          - '388:1'
+          - '{p=0.3}2261:1'
+          currency: 30
+          xp: 30
+          commands:
+          - 'console: msg {player} &9https://en.wikipedia.org/wiki/Belgian_chocolate &2Click the link for more info'
+          
+   
+#===============================================
+
+  ChallengeGroup7:
+    name: '&a Miscellaneous Challenges'
+    displayItem: 32
+    resetInHours: 20
+    requires:
+      rankLeeway: 0
+      challenges:
+      - skylord
+    challenges:
+      pearlcollector:
+        name: '&aPearl Collector'
+        description: Collect enderpearls from endermen.
+        type: onPlayer
+        requiredItems: '368:10;+4'
+        repeatable: true
+        displayItem: 368
+        takeItems: true
+        reward:
+          text: 5 gold ore, 1 blaze rod, 1 emerald
+          items:
+          - '14:5'
+          - '369:1'
+          - '388:1'
+          permission: none
+          currency: 70
+          xp: 70
+        repeatReward:
+          text: 1 gold ore, 1 blaze rod
+          items:
+          - '14:1'
+          - '369:1'
+          currency: 35
+          xp: 35
+       
+      slimefarmer:
+        name: '&aSlime Farmer'
+        description: Collect slimeballs from slimes.
+        type: onPlayer
+        requiredItems: '341:64;+4'
+        repeatable: true
+        displayItem: 341
+        takeItems: true
+        reward:
+          text: 4 slime blocks, 1 emeralds
+          items:
+          - '165:4'
+          - '388:1'
+          permission: none
+          currency: 70
+          xp: 70
+        repeatReward:
+          text: 1 redstone ore, 1 emeralds
+          items:
+          - '73:1'
+          - '388:1'
+          currency: 35
+          xp: 35
+       
+      technician:
+        name: '&aTechnician'
+        description: Collect some of every type of redstone equipment.
+        type: onPlayer
+        requiredItems: '331:64;+16 76:32;+4 356:5;+1 404:3;+1 33:2;+1 29:2;+1 69:1;+1 77:1;+1 70:1;+1 154:1;+1 23:1;+1 158:1;+1 151:1;+1'
+        repeatable: true
+        displayItem: 331
+        takeItems: true
+        reward:
+          text: 8 redstone blocks, 8 noteblocks and 4 tripwire hooks, 1 emerald
+          items:
+          - '152:8'
+          - '25:8'
+          - '131:4'
+          - '388:1'
+          permission: none
+          currency: 70
+          xp: 70
+        repeatReward:
+          text: 1 redstone block and 1 tripwire hook
+          items:
+          - '152:1'
+          - '131:1'
+          currency: 35
+          xp: 35
+       
+      woolcollector:
+        name: '&aWool Collector'
+        description: Collect every color of wool.
+        type: onPlayer
+        requiredItems: '35:0:8;+1 35:1:8;+1 35:2:8;+1 35:3:8;+1 35:4:8;+1 35:5:8;+1 35:6:8;+1 35:7:8;+1 35:8:8;+1 35:9:8;+1 35:10:8;+1 35:11:8;+1 35:12:8;+1 35:13:8;+1 35:14:8;+1 35:15:8;+1'
+        repeatable: true
+        displayItem: 35
+        takeItems: true
+        reward:
+          text: 2 diamonds, 3 disks, 1 emeralds
+          items:
+          - '264:2'
+          - '2262:1'
+          - '2263:1'
+          - '2264:1'
+          - '388:1'
+          permission: none
+          currency: 70
+          xp: 70
+        repeatReward:
+          text: 50% chance on 1 to 3 disks, 1 emeralds
+          items:
+          - '{p=0.3}2262:1'
+          - '{p=0.3}2263:1'
+          - '{p=0.3}2264:1'
+          - '388:1'
+          currency: 35
+          xp: 35
+       
+      glassmaker:
+        name: '&aGlassmaker'
+        description: Collect every color of stained glass panes.
+        type: onPlayer
+        requiredItems: '160:0:16;+2 160:1:16;+2 160:2:16;+2 160:3:16;+2 160:4:16;+2 160:5:16;+2 160:6:16;+2 160:7:16;+2 160:8:16;+2 160:9:16;+2 160:10:16;+2 160:11:16;+2 160:12:16;+2 160:13:16;+2 160:14:16;+2 160:15:16;+2'
+        repeatable: true
+        displayItem: 160
+        takeItems: true
+        reward:
+          text: 2 diamonds, 2 disks, 1 emeralds
+          items:
+          - '264:2'
+          - '2265:1'
+          - '2266:1'
+          - '388:1'
+          permission: none
+          currency: 70
+          xp: 70
+        repeatReward:
+          text: 30% chance on 1 or 2 disks, 1 emeralds
+          items:
+          - '{p=0.3}2265:1'
+          - '{p=0.3}2266:1'
+          - '388:1'
+          currency: 35
+          xp: 35
+       
+      maestro:
+        name: '&aMaestro'
+        description: Make a jukebox and collect all music discs.
+        type: onPlayer
+        requiredItems: '2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1'
+        repeatable: true
+        displayItem: 84
+        takeItems: true
+        reward:
+          text: 3 diamonds, 10 emeralds
+          items:
+          - '264:3'
+          - '388:10'
+          permission: none
+          currency: 70
+          xp: 70
+        repeatReward:
+          text: 2 gold ore, 1 diamond
+          items:
+          - '14:2'
+          - '264:1'
+          - '{p=0.2}264:1'
+          currency: 35
+          xp: 35
+       
+      emeraldcollector:
+        name: '&aEmerald Collector'
+        description: Collect emeralds.
+        type: onPlayer
+        requiredItems: '388:60;+10'
+        repeatable: false
+        displayItem: 388
+        takeItems: true
+        reward:
+          text: a full set of diamond armor
+          items:
+          - '310:1'
+          - '311:1'
+          - '312:1'
+          - '313:1'
+          permission: none
+          currency: 70
+          xp: 70
+        repeatReward:
+          text: full diamond armor
+          items:
+          - '310:1'
+          - '311:1'
+          - '312:1'
+          - '313:1'
+          currency: 35
+          xp: 35
+   
+#===============================================
+
+  ChallengeGroup8:
+    name: '&aExtreme Challenges'
+    displayItem: '264'
+    resetInHours: 20
+    requires:
+      rankLeeway: 0
+      challenges:
+      - skylord
+    challenges:
+      topchef:
+        name: '&aTop Chef'
+        description: Collect every kind of edible food.
+        type: onPlayer
+        requiredItems: '393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1'
+        repeatable: true
+        displayItem: 391
+        takeItems: true
+        reward:
+          text: 2 diamond, 1 mooshroom,
+          items:
+          - '264:2'
+          - '383:96:1'
+          currency: 80
+          xp: 80
+        repeatReward:
+          text: nothing yet
+          items:
+          - '264:2'
+          - '383:96:1' 
+          currency: 40
+          xp: 40
+        
+      cookielover:
+        name: '&aCookie Lover'
+        description: Make cookies and a bucket of milk.
+        type: onPlayer
+        requiredItems: '357:128;+4 335:1'
+        repeatable: true
+        displayItem: 357
+        takeItems: true
+        reward:
+          text: 4 redstone ore, 1 cocoa
+          items:
+          - '73:4'
+          - '351:3:1'
+          permission: none
+          currency: 80
+          xp: 80
+        repeatReward:
+          text: 1 cocoa, 5 clay
+          items:
+          - '351:3:1'
+          - '82:5'
+          currency: 40
+          xp: 40
+       
+      baker:
+        name: '&aPâtisserie'
+        description: Bake cakes, pumpkin pies, and cookies.
+        type: onPlayer
+        requiredItems: '354:5;+1 400:5;+1 357:128;+4'
+        repeatable: true
+        displayItem: 354
+        takeItems: true
+        reward:
+          text: 5 gold ore, 1 diamond
+          items:
+          - '14:5'
+          - '264:1'
+          permission: none
+          currency: 80
+          xp: 80
+        repeatReward:
+          text: 2 iron ore, 1 gold ore
+          items:
+          - '15:2'
+          - '14:1'
+          currency: 40
+          xp: 40
+   
+#===============================================
+#
+# Here follows the format and explanation for the challenge group and challenges setup. The single commented (#) are the most used settings 
+# while the double commented (##) are optionnal if you like to use those settings.
+#
+#ranks:
+#  # [text] name of the challenge Rank.
+#  ChallengeGroupX:
+#    #[text] The name of the challenge rank that shows up when you do /challenges (this supports capitals and colorcodes).
+#    name: '&aCuston Challenges rank name'
+#    # [itemid] The itemid of the item to be displayed in the challenge menu for complete challenges.
+#    displayItem: 3
+#        # [integer] The time in hours before required items reset to default (tis overwrites the Main reset time)
+#    resetInHours: 20
+#    # The requierments will allow when a challenge groups will be available to see and complete for players.
+#    requires:
+#      # [integer] The number of tasks per rank that can be left uncompleted to advance to the next rank. For example, if you have 4 challenges
+#      # with a rankLeeway of 1, a player would only need to complete 3 to advance to the next rank.
+#      # A rankLeeway of 0 would require them all.
+#      rankLeeway: 8
+#      # [integer] The amount of challenges that has to be completed before this group will show in the Challenges GUI.
+#      # This can be random between any challenges group aslong the amount is made.
+#      completedChallenges: 14
+#      # [text] Challenges that has to be completed before this group will show in the Challenges GUI
+#      challenges:
+#      - a challenge name
+#===============================================
+#    challenges:
+#      #[text] The name of the challenge. All challenge names should be lower case.
+#      defaultchallengename:
+#      #[text] The name of the challenge that shows up when you do /challenges (this supports capitals and colorcodes).
+#        name: '&a'
+#        # [text] What the player sees when they do /challenges <challengename>
+#        description:
+#        # [onIsland/onPlayer/islandLevel] This tells whether the required blocks/items should be in the player's inventory or on their island
+#        # When using onIsland, the player must be 10 blocks away from the required blocks on his island.
+#        # When using onIsland, the default radius distance is set to 10, all items requierd must be within this distance.
+#        # When using islandLevel, the 'requiredItems' field should be the island level required. The player must use /island level first to update his level.
+#        type: onPlayer
+##        type: islandLevel
+##        type: onIsland
+#        # To override the default radius when using onIsland, uncommend the "radius: " and fill in your own value.
+##        radius:
+#        # [itemid list] The itemid:count of the items required for the challenge.
+#        requiredItems: ''
+#        # [true/false] If the challenge can repeated or not.
+#        repeatable: true
+#        # [itemid] The itemid of the item to be displayed in the challenge menu for complete challenges.
+#        displayItem:
+##        tool:
+#        # [integer] The time in hours before required items reset to default (this overwrites the Main and Ranks reset times).
+##        resetInHours:
+#        # [true/false] Take required items on completing a challenge.
+#        takeItems: true
+#        # reward section to reward the player for completing the challenge.
+#        reward:
+#          # [text] Description of the reward. If omitted §4Unknown will be shown.
+#          text:
+#          # [itemid list] The itemid:<datavalue>:count of the reward to give the player for completing the challenge.
+#          items:
+##          # [permission node] A permission granted for completion. Multiple permissions are space-separated, i.e. - "test.1 test.2" (use none to not give a permission)
+#          permission: none
+#          # [integer] How much currency to give for the first time completion. (requires an economy plugin)
+#          currency: 0
+#          # [integer] How much xp to give to the player for the first time completion.
+#          xp: 0
+#          # Executes the given command upon completion. Prepend with "op" or "console" to run the commands as OP or from the Console. Examples:
+#          # commands:
+#          # - 'op: me are the GOD of things'
+#          # - 'console: give {party} aweseomestuff 32'
+#           # Possible command arguments are:
+#           # {player}     - The name of the player
+#           # {playerName} - The display name of the player
+#           # {challenge}  - The name of the challenge
+#           # {position}   - The position of the player
+#           # {party}      - Execute the command once for each member of the party (substituting the name)
+##          commands:
+##          - op:
+##          - console:
+#        # reward section to reward the player for completing a repeated challenge.
+#        repeatReward:
+#          # [text] Description of the reward. If omitted §4Unknown will be shown.
+#          text:
+#          # [itemid list] The itemid:<datavalue>:count of the reward to give the player for completing the challenge.
+#          items:
+##          # [integer] How much currency to give for the first time completion. (requires an economy plugin)
+#          currency: 0
+#          # [integer] How much xp to give to the player for the first time completion.
+#          xp: 0
+#          # Executes the given command upon completion. Prepend with "op" or "console" to run the commands as OP or from the Console. Examples:
+#          # commands:
+#          # - 'op: me are the GOD of things'
+#          # - 'console: give {party} aweseomestuff 32'
+#           # Possible command arguments are:
+#           # {player}     - The name of the player
+#           # {playerName} - The display name of the player
+#           # {challenge}  - The name of the challenge
+#           # {position}   - The position of the player
+#           # {party}      - Execute the command once for each member of the party (substituting the name)
+##          commands:
+##          - op:
+##          - console:
+#
+# All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
+#
 # DO NOT CHANGE!
-version: 15
+version: 18

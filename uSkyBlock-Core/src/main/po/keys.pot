@@ -31,6 +31,10 @@ msgstr ""
 msgid "§eThis challenge requires the following:"
 msgstr ""
 
+#, java-format
+msgid "§f{0} §7{1}"
+msgstr ""
+
 msgid "§6Item Reward: §a"
 msgstr ""
 
@@ -58,6 +62,10 @@ msgid "§4The {0} challenge is not repeatable!"
 msgstr ""
 
 #, java-format
+msgid "§eTrying to complete challenge §a{0}"
+msgstr ""
+
+#, java-format
 msgid "§4{0}"
 msgstr ""
 
@@ -81,6 +89,10 @@ msgstr ""
 msgid ""
 "§eStill the following entities short:\n"
 "{0}"
+msgstr ""
+
+#, java-format
+msgid " §4{0} §b{1}"
 msgstr ""
 
 #, java-format
@@ -627,6 +639,16 @@ msgstr ""
 
 #, java-format
 msgid "§eUnloading chunks at {0}"
+msgstr ""
+
+msgid "update the WG regions"
+msgstr ""
+
+#, java-format
+msgid "§eIsland world-guard regions updated for {0}"
+msgstr ""
+
+msgid "§eNo island found at your location!"
 msgstr ""
 
 msgid "Ultimate SkyBlock Admin"
@@ -1252,12 +1274,12 @@ msgstr ""
 msgid "§9{1} §7- {0}"
 msgstr ""
 
-msgid "§cThe island you are on is being deleted! Sending you to spawn."
-msgstr ""
-
 msgid ""
 "§cThe island owning this piece of nether is being deleted! Sending you to "
 "spawn."
+msgstr ""
+
+msgid "§cThe island you are on is being deleted! Sending you to spawn."
 msgstr ""
 
 #, java-format
@@ -1610,6 +1632,17 @@ msgid ""
 "mobs will spawn."
 msgstr ""
 
+msgid "Deep Ocean"
+msgstr ""
+
+msgid ""
+"The deep-ocean biome is an advanced\n"
+"biome. Passive mobs like animals will\n"
+"not spawn. Hostile mobs \n"
+"(including Guardians) will\n"
+"spawn normally."
+msgstr ""
+
 #, java-format
 msgid "Biome: {0}"
 msgstr ""
@@ -1715,6 +1748,10 @@ msgid ""
 msgstr ""
 
 msgid "Island Group"
+msgstr ""
+
+#, java-format
+msgid "§eMembers: §2{0}/{1}"
 msgstr ""
 
 msgid ""
@@ -1833,6 +1870,16 @@ msgstr ""
 msgid "§eSending you to spawn."
 msgstr ""
 
+msgid "§eThe island has been §cLOCKED§e."
+msgstr ""
+
+#, java-format
+msgid "§aYou will be teleported in {0} seconds."
+msgstr ""
+
+msgid "§7Teleport cancelled"
+msgstr ""
+
 msgid "Something went wrong saving the island and/or party data!"
 msgstr ""
 
@@ -1843,10 +1890,6 @@ msgid "§4You are not part of an island. Returning you the spawn area!"
 msgstr ""
 
 msgid "§aTeleporting you to your island."
-msgstr ""
-
-#, java-format
-msgid "§aYou will be teleported in {0} seconds."
 msgstr ""
 
 msgid "§4Unable to warp you to that player's island!"
@@ -1881,46 +1924,6 @@ msgid "Use §9/is h§r or the §9/is§r menu to go there."
 msgstr ""
 
 msgid "§eYay! We found a vacancy closer to spawn. §9Clearing it for you..."
-msgstr ""
-
-#, java-format
-msgid "§7Name: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Version: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Description: §b{0}\n"
-msgstr ""
-
-#, java-format
-msgid "§7Language: §b{0} ({1})\n"
-msgstr ""
-
-msgid "§7------------------------------\n"
-msgstr ""
-
-#, java-format
-msgid "§7Server: §e{0} {1}\n"
-msgstr ""
-
-msgid "§2ENABLED"
-msgstr ""
-
-msgid "§4DISABLED"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
-#, java-format
-msgid "§7Name: §d{0} ({1}§d)\n"
-msgstr ""
-
-#, java-format
-msgid "§7Version: §d{0}\n"
 msgstr ""
 
 msgid "d"

@@ -20,17 +20,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.FormatUtil;
 import us.talabrek.ultimateskyblock.util.ItemStackUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -123,9 +113,10 @@ public class ChallengeLogic {
         challengeName = challenge.getName();
         ChallengeCompletion completion = pi.getChallenge(challengeName);
         if (!challenge.getRank().isAvailable(pi) || completion.getTimesCompleted() > 0 && (!challenge.isRepeatable() || challenge.getType() == Challenge.Type.ISLAND)) {
-            player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challengeName));
+            player.sendMessage(tr("\u00a74The {0} challenge is not repeatable!", challenge.getDisplayName()));
             return;
         }
+        player.sendMessage(tr("\u00a7eTrying to complete challenge \u00a7a{0}", challenge.getDisplayName()));
         if (challenge.getType() == Challenge.Type.PLAYER) {
             tryComplete(player, challengeName, "onPlayer");
         } else if (challenge.getType() == Challenge.Type.ISLAND) {
@@ -209,13 +200,11 @@ public class ChallengeLogic {
             int diffSpecific = item.getAmount() - blockCount[(item.getTypeId() << 8) + (item.getDurability() & 0xff)];
             int diffGeneral = item.getAmount() - baseBlocks[item.getTypeId()];
             if (item.getDurability() != 0 && diffSpecific > 0) {
-                sb.append(" \u00a74" + diffSpecific
-                        + " \u00a7b" + VaultHandler.getItemName(item));
+                sb.append(" \u00a74").append(diffSpecific).append(" \u00a7b").append(VaultHandler.getItemName(item));
                 hasAll = false;
             }
             if (diffGeneral > 0) {
-                sb.append(" \u00a74" + diffGeneral
-                        + " \u00a7b" + VaultHandler.getItemName(item));
+                sb.append(" \u00a74").append(diffGeneral).append(" \u00a7b").append(VaultHandler.getItemName(item));
                 hasAll = false;
             }
         }
@@ -269,8 +258,8 @@ public class ChallengeLogic {
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<EntityMatch, Integer> entry : countMap.entrySet()) {
                 sb.append("\u00a7e - ");
-                sb.append(" \u00a74" + entry.getValue() + " \u00a7ex");
-                sb.append(" \u00a7b" + entry.getKey() + "\n");
+                sb.append(" \u00a74").append(entry.getValue()).append(" \u00a7ex");
+                sb.append(" \u00a7b").append(entry.getKey()).append("\n");
             }
             player.sendMessage(tr("\u00a7eStill the following entities short:\n{0}", sb.toString()).split("\n"));
         }
@@ -286,10 +275,9 @@ public class ChallengeLogic {
             boolean hasAll = true;
             List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedSinceTimer());
             for (ItemStack required : requiredItems) {
-                required.setItemMeta(null);
+                String name = VaultHandler.getItemName(required);
                 if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
-                    sb.append(" \u00a74" + (required.getAmount() - getCountOf(player.getInventory(), required))
-                            + " \u00a7b" + VaultHandler.getItemName(required));
+                    sb.append(tr(" \u00a74{0} \u00a7b{1}", (required.getAmount() - getCountOf(player.getInventory(), required)), name));
                     hasAll = false;
                 }
             }
@@ -309,6 +297,7 @@ public class ChallengeLogic {
     private int getCountOf(PlayerInventory inventory, ItemStack required) {
         int count = 0;
         for (ItemStack invItem : inventory.all(required.getType()).values()) {
+            // TODO: 12/11/2015 - R4zorax: Should also test displayname...
             if (invItem.getDurability() == required.getDurability()) {
                 count += invItem.getAmount();
             }
@@ -322,7 +311,7 @@ public class ChallengeLogic {
 
     private boolean giveReward(Player player, Challenge challenge) {
         String challengeName = challenge.getName();
-        player.sendMessage(tr("\u00a7aYou have completed the {0} challenge!", challengeName));
+        player.sendMessage(tr("\u00a7aYou have completed the {0} challenge!", challenge.getDisplayName()));
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
         Reward reward;
         boolean isFirstCompletion = playerInfo.checkChallenge(challengeName) == 0;
@@ -340,7 +329,7 @@ public class ChallengeLogic {
         player.giveExp(reward.getXpReward());
         boolean wasBroadcast = false;
         if (defaults.broadcastCompletion && isFirstCompletion) {
-            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", player.getName(), challengeName));
+            Bukkit.getServer().broadcastMessage(FormatUtil.normalize(config.getString("broadcastText")) + tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", player.getName(), challenge.getDisplayName()));
             wasBroadcast = true;
         }
         player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
@@ -363,7 +352,8 @@ public class ChallengeLogic {
             player.sendMessage(tr("\u00a7eYour inventory is \u00a74full\u00a7e. Items dropped on the ground."));
         }
         for (String cmd : reward.getCommands()) {
-            String command = cmd.replaceAll("\\{challenge\\}", challengeName);
+            String command = cmd.replaceAll("\\{challenge\\}", challenge.getName());
+            command = command.replaceAll("\\{challengeName\\}", challenge.getDisplayName());
             plugin.execCommand(player, command, true);
         }
         playerInfo.completeChallenge(challengeName, wasBroadcast);

@@ -9,7 +9,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marker;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class BiomeCommand extends RequireIslandCommand {
@@ -42,7 +42,7 @@ public class BiomeCommand extends RequireIslandCommand {
                         if (plugin.changePlayerBiome(player, biome)) {
                             player.sendMessage(tr("\u00a7aYou have changed your island''s biome to {0}", biome.toUpperCase()));
                             player.sendMessage(tr("\u00a7aYou may need to go to spawn, or relog, to see the changes."));
-                            island.sendMessageToIslandGroup(true, marktr("{0} changed the island biome to {1}"), player.getName(), biome.toUpperCase());
+                            island.sendMessageToIslandGroup(true, marker("{0} changed the island biome to {1}"), player.getName(), biome.toUpperCase());
                             plugin.getCooldownHandler().resetCooldown(player, "biome", Settings.general_biomeChange);
                         } else {
                             player.sendMessage(tr("\u00a7cYou do not have permission to change your biome to that type."));

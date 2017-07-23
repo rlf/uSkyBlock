@@ -3,17 +3,7 @@ package us.talabrek.ultimateskyblock.event;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Ghast;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.NPC;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Squid;
-import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.*;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -28,15 +18,8 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.EntityUtil;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
@@ -99,6 +82,9 @@ public class SpawnEvents implements Listener {
         Player player = event != null ? event.getPlayer() : null;
         if (player == null || event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
             return; // Bail out, we don't care
+        }
+        if (player.hasPermission("usb.mod.bypassprotection") || player.isOp()) {
+            return;
         }
         ItemStack item = event.getItem();
         if (RIGHT_CLICKS.contains(event.getAction()) && item != null && item.getType() == Material.MONSTER_EGG && item.getData() instanceof SpawnEgg) {

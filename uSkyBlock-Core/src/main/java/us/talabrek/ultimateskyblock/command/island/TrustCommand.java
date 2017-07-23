@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marker;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class TrustCommand extends RequireIslandCommand {
@@ -45,13 +45,13 @@ public class TrustCommand extends RequireIslandCommand {
                 if (offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
                 }
-                island.sendMessageToIslandGroup(true, marktr("\u00a7a{0} trusted {1} on the island"), player.getName(), name);
+                island.sendMessageToIslandGroup(true, marker("\u00a7a{0} trusted {1} on the island"), player.getName(), name);
             } else {
                 island.untrust(name);
                 if (offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
                 }
-                island.sendMessageToIslandGroup(true, marktr("\u00a7c{0} revoked trust in {1} on the island"), player.getName(), name);
+                island.sendMessageToIslandGroup(true, marker("\u00a7c{0} revoked trust in {1} on the island"), player.getName(), name);
             }
             WorldGuardHandler.updateRegion(player, island);
             return true;

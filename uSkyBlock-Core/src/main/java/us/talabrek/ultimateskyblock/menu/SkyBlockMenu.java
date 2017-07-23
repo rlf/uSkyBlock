@@ -475,7 +475,7 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
         meta2.setDisplayName("\u00a7a\u00a7l" + tr("Island Group"));
-        lores.add("\u00a7eMembers: \u00a72" + islandInfo.getPartySize() + "/" + islandInfo.getMaxPartySize());
+        lores.add(tr("\u00a7eMembers: \u00a72{0}/{1}", islandInfo.getPartySize(), islandInfo.getMaxPartySize()));
         addLore(lores, "\u00a7f", tr("View the members of your island\ngroup and their permissions. If\nyou are the island leader, you\ncan change the member permissions.\n\u00a7e\u00a7lClick here to view or change."));
         meta2.setLore(lores);
         menuItem.setItemMeta(meta2);
