@@ -24,7 +24,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LogUtil;
-import us.talabrek.ultimateskyblock.util.VersionUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -347,7 +347,7 @@ public class WorldGuardHandler {
         }
     }
 
-    private static ProtectedCuboidRegion getIslandRegion(Location islandLocation) {
+    public static ProtectedCuboidRegion getIslandRegion(Location islandLocation) {
         int r = Settings.island_radius;
         Vector islandCenter = new Vector(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
         return new ProtectedCuboidRegion(

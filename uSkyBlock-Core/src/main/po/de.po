@@ -90,6 +90,10 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid "§4You can complete this {0} more time(s)."
+msgstr ""
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4Anforderungen werden in {0} Tagen zurückgesetzt."
 
@@ -100,6 +104,21 @@ msgstr "§4Anforderungen werden in {0} Stunden zurückgesetzt."
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Anforderungen werden in {0} Minuten zurückgesetzt."
+
+msgid "§4This challenge is currently unavailable."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} days."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} hours."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} minutes."
+msgstr ""
 
 msgid "§eThis challenge requires:"
 msgstr "§eDiese Aufgabe erfordert:"
@@ -147,6 +166,10 @@ msgstr "§4Die Aufgabe {0} ist noch nicht verfügbar!"
 #, java-format
 msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4Diese {0} Aufgabe kannst du nicht Wiederholen!"
+
+#, java-format
+msgid "§4You cannot complete the {0} challenge again yet!"
+msgstr ""
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -1400,6 +1423,35 @@ msgstr "§4Dieser Befehl kann nur von Spielern ausgeführt werden"
 
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4Keine Insel. §eBenutze §b/is create§e um eine zu starten"
+
+msgid "changes a members island-permissions"
+msgstr ""
+
+#, java-format
+msgid "§ePermissions for §9{0}§e:"
+msgstr ""
+
+msgid "§aON"
+msgstr ""
+
+msgid "§cOFF"
+msgstr ""
+
+#, java-format
+msgid "§7 - §6{0}§7 : {1}"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid permission {0}. Must be one of {1}"
+msgstr ""
+
+#, java-format
+msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
+msgstr ""
+
+#, java-format
+msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
+msgstr ""
 
 msgid "delete your island and start a new one."
 msgstr "Löscht deine Insel und startet eine neue."

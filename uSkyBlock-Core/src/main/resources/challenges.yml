@@ -1171,7 +1171,7 @@ ranks:
         - 'LEAVES_2:16'
         - 'LEAVES_2:1:16'
         - 'FLOWER_POT:16'
-        - 'VINES:256'
+        - 'VINE:256'
         - '38:0:10' # red rose
         - '38:1:10' # blue orchid (requires swampland)
         - '38:2:10' # Allium (requires flower_forest)
@@ -1552,4 +1552,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 22
+version: 23

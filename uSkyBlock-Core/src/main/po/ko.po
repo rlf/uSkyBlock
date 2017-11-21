@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.7\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-11-27 14:25+0900\n"
+"PO-Revision-Date: 2017-04-06 19:30+0900\n"
 "Last-Translator: swan201\n"
 "Language-Team: swan201 <bmr0621@swiftnode.cloud>\n"
 "Language: ko_KR\n"
@@ -15,7 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -82,6 +81,10 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid "§4You can complete this {0} more time(s)."
+msgstr ""
+
+#, java-format
 msgid "§4Requirements will reset in {0} days."
 msgstr "§4필요 조건이 {0} 일 후에 리셋됩니다."
 
@@ -92,6 +95,21 @@ msgstr "§4필요 조건이 {0} 시간 후에 리셋됩니다."
 #, java-format
 msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4필요 조건이 {0} 분 후에 리셋됩니다."
+
+msgid "§4This challenge is currently unavailable."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} days."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} hours."
+msgstr ""
+
+#, java-format
+msgid "§4You can complete this again in {0} minutes."
+msgstr ""
 
 msgid "§eThis challenge requires:"
 msgstr "§e도전과제의 필요항목:"
@@ -141,6 +159,10 @@ msgid "§4The {0} challenge is not repeatable!"
 msgstr "§4{0} 반복할 수 없는 도전과제입니다!"
 
 #, java-format
+msgid "§4You cannot complete the {0} challenge again yet!"
+msgstr ""
+
+#, java-format
 msgid "§eTrying to complete challenge §a{0}"
 msgstr "§e도전과제를 완료하려면, §a{0}를 사용하세요"
 
@@ -169,7 +191,7 @@ msgid ""
 "§eStill the following entities short:\n"
 "{0}"
 msgstr ""
-"§e여전의 다음의 엔티티가 부족합니다:\n"
+"§e여전히 다음의 엔티티가 부족합니다:\n"
 "{0}"
 
 #, java-format
@@ -980,7 +1002,7 @@ msgstr "§e{0}§e가 당신을 초대하려 했지만 당신은 이미 파티에
 
 #, java-format
 msgid "§aInvite sent to {0}"
-msgstr "§a{0} 애개 초대장 발ㅅ"
+msgstr "§a{0} 에게 초대장 발송"
 
 #, java-format
 msgid "{0}§e has invited you to join their island!"
@@ -1375,6 +1397,35 @@ msgstr "§4이 커맨드는 오직 플레이어에 의해서만 실행됩니다"
 msgid "§4No Island. §eUse §b/is create§e to get one"
 msgstr "§4섬 없음. §e다음명령어 §b/is create§e 를 사용해 생성하세요"
 
+msgid "changes a members island-permissions"
+msgstr ""
+
+#, java-format
+msgid "§ePermissions for §9{0}§e:"
+msgstr ""
+
+msgid "§aON"
+msgstr ""
+
+msgid "§cOFF"
+msgstr ""
+
+#, java-format
+msgid "§7 - §6{0}§7 : {1}"
+msgstr ""
+
+#, java-format
+msgid "§cInvalid permission {0}. Must be one of {1}"
+msgstr ""
+
+#, java-format
+msgid "§eToggled permission §9{0}§e for §9{1}§e to {2}"
+msgstr ""
+
+#, java-format
+msgid "§eUnable to toggle permission §9{0}§e for §9{1}"
+msgstr ""
+
 msgid "delete your island and start a new one."
 msgstr "섬을 삭제하고 새로 시작합니다."
 
@@ -1655,18 +1706,18 @@ msgid "N/A"
 msgstr "N/A"
 
 msgid "§4** You are entering a protected - but abandoned - island area."
-msgstr "§4** 당신은 보호받는 - 하지만 버려진 - 섬의 지역에 입장하는 중입니다."
+msgstr "§4** 당신은 보호받지만 버려진 섬으로 텔레포트 하는 중입니다."
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
-msgstr "§d** 당신은 §b{0}의 §d섬에 입장하는 중입니다."
+msgstr "§d** 당신은 §b{0}§d의 섬에 입장하는 중입니다."
 
 msgid "§4** You are leaving an abandoned island."
 msgstr "§4** 당신은 버려진 섬에서 나오는 중입니다."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** 당신은 §b{0}'' §d의 섬을 떠나는 중입니다."
+msgstr "§d** 당신은 §b{0}' §d의 섬을 떠나는 중입니다."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr ""
@@ -1703,7 +1754,7 @@ msgstr "§e다음 {0}/{1} 파일 {2}로 변환"
 
 #, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
-msgstr "§7PlayerDB: uuid2name.yml 에서 {0} 플레이어를 필터리"
+msgstr "§7PlayerDB: uuid2name.yml 에서 {0} 플레이어를 필터링"
 
 #, java-format
 msgid "§7 - {0,number,##}% ({1}/{2}) ~ {3}"
@@ -1722,7 +1773,7 @@ msgstr ""
 
 #, java-format
 msgid "§7MojangAPI: Trying to fetch {0} players from Mojang"
-msgstr "§7MojangAPI: {0} 플레이ㅇ를 모장에서 검색중입니다"
+msgstr "§7MojangAPI: {0} 플레이어를 모장에서 검색중입니다"
 
 msgid "SUCCESS"
 msgstr "성공"
@@ -1732,7 +1783,7 @@ msgstr "실패"
 
 #, java-format
 msgid "§7 - MojangAPI:§aCOMPLETED: {0}"
-msgstr "§7 - MojangAPI:§a완ㄹ: {0}"
+msgstr "§7 - MojangAPI:§a완료: {0}"
 
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
@@ -1750,7 +1801,7 @@ msgstr "§4당신의 섬이 잠기는 시점에서 당신의 들어오는 워프
 
 #, java-format
 msgid "§b{0}§d unlocked the island."
-msgstr "§b{0}§d 섬을 Unlock 했습니다."
+msgstr "§b{0}§d 섬을 잠금해제 했습니다."
 
 #, java-format
 msgid "§cSKY §f> §7 {0}"
@@ -2337,12 +2388,10 @@ msgid ""
 "§e§lClick here to start!"
 msgstr ""
 "당신 소유의 섬을 시작하는 것으로\n"
-"skylock 여행을 시작하세요.\n"
-"skylock을 확장하는데 도움이 되는\n"
-"아이템과 skybucks를 벌 수 있는\n"
-"도전과제를 완료하세요. 당신은\n"
-"당신의 섬 제국을 건설하는데\n"
-"다른사람들을 초대할 수 있습니다!\n"
+"섬을 확장하고, 다른 사람들을 초대하여.\n"
+"놀거나, 부를 누릴 수 있습니다.\n"
+"당신의 제국을 건설하는데 \n"
+"다른 사람들을 초대해 보세요!\n"
 "§e§l여기를 눌러 시작하세요!"
 
 msgid "§aClick to create!"
@@ -2433,7 +2482,7 @@ msgid ""
 "§e§l(must be on island)"
 msgstr ""
 "당신의 skylock을 확장하고 특정한 도전과제를\n"
-"완료해서 섬 레벨을 올리세요. 레어도가 높은 블록일수록\n"
+"완료해서 섬 레벨을 올리세요. 희귀도가 높은 블록일수록\n"
 "당신의 레벨은 더 올라갑니다.\n"
 "§e§l여기를 클릭해서 재생성하세요\n"
 "§e§l(섬에 있어야 합니다)"
@@ -2713,7 +2762,7 @@ msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4당신의 skyblock 집에 지정하려면 당신의 섬에 더 가까워야 합니다!"
 
 msgid "§aYour skyblock home has been set to your current location."
-msgstr "§a당신의 skyblock집이 당신의 현제 지점에 지정되었습니다."
+msgstr "§a당신의 skyblock집이 당신의 현재 지점에 지정되었습니다."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4당신의 현재 지점은 안전한 집 위치가 아닙니다"

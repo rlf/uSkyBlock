@@ -149,6 +149,7 @@ public class IslandLogic {
                             plugin.spawnTeleport(player, true);
                         }
                     }
+                    WorldEditHandler.clearEntities(netherIsland.getWorld(), netherIsland);
                     WorldEditHandler.clearNetherIsland(netherIsland.getWorld(), netherRegion, afterDeletion);
                 } else {
                     afterDeletion.run();
@@ -164,6 +165,7 @@ public class IslandLogic {
                     plugin.spawnTeleport(player, true);
                 }
             }
+            WorldEditHandler.clearEntities(skyBlockWorld, loc);
             WorldEditHandler.clearIsland(skyBlockWorld, region, clearNether);
         } else {
             log.log(Level.WARNING, "Trying to delete an island - with no WG region! ({0})", LocationUtil.asString(loc));

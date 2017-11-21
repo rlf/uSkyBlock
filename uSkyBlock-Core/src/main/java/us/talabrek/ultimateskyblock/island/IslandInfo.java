@@ -78,7 +78,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     public boolean exists() {
         return this.file.exists();
     }
-    
+
     private void updateConfig() {
         int currentVersion = config.getInt("version", 0);
         if (currentVersion < 1) {
@@ -106,6 +106,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         config.set("party", null);
         config.set("general.scoreMultiply", null);
         config.set("general.scoreOffset", null);
+        config.set("blocks.hopperCount", 0);
         setupPartyLeader(leader);
         sendMessageToIslandGroup(false, marktr("The island has been created."));
     }
@@ -325,20 +326,31 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         save();
     }
 
-    public void togglePerm(final String playername, final String perm) {
+    public boolean togglePerm(final String playername, final String perm) {
         String uuidString = UUIDUtil.asString(uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(playername));
-        if (config.getBoolean("party.members." + uuidString + "." + perm, false)) {
-            config.set("party.members." + uuidString + "." + perm, false);
-        } else {
-            config.set("party.members." + uuidString + "." + perm, true);
+        ConfigurationSection memberSection = config.getConfigurationSection("party.members." + uuidString);
+        try {
+            if (memberSection == null) {
+                log.info("Perms for " + playername + " failed to toggle because player is not a part of that island!");
+                return false;
+            }
+            if (memberSection.getBoolean(perm, false)) {
+                memberSection.set(perm, false);
+            } else {
+                memberSection.set(perm, true);
+            }
+            save();
+            return true;
+        } catch (NullPointerException e) {
+            log.info("Perms for " + playername + " failed to toggle because player is not a part of that island!");
+            return false;
         }
-        save();
     }
 
     @Override
     public Set<String> getMembers() {
         ConfigurationSection memberSection = config.getConfigurationSection("party.members");
-        Set<String> members = new HashSet<>();
+        Set<String> members = new LinkedHashSet<>();
         if (memberSection != null) {
             for (String uuid : memberSection.getKeys(false)) {
                 UUID id = UUIDUtil.fromString(uuid);
@@ -348,6 +360,10 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                         members.add(nm);
                     } else {
                         log.info("Island " + name + " has unknown member-section " + uuid);
+                        // Remove broken UUID from island file
+                        config.set("party.members." + uuid, null);
+                        config.set("party.currentSize", getPartySize() - 1);
+                        save();
                     }
                 } else {
                     log.info("Island " + name + " has invalid member-section " + uuid);
@@ -469,6 +485,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     public boolean isBanned(String name) {
         return isBanned(uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(name));
     }
+
     public boolean isBanned(UUID uuid) {
         return config.getStringList("banned.list").contains(UUIDUtil.asString(uuid));
     }
@@ -634,9 +651,9 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
             if (split.length >= 2) {
                 long then = Long.parseLong(split[0]);
                 String msg = split[1];
-                Object[] args = new Object[split.length-2];
+                Object[] args = new Object[split.length - 2];
                 System.arraycopy(split, 2, args, 0, args.length);
-                convertedList.add(tr("\u00a79{1} \u00a77- {0}", TimeUtil.millisAsString(t-then), tr(msg, args)));
+                convertedList.add(tr("\u00a79{1} \u00a77- {0}", TimeUtil.millisAsString(t - then), tr(msg, args)));
             } else {
                 Matcher m = OLD_LOG_PATTERN.matcher(logEntry);
                 if (m.matches()) {
@@ -649,7 +666,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                     }
                     String msg = m.group("msg");
                     if (parsedDate != null) {
-                        convertedList.add(tr("\u00a79{1} \u00a77- {0}", TimeUtil.millisAsString(t-parsedDate.getTime()), msg));
+                        convertedList.add(tr("\u00a79{1} \u00a77- {0}", TimeUtil.millisAsString(t - parsedDate.getTime()), msg));
                     } else {
                         convertedList.add(logEntry);
                     }
@@ -759,6 +776,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         }
         return players;
     }
+
     @Override
     public boolean contains(Location loc) {
         return name.equalsIgnoreCase(WorldGuardHandler.getIslandNameAt(loc));
@@ -820,6 +838,15 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
     public void setScoreOffset(Double d) {
         config.set("general.scoreOffset", d);
+        save();
+    }
+
+    public int getHopperCount() {
+        return config.getInt("blocks.hopperCount", 0);
+    }
+
+    public void setHopperCount(int i) {
+        config.set("blocks.hopperCount", i);
         save();
     }
 }

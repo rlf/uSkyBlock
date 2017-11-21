@@ -40,7 +40,8 @@ public class ChallengeFactory {
                 section.getInt("rankLeeway", 1),
                 section.getBoolean("enableEconomyPlugin", true),
                 section.getBoolean("broadcastCompletion", true),
-                section.getInt("radius", 10), section.getBoolean("showLockedChallengeName", true));
+                section.getInt("radius", 10), section.getBoolean("showLockedChallengeName", true),
+                section.getInt("repeatLimit", 0));
     }
 
     public static Challenge createChallenge(Rank rank, ConfigurationSection section, ChallengeDefaults defaults) {
@@ -67,10 +68,11 @@ public class ChallengeFactory {
         }
         List<String> requiredChallenges = section.getStringList("requiredChallenges");
         int offset = section.getInt("offset", 0);
+        int repeatLimit = section.getInt("repeatLimit", 0);
         return new Challenge(name, displayName, description, type,
                 requiredItems, requiredEntities, requiredChallenges, rank,
                 resetInHours, displayItem, section.getString("tool", null), lockedItem, offset, takeItems,
-                radius, reward, repeatReward);
+                radius, reward, repeatReward, repeatLimit);
     }
 
     private static List<EntityMatch> createEntities(List<String> requiredEntities) {

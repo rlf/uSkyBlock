@@ -37,6 +37,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
+import org.bukkit.ChatColor;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -53,12 +54,14 @@ public class PlayerEvents implements Listener {
     private final boolean visitorFireProtected;
     private final boolean protectLava;
     private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
+    private final int hopperlimit;
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
         visitorFallProtected = plugin.getConfig().getBoolean("options.protection.visitors.fall", true);
         visitorFireProtected = plugin.getConfig().getBoolean("options.protection.visitors.fire-damage", true);
         protectLava = plugin.getConfig().getBoolean("options.protection.protect-lava", true);
+        hopperlimit = plugin.getConfig().getInt("options.island.hopperlimit", 10);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -101,7 +104,7 @@ public class PlayerEvents implements Listener {
             if (inventory.firstEmpty() != -1) {
                 obsidianClick.put(player.getUniqueId(), now);
                 player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
-                inventory.remove(new ItemStack(Material.BUCKET, 1));
+                inventory.removeItem(new ItemStack(Material.BUCKET, 1));
                 inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
                 player.updateInventory();
                 block.setType(Material.AIR);
@@ -255,5 +258,31 @@ public class PlayerEvents implements Listener {
             event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.SAPLING, 1));
             islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
+    }
+    
+    @EventHandler
+    public void onHopperPlace(BlockPlaceEvent event) 
+    {
+        if (Material.HOPPER.equals(event.getBlock().getType()))
+        {
+            IslandInfo isInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+            if(isInfo.getHopperCount() > hopperlimit)
+            {
+                event.setCancelled(true);
+                event.getPlayer().sendMessage(tr("\u00a74You've hit the hopper limit! You can't have more hoppers!"));
+            }
+            else
+            {
+                isInfo.setHopperCount(isInfo.getHopperCount() + 1);
+            }
+        }
+    }
+    
+    @EventHandler
+    public void onHopperDestroy(BlockBreakEvent event){
+    	if (Material.HOPPER.equals(event.getBlock().getType())){
+    		IslandInfo isInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+    		isInfo.setHopperCount(isInfo.getHopperCount() - 1);
+    	}
     }
 }

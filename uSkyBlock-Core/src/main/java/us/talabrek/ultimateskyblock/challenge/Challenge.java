@@ -27,7 +27,9 @@ public class Challenge {
     public static final int MAX_DETAILS = 11;
     public static final int MAX_LINE = 30;
 
-    public enum Type { PLAYER, ISLAND, ISLAND_LEVEL;
+    public enum Type {
+        PLAYER, ISLAND, ISLAND_LEVEL;
+
         static Type from(String s) {
             if (s == null || s.trim().isEmpty() || s.trim().toLowerCase().equals("onplayer")) {
                 return PLAYER;
@@ -37,6 +39,7 @@ public class Challenge {
             return ISLAND;
         }
     }
+
     private final String name;
     private final String description;
     private final String displayName;
@@ -54,11 +57,12 @@ public class Challenge {
     private final int radius;
     private final Reward reward;
     private final Reward repeatReward;
+    private final int repeatLimit;
 
     public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems,
                      List<EntityMatch> requiredEntities, List<String> requiredChallenges, Rank rank, int resetInHours,
                      ItemStack displayItem, String tool, ItemStack lockedItem, int offset, boolean takeItems,
-                     int radius, Reward reward, Reward repeatReward) {
+                     int radius, Reward reward, Reward repeatReward, int repeatLimit) {
         this.name = name;
         this.displayName = displayName;
         this.type = type;
@@ -76,6 +80,7 @@ public class Challenge {
         this.reward = reward;
         this.repeatReward = repeatReward;
         this.description = description;
+        this.repeatLimit = repeatLimit;
     }
 
     public boolean isRepeatable() {
@@ -122,10 +127,10 @@ public class Challenge {
                 int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc"), 10) : 0;
                 amount = ChallengeLogic.calcAmount(amount, op, inc, timesCompleted);
                 ItemStack mat = ItemStackUtil.createItemStack(m.group("itemstack"));
-                mat.setAmount(amount);
                 ItemMeta meta = mat.getItemMeta();
                 mat.setItemMeta(meta);
                 mat = NBTUtil.addNBTTag(mat, m.group("meta"));
+                mat.setAmount(amount);
                 items.add(mat);
             } else if (!item.matches("[0-9]+") && type != Type.ISLAND_LEVEL) {
                 uSkyBlock.getInstance().getLogger().log(Level.INFO, "Malformed challenge " + name + ", item: " + item + " is not a valid required item");
@@ -151,25 +156,42 @@ public class Challenge {
     }
 
     public ItemStack getDisplayItem(ChallengeCompletion completion, boolean withCurrency) {
+        int timesCompleted = completion.getTimesCompletedInCooldown();
         ItemStack currentChallengeItem = getDisplayItem();
         ItemMeta meta = currentChallengeItem.getItemMeta();
         List<String> lores = new ArrayList<>();
         lores.addAll(prefix(wordWrap(getDescription(), MAX_LINE), "\u00a77"));
-        int timesCompleted = completion.getTimesCompletedInCooldown();
         Reward reward = getReward();
         if (completion.getTimesCompleted() > 0 && isRepeatable()) {
-            currentChallengeItem.setAmount(completion.getTimesCompleted());
+            currentChallengeItem.setAmount(completion.getTimesCompleted() < currentChallengeItem.getMaxStackSize() ? completion.getTimesCompleted() : currentChallengeItem.getMaxStackSize());
             if (completion.isOnCooldown()) {
                 long cooldown = completion.getCooldownInMillis();
-                if (cooldown >= ChallengeLogic.MS_DAY) {
-                    final int days = (int) (cooldown / ChallengeLogic.MS_DAY);
-                    lores.add(tr("\u00a74Requirements will reset in {0} days.", days));
-                } else if (cooldown >= ChallengeLogic.MS_HOUR) {
-                    final int hours = (int) (cooldown / ChallengeLogic.MS_HOUR);
-                    lores.add(tr("\u00a74Requirements will reset in {0} hours.", hours));
-                } else if (cooldown >= 0) {
-                    final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
-                    lores.add(tr("\u00a74Requirements will reset in {0} minutes.", minutes));
+                if (timesCompleted < getRepeatLimit() || getRepeatLimit() <= 0) {
+                    if (getRepeatLimit() > 0) {
+                        lores.add(tr("\u00a74You can complete this {0} more time(s).", getRepeatLimit() - timesCompleted));
+                    }
+                    if (cooldown >= ChallengeLogic.MS_DAY) {
+                        final int days = (int) (cooldown / ChallengeLogic.MS_DAY);
+                        lores.add(tr("\u00a74Requirements will reset in {0} days.", days));
+                    } else if (cooldown >= ChallengeLogic.MS_HOUR) {
+                        final int hours = (int) (cooldown / ChallengeLogic.MS_HOUR);
+                        lores.add(tr("\u00a74Requirements will reset in {0} hours.", hours));
+                    } else if (cooldown >= 0) {
+                        final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
+                        lores.add(tr("\u00a74Requirements will reset in {0} minutes.", minutes));
+                    }
+                } else {
+                    lores.add(tr("\u00a74This challenge is currently unavailable."));
+                    if (cooldown >= ChallengeLogic.MS_DAY) {
+                        final int days = (int) (cooldown / ChallengeLogic.MS_DAY);
+                        lores.add(tr("\u00a74You can complete this again in {0} days.", days));
+                    } else if (cooldown >= ChallengeLogic.MS_HOUR) {
+                        final int hours = (int) (cooldown / ChallengeLogic.MS_HOUR);
+                        lores.add(tr("\u00a74You can complete this again in {0} hours.", hours));
+                    } else if (cooldown >= 0) {
+                        final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
+                        lores.add(tr("\u00a74You can complete this again in {0} minutes.", minutes));
+                    }
                 }
             }
             reward = getRepeatReward();
@@ -257,6 +279,10 @@ public class Challenge {
         return repeatReward;
     }
 
+    public int getRepeatLimit() {
+        return repeatLimit;
+    }
+
     public List<String> getMissingRequirements(PlayerInfo playerInfo) {
         List<String> missing = new ArrayList<>();
         for (String challengeName : requiredChallenges) {
@@ -275,7 +301,7 @@ public class Challenge {
             return Collections.emptyList();
         }
         String missingList = "" + missing;
-        missingList = missingList.substring(1, missingList.length()-1);
+        missingList = missingList.substring(1, missingList.length() - 1);
         return wordWrap(tr("\u00a77Requires {0}", missingList), MAX_LINE);
     }
 
@@ -291,6 +317,7 @@ public class Challenge {
                 ", takeItems=" + takeItems +
                 ", reward=" + reward +
                 ", repeatReward=" + repeatReward +
+                ", repeatLimit=" + repeatLimit +
                 '}';
     }
 }

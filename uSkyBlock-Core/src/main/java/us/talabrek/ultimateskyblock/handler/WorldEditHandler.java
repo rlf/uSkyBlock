@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.handler;
 
+import com.sk89q.worldedit.BlockVector2D;
 import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.LocalWorld;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
@@ -9,21 +9,15 @@ import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.data.DataException;
-import com.sk89q.worldedit.extent.clipboard.Clipboard;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
-import com.sk89q.worldedit.function.operation.Operation;
-import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.schematic.SchematicFormat;
-import com.sk89q.worldedit.session.ClipboardHolder;
-import com.sk89q.worldedit.world.registry.WorldData;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import org.bukkit.Bukkit;
+import dk.lockfuglsang.minecraft.reflection.ReflectionUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
@@ -38,7 +32,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -326,5 +322,24 @@ public class WorldEditHandler {
 
     public static EditSession createEditSession(com.sk89q.worldedit.world.World bukkitWorld, int maxBlocks) {
         return WorldEdit.getInstance().getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
+    }
+
+    public static void clearEntities(World world, Location center) {
+        Collection<Entity> entities;
+        if (VersionUtil.getVersion(dk.lockfuglsang.minecraft.reflection.ReflectionUtil.getCraftBukkitVersion()).isGTE("1.10")) {
+            entities = ReflectionUtil.exec(world, "getNearbyEntities",
+                    new Class[]{Location.class, Double.TYPE, Double.TYPE, Double.TYPE}, center, Settings.island_radius, 255, Settings.island_radius);
+            for (Entity entity : entities) {
+                entity.remove();
+            }
+        } else {
+            entities = world.getEntities();
+            ProtectedRegion islandRegion = WorldGuardHandler.getIslandRegionAt(center);
+            for (Entity entity : entities) {
+                if (entity != null && entity.getLocation() != null && islandRegion.contains(entity.getLocation().getBlockX(), entity.getLocation().getBlockY(), entity.getLocation().getBlockZ())) {
+                    entity.remove();
+                }
+            }
+        }
     }
 }

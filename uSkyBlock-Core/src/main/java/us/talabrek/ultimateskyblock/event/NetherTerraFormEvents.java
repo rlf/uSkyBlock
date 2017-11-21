@@ -12,6 +12,7 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -261,9 +262,7 @@ public class NetherTerraFormEvents implements Listener {
                 double p = RND.nextDouble();
                 if (p <= chanceWither) {
                     // Spawn Wither.
-                    Skeleton mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.SKELETON);
-                    mob.setSkeletonType(Skeleton.SkeletonType.WITHER);
-                    mob.getEquipment().setItemInHand(new ItemStack(Material.STONE_SWORD, 1));
+                    WitherSkeleton mob = (WitherSkeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.WITHER_SKELETON);
                 } else if (p <= chanceWither+chanceBlaze) {
                     // Spawn Blaze
                     Blaze mob = (Blaze) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.BLAZE);

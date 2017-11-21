@@ -268,9 +268,24 @@
             </build>
         </profile>
         <profile>
-            <id>1.10</id>
+            <id>1.11</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency> <!-- Bukkit implementation -->
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.11-R0.1-SNAPSHOT</version>
+                    <optional>true</optional>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>1.10</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->
@@ -500,15 +515,15 @@
             <version>1.5.11</version>
         </dependency>
         <dependency>
-            <groupId>be.maximvdw</groupId>
-            <artifactId>MVdWPlaceholderAPI</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>*</groupId>
-                </exclusion>
-            </exclusions>
+        <groupId>be.maximvdw</groupId>		
+            <artifactId>MVdWPlaceholderAPI</artifactId>		
+            <version>1.0.1-SNAPSHOT</version>		
+            <exclusions>		
+                <exclusion>		
+                    <artifactId>*</artifactId>		
+                    <groupId>*</groupId>		
+                </exclusion>		
+            </exclusions>		
         </dependency>
         <dependency>
             <groupId>me.clip.deluxechat</groupId>
