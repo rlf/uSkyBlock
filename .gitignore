@@ -15,6 +15,7 @@ bin
 **/*~
 .idea
 **/target
+
 **/*.mo
 .metadata
 bin/
@@ -65,3 +66,6 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+**/*.mo
+

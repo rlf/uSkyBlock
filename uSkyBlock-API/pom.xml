@@ -77,7 +77,7 @@
         <profile>
             <id>1.11</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
 			    <!--Spigot API-->
@@ -96,6 +96,7 @@
 			            <scope>provided</scope>
 			    </dependency>
 			     -->
+
             </dependencies>
         </profile>
         <profile>
@@ -141,6 +142,19 @@
                 </dependency>
             </dependencies>
         </profile><profile>
+            <id>1.7.9</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.7.9-R0.2</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
             <id>1.7.9</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
