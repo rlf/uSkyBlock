@@ -6,6 +6,7 @@
         <artifactId>uSkyBlock</artifactId>
         <groupId>uSkyBlock</groupId>
         <version>2.7.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

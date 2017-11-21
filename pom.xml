@@ -9,7 +9,7 @@
 
     <properties>
         <api.version>2.7.3</api.version>
-        <bukkit-utils.version>1.15</bukkit-utils.version>
+        <bukkit-utils.version>1.14</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.6</vault.version>
@@ -41,7 +41,7 @@
 
     <build>
         <finalName>${finalName}</finalName>
-        <pluginManagement>
+        <!-- <pluginManagement> -->
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -56,9 +56,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>2.6</version>
-                </plugin>
+                </plugin>  
             </plugins>
-        </pluginManagement>
+        <!-- </pluginManagement> -->
     </build>
     <repositories>
         <repository>
@@ -78,6 +78,10 @@
             <id>spigotmc.org</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
         </repository>
+        <repository>
+        	<id>spigot-repo</id>
+        	<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    	</repository>
         <repository>
             <id>vault-repo</id>
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>

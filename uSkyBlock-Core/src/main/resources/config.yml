@@ -87,12 +87,6 @@ options:
 
     # How many entries to remember in the island-log
     log-size: 10
-    
-    # How many hoppers are allowed to be placed down on an island
-    hopperlimit: 50
-    
-    # How many mob spawners are allowed to be placed on an island
-    spawnerlimit: 10
 
     # Limits the spawning
     spawn-limits:
@@ -226,8 +220,8 @@ options:
 
     # Controls advanced behaviour reg. the internal playerdb
     playerdb:
-      # valid values are: yml, memory, bukkit
-      storage: bukkit
+      # valid values are: yml, memory
+      storage: memory
 
   # Section about restarting your island (or accepting an invite).
   restart:
@@ -435,7 +429,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 61
+version: 60
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

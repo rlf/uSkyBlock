@@ -63,7 +63,7 @@ import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
-import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
+//import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
@@ -95,8 +95,7 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.ServerUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
-import dk.lockfuglsang.minecraft.util.VersionUtil;
-import us.talabrek.ultimateskyblock.uuid.BukkitPlayerDB;
+import us.talabrek.ultimateskyblock.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.MemoryPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
@@ -390,7 +389,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
             MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
             setupWorld(skyBlockNetherWorld, island_height / 2);
-            MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
+            //MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
         }
         return skyBlockNetherWorld;
     }
@@ -925,7 +924,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     @Override
-    public IslandInfo getIslandInfo(Location location) {
+    public us.talabrek.ultimateskyblock.api.IslandInfo getIslandInfo(Location location) {
         return getIslandInfo(WorldGuardHandler.getIslandNameAt(location));
     }
 
@@ -997,12 +996,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         String playerDbStorage = getConfig().getString("options.advanced.playerdb.storage", "yml");
         if (playerDbStorage.equalsIgnoreCase("yml")) {
             playerDB = new FilePlayerDB(this);
-        } else if (playerDbStorage.equalsIgnoreCase("memory")) {
-            playerDB = new MemoryPlayerDB(getConfig());
         } else {
-            playerDB = new BukkitPlayerDB();
+            playerDB = new MemoryPlayerDB(getConfig());
         }
-
         getServer().getPluginManager().registerEvents(playerDB, this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
