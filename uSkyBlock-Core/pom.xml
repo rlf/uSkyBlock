@@ -270,9 +270,32 @@
             </build>
         </profile>
         <profile>
-            <id>1.11</id>
+            <id>1.12</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+			    <!--Spigot API-->
+			    <dependency>
+			           <groupId>org.spigotmc</groupId>
+			           <artifactId>spigot-api</artifactId>
+			           <version>1.12.2-R0.1-SNAPSHOT</version>
+			           <scope>provided</scope>
+			    </dependency>
+			    
+			    <dependency>
+			            <groupId>org.bukkit</groupId>
+			            <artifactId>bukkit</artifactId>
+			            <version>1.12.2-R0.1-SNAPSHOT</version>
+			            <scope>provided</scope>
+			    </dependency>
+			    
+            </dependencies>
+        </profile>
+        <profile>
+            <id>1.11.1</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
 			    <!--Spigot API-->
@@ -292,7 +315,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>1.10</id>
+            <id>1.11</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -316,51 +339,6 @@
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
                     <version>1.10-R0.1-SNAPSHOT</version>
-                    <optional>true</optional>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>1.9</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency> <!-- Bukkit implementation -->
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                    <version>1.9.2-R0.1-SNAPSHOT</version>
-                    <optional>true</optional>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>1.8</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency> <!-- Bukkit implementation -->
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                    <version>1.8-R0.1-SNAPSHOT</version>
-                    <optional>true</optional>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>1.7.9</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency> <!-- Bukkit implementation -->
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                    <version>1.7.9-R0.2</version>
                     <optional>true</optional>
                     <scope>compile</scope>
                 </dependency>
