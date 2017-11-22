@@ -1,0 +1,43 @@
+#
+# This is a simple Yml file
+#
+# with multiple comments
+root:
+  child-value: 10
+
+  # child nodes
+  child node:
+
+    # a number
+    some-double: 1.34
+    some-section:
+      section-list:
+      - Hej
+      - Mor
+      another-list:
+      - what now
+      - do you know?
+
+    # this is a key and a value
+    key: value
+    abe: |-
+      lincoln
+      was a wonderful
+      president
+  another node:
+    enabled: true
+  a:
+    section:
+
+      # a comment
+      deeper:
+
+        # b comment
+        b:
+
+          # should be false
+          c: false
+an:
+  annoying:key this:
+    is:for:
+      sure: hello world
