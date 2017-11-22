@@ -13,7 +13,7 @@
 
     <build>
         <finalName>uSkyBlock</finalName>
-        <!--<pluginManagement>-->
+        <pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -40,7 +40,7 @@
                 </configuration>
             </plugin>
         </plugins>
-    	<!--  </pluginManagement>-->
+    	</pluginManagement>
     </build>
     <dependencies>
         <dependency>
