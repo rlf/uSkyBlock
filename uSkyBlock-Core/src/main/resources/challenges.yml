@@ -1,4 +1,4 @@
-# [true/false] Enable the use of the challenges command.
+﻿# [true/false] Enable the use of the challenges command.
 allowChallenges: true
 
 # [island/player] Whether challenges are tracked per player, or per island
@@ -19,7 +19,7 @@ requirePreviousRank: true
 rankLeeway: 12
 
 #[integer] The time in hours before required items reset to default. (only if not specified in the challenges below)
-defaultResetInHours: 20
+defaultResetInHours: 4
 
 #[color code] The color to use for uncompleted challenges in the list.
 challengeColor: '&e'
@@ -1171,7 +1171,7 @@ ranks:
         - 'LEAVES_2:16'
         - 'LEAVES_2:1:16'
         - 'FLOWER_POT:16'
-        - 'VINE:256'
+        - 'VINES:256'
         - '38:0:10' # red rose
         - '38:1:10' # blue orchid (requires swampland)
         - '38:2:10' # Allium (requires flower_forest)
@@ -1552,4 +1552,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 23
+version: 22
