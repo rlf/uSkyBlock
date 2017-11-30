@@ -52,7 +52,9 @@ public class IslandLocatorLogic {
         }
         return LocationUtil.alignToDistance(lastIsland, Settings.island_distance);
     }
-
+    /**
+     * Finds the next available island location and reserves it. 
+     */
     public synchronized Location getNextIslandLocation(Player player) {
         Location islandLocation = getNext(player);
         reserve(islandLocation);
@@ -75,7 +77,7 @@ public class IslandLocatorLogic {
             }
         }, reservationTimeout);
     }
-
+    //TODO: Make a gui for selecting this sort of thing. 
     private synchronized Location getNext(Player player) {
         Location last = getLastIsland();
         if (plugin.isSkyWorld(player.getWorld()) && !plugin.islandInSpawn(player.getLocation())) {

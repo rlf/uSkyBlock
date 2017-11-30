@@ -30,7 +30,7 @@ public class InternalEvents implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onCreate(CreateIslandEvent e) {
         if (!e.isCancelled()) {
-            plugin.createIsland(e.getPlayer(), e.getSchematic());
+            plugin.createIsland(e.getPlayer(), e.getSchematic(), e.getX(), e.getZ());
         }
     }
 

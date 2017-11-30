@@ -25,7 +25,7 @@ options:
     worldName: skyworld
 
     # [integer] Area around 0,0 where islands will not be created to protect spawn.
-    spawnSize: 64
+    spawnSize: 32
 
   island:
     # [integer] The y-coordinate (height) where islands are spawned.

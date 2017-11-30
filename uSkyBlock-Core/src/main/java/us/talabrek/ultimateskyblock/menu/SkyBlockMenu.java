@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.menu;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,8 +16,10 @@ import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.island.IslandLocatorLogic;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
@@ -43,7 +46,10 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
  * The UI menu of uSkyBlock (using the inventory UI).
  */
 public class SkyBlockMenu {
-    private final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
+    private static final int MAX_INV_SIZE = 54;
+    private static final int DISPLAYED_RAD = 2;
+    
+	private final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
     private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock plugin;
     private final ChallengeLogic challengeLogic;
@@ -513,7 +519,101 @@ public class SkyBlockMenu {
         }
         return index + 2;
     }
+     
+    /**
+     * Location Picker Menu:
+     * Creates a GUI for creating a finite (small) amount of island plots. 
+     * IF you're on a big server, you'll need to edit this to break it up into sectors first. 
+     * @param player
+     * @return
+     */
+    private Inventory createLocationPickerMenu(Player player, String schemeName) {
+        final PlayerInfo pi = plugin.getPlayerInfo(player);
+        Inventory menu = Bukkit.createInventory(null, MAX_INV_SIZE, "\u00a79" + tr("Location Picker"));
+        List<String> lores = new ArrayList<>();
+        
+        //Spawn Marker. 
+        int mididx = (int)Math.floor((MAX_INV_SIZE-COLS_PER_ROW)/2); //yes, it's 22.5->22
+        ItemStack menuItem = new ItemStack(Material.BEDROCK, 1);
+        ItemMeta meta = menuItem.getItemMeta();
+        meta.setDisplayName(tr("\u00a7a\u00a7lSpawn"));
+        menuItem.setItemMeta(meta);
+        menu.setItem(mididx, menuItem);
+        lores.clear();
+        
+        //if schemename isnt null, we'll include it to show what we've selected in the prev menu. 
+        //Our schema - Put in slot 0 for convenience to user. 
+        if (schemeName != null && schemeName != ""){
+        	IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+            menuItem = islandPerk.getDisplayItem();
+            meta = menuItem.getItemMeta();
+            lores = meta.getLore();
+            if (lores == null) {
+                lores = new ArrayList<>();
+            }
+            addLore(lores, tr("\u00a7aClick to return."));
+            meta.setLore(lores);
+            menuItem.setItemMeta(meta);
+            menu.setItem(0, menuItem);
+        }
 
+        int d = Settings.island_distance;
+        int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
+        int coordX, coordZ;
+        Location l;
+        for (int i = 0; i< MAX_INV_SIZE-COLS_PER_ROW; i++){
+        	//TODO: break this out into a helper function.
+        	int z = (int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2;
+        	int x = (i%COLS_PER_ROW)-midcol;
+        	if (i%COLS_PER_ROW >= (1) && i%COLS_PER_ROW <= (7) && i != mididx){        		
+        		coordX = x * d;
+        		coordZ = z * d;        		        		
+        		l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordZ);
+        		
+        		if(!plugin.getIslandLocatorLogic().isAvailableLocation(l)){
+        			//draw a player head here. you can't have this spot!
+        			menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        			
+        			final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
+        	        if (plugin.getIslandInfo(l) != null){
+        	        	if (plugin.getIslandInfo(l).getLeaderUniqueId() != null){
+	        	        meta2.setOwningPlayer(Bukkit.getOfflinePlayer(plugin.getIslandInfo(l).getLeaderUniqueId()));
+	        			meta2.setDisplayName(tr("\u00a7a\u00a7l"+plugin.getIslandInfo(l).getLeader()));
+        	        	}
+        	        } else {
+        	        	System.out.println("Unable to free location:x"+x+", z"+z);
+        	        	meta2.setDisplayName(tr("\u00a7a\u00a7lUnavailable"));
+        	        }
+        	        menuItem.setItemMeta(meta2);
+        	        menu.setItem(i, menuItem);
+        			
+        		} else {
+        			//draw a spot showing this is claimable. 
+        			menuItem = new ItemStack(Material.DIRT, 1);
+        	        meta = menuItem.getItemMeta();
+        	        meta.setDisplayName(tr("\u00a7a\u00a7lUnclaimed Space"));
+        	        menuItem.setItemMeta(meta);
+        	        addLore(lores, tr("\u00a7aClick to create here!"));
+        	        menu.setItem(i, menuItem);
+        	        lores.clear();
+        		}
+        			
+        	}
+        }       
+       
+        lores.clear();
+        return menu;
+    }
+    /**
+     * Creates the location picker menu without a schema
+     * @param player
+     * @return
+     */
+    private Inventory createLocationPickerMenu(Player player) {
+        return createLocationPickerMenu(player, null);
+    }
+    
+    
     private Inventory createMainMenu(Player player) {
         Inventory menu = Bukkit.createInventory(null, 18, "\u00a79" + tr("Island Menu"));
         List<String> lores = new ArrayList<>();
@@ -714,7 +814,9 @@ public class SkyBlockMenu {
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Create Menu")))) {
             onClickCreateMenu(event, p, meta, slotIndex, menuSize);
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Restart Menu")))) {
-            onClickRestartMenu(event, p, meta, slotIndex, currentItem);
+            onClickRestartMenu(event, p, meta, slotIndex, currentItem);        
+        } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Location Picker")))) { //Location Picker
+            onClickLocationMenu(event, p, meta, slotIndex, menuSize);  
         } else if (inventoryName.startsWith(stripFormatting(tr("Config:"))) && event.getWhoClicked() instanceof Player) {
             plugin.getConfigMenu().onClick(event);
         }
@@ -761,7 +863,7 @@ public class SkyBlockMenu {
         event.setCancelled(true);
         if (slotIndex == 0) {
             p.closeInventory();
-            p.performCommand("island create");
+            p.openInventory(createLocationPickerMenu(p));
         } else if (slotIndex == menuSize-1) {
             p.closeInventory();
             p.performCommand("island accept");
@@ -769,13 +871,52 @@ public class SkyBlockMenu {
             String schemeName = stripFormatting(meta.getDisplayName());
             if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
                 p.closeInventory();
-                p.performCommand("island create " + schemeName);
+                p.openInventory(createLocationPickerMenu(p, schemeName));
             } else {
                 p.sendMessage(tr("\u00a7eYou do not have access to that island-schematic!"));
             }
         }
     }
-
+    //TODO: Testing is in progress
+    private void onClickLocationMenu(InventoryClickEvent event, Player p, ItemMeta meta, int slotIndex, int menuSize) {
+        event.setCancelled(true);
+        if (slotIndex == 0) {
+            p.closeInventory();
+            p.openInventory(displayIslandGUI(p));
+        }
+        String schemeName = "";
+        boolean goodSchema = false;
+        if(event.getClickedInventory().getItem(0) != null){
+        	ItemMeta schemameta = event.getClickedInventory().getItem(0).getItemMeta();
+        	if (schemameta != null && schemameta.getDisplayName() != null) {
+                schemeName = stripFormatting(schemameta.getDisplayName());
+                if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
+                	goodSchema = true;
+                }
+        	}        
+        }
+        int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
+    	int z = (int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2;
+    	int x = (slotIndex%COLS_PER_ROW)-midcol;
+    	if (slotIndex%COLS_PER_ROW >= (1) && slotIndex%COLS_PER_ROW <= (7)){        
+    		//keep things in this tight bounds 
+			int coordX = x * Settings.island_distance;
+			int coordY = z * Settings.island_distance;        		        		
+    		Location l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordY);
+        		
+    		if(plugin.getIslandLocatorLogic().isAvailableLocation(l)){
+    			if (goodSchema){
+    				p.performCommand("island create "+schemeName+" "+x+" "+z);
+    			} else {
+    				p.performCommand("island create "+x+" "+z);
+    			}
+    		} else {
+    			p.sendMessage(tr("\u00a7ePlease select another location!"));
+    		}
+    	}
+                
+    }
+    
     private void onClickMainMenu(InventoryClickEvent event, ItemStack currentItem, Player p, int slotIndex) {
         event.setCancelled(true);
         if (slotIndex < 0 || slotIndex > 35) {

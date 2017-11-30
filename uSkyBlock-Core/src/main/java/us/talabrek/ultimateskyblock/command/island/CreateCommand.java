@@ -25,8 +25,24 @@ public class CreateCommand extends RequirePlayerCommand {
         PlayerInfo pi = plugin.getPlayerInfo(player);
         int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
         if (!pi.getHasIsland() && cooldown == 0) {
-            String cSchem = args != null && args.length > 0 ? args[0] : Settings.island_schematicName;
-            plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem));
+        	
+            String cSchem = args != null && args.length > 2 ? args[0] : Settings.island_schematicName;
+            String x = args != null && args.length > 2 ? args[1] : "0";
+            String z = args != null && args.length > 2 ? args[2] : "0";
+            	try{
+            		if (args.length == 2){
+            			//possible someone is typing this manually without schematic
+	            		Integer.parseInt(args[0]);
+	            		Integer.parseInt(args[1]);
+	            		x = args[0];
+	            		z = args[1];
+            		}
+            	} catch (NumberFormatException e){
+            		x = "0";
+            		z = "0";
+            	}
+            
+            plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem, Integer.parseInt(x), Integer.parseInt(z)));
         } else if (pi.getHasIsland()) {
             us.talabrek.ultimateskyblock.api.IslandInfo island = plugin.getIslandInfo(pi);
             if (island.isLeader(player)) {

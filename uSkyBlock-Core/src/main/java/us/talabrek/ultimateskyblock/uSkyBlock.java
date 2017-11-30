@@ -844,8 +844,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         callback.run();
     }
-
-    public void createIsland(final Player player, String cSchem) {
+    //TODO: modify this. 
+    public void createIsland(final Player player, String cSchem, int x, int z) {
         PlayerInfo pi = getPlayerInfo(player);
         if (pi.isIslandGenerating()) {
             player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot create now."));
@@ -859,11 +859,21 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             pi.setIslandGenerating(true);
         }
         try {
-            Location next = getIslandLocatorLogic().getNextIslandLocation(player);
-            if (isSkyWorld(player.getWorld())) {
-                spawnTeleport(player, true);
-            }
-            generateIsland(player, pi, next, cSchem);
+        	int coordX = x * Settings.island_distance;
+			int coordZ = z * Settings.island_distance;        		        		
+    		Location next = new Location(this.getWorld(), coordX, Settings.island_height, coordZ);
+    		//NOTE: Changed from: getIslandLocatorLogic().getNextIslandLocation(player);
+    		//This change will work on small servers only. I'll make it extensible upon request. 
+        	if (getIslandLocatorLogic().isAvailableLocation(next)){
+        		if (isSkyWorld(player.getWorld())) {
+        			spawnTeleport(player, true);
+        		}
+        		generateIsland(player, pi, next, cSchem);
+        		
+        	} else {
+        		player.sendMessage(tr("\u00a7eInvalid Format: "));
+                return;
+        	}
         } catch (Exception ex) {
             player.sendMessage(tr("Could not create your Island. Please contact a server moderator."));
             log(Level.SEVERE, "Error creating island", ex);
