@@ -103,6 +103,7 @@ import us.talabrek.ultimateskyblock.uuid.PlayerDB;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -170,6 +171,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private ChatLogic chatLogic;
 
     private volatile boolean maintenanceMode = false;
+    
+    private HashMap<UUID, ItemStack> skullcache;
 
     public uSkyBlock() {
     }
@@ -187,6 +190,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (animationHandler != null) {
             animationHandler.stop();
         }
+        skullcache.clear();
         challengeLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
@@ -206,6 +210,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         skyBlockNetherWorld = null;
         missingRequirements = null;
         instance = this;
+        skullcache = new HashMap<UUID, ItemStack>();
         CommandManager.registerRequirements(this);
         FileUtil.setDataFolder(getDataFolder());
         FileUtil.setAllwaysOverwrite("levelConfig.yml");
@@ -1332,6 +1337,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public IslandGenerator getIslandGenerator() {
         return islandGenerator;
+    }
+    
+    public HashMap<UUID, ItemStack> getSkullCache(){
+    	return skullcache;
     }
 
     public boolean isMaintenanceMode() {

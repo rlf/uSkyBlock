@@ -48,6 +48,17 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 public class SkyBlockMenu {
     private static final int MAX_INV_SIZE = 54;
     private static final int DISPLAYED_RAD = 2;
+    private static final Material AVAILABLE_ISLAND = Material.DIRT;
+    //The following values cannot equal each other. 
+    private static final short CLICKABLE_SCROLLBAR = (byte) 15;
+    private static final short LOCATION_SCROLLBAR = (byte) 0;
+    private static final short MAP_BACKGROUND = (byte) 3;
+    private static final short MAP_BACKGROUND_SEC = (byte) 9;
+    private static final short MAP_BACKGROUND_ORG = (byte) 11;
+    //End. 
+    private static final int MAP_Z_MULT = 3;
+    private static final int MAP_X_MULT = 2;
+    
     
 	private final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
     private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
@@ -519,7 +530,7 @@ public class SkyBlockMenu {
         }
         return index + 2;
     }
-     
+    //TODO: Continue testing this code. 
     /**
      * Location Picker Menu:
      * Creates a GUI for creating a finite (small) amount of island plots. 
@@ -527,81 +538,171 @@ public class SkyBlockMenu {
      * @param player
      * @return
      */
-    private Inventory createLocationPickerMenu(Player player, String schemeName) {
+    public Inventory createLocationPickerMenu(Player player, String schemeName, boolean isCreating, int cameraX, int cameraZ) {
         final PlayerInfo pi = plugin.getPlayerInfo(player);
-        Inventory menu = Bukkit.createInventory(null, MAX_INV_SIZE, "\u00a79" + tr("Location Picker"));
-        List<String> lores = new ArrayList<>();
-        
-        //Spawn Marker. 
-        int mididx = (int)Math.floor((MAX_INV_SIZE-COLS_PER_ROW)/2); //yes, it's 22.5->22
-        ItemStack menuItem = new ItemStack(Material.BEDROCK, 1);
-        ItemMeta meta = menuItem.getItemMeta();
-        meta.setDisplayName(tr("\u00a7a\u00a7lSpawn"));
-        menuItem.setItemMeta(meta);
-        menu.setItem(mididx, menuItem);
-        lores.clear();
-        
-        //if schemename isnt null, we'll include it to show what we've selected in the prev menu. 
-        //Our schema - Put in slot 0 for convenience to user. 
-        if (schemeName != null && schemeName != ""){
-        	IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
-            menuItem = islandPerk.getDisplayItem();
-            meta = menuItem.getItemMeta();
-            lores = meta.getLore();
-            if (lores == null) {
-                lores = new ArrayList<>();
-            }
-            addLore(lores, tr("\u00a7aClick to return."));
-            meta.setLore(lores);
-            menuItem.setItemMeta(meta);
-            menu.setItem(0, menuItem);
+        Inventory menu;
+        if (isCreating){
+        	menu = Bukkit.createInventory(null, MAX_INV_SIZE, "\u00a79" + tr("Location Picker"));
+        } else {
+        	menu = Bukkit.createInventory(null, MAX_INV_SIZE, "\u00a79" + tr("Skyblock Map"));
         }
-
-        int d = Settings.island_distance;
+        List<String> lores = new ArrayList<>();
+                
+        ItemStack menuItem;
+        ItemMeta meta;
+        
+        //Our schema - Put in slot 0 for convenience to user. 
+        //if schemename is null, use the default cfg value
+        schemeName = schemeName != null && schemeName != "" ? schemeName : Settings.island_schematicName;
+    	IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
+        menuItem = islandPerk.getDisplayItem();
+        meta = menuItem.getItemMeta();
+        lores = meta.getLore();
+        if (lores == null) {
+            lores = new ArrayList<>();
+        }
+        addLore(lores, tr("\u00a7aClick to return."));
+        meta.setLore(lores);
+        menuItem.setItemMeta(meta);
+        menu.setItem(0, menuItem);
+        lores.clear();
+            
+        if (cameraX != 0 || cameraZ != 0){
+	        menuItem = new ItemStack(Material.COMPASS, 1);
+	        meta = menuItem.getItemMeta();
+	        meta.setDisplayName(tr("\u00a7a\u00a7l"+cameraX+","+cameraZ));
+	        addLore(lores, tr("\u00a7aClick to re-center."));
+            meta.setLore(lores);
+			menuItem.setItemMeta(meta);
+			menu.setItem(COLS_PER_ROW, menuItem);
+			lores.clear();
+        }
+        
+		int d = Settings.island_distance;
         int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
-        int coordX, coordZ;
+        int x, coordX, z, coordZ;
         Location l;
-        for (int i = 0; i< MAX_INV_SIZE-COLS_PER_ROW; i++){
-        	//TODO: break this out into a helper function.
-        	int z = (int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2;
-        	int x = (i%COLS_PER_ROW)-midcol;
-        	if (i%COLS_PER_ROW >= (1) && i%COLS_PER_ROW <= (7) && i != mididx){        		
-        		coordX = x * d;
+        for (int i = 0; i< MAX_INV_SIZE; i++){
+        	z = (-1 *((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))+ cameraZ;
+        	x = (i%COLS_PER_ROW)-midcol + cameraX;
+        	if (i%COLS_PER_ROW >= (1) && i%COLS_PER_ROW <= (7) && i < MAX_INV_SIZE-COLS_PER_ROW){        		
+				coordX = x * d;
         		coordZ = z * d;        		        		
         		l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordZ);
         		
         		if(!plugin.getIslandLocatorLogic().isAvailableLocation(l)){
         			//draw a player head here. you can't have this spot!
-        			menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        			if (x == 0 && z == 0){
+        				//Spawn Marker. 
+						menuItem = new ItemStack(Material.BEDROCK, 1);
+						meta = menuItem.getItemMeta();
+						meta.setDisplayName(tr("\u00a7a\u00a7lSpawn"));
+						menuItem.setItemMeta(meta);
+						menu.setItem(i, menuItem);
+					} else {
+						menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+						SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
+						if (plugin.getIslandInfo(l) != null){
+							if (plugin.getIslandInfo(l).getLeaderUniqueId() != null){
+								
+								//check our local cache
+								if (plugin.getSkullCache().containsKey(plugin.getIslandInfo(l).getLeaderUniqueId())){
+									menuItem = plugin.getSkullCache().get(plugin.getIslandInfo(l).getLeaderUniqueId());
+									meta2 = (SkullMeta) menuItem.getItemMeta();
+									
+								} else {
+									meta2.setOwningPlayer(Bukkit.getOfflinePlayer(plugin.getIslandInfo(l).getLeaderUniqueId()));
+									meta2.setDisplayName(tr("\u00a7a\u00a7l"+plugin.getIslandInfo(l).getLeader()));									
+									plugin.getSkullCache().put(plugin.getIslandInfo(l).getLeaderUniqueId(), menuItem);
+								}
+								addLore(lores, tr("\u00a7aLoc "+x+", "+z));
+								addLore(lores, tr("\u00a7aLevel "+plugin.getIslandInfo(l).getLevel()));
+								addLore(lores, tr("\u00a7aClick to teleport"));
+								meta2.setLore(lores);
+								menuItem.setItemMeta(meta2);
+								lores.clear();
+							
+							}
+						} else {
+							System.out.println("Unable to free location:x"+x+", z"+z);
+							meta2.setDisplayName(tr("\u00a7a\u00a7lUnavailable"));
+							menuItem.setItemMeta(meta2);
+						} 
+						menu.setItem(i, menuItem);
+					}
         			
-        			final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
-        	        if (plugin.getIslandInfo(l) != null){
-        	        	if (plugin.getIslandInfo(l).getLeaderUniqueId() != null){
-	        	        meta2.setOwningPlayer(Bukkit.getOfflinePlayer(plugin.getIslandInfo(l).getLeaderUniqueId()));
-	        			meta2.setDisplayName(tr("\u00a7a\u00a7l"+plugin.getIslandInfo(l).getLeader()));
-        	        	}
-        	        } else {
-        	        	System.out.println("Unable to free location:x"+x+", z"+z);
-        	        	meta2.setDisplayName(tr("\u00a7a\u00a7lUnavailable"));
-        	        }
-        	        menuItem.setItemMeta(meta2);
-        	        menu.setItem(i, menuItem);
-        			
-        		} else {
-        			//draw a spot showing this is claimable. 
-        			menuItem = new ItemStack(Material.DIRT, 1);
+        		} else if (isCreating) {
+        			//if we're in the mode, draw a spot showing this is claimable. 
+        			menuItem = new ItemStack(AVAILABLE_ISLAND, 1);
         	        meta = menuItem.getItemMeta();
         	        meta.setDisplayName(tr("\u00a7a\u00a7lUnclaimed Space"));
-        	        menuItem.setItemMeta(meta);
+        	        menuItem.setItemMeta(meta);				
+        	        addLore(lores, tr("\u00a7aLoc "+x+", "+z));
         	        addLore(lores, tr("\u00a7aClick to create here!"));
+					meta.setLore(lores);
         	        menu.setItem(i, menuItem);
         	        lores.clear();
-        		}
+        		} else {
+        			//Map grids are nice to have. 
+        			if (z== 0 || x == 0){
+        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, MAP_BACKGROUND_ORG);
+        			}else if (z%4 == 0 || x%4 == 0){
+        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, MAP_BACKGROUND_SEC);
+        			} else {
+        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, MAP_BACKGROUND);
+        			}
+					meta = menuItem.getItemMeta();
+        	        meta.setDisplayName(tr("\u00a7a\u00a7lEmpty Space"));
+        	        addLore(lores, tr("\u00a7aLoc "+x+", "+z));
+        	        meta.setLore(lores);
+        	        menuItem.setItemMeta(meta);	
+					menu.setItem(i, menuItem);
+					lores.clear();
+				}
         			
+        	} else {
+        		//Scrollbar generation
+        		// Right top 5 Column here:
+        		if (i%COLS_PER_ROW == (8) && i < MAX_INV_SIZE-COLS_PER_ROW){
+        			if (cameraZ == (-1 * ((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
+        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
+        				addLore(lores, tr("\u00a7aCurrent Z: "+cameraZ));
+        			} else {
+        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
+        				addLore(lores, tr("\u00a7aClick to scroll"));        				
+        			}
+        			meta = menuItem.getItemMeta();
+        			meta.setDisplayName(tr("\u00a7a\u00a7lScrollbar"));
+        			meta.setLore(lores);
+        			menuItem.setItemMeta(meta);
+        	        menu.setItem(i, menuItem);
+        	        lores.clear();
+        	        
+        		}
+        		// Bottom middle 5 here:
+        		if (i%COLS_PER_ROW >= (2) && i%COLS_PER_ROW <= (6) && i > MAX_INV_SIZE-COLS_PER_ROW){
+        			if (cameraX == ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
+        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
+        				addLore(lores, tr("\u00a7aCurrent X: "+cameraX));
+        			} else {
+        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
+        				addLore(lores, tr("\u00a7aClick to scroll"));        				
+        			}
+        			meta = menuItem.getItemMeta();
+        			meta.setDisplayName(tr("\u00a7a\u00a7lScrollbar"));
+        			meta.setLore(lores);
+        			menuItem.setItemMeta(meta);
+        	        menu.setItem(i, menuItem);
+        	        lores.clear();
+        			
+        		}
         	}
-        }       
+				
+        } 
+        
        
         lores.clear();
+        
         return menu;
     }
     /**
@@ -611,6 +712,9 @@ public class SkyBlockMenu {
      */
     private Inventory createLocationPickerMenu(Player player) {
         return createLocationPickerMenu(player, null);
+    }
+    private Inventory createLocationPickerMenu(Player player, String schemeName){
+    	return createLocationPickerMenu(player, schemeName, true, 0, 0);
     }
     
     
@@ -744,6 +848,15 @@ public class SkyBlockMenu {
         menuItem.setItemMeta(meta4);
         menu.setItem(9, menuItem); // First item, 2nd line
         lores.clear();
+        
+        menuItem = new ItemStack(Material.EMPTY_MAP, 1);
+        meta4 = menuItem.getItemMeta();
+        meta4.setDisplayName(tr("\u00a7a\u00a7lSky Map"));
+        addLore(lores, "\u00a7f", tr("Shows an overview\nof all current\nislands\n\u00a7e\u00a7lClick here to open."));
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.setItem(12, menuItem); // First item, 2nd line
+        lores.clear();
 
         menuItem = new ItemStack(Material.HOPPER, 1);
         meta4 = menuItem.getItemMeta();
@@ -816,7 +929,9 @@ public class SkyBlockMenu {
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Restart Menu")))) {
             onClickRestartMenu(event, p, meta, slotIndex, currentItem);        
         } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Location Picker")))) { //Location Picker
-            onClickLocationMenu(event, p, meta, slotIndex, menuSize);  
+            onClickLocationMenu(event, p, currentItem, slotIndex, menuSize);  
+        } else if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Skyblock Map")))) { //Location Picker menu working in map mode
+            onClickMapMenu(event, p, currentItem, slotIndex, menuSize);  
         } else if (inventoryName.startsWith(stripFormatting(tr("Config:"))) && event.getWhoClicked() instanceof Player) {
             plugin.getConfigMenu().onClick(event);
         }
@@ -859,7 +974,7 @@ public class SkyBlockMenu {
         }, 0, 1000);
     }
 
-    private void onClickCreateMenu(InventoryClickEvent event, Player p, ItemMeta meta, int slotIndex, int menuSize) {
+    private void onClickCreateMenu(InventoryClickEvent event, Player p, ItemMeta meta, int slotIndex, int menuSize) {    	
         event.setCancelled(true);
         if (slotIndex == 0) {
             p.closeInventory();
@@ -877,29 +992,31 @@ public class SkyBlockMenu {
             }
         }
     }
-    //TODO: Testing is in progress
-    private void onClickLocationMenu(InventoryClickEvent event, Player p, ItemMeta meta, int slotIndex, int menuSize) {
+    private void onClickLocationMenu(InventoryClickEvent event, Player p, ItemStack currentItem, int slotIndex, int menuSize) {
         event.setCancelled(true);
+        
         if (slotIndex == 0) {
             p.closeInventory();
             p.openInventory(displayIslandGUI(p));
+            return;
         }
         String schemeName = "";
         boolean goodSchema = false;
         if(event.getClickedInventory().getItem(0) != null){
         	ItemMeta schemameta = event.getClickedInventory().getItem(0).getItemMeta();
         	if (schemameta != null && schemameta.getDisplayName() != null) {
-                schemeName = stripFormatting(schemameta.getDisplayName());
-                if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
-                	goodSchema = true;
-                }
+        		schemeName = stripFormatting(schemameta.getDisplayName());
+        		if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
+        			goodSchema = true;
+        		}
         	}        
         }
-        int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
-    	int z = (int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2;
-    	int x = (slotIndex%COLS_PER_ROW)-midcol;
-    	if (slotIndex%COLS_PER_ROW >= (1) && slotIndex%COLS_PER_ROW <= (7)){        
+        if (currentItem.getType().equals(AVAILABLE_ISLAND)){        
     		//keep things in this tight bounds 
+        	int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
+        	int z = -1 * ((int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2);
+        	int x = (slotIndex%COLS_PER_ROW)-midcol;
+        	
 			int coordX = x * Settings.island_distance;
 			int coordY = z * Settings.island_distance;        		        		
     		Location l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordY);
@@ -913,8 +1030,74 @@ public class SkyBlockMenu {
     		} else {
     			p.sendMessage(tr("\u00a7ePlease select another location!"));
     		}
+    	} else if (currentItem.getType().equals(Material.COMPASS)){
+    		// Request for re-centering.     		
+    		updateInventory(p, createLocationPickerMenu(p, schemeName, true, 0, 0));
+    		//p.closeInventory();
+			//p.openInventory(createLocationPickerMenu(p, schemeName, true, 0, 0));
+    	} else if (currentItem.getType().equals(Material.STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
+    		handleScrollbarClick(event, p, currentItem, slotIndex, true, schemeName);
+    	} else if (currentItem.getType().equals(Material.SKULL_ITEM)){        
+   		 	handleWarpClick(p, currentItem, slotIndex);
     	}
                 
+    }
+    //TODO: Still a lot of magic numbers here. will need to extract for convenience whenever minecraft decides to change inv size. 
+    private void onClickMapMenu(InventoryClickEvent event, Player p, ItemStack currentItem, int slotIndex, int menuSize) {
+        event.setCancelled(true);
+        if (slotIndex == 0) {
+            p.closeInventory();
+            p.openInventory(displayIslandGUI(p));
+        } else if (currentItem.getType().equals(Material.SKULL_ITEM)){        
+    		 handleWarpClick(p, currentItem, slotIndex);
+    	} else if (currentItem.getType().equals(Material.COMPASS)){
+    		// Request for re-centering. 
+    		updateInventory(p, createLocationPickerMenu(p, null, false, 0, 0));
+    		//p.closeInventory();
+			//p.openInventory(createLocationPickerMenu(p, null, false, 0, 0));
+    	} else if (currentItem.getType().equals(Material.STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
+    		handleScrollbarClick(event, p, currentItem, slotIndex, false, null);
+    	}
+                
+    }
+    private void handleWarpClick(Player p, ItemStack currentItem, int slotIndex){
+    	//keep things in this tight bounds 
+		
+		SkullMeta meta2 = (SkullMeta) currentItem.getItemMeta();			
+		if(meta2  != null && meta2.getOwningPlayer() != null && plugin.getPlayerInfo(meta2.getOwningPlayer().getUniqueId()) != null){
+			if (plugin.getIslandInfo(plugin.getPlayerInfo(meta2.getOwningPlayer().getUniqueId())) != null){
+				System.out.println(p.getName()+": "+"/island warp "+meta2.getOwningPlayer().getName());
+				p.performCommand("island warp "+meta2.getOwningPlayer().getName());
+			}
+			
+		}
+    }
+    private void handleScrollbarClick(InventoryClickEvent event, Player p, ItemStack currentItem, int slotIndex, boolean isCreating, String schemename){
+    	int cameraX = 0, cameraZ = 0; 
+    	int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
+    	int z = -1 *((int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2);
+    	int x = (slotIndex%COLS_PER_ROW)-midcol;
+        if (event.getInventory().getItem(COLS_PER_ROW) != null){
+        	ItemMeta camerameta = event.getInventory().getItem(COLS_PER_ROW).getItemMeta();
+        	if (camerameta != null && camerameta.getDisplayName() != null) {
+        		String camerastr = stripFormatting(camerameta.getDisplayName());
+        		cameraX = Integer.parseInt(camerastr.split(",")[0]);
+        		cameraZ = Integer.parseInt(camerastr.split(",")[1]);
+        	}
+        		
+        }
+		if (slotIndex % COLS_PER_ROW == 8 && slotIndex < MAX_INV_SIZE-COLS_PER_ROW){
+			// z-change
+			updateInventory(p, createLocationPickerMenu(p, schemename, isCreating, cameraX, z*MAP_Z_MULT));
+			//p.closeInventory();
+			//p.openInventory(createLocationPickerMenu(p, schemename, isCreating, cameraX, z*MAP_Z_MULT));
+		} else if (slotIndex % COLS_PER_ROW >= (2) && slotIndex % COLS_PER_ROW <= (6) && slotIndex > MAX_INV_SIZE-COLS_PER_ROW){
+			// x-change
+			updateInventory(p, createLocationPickerMenu(p, schemename, isCreating, x*MAP_X_MULT, cameraZ));
+			//p.closeInventory();
+			//p.openInventory(createLocationPickerMenu(p, schemename, isCreating, x*MAP_X_MULT, cameraZ));
+			
+		}
     }
     
     private void onClickMainMenu(InventoryClickEvent event, ItemStack currentItem, Player p, int slotIndex) {
@@ -930,6 +1113,9 @@ public class SkyBlockMenu {
         } else if (currentItem.getType() == Material.SKULL_ITEM) {
             p.closeInventory();
             p.performCommand("island party");
+        } else if (currentItem.getType() == Material.EMPTY_MAP) {
+            p.closeInventory();
+            p.performCommand("island map");
         } else if (currentItem.getType() == Material.BED) {
             p.closeInventory();
             p.performCommand("island sethome");
@@ -1201,6 +1387,32 @@ public class SkyBlockMenu {
             p.closeInventory();
             p.openInventory(displayPartyPlayerGUI(p, skull.getOwner()));
         }
+    }
+    
+    private boolean updateInventory(Player p, Inventory newInventory){
+    	Inventory inventory = p.getOpenInventory().getTopInventory();
+        if (inventory.getSize() == newInventory.getSize() && stripFormatting(inventory.getTitle()).equals(stripFormatting(newInventory.getTitle()))){
+        	
+        	ItemStack oldStack, newStack;
+        	for(int i = 0; inventory.getSize() > i; i++) {
+        		oldStack = inventory.getItem(i);
+        		newStack = newInventory.getItem(i);
+        		
+        		if(oldStack == null && newStack != null) {
+        			inventory.setItem(i, newStack);
+        		} else if(oldStack != null && newStack != null) {
+        			if(!oldStack.isSimilar(newStack)) inventory.setItem(i, newStack);
+        		} else {
+        			inventory.setItem(i, null);
+        		}
+        	}
+        	return true;
+        } else {
+        	System.out.println("Unable to update the inventory: "+inventory.getTitle()+" of "+inventory.getSize()+" vs "+newInventory.getTitle()+" of "+newInventory.getSize());
+        	return false;
+        }
+
+
     }
 
     public List<PartyPermissionMenuItem> getPermissionMenuItems() {

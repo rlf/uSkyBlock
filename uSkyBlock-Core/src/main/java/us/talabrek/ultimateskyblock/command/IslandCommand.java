@@ -45,6 +45,8 @@ public class IslandCommand extends AbstractCommandExecutor {
         addTab("member", new MemberTabCompleter(plugin));
         addTab("schematic", new SchematicTabCompleter(plugin));
         addTab("perm", new PermissionTabCompleter(plugin));
+        addTab("map", playerTabCompleter);
+        add(new MapCommand(plugin));
         add(new RestartCommand(plugin));
         add(new LogCommand(plugin, menu));
         CreateCommand createCommand = new CreateCommand(plugin);
