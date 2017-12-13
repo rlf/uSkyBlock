@@ -88,6 +88,9 @@ options:
     # How many entries to remember in the island-log
     log-size: 10
 
+    #hopper limit so it will be larger than 10ish
+    hopperlimit: 150
+
     # Limits the spawning
     spawn-limits:
       # [true/false] if true, the limits below will limit spawning
