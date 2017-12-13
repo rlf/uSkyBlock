@@ -146,6 +146,7 @@ options:
 
     # Whether or not portalling to the nether roof should be blocked.
     nether-roof: true
+    
 
     # Generally protections against griefers
     # If the flag is true, it generally means the protection is active
@@ -343,6 +344,8 @@ worldguard:
 nether:
   enabled: true
 
+  # Whether or not to generate an additional ceiling above the nether roof
+  extra-nether-ceiling: true
 
   height: 75
 

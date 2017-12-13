@@ -34,12 +34,14 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
                 generate[xyzToByte(x, y, z)] = BEDROCK;
             }
         }
-        for (y = 131; y <= 140; y++) {
-            for (int x = 0; x < 16; x++) {
-                for (int z = 0; z < 16; z++) {
-                    generate[xyzToByte(x, y, z)] = BEDROCK;
-                }
-            }
+        if (Settings.extra_nether_ceiling){
+	        for (y = 131; y <= 140; y++) {
+	            for (int x = 0; x < 16; x++) {
+	                for (int z = 0; z < 16; z++) {
+	                    generate[xyzToByte(x, y, z)] = BEDROCK;
+	                }
+	            }
+	        }
         }
     }
     private static final List<BlockPopulator> emptyBlockPopulatorList = new ArrayList<BlockPopulator>();
