@@ -665,14 +665,12 @@ public class SkyBlockMenu {
         		// Right top 5 Column here:
         		
         		if (i%COLS_PER_ROW == (8) && i < MAX_INV_SIZE-COLS_PER_ROW){
-        			boolean didZScroll = false;
         			if (cameraZ == (-1 * ((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
         				addLore(lores, tr("\u00a7aCurrent Z: "+cameraZ));
-        				didZScroll = true;
         			} else {
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
-        				if (didZScroll){
+        				if (cameraZ > (-1 * ((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
         					addLore(lores, tr("\u00a7aClick to scroll down")); 
         				} else {
         					addLore(lores, tr("\u00a7aClick to scroll up")); 
@@ -688,14 +686,12 @@ public class SkyBlockMenu {
         		}
         		// Bottom middle 5 here:
         		if (i%COLS_PER_ROW >= (2) && i%COLS_PER_ROW <= (6) && i > MAX_INV_SIZE-COLS_PER_ROW){
-        			boolean didXScroll = false;
         			if (cameraX == ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
         				addLore(lores, tr("\u00a7aCurrent X: "+cameraX));
-        				didXScroll = true;
         			} else {
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
-        				if (didXScroll){
+        				if (cameraX < ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
         					addLore(lores, tr("\u00a7aClick to scroll right")); 
         				} else {
         					addLore(lores, tr("\u00a7aClick to scroll left")); 
