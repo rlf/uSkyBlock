@@ -31,7 +31,6 @@ import java.util.logging.Logger;
 /**
  * The factory for creating islands (actual blocks).
  */
-@SuppressWarnings("deprecation")
 public class IslandGenerator {
     private static final List<String> USB_SCHEMATICS = Arrays.asList(
             "uSkyBlockNether",

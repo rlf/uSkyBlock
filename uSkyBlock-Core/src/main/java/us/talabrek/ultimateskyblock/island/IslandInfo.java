@@ -299,12 +299,12 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     public boolean hasPerm(Player player, String perm) {
         return hasPerm(player.getUniqueId(), perm);
     }
-
+    @Deprecated
     public boolean hasPerm(String playerName, String perm) {
         return hasPerm(uSkyBlock.getInstance().getPlayerDB().getUUIDFromName(playerName), perm);
     }
 
-    private boolean hasPerm(UUID uuid, String perm) {
+    public boolean hasPerm(UUID uuid, String perm) {
         return uuid.equals(getLeaderUniqueId()) || config.getBoolean("party.members." + UUIDUtil.asString(uuid) + "." + perm);
     }
 

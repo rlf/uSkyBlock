@@ -15,7 +15,6 @@ public class Settings {
     private static final Logger log = Logger.getLogger(Settings.class.getName());
     public static int general_maxPartySize;
     public static String general_worldName;
-    public static boolean general_allowWorldSpawnWarp;
     public static int island_distance;
     public static int island_height;
     public static int general_spawnSize;
@@ -103,11 +102,6 @@ public class Settings {
         }
         if (!config.contains("options.general.spawnSize")) {
             config.set("options.general.spawnSize", 50);
-            changed = true;
-        }
-        general_allowWorldSpawnWarp = config.getBoolean("options.general.allowWorldSpawnWarp", false);
-        if (!config.contains("options.general.allowWorldSpawnWarp")) {
-            config.set("options.general.allowWorldSpawnWarp", false);
             changed = true;
         }
         if (!config.contains("options.general.spawnSize")) {

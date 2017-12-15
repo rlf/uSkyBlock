@@ -1,15 +1,15 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.api.event.CreateIslandEvent;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 import java.util.Map;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import org.bukkit.entity.Player;
+
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.api.event.CreateIslandEvent;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
 public class CreateCommand extends RequirePlayerCommand {
     private final uSkyBlock plugin;
@@ -41,8 +41,15 @@ public class CreateCommand extends RequirePlayerCommand {
             		x = "0";
             		z = "0";
             	}
+            	if (x == "0" && z == "0"){
+            		player.sendMessage(tr("\u00a7eInvalid Format - Try: "+"\u00a7b/is create <schematic> [gridX] [gridZ]"));
+            		player.sendMessage(tr("\u00a7b[gridX] "+"\u00a7eand "+"\u00a7b[gridZ] "+"\u00a7eare island locations relative to spawn (0, 0)"));
+            		player.sendMessage(tr("\u00a7eExample, Adjacent to spawn:"+"\u00a7b/is create 1 0"));
+            		
+            	} else {            		
+            		plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem, Integer.parseInt(x), Integer.parseInt(z)));
+            	}
             
-            plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem, Integer.parseInt(x), Integer.parseInt(z)));
         } else if (pi.getHasIsland()) {
             us.talabrek.ultimateskyblock.api.IslandInfo island = plugin.getIslandInfo(pi);
             if (island.isLeader(player)) {
