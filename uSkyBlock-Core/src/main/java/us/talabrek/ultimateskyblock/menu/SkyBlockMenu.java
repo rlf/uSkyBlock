@@ -636,10 +636,10 @@ public class SkyBlockMenu {
         			menuItem = new ItemStack(AVAILABLE_ISLAND, 1);
         	        meta = menuItem.getItemMeta();
         	        meta.setDisplayName(tr("\u00a7a\u00a7lUnclaimed Space"));
-        	        menuItem.setItemMeta(meta);				
         	        addLore(lores, tr("\u00a7aLoc "+x+", "+z));
         	        addLore(lores, tr("\u00a7aClick to create here!"));
 					meta.setLore(lores);
+					menuItem.setItemMeta(meta);				
         	        menu.setItem(i, menuItem);
         	        lores.clear();
         		} else {
@@ -663,13 +663,20 @@ public class SkyBlockMenu {
         	} else {
         		//Scrollbar generation
         		// Right top 5 Column here:
+        		
         		if (i%COLS_PER_ROW == (8) && i < MAX_INV_SIZE-COLS_PER_ROW){
+        			boolean didZScroll = false;
         			if (cameraZ == (-1 * ((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
         				addLore(lores, tr("\u00a7aCurrent Z: "+cameraZ));
+        				didZScroll = true;
         			} else {
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
-        				addLore(lores, tr("\u00a7aClick to scroll"));        				
+        				if (didZScroll){
+        					addLore(lores, tr("\u00a7aClick to scroll down")); 
+        				} else {
+        					addLore(lores, tr("\u00a7aClick to scroll up")); 
+        				}
         			}
         			meta = menuItem.getItemMeta();
         			meta.setDisplayName(tr("\u00a7a\u00a7lScrollbar"));
@@ -681,12 +688,18 @@ public class SkyBlockMenu {
         		}
         		// Bottom middle 5 here:
         		if (i%COLS_PER_ROW >= (2) && i%COLS_PER_ROW <= (6) && i > MAX_INV_SIZE-COLS_PER_ROW){
+        			boolean didXScroll = false;
         			if (cameraX == ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
         				addLore(lores, tr("\u00a7aCurrent X: "+cameraX));
+        				didXScroll = true;
         			} else {
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
-        				addLore(lores, tr("\u00a7aClick to scroll"));        				
+        				if (didXScroll){
+        					addLore(lores, tr("\u00a7aClick to scroll right")); 
+        				} else {
+        					addLore(lores, tr("\u00a7aClick to scroll left")); 
+        				}     				
         			}
         			meta = menuItem.getItemMeta();
         			meta.setDisplayName(tr("\u00a7a\u00a7lScrollbar"));
@@ -1011,14 +1024,35 @@ public class SkyBlockMenu {
         		}
         	}        
         }
-        if (currentItem.getType().equals(AVAILABLE_ISLAND)){        
-    		//keep things in this tight bounds 
-        	int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
-        	int z = -1 * ((int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2);
-        	int x = (slotIndex%COLS_PER_ROW)-midcol;
+        if (currentItem.getType().equals(AVAILABLE_ISLAND)){  
         	
-			int coordX = x * Settings.island_distance;
-			int coordY = z * Settings.island_distance;        		        		
+        	// Commented out below for posterity (pre-scrollbar method)
+//        	//keep things in this tight bounds 
+//        	int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
+//        	int z = -1 * ((int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2);
+//        	int x = (slotIndex%COLS_PER_ROW)-midcol;
+        	int x = 0, z = 0;
+        	
+        	
+        	//TODO: Adjust for scrollbar
+        	if (currentItem.hasItemMeta() && currentItem.getItemMeta().hasLore()){
+        		for (String s : currentItem.getItemMeta().getLore()){
+        			// Passed Data Format: "blahLoc "+x+", "+z where # is positive/negative number
+        			if (s.contains("Loc")){
+        				s = stripFormatting(s);
+        				//Whack "Loc " and split our "x, z" into coords for loc testing. 
+        				String[] t = s.substring(4).split(", ");
+        				x = Integer.parseInt(t[0]);
+        				z = Integer.parseInt(t[1]);
+        				
+        			}
+        		}
+        	}
+        	
+        	
+        	int coordX = x * Settings.island_distance;
+        	int coordY = z * Settings.island_distance; 
+        	
     		Location l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordY);
         		
     		if(plugin.getIslandLocatorLogic().isAvailableLocation(l)){
