@@ -15,6 +15,7 @@ public class Settings {
     private static final Logger log = Logger.getLogger(Settings.class.getName());
     public static int general_maxPartySize;
     public static String general_worldName;
+    public static boolean general_allowWorldSpawnWarp;
     public static int island_distance;
     public static int island_height;
     public static int general_spawnSize;
@@ -100,8 +101,13 @@ public class Settings {
         } catch (Exception e) {
             island_height = 120;
         }
-        if (!config.contains("options.extras.obsidianToLava")) {
-            config.set("options.extras.obsidianToLava", true);
+        if (!config.contains("options.general.spawnSize")) {
+            config.set("options.general.spawnSize", 50);
+            changed = true;
+        }
+        general_allowWorldSpawnWarp = config.getBoolean("options.general.allowWorldSpawnWarp", false);
+        if (!config.contains("options.general.allowWorldSpawnWarp")) {
+            config.set("options.general.allowWorldSpawnWarp", false);
             changed = true;
         }
         if (!config.contains("options.general.spawnSize")) {
@@ -150,6 +156,10 @@ public class Settings {
         nether_lava_level = config.getInt("nether.lava_level", config.getInt("nether.lava-level", 32));
         nether_height = config.getInt("nether.height", island_height/2);
         extra_nether_ceiling = config.getBoolean("nether.extra-nether-ceiling", true);
+        if (!config.contains("nether.extra-nether-ceiling")){
+            config.set("nether.extra-nether-ceiling", true);
+            changed = true;
+        }
         return changed;
     }
 

@@ -60,6 +60,7 @@ public class SkyBlockMenu {
     private static final int MAP_X_MULT = 2;
     
     
+    
 	private final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
     private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock plugin;
@@ -157,10 +158,12 @@ public class SkyBlockMenu {
                     tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
             )
     );
+	
 
     public SkyBlockMenu(uSkyBlock plugin, ChallengeLogic challengeLogic) {
         this.plugin = plugin;
         this.challengeLogic = challengeLogic;
+       
     }
 
     public Inventory displayPartyPlayerGUI(final Player player, final String pname) {
@@ -597,8 +600,13 @@ public class SkyBlockMenu {
 						menuItem = new ItemStack(Material.BEDROCK, 1);
 						meta = menuItem.getItemMeta();
 						meta.setDisplayName(tr("\u00a7a\u00a7lSpawn"));
+						if (Settings.general_allowWorldSpawnWarp){
+							addLore(lores, tr("\u00a7aClick to teleport!"));
+							meta.setLore(lores);
+						}
 						menuItem.setItemMeta(meta);
 						menu.setItem(i, menuItem);
+						lores.clear();
 					} else {
 						menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 						SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
@@ -1028,9 +1036,6 @@ public class SkyBlockMenu {
 //        	int z = -1 * ((int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2);
 //        	int x = (slotIndex%COLS_PER_ROW)-midcol;
         	int x = 0, z = 0;
-        	
-        	
-        	//TODO: Adjust for scrollbar
         	if (currentItem.hasItemMeta() && currentItem.getItemMeta().hasLore()){
         		for (String s : currentItem.getItemMeta().getLore()){
         			// Passed Data Format: "blahLoc "+x+", "+z where # is positive/negative number
@@ -1044,11 +1049,8 @@ public class SkyBlockMenu {
         			}
         		}
         	}
-        	
-        	
         	int coordX = x * Settings.island_distance;
-        	int coordY = z * Settings.island_distance; 
-        	
+        	int coordY = z * Settings.island_distance;         	
     		Location l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordY);
         		
     		if(plugin.getIslandLocatorLogic().isAvailableLocation(l)){
@@ -1065,6 +1067,12 @@ public class SkyBlockMenu {
     		updateInventory(p, createLocationPickerMenu(p, schemeName, true, 0, 0));
     		//p.closeInventory();
 			//p.openInventory(createLocationPickerMenu(p, schemeName, true, 0, 0));
+    	} else if (currentItem.getType().equals(Material.BEDROCK)){
+    		// Warp to the spawnpoint, if that is enabled in the cfg. 
+    		if (Settings.general_allowWorldSpawnWarp){
+    			p.sendMessage(tr("\u00a7aTeleporting to World Spawn"));
+    			plugin.getTeleportLogic().spawnTeleport(p, false);
+    		}
     	} else if (currentItem.getType().equals(Material.STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
     		handleScrollbarClick(event, p, currentItem, slotIndex, true, schemeName);
     	} else if (currentItem.getType().equals(Material.SKULL_ITEM)){        
