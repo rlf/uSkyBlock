@@ -123,7 +123,7 @@ public class WorldGuardHandler {
         BlockVector minPoint = getProtectionVectorRight(islandLocation);
         BlockVector maxPoint = getProtectionVectorLeft(islandLocation);
         if (regionName != null && regionName.endsWith("nether")) {
-        	if (Settings.extra_nether_ceiling == false){ // Allow goofing around in the nether
+        	if (Settings.extra_nether_ceiling == true){ // Prevent goofing around in the nether [default behavior, default cfg value]
 	            minPoint = new BlockVector(minPoint.setY(3));
 	            maxPoint = new BlockVector(maxPoint.setY(120));
             }
