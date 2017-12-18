@@ -584,7 +584,7 @@ public class SkyBlockMenu {
         int x, coordX, z, coordZ;
         Location l;
         for (int i = 0; i< MAX_INV_SIZE; i++){
-        	z = (-1 *((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))+ cameraZ;
+        	z = (((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))+ cameraZ;
         	x = (i%COLS_PER_ROW)-midcol + cameraX;
         	if (i%COLS_PER_ROW >= (1) && i%COLS_PER_ROW <= (7) && i < MAX_INV_SIZE-COLS_PER_ROW){        		
 				coordX = x * d;
@@ -674,15 +674,15 @@ public class SkyBlockMenu {
         		// Right top 5 Column here:
         		
         		if (i%COLS_PER_ROW == (8) && i < MAX_INV_SIZE-COLS_PER_ROW){
-        			if (cameraZ == (-1 * ((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
+        			if (cameraZ == (((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
         				addLore(lores, tr("\u00a7aCurrent Z: "+cameraZ));
         			} else {
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
-        				if (cameraZ > (-1 * ((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
-        					addLore(lores, tr("\u00a7aClick to scroll down")); 
+        				if (cameraZ < (((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
+        					addLore(lores, tr("\u00a7aClick to scroll south")); 
         				} else {
-        					addLore(lores, tr("\u00a7aClick to scroll up")); 
+        					addLore(lores, tr("\u00a7aClick to scroll north")); 
         				}
         			}
         			meta = menuItem.getItemMeta();
@@ -701,9 +701,9 @@ public class SkyBlockMenu {
         			} else {
         				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
         				if (cameraX < ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
-        					addLore(lores, tr("\u00a7aClick to scroll right")); 
+        					addLore(lores, tr("\u00a7aClick to scroll east")); 
         				} else {
-        					addLore(lores, tr("\u00a7aClick to scroll left")); 
+        					addLore(lores, tr("\u00a7aClick to scroll west")); 
         				}     				
         			}
         			meta = menuItem.getItemMeta();
@@ -1132,7 +1132,7 @@ public class SkyBlockMenu {
     private void handleScrollbarClick(InventoryClickEvent event, Player p, ItemStack currentItem, int slotIndex, boolean isCreating, String schemename){
     	int cameraX = 0, cameraZ = 0; 
     	int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
-    	int z = -1 *((int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2);
+    	int z = ((int)Math.floor(slotIndex/(COLS_PER_ROW*1.0)) - 2);
     	int x = (slotIndex%COLS_PER_ROW)-midcol;
         if (event.getInventory().getItem(COLS_PER_ROW) != null){
         	ItemMeta camerameta = event.getInventory().getItem(COLS_PER_ROW).getItemMeta();
@@ -1342,24 +1342,27 @@ public class SkyBlockMenu {
             return;
         }
         if ((slotIndex % 9) > 0) { // 0,9... are the rank-headers...
-            p.closeInventory();
+            //p.closeInventory();
             if (currentItem.getItemMeta() != null) {
                 String challenge = currentItem.getItemMeta().getDisplayName();
-                String challengeName = stripFormatting(challenge);
+                String challengeName = stripFormatting(challenge);                
                 p.performCommand("c c " + challengeName);
             }
-            p.openInventory(displayChallengeGUI(p, page));
+            //p.openInventory(displayChallengeGUI(p, page));
+            updateInventory(p, displayChallengeGUI(p, page)); //Simply update this inventory rather than close/reopen
         } else {
             p.closeInventory();
             if (slotIndex < (CHALLENGE_PAGESIZE/2)) { // Upper half
                 if (page > 1) {
                     p.openInventory(displayChallengeGUI(p, page - 1));
                 } else {
+                	p.closeInventory();
                     p.performCommand("island");
                 }
             } else if (page < max) {
                 p.openInventory(displayChallengeGUI(p, page + 1));
             } else {
+            	p.closeInventory();
                 p.performCommand("island");
             }
         }

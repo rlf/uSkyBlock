@@ -130,7 +130,11 @@ public class Challenge {
                 ItemMeta meta = mat.getItemMeta();
                 mat.setItemMeta(meta);
                 mat = NBTUtil.addNBTTag(mat, m.group("meta"));
-                mat.setAmount(amount);
+                if (amount < 64){
+                	mat.setAmount(amount);                	
+                } else {
+                	mat.setAmount(64); //Stacks of more than 64 seem to do odd things, like disappear. 
+                }
                 items.add(mat);
             } else if (!item.matches("[0-9]+") && type != Type.ISLAND_LEVEL) {
                 uSkyBlock.getInstance().getLogger().log(Level.INFO, "Malformed challenge " + name + ", item: " + item + " is not a valid required item");
