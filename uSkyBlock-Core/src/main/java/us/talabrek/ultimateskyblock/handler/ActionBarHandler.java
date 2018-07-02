@@ -3,18 +3,13 @@ package us.talabrek.ultimateskyblock.handler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.handler.actionbarapi.ActionBarAPIAdaptor;
-import us.talabrek.ultimateskyblock.handler.titlemanager.TitleManagerAdaptor;
 
 /**
  * Static handler allowing for soft-depend.
  */
 public enum ActionBarHandler {;
     public static boolean isEnabled() {
-        return isActionBarAPI() || isTitleManager();
-    }
-
-    private static boolean isTitleManager() {
-        return Bukkit.getPluginManager().isPluginEnabled("TitleManager");
+        return isActionBarAPI();
     }
 
     public static boolean isActionBarAPI() {
@@ -25,8 +20,6 @@ public enum ActionBarHandler {;
         try {
             if (isActionBarAPI()) {
                 ActionBarAPIAdaptor.sendActionBar(player, message);
-            } else if (isTitleManager()) {
-                TitleManagerAdaptor.sendActionBar(player, message);
             } else {
                 sendFallback(player, message);
             }

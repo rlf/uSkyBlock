@@ -1671,6 +1671,9 @@ msgstr "§4Этот игрок запретил вам телепортиров�
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4Этот остров §clocked.§e Нет телепортации на остров."
 
+msgid "§4You've hit the hopper limit! You can't have more hoppers!"
+msgstr ""
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cВы достигли предела спавнов на вашем острове."
 

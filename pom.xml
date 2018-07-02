@@ -101,12 +101,6 @@
             <id>bstats-repo</id>
             <url>http://repo.bstats.org/content/repositories/releases/</url>
         </repository>
-<!--
-        <repository>
-            <id>titlemananager-repo</id>
-            <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
-        </repository>
-        -->
     </repositories>
     <pluginRepositories>
         <pluginRepository>

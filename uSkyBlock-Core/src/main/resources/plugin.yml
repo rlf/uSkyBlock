@@ -12,7 +12,6 @@ softdepend:
  - Multiverse-Core
  # optional dependencies
  - ActionBarAPI
- - TitleManager
  # WE/AWE
  - FastAsyncWorldEdit
  - AsyncWorldEdit

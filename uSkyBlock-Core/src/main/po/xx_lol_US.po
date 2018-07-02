@@ -1664,6 +1664,9 @@ msgstr "§4That kitteh haz forbidden you from teleporting to their cathouz."
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4That cathouz  iz §clocked.§e Noe teleporting to teh cathouz."
 
+msgid "§4You've hit the hopper limit! You can't have more hoppers!"
+msgstr ""
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cYou have reached yoor spawn-limit for yoor cathouz."
 

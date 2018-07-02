@@ -1683,6 +1683,9 @@ msgstr "§4Ce joueur vous a interdit de se téléporter à son île."
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4Cette île est §cvérrouillé.§e Impossible de s'y téléporter."
 
+msgid "§4You've hit the hopper limit! You can't have more hoppers!"
+msgstr ""
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cVous avez atteint la limite de spawn de votre île"
 

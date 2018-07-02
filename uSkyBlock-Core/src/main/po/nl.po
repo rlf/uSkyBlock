@@ -1690,6 +1690,9 @@ msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen."
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4Dat eiland is  §cgesloten.§e Er is geen teleport mogelijk."
 
+msgid "§4You've hit the hopper limit! You can't have more hoppers!"
+msgstr ""
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
 

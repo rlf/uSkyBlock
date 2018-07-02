@@ -1670,6 +1670,9 @@ msgstr "§4그 플레이어가 그들의 섬으로 당신이 텔레포트하는 
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4그 섬은 §c잠겼습니다.§e 그 섬으로 텔레포트 할 수 없습니다."
 
+msgid "§4You've hit the hopper limit! You can't have more hoppers!"
+msgstr ""
+
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§c당신은 당신 섬에서의 spawn제한에 다다랐습니다."
 
