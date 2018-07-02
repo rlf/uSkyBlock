@@ -6,6 +6,7 @@ import dk.lockfuglsang.minecraft.command.Command;
 import dk.lockfuglsang.minecraft.command.CommandManager;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -30,7 +31,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
@@ -241,7 +241,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }, getConfig().getLong("init.initDelay", 50L));
         try {
             Metrics metrics = new Metrics(this);
-            metrics.start();
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }

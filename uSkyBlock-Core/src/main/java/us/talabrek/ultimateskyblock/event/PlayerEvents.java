@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -52,6 +53,7 @@ public class PlayerEvents implements Listener {
     private final uSkyBlock plugin;
     private final boolean visitorFallProtected;
     private final boolean visitorFireProtected;
+    private final boolean visitorMonsterProtected;
     private final boolean protectLava;
     private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
     private final int hopperlimit;
@@ -60,6 +62,7 @@ public class PlayerEvents implements Listener {
         this.plugin = plugin;
         visitorFallProtected = plugin.getConfig().getBoolean("options.protection.visitors.fall", true);
         visitorFireProtected = plugin.getConfig().getBoolean("options.protection.visitors.fire-damage", true);
+        visitorMonsterProtected = plugin.getConfig().getBoolean("options.protection.visitors.monster-damage", false);
         protectLava = plugin.getConfig().getBoolean("options.protection.protect-lava", true);
         hopperlimit = plugin.getConfig().getInt("options.island.hopperlimit", 10);
     }
@@ -172,7 +175,7 @@ public class PlayerEvents implements Listener {
         if (!Settings.island_allowPvP
                 && ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
                 || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
-                && event.getEntity() instanceof Player
+                && (event.getEntity() instanceof Player || (visitorMonsterProtected && event.getEntity() instanceof Monster))
                 && !plugin.playerIsOnIsland((Player) event.getEntity())) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);

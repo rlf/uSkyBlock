@@ -178,6 +178,9 @@ options:
       # Whether or not visitors are protected from fire damage (incl. lava)
       fire-damage: true
 
+      # Whether or not visitors are protected from monster damage
+      monster-damage: false
+
       # Whether or not visitors should be allowed to drop items
       item-drops: true
 
@@ -435,7 +438,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 61
+version: 62
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

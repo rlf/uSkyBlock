@@ -20,6 +20,9 @@
         <travis.buildNumber>dev</travis.buildNumber>
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
+        <!-- necessary for intellij to function -->
+        <maven.compiler.source>10</maven.compiler.source>
+        <maven.compiler.target>10</maven.compiler.target>
     </properties>
 
     <modules>
@@ -48,8 +51,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.3</version>
                     <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>10</source>
+                        <target>10</target>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -83,8 +86,8 @@
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository>
-            <id>sk89q-maven</id>
-            <url>http://maven.sk89q.com/artifactory/repo/</url>
+            <id>sk89q-repo</id>
+            <url>http://maven.sk89q.com/repo/</url>
         </repository>
         <repository>
             <id>sk89q-mvn2</id>
@@ -95,9 +98,15 @@
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
         <repository>
+            <id>bstats-repo</id>
+            <url>http://repo.bstats.org/content/repositories/releases/</url>
+        </repository>
+<!--
+        <repository>
             <id>titlemananager-repo</id>
             <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
         </repository>
+        -->
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -138,13 +147,35 @@
         <profile>
             <id>wg611</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
                     <groupId>com.sk89q</groupId>
                     <artifactId>worldguard</artifactId>
                     <version>6.1.1-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>worldedit</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>wg62</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q.worldguard</groupId>
+                    <artifactId>worldguard-legacy</artifactId>
+                    <version>6.2</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>

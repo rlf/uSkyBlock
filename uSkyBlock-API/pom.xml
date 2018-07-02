@@ -26,8 +26,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.3</version>
                     <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>10</source>
+                        <target>10</target>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -46,9 +46,24 @@
     </repositories>
     <profiles>
         <profile>
-            <id>1.11</id>
+            <id>1.12.2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency> <!-- Bukkit implementation -->
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.12.2-R0.1-SNAPSHOT</version>
+                    <optional>true</optional>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>1.11</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->
