@@ -9,7 +9,7 @@
 
     <properties>
         <api.version>2.7.3</api.version>
-        <bukkit-utils.version>1.15</bukkit-utils.version>
+        <bukkit-utils.version>1.17</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.6</vault.version>
@@ -21,8 +21,8 @@
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
         <!-- necessary for intellij to function -->
-        <maven.compiler.source>10</maven.compiler.source>
-        <maven.compiler.target>10</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <modules>
@@ -51,8 +51,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.3</version>
                     <configuration>
-                        <source>10</source>
-                        <target>10</target>
+                        <source>1.8</source>
+                        <target>1.8</target>
                     </configuration>
                 </plugin>
                 <plugin>

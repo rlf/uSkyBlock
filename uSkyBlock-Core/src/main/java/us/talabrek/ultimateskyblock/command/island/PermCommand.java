@@ -14,7 +14,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class PermCommand extends RequireIslandCommand {
     public PermCommand(uSkyBlock plugin) {
-        super(plugin, "perm", null, "member ?perm", tr("changes a members island-permissions"));
+        super(plugin, "perm", "usb.island.perm", "member ?perm", tr("changes a members island-permissions"));
     }
 
     @Override

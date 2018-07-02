@@ -55,21 +55,18 @@ public class FAWEAdaptor implements AWEAdaptor {
 
     @Override
     public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
-        plugin.async(new Runnable() {
-            @Override
-            public void run() {
-                boolean noAir = false;
-                boolean entities = true;
-                Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
-                EditSession editSession = getEditSession(playerPerk, origin);
-                try {
-                    SchematicFormat.getFormat(file)
-                            .load(file)
-                            .paste(editSession, to, noAir, entities);
-                    editSession.flushQueue();
-                } catch (MaxChangedBlocksException | IOException | DataException e) {
-                    log.log(Level.INFO, "Unable to paste schematic " + file, e);
-                }
+        plugin.async(() -> {
+            boolean noAir = false;
+            boolean entities = true;
+            Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+            EditSession editSession = getEditSession(playerPerk, origin);
+            try {
+                SchematicFormat.getFormat(file)
+                        .load(file)
+                        .paste(editSession, to, noAir, entities);
+                editSession.flushQueue();
+            } catch (MaxChangedBlocksException | IOException | DataException e) {
+                log.log(Level.INFO, "Unable to paste schematic " + file, e);
             }
         });
     }
@@ -105,16 +102,13 @@ public class FAWEAdaptor implements AWEAdaptor {
     @Override
     public void regenerate(final Region region, final Runnable onCompletion) {
         // NOTE: Running this asynchronous MIGHT be a bit dangereous! Since pasting could interfere
-        plugin.async(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    EditSession editSession = createEditSession(region.getWorld(), -1);
-                    editSession.getWorld().regenerate(region, editSession);
-                    editSession.flushQueue();
-                } finally {
-                    onCompletion.run();
-                }
+        plugin.async(() -> {
+            try {
+                EditSession editSession = createEditSession(region.getWorld(), -1);
+                editSession.getWorld().regenerate(region, editSession);
+                editSession.flushQueue();
+            } finally {
+                onCompletion.run();
             }
         });
     }

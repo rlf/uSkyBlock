@@ -53,6 +53,7 @@ permissions:
       usb.island.level: true
       usb.island.limit: true
       usb.island.log: true
+      usb.island.perm: true
       usb.island.restart: true
       usb.island.sethome: true
       usb.island.signs.place: true
