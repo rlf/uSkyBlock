@@ -12,7 +12,7 @@
     <artifactId>uSkyBlock-Plugin</artifactId>
 
     <build>
-        <finalName>uSkyBlock-${project.version}</finalName>
+        <finalName>uSkyBlock</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
