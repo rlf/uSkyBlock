@@ -33,11 +33,6 @@ public class NullPlayer implements OfflinePlayer {
     }
 
     @Override
-    public void setBanned(boolean b) {
-
-    }
-
-    @Override
     public boolean isWhitelisted() {
         return true;
     }
