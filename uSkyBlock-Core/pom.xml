@@ -449,6 +449,12 @@
         </dependency>
         <dependency>
             <groupId>dk.lockfuglsang.minecraft</groupId>
+            <artifactId>bukkit-utils</artifactId>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
+        <dependency>
+            <groupId>dk.lockfuglsang.minecraft</groupId>
             <artifactId>po-utils</artifactId>
         </dependency>
         <dependency>
