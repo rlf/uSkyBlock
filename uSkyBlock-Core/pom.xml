@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <artifactId>uSkyBlock-Core</artifactId>
-
     <build>
         <plugins>
             <plugin>
@@ -263,9 +262,24 @@
             </build>
         </profile>
         <profile>
-            <id>1.11</id>
+            <id>1.12</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency> <!-- Bukkit implementation -->
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.12.2-R0.1-SNAPSHOT</version>
+                    <optional>true</optional>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>1.11</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->
@@ -441,13 +455,6 @@
             <groupId>com.github.rlf</groupId>
             <artifactId>uSkyBlock-API</artifactId>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>net.milkbowl.vault</groupId>
-            <artifactId>Vault</artifactId>
-            <optional>true</optional>
-        </dependency>
-        -->
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>

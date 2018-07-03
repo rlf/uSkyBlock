@@ -45,7 +45,7 @@
     </repositories>
     <profiles>
         <profile>
-            <id>1.12.2</id>
+            <id>1.12</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -94,6 +94,9 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
+            <properties>
+                <bukkit-version>1.9</bukkit-version>
+            </properties>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->
                     <groupId>org.bukkit</groupId>
