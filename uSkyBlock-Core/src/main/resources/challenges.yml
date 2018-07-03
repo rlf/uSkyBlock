@@ -725,7 +725,7 @@ ranks:
         - '64:30'
         requiredEntities:
         - 'Villager:10'
-        - 'IRON_GOLEM:1'
+        - 'VILLAGER_GOLEM:1'
         reward:
           text: 2 gold blocks, 1 diamond block
           items:
