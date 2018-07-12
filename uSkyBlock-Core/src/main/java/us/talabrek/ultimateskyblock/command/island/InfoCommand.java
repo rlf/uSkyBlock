@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.model.BlockScore;
 import us.talabrek.ultimateskyblock.async.Callback;
@@ -27,6 +28,10 @@ public class InfoCommand extends RequireIslandCommand {
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
         if (!Settings.island_useIslandLevel) {
             player.sendMessage(tr("\u00a74Island level has been disabled, contact an administrator."));
+            return true;
+        }
+        if (player.hasMetadata("usb.island.info.active")) {
+            player.sendMessage(tr("\u00a74Hold your horses! \u00a7eYou have to be patient..."));
             return true;
         }
         if (args.length == 0 || (args.length == 1 && args[0].matches("\\d*"))) {
@@ -81,16 +86,15 @@ public class InfoCommand extends RequireIslandCommand {
                         player.sendMessage(tr("\u00a7aIsland level is {0,number,###.##}", getState().getScore()));
                     }
                 }
+                player.removeMetadata("usb.island.info.active", plugin);
             }
         };
-        plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    plugin.calculateScoreAsync(player, playerInfo.locationForParty(), showInfo);
-                } catch (Exception e) {
-                    LogUtil.log(Level.SEVERE, "Error while calculating Island Level", e);
-                }
+        plugin.sync(() -> {
+            try {
+                player.setMetadata("usb.island.info.active", new FixedMetadataValue(plugin, Boolean.TRUE));
+                plugin.calculateScoreAsync(player, playerInfo.locationForParty(), showInfo);
+            } catch (Exception e) {
+                LogUtil.log(Level.SEVERE, "Error while calculating Island Level", e);
             }
         }, 1L);
         return true;

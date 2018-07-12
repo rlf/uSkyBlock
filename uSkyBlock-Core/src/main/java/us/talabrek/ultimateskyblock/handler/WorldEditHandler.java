@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.handler;
 
-import com.sk89q.worldedit.BlockVector2D;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
@@ -33,8 +32,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,8 +86,8 @@ public class WorldEditHandler {
         cz = maxZ & 0xF;
         maxX = cx != 15 ? maxX - cx : maxX;
         maxZ = cz != 15 ? maxZ - cz : maxZ;
-        for (int x = minX; x < maxX; x+=16) {
-            for (int z = minZ; z < maxZ; z+=16) {
+        for (int x = minX; x < maxX; x += 16) {
+            for (int z = minZ; z < maxZ; z += 16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));
             }
         }
@@ -109,8 +108,8 @@ public class WorldEditHandler {
         cz = maxZ & 0xF;
         maxX = cx != 15 ? maxX - cx + 16 : maxX;
         maxZ = cz != 15 ? maxZ - cz + 16 : maxZ;
-        for (int x = minX; x < maxX; x+=16) {
-            for (int z = minZ; z < maxZ; z+=16) {
+        for (int x = minX; x < maxX; x += 16) {
+            for (int z = minZ; z < maxZ; z += 16) {
                 chunks.add(new Vector2D(x >> 4, z >> 4));
             }
         }
@@ -199,30 +198,38 @@ public class WorldEditHandler {
         if (minModX != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(minX, minY, minZ),
-                    new Vector(minChunkX-1, maxY, maxZ)));
+                    new Vector(minChunkX - 1, maxY, maxZ)));
         }
         if (maxModZ != 15 && maxModZ != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(minChunkX, minY, maxChunkZ+1),
+                    new Vector(minChunkX, minY, maxChunkZ + 1),
                     new Vector(maxChunkX, maxY, maxZ)));
         }
         if (maxModX != 15 && maxModX != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(maxChunkX+1, minY, minZ),
+                    new Vector(maxChunkX + 1, minY, minZ),
                     new Vector(maxX, maxY, maxZ)));
         }
         if (minModZ != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
                     new Vector(minChunkX, minY, minZ),
-                    new Vector(maxChunkX, maxY, minChunkZ-1)));
+                    new Vector(maxChunkX, maxY, minChunkZ - 1)));
         }
         return borders;
     }
 
     public static void clearIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
         log.finer("Clearing island " + region);
+        uSkyBlock plugin = uSkyBlock.getInstance();
         final long t = System.currentTimeMillis();
         final Region cube = getRegion(skyWorld, region);
+        Runnable onCompletion = () -> {
+            long diff = System.currentTimeMillis() - t;
+            LogUtil.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+            if (afterDeletion != null) {
+                afterDeletion.run();
+            }
+        };
         Set<Vector2D> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
@@ -235,27 +242,26 @@ public class WorldEditHandler {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
         }
-        Runnable onCompletion = new Runnable() {
-            @Override
-            public void run() {
-                long diff = System.currentTimeMillis() - t;
-                LogUtil.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
-                if (afterDeletion != null) {
-                    afterDeletion.run();
-                }
-            }
-        };
         // This stopped performing
         //WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
-        WorldEditClear weRegen = new WorldEditClear(uSkyBlock.getInstance(), skyWorld, borderRegions, onCompletion);
-        WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
-        regen.runTask(uSkyBlock.getInstance());
+        WorldEditClear weRegen = new WorldEditClear(plugin, skyWorld, borderRegions, onCompletion);
+        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
+        regen.runTask(plugin);
     }
 
     public static void clearNetherIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
         log.finer("Clearing island " + region);
         final long t = System.currentTimeMillis();
         final Region cube = getRegion(skyWorld, region);
+        uSkyBlock plugin = uSkyBlock.getInstance();
+        Runnable onCompletion = () -> {
+            long diff = System.currentTimeMillis() - t;
+            LogUtil.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+            if (afterDeletion != null) {
+                afterDeletion.run();
+            }
+        };
+
         Set<Vector2D> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
@@ -268,22 +274,12 @@ public class WorldEditHandler {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
         }
-        Runnable onCompletion = new Runnable() {
-            @Override
-            public void run() {
-                long diff = System.currentTimeMillis() - t;
-                LogUtil.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
-                if (afterDeletion != null) {
-                    afterDeletion.run();
-                }
-            }
-        };
-        WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
-        WorldRegen regen = new WorldRegen(uSkyBlock.getInstance(), skyWorld, innerChunks, weRegen);
-        regen.runTask(uSkyBlock.getInstance());
+        WorldEditRegen weRegen = new WorldEditRegen(plugin, borderRegions, onCompletion);
+        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
+        regen.runTask(plugin);
     }
 
-    private static Region getRegion(World skyWorld, ProtectedRegion region) {
+    public static Region getRegion(World skyWorld, ProtectedRegion region) {
         return new CuboidRegion(new BukkitWorld(skyWorld), region.getMinimumPoint(), region.getMaximumPoint());
     }
 

@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
 import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
@@ -69,13 +70,10 @@ public class WorldEditRegen extends IncrementalRunnable {
     protected boolean execute() {
         while (!regions.isEmpty()) {
             final Region region = regions.remove(0);
-            AsyncWorldEditHandler.regenerate(region, new Runnable() {
-                @Override
-                public void run() {
-                    synchronized (WorldEditRegen.this) {
-                        tasksCompleted++;
-                        log.finer(Thread.currentThread().getName() + ": Completed " + tasksCompleted + " of " + tasksToComplete);
-                    }
+            AsyncWorldEditHandler.regenerate(region, () -> {
+                synchronized (WorldEditRegen.this) {
+                    tasksCompleted++;
+                    log.finer(Thread.currentThread().getName() + ": Completed " + tasksCompleted + " of " + tasksToComplete);
                 }
             });
             if (!tick()) {
