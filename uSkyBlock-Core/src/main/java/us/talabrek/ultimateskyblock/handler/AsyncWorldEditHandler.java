@@ -36,10 +36,6 @@ public enum AsyncWorldEditHandler {;
         adaptor = null;
     }
 
-    public static void registerCompletion(Player player) {
-        getAWEAdaptor().registerCompletion(player);
-    }
-
     public static EditSession createEditSession(World world, int maxblocks) {
         return getAWEAdaptor().createEditSession(world, maxblocks);
     }
