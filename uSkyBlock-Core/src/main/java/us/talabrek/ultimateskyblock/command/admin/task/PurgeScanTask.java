@@ -99,7 +99,7 @@ public class PurgeScanTask extends BukkitRunnable {
     private boolean abandonedSince(Set<UUID> members) {
         for (UUID member : members) {
             Player player = playerDB.getPlayer(member);
-            if (player != null && player.getLastPlayed() > cutOff) {
+            if (player == null || player.getLastPlayed() > cutOff) {
                 return false;
             }
         }
