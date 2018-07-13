@@ -13,6 +13,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -41,7 +42,7 @@ public class SignEvents implements Listener {
                 || (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.LEFT_CLICK_BLOCK)
                 || e.getClickedBlock() == null || e.getClickedBlock().getType() != Material.WALL_SIGN
                 || !(e.getClickedBlock().getState() instanceof Sign)
-                || !hasPermission(e.getPlayer(), "usb.island.signs.use")
+                || !e.getPlayer().hasPermission("usb.island.signs.use")
                 || e.getPlayer() == null || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())
                 || !(plugin.playerIsOnOwnIsland(e.getPlayer()))
                 ) {
@@ -80,18 +81,31 @@ public class SignEvents implements Listener {
                 && wallBlock.getState() instanceof Chest;
     }
 
-    //@EventHandler(priority = EventPriority.MONITOR)
-    //public void onChestClosed(InventoryCloseEvent e) {
-    //    if (e.getPlayer() == null || e.getPlayer().getLocation() == null
-    //            || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
-    //            ) {
-    //        return;
-    //    }
-    //    Location loc = ReflectionUtil.exec(e.getInventory(), "getLocation");
-    //    if (loc != null) {
-    //        logic.updateSignsOnContainer(loc);
-    //    }
-    //}
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onInventoryMovedEvent(InventoryMoveItemEvent e) {
+        if (e.getDestination() == null || e.getDestination().getLocation() == null || !plugin.isSkyAssociatedWorld(e.getDestination().getLocation().getWorld())) {
+            return;
+        }
+        Location loc = e.getDestination().getLocation();
+        if (loc != null) {
+            logic.updateSignsOnContainer(loc);
+        }
+        loc = e.getSource().getLocation();
+        if (loc != null) {
+            logic.updateSignsOnContainer(loc);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onChestClosed(InventoryCloseEvent e) {
+        if (e.getPlayer() == null || e.getPlayer().getLocation() == null || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())) {
+            return;
+        }
+        Location loc = e.getInventory().getLocation();
+        if (loc != null) {
+            logic.updateSignsOnContainer(loc);
+        }
+    }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onSignOrChestBreak(BlockBreakEvent e) {
