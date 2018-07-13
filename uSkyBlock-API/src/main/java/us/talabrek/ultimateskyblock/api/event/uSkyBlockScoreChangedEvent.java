@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.api.event;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import us.talabrek.ultimateskyblock.api.model.IslandScore;
@@ -12,10 +13,12 @@ public class uSkyBlockScoreChangedEvent extends uSkyBlockEvent {
     private static final HandlerList handlers = new HandlerList();
 
     private final IslandScore score;
+    private final Location islandLocation;
 
-    public uSkyBlockScoreChangedEvent(Player player, uSkyBlockAPI api, IslandScore score) {
+    public uSkyBlockScoreChangedEvent(Player player, uSkyBlockAPI api, IslandScore score, Location islandLocation) {
         super(player, api, Cause.SCORE_CHANGED);
         this.score = score;
+        this.islandLocation = islandLocation;
     }
 
     /**
@@ -24,6 +27,10 @@ public class uSkyBlockScoreChangedEvent extends uSkyBlockEvent {
      */
     public IslandScore getScore() {
         return score;
+    }
+
+    public Location getIslandLocation() {
+        return islandLocation;
     }
 
     @Override

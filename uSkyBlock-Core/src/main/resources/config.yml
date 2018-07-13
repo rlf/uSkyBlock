@@ -88,12 +88,6 @@ options:
     # How many entries to remember in the island-log
     log-size: 10
     
-    # How many hoppers are allowed to be placed down on an island
-    hopperlimit: 50
-    
-    # How many mob spawners are allowed to be placed on an island
-    spawnerlimit: 10
-
     # Limits the spawning
     spawn-limits:
       # [true/false] if true, the limits below will limit spawning
@@ -110,6 +104,16 @@ options:
 
       # how many snowmen and iron-golems can be spawned on an island
       golems: 5
+
+    block-limits:
+      # [true/false] if true, the limits below will limit block placement
+      enabled: true
+
+      # How many hoppers are allowed to be placed down on an island
+      hopper: 50
+
+      # How many mob spawners are allowed to be placed on an island
+      mob_spawner: 10
 
     # [permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
     # Only checked if 'addExtraItems' is set to true.
@@ -438,7 +442,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 62
+version: 64
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
@@ -447,3 +451,5 @@ force-replace:
 move-nodes:
   options.restart.confirmation: confirmation.is restart
   options.party.leave.confirmation: confirmation.is leave
+  options.island.hopperlimit: options.island.block-limits.hopper
+  options.island.spawnerlimit: options.island.block-limits.mob_spawner

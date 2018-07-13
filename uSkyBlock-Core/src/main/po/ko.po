@@ -1210,6 +1210,9 @@ msgstr "해당 유저가 다른 섬 정보를 보는것을 허용합니다."
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4섬 레벨이 작동하지 않습니다, 관리자에게 문의하세요."
 
+msgid "§4Hold your horses! §eYou have to be patient..."
+msgstr ""
+
 msgid "§eYou must be on your island to use this command."
 msgstr "§e이 커맨드를 쓰려면 자신의 섬에 있어야 합니다."
 
@@ -1228,6 +1231,10 @@ msgstr "§e{0}의 섬의 블록들(page {1,number} of {2,number}):"
 
 msgid "Score Count Block"
 msgstr "점수 카운트 블록"
+
+#, java-format
+msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgstr ""
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
@@ -1670,7 +1677,19 @@ msgstr "§4그 플레이어가 그들의 섬으로 당신이 텔레포트하는 
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4그 섬은 §c잠겼습니다.§e 그 섬으로 텔레포트 할 수 없습니다."
 
-msgid "§4You've hit the hopper limit! You can't have more hoppers!"
+#, java-format
+msgid ""
+"§4{0} is limited. §eScanning your island to see if you are allowed to place "
+"more, please be patient"
+msgstr ""
+
+msgid "§e... Scanning complete, you can try again"
+msgstr ""
+
+#, java-format
+msgid ""
+"§4You''ve hit the {0} limit!§e You can''t have more of that type on your "
+"island!§9 Max: {1,number}"
 msgstr ""
 
 msgid "§cYou have reached your spawn-limit for your island."
@@ -2699,6 +2718,18 @@ msgstr "§9텍스트 에디터"
 #, java-format
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "너무 많은 Mojangs API 호출 입니다 ({0} within {1}), sleeping {2}"
+
+msgid "§9Not really patient, are you?"
+msgstr ""
+
+msgid "§9Be patient, young padawan"
+msgstr ""
+
+msgid "§9Patience you MUST have, young padawan"
+msgstr ""
+
+msgid "§9The two most powerful warriors are patience and time."
+msgstr ""
 
 msgid "§eSending you to spawn."
 msgstr "§e스폰으로 이동 중 입니다."

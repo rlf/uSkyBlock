@@ -6,7 +6,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
-import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;

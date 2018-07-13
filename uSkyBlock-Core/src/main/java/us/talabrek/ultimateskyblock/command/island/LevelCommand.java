@@ -1,19 +1,17 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandRank;
-import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.island.IslandScore;
+import us.talabrek.ultimateskyblock.island.level.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
-import static dk.lockfuglsang.minecraft.po.I18nUtil.*;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LevelCommand extends RequireIslandCommand {
@@ -81,7 +79,7 @@ public class LevelCommand extends RequireIslandCommand {
             plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    plugin.calculateScoreAsync(player, info.locationForParty(), new Callback<IslandScore>() {
+                    plugin.calculateScoreAsync(player, info.locationForParty(), new Callback<us.talabrek.ultimateskyblock.api.model.IslandScore>() {
                         @Override
                         public void run() {
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 10L);

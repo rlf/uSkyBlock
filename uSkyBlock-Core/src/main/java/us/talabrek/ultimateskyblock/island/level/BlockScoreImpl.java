@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.island;
+package us.talabrek.ultimateskyblock.island.level;
 
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;

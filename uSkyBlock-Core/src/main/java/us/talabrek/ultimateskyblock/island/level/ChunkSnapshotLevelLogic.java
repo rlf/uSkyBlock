@@ -1,11 +1,11 @@
-package us.talabrek.ultimateskyblock.island;
+package us.talabrek.ultimateskyblock.island.level;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
-import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.task.ChunkSnapShotTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;

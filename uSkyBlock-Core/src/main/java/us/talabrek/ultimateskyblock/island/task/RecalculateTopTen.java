@@ -2,8 +2,7 @@ package us.talabrek.ultimateskyblock.island.task;
 
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
-import us.talabrek.ultimateskyblock.async.Callback;
-import us.talabrek.ultimateskyblock.island.IslandScore;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class RecalculateTopTen extends BukkitRunnable {
     public void run() {
         if (!locations.isEmpty()) {
             String islandName = locations.remove(0);
-            plugin.calculateScoreAsync(null, islandName, new Callback<IslandScore>() {
+            plugin.calculateScoreAsync(null, islandName, new Callback<us.talabrek.ultimateskyblock.api.model.IslandScore>() {
                 @Override
                 public void run() {
                     // We use the deprecated on purpose (the other would fail).
@@ -33,7 +32,7 @@ public class RecalculateTopTen extends BukkitRunnable {
                 }
             });
         } else {
-            plugin.fireChangeEvent(new uSkyBlockEvent(null, plugin.getAPI(), uSkyBlockEvent.Cause.RANK_UPDATED));
+            plugin.fireAsyncEvent(new uSkyBlockEvent(null, plugin.getAPI(), uSkyBlockEvent.Cause.RANK_UPDATED));
         }
     }
 }

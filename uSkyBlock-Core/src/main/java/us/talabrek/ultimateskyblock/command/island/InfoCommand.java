@@ -1,13 +1,12 @@
 package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
-import org.bukkit.metadata.FixedMetadataValue;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.api.model.BlockScore;
-import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.island.IslandScore;
+import us.talabrek.ultimateskyblock.player.PatienceTester;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LogUtil;
@@ -28,6 +27,9 @@ public class InfoCommand extends RequireIslandCommand {
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
         if (!Settings.island_useIslandLevel) {
             player.sendMessage(tr("\u00a74Island level has been disabled, contact an administrator."));
+            return true;
+        }
+        if (PatienceTester.isRunning(player, "usb.island.info.active")) {
             return true;
         }
         if (player.hasMetadata("usb.island.info.active")) {
@@ -63,7 +65,7 @@ public class InfoCommand extends RequireIslandCommand {
             return false;
         }
         final PlayerInfo playerInfo = islandPlayer.equals(player.getName()) ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(islandPlayer);
-        final Callback<IslandScore> showInfo = new Callback<IslandScore>() {
+        final Callback<us.talabrek.ultimateskyblock.api.model.IslandScore> showInfo = new Callback<us.talabrek.ultimateskyblock.api.model.IslandScore>() {
             @Override
             public void run() {
                 if (player.isOnline()) {
@@ -79,19 +81,19 @@ public class InfoCommand extends RequireIslandCommand {
                     if (cmd.equalsIgnoreCase("info") && getState() != null) {
                         player.sendMessage(tr("Score Count Block"));
                         for (BlockScore score : getState().getTop((currentPage - 1) * 10, 10)) {
-                            player.sendMessage(score.getState().getColor() + String.format("%05.2f  %d %s",
+                            player.sendMessage(score.getState().getColor() + tr("{0,number,#####.##}  {1,number,#} {2}",
                                     score.getScore(), score.getCount(),
                                     VaultHandler.getItemName(score.getBlock())));
                         }
                         player.sendMessage(tr("\u00a7aIsland level is {0,number,###.##}", getState().getScore()));
                     }
                 }
-                player.removeMetadata("usb.island.info.active", plugin);
+                PatienceTester.stopRunning(player, "usb.island.info.active");
             }
         };
         plugin.sync(() -> {
             try {
-                player.setMetadata("usb.island.info.active", new FixedMetadataValue(plugin, Boolean.TRUE));
+                PatienceTester.startRunning(player, "usb.island.info.active");
                 plugin.calculateScoreAsync(player, playerInfo.locationForParty(), showInfo);
             } catch (Exception e) {
                 LogUtil.log(Level.SEVERE, "Error while calculating Island Level", e);

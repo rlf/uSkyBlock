@@ -1,10 +1,8 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
-import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.command.admin.task.PurgeScanTask;
 import us.talabrek.ultimateskyblock.command.admin.task.PurgeTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;

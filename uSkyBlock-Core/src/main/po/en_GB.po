@@ -1217,6 +1217,9 @@ msgstr "§9* §7allows user to see others island info"
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4* §7Island level has been disabled, contact an administrator."
 
+msgid "§4Hold your horses! §eYou have to be patient..."
+msgstr ""
+
 msgid "§eYou must be on your island to use this command."
 msgstr "§4* §7You must be on your island to use this command."
 
@@ -1235,6 +1238,10 @@ msgstr "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
 
 msgid "Score Count Block"
 msgstr "Score Count Block"
+
+#, java-format
+msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgstr ""
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
@@ -1681,7 +1688,19 @@ msgstr ""
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4* §7That island is §4locked.§7 No teleporting to the island."
 
-msgid "§4You've hit the hopper limit! You can't have more hoppers!"
+#, java-format
+msgid ""
+"§4{0} is limited. §eScanning your island to see if you are allowed to place "
+"more, please be patient"
+msgstr ""
+
+msgid "§e... Scanning complete, you can try again"
+msgstr ""
+
+#, java-format
+msgid ""
+"§4You''ve hit the {0} limit!§e You can''t have more of that type on your "
+"island!§9 Max: {1,number}"
 msgstr ""
 
 msgid "§cYou have reached your spawn-limit for your island."
@@ -2726,6 +2745,18 @@ msgstr "§9Text Editor"
 #, java-format
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "§4* §7Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
+
+msgid "§9Not really patient, are you?"
+msgstr ""
+
+msgid "§9Be patient, young padawan"
+msgstr ""
+
+msgid "§9Patience you MUST have, young padawan"
+msgstr ""
+
+msgid "§9The two most powerful warriors are patience and time."
+msgstr ""
 
 msgid "§eSending you to spawn."
 msgstr "§9* §7Sending you to spawn."

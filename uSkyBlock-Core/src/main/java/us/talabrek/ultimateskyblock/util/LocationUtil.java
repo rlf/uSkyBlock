@@ -12,7 +12,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 
 import java.util.logging.Level;
 import java.util.regex.Matcher;

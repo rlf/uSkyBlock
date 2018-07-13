@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.island;
+package us.talabrek.ultimateskyblock.island.level;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.blocks.BaseBlock;
@@ -7,15 +7,19 @@ import com.sk89q.worldedit.util.Countable;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
-import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AweLevelLogic extends CommonLevelLogic {
+
+    private Set<Location> running = new HashSet<>();
 
     public AweLevelLogic(uSkyBlock plugin, FileConfiguration config) {
         super(plugin, config);
@@ -23,6 +27,10 @@ public class AweLevelLogic extends CommonLevelLogic {
 
     @Override
     public void calculateScoreAsync(Location l, Callback<IslandScore> callback) {
+        if (running.contains(l)) {
+            return;
+        }
+        running.add(l);
         plugin.async(() -> {
             ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(l);
             if (region == null) {
@@ -45,6 +53,7 @@ public class AweLevelLogic extends CommonLevelLogic {
 
             callback.setState(islandScore);
             plugin.sync(callback);
+            running.remove(l);
         });
     }
 }

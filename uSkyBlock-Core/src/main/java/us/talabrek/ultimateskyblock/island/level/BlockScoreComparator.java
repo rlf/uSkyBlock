@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.island;
+package us.talabrek.ultimateskyblock.island.level;
 
 import us.talabrek.ultimateskyblock.api.model.BlockScore;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;

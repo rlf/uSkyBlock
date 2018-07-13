@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.island;
+package us.talabrek.ultimateskyblock.island.level;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;

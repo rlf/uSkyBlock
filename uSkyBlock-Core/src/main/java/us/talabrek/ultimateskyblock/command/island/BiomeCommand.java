@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.task.SetBiomeTask;
