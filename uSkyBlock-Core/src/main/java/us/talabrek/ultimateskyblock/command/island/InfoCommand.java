@@ -81,7 +81,7 @@ public class InfoCommand extends RequireIslandCommand {
                     if (cmd.equalsIgnoreCase("info") && getState() != null) {
                         player.sendMessage(tr("Score Count Block"));
                         for (BlockScore score : getState().getTop((currentPage - 1) * 10, 10)) {
-                            player.sendMessage(score.getState().getColor() + tr("{0,number,#####.##}  {1,number,#} {2}",
+                            player.sendMessage(score.getState().getColor() + tr("{0,number,00.00}  {1,number,#} {2}",
                                     score.getScore(), score.getCount(),
                                     VaultHandler.getItemName(score.getBlock())));
                         }

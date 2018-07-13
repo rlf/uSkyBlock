@@ -1233,7 +1233,7 @@ msgid "Score Count Block"
 msgstr "Score Antal Blok"
 
 #, java-format
-msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgid "{0,number,00.00}  {1,number,#} {2}"
 msgstr ""
 
 #, java-format
