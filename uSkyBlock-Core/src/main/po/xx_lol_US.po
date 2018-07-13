@@ -2727,6 +2727,9 @@ msgstr "§9Text Editor"
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "Too many requests for Mojangs API ({0} wiffin {1}), sleeping {2}"
 
+msgid "§9Hold your horses! You have to be patient..."
+msgstr ""
+
 msgid "§9Not really patient, are you?"
 msgstr ""
 

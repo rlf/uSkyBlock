@@ -2703,6 +2703,9 @@ msgstr "§9Textovy editor"
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "Prilis mnoho pozadavku pro Mojang API ({0} within {1}), sleeping {2}"
 
+msgid "§9Hold your horses! You have to be patient..."
+msgstr ""
+
 msgid "§9Not really patient, are you?"
 msgstr ""
 

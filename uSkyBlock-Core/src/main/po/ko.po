@@ -2719,6 +2719,9 @@ msgstr "§9텍스트 에디터"
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "너무 많은 Mojangs API 호출 입니다 ({0} within {1}), sleeping {2}"
 
+msgid "§9Hold your horses! You have to be patient..."
+msgstr ""
+
 msgid "§9Not really patient, are you?"
 msgstr ""
 
