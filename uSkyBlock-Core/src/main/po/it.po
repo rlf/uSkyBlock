@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2017-03-26 17:50+0100\n"
+"PO-Revision-Date: 2018-07-14 23:52+0200\n"
 "Last-Translator: Leomixer17\n"
 "Language-Team: Rublitio\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -282,7 +283,7 @@ msgid "§cSorry! {0}"
 msgstr "§4* §7Scusa! {0}"
 
 msgid "Either send a message directly to your group, or toggle it on/off."
-msgstr "Invia un messaggio direttamente al tuo gruppo, o impostalo on/off"
+msgstr "Invia un messaggio direttamente al tuo gruppo, o impostalo on/off."
 
 msgid "party"
 msgstr "party"
@@ -382,7 +383,7 @@ msgstr ""
 "§4* §7Usa §a/usb island delete <nome>§7 per cancellarla."
 
 msgid "removes the player from the island"
-msgstr "rimuove il giocatore dall''isola"
+msgstr "rimuove il giocatore dall’isola"
 
 msgid "adds the player to the island"
 msgstr "aggiunge il giocatore all''isola"
@@ -776,26 +777,28 @@ msgid "§4You must provide the age in days to purge!"
 msgstr "§4* §7Devi fornire l''età in giorni per ripulire!"
 
 msgid "§4The level must be a valid number"
-msgstr ""
+msgstr "§4Il livello deve essere un numero valido"
 
 #, java-format
 msgid ""
 "§eFinding all islands that has been abandoned for more than {0} days below "
 "level {1}"
 msgstr ""
+"§eRicerca in corso di tutte le isole che sono state abbandonate da più di "
+"{0} giorni sotto il livello {1}"
 
 #, java-format
 msgid "§4PURGE:§e Do §9/usb purge confirm§e within {0} to accept."
-msgstr ""
+msgstr "§4PULIZIA:§e Fai §9/usb purge confirm§e entro {0} per accettare."
 
 msgid "§4Trying to abort purge"
-msgstr "§4* §7Provando ad abortire la pulizia"
+msgstr "§4* §7Provando ad interrompere la pulizia"
 
 msgid "§4Purge aborted!"
-msgstr ""
+msgstr "§4Pulizia interrotta!"
 
 msgid "§4A purge is already running.§e Either §9confirm§e or §9stop§e it."
-msgstr ""
+msgstr "§4Una pulizia è già in esecuzione.§e O §9confermala§e o §9interrompila§e."
 
 msgid "§4Starting purge..."
 msgstr "§4* §7Avviando la pulizia..."
@@ -842,10 +845,10 @@ msgstr "imposta un''isola del giocatore alla tua posizione"
 
 #, java-format
 msgid "§aSet {0}'s island to the current island."
-msgstr ""
+msgstr "§aImpostata l’isola di {0} a quella attuale."
 
 msgid "§4Island not found: unable to set the island!"
-msgstr ""
+msgstr "§4Isola non trovata: impossibile impostare l'isola!"
 
 msgid "reload configuration from file."
 msgstr "ricarica la configurazione dal file."
@@ -908,7 +911,9 @@ msgstr "§4* PULIZIA:§7 Scansione interrotta."
 msgid ""
 "§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
 "purgatory."
-msgstr ""
+ msgstr ""
+ "§4PULIZIA:§9 Scansione completata, trovati {0} candidati, sotto il livello {1}, pronti per "
+"la pulizia."
 
 #, java-format
 msgid ""
@@ -1240,7 +1245,7 @@ msgstr ""
 "§4* §7Il livello delle isole è disabilito, contatta una amministratore."
 
 msgid "§4Hold your horses! §eYou have to be patient..."
-msgstr ""
+msgstr "§4Frena i cavalli! §eDevi essere paziente..."
 
 msgid "§eYou must be on your island to use this command."
 msgstr "§4* §7Devi essere sulla tua isola per usare questo comando."
@@ -1263,7 +1268,7 @@ msgstr "Blocco Conto Punteggi"
 
 #, java-format
 msgid "{0,number,00.00}  {1,number,#} {2}"
-msgstr ""
+msgstr "{0,number,00.00}  {1,number,#} {2}"
 
 #, java-format
 msgid "§aIsland level is {0,number,###.##}"
@@ -1723,15 +1728,19 @@ msgid ""
 "§4{0} is limited. §eScanning your island to see if you are allowed to place "
 "more, please be patient"
 msgstr ""
+"§4{0} è limitato. §eScansione della tua isola in corso per vedere se puoi "
+"piazzarne ancora, sii paziente"
 
 msgid "§e... Scanning complete, you can try again"
-msgstr ""
+msgstr "§e... Scansione completata, puoi provare di nuovo"
 
 #, java-format
 msgid ""
 "§4You''ve hit the {0} limit!§e You can''t have more of that type on your "
 "island!§9 Max: {1,number}"
 msgstr ""
+"§4Hai raggiunto il limite di {0}!§e Non puoi averne più di quel tipo sulla "
+"tua isola!§9 Max: {1,number}"
 
 msgid "§cYou have reached your spawn-limit for your island."
 msgstr "§4* §7Hai raggiunto il tuo limite di spawn per la tua isola."
@@ -2489,10 +2498,10 @@ msgstr ""
 "§7({0})"
 
 msgid "§a§lReturn to Spawn"
-msgstr ""
+msgstr "§a§lRitorna allo Spawn"
 
 msgid "Teleport to the spawn area."
-msgstr ""
+msgstr "Teletrasportati allo spawn."
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lUnisciti ad un''Isola"
@@ -2788,19 +2797,19 @@ msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "§4* §7Troppe richieste alle API Mojang ({0} entro {1}), dormendo {2}"
 
 msgid "§9Hold your horses! You have to be patient..."
-msgstr ""
+msgstr "§9Frena i cavalli! Devi essere paziente..."
 
 msgid "§9Not really patient, are you?"
-msgstr ""
+msgstr "§9Non molto paziente, vero?"
 
 msgid "§9Be patient, young padawan"
-msgstr ""
+msgstr "§9Sii paziente, giovane padawan"
 
 msgid "§9Patience you MUST have, young padawan"
-msgstr ""
+msgstr "§9Pazienza DEVI avere, giovane padawan"
 
 msgid "§9The two most powerful warriors are patience and time."
-msgstr ""
+msgstr "§9I due guerrieri più potenti sono la pazienza e il tempo."
 
 msgid "§eSending you to spawn."
 msgstr "§9* §7Inviandoti allo spawn."
