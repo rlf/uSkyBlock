@@ -11,6 +11,9 @@
     <packaging>jar</packaging>
     <artifactId>uSkyBlock-Plugin</artifactId>
 
+    <properties>
+        <github.global.server>github</github.global.server>
+    </properties>
     <build>
         <finalName>uSkyBlock</finalName>
         <plugins>
