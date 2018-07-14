@@ -1,5 +1,6 @@
 box: openjdk:8-jdk
 
+# Trying to get wercker to do what travis won't
 build:
   steps:
     - script:
