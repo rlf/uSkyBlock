@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.api.async;
 
 /**
  * Runnable with state.
- * @since v2.7.3
+ * @since v2.7.4
  */
 public abstract class Callback<T> implements Runnable {
     private volatile T state;

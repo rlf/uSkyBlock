@@ -29,6 +29,11 @@ public class uSkyBlockScoreChangedEvent extends uSkyBlockEvent {
         return score;
     }
 
+    /**
+     * Returns the island location
+     * @return the island location
+     * @since v2.7.4
+     */
     public Location getIslandLocation() {
         return islandLocation;
     }

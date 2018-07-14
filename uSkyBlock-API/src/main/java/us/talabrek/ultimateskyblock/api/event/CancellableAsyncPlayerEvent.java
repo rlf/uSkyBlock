@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerEvent;
 
 /**
  * Common event for PlayerEvents that can be cancelled (async).
- * @since 2.7.3
+ * @since 2.7.4
  */
 public abstract class CancellableAsyncPlayerEvent extends Event implements Cancellable {
     private boolean cancelled = false;

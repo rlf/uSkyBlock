@@ -7,7 +7,7 @@ import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.api.model.IslandScore;
 
 /**
- * @since v2.7.3
+ * @since v2.7.4
  */
 public class IslandInfoEvent extends CancellableAsyncPlayerEvent {
     private static final HandlerList handlers = new HandlerList();
