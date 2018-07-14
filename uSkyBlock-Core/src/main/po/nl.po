@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-10-14 14:34+0100\n"
-"Last-Translator: dutchy1001\n"
-"Language-Team: Debocraft\n"
+"PO-Revision-Date: 2018-07-14 21:50+0100\n"
+"Last-Translator: clrxbl\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,7 @@ msgstr "slaat de documentatie van het commando op naar een bestand"
 
 #, java-format
 msgid "Wrote documentation to {0}"
-msgstr "Opgelagen documentatie naar {0} geschreven"
+msgstr "Opgeslagen documentatie naar {0} geschreven"
 
 #, java-format
 msgid "§4Error writing documentation: {0}"
@@ -83,7 +83,7 @@ msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
 msgid "§4You can complete this {0} more time(s)."
-msgstr ""
+msgstr "§4Je kan dit nog {0} keer voltooien."
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -98,19 +98,19 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4De vereisten worden teruggezet in {0} minuten."
 
 msgid "§4This challenge is currently unavailable."
-msgstr ""
+msgstr "§4Deze uitdaging is momenteel niet beschikbaar"
 
 #, java-format
 msgid "§4You can complete this again in {0} days."
-msgstr ""
+msgstr "§4Je kan dit opnieuw voltooien in {0} dagen."
 
 #, java-format
 msgid "§4You can complete this again in {0} hours."
-msgstr ""
+msgstr "§4Je kan dit opnieuw voltooien in {0} uren."
 
 #, java-format
 msgid "§4You can complete this again in {0} minutes."
-msgstr ""
+msgstr "§4Je kan dit opnieuw voltooien in {0} minuten."
 
 msgid "§eThis challenge requires:"
 msgstr "§eDeze uitdaging vereist:"
@@ -161,7 +161,7 @@ msgstr "§4De {0} uitdaging kan niet herhaald worden!"
 
 #, java-format
 msgid "§4You cannot complete the {0} challenge again yet!"
-msgstr ""
+msgstr "§4Je kan de {0} challenge nog niet opnieuw voltooien!"
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -234,7 +234,7 @@ msgstr "§4§lJe kan deze uitdaging niet herhalen."
 
 #, java-format
 msgid "Rank: {0}"
-msgstr "Rank: {0}"
+msgstr "Rang: {0}"
 
 msgid "§fComplete most challenges in"
 msgstr "§fVoltooi de meeste uitdagingen in"
@@ -266,7 +266,7 @@ msgid "But you are ALLLLLLL ALOOOOONE!"
 msgstr "Maar je bent HELEMAAAAAL ALLEEEEEEN!!"
 
 msgid "But you are Yelling in the wind!"
-msgstr "Maar je Schreeuwen tegen de wind in!"
+msgstr "Maar je bent in de wind aan het Schreeuwen!"
 
 msgid "But your fantasy friends are gone!"
 msgstr "Maar je fantasie vrienden zijn verdwenen!"
@@ -279,7 +279,7 @@ msgid "§cSorry! {0}"
 msgstr "§cSorry! {0}"
 
 msgid "Either send a message directly to your group, or toggle it on/off."
-msgstr "Stuur een bericht direct naar uw groep, of schakelen het aan/uit."
+msgstr "Stuur een bericht direct naar je groep, of schakel het aan/uit."
 
 msgid "party"
 msgstr "party"
@@ -289,7 +289,7 @@ msgstr "eiland"
 
 #, java-format
 msgid "§cToggled chat to {0} §aON"
-msgstr "§cSchakel chat {0} §aAAN"
+msgstr "§cChat geschakeld naar {0} §aAAN"
 
 #, java-format
 msgid "§cRepeat §9{0}§c to toggle it off"
@@ -327,7 +327,7 @@ msgstr "§4De uitdaging is nog nooit voltooid"
 
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
-msgstr "§ede uitdaging: {0} is gereset voor {1}"
+msgstr "§euitdaging: {0} is gereset naar {1}"
 
 msgid "resets all challenges for the player"
 msgstr "reset alle uitdagingen voor een speler"
@@ -337,7 +337,7 @@ msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} heeft al zijn uitdagingen laten resetten."
 
 msgid "complete all challenges in the rank"
-msgstr "Voltooi alle uitdagingen in deze groep"
+msgstr "voltooi alle uitdagingen in deze groep"
 
 #, java-format
 msgid "§4Challenge {0} has already been completed"
@@ -345,7 +345,7 @@ msgstr "§4De {0} uitdaging is al voltooid"
 
 #, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§eDe {0} uitdaging is volbracht door {1}"
+msgstr "§eDe {0} uitdaging is voltooid voor {1}"
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
@@ -357,7 +357,7 @@ msgstr "§4De speler met de naam {0} kan niet worden gevonden!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§4Geen ranking naam {0} gevonden!"
+msgstr "§4Geen rang genaamd {0} gevonden!"
 
 msgid "manage islands"
 msgstr "beheer de eilanden"
@@ -369,7 +369,7 @@ msgid "delete the island (removes the blocks)"
 msgstr "verwijder het eiland (dit verwijderd ook de blokken)"
 
 msgid "§9Deleted abandoned island at your current location."
-msgstr "§9Verwijderde het verlaten eiland op je lokatie."
+msgstr "§9Het verlaten eiland op je huidige locatie is verwijderd."
 
 msgid ""
 "§4Island at this location has members!\n"
@@ -382,11 +382,11 @@ msgid "removes the player from the island"
 msgstr "verwijderd de speler van het eiland"
 
 msgid "adds the player to the island"
-msgstr "voegt de spaeler aan het eiland toe"
+msgstr "voegt de speler toe aan het eiland"
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
-msgstr "§b{0}§d heeft zich aangesloten bij uw eiland."
+msgstr "§b{0}§d heeft zich aangesloten bij je eiland groep."
 
 #, java-format
 msgid "§4No player named {0} found!"
@@ -403,7 +403,7 @@ msgid "print out info about the island"
 msgstr "geeft informatie over het eiland"
 
 msgid "sets the biome of the island"
-msgstr "set het biome van het eiland"
+msgstr "zet de biome van het eiland"
 
 msgid "§4That player has no island."
 msgstr "§4Die speler heeft geen eiland."
@@ -412,10 +412,10 @@ msgid "§4No valid island at your location"
 msgstr "§4Er is geen geldig eiland op jouw locatie"
 
 msgid "purges the island"
-msgstr "verwijderd het eiland"
+msgstr "verwijdert het eiland"
 
 msgid "§4Error! §9No valid island found for purging."
-msgstr "§4Error! §9Er  is geen geldig eiland gevonden om te verwijderen."
+msgstr "§4Error! §9Er is geen geldig eiland gevonden om te verwijderen."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
@@ -426,7 +426,7 @@ msgstr "het eiland op slot zetten."
 
 #, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§cSet {0}'s eiland op de negeer lijst van verwijderen en de top-tien."
+msgstr "§cZet {0}'s eiland op de negeerlijst van verwijderen en de top-tien."
 
 #, java-format
 msgid ""
@@ -437,7 +437,7 @@ msgstr ""
 "lijst en kan verwijderd worden."
 
 msgid "§4No valid player-name supplied."
-msgstr "§4Geen geldige spelers-naam ingevoerd"
+msgstr "§4Geen geldige speler-naam ingevoerd"
 
 #, java-format
 msgid "Removing {0} from island"
@@ -445,15 +445,14 @@ msgstr "{0} is van het eiland verwijderd"
 
 #, java-format
 msgid "§eChanged biome of {0}s island to {1}."
-msgstr "§eHet biome van {0}s eiland is veranderd naar {1}."
+msgstr "§eDe biome van {0}s eiland is veranderd naar {1}."
 
 #, java-format
 msgid "§eChanged biome of {0}s island to OCEAN."
-msgstr "§eHet biome van {0}s eiland is veranderd naar OCEAN."
+msgstr "§eDe biome van {0}s eiland is veranderd naar OCEAN."
 
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
-msgstr ""
-"§aJe moet reloggen of terug naar spawn gaan om de verandering te kunnen zien"
+msgstr "§aJe moet reloggen of terug naar spawn gaan om de verandering te kunnen zien"
 
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
@@ -465,21 +464,21 @@ msgstr "§e{0} heeft zijn/haar biome veranderd naar OCEAN."
 
 #, java-format
 msgid "§eRemoving {0}'s island."
-msgstr "§eVerwijderd {0}'s eiland."
+msgstr "§e{0}'s eiland wordt verwijderd."
 
 msgid "Error: That player does not have an island!"
-msgstr "Error: Die speller heeft geen eiland!"
+msgstr "Error: Die speler heeft geen eiland!"
 
 #, java-format
 msgid "§e{0}s island at {1} has been protected"
-msgstr "§e{0}s eiland op {1} is nu beveiliging"
+msgstr "§e{0}s eiland op {1} is nu beschermd"
 
 #, java-format
 msgid "§4{0}s island at {1} was already protected"
-msgstr "§4{0}s eiland op {1} is al beveiligd"
+msgstr "§4{0}s eiland op {1} is al beschermd"
 
 msgid "open GUI for config"
-msgstr "open de GUI voor de config"
+msgstr "open de GUI voor de configuratie"
 
 msgid "§eInvalid configuration name"
 msgstr "§eOngeldige configuratie naam"
@@ -488,34 +487,34 @@ msgid "Controls player-cooldowns"
 msgstr "Beheert de player-cooldowns"
 
 msgid "clears the cooldown on a command (* = all)"
-msgstr "reset de cooldown met een commando (* = alle)"
+msgstr "reset de cooldown op een command (* = alle)"
 
 msgid "§eThe player is not currently online"
 msgstr "§eDe speler is niet online"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
-msgstr "Afkoelingsperiode gewist op {0} voor {1}"
+msgstr "Cooldownperiode gewist op {0} voor {1}"
 
 #, java-format
 msgid "No active cooldown on {0} for {1} detected!"
-msgstr "Geen actieve afkoelperiode gevonden voor {1} op {0}!"
+msgstr "Geen actieve cooldownperiode gevonden voor {1} op {0}!"
 
 msgid "Invalid command supplied, only restart and biome supported!"
-msgstr "Ongeldig commando, alleen opnieuw starten en biome is ondersteund!"
+msgstr "Ongeldig command, alleen opnieuw starten en biome is ondersteund!"
 
 msgid "restarts the cooldown on the command"
 msgstr "reset de cooldown met het command"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
-msgstr "§eReset afkoelperiode op {0} voor {1} §e naar {2} seconden"
+msgstr "§eReset cooldownperiode op {0} voor {1} §e naar {2} seconden"
 
 msgid "lists all the active cooldowns"
 msgstr "lijst van alle actieve cooldowns"
 
 msgid "§eCmd Cooldown"
-msgstr "§eCmd afkoelperiode"
+msgstr "§eCmd Cooldownperiode"
 
 #, java-format
 msgid "§a{0} §c{1}"
@@ -523,7 +522,7 @@ msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eNo active cooldowns for §9{0}§e found."
-msgstr "§eEr zijn geen actieve afkoelperiodes voor §9{0}§e gevonden."
+msgstr "§eEr zijn geen actieve cooldownperiodes voor §9{0}§e gevonden."
 
 msgid "control debugging"
 msgstr "debugging controle"
@@ -532,16 +531,16 @@ msgid "set debug-level"
 msgstr "set debug-niveau"
 
 msgid "toggle debug-logging"
-msgstr "toggle debug-logging"
+msgstr "schakel debug-logging"
 
 msgid "§4Logging wasn't active, so you can't disable it!"
 msgstr "§4Logging was niet actief, uitzetten is dus niet mogelijk!"
 
 msgid "flush current content of the logger to file."
-msgstr "verwijderd de huidige content van het log naar een bestand"
+msgstr "leegt de huidige content van het log naar een bestand"
 
 msgid "§eLog-file has been flushed."
-msgstr "§eHet log-bestand is vernieuwd."
+msgstr "§eHet log-bestand is geleegd."
 
 msgid "§4Logging is not enabled, use §d/usb debug enable"
 msgstr "§4Logging staat nog niet aan, gebruiken §d/usb debug enable"
@@ -563,16 +562,16 @@ msgid "§4No flatland detected at {0}'s island!"
 msgstr "§4Er is geen vlakland gevonden onder {0}'s eiland"
 
 msgid "flushes all caches to files"
-msgstr "saved all cashes naar file"
+msgstr "leegt alle caches naar bestanden"
 
 #, java-format
 msgid ""
 "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
 msgstr ""
-"§eFlushed §a{0} eilands§e, §b{1} speler en §6{2} uitdagingen volbrenging."
+"§e§a{0} eilanden§e, §b{1} spelers en §6{2} uitdagingen-volbrenging geleegd."
 
 msgid "manually update the top 10 list"
-msgstr "de top 10 lijst handmatig bijwerken"
+msgstr "de top tien lijst handmatig bijwerken"
 
 msgid "§eGenerating the Top Ten list"
 msgstr "§eHet genereren van de Top Tien lijst"
@@ -596,7 +595,7 @@ msgid "§eValid fields are {0}"
 msgstr "§eGeldige velden zijn {0}"
 
 msgid "teleport to another players island"
-msgstr "Telepoort naar een eiland van een andere speler"
+msgstr "Teleporteert naar een andere speler's eiland"
 
 msgid "§4Only supported for players"
 msgstr "§4Alleen ondersteund voor spelers"
@@ -606,13 +605,13 @@ msgstr "§4Die speler heeft geen eiland."
 
 #, java-format
 msgid "§aTeleporting to {0}''s island."
-msgstr "§aTeleporting naar {0}''s eiland."
+msgstr "§aTeleporteren naar {0}''s eiland."
 
 msgid "imports players and islands from other formats"
-msgstr "importeerd spelers en eilanden van een ander formaat"
+msgstr "importeert spelers en eilanden van een ander formaat"
 
 msgid "§9Job Statistics"
-msgstr "§9Job Statistieken"
+msgstr "§9Baan Statistieken"
 
 msgid "§7----------------"
 msgstr "§7----------------"
@@ -621,7 +620,7 @@ msgid "#"
 msgstr "#"
 
 msgid "ms/job"
-msgstr "ms/job"
+msgstr "ms/baan"
 
 msgid "ms/tick"
 msgstr "ms/tick"
@@ -639,18 +638,18 @@ msgid "name"
 msgstr "naam"
 
 msgid "changes the language of the plugin, and reloads"
-msgstr "verander de biome van het eiland"
+msgstr "verandert de taal van de plugin en herlaad"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr "§aDe taal is met succes veranders naar §e{0}"
+msgstr "§aDe taal is met succes veranderd naar §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
 msgstr "§cHet is mislukt om de taal naar §e{0} te veranderen."
 
 msgid "§9Supported Languages:\n"
-msgstr "§9Ondersteunende Talen:\n"
+msgstr "§9Ondersteunde Talen:\n"
 
 #, java-format
 msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
@@ -660,11 +659,11 @@ msgid "§cUnable to locate any languages."
 msgstr "§cKan geen talen vinden"
 
 msgid "transfer leadership to another player"
-msgstr "overdragen van het leiderschap naar een andere speler"
+msgstr "leiderschap overdragen naar een andere speler"
 
 #, java-format
 msgid "§4Player {0} has no island to transfer!"
-msgstr "§4De speler {0} heeft geen eiland om naar toe te gaan!"
+msgstr "§4De speler {0} heeft geen eiland om over te dragen"
 
 #, java-format
 msgid ""
@@ -682,7 +681,7 @@ msgid "advanced info about NBT stuff"
 msgstr "geavanceerde informatie over NBT materiaal"
 
 msgid "shows the NBTTag for the currently held item"
-msgstr "toont de NBTTag voor het item momenteel in handen"
+msgstr "toont de NBTTag voor het huidige vastgehouden item"
 
 #, java-format
 msgid "§eInfo for §9{0}"
@@ -700,7 +699,7 @@ msgid "§cNo item in hand!"
 msgstr "§cJe hand is leeg!"
 
 msgid "§eCan only be executed as a player"
-msgstr "§eKan alleen als speller worden uitgevoerd"
+msgstr "§eKan alleen als speler worden uitgevoerd"
 
 msgid "sets the NBTTag on the currently held item"
 msgstr "zet de NBTTag voor het item in je hand"
@@ -710,7 +709,7 @@ msgid "§eSet §9{0}§e to §c{1}"
 msgstr "§eZet §9{0}§e naar §c{1}"
 
 msgid "adds the NBTTag on the currently held item"
-msgstr "voegt de NBTTag aan op je huidige item"
+msgstr "voegt de NBTTag toe op je huidig vastgehouden item"
 
 #, java-format
 msgid "§eAdded §9{0}§e to §c{1}"
