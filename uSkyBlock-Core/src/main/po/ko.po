@@ -777,14 +777,17 @@ msgid ""
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr "§4청소:§e 해당 작업을 계속 진행하시려면 {0} 키를 누르세요."
+msgid "§4PURGE:§e Do §9/usb purge confirm§e within {0} to accept."
+msgstr ""
 
 msgid "§4Trying to abort purge"
 msgstr "§4청소작업을 취소중입니다."
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4A 청소가 이미 진행중입니다', 끝날 때까지 기다려주세요!"
+msgid "§4Purge aborted!"
+msgstr ""
+
+msgid "§4A purge is already running.§e Either §9confirm§e or §9stop§e it."
+msgstr ""
 
 msgid "§4Starting purge..."
 msgstr "§4청소작업을 시작합니다..."
@@ -889,8 +892,10 @@ msgid "§4PURGE:§9 Scanning aborted."
 msgstr "§4PURGE:§9 스캐닝 취소."
 
 #, java-format
-msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr "§4PURGE:§9 스캔 완료, {0}명의 처벌 후보자를 찾았습니다."
+msgid ""
+"§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
+"purgatory."
+msgstr ""
 
 #, java-format
 msgid ""

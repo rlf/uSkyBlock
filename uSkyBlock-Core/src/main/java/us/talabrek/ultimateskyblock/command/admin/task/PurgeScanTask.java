@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.command.admin.task;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -96,7 +97,7 @@ public class PurgeScanTask extends BukkitRunnable {
 
     private boolean abandonedSince(Set<UUID> members) {
         for (UUID member : members) {
-            Player player = playerDB.getPlayer(member);
+            OfflinePlayer player = playerDB.getOfflinePlayer(member);
             if (player == null || player.getLastPlayed() > cutOff) {
                 return false;
             }
@@ -112,7 +113,7 @@ public class PurgeScanTask extends BukkitRunnable {
             return;
         }
         log(Level.INFO, "Done scanning - found " + purgeList.size() + " candidates for purging.");
-        sender.sendMessage(tr("\u00a74PURGE:\u00a79 Scanning done, found {0} candidates for purgatory.", purgeList.size()));
+        sender.sendMessage(tr("\u00a74PURGE:\u00a79 Scanning done, found {0} candidates, below level {1}, ready for purgatory.", purgeList.size(), purgeLevel));
         done = true;
         if (!purgeList.isEmpty()) {
             callback.run();

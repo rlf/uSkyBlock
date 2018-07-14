@@ -778,14 +778,17 @@ msgid ""
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgid "§4PURGE:§e Do §9/usb purge confirm§e within {0} to accept."
 msgstr ""
 
 msgid "§4Trying to abort purge"
 msgstr ""
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4Очистка уже запущена, дождитесь завершения!"
+msgid "§4Purge aborted!"
+msgstr ""
+
+msgid "§4A purge is already running.§e Either §9confirm§e or §9stop§e it."
+msgstr ""
 
 msgid "§4Starting purge..."
 msgstr ""
@@ -890,9 +893,10 @@ msgid "§4PURGE:§9 Scanning aborted."
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgid ""
+"§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
+"purgatory."
 msgstr ""
-"§4ОЧИСТКА:§9 Сканирование завершено, найдено {0} кандидатов на очистку."
 
 #, java-format
 msgid ""

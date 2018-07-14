@@ -23,13 +23,13 @@ public class PurgeCommand extends AbstractCommand {
     private String days = null;
 
     public PurgeCommand(uSkyBlock plugin) {
-        super("purge", "usb.admin.purge", "time-in-days|stop ?level ?force", tr("purges all abandoned islands"));
+        super("purge", "usb.admin.purge", "time-in-days|stop|confirm ?level ?force", tr("purges all abandoned islands"));
         this.plugin = plugin;
     }
 
     @Override
     public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
-        if (scanActive()) {
+        if (purgeActive()) {
             tryConfirm(sender, args);
             return true;
         }
@@ -56,7 +56,7 @@ public class PurgeCommand extends AbstractCommand {
                 doPurge(sender);
             } else {
                 int timeout = plugin.getConfig().getInt("options.advanced.purgeTimeout", 600000);
-                sender.sendMessage(tr("\u00a74PURGE:\u00a7e Repeat the command within {0} to accept.", TimeUtil.millisAsString(timeout)));
+                sender.sendMessage(tr("\u00a74PURGE:\u00a7e Do \u00a79/usb purge confirm\u00a7e within {0} to accept.", TimeUtil.millisAsString(timeout)));
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -72,7 +72,7 @@ public class PurgeCommand extends AbstractCommand {
         return true;
     }
 
-    private boolean scanActive() {
+    private boolean purgeActive() {
         return scanTask != null && scanTask.isActive() || purgeTask != null && purgeTask.isActive();
     }
 
@@ -89,10 +89,14 @@ public class PurgeCommand extends AbstractCommand {
             scanTask.stop();
             return;
         }
-        if (scanTask != null && scanTask.isActive() && scanTask.isDone() && args.length == 1 && args[0].equalsIgnoreCase(days)) {
+        if (scanTask != null && scanTask.isActive() && scanTask.isDone() && args.length == 1 && args[0].equalsIgnoreCase("confirm")) {
             doPurge(sender);
+        } else if (scanTask != null && scanTask.isActive() && scanTask.isDone() && args.length == 1 && args[0].equalsIgnoreCase("stop")) {
+            scanTask.stop();
+            scanTask = null;
+            sender.sendMessage(tr("\u00a74Purge aborted!"));
         } else {
-            sender.sendMessage(tr("\u00a74A purge is already running, please wait for it to finish!"));
+            sender.sendMessage(tr("\u00a74A purge is already running.\u00a7e Either \u00a79confirm\u00a7e or \u00a79stop\u00a7e it."));
         }
     }
 

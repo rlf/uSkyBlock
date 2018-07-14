@@ -203,6 +203,11 @@ public class FilePlayerDB implements PlayerDB {
         return null;
     }
 
+    @Override
+    public OfflinePlayer getOfflinePlayer(UUID uuid) {
+        return Bukkit.getOfflinePlayer(uuid);
+    }
+
     private void saveToFile() {
         try {
             synchronized (uuid2NameConfig) {

@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.uuid;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -57,6 +58,8 @@ public interface PlayerDB extends Listener {
 
     Player getPlayer(UUID uuid);
     Player getPlayer(String name);
+
+    OfflinePlayer getOfflinePlayer(UUID uuid);
 
     void shutdown();
 }

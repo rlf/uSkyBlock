@@ -82,7 +82,8 @@ public class MemoryPlayerDB implements PlayerDB {
         return offlinePlayer != null ? offlinePlayer.getName() : null;
     }
 
-    private OfflinePlayer getOfflinePlayer(UUID uuid) {
+    @Override
+    public OfflinePlayer getOfflinePlayer(UUID uuid) {
         OfflinePlayer offlinePlayer;
         try {
             offlinePlayer = uuidCache.get(uuid);
