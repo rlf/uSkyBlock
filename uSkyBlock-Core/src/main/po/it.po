@@ -911,8 +911,8 @@ msgstr "§4* PULIZIA:§7 Scansione interrotta."
 msgid ""
 "§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
 "purgatory."
- msgstr ""
- "§4PULIZIA:§9 Scansione completata, trovati {0} candidati, sotto il livello {1}, pronti per "
+msgstr ""
+"§4PULIZIA:§9 Scansione completata, trovati {0} candidati, sotto il livello {1}, pronti per "
 "la pulizia."
 
 #, java-format
