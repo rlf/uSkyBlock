@@ -39,6 +39,7 @@
                     <arguments>
                         <argument>describe</argument>
                         <argument>--tags</argument>
+                        <argument>--dirty</argument>
                     </arguments>
                     <outputFile>${project.build.directory}/gittag.txt</outputFile>
                 </configuration>
