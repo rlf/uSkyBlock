@@ -1,7 +1,7 @@
 name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
 version: ${project.version}
-description: Ultimate SkyBlock v${gitTag}
+description: Ultimate SkyBlock v${gitTag}-${buildNumber}
 author: Talabrek, R4zorax and others
 load: STARTUP
 softdepend:
