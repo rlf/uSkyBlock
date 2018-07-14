@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,7 +13,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.challenge.Challenge;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +69,7 @@ public class ToolMenuEvents implements Listener {
         if (!plugin.isSkyAssociatedWorld(player.getWorld()) || !isTool(e.getItem())) {
             return;
         }
+
         // We are in a skyworld, a block has been hit, with the tool
         Material block = e.getClickedBlock().getType();
         short data = e.getClickedBlock().getData();

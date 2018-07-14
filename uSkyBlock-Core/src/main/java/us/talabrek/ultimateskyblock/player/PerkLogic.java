@@ -63,7 +63,7 @@ public class PerkLogic {
                         .extraItems(ItemStackUtil.createItemList(config.getString("extraItems", null), config.getStringList("extraItems")))
                         .build();
                 ItemStack itemStack = ItemStackUtil.createItemStack(
-                        config.getString("displayItem", "GRASS"),
+                        config.getString("displayItem", "SAPLING"),
                         schemeName,
                         config.getString("description", null)
                 );
@@ -75,7 +75,7 @@ public class PerkLogic {
             Perk perk = new PerkBuilder(defaultPerk).schematics(schemeName).build();
             if (!islandPerks.containsKey(schemeName)) {
                 islandPerks.put(schemeName, new IslandPerk(schemeName, "usb.schematic." + schemeName,
-                        ItemStackUtil.createItemStack("GRASS", schemeName, null), perk,
+                        ItemStackUtil.createItemStack("SAPLING", schemeName, null), perk,
                         1d, 0d));
             }
         }

@@ -766,9 +766,14 @@ msgstr "Ocista vsech zapomenutych ostrovu."
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Napis pocet dnu kdy se stane sirotkem!"
 
+msgid "§4The level must be a valid number"
+msgstr ""
+
 #, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eVyhledavam vsechny sirotky starsi :  {0}  dnu."
+msgid ""
+"§eFinding all islands that has been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
@@ -824,11 +829,11 @@ msgid "set a player's island to your location"
 msgstr "Nastavi hracuv ostrov do vasi aktualni polohy."
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aNastav {0} ostrov na nejblizsi bedrock ve tvem okoli."
+msgid "§aSet {0}'s island to the current island."
+msgstr ""
 
-msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4Zadny bedrock nenalezen: nelze nastavit ostrov!"
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr "Nacitam konfigurace ze souboru."
@@ -1230,7 +1235,7 @@ msgid "Score Count Block"
 msgstr "Skore poctu bloku"
 
 #, java-format
-msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgid "{0,number,00.00}  {1,number,#} {2}"
 msgstr ""
 
 #, java-format
@@ -2411,6 +2416,12 @@ msgid ""
 msgstr ""
 "§cNemas pristup!\n"
 "§7({0})"
+
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lPripojil ses na ostrov"

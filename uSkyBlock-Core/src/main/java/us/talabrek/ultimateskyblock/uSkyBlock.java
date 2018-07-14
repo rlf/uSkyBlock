@@ -331,6 +331,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         if (getConfig().getBoolean("signs.enabled", true)) {
             manager.registerEvents(new SignEvents(this, new SignLogic(this)), this);
+            manager.registerEvents(new SignEvents(this, new SignLogic(this)), this);
         }
         PlaceholderHandler.register(this);
         manager.registerEvents(new ChatEvents(chatLogic), this);
@@ -365,12 +366,21 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
             Location worldSpawn = world.getSpawnLocation();
             if (!isSafeLocation(worldSpawn)) {
-                Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
-                spawnBlock.setType(Material.BEDROCK);
-                Block air1 = spawnBlock.getRelative(BlockFace.UP);
-                air1.setType(Material.AIR);
-                air1.getRelative(BlockFace.UP).setType(Material.AIR);
+                createSpawn(world, worldSpawn);
             }
+        }
+    }
+
+    private void createSpawn(World world, Location worldSpawn) {
+        File spawnSchematic = new File(getDataFolder() + File.separator + "schematics" + File.separator + "spawn.schematic");
+        if (getConfig().getInt("options.general.spawnSize", 0) > 32 && spawnSchematic.exists()) {
+            AsyncWorldEditHandler.loadIslandSchematic(spawnSchematic, worldSpawn, null);
+        } else {
+            Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
+            spawnBlock.setType(Material.GOLD_BLOCK);
+            Block air1 = spawnBlock.getRelative(BlockFace.UP);
+            air1.setType(Material.AIR);
+            air1.getRelative(BlockFace.UP).setType(Material.AIR);
         }
     }
 
@@ -560,30 +570,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 (entity.getFallDistance() == 0 && !(entity instanceof Monster));
     }
 
-    public Location findBedrockLocation(final Location l) {
-        final int px = l.getBlockX();
-        final int py = l.getBlockY();
-        final int pz = l.getBlockZ();
-        World world = l.getWorld();
-        for (int x = -10; x <= 10; ++x) {
-            for (int y = -30; y <= 30; ++y) {
-                for (int z = -10; z <= 10; ++z) {
-                    final Block b = world.getBlockAt(px + x, py + y, pz + z);
-                    if (b.getType() == Material.BEDROCK) {
-                        return new Location(world, px + x, py + y, pz + z);
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
     public synchronized boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
         final PlayerInfo pi = playerLogic.getPlayerInfo(player);
 
         String islandName = WorldGuardHandler.getIslandNameAt(l);
         Location islandLocation = IslandUtil.getIslandLocation(islandName);
-        final Location newLoc = islandLocation != null ? islandLocation : findBedrockLocation(l);
+        final Location newLoc = islandLocation;
         if (newLoc == null) {
             return false;
         }
@@ -756,7 +748,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public boolean islandAtLocation(final Location loc) {
         return ((WorldGuardHandler.getIntersectingRegions(loc).size() > 0)
-                //|| (findBedrockLocation(loc) != null)
                 || islandLogic.hasIsland(loc)
         );
 

@@ -766,9 +766,14 @@ msgstr "purges all abandoned islands"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4You must provide teh age in dais to purrrge!"
 
+msgid "§4The level must be a valid number"
+msgstr ""
+
 #, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eFinding all islands that haz been abandoned for moar than {0} dais."
+msgid ""
+"§eFinding all islands that has been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
@@ -824,11 +829,11 @@ msgid "set a player's island to your location"
 msgstr "set a kitteh's cathouz to yoor location"
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aSet {0}''s cathouz to teh bedrock nearest you."
+msgid "§aSet {0}'s island to the current island."
+msgstr ""
 
-msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4Bedrock not found: unable to set teh cathouz!"
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr "reload configuration from file."
@@ -1231,7 +1236,7 @@ msgid "Score Count Block"
 msgstr "Score Count Blok"
 
 #, java-format
-msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgid "{0,number,00.00}  {1,number,#} {2}"
 msgstr ""
 
 #, java-format
@@ -2434,6 +2439,12 @@ msgstr ""
 "§cNoe access!\n"
 "§7({0})"
 
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
+
 msgid "§a§lJoin an Island"
 msgstr "§a§lJoin an Island"
 
@@ -2849,3 +2860,14 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "North-West"
+
+#~ msgid "§aSet {0}'s island to the bedrock nearest you."
+#~ msgstr "§aSet {0}''s cathouz to teh bedrock nearest you."
+
+#~ msgid "§4Bedrock not found: unable to set the island!"
+#~ msgstr "§4Bedrock not found: unable to set teh cathouz!"
+
+#~ msgid ""
+#~ "§eFinding all islands that has been abandoned for more than {0} days."
+#~ msgstr ""
+#~ "§eFinding all islands that haz been abandoned for moar than {0} dais."

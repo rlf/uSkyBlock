@@ -2,8 +2,6 @@ package us.talabrek.ultimateskyblock.command.admin.task;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -38,7 +36,7 @@ public class PurgeScanTask extends BukkitRunnable {
     private volatile boolean active;
     private boolean done;
 
-    public PurgeScanTask(uSkyBlock plugin, File islandDir, int time, CommandSender sender, Runnable callback) {
+    public PurgeScanTask(uSkyBlock plugin, File islandDir, int time, double purgeLevel, CommandSender sender, Runnable callback) {
         this.plugin = plugin;
         this.sender = sender;
         this.callback = callback;
@@ -46,7 +44,7 @@ public class PurgeScanTask extends BukkitRunnable {
         String[] islandList = islandDir.list(IslandUtil.createIslandFilenameFilter());
         this.islandList = new ArrayList<>(Arrays.asList(islandList));
         purgeList = new ArrayList<>();
-        purgeLevel = plugin.getConfig().getDouble("options.advanced.purgeLevel", 10);
+        this.purgeLevel = purgeLevel;
         int feedbackEvery = plugin.getConfig().getInt("async.long.feedbackEvery", 30000);
         tStart = System.currentTimeMillis();
         tracker = new ProgressTracker(sender, marktr("\u00a77- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"), 25, feedbackEvery);

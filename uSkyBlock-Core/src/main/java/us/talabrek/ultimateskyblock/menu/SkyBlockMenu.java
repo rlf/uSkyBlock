@@ -454,7 +454,7 @@ public class SkyBlockMenu {
         int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
         Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Create Menu"));
         List<String> lores = new ArrayList<>();
-        ItemStack menuItem = new ItemStack(Material.GRASS, 1);
+        ItemStack menuItem = new ItemStack(Material.SAPLING, 1);
         ItemMeta meta = menuItem.getItemMeta();
         meta.setDisplayName(tr("\u00a7a\u00a7lStart an Island"));
         addLore(lores, "\u00a7f", tr("Start your skyblock journey\nby starting your own island.\nComplete challenges to earn\nitems and skybucks to help\nexpand your skyblock. You can\ninvite others to join in\nbuilding your island empire!\n\u00a7e\u00a7lClick here to start!"));
@@ -463,7 +463,7 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
-        if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+        if (plugin.getConfig().getBoolean("island-schemes-enabled", true) && schemeNames.size() > 1) {
             int index = 1;
             for (String schemeName : schemeNames) {
                 IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
@@ -478,7 +478,6 @@ public class SkyBlockMenu {
                 if (lores == null) {
                     lores = new ArrayList<>();
                 }
-                // TODO: 30/01/2016 - R4zorax: Add the extra items?
                 if (player.hasPermission(islandPerk.getPermission())) {
                     addLore(lores, tr("\u00a7aClick to create!"));
                 } else {
@@ -489,6 +488,15 @@ public class SkyBlockMenu {
                 menu.setItem(index++, menuItem);
             }
         }
+
+        lores.clear();
+        menuItem = new ItemStack(Material.GRASS, 1);
+        meta = menuItem.getItemMeta();
+        meta.setDisplayName(tr("\u00a7a\u00a7lReturn to Spawn"));
+        addLore(lores, "\u00a7f", tr("Teleport to the spawn area."));
+        meta.setLore(lores);
+        menuItem.setItemMeta(meta);
+        menu.setItem(menuSize-2, menuItem);
 
         lores.clear();
         menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
@@ -511,7 +519,7 @@ public class SkyBlockMenu {
                 index++;
             }
         }
-        return index + 2;
+        return index + 3;
     }
 
     private Inventory createMainMenu(Player player) {
@@ -627,6 +635,15 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
+        menuItem = new ItemStack(Material.GRASS, 1);
+        meta4 = menuItem.getItemMeta();
+        meta4.setDisplayName(tr("\u00a7a\u00a7lReturn to Spawn"));
+        addLore(lores, "\u00a7f", tr("Teleport to the spawn area."));
+        meta4.setLore(lores);
+        menuItem.setItemMeta(meta4);
+        menu.addItem(menuItem);
+        lores.clear();
+
         menuItem = new ItemStack(Material.BOOK_AND_QUILL, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Log"));
@@ -636,7 +653,7 @@ public class SkyBlockMenu {
         menu.setItem(8, menuItem); // Last item, first line
         lores.clear();
 
-        menuItem = new ItemStack(Material.BED, 1);
+        menuItem = new ItemStack(Material.BED, 1, (short)14); // red bed
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lChange Home Location"));
         addLore(lores, "\u00a7f", tr("When you teleport to your\nisland you will be taken to\nthis location.\n\u00a7e\u00a7lClick here to change."));
@@ -762,6 +779,9 @@ public class SkyBlockMenu {
         if (slotIndex == 0) {
             p.closeInventory();
             p.performCommand("island create");
+        } else if (slotIndex == menuSize-2) {
+            p.closeInventory();
+            p.performCommand("island spawn");
         } else if (slotIndex == menuSize-1) {
             p.closeInventory();
             p.performCommand("island accept");
@@ -793,6 +813,9 @@ public class SkyBlockMenu {
             p.closeInventory();
             p.performCommand("island sethome");
             p.performCommand("island");
+        } else if (currentItem.getType() == Material.GRASS) {
+            p.closeInventory();
+            p.performCommand("island spawn");
         } else if (currentItem.getType() == Material.HOPPER) {
             p.closeInventory();
             p.performCommand("island setwarp");

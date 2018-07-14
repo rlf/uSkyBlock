@@ -766,9 +766,14 @@ msgstr "fjerner alle forladte øer"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Do skal angive hvor gamle (i dage) øerne til purge skal være!"
 
+msgid "§4The level must be a valid number"
+msgstr ""
+
 #, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eMarkerer all øer, der har været inaktive i mere end {0} dage."
+msgid ""
+"§eFinding all islands that has been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
@@ -825,11 +830,11 @@ msgid "set a player's island to your location"
 msgstr "tildeler øen til en spiller"
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aSatte {0}'s ø til det nærmeste grundfjeld."
+msgid "§aSet {0}'s island to the current island."
+msgstr ""
 
-msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4Intet grundfjeld fundet: Ikke istand til at sætte ø-ejerskab!"
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr "genindlæs konfigurationen fra fil."
@@ -2425,6 +2430,12 @@ msgid ""
 msgstr ""
 "§cIngen adgang!\n"
 "§7({0})"
+
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lHjælp en eksisterende ø"

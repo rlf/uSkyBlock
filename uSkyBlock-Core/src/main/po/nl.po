@@ -770,9 +770,14 @@ msgstr "verwijders alle verlaten eilanden"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Je moet het aantal dagen invoeren om een purge uit te voeren!"
 
+msgid "§4The level must be a valid number"
+msgstr ""
+
 #, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eMarkeer alle eilanden die inactief zijn voor meer dan {0} dagen."
+msgid ""
+"§eFinding all islands that has been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
@@ -828,12 +833,11 @@ msgid "set a player's island to your location"
 msgstr "zet een spelers eiland op mijn lokatie"
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aSet {0}'s eiland op het dichtstbijzijnde bedrock block ."
-
-msgid "§4Bedrock not found: unable to set the island!"
+msgid "§aSet {0}'s island to the current island."
 msgstr ""
-"§4Kan het bedrock block niet vinden waardoor veranderen niet mogelijk is!"
+
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr "herladen van de configuratie van het bestand"
@@ -1249,7 +1253,7 @@ msgid "Score Count Block"
 msgstr "Score van het aantal blokken"
 
 #, java-format
-msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgid "{0,number,00.00}  {1,number,#} {2}"
 msgstr ""
 
 #, java-format
@@ -2462,6 +2466,12 @@ msgid ""
 msgstr ""
 "§cGeen toegang!\n"
 "§7({0})"
+
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§lLid worden van een eiland"

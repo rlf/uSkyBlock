@@ -767,9 +767,14 @@ msgstr "모든 버려진 섬들을 청소합니다"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4당신은 청소하기위해 나이를 제공해야 합니다!"
 
+msgid "§4The level must be a valid number"
+msgstr ""
+
 #, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§e{0}일 이상 버려진 모든 섬을 찾는 중 입니다."
+msgid ""
+"§eFinding all islands that has been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
 
 #, java-format
 msgid "§4PURGE:§e Repeat the command within {0} to accept."
@@ -825,11 +830,11 @@ msgid "set a player's island to your location"
 msgstr "당신의 위치에 플레이어의 섬을 지정합니다"
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§a당신의 근처의 기반에 {0}의 섬을 지정합니다."
+msgid "§aSet {0}'s island to the current island."
+msgstr ""
 
-msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4기반을 찾지 못했습니다: 섬 지정이 불가합니다!"
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr "파일로 부터 외형을 리로드합니다."
@@ -1233,7 +1238,7 @@ msgid "Score Count Block"
 msgstr "점수 카운트 블록"
 
 #, java-format
-msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgid "{0,number,00.00}  {1,number,#} {2}"
 msgstr ""
 
 #, java-format
@@ -2426,6 +2431,12 @@ msgid ""
 msgstr ""
 "§c엑세스 불가!\n"
 "§7({0})"
+
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
 
 msgid "§a§lJoin an Island"
 msgstr "§a§l섬에 참여하기"

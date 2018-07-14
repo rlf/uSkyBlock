@@ -51,21 +51,20 @@ public class WorldEditHandler {
 
     public static void loadIslandSchematic(final File file, final Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
-        try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
-            boolean noAir = false;
-            boolean entities = true;
-            Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
-            EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
-            try {
-                SchematicFormat.getFormat(file)
-                        .load(file)
-                        .paste(editSession, to, noAir, entities);
-                editSession.flushQueue();
-            } catch (MaxChangedBlocksException | IOException | DataException e) {
-                log.log(Level.INFO, "Unable to paste schematic " + file, e);
-            }
-        } catch (IOException e) {
-            LogUtil.log(Level.WARNING, "Unable to load schematic " + file, e);
+        if (file == null || !file.exists() || !file.canRead()) {
+            LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
+        }
+        boolean noAir = false;
+        boolean entities = true;
+        Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+        EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
+        try {
+            SchematicFormat.getFormat(file)
+                    .load(file)
+                    .paste(editSession, to, noAir, entities);
+            editSession.flushQueue();
+        } catch (MaxChangedBlocksException | IOException | DataException e) {
+            log.log(Level.INFO, "Unable to paste schematic " + file, e);
         }
     }
 

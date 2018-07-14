@@ -26,9 +26,9 @@ public class RegisterIslandToPlayerCommand extends AbstractCommand {
         String playerName = args[0];
         Player player = (Player) sender;
         if (uSkyBlock.getInstance().devSetPlayerIsland(player, player.getLocation(), playerName)) {
-            sender.sendMessage(I18nUtil.tr("\u00a7aSet {0}'s island to the bedrock nearest you.", playerName));
+            sender.sendMessage(I18nUtil.tr("\u00a7aSet {0}'s island to the current island.", playerName));
         } else {
-            sender.sendMessage(I18nUtil.tr("\u00a74Bedrock not found: unable to set the island!"));
+            sender.sendMessage(I18nUtil.tr("\u00a74Island not found: unable to set the island!"));
         }
         return true;
     }

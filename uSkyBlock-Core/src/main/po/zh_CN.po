@@ -758,8 +758,13 @@ msgstr ""
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4你必须指定一个天数来删除。"
 
+msgid "§4The level must be a valid number"
+msgstr ""
+
 #, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
+msgid ""
+"§eFinding all islands that has been abandoned for more than {0} days below "
+"level {1}"
 msgstr ""
 
 #, java-format
@@ -816,11 +821,11 @@ msgid "set a player's island to your location"
 msgstr ""
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§a设置 {0} 的岛屿的中心点(基岩)在你的附近。"
+msgid "§aSet {0}'s island to the current island."
+msgstr ""
 
-msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4基岩未找到:无法设置岛屿"
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr ""
@@ -1209,7 +1214,7 @@ msgid "Score Count Block"
 msgstr "计分方块"
 
 #, java-format
-msgid "{0,number,#####.##}  {1,number,#} {2}"
+msgid "{0,number,00.00}  {1,number,#} {2}"
 msgstr ""
 
 #, java-format
@@ -2292,6 +2297,12 @@ msgstr ""
 msgid ""
 "§cNo access!\n"
 "§7({0})"
+msgstr ""
+
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
 msgstr ""
 
 msgid "§a§lJoin an Island"
