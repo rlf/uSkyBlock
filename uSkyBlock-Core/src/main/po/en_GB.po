@@ -1047,7 +1047,8 @@ msgstr "§7Invitation for §6{0} §7has timed out or been cancelled."
 
 #, java-format
 msgid "§eInvitation for {0}''s island has timedout or been cancelled."
-msgstr "§9* §7Invitation for §6{0}''s §7island has timed out or been cancelled."
+msgstr ""
+"§9* §7Invitation for §6{0}''s §7island has timed out or been cancelled."
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§9* §7You have §aaccepted §7the invitation to join an island."

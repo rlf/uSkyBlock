@@ -2191,7 +2191,7 @@ msgid "§cThis island is full."
 msgstr ""
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
 "§eby clicking a player''s icon."

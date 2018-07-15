@@ -217,7 +217,7 @@ public class SkyBlockMenu {
         } else {
             addLore(lores, tr("\u00a7cThis island is full."));
         }
-        addLore(lores, tr("\u00a7eHover over a player's icon to\n\u00a7eview their permissions. The\n\u00a7eleader can change permissions\n\u00a7eby clicking a player''s icon."));
+        addLore(lores, tr("\u00a7eHover over a player''s icon to\n\u00a7eview their permissions. The\n\u00a7eleader can change permissions\n\u00a7eby clicking a player''s icon."));
         meta2.setLore(lores);
         sign.setItemMeta(meta2);
         menu.addItem(sign.clone());
