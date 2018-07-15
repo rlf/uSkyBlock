@@ -50,13 +50,13 @@ public class PurgeCommand extends AbstractCommand {
         final boolean force = args[args.length-1].equalsIgnoreCase("force");
 
         final int time = Integer.parseInt(days, 10) * 24;
-        sender.sendMessage(tr("\u00a7eFinding all islands that has been abandoned for more than {0} days below level {1}", args[0], purgeLevel));
+        sender.sendMessage(tr("\u00a7eFinding all islands that have been abandoned for more than {0} days below level {1}", args[0], purgeLevel));
         scanTask = new PurgeScanTask(plugin, plugin.directoryIslands, time, purgeLevel, sender, () -> {
             if (force) {
                 doPurge(sender);
             } else {
                 int timeout = plugin.getConfig().getInt("options.advanced.purgeTimeout", 600000);
-                sender.sendMessage(tr("\u00a74PURGE:\u00a7e Do \u00a79/usb purge confirm\u00a7e within {0} to accept.", TimeUtil.millisAsString(timeout)));
+                sender.sendMessage(tr("\u00a74PURGE:\u00a7e Do \u00a79usb purge confirm\u00a7e within {0} to accept.", TimeUtil.millisAsString(timeout)));
                 new BukkitRunnable() {
                     @Override
                     public void run() {
