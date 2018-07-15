@@ -1,4 +1,4 @@
-# Change Log for v2.7.4..v2.7.4-201807152038
+# Change Log for v2.7.4..v2.7.4-201807152051
   * 7c310e3 Issue #1024 - correct usage of ' and `marktr` for commands
   * c69ecf1 Feature #974 - Add challengecompletion times as challenge requirement
   * a786922 Issue #995 - Handle many required items
