@@ -24,7 +24,6 @@ script:
 - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we613,wg62 clean install
 before_deploy:
 - mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-bukkit${MC}.jar
-- export RELEASENOTE=$( cat changelog.txt )
 deploy:
   provider: releases
   api-key: "${GITHUB_TOKEN}"
@@ -39,7 +38,6 @@ deploy:
     tags: true
     all_branches: true
   prerelease: true
-  body: "${RELEASENOTE}"
 cache:
   directories:
   - "$HOME/.m2"
