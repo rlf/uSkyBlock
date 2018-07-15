@@ -36,6 +36,7 @@ deploy:
   on:
     tags: true
     all_branches: true
+  prerelease: true
 after_success:
 - mvn -nsu deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:

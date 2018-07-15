@@ -60,17 +60,18 @@ public class LevelCommand extends RequireIslandCommand {
             return false;
         }
         final boolean shouldRecalculate = player.getName().equals(info.getPlayerName()) || hasPermission(player, "usb.admin.island");
-        final Runnable showInfo = new Runnable() {
-            @Override
-            public void run() {
-                if (player != null && player.isOnline() && info != null) {
-                    player.sendMessage(tr("\u00a7eInformation about {0}'s Island:", islandPlayer));
-                    if (cmd.equalsIgnoreCase("level")) {
-                        IslandRank rank = plugin.getIslandLogic().getRank(info.locationForParty());
+        final Runnable showInfo = () -> {
+            if (player != null && player.isOnline() && info != null) {
+                player.sendMessage(tr("\u00a7eInformation about {0}'s Island:", islandPlayer));
+                if (cmd.equalsIgnoreCase("level")) {
+                    IslandRank rank = plugin.getIslandLogic().getRank(info.locationForParty());
+                    if (rank != null) {
                         player.sendMessage(new String[]{
                                 tr("\u00a7aIsland level is {0,number,###.##}", rank.getScore()),
                                 tr("\u00a79Rank is {0}", rank.getRank())
                         });
+                    } else {
+                        player.sendMessage(tr("\u00a74Could not locate rank of {0}", islandPlayer));
                     }
                 }
             }
