@@ -21,10 +21,10 @@ before_install:
 - cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
 - cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
 script:
-- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true -Pi18n,${MC},we613,wg62 clean install
+- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we613,wg62 clean install
 before_deploy:
 - mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-bukkit${MC}.jar
-- export RELEASENOTE=$( cat changelog.txt )
+- export RELEASENOTE=$( cat changelog.txt | base64 )
 deploy:
   provider: releases
   api-key: "${GITHUB_TOKEN}"
@@ -39,8 +39,6 @@ deploy:
     all_branches: true
   prerelease: true
   body: ${RELEASENOTE}
-after_success:
-- mvn -nsu deploy -DGITHUB_TOKEN=${GITHUB_TOKEN}
 cache:
   directories:
   - "$HOME/.m2"
