@@ -1,9 +1,4 @@
 # uSkyBlock Localization for Spanish.
-#
-#
-#
-#
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
@@ -467,7 +462,7 @@ msgstr "§eSe cambió el bioma de la isla de {0} a OCÉANO."
 
 #, java-format
 msgid "§eRemoving {0}''s island."
-msgstr ""
+msgstr "§eQuitando la isla de {0}"
 
 msgid "Error: That player does not have an island!"
 msgstr "Error: ¡Ese jugador no tiene una isla!"
@@ -562,7 +557,7 @@ msgstr "§4No se encontró una isla válida"
 
 #, java-format
 msgid "§4No flatland detected at {0}''s island!"
-msgstr ""
+msgstr "§4¡No se detecto terreno plano en la isla de {0}!"
 
 msgid "flushes all caches to files"
 msgstr "pasa todo el caché a archivos"
@@ -830,7 +825,7 @@ msgid "§eAnimation-tick must be a valid integer."
 msgstr ""
 
 msgid "set a player''s island to your location"
-msgstr ""
+msgstr "establece la isla de un jugador a tu localización"
 
 #, java-format
 msgid "§aSet {0}''s island to the current island."
@@ -1046,7 +1041,7 @@ msgstr "§eLa invitación para {0}§e ha vencido o ha sido cancelada."
 
 #, java-format
 msgid "§eInvitation for {0}''s island has timedout or been cancelled."
-msgstr ""
+msgstr "§eLa invitación para la isla de {0} ha vencido o ha sido cancelada."
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eHas aceptado la invitación de unirte a una isla."
@@ -1208,7 +1203,7 @@ msgstr ""
 "ahora."
 
 msgid "check your or another''s island info"
-msgstr ""
+msgstr "verifica información de tu isla o la de otros"
 
 msgid "allows user to see others island info"
 msgstr ""
@@ -1256,7 +1251,7 @@ msgstr ""
 "isla."
 
 msgid "§4Only the island''s owner can invite!"
-msgstr ""
+msgstr "§4¡sólo el dueño de la isla puede invitar!"
 
 #, java-format
 msgid "§aYou can invite {0} more players."
@@ -1348,7 +1343,7 @@ msgstr ""
 
 #, java-format
 msgid "§eInformation about {0}''s Island:"
-msgstr ""
+msgstr "§eInformación sobre la isla de {0}:"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1481,10 +1476,10 @@ msgid "set the island-home"
 msgstr "establece el hogar de la isla"
 
 msgid "set your island''s warp location"
-msgstr ""
+msgstr "establece la localización del teletransporte de la isla"
 
 msgid "§cYou do not have permission to set your island''s warp point!"
-msgstr ""
+msgstr "§c¡No tienes el permiso para establecer el teletransporte de tu isla!"
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr ""
@@ -1545,7 +1540,7 @@ msgstr "§4Jugador desconocido {0}"
 
 #, java-format
 msgid "§eYou are now trusted on §4{0}''s §eisland."
-msgstr ""
+msgstr "§eAhora estás confiado en la isla de §4{0}§e."
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
@@ -1553,14 +1548,14 @@ msgstr "§a{0} confió en {1} para construir en la isla"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}''s §eisland."
-msgstr ""
+msgstr "§eYa no estas confiado en la isla de §4{0}§e."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} quitó la confianza de {1} en la isla"
 
 msgid "warp to another player''s island"
-msgstr ""
+msgstr "teletransportarse a la isla de otro jugador"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr ""
@@ -1684,7 +1679,7 @@ msgid "§eYour inventory must have another empty space!"
 msgstr ""
 
 msgid "§4It''s a bad idea to replace your lava!"
-msgstr ""
+msgstr "§4¡Es una mala idea reemplazar tu lava!"
 
 msgid "§eYou cannot hurt island-members."
 msgstr ""
@@ -2004,13 +1999,13 @@ msgid "Toggle Island Lock"
 msgstr ""
 
 msgid "toggle the island''s lock."
-msgstr ""
+msgstr "alternar el bloqueo de la isla"
 
 msgid "Set Island Warp"
 msgstr ""
 
 msgid "set the island''s warp."
-msgstr ""
+msgstr "establecer el teletransporte de la isla"
 
 msgid ""
 "set the island''s warp,\n"
@@ -2023,7 +2018,7 @@ msgid "Toggle Island Warp"
 msgstr ""
 
 msgid "toggle the island''s warp."
-msgstr ""
+msgstr "activar/desactivar el teletransporte de la isla"
 
 msgid ""
 "toggle the island''s warp,\n"
@@ -2334,7 +2329,7 @@ msgid "§cThis island is full."
 msgstr "§cEsta isla está llena."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
 "§eby clicking a player''s icon."
@@ -2359,7 +2354,7 @@ msgid "Cannot {0}"
 msgstr "No puede {0}"
 
 msgid "§e<Click to change this player''s permissions>"
-msgstr ""
+msgstr "§e<Click para cambiar los permisos de este jugador>"
 
 msgid "Island Log"
 msgstr "Registro de la Isla"
@@ -2782,11 +2777,11 @@ msgid "§aTeleporting you to your island."
 msgstr "§aTeletransportándote a tu isla."
 
 msgid "§4Unable to warp you to that player''s island!"
-msgstr ""
+msgstr "§4¡Incapaz de teletransportarte a la isla de ese jugador!"
 
 #, java-format
 msgid "§aTeleporting you to {0}''s island."
-msgstr ""
+msgstr "§aTeletransportándote a la isla de {0}§a."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr ""

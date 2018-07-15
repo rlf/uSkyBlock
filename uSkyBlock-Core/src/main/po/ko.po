@@ -1,8 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <github@protocodyne>, 2016.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.7\n"
@@ -462,7 +457,7 @@ msgstr "§e{0}은 바다로 변한 생태계를 가졌습니다."
 
 #, java-format
 msgid "§eRemoving {0}''s island."
-msgstr ""
+msgstr "§e{0}의 섬을 제거하는 중."
 
 msgid "Error: That player does not have an island!"
 msgstr "오류: 그 플레이어는 섬이 없습니다!"
@@ -559,7 +554,7 @@ msgstr "§4유효한 섬이 발견되지 않음"
 
 #, java-format
 msgid "§4No flatland detected at {0}''s island!"
-msgstr ""
+msgstr "§4{0}의 섬에 평지가 탐지되지 않음!"
 
 msgid "flushes all caches to files"
 msgstr "모든 캐시 파일을 제거 합니다"
@@ -830,7 +825,7 @@ msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimation-tick 의 값은 integer 형식 이여야 합니다."
 
 msgid "set a player''s island to your location"
-msgstr ""
+msgstr "당신의 위치에 플레이어의 섬을 지정합니다"
 
 #, java-format
 msgid "§aSet {0}''s island to the current island."
@@ -1048,7 +1043,7 @@ msgstr "§e{0}§e에게 한 초대가 시간초과 되었거나 취소되었습�
 
 #, java-format
 msgid "§eInvitation for {0}''s island has timedout or been cancelled."
-msgstr ""
+msgstr "§e{0}의 섬으로의 초대가 시간초과 되었거나 취소되었습니다 ."
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§e당신은 섬에 참여하는 초대를 승낙했습니다."
@@ -1212,7 +1207,7 @@ msgstr ""
 "다. "
 
 msgid "check your or another''s island info"
-msgstr ""
+msgstr "당신 또는 다른 사람의 섬 정보를 확인합니다"
 
 msgid "allows user to see others island info"
 msgstr "해당 유저가 다른 섬 정보를 보는것을 허용합니다."
@@ -1260,7 +1255,7 @@ msgstr ""
 "를 쓰세요 ."
 
 msgid "§4Only the island''s owner can invite!"
-msgstr ""
+msgstr "§4오직 이 섬의 주인만이 초대할 수 있습니다!"
 
 #, java-format
 msgid "§aYou can invite {0} more players."
@@ -1352,7 +1347,7 @@ msgstr "해당 유저가 다른섬에 쿼리를 날리는 것을 허용합니다
 
 #, java-format
 msgid "§eInformation about {0}''s Island:"
-msgstr ""
+msgstr "§e{0}의 섬에 대한 정보:"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1483,10 +1478,10 @@ msgid "set the island-home"
 msgstr "island-home을 지정하세요"
 
 msgid "set your island''s warp location"
-msgstr ""
+msgstr "당신의 섬의 워프 지점을 지정하세요"
 
 msgid "§cYou do not have permission to set your island''s warp point!"
-msgstr ""
+msgstr "§c당신은 섬에 워프 포인트를 지정할 권한이 없습니다!"
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr "§c워프를 지정하려면 자신의 섬에 있어야 합니다!"
@@ -1513,7 +1508,7 @@ msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d 비활성화된 섬 워프."
 
 msgid "§cYou do not have permission to enable/disable your island''s warp!"
-msgstr ""
+msgstr "§c당신 섬에 워프를 온/오프 할 권한이 없습니다!"
 
 msgid "display the top10 of islands"
 msgstr "섬들의 top 10을 보여줍니다"
@@ -1543,7 +1538,7 @@ msgstr "§4모르는 플레이어 {0}"
 
 #, java-format
 msgid "§eYou are now trusted on §4{0}''s §eisland."
-msgstr ""
+msgstr "§e§4{0}의§e섬에서 이제 신뢰받습니다."
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
@@ -1551,14 +1546,14 @@ msgstr "§a{0}가 {1}를 그 섬에서 믿습니다"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}''s §eisland."
-msgstr ""
+msgstr "§e당신은 더이상 §4{0}의 섬에서 신뢰받지 못합니다."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0}가 {1}을 신뢰했던 것을 취소합니다"
 
 msgid "warp to another player''s island"
-msgstr ""
+msgstr "다른 플레이어의 섬으로 워프합니다"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr ""
@@ -1680,7 +1675,7 @@ msgid "§eYour inventory must have another empty space!"
 msgstr "§e당신의 인벤토리에 반드시 빈공간이 있어야 합니다!"
 
 msgid "§4It''s a bad idea to replace your lava!"
-msgstr ""
+msgstr "§4당신의 용암을 대체하는건 좋은 생각이 아닌거 같네요!"
 
 msgid "§eYou cannot hurt island-members."
 msgstr "§e당신은 섬원을 해칠 수 없습니다."
@@ -1998,19 +1993,19 @@ msgid "Change Biome"
 msgstr "Biome 변경"
 
 msgid "change the island''s biome."
-msgstr ""
+msgstr "섬 바이옴 변경"
 
 msgid "Toggle Island Lock"
 msgstr "섬 잠금"
 
 msgid "toggle the island''s lock."
-msgstr ""
+msgstr "섬의 자물쇠를 토글합니다."
 
 msgid "Set Island Warp"
 msgstr "섬 워프 지정"
 
 msgid "set the island''s warp."
-msgstr ""
+msgstr "섬의 워프를 지정합니다."
 
 msgid ""
 "set the island''s warp,\n"
@@ -2023,7 +2018,7 @@ msgid "Toggle Island Warp"
 msgstr "섬 워프"
 
 msgid "toggle the island''s warp."
-msgstr ""
+msgstr "섬의 워프를 토글합니다."
 
 msgid ""
 "toggle the island''s warp,\n"
@@ -2328,7 +2323,7 @@ msgid "§cThis island is full."
 msgstr "§c이 섬은 꽉 찼습니다."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
 "§eby clicking a player''s icon."
@@ -2353,7 +2348,7 @@ msgid "Cannot {0}"
 msgstr "할 수 없음 {0}"
 
 msgid "§e<Click to change this player''s permissions>"
-msgstr ""
+msgstr "§e<이 플레이어의 권한을 바꾸려면 클릭하세요>"
 
 msgid "Island Log"
 msgstr "섬 기록"
@@ -2782,11 +2777,11 @@ msgid "§aTeleporting you to your island."
 msgstr "§a당신을 당신의 섬으로 텔레포트 하는 중입니다."
 
 msgid "§4Unable to warp you to that player''s island!"
-msgstr ""
+msgstr "§4해당플레이어의 섬으로 워프 할 수 없습니다!"
 
 #, java-format
 msgid "§aTeleporting you to {0}''s island."
-msgstr ""
+msgstr "§a당신은 {0}초 후에 텔레포트 됩니다"
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4당신의 skyblock 집에 지정하려면 당신의 섬에 더 가까워야 합니다!"

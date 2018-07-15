@@ -1,6 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the uSkyBlock package.
 # Egor Oldenburger <ERROR-202@MAIL.RU>, 2015.
 #
 msgid ""
@@ -466,7 +464,7 @@ msgstr "§e{0} изменил биом на Океан."
 
 #, java-format
 msgid "§eRemoving {0}''s island."
-msgstr ""
+msgstr "§eУдаление острова  {0}."
 
 msgid "Error: That player does not have an island!"
 msgstr "Ошибка: Игрок не имеет острова"
@@ -561,7 +559,7 @@ msgstr "§4Подходящего острова не найдено"
 
 #, java-format
 msgid "§4No flatland detected at {0}''s island!"
-msgstr ""
+msgstr "§4Равнина не найдена на острове {0}!"
 
 msgid "flushes all caches to files"
 msgstr "очистить все кэши к файлам"
@@ -831,7 +829,7 @@ msgid "§eAnimation-tick must be a valid integer."
 msgstr ""
 
 msgid "set a player''s island to your location"
-msgstr ""
+msgstr "установка острова игрока в вашей позиции"
 
 #, java-format
 msgid "§aSet {0}''s island to the current island."
@@ -1050,7 +1048,7 @@ msgstr "§eПриглашение для {0}§e было просрочено и
 
 #, java-format
 msgid "§eInvitation for {0}''s island has timedout or been cancelled."
-msgstr ""
+msgstr "§eПриглашение на остров игрока {0} было просрочено или отменено."
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eВы приняли приглашения о присоединении к острову."
@@ -1212,7 +1210,7 @@ msgstr ""
 "телепортироваться."
 
 msgid "check your or another''s island info"
-msgstr ""
+msgstr "проверить информацию вашего или другого острова"
 
 msgid "allows user to see others island info"
 msgstr ""
@@ -1260,7 +1258,7 @@ msgstr ""
 "свой остров."
 
 msgid "§4Only the island''s owner can invite!"
-msgstr ""
+msgstr "§4Только хозяин острова может приглашать!"
 
 #, java-format
 msgid "§aYou can invite {0} more players."
@@ -1351,7 +1349,7 @@ msgstr ""
 
 #, java-format
 msgid "§eInformation about {0}''s Island:"
-msgstr ""
+msgstr "§eИнформация об острове {0}:"
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1481,10 +1479,10 @@ msgid "set the island-home"
 msgstr "установка точки дома"
 
 msgid "set your island''s warp location"
-msgstr ""
+msgstr "установка точки перемещения"
 
 msgid "§cYou do not have permission to set your island''s warp point!"
-msgstr ""
+msgstr "§cУ вас недостаточно прав для установки точки перемещения на острове!"
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr ""
@@ -1514,7 +1512,7 @@ msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d деактивировал точку перемещения на острове."
 
 msgid "§cYou do not have permission to enable/disable your island''s warp!"
-msgstr ""
+msgstr "§cУ вас недостаточно прав для вкл/выкл точек перемещения на острове!"
 
 msgid "display the top10 of islands"
 msgstr "показать ТОП 10 островов"
@@ -1543,7 +1541,7 @@ msgstr "§4Неизвестный игрок {0}"
 
 #, java-format
 msgid "§eYou are now trusted on §4{0}''s §eisland."
-msgstr ""
+msgstr "§eВам не доверяют на острове §4{0}."
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
@@ -1551,14 +1549,14 @@ msgstr "§a {0} доверенный {1} на острове"
 
 #, java-format
 msgid "§eYou are no longer trusted on §4{0}''s §eisland."
-msgstr ""
+msgstr "§eВам больше не доверяют на острове §4{0}."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} отозвана доверие {1} на острове"
 
 msgid "warp to another player''s island"
-msgstr ""
+msgstr "перемещение на остров другого игрока"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr ""
@@ -1680,7 +1678,7 @@ msgid "§eYour inventory must have another empty space!"
 msgstr ""
 
 msgid "§4It''s a bad idea to replace your lava!"
-msgstr ""
+msgstr "§4Плохая идея переместить вашу лаву!"
 
 msgid "§eYou cannot hurt island-members."
 msgstr ""
@@ -2001,13 +1999,13 @@ msgid "Toggle Island Lock"
 msgstr ""
 
 msgid "toggle the island''s lock."
-msgstr ""
+msgstr "переключать блокировку острова."
 
 msgid "Set Island Warp"
 msgstr ""
 
 msgid "set the island''s warp."
-msgstr ""
+msgstr "устанавливать точку перемещения."
 
 msgid ""
 "set the island''s warp,\n"
@@ -2020,7 +2018,7 @@ msgid "Toggle Island Warp"
 msgstr ""
 
 msgid "toggle the island''s warp."
-msgstr ""
+msgstr "переключать точку перемещения."
 
 msgid ""
 "toggle the island''s warp,\n"
@@ -2320,7 +2318,7 @@ msgid "§cThis island is full."
 msgstr "§cОстров заполнен."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
 "§eby clicking a player''s icon."
@@ -2345,7 +2343,7 @@ msgid "Cannot {0}"
 msgstr "Не может {0}"
 
 msgid "§e<Click to change this player''s permissions>"
-msgstr ""
+msgstr "§e<нажмите для изменения прав игрока>"
 
 msgid "Island Log"
 msgstr "Журнал острова"
@@ -2765,11 +2763,11 @@ msgid "§aTeleporting you to your island."
 msgstr "§aТелепортация на ваш остров."
 
 msgid "§4Unable to warp you to that player''s island!"
-msgstr ""
+msgstr "§4Невозможно переместить вас на остров этого игрока!"
 
 #, java-format
 msgid "§aTeleporting you to {0}''s island."
-msgstr ""
+msgstr "§aТелепортация на остров игрока {0}."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Вы должны быть ближе к острову, чтобы установить на нем точку дома!"
