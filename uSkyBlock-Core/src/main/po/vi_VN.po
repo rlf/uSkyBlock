@@ -465,8 +465,8 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} đã chuyển môi trường đảo sang OCEAN"
 
 #, java-format
-msgid "§eRemoving {0}'s island."
-msgstr "§eĐang xóa skyblock của {0}."
+msgid "§eRemoving {0}''s island."
+msgstr ""
 
 msgid "Error: That player does not have an island!"
 msgstr "Lỗi: Người chơi đó không có skyblock!"
@@ -560,8 +560,8 @@ msgid "§4No valid island found"
 msgstr "§4Không có đảo hợp lệ."
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
-msgstr "§4Không có đảo hợp lệ tại đảo của {0}"
+msgid "§4No flatland detected at {0}''s island!"
+msgstr ""
 
 msgid "flushes all caches to files"
 msgstr "Xả toàn bộ cache vào files"
@@ -772,12 +772,12 @@ msgstr ""
 
 #, java-format
 msgid ""
-"§eFinding all islands that has been abandoned for more than {0} days below "
+"§eFinding all islands that have been abandoned for more than {0} days below "
 "level {1}"
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Do §9/usb purge confirm§e within {0} to accept."
+msgid "§4PURGE:§e Do §9usb purge confirm§e within {0} to accept."
 msgstr ""
 
 msgid "§4Trying to abort purge"
@@ -829,11 +829,11 @@ msgstr ""
 msgid "§eAnimation-tick must be a valid integer."
 msgstr ""
 
-msgid "set a player's island to your location"
-msgstr "Đặt đảo của người chơi tại vị trí của bạn"
+msgid "set a player''s island to your location"
+msgstr ""
 
 #, java-format
-msgid "§aSet {0}'s island to the current island."
+msgid "§aSet {0}''s island to the current island."
 msgstr ""
 
 msgid "§4Island not found: unable to set the island!"
@@ -1040,8 +1040,8 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§eLời mời {0} đã quá thời hạn hoặc bị huỷ bỏ."
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
-msgstr "§eLời mời đến dảo của {0} đã quá thời hạn hoặc bị huỷ bỏ."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
+msgstr ""
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eBạn chấp nhận lời mời gia nhập đảo."
@@ -1197,8 +1197,8 @@ msgid ""
 "right now."
 msgstr "§cĐảo của bạn đang khởi tạo, bạn không thể hồi chuyển về nhà."
 
-msgid "check your or anothers island info"
-msgstr "kiểm tra thông tin đảo của bạn hoặc người khác"
+msgid "check your or another''s island info"
+msgstr ""
 
 msgid "allows user to see others island info"
 msgstr ""
@@ -1243,8 +1243,8 @@ msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr "§eDùng§f /island invite <tên người chơi>§e để mời người chơi vào đảo."
 
-msgid "§4Only the island's owner can invite!"
-msgstr "§4Chỉ có quản lý mới có thể mời người chơi khác!"
+msgid "§4Only the island''s owner can invite!"
+msgstr ""
 
 #, java-format
 msgid "§aYou can invite {0} more players."
@@ -1335,8 +1335,8 @@ msgid "allows user to query for others levels"
 msgstr ""
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
-msgstr "§Thông tin đảo của {0}:"
+msgid "§eInformation about {0}''s Island:"
+msgstr ""
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1466,11 +1466,11 @@ msgstr "§eGhi chú: Mọi thử trên đảo và vật phẩm của bạn sẽ 
 msgid "set the island-home"
 msgstr "thiết đặt vị trí nhà"
 
-msgid "set your island's warp location"
-msgstr "thiết đặt điểm dịch chuyển của đảo"
+msgid "set your island''s warp location"
+msgstr ""
 
-msgid "§cYou do not have permission to set your island's warp point!"
-msgstr "§cBạn không có quyền thiết đặt điểm dịch chuyển của đảo"
+msgid "§cYou do not have permission to set your island''s warp point!"
+msgstr ""
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr "§cBạn phải trên đảo của bản thân để thiết đặt điểm dịch chuyển"
@@ -1496,8 +1496,8 @@ msgstr "§b{0}§d kích hoạt điểm dịch chuyển của đảo"
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d vô hiệu hoá điểm dịch chuyển của đảo"
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
-msgstr "§cBạn không có quyền bật/tắt điểm dịch chuyển"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
+msgstr ""
 
 msgid "display the top10 of islands"
 msgstr "hiện 10 đảo thứ hạng cao nhất"
@@ -1525,23 +1525,23 @@ msgid "§4Unknown player {0}"
 msgstr "§4Người chơi không xác định {0}"
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
-msgstr "§eBạn được tín nhiệm trên đảo của {0}"
+msgid "§eYou are now trusted on §4{0}''s §eisland."
+msgstr ""
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
 msgstr "§a{0} tín nhiệm bạn{1}"
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
-msgstr "§eBạn không còn được tin tưởng trên đảo của §4{0}"
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
+msgstr ""
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} không còn tín nhiệm {1}"
 
-msgid "warp to another player's island"
-msgstr "dịch chuyển đến đảo của người chơi khác"
+msgid "warp to another player''s island"
+msgstr ""
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr "§aĐiểm dịch chuyển đã hoạt động, người chơi có thể dịch chuyển đến"
@@ -1607,7 +1607,7 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another island's portals!"
+msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -1653,8 +1653,8 @@ msgstr "§eChuyển nham thạch trở lại thành dung nham. Cẩn thận!"
 msgid "§eYour inventory must have another empty space!"
 msgstr "§Hành trang phải còn trống!"
 
-msgid "§4It's a bad idea to replace your lava!"
-msgstr "§4Ý tưởng lấp dung nham có vẻ tồi"
+msgid "§4It''s a bad idea to replace your lava!"
+msgstr ""
 
 msgid "§eYou cannot hurt island-members."
 msgstr "§eBạn không thể gây sát thương lên thành viên trong đảo"
@@ -1962,23 +1962,23 @@ msgstr "Danh sách thử thách"
 msgid "Change Biome"
 msgstr ""
 
-msgid "change the island's biome."
+msgid "change the island''s biome."
 msgstr ""
 
 msgid "Toggle Island Lock"
 msgstr ""
 
-msgid "toggle the island's lock."
-msgstr "bật tắt khoá đảo"
+msgid "toggle the island''s lock."
+msgstr ""
 
 msgid "Set Island Warp"
 msgstr ""
 
-msgid "set the island's warp."
-msgstr "thiết đặt điểm dịch chuyển của đảo"
+msgid "set the island''s warp."
+msgstr ""
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
@@ -1987,11 +1987,11 @@ msgstr ""
 msgid "Toggle Island Warp"
 msgstr ""
 
-msgid "toggle the island's warp."
-msgstr "bật tắt điểm dịch chuyển của đảo"
+msgid "toggle the island''s warp."
+msgstr ""
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
@@ -2225,10 +2225,8 @@ msgstr "§9Quyền hạn"
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
-"§eNhấp để trở về\n"
-"§etrang thông tin đảo"
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2272,13 +2270,8 @@ msgid ""
 "§eHover over a player's icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
-"§eXem quyền hạn người chơi\n"
-"§ethông qua hình ảnh đại diện.\n"
-"§eQuản lý có thể thay đổi quyền hạn\n"
-"§ethành viên bằng cách nhấp vào\n"
-"§ehình đại diện"
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -2298,8 +2291,8 @@ msgstr "Có thể {0}"
 msgid "Cannot {0}"
 msgstr "Không thể {0}"
 
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Nhấp để thay đổi quyền hạn người chơi>"
+msgid "§e<Click to change this player''s permissions>"
+msgstr ""
 
 msgid "Island Log"
 msgstr "Lịch sử đảo"
@@ -2382,7 +2375,7 @@ msgid "§a§lJoin an Island"
 msgstr "§a§lGia nhập đảo"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2391,10 +2384,6 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Muốn tham gia đảo của người chơi khác?\n"
-"Nếu họ mời, bạn có thể nhấp vào đây\n"
-"hoặc dùng §e/island accept§f để đồng ý.\n"
-"§e§lNhấp để mời hoặc đồng ý lời mời!"
 
 msgid "Island Menu"
 msgstr "Đảo"
@@ -2403,15 +2392,12 @@ msgid "§a§lReturn Home"
 msgstr "§a§lHồi chuyển"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
-"Hồi chuyển về đảo\n"
-"Bạn có thể thay đổi vị trí hồi chuyển\n"
-"bằng §b/island sethome§e§lNhấp để hồi chuyển"
 
 msgid "§a§lChallenges"
 msgstr "§a§lThử thách"
@@ -2718,12 +2704,12 @@ msgstr ""
 msgid "§aTeleporting you to your island."
 msgstr "§aDịch chuyển về đảo."
 
-msgid "§4Unable to warp you to that player's island!"
-msgstr "§4Không thể dịch chuyển đến đảo của người chơi này!"
+msgid "§4Unable to warp you to that player''s island!"
+msgstr ""
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
-msgstr "§aDịch chuyển đến đảo của {0}."
+msgid "§aTeleporting you to {0}''s island."
+msgstr ""
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Cần phải ở trên đảo của bạn để thiết đặt nhà chính!"

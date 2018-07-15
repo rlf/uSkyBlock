@@ -9,6 +9,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class WarpCommand extends RequirePlayerCommand {
@@ -16,7 +17,7 @@ public class WarpCommand extends RequirePlayerCommand {
     private final uSkyBlock plugin;
 
     public WarpCommand(uSkyBlock plugin) {
-        super("warp|w", "usb.island.warp", "island", tr("warp to another player's island"));
+        super("warp|w", "usb.island.warp", "island", marktr("warp to another player''s island"));
         this.plugin = plugin;
     }
 

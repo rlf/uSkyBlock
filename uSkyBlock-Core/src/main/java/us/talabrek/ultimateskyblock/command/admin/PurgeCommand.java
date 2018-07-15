@@ -10,6 +10,7 @@ import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -23,7 +24,7 @@ public class PurgeCommand extends AbstractCommand {
     private String days = null;
 
     public PurgeCommand(uSkyBlock plugin) {
-        super("purge", "usb.admin.purge", "time-in-days|stop|confirm ?level ?force", tr("purges all abandoned islands"));
+        super("purge", "usb.admin.purge", "time-in-days|stop|confirm ?level ?force", marktr("purges all abandoned islands"));
         this.plugin = plugin;
     }
 

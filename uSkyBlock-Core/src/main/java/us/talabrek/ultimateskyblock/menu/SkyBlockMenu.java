@@ -56,15 +56,15 @@ public class SkyBlockMenu {
     ItemStack kick = new ItemStack(301, 1);
     private List<PartyPermissionMenuItem> permissionMenuItems = Arrays.asList(
             new PartyPermissionMenuItem(biome, "canChangeBiome", tr("Change Biome"),
-                    tr("change the island's biome.")),
+                    tr("change the island''s biome.")),
             new PartyPermissionMenuItem(lock, "canToggleLock", tr("Toggle Island Lock"),
-                    tr("toggle the island's lock.")),
+                    tr("toggle the island''s lock.")),
             new PartyPermissionMenuItem(warpset, "canChangeWarp", tr("Set Island Warp"),
-                    tr("set the island's warp."),
-                    tr("set the island's warp,\nwhich allows non-group\nmembers to teleport to\nthe island.")),
+                    tr("set the island''s warp."),
+                    tr("set the island''s warp,\nwhich allows non-group\nmembers to teleport to\nthe island.")),
             new PartyPermissionMenuItem(warptoggle, "canToggleWarp", tr("Toggle Island Warp"),
-                    tr("toggle the island's warp."),
-                    tr("toggle the island's warp,\nallowing them to turn it\non or off at anytime, but\nnot set the location.")),
+                    tr("toggle the island''s warp."),
+                    tr("toggle the island''s warp,\nallowing them to turn it\non or off at anytime, but\nnot set the location.")),
             new PartyPermissionMenuItem(invite, "canInviteOthers", tr("Invite Players"),
                     tr("invite others to the island."),
                     tr("invite\n" +
@@ -155,7 +155,7 @@ public class SkyBlockMenu {
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = sign.getItemMeta();
         meta2.setDisplayName(tr("\u00a79Player Permissions"));
-        addLore(lores, tr("\u00a7eClick here to return to\n\u00a7eyour island group's info."));
+        addLore(lores, tr("\u00a7eClick here to return to\n\u00a7eyour island group''s info."));
         meta2.setLore(lores);
         sign.setItemMeta(meta2);
         menu.addItem(sign);
@@ -217,7 +217,7 @@ public class SkyBlockMenu {
         } else {
             addLore(lores, tr("\u00a7cThis island is full."));
         }
-        addLore(lores, tr("\u00a7eHover over a player's icon to\n\u00a7eview their permissions. The\n\u00a7eleader can change permissions\n\u00a7eby clicking a player's icon."));
+        addLore(lores, tr("\u00a7eHover over a player's icon to\n\u00a7eview their permissions. The\n\u00a7eleader can change permissions\n\u00a7eby clicking a player''s icon."));
         meta2.setLore(lores);
         sign.setItemMeta(meta2);
         menu.addItem(sign.clone());
@@ -241,7 +241,7 @@ public class SkyBlockMenu {
                 }
             }
             if (islandInfo.isLeader(player.getName())) {
-                addLore(lores, tr("\u00a7e<Click to change this player's permissions>"));
+                addLore(lores, tr("\u00a7e<Click to change this player''s permissions>"));
             }
             meta3.setLore(lores);
             headItem.setItemMeta(meta3);
@@ -502,7 +502,7 @@ public class SkyBlockMenu {
         menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         final SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
         meta2.setDisplayName(tr("\u00a7a\u00a7lJoin an Island"));
-        addLore(lores, "\u00a7f", tr("Want to join another player's\nisland instead of starting\nyour own? If another player\ninvites you to their island\nyou can click here or use\n\u00a7e/island accept\u00a7f to join them.\n\u00a7e\u00a7lClick here to accept an invite!\n\u00a7e\u00a7l(You must be invited first)"));
+        addLore(lores, "\u00a7f", tr("Want to join another player''s\nisland instead of starting\nyour own? If another player\ninvites you to their island\nyou can click here or use\n\u00a7e/island accept\u00a7f to join them.\n\u00a7e\u00a7lClick here to accept an invite!\n\u00a7e\u00a7l(You must be invited first)"));
         meta2.setLore(lores);
         menuItem.setItemMeta(meta2);
         menu.setItem(menuSize-1, menuItem);
@@ -528,7 +528,7 @@ public class SkyBlockMenu {
         ItemStack menuItem = new ItemStack(Material.WOOD_DOOR, 1);
         ItemMeta meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lReturn Home"));
-        addLore(lores, "\u00a7f", tr("Return to your island's home\npoint. You can change your home\npoint to any location on your\nisland using \u00a7b/island sethome\n\u00a7e\u00a7lClick here to return home."));
+        addLore(lores, "\u00a7f", tr("Return to your island''s home\npoint. You can change your home\npoint to any location on your\nisland using \u00a7b/island sethome\n\u00a7e\u00a7lClick here to return home."));
         meta4.setLore(lores);
         menuItem.setItemMeta(meta4);
         menu.addItem(menuItem);

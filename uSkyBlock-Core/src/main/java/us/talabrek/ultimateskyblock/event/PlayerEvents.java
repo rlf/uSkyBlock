@@ -148,7 +148,7 @@ public class PlayerEvents implements Listener {
         }
         if (event.getBlockReplacedState() != null &&
                 isLavaSource(event.getBlockReplacedState().getType(), event.getBlockReplacedState().getRawData())) {
-            plugin.notifyPlayer(event.getPlayer(), tr("\u00a74It's a bad idea to replace your lava!"));
+            plugin.notifyPlayer(event.getPlayer(), tr("\u00a74It''s a bad idea to replace your lava!"));
             event.setCancelled(true);
         }
     }

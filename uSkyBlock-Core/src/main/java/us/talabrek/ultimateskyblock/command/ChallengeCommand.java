@@ -10,6 +10,7 @@ import us.talabrek.ultimateskyblock.command.completion.AvailableChallengeTabComp
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -19,7 +20,7 @@ public class ChallengeCommand extends AbstractCommandExecutor {
     private final uSkyBlock plugin;
 
     public ChallengeCommand(uSkyBlock plugin) {
-        super("challenges|c", "usb.island.challenges", tr("complete and list challenges"));
+        super("challenges|c", "usb.island.challenges", marktr("complete and list challenges"));
         this.plugin = plugin;
         addTab("challenge", new AvailableChallengeTabCompleter());
         add(new ChallengeCompleteCommand(plugin));

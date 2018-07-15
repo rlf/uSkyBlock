@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -19,7 +20,7 @@ public class AutoCommand extends AbstractCommand {
     private final HomeCommand home;
 
     public AutoCommand(uSkyBlock plugin, CreateCommand create, HomeCommand home) {
-        super("auto", "usb.island.create", tr("teleports you to your island (or create one)"));
+        super("auto", "usb.island.create", marktr("teleports you to your island (or create one)"));
         this.plugin = plugin;
         this.create = create;
         this.home = home;

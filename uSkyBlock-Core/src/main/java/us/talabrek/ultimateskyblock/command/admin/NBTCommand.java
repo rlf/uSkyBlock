@@ -11,6 +11,7 @@ import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -18,7 +19,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class NBTCommand extends CompositeCommand {
     public NBTCommand() {
-        super("nbt", "usb.admin.nbt", tr("advanced info about NBT stuff"));
+        super("nbt", "usb.admin.nbt", marktr("advanced info about NBT stuff"));
         add(new AbstractCommand("info|i", tr("shows the NBTTag for the currently held item")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {

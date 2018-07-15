@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -21,7 +22,7 @@ public class ConfigGUICommand extends AbstractCommand {
     public static final List<String> CONFIGS = Arrays.asList("config", "levelConfig", "challenges", "signs");
 
     public ConfigGUICommand(uSkyBlock plugin) {
-        super("config|c", "usb.admin.config", "?config", tr("open GUI for config"));
+        super("config|c", "usb.admin.config", "?config", marktr("open GUI for config"));
         this.plugin = plugin;
     }
 

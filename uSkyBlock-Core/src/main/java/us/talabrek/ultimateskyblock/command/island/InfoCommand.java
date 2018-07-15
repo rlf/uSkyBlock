@@ -15,11 +15,12 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class InfoCommand extends RequireIslandCommand {
     public InfoCommand(uSkyBlock plugin) {
-        super(plugin, "info", "usb.island.info", "?island", tr("check your or anothers island info"));
+        super(plugin, "info", "usb.island.info", "?island", marktr("check your or another''s island info"));
         addFeaturePermission("usb.island.info.other", tr("allows user to see others island info"));
     }
 

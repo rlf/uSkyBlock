@@ -26,7 +26,7 @@ public class AdminIslandCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public AdminIslandCommand(final uSkyBlock plugin, final ConfirmHandler confirmHandler) {
-        super("island|is", "", tr("manage islands"));
+        super("island|is", "", marktr("manage islands"));
         this.plugin = plugin;
         add(new AbstractIslandInfoCommand("protect", "usb.admin.protect", tr("protects the island")) {
             @Override
@@ -216,7 +216,7 @@ public class AdminIslandCommand extends CompositeCommand {
 
     private void deleteIsland(CommandSender sender, PlayerInfo playerInfo) {
         if (playerInfo != null && playerInfo.getIslandLocation() != null) {
-            sender.sendMessage(tr("\u00a7eRemoving {0}'s island.", playerInfo.getPlayerName()));
+            sender.sendMessage(tr("\u00a7eRemoving {0}''s island.", playerInfo.getPlayerName()));
             uSkyBlock.getInstance().deletePlayerIsland(playerInfo.getPlayerName(), null);
         } else {
             sender.sendMessage(tr("Error: That player does not have an island!"));

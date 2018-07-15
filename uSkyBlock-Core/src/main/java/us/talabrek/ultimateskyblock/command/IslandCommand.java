@@ -15,6 +15,7 @@ import us.talabrek.ultimateskyblock.command.island.*;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -25,7 +26,7 @@ public class IslandCommand extends AbstractCommandExecutor {
     private final SkyBlockMenu menu;
 
     public IslandCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super("island|is", "usb.island.create", tr("general island command"));
+        super("island|is", "usb.island.create", marktr("general island command"));
         this.plugin = plugin;
         this.menu = menu;
         addFeaturePermission("usb.mod.bypasscooldowns", tr("allows user to bypass cooldowns"));

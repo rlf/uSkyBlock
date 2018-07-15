@@ -27,7 +27,7 @@ public class InviteCommand extends RequireIslandCommand {
                 return true;
             }
             if (!island.isLeader(player) || !island.hasPerm(player, "canInviteOthers")) {
-                player.sendMessage(I18nUtil.tr("\u00a74Only the island's owner can invite!"));
+                player.sendMessage(I18nUtil.tr("\u00a74Only the island''s owner can invite!"));
                 return true;
             }
             int diff = island.getMaxPartySize() - island.getPartySize();

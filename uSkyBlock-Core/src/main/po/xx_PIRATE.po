@@ -462,8 +462,8 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} has had their biome changed to OCEAN."
 
 #, java-format
-msgid "§eRemoving {0}'s island."
-msgstr "§eRemovin'' {0}''s hideout."
+msgid "§eRemoving {0}''s island."
+msgstr ""
 
 msgid "Error: That player does not have an island!"
 msgstr "Blimey: That pirate does not have a hideout!"
@@ -557,8 +557,8 @@ msgid "§4No valid island found"
 msgstr "§4Nay valid hideout found"
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
-msgstr "§4Nay flatland detected at {0}''s hideout!"
+msgid "§4No flatland detected at {0}''s island!"
+msgstr ""
 
 msgid "flushes all caches to files"
 msgstr "flushes all caches to files"
@@ -771,12 +771,12 @@ msgstr ""
 
 #, java-format
 msgid ""
-"§eFinding all islands that has been abandoned for more than {0} days below "
+"§eFinding all islands that have been abandoned for more than {0} days below "
 "level {1}"
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Do §9/usb purge confirm§e within {0} to accept."
+msgid "§4PURGE:§e Do §9usb purge confirm§e within {0} to accept."
 msgstr ""
 
 msgid "§4Trying to abort purge"
@@ -828,11 +828,11 @@ msgstr "§eAnimation-tick changed to {0}."
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimation-tick must be a valid integer."
 
-msgid "set a player's island to your location"
-msgstr "set a pirate's hideout to yer location"
+msgid "set a player''s island to your location"
+msgstr ""
 
 #, java-format
-msgid "§aSet {0}'s island to the current island."
+msgid "§aSet {0}''s island to the current island."
 msgstr ""
 
 msgid "§4Island not found: unable to set the island!"
@@ -1044,8 +1044,8 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§eInvitation for {0}§e has timedout or been cancelled."
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
-msgstr "§eInvitation for {0}''s hideout has timedout or been cancelled."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
+msgstr ""
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eYe have accepted the invitation to join a hideout."
@@ -1208,8 +1208,8 @@ msgstr ""
 "§cYer hideout be in the process of generatin', ye cannot teleport home right "
 "now."
 
-msgid "check your or anothers island info"
-msgstr "check yer or anothers hideout info"
+msgid "check your or another''s island info"
+msgstr ""
 
 msgid "allows user to see others island info"
 msgstr "allows user to see others hideout info"
@@ -1255,8 +1255,8 @@ msgid ""
 msgstr ""
 "§eUse§f /island invite <playername>§e to invite a pirate to yer hideout."
 
-msgid "§4Only the island's owner can invite!"
-msgstr "§4Only the hideout's owner can invite!"
+msgid "§4Only the island''s owner can invite!"
+msgstr ""
 
 #, java-format
 msgid "§aYou can invite {0} more players."
@@ -1347,8 +1347,8 @@ msgid "allows user to query for others levels"
 msgstr "allows user to query for others levels"
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
-msgstr "§eInformation about {0}''s Island:"
+msgid "§eInformation about {0}''s Island:"
+msgstr ""
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1478,11 +1478,11 @@ msgstr "§eNOTE: Yer entire hideout an' all yer belongin's will be RESET!"
 msgid "set the island-home"
 msgstr "set the hideout-home"
 
-msgid "set your island's warp location"
-msgstr "set yer hideout's warp location"
+msgid "set your island''s warp location"
+msgstr ""
 
-msgid "§cYou do not have permission to set your island's warp point!"
-msgstr "§cYe do not have permission to set yer hideout's warp point!"
+msgid "§cYou do not have permission to set your island''s warp point!"
+msgstr ""
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr "§cYe need to be on yer own hideout to set the warp!"
@@ -1508,8 +1508,8 @@ msgstr "§b{0}§d activated the hideout warp."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deactivated the hideout warp."
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
-msgstr "§cYe do not have permission to enable/disable yer hideout's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
+msgstr ""
 
 msgid "display the top10 of islands"
 msgstr "display the top10 of islands"
@@ -1537,23 +1537,23 @@ msgid "§4Unknown player {0}"
 msgstr "§4Unknown pirate {0}"
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
-msgstr "§eYe be now trusted on §4{0}''s §eisland."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
+msgstr ""
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
 msgstr "§a{0} trusted {1} on the hideout"
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
-msgstr "§eYe be nay longer trusted on §4{0}''s §eisland."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
+msgstr ""
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} revoked trust in {1} on the hideout"
 
-msgid "warp to another player's island"
-msgstr "warp to another pirate's hideout"
+msgid "warp to another player''s island"
+msgstr ""
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr "§aYer incomin' warp be active, pirates may warp to yer hideout."
@@ -1621,7 +1621,7 @@ msgstr "allows user to use [usb] signs"
 msgid "allows user to place [usb] signs"
 msgstr "allows user to place [usb] signs"
 
-msgid "§eYou can not use another island's portals!"
+msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -1669,8 +1669,8 @@ msgstr "§eChangin' yer obsidian back into lava. Be careful!"
 msgid "§eYour inventory must have another empty space!"
 msgstr "§eYer inventory must have another empty space!"
 
-msgid "§4It's a bad idea to replace your lava!"
-msgstr "§4It's a bad idea to replace yer lava!"
+msgid "§4It''s a bad idea to replace your lava!"
+msgstr ""
 
 msgid "§eYou cannot hurt island-members."
 msgstr "§eYe cannot hurt hideout-members."
@@ -1985,48 +1985,40 @@ msgstr "Challenge Menu"
 msgid "Change Biome"
 msgstr "Change Biome"
 
-msgid "change the island's biome."
-msgstr "change the hideout's biome."
+msgid "change the island''s biome."
+msgstr ""
 
 msgid "Toggle Island Lock"
 msgstr "Toggle Island Lock"
 
-msgid "toggle the island's lock."
-msgstr "toggle the hideout's lock."
+msgid "toggle the island''s lock."
+msgstr ""
 
 msgid "Set Island Warp"
 msgstr "Set Island Warp"
 
-msgid "set the island's warp."
-msgstr "set the hideout's warp."
+msgid "set the island''s warp."
+msgstr ""
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
 msgstr ""
-"set the hideout's warp,\n"
-"which allows non-group\n"
-"members to teleport to\n"
-"the hideout."
 
 msgid "Toggle Island Warp"
 msgstr "Toggle Island Warp"
 
-msgid "toggle the island's warp."
-msgstr "toggle the hideout's warp."
+msgid "toggle the island''s warp."
+msgstr ""
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
-"toggle the hideout's warp,\n"
-"allowin' 'em to turn it\n"
-"on or off at anytime, but\n"
-"not set the location."
 
 msgid "Invite Players"
 msgstr "Invite Pirates"
@@ -2294,10 +2286,8 @@ msgstr "§9Pirate Permissions"
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
-"§eClick here to return to\n"
-"§eyer hideout group's info."
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2341,12 +2331,8 @@ msgid ""
 "§eHover over a player's icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
-"§eHover over a pirate's icon to\n"
-"§eview their permissions. The\n"
-"§ecaptain can change permissions\n"
-"§eby clickin' a pirate's icon."
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -2366,8 +2352,8 @@ msgstr "Can {0}"
 msgid "Cannot {0}"
 msgstr "Cannot {0}"
 
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Click to change this pirate's permissions>"
+msgid "§e<Click to change this player''s permissions>"
+msgstr ""
 
 msgid "Island Log"
 msgstr "Island Log"
@@ -2453,7 +2439,7 @@ msgid "§a§lJoin an Island"
 msgstr "§a§lJoin an Island"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2462,14 +2448,6 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Want to join another pirate's\n"
-" hideout instead of startin'\n"
-"yer own? If another pirate\n"
-"invites ye to their hideout\n"
-"ye can click here or use\n"
-"§e/island accept§f to join 'em.\n"
-"§e§lClick here to accept an invite!\n"
-"§e§l(Ye must be invited first)"
 
 msgid "Island Menu"
 msgstr "Island Menu"
@@ -2478,17 +2456,12 @@ msgid "§a§lReturn Home"
 msgstr "§a§lReturn Home"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
-"Return to yer hideout's home\n"
-"point. Ye can change yer home\n"
-"point to any location on yer\n"
-" hideout usin' §b/island sethome\n"
-"§e§lClick here to return home."
 
 msgid "§a§lChallenges"
 msgstr "§a§lChallenges"
@@ -2812,12 +2785,12 @@ msgstr "§cWARNING: §eTeleportin' ye to mid-air."
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportin' ye to yer hideout."
 
-msgid "§4Unable to warp you to that player's island!"
-msgstr "§4Unable to warp ye to that pirate's hideout!"
+msgid "§4Unable to warp you to that player''s island!"
+msgstr ""
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
-msgstr "§aTeleportin'' ye to {0}''s hideout."
+msgid "§aTeleporting you to {0}''s island."
+msgstr ""
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Ye must be closer to yer hideout to set yer skyblock home!"
@@ -2863,6 +2836,141 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "North-West"
+
+#~ msgid "§eRemoving {0}'s island."
+#~ msgstr "§eRemovin'' {0}''s hideout."
+
+#~ msgid "§4No flatland detected at {0}'s island!"
+#~ msgstr "§4Nay flatland detected at {0}''s hideout!"
+
+#~ msgid "set a player's island to your location"
+#~ msgstr "set a pirate's hideout to yer location"
+
+#~ msgid "§eInvitation for {0}'s island has timedout or been cancelled."
+#~ msgstr "§eInvitation for {0}''s hideout has timedout or been cancelled."
+
+#~ msgid "§4Only the island's owner can invite!"
+#~ msgstr "§4Only the hideout's owner can invite!"
+
+#~ msgid "§eInformation about {0}'s Island:"
+#~ msgstr "§eInformation about {0}''s Island:"
+
+#~ msgid "set your island's warp location"
+#~ msgstr "set yer hideout's warp location"
+
+#~ msgid "§cYou do not have permission to set your island's warp point!"
+#~ msgstr "§cYe do not have permission to set yer hideout's warp point!"
+
+#~ msgid "§cYou do not have permission to enable/disable your island's warp!"
+#~ msgstr "§cYe do not have permission to enable/disable yer hideout's warp!"
+
+#~ msgid "§eYou are now trusted on §4{0}'s §eisland."
+#~ msgstr "§eYe be now trusted on §4{0}''s §eisland."
+
+#~ msgid "§eYou are no longer trusted on §4{0}'s §eisland."
+#~ msgstr "§eYe be nay longer trusted on §4{0}''s §eisland."
+
+#~ msgid "warp to another player's island"
+#~ msgstr "warp to another pirate's hideout"
+
+#~ msgid "§4It's a bad idea to replace your lava!"
+#~ msgstr "§4It's a bad idea to replace yer lava!"
+
+#~ msgid "change the island's biome."
+#~ msgstr "change the hideout's biome."
+
+#~ msgid "toggle the island's lock."
+#~ msgstr "toggle the hideout's lock."
+
+#~ msgid "set the island's warp."
+#~ msgstr "set the hideout's warp."
+
+#~ msgid ""
+#~ "set the island's warp,\n"
+#~ "which allows non-group\n"
+#~ "members to teleport to\n"
+#~ "the island."
+#~ msgstr ""
+#~ "set the hideout's warp,\n"
+#~ "which allows non-group\n"
+#~ "members to teleport to\n"
+#~ "the hideout."
+
+#~ msgid "toggle the island's warp."
+#~ msgstr "toggle the hideout's warp."
+
+#~ msgid ""
+#~ "toggle the island's warp,\n"
+#~ "allowing them to turn it\n"
+#~ "on or off at anytime, but\n"
+#~ "not set the location."
+#~ msgstr ""
+#~ "toggle the hideout's warp,\n"
+#~ "allowin' 'em to turn it\n"
+#~ "on or off at anytime, but\n"
+#~ "not set the location."
+
+#~ msgid ""
+#~ "§eClick here to return to\n"
+#~ "§eyour island group's info."
+#~ msgstr ""
+#~ "§eClick here to return to\n"
+#~ "§eyer hideout group's info."
+
+#~ msgid ""
+#~ "§eHover over a player's icon to\n"
+#~ "§eview their permissions. The\n"
+#~ "§eleader can change permissions\n"
+#~ "§eby clicking a player's icon."
+#~ msgstr ""
+#~ "§eHover over a pirate's icon to\n"
+#~ "§eview their permissions. The\n"
+#~ "§ecaptain can change permissions\n"
+#~ "§eby clickin' a pirate's icon."
+
+#~ msgid "§e<Click to change this player's permissions>"
+#~ msgstr "§e<Click to change this pirate's permissions>"
+
+#~ msgid ""
+#~ "Want to join another player's\n"
+#~ "island instead of starting\n"
+#~ "your own? If another player\n"
+#~ "invites you to their island\n"
+#~ "you can click here or use\n"
+#~ "§e/island accept§f to join them.\n"
+#~ "§e§lClick here to accept an invite!\n"
+#~ "§e§l(You must be invited first)"
+#~ msgstr ""
+#~ "Want to join another pirate's\n"
+#~ " hideout instead of startin'\n"
+#~ "yer own? If another pirate\n"
+#~ "invites ye to their hideout\n"
+#~ "ye can click here or use\n"
+#~ "§e/island accept§f to join 'em.\n"
+#~ "§e§lClick here to accept an invite!\n"
+#~ "§e§l(Ye must be invited first)"
+
+#~ msgid ""
+#~ "Return to your island's home\n"
+#~ "point. You can change your home\n"
+#~ "point to any location on your\n"
+#~ "island using §b/island sethome\n"
+#~ "§e§lClick here to return home."
+#~ msgstr ""
+#~ "Return to yer hideout's home\n"
+#~ "point. Ye can change yer home\n"
+#~ "point to any location on yer\n"
+#~ " hideout usin' §b/island sethome\n"
+#~ "§e§lClick here to return home."
+
+#~ msgid "§4Unable to warp you to that player's island!"
+#~ msgstr "§4Unable to warp ye to that pirate's hideout!"
+
+#~ msgid "§aTeleporting you to {0}'s island."
+#~ msgstr "§aTeleportin'' ye to {0}''s hideout."
+
+#~ msgid "check your or anothers island info"
+#~ msgstr "check yer or anothers hideout info"
 
 #~ msgid "§eOrphans: {0}"
 #~ msgstr "§eOrphans: {0}"

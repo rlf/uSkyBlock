@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -22,7 +23,7 @@ public class SetIslandDataCommand extends AbstractIslandInfoCommand {
     private final List<String> methodNames;
 
     public SetIslandDataCommand(uSkyBlock plugin) {
-        super("set", "usb.admin.set", tr("advanced command for setting island-data"));
+        super("set", "usb.admin.set", marktr("advanced command for setting island-data"));
         methodNames = new ArrayList<>();
         for (Method m : IslandInfo.class.getDeclaredMethods()) {
             if (m.getName().startsWith("set")

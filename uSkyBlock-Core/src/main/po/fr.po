@@ -464,8 +464,8 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} a eu son biome changé en OCEAN."
 
 #, java-format
-msgid "§eRemoving {0}'s island."
-msgstr "§eL''île de {0} a été retiré"
+msgid "§eRemoving {0}''s island."
+msgstr ""
 
 msgid "Error: That player does not have an island!"
 msgstr "Erreur : Ce joueur n'a pas d'île"
@@ -559,8 +559,8 @@ msgid "§4No valid island found"
 msgstr "§4Ile non valide trouvé"
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
-msgstr "§4Aucun terrain plat détecté sur l''île de {0} !"
+msgid "§4No flatland detected at {0}''s island!"
+msgstr ""
 
 msgid "flushes all caches to files"
 msgstr "débusquer tout les fichiers cachés"
@@ -774,12 +774,12 @@ msgstr ""
 
 #, java-format
 msgid ""
-"§eFinding all islands that has been abandoned for more than {0} days below "
+"§eFinding all islands that have been abandoned for more than {0} days below "
 "level {1}"
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Do §9/usb purge confirm§e within {0} to accept."
+msgid "§4PURGE:§e Do §9usb purge confirm§e within {0} to accept."
 msgstr ""
 
 msgid "§4Trying to abort purge"
@@ -831,11 +831,11 @@ msgstr "§eAnimation des ticks changés en {0}."
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimation-tick doit être un nombre entier valide."
 
-msgid "set a player's island to your location"
-msgstr "fixer l'île d'un joueur à votre position"
+msgid "set a player''s island to your location"
+msgstr ""
 
 #, java-format
-msgid "§aSet {0}'s island to the current island."
+msgid "§aSet {0}''s island to the current island."
 msgstr ""
 
 msgid "§4Island not found: unable to set the island!"
@@ -1058,8 +1058,8 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§eL''invitation pour {0}§e a expiré ou a été annulé."
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
-msgstr "§eL'invitation pour l'île de {0} a expiré ou a été annulé."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
+msgstr ""
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eVous avez accepté l'invitation pour rejoindre l'île."
@@ -1219,8 +1219,8 @@ msgid ""
 "right now."
 msgstr "§cVotre île génére, vous ne pouvez vous téléporter maintenant."
 
-msgid "check your or anothers island info"
-msgstr "vérifier les informations d'une autre île"
+msgid "check your or another''s island info"
+msgstr ""
 
 msgid "allows user to see others island info"
 msgstr ""
@@ -1266,8 +1266,8 @@ msgid ""
 msgstr ""
 "§eUtiliser§f /island invite <pseudo> §e pour inviter un joueur sur votre île."
 
-msgid "§4Only the island's owner can invite!"
-msgstr "§4Seul le propriétaire de l'île peut inviter !"
+msgid "§4Only the island''s owner can invite!"
+msgstr ""
 
 #, java-format
 msgid "§aYou can invite {0} more players."
@@ -1360,8 +1360,8 @@ msgid "allows user to query for others levels"
 msgstr ""
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
-msgstr "§eInformations à propos de l''île de {0}:"
+msgid "§eInformation about {0}''s Island:"
+msgstr ""
 
 #, java-format
 msgid "§9Rank is {0}"
@@ -1494,13 +1494,11 @@ msgstr ""
 msgid "set the island-home"
 msgstr "modifier le home de l'île"
 
-msgid "set your island's warp location"
-msgstr "modifier la position du point de spawn du warp"
-
-msgid "§cYou do not have permission to set your island's warp point!"
+msgid "set your island''s warp location"
 msgstr ""
-"§cVous n'avez pas la permission pour modifier la position du warp de votre "
-"île !"
+
+msgid "§cYou do not have permission to set your island''s warp point!"
+msgstr ""
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr "§cVous devez être le chef de l'île pour modifier le warp !"
@@ -1528,9 +1526,8 @@ msgstr "§b{0}§d a activé le warp de l'île"
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d a désactivé le warp de l'île"
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr ""
-"§cVous n'avez pas la permission pour activer/désactiver le warp de votre île."
 
 msgid "display the top10 of islands"
 msgstr "afficher le top 10 des îles."
@@ -1559,23 +1556,23 @@ msgid "§4Unknown player {0}"
 msgstr "§4Joueur inconnu {0}"
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
-msgstr "§eVous avez ajouté §4{0}§e comme joueur de confiance sur l'île."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
+msgstr ""
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
 msgstr "§a{0} a ajouté {1} comme membre de confiance sur l'île"
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
-msgstr "§eVous n'êtes plus un joueur de confiance sur l'île de §4{0}."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
+msgstr ""
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0}a retiré le joueur {1} comme membre de confiance sur l'île"
 
-msgid "warp to another player's island"
-msgstr "utiliser le warp d'une autre île"
+msgid "warp to another player''s island"
+msgstr ""
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr "§aVotre warp est actif, les joueurs peuvent utiliser votre warp."
@@ -1641,7 +1638,7 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another island's portals!"
+msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -1692,8 +1689,8 @@ msgstr "§eObsidienne changé en lave ! Soyez prudent !"
 msgid "§eYour inventory must have another empty space!"
 msgstr "§eVotre inventaire doit avoir un autre espace de libre !"
 
-msgid "§4It's a bad idea to replace your lava!"
-msgstr "§4C'est une mauvaise idée de remplacer votre lave !"
+msgid "§4It''s a bad idea to replace your lava!"
+msgstr ""
 
 msgid "§eYou cannot hurt island-members."
 msgstr "§eVous ne pouvez pas frapper les membres de l'île."
@@ -2009,47 +2006,40 @@ msgstr "Menu des challenges"
 msgid "Change Biome"
 msgstr ""
 
-msgid "change the island's biome."
-msgstr "changer le biome de l'île"
+msgid "change the island''s biome."
+msgstr ""
 
 msgid "Toggle Island Lock"
 msgstr ""
 
-msgid "toggle the island's lock."
-msgstr "activer le vérrouillage de l'île"
+msgid "toggle the island''s lock."
+msgstr ""
 
 msgid "Set Island Warp"
 msgstr ""
 
-msgid "set the island's warp."
-msgstr "définir le warp de l'île"
+msgid "set the island''s warp."
+msgstr ""
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
 msgstr ""
-"définir le warp de l'île,\n"
-"qui permet à ceux qui ne sont pas de l'île\n"
-"de se téléporter sur l'île."
 
 msgid "Toggle Island Warp"
 msgstr ""
 
-msgid "toggle the island's warp."
-msgstr "activer le warp de l'île"
+msgid "toggle the island''s warp."
+msgstr ""
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
-"activer/désactiver le warp de l'île\n"
-"permet d'activer ou de\n"
-"désactiver à tout moment le warp de l'île\n"
-"mais pas de modifier la position."
 
 msgid "Invite Players"
 msgstr ""
@@ -2290,10 +2280,8 @@ msgstr "§9Permissions Joueurs"
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
-"§eClique ici pour retourner à\n"
-"§ela page du groupe."
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2337,11 +2325,8 @@ msgid ""
 "§eHover over a player's icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
-"§eSurvolez l'icone du joueur\n"
-"§epour voir ses permissions\n"
-"§eLe chef peu changer les "
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -2361,8 +2346,8 @@ msgstr "Vous pouvez {0}"
 msgid "Cannot {0}"
 msgstr "Vous ne pouvez pas {0}"
 
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Clique ici pour changer les permissions du joueur>"
+msgid "§e<Click to change this player''s permissions>"
+msgstr ""
 
 msgid "Island Log"
 msgstr "Log de l'île"
@@ -2445,7 +2430,7 @@ msgid "§a§lJoin an Island"
 msgstr "§a§lRejoindre une île"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2454,12 +2439,6 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Vous voulez rejoindre un \n"
-"autre membre ? Si l'autre \n"
-"joueur vous invite\n"
-"§e/island accept§f pour le rejoindre.\n"
-"§e§lClique ici pour accepter l'invitation !\n"
-"§e§l(Vous devez d'abord être invité)"
 
 msgid "Island Menu"
 msgstr "Menu de l'île"
@@ -2468,16 +2447,12 @@ msgid "§a§lReturn Home"
 msgstr "§a§lRetourner au home"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
-"Retourner au point de spawn de l'île.\n"
-"Vous pouvez changer le point de spawn\n"
-"avec §b/island sethome\n"
-"§e§lClique ici pour retourner sur l'île."
 
 msgid "§a§lChallenges"
 msgstr "§a§lChallenges"
@@ -2801,12 +2776,12 @@ msgstr "§cATTENTION: §eTéléportation en plein air."
 msgid "§aTeleporting you to your island."
 msgstr "§aTéléportation à votre île"
 
-msgid "§4Unable to warp you to that player's island!"
-msgstr "§4Impossible d'utiliser le warp de cette île !"
+msgid "§4Unable to warp you to that player''s island!"
+msgstr ""
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
-msgstr "§aTéléporté à l''île de {0}."
+msgid "§aTeleporting you to {0}''s island."
+msgstr ""
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Vous devez être plus proche de votre île pour modifier le home !"

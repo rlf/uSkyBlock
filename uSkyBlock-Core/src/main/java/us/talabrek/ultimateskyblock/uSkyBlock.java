@@ -652,10 +652,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         warpSweetWarp = getSafeWarpLocation(pi);
         if (warpSweetWarp == null) {
-            player.sendMessage(tr("\u00a74Unable to warp you to that player's island!"));
+            player.sendMessage(tr("\u00a74Unable to warp you to that player''s island!"));
             return true;
         }
-        player.sendMessage(tr("\u00a7aTeleporting you to {0}'s island.", pi.getDisplayName()));
+        player.sendMessage(tr("\u00a7aTeleporting you to {0}''s island.", pi.getDisplayName()));
         safeTeleport(player, warpSweetWarp, force);
         return true;
     }

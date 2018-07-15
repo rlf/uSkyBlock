@@ -8,13 +8,14 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 @SuppressWarnings("deprecation")
 public class LeaveCommand extends RequireIslandCommand {
 
     public LeaveCommand(uSkyBlock plugin) {
-        super(plugin, "leave", "usb.party.leave", tr("leave your party"));
+        super(plugin, "leave", "usb.party.leave", marktr("leave your party"));
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -21,7 +22,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class CooldownCommand extends CompositeCommand {
     public CooldownCommand(final uSkyBlock plugin) {
-        super("cooldown|cd", "usb.admin.cooldown", tr("Controls player-cooldowns"));
+        super("cooldown|cd", "usb.admin.cooldown", marktr("Controls player-cooldowns"));
         add(new AbstractCommand("clear|c", null, "player command", tr("clears the cooldown on a command (* = all)")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {

@@ -49,7 +49,7 @@ public class FlatlandFixCommand extends AbstractCommand {
     private boolean tryFlatlandFix(CommandSender sender, Location islandLocation) {
         // TODO: 29/12/2014 - R4zorax: Load chunks first?
         if (!plugin.getIslandLogic().clearFlatland(sender, islandLocation, 0)) {
-            sender.sendMessage(tr("\u00a74No flatland detected at {0}'s island!", LocationUtil.asString(islandLocation)));
+            sender.sendMessage(tr("\u00a74No flatland detected at {0}''s island!", LocationUtil.asString(islandLocation)));
         }
         return true;
     }

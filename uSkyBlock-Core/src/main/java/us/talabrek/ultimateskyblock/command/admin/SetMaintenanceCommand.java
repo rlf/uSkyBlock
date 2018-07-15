@@ -7,6 +7,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -16,7 +17,7 @@ public class SetMaintenanceCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public SetMaintenanceCommand(uSkyBlock plugin) {
-        super("maintenance", "usb.admin.maintenance", "true|false", tr("toggles maintenance mode"));
+        super("maintenance", "usb.admin.maintenance", "true|false", marktr("toggles maintenance mode"));
         this.plugin = plugin;
     }
 

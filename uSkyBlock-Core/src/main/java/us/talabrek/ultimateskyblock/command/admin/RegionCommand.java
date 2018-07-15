@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -38,7 +39,7 @@ public class RegionCommand extends CompositeCommand {
     private byte material_data;
 
     public RegionCommand(uSkyBlock plugin, final AnimationHandler animationHandler) {
-        super("region|rg", "usb.admin.region", tr("region manipulations"));
+        super("region|rg", "usb.admin.region", marktr("region manipulations"));
         this.animationHandler = animationHandler;
         add(new AbstractCommand("show", tr("shows the borders of the current island")) {
             @Override

@@ -8,7 +8,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 
 /**
  * Command for importing external formats.
@@ -18,7 +18,7 @@ public class ImportCommand extends AbstractCommand {
     private final ImportTabCompleter completer;
 
     public ImportCommand() {
-        super("import", "usb.admin.import", "format", tr("imports players and islands from other formats"));
+        super("import", "usb.admin.import", "format", marktr("imports players and islands from other formats"));
         completer = new ImportTabCompleter();
     }
 

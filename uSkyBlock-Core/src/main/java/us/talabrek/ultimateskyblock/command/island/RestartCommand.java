@@ -9,11 +9,12 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class RestartCommand extends RequireIslandCommand {
     public RestartCommand(uSkyBlock plugin) {
-        super(plugin, "restart|reset", "usb.island.restart", "?schematic", tr("delete your island and start a new one."));
+        super(plugin, "restart|reset", "usb.island.restart", "?schematic", marktr("delete your island and start a new one."));
         addFeaturePermission("usb.exempt.cooldown.restart", tr("exempt player from restart-cooldown"));
     }
 

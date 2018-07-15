@@ -7,6 +7,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -16,7 +17,7 @@ public class ChallengeCompleteCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public ChallengeCompleteCommand(uSkyBlock plugin) {
-        super("complete|c", "usb.island.challenges", "challenge", tr("try to complete a challenge"));
+        super("complete|c", "usb.island.challenges", "challenge", marktr("try to complete a challenge"));
         this.plugin = plugin;
     }
 

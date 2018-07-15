@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.util.Locale;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -22,7 +23,7 @@ public class LanguageCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public LanguageCommand(uSkyBlock plugin) {
-        super("lang|l", "usb.admin.lang", "language", tr("changes the language of the plugin, and reloads"));
+        super("lang|l", "usb.admin.lang", "language", marktr("changes the language of the plugin, and reloads"));
         this.plugin = plugin;
     }
 

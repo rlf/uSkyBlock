@@ -48,7 +48,7 @@ public class BiomeCommand extends RequireIslandCommand {
     private final SkyBlockMenu menu;
 
     public BiomeCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super(plugin, "biome|b", null, "biome ?radius", tr("change the biome of the island"));
+        super(plugin, "biome|b", null, "biome ?radius", marktr("change the biome of the island"));
         this.menu = menu;
         addFeaturePermission("usb.exempt.cooldown.biome", tr("exempt player from biome-cooldown"));
         for (String biome : BIOMES.keySet()) {

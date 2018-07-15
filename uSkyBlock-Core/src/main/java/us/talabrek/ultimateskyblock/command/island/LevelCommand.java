@@ -12,11 +12,12 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LevelCommand extends RequireIslandCommand {
     public LevelCommand(uSkyBlock plugin) {
-        super(plugin, "level", "usb.island.level", "?island", tr("check your or anothers island level"));
+        super(plugin, "level", "usb.island.level", "?island", marktr("check your or anothers island level"));
         addFeaturePermission("usb.island.level.other", tr("allows user to query for others levels"));
     }
 
@@ -62,7 +63,7 @@ public class LevelCommand extends RequireIslandCommand {
         final boolean shouldRecalculate = player.getName().equals(info.getPlayerName()) || hasPermission(player, "usb.admin.island");
         final Runnable showInfo = () -> {
             if (player != null && player.isOnline() && info != null) {
-                player.sendMessage(tr("\u00a7eInformation about {0}'s Island:", islandPlayer));
+                player.sendMessage(tr("\u00a7eInformation about {0}''s Island:", islandPlayer));
                 if (cmd.equalsIgnoreCase("level")) {
                     IslandRank rank = plugin.getIslandLogic().getRank(info.locationForParty());
                     if (rank != null) {
