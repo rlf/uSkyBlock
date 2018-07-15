@@ -1,4 +1,4 @@
-# Change Log for v2.7.4..v2.7.4-201807151511
+# Change Log for v2.7.4..v2.7.4-201807151514
   * c69ecf1 Feature #974 - Add challengecompletion times as challenge requirement
   * a786922 Issue #995 - Handle many required items
   * 07ecfe2 Issue #993 - Handle large orphan lists
