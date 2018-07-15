@@ -284,25 +284,11 @@ public class Challenge {
     }
 
     public List<String> getMissingRequirements(PlayerInfo playerInfo) {
-        List<String> missing = new ArrayList<>();
-        for (String challengeName : requiredChallenges) {
-            ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
-            if (completion != null && completion.getTimesCompleted() <= 0) {
-                String name = completion.getName();
-                Challenge challenge = uSkyBlock.getInstance().getChallengeLogic().getChallenge(name);
-                if (challenge != null) {
-                    missing.add(challenge.getDisplayName());
-                } else {
-                    missing.add(name);
-                }
-            }
+        String missingRequirement = ChallengeFormat.getMissingRequirement(playerInfo, requiredChallenges, uSkyBlock.getInstance().getChallengeLogic());
+        if (missingRequirement != null) {
+            return wordWrap(tr("\u00a77Requires {0}", missingRequirement), MAX_LINE);
         }
-        if (missing.isEmpty()) {
-            return Collections.emptyList();
-        }
-        String missingList = "" + missing;
-        missingList = missingList.substring(1, missingList.length() - 1);
-        return wordWrap(tr("\u00a77Requires {0}", missingList), MAX_LINE);
+        return Collections.emptyList();
     }
 
     @Override

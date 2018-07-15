@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.challenge.Challenge;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
+import us.talabrek.ultimateskyblock.command.completion.RankTabCompleter;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
@@ -22,7 +23,7 @@ public class AdminChallengeCommand extends CompositeCommand {
 
     private final uSkyBlock plugin;
 
-    public AdminChallengeCommand(final uSkyBlock plugin, TabCompleter challengeCompleter) {
+    public AdminChallengeCommand(final uSkyBlock plugin) {
         super("challenge|ch", "usb.mod.challenges", "player", I18nUtil.tr("Manage challenges for a player"));
         this.plugin = plugin;
         add(new ChallengeCommand("complete", null, "completes the challenge for the player") {
@@ -68,7 +69,6 @@ public class AdminChallengeCommand extends CompositeCommand {
                 }
             }
         });
-        addTab("challenge", challengeCompleter);
     }
 
     private void completeChallenge(CommandSender sender, PlayerInfo playerInfo, String challengeName) {

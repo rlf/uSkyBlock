@@ -822,6 +822,9 @@ ranks:
         description: Collect all types of wood items.
         type: onPlayer
         requiredItems: '136:16;+8 427:1;+1 186:2;+2 192:30;+15 65:30;+15 96:4;+2 72:2;+1'
+        requiredChallenges:
+        - toolmaker
+        - lumberjack:2
         displayItem: 58
         lockedDisplayItem: STAINED_GLASS_PANE:9
         reward:
@@ -871,6 +874,8 @@ ranks:
         description: Get hay bales for the horses.
         type: onPlayer
         requiredItems: '170:32;+4 420:8;+2 398:1 359:1'
+        requirecChallenges:
+        - wheatfarmer
         displayItem: 170
         lockedDisplayItem: STAINED_GLASS_PANE:12
         reward:
@@ -1089,6 +1094,10 @@ ranks:
         description: Collect every kind of edible food.
         type: onPlayer
         requiredItems: '393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1'
+        requiredChallenges:
+        - expertfarmer
+        - fisherman
+        - cookielover
         displayItem: 391
         lockedDisplayItem: STAINED_GLASS_PANE:4
         reward:
@@ -1113,6 +1122,8 @@ ranks:
         radius: 30
         displayItem: QUARTZ_BLOCK:2
         lockedDisplayItem: STAINED_GLASS_PANE:11
+        requiredChallenges:
+        - nethermining
         requiredItems:
         - 'QUARTZ_BLOCK:512'
         - 'QUARTZ_BLOCK:1:64' # chiseled
@@ -1552,4 +1563,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 25
+version: 26
