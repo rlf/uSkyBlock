@@ -1,8 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -462,8 +457,8 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} bylo podnebi zmeneno na OCEAN."
 
 #, java-format
-msgid "§eRemoving {0}'s island."
-msgstr "§eOdstranuji {0}'s ostrov."
+msgid "§eRemoving {0}''s island."
+msgstr "§eOdstranuji {0}''s ostrov."
 
 msgid "Error: That player does not have an island!"
 msgstr "Chyba: Tento hrac nema ostrov!"
@@ -557,7 +552,7 @@ msgid "§4No valid island found"
 msgstr "§4Zadny platny ostrov nenalezen."
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
+msgid "§4No flatland detected at {0}''s island!"
 msgstr "§4Zadna volna plocha nenalezena na {0} ostrove!"
 
 msgid "flushes all caches to files"
@@ -828,11 +823,11 @@ msgstr "§eAnimacni tick zmenen na  {0}."
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimacni tick musí byt platny integer."
 
-msgid "set a player's island to your location"
+msgid "set a player''s island to your location"
 msgstr "Nastavi hracuv ostrov do vasi aktualni polohy."
 
 #, java-format
-msgid "§aSet {0}'s island to the current island."
+msgid "§aSet {0}''s island to the current island."
 msgstr ""
 
 msgid "§4Island not found: unable to set the island!"
@@ -1046,7 +1041,7 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§ePozvanka pro {0}§e vyprsela nebo byla zrusena."
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
 msgstr "§ePozvanka na ostrov  {0}§e vyprsela nebo byla zrusena."
 
 msgid "§eYou have accepted the invitation to join an island."
@@ -1208,7 +1203,7 @@ msgstr ""
 "§cMomentalne se nemuzes teleportovat domu na ostrov, protoze tvuj ostrov se "
 "jeste vytvari."
 
-msgid "check your or anothers island info"
+msgid "check your or another''s island info"
 msgstr "Podivej se na informace o ostrove."
 
 msgid "allows user to see others island info"
@@ -1256,7 +1251,7 @@ msgstr ""
 "§ePouzik prikaz §f /island invite <playername>§epro pozvani hrace do tve "
 "party na ostrove."
 
-msgid "§4Only the island's owner can invite!"
+msgid "§4Only the island''s owner can invite!"
 msgstr "§4Pouze majitel ostrova muze prizvat jiného hrace!"
 
 #, java-format
@@ -1347,7 +1342,7 @@ msgid "allows user to query for others levels"
 msgstr ""
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
+msgid "§eInformation about {0}''s Island:"
 msgstr "§eInformace o ostrove hrace {0} :"
 
 #, java-format
@@ -1478,10 +1473,10 @@ msgstr "§ePOZOR: Tvuj cely ostrov a vsechny veci na nem budou RESETOVANY!"
 msgid "set the island-home"
 msgstr "Nastav home pozici na ostrove"
 
-msgid "set your island's warp location"
+msgid "set your island''s warp location"
 msgstr "Nastav lokaci warpu na ostrove"
 
-msgid "§cYou do not have permission to set your island's warp point!"
+msgid "§cYou do not have permission to set your island''s warp point!"
 msgstr "§cNemas opravneni nastavit misto pro teleport!"
 
 msgid "§cYou need to be on your own island to set the warp!"
@@ -1510,7 +1505,7 @@ msgstr "§b{0}§d  aktivoval teleport na ostrove."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deaktivovat teleport na ostrove."
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr "§cNemas opravneni povolit / zakazat teleport na ostrove!"
 
 msgid "display the top10 of islands"
@@ -1539,7 +1534,7 @@ msgid "§4Unknown player {0}"
 msgstr "§4Neznamy hrac {0}"
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
 msgstr "§eNyni ti zacal verit §4{0}' §ena tvem ostrove."
 
 #, java-format
@@ -1547,14 +1542,14 @@ msgid "§a{0} trusted {1} on the island"
 msgstr "§a{0} veri {1} na ostrove"
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
-msgstr "§eTi prestal verit §4{0}'s §eisland."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
+msgstr "§eTi prestal verit §4{0}''s §eisland."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} zrusil duveru {1} na ostrove"
 
-msgid "warp to another player's island"
+msgid "warp to another player''s island"
 msgstr "warp k ostrovu jneho hrace"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
@@ -1627,7 +1622,7 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another island's portals!"
+msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -1675,7 +1670,7 @@ msgstr "§ePrave menis svuj obsidian na lavu. Davej si bacha kam slapes! "
 msgid "§eYour inventory must have another empty space!"
 msgstr "§eTvuj inventar musi mit vice prazdneho mista!"
 
-msgid "§4It's a bad idea to replace your lava!"
+msgid "§4It''s a bad idea to replace your lava!"
 msgstr "§4To byl ale blbej napad premistit lavu!"
 
 msgid "§eYou cannot hurt island-members."
@@ -1990,23 +1985,23 @@ msgstr "Seznam ukolu"
 msgid "Change Biome"
 msgstr ""
 
-msgid "change the island's biome."
+msgid "change the island''s biome."
 msgstr ""
 
 msgid "Toggle Island Lock"
 msgstr ""
 
-msgid "toggle the island's lock."
+msgid "toggle the island''s lock."
 msgstr "Prepinat uzamceni ostrova"
 
 msgid "Set Island Warp"
 msgstr ""
 
-msgid "set the island's warp."
+msgid "set the island''s warp."
 msgstr "Nastavovani warpu na ostrove"
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
@@ -2015,11 +2010,11 @@ msgstr ""
 msgid "Toggle Island Warp"
 msgstr ""
 
-msgid "toggle the island's warp."
+msgid "toggle the island''s warp."
 msgstr "Prepinat moznost teleportace"
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
@@ -2277,7 +2272,7 @@ msgstr "§9Prava hrace"
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
 "§eKlikni zde pro navrat na\n"
 "§ehlavni nabidku ostrova."
@@ -2321,10 +2316,10 @@ msgid "§cThis island is full."
 msgstr "§cTento ostrov je jiz zaplnen."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
 "§eUmistenim mysi na ikonu hrace\n"
 "§ezobrazis jeho opravneni.\n"
@@ -2349,7 +2344,7 @@ msgstr "Povoleno {0}"
 msgid "Cannot {0}"
 msgstr "Zakazano {0}"
 
-msgid "§e<Click to change this player's permissions>"
+msgid "§e<Click to change this player''s permissions>"
 msgstr "§e<Klikni pro zmenu prav tohoto hrace>"
 
 msgid "Island Log"
@@ -2436,7 +2431,7 @@ msgid "§a§lJoin an Island"
 msgstr "§a§lPripojil ses na ostrov"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2463,7 +2458,7 @@ msgid "§a§lReturn Home"
 msgstr "§a§lNavrat domu"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
@@ -2794,11 +2789,11 @@ msgstr "§cVAROVANI: §eTeleportuji te do vzduchu."
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportuji te na tvuj ostrov."
 
-msgid "§4Unable to warp you to that player's island!"
+msgid "§4Unable to warp you to that player''s island!"
 msgstr "§4Je nemozne te teleportovat na ostrov tohoto hrace!"
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
+msgid "§aTeleporting you to {0}''s island."
 msgstr "§aTeleportuji te na ostrov hrace {0}."
 
 msgid "§4You must be closer to your island to set your skyblock home!"

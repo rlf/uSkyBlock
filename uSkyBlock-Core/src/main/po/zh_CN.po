@@ -1,5 +1,5 @@
 # Copyright (C) 2015
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the uSkyBlock package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
 #
 msgid ""
@@ -457,7 +457,7 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} 将他们的生物群系更改为了 OCEAN(海洋生物群系)"
 
 #, java-format
-msgid "§eRemoving {0}'s island."
+msgid "§eRemoving {0}''s island."
 msgstr "§e移除了 {0} 的岛屿。"
 
 msgid "Error: That player does not have an island!"
@@ -552,7 +552,7 @@ msgid "§4No valid island found"
 msgstr "§4没有找到有效的岛屿"
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
+msgid "§4No flatland detected at {0}''s island!"
 msgstr "§4在{0} 的岛上未检测到平地。"
 
 msgid "flushes all caches to files"
@@ -820,11 +820,11 @@ msgstr ""
 msgid "§eAnimation-tick must be a valid integer."
 msgstr ""
 
-msgid "set a player's island to your location"
+msgid "set a player''s island to your location"
 msgstr ""
 
 #, java-format
-msgid "§aSet {0}'s island to the current island."
+msgid "§aSet {0}''s island to the current island."
 msgstr ""
 
 msgid "§4Island not found: unable to set the island!"
@@ -1029,7 +1029,7 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§e来自{0}§e的邀请已经过时或被取消。"
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
 msgstr "§e来自{0}§e岛屿的邀请已经过时或被取消。"
 
 msgid "§eYou have accepted the invitation to join an island."
@@ -1187,7 +1187,7 @@ msgid ""
 "right now."
 msgstr ""
 
-msgid "check your or anothers island info"
+msgid "check your or another''s island info"
 msgstr ""
 
 msgid "allows user to see others island info"
@@ -1233,7 +1233,7 @@ msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr "§e驶入§f/island invite <玩家ID> §e邀请玩家加入你的岛屿."
 
-msgid "§4Only the island's owner can invite!"
+msgid "§4Only the island''s owner can invite!"
 msgstr "§4只有岛屿的主人才能邀请!"
 
 #, java-format
@@ -1324,7 +1324,7 @@ msgid "allows user to query for others levels"
 msgstr ""
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
+msgid "§eInformation about {0}''s Island:"
 msgstr ""
 
 #, java-format
@@ -1454,10 +1454,10 @@ msgstr "§e注意: 你所有财产和你的岛屿将被§c§l重置"
 msgid "set the island-home"
 msgstr ""
 
-msgid "set your island's warp location"
+msgid "set your island''s warp location"
 msgstr ""
 
-msgid "§cYou do not have permission to set your island's warp point!"
+msgid "§cYou do not have permission to set your island''s warp point!"
 msgstr "§c你没有权限设置你岛屿的传送点!"
 
 msgid "§cYou need to be on your own island to set the warp!"
@@ -1484,7 +1484,7 @@ msgstr ""
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d禁止了岛屿传送点."
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr "§c你没有权限启用/禁用岛屿的传送点!"
 
 msgid "display the top10 of islands"
@@ -1513,7 +1513,7 @@ msgid "§4Unknown player {0}"
 msgstr ""
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
 msgstr ""
 
 #, java-format
@@ -1521,14 +1521,14 @@ msgid "§a{0} trusted {1} on the island"
 msgstr ""
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
 msgstr ""
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr ""
 
-msgid "warp to another player's island"
+msgid "warp to another player''s island"
 msgstr ""
 
 msgid "§aYour incoming warp is active, players may warp to your island."
@@ -1593,7 +1593,7 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another island's portals!"
+msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -1639,7 +1639,7 @@ msgstr "§e已经将你的黑曜石变为岩浆.请务必当心!"
 msgid "§eYour inventory must have another empty space!"
 msgstr ""
 
-msgid "§4It's a bad idea to replace your lava!"
+msgid "§4It''s a bad idea to replace your lava!"
 msgstr "§4替换岩浆真是一个§f'不错'§4的注意呢~"
 
 msgid "§eYou cannot hurt island-members."
@@ -1944,23 +1944,23 @@ msgstr ""
 msgid "Change Biome"
 msgstr ""
 
-msgid "change the island's biome."
+msgid "change the island''s biome."
 msgstr ""
 
 msgid "Toggle Island Lock"
 msgstr ""
 
-msgid "toggle the island's lock."
+msgid "toggle the island''s lock."
 msgstr ""
 
 msgid "Set Island Warp"
 msgstr ""
 
-msgid "set the island's warp."
+msgid "set the island''s warp."
 msgstr ""
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
@@ -1969,11 +1969,11 @@ msgstr ""
 msgid "Toggle Island Warp"
 msgstr ""
 
-msgid "toggle the island's warp."
+msgid "toggle the island''s warp."
 msgstr ""
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
@@ -2169,7 +2169,7 @@ msgstr ""
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
 "§e点击这里返回\n"
 "§e岛屿团队信息."
@@ -2213,10 +2213,10 @@ msgid "§cThis island is full."
 msgstr "§c岛屿已满."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
 "§e将鼠标悬停到一个玩家的头像上\n"
 "§e即可查询他们的权限.\n"
@@ -2241,7 +2241,7 @@ msgstr ""
 msgid "Cannot {0}"
 msgstr ""
 
-msgid "§e<Click to change this player's permissions>"
+msgid "§e<Click to change this player''s permissions>"
 msgstr "§e<点击将更改玩家的权限>"
 
 msgid "Island Log"
@@ -2318,7 +2318,7 @@ msgid "§a§lJoin an Island"
 msgstr "§a§l加入一个岛屿"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2335,7 +2335,7 @@ msgid "§a§lReturn Home"
 msgstr "§a§l返回你的岛屿"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
@@ -2624,11 +2624,11 @@ msgstr ""
 msgid "§aTeleporting you to your island."
 msgstr "§a将你传送回自己的岛屿."
 
-msgid "§4Unable to warp you to that player's island!"
+msgid "§4Unable to warp you to that player''s island!"
 msgstr "§4无法传送至玩家的岛屿!"
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
+msgid "§aTeleporting you to {0}''s island."
 msgstr ""
 
 msgid "§4You must be closer to your island to set your skyblock home!"

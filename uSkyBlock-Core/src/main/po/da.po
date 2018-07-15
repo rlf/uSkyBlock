@@ -1,5 +1,4 @@
 # uSkyBlock Localization for Danish.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the uSkyBlock package.
 # Rasmus Lock Fuglsang <steam@lockfuglsang.dk>, 2015.
 #
@@ -463,8 +462,8 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} har fået deres biome ændret til HAV."
 
 #, java-format
-msgid "§eRemoving {0}'s island."
-msgstr "§eFjerner {0}'s ø."
+msgid "§eRemoving {0}''s island."
+msgstr "§eFjerner {0}''s ø."
 
 msgid "Error: That player does not have an island!"
 msgstr "Fejl: Den spiller har ingen ø!"
@@ -558,8 +557,8 @@ msgid "§4No valid island found"
 msgstr "§4Ingen valid ø fundet"
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
-msgstr "§4Intet fladland fundet ved {0}'s ø!"
+msgid "§4No flatland detected at {0}''s island!"
+msgstr "§4Intet fladland fundet ved {0}''s ø!"
 
 msgid "flushes all caches to files"
 msgstr "gemmer alle caches til filer"
@@ -829,11 +828,11 @@ msgstr "§eAnimations-tick ændret til {0}."
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimations-tick skal være et validt heltal."
 
-msgid "set a player's island to your location"
+msgid "set a player''s island to your location"
 msgstr "tildeler øen til en spiller"
 
 #, java-format
-msgid "§aSet {0}'s island to the current island."
+msgid "§aSet {0}''s island to the current island."
 msgstr "§aSæt {0}s ø til den nuværende."
 
 msgid "§4Island not found: unable to set the island!"
@@ -1047,8 +1046,8 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§eInvitationen til {0}§e er udløbet og er blevet annulleret."
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
-msgstr "§eInvitationen til {0}'s ø er udløbet og er blevet annulleret."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
+msgstr "§eInvitationen til {0}''s ø er udløbet og er blevet annulleret."
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr "§eDu har accepteret en invitation til at blive medlem af en ø."
@@ -1210,7 +1209,7 @@ msgid ""
 msgstr ""
 "§cDin ø er under konstruktion, du kan ikke teleportere til den i øjeblikket."
 
-msgid "check your or anothers island info"
+msgid "check your or another''s island info"
 msgstr "få information om din eller en andens ø"
 
 msgid "allows user to see others island info"
@@ -1257,7 +1256,7 @@ msgid ""
 msgstr ""
 "§eBrug §9/island invite <spillernavn>§e for at invite en spiller til din ø."
 
-msgid "§4Only the island's owner can invite!"
+msgid "§4Only the island''s owner can invite!"
 msgstr "§4Kun øens ejer kan invitere!"
 
 #, java-format
@@ -1348,7 +1347,7 @@ msgid "allows user to query for others levels"
 msgstr "tillader brugere at spørge til andres niveau"
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
+msgid "§eInformation about {0}''s Island:"
 msgstr "§eInformation om {0}s ø:"
 
 #, java-format
@@ -1478,11 +1477,11 @@ msgstr "§eBEMÆRK: Hele din ø, og alle dine ejendele vil blive tabt!"
 msgid "set the island-home"
 msgstr "sæt øens start-position"
 
-msgid "set your island's warp location"
+msgid "set your island''s warp location"
 msgstr "sæt din øs besøgspunkt"
 
-msgid "§cYou do not have permission to set your island's warp point!"
-msgstr "§cDu har ikke tilladelse til at sætte din ø's besøgsportal!"
+msgid "§cYou do not have permission to set your island''s warp point!"
+msgstr "§cDu har ikke tilladelse til at sætte din ø''s besøgsportal!"
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr "§4Du skal være på din ø, for at gøre det!"
@@ -1510,9 +1509,9 @@ msgstr "§b{0}§d aktiverede øens besøgsportal."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deaktiverede øens besøgsportal."
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr ""
-"§cDu har ikke tilladelse til at aktivere/deaktivere din ø's besøgsportal!"
+"§cDu har ikke tilladelse til at aktivere/deaktivere din ø''s besøgsportal!"
 
 msgid "display the top10 of islands"
 msgstr "vis top10 af øer"
@@ -1540,7 +1539,7 @@ msgid "§4Unknown player {0}"
 msgstr "§4Ukendt spiller {0}"
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
 msgstr "§eDu er nu betroet på §4{0}§es ø."
 
 #, java-format
@@ -1548,14 +1547,14 @@ msgid "§a{0} trusted {1} on the island"
 msgstr "§a{0} tilføjede {1} som ven til øen"
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
 msgstr "§eDu er ikke længere betroet på §4{0}§es ø."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} fjernede {1} som ven af øen"
 
-msgid "warp to another player's island"
+msgid "warp to another player''s island"
 msgstr "besøg en andens ø"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
@@ -1626,7 +1625,7 @@ msgstr "tillader brugere at bruge [usb] skilte"
 msgid "allows user to place [usb] signs"
 msgstr "tillader brugere at placere [usb] skilte"
 
-msgid "§eYou can not use another island's portals!"
+msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -1674,7 +1673,7 @@ msgstr "§eSkifter din obsidian tilbage til lava. Vær forsigtig!"
 msgid "§eYour inventory must have another empty space!"
 msgstr "§eDer skal være plads i dine tasker!"
 
-msgid "§4It's a bad idea to replace your lava!"
+msgid "§4It''s a bad idea to replace your lava!"
 msgstr "§4Det er en dårlig ide at fjerne din lava!"
 
 msgid "§eYou cannot hurt island-members."
@@ -1745,14 +1744,14 @@ msgstr "§4** Du ankommer nu til en beskyttet - men forladt - ø."
 
 #, java-format
 msgid "§d** You are entering §b{0}''s §disland."
-msgstr "§d** Du ankom til §b{0}'s §disland."
+msgstr "§d** Du ankom til §b{0}''s §disland."
 
 msgid "§4** You are leaving an abandoned island."
 msgstr "§4** Du forlader nu en forladt ø."
 
 #, java-format
 msgid "§d** You are leaving §b{0}''s §disland."
-msgstr "§d** Du forlader nu §b{0}'s §dø."
+msgstr "§d** Du forlader nu §b{0}''s §dø."
 
 msgid "§eYour island is now locked. Only your party members may enter."
 msgstr "§eDin ø er nu låst. Kun medlemmer kan teleportere til den."
@@ -1994,23 +1993,23 @@ msgstr "Udfordringer"
 msgid "Change Biome"
 msgstr "Skift Biome"
 
-msgid "change the island's biome."
+msgid "change the island''s biome."
 msgstr "skift øens biome."
 
 msgid "Toggle Island Lock"
 msgstr "Skift øens låsetilstand"
 
-msgid "toggle the island's lock."
+msgid "toggle the island''s lock."
 msgstr "skift øens låse-tilstand."
 
 msgid "Set Island Warp"
 msgstr "Sæt Øens Knudepunkt"
 
-msgid "set the island's warp."
+msgid "set the island''s warp."
 msgstr "sæt øens besøgspunkt."
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
@@ -2022,11 +2021,11 @@ msgstr ""
 msgid "Toggle Island Warp"
 msgstr "(De)aktiver øens knudepunkt"
 
-msgid "toggle the island's warp."
+msgid "toggle the island''s warp."
 msgstr "aktiver/deaktiver øens besøgspunkt."
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
@@ -2294,10 +2293,10 @@ msgstr "§9Spiller tilladelser"
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
 "§eKlik her for at vende tilbage\n"
-"§etil din ø's medlemsmenu."
+"§etil din ø''s medlemsmenu."
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2338,10 +2337,10 @@ msgid "§cThis island is full."
 msgstr "§cDenne ø er fuld."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
 "§eHold musen over en spillers\n"
 "§ebillede, for at se deres tilladelser\n"
@@ -2366,7 +2365,7 @@ msgstr "Kan {0}"
 msgid "Cannot {0}"
 msgstr "Kan ikke {0}"
 
-msgid "§e<Click to change this player's permissions>"
+msgid "§e<Click to change this player''s permissions>"
 msgstr "§e<Klik for at ændre tilladelse>"
 
 msgid "Island Log"
@@ -2453,7 +2452,7 @@ msgid "§a§lJoin an Island"
 msgstr "§a§lHjælp en eksisterende ø"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2476,7 +2475,7 @@ msgid "§a§lReturn Home"
 msgstr "§a§lReturner til hjemmet"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
@@ -2807,11 +2806,11 @@ msgstr "§cADVARSEL:§e Teleporterer dig op i luften."
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleporterer dig til din ø."
 
-msgid "§4Unable to warp you to that player's island!"
+msgid "§4Unable to warp you to that player''s island!"
 msgstr "§4Ude af stand til at teleportere dig til den spillers ø!"
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
+msgid "§aTeleporting you to {0}''s island."
 msgstr "§aTeleporterer dig til {0}s ø."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
