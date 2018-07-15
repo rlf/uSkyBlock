@@ -16,7 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -798,7 +797,8 @@ msgid "§4Purge aborted!"
 msgstr "§4Pulizia interrotta!"
 
 msgid "§4A purge is already running.§e Either §9confirm§e or §9stop§e it."
-msgstr "§4Una pulizia è già in esecuzione.§e O §9confermala§e o §9interrompila§e."
+msgstr ""
+"§4Una pulizia è già in esecuzione.§e O §9confermala§e o §9interrompila§e."
 
 msgid "§4Starting purge..."
 msgstr "§4* §7Avviando la pulizia..."
@@ -912,8 +912,8 @@ msgid ""
 "§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
 "purgatory."
 msgstr ""
-"§4PULIZIA:§9 Scansione completata, trovati {0} candidati, sotto il livello {1}, pronti per "
-"la pulizia."
+"§4PULIZIA:§9 Scansione completata, trovati {0} candidati, sotto il livello "
+"{1}, pronti per la pulizia."
 
 #, java-format
 msgid ""

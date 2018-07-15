@@ -452,7 +452,8 @@ msgid "§eChanged biome of {0}s island to OCEAN."
 msgstr "§eDe biome van {0}s eiland is veranderd naar OCEAN."
 
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
-msgstr "§aJe moet reloggen of terug naar spawn gaan om de verandering te kunnen zien"
+msgstr ""
+"§aJe moet reloggen of terug naar spawn gaan om de verandering te kunnen zien"
 
 #, java-format
 msgid "§e{0} has had their biome changed to {1}."
