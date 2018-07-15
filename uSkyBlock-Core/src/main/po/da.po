@@ -737,8 +737,8 @@ msgid "§eNo orphans currently registered."
 msgstr "§eIngen forældreløse øer registreret i øjeblikket."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eForældreløse: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -1355,6 +1355,10 @@ msgstr "§eInformation om {0}s ø:"
 msgid "§9Rank is {0}"
 msgstr "§eDin position er: §f{0}"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "lås din ø for ikke-medlemmer."
 
@@ -1622,8 +1626,8 @@ msgstr "tillader brugere at bruge [usb] skilte"
 msgid "allows user to place [usb] signs"
 msgstr "tillader brugere at placere [usb] skilte"
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eDu kan ikke bruge en anden ø's portaler!"
+msgid "§eYou can not use another island's portals!"
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eDu kan ikke handle på øer. Gør det i spawn."

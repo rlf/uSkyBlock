@@ -747,8 +747,8 @@ msgid "§eNo orphans currently registered."
 msgstr "§eDerzeit sind keine verwaisten Inseln registriert"
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eVerlassene Inseln: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -1381,6 +1381,10 @@ msgstr "§eInformationen über {0}'s Insel"
 msgid "§9Rank is {0}"
 msgstr "§9Stufe ist {0}"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "Sperrt deine Insel für nicht Mitglieder."
 
@@ -1656,8 +1660,8 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eDu kannst die Portale auf anderen Inseln nicht nutzen!"
+msgid "§eYou can not use another island's portals!"
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandeln ist auf fremden Inseln nicht erlaubt. Handel am Spawn"

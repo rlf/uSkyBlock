@@ -737,8 +737,8 @@ msgid "§eNo orphans currently registered."
 msgstr "§eZadny sirotek momentalne neni."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eSirotci: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -1354,6 +1354,10 @@ msgstr "§eInformace o ostrove hrace {0} :"
 msgid "§9Rank is {0}"
 msgstr "§9Tva sekce:  {0}"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "Uzamceni ostrova pro hrace, kteri nejsou clenove tve party."
 
@@ -1623,8 +1627,8 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eNemuzes pouzit porty na ostatních ostrovech!"
+msgid "§eYou can not use another island's portals!"
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eObchodovani na ostrovech není povoleno, pouze na spawnu."

@@ -740,7 +740,7 @@ msgid "§eNo orphans currently registered."
 msgstr ""
 
 #, java-format
-msgid "§eOrphans: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
 #, java-format
@@ -1342,6 +1342,10 @@ msgstr "§Thông tin đảo của {0}:"
 msgid "§9Rank is {0}"
 msgstr "§9Hạng {0}"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "khoá đảo đối với người ngoài nhóm"
 
@@ -1603,8 +1607,8 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eBạn không thể dùng cổng dịch chuyển ở đảo khác"
+msgid "§eYou can not use another island's portals!"
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eKhông thể trao đổi ở đảo khác ngoại trừ khu vực chung"

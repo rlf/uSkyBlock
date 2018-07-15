@@ -735,8 +735,8 @@ msgid "§eNo orphans currently registered."
 msgstr "§eNenhum orphan registrado atualmente."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eOrphans: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -1346,6 +1346,10 @@ msgstr "§eInformações sobre a ilha de {0}':"
 msgid "§9Rank is {0}"
 msgstr "§9Categoria: {0}"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "trancar sua ilha para jogadores fora do seu grupo."
 
@@ -1617,7 +1621,7 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another islands portals!"
+msgid "§eYou can not use another island's portals!"
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."

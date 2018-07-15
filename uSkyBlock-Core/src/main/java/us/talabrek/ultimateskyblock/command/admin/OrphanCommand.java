@@ -31,15 +31,24 @@ public class OrphanCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new AbstractCommand("list", I18nUtil.tr("list orphans")) {
+        add(new AbstractCommand("list", "?page", I18nUtil.tr("list orphans")) {
                 @Override
                 public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                     List<OrphanLogic.Orphan> orphans = plugin.getOrphanLogic().getOrphans();
                     if (orphans.isEmpty()) {
                         sender.sendMessage(I18nUtil.tr("\u00a7eNo orphans currently registered."));
                     } else {
-                        sender.sendMessage(I18nUtil.tr("\u00a7eOrphans: {0}",
-                                orphans.toString()
+                        int pageSize = 50;
+                        int pages = (int)Math.ceil(orphans.size() / pageSize);
+                        int page = args.length > 0 && args[0].matches("[0-9]+") ? Integer.parseInt(args[0], 10) : 1;
+                        if (page < 1) page = 1;
+                        if (page > pages) page = pages;
+                        int from = pageSize*(page-1);
+                        int to = Math.min(orphans.size(), pageSize*page);
+                        sender.sendMessage(I18nUtil.tr("\u00a7eOrphans ({0}/{1}): {2}",
+                                page,
+                                pages,
+                                orphans.subList(from, to).toString()
                                         .replaceAll(", ", "\u00a77; \u00a75")
                                         .replaceAll("\\[", "\u00a75")
                                         .replaceAll("\\]", "")

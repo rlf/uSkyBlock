@@ -741,8 +741,8 @@ msgid "§eNo orphans currently registered."
 msgstr "§eEr zijn geen orphans geregistreerd."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eOrphans: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -1375,6 +1375,10 @@ msgstr "§eInformatie over {0}'s Eiland"
 msgid "§9Rank is {0}"
 msgstr "§9Rank is {0}"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "sluit het eiland af voor niet-party leden"
 
@@ -1646,8 +1650,8 @@ msgstr "Hiermee kan de gebruiker [USB] borden gebruiken"
 msgid "allows user to place [usb] signs"
 msgstr "Hiermee kan de gebruiker [USB] borden te plaatsen"
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eJe kan alleen portals gebruiken op je eigen eiland!"
+msgid "§eYou can not use another island's portals!"
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandelen in niet toegestaan op andere eilanden. Doe het op spawn."

@@ -737,8 +737,8 @@ msgid "§eNo orphans currently registered."
 msgstr "§eNay orphans currently registered."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eOrphans: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -1354,6 +1354,10 @@ msgstr "§eInformation about {0}''s Island:"
 msgid "§9Rank is {0}"
 msgstr "§9Rank be {0}"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "lock yer hideout to non-party members."
 
@@ -1617,8 +1621,8 @@ msgstr "allows user to use [usb] signs"
 msgid "allows user to place [usb] signs"
 msgstr "allows user to place [usb] signs"
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eYe can not use another islands portals!"
+msgid "§eYou can not use another island's portals!"
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eTradin' isn't allowed on other islands. Do it in spawn."
@@ -2859,6 +2863,12 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "North-West"
+
+#~ msgid "§eOrphans: {0}"
+#~ msgstr "§eOrphans: {0}"
+
+#~ msgid "§eYou can not use another islands portals!"
+#~ msgstr "§eYe can not use another islands portals!"
 
 #~ msgid "§4A purge is already running, please wait for it to finish!"
 #~ msgstr "§4A purge be already runnin', please wait for it to finish!"

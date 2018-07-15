@@ -738,8 +738,8 @@ msgid "§eNo orphans currently registered."
 msgstr "§e현재 어느 고아도 등록하지 않았습니다."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§e고아들: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -1358,6 +1358,10 @@ msgstr "§e{0}의 섬에 대한 정보:"
 msgid "§9Rank is {0}"
 msgstr "§9랭크는 {0}입니다"
 
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
+
 msgid "lock your island to non-party members."
 msgstr "파티 멤버가 아닌 사람에게 당신의 섬을 잠그세요."
 
@@ -1627,8 +1631,8 @@ msgstr "해당유저가 [usb] signs를 사용하는 것을 허용합니다."
 msgid "allows user to place [usb] signs"
 msgstr "해당유저가 [usb] signs를 설치하는 것을 허용합니다."
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§e당신은 다른 섬의 포탈을 탈 수 없습니다!"
+msgid "§eYou can not use another island's portals!"
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 스폰으로 이동하여 주세요"
