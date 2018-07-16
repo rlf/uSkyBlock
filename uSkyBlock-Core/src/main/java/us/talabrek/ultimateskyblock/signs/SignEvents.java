@@ -16,6 +16,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -83,22 +84,33 @@ public class SignEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onInventoryMovedEvent(InventoryMoveItemEvent e) {
-        if (e.getDestination() == null || e.getDestination().getLocation() == null || !plugin.isSkyAssociatedWorld(e.getDestination().getLocation().getWorld())) {
+        if (e.getDestination() == null
+                || e.getDestination().getLocation() == null
+                || !plugin.isSkyAssociatedWorld(e.getDestination().getLocation().getWorld())) {
             return;
         }
-        Location loc = e.getDestination().getLocation();
-        if (loc != null) {
-            logic.updateSignsOnContainer(loc);
+        if (e.getDestination().getType() == InventoryType.CHEST) {
+            Location loc = e.getDestination().getLocation();
+            if (loc != null) {
+                logic.updateSignsOnContainer(loc);
+            }
         }
-        loc = e.getSource().getLocation();
-        if (loc != null) {
-            logic.updateSignsOnContainer(loc);
+        if (e.getSource().getType() == InventoryType.CHEST) {
+            Location loc = e.getSource().getLocation();
+            if (loc != null) {
+                logic.updateSignsOnContainer(loc);
+            }
         }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onChestClosed(InventoryCloseEvent e) {
-        if (e.getPlayer() == null || e.getPlayer().getLocation() == null || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())) {
+        if (e.getPlayer() == null
+                || e.getPlayer().getLocation() == null
+                || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
+                || e.getInventory().getType() != InventoryType.CHEST
+                )
+        {
             return;
         }
         Location loc = e.getInventory().getLocation();

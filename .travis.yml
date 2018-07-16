@@ -20,8 +20,8 @@ before_install:
 - mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 - cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
 - cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
-script:
-- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we613,wg62 clean install
+install:
+- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we613,wg62 install
 before_deploy:
 - mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-bukkit${MC}.jar
 deploy:

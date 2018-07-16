@@ -36,7 +36,7 @@ import static dk.lockfuglsang.minecraft.util.FormatUtil.wordWrap;
  */
 public class SignLogic {
     private static final Logger log = Logger.getLogger(SignLogic.class.getName());
-    public static final int SIGN_LINE_WIDTH = 11; // Actually more like 15, but we break after.
+    private static final int SIGN_LINE_WIDTH = 11; // Actually more like 15, but we break after.
     private final YmlConfiguration config;
     private final File configFile;
     private final uSkyBlock plugin;
@@ -49,7 +49,7 @@ public class SignLogic {
         challengeLogic = plugin.getChallengeLogic();
     }
 
-    public void addSign(Sign block, String[] lines, Chest chest) {
+    void addSign(Sign block, String[] lines, Chest chest) {
         Location loc = block.getLocation();
         ConfigurationSection signs = config.getConfigurationSection("signs");
         if (signs == null) {
@@ -75,13 +75,8 @@ public class SignLogic {
         updateSignsOnContainer(chest.getLocation());
     }
 
-    public void removeSign(final Location loc) {
-        plugin.async(new Runnable() {
-            @Override
-            public void run() {
-                removeSignAsync(loc);
-            }
-        });
+    void removeSign(final Location loc) {
+        plugin.async(() -> removeSignAsync(loc));
     }
 
     private void removeSignAsync(Location loc) {
@@ -99,13 +94,8 @@ public class SignLogic {
         save();
     }
 
-    public void removeChest(final Location loc) {
-        plugin.async(new Runnable() {
-            @Override
-            public void run() {
-                removeChestAsync(loc);
-            }
-        });
+    void removeChest(final Location loc) {
+        plugin.async(() -> removeChestAsync(loc));
     }
 
     private void removeChestAsync(Location loc) {
@@ -118,43 +108,40 @@ public class SignLogic {
         save();
     }
 
-    public void updateSignsOnContainer(final Location... containerLocations) {
-        plugin.async(new Runnable() {
-            @Override
-            public void run() {
-                for (Location loc : containerLocations) {
-                    if (loc == null) {
-                        continue;
-                    }
-                    long x1 = (long) Math.floor(loc.getX());
-                    long x2 = Math.round(loc.getX());
-                    long z1 = (long) Math.floor(loc.getZ());
-                    long z2 = Math.round(loc.getZ());
-                    if (x1 != x2) {
-                        // Double Chest!
-                        Location loc1 = loc.clone();
-                        loc1.setX(x1);
-                        Location loc2 = loc.clone();
-                        loc2.setX(x2);
-                        updateSignAsync(loc1);
-                        updateSignAsync(loc2);
-                    } else if (z1 != z2) {
-                        // Double Chest!
-                        Location loc1 = loc.clone();
-                        loc1.setZ(z1);
-                        Location loc2 = loc.clone();
-                        loc2.setZ(z2);
-                        updateSignAsync(loc1);
-                        updateSignAsync(loc2);
-                    } else {
-                        updateSignAsync(loc);
-                    }
+    void updateSignsOnContainer(final Location... containerLocations) {
+        plugin.async(() -> {
+            for (Location loc : containerLocations) {
+                if (loc == null) {
+                    continue;
+                }
+                long x1 = (long) Math.floor(loc.getX());
+                long x2 = Math.round(loc.getX());
+                long z1 = (long) Math.floor(loc.getZ());
+                long z2 = Math.round(loc.getZ());
+                if (x1 != x2) {
+                    // Double Chest!
+                    Location loc1 = loc.clone();
+                    loc1.setX(x1);
+                    Location loc2 = loc.clone();
+                    loc2.setX(x2);
+                    updateSignAsync(loc1);
+                    updateSignAsync(loc2);
+                } else if (z1 != z2) {
+                    // Double Chest!
+                    Location loc1 = loc.clone();
+                    loc1.setZ(z1);
+                    Location loc2 = loc.clone();
+                    loc2.setZ(z2);
+                    updateSignAsync(loc1);
+                    updateSignAsync(loc2);
+                } else {
+                    updateSignAsync(loc);
                 }
             }
         });
     }
 
-    public void updateSign(Location signLocation) {
+    void updateSign(Location signLocation) {
         String signString = LocationUtil.asKey(signLocation);
         String chestLocStr = config.getString("signs." + signString + ".chest", null);
         Location chestLoc = LocationUtil.fromString(chestLocStr);
@@ -210,12 +197,7 @@ public class SignLogic {
         final Location signLocation = LocationUtil.fromString(signLocString);
         final boolean challengeLocked = !isChallengeAvailable;
         // Back to sync
-        plugin.sync(new Runnable() {
-            @Override
-            public void run() {
-                updateSignFromChestSync(chestLoc, signLocation, challenge, requiredItems, challengeLocked);
-            }
-        });
+        plugin.sync(() -> updateSignFromChestSync(chestLoc, signLocation, challenge, requiredItems, challengeLocked));
     }
 
     private void updateSignFromChestSync(Location chestLoc, Location signLoc, Challenge challenge, List<ItemStack> requiredItems, boolean challengeLocked) {
@@ -274,12 +256,7 @@ public class SignLogic {
     }
 
     private void saveAsync() {
-        plugin.async(new Runnable() {
-            @Override
-            public void run() {
-                save();
-            }
-        });
+        plugin.async(this::save);
     }
 
     private void save() {
@@ -292,13 +269,8 @@ public class SignLogic {
         }
     }
 
-    public void signClicked(final Player player, final Location location) {
-        plugin.async(new Runnable() {
-            @Override
-            public void run() {
-                tryCompleteAsync(player, location);
-            }
-        });
+    void signClicked(final Player player, final Location location) {
+        plugin.async(() -> tryCompleteAsync(player, location));
     }
 
     private void tryCompleteAsync(final Player player, Location location) {
@@ -321,12 +293,7 @@ public class SignLogic {
                     player.sendMessage(tr("\u00a74The {0} challenge is not available yet!", challenge.getDisplayName()));
                     return;
                 }
-                plugin.sync(new Runnable() {
-                    @Override
-                    public void run() {
-                        tryComplete(player, chestLoc, challenge);
-                    }
-                });
+                plugin.sync(() -> tryComplete(player, chestLoc, challenge));
             }
         }
     }
@@ -357,10 +324,10 @@ public class SignLogic {
             missing += diff;
         }
         if (missing == 0) {
-            ItemStack[] items = requiredItems.toArray(new ItemStack[requiredItems.size()]);
+            ItemStack[] items = requiredItems.toArray(new ItemStack[0]);
             ItemStack[] copy = ItemStackUtil.clone(requiredItems).toArray(new ItemStack[requiredItems.size()]);
             HashMap<Integer, ItemStack> missingItems = player.getInventory().removeItem(items);
-            missingItems = chest.getInventory().removeItem(missingItems.values().toArray(new ItemStack[missingItems.size()]));
+            missingItems = chest.getInventory().removeItem(missingItems.values().toArray(new ItemStack[0]));
             if (!missingItems.isEmpty()) {
                 // This effectively means, we just donated some items to the player (exploit!!)
                 log.warning("Not all items removed from chest and player: " + missingItems.values());
@@ -369,7 +336,7 @@ public class SignLogic {
             if (leftOvers.isEmpty()) {
                 plugin.getChallengeLogic().completeChallenge(player, challenge.getName());
             } else {
-                chest.getInventory().addItem(leftOvers.values().toArray(new ItemStack[leftOvers.size()]));
+                chest.getInventory().addItem(leftOvers.values().toArray(new ItemStack[0]));
                 player.sendMessage(tr("\u00a7cWARNING:\u00a7e Could not transfer all the required items to your inventory!"));
             }
             updateSignsOnContainer(chest.getLocation());
