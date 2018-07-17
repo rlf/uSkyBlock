@@ -3,18 +3,18 @@ package us.talabrek.ultimateskyblock.command.admin;
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.challenge.Challenge;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
-import us.talabrek.ultimateskyblock.command.completion.RankTabCompleter;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.FormatUtil;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 
 /**
  * The challenge admin command.
@@ -24,7 +24,7 @@ public class AdminChallengeCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public AdminChallengeCommand(final uSkyBlock plugin) {
-        super("challenge|ch", "usb.mod.challenges", "player", I18nUtil.tr("Manage challenges for a player"));
+        super("challenge|ch", "usb.mod.challenges", "player", marktr("Manage challenges for a player"));
         this.plugin = plugin;
         add(new ChallengeCommand("complete", null, "completes the challenge for the player") {
             @Override
@@ -33,7 +33,7 @@ public class AdminChallengeCommand extends CompositeCommand {
                 completeChallenge(sender, playerInfo, challenge);
             }
         });
-        add(new ChallengeCommand("reset", null, I18nUtil.tr("resets the challenge for the player")) {
+        add(new ChallengeCommand("reset", null, marktr("resets the challenge for the player")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo pi, ChallengeCompletion completion) {
                 String challenge = completion.getName();
@@ -47,7 +47,7 @@ public class AdminChallengeCommand extends CompositeCommand {
                 }
             }
         });
-        add(new AbstractCommand("resetall", null, I18nUtil.tr("resets all challenges for the player")) {
+        add(new AbstractCommand("resetall", null, marktr("resets all challenges for the player")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 PlayerInfo playerInfo = (PlayerInfo) data.get("playerInfo");
@@ -60,7 +60,7 @@ public class AdminChallengeCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new RankCommand("rank", null, I18nUtil.tr("complete all challenges in the rank")) {
+        add(new RankCommand("rank", null, marktr("complete all challenges in the rank")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, String rankName, List<Challenge> challenges) {
                 for (Challenge c : challenges) {

@@ -7,12 +7,14 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+
 /**
  * Reloads the config-files for USB.
  */
 public class ReloadCommand extends AbstractCommand {
     public ReloadCommand() {
-        super("reload", "usb.admin.reload", I18nUtil.tr("reload configuration from file."));
+        super("reload", "usb.admin.reload", marktr("reload configuration from file."));
     }
 
     @Override

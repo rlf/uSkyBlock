@@ -613,6 +613,9 @@ msgstr "§9* §7Teletrasporto all''isola di §6{0}§7."
 msgid "imports players and islands from other formats"
 msgstr "importa i giocatori e le isole da altri formati"
 
+msgid "controls async jobs"
+msgstr ""
+
 msgid "§9Job Statistics"
 msgstr "§9* §7Statistiche Lavori"
 
@@ -744,6 +747,12 @@ msgstr "§4* §7Non ci sono attualmente orfani registrati."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr "vantaggi aggiuntivi {0}"
@@ -826,12 +835,18 @@ msgstr "§4* §7Arrestata la visualizzazione delle regioni"
 msgid "§eNo currently shown regions for this player"
 msgstr "§4* §7Nessuna regione mostrata per questo giocatore"
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr "§4* §7Animation-tick changed to {0}."
 
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§4* §7Animation-tick must be a valid integer."
+
+msgid "refreshes the existing animations"
+msgstr ""
 
 msgid "set a player''s island to your location"
 msgstr "imposta un''isola del giocatore alla tua posizione"
@@ -1412,6 +1427,9 @@ msgstr "§4* §7Solo il leader può trasferire la leadership!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "§c{0} §7ha provato a rilevare l''isola!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "mostra le informazioni del party"

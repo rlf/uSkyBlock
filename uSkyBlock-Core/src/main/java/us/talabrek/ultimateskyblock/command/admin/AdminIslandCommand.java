@@ -5,9 +5,7 @@ import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.command.admin.task.ProtectAllTask;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -28,13 +26,13 @@ public class AdminIslandCommand extends CompositeCommand {
     public AdminIslandCommand(final uSkyBlock plugin, final ConfirmHandler confirmHandler) {
         super("island|is", "", marktr("manage islands"));
         this.plugin = plugin;
-        add(new AbstractIslandInfoCommand("protect", "usb.admin.protect", tr("protects the island")) {
+        add(new AbstractIslandInfoCommand("protect", "usb.admin.protect", marktr("protects the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 protectIsland(sender, islandInfo);
             }
         });
-        add(new AbstractCommand("delete", "usb.admin.delete", "?leader", tr("delete the island (removes the blocks)")) {
+        add(new AbstractCommand("delete", "usb.admin.delete", "?leader", marktr("delete the island (removes the blocks)")) {
             @Override
             public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
@@ -63,13 +61,13 @@ public class AdminIslandCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractIslandInfoCommand("remove", "usb.admin.remove", tr("removes the player from the island")) {
+        add(new AbstractIslandInfoCommand("remove", "usb.admin.remove", marktr("removes the player from the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 removePlayerFromIsland(sender, playerInfo, islandInfo);
             }
         });
-        add(new AbstractCommand("addmember|add", "usb.admin.addmember", "player ?island", tr("adds the player to the island")) {
+        add(new AbstractCommand("addmember|add", "usb.admin.addmember", "player ?island", marktr("adds the player to the island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = null;
@@ -95,13 +93,13 @@ public class AdminIslandCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractIslandInfoCommand("info", "usb.admin.info", tr("print out info about the island")) {
+        add(new AbstractIslandInfoCommand("info", "usb.admin.info", marktr("print out info about the island")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 sender.sendMessage(islandInfo.toString());
             }
         });
-        add(new AbstractCommand("setbiome", "usb.admin.setbiome", "?leader biome", tr("sets the biome of the island")) {
+        add(new AbstractCommand("setbiome", "usb.admin.setbiome", "?leader biome", marktr("sets the biome of the island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 2) {
@@ -129,7 +127,7 @@ public class AdminIslandCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("purge", "usb.admin.purge", "?leader", tr("purges the island")) {
+        add(new AbstractCommand("purge", "usb.admin.purge", "?leader", marktr("purges the island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 String cmd = "/usb island purge";
@@ -161,7 +159,7 @@ public class AdminIslandCommand extends CompositeCommand {
         });
         add(new MakeLeaderCommand(plugin));
         add(new RegisterIslandToPlayerCommand());
-        add(new AbstractIslandInfoCommand("ignore", "usb.admin.ignore", tr("toggles the islands ignore status")) {
+        add(new AbstractIslandInfoCommand("ignore", "usb.admin.ignore", marktr("toggles the islands ignore status")) {
             @Override
             protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
                 if (islandInfo != null) {

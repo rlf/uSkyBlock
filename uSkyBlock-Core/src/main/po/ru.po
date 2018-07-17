@@ -610,6 +610,9 @@ msgstr ""
 msgid "imports players and islands from other formats"
 msgstr "импортирование игроков и островов в другие форматы"
 
+msgid "controls async jobs"
+msgstr ""
+
 msgid "§9Job Statistics"
 msgstr "§9Job Статистика"
 
@@ -742,6 +745,12 @@ msgstr "§eСироты не зарегистрированы."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr ""
@@ -821,11 +830,17 @@ msgstr ""
 msgid "§eNo currently shown regions for this player"
 msgstr ""
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr ""
 
 msgid "§eAnimation-tick must be a valid integer."
+msgstr ""
+
+msgid "refreshes the existing animations"
 msgstr ""
 
 msgid "set a player''s island to your location"
@@ -1390,6 +1405,9 @@ msgstr "§4Только хозяин может передать управле�
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0} пытался захватить остров!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "информация об участниках острова"

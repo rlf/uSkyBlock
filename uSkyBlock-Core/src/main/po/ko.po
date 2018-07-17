@@ -605,6 +605,9 @@ msgstr "§a{0}''의 섬으로 텔레포트중 입니다."
 msgid "imports players and islands from other formats"
 msgstr "다른 형식으로 부터 플레이어와 섬을 수입합니다"
 
+msgid "controls async jobs"
+msgstr ""
+
 msgid "§9Job Statistics"
 msgstr "§9직업 통계s"
 
@@ -736,6 +739,12 @@ msgstr "§e현재 어느 고아도 등록하지 않았습니다."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr "추가 perks {0}"
@@ -817,12 +826,18 @@ msgstr "§e지역표시를 중지합니다."
 msgid "§eNo currently shown regions for this player"
 msgstr "§e해당 플레이여의 지역이 없습니다."
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr "§eAnimation-tick 표시화면을 {0}로 변경합니다."
 
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimation-tick 의 값은 integer 형식 이여야 합니다."
+
+msgid "refreshes the existing animations"
+msgstr ""
 
 msgid "set a player''s island to your location"
 msgstr "당신의 위치에 플레이어의 섬을 지정합니다"
@@ -1388,6 +1403,9 @@ msgstr "§4오직 리더만이 리더 권한을 넘길 수 있습니다!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0}가 섬을 인수하려 합니다!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "파티의 정보를 보여줍니다"

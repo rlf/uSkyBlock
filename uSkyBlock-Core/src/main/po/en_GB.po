@@ -607,6 +607,9 @@ msgstr "§9* §7Teleporting to {0}''s island."
 msgid "imports players and islands from other formats"
 msgstr "imports players and islands from other formats"
 
+msgid "controls async jobs"
+msgstr ""
+
 msgid "§9Job Statistics"
 msgstr "§9* §7Job Statistics"
 
@@ -738,6 +741,12 @@ msgstr "§4* §7No orphans currently registered."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr "additional perks {0}"
@@ -819,12 +828,18 @@ msgstr "§4* §7Stopped displaying regions"
 msgid "§eNo currently shown regions for this player"
 msgstr "§4* §7No currently shown regions for this player"
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr "§4* §7Animation-tick changed to {0}."
 
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§4* §7Animation-tick must be a valid integer."
+
+msgid "refreshes the existing animations"
+msgstr ""
 
 msgid "set a player''s island to your location"
 msgstr "set a player''s island to your location"
@@ -1394,6 +1409,9 @@ msgstr "§4* §7Only leader can transfer leadership!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "§c{0} §7tried to take over the island!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "show party information"

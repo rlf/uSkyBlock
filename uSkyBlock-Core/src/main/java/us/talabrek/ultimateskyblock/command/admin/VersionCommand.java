@@ -1,11 +1,12 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
+
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 
 /**
  * Displays detailed version information.
@@ -14,7 +15,7 @@ public class VersionCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public VersionCommand(uSkyBlock plugin) {
-        super("version|v", "usb.admin.version", I18nUtil.tr("displays version information"));
+        super("version|v", "usb.admin.version", marktr("displays version information"));
         this.plugin = plugin;
     }
 

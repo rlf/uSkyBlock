@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -21,7 +22,7 @@ public class JobsCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public JobsCommand(uSkyBlock plugin) {
-        super("jobs|j", "usb.admin.jobs", "controls async jobs");
+        super("jobs|j", "usb.admin.jobs", marktr("controls async jobs"));
         this.plugin = plugin;
         /*
         add(new AbstractCommand("list|l", "usb.admin.jobs.list", "list all jobs") {

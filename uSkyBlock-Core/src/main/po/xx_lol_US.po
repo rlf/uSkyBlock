@@ -603,6 +603,9 @@ msgstr "§aTeleporting to {0}''s cathouz."
 msgid "imports players and islands from other formats"
 msgstr "imports kittehs an' islands from other formats"
 
+msgid "controls async jobs"
+msgstr ""
+
 msgid "§9Job Statistics"
 msgstr "§9Job Statistics"
 
@@ -734,6 +737,12 @@ msgstr "§eNoe orfanz currently registered."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr "additional perks {0}"
@@ -815,12 +824,18 @@ msgstr "§eStopped displaying regions"
 msgid "§eNo currently shown regions for this player"
 msgstr "§eNoe currently shown regions for this kitteh"
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr "§eAnimation-tick changed to {0}."
 
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimation-tick must be a valid integer."
+
+msgid "refreshes the existing animations"
+msgstr ""
 
 msgid "set a player''s island to your location"
 msgstr "set a kitteh''s cathouz to yoor location"
@@ -1384,6 +1399,9 @@ msgstr "§4Only top cat can transfer leadership!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0} tried to take over teh cathouz!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "show party information"

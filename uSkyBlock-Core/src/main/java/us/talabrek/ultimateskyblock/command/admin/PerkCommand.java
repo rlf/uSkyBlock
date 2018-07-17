@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.command.admin;
 
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.command.CompositeCommand;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.player.Perk;
@@ -10,12 +9,13 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
 
 public class PerkCommand extends CompositeCommand {
     public PerkCommand(final uSkyBlock plugin) {
-        super("perk", "usb.admin.perk", "shows perk-information");
+        super("perk", "usb.admin.perk", marktr("shows perk-information"));
         add(new AbstractCommand("list", "lists all perks") {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
@@ -29,7 +29,7 @@ public class PerkCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new AbstractCommand("player", "", "player", "shows a specific players perks") {
+        add(new AbstractCommand("player", "", "player", marktr("shows a specific players perks")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {

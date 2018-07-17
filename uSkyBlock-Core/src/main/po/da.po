@@ -608,6 +608,9 @@ msgstr "§aTeleporterer til {0}''s ø."
 msgid "imports players and islands from other formats"
 msgstr "importer spillere og øer fra andre formater"
 
+msgid "controls async jobs"
+msgstr ""
+
 msgid "§9Job Statistics"
 msgstr "§9Job Statistik"
 
@@ -739,6 +742,12 @@ msgstr "§eIngen forældreløse øer registreret i øjeblikket."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr "ekstra goder {0}"
@@ -820,12 +829,18 @@ msgstr "§eStoppede med at vise regioner"
 msgid "§eNo currently shown regions for this player"
 msgstr "§eIngen regioner at vise for denne spiller"
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr "§eAnimations-tick ændret til {0}."
 
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimations-tick skal være et validt heltal."
+
+msgid "refreshes the existing animations"
+msgstr ""
 
 msgid "set a player''s island to your location"
 msgstr "tildeler øen til en spiller"
@@ -1388,6 +1403,9 @@ msgstr "§4Kun lederen an overføre lederskab!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0} forsøgte at overtage øen!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "vis medlemsinformation"
