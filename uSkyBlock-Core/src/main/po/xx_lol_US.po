@@ -1694,11 +1694,11 @@ msgid ""
 "island!§9 Max: {1,number}"
 msgstr ""
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cYou have reached yoor spawn-limit for yoor cathouz."
-
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eYou can only use spawn-eggs on yoor own cathouz."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§cYou have reached yoor spawn-limit for yoor cathouz."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cBanned:§e You be banned from this cathouz."

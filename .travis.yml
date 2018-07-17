@@ -10,6 +10,7 @@ env:
   - secure: o8SotV4k+VSXkU2nO6skP6ASZ4n/MUfbnytrDv/aM089n7a9+a6Q1zgiy3px149iGHc10LB5DGYE/7SEB0XL1EXQ/XE5mDGhl7VPsZ0M3IcMLDwF3FxOxf/mrexHzkSyXf8vLbkvBYgoU/mWgKYB0hX/xw5DX3w3kU03i3/6Pfg=
   matrix:
   - MC=1.12
+  - MC=1.13
 git:
   submodules: false
 notifications:

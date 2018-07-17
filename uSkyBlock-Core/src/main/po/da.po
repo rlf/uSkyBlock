@@ -1703,11 +1703,11 @@ msgstr ""
 "§4Du har nået {0} grænsen!§e Du kan ikke have flere af denne type på din ø!"
 "§9 Max: {1,number}"
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§eDu har nået din øs spawn-grænse."
-
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eDu kan kun brug spawn-æg på din egen ø."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§eDu har nået din øs spawn-grænse."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cForvist:§e Du har ikke lov til at komme på denne ø."

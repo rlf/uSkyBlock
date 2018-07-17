@@ -1736,11 +1736,11 @@ msgstr ""
 "§4Hai raggiunto il limite di {0}!§e Non puoi averne più di quel tipo sulla "
 "tua isola!§9 Max: {1,number}"
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§4* §7Hai raggiunto il tuo limite di spawn per la tua isola."
-
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§9* §7Puoi solo usare uova sulla tua isola."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§4* §7Hai raggiunto il tuo limite di spawn per la tua isola."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§4* §lBannato§r§4:§7 Sei bannato da questa isola."

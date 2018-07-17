@@ -1704,11 +1704,11 @@ msgid ""
 "island!§9 Max: {1,number}"
 msgstr ""
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cВы достигли предела спавнов на вашем острове."
-
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eВы можете использовать спавн-яйца только на своем острове."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§cВы достигли предела спавнов на вашем острове."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cBanned:§e Вы запрещены с этого острова."

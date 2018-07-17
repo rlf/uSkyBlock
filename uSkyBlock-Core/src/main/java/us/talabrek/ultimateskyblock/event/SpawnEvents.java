@@ -5,8 +5,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Player;
@@ -18,9 +16,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MonsterEggs;
 import org.bukkit.material.SpawnEgg;
 import org.bukkit.metadata.FixedMetadataValue;
 import us.talabrek.ultimateskyblock.api.IslandInfo;
@@ -29,10 +27,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
@@ -51,51 +46,11 @@ public class SpawnEvents implements Listener {
     private static final Set<CreatureSpawnEvent.SpawnReason> ADMIN_INITIATED = new HashSet<>(Arrays.asList(
             CreatureSpawnEvent.SpawnReason.SPAWNER_EGG
     ));
-    private static final Map<Short, Set<Material>> FODDER = new HashMap<>();
 
-    /**
-     * Enable building on pre 1.8 code
-     */
-    private static final short RABBIT_ID = 101;
-
-    static {
-        FODDER.put(EntityType.PIG.getTypeId(), Collections.singleton(Material.CARROT_ITEM));
-        FODDER.put(EntityType.COW.getTypeId(), Collections.singleton(Material.WHEAT));
-        FODDER.put(EntityType.SHEEP.getTypeId(), Collections.singleton(Material.WHEAT));
-        FODDER.put(EntityType.CHICKEN.getTypeId(), Collections.singleton(Material.SEEDS));
-        FODDER.put(EntityType.OCELOT.getTypeId(), Collections.singleton(Material.RAW_FISH));
-        FODDER.put(EntityType.WOLF.getTypeId(), Collections.singleton(Material.RAW_BEEF));
-        FODDER.put(EntityType.HORSE.getTypeId(), new HashSet<>(Arrays.asList(Material.GOLDEN_APPLE, Material.GOLDEN_CARROT)));
-        FODDER.put(RABBIT_ID, new HashSet<>(Arrays.asList(Material.CARROT, Material.GOLDEN_CARROT, Material.YELLOW_FLOWER)));
-    }
     private final uSkyBlock plugin;
 
     public SpawnEvents(uSkyBlock plugin) {
         this.plugin = plugin;
-    }
-
-    @EventHandler
-    public void onFeedEvent(PlayerInteractEntityEvent event) {
-        Player player = event.getPlayer();
-        if (player == null || event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
-            return; // Bail out, we don't care
-        }
-        if (Animals.class.isAssignableFrom(event.getRightClicked().getType().getEntityClass()) && player.getItemInHand() != null) {
-            if (isFodder(event.getRightClicked(), player.getItemInHand())) {
-                checkLimits(event, event.getRightClicked().getType(), player.getLocation());
-                if (event.isCancelled()) {
-                    plugin.notifyPlayer(player, tr("\u00a7cYou have reached your spawn-limit for your island."));
-                }
-            }
-        }
-    }
-
-    private boolean isFodder(Entity entity, ItemStack item) {
-        if (entity == null || entity.getType() == null || item == null && item.getType() == null) {
-            return false;
-        }
-        Set<Material> acceptedFodder = FODDER.get(entity.getType().getTypeId());
-        return acceptedFodder != null && acceptedFodder.contains(item.getType());
     }
 
     @EventHandler
@@ -108,7 +63,7 @@ public class SpawnEvents implements Listener {
             return;
         }
         ItemStack item = event.getItem();
-        if (RIGHT_CLICKS.contains(event.getAction()) && item != null && item.getType() == Material.MONSTER_EGG && item.getData() instanceof SpawnEgg) {
+        if (RIGHT_CLICKS.contains(event.getAction()) && item != null && isSpawnEgg(item)) {
             if (!plugin.playerIsOnIsland(player)) {
                 event.setCancelled(true);
                 plugin.notifyPlayer(player, tr("\u00a7eYou can only use spawn-eggs on your own island."));
@@ -122,6 +77,10 @@ public class SpawnEvents implements Listener {
                 event.setUseInteractedBlock(Event.Result.DENY);
             }
         }
+    }
+
+    private boolean isSpawnEgg(ItemStack item) {
+        return item.getType().name().endsWith("_SPAWN_EGG") && item.getData() instanceof MonsterEggs;
     }
 
     @EventHandler

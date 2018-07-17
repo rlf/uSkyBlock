@@ -1701,11 +1701,11 @@ msgid ""
 "island!§9 Max: {1,number}"
 msgstr ""
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§c당신은 당신 섬에서의 spawn제한에 다다랐습니다."
-
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§e당신은 당신 소유의 섬에서 오직 spawn-eggs만 사용할 수 있습니다 ."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§c당신은 당신 섬에서의 spawn제한에 다다랐습니다."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cBanned:§e 당신은 이 섬으로부터 차단 되었습니다."

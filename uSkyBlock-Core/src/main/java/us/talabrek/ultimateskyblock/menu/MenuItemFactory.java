@@ -50,12 +50,12 @@ public class MenuItemFactory {
 
     public ItemStack createIntegerIcon(int value, boolean readonly) {
         return Math.abs(value) <= MAX_INT_VALUE
-                ? (readonly ? new ItemStack(Material.DETECTOR_RAIL, value) : new ItemStack(Material.RAILS, value))
-                : (readonly ? new ItemStack(Material.IRON_FENCE, 1, (short)1) : new ItemStack(Material.ACTIVATOR_RAIL, 1));
+                ? (readonly ? new ItemStack(Material.DETECTOR_RAIL, value) : new ItemStack(Material.RAIL, value))
+                : (readonly ? new ItemStack(Material.IRON_BARS, 1, (short)1) : new ItemStack(Material.ACTIVATOR_RAIL, 1));
     }
 
     public ItemStack createBooleanItem(boolean value, String path, YmlConfiguration config, boolean readonly) {
-        ItemStack icon = new ItemStack(Material.WOOL, 1, (short) (readonly ? (value ? 13 : 14) : (value ? 5 : 6)));
+        ItemStack icon = new ItemStack(readonly ? (value ? Material.GREEN_WOOL : Material.RED_WOOL) : (value ? Material.LIME_WOOL : Material.PINK_WOOL), 1);
         return createLeafItem(icon, value ? TRUE + tr("true") : FALSE + tr("false"),
                 path, config);
     }

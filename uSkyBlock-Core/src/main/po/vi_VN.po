@@ -1676,11 +1676,11 @@ msgid ""
 "island!§9 Max: {1,number}"
 msgstr ""
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cBạn đã đạt đến điểm bảo vệ giới hạn"
-
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eBạn chỉ có thể dùng trứng tạo sinh vật ở đảo của bản thân"
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§cBạn đã đạt đến điểm bảo vệ giới hạn"
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cBạn bị cấm khỏi đảo"

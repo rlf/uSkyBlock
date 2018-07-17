@@ -5,7 +5,6 @@ import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.island.level.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -60,7 +59,7 @@ public class LevelCommand extends RequireIslandCommand {
             player.sendMessage(tr("\u00a74That player is invalid or does not have an island!"));
             return false;
         }
-        final boolean shouldRecalculate = player.getName().equals(info.getPlayerName()) || hasPermission(player, "usb.admin.island");
+        final boolean shouldRecalculate = player.getName().equals(info.getPlayerName()) || player.hasPermission("usb.admin.island");
         final Runnable showInfo = () -> {
             if (player != null && player.isOnline() && info != null) {
                 player.sendMessage(tr("\u00a7eInformation about {0}''s Island:", islandPlayer));
@@ -78,17 +77,12 @@ public class LevelCommand extends RequireIslandCommand {
             }
         };
         if (shouldRecalculate) {
-            plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+            plugin.getServer().getScheduler().runTaskLater(plugin, () -> plugin.calculateScoreAsync(player, info.locationForParty(), new Callback<us.talabrek.ultimateskyblock.api.model.IslandScore>() {
                 @Override
                 public void run() {
-                    plugin.calculateScoreAsync(player, info.locationForParty(), new Callback<us.talabrek.ultimateskyblock.api.model.IslandScore>() {
-                        @Override
-                        public void run() {
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 10L);
-                        }
-                    });
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 10L);
                 }
-            }, 1L);
+            }), 1L);
         } else {
             showInfo.run();
         }

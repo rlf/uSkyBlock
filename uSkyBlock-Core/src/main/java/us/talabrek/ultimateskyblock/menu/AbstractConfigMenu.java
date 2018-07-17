@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -81,7 +80,7 @@ public class AbstractConfigMenu {
         }
         Matcher m = UUID_PATTERN.matcher(item);
         if (m.matches()) {
-            ItemStack itemStack = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+            ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD, 1);
             Bukkit.getUnsafe().modifyItemStack(itemStack, item);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName(tr(itemMeta.getDisplayName()));

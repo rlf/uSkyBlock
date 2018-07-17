@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
+import us.talabrek.ultimateskyblock.block.BlockCollection;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
@@ -227,36 +229,21 @@ public class ChallengeLogic implements Listener {
         final int py = l.getBlockY();
         final int pz = l.getBlockZ();
         World world = l.getWorld();
-        int[] blockCount = new int[0xffffff];
-        int[] baseBlocks = new int[0xffff];
+        BlockCollection blockCollection = new BlockCollection();
         for (int x = px - radius; x <= px + radius; x++) {
             for (int y = py - radius; y <= py + radius; y++) {
                 for (int z = pz - radius; z <= pz + radius; z++) {
                     Block block = world.getBlockAt(x, y, z);
-                    blockCount[(block.getTypeId() << 8) + (block.getData() & 0xff)]++;
-                    baseBlocks[block.getTypeId()]++;
+                    blockCollection.add(block);
                 }
             }
         }
-        StringBuilder sb = new StringBuilder();
-        boolean hasAll = true;
-        for (ItemStack item : itemStacks) {
-            int diffSpecific = item.getAmount() - blockCount[(item.getTypeId() << 8) + (item.getDurability() & 0xff)];
-            int diffGeneral = item.getAmount() - baseBlocks[item.getTypeId()];
-            if (item.getDurability() != 0 && diffSpecific > 0) {
-                sb.append(" \u00a74" + diffSpecific
-                        + " \u00a7b" + VaultHandler.getItemName(item));
-                hasAll = false;
-            } else if (diffGeneral > 0) {
-                sb.append(" \u00a74" + diffGeneral
-                        + " \u00a7b" + VaultHandler.getItemName(item));
-                hasAll = false;
-            }
+        String diff = blockCollection.diff(itemStacks);
+        if (diff != null) {
+            player.sendMessage(diff);
+            return false;
         }
-        if (!hasAll) {
-            player.sendMessage(tr("\u00a7eStill the following blocks short: {0}", sb.toString()));
-        }
-        return hasAll;
+        return true;
     }
 
     private boolean tryCompleteOnIsland(Player player, String challengeName) {
@@ -432,7 +419,7 @@ public class ChallengeLogic implements Listener {
             lores.add(tr("\u00a74\u00a7lYou can't repeat this challenge."));
         }
         if (completion.getTimesCompleted() > 0) {
-            meta.addEnchant(new EnchantmentWrapper(0), 0, true);
+            meta.addEnchant(Enchantment.LOYALTY, 0, true);
         }
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);

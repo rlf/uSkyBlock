@@ -267,14 +267,14 @@ public enum LocationUtil {
         int cz = z & 0xF;
         int topBlock = chunkSnapshot.getHighestBlockYAt(cx, cz);
         int y = blockLoc.getBlockY();
-        while (y <= topBlock && isLiquidOrAir(chunkSnapshot.getBlockTypeId(cx, y, cz))) {
+        while (y <= topBlock && isLiquidOrAir(chunkSnapshot.getBlockType(cx, y, cz))) {
             y++;
         }
         return new Location(blockLoc.getWorld(), x, y, z).getBlock();
     }
 
-    private static boolean isLiquidOrAir(int blockTypeId) {
-        return BlockUtil.isFluid(blockTypeId) || blockTypeId == Material.AIR.getId();
+    private static boolean isLiquidOrAir(Material material) {
+        return BlockUtil.isFluid(material) || material == Material.AIR;
     }
 
     public static String getCardinalDirection(float yaw) {

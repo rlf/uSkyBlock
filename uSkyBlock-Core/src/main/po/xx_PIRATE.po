@@ -1690,11 +1690,11 @@ msgid ""
 "island!§9 Max: {1,number}"
 msgstr ""
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cYe have reached yer spawn-limit for yer hideout."
-
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eYe can only use spawn-eggs on yer own hideout."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§cYe have reached yer spawn-limit for yer hideout."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cBanned:§e Ye be banned from this hideout."
