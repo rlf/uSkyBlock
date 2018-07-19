@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-07-14 23:52+0200\n"
+"PO-Revision-Date: 2018-07-20 01:12+0200\n"
 "Last-Translator: Leomixer17\n"
 "Language-Team: Rublitio\n"
 "Language: it\n"
@@ -11,6 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -483,30 +484,30 @@ msgid "open GUI for config"
 msgstr "apre la GUI per la config"
 
 msgid "searches config for a specific key"
-msgstr ""
+msgstr "cerca nella config una chiave specifica"
 
 #, java-format
 msgid "§c{0}§9"
-msgstr ""
+msgstr "§c{0}§9"
 
 #, java-format
 msgid "§9{0}§8: §e{1}"
-msgstr ""
+msgstr "§9{0}§8: §e{1}"
 
 #, java-format
 msgid "Found the following matching {0}:"
-msgstr ""
+msgstr "Trovati i seguenti risultati {0}:"
 
 msgid "§a<section>"
-msgstr ""
+msgstr "§a<sezione>"
 
 #, java-format
 msgid "§3{0,number,#.##}"
-msgstr ""
+msgstr "§3{0,number,#.##}"
 
 #, java-format
 msgid "§2{0}"
-msgstr ""
+msgstr "§2{0}"
 
 msgid "§eInvalid configuration name"
 msgstr "§4* §7Nome configurazione non valido"
@@ -640,7 +641,7 @@ msgid "imports players and islands from other formats"
 msgstr "importa i giocatori e le isole da altri formati"
 
 msgid "controls async jobs"
-msgstr ""
+msgstr "controlla i processi asincroni"
 
 msgid "§9Job Statistics"
 msgstr "§9* §7Statistiche Lavori"
@@ -771,13 +772,13 @@ msgstr "§4* §7Non ci sono attualmente orfani registrati."
 
 #, java-format
 msgid "§eOrphans ({0}/{1}): {2}"
-msgstr ""
+msgstr "§eOrfani ({0}/{1}): {2}"
 
 msgid "shows perk-information"
-msgstr ""
+msgstr "mostra le informazioni sui vantaggi"
 
 msgid "shows a specific players perks"
-msgstr ""
+msgstr "mostra vantaggi specifici per i giocatori"
 
 #, java-format
 msgid "additional perks {0}"
@@ -813,10 +814,12 @@ msgid ""
 "§eFinding all islands that have been abandoned for more than {0} days below "
 "level {1}"
 msgstr ""
+"§eRicerca in corso di tutte le isole che sono state abbandonate da più di "
+"{0} giorni sotto il livello {1}"
 
 #, java-format
 msgid "§4PURGE:§e Do §9usb purge confirm§e within {0} to accept."
-msgstr ""
+msgstr "§4PULIZIA:§e Fai §9usb purge confirm§e entro {0} per accettare."
 
 msgid "§4Trying to abort purge"
 msgstr "§4* §7Provando ad interrompere la pulizia"
@@ -862,7 +865,7 @@ msgid "§eNo currently shown regions for this player"
 msgstr "§4* §7Nessuna regione mostrata per questo giocatore"
 
 msgid "set the ticks between animations"
-msgstr ""
+msgstr "imposta i tick tra le animazioni"
 
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
@@ -872,7 +875,7 @@ msgid "§eAnimation-tick must be a valid integer."
 msgstr "§4* §7Animation-tick must be a valid integer."
 
 msgid "refreshes the existing animations"
-msgstr ""
+msgstr "aggiorna le animazioni esistenti"
 
 msgid "set a player''s island to your location"
 msgstr "imposta un''isola del giocatore alla tua posizione"
@@ -1420,7 +1423,7 @@ msgstr "§9* §7Il Rango è §9{0}"
 
 #, java-format
 msgid "§4Could not locate rank of {0}"
-msgstr ""
+msgstr "§4Impossibile individuare il rango di {0}"
 
 msgid "lock your island to non-party members."
 msgstr "blocca la tua isola ai non membri del party."
@@ -1455,7 +1458,7 @@ msgid "{0} tried to take over the island!"
 msgstr "§c{0} §7ha provato a rilevare l''isola!"
 
 msgid "show the islands limits"
-msgstr ""
+msgstr "mostra i limiti delle isole"
 
 msgid "show party information"
 msgstr "mostra le informazioni del party"
@@ -1550,7 +1553,7 @@ msgid "set your island''s warp location"
 msgstr "imposta la posizione del warp della tua isola"
 
 msgid "§cYou do not have permission to set your island''s warp point!"
-msgstr ""
+msgstr "§cNon hai il permesso di impostare il punto di warp della tua isola!"
 
 msgid "§cYou need to be on your own island to set the warp!"
 msgstr "§4* §7Hai bisogno di essere sulla tua isola per impostare il warp!"
@@ -1580,6 +1583,7 @@ msgstr "§6{0}§4 ha disattivato §7il warp dell''isola."
 
 msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr ""
+"§cNon hai il permesso di abilitare/disabilitare il warp della tua isola!"
 
 msgid "display the top10 of islands"
 msgstr "visualizza la top10 delle isole"
@@ -1698,7 +1702,7 @@ msgid "allows user to place [usb] signs"
 msgstr "consente all''utente di piazzare cartelli [usb]"
 
 msgid "§eYou can not use another island''s portals!"
-msgstr ""
+msgstr "§eNon puoi usare portali di altre isole!"
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Il commercio non è consentito su altre isole. Fallo nello spawn."
@@ -2098,6 +2102,10 @@ msgid ""
 "members to teleport to\n"
 "the island."
 msgstr ""
+"imposta il warp dell''isola,\n"
+"che consente ai membri non\n"
+"di gruppo di teletrasportarsi\n"
+"all''isola."
 
 msgid "Toggle Island Warp"
 msgstr "Attiva/Disattiva Warp Isola"
@@ -2111,6 +2119,10 @@ msgid ""
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
+"attiva/disattiva il warp dell''isola,\n"
+"permettendogli di attivarlo\n"
+"o disattivarlo in ogni momento, ma\n"
+"non impostare la posizione."
 
 msgid "Invite Players"
 msgstr "Invita Giocatori"
@@ -2380,6 +2392,8 @@ msgid ""
 "§eClick here to return to\n"
 "§eyour island group''s info."
 msgstr ""
+"§eClicca qui per ritornare alle\n"
+"§einformazioni sul tuo gruppo isola."
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2425,6 +2439,10 @@ msgid ""
 "§eleader can change permissions\n"
 "§eby clicking a player''s icon."
 msgstr ""
+"§ePassa sopra un''icona di un giocatore\n"
+"§eper visualizzare i suoi permessi. Il\n"
+"§ecapo può cambiare i permessi\n"
+"§ecliccando un''icona di un giocatore."
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -2540,6 +2558,14 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
+"Vuoi unirti all''isola di un altro\n"
+"giocatore invece di avviare\n"
+"la tua? Se un altro giocatore\n"
+"ti invita alla sua isola\n"
+"puoi cliccare qui o usa\n"
+"§e/island accept§f per unirti a lui.\n"
+"§e§lClicca qui per accettare un invito!\n"
+"§e§l(Devi essere invitato prima)"
 
 msgid "Island Menu"
 msgstr "Menu Isola"
@@ -2554,6 +2580,11 @@ msgid ""
 "island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
+"Ritorna al punto home della tua isola.\n"
+"Puoi impostare il tuo punto home\n"
+"in qualsiasi luogo sulla tua isola\n"
+"usando §b/island sethome\n"
+"§e§lClicca qui per ritornare alla tua home."
 
 msgid "§a§lChallenges"
 msgstr "§a§lSfide"
