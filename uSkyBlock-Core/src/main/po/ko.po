@@ -473,6 +473,32 @@ msgstr "§4{1}에 있는 {0}의 섬은 이미 보호받고 있습니다"
 msgid "open GUI for config"
 msgstr "키 변경을 위해 GUI를 여세요"
 
+msgid "searches config for a specific key"
+msgstr ""
+
+#, java-format
+msgid "§c{0}§9"
+msgstr ""
+
+#, java-format
+msgid "§9{0}§8: §e{1}"
+msgstr ""
+
+#, java-format
+msgid "Found the following matching {0}:"
+msgstr ""
+
+msgid "§a<section>"
+msgstr ""
+
+#, java-format
+msgid "§3{0,number,#.##}"
+msgstr ""
+
+#, java-format
+msgid "§2{0}"
+msgstr ""
+
 msgid "§eInvalid configuration name"
 msgstr "§e설정파일 이름이 올바르지 않습니다"
 

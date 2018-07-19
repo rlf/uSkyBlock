@@ -8,7 +8,7 @@ import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.command.admin.AbstractPlayerInfoCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminChallengeCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminIslandCommand;
-import us.talabrek.ultimateskyblock.command.admin.ConfigGUICommand;
+import us.talabrek.ultimateskyblock.command.admin.ConfigCommand;
 import us.talabrek.ultimateskyblock.command.admin.CooldownCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
 import us.talabrek.ultimateskyblock.command.admin.FlatlandFixCommand;
@@ -80,7 +80,7 @@ public class AdminCommand extends AbstractCommandExecutor {
         add(new LanguageCommand(plugin));
         add(new FlushCommand(plugin));
         add(new JobsCommand(plugin));
-        add(new ConfigGUICommand(plugin));
+        add(new ConfigCommand(plugin));
         add(new DocumentCommand(plugin, "doc", "usb.admin.doc"));
         add(new RegionCommand(plugin, animationHandler));
         add(new SetMaintenanceCommand(plugin));

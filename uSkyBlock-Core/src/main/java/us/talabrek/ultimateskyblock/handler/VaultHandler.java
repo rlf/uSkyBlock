@@ -63,11 +63,15 @@ public enum VaultHandler {;
 
     private static String getVaultItemName(ItemStack stack) {
         if (stack != null) {
-            if (stack.getItemMeta() != null && stack.getItemMeta().getDisplayName() != null) {
-                return stack.getItemMeta().getDisplayName();
+            try {
+                if (stack.getItemMeta() != null && stack.getItemMeta().getDisplayName() != null) {
+                    return stack.getItemMeta().getDisplayName();
+                }
+                ItemInfo itemInfo = Items.itemByStack(stack);
+                return itemInfo != null ? itemInfo.getName() : "" + stack.getType();
+            } catch (NullPointerException e) {
+                return "" + stack.getType();
             }
-            ItemInfo itemInfo = Items.itemByStack(stack);
-            return itemInfo != null ? itemInfo.getName() : "" + stack.getType();
         }
         return null;
     }
