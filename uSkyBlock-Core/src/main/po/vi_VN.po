@@ -14,43 +14,43 @@ msgstr ""
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
-msgstr ""
+msgstr "§eBạn không có quyền (§4{0}§e)"
 
 #, java-format
 msgid "§eInvalid command: {0}"
-msgstr ""
+msgstr "§eLệnh không hợp lệ: {0}"
 
 #, java-format
 msgid "§7Usage: {0}"
-msgstr ""
+msgstr "§7Cách dùng: {0}"
 
 #, java-format
 msgid "§7Use §3/{0} ? {1}§7 to display next page\n"
-msgstr ""
+msgstr "§7Dùng §3/{0} ? {1}§7 để xem trang tiếp theo\n"
 
 #, java-format
 msgid "§7Use §3/{0} ? {1} §7 to display previous page\n"
-msgstr ""
+msgstr "§7Dùng §3/{0} ? {1} §7 để xem trang trước\n"
 
 msgid "saves documentation of the commands to a file"
-msgstr ""
+msgstr "lưu thông tin lệnh vào một file"
 
 #, java-format
 msgid "Wrote documentation to {0}"
-msgstr ""
+msgstr "Đã ghi thông tin vào {0}"
 
 #, java-format
 msgid "§4Error writing documentation: {0}"
-msgstr ""
+msgstr "§4Lỗi khi ghi thông tin: {0}"
 
 msgid "Command"
-msgstr ""
+msgstr "Lệnh"
 
 msgid "Permission"
-msgstr ""
+msgstr "Quyền"
 
 msgid "Description"
-msgstr ""
+msgstr "Mô tả"
 
 #, java-format
 msgid "§f{0}x §7{1}"
@@ -78,7 +78,7 @@ msgstr ""
 
 #, java-format
 msgid "§4You can complete this {0} more time(s)."
-msgstr ""
+msgstr "§4Bạn có thể hoàn thành cái này {0} lần nữa."
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -93,32 +93,32 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4Điều kiện hoàn thành sẽ được thiếp lập lại trong {0} phút."
 
 msgid "§4This challenge is currently unavailable."
-msgstr ""
+msgstr "§4Thử thách hiện thời không có sẵn."
 
 #, java-format
 msgid "§4You can complete this again in {0} days."
-msgstr ""
+msgstr "§4Bạn có thể hoàn thành cái này sau {0} ngày."
 
 #, java-format
 msgid "§4You can complete this again in {0} hours."
-msgstr ""
+msgstr "§4Bạn có thể hoàn thành cái này sau {0} giờ."
 
 #, java-format
 msgid "§4You can complete this again in {0} minutes."
-msgstr ""
+msgstr "§4Bạn có thể hoàn thành cái này sau {0} phút"
 
 msgid "§eThis challenge requires:"
-msgstr ""
+msgstr "§eThử thách này cần:"
 
 msgid "§7and more..."
 msgstr "§7và còn nữa"
 
 msgid "§eItems will be traded for reward."
-msgstr ""
+msgstr "§eVật phẩm sẽ được trao đổi như phần thưởng."
 
 #, java-format
 msgid "§eMust be within {0} meters."
-msgstr ""
+msgstr "§ePhải trong phạm vi {0} mét."
 
 msgid "§6Item Reward: §a"
 msgstr "§6Phần thưởng: §a"
@@ -137,7 +137,7 @@ msgstr "§dTổng số lần hoàn thành: §f{0}"
 
 #, java-format
 msgid "§7Requires {0}"
-msgstr ""
+msgstr "§7Cần {0}"
 
 #, java-format
 msgid "§4No challenge named {0} found"
@@ -156,7 +156,7 @@ msgstr "§4Nhiệm vụ {0} không thể hoàn thành nhiều lần!"
 
 #, java-format
 msgid "§4You cannot complete the {0} challenge again yet!"
-msgstr ""
+msgstr "§4Bạn chưa thể hoàn thành nhiệm vụ {0} lần nữa!"
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -276,7 +276,7 @@ msgid "§cSorry! {0}"
 msgstr "§cXin lỗi! {0}"
 
 msgid "Either send a message directly to your group, or toggle it on/off."
-msgstr ""
+msgstr "Gửi tin nhắn trực tiếp đến nhóm của bạn, hoặc tùy chọn tắt/mở."
 
 msgid "party"
 msgstr ""
@@ -286,18 +286,18 @@ msgstr ""
 
 #, java-format
 msgid "§cToggled chat to {0} §aON"
-msgstr ""
+msgstr "§cTin nhắn đến {0} đã §aBẬT"
 
 #, java-format
 msgid "§cRepeat §9{0}§c to toggle it off"
-msgstr ""
+msgstr "§cDùng §9{0}§c lần nữa để tắt nó"
 
 #, java-format
 msgid "§aToggled chat §cOFF§a for {0}"
-msgstr ""
+msgstr "§aTin nhắn đã §cTẮT§a cho {0}"
 
 msgid "§cCommand only available to players"
-msgstr ""
+msgstr "§cLệnh chỉ có thể dùng bởi người chơi"
 
 msgid "talk to players on your island"
 msgstr "trò chuyện với người chơi trên đảo"
@@ -629,7 +629,7 @@ msgstr "§4Người chơi đó không có skyblock."
 
 #, java-format
 msgid "§aTeleporting to {0}''s island."
-msgstr ""
+msgstr "§aĐang dịch chuyển đến đảo của {0}."
 
 msgid "imports players and islands from other formats"
 msgstr "Chuyển đổi thông tin người chơi và đảo từ dạng khác"
@@ -2000,19 +2000,19 @@ msgid "Challenge Menu"
 msgstr "Danh sách thử thách"
 
 msgid "Change Biome"
-msgstr ""
+msgstr "Thay đổi Biome"
 
 msgid "change the island''s biome."
-msgstr ""
+msgstr "thay đổi biome của đảo."
 
 msgid "Toggle Island Lock"
-msgstr ""
+msgstr "Khóa/Mở đảo"
 
 msgid "toggle the island''s lock."
 msgstr "bật tắt khoá đảo"
 
 msgid "Set Island Warp"
-msgstr ""
+msgstr "Đặt điểm dịch chuyển"
 
 msgid "set the island''s warp."
 msgstr "thiết đặt điểm dịch chuyển của đảo"
@@ -2023,9 +2023,13 @@ msgid ""
 "members to teleport to\n"
 "the island."
 msgstr ""
+"đặt điểm dịch chuyển của đảo,\n"
+"cho phép những người ngoài đảo\n"
+"có thể dịch chuyển đến\n"
+"đảo của bạn."
 
 msgid "Toggle Island Warp"
-msgstr ""
+msgstr "Bật tắt điểm dịch chuyển"
 
 msgid "toggle the island''s warp."
 msgstr "bật tắt điểm dịch chuyển của đảo"
@@ -2036,9 +2040,13 @@ msgid ""
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
+"bật tắt điểm dịch chuyển,\n"
+"cho phép họ tùy chọn bật tắt\n"
+"bất cứ lúc nào, nhưng\n"
+"không đặt điểm dịch chuyển."
 
 msgid "Invite Players"
-msgstr ""
+msgstr "Mời Người Chơi"
 
 msgid "invite others to the island."
 msgstr "mời người chơi khác vào đảo"
@@ -2053,7 +2061,7 @@ msgstr ""
 "nếu đảo còn trống."
 
 msgid "Kick Players"
-msgstr ""
+msgstr "Đuổi Người Chơi"
 
 msgid "kick others from the island."
 msgstr "trục xuất người chơi khác khỏi đảo"
@@ -2063,7 +2071,9 @@ msgid ""
 "other players from the island,\n"
 "but they are unable to kick\n"
 "the island leader."
-msgstr "trục xuất người chơi\\,nnhưng không thể trục xuất quản lý"
+msgstr "" 
+"trục xuất người chơi\n"
+"nhưng không thể trục xuất quản lý."
 
 msgid "Ocean"
 msgstr "Đại dương"
@@ -2220,7 +2230,7 @@ msgstr ""
 "Mọi sinh vật xuất hiện bình thường."
 
 msgid "Flower Forest"
-msgstr ""
+msgstr "Rừng Hoa"
 
 msgid ""
 "The flower forest biome.\n"
@@ -2228,6 +2238,10 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
+"biome rừng hoa.\n"
+"mob bị động được sinh ra \n"
+"bình thường và mob chủ động\n"
+"cũng sẽ sinh ra."
 
 msgid "Deep Ocean"
 msgstr "Biển sâu"
@@ -2245,13 +2259,16 @@ msgstr ""
 "xuất hiện như bình thường"
 
 msgid "Ice Plains"
-msgstr ""
+msgstr "Đồng Bằng Tuyết"
 
 msgid ""
 "The ice-plains biome is an advanced biome.\n"
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
+"Biome đồng bằng tuyết là một biome nâng cao.\n"
+"Mob sẽ sinh ra tự nhiên.\n"
+"kể cả gấu bắc cực"
 
 msgid "Permissions"
 msgstr "Quyền hạn"
@@ -2270,7 +2287,7 @@ msgstr ""
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
-msgstr ""
+msgstr "§9Quyền của §e{0}"
 
 msgid ""
 "§eHover over an icon to view\n"
@@ -2736,10 +2753,10 @@ msgid "§4Player is already assigned to this island!"
 msgstr "§4Đảo đã chuyển giao cho người chơi"
 
 msgid "§4Unable to find a safe home-location on your island!"
-msgstr ""
+msgstr "§4Không thể tìm thấy chỗ đáp an toàn ở đảo của bạn!"
 
 msgid "§cWARNING: §eTeleporting you to mid-air."
-msgstr ""
+msgstr "§cCẢNH BÁO: §eĐang dịch chuyển bạn lên không trung."
 
 msgid "§aTeleporting you to your island."
 msgstr "§aDịch chuyển về đảo."
