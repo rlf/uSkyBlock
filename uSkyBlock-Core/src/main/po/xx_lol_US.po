@@ -75,6 +75,14 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid " §f{0}x §{1}"
+msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§eStill no haz dese bloks: {0}"
+
+#, java-format
 msgid "§4You can complete this {0} more time(s)."
 msgstr ""
 
@@ -175,10 +183,6 @@ msgstr "§4Yoor cathouz must be level {0} to complete this challenge!"
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Unknown type of challenge: {0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§eStill no haz dese bloks: {0}"
 
 #, java-format
 msgid ""
@@ -1916,10 +1920,6 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eYoor rank  iz: §f{0}"
 
-#, java-format
-msgid "Invalid block {0} found"
-msgstr ""
-
 msgid "UNKNOWN"
 msgstr "UNKNOWN"
 
@@ -1989,9 +1989,6 @@ msgstr "Return"
 
 msgid "§9Integer Editor"
 msgstr "§9Integer Editor"
-
-msgid "§9Item List Editor"
-msgstr "§9stuffs List Editor"
 
 msgid "§eConfiguration saved and reloaded."
 msgstr "§eConfiguration saved an' reloaded."
@@ -2911,6 +2908,9 @@ msgstr "West"
 
 msgid "North-West"
 msgstr "North-West"
+
+#~ msgid "§9Item List Editor"
+#~ msgstr "§9stuffs List Editor"
 
 #~ msgid "§eRemoving {0}'s island."
 #~ msgstr "§eRemoving {0}''s cathouz."

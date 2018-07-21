@@ -72,7 +72,7 @@
         <profile>
             <id>1.13</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->
@@ -87,7 +87,7 @@
         <profile>
             <id>1.12</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency> <!-- Bukkit implementation -->

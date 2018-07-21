@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.model.BlockScore;
-import us.talabrek.ultimateskyblock.island.level.yml.LegacyLevelConfigYmlReader;
 import us.talabrek.ultimateskyblock.island.level.yml.LevelConfigYmlReader;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -30,11 +29,7 @@ public abstract class CommonLevelLogic implements LevelLogic {
     }
 
     private void load() {
-        if (config.getInt("version", 0) < 100) {
-            scoreMap = new LegacyLevelConfigYmlReader().readLevelConfig(config);
-        } else {
-            scoreMap = new LevelConfigYmlReader().readLevelConfig(config);
-        }
+        scoreMap = new LevelConfigYmlReader().readLevelConfig(config);
     }
 
     Location getNetherLocation(Location l) {

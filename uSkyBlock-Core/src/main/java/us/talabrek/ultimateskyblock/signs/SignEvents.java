@@ -137,7 +137,7 @@ public class SignEvents implements Listener {
     }
 
     private boolean isSign(Material material) {
-        return material == Material.WALL_SIGN || material == Material.SIGN_POST;
+        return material == Material.WALL_SIGN || material == Material.SIGN;
     }
 
     @EventHandler(priority = EventPriority.LOW)

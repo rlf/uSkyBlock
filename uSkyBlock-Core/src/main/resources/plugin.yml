@@ -2,7 +2,7 @@ name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
 version: ${project.version}
 description: Ultimate SkyBlock v${gitTag}-${buildNumber}
-author: Talabrek, R4zorax and others
+author: R4zorax (and more)
 load: STARTUP
 softdepend:
  # mandatory dependencies
@@ -17,6 +17,7 @@ softdepend:
  - AsyncWorldEdit
  # placeholders
  - MVdWPlaceholderAPI
+api-version: 1.13
 
 commands:
   challenges:

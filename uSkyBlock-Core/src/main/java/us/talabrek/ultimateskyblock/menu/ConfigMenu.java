@@ -28,7 +28,6 @@ public class ConfigMenu {
         mainMenu = new MainConfigMenu(plugin, menuConfig, factory, editMenus);
         editMenus.add(new IntegerEditMenu(menuConfig, factory, mainMenu));
         editMenus.add(new BooleanEditMenu(menuConfig));
-        editMenus.add(new ItemStackEditMenu(menuConfig, mainMenu));
         editMenus.add(new StringEditMenu(menuConfig, mainMenu));
         editMenus.add(mainMenu); // mainMenu goes last (catch all)
     }

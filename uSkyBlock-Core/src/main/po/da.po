@@ -81,6 +81,14 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid " §f{0}x §{1}"
+msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§eDu mangler stadig følgende blokke: {0}"
+
+#, java-format
 msgid "§4You can complete this {0} more time(s)."
 msgstr "§4Du kan gennemføre dette {0} gange mere."
 
@@ -181,10 +189,6 @@ msgstr "§4Din ø skal mindst være level {0} for at gennemføre denne udfordrin
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Ukendt udfordrings-type: {0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§eDu mangler stadig følgende blokke: {0}"
 
 #, java-format
 msgid ""
@@ -1922,10 +1926,6 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDin position er: §f{0}"
 
-#, java-format
-msgid "Invalid block {0} found"
-msgstr ""
-
 msgid "UNKNOWN"
 msgstr "ukendt"
 
@@ -1997,9 +1997,6 @@ msgstr "Tilbage"
 
 msgid "§9Integer Editor"
 msgstr "§9Tal Redigering"
-
-msgid "§9Item List Editor"
-msgstr "§9Item List Editor"
 
 msgid "§eConfiguration saved and reloaded."
 msgstr "§eKonfigurationen gemt og genindlæst."

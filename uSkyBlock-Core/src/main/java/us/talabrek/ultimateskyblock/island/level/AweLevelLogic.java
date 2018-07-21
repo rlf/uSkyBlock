@@ -1,21 +1,11 @@
 package us.talabrek.ultimateskyblock.island.level;
 
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.blocks.BaseBlock;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.util.Countable;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import us.talabrek.ultimateskyblock.api.async.Callback;
-import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class AweLevelLogic extends CommonLevelLogic {
@@ -28,6 +18,8 @@ public class AweLevelLogic extends CommonLevelLogic {
 
     @Override
     public void calculateScoreAsync(Location l, Callback<IslandScore> callback) {
+        throw new UnsupportedOperationException("Not supported until WorldEdit releases a Bukkit 1.13 version");
+            /*
         if (running.contains(l)) {
             return;
         }
@@ -38,6 +30,7 @@ public class AweLevelLogic extends CommonLevelLogic {
                 return;
             }
             BlockCountCollection counts = new BlockCountCollection(scoreMap);
+
             EditSession editSession = AsyncWorldEditHandler.getAWEAdaptor().createEditSession(new BukkitWorld(l.getWorld()), -1);
             List<Countable<BaseBlock>> distribution = editSession.getBlockDistributionWithData(WorldEditHandler.getRegion(plugin.getWorld(), region));
             // TODO: Rasmus - 19-07-2018: fix this for 1.13 - once AWE has Material instead of ID for block-distribution
@@ -52,10 +45,10 @@ public class AweLevelLogic extends CommonLevelLogic {
                 distribution.forEach((a) -> counts.add(Material.getMaterial(a.getID().getType()), (byte) (a.getID().getData()&0xff),a.getAmount()));
                 islandScore = createIslandScore(counts);
             }
-
             callback.setState(islandScore);
             plugin.sync(callback);
             running.remove(l);
         });
+            */
     }
 }

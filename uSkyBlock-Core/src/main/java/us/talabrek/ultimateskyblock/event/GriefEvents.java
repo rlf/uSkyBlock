@@ -138,10 +138,11 @@ public class GriefEvents implements Listener {
         if (!tramplingEnabled || !plugin.isSkyAssociatedWorld(event.getPlayer().getWorld())) {
             return;
         }
+        // TODO: R4zorax - 21-07-2018: is this correct? SOIL is a state on DIRT?
         if (event.getAction() == Action.PHYSICAL
                 && !isValidTarget(event.getPlayer())
                 && event.getBlockFace() == BlockFace.UP
-                && event.getMaterial() == Material.SOIL) {
+                && event.getMaterial() == Material.DIRT) {
             event.setCancelled(true);
         }
     }

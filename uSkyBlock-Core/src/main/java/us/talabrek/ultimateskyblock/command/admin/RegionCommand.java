@@ -36,7 +36,6 @@ public class RegionCommand extends CompositeCommand {
     private final AnimationHandler animationHandler;
     private int dash;
     private Material material;
-    private byte material_data;
 
     public RegionCommand(uSkyBlock plugin, final AnimationHandler animationHandler) {
         super("region|rg", "usb.admin.region", marktr("region manipulations"));
@@ -49,7 +48,7 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         dash = 3;
-                        setMaterial(Material.BRICK, (byte) 0);
+                        setMaterial(Material.BRICKS);
                         showRegion(player, region);
                     } else {
                         sender.sendMessage(tr("\u00a7eNo island found at your current location"));
@@ -69,7 +68,7 @@ public class RegionCommand extends CompositeCommand {
                     Chunk chunk = player.getLocation().getChunk();
                     Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
                     dash = 4;
-                    setMaterial(Material.STAINED_GLASS, (byte) 4);
+                    setMaterial(Material.YELLOW_STAINED_GLASS);
                     showChunk(player, chunkCoords);
                     return true;
                 } else {
@@ -87,7 +86,7 @@ public class RegionCommand extends CompositeCommand {
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getInnerChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 3;
-                        setMaterial(Material.STAINED_GLASS, (byte) 11);
+                        setMaterial(Material.BLUE_STAINED_GLASS);
                         for (Vector2D v : borderRegions) {
                             showChunk(player, v);
                         }
@@ -113,7 +112,7 @@ public class RegionCommand extends CompositeCommand {
                     if (region != null) {
                         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 3;
-                        setMaterial(Material.STAINED_GLASS, (byte) 3);
+                        setMaterial(Material.LIGHT_BLUE_STAINED_GLASS);
                         for (Region rg : borderRegions) {
                             showRegion(player, rg);
                         }
@@ -136,7 +135,7 @@ public class RegionCommand extends CompositeCommand {
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getOuterChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 4;
-                        setMaterial(Material.STAINED_GLASS, (byte) 15);
+                        setMaterial(Material.BLACK_STAINED_GLASS);
                         for (Vector2D v : borderRegions) {
                             showChunk(player, v);
                         }
@@ -249,15 +248,14 @@ public class RegionCommand extends CompositeCommand {
         showRegion(player, y, minP, maxP);
     }
 
-    public void setMaterial(Material material, byte data) {
+    public void setMaterial(Material material) {
         if (material == null) {
             throw new IllegalArgumentException("material cannot be null");
         }
         this.material = material;
-        this.material_data = data;
     }
 
     public synchronized void addAnimation(Player player, List<Location> points) {
-        animationHandler.addAnimation(new BlockAnimation(player, points, material, material_data));
+        animationHandler.addAnimation(new BlockAnimation(player, points, material, (byte) 0));
     }
 }

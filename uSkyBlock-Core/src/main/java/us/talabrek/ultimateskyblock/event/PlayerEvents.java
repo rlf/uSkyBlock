@@ -154,7 +154,7 @@ public class PlayerEvents implements Listener {
     }
 
     private boolean isLavaSource(Material type, byte data) {
-        return (type == Material.STATIONARY_LAVA || type == Material.LAVA) && data == 0;
+        return (type == Material.LAVA) && data == 0;
     }
 
     @EventHandler
@@ -163,9 +163,10 @@ public class PlayerEvents implements Listener {
             return;
         }
         if (isLavaSource(event.getBlock().getType(), event.getBlock().getData())) {
-            if (event.getTo() != Material.LAVA && event.getTo() != Material.STATIONARY_LAVA) {
+            if (event.getTo() != Material.LAVA) {
                 event.setCancelled(true);
-                ItemStack item = new ItemStack(event.getTo(), 1, event.getData());
+                // TODO: R4zorax - 21-07-2018: missing datavalue (might convert stuff - exploit)
+                ItemStack item = new ItemStack(event.getTo(), 1);
                 Location above = event.getBlock().getLocation().add(0, 1, 0);
                 event.getBlock().getWorld().dropItemNaturally(above, item);
             }
@@ -268,7 +269,7 @@ public class PlayerEvents implements Listener {
         if (event == null || event.isCancelled() || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
             return;
         }
-        if (event.getBlock().getType() != Material.LEAVES || (event.getBlock().getData() & 0x3) != 0) {
+        if (event.getBlock().getType() != Material.OAK_LEAVES || (event.getBlock().getData() & 0x3) != 0) {
             return;
         }
         // Ok, a player broke an OAK LEAF in the Skyworld
@@ -276,7 +277,7 @@ public class PlayerEvents implements Listener {
         IslandInfo islandInfo = plugin.getIslandInfo(islandName);
         if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
             // Add an oak-sapling
-            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.SAPLING, 1));
+            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.OAK_SAPLING, 1));
             islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
     }

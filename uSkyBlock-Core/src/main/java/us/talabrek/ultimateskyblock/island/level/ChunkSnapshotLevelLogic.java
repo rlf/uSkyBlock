@@ -62,7 +62,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                                         int cz = (z & 0xf);
                                         for (int y = 0; y <= 255; y++) {
                                             Material blockType = chunk.getBlockType(cx, y, cz);
-                                            byte blockData = (byte) (chunk.getBlockData(cx, y, cz) & 0xff);
+                                            byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
                                             counts.add(blockType, blockData);
                                         }
                                     }
@@ -86,7 +86,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                                             int cz = (z & 0xf);
                                             for (int y = 5; y < 120; y++) {
                                                 Material blockType = chunk.getBlockType(cx, y, cz);
-                                                byte blockData = (byte) (chunk.getBlockData(cx, y, cz) & 0xff);
+                                                byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
                                                 counts.add(blockType, blockData);
                                             }
                                         }

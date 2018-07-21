@@ -76,6 +76,14 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid " §f{0}x §{1}"
+msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§eJeste tyto bloky: {0}"
+
+#, java-format
 msgid "§4You can complete this {0} more time(s)."
 msgstr ""
 
@@ -176,10 +184,6 @@ msgstr "§4Pro dokonceni tohoto ukolu je potreba mit level ostrova: {0} !"
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Neznamy typ ukolu: {0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§eJeste tyto bloky: {0}"
 
 #, java-format
 msgid ""
@@ -1917,10 +1921,6 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eTve umisteni je: §f{0}"
 
-#, java-format
-msgid "Invalid block {0} found"
-msgstr ""
-
 msgid "UNKNOWN"
 msgstr "NEZNAMY"
 
@@ -1990,9 +1990,6 @@ msgstr "Navrat"
 
 msgid "§9Integer Editor"
 msgstr "§9Integrovany editor"
-
-msgid "§9Item List Editor"
-msgstr "§9Editor itemu"
 
 msgid "§eConfiguration saved and reloaded."
 msgstr "§eKonfigurace ulozena a restartovana."

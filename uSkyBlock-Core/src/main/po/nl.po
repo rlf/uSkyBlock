@@ -82,6 +82,14 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
+msgid " §f{0}x §{1}"
+msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§eJe komt de volgende blokken tekort: {0}"
+
+#, java-format
 msgid "§4You can complete this {0} more time(s)."
 msgstr "§4Je kan dit nog {0} keer voltooien."
 
@@ -182,10 +190,6 @@ msgstr "Je eiland moet level {0} hebben om deze uitdaging te voltooien!"
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Onbekende soort uitdaging: {0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§eJe komt de volgende blokken tekort: {0}"
 
 #, java-format
 msgid ""
@@ -1950,10 +1954,6 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eJouw rank is: §f{0}"
 
-#, java-format
-msgid "Invalid block {0} found"
-msgstr ""
-
 msgid "UNKNOWN"
 msgstr "ONBEKEND"
 
@@ -2023,9 +2023,6 @@ msgstr "Terug"
 
 msgid "§9Integer Editor"
 msgstr "§9Integer Editor"
-
-msgid "§9Item List Editor"
-msgstr "§9Item Lijst Editor"
 
 msgid "§eConfiguration saved and reloaded."
 msgstr "§eDe Configuratie is opgeslagen en herladen."

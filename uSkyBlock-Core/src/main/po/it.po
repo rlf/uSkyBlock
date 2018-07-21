@@ -11,7 +11,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: \n"
 
 #, java-format
 msgid "§eYou do not have access (§4{0}§e)"
@@ -76,6 +75,14 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, java-format
+msgid " §f{0}x §{1}"
+msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§4* §7Ancora i seguenti blocchi: §4{0}"
 
 #, java-format
 msgid "§4You can complete this {0} more time(s)."
@@ -181,10 +188,6 @@ msgstr ""
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4* §7Tipo di sfida sconosciuto: §4{0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§4* §7Ancora i seguenti blocchi: §4{0}"
 
 #, java-format
 msgid ""
@@ -1968,10 +1971,6 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§9* §7Il tuo rango è: §f{0}"
 
-#, java-format
-msgid "Invalid block {0} found"
-msgstr ""
-
 msgid "UNKNOWN"
 msgstr "SCONOSCIUTO"
 
@@ -2042,9 +2041,6 @@ msgstr "Ritorna"
 
 msgid "§9Integer Editor"
 msgstr "§4* §7Editor Interi"
-
-msgid "§9Item List Editor"
-msgstr "§4* §7Editor Lista Item"
 
 msgid "§eConfiguration saved and reloaded."
 msgstr "§4* §7Configurazione salvata e ricaricata."
