@@ -11,6 +11,8 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+
 /**
  * Allows transfer of leadership to another player.
  */
@@ -18,7 +20,7 @@ public class MakeLeaderCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public MakeLeaderCommand(uSkyBlock plugin) {
-        super("makeleader|transfer", "usb.admin.makeleader", "leader oplayer", I18nUtil.tr("transfer leadership to another player"));
+        super("makeleader|transfer", "usb.admin.makeleader", "leader oplayer", marktr("transfer leadership to another player"));
         this.plugin = plugin;
     }
 
@@ -55,7 +57,7 @@ public class MakeLeaderCommand extends AbstractCommand {
                     islandPlayer.save();
                     playerInfo.save();
                     WorldGuardHandler.updateRegion(islandInfo);
-                    islandInfo.sendMessageToIslandGroup(true, I18nUtil.marktr("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
+                    islandInfo.sendMessageToIslandGroup(true, marktr("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
                 }
             });
             return true;

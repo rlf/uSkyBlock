@@ -20,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+
 /**
  * Debug control.
  */
@@ -28,8 +30,8 @@ public class DebugCommand extends CompositeCommand {
     private static Handler logHandler = null;
 
     public DebugCommand(final uSkyBlock plugin) {
-        super("debug", "usb.admin.debug", I18nUtil.tr("control debugging"));
-        add(new AbstractCommand("setlevel", null, "level", I18nUtil.tr("set debug-level")) {
+        super("debug", "usb.admin.debug", marktr("control debugging"));
+        add(new AbstractCommand("setlevel", null, "level", marktr("set debug-level")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1) {
@@ -39,7 +41,7 @@ public class DebugCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("enable|disable", null, I18nUtil.tr("toggle debug-logging")) {
+        add(new AbstractCommand("enable|disable", null, marktr("toggle debug-logging")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (logHandler != null && alias.equals("disable")) {
@@ -52,7 +54,7 @@ public class DebugCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new AbstractCommand("flush", null, I18nUtil.tr("flush current content of the logger to file.")) {
+        add(new AbstractCommand("flush", null, marktr("flush current content of the logger to file.")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (logHandler != null) {

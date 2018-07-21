@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -8,9 +7,11 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+
 public class SetHomeCommand extends RequireIslandCommand {
     public SetHomeCommand(uSkyBlock plugin) {
-        super(plugin, "sethome|tpset", "usb.island.sethome", I18nUtil.tr("set the island-home"));
+        super(plugin, "sethome|tpset", "usb.island.sethome", marktr("set the island-home"));
     }
 
     @Override

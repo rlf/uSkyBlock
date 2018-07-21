@@ -478,6 +478,32 @@ msgstr "§4La isla de {0} en {1} ya estaba protegida."
 msgid "open GUI for config"
 msgstr "abrir el menú para configuración"
 
+msgid "searches config for a specific key"
+msgstr ""
+
+#, java-format
+msgid "§c{0}§9"
+msgstr ""
+
+#, java-format
+msgid "§9{0}§8: §e{1}"
+msgstr ""
+
+#, java-format
+msgid "Found the following matching {0}:"
+msgstr ""
+
+msgid "§a<section>"
+msgstr ""
+
+#, java-format
+msgid "§3{0,number,#.##}"
+msgstr ""
+
+#, java-format
+msgid "§2{0}"
+msgstr ""
+
 msgid "§eInvalid configuration name"
 msgstr ""
 
@@ -606,6 +632,9 @@ msgstr ""
 
 msgid "imports players and islands from other formats"
 msgstr "importa jugadores e islas de otros formatos"
+
+msgid "controls async jobs"
+msgstr ""
 
 msgid "§9Job Statistics"
 msgstr "§9Estadísticas de trabajos"
@@ -738,6 +767,12 @@ msgstr "§eNo hay islas huérfanas actualmente registradas."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr ""
@@ -817,11 +852,17 @@ msgstr ""
 msgid "§eNo currently shown regions for this player"
 msgstr ""
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr ""
 
 msgid "§eAnimation-tick must be a valid integer."
+msgstr ""
+
+msgid "refreshes the existing animations"
 msgstr ""
 
 msgid "set a player''s island to your location"
@@ -1387,6 +1428,9 @@ msgstr "§4¡sólo el líder puede transferir su liderazgo!"
 msgid "{0} tried to take over the island!"
 msgstr "¡{0} intentó tomar el control de la isla!"
 
+msgid "show the islands limits"
+msgstr ""
+
 msgid "show party information"
 msgstr "muestra información de el grupo"
 
@@ -1879,6 +1923,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§eTu posición es: §f{0}"
+
+#, java-format
+msgid "Invalid block {0} found"
+msgstr ""
 
 msgid "UNKNOWN"
 msgstr ""

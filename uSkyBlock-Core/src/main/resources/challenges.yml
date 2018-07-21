@@ -589,7 +589,14 @@ ranks:
         - cactusfarmer
         - sugarfarmer
         - shroompicker
-        requiredItems: '360:256;+2 353:128;+2 296:128;+2 392:128;+2 391:128;+2 86:128;+2 81:128;+2'
+        requiredItems: 
+        - 360:256;+2
+        - 353:128;+2
+        - 296:128;+2
+        - 392:128;+2
+        - 391:128;+2
+        - 86:128;+2
+        - 81:128;+2
         reward:
           text: a bucket, cocoa and some animals
           items:
@@ -691,7 +698,20 @@ ranks:
         name: '&5Maestro'
         description: Make a jukebox and collect all music discs.
         type: onPlayer
-        requiredItems: '2256:1 2257:1 2258:1 2259:1 2260:1 2261:1 2262:1 2263:1 2264:1 2265:1 2266:1 2267:1 84:1'
+        requiredItems:
+        - '2256:1'
+        - '2257:1'
+        - '2258:1'
+        - '2259:1'
+        - '2260:1'
+        - '2261:1'
+        - '2262:1'
+        - '2263:1'
+        - '2264:1'
+        - '2265:1'
+        - '2266:1'
+        - '2267:1'
+        - '84:1'
         displayItem: 84
         lockedDisplayItem: STAINED_GLASS_PANE:10
         reward:
@@ -848,8 +868,9 @@ ranks:
         name: '&eCookie Lover'
         description: Make cookies and a bucket of milk.
         type: onPlayer
-        requiredChallenges: [expertfarmer]
-        requiredItems: '357:128;+4 335:1'
+        requiredChallenges:
+        - expertfarmer
+        requiredItems: 357:128;+4 335:1
         displayItem: 357
         lockedDisplayItem: STAINED_GLASS_PANE:4
         reward:
@@ -1043,7 +1064,20 @@ ranks:
         name: '&3Technician'
         description: Collect some of every type of redstone equipment.
         type: onPlayer
-        requiredItems: '331:64;+16 76:32;+4 356:5;+1 404:3;+1 33:2;+1 29:2;+1 69:1;+1 77:1;+1 70:1;+1 154:1;+1 23:1;+1 158:1;+1 151:1;+1'
+        requiredItems:
+        - '331:64;+16'
+        - '76:32;+4'
+        - '356:5;+1'
+        - '404:3;+1' 
+        - '33:2;+1'
+        - '29:2;+1' 
+        - '69:1;+1'
+        - '77:1;+1'
+        - '70:1;+1'
+        - '154:1;+1'
+        - '23:1;+1' 
+        - '158:1;+1'
+        - '151:1;+1'
         displayItem: 331
         lockedDisplayItem: STAINED_GLASS_PANE:9
         reward:
@@ -1093,7 +1127,23 @@ ranks:
         name: '&eTop Chef'
         description: Collect every kind of edible food.
         type: onPlayer
-        requiredItems: '393:1 297:1 354:1 366:1 350:0:1 350:1:1 349:2:1 320:1 357:1 322:0:1 396:1 282:1 400:1 364:1 360:1 391:1'
+        requiredItems: 
+        - '393:1'
+        - '297:1'
+        - '354:1'
+        - '366:1'
+        - '350:0:1'
+        - '350:1:1'
+        - '349:2:1'
+        - '320:1'
+        - '357:1'
+        - '22:0:1'
+        - '396:1'
+        - '282:1'
+        - '400:1'
+        - '364:1'
+        - '360:1'
+        - '391:1'
         requiredChallenges:
         - expertfarmer
         - fisherman
@@ -1211,8 +1261,12 @@ ranks:
         radius: 15
         displayItem: BEACON
         lockedDisplayItem: STAINED_GLASS_PANE:11
-        requiredChallenges: ['netherfortress', 'ironfarm', 'maestro', 'witherhunter']
-        requiredItems: '138:1 57:1 133:8 41:25 42:49'
+        requiredChallenges:
+        - netherfortress
+        - ironfarm
+        - maestro
+        - witherhunter
+        requiredItems: 138:1 57:1 133:8 41:25 42:49
         reward:
           items:
           - '174:16'
@@ -1230,7 +1284,11 @@ ranks:
         radius: 15
         displayItem: ENDER_PORTAL_FRAME
         lockedDisplayItem: STAINED_GLASS_PANE:11
-        requiredChallenges: [beaconator,tajmahal,hanginggardens,greatpyramid]
+        requiredChallenges:
+        - beaconator
+        - tajmahal
+        - hanginggardens
+        - greatpyramid
         requiredItems:
         - '120:12'
         - '119:9'

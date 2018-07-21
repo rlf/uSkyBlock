@@ -3,16 +3,14 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.hamcrest.MockitoHamcrest;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.when;
 
@@ -34,11 +32,11 @@ public class ChallengeFormatTest {
         ChallengeCompletion challengeCompletion = Mockito.mock(ChallengeCompletion.class);
         when(challengeCompletion.getTimesCompleted()).thenReturn(0);
         when(challengeCompletion.getName()).thenReturn(challengeName);
-        when(playerInfo.getChallenge(argThat(is(challengeName)))).thenReturn(challengeCompletion);
+        when(playerInfo.getChallenge(MockitoHamcrest.argThat(is(challengeName)))).thenReturn(challengeCompletion);
 
         Challenge challenge = Mockito.mock(Challenge.class);
         when(challenge.getDisplayName()).thenReturn(displayName);
-        when(challengeLogic.getChallenge(argThat(is(challengeName)))).thenReturn(challenge);
+        when(challengeLogic.getChallenge(MockitoHamcrest.argThat(is(challengeName)))).thenReturn(challenge);
     }
 
     @Test
@@ -71,7 +69,6 @@ public class ChallengeFormatTest {
         String missingRequirement = ChallengeFormat.getMissingRequirement(playerInfo, Arrays.asList("cobblestonegenerator", "pumpkinfarmer:2"), challengeLogic);
         assertThat(missingRequirement, is("§f2x §7§aPumpkin §9Farmer"));
     }
-
 
     @Test
     public void getMissingRequirement_AllFullyCompleted() {

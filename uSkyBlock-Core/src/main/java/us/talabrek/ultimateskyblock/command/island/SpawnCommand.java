@@ -1,10 +1,11 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
+
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 
 /**
  * Convernience to get to spawn.
@@ -13,7 +14,7 @@ public class SpawnCommand extends RequirePlayerCommand {
     private final uSkyBlock plugin;
 
     public SpawnCommand(uSkyBlock plugin) {
-        super("spawn", "usb.island.spawn", I18nUtil.tr("teleports you to the skyblock spawn"));
+        super("spawn", "usb.island.spawn", marktr("teleports you to the skyblock spawn"));
         this.plugin = plugin;
     }
 

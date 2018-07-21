@@ -1,29 +1,20 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 import dk.lockfuglsang.minecraft.util.BukkitServerMock;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.IronGolem;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class ChallengeFactoryTest {
@@ -60,7 +51,7 @@ public class ChallengeFactoryTest {
         assertThat(challenge, notNullValue());
         List<ItemStack> requiredItems = challenge.getRequiredItems(0);
         assertThat(requiredItems.size(), is(1));
-        assertThat(requiredItems.get(0), is(new ItemStack(Material.COBBLESTONE, 257)));
+        assertThat(ItemStackUtil.asString(requiredItems.get(0)), is(ItemStackUtil.asString(new ItemStack(Material.COBBLESTONE, 257))));
     }
 
 }

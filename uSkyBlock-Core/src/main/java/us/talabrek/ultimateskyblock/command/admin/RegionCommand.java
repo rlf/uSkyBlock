@@ -41,7 +41,7 @@ public class RegionCommand extends CompositeCommand {
     public RegionCommand(uSkyBlock plugin, final AnimationHandler animationHandler) {
         super("region|rg", "usb.admin.region", marktr("region manipulations"));
         this.animationHandler = animationHandler;
-        add(new AbstractCommand("show", tr("shows the borders of the current island")) {
+        add(new AbstractCommand("show", marktr("shows the borders of the current island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -61,7 +61,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("chunk", tr("shows the borders of the current chunk")) {
+        add(new AbstractCommand("chunk", marktr("shows the borders of the current chunk")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -78,7 +78,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("inner", tr("shows the borders of the inner-chunks")) {
+        add(new AbstractCommand("inner", marktr("shows the borders of the inner-chunks")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -104,7 +104,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("border", tr("shows the non-chunk-aligned borders")) {
+        add(new AbstractCommand("border", marktr("shows the non-chunk-aligned borders")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -127,7 +127,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("outer", tr("shows the borders of the outer-chunks")) {
+        add(new AbstractCommand("outer", marktr("shows the borders of the outer-chunks")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -153,7 +153,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("hide", tr("hides the regions again")) {
+        add(new AbstractCommand("hide", marktr("hides the regions again")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -170,7 +170,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("tick", null, "integer", "set the ticks between animations") {
+        add(new AbstractCommand("tick", null, "integer", marktr("set the ticks between animations")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1 && args[0].matches("[0-9]+")) {
@@ -186,7 +186,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("refresh", "refreshes the existing animations") {
+        add(new AbstractCommand("refresh", marktr("refreshes the existing animations")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 animationHandler.stop();

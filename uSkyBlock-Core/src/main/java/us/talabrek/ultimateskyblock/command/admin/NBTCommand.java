@@ -20,7 +20,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 public class NBTCommand extends CompositeCommand {
     public NBTCommand() {
         super("nbt", "usb.admin.nbt", marktr("advanced info about NBT stuff"));
-        add(new AbstractCommand("info|i", tr("shows the NBTTag for the currently held item")) {
+        add(new AbstractCommand("info|i", marktr("shows the NBTTag for the currently held item")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -42,7 +42,7 @@ public class NBTCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("set|s", null, "nbttag", tr("sets the NBTTag on the currently held item")) {
+        add(new AbstractCommand("set|s", null, "nbttag", marktr("sets the NBTTag on the currently held item")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -64,7 +64,7 @@ public class NBTCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("add|a", null, "nbttag", tr("adds the NBTTag on the currently held item")) {
+        add(new AbstractCommand("add|a", null, "nbttag", marktr("adds the NBTTag on the currently held item")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {

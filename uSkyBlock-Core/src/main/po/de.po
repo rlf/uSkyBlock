@@ -481,6 +481,32 @@ msgstr "§4{0}s Insel bei {1} war schon geschützt"
 msgid "open GUI for config"
 msgstr "Öffne Konfigurations Menü"
 
+msgid "searches config for a specific key"
+msgstr ""
+
+#, java-format
+msgid "§c{0}§9"
+msgstr ""
+
+#, java-format
+msgid "§9{0}§8: §e{1}"
+msgstr ""
+
+#, java-format
+msgid "Found the following matching {0}:"
+msgstr ""
+
+msgid "§a<section>"
+msgstr ""
+
+#, java-format
+msgid "§3{0,number,#.##}"
+msgstr ""
+
+#, java-format
+msgid "§2{0}"
+msgstr ""
+
 msgid "§eInvalid configuration name"
 msgstr "§eUngültiger Konfigurationsname"
 
@@ -614,6 +640,9 @@ msgstr "§aTeleportiert dich zu {0}''s Insel."
 msgid "imports players and islands from other formats"
 msgstr "Importiere Spieler und Inseln aus anderen Formaten"
 
+msgid "controls async jobs"
+msgstr ""
+
 msgid "§9Job Statistics"
 msgstr "§9Aufgaben Statistiken"
 
@@ -745,6 +774,12 @@ msgstr "§eDerzeit sind keine verwaisten Inseln registriert"
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr "Zusätzliche Fähigkeiten {0}"
@@ -826,12 +861,18 @@ msgstr "§eAnzeigen von Regionen gestoppt"
 msgid "§eNo currently shown regions for this player"
 msgstr "§eFür diesen Spieler werden derzeit keine Regionen gezeigt"
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr "§eAnimation-tick wurde zu {0} §egeändert."
 
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimation-tick muss ein gültiger Integer sein."
+
+msgid "refreshes the existing animations"
+msgstr ""
 
 msgid "set a player''s island to your location"
 msgstr "Setze die Insel eines Spielers an deine Position"
@@ -1412,6 +1453,9 @@ msgstr "§4Nur Anführer können die Führerschaft übertragen!"
 msgid "{0} tried to take over the island!"
 msgstr "{0} hat versucht die Insel zu übernehmen!"
 
+msgid "show the islands limits"
+msgstr ""
+
 msgid "show party information"
 msgstr "Zeige Gruppen Information"
 
@@ -1913,6 +1957,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§eDeine Stufe ist: §f{0}"
+
+#, java-format
+msgid "Invalid block {0} found"
+msgstr ""
 
 msgid "UNKNOWN"
 msgstr "Unbekannt"

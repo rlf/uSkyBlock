@@ -480,6 +480,32 @@ msgstr "§4Остров {0} в {1} уже был защищен"
 msgid "open GUI for config"
 msgstr "открыт графический интерфейс для конфигурации"
 
+msgid "searches config for a specific key"
+msgstr ""
+
+#, java-format
+msgid "§c{0}§9"
+msgstr ""
+
+#, java-format
+msgid "§9{0}§8: §e{1}"
+msgstr ""
+
+#, java-format
+msgid "Found the following matching {0}:"
+msgstr ""
+
+msgid "§a<section>"
+msgstr ""
+
+#, java-format
+msgid "§3{0,number,#.##}"
+msgstr ""
+
+#, java-format
+msgid "§2{0}"
+msgstr ""
+
 msgid "§eInvalid configuration name"
 msgstr ""
 
@@ -609,6 +635,9 @@ msgstr ""
 
 msgid "imports players and islands from other formats"
 msgstr "импортирование игроков и островов в другие форматы"
+
+msgid "controls async jobs"
+msgstr ""
 
 msgid "§9Job Statistics"
 msgstr "§9Job Статистика"
@@ -742,6 +771,12 @@ msgstr "§eСироты не зарегистрированы."
 msgid "§eOrphans ({0}/{1}): {2}"
 msgstr ""
 
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
+
 #, java-format
 msgid "additional perks {0}"
 msgstr ""
@@ -821,11 +856,17 @@ msgstr ""
 msgid "§eNo currently shown regions for this player"
 msgstr ""
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr ""
 
 msgid "§eAnimation-tick must be a valid integer."
+msgstr ""
+
+msgid "refreshes the existing animations"
 msgstr ""
 
 msgid "set a player''s island to your location"
@@ -1391,6 +1432,9 @@ msgstr "§4Только хозяин может передать управле�
 msgid "{0} tried to take over the island!"
 msgstr "{0} пытался захватить остров!"
 
+msgid "show the islands limits"
+msgstr ""
+
 msgid "show party information"
 msgstr "информация об участниках острова"
 
@@ -1878,6 +1922,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 #, java-format
 msgid "§eYour rank is: §f{0}"
 msgstr "§eВаш ранг: §f{0}"
+
+#, java-format
+msgid "Invalid block {0} found"
+msgstr ""
 
 msgid "UNKNOWN"
 msgstr ""

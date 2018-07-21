@@ -12,6 +12,7 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -21,7 +22,7 @@ public class FlatlandFixCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public FlatlandFixCommand(uSkyBlock plugin) {
-        super("fix-flatland", "usb.admin.remove", "?player", I18nUtil.tr("tries to fix the the area of flatland."));
+        super("fix-flatland", "usb.admin.remove", "?player", marktr("tries to fix the the area of flatland."));
         this.plugin = plugin;
     }
 

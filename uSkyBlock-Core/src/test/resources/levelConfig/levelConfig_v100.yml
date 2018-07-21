@@ -1,0 +1,481 @@
+general:
+
+  # pointsPerLevel - number of points needed to advance 1 island level.
+  pointsPerLevel: 1000
+
+  # default - the default value for blocks not listed in blockValues here.
+  default: 10
+
+  # useDiminishingReturns - If true, diminishing returns will be used for all blocks using the default scale 
+  # (custom scales can be defined in the section below).
+  # If useDiminishingReturns is false, the blocks listed in the dimishingReturns section will still be affected.
+  useDiminishingReturns: false
+
+  # defaultScale - the default value to use for diminishing returns. This is the number of blocks before DR starts to 
+  # lower value.
+  defaultScale: 10000
+blocks:
+  ACACIA_DOOR:
+    score: 20.0
+  ACACIA_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  ACACIA_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  ACACIA_STAIRS:
+    score: 15.0
+  ACTIVATOR_RAIL:
+    score: 20.0
+  AIR:
+    score: 0.0
+    limit: 0
+  ANVIL/0-2:
+    score: 150.0
+    limit: 5
+  BARRIER:
+    score: 0.0
+  BEACON:
+    score: 2000.0
+    limit: 10
+    negativeReturns: 15
+  BEDROCK:
+    score: 0.0
+  BED_BLOCK:
+    score: 1000.0
+    limit: 1
+  BIRCH_DOOR:
+    score: 20.0
+  BIRCH_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  BIRCH_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  BIRCH_WOOD_STAIRS:
+    score: 15.0
+  BOOKSHELF:
+    score: 50.0
+  BREWING_STAND:
+    score: 30.0
+    limit: 10
+  BRICK:
+    score: 50.0
+  BRICK_STAIRS:
+    score: 75.0
+    diminishingReturns: 5000
+  BROWN_MUSHROOM:
+    diminishingReturns: 100
+  CACTUS:
+    score: 0.0
+  CAKE_BLOCK:
+    score: 50.0
+  CARPET:
+    score: 20.0
+    diminishingReturns: 5000
+  CARROT:
+    score: 0.0
+  CAULDRON:
+    score: 155.0
+    limit: 10
+  CLAY:
+    score: 50.0
+  COAL_BLOCK:
+    score: 500.0
+    diminishingReturns: 100
+  COAL_ORE:
+    score: 200.0
+  COBBLESTONE:
+    limit: 10000
+  COBBLESTONE_STAIRS:
+    score: 15.0
+    diminishingReturns: 5000
+  COBBLE_WALL:
+    diminishingReturns: 5000
+  COCOA:
+    score: 0.0
+  COMMAND:
+    score: 0.0
+  CROPS:
+    score: 0.0
+  DARK_OAK_DOOR:
+    score: 20.0
+  DARK_OAK_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  DARK_OAK_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  DARK_OAK_STAIRS:
+    score: 15.0
+  DAYLIGHT_DETECTOR:
+    score: 200.0
+  DAYLIGHT_DETECTOR_INVERTED:
+    score: 200.0
+  DETECTOR_RAIL:
+    score: 20.0
+  DIAMOND_BLOCK:
+    score: 5000.0
+  DIAMOND_ORE:
+    score: 400.0
+  DIRT:
+    score: 20.0
+    diminishingReturns: 10000
+  DIRT/1:
+    score: 25.0
+    diminishingReturns: 10000
+  DIRT/2:
+    score: 25.0
+    diminishingReturns: 10000
+  DOUBLE_STEP/0:
+    diminishingReturns: 10000
+  DOUBLE_STEP/1:
+    score: 20.0
+    diminishingReturns: 10000
+  DOUBLE_STEP/2-3:
+    diminishingReturns: 10000
+  DOUBLE_STEP/4:
+    score: 50.0
+    diminishingReturns: 10000
+  DOUBLE_STEP/5:
+    score: 15.0
+    diminishingReturns: 10000
+  DOUBLE_STEP/6:
+    score: 20.0
+    diminishingReturns: 10000
+  DOUBLE_STEP/7:
+    score: 100.0
+    diminishingReturns: 10000
+  DOUBLE_STONE_SLAB2:
+    score: 20.0
+    diminishingReturns: 20000
+  DRAGON_EGG:
+    score: 5000.0
+    limit: 2
+  EMERALD_BLOCK:
+    score: 1000.0
+  EMERALD_ORE:
+    score: 200.0
+  ENCHANTMENT_TABLE:
+    score: 150.0
+  ENDER_CHEST:
+    score: 2000.0
+    limit: 3
+  ENDER_PORTAL:
+    score: 0.0
+  ENDER_PORTAL_FRAME:
+    score: 0.0
+  ENDER_STONE:
+    score: 15.0
+    limit: 10000
+  FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  FIRE:
+    score: 0.0
+  GLASS:
+    score: 50.0
+  GLOWSTONE:
+    score: 20.0
+  GOLD_BLOCK:
+    score: 1500.0
+    diminishingReturns: 100
+  GOLD_ORE:
+    score: 500.0
+  GOLD_PLATE:
+    score: 115.0
+  GRASS:
+    score: 20.0
+    diminishingReturns: 10000
+  GRAVEL:
+    score: 20.0
+  HARD_CLAY:
+    score: 20.0
+  HAY_BLOCK:
+    score: 20.0
+  HOPPER:
+    score: 125.0
+    limit: 10
+    negativeReturns: 5
+  HUGE_MUSHROOM_1:
+    score: 100.0
+    diminishingReturns: 30
+  HUGE_MUSHROOM_2:
+    score: 100.0
+    diminishingReturns: 30
+  ICE:
+    score: 50.0
+  IRON_BLOCK:
+    score: 300.0
+  IRON_DOOR_BLOCK:
+    score: 200.0
+  IRON_FENCE:
+    score: 12.5
+  IRON_ORE:
+    score: 200.0
+  IRON_PLATE:
+    score: 50.0
+  IRON_TRAPDOOR:
+    score: 20.0
+    diminishingReturns: 10
+  JACK_O_LANTERN:
+    score: 20.0
+  JUKEBOX:
+    score: 50.0
+  JUNGLE_DOOR:
+    score: 20.0
+  JUNGLE_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  JUNGLE_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  JUNGLE_WOOD_STAIRS:
+    score: 15.0
+  LADDER:
+    score: 0.0
+  LAPIS_BLOCK:
+    score: 500.0
+  LAPIS_ORE:
+    score: 300.0
+  LAVA:
+    score: 0.0
+  LEAVES/0-3:
+    score: 0.0
+  LEAVES_2/0-1:
+    score: 0.0
+  LOG/0-5:
+    additionalBlocks:
+    - LOG_2
+    diminishingReturns: 100
+  LOG_2:
+    diminishingReturns: 100
+  LOG_2/1:
+    diminishingReturns: 100
+  LONG_GRASS:
+    diminishingReturns: 100
+  MELON_BLOCK:
+    score: 0.0
+  MELON_STEM:
+    score: 0.0
+  MOSSY_COBBLESTONE:
+    score: 30.0
+  MYCEL:
+    score: 20.0
+    diminishingReturns: 10000
+  NETHERRACK:
+    limit: 10000
+  NETHER_BRICK:
+    score: 20.0
+    diminishingReturns: 20000
+  NETHER_BRICK_STAIRS:
+    score: 30.0
+    diminishingReturns: 5000
+  NETHER_FENCE:
+    score: 60.0
+    diminishingReturns: 5000
+  NOTE_BLOCK:
+    score: 20.0
+  OBSIDIAN:
+    score: 200.0
+    diminishingReturns: 50
+  PACKED_ICE:
+    score: 15.0
+  PISTON_BASE:
+    score: 40.0
+  PISTON_EXTENSION:
+    score: 0.0
+  PISTON_MOVING_PIECE:
+    score: 0.0
+  PISTON_STICKY_BASE:
+    score: 60.0
+  PORTAL:
+    score: 0.0
+  POTATO:
+    score: 0.0
+  POWERED_RAIL:
+    score: 20.0
+  PRISMARINE:
+    score: 50.0
+  PRISMARINE/1:
+    score: 50.0
+  PRISMARINE/2:
+    score: 50.0
+  PUMPKIN_STEM:
+    score: 0.0
+  QUARTZ_BLOCK/0-2:
+    score: 100.0
+    diminishingReturns: 5000
+  QUARTZ_ORE:
+    score: 50.0
+  QUARTZ_STAIRS:
+    score: 150.0
+    diminishingReturns: 5000
+  REDSTONE_BLOCK:
+    score: 150.0
+  REDSTONE_LAMP_OFF:
+    score: 20.0
+  REDSTONE_LAMP_ON:
+    score: 20.0
+  REDSTONE_WIRE:
+    score: 0.0
+  RED_MUSHROOM:
+    diminishingReturns: 100
+  RED_ROSE:
+    diminishingReturns: 100
+  RED_SANDSTONE/0-2:
+    score: 25.0
+  RED_SANDSTONE_STAIRS:
+    score: 20.0
+  SAND/0:
+    score: 20.0
+    diminishingReturns: 10000
+  SAND/1:
+    score: 22.5
+    diminishingReturns: 10000
+  SANDSTONE/0-2:
+    score: 80.0
+  SANDSTONE_STAIRS:
+    score: 120.0
+    diminishingReturns: 5000
+  SAPLING:
+    score: 0.0
+  SEA_LANTERN:
+    score: 50.0
+  SIGN_POST:
+    score: 0.0
+  SKULL/0-4:
+    score: 1000.0
+  SLIME_BLOCK:
+    score: 250.0
+    diminishingReturns: 100
+  SMOOTH_BRICK:
+    score: 12.0
+    diminishingReturns: 20000
+  SMOOTH_STAIRS:
+    score: 20.0
+    diminishingReturns: 5000
+  SNOW:
+    score: 0.0
+  SNOW_BLOCK:
+    score: 50.0
+  SOIL:
+    score: 40.0
+  SOUL_SAND:
+    limit: 10000
+  SPONGE:
+    score: 50.0
+    limit: 20
+  SPONGE/1:
+    score: 50.0
+  SPRUCE_DOOR:
+    score: 20.0
+  SPRUCE_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  SPRUCE_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  SPRUCE_WOOD_STAIRS:
+    score: 15.0
+  STAINED_CLAY:
+    score: 50.0
+  STAINED_GLASS:
+    score: 25.0
+  STANDING_BANNER:
+    score: 20.0
+    diminishingReturns: 20
+  STATIONARY_LAVA:
+    score: 0.0
+  STATIONARY_WATER:
+    score: 0.0
+  STEP/0:
+    score: 5.0
+    diminishingReturns: 10000
+  STEP/1:
+    score: 40.0
+    diminishingReturns: 10000
+  STEP/2:
+    score: 5.0
+    diminishingReturns: 10000
+  STEP/3:
+    score: 5.0
+    diminishingReturns: 10000
+  STEP/4:
+    score: 25.0
+    diminishingReturns: 10000
+  STEP/5:
+    score: 7.0
+    diminishingReturns: 10000
+  STEP/6:
+    score: 20.0
+    diminishingReturns: 10000
+  STEP/7:
+    score: 50.0
+    diminishingReturns: 10000
+  STONE/0:
+    diminishingReturns: 10000
+  STONE/1:
+    score: 12.5
+    diminishingReturns: 10000
+  STONE/2:
+    score: 15.0
+    diminishingReturns: 10000
+  STONE/3:
+    score: 12.5
+    diminishingReturns: 10000
+  STONE/4:
+    score: 15.0
+    diminishingReturns: 10000
+  STONE/5:
+    score: 12.5
+    diminishingReturns: 10000
+  STONE/6:
+    score: 15.0
+    diminishingReturns: 10000
+  STONE_PLATE:
+    score: 0.0
+  STONE_SLAB2:
+    score: 12.5
+    diminishingReturns: 20000
+  SUGAR_CANE_BLOCK:
+    score: 0.0
+  TNT:
+    score: 80.0
+  TRAPPED_CHEST:
+    score: 20.0
+  TRAP_DOOR:
+    score: 30.0
+  VINE:
+    limit: 25
+  WALL_BANNER:
+    score: 20.0
+    diminishingReturns: 20
+  WALL_SIGN:
+    score: 0.0
+  WATER:
+    score: 0.0
+  WEB:
+    score: 20.0
+  WOOD:
+    diminishingReturns: 10000
+  WOODEN_DOOR:
+    score: 20.0
+  WOOD_DOUBLE_STEP/0-5:
+    diminishingReturns: 10000
+  WOOD_PLATE:
+    score: 0.0
+  WOOD_STAIRS:
+    score: 15.0
+  WOOD_STEP/0-5:
+    score: 5.0
+    diminishingReturns: 10000
+  WOOL:
+    score: 50.0
+    diminishingReturns: 64
+  YELLOW_FLOWER:
+    diminishingReturns: 100
+version: 100

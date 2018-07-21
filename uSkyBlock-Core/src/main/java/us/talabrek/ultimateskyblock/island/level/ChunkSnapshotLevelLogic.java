@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.island.level;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.api.async.Callback;
@@ -44,7 +45,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                final int[] counts = createBlockCountArray();
+                                final BlockCountCollection counts = new BlockCountCollection(scoreMap);
                                 int minX = region.getMinimumPoint().getBlockX();
                                 int maxX = region.getMaximumPoint().getBlockX();
                                 int minZ = region.getMinimumPoint().getBlockZ();
@@ -60,9 +61,9 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                                         int cx = (x & 0xf);
                                         int cz = (z & 0xf);
                                         for (int y = 0; y <= 255; y++) {
-                                            int blockId = chunk.getBlockTypeId(cx, y, cz);
-                                            int blockData = chunk.getBlockData(cx, y, cz);
-                                            incBlockCount(blockId, blockData, counts, 1);
+                                            Material blockType = chunk.getBlockType(cx, y, cz);
+                                            byte blockData = (byte) (chunk.getBlockData(cx, y, cz) & 0xff);
+                                            counts.add(blockType, blockData);
                                         }
                                     }
                                 }
@@ -84,8 +85,9 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                                             int cx = (x & 0xf);
                                             int cz = (z & 0xf);
                                             for (int y = 5; y < 120; y++) {
-                                                int blockId = chunk.getBlockTypeId(cx, y, cz);
-                                                incBlockCount(blockId, chunk.getBlockData(cx, y, cz), counts, 1);
+                                                Material blockType = chunk.getBlockType(cx, y, cz);
+                                                byte blockData = (byte) (chunk.getBlockData(cx, y, cz) & 0xff);
+                                                counts.add(blockType, blockData);
                                             }
                                         }
                                     }

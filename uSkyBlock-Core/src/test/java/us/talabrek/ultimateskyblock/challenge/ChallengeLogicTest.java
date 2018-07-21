@@ -45,6 +45,7 @@ public class ChallengeLogicTest {
         FileUtil.readConfig(config, new File("src/main/resources/challenges.yml"));
         uSkyBlock plugin = mock(uSkyBlock.class);
         when(plugin.getConfig()).thenReturn(config);
+        when(plugin.getDataFolder()).thenReturn(new File("target/test-classes"));
         ChallengeLogic sut = new ChallengeLogic(config, plugin);
         // Adjust these values accordingly
         assertThat(sut.getRanks().size(), is(6));
