@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public class BlockCountCollection {
     private BlockLevelConfigMap configMap;
-    private Map<BlockKey, LongAdder> countMap;
+    private Map<BlockMatch, LongAdder> countMap;
 
     public BlockCountCollection(BlockLevelConfigMap configMap) {
         this.configMap = configMap;
@@ -23,7 +23,7 @@ public class BlockCountCollection {
 
     public int add(Material type, byte dataValue, int blockCount) {
         BlockLevelConfig blockLevelConfig = configMap.get(type, dataValue);
-        BlockKey key = blockLevelConfig.getKey();
+        BlockMatch key = blockLevelConfig.getKey();
         LongAdder count = countMap.computeIfAbsent(key, k -> new LongAdder());
         count.add(blockCount);
         return count.intValue();

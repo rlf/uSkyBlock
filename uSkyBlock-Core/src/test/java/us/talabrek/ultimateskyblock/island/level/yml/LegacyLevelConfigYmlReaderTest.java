@@ -1,9 +1,12 @@
-package us.talabrek.ultimateskyblock.island.level;
+package us.talabrek.ultimateskyblock.island.level.yml;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Material;
 import org.junit.Test;
+import us.talabrek.ultimateskyblock.island.level.BlockLevelConfig;
+import us.talabrek.ultimateskyblock.island.level.BlockLevelConfigBuilder;
+import us.talabrek.ultimateskyblock.island.level.BlockLevelConfigMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +14,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
-public class LevelConfigReaderTest {
+public class LegacyLevelConfigYmlReaderTest {
     @Test
     public void testDistinctValuesOfMap() {
         Map<String, BlockLevelConfigBuilder> builderMap = new HashMap<>();
@@ -26,12 +29,11 @@ public class LevelConfigReaderTest {
 
     @Test
     public void testReadingOfLevelConfig_blockValues() {
-        LevelConfigReader reader = new LevelConfigReader();
+        LegacyLevelConfigYmlReader reader = new LegacyLevelConfigYmlReader();
         YmlConfiguration config = new YmlConfiguration();
         FileUtil.readConfig(config, getClass().getClassLoader().getResourceAsStream("levelConfig/levelConfig_blockValuesOnly.yml"));
         BlockLevelConfigMap map = reader.readLevelConfig(config);
-        assertThat(map.size(), is(greaterThan(0)));
-        assertThat(map.size(), is(greaterThan((int)map.values().stream().distinct().count())));
+        assertThat(map.values().size(), is(greaterThan(0)));
 
         // additional blocks (including direct adressing).
         BlockLevelConfig logConfig = map.get(Material.LOG);
@@ -70,12 +72,11 @@ public class LevelConfigReaderTest {
 
     @Test
     public void testReadingOfLevelConfig_defaults() {
-        LevelConfigReader reader = new LevelConfigReader();
+        LegacyLevelConfigYmlReader reader = new LegacyLevelConfigYmlReader();
         YmlConfiguration config = new YmlConfiguration();
         FileUtil.readConfig(config, getClass().getClassLoader().getResourceAsStream("levelConfig/levelConfig.yml"));
         BlockLevelConfigMap map = reader.readLevelConfig(config);
-        assertThat(map.size(), is(greaterThan(0)));
-        assertThat(map.size(), is(greaterThan((int)map.values().stream().distinct().count())));
+        assertThat(map.values().size(), is(greaterThan(0)));
 
         // additional blocks (including direct adressing).
         double score = 0d;
@@ -91,12 +92,11 @@ public class LevelConfigReaderTest {
 
     @Test
     public void testReadingOfLevelConfig_limits() {
-        LevelConfigReader reader = new LevelConfigReader();
+        LegacyLevelConfigYmlReader reader = new LegacyLevelConfigYmlReader();
         YmlConfiguration config = new YmlConfiguration();
         FileUtil.readConfig(config, getClass().getClassLoader().getResourceAsStream("levelConfig/levelConfig.yml"));
         BlockLevelConfigMap map = reader.readLevelConfig(config);
-        assertThat(map.size(), is(greaterThan(0)));
-        assertThat(map.size(), is(greaterThan((int)map.values().stream().distinct().count())));
+        assertThat(map.values().size(), is(greaterThan(0)));
 
         // additional blocks (including direct adressing).
         double score = 1000d;
@@ -126,12 +126,11 @@ public class LevelConfigReaderTest {
 
     @Test
     public void testReadingOfLevelConfig_diminishingReturns() {
-        LevelConfigReader reader = new LevelConfigReader();
+        LegacyLevelConfigYmlReader reader = new LegacyLevelConfigYmlReader();
         YmlConfiguration config = new YmlConfiguration();
         FileUtil.readConfig(config, getClass().getClassLoader().getResourceAsStream("levelConfig/levelConfig.yml"));
         BlockLevelConfigMap map = reader.readLevelConfig(config);
-        assertThat(map.size(), is(greaterThan(0)));
-        assertThat(map.size(), is(greaterThan((int)map.values().stream().distinct().count())));
+        assertThat(map.values().size(), is(greaterThan(0)));
 
         // additional blocks (including direct adressing).
         double score = 20d;
@@ -149,12 +148,11 @@ public class LevelConfigReaderTest {
 
     @Test
     public void testReadingOfLevelConfig_negativeReturns() {
-        LevelConfigReader reader = new LevelConfigReader();
+        LegacyLevelConfigYmlReader reader = new LegacyLevelConfigYmlReader();
         YmlConfiguration config = new YmlConfiguration();
         FileUtil.readConfig(config, getClass().getClassLoader().getResourceAsStream("levelConfig/levelConfig.yml"));
         BlockLevelConfigMap map = reader.readLevelConfig(config);
-        assertThat(map.size(), is(greaterThan(0)));
-        assertThat(map.size(), is(greaterThan((int)map.values().stream().distinct().count())));
+        assertThat(map.values().size(), is(greaterThan(0)));
 
         // negativeReturns < blockLimit means negativeReturns wins
         double score = 125d;

@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.command;
 
-import dk.lockfuglsang.minecraft.command.AbstractCommandExecutor;
+import dk.lockfuglsang.minecraft.command.BaseCommandExecutor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 /**
  * Primary challenges command
  */
-public class ChallengeCommand extends AbstractCommandExecutor {
+public class ChallengeCommand extends BaseCommandExecutor {
     private final uSkyBlock plugin;
 
     public ChallengeCommand(uSkyBlock plugin) {

@@ -1916,6 +1916,10 @@ msgstr "§a#%2d §7(%5.2f): §e%s §7%s"
 msgid "§eYour rank is: §f{0}"
 msgstr "§eYoor rank  iz: §f{0}"
 
+#, java-format
+msgid "Invalid block {0} found"
+msgstr ""
+
 msgid "UNKNOWN"
 msgstr "UNKNOWN"
 

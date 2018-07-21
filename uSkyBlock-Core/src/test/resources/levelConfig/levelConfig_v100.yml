@@ -1,20 +1,19 @@
 general:
+
   # pointsPerLevel - number of points needed to advance 1 island level.
   pointsPerLevel: 1000
 
   # default - the default value for blocks not listed in blockValues here.
   default: 10
 
-  # diminishingReturns - the default value to use for diminishing returns. This is the number of blocks before DR starts to
+  # useDiminishingReturns - If true, diminishing returns will be used for all blocks using the default scale 
+  # (custom scales can be defined in the section below).
+  # If useDiminishingReturns is false, the blocks listed in the dimishingReturns section will still be affected.
+  useDiminishingReturns: false
+
+  # defaultScale - the default value to use for diminishing returns. This is the number of blocks before DR starts to 
   # lower value.
-  # no-value or a value of 0 means disabled.
-  # diminishingReturns: 5000
-
-  # limit - the default hard-limit for blocks not mentioned. This is the number of blocks that can provide score.
-  # no-value or -1 means disabled.
-  # limit: 10000
-
-  # blocks - the blocks listed below will have custom values instead of the default.
+  defaultScale: 10000
 blocks:
   ACACIA_DOOR:
     score: 20.0
@@ -133,9 +132,7 @@ blocks:
   DOUBLE_STEP/1:
     score: 20.0
     diminishingReturns: 10000
-  DOUBLE_STEP/2:
-    diminishingReturns: 10000
-  DOUBLE_STEP/3:
+  DOUBLE_STEP/2-3:
     diminishingReturns: 10000
   DOUBLE_STEP/4:
     score: 50.0

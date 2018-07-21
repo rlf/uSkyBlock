@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
+import java.util.UUID;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 
@@ -15,7 +16,7 @@ public class VersionCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public VersionCommand(uSkyBlock plugin) {
-        super("version|v", "usb.admin.version", marktr("displays version information"));
+        super("version|v", "usb.admin.version", null, marktr("displays version information"), null, UUID.fromString("97e8584c-438c-43cf-8b58-4e56c52398ed"));
         this.plugin = plugin;
     }
 

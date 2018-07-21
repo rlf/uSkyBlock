@@ -3,10 +3,10 @@ package us.talabrek.ultimateskyblock.island.level;
 import org.bukkit.Material;
 import us.talabrek.ultimateskyblock.api.model.BlockScore;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class BlockLevelConfig {
-    private final BlockKey key;
     private final BlockMatch baseBlock;
     private final Set<BlockMatch> additionalBlocks;
 
@@ -38,7 +38,6 @@ public class BlockLevelConfig {
         this.limit = limit;
         this.diminishingReturns = diminishingReturns;
         this.negativeReturns = negativeReturns;
-        this.key = new BlockKey(baseBlock.getType(), baseBlock.getDataValues().isEmpty() ? (byte) 0 : baseBlock.getDataValues().get(0));
     }
 
     public boolean matches(Material material, byte dataValue) {
@@ -52,11 +51,11 @@ public class BlockLevelConfig {
     public BlockScore calculateScore(int count, double pointsPerLevel) {
         BlockScore.State state = BlockScore.State.NORMAL;
         double adjustedCount = count;
-        if (negativeReturns > 0 && adjustedCount > negativeReturns) {
+        if (negativeReturns >= 0 && adjustedCount > negativeReturns) {
             state = BlockScore.State.NEGATIVE;
             adjustedCount = 2 * negativeReturns - adjustedCount;
         }
-        if (adjustedCount > limit && limit != -1) {
+        if (adjustedCount >= limit && limit != -1) {
             adjustedCount = limit;
             state = BlockScore.State.LIMIT;
         }
@@ -82,8 +81,28 @@ public class BlockLevelConfig {
         additionalBlocks.forEach(ch -> ch.accept(visitor));
     }
 
-    public BlockKey getKey() {
-        return key;
+    public BlockMatch getKey() {
+        return baseBlock;
+    }
+
+    public Set<BlockMatch> getAdditionalBlocks() {
+        return additionalBlocks;
+    }
+
+    public double getScorePerBlock() {
+        return scorePerBlock;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public int getDiminishingReturns() {
+        return diminishingReturns;
+    }
+
+    public int getNegativeReturns() {
+        return negativeReturns;
     }
 
     @Override
@@ -96,5 +115,25 @@ public class BlockLevelConfig {
                 ", diminishingReturns=" + diminishingReturns +
                 ", negativeReturns=" + negativeReturns +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BlockLevelConfig that = (BlockLevelConfig) o;
+        return Double.compare(that.scorePerBlock, scorePerBlock) == 0 &&
+                limit == that.limit &&
+                diminishingReturns == that.diminishingReturns &&
+                negativeReturns == that.negativeReturns &&
+                Objects.equals(baseBlock, that.baseBlock) &&
+                additionalBlocks.containsAll(that.additionalBlocks) &&
+                that.additionalBlocks.containsAll(additionalBlocks)
+                ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(baseBlock, additionalBlocks, scorePerBlock, limit, diminishingReturns, negativeReturns);
     }
 }

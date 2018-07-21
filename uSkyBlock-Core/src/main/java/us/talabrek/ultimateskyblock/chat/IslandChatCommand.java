@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.chat;
 
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
-import dk.lockfuglsang.minecraft.command.AbstractCommandExecutor;
+import dk.lockfuglsang.minecraft.command.BaseCommandExecutor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 /**
  * The chat command for party messages
  */
-public abstract class IslandChatCommand extends AbstractCommandExecutor {
+public abstract class IslandChatCommand extends BaseCommandExecutor {
     private final uSkyBlock plugin;
     private final ChatLogic chatLogic;
 

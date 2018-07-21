@@ -4,7 +4,7 @@ import org.bukkit.Material;
 
 import java.util.Objects;
 
-public class BlockKey {
+public class BlockKey implements Comparable<BlockKey> {
     private Material type;
     private byte dataValue;
 
@@ -37,6 +37,11 @@ public class BlockKey {
 
     @Override
     public String toString() {
-        return type.name() + ":" + dataValue;
+        return type.name() + (dataValue != 0 ? "/" + dataValue : "");
+    }
+
+    @Override
+    public int compareTo(BlockKey o) {
+        return toString().compareTo(o.toString());
     }
 }

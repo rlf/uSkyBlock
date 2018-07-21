@@ -1,8 +1,11 @@
-package us.talabrek.ultimateskyblock.island.level;
+package us.talabrek.ultimateskyblock.island.level.yml;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import us.talabrek.ultimateskyblock.island.level.BlockLevelConfigBuilder;
+import us.talabrek.ultimateskyblock.island.level.BlockLevelConfigMap;
+import us.talabrek.ultimateskyblock.island.level.BlockMatch;
 import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.util.ArrayList;
@@ -15,38 +18,50 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LevelConfigReader {
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
+/**
+ * Reads the "old-style" <code>levelConfig.yml</code> file.
+ */
+public class LegacyLevelConfigYmlReader {
     private static final Pattern KEY_PATTERN = Pattern.compile("(?<id>[A-Z_0-9]+)([/:](?<sub>(\\*|[0-9]+|[0-9]+-[0-9]+)))?");
 
-    private BlockLevelConfigBuilder defaultBuilder;
-    private final Map<String, BlockLevelConfigBuilder> map = new HashMap<>();
-
-    public LevelConfigReader() {
+    public LegacyLevelConfigYmlReader() {
     }
 
     public BlockLevelConfigMap readLevelConfig(FileConfiguration config) {
+        BlockLevelConfigBuilder defaultBuilder;
+        Map<String, BlockLevelConfigBuilder> map = new HashMap<>();
         double defaultScore = config.getDouble("general.default", 10d);
         int defaultLimit = config.getInt("general.limit", Integer.MAX_VALUE);
-        int defaultDR = config.getInt("general.defaultScale", Integer.MAX_VALUE);
+        int defaultDiminishingReturns = config.getInt("general.diminishingReturns", 0);
         defaultBuilder = new BlockLevelConfigBuilder()
                 .scorePerBlock(defaultScore)
-                .limit(defaultLimit);
-        addDefaults();
-        readBlockValues(config.getConfigurationSection("blockValues"));
-        readBlockLimits(config.getConfigurationSection("blockLimits"), defaultLimit);
-        readBlockDiminishingReturns(config.getConfigurationSection("diminishingReturns"), defaultDR);
-        readNegativeReturns(config.getConfigurationSection("negativeReturns"));
+                .limit(defaultLimit)
+                .diminishingReturns(defaultDiminishingReturns);
+        addDefaults(map, defaultBuilder);
+        readBlockValues(map, defaultBuilder, config.getConfigurationSection("blockValues"));
+        readBlockLimits(map, defaultBuilder, config.getConfigurationSection("blockLimits"), defaultLimit);
+        readBlockDiminishingReturns(map, defaultBuilder, config.getConfigurationSection("diminishingReturns"));
+        readNegativeReturns(map, defaultBuilder, config.getConfigurationSection("negativeReturns"));
         return new BlockLevelConfigMap(map.values().stream().distinct().map(BlockLevelConfigBuilder::build).collect(Collectors.toList()), defaultBuilder);
     }
 
-    private void addDefaults() {
+    private void addDefaults(Map<String, BlockLevelConfigBuilder> map, BlockLevelConfigBuilder defaultBuilder) {
         BlockLevelConfigBuilder nullScore = defaultBuilder.copy().base(new BlockMatch(Material.AIR)).scorePerBlock(0).limit(0);
         map.put(createKey(Material.AIR), nullScore);
     }
 
-    private void readBlockValues(ConfigurationSection blockValues) {
+    private void readBlockValues(Map<String, BlockLevelConfigBuilder> map, BlockLevelConfigBuilder defaultBuilder, ConfigurationSection blockValues) {
+        if (blockValues == null) {
+            return;
+        }
         for (String key : blockValues.getKeys(false)) {
             BlockMatch blockMatch = getBlockMatch(key);
+            if (blockMatch == null) {
+                LogUtil.log(Level.WARNING, tr("Invalid block {0} found", key));
+                continue;
+            }
             double value = blockValues.getDouble(key);
             BlockLevelConfigBuilder builder = null;
             if (value == -1) {
@@ -85,15 +100,17 @@ public class LevelConfigReader {
 
     private Stream<String> createKeys(BlockMatch blockMatch) {
         List<String> keyList = new ArrayList<>();
-        if (blockMatch.getDataValues().isEmpty()) {
-            keyList.add(createKey(blockMatch));
-        } else {
-            blockMatch.getDataValues().stream().forEach(data -> keyList.add(createKey(blockMatch.getType(), data)));
+        if (blockMatch != null) {
+            if (blockMatch.getDataValues().isEmpty()) {
+                keyList.add(createKey(blockMatch));
+            } else {
+                blockMatch.getDataValues().forEach(data -> keyList.add(createKey(blockMatch.getType(), data)));
+            }
         }
         return keyList.stream();
     }
 
-    private void readBlockLimits(ConfigurationSection blockLimits, int defaultLimit) {
+    private void readBlockLimits(Map<String, BlockLevelConfigBuilder> map, BlockLevelConfigBuilder defaultBuilder, ConfigurationSection blockLimits, int defaultLimit) {
         if (blockLimits == null) {
             return;
         }
@@ -110,13 +127,13 @@ public class LevelConfigReader {
         }
     }
 
-    private void readBlockDiminishingReturns(ConfigurationSection diminishingReturns, int defaultLimit) {
+    private void readBlockDiminishingReturns(Map<String, BlockLevelConfigBuilder> map, BlockLevelConfigBuilder defaultBuilder, ConfigurationSection diminishingReturns) {
         if (diminishingReturns == null) {
             return;
         }
         for (String blockKey : diminishingReturns.getKeys(false)) {
             BlockMatch blockMatch = getBlockMatch(blockKey);
-            int value = diminishingReturns.getInt(blockKey, defaultLimit);
+            int value = diminishingReturns.getInt(blockKey, 0);
             createKeys(blockMatch).forEach(k -> {
                 if (map.containsKey(k)) {
                     map.get(k).diminishingReturns(value);
@@ -127,7 +144,7 @@ public class LevelConfigReader {
         }
     }
 
-    private void readNegativeReturns(ConfigurationSection negativeReturns) {
+    private void readNegativeReturns(Map<String, BlockLevelConfigBuilder> map, BlockLevelConfigBuilder defaultBuilder, ConfigurationSection negativeReturns) {
         if (negativeReturns == null) {
             return;
         }
@@ -145,7 +162,7 @@ public class LevelConfigReader {
     }
 
     private String createKey(BlockMatch block) {
-        return createKey(block.getType(), block.getDataValues().isEmpty() ? (byte) 0 : block.getDataValues().get(0));
+        return createKey(block.getType(), block.getDataValues().isEmpty() ? (byte) 0 : block.getDataValues().iterator().next());
     }
 
     private String createKey(Material material) {

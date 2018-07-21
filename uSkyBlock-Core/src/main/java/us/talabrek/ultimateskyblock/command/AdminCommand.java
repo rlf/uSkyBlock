@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.command;
 
 import dk.lockfuglsang.minecraft.animation.AnimationHandler;
-import dk.lockfuglsang.minecraft.command.AbstractCommandExecutor;
+import dk.lockfuglsang.minecraft.command.BaseCommandExecutor;
 import dk.lockfuglsang.minecraft.command.DocumentCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -42,7 +42,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 /**
  * The new admin command, alias /usb
  */
-public class AdminCommand extends AbstractCommandExecutor {
+public class AdminCommand extends BaseCommandExecutor {
     public AdminCommand(final uSkyBlock plugin, ConfirmHandler confirmHandler, AnimationHandler animationHandler) {
         super("usb", null, marktr("Ultimate SkyBlock Admin"));
         OnlinePlayerTabCompleter playerCompleter = new OnlinePlayerTabCompleter();
