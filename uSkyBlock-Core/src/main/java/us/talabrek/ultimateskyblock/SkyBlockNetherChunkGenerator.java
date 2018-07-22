@@ -17,7 +17,11 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
     @Override
     public ChunkData generateChunkData(World world, Random random, int cx, int cz, BiomeGrid biome) {
         ChunkData chunkData = createChunkData(world);
-        biome.setBiome(cx,cz, Biome.NETHER);
+        for (int x = 0; x <= 15; x++) {
+            for (int z = 0; z <= 15; z++) {
+                biome.setBiome(x, z, Biome.valueOf("HELL"));
+            }
+        }
         int y = 0;
         // Solid floor
         for (int x = 0; x < 16; x++) {

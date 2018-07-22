@@ -1817,21 +1817,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4파티의 리더여야 당신의 섬을 해제 할 수 있습니다!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-"§e진행중: {0,number,##}% ({1}/{2} - 성공:{3}, 실패:{4}, 스키:{5}) ~ {6}"
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§4§e{0}§4란 이름의 수입업자를 찾지 못했습니다 "
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr "§e다음 {0}/{1} 파일 {2}로 변환"
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr "§7PlayerDB: uuid2name.yml 에서 {0} 플레이어를 필터링"
 
@@ -1867,6 +1852,21 @@ msgstr "§7 - MojangAPI:§a완료: {0}"
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr "§7 - MojangAPI:§c에러: {0}"
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+"§e진행중: {0,number,##}% ({1}/{2} - 성공:{3}, 실패:{4}, 스키:{5}) ~ {6}"
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§4§e{0}§4란 이름의 수입업자를 찾지 못했습니다 "
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr "§e다음 {0}/{1} 파일 {2}로 변환"
 
 msgid "The island has been created."
 msgstr "이 섬이 생성되었습니다."

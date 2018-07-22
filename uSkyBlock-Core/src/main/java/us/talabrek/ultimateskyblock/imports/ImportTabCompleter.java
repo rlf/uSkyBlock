@@ -1,4 +1,4 @@
-package us.talabrek.ultimateskyblock.imports.impl;
+package us.talabrek.ultimateskyblock.imports;
 
 import dk.lockfuglsang.minecraft.command.completion.AbstractTabCompleter;
 import org.bukkit.command.CommandSender;

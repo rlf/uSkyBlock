@@ -3,7 +3,7 @@ package us.talabrek.ultimateskyblock.command.admin;
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import us.talabrek.ultimateskyblock.imports.impl.ImportTabCompleter;
+import us.talabrek.ultimateskyblock.imports.ImportTabCompleter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;

@@ -1804,22 +1804,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Ye must be the party captain to unlock yer hideout!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§4Nay importer named §e{0}§4 found"
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr "§eConverted {0}/{1} files in {2}"
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr "§7PlayerDB: Filterin'' {0} pirates from uuid2name.yml"
 
@@ -1856,6 +1840,22 @@ msgstr "§7 - MojangAPI:§aCOMPLETED: {0}"
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr "§7 - MojangAPI:§cERROR: {0}"
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§4Nay importer named §e{0}§4 found"
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr "§eConverted {0}/{1} files in {2}"
 
 msgid "The island has been created."
 msgstr "The hideout has been created."

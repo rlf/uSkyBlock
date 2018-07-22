@@ -14,9 +14,13 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
     private static final List<BlockPopulator> emptyBlockPopulatorList = new ArrayList<>();
 
     @Override
-    public ChunkData generateChunkData(World world, Random random, int x, int z, BiomeGrid biome) {
+    public ChunkData generateChunkData(World world, Random random, int cx, int cz, BiomeGrid biome) {
         ChunkData chunkData = createChunkData(world);
-        biome.setBiome(x, z, Biome.OCEAN);
+        for (int x = 0; x <= 15; x++) {
+            for (int z = 0; z <= 15; z++) {
+                biome.setBiome(x, z, Biome.OCEAN);
+            }
+        }
         return chunkData;
     }
 
