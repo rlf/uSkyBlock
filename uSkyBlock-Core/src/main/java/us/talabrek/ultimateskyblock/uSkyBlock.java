@@ -70,7 +70,7 @@ import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
-import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
+import us.talabrek.ultimateskyblock.imports.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.BlockLimitLogic;
 import us.talabrek.ultimateskyblock.island.level.AweLevelLogic;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;

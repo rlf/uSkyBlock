@@ -1757,20 +1757,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr ""
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr ""
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr ""
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr ""
 
@@ -1804,6 +1790,20 @@ msgstr ""
 
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
+msgstr ""
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr ""
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
 msgstr ""
 
 msgid "The island has been created."

@@ -1810,20 +1810,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§cEndast gruppledaren kan låsa upp ön!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§cIngen importer kallad §e{0}§4 hittades."
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr "§eKonverterade {0}/{1} filer på {2}"
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr "§7PlayerDB: Filtrerar {0} spelare från uuid2name.yml"
 
@@ -1860,6 +1846,20 @@ msgstr "§7 - MojangAPI:§aSLUTFÖRDE: {0}"
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr "§7 - MojangAPI:§cFEL: {0}"
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§cIngen importer kallad §e{0}§4 hittades."
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr "§eKonverterade {0}/{1} filer på {2}"
 
 msgid "The island has been created."
 msgstr "Ön har skapats."

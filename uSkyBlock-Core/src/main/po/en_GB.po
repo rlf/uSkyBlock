@@ -1823,22 +1823,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4* §7You must be the party leader to unlock your island!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-"§4e* §7Progress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:"
-"{5}) ~ {6}"
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§4* §7No importer named §6{0}§7 found"
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr "§e* §7Converted {0}/{1} files in {2}"
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr "§9* §7PlayerDB: Filtering {0} players from uuid2name.yml"
 
@@ -1875,6 +1859,22 @@ msgstr "§9* §7 - MojangAPI:§aCOMPLETED: {0}"
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr "§9* §7 - MojangAPI:§cERROR: {0}"
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+"§4e* §7Progress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:"
+"{5}) ~ {6}"
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§4* §7No importer named §6{0}§7 found"
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr "§e* §7Converted {0}/{1} files in {2}"
 
 msgid "The island has been created."
 msgstr "The island has been created."

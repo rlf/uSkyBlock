@@ -1,8 +1,9 @@
-package us.talabrek.ultimateskyblock.imports.impl;
+package us.talabrek.ultimateskyblock.imports;
 
+import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.imports.USBImporter;
+import us.talabrek.ultimateskyblock.imports.challenges.ChallengesImporter;
 import us.talabrek.ultimateskyblock.imports.fixuuidleader.UUIDLeaderImporter;
 import us.talabrek.ultimateskyblock.imports.levelconfig.LevelConfigImporter;
 import us.talabrek.ultimateskyblock.imports.name2uuid.Name2UUIDImporter;
@@ -10,7 +11,6 @@ import us.talabrek.ultimateskyblock.imports.update.USBUpdateImporter;
 import us.talabrek.ultimateskyblock.imports.wolfwork.WolfWorkUSBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.ProgressTracker;
-import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,6 +58,7 @@ public class USBImporterExecutor {
             importers.add(new USBUpdateImporter());
             importers.add(new Name2UUIDImporter());
             importers.add(new LevelConfigImporter());
+            importers.add(new ChallengesImporter());
             ServiceLoader serviceLoader = ServiceLoader.load(USBImporter.class, getClass().getClassLoader());
             for (Iterator<USBImporter> it = serviceLoader.iterator(); it.hasNext(); ) {
                 importers.add(it.next());

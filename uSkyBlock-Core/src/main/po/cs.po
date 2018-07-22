@@ -1807,22 +1807,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Musis byt vudce party aby si odemcel svuj ostrov!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§4Zadny import s nazvem §e{0}§4 nenalezen"
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr "§eKonvertovano {0}/{1} souboru v  {2}"
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 
@@ -1859,6 +1843,22 @@ msgstr "§7 - MojangAPI:§aCOMPLETED: {0}"
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr "§7 - MojangAPI:§cERROR: {0}"
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§4Zadny import s nazvem §e{0}§4 nenalezen"
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr "§eKonvertovano {0}/{1} souboru v  {2}"
 
 msgid "The island has been created."
 msgstr "Ostrov byl vytvoren."
