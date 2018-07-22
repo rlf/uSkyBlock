@@ -310,7 +310,7 @@ ranks:
         reward:
           text: 32 dirt, 32 sand, 4 diamonds, 5 emeralds
           items:
-          - DIRT:DIRT2
+          - DIRT:32
           - SAND:32
           - EMERALD:5
           - DIAMOND:4
