@@ -2075,7 +2075,7 @@ msgid ""
 "other players from the island,\n"
 "but they are unable to kick\n"
 "the island leader."
-msgstr "" 
+msgstr ""
 "trục xuất người chơi\n"
 "nhưng không thể trục xuất quản lý."
 

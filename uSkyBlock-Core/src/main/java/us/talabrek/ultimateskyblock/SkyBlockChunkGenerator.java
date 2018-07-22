@@ -11,37 +11,17 @@ import java.util.List;
 import java.util.Random;
 
 public class SkyBlockChunkGenerator extends ChunkGenerator {
-    private static final byte[] generate = new byte[32768];
-    private static final byte[][] blockSections = new byte[16][];
-    private static final short[][] extBlockSections = new short[16][];
     private static final List<BlockPopulator> emptyBlockPopulatorList = new ArrayList<>();
 
     @Override
-    public byte[] generate(World world, Random random, int x, int z) {
-        return generate;
-    }
-
-    @Override
-    public short[][] generateExtBlockSections(World world, Random random, int cx, int cz, BiomeGrid biomes) {
-        setDefaultBiome(biomes);
-        return extBlockSections;
-    }
-
-    private void setDefaultBiome(BiomeGrid biomes) {
-        if (biomes != null) {
-            Biome biome = Biome.valueOf(uSkyBlock.getInstance().getConfig().getString("options.general.defaultBiome", "OCEAN"));
-            for (int x = 0; x < 16; x++) {
-                for (int z = 0; z < 16; z++) {
-                    biomes.setBiome(x,z, biome);
-                }
+    public ChunkData generateChunkData(World world, Random random, int cx, int cz, BiomeGrid biome) {
+        ChunkData chunkData = createChunkData(world);
+        for (int x = 0; x <= 15; x++) {
+            for (int z = 0; z <= 15; z++) {
+                biome.setBiome(x, z, Biome.OCEAN);
             }
         }
-    }
-
-    @Override
-    public byte[][] generateBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
-        setDefaultBiome(biomes);
-        return blockSections;
+        return chunkData;
     }
 
     @Override
