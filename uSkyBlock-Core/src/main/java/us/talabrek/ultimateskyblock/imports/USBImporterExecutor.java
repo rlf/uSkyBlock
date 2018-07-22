@@ -3,7 +3,7 @@ package us.talabrek.ultimateskyblock.imports;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import us.talabrek.ultimateskyblock.imports.challenges.ChallengesImporter;
+import us.talabrek.ultimateskyblock.imports.challenges.ConfigPre13Importer;
 import us.talabrek.ultimateskyblock.imports.fixuuidleader.UUIDLeaderImporter;
 import us.talabrek.ultimateskyblock.imports.name2uuid.Name2UUIDImporter;
 import us.talabrek.ultimateskyblock.imports.update.USBUpdateImporter;
@@ -56,7 +56,7 @@ public class USBImporterExecutor {
             importers.add(new UUIDLeaderImporter());
             importers.add(new USBUpdateImporter());
             importers.add(new Name2UUIDImporter());
-            importers.add(new ChallengesImporter());
+            importers.add(new ConfigPre13Importer());
             ServiceLoader serviceLoader = ServiceLoader.load(USBImporter.class, getClass().getClassLoader());
             for (Iterator<USBImporter> it = serviceLoader.iterator(); it.hasNext(); ) {
                 importers.add(it.next());

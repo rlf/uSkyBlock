@@ -2,6 +2,7 @@
 language: en
 options:
   general:
+
     # [integer] The max number of players allowed in a single party. (including the leader)
     maxPartySize: 4
 
@@ -26,8 +27,8 @@ options:
 
     # [integer] Area around 0,0 where islands will not be created to protect spawn.
     spawnSize: 64
-
   island:
+
     # [integer] The y-coordinate (height) where islands are spawned.
     height: 150
 
@@ -47,87 +48,60 @@ options:
 
     # [item list] The list of items to place in the chest when a player starts a new island. ITEM_ID:HOW_MANY.
     # default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign.
-    chestItems: 79:2 360:1 81:1 327:1 40:1 39:1 361:1 338:1 323:1
-
-    # [true/false] If true, add extra items to a chest when a player starts a new island. (for donors and special players)
+    chestItems:
+    - ICE:2
+    - MELON:1
+    - CACTUS:1
+    - LAVA_BUCKET:1
+    - RED_MUSHROOM:1
+    - BROWN_MUSHROOM:1
+    - PUMPKIN_SEEDS:1
+    - SUGAR_CANE:1
+    - SIGN:1
     addExtraItems: true
-
-    # [integer] The delay in seconds before teleporting to an island. Affects /is home, /is warp, /is spawn
     islandTeleportDelay: 2
-
-    # Allow PvP on the island
     allowPvP: deny
-
-    #[true/false] Allow players to completely lock their islands so non-party members can't enter. (locking still requires permission usb.lock)
     allowIslandLock: true
-
-    # [true/false] If true, use island levels/ranks (/island info) - may have a slight impact on performance
-    # Set to false if you have performance issues
     useIslandLevel: true
-
-    # [true/false] Whether or not /is top should be available.
     useTopTen: true
-
-    # [integer] The time in minutes for how often the top-ten list will be re-generated when doing /is top
     topTenTimeout: 20
-
-    # [integer] The time in minutes for refreshing/recalculating the score for players on their island
-    # set to 0 to disabled
     autoRefreshScore: 0
-
-    # [true/false] Whether or not to include island-members on the top-ten scoreboard
     topTenShowMembers: true
-
-    # [true/false] Whether or not to try and fix flat-land issues when players join the server
-    # Note: will make the PlayerJoin event take longer.
     fixFlatland: false
-
-    # The format used in /islandtalk chat messages
     chat-format: '&9SKY &r{DISPLAYNAME} &f>&d {MESSAGE}'
-
-    # How many entries to remember in the island-log
     log-size: 10
-    
-    # Limits the spawning
     spawn-limits:
-      # [true/false] if true, the limits below will limit spawning
       enabled: true
-
-      # how many animals can be spawned within an island
       animals: 48
-
-      # how many monsters can be spawned on an island
       monsters: 50
-
-      # how many villagers can be spawned on an island
       villagers: 16
-
-      # how many snowmen and iron-golems can be spawned on an island
       golems: 5
-
     block-limits:
-      # [true/false] if true, the limits below will limit block placement
       enabled: true
-
-      # How many hoppers are allowed to be placed down on an island
       hopper: 50
-
-      # How many mob spawners are allowed to be placed on an island
       mob_spawner: 10
-
-    # [permission] The name of the permissions to check if extra items are added to the chest, you can change these or add more
-    # Only checked if 'addExtraItems' is set to true.
-    # [permission:item list] The list of extra items to add to the chest, will only be added if the player has the permission. ITEM_ID:HOW_MANY
-    # When granting the permission, prefix it with "usb." so the full permission to add would be usb.smallbonus
     extraPermissions:
-      smallbonus: '4:16 320:5'
-      mediumbonus: '50:16 327:1'
-      largebonus: '3:5 12:5'
-      giantbonus: '2:1 110:1'
-      extremebonus: '352:8 263:4'
-      donorbonus: '261:1 262:32 272:1'
-
+      smallbonus:
+      - COBBLESTONE:16
+      - GRILLED_PORK:5
+      mediumbonus:
+      - TORCH:16
+      - LAVA_BUCKET:1
+      largebonus:
+      - DIRT:5
+      - SAND:5
+      giantbonus:
+      - GRASS:1
+      - MYCEL:1
+      extremebonus:
+      - BONE:8
+      - COAL:4
+      donorbonus:
+      - BOW:1
+      - ARROW:32
+      - STONE_SWORD:1
   extras:
+
     # [true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
     # NOTE: Requires EssentialsSpawn or another plugin with the "/spawn" command
     sendToSpawn: false
@@ -158,6 +132,7 @@ options:
     # If the flag is true, it generally means the protection is active
     # (meaning the action is blocked)
     visitors:
+
       # Protect visitors from trampling your crop
       trampling: true
 
@@ -202,8 +177,8 @@ options:
 
       # Wheter or not visitors can break vehicles
       vehicle-damage: false
-
   party:
+
     # The number of ms before an invite timeouts (1000 ms per second)
     invite-timeout: 30000
 
@@ -220,6 +195,7 @@ options:
 
   # This section provide some performance tweaking configs
   advanced:
+
     # If true, display-name is looked up (might be performance intensive).
     useDisplayNames: false
 
@@ -233,19 +209,25 @@ options:
 
     # Controls advanced behaviour reg. the internal playerdb
     playerdb:
+
       # valid values are: yml, memory, bukkit
       storage: bukkit
 
   # Section about restarting your island (or accepting an invite).
   restart:
+
     # Clears the player's inventory on island create/restart
     clearInventory: true
+
     # Clears the player's armor on island create/restart
     clearArmor: true
+
     # Clears the player's enderchest on island create/restart
     clearEnderChest: true
+
     # Clears the permissions the player has been granted from rewards
     clearPerms: true
+
     # Clears the users balance (set to 0)
     clearCurrency: false
 
@@ -261,25 +243,31 @@ options:
     # - me Jumps with &ajoy
     extra-commands: []
 
-
 # Whether or not to show the UI for create/restart
 island-schemes-enabled: true
 
 # List of selections for /is create and /is restart
 # the nodes under island-schemes must match the schematic-names from the schematics folder.
 island-schemes:
+
   # name of the schematic
   default:
+
     # permission needed to use island
     permission: usb.island.create
+
     # small discription of the island
     description: The default uSkyBlock island
+
     # item to display in the GUI
     displayItem: SAPLING
+
     # optional, default true (true enabled in GUI, false disabled in GUI)
     enabled: true
+
     # optional, must be listed in ascending order
     index: 2
+
     # optional extra's that can be given per island
     extraItems: ''
     maxPartySize: 4
@@ -287,8 +275,10 @@ island-schemes:
     monsters: 50
     villagers: 16
     golems: 5
+
     # Get 100% of the normal score
     scoreMultiply: 1.0
+
     # But start with no offset
     scoreOffset: 0
   skySMP:
@@ -297,42 +287,30 @@ island-schemes:
     displayItem: LEAVES
     enabled: false
     index: 3
-    extraItems: 'OBSIDIAN:14 FLINT_AND_STEEL:1'
+    extraItems: OBSIDIAN:14 FLINT_AND_STEEL:1
     maxPartySize: 4
     animals: 48
     monsters: 50
     villagers: 16
     golems: 5
+
     # Only get 90% of the normal score
     scoreMultiply: 0.9
+
     # But start with an offset of 40
     scoreOffset: 40
   spawn:
     description: The default spawn schematic
     enabled: false
-
-# This section allows donors to get specific perks
-#donor-perks:
-#  usb:
-#    donor:
-#      example:
-#        # permission: usb.donor.example will give the below extra items
-#        maxPartySize: 5
-#        schematics: [LargeIsland]
-#        animals: 60
-#        monsters: 100
-#        villagers: 24
-#        rewardBonus: 0.5
-#        hungerReduction: 0.5
-
 confirmation:
+
   # [true/false] Whether to require confirmation (i.e. repeating the command twice).
   is leave: true
 
   # [true/false] Whether to require confirmation (i.e. repeating the command twice).
   is restart: true
-
 asyncworldedit:
+
   # Supports disabling the detection of AWE
   enabled: true
 
@@ -341,31 +319,23 @@ asyncworldedit:
 
   # Or 20pct (what-ever comes first)
   progressEveryPct: 20
-
   watchDog:
+
     # The maximum time to wait for AWE paste to complete (2m, 3m20s, etc.)
     timeout: 15s
+
     # The number of ms between each heartbeat
     heartBeatMs: 2000
-
 worldguard:
   entry-message: true
   exit-message: true
-
-
 nether:
   enabled: true
-
-
   height: 75
-
   lava_level: 7
-
   activate-at:
     level: 100
-
   schematicName: uSkyBlockNether
-
   terraform-enabled: true
 
   # The distance to search for valid terra-form location.
@@ -410,17 +380,16 @@ nether:
   # The chances of changing a pigzombie when spawned on a netherbrick
   spawn-chances:
     enabled: true
-    wither: 0.20
-    skeleton: 0.10
-    blaze: 0.20
-
+    wither: 0.2
+    skeleton: 0.1
+    blaze: 0.2
 tool-menu:
   enabled: true
   tool: SAPLING
   commands:
-    CHEST: 'island'
-    BEDROCK: 'island spawn'
-    WORKBENCH: 'challenges'
+    CHEST: island
+    BEDROCK: island spawn
+    WORKBENCH: challenges
 
 # Placeholders - enable these to get placeholder substitution
 # usb_version
@@ -432,6 +401,7 @@ tool-menu:
 # usb_island_golems_max, usb_island_monsters_max, usb_island_animals_max, usb_island_villagers_max,
 # usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_villagers
 placeholder:
+
   # Hooks directly into DeluxeChatPlaceholderAPI
   deluxechatplaceholderapi: false
 
@@ -445,14 +415,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 65
-force-replace:
-  options.party.invite-timeout: 100
-  options.island.islandTeleportDelay: 5
-  options.island.useOldIslands: false
-  options.island.schematicName: yourschematichere
-move-nodes:
-  options.restart.confirmation: confirmation.is restart
-  options.party.leave.confirmation: confirmation.is leave
-  options.island.hopperlimit: options.island.block-limits.hopper
-  options.island.spawnerlimit: options.island.block-limits.mob_spawner
+version: 66
+importer:
+  name2uuid:
+    imported: true
