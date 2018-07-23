@@ -11,6 +11,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -20,16 +21,17 @@ import java.util.stream.Collectors;
 
 import static dk.lockfuglsang.minecraft.file.FileUtil.readConfig;
 
-public class ConfigPre13Importer implements USBImporter {
+public class Config13Importer implements USBImporter {
     public static final Pattern REQ_PATTERN = Pattern.compile("(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?)(?<meta>\\{.*\\})?:(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?");
-    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<itemstack>(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?):(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
-    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<itemstack>(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?)\\s*(?<meta>\\{.*\\})?");
+    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?):(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
+    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?)\\s*(?<meta>\\{.*\\})?");
 
     private uSkyBlock plugin;
 
+
     @Override
     public String getName() {
-        return "configpre1.13";
+        return "config1.13";
     }
 
     @Override
@@ -45,7 +47,7 @@ public class ConfigPre13Importer implements USBImporter {
         try {
             config.save(new File(file.getParentFile(), file.getName() + ".org"));
         } catch (IOException e) {
-            throw new IllegalStateException("Unable to save backup file", e);
+            e.printStackTrace();
         }
         if (file.getName().equals("challenges.yml")) {
             convertChallenges(config);
@@ -57,7 +59,7 @@ public class ConfigPre13Importer implements USBImporter {
         try {
             config.save(file);
         } catch (IOException e) {
-            throw new IllegalStateException("Unable to save config file", e);
+            e.printStackTrace();
         }
         return true;
     }
@@ -71,14 +73,22 @@ public class ConfigPre13Importer implements USBImporter {
         // chestItems
         for (String key : keys.stream().filter(f -> f.endsWith(".chestItems")).collect(Collectors.toList())) {
             List<String> value = new ArrayList<>();
-            value.addAll(convertItemAmountList(config.getStringList(key)));
+            if (config.isList(key)) {
+                value.addAll(convertItemAmountList(config.getStringList(key)));
+            } else if (config.isString(key)) {
+                value.addAll(convertItemAmountList(Arrays.asList(config.getString(key, "").split(" "))));
+            }
             config.set(key, value);
         }
         // extraPermissions
         ConfigurationSection extraPerms = config.getConfigurationSection("options.island.extraPermissions");
         if (extraPerms != null) {
-            for (String key : extraPerms.getKeys(false)) {
-                extraPerms.set(key, convertItemAmountList(extraPerms.getStringList(key)));
+            for (String key : extraPerms.getKeys(true)) {
+                if (config.isList(key)) {
+                    extraPerms.set(key, convertItemAmountList(extraPerms.getStringList(key)));
+                } else {
+                    extraPerms.set(key, convertItemAmountList(Arrays.asList(extraPerms.getString(key, "").split(" "))));
+                }
             }
         }
     }
@@ -88,13 +98,21 @@ public class ConfigPre13Importer implements USBImporter {
         Set<String> keys = config.getKeys(true);
         for (String key : keys.stream().filter(f -> f.endsWith(".requiredItems")).collect(Collectors.toList())) {
             List<String> value = new ArrayList<>();
-            value.addAll(convertRequiredItemsList(config.getStringList(key)));
+            if (config.isList(key)) {
+                value.addAll(convertRequiredItemsList(config.getStringList(key)));
+            } else if (config.isString(key)) {
+                value.addAll(convertRequiredItemsList(Arrays.asList(config.getString(key, "").split(" "))));
+            }
             config.set(key, value);
         }
         // Rewards (.items)
         for (String key : keys.stream().filter(f -> f.endsWith(".items")).collect(Collectors.toList())) {
             List<String> value = new ArrayList<>();
-            value.addAll(convertItemAmountList(config.getStringList(key)));
+            if (config.isList(key)) {
+                value.addAll(convertItemAmountList(config.getStringList(key)));
+            } else if (config.isString(key)) {
+                value.addAll(convertItemAmountList(Arrays.asList(config.getString(key, "").split(" "))));
+            }
             config.set(key, value);
         }
         // displayItems (and lockedDisplayItem)
@@ -125,7 +143,7 @@ public class ConfigPre13Importer implements USBImporter {
         if (m.matches()) {
             String itemstack = m.group("itemstack");
             ItemStack itemStack = ItemStackUtil.createItemStack(itemstack);
-            String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 ? ":" + itemStack.getDurability() : "");
+            String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 && itemStack.getDurability() < itemStack.getType().getMaxDurability() ? ":" + itemStack.getDurability() : "");
             return replaceItemStack(m, value, newItemStack);
         }
         return null;
@@ -138,7 +156,7 @@ public class ConfigPre13Importer implements USBImporter {
         }
         String itemstack = m.group("itemstack");
         ItemStack itemStack = ItemStackUtil.createItemStack(itemstack);
-        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 ? ":" + itemStack.getDurability() : "");
+        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 && itemStack.getDurability() < itemStack.getType().getMaxDurability() ? ":" + itemStack.getDurability() : "");
         return replaceItemStack(m, reward, newItemStack);
     }
 
@@ -149,7 +167,7 @@ public class ConfigPre13Importer implements USBImporter {
         }
         String itemstack = m.group("itemstack");
         ItemStack itemStack = ItemStackUtil.createItemStack(itemstack);
-        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 ? ":" + itemStack.getDurability() : "");
+        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 && itemStack.getDurability() < itemStack.getType().getMaxDurability() ? ":" + itemStack.getDurability() : "");
         return replaceItemStack(m, displayItem, newItemStack);
     }
 

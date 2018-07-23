@@ -109,6 +109,7 @@ permissions:
       usb.admin.import: true
       usb.admin.ignore: true
       usb.admin.info: true
+      usb.admin.island: true
       usb.admin.lang: true
       usb.admin.maintenance: true
       usb.admin.makeleader: true
@@ -145,6 +146,7 @@ permissions:
       usb.admin.ignore: true
       usb.admin.import: true
       usb.admin.info: true
+      usb.admin.island: true
       usb.admin.jobs: true
       usb.admin.jobs.stats: true
       usb.admin.lang: true

@@ -8,6 +8,7 @@ import org.bukkit.command.TabCompleter;
 import us.talabrek.ultimateskyblock.command.admin.AbstractPlayerInfoCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminChallengeCommand;
 import us.talabrek.ultimateskyblock.command.admin.AdminIslandCommand;
+import us.talabrek.ultimateskyblock.command.admin.ChunkCommand;
 import us.talabrek.ultimateskyblock.command.admin.ConfigCommand;
 import us.talabrek.ultimateskyblock.command.admin.CooldownCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
@@ -86,5 +87,6 @@ public class AdminCommand extends BaseCommandExecutor {
         add(new SetMaintenanceCommand(plugin));
         add(new NBTCommand());
         add(new ProtectAllCommand(plugin));
+        add(new ChunkCommand());
     }
 }

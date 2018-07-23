@@ -24,7 +24,7 @@ public class AdminIslandCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public AdminIslandCommand(final uSkyBlock plugin, final ConfirmHandler confirmHandler) {
-        super("island|is", "usb.admin", marktr("manage islands"));
+        super("island|is", "usb.admin.island", marktr("manage islands"));
         this.plugin = plugin;
         add(new AbstractIslandInfoCommand("protect", "usb.admin.protect", marktr("protects the island")) {
             @Override

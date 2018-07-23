@@ -72,7 +72,10 @@ public class LevelConfigYmlReader {
         if (m.matches()) {
             Material material = null;
             String materialName = m.group("type");
-            material = Material.getMaterial(materialName);
+            material = Material.matchMaterial(materialName);
+            if (material == null) {
+                material = Material.matchMaterial(materialName, true);
+            }
             if (material == null) {
                 LogUtil.log(Level.WARNING, "Invalid key '" + blockKey + "' in levelConfig, could not lookup Material");
                 return null;
@@ -109,8 +112,9 @@ public class LevelConfigYmlReader {
     }
 
     private void addDefaults(List<BlockLevelConfig> blocks, BlockLevelConfigBuilder defaultBuilder) {
-        BlockLevelConfigBuilder nullScore = defaultBuilder.copy().base(new BlockMatch(Material.AIR)).scorePerBlock(0).limit(0);
-        blocks.add(nullScore.build());
+        BlockLevelConfigBuilder nullScore = defaultBuilder.copy().scorePerBlock(0).limit(0);
+        blocks.add(nullScore.base(Material.AIR).build());
+        blocks.add(nullScore.base(Material.LEGACY_AIR).build());
     }
 
 }
