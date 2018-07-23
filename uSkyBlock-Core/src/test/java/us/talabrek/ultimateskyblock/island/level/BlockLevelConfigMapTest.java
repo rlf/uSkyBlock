@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.island.level;
 
 import org.bukkit.Material;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import static org.hamcrest.Matchers.is;
 public class BlockLevelConfigMapTest {
 
     @Test
-    @Ignore("Currently 1.13 cannot load Material in JUNit test runner")
     public void get() {
         BlockLevelConfigBuilder defaultBuilder = new BlockLevelConfigBuilder().limit(17).scorePerBlock(10);
         List<BlockLevelConfig> collection = new ArrayList<>();

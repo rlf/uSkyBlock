@@ -1,15 +1,18 @@
 package us.talabrek.ultimateskyblock.util;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-@Ignore("Currently 1.13 cannot load Material in JUNit test runner")
 public class MaterialUtilTest {
+    @Test
+    public void testGuava() {
+        Preconditions.checkArgument(true,"description", "something to test against");
+    }
     @Test
     public void testIsTool() {
         assertThat(MaterialUtil.isTool(Material.OAK_WOOD), is(false));

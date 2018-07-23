@@ -14,7 +14,7 @@ ranks:
         type: onPlayer
         requiredItems: 'COBBLESTONE:257'
         radius: 24
-        displayItem: 'MONSTER_EGG:1 {EntityTag:{id:"Villager"}}'
+        displayItem: 'VILLAGER_SPAWN_EGG'
         takeItems: true
         reward:
           text: 1 enchanted book (Unbreaking III)

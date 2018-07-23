@@ -10,7 +10,6 @@ import org.bukkit.Server;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
-import org.junit.Ignore;
 import org.junit.Test;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -40,7 +39,6 @@ public class ChallengeLogicTest {
     }
 
     @Test
-    @Ignore("Currently 1.13 cannot load Material in JUNit test runner")
     public void testDefaultChallengesYml() throws Exception {
         setupServerMock();
         YmlConfiguration config = new YmlConfiguration();

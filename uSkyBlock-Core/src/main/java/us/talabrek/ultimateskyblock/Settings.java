@@ -109,9 +109,7 @@ public class Settings {
         }
         general_spawnSize = config.getInt("options.general.spawnSize", 50);
         island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
-                config.getString("options.island.chestItems", null),
-                config.getStringList("options.island.chestItems")
-        ));
+                config.getStringList("options.island.chestItems")));
 
         island_schematicName = config.getString("options.island.schematicName");
         if (island_schematicName == null || "yourschematicname".equals(island_schematicName) || "uSkyBlockDefault".equals(island_schematicName)) {

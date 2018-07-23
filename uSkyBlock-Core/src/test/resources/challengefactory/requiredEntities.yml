@@ -22,8 +22,8 @@ ranks:
         radius: 24
         requiredEntities:
         - Villager:16
-        - VILLAGER_GOLEM:2 # <- problem here. The IG doesn't count as reqEntity, so ingame are villagers only required for this challenge
-        displayItem: 'MONSTER_EGG:1 {EntityTag:{id:"Villager"}}'
+        - IRON_GOLEM:2
+        displayItem: 'VILLAGER_SPAWN_EGG'
         takeItems: true
         reward:
           text: 1 enchanted book (Unbreaking III)

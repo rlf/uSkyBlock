@@ -39,7 +39,12 @@ public enum MaterialUtil {
     public static String getToolType(Material tool) {
         if (isTool(tool)) {
             String enumName = tool.name();
-            return enumName.substring(0, enumName.indexOf('_'));
+            String typeName = enumName.substring(0, enumName.indexOf('_')).toUpperCase();
+            // GOLDEN and WOODEN -> GOLD and WOOD
+            if (typeName.endsWith("EN")) {
+                return typeName.substring(0, typeName.length()-2);
+            }
+            return typeName;
         }
         return null;
     }
