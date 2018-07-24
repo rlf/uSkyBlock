@@ -109,7 +109,6 @@ public class Settings {
         }
         general_spawnSize = config.getInt("options.general.spawnSize", 50);
         island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
-                config.getString("options.island.chestItems", null),
                 config.getStringList("options.island.chestItems")
         ));
 

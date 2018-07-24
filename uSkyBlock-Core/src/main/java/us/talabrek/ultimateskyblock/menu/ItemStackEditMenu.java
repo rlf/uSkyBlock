@@ -255,10 +255,10 @@ public class ItemStackEditMenu extends AbstractConfigMenu implements EditMenu {
         if (!config.isString(path)) {
             return null;
         }
-        String items = config.getString(path);
+        List<String> stringList = config.getStringList(path);
         List<ItemStack> itemList = null;
         try {
-            itemList = ItemStackUtil.createItemList(items);
+            itemList = ItemStackUtil.createItemList(stringList);
         } catch (IllegalArgumentException ignored) {
             return null;
         }

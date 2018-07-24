@@ -27,7 +27,7 @@ public class PerkLogic {
 
     public PerkLogic(uSkyBlock plugin, IslandGenerator islandGenerator) {
         this.plugin = plugin;
-        defaultPerk = new Perk(ItemStackUtil.createItemList(""), Settings.general_maxPartySize,
+        defaultPerk = new Perk(Collections.emptyList(), Settings.general_maxPartySize,
                 plugin.getConfig().getInt("options.island.spawn-limits.animals", 30),
                 plugin.getConfig().getInt("options.island.spawn-limits.monsters", 50),
                 plugin.getConfig().getInt("options.island.spawn-limits.villagers", 16),
@@ -60,7 +60,7 @@ public class PerkLogic {
                         .golems(config.getInt("golems", 0))
                         .rewBonus(config.getInt("rewardBonus", 0))
                         .hungerReduction(config.getInt("hungerReduction", 0))
-                        .extraItems(ItemStackUtil.createItemList(config.getString("extraItems", null), config.getStringList("extraItems")))
+                        .extraItems(ItemStackUtil.createItemList(config.getStringList("extraItems")))
                         .build();
                 ItemStack itemStack = ItemStackUtil.createItemStack(
                         config.getString("displayItem", "SAPLING"),
@@ -127,7 +127,7 @@ public class PerkLogic {
             } else {
                 // Read leaf
                 donorPerks.put(perm, new Perk(
-                        ItemStackUtil.createItemList(config.getString("extraItems", null), config.getStringList("extraItems")),
+                        ItemStackUtil.createItemList(config.getStringList("extraItems")),
                         config.getInt("maxPartySize", defaultPerk.getMaxPartySize()),
                         config.getInt("animals", defaultPerk.getAnimals()),
                         config.getInt("monsters", defaultPerk.getMonsters()),
@@ -145,7 +145,7 @@ public class PerkLogic {
             return;
         }
         for (String key : config.getKeys(false)) {
-            List<ItemStack> items = ItemStackUtil.createItemList(config.getString(key, null), config.getStringList(key));
+            List<ItemStack> items = ItemStackUtil.createItemList(config.getStringList(key));
             if (items != null && !items.isEmpty()) {
                 String perm = "usb." + key;
                 donorPerks.put(perm, new PerkBuilder(donorPerks.get(perm))
