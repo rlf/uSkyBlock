@@ -161,6 +161,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
             JobManager.addJob(this);
         }
         try {
+            consecutiveRuns++;
             if (!execute() && !isCancelled) {
                 plugin.sync(this, TimeUtil.ticksAsMillis(consecutiveRuns < maxConsecutive ? 0 : yieldDelay));
             } else {
@@ -172,7 +173,6 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
         } finally {
             tUsed += (t() - tRunning);
             tRunning = 0;
-            consecutiveRuns++;
             if (consecutiveRuns > maxConsecutive) {
                 consecutiveRuns = 0;
             }

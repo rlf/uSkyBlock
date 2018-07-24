@@ -41,7 +41,7 @@ public class ChunkSnapShotTask extends IncrementalRunnable {
             if (!chunk.isLoaded()) {
                 chunk.load();
             }
-            snapshots.add(chunk.getChunkSnapshot(true, false, false));
+            snapshots.add(chunk.getChunkSnapshot(false, false, false));
             if (!tick()) {
                 break;
             }

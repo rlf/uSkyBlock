@@ -45,57 +45,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                final BlockCountCollection counts = new BlockCountCollection(scoreMap);
-                                int minX = region.getMinimumPoint().getBlockX();
-                                int maxX = region.getMaximumPoint().getBlockX();
-                                int minZ = region.getMinimumPoint().getBlockZ();
-                                int maxZ = region.getMaximumPoint().getBlockZ();
-                                for (int x = minX; x <= maxX; ++x) {
-                                    for (int z = minZ; z <= maxZ; ++z) {
-                                        ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
-                                        if (chunk == null) {
-                                            // This should NOT happen!
-                                            log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x + "," + z);
-                                            continue;
-                                        }
-                                        int cx = (x & 0xf);
-                                        int cz = (z & 0xf);
-                                        for (int y = 0; y <= chunk.getHighestBlockYAt(x,z); y++) {
-                                            Material blockType = chunk.getBlockType(cx, y, cz);
-                                            byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
-                                            counts.add(blockType, blockData);
-                                        }
-                                    }
-                                }
-                                IslandScore islandScore = createIslandScore(counts);
-                                if (islandScore.getScore() >= activateNetherAtLevel && netherRegion != null && snapshotsNether != null) {
-                                    // Add nether levels
-                                    minX = netherRegion.getMinimumPoint().getBlockX();
-                                    maxX = netherRegion.getMaximumPoint().getBlockX();
-                                    minZ = netherRegion.getMinimumPoint().getBlockZ();
-                                    maxZ = netherRegion.getMaximumPoint().getBlockZ();
-                                    for (int x = minX; x <= maxX; ++x) {
-                                        for (int z = minZ; z <= maxZ; ++z) {
-                                            ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
-                                            if (chunk == null) {
-                                                // This should NOT happen!
-                                                log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x + "," + z);
-                                                continue;
-                                            }
-                                            int cx = (x & 0xf);
-                                            int cz = (z & 0xf);
-                                            for (int y = 6; y < 120; y++) {
-                                                Material blockType = chunk.getBlockType(cx, y, cz);
-                                                byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
-                                                counts.add(blockType, blockData);
-                                            }
-                                        }
-                                    }
-                                    islandScore = createIslandScore(counts);
-                                }
-                                callback.setState(islandScore);
-                                plugin.sync(callback);
-                                log.exiting(CN, "calculateScoreAsync");
+                                calculateScoreAndCallback(region, snapshotsOverworld, netherRegion, snapshotsNether, callback);
                             }
                         }.runTaskAsynchronously(plugin);
                     }
@@ -104,7 +54,72 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
         }).runTask(plugin);
     }
 
-    private ChunkSnapshot getChunkSnapshot(int x, int z, List<ChunkSnapshot> snapshots) {
+    private void calculateScoreAndCallback(ProtectedRegion region, List<ChunkSnapshot> snapshotsOverworld, ProtectedRegion netherRegion, List<ChunkSnapshot> snapshotsNether, Callback<IslandScore> callback) {
+        IslandScore islandScore = calculateScore(region, snapshotsOverworld, netherRegion, snapshotsNether);
+        callback.setState(islandScore);
+        plugin.sync(callback);
+        log.exiting(CN, "calculateScoreAsync");
+    }
+
+    private IslandScore calculateScore(ProtectedRegion region, List<ChunkSnapshot> snapshotsOverworld, ProtectedRegion netherRegion, List<ChunkSnapshot> snapshotsNether) {
+        final BlockCountCollection counts = new BlockCountCollection(scoreMap);
+        int minX = region.getMinimumPoint().getBlockX();
+        int maxX = region.getMaximumPoint().getBlockX();
+        int minZ = region.getMinimumPoint().getBlockZ();
+        int maxZ = region.getMaximumPoint().getBlockZ();
+        for (int x = minX; x <= maxX; ++x) {
+            for (int z = minZ; z <= maxZ; ++z) {
+                ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
+                if (chunk == null) {
+                    // This should NOT happen!
+                    log.log(Level.WARNING, "Missing chunk in snapshot for x,z = " + x + "," + z);
+                    continue;
+                }
+                int cx = (x & 0xf);
+                int cz = (z & 0xf);
+                for (int y = 0; y <= 255; y++) {
+                    Material blockType = chunk.getBlockType(cx, y, cz);
+                    if (blockType == Material.AIR) {
+                        continue;
+                    }
+                    byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
+                    counts.add(blockType, blockData);
+                }
+            }
+        }
+        IslandScore islandScore = createIslandScore(counts);
+        if (islandScore.getScore() >= activateNetherAtLevel && netherRegion != null && snapshotsNether != null) {
+            // Add nether levels
+            minX = netherRegion.getMinimumPoint().getBlockX();
+            maxX = netherRegion.getMaximumPoint().getBlockX();
+            minZ = netherRegion.getMinimumPoint().getBlockZ();
+            maxZ = netherRegion.getMaximumPoint().getBlockZ();
+            for (int x = minX; x <= maxX; ++x) {
+                for (int z = minZ; z <= maxZ; ++z) {
+                    ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsNether);
+                    if (chunk == null) {
+                        // This should NOT happen!
+                        log.log(Level.WARNING, "Missing nether-chunk in snapshot for x,z = " + x + "," + z);
+                        continue;
+                    }
+                    int cx = (x & 0xf);
+                    int cz = (z & 0xf);
+                    for (int y = 6; y < 120; y++) {
+                        Material blockType = chunk.getBlockType(cx, y, cz);
+                        if (blockType == Material.AIR) {
+                            continue;
+                        }
+                        byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
+                        counts.add(blockType, blockData);
+                    }
+                }
+            }
+            islandScore = createIslandScore(counts);
+        }
+        return islandScore;
+    }
+
+    private static ChunkSnapshot getChunkSnapshot(int x, int z, List<ChunkSnapshot> snapshots) {
         for (ChunkSnapshot chunk : snapshots) {
             if (chunk.getX() == x && chunk.getZ() == z) {
                 return chunk;

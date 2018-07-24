@@ -64,7 +64,7 @@ public enum VaultHandler {;
     private static String getVaultItemName(ItemStack stack) {
         if (stack != null) {
             try {
-                if (stack.getItemMeta() != null && stack.getItemMeta().getDisplayName() != null) {
+                if (stack.getItemMeta() != null && stack.getItemMeta().getDisplayName() != null && !stack.getItemMeta().getDisplayName().trim().isEmpty()) {
                     return stack.getItemMeta().getDisplayName();
                 }
                 ItemInfo itemInfo = Items.itemByStack(stack);
