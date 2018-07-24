@@ -72,7 +72,7 @@ ranks:
         description: Mine from a cobblestone generator.
         type: onPlayer
         requiredItems:
-        - COBBLESTONE:6COBBLESTONE;+2
+        - COBBLESTONE:64;+2
         displayItem: COBBLESTONE
         lockedDisplayItem: STAINED_GLASS_PANE:7
         resetInHours: 12
@@ -1589,7 +1589,7 @@ ranks:
 
 #===============================================
 #
-# Here follows the format and explanation for the challenge group and challenges setup. The single commented (#) are the most used settings 
+# Here follows the format and explanation for the challenge group and challenges setup. The single commented (#) are the most used settings
 # while the double commented (##) are optionnal if you like to use those settings.
 #
 #ranks:
@@ -1687,4 +1687,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 100
+version: 26

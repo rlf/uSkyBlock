@@ -177,6 +177,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private volatile boolean maintenanceMode = false;
     private BlockLimitLogic blockLimitLogic;
+    private Metrics metrics;
 
     public uSkyBlock() {
     }
@@ -247,7 +248,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
         }, getConfig().getLong("init.initDelay", 50L));
         try {
-            Metrics metrics = new Metrics(this);
+            metrics = new Metrics(this);
+            metrics.addCustomChart(new Metrics.SimplePie("language", () -> getConfig().getString("language", "en")));
+            metrics.addCustomChart(new Metrics.SimplePie("radius_and_distance", () -> String.format("(%d,%d)", Settings.island_radius, Settings.island_distance)));
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }

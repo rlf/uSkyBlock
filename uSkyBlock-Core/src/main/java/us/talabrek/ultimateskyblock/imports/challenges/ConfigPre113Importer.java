@@ -7,31 +7,31 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static dk.lockfuglsang.minecraft.file.FileUtil.readConfig;
 
-public class Config13Importer implements USBImporter {
-    public static final Pattern REQ_PATTERN = Pattern.compile("(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?)(?<meta>\\{.*\\})?:(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?");
-    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?):(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
-    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?)\\s*(?<meta>\\{.*\\})?");
+public class ConfigPre113Importer implements USBImporter {
+    private static final Pattern REQ_PATTERN = Pattern.compile("(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?)(?<meta>\\{.*\\})?:(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?");
+    private static final Pattern ITEM_AMOUNT_PATTERN = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?(?<itemstack>(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?):(?<amount>[0-9]+)\\s*(?<meta>\\{.*\\})?");
+    private static final Pattern ITEM_PATTERN = Pattern.compile("(?<itemstack>(?<id>[0-9A-Z_]+)(:(?<sub>[0-9]+))?)\\s*(?<meta>\\{.*\\})?");
 
     private uSkyBlock plugin;
 
-
     @Override
     public String getName() {
-        return "config1.13";
+        return "config-pre-1-13";
     }
 
     @Override
@@ -68,26 +68,30 @@ public class Config13Importer implements USBImporter {
         Set<String> keys = config.getKeys(true);
         // displayItems (and lockedDisplayItem)
         for (String key : keys.stream().filter(f -> f.toLowerCase().endsWith("displayitem")).collect(Collectors.toList())) {
-            config.set(key, convertItem(config.getString(key)));
+            try {
+                config.set(key, convertItem(config.getString(key)));
+            } catch (Exception e) {
+                LogUtil.log(Level.WARNING, "Unable to convert config.yml:" + key + ":" + e.getMessage());
+            }
         }
         // chestItems
-        for (String key : keys.stream().filter(f -> f.endsWith(".chestItems")).collect(Collectors.toList())) {
-            List<String> value = new ArrayList<>();
-            if (config.isList(key)) {
+        for (String key : keys.stream().filter(f -> f.endsWith(".chestItems") || f.endsWith(".extraItems")).collect(Collectors.toList())) {
+            try {
+                List<String> value = new ArrayList<>();
                 value.addAll(convertItemAmountList(config.getStringList(key)));
-            } else if (config.isString(key)) {
-                value.addAll(convertItemAmountList(Arrays.asList(config.getString(key, "").split(" "))));
+                config.set(key, value);
+            } catch (Exception e) {
+                LogUtil.log(Level.WARNING, "Unable to convert config.yml:" + key + ":" + e.getMessage());
             }
-            config.set(key, value);
         }
         // extraPermissions
         ConfigurationSection extraPerms = config.getConfigurationSection("options.island.extraPermissions");
         if (extraPerms != null) {
-            for (String key : extraPerms.getKeys(true)) {
-                if (config.isList(key)) {
+            for (String key : extraPerms.getKeys(false)) {
+                try {
                     extraPerms.set(key, convertItemAmountList(extraPerms.getStringList(key)));
-                } else {
-                    extraPerms.set(key, convertItemAmountList(Arrays.asList(extraPerms.getString(key, "").split(" "))));
+                } catch (Exception e) {
+                    LogUtil.log(Level.WARNING, "Unable to convert config.yml:" + key + ":" + e.getMessage());
                 }
             }
         }
@@ -97,30 +101,33 @@ public class Config13Importer implements USBImporter {
         // Convert all requiredItems
         Set<String> keys = config.getKeys(true);
         for (String key : keys.stream().filter(f -> f.endsWith(".requiredItems")).collect(Collectors.toList())) {
-            List<String> value = new ArrayList<>();
-            if (config.isList(key)) {
+            try {
+                List<String> value = new ArrayList<>();
                 value.addAll(convertRequiredItemsList(config.getStringList(key)));
-            } else if (config.isString(key)) {
-                value.addAll(convertRequiredItemsList(Arrays.asList(config.getString(key, "").split(" "))));
+                config.set(key, value);
+            } catch (Exception e) {
+                LogUtil.log(Level.WARNING, "Unable to convert challenges.yml:" + key + ":" + e.getMessage());
             }
-            config.set(key, value);
         }
         // Rewards (.items)
         for (String key : keys.stream().filter(f -> f.endsWith(".items")).collect(Collectors.toList())) {
-            List<String> value = new ArrayList<>();
-            if (config.isList(key)) {
+            try {
+                List<String> value = new ArrayList<>();
                 value.addAll(convertItemAmountList(config.getStringList(key)));
-            } else if (config.isString(key)) {
-                value.addAll(convertItemAmountList(Arrays.asList(config.getString(key, "").split(" "))));
+                config.set(key, value);
+            } catch (Exception e) {
+                LogUtil.log(Level.WARNING, "Unable to convert challenges.yml:" + key + ":" + e.getMessage());
             }
-            config.set(key, value);
         }
         // displayItems (and lockedDisplayItem)
         for (String key : keys.stream().filter(f -> f.toLowerCase().endsWith("displayitem")).collect(Collectors.toList())) {
-            config.set(key, convertItem(config.getString(key)));
+            try {
+                config.set(key, convertItem(config.getString(key)));
+            } catch (Exception e) {
+                LogUtil.log(Level.WARNING, "Unable to convert challenges.yml:" + key + ":" + e.getMessage());
+            }
         }
     }
-
 
     private Collection<? extends String> convertItemAmountList(List<String> stringList) {
         List<String> values = new ArrayList<>();
@@ -143,7 +150,7 @@ public class Config13Importer implements USBImporter {
         if (m.matches()) {
             String itemstack = m.group("itemstack");
             ItemStack itemStack = ItemStackUtil.createItemStack(itemstack);
-            String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 && itemStack.getDurability() < itemStack.getType().getMaxDurability() ? ":" + itemStack.getDurability() : "");
+            String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 ? ":" + itemStack.getDurability() : "");
             return replaceItemStack(m, value, newItemStack);
         }
         return null;
@@ -156,7 +163,7 @@ public class Config13Importer implements USBImporter {
         }
         String itemstack = m.group("itemstack");
         ItemStack itemStack = ItemStackUtil.createItemStack(itemstack);
-        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 && itemStack.getDurability() < itemStack.getType().getMaxDurability() ? ":" + itemStack.getDurability() : "");
+        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 ? ":" + itemStack.getDurability() : "");
         return replaceItemStack(m, reward, newItemStack);
     }
 
@@ -167,7 +174,7 @@ public class Config13Importer implements USBImporter {
         }
         String itemstack = m.group("itemstack");
         ItemStack itemStack = ItemStackUtil.createItemStack(itemstack);
-        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 && itemStack.getDurability() < itemStack.getType().getMaxDurability() ? ":" + itemStack.getDurability() : "");
+        String newItemStack = itemStack.getType().name() + (itemStack.getDurability() > 0 ? ":" + itemStack.getDurability() : "");
         return replaceItemStack(m, displayItem, newItemStack);
     }
 
