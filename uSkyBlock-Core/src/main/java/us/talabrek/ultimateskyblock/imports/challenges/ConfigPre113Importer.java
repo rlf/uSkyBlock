@@ -31,7 +31,7 @@ public class ConfigPre113Importer implements USBImporter {
 
     @Override
     public String getName() {
-        return "config-pre-1-13";
+        return "config-1-13";
     }
 
     @Override
