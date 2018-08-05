@@ -28,12 +28,7 @@
     <modules>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
-        <module>uSkyBlock-AWE211</module>
-        <module>uSkyBlock-AWE311</module>
-        <module>uSkyBlock-AWE321</module>
-        <module>uSkyBlock-AWE330</module>
         <module>uSkyBlock-Plugin</module>
-        <module>uSkyBlock-FAWE</module>
     </modules>
 
     <scm>
@@ -165,7 +160,7 @@
         <profile>
             <id>wg62</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -185,50 +180,24 @@
             </dependencies>
         </profile>
         <profile>
-            <id>we5</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q</groupId>
-                    <artifactId>worldedit</artifactId>
-                    <version>5.5.8</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>c </id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q.worldedit</groupId>
-                    <artifactId>worldedit-bukkit</artifactId>
-                    <version>6.0.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>we611</id>
+            <id>wg700</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>com.sk89q.worldedit</groupId>
-                    <artifactId>worldedit-bukkit</artifactId>
-                    <version>6.1.1-SNAPSHOT</version>
+                    <groupId>com.sk89q.worldguard</groupId>
+                    <artifactId>worldguard-legacy</artifactId>
+                    <version>7.0.0-SNAPSHOT</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>worldedit</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
             </dependencies>
         </profile>
@@ -242,6 +211,22 @@
                     <groupId>com.sk89q.worldedit</groupId>
                     <artifactId>worldedit-bukkit</artifactId>
                     <version>6.1.3-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we700</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>7.0.0-SNAPSHOT</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>

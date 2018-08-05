@@ -7,10 +7,14 @@ import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldedit.extent.clipboard.Clipboard;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
+import com.sk89q.worldedit.function.operation.Operation;
+import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.schematic.SchematicFormat;
+import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dk.lockfuglsang.minecraft.reflection.ReflectionUtil;
 import dk.lockfuglsang.minecraft.util.VersionUtil;
@@ -27,7 +31,9 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -55,11 +61,14 @@ public class WorldEditHandler {
         Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
         EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
         try {
-            SchematicFormat.getFormat(file)
-                    .load(file)
-                    .paste(editSession, to, noAir, entities);
+            ClipboardFormat clipboardFormat = ClipboardFormats.findByFile(file);
+            try (InputStream in = new FileInputStream(file)) {
+                Clipboard clipboard = clipboardFormat.getReader(in).read();
+                Operation operation = new ClipboardHolder(clipboard).createPaste(editSession).to(to).ignoreAirBlocks(noAir).build();
+                Operations.completeLegacy(operation);
+            }
             editSession.flushQueue();
-        } catch (MaxChangedBlocksException | IOException | DataException e) {
+        } catch (MaxChangedBlocksException | IOException e) {
             log.log(Level.INFO, "Unable to paste schematic " + file, e);
         }
     }

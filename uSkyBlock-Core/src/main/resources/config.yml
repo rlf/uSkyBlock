@@ -79,7 +79,7 @@ options:
     block-limits:
       enabled: true
       hopper: 50
-      mob_spawner: 10
+      spawner: 10
     extraPermissions:
       smallbonus:
       - COBBLESTONE:16
@@ -413,7 +413,15 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 100
-importer:
-  name2uuid:
-    imported: true
+version: 101
+force-replace:
+  options.party.invite-timeout: 100
+  options.island.islandTeleportDelay: 5
+  options.island.useOldIslands: false
+  options.island.schematicName: yourschematichere
+move-nodes:
+  options.restart.confirmation: confirmation.is restart
+  options.party.leave.confirmation: confirmation.is leave
+  options.island.hopperlimit: options.island.block-limits.hopper
+  options.island.spawnerlimit: options.island.block-limits.mob_spawner
+  options.island.block-limits.mob_spawner: options.island.block-limits.spawner

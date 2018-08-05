@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.event;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
@@ -138,11 +137,11 @@ public class GriefEvents implements Listener {
         if (!tramplingEnabled || !plugin.isSkyAssociatedWorld(event.getPlayer().getWorld())) {
             return;
         }
-        // TODO: R4zorax - 21-07-2018: is this correct? SOIL is a state on DIRT?
         if (event.getAction() == Action.PHYSICAL
                 && !isValidTarget(event.getPlayer())
-                && event.getBlockFace() == BlockFace.UP
-                && event.getMaterial() == Material.DIRT) {
+                && event.hasBlock()
+                && event.getClickedBlock().getType() == Material.FARMLAND
+                ) {
             event.setCancelled(true);
         }
     }
