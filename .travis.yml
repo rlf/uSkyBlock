@@ -21,7 +21,7 @@ before_install:
 - cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
 - cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
 install:
-- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we613,wg62 install
+- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we700,wg700 install
 before_deploy:
 - mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-bukkit${MC}.jar
 deploy:
