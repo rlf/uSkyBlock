@@ -60,11 +60,6 @@
     </build>
     <repositories>
         <repository>
-            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
-            <id>rlf-mvn-repo</id>
-            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
-        </repository>
-        <repository>
             <id>AWE-mvn-repo</id>
             <url>https://raw.github.com/SBPrime/AsyncWorldEdit-API/maven-artifact/</url>
         </repository>
@@ -97,6 +92,10 @@
         <repository>
             <id>bstats-repo</id>
             <url>http://repo.bstats.org/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>rlf-mvn-repo</id>
+            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
     </repositories>
     <pluginRepositories>

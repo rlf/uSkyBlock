@@ -51,7 +51,9 @@ public class WorldEditHandler {
         EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
         editSession.setFastMode(true);
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(origin);
-        editSession.setMask(new RegionMask(getRegion(origin.getWorld(), region)));
+        if (region != null) {
+            editSession.setMask(new RegionMask(getRegion(origin.getWorld(), region)));
+        }
         try {
             ClipboardFormat clipboardFormat = ClipboardFormats.findByFile(file);
             try (InputStream in = new FileInputStream(file)) {
