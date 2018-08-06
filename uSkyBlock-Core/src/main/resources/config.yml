@@ -50,7 +50,7 @@ options:
     # default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign.
     chestItems:
     - ICE:2
-    - MELON:1
+    - MELON_SLICE:1
     - CACTUS:1
     - LAVA_BUCKET:1
     - RED_MUSHROOM:1
@@ -416,7 +416,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 102
+version: 103
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
