@@ -1,4 +1,4 @@
-## Change Log for v2.7.5-bukkit-1.13-pre..v2.7.6-RC1
+## Change Log for v2.7.5-bukkit-1.13-pre..v2.7.6
 
 
 ## Translations
