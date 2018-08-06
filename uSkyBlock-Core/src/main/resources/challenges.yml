@@ -84,7 +84,7 @@ ranks:
           currency: 10
           xp: 10
           commands:
-          - op:effect {player} regeneration
+          - op:effect give {player} regeneration
         repeatReward:
           text: 1 leather, 10% chance to get a book
           items:
@@ -256,7 +256,7 @@ ranks:
         name: '&7Novice Builder'
         description: Reach island level 20.
         type: islandLevel
-        requiredItems: []
+        requiredLevel: 20
         displayItem: COAL_ORE
         reward:
           text: 8 dirt, 8 sand, 5 emeralds
@@ -268,12 +268,12 @@ ranks:
           currency: 20
           xp: 20
           commands:
-          - op:effect {party} regeneration
+          - op:effect give {party} regeneration
       adeptbuilder:
         name: '&aAdept Builder'
         description: Reach island level 50.
         type: islandLevel
-        requiredItems: []
+        requiredLevel: 50
         displayItem: IRON_ORE
         offset: -1
         reward:
@@ -288,7 +288,7 @@ ranks:
         name: '&eExpert Builder'
         description: Reach island level 100.
         type: islandLevel
-        requiredItems: []
+        requiredLevel: 100
         displayItem: GOLD_ORE
         offset: -1
         reward:
@@ -304,7 +304,7 @@ ranks:
         name: '&cMaster Builder'
         description: Reach island level 250.
         type: islandLevel
-        requiredItems: []
+        requiredLevel: 250
         displayItem: DIAMOND_ORE
         offset: -1
         reward:
@@ -320,7 +320,7 @@ ranks:
         name: '&4Sky Lord'
         description: Reach island level 500.
         type: islandLevel
-        requiredItems: []
+        requiredLevel: 500
         displayItem: EMERALD_ORE
         offset: -1
         reward:
@@ -1687,4 +1687,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 100
+version: 101

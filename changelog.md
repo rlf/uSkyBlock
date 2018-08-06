@@ -1,4 +1,4 @@
-## Change Log for v2.7.6..v2.7.6-RC1
+## Change Log for v2.7.6..v2.7.6-RC2
 
 
 ## Translations

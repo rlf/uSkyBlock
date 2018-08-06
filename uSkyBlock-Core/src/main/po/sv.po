@@ -90,7 +90,7 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
-msgid " §f{0}x §{1}"
+msgid " §f{0}x §7{1}"
 msgstr ""
 
 #, java-format

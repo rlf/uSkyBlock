@@ -47,6 +47,7 @@ public class Challenge {
     private final List<String> requiredItems;
     private final List<EntityMatch> requiredEntities;
     private final List<String> requiredChallenges;
+    private double requiredLevel;
     private final Rank rank;
     private final int resetInHours;
     private final ItemStack displayItem;
@@ -60,7 +61,7 @@ public class Challenge {
     private final int repeatLimit;
 
     public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems,
-                     List<EntityMatch> requiredEntities, List<String> requiredChallenges, Rank rank, int resetInHours,
+                     List<EntityMatch> requiredEntities, List<String> requiredChallenges, double requiredLevel, Rank rank, int resetInHours,
                      ItemStack displayItem, String tool, ItemStack lockedItem, int offset, boolean takeItems,
                      int radius, Reward reward, Reward repeatReward, int repeatLimit) {
         this.name = name;
@@ -69,6 +70,7 @@ public class Challenge {
         this.requiredItems = requiredItems;
         this.requiredEntities = requiredEntities;
         this.requiredChallenges = requiredChallenges;
+        this.requiredLevel = requiredLevel;
         this.rank = rank;
         this.resetInHours = resetInHours;
         this.displayItem = displayItem;
@@ -107,11 +109,8 @@ public class Challenge {
         return radius;
     }
 
-    public int getRequiredLevel() {
-        if (type == Type.ISLAND_LEVEL && requiredItems.size() == 1) {
-            return Integer.parseInt(requiredItems.get(0), 10);
-        }
-        return 0;
+    public double getRequiredLevel() {
+        return requiredLevel;
     }
 
     public List<ItemStack> getRequiredItems(int timesCompleted) {

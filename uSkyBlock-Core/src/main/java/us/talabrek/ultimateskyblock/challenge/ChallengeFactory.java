@@ -70,7 +70,7 @@ public class ChallengeFactory {
         int offset = section.getInt("offset", 0);
         int repeatLimit = section.getInt("repeatLimit", 0);
         return new Challenge(name, displayName, description, type,
-                requiredItems, requiredEntities, requiredChallenges, rank,
+                requiredItems, requiredEntities, requiredChallenges, section.getDouble("requiredLevel", 0d), rank,
                 resetInHours, displayItem, section.getString("tool", null), lockedItem, offset, takeItems,
                 radius, reward, repeatReward, repeatLimit);
     }
