@@ -213,7 +213,7 @@
                 <filtering>false</filtering>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.schematic</include>
+                    <include>schematics/*</include>
                     <include>structures/*</include>
                 </includes>
             </resource>
@@ -498,12 +498,6 @@
             <artifactId>mockito-core</artifactId>
             <version>2.19.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>25.1-jre</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

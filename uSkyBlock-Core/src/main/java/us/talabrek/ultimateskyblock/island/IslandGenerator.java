@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.island;
 
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -46,7 +48,6 @@ public class IslandGenerator {
         if (!directorySchematics.exists()) {
             directorySchematics.mkdir();
         }
-        netherSchematic = new File(directorySchematics, config.getString("nether.schematicName", "uSkyBlockNether") + ".schematic");
         CodeSource codeSource = getClass().getProtectionDomain().getCodeSource();
         if (codeSource != null) {
             URL jar = codeSource.getLocation();
@@ -54,7 +55,7 @@ public class IslandGenerator {
                 ZipEntry entry = null;
                 while ((entry = zin.getNextEntry()) != null) {
                     String prefix = "schematics/";
-                    if (entry.getName().startsWith(prefix) && entry.getName().endsWith(".schematic")) {
+                    if (isSchematicFile(entry, prefix)) {
                         File f = new File(directorySchematics + File.separator + entry.getName().substring(prefix.length()));
                         if (!f.exists()) {
                             try (InputStream inputStream = uSkyBlock.class.getClassLoader().getResourceAsStream(entry.getName())) {
@@ -70,6 +71,7 @@ public class IslandGenerator {
                 log.log(Level.WARNING, "Unable to find schematics in jar", e);
             }
         }
+        netherSchematic =  getSchematicFile(config.getString("nether.schematicName", "uSkyBlockNether"));
         this.schemFiles = directorySchematics.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -83,6 +85,10 @@ public class IslandGenerator {
         } else {
             log.log(Level.INFO, "[uSkyBlock] " + this.schemFiles.length + " schematics loaded.");
         }
+    }
+
+    private boolean isSchematicFile(ZipEntry entry, String prefix) {
+        return entry.getName().startsWith(prefix);
     }
 
     public List<String> getSchemeNames() {
@@ -99,9 +105,9 @@ public class IslandGenerator {
         next.setYaw(0);
         next.setPitch(0);
         next.setY((double) Settings.island_height);
-        File schemFile = new File(directorySchematics, (cSchem != null ? cSchem : "default") + ".schematic");
-        File netherFile = new File(directorySchematics, (cSchem != null ? cSchem + "Nether" : "uSkyBlockNether") + ".schematic");
-        if (!netherFile.exists()) {
+        File schemFile = getSchematicFile(cSchem != null ? cSchem : "default");
+        File netherFile = getSchematicFile(cSchem != null ? cSchem + "Nether" : "uSkyBlockNether");
+        if (netherFile == null) {
             netherFile = netherSchematic;
         }
         if (schemFile.exists() && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
@@ -115,6 +121,12 @@ public class IslandGenerator {
         } else {
             return false;
         }
+    }
+
+    private File getSchematicFile(String cSchem) {
+        List<String> extensions = ClipboardFormats.getAll().stream().flatMap(f -> f.getFileExtensions().stream()).distinct().collect(Collectors.toList());
+        return extensions.stream().map(f -> new File(directorySchematics, cSchem + "." + f)).filter(f -> f.exists() && f.canRead())
+                .findFirst().orElse(null);
     }
 
     public boolean findAndSetChest(final Location loc, final Perk perk) {

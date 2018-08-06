@@ -100,6 +100,9 @@ options:
       - BOW:1
       - ARROW:32
       - STONE_SWORD:1
+      netheraccess:
+      - OBSIDIAN:14
+      - FLINT_AND_STEEL:1
   extras:
 
     # [true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
@@ -413,7 +416,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 101
+version: 102
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

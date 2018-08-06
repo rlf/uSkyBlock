@@ -7,7 +7,6 @@ import dk.lockfuglsang.minecraft.util.FormatUtil;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class Rank {
     private final List<Challenge> challenges;
     private ConfigurationSection config;
 
-    public Rank(ConfigurationSection section, @Nullable Rank previousRank, ChallengeDefaults defaults) {
+    public Rank(ConfigurationSection section, Rank previousRank, ChallengeDefaults defaults) {
         this.challenges = new ArrayList<>();
         this.previousRank = previousRank;
         this.defaults = defaults;

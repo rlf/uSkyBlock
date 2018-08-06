@@ -1,15 +1,14 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.Vector2D;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
+import com.sk89q.worldedit.function.mask.RegionMask;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.regions.CuboidRegion;
@@ -21,7 +20,6 @@ import dk.lockfuglsang.minecraft.util.VersionUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
-import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
@@ -43,32 +41,30 @@ import java.util.logging.Logger;
 public class WorldEditHandler {
     private static final Logger log = Logger.getLogger(WorldEditHandler.class.getName());
 
-    public static WorldEditPlugin getWorldEdit() {
-        final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldEdit");
-        if (plugin == null || !(plugin instanceof WorldEditPlugin)) {
-            return null;
-        }
-        return (WorldEditPlugin) plugin;
-    }
-
     public static void loadIslandSchematic(final File file, final Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
         if (file == null || !file.exists() || !file.canRead()) {
             LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
         }
         boolean noAir = false;
-        boolean entities = true;
         Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
         EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
+        editSession.setFastMode(true);
+        ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(origin);
+        editSession.setMask(new RegionMask(getRegion(origin.getWorld(), region)));
         try {
             ClipboardFormat clipboardFormat = ClipboardFormats.findByFile(file);
             try (InputStream in = new FileInputStream(file)) {
                 Clipboard clipboard = clipboardFormat.getReader(in).read();
-                Operation operation = new ClipboardHolder(clipboard).createPaste(editSession).to(to).ignoreAirBlocks(noAir).build();
-                Operations.completeLegacy(operation);
+                Operation operation = new ClipboardHolder(clipboard)
+                        .createPaste(editSession)
+                        .to(to)
+                        .ignoreAirBlocks(noAir)
+                        .build();
+                Operations.completeBlindly(operation);
             }
             editSession.flushQueue();
-        } catch (MaxChangedBlocksException | IOException e) {
+        } catch (IOException e) {
             log.log(Level.INFO, "Unable to paste schematic " + file, e);
         }
     }

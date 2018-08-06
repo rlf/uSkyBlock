@@ -277,31 +277,6 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE211</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE311</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE321</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE330</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-FAWE</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>me.clip.deluxechat</groupId>
                 <artifactId>DeluxeChatPlaceholderAPI</artifactId>
                 <version>${deluxechat.version}</version>

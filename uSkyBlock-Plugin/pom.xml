@@ -52,25 +52,5 @@
             <groupId>uSkyBlock</groupId>
             <artifactId>uSkyBlock-Core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE211</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE311</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE321</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE330</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-FAWE</artifactId>
-        </dependency>
     </dependencies>
 </project>
