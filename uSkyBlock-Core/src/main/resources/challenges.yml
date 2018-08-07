@@ -166,7 +166,7 @@ ranks:
         description: Harvest slices of melon from a farm.
         type: onPlayer
         requiredItems:
-        - MELON:128;+8
+        - MELON_SLICE:128;+8
         displayItem: MELON
         lockedDisplayItem: BROWN_STAINED_GLASS_PANE
         reward:
