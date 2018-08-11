@@ -352,6 +352,10 @@ msgid "complete all challenges in the rank"
 msgstr "slutför alla uppdrag i ranken"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§cIngen spelare med namnet {0} hittades!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§cUppdraget {0} har redan slutförts"
 
@@ -362,10 +366,6 @@ msgstr "§eUppdraget {0} har slutförts för {1}"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§cInget uppdrag med namnet {0} hittades!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§cIngen spelare med namnet {0} hittades!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"

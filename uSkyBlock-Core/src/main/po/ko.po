@@ -338,6 +338,10 @@ msgid "complete all challenges in the rank"
 msgstr "이 랭크의 모든 도전과제를 완료하였습니다"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§4도전과제 {0}는 이미 완료되었습니다"
 
@@ -348,10 +352,6 @@ msgstr "§e도전과제: {0}이 {1}를 완료했습니다"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4{0}란 이름의 도전과제를 찾지 못했습니다!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"

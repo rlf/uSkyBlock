@@ -51,7 +51,7 @@ public class ChallengeCommand extends BaseCommandExecutor {
             return true;
         }
         if (args.length == 0) {
-            player.openInventory(plugin.getMenu().displayChallengeGUI(player, 1));
+            player.openInventory(plugin.getMenu().displayChallengeGUI(player, 1, null));
             return true;
         } else {
             return super.onCommand(sender, command, alias, args);

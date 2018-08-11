@@ -1248,8 +1248,8 @@ ranks:
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         requiredItems:
         - PRISMARINE:512
-        - PRISMARINE:64
-        - PRISMARINE:128
+        - PRISMARINE_BRICKS:128
+        - DARK_PRISMARINE:64
         - SEA_LANTERN:32
         - OAK_LEAVES:16
         - SPRUCE_LEAVES:16
@@ -1687,4 +1687,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 101
+version: 103

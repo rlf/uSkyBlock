@@ -402,11 +402,11 @@ public class SkyBlockMenu {
         return false;
     }
 
-    public Inventory displayChallengeGUI(final Player player, int page) {
+    public Inventory displayChallengeGUI(final Player player, int page, String playerName) {
         int total = challengeLogic.getTotalPages();
         Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + pre("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
-        final PlayerInfo pi = plugin.getPlayerInfo(player);
-        challengeLogic.populateChallengeRank(menu, pi, page);
+        final PlayerInfo pi = playerName == null ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(playerName);
+        challengeLogic.populateChallengeRank(menu, pi, page, playerName != null && player.hasPermission("usb.mod.bypassrestriction"));
         int pages[] = new int[9];
         pages[0] = 1;
         pages[8] = total;
@@ -430,7 +430,10 @@ public class SkyBlockMenu {
                     pageItem = ItemStackUtil.createItemStack("BOOK", tr("\u00a77Page {0}", p), null);
                 }
                 if (i == 0) {
-                    pageItem = ItemStackUtil.builder(pageItem).displayName(tr("\u00a77First Page")).build();
+                    pageItem = ItemStackUtil.builder(pageItem)
+                            .displayName(tr("\u00a77First Page"))
+                            .lore(playerName != null ? playerName : "")
+                            .build();
                 } else if (i == 8) {
                     pageItem = ItemStackUtil.builder(pageItem).displayName(tr("\u00a77Last Page")).build();
                 }
@@ -967,13 +970,17 @@ public class SkyBlockMenu {
             page = Integer.parseInt(m.group("p"));
             max = Integer.parseInt(m.group("max"));
         }
+        ItemStack item = event.getInventory().getItem(event.getInventory().getSize() - 9);
+        String playerName = item != null && item.hasItemMeta() && item.getItemMeta().getLore() != null && item.getItemMeta().getLore().size() > 0
+                ? item.getItemMeta().getLore().get(0)
+                : null;
         // Last row is pagination
         if (slotIndex >= CHALLENGE_PAGESIZE && slotIndex < CHALLENGE_PAGESIZE + COLS_PER_ROW
                 && currentItem != null && currentItem.getType() != Material.AIR)
         {
             // Pagination
             p.closeInventory();
-            p.openInventory(displayChallengeGUI(p, currentItem.getAmount()));
+            p.openInventory(displayChallengeGUI(p, currentItem.getAmount(), playerName));
             return;
         }
         // If in action bar or anywhere else, just bail out
@@ -987,17 +994,17 @@ public class SkyBlockMenu {
                 String challengeName = stripFormatting(challenge);
                 p.performCommand("c c " + challengeName);
             }
-            p.openInventory(displayChallengeGUI(p, page));
+            p.openInventory(displayChallengeGUI(p, page, playerName));
         } else {
             p.closeInventory();
             if (slotIndex < (CHALLENGE_PAGESIZE/2)) { // Upper half
                 if (page > 1) {
-                    p.openInventory(displayChallengeGUI(p, page - 1));
+                    p.openInventory(displayChallengeGUI(p, page - 1, playerName));
                 } else {
                     p.performCommand("island");
                 }
             } else if (page < max) {
-                p.openInventory(displayChallengeGUI(p, page + 1));
+                p.openInventory(displayChallengeGUI(p, page + 1, playerName));
             } else {
                 p.performCommand("island");
             }

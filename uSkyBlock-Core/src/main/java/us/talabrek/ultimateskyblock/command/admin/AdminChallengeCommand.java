@@ -5,6 +5,7 @@ import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.challenge.Challenge;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -69,6 +70,24 @@ public class AdminChallengeCommand extends CompositeCommand {
                 }
             }
         });
+        add(new AbstractCommand("show", null, "?page", "show challenges for the chosen player") {
+            @Override
+            public boolean execute(CommandSender commandSender, String alias, Map<String, Object> data, String... args) {
+                PlayerInfo playerInfo = (PlayerInfo) data.get("playerInfo");
+                if (playerInfo == null) {
+                    commandSender.sendMessage(I18nUtil.tr("\u00a74No player named {0} was found!", data.get("player")));
+                    return false;
+                }
+                if (commandSender instanceof Player) {
+                    int page = args.length > 0 && args[0].matches("[0-9]+") ? Integer.parseInt(args[0], 10) : 1;
+                    String playerName = (String) data.get("playerName");
+                    Player player = (Player) commandSender;
+                    player.openInventory(plugin.getMenu().displayChallengeGUI(player, page, playerName));
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void completeChallenge(CommandSender sender, PlayerInfo playerInfo, String challengeName) {
@@ -89,6 +108,7 @@ public class AdminChallengeCommand extends CompositeCommand {
             if (playerInfo != null) {
                 data.put("playerInfo", playerInfo);
             }
+            data.put("playerName", args[0]);
         }
         return super.execute(sender, alias, data, args);
     }

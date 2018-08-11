@@ -343,6 +343,10 @@ msgid "complete all challenges in the rank"
 msgstr ""
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4Игрок с именем {0} не найден!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr ""
 
@@ -353,10 +357,6 @@ msgstr ""
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Задание с названием {0} не найдено!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4Игрок с именем {0} не найден!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"

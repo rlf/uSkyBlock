@@ -2,13 +2,13 @@ package us.talabrek.ultimateskyblock.challenge;
 
 import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -24,7 +24,6 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -437,7 +436,7 @@ public class ChallengeLogic implements Listener {
         }
     }
 
-    public void populateChallengeRank(Inventory menu, PlayerInfo pi, int page) {
+    public void populateChallengeRank(Inventory menu, PlayerInfo pi, int page, boolean isAdminAccess) {
         List<Rank> ranksOnPage = new ArrayList<>(ranks.values());
         // page 1 = 0-4, 2 = 5-8, ...
         if (page > 0) {
@@ -445,7 +444,7 @@ public class ChallengeLogic implements Listener {
         }
         int location = 0;
         for (Rank rank : ranksOnPage) {
-            location = populateChallengeRank(menu, rank, location, pi);
+            location = populateChallengeRank(menu, rank, location, pi, isAdminAccess);
             if ((location % 9) != 0) {
                 location += (9 - (location % 9)); // Skip the rest of that line
             }
@@ -485,7 +484,7 @@ public class ChallengeLogic implements Listener {
         return (int) Math.ceil(rankSize / 8f);
     }
 
-    public int populateChallengeRank(Inventory menu, final Rank rank, int location, final PlayerInfo playerInfo) {
+    public int populateChallengeRank(Inventory menu, final Rank rank, int location, final PlayerInfo playerInfo, boolean isAdminAccess) {
         List<String> lores = new ArrayList<>();
         ItemStack currentChallengeItem = rank.getDisplayItem();
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
@@ -518,16 +517,20 @@ public class ChallengeLogic implements Listener {
                 currentChallengeItem = getItemStack(playerInfo, challengeName);
                 List<String> missingReqs = challenge.getMissingRequirements(playerInfo);
                 if (!missingRankRequirements.isEmpty() || !missingReqs.isEmpty()) {
-                    ItemStack locked = challenge.getLockedDisplayItem();
-                    if (locked == null) {
-                        locked = lockedItemMap.get(challenge.getType());
-                    }
-                    if (locked != null) {
-                        currentChallengeItem.setType(locked.getType());
-                        currentChallengeItem.setDurability(locked.getDurability());
-                    } else if (lockedItem != null) {
-                        currentChallengeItem.setType(lockedItem.getType());
-                        currentChallengeItem.setDurability(lockedItem.getDurability());
+                    if (!isAdminAccess) {
+                        ItemStack locked = challenge.getLockedDisplayItem();
+                        if (locked == null) {
+                            locked = lockedItemMap.get(challenge.getType());
+                        }
+                        if (locked != null) {
+                            currentChallengeItem.setType(locked.getType());
+                            currentChallengeItem.setDurability(locked.getDurability());
+                        } else if (lockedItem != null) {
+                            currentChallengeItem.setType(lockedItem.getType());
+                            currentChallengeItem.setDurability(lockedItem.getDurability());
+                        }
+                    } else {
+                        lores = currentChallengeItem.getItemMeta().getLore();
                     }
                     meta4 = currentChallengeItem.getItemMeta();
                     if (defaults.showLockedChallengeName) {

@@ -344,6 +344,10 @@ msgid "complete all challenges in the rank"
 msgstr "voltooi alle uitdagingen in deze groep"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4De speler met de naam {0} kan niet worden gevonden!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§4De {0} uitdaging is al voltooid"
 
@@ -354,10 +358,6 @@ msgstr "§eDe {0} uitdaging is voltooid voor {1}"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4De uitdaging met de naam {0} kan niet worden gevonden!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4De speler met de naam {0} kan niet worden gevonden!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"

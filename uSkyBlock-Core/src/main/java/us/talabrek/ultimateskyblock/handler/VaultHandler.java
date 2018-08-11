@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.handler;
 
-import dk.lockfuglsang.minecraft.po.I18nUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.item.ItemInfo;
 import net.milkbowl.vault.item.Items;
@@ -57,8 +57,7 @@ public enum VaultHandler {;
     }
 
     public static String getItemName(ItemStack stack) {
-        String itemName = getVaultItemName(stack);
-        return I18nUtil.tr(itemName);
+        return ItemStackUtil.getItemName(stack);
     }
 
     private static String getVaultItemName(ItemStack stack) {

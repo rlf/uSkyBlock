@@ -337,6 +337,10 @@ msgid "complete all challenges in the rank"
 msgstr "complete all challenges in the rank"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4Nay pirate named {0} was found!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§4Challenge {0} has already been completed"
 
@@ -347,10 +351,6 @@ msgstr "§eChallenge {0} has been completed for {1}"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Nay challenge named {0} was found!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4Nay pirate named {0} was found!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
