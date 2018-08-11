@@ -409,6 +409,7 @@ ranks:
           items:
           - CARROT:1
           - DIRT:4
+          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}RED_SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 50
@@ -417,6 +418,7 @@ ranks:
           text: 1 baked potato
           items:
           - BAKED_POTATO:1
+          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}RED_SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 25
@@ -435,6 +437,7 @@ ranks:
           - SADDLE:1
           - POTATO:1
           - PIG_SPAWN_EGG:1
+          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}RED_SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 50
@@ -443,6 +446,7 @@ ranks:
           text: 1 golden carrot
           items:
           - GOLDEN_CARROT:1
+          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 25
@@ -482,11 +486,12 @@ ranks:
         displayItem: ROTTEN_FLESH
         lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, 4 iron ore, 1 flint
+          text: 4 redstone ore, 4 iron ore, beetroot-seeds and 1 flint
           items:
           - REDSTONE_ORE:4
           - IRON_ORE:4
           - FLINT:1
+          - BEETROOT_SEEDS:1
           currency: 30
           xp: 30
         repeatReward:
@@ -644,10 +649,11 @@ ranks:
         displayItem: COD
         lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
         reward:
-          text: 10 lapis blocks, 20 prismarine, deep-ocean
+          text: 10 lapis blocks, 20 prismarine, kelp, deep-ocean
           items:
           - LAPIS_BLOCK:10
           - PRISMARINE:20
+          - KELP:1
           - '{p=0.20}PRISMARINE_CRYSTALS:5'
           permission: usb.biome.deep_ocean
           currency: 50
