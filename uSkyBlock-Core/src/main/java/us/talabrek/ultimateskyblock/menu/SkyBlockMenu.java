@@ -971,9 +971,13 @@ public class SkyBlockMenu {
             max = Integer.parseInt(m.group("max"));
         }
         ItemStack item = event.getInventory().getItem(event.getInventory().getSize() - 9);
-        String playerName = item != null && item.hasItemMeta() && item.getItemMeta().getLore() != null && item.getItemMeta().getLore().size() > 0
+        String playerName = item != null && item.hasItemMeta() && item.getItemMeta().getLore() != null
+                && item.getItemMeta().getLore().size() > 0
                 ? item.getItemMeta().getLore().get(0)
                 : null;
+        if (playerName != null && playerName.trim().isEmpty()) {
+            playerName = null;
+        }
         // Last row is pagination
         if (slotIndex >= CHALLENGE_PAGESIZE && slotIndex < CHALLENGE_PAGESIZE + COLS_PER_ROW
                 && currentItem != null && currentItem.getType() != Material.AIR)
