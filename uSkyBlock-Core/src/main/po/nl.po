@@ -1740,6 +1740,9 @@ msgstr "Hiermee kan de gebruiker [USB] borden te plaatsen"
 msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
+msgid "§eVillager-trading isn't allowed."
+msgstr ""
+
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandelen in niet toegestaan op andere eilanden. Doe het op spawn."
 

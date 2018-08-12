@@ -1716,6 +1716,9 @@ msgstr "해당유저가 [usb] signs를 설치하는 것을 허용합니다."
 msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
+msgid "§eVillager-trading isn't allowed."
+msgstr ""
+
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§e트레이드는 다른 섬에선 허가되지 않습니다. 스폰으로 이동하여 주세요"
 

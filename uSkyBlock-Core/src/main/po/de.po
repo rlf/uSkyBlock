@@ -1744,6 +1744,9 @@ msgstr ""
 msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
+msgid "§eVillager-trading isn't allowed."
+msgstr ""
+
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandeln ist auf fremden Inseln nicht erlaubt. Handel am Spawn"
 

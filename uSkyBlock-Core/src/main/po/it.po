@@ -1746,6 +1746,9 @@ msgstr "consente all''utente di piazzare cartelli [usb]"
 msgid "§eYou can not use another island''s portals!"
 msgstr "§eNon puoi usare portali di altre isole!"
 
+msgid "§eVillager-trading isn't allowed."
+msgstr ""
+
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Il commercio non è consentito su altre isole. Fallo nello spawn."
 

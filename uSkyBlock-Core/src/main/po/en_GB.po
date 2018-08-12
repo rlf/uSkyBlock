@@ -1726,6 +1726,9 @@ msgstr "§9* §7allows user to place §9[usb] §7signs"
 msgid "§eYou can not use another island''s portals!"
 msgstr ""
 
+msgid "§eVillager-trading isn't allowed."
+msgstr ""
+
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§9* §7Trading isn't allowed on other islands. Do it in spawn."
 
