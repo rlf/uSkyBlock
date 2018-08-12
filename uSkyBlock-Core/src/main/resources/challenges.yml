@@ -415,8 +415,9 @@ ranks:
           currency: 50
           xp: 50
         repeatReward:
-          text: 1 baked potato
+          text: 4 dirt and a baked potato
           items:
+          - DIRT:4
           - BAKED_POTATO:1
           - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}RED_SAND:1'
@@ -549,6 +550,32 @@ ranks:
           - IRON_PICKAXE:1
           currency: 40
           xp: 40
+      nethermining:
+        name: '&7Nether Mining'
+        description: Mine from your Nether island.
+        type: onPlayer
+        displayItem: NETHERRACK
+        lockedDisplayItem: GRAY_STAINED_GLASS_PANE
+        offset: -1
+        requiredItems:
+        - NETHERRACK:64;+2
+        - SOUL_SAND:16;+2
+        - GRAVEL:32;+2
+        - QUARTZ:32;+2
+        - GLOWSTONE:16;+2
+        reward:
+          text: 1 ghast tear, 1 magic bow
+          items:
+          - GHAST_TEAR:1
+          - BOW:1 {ench:[{id:51,lvl:1},{id:34,lvl:3}]}
+          currency: 40
+          xp: 40
+        repeatReward:
+          text: 32 arrows
+          items:
+          - ARROW:32
+          currency: 20
+          xp: 20
   Tier3:
     name: '&eExpert'
     displayItem: YELLOW_TERRACOTTA
@@ -749,7 +776,7 @@ ranks:
           - '{p=0.3}MUSIC_DISC_STAL:1'
           - '{p=0.3}MUSIC_DISC_STRAD:1'
           - EMERALD:1
-          - PIG_SPAWN_EGG:1 {EntityTag:{id:"Sheep"}}
+          - SHEEP_SPAWN_EGG:1
           - ROSE_BUSH:1
           - PEONY:1
           currency: 35
@@ -812,32 +839,25 @@ ranks:
           - DIAMOND_BLOCK:1
           currency: 500
           xp: 400
-      netherrack:
-        name: '&7Nether Mining'
-        description: Mine from your Nether island.
-        type: onPlayer
-        displayItem: NETHERRACK
-        lockedDisplayItem: GRAY_STAINED_GLASS_PANE
+      netherfortress:
+        name: '&9Nether Fortress'
+        description: Build a netherfortress.
+        type: onIsland
+        radius: 50
         requiredItems:
-        - NETHERRACK:64;+2
-        - SOUL_SAND:16;+2
-        - GRAVEL:32;+2
-        - QUARTZ:32;+2
-        - GLOWSTONE:16;+2
+        - NETHER_BRICK:512
+        - NETHER_BRICK_SLAB:64
+        - NETHER_BRICK_FENCE:64
+        - NETHER_BRICK_STAIRS:64
+        displayItem: NETHER_BRICK_FENCE
+        lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         reward:
-          text: 1 ghast tear, 1 magic bow
+          text: enchantment table, brewing stand
           items:
-          - GHAST_TEAR:1
-          - BOW:1 {ench:[{id:51,lvl:1},{id:34,lvl:3}]}
+          - ENCHANTING_TABLE:1
+          - BREWING_STAND:1
           currency: 40
           xp: 40
-        repeatReward:
-          text: 32 arrows
-          items:
-          - ARROW:32
-          currency: 20
-          xp: 20
-
   #===============================================
   Tier4:
     name: '&cMaster'
@@ -1056,25 +1076,6 @@ ranks:
           - '{p=0.05}DIAMOND_HORSE_ARMOR:1'
           currency: 25
           xp: 25
-      netherfortress:
-        name: '&9Nether Fortress'
-        description: Build a netherfortress.
-        type: onIsland
-        radius: 50
-        requiredItems:
-        - NETHER_BRICK:512
-        - NETHER_BRICK_SLAB:64
-        - NETHER_BRICK_FENCE:64
-        - NETHER_BRICK_STAIRS:64
-        displayItem: NETHER_BRICK_FENCE
-        lockedDisplayItem: BLUE_STAINED_GLASS_PANE
-        reward:
-          text: enchantment table, brewing stand
-          items:
-          - ENCHANTING_TABLE:1
-          - BREWING_STAND:1
-          currency: 40
-          xp: 40
       witherhunter:
         name: '&5Wither Hunter'
         description: Collect some Wither Skeleton skulls.
