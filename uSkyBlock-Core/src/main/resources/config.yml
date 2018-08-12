@@ -357,11 +357,11 @@ nether:
     NETHERRACK:
     - '{p=0.7}NETHERRACK'
     - '{p=0.15}NETHERRACK'
-    - '{p=0.05}QUARTZ_ORE'
+    - '{p=0.05}NETHER_QUARTZ_ORE'
     - '{p=0.05}SOUL_SAND'
-    QUARTZ_ORE:
-    - '{p=0.50}QUARTZ_ORE'
-    - '{p=0.10}QUARTZ_ORE'
+    NETHER_QUARTZ_ORE:
+    - '{p=0.50}NETHER_QUARTZ_ORE'
+    - '{p=0.10}NETHER_QUARTZ_ORE'
     SOUL_SAND:
     - '{p=0.70}SOUL_SAND'
     - '{p=0.10}SOUL_SAND'

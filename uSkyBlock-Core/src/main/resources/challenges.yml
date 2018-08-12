@@ -690,6 +690,7 @@ ranks:
           text: a bucket, cocoa and some animals
           items:
           - BUCKET:1
+          - BEETROOT_SEEDS:1
           - COCOA_BEANS:1
           - COW_SPAWN_EGG:1
           currency: 50
@@ -708,8 +709,8 @@ ranks:
         - COD:5;+1
         - SALMON:5;+1
         - PUFFERFISH:3;+1
-        - TROPICAL_FISH:1;+1
-        - INK_SAC:5;+5
+        - TROPICAL_FISH:1;+0
+        - INK_SAC:5;+2
         displayItem: COD
         lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
         reward:
