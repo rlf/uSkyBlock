@@ -333,7 +333,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         if (getConfig().getBoolean("signs.enabled", true)) {
             manager.registerEvents(new SignEvents(this, new SignLogic(this)), this);
-            manager.registerEvents(new SignEvents(this, new SignLogic(this)), this);
         }
         PlaceholderHandler.register(this);
         manager.registerEvents(new ChatEvents(chatLogic), this);

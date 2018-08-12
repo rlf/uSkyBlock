@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import us.talabrek.ultimateskyblock.handler.EntitySpawner;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.MaterialUtil;
@@ -121,9 +123,10 @@ public class NetherTerraFormEvents implements Listener {
         v.normalize();
         // Disable spawning above the player... enabling the player to clear a region
         if (playerLocation.getPitch() >= minPitch && playerLocation.getPitch() <= maxPitch) {
+            ProtectedCuboidRegion islandRegion = WorldGuardHandler.getIslandRegion(playerLocation);
             List<Material> yield = getYield(block.getType(), toolWeight);
             for (Material mat : yield) {
-                spawnBlock(mat, blockLocation, v);
+                spawnBlock(mat, blockLocation, v, islandRegion);
             }
         }
     }
@@ -134,19 +137,19 @@ public class NetherTerraFormEvents implements Listener {
         return d != null ? d : 1d;
     }
 
-    private void spawnBlock(Material type, Location location, Vector v) {
+    private void spawnBlock(Material type, Location location, Vector v, ProtectedCuboidRegion islandRegion) {
         Location spawnLoc = null;
         if (MaterialUtil.isFallingMaterial(type)) {
-            spawnLoc = findSolidSpawnLocation(location, v);
+            spawnLoc = findSolidSpawnLocation(location, v, islandRegion);
         } else {
-            spawnLoc = findAirSpawnLocation(location, v);
+            spawnLoc = findAirSpawnLocation(location, v, islandRegion);
         }
         if (spawnLoc != null) {
             spawnLoc.getWorld().getBlockAt(spawnLoc).setType(type);
         }
     }
 
-    private Location findAirSpawnLocation(Location location, Vector v) {
+    private Location findAirSpawnLocation(Location location, Vector v, ProtectedCuboidRegion islandRegion) {
         // Searches in a cone for an air block
         Location lookAt = new Location(location.getWorld(),
                 Math.round(location.getX() + v.getX()),
@@ -154,7 +157,8 @@ public class NetherTerraFormEvents implements Listener {
                 Math.round(location.getZ() + v.getZ()));
         while (v.length() < maxScan) {
             for (Location loc : getLocationsInPlane(lookAt, v)) {
-                if (loc.getBlock().getType() == Material.AIR && isAdjacentToSolid(loc)) {
+                if (loc.getBlock().getType() == Material.AIR && isAdjacentToSolid(loc)
+                        && isInIslandRegion(islandRegion, loc)) {
                     return loc;
                 }
             }
@@ -162,6 +166,10 @@ public class NetherTerraFormEvents implements Listener {
             v.normalize().multiply(n+1);
         }
         return null;
+    }
+
+    private boolean isInIslandRegion(ProtectedCuboidRegion islandRegion, Location loc) {
+        return WorldGuardHandler.isInRegion(islandRegion, loc);
     }
 
     private boolean isAdjacentToSolid(Location loc) {
@@ -173,12 +181,13 @@ public class NetherTerraFormEvents implements Listener {
         return false;
     }
 
-    private Location findSolidSpawnLocation(Location location, Vector v) {
+    private Location findSolidSpawnLocation(Location location, Vector v, ProtectedCuboidRegion islandRegion) {
         // Searches in a cone for an air block
-
         while (v.length() < maxScan) {
             for (Location loc : getLocationsInPlane(location, v)) {
-                if (loc.getBlock().getType() == Material.AIR && loc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
+                if (loc.getBlock().getType() == Material.AIR
+                        && loc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()
+                        && isInIslandRegion(islandRegion, loc)) {
                     return loc;
                 }
             }

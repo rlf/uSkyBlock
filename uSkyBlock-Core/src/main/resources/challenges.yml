@@ -491,7 +491,8 @@ ranks:
           - REDSTONE_ORE:4
           - IRON_ORE:4
           - FLINT:1
-          - BEETROOT_SEEDS:1
+          - '{p=0.10}POTATO:1'
+          - '{p=0.10}BEETROOT_SEEDS:1'
           currency: 30
           xp: 30
         repeatReward:
@@ -500,6 +501,9 @@ ranks:
           - REDSTONE_ORE:1
           - IRON_ORE:4
           - FLINT:1
+          - '{p=0.05}POTATO:1'
+          - '{p=0.05}CARROT:1'
+          - '{p=0.05}BEETROOT_SEEDS:1'
           currency: 15
           xp: 15
       homeowner:
@@ -574,6 +578,39 @@ ranks:
           - PIG_SPAWN_EGG:1
           currency: 30
           xp: 30
+      sawmill:
+        name: '&3Saw Mill'
+        description: Deliver a collection of processed wood
+        type: onPlayer
+        offset: -1
+        requiredChallenges:
+        - toolmaker
+        requiredItems:
+        - STRIPPED_OAK_LOG:8;+2
+        - STRIPPED_SPRUCE_LOG:8;+2
+        - STRIPPED_BIRCH_LOG:8;+2
+        - STRIPPED_JUNGLE_LOG:8;+2
+        - STRIPPED_ACACIA_LOG:8;+2
+        - STRIPPED_DARK_OAK_LOG:8;+2
+        displayItem: IRON_AXE
+        lockedDisplayItem: CYAN_STAINED_GLASS_PANE
+        reward:
+          text: 4 redstone ore, 4 iron, 1 mule
+          items:
+          - COCOA_BEANS:1
+          - REDSTONE_ORE:4
+          - IRON_ORE:4
+          - MULE_SPAWN_EGG:1
+          currency: 30
+          xp: 30
+        repeatReward:
+          text: 1 redstone ore, 1 iron ore
+          items:
+          - REDSTONE_ORE:1
+          - IRON_ORE:1
+          - '{p=0.05}GOLD_ORE:1'
+          currency: 15
+          xp: 15
       torchmaker:
         name: '&3Torch Maker'
         description: Make 128 torches.
@@ -626,7 +663,7 @@ ranks:
           text: a bucket, cocoa and some animals
           items:
           - BUCKET:1
-          - INK_SAC:1
+          - COCOA_BEANS:1
           - COW_SPAWN_EGG:1
           currency: 50
           xp: 50
@@ -1693,4 +1730,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 103
+version: 104

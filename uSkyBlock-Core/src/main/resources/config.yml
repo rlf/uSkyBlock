@@ -131,6 +131,10 @@ options:
     # Whether or not portalling to the nether roof should be blocked.
     nether-roof: true
 
+    # Whether or not anyone can trade i skyblock
+    # default: false - since it goes against the core of skyblock
+    villager-trading-enabled: false
+
     # Generally protections against griefers
     # If the flag is true, it generally means the protection is active
     # (meaning the action is blocked)
