@@ -438,7 +438,6 @@ ranks:
           - SADDLE:1
           - POTATO:1
           - PIG_SPAWN_EGG:1
-          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}RED_SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 50
@@ -447,7 +446,6 @@ ranks:
           text: 1 golden carrot
           items:
           - GOLDEN_CARROT:1
-          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 25
@@ -493,7 +491,7 @@ ranks:
           - IRON_ORE:4
           - FLINT:1
           - '{p=0.10}POTATO:1'
-          - '{p=0.10}BEETROOT_SEEDS:1'
+          - '{p=0.10}CARROT:1'
           currency: 30
           xp: 30
         repeatReward:
@@ -504,7 +502,6 @@ ranks:
           - FLINT:1
           - '{p=0.05}POTATO:1'
           - '{p=0.05}CARROT:1'
-          - '{p=0.05}BEETROOT_SEEDS:1'
           currency: 15
           xp: 15
       homeowner:
@@ -524,11 +521,12 @@ ranks:
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         displayItem: OAK_DOOR
         reward:
-          text: 4 redstone ore, 5 inksac, 4 iron ore
+          text: 4 redstone ore, 5 inksac, 4 iron ore and some seeds
           items:
           - REDSTONE_ORE:4
           - IRON_ORE:4
           - INK_SAC:5
+          - BEETROOT_SEEDS:1
           currency: 40
           xp: 40
       netherportal:
@@ -567,13 +565,14 @@ ranks:
           text: 1 ghast tear, 1 magic bow
           items:
           - GHAST_TEAR:1
-          - BOW:1 {ench:[{id:51,lvl:1},{id:34,lvl:3}]}
+          - 'BOW:1 {ench:[{id:"minecraft:infinity",lvl:1},{id:"minecraft:unbreaking",lvl:3}]}'
           currency: 40
           xp: 40
         repeatReward:
-          text: 32 arrows
+          text: a blaze-rod and a chance of ghast tear
           items:
-          - ARROW:32
+          - BLAZE_ROD:1
+          - '{p=0.10}GHAST_TEAR:1'
           currency: 20
           xp: 20
   Tier3:
@@ -679,26 +678,26 @@ ranks:
         - sugarfarmer
         - shroompicker
         requiredItems:
-        - MELON:256;+2
+        - MELON_SLICE:256;+2
         - SUGAR:128;+2
         - WHEAT:128;+2
         - POTATO:128;+2
         - CARROT:128;+2
         - PUMPKIN:128;+2
         - CACTUS:128;+2
+        - BEETROOT:128;+2
         reward:
-          text: a bucket, cocoa and some animals
+          text: a bucket, cocoa and a cow
           items:
           - BUCKET:1
-          - BEETROOT_SEEDS:1
           - COCOA_BEANS:1
           - COW_SPAWN_EGG:1
           currency: 50
           xp: 50
         repeatReward:
-          text: 1 bucket
+          text: a cow
           items:
-          - BUCKET:1
+          - COW_SPAWN_EGG:1
           currency: 25
           xp: 25
       fisherman:
@@ -724,10 +723,11 @@ ranks:
           currency: 50
           xp: 50
         repeatReward:
-          text: 2 lapis, 5 prismarine, chance at prismarine crystals
+          text: 2 lapis, 5 prismarine, kelp and a chance at prismarine crystals
           items:
           - INK_SAC:2
           - PRISMARINE:5
+          - KELP:1
           - '{p=0.20}PRISMARINE_CRYSTALS:5'
           currency: 25
           xp: 25
@@ -853,10 +853,13 @@ ranks:
         displayItem: NETHER_BRICK_FENCE
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         reward:
-          text: enchantment table, brewing stand
+          text: a wither-skull and a blaze rod and a chance of diamonds
           items:
-          - ENCHANTING_TABLE:1
-          - BREWING_STAND:1
+          - WITHER_SKELETON_SKULL:1
+          - BLAZE_ROD:1
+          - '{p=0.05}DIAMOND:3'
+          - '{p=0.10}DIAMOND:2'
+          - '{p=0.15}DIAMOND:1'
           currency: 40
           xp: 40
   #===============================================
@@ -961,14 +964,15 @@ ranks:
         displayItem: COOKIE
         lockedDisplayItem: YELLOW_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, 1 diamond
+          text: 4 redstone ore, clay and a diamond
           items:
           - REDSTONE_ORE:4
+          - CLAY:5
           - DIAMOND:1
           currency: 80
           xp: 80
         repeatReward:
-          text: 1 iron ore, 5 clay
+          text: iron ore and some clay
           items:
           - IRON_ORE:1
           - CLAY:5

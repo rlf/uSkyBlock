@@ -376,11 +376,11 @@ nether:
 
   # Weights that is applied to the above terraform chances depending on the tool used
   terraform-weight:
-    WOOD: 1.1
+    WOOD: 0
     STONE: 1.0
     IRON: 0.9
-    GOLD: 0
-    DIAMOND: 0.1
+    GOLD: 1.5
+    DIAMOND: 0.2
 
   # The chances of changing a pigzombie when spawned on a netherbrick
   spawn-chances:
