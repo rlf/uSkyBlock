@@ -558,14 +558,15 @@ ranks:
         requiredItems:
         - NETHERRACK:64;+2
         - SOUL_SAND:16;+2
-        - GRAVEL:32;+2
+        - GRAVEL:16;+2
         - QUARTZ:32;+2
         - GLOWSTONE:16;+2
+        - COARSE_DIRT:4;+2
         reward:
           text: 1 ghast tear, 1 magic bow
           items:
           - GHAST_TEAR:1
-          - 'BOW:1 {ench:[{id:"minecraft:infinity",lvl:1},{id:"minecraft:unbreaking",lvl:3}]}'
+          - 'BOW:1 {Enchantments:[{id:"minecraft:infinity",lvl:1},{id:"minecraft:unbreaking",lvl:3}]}'
           currency: 40
           xp: 40
         repeatReward:
@@ -621,7 +622,7 @@ ranks:
         displayItem: IRON_AXE
         lockedDisplayItem: CYAN_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, 4 iron, 1 mule
+          text: 4 redstone ore, 4 iron, cocoa and a mule
           items:
           - COCOA_BEANS:1
           - REDSTONE_ORE:4
@@ -679,7 +680,7 @@ ranks:
         - shroompicker
         requiredItems:
         - MELON_SLICE:256;+2
-        - SUGAR:128;+2
+        - SUGAR_CANE:128;+2
         - WHEAT:128;+2
         - POTATO:128;+2
         - CARROT:128;+2
@@ -740,29 +741,26 @@ ranks:
         requiredChallenges:
         - monsterfarmer
         requiredItems:
-        - WHITE_WOOL:8;+2
-        - ORANGE_WOOL:8;+2
-        - MAGENTA_WOOL:8;+2
-        - LIGHT_BLUE_WOOL:8;+2
-        - YELLOW_WOOL:8;+2
-        - LIME_WOOL:8;+2
-        - PINK_WOOL:8;+2
-        - GRAY_WOOL:8;+2
-        - LIGHT_GRAY_WOOL:8;+2
-        - CYAN_WOOL:8;+2
-        - PURPLE_WOOL:8;+2
-        - BLUE_WOOL:8;+2
-        - BROWN_WOOL:8;+2
-        - GREEN_WOOL:8;+2
-        - RED_WOOL:8;+2
-        - BLACK_WOOL:8;+2
+        - WHITE_WOOL:2;+4
+        - ORANGE_WOOL:2;+4
+        - MAGENTA_WOOL:2;+4
+        - LIGHT_BLUE_WOOL:2;+4
+        - YELLOW_WOOL:2;+4
+        - LIME_WOOL:2;+4
+        - PINK_WOOL:2;+4
+        - GRAY_WOOL:2;+4
+        - LIGHT_GRAY_WOOL:2;+4
+        - CYAN_WOOL:2;+4
+        - PURPLE_WOOL:2;+4
+        - BLUE_WOOL:2;+4
+        - BROWN_WOOL:2;+4
+        - GREEN_WOOL:2;+4
+        - RED_WOOL:2;+4
+        - BLACK_WOOL:2;+4
         reward:
           text: 2 diamonds, sheep, emerald, flowers
           items:
           - DIAMOND:2
-          - MUSIC_DISC_MELLOHI:1
-          - MUSIC_DISC_STAL:1
-          - MUSIC_DISC_STRAD:1
           - EMERALD:1
           - SHEEP_SPAWN_EGG:1
           - ROSE_BUSH:1
@@ -773,9 +771,6 @@ ranks:
         repeatReward:
           text: emerald, sheep, flowers
           items:
-          - '{p=0.3}MUSIC_DISC_MELLOHI:1'
-          - '{p=0.3}MUSIC_DISC_STAL:1'
-          - '{p=0.3}MUSIC_DISC_STRAD:1'
           - EMERALD:1
           - SHEEP_SPAWN_EGG:1
           - ROSE_BUSH:1
@@ -850,6 +845,7 @@ ranks:
         - NETHER_BRICK_SLAB:64
         - NETHER_BRICK_FENCE:64
         - NETHER_BRICK_STAIRS:64
+        - SOUL_SAND:32
         displayItem: NETHER_BRICK_FENCE
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         reward:
@@ -937,19 +933,21 @@ ranks:
         displayItem: CRAFTING_TABLE
         lockedDisplayItem: CYAN_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, jukebox, 4 iron ore
+          text: a parrot and a jukebox with some redstone and iron
           items:
+          - PARROT_SPAWN_EGG:1
+          - JUKEBOX:1
           - REDSTONE_ORE:4
           - IRON_ORE:4
-          - JUKEBOX:1
           currency: 30
           xp: 30
         repeatReward:
-          text: 1 redstone ore, 1 iron ore
+          text: redstone, iron and a slim chance at a parrot
           items:
           - REDSTONE_ORE:1
           - IRON_ORE:1
           - '{p=0.25}JUKEBOX:1'
+          - '{p=0.05}PARROT_SPAWN_EGG:1'
           currency: 15
           xp: 15
       cookielover:
@@ -980,6 +978,40 @@ ranks:
           - '{p=0.3}IRON_ORE:2'
           currency: 40
           xp: 40
+      deepseafisherman:
+        name: '&5Deep Sea Fishing'
+        description: Farm the deep sea
+        type: onPlayer
+        requiredItems:
+        - COD:10;+5
+        - SALMON:10;+5
+        - PUFFERFISH:5;+3
+        - TROPICAL_FISH:3;+2
+        - PRISMARINE_CRYSTALS:16;+8
+        - PRISMARINE_SHARD:16;+8
+        - DRIED_KELP_BLOCK:64;+32
+        - NAUTILUS_SHELL:1
+        displayItem: HEART_OF_THE_SEA
+        lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
+        reward:
+          text: heart-of-the-sea, nautilus shell and a turtle
+          items:
+          - NAUTILUS_SHELL:1
+          - HEART_OF_THE_SEA:1
+          - TURTLE_SPAWN_EGG:1
+          - '{p=0.1}NAUTILUS_SHELL:1'
+          permission: usb.biome.deep_ocean
+          currency: 50
+          xp: 50
+        repeatReward:
+          text: nautilus shell, turtle and a chance of a heart
+          items:
+          - NAUTILUS_SHELL:1
+          - TURTLE_SPAWN_EGG:1
+          - '{p=0.05}HEART_OF_THE_SEA:1'
+          - '{p=0.1}NAUTILUS_SHELL:1'
+          currency: 25
+          xp: 25
       horsingaround:
         name: '&6Horsing Around'
         description: Get hay bales for the horses.
@@ -1160,19 +1192,18 @@ ranks:
         displayItem: REDSTONE
         lockedDisplayItem: CYAN_STAINED_GLASS_PANE
         reward:
-          text: 8 redstone blocks, 8 noteblocks and 4 tripwire hooks, 1 emerald
+          text: snow, ice and packed ice
           items:
-          - REDSTONE_BLOCK:8
-          - NOTE_BLOCK:8
-          - TRIPWIRE_HOOK:4
-          - EMERALD:1
+          - SNOW_BLOCK:4
+          - ICE:8
+          - PACKED_ICE:8
+          - REDSTONE_BLOCK:64
           currency: 70
           xp: 70
         repeatReward:
-          text: 1 redstone block and 1 tripwire hook
+          text: a stack of redstone blocks
           items:
-          - REDSTONE_BLOCK:1
-          - TRIPWIRE_HOOK:1
+          - REDSTONE_BLOCK:64
           currency: 35
           xp: 35
       emeraldcollector:
@@ -1285,29 +1316,26 @@ ranks:
           items:
           - END_PORTAL_FRAME:3
           - DIAMOND:3
-          - BOW:1 {ench:[{id:51,lvl:1},{id:34,lvl:3},{id:48,lvl:5}]}
+          - BOW:1 {Enchantments:[{id:"minecraft:infinity",lvl:1},{id:"minecraft:unbreaking",lvl:3},{id:"minecraft:power",lvl:5}]}
           currency: 1000
           xp: 500
-      hanginggardens:
-        name: '&9Hanging Gardens'
-        description: Build the hanging gardens
+      poseidonshalls:
+        name: '&9Poseidon''s Halls'
+        description: Build the halls of Poseidon
         type: onIsland
         radius: 50
         displayItem: PRISMARINE
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
+        requiredChallenges:
+        - deepseafisherman
         requiredItems:
         - PRISMARINE:512
         - PRISMARINE_BRICKS:128
         - DARK_PRISMARINE:64
         - SEA_LANTERN:32
-        - OAK_LEAVES:16
-        - SPRUCE_LEAVES:16
-        - BIRCH_LEAVES:16
-        - JUNGLE_LEAVES:16
-        - ACACIA_LEAVES:16
-        - DARK_OAK_LEAVES:16
+        - CONDUIT:1
         - FLOWER_POT:16
-        - VINE:256
+        - VINE:128
         - POPPY:10
         - BLUE_ORCHID:10
         - ALLIUM:10
@@ -1348,11 +1376,9 @@ ranks:
         - IRON_BLOCK:49
         reward:
           items:
-          - PACKED_ICE:16
-          - SNOW_BLOCK:4
           - END_PORTAL_FRAME:3
-          - DIAMOND_SWORD:1 {ench:[{id:16,lvl:5},{id:34,lvl:3},{id:70,lvl:1}]}
-          text: packed ice, snow and some portal-pieces
+          - DIAMOND_SWORD:1 {Enchantments:[{id:"minecraft:sharpness",lvl:5},{id:"minecraft:unbreaking",lvl:3},{id:"minecraft:fire",lvl:1}]}
+          text: some end-portal-pieces and a magic diamond sword
           currency: 4000
           xp: 1000
       endportal:
@@ -1365,7 +1391,7 @@ ranks:
         requiredChallenges:
         - beaconator
         - tajmahal
-        - hanginggardens
+        - poseidonshalls
         - greatpyramid
         requiredItems:
         - END_PORTAL_FRAME:12
@@ -1374,7 +1400,7 @@ ranks:
           text: 5 dia and some nice boots
           items:
           - DIAMOND:5
-          - DIAMOND_BOOTS:1 {ench:[{id:2,lvl:4},{id:0,lvl:4},{id:3,lvl:4}]}
+          - DIAMOND_BOOTS:1 {Enchantments:[{id:"minecraft:feather_falling",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:blast_protection",lvl:4}]}
           currency: 4000
           xp: 1000
 
