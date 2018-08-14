@@ -4,11 +4,11 @@ import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector2D;
-import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.world.block.BlockType;
+import com.sk89q.worldedit.world.block.BlockState;
+import com.sk89q.worldedit.world.block.BlockTypes;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
@@ -27,7 +27,7 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
  * Not as fast as WorldEditRegenTask, but more versatile.
  */
 public class WorldEditClearFlatlandTask extends IncrementalRunnable {
-   private static final BaseBlock AIR = new BaseBlock(new BlockType("air"));
+   private static final BlockState AIR = BlockTypes.AIR.getDefaultState();
 
     private final Set<Region> borderRegions;
     private final Set<Vector2D> innerChunks;
