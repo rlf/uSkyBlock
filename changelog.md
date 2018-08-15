@@ -1,4 +1,4 @@
-## Change Log for v2.7.6..v2.7.6-RC3
+## Change Log for v2.7.6..v2.7.6-201808150212
 
 
 ## Translations
