@@ -148,6 +148,11 @@ public class LimitLogic {
                         ItemStackUtil.getItemName(new ItemStack(entry.getKey())),
                         blockCount >= entry.getValue() ? tr("\u00a7c{0}", blockCount) : blockCount,
                         entry.getValue()) + "\n");
+            } else {
+                sb.append(tr("\u00a77{0}: \u00a7a{1}\u00a77 (max. {2})",
+                        ItemStackUtil.getItemName(new ItemStack(entry.getKey())),
+                        tr("\u00a7c{0}", "?"),
+                        entry.getValue()) + "\n");
             }
         }
         return sb.toString().trim();
