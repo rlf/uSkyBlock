@@ -266,7 +266,7 @@ public class NetherTerraFormEvents implements Listener {
             if (isNetherFortressWalkway(block)) {
                 e.setCancelled(true);
                 double p = RND.nextDouble();
-                if (p <= chanceWither) {
+                if (p <= chanceWither && block.getRelative(BlockFace.UP, 3).getType() == Material.AIR) {
                     entitySpawner.spawnWitherSkeleton(e.getLocation());
                 } else if (p <= chanceWither+chanceBlaze) {
                     entitySpawner.spawnBlaze(e.getLocation());
@@ -280,10 +280,7 @@ public class NetherTerraFormEvents implements Listener {
     }
 
     private boolean isNetherFortressWalkway(Block block) {
-        // TODO: 23/09/2015 - R4zorax: More intelligently please...
-        // NS          NS    NS =
-        // NB NB NB NB NB    NB = NetherBrick
-        return block.getType() == Material.NETHER_BRICK;
+        return block.getType() == Material.NETHER_BRICKS;
     }
 
     @EventHandler

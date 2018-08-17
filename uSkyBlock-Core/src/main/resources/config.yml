@@ -13,7 +13,7 @@ options:
     cooldownRestart: 30
 
     # [integer] The time in seconds before a player can use the /island biome command again.
-    biomeChange: 180
+    biomeChange: 60
 
     # [string] The default biome assigned to new islands
     defaultBiome: OCEAN

@@ -52,5 +52,9 @@
             <groupId>uSkyBlock</groupId>
             <artifactId>uSkyBlock-Core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>uSkyBlock</groupId>
+            <artifactId>uSkyBlock-FAWE</artifactId>
+        </dependency>
     </dependencies>
 </project>

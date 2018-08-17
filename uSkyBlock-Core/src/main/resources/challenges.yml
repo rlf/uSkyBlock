@@ -841,7 +841,7 @@ ranks:
         type: onIsland
         radius: 50
         requiredItems:
-        - NETHER_BRICK:512
+        - NETHER_BRICKS:512
         - NETHER_BRICK_SLAB:64
         - NETHER_BRICK_FENCE:64
         - NETHER_BRICK_STAIRS:64
@@ -962,11 +962,12 @@ ranks:
         displayItem: COOKIE
         lockedDisplayItem: YELLOW_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, clay and a diamond
+          text: 4 redstone ore, clay a bucket and a diamond
           items:
           - REDSTONE_ORE:4
           - CLAY:5
           - DIAMOND:1
+          - BUCKET:1
           currency: 80
           xp: 80
         repeatReward:
@@ -974,6 +975,7 @@ ranks:
           items:
           - IRON_ORE:1
           - CLAY:5
+          - BUCKET:1
           - '{p=0.4}CLAY:3'
           - '{p=0.3}IRON_ORE:2'
           currency: 40

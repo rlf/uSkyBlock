@@ -271,7 +271,13 @@ blocks:
     diminishingReturns: 10000
   NETHERRACK:
     limit: 10000
-  NETHER_BRICK:
+  NETHER_BRICK_SLAB:
+    score: 10.0
+    diminishingReturns: 20000
+  NETHER_BRICK_FENCE:
+    score: 30.0
+    diminishingReturns: 10000
+  NETHER_BRICKS:
     score: 20.0
     diminishingReturns: 20000
   NETHER_BRICK_STAIRS:

@@ -81,7 +81,6 @@ public class SkyBlockNetherChunkGenerator extends ChunkGenerator {
                 chunkData.setBlock(x, y, z, Material.BEDROCK);
             }
         }
-
         return chunkData;
     }
 
