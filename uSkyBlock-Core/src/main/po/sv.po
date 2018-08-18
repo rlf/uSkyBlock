@@ -1243,6 +1243,12 @@ msgstr "§7Byter biome nära dig till {0}, vänligen vänta."
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr "§7Byter biome på din ö till {0}, vänligen vänta."
@@ -2462,6 +2468,32 @@ msgstr "§e§lKlicka här för att byta till detta biome."
 
 msgid "You cannot use this biome."
 msgstr "§c§lDu får inte använda detta biome."
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
+msgstr ""
 
 msgid "§7Current page"
 msgstr ""

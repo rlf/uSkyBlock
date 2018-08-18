@@ -1223,6 +1223,12 @@ msgstr ""
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr "§7Đang chuyển vùng thành §9{0}§7, hãy kiên nhẫn."
@@ -2420,6 +2426,32 @@ msgstr "§e§lNhấp để chuyển đến vùng này."
 
 msgid "You cannot use this biome."
 msgstr "Bạn không thể chuyền đến vùng này"
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
+msgstr ""
 
 msgid "§7Current page"
 msgstr "§7Trang hiện tại"

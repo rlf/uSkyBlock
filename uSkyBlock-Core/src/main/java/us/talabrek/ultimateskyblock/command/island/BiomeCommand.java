@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
@@ -103,9 +104,12 @@ public class BiomeCommand extends RequireIslandCommand {
                     maxP = new BlockVector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
                 }
                 player.sendMessage(tr("\u00a77The pixies are busy changing the biome near you to \u00a79{0}\u00a77, be patient.", biome));
-            } else if (args.length == 2) {
-                return false; // not a valid number
-            } else {
+            } else if (args.length == 2 && args[1].equalsIgnoreCase("chunk")) {
+                Chunk chunk = location.clone().getChunk();
+                minP = new BlockVector(chunk.getX() << 4, 0, chunk.getZ() << 4);
+                maxP = new BlockVector((chunk.getX() << 4) + 15, location.getWorld().getMaxHeight(), (chunk.getZ() << 4) + 15);
+                player.sendMessage(tr("\u00a77The pixies are busy changing the biome in your current chunk to \u00a79{0}\u00a77, be patient.", biome));
+            } else if (args.length < 2 || args[1].equalsIgnoreCase("all")) {
                 player.sendMessage(tr("\u00a77The pixies are busy changing the biome of your island to \u00a79{0}\u00a77, be patient.", biome));
             }
             Biome biomeEnum = BIOMES.get(biome);
@@ -113,18 +117,15 @@ public class BiomeCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7eInvalid biome {0} supplied!", biome));
                 return true;
             }
-            new SetBiomeTask(plugin, player.getWorld(), minP, maxP, biomeEnum, new Runnable() {
-                @Override
-                public void run() {
-                    if (args.length == 1) {
-                        island.setBiome(biome);
-                        player.sendMessage(tr("\u00a7aYou have changed your island''s biome to {0}", biome.toUpperCase()));
-                        island.sendMessageToIslandGroup(true, marktr("{0} changed the island biome to {1}"), player.getName(), biome.toUpperCase());
-                        plugin.getCooldownHandler().resetCooldown(player, "biome", Settings.general_biomeChange);
-                    } else {
-                        player.sendMessage(tr("\u00a7aYou have changed {0} blocks around you to the {1} biome", args[1], biome.toUpperCase()));
-                        island.sendMessageToIslandGroup(true, marktr("{0} created an area with {1} biome"), player.getName(), biome.toUpperCase());
-                    }
+            new SetBiomeTask(plugin, player.getWorld(), minP, maxP, biomeEnum, () -> {
+                if (args.length == 1) {
+                    island.setBiome(biome);
+                    player.sendMessage(tr("\u00a7aYou have changed your island''s biome to {0}", biome.toUpperCase()));
+                    island.sendMessageToIslandGroup(true, marktr("{0} changed the island biome to {1}"), player.getName(), biome.toUpperCase());
+                    plugin.getCooldownHandler().resetCooldown(player, "biome", Settings.general_biomeChange);
+                } else {
+                    player.sendMessage(tr("\u00a7aYou have changed {0} blocks around you to the {1} biome", args[1], biome.toUpperCase()));
+                    island.sendMessageToIslandGroup(true, marktr("{0} created an area with {1} biome"), player.getName(), biome.toUpperCase());
                 }
             }).runTask(plugin);
         }
