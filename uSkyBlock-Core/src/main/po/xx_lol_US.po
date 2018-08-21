@@ -337,6 +337,10 @@ msgid "complete all challenges in the rank"
 msgstr "complete all challenges in teh rank"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4Noe kitteh named {0} wuz found!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§4Challenge {0} haz already been completed"
 
@@ -347,10 +351,6 @@ msgstr "§eChallenge {0} haz been completed for {1}"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Noe challenge named {0} wuz found!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4Noe kitteh named {0} wuz found!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
@@ -1227,6 +1227,12 @@ msgstr ""
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
@@ -1707,6 +1713,9 @@ msgid "allows user to place [usb] signs"
 msgstr "allows user to place [usb] signs"
 
 msgid "§eYou can not use another island''s portals!"
+msgstr ""
+
+msgid "§eVillager-trading isn't allowed."
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -2480,6 +2489,32 @@ msgstr "§e§lClick to change to this baium."
 
 msgid "You cannot use this biome."
 msgstr "You cannot use this baium."
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
+msgstr ""
 
 msgid "§7Current page"
 msgstr "§7Current page"

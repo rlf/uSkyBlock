@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.api.model.BlockScore;
 import us.talabrek.ultimateskyblock.island.level.IslandScore;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +21,7 @@ public class BlockLimitLogic {
     private static final Logger log = Logger.getLogger(BlockLimitLogic.class.getName());
     private uSkyBlock plugin;
     private Map<Material, Integer> blockLimits = new HashMap<>();
-    // TODO: Rasmus - 13-07-2018: Persist this somehow - and use a guavacache
+    // TODO: R4zorax - 13-07-2018: Persist this somehow - and use a guavacache
     private Map<Location, Map<Material,Integer>> blockCounts = new HashMap<>();
 
     private final boolean limitsEnabled;
@@ -49,6 +50,10 @@ public class BlockLimitLogic {
         return blockLimits.getOrDefault(type, Integer.MAX_VALUE);
     }
 
+    public Map<Material,Integer> getLimits() {
+        return Collections.unmodifiableMap(blockLimits);
+    }
+
     public void updateBlockCount(Location islandLocation, IslandScore score) {
         if (!limitsEnabled) {
             return;
@@ -70,17 +75,25 @@ public class BlockLimitLogic {
         return countMap;
     }
 
-    public CanPlace canPlace(Material type, Location islandLocation) {
+    public int getCount(Material type, Location islandLocation) {
         if (!limitsEnabled || !blockLimits.containsKey(type)) {
-            return CanPlace.YES;
+            return -1;
         }
         Map<Material, Integer> islandCount = blockCounts.getOrDefault(islandLocation, null);
         if (islandCount == null) {
+            return -2;
+        }
+        return islandCount.getOrDefault(type, 0);
+    }
+
+    public CanPlace canPlace(Material type, Location islandLocation) {
+        int count = getCount(type, islandLocation);
+        if (count == -1) {
+            return CanPlace.YES;
+        } else if (count == -2) {
             return CanPlace.UNCERTAIN;
         }
-        int blockCount = islandCount.getOrDefault(type, 0);
-        int limit = blockLimits.getOrDefault(type, Integer.MAX_VALUE);
-        return blockCount < limit ? CanPlace.YES : CanPlace.NO;
+        return count < blockLimits.getOrDefault(type, Integer.MAX_VALUE) ? CanPlace.YES : CanPlace.NO;
     }
 
     public void incBlockCount(Location islandLocation, Material type) {

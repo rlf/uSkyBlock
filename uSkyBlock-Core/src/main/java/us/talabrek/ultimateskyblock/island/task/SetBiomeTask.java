@@ -10,7 +10,6 @@ import org.bukkit.block.Biome;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Iterator;

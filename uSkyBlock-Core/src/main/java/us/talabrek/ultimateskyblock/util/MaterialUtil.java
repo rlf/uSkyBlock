@@ -67,10 +67,14 @@ public enum MaterialUtil {
             Matcher m = MATERIAL_PROBABILITY.matcher(line);
             if (m.matches()) {
                 Material mat = Material.getMaterial(m.group("id"));
+                if (mat == null) {
+                    Bukkit.getLogger().log(Level.WARNING, "Unknown material: " + line);
+                    continue;
+                }
                 double p = m.group("prob") != null ? Double.parseDouble(m.group("prob")) : 1;
                 list.add(new MaterialProbability(mat, p));
             } else {
-                Bukkit.getLogger().log(Level.WARNING, "Misconfigured list of materials: " + line);
+                Bukkit.getLogger().log(Level.WARNING, "Unknown material: " + line);
             }
         }
         return list;

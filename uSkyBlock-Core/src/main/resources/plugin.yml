@@ -67,7 +67,7 @@ permissions:
 
   usb.social:
     description: The advanced social group for uSkyBlock usage (adds party and stuff)
-    default: false
+    default: true
     children:
       usb.island.ban: true
       usb.island.info.other: true
@@ -193,6 +193,7 @@ permissions:
       usb.exempt.cooldown.restart: true
 
   usb.island.*:
+    default: true
     children:
       usb.island.ban: true
       usb.island.challenges: true
@@ -229,6 +230,7 @@ permissions:
       usb.mod.topten: true
 
   usb.party.*:
+    default: true
     children:
       usb.party.info: true
       usb.party.invite: true

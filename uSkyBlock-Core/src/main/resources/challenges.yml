@@ -166,7 +166,7 @@ ranks:
         description: Harvest slices of melon from a farm.
         type: onPlayer
         requiredItems:
-        - MELON:128;+8
+        - MELON_SLICE:128;+8
         displayItem: MELON
         lockedDisplayItem: BROWN_STAINED_GLASS_PANE
         reward:
@@ -409,14 +409,17 @@ ranks:
           items:
           - CARROT:1
           - DIRT:4
+          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}RED_SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 50
           xp: 50
         repeatReward:
-          text: 1 baked potato
+          text: 4 dirt and a baked potato
           items:
+          - DIRT:4
           - BAKED_POTATO:1
+          - '{p=0.10}BEETROOT_SEEDS:1'
           - '{p=0.05}RED_SAND:1'
           - '{p=0.01}DIAMOND:1'
           currency: 25
@@ -482,11 +485,13 @@ ranks:
         displayItem: ROTTEN_FLESH
         lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, 4 iron ore, 1 flint
+          text: 4 redstone ore, 4 iron ore, beetroot-seeds and 1 flint
           items:
           - REDSTONE_ORE:4
           - IRON_ORE:4
           - FLINT:1
+          - '{p=0.10}POTATO:1'
+          - '{p=0.10}CARROT:1'
           currency: 30
           xp: 30
         repeatReward:
@@ -495,6 +500,8 @@ ranks:
           - REDSTONE_ORE:1
           - IRON_ORE:4
           - FLINT:1
+          - '{p=0.05}POTATO:1'
+          - '{p=0.05}CARROT:1'
           currency: 15
           xp: 15
       homeowner:
@@ -514,11 +521,12 @@ ranks:
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         displayItem: OAK_DOOR
         reward:
-          text: 4 redstone ore, 5 inksac, 4 iron ore
+          text: 4 redstone ore, 5 inksac, 4 iron ore and some seeds
           items:
           - REDSTONE_ORE:4
           - IRON_ORE:4
           - INK_SAC:5
+          - BEETROOT_SEEDS:1
           currency: 40
           xp: 40
       netherportal:
@@ -540,6 +548,34 @@ ranks:
           - IRON_PICKAXE:1
           currency: 40
           xp: 40
+      nethermining:
+        name: '&7Nether Mining'
+        description: Mine from your Nether island.
+        type: onPlayer
+        displayItem: NETHERRACK
+        lockedDisplayItem: GRAY_STAINED_GLASS_PANE
+        offset: -1
+        requiredItems:
+        - NETHERRACK:64;+2
+        - SOUL_SAND:16;+2
+        - GRAVEL:16;+2
+        - QUARTZ:32;+2
+        - GLOWSTONE:16;+2
+        - COARSE_DIRT:4;+2
+        reward:
+          text: 1 ghast tear, 1 magic bow
+          items:
+          - GHAST_TEAR:1
+          - 'BOW:1 {Enchantments:[{id:"minecraft:infinity",lvl:1},{id:"minecraft:unbreaking",lvl:3}]}'
+          currency: 40
+          xp: 40
+        repeatReward:
+          text: a blaze-rod and a chance of ghast tear
+          items:
+          - BLAZE_ROD:1
+          - '{p=0.10}GHAST_TEAR:1'
+          currency: 20
+          xp: 20
   Tier3:
     name: '&eExpert'
     displayItem: YELLOW_TERRACOTTA
@@ -569,6 +605,39 @@ ranks:
           - PIG_SPAWN_EGG:1
           currency: 30
           xp: 30
+      sawmill:
+        name: '&3Saw Mill'
+        description: Deliver a collection of processed wood
+        type: onPlayer
+        offset: -1
+        requiredChallenges:
+        - toolmaker
+        requiredItems:
+        - STRIPPED_OAK_LOG:8;+2
+        - STRIPPED_SPRUCE_LOG:8;+2
+        - STRIPPED_BIRCH_LOG:8;+2
+        - STRIPPED_JUNGLE_LOG:8;+2
+        - STRIPPED_ACACIA_LOG:8;+2
+        - STRIPPED_DARK_OAK_LOG:8;+2
+        displayItem: IRON_AXE
+        lockedDisplayItem: CYAN_STAINED_GLASS_PANE
+        reward:
+          text: 4 redstone ore, 4 iron, cocoa and a mule
+          items:
+          - COCOA_BEANS:1
+          - REDSTONE_ORE:4
+          - IRON_ORE:4
+          - MULE_SPAWN_EGG:1
+          currency: 30
+          xp: 30
+        repeatReward:
+          text: 1 redstone ore, 1 iron ore
+          items:
+          - REDSTONE_ORE:1
+          - IRON_ORE:1
+          - '{p=0.05}GOLD_ORE:1'
+          currency: 15
+          xp: 15
       torchmaker:
         name: '&3Torch Maker'
         description: Make 128 torches.
@@ -610,25 +679,26 @@ ranks:
         - sugarfarmer
         - shroompicker
         requiredItems:
-        - MELON:256;+2
-        - SUGAR:128;+2
+        - MELON_SLICE:256;+2
+        - SUGAR_CANE:128;+2
         - WHEAT:128;+2
         - POTATO:128;+2
         - CARROT:128;+2
         - PUMPKIN:128;+2
         - CACTUS:128;+2
+        - BEETROOT:128;+2
         reward:
-          text: a bucket, cocoa and some animals
+          text: a bucket, cocoa and a cow
           items:
           - BUCKET:1
-          - INK_SAC:1
+          - COCOA_BEANS:1
           - COW_SPAWN_EGG:1
           currency: 50
           xp: 50
         repeatReward:
-          text: 1 bucket
+          text: a cow
           items:
-          - BUCKET:1
+          - COW_SPAWN_EGG:1
           currency: 25
           xp: 25
       fisherman:
@@ -639,24 +709,26 @@ ranks:
         - COD:5;+1
         - SALMON:5;+1
         - PUFFERFISH:3;+1
-        - TROPICAL_FISH:1;+1
-        - INK_SAC:5;+5
+        - TROPICAL_FISH:1;+0
+        - INK_SAC:5;+2
         displayItem: COD
         lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
         reward:
-          text: 10 lapis blocks, 20 prismarine, deep-ocean
+          text: 10 lapis blocks, 20 prismarine, kelp, deep-ocean
           items:
           - LAPIS_BLOCK:10
           - PRISMARINE:20
+          - KELP:1
           - '{p=0.20}PRISMARINE_CRYSTALS:5'
           permission: usb.biome.deep_ocean
           currency: 50
           xp: 50
         repeatReward:
-          text: 2 lapis, 5 prismarine, chance at prismarine crystals
+          text: 2 lapis, 5 prismarine, kelp and a chance at prismarine crystals
           items:
           - INK_SAC:2
           - PRISMARINE:5
+          - KELP:1
           - '{p=0.20}PRISMARINE_CRYSTALS:5'
           currency: 25
           xp: 25
@@ -669,29 +741,26 @@ ranks:
         requiredChallenges:
         - monsterfarmer
         requiredItems:
-        - WHITE_WOOL:8;+2
-        - ORANGE_WOOL:8;+2
-        - MAGENTA_WOOL:8;+2
-        - LIGHT_BLUE_WOOL:8;+2
-        - YELLOW_WOOL:8;+2
-        - LIME_WOOL:8;+2
-        - PINK_WOOL:8;+2
-        - GRAY_WOOL:8;+2
-        - LIGHT_GRAY_WOOL:8;+2
-        - CYAN_WOOL:8;+2
-        - PURPLE_WOOL:8;+2
-        - BLUE_WOOL:8;+2
-        - BROWN_WOOL:8;+2
-        - GREEN_WOOL:8;+2
-        - RED_WOOL:8;+2
-        - BLACK_WOOL:8;+2
+        - WHITE_WOOL:2;+4
+        - ORANGE_WOOL:2;+4
+        - MAGENTA_WOOL:2;+4
+        - LIGHT_BLUE_WOOL:2;+4
+        - YELLOW_WOOL:2;+4
+        - LIME_WOOL:2;+4
+        - PINK_WOOL:2;+4
+        - GRAY_WOOL:2;+4
+        - LIGHT_GRAY_WOOL:2;+4
+        - CYAN_WOOL:2;+4
+        - PURPLE_WOOL:2;+4
+        - BLUE_WOOL:2;+4
+        - BROWN_WOOL:2;+4
+        - GREEN_WOOL:2;+4
+        - RED_WOOL:2;+4
+        - BLACK_WOOL:2;+4
         reward:
           text: 2 diamonds, sheep, emerald, flowers
           items:
           - DIAMOND:2
-          - MUSIC_DISC_MELLOHI:1
-          - MUSIC_DISC_STAL:1
-          - MUSIC_DISC_STRAD:1
           - EMERALD:1
           - SHEEP_SPAWN_EGG:1
           - ROSE_BUSH:1
@@ -702,11 +771,8 @@ ranks:
         repeatReward:
           text: emerald, sheep, flowers
           items:
-          - '{p=0.3}MUSIC_DISC_MELLOHI:1'
-          - '{p=0.3}MUSIC_DISC_STAL:1'
-          - '{p=0.3}MUSIC_DISC_STRAD:1'
           - EMERALD:1
-          - PIG_SPAWN_EGG:1 {EntityTag:{id:"Sheep"}}
+          - SHEEP_SPAWN_EGG:1
           - ROSE_BUSH:1
           - PEONY:1
           currency: 35
@@ -769,32 +835,29 @@ ranks:
           - DIAMOND_BLOCK:1
           currency: 500
           xp: 400
-      netherrack:
-        name: '&7Nether Mining'
-        description: Mine from your Nether island.
-        type: onPlayer
-        displayItem: NETHERRACK
-        lockedDisplayItem: GRAY_STAINED_GLASS_PANE
+      netherfortress:
+        name: '&9Nether Fortress'
+        description: Build a netherfortress.
+        type: onIsland
+        radius: 50
         requiredItems:
-        - NETHERRACK:64;+2
-        - SOUL_SAND:16;+2
-        - GRAVEL:32;+2
-        - QUARTZ:32;+2
-        - GLOWSTONE:16;+2
+        - NETHER_BRICKS:512
+        - NETHER_BRICK_SLAB:64
+        - NETHER_BRICK_FENCE:64
+        - NETHER_BRICK_STAIRS:64
+        - SOUL_SAND:32
+        displayItem: NETHER_BRICK_FENCE
+        lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         reward:
-          text: 1 ghast tear, 1 magic bow
+          text: a wither-skull and a blaze rod and a chance of diamonds
           items:
-          - GHAST_TEAR:1
-          - BOW:1 {ench:[{id:51,lvl:1},{id:34,lvl:3}]}
+          - WITHER_SKELETON_SKULL:1
+          - BLAZE_ROD:1
+          - '{p=0.05}DIAMOND:3'
+          - '{p=0.10}DIAMOND:2'
+          - '{p=0.15}DIAMOND:1'
           currency: 40
           xp: 40
-        repeatReward:
-          text: 32 arrows
-          items:
-          - ARROW:32
-          currency: 20
-          xp: 20
-
   #===============================================
   Tier4:
     name: '&cMaster'
@@ -870,19 +933,21 @@ ranks:
         displayItem: CRAFTING_TABLE
         lockedDisplayItem: CYAN_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, jukebox, 4 iron ore
+          text: a parrot and a jukebox with some redstone and iron
           items:
+          - PARROT_SPAWN_EGG:1
+          - JUKEBOX:1
           - REDSTONE_ORE:4
           - IRON_ORE:4
-          - JUKEBOX:1
           currency: 30
           xp: 30
         repeatReward:
-          text: 1 redstone ore, 1 iron ore
+          text: redstone, iron and a slim chance at a parrot
           items:
           - REDSTONE_ORE:1
           - IRON_ORE:1
           - '{p=0.25}JUKEBOX:1'
+          - '{p=0.05}PARROT_SPAWN_EGG:1'
           currency: 15
           xp: 15
       cookielover:
@@ -897,21 +962,58 @@ ranks:
         displayItem: COOKIE
         lockedDisplayItem: YELLOW_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, 1 diamond
+          text: 4 redstone ore, clay a bucket and a diamond
           items:
           - REDSTONE_ORE:4
+          - CLAY:5
           - DIAMOND:1
+          - BUCKET:1
           currency: 80
           xp: 80
         repeatReward:
-          text: 1 iron ore, 5 clay
+          text: iron ore and some clay
           items:
           - IRON_ORE:1
           - CLAY:5
+          - BUCKET:1
           - '{p=0.4}CLAY:3'
           - '{p=0.3}IRON_ORE:2'
           currency: 40
           xp: 40
+      deepseafisherman:
+        name: '&5Deep Sea Fishing'
+        description: Farm the deep sea
+        type: onPlayer
+        requiredItems:
+        - COD:10;+5
+        - SALMON:10;+5
+        - PUFFERFISH:5;+3
+        - TROPICAL_FISH:3;+2
+        - PRISMARINE_CRYSTALS:16;+8
+        - PRISMARINE_SHARD:16;+8
+        - DRIED_KELP_BLOCK:64;+32
+        - NAUTILUS_SHELL:1
+        displayItem: HEART_OF_THE_SEA
+        lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
+        reward:
+          text: heart-of-the-sea, nautilus shell and a turtle
+          items:
+          - NAUTILUS_SHELL:1
+          - HEART_OF_THE_SEA:1
+          - TURTLE_SPAWN_EGG:1
+          - '{p=0.1}NAUTILUS_SHELL:1'
+          permission: usb.biome.deep_ocean
+          currency: 50
+          xp: 50
+        repeatReward:
+          text: nautilus shell, turtle and a chance of a heart
+          items:
+          - NAUTILUS_SHELL:1
+          - TURTLE_SPAWN_EGG:1
+          - '{p=0.05}HEART_OF_THE_SEA:1'
+          - '{p=0.1}NAUTILUS_SHELL:1'
+          currency: 25
+          xp: 25
       horsingaround:
         name: '&6Horsing Around'
         description: Get hay bales for the horses.
@@ -1013,25 +1115,6 @@ ranks:
           - '{p=0.05}DIAMOND_HORSE_ARMOR:1'
           currency: 25
           xp: 25
-      netherfortress:
-        name: '&9Nether Fortress'
-        description: Build a netherfortress.
-        type: onIsland
-        radius: 50
-        requiredItems:
-        - NETHER_BRICK:512
-        - NETHER_BRICK_SLAB:64
-        - NETHER_BRICK_FENCE:64
-        - NETHER_BRICK_STAIRS:64
-        displayItem: NETHER_BRICK_FENCE
-        lockedDisplayItem: BLUE_STAINED_GLASS_PANE
-        reward:
-          text: enchantment table, brewing stand
-          items:
-          - ENCHANTING_TABLE:1
-          - BREWING_STAND:1
-          currency: 40
-          xp: 40
       witherhunter:
         name: '&5Wither Hunter'
         description: Collect some Wither Skeleton skulls.
@@ -1111,19 +1194,18 @@ ranks:
         displayItem: REDSTONE
         lockedDisplayItem: CYAN_STAINED_GLASS_PANE
         reward:
-          text: 8 redstone blocks, 8 noteblocks and 4 tripwire hooks, 1 emerald
+          text: snow, ice and packed ice
           items:
-          - REDSTONE_BLOCK:8
-          - NOTE_BLOCK:8
-          - TRIPWIRE_HOOK:4
-          - EMERALD:1
+          - SNOW_BLOCK:4
+          - ICE:8
+          - PACKED_ICE:8
+          - REDSTONE_BLOCK:64
           currency: 70
           xp: 70
         repeatReward:
-          text: 1 redstone block and 1 tripwire hook
+          text: a stack of redstone blocks
           items:
-          - REDSTONE_BLOCK:1
-          - TRIPWIRE_HOOK:1
+          - REDSTONE_BLOCK:64
           currency: 35
           xp: 35
       emeraldcollector:
@@ -1236,29 +1318,26 @@ ranks:
           items:
           - END_PORTAL_FRAME:3
           - DIAMOND:3
-          - BOW:1 {ench:[{id:51,lvl:1},{id:34,lvl:3},{id:48,lvl:5}]}
+          - BOW:1 {Enchantments:[{id:"minecraft:infinity",lvl:1},{id:"minecraft:unbreaking",lvl:3},{id:"minecraft:power",lvl:5}]}
           currency: 1000
           xp: 500
-      hanginggardens:
-        name: '&9Hanging Gardens'
-        description: Build the hanging gardens
+      poseidonshalls:
+        name: '&9Poseidon''s Halls'
+        description: Build the halls of Poseidon
         type: onIsland
         radius: 50
         displayItem: PRISMARINE
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
+        requiredChallenges:
+        - deepseafisherman
         requiredItems:
         - PRISMARINE:512
-        - PRISMARINE:64
-        - PRISMARINE:128
+        - PRISMARINE_BRICKS:128
+        - DARK_PRISMARINE:64
         - SEA_LANTERN:32
-        - OAK_LEAVES:16
-        - SPRUCE_LEAVES:16
-        - BIRCH_LEAVES:16
-        - JUNGLE_LEAVES:16
-        - ACACIA_LEAVES:16
-        - DARK_OAK_LEAVES:16
+        - CONDUIT:1
         - FLOWER_POT:16
-        - VINE:256
+        - VINE:128
         - POPPY:10
         - BLUE_ORCHID:10
         - ALLIUM:10
@@ -1299,11 +1378,9 @@ ranks:
         - IRON_BLOCK:49
         reward:
           items:
-          - PACKED_ICE:16
-          - SNOW_BLOCK:4
           - END_PORTAL_FRAME:3
-          - DIAMOND_SWORD:1 {ench:[{id:16,lvl:5},{id:34,lvl:3},{id:70,lvl:1}]}
-          text: packed ice, snow and some portal-pieces
+          - DIAMOND_SWORD:1 {Enchantments:[{id:"minecraft:sharpness",lvl:5},{id:"minecraft:unbreaking",lvl:3},{id:"minecraft:fire",lvl:1}]}
+          text: some end-portal-pieces and a magic diamond sword
           currency: 4000
           xp: 1000
       endportal:
@@ -1316,7 +1393,7 @@ ranks:
         requiredChallenges:
         - beaconator
         - tajmahal
-        - hanginggardens
+        - poseidonshalls
         - greatpyramid
         requiredItems:
         - END_PORTAL_FRAME:12
@@ -1325,7 +1402,7 @@ ranks:
           text: 5 dia and some nice boots
           items:
           - DIAMOND:5
-          - DIAMOND_BOOTS:1 {ench:[{id:2,lvl:4},{id:0,lvl:4},{id:3,lvl:4}]}
+          - DIAMOND_BOOTS:1 {Enchantments:[{id:"minecraft:feather_falling",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:blast_protection",lvl:4}]}
           currency: 4000
           xp: 1000
 
@@ -1687,4 +1764,4 @@ ranks:
 # All commented settings (#) in the above challenges (not the explanation) can be removed to clean up the challenges.yml.
 #
 # DO NOT CHANGE!
-version: 101
+version: 104

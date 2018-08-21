@@ -391,10 +391,14 @@ public class WorldGuardHandler {
         return creatures;
     }
 
-    private static Vector asVector(Location location) {
+    public static Vector asVector(Location location) {
         if (location == null) {
             return new Vector(0, 0, 0);
         }
         return toVector(location);
+    }
+
+    public static boolean isInRegion(ProtectedCuboidRegion islandRegion, Location loc) {
+        return islandRegion.contains(asVector(loc));
     }
 }

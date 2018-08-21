@@ -109,8 +109,7 @@ public class SignEvents implements Listener {
                 || e.getPlayer().getLocation() == null
                 || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
                 || e.getInventory().getType() != InventoryType.CHEST
-                )
-        {
+                ) {
             return;
         }
         Location loc = e.getInventory().getLocation();
@@ -140,11 +139,10 @@ public class SignEvents implements Listener {
         return material == Material.WALL_SIGN || material == Material.SIGN;
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockHit(PlayerInteractEvent e) {
         Player player = e.getPlayer();
-        if (e.isCancelled()
-                || e.getPlayer() == null
+        if (e.getPlayer() == null
                 || e.getClickedBlock() == null
                 || e.getAction() != Action.RIGHT_CLICK_BLOCK
                 || e.getPlayer().getGameMode() != GameMode.SURVIVAL

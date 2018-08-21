@@ -338,6 +338,10 @@ msgid "complete all challenges in the rank"
 msgstr "이 랭크의 모든 도전과제를 완료하였습니다"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§4도전과제 {0}는 이미 완료되었습니다"
 
@@ -348,10 +352,6 @@ msgstr "§e도전과제: {0}이 {1}를 완료했습니다"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4{0}란 이름의 도전과제를 찾지 못했습니다!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4{0}란 이름의 플레이어를 찾지 못했습니다!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
@@ -1230,6 +1230,12 @@ msgstr ""
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
@@ -1714,6 +1720,9 @@ msgid "allows user to place [usb] signs"
 msgstr "해당유저가 [usb] signs를 설치하는 것을 허용합니다."
 
 msgid "§eYou can not use another island''s portals!"
+msgstr ""
+
+msgid "§eVillager-trading isn't allowed."
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -2462,6 +2471,32 @@ msgstr "§e§l이 생태계를 바꾸려면 클릭하세요."
 
 msgid "You cannot use this biome."
 msgstr "당신은 이 생태계를 쓸 수 없습니다."
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
+msgstr ""
 
 msgid "§7Current page"
 msgstr "현재 페이지"

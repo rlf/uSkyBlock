@@ -3,11 +3,10 @@ package us.talabrek.ultimateskyblock.handler.task;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.world.block.BlockType;
+import com.sk89q.worldedit.world.block.BlockTypes;
 import org.bukkit.World;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
@@ -28,7 +27,6 @@ public class WorldEditClear extends IncrementalRunnable {
     private static final int INCREMENT = 2;
     private final World world;
     private final List<Region> regions;
-    private final BaseBlock AIR = new BaseBlock(new BlockType("air"));
 
     public WorldEditClear(uSkyBlock plugin, World world, Set<Region> borderRegions, Runnable onCompletion) {
         super(plugin, onCompletion);
@@ -78,7 +76,7 @@ public class WorldEditClear extends IncrementalRunnable {
             editSession.enableQueue();
             editSession.setFastMode(true);
             try {
-                editSession.setBlocks(region, AIR);
+                editSession.setBlocks(region, BlockTypes.AIR.getDefaultState());
             } catch (MaxChangedBlocksException e) {
                 log.log(Level.INFO, "Warning: we got MaxChangedBlocks from WE, please increase it!");
             }

@@ -33,7 +33,7 @@ public class AweLevelLogic extends CommonLevelLogic {
 
             EditSession editSession = AsyncWorldEditHandler.getAWEAdaptor().createEditSession(new BukkitWorld(l.getWorld()), -1);
             List<Countable<BaseBlock>> distribution = editSession.getBlockDistributionWithData(WorldEditHandler.getRegion(plugin.getWorld(), region));
-            // TODO: Rasmus - 19-07-2018: fix this for 1.13 - once AWE has Material instead of ID for block-distribution
+            // TODO: R4zorax - 19-07-2018: fix this for 1.13 - once AWE has Material instead of ID for block-distribution
             distribution.forEach((a) -> counts.add(Material.getMaterial(a.getID().getType()), (byte) (a.getID().getData()&0xff),a.getAmount()));
 
             IslandScore islandScore = createIslandScore(counts);

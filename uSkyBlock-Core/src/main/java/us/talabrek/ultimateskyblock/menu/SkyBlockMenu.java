@@ -20,6 +20,7 @@ import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.PlayerUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -276,7 +277,7 @@ public class SkyBlockMenu {
 
     public Inventory displayBiomeGUI(final Player player) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79" + tr("Island Biome"));
+        Inventory menu = Bukkit.createInventory(null, 27, "\u00a79" + tr("Island Biome"));
         ItemMeta meta4 = sign.getItemMeta();
         meta4.setDisplayName("\u00a7h" + tr("Island Biome"));
         addLore(lores, tr("\u00a7eClick here to return to\n\u00a7ethe main island screen."));
@@ -309,7 +310,63 @@ public class SkyBlockMenu {
             menu.addItem(menuItem);
             lores.clear();
         }
+
+        updateBiomeRadius(player, menu);
+
+
         return menu;
+    }
+
+    private void updateBiomeRadius(Player player, Inventory menu) {
+        String radius = PlayerUtil.getMetadata(player, "biome.radius", "chunk");
+        String radiusDisplay;
+        switch (radius) {
+            case "chunk": radiusDisplay = tr("\u00a72chunk");
+                break;
+            case "all":
+                radiusDisplay = tr("\u00a7call");
+                break;
+            default:
+                radiusDisplay = tr("\u00a7e{0}", radius);
+        }
+
+        List<String> lores = new ArrayList<>();
+        ItemStack menuItem = new ItemStack(Material.RED_CARPET);
+        ItemMeta itemMeta = menuItem.getItemMeta();
+        itemMeta.setDisplayName(tr("\u00a7c-"));
+        lores.add(tr("Decrease radius of biome-change"));
+        lores.add(tr(tr("Current radius: {0}", radiusDisplay)));
+        itemMeta.setLore(lores);
+        menuItem.setItemMeta(itemMeta);
+        menu.setItem(21, menuItem);
+
+        lores.clear();
+        menuItem = new ItemStack(Material.GRASS_BLOCK);
+        if (radius.matches("[0-9]+")) {
+            int radiusInt = Integer.parseInt(radius, 10);
+            if (radiusInt <= menuItem.getType().getMaxStackSize()) {
+                menuItem.setAmount(radiusInt);
+            } else {
+                menuItem.setAmount(1);
+            }
+        } else {
+            menuItem.setAmount(1);
+        }
+        itemMeta = menuItem.getItemMeta();
+        itemMeta.setDisplayName(tr("Current radius: {0}", radiusDisplay));
+        itemMeta.setLore(lores);
+        menuItem.setItemMeta(itemMeta);
+        menu.setItem(22, menuItem);
+
+        lores.clear();
+        menuItem = new ItemStack(Material.GREEN_CARPET);
+        itemMeta = menuItem.getItemMeta();
+        itemMeta.setDisplayName(tr("\u00a72+"));
+        lores.add(tr("Increase radius of biome-change"));
+        lores.add(tr(tr("Current radius: {0}", radiusDisplay)));
+        itemMeta.setLore(lores);
+        menuItem.setItemMeta(itemMeta);
+        menu.setItem(23, menuItem);
     }
 
     private void addExtraMenus(Player player, Inventory menu) {
@@ -402,11 +459,11 @@ public class SkyBlockMenu {
         return false;
     }
 
-    public Inventory displayChallengeGUI(final Player player, int page) {
+    public Inventory displayChallengeGUI(final Player player, int page, String playerName) {
         int total = challengeLogic.getTotalPages();
         Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + pre("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
-        final PlayerInfo pi = plugin.getPlayerInfo(player);
-        challengeLogic.populateChallengeRank(menu, pi, page);
+        final PlayerInfo pi = playerName == null ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(playerName);
+        challengeLogic.populateChallengeRank(menu, pi, page, playerName != null && player.hasPermission("usb.mod.bypassrestriction"));
         int pages[] = new int[9];
         pages[0] = 1;
         pages[8] = total;
@@ -430,7 +487,10 @@ public class SkyBlockMenu {
                     pageItem = ItemStackUtil.createItemStack("BOOK", tr("\u00a77Page {0}", p), null);
                 }
                 if (i == 0) {
-                    pageItem = ItemStackUtil.builder(pageItem).displayName(tr("\u00a77First Page")).build();
+                    pageItem = ItemStackUtil.builder(pageItem)
+                            .displayName(tr("\u00a77First Page"))
+                            .lore(playerName != null ? playerName : "")
+                            .build();
                 } else if (i == 8) {
                     pageItem = ItemStackUtil.builder(pageItem).displayName(tr("\u00a77Last Page")).build();
                 }
@@ -967,13 +1027,21 @@ public class SkyBlockMenu {
             page = Integer.parseInt(m.group("p"));
             max = Integer.parseInt(m.group("max"));
         }
+        ItemStack item = event.getInventory().getItem(event.getInventory().getSize() - 9);
+        String playerName = item != null && item.hasItemMeta() && item.getItemMeta().getLore() != null
+                && item.getItemMeta().getLore().size() > 0
+                ? item.getItemMeta().getLore().get(0)
+                : null;
+        if (playerName != null && playerName.trim().isEmpty()) {
+            playerName = null;
+        }
         // Last row is pagination
         if (slotIndex >= CHALLENGE_PAGESIZE && slotIndex < CHALLENGE_PAGESIZE + COLS_PER_ROW
                 && currentItem != null && currentItem.getType() != Material.AIR)
         {
             // Pagination
             p.closeInventory();
-            p.openInventory(displayChallengeGUI(p, currentItem.getAmount()));
+            p.openInventory(displayChallengeGUI(p, currentItem.getAmount(), playerName));
             return;
         }
         // If in action bar or anywhere else, just bail out
@@ -987,17 +1055,17 @@ public class SkyBlockMenu {
                 String challengeName = stripFormatting(challenge);
                 p.performCommand("c c " + challengeName);
             }
-            p.openInventory(displayChallengeGUI(p, page));
+            p.openInventory(displayChallengeGUI(p, page, playerName));
         } else {
             p.closeInventory();
             if (slotIndex < (CHALLENGE_PAGESIZE/2)) { // Upper half
                 if (page > 1) {
-                    p.openInventory(displayChallengeGUI(p, page - 1));
+                    p.openInventory(displayChallengeGUI(p, page - 1, playerName));
                 } else {
                     p.performCommand("island");
                 }
             } else if (page < max) {
-                p.openInventory(displayChallengeGUI(p, page + 1));
+                p.openInventory(displayChallengeGUI(p, page + 1, playerName));
             } else {
                 p.performCommand("island");
             }
@@ -1019,11 +1087,30 @@ public class SkyBlockMenu {
             p.performCommand("island");
             return;
         }
+        if (slotIndex >= 21 && slotIndex <= 23) {
+            List<String> radii = Arrays.asList("10", "chunk", "20", "30", "40", "50", "60", "70", "80", "90", "100", "all");
+            String radius = PlayerUtil.getMetadata(p, "biome.radius", "chunk");
+            int ix = radii.indexOf(radius);
+            if (ix == -1) {
+                ix = 1;
+            }
+            if (currentItem.getType() == Material.RED_CARPET && ix > 0) {
+                ix--;
+            } else if (currentItem.getType() == Material.GREEN_CARPET && ix < radii.size()-1) {
+                ix++;
+            }
+            radius = radii.get(ix);
+            PlayerUtil.setMetadata(p, "biome.radius", radius);
+            updateBiomeRadius(p, event.getInventory());
+            event.setCancelled(true);
+            return;
+        }
         for (BiomeMenuItem biomeMenu : biomeMenus) {
             ItemStack menuIcon = biomeMenu.getIcon();
             if (currentItem.getType() == menuIcon.getType() && currentItem.getDurability() == menuIcon.getDurability()) {
+                String radius = PlayerUtil.getMetadata(p, "biome.radius", "chunk");
                 p.closeInventory();
-                p.performCommand("island biome " + biomeMenu.getId());
+                p.performCommand("island biome " + biomeMenu.getId() + " " + radius);
                 return;
             }
         }

@@ -13,7 +13,7 @@ options:
     cooldownRestart: 30
 
     # [integer] The time in seconds before a player can use the /island biome command again.
-    biomeChange: 180
+    biomeChange: 60
 
     # [string] The default biome assigned to new islands
     defaultBiome: OCEAN
@@ -50,7 +50,7 @@ options:
     # default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign.
     chestItems:
     - ICE:2
-    - MELON:1
+    - MELON_SLICE:1
     - CACTUS:1
     - LAVA_BUCKET:1
     - RED_MUSHROOM:1
@@ -130,6 +130,10 @@ options:
 
     # Whether or not portalling to the nether roof should be blocked.
     nether-roof: true
+
+    # Whether or not anyone can trade i skyblock
+    # default: false - since it goes against the core of skyblock
+    villager-trading-enabled: false
 
     # Generally protections against griefers
     # If the flag is true, it generally means the protection is active
@@ -351,32 +355,32 @@ nether:
   # The probability of forming blocks
   terraform:
     NETHERRACK:
-    - '{p=0.7}NETHERRACK'
+    - '{p=0.30}NETHERRACK'
     - '{p=0.15}NETHERRACK'
-    - '{p=0.05}QUARTZ_ORE'
+    - '{p=0.05}NETHER_QUARTZ_ORE'
     - '{p=0.05}SOUL_SAND'
-    QUARTZ_ORE:
-    - '{p=0.50}QUARTZ_ORE'
-    - '{p=0.10}QUARTZ_ORE'
+    NETHER_QUARTZ_ORE:
+    - '{p=0.30}NETHER_QUARTZ_ORE'
+    - '{p=0.10}NETHER_QUARTZ_ORE'
     SOUL_SAND:
-    - '{p=0.70}SOUL_SAND'
-    - '{p=0.10}SOUL_SAND'
+    - '{p=0.25}SOUL_SAND'
+    - '{p=0.07}SOUL_SAND'
     - '{p=0.05}GRAVEL'
     GRAVEL:
     - '{p=0.15}GRAVEL'
     - '{p=0.05}GRAVEL'
     - '{p=0.05}SOUL_SAND'
     GLOWSTONE:
-    - '{p=0.85}GLOWSTONE'
+    - '{p=0.80}GLOWSTONE'
     - '{p=0.15}GLOWSTONE'
 
   # Weights that is applied to the above terraform chances depending on the tool used
   terraform-weight:
-    WOOD: 1.1
+    WOOD: 0
     STONE: 1.0
     IRON: 0.9
-    GOLD: 0
-    DIAMOND: 0.5
+    GOLD: 1.5
+    DIAMOND: 0.2
 
   # The chances of changing a pigzombie when spawned on a netherbrick
   spawn-chances:
@@ -416,7 +420,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 102
+version: 103
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

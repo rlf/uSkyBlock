@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Bukkit;
@@ -25,11 +24,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.CodeSource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -124,7 +123,7 @@ public class IslandGenerator {
     }
 
     private File getSchematicFile(String cSchem) {
-        List<String> extensions = ClipboardFormats.getAll().stream().flatMap(f -> f.getFileExtensions().stream()).distinct().collect(Collectors.toList());
+        List<String> extensions = Arrays.asList("schematic", "schem");
         return extensions.stream().map(f -> new File(directorySchematics, cSchem + "." + f)).filter(f -> f.exists() && f.canRead())
                 .findFirst().orElse(null);
     }

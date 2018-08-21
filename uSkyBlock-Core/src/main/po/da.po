@@ -343,6 +343,10 @@ msgid "complete all challenges in the rank"
 msgstr "gennemfør alle udfordringerne i kategorien"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4Ingen spiller med navn {0} fundet!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§4Udfordringen {0} er allerede blevet gennemført"
 
@@ -353,10 +357,6 @@ msgstr "§eUdfordring {0} er blevet gennemført af {1}"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Ingen udfordringer med navn {0} fundet!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4Ingen spiller med navn {0} fundet!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
@@ -1233,6 +1233,12 @@ msgstr ""
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
@@ -1712,6 +1718,9 @@ msgid "allows user to place [usb] signs"
 msgstr "tillader brugere at placere [usb] skilte"
 
 msgid "§eYou can not use another island''s portals!"
+msgstr ""
+
+msgid "§eVillager-trading isn't allowed."
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -2468,6 +2477,32 @@ msgstr "§e§lKlik for at ændre biomen."
 
 msgid "You cannot use this biome."
 msgstr "Du kan ikke bruge denne biome."
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
+msgstr ""
 
 msgid "§7Current page"
 msgstr "§7Denne side"
