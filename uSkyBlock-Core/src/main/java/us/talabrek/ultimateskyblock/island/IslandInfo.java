@@ -3,12 +3,12 @@ package us.talabrek.ultimateskyblock.island;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.api.model.IslandScore;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -22,7 +22,15 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -200,6 +208,17 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                 section.set("maxGolems", perk.getGolems());
                 dirty = true;
             }
+            if (section.isConfigurationSection("maxBlocks")) {
+                dirty = true;
+                Map<Material, Integer> blockLimits = perk.getBlockLimits();
+                section.set("blockLimits ", null);
+                if (!blockLimits.isEmpty()) {
+                    ConfigurationSection maxBlocks = section.createSection("blockLimits");
+                    for (Map.Entry<Material,Integer> limit : blockLimits.entrySet()) {
+                        maxBlocks.set(limit.getKey().name(), limit.getValue());
+                    }
+                }
+            }
         }
         if (dirty) {
             save();
@@ -258,6 +277,33 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     @Override
     public int getMaxGolems() {
         return getMaxPartyIntValue("maxGolems", uSkyBlock.getInstance().getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getGolems());
+    }
+
+    @Override
+    public Map<Material, Integer> getBlockLimits() {
+        Map<Material, Integer> blockLimitMap = new HashMap<>();
+        ConfigurationSection membersSection = config.getConfigurationSection("party.members");
+        if (membersSection != null) {
+            for (String memberName : membersSection.getKeys(false)) {
+                ConfigurationSection memberSection = membersSection.getConfigurationSection(memberName);
+                if (memberSection != null) {
+                    if (memberSection.isConfigurationSection("blockLimits")) {
+                        ConfigurationSection blockLimits = memberSection.getConfigurationSection("blockLimits");
+                        for (String material : blockLimits.getKeys(false)) {
+                            Material type = Material.matchMaterial(material);
+                            if (type != null) {
+                                blockLimitMap.computeIfAbsent(type, (k) -> {
+                                    int memberMax = blockLimits.getInt(material, 0);
+                                    return blockLimitMap.compute(type, (key, oldValue) ->
+                                            oldValue != null && memberMax > 0 ? Math.max(memberMax, oldValue) : null);
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return blockLimitMap;
     }
 
     private int getMaxPartyIntValue(String name, int defaultValue) {

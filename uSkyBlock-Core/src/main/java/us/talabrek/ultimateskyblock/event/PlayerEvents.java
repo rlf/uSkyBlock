@@ -295,7 +295,7 @@ public class PlayerEvents implements Listener {
             return;
         }
         Material type = event.getBlock().getType();
-        BlockLimitLogic.CanPlace canPlace = plugin.getBlockLimitLogic().canPlace(type, islandInfo.getIslandLocation());
+        BlockLimitLogic.CanPlace canPlace = plugin.getBlockLimitLogic().canPlace(type, islandInfo);
         if (canPlace == BlockLimitLogic.CanPlace.UNCERTAIN) {
             event.setCancelled(true);
             final String key = "usb.block-limits";

@@ -8,7 +8,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Squid;
+import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.Wither;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -28,6 +28,7 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
@@ -92,11 +93,9 @@ public class SpawnEvents implements Listener {
             return; // Allow it, the above method would have blocked it if it should be blocked.
         }
         checkLimits(event, event.getEntity().getType(), event.getLocation());
-        if (!event.isCancelled() && event.getEntity() instanceof Squid) {
+        if (!event.isCancelled() && event.getEntity() instanceof WaterMob) {
             Location loc = event.getLocation();
-            int z = loc.getBlockZ();
-            int x = loc.getBlockX();
-            if (loc.getWorld().getBiome(x, z) == Biome.DEEP_OCEAN && LocationUtil.findRoofBlock(loc).getType() == Material.PRISMARINE) {
+            if (isDeepOceanBiome(loc) && isPrismarineRoof(loc)) {
                 loc.getWorld().spawnEntity(loc, EntityType.GUARDIAN);
                 event.setCancelled(true);
             }
@@ -108,6 +107,16 @@ public class SpawnEvents implements Listener {
                 event.getEntity().setMetadata("fromIsland", new FixedMetadataValue(plugin, islandInfo.getName()));
             }
         }
+    }
+
+    private boolean isPrismarineRoof(Location loc) {
+        List<Material> prismarineBlocks = Arrays.asList(Material.PRISMARINE, Material.PRISMARINE_BRICKS, Material.DARK_PRISMARINE);
+        return prismarineBlocks.contains(LocationUtil.findRoofBlock(loc).getType());
+    }
+
+    private boolean isDeepOceanBiome(Location loc) {
+        List<Biome> deepOceans = Arrays.asList(Biome.DEEP_OCEAN, Biome.DEEP_COLD_OCEAN, Biome.DEEP_FROZEN_OCEAN, Biome.DEEP_LUKEWARM_OCEAN, Biome.DEEP_WARM_OCEAN);
+        return deepOceans.contains(loc.getWorld().getBiome(loc.getBlockX(), loc.getBlockZ()));
     }
 
     private void checkLimits(Cancellable event, EntityType entityType, Location location) {

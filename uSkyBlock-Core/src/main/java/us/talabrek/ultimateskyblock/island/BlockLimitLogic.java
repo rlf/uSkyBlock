@@ -86,8 +86,8 @@ public class BlockLimitLogic {
         return islandCount.getOrDefault(type, 0);
     }
 
-    public CanPlace canPlace(Material type, Location islandLocation) {
-        int count = getCount(type, islandLocation);
+    public CanPlace canPlace(Material type, IslandInfo islandInfo) {
+        int count = getCount(type, islandInfo.getIslandLocation());
         if (count == -1) {
             return CanPlace.YES;
         } else if (count == -2) {

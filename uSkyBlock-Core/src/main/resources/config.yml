@@ -72,7 +72,7 @@ options:
     log-size: 10
     spawn-limits:
       enabled: true
-      animals: 48
+      animals: 64
       monsters: 50
       villagers: 16
       golems: 5
@@ -250,6 +250,21 @@ options:
     # - me Jumps with &ajoy
     extra-commands: []
 
+# In this section it's possible to assign additional perks to permission-nodes
+donor-perks:
+  # the permission node to give to someone
+  'usb.donor.small':
+    extraItems: [BONE_MEAL:1]
+    maxPartySize: 5
+    animals: 84
+    monsters: 60
+    villagers: 20
+    golems: 6
+    # 10% more XP
+    rewardBonus: 0.1
+    # 10% less hunger
+    hungerReduction: 0.1
+
 # Whether or not to show the UI for create/restart
 island-schemes-enabled: true
 
@@ -278,7 +293,7 @@ island-schemes:
     # optional extra's that can be given per island
     extraItems: ''
     maxPartySize: 4
-    animals: 48
+    animals: 64
     monsters: 50
     villagers: 16
     golems: 5
@@ -298,7 +313,7 @@ island-schemes:
     - OBSIDIAN:14
     - FLINT_AND_STEEL:1
     maxPartySize: 4
-    animals: 48
+    animals: 64
     monsters: 50
     villagers: 16
     golems: 5

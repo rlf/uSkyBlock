@@ -1194,7 +1194,7 @@ ranks:
         displayItem: REDSTONE
         lockedDisplayItem: CYAN_STAINED_GLASS_PANE
         reward:
-          text: snow, ice and packed ice
+          text: some snow, ice and packed ice
           items:
           - SNOW_BLOCK:4
           - ICE:8
@@ -1203,9 +1203,11 @@ ranks:
           currency: 70
           xp: 70
         repeatReward:
-          text: a stack of redstone blocks
+          text: a stack of redstone blocks and some ice
           items:
           - REDSTONE_BLOCK:64
+          - ICE:4
+          - PACKED_ICE:1
           currency: 35
           xp: 35
       emeraldcollector:
