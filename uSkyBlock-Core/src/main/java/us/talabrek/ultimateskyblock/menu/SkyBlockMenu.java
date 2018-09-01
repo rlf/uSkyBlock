@@ -482,7 +482,7 @@ public class SkyBlockMenu {
             if (p >= 1 && p <= total) {
                 ItemStack pageItem = null;
                 if (p == page) {
-                    pageItem = ItemStackUtil.createItemStack("BOOK_AND_QUILL", tr("\u00a77Current page"), null);
+                    pageItem = ItemStackUtil.createItemStack("WRITABLE_BOOK", tr("\u00a77Current page"), null);
                 } else {
                     pageItem = ItemStackUtil.createItemStack("BOOK", tr("\u00a77Page {0}", p), null);
                 }
