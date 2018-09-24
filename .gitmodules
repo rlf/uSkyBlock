@@ -1,0 +1,3 @@
+[submodule "bukkit-utils"]
+	path = bukkit-utils
+	url = https://github.com/rlf/bukkit-utils
