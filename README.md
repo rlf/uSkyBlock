@@ -1,7 +1,8 @@
 # uSkyBlock
 ## Find Us
-The main project is located at [rlf/uskyblock](https://github.com/rlf/uSkyBlock) and on [Spigot](https://www.spigotmc.org/resources/uskyblock.2280/) 
-Currently [Open Issues](https://github.com/rlf/uSkyBlock/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22T%20ready%20for%20test%22%20-label%3A%22T%20tested%20awaiting%20reporter%22)
+The main project is located at [rlf/uskyblock](https://github.com/rlf/uSkyBlock) and [Spigot resources](https://www.spigotmc.org/resources/uskyblock.2280/)   
+
+Currently [open issues on the main project](https://github.com/rlf/uSkyBlock/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22T%20ready%20for%20test%22%20-label%3A%22T%20tested%20awaiting%20reporter%22)
 
 ## Fork Notes
 
@@ -16,10 +17,10 @@ As is the nature of things, work on this repo is volunteer-only and for personal
 
 This version depends on the following plugins:
 
-* Bukkit/Spigot 1.13.1-R0.1-SNAPSHOT
-* Vault 1.6.x
-* WorldEdit 7.0.0-SNAPSHOT
-* WorldGuard 7.0.0-SNAPSHOT
+* Bukkit/Spigot 1.13.1-R0.1-SNAPSHOT - Generated using [Spigot's Buildtools](https://www.spigotmc.org/wiki/buildtools/)
+* Vault 1.6.x - Available as a [Spigot Resource](https://www.spigotmc.org/resources/vault.34315/)
+* WorldEdit 7.0.0-SNAPSHOT - Available at [EngineHub\WorldEdit](http://www.enginehub.org/worldedit) 
+* WorldGuard 7.0.0-SNAPSHOT - Available at [EngineHub\WorldGuard](http://www.enginehub.org/worldguard)
 
 ## Releases 
 Please see [rlf/uSkyblock](https://github.com/rlf/uSkyBlock) for the latest and greatest code. 
