@@ -1,5 +1,5 @@
 # Copyright (C) 2015
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the uSkyBlock package.
 # Miku_Snow <admin@915mc.com>, 2015-04-23.
 #
 msgid ""
@@ -78,6 +78,14 @@ msgstr "秒"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr ""
+
+#, java-format
+msgid " §f{0}x §7{1}"
+msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§e任然缺少以下方块: {0}"
 
 #, java-format
 msgid "§4You can complete this {0} more time(s)."
@@ -180,10 +188,6 @@ msgstr "§4您的岛屿必须达到 {0} 级,才能完成当前挑战!"
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4未知难度的挑战: {0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§e任然缺少以下方块: {0}"
 
 #, java-format
 msgid ""
@@ -338,6 +342,10 @@ msgid "complete all challenges in the rank"
 msgstr ""
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4没有名字为 {0} 的玩家被找到"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr ""
 
@@ -348,10 +356,6 @@ msgstr ""
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4挑战: {0} 未找到!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4没有名字为 {0} 的玩家被找到"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
@@ -457,7 +461,7 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} 将他们的生物群系更改为了 OCEAN(海洋生物群系)"
 
 #, java-format
-msgid "§eRemoving {0}'s island."
+msgid "§eRemoving {0}''s island."
 msgstr "§e移除了 {0} 的岛屿。"
 
 msgid "Error: That player does not have an island!"
@@ -471,7 +475,72 @@ msgstr "§e{0} 的岛屿在 {1} 被保护"
 msgid "§4{0}s island at {1} was already protected"
 msgstr ""
 
+msgid "various chunk commands"
+msgstr ""
+
+msgid "regenerate current chunk"
+msgstr ""
+
+#, java-format
+msgid "successfully regenerated chunk at {0},{1}"
+msgstr ""
+
+#, java-format
+msgid "§4FAILED!§e could not regenerate chunk at {0},{1}"
+msgstr ""
+
+msgid "unload current chunk"
+msgstr ""
+
+#, java-format
+msgid "successfully unloaded chunk at {0},{1}"
+msgstr ""
+
+#, java-format
+msgid "§4FAILED!§e could not unload chunk at {0},{1}"
+msgstr ""
+
+msgid "load current chunk"
+msgstr ""
+
+#, java-format
+msgid "loaded chunk at {0},{1}"
+msgstr ""
+
+msgid "only available for players"
+msgstr ""
+
+#, java-format
+msgid "§4ERROR:§e {0}"
+msgstr ""
+
 msgid "open GUI for config"
+msgstr ""
+
+msgid "searches config for a specific key"
+msgstr ""
+
+#, java-format
+msgid "§c{0}§9"
+msgstr ""
+
+#, java-format
+msgid "§9{0}§8: §e{1}"
+msgstr ""
+
+#, java-format
+msgid "Found the following matching {0}:"
+msgstr ""
+
+msgid "§a<section>"
+msgstr ""
+
+#, java-format
+msgid "§3{0,number,#.##}"
+msgstr ""
+
+#, java-format
+msgid "§2{0}"
 msgstr ""
 
 msgid "§eInvalid configuration name"
@@ -552,7 +621,7 @@ msgid "§4No valid island found"
 msgstr "§4没有找到有效的岛屿"
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
+msgid "§4No flatland detected at {0}''s island!"
 msgstr "§4在{0} 的岛上未检测到平地。"
 
 msgid "flushes all caches to files"
@@ -601,6 +670,9 @@ msgid "§aTeleporting to {0}''s island."
 msgstr ""
 
 msgid "imports players and islands from other formats"
+msgstr ""
+
+msgid "controls async jobs"
 msgstr ""
 
 msgid "§9Job Statistics"
@@ -731,7 +803,13 @@ msgid "§eNo orphans currently registered."
 msgstr ""
 
 #, java-format
-msgid "§eOrphans: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
+
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
 msgstr ""
 
 #, java-format
@@ -758,19 +836,27 @@ msgstr ""
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4你必须指定一个天数来删除。"
 
-#, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
+msgid "§4The level must be a valid number"
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
+msgid ""
+"§eFinding all islands that have been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
+
+#, java-format
+msgid "§4PURGE:§e Do §9usb purge confirm§e within {0} to accept."
 msgstr ""
 
 msgid "§4Trying to abort purge"
 msgstr ""
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4一个清理任务正在进行中,请等待执行结束。"
+msgid "§4Purge aborted!"
+msgstr ""
+
+msgid "§4A purge is already running.§e Either §9confirm§e or §9stop§e it."
+msgstr ""
 
 msgid "§4Starting purge..."
 msgstr ""
@@ -805,6 +891,9 @@ msgstr ""
 msgid "§eNo currently shown regions for this player"
 msgstr ""
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr ""
@@ -812,15 +901,18 @@ msgstr ""
 msgid "§eAnimation-tick must be a valid integer."
 msgstr ""
 
-msgid "set a player's island to your location"
+msgid "refreshes the existing animations"
+msgstr ""
+
+msgid "set a player''s island to your location"
 msgstr ""
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§a设置 {0} 的岛屿的中心点(基岩)在你的附近。"
+msgid "§aSet {0}''s island to the current island."
+msgstr ""
 
-msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4基岩未找到:无法设置岛屿"
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr ""
@@ -875,7 +967,9 @@ msgid "§4PURGE:§9 Scanning aborted."
 msgstr ""
 
 #, java-format
-msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
+msgid ""
+"§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
+"purgatory."
 msgstr ""
 
 #, java-format
@@ -1019,7 +1113,7 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§e来自{0}§e的邀请已经过时或被取消。"
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
 msgstr "§e来自{0}§e岛屿的邀请已经过时或被取消。"
 
 msgid "§eYou have accepted the invitation to join an island."
@@ -1121,6 +1215,12 @@ msgstr ""
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
@@ -1177,7 +1277,7 @@ msgid ""
 "right now."
 msgstr ""
 
-msgid "check your or anothers island info"
+msgid "check your or another''s island info"
 msgstr ""
 
 msgid "allows user to see others island info"
@@ -1185,6 +1285,9 @@ msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4岛屿等级系统未启用,请联系管理员."
+
+msgid "§4Hold your horses! §eYou have to be patient..."
+msgstr ""
 
 msgid "§eYou must be on your island to use this command."
 msgstr "§e你必须在你的岛屿上来使用这个指令."
@@ -1206,6 +1309,10 @@ msgid "Score Count Block"
 msgstr "计分方块"
 
 #, java-format
+msgid "{0,number,00.00}  {1,number,#} {2}"
+msgstr ""
+
+#, java-format
 msgid "§aIsland level is {0,number,###.##}"
 msgstr "§a岛屿等级: {0,number,###.##}"
 
@@ -1216,7 +1323,7 @@ msgid ""
 "§eUse§f /island invite <playername>§e to invite a player to your island."
 msgstr "§e驶入§f/island invite <玩家ID> §e邀请玩家加入你的岛屿."
 
-msgid "§4Only the island's owner can invite!"
+msgid "§4Only the island''s owner can invite!"
 msgstr "§4只有岛屿的主人才能邀请!"
 
 #, java-format
@@ -1307,12 +1414,16 @@ msgid "allows user to query for others levels"
 msgstr ""
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
+msgid "§eInformation about {0}''s Island:"
 msgstr ""
 
 #, java-format
 msgid "§9Rank is {0}"
 msgstr "§9排名: {0}"
+
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
 
 msgid "lock your island to non-party members."
 msgstr ""
@@ -1345,6 +1456,9 @@ msgstr "§4只有岛屿的主人才能转移权限!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0}试图接管当前岛屿!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr ""
@@ -1433,10 +1547,10 @@ msgstr "§e注意: 你所有财产和你的岛屿将被§c§l重置"
 msgid "set the island-home"
 msgstr ""
 
-msgid "set your island's warp location"
+msgid "set your island''s warp location"
 msgstr ""
 
-msgid "§cYou do not have permission to set your island's warp point!"
+msgid "§cYou do not have permission to set your island''s warp point!"
 msgstr "§c你没有权限设置你岛屿的传送点!"
 
 msgid "§cYou need to be on your own island to set the warp!"
@@ -1463,7 +1577,7 @@ msgstr ""
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d禁止了岛屿传送点."
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr "§c你没有权限启用/禁用岛屿的传送点!"
 
 msgid "display the top10 of islands"
@@ -1492,7 +1606,7 @@ msgid "§4Unknown player {0}"
 msgstr ""
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
 msgstr ""
 
 #, java-format
@@ -1500,14 +1614,14 @@ msgid "§a{0} trusted {1} on the island"
 msgstr ""
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
 msgstr ""
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr ""
 
-msgid "warp to another player's island"
+msgid "warp to another player''s island"
 msgstr ""
 
 msgid "§aYour incoming warp is active, players may warp to your island."
@@ -1572,7 +1686,10 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another islands portals!"
+msgid "§eYou can not use another island''s portals!"
+msgstr ""
+
+msgid "§eVillager-trading isn't allowed."
 msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
@@ -1618,7 +1735,7 @@ msgstr "§e已经将你的黑曜石变为岩浆.请务必当心!"
 msgid "§eYour inventory must have another empty space!"
 msgstr ""
 
-msgid "§4It's a bad idea to replace your lava!"
+msgid "§4It''s a bad idea to replace your lava!"
 msgstr "§4替换岩浆真是一个§f'不错'§4的注意呢~"
 
 msgid "§eYou cannot hurt island-members."
@@ -1630,10 +1747,25 @@ msgstr "§4玩家禁止你传送到他们的岛屿上."
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr ""
 
-msgid "§cYou have reached your spawn-limit for your island."
+#, java-format
+msgid ""
+"§4{0} is limited. §eScanning your island to see if you are allowed to place "
+"more, please be patient"
+msgstr ""
+
+msgid "§e... Scanning complete, you can try again"
+msgstr ""
+
+#, java-format
+msgid ""
+"§4You''ve hit the {0} limit!§e You can''t have more of that type on your "
+"island!§9 Max: {1,number}"
 msgstr ""
 
 msgid "§eYou can only use spawn-eggs on your own island."
+msgstr ""
+
+msgid "§cYou have reached your spawn-limit for your island."
 msgstr ""
 
 msgid "§cBanned:§e You are banned from this island."
@@ -1694,20 +1826,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4你必须得是岛屿的主人才能解锁你的岛屿!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§4输入的名字§e{0}§4未找到"
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr ""
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr ""
 
@@ -1741,6 +1859,20 @@ msgstr ""
 
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
+msgstr ""
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§4输入的名字§e{0}§4未找到"
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
 msgstr ""
 
 msgid "The island has been created."
@@ -1869,9 +2001,6 @@ msgstr ""
 msgid "§9Integer Editor"
 msgstr ""
 
-msgid "§9Item List Editor"
-msgstr ""
-
 msgid "§eConfiguration saved and reloaded."
 msgstr ""
 
@@ -1908,23 +2037,23 @@ msgstr ""
 msgid "Change Biome"
 msgstr ""
 
-msgid "change the island's biome."
+msgid "change the island''s biome."
 msgstr ""
 
 msgid "Toggle Island Lock"
 msgstr ""
 
-msgid "toggle the island's lock."
+msgid "toggle the island''s lock."
 msgstr ""
 
 msgid "Set Island Warp"
 msgstr ""
 
-msgid "set the island's warp."
+msgid "set the island''s warp."
 msgstr ""
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
@@ -1933,11 +2062,11 @@ msgstr ""
 msgid "Toggle Island Warp"
 msgstr ""
 
-msgid "toggle the island's warp."
+msgid "toggle the island''s warp."
 msgstr ""
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
@@ -2133,10 +2262,8 @@ msgstr ""
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
-"§e点击这里返回\n"
-"§e岛屿团队信息."
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2177,15 +2304,11 @@ msgid "§cThis island is full."
 msgstr "§c岛屿已满."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
-"§e将鼠标悬停到一个玩家的头像上\n"
-"§e即可查询他们的权限.\n"
-"§e岛屿主人可以点击头像来\n"
-"§e更改他们的权限"
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -2205,7 +2328,7 @@ msgstr ""
 msgid "Cannot {0}"
 msgstr ""
 
-msgid "§e<Click to change this player's permissions>"
+msgid "§e<Click to change this player''s permissions>"
 msgstr "§e<点击将更改玩家的权限>"
 
 msgid "Island Log"
@@ -2235,6 +2358,32 @@ msgid "§e§lClick to change to this biome."
 msgstr "§e§l点击将会更改为这个生物群系."
 
 msgid "You cannot use this biome."
+msgstr ""
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
 msgstr ""
 
 msgid "§7Current page"
@@ -2272,11 +2421,17 @@ msgid ""
 "§7({0})"
 msgstr ""
 
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
+
 msgid "§a§lJoin an Island"
 msgstr "§a§l加入一个岛屿"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2293,7 +2448,7 @@ msgid "§a§lReturn Home"
 msgstr "§a§l返回你的岛屿"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
@@ -2514,6 +2669,21 @@ msgstr ""
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr ""
 
+msgid "§9Hold your horses! You have to be patient..."
+msgstr ""
+
+msgid "§9Not really patient, are you?"
+msgstr ""
+
+msgid "§9Be patient, young padawan"
+msgstr ""
+
+msgid "§9Patience you MUST have, young padawan"
+msgstr ""
+
+msgid "§9The two most powerful warriors are patience and time."
+msgstr ""
+
 msgid "§eSending you to spawn."
 msgstr ""
 
@@ -2567,11 +2737,11 @@ msgstr ""
 msgid "§aTeleporting you to your island."
 msgstr "§a将你传送回自己的岛屿."
 
-msgid "§4Unable to warp you to that player's island!"
+msgid "§4Unable to warp you to that player''s island!"
 msgstr "§4无法传送至玩家的岛屿!"
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
+msgid "§aTeleporting you to {0}''s island."
 msgstr ""
 
 msgid "§4You must be closer to your island to set your skyblock home!"

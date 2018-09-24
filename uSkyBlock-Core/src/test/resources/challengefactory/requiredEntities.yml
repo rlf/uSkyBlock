@@ -1,0 +1,33 @@
+# When creating your own challenges you will have
+# to uncomment the section below or the default challenges
+# will be re-added on every server restart. When altering
+# the default challenges this should be fine to leave.
+#merge-ignore:
+#  - 'ranks'
+#
+#===============================================
+# An explanation to setup your own challenges
+# can be found at the bottom of this file.
+#===============================================
+ranks:
+  Tier1:
+    name: '&7Novice'
+    displayItem: 'STAINED_CLAY:9'
+    resetInHours: 20
+    challenges:
+      villageguard:
+        name: '&cVillage Guard'
+        description: Create the village.
+        type: onIsland
+        radius: 24
+        requiredEntities:
+        - Villager:16
+        - IRON_GOLEM:2
+        displayItem: 'VILLAGER_SPAWN_EGG'
+        takeItems: true
+        reward:
+          text: 1 enchanted book (Unbreaking III)
+          items:
+          - 'ENCHANTED_BOOK:1 {StoredEnchantments:[{id:34,lvl:3}]}'
+          currency: 8
+          xp: 50

@@ -1,9 +1,11 @@
 package us.talabrek.ultimateskyblock.api;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -48,6 +50,13 @@ public interface IslandInfo {
      * @return the maximum number of golems that can spawn on this island.
      */
     int getMaxGolems();
+
+    /**
+     * Returns the maximum number of blocks of limited types that can be placed on the island.
+     *
+     * @since v2.7.6
+     */
+    Map<Material, Integer> getBlockLimits();
 
     /**
      * Returns the player-name of the island-leader.

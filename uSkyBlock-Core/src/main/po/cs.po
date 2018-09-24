@@ -1,8 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -79,6 +74,14 @@ msgstr "s"
 #, java-format
 msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
+
+#, java-format
+msgid " §f{0}x §7{1}"
+msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§eJeste tyto bloky: {0}"
 
 #, java-format
 msgid "§4You can complete this {0} more time(s)."
@@ -181,10 +184,6 @@ msgstr "§4Pro dokonceni tohoto ukolu je potreba mit level ostrova: {0} !"
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Neznamy typ ukolu: {0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§eJeste tyto bloky: {0}"
 
 #, java-format
 msgid ""
@@ -339,6 +338,10 @@ msgid "complete all challenges in the rank"
 msgstr "dokoncil vsechny ukoly v sekci"
 
 #, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4Zadny hrac s timto jmenem {0} nebyl nalezen!"
+
+#, java-format
 msgid "§4Challenge {0} has already been completed"
 msgstr "§4Ukol {0} byl jiz dokoncen."
 
@@ -349,10 +352,6 @@ msgstr "§eUkol {0} byl dokoncen: {1}"
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4Zadny ukol s timto nazvem {0} nebyl nalezen!"
-
-#, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4Zadny hrac s timto jmenem {0} nebyl nalezen!"
 
 #, java-format
 msgid "§4No rank named {0} was found!"
@@ -462,8 +461,8 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} bylo podnebi zmeneno na OCEAN."
 
 #, java-format
-msgid "§eRemoving {0}'s island."
-msgstr "§eOdstranuji {0}'s ostrov."
+msgid "§eRemoving {0}''s island."
+msgstr "§eOdstranuji {0}''s ostrov."
 
 msgid "Error: That player does not have an island!"
 msgstr "Chyba: Tento hrac nema ostrov!"
@@ -476,8 +475,73 @@ msgstr "e{0}s Ostrov  {1} je nyní chranen."
 msgid "§4{0}s island at {1} was already protected"
 msgstr "§4{0}s Ostrov at {1} uz je chranen."
 
+msgid "various chunk commands"
+msgstr ""
+
+msgid "regenerate current chunk"
+msgstr ""
+
+#, java-format
+msgid "successfully regenerated chunk at {0},{1}"
+msgstr ""
+
+#, java-format
+msgid "§4FAILED!§e could not regenerate chunk at {0},{1}"
+msgstr ""
+
+msgid "unload current chunk"
+msgstr ""
+
+#, java-format
+msgid "successfully unloaded chunk at {0},{1}"
+msgstr ""
+
+#, java-format
+msgid "§4FAILED!§e could not unload chunk at {0},{1}"
+msgstr ""
+
+msgid "load current chunk"
+msgstr ""
+
+#, java-format
+msgid "loaded chunk at {0},{1}"
+msgstr ""
+
+msgid "only available for players"
+msgstr ""
+
+#, java-format
+msgid "§4ERROR:§e {0}"
+msgstr ""
+
 msgid "open GUI for config"
 msgstr "Otevri GUI pro nastaveni"
+
+msgid "searches config for a specific key"
+msgstr ""
+
+#, java-format
+msgid "§c{0}§9"
+msgstr ""
+
+#, java-format
+msgid "§9{0}§8: §e{1}"
+msgstr ""
+
+#, java-format
+msgid "Found the following matching {0}:"
+msgstr ""
+
+msgid "§a<section>"
+msgstr ""
+
+#, java-format
+msgid "§3{0,number,#.##}"
+msgstr ""
+
+#, java-format
+msgid "§2{0}"
+msgstr ""
 
 msgid "§eInvalid configuration name"
 msgstr "§Neplatne konfiguracni jmeno"
@@ -557,7 +621,7 @@ msgid "§4No valid island found"
 msgstr "§4Zadny platny ostrov nenalezen."
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
+msgid "§4No flatland detected at {0}''s island!"
 msgstr "§4Zadna volna plocha nenalezena na {0} ostrove!"
 
 msgid "flushes all caches to files"
@@ -607,6 +671,9 @@ msgstr ""
 
 msgid "imports players and islands from other formats"
 msgstr "Prenese hrace a ostrovy z jineho formatu."
+
+msgid "controls async jobs"
+msgstr ""
 
 msgid "§9Job Statistics"
 msgstr "§9Statistiky prace"
@@ -737,8 +804,14 @@ msgid "§eNo orphans currently registered."
 msgstr "§eZadny sirotek momentalne neni."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eSirotci: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
+
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -766,19 +839,27 @@ msgstr "Ocista vsech zapomenutych ostrovu."
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Napis pocet dnu kdy se stane sirotkem!"
 
-#, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eVyhledavam vsechny sirotky starsi :  {0}  dnu."
+msgid "§4The level must be a valid number"
+msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr "§4CISTENI:§e Opakuj prikaz behem {0} pro prijmuti."
+msgid ""
+"§eFinding all islands that have been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
+
+#, java-format
+msgid "§4PURGE:§e Do §9usb purge confirm§e within {0} to accept."
+msgstr ""
 
 msgid "§4Trying to abort purge"
 msgstr "§4Snazim se prerusit cisteni"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4Cisteni jiz bezi, prosim vyckejte az se dokonci!"
+msgid "§4Purge aborted!"
+msgstr ""
+
+msgid "§4A purge is already running.§e Either §9confirm§e or §9stop§e it."
+msgstr ""
 
 msgid "§4Starting purge..."
 msgstr "§4Zacinam cisteni..."
@@ -813,6 +894,9 @@ msgstr "§eZastavi zobrazovani regionu"
 msgid "§eNo currently shown regions for this player"
 msgstr "§eV soucasne dobe se tomuto hraci nezobrazuji regiony."
 
+msgid "set the ticks between animations"
+msgstr ""
+
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
 msgstr "§eAnimacni tick zmenen na  {0}."
@@ -820,15 +904,18 @@ msgstr "§eAnimacni tick zmenen na  {0}."
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimacni tick musí byt platny integer."
 
-msgid "set a player's island to your location"
+msgid "refreshes the existing animations"
+msgstr ""
+
+msgid "set a player''s island to your location"
 msgstr "Nastavi hracuv ostrov do vasi aktualni polohy."
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aNastav {0} ostrov na nejblizsi bedrock ve tvem okoli."
+msgid "§aSet {0}''s island to the current island."
+msgstr ""
 
-msgid "§4Bedrock not found: unable to set the island!"
-msgstr "§4Zadny bedrock nenalezen: nelze nastavit ostrov!"
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr "Nacitam konfigurace ze souboru."
@@ -884,8 +971,10 @@ msgid "§4PURGE:§9 Scanning aborted."
 msgstr "§4PURGE:§9 Skenovani preruseno."
 
 #, java-format
-msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr "§4PURGE:§9 Skenovani dokonceno, nalezeno {0} polozek k ociste."
+msgid ""
+"§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
+"purgatory."
+msgstr ""
 
 #, java-format
 msgid ""
@@ -1036,7 +1125,7 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§ePozvanka pro {0}§e vyprsela nebo byla zrusena."
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
 msgstr "§ePozvanka na ostrov  {0}§e vyprsela nebo byla zrusena."
 
 msgid "§eYou have accepted the invitation to join an island."
@@ -1138,6 +1227,12 @@ msgstr ""
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
@@ -1198,7 +1293,7 @@ msgstr ""
 "§cMomentalne se nemuzes teleportovat domu na ostrov, protoze tvuj ostrov se "
 "jeste vytvari."
 
-msgid "check your or anothers island info"
+msgid "check your or another''s island info"
 msgstr "Podivej se na informace o ostrove."
 
 msgid "allows user to see others island info"
@@ -1206,6 +1301,9 @@ msgstr ""
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Uroven ostrova není povolena, kontaktuj admina."
+
+msgid "§4Hold your horses! §eYou have to be patient..."
+msgstr ""
 
 msgid "§eYou must be on your island to use this command."
 msgstr "§eMusis byt na svem ostrove aby si mohl pouzit tento prikaz."
@@ -1227,6 +1325,10 @@ msgid "Score Count Block"
 msgstr "Skore poctu bloku"
 
 #, java-format
+msgid "{0,number,00.00}  {1,number,#} {2}"
+msgstr ""
+
+#, java-format
 msgid "§aIsland level is {0,number,###.##}"
 msgstr "§aLevel ostrova je:  {0,number,###.##}"
 
@@ -1239,7 +1341,7 @@ msgstr ""
 "§ePouzik prikaz §f /island invite <playername>§epro pozvani hrace do tve "
 "party na ostrove."
 
-msgid "§4Only the island's owner can invite!"
+msgid "§4Only the island''s owner can invite!"
 msgstr "§4Pouze majitel ostrova muze prizvat jiného hrace!"
 
 #, java-format
@@ -1330,12 +1432,16 @@ msgid "allows user to query for others levels"
 msgstr ""
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
+msgid "§eInformation about {0}''s Island:"
 msgstr "§eInformace o ostrove hrace {0} :"
 
 #, java-format
 msgid "§9Rank is {0}"
 msgstr "§9Tva sekce:  {0}"
+
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
 
 msgid "lock your island to non-party members."
 msgstr "Uzamceni ostrova pro hrace, kteri nejsou clenove tve party."
@@ -1368,6 +1474,9 @@ msgstr "§4Pouze vudce muze predat vudcovstvi!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0} se pokusil prevzit tvuj ostrov!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "Zobrazi informace o parte "
@@ -1457,10 +1566,10 @@ msgstr "§ePOZOR: Tvuj cely ostrov a vsechny veci na nem budou RESETOVANY!"
 msgid "set the island-home"
 msgstr "Nastav home pozici na ostrove"
 
-msgid "set your island's warp location"
+msgid "set your island''s warp location"
 msgstr "Nastav lokaci warpu na ostrove"
 
-msgid "§cYou do not have permission to set your island's warp point!"
+msgid "§cYou do not have permission to set your island''s warp point!"
 msgstr "§cNemas opravneni nastavit misto pro teleport!"
 
 msgid "§cYou need to be on your own island to set the warp!"
@@ -1489,7 +1598,7 @@ msgstr "§b{0}§d  aktivoval teleport na ostrove."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d deaktivovat teleport na ostrove."
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr "§cNemas opravneni povolit / zakazat teleport na ostrove!"
 
 msgid "display the top10 of islands"
@@ -1518,7 +1627,7 @@ msgid "§4Unknown player {0}"
 msgstr "§4Neznamy hrac {0}"
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
 msgstr "§eNyni ti zacal verit §4{0}' §ena tvem ostrove."
 
 #, java-format
@@ -1526,14 +1635,14 @@ msgid "§a{0} trusted {1} on the island"
 msgstr "§a{0} veri {1} na ostrove"
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
-msgstr "§eTi prestal verit §4{0}'s §eisland."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
+msgstr "§eTi prestal verit §4{0}''s §eisland."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} zrusil duveru {1} na ostrove"
 
-msgid "warp to another player's island"
+msgid "warp to another player''s island"
 msgstr "warp k ostrovu jneho hrace"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
@@ -1606,8 +1715,11 @@ msgstr ""
 msgid "allows user to place [usb] signs"
 msgstr ""
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eNemuzes pouzit porty na ostatních ostrovech!"
+msgid "§eYou can not use another island''s portals!"
+msgstr ""
+
+msgid "§eVillager-trading isn't allowed."
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eObchodovani na ostrovech není povoleno, pouze na spawnu."
@@ -1654,7 +1766,7 @@ msgstr "§ePrave menis svuj obsidian na lavu. Davej si bacha kam slapes! "
 msgid "§eYour inventory must have another empty space!"
 msgstr "§eTvuj inventar musi mit vice prazdneho mista!"
 
-msgid "§4It's a bad idea to replace your lava!"
+msgid "§4It''s a bad idea to replace your lava!"
 msgstr "§4To byl ale blbej napad premistit lavu!"
 
 msgid "§eYou cannot hurt island-members."
@@ -1666,11 +1778,26 @@ msgstr "§4Hrac ti zakazal teleportovat se na jeho ostrov."
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4Tento ostrov je §clocked.§e Zadne teleportovani na ostrov nejde."
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cDosahl jsi sveho spawn limitu pro svuj ostrov."
+#, java-format
+msgid ""
+"§4{0} is limited. §eScanning your island to see if you are allowed to place "
+"more, please be patient"
+msgstr ""
+
+msgid "§e... Scanning complete, you can try again"
+msgstr ""
+
+#, java-format
+msgid ""
+"§4You''ve hit the {0} limit!§e You can''t have more of that type on your "
+"island!§9 Max: {1,number}"
+msgstr ""
 
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eVejce na spawnuti muzes pouzit pouze na svem ostrove."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§cDosahl jsi sveho spawn limitu pro svuj ostrov."
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cBanned:§e Jsi zabanovan pro tento ostrov."
@@ -1732,22 +1859,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Musis byt vudce party aby si odemcel svuj ostrov!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§4Zadny import s nazvem §e{0}§4 nenalezen"
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr "§eKonvertovano {0}/{1} souboru v  {2}"
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 
@@ -1784,6 +1895,22 @@ msgstr "§7 - MojangAPI:§aCOMPLETED: {0}"
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr "§7 - MojangAPI:§cERROR: {0}"
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§4Zadny import s nazvem §e{0}§4 nenalezen"
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr "§eKonvertovano {0}/{1} souboru v  {2}"
 
 msgid "The island has been created."
 msgstr "Ostrov byl vytvoren."
@@ -1912,9 +2039,6 @@ msgstr "Navrat"
 msgid "§9Integer Editor"
 msgstr "§9Integrovany editor"
 
-msgid "§9Item List Editor"
-msgstr "§9Editor itemu"
-
 msgid "§eConfiguration saved and reloaded."
 msgstr "§eKonfigurace ulozena a restartovana."
 
@@ -1954,23 +2078,23 @@ msgstr "Seznam ukolu"
 msgid "Change Biome"
 msgstr ""
 
-msgid "change the island's biome."
+msgid "change the island''s biome."
 msgstr ""
 
 msgid "Toggle Island Lock"
 msgstr ""
 
-msgid "toggle the island's lock."
+msgid "toggle the island''s lock."
 msgstr "Prepinat uzamceni ostrova"
 
 msgid "Set Island Warp"
 msgstr ""
 
-msgid "set the island's warp."
+msgid "set the island''s warp."
 msgstr "Nastavovani warpu na ostrove"
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
@@ -1979,11 +2103,11 @@ msgstr ""
 msgid "Toggle Island Warp"
 msgstr ""
 
-msgid "toggle the island's warp."
+msgid "toggle the island''s warp."
 msgstr "Prepinat moznost teleportace"
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
@@ -2241,10 +2365,8 @@ msgstr "§9Prava hrace"
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
-"§eKlikni zde pro navrat na\n"
-"§ehlavni nabidku ostrova."
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2285,15 +2407,11 @@ msgid "§cThis island is full."
 msgstr "§cTento ostrov je jiz zaplnen."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
-"§eUmistenim mysi na ikonu hrace\n"
-"§ezobrazis jeho opravneni.\n"
-"§eVudce ostrova muze tyto opravneni zmenit\n"
-"§ekliknutim na ikonu hrace."
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -2313,7 +2431,7 @@ msgstr "Povoleno {0}"
 msgid "Cannot {0}"
 msgstr "Zakazano {0}"
 
-msgid "§e<Click to change this player's permissions>"
+msgid "§e<Click to change this player''s permissions>"
 msgstr "§e<Klikni pro zmenu prav tohoto hrace>"
 
 msgid "Island Log"
@@ -2344,6 +2462,32 @@ msgstr "§e§lKlikni pro zmenu podnebi."
 
 msgid "You cannot use this biome."
 msgstr "Nemuzes pouzit toto podnebi."
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
+msgstr ""
 
 msgid "§7Current page"
 msgstr "§7Aktualni stranka"
@@ -2390,11 +2534,17 @@ msgstr ""
 "§cNemas pristup!\n"
 "§7({0})"
 
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
+
 msgid "§a§lJoin an Island"
 msgstr "§a§lPripojil ses na ostrov"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2403,16 +2553,6 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Chces se pripojit k jinemu hraci\n"
-"na jeho ostrov misto aby jsi\n"
-"mel svuj vlastni ostrov?\n"
-"Pokud te jiny hrac pozve\n"
-"na svuj ostrov  pomoci prikazu:\n"
-"/usb invite <tvujnick>\n"
-"Tak klikni sem, nebo pouzij prikaz\n"
-"§e/island accept§f aby jsi povrdil zadost..\n"
-"§e§lKlikni zde pro prijmuti pozvanky!\n"
-"§e§l(Musis byt pozvan jako prvni)"
 
 msgid "Island Menu"
 msgstr "Menu Ostrova"
@@ -2421,18 +2561,12 @@ msgid "§a§lReturn Home"
 msgstr "§a§lNavrat domu"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
-"Navrat domu na tvuj ostrov.\n"
-"Jestli chces zmenit svou \n"
-"pozici domova, tak napis\n"
-"prikaz §b/is sethome\n"
-"nebo klikni na ikonu postele.\n"
-"§e§lKlikni zde pro navrat domu."
 
 msgid "§a§lChallenges"
 msgstr "§a§lUkoly"
@@ -2681,6 +2815,21 @@ msgstr "§9Textovy editor"
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "Prilis mnoho pozadavku pro Mojang API ({0} within {1}), sleeping {2}"
 
+msgid "§9Hold your horses! You have to be patient..."
+msgstr ""
+
+msgid "§9Not really patient, are you?"
+msgstr ""
+
+msgid "§9Be patient, young padawan"
+msgstr ""
+
+msgid "§9Patience you MUST have, young padawan"
+msgstr ""
+
+msgid "§9The two most powerful warriors are patience and time."
+msgstr ""
+
 msgid "§eSending you to spawn."
 msgstr "§ePosilam te na spawn."
 
@@ -2737,11 +2886,11 @@ msgstr "§cVAROVANI: §eTeleportuji te do vzduchu."
 msgid "§aTeleporting you to your island."
 msgstr "§aTeleportuji te na tvuj ostrov."
 
-msgid "§4Unable to warp you to that player's island!"
+msgid "§4Unable to warp you to that player''s island!"
 msgstr "§4Je nemozne te teleportovat na ostrov tohoto hrace!"
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
+msgid "§aTeleporting you to {0}''s island."
 msgstr "§aTeleportuji te na ostrov hrace {0}."
 
 msgid "§4You must be closer to your island to set your skyblock home!"

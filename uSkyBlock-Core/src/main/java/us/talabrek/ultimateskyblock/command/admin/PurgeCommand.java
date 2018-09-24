@@ -1,10 +1,8 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
 import dk.lockfuglsang.minecraft.command.AbstractCommand;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
-import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.command.admin.task.PurgeScanTask;
 import us.talabrek.ultimateskyblock.command.admin.task.PurgeTask;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -12,6 +10,7 @@ import dk.lockfuglsang.minecraft.util.TimeUtil;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -25,13 +24,13 @@ public class PurgeCommand extends AbstractCommand {
     private String days = null;
 
     public PurgeCommand(uSkyBlock plugin) {
-        super("purge", "usb.admin.purge", "time-in-days|stop ?force", tr("purges all abandoned islands"));
+        super("purge", "usb.admin.purge", "time-in-days|stop|confirm ?level ?force", marktr("purges all abandoned islands"));
         this.plugin = plugin;
     }
 
     @Override
     public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, String... args) {
-        if (scanActive()) {
+        if (purgeActive()) {
             tryConfirm(sender, args);
             return true;
         }
@@ -40,34 +39,41 @@ public class PurgeCommand extends AbstractCommand {
             return false;
         }
         days = args[0];
-        final boolean force = args.length > 1 && args[1].equalsIgnoreCase("force");
+        double purgeLevel = plugin.getConfig().getDouble("options.advanced.purgeLevel", 10);
+        if (args.length > 1 && args[1].matches("[0-9]+([.,][0-9]+)?")) {
+            try {
+                purgeLevel = Double.parseDouble(args[1]);
+            } catch (NumberFormatException e) {
+                sender.sendMessage(tr("\u00a74The level must be a valid number"));
+                return false;
+            }
+        }
+        final boolean force = args[args.length-1].equalsIgnoreCase("force");
+
         final int time = Integer.parseInt(days, 10) * 24;
-        sender.sendMessage(tr("\u00a7eFinding all islands that has been abandoned for more than {0} days.", args[0]));
-        scanTask = new PurgeScanTask(plugin, plugin.directoryIslands, time, sender, new Runnable() {
-            @Override
-            public void run() {
-                if (force) {
-                    doPurge(sender);
-                } else {
-                    int timeout = plugin.getConfig().getInt("options.advanced.purgeTimeout", 600000);
-                    sender.sendMessage(tr("\u00a74PURGE:\u00a7e Repeat the command within {0} to accept.", TimeUtil.millisAsString(timeout)));
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            if (scanTask.isActive()) {
-                                sender.sendMessage("\u00a77purge timed out");
-                                scanTask.stop();
-                            }
+        sender.sendMessage(tr("\u00a7eFinding all islands that have been abandoned for more than {0} days below level {1}", args[0], purgeLevel));
+        scanTask = new PurgeScanTask(plugin, plugin.directoryIslands, time, purgeLevel, sender, () -> {
+            if (force) {
+                doPurge(sender);
+            } else {
+                int timeout = plugin.getConfig().getInt("options.advanced.purgeTimeout", 600000);
+                sender.sendMessage(tr("\u00a74PURGE:\u00a7e Do \u00a79usb purge confirm\u00a7e within {0} to accept.", TimeUtil.millisAsString(timeout)));
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        if (scanTask.isActive()) {
+                            sender.sendMessage("\u00a77purge timed out");
+                            scanTask.stop();
                         }
-                    }.runTaskLaterAsynchronously(plugin, TimeUtil.millisAsTicks(timeout));
-                }
+                    }
+                }.runTaskLaterAsynchronously(plugin, TimeUtil.millisAsTicks(timeout));
             }
         });
         scanTask.runTaskAsynchronously(plugin);
         return true;
     }
 
-    private boolean scanActive() {
+    private boolean purgeActive() {
         return scanTask != null && scanTask.isActive() || purgeTask != null && purgeTask.isActive();
     }
 
@@ -84,10 +90,14 @@ public class PurgeCommand extends AbstractCommand {
             scanTask.stop();
             return;
         }
-        if (scanTask != null && scanTask.isActive() && scanTask.isDone() && args.length == 1 && args[0].equalsIgnoreCase(days)) {
+        if (scanTask != null && scanTask.isActive() && scanTask.isDone() && args.length == 1 && args[0].equalsIgnoreCase("confirm")) {
             doPurge(sender);
+        } else if (scanTask != null && scanTask.isActive() && scanTask.isDone() && args.length == 1 && args[0].equalsIgnoreCase("stop")) {
+            scanTask.stop();
+            scanTask = null;
+            sender.sendMessage(tr("\u00a74Purge aborted!"));
         } else {
-            sender.sendMessage(tr("\u00a74A purge is already running, please wait for it to finish!"));
+            sender.sendMessage(tr("\u00a74A purge is already running.\u00a7e Either \u00a79confirm\u00a7e or \u00a79stop\u00a7e it."));
         }
     }
 

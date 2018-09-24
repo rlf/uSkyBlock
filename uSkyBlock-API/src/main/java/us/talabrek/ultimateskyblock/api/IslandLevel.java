@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.api;
 
-
 import java.util.List;
 
 /**

@@ -6,10 +6,9 @@
 
     <groupId>com.github.rlf</groupId>
     <artifactId>uSkyBlock-API</artifactId>
-    <version>2.7.3</version>
+    <version>2.7.4</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <GITHUB_TOKEN>invalid</GITHUB_TOKEN>
         <travis.buildNumber>dev</travis.buildNumber>
         <github.global.server>github</github.global.server>
     </properties>
@@ -19,12 +18,11 @@
         <url>https://github.com/rlf/uSkyBlock.git</url>
     </scm>
     <build>
-        <!-- <pluginManagement> -->
+        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.3</version>
                     <configuration>
                         <source>1.8</source>
                         <target>1.8</target>
@@ -35,8 +33,34 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>2.6</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.github.github</groupId>
+                    <artifactId>site-maven-plugin</artifactId>
+                    <version>0.12</version>
+                    <configuration>
+                        <message>Maven artifacts for ${project.groupId}:${project.artifactId}:${project.version}</message>  <!-- git commit message -->
+                        <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
+                        <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
+                        <branch>refs/heads/master</branch>                       <!-- remote branch name -->
+                        <includes>
+                            <include>**/${project.artifactId}/**</include>
+                        </includes>
+                        <repositoryName>mvn-repo</repositoryName>      <!-- github repo name -->
+                        <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
+                        <merge>true</merge>
+                    </configuration>
+                    <executions>
+                        <!-- run site-maven-plugin's 'site' target as part of the builder's normal 'deploy' phase -->
+                        <execution>
+                            <goals>
+                                <goal>site</goal>
+                            </goals>
+                            <phase>deploy</phase>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
-        <!-- </pluginManagement> -->
+        </pluginManagement>
     </build>
     <repositories>
         <repository>
@@ -49,33 +73,8 @@
     	</repository>
     </repositories>
     <profiles>
-        
-                <profile>
-            <id>1.12</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-			    <!--Spigot API-->
-			    <dependency>
-			           <groupId>org.spigotmc</groupId>
-			           <artifactId>spigot-api</artifactId>
-			           <version>1.12.2-R0.1-SNAPSHOT</version>
-			           <scope>provided</scope>
-			    </dependency>
-			    <!-- Bukkit API - pick this or spigot
-			    
-			    <dependency>
-			            <groupId>org.bukkit</groupId>
-			            <artifactId>bukkit</artifactId>
-			            <version>1.12.2-R0.1-SNAPSHOT</version>
-			            <scope>provided</scope>
-			    </dependency>
-			     -->
-            </dependencies>
-        </profile>
         <profile>
-            <id>1.11</id>
+            <id>1.13</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -84,7 +83,7 @@
 			    <dependency>
 			           <groupId>org.spigotmc</groupId>
 			           <artifactId>spigot-api</artifactId>
-			           <version>1.11-R0.1-SNAPSHOT</version>
+			           <version>1.13.1-R0.1-SNAPSHOT</version>
 			           <scope>provided</scope>
 			    </dependency>
 			    <!-- Bukkit API - pick this or spigot
@@ -92,7 +91,7 @@
 			    <dependency>
 			            <groupId>org.bukkit</groupId>
 			            <artifactId>bukkit</artifactId>
-			            <version>1.11-R0.1-SNAPSHOT</version>
+			            <version>1.13.1-R0.1-SNAPSHOT</version>
 			            <scope>provided</scope>
 			    </dependency>
 			     -->
@@ -100,7 +99,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>1.10</id>
+            <id>1.12</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -108,49 +107,9 @@
                 <dependency> <!-- Bukkit implementation -->
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
-                    <version>1.10-R0.1-SNAPSHOT</version>
+                    <version>1.12.2-R0.1-SNAPSHOT</version>
                     <optional>true</optional>
                     <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>1.9</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency> <!-- Bukkit implementation -->
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                    <version>1.9-R0.1-SNAPSHOT</version>
-                    <optional>true</optional>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>1.8</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                    <version>1.8-R0.1-SNAPSHOT</version>
-                </dependency>
-            </dependencies>
-        </profile><profile>
-            <id>1.7.9</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                    <version>1.7.9-R0.2</version>
                 </dependency>
             </dependencies>
         </profile>

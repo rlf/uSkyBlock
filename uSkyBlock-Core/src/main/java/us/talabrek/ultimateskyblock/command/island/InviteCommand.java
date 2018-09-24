@@ -11,11 +11,13 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+
 public class InviteCommand extends RequireIslandCommand {
     private final InviteHandler inviteHandler;
 
     public InviteCommand(uSkyBlock plugin, InviteHandler inviteHandler) {
-        super(plugin, "invite", "usb.party.invite", "oplayer", I18nUtil.tr("invite a player to your island"));
+        super(plugin, "invite", "usb.party.invite", "oplayer", marktr("invite a player to your island"));
         this.inviteHandler = inviteHandler;
     }
 
@@ -27,7 +29,7 @@ public class InviteCommand extends RequireIslandCommand {
                 return true;
             }
             if (!island.isLeader(player) || !island.hasPerm(player, "canInviteOthers")) {
-                player.sendMessage(I18nUtil.tr("\u00a74Only the island's owner can invite!"));
+                player.sendMessage(I18nUtil.tr("\u00a74Only the island''s owner can invite!"));
                 return true;
             }
             int diff = island.getMaxPartySize() - island.getPartySize();

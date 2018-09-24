@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -15,7 +16,7 @@ public class GotoIslandCommand extends AbstractPlayerInfoCommand {
     private final uSkyBlock plugin;
 
     public GotoIslandCommand(uSkyBlock plugin) {
-        super("goto", "usb.mod.goto", I18nUtil.tr("teleport to another players island"));
+        super("goto", "usb.mod.goto", marktr("teleport to another players island"));
         this.plugin = plugin;
     }
 

@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.command;
 
-import dk.lockfuglsang.minecraft.command.AbstractCommandExecutor;
+import dk.lockfuglsang.minecraft.command.BaseCommandExecutor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,16 +10,17 @@ import us.talabrek.ultimateskyblock.command.completion.AvailableChallengeTabComp
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
  * Primary challenges command
  */
-public class ChallengeCommand extends AbstractCommandExecutor {
+public class ChallengeCommand extends BaseCommandExecutor {
     private final uSkyBlock plugin;
 
     public ChallengeCommand(uSkyBlock plugin) {
-        super("challenges|c", "usb.island.challenges", tr("complete and list challenges"));
+        super("challenges|c", "usb.island.challenges", marktr("complete and list challenges"));
         this.plugin = plugin;
         addTab("challenge", new AvailableChallengeTabCompleter());
         add(new ChallengeCompleteCommand(plugin));
@@ -50,7 +51,7 @@ public class ChallengeCommand extends AbstractCommandExecutor {
             return true;
         }
         if (args.length == 0) {
-            player.openInventory(plugin.getMenu().displayChallengeGUI(player, 1));
+            player.openInventory(plugin.getMenu().displayChallengeGUI(player, 1, null));
             return true;
         } else {
             return super.onCommand(sender, command, alias, args);

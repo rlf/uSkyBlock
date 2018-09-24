@@ -47,6 +47,7 @@ public class Challenge {
     private final List<String> requiredItems;
     private final List<EntityMatch> requiredEntities;
     private final List<String> requiredChallenges;
+    private double requiredLevel;
     private final Rank rank;
     private final int resetInHours;
     private final ItemStack displayItem;
@@ -60,7 +61,7 @@ public class Challenge {
     private final int repeatLimit;
 
     public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems,
-                     List<EntityMatch> requiredEntities, List<String> requiredChallenges, Rank rank, int resetInHours,
+                     List<EntityMatch> requiredEntities, List<String> requiredChallenges, double requiredLevel, Rank rank, int resetInHours,
                      ItemStack displayItem, String tool, ItemStack lockedItem, int offset, boolean takeItems,
                      int radius, Reward reward, Reward repeatReward, int repeatLimit) {
         this.name = name;
@@ -69,6 +70,7 @@ public class Challenge {
         this.requiredItems = requiredItems;
         this.requiredEntities = requiredEntities;
         this.requiredChallenges = requiredChallenges;
+        this.requiredLevel = requiredLevel;
         this.rank = rank;
         this.resetInHours = resetInHours;
         this.displayItem = displayItem;
@@ -107,11 +109,8 @@ public class Challenge {
         return radius;
     }
 
-    public int getRequiredLevel() {
-        if (type == Type.ISLAND_LEVEL && requiredItems.size() == 1) {
-            return Integer.parseInt(requiredItems.get(0), 10);
-        }
-        return 0;
+    public double getRequiredLevel() {
+        return requiredLevel;
     }
 
     public List<ItemStack> getRequiredItems(int timesCompleted) {
@@ -288,25 +287,11 @@ public class Challenge {
     }
 
     public List<String> getMissingRequirements(PlayerInfo playerInfo) {
-        List<String> missing = new ArrayList<>();
-        for (String challengeName : requiredChallenges) {
-            ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
-            if (completion != null && completion.getTimesCompleted() <= 0) {
-                String name = completion.getName();
-                Challenge challenge = uSkyBlock.getInstance().getChallengeLogic().getChallenge(name);
-                if (challenge != null) {
-                    missing.add(challenge.getDisplayName());
-                } else {
-                    missing.add(name);
-                }
-            }
+        String missingRequirement = ChallengeFormat.getMissingRequirement(playerInfo, requiredChallenges, uSkyBlock.getInstance().getChallengeLogic());
+        if (missingRequirement != null) {
+            return wordWrap(tr("\u00a77Requires {0}", missingRequirement), MAX_LINE);
         }
-        if (missing.isEmpty()) {
-            return Collections.emptyList();
-        }
-        String missingList = "" + missing;
-        missingList = missingList.substring(1, missingList.length() - 1);
-        return wordWrap(tr("\u00a77Requires {0}", missingList), MAX_LINE);
+        return Collections.emptyList();
     }
 
     @Override

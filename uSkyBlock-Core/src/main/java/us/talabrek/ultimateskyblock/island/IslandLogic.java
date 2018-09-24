@@ -1,7 +1,34 @@
 package us.talabrek.ultimateskyblock.island;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static org.bukkit.Material.BEDROCK;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.IslandLevel;
+import us.talabrek.ultimateskyblock.api.IslandRank;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.handler.task.WorldEditClearFlatlandTask;
+import us.talabrek.ultimateskyblock.island.level.IslandScore;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.PlayerUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,36 +40,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
-
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-
-import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.util.TimeUtil;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.api.IslandLevel;
-import us.talabrek.ultimateskyblock.api.IslandRank;
-import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditClearFlatlandTask;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.util.IslandUtil;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
-import us.talabrek.ultimateskyblock.util.PlayerUtil;
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static org.bukkit.Material.BEDROCK;
 
 /**
  * Responsible for island creation, locating locations, purging, clearing etc.
@@ -261,7 +261,7 @@ public class IslandLogic {
 
     public void showTopTen(final CommandSender sender, final int page) {
         long t = System.currentTimeMillis();
-        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || (sender.hasPermission("usb.admin.topten") || sender.isOp())) {
+        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || (hasPermission(sender, "usb.admin.topten") || sender.isOp())) {
             lastGenerate = t;
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override
@@ -344,6 +344,7 @@ public class IslandLogic {
     public synchronized void deleteIslandConfig(final String location) {
         try {
             IslandInfo islandInfo = cache.get(location);
+            updateRank(islandInfo, new IslandScore(0, Collections.EMPTY_LIST));
             if (islandInfo.exists()) {
                 islandInfo.delete();
             }

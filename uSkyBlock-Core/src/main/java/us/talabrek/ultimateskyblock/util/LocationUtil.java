@@ -12,8 +12,9 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,9 +47,9 @@ public enum LocationUtil {
         if (loc.getWorld() != null && loc.getWorld().getName() != null) {
             s += loc.getWorld().getName() + ":";
         }
-        s += String.format("%.2f,%.2f,%.2f", loc.getX(), loc.getY(), loc.getZ());
+        s += String.format(Locale.ENGLISH, "%.2f,%.2f,%.2f", loc.getX(), loc.getY(), loc.getZ());
         if (loc.getYaw() != 0f || loc.getPitch() != 0f) {
-            s += String.format(":%.2f:%.2f", loc.getYaw(), loc.getPitch());
+            s += String.format(Locale.ENGLISH, ":%.2f:%.2f", loc.getYaw(), loc.getPitch());
         }
         return s;
     }
@@ -266,14 +267,14 @@ public enum LocationUtil {
         int cz = z & 0xF;
         int topBlock = chunkSnapshot.getHighestBlockYAt(cx, cz);
         int y = blockLoc.getBlockY();
-        while (y <= topBlock && isLiquidOrAir(chunkSnapshot.getBlockTypeId(cx, y, cz))) {
+        while (y <= topBlock && isLiquidOrAir(chunkSnapshot.getBlockType(cx, y, cz))) {
             y++;
         }
         return new Location(blockLoc.getWorld(), x, y, z).getBlock();
     }
 
-    private static boolean isLiquidOrAir(int blockTypeId) {
-        return BlockUtil.isFluid(blockTypeId) || blockTypeId == Material.AIR.getId();
+    private static boolean isLiquidOrAir(Material material) {
+        return BlockUtil.isFluid(material) || material == Material.AIR;
     }
 
     public static String getCardinalDirection(float yaw) {

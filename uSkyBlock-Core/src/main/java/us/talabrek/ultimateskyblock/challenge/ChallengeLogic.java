@@ -2,12 +2,13 @@ package us.talabrek.ultimateskyblock.challenge;
 
 import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.enchantments.EnchantmentWrapper;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -17,12 +18,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
+import us.talabrek.ultimateskyblock.block.BlockCollection;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -227,36 +228,21 @@ public class ChallengeLogic implements Listener {
         final int py = l.getBlockY();
         final int pz = l.getBlockZ();
         World world = l.getWorld();
-        int[] blockCount = new int[0xffffff];
-        int[] baseBlocks = new int[0xffff];
+        BlockCollection blockCollection = new BlockCollection();
         for (int x = px - radius; x <= px + radius; x++) {
             for (int y = py - radius; y <= py + radius; y++) {
                 for (int z = pz - radius; z <= pz + radius; z++) {
                     Block block = world.getBlockAt(x, y, z);
-                    blockCount[(block.getTypeId() << 8) + (block.getData() & 0xff)]++;
-                    baseBlocks[block.getTypeId()]++;
+                    blockCollection.add(block);
                 }
             }
         }
-        StringBuilder sb = new StringBuilder();
-        boolean hasAll = true;
-        for (ItemStack item : itemStacks) {
-            int diffSpecific = item.getAmount() - blockCount[(item.getTypeId() << 8) + (item.getDurability() & 0xff)];
-            int diffGeneral = item.getAmount() - baseBlocks[item.getTypeId()];
-            if (item.getDurability() != 0 && diffSpecific > 0) {
-                sb.append(" \u00a74" + diffSpecific
-                        + " \u00a7b" + VaultHandler.getItemName(item));
-                hasAll = false;
-            } else if (diffGeneral > 0) {
-                sb.append(" \u00a74" + diffGeneral
-                        + " \u00a7b" + VaultHandler.getItemName(item));
-                hasAll = false;
-            }
+        String diff = blockCollection.diff(itemStacks);
+        if (diff != null) {
+            player.sendMessage(diff);
+            return false;
         }
-        if (!hasAll) {
-            player.sendMessage(tr("\u00a7eStill the following blocks short: {0}", sb.toString()));
-        }
-        return hasAll;
+        return true;
     }
 
     private boolean tryCompleteOnIsland(Player player, String challengeName) {
@@ -432,7 +418,7 @@ public class ChallengeLogic implements Listener {
             lores.add(tr("\u00a74\u00a7lYou can't repeat this challenge."));
         }
         if (completion.getTimesCompleted() > 0) {
-            meta.addEnchant(new EnchantmentWrapper(0), 0, true);
+            meta.addEnchant(Enchantment.LOYALTY, 0, true);
         }
         meta.setLore(lores);
         currentChallengeItem.setItemMeta(meta);
@@ -450,7 +436,7 @@ public class ChallengeLogic implements Listener {
         }
     }
 
-    public void populateChallengeRank(Inventory menu, PlayerInfo pi, int page) {
+    public void populateChallengeRank(Inventory menu, PlayerInfo pi, int page, boolean isAdminAccess) {
         List<Rank> ranksOnPage = new ArrayList<>(ranks.values());
         // page 1 = 0-4, 2 = 5-8, ...
         if (page > 0) {
@@ -458,7 +444,7 @@ public class ChallengeLogic implements Listener {
         }
         int location = 0;
         for (Rank rank : ranksOnPage) {
-            location = populateChallengeRank(menu, rank, location, pi);
+            location = populateChallengeRank(menu, rank, location, pi, isAdminAccess);
             if ((location % 9) != 0) {
                 location += (9 - (location % 9)); // Skip the rest of that line
             }
@@ -498,7 +484,7 @@ public class ChallengeLogic implements Listener {
         return (int) Math.ceil(rankSize / 8f);
     }
 
-    public int populateChallengeRank(Inventory menu, final Rank rank, int location, final PlayerInfo playerInfo) {
+    public int populateChallengeRank(Inventory menu, final Rank rank, int location, final PlayerInfo playerInfo, boolean isAdminAccess) {
         List<String> lores = new ArrayList<>();
         ItemStack currentChallengeItem = rank.getDisplayItem();
         ItemMeta meta4 = currentChallengeItem.getItemMeta();
@@ -531,16 +517,20 @@ public class ChallengeLogic implements Listener {
                 currentChallengeItem = getItemStack(playerInfo, challengeName);
                 List<String> missingReqs = challenge.getMissingRequirements(playerInfo);
                 if (!missingRankRequirements.isEmpty() || !missingReqs.isEmpty()) {
-                    ItemStack locked = challenge.getLockedDisplayItem();
-                    if (locked == null) {
-                        locked = lockedItemMap.get(challenge.getType());
-                    }
-                    if (locked != null) {
-                        currentChallengeItem.setType(locked.getType());
-                        currentChallengeItem.setDurability(locked.getDurability());
-                    } else if (lockedItem != null) {
-                        currentChallengeItem.setType(lockedItem.getType());
-                        currentChallengeItem.setDurability(lockedItem.getDurability());
+                    if (!isAdminAccess) {
+                        ItemStack locked = challenge.getLockedDisplayItem();
+                        if (locked == null) {
+                            locked = lockedItemMap.get(challenge.getType());
+                        }
+                        if (locked != null) {
+                            currentChallengeItem.setType(locked.getType());
+                            currentChallengeItem.setDurability(locked.getDurability());
+                        } else if (lockedItem != null) {
+                            currentChallengeItem.setType(lockedItem.getType());
+                            currentChallengeItem.setDurability(lockedItem.getDurability());
+                        }
+                    } else {
+                        lores = currentChallengeItem.getItemMeta().getLore();
                     }
                     meta4 = currentChallengeItem.getItemMeta();
                     if (defaults.showLockedChallengeName) {

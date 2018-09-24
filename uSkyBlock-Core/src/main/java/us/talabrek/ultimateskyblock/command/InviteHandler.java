@@ -179,7 +179,7 @@ public class InviteHandler implements Listener {
             islandInfo.sendMessageToIslandGroup(true, marktr("\u00a7eInvitation for {0}\u00a7e has timedout or been cancelled."), invite.getDisplayName());
             Player player = Bukkit.getPlayer(uuid);
             if (player != null && player.isOnline()) {
-                player.sendMessage(tr("\u00a7eInvitation for {0}'s island has timedout or been cancelled.", islandInfo.getLeader()));
+                player.sendMessage(tr("\u00a7eInvitation for {0}''s island has timedout or been cancelled.", islandInfo.getLeader()));
             }
             return true;
         }

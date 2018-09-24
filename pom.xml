@@ -4,12 +4,12 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.7.0-SNAPSHOT</version>
+    <version>2.7.5-SNAPSHOT</version>
     <name>Ultimate SkyBlock</name>
 
     <properties>
-        <api.version>2.7.3</api.version>
-        <bukkit-utils.version>1.15</bukkit-utils.version>
+        <api.version>2.7.4</api.version>
+        <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.6</vault.version>
@@ -20,17 +20,17 @@
         <travis.buildNumber>dev</travis.buildNumber>
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
+        <!-- necessary for intellij to function -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <modules>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
-        <module>uSkyBlock-AWE211</module>
-        <module>uSkyBlock-AWE311</module>
-        <module>uSkyBlock-AWE321</module>
-        <module>uSkyBlock-AWE330</module>
-        <module>uSkyBlock-FAWE</module>
         <module>uSkyBlock-Plugin</module>
+        <module>uSkyBlock-FAWE</module>
+        <module>uSkyBlock-WE700</module>
     </modules>
 
     <scm>
@@ -41,7 +41,7 @@
 
     <build>
         <finalName>${finalName}</finalName>
-        <pluginManagement> 
+        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -57,15 +57,10 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>2.6</version>
                 </plugin>
-	      </plugins>
-        </pluginManagement> 
+            </plugins>
+        </pluginManagement>
     </build>
     <repositories>
-        <repository>
-            <!-- Our repo is last - so we can put in fallback artifacts when the other repos are down -->
-            <id>rlf-mvn-repo</id>
-            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
-        </repository>
         <repository>
             <id>AWE-mvn-repo</id>
             <url>https://raw.github.com/SBPrime/AsyncWorldEdit-API/maven-artifact/</url>
@@ -87,20 +82,26 @@
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository>
-            <id>sk89q-maven</id>
-            <url>http://maven.sk89q.com/artifactory/repo/</url>
+            <id>sk89q-repo</id>
+            <url>http://maven.sk89q.com/repo/</url>
         </repository>
+        <!--
         <repository>
             <id>sk89q-mvn2</id>
             <url>http://mvn2.sk89q.com/repo</url>
         </repository>
+        -->
         <repository>
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
         <repository>
-            <id>titlemananager-repo</id>
-            <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
+            <id>bstats-repo</id>
+            <url>http://repo.bstats.org/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>rlf-mvn-repo</id>
+            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -142,7 +143,7 @@
         <profile>
             <id>wg611</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -162,50 +163,46 @@
             </dependencies>
         </profile>
         <profile>
-            <id>we5</id>
+            <id>wg62</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>com.sk89q</groupId>
-                    <artifactId>worldedit</artifactId>
-                    <version>5.5.8</version>
+                    <groupId>com.sk89q.worldguard</groupId>
+                    <artifactId>worldguard-legacy</artifactId>
+                    <version>6.2</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>worldedit</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
             </dependencies>
         </profile>
         <profile>
-            <id>we6</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q.worldedit</groupId>
-                    <artifactId>worldedit-bukkit</artifactId>
-                    <version>6.0.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>we611</id>
+            <id>wg700</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>com.sk89q.worldedit</groupId>
-                    <artifactId>worldedit-bukkit</artifactId>
-                    <version>6.1.1-SNAPSHOT</version>
+                    <groupId>com.sk89q.worldguard</groupId>
+                    <artifactId>worldguard-legacy</artifactId>
+                    <version>7.0.0-SNAPSHOT</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>worldedit</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
             </dependencies>
         </profile>
@@ -219,6 +216,22 @@
                     <groupId>com.sk89q.worldedit</groupId>
                     <artifactId>worldedit-bukkit</artifactId>
                     <version>6.1.3-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <type>jar</type>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>we700</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sk89q.worldedit</groupId>
+                    <artifactId>worldedit-bukkit</artifactId>
+                    <version>7.0.0-SNAPSHOT</version>
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>
@@ -242,6 +255,13 @@
             </dependency>
             <dependency>
                 <groupId>dk.lockfuglsang.minecraft</groupId>
+                <artifactId>bukkit-utils</artifactId>
+                <version>${bukkit-utils.version}</version>
+                <scope>test</scope>
+                <classifier>tests</classifier>
+            </dependency>
+            <dependency>
+                <groupId>dk.lockfuglsang.minecraft</groupId>
                 <artifactId>po-utils</artifactId>
                 <version>${po-utils.version}</version>
             </dependency>
@@ -259,26 +279,6 @@
             <dependency>
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-Core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE211</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE311</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE321</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>uSkyBlock</groupId>
-                <artifactId>uSkyBlock-AWE330</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

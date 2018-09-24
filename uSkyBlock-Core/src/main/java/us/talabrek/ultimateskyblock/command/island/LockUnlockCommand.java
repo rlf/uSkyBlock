@@ -2,18 +2,18 @@ package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LockUnlockCommand extends RequireIslandCommand {
     public LockUnlockCommand(uSkyBlock plugin) {
-        super(plugin, "lock|unlock", "usb.island.lock", tr("lock your island to non-party members."));
+        super(plugin, "lock|unlock", "usb.island.lock", marktr("lock your island to non-party members."));
     }
 
     @Override

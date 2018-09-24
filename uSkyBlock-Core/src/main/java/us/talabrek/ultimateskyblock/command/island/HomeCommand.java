@@ -8,9 +8,11 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+
 public class HomeCommand extends RequireIslandCommand {
     public HomeCommand(uSkyBlock plugin) {
-        super(plugin, "home|h", "usb.island.home", I18nUtil.tr("teleport to the island home"));
+        super(plugin, "home|h", "usb.island.home", marktr("teleport to the island home"));
     }
 
     @Override

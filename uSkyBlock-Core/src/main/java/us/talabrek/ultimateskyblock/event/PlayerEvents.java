@@ -1,10 +1,11 @@
 package us.talabrek.ultimateskyblock.event;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -24,8 +25,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.async.Callback;
+import us.talabrek.ultimateskyblock.api.event.IslandInfoEvent;
+import us.talabrek.ultimateskyblock.api.model.IslandScore;
+import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.island.BlockLimitLogic;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.PatienceTester;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -37,7 +44,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
-import org.bukkit.ChatColor;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -52,16 +58,19 @@ public class PlayerEvents implements Listener {
     private final uSkyBlock plugin;
     private final boolean visitorFallProtected;
     private final boolean visitorFireProtected;
+    private final boolean visitorMonsterProtected;
     private final boolean protectLava;
     private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
-    private final int hopperlimit;
+    private final boolean blockLimitsEnabled;
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
-        visitorFallProtected = plugin.getConfig().getBoolean("options.protection.visitors.fall", true);
-        visitorFireProtected = plugin.getConfig().getBoolean("options.protection.visitors.fire-damage", true);
-        protectLava = plugin.getConfig().getBoolean("options.protection.protect-lava", true);
-        hopperlimit = plugin.getConfig().getInt("options.island.hopperlimit", 10);
+        FileConfiguration config = plugin.getConfig();
+        visitorFallProtected = config.getBoolean("options.protection.visitors.fall", true);
+        visitorFireProtected = config.getBoolean("options.protection.visitors.fire-damage", true);
+        visitorMonsterProtected = config.getBoolean("options.protection.visitors.monster-damage", false);
+        protectLava = config.getBoolean("options.protection.protect-lava", true);
+        blockLimitsEnabled = config.getBoolean("options.island.block-limits.enabled", false);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -139,13 +148,13 @@ public class PlayerEvents implements Listener {
         }
         if (event.getBlockReplacedState() != null &&
                 isLavaSource(event.getBlockReplacedState().getType(), event.getBlockReplacedState().getRawData())) {
-            plugin.notifyPlayer(event.getPlayer(), tr("\u00a74It's a bad idea to replace your lava!"));
+            plugin.notifyPlayer(event.getPlayer(), tr("\u00a74It''s a bad idea to replace your lava!"));
             event.setCancelled(true);
         }
     }
 
     private boolean isLavaSource(Material type, byte data) {
-        return (type == Material.STATIONARY_LAVA || type == Material.LAVA) && data == 0;
+        return (type == Material.LAVA) && data == 0;
     }
 
     @EventHandler
@@ -154,9 +163,10 @@ public class PlayerEvents implements Listener {
             return;
         }
         if (isLavaSource(event.getBlock().getType(), event.getBlock().getData())) {
-            if (event.getTo() != Material.LAVA && event.getTo() != Material.STATIONARY_LAVA) {
+            if (event.getTo() != Material.LAVA) {
                 event.setCancelled(true);
-                ItemStack item = new ItemStack(event.getTo(), 1, event.getData());
+                // TODO: R4zorax - 21-07-2018: missing datavalue (might convert stuff - exploit)
+                ItemStack item = new ItemStack(event.getTo(), 1);
                 Location above = event.getBlock().getLocation().add(0, 1, 0);
                 event.getBlock().getWorld().dropItemNaturally(above, item);
             }
@@ -172,10 +182,22 @@ public class PlayerEvents implements Listener {
         if (!Settings.island_allowPvP
                 && ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
                 || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
-                && event.getEntity() instanceof Player
+                && (event.getEntity() instanceof Player || (visitorMonsterProtected && event.getEntity() instanceof Monster))
                 && !plugin.playerIsOnIsland((Player) event.getEntity())) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onSpawnDamage(final EntityDamageEvent event) {
+        if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
+            return;
+        }
+        if (event.getEntity() instanceof Player && plugin.playerIsInSpawn((Player) event.getEntity()) && event.getCause() == EntityDamageEvent.DamageCause.VOID) {
+            event.setDamage(-event.getDamage());
+            event.setCancelled(true);
+            plugin.spawnTeleport((Player) event.getEntity(), true);
         }
     }
 
@@ -247,7 +269,7 @@ public class PlayerEvents implements Listener {
         if (event == null || event.isCancelled() || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
             return;
         }
-        if (event.getBlock().getType() != Material.LEAVES || (event.getBlock().getData() & 0x3) != 0) {
+        if (event.getBlock().getType() != Material.OAK_LEAVES || (event.getBlock().getData() & 0x3) != 0) {
             return;
         }
         // Ok, a player broke an OAK LEAF in the Skyworld
@@ -255,34 +277,58 @@ public class PlayerEvents implements Listener {
         IslandInfo islandInfo = plugin.getIslandInfo(islandName);
         if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
             // Add an oak-sapling
-            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.SAPLING, 1));
+            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.OAK_SAPLING, 1));
             islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
     }
     
     @EventHandler
-    public void onHopperPlace(BlockPlaceEvent event) 
+    public void onBlockPlaceEvent(BlockPlaceEvent event)
     {
-        if (Material.HOPPER.equals(event.getBlock().getType()))
-        {
-            IslandInfo isInfo = plugin.getIslandInfo(event.getBlock().getLocation());
-            if(isInfo.getHopperCount() > hopperlimit)
-            {
-                event.setCancelled(true);
-                event.getPlayer().sendMessage(tr("\u00a74You've hit the hopper limit! You can't have more hoppers!"));
-            }
-            else
-            {
-                isInfo.setHopperCount(isInfo.getHopperCount() + 1);
-            }
+        final Player player = event.getPlayer();
+        if (!blockLimitsEnabled || player == null || !plugin.isSkyWorld(player.getWorld()) || event.isCancelled()) {
+            return; // Skip
         }
+
+        IslandInfo islandInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+        if (islandInfo == null) {
+            return;
+        }
+        Material type = event.getBlock().getType();
+        BlockLimitLogic.CanPlace canPlace = plugin.getBlockLimitLogic().canPlace(type, islandInfo);
+        if (canPlace == BlockLimitLogic.CanPlace.UNCERTAIN) {
+            event.setCancelled(true);
+            final String key = "usb.block-limits";
+            if (!PatienceTester.isRunning(player, key)) {
+                PatienceTester.startRunning(player, key);
+                player.sendMessage(tr("\u00a74{0} is limited. \u00a7eScanning your island to see if you are allowed to place more, please be patient", VaultHandler.getItemName(new ItemStack(type))));
+                plugin.fireAsyncEvent(new IslandInfoEvent(player, islandInfo.getIslandLocation(), new Callback<IslandScore>() {
+                    @Override
+                    public void run() {
+                        player.sendMessage(tr("\u00a7e... Scanning complete, you can try again"));
+                        PatienceTester.stopRunning(player, key);
+                    }
+                }));
+            }
+            return;
+        }
+        if (canPlace == BlockLimitLogic.CanPlace.NO) {
+            event.setCancelled(true);
+            player.sendMessage(tr("\u00a74You''ve hit the {0} limit!\u00a7e You can''t have more of that type on your island!\u00a79 Max: {1,number}", VaultHandler.getItemName(new ItemStack(type)), plugin.getBlockLimitLogic().getLimit(type)));
+            return;
+        }
+        plugin.getBlockLimitLogic().incBlockCount(islandInfo.getIslandLocation(), type);
     }
     
     @EventHandler
     public void onHopperDestroy(BlockBreakEvent event){
-    	if (Material.HOPPER.equals(event.getBlock().getType())){
-    		IslandInfo isInfo = plugin.getIslandInfo(event.getBlock().getLocation());
-    		isInfo.setHopperCount(isInfo.getHopperCount() - 1);
-    	}
+        if (!blockLimitsEnabled || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld()) || event.isCancelled()) {
+            return; // Skip
+        }
+        IslandInfo islandInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+        if (islandInfo == null) {
+            return;
+        }
+        plugin.getBlockLimitLogic().decBlockCount(islandInfo.getIslandLocation(), event.getBlock().getType());
     }
 }

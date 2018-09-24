@@ -14,22 +14,24 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.util.Collection;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+
 public class PartyCommand extends CompositeCommand {
     private final uSkyBlock plugin;
     private final SkyBlockMenu menu;
 
     public PartyCommand(final uSkyBlock plugin, SkyBlockMenu menu, final InviteHandler inviteHandler) {
-        super("party", null, I18nUtil.tr("show party information"));
+        super("party", null, marktr("show party information"));
         this.plugin = plugin;
         this.menu = menu;
-        add(new AbstractCommand("info", "usb.party.info", I18nUtil.tr("shows information about your party")) {
+        add(new AbstractCommand("info", "usb.party.info", marktr("shows information about your party")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 sender.sendMessage(plugin.getIslandInfo((Player) sender).toString());
                 return true;
             }
         });
-        add(new AbstractCommand("invites", "usb.party.invites", I18nUtil.tr("show pending invites")) {
+        add(new AbstractCommand("invites", "usb.party.invites", marktr("show pending invites")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = plugin.getIslandInfo((Player) sender);
@@ -42,7 +44,7 @@ public class PartyCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new AbstractCommand("uninvite", "usb.party.uninvite", "player", I18nUtil.tr("withdraw an invite")) {
+        add(new AbstractCommand("uninvite", "usb.party.uninvite", "player", marktr("withdraw an invite")) {
             @Override
             public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, final String... args) {
                 if (args.length == 1 && sender instanceof Player) {

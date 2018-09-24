@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.event;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Creature;
@@ -26,7 +25,6 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
-import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -72,9 +70,11 @@ public class GriefEvents implements Listener {
             && !isValidTarget(((Creeper)event.getEntity()).getTarget()))
         {
             event.setCancelled(true);
-        } else if (event.getEntity() instanceof TNTPrimed
-            && !isValidTarget(((TNTPrimed) event.getEntity()).getSource())) {
-            event.setCancelled(true);
+        } else if (event.getEntity() instanceof TNTPrimed) {
+            TNTPrimed tntPrimed = (TNTPrimed) event.getEntity();
+            if (tntPrimed.getSource() instanceof Player && !isValidTarget(tntPrimed.getSource())) {
+                event.setCancelled(true);
+            }
         }
     }
 
@@ -141,8 +141,9 @@ public class GriefEvents implements Listener {
         }
         if (event.getAction() == Action.PHYSICAL
                 && !isValidTarget(event.getPlayer())
-                && event.getBlockFace() == BlockFace.UP
-                && event.getMaterial() == Material.SOIL) {
+                && event.hasBlock()
+                && event.getClickedBlock().getType() == Material.FARMLAND
+                ) {
             event.setCancelled(true);
         }
     }

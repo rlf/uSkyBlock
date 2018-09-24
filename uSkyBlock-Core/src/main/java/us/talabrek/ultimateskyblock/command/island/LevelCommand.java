@@ -1,24 +1,22 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandRank;
-import us.talabrek.ultimateskyblock.async.Callback;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.island.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
-import static dk.lockfuglsang.minecraft.po.I18nUtil.*;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LevelCommand extends RequireIslandCommand {
     public LevelCommand(uSkyBlock plugin) {
-        super(plugin, "level", "usb.island.level", "?island", tr("check your or anothers island level"));
+        super(plugin, "level", "usb.island.level", "?island", marktr("check your or anothers island level"));
         addFeaturePermission("usb.island.level.other", tr("allows user to query for others levels"));
     }
 
@@ -61,34 +59,30 @@ public class LevelCommand extends RequireIslandCommand {
             player.sendMessage(tr("\u00a74That player is invalid or does not have an island!"));
             return false;
         }
-        final boolean shouldRecalculate = player.getName().equals(info.getPlayerName()) || hasPermission(player, "usb.admin.island");
-        final Runnable showInfo = new Runnable() {
-            @Override
-            public void run() {
-                if (player != null && player.isOnline() && info != null) {
-                    player.sendMessage(tr("\u00a7eInformation about {0}'s Island:", islandPlayer));
-                    if (cmd.equalsIgnoreCase("level")) {
-                        IslandRank rank = plugin.getIslandLogic().getRank(info.locationForParty());
+        final boolean shouldRecalculate = player.getName().equals(info.getPlayerName()) || player.hasPermission("usb.admin.island");
+        final Runnable showInfo = () -> {
+            if (player != null && player.isOnline() && info != null) {
+                player.sendMessage(tr("\u00a7eInformation about {0}''s Island:", islandPlayer));
+                if (cmd.equalsIgnoreCase("level")) {
+                    IslandRank rank = plugin.getIslandLogic().getRank(info.locationForParty());
+                    if (rank != null) {
                         player.sendMessage(new String[]{
                                 tr("\u00a7aIsland level is {0,number,###.##}", rank.getScore()),
                                 tr("\u00a79Rank is {0}", rank.getRank())
                         });
+                    } else {
+                        player.sendMessage(tr("\u00a74Could not locate rank of {0}", islandPlayer));
                     }
                 }
             }
         };
         if (shouldRecalculate) {
-            plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+            plugin.getServer().getScheduler().runTaskLater(plugin, () -> plugin.calculateScoreAsync(player, info.locationForParty(), new Callback<us.talabrek.ultimateskyblock.api.model.IslandScore>() {
                 @Override
                 public void run() {
-                    plugin.calculateScoreAsync(player, info.locationForParty(), new Callback<IslandScore>() {
-                        @Override
-                        public void run() {
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 10L);
-                        }
-                    });
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, showInfo, 10L);
                 }
-            }, 1L);
+            }), 1L);
         } else {
             showInfo.run();
         }

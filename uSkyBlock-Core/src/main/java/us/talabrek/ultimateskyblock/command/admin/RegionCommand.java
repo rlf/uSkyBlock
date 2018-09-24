@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -35,12 +36,11 @@ public class RegionCommand extends CompositeCommand {
     private final AnimationHandler animationHandler;
     private int dash;
     private Material material;
-    private byte material_data;
 
     public RegionCommand(uSkyBlock plugin, final AnimationHandler animationHandler) {
-        super("region|rg", "usb.admin.region", tr("region manipulations"));
+        super("region|rg", "usb.admin.region", marktr("region manipulations"));
         this.animationHandler = animationHandler;
-        add(new AbstractCommand("show", tr("shows the borders of the current island")) {
+        add(new AbstractCommand("show", marktr("shows the borders of the current island")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -48,7 +48,7 @@ public class RegionCommand extends CompositeCommand {
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
                         dash = 3;
-                        setMaterial(Material.BRICK, (byte) 0);
+                        setMaterial(Material.BRICKS);
                         showRegion(player, region);
                     } else {
                         sender.sendMessage(tr("\u00a7eNo island found at your current location"));
@@ -60,7 +60,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("chunk", tr("shows the borders of the current chunk")) {
+        add(new AbstractCommand("chunk", marktr("shows the borders of the current chunk")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -68,7 +68,7 @@ public class RegionCommand extends CompositeCommand {
                     Chunk chunk = player.getLocation().getChunk();
                     Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
                     dash = 4;
-                    setMaterial(Material.STAINED_GLASS, (byte) 4);
+                    setMaterial(Material.YELLOW_STAINED_GLASS);
                     showChunk(player, chunkCoords);
                     return true;
                 } else {
@@ -77,7 +77,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("inner", tr("shows the borders of the inner-chunks")) {
+        add(new AbstractCommand("inner", marktr("shows the borders of the inner-chunks")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -86,7 +86,7 @@ public class RegionCommand extends CompositeCommand {
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getInnerChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 3;
-                        setMaterial(Material.STAINED_GLASS, (byte) 11);
+                        setMaterial(Material.BLUE_STAINED_GLASS);
                         for (Vector2D v : borderRegions) {
                             showChunk(player, v);
                         }
@@ -103,7 +103,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("border", tr("shows the non-chunk-aligned borders")) {
+        add(new AbstractCommand("border", marktr("shows the non-chunk-aligned borders")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -112,7 +112,7 @@ public class RegionCommand extends CompositeCommand {
                     if (region != null) {
                         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 3;
-                        setMaterial(Material.STAINED_GLASS, (byte) 3);
+                        setMaterial(Material.LIGHT_BLUE_STAINED_GLASS);
                         for (Region rg : borderRegions) {
                             showRegion(player, rg);
                         }
@@ -126,7 +126,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("outer", tr("shows the borders of the outer-chunks")) {
+        add(new AbstractCommand("outer", marktr("shows the borders of the outer-chunks")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -135,7 +135,7 @@ public class RegionCommand extends CompositeCommand {
                     if (region != null) {
                         Set<Vector2D> borderRegions = WorldEditHandler.getOuterChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 4;
-                        setMaterial(Material.STAINED_GLASS, (byte) 15);
+                        setMaterial(Material.BLACK_STAINED_GLASS);
                         for (Vector2D v : borderRegions) {
                             showChunk(player, v);
                         }
@@ -152,7 +152,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("hide", tr("hides the regions again")) {
+        add(new AbstractCommand("hide", marktr("hides the regions again")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
@@ -169,7 +169,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("tick", null, "integer", "set the ticks between animations") {
+        add(new AbstractCommand("tick", null, "integer", marktr("set the ticks between animations")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length == 1 && args[0].matches("[0-9]+")) {
@@ -185,7 +185,7 @@ public class RegionCommand extends CompositeCommand {
                 return false;
             }
         });
-        add(new AbstractCommand("refresh", "refreshes the existing animations") {
+        add(new AbstractCommand("refresh", marktr("refreshes the existing animations")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 animationHandler.stop();
@@ -248,15 +248,14 @@ public class RegionCommand extends CompositeCommand {
         showRegion(player, y, minP, maxP);
     }
 
-    public void setMaterial(Material material, byte data) {
+    public void setMaterial(Material material) {
         if (material == null) {
             throw new IllegalArgumentException("material cannot be null");
         }
         this.material = material;
-        this.material_data = data;
     }
 
     public synchronized void addAnimation(Player player, List<Location> points) {
-        animationHandler.addAnimation(new BlockAnimation(player, points, material, material_data));
+        animationHandler.addAnimation(new BlockAnimation(player, points, material, (byte) 0));
     }
 }

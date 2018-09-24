@@ -17,7 +17,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class TrustCommand extends RequireIslandCommand {
     public TrustCommand(uSkyBlock plugin) {
-        super(plugin, "trust|untrust", "usb.island.trust", "?player", tr("trust/untrust a player to help on your island."));
+        super(plugin, "trust|untrust", "usb.island.trust", "?player", marktr("trust/untrust a player to help on your island."));
     }
 
     @Override
@@ -43,13 +43,13 @@ public class TrustCommand extends RequireIslandCommand {
             if (alias.equals("trust")) {
                 island.trust(offlinePlayer.getUniqueId());
                 if (offlinePlayer.isOnline()) {
-                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
+                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}''s \u00a7eisland.", pi.getDisplayName()));
                 }
                 island.sendMessageToIslandGroup(true, marktr("\u00a7a{0} trusted {1} on the island"), player.getName(), name);
             } else {
                 island.untrust(offlinePlayer.getUniqueId());
                 if (offlinePlayer.isOnline()) {
-                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}'s \u00a7eisland.", pi.getDisplayName()));
+                    offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}''s \u00a7eisland.", pi.getDisplayName()));
                 }
                 island.sendMessageToIslandGroup(true, marktr("\u00a7c{0} revoked trust in {1} on the island"), player.getName(), name);
             }

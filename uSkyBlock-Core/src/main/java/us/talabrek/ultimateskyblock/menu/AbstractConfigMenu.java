@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -41,8 +40,8 @@ public class AbstractConfigMenu {
         return createItem(icon, (short) 0, title, lore);
     }
 
-    protected ItemStack createItem(Material icon, short subType, String title, List<String> lore) {
-        ItemStack itemStack = new ItemStack(icon, 1, subType);
+    protected ItemStack createItem(Material icon, int subType, String title, List<String> lore) {
+        ItemStack itemStack = new ItemStack(icon, 1, (short) (subType & 0xff));
         ItemMeta meta = itemStack.getItemMeta();
         meta.setDisplayName(title);
         meta.setLore(lore);
@@ -81,7 +80,7 @@ public class AbstractConfigMenu {
         }
         Matcher m = UUID_PATTERN.matcher(item);
         if (m.matches()) {
-            ItemStack itemStack = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+            ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD, 1);
             Bukkit.getUnsafe().modifyItemStack(itemStack, item);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName(tr(itemMeta.getDisplayName()));

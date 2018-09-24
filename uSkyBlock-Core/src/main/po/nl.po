@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-10-14 14:34+0100\n"
-"Last-Translator: dutchy1001\n"
-"Language-Team: Debocraft\n"
+"PO-Revision-Date: 2018-07-14 21:50+0100\n"
+"Last-Translator: clrxbl\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,7 @@ msgstr "slaat de documentatie van het commando op naar een bestand"
 
 #, java-format
 msgid "Wrote documentation to {0}"
-msgstr "Opgelagen documentatie naar {0} geschreven"
+msgstr "Opgeslagen documentatie naar {0} geschreven"
 
 #, java-format
 msgid "§4Error writing documentation: {0}"
@@ -82,8 +82,16 @@ msgid "{0,number,0}:{1,number,00}.{2,number,000}"
 msgstr "{0,number,0}:{1,number,00}.{2,number,000}"
 
 #, java-format
-msgid "§4You can complete this {0} more time(s)."
+msgid " §f{0}x §7{1}"
 msgstr ""
+
+#, java-format
+msgid "§eStill the following blocks short: {0}"
+msgstr "§eJe komt de volgende blokken tekort: {0}"
+
+#, java-format
+msgid "§4You can complete this {0} more time(s)."
+msgstr "§4Je kan dit nog {0} keer voltooien."
 
 #, java-format
 msgid "§4Requirements will reset in {0} days."
@@ -98,19 +106,19 @@ msgid "§4Requirements will reset in {0} minutes."
 msgstr "§4De vereisten worden teruggezet in {0} minuten."
 
 msgid "§4This challenge is currently unavailable."
-msgstr ""
+msgstr "§4Deze uitdaging is momenteel niet beschikbaar"
 
 #, java-format
 msgid "§4You can complete this again in {0} days."
-msgstr ""
+msgstr "§4Je kan dit opnieuw voltooien in {0} dagen."
 
 #, java-format
 msgid "§4You can complete this again in {0} hours."
-msgstr ""
+msgstr "§4Je kan dit opnieuw voltooien in {0} uren."
 
 #, java-format
 msgid "§4You can complete this again in {0} minutes."
-msgstr ""
+msgstr "§4Je kan dit opnieuw voltooien in {0} minuten."
 
 msgid "§eThis challenge requires:"
 msgstr "§eDeze uitdaging vereist:"
@@ -161,7 +169,7 @@ msgstr "§4De {0} uitdaging kan niet herhaald worden!"
 
 #, java-format
 msgid "§4You cannot complete the {0} challenge again yet!"
-msgstr ""
+msgstr "§4Je kan de {0} challenge nog niet opnieuw voltooien!"
 
 #, java-format
 msgid "§eTrying to complete challenge §a{0}"
@@ -182,10 +190,6 @@ msgstr "Je eiland moet level {0} hebben om deze uitdaging te voltooien!"
 #, java-format
 msgid "§4Unknown type of challenge: {0}"
 msgstr "§4Onbekende soort uitdaging: {0}"
-
-#, java-format
-msgid "§eStill the following blocks short: {0}"
-msgstr "§eJe komt de volgende blokken tekort: {0}"
 
 #, java-format
 msgid ""
@@ -234,7 +238,7 @@ msgstr "§4§lJe kan deze uitdaging niet herhalen."
 
 #, java-format
 msgid "Rank: {0}"
-msgstr "Rank: {0}"
+msgstr "Rang: {0}"
 
 msgid "§fComplete most challenges in"
 msgstr "§fVoltooi de meeste uitdagingen in"
@@ -266,7 +270,7 @@ msgid "But you are ALLLLLLL ALOOOOONE!"
 msgstr "Maar je bent HELEMAAAAAL ALLEEEEEEN!!"
 
 msgid "But you are Yelling in the wind!"
-msgstr "Maar je Schreeuwen tegen de wind in!"
+msgstr "Maar je bent in de wind aan het Schreeuwen!"
 
 msgid "But your fantasy friends are gone!"
 msgstr "Maar je fantasie vrienden zijn verdwenen!"
@@ -279,7 +283,7 @@ msgid "§cSorry! {0}"
 msgstr "§cSorry! {0}"
 
 msgid "Either send a message directly to your group, or toggle it on/off."
-msgstr "Stuur een bericht direct naar uw groep, of schakelen het aan/uit."
+msgstr "Stuur een bericht direct naar je groep, of schakel het aan/uit."
 
 msgid "party"
 msgstr "party"
@@ -289,7 +293,7 @@ msgstr "eiland"
 
 #, java-format
 msgid "§cToggled chat to {0} §aON"
-msgstr "§cSchakel chat {0} §aAAN"
+msgstr "§cChat geschakeld naar {0} §aAAN"
 
 #, java-format
 msgid "§cRepeat §9{0}§c to toggle it off"
@@ -327,7 +331,7 @@ msgstr "§4De uitdaging is nog nooit voltooid"
 
 #, java-format
 msgid "§echallenge: {0} has been reset for {1}"
-msgstr "§ede uitdaging: {0} is gereset voor {1}"
+msgstr "§euitdaging: {0} is gereset naar {1}"
 
 msgid "resets all challenges for the player"
 msgstr "reset alle uitdagingen voor een speler"
@@ -337,7 +341,11 @@ msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} heeft al zijn uitdagingen laten resetten."
 
 msgid "complete all challenges in the rank"
-msgstr "Voltooi alle uitdagingen in deze groep"
+msgstr "voltooi alle uitdagingen in deze groep"
+
+#, java-format
+msgid "§4No player named {0} was found!"
+msgstr "§4De speler met de naam {0} kan niet worden gevonden!"
 
 #, java-format
 msgid "§4Challenge {0} has already been completed"
@@ -345,19 +353,15 @@ msgstr "§4De {0} uitdaging is al voltooid"
 
 #, java-format
 msgid "§eChallenge {0} has been completed for {1}"
-msgstr "§eDe {0} uitdaging is volbracht door {1}"
+msgstr "§eDe {0} uitdaging is voltooid voor {1}"
 
 #, java-format
 msgid "§4No challenge named {0} was found!"
 msgstr "§4De uitdaging met de naam {0} kan niet worden gevonden!"
 
 #, java-format
-msgid "§4No player named {0} was found!"
-msgstr "§4De speler met de naam {0} kan niet worden gevonden!"
-
-#, java-format
 msgid "§4No rank named {0} was found!"
-msgstr "§4Geen ranking naam {0} gevonden!"
+msgstr "§4Geen rang genaamd {0} gevonden!"
 
 msgid "manage islands"
 msgstr "beheer de eilanden"
@@ -369,7 +373,7 @@ msgid "delete the island (removes the blocks)"
 msgstr "verwijder het eiland (dit verwijderd ook de blokken)"
 
 msgid "§9Deleted abandoned island at your current location."
-msgstr "§9Verwijderde het verlaten eiland op je lokatie."
+msgstr "§9Het verlaten eiland op je huidige locatie is verwijderd."
 
 msgid ""
 "§4Island at this location has members!\n"
@@ -382,11 +386,11 @@ msgid "removes the player from the island"
 msgstr "verwijderd de speler van het eiland"
 
 msgid "adds the player to the island"
-msgstr "voegt de spaeler aan het eiland toe"
+msgstr "voegt de speler toe aan het eiland"
 
 #, java-format
 msgid "§b{0}§d has joined your island group."
-msgstr "§b{0}§d heeft zich aangesloten bij uw eiland."
+msgstr "§b{0}§d heeft zich aangesloten bij je eiland groep."
 
 #, java-format
 msgid "§4No player named {0} found!"
@@ -403,7 +407,7 @@ msgid "print out info about the island"
 msgstr "geeft informatie over het eiland"
 
 msgid "sets the biome of the island"
-msgstr "set het biome van het eiland"
+msgstr "zet de biome van het eiland"
 
 msgid "§4That player has no island."
 msgstr "§4Die speler heeft geen eiland."
@@ -412,10 +416,10 @@ msgid "§4No valid island at your location"
 msgstr "§4Er is geen geldig eiland op jouw locatie"
 
 msgid "purges the island"
-msgstr "verwijderd het eiland"
+msgstr "verwijdert het eiland"
 
 msgid "§4Error! §9No valid island found for purging."
-msgstr "§4Error! §9Er  is geen geldig eiland gevonden om te verwijderen."
+msgstr "§4Error! §9Er is geen geldig eiland gevonden om te verwijderen."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
@@ -426,7 +430,7 @@ msgstr "het eiland op slot zetten."
 
 #, java-format
 msgid "§cSet {0}s island to be ignored on top-ten and purge."
-msgstr "§cSet {0}'s eiland op de negeer lijst van verwijderen en de top-tien."
+msgstr "§cZet {0}''s eiland op de negeerlijst van verwijderen en de top-tien."
 
 #, java-format
 msgid ""
@@ -437,7 +441,7 @@ msgstr ""
 "lijst en kan verwijderd worden."
 
 msgid "§4No valid player-name supplied."
-msgstr "§4Geen geldige spelers-naam ingevoerd"
+msgstr "§4Geen geldige speler-naam ingevoerd"
 
 #, java-format
 msgid "Removing {0} from island"
@@ -445,11 +449,11 @@ msgstr "{0} is van het eiland verwijderd"
 
 #, java-format
 msgid "§eChanged biome of {0}s island to {1}."
-msgstr "§eHet biome van {0}s eiland is veranderd naar {1}."
+msgstr "§eDe biome van {0}s eiland is veranderd naar {1}."
 
 #, java-format
 msgid "§eChanged biome of {0}s island to OCEAN."
-msgstr "§eHet biome van {0}s eiland is veranderd naar OCEAN."
+msgstr "§eDe biome van {0}s eiland is veranderd naar OCEAN."
 
 msgid "§aYou may need to go to spawn, or relog, to see the changes."
 msgstr ""
@@ -464,22 +468,87 @@ msgid "§e{0} has had their biome changed to OCEAN."
 msgstr "§e{0} heeft zijn/haar biome veranderd naar OCEAN."
 
 #, java-format
-msgid "§eRemoving {0}'s island."
-msgstr "§eVerwijderd {0}'s eiland."
+msgid "§eRemoving {0}''s island."
+msgstr "§e{0}''s eiland wordt verwijderd."
 
 msgid "Error: That player does not have an island!"
-msgstr "Error: Die speller heeft geen eiland!"
+msgstr "Error: Die speler heeft geen eiland!"
 
 #, java-format
 msgid "§e{0}s island at {1} has been protected"
-msgstr "§e{0}s eiland op {1} is nu beveiliging"
+msgstr "§e{0}s eiland op {1} is nu beschermd"
 
 #, java-format
 msgid "§4{0}s island at {1} was already protected"
-msgstr "§4{0}s eiland op {1} is al beveiligd"
+msgstr "§4{0}s eiland op {1} is al beschermd"
+
+msgid "various chunk commands"
+msgstr ""
+
+msgid "regenerate current chunk"
+msgstr ""
+
+#, java-format
+msgid "successfully regenerated chunk at {0},{1}"
+msgstr ""
+
+#, java-format
+msgid "§4FAILED!§e could not regenerate chunk at {0},{1}"
+msgstr ""
+
+msgid "unload current chunk"
+msgstr ""
+
+#, java-format
+msgid "successfully unloaded chunk at {0},{1}"
+msgstr ""
+
+#, java-format
+msgid "§4FAILED!§e could not unload chunk at {0},{1}"
+msgstr ""
+
+msgid "load current chunk"
+msgstr ""
+
+#, java-format
+msgid "loaded chunk at {0},{1}"
+msgstr ""
+
+msgid "only available for players"
+msgstr ""
+
+#, java-format
+msgid "§4ERROR:§e {0}"
+msgstr ""
 
 msgid "open GUI for config"
-msgstr "open de GUI voor de config"
+msgstr "open de GUI voor de configuratie"
+
+msgid "searches config for a specific key"
+msgstr ""
+
+#, java-format
+msgid "§c{0}§9"
+msgstr ""
+
+#, java-format
+msgid "§9{0}§8: §e{1}"
+msgstr ""
+
+#, java-format
+msgid "Found the following matching {0}:"
+msgstr ""
+
+msgid "§a<section>"
+msgstr ""
+
+#, java-format
+msgid "§3{0,number,#.##}"
+msgstr ""
+
+#, java-format
+msgid "§2{0}"
+msgstr ""
 
 msgid "§eInvalid configuration name"
 msgstr "§eOngeldige configuratie naam"
@@ -488,34 +557,34 @@ msgid "Controls player-cooldowns"
 msgstr "Beheert de player-cooldowns"
 
 msgid "clears the cooldown on a command (* = all)"
-msgstr "reset de cooldown met een commando (* = alle)"
+msgstr "reset de cooldown op een command (* = alle)"
 
 msgid "§eThe player is not currently online"
 msgstr "§eDe speler is niet online"
 
 #, java-format
 msgid "Cleared cooldown on {0} for {1}"
-msgstr "Afkoelingsperiode gewist op {0} voor {1}"
+msgstr "Cooldownperiode gewist op {0} voor {1}"
 
 #, java-format
 msgid "No active cooldown on {0} for {1} detected!"
-msgstr "Geen actieve afkoelperiode gevonden voor {1} op {0}!"
+msgstr "Geen actieve cooldownperiode gevonden voor {1} op {0}!"
 
 msgid "Invalid command supplied, only restart and biome supported!"
-msgstr "Ongeldig commando, alleen opnieuw starten en biome is ondersteund!"
+msgstr "Ongeldig command, alleen opnieuw starten en biome is ondersteund!"
 
 msgid "restarts the cooldown on the command"
 msgstr "reset de cooldown met het command"
 
 #, java-format
 msgid "§eReset cooldown on {0} for {1}§e to {2} seconds"
-msgstr "§eReset afkoelperiode op {0} voor {1} §e naar {2} seconden"
+msgstr "§eReset cooldownperiode op {0} voor {1} §e naar {2} seconden"
 
 msgid "lists all the active cooldowns"
 msgstr "lijst van alle actieve cooldowns"
 
 msgid "§eCmd Cooldown"
-msgstr "§eCmd afkoelperiode"
+msgstr "§eCmd Cooldownperiode"
 
 #, java-format
 msgid "§a{0} §c{1}"
@@ -523,7 +592,7 @@ msgstr "§a{0} §c{1}"
 
 #, java-format
 msgid "§eNo active cooldowns for §9{0}§e found."
-msgstr "§eEr zijn geen actieve afkoelperiodes voor §9{0}§e gevonden."
+msgstr "§eEr zijn geen actieve cooldownperiodes voor §9{0}§e gevonden."
 
 msgid "control debugging"
 msgstr "debugging controle"
@@ -532,16 +601,16 @@ msgid "set debug-level"
 msgstr "set debug-niveau"
 
 msgid "toggle debug-logging"
-msgstr "toggle debug-logging"
+msgstr "schakel debug-logging"
 
 msgid "§4Logging wasn't active, so you can't disable it!"
 msgstr "§4Logging was niet actief, uitzetten is dus niet mogelijk!"
 
 msgid "flush current content of the logger to file."
-msgstr "verwijderd de huidige content van het log naar een bestand"
+msgstr "leegt de huidige content van het log naar een bestand"
 
 msgid "§eLog-file has been flushed."
-msgstr "§eHet log-bestand is vernieuwd."
+msgstr "§eHet log-bestand is geleegd."
 
 msgid "§4Logging is not enabled, use §d/usb debug enable"
 msgstr "§4Logging staat nog niet aan, gebruiken §d/usb debug enable"
@@ -559,20 +628,20 @@ msgid "§4No valid island found"
 msgstr "§4Er is geen geldig eiland gevonden"
 
 #, java-format
-msgid "§4No flatland detected at {0}'s island!"
-msgstr "§4Er is geen vlakland gevonden onder {0}'s eiland"
+msgid "§4No flatland detected at {0}''s island!"
+msgstr "§4Er is geen vlakland gevonden onder {0}''s eiland"
 
 msgid "flushes all caches to files"
-msgstr "saved all cashes naar file"
+msgstr "leegt alle caches naar bestanden"
 
 #, java-format
 msgid ""
 "§eFlushed §a{0} islands§e, §b{1} players and §6{2} challenge-completions."
 msgstr ""
-"§eFlushed §a{0} eilands§e, §b{1} speler en §6{2} uitdagingen volbrenging."
+"§e§a{0} eilanden§e, §b{1} spelers en §6{2} uitdagingen-volbrenging geleegd."
 
 msgid "manually update the top 10 list"
-msgstr "de top 10 lijst handmatig bijwerken"
+msgstr "de top tien lijst handmatig bijwerken"
 
 msgid "§eGenerating the Top Ten list"
 msgstr "§eHet genereren van de Top Tien lijst"
@@ -596,7 +665,7 @@ msgid "§eValid fields are {0}"
 msgstr "§eGeldige velden zijn {0}"
 
 msgid "teleport to another players island"
-msgstr "Telepoort naar een eiland van een andere speler"
+msgstr "Teleporteert naar een andere speler''s eiland"
 
 msgid "§4Only supported for players"
 msgstr "§4Alleen ondersteund voor spelers"
@@ -606,13 +675,16 @@ msgstr "§4Die speler heeft geen eiland."
 
 #, java-format
 msgid "§aTeleporting to {0}''s island."
-msgstr "§aTeleporting naar {0}''s eiland."
+msgstr "§aTeleporteren naar {0}''s eiland."
 
 msgid "imports players and islands from other formats"
-msgstr "importeerd spelers en eilanden van een ander formaat"
+msgstr "importeert spelers en eilanden van een ander formaat"
+
+msgid "controls async jobs"
+msgstr ""
 
 msgid "§9Job Statistics"
-msgstr "§9Job Statistieken"
+msgstr "§9Baan Statistieken"
 
 msgid "§7----------------"
 msgstr "§7----------------"
@@ -621,7 +693,7 @@ msgid "#"
 msgstr "#"
 
 msgid "ms/job"
-msgstr "ms/job"
+msgstr "ms/baan"
 
 msgid "ms/tick"
 msgstr "ms/tick"
@@ -639,18 +711,18 @@ msgid "name"
 msgstr "naam"
 
 msgid "changes the language of the plugin, and reloads"
-msgstr "verander de biome van het eiland"
+msgstr "verandert de taal van de plugin en herlaad"
 
 #, java-format
 msgid "§aSuccessfully changed language to §e{0}"
-msgstr "§aDe taal is met succes veranders naar §e{0}"
+msgstr "§aDe taal is met succes veranderd naar §e{0}"
 
 #, java-format
 msgid "§cFailed to change language to §e{0}"
 msgstr "§cHet is mislukt om de taal naar §e{0} te veranderen."
 
 msgid "§9Supported Languages:\n"
-msgstr "§9Ondersteunende Talen:\n"
+msgstr "§9Ondersteunde Talen:\n"
 
 #, java-format
 msgid "§f{0} §7{1} §9 by {2} §7{3}\n"
@@ -660,11 +732,11 @@ msgid "§cUnable to locate any languages."
 msgstr "§cKan geen talen vinden"
 
 msgid "transfer leadership to another player"
-msgstr "overdragen van het leiderschap naar een andere speler"
+msgstr "leiderschap overdragen naar een andere speler"
 
 #, java-format
 msgid "§4Player {0} has no island to transfer!"
-msgstr "§4De speler {0} heeft geen eiland om naar toe te gaan!"
+msgstr "§4De speler {0} heeft geen eiland om over te dragen"
 
 #, java-format
 msgid ""
@@ -682,7 +754,7 @@ msgid "advanced info about NBT stuff"
 msgstr "geavanceerde informatie over NBT materiaal"
 
 msgid "shows the NBTTag for the currently held item"
-msgstr "toont de NBTTag voor het item momenteel in handen"
+msgstr "toont de NBTTag voor het huidige vastgehouden item"
 
 #, java-format
 msgid "§eInfo for §9{0}"
@@ -700,7 +772,7 @@ msgid "§cNo item in hand!"
 msgstr "§cJe hand is leeg!"
 
 msgid "§eCan only be executed as a player"
-msgstr "§eKan alleen als speller worden uitgevoerd"
+msgstr "§eKan alleen als speler worden uitgevoerd"
 
 msgid "sets the NBTTag on the currently held item"
 msgstr "zet de NBTTag voor het item in je hand"
@@ -710,7 +782,7 @@ msgid "§eSet §9{0}§e to §c{1}"
 msgstr "§eZet §9{0}§e naar §c{1}"
 
 msgid "adds the NBTTag on the currently held item"
-msgstr "voegt de NBTTag aan op je huidige item"
+msgstr "voegt de NBTTag toe op je huidig vastgehouden item"
 
 #, java-format
 msgid "§eAdded §9{0}§e to §c{1}"
@@ -741,8 +813,14 @@ msgid "§eNo orphans currently registered."
 msgstr "§eEr zijn geen orphans geregistreerd."
 
 #, java-format
-msgid "§eOrphans: {0}"
-msgstr "§eOrphans: {0}"
+msgid "§eOrphans ({0}/{1}): {2}"
+msgstr ""
+
+msgid "shows perk-information"
+msgstr ""
+
+msgid "shows a specific players perks"
+msgstr ""
 
 #, java-format
 msgid "additional perks {0}"
@@ -770,19 +848,27 @@ msgstr "verwijders alle verlaten eilanden"
 msgid "§4You must provide the age in days to purge!"
 msgstr "§4Je moet het aantal dagen invoeren om een purge uit te voeren!"
 
-#, java-format
-msgid "§eFinding all islands that has been abandoned for more than {0} days."
-msgstr "§eMarkeer alle eilanden die inactief zijn voor meer dan {0} dagen."
+msgid "§4The level must be a valid number"
+msgstr ""
 
 #, java-format
-msgid "§4PURGE:§e Repeat the command within {0} to accept."
-msgstr "§4PURGE:§e Herhaal de commando in {0} om te accepteren."
+msgid ""
+"§eFinding all islands that have been abandoned for more than {0} days below "
+"level {1}"
+msgstr ""
+
+#, java-format
+msgid "§4PURGE:§e Do §9usb purge confirm§e within {0} to accept."
+msgstr ""
 
 msgid "§4Trying to abort purge"
 msgstr "§4probeert de purge te stoppen"
 
-msgid "§4A purge is already running, please wait for it to finish!"
-msgstr "§4Een purge wordt al uitgevoerd, wacht tot het klaar is!"
+msgid "§4Purge aborted!"
+msgstr ""
+
+msgid "§4A purge is already running.§e Either §9confirm§e or §9stop§e it."
+msgstr ""
 
 msgid "§4Starting purge..."
 msgstr "§4Starten van de purge..."
@@ -809,13 +895,16 @@ msgid "shows the borders of the outer-chunks"
 msgstr "toont de grens aan van de buitenkant-chunks"
 
 msgid "hides the regions again"
-msgstr "verbergt de regio's opnieuw"
+msgstr "verbergt de regio''s opnieuw"
 
 msgid "§eStopped displaying regions"
-msgstr "§eGestopt met het weergeven van de regio's"
+msgstr "§eGestopt met het weergeven van de regio''s"
 
 msgid "§eNo currently shown regions for this player"
-msgstr "§eEr worden geen regio's weergegeven voor deze speler"
+msgstr "§eEr worden geen regio''s weergegeven voor deze speler"
+
+msgid "set the ticks between animations"
+msgstr ""
 
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
@@ -824,16 +913,18 @@ msgstr "§eAnimatie-tick veranderd naar {0}."
 msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimatie-tick moet een geldig geheel getal zijn."
 
-msgid "set a player's island to your location"
+msgid "refreshes the existing animations"
+msgstr ""
+
+msgid "set a player''s island to your location"
 msgstr "zet een spelers eiland op mijn lokatie"
 
 #, java-format
-msgid "§aSet {0}'s island to the bedrock nearest you."
-msgstr "§aSet {0}'s eiland op het dichtstbijzijnde bedrock block ."
-
-msgid "§4Bedrock not found: unable to set the island!"
+msgid "§aSet {0}''s island to the current island."
 msgstr ""
-"§4Kan het bedrock block niet vinden waardoor veranderen niet mogelijk is!"
+
+msgid "§4Island not found: unable to set the island!"
+msgstr ""
 
 msgid "reload configuration from file."
 msgstr "herladen van de configuratie van het bestand"
@@ -881,7 +972,7 @@ msgstr "§cAFGEBROKEN:§e Protect-All was gestopped!"
 
 #, java-format
 msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
-msgstr "§eVolbracht protect-all in {0}, {1} nieuwe regio's zijn gecreeerd!"
+msgstr "§eVolbracht protect-all in {0}, {1} nieuwe regio''s zijn gecreeerd!"
 
 #, java-format
 msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
@@ -891,8 +982,10 @@ msgid "§4PURGE:§9 Scanning aborted."
 msgstr "§4PURGE:§9 Scanning gestopped."
 
 #, java-format
-msgid "§4PURGE:§9 Scanning done, found {0} candidates for purgatory."
-msgstr "§4VERWIJDER:§9 Scan klaar, {0} kandidaten gevonden voor verwijdering."
+msgid ""
+"§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
+"purgatory."
+msgstr ""
 
 #, java-format
 msgid ""
@@ -931,7 +1024,7 @@ msgid "§eUnloading chunks at {0}"
 msgstr "§eHet ontladen van de chunks op {0}"
 
 msgid "update the WG regions"
-msgstr "Bijwerken van de WG regio's"
+msgstr "Bijwerken van de WG regio''s"
 
 #, java-format
 msgid "§eIsland world-guard regions updated for {0}"
@@ -1050,8 +1143,8 @@ msgid "§eInvitation for {0}§e has timedout or been cancelled."
 msgstr "§eDe uitnodiging van {0}§e is verlopen of geannuleerd."
 
 #, java-format
-msgid "§eInvitation for {0}'s island has timedout or been cancelled."
-msgstr "§eDe uitnodiging van {0}'s eiland  is verlopen of geannuleerd."
+msgid "§eInvitation for {0}''s island has timedout or been cancelled."
+msgstr "§eDe uitnodiging van {0}''s eiland  is verlopen of geannuleerd."
 
 msgid "§eYou have accepted the invitation to join an island."
 msgstr ""
@@ -1158,6 +1251,12 @@ msgstr ""
 
 #, java-format
 msgid ""
+"§7The pixies are busy changing the biome in your current chunk to §9{0}§7, "
+"be patient."
+msgstr ""
+
+#, java-format
+msgid ""
 "§7The pixies are busy changing the biome of your island to §9{0}§7, be "
 "patient."
 msgstr ""
@@ -1217,7 +1316,7 @@ msgstr ""
 "§cJe eiland is in het proces van het genereren, je kan nu niet naar je home "
 "lokatie teleporteren."
 
-msgid "check your or anothers island info"
+msgid "check your or another''s island info"
 msgstr "controleer jouw of iemand anders z'n eiland informatie"
 
 msgid "allows user to see others island info"
@@ -1225,6 +1324,9 @@ msgstr "Laat de gebruiker anderen eiland info zien"
 
 msgid "§4Island level has been disabled, contact an administrator."
 msgstr "§4Eiland niveau is uitgeschakeld, neem contact op met een beheerder."
+
+msgid "§4Hold your horses! §eYou have to be patient..."
+msgstr ""
 
 msgid "§eYou must be on your island to use this command."
 msgstr "§eJe moet op je eiland zijn om dit commando te kunnen uitvoeren"
@@ -1246,6 +1348,10 @@ msgid "Score Count Block"
 msgstr "Score van het aantal blokken"
 
 #, java-format
+msgid "{0,number,00.00}  {1,number,#} {2}"
+msgstr ""
+
+#, java-format
 msgid "§aIsland level is {0,number,###.##}"
 msgstr "§aEiland niveau is {0,number,###.##}"
 
@@ -1258,7 +1364,7 @@ msgstr ""
 "§eGebruik§f /island invite <spelersnaam>§e om een speler uittenodigen naar "
 "uw eiland."
 
-msgid "§4Only the island's owner can invite!"
+msgid "§4Only the island''s owner can invite!"
 msgstr "§4Alleen de eiland eigenaar kan spelers uitnodigen!"
 
 #, java-format
@@ -1352,12 +1458,16 @@ msgid "allows user to query for others levels"
 msgstr "laat de speler andere spelers levels opvragen"
 
 #, java-format
-msgid "§eInformation about {0}'s Island:"
-msgstr "§eInformatie over {0}'s Eiland"
+msgid "§eInformation about {0}''s Island:"
+msgstr "§eInformatie over {0}''s Eiland"
 
 #, java-format
 msgid "§9Rank is {0}"
 msgstr "§9Rank is {0}"
+
+#, java-format
+msgid "§4Could not locate rank of {0}"
+msgstr ""
 
 msgid "lock your island to non-party members."
 msgstr "sluit het eiland af voor niet-party leden"
@@ -1391,6 +1501,9 @@ msgstr "§4Alleen de leider kan het leiderschap overdragen!"
 #, java-format
 msgid "{0} tried to take over the island!"
 msgstr "{0} heeft geprobeerd het eiland over te nemen!"
+
+msgid "show the islands limits"
+msgstr ""
 
 msgid "show party information"
 msgstr "laat party informatie zien"
@@ -1480,10 +1593,10 @@ msgstr "§eLET OP: Je gehele eiland en je belangen worden VERWIJDERD!"
 msgid "set the island-home"
 msgstr "set de thuis-lokatie"
 
-msgid "set your island's warp location"
+msgid "set your island''s warp location"
 msgstr "set de warp lokatie van je eiland"
 
-msgid "§cYou do not have permission to set your island's warp point!"
+msgid "§cYou do not have permission to set your island''s warp point!"
 msgstr "§cje hebt geen toestemming om je warp lokatie te zetten op je eiland!"
 
 msgid "§cYou need to be on your own island to set the warp!"
@@ -1512,7 +1625,7 @@ msgstr "§b{0}§d heeft het eiland warp geactiveerd."
 msgid "§b{0}§d deactivated the island warp."
 msgstr "§b{0}§d heeft het eiland warp gedeactiveerd."
 
-msgid "§cYou do not have permission to enable/disable your island's warp!"
+msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr "§cJe hebt geen toestemming om je eiland warp aan/uit te zetten!"
 
 msgid "display the top10 of islands"
@@ -1544,23 +1657,23 @@ msgid "§4Unknown player {0}"
 msgstr "§4Onbekende speler {0}"
 
 #, java-format
-msgid "§eYou are now trusted on §4{0}'s §eisland."
-msgstr "§eJe bent nu vertrouwed op §4{0}'s §eeiland."
+msgid "§eYou are now trusted on §4{0}''s §eisland."
+msgstr "§eJe bent nu vertrouwed op §4{0}''s §eeiland."
 
 #, java-format
 msgid "§a{0} trusted {1} on the island"
 msgstr "§a{0} vertrouwd {1} op het eiland"
 
 #, java-format
-msgid "§eYou are no longer trusted on §4{0}'s §eisland."
-msgstr "§eJe bent niet meer vertrouwd op §4{0}'s §eeiland."
+msgid "§eYou are no longer trusted on §4{0}''s §eisland."
+msgstr "§eJe bent niet meer vertrouwd op §4{0}''s §eeiland."
 
 #, java-format
 msgid "§c{0} revoked trust in {1} on the island"
 msgstr "§c{0} heeft het vertouwen afgenomen van {1} op het eiland."
 
-msgid "warp to another player's island"
-msgstr "warp naar een andere speler's eiland"
+msgid "warp to another player''s island"
+msgstr "warp naar een andere speler''s eiland"
 
 msgid "§aYour incoming warp is active, players may warp to your island."
 msgstr "§aJe inkomende warp is actief, spelers kunnen naar je eiland warpen."
@@ -1630,8 +1743,11 @@ msgstr "Hiermee kan de gebruiker [USB] borden gebruiken"
 msgid "allows user to place [usb] signs"
 msgstr "Hiermee kan de gebruiker [USB] borden te plaatsen"
 
-msgid "§eYou can not use another islands portals!"
-msgstr "§eJe kan alleen portals gebruiken op je eigen eiland!"
+msgid "§eYou can not use another island''s portals!"
+msgstr ""
+
+msgid "§eVillager-trading isn't allowed."
+msgstr ""
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandelen in niet toegestaan op andere eilanden. Doe het op spawn."
@@ -1678,7 +1794,7 @@ msgstr "§eVerander je Obsidian terug naar lava. Wel opletten!"
 msgid "§eYour inventory must have another empty space!"
 msgstr "§eJe inventaris moet tenminsten 1 lege plek hebben!"
 
-msgid "§4It's a bad idea to replace your lava!"
+msgid "§4It''s a bad idea to replace your lava!"
 msgstr "§4Het is een slecht idee om je lava te vervangen!"
 
 msgid "§eYou cannot hurt island-members."
@@ -1690,11 +1806,26 @@ msgstr "§4Die speler heeft je verboden om naar zijn eiland te warpen."
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4Dat eiland is  §cgesloten.§e Er is geen teleport mogelijk."
 
-msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
+#, java-format
+msgid ""
+"§4{0} is limited. §eScanning your island to see if you are allowed to place "
+"more, please be patient"
+msgstr ""
+
+msgid "§e... Scanning complete, you can try again"
+msgstr ""
+
+#, java-format
+msgid ""
+"§4You''ve hit the {0} limit!§e You can''t have more of that type on your "
+"island!§9 Max: {1,number}"
+msgstr ""
 
 msgid "§eYou can only use spawn-eggs on your own island."
 msgstr "§eJe kan alleen spawn-eggs op je eigen eiland gebruiken."
+
+msgid "§cYou have reached your spawn-limit for your island."
+msgstr "§cJe hebt het maximake berijkt voor je spawn-limiet"
 
 msgid "§cBanned:§e You are banned from this island."
 msgstr "§cVerbannen:§e je bent verbannen van dit eiland."
@@ -1758,22 +1889,6 @@ msgid "§4You must be the party leader to unlock your island!"
 msgstr "§4Je moet eiland eigenaar zijn om je eiland te ontgrendelen!"
 
 #, java-format
-msgid ""
-"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
-"~ {6}"
-msgstr ""
-"§eVoortgang: {0,number,##}% ({1}/{2} - succes:{3}, mislukt:{4}, overgeslage:"
-"{5}) ~ {6}"
-
-#, java-format
-msgid "§4No importer named §e{0}§4 found"
-msgstr "§4Geen importuer met de naam §e{0}§4 gevonden"
-
-#, java-format
-msgid "§eConverted {0}/{1} files in {2}"
-msgstr "§eConverted {0}/{1} files in {2}"
-
-#, java-format
 msgid "§7PlayerDB: Filtering {0} players from uuid2name.yml"
 msgstr "§7PlayerDB: Filtering {0} spelers van uuid2name.yml"
 
@@ -1810,6 +1925,22 @@ msgstr "§7 - MojangAPI:§aVOLTOOID: {0}"
 #, java-format
 msgid "§7 - MojangAPI:§cERROR: {0}"
 msgstr "§7 - MojangAPI:§cERROR: {0}"
+
+#, java-format
+msgid ""
+"§eProgress: {0,number,##}% ({1}/{2} - success:{3}, failed:{4}, skipped:{5}) "
+"~ {6}"
+msgstr ""
+"§eVoortgang: {0,number,##}% ({1}/{2} - succes:{3}, mislukt:{4}, overgeslage:"
+"{5}) ~ {6}"
+
+#, java-format
+msgid "§4No importer named §e{0}§4 found"
+msgstr "§4Geen importuer met de naam §e{0}§4 gevonden"
+
+#, java-format
+msgid "§eConverted {0}/{1} files in {2}"
+msgstr "§eConverted {0}/{1} files in {2}"
 
 msgid "The island has been created."
 msgstr "Je eiland is gecreeerd."
@@ -1941,9 +2072,6 @@ msgstr "Terug"
 msgid "§9Integer Editor"
 msgstr "§9Integer Editor"
 
-msgid "§9Item List Editor"
-msgstr "§9Item Lijst Editor"
-
 msgid "§eConfiguration saved and reloaded."
 msgstr "§eDe Configuratie is opgeslagen en herladen."
 
@@ -1983,44 +2111,44 @@ msgstr "Uitdagingen Menu "
 msgid "Change Biome"
 msgstr "Verander Biome"
 
-msgid "change the island's biome."
+msgid "change the island''s biome."
 msgstr "verander het eiland''s biome"
 
 msgid "Toggle Island Lock"
 msgstr "Schakel Island Lock"
 
-msgid "toggle the island's lock."
+msgid "toggle the island''s lock."
 msgstr "het eiland op slot zetten."
 
 msgid "Set Island Warp"
 msgstr "Set Island Warp"
 
-msgid "set the island's warp."
+msgid "set the island''s warp."
 msgstr "de warp van het eiland veranderen."
 
 msgid ""
-"set the island's warp,\n"
+"set the island''s warp,\n"
 "which allows non-group\n"
 "members to teleport to\n"
 "the island."
 msgstr ""
-"set het eiland's warp,\n"
+"set het eiland''s warp,\n"
 "voor non leden, om naar\n"
 "het eiland te teleporteren."
 
 msgid "Toggle Island Warp"
 msgstr "Schakel Island Warp"
 
-msgid "toggle the island's warp."
+msgid "toggle the island''s warp."
 msgstr "de warp aan en uit zetten."
 
 msgid ""
-"toggle the island's warp,\n"
+"toggle the island''s warp,\n"
 "allowing them to turn it\n"
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
-"toggle het eiland's warp,\n"
+"toggle het eiland''s warp,\n"
 "hiermee kan het aan of uit\n"
 "gezet mee worden, maar kan\n"
 "niet de locatie mee gezet worden."
@@ -2288,10 +2416,10 @@ msgstr "§9Speler Permissions"
 
 msgid ""
 "§eClick here to return to\n"
-"§eyour island group's info."
+"§eyour island group''s info."
 msgstr ""
 "§eKlik hier om terug te gaan\n"
-"§enaar je eilands groep's info."
+"§enaar je eilands groep''s info."
 
 #, java-format
 msgid "§e{0}''§9s Permissions"
@@ -2334,16 +2462,11 @@ msgid "§cThis island is full."
 msgstr "§cDit eoland is vol."
 
 msgid ""
-"§eHover over a player's icon to\n"
+"§eHover over a player''s icon to\n"
 "§eview their permissions. The\n"
 "§eleader can change permissions\n"
-"§eby clicking a player's icon."
+"§eby clicking a player''s icon."
 msgstr ""
-"§eHover over een spelers icoon\n"
-"§eom hun permissies te zien. De\n"
-"§eleider kan de permissies\n"
-"§everanderen doormiddel van\n"
-"§eop de spelers icoon te klikken."
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -2363,8 +2486,8 @@ msgstr "Kan {0}"
 msgid "Cannot {0}"
 msgstr "Kan niet {0}"
 
-msgid "§e<Click to change this player's permissions>"
-msgstr "§e<Klik hier om deze speler's permissie te veranderen>"
+msgid "§e<Click to change this player''s permissions>"
+msgstr "§e<Klik hier om deze speler''s permissie te veranderen>"
 
 msgid "Island Log"
 msgstr "Eiland Log"
@@ -2374,7 +2497,7 @@ msgid ""
 "§ethe main island screen."
 msgstr ""
 "§eKlik hier om terug te gaan\n"
-"§enaar het eiland's hoofdmenu."
+"§enaar het eiland''s hoofdmenu."
 
 msgid "§e§lIsland Log"
 msgstr "§e§lEiland Log"
@@ -2394,6 +2517,32 @@ msgstr "§e§lKlik hier om naar deze biome te veranderen."
 
 msgid "You cannot use this biome."
 msgstr "Je kan deze biome niet gebruiken"
+
+msgid "§2chunk"
+msgstr ""
+
+msgid "§call"
+msgstr ""
+
+#, java-format
+msgid "§e{0}"
+msgstr ""
+
+msgid "§c-"
+msgstr ""
+
+msgid "Decrease radius of biome-change"
+msgstr ""
+
+#, java-format
+msgid "Current radius: {0}"
+msgstr ""
+
+msgid "§2+"
+msgstr ""
+
+msgid "Increase radius of biome-change"
+msgstr ""
 
 msgid "§7Current page"
 msgstr "§7Huidige pagina"
@@ -2441,11 +2590,17 @@ msgstr ""
 "§cGeen toegang!\n"
 "§7({0})"
 
+msgid "§a§lReturn to Spawn"
+msgstr ""
+
+msgid "Teleport to the spawn area."
+msgstr ""
+
 msgid "§a§lJoin an Island"
 msgstr "§a§lLid worden van een eiland"
 
 msgid ""
-"Want to join another player's\n"
+"Want to join another player''s\n"
 "island instead of starting\n"
 "your own? If another player\n"
 "invites you to their island\n"
@@ -2454,13 +2609,6 @@ msgid ""
 "§e§lClick here to accept an invite!\n"
 "§e§l(You must be invited first)"
 msgstr ""
-"Wil je samen met iemand anders\n"
-"spelen in plaats van je eigen eiland?\n"
-"Als een andere speler je uitnodigd kan\n"
-"je hier klikken of gebruik de commando:\n"
-"§e/island accept§f Om de uitnodiging te accepteren.\n"
-"§e§lKlik hier om een uitnodiging te accepteren!\n"
-"§e§l(je moet wel eerst uitgenodigd zijn dan)"
 
 msgid "Island Menu"
 msgstr "Eiland Menu"
@@ -2469,18 +2617,12 @@ msgid "§a§lReturn Home"
 msgstr "§a§lTerug naar Huis"
 
 msgid ""
-"Return to your island's home\n"
+"Return to your island''s home\n"
 "point. You can change your home\n"
 "point to any location on your\n"
 "island using §b/island sethome\n"
 "§e§lClick here to return home."
 msgstr ""
-"Keer terug naar je eilands\n"
-"thuis lokatie. Je kan je thuis\n"
-"lokatie veranderen naar elke\n"
-"lokatie op je eiland door gebruik\n"
-"te maken van §b/island sethome.\n"
-"§e§lKlik hier om naar je thuis lokatie te gaan."
 
 msgid "§a§lChallenges"
 msgstr "§a§lUitdagingen"
@@ -2739,6 +2881,21 @@ msgstr "§9Text Editor"
 msgid "Too many requests for Mojangs API ({0} within {1}), sleeping {2}"
 msgstr "Te veel verzoeken naar Mojangs API ({0} binnen {1}), pause {2}"
 
+msgid "§9Hold your horses! You have to be patient..."
+msgstr ""
+
+msgid "§9Not really patient, are you?"
+msgstr ""
+
+msgid "§9Be patient, young padawan"
+msgstr ""
+
+msgid "§9Patience you MUST have, young padawan"
+msgstr ""
+
+msgid "§9The two most powerful warriors are patience and time."
+msgstr ""
+
 msgid "§eSending you to spawn."
 msgstr "§eJe wordt naar spawn gestuurd."
 
@@ -2797,12 +2954,12 @@ msgstr "§cWAARSCHUWING: §eJe wordt in ergens in de lucht geteleporteerd."
 msgid "§aTeleporting you to your island."
 msgstr "§aJe word getelepoorteerd naar je eiland."
 
-msgid "§4Unable to warp you to that player's island!"
+msgid "§4Unable to warp you to that player''s island!"
 msgstr "§4Je kan niet naar die spelers eiland warpen!"
 
 #, java-format
-msgid "§aTeleporting you to {0}'s island."
-msgstr "§aTeleporteren naar {0}'s eiland."
+msgid "§aTeleporting you to {0}''s island."
+msgstr "§aTeleporteren naar {0}''s eiland."
 
 msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Je moet dichter bij je eiland zijn om je skyblock home te zetten"

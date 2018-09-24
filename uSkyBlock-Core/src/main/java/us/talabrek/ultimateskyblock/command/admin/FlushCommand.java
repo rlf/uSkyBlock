@@ -6,13 +6,14 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class FlushCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public FlushCommand(uSkyBlock plugin) {
-        super("flush", "usb.admin.cache", tr("flushes all caches to files"));
+        super("flush", "usb.admin.cache", marktr("flushes all caches to files"));
         this.plugin = plugin;
     }
 

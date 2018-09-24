@@ -13,6 +13,7 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -22,7 +23,7 @@ public class ChallengeInfoCommand extends AbstractCommand {
     private final uSkyBlock plugin;
 
     public ChallengeInfoCommand(uSkyBlock plugin) {
-        super("info|i", null, "challenge", tr("show information about the challenge"));
+        super("info|i", null, "challenge", marktr("show information about the challenge"));
         this.plugin = plugin;
     }
 

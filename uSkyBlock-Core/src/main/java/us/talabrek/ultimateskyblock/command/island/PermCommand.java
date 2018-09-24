@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class PermCommand extends RequireIslandCommand {
     public PermCommand(uSkyBlock plugin) {
-        super(plugin, "perm", null, "member ?perm", tr("changes a members island-permissions"));
+        super(plugin, "perm", "usb.island.perm", "member ?perm", marktr("changes a members island-permissions"));
     }
 
     @Override

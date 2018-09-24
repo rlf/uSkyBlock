@@ -67,7 +67,7 @@ public class TeleportLogic implements Listener {
     public void spawnTeleport(final Player player, boolean force) {
         int delay = teleportDelay;
         final Location spawnLocation = LocationUtil.centerOnBlock(plugin.getWorld().getSpawnLocation());
-        if (hasPermission(player, "usb.mod.bypassteleport") || (delay == 0) || force) {
+        if (player.hasPermission("usb.mod.bypassteleport") || (delay == 0) || force) {
             if (Settings.extras_sendToSpawn) {
                 plugin.execCommand(player, "op:spawn", false);
             } else {

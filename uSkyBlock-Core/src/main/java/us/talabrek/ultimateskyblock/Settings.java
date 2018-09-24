@@ -110,7 +110,6 @@ public class Settings {
         }
         general_spawnSize = config.getInt("options.general.spawnSize", 50);
         island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
-                config.getString("options.island.chestItems", null),
                 config.getStringList("options.island.chestItems")
         ));
 
@@ -122,7 +121,7 @@ public class Settings {
         }
         final Set<String> permissionList = new HashSet<>();
         if (config.isConfigurationSection("options.island.extraPermissions")) {
-            permissionList.addAll(config.getConfigurationSection("options.island.extraPermissions").getKeys(true));
+            permissionList.addAll(config.getConfigurationSection("options.island.extraPermissions").getKeys(false));
         }
         island_addExtraItems = config.getBoolean("options.island.addExtraItems");
         extras_obsidianToLava = config.getBoolean("options.extras.obsidianToLava");

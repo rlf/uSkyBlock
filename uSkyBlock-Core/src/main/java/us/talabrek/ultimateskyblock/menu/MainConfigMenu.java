@@ -53,7 +53,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         if (item == null) {
             return true;
         }
-        if (event.getSlot() % 9 == 0 && (item.getType() == Material.BOOK || item.getType() == Material.BOOK_AND_QUILL)) {
+        if (event.getSlot() % 9 == 0 && (item.getType() == Material.BOOK || item.getType() == Material.WRITABLE_BOOK)) {
             String configName = getConfigName(item);
             int page = getConfigPage(item);
             if (event.isShiftClick()) {
@@ -191,7 +191,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
                 menu.setItem(i-startOffset, itemStack);
             }
         }
-        menu.setItem(0, builder(new ItemStack(page == 1 ? Material.BOOK_AND_QUILL : Material.BOOK, 1))
+        menu.setItem(0, builder(new ItemStack(page == 1 ? Material.WRITABLE_BOOK : Material.BOOK, 1))
                 .displayName(filename)
                 .lore(tr("\u00a77Page {0}", 1))
                 .lore(tr("\u00a73First Page"))
@@ -204,12 +204,12 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
             offset = maxPages-3;
         }
         for (int i = offset; maxPages > offset && i <= Math.min(offset+2, maxPages-1); i++) {
-            menu.setItem((1 + i - offset) * 9, builder(new ItemStack(page == i ? Material.BOOK_AND_QUILL : Material.BOOK, i))
+            menu.setItem((1 + i - offset) * 9, builder(new ItemStack(page == i ? Material.WRITABLE_BOOK : Material.BOOK, i))
                     .displayName(filename)
                     .lore(tr("\u00a77Page {0}", i))
                     .build());
         }
-        menu.setItem(getIndex(4,0), builder(new ItemStack(page == maxPages ? Material.BOOK_AND_QUILL : Material.BOOK, maxPages))
+        menu.setItem(getIndex(4,0), builder(new ItemStack(page == maxPages ? Material.WRITABLE_BOOK : Material.BOOK, maxPages))
                 .displayName(filename)
                 .lore(tr("\u00a77Page {0}", maxPages))
                 .lore(tr("\u00a73Last Page"))
@@ -248,7 +248,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     private ItemStack getCurrentMenu(InventoryClickEvent event) {
         int index = 0;
         ItemStack currentMenu = event.getInventory().getItem(index);
-        while (currentMenu != null && currentMenu.getType() != Material.BOOK_AND_QUILL) {
+        while (currentMenu != null && currentMenu.getType() != Material.WRITABLE_BOOK) {
             index += 9;
             currentMenu = event.getInventory().getItem(index);
         }

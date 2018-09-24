@@ -4,6 +4,7 @@ import com.sk89q.worldedit.Vector2D;
 import org.bukkit.World;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class WorldRegen extends IncrementalRunnable {
     private final List<Vector2D> chunks;
 
     public WorldRegen(uSkyBlock plugin, World world, Set<Vector2D> chunks, Runnable onCompletion) {
-        super(plugin, onCompletion);
+        super(plugin, onCompletion);//, 15, -1, 50);
         this.world = world;
         this.chunks = new ArrayList<>(chunks);
         log.log(Level.FINE, "Planning regen of chunks: " + chunks);
@@ -30,7 +31,17 @@ public class WorldRegen extends IncrementalRunnable {
     protected boolean execute() {
         while (!chunks.isEmpty()) {
             Vector2D chunk = chunks.remove(0);
-            world.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ());
+            try {
+                if (!world.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ())) {
+                    LogUtil.log(Level.WARNING, "Unable to regenerate chunk " + chunk);
+                    chunks.add(chunk);
+                    break;
+                }
+            } catch (Exception e) {
+                LogUtil.log(Level.WARNING, "Exception trying to regenerate chunk " + chunk, e);
+                chunks.add(chunk);
+                break;
+            }
             if (!tick()) {
                 break;
             }

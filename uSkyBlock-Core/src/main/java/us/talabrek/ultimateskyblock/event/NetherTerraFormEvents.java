@@ -1,29 +1,26 @@
 package us.talabrek.ultimateskyblock.event;
 
+import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Blaze;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.ItemSpawnEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import us.talabrek.ultimateskyblock.handler.EntitySpawner;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.MaterialUtil;
@@ -55,6 +52,7 @@ public class NetherTerraFormEvents implements Listener {
     private final boolean netherRoof;
     private final double minPitch;
     private final double maxPitch;
+    private final EntitySpawner entitySpawner;
 
     public NetherTerraFormEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -90,6 +88,7 @@ public class NetherTerraFormEvents implements Listener {
             chanceWither = 0.4;
             chanceSkeleton = 0.1;
         }
+        entitySpawner = new EntitySpawner();
     }
 
     @EventHandler(priority = EventPriority.LOW)
@@ -124,9 +123,10 @@ public class NetherTerraFormEvents implements Listener {
         v.normalize();
         // Disable spawning above the player... enabling the player to clear a region
         if (playerLocation.getPitch() >= minPitch && playerLocation.getPitch() <= maxPitch) {
+            ProtectedCuboidRegion islandRegion = WorldGuardHandler.getIslandRegion(playerLocation);
             List<Material> yield = getYield(block.getType(), toolWeight);
             for (Material mat : yield) {
-                spawnBlock(mat, blockLocation, v);
+                spawnBlock(mat, blockLocation, v, islandRegion);
             }
         }
     }
@@ -137,19 +137,19 @@ public class NetherTerraFormEvents implements Listener {
         return d != null ? d : 1d;
     }
 
-    private void spawnBlock(Material type, Location location, Vector v) {
+    private void spawnBlock(Material type, Location location, Vector v, ProtectedCuboidRegion islandRegion) {
         Location spawnLoc = null;
         if (MaterialUtil.isFallingMaterial(type)) {
-            spawnLoc = findSolidSpawnLocation(location, v);
+            spawnLoc = findSolidSpawnLocation(location, v, islandRegion);
         } else {
-            spawnLoc = findAirSpawnLocation(location, v);
+            spawnLoc = findAirSpawnLocation(location, v, islandRegion);
         }
         if (spawnLoc != null) {
             spawnLoc.getWorld().getBlockAt(spawnLoc).setType(type);
         }
     }
 
-    private Location findAirSpawnLocation(Location location, Vector v) {
+    private Location findAirSpawnLocation(Location location, Vector v, ProtectedCuboidRegion islandRegion) {
         // Searches in a cone for an air block
         Location lookAt = new Location(location.getWorld(),
                 Math.round(location.getX() + v.getX()),
@@ -157,7 +157,8 @@ public class NetherTerraFormEvents implements Listener {
                 Math.round(location.getZ() + v.getZ()));
         while (v.length() < maxScan) {
             for (Location loc : getLocationsInPlane(lookAt, v)) {
-                if (loc.getBlock().getType() == Material.AIR && isAdjacentToSolid(loc)) {
+                if (loc.getBlock().getType() == Material.AIR && isAdjacentToSolid(loc)
+                        && isInIslandRegion(islandRegion, loc)) {
                     return loc;
                 }
             }
@@ -165,6 +166,10 @@ public class NetherTerraFormEvents implements Listener {
             v.normalize().multiply(n+1);
         }
         return null;
+    }
+
+    private boolean isInIslandRegion(ProtectedCuboidRegion islandRegion, Location loc) {
+        return WorldGuardHandler.isInRegion(islandRegion, loc);
     }
 
     private boolean isAdjacentToSolid(Location loc) {
@@ -176,12 +181,13 @@ public class NetherTerraFormEvents implements Listener {
         return false;
     }
 
-    private Location findSolidSpawnLocation(Location location, Vector v) {
+    private Location findSolidSpawnLocation(Location location, Vector v, ProtectedCuboidRegion islandRegion) {
         // Searches in a cone for an air block
-
         while (v.length() < maxScan) {
             for (Location loc : getLocationsInPlane(location, v)) {
-                if (loc.getBlock().getType() == Material.AIR && loc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
+                if (loc.getBlock().getType() == Material.AIR
+                        && loc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()
+                        && isInIslandRegion(islandRegion, loc)) {
                     return loc;
                 }
             }
@@ -260,15 +266,12 @@ public class NetherTerraFormEvents implements Listener {
             if (isNetherFortressWalkway(block)) {
                 e.setCancelled(true);
                 double p = RND.nextDouble();
-                if (p <= chanceWither) {
-                    // Spawn Wither.
-                    WitherSkeleton mob = (WitherSkeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.WITHER_SKELETON);
+                if (p <= chanceWither && block.getRelative(BlockFace.UP, 3).getType() == Material.AIR) {
+                    entitySpawner.spawnWitherSkeleton(e.getLocation());
                 } else if (p <= chanceWither+chanceBlaze) {
-                    // Spawn Blaze
-                    Blaze mob = (Blaze) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.BLAZE);
+                    entitySpawner.spawnBlaze(e.getLocation());
                 } else if (p <= chanceWither+chanceBlaze+chanceSkeleton) {
-                    // Spawn Skeleton
-                    Skeleton mob = (Skeleton) e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.SKELETON);
+                    entitySpawner.spawnSkeleton(e.getLocation());
                 } else {
                     e.setCancelled(false); // Spawn PigZombie
                 }
@@ -277,10 +280,7 @@ public class NetherTerraFormEvents implements Listener {
     }
 
     private boolean isNetherFortressWalkway(Block block) {
-        // TODO: 23/09/2015 - R4zorax: More intelligently please...
-        // NS          NS    NS =
-        // NB NB NB NB NB    NB = NetherBrick
-        return block.getType() == Material.NETHER_BRICK;
+        return block.getType() == Material.NETHER_BRICKS;
     }
 
     @EventHandler

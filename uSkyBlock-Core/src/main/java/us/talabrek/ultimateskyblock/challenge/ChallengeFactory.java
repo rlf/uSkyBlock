@@ -23,7 +23,7 @@ import static dk.lockfuglsang.minecraft.util.ItemStackUtil.createItemStack;
  * Builder for Challenges (Note:
  */
 public class ChallengeFactory {
-    private static final Pattern ENTITY_PATTERN = Pattern.compile("(?<type>[a-zA-Z0-9]+)(?<meta>:\\{.*\\})?(:(?<count>[0-9]+))?");
+    private static final Pattern ENTITY_PATTERN = Pattern.compile("(?<type>[a-zA-Z0-9_]+)(?<meta>:\\{.*\\})?(:(?<count>[0-9]+))?");
     private static Logger log = Logger.getLogger(ChallengeFactory.class.getName());
 
     public static void setLogger(Logger log) {
@@ -70,7 +70,7 @@ public class ChallengeFactory {
         int offset = section.getInt("offset", 0);
         int repeatLimit = section.getInt("repeatLimit", 0);
         return new Challenge(name, displayName, description, type,
-                requiredItems, requiredEntities, requiredChallenges, rank,
+                requiredItems, requiredEntities, requiredChallenges, section.getDouble("requiredLevel", 0d), rank,
                 resetInHours, displayItem, section.getString("tool", null), lockedItem, offset, takeItems,
                 radius, reward, repeatReward, repeatLimit);
     }
@@ -91,6 +91,8 @@ public class ChallengeFactory {
                 } else {
                     throw new IllegalArgumentException("Malformed requiredEntities: " + entityString);
                 }
+            } else {
+                throw new IllegalArgumentException("Malformed requiredEntities: " + entityString);
             }
         }
         return entities;

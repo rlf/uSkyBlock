@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -22,7 +23,7 @@ public class GetIslandDataCommand extends AbstractIslandInfoCommand {
     private final List<String> getterNames;
 
     public GetIslandDataCommand() {
-        super("get", "usb.admin.get", tr("advanced command for getting island-data"));
+        super("get", "usb.admin.get", marktr("advanced command for getting island-data"));
         getterNames = new ArrayList<>();
         for (Method m : IslandInfo.class.getDeclaredMethods()) {
             if (m.getName().startsWith("get") && m.getParameterTypes().length == 0) {

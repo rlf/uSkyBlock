@@ -6,6 +6,10 @@ import dk.lockfuglsang.minecraft.command.Command;
 import dk.lockfuglsang.minecraft.command.CommandManager;
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
+import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -21,6 +25,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -30,27 +35,28 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.mcstats.Metrics;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
+import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
 import us.talabrek.ultimateskyblock.api.event.MemberLeftEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
-import us.talabrek.ultimateskyblock.async.Callback;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.chat.ChatEvents;
 import us.talabrek.ultimateskyblock.chat.ChatLogic;
+import us.talabrek.ultimateskyblock.chat.IslandTalkCommand;
+import us.talabrek.ultimateskyblock.chat.PartyTalkCommand;
 import us.talabrek.ultimateskyblock.command.AdminCommand;
 import us.talabrek.ultimateskyblock.command.ChallengeCommand;
 import us.talabrek.ultimateskyblock.command.IslandCommand;
-import us.talabrek.ultimateskyblock.chat.IslandTalkCommand;
-import us.talabrek.ultimateskyblock.chat.PartyTalkCommand;
 import us.talabrek.ultimateskyblock.command.admin.DebugCommand;
 import us.talabrek.ultimateskyblock.command.admin.SetMaintenanceCommand;
 import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.event.ExploitEvents;
 import us.talabrek.ultimateskyblock.event.GriefEvents;
+import us.talabrek.ultimateskyblock.event.InternalEvents;
 import us.talabrek.ultimateskyblock.event.ItemDropEvents;
 import us.talabrek.ultimateskyblock.event.MenuEvents;
 import us.talabrek.ultimateskyblock.event.NetherTerraFormEvents;
@@ -58,24 +64,25 @@ import us.talabrek.ultimateskyblock.event.PlayerEvents;
 import us.talabrek.ultimateskyblock.event.SpawnEvents;
 import us.talabrek.ultimateskyblock.event.ToolMenuEvents;
 import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
-import us.talabrek.ultimateskyblock.event.InternalEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
-//import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
+import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
-import us.talabrek.ultimateskyblock.imports.impl.USBImporterExecutor;
+import us.talabrek.ultimateskyblock.imports.USBImporterExecutor;
+import us.talabrek.ultimateskyblock.island.BlockLimitLogic;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.IslandLocatorLogic;
 import us.talabrek.ultimateskyblock.island.IslandLogic;
-import us.talabrek.ultimateskyblock.island.IslandScore;
-import us.talabrek.ultimateskyblock.island.LevelLogic;
 import us.talabrek.ultimateskyblock.island.LimitLogic;
 import us.talabrek.ultimateskyblock.island.OrphanLogic;
+import us.talabrek.ultimateskyblock.island.level.ChunkSnapshotLevelLogic;
+import us.talabrek.ultimateskyblock.island.level.IslandScore;
+import us.talabrek.ultimateskyblock.island.level.LevelLogic;
 import us.talabrek.ultimateskyblock.island.task.CreateIslandTask;
 import us.talabrek.ultimateskyblock.island.task.RecalculateRunnable;
 import us.talabrek.ultimateskyblock.island.task.SetBiomeTask;
@@ -94,8 +101,6 @@ import us.talabrek.ultimateskyblock.util.IslandUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 import us.talabrek.ultimateskyblock.util.ServerUtil;
-import dk.lockfuglsang.minecraft.util.TimeUtil;
-import dk.lockfuglsang.minecraft.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uuid.BukkitPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.MemoryPlayerDB;
@@ -121,9 +126,9 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManager.RequirementChecker {
     private static final String CN = uSkyBlock.class.getName();
     private static final String[][] depends = new String[][]{
-            new String[]{"Vault", "1.5"},
-            new String[]{"WorldEdit", "6.0"},
-            new String[]{"WorldGuard", "6.0"},
+            new String[]{"Vault", "1.5", "optional"},
+            new String[]{"WorldEdit", "7.0"},
+            new String[]{"WorldGuard", "7.0"},
             new String[]{"FastAsyncWorldEdit", "3.5", "optional"},
             new String[]{"AsyncWorldEdit", "2.0", "optional"},
             new String[]{"Multiverse-Core", "2.5", "optional"},
@@ -157,6 +162,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public File directoryIslands;
 
     private BukkitTask autoRecalculateTask;
+
     static {
         uSkyBlock.skyBlockWorld = null;
     }
@@ -171,7 +177,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private ChatLogic chatLogic;
 
     private volatile boolean maintenanceMode = false;
-    
+    private BlockLimitLogic blockLimitLogic;
+    private Metrics metrics;    
     private HashMap<UUID, ItemStack> skullcache;
 
     public uSkyBlock() {
@@ -190,6 +197,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (animationHandler != null) {
             animationHandler.stop();
         }
+        //TODO: 1.13ify or remove this
         skullcache.clear();
         challengeLogic.shutdown();
         playerLogic.shutdown();
@@ -210,6 +218,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         skyBlockNetherWorld = null;
         missingRequirements = null;
         instance = this;
+        //TODO: 1.13ify or remove this
         skullcache = new HashMap<UUID, ItemStack>();
         CommandManager.registerRequirements(this);
         FileUtil.setDataFolder(getDataFolder());
@@ -241,14 +250,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     Bukkit.getConsoleSender().sendMessage(tr("Converting data to UUID, this make take a while!"));
                     getImporter().importUSB(Bukkit.getConsoleSender(), "name2uuid");
                 }
-
                 log(Level.INFO, getVersionInfo(false));
             }
         }, getConfig().getLong("init.initDelay", 50L));
-        
         try {
-            Metrics metrics = new Metrics(this);
-            metrics.start();
+            metrics = new Metrics(this);
+            metrics.addCustomChart(new Metrics.SimplePie("language", () -> getConfig().getString("language", "en")));
+            metrics.addCustomChart(new Metrics.SimplePie("radius_and_distance", () -> String.format("(%d,%d)", Settings.island_radius, Settings.island_distance)));
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }
@@ -257,7 +265,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public synchronized boolean isRequirementsMet(CommandSender sender, Command command, String... args) {
         if (maintenanceMode && !(
                 (command instanceof AdminCommand && args != null && args.length > 0 && args[0].equals("maintenance")) ||
-                command instanceof SetMaintenanceCommand)) {
+                        command instanceof SetMaintenanceCommand)) {
             sender.sendMessage(tr("\u00a7cMAINTENANCE:\u00a7e uSkyBlock is currently in maintenance mode"));
             return false;
         }
@@ -274,7 +282,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                         missingRequirements += tr("\u00a7buSkyBlock\u00a7e depends on \u00a79{0}\u00a7e >= \u00a7av{1}\u00a7e but only \u00a7cv{2}\u00a7e was found!\n", pluginReq[0], pluginReq[1], desc.getVersion());
                     }
                 } else {
-                    missingRequirements += tr("\u00a7buSkyBlock\u00a7e depends on \u00a79{0}\u00a7e >= \u00a7av{1}",  pluginReq[0], pluginReq[1]);
+                    missingRequirements += tr("\u00a7buSkyBlock\u00a7e depends on \u00a79{0}\u00a7e >= \u00a7av{1}", pluginReq[0], pluginReq[1]);
                 }
             }
         }
@@ -342,8 +350,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             ChunkGenerator skyGenerator = getGenerator();
             ChunkGenerator worldGenerator = skyBlockWorld != null ? skyBlockWorld.getGenerator() : null;
             if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures() ||
-                    worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName()))
-            {
+                    worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
                 uSkyBlock.skyBlockWorld = WorldCreator
                         .name(Settings.general_worldName)
                         .type(WorldType.NORMAL)
@@ -366,12 +373,21 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
             Location worldSpawn = world.getSpawnLocation();
             if (!isSafeLocation(worldSpawn)) {
-                Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
-                spawnBlock.setType(Material.BEDROCK);
-                Block air1 = spawnBlock.getRelative(BlockFace.UP);
-                air1.setType(Material.AIR);
-                air1.getRelative(BlockFace.UP).setType(Material.AIR);
+                createSpawn(world, worldSpawn);
             }
+        }
+    }
+
+    private void createSpawn(World world, Location worldSpawn) {
+        File spawnSchematic = new File(getDataFolder() + File.separator + "schematics" + File.separator + "spawn.schematic");
+        if (getConfig().getInt("options.general.spawnSize", 0) > 32 && spawnSchematic.exists()) {
+            AsyncWorldEditHandler.loadIslandSchematic(spawnSchematic, worldSpawn, null);
+        } else {
+            Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
+            spawnBlock.setType(Material.GOLD_BLOCK);
+            Block air1 = spawnBlock.getRelative(BlockFace.UP);
+            air1.setType(Material.AIR);
+            air1.getRelative(BlockFace.UP).setType(Material.AIR);
         }
     }
 
@@ -397,7 +413,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
             MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
             setupWorld(skyBlockNetherWorld, island_height / 2);
-            //MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
+            MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
         }
         return skyBlockNetherWorld;
     }
@@ -561,30 +577,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 (entity.getFallDistance() == 0 && !(entity instanceof Monster));
     }
 
-    public Location findBedrockLocation(final Location l) {
-        final int px = l.getBlockX();
-        final int py = l.getBlockY();
-        final int pz = l.getBlockZ();
-        World world = l.getWorld();
-        for (int x = -10; x <= 10; ++x) {
-            for (int y = -30; y <= 30; ++y) {
-                for (int z = -10; z <= 10; ++z) {
-                    final Block b = world.getBlockAt(px + x, py + y, pz + z);
-                    if (b.getType() == Material.BEDROCK) {
-                        return new Location(world, px + x, py + y, pz + z);
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
     public synchronized boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
         final PlayerInfo pi = playerLogic.getPlayerInfo(player);
 
         String islandName = WorldGuardHandler.getIslandNameAt(l);
         Location islandLocation = IslandUtil.getIslandLocation(islandName);
-        final Location newLoc = islandLocation != null ? islandLocation : findBedrockLocation(l);
+        final Location newLoc = islandLocation;
         if (newLoc == null) {
             return false;
         }
@@ -661,10 +659,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         warpSweetWarp = getSafeWarpLocation(pi);
         if (warpSweetWarp == null) {
-            player.sendMessage(tr("\u00a74Unable to warp you to that player's island!"));
+            player.sendMessage(tr("\u00a74Unable to warp you to that player''s island!"));
             return true;
         }
-        player.sendMessage(tr("\u00a7aTeleporting you to {0}'s island.", pi.getDisplayName()));
+        player.sendMessage(tr("\u00a7aTeleporting you to {0}''s island.", pi.getDisplayName()));
         safeTeleport(player, warpSweetWarp, force);
         return true;
     }
@@ -851,7 +849,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         callback.run();
     }
-    //TODO: modify this. 
+    //TODO: Verify this against edge cases where regions are slightly offset. 
     public void createIsland(final Player player, String cSchem, int x, int z) {
         PlayerInfo pi = getPlayerInfo(player);
         if (pi.isIslandGenerating()) {
@@ -866,12 +864,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             pi.setIslandGenerating(true);
         }
         try {
+        	//TODO: Check some edge cases here - there seems to be a bug. 
         	int coordX = x * Settings.island_distance;
 			int coordZ = z * Settings.island_distance;        		        		
     		Location next = new Location(this.getWorld(), coordX, Settings.island_height, coordZ);
-    		//NOTE: Changed from: getIslandLocatorLogic().getNextIslandLocation(player);
-    		//This change will work on small servers only. I'll make it extensible upon request. 
-        	if (getIslandLocatorLogic().isAvailableLocation(next)){
+    		if (getIslandLocatorLogic().isAvailableLocation(next)){
         		if (isSkyWorld(player.getWorld())) {
         			spawnTeleport(player, true);
         		}
@@ -881,6 +878,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         		player.sendMessage(tr("\u00a7eInvalid Format: "));
                 return;
         	}
+        	// Changed from: 
+        	//Location next = getIslandLocatorLogic().getNextIslandLocation(player);
+            //if (isSkyWorld(player.getWorld())) {
+            //    spawnTeleport(player, true);
+            //}
+            //generateIsland(player, pi, next, cSchem);
         } catch (Exception ex) {
             player.sendMessage(tr("Could not create your Island. Please contact a server moderator."));
             log(Level.SEVERE, "Error creating island", ex);
@@ -1028,11 +1031,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         challengeLogic = new ChallengeLogic(FileUtil.getYmlConfiguration("challenges.yml"), this);
         menu = new SkyBlockMenu(this, challengeLogic);
         configMenu = new ConfigMenu(this);
-        levelLogic = new LevelLogic(this, FileUtil.getYmlConfiguration("levelConfig.yml"));
+        YmlConfiguration levelConfig = FileUtil.getYmlConfiguration("levelConfig.yml");
+        // Disabled until AWE/FAWE supports 1.13
+        //levelLogic = AsyncWorldEditHandler.isAWE() ? new AweLevelLogic(this, levelConfig) : new ChunkSnapshotLevelLogic(this, levelConfig);
+        levelLogic = new ChunkSnapshotLevelLogic(this, levelConfig);
         orphanLogic = new OrphanLogic(this);
         islandLocatorLogic = new IslandLocatorLogic(this);
         islandLogic = new IslandLogic(this, directoryIslands, orphanLogic);
         limitLogic = new LimitLogic(this);
+        blockLimitLogic = new BlockLimitLogic(this);
         notifier = new PlayerNotifier(getConfig());
         playerLogic = new PlayerLogic(this);
         if (autoRecalculateTask != null) {
@@ -1087,6 +1094,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public OrphanLogic getOrphanLogic() {
         return orphanLogic;
+    }
+
+    public BlockLimitLogic getBlockLimitLogic() {
+        return blockLimitLogic;
     }
 
     /**
@@ -1242,16 +1253,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public void fireChangeEvent(CommandSender sender, uSkyBlockEvent.Cause cause) {
         Player player = (sender instanceof Player) ? (Player) sender : null;
         final uSkyBlockEvent event = new uSkyBlockEvent(player, this, cause);
-        fireChangeEvent(event);
+        fireAsyncEvent(event);
     }
 
-    public void fireChangeEvent(final uSkyBlockEvent event) {
-        getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {
-                    @Override
-                    public void run() {
-                        getServer().getPluginManager().callEvent(event);
-                    }
-                }
+    public void fireAsyncEvent(final Event event) {
+        getServer().getScheduler().runTaskAsynchronously(this,
+                () -> getServer().getPluginManager().callEvent(event)
         );
     }
 
@@ -1298,11 +1305,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private IslandScore adjustScore(IslandScore score, IslandInfo islandInfo) {
         IslandPerk islandPerk = perkLogic.getIslandPerk(islandInfo.getSchematicName());
         double blockScore = score.getScore();
-        blockScore = blockScore*islandPerk.getScoreMultiply()*islandInfo.getScoreMultiplier() + islandPerk.getScoreOffset()+islandInfo.getScoreOffset();
+        blockScore = blockScore * islandPerk.getScoreMultiply() * islandInfo.getScoreMultiplier() + islandPerk.getScoreOffset() + islandInfo.getScoreOffset();
         return new IslandScore(blockScore, score.getTop());
     }
 
-    public void calculateScoreAsync(final Player player, String islandName, final Callback<IslandScore> callback) {
+    public void calculateScoreAsync(final Player player, String islandName, final Callback<us.talabrek.ultimateskyblock.api.model.IslandScore> callback) {
         final IslandInfo islandInfo = getIslandInfo(islandName);
         getLevelLogic().calculateScoreAsync(islandInfo.getIslandLocation(), new Callback<IslandScore>() {
             @Override
@@ -1311,7 +1318,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 callback.setState(score);
                 islandInfo.setLevel(score.getScore());
                 getIslandLogic().updateRank(islandInfo, score);
-                fireChangeEvent(new uSkyBlockEvent(player, getInstance(), uSkyBlockEvent.Cause.SCORE_CHANGED));
+                fireAsyncEvent(new uSkyBlockScoreChangedEvent(player, getInstance(), score, islandInfo.getIslandLocation()));
                 callback.run();
             }
         });
@@ -1340,7 +1347,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public IslandGenerator getIslandGenerator() {
         return islandGenerator;
     }
-    
+    //TODO: 1.13-ify this!
     public HashMap<UUID, ItemStack> getSkullCache(){
     	return skullcache;
     }
@@ -1352,6 +1359,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     /**
      * CAUTION! If anyone calls this with true, they MUST ensure it is later called with false,
      * or the plugin will effectively be in a locked state.
+     *
      * @param maintenanceMode whether or not to enable maintenance-mode.
      */
     public void setMaintenanceMode(boolean maintenanceMode) {
@@ -1411,10 +1419,14 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public void fireMemberJoinedEvent(IslandInfo islandInfo, PlayerInfo playerInfo) {
-        async(() -> { getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo)); });
+        async(() -> {
+            getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo));
+        });
     }
 
     public void fireMemberLeftEvent(IslandInfo islandInfo, PlayerInfo member) {
-        async(() -> { getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member)); });
+        async(() -> {
+            getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member));
+        });
     }
 }

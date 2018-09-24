@@ -98,6 +98,13 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         return player;
     }
 
+    public OfflinePlayer getOfflinePlayer() {
+        if (uuid != null) {
+            return uSkyBlock.getInstance().getPlayerDB().getOfflinePlayer(uuid);
+        }
+        return null;
+    }
+
     @Override
     public String getPlayerName() {
         return this.playerName;

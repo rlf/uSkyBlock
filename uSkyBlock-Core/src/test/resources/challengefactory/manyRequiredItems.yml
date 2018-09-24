@@ -1,0 +1,24 @@
+#===============================================
+# An explanation to setup your own challenges
+# can be found at the bottom of this file.
+#===============================================
+ranks:
+  Tier1:
+    name: '&7Novice'
+    displayItem: 'STAINED_CLAY:9'
+    resetInHours: 20
+    challenges:
+      villageguard:
+        name: '&cVillage Guard'
+        description: Create the village.
+        type: onPlayer
+        requiredItems: 'COBBLESTONE:257'
+        radius: 24
+        displayItem: 'VILLAGER_SPAWN_EGG'
+        takeItems: true
+        reward:
+          text: 1 enchanted book (Unbreaking III)
+          items:
+          - 'ENCHANTED_BOOK:1 {StoredEnchantments:[{id:34,lvl:3}]}'
+          currency: 8
+          xp: 50

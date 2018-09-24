@@ -1,12 +1,15 @@
 package us.talabrek.ultimateskyblock.player;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,10 +23,20 @@ public class Perk {
     private final double rewBonus;
     private final double hungerReduction;
     private final Set<String> schematics;
+    private Map<Material, Integer> blockLimits;
     private final int villagers;
     private final int golems;
 
-    Perk(List<ItemStack> extraItems, int maxPartySize, int animals, int monsters, int villagers, int golems, double rewBonus, double hungerReduction, List<String> schematics) {
+    Perk(List<ItemStack> extraItems,
+         int maxPartySize,
+         int animals,
+         int monsters,
+         int villagers,
+         int golems,
+         double rewBonus,
+         double hungerReduction,
+         List<String> schematics,
+         Map<Material, Integer> blockLimits) {
         this.maxPartySize = maxPartySize >= 0 ? maxPartySize : 0;
         this.animals = animals >= 0 ? animals : 0;
         this.monsters = monsters >= 0 ? monsters : 0;
@@ -33,6 +46,7 @@ public class Perk {
         this.rewBonus = rewBonus >= 0 ? rewBonus : 0;
         this.hungerReduction = hungerReduction >= 0 && hungerReduction <= 1 ? hungerReduction : 0;
         this.schematics = schematics != null ? new HashSet<>(schematics) : Collections.<String>emptySet();
+        this.blockLimits = blockLimits != null ? new HashMap<>(blockLimits) : Collections.emptyMap();
     }
 
     public int getMaxPartySize() {
@@ -58,6 +72,8 @@ public class Perk {
     public List<ItemStack> getExtraItems() {
         return extraItems;
     }
+
+    public Map<Material,Integer> getBlockLimits() { return blockLimits; }
 
     public double getRewBonus() {
         return rewBonus;
@@ -87,7 +103,7 @@ public class Perk {
                 Math.max(golems, other.getGolems()),
                 Math.max(rewBonus, other.getRewBonus()),
                 Math.max(hungerReduction, other.getHungerReduction()),
-                schems);
+                schems, null);
     }
 
     @Override
@@ -100,6 +116,8 @@ public class Perk {
                 (!extraItems.isEmpty() ? "extraItems:" + ItemStackUtil.asShortString(extraItems) +"\n" : "") +
                 (rewBonus > 0 ? "rewBonus:" + rewBonus +"\n" : "") +
                 (hungerReduction > 0 ? "hungerReduction:" + hungerReduction +"\n" : "") +
-                (!schematics.isEmpty() ? "schematics:" + schematics +"\n" : "");
+                (!schematics.isEmpty() ? "schematics:" + schematics +"\n" : "") +
+                (!blockLimits.isEmpty() ? "blockLimits:" + blockLimits +"\n" : "")
+                ;
     }
 }

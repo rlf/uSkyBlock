@@ -13,6 +13,7 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -22,9 +23,9 @@ public class WGCommand extends CompositeCommand {
     private final uSkyBlock plugin;
 
     public WGCommand(final uSkyBlock plugin) {
-        super("wg", "usb.admin.wg", I18nUtil.tr("various WorldGuard utilities"));
+        super("wg", "usb.admin.wg", marktr("various WorldGuard utilities"));
         this.plugin = plugin;
-        add(new RequirePlayerCommand("refresh", null, I18nUtil.tr("refreshes the chunks around the player")) {
+        add(new RequirePlayerCommand("refresh", null, marktr("refreshes the chunks around the player")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 WorldEditHandler.refreshRegion(player.getLocation());
@@ -32,7 +33,7 @@ public class WGCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new RequirePlayerCommand("load", null, I18nUtil.tr("load the region chunks")) {
+        add(new RequirePlayerCommand("load", null, marktr("load the region chunks")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 WorldEditHandler.loadRegion(player.getLocation());
@@ -40,7 +41,7 @@ public class WGCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new RequirePlayerCommand("unload", null, I18nUtil.tr("load the region chunks")) {
+        add(new RequirePlayerCommand("unload", null, marktr("load the region chunks")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 LocationUtil.loadChunkAt(player.getLocation());
@@ -48,7 +49,7 @@ public class WGCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new RequirePlayerCommand("update", null, tr("update the WG regions")) {
+        add(new RequirePlayerCommand("update", null, marktr("update the WG regions")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 String island = WorldGuardHandler.getIslandNameAt(player.getLocation());
@@ -64,7 +65,7 @@ public class WGCommand extends CompositeCommand {
                 return true;
             }
         });
-        add(new RequirePlayerCommand("chunk", null, I18nUtil.tr("refreshes the chunk around the player")) {
+        add(new RequirePlayerCommand("chunk", null, marktr("refreshes the chunk around the player")) {
             @Override
             protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
                 World world = player.getWorld();

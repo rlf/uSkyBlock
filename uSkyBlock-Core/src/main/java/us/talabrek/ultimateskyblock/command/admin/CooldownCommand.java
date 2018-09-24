@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -21,8 +22,8 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class CooldownCommand extends CompositeCommand {
     public CooldownCommand(final uSkyBlock plugin) {
-        super("cooldown|cd", "usb.admin.cooldown", tr("Controls player-cooldowns"));
-        add(new AbstractCommand("clear|c", null, "player command", tr("clears the cooldown on a command (* = all)")) {
+        super("cooldown|cd", "usb.admin.cooldown", marktr("Controls player-cooldowns"));
+        add(new AbstractCommand("clear|c", null, "player command", marktr("clears the cooldown on a command (* = all)")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length < 2) {
@@ -46,7 +47,7 @@ public class CooldownCommand extends CompositeCommand {
                 }
             }
         });
-        add(new AbstractCommand("restart|r", null, "player", tr("restarts the cooldown on the command")) {
+        add(new AbstractCommand("restart|r", null, "player", marktr("restarts the cooldown on the command")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length < 2) {
@@ -68,7 +69,7 @@ public class CooldownCommand extends CompositeCommand {
                 }
             }
         });
-        add(new AbstractCommand("list|l", null, "?player", tr("lists all the active cooldowns")) {
+        add(new AbstractCommand("list|l", null, "?player", marktr("lists all the active cooldowns")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (args.length < 1) {

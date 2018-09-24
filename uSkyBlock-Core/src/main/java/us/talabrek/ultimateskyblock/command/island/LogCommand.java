@@ -8,13 +8,14 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LogCommand extends RequireIslandCommand {
     private final SkyBlockMenu menu;
 
     public LogCommand(uSkyBlock plugin, SkyBlockMenu menu) {
-        super(plugin, "log|l", "usb.island.log", tr("display log"));
+        super(plugin, "log|l", "usb.island.log", marktr("display log"));
         this.menu = menu;
     }
 

@@ -5,8 +5,8 @@ import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class Rank {
     private final List<Challenge> challenges;
     private ConfigurationSection config;
 
-    public Rank(ConfigurationSection section, @Nullable Rank previousRank, ChallengeDefaults defaults) {
+    public Rank(ConfigurationSection section, Rank previousRank, ChallengeDefaults defaults) {
         this.challenges = new ArrayList<>();
         this.previousRank = previousRank;
         this.defaults = defaults;
@@ -37,6 +37,7 @@ public class Rank {
 
     /**
      * Whether the rank is available for the player.
+     *
      * @param playerInfo PlayerInfo of the player
      * @return
      */
@@ -81,18 +82,9 @@ public class Rank {
                     missing.add(tr("\u00a77Complete {0} more {1} \u00a77challenges", (leeway - rankLeeway), previousRank));
                 }
             }
-            for (String challengeName : requires.getStringList("challenges")) {
-                ChallengeCompletion challenge = playerInfo.getChallenge(challengeName);
-                StringBuilder sb = new StringBuilder();
-                if (challenge != null && challenge.getTimesCompleted() <= 0) {
-                    if (sb.length() > 0) {
-                        sb.append(", ");
-                    }
-                    sb.append(challengeName);
-                }
-                if (sb.length() > 0) {
-                    missing.add(tr("\u00a77Complete {0}", sb.toString()));
-                }
+            String missingChallenges = ChallengeFormat.getMissingRequirement(playerInfo, requires.getStringList("challenges"), uSkyBlock.getInstance().getChallengeLogic());
+            if (missingChallenges != null) {
+                missing.add(tr("\u00a77Complete {0}", missingChallenges));
             }
             if (!missing.isEmpty()) {
                 missing.add("\u00a77" + tr("to unlock this rank"));

@@ -1,8 +1,8 @@
 name: uSkyBlock
 main: us.talabrek.ultimateskyblock.uSkyBlock
 version: ${project.version}
-description: Ultimate SkyBlock v${gitTag}-${buildNumber}-${travis.buildNumber}
-author: Talabrek, R4zorax and others
+description: Ultimate SkyBlock v${gitTag}-${buildNumber}
+author: R4zorax (and more)
 load: STARTUP
 softdepend:
  # mandatory dependencies
@@ -12,12 +12,12 @@ softdepend:
  - Multiverse-Core
  # optional dependencies
  - ActionBarAPI
- - TitleManager
  # WE/AWE
  - FastAsyncWorldEdit
  - AsyncWorldEdit
  # placeholders
  - MVdWPlaceholderAPI
+api-version: 1.13
 
 commands:
   challenges:
@@ -54,6 +54,7 @@ permissions:
       usb.island.level: true
       usb.island.limit: true
       usb.island.log: true
+      usb.island.perm: true
       usb.island.restart: true
       usb.island.sethome: true
       usb.island.signs.place: true
@@ -66,7 +67,7 @@ permissions:
 
   usb.social:
     description: The advanced social group for uSkyBlock usage (adds party and stuff)
-    default: false
+    default: true
     children:
       usb.island.ban: true
       usb.island.info.other: true
@@ -108,6 +109,7 @@ permissions:
       usb.admin.import: true
       usb.admin.ignore: true
       usb.admin.info: true
+      usb.admin.island: true
       usb.admin.lang: true
       usb.admin.maintenance: true
       usb.admin.makeleader: true
@@ -144,6 +146,7 @@ permissions:
       usb.admin.ignore: true
       usb.admin.import: true
       usb.admin.info: true
+      usb.admin.island: true
       usb.admin.jobs: true
       usb.admin.jobs.stats: true
       usb.admin.lang: true
@@ -190,6 +193,7 @@ permissions:
       usb.exempt.cooldown.restart: true
 
   usb.island.*:
+    default: true
     children:
       usb.island.ban: true
       usb.island.challenges: true
@@ -226,6 +230,7 @@ permissions:
       usb.mod.topten: true
 
   usb.party.*:
+    default: true
     children:
       usb.party.info: true
       usb.party.invite: true

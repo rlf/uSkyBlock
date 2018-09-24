@@ -1,58 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>uSkyBlock</artifactId>
-		<groupId>uSkyBlock</groupId>
-		<version>2.7.0-SNAPSHOT</version>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
-	<artifactId>uSkyBlock-Plugin</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>uSkyBlock</artifactId>
+        <groupId>uSkyBlock</groupId>
+        <version>2.7.5-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <artifactId>uSkyBlock-Plugin</artifactId>
 
-
-	<!-- NOTE: These dependency declarations are only required to sort this 
-		project to the end of the line in the multimodule build. Since we only include 
-		the child1 module in our assembly, we only need to ensure this distribution 
-		project builds AFTER that one... -->
-    
-    <dependencies>
-        <dependency>
-            <groupId>com.github.rlf</groupId>
-            <artifactId>uSkyBlock-API</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-Core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE211</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE311</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE321</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-AWE330</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>uSkyBlock</groupId>
-            <artifactId>uSkyBlock-FAWE</artifactId>
-        </dependency>        
-    </dependencies>
+    <properties>
+        <github.global.server>github</github.global.server>
+    </properties>
     <build>
         <finalName>uSkyBlock</finalName>
-        
-            <plugins>
+        <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>2.5.5</version>
                 <executions>
                     <execution>
                         <id>distro-assembly</id>
@@ -64,11 +31,6 @@
                             <descriptors>
                                 <descriptor>src/assembly/plugin.xml</descriptor>
                             </descriptors>
-                              <!-- When uncommented, loads way more than necessary
-                              <descriptorRefs>
-				            <descriptorRef>jar-with-dependencies</descriptorRef>
-				          </descriptorRefs>
-				           -->
                         </configuration>
                     </execution>
                 </executions>
@@ -80,6 +42,19 @@
                 </configuration>
             </plugin>
         </plugins>
-        
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.rlf</groupId>
+            <artifactId>uSkyBlock-API</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uSkyBlock</groupId>
+            <artifactId>uSkyBlock-Core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uSkyBlock</groupId>
+            <artifactId>uSkyBlock-FAWE</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -65,7 +65,7 @@ public class StringEditMenu extends AbstractConfigMenu implements EditMenu {
         }
         capsOn = createItem(menuConfig.getString("keyboard.capslock.true"));
         capsOff = createItem(menuConfig.getString("keyboard.capslock.false"));
-        keyboard.set(getIndex(0,0), createItem(Material.WOOD_DOOR, "\u00a79" + tr("Return"), null));
+        keyboard.set(getIndex(0,0), createItem(Material.OAK_DOOR, "\u00a79" + tr("Return"), null));
         capsIndex = getIndex(5, 0);
         keyboard.set(capsIndex, capsOff);
         backspaceIndex = getIndex(0, 5);
@@ -104,7 +104,7 @@ public class StringEditMenu extends AbstractConfigMenu implements EditMenu {
             } else if (e.getSlot() == returnIndex) {
                 player.openInventory(parent.createEditMenu(configName, path, page));
                 return true;
-            } else if (currentItem.getType() == Material.SKULL_ITEM) {
+            } else if (currentItem.getType() == Material.PLAYER_HEAD) {
                 String character = stripFormatting(currentItem.getItemMeta().getDisplayName());
                 if (character.isEmpty()) {
                     character = " ";

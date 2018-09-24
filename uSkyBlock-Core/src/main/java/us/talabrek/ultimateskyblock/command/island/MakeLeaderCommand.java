@@ -13,7 +13,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class MakeLeaderCommand extends RequireIslandCommand {
     public MakeLeaderCommand(uSkyBlock plugin) {
-        super(plugin, "makeleader|transfer", "usb.island.makeleader", "member", tr("transfer leadership to another member"));
+        super(plugin, "makeleader|transfer", "usb.island.makeleader", "member", marktr("transfer leadership to another member"));
     }
 
     @Override

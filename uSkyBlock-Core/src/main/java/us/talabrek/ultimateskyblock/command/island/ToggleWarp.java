@@ -12,7 +12,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class ToggleWarp extends RequireIslandCommand {
     public ToggleWarp(uSkyBlock plugin) {
-        super(plugin, "togglewarp|tw", "usb.island.togglewarp", tr("enable/disable warping to your island."));
+        super(plugin, "togglewarp|tw", "usb.island.togglewarp", marktr("enable/disable warping to your island."));
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ToggleWarp extends RequireIslandCommand {
                 island.setWarp(false);
             }
         } else {
-            player.sendMessage(tr("\u00a7cYou do not have permission to enable/disable your island's warp!"));
+            player.sendMessage(tr("\u00a7cYou do not have permission to enable/disable your island''s warp!"));
         }
         return true;
     }

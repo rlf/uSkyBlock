@@ -27,14 +27,14 @@ public class PerkLogic {
 
     public PerkLogic(uSkyBlock plugin, IslandGenerator islandGenerator) {
         this.plugin = plugin;
-        defaultPerk = new Perk(ItemStackUtil.createItemList(""), Settings.general_maxPartySize,
+        defaultPerk = new Perk(Collections.emptyList(), Settings.general_maxPartySize,
                 plugin.getConfig().getInt("options.island.spawn-limits.animals", 30),
                 plugin.getConfig().getInt("options.island.spawn-limits.monsters", 50),
                 plugin.getConfig().getInt("options.island.spawn-limits.villagers", 16),
                 plugin.getConfig().getInt("options.island.spawn-limits.golems", 4),
                 0,
                 0,
-                null);
+                null, null);
         donorPerks = new ConcurrentHashMap<>();
         addDonorPerks(null, plugin.getConfig().getConfigurationSection("donor-perks"));
         addExtraPermissionPerks(plugin.getConfig().getConfigurationSection("options.island.extraPermissions"));
@@ -60,10 +60,10 @@ public class PerkLogic {
                         .golems(config.getInt("golems", 0))
                         .rewBonus(config.getInt("rewardBonus", 0))
                         .hungerReduction(config.getInt("hungerReduction", 0))
-                        .extraItems(ItemStackUtil.createItemList(config.getString("extraItems", null), config.getStringList("extraItems")))
+                        .extraItems(ItemStackUtil.createItemList(config.getStringList("extraItems")))
                         .build();
                 ItemStack itemStack = ItemStackUtil.createItemStack(
-                        config.getString("displayItem", "GRASS"),
+                        config.getString("displayItem", "SAPLING"),
                         schemeName,
                         config.getString("description", null)
                 );
@@ -75,7 +75,7 @@ public class PerkLogic {
             Perk perk = new PerkBuilder(defaultPerk).schematics(schemeName).build();
             if (!islandPerks.containsKey(schemeName)) {
                 islandPerks.put(schemeName, new IslandPerk(schemeName, "usb.schematic." + schemeName,
-                        ItemStackUtil.createItemStack("GRASS", schemeName, null), perk,
+                        ItemStackUtil.createItemStack("SAPLING", schemeName, null), perk,
                         1d, 0d));
             }
         }
@@ -127,7 +127,7 @@ public class PerkLogic {
             } else {
                 // Read leaf
                 donorPerks.put(perm, new Perk(
-                        ItemStackUtil.createItemList(config.getString("extraItems", null), config.getStringList("extraItems")),
+                        ItemStackUtil.createItemList(config.getStringList("extraItems")),
                         config.getInt("maxPartySize", defaultPerk.getMaxPartySize()),
                         config.getInt("animals", defaultPerk.getAnimals()),
                         config.getInt("monsters", defaultPerk.getMonsters()),
@@ -135,7 +135,7 @@ public class PerkLogic {
                         config.getInt("golems", defaultPerk.getGolems()),
                         config.getDouble("rewardBonus", defaultPerk.getRewBonus()),
                         config.getDouble("hungerReduction", defaultPerk.getHungerReduction()),
-                        config.getStringList("schematics")));
+                        config.getStringList("schematics"), null));
             }
         }
     }
@@ -145,7 +145,7 @@ public class PerkLogic {
             return;
         }
         for (String key : config.getKeys(false)) {
-            List<ItemStack> items = ItemStackUtil.createItemList(config.getString(key, null), config.getStringList(key));
+            List<ItemStack> items = ItemStackUtil.createItemList(config.getStringList(key));
             if (items != null && !items.isEmpty()) {
                 String perm = "usb." + key;
                 donorPerks.put(perm, new PerkBuilder(donorPerks.get(perm))
@@ -223,55 +223,55 @@ public class PerkLogic {
         private Perk perk;
 
         public PerkBuilder() {
-            perk = new Perk(null, 0, 0, 0, 0, 0, 0, 0, null);
+            perk = new Perk(null, 0, 0, 0, 0, 0, 0, 0, null, null);
         }
 
         public PerkBuilder(Perk basePerk) {
-            perk = basePerk != null ? basePerk : new Perk(null, 0, 0, 0, 0, 0, 0, 0, null);
+            perk = basePerk != null ? basePerk : new Perk(null, 0, 0, 0, 0, 0, 0, 0, null, null);
         }
 
         public PerkBuilder extraItems(List<ItemStack> items) {
-            perk = perk.combine(new Perk(items, 0, 0, 0, 0, 0, 0, 0, null));
+            perk = perk.combine(new Perk(items, 0, 0, 0, 0, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder maxPartySize(int max) {
-            perk = perk.combine(new Perk(null, max, 0, 0, 0, 0, 0, 0, null));
+            perk = perk.combine(new Perk(null, max, 0, 0, 0, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder animals(int animals) {
-            perk = perk.combine(new Perk(null, 0, animals, 0, 0, 0, 0, 0, null));
+            perk = perk.combine(new Perk(null, 0, animals, 0, 0, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder monsters(int monsters) {
-            perk = perk.combine(new Perk(null, 0, 0, monsters, 0, 0, 0, 0, null));
+            perk = perk.combine(new Perk(null, 0, 0, monsters, 0, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder villagers(int villagers) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, villagers, 0, 0, 0, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, villagers, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder golems(int golems) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, golems, 0, 0, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, golems, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder rewBonus(double bonus) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, bonus, 0, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, bonus, 0, null, null));
             return this;
         }
 
         public PerkBuilder hungerReduction(double reduction) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, reduction, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, reduction, null, null));
             return this;
         }
 
         public PerkBuilder schematics(String... schemes) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, 0, Arrays.asList(schemes)));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, 0, Arrays.asList(schemes), null));
             return this;
         }
 

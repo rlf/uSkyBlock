@@ -11,6 +11,7 @@ public class NullPlayer implements OfflinePlayer {
     public static final NullPlayer INSTANCE = new NullPlayer();
     private NullPlayer() {
     }
+
     @Override
     public boolean isOnline() {
         return false;
@@ -30,11 +31,6 @@ public class NullPlayer implements OfflinePlayer {
     public boolean isBanned() {
         return false;
     }
-
-//    @Override
-//    public void setBanned(boolean b) {
-//
-//    }
 
     @Override
     public boolean isWhitelisted() {

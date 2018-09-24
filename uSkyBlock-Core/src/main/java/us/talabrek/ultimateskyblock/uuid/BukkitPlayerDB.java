@@ -77,6 +77,11 @@ public class BukkitPlayerDB implements PlayerDB {
     }
 
     @Override
+    public OfflinePlayer getOfflinePlayer(UUID uuid) {
+        return Bukkit.getOfflinePlayer(uuid);
+    }
+
+    @Override
     public void shutdown() {
         // Do nothing
     }

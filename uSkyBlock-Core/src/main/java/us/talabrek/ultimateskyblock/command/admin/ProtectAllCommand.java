@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.util.ProgressTracker;
 
 import java.util.Map;
 
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -18,7 +19,7 @@ public class ProtectAllCommand extends AbstractCommand {
     private ProtectAllTask task;
 
     public ProtectAllCommand(uSkyBlock plugin) {
-        super("protectall", "usb.admin.protectall", tr("protects all islands (time consuming)"));
+        super("protectall", "usb.admin.protectall", marktr("protects all islands (time consuming)"));
         this.plugin = plugin;
     }
 
