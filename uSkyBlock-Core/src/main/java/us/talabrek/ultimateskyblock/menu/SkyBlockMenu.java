@@ -331,7 +331,59 @@ public class SkyBlockMenu {
 
         return menu;
     }
+    
+    private void updateBiomeRadius(Player player, Inventory menu) {
+        String radius = PlayerUtil.getMetadata(player, "biome.radius", "chunk");
+        String radiusDisplay;
+        switch (radius) {
+            case "chunk": radiusDisplay = tr("\u00a72chunk");
+                break;
+            case "all":
+                radiusDisplay = tr("\u00a7call");
+                break;
+            default:
+                radiusDisplay = tr("\u00a7e{0}", radius);
+        }
 
+        List<String> lores = new ArrayList<>();
+        ItemStack menuItem = new ItemStack(Material.RED_CARPET);
+        ItemMeta itemMeta = menuItem.getItemMeta();
+        itemMeta.setDisplayName(tr("\u00a7c-"));
+        lores.add(tr("Decrease radius of biome-change"));
+        lores.add(tr(tr("Current radius: {0}", radiusDisplay)));
+        itemMeta.setLore(lores);
+        menuItem.setItemMeta(itemMeta);
+        menu.setItem(21, menuItem);
+
+        lores.clear();
+        menuItem = new ItemStack(Material.GRASS_BLOCK);
+        if (radius.matches("[0-9]+")) {
+            int radiusInt = Integer.parseInt(radius, 10);
+            if (radiusInt <= menuItem.getType().getMaxStackSize()) {
+                menuItem.setAmount(radiusInt);
+            } else {
+                menuItem.setAmount(1);
+            }
+        } else {
+            menuItem.setAmount(1);
+        }
+        itemMeta = menuItem.getItemMeta();
+        itemMeta.setDisplayName(tr("Current radius: {0}", radiusDisplay));
+        itemMeta.setLore(lores);
+        menuItem.setItemMeta(itemMeta);
+        menu.setItem(22, menuItem);
+
+        lores.clear();
+        menuItem = new ItemStack(Material.GREEN_CARPET);
+        itemMeta = menuItem.getItemMeta();
+        itemMeta.setDisplayName(tr("\u00a72+"));
+        lores.add(tr("Increase radius of biome-change"));
+        lores.add(tr(tr("Current radius: {0}", radiusDisplay)));
+        itemMeta.setLore(lores);
+        menuItem.setItemMeta(itemMeta);
+        menu.setItem(23, menuItem);
+    }
+    
     private void addExtraMenus(Player player, Inventory menu) {
         ConfigurationSection extras = plugin.getConfig().getConfigurationSection("options.extra-menus");
         if (extras == null) {
