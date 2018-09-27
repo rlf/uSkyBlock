@@ -25,6 +25,7 @@ import us.talabrek.ultimateskyblock.command.island.LevelCommand;
 import us.talabrek.ultimateskyblock.command.island.LockUnlockCommand;
 import us.talabrek.ultimateskyblock.command.island.LogCommand;
 import us.talabrek.ultimateskyblock.command.island.MakeLeaderCommand;
+import us.talabrek.ultimateskyblock.command.island.MapCommand;
 import us.talabrek.ultimateskyblock.command.island.MobLimitCommand;
 import us.talabrek.ultimateskyblock.command.island.PartyCommand;
 import us.talabrek.ultimateskyblock.command.island.PermCommand;
