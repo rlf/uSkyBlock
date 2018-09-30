@@ -1,34 +1,6 @@
 package us.talabrek.ultimateskyblock.handler;
 
-import com.sk89q.worldedit.BlockVector;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.domains.DefaultDomain;
-import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
-import com.sk89q.worldguard.protection.flags.Flags;
-import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
-import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
-import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import dk.lockfuglsang.minecraft.po.I18nUtil;
-import dk.lockfuglsang.minecraft.util.VersionUtil;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.LogUtil;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +12,36 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+
+import com.sk89q.worldedit.BlockVector;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.domains.DefaultDomain;
+import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.Flags;
+import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+import dk.lockfuglsang.minecraft.po.I18nUtil;
+import dk.lockfuglsang.minecraft.util.VersionUtil;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
@@ -148,24 +149,24 @@ public class WorldGuardHandler {
         if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.entry-message", true)) {
         	
             if (owners.size() == 0) {
-                region.setFlag(DefaultFlag.GREET_MESSAGE, tr("\u00a74** You are entering a protected - but abandoned - island area."));
+                region.setFlag(Flags.GREET_MESSAGE, tr("\u00a74** You are entering a protected - but abandoned - island area."));
             } else {
-                region.setFlag(DefaultFlag.GREET_MESSAGE, tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
+                region.setFlag(Flags.GREET_MESSAGE, tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
             }
         } else {
-            region.setFlag(DefaultFlag.GREET_MESSAGE, null);
+            region.setFlag(Flags.GREET_MESSAGE, null);
         }
         if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.exit-message", true)) {
             if (owners.size() == 0) {
-                region.setFlag(DefaultFlag.FAREWELL_MESSAGE, tr("\u00a74** You are leaving an abandoned island."));
+                region.setFlag(Flags.FAREWELL_MESSAGE, tr("\u00a74** You are leaving an abandoned island."));
             } else {
-                region.setFlag(DefaultFlag.FAREWELL_MESSAGE, tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
+                region.setFlag(Flags.FAREWELL_MESSAGE, tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
             }
         } else {
-            region.setFlag(DefaultFlag.FAREWELL_MESSAGE, null);
+            region.setFlag(Flags.FAREWELL_MESSAGE, null);
         }
         setVersionSpecificFlags(region);
-        region.setFlag(DefaultFlag.PVP, null);
+        region.setFlag(Flags.PVP, null);
         boolean isLocked = islandConfig.isLocked();
         updateLockStatus(region, isLocked);
         return region;
@@ -173,9 +174,9 @@ public class WorldGuardHandler {
 
     private static void updateLockStatus(ProtectedRegion region, boolean isLocked) {
         if (isLocked) {
-            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
+            region.setFlag(Flags.ENTRY, StateFlag.State.DENY);
         } else {
-            region.setFlag(DefaultFlag.ENTRY, null);
+            region.setFlag(Flags.ENTRY, null);
         }
     }
 
@@ -187,11 +188,11 @@ public class WorldGuardHandler {
                 // Default values sort of bring us there... niiiiice
             } else {
                 // 5.9 or below
-                region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
-                region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
-                region.setFlag(DefaultFlag.CHEST_ACCESS, StateFlag.State.DENY);
-                region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
-                region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
+                region.setFlag(Flags.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
+                region.setFlag(Flags.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
+                region.setFlag(Flags.CHEST_ACCESS, StateFlag.State.DENY);
+                region.setFlag(Flags.USE, StateFlag.State.DENY);
+                region.setFlag(Flags.DESTROY_VEHICLE, StateFlag.State.DENY);
             }
         }
     }
@@ -306,11 +307,11 @@ public class WorldGuardHandler {
             if (global == null) {
                 global = new GlobalProtectedRegion("__global__");
             }
-            global.setFlag(DefaultFlag.BUILD, StateFlag.State.DENY);
+            global.setFlag(Flags.BUILD, StateFlag.State.DENY);
             if (Settings.island_allowPvP) {
-                global.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
+                global.setFlag(Flags.PVP, StateFlag.State.ALLOW);
             } else {
-                global.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+                global.setFlag(Flags.PVP, StateFlag.State.DENY);
             }
             regionManager.addRegion(global);
         }
