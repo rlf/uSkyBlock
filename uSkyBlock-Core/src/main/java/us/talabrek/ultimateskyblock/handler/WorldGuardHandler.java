@@ -8,6 +8,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
 import com.sk89q.worldguard.protection.flags.StateFlag;
@@ -145,25 +146,26 @@ public class WorldGuardHandler {
         region.setMembers(members);
         region.setPriority(100);
         if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.entry-message", true)) {
+        	
             if (owners.size() == 0) {
-                region.setFlag(Flags.GREET_MESSAGE, tr("\u00a74** You are entering a protected - but abandoned - island area."));
+                region.setFlag(DefaultFlag.GREET_MESSAGE, tr("\u00a74** You are entering a protected - but abandoned - island area."));
             } else {
-                region.setFlag(Flags.GREET_MESSAGE, tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
+                region.setFlag(DefaultFlag.GREET_MESSAGE, tr("\u00a7d** You are entering \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
             }
         } else {
-            region.setFlag(Flags.GREET_MESSAGE, null);
+            region.setFlag(DefaultFlag.GREET_MESSAGE, null);
         }
         if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.exit-message", true)) {
             if (owners.size() == 0) {
-                region.setFlag(Flags.FAREWELL_MESSAGE, tr("\u00a74** You are leaving an abandoned island."));
+                region.setFlag(DefaultFlag.FAREWELL_MESSAGE, tr("\u00a74** You are leaving an abandoned island."));
             } else {
-                region.setFlag(Flags.FAREWELL_MESSAGE, tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
+                region.setFlag(DefaultFlag.FAREWELL_MESSAGE, tr("\u00a7d** You are leaving \u00a7b{0}''s \u00a7disland.", islandConfig.getLeader()));
             }
         } else {
-            region.setFlag(Flags.FAREWELL_MESSAGE, null);
+            region.setFlag(DefaultFlag.FAREWELL_MESSAGE, null);
         }
         setVersionSpecificFlags(region);
-        region.setFlag(Flags.PVP, null);
+        region.setFlag(DefaultFlag.PVP, null);
         boolean isLocked = islandConfig.isLocked();
         updateLockStatus(region, isLocked);
         return region;
@@ -171,9 +173,9 @@ public class WorldGuardHandler {
 
     private static void updateLockStatus(ProtectedRegion region, boolean isLocked) {
         if (isLocked) {
-            region.setFlag(Flags.ENTRY, StateFlag.State.DENY);
+            region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
         } else {
-            region.setFlag(Flags.ENTRY, null);
+            region.setFlag(DefaultFlag.ENTRY, null);
         }
     }
 
@@ -185,11 +187,11 @@ public class WorldGuardHandler {
                 // Default values sort of bring us there... niiiiice
             } else {
                 // 5.9 or below
-                region.setFlag(Flags.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
-                region.setFlag(Flags.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
-                region.setFlag(Flags.CHEST_ACCESS, StateFlag.State.DENY);
-                region.setFlag(Flags.USE, StateFlag.State.DENY);
-                region.setFlag(Flags.DESTROY_VEHICLE, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.CHEST_ACCESS, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.DESTROY_VEHICLE, StateFlag.State.DENY);
             }
         }
     }
@@ -304,11 +306,11 @@ public class WorldGuardHandler {
             if (global == null) {
                 global = new GlobalProtectedRegion("__global__");
             }
-            global.setFlag(Flags.BUILD, StateFlag.State.DENY);
+            global.setFlag(DefaultFlag.BUILD, StateFlag.State.DENY);
             if (Settings.island_allowPvP) {
-                global.setFlag(Flags.PVP, StateFlag.State.ALLOW);
+                global.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
             } else {
-                global.setFlag(Flags.PVP, StateFlag.State.DENY);
+                global.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
             }
             regionManager.addRegion(global);
         }

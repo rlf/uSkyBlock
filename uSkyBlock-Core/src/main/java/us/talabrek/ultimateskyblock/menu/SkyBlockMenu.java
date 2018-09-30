@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.menu;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -19,6 +20,7 @@ import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 
@@ -670,7 +672,7 @@ public class SkyBlockMenu {
 						lores.clear();
 					} else {
 						
-						menuItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+						menuItem = new ItemStack(Material.ZOMBIE_HEAD, 1, (short) 3);
 						SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
 						if (plugin.getIslandInfo(l) != null){
 							if (plugin.getIslandInfo(l).getLeaderUniqueId() != null){
@@ -717,11 +719,11 @@ public class SkyBlockMenu {
         		} else {
         			//Map grids are nice to have. 
         			if (z== 0 || x == 0){
-        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, MAP_BACKGROUND_ORG);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, MAP_BACKGROUND_ORG);
         			}else if (z%4 == 0 || x%4 == 0){
-        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, MAP_BACKGROUND_SEC);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, MAP_BACKGROUND_SEC);
         			} else {
-        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, MAP_BACKGROUND);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, MAP_BACKGROUND);
         			}
 					meta = menuItem.getItemMeta();
         	        meta.setDisplayName(tr("\u00a7a\u00a7lEmpty Space"));
@@ -738,10 +740,10 @@ public class SkyBlockMenu {
         		
         		if (i%COLS_PER_ROW == (8) && i < MAX_INV_SIZE-COLS_PER_ROW){
         			if (cameraZ == (((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
-        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
         				addLore(lores, tr("\u00a7aCurrent Z: "+cameraZ));
         			} else {
-        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
         				if (cameraZ < (((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
         					addLore(lores, tr("\u00a7aClick to scroll south")); 
         				} else {
@@ -759,10 +761,10 @@ public class SkyBlockMenu {
         		// Bottom middle 5 here:
         		if (i%COLS_PER_ROW >= (2) && i%COLS_PER_ROW <= (6) && i > MAX_INV_SIZE-COLS_PER_ROW){
         			if (cameraX == ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
-        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
         				addLore(lores, tr("\u00a7aCurrent X: "+cameraX));
         			} else {
-        				menuItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
         				if (cameraX < ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
         					addLore(lores, tr("\u00a7aClick to scroll east")); 
         				} else {
@@ -939,7 +941,7 @@ public class SkyBlockMenu {
         menu.setItem(9, menuItem); // First item, 2nd line
         lores.clear();
         
-        menuItem = new ItemStack(Material.EMPTY_MAP, 1);
+        menuItem = new ItemStack(Material.MAP, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lSky Map"));
         addLore(lores, "\u00a7f", tr("Shows an overview\nof all current\nislands\n\u00a7e\u00a7lClick here to open."));
@@ -1138,9 +1140,9 @@ public class SkyBlockMenu {
     	} else if (currentItem.getType().equals(Material.COMPASS)){
     		// Request for re-centering.     		
     		updateInventory(p, createLocationPickerMenu(p, schemeName, true, 0, 0));
-    	} else if (currentItem.getType().equals(Material.STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
+    	} else if (currentItem.getType().equals(Material.GRAY_STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
     		handleScrollbarClick(event, p, currentItem, slotIndex, true, schemeName);
-    	} else if (currentItem.getType().equals(Material.SKULL_ITEM)){        
+    	} else if (currentItem.getType().equals(Material.SKELETON_SKULL)){        
    		 	handleWarpClick(p, currentItem, slotIndex);
     	}
                 
@@ -1158,7 +1160,7 @@ public class SkyBlockMenu {
         if (slotIndex == 0) {
             p.closeInventory();
             p.openInventory(displayIslandGUI(p));
-        } else if (currentItem.getType().equals(Material.SKULL_ITEM)){        
+        } else if (currentItem.getType().equals(Material.SKELETON_SKULL)){        
     		 handleWarpClick(p, currentItem, slotIndex);
     	} else if (currentItem.getType().equals(Material.COMPASS)){
     		// Request for re-centering. 
@@ -1168,7 +1170,7 @@ public class SkyBlockMenu {
     			p.closeInventory();
     			p.performCommand("island spawn");
     		} 
-    	} else if (currentItem.getType().equals(Material.STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
+    	} else if (currentItem.getType().equals(Material.ORANGE_STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
     		handleScrollbarClick(event, p, currentItem, slotIndex, false, null);
     	}
                 
@@ -1233,7 +1235,7 @@ public class SkyBlockMenu {
         } else if (currentItem.getType() == Material.PLAYER_HEAD) {
             p.closeInventory();
             p.performCommand("island party");
-        } else if (currentItem.getType() == Material.EMPTY_MAP) {
+        } else if (currentItem.getType() == Material.MAP) {
             p.closeInventory();
             p.performCommand("island map");
         } else if (currentItem.getType() == Material.RED_BED) {
