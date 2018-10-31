@@ -1137,8 +1137,8 @@ ranks:
         repeatReward:
           text: 2 gold ore, 5% chance of nether star
           items:
-          - '14:2'
-          - '{p=0.05}399:1'
+          - 'GOLD_ORE:2'
+          - '{p=0.05}NETHER_STAR:1'
           currency: 20
           xp: 20
       pearlcollector:
