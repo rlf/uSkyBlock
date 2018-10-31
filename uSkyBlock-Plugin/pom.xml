@@ -18,18 +18,32 @@
 		<dependency>
 			<groupId>com.github.rlf</groupId>
 			<artifactId>uSkyBlock-API</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>uSkyBlock</groupId>
 			<artifactId>uSkyBlock-Core</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>uSkyBlock</groupId>
 			<artifactId>uSkyBlock-FAWE</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<build>
 		<finalName>uSkyBlock</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -38,7 +52,7 @@
 					<executions>
 						<execution>
 							<id>distro-assembly</id>
-							<phase>package</phase>
+							<phase>compile</phase>
 							<goals>
 								<goal>single</goal>
 							</goals>
