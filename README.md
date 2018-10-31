@@ -47,6 +47,28 @@ Please make sure, that the config files are as you expect them to be, before usi
 
 See (https://github.com/rlf/uSkyBlock/wiki/Building)
 
+### Get Ready: Verify Maven and Java, and clone the project. 
+This project is built using Apache Maven. If you are a purist, and would like to use Maven outside of IntelliJ or Eclipse you can install it using the instructions here (https://maven.apache.org/install.html). 
+
+This project is built against Java 8. If you are new to Java development, be sure to have the [JDK installed](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+
+When cloning the project, be aware that this project makes use of the [BukkitUtils](https://github.com/rlf/bukkit-utils) project as a submodule. 
+Clone the repository using the recursive flag like so:
+`git clone --recursive <project url>`
+
+### Set: Build Bukkit/Spigot
+As this is a bukkit plugin, you will need to reference the latest flavor of the Bukkit server. 
+The spigot team has maintained Bukkit in the form of binary patches, and have provided their own tool for building. This tool does all the heavy lifting, so follow the instructions here, sit back, and grab a coffee:
+https://www.spigotmc.org/wiki/buildtools/
+
+After building this, Spigot and Bukkit will be installed into your local Maven repository, and be able to be used in the build process. 
+
+### Go: Build!
+The project can be built by navigating to the root of the uSkyBlock project and executing
+`mvn clean install`
+
+If all goes well, you should see an `[INFO] BUILD SUCCESS` message, with the final step being the `maven-install-plugin` copying uSkyBlock to your local maven repository.
+
 # API
 uSkyBlock has an API (since v2.0.1-RC1.65).
 
