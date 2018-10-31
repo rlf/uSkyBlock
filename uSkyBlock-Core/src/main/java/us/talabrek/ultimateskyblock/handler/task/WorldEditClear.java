@@ -80,7 +80,8 @@ public class WorldEditClear extends IncrementalRunnable {
             } catch (MaxChangedBlocksException e) {
                 log.log(Level.INFO, "Warning: we got MaxChangedBlocks from WE, please increase it!");
             }
-            editSession.flushQueue();
+            editSession.flushSession();
+            //editSession.flushQueue();
             //editSession.commit();
             if (!tick()) {
                 break;

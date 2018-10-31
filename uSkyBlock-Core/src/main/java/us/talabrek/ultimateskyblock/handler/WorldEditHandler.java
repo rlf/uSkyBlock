@@ -65,7 +65,7 @@ public class WorldEditHandler {
                         .build();
                 Operations.completeBlindly(operation);
             }
-            editSession.flushQueue();
+            editSession.flushSession();
         } catch (IOException e) {
             log.log(Level.INFO, "Unable to paste schematic " + file, e);
         }

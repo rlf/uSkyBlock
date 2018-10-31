@@ -28,9 +28,9 @@
     <modules>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
-        <module>uSkyBlock-Plugin</module>
         <module>uSkyBlock-FAWE</module>
         <module>uSkyBlock-WE700</module>
+        <module>uSkyBlock-Plugin</module>
     </modules>
 
     <scm>
@@ -197,12 +197,12 @@
                     <scope>compile</scope>
                     <type>jar</type>
                     <optional>true</optional>
-                    <exclusions>
+<!--                     <exclusions>
                         <exclusion>
                             <groupId>com.sk89q</groupId>
                             <artifactId>worldedit</artifactId>
                         </exclusion>
-                    </exclusions>
+                    </exclusions> -->
                 </dependency>
             </dependencies>
         </profile>

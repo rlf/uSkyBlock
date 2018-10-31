@@ -121,7 +121,8 @@ public enum AsyncWorldEditHandler {;
                         editSession.enableQueue();
                         editSession.setFastMode(true);
                         editSession.getWorld().regenerate(region, editSession);
-                        editSession.flushQueue();
+                        editSession.flushSession();
+                        //editSession.flushQueue();
                     } finally {
                         onCompletion.run();
                     }

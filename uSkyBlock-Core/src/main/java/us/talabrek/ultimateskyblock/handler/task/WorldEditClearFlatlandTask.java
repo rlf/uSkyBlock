@@ -86,7 +86,8 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
                     plugin.getLogger().log(Level.WARNING, "Unable to clear flat-land", e);
                 }
             }
-            editSession.flushQueue();
+            editSession.flushSession();
+            //editSession.flushQueue();
             if (!tick()) {
                 break;
             }

@@ -83,8 +83,8 @@
 			    <dependency>
 			           <groupId>org.spigotmc</groupId>
 			           <artifactId>spigot-api</artifactId>
-			           <version>1.13.1-R0.1-SNAPSHOT</version>
-			           <scope>provided</scope>
+			           <version>1.13.2-R0.1-SNAPSHOT</version>
+			           <scope>compile</scope>
 			    </dependency>
 			    <!-- Bukkit API - pick this or spigot
 			    
