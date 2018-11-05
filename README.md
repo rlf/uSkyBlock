@@ -18,9 +18,11 @@ As is the nature of things, work on this repo is volunteer-only and for personal
 This version depends on the following plugins:
 
 * Bukkit/Spigot 1.13.1-R0.1-SNAPSHOT - Generated using [Spigot's Buildtools](https://www.spigotmc.org/wiki/buildtools/)
+* Multiverse-Core - Builds available at [OnARandomBox\Multiverse-Core](https://ci.onarandombox.com/job/Multiverse-Core/) and source on [Github](https://github.com/Multiverse/Multiverse-Core)
 * Vault 1.6.x - Available as a [Spigot Resource](https://www.spigotmc.org/resources/vault.34315/)
 * WorldEdit 7.0.0-SNAPSHOT - Available at [EngineHub\WorldEdit](http://www.enginehub.org/worldedit) 
 * WorldGuard 7.0.0-SNAPSHOT - Available at [EngineHub\WorldGuard](http://www.enginehub.org/worldguard)
+
 
 ## Releases 
 Please see [rlf/uSkyblock](https://github.com/rlf/uSkyBlock) for the latest and greatest code. 
