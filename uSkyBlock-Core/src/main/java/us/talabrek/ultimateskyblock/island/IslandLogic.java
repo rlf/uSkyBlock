@@ -1,34 +1,8 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.util.TimeUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.api.IslandLevel;
-import us.talabrek.ultimateskyblock.api.IslandRank;
-import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditClearFlatlandTask;
-import us.talabrek.ultimateskyblock.island.level.IslandScore;
-import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.IslandUtil;
-import us.talabrek.ultimateskyblock.util.LocationUtil;
-import us.talabrek.ultimateskyblock.util.PlayerUtil;
+import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static org.bukkit.Material.BEDROCK;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,9 +14,37 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static org.bukkit.Material.BEDROCK;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+import dk.lockfuglsang.minecraft.file.FileUtil;
+import dk.lockfuglsang.minecraft.util.TimeUtil;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.api.IslandLevel;
+import us.talabrek.ultimateskyblock.api.IslandRank;
+import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
+import us.talabrek.ultimateskyblock.handler.task.WorldEditClearFlatlandTask;
+import us.talabrek.ultimateskyblock.island.level.IslandScore;
+import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.util.IslandUtil;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.util.PlayerUtil;
 
 /**
  * Responsible for island creation, locating locations, purging, clearing etc.
@@ -116,7 +118,7 @@ public class IslandLogic {
             throw new IllegalStateException("Unable to load island", e);
         }
     }
-    
+
     public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
         if (playerInfo != null && playerInfo.getHasIsland()) {
             return getIslandInfo(playerInfo.locationForParty());
@@ -204,8 +206,8 @@ public class IslandLogic {
                         || w.getBlockAt(px-radius, py, pz-radius).getType() == BEDROCK)
                 {
                     sender.sendMessage(String.format("\u00a7c-----------------------------------\n\u00a7cFlatland detected under your island!\n\u00a7e Clearing it in %s, stay clear.\n\u00a7c-----------------------------------\n", TimeUtil.ticksAsString(delay)));
-                    new WorldEditClearFlatlandTask(plugin, sender, new CuboidRegion(new Vector(px-radius, 0, pz-radius),
-                            new Vector(px+radius, 4, pz+radius)),
+                    new WorldEditClearFlatlandTask(plugin, sender, new CuboidRegion(BlockVector3.at(px-radius, 0, pz-radius),
+                            BlockVector3.at(px+radius, 4, pz+radius)),
                             "\u00a7eFlatland was cleared under your island (%s). Take care.").runTaskLater(plugin, delay);
                 }
             }

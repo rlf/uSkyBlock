@@ -1,32 +1,33 @@
 package us.talabrek.ultimateskyblock.command.admin;
 
-import com.sk89q.worldedit.BlockVector;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.Vector2D;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import dk.lockfuglsang.minecraft.animation.AnimationHandler;
-import dk.lockfuglsang.minecraft.animation.BlockAnimation;
-import dk.lockfuglsang.minecraft.command.AbstractCommand;
-import dk.lockfuglsang.minecraft.command.CompositeCommand;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
-import us.talabrek.ultimateskyblock.uSkyBlock;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import com.sk89q.worldedit.math.BlockVector2;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+import dk.lockfuglsang.minecraft.animation.AnimationHandler;
+import dk.lockfuglsang.minecraft.animation.BlockAnimation;
+import dk.lockfuglsang.minecraft.command.AbstractCommand;
+import dk.lockfuglsang.minecraft.command.CompositeCommand;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 
 /**
  * Command to show the regions of interest.
@@ -66,7 +67,7 @@ public class RegionCommand extends CompositeCommand {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     Chunk chunk = player.getLocation().getChunk();
-                    Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
+                    BlockVector2 chunkCoords = BlockVector2.at(chunk.getX(), chunk.getZ());
                     dash = 4;
                     setMaterial(Material.YELLOW_STAINED_GLASS);
                     showChunk(player, chunkCoords);
@@ -84,17 +85,17 @@ public class RegionCommand extends CompositeCommand {
                     Player player = (Player) sender;
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
-                        Set<Vector2D> borderRegions = WorldEditHandler.getInnerChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
+                        Set<BlockVector2> borderRegions = WorldEditHandler.getInnerChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 3;
                         setMaterial(Material.BLUE_STAINED_GLASS);
-                        for (Vector2D v : borderRegions) {
+                        for (BlockVector2 v : borderRegions) {
                             showChunk(player, v);
                         }
                     } else {
                         sender.sendMessage(tr("\u00a7eNo island found at your current location"));
                     }
                     Chunk chunk = player.getLocation().getChunk();
-                    Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
+                    BlockVector2 chunkCoords = BlockVector2.at(chunk.getX(), chunk.getZ());
                     showChunk(player, chunkCoords);
                     return true;
                 } else {
@@ -133,17 +134,17 @@ public class RegionCommand extends CompositeCommand {
                     Player player = (Player) sender;
                     ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(player.getLocation());
                     if (region != null) {
-                        Set<Vector2D> borderRegions = WorldEditHandler.getOuterChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
+                        Set<BlockVector2> borderRegions = WorldEditHandler.getOuterChunks(new CuboidRegion(region.getMinimumPoint(), region.getMaximumPoint()));
                         dash = 4;
                         setMaterial(Material.BLACK_STAINED_GLASS);
-                        for (Vector2D v : borderRegions) {
+                        for (BlockVector2 v : borderRegions) {
                             showChunk(player, v);
                         }
                     } else {
                         sender.sendMessage(tr("\u00a7eNo island found at your current location"));
                     }
                     Chunk chunk = player.getLocation().getChunk();
-                    Vector2D chunkCoords = new Vector2D(chunk.getX(), chunk.getZ());
+                    BlockVector2 chunkCoords = BlockVector2.at(chunk.getX(), chunk.getZ());
                     showChunk(player, chunkCoords);
                     return true;
                 } else {
@@ -195,7 +196,7 @@ public class RegionCommand extends CompositeCommand {
         });
     }
 
-    private void showChunk(Player player, Vector2D chunk) {
+    private void showChunk(Player player, BlockVector2 chunk) {
         World world = player.getWorld();
         int y = player.getLocation().getBlockY();
         List<Location> points = new ArrayList<>();
@@ -218,12 +219,12 @@ public class RegionCommand extends CompositeCommand {
 
     private void showRegion(Player player, Region region) {
         int y = player.getLocation().getBlockY();
-        Vector minP = region.getMinimumPoint();
-        Vector maxP = region.getMaximumPoint();
+        BlockVector3 minP = region.getMinimumPoint();
+        BlockVector3 maxP = region.getMaximumPoint();
         showRegion(player, y, minP, maxP);
     }
 
-    private void showRegion(Player player, int y, Vector minP, Vector maxP) {
+    private void showRegion(Player player, int y, BlockVector3 minP, BlockVector3 maxP) {
         World world = player.getWorld();
         List<Location> points = new ArrayList<>();
         for (int x = minP.getBlockX(); x <= maxP.getBlockX(); x+=dash) {
@@ -243,8 +244,8 @@ public class RegionCommand extends CompositeCommand {
 
     private void showRegion(Player player, ProtectedRegion region) {
         int y = player.getLocation().getBlockY();
-        BlockVector minP = region.getMinimumPoint();
-        BlockVector maxP = region.getMaximumPoint();
+        BlockVector3 minP = region.getMinimumPoint();
+        BlockVector3 maxP = region.getMaximumPoint();
         showRegion(player, y, minP, maxP);
     }
 

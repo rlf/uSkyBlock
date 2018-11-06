@@ -198,6 +198,10 @@
                             <groupId>com.sk89q</groupId>
                             <artifactId>worldedit</artifactId>
                         </exclusion>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>commandbook</artifactId>
+                        </exclusion>
                     </exclusions>
                 </dependency>
             </dependencies>

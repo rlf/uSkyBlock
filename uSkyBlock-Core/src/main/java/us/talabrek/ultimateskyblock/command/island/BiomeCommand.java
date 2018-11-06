@@ -1,25 +1,27 @@
 package us.talabrek.ultimateskyblock.command.island;
 
-import com.sk89q.worldedit.BlockVector;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.util.BiomeUtil.getBiome;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
+
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.island.task.SetBiomeTask;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.uSkyBlock;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.BiomeUtil.getBiome;
 
 public class BiomeCommand extends RequireIslandCommand {
     public static final Map<String, Biome> BIOMES = new HashMap<String, Biome>() {
@@ -91,23 +93,23 @@ public class BiomeCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a7cYou do not have permission to change your biome to that type."));
                 return true;
             }
-            BlockVector minP = region.getMinimumPoint();
-            BlockVector maxP = region.getMaximumPoint();
+            BlockVector3 minP = region.getMinimumPoint();
+            BlockVector3 maxP = region.getMaximumPoint();
             if (args.length == 2 && args[1].matches("[0-9]+")) {
                 int radius = Integer.parseInt(args[1], 10);
                 Location loc = location.clone().add(-radius, 0, -radius);
                 if (region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ())) {
-                    minP = new BlockVector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+                    minP = BlockVector3.at(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
                 }
                 loc = location.clone().add(radius, 0, radius);
                 if (region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ())) {
-                    maxP = new BlockVector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+                    maxP = BlockVector3.at(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
                 }
                 player.sendMessage(tr("\u00a77The pixies are busy changing the biome near you to \u00a79{0}\u00a77, be patient.", biome));
             } else if (args.length == 2 && args[1].equalsIgnoreCase("chunk")) {
                 Chunk chunk = location.clone().getChunk();
-                minP = new BlockVector(chunk.getX() << 4, 0, chunk.getZ() << 4);
-                maxP = new BlockVector((chunk.getX() << 4) + 15, location.getWorld().getMaxHeight(), (chunk.getZ() << 4) + 15);
+                minP = BlockVector3.at(chunk.getX() << 4, 0, chunk.getZ() << 4);
+                maxP = BlockVector3.at((chunk.getX() << 4) + 15, location.getWorld().getMaxHeight(), (chunk.getZ() << 4) + 15);
                 player.sendMessage(tr("\u00a77The pixies are busy changing the biome in your current chunk to \u00a79{0}\u00a77, be patient.", biome));
             } else if (args.length < 2 || args[1].equalsIgnoreCase("all")) {
                 player.sendMessage(tr("\u00a77The pixies are busy changing the biome of your island to \u00a79{0}\u00a77, be patient.", biome));
