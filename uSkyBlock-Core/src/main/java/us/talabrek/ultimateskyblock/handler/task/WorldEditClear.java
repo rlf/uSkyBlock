@@ -2,8 +2,8 @@ package us.talabrek.ultimateskyblock.handler.task;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.block.BlockTypes;
@@ -41,27 +41,27 @@ public class WorldEditClear extends IncrementalRunnable {
         for (Region region : borderRegions) {
             if (region.getLength() > region.getWidth())  {
                 // Z-axis
-                Vector min = region.getMinimumPoint();
-                Vector max = region.getMaximumPoint();
-                Vector pt = new Vector(max);
-                pt = pt.setZ(min.getBlockZ());
+                BlockVector3 min = region.getMinimumPoint();
+                BlockVector3 max = region.getMaximumPoint();
+                BlockVector3 pt = BlockVector3.at(max.getX(), max.getY(), max.getZ());
+                pt = pt.withZ(min.getBlockZ());
                 while (pt.getBlockZ() < max.getBlockZ()) {
                     int dz = Math.min(INCREMENT, Math.abs(max.getBlockZ()-pt.getBlockZ()));
                     pt = pt.add(0, 0, dz);
                     list.add(new CuboidRegion(min, pt));
-                    min = min.setZ(pt.getZ());
+                    min = min.withZ(pt.getZ());
                 }
             } else {
                 // X-axis
-                Vector min = region.getMinimumPoint();
-                Vector max = region.getMaximumPoint();
-                Vector pt = new Vector(max);
-                pt = pt.setX(min.getBlockX());
+                BlockVector3 min = region.getMinimumPoint();
+                BlockVector3 max = region.getMaximumPoint();
+                BlockVector3 pt = BlockVector3.at(max.getX(), max.getY(), max.getZ());
+                pt = pt.withX(min.getBlockX());
                 while (pt.getBlockX() < max.getBlockX()) {
                     int dx = Math.min(INCREMENT, Math.abs(max.getBlockX()-pt.getBlockX()));
                     pt = pt.add(dx, 0, 0);
                     list.add(new CuboidRegion(min, pt));
-                    min = min.setX(pt.getX());
+                    min = min.withX(pt.getX());
                 }
             }
         }
@@ -80,7 +80,7 @@ public class WorldEditClear extends IncrementalRunnable {
             } catch (MaxChangedBlocksException e) {
                 log.log(Level.INFO, "Warning: we got MaxChangedBlocks from WE, please increase it!");
             }
-            editSession.flushQueue();
+            editSession.flushSession();
             //editSession.commit();
             if (!tick()) {
                 break;
