@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.island.task;
 
-import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Chunk;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ChunkSnapShotTask extends IncrementalRunnable {
     private final Location location;
-    private final List<Vector2D> chunks;
+    private final List<BlockVector2> chunks;
     private List<ChunkSnapshot> snapshots = new ArrayList<>();
 
     public ChunkSnapShotTask(uSkyBlock plugin, Location location, ProtectedRegion region, final Callback<List<ChunkSnapshot>> callback) {
@@ -36,7 +36,7 @@ public class ChunkSnapShotTask extends IncrementalRunnable {
     @Override
     protected boolean execute() {
         while (!chunks.isEmpty()) {
-            Vector2D chunkVector = chunks.remove(0);
+            BlockVector2 chunkVector = chunks.remove(0);
             Chunk chunk = location.getWorld().getChunkAt(chunkVector.getBlockX(), chunkVector.getBlockZ());
             if (!chunk.isLoaded()) {
                 chunk.load();

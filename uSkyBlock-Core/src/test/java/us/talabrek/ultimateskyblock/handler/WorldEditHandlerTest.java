@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.handler;
 
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.math.BlockVector2;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import org.junit.Test;
@@ -40,72 +40,72 @@ public class WorldEditHandlerTest {
     @Test
     public void testGetBorderRegionsAligned() throws Exception {
         // A
-        Region region = new CuboidRegion(new Vector(0,0,0), new Vector(15, 15, 15));
+        Region region = new CuboidRegion(BlockVector3.at(0,0,0), BlockVector3.at(15, 15, 15));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         assertThat("A", borderRegions, is(Collections.<Region>emptySet()));
 
         // B
-        region = new CuboidRegion(new Vector(0,0,-16), new Vector(15, 15, -1));
+        region = new CuboidRegion(BlockVector3.at(0,0,-16), BlockVector3.at(15, 15, -1));
         borderRegions = WorldEditHandler.getBorderRegions(region);
         assertThat("B", borderRegions, is(Collections.<Region>emptySet()));
 
         // C
-        region = new CuboidRegion(new Vector(-16,0,-16), new Vector(-1, 15, -1));
+        region = new CuboidRegion(BlockVector3.at(-16,0,-16), BlockVector3.at(-1, 15, -1));
         borderRegions = WorldEditHandler.getBorderRegions(region);
         assertThat("C", borderRegions, is(Collections.<Region>emptySet()));
 
         // D
-        region = new CuboidRegion(new Vector(-16,0,0), new Vector(-1, 15, 15));
+        region = new CuboidRegion(BlockVector3.at(-16,0,0), BlockVector3.at(-1, 15, 15));
         borderRegions = WorldEditHandler.getBorderRegions(region);
         assertThat("D", borderRegions, is(Collections.<Region>emptySet()));
     }
 
     @Test
     public void testBorderXPosMax() {
-        Region region = new CuboidRegion(new Vector(0,0,0), new Vector(16, 15, 15));
+        Region region = new CuboidRegion(BlockVector3.at(0,0,0), BlockVector3.at(16, 15, 15));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expected = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(new Vector(16,0,0), new Vector(16,15,15))
+                new CuboidRegion(BlockVector3.at(16,0,0), BlockVector3.at(16,15,15))
         ));
         verifySame(borderRegions, expected);
     }
 
     @Test
     public void testBorderXPosMin() {
-        Region region = new CuboidRegion(new Vector(15,0,0), new Vector(31, 15, 15));
+        Region region = new CuboidRegion(BlockVector3.at(15,0,0), BlockVector3.at(31, 15, 15));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expected = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(new Vector(15,0,0), new Vector(15,15,15))
+                new CuboidRegion(BlockVector3.at(15,0,0), BlockVector3.at(15,15,15))
         ));
         verifySame(borderRegions, expected);
     }
 
     @Test
     public void testBorderXNegMax() {
-        Region region = new CuboidRegion(new Vector(-16,0,-16), new Vector(0, 15, -1));
+        Region region = new CuboidRegion(BlockVector3.at(-16,0,-16), BlockVector3.at(0, 15, -1));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expected = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(new Vector(0,0,-16), new Vector(0,15,-1))
+                new CuboidRegion(BlockVector3.at(0,0,-16), BlockVector3.at(0,15,-1))
         ));
         verifySame(borderRegions, expected);
     }
 
     @Test
     public void testBorderXNegMin() {
-        Region region = new CuboidRegion(new Vector(-17,0,-16), new Vector(-1, 15, -1));
+        Region region = new CuboidRegion(BlockVector3.at(-17,0,-16), BlockVector3.at(-1, 15, -1));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expected = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(new Vector(-17,0,-16), new Vector(-17,15,-1))
+                new CuboidRegion(BlockVector3.at(-17,0,-16), BlockVector3.at(-17,15,-1))
         ));
         verifySame(borderRegions, expected);
     }
 
     @Test
     public void testBorderZPos() {
-        Region region = new CuboidRegion(new Vector(0,0,0), new Vector(15, 15, 16));
+        Region region = new CuboidRegion(BlockVector3.at(0,0,0), BlockVector3.at(15, 15, 16));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expected = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(new Vector(0,0,16), new Vector(15,15,16))
+                new CuboidRegion(BlockVector3.at(0,0,16), BlockVector3.at(15,15,16))
         ));
         verifySame(borderRegions, expected);
     }
@@ -187,31 +187,31 @@ public class WorldEditHandlerTest {
      */
     @Test
     public void testGetBorderRegionsUnalignedPos() throws Exception {
-        Region region = new CuboidRegion(new Vector(1,0,1), new Vector(32, 15, 32));
+        Region region = new CuboidRegion(BlockVector3.at(1,0,1), BlockVector3.at(32, 15, 32));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expectedBorder = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(new Vector(1,0,1), new Vector(15,15,32)),
-                new CuboidRegion(new Vector(32,0,1), new Vector(32,15,32)),
-                new CuboidRegion(new Vector(16,0,1), new Vector(31,15,15)),
-                new CuboidRegion(new Vector(16,0,32), new Vector(31,15,32))
+                new CuboidRegion(BlockVector3.at(1,0,1), BlockVector3.at(15,15,32)),
+                new CuboidRegion(BlockVector3.at(32,0,1), BlockVector3.at(32,15,32)),
+                new CuboidRegion(BlockVector3.at(16,0,1), BlockVector3.at(31,15,15)),
+                new CuboidRegion(BlockVector3.at(16,0,32), BlockVector3.at(31,15,32))
         ));
-        Set<Vector2D> expectedInner = new HashSet<>(Arrays.asList(
-                new Vector2D(1, 1)
+        Set<BlockVector2> expectedInner = new HashSet<>(Arrays.asList(
+                BlockVector2.at(1, 1)
         ));
         verifySame(borderRegions, expectedBorder);
-        Set<Vector2D> innerChunks = WorldEditHandler.getInnerChunks(region);
+        Set<BlockVector2> innerChunks = WorldEditHandler.getInnerChunks(region);
         assertThat(innerChunks, is(expectedInner));
     }
 
     @Test
     public void testGetBorderRegionsAligned4Quadrants() throws Exception {
-        Region region = new CuboidRegion(new Vector(-64,0,-64), new Vector(63, 15, 63));
+        Region region = new CuboidRegion(BlockVector3.at(-64,0,-64), BlockVector3.at(63, 15, 63));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expectedBorder = new HashSet<>(Arrays.<Region>asList());
-        Set<Vector2D> expectedInner = new HashSet<>();
+        Set<BlockVector2> expectedInner = new HashSet<>();
         for (int x = -4; x <= 3; x++) {
             for (int z = -4; z <= 3; z++) {
-                expectedInner.add(new Vector2D(x, z));
+                expectedInner.add(BlockVector2.at(x, z));
             }
         }
         verifySame(borderRegions, expectedBorder);
@@ -245,24 +245,24 @@ public class WorldEditHandlerTest {
      */
     @Test
     public void testGetBorderRegionsUnaligned4Quadrants() throws Exception {
-        Region region = new CuboidRegion(new Vector(-31,0,-31), new Vector(32, 15, 32));
+        Region region = new CuboidRegion(BlockVector3.at(-31,0,-31), BlockVector3.at(32, 15, 32));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expectedBorder = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(new Vector(-16,0,32), new Vector(31,15,32)),
-                new CuboidRegion(new Vector(-16,0,-31), new Vector(31,15,-17)),
-                new CuboidRegion(new Vector(-31,0,-31), new Vector(-17,15,32)),
-                new CuboidRegion(new Vector(32,0,-31), new Vector(32,15,32))
+                new CuboidRegion(BlockVector3.at(-16,0,32), BlockVector3.at(31,15,32)),
+                new CuboidRegion(BlockVector3.at(-16,0,-31), BlockVector3.at(31,15,-17)),
+                new CuboidRegion(BlockVector3.at(-31,0,-31), BlockVector3.at(-17,15,32)),
+                new CuboidRegion(BlockVector3.at(32,0,-31), BlockVector3.at(32,15,32))
                 ));
-        Set<Vector2D> expectedInner = new HashSet<>();
+        Set<BlockVector2> expectedInner = new HashSet<>();
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
-                expectedInner.add(new Vector2D(x, z));
+                expectedInner.add(BlockVector2.at(x, z));
             }
         }
-        Set<Vector2D> expectedOuter = new HashSet<>();
+        Set<BlockVector2> expectedOuter = new HashSet<>();
         for (int x = -2; x <= 2; x++) {
             for (int z = -2; z <= 2; z++) {
-                expectedOuter.add(new Vector2D(x, z));
+                expectedOuter.add(BlockVector2.at(x, z));
             }
         }
 
