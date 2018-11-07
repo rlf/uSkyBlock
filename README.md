@@ -91,4 +91,4 @@ So, with Talabreks blessing, this repository will try to consolidate the many di
 ## References
 
 * [GPLv3](http://www.gnu.org/copyleft/gpl.html) - [tl;dr Legal](https://www.tldrlegal.com/l/gpl-3.0)
-* Dutchy1001s guides and tutorials on uSkyBlock - [http://debocraft.x10.mx/skyblock/](http://debocraft.x10.mx/skyblock/)
+
