@@ -40,7 +40,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static org.bukkit.Material.BEDROCK;
 
@@ -261,7 +260,7 @@ public class IslandLogic {
 
     public void showTopTen(final CommandSender sender, final int page) {
         long t = System.currentTimeMillis();
-        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || (hasPermission(sender, "usb.admin.topten") || sender.isOp())) {
+        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || (sender.hasPermission("usb.admin.topten") || sender.isOp())) {
             lastGenerate = t;
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override

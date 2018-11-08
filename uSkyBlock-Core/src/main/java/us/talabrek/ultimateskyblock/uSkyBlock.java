@@ -115,7 +115,6 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.Settings.island_height;
@@ -824,7 +823,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public void changePlayerBiome(Player player, final String bName, final Callback<Boolean> callback) {
         callback.setState(false);
-        if (bName.equalsIgnoreCase("ocean") || hasPermission(player, "usb.biome." + bName)) {
+        if (bName.equalsIgnoreCase("ocean") || player.hasPermission("usb.biome." + bName)) {
             PlayerInfo playerInfo = getPlayerInfo(player);
             final IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
             if (islandInfo.hasPerm(player, "canChangeBiome")) {

@@ -14,7 +14,6 @@ import us.talabrek.ultimateskyblock.util.LogUtil;
 import java.util.Map;
 import java.util.logging.Level;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
