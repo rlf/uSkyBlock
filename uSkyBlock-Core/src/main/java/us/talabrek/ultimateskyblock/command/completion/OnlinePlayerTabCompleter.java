@@ -16,6 +16,14 @@ public class OnlinePlayerTabCompleter extends AbstractTabCompleter {
     public List<String> getTabList(CommandSender commandSender, String term) {
         List<String> list = new ArrayList<>();
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+            // Ignore hidden players:
+            if (commandSender instanceof Player) {
+                if (!((Player) commandSender).canSee(player)) {
+                    continue;
+                }
+            }
+
+            // Add player to tablist:
             list.add(player.getName());
         }
         return list;
