@@ -33,8 +33,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 import java.text.MessageFormat;
 import java.text.ParseException;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
-
 /**
  * Handling of mob-related events.
  */
@@ -91,7 +89,7 @@ public class GriefEvents implements Listener {
         if (!shearingEnabled || !plugin.isSkyAssociatedWorld(player.getWorld())) {
             return; // Not our concern
         }
-        if (hasPermission(player, "usb.mod.bypassprotection")) {
+        if (player.hasPermission("usb.mod.bypassprotection")) {
             return;
         }
         if (!plugin.playerIsOnIsland(player)) {
@@ -109,7 +107,7 @@ public class GriefEvents implements Listener {
         }
         if (event.getDamager() instanceof Player
                 && !plugin.playerIsOnIsland((Player)event.getDamager())) {
-            if (hasPermission(event.getDamager(), "usb.mod.bypassprotection")) {
+            if (event.getDamager().hasPermission("usb.mod.bypassprotection")) {
                 return;
             }
             cancelMobDamage(event);
@@ -119,7 +117,7 @@ public class GriefEvents implements Listener {
                 return;
             }
             Player player = (Player) shooter;
-            if (hasPermission(player, "usb.mod.bypassprotection") || plugin.playerIsOnIsland(player)) {
+            if (player.hasPermission("usb.mod.bypassprotection") || plugin.playerIsOnIsland(player)) {
                 return;
             }
             cancelMobDamage(event);

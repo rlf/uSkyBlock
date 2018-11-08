@@ -10,7 +10,6 @@ import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
