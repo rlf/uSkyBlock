@@ -34,7 +34,7 @@ public enum MultiverseCoreHandler {;
         if (core != null) {
             Location worldSpawn = new Location(skyWorld, 0.5, Settings.island_height + 0.1, 0.5);
             if (!core.getMVWorldManager().isMVWorld(skyWorld)) {
-                core.getMVWorldManager().addWorld(skyWorld.getName(), World.Environment.NORMAL, "0", WorldType.NORMAL, false, "uSkyBlock");
+                core.getMVWorldManager().addWorld(skyWorld.getName(), World.Environment.NORMAL, "0", WorldType.NORMAL, false, "uSkyBlock", false);
             }
             MultiverseWorld mvWorld = core.getMVWorldManager().getMVWorld(skyWorld);
             mvWorld.setEnvironment(World.Environment.NORMAL);
@@ -61,9 +61,9 @@ public enum MultiverseCoreHandler {;
     public static void importNetherWorld(World skyNetherWorld) {
         MultiverseCore core = getMultiverseCore();
         if (core != null) {
-            Location worldSpawn = new Location(skyNetherWorld, 0.5, Settings.island_height/2 + 0.1, 0.5);
+            Location worldSpawn = new Location(skyNetherWorld, 0.5, Settings.island_height/2.0 + 0.1, 0.5);
             if (!core.getMVWorldManager().isMVWorld(skyNetherWorld)) {
-                core.getMVWorldManager().addWorld(skyNetherWorld.getName(), World.Environment.NETHER, "0", WorldType.NORMAL, false, "uSkyBlock");
+                core.getMVWorldManager().addWorld(skyNetherWorld.getName(), World.Environment.NETHER, "0", WorldType.NORMAL, false, "uSkyBlock", false);
             }
             MultiverseWorld mvWorld = core.getMVWorldManager().getMVWorld(skyNetherWorld);
             mvWorld.setEnvironment(World.Environment.NETHER);
