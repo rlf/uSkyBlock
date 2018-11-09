@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EnderPearl;
-import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -172,17 +171,38 @@ public class PlayerEvents implements Listener {
         }
     }
 
+    // TODO 2018-11-09 Muspah: Move (parts) to new EntityDamageByEntityEvent-handler
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onVisitorDamage(final EntityDamageEvent event) {
+        // Only protect things in the Skyworld.
         if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
-        // Only protect visitors against damage, if pvp is disabled
-        if (!Settings.island_allowPvP
-                && ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
-                || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL)))
-                && (event.getEntity() instanceof Player || (visitorMonsterProtected && event.getEntity() instanceof Monster))
-                && !plugin.playerIsOnIsland((Player) event.getEntity())) {
+
+        // Only protect visitors against damage if pvp is disabled:
+        if (Settings.island_allowPvP) {
+            return;
+        }
+
+        // This protection only applies to players:
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+
+        // Don't protect players on their own islands:
+        if (plugin.playerIsOnIsland((Player) event.getEntity())) {
+            return;
+        }
+
+        if ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
+                || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL))
+                || (visitorMonsterProtected &&
+                    (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK
+                    || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
+                    || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION
+                    || event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE
+                    || event.getCause() == EntityDamageEvent.DamageCause.MAGIC
+                    || event.getCause() == EntityDamageEvent.DamageCause.POISON))) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);
         }
