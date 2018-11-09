@@ -143,7 +143,7 @@ public class IslandLogic {
                 ProtectedRegion netherRegion = WorldGuardHandler.getNetherRegionAt(netherIsland);
                 if (netherRegion != null) {
                     for (Player player : WorldGuardHandler.getPlayersInRegion(netherIsland.getWorld(), netherRegion)) {
-                        if (player != null && player.isOnline() && plugin.isSkyNether(player.getWorld()) && !player.isFlying()) {
+                        if (player != null && player.isOnline() && plugin.getWorldLogic().isSkyNether(player.getWorld()) && !player.isFlying()) {
                             player.sendMessage(tr("\u00a7cThe island owning this piece of nether is being deleted! Sending you to spawn."));
                             plugin.spawnTeleport(player, true);
                         }
@@ -159,7 +159,7 @@ public class IslandLogic {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
             for (Player player : WorldGuardHandler.getPlayersInRegion(plugin.getWorld(), region)) {
-                if (player != null && player.isOnline() && plugin.isSkyWorld(player.getWorld()) && !player.isFlying()) {
+                if (player != null && player.isOnline() && plugin.getWorldLogic().isSkyWorld(player.getWorld()) && !player.isFlying()) {
                     player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
                     plugin.spawnTeleport(player, true);
                 }

@@ -98,7 +98,7 @@ public class NetherTerraFormEvents implements Listener {
         }
         Block block = event.getBlock();
         Player player = event.getPlayer();
-        if (block == null || player == null || !plugin.isSkyNether(block.getWorld()) || !plugin.isSkyNether(player.getWorld())) {
+        if (block == null || player == null || !plugin.getWorldLogic().isSkyNether(block.getWorld()) || !plugin.getWorldLogic().isSkyNether(player.getWorld())) {
             return; // Bail out, not our problem
         }
         if (player.getGameMode() != GameMode.SURVIVAL) {
@@ -232,7 +232,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler
     public void onGhastExplode(EntityExplodeEvent event) {
-        if (event == null || event.getEntity() == null || !plugin.isSkyNether(event.getEntity().getWorld())) {
+        if (event == null || event.getEntity() == null || !plugin.getWorldLogic().isSkyNether(event.getEntity().getWorld())) {
             return; // Bail out, not our problem
         }
         // TODO: 23/09/2015 - R4zorax: Perhaps enable this when island has a certain level?
@@ -253,7 +253,7 @@ public class NetherTerraFormEvents implements Listener {
         if (!spawnEnabled || e == null || e.isCancelled() || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL || e.getEntity() == null) {
             return;
         }
-        if (!plugin.isSkyNether(e.getLocation().getWorld())) {
+        if (!plugin.getWorldLogic().isSkyNether(e.getLocation().getWorld())) {
             return;
         }
         if (e.getLocation().getBlockY() > plugin.getSkyBlockNetherWorld().getMaxHeight()) {
@@ -285,7 +285,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
-        if (!netherRoof || e == null || e.getPlayer() == null || e.getTo() == null || !plugin.isSkyNether(e.getTo().getWorld())) {
+        if (!netherRoof || e == null || e.getPlayer() == null || e.getTo() == null || !plugin.getWorldLogic().isSkyNether(e.getTo().getWorld())) {
             return; // Bail out.
         }
         if (e.getTo().getBlockY() > 127) {

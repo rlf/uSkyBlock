@@ -74,10 +74,10 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerFoodChange(final FoodLevelChangeEvent event) {
-        if (event.getEntity() instanceof Player && plugin.isSkyWorld(event.getEntity().getWorld())) {
+        if (event.getEntity() instanceof Player && plugin.getWorldLogic().isSkyWorld(event.getEntity().getWorld())) {
             Player hungerman = (Player) event.getEntity();
             float randomNum = RANDOM.nextFloat();
-            if (plugin.isSkyWorld(hungerman.getWorld()) && hungerman.getFoodLevel() > event.getFoodLevel() && plugin.playerIsOnIsland(hungerman)) {
+            if (plugin.getWorldLogic().isSkyWorld(hungerman.getWorld()) && hungerman.getFoodLevel() > event.getFoodLevel() && plugin.playerIsOnIsland(hungerman)) {
                 Perk perk = plugin.getPerkLogic().getPerk(hungerman);
                 if (randomNum <= perk.getHungerReduction()) {
                     event.setCancelled(true);
@@ -89,7 +89,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onClickOnObsidian(final PlayerInteractEvent event) {
-        if (!plugin.isSkyWorld(event.getPlayer().getWorld())) {
+        if (!plugin.getWorldLogic().isSkyWorld(event.getPlayer().getWorld())) {
             return;
         }
         long now = System.currentTimeMillis();
@@ -102,7 +102,7 @@ public class PlayerEvents implements Listener {
             return;
         }
         if (Settings.extras_obsidianToLava && plugin.playerIsOnIsland(player)
-                && plugin.isSkyWorld(player.getWorld())
+                && plugin.getWorldLogic().isSkyWorld(player.getWorld())
                 && event.getAction() == Action.RIGHT_CLICK_BLOCK
                 && player.getItemInHand() != null
                 && player.getItemInHand().getType() == Material.BUCKET
@@ -142,7 +142,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onLavaReplace(BlockPlaceEvent event) {
-        if (!protectLava || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
+        if (!protectLava || event.getPlayer() == null || !plugin.getWorldLogic().isSkyWorld(event.getPlayer().getWorld())) {
             return; // Skip
         }
         if (event.getBlockReplacedState() != null &&
@@ -158,7 +158,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onLavaAbsorption(EntityChangeBlockEvent event) {
-        if (!plugin.isSkyWorld(event.getBlock().getWorld())) {
+        if (!plugin.getWorldLogic().isSkyWorld(event.getBlock().getWorld())) {
             return;
         }
         if (isLavaSource(event.getBlock().getType(), event.getBlock().getData())) {
@@ -174,7 +174,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onVisitorDamage(final EntityDamageEvent event) {
-        if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
+        if (!plugin.getWorldLogic().isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
         // Only protect visitors against damage, if pvp is disabled
@@ -190,7 +190,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onSpawnDamage(final EntityDamageEvent event) {
-        if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
+        if (!plugin.getWorldLogic().isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
         if (event.getEntity() instanceof Player && plugin.playerIsInSpawn((Player) event.getEntity()) && event.getCause() == EntityDamageEvent.DamageCause.VOID) {
@@ -202,7 +202,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onMemberDamage(final EntityDamageByEntityEvent event) {
-        if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
+        if (!plugin.getWorldLogic().isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
         if (!(event.getEntity() instanceof Player)) {
@@ -236,14 +236,14 @@ public class PlayerEvents implements Listener {
         if (Settings.extras_sendToSpawn) {
             return;
         }
-        if (plugin.isSkyWorld(event.getPlayer().getWorld())) {
+        if (plugin.getWorldLogic().isSkyWorld(event.getPlayer().getWorld())) {
             event.setRespawnLocation(plugin.getSkyBlockWorld().getSpawnLocation());
         }
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onTeleport(PlayerTeleportEvent event) {
-        if (event.isCancelled() || !plugin.isSkyWorld(event.getTo().getWorld())) {
+        if (event.isCancelled() || !plugin.getWorldLogic().isSkyWorld(event.getTo().getWorld())) {
             return;
         }
         final Player player = event.getPlayer();
@@ -265,7 +265,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onLeafBreak(BlockBreakEvent event) {
-        if (event == null || event.isCancelled() || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
+        if (event == null || event.isCancelled() || event.getPlayer() == null || !plugin.getWorldLogic().isSkyWorld(event.getPlayer().getWorld())) {
             return;
         }
         if (event.getBlock().getType() != Material.OAK_LEAVES || (event.getBlock().getData() & 0x3) != 0) {
@@ -285,7 +285,7 @@ public class PlayerEvents implements Listener {
     public void onBlockPlaceEvent(BlockPlaceEvent event)
     {
         final Player player = event.getPlayer();
-        if (!blockLimitsEnabled || player == null || !plugin.isSkyWorld(player.getWorld()) || event.isCancelled()) {
+        if (!blockLimitsEnabled || player == null || !plugin.getWorldLogic().isSkyWorld(player.getWorld()) || event.isCancelled()) {
             return; // Skip
         }
 
@@ -321,7 +321,7 @@ public class PlayerEvents implements Listener {
     
     @EventHandler
     public void onHopperDestroy(BlockBreakEvent event){
-        if (!blockLimitsEnabled || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld()) || event.isCancelled()) {
+        if (!blockLimitsEnabled || event.getPlayer() == null || !plugin.getWorldLogic().isSkyWorld(event.getPlayer().getWorld()) || event.isCancelled()) {
             return; // Skip
         }
         IslandInfo islandInfo = plugin.getIslandInfo(event.getBlock().getLocation());

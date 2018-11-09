@@ -56,7 +56,7 @@ public class SpawnEvents implements Listener {
     @EventHandler
     public void onSpawnEggEvent(PlayerInteractEvent event) {
         Player player = event != null ? event.getPlayer() : null;
-        if (player == null || event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
+        if (player == null || event.isCancelled() || !plugin.getWorldLogic().isSkyWorld(player.getWorld())) {
             return; // Bail out, we don't care
         }
         if (player.hasPermission("usb.mod.bypassprotection") || player.isOp()) {
@@ -85,7 +85,7 @@ public class SpawnEvents implements Listener {
 
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
-        if (event == null || event.isCancelled() || event.getLocation() == null || !plugin.isSkyWorld(event.getLocation().getWorld())) {
+        if (event == null || event.isCancelled() || event.getLocation() == null || !plugin.getWorldLogic().isSkyWorld(event.getLocation().getWorld())) {
             return; // Bail out, we don't care
         }
         if (!event.isCancelled() && ADMIN_INITIATED.contains(event.getSpawnReason())) {

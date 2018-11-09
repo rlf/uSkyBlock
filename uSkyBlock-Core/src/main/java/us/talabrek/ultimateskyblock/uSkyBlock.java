@@ -13,13 +13,10 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
@@ -105,6 +102,7 @@ import us.talabrek.ultimateskyblock.uuid.BukkitPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.MemoryPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
+import us.talabrek.ultimateskyblock.world.WorldLogic;
 
 import java.io.File;
 import java.util.Collections;
@@ -173,6 +171,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private CooldownHandler cooldownHandler;
     private PlayerLogic playerLogic;
     private ChatLogic chatLogic;
+    private WorldLogic worldLogic;
 
     private volatile boolean maintenanceMode = false;
     private BlockLimitLogic blockLimitLogic;
@@ -197,6 +196,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         challengeLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
+        worldLogic.shutdown();
         playerDB.shutdown(); // Must be before playerNameChangeManager!!
         AsyncWorldEditHandler.onDisable(this);
         DebugCommand.disableLogging(null);
@@ -340,7 +340,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
             skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
-            ChunkGenerator skyGenerator = getGenerator();
+            ChunkGenerator skyGenerator = getWorldLogic().getGenerator();
             ChunkGenerator worldGenerator = skyBlockWorld != null ? skyBlockWorld.getGenerator() : null;
             if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures() ||
                     worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
@@ -354,34 +354,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 uSkyBlock.skyBlockWorld.save();
             }
             MultiverseCoreHandler.importWorld(skyBlockWorld);
-            setupWorld(skyBlockWorld, island_height);
+            getWorldLogic().setupWorld(skyBlockWorld, island_height);
         }
         return uSkyBlock.skyBlockWorld;
-    }
-
-    private void setupWorld(World world, int island_height) {
-        if (Settings.general_spawnSize > 0) {
-            if (LocationUtil.isEmptyLocation(world.getSpawnLocation())) {
-                world.setSpawnLocation(0, island_height, 0);
-            }
-            Location worldSpawn = world.getSpawnLocation();
-            if (!isSafeLocation(worldSpawn)) {
-                createSpawn(world, worldSpawn);
-            }
-        }
-    }
-
-    private void createSpawn(World world, Location worldSpawn) {
-        File spawnSchematic = new File(getDataFolder() + File.separator + "schematics" + File.separator + "spawn.schematic");
-        if (getConfig().getInt("options.general.spawnSize", 0) > 32 && spawnSchematic.exists()) {
-            AsyncWorldEditHandler.loadIslandSchematic(spawnSchematic, worldSpawn, null);
-        } else {
-            Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
-            spawnBlock.setType(Material.GOLD_BLOCK);
-            Block air1 = spawnBlock.getRelative(BlockFace.UP);
-            air1.setType(Material.AIR);
-            air1.getRelative(BlockFace.UP).setType(Material.AIR);
-        }
     }
 
     public static World getSkyBlockWorld() {
@@ -391,7 +366,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public World getSkyBlockNetherWorld() {
         if (skyBlockNetherWorld == null && Settings.nether_enabled) {
             skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
-            ChunkGenerator skyGenerator = getNetherGenerator();
+            ChunkGenerator skyGenerator = getWorldLogic().getNetherGenerator();
             ChunkGenerator worldGenerator = skyBlockNetherWorld != null ? skyBlockNetherWorld.getGenerator() : null;
             if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() ||
                     worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
@@ -405,7 +380,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 uSkyBlock.skyBlockNetherWorld.save();
             }
             MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
-            setupWorld(skyBlockNetherWorld, island_height / 2);
+            getWorldLogic().setupWorld(skyBlockNetherWorld, island_height / 2);
             MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
         }
         return skyBlockNetherWorld;
@@ -453,7 +428,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     private void postDelete(final PlayerInfo pi) {
-
         pi.save();
     }
 
@@ -509,7 +483,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (playerInfo != null) {
             playerInfo.setIslandGenerating(true);
         }
-        if (isSkyWorld(player.getWorld())) {
+        if (getWorldLogic().isSkyWorld(player.getWorld())) {
             // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
             clearPlayerInventory(player);
             clearEntitiesNearPlayer(player);
@@ -526,7 +500,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public void clearPlayerInventory(Player player) {
         getLogger().entering(CN, "clearPlayerInventory", player);
         PlayerInfo playerInfo = getPlayerInfo(player);
-        if (!isSkyWorld(player.getWorld())) {
+        if (!getWorldLogic().isSkyWorld(player.getWorld())) {
             getLogger().finer("not clearing, since player is not in skyworld, marking for clear on next entry");
             if (playerInfo != null) {
                 playerInfo.setClearInventoryOnNextEntry(true);
@@ -710,7 +684,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean locationIsOnNetherIsland(final Player player, final Location loc) {
-        if (!isSkyNether(loc.getWorld())) {
+        if (!getWorldLogic().isSkyNether(loc.getWorld())) {
             return false;
         }
         PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
@@ -726,7 +700,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean locationIsOnIsland(final Player player, final Location loc) {
-        if (!isSkyWorld(loc.getWorld())) {
+        if (!getWorldLogic().isSkyWorld(loc.getWorld())) {
             return false;
         }
         PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
@@ -763,34 +737,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public ChunkGenerator getDefaultWorldGenerator(final String worldName, final String id) {
         return ((id != null && id.endsWith("nether")) || (worldName != null && worldName.endsWith("nether")))
                 && Settings.nether_enabled
-                ? getNetherGenerator()
-                : getGenerator();
-    }
-
-    private ChunkGenerator getGenerator() {
-        try {
-            String genClass = getConfig().getString("options.advanced.chunk-generator", "us.talabrek.ultimateskyblock.SkyBlockChunkGenerator");
-            Object generator = Class.forName(genClass).newInstance();
-            if (generator instanceof ChunkGenerator) {
-                return (ChunkGenerator) generator;
-            }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            log(Level.WARNING, "Invalid chunk-generator configured: " + e);
-        }
-        return new SkyBlockChunkGenerator();
-    }
-
-    private ChunkGenerator getNetherGenerator() {
-        try {
-            String genClass = getConfig().getString("nether.chunk-generator", "us.talabrek.ultimateskyblock.SkyBlockNetherChunkGenerator");
-            Object generator = Class.forName(genClass).newInstance();
-            if (generator instanceof ChunkGenerator) {
-                return (ChunkGenerator) generator;
-            }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            log(Level.WARNING, "Invalid chunk-generator configured: " + e);
-        }
-        return new SkyBlockNetherChunkGenerator();
+                ? getWorldLogic().getNetherGenerator()
+                : getWorldLogic().getGenerator();
     }
 
     public PlayerInfo getPlayerInfo(Player player) {
@@ -857,7 +805,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         try {
             Location next = getIslandLocatorLogic().getNextIslandLocation(player);
-            if (isSkyWorld(player.getWorld())) {
+            if (getWorldLogic().isSkyWorld(player.getWorld())) {
                 spawnTeleport(player, true);
             }
             generateIsland(player, pi, next, cSchem);
@@ -981,6 +929,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (islandLogic != null) {
             islandLogic.shutdown();
         }
+        if (worldLogic != null) {
+            worldLogic.shutdown();
+        }
         PlaceholderHandler.unregister(this);
         VaultHandler.setupEconomy();
         VaultHandler.setupPermissions();
@@ -1001,6 +952,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
 
         getServer().getPluginManager().registerEvents(playerDB, this);
+        worldLogic = new WorldLogic(this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
         islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
@@ -1045,18 +997,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         getCommand("usb").setExecutor(new AdminCommand(this, confirmHandler, animationHandler));
         getCommand("islandtalk").setExecutor(new IslandTalkCommand(this, chatLogic));
         getCommand("partytalk").setExecutor(new PartyTalkCommand(this, chatLogic));
-    }
-
-    public boolean isSkyWorld(World world) {
-        if (world == null) {
-            return false;
-        }
-        return getSkyBlockWorld().getName().equalsIgnoreCase(world.getName());
-    }
-
-    public boolean isSkyNether(World world) {
-        World netherWorld = getSkyBlockNetherWorld();
-        return world != null && netherWorld != null && world.getName().equalsIgnoreCase(netherWorld.getName());
     }
 
     public boolean isSkyAssociatedWorld(World world) {
@@ -1168,7 +1108,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public boolean playerIsInSpawn(Player player) {
         Location pLoc = player.getLocation();
-        if (!isSkyWorld(pLoc.getWorld())) {
+        if (!getWorldLogic().isSkyWorld(pLoc.getWorld())) {
             return false;
         }
         Location spawnCenter = new Location(skyBlockWorld, 0, pLoc.getBlockY(), 0);
@@ -1309,6 +1249,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return cooldownHandler;
     }
 
+    public LimitLogic getLimitLogic() {
+        return limitLogic;
+    }
+
     public PlayerLogic getPlayerLogic() {
         return playerLogic;
     }
@@ -1317,8 +1261,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return teleportLogic;
     }
 
-    public LimitLogic getLimitLogic() {
-        return limitLogic;
+    public WorldLogic getWorldLogic() {
+        return worldLogic;
     }
 
     public IslandGenerator getIslandGenerator() {

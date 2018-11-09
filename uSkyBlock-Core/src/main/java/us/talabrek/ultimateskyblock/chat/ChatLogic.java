@@ -42,7 +42,7 @@ public class ChatLogic {
             IslandInfo islandInfo = plugin.getIslandInfo(player);
             return islandInfo != null ? islandInfo.getOnlineMembers() : Collections.singletonList(player);
         } else if (chatType == IslandChatEvent.Type.ISLAND) {
-            if (plugin.isSkyWorld(player.getWorld())) {
+            if (plugin.getWorldLogic().isSkyWorld(player.getWorld())) {
                 return WorldGuardHandler.getPlayersInRegion(plugin.getWorld(), WorldGuardHandler.getIslandRegionAt(player.getLocation()));
             }
             return Collections.emptyList();

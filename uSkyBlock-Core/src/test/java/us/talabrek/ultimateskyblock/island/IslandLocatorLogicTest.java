@@ -9,6 +9,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.world.WorldLogic;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -97,7 +98,9 @@ public class IslandLocatorLogicTest {
         when(plugin.getConfig()).thenReturn(config);
         OrphanLogic orphanLogic = mock(OrphanLogic.class);
         when(plugin.getOrphanLogic()).thenReturn(orphanLogic);
-        when(plugin.isSkyWorld(any(World.class))).thenReturn(true);
+        WorldLogic worldLogic = mock(WorldLogic.class);
+        when(plugin.getWorldLogic()).thenReturn(worldLogic);
+        when(plugin.getWorldLogic().isSkyWorld(any(World.class))).thenReturn(true);
         return plugin;
     }
 }
