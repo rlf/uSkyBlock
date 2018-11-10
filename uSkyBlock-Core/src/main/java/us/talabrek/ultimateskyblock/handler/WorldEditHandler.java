@@ -1,8 +1,8 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
@@ -47,7 +47,7 @@ public class WorldEditHandler {
             LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
         }
         boolean noAir = false;
-        Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+        BlockVector3 to = BlockVector3.at(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
         EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
         editSession.setFastMode(true);
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(origin);
@@ -65,7 +65,7 @@ public class WorldEditHandler {
                         .build();
                 Operations.completeBlindly(operation);
             }
-            editSession.flushQueue();
+            editSession.flushSession();
         } catch (IOException e) {
             log.log(Level.INFO, "Unable to paste schematic " + file, e);
         }
@@ -74,8 +74,8 @@ public class WorldEditHandler {
     /**
      * Returns all the chunks that are fully contained within the region.
      */
-    public static Set<Vector2D> getInnerChunks(Region region) {
-        Set<Vector2D> chunks = new HashSet<>();
+    public static Set<BlockVector2> getInnerChunks(Region region) {
+        Set<BlockVector2> chunks = new HashSet<>();
         int minX = region.getMinimumPoint().getBlockX();
         int minZ = region.getMinimumPoint().getBlockZ();
         int maxX = region.getMaximumPoint().getBlockX();
@@ -90,14 +90,14 @@ public class WorldEditHandler {
         maxZ = cz != 15 ? maxZ - cz : maxZ;
         for (int x = minX; x < maxX; x += 16) {
             for (int z = minZ; z < maxZ; z += 16) {
-                chunks.add(new Vector2D(x >> 4, z >> 4));
+                chunks.add(BlockVector2.at(x >> 4, z >> 4));
             }
         }
         return chunks;
     }
 
-    public static Set<Vector2D> getOuterChunks(Region region) {
-        Set<Vector2D> chunks = new HashSet<>();
+    public static Set<BlockVector2> getOuterChunks(Region region) {
+        Set<BlockVector2> chunks = new HashSet<>();
         int minX = region.getMinimumPoint().getBlockX();
         int minZ = region.getMinimumPoint().getBlockZ();
         int maxX = region.getMaximumPoint().getBlockX();
@@ -112,14 +112,14 @@ public class WorldEditHandler {
         maxZ = cz != 15 ? maxZ - cz + 16 : maxZ;
         for (int x = minX; x < maxX; x += 16) {
             for (int z = minZ; z < maxZ; z += 16) {
-                chunks.add(new Vector2D(x >> 4, z >> 4));
+                chunks.add(BlockVector2.at(x >> 4, z >> 4));
             }
         }
         return chunks;
     }
 
-    public static Set<Vector2D> getChunks(Region region) {
-        Set<Vector2D> chunks = new HashSet<>();
+    public static Set<BlockVector2> getChunks(Region region) {
+        Set<BlockVector2> chunks = new HashSet<>();
         int minX = region.getMinimumPoint().getBlockX();
         int minZ = region.getMinimumPoint().getBlockZ();
         int maxX = region.getMaximumPoint().getBlockX();
@@ -132,7 +132,7 @@ public class WorldEditHandler {
         maxZ = (maxZ - (maxZ & 0xF) + 16) >> 4;
         for (int x = minX; x <= maxX; x++) {
             for (int z = minZ; z <= maxZ; z++) {
-                chunks.add(new Vector2D(x, z));
+                chunks.add(BlockVector2.at(x, z));
             }
         }
         return chunks;
@@ -178,8 +178,8 @@ public class WorldEditHandler {
      */
     public static Set<Region> getBorderRegions(Region region) {
         Set<Region> borders = new HashSet<>();
-        Vector min = region.getMinimumPoint();
-        Vector max = region.getMaximumPoint();
+        BlockVector3 min = region.getMinimumPoint();
+        BlockVector3 max = region.getMaximumPoint();
         int minY = min.getBlockY();
         int maxY = max.getBlockY();
         int minX = min.getBlockX();
@@ -199,23 +199,23 @@ public class WorldEditHandler {
         // min < minChunk < maxChunk < max
         if (minModX != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(minX, minY, minZ),
-                    new Vector(minChunkX - 1, maxY, maxZ)));
+                    BlockVector3.at(minX, minY, minZ),
+                    BlockVector3.at(minChunkX - 1, maxY, maxZ)));
         }
         if (maxModZ != 15 && maxModZ != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(minChunkX, minY, maxChunkZ + 1),
-                    new Vector(maxChunkX, maxY, maxZ)));
+            		BlockVector3.at(minChunkX, minY, maxChunkZ + 1),
+            		BlockVector3.at(maxChunkX, maxY, maxZ)));
         }
         if (maxModX != 15 && maxModX != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(maxChunkX + 1, minY, minZ),
-                    new Vector(maxX, maxY, maxZ)));
+            		BlockVector3.at(maxChunkX + 1, minY, minZ),
+            		BlockVector3.at(maxX, maxY, maxZ)));
         }
         if (minModZ != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
-                    new Vector(minChunkX, minY, minZ),
-                    new Vector(maxChunkX, maxY, minChunkZ - 1)));
+            		BlockVector3.at(minChunkX, minY, minZ),
+            		BlockVector3.at(maxChunkX, maxY, minChunkZ - 1)));
         }
         return borders;
     }
@@ -232,7 +232,7 @@ public class WorldEditHandler {
                 afterDeletion.run();
             }
         };
-        Set<Vector2D> innerChunks;
+        Set<BlockVector2> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
             if (Settings.island_protectionRange == Settings.island_distance) {
@@ -264,7 +264,7 @@ public class WorldEditHandler {
             }
         };
 
-        Set<Vector2D> innerChunks;
+        Set<BlockVector2> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
             if (Settings.island_protectionRange == Settings.island_distance) {
@@ -294,7 +294,7 @@ public class WorldEditHandler {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(location);
         World world = location.getWorld();
         Region cube = getRegion(world, region);
-        for (Vector2D chunk : cube.getChunks()) {
+        for (BlockVector2 chunk : cube.getChunks()) {
             world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true, false);
             world.loadChunk(chunk.getBlockX(), chunk.getBlockZ(), false);
         }
@@ -304,7 +304,7 @@ public class WorldEditHandler {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(location);
         World world = location.getWorld();
         Region cube = getRegion(world, region);
-        for (Vector2D chunk : cube.getChunks()) {
+        for (BlockVector2 chunk : cube.getChunks()) {
             world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true);
         }
     }
@@ -313,7 +313,7 @@ public class WorldEditHandler {
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(location);
         World world = location.getWorld();
         Region cube = getRegion(world, region);
-        for (Vector2D chunk : cube.getChunks()) {
+        for (BlockVector2 chunk : cube.getChunks()) {
             world.refreshChunk(chunk.getBlockX(), chunk.getBlockZ());
         }
     }

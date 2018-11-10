@@ -50,6 +50,7 @@ permissions:
       usb.island.challenges: true
       usb.island.create: true
       usb.island.home: true
+      usb.island.map: true
       usb.island.info: true
       usb.island.level: true
       usb.island.limit: true
@@ -199,6 +200,7 @@ permissions:
       usb.island.challenges: true
       usb.island.create: true
       usb.island.home: true
+      usb.island.map: true
       usb.island.info: true
       usb.island.info.other: true
       usb.island.level: true
