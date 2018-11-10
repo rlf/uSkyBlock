@@ -48,14 +48,7 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 public class SkyBlockMenu {
     private static final int MAX_INV_SIZE = 54;
     private static final Material AVAILABLE_ISLAND = Material.DIRT;
-    //The following values cannot equal each other. 
-    //TODO: FIX THIS FOR 1.13!!!!!!!!!!!
-    private static final short CLICKABLE_SCROLLBAR = (byte) 15;
-    private static final short LOCATION_SCROLLBAR = (byte) 0;
-    private static final short MAP_BACKGROUND = (byte) 3;
-    private static final short MAP_BACKGROUND_SEC = (byte) 9;
-    private static final short MAP_BACKGROUND_ORG = (byte) 11;
-    //End. 
+
     private static final int MAP_Z_MULT = 3;
     private static final int MAP_X_MULT = 2;
     
@@ -141,7 +134,7 @@ public class SkyBlockMenu {
                     "extreme_hills", tr("Extreme Hills"),
                     tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
             ),
-            new BiomeMenuItem(new ItemStack(Material.ROSE_BUSH, 1, (short) 5),
+            new BiomeMenuItem(new ItemStack(Material.ROSE_BUSH, 1),
                     "flower_forest", tr("Flower Forest"),
                     tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
             ),
@@ -719,11 +712,11 @@ public class SkyBlockMenu {
         		} else {
         			//Map grids are nice to have. 
         			if (z== 0 || x == 0){
-        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, MAP_BACKGROUND_ORG);
+        				menuItem = new ItemStack(Material.BLUE_STAINED_GLASS_PANE, 1);
         			}else if (z%4 == 0 || x%4 == 0){
-        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, MAP_BACKGROUND_SEC);
+        				menuItem = new ItemStack(Material.CYAN_STAINED_GLASS_PANE, 1);
         			} else {
-        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, MAP_BACKGROUND);
+        				menuItem = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE, 1);
         			}
 					meta = menuItem.getItemMeta();
         	        meta.setDisplayName(tr("\u00a7a\u00a7lEmpty Space"));
@@ -740,10 +733,10 @@ public class SkyBlockMenu {
         		
         		if (i%COLS_PER_ROW == (8) && i < MAX_INV_SIZE-COLS_PER_ROW){
         			if (cameraZ == (((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
-        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1) ;
         				addLore(lores, tr("\u00a7aCurrent Z: "+cameraZ));
         			} else {
-        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
+        				menuItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
         				if (cameraZ < (((int)Math.floor(i/(COLS_PER_ROW*1.0)) - 2))*MAP_Z_MULT){
         					addLore(lores, tr("\u00a7aClick to scroll south")); 
         				} else {
@@ -761,10 +754,10 @@ public class SkyBlockMenu {
         		// Bottom middle 5 here:
         		if (i%COLS_PER_ROW >= (2) && i%COLS_PER_ROW <= (6) && i > MAX_INV_SIZE-COLS_PER_ROW){
         			if (cameraX == ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
-        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, LOCATION_SCROLLBAR);
+        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1);
         				addLore(lores, tr("\u00a7aCurrent X: "+cameraX));
         			} else {
-        				menuItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 1, CLICKABLE_SCROLLBAR);
+        				menuItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
         				if (cameraX < ((i%COLS_PER_ROW)-midcol)*MAP_X_MULT){
         					addLore(lores, tr("\u00a7aClick to scroll east")); 
         				} else {
@@ -1140,7 +1133,7 @@ public class SkyBlockMenu {
     	} else if (currentItem.getType().equals(Material.COMPASS)){
     		// Request for re-centering.     		
     		updateInventory(p, createLocationPickerMenu(p, schemeName, true, 0, 0));
-    	} else if (currentItem.getType().equals(Material.GRAY_STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
+    	} else if (currentItem.getType().equals(Material.BLACK_STAINED_GLASS_PANE)){
     		handleScrollbarClick(event, p, currentItem, slotIndex, true, schemeName);
     	} else if (currentItem.getType().equals(Material.SKELETON_SKULL)){        
    		 	handleWarpClick(p, currentItem, slotIndex);
@@ -1170,7 +1163,7 @@ public class SkyBlockMenu {
     			p.closeInventory();
     			p.performCommand("island spawn");
     		} 
-    	} else if (currentItem.getType().equals(Material.ORANGE_STAINED_GLASS_PANE) && currentItem.getDurability() == CLICKABLE_SCROLLBAR){
+    	} else if (currentItem.getType().equals(Material.BLACK_STAINED_GLASS_PANE) ){
     		handleScrollbarClick(event, p, currentItem, slotIndex, false, null);
     	}
                 
