@@ -1,9 +1,9 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
-import com.sk89q.worldedit.BlockVector;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
@@ -30,7 +30,7 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
    private static final BlockState AIR = BlockTypes.AIR.getDefaultState();
 
     private final Set<Region> borderRegions;
-    private final Set<Vector2D> innerChunks;
+    private final Set<BlockVector2> innerChunks;
     private final uSkyBlock plugin;
     private final BukkitWorld bukkitWorld;
     private final int minY;
@@ -58,21 +58,21 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
 
     @Override
     public boolean execute() {
-        Iterator<Vector2D> inner = innerChunks.iterator();
+        Iterator<BlockVector2> inner = innerChunks.iterator();
         Iterator<Region> border = borderRegions.iterator();
         while (!isComplete()) {
             EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
             editSession.setFastMode(true);
             editSession.enableQueue();
             if (inner.hasNext()) {
-                Vector2D chunk = inner.next();
+            	BlockVector2 chunk = inner.next();
                 inner.remove();
                 try {
                     int x = chunk.getBlockX() << 4;
                     int z = chunk.getBlockZ() << 4;
                     editSession.setBlocks(new CuboidRegion(bukkitWorld,
-                                    new BlockVector(x, minY, z),
-                                    new BlockVector(x + 15, maxY, z + 15)),
+                                    BlockVector3.at(x, minY, z),
+                                    BlockVector3.at(x + 15, maxY, z + 15)),
                             AIR);
                 } catch (MaxChangedBlocksException e) {
                     plugin.getLogger().log(Level.WARNING, "Unable to clear flat-land", e);
