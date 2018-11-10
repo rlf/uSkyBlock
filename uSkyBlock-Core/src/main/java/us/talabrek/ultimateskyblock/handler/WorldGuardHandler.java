@@ -132,8 +132,8 @@ public class WorldGuardHandler {
         BlockVector3 maxPoint = getProtectionVectorLeft(islandLocation);
         if (regionName != null && regionName.endsWith("nether")) {
             minPoint = minPoint.withY(6);
-            //Note: Increase this to 256 from 119 to allow players to escape the nether roof late-game.
-            maxPoint = maxPoint.withY(119);
+            //Note: Increased this to 256 from 119 to allow players to escape the nether roof late-game.
+            maxPoint = maxPoint.withY(256);
         }
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName, minPoint, maxPoint);
         final DefaultDomain owners = new DefaultDomain();
