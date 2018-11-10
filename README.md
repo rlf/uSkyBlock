@@ -19,6 +19,7 @@ This version depends on the following plugins:
 
 * Bukkit/Spigot 1.13.1-R0.1-SNAPSHOT - Generated using [Spigot's Buildtools](https://www.spigotmc.org/wiki/buildtools/)
 * Multiverse-Core - Builds available at [OnARandomBox\Multiverse-Core](https://ci.onarandombox.com/job/Multiverse-Core/) and source on [Github](https://github.com/Multiverse/Multiverse-Core)
+* Multiverse-Netherportals - Builds available at [OnARandomBox\Multiverse-Netherportals](https://ci.onarandombox.com/job/Multiverse-NetherPortals/) and source on [Github](https://github.com/Multiverse/Multiverse-NetherPortals/)
 * Vault 1.6.x - Available as a [Spigot Resource](https://www.spigotmc.org/resources/vault.34315/)
 * WorldEdit 7.0.0-SNAPSHOT - Available at [EngineHub\WorldEdit](http://www.enginehub.org/worldedit) 
 * WorldGuard 7.0.0-SNAPSHOT - Available at [EngineHub\WorldGuard](http://www.enginehub.org/worldguard)
