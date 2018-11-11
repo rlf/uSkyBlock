@@ -17,7 +17,7 @@ As is the nature of things, work on this repo is volunteer-only and for personal
 
 This version depends on the following plugins:
 
-* Bukkit/Spigot 1.13.1-R0.1-SNAPSHOT - Generated using [Spigot's Buildtools](https://www.spigotmc.org/wiki/buildtools/)
+* Bukkit/Spigot 1.13.2-R0.1-SNAPSHOT - Generated using [Spigot's Buildtools](https://www.spigotmc.org/wiki/buildtools/)
 * Vault 1.6.x - Available as a [Spigot Resource](https://www.spigotmc.org/resources/vault.34315/)
 * WorldEdit 7.0.0-SNAPSHOT - Available at [EngineHub\WorldEdit](http://www.enginehub.org/worldedit) 
 * WorldGuard 7.0.0-SNAPSHOT - Available at [EngineHub\WorldGuard](http://www.enginehub.org/worldguard)
