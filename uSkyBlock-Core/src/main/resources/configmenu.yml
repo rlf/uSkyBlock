@@ -11,10 +11,10 @@ config.yml:
 
   # readonly contains paths that should not be editable from the menu
   readonly:
-    - options.general.spawnSize
+    - options.general.spawnRadius
     - options.general.worldName
-    - options.island.protectionRange
-    - options.island.distance
+    - options.island.protectionRadius
+    - options.island.islandRadius
     - options.island.height
     - nether.enabled
 

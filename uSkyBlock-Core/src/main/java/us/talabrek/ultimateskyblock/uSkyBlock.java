@@ -258,7 +258,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         try {
             metrics = new Metrics(this);
             metrics.addCustomChart(new Metrics.SimplePie("language", () -> getConfig().getString("language", "en")));
-            metrics.addCustomChart(new Metrics.SimplePie("radius_and_distance", () -> String.format("(%d,%d)", Settings.island_radius, Settings.island_distance)));
+            metrics.addCustomChart(new Metrics.SimplePie("radius_and_distance", () -> String.format("(%d,%d)", Settings.island_protection_radius, Settings.island_plotRadius)));
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }
@@ -382,7 +382,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private void createSpawn(World world, Location worldSpawn) {
         File spawnSchematic = new File(getDataFolder() + File.separator + "schematics" + File.separator + "spawn.schematic");
-        if (getConfig().getInt("options.general.spawnSize", 0) > 32 && spawnSchematic.exists()) {
+        //spawn.schematic is 25 blocks wide.
+        
+        if (getConfig().getInt("options.general.spawnSize", 0) < 32 && spawnSchematic.exists()) {
             AsyncWorldEditHandler.loadIslandSchematic(spawnSchematic, worldSpawn, null);
         } else {
             Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
@@ -566,7 +568,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private void clearEntitiesNearPlayer(Player player) {
         getLogger().entering(CN, "clearEntitiesNearPlayer", player);
-        for (final Entity entity : player.getNearbyEntities((double) (Settings.island_radius), 255.0, (double) (Settings.island_radius))) {
+        for (final Entity entity : player.getNearbyEntities((double) (Settings.island_protection_radius), 255.0, (double) (Settings.island_protection_radius))) {
             if (!validEntity(entity)) {
                 entity.remove();
             }
@@ -589,7 +591,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             return false;
         }
         // Align to appropriate coordinates
-        LocationUtil.alignToDistance(newLoc, Settings.island_distance);
+        LocationUtil.alignToDistance(newLoc, Settings.island_plotRadius * 2);
         boolean deleteOldIsland = false;
         if (pi.getHasIsland()) {
             Location oldLoc = pi.getIslandLocation();
@@ -867,8 +869,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         try {
         	//TODO: Check some edge cases here - there seems to be a bug. 
-        	int coordX = x * Settings.island_distance;
-			int coordZ = z * Settings.island_distance;        		        		
+        	int coordX = x * Settings.island_plotRadius * 2;
+			int coordZ = z * Settings.island_plotRadius * 2;        		        		
     		Location next = new Location(this.getWorld(), coordX, Settings.island_height, coordZ);
     		if (getIslandLocatorLogic().isAvailableLocation(next)){
         		if (isSkyWorld(player.getWorld())) {
@@ -1270,7 +1272,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         msg += pre("\u00a77Version: \u00a7b{0}\n", description.getVersion());
         msg += pre("\u00a77Description: \u00a7b{0}\n", description.getDescription());
         msg += pre("\u00a77Language: \u00a7b{0} ({1})\n", getConfig().get("language", "en"), I18nUtil.getI18n().getLocale());
-        msg += pre("\u00a79  State: d={0}, r={1}, i={2}, p={3}, n={4}, awe={5}\n", Settings.island_distance, Settings.island_radius,
+        msg += pre("\u00a79  State: d={0}, r={1}, i={2}, p={3}, n={4}, awe={5}\n", Settings.island_plotRadius, Settings.island_protection_radius,
                 islandLogic.getSize(), playerLogic.getSize(),
                 Settings.nether_enabled, AsyncWorldEditHandler.isAWE());
         msg += pre("\u00a77Server: \u00a7e{0} {1}\n", getServer().getName(), getServer().getVersion());

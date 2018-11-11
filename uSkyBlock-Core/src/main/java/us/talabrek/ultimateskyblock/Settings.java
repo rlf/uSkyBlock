@@ -15,12 +15,12 @@ public class Settings {
     private static final Logger log = Logger.getLogger(Settings.class.getName());
     public static int general_maxPartySize;
     public static String general_worldName;
-    public static int island_distance;
+    public static int island_plotRadius;
     public static int island_height;
     public static int general_spawnSize;
     public static boolean island_removeCreaturesByTeleport;
-    public static int island_protectionRange;
-    public static int island_radius;
+    public static int island_protectionRadius;
+    public static int island_protection_radius;
     public static ItemStack[] island_chestItems;
     public static boolean island_addExtraItems;
     public static String[] island_extraPermissions;
@@ -52,22 +52,44 @@ public class Settings {
             general_maxPartySize = 4;
         }
         try {
-            island_distance = config.getInt("options.island.distance");
-            if (island_distance < 50) {
-                island_distance = 50;
+        	// Catch and convert old naming convention.
+            if (!config.contains("options.island.islandRadius")) {
+                if (config.contains("options.island.distance")) {
+                	int size = config.getInt("options.island.distance");
+                    config.set("options.island.islandRadius", size/2);
+                } else {
+                	config.set("options.island.islandRadius", 64);
+                }
+                changed = true;
+            }
+            island_plotRadius = config.getInt("options.island.islandRadius");
+            if (island_plotRadius < 64) {
+                island_plotRadius = 64;
             }
         } catch (Exception e) {
-            island_distance = 110;
+        	//Protection range cannot be higher than 'radius'
+            island_plotRadius = 64; 
         }
         try {
-            island_protectionRange = config.getInt("options.island.protectionRange");
-            if (island_protectionRange > island_distance) {
-                island_protectionRange = island_distance;
+        	// Catch and convert old naming convention. 
+            if (!config.contains("options.island.protectionRadius")) {
+                if (config.contains("options.island.protectionRange")) {
+                	int size = config.getInt("options.island.protectionRange");
+                    config.set("options.island.protectionRadius", size/2);
+                } else {
+                	config.set("options.island.protectionRadius", 64);
+                }
+                changed = true;
+            }
+            island_protectionRadius = config.getInt("options.island.protectionRadius");
+            if (island_protectionRadius > island_plotRadius) {
+                island_protectionRadius = island_plotRadius;
             }
         } catch (Exception e) {
-            island_protectionRange = 128;
+        	//Protection range cannot be higher than 'radius'
+            island_protectionRadius = 64;
         }
-        island_radius = island_protectionRange / 2;
+        island_protection_radius = island_protectionRadius;
         try {
             general_cooldownInfo = config.getInt("options.general.cooldownInfo");
             if (general_cooldownInfo < 0) {
@@ -100,15 +122,17 @@ public class Settings {
         } catch (Exception e) {
             island_height = 120;
         }
-        if (!config.contains("options.general.spawnSize")) {
-            config.set("options.general.spawnSize", 50);
+     // Catch and convert old naming convention.
+        if (!config.contains("options.general.spawnRadius")) {
+            if (config.contains("options.general.spawnSize")) {
+            	int size = config.getInt("options.general.spawnSize", 64);
+                config.set("options.general.spawnRadius", size);
+            } else {
+            	config.set("options.general.spawnRadius", 64);
+            }
             changed = true;
         }
-        if (!config.contains("options.general.spawnSize")) {
-            config.set("options.general.spawnSize", 50);
-            changed = true;
-        }
-        general_spawnSize = config.getInt("options.general.spawnSize", 50);
+        general_spawnSize = config.getInt("options.general.spawnRadius", 64);
         island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
                 config.getStringList("options.island.chestItems")
         ));

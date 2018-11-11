@@ -194,7 +194,7 @@ public class IslandLogic {
                 final int px = loc.getBlockX();
                 final int pz = loc.getBlockZ();
                 final int py = 0;
-                final int range = Math.max(Settings.island_protectionRange, Settings.island_distance) + 1;
+                final int range = Math.max(Settings.island_protectionRadius, Settings.island_plotRadius) + 1;
                 final int radius = range/2;
                 // 5 sampling points...
                 if (w.getBlockAt(px, py, pz).getType() == BEDROCK

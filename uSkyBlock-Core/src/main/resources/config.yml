@@ -25,19 +25,25 @@ options:
     # [string] The name of the skyblock world, will be automatically generated if it doesn't exist.
     worldName: skyworld
 
-    # [integer] Area around 0,0 where islands will not be created to protect spawn.
-    spawnSize: 32
+    # [integer] Area Radius around 0,0 where islands will not be created to protect spawn.
+    # This member was formerly known as 'spawnSize'
+    spawnRadius: 64
+    
   island:
 
     # [integer] The y-coordinate (height) where islands are spawned.
     height: 150
 
-    # [integer] The number of blocks between islands.
-    distance: 128
+    # [integer] The distance from center to edge of each island. 
+    # 2*this number is the center-to-center distance between islands.
+    # The member was formerly known as 'distance'/2
+    islandRadius: 64
 
-    # [integer] The size of the protective region for each island. Can't be higher than 'distance'
-    # and MUST be divisible by 32 if you intend to use nether.
-    protectionRange: 128
+    # [integer] The size of the protective region for each island. Can't be higher than 'islandRadius'
+    # This number must be divisible by 32 if you intend to use the nether
+    # Generally, this is set to island radius.
+    # This member was formerly known as 'protectionRange'/2
+    protectionRadius: 64
 
     # [filename] The schematic to use for island generation.
     # Put your schematic in the 'uSkyBlock/schematics' folder, you don't need to add the '.schematic' part below.

@@ -239,11 +239,11 @@ public class WorldGuardHandler {
     }
 
     public static BlockVector3 getProtectionVectorLeft(final Location island) {
-        return BlockVector3.at(island.getX() + Settings.island_radius - 1, 255.0, island.getZ() + Settings.island_radius - 1);
+        return BlockVector3.at(island.getX() + Settings.island_protection_radius - 1, 255.0, island.getZ() + Settings.island_protection_radius - 1);
     }
 
     public static BlockVector3 getProtectionVectorRight(final Location island) {
-        return BlockVector3.at(island.getX() - Settings.island_radius, 0.0, island.getZ() - Settings.island_radius);
+        return BlockVector3.at(island.getX() - Settings.island_protection_radius, 0.0, island.getZ() - Settings.island_protection_radius);
     }
 
     public static String getIslandNameAt(Location location) {
@@ -359,7 +359,7 @@ public class WorldGuardHandler {
     }
 
     public static ProtectedCuboidRegion getIslandRegion(Location islandLocation) {
-        int r = Settings.island_radius;
+        int r = Settings.island_protection_radius;
         BlockVector3 islandCenter = BlockVector3.at(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
         return new ProtectedCuboidRegion(
                 String.format("%d,%disland", islandCenter.getBlockX(), islandLocation.getBlockZ()),

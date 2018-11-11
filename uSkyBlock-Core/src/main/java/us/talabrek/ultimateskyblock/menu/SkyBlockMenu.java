@@ -646,7 +646,7 @@ public class SkyBlockMenu {
 			lores.clear();
         }
         
-		int d = Settings.island_distance;
+		int d = Settings.island_plotRadius * 2;
         int midcol = (int)Math.floor(COLS_PER_ROW/2); //on standard inv, 4
         int x, coordX, z, coordZ;
         Location l;
@@ -1127,8 +1127,8 @@ public class SkyBlockMenu {
         			}
         		}
         	}
-        	int coordX = x * Settings.island_distance;
-        	int coordY = z * Settings.island_distance;         	
+        	int coordX = x * Settings.island_plotRadius;
+        	int coordY = z * Settings.island_plotRadius;         	
     		Location l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordY);
         		
     		if(plugin.getIslandLocatorLogic().isAvailableLocation(l)){

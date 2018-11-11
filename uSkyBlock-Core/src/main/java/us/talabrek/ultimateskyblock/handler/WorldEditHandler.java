@@ -235,7 +235,7 @@ public class WorldEditHandler {
         Set<BlockVector2> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
-            if (Settings.island_protectionRange == Settings.island_distance) {
+            if (Settings.island_protectionRadius == Settings.island_plotRadius) {
                 innerChunks = getInnerChunks(cube);
             } else {
                 innerChunks = getOuterChunks(cube);
@@ -267,7 +267,7 @@ public class WorldEditHandler {
         Set<BlockVector2> innerChunks;
         Set<Region> borderRegions = new HashSet<>();
         if (isOuterPossible()) {
-            if (Settings.island_protectionRange == Settings.island_distance) {
+            if (Settings.island_protectionRadius == Settings.island_plotRadius) {
                 innerChunks = getInnerChunks(cube);
             } else {
                 innerChunks = getOuterChunks(cube);
@@ -286,8 +286,8 @@ public class WorldEditHandler {
     }
 
     public static boolean isOuterPossible() {
-        return Settings.island_distance >= Settings.island_protectionRange &&
-                ((Settings.island_distance % 32) == 0 || (Settings.island_distance - Settings.island_protectionRange) > 32);
+        return Settings.island_plotRadius >= Settings.island_protectionRadius &&
+                ((Settings.island_plotRadius % 32) == 0 || (Settings.island_plotRadius - Settings.island_protectionRadius) > 32);
     }
 
     public static void loadRegion(Location location) {
@@ -326,7 +326,7 @@ public class WorldEditHandler {
         Collection<Entity> entities;
         if (VersionUtil.getVersion(dk.lockfuglsang.minecraft.reflection.ReflectionUtil.getCraftBukkitVersion()).isGTE("1.10")) {
             entities = ReflectionUtil.exec(world, "getNearbyEntities",
-                    new Class[]{Location.class, Double.TYPE, Double.TYPE, Double.TYPE}, center, Settings.island_radius, 255, Settings.island_radius);
+                    new Class[]{Location.class, Double.TYPE, Double.TYPE, Double.TYPE}, center, Settings.island_protection_radius, 255, Settings.island_protection_radius);
             for (Entity entity : entities) {
                 entity.remove();
             }

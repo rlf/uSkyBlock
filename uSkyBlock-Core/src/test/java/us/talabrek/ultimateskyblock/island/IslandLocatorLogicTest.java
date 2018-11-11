@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 public class IslandLocatorLogicTest {
     @Test
     public void testNextIslandLocation() throws Exception {
-        Settings.island_distance = 1;
+        Settings.island_plotRadius = 1;
         Location p = new Location(null, 0, 0, 0);
         File csvFile = File.createTempFile("newislands", ".csv");
         PrintWriter writer = new PrintWriter(new FileWriter(csvFile));
@@ -43,7 +43,7 @@ public class IslandLocatorLogicTest {
 
     @Test
     public void testNextIslandLocationReservation() throws Exception {
-        Settings.island_distance = 10;
+        Settings.island_plotRadius = 10;
         uSkyBlock plugin = createPluginMock();
         IslandLocatorLogic locator = new IslandLocatorLogic(plugin);
         Player player = createPlayerMock();
@@ -56,7 +56,7 @@ public class IslandLocatorLogicTest {
 
     @Test
     public void testNextIslandLocationReservationConcurrency() throws Exception {
-        Settings.island_distance = 10;
+        Settings.island_plotRadius = 10;
         uSkyBlock plugin = createPluginMock();
         final IslandLocatorLogic locator = new IslandLocatorLogic(plugin);
         final List<Location> locations = new ArrayList<>();
