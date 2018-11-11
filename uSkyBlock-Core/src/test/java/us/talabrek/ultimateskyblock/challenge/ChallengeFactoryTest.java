@@ -52,7 +52,8 @@ public class ChallengeFactoryTest {
         assertThat(challenge, notNullValue());
         List<ItemStack> requiredItems = challenge.getRequiredItems(0);
         assertThat(requiredItems.size(), is(1));
-        assertThat(ItemStackUtil.asString(requiredItems.get(0)), is(ItemStackUtil.asString(new ItemStack(Material.COBBLESTONE, 257))));
+        // We changed the default config and must change the test as a result..
+        assertThat(ItemStackUtil.asString(requiredItems.get(0)), is(ItemStackUtil.asString(new ItemStack(Material.COBBLESTONE, 64))));
     }
 
 }

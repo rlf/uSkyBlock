@@ -1,4 +1,3 @@
-
 package us.talabrek.ultimateskyblock.handler.multiverseinventories;
 
 import com.onarandombox.multiverseinventories.MultiverseInventories;

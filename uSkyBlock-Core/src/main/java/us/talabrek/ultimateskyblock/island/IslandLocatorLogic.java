@@ -50,7 +50,7 @@ public class IslandLocatorLogic {
                     config.getInt("options.general.lastIslandX", 0), Settings.island_height,
                     config.getInt("options.general.lastIslandZ", 0));
         }
-        return LocationUtil.alignToDistance(lastIsland, Settings.island_distance);
+        return LocationUtil.alignToDistance(lastIsland, Settings.island_plotRadius * 2);
     }
     /**
      * Finds the next available island location and reserves it. 
@@ -81,13 +81,13 @@ public class IslandLocatorLogic {
     private synchronized Location getNext(Player player) {
         Location last = getLastIsland();
         if (plugin.isSkyWorld(player.getWorld()) && !plugin.islandInSpawn(player.getLocation())) {
-            Location location = LocationUtil.alignToDistance(player.getLocation(), Settings.island_distance);
+            Location location = LocationUtil.alignToDistance(player.getLocation(), Settings.island_plotRadius * 2);
             if (isAvailableLocation(location)) {
                 player.sendMessage(tr("\u00a79Creating an island at your location"));
                 return location;
             }
             Vector v = player.getLocation().getDirection().normalize();
-            location = LocationUtil.alignToDistance(location.add(v.multiply(Settings.island_distance)), Settings.island_distance);
+            location = LocationUtil.alignToDistance(location.add(v.multiply(Settings.island_plotRadius)), Settings.island_plotRadius);
             if (isAvailableLocation(location)) {
                 player.sendMessage(tr("\u00a79Creating an island \u00a77{0}\u00a79 of you", LocationUtil.getCardinalDirection(player.getLocation().getYaw())));
                 return location;
@@ -154,7 +154,7 @@ public class IslandLocatorLogic {
      * </pre>
      */
     static Location nextIslandLocation(final Location lastIsland) {
-        int d = Settings.island_distance;
+        int d = Settings.island_plotRadius;
         LocationUtil.alignToDistance(lastIsland, d);
         int x = lastIsland.getBlockX();
         int z = lastIsland.getBlockZ();

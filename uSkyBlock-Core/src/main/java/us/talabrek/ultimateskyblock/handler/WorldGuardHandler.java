@@ -1,7 +1,26 @@
 package us.talabrek.ultimateskyblock.handler;
 
-import com.sk89q.worldedit.BlockVector;
-import com.sk89q.worldedit.Vector;
+import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -15,31 +34,14 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import dk.lockfuglsang.minecraft.util.VersionUtil;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LogUtil;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class WorldGuardHandler {
     private static final String CN = WorldGuardHandler.class.getName();
@@ -126,11 +128,12 @@ public class WorldGuardHandler {
 
     private static ProtectedCuboidRegion setRegionFlags(IslandInfo islandConfig, String regionName) throws InvalidFlagFormat {
         Location islandLocation = islandConfig.getIslandLocation();
-        BlockVector minPoint = getProtectionVectorRight(islandLocation);
-        BlockVector maxPoint = getProtectionVectorLeft(islandLocation);
+        BlockVector3 minPoint = getProtectionVectorRight(islandLocation);
+        BlockVector3 maxPoint = getProtectionVectorLeft(islandLocation);
         if (regionName != null && regionName.endsWith("nether")) {
-            minPoint = new BlockVector(minPoint.setY(6));
-            maxPoint = new BlockVector(maxPoint.setY(119));
+            minPoint = minPoint.withY(6);
+            //Note: Increased this to 256 from 119 to allow players to escape the nether roof late-game.
+            maxPoint = maxPoint.withY(256);
         }
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName, minPoint, maxPoint);
         final DefaultDomain owners = new DefaultDomain();
@@ -145,6 +148,7 @@ public class WorldGuardHandler {
         region.setMembers(members);
         region.setPriority(100);
         if (uSkyBlock.getInstance().getConfig().getBoolean("worldguard.entry-message", true)) {
+        	
             if (owners.size() == 0) {
                 region.setFlag(Flags.GREET_MESSAGE, tr("\u00a74** You are entering a protected - but abandoned - island area."));
             } else {
@@ -234,17 +238,17 @@ public class WorldGuardHandler {
         }
     }
 
-    public static BlockVector getProtectionVectorLeft(final Location island) {
-        return new BlockVector(island.getX() + Settings.island_radius - 1, 255.0, island.getZ() + Settings.island_radius - 1);
+    public static BlockVector3 getProtectionVectorLeft(final Location island) {
+        return BlockVector3.at(island.getX() + Settings.island_protection_radius - 1, 255.0, island.getZ() + Settings.island_protection_radius - 1);
     }
 
-    public static BlockVector getProtectionVectorRight(final Location island) {
-        return new BlockVector(island.getX() - Settings.island_radius, 0.0, island.getZ() - Settings.island_radius);
+    public static BlockVector3 getProtectionVectorRight(final Location island) {
+        return BlockVector3.at(island.getX() - Settings.island_protection_radius, 0.0, island.getZ() - Settings.island_protection_radius);
     }
 
     public static String getIslandNameAt(Location location) {
         RegionManager regionManager = getRegionManager(location.getWorld());
-        Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(toVector(location));
+        Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(asVector(location));
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
             if (!id.equalsIgnoreCase("__global__") && (id.endsWith("island") || id.endsWith("nether"))) {
@@ -259,7 +263,7 @@ public class WorldGuardHandler {
         if (regionManager == null) {
             return null;
         }
-        Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(toVector(location));
+        Iterable<ProtectedRegion> applicableRegions = regionManager.getApplicableRegions(asVector(location));
         for (ProtectedRegion region : applicableRegions) {
             String id = region.getId().toLowerCase();
             if (!id.equalsIgnoreCase("__global__") && (id.endsWith("island") || id.endsWith("nether"))) {
@@ -269,8 +273,8 @@ public class WorldGuardHandler {
         return null;
     }
 
-    private static Vector toVector(Location location) {
-        return new Vector(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+    private static BlockVector3 toVector(Location location) {
+        return BlockVector3.at(location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
     public static ProtectedRegion getNetherRegionAt(Location location) {
@@ -343,7 +347,7 @@ public class WorldGuardHandler {
             if (r == 0) {
                 return false;
             }
-            ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", new BlockVector(-r, 0, -r), new BlockVector(r, 255, r));
+            ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", BlockVector3.at(-r, 0, -r), BlockVector3.at(r, 255, r));
             ProtectedCuboidRegion islandRegion = getIslandRegion(islandLocation);
             return !islandRegion.getIntersectingRegions(Collections.singletonList(spawn)).isEmpty();
         } catch (Exception e) {
@@ -355,8 +359,8 @@ public class WorldGuardHandler {
     }
 
     public static ProtectedCuboidRegion getIslandRegion(Location islandLocation) {
-        int r = Settings.island_radius;
-        Vector islandCenter = new Vector(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
+        int r = Settings.island_protection_radius;
+        BlockVector3 islandCenter = BlockVector3.at(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
         return new ProtectedCuboidRegion(
                 String.format("%d,%disland", islandCenter.getBlockX(), islandLocation.getBlockZ()),
                 getProtectionVectorLeft(islandLocation),
@@ -391,9 +395,9 @@ public class WorldGuardHandler {
         return creatures;
     }
 
-    public static Vector asVector(Location location) {
+    public static BlockVector3 asVector(Location location) {
         if (location == null) {
-            return new Vector(0, 0, 0);
+            return BlockVector3.at(0, 0, 0);
         }
         return toVector(location);
     }

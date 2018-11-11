@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.island.task;
 
-import com.sk89q.worldedit.BlockVector;
-import com.sk89q.worldedit.Vector2D;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
@@ -21,9 +21,9 @@ import java.util.Set;
 public class SetBiomeTask extends IncrementalRunnable {
     private final World world;
     private final Biome biome;
-    private final BlockVector minP;
-    private final BlockVector maxP;
-    private final Set<Vector2D> chunks;
+    private final BlockVector3 minP;
+    private final BlockVector3 maxP;
+    private final Set<BlockVector2> chunks;
 
     public SetBiomeTask(uSkyBlock plugin, Location loc, Biome biome, Runnable onCompletion) {
         super(plugin, onCompletion);
@@ -40,7 +40,7 @@ public class SetBiomeTask extends IncrementalRunnable {
         chunks = WorldEditHandler.getChunks(new CuboidRegion(minP, maxP));
     }
 
-    public SetBiomeTask(uSkyBlock plugin, World world, BlockVector minP, BlockVector maxP, Biome biome, Runnable onCompletion) {
+    public SetBiomeTask(uSkyBlock plugin, World world, BlockVector3 minP, BlockVector3 maxP, Biome biome, Runnable onCompletion) {
         super(plugin, onCompletion);
         this.biome = biome;
         this.minP = minP;
@@ -54,9 +54,9 @@ public class SetBiomeTask extends IncrementalRunnable {
         if (minP == null || maxP == null) {
             return true;
         }
-        Iterator<Vector2D> it = chunks.iterator();
+        Iterator<BlockVector2> it = chunks.iterator();
         while (it.hasNext()) {
-            Vector2D chunk = it.next();
+        	BlockVector2 chunk = it.next();
             it.remove();
             world.loadChunk(chunk.getBlockX(), chunk.getBlockZ());
             int cx = chunk.getBlockX() << 4;
