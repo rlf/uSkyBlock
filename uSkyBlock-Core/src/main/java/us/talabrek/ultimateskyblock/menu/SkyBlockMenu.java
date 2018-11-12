@@ -304,8 +304,7 @@ public class SkyBlockMenu {
             }
             ItemStack menuItem = biomeMenu.getIcon();
             meta4 = menuItem.getItemMeta();
-            
-            if (player.hasPermission( "usb.biome." + biomeMenu.getId())) {
+            if (player.hasPermission("usb.biome." + biomeMenu.getId())) {
                 meta4.setDisplayName("\u00a7a" + tr("Biome: {0}", biomeMenu.getTitle()));
                 addLore(lores, "\u00a7f", biomeMenu.getDescription());
                 if (biomeMenu.getId().equalsIgnoreCase(currentBiome)) {
@@ -405,7 +404,7 @@ public class SkyBlockMenu {
                         String lore = matcher.group("value");
                         boolean not = matcher.group("not") != null;
                         if (perm != null) {
-                            boolean hasPerm = player.hasPermission( perm);
+                            boolean hasPerm = player.hasPermission(perm);
                             if ((hasPerm && !not) || (!hasPerm && not)) {
                                 lores.add(lore);
                             }
@@ -452,7 +451,7 @@ public class SkyBlockMenu {
                             String cmd = matcher.group("value");
                             boolean not = matcher.group("not") != null;
                             if (perm != null) {
-                                boolean hasPerm = player.hasPermission( perm);
+                                boolean hasPerm = player.hasPermission(perm);
                                 if ((hasPerm && !not) || (!hasPerm && not)) {
                                     plugin.execCommand(player, cmd, false);
                                 }
@@ -870,14 +869,14 @@ public class SkyBlockMenu {
         meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Lock"));
         if (plugin.getIslandInfo(player).isLocked()) {
             addLore(lores, tr("\u00a7eLock Status: \u00a7aActive\n\u00a7fYour island is currently \u00a7clocked.\n\u00a7fPlayers outside of your group\n\u00a7fare unable to enter your island."));
-            if (islandInfo.hasPerm(player, "canToggleLock") && player.hasPermission( "usb.island.lock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock") && player.hasPermission("usb.island.lock")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to unlock your island."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the lock."));
             }
         } else {
             addLore(lores, tr("\u00a7eLock Status: \u00a78Inactive\n\u00a7fYour island is currently \u00a7aunlocked.\n\u00a7fAll players are able to enter your\n\u00a7fisland, but only you and your group\n\u00a7fmembers may build there."));
-            if (islandInfo.hasPerm(player, "canToggleLock") && player.hasPermission( "usb.island.lock")) {
+            if (islandInfo.hasPerm(player, "canToggleLock") && player.hasPermission("usb.island.lock")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to lock your island."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the lock."));
@@ -893,7 +892,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a7aActive\n\u00a7fOther players may warp to your\n\u00a7fisland at anytime to the point\n\u00a7fyou set using \u00a7d/island setwarp."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && player.hasPermission( "usb.island.togglewarp")) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && player.hasPermission("usb.island.togglewarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to deactivate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
@@ -903,7 +902,7 @@ public class SkyBlockMenu {
             meta4 = menuItem.getItemMeta();
             meta4.setDisplayName(tr("\u00a7a\u00a7lIsland Warp"));
             addLore(lores, tr("\u00a7eWarp Status: \u00a78Inactive\n\u00a7fOther players can't warp to your\n\u00a7fisland. Set a warp point using\n\u00a7d/island setwarp \u00a7fbefore activating."));
-            if (islandInfo.hasPerm(player, "canToggleWarp") && player.hasPermission( "usb.island.togglewarp")) {
+            if (islandInfo.hasPerm(player, "canToggleWarp") && player.hasPermission("usb.island.togglewarp")) {
                 addLore(lores, tr("\u00a7e\u00a7lClick here to activate."));
             } else {
                 addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));
@@ -954,7 +953,7 @@ public class SkyBlockMenu {
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lChange Warp Location"));
         addLore(lores, "\u00a7f", tr("When your warp is activated,\nother players will be taken to\nthis point when they teleport\nto your island."));
-        if (islandInfo.hasPerm(player, "canChangeWarp") && player.hasPermission( "usb.island.setwarp")) {
+        if (islandInfo.hasPerm(player, "canChangeWarp") && player.hasPermission("usb.island.setwarp")) {
             addLore(lores, tr("\u00a7e\u00a7lClick here to change."));
         } else {
             addLore(lores, tr("\u00a7c\u00a7lYou can't change the warp."));

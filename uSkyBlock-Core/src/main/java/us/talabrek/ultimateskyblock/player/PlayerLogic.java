@@ -18,7 +18,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -117,7 +116,7 @@ public class PlayerLogic {
                                     });
                                     plugin.spawnTeleport(onlinePlayer, true);
                                 } else if (islandInfo != null && islandInfo.isLocked()) {
-                                    if (!hasPermission(onlinePlayer, "usb.mod.bypassprotection")) {
+                                    if (!onlinePlayer.hasPermission("usb.mod.bypassprotection")) {
                                         onlinePlayer.sendMessage(new String[]{
                                                 tr("\u00a7eThe island has been §cLOCKED§e.", islandInfo.getLeader()),
                                                 tr("\u00a7eSending you to spawn.")

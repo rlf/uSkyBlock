@@ -1,8 +1,7 @@
 package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.math.BlockVector2;
+
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
@@ -11,6 +10,8 @@ import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
 import com.sk89q.worldedit.function.mask.RegionMask;
 import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
+import com.sk89q.worldedit.math.BlockVector2;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.ClipboardHolder;
@@ -204,18 +205,18 @@ public class WorldEditHandler {
         }
         if (maxModZ != 15 && maxModZ != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-            		BlockVector3.at(minChunkX, minY, maxChunkZ + 1),
-            		BlockVector3.at(maxChunkX, maxY, maxZ)));
+                    BlockVector3.at(minChunkX, minY, maxChunkZ + 1),
+                    BlockVector3.at(maxChunkX, maxY, maxZ)));
         }
         if (maxModX != 15 && maxModX != -1) {
             borders.add(new CuboidRegion(region.getWorld(),
-            		BlockVector3.at(maxChunkX + 1, minY, minZ),
-            		BlockVector3.at(maxX, maxY, maxZ)));
+                    BlockVector3.at(maxChunkX + 1, minY, minZ),
+                    BlockVector3.at(maxX, maxY, maxZ)));
         }
         if (minModZ != 0) {
             borders.add(new CuboidRegion(region.getWorld(),
-            		BlockVector3.at(minChunkX, minY, minZ),
-            		BlockVector3.at(maxChunkX, maxY, minChunkZ - 1)));
+                    BlockVector3.at(minChunkX, minY, minZ),
+                    BlockVector3.at(maxChunkX, maxY, minChunkZ - 1)));
         }
         return borders;
     }

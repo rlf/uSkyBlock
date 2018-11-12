@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -60,7 +59,7 @@ public class SpawnEvents implements Listener {
         if (player == null || event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
             return; // Bail out, we don't care
         }
-        if (hasPermission(player, "usb.mod.bypassprotection") || player.isOp()) {
+        if (player.hasPermission("usb.mod.bypassprotection") || player.isOp()) {
             return;
         }
         ItemStack item = event.getItem();

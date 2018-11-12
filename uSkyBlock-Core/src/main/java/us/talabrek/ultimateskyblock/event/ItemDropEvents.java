@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -116,7 +115,7 @@ public class ItemDropEvents implements Listener {
             clearDropInfo(event.getItem());
             return;
         }
-        if (wasDroppedBy(player, event) || hasPermission(player, "usb.mod.bypassprotection") || plugin.playerIsOnIsland(player) || plugin.playerIsInSpawn(player)) {
+        if (wasDroppedBy(player, event) || player.hasPermission("usb.mod.bypassprotection") || plugin.playerIsOnIsland(player) || plugin.playerIsInSpawn(player)) {
             clearDropInfo(event.getItem());
             return; // Allowed
         }

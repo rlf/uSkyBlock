@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.island.task;
 
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.math.BlockVector2;
+
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Location;
@@ -56,7 +57,7 @@ public class SetBiomeTask extends IncrementalRunnable {
         }
         Iterator<BlockVector2> it = chunks.iterator();
         while (it.hasNext()) {
-        	BlockVector2 chunk = it.next();
+            BlockVector2 chunk = it.next();
             it.remove();
             world.loadChunk(chunk.getBlockX(), chunk.getBlockZ());
             int cx = chunk.getBlockX() << 4;

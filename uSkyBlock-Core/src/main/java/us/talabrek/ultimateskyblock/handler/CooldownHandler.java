@@ -10,8 +10,6 @@ import java.util.UUID;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
-
 /**
  * Responsible for handling various cooldowns on commands.
  */
@@ -31,7 +29,7 @@ public class CooldownHandler {
      * @return
      */
     public int getCooldown(org.bukkit.entity.Player player, String cmd) {
-        if (hasPermission(player, "usb.mod.bypasscooldowns") || hasPermission(player, "usb.exempt.cooldown." + cmd)) {
+        if (player.hasPermission("usb.mod.bypasscooldowns") || player.hasPermission("usb.exempt.cooldown." + cmd)) {
             return 0;
         }
         Map<String, Long> map = cooldowns.get(player.getUniqueId());

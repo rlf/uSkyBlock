@@ -6,12 +6,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -38,7 +36,7 @@ public class WorldGuardEvents implements Listener {
             return;
         }
         Player player = e.getPlayer();
-        if (!player.isOp() && !hasPermission(player, "usb.mod.bypassprotection") && isBlockedFromEntry(player, islandInfo)) {
+        if (!player.isOp() && !player.hasPermission("usb.mod.bypassprotection") && isBlockedFromEntry(player, islandInfo)) {
             e.setCancelled(true);
             Location l = e.getTo().clone();
             l.subtract(islandInfo.getIslandLocation());

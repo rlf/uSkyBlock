@@ -1,10 +1,11 @@
 package us.talabrek.ultimateskyblock.handler.task;
 
-import com.sk89q.worldedit.math.BlockVector3;
+
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.math.BlockVector2;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.block.BlockState;
@@ -65,11 +66,11 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
             editSession.setFastMode(true);
             editSession.enableQueue();
             if (inner.hasNext()) {
-            	BlockVector2 chunk = inner.next();
+                BlockVector2 chunk = inner.next();
                 inner.remove();
                 try {
-                    int x = chunk.getBlockX() << 4;
-                    int z = chunk.getBlockZ() << 4;
+                    int x = chunk.getX() << 4;
+                    int z = chunk.getZ() << 4;
                     editSession.setBlocks(new CuboidRegion(bukkitWorld,
                                     BlockVector3.at(x, minY, z),
                                     BlockVector3.at(x + 15, maxY, z + 15)),
@@ -87,7 +88,6 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
                 }
             }
             editSession.flushSession();
-            //editSession.flushQueue();
             if (!tick()) {
                 break;
             }

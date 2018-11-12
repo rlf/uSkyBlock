@@ -30,7 +30,7 @@ public class WorldRegen extends IncrementalRunnable {
     @Override
     protected boolean execute() {
         while (!chunks.isEmpty()) {
-        	BlockVector2 chunk = chunks.remove(0);
+            BlockVector2 chunk = chunks.remove(0);
             try {
                 if (!world.regenerateChunk(chunk.getBlockX(), chunk.getBlockZ())) {
                     LogUtil.log(Level.WARNING, "Unable to regenerate chunk " + chunk);

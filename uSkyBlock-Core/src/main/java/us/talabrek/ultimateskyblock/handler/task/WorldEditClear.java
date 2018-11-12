@@ -2,8 +2,8 @@ package us.talabrek.ultimateskyblock.handler.task;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.block.BlockTypes;
@@ -79,7 +79,6 @@ public class WorldEditClear extends IncrementalRunnable {
                 log.log(Level.INFO, "Warning: we got MaxChangedBlocks from WE, please increase it!");
             }
             editSession.flushSession();
-            //editSession.flushQueue();
             //editSession.commit();
             if (!tick()) {
                 break;

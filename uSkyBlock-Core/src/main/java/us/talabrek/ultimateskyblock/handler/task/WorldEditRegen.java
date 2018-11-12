@@ -41,6 +41,7 @@ public class WorldEditRegen extends IncrementalRunnable {
                 BlockVector3 min = region.getMinimumPoint();
                 BlockVector3 max = region.getMaximumPoint();
                 BlockVector3 pt = max.withZ(min.getBlockZ());
+                pt = pt.withZ(min.getBlockZ());
                 while (pt.getBlockZ() < max.getBlockZ()) {
                     int dz = Math.min(INCREMENT, Math.abs(max.getBlockZ() - pt.getBlockZ()));
                     pt = pt.add(0, 0, dz);

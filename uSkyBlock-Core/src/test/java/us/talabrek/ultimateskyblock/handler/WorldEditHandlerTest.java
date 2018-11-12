@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.math.BlockVector2;
+
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import org.junit.Test;
@@ -55,7 +56,7 @@ public class WorldEditHandlerTest {
         assertThat("C", borderRegions, is(Collections.<Region>emptySet()));
 
         // D
-        region = new CuboidRegion(BlockVector3.at(-16,0,0),BlockVector3.at(-1, 15, 15));
+        region = new CuboidRegion(BlockVector3.at(-16,0,0), BlockVector3.at(-1, 15, 15));
         borderRegions = WorldEditHandler.getBorderRegions(region);
         assertThat("D", borderRegions, is(Collections.<Region>emptySet()));
     }
@@ -65,7 +66,7 @@ public class WorldEditHandlerTest {
         Region region = new CuboidRegion(BlockVector3.at(0,0,0), BlockVector3.at(16, 15, 15));
         Set<Region> borderRegions = WorldEditHandler.getBorderRegions(region);
         Set<Region> expected = new HashSet<>(Arrays.<Region>asList(
-                new CuboidRegion(BlockVector3.at(16,0,0),BlockVector3.at(16,15,15))
+                new CuboidRegion(BlockVector3.at(16,0,0), BlockVector3.at(16,15,15))
         ));
         verifySame(borderRegions, expected);
     }
