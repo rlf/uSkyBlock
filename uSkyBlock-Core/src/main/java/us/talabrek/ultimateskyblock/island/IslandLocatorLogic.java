@@ -77,7 +77,7 @@ public class IslandLocatorLogic {
             }
         }, reservationTimeout);
     }
-    //DONE: Make a gui for selecting this sort of thing. 
+ 
     private synchronized Location getNext(Player player) {
         Location last = getLastIsland();
         if (plugin.isSkyWorld(player.getWorld()) && !plugin.islandInSpawn(player.getLocation())) {

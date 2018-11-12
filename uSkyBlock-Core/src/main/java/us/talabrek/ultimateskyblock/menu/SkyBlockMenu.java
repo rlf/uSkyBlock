@@ -1074,6 +1074,9 @@ public class SkyBlockMenu {
         } else if (slotIndex == menuSize-1) {
             p.closeInventory();
             p.performCommand("island accept");
+        } else if (slotIndex == menuSize-2) {
+            p.closeInventory();
+            p.performCommand("island spawn");
         } else if (meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
             if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
