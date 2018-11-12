@@ -5,8 +5,6 @@ import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -34,7 +32,6 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
@@ -1087,7 +1084,7 @@ public class SkyBlockMenu {
             }
         }
     }
-    /**TODO: UPDATE PER 1.13
+    /**
      * Handle clicks on the map GUI when in island creation mode. 
      * @param event
      * @param p
@@ -1130,8 +1127,8 @@ public class SkyBlockMenu {
         			}
         		}
         	}
-        	int coordX = x * Settings.island_plotRadius;
-        	int coordY = z * Settings.island_plotRadius;         	
+        	int coordX = x * Settings.island_plotRadius * 2;
+        	int coordY = z * Settings.island_plotRadius * 2;         	
     		Location l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordY);
         		
     		if(plugin.getIslandLocatorLogic().isAvailableLocation(l)){
@@ -1153,7 +1150,7 @@ public class SkyBlockMenu {
     	}
                 
     }
-    /**TODO: UPDATE PER 1.13
+    /**
      * Handle clicks on the map GUI when in map mode. 
      * @param event
      * @param p
