@@ -20,7 +20,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -347,7 +346,7 @@ public class WorldGuardHandler {
             if (r == 0) {
                 return false;
             }
-            ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", BlockVector3.at(-r, 0, -r), BlockVector3.at(r, 255, r));
+            ProtectedRegion spawn = new ProtectedCuboidRegion("spawn", BlockVector3.at(-r, 0, -r), BlockVector3.at(r-1, 255, r-1));
             ProtectedCuboidRegion islandRegion = getIslandRegion(islandLocation);
             return !islandRegion.getIntersectingRegions(Collections.singletonList(spawn)).isEmpty();
         } catch (Exception e) {
@@ -359,7 +358,6 @@ public class WorldGuardHandler {
     }
 
     public static ProtectedCuboidRegion getIslandRegion(Location islandLocation) {
-        int r = Settings.island_protection_radius;
         BlockVector3 islandCenter = BlockVector3.at(islandLocation.getBlockX(), 0, islandLocation.getBlockZ());
         return new ProtectedCuboidRegion(
                 String.format("%d,%disland", islandCenter.getBlockX(), islandLocation.getBlockZ()),

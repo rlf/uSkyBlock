@@ -64,8 +64,8 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
         String path = returnItem.getItemMeta().getLore().get(1);
         int page = getPage(returnItem.getItemMeta().getLore().get(2));
         int slot = event.getSlot();
-        int row = slot / 9;
-        int col = slot % 9;
+//        int row = slot / 9;
+//        int col = slot % 9;
         ItemStack clickedItem = event.getCurrentItem();
         if (slot >= getIndex(3, 0) && slot <= getIndex(3, 8)) {
             // increment buttons

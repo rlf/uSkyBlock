@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Public API for an island.
@@ -110,6 +111,12 @@ public interface IslandInfo {
      * @deprecated Use #getTrusteeUUIDs instead
      */
     List<String> getTrustees();
+    
+    /**
+     * List of players trusted on this island.
+     * @return List of players trusted on this island.
+     */
+    List<UUID> getTrusteeUUIDs();
 
     /**
      * The currently registered level of this island.

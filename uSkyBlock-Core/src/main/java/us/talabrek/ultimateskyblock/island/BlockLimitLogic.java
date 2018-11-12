@@ -19,7 +19,6 @@ public class BlockLimitLogic {
     public enum CanPlace { YES, UNCERTAIN, NO};
 
     private static final Logger log = Logger.getLogger(BlockLimitLogic.class.getName());
-    private uSkyBlock plugin;
     private Map<Material, Integer> blockLimits = new HashMap<>();
     // TODO: R4zorax - 13-07-2018: Persist this somehow - and use a guavacache
     private Map<Location, Map<Material,Integer>> blockCounts = new HashMap<>();
@@ -27,7 +26,6 @@ public class BlockLimitLogic {
     private final boolean limitsEnabled;
 
     public BlockLimitLogic(uSkyBlock plugin) {
-        this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
         limitsEnabled = config.getBoolean("options.island.block-limits.enabled", false);
         if (limitsEnabled) {

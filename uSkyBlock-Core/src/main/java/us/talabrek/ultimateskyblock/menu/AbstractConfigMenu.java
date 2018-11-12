@@ -41,7 +41,7 @@ public class AbstractConfigMenu {
     }
 
     protected ItemStack createItem(Material icon, int subType, String title, List<String> lore) {
-        ItemStack itemStack = new ItemStack(icon, 1, (short) (subType & 0xff));
+        ItemStack itemStack = new ItemStack(icon, 1);
         ItemMeta meta = itemStack.getItemMeta();
         meta.setDisplayName(title);
         meta.setLore(lore);

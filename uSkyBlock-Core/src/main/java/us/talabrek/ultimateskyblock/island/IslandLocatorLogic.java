@@ -2,6 +2,8 @@ package us.talabrek.ultimateskyblock.island;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -154,7 +156,7 @@ public class IslandLocatorLogic {
      * </pre>
      */
     static Location nextIslandLocation(final Location lastIsland) {
-        int d = Settings.island_plotRadius;
+        int d = Settings.island_plotRadius * 2;
         LocationUtil.alignToDistance(lastIsland, d);
         int x = lastIsland.getBlockX();
         int z = lastIsland.getBlockZ();

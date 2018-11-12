@@ -8,7 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.Settings;
@@ -182,10 +181,7 @@ public enum LocationUtil {
         if (chestBlock.getType() == Material.CHEST) {
             BlockFace primaryDirection = null;
             // Start by checking in front of the chest.
-            MaterialData data = chestBlock.getState().getData();
-            if (data instanceof org.bukkit.material.Chest) {
-                primaryDirection = ((org.bukkit.material.Chest) data).getFacing();
-            }
+            primaryDirection = ((org.bukkit.material.Chest) chestBlock.getState().getData()).getFacing();
             if (primaryDirection == BlockFace.NORTH) {
                 // Neg Z
                 pz -= 1; // start one block in the north dir.

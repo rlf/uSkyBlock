@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 /**
@@ -43,7 +42,7 @@ public class TeleportLogic implements Listener {
     public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
         log.log(Level.FINER, "safeTeleport " + player + " to " + homeSweetHome + (force ? " with force" : ""));
         final Location targetLoc = LocationUtil.centerOnBlock(homeSweetHome.clone());
-        if (hasPermission(player, "usb.mod.bypassteleport") || (teleportDelay == 0) || force) {
+        if (player.hasPermission("usb.mod.bypassteleport") || (teleportDelay == 0) || force) {
             player.setVelocity(new org.bukkit.util.Vector());
             LocationUtil.loadChunkAt(targetLoc);
             player.teleport(targetLoc);

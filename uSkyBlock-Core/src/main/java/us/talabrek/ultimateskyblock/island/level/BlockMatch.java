@@ -38,7 +38,7 @@ public class BlockMatch implements Comparable<BlockMatch> {
 
     public ItemStack asItemStack() {
         if (dataValues.size() == 1) {
-            return new ItemStack(type, 1, dataValues.iterator().next());
+            return new ItemStack(type, 1);
         }
         return new ItemStack(type, 1);
     }

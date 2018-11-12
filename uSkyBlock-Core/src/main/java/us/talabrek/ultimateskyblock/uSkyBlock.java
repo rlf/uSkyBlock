@@ -118,7 +118,6 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static dk.lockfuglsang.minecraft.perm.PermissionUtil.hasPermission;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static us.talabrek.ultimateskyblock.Settings.island_height;
@@ -590,17 +589,17 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (newLoc == null) {
             return false;
         }
-        // Align to appropriate coordinates
-        LocationUtil.alignToDistance(newLoc, Settings.island_plotRadius * 2);
-        boolean deleteOldIsland = false;
-        if (pi.getHasIsland()) {
-            Location oldLoc = pi.getIslandLocation();
-            if (newLoc != null && oldLoc != null
-                    && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ())) {
-                deleteOldIsland = true;
-            }
-        }
-        if (newLoc != null) {
+        else {
+        	// Align to appropriate coordinates
+        	LocationUtil.alignToDistance(newLoc, Settings.island_plotRadius * 2);
+        	boolean deleteOldIsland = false;
+        	if (pi.getHasIsland()) {
+        		Location oldLoc = pi.getIslandLocation();
+        		if (newLoc != null && oldLoc != null
+        				&& !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ())) {
+        			deleteOldIsland = true;
+        		}
+        	}
             if (newLoc.equals(pi.getIslandLocation())) {
                 sender.sendMessage(tr("\u00a74Player is already assigned to this island!"));
                 deleteOldIsland = false;
@@ -623,7 +622,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
             return true;
         }
-        return false;
     }
 
     public boolean homeTeleport(final Player player, boolean force) {
@@ -713,7 +711,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         String islandName = WorldGuardHandler.getIslandNameAt(player.getLocation());
         if (islandName != null) {
             us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = islandLogic.getIslandInfo(islandName);
-            if (islandInfo != null && islandInfo.getTrustees().contains(player.getName())) {
+            if (islandInfo != null && islandInfo.getTrusteeUUIDs().contains(player.getUniqueId())) {
                 return true;
             }
         }
@@ -835,7 +833,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public void changePlayerBiome(Player player, final String bName, final Callback<Boolean> callback) {
         callback.setState(false);
-        if (bName.equalsIgnoreCase("ocean") || hasPermission(player, "usb.biome." + bName)) {
+        if (bName.equalsIgnoreCase("ocean") || player.hasPermission("usb.biome." + bName)) {
             PlayerInfo playerInfo = getPlayerInfo(player);
             final IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
             if (islandInfo.hasPerm(player, "canChangeBiome")) {

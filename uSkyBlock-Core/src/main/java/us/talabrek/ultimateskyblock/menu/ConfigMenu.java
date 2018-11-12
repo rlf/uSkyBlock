@@ -15,13 +15,11 @@ import java.util.List;
 public class ConfigMenu {
 
     private final YmlConfiguration menuConfig;
-    private final uSkyBlock plugin;
     private final MenuItemFactory factory;
     private final List<EditMenu> editMenus = new ArrayList<>();
     private final MainConfigMenu mainMenu;
 
     public ConfigMenu(uSkyBlock plugin) {
-        this.plugin = plugin;
         menuConfig = new YmlConfiguration();
         FileUtil.readConfig(menuConfig, getClass().getClassLoader().getResourceAsStream("configmenu.yml"));
         factory = new MenuItemFactory();
