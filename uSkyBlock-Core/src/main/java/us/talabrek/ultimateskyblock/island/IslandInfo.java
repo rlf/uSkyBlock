@@ -145,7 +145,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     public void addMember(final PlayerInfo playerInfo) {
         playerInfo.setJoinParty(getIslandLocation());
         setupPartyMember(playerInfo);
-        uSkyBlock.getInstance().fireMemberJoinedEvent(this, playerInfo);
+        uSkyBlock.getInstance().getEventLogic().fireMemberJoinedEvent(this, playerInfo);
     }
 
     public void setupPartyMember(final PlayerInfo member) {
@@ -653,7 +653,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
         sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d has been removed from the island group."), member.getPlayerName());
         WorldGuardHandler.updateRegion(this);
-        uSkyBlock.getInstance().fireMemberLeftEvent(this, member);
+        uSkyBlock.getInstance().getEventLogic().fireMemberLeftEvent(this, member);
         save();
     }
 

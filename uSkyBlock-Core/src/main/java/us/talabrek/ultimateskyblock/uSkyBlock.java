@@ -38,6 +38,7 @@ import org.bukkit.scheduler.BukkitTask;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.async.Callback;
+import us.talabrek.ultimateskyblock.api.event.EventLogic;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
 import us.talabrek.ultimateskyblock.api.event.MemberLeftEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
@@ -139,6 +140,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private SkyBlockMenu menu;
     private ConfigMenu configMenu;
     private ChallengeLogic challengeLogic;
+    private EventLogic eventLogic;
     private LevelLogic levelLogic;
     private IslandLogic islandLogic;
     private OrphanLogic orphanLogic;
@@ -195,6 +197,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             animationHandler.stop();
         }
         challengeLogic.shutdown();
+        eventLogic.shutdown();
         playerLogic.shutdown();
         islandLogic.shutdown();
         playerDB.shutdown(); // Must be before playerNameChangeManager!!
@@ -1001,6 +1004,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
 
         getServer().getPluginManager().registerEvents(playerDB, this);
+        eventLogic = new EventLogic(this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
         islandGenerator = new IslandGenerator(getDataFolder(), getConfig());
@@ -1309,6 +1313,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return cooldownHandler;
     }
 
+    public EventLogic getEventLogic() {
+        return eventLogic;
+    }
+
     public PlayerLogic getPlayerLogic() {
         return playerLogic;
     }
@@ -1389,17 +1397,5 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         for (String cmd : cmdList) {
             execCommand(player, cmd, false);
         }
-    }
-
-    public void fireMemberJoinedEvent(IslandInfo islandInfo, PlayerInfo playerInfo) {
-        async(() -> {
-            getServer().getPluginManager().callEvent(new MemberJoinedEvent(islandInfo, playerInfo));
-        });
-    }
-
-    public void fireMemberLeftEvent(IslandInfo islandInfo, PlayerInfo member) {
-        async(() -> {
-            getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member));
-        });
     }
 }
