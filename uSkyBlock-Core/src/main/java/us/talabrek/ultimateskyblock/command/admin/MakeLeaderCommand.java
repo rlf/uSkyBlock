@@ -32,31 +32,32 @@ public class MakeLeaderCommand extends AbstractCommand {
                 public void run() {
                     String islandPlayerName = args[0];
                     String playerName = args[1];
-                    PlayerInfo islandPlayer = plugin.getPlayerInfo(islandPlayerName);
-                    PlayerInfo playerInfo = plugin.getPlayerInfo(playerName);
+                    PlayerInfo currentLeader = plugin.getPlayerInfo(islandPlayerName);
+                    PlayerInfo newLeader = plugin.getPlayerInfo(playerName);
 
-                    if (islandPlayer == null || !islandPlayer.getHasIsland()) {
+                    if (currentLeader == null || !currentLeader.getHasIsland()) {
                         sender.sendMessage(I18nUtil.tr("\u00a74Player {0} has no island to transfer!", islandPlayerName));
                         return;
                     }
-                    IslandInfo islandInfo = plugin.getIslandInfo(islandPlayer);
+                    IslandInfo islandInfo = plugin.getIslandInfo(currentLeader);
                     if (islandInfo == null) {
                         sender.sendMessage(I18nUtil.tr("\u00a74Player {0} has no island to transfer!", islandPlayerName));
                         return;
                     }
-                    if (playerInfo != null && playerInfo.getHasIsland() && !playerInfo.locationForParty().equals(islandInfo.getName())) {
+                    if (newLeader != null && newLeader.getHasIsland() && !newLeader.locationForParty().equals(islandInfo.getName())) {
                         sender.sendMessage(I18nUtil.tr("\u00a7ePlayer \u00a7d{0}\u00a7e already has an island.\u00a7eUse \u00a7d/usb island remove <name>\u00a7e to remove him first.", playerName));
                         return;
                     }
-                    playerInfo.setJoinParty(islandInfo.getIslandLocation());
-                    Location homeLocation = islandPlayer.getHomeLocation();
-                    islandInfo.removeMember(islandPlayer); // Remove leader
-                    islandInfo.setupPartyLeader(playerInfo.getPlayerName()); // Promote member
-                    islandInfo.addMember(islandPlayer);
-                    playerInfo.setHomeLocation(homeLocation);
-                    islandPlayer.save();
-                    playerInfo.save();
+                    newLeader.setJoinParty(islandInfo.getIslandLocation());
+                    Location homeLocation = currentLeader.getHomeLocation();
+                    islandInfo.removeMember(currentLeader); // Remove leader
+                    islandInfo.setupPartyLeader(newLeader.getPlayerName()); // Promote member
+                    islandInfo.addMember(currentLeader);
+                    newLeader.setHomeLocation(homeLocation);
+                    currentLeader.save();
+                    newLeader.save();
                     WorldGuardHandler.updateRegion(islandInfo);
+                    plugin.getEventLogic().fireIslandLeaderChangedEvent(islandInfo, currentLeader, newLeader);
                     islandInfo.sendMessageToIslandGroup(true, marktr("\u00a7bLeadership transferred by {0}\u00a7b to {1}"), sender.getName(), playerName);
                 }
             });

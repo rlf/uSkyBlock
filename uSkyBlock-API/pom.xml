@@ -4,97 +4,77 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.rlf</groupId>
-	<artifactId>uSkyBlock-API</artifactId>
-	<version>2.7.5</version>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<travis.buildNumber>dev</travis.buildNumber>
-		<github.global.server>github</github.global.server>
-	</properties>
-	<scm>
-		<connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
-		<developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
-		<url>https://github.com/rlf/uSkyBlock.git</url>
-	</scm>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.github.github</groupId>
-				<artifactId>site-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.6</version>
-				</plugin>
-				<plugin>
-					<groupId>com.github.github</groupId>
-					<artifactId>site-maven-plugin</artifactId>
-					<version>0.12</version>
-					<configuration>
-						<message>Maven artifacts for
-							${project.groupId}:${project.artifactId}:${project.version}</message>  <!-- git commit message -->
-						<noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-						<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-						<branch>refs/heads/master</branch>                       <!-- remote branch name -->
-						<includes>
-							<include>**/${project.artifactId}/**</include>
-						</includes>
-						<repositoryName>mvn-repo</repositoryName>      <!-- github repo name -->
-						<repositoryOwner>rlf</repositoryOwner>    <!-- github username -->
-						<merge>true</merge>
-					</configuration>
-					<executions>
-						<!-- run site-maven-plugin's 'site' target as part of the builder's 
-							normal 'deploy' phase -->
-						<execution>
-							<goals>
-								<goal>site</goal>
-							</goals>
-							<phase>deploy</phase>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-	<repositories>
-		<repository>
-			<id>spigotmc.org</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
-		</repository>
-		<repository>
-			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-		</repository>
-	</repositories>
-	<profiles>
-		<profile>
-			<id>1.13</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<dependencies>
+    <groupId>com.github.rlf</groupId>
+    <artifactId>uSkyBlock-API</artifactId>
+    <version>2.7.5</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <travis.buildNumber>dev</travis.buildNumber>
+        <github.global.server>github</github.global.server>
+    </properties>
+    <scm>
+        <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
+        <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
+        <url>https://github.com/rlf/uSkyBlock.git</url>
+    </scm>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.github</groupId>
+                    <artifactId>site-maven-plugin</artifactId>
+                    <version>0.12</version>
+                    <configuration>
+                        <message>Maven artifacts for ${project.groupId}:${project.artifactId}:${project.version}</message>  <!-- git commit message -->
+                        <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
+                        <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
+                        <branch>refs/heads/master</branch>                       <!-- remote branch name -->
+                        <includes>
+                            <include>**/${project.artifactId}/**</include>
+                        </includes>
+                        <repositoryName>mvn-repo</repositoryName>      <!-- github repo name -->
+                        <repositoryOwner>rlf</repositoryOwner>    <!-- github username  -->
+                        <merge>true</merge>
+                    </configuration>
+                    <executions>
+                        <!-- run site-maven-plugin's 'site' target as part of the builder's normal 'deploy' phase -->
+                        <execution>
+                            <goals>
+                                <goal>site</goal>
+                            </goals>
+                            <phase>deploy</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <repositories>
+        <repository>
+            <id>spigotmc.org</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
+        </repository>
+    </repositories>
+    <profiles>
+        <profile>
+            <id>1.13</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
 				<!--Spigot API -->
 				<dependency>
 					<groupId>org.spigotmc</groupId>
@@ -105,23 +85,22 @@
 				<!-- Bukkit API - pick this or spigot <dependency> <groupId>org.bukkit</groupId> 
 					<artifactId>bukkit</artifactId> <version>1.13.1-R0.1-SNAPSHOT</version> <scope>provided</scope> 
 					</dependency> -->
-
-			</dependencies>
-		</profile>
-		<profile>
-			<id>1.12</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<dependencies>
-				<dependency> <!-- Bukkit implementation -->
-					<groupId>org.bukkit</groupId>
-					<artifactId>bukkit</artifactId>
-					<version>1.12.2-R0.1-SNAPSHOT</version>
-					<optional>true</optional>
-					<scope>compile</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>1.12</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency> <!-- Bukkit implementation -->
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.12.2-R0.1-SNAPSHOT</version>
+                    <optional>true</optional>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>
