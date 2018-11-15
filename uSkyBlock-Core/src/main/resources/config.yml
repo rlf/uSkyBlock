@@ -21,7 +21,18 @@ options:
     # [integer] The number of milliseconds between the same notification is sent to the player.
     # This is used when events are triggered heavily - i.e. item-pickup-prevention, damage-prevention etc.
     maxSpam: 2000
+    
+    # [true/false] If true, allow players to select the location of their islands using a scrollable GUI.
+    # The maximum amount of accessible islands is 223. 
+    # false: server auto-selects player's island location in a spiral pattern.
+    enable-island-picker: true
 
+    # [true/false] If true, allow players to open a GUI and see where other players islands are relative to spawn 
+    # The maximum amount of visible locations is 224: 223 islands, and spawn. 
+    # false: GUI does not have an option in the '/is' menu, and cannot be opened with '/is map'
+    enable-island-map: true
+
+            
     # [string] The name of the skyblock world, will be automatically generated if it doesn't exist.
     worldName: skyworld
 

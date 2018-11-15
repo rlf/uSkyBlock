@@ -62,6 +62,14 @@ public class IslandLocatorLogic {
         reserve(islandLocation);
         return islandLocation.clone();
     }
+    
+    /**
+     * Reserves the specified island location. Used for GUI selection. 
+     */
+    public synchronized Location reserveSpecificIslandLocation(Player player, Location location) {
+        reserve(location);
+        return location.clone();
+    }
 
     private void reserve(Location islandLocation) {
         final String islandName = LocationUtil.getIslandName(islandLocation);

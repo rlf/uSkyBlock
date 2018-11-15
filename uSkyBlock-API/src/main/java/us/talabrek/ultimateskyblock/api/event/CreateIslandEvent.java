@@ -19,6 +19,12 @@ public class CreateIslandEvent extends CancellablePlayerEvent {
         this.x = x;
         this.z = z;
     }
+    public CreateIslandEvent(Player who, String schematic) {
+        super(who);
+        this.schematic = schematic;
+        this.x = 0;
+        this.z = 0;
+    }
 
     public String getSchematic() {
         return schematic;

@@ -596,8 +596,8 @@ public class SkyBlockMenu {
 
     /**
      * Location Picker Menu:
-     * Creates a GUI for creating a finite (small) amount of island plots. 
-     * IF you're on a big server, you'll need to edit this to break it up into sectors first. 
+     * Creates a GUI for creating a finite (223) amount of island plots. 
+     * On large server, avoid using this. Set the general 'enable-island-picker' to false in your config.
      * @param player
      * @return
      */
@@ -654,8 +654,8 @@ public class SkyBlockMenu {
         		coordZ = z * d;        		        		
         		l = new Location(plugin.getWorld(), coordX, Settings.island_height, coordZ);
         		
+        		//draw a player head here. you can't have this spot!
         		if(!plugin.getIslandLocatorLogic().isAvailableLocation(l)){
-        			//draw a player head here. you can't have this spot!
         			if (x == 0 && z == 0){
         				//Spawn Marker. 
 						menuItem = new ItemStack(Material.BEDROCK, 1);
@@ -673,28 +673,42 @@ public class SkyBlockMenu {
 						menuItem = new ItemStack(Material.PLAYER_HEAD, 1);
 						SkullMeta meta2 = (SkullMeta) menuItem.getItemMeta();
 						if (plugin.getIslandInfo(l) != null){
-							if (plugin.getIslandInfo(l).getLeaderUniqueId() != null){
-								
-								//check our local cache
-								//TODO: Force a client preload of this by having all player skulls in the world. 
-								// Perhaps change the Spawn Block so that it contains all player heads somewhere?
-								if (plugin.getSkullCache().containsKey(plugin.getIslandInfo(l).getLeaderUniqueId())){
-									menuItem = plugin.getSkullCache().get(plugin.getIslandInfo(l).getLeaderUniqueId());
-									meta2 = (SkullMeta) menuItem.getItemMeta();
-									
-									
-								} else {
-									meta2.setOwningPlayer(Bukkit.getOfflinePlayer(plugin.getIslandInfo(l).getLeaderUniqueId()));
-									meta2.setDisplayName(tr("\u00a7a\u00a7l"+plugin.getIslandInfo(l).getLeader()));									
-									plugin.getSkullCache().put(plugin.getIslandInfo(l).getLeaderUniqueId(), menuItem);
+							UUID test;
+							boolean exists = false;
+							try {
+								test = plugin.getIslandInfo(l).getLeaderUniqueId();
+								if (test != null) {
+									//check our local skullcache
+									//TODO: Force a client preload of this by having all player skulls in the world. 
+									// Perhaps change the Spawn Block so that it contains all player heads somewhere?
+									if (plugin.getSkullCache().containsKey(plugin.getIslandInfo(l).getLeaderUniqueId())){
+										menuItem = plugin.getSkullCache().get(plugin.getIslandInfo(l).getLeaderUniqueId());
+										meta2 = (SkullMeta) menuItem.getItemMeta();
+										
+										
+									} else {
+										meta2.setOwningPlayer(Bukkit.getOfflinePlayer(plugin.getIslandInfo(l).getLeaderUniqueId()));
+										meta2.setDisplayName(tr("\u00a7a\u00a7l"+plugin.getIslandInfo(l).getLeader()));									
+										plugin.getSkullCache().put(plugin.getIslandInfo(l).getLeaderUniqueId(), menuItem);
+									}
+									addLore(lores, tr("\u00a7aLoc "+x+", "+z));
+									addLore(lores, tr("\u00a7aLevel "+plugin.getIslandInfo(l).getLevel()));
+									addLore(lores, tr("\u00a7aClick to teleport"));
+									meta2.setLore(lores);
+									menuItem.setItemMeta(meta2);
+									lores.clear();
+									exists = true;
 								}
-								addLore(lores, tr("\u00a7aLoc "+x+", "+z));
-								addLore(lores, tr("\u00a7aLevel "+plugin.getIslandInfo(l).getLevel()));
-								addLore(lores, tr("\u00a7aClick to teleport"));
-								meta2.setLore(lores);
-								menuItem.setItemMeta(meta2);
-								lores.clear();
-							
+							} catch (IllegalArgumentException e) {
+								// Catch 'Name Cannot Be Blank' for islands that existed previously, but now do not.
+								// Ex: Deletion of island data from islands folder, but blocks still exist. 
+								exists = false;
+							}
+							if (exists == false) {
+								menuItem = new ItemStack(Material.STONE, 1);
+								ItemMeta meta3 = menuItem.getItemMeta();
+								meta3.setDisplayName(tr("\u00a7a\u00a7lUnavailable"));
+								menuItem.setItemMeta(meta3);
 							}
 						} else {
 							System.out.println("Unable to free location:x"+x+", z"+z);
@@ -940,14 +954,16 @@ public class SkyBlockMenu {
         menu.setItem(9, menuItem); // First item, 2nd line
         lores.clear();
         
-        menuItem = new ItemStack(Material.MAP, 1);
-        meta4 = menuItem.getItemMeta();
-        meta4.setDisplayName(tr("\u00a7a\u00a7lSky Map"));
-        addLore(lores, "\u00a7f", tr("Shows an overview\nof all current\nislands\n\u00a7e\u00a7lClick here to open."));
-        meta4.setLore(lores);
-        menuItem.setItemMeta(meta4);
-        menu.setItem(12, menuItem); // First item, 2nd line
-        lores.clear();
+        if (Settings.general_enableSkyMap) {
+	        menuItem = new ItemStack(Material.MAP, 1);
+	        meta4 = menuItem.getItemMeta();
+	        meta4.setDisplayName(tr("\u00a7a\u00a7lSky Map"));
+	        addLore(lores, "\u00a7f", tr("Shows an overview\nof all current\nislands\n\u00a7e\u00a7lClick here to open."));
+	        meta4.setLore(lores);
+	        menuItem.setItemMeta(meta4);
+	        menu.setItem(12, menuItem); // First item, 2nd line
+	        lores.clear();
+        }
 
         menuItem = new ItemStack(Material.HOPPER, 1);
         meta4 = menuItem.getItemMeta();
@@ -1066,7 +1082,11 @@ public class SkyBlockMenu {
         event.setCancelled(true);
         if (slotIndex == 0) {
             p.closeInventory();
-            p.openInventory(createLocationPickerMenu(p));
+            if (Settings.general_allowLocationSelection) {
+            	p.openInventory(createLocationPickerMenu(p));
+            } else {
+            	p.performCommand("island create");
+            }
         } else if (slotIndex == menuSize-1) {
             p.closeInventory();
             p.performCommand("island accept");

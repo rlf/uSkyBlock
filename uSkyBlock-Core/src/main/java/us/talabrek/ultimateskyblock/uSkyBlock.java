@@ -851,7 +851,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         callback.run();
     }
-    //TODO: Verify this against edge cases where regions are slightly offset. 
+    //DONE: Verified against edge cases where regions are slightly offset. 
     public void createIsland(final Player player, String cSchem, int x, int z) {
         PlayerInfo pi = getPlayerInfo(player);
         if (pi.isIslandGenerating()) {
@@ -866,26 +866,25 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             pi.setIslandGenerating(true);
         }
         try {
-        	//TODO: Check some edge cases here - there seems to be a bug. 
-        	int coordX = x * Settings.island_plotRadius * 2;
-			int coordZ = z * Settings.island_plotRadius * 2;        		        		
-    		Location next = new Location(this.getWorld(), coordX, Settings.island_height, coordZ);
-    		if (getIslandLocatorLogic().isAvailableLocation(next)){
-        		if (isSkyWorld(player.getWorld())) {
-        			spawnTeleport(player, true);
-        		}
-        		generateIsland(player, pi, next, cSchem);
-        		
+        	Location next;
+        	if (Settings.general_allowLocationSelection) {
+	        	int coordX = x * Settings.island_plotRadius * 2;
+				int coordZ = z * Settings.island_plotRadius * 2;        		        		
+	    		next = new Location(this.getWorld(), coordX, Settings.island_height, coordZ);
+	    		if (!getIslandLocatorLogic().isAvailableLocation(next)){
+	    			player.sendMessage(tr("\u00a7eUnable to create island at {0},{1}. Contact a moderator", next.getX(), next.getZ()));
+	    			return;
+	    		}
+	    		getIslandLocatorLogic().reserveSpecificIslandLocation(player, next);
         	} else {
-        		player.sendMessage(tr("\u00a7eInvalid Format: "));
-                return;
+        		next = getIslandLocatorLogic().getNextIslandLocation(player);
         	}
-        	// Changed from: 
-        	//Location next = getIslandLocatorLogic().getNextIslandLocation(player);
-            //if (isSkyWorld(player.getWorld())) {
-            //    spawnTeleport(player, true);
-            //}
-            //generateIsland(player, pi, next, cSchem);
+        	
+        	if (isSkyWorld(player.getWorld())) {
+        		spawnTeleport(player, true);
+        	}
+        	generateIsland(player, pi, next, cSchem);
+
         } catch (Exception ex) {
             player.sendMessage(tr("Could not create your Island. Please contact a server moderator."));
             log(Level.SEVERE, "Error creating island", ex);

@@ -3,16 +3,16 @@ package us.talabrek.ultimateskyblock.event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+
+import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.api.event.CreateIslandEvent;
 import us.talabrek.ultimateskyblock.api.event.IslandInfoEvent;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
 import us.talabrek.ultimateskyblock.api.event.MemberLeftEvent;
 import us.talabrek.ultimateskyblock.api.event.RestartIslandEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
-import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.island.level.IslandScore;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
-import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 /**

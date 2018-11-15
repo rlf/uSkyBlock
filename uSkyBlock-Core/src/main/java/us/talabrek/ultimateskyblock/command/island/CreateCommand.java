@@ -30,28 +30,32 @@ public class CreateCommand extends RequirePlayerCommand {
         if (!pi.getHasIsland() && cooldown == 0) {
         	
             String cSchem = args != null && args.length > 2 ? args[0] : Settings.island_schematicName;
-            String x = args != null && args.length > 2 ? args[1] : "0";
-            String z = args != null && args.length > 2 ? args[2] : "0";
-            	try{
-            		if (args.length == 2){
-            			//possible someone is typing this manually without schematic
-	            		Integer.parseInt(args[0]);
-	            		Integer.parseInt(args[1]);
-	            		x = args[0];
-	            		z = args[1];
-            		}
-            	} catch (NumberFormatException e){
-            		x = "0";
-            		z = "0";
-            	}
-            	if (x == "0" && z == "0"){
-            		player.sendMessage(tr("\u00a7eInvalid Format - Try: "+"\u00a7b/is create <schematic> [gridX] [gridZ]"));
-            		player.sendMessage(tr("\u00a7b[gridX] "+"\u00a7eand "+"\u00a7b[gridZ] "+"\u00a7eare island locations relative to spawn (0, 0)"));
-            		player.sendMessage(tr("\u00a7eExample, Adjacent to spawn:"+"\u00a7b/is create 1 0"));
-            		
-            	} else {            		
-            		plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem, Integer.parseInt(x), Integer.parseInt(z)));
-            	}
+            if (Settings.general_allowLocationSelection) {
+	            String x = args != null && args.length > 2 ? args[1] : "0";
+	            String z = args != null && args.length > 2 ? args[2] : "0";
+	            	try{
+	            		if (args.length == 2){
+	            			//possible someone is typing this manually without schematic
+		            		Integer.parseInt(args[0]);
+		            		Integer.parseInt(args[1]);
+		            		x = args[0];
+		            		z = args[1];
+	            		}
+	            	} catch (NumberFormatException e){
+	            		x = "0";
+	            		z = "0";
+	            	}
+	            	if (x == "0" && z == "0"){
+	            		player.sendMessage(tr("\u00a7eInvalid Format - Try: "+"\u00a7b/is create <schematic> [gridX] [gridZ]"));
+	            		player.sendMessage(tr("\u00a7b[gridX] "+"\u00a7eand "+"\u00a7b[gridZ] "+"\u00a7eare island locations relative to spawn (0, 0)"));
+	            		player.sendMessage(tr("\u00a7eExample, Adjacent to spawn:"+"\u00a7b/is create 1 0"));
+	            		
+	            	} else {            		
+	            		plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem, Integer.parseInt(x), Integer.parseInt(z)));
+	            	}
+            } else {
+            	plugin.getServer().getPluginManager().callEvent(new CreateIslandEvent(player, cSchem));
+            }
             
         } else if (pi.getHasIsland()) {
             us.talabrek.ultimateskyblock.api.IslandInfo island = plugin.getIslandInfo(pi);

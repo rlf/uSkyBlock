@@ -71,8 +71,10 @@ public class IslandCommand extends BaseCommandExecutor {
         addTab("member", new MemberTabCompleter(plugin));
         addTab("schematic", new SchematicTabCompleter(plugin));
         addTab("perm", new PermissionTabCompleter(plugin));
-        addTab("map", playerTabCompleter);
-        add(new MapCommand(plugin));
+        if (Settings.general_enableSkyMap) {
+        	addTab("map", playerTabCompleter);
+        	add(new MapCommand(plugin));        	
+        }
         add(new RestartCommand(plugin));
         add(new LogCommand(plugin, menu));
         CreateCommand createCommand = new CreateCommand(plugin);
