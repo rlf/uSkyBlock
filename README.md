@@ -1,17 +1,9 @@
 # uSkyBlock
-## Find Us
-The main project is located at [rlf/uskyblock](https://github.com/rlf/uSkyBlock) and [Spigot resources](https://www.spigotmc.org/resources/uskyblock.2280/)   
+This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin.
 
-Currently [open issues on the main project](https://github.com/rlf/uSkyBlock/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22T%20ready%20for%20test%22%20-label%3A%22T%20tested%20awaiting%20reporter%22)
+We are on [Spigot](https://www.spigotmc.org/resources/uskyblock.2280/) and [Bukkit](http://dev.bukkit.org/bukkit-plugins/uskyblock/)
 
-## Fork Notes
-
-This is a periodically updated and custom fork of [rlf's version](https://github.com/rlf/uSkyBlock) of Talabrek's Ultimate SkyBlock plugin.
-
-This version aims to develop GUI-based maps for island creation, selection, and teleportation. 
-As is such, consider this particular fork to be development-only. We plan on submitting pull requests to the [official repository](https://github.com/rlf/uSkyBlock)  when we have finished testing. 
-
-As is the nature of things, work on this repo is volunteer-only and for personal enjoyment. Do not use this in a production environment. 
+Currently [Open Issues](https://github.com/rlf/uSkyBlock/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22T%20ready%20for%20test%22%20-label%3A%22T%20tested%20awaiting%20reporter%22)
 
 # Installation
 
@@ -27,15 +19,13 @@ This version depends on the following plugins:
 
 
 ## Releases 
-Please see [rlf/uSkyblock](https://github.com/rlf/uSkyBlock) for the latest and greatest code. 
-
 [![Build Status](https://api.travis-ci.org/rlf/uSkyBlock.svg)](https://travis-ci.org/rlf/uSkyBlock) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Percentage of issues still open")
 
 https://github.com/rlf/uSkyBlock/releases
 
 Pre-releases will end in a date-stamp, and is considered **unsafe** for production servers.
 
-Releases have a clean version number, has been tested, and should be safe for production servers.
+Releases have a clean version number, have been tested, and should be safe for production servers.
 
 ### Bukkit/Spigot Pre 1.13.1 Releases
 Minecraft version 1.13 had fundamental API changes from previous versions, and so moving forward only 1.13 will be supported. 
