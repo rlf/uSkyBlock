@@ -357,9 +357,6 @@ worldguard:
 nether:
   enabled: true
 
-  # Whether or not to generate an additional ceiling above the nether roof
-  extra-nether-ceiling: true
-
   height: 75
   lava_level: 7
   activate-at:

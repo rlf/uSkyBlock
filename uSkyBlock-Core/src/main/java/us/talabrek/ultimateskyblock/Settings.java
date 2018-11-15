@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class Settings {
     private static final Logger log = Logger.getLogger(Settings.class.getName());
     public static int general_maxPartySize;
-    public static String general_worldName;
+    public static String general_worldName;   
     public static int island_plotRadius;
     public static int island_height;
     public static int general_spawnSize;
@@ -39,7 +39,7 @@ public class Settings {
     public static boolean nether_enabled;
     public static int nether_lava_level;
     public static int nether_height;
-    public static boolean extra_nether_ceiling;
+    
 
     public static boolean loadPluginConfig(FileConfiguration config) {
         boolean changed = false;
@@ -132,6 +132,7 @@ public class Settings {
             }
             changed = true;
         }
+
         general_spawnSize = config.getInt("options.general.spawnRadius", 64);
         island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
                 config.getStringList("options.island.chestItems")
@@ -172,11 +173,6 @@ public class Settings {
         }
         nether_lava_level = config.getInt("nether.lava_level", config.getInt("nether.lava-level", 32));
         nether_height = config.getInt("nether.height", island_height/2);
-        extra_nether_ceiling = config.getBoolean("nether.extra-nether-ceiling", true);
-        if (!config.contains("nether.extra-nether-ceiling")){
-            config.set("nether.extra-nether-ceiling", true);
-            changed = true;
-        }
         return changed;
     }
 
