@@ -17,26 +17,28 @@ public class MakeLeaderCommand extends RequireIslandCommand {
     }
 
     @Override
-    protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
+    protected boolean doExecute(String alias, Player player, PlayerInfo currentLeader, IslandInfo island, Map<String, Object> data, String... args) {
         if (args.length == 1) {
-            String member = args[0];
-            if (!island.getMembers().contains(member)) {
+            String newLeader = args[0];
+            if (!island.getMembers().contains(newLeader)) {
                 player.sendMessage(tr("\u00a74You can only transfer ownership to party-members!"));
                 return true;
             }
-            if (island.getLeader().equals(member)) {
-                player.sendMessage(tr("{0}\u00a7e is already leader of your island!", member));
+            if (island.getLeader().equals(newLeader)) {
+                player.sendMessage(tr("{0}\u00a7e is already leader of your island!", newLeader));
                 return true;
             }
             if (!island.isLeader(player)) {
                 player.sendMessage(tr("\u00a74Only leader can transfer leadership!"));
-                island.sendMessageToIslandGroup(true, marktr("{0} tried to take over the island!"), member);
+                island.sendMessageToIslandGroup(true, marktr("{0} tried to take over the island!"), newLeader);
                 return true;
             }
-            island.setupPartyLeader(member); // Promote member
-            island.setupPartyMember(pi); // Demote leader
+            island.setupPartyLeader(newLeader); // Promote member
+            island.setupPartyMember(currentLeader); // Demote leader
             WorldGuardHandler.updateRegion(island);
-            island.sendMessageToIslandGroup(true, tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", player.getDisplayName(), member));
+            PlayerInfo newLeaderInfo = uSkyBlock.getInstance().getPlayerInfo(newLeader);
+            uSkyBlock.getInstance().getEventLogic().fireIslandLeaderChangedEvent(island, currentLeader, newLeaderInfo);
+            island.sendMessageToIslandGroup(true, tr("\u00a7bLeadership transferred by {0}\u00a7b to {1}", player.getDisplayName(), newLeader));
             return true;
         }
         return false;
