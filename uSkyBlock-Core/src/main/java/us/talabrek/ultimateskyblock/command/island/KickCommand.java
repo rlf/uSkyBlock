@@ -48,7 +48,7 @@ public class KickCommand extends RequireIslandCommand {
                 }
                 island.removeMember(targetPlayerInfo);
                 if (isOnIsland && onlineTargetPlayer.isOnline()) {
-                    plugin.spawnTeleport(onlineTargetPlayer, true);
+                    plugin.getTeleportLogic().spawnTeleport(onlineTargetPlayer, true);
                 }
             } else if (onlineTargetPlayer != null
                     && onlineTargetPlayer.isOnline()
@@ -62,7 +62,7 @@ public class KickCommand extends RequireIslandCommand {
                 }
                 onlineTargetPlayer.sendMessage(I18nUtil.tr("\u00a74{0} has kicked you from their island!",  player.getName()));
                 player.sendMessage(I18nUtil.tr("\u00a74{0} has been kicked from the island.", targetPlayerName));
-                plugin.spawnTeleport(onlineTargetPlayer, true);
+                plugin.getTeleportLogic().spawnTeleport(onlineTargetPlayer, true);
             } else {
                 player.sendMessage(I18nUtil.tr("\u00a74That player is not part of your island group, and not on your island!"));
             }

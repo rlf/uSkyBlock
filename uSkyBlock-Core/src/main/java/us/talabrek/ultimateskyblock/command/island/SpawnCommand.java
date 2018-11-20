@@ -20,7 +20,7 @@ public class SpawnCommand extends RequirePlayerCommand {
 
     @Override
     protected boolean doExecute(String alias, Player player, Map<String, Object> data, String... args) {
-        plugin.spawnTeleport(player);
+        plugin.getTeleportLogic().spawnTeleport(player, false);
         return true;
     }
 }

@@ -39,8 +39,6 @@ import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.api.event.EventLogic;
-import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
-import us.talabrek.ultimateskyblock.api.event.MemberLeftEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
@@ -636,15 +634,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
             removeCreatures(homeSweetHome);
             player.sendMessage(tr("\u00a7aTeleporting you to your island."));
-            safeTeleport(player, homeSweetHome, force);
+            getTeleportLogic().safeTeleport(player, homeSweetHome, force);
             return true;
         } finally {
             getLogger().exiting(CN, "homeTeleport");
         }
-    }
-
-    public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
-        teleportLogic.safeTeleport(player, homeSweetHome, force);
     }
 
     public boolean warpTeleport(final Player player, final PlayerInfo pi, boolean force) {
@@ -659,16 +653,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             return true;
         }
         player.sendMessage(tr("\u00a7aTeleporting you to {0}''s island.", pi.getDisplayName()));
-        safeTeleport(player, warpSweetWarp, force);
+        getTeleportLogic().safeTeleport(player, warpSweetWarp, force);
         return true;
-    }
-
-    public void spawnTeleport(final Player player) {
-        spawnTeleport(player, false);
-    }
-
-    public void spawnTeleport(final Player player, boolean force) {
-        teleportLogic.spawnTeleport(player, force);
     }
 
     public boolean homeSet(final Player player) {
@@ -861,7 +847,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         try {
             Location next = getIslandLocatorLogic().getNextIslandLocation(player);
             if (isSkyWorld(player.getWorld())) {
-                spawnTeleport(player, true);
+                getTeleportLogic().spawnTeleport(player, true);
             }
             generateIsland(player, pi, next, cSchem);
         } catch (Exception ex) {
