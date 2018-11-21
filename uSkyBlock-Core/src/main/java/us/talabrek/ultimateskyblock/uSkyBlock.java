@@ -576,44 +576,42 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
         String islandName = WorldGuardHandler.getIslandNameAt(l);
         Location islandLocation = IslandUtil.getIslandLocation(islandName);
-        final Location newLoc = islandLocation;
+        final Location newLoc = LocationUtil.alignToDistance(islandLocation, Settings.island_distance);
         if (newLoc == null) {
             return false;
         }
-        // Align to appropriate coordinates
-        LocationUtil.alignToDistance(newLoc, Settings.island_distance);
+
         boolean deleteOldIsland = false;
         if (pi.getHasIsland()) {
             Location oldLoc = pi.getIslandLocation();
-            if (newLoc != null && oldLoc != null
+            if (oldLoc != null
                     && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ())) {
                 deleteOldIsland = true;
             }
         }
-        if (newLoc != null) {
-            if (newLoc.equals(pi.getIslandLocation())) {
-                sender.sendMessage(tr("\u00a74Player is already assigned to this island!"));
-                deleteOldIsland = false;
-            }
-            Runnable resetIsland = new Runnable() {
-                @Override
-                public void run() {
-                    pi.setHomeLocation(null);
-                    pi.setIslandLocation(newLoc);
-                    pi.setHomeLocation(getSafeHomeLocation(pi));
-                    IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
-                    WorldGuardHandler.updateRegion(island);
-                    pi.save();
-                }
-            };
-            if (deleteOldIsland) {
-                deletePlayerIsland(pi.getPlayerName(), resetIsland);
-            } else {
-                resetIsland.run();
-            }
-            return true;
+
+        if (newLoc.equals(pi.getIslandLocation())) {
+            sender.sendMessage(tr("\u00a74Player is already assigned to this island!"));
+            deleteOldIsland = false;
         }
-        return false;
+
+        // Purge current islandinfo and partymembers if there's an active party at this location (issue #948)
+        getIslandLogic().purge(islandName);
+
+        Runnable resetIsland = () -> {
+            pi.setHomeLocation(null);
+            pi.setIslandLocation(newLoc);
+            pi.setHomeLocation(getSafeHomeLocation(pi));
+            IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
+            WorldGuardHandler.updateRegion(island);
+            pi.save();
+        };
+        if (deleteOldIsland) {
+            deletePlayerIsland(pi.getPlayerName(), resetIsland);
+        } else {
+            resetIsland.run();
+        }
+        return true;
     }
 
     public boolean homeTeleport(final Player player, boolean force) {
