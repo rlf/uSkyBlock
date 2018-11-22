@@ -145,7 +145,7 @@ public class IslandLogic {
                     for (Player player : WorldGuardHandler.getPlayersInRegion(netherIsland.getWorld(), netherRegion)) {
                         if (player != null && player.isOnline() && plugin.isSkyNether(player.getWorld()) && !player.isFlying()) {
                             player.sendMessage(tr("\u00a7cThe island owning this piece of nether is being deleted! Sending you to spawn."));
-                            plugin.spawnTeleport(player, true);
+                            plugin.getTeleportLogic().spawnTeleport(player, true);
                         }
                     }
                     WorldEditHandler.clearEntities(netherIsland.getWorld(), netherIsland);
@@ -161,7 +161,7 @@ public class IslandLogic {
             for (Player player : WorldGuardHandler.getPlayersInRegion(plugin.getWorld(), region)) {
                 if (player != null && player.isOnline() && plugin.isSkyWorld(player.getWorld()) && !player.isFlying()) {
                     player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
-                    plugin.spawnTeleport(player, true);
+                    plugin.getTeleportLogic().spawnTeleport(player, true);
                 }
             }
             WorldEditHandler.clearEntities(skyBlockWorld, loc);

@@ -114,14 +114,14 @@ public class PlayerLogic {
                                             tr("\u00a7eYou have been §cBANNED§e from {0}§e''s island.", islandInfo.getLeader()),
                                             tr("\u00a7eSending you to spawn.")
                                     });
-                                    plugin.spawnTeleport(onlinePlayer, true);
+                                    plugin.getTeleportLogic().spawnTeleport(onlinePlayer, true);
                                 } else if (islandInfo != null && islandInfo.isLocked()) {
                                     if (!onlinePlayer.hasPermission("usb.mod.bypassprotection")) {
                                         onlinePlayer.sendMessage(new String[]{
                                                 tr("\u00a7eThe island has been §cLOCKED§e.", islandInfo.getLeader()),
                                                 tr("\u00a7eSending you to spawn.")
                                         });
-                                        plugin.spawnTeleport(onlinePlayer, true);
+                                        plugin.getTeleportLogic().spawnTeleport(onlinePlayer, true);
                                     }
                                 }
                             }

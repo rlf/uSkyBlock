@@ -52,7 +52,7 @@ public class BanCommand extends RequireIslandCommand {
                 if (offlinePlayer != null && offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou have been \u00a7cBANNED\u00a7e from {0}\u00a7e''s island.", player.getDisplayName()));
                     if (plugin.locationIsOnIsland(player, offlinePlayer.getPlayer().getLocation())) {
-                        plugin.spawnTeleport(offlinePlayer.getPlayer(), true);
+                        plugin.getTeleportLogic().spawnTeleport(offlinePlayer.getPlayer(), true);
                     }
                 }
             } else {

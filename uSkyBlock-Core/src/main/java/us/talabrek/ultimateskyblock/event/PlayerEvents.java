@@ -216,7 +216,7 @@ public class PlayerEvents implements Listener {
         if (event.getEntity() instanceof Player && plugin.playerIsInSpawn((Player) event.getEntity()) && event.getCause() == EntityDamageEvent.DamageCause.VOID) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);
-            plugin.spawnTeleport((Player) event.getEntity(), true);
+            plugin.getTeleportLogic().spawnTeleport((Player) event.getEntity(), true);
         }
     }
 

@@ -39,8 +39,6 @@ import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.api.event.EventLogic;
-import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
-import us.talabrek.ultimateskyblock.api.event.MemberLeftEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.api.event.uSkyBlockScoreChangedEvent;
 import us.talabrek.ultimateskyblock.api.uSkyBlockAPI;
@@ -578,44 +576,42 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
         String islandName = WorldGuardHandler.getIslandNameAt(l);
         Location islandLocation = IslandUtil.getIslandLocation(islandName);
-        final Location newLoc = islandLocation;
+        final Location newLoc = LocationUtil.alignToDistance(islandLocation, Settings.island_distance);
         if (newLoc == null) {
             return false;
         }
-        // Align to appropriate coordinates
-        LocationUtil.alignToDistance(newLoc, Settings.island_distance);
+
         boolean deleteOldIsland = false;
         if (pi.getHasIsland()) {
             Location oldLoc = pi.getIslandLocation();
-            if (newLoc != null && oldLoc != null
+            if (oldLoc != null
                     && !(newLoc.getBlockX() == oldLoc.getBlockX() && newLoc.getBlockZ() == oldLoc.getBlockZ())) {
                 deleteOldIsland = true;
             }
         }
-        if (newLoc != null) {
-            if (newLoc.equals(pi.getIslandLocation())) {
-                sender.sendMessage(tr("\u00a74Player is already assigned to this island!"));
-                deleteOldIsland = false;
-            }
-            Runnable resetIsland = new Runnable() {
-                @Override
-                public void run() {
-                    pi.setHomeLocation(null);
-                    pi.setIslandLocation(newLoc);
-                    pi.setHomeLocation(getSafeHomeLocation(pi));
-                    IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
-                    WorldGuardHandler.updateRegion(island);
-                    pi.save();
-                }
-            };
-            if (deleteOldIsland) {
-                deletePlayerIsland(pi.getPlayerName(), resetIsland);
-            } else {
-                resetIsland.run();
-            }
-            return true;
+
+        if (newLoc.equals(pi.getIslandLocation())) {
+            sender.sendMessage(tr("\u00a74Player is already assigned to this island!"));
+            deleteOldIsland = false;
         }
-        return false;
+
+        // Purge current islandinfo and partymembers if there's an active party at this location (issue #948)
+        getIslandLogic().purge(islandName);
+
+        Runnable resetIsland = () -> {
+            pi.setHomeLocation(null);
+            pi.setIslandLocation(newLoc);
+            pi.setHomeLocation(getSafeHomeLocation(pi));
+            IslandInfo island = islandLogic.createIslandInfo(pi.locationForParty(), player);
+            WorldGuardHandler.updateRegion(island);
+            pi.save();
+        };
+        if (deleteOldIsland) {
+            deletePlayerIsland(pi.getPlayerName(), resetIsland);
+        } else {
+            resetIsland.run();
+        }
+        return true;
     }
 
     public boolean homeTeleport(final Player player, boolean force) {
@@ -636,15 +632,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
             removeCreatures(homeSweetHome);
             player.sendMessage(tr("\u00a7aTeleporting you to your island."));
-            safeTeleport(player, homeSweetHome, force);
+            getTeleportLogic().safeTeleport(player, homeSweetHome, force);
             return true;
         } finally {
             getLogger().exiting(CN, "homeTeleport");
         }
-    }
-
-    public void safeTeleport(final Player player, final Location homeSweetHome, boolean force) {
-        teleportLogic.safeTeleport(player, homeSweetHome, force);
     }
 
     public boolean warpTeleport(final Player player, final PlayerInfo pi, boolean force) {
@@ -659,16 +651,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             return true;
         }
         player.sendMessage(tr("\u00a7aTeleporting you to {0}''s island.", pi.getDisplayName()));
-        safeTeleport(player, warpSweetWarp, force);
+        getTeleportLogic().safeTeleport(player, warpSweetWarp, force);
         return true;
-    }
-
-    public void spawnTeleport(final Player player) {
-        spawnTeleport(player, false);
-    }
-
-    public void spawnTeleport(final Player player, boolean force) {
-        teleportLogic.spawnTeleport(player, force);
     }
 
     public boolean homeSet(final Player player) {
@@ -861,7 +845,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         try {
             Location next = getIslandLocatorLogic().getNextIslandLocation(player);
             if (isSkyWorld(player.getWorld())) {
-                spawnTeleport(player, true);
+                getTeleportLogic().spawnTeleport(player, true);
             }
             generateIsland(player, pi, next, cSchem);
         } catch (Exception ex) {
