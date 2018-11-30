@@ -4,7 +4,6 @@ import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -47,13 +46,13 @@ public class SkyBlockMenu {
     private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock plugin;
     private final ChallengeLogic challengeLogic;
-    ItemStack sign = new ItemStack(Material.SIGN, 1);
-    ItemStack biome = new ItemStack(Material.JUNGLE_SAPLING, 1);
-    ItemStack lock = new ItemStack(Material.IRON_BARS, 1);
-    ItemStack warpset = new ItemStack(Material.END_PORTAL_FRAME, 1);
-    ItemStack warptoggle = new ItemStack(Material.LEVER, 1);
-    ItemStack invite = new ItemStack(Material.CARROT_ON_A_STICK, 1);
-    ItemStack kick = new ItemStack(Material.LEATHER_BOOTS, 1);
+    private ItemStack sign = new ItemStack(Material.SIGN, 1);
+    private ItemStack biome = new ItemStack(Material.JUNGLE_SAPLING, 1);
+    private ItemStack lock = new ItemStack(Material.IRON_BARS, 1);
+    private ItemStack warpset = new ItemStack(Material.END_PORTAL_FRAME, 1);
+    private ItemStack warptoggle = new ItemStack(Material.LEVER, 1);
+    private ItemStack invite = new ItemStack(Material.CARROT_ON_A_STICK, 1);
+    private ItemStack kick = new ItemStack(Material.LEATHER_BOOTS, 1);
     private List<PartyPermissionMenuItem> permissionMenuItems = Arrays.asList(
             new PartyPermissionMenuItem(biome, "canChangeBiome", tr("Change Biome"),
                     tr("change the island''s biome.")),
@@ -317,7 +316,7 @@ public class SkyBlockMenu {
     }
 
     private void updateBiomeRadius(Player player, Inventory menu) {
-        String radius = PlayerUtil.getMetadata(player, "biome.radius", "chunk");
+        String radius = PlayerUtil.getMetadata(player, "biome.radius", "all");
         String radiusDisplay;
         switch (radius) {
             case "chunk": radiusDisplay = tr("\u00a72chunk");
@@ -373,7 +372,6 @@ public class SkyBlockMenu {
         if (extras == null) {
             return;
         }
-        World world = plugin.getSkyBlockWorld();
         for (String sIndex : extras.getKeys(false)) {
             ConfigurationSection menuSection = extras.getConfigurationSection(sIndex);
             if (menuSection == null) {
@@ -420,7 +418,6 @@ public class SkyBlockMenu {
         }
         Material itemType = currentItem.getType();
         String itemTitle = currentItem.getItemMeta().getDisplayName();
-        World world = player.getWorld();
         for (String sIndex : extras.getKeys(false)) {
             ConfigurationSection menuSection = extras.getConfigurationSection(sIndex);
             if (menuSection == null) {
@@ -463,7 +460,7 @@ public class SkyBlockMenu {
         Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + pre("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
         final PlayerInfo pi = playerName == null ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(playerName);
         challengeLogic.populateChallengeRank(menu, pi, page, playerName != null && player.hasPermission("usb.mod.bypassrestriction"));
-        int pages[] = new int[9];
+        int[] pages = new int[9];
         pages[0] = 1;
         pages[8] = total;
         int startOffset = 2;
@@ -479,7 +476,7 @@ public class SkyBlockMenu {
         for (int i = 0; i < pages.length; i++) {
             int p = pages[i];
             if (p >= 1 && p <= total) {
-                ItemStack pageItem = null;
+                ItemStack pageItem;
                 if (p == page) {
                     pageItem = ItemStackUtil.createItemStack("WRITABLE_BOOK", tr("\u00a77Current page"), null);
                 } else {
@@ -630,7 +627,7 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
-        menuItem = new ItemStack(Material.JUNGLE_SAPLING, 1, (short) 3);
+        menuItem = new ItemStack(Material.JUNGLE_SAPLING, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName("\u00a7a\u00a7l" + tr("Change Island Biome"));
         lores.add(tr("\u00a7eCurrent Biome: \u00a7b{0}", islandInfo.getBiome()));
@@ -736,7 +733,7 @@ public class SkyBlockMenu {
         lores.clear();
         if (islandInfo.isLeader(player)) {
             if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
-                menuItem = new ItemStack(Material.DIRT, 1, (byte) 2);
+                menuItem = new ItemStack(Material.PODZOL, 1);
                 meta4 = menuItem.getItemMeta();
                 meta4.setDisplayName(tr("\u00a7c\u00a7lRestart Island"));
                 addLore(lores, "\u00a7f", tr("Restarts your island.\n\u00a74WARNING! \u00a7cwill remove your items and island!"));
@@ -1088,7 +1085,7 @@ public class SkyBlockMenu {
         }
         if (slotIndex >= 21 && slotIndex <= 23) {
             List<String> radii = Arrays.asList("10", "chunk", "20", "30", "40", "50", "60", "70", "80", "90", "100", "all");
-            String radius = PlayerUtil.getMetadata(p, "biome.radius", "chunk");
+            String radius = PlayerUtil.getMetadata(p, "biome.radius", "all");
             int ix = radii.indexOf(radius);
             if (ix == -1) {
                 ix = 1;
@@ -1107,7 +1104,7 @@ public class SkyBlockMenu {
         for (BiomeMenuItem biomeMenu : biomeMenus) {
             ItemStack menuIcon = biomeMenu.getIcon();
             if (currentItem.getType() == menuIcon.getType() && currentItem.getDurability() == menuIcon.getDurability()) {
-                String radius = PlayerUtil.getMetadata(p, "biome.radius", "chunk");
+                String radius = PlayerUtil.getMetadata(p, "biome.radius", "all");
                 p.closeInventory();
                 p.performCommand("island biome " + biomeMenu.getId() + " " + radius);
                 return;
