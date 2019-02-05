@@ -20,6 +20,7 @@ import dk.lockfuglsang.minecraft.util.VersionUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
@@ -328,14 +329,22 @@ public class WorldEditHandler {
             entities = ReflectionUtil.exec(world, "getNearbyEntities",
                     new Class[]{Location.class, Double.TYPE, Double.TYPE, Double.TYPE}, center, Settings.island_radius, 255, Settings.island_radius);
             for (Entity entity : entities) {
-                entity.remove();
+                if (!(entity instanceof Player)) {
+                    entity.remove();
+                } else {
+                    uSkyBlock.getInstance().getTeleportLogic().spawnTeleport((Player) entity, true);
+                }
             }
         } else {
             entities = world.getEntities();
             ProtectedRegion islandRegion = WorldGuardHandler.getIslandRegionAt(center);
             for (Entity entity : entities) {
                 if (entity != null && entity.getLocation() != null && islandRegion.contains(entity.getLocation().getBlockX(), entity.getLocation().getBlockY(), entity.getLocation().getBlockZ())) {
-                    entity.remove();
+                    if (!(entity instanceof Player)) {
+                        entity.remove();
+                    } else {
+                        uSkyBlock.getInstance().getTeleportLogic().spawnTeleport((Player) entity, true);
+                    }
                 }
             }
         }
