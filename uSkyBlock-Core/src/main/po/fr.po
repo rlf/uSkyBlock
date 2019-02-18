@@ -341,7 +341,7 @@ msgid "§e{0} has had all challenges reset."
 msgstr "§e{0} a eu tous les challenges réinitialisés."
 
 msgid "complete all challenges in the rank"
-msgstr "compléte tout les challenges dans le rang"
+msgstr "complète tout les challenges dans le rang"
 
 #, java-format
 msgid "§4No player named {0} was found!"
@@ -398,7 +398,7 @@ msgstr "§4Aucun joueur nommé {0} trouvé !"
 
 msgid ""
 "§4No valid island provided, either stand within one, or provide an island name"
-msgstr "§4Aucune île fournie , essayez de fournir un nom d'île"
+msgstr "§4Aucune île indiquée. Essayez de fournir un nom d'île"
 
 msgid "print out info about the island"
 msgstr "afficher les informations à propos de l'île"
@@ -420,7 +420,7 @@ msgstr "§4Erreur ! §9Aucune île valide à nettoyer."
 
 #, java-format
 msgid "§cPURGE: §9Purged island at {0}"
-msgstr "§cNettoyage : §9Ile nettoyé à {0}"
+msgstr "§cNETTOYAGE : §9Ile nettoyé à {0}"
 
 msgid "toggles the islands ignore status"
 msgstr "activer"
@@ -971,7 +971,7 @@ msgid "§7- SCANNING: {0,number,##}% ({1}/{2} failed: {3}) ~ {4}"
 msgstr "§7- Scan: {0,number,##}% ({1}/{2} échoués: {3}) ~ {4}"
 
 msgid "§4PURGE:§9 Scanning aborted."
-msgstr "§4PURGE :§9 Scan interrompu."
+msgstr "§4NETTOYAGE :§9 Scan interrompu."
 
 #, java-format
 msgid ""
@@ -984,10 +984,10 @@ msgid "- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{
 msgstr ""
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4 NETTOYAGE: Finit , îles abandonnés nétoyés."
+msgstr "§4NETTOYAGE : Finit , îles abandonnés nétoyés."
 
 msgid "§4PURGE:§9 Aborted purging abandoned islands."
-msgstr "§4PURGE :§9 Purge annulée des îles abandonnées."
+msgstr "§4NETTOYAGE :§9 Purge annulée des îles abandonnées."
 
 msgid "displays version information"
 msgstr "afficher les informations sur la version"
@@ -1067,13 +1067,13 @@ msgid "complete and list challenges"
 msgstr "liste des challenges"
 
 msgid "§eChallenges has been disabled. Contact an administrator."
-msgstr "§eChallenge désactivé. Contacte un administrateur."
+msgstr "§eChallenge désactivé. Contactez un administrateur."
 
 msgid "§4You can only submit challenges in the skyblock world!"
-msgstr "§4Vous pouvez compléter les challenges uniquement dans le mode du skyblock !"
+msgstr "§4Vous devez être dans le monde Skyblock pour compléter les challenges !"
 
 msgid "§4You can only submit challenges when you have an island!"
-msgstr "§4Vous pouvez compléter les challenges uniquement quand vous avez une île !"
+msgstr "§4Vous devez avoir une île pour compléter les challenges !"
 
 msgid ""
 "§4Your island is full, or you have too many pending invites. You can't invite "
@@ -1200,10 +1200,10 @@ msgid "Let the player change their islands biome to {0}"
 msgstr ""
 
 msgid "§cYou do not have permission to change the biome of your current island."
-msgstr "§cVous n'avez pas la permission pour changer le biome de l'île actuelle."
+msgstr "§cVous n'avez pas la permission de changer le biome de l'île actuelle."
 
 msgid "§4You do not have permission to change the biome of this island!"
-msgstr "§4Vous n'avez pas la permission pour changer le biome de l'île !"
+msgstr "§4Vous n'avez pas la permission de changer le biome de l'île !"
 
 msgid "§eYou must be on your island to change the biome!"
 msgstr "§eVous devez être sur votre île pour changer le biome !"
@@ -1218,7 +1218,7 @@ msgid "§eYou can change your biome again in {0,number,#} minutes."
 msgstr "§eVous ne pouvez pas changer le biome avant {0,number,#} minutes."
 
 msgid "§cYou do not have permission to change your biome to that type."
-msgstr "§cVous n'êtes pas autorisé à changer votre biome à ce type."
+msgstr "§cVous n'êtes pas autorisé à changer votre biome vers ce type."
 
 #, java-format
 msgid "§7The pixies are busy changing the biome near you to §9{0}§7, be patient."
@@ -1376,7 +1376,7 @@ msgstr "§4{0} a été retiré de l'île."
 
 #, java-format
 msgid "§4{0} tried to kick you from their island!"
-msgstr "§4{0} a essayé de vous kick de leur île !"
+msgstr "§4{0} a essayé de vous kick de son île !"
 
 #, java-format
 msgid "§4{0} is exempt from being kicked."
@@ -1384,7 +1384,7 @@ msgstr "§4{0} est excepté du kick de l'île."
 
 #, java-format
 msgid "§4{0} has kicked you from their island!"
-msgstr "§4{0} vous a kické de leur île !"
+msgstr "§4{0} vous a kické de son île !"
 
 #, java-format
 msgid "§4{0} has been kicked from the island."
@@ -1415,7 +1415,7 @@ msgid "§4{0} has left your island!"
 msgstr "§4{0} a quitté votre île !"
 
 msgid "§4You must be in the skyblock world to leave your party!"
-msgstr "§4Vous devez être dans le monde du skyblock pour quitter l'île !"
+msgstr "§4Vous devez être dans le monde skyblock pour quitter l'île !"
 
 msgid "check your or anothers island level"
 msgstr "vérifier le niveau des autres îles"
@@ -1454,7 +1454,7 @@ msgid "transfer leadership to another member"
 msgstr "transférer le chef à un autre membre"
 
 msgid "§4You can only transfer ownership to party-members!"
-msgstr "§4Vous ne pouvez uniquement transférer le chef aux membres de votre île !"
+msgstr "§4Seul un membre de votre île peut devenir chef !"
 
 #, java-format
 msgid "{0}§e is already leader of your island!"
@@ -1533,7 +1533,7 @@ msgid ""
 "§4Only the owner may restart this island. Leave this island in order to start your "
 "own (/island leave)."
 msgstr ""
-"§4Uniquement le chef de l'île peut remettre à zéro l'île. Quitter l'île pour créer "
+"§4Uniquement le chef de l'île peut remettre à zéro l'île. Quittez l'île pour créer "
 "la votre (/island leave)."
 
 msgid ""
@@ -1592,7 +1592,7 @@ msgid "§cYou do not have permission to enable/disable your island''s warp!"
 msgstr ""
 
 msgid "display the top10 of islands"
-msgstr "Afficher le top 10 des îles."
+msgstr "afficher le top 10 des îles"
 
 msgid "enables user to all-ways generate top-ten (no caching)"
 msgstr ""
@@ -1660,7 +1660,7 @@ msgid ""
 "§cYour island is in the process of generating, you cannot warp to other players "
 "islands right now."
 msgstr ""
-"§cVotre île est en géneration, vous ne pouvez vous téléporter sur d'autres îles."
+"§cVotre île est en géneration, vous ne pouvez pas vous téléporter sur d'autres îles."
 
 msgid "§4That player does not exist!"
 msgstr "§4Ce joueur n'éxiste pas !"
@@ -1743,7 +1743,7 @@ msgstr ""
 "§cNETHER§c, ce n'est pas autorisé."
 
 msgid "§4You can only convert obsidian once every 10 seconds"
-msgstr "§4Vous ne pouvez convertir l'obsidienne, qu'une fois toutes les 10 secondes."
+msgstr "§4Vous ne pouvez convertir l'obsidienne qu'une fois toutes les 10 secondes."
 
 msgid "§eChanging your obsidian back into lava. Be careful!"
 msgstr "§eObsidienne changé en lave ! Soyez prudent !"
@@ -1940,7 +1940,7 @@ msgstr "§eTableau des meilleurs joueurs (page {0} de {1}):"
 #, java-format
 msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr ""
-"§4La top liste est vide ! Seulement les îles au dessus du niveau {0} est pris en "
+"§4Le top 10 est vide ! Seulement les îles au dessus du niveau {0} est pris en "
 "compte."
 
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
@@ -2477,7 +2477,7 @@ msgid ""
 "building your island empire!\n"
 "§e§lClick here to start!"
 msgstr ""
-"Commencez votre voyage de skyblock\n"
+"Commencez votre aventure skyblock\n"
 "en créant votre île.\n"
 "Complétez les challenges pour \n"
 "gagner de l'argent et des objets.\n"
@@ -2744,7 +2744,7 @@ msgid ""
 "§4WARNING! §cwill remove all your items!"
 msgstr ""
 "Quitte votre île.\n"
-"§4ATTENTION !§ccela va supprimer tout vos items !"
+"§4ATTENTION ! §ccela va supprimer tout vos items !"
 
 msgid "§cClick to leave"
 msgstr "§cCliquez pour quitter"
@@ -2789,7 +2789,7 @@ msgid "§9Be patient, young padawan"
 msgstr "§9Soyez patient, jeune padawan"
 
 msgid "§9Patience you MUST have, young padawan"
-msgstr "§9Jeune padawan, avoir la patience tu DOIS"
+msgstr "§9Jeune padawan, la patience tu DOIS avoir"
 
 msgid "§9The two most powerful warriors are patience and time."
 msgstr ""
@@ -2812,7 +2812,7 @@ msgstr "PRÊT"
 
 msgid "§cWARNING:§e Could not transfer all the required items to your inventory!"
 msgstr ""
-"§cATTENTION :§e Impossible de transférer tout les items nécessaires dansvotre "
+"§cATTENTION :§e Impossible de transférer tout les items nécessaires dans votre"
 "inventaire !"
 
 msgid "§cNot enough items in chest to complete challenge!"
@@ -2863,7 +2863,7 @@ msgid "§aYour skyblock home has been set to your current location."
 msgstr "§aVotre home a été modifié à votre position acutelle."
 
 msgid "§4Your current location is not a safe home-location."
-msgstr "§4Votre position acutelle n'est pas un home protégé."
+msgstr "§4Votre position actuelle n'est pas un home protégé."
 
 msgid "§cYour island is in the process of generating, you cannot create now."
 msgstr "§cVotre île est en cours de génération, vous ne pouvez pas créer maintenant."
