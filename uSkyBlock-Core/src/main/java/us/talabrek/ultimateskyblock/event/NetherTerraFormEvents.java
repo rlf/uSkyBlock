@@ -134,7 +134,7 @@ public class NetherTerraFormEvents implements Listener {
     private Double getToolWeight(ItemStack tool) {
         String toolType = MaterialUtil.getToolType(tool.getType());
         Double d = toolWeights.get(toolType);
-        return d != null ? d : 1d;
+        return d != null ? d : 0d;
     }
 
     private void spawnBlock(Material type, Location location, Vector v, ProtectedCuboidRegion islandRegion) {
