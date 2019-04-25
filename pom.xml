@@ -81,19 +81,13 @@
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/repo/</url>
         </repository>
-        <!--
-        <repository>
-            <id>sk89q-mvn2</id>
-            <url>http://mvn2.sk89q.com/repo</url>
-        </repository>
-        -->
         <repository>
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
         <repository>
-            <id>bstats-repo</id>
-            <url>http://repo.bstats.org/content/repositories/releases/</url>
+            <id>CodeMC</id>
+            <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
         <repository>
             <id>rlf-mvn-repo</id>
@@ -107,79 +101,6 @@
         </pluginRepository>
     </pluginRepositories>
     <profiles>
-        <profile>
-            <id>wg5</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q</groupId>
-                    <artifactId>worldguard</artifactId>
-                    <version>5.9</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>wg6</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q</groupId>
-                    <artifactId>worldguard</artifactId>
-                    <version>6.0.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>wg611</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q</groupId>
-                    <artifactId>worldguard</artifactId>
-                    <version>6.1.1-SNAPSHOT</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.sk89q</groupId>
-                            <artifactId>worldedit</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>wg62</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q.worldguard</groupId>
-                    <artifactId>worldguard-legacy</artifactId>
-                    <version>6.2</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.sk89q</groupId>
-                            <artifactId>worldedit</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
         <profile>
             <id>wg700</id>
             <activation>
@@ -199,22 +120,6 @@
                             <artifactId>worldedit</artifactId>
                         </exclusion>
                     </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>we613</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q.worldedit</groupId>
-                    <artifactId>worldedit-bukkit</artifactId>
-                    <version>6.1.3-SNAPSHOT</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
                 </dependency>
             </dependencies>
         </profile>
