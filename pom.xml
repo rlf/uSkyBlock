@@ -12,7 +12,7 @@
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
-        <vault.version>1.6</vault.version>
+        <vault.version>1.7</vault.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>

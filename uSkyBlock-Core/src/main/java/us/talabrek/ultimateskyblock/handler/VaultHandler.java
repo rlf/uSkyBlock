@@ -2,8 +2,6 @@ package us.talabrek.ultimateskyblock.handler;
 
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.item.ItemInfo;
-import net.milkbowl.vault.item.Items;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -58,21 +56,6 @@ public enum VaultHandler {;
 
     public static String getItemName(ItemStack stack) {
         return ItemStackUtil.getItemName(stack);
-    }
-
-    private static String getVaultItemName(ItemStack stack) {
-        if (stack != null) {
-            try {
-                if (stack.getItemMeta() != null && stack.getItemMeta().getDisplayName() != null && !stack.getItemMeta().getDisplayName().trim().isEmpty()) {
-                    return stack.getItemMeta().getDisplayName();
-                }
-                ItemInfo itemInfo = Items.itemByStack(stack);
-                return itemInfo != null ? itemInfo.getName() : "" + stack.getType();
-            } catch (NullPointerException e) {
-                return "" + stack.getType();
-            }
-        }
-        return null;
     }
 
     public static boolean hasEcon() {
