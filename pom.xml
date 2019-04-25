@@ -4,7 +4,7 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.7.5-SNAPSHOT</version>
+    <version>2.7.7-SNAPSHOT</version>
     <name>Ultimate SkyBlock</name>
 
     <properties>
@@ -29,7 +29,6 @@
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-Plugin</module>
-        <module>uSkyBlock-WE700</module>
         <module>uSkyBlock-FAWE</module>
     </modules>
 
