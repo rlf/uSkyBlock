@@ -2,21 +2,19 @@
 
 This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin.
 
-We are on [Spigot](https://www.spigotmc.org/resources/uskyblock.2280/) and [Bukkit](http://dev.bukkit.org/bukkit-plugins/uskyblock/)
-
-Currently [Open Issues](https://github.com/rlf/uSkyBlock/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22T%20ready%20for%20test%22%20-label%3A%22T%20tested%20awaiting%20reporter%22)
+We are on [Spigot](https://www.spigotmc.org/resources/uskyblock-revived.66795/). Currently [Open Issues](https://github.com/rlf/uSkyBlock/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22T%20ready%20for%20test%22%20-label%3A%22T%20tested%20awaiting%20reporter%22)
 
 # Installation
 
 This version depends on the following plugins:
 
-* Bukkit/Spigot 1.9-R0.1-SNAPSHOT
-* Vault 1.5.x
-* WorldEdit 6.0.0-SNAPSHOT
-* WorldGuard 6.0.0-SNAPSHOT
+* Bukkit/Spigot 1.13.2-R0.1-SNAPSHOT
+* Vault 1.6.x
+* WorldEdit 7.0.0-SNAPSHOT
+* WorldGuard 7.0.0-SNAPSHOT
 
 ## Releases 
-[![Build Status](https://api.travis-ci.org/rlf/uSkyBlock.svg)](https://travis-ci.org/rlf/uSkyBlock) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Percentage of issues still open")
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Percentage of issues still open")
 
 https://github.com/rlf/uSkyBlock/releases
 
