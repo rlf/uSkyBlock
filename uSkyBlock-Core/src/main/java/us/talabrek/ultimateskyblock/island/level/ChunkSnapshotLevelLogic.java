@@ -1,10 +1,15 @@
 package us.talabrek.ultimateskyblock.island.level;
 
+import com.bgsoftware.wildstacker.api.WildStackerAPI;
+import com.bgsoftware.wildstacker.api.objects.StackedBarrel;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Server;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.scheduler.BukkitRunnable;
 import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
@@ -45,7 +50,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                calculateScoreAndCallback(region, snapshotsOverworld, netherRegion, snapshotsNether, callback);
+                                calculateScoreAndCallback(region, snapshotsOverworld, netherRegion, snapshotsNether, l, callback);
                             }
                         }.runTaskAsynchronously(plugin);
                     }
@@ -54,14 +59,14 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
         }).runTask(plugin);
     }
 
-    private void calculateScoreAndCallback(ProtectedRegion region, List<ChunkSnapshot> snapshotsOverworld, ProtectedRegion netherRegion, List<ChunkSnapshot> snapshotsNether, Callback<IslandScore> callback) {
-        IslandScore islandScore = calculateScore(region, snapshotsOverworld, netherRegion, snapshotsNether);
+    private void calculateScoreAndCallback(ProtectedRegion region, List<ChunkSnapshot> snapshotsOverworld, ProtectedRegion netherRegion, List<ChunkSnapshot> snapshotsNether, Location l, Callback<IslandScore> callback) {
+        IslandScore islandScore = calculateScore(region, snapshotsOverworld, netherRegion, snapshotsNether, l);
         callback.setState(islandScore);
         plugin.sync(callback);
         log.exiting(CN, "calculateScoreAsync");
     }
 
-    private IslandScore calculateScore(ProtectedRegion region, List<ChunkSnapshot> snapshotsOverworld, ProtectedRegion netherRegion, List<ChunkSnapshot> snapshotsNether) {
+    private IslandScore calculateScore(ProtectedRegion region, List<ChunkSnapshot> snapshotsOverworld, ProtectedRegion netherRegion, List<ChunkSnapshot> snapshotsNether, Location l) {
         final BlockCountCollection counts = new BlockCountCollection(scoreMap);
         int minX = region.getMinimumPoint().getBlockX();
         int maxX = region.getMaximumPoint().getBlockX();
@@ -83,6 +88,13 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                         continue;
                     }
                     byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
+
+                    if(WildStackerAPI.getWildStacker() != null){
+                        StackedBarrel barrel = WildStackerAPI.getWildStacker().getSystemManager().getStackedBarrel(new Location(l.getWorld(), cx, y, cz));
+                        if(barrel != null){
+                            counts.add(blockType, blockData, WildStackerAPI.getBarrelAmount(barrel.getBlock()));
+                        }
+                    }
                     counts.add(blockType, blockData);
                 }
             }
