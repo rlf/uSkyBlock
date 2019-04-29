@@ -89,16 +89,25 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                     }
                     byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
 
-                    if(WildStackerAPI.getWildStacker() != null){
-                        StackedBarrel barrel = WildStackerAPI.getWildStacker().getSystemManager().getStackedBarrel(new Location(l.getWorld(), cx, y, cz));
-                        if(barrel != null){
-                            counts.add(blockType, blockData, WildStackerAPI.getBarrelAmount(barrel.getBlock()));
-                        }
-                    }
                     counts.add(blockType, blockData);
                 }
             }
         }
+
+        if(WildStackerAPI.getWildStacker() != null){
+            List<StackedBarrel> barrels = WildStackerAPI.getWildStacker().getSystemManager().getStackedBarrels();
+            log.log(Level.WARNING, "[Level Calculation] Barrels:" + barrels.size());
+            int finalMinX = minX;
+            int finalMaxX = maxX;
+            int finalMinZ = minZ;
+            int finalMaxZ = maxZ;
+            barrels.forEach(stackedBarrel -> {
+                if(stackedBarrel.getLocation().getWorld() == l.getWorld() && stackedBarrel.getLocation().getBlockX() >= finalMinX && stackedBarrel.getLocation().getBlockX() <= finalMaxX && stackedBarrel.getLocation().getBlockZ() >= finalMinZ && stackedBarrel.getLocation().getBlockZ() <= finalMaxZ){
+                    counts.add(stackedBarrel.getBarrelItem(0).getType(), stackedBarrel.getBarrelItem(0).getData().getData(), stackedBarrel.getStackAmount());
+                }
+            });
+        }
+
         IslandScore islandScore = createIslandScore(counts);
         if (islandScore.getScore() >= activateNetherAtLevel && netherRegion != null && snapshotsNether != null) {
             // Add nether levels
