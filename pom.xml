@@ -92,6 +92,10 @@
             <id>rlf-mvn-repo</id>
             <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
+		<repository>
+			<id>local-maven-repo</id>
+			<url>file:${project.basedir}/Libraries</url>
+		</repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
