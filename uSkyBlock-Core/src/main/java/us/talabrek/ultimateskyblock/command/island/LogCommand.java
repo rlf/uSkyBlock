@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.command.island;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -21,7 +22,8 @@ public class LogCommand extends RequireIslandCommand {
 
     @Override
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
-        player.openInventory(menu.displayLogGUI(player));
+        Map.Entry<Inventory, String> inv = menu.displayLogGUI(player);
+        menu.getInventoryManager().createInventory(player, inv.getKey(), inv.getValue());
         return true;
     }
 }

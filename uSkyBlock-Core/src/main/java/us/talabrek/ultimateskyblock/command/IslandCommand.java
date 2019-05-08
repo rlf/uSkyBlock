@@ -4,6 +4,7 @@ import dk.lockfuglsang.minecraft.command.BaseCommandExecutor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.command.completion.AllPlayerTabCompleter;
 import us.talabrek.ultimateskyblock.command.completion.BiomeTabCompleter;
@@ -38,6 +39,8 @@ import us.talabrek.ultimateskyblock.command.island.TrustCommand;
 import us.talabrek.ultimateskyblock.command.island.WarpCommand;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+
+import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -109,7 +112,8 @@ public class IslandCommand extends BaseCommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 0) {
-                player.openInventory(menu.displayIslandGUI(player));
+                Map.Entry<Inventory, String> inv = menu.displayIslandGUI(player);
+                menu.getInventoryManager().createInventory(player, inv.getKey(), inv.getValue());
                 return true;
             }
         }

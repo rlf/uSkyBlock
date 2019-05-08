@@ -68,6 +68,16 @@ public class NullPlayer implements OfflinePlayer {
     }
 
     @Override
+    public long getLastLogin() {
+        return 0;
+    }
+
+    @Override
+    public long getLastSeen() {
+        return 0;
+    }
+
+    @Override
     public Map<String, Object> serialize() {
         return null;
     }

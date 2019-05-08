@@ -336,6 +336,11 @@
             <artifactId>VaultAPI</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>me.skorrloregaming</groupId>
+            <artifactId>InventoryManager</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>com.onarandombox.multiversecore</groupId>
