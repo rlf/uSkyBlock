@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.event;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -22,7 +23,7 @@ public class MenuEvents implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void guiClick(final InventoryClickEvent event) {
         String prefix = stripFormatting(tr("Config:"));
-        if (!prefix.isEmpty() && stripFormatting(event.getInventory().getTitle()).startsWith(prefix)) {
+        if (!prefix.isEmpty() && stripFormatting(plugin.getMenu().getInventoryManager().getInventoryName((Player) event.getWhoClicked())).startsWith(prefix)) {
             plugin.getConfigMenu().onClick(event);
         } else {
             plugin.getMenu().onClick(event);
