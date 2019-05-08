@@ -94,7 +94,7 @@
         </repository>
         <repository>
             <id>nexus-repo</id>
-            <url>https://maven.skorrloregaming.com/repository/maven-snapshots/</url>
+            <url>https://maven.skorrloregaming.com/repository/maven-releases/</url>
         </repository>
     </repositories>
     <pluginRepositories>
