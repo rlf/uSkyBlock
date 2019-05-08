@@ -92,10 +92,6 @@
             <id>rlf-mvn-repo</id>
             <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
-        <repository>
-            <id>nexus-repo</id>
-            <url>https://maven.skorrloregaming.com/repository/maven-releases/</url>
-        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>

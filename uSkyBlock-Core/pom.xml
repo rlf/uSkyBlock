@@ -312,6 +312,12 @@
             </build>
         </profile>
     </profiles>
+    <repositories>
+        <repository>
+            <id>nexus-repo</id>
+            <url>https://maven.skorrloregaming.com/repository/maven-releases/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>dk.lockfuglsang.minecraft</groupId>
