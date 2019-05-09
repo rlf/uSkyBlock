@@ -908,7 +908,8 @@ public class SkyBlockMenu {
 		} else if (slotIndex == 17) {
 			if (islandInfo.isLeader(p) && plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
 				p.closeInventory();
-				p.openInventory(createRestartGUI(p));
+				Map.Entry<Inventory, String> inv = createRestartGUI(p);
+				inventoryManager.createInventory(p, inv.getKey(), inv.getValue());
 			} else {
 				if (plugin.getConfirmHandler().millisLeft(p, "/is leave") > 0) {
 					p.closeInventory();
