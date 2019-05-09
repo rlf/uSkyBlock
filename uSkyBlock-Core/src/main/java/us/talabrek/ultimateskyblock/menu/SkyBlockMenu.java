@@ -957,7 +957,7 @@ public class SkyBlockMenu {
 		inventory.setItem(17, currentItem);
 	}
 
-	public Inventory createRestartGUI(Player player) {
+	public Map.Entry<Inventory, String> createRestartGUI(Player player) {
 		List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
 		int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d) * 9;
 		Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Restart Menu"));
@@ -974,7 +974,7 @@ public class SkyBlockMenu {
 		if (plugin.getConfirmHandler().millisLeft(player, "/is restart") > 0) {
 			updateRestartMenuTimer(player, menu);
 		}
-		return menu;
+		return new AbstractMap.SimpleEntry(menu, "\u00a79" + tr("Island Restart Menu"));
 	}
 
 	private void updateRestartMenu(Inventory menu, Player player, List<String> schemeNames) {
