@@ -21,7 +21,7 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 /**
  * Handles integration with AWE.
  * Very HACKY and VERY unstable.
- *
+ * <p>
  * Only kept as a cosmetic measure, to at least try to give the players some feedback.
  */
 public enum AsyncWorldEditHandler {;

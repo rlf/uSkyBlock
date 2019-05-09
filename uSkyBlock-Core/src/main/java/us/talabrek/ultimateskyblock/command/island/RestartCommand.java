@@ -14,46 +14,46 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class RestartCommand extends RequireIslandCommand {
-	public RestartCommand(uSkyBlock plugin) {
-		super(plugin, "restart|reset", "usb.island.restart", "?schematic", marktr("delete your island and start a new one."));
-		addFeaturePermission("usb.exempt.cooldown.restart", tr("exempt player from restart-cooldown"));
-	}
+    public RestartCommand(uSkyBlock plugin) {
+        super(plugin, "restart|reset", "usb.island.restart", "?schematic", marktr("delete your island and start a new one."));
+        addFeaturePermission("usb.exempt.cooldown.restart", tr("exempt player from restart-cooldown"));
+    }
 
-	@Override
-	protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
-		if (island.getPartySize() > 1) {
-			if (!island.isLeader(player)) {
-				player.sendMessage(tr("\u00a74Only the owner may restart this island. Leave this island in order to start your own (/island leave)."));
-			} else {
-				player.sendMessage(tr("\u00a7eYou must remove all players from your island before you can restart it (/island kick <player>). See a list of players currently part of your island using /island party."));
-			}
-			return true;
-		}
-		int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
-		if (cooldown > 0) {
-			player.sendMessage(tr("\u00a7cYou can restart your island in {0} seconds.", cooldown));
-			return true;
-		} else {
-			if (pi.isIslandGenerating()) {
-				player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot restart now."));
-				return true;
-			}
-			if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
-				if (args == null || args.length == 0) {
-					Map.Entry<Inventory, String> inv = plugin.getMenu().createRestartGUI(player);
-					plugin.getMenu().getInventoryManager().createInventory(player, inv.getKey(), inv.getValue());
-					return true;
-				}
-			}
-			if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
-				plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
-				String cSchem = args != null && args.length > 0 ? args[0] : island.getSchematicName();
-				plugin.getServer().getPluginManager().callEvent(new RestartIslandEvent(player, pi.getIslandLocation(), cSchem));
-				return true;
-			} else {
-				player.sendMessage(tr("\u00a7eNOTE: Your entire island and all your belongings will be RESET!"));
-				return true;
-			}
-		}
-	}
+    @Override
+    protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
+        if (island.getPartySize() > 1) {
+            if (!island.isLeader(player)) {
+                player.sendMessage(tr("\u00a74Only the owner may restart this island. Leave this island in order to start your own (/island leave)."));
+            } else {
+                player.sendMessage(tr("\u00a7eYou must remove all players from your island before you can restart it (/island kick <player>). See a list of players currently part of your island using /island party."));
+            }
+            return true;
+        }
+        int cooldown = plugin.getCooldownHandler().getCooldown(player, "restart");
+        if (cooldown > 0) {
+            player.sendMessage(tr("\u00a7cYou can restart your island in {0} seconds.", cooldown));
+            return true;
+        } else {
+            if (pi.isIslandGenerating()) {
+                player.sendMessage(tr("\u00a7cYour island is in the process of generating, you cannot restart now."));
+                return true;
+            }
+            if (plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
+                if (args == null || args.length == 0) {
+                    Map.Entry<Inventory, String> inv = plugin.getMenu().createRestartGUI(player);
+                    plugin.getMenu().getInventoryManager().createInventory(player, inv.getKey(), inv.getValue());
+                    return true;
+                }
+            }
+            if (plugin.getConfirmHandler().checkCommand(player, "/is restart")) {
+                plugin.getCooldownHandler().resetCooldown(player, "restart", Settings.general_cooldownRestart);
+                String cSchem = args != null && args.length > 0 ? args[0] : island.getSchematicName();
+                plugin.getServer().getPluginManager().callEvent(new RestartIslandEvent(player, pi.getIslandLocation(), cSchem));
+                return true;
+            } else {
+                player.sendMessage(tr("\u00a7eNOTE: Your entire island and all your belongings will be RESET!"));
+                return true;
+            }
+        }
+    }
 }

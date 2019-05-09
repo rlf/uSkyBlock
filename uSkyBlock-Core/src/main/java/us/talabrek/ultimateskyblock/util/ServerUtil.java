@@ -9,7 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.UUID;
 
-public enum ServerUtil {;
+public enum ServerUtil {
+    ;
     private static final UUID ONLINE_UUID = UUIDUtil.fromString("97e8584c-438c-43cf-8b58-4e56c52398ed");
     private static final String ONLINE_NAME = "R4zorax";
     private static OfflinePlayer offlinePlayer;

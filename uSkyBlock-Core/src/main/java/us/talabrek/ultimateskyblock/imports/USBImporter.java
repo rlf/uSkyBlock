@@ -10,6 +10,7 @@ import java.io.File;
 public interface USBImporter {
     /**
      * Identifies the importer.
+     *
      * @return The name of the importer
      */
     String getName();
@@ -18,6 +19,7 @@ public interface USBImporter {
 
     /**
      * Imports the player into the existing data structure.
+     *
      * @param file The file to import.
      * @return <code>true</code> iff the import was successful.
      */
@@ -25,6 +27,7 @@ public interface USBImporter {
 
     /**
      * Returns the candidates for import.
+     *
      * @return
      */
     File[] getFiles();

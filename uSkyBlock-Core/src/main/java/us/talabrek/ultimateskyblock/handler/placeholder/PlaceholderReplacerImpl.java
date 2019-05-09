@@ -88,36 +88,60 @@ public class PlaceholderReplacerImpl implements PlaceholderAPI.PlaceholderReplac
 
     private String lookup(String placeholder) {
         switch (placeholder) {
-            case "usb_version": return plugin.getDescription().getVersion();
+            case "usb_version":
+                return plugin.getDescription().getVersion();
         }
         throw new IllegalArgumentException("Unsupported placeholder " + placeholder);
     }
 
     private String lookup(IslandInfo islandInfo, String placeholder) {
         switch (placeholder) {
-            case "usb_island_level": return pre("{0,number,##.#}", islandInfo.getLevel());
-            case "usb_island_level_int": return pre("{0,number,#}", islandInfo.getLevel());
-            case "usb_island_rank": return getRank(islandInfo);
-            case "usb_island_leader": return islandInfo.getLeader();
-            case "usb_island_golems_max": return "" + islandInfo.getMaxGolems();
-            case "usb_island_monsters_max": return "" + islandInfo.getMaxMonsters();
-            case "usb_island_animals_max": return "" + islandInfo.getMaxAnimals();
-            case "usb_island_villagers_max": return "" + islandInfo.getMaxVillagers();
-            case "usb_island_partysize_max": return "" + islandInfo.getMaxPartySize();
-            case "usb_island_golems": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.GOLEM);
-            case "usb_island_monsters": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.MONSTER);
-            case "usb_island_animals": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.ANIMAL);
-            case "usb_island_villagers": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.VILLAGER);
-            case "usb_island_partysize": return "" + islandInfo.getPartySize();
-            case "usb_island_biome": return islandInfo.getBiome();
-            case "usb_island_bans": return ""+islandInfo.getBans();
-            case "usb_island_members": return ""+islandInfo.getMembers();
-            case "usb_island_trustees": return ""+islandInfo.getTrustees();
-            case "usb_island_location": return LocationUtil.asString(islandInfo.getIslandLocation());
-            case "usb_island_location_x": return pre("{0,number,#}", islandInfo.getIslandLocation().getBlockX());
-            case "usb_island_location_y": return pre("{0,number,#}", islandInfo.getIslandLocation().getBlockY());
-            case "usb_island_location_z": return pre("{0,number,#}", islandInfo.getIslandLocation().getBlockZ());
-            case "usb_island_schematic": return islandInfo.getSchematicName();
+            case "usb_island_level":
+                return pre("{0,number,##.#}", islandInfo.getLevel());
+            case "usb_island_level_int":
+                return pre("{0,number,#}", islandInfo.getLevel());
+            case "usb_island_rank":
+                return getRank(islandInfo);
+            case "usb_island_leader":
+                return islandInfo.getLeader();
+            case "usb_island_golems_max":
+                return "" + islandInfo.getMaxGolems();
+            case "usb_island_monsters_max":
+                return "" + islandInfo.getMaxMonsters();
+            case "usb_island_animals_max":
+                return "" + islandInfo.getMaxAnimals();
+            case "usb_island_villagers_max":
+                return "" + islandInfo.getMaxVillagers();
+            case "usb_island_partysize_max":
+                return "" + islandInfo.getMaxPartySize();
+            case "usb_island_golems":
+                return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.GOLEM);
+            case "usb_island_monsters":
+                return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.MONSTER);
+            case "usb_island_animals":
+                return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.ANIMAL);
+            case "usb_island_villagers":
+                return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.VILLAGER);
+            case "usb_island_partysize":
+                return "" + islandInfo.getPartySize();
+            case "usb_island_biome":
+                return islandInfo.getBiome();
+            case "usb_island_bans":
+                return "" + islandInfo.getBans();
+            case "usb_island_members":
+                return "" + islandInfo.getMembers();
+            case "usb_island_trustees":
+                return "" + islandInfo.getTrustees();
+            case "usb_island_location":
+                return LocationUtil.asString(islandInfo.getIslandLocation());
+            case "usb_island_location_x":
+                return pre("{0,number,#}", islandInfo.getIslandLocation().getBlockX());
+            case "usb_island_location_y":
+                return pre("{0,number,#}", islandInfo.getIslandLocation().getBlockY());
+            case "usb_island_location_z":
+                return pre("{0,number,#}", islandInfo.getIslandLocation().getBlockZ());
+            case "usb_island_schematic":
+                return islandInfo.getSchematicName();
         }
         throw new IllegalArgumentException("Unsupported placeholder " + placeholder);
     }

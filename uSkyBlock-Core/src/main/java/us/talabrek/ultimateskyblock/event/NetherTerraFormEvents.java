@@ -40,7 +40,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class NetherTerraFormEvents implements Listener {
     private final uSkyBlock plugin;
-    private final Map<Material,List<MaterialUtil.MaterialProbability>> terraFormMap = new HashMap<>();
+    private final Map<Material, List<MaterialUtil.MaterialProbability>> terraFormMap = new HashMap<>();
     private final Map<String, Double> toolWeights = new HashMap<>();
     private static final Random RND = new Random(System.currentTimeMillis());
     private final double maxScan;
@@ -163,7 +163,7 @@ public class NetherTerraFormEvents implements Listener {
                 }
             }
             double n = v.length();
-            v.normalize().multiply(n+1);
+            v.normalize().multiply(n + 1);
         }
         return null;
     }
@@ -192,7 +192,7 @@ public class NetherTerraFormEvents implements Listener {
                 }
             }
             double n = v.length();
-            v.normalize().multiply(n+1);
+            v.normalize().multiply(n + 1);
         }
         return null;
     }
@@ -216,14 +216,14 @@ public class NetherTerraFormEvents implements Listener {
             }
         }
         Collections.shuffle(locs);
-        locs = locs.subList(0, locs.size()/2); // Only try half
+        locs = locs.subList(0, locs.size() / 2); // Only try half
         return locs;
     }
 
     public List<Material> getYield(Material material, double toolWeight) {
         List<Material> copy = new ArrayList<>();
         for (MaterialUtil.MaterialProbability e : terraFormMap.get(material)) {
-            if (RND.nextDouble() < e.getProbability()*toolWeight) {
+            if (RND.nextDouble() < e.getProbability() * toolWeight) {
                 copy.add(e.getMaterial());
             }
         }
@@ -246,6 +246,7 @@ public class NetherTerraFormEvents implements Listener {
 
     /**
      * Comes AFTER the SpawnEvents{@link #onCreatureSpawn(CreatureSpawnEvent)} - so cancelled will have effect
+     *
      * @param e
      */
     @EventHandler(priority = EventPriority.HIGH)
@@ -268,9 +269,9 @@ public class NetherTerraFormEvents implements Listener {
                 double p = RND.nextDouble();
                 if (p <= chanceWither && block.getRelative(BlockFace.UP, 3).getType() == Material.AIR) {
                     entitySpawner.spawnWitherSkeleton(e.getLocation());
-                } else if (p <= chanceWither+chanceBlaze) {
+                } else if (p <= chanceWither + chanceBlaze) {
                     entitySpawner.spawnBlaze(e.getLocation());
-                } else if (p <= chanceWither+chanceBlaze+chanceSkeleton) {
+                } else if (p <= chanceWither + chanceBlaze + chanceSkeleton) {
                     entitySpawner.spawnSkeleton(e.getLocation());
                 } else {
                     e.setCancelled(false); // Spawn PigZombie

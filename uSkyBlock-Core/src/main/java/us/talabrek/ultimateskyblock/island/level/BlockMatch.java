@@ -62,7 +62,7 @@ public class BlockMatch implements Comparable<BlockMatch> {
         String dvString = "";
         if (dataValues.size() > 1) {
             dvString = String.format("/%d-%d", dataValues.stream().min(Byte::compareTo).get(), dataValues.stream().max(Byte::compareTo).get());
-        } else if (!dataValues.isEmpty()){
+        } else if (!dataValues.isEmpty()) {
             dvString = String.format("/%d", dataValues.iterator().next());
         }
         if (dvString.equals("/0-15")) {

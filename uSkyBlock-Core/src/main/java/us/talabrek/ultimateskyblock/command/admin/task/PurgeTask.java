@@ -46,7 +46,7 @@ public class PurgeTask extends BukkitRunnable {
             plugin.getIslandLogic().purge(islandName);
             cnt++;
             long elapsed = System.currentTimeMillis() - tStart;
-            long eta = (elapsed/cnt) * (total-cnt);
+            long eta = (elapsed / cnt) * (total - cnt);
             tracker.progressUpdate(cnt, total, TimeUtil.millisAsString(elapsed), TimeUtil.millisAsString(eta));
         }
         plugin.getOrphanLogic().save();

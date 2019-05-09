@@ -8,11 +8,13 @@ import us.talabrek.ultimateskyblock.handler.multiverseinventories.MultiverseInve
  * Handler for accessing Multiverse-Inventories, if enabled.
  */
 public enum MultiverseInventoriesHandler {;
+
     public static void linkWorlds(World... worlds) {
         if (isMVInv()) {
             MultiverseInventoriesAdaptor.linkWorlds(worlds);
         }
     }
+
     public static boolean isMVInv() {
         return Bukkit.getPluginManager().isPluginEnabled("Multiverse-Inventories");
     }

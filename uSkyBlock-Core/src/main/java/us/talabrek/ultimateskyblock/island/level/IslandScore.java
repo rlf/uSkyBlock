@@ -74,7 +74,7 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
             Collections.sort(top, new BlockScoreComparator());
             isSorted = true;
         }
-        return top.subList(offset, Math.min(offset+num, top.size()));
+        return top.subList(offset, Math.min(offset + num, top.size()));
     }
 
     @Override

@@ -50,7 +50,7 @@ public class AbstractConfigMenu {
     }
 
     protected static int getIndex(int row, int col) {
-        return row*9 + col;
+        return row * 9 + col;
     }
 
     boolean isBlackListed(String file, String currentPath) {

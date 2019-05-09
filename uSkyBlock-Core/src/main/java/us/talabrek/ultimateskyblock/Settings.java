@@ -133,7 +133,7 @@ public class Settings {
         island_allowIslandLock = config.getBoolean("options.island.allowIslandLock");
         island_topTenTimeout = config.getInt("options.island.topTenTimeout", 7); // Every 7 minutes
         island_allowPvP = config.getString("options.island.allowPvP", "deny").equalsIgnoreCase("allow") ||
-            config.getString("options.island.allowPvP", "false").equalsIgnoreCase("true");
+                config.getString("options.island.allowPvP", "false").equalsIgnoreCase("true");
         Locale loc = I18nUtil.getLocale(config.getString("language", null));
         if (loc != null) {
             locale = loc;
@@ -146,7 +146,7 @@ public class Settings {
             changed = true;
         }
         nether_lava_level = config.getInt("nether.lava_level", config.getInt("nether.lava-level", 32));
-        nether_height = config.getInt("nether.height", island_height/2);
+        nether_height = config.getInt("nether.height", island_height / 2);
         return changed;
     }
 

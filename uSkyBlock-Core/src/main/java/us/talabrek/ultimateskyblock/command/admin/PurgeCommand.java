@@ -48,7 +48,7 @@ public class PurgeCommand extends AbstractCommand {
                 return false;
             }
         }
-        final boolean force = args[args.length-1].equalsIgnoreCase("force");
+        final boolean force = args[args.length - 1].equalsIgnoreCase("force");
 
         final int time = Integer.parseInt(days, 10) * 24;
         sender.sendMessage(tr("\u00a7eFinding all islands that have been abandoned for more than {0} days below level {1}", args[0], purgeLevel));

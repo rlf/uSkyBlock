@@ -213,7 +213,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                 section.set("blockLimits ", null);
                 if (!blockLimits.isEmpty()) {
                     ConfigurationSection maxBlocks = section.createSection("blockLimits");
-                    for (Map.Entry<Material,Integer> limit : blockLimits.entrySet()) {
+                    for (Map.Entry<Material, Integer> limit : blockLimits.entrySet()) {
                         maxBlocks.set(limit.getKey().name(), limit.getValue());
                     }
                 }

@@ -65,8 +65,7 @@ public class GriefEvents implements Listener {
             return;
         }
         if (event.getEntity() instanceof Creeper
-            && !isValidTarget(((Creeper)event.getEntity()).getTarget()))
-        {
+                && !isValidTarget(((Creeper) event.getEntity()).getTarget())) {
             event.setCancelled(true);
         } else if (event.getEntity() instanceof TNTPrimed) {
             TNTPrimed tntPrimed = (TNTPrimed) event.getEntity();
@@ -80,7 +79,7 @@ public class GriefEvents implements Listener {
      * Valid targets are players belonging to the island.
      */
     private boolean isValidTarget(Entity target) {
-        return target instanceof Player && plugin.playerIsOnIsland((Player)target);
+        return target instanceof Player && plugin.playerIsOnIsland((Player) target);
     }
 
     @EventHandler
@@ -106,7 +105,7 @@ public class GriefEvents implements Listener {
             return;
         }
         if (event.getDamager() instanceof Player
-                && !plugin.playerIsOnIsland((Player)event.getDamager())) {
+                && !plugin.playerIsOnIsland((Player) event.getDamager())) {
             if (event.getDamager().hasPermission("usb.mod.bypassprotection")) {
                 return;
             }
@@ -141,7 +140,7 @@ public class GriefEvents implements Listener {
                 && !isValidTarget(event.getPlayer())
                 && event.hasBlock()
                 && event.getClickedBlock().getType() == Material.FARMLAND
-                ) {
+        ) {
             event.setCancelled(true);
         }
     }

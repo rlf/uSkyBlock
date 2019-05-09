@@ -18,7 +18,7 @@ public class BlockLevelConfigMapTest {
         collection.add(defaultBuilder.copy().base(Material.AIR).scorePerBlock(0).build());
         collection.add(defaultBuilder.copy().base(Material.STONE).scorePerBlock(12).build());
         collection.add(defaultBuilder.copy().base(Material.OAK_WOOD).scorePerBlock(9)
-                .additionalBlocks(new BlockMatch(Material.OAK_LOG, new byte[] {0,1,2,3,4}))
+                .additionalBlocks(new BlockMatch(Material.OAK_LOG, new byte[]{0, 1, 2, 3, 4}))
                 .build());
         BlockLevelConfigMap map = new BlockLevelConfigMap(collection, defaultBuilder);
 

@@ -27,7 +27,8 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LimitLogic {
-    public enum CreatureType { UNKNOWN, ANIMAL, MONSTER, VILLAGER, GOLEM }
+    public enum CreatureType {UNKNOWN, ANIMAL, MONSTER, VILLAGER, GOLEM}
+
     static {
         marktr("UNKNOWN");
         marktr("ANIMAL");
@@ -96,7 +97,7 @@ public class LimitLogic {
                 || WaterMob.class.isAssignableFrom(entityType.getEntityClass())
                 || Slime.class.isAssignableFrom(entityType.getEntityClass())
                 || Ghast.class.isAssignableFrom(entityType.getEntityClass())
-                ) {
+        ) {
             return CreatureType.MONSTER;
         } else if (Animals.class.isAssignableFrom(entityType.getEntityClass())) {
             return CreatureType.ANIMAL;
@@ -120,10 +121,14 @@ public class LimitLogic {
 
     private int getMax(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo, CreatureType creatureType) {
         switch (creatureType) {
-            case ANIMAL: return islandInfo.getMaxAnimals();
-            case MONSTER: return islandInfo.getMaxMonsters();
-            case VILLAGER: return islandInfo.getMaxVillagers();
-            case GOLEM: return islandInfo.getMaxGolems();
+            case ANIMAL:
+                return islandInfo.getMaxAnimals();
+            case MONSTER:
+                return islandInfo.getMaxMonsters();
+            case VILLAGER:
+                return islandInfo.getMaxVillagers();
+            case GOLEM:
+                return islandInfo.getMaxGolems();
         }
         return Integer.MAX_VALUE;
     }
@@ -138,10 +143,10 @@ public class LimitLogic {
             }
             int cnt = count.containsKey(key) ? count.get(key) : 0;
             int max = creatureMax.get(key);
-            sb.append(tr("\u00a77{0}: \u00a7a{1}\u00a77 (max. {2})", tr(key.name()), cnt >= max ? tr("\u00a7c{0}",cnt) : cnt, max) + "\n");
+            sb.append(tr("\u00a77{0}: \u00a7a{1}\u00a77 (max. {2})", tr(key.name()), cnt >= max ? tr("\u00a7c{0}", cnt) : cnt, max) + "\n");
         }
         Map<Material, Integer> blockLimits = plugin.getBlockLimitLogic().getLimits();
-        for (Map.Entry<Material,Integer> entry : blockLimits.entrySet()) {
+        for (Map.Entry<Material, Integer> entry : blockLimits.entrySet()) {
             int blockCount = plugin.getBlockLimitLogic().getCount(entry.getKey(), islandInfo.getIslandLocation());
             if (blockCount >= 0) {
                 sb.append(tr("\u00a77{0}: \u00a7a{1}\u00a77 (max. {2})",

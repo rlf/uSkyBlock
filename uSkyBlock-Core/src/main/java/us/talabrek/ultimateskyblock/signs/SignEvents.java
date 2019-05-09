@@ -46,7 +46,7 @@ public class SignEvents implements Listener {
                 || !e.getPlayer().hasPermission("usb.island.signs.use")
                 || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())
                 || !(plugin.playerIsOnOwnIsland(e.getPlayer()))
-                ) {
+        ) {
             return;
         }
         if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
@@ -65,7 +65,7 @@ public class SignEvents implements Listener {
                 || !e.getPlayer().hasPermission("usb.island.signs.place")
                 || !(e.getBlock().getType() == Material.WALL_SIGN)
                 || !(e.getBlock().getState() instanceof Sign)
-                ) {
+        ) {
             return;
         }
         Sign sign = (Sign) e.getBlock().getState();
@@ -109,7 +109,7 @@ public class SignEvents implements Listener {
                 || e.getPlayer().getLocation() == null
                 || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
                 || e.getInventory().getType() != InventoryType.CHEST
-                ) {
+        ) {
             return;
         }
         Location loc = e.getInventory().getLocation();
@@ -125,7 +125,7 @@ public class SignEvents implements Listener {
                 || (e.getBlock().getType() != Material.WALL_SIGN && !(e.getBlock().getType() == Material.CHEST || e.getBlock().getType() == Material.TRAPPED_CHEST))
                 || e.getBlock().getLocation() == null
                 || !plugin.isSkyAssociatedWorld(e.getBlock().getLocation().getWorld())
-                ) {
+        ) {
             return;
         }
         if (e.getBlock().getType() == Material.WALL_SIGN) {

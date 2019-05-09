@@ -249,7 +249,7 @@ blocks:
     score: 0.0
   LOG/0-5:
     additionalBlocks:
-    - LOG_2
+      - LOG_2
     diminishingReturns: 100
   LOG_2:
     diminishingReturns: 100

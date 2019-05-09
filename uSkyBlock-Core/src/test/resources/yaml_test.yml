@@ -11,8 +11,8 @@ options:
   # contains config for the party
   partyConfig:
 
-      # Uses different indentation
-      double-value: -3.14
+    # Uses different indentation
+    double-value: -3.14
 
-      # with a comment
-      someString: Not sure how this will go down?
+    # with a comment
+    someString: Not sure how this will go down?

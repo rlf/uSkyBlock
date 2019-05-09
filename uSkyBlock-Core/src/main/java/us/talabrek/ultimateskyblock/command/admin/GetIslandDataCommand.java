@@ -38,7 +38,7 @@ public class GetIslandDataCommand extends AbstractIslandInfoCommand {
     @Override
     protected void doExecute(CommandSender sender, PlayerInfo playerInfo, IslandInfo islandInfo, String... args) {
         if (args.length == 1 && args[0].length() > 1) {
-            String getName = "get" + args[0].substring(0,1).toUpperCase() + args[0].substring(1);
+            String getName = "get" + args[0].substring(0, 1).toUpperCase() + args[0].substring(1);
             try {
                 Object value = IslandInfo.class.getMethod(getName).invoke(islandInfo);
                 sender.sendMessage(tr("\u00a7eCurrent value for {0} is ''{1}''", args[0], value));

@@ -14,9 +14,9 @@ public class EventLogic {
     /**
      * Fires a new async {@link IslandLeaderChangedEvent}.
      *
-     * @param islandInfo {@link IslandInfo} for the island in the scope of this event.
+     * @param islandInfo         {@link IslandInfo} for the island in the scope of this event.
      * @param originalLeaderInfo {@link PlayerInfo} for the original island leader.
-     * @param newLeaderInfo {@link PlayerInfo} for the new island leader.
+     * @param newLeaderInfo      {@link PlayerInfo} for the new island leader.
      */
     public void fireIslandLeaderChangedEvent(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo,
                                              us.talabrek.ultimateskyblock.api.PlayerInfo originalLeaderInfo,
@@ -38,7 +38,7 @@ public class EventLogic {
      * Fires a new async {@link MemberLeftEvent}.
      *
      * @param islandInfo {@link IslandInfo} for the island that the member left.
-     * @param member {@link PlayerInfo} for the left member.
+     * @param member     {@link PlayerInfo} for the left member.
      */
     public void fireMemberLeftEvent(IslandInfo islandInfo, PlayerInfo member) {
         plugin.async(() -> plugin.getServer().getPluginManager().callEvent(new MemberLeftEvent(islandInfo, member)));

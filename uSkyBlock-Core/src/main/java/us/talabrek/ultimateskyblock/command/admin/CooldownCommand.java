@@ -105,8 +105,10 @@ public class CooldownCommand extends CompositeCommand {
 
     private int getCooldown(String cmd) {
         switch (cmd) {
-            case "restart": return Settings.general_cooldownRestart;
-            case "biome": return Settings.general_biomeChange;
+            case "restart":
+                return Settings.general_cooldownRestart;
+            case "biome":
+                return Settings.general_biomeChange;
         }
         return 0;
     }

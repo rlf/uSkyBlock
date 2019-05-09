@@ -55,6 +55,6 @@ public class WorldGuardEvents implements Listener {
     private boolean isBlockedFromEntry(Player player, IslandInfo islandInfo) {
         return islandInfo.isBanned(player) || (islandInfo.isLocked() && !(
                 islandInfo.getMembers().contains(player.getName()) || islandInfo.getTrustees().contains(player.getName())
-                ));
+        ));
     }
 }

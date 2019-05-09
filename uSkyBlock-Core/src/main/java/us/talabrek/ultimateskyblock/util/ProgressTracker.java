@@ -29,7 +29,7 @@ public class ProgressTracker {
         if (now > (lastProgressTime + progressEveryMs) || pct > (lastProgressPct + progressEveryPct)) {
             lastProgressPct = pct;
             lastProgressTime = now;
-            Object[] newArgs = new Object[args.length+3];
+            Object[] newArgs = new Object[args.length + 3];
             newArgs[0] = pct;
             newArgs[1] = progress;
             newArgs[2] = total;

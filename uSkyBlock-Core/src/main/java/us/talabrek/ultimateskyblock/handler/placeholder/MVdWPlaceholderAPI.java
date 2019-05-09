@@ -13,6 +13,7 @@ import java.util.logging.Logger;
  */
 public class MVdWPlaceholderAPI implements PlaceholderAPI {
     private static final Logger log = Logger.getLogger(MVdWPlaceholderAPI.class.getName());
+
     public boolean isAvailable() {
         // Might not be enabled yet...
         return Bukkit.getPluginManager().getPlugin("MVdWPlaceholderAPI") != null;

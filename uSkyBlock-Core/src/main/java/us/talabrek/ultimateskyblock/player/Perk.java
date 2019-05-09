@@ -73,7 +73,9 @@ public class Perk {
         return extraItems;
     }
 
-    public Map<Material,Integer> getBlockLimits() { return blockLimits; }
+    public Map<Material, Integer> getBlockLimits() {
+        return blockLimits;
+    }
 
     public double getRewBonus() {
         return rewBonus;
@@ -108,16 +110,16 @@ public class Perk {
 
     @Override
     public String toString() {
-        return  (maxPartySize > 0 ? "maxPartySize:" + maxPartySize + "\n" : "") +
-                (animals > 0 ? "animals:" + animals +"\n" : "") +
-                (monsters > 0 ? "monsters:" + monsters +"\n" : "") +
+        return (maxPartySize > 0 ? "maxPartySize:" + maxPartySize + "\n" : "") +
+                (animals > 0 ? "animals:" + animals + "\n" : "") +
+                (monsters > 0 ? "monsters:" + monsters + "\n" : "") +
                 (villagers > 0 ? "villagers:" + villagers + "\n" : "") +
                 (golems > 0 ? "golems:" + golems + "\n" : "") +
-                (!extraItems.isEmpty() ? "extraItems:" + ItemStackUtil.asShortString(extraItems) +"\n" : "") +
-                (rewBonus > 0 ? "rewBonus:" + rewBonus +"\n" : "") +
-                (hungerReduction > 0 ? "hungerReduction:" + hungerReduction +"\n" : "") +
-                (!schematics.isEmpty() ? "schematics:" + schematics +"\n" : "") +
-                (!blockLimits.isEmpty() ? "blockLimits:" + blockLimits +"\n" : "")
+                (!extraItems.isEmpty() ? "extraItems:" + ItemStackUtil.asShortString(extraItems) + "\n" : "") +
+                (rewBonus > 0 ? "rewBonus:" + rewBonus + "\n" : "") +
+                (hungerReduction > 0 ? "hungerReduction:" + hungerReduction + "\n" : "") +
+                (!schematics.isEmpty() ? "schematics:" + schematics + "\n" : "") +
+                (!blockLimits.isEmpty() ? "blockLimits:" + blockLimits + "\n" : "")
                 ;
     }
 }

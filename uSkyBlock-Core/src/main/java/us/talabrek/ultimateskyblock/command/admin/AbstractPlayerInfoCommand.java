@@ -16,7 +16,9 @@ public abstract class AbstractPlayerInfoCommand extends AbstractCommand {
     protected AbstractPlayerInfoCommand(String name, String permission, String description) {
         super(name, permission, "player", description);
     }
+
     protected abstract void doExecute(CommandSender sender, PlayerInfo playerInfo);
+
     @Override
     public boolean execute(final CommandSender sender, String alias, final Map<String, Object> data, final String... args) {
         if (args.length > 0) {

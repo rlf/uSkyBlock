@@ -75,7 +75,7 @@ public class PurgeScanTask extends BukkitRunnable {
                 failed++;
             }
             progress++;
-            tracker.progressUpdate(progress, total, failed, TimeUtil.millisAsString(System.currentTimeMillis()-tStart));
+            tracker.progressUpdate(progress, total, failed, TimeUtil.millisAsString(System.currentTimeMillis() - tStart));
         }
     }
 

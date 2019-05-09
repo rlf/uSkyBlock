@@ -8,6 +8,7 @@ import java.util.logging.Logger;
  */
 public enum UUIDUtil {;
     private static final Logger log = Logger.getLogger(UUIDUtil.class.getName());
+
     public static UUID fromString(String id) {
         if (id == null || id.isEmpty()) {
             return null;

@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.handler.actionbarapi.ActionBarAPIAdaptor;
  * Static handler allowing for soft-depend.
  */
 public enum ActionBarHandler {;
+
     public static boolean isEnabled() {
         return isActionBarAPI();
     }

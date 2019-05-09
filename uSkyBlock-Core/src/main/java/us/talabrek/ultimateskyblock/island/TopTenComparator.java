@@ -9,9 +9,10 @@ import java.util.Map;
 public class TopTenComparator implements Comparator<String> {
     private final Map<String, Double> dataMap;
 
-    public TopTenComparator(Map<String,Double> map) {
+    public TopTenComparator(Map<String, Double> map) {
         this.dataMap = map;
     }
+
     @Override
     public int compare(String o1, String o2) {
         int cmp = getValue(o2) - getValue(o1);
@@ -24,7 +25,7 @@ public class TopTenComparator implements Comparator<String> {
     private int getValue(String key) {
         Double d = dataMap.get(key);
         if (d != null) {
-            return (int)(Math.round(d.doubleValue()*10));
+            return (int) (Math.round(d.doubleValue() * 10));
         }
         return 0;
     }

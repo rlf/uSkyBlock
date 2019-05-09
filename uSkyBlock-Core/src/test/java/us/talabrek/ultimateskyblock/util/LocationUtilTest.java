@@ -11,13 +11,13 @@ public class LocationUtilTest {
 
     @Test
     public void testAlignToDistance0x0() throws Exception {
-        Location loc = new Location(null, 0,0,0);
+        Location loc = new Location(null, 0, 0, 0);
         assertThat(LocationUtil.alignToDistance(loc, 1024), is(new Location(null, 0, Settings.island_height, 0)));
     }
 
     @Test
     public void testAlignToDistance1024x1024() throws Exception {
-        Location loc = new Location(null, 1024,0,1024);
+        Location loc = new Location(null, 1024, 0, 1024);
         assertThat(LocationUtil.alignToDistance(loc, 1024), is(new Location(null, 1024, Settings.island_height, 1024)));
 
         loc.setX(511.9);

@@ -128,7 +128,7 @@ public class USBImporterExecutor {
                 }
                 progressTracker.progressUpdate(countSuccess + countFailed + countSkip, files.length,
                         countSuccess, countFailed, countSkip,
-                        TimeUtil.millisAsString(System.currentTimeMillis()-tStart));
+                        TimeUtil.millisAsString(System.currentTimeMillis() - tStart));
             }
         } finally {
             complete(sender, importer);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  */
 public class SchematicTabCompleter extends AbstractTabCompleter {
     private final uSkyBlock plugin;

@@ -27,14 +27,14 @@ public class PatienceTester {
     }
 
     private static String getMessage() {
-        String[] messages = new String[] {
+        String[] messages = new String[]{
                 tr("\u00a79Hold your horses! You have to be patient..."),
                 tr("\u00a79Not really patient, are you?"),
                 tr("\u00a79Be patient, young padawan"),
                 tr("\u00a79Patience you MUST have, young padawan"),
                 tr("\u00a79The two most powerful warriors are patience and time."),
         };
-        return messages[(int)Math.floor(Math.random() * messages.length)];
+        return messages[(int) Math.floor(Math.random() * messages.length)];
     }
 
     public static void startRunning(Player player, String key) {

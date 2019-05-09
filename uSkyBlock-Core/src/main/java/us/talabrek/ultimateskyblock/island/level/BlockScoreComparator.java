@@ -11,7 +11,7 @@ import java.util.Comparator;
 public class BlockScoreComparator implements Comparator<BlockScore> {
     @Override
     public int compare(BlockScore o1, BlockScore o2) {
-        int cmp = (int) Math.round(100*(o2.getScore() - o1.getScore()));
+        int cmp = (int) Math.round(100 * (o2.getScore() - o1.getScore()));
         if (cmp == 0) {
             cmp = o2.getCount() - o1.getCount();
         }

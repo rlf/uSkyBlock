@@ -20,6 +20,6 @@ public class GriefEventsTest {
         Object[] parse = new MessageFormat(I18nUtil.marktr("{0}''s Wither")).parse(name);
         assertThat(parse, CoreMatchers.notNullValue());
         assertThat(parse.length, is(1));
-        assertThat((String)parse[0], is("R4zorax"));
+        assertThat((String) parse[0], is("R4zorax"));
     }
 }

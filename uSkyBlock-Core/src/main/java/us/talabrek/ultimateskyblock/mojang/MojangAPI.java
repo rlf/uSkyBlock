@@ -4,7 +4,7 @@
  *     * Mojang API auto-throttling when receiving HTTP 429 (TOO MANY REQUESTS)
  *     * Incremental consumer strategy (consume each response, instead of blocking for everything).
  * </pre>
- *
+ * <p>
  * Inspired by https://gist.github.com/evilmidget38/26d70114b834f71fb3b4
  */
 package us.talabrek.ultimateskyblock.mojang;
@@ -96,7 +96,7 @@ public class MojangAPI {
                 success++;
             }
             if (callback != null) {
-                callback.progress(success+failed, failed, total, "OfflineMode");
+                callback.progress(success + failed, failed, total, "OfflineMode");
             }
         }
         if (callback != null) {
@@ -164,10 +164,10 @@ public class MojangAPI {
         if (responseCode == TOO_MANY_REQUESTS) {
             lastFailure = now;
             failuresInRow++;
-            long throttle = THROTTLE_FAILURE*failuresInRow;
+            long throttle = THROTTLE_FAILURE * failuresInRow;
             callback.error(tr("Too many requests for Mojangs API ({0} within {1}), sleeping {2}",
                     numRequests,
-                    TimeUtil.millisAsString(now -tStart),
+                    TimeUtil.millisAsString(now - tStart),
                     TimeUtil.millisAsShort(throttle)));
             Thread.sleep(throttle);
         } else {

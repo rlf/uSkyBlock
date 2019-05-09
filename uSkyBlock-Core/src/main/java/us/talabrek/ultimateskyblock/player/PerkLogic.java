@@ -157,7 +157,7 @@ public class PerkLogic {
 
     private void addPartyPermissionPerks(String perm, ConfigurationSection config) {
         int[] values = {5, 6, 7, 8};
-        String[] perms = {"usb.extra.partysize1","usb.extra.partysize2","usb.extra.partysize3","usb.extra.partysize"};
+        String[] perms = {"usb.extra.partysize1", "usb.extra.partysize2", "usb.extra.partysize3", "usb.extra.partysize"};
         for (int i = 0; i < values.length; i++) {
             donorPerks.put(perms[i],
                     new PerkBuilder(donorPerks.get(perms[i]))

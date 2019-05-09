@@ -9,7 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-public enum VaultHandler {;
+public enum VaultHandler {
+    ;
     private static Permission perms;
     private static Economy econ;
 

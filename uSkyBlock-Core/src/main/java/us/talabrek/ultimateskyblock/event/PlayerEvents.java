@@ -197,12 +197,12 @@ public class PlayerEvents implements Listener {
         if ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
                 || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL))
                 || (visitorMonsterProtected &&
-                    (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK
-                    || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
-                    || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION
-                    || event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE
-                    || event.getCause() == EntityDamageEvent.DamageCause.MAGIC
-                    || event.getCause() == EntityDamageEvent.DamageCause.POISON))) {
+                (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK
+                        || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
+                        || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION
+                        || event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE
+                        || event.getCause() == EntityDamageEvent.DamageCause.MAGIC
+                        || event.getCause() == EntityDamageEvent.DamageCause.POISON))) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);
         }
@@ -300,10 +300,9 @@ public class PlayerEvents implements Listener {
             islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
     }
-    
+
     @EventHandler
-    public void onBlockPlaceEvent(BlockPlaceEvent event)
-    {
+    public void onBlockPlaceEvent(BlockPlaceEvent event) {
         final Player player = event.getPlayer();
         if (!blockLimitsEnabled || player == null || !plugin.isSkyWorld(player.getWorld()) || event.isCancelled()) {
             return; // Skip
@@ -338,9 +337,9 @@ public class PlayerEvents implements Listener {
         }
         plugin.getBlockLimitLogic().incBlockCount(islandInfo.getIslandLocation(), type);
     }
-    
+
     @EventHandler
-    public void onHopperDestroy(BlockBreakEvent event){
+    public void onHopperDestroy(BlockBreakEvent event) {
         if (!blockLimitsEnabled || event.getPlayer() == null || !plugin.isSkyWorld(event.getPlayer().getWorld()) || event.isCancelled()) {
             return; // Skip
         }

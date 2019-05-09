@@ -16,7 +16,7 @@ public class AvailableChallengeTabCompleter extends AbstractTabCompleter {
     protected List<String> getTabList(CommandSender commandSender, String term) {
         PlayerInfo pi = null;
         if (commandSender instanceof Player) {
-            pi = uSkyBlock.getInstance().getPlayerInfo((Player)commandSender);
+            pi = uSkyBlock.getInstance().getPlayerInfo((Player) commandSender);
             if (pi != null) {
                 uSkyBlock.getInstance().getChallengeLogic().getAvailableChallengeNames(pi);
             }

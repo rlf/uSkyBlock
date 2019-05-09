@@ -139,7 +139,7 @@ public class OrphanLogic {
         }
 
         public int distanceSquared() {
-            return x*x + z * z;
+            return x * x + z * z;
         }
 
         @Override

@@ -57,9 +57,9 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
             String configName = getConfigName(item);
             int page = getConfigPage(item);
             if (event.isShiftClick()) {
-                if (event.getSlot() == getIndex(1,0) && page > 10) {
+                if (event.getSlot() == getIndex(1, 0) && page > 10) {
                     page -= 10;
-                } else if (event.getSlot() == getIndex(3,0)) {
+                } else if (event.getSlot() == getIndex(3, 0)) {
                     page += 10;
                 }
             }
@@ -166,29 +166,29 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         }
         Inventory menu = Bukkit.createInventory(null, 6 * 9, tr("Config:") + " " + pre("{0} ({1}/{2})", filename, page, maxPages));
         menu.setMaxStackSize(MenuItemFactory.MAX_INT_VALUE);
-        int startOffset = (page-1)*54;
+        int startOffset = (page - 1) * 54;
         // Add section markers on top line
         for (int i = 1; i <= 8; i++) {
-            if (menuList.get(startOffset+i) != null) {
+            if (menuList.get(startOffset + i) != null) {
                 break; // Already an item here... we are done
             }
             int offset = 9;
-            while (menuList.get(startOffset+i) == null) {
+            while (menuList.get(startOffset + i) == null) {
                 // find on "higher (hidden) row"
-                if (menuList.get(startOffset+i-offset) != null) {
-                    menuList.set(startOffset+i, menuList.get(startOffset+i-offset).clone());
+                if (menuList.get(startOffset + i - offset) != null) {
+                    menuList.set(startOffset + i, menuList.get(startOffset + i - offset).clone());
                     break;
                 }
                 offset += 9;
             }
         }
-        for (int i = startOffset; i < (page*54); i++) {
+        for (int i = startOffset; i < (page * 54); i++) {
             if (i >= menuList.size()) {
                 break;
             }
             ItemStack itemStack = menuList.get(i);
             if (itemStack != null) {
-                menu.setItem(i-startOffset, itemStack);
+                menu.setItem(i - startOffset, itemStack);
             }
         }
         menu.setItem(0, builder(new ItemStack(page == 1 ? Material.WRITABLE_BOOK : Material.BOOK, 1))
@@ -198,18 +198,18 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
                 .build());
         int offset = 2;
         if (page > 3) {
-            offset = page-1;
+            offset = page - 1;
         }
-        if (offset > maxPages-3 && maxPages > 5) {
-            offset = maxPages-3;
+        if (offset > maxPages - 3 && maxPages > 5) {
+            offset = maxPages - 3;
         }
-        for (int i = offset; maxPages > offset && i <= Math.min(offset+2, maxPages-1); i++) {
+        for (int i = offset; maxPages > offset && i <= Math.min(offset + 2, maxPages - 1); i++) {
             menu.setItem((1 + i - offset) * 9, builder(new ItemStack(page == i ? Material.WRITABLE_BOOK : Material.BOOK, i))
                     .displayName(filename)
                     .lore(tr("\u00a77Page {0}", i))
                     .build());
         }
-        menu.setItem(getIndex(4,0), builder(new ItemStack(page == maxPages ? Material.WRITABLE_BOOK : Material.BOOK, maxPages))
+        menu.setItem(getIndex(4, 0), builder(new ItemStack(page == maxPages ? Material.WRITABLE_BOOK : Material.BOOK, maxPages))
                 .displayName(filename)
                 .lore(tr("\u00a77Page {0}", maxPages))
                 .lore(tr("\u00a73Last Page"))
@@ -245,6 +245,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         }
         return 1;
     }
+
     private ItemStack getCurrentMenu(InventoryClickEvent event) {
         int index = 0;
         ItemStack currentMenu = event.getInventory().getItem(index);
@@ -320,6 +321,6 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
                 col = colbase;
             }
         }
-        return col != colbase ? row+1 : row;
+        return col != colbase ? row + 1 : row;
     }
 }

@@ -127,7 +127,9 @@
                 <executions>
                     <execution>
                         <phase>prepare-package</phase>
-                        <goals><goal>run</goal></goals>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
                         <configuration>
                             <target>
                                 <zip destfile="${project.build.outputDirectory}/i18n.zip"
@@ -240,7 +242,8 @@
                                     <goal>gettext</goal>
                                 </goals>
                                 <configuration>
-                                    <sourceDirectory>${project.parent.basedir}/bukkit-utils/src/main/java</sourceDirectory>
+                                    <sourceDirectory>${project.parent.basedir}/bukkit-utils/src/main/java
+                                    </sourceDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -398,15 +401,15 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-        <groupId>be.maximvdw</groupId>		
-            <artifactId>MVdWPlaceholderAPI</artifactId>		
-            <version>1.0.1-SNAPSHOT</version>		
-            <exclusions>		
-                <exclusion>		
-                    <artifactId>*</artifactId>		
-                    <groupId>*</groupId>		
-                </exclusion>		
-            </exclusions>		
+            <groupId>be.maximvdw</groupId>
+            <artifactId>MVdWPlaceholderAPI</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>*</artifactId>
+                    <groupId>*</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>me.clip.deluxechat</groupId>

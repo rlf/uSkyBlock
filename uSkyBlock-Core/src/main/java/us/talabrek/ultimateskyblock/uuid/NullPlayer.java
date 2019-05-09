@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public class NullPlayer implements OfflinePlayer {
     public static final NullPlayer INSTANCE = new NullPlayer();
+
     private NullPlayer() {
     }
 

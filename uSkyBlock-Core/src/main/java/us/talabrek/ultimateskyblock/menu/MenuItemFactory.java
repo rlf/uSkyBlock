@@ -28,7 +28,7 @@ public class MenuItemFactory {
 
     public ItemStack createLeafItem(ItemStack item, String value, String path, YmlConfiguration config) {
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("\u00a77\u00a7o" + path.substring(path.lastIndexOf('.')+1));
+        meta.setDisplayName("\u00a77\u00a7o" + path.substring(path.lastIndexOf('.') + 1));
         List<String> lore = new ArrayList<>();
         lore.add(STRING + value);
         String comment = config.getComment(path);
@@ -51,7 +51,7 @@ public class MenuItemFactory {
     public ItemStack createIntegerIcon(int value, boolean readonly) {
         return Math.abs(value) <= MAX_INT_VALUE
                 ? (readonly ? new ItemStack(Material.DETECTOR_RAIL, value) : new ItemStack(Material.RAIL, value))
-                : (readonly ? new ItemStack(Material.IRON_BARS, 1, (short)1) : new ItemStack(Material.ACTIVATOR_RAIL, 1));
+                : (readonly ? new ItemStack(Material.IRON_BARS, 1, (short) 1) : new ItemStack(Material.ACTIVATOR_RAIL, 1));
     }
 
     public ItemStack createBooleanItem(boolean value, String path, YmlConfiguration config, boolean readonly) {

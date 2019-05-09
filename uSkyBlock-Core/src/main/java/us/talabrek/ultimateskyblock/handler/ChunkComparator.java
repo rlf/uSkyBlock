@@ -13,7 +13,7 @@ public class ChunkComparator implements Comparator<BlockVector2> {
 
     @Override
     public int compare(BlockVector2 o1, BlockVector2 o2) {
-        int cmp = (int) Math.round(origin.distanceSq(o1) -  origin.distanceSq(o2));
+        int cmp = (int) Math.round(origin.distanceSq(o1) - origin.distanceSq(o2));
         if (cmp == 0) {
             cmp = o1.getBlockX() - o2.getBlockX();
         }

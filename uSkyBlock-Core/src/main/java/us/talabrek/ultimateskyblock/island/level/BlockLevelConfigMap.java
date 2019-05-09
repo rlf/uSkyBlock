@@ -45,7 +45,7 @@ public class BlockLevelConfigMap {
         List<BlockLevelConfig> match = searchSet.stream()
                 .filter(p -> p.matches(key.getType(), key.getDataValue()))
                 .distinct()
-                .sorted((a,b) -> -a.getKey().compareTo(b.getKey())) // best match = longest string = desc ordering
+                .sorted((a, b) -> -a.getKey().compareTo(b.getKey())) // best match = longest string = desc ordering
                 .collect(Collectors.toList());
         if (!match.isEmpty()) {
             return match.get(0);
@@ -66,7 +66,7 @@ public class BlockLevelConfigMap {
     }
 
     private BlockKey createKey(Material material) {
-        return createKey(material, (byte)0);
+        return createKey(material, (byte) 0);
     }
 
     public BlockLevelConfig getDefault() {

@@ -37,13 +37,13 @@ public class StringEditMenu extends AbstractConfigMenu implements EditMenu {
         super(menuConfig);
         this.parent = parent;
         List<?> characterMap = menuConfig.getList("keyboard.en");
-        ensureCapacity(keyboard, 9*6);
-        ensureCapacity(capslockOverlay, 9*6);
+        ensureCapacity(keyboard, 9 * 6);
+        ensureCapacity(capslockOverlay, 9 * 6);
         int row = 0;
         for (Object o : characterMap) {
             int col = 0;
             if (o instanceof List) {
-                for (String item : (List<String>)o) {
+                for (String item : (List<String>) o) {
                     ItemStack character = createItem(item);
                     if (character != null) {
                         keyboard.set(getIndex(row, col), character);
@@ -65,7 +65,7 @@ public class StringEditMenu extends AbstractConfigMenu implements EditMenu {
         }
         capsOn = createItem(menuConfig.getString("keyboard.capslock.true"));
         capsOff = createItem(menuConfig.getString("keyboard.capslock.false"));
-        keyboard.set(getIndex(0,0), createItem(Material.OAK_DOOR, "\u00a79" + tr("Return"), null));
+        keyboard.set(getIndex(0, 0), createItem(Material.OAK_DOOR, "\u00a79" + tr("Return"), null));
         capsIndex = getIndex(5, 0);
         keyboard.set(capsIndex, capsOff);
         backspaceIndex = getIndex(0, 5);

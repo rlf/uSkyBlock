@@ -141,7 +141,7 @@ public class WolfWorkUSBImporter implements USBImporter {
             if (o instanceof PlayerInfo) {
                 return (PlayerInfo) o;
             }
-        } catch (ClassNotFoundException|IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             // Ignore...
         }
         return null;

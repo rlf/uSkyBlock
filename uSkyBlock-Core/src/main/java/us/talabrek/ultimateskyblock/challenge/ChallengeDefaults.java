@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 /**
+ *
  */
 public class ChallengeDefaults {
     public final int resetInHours;

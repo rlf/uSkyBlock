@@ -115,7 +115,7 @@ public class IslandLogic {
             throw new IllegalStateException("Unable to load island", e);
         }
     }
-    
+
     public IslandInfo getIslandInfo(PlayerInfo playerInfo) {
         if (playerInfo != null && playerInfo.getHasIsland()) {
             return getIslandInfo(playerInfo.locationForParty());
@@ -127,8 +127,8 @@ public class IslandLogic {
         World world = l.getWorld();
         final int px = l.getBlockX();
         final int pz = l.getBlockZ();
-        for (int x = -radius-16; x <= radius+16; x += 16) {
-            for (int z = -radius-16; z <= radius+16; z += 16) {
+        for (int x = -radius - 16; x <= radius + 16; x += 16) {
+            for (int z = -radius - 16; z <= radius + 16; z += 16) {
                 world.loadChunk((px + x) / 16, (pz + z) / 16, true);
             }
         }
@@ -175,7 +175,7 @@ public class IslandLogic {
     private Location getNetherLocation(Location loc) {
         Location netherIsland = loc.clone();
         netherIsland.setWorld(plugin.getSkyBlockNetherWorld());
-        netherIsland.setY(loc.getY()/2);
+        netherIsland.setY(loc.getY() / 2);
         return netherIsland;
     }
 
@@ -194,17 +194,16 @@ public class IslandLogic {
                 final int pz = loc.getBlockZ();
                 final int py = 0;
                 final int range = Math.max(Settings.island_protectionRange, Settings.island_distance) + 1;
-                final int radius = range/2;
+                final int radius = range / 2;
                 // 5 sampling points...
                 if (w.getBlockAt(px, py, pz).getType() == BEDROCK
-                        || w.getBlockAt(px+radius, py, pz+radius).getType() == BEDROCK
-                        || w.getBlockAt(px+radius, py, pz-radius).getType() == BEDROCK
-                        || w.getBlockAt(px-radius, py, pz+radius).getType() == BEDROCK
-                        || w.getBlockAt(px-radius, py, pz-radius).getType() == BEDROCK)
-                {
+                        || w.getBlockAt(px + radius, py, pz + radius).getType() == BEDROCK
+                        || w.getBlockAt(px + radius, py, pz - radius).getType() == BEDROCK
+                        || w.getBlockAt(px - radius, py, pz + radius).getType() == BEDROCK
+                        || w.getBlockAt(px - radius, py, pz - radius).getType() == BEDROCK) {
                     sender.sendMessage(String.format("\u00a7c-----------------------------------\n\u00a7cFlatland detected under your island!\n\u00a7e Clearing it in %s, stay clear.\n\u00a7c-----------------------------------\n", TimeUtil.ticksAsString(delay)));
-                    new WorldEditClearFlatlandTask(plugin, sender, new CuboidRegion(BlockVector3.at(px-radius, 0, pz-radius),
-                            BlockVector3.at(px+radius, 4, pz+radius)),
+                    new WorldEditClearFlatlandTask(plugin, sender, new CuboidRegion(BlockVector3.at(px - radius, 0, pz - radius),
+                            BlockVector3.at(px + radius, 4, pz + radius)),
                             "\u00a7eFlatland was cleared under your island (%s). Take care.").runTaskLater(plugin, delay);
                 }
             }
@@ -219,7 +218,7 @@ public class IslandLogic {
 
     public void displayTopTen(final CommandSender sender, int page) {
         synchronized (ranks) {
-            int maxpage = (( ranks.size()-1) / 10) + 1;
+            int maxpage = ((ranks.size() - 1) / 10) + 1;
             if (page > maxpage) {
                 page = maxpage;
             }
@@ -240,9 +239,9 @@ public class IslandLogic {
             if (playerInfo != null && playerInfo.getHasIsland()) {
                 rank = getRank(playerInfo.locationForParty());
             }
-            int offset = (page-1) * 10;
+            int offset = (page - 1) * 10;
             place += offset;
-            for (final IslandLevel level : ranks.subList(offset, Math.min(ranks.size(), 10*page))) {
+            for (final IslandLevel level : ranks.subList(offset, Math.min(ranks.size(), 10 * page))) {
                 String members = "";
                 if (showMembers && !level.getMembers().isEmpty()) {
                     members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
@@ -260,7 +259,7 @@ public class IslandLogic {
 
     public void showTopTen(final CommandSender sender, final int page) {
         long t = System.currentTimeMillis();
-        if (t > (lastGenerate + (Settings.island_topTenTimeout*60000)) || (sender.hasPermission("usb.admin.topten") || sender.isOp())) {
+        if (t > (lastGenerate + (Settings.island_topTenTimeout * 60000)) || (sender.hasPermission("usb.admin.topten") || sender.isOp())) {
             lastGenerate = t;
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable() {
                 @Override
@@ -280,7 +279,7 @@ public class IslandLogic {
             if (size <= offset) {
                 return Collections.emptyList();
             }
-            return ranks.subList(offset, Math.min(size-offset, length));
+            return ranks.subList(offset, Math.min(size - offset, length));
         }
     }
 
@@ -321,15 +320,15 @@ public class IslandLogic {
         memberList.remove(partyLeader);
         List<String> names = new ArrayList<>();
         if (useDisplayNames) {
-        	partyLeaderName = PlayerUtil.getPlayerDisplayName(partyLeader);
-        	for (String name : memberList) {
-	            String displayName = PlayerUtil.getPlayerDisplayName(name);
-	            if (displayName != null) {
-	                names.add(displayName);
-	            }
-        	}
+            partyLeaderName = PlayerUtil.getPlayerDisplayName(partyLeader);
+            for (String name : memberList) {
+                String displayName = PlayerUtil.getPlayerDisplayName(name);
+                if (displayName != null) {
+                    names.add(displayName);
+                }
+            }
         } else {
-        	names = memberList;
+            names = memberList;
         }
         return new IslandLevel(islandInfo.getName(), partyLeaderName, names, level);
     }
@@ -377,7 +376,7 @@ public class IslandLogic {
             for (int i = 0; i < rankList.size(); i++) {
                 IslandLevel level = rankList.get(i);
                 if (level.getIslandName().equalsIgnoreCase(islandName)) {
-                    return new IslandRank(level, i+1);
+                    return new IslandRank(level, i + 1);
                 }
             }
         }

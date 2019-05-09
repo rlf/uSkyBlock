@@ -25,7 +25,7 @@ public class ToolMenuEvents implements Listener {
     public static final String COMPLETE_CHALLENGE_CMD = "challenges complete ";
     private final uSkyBlock plugin;
     private final ItemStack tool;
-    private final Map<String,String> commandMap = new HashMap<>();
+    private final Map<String, String> commandMap = new HashMap<>();
 
     public ToolMenuEvents(uSkyBlock plugin) {
         this.plugin = plugin;

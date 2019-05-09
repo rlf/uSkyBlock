@@ -97,6 +97,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
 
     /**
      * Used by sub-classes to see how much time they have left.
+     *
      * @return The number of ms the current #execute() has been running.
      */
     protected long millisActive() {
@@ -108,7 +109,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
     }
 
     public boolean stillTime() {
-        double millisPerTick = getTimeUsed()/(iterations != 0 ? iterations : 1);
+        double millisPerTick = getTimeUsed() / (iterations != 0 ? iterations : 1);
         return millisPerTick < millisLeft();
     }
 
@@ -123,12 +124,14 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
 
     /**
      * Executes a potentially heavy task
+     *
      * @return <code>true</code> if done, <code>false</code> otherwise.
      */
     protected abstract boolean execute();
 
     /**
      * Returns the number of ms the task has been active.
+     *
      * @return the number of ms the task has been active.
      */
     public long getTimeElapsed() {
@@ -143,10 +146,11 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
 
     /**
      * Returns the number of ms the task has been actively executing.
+     *
      * @return the number of ms the task has been actively executing.
      */
     public double getTimeUsed() {
-        return tUsed + (tRunning != 0 ? t()-tRunning : 0);
+        return tUsed + (tRunning != 0 ? t() - tRunning : 0);
     }
 
     public void cancel() {
@@ -181,7 +185,7 @@ public abstract class IncrementalRunnable extends BukkitRunnable {
     }
 
     private static double t() {
-        return System.nanoTime()/1000000d;
+        return System.nanoTime() / 1000000d;
     }
 
     protected void setOnCompletion(Runnable onCompletion) {

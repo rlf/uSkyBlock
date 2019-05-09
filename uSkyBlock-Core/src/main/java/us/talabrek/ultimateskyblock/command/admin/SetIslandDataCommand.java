@@ -100,10 +100,9 @@ public class SetIslandDataCommand extends AbstractIslandInfoCommand {
         for (Method m : IslandInfo.class.getDeclaredMethods()) {
             if (methodName.equalsIgnoreCase(m.getName()) ||
                     (methodName.startsWith("get") && (
-                            ("is"+methodName.substring(3)).equalsIgnoreCase(m.getName()) ||
-                            ("has"+methodName.substring(3)).equalsIgnoreCase(m.getName())
-                    )))
-            {
+                            ("is" + methodName.substring(3)).equalsIgnoreCase(m.getName()) ||
+                                    ("has" + methodName.substring(3)).equalsIgnoreCase(m.getName())
+                    ))) {
                 return m;
             }
         }

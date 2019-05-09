@@ -80,7 +80,7 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
             config.set(path, value);
             config.set("dirty", true);
         }
-        if (slot != getIndex(5,0)) {
+        if (slot != getIndex(5, 0)) {
             player.openInventory(createEditMenu(configName, path, page));
         } else {
             player.openInventory(parent.createEditMenu(configName, path, page));

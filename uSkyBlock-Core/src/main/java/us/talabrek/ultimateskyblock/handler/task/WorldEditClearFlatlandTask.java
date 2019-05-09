@@ -27,7 +27,7 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
  * Not as fast as WorldEditRegenTask, but more versatile.
  */
 public class WorldEditClearFlatlandTask extends IncrementalRunnable {
-   private static final BlockState AIR = BlockTypes.AIR.getDefaultState();
+    private static final BlockState AIR = BlockTypes.AIR.getDefaultState();
 
     private final Set<Region> borderRegions;
     private final Set<BlockVector2> innerChunks;
@@ -53,7 +53,7 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
         bukkitWorld = new BukkitWorld(plugin.getWorld());
         minY = Math.min(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
         maxY = Math.max(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
-        maxBlocks = 2*Math.max(region.getLength(), region.getWidth())*16*(maxY-minY);
+        maxBlocks = 2 * Math.max(region.getLength(), region.getWidth()) * 16 * (maxY - minY);
     }
 
     @Override

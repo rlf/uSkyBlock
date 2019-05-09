@@ -49,15 +49,15 @@ options:
     # [item list] The list of items to place in the chest when a player starts a new island. ITEM_ID:HOW_MANY.
     # default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign.
     chestItems:
-    - ICE:2
-    - MELON_SLICE:1
-    - CACTUS:1
-    - LAVA_BUCKET:1
-    - RED_MUSHROOM:1
-    - BROWN_MUSHROOM:1
-    - PUMPKIN_SEEDS:1
-    - SUGAR_CANE:1
-    - SIGN:1
+      - ICE:2
+      - MELON_SLICE:1
+      - CACTUS:1
+      - LAVA_BUCKET:1
+      - RED_MUSHROOM:1
+      - BROWN_MUSHROOM:1
+      - PUMPKIN_SEEDS:1
+      - SUGAR_CANE:1
+      - SIGN:1
     addExtraItems: true
     islandTeleportDelay: 2
     allowPvP: deny
@@ -82,27 +82,27 @@ options:
       spawner: 10
     extraPermissions:
       smallbonus:
-      - COBBLESTONE:16
-      - COOKED_PORKCHOP:5
+        - COBBLESTONE:16
+        - COOKED_PORKCHOP:5
       mediumbonus:
-      - TORCH:16
-      - LAVA_BUCKET:1
+        - TORCH:16
+        - LAVA_BUCKET:1
       largebonus:
-      - DIRT:5
-      - SAND:5
+        - DIRT:5
+        - SAND:5
       giantbonus:
-      - GRASS:1
-      - MYCELIUM:1
+        - GRASS:1
+        - MYCELIUM:1
       extremebonus:
-      - BONE:8
-      - COAL:4
+        - BONE:8
+        - COAL:4
       donorbonus:
-      - BOW:1
-      - ARROW:32
-      - STONE_SWORD:1
+        - BOW:1
+        - ARROW:32
+        - STONE_SWORD:1
       netheraccess:
-      - OBSIDIAN:14
-      - FLINT_AND_STEEL:1
+        - OBSIDIAN:14
+        - FLINT_AND_STEEL:1
   extras:
 
     # [true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
@@ -194,11 +194,11 @@ options:
 
     # Extra commands to execute when players join an island
     join-commands:
-    - op:playsound block.enderchest.open block @p
+      - op:playsound block.enderchest.open block @p
 
     # Extra commands to execute when players leave an island
     leave-commands:
-    - op:playsound block.enderchest.close block @p
+      - op:playsound block.enderchest.close block @p
 
   # This section provide some performance tweaking configs
   advanced:
@@ -310,8 +310,8 @@ island-schemes:
     enabled: false
     index: 3
     extraItems:
-    - OBSIDIAN:14
-    - FLINT_AND_STEEL:1
+      - OBSIDIAN:14
+      - FLINT_AND_STEEL:1
     maxPartySize: 4
     animals: 64
     monsters: 50
@@ -370,24 +370,24 @@ nether:
   # The probability of forming blocks
   terraform:
     NETHERRACK:
-    - '{p=0.30}NETHERRACK'
-    - '{p=0.15}NETHERRACK'
-    - '{p=0.05}NETHER_QUARTZ_ORE'
-    - '{p=0.05}SOUL_SAND'
+      - '{p=0.30}NETHERRACK'
+      - '{p=0.15}NETHERRACK'
+      - '{p=0.05}NETHER_QUARTZ_ORE'
+      - '{p=0.05}SOUL_SAND'
     NETHER_QUARTZ_ORE:
-    - '{p=0.30}NETHER_QUARTZ_ORE'
-    - '{p=0.10}NETHER_QUARTZ_ORE'
+      - '{p=0.30}NETHER_QUARTZ_ORE'
+      - '{p=0.10}NETHER_QUARTZ_ORE'
     SOUL_SAND:
-    - '{p=0.25}SOUL_SAND'
-    - '{p=0.07}SOUL_SAND'
-    - '{p=0.05}GRAVEL'
+      - '{p=0.25}SOUL_SAND'
+      - '{p=0.07}SOUL_SAND'
+      - '{p=0.05}GRAVEL'
     GRAVEL:
-    - '{p=0.15}GRAVEL'
-    - '{p=0.05}GRAVEL'
-    - '{p=0.05}SOUL_SAND'
+      - '{p=0.15}GRAVEL'
+      - '{p=0.05}GRAVEL'
+      - '{p=0.05}SOUL_SAND'
     GLOWSTONE:
-    - '{p=0.80}GLOWSTONE'
-    - '{p=0.15}GLOWSTONE'
+      - '{p=0.80}GLOWSTONE'
+      - '{p=0.15}GLOWSTONE'
 
   # Weights that is applied to the above terraform chances depending on the tool used
   terraform-weight:

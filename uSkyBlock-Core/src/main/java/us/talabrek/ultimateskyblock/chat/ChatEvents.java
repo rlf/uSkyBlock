@@ -26,8 +26,7 @@ public class ChatEvents implements Listener {
                 || !e.getPlayer().isOnline()
                 || e.getType() == null
                 || e.getMessage() == null
-                )
-        {
+        ) {
             return;
         }
         logic.sendMessage(e.getPlayer(), e.getType(), e.getMessage());
@@ -38,7 +37,7 @@ public class ChatEvents implements Listener {
         if (e.isCancelled()
                 || e.getMessage() == null
                 || e.getPlayer() == null
-                ) {
+        ) {
             return;
         }
         IslandChatEvent.Type toggle = logic.getToggle(e.getPlayer());

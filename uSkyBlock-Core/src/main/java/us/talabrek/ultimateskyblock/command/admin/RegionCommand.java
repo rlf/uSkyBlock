@@ -200,17 +200,17 @@ public class RegionCommand extends CompositeCommand {
         List<Location> points = new ArrayList<>();
         int px = chunk.getBlockX() << 4;
         int pz = chunk.getBlockZ() << 4;
-        for (int x = 0; x <= 15; x+=dash) {
-            points.add(new Location(world, px+x+0.5d, y, pz+0.5d));
+        for (int x = 0; x <= 15; x += dash) {
+            points.add(new Location(world, px + x + 0.5d, y, pz + 0.5d));
         }
-        for (int z = 0; z <= 15; z+=dash) {
-            points.add(new Location(world, px+15+0.5d, y, pz+z+0.5d));
+        for (int z = 0; z <= 15; z += dash) {
+            points.add(new Location(world, px + 15 + 0.5d, y, pz + z + 0.5d));
         }
-        for (int x = 15; x >= 0; x-=dash) {
-            points.add(new Location(world, px+x+0.5d, y, pz+15+0.5d));
+        for (int x = 15; x >= 0; x -= dash) {
+            points.add(new Location(world, px + x + 0.5d, y, pz + 15 + 0.5d));
         }
-        for (int z = 15; z >= 0; z-=dash) {
-            points.add(new Location(world, px+0.5d, y, pz+z+0.5d));
+        for (int z = 15; z >= 0; z -= dash) {
+            points.add(new Location(world, px + 0.5d, y, pz + z + 0.5d));
         }
         addAnimation(player, points);
     }
@@ -225,17 +225,17 @@ public class RegionCommand extends CompositeCommand {
     private void showRegion(Player player, int y, BlockVector3 minP, BlockVector3 maxP) {
         World world = player.getWorld();
         List<Location> points = new ArrayList<>();
-        for (int x = minP.getBlockX(); x <= maxP.getBlockX(); x+=dash) {
-            points.add(new Location(world, x+0.5d, y, minP.getBlockZ()+0.5d));
+        for (int x = minP.getBlockX(); x <= maxP.getBlockX(); x += dash) {
+            points.add(new Location(world, x + 0.5d, y, minP.getBlockZ() + 0.5d));
         }
-        for (int z = minP.getBlockZ(); z <= maxP.getBlockZ(); z+=dash) {
-            points.add(new Location(world, maxP.getBlockX()+0.5d, y, z+0.5d));
+        for (int z = minP.getBlockZ(); z <= maxP.getBlockZ(); z += dash) {
+            points.add(new Location(world, maxP.getBlockX() + 0.5d, y, z + 0.5d));
         }
-        for (int x = maxP.getBlockX(); x >= minP.getBlockX(); x-=dash) {
-            points.add(new Location(world, x+0.5d, y, maxP.getBlockZ()+0.5d));
+        for (int x = maxP.getBlockX(); x >= minP.getBlockX(); x -= dash) {
+            points.add(new Location(world, x + 0.5d, y, maxP.getBlockZ() + 0.5d));
         }
-        for (int z = maxP.getBlockZ(); z >= minP.getBlockZ(); z-=dash) {
-            points.add(new Location(world, minP.getBlockX()+0.5d, y, z+0.5d));
+        for (int z = maxP.getBlockZ(); z >= minP.getBlockZ(); z -= dash) {
+            points.add(new Location(world, minP.getBlockX() + 0.5d, y, z + 0.5d));
         }
         addAnimation(player, points);
     }

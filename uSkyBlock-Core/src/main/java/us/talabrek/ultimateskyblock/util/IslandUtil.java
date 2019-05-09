@@ -20,7 +20,7 @@ public enum IslandUtil {;
                 return name != null
                         && name.matches("-?[0-9]+,-?[0-9]+.yml")
                         && !"null.yml".equalsIgnoreCase(name)
-                        && (Settings.general_spawnSize == 0  || !"0,0.yml".equalsIgnoreCase(name));
+                        && (Settings.general_spawnSize == 0 || !"0,0.yml".equalsIgnoreCase(name));
             }
         };
     }

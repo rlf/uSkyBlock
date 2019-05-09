@@ -5,18 +5,18 @@ description: Ultimate SkyBlock v${project.version}-${buildNumber}
 author: R4zorax (and more)
 load: STARTUP
 softdepend:
- # mandatory dependencies
- - Vault
- - WorldEdit
- - WorldGuard
- - Multiverse-Core
- # optional dependencies
- - ActionBarAPI
- # WE/AWE
- - FastAsyncWorldEdit
- - AsyncWorldEdit
- # placeholders
- - MVdWPlaceholderAPI
+  # mandatory dependencies
+  - Vault
+  - WorldEdit
+  - WorldGuard
+  - Multiverse-Core
+  # optional dependencies
+  - ActionBarAPI
+  # WE/AWE
+  - FastAsyncWorldEdit
+  - AsyncWorldEdit
+  # placeholders
+  - MVdWPlaceholderAPI
 api-version: 1.13
 
 commands:

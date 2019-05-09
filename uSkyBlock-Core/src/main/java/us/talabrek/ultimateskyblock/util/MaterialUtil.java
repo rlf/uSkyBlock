@@ -24,6 +24,7 @@ public enum MaterialUtil {
     private static final Collection<Material> GOLD_TOOLS = Arrays.asList(Material.GOLDEN_AXE, Material.GOLDEN_HOE, Material.GOLDEN_PICKAXE, Material.GOLDEN_SHOVEL, Material.GOLDEN_SWORD);
     private static final Collection<Material> DIAMOND_TOOLS = Arrays.asList(Material.DIAMOND_AXE, Material.DIAMOND_HOE, Material.DIAMOND_PICKAXE, Material.DIAMOND_SHOVEL, Material.DIAMOND_SWORD);
     private static final Collection<Material> TOOLS = new ArrayList<>();
+
     static {
         TOOLS.addAll(WOOD_TOOLS);
         TOOLS.addAll(STONE_TOOLS);
@@ -42,7 +43,7 @@ public enum MaterialUtil {
             String typeName = enumName.substring(0, enumName.indexOf('_')).toUpperCase();
             // GOLDEN and WOODEN -> GOLD and WOOD
             if (typeName.endsWith("EN")) {
-                return typeName.substring(0, typeName.length()-2);
+                return typeName.substring(0, typeName.length() - 2);
             }
             return typeName;
         }

@@ -48,7 +48,7 @@ public class PlaceholderHandler {
 
     public static void unregister(uSkyBlock plugin) {
         PlaceholderAPI.PlaceholderReplacer placeholderReplacer = getReplacer(plugin);
-        for (Iterator<PlaceholderAPI> it = apis.iterator(); it.hasNext();) {
+        for (Iterator<PlaceholderAPI> it = apis.iterator(); it.hasNext(); ) {
             it.next().unregisterPlaceholder(plugin, placeholderReplacer);
             it.remove();
         }

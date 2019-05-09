@@ -14,6 +14,7 @@ import java.util.List;
  * Handles various entity operations.
  */
 public enum EntityUtil {;
+
     public static List<Animals> getAnimals(List<? extends Entity> creatures) {
         return getEntity(creatures, Animals.class);
     }

@@ -28,6 +28,7 @@ public class BlockCollection {
 
     /**
      * Returns <code>null</code> if all the items are in the BlockCollection, a String describing the missing items if it's not
+     *
      * @param itemStacks
      * @return
      */

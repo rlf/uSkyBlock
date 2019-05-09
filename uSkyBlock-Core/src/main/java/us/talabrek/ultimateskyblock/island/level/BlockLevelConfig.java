@@ -64,7 +64,7 @@ public class BlockLevelConfig {
             adjustedCount = dReturns(adjustedCount, diminishingReturns);
         }
         double blockScore = adjustedCount * scorePerBlock;
-        return new BlockScoreImpl(baseBlock.asItemStack(), count, blockScore/pointsPerLevel, state);
+        return new BlockScoreImpl(baseBlock.asItemStack(), count, blockScore / pointsPerLevel, state);
     }
 
     private double dReturns(final double val, final double scale) {

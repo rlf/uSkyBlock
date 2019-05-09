@@ -16,6 +16,7 @@ public interface PlayerDB extends Listener {
 
     /**
      * Returns the UUID (if found) for the player we currently thinks has that name
+     *
      * @param name The name (not displayName) of a player.
      * @return
      */
@@ -23,7 +24,8 @@ public interface PlayerDB extends Listener {
 
     /**
      * Returns the UUID (if found) for the player we currently thinks has that name
-     * @param name The name (not displayName) of a player.
+     *
+     * @param name   The name (not displayName) of a player.
      * @param lookup Whether or not to ask Mojang for the UUID.
      * @return
      */
@@ -31,6 +33,7 @@ public interface PlayerDB extends Listener {
 
     /**
      * Returns the current name from the DB.
+     *
      * @param uuid The UUID of the player.
      * @return the current name from the DB.
      */
@@ -38,12 +41,14 @@ public interface PlayerDB extends Listener {
 
     /**
      * Returns the last known DisplayName of the player.
+     *
      * @param uuid The UUID of the player.
      * @return the last known DisplayName of the player.
      */
     String getDisplayName(UUID uuid);
 
-    /** Returns the last known UUID of the player with the given name.
+    /**
+     * Returns the last known UUID of the player with the given name.
      *
      * @param playerName The last known playername.
      * @return Either the displayName (if found) or the player-name.
@@ -51,12 +56,14 @@ public interface PlayerDB extends Listener {
     String getDisplayName(String playerName);
 
     Set<String> getNames(String search);
+
     /**
      * Stores a new name in the DB.
      */
     void updatePlayer(UUID uuid, String name, String displayName);
 
     Player getPlayer(UUID uuid);
+
     Player getPlayer(String name);
 
     OfflinePlayer getOfflinePlayer(UUID uuid);

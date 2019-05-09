@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentMap;
  * Responsible for holding ongoing jobs, and recording status.
  */
 public enum JobManager {;
-    private static final ConcurrentMap<String,Stats> jobStats = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, Stats> jobStats = new ConcurrentHashMap<>();
 
     public static void addJob(IncrementalRunnable runnable) {
         String jobName = runnable.getClass().getSimpleName();
@@ -27,7 +27,7 @@ public enum JobManager {;
         jobStats.get(jobName).complete(runnable);
     }
 
-    public static Map<String,Stats> getStats() {
+    public static Map<String, Stats> getStats() {
         return Collections.unmodifiableMap(jobStats);
     }
 
@@ -78,7 +78,7 @@ public enum JobManager {;
         }
 
         public double getAvgMsElapsedPerJob() {
-            return timeElapsed *1d / (jobs > 0 ? jobs : 1);
+            return timeElapsed * 1d / (jobs > 0 ? jobs : 1);
         }
 
         public int getRunningJobs() {

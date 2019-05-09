@@ -72,6 +72,7 @@ public class ChatLogic {
 
     /**
      * Toggles the chat-type on or off, returns <code>true</code> if it was toggled on.
+     *
      * @param player
      * @param type
      * @return
@@ -89,6 +90,7 @@ public class ChatLogic {
 
     /**
      * Returns the current toggle, or <code>null</code> if none exists.
+     *
      * @param player
      * @return
      */

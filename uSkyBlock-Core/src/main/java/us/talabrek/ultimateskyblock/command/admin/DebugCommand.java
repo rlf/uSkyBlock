@@ -122,7 +122,7 @@ public class DebugCommand extends CompositeCommand {
         @Override
         public String format(LogRecord record) {
             String sourceClassName = record.getSourceClassName();
-            sourceClassName = sourceClassName.substring(sourceClassName.lastIndexOf(".")+1);
+            sourceClassName = sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1);
             try {
                 return String.format("%1$d %2$tY-%2$tm-%2$td %2$tH:%2$tM:%2$tS.%2$tL %3$s %4$s %5$s\n",
                         record.getMillis(), new Date(record.getMillis()), sourceClassName,

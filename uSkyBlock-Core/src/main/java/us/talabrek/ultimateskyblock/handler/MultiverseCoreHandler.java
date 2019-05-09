@@ -16,10 +16,11 @@ import static us.talabrek.ultimateskyblock.util.LocationUtil.centerOnBlock;
  * Wrapper for the MVCore plugin.
  */
 public enum MultiverseCoreHandler {;
+
     public static MultiverseCore getMultiverseCore() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("Multiverse-Core");
         if (plugin instanceof MultiverseCore) {
-            return (MultiverseCore)plugin;
+            return (MultiverseCore) plugin;
         }
         return null;
     }
@@ -61,7 +62,7 @@ public enum MultiverseCoreHandler {;
     public static void importNetherWorld(World skyNetherWorld) {
         MultiverseCore core = getMultiverseCore();
         if (core != null) {
-            Location worldSpawn = new Location(skyNetherWorld, 0.5, Settings.island_height/2.0 + 0.1, 0.5);
+            Location worldSpawn = new Location(skyNetherWorld, 0.5, Settings.island_height / 2.0 + 0.1, 0.5);
             if (!core.getMVWorldManager().isMVWorld(skyNetherWorld)) {
                 core.getMVWorldManager().addWorld(skyNetherWorld.getName(), World.Environment.NETHER, "0", WorldType.NORMAL, false, "uSkyBlock", false);
             }

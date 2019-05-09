@@ -96,7 +96,7 @@ public class MemoryPlayerDB implements PlayerDB {
     @Override
     public String getDisplayName(UUID uuid) {
         OfflinePlayer offlinePlayer = getOfflinePlayer(uuid);
-        return offlinePlayer != null && offlinePlayer.isOnline() && offlinePlayer.getPlayer() !=  null
+        return offlinePlayer != null && offlinePlayer.isOnline() && offlinePlayer.getPlayer() != null
                 ? offlinePlayer.getPlayer().getDisplayName()
                 : null;
     }
@@ -104,7 +104,7 @@ public class MemoryPlayerDB implements PlayerDB {
     @Override
     public String getDisplayName(String playerName) {
         OfflinePlayer offlinePlayer = getOfflinePlayer(playerName, true);
-        return offlinePlayer != null && offlinePlayer.isOnline() && offlinePlayer.getPlayer() !=  null
+        return offlinePlayer != null && offlinePlayer.isOnline() && offlinePlayer.getPlayer() != null
                 ? offlinePlayer.getPlayer().getDisplayName()
                 : null;
     }

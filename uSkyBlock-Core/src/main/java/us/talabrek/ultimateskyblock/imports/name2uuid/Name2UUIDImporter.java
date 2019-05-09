@@ -92,7 +92,7 @@ public class Name2UUIDImporter implements USBImporter {
     public Boolean importFile(File file) {
         if (file.getParentFile().getName().equalsIgnoreCase("players")) {
             return importPlayer(file);
-        } else if (file.getParentFile().getName().equalsIgnoreCase("islands")){
+        } else if (file.getParentFile().getName().equalsIgnoreCase("islands")) {
             return importIsland(file);
         } else if (file.getName().equalsIgnoreCase("uuid2name.yml")) {
             return importPlayerDB();
@@ -123,7 +123,7 @@ public class Name2UUIDImporter implements USBImporter {
                 it.remove();
             }
             if (cnt % 20 == 0) {
-                dbtracker.progressUpdate(cnt, total, TimeUtil.millisAsString(System.currentTimeMillis()-tStart));
+                dbtracker.progressUpdate(cnt, total, TimeUtil.millisAsString(System.currentTimeMillis() - tStart));
             }
         }
         Bukkit.getConsoleSender().sendMessage(tr("\u00a77PlayerDB: Filtered {0} names", cnt));
@@ -157,7 +157,7 @@ public class Name2UUIDImporter implements USBImporter {
             @Override
             public void progress(int progress, int failed, int total, String message) {
                 tracker.progressUpdate(progress, total, failed, message,
-                        100f*failed/(progress > 0 ? progress : 1), TimeUtil.millisAsString(System.currentTimeMillis()-tStart));
+                        100f * failed / (progress > 0 ? progress : 1), TimeUtil.millisAsString(System.currentTimeMillis() - tStart));
             }
 
             @Override
@@ -294,7 +294,7 @@ public class Name2UUIDImporter implements USBImporter {
         File[] files = new File[islandFiles.length + playerFiles.length + 1];
         files[0] = new File(plugin.getDataFolder(), "uuid2name.yml");
         System.arraycopy(playerFiles, 0, files, 1, playerFiles.length);
-        System.arraycopy(islandFiles, 0, files, playerFiles.length+1, islandFiles.length);
+        System.arraycopy(islandFiles, 0, files, playerFiles.length + 1, islandFiles.length);
         return files;
     }
 

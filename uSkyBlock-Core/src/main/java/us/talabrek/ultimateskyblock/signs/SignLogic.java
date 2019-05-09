@@ -206,7 +206,7 @@ public class SignLogic {
         if (chestBlock != null && signBlock != null
                 && isChest(chestBlock)
                 && signBlock.getType() == Material.WALL_SIGN && signBlock.getState() instanceof Sign
-                ) {
+        ) {
             Sign sign = (Sign) signBlock.getState();
             Chest chest = (Chest) chestBlock.getState();
             int missing = -1;

@@ -20,7 +20,7 @@ public abstract class RequireIslandCommand extends RequirePlayerCommand {
     }
 
     protected RequireIslandCommand(uSkyBlock plugin, String name, String perm, String description) {
-        this(plugin, name, perm, null,description);
+        this(plugin, name, perm, null, description);
     }
 
     protected RequireIslandCommand(uSkyBlock plugin, String name, String perm, String param, String description) {

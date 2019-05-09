@@ -11,8 +11,9 @@ import static org.junit.Assert.assertThat;
 public class MaterialUtilTest {
     @Test
     public void testGuava() {
-        Preconditions.checkArgument(true,"description", "something to test against");
+        Preconditions.checkArgument(true, "description", "something to test against");
     }
+
     @Test
     public void testIsTool() {
         assertThat(MaterialUtil.isTool(Material.OAK_WOOD), is(false));

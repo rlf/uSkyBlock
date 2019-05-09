@@ -17,6 +17,7 @@ public class RegisterIslandToPlayerCommand extends AbstractCommand {
     public RegisterIslandToPlayerCommand() {
         super("register", "usb.admin.register", "player", marktr("set a player''s island to your location"));
     }
+
     @Override
     public boolean execute(final CommandSender sender, String alias, Map<String, Object> data, final String... args) {
         if (!(sender instanceof Player)) {

@@ -19,6 +19,7 @@ public interface AWEAdaptor {
     void onDisable(Plugin plugin);
 
     void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk);
+
     void registerCompletion(Player player);
 
     EditSession createEditSession(World world, int maxBlocks);

@@ -39,12 +39,12 @@ public class EntityMatch {
     };
     private static final String[] COLOR_KEYS = {"Color", "color"};
     private final EntityType type;
-    private final Map<String,Object> meta;
+    private final Map<String, Object> meta;
     private final int count;
 
     public EntityMatch(EntityType type, Map<String, Object> meta, int count) {
         this.type = type;
-        this.meta = meta != null ? meta : new HashMap<String,Object>();
+        this.meta = meta != null ? meta : new HashMap<String, Object>();
         this.count = count;
     }
 
@@ -120,7 +120,7 @@ public class EntityMatch {
         String color = getColorCode(meta);
         sb.append(color);
         sb.append(name);
-        Map<String,Object> extra = new HashMap<>(meta);
+        Map<String, Object> extra = new HashMap<>(meta);
         for (String key : COLOR_KEYS) {
             extra.remove(key);
         }
@@ -136,7 +136,7 @@ public class EntityMatch {
             if (meta.containsKey(key)) {
                 try {
                     int colorcode = Integer.parseInt("" + meta.get(key));
-                    return  dataValueToFormattingCode(colorcode);
+                    return dataValueToFormattingCode(colorcode);
                 } catch (NumberFormatException e) {
                     // ignore
                 }

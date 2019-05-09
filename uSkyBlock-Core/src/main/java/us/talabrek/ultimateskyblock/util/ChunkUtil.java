@@ -11,13 +11,14 @@ import java.util.Map;
  * Utility for snapshotting and similar of chunks
  */
 public enum ChunkUtil {;
+
     public static Chunks getSnapshots(Location loc, int radius) {
         if (loc == null) {
             return null;
         }
         int cx = loc.getBlockX() >> 4;
         int cz = loc.getBlockZ() >> 4;
-        Map<String,ChunkSnapshot> snapshots = new HashMap<>();
+        Map<String, ChunkSnapshot> snapshots = new HashMap<>();
         for (int x = cx - radius; x <= cx + radius; ++x) {
             for (int z = cz - radius; z <= cz + radius; ++z) {
                 ChunkSnapshot snapshot = loc.getWorld().getChunkAt(x, z).getChunkSnapshot(false, false, false);
@@ -33,11 +34,11 @@ public enum ChunkUtil {;
         }
         int cx = loc.getBlockX() >> 4;
         int cz = loc.getBlockZ() >> 4;
-        Map<String,ChunkSnapshot> snapshots = new HashMap<>();
-        snapshots.put("" + cx +"," + cz, loc.getWorld().getChunkAt(cx, cz).getChunkSnapshot(false, false, false));
-        snapshots.put("" + (cx-1) +"," + cz, loc.getWorld().getChunkAt(cx-1, cz).getChunkSnapshot(false, false, false));
-        snapshots.put("" + cx +"," + (cz-1), loc.getWorld().getChunkAt(cx, cz-1).getChunkSnapshot(false, false, false));
-        snapshots.put("" + (cx-1) +"," + (cz-1), loc.getWorld().getChunkAt(cx-1, cz-1).getChunkSnapshot(false, false, false));
+        Map<String, ChunkSnapshot> snapshots = new HashMap<>();
+        snapshots.put("" + cx + "," + cz, loc.getWorld().getChunkAt(cx, cz).getChunkSnapshot(false, false, false));
+        snapshots.put("" + (cx - 1) + "," + cz, loc.getWorld().getChunkAt(cx - 1, cz).getChunkSnapshot(false, false, false));
+        snapshots.put("" + cx + "," + (cz - 1), loc.getWorld().getChunkAt(cx, cz - 1).getChunkSnapshot(false, false, false));
+        snapshots.put("" + (cx - 1) + "," + (cz - 1), loc.getWorld().getChunkAt(cx - 1, cz - 1).getChunkSnapshot(false, false, false));
         return new Chunks(snapshots);
     }
 

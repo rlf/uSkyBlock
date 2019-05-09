@@ -79,7 +79,7 @@ public class ProtectAllTask extends BukkitRunnable {
             active = false;
         }
         String message = tr("\u00a7eCompleted protect-all in {0}, {1} new regions were created!", getElapsed(tStart), success);
-        if (sender instanceof Player && ((Player)sender).isOnline()) {
+        if (sender instanceof Player && ((Player) sender).isOnline()) {
             sender.sendMessage(message);
         }
         LogUtil.log(Level.INFO, message);

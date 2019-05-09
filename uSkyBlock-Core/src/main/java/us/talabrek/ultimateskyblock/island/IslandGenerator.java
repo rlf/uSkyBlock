@@ -70,7 +70,7 @@ public class IslandGenerator {
                 log.log(Level.WARNING, "Unable to find schematics in jar", e);
             }
         }
-        netherSchematic =  getSchematicFile(config.getString("nether.schematicName", "uSkyBlockNether"));
+        netherSchematic = getSchematicFile(config.getString("nether.schematicName", "uSkyBlockNether"));
         this.schemFiles = directorySchematics.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {

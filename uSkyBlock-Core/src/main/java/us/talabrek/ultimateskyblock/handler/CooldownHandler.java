@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Responsible for handling various cooldowns on commands.
  */
 public class CooldownHandler {
-    private final Map<UUID, Map<String,Long>> cooldowns = new WeakHashMap<>();
+    private final Map<UUID, Map<String, Long>> cooldowns = new WeakHashMap<>();
     private final uSkyBlock plugin;
 
     public CooldownHandler(uSkyBlock plugin) {
@@ -24,8 +24,9 @@ public class CooldownHandler {
     /**
      * Returns the number of seconds left on the cooldown.
      * <code>0</code> if it's not on cooldown anymore.
+     *
      * @param player The player
-     * @param cmd The command to check
+     * @param cmd    The command to check
      * @return
      */
     public int getCooldown(org.bukkit.entity.Player player, String cmd) {

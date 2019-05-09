@@ -70,7 +70,7 @@ public enum LocationUtil {
                     Double.parseDouble(m.group("z")),
                     m.group("yaw") != null ? Float.parseFloat(m.group("yaw")) : 0,
                     m.group("pitch") != null ? Float.parseFloat(m.group("pitch")) : 0
-                    );
+            );
         }
         return null;
     }
@@ -278,7 +278,7 @@ public enum LocationUtil {
     }
 
     public static String getCardinalDirection(float yaw) {
-        return tr(CARDINAL_DIRECTION[((int) Math.round((((int)yaw + 360) % 360) / 45d)) % CARDINAL_DIRECTION.length]);
+        return tr(CARDINAL_DIRECTION[((int) Math.round((((int) yaw + 360) % 360) / 45d)) % CARDINAL_DIRECTION.length]);
     }
 
     public static class ScanChest extends BukkitRunnable {

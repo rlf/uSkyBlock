@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ *
  */
 public class RecalculateTopTen extends BukkitRunnable {
     private final List<String> locations;

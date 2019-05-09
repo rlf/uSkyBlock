@@ -54,7 +54,7 @@ public class PlayerLogic {
                            }
                        }
                 );
-        long every = TimeUtil.secondsAsMillis(plugin.getConfig().getInt("options.advanced.player.saveEvery", 2*60));
+        long every = TimeUtil.secondsAsMillis(plugin.getConfig().getInt("options.advanced.player.saveEvery", 2 * 60));
         saveTask = plugin.async(new Runnable() {
             @Override
             public void run() {
@@ -99,34 +99,34 @@ public class PlayerLogic {
                 }
             }
             plugin.sync(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (playerInfo.getHasIsland()) {
-                                WorldGuardHandler.protectIsland(onlinePlayer, playerInfo);
-                                plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
-                            }
-                            if (plugin.isSkyAssociatedWorld(onlinePlayer.getWorld()) && !plugin.playerIsOnIsland(onlinePlayer)) {
-                                // Check if banned
-                                String islandName = WorldGuardHandler.getIslandNameAt(onlinePlayer.getLocation());
-                                IslandInfo islandInfo = plugin.getIslandInfo(islandName);
-                                if (islandInfo != null && islandInfo.isBanned(onlinePlayer)) {
-                                    onlinePlayer.sendMessage(new String[]{
-                                            tr("\u00a7eYou have been §cBANNED§e from {0}§e''s island.", islandInfo.getLeader()),
-                                            tr("\u00a7eSending you to spawn.")
-                                    });
-                                    plugin.getTeleportLogic().spawnTeleport(onlinePlayer, true);
-                                } else if (islandInfo != null && islandInfo.isLocked()) {
-                                    if (!onlinePlayer.hasPermission("usb.mod.bypassprotection")) {
+                            @Override
+                            public void run() {
+                                if (playerInfo.getHasIsland()) {
+                                    WorldGuardHandler.protectIsland(onlinePlayer, playerInfo);
+                                    plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
+                                }
+                                if (plugin.isSkyAssociatedWorld(onlinePlayer.getWorld()) && !plugin.playerIsOnIsland(onlinePlayer)) {
+                                    // Check if banned
+                                    String islandName = WorldGuardHandler.getIslandNameAt(onlinePlayer.getLocation());
+                                    IslandInfo islandInfo = plugin.getIslandInfo(islandName);
+                                    if (islandInfo != null && islandInfo.isBanned(onlinePlayer)) {
                                         onlinePlayer.sendMessage(new String[]{
-                                                tr("\u00a7eThe island has been §cLOCKED§e.", islandInfo.getLeader()),
+                                                tr("\u00a7eYou have been §cBANNED§e from {0}§e''s island.", islandInfo.getLeader()),
                                                 tr("\u00a7eSending you to spawn.")
                                         });
                                         plugin.getTeleportLogic().spawnTeleport(onlinePlayer, true);
+                                    } else if (islandInfo != null && islandInfo.isLocked()) {
+                                        if (!onlinePlayer.hasPermission("usb.mod.bypassprotection")) {
+                                            onlinePlayer.sendMessage(new String[]{
+                                                    tr("\u00a7eThe island has been §cLOCKED§e.", islandInfo.getLeader()),
+                                                    tr("\u00a7eSending you to spawn.")
+                                            });
+                                            plugin.getTeleportLogic().spawnTeleport(onlinePlayer, true);
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
             );
         }
         return playerInfo;

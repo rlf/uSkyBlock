@@ -39,14 +39,14 @@ public class WorldEditClear extends IncrementalRunnable {
     private List<Region> createRegions(Set<Region> borderRegions) {
         List<Region> list = new ArrayList<>();
         for (Region region : borderRegions) {
-            if (region.getLength() > region.getWidth())  {
+            if (region.getLength() > region.getWidth()) {
                 // Z-axis
                 BlockVector3 min = region.getMinimumPoint();
                 BlockVector3 max = region.getMaximumPoint();
                 BlockVector3 pt = BlockVector3.at(max.getX(), max.getY(), max.getZ());
                 pt = pt.withZ(min.getBlockZ());
                 while (pt.getBlockZ() < max.getBlockZ()) {
-                    int dz = Math.min(INCREMENT, Math.abs(max.getBlockZ()-pt.getBlockZ()));
+                    int dz = Math.min(INCREMENT, Math.abs(max.getBlockZ() - pt.getBlockZ()));
                     pt = pt.add(0, 0, dz);
                     list.add(new CuboidRegion(min, pt));
                     min = min.withZ(pt.getZ());
@@ -58,7 +58,7 @@ public class WorldEditClear extends IncrementalRunnable {
                 BlockVector3 pt = BlockVector3.at(max.getX(), max.getY(), max.getZ());
                 pt = pt.withX(min.getBlockX());
                 while (pt.getBlockX() < max.getBlockX()) {
-                    int dx = Math.min(INCREMENT, Math.abs(max.getBlockX()-pt.getBlockX()));
+                    int dx = Math.min(INCREMENT, Math.abs(max.getBlockX() - pt.getBlockX()));
                     pt = pt.add(dx, 0, 0);
                     list.add(new CuboidRegion(min, pt));
                     min = min.withX(pt.getX());

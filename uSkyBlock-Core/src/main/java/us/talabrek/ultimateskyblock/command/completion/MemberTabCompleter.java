@@ -28,7 +28,7 @@ public class MemberTabCompleter implements TabCompleter {
             if (playerInfo != null && playerInfo.getHasIsland()) {
                 us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
                 if (islandInfo != null) {
-                    String member = args.length > 0 ? args[args.length-1] : "";
+                    String member = args.length > 0 ? args[args.length - 1] : "";
                     return AbstractTabCompleter.filter(new ArrayList<>(islandInfo.getMembers()), member);
                 }
             }
