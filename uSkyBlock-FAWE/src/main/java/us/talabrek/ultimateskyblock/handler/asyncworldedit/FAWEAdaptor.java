@@ -2,9 +2,9 @@ package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
 import com.boydti.fawe.util.EditSessionBuilder;
 import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Location;
@@ -48,14 +48,13 @@ public class FAWEAdaptor implements AWEAdaptor {
             if (file == null || !file.exists() || !file.canRead()) {
                 LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
             }
-            boolean noAir = false;
-            Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+            BlockVector3 to = BlockVector3.at(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
             EditSession editSession = getEditSession(playerPerk, origin);
             try {
-                ClipboardFormat
+                ClipboardFormats
                         .findByFile(file)
                         .load(file)
-                        .paste(editSession, to, noAir);
+                        .paste(editSession, to, false);
                 editSession.flushQueue();
             } catch (IOException e) {
                 log.log(Level.INFO, "Unable to paste schematic " + file, e);
@@ -64,8 +63,7 @@ public class FAWEAdaptor implements AWEAdaptor {
     }
 
     private synchronized EditSession getEditSession(PlayerPerk playerPerk, Location origin) {
-        EditSession editSession = createEditSession(new BukkitWorld(origin.getWorld()), -1);
-        return editSession;
+        return createEditSession(new BukkitWorld(origin.getWorld()), -1);
     }
 
     public EditSession createEditSession(World bukkitWorld, int maxBlocks) {
