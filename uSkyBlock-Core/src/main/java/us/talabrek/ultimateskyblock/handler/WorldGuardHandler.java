@@ -8,14 +8,12 @@ import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.Flags;
-import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
-import dk.lockfuglsang.minecraft.util.VersionUtil;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -47,7 +45,7 @@ public class WorldGuardHandler {
 
     public static WorldGuardPlatform getWorldGuard() {
         final Plugin plugin = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
-        if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
+        if (!(plugin instanceof WorldGuardPlugin)) {
             return null;
         }
         return WorldGuard.getInstance().getPlatform();
@@ -118,18 +116,18 @@ public class WorldGuardHandler {
         return getWorldGuard().getRegionContainer().get(new BukkitWorld(world));
     }
 
-    private static ProtectedCuboidRegion setRegionFlags(IslandInfo islandConfig) throws InvalidFlagFormat {
+    private static ProtectedCuboidRegion setRegionFlags(IslandInfo islandConfig) {
         String regionName = islandConfig.getName() + "island";
         return setRegionFlags(islandConfig, regionName);
     }
 
-    private static ProtectedCuboidRegion setRegionFlags(IslandInfo islandConfig, String regionName) throws InvalidFlagFormat {
+    private static ProtectedCuboidRegion setRegionFlags(IslandInfo islandConfig, String regionName) {
         Location islandLocation = islandConfig.getIslandLocation();
         BlockVector3 minPoint = getProtectionVectorRight(islandLocation);
         BlockVector3 maxPoint = getProtectionVectorLeft(islandLocation);
         if (regionName != null && regionName.endsWith("nether")) {
             minPoint = minPoint.withY(6);
-            maxPoint = maxPoint.withY(119);
+            maxPoint = maxPoint.withY(120);
         }
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName, minPoint, maxPoint);
         final DefaultDomain owners = new DefaultDomain();
@@ -161,7 +159,6 @@ public class WorldGuardHandler {
         } else {
             region.setFlag(Flags.FAREWELL_MESSAGE, null);
         }
-        setVersionSpecificFlags(region);
         region.setFlag(Flags.PVP, null);
         boolean isLocked = islandConfig.isLocked();
         updateLockStatus(region, isLocked);
@@ -173,23 +170,6 @@ public class WorldGuardHandler {
             region.setFlag(Flags.ENTRY, StateFlag.State.DENY);
         } else {
             region.setFlag(Flags.ENTRY, null);
-        }
-    }
-
-    private static void setVersionSpecificFlags(ProtectedCuboidRegion region) {
-        Plugin worldGuard = uSkyBlock.getInstance().getServer().getPluginManager().getPlugin("WorldGuard");
-        if (worldGuard != null && worldGuard.isEnabled() && worldGuard.getDescription() != null) {
-            VersionUtil.Version wgVersion = VersionUtil.getVersion(worldGuard.getDescription().getVersion());
-            if (wgVersion.isGTE("6.0")) {
-                // Default values sort of bring us there... niiiiice
-            } else {
-                // 5.9 or below
-                region.setFlag(Flags.ENTITY_ITEM_FRAME_DESTROY, StateFlag.State.DENY);
-                region.setFlag(Flags.ENTITY_PAINTING_DESTROY, StateFlag.State.DENY);
-                region.setFlag(Flags.CHEST_ACCESS, StateFlag.State.DENY);
-                region.setFlag(Flags.USE, StateFlag.State.DENY);
-                region.setFlag(Flags.DESTROY_VEHICLE, StateFlag.State.DENY);
-            }
         }
     }
 
