@@ -401,6 +401,13 @@
             <groupId>me.clip.deluxechat</groupId>
             <artifactId>DeluxeChatPlaceholderAPI</artifactId>
         </dependency>
+        <dependency>
+            <groupId>wild.wildstacker</groupId>
+            <artifactId>Wildstacker</artifactId>
+            <version>b14</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../Libraries/WildStackerAPI-b14.jar</systemPath>
+        </dependency>
 
         <!-- TESTING -->
         <dependency>
