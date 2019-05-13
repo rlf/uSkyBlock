@@ -2,12 +2,7 @@ language: java
 jdk:
 - oraclejdk8
 sudo: false
-branches:
-  only:
-  - "/^v2.*$/"
 env:
-  global:
-  - secure: o8SotV4k+VSXkU2nO6skP6ASZ4n/MUfbnytrDv/aM089n7a9+a6Q1zgiy3px149iGHc10LB5DGYE/7SEB0XL1EXQ/XE5mDGhl7VPsZ0M3IcMLDwF3FxOxf/mrexHzkSyXf8vLbkvBYgoU/mWgKYB0hX/xw5DX3w3kU03i3/6Pfg=
   matrix:
   - MC=1.13
 git:
@@ -17,27 +12,7 @@ notifications:
 before_install:
 - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 - git submodule update --init --recursive
-- mvn versions:set -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -DnewVersion=${TRAVIS_TAG:1}
 - cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
 - cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
 install:
 - mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we700,wg700 install
-before_deploy:
-- mv uSkyBlock-Plugin/target/uSkyBlock.jar uSkyBlock-Plugin/target/uSkyBlock-bukkit${MC}.jar
-deploy:
-  provider: releases
-  api-key: "${GITHUB_TOKEN}"
-  file_glob: true
-  file:
-  - uSkyBlock-Plugin/target/uSkyBlock*.jar
-  - uSkyBlock-Plugin/target/uSkyBlock-Plugin/gettext-report.txt
-  - changelog.md
-  - uSkyBlock-API/target/uSkyBlock-API-*.jar
-  skip_cleanup: true
-  on:
-    tags: true
-    all_branches: true
-  prerelease: true
-cache:
-  directories:
-  - "$HOME/.m2"
