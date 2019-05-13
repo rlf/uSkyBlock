@@ -124,10 +124,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private static final String CN = uSkyBlock.class.getName();
     private static final String[][] depends = new String[][]{
             new String[]{"Vault", "1.7.0", "optional"},
-            new String[]{"WorldEdit", "7.0"},
+            new String[]{"WorldEdit", "7.0", "optionalIf", "FastAsyncWorldEdit"},
             new String[]{"WorldGuard", "7.0"},
-            new String[]{"FastAsyncWorldEdit", "3.5", "optional"},
-            new String[]{"AsyncWorldEdit", "2.0", "optional"},
+            new String[]{"FastAsyncWorldEdit", "1.13", "optional"},
             new String[]{"Multiverse-Core", "2.5", "optional"},
             new String[]{"Multiverse-Portals", "2.5", "optional"},
             new String[]{"Multiverse-NetherPortals", "2.5", "optional"},
@@ -268,7 +267,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             missingRequirements = "";
             for (String[] pluginReq : depends) {
                 if (pluginReq.length > 2 && pluginReq[2].equals("optional")) {
-                    continue;
+                    // Do check the version if an optional requirement is present.
+                    if (!pluginManager.isPluginEnabled(pluginReq[0])) {
+                        continue;
+                    }
+                }
+                if (pluginReq.length > 2 && pluginReq[2].equals("optionalIf")) {
+                    if (pluginManager.isPluginEnabled(pluginReq[3])) {
+                        continue;
+                    }
                 }
                 if (pluginManager.isPluginEnabled(pluginReq[0])) {
                     PluginDescriptionFile desc = pluginManager.getPlugin(pluginReq[0]).getDescription();
