@@ -89,6 +89,10 @@
             <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
         <repository>
+            <id>github-uskyblock-api</id>
+            <url>https://raw.githubusercontent.com/uskyblock/uskyblock-repo/master/</url>
+        </repository>
+        <repository>
             <id>rlf-mvn-repo</id>
             <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
