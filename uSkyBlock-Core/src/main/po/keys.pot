@@ -1907,6 +1907,9 @@ msgstr ""
 msgid "§4Top ten list is empty! Only islands above level {0} is considered."
 msgstr ""
 
+msgid "Click to warp to the island!"
+msgstr ""
+
 msgid "§a#%2d §7(%5.2f): §e%s §7%s"
 msgstr ""
 

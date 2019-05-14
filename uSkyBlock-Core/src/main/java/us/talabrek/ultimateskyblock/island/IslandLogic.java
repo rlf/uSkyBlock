@@ -16,6 +16,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+import org.json.simple.JSONObject;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
@@ -247,8 +248,22 @@ public class IslandLogic {
                 if (showMembers && !level.getMembers().isEmpty()) {
                     members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
                 }
-                sender.sendMessage(String.format(tr("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a77%s"), place, level.getScore(),
-                        level.getLeaderName(), members));
+                Player player = (Player)sender;
+                String str = String.format(tr("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a77%s"), place, level.getScore(), level.getLeaderName(), members);
+                String hover = tr("Click to warp to the island!");
+                String cmd = String.format("/is w %s",level.getLeaderName());
+                JSONObject json = new JSONObject();
+                json.put("text",str);
+                JSONObject jhover = new JSONObject();
+                jhover.put("action","show_text");
+                jhover.put("value",hover);
+                JSONObject jclick = new JSONObject();
+                jclick.put("action","run_command");
+                jclick.put("value",cmd);
+                json.put("hoverEvent",jhover);
+                json.put("clickEvent",jclick);
+                uSkyBlock.getInstance().execCommand(player,"console:tellraw " +
+                        player.getName() + " " + json.toString(),false);
                 place++;
             }
             if (rank != null) {
