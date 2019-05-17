@@ -21,7 +21,7 @@ public class WorldRegen extends IncrementalRunnable {
     private final List<BlockVector2> chunks;
 
     public WorldRegen(uSkyBlock plugin, World world, Set<BlockVector2> chunks, Runnable onCompletion) {
-        super(plugin, onCompletion);//, 15, -1, 50);
+        super(plugin, onCompletion);
         this.world = world;
         this.chunks = new ArrayList<>(chunks);
         log.log(Level.FINE, "Planning regen of chunks: " + chunks);
