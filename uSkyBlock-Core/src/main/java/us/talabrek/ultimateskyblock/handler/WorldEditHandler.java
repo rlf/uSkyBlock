@@ -296,7 +296,7 @@ public class WorldEditHandler {
         World world = location.getWorld();
         Region cube = getRegion(world, region);
         for (BlockVector2 chunk : cube.getChunks()) {
-            world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true, false);
+            world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true);
             world.loadChunk(chunk.getBlockX(), chunk.getBlockZ(), false);
         }
     }
