@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import us.talabrek.ultimateskyblock.player.UltimateHolder;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
@@ -50,8 +51,9 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
 
     @Override
     public boolean onClick(InventoryClickEvent event) {
-        if (event.getInventory() == null || event.getInventory().getTitle() == null ||
-                !stripFormatting(event.getInventory().getTitle()).contains(stripFormatting(getTitle()))) {
+        if (event.getInventory() == null || !(event.getInventory().getHolder() instanceof UltimateHolder) ||
+                ((UltimateHolder) event.getInventory().getHolder()).getTitle() == null ||
+                !stripFormatting(((UltimateHolder) event.getInventory().getHolder()).getTitle()).contains(stripFormatting(getTitle()))) {
             return false;
         }
         if (event.getSlotType() != InventoryType.SlotType.CONTAINER) {
