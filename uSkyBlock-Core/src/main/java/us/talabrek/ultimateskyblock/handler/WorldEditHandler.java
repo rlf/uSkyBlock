@@ -248,8 +248,8 @@ public class WorldEditHandler {
         // This stopped performing
         //WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
         WorldEditClear weRegen = new WorldEditClear(plugin, skyWorld, borderRegions, onCompletion);
-        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
-        regen.runTask(plugin);
+        //WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
+        weRegen.runTask(plugin);
     }
 
     public static void clearNetherIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
@@ -278,8 +278,8 @@ public class WorldEditHandler {
             borderRegions = getBorderRegions(cube);
         }
         WorldEditRegen weRegen = new WorldEditRegen(plugin, borderRegions, onCompletion);
-        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
-        regen.runTask(plugin);
+        //WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
+        weRegen.runTask(plugin);
     }
 
     public static Region getRegion(World skyWorld, ProtectedRegion region) {
