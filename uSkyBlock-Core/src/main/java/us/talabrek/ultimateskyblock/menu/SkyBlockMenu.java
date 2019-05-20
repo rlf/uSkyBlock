@@ -18,6 +18,7 @@ import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
+import us.talabrek.ultimateskyblock.player.UltimateHolder;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 
@@ -42,11 +43,17 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
  * The UI menu of uSkyBlock (using the inventory UI).
  */
 public class SkyBlockMenu {
+    public static final Material SIGN_MATERIAL = Material.getMaterial("SIGN") == null
+            ? Material.getMaterial("OAK_SIGN")
+            : Material.getMaterial("SIGN");
+    public static final Material WALL_SIGN_MATERIAL = Material.getMaterial("WALL_SIGN") == null
+            ? Material.getMaterial("OAK_WALL_SIGN")
+            : Material.getMaterial("WALL_SIGN");
     private final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
     private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock plugin;
     private final ChallengeLogic challengeLogic;
-    private ItemStack sign = new ItemStack(Material.SIGN, 1);
+    private ItemStack sign = new ItemStack(SIGN_MATERIAL, 1);
     private ItemStack biome = new ItemStack(Material.JUNGLE_SAPLING, 1);
     private ItemStack lock = new ItemStack(Material.IRON_BARS, 1);
     private ItemStack warpset = new ItemStack(Material.END_PORTAL_FRAME, 1);
@@ -149,7 +156,7 @@ public class SkyBlockMenu {
         List<String> lores = new ArrayList<>();
         String emptyTitle = tr("{0} <{1}>", "", tr("Permissions"));
         String title = tr("{0} <{1}>", pname.substring(0, Math.min(32-emptyTitle.length(), pname.length())), tr("Permissions"));
-        Inventory menu = Bukkit.createInventory(null, 9, title);
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), 9, title);
         final ItemStack pHead = new ItemStack(Material.PLAYER_HEAD, 1);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
         ItemMeta meta2 = sign.getItemMeta();
@@ -205,7 +212,8 @@ public class SkyBlockMenu {
 
     public Inventory displayPartyGUI(final Player player) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79" + tr("Island Group Members"));
+        String title = "\u00a79" + tr("Island Group Members");
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), 18, title);
         IslandInfo islandInfo = plugin.getIslandInfo(player);
         final Set<String> memberList = islandInfo.getMembers();
         final ItemMeta meta2 = sign.getItemMeta();
@@ -252,7 +260,8 @@ public class SkyBlockMenu {
 
     public Inventory displayLogGUI(final Player player) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 9, "\u00a79" + tr("Island Log"));
+        String title = "\u00a79" + tr("Island Log");
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), 9, title);
         ItemMeta meta4 = sign.getItemMeta();
         meta4.setDisplayName("\u00a79\u00a7l" + tr("Island Log"));
         addLore(lores, tr("\u00a7eClick here to return to\n\u00a7ethe main island screen."));
@@ -275,7 +284,8 @@ public class SkyBlockMenu {
 
     public Inventory displayBiomeGUI(final Player player) {
         List<String> lores = new ArrayList<>();
-        Inventory menu = Bukkit.createInventory(null, 27, "\u00a79" + tr("Island Biome"));
+        String title = "\u00a79" + tr("Island Biome");
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), 27, title);
         ItemMeta meta4 = sign.getItemMeta();
         meta4.setDisplayName("\u00a7h" + tr("Island Biome"));
         addLore(lores, tr("\u00a7eClick here to return to\n\u00a7ethe main island screen."));
@@ -457,7 +467,8 @@ public class SkyBlockMenu {
 
     public Inventory displayChallengeGUI(final Player player, int page, String playerName) {
         int total = challengeLogic.getTotalPages();
-        Inventory menu = Bukkit.createInventory(null, CHALLENGE_PAGESIZE+COLS_PER_ROW, "\u00a79" + pre("{0} ({1}/{2})", tr("Challenge Menu"), page, total));
+        String title = "\u00a79" + pre("{0} ({1}/{2})", tr("Challenge Menu"), page, total);
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), CHALLENGE_PAGESIZE+COLS_PER_ROW, title);
         final PlayerInfo pi = playerName == null ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(playerName);
         challengeLogic.populateChallengeRank(menu, pi, page, playerName != null && player.hasPermission("usb.mod.bypassrestriction"));
         int[] pages = new int[9];
@@ -508,7 +519,8 @@ public class SkyBlockMenu {
     private Inventory createInitMenu(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
         int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
-        Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Create Menu"));
+        String title = "\u00a79" + tr("Island Create Menu");
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), menuSize, title);
         List<String> lores = new ArrayList<>();
         ItemStack menuItem = new ItemStack(Material.OAK_SAPLING, 1);
         ItemMeta meta = menuItem.getItemMeta();
@@ -579,7 +591,8 @@ public class SkyBlockMenu {
     }
 
     private Inventory createMainMenu(Player player) {
-        Inventory menu = Bukkit.createInventory(null, 18, "\u00a79" + tr("Island Menu"));
+		String title = "\u00a79" + tr("Island Menu");
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), 18, title);
         List<String> lores = new ArrayList<>();
         ItemStack menuItem = new ItemStack(Material.OAK_DOOR, 1);
         ItemMeta meta4 = menuItem.getItemMeta();
@@ -769,7 +782,9 @@ public class SkyBlockMenu {
         Player p = (Player) event.getWhoClicked();
         ItemMeta meta = currentItem.getItemMeta();
         SkullMeta skull = meta instanceof SkullMeta ? (SkullMeta) meta : null;
-        String inventoryName = stripFormatting(event.getInventory().getName());
+        if (!(event.getInventory().getHolder() instanceof UltimateHolder))
+        	return;
+        String inventoryName = stripFormatting(((UltimateHolder) event.getInventory().getHolder()).getTitle());
         int slotIndex = event.getSlot();
         int menuSize = event.getInventory().getSize();
         if (inventoryName.equalsIgnoreCase(stripFormatting(tr("Island Group Members")))) {
@@ -952,9 +967,10 @@ public class SkyBlockMenu {
     public Inventory createRestartGUI(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
         int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
-        Inventory menu = Bukkit.createInventory(null, menuSize, "\u00a79" + tr("Island Restart Menu"));
+        String title = "\u00a79" + tr("Island Restart Menu");
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title), menuSize, title);
         List<String> lores = new ArrayList<>();
-        ItemStack menuItem = new ItemStack(Material.SIGN, 1);
+        ItemStack menuItem = new ItemStack(SIGN_MATERIAL, 1);
         ItemMeta meta = menuItem.getItemMeta();
         meta.setDisplayName(tr("\u00a7a\u00a7lReturn to the main menu"));
         meta.setLore(lores);
@@ -1078,7 +1094,7 @@ public class SkyBlockMenu {
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        if (slotIndex == 0 && currentItem.getType() == Material.SIGN) {
+        if (slotIndex == 0 && currentItem.getType() == SIGN_MATERIAL) {
             p.closeInventory();
             p.performCommand("island");
             return;
@@ -1139,7 +1155,7 @@ public class SkyBlockMenu {
                 return;
             }
         }
-        if (currentItem.getType() == Material.SIGN) {
+        if (currentItem.getType() == SIGN_MATERIAL) {
             p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         } else {
@@ -1153,7 +1169,7 @@ public class SkyBlockMenu {
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        if (meta == null || currentItem.getType() == Material.SIGN) {
+        if (meta == null || currentItem.getType() == SIGN_MATERIAL) {
             p.closeInventory();
             p.performCommand("island");
         } else if (skull != null && plugin.getIslandInfo(p).isLeader(p)) {

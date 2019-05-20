@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import us.talabrek.ultimateskyblock.player.UltimateHolder;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
@@ -44,7 +45,9 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
 
     @Override
     public boolean onClick(InventoryClickEvent event) {
-        String title = stripFormatting(event.getInventory().getTitle());
+        if (!(event.getInventory().getHolder() instanceof UltimateHolder))
+            return false;
+        String title = stripFormatting(((UltimateHolder) event.getInventory().getHolder()).getTitle());
         final Player player = (Player) event.getWhoClicked();
         if (!title.contains(".yml")) {
             return false;

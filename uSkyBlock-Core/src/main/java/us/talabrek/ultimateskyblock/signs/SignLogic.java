@@ -16,6 +16,7 @@ import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
+import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
@@ -205,7 +206,7 @@ public class SignLogic {
         Block signBlock = signLoc != null ? signLoc.getBlock() : null;
         if (chestBlock != null && signBlock != null
                 && isChest(chestBlock)
-                && signBlock.getType() == Material.WALL_SIGN && signBlock.getState() instanceof Sign
+                && signBlock.getType() == SkyBlockMenu.WALL_SIGN_MATERIAL && signBlock.getState() instanceof Sign
                 ) {
             Sign sign = (Sign) signBlock.getState();
             Chest chest = (Chest) chestBlock.getState();
