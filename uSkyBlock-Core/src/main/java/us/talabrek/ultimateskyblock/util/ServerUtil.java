@@ -33,6 +33,7 @@ public enum ServerUtil {;
     private static OfflinePlayer getOfflinePlayer() {
         if (offlinePlayer == null) {
             try {
+                //noinspection deprecation
                 offlinePlayer = Bukkit.getOfflinePlayer(ONLINE_NAME);
             } catch (Throwable ignored) {
                 // Ignored

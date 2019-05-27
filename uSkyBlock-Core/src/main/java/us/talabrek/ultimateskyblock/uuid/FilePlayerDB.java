@@ -97,11 +97,10 @@ public class FilePlayerDB implements PlayerDB {
         }
         UUID result = null;
         if (lookup) {
+            //noinspection deprecation
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-            if (offlinePlayer != null) {
-                updatePlayer(offlinePlayer.getUniqueId(), offlinePlayer.getName(), offlinePlayer.getName());
-                result = offlinePlayer.getUniqueId();
-            }
+            updatePlayer(offlinePlayer.getUniqueId(), offlinePlayer.getName(), offlinePlayer.getName());
+            result = offlinePlayer.getUniqueId();
         }
         name2uuidCache.put(name, result);
         return result;
@@ -117,7 +116,7 @@ public class FilePlayerDB implements PlayerDB {
         }
         String name = null;
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-        if (offlinePlayer != null) {
+        if (offlinePlayer.getName() != null) {
             updatePlayer(offlinePlayer.getUniqueId(), offlinePlayer.getName(), offlinePlayer.getName());
             name = offlinePlayer.getName();
         }
@@ -194,6 +193,7 @@ public class FilePlayerDB implements PlayerDB {
             if (uuid != null) {
                 return getPlayer(uuid);
             }
+            //noinspection deprecation
             Player player = Bukkit.getPlayer(name);
             if (player != null) {
                 updatePlayer(player.getUniqueId(), player.getName(), player.getDisplayName());

@@ -219,6 +219,7 @@ public class PlayerInfo implements Serializable {
     }
 
     public Player getPlayer() {
+        //noinspection deprecation
         return Bukkit.getPlayerExact(playerName);
     }
 

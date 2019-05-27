@@ -72,6 +72,7 @@ public class AdminIslandCommand extends CompositeCommand {
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 IslandInfo islandInfo = null;
                 if (args.length == 2) {
+                    //noinspection deprecation
                     islandInfo = plugin.getIslandInfo(Bukkit.getPlayer(args[1]));
                 } else if (args.length == 1 && sender instanceof Player) {
                     String islandName = WorldGuardHandler.getIslandNameAt(((Player) sender).getLocation());
