@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -32,8 +32,9 @@ public class ItemDropEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
+    @SuppressWarnings("unused")
     public void onDropEvent(PlayerDropItemEvent event) {
-        if (event.isCancelled() || event.getPlayer() == null) {
+        if (event.isCancelled()) {
             return;
         }
         Player player = event.getPlayer();
@@ -49,6 +50,7 @@ public class ItemDropEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
+    @SuppressWarnings("unused")
     public void onDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
         if (!plugin.isSkyWorld(player.getWorld())) {
@@ -86,12 +88,7 @@ public class ItemDropEvents implements Listener {
         if (meta != null) {
             List<String> lore = meta.getLore();
             if (lore != null && !lore.isEmpty()) {
-                for (Iterator<String> it = lore.iterator(); it.hasNext(); ) {
-                    String line = it.next();
-                    if (line.contains(tr("Owner: {0}", ""))) {
-                        it.remove();
-                    }
-                }
+                lore.removeIf(line -> line.contains(tr("Owner: {0}", "")));
                 meta.setLore(lore);
                 stack.setItemMeta(meta);
                 item.setItemStack(stack);
@@ -100,6 +97,7 @@ public class ItemDropEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
+    @SuppressWarnings("unused")
     public void onPickupInventoryEvent(InventoryPickupItemEvent event) {
         if (!plugin.isSkyWorld(event.getItem().getWorld())) {
             return;
@@ -109,8 +107,12 @@ public class ItemDropEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPickupEvent(PlayerPickupItemEvent event) {
-        Player player = event.getPlayer();
+    @SuppressWarnings("unused")
+    public void onPickupEvent(EntityPickupItemEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+        Player player = (Player) event.getEntity();
         if (event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
             clearDropInfo(event.getItem());
             return;
@@ -124,7 +126,7 @@ public class ItemDropEvents implements Listener {
         plugin.notifyPlayer(player, tr("You cannot pick up other players' loot when you are a visitor!"));
     }
 
-    private boolean wasDroppedBy(Player player, PlayerPickupItemEvent event) {
+    private boolean wasDroppedBy(Player player, EntityPickupItemEvent event) {
         ItemStack itemStack = event.getItem().getItemStack();
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
