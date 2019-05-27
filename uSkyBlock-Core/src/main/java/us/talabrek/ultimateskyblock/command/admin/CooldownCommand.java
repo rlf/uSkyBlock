@@ -29,12 +29,13 @@ public class CooldownCommand extends CompositeCommand {
                 if (args.length < 2) {
                     return false;
                 }
+                //noinspection deprecation
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null || !p.isOnline()) {
                     sender.sendMessage(tr("\u00a7eThe player is not currently online"));
                     return false;
                 }
-                if (args.length > 1 && "restart|biome".contains(args[1])) {
+                if ("restart|biome".contains(args[1])) {
                     if (plugin.getCooldownHandler().clearCooldown(p, args[1])) {
                         sender.sendMessage(tr("Cleared cooldown on {0} for {1}", args[1], p.getDisplayName()));
                     } else {
@@ -53,12 +54,13 @@ public class CooldownCommand extends CompositeCommand {
                 if (args.length < 2) {
                     return false;
                 }
+                //noinspection deprecation
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null || !p.isOnline()) {
                     sender.sendMessage(tr("\u00a7eThe player is not currently online"));
                     return false;
                 }
-                if (args.length > 1 && "restart|biome".contains(args[1])) {
+                if ("restart|biome".contains(args[1])) {
                     int cooldown = getCooldown(args[1]);
                     plugin.getCooldownHandler().resetCooldown(p, args[1], cooldown);
                     sender.sendMessage(tr("\u00a7eReset cooldown on {0} for {1}\u00a7e to {2} seconds", args[1], p.getDisplayName(), cooldown));
@@ -75,6 +77,7 @@ public class CooldownCommand extends CompositeCommand {
                 if (args.length < 1) {
                     return false;
                 }
+                //noinspection deprecation
                 Player p = Bukkit.getPlayer(args[0]);
                 if (p == null || !p.isOnline()) {
                     sender.sendMessage(tr("\u00a7eThe player is not currently online"));

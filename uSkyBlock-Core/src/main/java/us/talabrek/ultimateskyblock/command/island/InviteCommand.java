@@ -40,6 +40,7 @@ public class InviteCommand extends RequireIslandCommand {
             }
         }
         if (args.length == 1) {
+            //noinspection deprecation
             Player otherPlayer = Bukkit.getPlayer(args[0]);
             if (!island.hasPerm(player, "canInviteOthers")) {
                 player.sendMessage(I18nUtil.tr("\u00a74You do not have permission to invite others to this island!"));

@@ -193,6 +193,7 @@ public class FilePlayerDB implements PlayerDB {
             if (uuid != null) {
                 return getPlayer(uuid);
             }
+            //noinspection deprecation
             Player player = Bukkit.getPlayer(name);
             if (player != null) {
                 updatePlayer(player.getUniqueId(), player.getName(), player.getDisplayName());

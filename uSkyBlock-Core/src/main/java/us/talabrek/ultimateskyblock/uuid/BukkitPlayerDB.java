@@ -46,6 +46,7 @@ public class BukkitPlayerDB implements PlayerDB {
 
     @Override
     public String getDisplayName(String playerName) {
+        //noinspection deprecation
         Player player = Bukkit.getPlayer(playerName);
         return player != null ? player.getDisplayName() : null;
     }
@@ -55,7 +56,7 @@ public class BukkitPlayerDB implements PlayerDB {
         Set<String> names = new HashSet<>();
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         for (Player player : onlinePlayers) {
-            if (player != null && player.isOnline() && player.getName() != null) {
+            if (player != null && player.isOnline()) {
                 names.add(player.getName());
             }
         }
@@ -74,6 +75,7 @@ public class BukkitPlayerDB implements PlayerDB {
 
     @Override
     public Player getPlayer(String name) {
+        //noinspection deprecation
         return Bukkit.getPlayer(name);
     }
 
