@@ -1,13 +1,17 @@
 package us.talabrek.ultimateskyblock.island;
 
+import com.google.common.base.Preconditions;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
@@ -644,6 +648,19 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         save();
     }
 
+    public boolean isTrusted(@NotNull OfflinePlayer target) {
+        Validate.notNull(target, "Target cannot be null");
+
+        return isTrusted(target.getUniqueId());
+    }
+
+    public boolean isTrusted(@NotNull UUID target) {
+        Validate.notNull(target, "Target cannot be null");
+
+        List<String> trustees = config.getStringList("trust.list");
+        return trustees.contains(target.toString());
+    }
+
     public void removeMember(PlayerInfo member) {
         member.setHomeLocation(null);
         member.removeFromIsland();
@@ -732,7 +749,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     @Override
     public Location getWarpLocation() {
         if (hasWarp()) {
-            return new Location(uSkyBlock.getInstance().getSkyBlockWorld(),
+            return new Location(uSkyBlock.getSkyBlockWorld(),
                     config.getInt("general.warpLocationX", 0),
                     config.getInt("general.warpLocationY", 0),
                     config.getInt("general.warpLocationZ", 0),

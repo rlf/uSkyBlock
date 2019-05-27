@@ -39,7 +39,7 @@ public class BanCommand extends RequireIslandCommand {
             if (!island.isBanned(name)) {
                 //noinspection deprecation
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                if (offlinePlayer.hasPlayedBefore()) {
+                if (!offlinePlayer.hasPlayedBefore()) {
                     player.sendMessage(tr("\u00a7eUnable to ban unknown player {0}", name));
                     return true;
                 }
@@ -59,7 +59,7 @@ public class BanCommand extends RequireIslandCommand {
             } else {
                 //noinspection deprecation
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                if (offlinePlayer.hasPlayedBefore()) {
+                if (!offlinePlayer.hasPlayedBefore()) {
                     player.sendMessage(tr("\u00a7eUnable to ban unknown player {0}", name));
                     return true;
                 }
