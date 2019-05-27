@@ -85,16 +85,12 @@ public class MojangAPI {
         int success = 0;
         int total = names.size();
         for (String name : names) {
+            //noinspection deprecation
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-            if (offlinePlayer == null) {
-                consumer.unknown(Collections.singletonList(name));
-                failed++;
-            } else {
-                Map<String, UUID> map = new HashMap<>();
-                map.put(offlinePlayer.getName(), offlinePlayer.getUniqueId());
-                consumer.success(map);
-                success++;
-            }
+            Map<String, UUID> map = new HashMap<>();
+            map.put(offlinePlayer.getName(), offlinePlayer.getUniqueId());
+            consumer.success(map);
+            success++;
             if (callback != null) {
                 callback.progress(success+failed, failed, total, "OfflineMode");
             }

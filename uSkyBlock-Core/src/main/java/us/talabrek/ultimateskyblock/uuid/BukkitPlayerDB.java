@@ -19,8 +19,9 @@ public class BukkitPlayerDB implements PlayerDB {
         if (UNKNOWN_PLAYER_NAME.equalsIgnoreCase(name)) {
             return UNKNOWN_PLAYER_UUID;
         }
+        //noinspection deprecation
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-        return offlinePlayer != null ? offlinePlayer.getUniqueId() : null;
+        return offlinePlayer.getUniqueId();
     }
 
     @Override
@@ -34,7 +35,7 @@ public class BukkitPlayerDB implements PlayerDB {
             return UNKNOWN_PLAYER_NAME;
         }
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-        return offlinePlayer != null ? offlinePlayer.getName() : null;
+        return offlinePlayer.getName();
     }
 
     @Override

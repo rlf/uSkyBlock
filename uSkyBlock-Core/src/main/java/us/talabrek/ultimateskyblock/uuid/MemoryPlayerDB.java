@@ -28,12 +28,10 @@ public class MemoryPlayerDB implements PlayerDB {
                 .build(new CacheLoader<String, OfflinePlayer>() {
                     @Override
                     public OfflinePlayer load(String name) throws Exception {
+                        //noinspection deprecation
                         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                        if (offlinePlayer != null) {
-                            uuidCache.put(offlinePlayer.getUniqueId(), offlinePlayer);
-                            return offlinePlayer;
-                        }
-                        return NULL_PLAYER;
+                        uuidCache.put(offlinePlayer.getUniqueId(), offlinePlayer);
+                        return offlinePlayer;
                     }
                 });
         uuidCache = CacheBuilder
@@ -42,7 +40,7 @@ public class MemoryPlayerDB implements PlayerDB {
                     @Override
                     public OfflinePlayer load(UUID uuid) throws Exception {
                         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-                        if (offlinePlayer != null) {
+                        if (offlinePlayer.getName() != null) {
                             nameCache.put(offlinePlayer.getName(), offlinePlayer);
                             return offlinePlayer;
                         }
