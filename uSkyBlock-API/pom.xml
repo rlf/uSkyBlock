@@ -6,7 +6,7 @@
 
     <groupId>com.github.rlf</groupId>
     <artifactId>uSkyBlock-API</artifactId>
-    <version>2.7.5</version>
+    <version>2.7.7</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <travis.buildNumber>dev</travis.buildNumber>
@@ -30,6 +30,14 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
         </repository>
     </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>17.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -77,13 +85,13 @@
         <profile>
             <id>1.14</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
-                    <version>1.14-R0.1-SNAPSHOT</version>
+                    <version>1.14.2-R0.1-SNAPSHOT</version>
                     <optional>true</optional>
                     <scope>compile</scope>
                 </dependency>
@@ -92,7 +100,7 @@
         <profile>
             <id>1.13</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>

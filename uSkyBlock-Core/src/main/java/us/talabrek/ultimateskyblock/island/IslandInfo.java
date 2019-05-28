@@ -1,8 +1,8 @@
 package us.talabrek.ultimateskyblock.island;
 
-import com.google.common.base.Preconditions;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,7 +12,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.api.event.island.IslandTrustPlayerEvent;
+import us.talabrek.ultimateskyblock.api.event.island.IslandUntrustPlayerEvent;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -622,39 +625,66 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         return uuidList;
     }
 
-    public void trust(UUID uuid) {
-        String uuidString = UUIDUtil.asString(uuid);
-        List<String> trustees = config.getStringList("trust.list");
-        if (!trustees.contains(uuidString)) {
-            trustees.add(uuidString);
-            config.set("trust.list", trustees);
-        }
-        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(uuid);
-        if (playerInfo != null) {
-            playerInfo.addTrust(this.name);
-        }
-        save();
+    @Override
+    public boolean trustPlayer(@NotNull OfflinePlayer target) {
+        Validate.notNull(target, "Target cannot be null");
+
+        return trustPlayer(target, null);
     }
 
-    public void untrust(UUID uuid) {
-        String uuidString = UUIDUtil.asString(uuid);
+    @Override
+    public boolean trustPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer) {
+        Validate.notNull(target, "Target cannot be null");
+
+        IslandTrustPlayerEvent event = new IslandTrustPlayerEvent(this, target, initializer);
+        uSkyBlock.getInstance().getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            return false;
+        }
+
         List<String> trustees = config.getStringList("trust.list");
-        trustees.remove(uuidString);
-        config.set("trust.list", trustees);
-        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(uuid);
+        if (!trustees.contains(target.getUniqueId().toString())) {
+            trustees.add(target.getUniqueId().toString());
+            config.set("trust.list", trustees);
+        }
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(target.getUniqueId());
         if (playerInfo != null) {
             playerInfo.removeTrust(this.name);
         }
         save();
+        return true;
     }
 
-    public boolean isTrusted(@NotNull OfflinePlayer target) {
+    @Override
+    public boolean untrustPlayer(@NotNull OfflinePlayer target) {
         Validate.notNull(target, "Target cannot be null");
 
-        return isTrusted(target.getUniqueId());
+        return untrustPlayer(target, null);
     }
 
-    public boolean isTrusted(@NotNull UUID target) {
+    @Override
+    public boolean untrustPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer) {
+        Validate.notNull(target, "Target cannot be null");
+
+        IslandUntrustPlayerEvent event = new IslandUntrustPlayerEvent(this, target, initializer);
+        uSkyBlock.getInstance().getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            return false;
+        }
+
+        List<String> trustees = config.getStringList("trust.list");
+        trustees.remove(target.getUniqueId().toString());
+        config.set("trust.list", trustees);
+        PlayerInfo playerInfo = uSkyBlock.getInstance().getPlayerInfo(target.getUniqueId());
+        if (playerInfo != null) {
+            playerInfo.removeTrust(this.name);
+        }
+        save();
+        return true;
+    }
+
+    @Override
+    public boolean isTrusted(@NotNull OfflinePlayer target) {
         Validate.notNull(target, "Target cannot be null");
 
         List<String> trustees = config.getStringList("trust.list");
