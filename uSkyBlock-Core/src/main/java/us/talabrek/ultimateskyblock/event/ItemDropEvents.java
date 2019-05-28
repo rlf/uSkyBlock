@@ -31,12 +31,9 @@ public class ItemDropEvents implements Listener {
         visitorsCanDrop = plugin.getConfig().getBoolean("options.protection.visitors.item-drops", true);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     @SuppressWarnings("unused")
     public void onDropEvent(PlayerDropItemEvent event) {
-        if (event.isCancelled()) {
-            return;
-        }
         Player player = event.getPlayer();
         if (!plugin.isSkyWorld(player.getWorld())) {
             return;

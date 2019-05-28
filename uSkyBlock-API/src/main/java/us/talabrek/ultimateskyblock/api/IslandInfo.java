@@ -2,11 +2,15 @@ package us.talabrek.ultimateskyblock.api;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Public API for an island.
@@ -92,9 +96,9 @@ public interface IslandInfo {
     String getName();
 
     /**
-     * True iff the player has been banned from this island.
+     * True if the player has been banned from this island.
      * @param player The player to query for
-     * @return True iff the player has been banned from this island.
+     * @return True if the player has been banned from this island.
      */
     boolean isBanned(Player player);
 
@@ -110,6 +114,43 @@ public interface IslandInfo {
      * @deprecated Use #getTrusteeUUIDs instead
      */
     List<String> getTrustees();
+
+    /**
+     * Trusts a player on this island.
+     * @param target The {@link OfflinePlayer} to trust.
+     * @return True if the player was trusted, false otherwise.
+     */
+    boolean trustPlayer(@NotNull OfflinePlayer target);
+
+    /**
+     * Trusts a player on this island.
+     * @param target The {@link OfflinePlayer} to trust.
+     * @param initializer The {@link OfflinePlayer} initializing this request.
+     * @return True if the player was trusted, false otherwise.
+     */
+    boolean trustPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
+
+    /**
+     * Untrusts a player on this island.
+     * @param target The {@link OfflinePlayer} to untrust.
+     * @return True if the player was trusted, false otherwise.
+     */
+    boolean untrustPlayer(@NotNull OfflinePlayer target);
+
+    /**
+     * Untrusts a player on this island.
+     * @param target The {@link OfflinePlayer} to untrust.
+     * @param initializer The {@link OfflinePlayer} initializing this request.
+     * @return True if the player was trusted, false otherwise.
+     */
+    boolean untrustPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
+
+    /**
+     * Checks if the given player is trusted on this island.
+     * @param target The player to query for.
+     * @return True if the player is trusted on this island, false otherwise.
+     */
+    boolean isTrusted(@NotNull OfflinePlayer target);
 
     /**
      * The currently registered level of this island.

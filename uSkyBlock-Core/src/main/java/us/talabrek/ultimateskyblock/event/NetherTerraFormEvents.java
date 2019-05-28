@@ -91,14 +91,14 @@ public class NetherTerraFormEvents implements Listener {
         entitySpawner = new EntitySpawner();
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
-        if (event == null || event.isCancelled() || !terraformEnabled) {
+        if (event == null || !terraformEnabled) {
             return;
         }
         Block block = event.getBlock();
         Player player = event.getPlayer();
-        if (block == null || player == null || !plugin.isSkyNether(block.getWorld()) || !plugin.isSkyNether(player.getWorld())) {
+        if (!plugin.isSkyNether(block.getWorld()) || !plugin.isSkyNether(player.getWorld())) {
             return; // Bail out, not our problem
         }
         if (player.getGameMode() != GameMode.SURVIVAL) {
@@ -112,7 +112,7 @@ public class NetherTerraFormEvents implements Listener {
         }
         // TODO: 10/07/2016 - R4zorax: Handle dual-wielding (would break 1.8 compatibility)
         ItemStack tool = event.getPlayer().getItemInHand();
-        if (tool == null || event.getBlock().getDrops(tool).isEmpty()) {
+        if (event.getBlock().getDrops(tool).isEmpty()) {
             return; // Only terra-form when stuff is mined correctly
         }
         double toolWeight = getToolWeight(tool);
@@ -232,7 +232,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler
     public void onGhastExplode(EntityExplodeEvent event) {
-        if (event == null || event.getEntity() == null || !plugin.isSkyNether(event.getEntity().getWorld())) {
+        if (event == null || !plugin.isSkyNether(event.getEntity().getWorld())) {
             return; // Bail out, not our problem
         }
         // TODO: 23/09/2015 - R4zorax: Perhaps enable this when island has a certain level?
@@ -248,9 +248,9 @@ public class NetherTerraFormEvents implements Listener {
      * Comes AFTER the SpawnEvents{@link #onCreatureSpawn(CreatureSpawnEvent)} - so cancelled will have effect
      * @param e
      */
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onCreatureSpawn(CreatureSpawnEvent e) {
-        if (!spawnEnabled || e == null || e.isCancelled() || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL || e.getEntity() == null) {
+        if (!spawnEnabled || e == null || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL) {
             return;
         }
         if (!plugin.isSkyNether(e.getLocation().getWorld())) {
@@ -285,7 +285,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
-        if (!netherRoof || e == null || e.getPlayer() == null || e.getTo() == null || !plugin.isSkyNether(e.getTo().getWorld())) {
+        if (!netherRoof || e == null || e.getTo() == null || !plugin.isSkyNether(e.getTo().getWorld())) {
             return; // Bail out.
         }
         if (e.getTo().getBlockY() > 127) {
