@@ -239,15 +239,22 @@ public class IslandLogic {
                 if (showMembers && !level.getMembers().isEmpty()) {
                     members = Arrays.toString(level.getMembers().toArray(new String[level.getMembers().size()]));
                 }
-                Player player = (Player)sender;
-                String warpString = getJsonWarpString(
-                        String.format(tr("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a77%s"),
-                                place, level.getScore(), level.getLeaderName(), members),
-                        tr("Click to warp to the island!"),
-                        String.format("/is w %s", level.getLeaderName())
-                );
-                uSkyBlock.getInstance().execCommand(player,"console:tellraw " +
-                        player.getName() + " " + warpString, false);
+                String message = String.format(tr("\u00a7a#%2d \u00a77(%5.2f): \u00a7e%s \u00a77%s"),
+                        place, level.getScore(), level.getLeaderName(), members);
+                if (sender instanceof Player) {
+                    Player target = (Player) sender;
+                    String warpString = getJsonWarpString(
+                            message,
+                            tr("Click to warp to the island!"),
+                            String.format("/is w %s", level.getLeaderName())
+                    );
+                    uSkyBlock.getInstance().execCommand(target, "console:tellraw " +
+                            target.getName() + " " + warpString, false);
+                } else {
+                    sender.sendMessage(message);
+                }
+
+
                 place++;
             }
             if (rank != null) {
