@@ -87,9 +87,9 @@ public interface IslandInfo {
     int getPartySize();
 
     /**
-     * True iff the player is the leader of this island.
+     * True if the player is the leader of this island.
      * @param player The player to query for
-     * @return True iff the player is the leader of this island.
+     * @return True if the player is the leader of this island.
      */
     boolean isLeader(Player player);
 
@@ -119,6 +119,7 @@ public interface IslandInfo {
      * Trusts a player on this island.
      * @param target The {@link OfflinePlayer} to trust.
      * @return True if the player was trusted, false otherwise.
+     * @since 2.7.7
      */
     boolean trustPlayer(@NotNull OfflinePlayer target);
 
@@ -127,6 +128,7 @@ public interface IslandInfo {
      * @param target The {@link OfflinePlayer} to trust.
      * @param initializer The {@link OfflinePlayer} initializing this request.
      * @return True if the player was trusted, false otherwise.
+     * @since 2.7.7
      */
     boolean trustPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
 
@@ -134,6 +136,7 @@ public interface IslandInfo {
      * Untrusts a player on this island.
      * @param target The {@link OfflinePlayer} to untrust.
      * @return True if the player was trusted, false otherwise.
+     * @since 2.7.7
      */
     boolean untrustPlayer(@NotNull OfflinePlayer target);
 
@@ -142,6 +145,7 @@ public interface IslandInfo {
      * @param target The {@link OfflinePlayer} to untrust.
      * @param initializer The {@link OfflinePlayer} initializing this request.
      * @return True if the player was trusted, false otherwise.
+     * @since 2.7.7
      */
     boolean untrustPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
 
@@ -149,6 +153,7 @@ public interface IslandInfo {
      * Checks if the given player is trusted on this island.
      * @param target The player to query for.
      * @return True if the player is trusted on this island, false otherwise.
+     * @since 2.7.7
      */
     boolean isTrusted(@NotNull OfflinePlayer target);
 
