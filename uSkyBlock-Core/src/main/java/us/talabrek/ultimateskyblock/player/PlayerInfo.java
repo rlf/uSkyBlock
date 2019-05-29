@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.player;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
-import org.bukkit.Bukkit;
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -10,6 +10,8 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -392,12 +394,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
 
     public void onTeleport(final Player player) {
         if (isClearInventoryOnNextEntry()) {
-            uSkyBlock.getInstance().sync(new Runnable() {
-                @Override
-                public void run() {
-                    uSkyBlock.getInstance().clearPlayerInventory(player);
-                }
-            }, 50);
+            uSkyBlock.getInstance().sync(() -> uSkyBlock.getInstance().clearPlayerInventory(player), 50);
         }
         List<String> pending = playerData.getStringList("pending-commands");
         if (!pending.isEmpty()) {
@@ -405,9 +402,16 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
             playerData.set("pending-commands", null);
             save();
         }
+        List<String> pendingPermissions = playerData.getStringList("pending-permissions");
+        if (!pendingPermissions.isEmpty()) {
+            if (addPermissions(pendingPermissions)) {
+                playerData.set("pending-permissions", null);
+            }
+            save();
+        }
     }
 
-    public boolean execCommands(List<String> commands) {
+    public boolean execCommands(@Nullable List<String> commands) {
         if (commands == null || commands.isEmpty()) {
             return true;
         }
@@ -424,30 +428,41 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         }
     }
 
-    public void addPermissions(List<String> perms) {
-        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-        if (offlinePlayer == null) {
-            return;
+    public boolean addPermissions(@Nullable List<String> perms) {
+        if (perms == null || perms.isEmpty()) {
+            return true;
         }
-        List<String> permList = playerData.getStringList("player.perms");
-        for (String perm : perms) {
-            if (!VaultHandler.hasPermission(offlinePlayer, perm)) {
-                permList.add(perm);
-                VaultHandler.addPermission(offlinePlayer, perm);
+        Player target = getPlayer();
+        if (target != null && target.isOnline()) {
+            List<String> permList = playerData.getStringList("player.perms");
+            for (String perm : perms) {
+                if (!VaultHandler.hasPermission(target, perm)) {
+                    permList.add(perm);
+                    VaultHandler.addPermission(target, perm);
+                }
             }
+            playerData.set("player.perms", permList);
+            save();
+            return true;
+        } else {
+            List<String> pending = playerData.getStringList("pending-permissions");
+            pending.addAll(perms);
+            playerData.set("pending-permissions", pending);
+            save();
+            return false;
         }
-        playerData.set("player.perms", permList);
-        save();
     }
 
-    public void clearPerms(Player player) {
-        // Also clear perms
+    public void clearPerms(@NotNull Player target) {
+        Validate.notNull(target, "Target cannot be null!");
+
         final List<String> perms = playerData.getStringList("player.perms");
-        if (perms != null && !perms.isEmpty()) {
+        if (!perms.isEmpty()) {
             for (String perm : perms) {
-                VaultHandler.removePermission(player, perm);
+                VaultHandler.removePermission(target, perm);
             }
             playerData.set("player.perms", null);
+            playerData.set("pending-permissions", null);
             save();
         }
     }
