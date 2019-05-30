@@ -2,6 +2,9 @@ language: java
 jdk:
 - oraclejdk8
 sudo: false
+cache:
+  directories:
+    - "$HOME/.m2"
 env:
   matrix:
   - MC=1.13
@@ -15,4 +18,20 @@ before_install:
 - cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
 - cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
 install:
-- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we700,wg700 install
+- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we700,wg700 clean deploy
+before_deploy:
+  - echo '|1|DBFhltHRAVmrfmMZPLbN7FwnS5E=|79CP65+tOIeVNeNNC2R680mpV9o= ecdsa-sha2-nistp256
+    AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK/krqsEUrVoDrYIc7I7nsiSCF0M7Xxr379IqZ2pLUPlxF2Or/MkTTokXzRsyspJazL1W1UrBDmKXHfO6+tyMMw='
+    >> $HOME/.ssh/known_hosts
+  - openssl aes-256-cbc -K $encrypted_77431b0955a8_key -iv $encrypted_77431b0955a8_iv
+    -in deploy_rsa.enc -out deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 deploy_rsa
+  - ssh-add deploy_rsa
+  - chmod +x scripts/deploy.sh
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: bash scripts/deploy.sh
+  on:
+    branch: master

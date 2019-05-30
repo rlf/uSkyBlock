@@ -13,9 +13,11 @@
 
     <properties>
         <github.global.server>github</github.global.server>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
+
     <build>
-        <finalName>uSkyBlock</finalName>
+        <finalName>uSkyBlock-${pom.version}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -43,6 +45,7 @@
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>com.github.rlf</groupId>
