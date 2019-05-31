@@ -37,7 +37,7 @@ public class TrustCommand extends RequireIslandCommand {
             }
             //noinspection deprecation
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-            if (!offlinePlayer.hasPlayedBefore()) {
+            if (!offlinePlayer.hasPlayedBefore() && !offlinePlayer.isOnline()) {
                 player.sendMessage(tr("\u00a74Unknown player {0}", name));
                 return true;
             }
