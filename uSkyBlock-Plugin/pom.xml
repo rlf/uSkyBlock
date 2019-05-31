@@ -5,7 +5,7 @@
     <parent>
         <artifactId>uSkyBlock</artifactId>
         <groupId>uSkyBlock</groupId>
-        <version>2.7.9-SNAPSHOT</version>
+        <version>2.7.10-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
@@ -13,7 +13,7 @@
 
     <properties>
         <github.global.server>github</github.global.server>
-        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
 
     <build>
@@ -40,7 +40,7 @@
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <classesDirectory>${project.build.directory}/uSkyBlock-Plugin</classesDirectory>
+                    <classesDirectory>${project.build.directory}/uSkyBlock-${pom.version}-Plugin</classesDirectory>
                 </configuration>
             </plugin>
         </plugins>
