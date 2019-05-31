@@ -152,7 +152,8 @@ public interface IslandInfo {
     boolean unbanPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
 
     /**
-     * Checks if the given player is trusted on this island.
+     * Checks if the given player is banned on this island.
+     *
      * @param target The {@link OfflinePlayer} to query for.
      * @return True if the player is banned on this island, false otherwise.
      * @since 2.7.8

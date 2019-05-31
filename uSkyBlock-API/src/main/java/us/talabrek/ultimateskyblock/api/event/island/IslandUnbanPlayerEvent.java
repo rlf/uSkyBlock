@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.api.IslandInfo;
 
 /**
- * Thrown when a player is banned from an island.
+ * Thrown when a player is unbanned from an island.
  * @implNote Until more fundamental changes to uSkyBlock are made, the user gets *NO* feedback that the unban event is
  * cancelled from us! The cancelling plugin should send a message to the initializer if feedback is expected.
  * @since 2.7.8
@@ -36,8 +36,8 @@ public class IslandUnbanPlayerEvent extends CancellableIslandEvent {
     }
 
     /**
-     * Gets the {@link OfflinePlayer} initializing the ban event, if available.
-     * @return The {@link OfflinePlayer} initializing the ban event, or null if the initializer is unknown.
+     * Gets the {@link OfflinePlayer} initializing the unban event, if available.
+     * @return The {@link OfflinePlayer} initializing the unban event, or null if the initializer is unknown.
      */
     @Nullable
     public OfflinePlayer getInitializer() {
