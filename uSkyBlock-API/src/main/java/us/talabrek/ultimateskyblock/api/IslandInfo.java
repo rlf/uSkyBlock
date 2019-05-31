@@ -99,6 +99,7 @@ public interface IslandInfo {
      * True if the player has been banned from this island.
      * @param player The player to query for
      * @return True if the player has been banned from this island.
+     * @deprecated Use {@link IslandInfo#isBanned(OfflinePlayer)}
      */
     boolean isBanned(Player player);
 
@@ -109,6 +110,57 @@ public interface IslandInfo {
     List<String> getBans();
 
     /**
+     * Bans a player from this island.
+     * Plugins using this function should check if the initializer is authorized to ban a player.
+     *
+     * @param target The {@link OfflinePlayer} to ban.
+     * @return True if the player was banned, false otherwise. Returns false if the player is banned already.
+     * @since 2.7.8
+     */
+    boolean banPlayer(@NotNull OfflinePlayer target);
+
+    /**
+     * Bans a player from this island.
+     * Plugins using this function should check if the initializer is authorized to ban a player.
+     *
+     * @param target The {@link OfflinePlayer} to ban.
+     * @param initializer The {@link OfflinePlayer} initializing this request.
+     * @return True if the player was banned, false otherwise. Returns false if the player is banned already.
+     * @since 2.7.8
+     */
+    boolean banPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
+
+    /**
+     * Unbans a player from this island.
+     * Plugins using this function should check if the initializer is authorized to unban a player.
+     *
+     * @param target The {@link OfflinePlayer} to unban.
+     * @return True if the player was unbanned, false otherwise. Returns false if the player is unbanned already.
+     * @since 2.7.8
+     */
+    boolean unbanPlayer(@NotNull OfflinePlayer target);
+
+    /**
+     * Unbans a player from this island.
+     * Plugins using this function should check if the initializer is authorized to unban a player.
+     *
+     * @param target The {@link OfflinePlayer} to unban.
+     * @param initializer the {@link OfflinePlayer} initializing this request.
+     * @return True if the player was unbanned, false otherwise. Returns false if the player is unbanned already.
+     * @since 2.7.8
+     */
+    boolean unbanPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
+
+    /**
+     * Checks if the given player is banned on this island.
+     *
+     * @param target The {@link OfflinePlayer} to query for.
+     * @return True if the player is banned on this island, false otherwise.
+     * @since 2.7.8
+     */
+    boolean isBanned(@NotNull OfflinePlayer target);
+
+    /**
      * List of players trusted on this island.
      * @return List of players trusted on this island.
      * @deprecated Use #getTrusteeUUIDs instead
@@ -117,6 +169,8 @@ public interface IslandInfo {
 
     /**
      * Trusts a player on this island.
+     * Plugins using this function should check if the initializer is authorized to trust a player.
+     *
      * @param target The {@link OfflinePlayer} to trust.
      * @return True if the player was trusted, false otherwise.
      * @since 2.7.7
@@ -125,6 +179,8 @@ public interface IslandInfo {
 
     /**
      * Trusts a player on this island.
+     * Plugins using this function should check if the initializer is authorized to trust a player.
+     *
      * @param target The {@link OfflinePlayer} to trust.
      * @param initializer The {@link OfflinePlayer} initializing this request.
      * @return True if the player was trusted, false otherwise.
@@ -134,24 +190,28 @@ public interface IslandInfo {
 
     /**
      * Untrusts a player on this island.
+     * Plugins using this function should check if the initializer is authorized to untrust a player.
+     *
      * @param target The {@link OfflinePlayer} to untrust.
-     * @return True if the player was trusted, false otherwise.
+     * @return True if the player was untrusted, false otherwise.
      * @since 2.7.7
      */
     boolean untrustPlayer(@NotNull OfflinePlayer target);
 
     /**
      * Untrusts a player on this island.
+     * Plugins using this function should check if the initializer is authorized to untrust a player.
+     *
      * @param target The {@link OfflinePlayer} to untrust.
      * @param initializer The {@link OfflinePlayer} initializing this request.
-     * @return True if the player was trusted, false otherwise.
+     * @return True if the player was untrusted, false otherwise.
      * @since 2.7.7
      */
     boolean untrustPlayer(@NotNull OfflinePlayer target, @Nullable OfflinePlayer initializer);
 
     /**
      * Checks if the given player is trusted on this island.
-     * @param target The player to query for.
+     * @param target The {@link OfflinePlayer} to query for.
      * @return True if the player is trusted on this island, false otherwise.
      * @since 2.7.7
      */

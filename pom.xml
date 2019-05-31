@@ -4,11 +4,11 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.7.9-SNAPSHOT</version>
+    <version>2.7.10-SNAPSHOT</version>
     <name>Ultimate SkyBlock</name>
 
     <properties>
-        <api.version>2.7.7</api.version>
+        <api.version>2.7.8</api.version>
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
