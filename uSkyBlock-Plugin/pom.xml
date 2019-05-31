@@ -13,7 +13,7 @@
 
     <properties>
         <github.global.server>github</github.global.server>
-        <maven.deploy.skip>false</maven.deploy.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <build>
