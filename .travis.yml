@@ -34,4 +34,5 @@ deploy:
   skip_cleanup: true
   script: bash scripts/deploy.sh
   on:
-    branch: master
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^master|release$

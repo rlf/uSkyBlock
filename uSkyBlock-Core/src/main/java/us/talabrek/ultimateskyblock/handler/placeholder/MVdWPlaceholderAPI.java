@@ -1,18 +1,13 @@
 package us.talabrek.ultimateskyblock.handler.placeholder;
 
-import be.maximvdw.placeholderapi.PlaceholderReplaceEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-
-import java.util.Iterator;
-import java.util.logging.Logger;
 
 /**
  * MVdWPlaceholder proxy
  */
 public class MVdWPlaceholderAPI implements PlaceholderAPI {
-    private static final Logger log = Logger.getLogger(MVdWPlaceholderAPI.class.getName());
     public boolean isAvailable() {
         // Might not be enabled yet...
         return Bukkit.getPluginManager().getPlugin("MVdWPlaceholderAPI") != null;
@@ -21,15 +16,11 @@ public class MVdWPlaceholderAPI implements PlaceholderAPI {
     @Override
     public boolean registerPlaceholder(uSkyBlock plugin, final PlaceholderReplacer replacer) {
         if (isAvailable()) {
-            be.maximvdw.placeholderapi.PlaceholderReplacer proxy = new be.maximvdw.placeholderapi.PlaceholderReplacer() {
-                @Override
-                public String onPlaceholderReplace(PlaceholderReplaceEvent e) {
-                    log.info("Placeholder: " + e.getPlaceholder());
-                    if (replacer.getPlaceholders().contains(e.getPlaceholder())) {
-                        return replacer.replace(e.getOfflinePlayer(), e.getPlayer(), e.getPlaceholder());
-                    }
-                    return null;
+            be.maximvdw.placeholderapi.PlaceholderReplacer proxy = e -> {
+                if (replacer.getPlaceholders().contains(e.getPlaceholder())) {
+                    return replacer.replace(e.getOfflinePlayer(), e.getPlayer(), e.getPlaceholder());
                 }
+                return null;
             };
             for (String placeholder : replacer.getPlaceholders()) {
                 be.maximvdw.placeholderapi.PlaceholderAPI.registerPlaceholder(plugin, placeholder, proxy);
@@ -41,11 +32,7 @@ public class MVdWPlaceholderAPI implements PlaceholderAPI {
 
     @Override
     public void unregisterPlaceholder(uSkyBlock plugin, PlaceholderReplacer placeholderReplacer) {
-        for (Iterator<String> it = be.maximvdw.placeholderapi.PlaceholderAPI.getCustomPlaceholders().keySet().iterator(); it.hasNext(); ) {
-            if (it.next().startsWith("usb_")) {
-                it.remove();
-            }
-        }
+        // Not implemented.
     }
 
     @Override

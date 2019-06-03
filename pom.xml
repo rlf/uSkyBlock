@@ -97,6 +97,10 @@
             <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
         <repository>
+            <id>mvdw-software</id>
+            <url>http://repo.mvdw-software.be/content/groups/public/</url>
+        </repository>
+        <repository>
             <id>github-uskyblock-api</id>
             <url>https://raw.githubusercontent.com/uskyblock/uskyblock-repo/master/</url>
         </repository>
