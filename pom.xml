@@ -105,6 +105,10 @@
             <url>https://raw.githubusercontent.com/uskyblock/uskyblock-repo/master/</url>
         </repository>
         <repository>
+            <id>uskyblock-dependencies</id>
+            <url>https://www.uskyblock.ovh/maven/dependencies/</url>
+        </repository>
+        <repository>
             <id>rlf-mvn-repo</id>
             <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
