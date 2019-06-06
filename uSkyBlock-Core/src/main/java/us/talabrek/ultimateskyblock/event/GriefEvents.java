@@ -146,9 +146,9 @@ public class GriefEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onTargeting(EntityTargetLivingEntityEvent e) {
-        if (!witherEnabled || e == null || e.isCancelled() || !plugin.isSkyAssociatedWorld(e.getEntity().getWorld())) {
+        if (!witherEnabled || e == null || !plugin.isSkyAssociatedWorld(e.getEntity().getWorld())) {
             return;
         }
         if (e.getEntity() instanceof Wither && e.getTarget() != null) {
@@ -205,7 +205,7 @@ public class GriefEvents implements Listener {
 
     @EventHandler
     public void onEgg(PlayerEggThrowEvent e) {
-        if (!hatchingEnabled || e.getPlayer() == null || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())) {
+        if (!hatchingEnabled || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())) {
             return;
         }
         if (!plugin.playerIsOnIsland(e.getPlayer())) {

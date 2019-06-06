@@ -53,15 +53,15 @@ public class ToolMenuEvents implements Listener {
             ItemStack toolItem = challenge != null && challenge.getTool() != null ? ItemStackUtil.createItemStack(challenge.getTool()) : null;
             if (toolItem != null) {
                 commandMap.put(ItemStackUtil.asString(toolItem), COMPLETE_CHALLENGE_CMD + challengeName);
-            } else if (displayItem != null && displayItem.getType() != null && displayItem.getType().isBlock()) {
+            } else if (displayItem != null && displayItem.getType().isBlock()) {
                 commandMap.put(ItemStackUtil.asString(displayItem), COMPLETE_CHALLENGE_CMD + challengeName);
             }
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onBlockHit(PlayerInteractEvent e) {
-        if (e == null || e.isCancelled() || e.getPlayer() == null || e.getClickedBlock() == null
+        if (e == null || e.getClickedBlock() == null
                 || e.getAction() != Action.LEFT_CLICK_BLOCK || e.getPlayer().getGameMode() != GameMode.SURVIVAL) {
             return;
         }

@@ -37,8 +37,9 @@ public class BanCommand extends RequireIslandCommand {
                 return true;
             }
             if (!island.isBanned(name)) {
+                //noinspection deprecation
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                if (offlinePlayer == null) {
+                if (!offlinePlayer.hasPlayedBefore() && !offlinePlayer.isOnline()) {
                     player.sendMessage(tr("\u00a7eUnable to ban unknown player {0}", name));
                     return true;
                 }
@@ -47,23 +48,24 @@ public class BanCommand extends RequireIslandCommand {
                     player.sendMessage(tr("\u00a74{0} is exempt from being banned.", name));
                     return true;
                 }
-                island.banPlayer(offlinePlayer.getUniqueId());
+                island.banPlayer(offlinePlayer, player);
                 player.sendMessage(tr("\u00a7eYou have banned \u00a74{0}\u00a7e from warping to your island.", name));
-                if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                if (offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou have been \u00a7cBANNED\u00a7e from {0}\u00a7e''s island.", player.getDisplayName()));
                     if (plugin.locationIsOnIsland(player, offlinePlayer.getPlayer().getLocation())) {
                         plugin.getTeleportLogic().spawnTeleport(offlinePlayer.getPlayer(), true);
                     }
                 }
             } else {
+                //noinspection deprecation
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-                if (offlinePlayer == null) {
+                if (!offlinePlayer.hasPlayedBefore() && !offlinePlayer.isOnline()) {
                     player.sendMessage(tr("\u00a7eUnable to ban unknown player {0}", name));
                     return true;
                 }
-                island.unbanPlayer(offlinePlayer.getUniqueId());
+                island.unbanPlayer(offlinePlayer, player);
                 player.sendMessage(tr("\u00a7eYou have unbanned \u00a7a{0}\u00a7e from warping to your island.", name));
-                if (offlinePlayer != null && offlinePlayer.isOnline()) {
+                if (offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou have been \u00a7aUNBANNED\u00a7e from {0}\u00a7e''s island.", player.getDisplayName()));
                 }
             }

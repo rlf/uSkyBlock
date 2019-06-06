@@ -23,8 +23,9 @@ public class WorldGuardEvents implements Listener {
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void onPlayerMove(PlayerMoveEvent e) {
-        if (e == null || e.getTo() == null || e.getPlayer() == null || !plugin.isSkyAssociatedWorld(e.getTo().getWorld())) {
+        if (e == null || e.getTo() == null || !plugin.isSkyAssociatedWorld(e.getTo().getWorld())) {
             return;
         }
         String islandNameAt = WorldGuardHandler.getIslandNameAt(e.getTo());
@@ -54,7 +55,8 @@ public class WorldGuardEvents implements Listener {
 
     private boolean isBlockedFromEntry(Player player, IslandInfo islandInfo) {
         return islandInfo.isBanned(player) || (islandInfo.isLocked() && !(
-                islandInfo.getMembers().contains(player.getName()) || islandInfo.getTrustees().contains(player.getName())
+                islandInfo.getMembers().contains(player.getName()) ||
+                        islandInfo.getTrusteeUUIDs().contains(player.getUniqueId())
                 ));
     }
 }

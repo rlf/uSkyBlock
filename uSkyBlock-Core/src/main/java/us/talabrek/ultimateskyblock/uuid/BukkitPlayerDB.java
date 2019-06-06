@@ -19,8 +19,9 @@ public class BukkitPlayerDB implements PlayerDB {
         if (UNKNOWN_PLAYER_NAME.equalsIgnoreCase(name)) {
             return UNKNOWN_PLAYER_UUID;
         }
+        //noinspection deprecation
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-        return offlinePlayer != null ? offlinePlayer.getUniqueId() : null;
+        return offlinePlayer.getUniqueId();
     }
 
     @Override
@@ -34,7 +35,7 @@ public class BukkitPlayerDB implements PlayerDB {
             return UNKNOWN_PLAYER_NAME;
         }
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-        return offlinePlayer != null ? offlinePlayer.getName() : null;
+        return offlinePlayer.getName();
     }
 
     @Override
@@ -45,6 +46,7 @@ public class BukkitPlayerDB implements PlayerDB {
 
     @Override
     public String getDisplayName(String playerName) {
+        //noinspection deprecation
         Player player = Bukkit.getPlayer(playerName);
         return player != null ? player.getDisplayName() : null;
     }
@@ -54,7 +56,7 @@ public class BukkitPlayerDB implements PlayerDB {
         Set<String> names = new HashSet<>();
         Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
         for (Player player : onlinePlayers) {
-            if (player != null && player.isOnline() && player.getName() != null) {
+            if (player != null && player.isOnline()) {
                 names.add(player.getName());
             }
         }
@@ -73,6 +75,7 @@ public class BukkitPlayerDB implements PlayerDB {
 
     @Override
     public Player getPlayer(String name) {
+        //noinspection deprecation
         return Bukkit.getPlayer(name);
     }
 

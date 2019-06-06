@@ -6,11 +6,12 @@
 
     <groupId>com.github.rlf</groupId>
     <artifactId>uSkyBlock-API</artifactId>
-    <version>2.7.5</version>
+    <version>2.7.8</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <travis.buildNumber>dev</travis.buildNumber>
         <github.global.server>github</github.global.server>
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
     <scm>
         <connection>scm:git:git://github.com/uskyblock/uskyblock-repo.git</connection>
@@ -30,6 +31,14 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
         </repository>
     </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>17.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -44,7 +53,25 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.1.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <show>public</show>
+                    <failOnError>false</failOnError>
+                    <doclint>none</doclint>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.github.github</groupId>
@@ -67,7 +94,7 @@
                         <goals>
                             <goal>site</goal>
                         </goals>
-                        <phase>deploy</phase>
+                        <phase>site-deploy</phase>
                     </execution>
                 </executions>
             </plugin>
@@ -77,13 +104,13 @@
         <profile>
             <id>1.14</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
-                    <version>1.14.1-R0.1-SNAPSHOT</version>
+                    <version>1.14.2-R0.1-SNAPSHOT</version>
                     <optional>true</optional>
                     <scope>compile</scope>
                 </dependency>
@@ -92,7 +119,7 @@
         <profile>
             <id>1.13</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>

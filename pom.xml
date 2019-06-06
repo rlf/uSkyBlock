@@ -4,11 +4,11 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.7.7-SNAPSHOT</version>
+    <version>2.7.10-SNAPSHOT</version>
     <name>Ultimate SkyBlock</name>
 
     <properties>
-        <api.version>2.7.5</api.version>
+        <api.version>2.7.8</api.version>
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
@@ -23,6 +23,9 @@
         <!-- necessary for intellij to function -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- We only want to deploy specific submodules -->
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <modules>
@@ -54,7 +57,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -67,6 +75,10 @@
         <repository>
             <id>spigotmc.org</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>papermc</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
         <repository>
             <id>vault-repo</id>
@@ -85,8 +97,16 @@
             <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
         <repository>
+            <id>mvdw-software</id>
+            <url>http://repo.mvdw-software.be/content/groups/public/</url>
+        </repository>
+        <repository>
             <id>github-uskyblock-api</id>
             <url>https://raw.githubusercontent.com/uskyblock/uskyblock-repo/master/</url>
+        </repository>
+        <repository>
+            <id>uskyblock-dependencies</id>
+            <url>https://www.uskyblock.ovh/maven/dependencies/</url>
         </repository>
         <repository>
             <id>rlf-mvn-repo</id>
@@ -139,13 +159,6 @@
             </dependencies>
         </profile>
     </profiles>
-    <distributionManagement>
-        <repository>
-            <id>internal.repo</id>
-            <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
-        </repository>
-    </distributionManagement>
     <dependencyManagement>
         <dependencies>
             <dependency>

@@ -118,7 +118,7 @@ public enum AsyncWorldEditHandler {;
                 public void run() {
                     try {
                         final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
-                        editSession.enableQueue();
+                        editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
                         editSession.setFastMode(true);
                         editSession.getWorld().regenerate(region, editSession);
                         editSession.flushSession();

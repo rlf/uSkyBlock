@@ -35,19 +35,20 @@ public class TrustCommand extends RequireIslandCommand {
                 player.sendMessage(tr("\u00a74Members are already trusted!"));
                 return true;
             }
+            //noinspection deprecation
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(name);
-            if (offlinePlayer == null) {
+            if (!offlinePlayer.hasPlayedBefore() && !offlinePlayer.isOnline()) {
                 player.sendMessage(tr("\u00a74Unknown player {0}", name));
                 return true;
             }
             if (alias.equals("trust")) {
-                island.trust(offlinePlayer.getUniqueId());
+                island.trustPlayer(offlinePlayer, player);
                 if (offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are now trusted on \u00a74{0}''s \u00a7eisland.", pi.getDisplayName()));
                 }
                 island.sendMessageToIslandGroup(true, marktr("\u00a7a{0} trusted {1} on the island"), player.getName(), name);
             } else {
-                island.untrust(offlinePlayer.getUniqueId());
+                island.untrustPlayer(offlinePlayer, player);
                 if (offlinePlayer.isOnline()) {
                     offlinePlayer.getPlayer().sendMessage(tr("\u00a7eYou are no longer trusted on \u00a74{0}''s \u00a7eisland.", pi.getDisplayName()));
                 }
