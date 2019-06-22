@@ -35,6 +35,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.async.Callback;
@@ -104,6 +105,7 @@ import us.talabrek.ultimateskyblock.uuid.BukkitPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.FilePlayerDB;
 import us.talabrek.ultimateskyblock.uuid.MemoryPlayerDB;
 import us.talabrek.ultimateskyblock.uuid.PlayerDB;
+import us.talabrek.ultimateskyblock.world.WorldManager;
 
 import java.io.File;
 import java.util.Collections;
@@ -144,6 +146,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private PerkLogic perkLogic;
     private TeleportLogic teleportLogic;
     private LimitLogic limitLogic;
+
+    /* MANAGERS */
+    private WorldManager worldManager;
 
     private IslandGenerator islandGenerator;
     private PlayerNotifier notifier;
@@ -995,6 +1000,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
 
         getServer().getPluginManager().registerEvents(playerDB, this);
+        worldManager = new WorldManager();
         eventLogic = new EventLogic(this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
@@ -1322,6 +1328,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public IslandGenerator getIslandGenerator() {
         return islandGenerator;
+    }
+
+    public WorldManager getWorldManager() {
+        return worldManager;
     }
 
     public boolean isMaintenanceMode() {

@@ -211,7 +211,7 @@
                 <dependency>
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
-                    <version>1.14.1-R0.1-SNAPSHOT</version>
+                    <version>1.14.2-R0.1-SNAPSHOT</version>
                     <optional>true</optional>
                     <scope>compile</scope>
                 </dependency>
@@ -413,9 +413,8 @@
         <!-- ANNOTATIONS -->
         <dependency>
             <groupId>org.jetbrains</groupId>
-            <artifactId>annotations-java5</artifactId>
+            <artifactId>annotations</artifactId>
             <version>17.0.0</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>

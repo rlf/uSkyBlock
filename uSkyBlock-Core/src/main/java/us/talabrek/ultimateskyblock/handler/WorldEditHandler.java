@@ -17,13 +17,13 @@ import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import dk.lockfuglsang.minecraft.reflection.ReflectionUtil;
 import dk.lockfuglsang.minecraft.util.VersionUtil;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
 import us.talabrek.ultimateskyblock.handler.task.WorldRegen;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -221,6 +221,7 @@ public class WorldEditHandler {
         return borders;
     }
 
+    @SuppressWarnings("Duplicates")
     public static void clearIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
         log.finer("Clearing island " + region);
         uSkyBlock plugin = uSkyBlock.getInstance();
@@ -228,7 +229,7 @@ public class WorldEditHandler {
         final Region cube = getRegion(skyWorld, region);
         Runnable onCompletion = () -> {
             long diff = System.currentTimeMillis() - t;
-            LogUtil.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+            LogUtil.log(Level.INFO, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
             if (afterDeletion != null) {
                 afterDeletion.run();
             }
@@ -245,13 +246,12 @@ public class WorldEditHandler {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
         }
-        // This stopped performing
-        //WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
         WorldEditClear weRegen = new WorldEditClear(plugin, skyWorld, borderRegions, onCompletion);
-        //WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
-        weRegen.runTask(plugin);
+        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
+        regen.runTask(plugin);
     }
 
+    @SuppressWarnings("Duplicates")
     public static void clearNetherIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
         log.finer("Clearing island " + region);
         final long t = System.currentTimeMillis();
@@ -259,7 +259,7 @@ public class WorldEditHandler {
         uSkyBlock plugin = uSkyBlock.getInstance();
         Runnable onCompletion = () -> {
             long diff = System.currentTimeMillis() - t;
-            LogUtil.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+            LogUtil.log(Level.INFO, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
             if (afterDeletion != null) {
                 afterDeletion.run();
             }
@@ -277,8 +277,8 @@ public class WorldEditHandler {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
         }
-        WorldEditRegen weRegen = new WorldEditRegen(plugin, borderRegions, onCompletion);
-        //WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
+        WorldEditClear weRegen = new WorldEditClear(plugin, skyWorld, borderRegions, onCompletion);
+        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
         weRegen.runTask(plugin);
     }
 
