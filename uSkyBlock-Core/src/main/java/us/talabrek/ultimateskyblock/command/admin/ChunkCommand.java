@@ -28,7 +28,7 @@ public class ChunkCommand extends CompositeCommand {
         add(new RequireChunkCommand("unload", marktr("unload current chunk")) {
             @Override
             void doChunkCommand(Player player, Chunk chunk) {
-                if (chunk.getWorld().unloadChunk(chunk.getX(), chunk.getZ(), false, false)) {
+                if (chunk.getWorld().unloadChunk(chunk.getX(), chunk.getZ(), false)) {
                     player.sendMessage(tr("successfully unloaded chunk at {0},{1}", chunk.getX(), chunk.getZ()));
                 } else {
                     player.sendMessage(tr("\u00a74FAILED!\u00a7e could not unload chunk at {0},{1}", chunk.getX(), chunk.getZ()));

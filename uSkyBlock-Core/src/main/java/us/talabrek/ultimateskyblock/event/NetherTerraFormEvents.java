@@ -49,7 +49,6 @@ public class NetherTerraFormEvents implements Listener {
     private final double chanceBlaze;
     private final boolean terraformEnabled;
     private final boolean spawnEnabled;
-    private final boolean netherRoof;
     private final double minPitch;
     private final double maxPitch;
     private final EntitySpawner entitySpawner;
@@ -59,7 +58,6 @@ public class NetherTerraFormEvents implements Listener {
         // TODO: 23/09/2015 - R4zorax: Allow this to be perk-based?
         terraformEnabled = plugin.getConfig().getBoolean("nether.terraform-enabled", true);
         spawnEnabled = plugin.getConfig().getBoolean("nether.spawn-chances.enabled", true);
-        netherRoof = plugin.getConfig().getBoolean("options.protection.nether-roof", true);
         minPitch = plugin.getConfig().getDouble("nether.terraform-min-pitch", -70d);
         maxPitch = plugin.getConfig().getDouble("nether.terraform-max-pitch", 90d);
         ConfigurationSection config = plugin.getConfig().getConfigurationSection("nether.terraform");
@@ -281,16 +279,5 @@ public class NetherTerraFormEvents implements Listener {
 
     private boolean isNetherFortressWalkway(Block block) {
         return block.getType() == Material.NETHER_BRICKS;
-    }
-
-    @EventHandler
-    public void onTeleport(PlayerTeleportEvent e) {
-        if (!netherRoof || e == null || e.getTo() == null || !plugin.isSkyNether(e.getTo().getWorld())) {
-            return; // Bail out.
-        }
-        if (e.getTo().getBlockY() > 127) {
-            e.setCancelled(true);
-            e.getPlayer().sendMessage(tr("\u00a7cNo Access! \u00a7eYou are trying to teleport to the roof of the \u00a7cNETHER\u00a7e, that is not allowed."));
-        }
     }
 }

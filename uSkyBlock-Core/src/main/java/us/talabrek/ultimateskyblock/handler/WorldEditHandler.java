@@ -15,16 +15,14 @@ import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import dk.lockfuglsang.minecraft.reflection.ReflectionUtil;
-import dk.lockfuglsang.minecraft.util.VersionUtil;
+import org.apache.commons.lang.Validate;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.task.WorldEditClear;
-import us.talabrek.ultimateskyblock.handler.task.WorldEditRegen;
-import us.talabrek.ultimateskyblock.handler.task.WorldRegen;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LogUtil;
@@ -33,8 +31,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -221,14 +220,19 @@ public class WorldEditHandler {
         return borders;
     }
 
-    public static void clearIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
+    public static void clearIsland(@NotNull final World islandWorld, @NotNull final ProtectedRegion region,
+                                   @Nullable final Runnable afterDeletion) {
+        Validate.notNull(islandWorld, "IslandWorld cannot be null");
+        Validate.notNull(region, "Region cannot be null");
+
         log.finer("Clearing island " + region);
         uSkyBlock plugin = uSkyBlock.getInstance();
         final long t = System.currentTimeMillis();
-        final Region cube = getRegion(skyWorld, region);
+        final Region cube = getRegion(islandWorld, region);
         Runnable onCompletion = () -> {
             long diff = System.currentTimeMillis() - t;
-            LogUtil.log(Level.FINE, String.format("Cleared island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
+            LogUtil.log(Level.INFO, String.format("Cleared island on %s in %d.%03d seconds",
+                    islandWorld.getName(), (diff / 1000), (diff % 1000)));
             if (afterDeletion != null) {
                 afterDeletion.run();
             }
@@ -245,41 +249,12 @@ public class WorldEditHandler {
             innerChunks = getInnerChunks(cube);
             borderRegions = getBorderRegions(cube);
         }
-        // This stopped performing
-        //WorldEditRegen weRegen = new WorldEditRegen(uSkyBlock.getInstance(), borderRegions, onCompletion);
-        WorldEditClear weRegen = new WorldEditClear(plugin, skyWorld, borderRegions, onCompletion);
-        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
-        regen.runTask(plugin);
-    }
-
-    public static void clearNetherIsland(final World skyWorld, final ProtectedRegion region, final Runnable afterDeletion) {
-        log.finer("Clearing island " + region);
-        final long t = System.currentTimeMillis();
-        final Region cube = getRegion(skyWorld, region);
-        uSkyBlock plugin = uSkyBlock.getInstance();
-        Runnable onCompletion = () -> {
-            long diff = System.currentTimeMillis() - t;
-            LogUtil.log(Level.FINE, String.format("Cleared nether-island in %d.%03d seconds", (diff / 1000), (diff % 1000)));
-            if (afterDeletion != null) {
-                afterDeletion.run();
-            }
-        };
-
-        Set<BlockVector2> innerChunks;
-        Set<Region> borderRegions = new HashSet<>();
-        if (isOuterPossible()) {
-            if (Settings.island_protectionRange == Settings.island_distance) {
-                innerChunks = getInnerChunks(cube);
-            } else {
-                innerChunks = getOuterChunks(cube);
-            }
-        } else {
-            innerChunks = getInnerChunks(cube);
-            borderRegions = getBorderRegions(cube);
+        List<Chunk> chunkList = new ArrayList<>();
+        for (BlockVector2 vector : innerChunks) {
+            chunkList.add(islandWorld.getChunkAt(vector.getBlockX(), vector.getBlockZ()));
         }
-        WorldEditRegen weRegen = new WorldEditRegen(plugin, borderRegions, onCompletion);
-        WorldRegen regen = new WorldRegen(plugin, skyWorld, innerChunks, weRegen);
-        regen.runTask(plugin);
+        WorldEditClear weClear = new WorldEditClear(plugin, islandWorld, borderRegions, onCompletion);
+        plugin.getWorldManager().getChunkRegenerator(islandWorld).regenerateChunks(chunkList, weClear);
     }
 
     public static Region getRegion(World skyWorld, ProtectedRegion region) {
@@ -296,7 +271,7 @@ public class WorldEditHandler {
         World world = location.getWorld();
         Region cube = getRegion(world, region);
         for (BlockVector2 chunk : cube.getChunks()) {
-            world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true, false);
+            world.unloadChunk(chunk.getBlockX(), chunk.getBlockZ(), true);
             world.loadChunk(chunk.getBlockX(), chunk.getBlockZ(), false);
         }
     }
@@ -321,32 +296,5 @@ public class WorldEditHandler {
 
     public static EditSession createEditSession(com.sk89q.worldedit.world.World bukkitWorld, int maxBlocks) {
         return WorldEdit.getInstance().getEditSessionFactory().getEditSession(bukkitWorld, maxBlocks);
-    }
-
-    public static void clearEntities(World world, Location center) {
-        Collection<Entity> entities;
-        if (VersionUtil.getVersion(dk.lockfuglsang.minecraft.reflection.ReflectionUtil.getCraftBukkitVersion()).isGTE("1.10")) {
-            entities = ReflectionUtil.exec(world, "getNearbyEntities",
-                    new Class[]{Location.class, Double.TYPE, Double.TYPE, Double.TYPE}, center, Settings.island_radius, 255, Settings.island_radius);
-            for (Entity entity : entities) {
-                if (!(entity instanceof Player)) {
-                    entity.remove();
-                } else {
-                    uSkyBlock.getInstance().getTeleportLogic().spawnTeleport((Player) entity, true);
-                }
-            }
-        } else {
-            entities = world.getEntities();
-            ProtectedRegion islandRegion = WorldGuardHandler.getIslandRegionAt(center);
-            for (Entity entity : entities) {
-                if (entity != null && entity.getLocation() != null && islandRegion.contains(entity.getLocation().getBlockX(), entity.getLocation().getBlockY(), entity.getLocation().getBlockZ())) {
-                    if (!(entity instanceof Player)) {
-                        entity.remove();
-                    } else {
-                        uSkyBlock.getInstance().getTeleportLogic().spawnTeleport((Player) entity, true);
-                    }
-                }
-            }
-        }
     }
 }
