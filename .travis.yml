@@ -30,9 +30,13 @@ before_deploy:
   - ssh-add deploy_rsa
   - chmod +x scripts/deploy.sh
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: bash scripts/deploy.sh
-  on:
-    all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^master|release$
+  - provider: script
+    skip_cleanup: true
+    script: bash scripts/deploy-staging.sh
+    on:
+      branch: "master"
+  - provider: script
+    skip_cleanup: true
+    script: bash scripts/deploy-release.sh
+    on:
+      tags: true
