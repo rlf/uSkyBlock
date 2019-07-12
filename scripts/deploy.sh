@@ -32,7 +32,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" == "master" ]]
 
 fi
 
-if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" == "release" ]]; then
+if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ ! -z "$TRAVIS_TAG" ]]; then
 
   echo -e "Publishing javadocs and artifacts...\n"
   cd $HOME
