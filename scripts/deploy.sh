@@ -6,13 +6,13 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" == "master" ]]
   cd $HOME
 
   rsync -r --quiet $HOME/build/uskyblock/uSkyBlock/uSkyBlock-API/target/mvn-repo/ \
-  dool1@shell.xs4all.nl:WWW/maven/master/
+  dool1@shell.xs4all.nl:WWW/maven/uskyblock/
 
   rsync -r --quiet $HOME/build/uskyblock/uSkyBlock/uSkyBlock-Core/target/mvn-repo/ \
-  dool1@shell.xs4all.nl:WWW/maven/master/
+  dool1@shell.xs4all.nl:WWW/maven/uskyblock/
 
   rsync -r --quiet $HOME/build/uskyblock/uSkyBlock/uSkyBlock-FAWE/target/mvn-repo/ \
-  dool1@shell.xs4all.nl:WWW/maven/master/
+  dool1@shell.xs4all.nl:WWW/maven/uskyblock/
 
   echo -e "Publishing javadocs...\n"
 
@@ -38,13 +38,13 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ ! -z "$TRAVIS_TAG" ]]; then
   cd $HOME
 
   rsync -r --quiet $HOME/build/uskyblock/uSkyBlock/uSkyBlock-API/target/mvn-repo/ \
-  dool1@shell.xs4all.nl:WWW/maven/release/
+  dool1@shell.xs4all.nl:WWW/maven/uskyblock/
 
   rsync -r --quiet $HOME/build/uskyblock/uSkyBlock/uSkyBlock-Core/target/mvn-repo/ \
-  dool1@shell.xs4all.nl:WWW/maven/release/
+  dool1@shell.xs4all.nl:WWW/maven/uskyblock/
 
   rsync -r --quiet $HOME/build/uskyblock/uSkyBlock/uSkyBlock-FAWE/target/mvn-repo/ \
-  dool1@shell.xs4all.nl:WWW/maven/release/
+  dool1@shell.xs4all.nl:WWW/maven/uskyblock/
 
   echo -e "Publishing javadocs...\n"
 
