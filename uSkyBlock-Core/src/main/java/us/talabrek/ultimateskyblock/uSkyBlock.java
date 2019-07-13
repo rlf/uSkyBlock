@@ -11,7 +11,6 @@ import dk.lockfuglsang.minecraft.util.VersionUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -22,8 +21,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -443,29 +440,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return null;
     }
 
-    public void removeCreatures(final Location l) {
-        if (!Settings.island_removeCreaturesByTeleport || l == null) {
-            return;
-        }
-        final int px = l.getBlockX();
-        final int py = l.getBlockY();
-        final int pz = l.getBlockZ();
-        for (int x = -1; x <= 1; ++x) {
-            for (int z = -1; z <= 1; ++z) {
-                final Chunk c = l.getWorld().getChunkAt(new Location(l.getWorld(), (double) (px + x * 16), (double) py, (double) (pz + z * 16)));
-                Entity[] entities;
-                for (int length = (entities = c.getEntities()).length, i = 0; i < length; ++i) {
-                    final Entity e = entities[i];
-                    if (e instanceof Monster && e.getCustomName() == null) { // Remove all monsters that are not named
-                        e.remove();
-                    }
-                }
-            }
-        }
-    }
-
     private void postDelete(final PlayerInfo pi) {
-
         pi.save();
     }
 
@@ -524,7 +499,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (isSkyWorld(player.getWorld())) {
             // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
             clearPlayerInventory(player);
-            clearEntitiesNearPlayer(player);
         }
         islandLogic.clearIsland(next, new Runnable() {
             @Override
@@ -565,21 +539,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             VaultHandler.getEcon().withdrawPlayer(player, VaultHandler.getEcon().getBalance(player));
         }
         getLogger().exiting(CN, "clearPlayerInventory");
-    }
-
-    private void clearEntitiesNearPlayer(Player player) {
-        getLogger().entering(CN, "clearEntitiesNearPlayer", player);
-        for (final Entity entity : player.getNearbyEntities((double) (Settings.island_radius), 255.0, (double) (Settings.island_radius))) {
-            if (!validEntity(entity)) {
-                entity.remove();
-            }
-        }
-        getLogger().exiting(CN, "clearEntitiesNearPlayer");
-    }
-
-    private boolean validEntity(Entity entity) {
-        return (entity instanceof Player) ||
-                (entity.getFallDistance() == 0 && !(entity instanceof Monster));
     }
 
     public synchronized boolean devSetPlayerIsland(final Player sender, final Location l, final String player) {
@@ -641,7 +600,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 }
                 return true;
             }
-            removeCreatures(homeSweetHome);
+            getWorldManager().removeCreatures(homeSweetHome);
             player.sendMessage(tr("\u00a7aTeleporting you to your island."));
             getTeleportLogic().safeTeleport(player, homeSweetHome, force);
             return true;
