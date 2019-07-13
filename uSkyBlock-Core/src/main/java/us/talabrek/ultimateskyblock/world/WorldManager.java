@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.world;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -32,7 +31,6 @@ public class WorldManager {
             return;
         }
 
-        Bukkit.getLogger().warning("RemoveCreatures called");
         final int px = target.getBlockX();
         final int py = target.getBlockY();
         final int pz = target.getBlockZ();
