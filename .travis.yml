@@ -28,7 +28,8 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 deploy_rsa
   - ssh-add deploy_rsa
-  - chmod +x scripts/deploy.sh
+  - chmod +x scripts/deploy-staging.sh
+  - chmod +x scripts/deploy-release.sh
 deploy:
   - provider: script
     skip_cleanup: true
