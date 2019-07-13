@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.challenge;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.json.simple.JSONObject;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.util.EntityUtil;
 
 import java.lang.reflect.Field;

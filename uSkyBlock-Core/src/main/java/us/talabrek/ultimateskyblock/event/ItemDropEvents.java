@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;

@@ -1,14 +1,12 @@
 package us.talabrek.ultimateskyblock.handler.placeholder;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class PlaceholderHandler {
     private static final String[] ADAPTORS = {

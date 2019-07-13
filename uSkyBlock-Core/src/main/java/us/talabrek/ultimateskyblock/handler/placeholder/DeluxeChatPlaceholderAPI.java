@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.handler.placeholder;
 
-import me.clip.deluxechat.placeholders.*;
+import me.clip.deluxechat.placeholders.DeluxePlaceholderHook;
 import me.clip.deluxechat.placeholders.PlaceholderHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

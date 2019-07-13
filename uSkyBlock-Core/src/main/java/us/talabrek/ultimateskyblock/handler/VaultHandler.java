@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.handler;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;

@@ -5,7 +5,6 @@ import org.bukkit.command.CommandSender;
 import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

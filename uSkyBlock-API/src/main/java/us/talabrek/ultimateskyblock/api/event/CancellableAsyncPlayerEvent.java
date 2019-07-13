@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.api.event;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
-import org.bukkit.event.player.PlayerEvent;
 
 /**
  * Common event for PlayerEvents that can be cancelled (async).

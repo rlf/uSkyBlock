@@ -2,7 +2,6 @@ package us.talabrek.ultimateskyblock.island.task;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import us.talabrek.ultimateskyblock.api.event.uSkyBlockEvent;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.HashSet;

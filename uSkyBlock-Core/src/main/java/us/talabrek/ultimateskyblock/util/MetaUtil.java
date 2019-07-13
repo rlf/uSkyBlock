@@ -1,7 +1,5 @@
 package us.talabrek.ultimateskyblock.util;
 
-import dk.lockfuglsang.minecraft.nbt.NBTUtil;
-import org.bukkit.inventory.ItemStack;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
