@@ -125,29 +125,7 @@
     </pluginRepositories>
     <profiles>
         <profile>
-            <id>wg700</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q.worldguard</groupId>
-                    <artifactId>worldguard-legacy</artifactId>
-                    <version>7.0.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.sk89q</groupId>
-                            <artifactId>worldedit</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>we700</id>
+            <id>1.14</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -156,9 +134,19 @@
                     <groupId>com.sk89q.worldedit</groupId>
                     <artifactId>worldedit-bukkit</artifactId>
                     <version>7.0.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                    <type>jar</type>
-                    <optional>true</optional>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.sk89q.worldguard</groupId>
+                    <artifactId>worldguard-legacy</artifactId>
+                    <version>7.0.0-SNAPSHOT</version>
+                    <scope>provided</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.sk89q</groupId>
+                            <artifactId>worldedit</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
             </dependencies>
         </profile>

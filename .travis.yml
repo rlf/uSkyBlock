@@ -18,7 +18,7 @@ before_install:
 - cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
 - cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
 install:
-- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC},we700,wg700 clean deploy
+- mvn -nsu -Dtravis.buildNumber=${TRAVIS_BUILD_NUMBER} -Pi18n,${MC} clean deploy
 before_deploy:
   - echo '|1|DBFhltHRAVmrfmMZPLbN7FwnS5E=|79CP65+tOIeVNeNNC2R680mpV9o= ecdsa-sha2-nistp256
     AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK/krqsEUrVoDrYIc7I7nsiSCF0M7Xxr379IqZ2pLUPlxF2Or/MkTTokXzRsyspJazL1W1UrBDmKXHfO6+tyMMw='

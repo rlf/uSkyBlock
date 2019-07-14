@@ -27,7 +27,7 @@ public class WorldManager {
      * @param target Location to remove unnamed monsters.
      */
     public void removeCreatures(@Nullable final Location target) {
-        if (!Settings.island_removeCreaturesByTeleport || target == null) {
+        if (!Settings.island_removeCreaturesByTeleport || target == null || target.getWorld() == null) {
             return;
         }
 
