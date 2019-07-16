@@ -35,7 +35,6 @@ import java.util.zip.ZipInputStream;
 /**
  * The factory for creating islands (actual blocks).
  */
-@SuppressWarnings("deprecation")
 public class IslandGenerator {
     private static final Logger log = Logger.getLogger(IslandGenerator.class.getName());
     private final File[] schemFiles;
@@ -76,7 +75,11 @@ public class IslandGenerator {
             public boolean accept(File dir, String name) {
                 String basename = FileUtil.getBasename(name);
                 boolean enabled = config.getBoolean("island-schemes." + basename + ".enabled", true);
-                return enabled && name != null && name.endsWith(".schematic") && !name.startsWith("uSkyBlock") && !basename.toLowerCase().endsWith("nether");
+                return enabled &&
+                        name != null &&
+                        (name.endsWith(".schematic") || name.endsWith(".schem")) &&
+                        !name.startsWith("uSkyBlock") &&
+                        !basename.toLowerCase().endsWith("nether");
             }
         });
         if (this.schemFiles == null) {
