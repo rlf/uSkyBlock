@@ -24,7 +24,7 @@ public class HomeCommand extends RequireIslandCommand {
         if (pi.getHomeLocation() == null) {
             pi.setHomeLocation(pi.getIslandLocation());
         }
-        plugin.homeTeleport(player, false);
+        plugin.getTeleportLogic().homeTeleport(player, false);
         return true;
     }
 }

@@ -72,7 +72,7 @@ public class GenerateTask extends BukkitRunnable {
                                 if (AsyncWorldEditHandler.isAWE()) {
                                     player.sendMessage(tr("\u00a7cNote:\u00a7e Construction might still be ongoing."));
                                 }
-                                plugin.homeTeleport(player, true);
+                                plugin.getTeleportLogic().homeTeleport(player, true);
                             } else {
                                 player.sendMessage(new String[]{
                                         tr("\u00a7aCongratulations! \u00a7eYour island has appeared."),

@@ -97,6 +97,7 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.bstats:*</include>
+                                    <include>io.papermc:paperlib</include>
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>dk.lockfuglsang.minecraft:po-utils</include>
                                 </includes>
@@ -109,6 +110,10 @@
                                 <relocation>
                                     <pattern>dk.lockfuglsang.minecraft</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>io.papermc.lib</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.paperlib</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

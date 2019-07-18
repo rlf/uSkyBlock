@@ -9,6 +9,7 @@ import dk.lockfuglsang.minecraft.po.I18nUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import dk.lockfuglsang.minecraft.util.VersionUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
+import io.papermc.lib.PaperLib;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -254,6 +255,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         } catch (Exception e) {
             log(Level.WARNING, "Failed to submit metrics data", e);
         }
+
+        PaperLib.suggestPaper(this);
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender, Command command, String... args) {
@@ -581,47 +584,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         } else {
             resetIsland.run();
         }
-        return true;
-    }
-
-    public boolean homeTeleport(final Player player, boolean force) {
-        getLogger().entering(CN, "homeTeleport", player);
-        try {
-            Location homeSweetHome = null;
-            PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
-            if (playerInfo != null) {
-                homeSweetHome = getSafeHomeLocation(playerInfo);
-            }
-            if (homeSweetHome == null) {
-                player.sendMessage(tr("\u00a74Unable to find a safe home-location on your island!"));
-                if (player.isFlying()) {
-                    player.sendMessage(tr("\u00a7cWARNING: \u00a7eTeleporting you to mid-air."));
-                    player.teleport(playerInfo.getIslandLocation());
-                }
-                return true;
-            }
-            getWorldManager().removeCreatures(homeSweetHome);
-            player.sendMessage(tr("\u00a7aTeleporting you to your island."));
-            getTeleportLogic().safeTeleport(player, homeSweetHome, force);
-            return true;
-        } finally {
-            getLogger().exiting(CN, "homeTeleport");
-        }
-    }
-
-    public boolean warpTeleport(final Player player, final PlayerInfo pi, boolean force) {
-        Location warpSweetWarp = null;
-        if (pi == null) {
-            player.sendMessage(tr("\u00a74That player does not exist!"));
-            return true;
-        }
-        warpSweetWarp = getSafeWarpLocation(pi);
-        if (warpSweetWarp == null) {
-            player.sendMessage(tr("\u00a74Unable to warp you to that player''s island!"));
-            return true;
-        }
-        player.sendMessage(tr("\u00a7aTeleporting you to {0}''s island.", pi.getDisplayName()));
-        getTeleportLogic().safeTeleport(player, warpSweetWarp, force);
         return true;
     }
 

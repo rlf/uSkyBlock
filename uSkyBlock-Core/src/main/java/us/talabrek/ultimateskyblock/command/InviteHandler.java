@@ -125,7 +125,7 @@ public class InviteHandler implements Listener {
                 public void run() {
                     player.sendMessage(tr("\u00a7aYou have joined an island! Use /island party to see the other members."));
                     addPlayerToParty(player, island);
-                    plugin.homeTeleport(player, true);
+                    plugin.getTeleportLogic().homeTeleport(player, true);
                     plugin.clearPlayerInventory(player);
                 }
             };

@@ -66,7 +66,7 @@ public class WarpCommand extends RequirePlayerCommand {
                     if (plugin.getConfig().getBoolean("options.protection.visitors.warn-on-warp", true)) {
                         island.sendMessageToOnlineMembers(tr("\u00a7cWARNING: \u00a79{0}\u00a7e is warping to your island!", player.getDisplayName()));
                     }
-                    plugin.warpTeleport(player, targetPlayerInfo, false);
+                    plugin.getTeleportLogic().warpTeleport(player, targetPlayerInfo, false);
                 } else {
                     player.sendMessage(tr("\u00a74That player has forbidden you from warping to their island."));
                 }
