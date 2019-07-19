@@ -5,8 +5,10 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -70,10 +72,14 @@ public class SignEvents implements Listener {
             return;
         }
         Sign sign = (Sign) e.getBlock().getState();
-        org.bukkit.material.Sign data = (org.bukkit.material.Sign) sign.getData();
-        Block wallBlock = sign.getBlock().getRelative(data.getAttachedFace());
-        if (isChest(wallBlock)) {
-            logic.addSign(sign, e.getLines(), (Chest) wallBlock.getState());
+
+        if(sign.getBlock().getState().getBlockData() instanceof WallSign) {
+            WallSign data = (WallSign) sign.getBlock().getState().getBlockData();
+            BlockFace attached = data.getFacing().getOppositeFace();
+            Block wallBlock = sign.getBlock().getRelative(attached);
+            if (isChest(wallBlock)) {
+                logic.addSign(sign, e.getLines(), (Chest) wallBlock.getState());
+            }
         }
     }
 
