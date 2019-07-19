@@ -6,6 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import us.talabrek.ultimateskyblock.api.event.IslandChatEvent;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 /**
  * @see us.talabrek.ultimateskyblock.api.event.IslandChatEvent
@@ -44,7 +45,8 @@ public class ChatEvents implements Listener {
         IslandChatEvent.Type toggle = logic.getToggle(e.getPlayer());
         if (toggle != null) {
             e.setCancelled(true);
-            Bukkit.getPluginManager().callEvent(new IslandChatEvent(e.getPlayer(), toggle, e.getMessage()));
+            Bukkit.getScheduler().runTask(uSkyBlock.getInstance(), () ->
+                    Bukkit.getPluginManager().callEvent(new IslandChatEvent(e.getPlayer(), toggle, e.getMessage())));
         }
     }
 }

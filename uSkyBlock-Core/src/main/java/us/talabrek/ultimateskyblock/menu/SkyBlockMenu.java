@@ -776,7 +776,8 @@ public class SkyBlockMenu {
 
     public void onClick(InventoryClickEvent event) {
         ItemStack currentItem = event != null ? event.getCurrentItem() : null;
-        if (event == null || currentItem == null || event.getWhoClicked() == null || event.getSlotType() != InventoryType.SlotType.CONTAINER) {
+        //if (event == null || currentItem == null || event.getWhoClicked() == null || event.getSlotType() != InventoryType.SlotType.CONTAINER) {
+        if (event == null || currentItem == null || event.getWhoClicked() == null) {
             return; // Bail out, nothing we can do anyway
         }
         Player p = (Player) event.getWhoClicked();

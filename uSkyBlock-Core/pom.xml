@@ -396,7 +396,7 @@
         </dependency>
         <dependency>
             <groupId>be.maximvdw</groupId>
-            <artifactId>MVdWPlaceholderAPI</artifactId>		
+            <artifactId>MVdWPlaceholderAPI</artifactId>
             <version>3.0.1-SNAPSHOT</version>
             <scope>provided</scope>
             <!-- MVdWPlaceholderAPI includes a lot of unpublished dependencies, like Spigot 1.9 -->
