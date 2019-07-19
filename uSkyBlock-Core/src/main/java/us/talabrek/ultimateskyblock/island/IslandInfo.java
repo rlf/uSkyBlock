@@ -827,7 +827,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         Validate.notNull(target, "Target cannot be null");
 
         List<String> trustees = config.getStringList("trust.list");
-        return trustees.contains(target.toString());
+        return trustees.contains(target.getUniqueId().toString());
     }
 
     public void removeMember(@NotNull PlayerInfo member) {
