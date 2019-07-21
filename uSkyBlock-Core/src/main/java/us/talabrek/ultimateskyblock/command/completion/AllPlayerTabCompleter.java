@@ -22,7 +22,8 @@ public class AllPlayerTabCompleter extends AbstractTabCompleter {
     @Override
     protected List<String> getTabList(CommandSender commandSender, String term) {
         Set<String> allPlayers = new LinkedHashSet<>(online.getTabList(commandSender, term));
-        allPlayers.addAll(uSkyBlock.getInstance().getPlayerDB().getNames(term));
+        // Fetching from player DB disabled -- see GH rlf/1211.
+        //allPlayers.addAll(uSkyBlock.getInstance().getPlayerDB().getNames(term));
         return new ArrayList<>(allPlayers);
     }
 }
