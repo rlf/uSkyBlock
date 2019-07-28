@@ -219,7 +219,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onMemberDamage(final EntityDamageByEntityEvent event) {
-        if (!plugin.isSkyWorld(event.getEntity().getWorld())) {
+        if (!plugin.isSkyWorld(event.getEntity().getWorld()) && !plugin.isSkyNether(event.getEntity().getWorld())) {
             return;
         }
         if (!(event.getEntity() instanceof Player)) {
