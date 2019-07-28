@@ -302,7 +302,7 @@ public class PlayerEvents implements Listener {
     public void onBlockPlaceEvent(BlockPlaceEvent event)
     {
         final Player player = event.getPlayer();
-        if (!blockLimitsEnabled || !plugin.isSkyWorld(player.getWorld())) {
+        if (!blockLimitsEnabled || !plugin.isSkyWorld(player.getWorld()) || !plugin.isSkyNether(player.getWorld())) {
             return; // Skip
         }
 
@@ -338,7 +338,7 @@ public class PlayerEvents implements Listener {
     
     @EventHandler(ignoreCancelled = true)
     public void onHopperDestroy(BlockBreakEvent event){
-        if (!blockLimitsEnabled || !plugin.isSkyWorld(event.getPlayer().getWorld())) {
+        if (!blockLimitsEnabled || !plugin.isSkyWorld(event.getPlayer().getWorld()) || !plugin.isSkyNether(event.getPlayer().getWorld())) {
             return; // Skip
         }
         IslandInfo islandInfo = plugin.getIslandInfo(event.getBlock().getLocation());
