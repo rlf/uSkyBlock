@@ -98,6 +98,7 @@
                                 <includes>
                                     <include>org.bstats:*</include>
                                     <include>io.papermc:paperlib</include>
+                                    <include>net.wesjd:anvilgui</include>
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>dk.lockfuglsang.minecraft:po-utils</include>
                                 </includes>
@@ -114,6 +115,10 @@
                                 <relocation>
                                     <pattern>io.papermc.lib</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.paperlib</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.wesjd.anvilgui</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.anvilgui</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
@@ -344,6 +349,13 @@
             <groupId>io.papermc</groupId>
             <artifactId>paperlib</artifactId>
             <version>1.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- AnvilGUI -->
+        <dependency>
+            <groupId>com.github.WesJD</groupId>
+            <artifactId>AnvilGUI</artifactId>
+            <version>master-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <!-- Multiverse -->
