@@ -132,7 +132,7 @@ public class StringEditMenu extends AbstractConfigMenu implements EditMenu {
             return null;
         }
         String value = config.getString(path, "");
-        Inventory menu = Bukkit.createInventory(null, 9 * 6, getTitle());
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, getTitle()), 9 * 6, getTitle());
         setCharacters(menu, value, keyboard);
         if (isCaps) {
             setCharacters(menu, value, capslockOverlay);

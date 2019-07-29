@@ -85,7 +85,7 @@ public class SpawnEvents implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onCreatureSpawn(CreatureSpawnEvent event) {
-        if (event == null || !plugin.isSkyWorld(event.getLocation().getWorld())) {
+        if (event == null || (!plugin.isSkyWorld(event.getLocation().getWorld()) && !plugin.isSkyNether(event.getLocation().getWorld()))) {
             return; // Bail out, we don't care
         }
         if (!event.isCancelled() && ADMIN_INITIATED.contains(event.getSpawnReason())) {

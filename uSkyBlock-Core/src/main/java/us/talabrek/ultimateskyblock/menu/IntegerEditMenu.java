@@ -91,7 +91,11 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
     }
 
     private int getDisplayNameAsInt(ItemStack clickedItem) {
-        return Integer.parseInt(stripFormatting(clickedItem.getItemMeta().getDisplayName()).replaceAll("[^0-9\\-]+", ""), 10);
+        int number = 0;
+        try {
+        number = Integer.parseInt(stripFormatting(clickedItem.getItemMeta().getDisplayName()).replaceAll("[^0-9\\-]+", ""), 10);
+        } catch (NumberFormatException ex) {}
+        return number;
     }
 
     /**
@@ -121,7 +125,7 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
             return null;
         }
         int value = config.getInt(path, 0);
-        Inventory menu = Bukkit.createInventory(null, 6 * 9, getTitle());
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, getTitle()), 6 * 9, getTitle());
         menu.setMaxStackSize(MenuItemFactory.MAX_INT_VALUE);
         ItemStack frame = createItem(Material.BLACK_STAINED_GLASS_PANE, 0, null, null);
         for (int i = 0; i < 27; i++) {
