@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
+import org.bukkit.generator.ChunkGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
@@ -18,12 +19,16 @@ import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WorldManager {
     private final uSkyBlock plugin;
+    private final Logger logger;
 
     public WorldManager(@NotNull uSkyBlock plugin) {
         this.plugin = plugin;
+        this.logger = plugin.getLogger();
     }
 
     /**
@@ -102,5 +107,59 @@ public class WorldManager {
             air.setType(Material.AIR);
             air.getRelative(BlockFace.UP).setType(Material.AIR);
         }
+    }
+
+    /**
+     * Gets the {@link ChunkGenerator} responsible for generating chunks in the overworld skyworld.
+     * @return ChunkGenerator for overworld skyworld.
+     */
+    @NotNull
+    public ChunkGenerator getOverworldGenerator() {
+        try {
+            String clazz = plugin.getConfig().getString("options.advanced.chunk-generator",
+                    "us.talabrek.ultimateskyblock.world.SkyBlockChunkGenerator");
+            Object generator = Class.forName(clazz).newInstance();
+            if (generator instanceof ChunkGenerator) {
+                return (ChunkGenerator) generator;
+            }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
+            logger.log(Level.WARNING, "Invalid overworld chunk-generator configured: " + ex);
+        }
+        return new SkyBlockChunkGenerator();
+    }
+
+    /**
+     * Gets the {@link ChunkGenerator} responsible for generating chunks in the nether skyworld.
+     * @return ChunkGenerator for nether skyworld.
+     */
+    @NotNull
+    public ChunkGenerator getNetherGenerator() {
+        try {
+            String clazz = plugin.getConfig().getString("nether.chunk-generator",
+                    "us.talabrek.ultimateskyblock.world.SkyBlockNetherChunkGenerator");
+            Object generator = Class.forName(clazz).newInstance();
+            if (generator instanceof ChunkGenerator) {
+                return (ChunkGenerator) generator;
+            }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
+            logger.log(Level.WARNING, "Invalid nether chunk-generator configured: " + ex);
+        }
+        return new SkyBlockNetherChunkGenerator();
+    }
+
+    /**
+     * Gets a {@link ChunkGenerator} for use in a default world, as specified in the server configuration
+     * @param worldName Name of the world that this will be applied to
+     * @param id Unique ID, if any, that was specified to indicate which generator was requested
+     * @return ChunkGenerator for use in the default world generation
+     */
+    @Nullable
+    public ChunkGenerator getDefaultWorldGenerator(@NotNull String worldName, @Nullable String id) {
+        Validate.notNull(worldName, "WorldName cannot be null");
+
+        return ((id != null && id.endsWith("nether")) || (worldName.endsWith("nether")))
+                && Settings.nether_enabled
+                ? getNetherGenerator()
+                : getOverworldGenerator();
     }
 }

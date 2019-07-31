@@ -33,6 +33,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.api.IslandLevel;
 import us.talabrek.ultimateskyblock.api.IslandRank;
 import us.talabrek.ultimateskyblock.api.async.Callback;
@@ -352,7 +354,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public World getWorld() {
         if (uSkyBlock.skyBlockWorld == null) {
             skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
-            ChunkGenerator skyGenerator = getGenerator();
+            ChunkGenerator skyGenerator = getWorldManager().getOverworldGenerator();
             ChunkGenerator worldGenerator = skyBlockWorld != null ? skyBlockWorld.getGenerator() : null;
             if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures() ||
                     worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
@@ -378,7 +380,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public World getSkyBlockNetherWorld() {
         if (skyBlockNetherWorld == null && Settings.nether_enabled) {
             skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
-            ChunkGenerator skyGenerator = getNetherGenerator();
+            ChunkGenerator skyGenerator = getWorldManager().getNetherGenerator();
             ChunkGenerator worldGenerator = skyBlockNetherWorld != null ? skyBlockNetherWorld.getGenerator() : null;
             if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() ||
                     worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
@@ -654,37 +656,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return WorldGuardHandler.isIslandIntersectingSpawn(loc);
     }
 
-    public ChunkGenerator getDefaultWorldGenerator(final String worldName, final String id) {
-        return ((id != null && id.endsWith("nether")) || (worldName != null && worldName.endsWith("nether")))
-                && Settings.nether_enabled
-                ? getNetherGenerator()
-                : getGenerator();
-    }
-
-    private ChunkGenerator getGenerator() {
-        try {
-            String genClass = getConfig().getString("options.advanced.chunk-generator", "us.talabrek.ultimateskyblock.SkyBlockChunkGenerator");
-            Object generator = Class.forName(genClass).newInstance();
-            if (generator instanceof ChunkGenerator) {
-                return (ChunkGenerator) generator;
-            }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            log(Level.WARNING, "Invalid chunk-generator configured: " + e);
-        }
-        return new SkyBlockChunkGenerator();
-    }
-
-    private ChunkGenerator getNetherGenerator() {
-        try {
-            String genClass = getConfig().getString("nether.chunk-generator", "us.talabrek.ultimateskyblock.SkyBlockNetherChunkGenerator");
-            Object generator = Class.forName(genClass).newInstance();
-            if (generator instanceof ChunkGenerator) {
-                return (ChunkGenerator) generator;
-            }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            log(Level.WARNING, "Invalid chunk-generator configured: " + e);
-        }
-        return new SkyBlockNetherChunkGenerator();
+    @Override
+    public ChunkGenerator getDefaultWorldGenerator(@NotNull String worldName, @Nullable String id) {
+        return getWorldManager().getDefaultWorldGenerator(worldName, id);
     }
 
     public PlayerInfo getPlayerInfo(Player player) {
