@@ -366,34 +366,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 uSkyBlock.skyBlockWorld.save();
             }
             MultiverseCoreHandler.importWorld(skyBlockWorld);
-            setupWorld(skyBlockWorld, island_height);
+            getWorldManager().setupWorld(skyBlockWorld, island_height);
         }
         return uSkyBlock.skyBlockWorld;
-    }
-
-    private void setupWorld(World world, int island_height) {
-        if (Settings.general_spawnSize > 0) {
-            if (LocationUtil.isEmptyLocation(world.getSpawnLocation())) {
-                world.setSpawnLocation(0, island_height, 0);
-            }
-            Location worldSpawn = world.getSpawnLocation();
-            if (!isSafeLocation(worldSpawn)) {
-                createSpawn(world, worldSpawn);
-            }
-        }
-    }
-
-    private void createSpawn(World world, Location worldSpawn) {
-        File spawnSchematic = new File(getDataFolder() + File.separator + "schematics" + File.separator + "spawn.schematic");
-        if (getConfig().getInt("options.general.spawnSize", 0) > 32 && spawnSchematic.exists()) {
-            AsyncWorldEditHandler.loadIslandSchematic(spawnSchematic, worldSpawn, null);
-        } else {
-            Block spawnBlock = world.getBlockAt(worldSpawn).getRelative(BlockFace.DOWN);
-            spawnBlock.setType(Material.GOLD_BLOCK);
-            Block air1 = spawnBlock.getRelative(BlockFace.UP);
-            air1.setType(Material.AIR);
-            air1.getRelative(BlockFace.UP).setType(Material.AIR);
-        }
     }
 
     public static World getSkyBlockWorld() {
@@ -417,7 +392,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 uSkyBlock.skyBlockNetherWorld.save();
             }
             MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
-            setupWorld(skyBlockNetherWorld, island_height / 2);
+            getWorldManager().setupWorld(skyBlockNetherWorld, island_height / 2);
             MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
         }
         return skyBlockNetherWorld;
@@ -920,7 +895,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
 
         getServer().getPluginManager().registerEvents(playerDB, this);
-        worldManager = new WorldManager();
+        worldManager = new WorldManager(this);
         eventLogic = new EventLogic(this);
         teleportLogic = new TeleportLogic(this);
         PlayerUtil.loadConfig(playerDB, getConfig());
