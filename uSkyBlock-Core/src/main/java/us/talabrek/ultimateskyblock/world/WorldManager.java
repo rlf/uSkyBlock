@@ -86,7 +86,7 @@ public class WorldManager {
      * @param world World to setup.
      * @param islandHeight Height at which islands will be created.
      */
-    public void setupWorld(@NotNull World world, int islandHeight) {
+    private void setupWorld(@NotNull World world, int islandHeight) {
         Validate.notNull(world, "World cannot be null");
 
         if (LocationUtil.isEmptyLocation(world.getSpawnLocation())) {
@@ -128,7 +128,7 @@ public class WorldManager {
      * @return ChunkGenerator for overworld skyworld.
      */
     @NotNull
-    public ChunkGenerator getOverworldGenerator() {
+    private ChunkGenerator getOverworldGenerator() {
         try {
             String clazz = plugin.getConfig().getString("options.advanced.chunk-generator",
                     "us.talabrek.ultimateskyblock.world.SkyBlockChunkGenerator");
@@ -147,7 +147,7 @@ public class WorldManager {
      * @return ChunkGenerator for nether skyworld.
      */
     @NotNull
-    public ChunkGenerator getNetherGenerator() {
+    private ChunkGenerator getNetherGenerator() {
         try {
             String clazz = plugin.getConfig().getString("nether.chunk-generator",
                     "us.talabrek.ultimateskyblock.world.SkyBlockNetherChunkGenerator");
