@@ -236,4 +236,46 @@ public class WorldManager {
         }
         return skyBlockNetherWorld;
     }
+
+    /**
+     * Checks if the given {@link World} is the skyblock island world.
+     * @param world World to check.
+     * @return True if the given world is the skyblock island world, false otherwise.
+     */
+    public boolean isSkyWorld(@Nullable World world) {
+        if (world == null) {
+            return false;
+        }
+
+        return getWorld().getName().equalsIgnoreCase(world.getName());
+    }
+
+    /**
+     * Checks if the given {@link World} is the skyblock nether island world.
+     * @param world World to check.
+     * @return True if the given world is the skyblock nether island world, false otherwise.
+     */
+    public boolean isSkyNether(@Nullable World world) {
+        if (world == null) {
+            return false;
+        }
+
+        World netherWorld = getNetherWorld();
+        return netherWorld != null && world.getName().equalsIgnoreCase(netherWorld.getName());
+    }
+
+    /**
+     * Checks if the given {@link World} is associated with Ultimate Skyblock.
+     * @param world World to check.
+     * @return True if the given world is associated with the plugin, false otherwise.
+     */
+    public boolean isSkyAssociatedWorld(@Nullable World world) {
+        if (world == null) {
+            return false;
+        }
+
+        return world.getName().startsWith(WorldManager.skyBlockWorld.getName())
+                && !(world.getEnvironment() == World.Environment.NETHER && !Settings.nether_enabled)
+                && !(world.getEnvironment() == World.Environment.THE_END);
+    }
 }

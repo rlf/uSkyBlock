@@ -41,7 +41,7 @@ public class ChallengeCommand extends BaseCommandExecutor {
             return false;
         }
         Player player = (Player) sender;
-        if (!plugin.isSkyAssociatedWorld(player.getWorld())) {
+        if (!plugin.getWorldManager().isSkyAssociatedWorld(player.getWorld())) {
             player.sendMessage(tr("\u00a74You can only submit challenges in the skyblock world!"));
             return true;
         }

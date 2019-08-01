@@ -34,7 +34,7 @@ public class ItemDropEvents implements Listener {
     @SuppressWarnings("unused")
     public void onDropEvent(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
-        if (!plugin.isSkyWorld(player.getWorld())) {
+        if (!plugin.getWorldManager().isSkyWorld(player.getWorld())) {
             return;
         }
         if (!visitorsCanDrop && !plugin.playerIsOnIsland(player) && !plugin.playerIsInSpawn(player)) {
@@ -49,7 +49,7 @@ public class ItemDropEvents implements Listener {
     @SuppressWarnings("unused")
     public void onDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if (!plugin.isSkyWorld(player.getWorld())) {
+        if (!plugin.getWorldManager().isSkyWorld(player.getWorld())) {
             return;
         }
         if (!visitorsCanDrop && !plugin.playerIsOnIsland(player) && !plugin.playerIsInSpawn(player)) {
@@ -95,7 +95,7 @@ public class ItemDropEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     @SuppressWarnings("unused")
     public void onPickupInventoryEvent(InventoryPickupItemEvent event) {
-        if (!plugin.isSkyWorld(event.getItem().getWorld())) {
+        if (!plugin.getWorldManager().isSkyWorld(event.getItem().getWorld())) {
             return;
         }
         // I.e. hoppers...
@@ -109,7 +109,7 @@ public class ItemDropEvents implements Listener {
             return;
         }
         Player player = (Player) event.getEntity();
-        if (event.isCancelled() || !plugin.isSkyWorld(player.getWorld())) {
+        if (event.isCancelled() || !plugin.getWorldManager().isSkyWorld(player.getWorld())) {
             clearDropInfo(event.getItem());
             return;
         }

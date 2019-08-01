@@ -47,7 +47,7 @@ public class SignEvents implements Listener {
                 || e.getClickedBlock().getType() != SkyBlockMenu.WALL_SIGN_MATERIAL
                 || !(e.getClickedBlock().getState() instanceof Sign)
                 || !e.getPlayer().hasPermission("usb.island.signs.use")
-                || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())
+                || !plugin.getWorldManager().isSkyAssociatedWorld(e.getPlayer().getWorld())
                 || !(plugin.playerIsOnOwnIsland(e.getPlayer()))
                 ) {
             return;
@@ -62,7 +62,7 @@ public class SignEvents implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onSignChanged(SignChangeEvent e) {
         if (e.isCancelled() || e.getPlayer() == null
-                || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())
+                || !plugin.getWorldManager().isSkyAssociatedWorld(e.getPlayer().getWorld())
                 || !e.getLines()[0].equalsIgnoreCase("[usb]")
                 || e.getLines()[1].trim().isEmpty()
                 || !e.getPlayer().hasPermission("usb.island.signs.place")
@@ -93,7 +93,7 @@ public class SignEvents implements Listener {
     public void onInventoryMovedEvent(InventoryMoveItemEvent e) {
         if (e.getDestination() == null
                 || e.getDestination().getLocation() == null
-                || !plugin.isSkyAssociatedWorld(e.getDestination().getLocation().getWorld())) {
+                || !plugin.getWorldManager().isSkyAssociatedWorld(e.getDestination().getLocation().getWorld())) {
             return;
         }
         if (e.getDestination().getType() == InventoryType.CHEST) {
@@ -114,7 +114,7 @@ public class SignEvents implements Listener {
     public void onChestClosed(InventoryCloseEvent e) {
         if (e.getPlayer() == null
                 || e.getPlayer().getLocation() == null
-                || !plugin.isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
+                || !plugin.getWorldManager().isSkyAssociatedWorld(e.getPlayer().getLocation().getWorld())
                 || e.getInventory().getType() != InventoryType.CHEST
                 ) {
             return;
@@ -131,7 +131,7 @@ public class SignEvents implements Listener {
                 || e.getBlock() == null
                 || (e.getBlock().getType() != SkyBlockMenu.WALL_SIGN_MATERIAL && !(e.getBlock().getType() == Material.CHEST || e.getBlock().getType() == Material.TRAPPED_CHEST))
                 || e.getBlock().getLocation() == null
-                || !plugin.isSkyAssociatedWorld(e.getBlock().getLocation().getWorld())
+                || !plugin.getWorldManager().isSkyAssociatedWorld(e.getBlock().getLocation().getWorld())
                 ) {
             return;
         }
@@ -155,7 +155,7 @@ public class SignEvents implements Listener {
                 || e.getPlayer().getGameMode() != GameMode.SURVIVAL
                 || !isSign(e.getClickedBlock().getType())
                 || !player.hasPermission("usb.island.signs.use")
-                || !plugin.isSkyAssociatedWorld(player.getWorld())) {
+                || !plugin.getWorldManager().isSkyAssociatedWorld(player.getWorld())) {
             return;
         }
 

@@ -61,7 +61,7 @@ public class GriefEvents implements Listener {
 
     @EventHandler
     public void onCreeperExplode(ExplosionPrimeEvent event) {
-        if (!creeperEnabled || !plugin.isSkyWorld(event.getEntity().getWorld())) {
+        if (!creeperEnabled || !plugin.getWorldManager().isSkyWorld(event.getEntity().getWorld())) {
             return;
         }
         if (event.getEntity() instanceof Creeper
@@ -86,7 +86,7 @@ public class GriefEvents implements Listener {
     @EventHandler
     public void onShearEvent(PlayerShearEntityEvent event) {
         Player player = event.getPlayer();
-        if (!shearingEnabled || !plugin.isSkyAssociatedWorld(player.getWorld())) {
+        if (!shearingEnabled || !plugin.getWorldManager().isSkyAssociatedWorld(player.getWorld())) {
             return; // Not our concern
         }
         if (player.hasPermission("usb.mod.bypassprotection")) {
@@ -99,7 +99,8 @@ public class GriefEvents implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if ((!killAnimalsEnabled && !killMonstersEnabled) || !plugin.isSkyAssociatedWorld(event.getDamager().getWorld())) {
+        if ((!killAnimalsEnabled && !killMonstersEnabled)
+                || !plugin.getWorldManager().isSkyAssociatedWorld(event.getDamager().getWorld())) {
             return;
         }
         if (!(event.getEntity() instanceof Creature)) {
@@ -134,7 +135,7 @@ public class GriefEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onTrampling(PlayerInteractEvent event) {
-        if (!tramplingEnabled || !plugin.isSkyAssociatedWorld(event.getPlayer().getWorld())) {
+        if (!tramplingEnabled || !plugin.getWorldManager().isSkyAssociatedWorld(event.getPlayer().getWorld())) {
             return;
         }
         if (event.getAction() == Action.PHYSICAL
@@ -148,7 +149,7 @@ public class GriefEvents implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onTargeting(EntityTargetLivingEntityEvent e) {
-        if (!witherEnabled || e == null || !plugin.isSkyAssociatedWorld(e.getEntity().getWorld())) {
+        if (!witherEnabled || !plugin.getWorldManager().isSkyAssociatedWorld(e.getEntity().getWorld())) {
             return;
         }
         if (e.getEntity() instanceof Wither && e.getTarget() != null) {
@@ -158,7 +159,9 @@ public class GriefEvents implements Listener {
 
     @EventHandler
     public void onWitherSkullExplosion(EntityDamageByEntityEvent e) {
-        if (!witherEnabled || e == null || !(e.getEntity() instanceof WitherSkull) || !plugin.isSkyAssociatedWorld(e.getEntity().getWorld())) {
+        if (!witherEnabled
+                || !(e.getEntity() instanceof WitherSkull)
+                || !plugin.getWorldManager().isSkyAssociatedWorld(e.getEntity().getWorld())) {
             return;
         }
         // Find owner
@@ -205,7 +208,7 @@ public class GriefEvents implements Listener {
 
     @EventHandler
     public void onEgg(PlayerEggThrowEvent e) {
-        if (!hatchingEnabled || !plugin.isSkyAssociatedWorld(e.getPlayer().getWorld())) {
+        if (!hatchingEnabled || !plugin.getWorldManager().isSkyAssociatedWorld(e.getPlayer().getWorld())) {
             return;
         }
         if (!plugin.playerIsOnIsland(e.getPlayer())) {

@@ -412,7 +412,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (playerInfo != null) {
             playerInfo.setIslandGenerating(true);
         }
-        if (isSkyWorld(player.getWorld())) {
+        if (getWorldManager().isSkyWorld(player.getWorld())) {
             // Clear first, since the player could log out and we NEED to make sure their inventory gets cleared.
             clearPlayerInventory(player);
         }
@@ -428,7 +428,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public void clearPlayerInventory(Player player) {
         getLogger().entering(CN, "clearPlayerInventory", player);
         PlayerInfo playerInfo = getPlayerInfo(player);
-        if (!isSkyWorld(player.getWorld())) {
+        if (!getWorldManager().isSkyWorld(player.getWorld())) {
             getLogger().finer("not clearing, since player is not in skyworld, marking for clear on next entry");
             if (playerInfo != null) {
                 playerInfo.setClearInventoryOnNextEntry(true);
@@ -542,7 +542,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean locationIsOnNetherIsland(final Player player, final Location loc) {
-        if (!isSkyNether(loc.getWorld())) {
+        if (!getWorldManager().isSkyNether(loc.getWorld())) {
             return false;
         }
         PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
@@ -558,7 +558,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean locationIsOnIsland(final Player player, final Location loc) {
-        if (!isSkyWorld(loc.getWorld())) {
+        if (!getWorldManager().isSkyWorld(loc.getWorld())) {
             return false;
         }
         PlayerInfo playerInfo = playerLogic.getPlayerInfo(player);
@@ -661,7 +661,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         try {
             Location next = getIslandLocatorLogic().getNextIslandLocation(player);
-            if (isSkyWorld(player.getWorld())) {
+            if (getWorldManager().isSkyWorld(player.getWorld())) {
                 getTeleportLogic().spawnTeleport(player, true);
             }
             generateIsland(player, pi, next, cSchem);
@@ -853,24 +853,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         getCommand("partytalk").setExecutor(new PartyTalkCommand(this, chatLogic));
     }
 
-    public boolean isSkyWorld(World world) {
-        if (world == null) {
-            return false;
-        }
-        return getWorldManager().getWorld().getName().equalsIgnoreCase(world.getName());
-    }
-
-    public boolean isSkyNether(World world) {
-        World netherWorld = getWorldManager().getNetherWorld();
-        return world != null && netherWorld != null && world.getName().equalsIgnoreCase(netherWorld.getName());
-    }
-
-    public boolean isSkyAssociatedWorld(World world) {
-        return world.getName().startsWith(WorldManager.skyBlockWorld.getName())
-                && !(world.getEnvironment() == World.Environment.NETHER && !Settings.nether_enabled)
-                && !(world.getEnvironment() == World.Environment.THE_END);
-    }
-
     public IslandLogic getIslandLogic() {
         return islandLogic;
     }
@@ -892,7 +874,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (command == null || player == null) {
             return;
         }
-        if (onlyInSky && !isSkyAssociatedWorld(player.getWorld())) {
+        if (onlyInSky && !getWorldManager().isSkyAssociatedWorld(player.getWorld())) {
             return;
         }
         command = command
@@ -974,7 +956,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public boolean playerIsInSpawn(Player player) {
         Location pLoc = player.getLocation();
-        if (!isSkyWorld(pLoc.getWorld())) {
+        if (!getWorldManager().isSkyWorld(pLoc.getWorld())) {
             return false;
         }
         Location spawnCenter = new Location(WorldManager.skyBlockWorld, 0, pLoc.getBlockY(), 0);
