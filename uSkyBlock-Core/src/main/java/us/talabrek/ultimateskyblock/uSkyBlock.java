@@ -13,13 +13,8 @@ import io.papermc.lib.PaperLib;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -66,8 +61,6 @@ import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
-import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
-import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
@@ -117,7 +110,6 @@ import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.Settings.island_height;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
 import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
@@ -154,19 +146,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     private USBImporterExecutor importer;
 
-    private static volatile World skyBlockWorld;
-    private static volatile World skyBlockNetherWorld;
-
     private static uSkyBlock instance;
     // TODO: 28/06/2016 - R4zorax: These two should probably be moved to the proper classes
     public File directoryPlayers;
     public File directoryIslands;
 
     private BukkitTask autoRecalculateTask;
-
-    static {
-        uSkyBlock.skyBlockWorld = null;
-    }
 
     private IslandLocatorLogic islandLocatorLogic;
     private PlayerDB playerDB;
@@ -189,7 +174,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         HandlerList.unregisterAll(this);
         Bukkit.getScheduler().cancelTasks(this);
         try {
-            uSkyBlock.skyBlockWorld = null; // Force a reload on config.
+            WorldManager.skyBlockWorld = null; // Force a reload on config.
         } catch (Exception e) {
             log(Level.INFO, tr("Something went wrong saving the island and/or party data!"), e);
         }
@@ -213,8 +198,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     @Override
     public void onEnable() {
-        skyBlockWorld = null; // Force a re-import or what-ever...
-        skyBlockNetherWorld = null;
+        WorldManager.skyBlockWorld = null; // Force a re-import or what-ever...
+        WorldManager.skyBlockNetherWorld = null;
         missingRequirements = null;
         instance = this;
         CommandManager.registerRequirements(this);
@@ -351,53 +336,19 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         manager.registerEvents(new ChatEvents(chatLogic), this);
     }
 
+    @Deprecated
     public World getWorld() {
-        if (uSkyBlock.skyBlockWorld == null) {
-            skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
-            ChunkGenerator skyGenerator = getWorldManager().getOverworldGenerator();
-            ChunkGenerator worldGenerator = skyBlockWorld != null ? skyBlockWorld.getGenerator() : null;
-            if (skyBlockWorld == null || skyBlockWorld.canGenerateStructures() ||
-                    worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
-                uSkyBlock.skyBlockWorld = WorldCreator
-                        .name(Settings.general_worldName)
-                        .type(WorldType.NORMAL)
-                        .generateStructures(false)
-                        .environment(World.Environment.NORMAL)
-                        .generator(skyGenerator)
-                        .createWorld();
-                uSkyBlock.skyBlockWorld.save();
-            }
-            MultiverseCoreHandler.importWorld(skyBlockWorld);
-            getWorldManager().setupWorld(skyBlockWorld, island_height);
-        }
-        return uSkyBlock.skyBlockWorld;
+        return getWorldManager().getWorld();
     }
 
+    @Deprecated
     public static World getSkyBlockWorld() {
         return getInstance().getWorld();
     }
 
+    @Deprecated
     public World getSkyBlockNetherWorld() {
-        if (skyBlockNetherWorld == null && Settings.nether_enabled) {
-            skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
-            ChunkGenerator skyGenerator = getWorldManager().getNetherGenerator();
-            ChunkGenerator worldGenerator = skyBlockNetherWorld != null ? skyBlockNetherWorld.getGenerator() : null;
-            if (skyBlockNetherWorld == null || skyBlockNetherWorld.canGenerateStructures() ||
-                    worldGenerator == null || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
-                uSkyBlock.skyBlockNetherWorld = WorldCreator
-                        .name(Settings.general_worldName + "_nether")
-                        .type(WorldType.NORMAL)
-                        .generateStructures(false)
-                        .environment(World.Environment.NETHER)
-                        .generator(skyGenerator)
-                        .createWorld();
-                uSkyBlock.skyBlockNetherWorld.save();
-            }
-            MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
-            getWorldManager().setupWorld(skyBlockNetherWorld, island_height / 2);
-            MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
-        }
-        return skyBlockNetherWorld;
+        return getWorldManager().getSkyBlockNetherWorld();
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
@@ -930,7 +881,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean isSkyAssociatedWorld(World world) {
-        return world.getName().startsWith(skyBlockWorld.getName())
+        return world.getName().startsWith(WorldManager.skyBlockWorld.getName())
                 && !(world.getEnvironment() == World.Environment.NETHER && !Settings.nether_enabled)
                 && !(world.getEnvironment() == World.Environment.THE_END);
     }
@@ -1041,7 +992,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (!isSkyWorld(pLoc.getWorld())) {
             return false;
         }
-        Location spawnCenter = new Location(skyBlockWorld, 0, pLoc.getBlockY(), 0);
+        Location spawnCenter = new Location(WorldManager.skyBlockWorld, 0, pLoc.getBlockY(), 0);
         return spawnCenter.distance(pLoc) <= Settings.general_spawnSize;
     }
 

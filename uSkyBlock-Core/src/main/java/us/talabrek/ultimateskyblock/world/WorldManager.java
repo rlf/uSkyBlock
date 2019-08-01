@@ -1,10 +1,13 @@
 package us.talabrek.ultimateskyblock.world;
 
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
@@ -14,6 +17,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
+import us.talabrek.ultimateskyblock.handler.MultiverseCoreHandler;
+import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
@@ -22,9 +27,18 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static us.talabrek.ultimateskyblock.Settings.island_height;
+
 public class WorldManager {
     private final uSkyBlock plugin;
     private final Logger logger;
+
+    public static volatile World skyBlockWorld;
+    public static volatile World skyBlockNetherWorld;
+
+    static {
+        skyBlockWorld = null;
+    }
 
     public WorldManager(@NotNull uSkyBlock plugin) {
         this.plugin = plugin;
@@ -161,5 +175,65 @@ public class WorldManager {
                 && Settings.nether_enabled
                 ? getNetherGenerator()
                 : getOverworldGenerator();
+    }
+
+    /**
+     * Gets the skyblock island {@link World}. Creates and/or imports the world if necessary.
+     * @return Skyblock island world.
+     */
+    @NotNull
+    public synchronized World getWorld() {
+        if (skyBlockWorld == null) {
+            skyBlockWorld = Bukkit.getWorld(Settings.general_worldName);
+            ChunkGenerator skyGenerator = getOverworldGenerator();
+            ChunkGenerator worldGenerator = skyBlockWorld != null ? skyBlockWorld.getGenerator() : null;
+            if (skyBlockWorld == null
+                    || skyBlockWorld.canGenerateStructures()
+                    || worldGenerator == null
+                    || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
+                skyBlockWorld = WorldCreator
+                        .name(Settings.general_worldName)
+                        .type(WorldType.NORMAL)
+                        .generateStructures(false)
+                        .environment(World.Environment.NORMAL)
+                        .generator(skyGenerator)
+                        .createWorld();
+                skyBlockWorld.save();
+            }
+            MultiverseCoreHandler.importWorld(skyBlockWorld);
+            setupWorld(skyBlockWorld, island_height);
+        }
+        return skyBlockWorld;
+    }
+
+    /**
+     * Gets the skyblock nether island {@link World}. Creates and/or imports the world if necessary. Returns null if
+     * the nether is not enabled in the plugin configuration.
+     * @return Skyblock nether island world, or null if nether is disabled.
+     */
+    @Nullable
+    public synchronized World getSkyBlockNetherWorld() {
+        if (skyBlockNetherWorld == null && Settings.nether_enabled) {
+            skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
+            ChunkGenerator skyGenerator = getNetherGenerator();
+            ChunkGenerator worldGenerator = skyBlockNetherWorld != null ? skyBlockNetherWorld.getGenerator() : null;
+            if (skyBlockNetherWorld == null
+                    || skyBlockNetherWorld.canGenerateStructures()
+                    || worldGenerator == null
+                    || !worldGenerator.getClass().getName().equals(skyGenerator.getClass().getName())) {
+                skyBlockNetherWorld = WorldCreator
+                        .name(Settings.general_worldName + "_nether")
+                        .type(WorldType.NORMAL)
+                        .generateStructures(false)
+                        .environment(World.Environment.NETHER)
+                        .generator(skyGenerator)
+                        .createWorld();
+                skyBlockNetherWorld.save();
+            }
+            MultiverseCoreHandler.importNetherWorld(skyBlockNetherWorld);
+            setupWorld(skyBlockNetherWorld, island_height / 2);
+            MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
+        }
+        return skyBlockNetherWorld;
     }
 }
