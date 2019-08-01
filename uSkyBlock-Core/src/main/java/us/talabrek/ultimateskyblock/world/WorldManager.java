@@ -212,7 +212,7 @@ public class WorldManager {
      * @return Skyblock nether island world, or null if nether is disabled.
      */
     @Nullable
-    public synchronized World getSkyBlockNetherWorld() {
+    public synchronized World getNetherWorld() {
         if (skyBlockNetherWorld == null && Settings.nether_enabled) {
             skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
             ChunkGenerator skyGenerator = getNetherGenerator();

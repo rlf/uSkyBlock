@@ -251,7 +251,7 @@ public class NetherTerraFormEvents implements Listener {
         if (!plugin.isSkyNether(e.getLocation().getWorld())) {
             return;
         }
-        if (e.getLocation().getBlockY() > plugin.getSkyBlockNetherWorld().getMaxHeight()) {
+        if (e.getLocation().getBlockY() > plugin.getWorldManager().getSkyBlockNetherWorld().getMaxHeight()) {
             // Block spawning above nether...
             e.setCancelled(true);
             return;

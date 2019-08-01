@@ -17,7 +17,7 @@ public class RecalculateRunnable extends BukkitRunnable {
     @Override
     public void run() {
         Set<String> recalcIslands = new HashSet<>();
-        for (Player player : plugin.getWorld().getPlayers()) {
+        for (Player player : plugin.getWorldManager().getWorld().getPlayers()) {
             if (player.isOnline() && plugin.playerIsOnIsland(player)) {
                 recalcIslands.add(plugin.getPlayerInfo(player).locationForParty());
             }

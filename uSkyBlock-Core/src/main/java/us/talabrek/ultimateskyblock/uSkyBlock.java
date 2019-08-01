@@ -223,9 +223,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     log(Level.INFO, "Hooked into Vault Permissions");
                 }
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
-                WorldGuardHandler.setupGlobal(getSkyBlockWorld());
-                if (getSkyBlockNetherWorld() != null) {
-                    WorldGuardHandler.setupGlobal(getSkyBlockNetherWorld());
+                WorldGuardHandler.setupGlobal(getWorldManager().getWorld());
+                if (getWorldManager().getNetherWorld() != null) {
+                    WorldGuardHandler.setupGlobal(getWorldManager().getNetherWorld());
                 }
                 registerEventsAndCommands();
                 if (!getConfig().getBoolean("importer.name2uuid.imported", false)) {
@@ -334,21 +334,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         PlaceholderHandler.register(this);
         manager.registerEvents(new ChatEvents(chatLogic), this);
-    }
-
-    @Deprecated
-    public World getWorld() {
-        return getWorldManager().getWorld();
-    }
-
-    @Deprecated
-    public static World getSkyBlockWorld() {
-        return getInstance().getWorld();
-    }
-
-    @Deprecated
-    public World getSkyBlockNetherWorld() {
-        return getWorldManager().getSkyBlockNetherWorld();
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
@@ -516,7 +501,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     }
 
     public boolean homeSet(final Player player) {
-        if (!player.getWorld().getName().equalsIgnoreCase(getSkyBlockWorld().getName())) {
+        if (!player.getWorld().getName().equalsIgnoreCase(getWorldManager().getWorld().getName())) {
             player.sendMessage(tr("\u00a74You must be closer to your island to set your skyblock home!"));
             return true;
         }
@@ -872,11 +857,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (world == null) {
             return false;
         }
-        return getSkyBlockWorld().getName().equalsIgnoreCase(world.getName());
+        return getWorldManager().getWorld().getName().equalsIgnoreCase(world.getName());
     }
 
     public boolean isSkyNether(World world) {
-        World netherWorld = getSkyBlockNetherWorld();
+        World netherWorld = getWorldManager().getNetherWorld();
         return world != null && netherWorld != null && world.getName().equalsIgnoreCase(netherWorld.getName());
     }
 

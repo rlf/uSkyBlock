@@ -43,7 +43,8 @@ public class ChatLogic {
             return islandInfo != null ? islandInfo.getOnlineMembers() : Collections.singletonList(player);
         } else if (chatType == IslandChatEvent.Type.ISLAND) {
             if (plugin.isSkyWorld(player.getWorld())) {
-                return WorldGuardHandler.getPlayersInRegion(plugin.getWorld(), WorldGuardHandler.getIslandRegionAt(player.getLocation()));
+                return WorldGuardHandler.getPlayersInRegion(plugin.getWorldManager().getWorld(),
+                        WorldGuardHandler.getIslandRegionAt(player.getLocation()));
             }
             return Collections.emptyList();
         }

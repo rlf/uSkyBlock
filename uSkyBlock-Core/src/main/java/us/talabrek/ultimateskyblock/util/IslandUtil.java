@@ -29,7 +29,7 @@ public enum IslandUtil {;
         if (islandName == null || islandName.isEmpty()) {
             return null;
         }
-        World world = uSkyBlock.getInstance().getWorld();
+        World world = uSkyBlock.getInstance().getWorldManager().getWorld();
         String[] cords = islandName.split(",");
         return new Location(world, Long.parseLong(cords[0], 10), Settings.island_height, Long.parseLong(cords[1], 10));
     }

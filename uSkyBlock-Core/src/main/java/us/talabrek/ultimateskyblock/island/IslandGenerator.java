@@ -91,7 +91,7 @@ public class IslandGenerator {
         }
         if (schemFile.exists() && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
             AsyncWorldEditHandler.loadIslandSchematic(schemFile, next, playerPerk);
-            World skyBlockNetherWorld = uSkyBlock.getInstance().getSkyBlockNetherWorld();
+            World skyBlockNetherWorld = uSkyBlock.getInstance().getWorldManager().getNetherWorld();
             if (skyBlockNetherWorld != null) {
                 Location netherHome = new Location(skyBlockNetherWorld, next.getBlockX(), Settings.nether_height, next.getBlockZ());
                 AsyncWorldEditHandler.loadIslandSchematic(netherFile, netherHome, playerPerk);

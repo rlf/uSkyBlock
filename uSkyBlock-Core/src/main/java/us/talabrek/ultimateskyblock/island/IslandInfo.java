@@ -922,7 +922,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
     @Nullable
     public Location getWarpLocation() {
         if (hasWarp()) {
-            return new Location(uSkyBlock.getSkyBlockWorld(),
+            return new Location(plugin.getWorldManager().getWorld(),
                     config.getInt("general.warpLocationX", 0),
                     config.getInt("general.warpLocationY", 0),
                     config.getInt("general.warpLocationZ", 0),

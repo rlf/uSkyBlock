@@ -73,7 +73,7 @@ public class WorldGuardHandler {
 
     public static boolean protectIsland(uSkyBlock plugin, CommandSender sender, IslandInfo islandConfig) {
         try {
-            RegionManager regionManager = getRegionManager(plugin.getWorld());
+            RegionManager regionManager = getRegionManager(plugin.getWorldManager().getWorld());
             String regionName = islandConfig.getName() + "island";
             if (islandConfig != null && noOrOldRegion(regionManager, regionName, islandConfig)) {
                 updateRegion(islandConfig);
@@ -94,13 +94,13 @@ public class WorldGuardHandler {
     public static void updateRegion(IslandInfo islandInfo) {
         try {
             ProtectedCuboidRegion region = setRegionFlags(islandInfo);
-            RegionManager regionManager = getRegionManager(uSkyBlock.getInstance().getWorld());
+            RegionManager regionManager = getRegionManager(uSkyBlock.getInstance().getWorldManager().getWorld());
             regionManager.removeRegion(islandInfo.getName() + "island");
             regionManager.removeRegion(islandInfo.getLeader() + "island");
             regionManager.addRegion(region);
             String netherName = islandInfo.getName() + "nether";
             region = setRegionFlags(islandInfo, netherName);
-            World netherWorld = uSkyBlock.getInstance().getSkyBlockNetherWorld();
+            World netherWorld = uSkyBlock.getInstance().getWorldManager().getNetherWorld();
             if (netherWorld != null) {
                 regionManager = getRegionManager(netherWorld);
                 regionManager.removeRegion(netherName);
@@ -185,7 +185,7 @@ public class WorldGuardHandler {
 
     public static void islandLock(final CommandSender sender, final String islandName) {
         try {
-            RegionManager regionManager = getRegionManager(uSkyBlock.getSkyBlockWorld());
+            RegionManager regionManager = getRegionManager(uSkyBlock.getInstance().getWorldManager().getWorld());
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 updateLockStatus(region, true);
@@ -200,7 +200,7 @@ public class WorldGuardHandler {
 
     public static void islandUnlock(final CommandSender sender, final String islandName) {
         try {
-            RegionManager regionManager = getRegionManager(uSkyBlock.getSkyBlockWorld());
+            RegionManager regionManager = getRegionManager(uSkyBlock.getInstance().getWorldManager().getWorld());
             if (regionManager.hasRegion(islandName + "island")) {
                 ProtectedRegion region = regionManager.getRegion(islandName + "island");
                 updateLockStatus(region, false);
@@ -271,7 +271,7 @@ public class WorldGuardHandler {
     }
 
     public static void removeIslandRegion(String islandName) {
-        RegionManager regionManager = getRegionManager(uSkyBlock.getSkyBlockWorld());
+        RegionManager regionManager = getRegionManager(uSkyBlock.getInstance().getWorldManager().getWorld());
         regionManager.removeRegion(islandName + "island");
         regionManager.removeRegion(islandName + "nether");
     }

@@ -146,10 +146,10 @@ public class IslandLogic {
                 }
             }
         };
-        World skyBlockWorld = plugin.getWorld();
+        World skyBlockWorld = plugin.getWorldManager().getWorld();
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(loc);
         if (region != null) {
-            for (Player player : WorldGuardHandler.getPlayersInRegion(plugin.getWorld(), region)) {
+            for (Player player : WorldGuardHandler.getPlayersInRegion(plugin.getWorldManager().getWorld(), region)) {
                 if (player != null && player.isOnline() && plugin.isSkyWorld(player.getWorld()) && !player.isFlying()) {
                     player.sendMessage(tr("\u00a7cThe island you are on is being deleted! Sending you to spawn."));
                     plugin.getTeleportLogic().spawnTeleport(player, true);
@@ -164,7 +164,7 @@ public class IslandLogic {
 
     private Location getNetherLocation(Location loc) {
         Location netherIsland = loc.clone();
-        netherIsland.setWorld(plugin.getSkyBlockNetherWorld());
+        netherIsland.setWorld(plugin.getWorldManager().getNetherWorld());
         netherIsland.setY(loc.getY()/2);
         return netherIsland;
     }

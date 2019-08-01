@@ -254,7 +254,7 @@ public class PlayerEvents implements Listener {
             return;
         }
         if (plugin.isSkyWorld(event.getPlayer().getWorld())) {
-            event.setRespawnLocation(uSkyBlock.getSkyBlockWorld().getSpawnLocation());
+            event.setRespawnLocation(plugin.getWorldManager().getWorld().getSpawnLocation());
         }
     }
 
