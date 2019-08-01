@@ -85,7 +85,7 @@ public class OrphanLogic {
             return null;
         }
         try {
-            World world = plugin.getWorld();
+            World world = plugin.getWorldManager().getWorld();
             for (Iterator<Orphan> it = orphaned.iterator(); it.hasNext(); ) {
                 Orphan candidate = it.next();
                 if (candidate != null) {

@@ -34,7 +34,7 @@ public abstract class CommonLevelLogic implements LevelLogic {
 
     Location getNetherLocation(Location l) {
         Location netherLoc = l.clone();
-        netherLoc.setWorld(plugin.getSkyBlockNetherWorld());
+        netherLoc.setWorld(plugin.getWorldManager().getNetherWorld());
         netherLoc.setY(Settings.nether_height);
         return netherLoc;
     }

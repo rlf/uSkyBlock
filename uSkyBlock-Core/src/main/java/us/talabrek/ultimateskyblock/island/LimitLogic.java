@@ -51,8 +51,9 @@ public class LimitLogic {
         ProtectedRegion islandRegionAt = WorldGuardHandler.getIslandRegionAt(islandLocation);
         if (islandRegionAt != null) {
             // Nether and Overworld regions are more or less equal (same x,z coords)
-            List<LivingEntity> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorld(), islandRegionAt);
-            World nether = plugin.getSkyBlockNetherWorld();
+            List<LivingEntity> creatures = WorldGuardHandler.getCreaturesInRegion(plugin.getWorldManager().getWorld(),
+                    islandRegionAt);
+            World nether = plugin.getWorldManager().getNetherWorld();
             if (nether != null) {
                 creatures.addAll(WorldGuardHandler.getCreaturesInRegion(nether, islandRegionAt));
             }

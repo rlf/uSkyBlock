@@ -152,7 +152,7 @@ public class SignLogic {
     }
 
     private void updateSignAsync(final Location chestLoc) {
-        if (chestLoc == null || !plugin.isSkyAssociatedWorld(chestLoc.getWorld())) {
+        if (chestLoc == null || !plugin.getWorldManager().isSkyAssociatedWorld(chestLoc.getWorld())) {
             return;
         }
         String locString = LocationUtil.asKey(chestLoc);

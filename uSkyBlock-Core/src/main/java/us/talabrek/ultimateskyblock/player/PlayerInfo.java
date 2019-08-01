@@ -124,7 +124,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     @Override
     public Location getIslandNetherLocation() {
         Location l = getIslandLocation();
-        World nether = uSkyBlock.getInstance().getSkyBlockNetherWorld();
+        World nether = uSkyBlock.getInstance().getWorldManager().getNetherWorld();
         if (nether == null) {
             return null;
         }
@@ -210,9 +210,9 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         try {
             this.displayName = playerData.getString("player.displayName", playerName);
             this.uuid = UUIDUtil.fromString(playerData.getString("player.uuid", null));
-            this.islandLocation = new Location(uSkyBlock.getSkyBlockWorld(),
+            this.islandLocation = new Location(uSkyBlock.getInstance().getWorldManager().getWorld(),
                     playerData.getInt("player.islandX"), playerData.getInt("player.islandY"), playerData.getInt("player.islandZ"));
-            this.homeLocation = new Location(uSkyBlock.getSkyBlockWorld(),
+            this.homeLocation = new Location(uSkyBlock.getInstance().getWorldManager().getWorld(),
                     playerData.getInt("player.homeX") + 0.5, playerData.getInt("player.homeY") + 0.2, playerData.getInt("player.homeZ") + 0.5,
                     (float) playerData.getDouble("player.homeYaw", 0.0),
                     (float) playerData.getDouble("player.homePitch", 0.0));

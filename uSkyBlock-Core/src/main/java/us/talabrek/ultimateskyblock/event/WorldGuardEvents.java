@@ -25,7 +25,7 @@ public class WorldGuardEvents implements Listener {
     @EventHandler
     @SuppressWarnings("unused")
     public void onPlayerMove(PlayerMoveEvent e) {
-        if (e == null || e.getTo() == null || !plugin.isSkyAssociatedWorld(e.getTo().getWorld())) {
+        if (e.getTo() == null || !plugin.getWorldManager().isSkyAssociatedWorld(e.getTo().getWorld())) {
             return;
         }
         String islandNameAt = WorldGuardHandler.getIslandNameAt(e.getTo());

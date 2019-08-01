@@ -66,7 +66,7 @@ public class ToolMenuEvents implements Listener {
             return;
         }
         Player player = e.getPlayer();
-        if (!plugin.isSkyAssociatedWorld(player.getWorld()) || !isTool(e.getItem())) {
+        if (!plugin.getWorldManager().isSkyAssociatedWorld(player.getWorld()) || !isTool(e.getItem())) {
             return;
         }
 

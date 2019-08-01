@@ -46,7 +46,7 @@ public class IslandLocatorLogic {
 
     private Location getLastIsland() {
         if (lastIsland == null) {
-            lastIsland = new Location(plugin.getWorld(),
+            lastIsland = new Location(plugin.getWorldManager().getWorld(),
                     config.getInt("options.general.lastIslandX", 0), Settings.island_height,
                     config.getInt("options.general.lastIslandZ", 0));
         }
@@ -78,7 +78,7 @@ public class IslandLocatorLogic {
 
     private synchronized Location getNext(Player player) {
         Location last = getLastIsland();
-        if (plugin.isSkyWorld(player.getWorld()) && !plugin.islandInSpawn(player.getLocation())) {
+        if (plugin.getWorldManager().isSkyWorld(player.getWorld()) && !plugin.islandInSpawn(player.getLocation())) {
             Location location = LocationUtil.alignToDistance(player.getLocation(), Settings.island_distance);
             if (isAvailableLocation(location)) {
                 player.sendMessage(tr("\u00a79Creating an island at your location"));

@@ -20,7 +20,7 @@ public class LeaveCommand extends RequireIslandCommand {
 
     @Override
     protected boolean doExecute(String alias, Player player, PlayerInfo pi, IslandInfo island, Map<String, Object> data, String... args) {
-        if (player.getWorld().getName().equalsIgnoreCase(uSkyBlock.getSkyBlockWorld().getName())) {
+        if (player.getWorld().getName().equalsIgnoreCase(plugin.getWorldManager().getWorld().getName())) {
             if (!island.isParty()) {
                 player.sendMessage(tr("\u00a74You can't leave your island if you are the only person. Try using /island restart if you want a new one!"));
                 return true;

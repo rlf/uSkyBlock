@@ -93,7 +93,7 @@ public class NetherTerraFormEvents implements Listener {
         }
         Block block = event.getBlock();
         Player player = event.getPlayer();
-        if (!plugin.isSkyNether(block.getWorld()) || !plugin.isSkyNether(player.getWorld())) {
+        if (!plugin.getWorldManager().isSkyNether(block.getWorld()) || !plugin.getWorldManager().isSkyNether(player.getWorld())) {
             return; // Bail out, not our problem
         }
         if (player.getGameMode() != GameMode.SURVIVAL) {
@@ -227,7 +227,7 @@ public class NetherTerraFormEvents implements Listener {
 
     @EventHandler
     public void onGhastExplode(EntityExplodeEvent event) {
-        if (event == null || !plugin.isSkyNether(event.getEntity().getWorld())) {
+        if (!plugin.getWorldManager().isSkyNether(event.getEntity().getWorld())) {
             return; // Bail out, not our problem
         }
         // TODO: 23/09/2015 - R4zorax: Perhaps enable this when island has a certain level?
@@ -245,13 +245,13 @@ public class NetherTerraFormEvents implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onCreatureSpawn(CreatureSpawnEvent e) {
-        if (!spawnEnabled || e == null || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL) {
+        if (!spawnEnabled || e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL) {
             return;
         }
-        if (!plugin.isSkyNether(e.getLocation().getWorld())) {
+        if (!plugin.getWorldManager().isSkyNether(e.getLocation().getWorld())) {
             return;
         }
-        if (e.getLocation().getBlockY() > plugin.getSkyBlockNetherWorld().getMaxHeight()) {
+        if (e.getLocation().getBlockY() > plugin.getWorldManager().getNetherWorld().getMaxHeight()) {
             // Block spawning above nether...
             e.setCancelled(true);
             return;

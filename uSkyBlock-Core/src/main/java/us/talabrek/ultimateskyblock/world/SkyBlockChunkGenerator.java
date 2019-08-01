@@ -1,10 +1,11 @@
-package us.talabrek.ultimateskyblock;
+package us.talabrek.ultimateskyblock.world;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import us.talabrek.ultimateskyblock.Settings;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -47,7 +47,7 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
         this.plugin = plugin;
         innerChunks = WorldEditHandler.getInnerChunks(region);
         borderRegions = WorldEditHandler.getBorderRegions(region);
-        bukkitWorld = new BukkitWorld(plugin.getWorld());
+        bukkitWorld = new BukkitWorld(plugin.getWorldManager().getWorld());
         minY = Math.min(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
         maxY = Math.max(region.getMinimumPoint().getBlockY(), region.getMaximumPoint().getBlockY());
         maxBlocks = 2*Math.max(region.getLength(), region.getWidth())*16*(maxY-minY);

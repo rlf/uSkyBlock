@@ -105,7 +105,7 @@ public class PlayerLogic {
                                 WorldGuardHandler.protectIsland(onlinePlayer, playerInfo);
                                 plugin.getIslandLogic().clearFlatland(onlinePlayer, playerInfo.getIslandLocation(), 400);
                             }
-                            if (plugin.isSkyAssociatedWorld(onlinePlayer.getWorld()) && !plugin.playerIsOnIsland(onlinePlayer)) {
+                            if (plugin.getWorldManager().isSkyAssociatedWorld(onlinePlayer.getWorld()) && !plugin.playerIsOnIsland(onlinePlayer)) {
                                 // Check if banned
                                 String islandName = WorldGuardHandler.getIslandNameAt(onlinePlayer.getLocation());
                                 IslandInfo islandInfo = plugin.getIslandInfo(islandName);

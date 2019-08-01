@@ -105,7 +105,7 @@ public class TeleportLogic implements Listener {
     public void spawnTeleport(@NotNull Player player, boolean force) {
         Validate.notNull(player, "Player cannot be null");
 
-        Location spawnLocation = LocationUtil.centerOnBlock(plugin.getWorld().getSpawnLocation());
+        Location spawnLocation = LocationUtil.centerOnBlock(plugin.getWorldManager().getWorld().getSpawnLocation());
         if (player.hasPermission("usb.mod.bypassteleport") || (teleportDelay == 0) || force) {
             if (Settings.extras_sendToSpawn) {
                 plugin.execCommand(player, "op:spawn", false);
