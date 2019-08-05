@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.world;
 
+import io.papermc.lib.PaperLib;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -39,7 +40,8 @@ public class ChunkRegenerator {
     }
 
     /**
-     * Regenerates the given list of {@link Chunk}s at a 5 chunks/tick speed.
+     * Regenerates the given list of {@link Chunk}s at a 4 chunks/tick speed (can be overwritten with hidden
+     * configuration value).
      * @param chunkList List of chunks to regenerate.
      * @param onCompletion Runnable to schedule on completion, or null to call no runnable.
      */
@@ -51,13 +53,14 @@ public class ChunkRegenerator {
         task = scheduler.runTaskTimer(plugin, () -> {
             for (int i = 0; i < CHUNKS_PER_TICK; i++) {
                 if (!chunkList.isEmpty()) {
-                    final Chunk chunk = chunkList.remove(0);
+                    Chunk chunk = chunkList.remove(0);
                     regenerateChunk(chunk);
                 } else {
                     if (onCompletion != null) {
                         scheduler.runTaskLater(plugin, onCompletion, 1L);
                     }
                     task.cancel();
+                    break;
                 }
             }
         }, 0L, 1L);
@@ -67,7 +70,7 @@ public class ChunkRegenerator {
      * Regenerates the given {@link Chunk}, removing all it's entities except players and setting the default biome.
      * @param chunk Chunk to regenerate.
      */
-    public void regenerateChunk(@NotNull Chunk chunk) {
+    private void regenerateChunk(@NotNull Chunk chunk) {
         Validate.notNull(chunk, "Chunk cannot be null");
 
         spawnTeleportPlayers(chunk);
