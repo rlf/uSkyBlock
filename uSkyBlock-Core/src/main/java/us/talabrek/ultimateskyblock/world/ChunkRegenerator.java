@@ -39,25 +39,26 @@ public class ChunkRegenerator {
     }
 
     /**
-     * Regenerates the given list of {@link Chunk}s at a 5 chunks/tick speed.
+     * Regenerates the given list of {@link Chunk}s at the configured chunks/tick speed (default: 4).
      * @param chunkList List of chunks to regenerate.
      * @param onCompletion Runnable to schedule on completion, or null to call no runnable.
      */
     public void regenerateChunks(@NotNull List<Chunk> chunkList, @Nullable Runnable onCompletion) {
         Validate.notNull(chunkList, "ChunkList cannot be empty");
 
-        final int CHUNKS_PER_TICK = 5;
+        final int CHUNKS_PER_TICK = plugin.getConfig().getInt("options.advanced.chunkRegenSpeed", 4);
         BukkitScheduler scheduler = plugin.getServer().getScheduler();
         task = scheduler.runTaskTimer(plugin, () -> {
-            for (int i = 0; i < CHUNKS_PER_TICK; i++) {
+            for (int i = 0; i <= CHUNKS_PER_TICK; i++) {
                 if (!chunkList.isEmpty()) {
-                    final Chunk chunk = chunkList.remove(0);
+                    Chunk chunk = chunkList.remove(0);
                     regenerateChunk(chunk);
                 } else {
                     if (onCompletion != null) {
                         scheduler.runTaskLater(plugin, onCompletion, 1L);
                     }
                     task.cancel();
+                    break;
                 }
             }
         }, 0L, 1L);
@@ -67,7 +68,7 @@ public class ChunkRegenerator {
      * Regenerates the given {@link Chunk}, removing all it's entities except players and setting the default biome.
      * @param chunk Chunk to regenerate.
      */
-    public void regenerateChunk(@NotNull Chunk chunk) {
+    private void regenerateChunk(@NotNull Chunk chunk) {
         Validate.notNull(chunk, "Chunk cannot be null");
 
         spawnTeleportPlayers(chunk);
@@ -114,7 +115,7 @@ public class ChunkRegenerator {
     /**
      * Default BiomeGrid used by uSkyBlock when regenerating chunks.
      */
-    class DefaultBiomeGrid implements BiomeGrid {
+    static class DefaultBiomeGrid implements BiomeGrid {
         private Biome defaultBiome;
 
         DefaultBiomeGrid(Environment env) {

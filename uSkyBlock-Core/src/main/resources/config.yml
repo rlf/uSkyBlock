@@ -214,6 +214,10 @@ options:
     # re-executing it (/is leave, /is restart).
     confirmTimeout: 10
 
+    # [number] The number of chunks to regenerate per server tick. Might be decreased or increased based on available
+    # server resources. Default value: 4.
+    chunkRegenSpeed: 4
+
     # Controls advanced behaviour reg. the internal playerdb
     playerdb:
 
@@ -435,7 +439,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 103
+version: 104
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
