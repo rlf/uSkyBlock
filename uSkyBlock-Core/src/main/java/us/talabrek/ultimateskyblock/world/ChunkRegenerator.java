@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.world;
 
-import io.papermc.lib.PaperLib;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -40,18 +39,17 @@ public class ChunkRegenerator {
     }
 
     /**
-     * Regenerates the given list of {@link Chunk}s at a 4 chunks/tick speed (can be overwritten with hidden
-     * configuration value).
+     * Regenerates the given list of {@link Chunk}s at the configured chunks/tick speed (default: 4).
      * @param chunkList List of chunks to regenerate.
      * @param onCompletion Runnable to schedule on completion, or null to call no runnable.
      */
     public void regenerateChunks(@NotNull List<Chunk> chunkList, @Nullable Runnable onCompletion) {
         Validate.notNull(chunkList, "ChunkList cannot be empty");
 
-        final int CHUNKS_PER_TICK = 5;
+        final int CHUNKS_PER_TICK = plugin.getConfig().getInt("options.advanced.chunkRegenSpeed", 4);
         BukkitScheduler scheduler = plugin.getServer().getScheduler();
         task = scheduler.runTaskTimer(plugin, () -> {
-            for (int i = 0; i < CHUNKS_PER_TICK; i++) {
+            for (int i = 0; i <= CHUNKS_PER_TICK; i++) {
                 if (!chunkList.isEmpty()) {
                     Chunk chunk = chunkList.remove(0);
                     regenerateChunk(chunk);
@@ -117,7 +115,7 @@ public class ChunkRegenerator {
     /**
      * Default BiomeGrid used by uSkyBlock when regenerating chunks.
      */
-    class DefaultBiomeGrid implements BiomeGrid {
+    static class DefaultBiomeGrid implements BiomeGrid {
         private Biome defaultBiome;
 
         DefaultBiomeGrid(Environment env) {
