@@ -68,35 +68,31 @@
         </pluginManagement>
     </build>
     <repositories>
-        <repository>
-            <id>gettext-commons-mvn-repo</id>
-            <url>https://raw.github.com/rlf/gettext-commons/mvn-repo/</url>
-        </repository>
-        <repository>
+        <repository> <!-- Bukkit & Spigot API -->
             <id>spigotmc.org</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/public</url>
         </repository>
-        <repository>
+        <repository> <!-- PaperLib -->
             <id>papermc</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
-        <repository>
+        <repository> <!-- Vault API -->
             <id>vault-repo</id>
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
-        <repository>
+        <repository> <!-- WorldEdit/WorldGuard -->
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/repo/</url>
         </repository>
-        <repository>
+        <repository> <!-- MultiVerse -->
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
-        <repository>
+        <repository> <!-- bStats -->
             <id>CodeMC</id>
             <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
-        <repository>
+        <repository> <!-- MVdWPlaceholderApi -->
             <id>mvdw-software</id>
             <url>http://repo.mvdw-software.be/content/groups/public/</url>
         </repository>
@@ -104,23 +100,19 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-        <repository>
+        <repository> <!-- uSkyBlock dependencies that don't have a (stable) repository -->
             <id>uskyblock-dependencies</id>
             <url>https://www.uskyblock.ovh/maven/dependencies/</url>
         </repository>
-        <repository>
+        <repository> <!-- uSkyBlock plugin artifacts -->
             <id>uskyblock-maven</id>
             <url>https://www.uskyblock.ovh/maven/uskyblock/</url>
-        </repository>
-        <repository>
-            <id>rlf-mvn-repo</id>
-            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>uSkyBlock-mvn-repo</id>
-            <url>https://raw.github.com/rlf/mvn-repo/master/</url>
+            <id>uskyblock-dependencies</id>
+            <url>https://www.uskyblock.ovh/maven/dependencies/</url>
         </pluginRepository>
     </pluginRepositories>
     <profiles>
