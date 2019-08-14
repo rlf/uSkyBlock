@@ -87,7 +87,7 @@ public class IslandLogic {
                     @Override
                     public IslandInfo load(String islandName) throws Exception {
                         log.fine("Loading island-info " + islandName + " to cache!");
-                        return new IslandInfo(islandName);
+                        return new IslandInfo(islandName, plugin);
                     }
                 });
         long every = TimeUtil.secondsAsMillis(plugin.getConfig().getInt("options.advanced.island.saveEvery", 30));

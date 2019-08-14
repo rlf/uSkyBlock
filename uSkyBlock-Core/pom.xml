@@ -355,7 +355,7 @@
         <dependency>
             <groupId>com.github.WesJD</groupId>
             <artifactId>AnvilGUI</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>4b7a469d7e</version>
             <scope>compile</scope>
         </dependency>
         <!-- Multiverse -->
