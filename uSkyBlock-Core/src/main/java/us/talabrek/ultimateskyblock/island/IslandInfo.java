@@ -14,8 +14,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.event.island.IslandBanPlayerEvent;
+import us.talabrek.ultimateskyblock.api.event.island.IslandLockEvent;
 import us.talabrek.ultimateskyblock.api.event.island.IslandTrustPlayerEvent;
 import us.talabrek.ultimateskyblock.api.event.island.IslandUnbanPlayerEvent;
+import us.talabrek.ultimateskyblock.api.event.island.IslandUnlockEvent;
 import us.talabrek.ultimateskyblock.api.event.island.IslandUntrustPlayerEvent;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.player.Perk;
@@ -387,6 +389,11 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         return uuid.equals(getLeaderUniqueId()) || config.getBoolean("party.members." + UUIDUtil.asString(uuid) + "." + perm);
     }
 
+    @Override
+    public String getBiome() {
+        return config.getString("general.biome", "OCEAN").toUpperCase();
+    }
+
     public void setBiome(@NotNull String biome) {
         Validate.notNull(biome, "Biome cannot be null");
         Validate.notEmpty(biome, "Biome cannot be empty");
@@ -487,11 +494,6 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         return getMemberUUIDs().contains(target.getUniqueId());
     }
 
-    @Override
-    public String getBiome() {
-        return config.getString("general.biome", "OCEAN").toUpperCase();
-    }
-
     public void log(@NotNull String message, @Nullable Object[] args) {
         Validate.notNull(message, "Message cannot be null");
         Validate.notEmpty(message, "Message cannot be empty");
@@ -552,8 +554,19 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         save();
     }
 
-    public void lock(@NotNull Player player) {
+    /**
+     * Locks the island. Might get cancelled via the fired {@link IslandLockEvent}.
+     * @param player {@link Player} initializing the lock.
+     * @return True if the island was locked, false otherwise, e.g. when the event is cancelled.
+     */
+    public boolean lock(@NotNull Player player) {
         Validate.notNull(player, "Player cannot be null");
+
+        IslandLockEvent event = new IslandLockEvent(this, player);
+        plugin.getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            return false;
+        }
 
         WorldGuardHandler.islandLock(player, name);
         config.set("general.locked", true);
@@ -564,15 +577,28 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
             sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d deactivated the island warp."), player.getName());
         }
         save();
+        return true;
     }
 
-    public void unlock(@NotNull Player player) {
+    /**
+     * Unlocks the island. Might get cancelled via the fired {@link IslandUnlockEvent}.
+     * @param player {@link Player} initializing the unlock.
+     * @return True if the island was unlocked, false otherwise, e.g. when the event is cancelled.
+     */
+    public boolean unlock(@NotNull Player player) {
         Validate.notNull(player, "Player cannot be null");
+
+        IslandUnlockEvent event = new IslandUnlockEvent(this, player);
+        plugin.getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            return false;
+        }
 
         WorldGuardHandler.islandUnlock(player, name);
         config.set("general.locked", false);
         sendMessageToIslandGroup(true, marktr("\u00a7b{0}\u00a7d unlocked the island."), player.getName());
         save();
+        return true;
     }
 
     public void sendMessageToIslandGroup(boolean broadcast, @NotNull String message, @Nullable Object... args) {
