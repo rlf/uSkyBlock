@@ -485,7 +485,7 @@ ranks:
         displayItem: ROTTEN_FLESH
         lockedDisplayItem: PURPLE_STAINED_GLASS_PANE
         reward:
-          text: 4 redstone ore, 4 iron ore, beetroot-seeds and 1 flint
+          text: 4 redstone ore, 4 iron ore and 1 flint
           items:
           - REDSTONE_ORE:4
           - IRON_ORE:4
