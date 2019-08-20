@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -293,7 +292,7 @@ public class SkyBlockMenu {
         sign.setItemMeta(meta4);
         menu.addItem(new ItemStack[]{sign});
         lores.clear();
-        String currentBiome = plugin.getCurrentBiome(player);
+        String currentBiome = plugin.getIslandInfo(player).getBiome();
         for (BiomeMenuItem biomeMenu : biomeMenus) {
             if (!BiomeCommand.biomeExists(biomeMenu.getId())) {
                 continue; // Skip it
