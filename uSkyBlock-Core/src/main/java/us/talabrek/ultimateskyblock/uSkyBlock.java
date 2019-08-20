@@ -13,7 +13,6 @@ import io.papermc.lib.PaperLib;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -333,13 +332,13 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             manager.registerEvents(new SignEvents(this, new SignLogic(this)), this);
         }
         PlaceholderHandler.register(this);
-        manager.registerEvents(new ChatEvents(chatLogic), this);
+        manager.registerEvents(new ChatEvents(chatLogic, this), this);
     }
 
     public Location getSafeHomeLocation(final PlayerInfo p) {
-        Location home = findNearestSafeLocation(p.getHomeLocation());
+        Location home = LocationUtil.findNearestSafeLocation(p.getHomeLocation(), null);
         if (home == null) {
-            home = findNearestSafeLocation(p.getIslandLocation());
+            home = LocationUtil.findNearestSafeLocation(p.getIslandLocation(), null);
         }
         return home;
     }
@@ -347,9 +346,9 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     public Location getSafeWarpLocation(final PlayerInfo p) {
         us.talabrek.ultimateskyblock.api.IslandInfo islandInfo = getIslandInfo(p);
         if (islandInfo != null) {
-            Location warp = findNearestSafeLocation(islandInfo.getWarpLocation());
+            Location warp = LocationUtil.findNearestSafeLocation(islandInfo.getWarpLocation(), null);
             if (warp == null) {
-                warp = findNearestSafeLocation(islandInfo.getIslandLocation());
+                warp = LocationUtil.findNearestSafeLocation(islandInfo.getIslandLocation(), null);
             }
             return warp;
         }
@@ -686,10 +685,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         islandLogic.clearIsland(next, createTask);
     }
 
-    Location findNearestSafeLocation(Location loc) {
-        return LocationUtil.findNearestSafeLocation(loc, null);
-    }
-
     public Location getChestSpawnLoc(final Location loc) {
         Location chestLocation = LocationUtil.findChestLocation(loc);
         return LocationUtil.findNearestSpawnLocation(chestLocation != null ? chestLocation : loc);
@@ -714,10 +709,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }
         playerInfo.save();
         return info;
-    }
-
-    public String getCurrentBiome(Player p) {
-        return getIslandInfo(p).getBiome();
     }
 
     public IslandInfo getIslandInfo(Player player) {
