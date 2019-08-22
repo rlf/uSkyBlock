@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import us.talabrek.ultimateskyblock.player.UltimateHolder;
+import us.talabrek.ultimateskyblock.player.UltimateHolder.MenuType;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
@@ -132,7 +133,7 @@ public class StringEditMenu extends AbstractConfigMenu implements EditMenu {
             return null;
         }
         String value = config.getString(path, "");
-        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, getTitle()), 9 * 6, getTitle());
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, getTitle(), MenuType.DEFAULT), 9 * 6, getTitle());
         setCharacters(menu, value, keyboard);
         if (isCaps) {
             setCharacters(menu, value, capslockOverlay);
