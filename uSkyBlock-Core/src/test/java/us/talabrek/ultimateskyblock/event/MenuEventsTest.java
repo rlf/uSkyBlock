@@ -8,12 +8,12 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.InventoryView;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import us.talabrek.ultimateskyblock.menu.ConfigMenu;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.UltimateHolder;
+import us.talabrek.ultimateskyblock.player.UltimateHolder.MenuType;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.UUID;
@@ -21,7 +21,6 @@ import java.util.UUID;
 import static org.mockito.Mockito.*;
 
 public class MenuEventsTest {
-    private uSkyBlock fakePlugin;
     private ConfigMenu fakeConfigMenu;
     private SkyBlockMenu fakeMenu;
 
@@ -29,7 +28,7 @@ public class MenuEventsTest {
 
     @Before
     public void setUp() {
-        fakePlugin = mock(uSkyBlock.class);
+        uSkyBlock fakePlugin = mock(uSkyBlock.class);
         fakeConfigMenu = spy(mock(ConfigMenu.class));
         fakeMenu = spy(mock(SkyBlockMenu.class));
 
@@ -44,7 +43,7 @@ public class MenuEventsTest {
 
     @Test
     public void testOnGuiClick_configMenu() {
-        UltimateHolder holder = new UltimateHolder(getFakePlayer(), "Config: config.yml (1/2)");
+        UltimateHolder holder = new UltimateHolder(getFakePlayer(), "Config: config.yml (1/2)", MenuType.CONFIG);
         InventoryClickEvent event = getEvent(holder);
 
         menuEvents.guiClick(event);
@@ -54,7 +53,7 @@ public class MenuEventsTest {
 
     @Test
     public void testOnGuiClick_regularMenu() {
-        UltimateHolder holder = new UltimateHolder(getFakePlayer(), "Island GUI menu");
+        UltimateHolder holder = new UltimateHolder(getFakePlayer(), "Island GUI menu", MenuType.DEFAULT);
         InventoryClickEvent event = getEvent(holder);
 
         menuEvents.guiClick(event);
@@ -69,7 +68,7 @@ public class MenuEventsTest {
 
         menuEvents.guiClick(event);
         verify(fakeConfigMenu, times(0)).onClick(any());
-        verify(fakeMenu).onClick(event);
+        verify(fakeMenu, times(0)).onClick(event);
     }
 
     private Player getFakePlayer() {

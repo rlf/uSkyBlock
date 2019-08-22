@@ -22,9 +22,13 @@ public class MenuEvents implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void guiClick(final InventoryClickEvent event) {
-        String prefix = stripFormatting(tr("Config:"));
-        if (!prefix.isEmpty() && event.getInventory().getHolder() instanceof UltimateHolder &&
-                stripFormatting(((UltimateHolder) event.getInventory().getHolder()).getTitle()).startsWith(prefix)) {
+        if (!(event.getInventory().getHolder() instanceof UltimateHolder)) {
+            // Not our menu.
+            return;
+        }
+
+        UltimateHolder holder = (UltimateHolder) event.getInventory().getHolder();
+        if (holder.getMenuType() == UltimateHolder.MenuType.CONFIG) {
             plugin.getConfigMenu().onClick(event);
         } else {
             plugin.getMenu().onClick(event);

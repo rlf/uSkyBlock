@@ -11,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.player.UltimateHolder;
+import us.talabrek.ultimateskyblock.player.UltimateHolder.MenuType;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
@@ -171,7 +172,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
             page = maxPages;
         }
         String title = tr("Config:") + " " + pre("{0} ({1}/{2})", filename, page, maxPages);
-        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, title), 6 * 9, title);
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, title, MenuType.CONFIG), 6 * 9, title);
         menu.setMaxStackSize(MenuItemFactory.MAX_INT_VALUE);
         int startOffset = (page-1)*54;
         // Add section markers on top line

@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import us.talabrek.ultimateskyblock.player.UltimateHolder;
+import us.talabrek.ultimateskyblock.player.UltimateHolder.MenuType;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.stripFormatting;
@@ -51,7 +52,7 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
 
     @Override
     public boolean onClick(InventoryClickEvent event) {
-        if (event.getInventory() == null || !(event.getInventory().getHolder() instanceof UltimateHolder) ||
+        if (!(event.getInventory().getHolder() instanceof UltimateHolder) ||
                 ((UltimateHolder) event.getInventory().getHolder()).getTitle() == null ||
                 !stripFormatting(((UltimateHolder) event.getInventory().getHolder()).getTitle()).contains(stripFormatting(getTitle()))) {
             return false;
@@ -125,7 +126,7 @@ public class IntegerEditMenu extends AbstractConfigMenu implements EditMenu {
             return null;
         }
         int value = config.getInt(path, 0);
-        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, getTitle()), 6 * 9, getTitle());
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(null, getTitle(), MenuType.CONFIG), 6 * 9, getTitle());
         menu.setMaxStackSize(MenuItemFactory.MAX_INT_VALUE);
         ItemStack frame = createItem(Material.BLACK_STAINED_GLASS_PANE, 0, null, null);
         for (int i = 0; i < 27; i++) {
