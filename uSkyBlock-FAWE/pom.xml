@@ -16,8 +16,8 @@
 
     <repositories>
         <repository>
-            <id>empcraft</id>
-            <url>https://ci.athion.net/job/FastAsyncWorldEdit-1.13/ws/mvn</url>
+            <id>fawe-jenkins</id>
+            <url>https://ci.athion.net/job/FastAsyncWorldEdit-Breaking/ws/mvn</url>
         </repository>
     </repositories>
 
