@@ -89,6 +89,10 @@ public class WorldManager {
     private void setupWorld(@NotNull World world, int islandHeight) {
         Validate.notNull(world, "World cannot be null");
 
+        if (!plugin.getConfig().getBoolean("options.advanced.manageSpawn")) {
+            return;
+        }
+
         if (LocationUtil.isEmptyLocation(world.getSpawnLocation())) {
             world.setSpawnLocation(0, islandHeight, 0);
         }
@@ -107,10 +111,6 @@ public class WorldManager {
     private void createSpawn(@NotNull Location spawnLocation) {
         Validate.notNull(spawnLocation, "SpawnLocation cannot be null");
         Validate.notNull(spawnLocation.getWorld(), "SpawnLocation#world cannot be null");
-
-        if (!plugin.getConfig().getBoolean("options.advanced.manageSpawn")) {
-            return;
-        }
 
         File schematic = new File(plugin.getDataFolder() + File.separator + "schematics" +
                 File.separator + "spawn.schem");
