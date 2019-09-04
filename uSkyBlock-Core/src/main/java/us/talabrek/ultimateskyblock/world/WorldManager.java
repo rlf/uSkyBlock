@@ -108,6 +108,10 @@ public class WorldManager {
         Validate.notNull(spawnLocation, "SpawnLocation cannot be null");
         Validate.notNull(spawnLocation.getWorld(), "SpawnLocation#world cannot be null");
 
+        if (!plugin.getConfig().getBoolean("options.advanced.manageSpawn")) {
+            return;
+        }
+
         File schematic = new File(plugin.getDataFolder() + File.separator + "schematics" +
                 File.separator + "spawn.schem");
         World world = spawnLocation.getWorld();

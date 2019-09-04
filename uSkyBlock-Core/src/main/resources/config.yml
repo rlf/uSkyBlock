@@ -218,6 +218,10 @@ options:
     # server resources. Default value: 4.
     chunkRegenSpeed: 4
 
+    # If false, the world spawn will be ignored. You should take care of placing the world spawn location
+    # with /mv setspawn and managing the spawn building.
+    manageSpawn: true
+
     # Controls advanced behaviour reg. the internal playerdb
     playerdb:
 
@@ -439,7 +443,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 104
+version: 105
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
