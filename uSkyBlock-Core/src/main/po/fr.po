@@ -2860,7 +2860,7 @@ msgid "§4You must be closer to your island to set your skyblock home!"
 msgstr "§4Vous devez être plus proche de votre île pour modifier le home !"
 
 msgid "§aYour skyblock home has been set to your current location."
-msgstr "§aVotre home a été modifié à votre position acutelle."
+msgstr "§aVotre home a été modifié à votre position actuelle."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Votre position actuelle n'est pas un home protégé."
