@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2017-03-12 22:29+0000\n"
+"Last-Translator: dutchy1001\n"
+"Language-Team: uSkyblock-dev team\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, java-format
+msgid "§eYou do not have access to that island-schematic!"
+msgstr "§eYou have no azzess to the schemz"
+
+#, java-format
+msgid "§eNo active cooldowns for §9{0}§e found."
+msgstr "§4* §7No expired coolupz for §6{0}§7 found."

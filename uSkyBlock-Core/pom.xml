@@ -339,7 +339,7 @@
             <classifier>tests</classifier>
         </dependency>
         <dependency>
-            <groupId>dk.lockfuglsang.minecraft</groupId>
+            <groupId>uSkyBlock</groupId>
             <artifactId>po-utils</artifactId>
         </dependency>
         <dependency>
