@@ -1316,7 +1316,7 @@ ranks:
         - SANDSTONE_SLAB:64
         - RED_SANDSTONE:16
         reward:
-          text: 3 end-portal frames, 3 dia, bow
+          text: 3 end-portal frames, 3 diamonds, bow
           items:
           - END_PORTAL_FRAME:3
           - DIAMOND:3
@@ -1354,7 +1354,7 @@ ranks:
         - ROSE_BUSH:10
         - PEONY:10
         reward:
-          text: 3 end-portal frames, 5 dia
+          text: 3 end-portal frames, 5 diamonds
           items:
           - END_PORTAL_FRAME:3
           - DIAMOND:5
@@ -1401,7 +1401,7 @@ ranks:
         - END_PORTAL_FRAME:12
         - END_PORTAL:9
         reward:
-          text: 5 dia and some nice boots
+          text: 5 diamonds and some nice boots
           items:
           - DIAMOND:5
           - DIAMOND_BOOTS:1 {Enchantments:[{id:"minecraft:feather_falling",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:blast_protection",lvl:4}]}
