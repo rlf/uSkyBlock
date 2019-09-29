@@ -184,6 +184,17 @@ options:
 
       # Wheter or not visitors can break vehicles
       vehicle-damage: false
+
+  # Contains flags for controlling monster spawning on islands.
+  spawning:
+    # Controls if Phantoms are allowed to spawn naturally. Non-natural spawns, e.g. from a spawnegg, are not
+    # managed by us.
+    phantoms:
+      # [true/false] If natural Phantom spawns are allowed in the overworld. True enables Phantom spawning.
+      overworld: true
+      # [true/false] If natural Phantom spawns are allowed in the nether. True enables Phantom spawning.
+      nether: false
+
   party:
 
     # The number of ms before an invite timeouts (1000 ms per second)
@@ -443,7 +454,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 105
+version: 106
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

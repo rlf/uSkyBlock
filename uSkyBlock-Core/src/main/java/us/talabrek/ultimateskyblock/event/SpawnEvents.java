@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
+import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.Wither;
@@ -49,8 +50,13 @@ public class SpawnEvents implements Listener {
 
     private final uSkyBlock plugin;
 
+    private boolean phantomsInOverworld;
+    private boolean phantomsInNether;
+
     public SpawnEvents(uSkyBlock plugin) {
         this.plugin = plugin;
+        phantomsInOverworld = plugin.getConfig().getBoolean("options.spawning.phantoms.overworld", true);
+        phantomsInNether = plugin.getConfig().getBoolean("options.spawning.phantoms.nether", false);
     }
 
     @EventHandler
@@ -141,5 +147,38 @@ public class SpawnEvents implements Listener {
         if (!plugin.getLimitLogic().canSpawn(entityType, islandInfo)) {
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onPhantomSpawn(CreatureSpawnEvent event) {
+        if (!(event.getEntity() instanceof Phantom) ||
+                event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL) {
+            return;
+        }
+
+        World spawnWorld = event.getEntity().getWorld();
+        if (!phantomsInOverworld && plugin.getWorldManager().isSkyWorld(spawnWorld)) {
+            event.setCancelled(true);
+        }
+
+        if (!phantomsInNether && plugin.getWorldManager().isSkyNether(spawnWorld)) {
+            event.setCancelled(true);
+        }
+    }
+
+    /**
+     * Changes the setting that allows Phantoms to spawn in the overworld. Used for testing purposes.
+     * @param state True/enabled means spawning is allowed, false disallowed.
+     */
+    void setPhantomsInOverworld(boolean state) {
+        this.phantomsInOverworld = state;
+    }
+
+    /**
+     * Changes the setting that allows Phantoms to spawn in the nether. Used for testing purposes.
+     * @param state True/enabled means spawning is allowed, false disallowed.
+     */
+    void setPhantomsInNether(boolean state) {
+        this.phantomsInNether = state;
     }
 }
