@@ -726,7 +726,7 @@ ranks:
         repeatReward:
           text: 2 lapis, 5 prismarine, kelp and a chance at prismarine crystals
           items:
-          - INK_SAC:2
+          - LAPIS_LAZULI:2
           - PRISMARINE:5
           - KELP:1
           - '{p=0.20}PRISMARINE_CRYSTALS:5'
