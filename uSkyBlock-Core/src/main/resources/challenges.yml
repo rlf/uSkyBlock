@@ -1288,11 +1288,10 @@ ranks:
         - nethermining
         requiredItems:
         - QUARTZ_BLOCK:512
-        - QUARTZ_BLOCK:64
-        - QUARTZ_BLOCK:128
+        - CHISELED_QUARTZ_BLOCK:64
+        - QUARTZ_PILLAR:128
         - QUARTZ_STAIRS:64
-        - QUARTZ_SLAB:128
-        - QUARTZ_SLAB:64
+        - QUARTZ_SLAB:192
         reward:
           text: 3 end-portal frames, red sand
           items:
@@ -1309,11 +1308,10 @@ ranks:
         lockedDisplayItem: BLUE_STAINED_GLASS_PANE
         requiredItems:
         - SANDSTONE:512
-        - SANDSTONE:64
-        - SANDSTONE:128
+        - CHISELED_SANDSTONE:64
+        - SMOOTH_SANDSTONE:128
         - SANDSTONE_STAIRS:64
-        - SANDSTONE_SLAB:128
-        - SANDSTONE_SLAB:64
+        - SANDSTONE_SLAB:192
         - RED_SANDSTONE:16
         reward:
           text: 3 end-portal frames, 3 diamonds, bow
