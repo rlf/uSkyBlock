@@ -133,13 +133,26 @@ public class ChunkRegenerator {
         }
 
         @NotNull
+        @Deprecated
         @Override
         public Biome getBiome(int x, int z) {
             return defaultBiome;
         }
 
+        @NotNull
+        @Override
+        public Biome getBiome(int x, int y, int z) {
+            return defaultBiome;
+        }
+
+        @Deprecated
         @Override
         public void setBiome(int x, int z, @NotNull Biome bio) {
+            defaultBiome = bio;
+        }
+
+        @Override
+        public void setBiome(int x, int y, int z, @NotNull Biome bio) {
             defaultBiome = bio;
         }
     }
