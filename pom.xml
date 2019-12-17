@@ -104,7 +104,7 @@
         </repository>
         <repository> <!-- MultiVerse -->
             <id>onarandombox</id>
-            <url>http://repo.onarandombox.com/content/groups/public</url>
+            <url>http://repo.onarandombox.com/nexus/content/groups/public</url>
         </repository>
         <repository> <!-- bStats -->
             <id>CodeMC</id>
