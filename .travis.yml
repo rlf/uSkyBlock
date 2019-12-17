@@ -7,7 +7,7 @@ cache:
     - "$HOME/.m2"
 env:
   matrix:
-  - MC=1.14
+  - MC=1.15
 git:
   submodules: false
 notifications:

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>uSkyBlock</artifactId>
         <groupId>uSkyBlock</groupId>
-        <version>2.8.6</version>
+        <version>2.8.7-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
@@ -101,6 +101,7 @@
                                     <include>net.wesjd:anvilgui</include>
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>dk.lockfuglsang.minecraft:po-utils</include>
+                                    <include>com.googlecode.json-simple:json-simple</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
@@ -221,7 +222,7 @@
 
     <profiles>
         <profile>
-            <id>1.14</id>
+            <id>1.15</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -229,7 +230,7 @@
                 <dependency>
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
-                    <version>1.14.4-R0.1-SNAPSHOT</version>
+                    <version>1.15-R0.1-SNAPSHOT</version>
                     <optional>true</optional>
                     <scope>compile</scope>
                 </dependency>
@@ -442,6 +443,12 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- DEPRECATED -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
         </dependency>
         <!-- TESTING -->
         <dependency>
