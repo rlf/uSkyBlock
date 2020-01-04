@@ -77,10 +77,15 @@ public class SetBiomeTask extends IncrementalRunnable {
             }
             for (int x = cx; x <= mx; x++) {
                 for (int z = cz; z <= mz; z++) {
-                    world.setBiome(x, z, biome);
+                    for (int y = 0; y < world.getMaxHeight(); y++) {
+                        world.setBiome(x, y, z, biome);
+                    }
                 }
             }
+
+            //noinspection deprecation
             world.refreshChunk(chunk.getBlockX(), chunk.getBlockZ());
+
             if (!tick()) {
                 return isDone();
             }
