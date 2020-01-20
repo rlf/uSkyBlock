@@ -8,17 +8,17 @@ We are on [Spigot](https://www.spigotmc.org/resources/uskyblock-revived.66795/).
 
 This version depends on the following plugins:
 
-* Bukkit/Spigot 1.15-R0.1-SNAPSHOT
+* Bukkit/Spigot 1.15.1-R0.1-SNAPSHOT
 * Vault 1.7.x
-* WorldEdit 7.0.0-SNAPSHOT
-* WorldGuard 7.0.0-SNAPSHOT
+* WorldEdit 7.1.0-SNAPSHOT
+* WorldGuard 7.0.2-SNAPSHOT
 
 ## Releases 
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Percentage of issues still open")
 
-https://github.com/rlf/uSkyBlock/releases
+https://www.spigotmc.org/resources/uskyblock-revived.66795/history
 
-Pre-releases will end in a date-stamp, and is considered **unsafe** for production servers.
+Pre-releases will end in -SNAPSHOT, and is considered **unsafe** for production servers.
 
 Releases have a clean version number, has been tested, and should be safe for production servers.
 
