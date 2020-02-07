@@ -17,6 +17,10 @@ public class Settings {
     public static String general_worldName;
     public static int island_distance;
     public static int island_height;
+    public static int orgx;
+    public static int orgz;
+    public static String path;
+    public static int forbid;
     public static int general_spawnSize;
     public static boolean island_removeCreaturesByTeleport;
     public static int island_protectionRange;
@@ -58,6 +62,53 @@ public class Settings {
         } catch (Exception e) {
             island_distance = 110;
         }
+        try {
+            orgx = config.getInt("options.island.orgx");
+            orgx = (orgx/island_distance)*island_distance;
+        } catch (Exception e) {
+            orgx = 0;
+        }
+        try {
+            orgz = config.getInt("options.island.orgz");
+            orgz = (orgz/island_distance)*island_distance;
+        } catch (Exception e) {
+            orgz = 0;
+        }
+        path = config.getString("options.island.path");
+        if( path == null ) {
+            path = "UNI";
+        }
+        path.toUpperCase();
+        //
+        // Forbidden quadrants will not be populated:
+        //
+        //         N
+        //         ^
+        //  forbid |
+        //  bit 3  | bit 0
+        //         |
+        //  W <----O-----> E
+        //         |
+        //  bit 2  | bit 1
+        //         |
+        //         v
+        //         S
+        //
+        switch(path) { 
+            case "N":   forbid = 0b0110; break; 
+            case "NE":  forbid = 0b1110; break; 
+            case "!NE": forbid = 0b0001; break; 
+            case "E":   forbid = 0b1100; break; 
+            case "SE":  forbid = 0b1101; break; 
+            case "!SE": forbid = 0b0010; break; 
+            case "S":   forbid = 0b1001; break; 
+            case "SW":  forbid = 0b1011; break; 
+            case "!SW": forbid = 0b0100; break; 
+            case "W":   forbid = 0b0011; break; 
+            case "NW":  forbid = 0b0111; break; 
+            case "!NW": forbid = 0b1000; break; 
+            default:   path   = "UNI"; forbid = 0; 
+        } 
         try {
             island_protectionRange = config.getInt("options.island.protectionRange");
             if (island_protectionRange > island_distance) {
