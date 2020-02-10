@@ -53,9 +53,11 @@ public class IslandLocatorLogic {
 
     private Location getLastIsland() {
         if (lastIsland == null) {
-            lastIsland = new Location(plugin.getWorldManager().getWorld(),
-                    config.getInt("options.general.lastIslandX", 0), Settings.island_height,
-                    config.getInt("options.general.lastIslandZ", 0));
+            lastIsland = new Location(
+               plugin.getWorldManager().getWorld(),
+               config.getInt("options.general.lastIslandX", Settings.orgx), 
+               Settings.island_height,
+               config.getInt("options.general.lastIslandZ", Settings.orgz));
         }
         return LocationUtil.alignToDistance(lastIsland, Settings.island_distance);
     }

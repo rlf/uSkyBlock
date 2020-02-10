@@ -34,6 +34,6 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
-        return new Location(world, 0.5d, Settings.island_height, 0.5d);
+        return new Location(world, Settings.orgx, Settings.island_height, Settings.orgz);
     }
 }
