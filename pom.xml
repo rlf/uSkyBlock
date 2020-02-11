@@ -96,15 +96,15 @@
         </repository>
         <repository> <!-- Vault API -->
             <id>vault-repo</id>
-            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
+            <url>https://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository> <!-- WorldEdit/WorldGuard -->
             <id>sk89q-repo</id>
-            <url>http://maven.sk89q.com/repo/</url>
+            <url>https://maven.sk89q.com/repo/</url>
         </repository>
         <repository> <!-- MultiVerse -->
             <id>onarandombox</id>
-            <url>http://repo.onarandombox.com/nexus/content/groups/public</url>
+            <url>https://repo.onarandombox.com/nexus/content/groups/public</url>
         </repository>
         <repository> <!-- bStats -->
             <id>CodeMC</id>
