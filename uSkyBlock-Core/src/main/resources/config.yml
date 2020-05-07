@@ -35,6 +35,28 @@ options:
     # [integer] The number of blocks between islands.
     distance: 128
 
+    # [integer] The x origin for the first placement.
+    orgx: 0
+
+    # [integer] The z origin for the first placement.
+    orgz: 0
+
+    # [string] Path for the placement as:
+    # N:   Northern hemisphere only
+    # NE:  North-Eastern quadrant only
+    # !NE: North-Eastern quadrant is forbidden
+    # E:   Eastern
+    # SE:  South-Eastern
+    # !SE: Forbid South-East
+    # S:   Southern hemisphere
+    # SW:  South-West
+    # !SW: Forbid South-West
+    # W:   Western
+    # NW:  North-West
+    # !NW: Forbid North-West
+    # UNI: No restrictions (default)
+    path: UNI
+
     # [integer] The size of the protective region for each island. Can't be higher than 'distance'
     # and MUST be divisible by 32 if you intend to use nether.
     protectionRange: 128

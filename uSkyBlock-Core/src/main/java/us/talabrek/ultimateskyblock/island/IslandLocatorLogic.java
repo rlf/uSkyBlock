@@ -34,21 +34,30 @@ public class IslandLocatorLogic {
         this.configFile = new File(plugin.getDataFolder(), "lastIslandConfig.yml");
         this.config = new YmlConfiguration();
         FileUtil.readConfig(config, configFile);
-        // Backward compatibility
-        if (!config.contains("options.general.lastIslandX") && plugin.getConfig().contains("options.general.lastIslandX")) {
-            config.set("options.general.lastIslandX", plugin.getConfig().getInt("options.general.lastIslandX"));
-            config.set("options.general.lastIslandZ", plugin.getConfig().getInt("options.general.lastIslandZ"));
-            plugin.getConfig().set("options.general.lastIslandX", null);
-            plugin.getConfig().set("options.general.lastIslandZ", null);
+
+        if (!config.contains("options.general.lastIslandX") ) {
+           // Backward compatibility
+           if (plugin.getConfig().contains("options.general.lastIslandX")) {
+               config.set("options.general.lastIslandX", plugin.getConfig().getInt("options.general.lastIslandX"));
+               config.set("options.general.lastIslandZ", plugin.getConfig().getInt("options.general.lastIslandZ"));
+               plugin.getConfig().set("options.general.lastIslandX", null);
+               plugin.getConfig().set("options.general.lastIslandZ", null);
+           }
+           else {
+               config.set("options.general.lastIslandX", Settings.orgx );
+               config.set("options.general.lastIslandZ", Settings.orgz );
+           }
         }
         reservationTimeout = plugin.getConfig().getLong("options.island.reservationTimeout", 5 * 60000);
     }
 
     private Location getLastIsland() {
         if (lastIsland == null) {
-            lastIsland = new Location(plugin.getWorldManager().getWorld(),
-                    config.getInt("options.general.lastIslandX", 0), Settings.island_height,
-                    config.getInt("options.general.lastIslandZ", 0));
+            lastIsland = new Location(
+               plugin.getWorldManager().getWorld(),
+               config.getInt("options.general.lastIslandX", Settings.orgx), 
+               Settings.island_height,
+               config.getInt("options.general.lastIslandZ", Settings.orgz));
         }
         return LocationUtil.alignToDistance(lastIsland, Settings.island_distance);
     }
@@ -127,56 +136,67 @@ public class IslandLocatorLogic {
     private boolean isReserved(Location next) {
         return reservations.containsKey(LocationUtil.getIslandName(next));
     }
-
     /**
      * <pre>
-     *                            z
-     *   x = -z                   ^                    x = z
-     *        \        -x < z     |     x < z         /
-     *           \                |                /
+     *  [NW]                      -z                     [NE]
+     *   x = z                    ^                    x = -z
+     *        \        -x < -z    |     x < -z        /
+     *           \               [N]               /
      *              \             |             /
-     *                 \          |          /
-     *                    \       |       /          x > z
-     *        -x > z         \    |    /
-     *                          \ | /
-     *     -----------------------+-----------------------------> x
-     *                          / | \
-     *        -x > -z        /    |    \
-     *        (x < z)     /       |       \          x > -z
-     *                 /          |          \
-     *              /             |             \
-     *           /     -x < -z    |   x < -z       \
-     *       x = z                |                x = -z
-     *                            |
-     *                            v
+     *  forbid=0b1000  \          |          / forbid=0b0001
+     *  quadrant 3        \       |       /    quadrant 0
+     *        -x > -z        \    |    /             x > -z
+     *                        /~~~^~~~\
+     *     -------[W]--------<orgx,orgz>----------[E]-----------> x
+     *                        \---v---/
+     *        -x > z         /    |    \       quadrant 1
+     *        (x < -z)    /       |       \          x >  z
+     *  forbid=0b0100  /          |          \ forbid=0b0010
+     *  quadrant 2  /             |             \
+     *           /     -x < z     |   x < z        \
+     *       x = -z              [S]               x = z
+     *       /                    |                    \
+     *    [SW]                    v                   [SE]
      * </pre>
      */
     static Location nextIslandLocation(final Location lastIsland) {
         int d = Settings.island_distance;
+        boolean isforbidden = false;
         LocationUtil.alignToDistance(lastIsland, d);
-        int x = lastIsland.getBlockX();
-        int z = lastIsland.getBlockZ();
-        if (x < z) {
-            if (-1 * x < z) {
-                x += d;
-            } else {
-                z += d;
-            }
-        } else if (x > z) {
-            if (-1 * x >= z) {
-                x -= d;
-            } else {
-                z -= d;
-            }
-        } else { // x == z
-            if (x <= 0) {
-                z += d;
-            } else {
-                z -= d;
-            }
-        }
-        lastIsland.setX(x);
-        lastIsland.setZ(z);
+        int x = lastIsland.getBlockX()-Settings.orgx;
+        int z = lastIsland.getBlockZ()-Settings.orgz;
+        do {
+           // Snake, counterclockwise
+           if (x < z) {
+              if (-x < z)  x += d;  // E
+              else         z += d;  // S
+           } 
+           else if (x > z) {
+              if (-x >= z) x -= d;  // W
+              else         z -= d;  // N
+           } 
+           else { // x == z
+              if (x <= 0)  z += d;  // S
+              else         z -= d;  // N
+           }
+           if( Settings.forbid == 0 ) break;
+           // Check the new location for forbidden areas
+           isforbidden = false;
+           if( x>0 && z<0 && (Settings.forbid & 0b0001) !=0 ) isforbidden = true;
+           if( x>0 && z>0 && (Settings.forbid & 0b0010) !=0 ) isforbidden = true;
+           if( x<0 && z>0 && (Settings.forbid & 0b0100) !=0 ) isforbidden = true;
+           if( x<0 && z<0 && (Settings.forbid & 0b1000) !=0 ) isforbidden = true;
+        } while( isforbidden );
+        //
+        // A BIG FAT WARNING!
+        // ==================
+        // This code is a Quick And Dirty solution!
+        // In case of large SkyBlock, it might cause severe LAGG!
+        // Volunteers! It is a TODO for one step path-finding :-)
+        // (scrolling through the path this way is quite brainless)
+        // 
+        lastIsland.setX(x+Settings.orgx);
+        lastIsland.setZ(z+Settings.orgz);
         return lastIsland;
     }
 }
