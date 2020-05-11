@@ -87,6 +87,6 @@ public class AdminCommand extends BaseCommandExecutor {
         add(new SetMaintenanceCommand(plugin));
         add(new NBTCommand());
         add(new ProtectAllCommand(plugin));
-        add(new ChunkCommand());
+        add(new ChunkCommand(plugin));
     }
 }

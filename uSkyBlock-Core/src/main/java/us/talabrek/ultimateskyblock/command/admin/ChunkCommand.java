@@ -6,6 +6,7 @@ import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Map;
 
@@ -13,16 +14,17 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class ChunkCommand extends CompositeCommand {
-    public ChunkCommand() {
+    private final uSkyBlock plugin;
+
+    public ChunkCommand(uSkyBlock plugin) {
         super("chunk", "usb.admin.chunk", marktr("various chunk commands"));
+        this.plugin = plugin;
+
         add(new RequireChunkCommand("regen", marktr("regenerate current chunk")) {
             @Override
             void doChunkCommand(Player player, Chunk chunk) {
-                if (chunk.getWorld().regenerateChunk(chunk.getX(), chunk.getZ())) {
-                    player.sendMessage(tr("successfully regenerated chunk at {0},{1}", chunk.getX(), chunk.getZ()));
-                } else {
-                    player.sendMessage(tr("\u00a74FAILED!\u00a7e could not regenerate chunk at {0},{1}", chunk.getX(), chunk.getZ()));
-                }
+                plugin.getWorldManager().getChunkRegenerator(chunk.getWorld()).regenerateChunk(chunk);
+                player.sendMessage(tr("successfully regenerated chunk at {0},{1}", chunk.getX(), chunk.getZ()));
             }
         });
         add(new RequireChunkCommand("unload", marktr("unload current chunk")) {

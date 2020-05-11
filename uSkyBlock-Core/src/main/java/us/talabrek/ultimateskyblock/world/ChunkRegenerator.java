@@ -68,7 +68,7 @@ public class ChunkRegenerator {
      * Regenerates the given {@link Chunk}, removing all it's entities except players and setting the default biome.
      * @param chunk Chunk to regenerate.
      */
-    private void regenerateChunk(@NotNull Chunk chunk) {
+    public void regenerateChunk(@NotNull Chunk chunk) {
         Validate.notNull(chunk, "Chunk cannot be null");
 
         spawnTeleportPlayers(chunk);
