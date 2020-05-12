@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>17.0.0</version>
+            <version>19.0.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -79,7 +79,7 @@
                 <dependency>
                     <groupId>org.bukkit</groupId>
                     <artifactId>bukkit</artifactId>
-                    <version>1.15-R0.1-SNAPSHOT</version>
+                    <version>1.15.2-R0.1-SNAPSHOT</version>
                     <optional>true</optional>
                     <scope>compile</scope>
                 </dependency>

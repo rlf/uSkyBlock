@@ -101,6 +101,7 @@ import us.talabrek.ultimateskyblock.world.WorldManager;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -624,27 +625,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         new SetBiomeTask(this, loc, biome, null).runTask(this);
     }
 
-    public void changePlayerBiome(Player player, final String bName, final Callback<Boolean> callback) {
-        callback.setState(false);
-        if (bName.equalsIgnoreCase("ocean") || player.hasPermission("usb.biome." + bName)) {
-            PlayerInfo playerInfo = getPlayerInfo(player);
-            final IslandInfo islandInfo = islandLogic.getIslandInfo(playerInfo);
-            if (islandInfo.hasPerm(player, "canChangeBiome")) {
-                player.sendMessage(tr("\u00a77The pixies are busy changing the biome of your island to \u00a79{0}\u00a77, be patient.", bName));
-                new SetBiomeTask(this, playerInfo.getIslandLocation(), getBiome(bName), new Runnable() {
-                    @Override
-                    public void run() {
-                        islandInfo.setBiome(bName);
-                        callback.setState(true);
-                        callback.run();
-                    }
-                }).runTask(this);
-                return;
-            }
-        }
-        callback.run();
-    }
-
     public void createIsland(final Player player, String cSchem) {
         PlayerInfo pi = getPlayerInfo(player);
         if (pi.isIslandGenerating()) {
@@ -685,17 +665,15 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         islandLogic.clearIsland(next, createTask);
     }
 
-    public Location getChestSpawnLoc(final Location loc) {
-        Location chestLocation = LocationUtil.findChestLocation(loc);
-        return LocationUtil.findNearestSpawnLocation(chestLocation != null ? chestLocation : loc);
-    }
-
     public IslandInfo setNewPlayerIsland(final PlayerInfo playerInfo, final Location loc) {
         playerInfo.startNewIsland(loc);
 
-        Location chestSpawnLocation = getChestSpawnLoc(loc);
-        if (chestSpawnLocation != null) {
-            playerInfo.setHomeLocation(chestSpawnLocation);
+        Location chestLocation = LocationUtil.findChestLocation(loc);
+        Optional<Location> chestSpawnLocation = LocationUtil.findNearestSpawnLocation(
+            chestLocation != null ? chestLocation : loc);
+
+        if (chestSpawnLocation.isPresent()) {
+            playerInfo.setHomeLocation(chestSpawnLocation.get());
         } else {
             log(Level.SEVERE, "Could not find a safe chest within 15 blocks of the island spawn. Bad schematic!");
         }

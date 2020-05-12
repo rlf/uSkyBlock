@@ -8,6 +8,7 @@
     <name>Ultimate SkyBlock</name>
 
     <properties>
+        <jbannotations.version>19.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
         <po-utils.version>1.2</po-utils.version>
@@ -207,6 +208,11 @@
                 <groupId>me.clip.deluxechat</groupId>
                 <artifactId>DeluxeChatPlaceholderAPI</artifactId>
                 <version>${deluxechat.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jbannotations.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
