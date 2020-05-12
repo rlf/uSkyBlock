@@ -1,8 +1,12 @@
 package us.talabrek.ultimateskyblock.uuid;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Statistic;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.UUID;
@@ -65,6 +69,96 @@ public class NullPlayer implements OfflinePlayer {
     @Override
     public Location getBedSpawnLocation() {
         return null;
+    }
+
+    @Override
+    public void incrementStatistic(@NotNull Statistic statistic) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void decrementStatistic(@NotNull Statistic statistic) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void incrementStatistic(@NotNull Statistic statistic, int amount) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void decrementStatistic(@NotNull Statistic statistic, int amount) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void setStatistic(@NotNull Statistic statistic, int newValue) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public int getStatistic(@NotNull Statistic statistic) throws IllegalArgumentException {
+        return 0;
+    }
+
+    @Override
+    public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public int getStatistic(@NotNull Statistic statistic, @NotNull Material material) throws IllegalArgumentException {
+        return 0;
+    }
+
+    @Override
+    public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int newValue) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType) throws IllegalArgumentException {
+        return 0;
+    }
+
+    @Override
+    public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount) {
+
+    }
+
+    @Override
+    public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue) {
+
     }
 
     @Override
