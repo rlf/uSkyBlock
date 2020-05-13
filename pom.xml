@@ -11,6 +11,7 @@
         <jbannotations.version>19.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
+        <paperlib.version>1.0.3</paperlib.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.7</vault.version>
@@ -213,6 +214,11 @@
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
                 <version>${jbannotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.papermc</groupId>
+                <artifactId>paperlib</artifactId>
+                <version>${paperlib.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
