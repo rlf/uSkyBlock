@@ -28,5 +28,9 @@ public class MetricsManager {
             () -> plugin.getConfig().getString("language", "en")));
         bStats.addCustomChart(new Metrics.SimplePie("radius_and_distance",
             () -> String.format("(%d,%d)", Settings.island_radius, Settings.island_distance)));
+
+        // Temp. chart to measure storage usage for (legacy) uuid.PlayerDB.
+        bStats.addCustomChart(new Metrics.SimplePie("playerdb_type",
+            () -> plugin.getConfig().getString("options.advanced.playerdb.storage", "yml")));
     }
 }
