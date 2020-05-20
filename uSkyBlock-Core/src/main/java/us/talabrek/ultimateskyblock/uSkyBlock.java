@@ -10,7 +10,6 @@ import dk.lockfuglsang.minecraft.util.TimeUtil;
 import dk.lockfuglsang.minecraft.util.VersionUtil;
 import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import io.papermc.lib.PaperLib;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
@@ -63,6 +62,9 @@ import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
+import us.talabrek.ultimateskyblock.hook.HookManager;
+import us.talabrek.ultimateskyblock.hook.economy.EconomyHook;
+import us.talabrek.ultimateskyblock.hook.economy.VaultEconomy;
 import us.talabrek.ultimateskyblock.imports.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.BlockLimitLogic;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
@@ -139,6 +141,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private LimitLogic limitLogic;
 
     /* MANAGERS */
+    private HookManager hookManager;
     private MetricsManager metricsManager;
     private WorldManager worldManager;
 
@@ -215,9 +218,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 ServerUtil.init(uSkyBlock.this);
                 if (!isRequirementsMet(Bukkit.getConsoleSender(), null)) {
                     return;
-                }
-                if (VaultHandler.setupEconomy()) {
-                    log(Level.INFO, "Hooked into Vault Economy");
                 }
                 if (VaultHandler.setupPermissions()) {
                     log(Level.INFO, "Hooked into Vault Permissions");
@@ -445,8 +445,11 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         if (getConfig().getBoolean("options.restart.clearEnderChest", true)) {
             player.getEnderChest().clear();
         }
-        if (getConfig().getBoolean("options.restart.clearCurrency", false) && VaultHandler.hasEcon()) {
-            VaultHandler.getEcon().withdrawPlayer(player, VaultHandler.getEcon().getBalance(player));
+        if (getConfig().getBoolean("options.restart.clearCurrency", false)) {
+            getHookManager().getHook("Economy").ifPresent((hook) -> {
+                EconomyHook economyHook = (EconomyHook) hook;
+                economyHook.withdrawPlayer(player, economyHook.getBalance(player));
+            });
         }
         getLogger().exiting(CN, "clearPlayerInventory");
     }
@@ -739,6 +742,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private void reloadConfigs() {
         createFolders();
         HandlerList.unregisterAll(this);
+        hookManager = new HookManager(this);
         if (challengeLogic != null) {
             challengeLogic.shutdown();
         }
@@ -749,7 +753,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             islandLogic.shutdown();
         }
         PlaceholderHandler.unregister(this);
-        VaultHandler.setupEconomy();
+        hookManager.registerHook(new VaultEconomy(this));
         VaultHandler.setupPermissions();
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
@@ -1078,6 +1082,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public IslandGenerator getIslandGenerator() {
         return islandGenerator;
+    }
+
+    public HookManager getHookManager() {
+        return hookManager;
     }
 
     public WorldManager getWorldManager() {

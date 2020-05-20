@@ -20,6 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
 import us.talabrek.ultimateskyblock.block.BlockCollection;
 import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.hook.economy.EconomyHook;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -350,12 +351,6 @@ public class ChallengeLogic implements Listener {
         } else {
             reward = challenge.getRepeatReward();
         }
-        float rewBonus = 1;
-        if (defaults.enableEconomyPlugin && VaultHandler.hasEcon()) {
-            Perk perk = plugin.getPerkLogic().getPerk(player);
-            rewBonus += perk.getRewBonus();
-            VaultHandler.depositPlayer(player, reward.getCurrencyReward() * rewBonus);
-        }
         player.giveExp(reward.getXpReward());
         boolean wasBroadcast = false;
         if (defaults.broadcastCompletion && isFirstCompletion) {
@@ -364,8 +359,20 @@ public class ChallengeLogic implements Listener {
         }
         player.sendMessage(tr("\u00a7eItem reward(s): \u00a7f{0}", reward.getRewardText()));
         player.sendMessage(tr("\u00a7eExp reward: \u00a7f{0,number,#.#}", reward.getXpReward()));
-        if (defaults.enableEconomyPlugin && VaultHandler.hasEcon()) {
-            player.sendMessage(tr("\u00a7eCurrency reward: \u00a7f{0,number,###.##} {1} \u00a7a ({2,number,##.##})%", reward.getCurrencyReward() * rewBonus, VaultHandler.getEcon().currencyNamePlural(), (rewBonus - 1.0) * 100.0));
+        if (defaults.enableEconomyPlugin) {
+            float rewBonus = 1;
+            Perk perk = plugin.getPerkLogic().getPerk(player);
+            rewBonus += perk.getRewBonus();
+            float currencyReward = reward.getCurrencyReward() * rewBonus;
+            double percentage = (rewBonus - 1.0) * 100.0;
+
+            plugin.getHookManager().getHook("Economy").ifPresent((hook) -> {
+                EconomyHook economyHook = (EconomyHook) hook;
+                economyHook.depositPlayer(player, currencyReward);
+
+                player.sendMessage(tr("\u00a7eCurrency reward: \u00a7f{0,number,###.##} {1} \u00a7a ({2,number,##.##})%",
+                    currencyReward, economyHook.getCurrenyName(), percentage));
+            });
         }
         if (reward.getPermissionReward() != null) {
             List<String> perms = Arrays.asList(reward.getPermissionReward().trim().split(" "));
