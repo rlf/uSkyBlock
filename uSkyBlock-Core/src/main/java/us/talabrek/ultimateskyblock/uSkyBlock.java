@@ -219,9 +219,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 if (!isRequirementsMet(Bukkit.getConsoleSender(), null)) {
                     return;
                 }
-                if (VaultHandler.setupPermissions()) {
-                    log(Level.INFO, "Hooked into Vault Permissions");
-                }
+                uSkyBlock.this.getHookManager().setupEconomyHook();
+                uSkyBlock.this.getHookManager().setupPermissionsHook();
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);
                 WorldGuardHandler.setupGlobal(getWorldManager().getWorld());
                 if (getWorldManager().getNetherWorld() != null) {
@@ -446,10 +445,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             player.getEnderChest().clear();
         }
         if (getConfig().getBoolean("options.restart.clearCurrency", false)) {
-            getHookManager().getHook("Economy").ifPresent((hook) -> {
-                EconomyHook economyHook = (EconomyHook) hook;
-                economyHook.withdrawPlayer(player, economyHook.getBalance(player));
-            });
+            getHookManager().getEconomyHook().ifPresent((hook) -> hook.withdrawPlayer(player, hook.getBalance(player)));
         }
         getLogger().exiting(CN, "clearPlayerInventory");
     }
@@ -753,8 +749,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             islandLogic.shutdown();
         }
         PlaceholderHandler.unregister(this);
-        hookManager.registerHook(new VaultEconomy(this));
-        VaultHandler.setupPermissions();
         if (Settings.loadPluginConfig(getConfig())) {
             saveConfig();
         }

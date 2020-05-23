@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
+import us.talabrek.ultimateskyblock.hook.permissions.PermissionsHook;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +39,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     private static final Logger log = Logger.getLogger(CN);
     private static final long serialVersionUID = 1L;
     private static final int YML_VERSION = 1;
+    private final uSkyBlock plugin;
     private String playerName;
     private String displayName;
     private UUID uuid;
@@ -52,7 +54,8 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     private boolean islandGenerating = false;
     private boolean dirty = false;
 
-    public PlayerInfo(String currentPlayerName, UUID playerUUID) {
+    public PlayerInfo(String currentPlayerName, UUID playerUUID, uSkyBlock plugin) {
+        this.plugin = plugin;
         this.uuid = playerUUID;
         this.playerName = currentPlayerName;
         // Prefer UUID over Name
@@ -432,13 +435,18 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         if (perms == null || perms.isEmpty()) {
             return true;
         }
+
         Player target = getPlayer();
-        if (target != null && target.isOnline()) {
+        Optional<PermissionsHook> hook = plugin.getHookManager().getPermissionsHook();
+
+        if (target != null && target.isOnline() && hook.isPresent()) {
             List<String> permList = playerData.getStringList("player.perms");
+            PermissionsHook pHook = hook.get();
+
             for (String perm : perms) {
-                if (!VaultHandler.hasPermission(target, perm)) {
+                if (pHook.hasPermission(target, perm)) {
                     permList.add(perm);
-                    VaultHandler.addPermission(target, perm);
+                    pHook.addPermission(target, perm);
                 }
             }
             playerData.set("player.perms", permList);
@@ -458,9 +466,11 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
 
         final List<String> perms = playerData.getStringList("player.perms");
         if (!perms.isEmpty()) {
-            for (String perm : perms) {
-                VaultHandler.removePermission(target, perm);
-            }
+            plugin.getHookManager().getPermissionsHook().ifPresent((hook) -> {
+                for (String perm : perms) {
+                    hook.removePermission(target, perm);
+                }
+            });
             playerData.set("player.perms", null);
             playerData.set("pending-permissions", null);
             save();

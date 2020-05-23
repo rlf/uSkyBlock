@@ -25,7 +25,7 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
  */
 public class PlayerLogic {
     private static final Logger log = Logger.getLogger(PlayerLogic.class.getName());
-    private static final PlayerInfo UNKNOWN_PLAYER = new PlayerInfo(PlayerDB.UNKNOWN_PLAYER_NAME, PlayerDB.UNKNOWN_PLAYER_UUID);
+    private static final PlayerInfo UNKNOWN_PLAYER = new PlayerInfo(PlayerDB.UNKNOWN_PLAYER_NAME, PlayerDB.UNKNOWN_PLAYER_UUID, uSkyBlock.getInstance());
     private final LoadingCache<UUID, PlayerInfo> playerCache;
     private final uSkyBlock plugin;
     private final BukkitTask saveTask;
@@ -88,7 +88,7 @@ public class PlayerLogic {
         }
         log.log(Level.FINER, "Loading player data for " + playerUUID + "/" + playerName);
 
-        final PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID);
+        final PlayerInfo playerInfo = new PlayerInfo(playerName, playerUUID, plugin);
 
         final Player onlinePlayer = uSkyBlock.getInstance().getPlayerDB().getPlayer(playerUUID);
         if (onlinePlayer != null && onlinePlayer.isOnline()) {

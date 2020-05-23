@@ -366,12 +366,11 @@ public class ChallengeLogic implements Listener {
             float currencyReward = reward.getCurrencyReward() * rewBonus;
             double percentage = (rewBonus - 1.0) * 100.0;
 
-            plugin.getHookManager().getHook("Economy").ifPresent((hook) -> {
-                EconomyHook economyHook = (EconomyHook) hook;
-                economyHook.depositPlayer(player, currencyReward);
+            plugin.getHookManager().getEconomyHook().ifPresent((hook) -> {
+                hook.depositPlayer(player, currencyReward);
 
                 player.sendMessage(tr("\u00a7eCurrency reward: \u00a7f{0,number,###.##} {1} \u00a7a ({2,number,##.##})%",
-                    currencyReward, economyHook.getCurrenyName(), percentage));
+                    currencyReward, hook.getCurrenyName(), percentage));
             });
         }
         if (reward.getPermissionReward() != null) {

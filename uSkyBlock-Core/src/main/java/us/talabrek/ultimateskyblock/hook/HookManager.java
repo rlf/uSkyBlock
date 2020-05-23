@@ -1,6 +1,10 @@
 package us.talabrek.ultimateskyblock.hook;
 
 import org.jetbrains.annotations.NotNull;
+import us.talabrek.ultimateskyblock.hook.economy.EconomyHook;
+import us.talabrek.ultimateskyblock.hook.economy.VaultEconomy;
+import us.talabrek.ultimateskyblock.hook.permissions.PermissionsHook;
+import us.talabrek.ultimateskyblock.hook.permissions.VaultPermissions;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
@@ -11,18 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class HookManager {
     private final uSkyBlock plugin;
-    private Map<String, PluginHook> hooks = new ConcurrentHashMap<>();
+    private final Map<String, PluginHook> hooks = new ConcurrentHashMap<>();
 
     public HookManager(@NotNull uSkyBlock plugin) {
         this.plugin = plugin;
-    }
-
-    /**
-     * Gets a {@link List} of all enabled hooks.
-     * @return List of all enabled hooks.
-     */
-    public @NotNull List<String> getEnabledHooks() {
-        return new ArrayList<>(hooks.keySet());
     }
 
     /**
@@ -30,23 +26,24 @@ public class HookManager {
      * @param hook Name of the requested hook.
      * @return Optional containing the requested PluginHook, or null if unavailable.
      */
-    public Optional<? extends PluginHook> getHook(String hook) {
+    public Optional<PluginHook> getHook(String hook) {
         return Optional.ofNullable(hooks.get(hook));
     }
 
     /**
-     * Returns the requested {@link PluginHook}. Throws a {@link NullPointerException} if the hook is not available.
-     * This method is designed to be used for hooks that we check on load, e.g. WorldEdit.
-     * @param hook Name of the requested hook.
-     * @return Requested PluginHook
-     * @throws NullPointerException If the requested hook is unavailable.
+     * Short method for {@link #getHook(String)} to get the optional {@link EconomyHook}.
+     * @return optional of EconomyHook.
      */
-    public @NotNull PluginHook getRequiredHook(String hook) throws NullPointerException {
-        PluginHook foundHook = hooks.get(hook);
-        if (foundHook == null) {
-            throw new NullPointerException("No required hook found for: " + hook);
-        }
-        return foundHook;
+    public Optional<EconomyHook> getEconomyHook() {
+        return Optional.ofNullable((EconomyHook) getHook("Economy").orElse(null));
+    }
+
+    /**
+     * Short method for {@link #getHook(String)} to get the optional {@link PermissionsHook}.
+     * @return optional of PermissionsHook.
+     */
+    public Optional<PermissionsHook> getPermissionsHook() {
+        return Optional.ofNullable((PermissionsHook) getHook("Permissions").orElse(null));
     }
 
     /**
@@ -58,5 +55,48 @@ public class HookManager {
     public void registerHook(PluginHook hook) throws HookFailedException {
         hook.onHook();
         hooks.put(hook.getHookName(), hook);
+    }
+
+    /**
+     * Checks and hooks if there are compatible Economy plugins available.
+     * @return True if a compatible Economy plugin has been found and hooking succeeded, false otherwise.
+     */
+    public boolean setupEconomyHook() {
+        try {
+            if (plugin.getServer().getPluginManager().isPluginEnabled("Vault")) {
+                VaultEconomy vault = new VaultEconomy(plugin);
+                registerHook(vault);
+                plugin.getLogger().info("Hooked into Vault economy");
+                return true;
+            }
+        } catch (HookFailedException ex) {
+            plugin.getLogger().warning("Failed to hook into Vault economy.");
+            ex.printStackTrace();
+        }
+
+        plugin.getLogger().info("Failed to find a compatible economy system. Economy rewards will be disabled.");
+        return false;
+    }
+
+    /**
+     * Checks and hooks if there are compatible Permissions plugins available.
+     * @return True if a compatible Permissions plugin has geen found and hooking succeeded, false otherwise.
+     */
+    public boolean setupPermissionsHook() {
+        try {
+            if (plugin.getServer().getPluginManager().isPluginEnabled("Vault")) {
+                VaultPermissions vault = new VaultPermissions(plugin);
+                registerHook(vault);
+                plugin.getLogger().info("Hooked into Vault permissions.");
+                return true;
+            }
+        } catch (HookFailedException ex) {
+            plugin.getLogger().warning("Failed to hook into Vault permissions plugin.");
+            ex.printStackTrace();
+        }
+
+        plugin.getLogger().warning("Failed to find a compatible permissions system. Permission rewards " +
+            "will be disabled.");
+        return false;
     }
 }
