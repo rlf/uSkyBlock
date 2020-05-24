@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.island.level;
 
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 
 public class BlockScoreImpl implements us.talabrek.ultimateskyblock.api.model.BlockScore {
@@ -21,7 +21,7 @@ public class BlockScoreImpl implements us.talabrek.ultimateskyblock.api.model.Bl
         this.count = count;
         this.score = score;
         this.state = state;
-        this.name = name != null ? name : VaultHandler.getItemName(getBlock());
+        this.name = name != null ? name : ItemStackUtil.getItemName(getBlock());
     }
 
     @Override

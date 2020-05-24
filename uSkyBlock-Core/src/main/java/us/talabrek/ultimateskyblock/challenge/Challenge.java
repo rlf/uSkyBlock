@@ -3,7 +3,6 @@ package us.talabrek.ultimateskyblock.challenge;
 import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
@@ -207,8 +206,8 @@ public class Challenge {
                     break;
                 }
                 details.add(item.getAmount() > 1
-                        ? tr("\u00a7f{0}x \u00a77{1}", item.getAmount(), VaultHandler.getItemName(item))
-                        : tr("\u00a77{0}", VaultHandler.getItemName(item)));
+                        ? tr("\u00a7f{0}x \u00a77{1}", item.getAmount(), ItemStackUtil.getItemName(item))
+                        : tr("\u00a77{0}", ItemStackUtil.getItemName(item)));
             }
         }
         if (requiredEntities != null && !requiredEntities.isEmpty() && wrappedDetails(details).size() < MAX_DETAILS) {

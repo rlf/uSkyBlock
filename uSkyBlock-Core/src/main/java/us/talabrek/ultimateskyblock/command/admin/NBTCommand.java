@@ -6,7 +6,6 @@ import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.Map;
@@ -29,7 +28,7 @@ public class NBTCommand extends CompositeCommand {
                     if (itemStack != null) {
                         String[] msgs = new String[]{
                                 tr("\u00a7eInfo for \u00a79{0}", ItemStackUtil.asString(itemStack)),
-                                tr("\u00a77 - name: \u00a79{0}", VaultHandler.getItemName(itemStack)),
+                                tr("\u00a77 - name: \u00a79{0}", ItemStackUtil.getItemName(itemStack)),
                                 tr("\u00a77 - nbttag: \u00a79{0}", NBTUtil.getNBTTag(itemStack))
                         };
                         player.sendMessage(msgs);

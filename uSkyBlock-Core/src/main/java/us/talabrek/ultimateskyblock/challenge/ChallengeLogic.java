@@ -19,8 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import us.talabrek.ultimateskyblock.api.event.MemberJoinedEvent;
 import us.talabrek.ultimateskyblock.block.BlockCollection;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
-import us.talabrek.ultimateskyblock.hook.economy.EconomyHook;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
@@ -307,7 +305,7 @@ public class ChallengeLogic implements Listener {
             boolean hasAll = true;
             List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
             for (ItemStack required : requiredItems) {
-                String name = VaultHandler.getItemName(required);
+                String name = ItemStackUtil.getItemName(required);
                 if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
                     sb.append(tr(" \u00a74{0} \u00a7b{1}", (required.getAmount() - getCountOf(player.getInventory(), required)), name));
                     hasAll = false;

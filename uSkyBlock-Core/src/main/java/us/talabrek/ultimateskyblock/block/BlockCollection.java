@@ -1,9 +1,9 @@
 package us.talabrek.ultimateskyblock.block;
 
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.handler.VaultHandler;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -41,7 +41,7 @@ public class BlockCollection {
                 diff = item.getAmount() - count(item.getType());
             }
             if (diff > 0) {
-                sb.append(tr(" \u00a7f{0}x \u00a77{1}", diff, VaultHandler.getItemName(item)));
+                sb.append(tr(" \u00a7f{0}x \u00a77{1}", diff, ItemStackUtil.getItemName(item)));
             }
         }
         if (sb.toString().trim().isEmpty()) {
