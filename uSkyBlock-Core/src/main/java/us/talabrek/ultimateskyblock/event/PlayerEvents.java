@@ -4,6 +4,8 @@ import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Levelled;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
@@ -46,6 +48,7 @@ import java.util.WeakHashMap;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
+@SuppressWarnings("unused")
 public class PlayerEvents implements Listener {
     private static final Set<EntityDamageEvent.DamageCause> FIRE_TRAP = new HashSet<>(
             Arrays.asList(EntityDamageEvent.DamageCause.LAVA, EntityDamageEvent.DamageCause.FIRE, EntityDamageEvent.DamageCause.FIRE_TICK));
@@ -142,16 +145,20 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onLavaReplace(BlockPlaceEvent event) {
         if (!protectLava || !plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
-            return; // Skip
+            return;
         }
-        if (isLavaSource(event.getBlockReplacedState().getType(), event.getBlockReplacedState().getRawData())) {
+        if (isLavaSource(event.getBlockReplacedState().getBlockData())) {
             plugin.notifyPlayer(event.getPlayer(), tr("\u00a74It''s a bad idea to replace your lava!"));
             event.setCancelled(true);
         }
     }
 
-    private boolean isLavaSource(Material type, byte data) {
-        return (type == Material.LAVA) && data == 0;
+    private boolean isLavaSource(BlockData blockData) {
+        if (blockData.getMaterial() == Material.LAVA) {
+            Levelled level = (Levelled) blockData;
+            return level.getLevel() == 0;
+        }
+        return false;
     }
 
     @EventHandler
@@ -159,7 +166,7 @@ public class PlayerEvents implements Listener {
         if (!plugin.getWorldManager().isSkyWorld(event.getBlock().getWorld())) {
             return;
         }
-        if (isLavaSource(event.getBlock().getType(), event.getBlock().getData())) {
+        if (isLavaSource(event.getBlock().getBlockData())) {
             if (event.getTo() != Material.LAVA) {
                 event.setCancelled(true);
                 // TODO: R4zorax - 21-07-2018: missing datavalue (might convert stuff - exploit)
