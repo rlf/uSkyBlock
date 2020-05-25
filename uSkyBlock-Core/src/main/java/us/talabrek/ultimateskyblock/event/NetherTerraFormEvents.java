@@ -7,9 +7,11 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -18,7 +20,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import us.talabrek.ultimateskyblock.handler.EntitySpawner;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
@@ -48,7 +49,6 @@ public class NetherTerraFormEvents implements Listener {
     private final boolean spawnEnabled;
     private final double minPitch;
     private final double maxPitch;
-    private final EntitySpawner entitySpawner;
 
     public NetherTerraFormEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -83,7 +83,6 @@ public class NetherTerraFormEvents implements Listener {
             chanceWither = 0.4;
             chanceSkeleton = 0.1;
         }
-        entitySpawner = new EntitySpawner();
     }
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
@@ -262,11 +261,13 @@ public class NetherTerraFormEvents implements Listener {
                 e.setCancelled(true);
                 double p = RND.nextDouble();
                 if (p <= chanceWither && block.getRelative(BlockFace.UP, 3).getType() == Material.AIR) {
-                    entitySpawner.spawnWitherSkeleton(e.getLocation());
+                    WitherSkeleton mob = (WitherSkeleton) e.getLocation().getWorld().spawnEntity(
+                        e.getLocation(), EntityType.WITHER_SKELETON);
+                    mob.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_SWORD, 1));
                 } else if (p <= chanceWither+chanceBlaze) {
-                    entitySpawner.spawnBlaze(e.getLocation());
+                    e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.BLAZE);
                 } else if (p <= chanceWither+chanceBlaze+chanceSkeleton) {
-                    entitySpawner.spawnSkeleton(e.getLocation());
+                    e.getLocation().getWorld().spawnEntity(e.getLocation(), EntityType.SKELETON);
                 } else {
                     e.setCancelled(false); // Spawn PigZombie
                 }
