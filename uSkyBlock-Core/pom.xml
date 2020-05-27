@@ -98,7 +98,7 @@
                                 <includes>
                                     <include>org.bstats:*</include>
                                     <include>io.papermc:paperlib</include>
-                                    <include>net.wesjd:anvilgui</include>
+<!--                                    <include>net.wesjd:anvilgui</include>-->
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>dk.lockfuglsang.minecraft:po-utils</include>
                                     <include>com.googlecode.json-simple:json-simple</include>
@@ -117,10 +117,10 @@
                                     <pattern>io.papermc.lib</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.paperlib</shadedPattern>
                                 </relocation>
-                                <relocation>
-                                    <pattern>net.wesjd.anvilgui</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.anvilgui</shadedPattern>
-                                </relocation>
+<!--                                <relocation>-->
+<!--                                    <pattern>net.wesjd.anvilgui</pattern>-->
+<!--                                    <shadedPattern>us.talabrek.ultimateskyblock.anvilgui</shadedPattern>-->
+<!--                                </relocation>-->
                             </relocations>
                         </configuration>
                     </execution>
@@ -360,12 +360,12 @@
             <scope>compile</scope>
         </dependency>
         <!-- AnvilGUI -->
-        <dependency>
-            <groupId>com.github.WesJD</groupId>
-            <artifactId>AnvilGUI</artifactId>
-            <version>master-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.WesJD</groupId>-->
+<!--            <artifactId>AnvilGUI</artifactId>-->
+<!--            <version>master-SNAPSHOT</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
         <!-- Multiverse -->
         <dependency>
             <groupId>com.onarandombox.multiversecore</groupId>
