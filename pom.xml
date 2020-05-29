@@ -100,11 +100,6 @@
             <id>sk89q-repo</id>
             <url>https://maven.sk89q.com/repo/</url>
         </repository>
-        <!-- MV-Core repo mainly returns 404's, hosting on uskyblock-dependencies for now -->
-<!--        <repository> &lt;!&ndash; MultiVerse &ndash;&gt;-->
-<!--            <id>onarandombox</id>-->
-<!--            <url>http://repo.onarandombox.com/nexus/content/groups/public</url>-->
-<!--        </repository>-->
         <repository> <!-- bStats -->
             <id>CodeMC</id>
             <url>https://repo.codemc.org/repository/maven-public</url>
@@ -112,10 +107,6 @@
         <repository> <!-- MVdWPlaceholderApi -->
             <id>mvdw-software</id>
             <url>https://repo.mvdw-software.com/content/groups/public/</url>
-        </repository>
-        <repository> <!-- Jitpack for AnvilGUI, Vault -->
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
         </repository>
         <repository> <!-- uSkyBlock dependencies that don't have a (stable) repository -->
             <id>uskyblock-dependencies</id>
