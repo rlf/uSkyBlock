@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServiceRegisterEvent;
+import org.bukkit.event.server.ServiceUnregisterEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.jetbrains.annotations.NotNull;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -51,7 +52,7 @@ public class VaultPermissions extends PermissionsHook implements Listener {
 
     @EventHandler
     @SuppressWarnings("unused")
-    public void onPermissionUnregister(ServiceRegisterEvent event) {
+    public void onPermissionUnregister(ServiceUnregisterEvent event) {
         if (event.getProvider().getProvider() instanceof Permission) {
             this.permission = null;
             setupPermission().ifPresent((permission) -> this.permission = permission);
