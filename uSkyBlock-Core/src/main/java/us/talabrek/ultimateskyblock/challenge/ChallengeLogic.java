@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -60,7 +61,7 @@ public class ChallengeLogic implements Listener {
     public final ChallengeDefaults defaults;
     public final ChallengeCompletionLogic completionLogic;
     private final ItemStack lockedItem;
-    private final Map<Challenge.Type, ItemStack> lockedItemMap = new HashMap<>();
+    private final Map<Challenge.Type, ItemStack> lockedItemMap = new EnumMap<>(Challenge.Type.class);
 
     public ChallengeLogic(FileConfiguration config, uSkyBlock plugin) {
         this.config = config;
@@ -125,7 +126,7 @@ public class ChallengeLogic implements Listener {
     }
 
     public List<Challenge> getChallengesForRank(String rank) {
-        return ranks.containsKey(rank) ? ranks.get(rank).getChallenges() : Collections.<Challenge>emptyList();
+        return ranks.containsKey(rank) ? ranks.get(rank).getChallenges() : Collections.emptyList();
     }
 
     public void completeChallenge(final Player player, String challengeName) {
@@ -213,9 +214,15 @@ public class ChallengeLogic implements Listener {
         return false;
     }
 
+    /**
+     * Try to complete a {@link Challenge} for the given {@link Player} where a minimal island level is a requirement.
+     * @param player Player to complete the challenge for.
+     * @param challenge Challenge to complete.
+     * @return True if the challenge was completed succesfully, false otherwise.
+     */
     private boolean tryCompleteIslandLevel(Player player, Challenge challenge) {
         if (plugin.getIslandInfo(player).getLevel() >= challenge.getRequiredLevel()) {
-            giveReward(player, challenge.getName());
+            giveReward(player, challenge);
             return true;
         }
         return false;
@@ -244,12 +251,19 @@ public class ChallengeLogic implements Listener {
         return true;
     }
 
+    /**
+     * Try to complete a {@link Challenge} on the island of the given {@link Player} where items or entities are
+     * required to be present on the island.
+     * @param player Player to complete the challenge for.
+     * @param challengeName Challenge to complete.
+     * @return True if the challenge was completed succesfully, false otherwise.
+     */
     private boolean tryCompleteOnIsland(Player player, String challengeName) {
         Challenge challenge = getChallenge(challengeName);
         List<ItemStack> requiredItems = challenge.getRequiredItems(0);
         int radius = challenge.getRadius();
         if (islandContains(player, requiredItems, radius) && hasEntitiesNear(player, challenge.getRequiredEntities(), radius)) {
-            giveReward(player, challengeName);
+            giveReward(player, challenge);
             return true;
         }
         return false;
@@ -257,7 +271,7 @@ public class ChallengeLogic implements Listener {
 
     private boolean hasEntitiesNear(Player player, List<EntityMatch> requiredEntities, int radius) {
         Map<EntityMatch, Integer> countMap = new LinkedHashMap<>();
-        Map<EntityType, Set<EntityMatch>> matchMap = new HashMap<>();
+        Map<EntityType, Set<EntityMatch>> matchMap = new EnumMap<>(EntityType.class);
         for (EntityMatch match : requiredEntities) {
             countMap.put(match, match.getCount());
             Set<EntityMatch> set = matchMap.get(match.getType());
@@ -332,10 +346,6 @@ public class ChallengeLogic implements Listener {
             }
         }
         return count;
-    }
-
-    public boolean giveReward(final Player player, final String challengeName) {
-        return giveReward(player, getChallenge(challengeName));
     }
 
     private boolean giveReward(Player player, Challenge challenge) {
