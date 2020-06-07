@@ -100,7 +100,7 @@
                                     <include>io.papermc:paperlib</include>
 <!--                                    <include>net.wesjd:anvilgui</include>-->
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
-                                    <include>dk.lockfuglsang.minecraft:po-utils</include>
+                                    <include>uSkyBlock:po-utils</include>
                                     <include>com.googlecode.json-simple:json-simple</include>
                                 </includes>
                             </artifactSet>

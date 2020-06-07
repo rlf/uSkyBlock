@@ -12,7 +12,6 @@
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
         <paperlib.version>1.0.3</paperlib.version>
-        <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.7</vault.version>
 
@@ -157,6 +156,12 @@
                 <groupId>dk.lockfuglsang.minecraft</groupId>
                 <artifactId>bukkit-utils</artifactId>
                 <version>${bukkit-utils.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>dk.lockfuglsang.minecraft</groupId>
+                        <artifactId>po-utils</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>dk.lockfuglsang.minecraft</groupId>
@@ -164,11 +169,6 @@
                 <version>${bukkit-utils.version}</version>
                 <scope>test</scope>
                 <classifier>tests</classifier>
-            </dependency>
-            <dependency>
-                <groupId>dk.lockfuglsang.minecraft</groupId>
-                <artifactId>po-utils</artifactId>
-                <version>${po-utils.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.milkbowl.vault</groupId>
