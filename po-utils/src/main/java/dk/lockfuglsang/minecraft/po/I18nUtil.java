@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -148,31 +148,42 @@ public enum I18nUtil {
      */
     public static class I18n {
         private final Locale locale;
-        private List<Properties> props;
+        private final Properties translations = new Properties();
 
         I18n(Locale locale) {
             this.locale = locale;
-            props = new ArrayList<>();
-            addPropsFromPluginFolder();
-            addPropsFromJar();
-            addPropsFromZipInJar();
+
+            // Order of these calls is important here, because it specifies the priority of the files (git rlf/1233).
+            addPropertiesFromZipInJar().ifPresent(properties -> {
+                translations.putAll(properties);
+                log.log(Level.INFO, "Added {0} translations from ZIP inside JAR.", properties.size());
+            });
+            addPropertiesFromJar().ifPresent(properties -> {
+                translations.putAll(properties);
+                log.log(Level.INFO, "Added {0} translations from the JAR.", properties.size());
+            });
+            addPropertiesFromPluginFolder().ifPresent(properties -> {
+                translations.putAll(properties);
+                log.log(Level.INFO, "Added {0} translations from the plugin directory.", properties.size());
+            });
+
+            log.log(Level.INFO, "Loaded {0} translations.", translations.size());
         }
 
-        private void addPropsFromJar() {
+        private Optional<Properties> addPropertiesFromJar() {
             try (InputStream in = getClass().getClassLoader().getResourceAsStream("po/" + locale + ".po")) {
                 if (in == null) {
-                    return;
+                    return Optional.empty();
                 }
-                Properties i18nProps = POParser.asProperties(in);
-                if (i18nProps != null && !i18nProps.isEmpty()) {
-                    props.add(i18nProps);
-                }
+                Properties properties = POParser.asProperties(in);
+                return Optional.ofNullable(properties);
             } catch (IOException e) {
                 log.info("Unable to read translations from po/" + locale + ".po: " + e);
             }
+            return Optional.empty();
         }
 
-        private void addPropsFromZipInJar() {
+        private Optional<Properties> addPropertiesFromZipInJar() {
             // We zip the .po files, since they are currently half the footprint of the jar.
             try (
                     InputStream in = getClass().getClassLoader().getResourceAsStream("i18n.zip");
@@ -182,40 +193,36 @@ public enum I18nUtil {
                 do {
                     nextEntry = zin != null ? zin.getNextEntry() : null;
                     if (nextEntry != null && nextEntry.getName().equalsIgnoreCase(locale + ".po")) {
-                        Properties i18nProps = POParser.asProperties(zin);
-                        if (i18nProps != null && !i18nProps.isEmpty()) {
-                            props.add(i18nProps);
-                        }
+                        Properties properties = POParser.asProperties(zin);
+                        return Optional.ofNullable(properties);
                     }
                 } while (nextEntry != null);
             } catch (IOException e) {
                 log.info("Unable to load translations from i18n.zip!" + locale + ".po: " + e);
             }
+            return Optional.empty();
         }
 
-        private void addPropsFromPluginFolder() {
+        private Optional<Properties> addPropertiesFromPluginFolder() {
             File poFile = new File(dataFolder, "i18n" + File.separator + locale + ".po");
             if (poFile.exists()) {
                 try (InputStream in = new FileInputStream(poFile)) {
-                    Properties i18nProps = POParser.asProperties(in);
-                    if (i18nProps != null && !i18nProps.isEmpty()) {
-                        props.add(i18nProps);
-                    }
+                    Properties properties = POParser.asProperties(in);
+                    return Optional.ofNullable(properties);
                 } catch (IOException e) {
                     log.info("Unable to load translations from i18n" + File.separator + locale + ".po: " + e);
                 }
             }
+            return Optional.empty();
         }
 
         public String tr(String key, Object... args) {
             if (key == null || key.trim().isEmpty()) {
                 return "";
             }
-            for (Properties prop : props) {
-                String propKey = prop.getProperty(key);
-                if (propKey != null && prop.containsKey(key) && !propKey.trim().isEmpty()) {
-                    return format(propKey, args);
-                }
+            String propKey = translations.getProperty(key);
+            if (propKey != null && !propKey.trim().isEmpty()) {
+                return format(propKey, args);
             }
             return format(key, args);
         }
