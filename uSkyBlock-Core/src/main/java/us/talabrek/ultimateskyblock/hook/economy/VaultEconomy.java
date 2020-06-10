@@ -34,7 +34,10 @@ public class VaultEconomy extends EconomyHook implements Listener {
 
     @Override
     public @NotNull String getCurrenyName() {
-        return economy.currencyNamePlural();
+        if (economy != null) {
+            return economy.currencyNamePlural();
+        }
+        return super.getCurrenyName();
     }
 
     @Override
