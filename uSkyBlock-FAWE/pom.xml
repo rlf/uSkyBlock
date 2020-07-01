@@ -33,11 +33,11 @@
             <artifactId>uSkyBlock-Core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.13.2-R0.1-SNAPSHOT</version>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.16.1-R0.1-SNAPSHOT</version>
             <optional>true</optional>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <!-- WorldEdit -->
         <dependency>
@@ -45,6 +45,12 @@
             <artifactId>worldedit-bukkit</artifactId>
             <version>7.0.1</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- WorldGuard -->
         <dependency>
@@ -53,6 +59,10 @@
             <version>7.0.1</version>
             <scope>provided</scope>
             <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>com.sk89q</groupId>
                     <artifactId>worldedit</artifactId>
