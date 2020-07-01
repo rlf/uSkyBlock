@@ -151,6 +151,12 @@
                 <artifactId>VaultAPI</artifactId>
                 <optional>true</optional>
                 <version>${vault.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.bukkit</groupId>
+                        <artifactId>bukkit</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.github.rlf</groupId>
@@ -189,12 +195,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <profiles>
-        <profile>
-            <id>1.16</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-    </profiles>
 </project>
