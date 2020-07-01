@@ -133,6 +133,10 @@
                         <groupId>dk.lockfuglsang.minecraft</groupId>
                         <artifactId>po-utils</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.bukkit</groupId>
+                        <artifactId>bukkit</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
@@ -185,4 +189,12 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <profiles>
+        <profile>
+            <id>1.16</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 </project>

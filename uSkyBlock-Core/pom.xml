@@ -217,6 +217,21 @@
 
     <profiles>
         <profile>
+            <id>1.16</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.spigotmc</groupId>
+                    <artifactId>spigot-api</artifactId>
+                    <version>1.16.1-R0.1-SNAPSHOT</version>
+                    <scope>compile</scope>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
             <id>i18n</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -330,14 +345,6 @@
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- Spigot API -->
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <!-- PaperLib -->
