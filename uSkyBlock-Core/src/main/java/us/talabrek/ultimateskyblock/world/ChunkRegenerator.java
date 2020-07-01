@@ -123,7 +123,7 @@ public class ChunkRegenerator {
                     defaultBiome = Biome.THE_END;
                     break;
                 case NETHER:
-                    defaultBiome = Biome.NETHER;
+                    defaultBiome = Biome.NETHER_WASTES;
                     break;
                 default:
                     defaultBiome = Biome.OCEAN;

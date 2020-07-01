@@ -26,7 +26,7 @@ public class BiomeCommand extends RequireIslandCommand {
         {
             put("ocean", Biome.OCEAN);
             put("jungle", Biome.JUNGLE);
-            put("hell", Biome.NETHER);
+            put("hell", Biome.NETHER_WASTES);
             put("sky", Biome.THE_END);
             put("mushroom", Biome.MUSHROOM_FIELDS);
             put("swampland", Biome.SWAMP);
