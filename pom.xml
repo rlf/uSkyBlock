@@ -11,7 +11,7 @@
         <jbannotations.version>19.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
-        <paperlib.version>1.0.3</paperlib.version>
+        <paperlib.version>1.0.4</paperlib.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.7</vault.version>
 
@@ -122,34 +122,6 @@
             <url>https://www.uskyblock.ovh/maven/dependencies/</url>
         </pluginRepository>
     </pluginRepositories>
-    <profiles>
-        <profile>
-            <id>1.15</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sk89q.worldedit</groupId>
-                    <artifactId>worldedit-bukkit</artifactId>
-                    <version>7.0.1</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.sk89q.worldguard</groupId>
-                    <artifactId>worldguard-bukkit</artifactId>
-                    <version>7.0.1</version>
-                    <scope>provided</scope>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.sk89q</groupId>
-                            <artifactId>worldedit</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
     <dependencyManagement>
         <dependencies>
             <dependency>

@@ -98,7 +98,6 @@
                                 <includes>
                                     <include>org.bstats:*</include>
                                     <include>io.papermc:paperlib</include>
-<!--                                    <include>net.wesjd:anvilgui</include>-->
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>uSkyBlock:po-utils</include>
                                     <include>com.googlecode.json-simple:json-simple</include>
@@ -117,10 +116,6 @@
                                     <pattern>io.papermc.lib</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.paperlib</shadedPattern>
                                 </relocation>
-<!--                                <relocation>-->
-<!--                                    <pattern>net.wesjd.anvilgui</pattern>-->
-<!--                                    <shadedPattern>us.talabrek.ultimateskyblock.anvilgui</shadedPattern>-->
-<!--                                </relocation>-->
                             </relocations>
                         </configuration>
                     </execution>
@@ -167,7 +162,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <show>private</show>
+                    <show>public</show>
                     <failOnError>false</failOnError>
                     <doclint>none</doclint>
                 </configuration>
@@ -221,21 +216,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>1.15</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                    <version>1.15.2-R0.1-SNAPSHOT</version>
-                    <optional>true</optional>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
         <profile>
             <id>i18n</id>
             <activation>
@@ -353,19 +333,19 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Spigot API -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.16.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- PaperLib -->
         <dependency>
             <groupId>io.papermc</groupId>
             <artifactId>paperlib</artifactId>
             <scope>compile</scope>
         </dependency>
-        <!-- AnvilGUI -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.WesJD</groupId>-->
-<!--            <artifactId>AnvilGUI</artifactId>-->
-<!--            <version>master-SNAPSHOT</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
         <!-- Multiverse -->
         <dependency>
             <groupId>com.onarandombox.multiversecore</groupId>
@@ -390,6 +370,26 @@
                 <exclusion>
                     <groupId>*</groupId>
                     <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- WorldEdit -->
+        <dependency>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-bukkit</artifactId>
+            <version>7.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- WorldGuard -->
+        <dependency>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-bukkit</artifactId>
+            <version>7.0.1</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sk89q</groupId>
+                    <artifactId>worldedit</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
