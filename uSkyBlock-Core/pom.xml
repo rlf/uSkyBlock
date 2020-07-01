@@ -332,13 +332,13 @@
             <artifactId>VaultAPI</artifactId>
             <optional>true</optional>
         </dependency>
-
         <!-- Spigot API -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.16.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <!-- PaperLib -->
         <dependency>
@@ -379,6 +379,12 @@
             <artifactId>worldedit-bukkit</artifactId>
             <version>7.0.1</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- WorldGuard -->
         <dependency>
@@ -390,6 +396,10 @@
                 <exclusion>
                     <groupId>com.sk89q</groupId>
                     <artifactId>worldedit</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -413,6 +423,12 @@
             <artifactId>ActionBarAPI</artifactId>
             <version>1.5.4</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>be.maximvdw</groupId>
