@@ -312,6 +312,12 @@
         <dependency>
             <groupId>dk.lockfuglsang.minecraft</groupId>
             <artifactId>bukkit-utils</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>dk.lockfuglsang.minecraft</groupId>
