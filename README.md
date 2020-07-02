@@ -8,7 +8,7 @@ We are on [Spigot](https://www.spigotmc.org/resources/uskyblock-revived.66795/).
 
 This version depends on the following plugins:
 
-* Bukkit/Spigot 1.15.1-R0.1-SNAPSHOT
+* Spigot/Paper 1.16.1-R0.1-SNAPSHOT
 * Vault 1.7.x
 * WorldEdit 7.1.0-SNAPSHOT
 * WorldGuard 7.0.2-SNAPSHOT
