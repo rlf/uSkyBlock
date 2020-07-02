@@ -13,7 +13,10 @@
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
         <paperlib.version>1.0.4</paperlib.version>
         <deluxechat.version>1.6</deluxechat.version>
+        <spigotapi.version>1.16.1-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
+        <worldedit.version>7.2.0-SNAPSHOT</worldedit.version>
+        <worldguard.version>7.0.4-SNAPSHOT</worldguard.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
