@@ -8,6 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +17,6 @@ import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.challenge.ChallengeLogic;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
-import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
@@ -204,10 +204,7 @@ public class SignLogic {
     private void updateSignFromChestSync(Location chestLoc, Location signLoc, Challenge challenge, List<ItemStack> requiredItems, boolean challengeLocked) {
         Block chestBlock = chestLoc.getBlock();
         Block signBlock = signLoc != null ? signLoc.getBlock() : null;
-        if (chestBlock != null && signBlock != null
-                && isChest(chestBlock)
-                && signBlock.getType() == SkyBlockMenu.WALL_SIGN_MATERIAL && signBlock.getState() instanceof Sign
-                ) {
+        if (signBlock != null && isChest(chestBlock) && signBlock.getState().getBlockData() instanceof WallSign) {
             Sign sign = (Sign) signBlock.getState();
             Chest chest = (Chest) chestBlock.getState();
             int missing = -1;
