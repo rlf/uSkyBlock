@@ -43,14 +43,11 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
  * The UI menu of uSkyBlock (using the inventory UI).
  */
 public class SkyBlockMenu {
-    public static final Material SIGN_MATERIAL = Material.getMaterial("SIGN") == null
-            ? Material.getMaterial("OAK_SIGN")
-            : Material.getMaterial("SIGN");
     private final Pattern PERM_VALUE_PATTERN = Pattern.compile("(\\[(?<perm>(?<not>[!])?[^\\]]+)\\])?(?<value>.*)");
     private final Pattern CHALLENGE_PAGE_HEADER = Pattern.compile(tr("Challenge Menu") + ".*\\((?<p>[0-9]+)/(?<max>[0-9]+)\\)");
     private uSkyBlock plugin;
     private final ChallengeLogic challengeLogic;
-    private ItemStack sign = new ItemStack(SIGN_MATERIAL, 1);
+    private ItemStack sign = new ItemStack(Material.OAK_SIGN, 1);
     private ItemStack biome = new ItemStack(Material.JUNGLE_SAPLING, 1);
     private ItemStack lock = new ItemStack(Material.IRON_BARS, 1);
     private ItemStack warpset = new ItemStack(Material.END_PORTAL_FRAME, 1);
@@ -967,7 +964,7 @@ public class SkyBlockMenu {
         String title = "\u00a79" + tr("Island Restart Menu");
         Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title, MenuType.DEFAULT), menuSize, title);
         List<String> lores = new ArrayList<>();
-        ItemStack menuItem = new ItemStack(SIGN_MATERIAL, 1);
+        ItemStack menuItem = new ItemStack(Material.OAK_SIGN, 1);
         ItemMeta meta = menuItem.getItemMeta();
         meta.setDisplayName(tr("\u00a7a\u00a7lReturn to the main menu"));
         meta.setLore(lores);
@@ -1091,7 +1088,7 @@ public class SkyBlockMenu {
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        if (slotIndex == 0 && currentItem.getType() == SIGN_MATERIAL) {
+        if (slotIndex == 0 && currentItem.getType() == Material.OAK_SIGN) {
             p.closeInventory();
             p.performCommand("island");
             return;
@@ -1152,7 +1149,7 @@ public class SkyBlockMenu {
                 return;
             }
         }
-        if (currentItem.getType() == SIGN_MATERIAL) {
+        if (currentItem.getType() == Material.OAK_SIGN) {
             p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         } else {
@@ -1166,7 +1163,7 @@ public class SkyBlockMenu {
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        if (meta == null || currentItem.getType() == SIGN_MATERIAL) {
+        if (meta == null || currentItem.getType() == Material.OAK_SIGN) {
             p.closeInventory();
             p.performCommand("island");
         } else if (skull != null && plugin.getIslandInfo(p).isLeader(p)) {
