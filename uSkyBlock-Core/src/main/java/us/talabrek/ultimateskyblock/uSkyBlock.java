@@ -59,9 +59,11 @@ import us.talabrek.ultimateskyblock.event.WorldGuardEvents;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
 import us.talabrek.ultimateskyblock.handler.ConfirmHandler;
 import us.talabrek.ultimateskyblock.handler.CooldownHandler;
+import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
 import us.talabrek.ultimateskyblock.hook.HookManager;
+import us.talabrek.ultimateskyblock.hook.world.MultiverseHook;
 import us.talabrek.ultimateskyblock.imports.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.BlockLimitLogic;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
@@ -109,6 +111,7 @@ import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
+import static us.talabrek.ultimateskyblock.Settings.island_height;
 import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
 import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
@@ -216,6 +219,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                 if (!isRequirementsMet(Bukkit.getConsoleSender(), null)) {
                     return;
                 }
+                uSkyBlock.this.getHookManager().setupMultiverse();
                 uSkyBlock.this.getHookManager().setupEconomyHook();
                 uSkyBlock.this.getHookManager().setupPermissionsHook();
                 AsyncWorldEditHandler.onEnable(uSkyBlock.this);

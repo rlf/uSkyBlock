@@ -5,6 +5,7 @@ import us.talabrek.ultimateskyblock.hook.economy.EconomyHook;
 import us.talabrek.ultimateskyblock.hook.economy.VaultEconomy;
 import us.talabrek.ultimateskyblock.hook.permissions.PermissionsHook;
 import us.talabrek.ultimateskyblock.hook.permissions.VaultPermissions;
+import us.talabrek.ultimateskyblock.hook.world.MultiverseHook;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.ArrayList;
@@ -36,6 +37,14 @@ public class HookManager {
      */
     public Optional<EconomyHook> getEconomyHook() {
         return Optional.ofNullable((EconomyHook) getHook("Economy").orElse(null));
+    }
+
+    /**
+     * Short method for {@link #getHook(String)} to get the optional {@link MultiverseHook}.
+     * @return optional of MultiverseHook.
+     */
+    public Optional<MultiverseHook> getMultiverse() {
+        return Optional.ofNullable((MultiverseHook) getHook("Multiverse").orElse(null));
     }
 
     /**
@@ -75,6 +84,27 @@ public class HookManager {
         }
 
         plugin.getLogger().info("Failed to find a compatible economy system. Economy rewards will be disabled.");
+        return false;
+    }
+
+    /**
+     * Checks and hooks into Multiverse-Core.
+     * @return True if hooking succeeded, false otherwise.
+     */
+    public boolean setupMultiverse() {
+        try {
+            if (plugin.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
+                MultiverseHook mvHook = new MultiverseHook(plugin);
+                registerHook(mvHook);
+                plugin.getLogger().info("Hooked into Multiverse-Core");
+                return true;
+            }
+        } catch (HookFailedException ex) {
+            plugin.getLogger().warning("Failed to hook into Multiverse-Core");
+            ex.printStackTrace();
+        }
+
+        plugin.getLogger().warning("Failed to find Multiverse-Core. Multiworld support will be limited.");
         return false;
     }
 
