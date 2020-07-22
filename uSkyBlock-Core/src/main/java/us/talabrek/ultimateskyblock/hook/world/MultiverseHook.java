@@ -16,7 +16,6 @@ import us.talabrek.ultimateskyblock.hook.PluginHook;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 public class MultiverseHook extends PluginHook {
@@ -27,8 +26,13 @@ public class MultiverseHook extends PluginHook {
 
     public MultiverseHook(@NotNull uSkyBlock plugin) {
         super(plugin, "Multiverse", "Multiverse");
-        setupCore().ifPresent(mvPlugin -> this.mvCore = mvPlugin);
-        setupInventories().ifPresent(mvPlugin -> this.mvInventories = mvPlugin);
+
+        if (plugin.getServer().getPluginManager().isPluginEnabled("Multiverse-Core")) {
+            setupCore().ifPresent(mvPlugin -> this.mvCore = mvPlugin);
+        }
+        if (plugin.getServer().getPluginManager().isPluginEnabled("Multiverse-Inventories")) {
+            setupInventories().ifPresent(mvPlugin -> this.mvInventories = mvPlugin);
+        }
     }
 
     private Optional<MultiverseCore> setupCore() {
