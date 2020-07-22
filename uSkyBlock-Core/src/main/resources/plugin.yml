@@ -6,12 +6,13 @@ author: R4zorax (and more)
 load: STARTUP
 softdepend:
  # mandatory dependencies
- - Vault
  - WorldEdit
  - WorldGuard
- - Multiverse-Core
  # optional dependencies
  - ActionBarAPI
+ - Multiverse-Core
+ - Multiverse-Inventories
+ - Vault
  # WE/AWE
  - FastAsyncWorldEdit
  - AsyncWorldEdit

@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
-import us.talabrek.ultimateskyblock.handler.MultiverseInventoriesHandler;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
@@ -244,7 +243,6 @@ public class WorldManager {
             plugin.getHookManager().getMultiverse().ifPresent(hook -> {
                 hook.registerNetherworld(skyBlockNetherWorld);
                 setupWorld(skyBlockNetherWorld, island_height / 2);
-                MultiverseInventoriesHandler.linkWorlds(getWorld(), skyBlockNetherWorld);
             }), plugin.getConfig().getLong("init.initDelay", 50L) + 100L);
 
         return skyBlockNetherWorld;
