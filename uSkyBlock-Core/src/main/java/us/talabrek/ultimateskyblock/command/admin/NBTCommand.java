@@ -24,17 +24,17 @@ public class NBTCommand extends CompositeCommand {
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
-                    ItemStack itemStack = player.getInventory().getItemInHand();
-                    if (itemStack != null) {
-                        String[] msgs = new String[]{
-                                tr("\u00a7eInfo for \u00a79{0}", ItemStackUtil.asString(itemStack)),
-                                tr("\u00a77 - name: \u00a79{0}", ItemStackUtil.getItemName(itemStack)),
-                                tr("\u00a77 - nbttag: \u00a79{0}", NBTUtil.getNBTTag(itemStack))
-                        };
-                        player.sendMessage(msgs);
-                    } else {
+                    ItemStack itemStack = player.getInventory().getItemInMainHand();
+                    if (!itemStack.getType().isItem()) {
                         player.sendMessage(tr("\u00a7cNo item in hand!"));
+                        return true;
                     }
+                    String[] msgs = new String[]{
+                            tr("\u00a7eInfo for \u00a79{0}", ItemStackUtil.asString(itemStack)),
+                            tr("\u00a77 - name: \u00a79{0}", ItemStackUtil.getItemName(itemStack)),
+                            tr("\u00a77 - nbttag: \u00a79{0}", NBTUtil.getNBTTag(itemStack))
+                    };
+                    player.sendMessage(msgs);
                     return true;
                 }
                 sender.sendMessage(tr("\u00a7eCan only be executed as a player"));
@@ -44,20 +44,18 @@ public class NBTCommand extends CompositeCommand {
         add(new AbstractCommand("set|s", null, "nbttag", marktr("sets the NBTTag on the currently held item")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                if (sender instanceof Player) {
-                    if (args.length > 0) {
-                        Player player = (Player) sender;
-                        ItemStack itemStack = player.getInventory().getItemInHand();
-                        if (itemStack != null) {
-                            String nbtTag = join(args);
-                            itemStack = NBTUtil.setNBTTag(itemStack, nbtTag);
-                            player.getInventory().setItemInHand(itemStack);
-                            player.sendMessage(tr("\u00a7eSet \u00a79{0}\u00a7e to \u00a7c{1}", nbtTag, itemStack));
-                        } else {
-                            player.sendMessage(tr("\u00a7cNo item in hand!"));
-                        }
+                if (sender instanceof Player && args.length > 0) {
+                    Player player = (Player) sender;
+                    ItemStack itemStack = player.getInventory().getItemInMainHand();
+                    if (!itemStack.getType() .isItem()) {
+                        player.sendMessage(tr("\u00a7cNo item in hand!"));
                         return true;
                     }
+                    String nbtTag = join(args);
+                    itemStack = NBTUtil.setNBTTag(itemStack, nbtTag);
+                    player.getInventory().setItemInMainHand(itemStack);
+                    player.sendMessage(tr("\u00a7eSet \u00a79{0}\u00a7e to \u00a7c{1}", nbtTag, itemStack));
+                    return true;
                 }
                 sender.sendMessage(tr("\u00a7eCan only be executed as a player"));
                 return false;
@@ -66,20 +64,18 @@ public class NBTCommand extends CompositeCommand {
         add(new AbstractCommand("add|a", null, "nbttag", marktr("adds the NBTTag on the currently held item")) {
             @Override
             public boolean execute(CommandSender sender, String alias, Map<String, Object> data, String... args) {
-                if (sender instanceof Player) {
-                    if (args.length > 0) {
-                        Player player = (Player) sender;
-                        ItemStack itemStack = player.getInventory().getItemInHand();
-                        if (itemStack != null) {
-                            String nbtTag = join(args);
-                            itemStack = NBTUtil.addNBTTag(itemStack, nbtTag);
-                            player.getInventory().setItemInHand(itemStack);
-                            player.sendMessage(tr("\u00a7eAdded \u00a79{0}\u00a7e to \u00a7c{1}", nbtTag, itemStack));
-                        } else {
-                            player.sendMessage(tr("\u00a7cNo item in hand!"));
-                        }
+                if (sender instanceof Player && args.length > 0) {
+                    Player player = (Player) sender;
+                    ItemStack itemStack = player.getInventory().getItemInMainHand();
+                    if (!itemStack.getType().isItem()) {
+                        player.sendMessage(tr("\u00a7cNo item in hand!"));
                         return true;
                     }
+                    String nbtTag = join(args);
+                    itemStack = NBTUtil.addNBTTag(itemStack, nbtTag);
+                    player.getInventory().setItemInMainHand(itemStack);
+                    player.sendMessage(tr("\u00a7eAdded \u00a79{0}\u00a7e to \u00a7c{1}", nbtTag, itemStack));
+                    return true;
                 }
                 sender.sendMessage(tr("\u00a7eCan only be executed as a player"));
                 return false;
