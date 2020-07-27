@@ -57,7 +57,7 @@ options:
     - BROWN_MUSHROOM:1
     - PUMPKIN_SEEDS:1
     - SUGAR_CANE:1
-    - SIGN:1
+    - OAK_SIGN:1
     addExtraItems: true
     islandTeleportDelay: 2
     allowPvP: deny
@@ -454,7 +454,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 106
+version: 107
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5
