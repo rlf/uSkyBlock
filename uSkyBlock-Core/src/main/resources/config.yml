@@ -424,7 +424,7 @@ nether:
     blaze: 0.2
 tool-menu:
   enabled: true
-  tool: SAPLING
+  tool: OAK_SAPLING
   commands:
     CHEST: island
     BEDROCK: island spawn

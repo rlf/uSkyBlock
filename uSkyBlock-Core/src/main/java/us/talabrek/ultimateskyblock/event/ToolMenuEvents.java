@@ -21,7 +21,6 @@ import java.util.Map;
  * Events triggering the tool-menu
  */
 public class ToolMenuEvents implements Listener {
-
     public static final String COMPLETE_CHALLENGE_CMD = "challenges complete ";
     private final uSkyBlock plugin;
     private final ItemStack tool;
@@ -29,7 +28,7 @@ public class ToolMenuEvents implements Listener {
 
     public ToolMenuEvents(uSkyBlock plugin) {
         this.plugin = plugin;
-        tool = ItemStackUtil.createItemStack(plugin.getConfig().getString("tool-menu.tool", "SAPLING"));
+        tool = ItemStackUtil.createItemStack(plugin.getConfig().getString("tool-menu.tool", Material.OAK_SAPLING.toString()));
         registerChallenges();
         registerCommands();
     }
@@ -61,8 +60,8 @@ public class ToolMenuEvents implements Listener {
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onBlockHit(PlayerInteractEvent e) {
-        if (e == null || e.getClickedBlock() == null
-                || e.getAction() != Action.LEFT_CLICK_BLOCK || e.getPlayer().getGameMode() != GameMode.SURVIVAL) {
+        if (e.getClickedBlock() == null || e.getAction() != Action.LEFT_CLICK_BLOCK ||
+            e.getPlayer().getGameMode() != GameMode.SURVIVAL) {
             return;
         }
         Player player = e.getPlayer();
@@ -72,16 +71,8 @@ public class ToolMenuEvents implements Listener {
 
         // We are in a skyworld, a block has been hit, with the tool
         Material block = e.getClickedBlock().getType();
-        short data = e.getClickedBlock().getData();
-        String itemId = ItemStackUtil.asString(new ItemStack(block, 1, data));
-        if (commandMap.containsKey(itemId)) {
-            doCmd(e, player, itemId);
-        }
-        if (!e.isCancelled()) {
-            itemId = ItemStackUtil.asString(new ItemStack(block, 1));
-            if (commandMap.containsKey(itemId)) {
-                doCmd(e, player, itemId);
-            }
+        if (commandMap.containsKey(block.toString())) {
+            doCmd(e, player, block.toString());
         }
     }
 
@@ -99,7 +90,12 @@ public class ToolMenuEvents implements Listener {
         }
     }
 
+    /**
+     * Checks if the given {@link ItemStack} is the configured tool for the tool menu.
+     * @param item ItemStack to check.
+     * @return True if it is the configured tool, false otherwise.
+     */
     private boolean isTool(ItemStack item) {
-        return item != null && tool != null && item.getType() == tool.getType() && item.getDurability() == tool.getDurability();
+        return item != null && tool != null && item.getType() == tool.getType();
     }
 }
