@@ -67,7 +67,6 @@ public class AWE370Adaptor implements AWEAdaptor {
                     PlayerJob job = it.next();
                     int left = job.progress(blocksPlaced);
                     if (left > 0 && isFirst && pendingJobs.size() > 1) {
-                        log.finer("remove: " + job);
                         it.remove();
                         markJobs(blocksPlaced + left, queuedBlocks - left);
                     }
@@ -176,7 +175,6 @@ public class AWE370Adaptor implements AWEAdaptor {
                 Clipboard clipboard = format.getReader(inStream).read();
                 ClipboardHolder holder = new ClipboardHolder(clipboard);
                 editSession.enableQueue();
-                editSession.setFastMode(true);
 
                 BlockVector3 to = BlockVector3.at(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
                 final Operation operation = holder

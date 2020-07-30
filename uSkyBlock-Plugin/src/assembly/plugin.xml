@@ -12,6 +12,7 @@
                 <include>com.github.rlf:uSkyBlock-API</include>
                 <include>uSkyBlock:uSkyBlock-Core</include>
                 <include>uSkyBlock:uSkyBlock-FAWE</include>
+                <include>uSkyBlock:uSkyBlock-AWE370</include>
             </includes>
             <unpack>true</unpack>
         </dependencySet>
