@@ -45,6 +45,7 @@
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-Plugin</module>
         <module>uSkyBlock-FAWE</module>
+        <module>uSkyBlock-AWE370</module>
     </modules>
 
     <scm>
