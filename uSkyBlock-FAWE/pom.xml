@@ -16,16 +16,16 @@
 
     <repositories>
         <repository>
-            <id>fawe-jenkins</id>
-            <url>https://ci.athion.net/job/FastAsyncWorldEdit-Breaking/ws/mvn</url>
+            <id>IntellectualSites</id>
+            <url>https://mvn.intellectualsites.com/content/repositories/releases/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>com.boydti</groupId>
-            <artifactId>fawe-api</artifactId>
-            <version>latest</version>
+            <groupId>com.intellectualsites.fawe</groupId>
+            <artifactId>FAWE-Bukkit</artifactId>
+            <version>1.16-306</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

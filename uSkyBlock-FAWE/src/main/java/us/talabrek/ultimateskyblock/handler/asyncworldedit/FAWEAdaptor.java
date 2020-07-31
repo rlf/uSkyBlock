@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 import com.boydti.fawe.util.EditSessionBuilder;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.Region;
@@ -12,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.LogUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,6 @@ public class FAWEAdaptor implements AWEAdaptor {
     @Override
     public void onEnable(Plugin plugin) {
         this.plugin = (uSkyBlock) plugin;
-        log.finer("- FAWE debugging: Location of WorldEdit EditSession: " + EditSession.class.getResource('/' + EditSession.class.getName().replace('.', '/') + ".class"));
     }
 
     @Override
@@ -44,20 +43,26 @@ public class FAWEAdaptor implements AWEAdaptor {
     @Override
     public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
         plugin.async(() -> {
-            log.finer("Trying to load schematic " + file);
             if (file == null || !file.exists() || !file.canRead()) {
-                LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
+                log.log(Level.WARNING, "Unable to load schematic {}", file);
+                return;
             }
+
+            ClipboardFormat format = ClipboardFormats.findByFile(file);
+            if (format == null) {
+                log.log(Level.SEVERE, "Unable to find schematic format for file {}", file);
+                return;
+            }
+
             BlockVector3 to = BlockVector3.at(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
             EditSession editSession = getEditSession(playerPerk, origin);
             try {
-                ClipboardFormats
-                        .findByFile(file)
-                        .load(file)
-                        .paste(editSession, to, false);
+                format
+                    .load(file)
+                    .paste(editSession, to, false);
                 editSession.flushQueue();
-            } catch (IOException e) {
-                log.log(Level.INFO, "Unable to paste schematic " + file, e);
+            } catch (IOException ex) {
+                log.log(Level.INFO, "Unable to paste schematic " + file, ex);
             }
         });
     }
