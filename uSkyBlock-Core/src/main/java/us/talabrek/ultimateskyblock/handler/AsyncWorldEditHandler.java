@@ -55,16 +55,25 @@ public enum AsyncWorldEditHandler {;
             }
             Plugin fawe = getFAWE();
             Plugin awe = getAWE();
-            String className = null;
+            String className;
             if (fawe != null) {
                 VersionUtil.Version version = VersionUtil.getVersion(fawe.getDescription().getVersion());
                 className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWEAdaptor";
                 try {
-                    adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
-                    log(Level.INFO, "Hooked into FAWE " + version);
-                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
-                    log(Level.WARNING, "Unable to locate FAWE adaptor for version " + version + ": " + e);
+                    adaptor = (AWEAdaptor) Class.forName(className).getDeclaredConstructor().newInstance();
+                    log(Level.INFO, "Hooked into FAWE version " + version);
+                } catch (Exception ex) {
+                    log(Level.WARNING, "Unable to locate FAWE adaptor for version " + version + ": " + ex);
                     adaptor = NULL_ADAPTOR;
+                }
+            } else if (awe != null) {
+                VersionUtil.Version version = VersionUtil.getVersion(awe.getDescription().getVersion());
+                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.AWE370Adaptor";
+                try {
+                    adaptor = (AWEAdaptor) Class.forName(className).getDeclaredConstructor().newInstance();
+                    log(Level.INFO, "Hooked into AWE version " + version);
+                } catch (Exception ex) {
+                    log(Level.WARNING, "Unable to locale AWE adaptor for version " + version, ex);
                 }
             } else {
                 adaptor = NULL_ADAPTOR;

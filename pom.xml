@@ -45,6 +45,7 @@
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-Plugin</module>
         <module>uSkyBlock-FAWE</module>
+        <module>uSkyBlock-AWE370</module>
     </modules>
 
     <scm>
@@ -174,6 +175,11 @@
             <dependency>
                 <groupId>uSkyBlock</groupId>
                 <artifactId>uSkyBlock-FAWE</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>uSkyBlock</groupId>
+                <artifactId>uSkyBlock-AWE370</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
