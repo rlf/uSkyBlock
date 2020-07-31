@@ -109,8 +109,6 @@ import java.util.regex.Pattern;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.pre;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.Settings.island_height;
-import static us.talabrek.ultimateskyblock.util.LocationUtil.isSafeLocation;
 import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManager.RequirementChecker {
@@ -119,7 +117,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             new String[]{"Vault", "1.7.0", "optional"},
             new String[]{"WorldEdit", "7.0", "optionalIf", "FastAsyncWorldEdit"},
             new String[]{"WorldGuard", "7.0"},
-            new String[]{"FastAsyncWorldEdit", "1.13", "optional"},
+            new String[]{"FastAsyncWorldEdit", "1.16.1", "optional"},
             new String[]{"Multiverse-Core", "2.5", "optional"},
             new String[]{"Multiverse-Portals", "2.5", "optional"},
             new String[]{"Multiverse-NetherPortals", "2.5", "optional"},
