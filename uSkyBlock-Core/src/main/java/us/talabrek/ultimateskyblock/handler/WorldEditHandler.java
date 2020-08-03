@@ -14,6 +14,7 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.ClipboardHolder;
+import com.sk89q.worldedit.util.SideEffectSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
@@ -49,7 +50,7 @@ public class WorldEditHandler {
         boolean noAir = false;
         BlockVector3 to = BlockVector3.at(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
         EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(new BukkitWorld(origin.getWorld()), -1);
-        editSession.setFastMode(true);
+        editSession.setSideEffectApplier(SideEffectSet.none());
         ProtectedRegion region = WorldGuardHandler.getIslandRegionAt(origin);
         if (region != null) {
             editSession.setMask(new RegionMask(getRegion(origin.getWorld(), region)));

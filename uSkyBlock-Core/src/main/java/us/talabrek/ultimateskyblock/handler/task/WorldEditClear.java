@@ -6,6 +6,7 @@ import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.util.SideEffectSet;
 import com.sk89q.worldedit.world.block.BlockTypes;
 import org.bukkit.World;
 import us.talabrek.ultimateskyblock.async.IncrementalRunnable;
@@ -75,7 +76,7 @@ public class WorldEditClear extends IncrementalRunnable {
             final EditSession editSession = WorldEditHandler.createEditSession(
                     new BukkitWorld(world), region.getArea() * 255);
             editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
-            editSession.setFastMode(true);
+            editSession.setSideEffectApplier(SideEffectSet.defaults());
             try {
                 editSession.setBlocks(region, BlockTypes.AIR.getDefaultState());
             } catch (MaxChangedBlocksException e) {

@@ -2,6 +2,7 @@ package us.talabrek.ultimateskyblock.handler;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.util.SideEffectSet;
 import com.sk89q.worldedit.world.World;
 import dk.lockfuglsang.minecraft.util.VersionUtil;
 import org.bukkit.Bukkit;
@@ -128,7 +129,7 @@ public enum AsyncWorldEditHandler {;
                     try {
                         final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
                         editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
-                        editSession.setFastMode(true);
+                        editSession.setSideEffectApplier(SideEffectSet.defaults());
                         editSession.getWorld().regenerate(region, editSession);
                         editSession.flushSession();
                     } finally {

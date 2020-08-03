@@ -7,6 +7,7 @@ import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.util.SideEffectSet;
 import com.sk89q.worldedit.world.block.BlockState;
 import com.sk89q.worldedit.world.block.BlockTypes;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
@@ -59,7 +60,7 @@ public class WorldEditClearFlatlandTask extends IncrementalRunnable {
         Iterator<Region> border = borderRegions.iterator();
         while (!isComplete()) {
             EditSession editSession = AsyncWorldEditHandler.createEditSession(bukkitWorld, maxBlocks);
-            editSession.setFastMode(true);
+            editSession.setSideEffectApplier(SideEffectSet.defaults());
             editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
             if (inner.hasNext()) {
                 BlockVector2 chunk = inner.next();
