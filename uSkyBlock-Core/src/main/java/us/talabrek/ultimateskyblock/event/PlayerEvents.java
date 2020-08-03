@@ -289,27 +289,31 @@ public class PlayerEvents implements Listener {
         }
     }
 
+    /**
+     * This EventHandler handles {@link BlockBreakEvent} to detect if a player broke OAK_LEAVES in the skyworld,
+     * and will drop an OAK_SAPLING if so. This will prevent cases where the default generated oak tree on a new
+     * island drops no saplings.
+     * @param event BlockBreakEvent to handle.
+     */
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onLeafBreak(BlockBreakEvent event) {
         if (!plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
             return;
         }
-        if (event.getBlock().getType() != Material.OAK_LEAVES || (event.getBlock().getData() & 0x3) != 0) {
+        if (event.getBlock().getType() != Material.OAK_LEAVES) {
             return;
         }
-        // Ok, a player broke an OAK LEAF in the Skyworld
+
         String islandName = WorldGuardHandler.getIslandNameAt(event.getPlayer().getLocation());
         IslandInfo islandInfo = plugin.getIslandInfo(islandName);
         if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
-            // Add an oak-sapling
             event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.OAK_SAPLING, 1));
             islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
         }
     }
     
     @EventHandler(ignoreCancelled = true)
-    public void onBlockPlaceEvent(BlockPlaceEvent event)
-    {
+    public void onBlockPlaceEvent(BlockPlaceEvent event) {
         final Player player = event.getPlayer();
         if (!blockLimitsEnabled || !plugin.getWorldManager().isSkyAssociatedWorld(player.getWorld())) {
             return; // Skip
