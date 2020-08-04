@@ -487,4 +487,4 @@ blocks:
     diminishingReturns: 64
   YELLOW_FLOWER:
     diminishingReturns: 100
-version: 100
+version: 101
