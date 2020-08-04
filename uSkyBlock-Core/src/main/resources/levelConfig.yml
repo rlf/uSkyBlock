@@ -89,6 +89,9 @@ blocks:
     diminishingReturns: 100
   COAL_ORE:
     score: 200.0
+  COARSE_DIRT:
+    score: 25.0
+    diminishingReturns: 10000
   COBBLESTONE:
     limit: 10000
   COBBLESTONE_STAIRS:
@@ -127,12 +130,6 @@ blocks:
     score: 400.0
   DIRT:
     score: 20.0
-    diminishingReturns: 10000
-  DIRT/1:
-    score: 25.0
-    diminishingReturns: 10000
-  DIRT/2:
-    score: 25.0
     diminishingReturns: 10000
   DOUBLE_STEP/0:
     diminishingReturns: 10000
@@ -307,6 +304,9 @@ blocks:
     score: 0.0
   PISTON_STICKY_BASE:
     score: 60.0
+  PODZOL:
+    score: 25.0
+    diminishingReturns: 10000
   PORTAL:
     score: 0.0
   POTATO:
