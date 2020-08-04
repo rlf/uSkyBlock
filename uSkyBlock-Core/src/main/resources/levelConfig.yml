@@ -31,7 +31,7 @@ blocks:
   AIR:
     score: 0.0
     limit: 0
-  ANVIL/0-2:
+  ANVIL:
     score: 150.0
     limit: 5
   BARRIER:
@@ -79,6 +79,9 @@ blocks:
   CAULDRON:
     score: 155.0
     limit: 10
+  CHIPPED_ANVIL:
+    score: 150.0
+    limit: 5
   CLAY:
     score: 50.0
   COAL_BLOCK:
@@ -99,6 +102,9 @@ blocks:
     score: 0.0
   CROPS:
     score: 0.0
+  DAMAGED_ANVIL:
+    score: 150.0
+    limit: 5
   DARK_OAK_DOOR:
     score: 20.0
   DARK_OAK_FENCE:
