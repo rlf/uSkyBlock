@@ -220,7 +220,11 @@ public class WorldManager {
      */
     @Nullable
     public synchronized World getNetherWorld() {
-        if (skyBlockNetherWorld == null && Settings.nether_enabled) {
+        if (!Settings.nether_enabled) {
+            return null;
+        }
+
+        if (skyBlockNetherWorld == null) {
             skyBlockNetherWorld = Bukkit.getWorld(Settings.general_worldName + "_nether");
             ChunkGenerator skyGenerator = getNetherGenerator();
             ChunkGenerator worldGenerator = skyBlockNetherWorld != null ? skyBlockNetherWorld.getGenerator() : null;
