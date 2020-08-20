@@ -228,6 +228,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     Bukkit.getConsoleSender().sendMessage(tr("Converting data to UUID, this make take a while!"));
                     getImporter().importUSB(Bukkit.getConsoleSender(), "name2uuid");
                 }
+                getServer().dispatchCommand(getServer().getConsoleSender(), "usb flush"); // See uskyblock#4
                 log(Level.INFO, getVersionInfo(false));
             }
         }, getConfig().getLong("init.initDelay", 50L));
