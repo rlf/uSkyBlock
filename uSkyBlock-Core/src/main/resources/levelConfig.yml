@@ -246,10 +246,6 @@ blocks:
     score: 300.0
   LAVA:
     score: 0.0
-  LEAVES/0-3:
-    score: 0.0
-  LEAVES_2/0-1:
-    score: 0.0
   LOG/0-5:
     additionalBlocks:
     - LOG_2
@@ -288,6 +284,22 @@ blocks:
     diminishingReturns: 5000
   NOTE_BLOCK:
     score: 20.0
+  OAK_LEAVES:
+    additionalBlocks:
+    - ACACIA_LEAVES
+    - BRICH_LEAVES
+    - DARK_OAK_LEAVES
+    - JUNGLE_LEAVES
+    - SPRUCE_LEAVES
+    score: 0.0
+  OAK_LOG:
+    additionalBlocks:
+      - ACACIA_LOG
+      - BIRCH_LOG
+      - DARK_OAK_LOG
+      - JUNGLE_LOG
+      - SPRUCE_LOG
+    diminishingReturns: 100
   OBSIDIAN:
     score: 200.0
     diminishingReturns: 50
