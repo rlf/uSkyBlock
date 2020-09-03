@@ -475,6 +475,25 @@ blocks:
     score: 0.0
   WEB:
     score: 20.0
+  WHITE_WOOL:
+    additionalBlocks:
+      - BLACK_WOOL
+      - BLUE_WOOL
+      - BROWN_WOOL
+      - CYAN_WOOL
+      - GRAY_WOOL
+      - GREEN_WOOL
+      - LIGHT_BLUE_WOOL
+      - LIGHT_GRAY_WOOL
+      - LIME_WOOL
+      - MAGENTA_WOOL
+      - ORANGE_WOOL
+      - PINK_WOOL
+      - PURPLE_WOOL
+      - RED_WOOL
+      - YELLOW_WOOL
+    score: 50.0
+    diminishingReturns: 64
   WOOD:
     diminishingReturns: 10000
   WOODEN_DOOR:
@@ -488,9 +507,6 @@ blocks:
   WOOD_STEP/0-5:
     score: 5.0
     diminishingReturns: 10000
-  WOOL:
-    score: 50.0
-    diminishingReturns: 64
   YELLOW_FLOWER:
     diminishingReturns: 100
 version: 101
