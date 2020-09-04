@@ -96,6 +96,10 @@ blocks:
   CAULDRON:
     score: 155.0
     limit: 10
+  CHISELED_RED_SANDSTONE:
+    score: 25.0
+  CHISELED_SANDSTONE:
+    score: 80.0
   CLAY:
     score: 50.0
   COAL_BLOCK:
@@ -125,6 +129,16 @@ blocks:
     score: 30.0
   CROPS:
     score: 0.0
+  CUT_RED_SANDSTONE:
+    score: 25.0
+  CUT_RED_SANDSTONE_SLAB:
+    score: 12.5
+    diminishingReturns: 10000
+  CUT_SANDSTONE:
+    score: 80.0
+  CUT_SANDSTONE_SLAB:
+    score: 40.0
+    diminishingReturns: 10000
   DARK_OAK_DOOR:
     score: 20.0
   DARK_OAK_FENCE:
@@ -321,7 +335,7 @@ blocks:
   OAK_LEAVES:
     additionalBlocks:
     - ACACIA_LEAVES
-    - BRICH_LEAVES
+    - BIRCH_LEAVES
     - DARK_OAK_LEAVES
     - JUNGLE_LEAVES
     - SPRUCE_LEAVES
@@ -343,6 +357,14 @@ blocks:
     - JUNGLE_PRESSURE_PLATE
     - SPRUCE_PRESSURE_PLATE
     - WARPED_PRESSURE_PLATE
+    score: 0.0
+  OAK_SAPLING:
+    additionalBlocks:
+      - ACACIA_SAPLING
+      - BIRCH_SAPLING
+      - DARK_OAK_SAPLING
+      - JUNGLE_SAPLING
+      - SPRUCE_SAPLING
     score: 0.0
   OAK_SLAB:
     additionalBlocks:
@@ -413,23 +435,27 @@ blocks:
     diminishingReturns: 100
   RED_ROSE:
     diminishingReturns: 100
-  RED_SANDSTONE/0-2:
-    score: 25.0
-  RED_SANDSTONE_STAIRS:
-    score: 20.0
-  SAND/0:
-    score: 20.0
-    diminishingReturns: 10000
-  SAND/1:
+  RED_SAND:
     score: 22.5
     diminishingReturns: 10000
-  SANDSTONE/0-2:
+  RED_SANDSTONE:
+    score: 25.0
+  RED_SANDSTONE_SLAB:
+    score: 12.5
+    diminishingReturns: 10000
+  RED_SANDSTONE_STAIRS:
+    score: 20.0
+  SAND:
+    score: 20.0
+    diminishingReturns: 10000
+  SANDSTONE:
     score: 80.0
+  SANDSTONE_SLAB:
+    score: 40.0
+    diminishingReturns: 10000
   SANDSTONE_STAIRS:
     score: 120.0
     diminishingReturns: 5000
-  SAPLING:
-    score: 0.0
   SEA_LANTERN:
     score: 50.0
   SIGN_POST:
@@ -442,6 +468,16 @@ blocks:
   SMOOTH_BRICK:
     score: 12.0
     diminishingReturns: 20000
+  SMOOTH_RED_SANDSTONE:
+    score: 25.0
+  SMOOTH_RED_SANDSTONE_SLAB:
+    score: 12.5
+    diminishingReturns: 10000
+  SMOOTH_SANDSTONE:
+    score: 80.0
+  SMOOTH_SANDSTONE_SLAB:
+    score: 40.0
+    diminishingReturns: 10000
   SMOOTH_STAIRS:
     score: 20.0
     diminishingReturns: 5000
@@ -489,9 +525,6 @@ blocks:
     score: 0.0
   STEP/0:
     score: 5.0
-    diminishingReturns: 10000
-  STEP/1:
-    score: 40.0
     diminishingReturns: 10000
   STEP/2:
     score: 5.0
