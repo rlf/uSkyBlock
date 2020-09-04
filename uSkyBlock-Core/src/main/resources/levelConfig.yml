@@ -26,6 +26,12 @@ blocks:
     diminishingReturns: 100
   ACACIA_STAIRS:
     score: 15.0
+  ACACIA_TRAPDOOR:
+    score: 30.0
+  ACACIA_WOOD:
+    additionalBlocks:
+      - STRIPPED_ACACIA_WOOD
+    diminishingReturns: 10000
   ACTIVATOR_RAIL:
     score: 20.0
   AIR:
@@ -56,6 +62,14 @@ blocks:
   BIRCH_FENCE_GATE:
     score: 40.0
     diminishingReturns: 100
+  BIRCH_STAIRS:
+    score: 15.0
+  BIRCH_TRAPDOOR:
+    score: 30.0
+  BIRCH_WOOD:
+    additionalBlocks:
+      - STRIPPED_BIRCH_WOOD
+    diminishingReturns: 10000
   BIRCH_WOOD_STAIRS:
     score: 15.0
   BOOKSHELF:
@@ -103,6 +117,12 @@ blocks:
     score: 0.0
   COMMAND:
     score: 0.0
+  CRIMSON_DOOR:
+    score: 20.0
+  CRIMSON_STAIRS:
+    score: 15.0
+  CRIMSON_TRAPDOOR:
+    score: 30.0
   CROPS:
     score: 0.0
   DARK_OAK_DOOR:
@@ -115,6 +135,12 @@ blocks:
     diminishingReturns: 100
   DARK_OAK_STAIRS:
     score: 15.0
+  DARK_OAK_TRAPDOOR:
+    score: 30.0
+  DARK_OAK_WOOD:
+    additionalBlocks:
+      - STRIPPED_DARK_OAK_WOOD
+    diminishingReturns: 10000
   DAYLIGHT_DETECTOR:
     score: 200.0
   DAYLIGHT_DETECTOR_INVERTED:
@@ -234,6 +260,14 @@ blocks:
   JUNGLE_FENCE_GATE:
     score: 40.0
     diminishingReturns: 100
+  JUNGLE_STAIRS:
+    score: 15.0
+  JUNGLE_TRAPDOOR:
+    score: 30.0
+  JUNGLE_WOOD:
+    additionalBlocks:
+      - STRIPPED_JUNGLE_WOOD
+    diminishingReturns: 10000
   JUNGLE_WOOD_STAIRS:
     score: 15.0
   LADDER:
@@ -282,6 +316,8 @@ blocks:
     diminishingReturns: 5000
   NOTE_BLOCK:
     score: 20.0
+  OAK_DOOR:
+    score: 20.0
   OAK_LEAVES:
     additionalBlocks:
     - ACACIA_LEAVES
@@ -308,6 +344,25 @@ blocks:
     - SPRUCE_PRESSURE_PLATE
     - WARPED_PRESSURE_PLATE
     score: 0.0
+  OAK_SLAB:
+    additionalBlocks:
+      - ACACIA_SLAB
+      - BIRCH_SLAB
+      - CRIMSON_SLAB
+      - DARK_OAK_SLAB
+      - JUNGLE_SLAB
+      - SPRUCE_SLAB
+      - WARPED_SLAB
+    score: 5.0
+    diminishingReturns: 15000
+  OAK_STAIRS:
+    score: 15.0
+  OAK_TRAPDOOR:
+    score: 30.0
+  OAK_WOOD:
+    additionalBlocks:
+      - STRIPPED_OAK_WOOD
+    diminishingReturns: 10000
   OBSIDIAN:
     score: 200.0
     diminishingReturns: 50
@@ -411,6 +466,14 @@ blocks:
   SPRUCE_FENCE_GATE:
     score: 40.0
     diminishingReturns: 100
+  SPRUCE_STAIRS:
+    score: 15.0
+  SPRUCE_TRAPDOOR:
+    score: 30.0
+  SPRUCE_WOOD:
+    additionalBlocks:
+      - STRIPPED_SPRUCE_WOOD
+    diminishingReturns: 10000
   SPRUCE_WOOD_STAIRS:
     score: 15.0
   STAINED_CLAY:
@@ -498,8 +561,6 @@ blocks:
     score: 80.0
   TRAPPED_CHEST:
     score: 20.0
-  TRAP_DOOR:
-    score: 30.0
   VINE:
     limit: 25
   WALL_BANNER:
@@ -507,6 +568,12 @@ blocks:
     diminishingReturns: 20
   WALL_SIGN:
     score: 0.0
+  WARPED_DOOR:
+    score: 20.0
+  WARPED_STAIRS:
+    score: 15.0
+  WARPED_TRAPDOOR:
+    score: 30.0
   WATER:
     score: 0.0
   WEB:
@@ -548,17 +615,6 @@ blocks:
       - RED_GLAZED_TERRACOTTA
       - YELLOW_GLAZED_TERRACOTTA
     score: 20.0
-  WOOD:
-    diminishingReturns: 10000
-  WOODEN_DOOR:
-    score: 20.0
-  WOOD_DOUBLE_STEP/0-5:
-    diminishingReturns: 10000
-  WOOD_STAIRS:
-    score: 15.0
-  WOOD_STEP/0-5:
-    score: 5.0
-    diminishingReturns: 10000
   YELLOW_FLOWER:
     diminishingReturns: 100
 version: 101
