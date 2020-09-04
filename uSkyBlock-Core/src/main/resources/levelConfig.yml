@@ -300,6 +300,16 @@ blocks:
       - JUNGLE_LOG
       - SPRUCE_LOG
     diminishingReturns: 100
+  OAK_PRESSURE_PLATE:
+    additionalBlocks:
+    - ACACIA_PRESSURE_PLATE
+    - BIRCH_PRESSURE_PLATE
+    - CRIMSON_PRESSURE_PLATE
+    - DARK_OAK_PRESSURE_PLATE
+    - JUNGLE_PRESSURE_PLATE
+    - SPRUCE_PRESSURE_PLATE
+    - WARPED_PRESSURE_PLATE
+    score: 0.0
   OBSIDIAN:
     score: 200.0
     diminishingReturns: 50
@@ -509,8 +519,6 @@ blocks:
     score: 20.0
   WOOD_DOUBLE_STEP/0-5:
     diminishingReturns: 10000
-  WOOD_PLATE:
-    score: 0.0
   WOOD_STAIRS:
     score: 15.0
   WOOD_STEP/0-5:
