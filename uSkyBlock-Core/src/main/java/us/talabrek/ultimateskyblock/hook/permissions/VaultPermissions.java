@@ -17,7 +17,7 @@ public class VaultPermissions extends PermissionsHook implements Listener {
 
     public VaultPermissions(@NotNull uSkyBlock plugin) {
         super(plugin, "Vault");
-        setupPermission().ifPresent((permission) -> this.permission = permission);
+        setupPermission().ifPresent(vaultPlugin -> this.permission = vaultPlugin);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -26,6 +26,7 @@ public class VaultPermissions extends PermissionsHook implements Listener {
             plugin.getServer().getServicesManager().getRegistration(Permission.class);
         if (rsp != null) {
             permission = rsp.getProvider();
+            plugin.getLogger().info("Using " + rsp.getProvider().getName() + " as permission provider.");
             return Optional.of(permission);
         }
 
@@ -43,19 +44,17 @@ public class VaultPermissions extends PermissionsHook implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void onPermissionRegister(ServiceRegisterEvent event) {
         if (event.getProvider().getProvider() instanceof Permission) {
-            setupPermission().ifPresent((permission) -> this.permission = permission);
+            setupPermission().ifPresent(vaultPlugin -> this.permission = vaultPlugin);
         }
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void onPermissionUnregister(ServiceUnregisterEvent event) {
         if (event.getProvider().getProvider() instanceof Permission) {
             this.permission = null;
-            setupPermission().ifPresent((permission) -> this.permission = permission);
+            setupPermission().ifPresent(vaultPlugin -> this.permission = vaultPlugin);
         }
     }
 }

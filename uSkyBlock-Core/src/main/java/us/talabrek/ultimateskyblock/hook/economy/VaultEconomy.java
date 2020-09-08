@@ -17,7 +17,7 @@ public class VaultEconomy extends EconomyHook implements Listener {
 
     public VaultEconomy(@NotNull uSkyBlock plugin) {
         super(plugin, "Vault");
-        setupEconomy().ifPresent((economy) -> this.economy = economy);
+        setupEconomy().ifPresent(vaultPlugin -> this.economy = vaultPlugin);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -26,6 +26,7 @@ public class VaultEconomy extends EconomyHook implements Listener {
             plugin.getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp != null) {
             economy = rsp.getProvider();
+            plugin.getLogger().info("Using " + rsp.getProvider().getName() + " as economy provider.");
             return Optional.of(economy);
         }
 
@@ -65,19 +66,17 @@ public class VaultEconomy extends EconomyHook implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void onEconomyRegister(ServiceRegisterEvent event) {
         if (event.getProvider().getProvider() instanceof Economy) {
-            setupEconomy().ifPresent((economy) -> this.economy = economy);
+            setupEconomy().ifPresent(vaultPlugin -> this.economy = vaultPlugin);
         }
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void onEconomyUnregister(ServiceUnregisterEvent event) {
         if (event.getProvider().getProvider() instanceof Economy) {
             this.economy = null;
-            setupEconomy().ifPresent((economy) -> this.economy = economy);
+            setupEconomy().ifPresent(vaultPlugin -> this.economy = vaultPlugin);
         }
     }
 }
