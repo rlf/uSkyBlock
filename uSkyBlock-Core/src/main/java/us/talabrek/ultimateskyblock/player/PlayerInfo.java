@@ -444,7 +444,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
             PermissionsHook pHook = hook.get();
 
             for (String perm : perms) {
-                if (pHook.hasPermission(target, perm)) {
+                if (!pHook.hasPermission(target, perm)) {
                     permList.add(perm);
                     pHook.addPermission(target, perm);
                 }
