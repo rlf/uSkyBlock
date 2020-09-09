@@ -121,6 +121,10 @@ blocks:
     score: 0.0
   COMMAND:
     score: 0.0
+  CREEPER_HEAD:
+    additionalBlocks:
+      - CREEPER_HEAD
+    score: 1000.0
   CRIMSON_DOOR:
     score: 20.0
   CRIMSON_STAIRS:
@@ -398,6 +402,10 @@ blocks:
     score: 0.0
   PISTON_STICKY_BASE:
     score: 60.0
+  PLAYER_HEAD:
+    additionalBlocks:
+      - PLAYER_WALL_HEAD
+    score: 1000.0
   PODZOL:
     score: 25.0
     diminishingReturns: 10000
@@ -460,7 +468,9 @@ blocks:
     score: 50.0
   SIGN_POST:
     score: 0.0
-  SKULL/0-4:
+  SKELETON_SKULL:
+    additionalBlocks:
+      - SKELETON_WALL_SKULL
     score: 1000.0
   SLIME_BLOCK:
     score: 250.0
@@ -648,6 +658,14 @@ blocks:
       - RED_GLAZED_TERRACOTTA
       - YELLOW_GLAZED_TERRACOTTA
     score: 20.0
+  WITHER_SKELETON_SKULL:
+    additionalBlocks:
+      - WITHER_SKELETON_WALL_SKULL
+    score: 1000.0
   YELLOW_FLOWER:
     diminishingReturns: 100
+  ZOMBIE_HEAD:
+    additionalBlocks:
+      - ZOMBIE_WALL_HEAD
+    score: 1000.0
 version: 101
