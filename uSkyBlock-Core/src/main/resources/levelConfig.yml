@@ -224,8 +224,6 @@ blocks:
     diminishingReturns: 100
   GOLD_ORE:
     score: 500.0
-  GOLD_PLATE:
-    score: 115.0
   GRANITE:
     score: 12.5
     diminishingReturns: 10000
@@ -236,6 +234,8 @@ blocks:
     score: 20.0
   HAY_BLOCK:
     score: 20.0
+  HEAVY_WEIGHTED_PRESSURE_PLATE:
+    score: 50.0
   HOPPER:
     score: 125.0
     limit: 10
@@ -256,8 +256,6 @@ blocks:
     score: 12.5
   IRON_ORE:
     score: 200.0
-  IRON_PLATE:
-    score: 50.0
   IRON_TRAPDOOR:
     score: 20.0
     diminishingReturns: 10
@@ -291,6 +289,8 @@ blocks:
     score: 300.0
   LAVA:
     score: 0.0
+  LIGHT_WEIGHTED_PRESSURE_PLATE:
+    score: 115.0
   LOG/0-5:
     additionalBlocks:
     - LOG_2
@@ -549,7 +549,7 @@ blocks:
   STONE_BRICK_SLAB:
     score: 7.0
     diminishingReturns: 10000
-  STONE_PLATE:
+  STONE_PRESSURE_PLATE:
     score: 0.0
   STONE_SLAB:
     score: 5.0
