@@ -551,8 +551,6 @@ blocks:
     score: 15.0
   STAINED_CLAY:
     score: 50.0
-  STAINED_GLASS:
-    score: 25.0
   STANDING_BANNER:
     score: 20.0
     diminishingReturns: 20
@@ -608,6 +606,24 @@ blocks:
     score: 20.0
   WET_SPONGE:
     score: 50.0
+  WHITE_STAINED_GLASS:
+    additionalBlocks:
+      - BLACK_STAINED_GLASS
+      - BLUE_STAINED_GLASS
+      - BROWN_STAINED_GLASS
+      - CYAN_STAINED_GLASS
+      - GRAY_STAINED_GLASS
+      - GREEN_STAINED_GLASS
+      - LIGHT_BLUE_STAINED_GLASS
+      - LIGHT_GRAY_STAINED_GLASS
+      - LIME_STAINED_GLASS
+      - MAGENTA_STAINED_GLASS
+      - ORANGE_STAINED_GLASS
+      - PINK_STAINED_GLASS
+      - PURPLE_STAINED_GLASS
+      - RED_STAINED_GLASS
+      - YELLOW_STAINED_GLASS
+    score: 25.0
   WHITE_WOOL:
     additionalBlocks:
       - BLACK_WOOL
