@@ -548,9 +548,6 @@ blocks:
     score: 15.0
   STAINED_CLAY:
     score: 50.0
-  STANDING_BANNER:
-    score: 20.0
-    diminishingReturns: 20
   STONE:
     diminishingReturns: 10000
   STONE_BRICK_SLAB:
@@ -588,9 +585,6 @@ blocks:
     score: 20.0
   VINE:
     limit: 25
-  WALL_BANNER:
-    score: 20.0
-    diminishingReturns: 20
   WARPED_DOOR:
     score: 20.0
   WARPED_STAIRS:
@@ -603,6 +597,25 @@ blocks:
     score: 20.0
   WET_SPONGE:
     score: 50.0
+  WHITE_BANNER:
+    additionalBlocks:
+      - BLACK_BANNER
+      - BLUE_BANNER
+      - BROWN_BANNER
+      - CYAN_BANNER
+      - GRAY_BANNER
+      - GREEN_BANNER
+      - LIGHT_BLUE_BANNER
+      - LIGHT_GRAY_BANNER
+      - LIME_BANNER
+      - MAGENTA_BANNER
+      - ORANGE_BANNER
+      - PINK_BANNER
+      - PURPLE_BANNER
+      - RED_BANNER
+      - YELLOW_BANNER
+    score: 20.0
+    diminishingReturns: 20
   WHITE_BED:
     additionalBlocks:
       - BLACK_BED
@@ -658,6 +671,25 @@ blocks:
       - RED_STAINED_GLASS_PANE
       - YELLOW_STAINED_GLASS_PANE
     score: 10.0
+  WHITE_WALL_BANNER:
+    additionalBlocks:
+      - BLACK_WALL_BANNER
+      - BLUE_WALL_BANNER
+      - BROWN_WALL_BANNER
+      - CYAN_WALL_BANNER
+      - GRAY_WALL_BANNER
+      - GREEN_WALL_BANNER
+      - LIGHT_BLUE_WALL_BANNER
+      - LIGHT_GRAY_WALL_BANNER
+      - LIME_WALL_BANNER
+      - MAGENTA_WALL_BANNER
+      - ORANGE_WALL_BANNER
+      - PINK_WALL_BANNER
+      - PURPLE_WALL_BANNER
+      - RED_WALL_BANNER
+      - YELLOW_WALL_BANNER
+    score: 20.0
+    diminishingReturns: 20
   WHITE_WOOL:
     additionalBlocks:
       - BLACK_WOOL
