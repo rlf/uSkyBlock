@@ -82,6 +82,9 @@ blocks:
     limit: 10
   BRICK:
     score: 50.0
+  BRICK_SLAB:
+    score: 25.0
+    diminishingReturns: 10000
   BRICK_STAIRS:
     score: 75.0
     diminishingReturns: 5000
@@ -115,6 +118,9 @@ blocks:
     diminishingReturns: 10000
   COBBLESTONE:
     limit: 10000
+  COBBLESTONE_SLAB:
+    score: 5.0
+    diminishingReturns: 10000
   COBBLESTONE_STAIRS:
     score: 15.0
     diminishingReturns: 5000
@@ -422,6 +428,9 @@ blocks:
     diminishingReturns: 5000
   QUARTZ_ORE:
     score: 50.0
+  QUARTZ_SLAB:
+    score: 50.0
+    diminishingReturns: 10000
   QUARTZ_STAIRS:
     score: 150.0
     diminishingReturns: 5000
@@ -525,34 +534,16 @@ blocks:
     score: 0.0
   STATIONARY_WATER:
     score: 0.0
-  STEP/0:
-    score: 5.0
-    diminishingReturns: 10000
-  STEP/2:
-    score: 5.0
-    diminishingReturns: 10000
-  STEP/3:
-    score: 5.0
-    diminishingReturns: 10000
-  STEP/4:
-    score: 25.0
-    diminishingReturns: 10000
-  STEP/5:
-    score: 7.0
-    diminishingReturns: 10000
-  STEP/6:
-    score: 20.0
-    diminishingReturns: 10000
-  STEP/7:
-    score: 50.0
-    diminishingReturns: 10000
   STONE:
+    diminishingReturns: 10000
+  STONE_BRICK_SLAB:
+    score: 7.0
     diminishingReturns: 10000
   STONE_PLATE:
     score: 0.0
-  STONE_SLAB2:
-    score: 12.5
-    diminishingReturns: 20000
+  STONE_SLAB:
+    score: 5.0
+    diminishingReturns: 10000
   SUGAR_CANE_BLOCK:
     score: 0.0
   TERRACOTTA:
