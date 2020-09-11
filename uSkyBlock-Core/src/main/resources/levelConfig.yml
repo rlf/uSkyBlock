@@ -54,9 +54,6 @@ blocks:
     negativeReturns: 15
   BEDROCK:
     score: 0.0
-  BED_BLOCK:
-    score: 1000.0
-    limit: 1
   BIRCH_DOOR:
     score: 20.0
   BIRCH_FENCE:
@@ -606,6 +603,25 @@ blocks:
     score: 20.0
   WET_SPONGE:
     score: 50.0
+  WHITE_BED:
+    additionalBlocks:
+      - BLACK_BED
+      - BLUE_BED
+      - BROWN_BED
+      - CYAN_BED
+      - GRAY_BED
+      - GREEN_BED
+      - LIGHT_BLUE_BED
+      - LIGHT_GRAY_BED
+      - LIME_BED
+      - MAGENTA_BED
+      - ORANGE_BED
+      - PINK_BED
+      - PURPLE_BED
+      - RED_BED
+      - YELLOW_BED
+    score: 1000.0
+    limit: 1
   WHITE_STAINED_GLASS:
     additionalBlocks:
       - BLACK_STAINED_GLASS
