@@ -478,8 +478,6 @@ blocks:
   SPONGE:
     score: 50.0
     limit: 20
-  SPONGE/1:
-    score: 50.0
   SPRUCE_DOOR:
     score: 20.0
   SPRUCE_FENCE:
@@ -597,6 +595,8 @@ blocks:
     score: 0.0
   WEB:
     score: 20.0
+  WET_SPONGE:
+    score: 50.0
   WHITE_WOOL:
     additionalBlocks:
       - BLACK_WOOL
