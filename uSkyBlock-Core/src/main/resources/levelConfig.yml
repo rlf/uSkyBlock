@@ -556,10 +556,6 @@ blocks:
   STANDING_BANNER:
     score: 20.0
     diminishingReturns: 20
-  STATIONARY_LAVA:
-    score: 0.0
-  STATIONARY_WATER:
-    score: 0.0
   STONE:
     diminishingReturns: 10000
   STONE_BRICK_SLAB:
