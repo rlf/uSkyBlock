@@ -365,6 +365,24 @@ blocks:
       - JUNGLE_SAPLING
       - SPRUCE_SAPLING
     score: 0.0
+  OAK_SIGN:
+    additionalBlocks:
+      - ACACIA_SIGN
+      - ACACIA_WALL_SIGN
+      - BIRCH_SIGN
+      - BIRCH_WALL_SIGN
+      - CRIMSON_SIGN
+      - CRIMSON_WALL_SIGN
+      - DARK_OAK_SIGN
+      - DARK_OAK_WALL_SIGN
+      - JUNGLE_SIGN
+      - JUNGLE_WALL_SIGN
+      - OAK_WALL_SIGN
+      - SPRUCE_SIGN
+      - SPRUCE_WALL_SIGN
+      - WARPED_SIGN
+      - WARPED_WALL_SIGN
+    score: 0.0
   OAK_SLAB:
     additionalBlocks:
       - ACACIA_SLAB
@@ -479,8 +497,6 @@ blocks:
     diminishingReturns: 5000
   SEA_LANTERN:
     score: 50.0
-  SIGN_POST:
-    score: 0.0
   SKELETON_SKULL:
     additionalBlocks:
       - SKELETON_WALL_SKULL
@@ -584,8 +600,6 @@ blocks:
   WALL_BANNER:
     score: 20.0
     diminishingReturns: 20
-  WALL_SIGN:
-    score: 0.0
   WARPED_DOOR:
     score: 20.0
   WARPED_STAIRS:
