@@ -172,30 +172,6 @@ blocks:
   DIRT:
     score: 20.0
     diminishingReturns: 10000
-  DOUBLE_STEP/0:
-    diminishingReturns: 10000
-  DOUBLE_STEP/1:
-    score: 20.0
-    diminishingReturns: 10000
-  DOUBLE_STEP/2:
-    diminishingReturns: 10000
-  DOUBLE_STEP/3:
-    diminishingReturns: 10000
-  DOUBLE_STEP/4:
-    score: 50.0
-    diminishingReturns: 10000
-  DOUBLE_STEP/5:
-    score: 15.0
-    diminishingReturns: 10000
-  DOUBLE_STEP/6:
-    score: 20.0
-    diminishingReturns: 10000
-  DOUBLE_STEP/7:
-    score: 100.0
-    diminishingReturns: 10000
-  DOUBLE_STONE_SLAB2:
-    score: 20.0
-    diminishingReturns: 20000
   DRAGON_EGG:
     score: 5000.0
     limit: 2
