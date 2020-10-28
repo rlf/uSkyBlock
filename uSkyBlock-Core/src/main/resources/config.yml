@@ -427,8 +427,8 @@ tool-menu:
   tool: OAK_SAPLING
   commands:
     CHEST: island
+    CRAFTING_TABLE: challenges
     BEDROCK: island spawn
-    WORKBENCH: challenges
 
 # Placeholders - enable these to get placeholder substitution
 # usb_version

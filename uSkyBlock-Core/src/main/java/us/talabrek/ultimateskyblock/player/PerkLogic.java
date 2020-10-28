@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.player;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -63,7 +64,7 @@ public class PerkLogic {
                         .extraItems(ItemStackUtil.createItemList(config.getStringList("extraItems")))
                         .build();
                 ItemStack itemStack = ItemStackUtil.createItemStack(
-                        config.getString("displayItem", "SAPLING"),
+                        config.getString("displayItem", Material.OAK_SAPLING.toString()),
                         schemeName,
                         config.getString("description", null)
                 );
@@ -75,7 +76,7 @@ public class PerkLogic {
             Perk perk = new PerkBuilder(defaultPerk).schematics(schemeName).build();
             if (!islandPerks.containsKey(schemeName)) {
                 islandPerks.put(schemeName, new IslandPerk(schemeName, "usb.schematic." + schemeName,
-                        ItemStackUtil.createItemStack("SAPLING", schemeName, null), perk,
+                        ItemStackUtil.createItemStack(Material.OAK_SAPLING.toString(), schemeName, null), perk,
                         1d, 0d));
             }
         }
@@ -104,7 +105,7 @@ public class PerkLogic {
             return islandPerks.get(schemeName);
         }
         return new IslandPerk(schemeName, "usb.schematic." + schemeName,
-                ItemStackUtil.createItemStack("GRASS", schemeName, null), defaultPerk);
+                ItemStackUtil.createItemStack(Material.GRASS_BLOCK.toString(), schemeName, null), defaultPerk);
     }
 
     private Perk createPerk(Player player) {
