@@ -97,6 +97,9 @@ public class WorldManager {
 
         Location spawnLocation = world.getSpawnLocation();
         if (!LocationUtil.isSafeLocation(spawnLocation)) {
+            // Warn the user why we're doing this, because it's a FAQ on the forums:
+            plugin.getLogger().warning("Spawn location in " + world.getName() + " is considered unsafe. " +
+                "Placing default spawn. This check can be disabled in config.yml, option manageSpawn.");
             createSpawn(spawnLocation);
         }
     }
