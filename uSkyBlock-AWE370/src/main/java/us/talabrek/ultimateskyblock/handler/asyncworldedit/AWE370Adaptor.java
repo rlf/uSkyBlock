@@ -110,14 +110,20 @@ public class AWE370Adaptor implements AWEAdaptor {
     public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
         final IAsyncWorldEdit awe = getAWE();
         BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
-        Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
         int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
         IPlayerManager pm = awe.getPlayerManager();
         final IPlayerEntry playerEntry = pm.getUnknownPlayer();
         IThreadSafeEditSession tsSession = (IThreadSafeEditSession) createEditSession(bukkitWorld, maxBlocks);
         IFuncParamEx<Integer, ICancelabeEditSession, MaxChangedBlocksException> action = new PasteAction(origin, file);
-        registerCompletion(player);
-        awe.getBlockPlacer().performAsAsyncJob(tsSession, playerEntry, "loadIslandSchematic:"+playerPerk.getPlayerInfo().getPlayerName(), action);
+
+        String jobName = "loadIslandSchematic";
+        if (playerPerk != null) {
+            Player player = Bukkit.getPlayer(playerPerk.getPlayerInfo().getUniqueId());
+            registerCompletion(player);
+            jobName = jobName.concat(":" + playerPerk.getPlayerInfo().getPlayerName());
+        }
+
+        awe.getBlockPlacer().performAsAsyncJob(tsSession, playerEntry, jobName, action);
         if (timerTask != null) {
             timerTask.cancel();
         }
