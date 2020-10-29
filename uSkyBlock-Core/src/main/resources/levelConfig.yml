@@ -461,9 +461,7 @@ blocks:
     diminishingReturns: 5000
   REDSTONE_BLOCK:
     score: 150.0
-  REDSTONE_LAMP_OFF:
-    score: 20.0
-  REDSTONE_LAMP_ON:
+  REDSTONE_LAMP:
     score: 20.0
   REDSTONE_WIRE:
     score: 0.0
