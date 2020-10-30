@@ -43,6 +43,15 @@ blocks:
   ANDESITE:
     score: 12.5
     diminishingReturns: 10000
+  ANDESITE_SLAB:
+    score: 6.5
+    diminishingReturns: 10000
+  ANDESITE_STAIRS:
+    score: 15.0
+    diminishingReturns: 5000
+  ANDESITE_WALL:
+    score:  12.5
+    diminishingReturns: 5000
   ANVIL:
     additionalBlocks:
       - CHIPPED_ANVIL
@@ -121,7 +130,7 @@ blocks:
   COBBLESTONE_STAIRS:
     score: 15.0
     diminishingReturns: 5000
-  COBBLE_WALL:
+  COBBLESTONE_WALL:
     diminishingReturns: 5000
   COCOA:
     score: 0.0
@@ -185,6 +194,15 @@ blocks:
   DIORITE:
     score: 12.5
     diminishingReturns: 10000
+  DIORITE_SLAB:
+    score: 6.5
+    diminishingReturns: 10000
+  DIORITE_STAIRS:
+    score: 15.0
+    diminishingReturns: 5000
+  DIORITE_WALL:
+    score: 12.5
+    diminishingReturns: 5000
   DIRT:
     score: 20.0
     diminishingReturns: 10000
@@ -227,6 +245,15 @@ blocks:
   GRANITE:
     score: 12.5
     diminishingReturns: 10000
+  GRANITE_SLAB:
+    score: 6.5
+    diminishingReturns: 10000
+  GRANITE_STAIRS:
+    score: 15.0
+    diminishingReturns: 5000
+  GRANITE_WALL:
+    score: 12.5
+    diminishingReturns: 5000
   GRASS:
     score: 20.0
     diminishingReturns: 10000
@@ -417,12 +444,30 @@ blocks:
   POLISHED_ANDESITE:
     score: 15.0
     diminishingReturns: 10000
+  POLISHED_ANDESITE_SLAB:
+    score: 7.5
+    diminishingReturns: 10000
+  POLISHED_ANDESITE_STAIRS:
+    score: 17.5
+    diminishingReturns: 5000
   POLISHED_DIORITE:
     score: 15.0
     diminishingReturns: 10000
+  POLISHED_DIORITE_SLAB:
+    score: 7.5
+    diminishingReturns: 10000
+  POLISHED_DIORITE_STAIRS:
+    score: 17.5
+    diminishingReturns: 5000
   POLISHED_GRANITE:
     score: 15.0
     diminishingReturns: 10000
+  POLISHED_GRANITE_SLAB:
+    score: 7.5
+    diminishingReturns: 10000
+  POLISHED_GRANITE_STAIRS:
+    score: 17.5
+    diminishingReturns: 5000
   PORTAL:
     score: 0.0
   POTATO:
@@ -604,6 +649,8 @@ blocks:
   WARPED_TRAPDOOR:
     score: 30.0
   WATER:
+    additionalBlocks:
+      - BUBBLE_COLUMN
     score: 0.0
   WEB:
     score: 20.0
