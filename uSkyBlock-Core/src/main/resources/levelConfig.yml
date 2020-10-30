@@ -45,8 +45,8 @@ blocks:
     diminishingReturns: 10000
   ANVIL:
     additionalBlocks:
-    - CHIPPED_ANVIL
-    - DAMAGED_ANVIL
+      - CHIPPED_ANVIL
+      - DAMAGED_ANVIL
     score: 150.0
     limit: 5
   BARRIER:
@@ -291,14 +291,6 @@ blocks:
     score: 0.0
   LIGHT_WEIGHTED_PRESSURE_PLATE:
     score: 115.0
-  LOG/0-5:
-    additionalBlocks:
-    - LOG_2
-    diminishingReturns: 100
-  LOG_2:
-    diminishingReturns: 100
-  LOG_2/1:
-    diminishingReturns: 100
   LONG_GRASS:
     diminishingReturns: 100
   MELON_BLOCK:
@@ -333,11 +325,11 @@ blocks:
     score: 20.0
   OAK_LEAVES:
     additionalBlocks:
-    - ACACIA_LEAVES
-    - BIRCH_LEAVES
-    - DARK_OAK_LEAVES
-    - JUNGLE_LEAVES
-    - SPRUCE_LEAVES
+      - ACACIA_LEAVES
+      - BIRCH_LEAVES
+      - DARK_OAK_LEAVES
+      - JUNGLE_LEAVES
+      - SPRUCE_LEAVES
     score: 0.0
   OAK_LOG:
     additionalBlocks:
@@ -349,13 +341,13 @@ blocks:
     diminishingReturns: 100
   OAK_PRESSURE_PLATE:
     additionalBlocks:
-    - ACACIA_PRESSURE_PLATE
-    - BIRCH_PRESSURE_PLATE
-    - CRIMSON_PRESSURE_PLATE
-    - DARK_OAK_PRESSURE_PLATE
-    - JUNGLE_PRESSURE_PLATE
-    - SPRUCE_PRESSURE_PLATE
-    - WARPED_PRESSURE_PLATE
+      - ACACIA_PRESSURE_PLATE
+      - BIRCH_PRESSURE_PLATE
+      - CRIMSON_PRESSURE_PLATE
+      - DARK_OAK_PRESSURE_PLATE
+      - JUNGLE_PRESSURE_PLATE
+      - SPRUCE_PRESSURE_PLATE
+      - WARPED_PRESSURE_PLATE
     score: 0.0
   OAK_SAPLING:
     additionalBlocks:
