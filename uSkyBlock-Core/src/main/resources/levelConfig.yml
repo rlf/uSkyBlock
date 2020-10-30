@@ -35,6 +35,9 @@ blocks:
   ACTIVATOR_RAIL:
     score: 20.0
   AIR:
+    additionalBlocks:
+      - CAVE_AIR
+      - VOID_AIR
     score: 0.0
     limit: 0
   ANDESITE:
@@ -125,7 +128,10 @@ blocks:
     diminishingReturns: 5000
   COCOA:
     score: 0.0
-  COMMAND:
+  COMMAND_BLOCK:
+    additionalBlocks:
+      - CHAIN_COMMAND_BLOCK
+      - REPEATING_COMMAND_BLOCK
     score: 0.0
   CREEPER_HEAD:
     additionalBlocks:
