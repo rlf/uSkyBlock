@@ -40,6 +40,8 @@ blocks:
       - VOID_AIR
     score: 0.0
     limit: 0
+  ALLIUM:
+    diminishingReturns: 100
   ANDESITE:
     score: 12.5
     diminishingReturns: 10000
@@ -58,6 +60,8 @@ blocks:
       - DAMAGED_ANVIL
     score: 150.0
     limit: 5
+  AZURE_BLUET:
+    diminishingReturns: 100
   BARRIER:
     score: 0.0
   BEACON:
@@ -84,6 +88,8 @@ blocks:
     diminishingReturns: 10000
   BIRCH_WOOD_STAIRS:
     score: 15.0
+  BLUE_ORCHID:
+    diminishingReturns: 100
   BOOKSHELF:
     score: 50.0
   BREWING_STAND:
@@ -141,6 +147,8 @@ blocks:
       - CHAIN_COMMAND_BLOCK
       - REPEATING_COMMAND_BLOCK
     score: 0.0
+  CORNFLOWER:
+    diminishingReturns: 100
   CREEPER_HEAD:
     additionalBlocks:
       - CREEPER_WALL_HEAD
@@ -312,6 +320,10 @@ blocks:
     score: 0.0
   LIGHT_WEIGHTED_PRESSURE_PLATE:
     score: 115.0
+  LILAC:
+    diminishingReturns: 100
+  LILY_OF_THE_VALLEY:
+    diminishingReturns: 100
   LONG_GRASS:
     diminishingReturns: 100
   MELON:
@@ -417,8 +429,16 @@ blocks:
   OBSIDIAN:
     score: 200.0
     diminishingReturns: 50
+  ORANGE_TULIP:
+    diminishingReturns: 100
+  OXEYE_DAISY:
+    diminishingReturns: 100
   PACKED_ICE:
     score: 15.0
+  PEONY:
+    diminishingReturns: 100
+  PINK_TULIP:
+    diminishingReturns: 100
   PISTON:
     score: 40.0
   PISTON_HEAD:
@@ -457,6 +477,8 @@ blocks:
   POLISHED_GRANITE_STAIRS:
     score: 17.5
     diminishingReturns: 5000
+  POPPY:
+    diminishingReturns: 100
   PORTAL:
     score: 0.0
   POTATOES:
@@ -494,8 +516,6 @@ blocks:
     score: 0.0
   RED_MUSHROOM:
     diminishingReturns: 100
-  RED_ROSE:
-    diminishingReturns: 100
   RED_SAND:
     score: 22.5
     diminishingReturns: 10000
@@ -506,6 +526,10 @@ blocks:
     diminishingReturns: 10000
   RED_SANDSTONE_STAIRS:
     score: 20.0
+  RED_TULIP:
+    diminishingReturns: 100
+  ROSE_BUSH:
+    diminishingReturns: 100
   SAND:
     score: 20.0
     diminishingReturns: 10000
@@ -606,6 +630,8 @@ blocks:
     diminishingReturns: 10000
   SUGAR_CANE:
     score: 0.0
+  SUNFLOWER:
+    diminishingReturns: 100
   TERRACOTTA:
     additionalBlocks:
       - BLACK_TERRACOTTA
@@ -792,6 +818,8 @@ blocks:
       - RED_STAINED_GLASS_PANE
       - YELLOW_STAINED_GLASS_PANE
     score: 10.0
+  WHITE_TULIP:
+    diminishingReturns: 100
   WHITE_WALL_BANNER:
     additionalBlocks:
       - BLACK_WALL_BANNER
@@ -830,6 +858,8 @@ blocks:
       - YELLOW_WOOL
     score: 50.0
     diminishingReturns: 64
+  WITHER_ROSE:
+    diminishingReturns: 100
   WITHER_SKELETON_SKULL:
     additionalBlocks:
       - WITHER_SKELETON_WALL_SKULL
