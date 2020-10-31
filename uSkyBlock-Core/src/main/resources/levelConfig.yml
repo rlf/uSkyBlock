@@ -89,19 +89,19 @@ blocks:
   BREWING_STAND:
     score: 30.0
     limit: 10
-  BRICK:
-    score: 50.0
   BRICK_SLAB:
     score: 25.0
     diminishingReturns: 10000
   BRICK_STAIRS:
     score: 75.0
     diminishingReturns: 5000
+  BRICKS:
+    score: 50.0
   BROWN_MUSHROOM:
     diminishingReturns: 100
   CACTUS:
     score: 0.0
-  CAKE_BLOCK:
+  CAKE:
     score: 50.0
   CARROT:
     score: 0.0
@@ -119,6 +119,8 @@ blocks:
     diminishingReturns: 100
   COAL_ORE:
     score: 200.0
+  COBWEB:
+    score: 20.0
   COARSE_DIRT:
     score: 25.0
     diminishingReturns: 10000
@@ -141,7 +143,7 @@ blocks:
     score: 0.0
   CREEPER_HEAD:
     additionalBlocks:
-      - CREEPER_HEAD
+      - CREEPER_WALL_HEAD
     score: 1000.0
   CRIMSON_DOOR:
     score: 20.0
@@ -149,8 +151,6 @@ blocks:
     score: 15.0
   CRIMSON_TRAPDOOR:
     score: 30.0
-  CROPS:
-    score: 0.0
   CUT_RED_SANDSTONE:
     score: 25.0
   CUT_RED_SANDSTONE_SLAB:
@@ -161,6 +161,8 @@ blocks:
   CUT_SANDSTONE_SLAB:
     score: 40.0
     diminishingReturns: 10000
+  DANDELION:
+    diminishingReturns: 100
   DARK_OAK_DOOR:
     score: 20.0
   DARK_OAK_FENCE:
@@ -182,8 +184,6 @@ blocks:
   DARK_PRISMARINE_SLAB:
     score: 25.0
   DAYLIGHT_DETECTOR:
-    score: 200.0
-  DAYLIGHT_DETECTOR_INVERTED:
     score: 200.0
   DETECTOR_RAIL:
     score: 20.0
@@ -213,24 +213,18 @@ blocks:
     score: 1000.0
   EMERALD_ORE:
     score: 200.0
-  ENCHANTMENT_TABLE:
+  ENCHANTING_TABLE:
     score: 150.0
+  END_PORTAL:
+    additionalBlock:
+      - END_PORTAL_FRAME
+    score: 0.0
+  END_STONE:
+    score: 15.0
+    limit: 10000
   ENDER_CHEST:
     score: 2000.0
     limit: 3
-  ENDER_PORTAL:
-    score: 0.0
-  ENDER_PORTAL_FRAME:
-    score: 0.0
-  ENDER_STONE:
-    score: 15.0
-    limit: 10000
-  FENCE:
-    score: 17.5
-    diminishingReturns: 5000
-  FENCE_GATE:
-    score: 40.0
-    diminishingReturns: 100
   FIRE:
     score: 0.0
   GLASS:
@@ -254,7 +248,7 @@ blocks:
   GRANITE_WALL:
     score: 12.5
     diminishingReturns: 5000
-  GRASS:
+  GRASS_BLOCK:
     score: 20.0
     diminishingReturns: 10000
   GRAVEL:
@@ -275,12 +269,12 @@ blocks:
     diminishingReturns: 30
   ICE:
     score: 50.0
+  IRON_BARS:
+    score: 12.5
   IRON_BLOCK:
     score: 300.0
-  IRON_DOOR_BLOCK:
+  IRON_DOOR:
     score: 200.0
-  IRON_FENCE:
-    score: 12.5
   IRON_ORE:
     score: 200.0
   IRON_TRAPDOOR:
@@ -320,32 +314,31 @@ blocks:
     score: 115.0
   LONG_GRASS:
     diminishingReturns: 100
-  MELON_BLOCK:
+  MELON:
     score: 0.0
   MELON_STEM:
     score: 0.0
   MOSSY_COBBLESTONE:
     score: 30.0
-  MYCEL:
+  MYCELIUM:
     score: 20.0
     diminishingReturns: 10000
-  NETHERRACK:
-    limit: 10000
-  NETHER_BRICK_SLAB:
-    score: 10.0
-    diminishingReturns: 20000
   NETHER_BRICK_FENCE:
     score: 30.0
     diminishingReturns: 10000
-  NETHER_BRICKS:
-    score: 20.0
+  NETHER_BRICK_SLAB:
+    score: 10.0
     diminishingReturns: 20000
   NETHER_BRICK_STAIRS:
     score: 30.0
     diminishingReturns: 5000
-  NETHER_FENCE:
-    score: 60.0
-    diminishingReturns: 5000
+  NETHER_BRICKS:
+    score: 20.0
+    diminishingReturns: 20000
+  NETHER_QUARTZ:
+    score: 50.0
+  NETHERRACK:
+    limit: 10000
   NOTE_BLOCK:
     score: 20.0
   OAK_DOOR:
@@ -426,14 +419,10 @@ blocks:
     diminishingReturns: 50
   PACKED_ICE:
     score: 15.0
-  PISTON_BASE:
+  PISTON:
     score: 40.0
-  PISTON_EXTENSION:
+  PISTON_HEAD:
     score: 0.0
-  PISTON_MOVING_PIECE:
-    score: 0.0
-  PISTON_STICKY_BASE:
-    score: 60.0
   PLAYER_HEAD:
     additionalBlocks:
       - PLAYER_WALL_HEAD
@@ -470,17 +459,17 @@ blocks:
     diminishingReturns: 5000
   PORTAL:
     score: 0.0
-  POTATO:
+  POTATOES:
     score: 0.0
   POWERED_RAIL:
     score: 20.0
   PRISMARINE:
     score: 50.0
-  PRISMARINE_SLAB:
+  PRISMARINE_BRICK_SLAB:
     score: 25.0
   PRISMARINE_BRICKS:
     score: 50.0
-  PRISMARINE_BRICK_SLAB:
+  PRISMARINE_SLAB:
     score: 25.0
   PUMPKIN_STEM:
     score: 0.0
@@ -491,8 +480,6 @@ blocks:
       - QUARTZ_PILLAR
     score: 100.0
     diminishingReturns: 5000
-  QUARTZ_ORE:
-    score: 50.0
   QUARTZ_SLAB:
     score: 50.0
     diminishingReturns: 10000
@@ -605,6 +592,8 @@ blocks:
     score: 15.0
   STAINED_CLAY:
     score: 50.0
+  STICKY_PISTON:
+    score: 60.0
   STONE:
     diminishingReturns: 10000
   STONE_BRICK_SLAB:
@@ -615,7 +604,7 @@ blocks:
   STONE_SLAB:
     score: 5.0
     diminishingReturns: 10000
-  SUGAR_CANE_BLOCK:
+  SUGAR_CANE:
     score: 0.0
   TERRACOTTA:
     additionalBlocks:
@@ -652,10 +641,10 @@ blocks:
     additionalBlocks:
       - BUBBLE_COLUMN
     score: 0.0
-  WEB:
-    score: 20.0
   WET_SPONGE:
     score: 50.0
+  WHEAT:
+    score: 0.0
   WHITE_BANNER:
     additionalBlocks:
       - BLACK_BANNER
@@ -845,8 +834,6 @@ blocks:
     additionalBlocks:
       - WITHER_SKELETON_WALL_SKULL
     score: 1000.0
-  YELLOW_FLOWER:
-    diminishingReturns: 100
   ZOMBIE_HEAD:
     additionalBlocks:
       - ZOMBIE_WALL_HEAD
