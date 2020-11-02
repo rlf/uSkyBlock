@@ -189,8 +189,13 @@ blocks:
     diminishingReturns: 10000
   DARK_PRISMARINE:
     score: 50.0
+    diminishingReturns: 10000
   DARK_PRISMARINE_SLAB:
     score: 25.0
+    diminishingReturns: 10000
+  DARK_PRISMARINE_STAIRS:
+    score: 75.0
+    diminishingReturns: 5000
   DAYLIGHT_DETECTOR:
     score: 200.0
   DETECTOR_RAIL:
@@ -308,8 +313,6 @@ blocks:
     additionalBlocks:
       - STRIPPED_JUNGLE_WOOD
     diminishingReturns: 10000
-  JUNGLE_WOOD_STAIRS:
-    score: 15.0
   LADDER:
     score: 0.0
   LAPIS_BLOCK:
@@ -487,12 +490,25 @@ blocks:
     score: 20.0
   PRISMARINE:
     score: 50.0
+    diminishingReturns: 10000
   PRISMARINE_BRICK_SLAB:
     score: 25.0
+    diminishingReturns: 10000
+  PRISMARINE_BRICK_STAIRS:
+    score: 75.0
+    diminishingReturns: 5000
   PRISMARINE_BRICKS:
     score: 50.0
+    diminishingReturns: 10000
   PRISMARINE_SLAB:
     score: 25.0
+    diminishingReturns: 10000
+  PRISMARINE_STAIRS:
+    score: 75.0
+    diminishingReturns: 5000
+  PRISMARINE_WALL:
+    score: 50.0
+    diminishingReturns: 5000
   PUMPKIN_STEM:
     score: 0.0
   QUARTZ_BLOCK:
@@ -669,6 +685,7 @@ blocks:
     score: 0.0
   WET_SPONGE:
     score: 50.0
+    limit: 20
   WHEAT:
     score: 0.0
   WHITE_BANNER:
