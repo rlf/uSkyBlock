@@ -88,6 +88,16 @@ blocks:
     diminishingReturns: 10000
   BIRCH_WOOD_STAIRS:
     score: 15.0
+  BLACKSTONE:
+    limit: 10000
+  BLACKSTONE_SLAB:
+    score: 5.0
+    diminishingReturns: 10000
+  BLACKSTONE_STAIRS:
+    score: 15.0
+    diminishingReturns: 5000
+  BLACKSTONE_WALL:
+    diminishingReturns: 5000
   BLUE_ORCHID:
     diminishingReturns: 100
   BOOKSHELF:
@@ -100,6 +110,9 @@ blocks:
     diminishingReturns: 10000
   BRICK_STAIRS:
     score: 75.0
+    diminishingReturns: 5000
+  BRICK_WALL:
+    score: 50.0
     diminishingReturns: 5000
   BRICKS:
     score: 50.0
@@ -114,10 +127,21 @@ blocks:
   CAULDRON:
     score: 155.0
     limit: 10
+  CHISELED_NETHER_BRICKS:
+    score: 20.0
+    diminishingReturns: 10000
+  CHISELED_POLISHED_BLACKSTONE:
+    score: 12.0
+    diminishingReturns: 10000
   CHISELED_RED_SANDSTONE:
     score: 25.0
+    diminishingReturns: 10000
   CHISELED_SANDSTONE:
     score: 80.0
+    diminishingReturns: 10000
+  CHISELED_STONE_BRICKS:
+    score: 12.0
+    diminishingReturns: 10000
   CLAY:
     score: 50.0
   COAL_BLOCK:
@@ -146,9 +170,20 @@ blocks:
     additionalBlocks:
       - CHAIN_COMMAND_BLOCK
       - REPEATING_COMMAND_BLOCK
+      - STRUCTURE_BLOCK
+      - STRUCTURE_VOID
     score: 0.0
   CORNFLOWER:
     diminishingReturns: 100
+  CRACKED_NETHER_BRICKS:
+    score: 22.5
+    diminishingReturns: 10000
+  CRACKED_POLISHED_BLACKSTONE_BRICKS:
+    score: 12.0
+    diminishingReturns: 10000
+  CRACKED_STONE_BRICKS:
+    score: 15.0
+    diminishingReturns: 10000
   CREEPER_HEAD:
     additionalBlocks:
       - CREEPER_WALL_HEAD
@@ -217,6 +252,8 @@ blocks:
     score: 12.5
     diminishingReturns: 5000
   DIRT:
+    additionalBlocks:
+      - FARMLAND
     score: 20.0
     diminishingReturns: 10000
   DRAGON_EGG:
@@ -235,11 +272,25 @@ blocks:
   END_STONE:
     score: 15.0
     limit: 10000
+  END_STONE_BRICK_SLAB:
+    score: 7.5
+    diminishingReturns: 10000
+  END_STONE_BRICK_STAIRS:
+    score: 20.0
+    diminishingReturns: 5000
+  END_STONE_BRICK_WALL:
+    score: 15.0
+    diminishingReturns: 5000
+  END_STONE_BRICKS:
+    score: 15.0
+    limit: 10000
   ENDER_CHEST:
     score: 2000.0
     limit: 3
   FIRE:
     score: 0.0
+  GILDED_BLACKSTONE:
+    score: 50.0
   GLASS:
     score: 50.0
   GLOWSTONE:
@@ -335,6 +386,26 @@ blocks:
     score: 0.0
   MOSSY_COBBLESTONE:
     score: 30.0
+  MOSSY_COBBLESTONE_SLAB:
+    score: 15.0
+    diminishingReturns: 10000
+  MOSSY_COBBLESTONE_STAIRS:
+    score: 20.0
+    diminishingReturns: 5000
+  MOSSY_COBBLESTONE_WALL:
+    score: 30.0
+    diminishingReturns: 5000
+  MOSSY_STONE_BRICK_SLAB:
+    score: 16.0
+    diminishingReturns: 10000
+  MOSSY_STONE_BRICK_STAIRS:
+    score: 21.0
+    diminishingReturns: 5000
+  MOSSY_STONE_BRICK_WALL:
+    score: 32.0
+    diminishingReturns: 5000
+  MOSSY_STONE_BRICKS:
+    score: 32.0
   MYCELIUM:
     score: 20.0
     diminishingReturns: 10000
@@ -346,6 +417,9 @@ blocks:
     diminishingReturns: 20000
   NETHER_BRICK_STAIRS:
     score: 30.0
+    diminishingReturns: 5000
+  NETHER_BRICK_WALL:
+    score: 20.0
     diminishingReturns: 5000
   NETHER_BRICKS:
     score: 20.0
@@ -462,6 +536,30 @@ blocks:
   POLISHED_ANDESITE_STAIRS:
     score: 17.5
     diminishingReturns: 5000
+  POLISHED_BLACKSTONE:
+    score: 12.0
+    diminishingReturns: 20000
+  POLISHED_BLACKSTONE_BRICK_SLAB:
+    score: 6.0
+    diminishingReturns: 10000
+  POLISHED_BLACKSTONE_BRICK_STAIRS:
+    score: 18.0
+    diminishingReturns: 5000
+  POLISHED_BLACKSTONE_BRICK_WALL:
+    score: 12.0
+    diminishingReturns: 5000
+  POLISHED_BLACKSTONE_BRICKS:
+    score: 12.0
+    diminishingReturns: 20000
+  POLISHED_BLACKSTONE_SLAB:
+    score: 6.0
+    diminishingReturns: 10000
+  POLISHED_BLACKSTONE_STAIRS:
+    score: 18.0
+    diminishingReturns: 5000
+  POLISHED_BLACKSTONE_WALL:
+    score: 12.0
+    diminishingReturns: 5000
   POLISHED_DIORITE:
     score: 15.0
     diminishingReturns: 10000
@@ -511,6 +609,18 @@ blocks:
     diminishingReturns: 5000
   PUMPKIN_STEM:
     score: 0.0
+  PURPUR_BLOCK:
+    score: 15.0
+    diminishingReturns: 10000
+  PURPUR_PILLAR:
+    score: 15.0
+    diminishingReturns: 5000
+  PURPUR_SLAB:
+    score: 7.5
+    diminishingReturns: 10000
+  PURPUR_STAIRS:
+    score: 22.5
+    diminishingReturns: 5000
   QUARTZ_BLOCK:
     additionalBlocks:
       - CHISELED_QUARTZ_BLOCK
@@ -524,14 +634,20 @@ blocks:
   QUARTZ_STAIRS:
     score: 150.0
     diminishingReturns: 5000
-  REDSTONE_BLOCK:
-    score: 150.0
-  REDSTONE_LAMP:
-    score: 20.0
-  REDSTONE_WIRE:
-    score: 0.0
   RED_MUSHROOM:
     diminishingReturns: 100
+  RED_NETHER_BRICK_SLAB:
+    score: 10.0
+    diminishingReturns: 10000
+  RED_NETHER_BRICK_STAIRS:
+    score: 30.0
+    diminishingReturns: 5000
+  RED_NETHER_BRICK_WALL:
+    score: 20.0
+    diminishingReturns: 5000
+  RED_NETHER_BRICKS:
+    score: 20.0
+    diminishingReturns: 10000
   RED_SAND:
     score: 22.5
     diminishingReturns: 10000
@@ -542,8 +658,18 @@ blocks:
     diminishingReturns: 10000
   RED_SANDSTONE_STAIRS:
     score: 20.0
+    diminishingReturns: 5000
+  RED_SANDSTONE_WALL:
+    score: 25.0
+    diminishingReturns: 5000
   RED_TULIP:
     diminishingReturns: 100
+  REDSTONE_BLOCK:
+    score: 150.0
+  REDSTONE_LAMP:
+    score: 20.0
+  REDSTONE_WIRE:
+    score: 0.0
   ROSE_BUSH:
     diminishingReturns: 100
   SAND:
@@ -556,6 +682,9 @@ blocks:
     diminishingReturns: 10000
   SANDSTONE_STAIRS:
     score: 120.0
+    diminishingReturns: 5000
+  SANDSTONE_WALL:
+    score: 80.0
     diminishingReturns: 5000
   SEA_LANTERN:
     score: 50.0
@@ -585,22 +714,36 @@ blocks:
   SLIME_BLOCK:
     score: 250.0
     diminishingReturns: 100
-  SMOOTH_BRICK:
-    score: 12.0
-    diminishingReturns: 20000
+  SMOOTH_QUARTZ:
+    score: 100.0
+    diminishingReturns: 5000
+  SMOOTH_QUARTZ_SLAB:
+    score: 50.0
+    diminishingReturns: 10000
+  SMOOTH_QUARTZ_STAIRS:
+    score: 150.0
+    diminishingReturns: 5000
   SMOOTH_RED_SANDSTONE:
     score: 25.0
   SMOOTH_RED_SANDSTONE_SLAB:
     score: 12.5
     diminishingReturns: 10000
+  SMOOTH_RED_SANDSTONE_STAIRS:
+    score: 37.5
+    diminishingReturns: 5000
   SMOOTH_SANDSTONE:
     score: 80.0
   SMOOTH_SANDSTONE_SLAB:
     score: 40.0
     diminishingReturns: 10000
-  SMOOTH_STAIRS:
-    score: 20.0
+  SMOOTH_SANDSTONE_STAIRS:
+    score: 120.0
     diminishingReturns: 5000
+  SMOOTH_STONE:
+    score: 12.0
+  SMOOTH_STONE_SLAB:
+    score: 6.0
+    diminishingReturns: 10000
   SNOW:
     score: 0.0
   SNOW_BLOCK:
@@ -637,8 +780,17 @@ blocks:
   STONE:
     diminishingReturns: 10000
   STONE_BRICK_SLAB:
-    score: 7.0
+    score: 6.0
     diminishingReturns: 10000
+  STONE_BRICK_STAIRS:
+    score: 18.0
+    diminishingReturns: 5000
+  STONE_BRICK_WALL:
+    score: 12.0
+    diminishingReturns: 5000
+  STONE_BRICKS:
+    score: 12.0
+    diminishingReturns: 20000
   STONE_PRESSURE_PLATE:
     score: 0.0
   STONE_SLAB:
