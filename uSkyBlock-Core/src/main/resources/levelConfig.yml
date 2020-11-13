@@ -155,6 +155,8 @@ blocks:
     score: 80.0
     diminishingReturns: 10000
   CHISELED_STONE_BRICKS:
+    additionalBlocks:
+      - INFESTED_CHISELED_STONE_BRICKS
     score: 12.0
     diminishingReturns: 10000
   CLAY:
@@ -170,6 +172,8 @@ blocks:
     score: 25.0
     diminishingReturns: 10000
   COBBLESTONE:
+    additionalBlocks:
+      - INFESTED_COBBLESTONE
     limit: 10000
   COBBLESTONE_SLAB:
     score: 5.0
@@ -199,6 +203,8 @@ blocks:
     score: 12.0
     diminishingReturns: 10000
   CRACKED_STONE_BRICKS:
+    additionalBlocks:
+      - INFESTED_CRACKED_STONE_BRICKS
     score: 15.0
     diminishingReturns: 10000
   CREEPER_HEAD:
@@ -434,6 +440,8 @@ blocks:
     score: 32.0
     diminishingReturns: 5000
   MOSSY_STONE_BRICKS:
+    additionalBlocks:
+      - INFESTED_MOSSY_STONE_BRICKS
     score: 32.0
   MYCELIUM:
     score: 20.0
@@ -817,6 +825,8 @@ blocks:
   STICKY_PISTON:
     score: 60.0
   STONE:
+    additionalBlocks:
+      - INFESTED_STONE
     diminishingReturns: 10000
   STONE_BRICK_SLAB:
     score: 6.0
@@ -828,6 +838,8 @@ blocks:
     score: 12.0
     diminishingReturns: 5000
   STONE_BRICKS:
+    additionalBlocks:
+      - INFESTED_STONE_BRICKS
     score: 12.0
     diminishingReturns: 20000
   STONE_PRESSURE_PLATE:
