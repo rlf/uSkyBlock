@@ -62,6 +62,8 @@ blocks:
     limit: 5
   AZURE_BLUET:
     diminishingReturns: 100
+  BARREL:
+    score: 12.5
   BARRIER:
     score: 0.0
   BEACON:
@@ -70,6 +72,8 @@ blocks:
     negativeReturns: 15
   BEDROCK:
     score: 0.0
+  BELL:
+    score: 50.0
   BIRCH_DOOR:
     score: 20.0
   BIRCH_FENCE:
@@ -98,6 +102,9 @@ blocks:
     diminishingReturns: 5000
   BLACKSTONE_WALL:
     diminishingReturns: 5000
+  BLAST_FURNACE:
+    score: 50.0
+    limit: 250
   BLUE_ORCHID:
     diminishingReturns: 100
   BOOKSHELF:
@@ -122,11 +129,19 @@ blocks:
     score: 0.0
   CAKE:
     score: 50.0
+  CAMPFIRE:
+    score: 15.0
+    limit: 250
+  CARTOGRAPHY_TABLE:
+    score: 15.0
+    limit: 250
   CARROT:
     score: 0.0
   CAULDRON:
     score: 155.0
     limit: 10
+  CHEST:
+    score: 15.0
   CHISELED_NETHER_BRICKS:
     score: 20.0
     diminishingReturns: 10000
@@ -173,6 +188,8 @@ blocks:
       - STRUCTURE_BLOCK
       - STRUCTURE_VOID
     score: 0.0
+  COMPOSTER:
+    limit: 250
   CORNFLOWER:
     diminishingReturns: 100
   CRACKED_NETHER_BRICKS:
@@ -289,6 +306,9 @@ blocks:
     limit: 3
   FIRE:
     score: 0.0
+  FLETCHING_TABLE:
+    score: 15.0
+    limit: 250
   GILDED_BLACKSTONE:
     score: 50.0
   GLASS:
@@ -317,6 +337,8 @@ blocks:
     diminishingReturns: 10000
   GRAVEL:
     score: 20.0
+  GRINDSTONE:
+    limit: 250
   HAY_BLOCK:
     score: 20.0
   HEAVY_WEIGHTED_PRESSURE_PLATE:
@@ -366,12 +388,17 @@ blocks:
     diminishingReturns: 10000
   LADDER:
     score: 0.0
+  LANTERN:
+    score: 25.0
   LAPIS_BLOCK:
     score: 500.0
   LAPIS_ORE:
     score: 300.0
   LAVA:
     score: 0.0
+  LECTERN:
+    score: 55.0
+    limit: 250
   LIGHT_WEIGHTED_PRESSURE_PLATE:
     score: 115.0
   LILAC:
@@ -380,6 +407,8 @@ blocks:
     diminishingReturns: 100
   LONG_GRASS:
     diminishingReturns: 100
+  LOOM:
+    limit: 250
   MELON:
     score: 0.0
   MELON_STEM:
@@ -424,8 +453,6 @@ blocks:
   NETHER_BRICKS:
     score: 20.0
     diminishingReturns: 20000
-  NETHER_QUARTZ:
-    score: 50.0
   NETHERRACK:
     limit: 10000
   NOTE_BLOCK:
@@ -628,6 +655,8 @@ blocks:
       - QUARTZ_PILLAR
     score: 100.0
     diminishingReturns: 5000
+  QUARTZ_ORE:
+    score: 50.0
   QUARTZ_SLAB:
     score: 50.0
     diminishingReturns: 10000
@@ -714,6 +743,12 @@ blocks:
   SLIME_BLOCK:
     score: 250.0
     diminishingReturns: 100
+  SMITHING_TABLE:
+    score: 20.0
+    limit: 250
+  SMOKER:
+    score: 15.0
+    limit: 250
   SMOOTH_QUARTZ:
     score: 100.0
     diminishingReturns: 5000
@@ -750,6 +785,10 @@ blocks:
     score: 50.0
   SOIL:
     score: 40.0
+  SOUL_CAMPFIRE:
+    score: 15.0
+  SOUL_LANTERN:
+    score: 25.0
   SOUL_SAND:
     limit: 10000
   SPONGE:
@@ -796,6 +835,9 @@ blocks:
   STONE_SLAB:
     score: 5.0
     diminishingReturns: 10000
+  STONECUTTER:
+    score: 15.0
+    limit: 250
   SUGAR_CANE:
     score: 0.0
   SUNFLOWER:
