@@ -42,6 +42,8 @@ blocks:
     limit: 0
   ALLIUM:
     diminishingReturns: 100
+  ANCIENT_DEBRIS:
+    score: 500.0
   ANDESITE:
     score: 12.5
     diminishingReturns: 10000
@@ -66,6 +68,8 @@ blocks:
     score: 12.5
   BARRIER:
     score: 0.0
+  BASALT:
+    limit: 10000
   BEACON:
     score: 2000.0
     limit: 10
@@ -125,6 +129,8 @@ blocks:
     score: 50.0
   BROWN_MUSHROOM:
     diminishingReturns: 100
+  BROWN_MUSHROOM_BLOCK:
+    diminishingReturns: 100
   CACTUS:
     score: 0.0
   CAKE:
@@ -140,6 +146,9 @@ blocks:
   CAULDRON:
     score: 155.0
     limit: 10
+  CHAIN:
+    score: 20.0
+    limit: 1000
   CHEST:
     score: 15.0
   CHISELED_NETHER_BRICKS:
@@ -213,10 +222,33 @@ blocks:
     score: 1000.0
   CRIMSON_DOOR:
     score: 20.0
+  CRIMSON_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  CRIMSON_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  CRIMSON_FUNGUS:
+    score: 0.0
+  CRIMSON_HYPHAE:
+    additionalBlocks:
+      - STRIPPED_CRIMSON_HYPHAE
+    diminishingReturns: 10000
+  CRIMSON_NYLIUM:
+    score: 15.0
+    diminishingReturns: 10000
+  CRIMSON_ROOTS:
+    score: 0.0
   CRIMSON_STAIRS:
     score: 15.0
+  CRIMSON_STEM:
+    additionalBlocks:
+      - STRIPPED_CRIMSON_STEM
+    diminishingReturns: 100
   CRIMSON_TRAPDOOR:
     score: 30.0
+  CRYING_OBSIDIAN:
+    score: 100.0
   CUT_RED_SANDSTONE:
     score: 25.0
   CUT_RED_SANDSTONE_SLAB:
@@ -411,6 +443,9 @@ blocks:
     diminishingReturns: 100
   LILY_OF_THE_VALLEY:
     diminishingReturns: 100
+  LODESTONE:
+    score: 500.0
+    limit: 5
   LONG_GRASS:
     diminishingReturns: 100
   LOOM:
@@ -443,6 +478,8 @@ blocks:
     additionalBlocks:
       - INFESTED_MOSSY_STONE_BRICKS
     score: 32.0
+  MUSHROOM_STEM:
+    diminishingReturns: 100
   MYCELIUM:
     score: 20.0
     diminishingReturns: 10000
@@ -461,6 +498,16 @@ blocks:
   NETHER_BRICKS:
     score: 20.0
     diminishingReturns: 20000
+  NETHER_GOLD_ORE:
+    score: 500.0
+  NETHER_PORTAL:
+    score: 0.0
+  NETHER_QUARTZ_ORE:
+    score: 50.0
+  NETHER_WART:
+    score: 0.0
+  NETHERITE_BLOCK:
+    score: 5000.0
   NETHERRACK:
     limit: 10000
   NOTE_BLOCK:
@@ -571,6 +618,9 @@ blocks:
   POLISHED_ANDESITE_STAIRS:
     score: 17.5
     diminishingReturns: 5000
+  POLISHED_BASALT:
+    score: 12.0
+    diminishingReturns: 20000
   POLISHED_BLACKSTONE:
     score: 12.0
     diminishingReturns: 20000
@@ -586,6 +636,10 @@ blocks:
   POLISHED_BLACKSTONE_BRICKS:
     score: 12.0
     diminishingReturns: 20000
+  POLISHED_BLACKSTONE_BUTTON:
+    score: 0.0
+  POLISHED_BLACKSTONE_PRESSURE_PLATE:
+    score: 0.0
   POLISHED_BLACKSTONE_SLAB:
     score: 6.0
     diminishingReturns: 10000
@@ -663,8 +717,6 @@ blocks:
       - QUARTZ_PILLAR
     score: 100.0
     diminishingReturns: 5000
-  QUARTZ_ORE:
-    score: 50.0
   QUARTZ_SLAB:
     score: 50.0
     diminishingReturns: 10000
@@ -672,6 +724,8 @@ blocks:
     score: 150.0
     diminishingReturns: 5000
   RED_MUSHROOM:
+    diminishingReturns: 100
+  RED_MUSHROOM_BLOCK:
     diminishingReturns: 100
   RED_NETHER_BRICK_SLAB:
     score: 10.0
@@ -705,8 +759,13 @@ blocks:
     score: 150.0
   REDSTONE_LAMP:
     score: 20.0
+  REDSTONE_ORE:
+    score: 25.0
   REDSTONE_WIRE:
     score: 0.0
+  RESPAWN_ANCHOR:
+    score: 300.0
+    limit: 1
   ROSE_BUSH:
     diminishingReturns: 100
   SAND:
@@ -744,6 +803,8 @@ blocks:
       - WHITE_SHULKER_BOX
       - YELLOW_SHULKER_BOX
     score: 500.0
+  SHROOMLIGHT:
+    score: 20.0
   SKELETON_SKULL:
     additionalBlocks:
       - SKELETON_WALL_SKULL
@@ -795,9 +856,13 @@ blocks:
     score: 40.0
   SOUL_CAMPFIRE:
     score: 15.0
+  SOUL_FIRE:
+    score: 0.0
   SOUL_LANTERN:
     score: 25.0
   SOUL_SAND:
+    limit: 10000
+  SOUL_SOIL:
     limit: 10000
   SPONGE:
     score: 50.0
@@ -877,18 +942,47 @@ blocks:
     score: 80.0
   TRAPPED_CHEST:
     score: 20.0
+  TWISTING_VINES:
+    additionalBlocks:
+      - TWISTING_VINES_PLANT
+    limit: 25
   VINE:
     limit: 25
   WARPED_DOOR:
     score: 20.0
+  WARPED_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  WARPED_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
+  WARPED_FUNGUS:
+    score: 0.0
+  WARPED_HYPHAE:
+    additionalBlocks:
+      - STRIPPED_WARPED_HYPHAE
+    diminishingReturns: 10000
+  WARPED_NYLIUM:
+    score: 15.0
+    diminishingReturns: 10000
+  WARPED_ROOTS:
+    score: 0.0
   WARPED_STAIRS:
     score: 15.0
+  WARPED_STEM:
+    additionalBlocks:
+      - STRIPPED_WARPED_STEM
+    diminishingReturns: 100
   WARPED_TRAPDOOR:
     score: 30.0
   WATER:
     additionalBlocks:
       - BUBBLE_COLUMN
     score: 0.0
+  WEEPING_VINES:
+    additionalBlocks:
+      - WEEPING_VINES_PLANT
+    limit: 25
   WET_SPONGE:
     score: 50.0
     limit: 20
