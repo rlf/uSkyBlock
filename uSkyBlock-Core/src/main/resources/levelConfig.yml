@@ -64,6 +64,10 @@ blocks:
     limit: 5
   AZURE_BLUET:
     diminishingReturns: 100
+  BAMBOO:
+    additionalBlocks:
+      - BAMBOO_SAPLING
+    limit: 1000
   BARREL:
     score: 12.5
   BARRIER:
@@ -75,6 +79,13 @@ blocks:
     limit: 10
     negativeReturns: 15
   BEDROCK:
+    score: 0.0
+  BEEHIVE:
+    additionalBlocks:
+      - BEE_NEST
+    score: 30.0
+    limit: 200
+  BEETROOTS:
     score: 0.0
   BELL:
     score: 50.0
@@ -94,8 +105,6 @@ blocks:
     additionalBlocks:
       - STRIPPED_BIRCH_WOOD
     diminishingReturns: 10000
-  BIRCH_WOOD_STAIRS:
-    score: 15.0
   BLACKSTONE:
     limit: 10000
   BLACKSTONE_SLAB:
@@ -109,6 +118,8 @@ blocks:
   BLAST_FURNACE:
     score: 50.0
     limit: 250
+  BLUE_ICE:
+    score: 50.0
   BLUE_ORCHID:
     diminishingReturns: 100
   BOOKSHELF:
@@ -141,7 +152,7 @@ blocks:
   CARTOGRAPHY_TABLE:
     score: 15.0
     limit: 250
-  CARROT:
+  CARROTS:
     score: 0.0
   CAULDRON:
     score: 155.0
@@ -201,8 +212,14 @@ blocks:
       - STRUCTURE_BLOCK
       - STRUCTURE_VOID
     score: 0.0
+  COMPARATOR:
+    score: 15.0
   COMPOSTER:
     limit: 250
+  CONDUIT:
+    score: 2000.0
+    limit: 10
+    negativeReturns: 15
   CORNFLOWER:
     diminishingReturns: 100
   CRACKED_NETHER_BRICKS:
@@ -314,6 +331,13 @@ blocks:
   DRAGON_EGG:
     score: 5000.0
     limit: 2
+  DRAGON_HEAD:
+    additionalBlocks:
+      - DRAGON_WALL_HEAD
+    score: 5000.0
+    limit: 2
+  DRIED_KELP_BLOCK:
+    score: 20.0
   EMERALD_BLOCK:
     score: 1000.0
   EMERALD_ORE:
@@ -342,15 +366,21 @@ blocks:
   ENDER_CHEST:
     score: 2000.0
     limit: 3
+  FERN:
+    diminishingReturns: 100
   FIRE:
     score: 0.0
   FLETCHING_TABLE:
     score: 15.0
     limit: 250
+  FROSTED_ICE:
+    score: 0.0
   GILDED_BLACKSTONE:
     score: 50.0
   GLASS:
     score: 50.0
+  GLASS_PANE:
+    score: 10.0
   GLOWSTONE:
     score: 20.0
   GOLD_BLOCK:
@@ -373,6 +403,9 @@ blocks:
   GRASS_BLOCK:
     score: 20.0
     diminishingReturns: 10000
+  GRASS_PATH:
+    score: 20.0
+    diminishingReturns: 5000
   GRAVEL:
     score: 20.0
   GRINDSTONE:
@@ -385,12 +418,6 @@ blocks:
     score: 125.0
     limit: 10
     negativeReturns: 5
-  HUGE_MUSHROOM_1:
-    score: 100.0
-    diminishingReturns: 30
-  HUGE_MUSHROOM_2:
-    score: 100.0
-    diminishingReturns: 30
   ICE:
     score: 50.0
   IRON_BARS:
@@ -424,6 +451,10 @@ blocks:
     additionalBlocks:
       - STRIPPED_JUNGLE_WOOD
     diminishingReturns: 10000
+  KELP:
+    additionalBlocks:
+      - KELP_PLANT
+    score: 0.0
   LADDER:
     score: 0.0
   LANTERN:
@@ -437,6 +468,9 @@ blocks:
   LECTERN:
     score: 55.0
     limit: 250
+  LEVER:
+    score: 5.0
+    limit: 250
   LIGHT_WEIGHTED_PRESSURE_PLATE:
     score: 115.0
   LILAC:
@@ -446,13 +480,15 @@ blocks:
   LODESTONE:
     score: 500.0
     limit: 5
-  LONG_GRASS:
-    diminishingReturns: 100
   LOOM:
     limit: 250
+  MAGMA_BLOCK:
+    score: 15.0
   MELON:
     score: 0.0
   MELON_STEM:
+    additionalBlocks:
+      - ATTACHED_MELON_STEM
     score: 0.0
   MOSSY_COBBLESTONE:
     score: 30.0
@@ -514,6 +550,12 @@ blocks:
     score: 20.0
   OAK_DOOR:
     score: 20.0
+  OAK_FENCE:
+    score: 17.5
+    diminishingReturns: 5000
+  OAK_FENCE_GATE:
+    score: 40.0
+    diminishingReturns: 100
   OAK_LEAVES:
     additionalBlocks:
       - ACACIA_LEAVES
@@ -585,6 +627,8 @@ blocks:
     additionalBlocks:
       - STRIPPED_OAK_WOOD
     diminishingReturns: 10000
+  OBSERVER:
+    score: 15.0
   OBSIDIAN:
     score: 200.0
     diminishingReturns: 50
@@ -601,6 +645,8 @@ blocks:
   PISTON:
     score: 40.0
   PISTON_HEAD:
+    additionalBlocks:
+      - MOVING_PISTON
     score: 0.0
   PLAYER_HEAD:
     additionalBlocks:
@@ -669,8 +715,6 @@ blocks:
     diminishingReturns: 5000
   POPPY:
     diminishingReturns: 100
-  PORTAL:
-    score: 0.0
   POTATOES:
     score: 0.0
   POWERED_RAIL:
@@ -696,7 +740,11 @@ blocks:
   PRISMARINE_WALL:
     score: 50.0
     diminishingReturns: 5000
+  PUMPKIN:
+    score: 0.0
   PUMPKIN_STEM:
+    additionalBlocks:
+      - ATTACHED_PUMPKIN_STEM
     score: 0.0
   PURPUR_BLOCK:
     score: 15.0
@@ -763,6 +811,8 @@ blocks:
     score: 25.0
   REDSTONE_WIRE:
     score: 0.0
+  REPEATER:
+    score: 15.0
   RESPAWN_ANCHOR:
     score: 300.0
     limit: 1
@@ -784,6 +834,8 @@ blocks:
     diminishingReturns: 5000
   SEA_LANTERN:
     score: 50.0
+  SEA_PICKLE:
+    limit: 100
   SHULKER_BOX:
     additionalBlocks:
       - BLACK_SHULKER_BOX
@@ -852,8 +904,6 @@ blocks:
     score: 0.0
   SNOW_BLOCK:
     score: 50.0
-  SOIL:
-    score: 40.0
   SOUL_CAMPFIRE:
     score: 15.0
   SOUL_FIRE:
@@ -883,10 +933,6 @@ blocks:
     additionalBlocks:
       - STRIPPED_SPRUCE_WOOD
     diminishingReturns: 10000
-  SPRUCE_WOOD_STAIRS:
-    score: 15.0
-  STAINED_CLAY:
-    score: 50.0
   STICKY_PISTON:
     score: 60.0
   STONE:
@@ -919,6 +965,8 @@ blocks:
     score: 0.0
   SUNFLOWER:
     diminishingReturns: 100
+  SWEET_BERRY_BUSH:
+    diminishingReturns: 100
   TERRACOTTA:
     additionalBlocks:
       - BLACK_TERRACOTTA
@@ -942,6 +990,11 @@ blocks:
     score: 80.0
   TRAPPED_CHEST:
     score: 20.0
+  TRIPWIRE:
+    score: 0.0
+  TRIPWIRE_HOOK:
+    score: 15.0
+    limit: 250
   TWISTING_VINES:
     additionalBlocks:
       - TWISTING_VINES_PLANT
