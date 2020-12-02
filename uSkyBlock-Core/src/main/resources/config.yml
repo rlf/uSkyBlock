@@ -415,6 +415,7 @@ nether:
     IRON: 0.9
     GOLD: 1.5
     DIAMOND: 0.2
+    NETHERITE: 1.2
 
   # The chances of changing a pigzombie when spawned on a netherbrick
   spawn-chances:
