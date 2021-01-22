@@ -11,11 +11,6 @@
     <packaging>jar</packaging>
     <artifactId>uSkyBlock-Plugin</artifactId>
 
-    <properties>
-        <github.global.server>github</github.global.server>
-        <maven.deploy.skip>true</maven.deploy.skip>
-    </properties>
-
     <build>
         <finalName>uSkyBlock-${project.version}</finalName>
         <plugins>

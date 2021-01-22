@@ -11,18 +11,6 @@
     <packaging>jar</packaging>
     <artifactId>po-utils</artifactId>
 
-    <properties>
-        <maven.deploy.skip>false</maven.deploy.skip>
-    </properties>
-
-    <distributionManagement>
-        <repository>
-            <id>internal.repo</id>
-            <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
-        </repository>
-    </distributionManagement>
-
     <dependencies>
         <dependency>
             <groupId>org.jetbrains</groupId>

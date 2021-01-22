@@ -10,10 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uSkyBlock-AWE370</artifactId>
 
-    <properties>
-        <maven.deploy.skip>false</maven.deploy.skip>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.primesoft.asyncworldedit</groupId>
@@ -46,12 +42,4 @@
             </exclusions>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>internal.repo</id>
-            <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/mvn-repo</url>
-        </repository>
-    </distributionManagement>
 </project>

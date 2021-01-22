@@ -11,7 +11,15 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
     travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
 
     rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+    $HOME/build/uskyblock/uSkyBlock/target/mvn-repo/ \
+    travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
+
+    rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
     $HOME/build/uskyblock/uSkyBlock/uSkyBlock-API/target/mvn-repo/ \
+    travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
+
+    rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+    $HOME/build/uskyblock/uSkyBlock/uSkyBlock-AWE370/target/mvn-repo/ \
     travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
 
     rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
@@ -23,7 +31,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
     travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
 
     rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
-    $HOME/build/uskyblock/uSkyBlock/uSkyBlock-AWE370/target/mvn-repo/ \
+    $HOME/build/uskyblock/uSkyBlock/uSkyBlock-Plugin/target/mvn-repo/ \
     travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
 
     echo -e "Publishing javadocs...\n"

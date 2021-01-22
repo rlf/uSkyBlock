@@ -28,9 +28,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <!-- We only want to deploy specific submodules -->
-        <maven.deploy.skip>true</maven.deploy.skip>
-
         <!-- Testing -->
         <hamcrest.version>2.1</hamcrest.version>
         <junit.version>4.12</junit.version>
@@ -49,10 +46,18 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git://github.com/rlf/uSkyBlock.git</connection>
-        <developerConnection>scm:git:git://github.com/rlf/uSkyBlock.git</developerConnection>
-        <url>https://github.com/rlf/uSkyBlock.git</url>
+        <connection>scm:git:git://github.com/uskyblock/uSkyBlock.git</connection>
+        <developerConnection>scm:git:git://github.com/uskyblock/uSkyBlock.git</developerConnection>
+        <url>https://github.com/uskyblock/uSkyBlock.git</url>
     </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Temporary Staging Repository</name>
+            <url>file://${project.build.directory}/mvn-repo</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <finalName>${finalName}</finalName>
