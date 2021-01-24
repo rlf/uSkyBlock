@@ -117,7 +117,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             new String[]{"Vault", "1.7.0", "optional"},
             new String[]{"WorldEdit", "7.0", "optionalIf", "FastAsyncWorldEdit"},
             new String[]{"WorldGuard", "7.0"},
-            new String[]{"FastAsyncWorldEdit", "1.16.1", "optional"},
+            new String[]{"FastAsyncWorldEdit", "1.16", "optional"},
             new String[]{"Multiverse-Core", "2.5", "optional"},
             new String[]{"Multiverse-Portals", "2.5", "optional"},
             new String[]{"Multiverse-NetherPortals", "2.5", "optional"},
