@@ -805,14 +805,12 @@ public class SkyBlockMenu {
     private void onClickRestartMenu(final InventoryClickEvent event, final Player p, ItemMeta meta, int slotIndex, ItemStack currentItem) {
         event.setCancelled(true);
         if (slotIndex == 0) {
-            p.closeInventory();
             p.openInventory(createMainMenu(p));
         } else if (currentItem != null && meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
             IslandPerk islandPerk = plugin.getPerkLogic().getIslandPerk(schemeName);
             if (plugin.getPerkLogic().getSchemes(p).contains(schemeName) && p.hasPermission(islandPerk.getPermission())) {
                 if (plugin.getConfirmHandler().millisLeft(p, "/is restart") > 0) {
-                    p.closeInventory();
                     p.performCommand("island restart " + schemeName);
                 } else {
                     p.performCommand("island restart " + schemeName);
@@ -839,18 +837,14 @@ public class SkyBlockMenu {
     private void onClickCreateMenu(InventoryClickEvent event, Player p, ItemMeta meta, int slotIndex, int menuSize) {
         event.setCancelled(true);
         if (slotIndex == 0) {
-            p.closeInventory();
             p.performCommand("island create");
         } else if (slotIndex == menuSize-2) {
-            p.closeInventory();
             p.performCommand("island spawn");
         } else if (slotIndex == menuSize-1) {
-            p.closeInventory();
             p.performCommand("island accept");
         } else if (meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
             if (plugin.getPerkLogic().getSchemes(p).contains(schemeName)) {
-                p.closeInventory();
                 p.performCommand("island create " + schemeName);
             } else {
                 p.sendMessage(tr("\u00a7eYou do not have access to that island-schematic!"));
@@ -866,53 +860,39 @@ public class SkyBlockMenu {
         PlayerInfo playerInfo = plugin.getPlayerInfo(p);
         IslandInfo islandInfo = plugin.getIslandInfo(playerInfo);
         if (currentItem.getType() == Material.JUNGLE_SAPLING) {
-            p.closeInventory();
             p.performCommand("island biome");
         } else if (currentItem.getType() == Material.PLAYER_HEAD) {
-            p.closeInventory();
             p.performCommand("island party");
         } else if (currentItem.getType() == Material.RED_BED) {
-            p.closeInventory();
             p.performCommand("island sethome");
             p.performCommand("island");
         } else if (currentItem.getType() == Material.GRASS) {
-            p.closeInventory();
             p.performCommand("island spawn");
         } else if (currentItem.getType() == Material.HOPPER) {
-            p.closeInventory();
             p.performCommand("island setwarp");
             p.performCommand("island");
         } else if (currentItem.getType() == Material.WRITABLE_BOOK) {
-            p.closeInventory();
             p.performCommand("island log");
         } else if (currentItem.getType() == Material.OAK_DOOR) {
-            p.closeInventory();
             p.performCommand("island home");
         } else if (currentItem.getType() == Material.EXPERIENCE_BOTTLE) {
-            p.closeInventory();
             p.performCommand("island level");
         } else if (currentItem.getType() == Material.DIAMOND_ORE) {
-            p.closeInventory();
             p.performCommand("c");
         } else if (currentItem.getType() == Material.END_STONE || currentItem.getType() == Material.END_PORTAL_FRAME) {
-            p.closeInventory();
             p.performCommand("island togglewarp");
             p.performCommand("island");
         } else if (currentItem.getType() == Material.IRON_BARS && islandInfo.isLocked()) {
-            p.closeInventory();
             p.performCommand("island unlock");
             p.performCommand("island");
         } else if (currentItem.getType() == Material.IRON_BARS && !islandInfo.isLocked()) {
-            p.closeInventory();
             p.performCommand("island lock");
             p.performCommand("island");
         } else if (slotIndex == 17) {
             if (islandInfo.isLeader(p) && plugin.getConfig().getBoolean("island-schemes-enabled", true)) {
-                p.closeInventory();
                 p.openInventory(createRestartGUI(p));
             } else {
                 if (plugin.getConfirmHandler().millisLeft(p, "/is leave") > 0) {
-                    p.closeInventory();
                     p.performCommand("island leave");
                 } else {
                     p.performCommand("island leave");
@@ -921,7 +901,6 @@ public class SkyBlockMenu {
             }
         } else {
             if (!isExtraMenuAction(p, currentItem)) {
-                p.closeInventory();
                 p.performCommand("island");
             }
         }
@@ -1019,7 +998,6 @@ public class SkyBlockMenu {
         if (slotIndex < 0 || slotIndex > 35) {
             return;
         }
-        p.closeInventory();
         p.performCommand("island");
     }
 
@@ -1046,7 +1024,6 @@ public class SkyBlockMenu {
                 && currentItem != null && currentItem.getType() != Material.AIR)
         {
             // Pagination
-            p.closeInventory();
             p.openInventory(displayChallengeGUI(p, currentItem.getAmount(), playerName));
             return;
         }
@@ -1055,7 +1032,6 @@ public class SkyBlockMenu {
             return;
         }
         if ((slotIndex % 9) > 0) { // 0,9... are the rank-headers...
-            p.closeInventory();
             if (currentItem.getItemMeta() != null) {
                 String challenge = currentItem.getItemMeta().getDisplayName();
                 String challengeName = stripFormatting(challenge);
@@ -1063,7 +1039,6 @@ public class SkyBlockMenu {
             }
             p.openInventory(displayChallengeGUI(p, page, playerName));
         } else {
-            p.closeInventory();
             if (slotIndex < (CHALLENGE_PAGESIZE/2)) { // Upper half
                 if (page > 1) {
                     p.openInventory(displayChallengeGUI(p, page - 1, playerName));
@@ -1089,7 +1064,6 @@ public class SkyBlockMenu {
             return;
         }
         if (slotIndex == 0 && currentItem.getType() == Material.OAK_SIGN) {
-            p.closeInventory();
             p.performCommand("island");
             return;
         }
@@ -1115,7 +1089,6 @@ public class SkyBlockMenu {
             ItemStack menuIcon = biomeMenu.getIcon();
             if (currentItem.getType() == menuIcon.getType() && currentItem.getDurability() == menuIcon.getDurability()) {
                 String radius = PlayerUtil.getMetadata(p, "biome.radius", "all");
-                p.closeInventory();
                 p.performCommand("island biome " + biomeMenu.getId() + " " + radius);
                 return;
             }
@@ -1129,7 +1102,6 @@ public class SkyBlockMenu {
         }
         IslandInfo islandInfo = plugin.getIslandInfo(p);
         if (!plugin.getIslandInfo(p).isLeader(p)) {
-            p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         }
         String[] playerPerm = inventoryName.split(" ");
@@ -1143,17 +1115,14 @@ public class SkyBlockMenu {
         }
         for (PartyPermissionMenuItem item : permissionMenuItems) {
             if (currentItem.getType() == item.getIcon().getType()) {
-                p.closeInventory();
                 islandInfo.togglePerm(pname, item.getPerm());
                 p.openInventory(displayPartyPlayerGUI(p, pname));
                 return;
             }
         }
         if (currentItem.getType() == Material.OAK_SIGN) {
-            p.closeInventory();
             p.openInventory(displayPartyGUI(p));
         } else {
-            p.closeInventory();
             p.openInventory(displayPartyPlayerGUI(p, pname));
         }
     }
@@ -1164,10 +1133,8 @@ public class SkyBlockMenu {
             return;
         }
         if (meta == null || currentItem.getType() == Material.OAK_SIGN) {
-            p.closeInventory();
             p.performCommand("island");
         } else if (skull != null && plugin.getIslandInfo(p).isLeader(p)) {
-            p.closeInventory();
             p.openInventory(displayPartyPlayerGUI(p, skull.getOwner()));
         }
     }
