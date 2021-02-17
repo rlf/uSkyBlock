@@ -93,19 +93,19 @@ msgid "{0}''s Wither"
 msgstr "{0}''s Wither"
 
 msgid "§eYou can not use another island''s portals!"
-msgstr ""
+msgstr "§eDu kannst keine Portale auf fremden Inseln benutzen!"
 
 msgid "§eVillager-trading isn't allowed."
-msgstr ""
+msgstr "§eDas Handeln mit Dorfbewohnern ist nicht erlaubt."
 
 msgid "§eTrading isn't allowed on other islands. Do it in spawn."
 msgstr "§eHandeln ist auf fremden Inseln nicht erlaubt. Handel am Spawn"
 
 msgid "§eRiding is only allowed on your own island!"
-msgstr ""
+msgstr "§eDu kannst nur auf deiner eigenen Insel reiten!"
 
 msgid "§eYou cannot break vehicles while being a visitor!"
-msgstr ""
+msgstr "§eAls Besucher kannst du keine Fahrzeuge zerstören!"
 
 msgid "§4You can only convert obsidian once every 10 seconds"
 msgstr "§4Du kannst Obsidian nur alle 10 Sekunden konvertieren"
@@ -120,11 +120,10 @@ msgid "§4It''s a bad idea to replace your lava!"
 msgstr "§4Es ist eine schlechte Idee deine Lava zu ersetzen!"
 
 msgid "§eYou cannot hurt island-members."
-msgstr "§eDu kannst keine Island Mitglieder angreifen"
+msgstr "§eDu kannst keine Insel-Mitglieder angreifen"
 
 msgid "§4That player has forbidden you from teleporting to their island."
-msgstr ""
-"§4Dieser Spieler hat dir Verboten sich auf seine Insel zu Teleportieren."
+msgstr "§4Dieser Spieler hat dir verboten, dich zu seiner Insel zu teleportieren!"
 
 msgid "§4That island is §clocked.§e No teleporting to the island."
 msgstr "§4Diese Insel ist gesperrt. Kein Teleport zu dieser Insel"
@@ -134,21 +133,24 @@ msgid ""
 "§4{0} is limited. §eScanning your island to see if you are allowed to place "
 "more, please be patient"
 msgstr ""
+"§4{0} sind begrenzt. §eDeine Insel wird gescannt, um zu sehen, ob du mehr davon platzieren kannst." 
+"Bitte Gedulde dich einen Moment..."
 
 msgid "§e... Scanning complete, you can try again"
-msgstr ""
+msgstr "§e... Scan abgeschlossen! Du kannst es erneut versuchen."
 
 #, java-format
 msgid ""
 "§4You''ve hit the {0} limit!§e You can''t have more of that type on your "
 "island!§9 Max: {1,number}"
-msgstr ""
+msgstr "§4Du hast das Limit an {0} erreicht!"
+"§9 Max: {1,number}"
 
 msgid "§eYou can only use spawn-eggs on your own island."
-msgstr "§eDu kannst Spawn-Eier nur auf Deiner eigenen Insel nutzen"
+msgstr "§eDu kannst Spawneggs nur auf deiner eigenen Insel nutzen"
 
 msgid "§cYou have reached your spawn-limit for your island."
-msgstr "§cDas Spawnlimit für Deine Insel wurde erreicht"
+msgstr "§cDas Spawnlimit für deine Insel wurde erreicht"
 
 msgid "§eVisitors can't drop items!"
 msgstr "§eBesucher können keine Items droppen"
@@ -167,11 +169,10 @@ msgid "§cLocked:§e That island is locked! No entry allowed."
 msgstr "§cAbgeschloßen:§e Diese Insel ist geschlossen, kein Eintritt möglich"
 
 msgid "Something went wrong saving the island and/or party data!"
-msgstr "Etwas ist Schiefgelaufen beim speichern der Insel/Spieler Daten...!"
+msgstr "Beim speichern deiner Insel/Spieler-Daten ist etwas schief gelaufen...!"
 
 msgid "Converting data to UUID, this make take a while!"
-msgstr ""
-"Die Daten werden in das UUID Format konvertiert. Dies kann lange dauern!"
+msgstr "Die Daten werden in das UUID Format konvertiert. Dies kann lange dauern!"
 
 msgid "§cMAINTENANCE:§e uSkyBlock is currently in maintenance mode"
 msgstr "§cWARTUNGSMODUS:§e uSkyBlock ist derzeit im Wartungsmodus"
@@ -193,12 +194,10 @@ msgid "§4Player is already assigned to this island!"
 msgstr "§4Dieser Spieler gehört bereits zu deiner Insel!"
 
 msgid "§4You must be closer to your island to set your skyblock home!"
-msgstr ""
-"§4Du musst Dich näher an Deiner Insel befinden, um dein SkyBlock Home zu "
-"setzen!"
+msgstr "§4Du musst Dich näher an deiner Insel befinden, um dein SkyBlock Home zu setzen!"
 
 msgid "§aYour skyblock home has been set to your current location."
-msgstr "§aDein SkyBlock Home wurde an Deine aktuelle Position gesetzt."
+msgstr "§aDein SkyBlock Home wurde an deine aktuelle Position gesetzt."
 
 msgid "§4Your current location is not a safe home-location."
 msgstr "§4Deine jetztige Home-Position ist nicht sicher"
@@ -226,7 +225,7 @@ msgstr "§cDieses Kommando ist derzeit deaktiviert!"
 
 #, java-format
 msgid " §f{0}x §7{1}"
-msgstr ""
+msgstr " §f{0}x §7{1}"
 
 #, java-format
 msgid "§eStill the following blocks short: {0}"
@@ -342,6 +341,10 @@ msgid ""
 "members to teleport to\n"
 "the island."
 msgstr ""
+"setze den Insel-Warp,\n"
+"welcher nicht-Gruppenmitgliedern\n"
+"erlaubt, sich zu der Insel\n"
+"zu teleportieren."
 
 msgid "Toggle Island Warp"
 msgstr "Schaltet den Insel Warp an und aus"
@@ -355,6 +358,10 @@ msgid ""
 "on or off at anytime, but\n"
 "not set the location."
 msgstr ""
+"erlaubt, den Inselwarp zu,\n"
+"de-/aktivieren, aber nicht\n"
+"die Position zu setzen."
+
 
 msgid "Invite Players"
 msgstr "Spieler einladen"
@@ -370,7 +377,7 @@ msgid ""
 msgstr ""
 "Lade noch andere Spieler\n"
 "auf Deine Insel ein\n"
-"Es ist noch mehr Platz!"
+"Hier ist genug Platz!"
 
 msgid "Kick Players"
 msgstr "Spieler kicken"
@@ -386,7 +393,7 @@ msgid ""
 msgstr ""
 "Rauswerfen\n"
 "Kann anderen Mitglieder rauswerfen\n"
-"aber können nicht den \n"
+"aber kann nicht den \n"
 "Besitzer rauswerfen"
 
 msgid "Ocean"
@@ -550,7 +557,7 @@ msgstr ""
 "spawnen normal"
 
 msgid "Flower Forest"
-msgstr ""
+msgstr "Blumenwald"
 
 msgid ""
 "The flower forest biome.\n"
@@ -558,7 +565,7 @@ msgid ""
 "normally and hostile\n"
 "mobs will spawn."
 msgstr ""
-"The flower forest biome.\n"
+"The Blumenwald-Biom.\n"
 "normale und passive Mobs\n"
 "spawnen normal"
 
@@ -579,14 +586,14 @@ msgstr ""
 "spawnen normal"
 
 msgid "Ice Plains"
-msgstr ""
+msgstr "Ice Plains"
 
 msgid ""
 "The ice-plains biome is an advanced biome.\n"
 "Mobs will spawn naturally.\n"
 "including polar-bears"
 msgstr ""
-"The ice-plains biome is an advanced biome.\n"
+"Das Ice-Plains Biom ist ein besonderes Biom.\n"
 "Mobs spawnen normal.\n"
 "inklusiv Polarbären"
 
@@ -615,9 +622,10 @@ msgid ""
 "§ea permission. Change the\n"
 "§epermission by clicking it."
 msgstr ""
-"§eZeige auf ein Icon um die \n"
+"§eFahre mit der Maus\n"
+"§eüber ein Icon um die \n"
 "§eRechte zu sehen. Klicke\n"
-"§edarauf um diese zu ändern."
+"§edarauf, um diese zu ändern."
 
 msgid "§fThis player §acan"
 msgstr "§fDieser Spieler §akann"
@@ -650,6 +658,11 @@ msgid ""
 "§eleader can change permissions\n"
 "§eby clicking a player''s icon."
 msgstr ""
+"§eFahre mit der Maus über\n"
+"§edas Icon eines Spielers, um seine\n"
+"§eRechte einzusehen. Der Inselbesitzer"
+"§ekann die Rechte ändern, indem er\n"
+"§edas Icon anklickt."
 
 #, java-format
 msgid "§e{0}''s§9 Permissions"
@@ -673,7 +686,7 @@ msgid "§e<Click to change this player''s permissions>"
 msgstr "§e<Klick um die Rechte des Spielers zu ändern>"
 
 msgid "Island Log"
-msgstr "Insel Log"
+msgstr "Insel Logbuch"
 
 msgid ""
 "§eClick here to return to\n"
@@ -686,7 +699,7 @@ msgid "§e§lIsland Log"
 msgstr "§e§lInsel Logbuch"
 
 msgid "Island Biome"
-msgstr "Insel Biome"
+msgstr "Insel Biom"
 
 #, java-format
 msgid "Biome: {0}"
@@ -696,7 +709,7 @@ msgid "§2§lThis is your current biome."
 msgstr "§2§lDas ist dein aktuelles Biom."
 
 msgid "§e§lClick to change to this biome."
-msgstr "§e§lKlick hier um zu diesem Biom zu wechseln"
+msgstr "§e§lKlicke hier, um zu diesem Biom zu wechseln"
 
 msgid "You cannot use this biome."
 msgstr "Du kannst dieses Biom nicht nutzen"
