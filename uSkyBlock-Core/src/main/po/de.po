@@ -350,7 +350,7 @@ msgid "Toggle Island Warp"
 msgstr "Schaltet den Insel Warp an und aus"
 
 msgid "toggle the island''s warp."
-msgstr "kann den Insel Warp aktivieren und deaktivieren"
+msgstr "den Insel Warp aktivieren und deaktivieren"
 
 msgid ""
 "toggle the island''s warp,\n"
@@ -367,7 +367,7 @@ msgid "Invite Players"
 msgstr "Spieler einladen"
 
 msgid "invite others to the island."
-msgstr "kann andere Spieler auf die Insel einladen"
+msgstr "andere Spieler auf die Insel einladen"
 
 msgid ""
 "invite\n"
@@ -383,7 +383,7 @@ msgid "Kick Players"
 msgstr "Spieler kicken"
 
 msgid "kick others from the island."
-msgstr "kann andere von der Insel entfernen"
+msgstr "andere von der Insel entfernen"
 
 msgid ""
 "kick\n"
@@ -392,9 +392,9 @@ msgid ""
 "the island leader."
 msgstr ""
 "Rauswerfen\n"
-"Kann anderen Mitglieder rauswerfen\n"
-"aber kann nicht den \n"
-"Besitzer rauswerfen"
+"andere Mitglieder rauswerfen\n"
+"aber nicht den\n"
+"Besitzer."
 
 msgid "Ocean"
 msgstr "Ocean"
@@ -450,7 +450,7 @@ msgid ""
 "spawn. Hostile mobs will\n"
 "spawn normally."
 msgstr ""
-"Das Dschungel biom ist farbenfroh\n"
+"Das Dschungelbiom ist farbenfroh\n"
 "Passive Tiere (Inklusive Katzen) spawnen\n"
 "Monster spawnen normal"
 
@@ -1542,16 +1542,16 @@ msgid "§cCommand only available to players"
 msgstr "§cKommando nur für Spieler verfügbar"
 
 msgid "talk to your island party"
-msgstr "redet mit deinen Insel Mitgliedern"
+msgstr "rede mit deinen Insel-Mitgliedern"
 
 msgid "talk to players on your island"
 msgstr "rede zu Spielern auf deiner Insel"
 
 msgid "manually update the top 10 list"
-msgstr "Aktualisiere manuell die Bestenliste!"
+msgstr "Aktualisiere die Bestenliste!"
 
 msgid "§eGenerating the Top Ten list"
-msgstr "§eErstellt die Bestenliste"
+msgstr "§eErstell die Bestenliste"
 
 msgid "§eFinished generation of the Top Ten list"
 msgstr "§eDie Bestenliste wurde erfolgreich erstellt"
@@ -1731,7 +1731,7 @@ msgstr "§eDerzeit sind keine verwaisten Inseln registriert"
 
 #, java-format
 msgid "§eOrphans ({0}/{1}): {2}"
-msgstr ""
+msgstr §eOrphans ({0}/{1}): {2}""
 
 msgid "transfer leadership to another player"
 msgstr "Übergib die Führung an einen anderen Spieler"
@@ -1750,13 +1750,13 @@ msgstr ""
 
 #, java-format
 msgid "§bLeadership transferred by {0}§b to {1}"
-msgstr "§bFührung übergeben von {0}§b an {1}"
+msgstr "§bDie Leitung von {0}§b an {1} übergeben"
 
 msgid "open GUI for config"
 msgstr "Öffne Konfigurations Menü"
 
 msgid "searches config for a specific key"
-msgstr ""
+msgstr "durchsucht die config nach einem bestimmten Wert"
 
 #, java-format
 msgid "§c{0}§9"
@@ -1768,7 +1768,7 @@ msgstr ""
 
 #, java-format
 msgid "Found the following matching {0}:"
-msgstr ""
+msgstr "Folgende Treffer gefunden: {0}:"
 
 msgid "§a<section>"
 msgstr ""
@@ -1864,7 +1864,7 @@ msgid "§eNo currently shown regions for this player"
 msgstr "§eFür diesen Spieler werden derzeit keine Regionen gezeigt"
 
 msgid "set the ticks between animations"
-msgstr ""
+msgstr "setze den Cooldown zwischen den Animationen in Ticks"
 
 #, java-format
 msgid "§eAnimation-tick changed to {0}."
@@ -1874,15 +1874,16 @@ msgid "§eAnimation-tick must be a valid integer."
 msgstr "§eAnimation-tick muss ein gültiger Integer sein."
 
 msgid "refreshes the existing animations"
-msgstr ""
+msgstr "aktualisiert die bereits existierenden Animationen"
 
 #, java-format
 msgid ""
 "- PURGING: {0,number,##}% ({1}/{2}), elapsed {3}, estimated completion ~{4}"
 msgstr ""
+"- SÄUBERT: {0,number,##}% ({1}/{2}), verstrichen {3}, geschätzte Vervollständigung ~{4}"
 
 msgid "§4PURGE:§9 Finished purging abandoned islands."
-msgstr "§4PURGE:§9 Verlassene Inseln wurde entfernt."
+msgstr "§4PURGE:§9 Verlassene Inseln wurden entfernt."
 
 msgid "§4PURGE:§9 Aborted purging abandoned islands."
 msgstr "§4SÄUBERUNG:§9 Das säubern von verlassenen Inseln wurde abgebrochen."
@@ -1899,6 +1900,7 @@ msgid ""
 "§4PURGE:§9 Scanning done, found {0} candidates, below level {1}, ready for "
 "purgatory."
 msgstr ""
+"§4SÄUBERUNG:§9 Scan abgeschlossen, {0} Inseln gefunden, die unter Level {1} sind."
 
 msgid "§cABORTED:§e Protect-All was aborted!"
 msgstr "§cABGEBROCHEN:§e Protect-All wurde unterbrochen!"
@@ -1906,7 +1908,7 @@ msgstr "§cABGEBROCHEN:§e Protect-All wurde unterbrochen!"
 #, java-format
 msgid "§eCompleted protect-all in {0}, {1} new regions were created!"
 msgstr ""
-"§eCompleted wurde in {0} $eabgeschlossen, {1} neue Regionen wurden erstellt!"
+"§eProtect-All wurde in {0} $eabgeschlossen, {1} neue Regionen wurden erstellt!"
 
 msgid "control debugging"
 msgstr "Steuert Fehlerüberprüfung"
@@ -2056,43 +2058,43 @@ msgid "§4No rank named {0} was found!"
 msgstr "§4Kein Rang namens {0} wurde gefunden"
 
 msgid "various chunk commands"
-msgstr ""
+msgstr "verschiedene Chunk-Befehle"
 
 msgid "regenerate current chunk"
-msgstr ""
+msgstr "regeneriere aktuellen Chunk"
 
 #, java-format
 msgid "successfully regenerated chunk at {0},{1}"
-msgstr ""
+msgstr "Chunk bei {0},{1} erfolgreich regeneriert"
 
 #, java-format
 msgid "§4FAILED!§e could not regenerate chunk at {0},{1}"
-msgstr ""
+msgstr "§4FEHLER!§e Chunk bei {0},{1} konnte nicht regeneriert werden!"
 
 msgid "unload current chunk"
-msgstr ""
+msgstr "aktuellen Chunk unloaden"
 
 #, java-format
 msgid "successfully unloaded chunk at {0},{1}"
-msgstr ""
+msgstr "Der Chunk bei {0},{1} wurde erfolgreich geunloaded!"
 
 #, java-format
 msgid "§4FAILED!§e could not unload chunk at {0},{1}"
-msgstr ""
+msgstr "§4FEHLER!§e Chunk bei {0},{1} konnte nicht geunloaded werden!"
 
 msgid "load current chunk"
-msgstr ""
+msgstr "lade aktuellen Chunk"
 
 #, java-format
 msgid "loaded chunk at {0},{1}"
-msgstr ""
+msgstr "Chunk bei {0},{1} wurde geladen"
 
 msgid "only available for players"
-msgstr ""
+msgstr "Nur für Spieler verfügbar"
 
 #, java-format
 msgid "§4ERROR:§e {0}"
-msgstr ""
+msgstr "§4FEHLER:§e {0}"
 
 msgid "protects all islands (time consuming)"
 msgstr "Schützt alle Inseln (Zeitaufwändig)"
@@ -2132,7 +2134,7 @@ msgid ""
 "§4Island at this location has members!\n"
 "§eUse §9/usb island delete <name>§e to delete it."
 msgstr ""
-"§4Die Insel an ihrem Standort hat Mitglieder!\n"
+"§4Die Insel an diesem Standort hat Mitglieder!\n"
 "§eBenutze §9/usb island delete <name>§e um die Insel zu löschen."
 
 msgid "removes the player from the island"
@@ -2239,10 +2241,10 @@ msgid "imports players and islands from other formats"
 msgstr "Importiere Spieler und Inseln aus anderen Formaten"
 
 msgid "shows perk-information"
-msgstr ""
+msgstr "zeigt Perk-Informationen"
 
 msgid "shows a specific players perks"
-msgstr ""
+msgstr "zeigt die Perks eines bestimmten Spielers"
 
 #, java-format
 msgid "additional perks {0}"
@@ -2349,19 +2351,19 @@ msgid "general island command"
 msgstr "Allgemeine Insel Befehle"
 
 msgid "allows user to bypass cooldowns"
-msgstr ""
+msgstr "erlaubt, gegen Cooldowns immum zu sein"
 
 msgid "allows user to bypass visitor-protections"
-msgstr ""
+msgstr "erlaubt, trotz der Besucher-Protection abzubauen"
 
 msgid "allows user to bypass teleport-delay"
-msgstr ""
+msgstr "erlaubt, gegen das Teleport-Delay immun zu sein"
 
 msgid "allows user to use [usb] signs"
-msgstr ""
+msgstr "erlaubt, [usb] Schilder zu benutzen"
 
 msgid "allows user to place [usb] signs"
-msgstr ""
+msgstr "erlaubt [usb] Schilder zu platzieren"
 
 msgid "complete and list challenges"
 msgstr "vervollständige und zeige Aufgaben an"
@@ -2616,24 +2618,23 @@ msgid ""
 "§cYour island is in the process of generating, you cannot teleport home "
 "right now."
 msgstr ""
-"§cDeine Insel wird gerade erstellt. Du kannst dich jetzt nicht auf sie "
-"teleportieren"
+"§cDeine Insel wird gerade erstellt. Du kannst dich jetzt nicht teleportieren"
 
 msgid "§4This command can only be executed by a player"
 msgstr "§4Dieser Befehl kann nur von Spielern ausgeführt werden"
 
 msgid "transfer leadership to another member"
-msgstr "Übertrage die Führerrolle zu einem anderen Spieler"
+msgstr "Übertrage die Leitung einem anderen Spieler"
 
 msgid "§4You can only transfer ownership to party-members!"
-msgstr "§4Du kannst die Führerschaft nur auf Gruppenmitglieder übertragen!"
+msgstr "§4Du kannst die Leitung nur auf Gruppenmitglieder übertragen!"
 
 #, java-format
 msgid "{0}§e is already leader of your island!"
 msgstr "{0}§e ist bereits der Anführer der Insel!"
 
 msgid "§4Only leader can transfer leadership!"
-msgstr "§4Nur Anführer können die Führerschaft übertragen!"
+msgstr "§4Nur Anführer können die Leitung übertragen!"
 
 #, java-format
 msgid "{0} tried to take over the island!"
@@ -2665,7 +2666,7 @@ msgid "allows user to see others island info"
 msgstr "erlaubt den Spieler Infos von anderen Insel anzugucken"
 
 msgid "§4Hold your horses! §eYou have to be patient..."
-msgstr ""
+msgstr "§4Gedulde dich doch einmal..."
 
 #, java-format
 msgid "§eBlocks on {0}s Island (page {1,number} of {2,number}):"
@@ -2718,7 +2719,7 @@ msgid "delete your island and start a new one."
 msgstr "Löscht deine Insel und startet eine neue."
 
 msgid "exempt player from restart-cooldown"
-msgstr ""
+msgstr "befreit einen Spieler vom restart-cooldown"
 
 msgid ""
 "§4Only the owner may restart this island. Leave this island in order to "
@@ -2891,13 +2892,13 @@ msgstr ""
 
 #, java-format
 msgid "§ePermissions for §9{0}§e:"
-msgstr ""
+msgstr "§eRechte für §9{0}§e:"
 
 msgid "§aON"
-msgstr ""
+msgstr "§aAN"
 
 msgid "§cOFF"
-msgstr ""
+msgstr "§cAUS"
 
 #, java-format
 msgid "§7 - §6{0}§7 : {1}"
@@ -2919,22 +2920,21 @@ msgid "set the island-home"
 msgstr "Setze dein Home"
 
 msgid "show the islands limits"
-msgstr ""
+msgstr "zeige die Insel-Begrenzungen"
 
 msgid "enable/disable warping to your island."
 msgstr "Aktiviere/Deaktiviere Warping zu deiner Insel."
 
 msgid "§4Your island is locked. You must unlock it before enabling your warp."
 msgstr ""
-"§4Deine Insel ist gesperrt. Du musst sie entsperren um das warpen freizu "
-"schalten."
+"§4Deine Insel ist gesperrt. Du musst sie entsperren um das warpen freizuschalten."
 
 #, java-format
 msgid "§b{0}§d activated the island warp."
 msgstr "§b{0}§d hat den Insel Warp aktiviert"
 
 msgid "§cYou do not have permission to enable/disable your island''s warp!"
-msgstr ""
+msgstr "§cDu hast keine Rechte den Inselwarp zu de-/aktivieren!"
 
 msgid "try to complete a challenge"
 msgstr "versucht eine Aufgabe abzuschliessen"
@@ -2974,35 +2974,35 @@ msgid "§eThe island has been §cLOCKED§e."
 msgstr "§eDie Insel wurde §cGESPERRT§e."
 
 msgid "§9Hold your horses! You have to be patient..."
-msgstr ""
+msgstr "§9Gedulde dich doch einmal..."
 
 msgid "§9Not really patient, are you?"
-msgstr ""
+msgstr "§9Du bist nicht wirklich ausdauernd, oder?"
 
 msgid "§9Be patient, young padawan"
-msgstr ""
+msgstr "§9Gedulde dich, junger Padawan"
 
 msgid "§9Patience you MUST have, young padawan"
-msgstr ""
+msgstr "§9Du must geduldig sein, junger Padawan!"
 
 msgid "§9The two most powerful warriors are patience and time."
-msgstr ""
+msgstr §9Die zwei stärksten Krieger sind Geduld und Zeit.""
 
 msgid "§4Unable to find a safe home-location on your island!"
 msgstr "§4Es konnte kein sicherer Ort für dein Home gefunden werden!"
 
 msgid "§cWARNING: §eTeleporting you to mid-air."
-msgstr "§cWARNUNG: §eDu wirst in die Luft geportet."
+msgstr "§cWARNUNG: §eDu wirst in die Luft teleportiert."
 
 msgid "§aTeleporting you to your island."
-msgstr "§aDu wirst zu Deiner Insel teleportiert."
+msgstr "§aDu wirst zu deiner Insel teleportiert."
 
 #, java-format
 msgid "§aYou will be teleported in {0} seconds."
-msgstr "§aDu wirst in {0} Sekunden Teleportiert."
+msgstr "§aDu wirst in {0} Sekunden teleportiert."
 
 msgid "§4Unable to warp you to that player''s island!"
-msgstr "§4Es ist nicht möglich Dich zu der Insel von dem Spieler zu Warpen!"
+msgstr "§4Es ist nicht möglich, dich zur Insel von diesem Spieler zu Warpen!"
 
 #, java-format
 msgid "§aTeleporting you to {0}''s island."
