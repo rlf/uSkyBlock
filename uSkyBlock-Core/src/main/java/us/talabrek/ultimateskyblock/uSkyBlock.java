@@ -234,7 +234,6 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         }, getConfig().getLong("init.initDelay", 50L));
 
         metricsManager = new MetricsManager(this);
-        PaperLib.suggestPaper(this);
     }
 
     public synchronized boolean isRequirementsMet(CommandSender sender, Command command, String... args) {
