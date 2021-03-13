@@ -1,0 +1,3 @@
+files:
+  - source: /uSkyBlock-Core/src/main/po/keys.pot
+    translation: /uSkyBlock-Core/src/main/po/%locale_with_underscore%.po
