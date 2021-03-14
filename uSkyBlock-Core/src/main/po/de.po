@@ -133,7 +133,7 @@ msgid ""
 "§4{0} is limited. §eScanning your island to see if you are allowed to place "
 "more, please be patient"
 msgstr ""
-"§4{0} sind begrenzt. §eDeine Insel wird gescannt, um zu sehen, ob du mehr davon platzieren kannst." 
+"§4{0} sind begrenzt. §eDeine Insel wird gescannt, um zu sehen, ob du mehr davon platzieren kannst."
 "Bitte Gedulde dich einen Moment..."
 
 msgid "§e... Scanning complete, you can try again"
@@ -1731,7 +1731,7 @@ msgstr "§eDerzeit sind keine verwaisten Inseln registriert"
 
 #, java-format
 msgid "§eOrphans ({0}/{1}): {2}"
-msgstr §eOrphans ({0}/{1}): {2}""
+msgstr "§eOrphans ({0}/{1}): {2}"
 
 msgid "transfer leadership to another player"
 msgstr "Übergib die Führung an einen anderen Spieler"
@@ -2986,7 +2986,7 @@ msgid "§9Patience you MUST have, young padawan"
 msgstr "§9Du must geduldig sein, junger Padawan!"
 
 msgid "§9The two most powerful warriors are patience and time."
-msgstr §9Die zwei stärksten Krieger sind Geduld und Zeit.""
+msgstr "§9Die zwei stärksten Krieger sind Geduld und Zeit."
 
 msgid "§4Unable to find a safe home-location on your island!"
 msgstr "§4Es konnte kein sicherer Ort für dein Home gefunden werden!"
