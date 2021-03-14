@@ -1,3 +1,16 @@
+commit_message: "[ci skip]"
 files:
   - source: /uSkyBlock-Core/src/main/po/keys.pot
     translation: /uSkyBlock-Core/src/main/po/%locale_with_underscore%.po
+    languages_mapping:
+      locale_with_underscore:
+        cs: cs
+        da: da
+        de: de
+        es-ES: es
+        fr: fr
+        it: it
+        ko: ko
+        nl: nl
+        ru: ru
+        sv: sv
