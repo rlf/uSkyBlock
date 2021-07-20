@@ -114,13 +114,13 @@ import static us.talabrek.ultimateskyblock.util.LogUtil.log;
 public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManager.RequirementChecker {
     private static final String CN = uSkyBlock.class.getName();
     private static final String[][] depends = new String[][]{
-            new String[]{"Vault", "1.7.0", "optional"},
-            new String[]{"WorldEdit", "7.0", "optionalIf", "FastAsyncWorldEdit"},
-            new String[]{"WorldGuard", "7.0"},
-            new String[]{"FastAsyncWorldEdit", "1.16", "optional"},
-            new String[]{"Multiverse-Core", "2.5", "optional"},
-            new String[]{"Multiverse-Portals", "2.5", "optional"},
-            new String[]{"Multiverse-NetherPortals", "2.5", "optional"},
+            new String[]{"Vault", "1.7.1", "optional"},
+            new String[]{"WorldEdit", "7.2.6", "optionalIf", "FastAsyncWorldEdit"},
+            new String[]{"WorldGuard", "7.0.6"},
+            new String[]{"FastAsyncWorldEdit", "1.17", "optional"},
+            new String[]{"Multiverse-Core", "4.3.0", "optional"},
+            new String[]{"Multiverse-Portals", "4.2.1", "optional"},
+            new String[]{"Multiverse-NetherPortals", "4.2.1", "optional"},
     };
     private static String missingRequirements = null;
     private static final Random RND = new Random(System.currentTimeMillis());

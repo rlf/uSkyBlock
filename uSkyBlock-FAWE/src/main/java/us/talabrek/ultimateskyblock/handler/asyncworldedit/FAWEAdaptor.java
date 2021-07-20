@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
-import com.boydti.fawe.util.EditSessionBuilder;
+import com.fastasyncworldedit.core.util.EditSessionBuilder;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;

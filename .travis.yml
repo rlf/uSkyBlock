@@ -1,6 +1,6 @@
 language: java
 jdk:
-- openjdk8
+- openjdk16
 sudo: false
 cache:
   directories:
@@ -24,6 +24,7 @@ before_deploy:
   - ssh-add deploy_rsa
   - chmod +x scripts/deploy-staging.sh
   - chmod +x scripts/deploy-release.sh
+  - chmod +x scripts/deploy-117.sh
 deploy:
   - provider: script
     skip_cleanup: true
@@ -35,3 +36,8 @@ deploy:
     script: bash scripts/deploy-release.sh
     on:
       tags: true
+  - provider: script
+    skip_cleanup: true
+    script: bash scripts/deploy-117.sh
+    on:
+      branch: "bukkit-1.17"

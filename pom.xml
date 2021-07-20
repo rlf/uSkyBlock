@@ -10,13 +10,13 @@
     <properties>
         <jbannotations.version>19.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>
-        <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
+        <bukkit-utils.version>1.25-SNAPSHOT</bukkit-utils.version>
         <paperlib.version>1.0.4</paperlib.version>
         <deluxechat.version>1.6</deluxechat.version>
-        <spigotapi.version>1.16.1-R0.1-SNAPSHOT</spigotapi.version>
+        <spigotapi.version>1.17-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
-        <worldedit.version>7.2.0-SNAPSHOT</worldedit.version>
-        <worldguard.version>7.0.4-SNAPSHOT</worldguard.version>
+        <worldedit.version>7.2.6-SNAPSHOT</worldedit.version>
+        <worldguard.version>7.0.6-SNAPSHOT</worldguard.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
@@ -24,16 +24,12 @@
         <travis.buildNumber>dev</travis.buildNumber>
         <msgfmtCmd>msgfmt</msgfmtCmd>
         <msgmergeCmd>msgmerge</msgmergeCmd>
-        <!-- necessary for intellij to function -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- Testing -->
         <hamcrest.version>2.1</hamcrest.version>
         <junit.version>4.12</junit.version>
         <junit-vintage-engine.version>5.5.1</junit-vintage-engine.version>
-        <mockito.version>3.0.0</mockito.version>
-        <powermock.version>2.0.2</powermock.version>
+        <mockito.version>3.11.0</mockito.version>
     </properties>
 
     <modules>
@@ -68,19 +64,23 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
+                        <release>16</release>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.3.0-SNAPSHOT</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -126,6 +126,10 @@
         </repository>
     </repositories>
     <pluginRepositories>
+        <pluginRepository>
+            <id>apache-snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+        </pluginRepository>
         <pluginRepository>
             <id>uskyblock-dependencies</id>
             <url>https://www.uskyblock.ovh/maven/dependencies/</url>

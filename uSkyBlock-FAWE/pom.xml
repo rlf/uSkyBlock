@@ -19,9 +19,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.intellectualsites.fawe</groupId>
+            <groupId>com.fastasyncworldedit</groupId>
             <artifactId>FAWE-Bukkit</artifactId>
-            <version>1.16-412</version>
+            <version>1.17-6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -55,7 +55,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
