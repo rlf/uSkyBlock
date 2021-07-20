@@ -12,7 +12,6 @@
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.25-SNAPSHOT</bukkit-utils.version>
         <paperlib.version>1.0.4</paperlib.version>
-        <deluxechat.version>1.6</deluxechat.version>
         <spigotapi.version>1.17-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
         <worldedit.version>7.2.6-SNAPSHOT</worldedit.version>
@@ -195,11 +194,6 @@
                 <groupId>uSkyBlock</groupId>
                 <artifactId>po-utils</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.clip.deluxechat</groupId>
-                <artifactId>DeluxeChatPlaceholderAPI</artifactId>
-                <version>${deluxechat.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains</groupId>

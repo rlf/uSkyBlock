@@ -13,7 +13,6 @@ public class PlaceholderHandler {
             ChatPlaceholder.class.getName(),
             ServerCommandPlaceholder.class.getName(),
             "us.talabrek.ultimateskyblock.handler.placeholder.MVdWPlaceholderAPI",
-            "us.talabrek.ultimateskyblock.handler.placeholder.DeluxeChatPlaceholderAPI"
     };
 
     private static PlaceholderAPI.PlaceholderReplacer replacer;

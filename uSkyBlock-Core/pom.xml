@@ -437,10 +437,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>me.clip.deluxechat</groupId>
-            <artifactId>DeluxeChatPlaceholderAPI</artifactId>
-        </dependency>
         <!-- ANNOTATIONS -->
         <dependency>
             <groupId>org.jetbrains</groupId>

@@ -442,9 +442,6 @@ tool-menu:
 # usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_villagers
 placeholder:
 
-  # Hooks directly into DeluxeChatPlaceholderAPI
-  deluxechatplaceholderapi: false
-
   # Hooks into MVdWPlaceholderAPI
   mvdwplaceholderapi: false
 
