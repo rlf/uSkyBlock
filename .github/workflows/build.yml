@@ -2,13 +2,13 @@ name: Maven build
 
 on:
   push:
-    branches: [ gh-actions ]
+    branches: [ master ]
   pull_request:
-    branches: [ gh-actions ]
+    branches: [ master ]
 
 jobs:
   build_and_test:
-    if: github.repository_owner == 'Muspah'
+    if: github.repository_owner == 'uskyblock'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
