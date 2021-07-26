@@ -16,7 +16,6 @@ import com.sk89q.worldedit.world.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.primesoft.asyncworldedit.api.IAsyncWorldEdit;
 import org.primesoft.asyncworldedit.api.blockPlacer.IBlockPlacerPlayer;
@@ -50,6 +49,7 @@ public class AWE370Adaptor implements AWEAdaptor {
     static long progressEveryMs = 3000; // 2 seconds
     static double progressEveryPct = 20;
     private static final Set<PlayerJob> pendingJobs = Collections.synchronizedSet(new LinkedHashSet<>());
+    private uSkyBlock plugin;
 
     private static void updateProgress(IPlayerEntry playerEntry, int queuedBlocks, int maxQueuedBlocks) {
         if (maxQueuedBlocks <= 1) {
@@ -94,14 +94,15 @@ public class AWE370Adaptor implements AWEAdaptor {
     }
 
     @Override
-    public void onEnable(Plugin plugin) {
+    public void onEnable(uSkyBlock plugin) {
+        this.plugin = plugin;
         progressEveryMs = plugin.getConfig().getInt("asyncworldedit.progressEveryMs", 3000);
         progressEveryPct = plugin.getConfig().getDouble("asyncworldedit.progressEveryPct", 20);
     }
 
     @Override
     public void registerCompletion(Player player) {
-        PlayerJob newJob = new PlayerJob(player, progressEveryMs, progressEveryPct);
+        PlayerJob newJob = new PlayerJob(player, progressEveryMs, progressEveryPct, plugin);
         pendingJobs.remove(newJob);
         pendingJobs.add(newJob);
     }
@@ -127,7 +128,7 @@ public class AWE370Adaptor implements AWEAdaptor {
         if (timerTask != null) {
             timerTask.cancel();
         }
-        timerTask = uSkyBlock.getInstance().async(new Runnable() {
+        timerTask = plugin.async(new Runnable() {
             int maxSize = -1;
             @Override
             public void run() {
@@ -158,7 +159,7 @@ public class AWE370Adaptor implements AWEAdaptor {
     }
 
     @Override
-    public void onDisable(Plugin plugin) {
+    public void onDisable(uSkyBlock plugin) {
     }
 
     private static class PasteAction implements IFuncParamEx<Integer, ICancelabeEditSession, MaxChangedBlocksException> {

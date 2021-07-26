@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.io.File;
 
@@ -15,9 +16,9 @@ import java.io.File;
  * Interface for various AWE version-adaptors.
  */
 public interface AWEAdaptor {
-    void onEnable(Plugin plugin);
+    void onEnable(uSkyBlock plugin);
 
-    void onDisable(Plugin plugin);
+    void onDisable(uSkyBlock plugin);
 
     void loadIslandSchematic(File file, Location origin, @Nullable PlayerPerk playerPerk);
     void registerCompletion(Player player);

@@ -2,7 +2,7 @@ package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.entity.Player;
-import us.talabrek.ultimateskyblock.handler.ActionBarHandler;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.logging.Logger;
 
@@ -17,6 +17,7 @@ class PlayerJob {
     private long lastProgressMs;
     private double percentage;
     private double lastProgressPct;
+    private final uSkyBlock plugin;
 
     /**
      * The number of blocks placed in previous jobs
@@ -26,8 +27,10 @@ class PlayerJob {
     private int maxQueuedBlocks;
     private int startOffset;
 
-    PlayerJob(Player player, long progressEveryMs, double progressEveryPct) {
+    PlayerJob(Player player, long progressEveryMs, double progressEveryPct, uSkyBlock plugin) {
         this.player = player;
+        this.plugin = plugin;
+
         this.progressEveryMs = progressEveryMs;
         this.progressEveryPct = progressEveryPct;
         lastProgressMs = System.currentTimeMillis();
@@ -65,7 +68,7 @@ class PlayerJob {
     private void showProgress(String message) {
         long t = System.currentTimeMillis();
         if (t > (lastProgressMs + progressEveryMs) || percentage > (lastProgressPct + progressEveryPct)) {
-            ActionBarHandler.sendActionBar(player, message);
+            plugin.getPlayerLogic().getNotificationManager().sendActionBar(player, message);
             lastProgressMs = t;
             lastProgressPct = Math.floor(percentage/ progressEveryPct) * progressEveryPct;
         }

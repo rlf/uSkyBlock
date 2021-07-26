@@ -27,12 +27,12 @@ public class FAWEAdaptor implements AWEAdaptor {
     private uSkyBlock plugin;
 
     @Override
-    public void onEnable(Plugin plugin) {
-        this.plugin = (uSkyBlock) plugin;
+    public void onEnable(uSkyBlock plugin) {
+        this.plugin = plugin;
     }
 
     @Override
-    public void onDisable(Plugin plugin) {
+    public void onDisable(uSkyBlock plugin) {
         this.plugin = null;
     }
 

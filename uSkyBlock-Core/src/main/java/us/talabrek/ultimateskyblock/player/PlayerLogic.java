@@ -7,6 +7,7 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -30,6 +31,7 @@ public class PlayerLogic {
     private final uSkyBlock plugin;
     private final BukkitTask saveTask;
     private final PlayerDB playerDB;
+    private final NotificationManager notificationManager;
 
     public PlayerLogic(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -61,6 +63,7 @@ public class PlayerLogic {
                 saveDirtyToFiles();
             }
         }, every, every);
+        notificationManager = new NotificationManager(plugin);
     }
 
     private void saveDirtyToFiles() {
@@ -168,6 +171,7 @@ public class PlayerLogic {
     public void shutdown() {
         saveTask.cancel();
         flushCache();
+        notificationManager.shutdown();
     }
 
     public long flushCache() {
@@ -179,5 +183,9 @@ public class PlayerLogic {
     public int getSize() {
         String[] list = plugin.directoryPlayers.list();
         return list != null ? list.length : 0;
+    }
+
+    public @NotNull NotificationManager getNotificationManager() {
+        return notificationManager;
     }
 }

@@ -97,7 +97,7 @@ public enum AsyncWorldEditHandler {;
 
     public static final AWEAdaptor NULL_ADAPTOR = new AWEAdaptor() {
         @Override
-        public void onEnable(Plugin plugin) {
+        public void onEnable(uSkyBlock plugin) {
 
         }
 
@@ -112,7 +112,7 @@ public enum AsyncWorldEditHandler {;
         }
 
         @Override
-        public void onDisable(Plugin plugin) {
+        public void onDisable(uSkyBlock plugin) {
 
         }
 

@@ -82,18 +82,15 @@
                             <minimizeJar>true</minimizeJar>
                             <artifactSet>
                                 <includes>
-                                    <include>org.bstats:*</include>
-                                    <include>io.papermc:paperlib</include>
-                                    <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
-                                    <include>uSkyBlock:po-utils</include>
                                     <include>com.googlecode.json-simple:json-simple</include>
+                                    <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
+                                    <include>io.papermc:paperlib</include>
+                                    <include>net.kyori:*</include>
+                                    <include>org.bstats:*</include>
+                                    <include>uSkyBlock:po-utils</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
-                                <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
-                                </relocation>
                                 <relocation>
                                     <pattern>dk.lockfuglsang.minecraft</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>
@@ -101,6 +98,14 @@
                                 <relocation>
                                     <pattern>io.papermc.lib</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.paperlib</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.kyori</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.kyori</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
@@ -411,19 +416,6 @@
             <version>21.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- OPTIONAL -->
-        <dependency>
-            <groupId>com.connorlinfoot.actionbarapi</groupId>
-            <artifactId>ActionBarAPI</artifactId>
-            <version>1.5.4</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>be.maximvdw</groupId>
             <artifactId>MVdWPlaceholderAPI</artifactId>
@@ -436,6 +428,16 @@
                     <groupId>*</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- ANNOTATIONS -->
         <dependency>
