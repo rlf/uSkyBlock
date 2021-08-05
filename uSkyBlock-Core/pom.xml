@@ -215,6 +215,21 @@
                 </includes>
             </resource>
         </resources>
+        <testResources>
+            <testResource>
+                <targetPath>.</targetPath>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+            </testResource>
+            <testResource>
+                <targetPath>imported</targetPath>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>levelConfig.yml</include>
+                </includes>
+            </testResource>
+        </testResources>
     </build>
 
     <profiles>
