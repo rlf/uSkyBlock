@@ -412,7 +412,7 @@ public class ChallengeLogic implements Listener {
             command = command.replaceAll("\\{challengeName\\}", Matcher.quoteReplacement(challenge.getDisplayName()));
             plugin.execCommand(player, command, true);
         }
-        playerInfo.completeChallenge(challengeName, wasBroadcast);
+        playerInfo.completeChallenge(challenge, wasBroadcast);
         return true;
     }
 

@@ -91,11 +91,12 @@ public class AdminChallengeCommand extends CompositeCommand {
     }
 
     private void completeChallenge(CommandSender sender, PlayerInfo playerInfo, String challengeName) {
+        Challenge challenge = plugin.getChallengeLogic().getChallenge(challengeName);
         ChallengeCompletion completion = playerInfo.getChallenge(challengeName);
         if (completion.getTimesCompleted() > 0) {
             sender.sendMessage(I18nUtil.tr("\u00a74Challenge {0} has already been completed", challengeName));
         } else {
-            playerInfo.completeChallenge(challengeName, true);
+            playerInfo.completeChallenge(challenge, true);
             playerInfo.save();
             sender.sendMessage(I18nUtil.tr("\u00a7eChallenge {0} has been completed for {1}", challengeName, playerInfo.getPlayerName()));
         }

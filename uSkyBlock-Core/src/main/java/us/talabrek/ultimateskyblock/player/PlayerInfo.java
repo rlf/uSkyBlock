@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import us.talabrek.ultimateskyblock.challenge.Challenge;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.hook.permissions.PermissionsHook;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
@@ -162,14 +163,15 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         this.homeLocation = l != null ? l.clone() : null;
     }
 
-    public void completeChallenge(final String challenge, boolean silent) {
-        uSkyBlock.getInstance().getChallengeLogic().completeChallenge(this, challenge);
+    public void completeChallenge(Challenge challenge, boolean silent) {
+        uSkyBlock.getInstance().getChallengeLogic().completeChallenge(this, challenge.getName());
         if (silent) {
             return;
         }
         IslandInfo island = getIslandInfo();
         if (island != null) {
-            island.sendMessageToOnlineMembers(tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!", getPlayerName(), challenge));
+            island.sendMessageToOnlineMembers(tr("\u00a79{0}\u00a7f has completed the \u00a79{1}\u00a7f challenge!",
+                getPlayerName(), challenge.getDisplayName()));
         }
     }
 
