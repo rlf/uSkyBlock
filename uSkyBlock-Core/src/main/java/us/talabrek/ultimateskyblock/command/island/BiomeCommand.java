@@ -19,30 +19,14 @@ import java.util.Map;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
-import static us.talabrek.ultimateskyblock.util.BiomeUtil.getBiome;
 
 public class BiomeCommand extends RequireIslandCommand {
-    public static final Map<String, Biome> BIOMES = new HashMap<String, Biome>() {
+    public static final Map<String, Biome> BIOMES = new HashMap<>() {
         {
-            put("ocean", Biome.OCEAN);
-            put("jungle", Biome.JUNGLE);
-            put("hell", Biome.NETHER_WASTES);
-            put("sky", Biome.THE_END);
-            put("mushroom", Biome.MUSHROOM_FIELDS);
-            put("swampland", Biome.SWAMP);
-            put("taiga", Biome.SNOWY_TAIGA);
-            put("desert", Biome.DESERT);
-            put("forest", Biome.FOREST);
-            put("plains", Biome.PLAINS);
-            put("extreme_hills", Biome.DARK_FOREST_HILLS);
-            put("deep_ocean", Biome.DEEP_OCEAN);
-            Biome b = getBiome("ICE_PLAINS");
-            if (b != null) {
-                put("ice_plains", b);
-            }
-            b = getBiome("FLOWER_FOREST");
-            if (b != null) {
-                put("flower_forest", b);
+            for (Biome biome : Biome.values()) {
+                if (!biome.name().equalsIgnoreCase("custom")) {
+                    put(biome.name().toLowerCase(), biome);
+                }
             }
         }
     };
@@ -93,16 +77,19 @@ public class BiomeCommand extends RequireIslandCommand {
             }
             BlockVector3 minP = region.getMinimumPoint();
             BlockVector3 maxP = region.getMaximumPoint();
+            if (Settings.island_distance > Settings.island_protectionRange) {
+                int buffer = (Settings.island_distance - Settings.island_protectionRange) / 2;
+                minP.subtract(buffer, 0, buffer);
+                maxP.add(buffer, 0, buffer);
+            }
             if (args.length == 2 && args[1].matches("[0-9]+")) {
                 int radius = Integer.parseInt(args[1], 10);
-                Location loc = location.clone().add(-radius, 0, -radius);
-                if (region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ())) {
-                    minP = BlockVector3.at(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
-                }
-                loc = location.clone().add(radius, 0, radius);
-                if (region.contains(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ())) {
-                    maxP = BlockVector3.at(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
-                }
+                minP = BlockVector3.at(Math.max(location.getBlockX() - radius, minP.getBlockX()),
+                    Math.max(location.getBlockY() - radius, minP.getBlockY()),
+                    Math.max(location.getBlockZ() - radius, minP.getBlockZ()));
+                maxP = BlockVector3.at(Math.min(location.getBlockX() + radius, maxP.getBlockX()),
+                    Math.min(location.getBlockY() + radius, maxP.getBlockY()),
+                    Math.min(location.getBlockZ() + radius, maxP.getBlockZ()));
                 player.sendMessage(tr("\u00a77The pixies are busy changing the biome near you to \u00a79{0}\u00a77, be patient.", biome));
             } else if (args.length == 2 && args[1].equalsIgnoreCase("chunk")) {
                 Chunk chunk = location.clone().getChunk();
