@@ -1,6 +1,7 @@
 package us.talabrek.ultimateskyblock;
 
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 
 import java.util.logging.Level;
 
@@ -24,13 +25,13 @@ public class MetricsManager {
 
     private void setupMetrics(int pluginId) {
         Metrics bStats = new Metrics(plugin, pluginId);
-        bStats.addCustomChart(new Metrics.SimplePie("language",
+        bStats.addCustomChart(new SimplePie("language",
             () -> plugin.getConfig().getString("language", "en")));
-        bStats.addCustomChart(new Metrics.SimplePie("radius_and_distance",
+        bStats.addCustomChart(new SimplePie("radius_and_distance",
             () -> String.format("(%d,%d)", Settings.island_radius, Settings.island_distance)));
 
         // Temp. chart to measure storage usage for (legacy) uuid.PlayerDB.
-        bStats.addCustomChart(new Metrics.SimplePie("playerdb_type",
+        bStats.addCustomChart(new SimplePie("playerdb_type",
             () -> plugin.getConfig().getString("options.advanced.playerdb.storage", "yml")));
     }
 }
