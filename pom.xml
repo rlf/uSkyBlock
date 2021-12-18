@@ -4,20 +4,20 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.10.0-SNAPSHOT</version>
+    <version>2.11.0-SNAPSHOT</version>
     <name>Ultimate SkyBlock</name>
 
     <properties>
         <adventure-api.version>4.9.3</adventure-api.version>
         <adventure-bukkit.version>4.0.0</adventure-bukkit.version>
-        <jbannotations.version>19.0.0</jbannotations.version>
+        <jbannotations.version>22.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.25-SNAPSHOT</bukkit-utils.version>
         <paperlib.version>1.0.4</paperlib.version>
-        <spigotapi.version>1.17-R0.1-SNAPSHOT</spigotapi.version>
+        <spigotapi.version>1.18.1-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
-        <worldedit.version>7.2.6-SNAPSHOT</worldedit.version>
-        <worldguard.version>7.0.6-SNAPSHOT</worldguard.version>
+        <worldedit.version>7.2.8</worldedit.version>
+        <worldguard.version>7.0.6</worldguard.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
