@@ -15,11 +15,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.*;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -29,29 +28,24 @@ import org.bukkit.projectiles.ProjectileSource;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.api.async.Callback;
 import us.talabrek.ultimateskyblock.api.event.IslandInfoEvent;
-import us.talabrek.ultimateskyblock.api.model.IslandScore;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.BlockLimitLogic;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PatienceTester;
-import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.LocationUtil;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.WeakHashMap;
+import java.util.*;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
-@SuppressWarnings("unused")
 public class PlayerEvents implements Listener {
-    private static final Set<EntityDamageEvent.DamageCause> FIRE_TRAP = new HashSet<>(
-            Arrays.asList(EntityDamageEvent.DamageCause.LAVA, EntityDamageEvent.DamageCause.FIRE, EntityDamageEvent.DamageCause.FIRE_TICK));
+    private static final Set<EntityDamageEvent.DamageCause> FIRE_TRAP = new HashSet<>(Arrays.asList(
+        EntityDamageEvent.DamageCause.LAVA,
+        EntityDamageEvent.DamageCause.FIRE,
+        EntityDamageEvent.DamageCause.FIRE_TICK,
+        EntityDamageEvent.DamageCause.HOT_FLOOR));
     private static final Random RANDOM = new Random();
     private static final int OBSIDIAN_SPAM = 10000; // Max once every 10 seconds.
 
@@ -62,6 +56,13 @@ public class PlayerEvents implements Listener {
     private final boolean protectLava;
     private final Map<UUID, Long> obsidianClick = new WeakHashMap<>();
     private final boolean blockLimitsEnabled;
+    private final Map<Material, Material> leafSaplings = Map.of(
+        Material.OAK_LEAVES, Material.OAK_SAPLING,
+        Material.SPRUCE_LEAVES, Material.SPRUCE_SAPLING,
+        Material.BIRCH_LEAVES, Material.BIRCH_SAPLING,
+        Material.ACACIA_LEAVES, Material.ACACIA_SAPLING,
+        Material.JUNGLE_LEAVES, Material.JUNGLE_SAPLING,
+        Material.DARK_OAK_LEAVES, Material.DARK_OAK_SAPLING);
 
     public PlayerEvents(uSkyBlock plugin) {
         this.plugin = plugin;
@@ -73,52 +74,50 @@ public class PlayerEvents implements Listener {
         blockLimitsEnabled = config.getBoolean("options.island.block-limits.enabled", false);
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onPlayerFoodChange(final FoodLevelChangeEvent event) {
-        if (event.getEntity() instanceof Player && plugin.getWorldManager().isSkyWorld(event.getEntity().getWorld())) {
-            Player hungerman = (Player) event.getEntity();
-            float randomNum = RANDOM.nextFloat();
-            if (plugin.getWorldManager().isSkyWorld(hungerman.getWorld())
-                    && hungerman.getFoodLevel() > event.getFoodLevel()
-                    && plugin.playerIsOnIsland(hungerman)) {
-                Perk perk = plugin.getPerkLogic().getPerk(hungerman);
-                if (randomNum <= perk.getHungerReduction()) {
+        if (event.getEntity() instanceof Player player) {
+            if (player.getFoodLevel() > event.getFoodLevel() && plugin.playerIsOnIsland(player)) {
+                if (RANDOM.nextFloat() <= plugin.getPerkLogic().getPerk(player).getHungerReduction()) {
                     event.setCancelled(true);
                 }
             }
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onClickOnObsidian(final PlayerInteractEvent event) {
-        if (!plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
-            return;
-        }
-        long now = System.currentTimeMillis();
         Player player = event.getPlayer();
-        PlayerInventory inventory = player.getInventory();
         Block block = event.getClickedBlock();
-        Long lastClick = obsidianClick.get(player.getUniqueId());
-        if (lastClick != null && (lastClick + OBSIDIAN_SPAM) >= now) {
-            plugin.notifyPlayer(player, tr("\u00a74You can only convert obsidian once every 10 seconds"));
-            return;
-        }
-        if (Settings.extras_obsidianToLava && plugin.playerIsOnIsland(player)
-                && plugin.getWorldManager().isSkyWorld(player.getWorld())
-                && event.getAction() == Action.RIGHT_CLICK_BLOCK
-                && player.getItemInHand() != null
-                && player.getItemInHand().getType() == Material.BUCKET
-                && block != null
-                && block.getType() == Material.OBSIDIAN
-                && !testForObsidian(block)) {
+        if (plugin.playerIsOnIsland(player)
+            && Settings.extras_obsidianToLava
+            && event.hasBlock()
+            && event.hasItem()
+            && event.getAction() == Action.RIGHT_CLICK_BLOCK
+            && event.getMaterial() == Material.BUCKET
+            && block != null
+            && block.getType() == Material.OBSIDIAN
+            && !testForObsidian(block)) {
+            long now = System.currentTimeMillis();
+            Long lastClick = obsidianClick.get(player.getUniqueId());
+            if (lastClick != null && (lastClick + OBSIDIAN_SPAM) >= now) {
+                plugin.notifyPlayer(player, tr("\u00a74You can only convert obsidian once every 10 seconds"));
+                return;
+            }
+            PlayerInventory inventory = player.getInventory();
             if (inventory.firstEmpty() != -1) {
-                obsidianClick.put(player.getUniqueId(), now);
-                player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
-                inventory.removeItem(new ItemStack(Material.BUCKET, 1));
-                inventory.addItem(new ItemStack(Material.LAVA_BUCKET, 1));
-                player.updateInventory();
-                block.setType(Material.AIR);
-                event.setCancelled(true); // Don't execute the click anymore (since that would re-place the lava).
+                HashMap<Integer, ItemStack> leftover = inventory.removeItem(new ItemStack(Material.BUCKET));
+                if (leftover.isEmpty()) {
+                    obsidianClick.put(player.getUniqueId(), now);
+                    player.sendMessage(tr("\u00a7eChanging your obsidian back into lava. Be careful!"));
+                    leftover = inventory.addItem(new ItemStack(Material.LAVA_BUCKET));
+                    // Just in case, drop the item if their inventory somehow filled before we could add it
+                    if (!leftover.isEmpty()) {
+                        player.getWorld().dropItem(block.getLocation(), new ItemStack(Material.LAVA_BUCKET));
+                    }
+                    block.setType(Material.AIR);
+                    event.setCancelled(true);
+                }
             } else {
                 player.sendMessage(tr("\u00a7eYour inventory must have another empty space!"));
             }
@@ -142,7 +141,19 @@ public class PlayerEvents implements Listener {
         return false;
     }
 
-    @EventHandler
+    // Prevent re-placing lava that was picked up in the last tick
+    @EventHandler(ignoreCancelled = true)
+    public void onLavaPlace(final PlayerBucketEmptyEvent event) {
+        if (Settings.extras_obsidianToLava && event.getBucket() == Material.LAVA_BUCKET) {
+            long now = System.currentTimeMillis();
+            Long lastClick = obsidianClick.get(event.getPlayer().getUniqueId());
+            if (lastClick != null && (now - lastClick < 50)) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
     public void onLavaReplace(BlockPlaceEvent event) {
         if (!protectLava || !plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
             return;
@@ -154,122 +165,117 @@ public class PlayerEvents implements Listener {
     }
 
     private boolean isLavaSource(BlockData blockData) {
-        if (blockData.getMaterial() == Material.LAVA) {
-            Levelled level = (Levelled) blockData;
-            return level.getLevel() == 0;
-        }
-        return false;
+        return (blockData.getMaterial() == Material.LAVA
+            && blockData instanceof Levelled level
+            && level.getLevel() == 0);
     }
 
+    // If an entity, such as an Enderman, attempts to replace a lava source block then cancel it and drop the item instead
     @EventHandler
     public void onLavaAbsorption(EntityChangeBlockEvent event) {
-        if (!plugin.getWorldManager().isSkyWorld(event.getBlock().getWorld())) {
+        Block block = event.getBlock();
+        if (!protectLava || !plugin.getWorldManager().isSkyWorld(block.getWorld())) {
             return;
         }
-        if (isLavaSource(event.getBlock().getBlockData())) {
+        if (isLavaSource(block.getBlockData())) {
             if (event.getTo() != Material.LAVA) {
                 event.setCancelled(true);
-                // TODO: R4zorax - 21-07-2018: missing datavalue (might convert stuff - exploit)
-                ItemStack item = new ItemStack(event.getTo(), 1);
-                Location above = event.getBlock().getLocation().add(0, 1, 0);
-                event.getBlock().getWorld().dropItemNaturally(above, item);
+                // Drop the item diagonally above to reduce the risk of the item falling into the lava
+                block.getWorld().dropItemNaturally(block.getLocation().add(1, 1, 1), new ItemStack(event.getTo()));
             }
         }
     }
 
-    // TODO 2018-11-09 Muspah: Move (parts) to new EntityDamageByEntityEvent-handler
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onVisitorDamage(final EntityDamageEvent event) {
-        // Only protect things in the Skyworld.
-        if (!plugin.getWorldManager().isSkyWorld(event.getEntity().getWorld())) {
-            return;
+        if (event.getEntity() instanceof Player player
+            && plugin.getWorldManager().isSkyAssociatedWorld(player.getWorld())
+            && !plugin.playerIsOnIsland(player)) {
+            if ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
+                || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL))) {
+                event.setDamage(-event.getDamage());
+                event.setCancelled(true);
+            }
         }
+    }
 
-        // Only protect visitors against damage if pvp is disabled:
-        if (Settings.island_allowPvP) {
-            return;
-        }
-
-        // This protection only applies to players:
-        if (!(event.getEntity() instanceof Player)) {
-            return;
-        }
-
-        // Don't protect players on their own islands:
-        if (plugin.playerIsOnIsland((Player) event.getEntity())) {
-            return;
-        }
-
-        if ((visitorFireProtected && FIRE_TRAP.contains(event.getCause()))
-                || (visitorFallProtected && (event.getCause() == EntityDamageEvent.DamageCause.FALL))
-                || (visitorMonsterProtected &&
-                    (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onVisitorDamageByEntity(final EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player player
+            && plugin.getWorldManager().isSkyAssociatedWorld(player.getWorld())
+            && !plugin.playerIsOnIsland(player)
+            && !(event.getDamager() instanceof Player && Settings.island_allowPvP)) {
+            if (visitorMonsterProtected &&
+                (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK
                     || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
                     || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION
                     || event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE
                     || event.getCause() == EntityDamageEvent.DamageCause.MAGIC
-                    || event.getCause() == EntityDamageEvent.DamageCause.POISON))) {
-            event.setDamage(-event.getDamage());
-            event.setCancelled(true);
+                    || event.getCause() == EntityDamageEvent.DamageCause.POISON)) {
+                event.setDamage(-event.getDamage());
+                event.setCancelled(true);
+            }
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onSpawnDamage(final EntityDamageEvent event) {
-        if (!plugin.getWorldManager().isSkyWorld(event.getEntity().getWorld())) {
-            return;
-        }
-        if (event.getEntity() instanceof Player && plugin.playerIsInSpawn((Player) event.getEntity()) && event.getCause() == EntityDamageEvent.DamageCause.VOID) {
+        if (event.getEntity() instanceof Player player && plugin.playerIsInSpawn(player) && event.getCause() == EntityDamageEvent.DamageCause.VOID) {
             event.setDamage(-event.getDamage());
             event.setCancelled(true);
-            plugin.getTeleportLogic().spawnTeleport((Player) event.getEntity(), true);
+            player.setFallDistance(0);
+            plugin.getTeleportLogic().spawnTeleport(player, true);
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onMemberDamage(final EntityDamageByEntityEvent event) {
-        if (!plugin.getWorldManager().isSkyAssociatedWorld(event.getEntity().getWorld())) {
-            return;
-        }
-        if (!(event.getEntity() instanceof Player)) {
-            return;
-        }
-        Player p2 = (Player) event.getEntity();
-        if (event.getDamager() instanceof Player) {
-            Player p1 = (Player) event.getDamager();
-            cancelMemberDamage(p1, p2, event);
-        } else if (event.getDamager() instanceof Projectile
-                && !(event.getDamager() instanceof EnderPearl)) {
-            ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
-            if (shooter instanceof Player) {
-                Player p1 = (Player) shooter;
-                cancelMemberDamage(p1, p2, event);
+        if (event.getEntity() instanceof Player victim && plugin.getWorldManager().isSkyAssociatedWorld(victim.getWorld())) {
+            if (event.getDamager() instanceof Player attacker) {
+                cancelMemberDamage(attacker, victim, event);
+            }
+            else if (event.getDamager() instanceof Projectile && !(event.getDamager() instanceof EnderPearl)) {
+                ProjectileSource shooter = ((Projectile) event.getDamager()).getShooter();
+                if (shooter instanceof Player attacker) {
+                    cancelMemberDamage(attacker, victim, event);
+                }
             }
         }
     }
 
-    private void cancelMemberDamage(Player p1, Player p2, EntityDamageByEntityEvent event) {
-        IslandInfo is1 = plugin.getIslandInfo(p1);
-        IslandInfo is2 = plugin.getIslandInfo(p2);
+    private void cancelMemberDamage(Player attacker, Player victim, EntityDamageByEntityEvent event) {
+        IslandInfo is1 = plugin.getIslandInfo(attacker);
+        IslandInfo is2 = plugin.getIslandInfo(victim);
         if (is1 != null && is2 != null && is1.getName().equals(is2.getName())) {
-            plugin.notifyPlayer(p1, tr("\u00a7eYou cannot hurt island-members."));
+            plugin.notifyPlayer(attacker, tr("\u00a7eYou cannot hurt island-members."));
             event.setCancelled(true);
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        if (Settings.extras_sendToSpawn) {
-            return;
+        if (Settings.extras_respawnAtIsland) {
+            PlayerInfo playerInfo = plugin.getPlayerInfo(event.getPlayer());
+            if (playerInfo.getHasIsland()) {
+                Location homeLocation = LocationUtil.findNearestSafeLocation(playerInfo.getHomeLocation(), null);
+                if (homeLocation == null) {
+                    homeLocation = LocationUtil.findNearestSafeLocation(playerInfo.getIslandLocation(), null);
+                }
+                // If homeLocation is somehow still null, we intentionally fallthrough
+                if (homeLocation != null) {
+                    event.setRespawnLocation(homeLocation);
+                    return;
+                }
+            }
         }
-        if (plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
+        if (!Settings.extras_sendToSpawn && plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
             event.setRespawnLocation(plugin.getWorldManager().getWorld().getSpawnLocation());
         }
     }
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onTeleport(PlayerTeleportEvent event) {
-        if (event.getTo() != null || !plugin.getWorldManager().isSkyWorld(event.getTo().getWorld())) {
+        if (event.getTo() == null || !plugin.getWorldManager().isSkyWorld(event.getTo().getWorld())) {
             return;
         }
         final Player player = event.getPlayer();
@@ -290,28 +296,22 @@ public class PlayerEvents implements Listener {
     }
 
     /**
-     * This EventHandler handles {@link BlockBreakEvent} to detect if a player broke OAK_LEAVES in the skyworld,
-     * and will drop an OAK_SAPLING if so. This will prevent cases where the default generated oak tree on a new
+     * This EventHandler handles {@link BlockBreakEvent} to detect if a player broke leaves in the skyworld,
+     * and will drop a sapling if so. This will prevent cases where the default generated tree on a new
      * island drops no saplings.
      * @param event BlockBreakEvent to handle.
      */
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onLeafBreak(BlockBreakEvent event) {
-        if (!plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
-            return;
-        }
-        if (event.getBlock().getType() != Material.OAK_LEAVES) {
-            return;
-        }
-
-        String islandName = WorldGuardHandler.getIslandNameAt(event.getPlayer().getLocation());
-        IslandInfo islandInfo = plugin.getIslandInfo(islandName);
-        if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
-            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.OAK_SAPLING, 1));
-            islandInfo.setLeafBreaks(islandInfo.getLeafBreaks() + 1);
+        if (plugin.playerIsOnIsland(event.getPlayer()) && leafSaplings.containsKey(event.getBlock().getType())) {
+            IslandInfo islandInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+            if (islandInfo != null && islandInfo.getLeafBreaks() == 0) {
+                event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(leafSaplings.get(event.getBlock().getType())));
+                islandInfo.setLeafBreaks(1);
+            }
         }
     }
-    
+
     @EventHandler(ignoreCancelled = true)
     public void onBlockPlaceEvent(BlockPlaceEvent event) {
         final Player player = event.getPlayer();
@@ -331,7 +331,7 @@ public class PlayerEvents implements Listener {
             if (!PatienceTester.isRunning(player, key)) {
                 PatienceTester.startRunning(player, key);
                 player.sendMessage(tr("\u00a74{0} is limited. \u00a7eScanning your island to see if you are allowed to place more, please be patient", ItemStackUtil.getItemName(new ItemStack(type))));
-                plugin.fireAsyncEvent(new IslandInfoEvent(player, islandInfo.getIslandLocation(), new Callback<IslandScore>() {
+                plugin.fireAsyncEvent(new IslandInfoEvent(player, islandInfo.getIslandLocation(), new Callback<>() {
                     @Override
                     public void run() {
                         player.sendMessage(tr("\u00a7e... Scanning complete, you can try again"));
@@ -348,10 +348,10 @@ public class PlayerEvents implements Listener {
         }
         plugin.getBlockLimitLogic().incBlockCount(islandInfo.getIslandLocation(), type);
     }
-    
+
     @EventHandler(ignoreCancelled = true)
-    public void onHopperDestroy(BlockBreakEvent event){
-        if (!blockLimitsEnabled || !plugin.getWorldManager().isSkyAssociatedWorld(event.getPlayer().getWorld())) {
+    public void onBlockBreak(BlockBreakEvent event){
+        if (!blockLimitsEnabled || !plugin.getWorldManager().isSkyAssociatedWorld(event.getBlock().getWorld())) {
             return; // Skip
         }
         IslandInfo islandInfo = plugin.getIslandInfo(event.getBlock().getLocation());
@@ -359,5 +359,29 @@ public class PlayerEvents implements Listener {
             return;
         }
         plugin.getBlockLimitLogic().decBlockCount(islandInfo.getIslandLocation(), event.getBlock().getType());
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onBlockExplode(EntityExplodeEvent event) {
+        if (blockLimitsEnabled && plugin.getWorldManager().isSkyAssociatedWorld(event.getLocation().getWorld())) {
+            IslandInfo islandInfo = plugin.getIslandInfo(event.getLocation());
+            if (islandInfo != null) {
+                for (Block block : event.blockList()) {
+                    plugin.getBlockLimitLogic().decBlockCount(islandInfo.getIslandLocation(), block.getType());
+                }
+            }
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onBlockExplodeUnknown(BlockExplodeEvent event) {
+        if (blockLimitsEnabled && plugin.getWorldManager().isSkyAssociatedWorld(event.getBlock().getWorld())) {
+            IslandInfo islandInfo = plugin.getIslandInfo(event.getBlock().getLocation());
+            if (islandInfo != null) {
+                for (Block block : event.blockList()) {
+                    plugin.getBlockLimitLogic().decBlockCount(islandInfo.getIslandLocation(), block.getType());
+                }
+            }
+        }
     }
 }

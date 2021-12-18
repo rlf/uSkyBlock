@@ -109,7 +109,11 @@ options:
     # NOTE: Requires EssentialsSpawn or another plugin with the "/spawn" command
     sendToSpawn: false
 
-    # [true/false] If true, a player can right-click on a block of obsidian on their island while holding an empty bucket to remove the obsidian and fill the bucket with lava. This is useful for people that accidently
+    # [true/false] If true, when a player respawns they will respawn on their island. Will first attempt to respawn them at the closest safe location to their island home, then their island spawn, then the server spawn.
+    # NOTE: If this is true, sendToSpawn is ignored unless the player has no island or no viable island home or spawn location.
+    respawnAtIsland: true
+
+    # [true/false] If true, a player can right-click on a block of obsidian on their island while holding an empty bucket to remove the obsidian and fill the bucket with lava. This is useful for people that accidentally
     # turn their lava into obsidian with a bad cobblestone generator design. Will only work on the player's island and if there are no other obsidian blocks nearby (so can't be used on portals).
     obsidianToLava: true
 
