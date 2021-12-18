@@ -21,10 +21,10 @@ jobs:
         run: |
           cd uSkyBlock-Core/src/main/po && perl en2pirate.pl && cd -
           cd uSkyBlock-Core/src/main/po && perl en2kitteh.pl && cd -
-      - name: JDK 16
+      - name: JDK 17
         uses: actions/setup-java@v1
         with:
-          java-version: '16'
+          java-version: '17'
           distribution: 'adopt'
       - name: Cache Maven repository
         uses: actions/cache@v2
