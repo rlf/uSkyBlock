@@ -8,7 +8,7 @@
     <name>Ultimate SkyBlock</name>
 
     <properties>
-        <adventure-api.version>4.8.1</adventure-api.version>
+        <adventure-api.version>4.9.1</adventure-api.version>
         <adventure-bukkit.version>4.0.0-SNAPSHOT</adventure-bukkit.version>
         <jbannotations.version>19.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>

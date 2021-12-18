@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import us.talabrek.ultimateskyblock.command.island.BiomeCommand;
 import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
@@ -30,6 +31,7 @@ public class Settings {
     public static int general_cooldownInfo;
     public static int general_cooldownRestart;
     public static int general_biomeChange;
+    public static String general_defaultBiome;
     public static boolean extras_sendToSpawn;
     public static boolean extras_obsidianToLava;
     public static String island_schematicName;
@@ -82,6 +84,14 @@ public class Settings {
             }
         } catch (Exception e) {
             general_biomeChange = 3600;
+        }
+        try {
+            general_defaultBiome = config.getString("options.general.defaultBiome");
+            if (!BiomeCommand.biomeExists(general_defaultBiome)) {
+                general_defaultBiome = "OCEAN";
+            }
+        } catch (Exception e) {
+            general_defaultBiome = "OCEAN";
         }
         try {
             general_cooldownRestart = config.getInt("options.general.cooldownRestart");

@@ -391,7 +391,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
 
     @Override
     public String getBiome() {
-        return config.getString("general.biome", "OCEAN").toUpperCase();
+        return config.getString("general.biome", Settings.general_defaultBiome).toUpperCase();
     }
 
     public void setBiome(@NotNull String biome) {

@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
 import java.util.Arrays;
@@ -126,7 +127,7 @@ public class ChunkRegenerator {
                     defaultBiome = Biome.NETHER_WASTES;
                     break;
                 default:
-                    defaultBiome = Biome.OCEAN;
+                    defaultBiome = Biome.valueOf(Settings.general_defaultBiome);
                     break;
             }
         }

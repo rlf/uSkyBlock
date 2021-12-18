@@ -20,7 +20,7 @@ public class SkyBlockChunkGenerator extends ChunkGenerator {
         for (int x = 0; x <= 15; x++) {
             for (int z = 0; z <= 15; z++) {
                 for (int y = 0; y < world.getMaxHeight(); y++) {
-                    biome.setBiome(x, y, z, Biome.OCEAN);
+                    biome.setBiome(x, y, z, Biome.valueOf(Settings.general_defaultBiome));
                 }
             }
         }

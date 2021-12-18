@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.imports.wolfwork;
 
+import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.imports.USBImporter;
@@ -129,7 +130,7 @@ public class WolfWorkUSBImporter implements USBImporter {
             }
             // Not really that important - since it's most likely different!
             islandInfo.setLevel(playerInfo.getIslandLevel());
-            islandInfo.setBiome("OCEAN");
+            islandInfo.setBiome(Settings.general_defaultBiome);
             islandInfo.save();
             WorldGuardHandler.updateRegion(islandInfo);
         }
