@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.fastasyncworldedit</groupId>
             <artifactId>FAWE-Bukkit</artifactId>
-            <version>1.17-6</version>
+            <version>1.17-268</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

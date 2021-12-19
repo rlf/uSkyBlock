@@ -9,11 +9,11 @@
 
     <properties>
         <adventure-api.version>4.9.3</adventure-api.version>
-        <adventure-bukkit.version>4.0.0</adventure-bukkit.version>
-        <jbannotations.version>22.0.0</jbannotations.version>
+        <adventure-bukkit.version>4.0.1</adventure-bukkit.version>
+        <jbannotations.version>23.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.25-SNAPSHOT</bukkit-utils.version>
-        <paperlib.version>1.0.4</paperlib.version>
+        <paperlib.version>1.0.7</paperlib.version>
         <spigotapi.version>1.18.1-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
         <worldedit.version>7.2.8</worldedit.version>
@@ -27,10 +27,10 @@
         <msgmergeCmd>msgmerge</msgmergeCmd>
 
         <!-- Testing -->
-        <hamcrest.version>2.1</hamcrest.version>
-        <junit.version>4.12</junit.version>
-        <junit-vintage-engine.version>5.5.1</junit-vintage-engine.version>
-        <mockito.version>3.11.0</mockito.version>
+        <hamcrest.version>2.2</hamcrest.version>
+        <junit.version>4.13.2</junit.version>
+        <junit-vintage-engine.version>5.8.2</junit-vintage-engine.version>
+        <mockito.version>3.12.4</mockito.version>
     </properties>
 
     <modules>
@@ -76,7 +76,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -86,15 +86,37 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.2</version>
+                    <version>3.0.0-M5</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.22.2</version>
+                    <version>3.0.0-M5</version>
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.8.1</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
     <repositories>
         <repository> <!-- Bukkit & Spigot API -->
