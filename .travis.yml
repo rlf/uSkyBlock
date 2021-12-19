@@ -1,6 +1,7 @@
 language: java
 jdk:
 - openjdk17
+dist: focal
 sudo: false
 cache:
   directories:
