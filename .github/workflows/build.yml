@@ -34,3 +34,20 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
         run: mvn -U -Pi18n clean deploy
+
+      # Install our SSH key:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOST }}
+
+      # Mark our scripts runnable:
+      - name: Mark deploy scripts runnable
+        run: |
+          chmod +x "${GITHUB_WORKSPACE}/.github/deploy-staging.sh"
+
+      # Deploy from master branch (staging release):
+      - name: Run deploy script for staging release
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        run: "${GITHUB_WORKSPACE}/.github/deploy-staging.sh"
