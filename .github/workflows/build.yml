@@ -25,7 +25,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'temurin'
+      - name: Install gettext
+        run: sudo apt-get install -y gettext
       - name: Cache Maven repository
         uses: actions/cache@v2
         with:
