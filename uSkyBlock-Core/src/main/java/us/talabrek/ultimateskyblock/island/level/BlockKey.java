@@ -5,20 +5,14 @@ import org.bukkit.Material;
 import java.util.Objects;
 
 public class BlockKey implements Comparable<BlockKey> {
-    private Material type;
-    private byte dataValue;
+    private final Material type;
 
-    public BlockKey(Material type, byte dataValue) {
+    public BlockKey(Material type) {
         this.type = type;
-        this.dataValue = dataValue;
     }
 
     public Material getType() {
         return type;
-    }
-
-    public byte getDataValue() {
-        return dataValue;
     }
 
     @Override
@@ -26,18 +20,17 @@ public class BlockKey implements Comparable<BlockKey> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BlockKey blockKey = (BlockKey) o;
-        return dataValue == blockKey.dataValue &&
-                type == blockKey.type;
+        return type == blockKey.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, dataValue);
+        return Objects.hash(type);
     }
 
     @Override
     public String toString() {
-        return type.name() + (dataValue != 0 ? "/" + dataValue : "");
+        return type.name();
     }
 
     @Override

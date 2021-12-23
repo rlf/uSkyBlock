@@ -40,12 +40,8 @@ public class BlockLevelConfig {
         this.negativeReturns = negativeReturns;
     }
 
-    public boolean matches(Material material, byte dataValue) {
-        return baseBlock.matches(material, dataValue) || additionalBlocks.stream().anyMatch(b -> b.matches(material, dataValue));
-    }
-
-    public BlockScore calculateScore(int count) {
-        return calculateScore(count, 1);
+    public boolean matches(Material material) {
+        return baseBlock.matches(material) || additionalBlocks.stream().anyMatch(b -> b.matches(material));
     }
 
     public BlockScore calculateScore(int count, double pointsPerLevel) {

@@ -14,11 +14,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class LevelConfigYmlReader {
-    private static final Pattern BLOCK_KEY_PATTERN = Pattern.compile("(?<type>[A-Z0-9_]+)(/(?<sub>[0-9\\-]+))?");
-    
+    private static final Pattern BLOCK_KEY_PATTERN = Pattern.compile("(?<type>[A-Z0-9_]+)?");
+
     public BlockLevelConfigMap readLevelConfig(FileConfiguration config) {
         double defaultScore = config.getDouble("general.default", 10d);
         int defaultLimit = config.getInt("general.limit", Integer.MAX_VALUE);
@@ -62,7 +61,7 @@ public class LevelConfigYmlReader {
         }
         List<String> additionBlocks = section.getStringList("additionalBlocks");
         if (!additionBlocks.isEmpty()) {
-            builder.additionalBlocks(additionBlocks.stream().map(s -> getBlockMatch(s)).collect(Collectors.toList()).toArray(new BlockMatch[0]));
+            builder.additionalBlocks(additionBlocks.stream().map(this::getBlockMatch).toArray(BlockMatch[]::new));
         }
         return builder.build();
     }
@@ -70,7 +69,7 @@ public class LevelConfigYmlReader {
     private BlockMatch getBlockMatch(String blockKey) {
         Matcher m = BLOCK_KEY_PATTERN.matcher(blockKey);
         if (m.matches()) {
-            Material material = null;
+            Material material;
             String materialName = m.group("type");
             material = Material.matchMaterial(materialName);
             if (material == null) {
@@ -80,41 +79,15 @@ public class LevelConfigYmlReader {
                 LogUtil.log(Level.WARNING, "Invalid key '" + blockKey + "' in levelConfig, could not lookup Material");
                 return null;
             }
-            byte[] dataValues = getDataValues(m.group("sub"));
-            return new BlockMatch(material, dataValues);
+            return new BlockMatch(material);
         } else {
             LogUtil.log(Level.WARNING, "Invalid key '" + blockKey + "' in levelConfig");
         }
         return null;
     }
 
-    private byte[] getDataValues(String sub) {
-        if (sub == null) {
-            return new byte[0];
-        }
-        if (sub.equalsIgnoreCase("*") || sub.equalsIgnoreCase("0-15")) {
-            return new byte[0];
-        } else if (!sub.isEmpty()) {
-            String[] split = sub.split("-");
-            if (split.length == 1) {
-                return new byte[]{(byte) (Integer.parseInt(split[0]) & 0x0f)};
-            } else {
-                int min = Integer.parseInt(split[0]);
-                int max = Integer.parseInt(split[1]);
-                byte[] data = new byte[max - min + 1];
-                for (int i = 0; i < data.length; i++) {
-                    data[i] = (byte) ((min + i) & 0x0f);
-                }
-                return data;
-            }
-        }
-        return new byte[0];
-    }
-
     private void addDefaults(List<BlockLevelConfig> blocks, BlockLevelConfigBuilder defaultBuilder) {
         BlockLevelConfigBuilder nullScore = defaultBuilder.copy().scorePerBlock(0).limit(0);
         blocks.add(nullScore.base(Material.AIR).build());
-        blocks.add(nullScore.base(Material.LEGACY_AIR).build());
     }
-
 }

@@ -82,8 +82,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                     if (blockType == Material.AIR) {
                         continue;
                     }
-                    byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
-                    counts.add(blockType, blockData);
+                    counts.add(blockType);
                 }
             }
         }
@@ -109,8 +108,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                         if (blockType == Material.AIR) {
                             continue;
                         }
-                        byte blockData = (byte) (chunk.getData(cx, y, cz) & 0xff);
-                        counts.add(blockType, blockData);
+                        counts.add(blockType);
                     }
                 }
             }
@@ -127,5 +125,4 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
         }
         return null;
     }
-
 }

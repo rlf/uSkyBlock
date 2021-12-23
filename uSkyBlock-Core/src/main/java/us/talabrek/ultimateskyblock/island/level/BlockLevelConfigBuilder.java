@@ -23,11 +23,6 @@ public class BlockLevelConfigBuilder {
         return this;
     }
 
-    public BlockLevelConfigBuilder base(Material baseBlock, byte dataValue) {
-        this.baseBlock = new BlockMatch(baseBlock, dataValue);
-        return this;
-    }
-
     public BlockLevelConfigBuilder base(BlockMatch baseBlock) {
         this.baseBlock = baseBlock;
         return this;
@@ -75,7 +70,6 @@ public class BlockLevelConfigBuilder {
         // merge any additionalBlocks of the same type as baseBlock into the baseblock
         additionalBlocks.forEach(c -> {
             if (baseBlock.getType() == c.getType()) {
-                baseBlock.getDataValues().addAll(c.getDataValues());
             }
         });
         additionalBlocks = additionalBlocks.stream().filter(f -> f.getType() != baseBlock.getType()).collect(Collectors.toSet());

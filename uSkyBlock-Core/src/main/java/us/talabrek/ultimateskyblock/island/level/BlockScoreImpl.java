@@ -5,7 +5,6 @@ import org.bukkit.inventory.ItemStack;
 
 
 public class BlockScoreImpl implements us.talabrek.ultimateskyblock.api.model.BlockScore {
-
     private final ItemStack block;
     private final int count;
     private final double score;

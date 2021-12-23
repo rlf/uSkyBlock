@@ -47,7 +47,6 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
                 score.getScore() + existing.getScore(), state, score.getName());
     }
 
-
     @Override
     public double getScore() {
         return score;
@@ -81,5 +80,4 @@ public class IslandScore implements us.talabrek.ultimateskyblock.api.model.Islan
     public int getSize() {
         return top.size();
     }
-
 }

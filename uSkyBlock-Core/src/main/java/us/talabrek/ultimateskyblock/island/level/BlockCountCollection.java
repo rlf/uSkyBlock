@@ -21,16 +21,16 @@ public class BlockCountCollection {
         countMap = new ConcurrentHashMap<>();
     }
 
-    public int add(Material type, byte dataValue, int blockCount) {
-        BlockLevelConfig blockLevelConfig = configMap.get(type, dataValue);
+    public int add(Material type, int blockCount) {
+        BlockLevelConfig blockLevelConfig = configMap.get(type);
         BlockMatch key = blockLevelConfig.getKey();
         LongAdder count = countMap.computeIfAbsent(key, k -> new LongAdder());
         count.add(blockCount);
         return count.intValue();
     }
 
-    public int add(Material type, byte dataValue) {
-        return add(type, dataValue, 1);
+    public int add(Material type) {
+        return add(type, 1);
     }
 
     public List<BlockScore> calculateScore(double pointsPerLevel) {
