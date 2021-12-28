@@ -8,10 +8,10 @@ We are on [Spigot](https://www.spigotmc.org/resources/uskyblock-revived.66795/).
 
 This version depends on the following plugins:
 
-* Spigot/Paper 1.17-R0.1-SNAPSHOT
+* Spigot/Paper 1.18.1-R0.1-SNAPSHOT
 * Vault 1.7.x
-* WorldEdit 7.1.0-SNAPSHOT
-* WorldGuard 7.0.2-SNAPSHOT
+* WorldEdit 7.2.8
+* WorldGuard 7.0.6
 
 ## Releases 
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg)](http://isitmaintained.com/project/rlf/uSkyBlock "Percentage of issues still open")
