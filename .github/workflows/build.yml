@@ -41,12 +41,14 @@ jobs:
       # Install our SSH key:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
+        if: ${{ github.event_name == 'push' }}
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_KNOWN_HOST }}
 
       # Mark our scripts runnable:
       - name: Mark deploy scripts runnable
+        if: ${{ github.event_name == 'push' }}
         run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/deploy-staging.sh"
           chmod +x "${GITHUB_WORKSPACE}/.github/deploy-release.sh"
