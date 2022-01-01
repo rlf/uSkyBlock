@@ -86,7 +86,7 @@ public class ChallengeFactory {
                 int count = countStr != null ? Integer.parseInt(countStr, 10) : 1;
                 EntityType entityType = EntityType.fromName(type);
                 Map<String, Object> map = meta != null ? MetaUtil.createMap(meta.substring(1)) : new HashMap<String, Object>(); // skip the leading ':'
-                if (entityType != null && map != null) {
+                if (entityType != null) {
                     entities.add(new EntityMatch(entityType, map, count));
                 } else {
                     throw new IllegalArgumentException("Malformed requiredEntities: " + entityString);

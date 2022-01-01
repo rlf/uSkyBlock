@@ -82,7 +82,7 @@
                             <minimizeJar>true</minimizeJar>
                             <artifactSet>
                                 <includes>
-                                    <include>com.googlecode.json-simple:json-simple</include>
+                                    <include>com.google.code.gson:gson</include>
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>io.papermc:paperlib</include>
                                     <include>net.kyori:*</include>
@@ -106,6 +106,10 @@
                                 <relocation>
                                     <pattern>org.bstats</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.code.gson</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.gson</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
@@ -357,6 +361,12 @@
             <version>${spigotapi.version}</version>
             <scope>provided</scope>
             <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- PaperLib -->
         <dependency>
@@ -432,6 +442,12 @@
             <version>31.0.1-jre</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Google Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>be.maximvdw</groupId>
             <artifactId>MVdWPlaceholderAPI</artifactId>
@@ -465,12 +481,6 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
             <scope>provided</scope>
-        </dependency>
-        <!-- DEPRECATED -->
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
         </dependency>
         <!-- TESTING -->
         <dependency>
