@@ -1,30 +1,26 @@
 package us.talabrek.ultimateskyblock.util;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.StringReader;
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.Map;
 
-/**
- */
 public enum MetaUtil {;
+    private static final Gson gson = new Gson();
 
-    public static Map<String,Object> createMap(String mapString) {
+    public static @NotNull Map<String, Object> createMap(String mapString) {
         if (mapString == null || mapString.isEmpty()) {
             return Collections.emptyMap();
         }
         try {
-            Object parse = new JSONParser().parse(new StringReader(mapString));
-            if (parse instanceof Map) {
-                return (Map<String,Object>)parse;
-            }
-        } catch (IOException | ParseException e) {
-            throw new IllegalArgumentException("Not a valid map: " + mapString, e);
+            Type mapType = new TypeToken<Map<String, Object>>() {}.getType();
+            return gson.fromJson(mapString, mapType);
+        } catch (JsonSyntaxException ex) {
+            throw new IllegalArgumentException("Not a valid map: " + mapString, ex);
         }
-        throw new IllegalArgumentException("Not a map: " + mapString);
     }
-
 }

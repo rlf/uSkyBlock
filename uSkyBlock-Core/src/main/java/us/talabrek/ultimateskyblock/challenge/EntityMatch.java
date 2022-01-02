@@ -1,8 +1,8 @@
 package us.talabrek.ultimateskyblock.challenge;
 
+import com.google.gson.Gson;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.json.simple.JSONObject;
 import us.talabrek.ultimateskyblock.util.EntityUtil;
 
 import java.lang.reflect.Field;
@@ -15,6 +15,8 @@ import java.util.Map;
  * Data object holding values for matching an entity against a challenge.
  */
 public class EntityMatch {
+    private static final Gson gson = new Gson();
+
     /**
      * @see @link http://minecraft.gamepedia.com/Data_values#Wool.2C_Stained_Clay.2C_Stained_Glass_and_Carpet
      */
@@ -43,7 +45,7 @@ public class EntityMatch {
 
     public EntityMatch(EntityType type, Map<String, Object> meta, int count) {
         this.type = type;
-        this.meta = meta != null ? meta : new HashMap<String,Object>();
+        this.meta = meta != null ? meta : new HashMap<>();
         this.count = count;
     }
 
@@ -110,7 +112,7 @@ public class EntityMatch {
 
     @Override
     public String toString() {
-        return type.name() + (meta.isEmpty() ? "" : ":" + JSONObject.toJSONString(meta));
+        return type.name() + (meta.isEmpty() ? "" : ":" + gson.toJson(meta));
     }
 
     public String getDisplayName() {
@@ -124,7 +126,7 @@ public class EntityMatch {
             extra.remove(key);
         }
         if (!extra.isEmpty()) {
-            sb.append(":").append(JSONObject.toJSONString(extra));
+            sb.append(":").append(gson.toJson(extra));
         }
         return sb.toString();
     }
