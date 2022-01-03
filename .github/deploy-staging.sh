@@ -51,3 +51,7 @@ echo -e "Publishing final plugin release...\n"
 rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
 $HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-Plugin/target/uSkyBlock-*.jar \
 travis@travis.internetpolice.eu:WWW-USB/downloads/master/uSkyBlock/
+
+rsync -r --quiet --no-R --no-implied-dirs -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+$HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-Plugin/target/classes/version.json \
+travis@travis.internetpolice.eu:WWW-USB/versions/staging.json
