@@ -1,8 +1,14 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 import com.google.gson.Gson;
+import org.apache.commons.lang.WordUtils;
+import org.bukkit.DyeColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.material.Colorable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.EntityUtil;
 
 import java.lang.reflect.Field;
@@ -16,31 +22,11 @@ import java.util.Map;
  */
 public class EntityMatch {
     private static final Gson gson = new Gson();
+    private final uSkyBlock server = uSkyBlock.getInstance();
 
-    /**
-     * @see @link http://minecraft.gamepedia.com/Data_values#Wool.2C_Stained_Clay.2C_Stained_Glass_and_Carpet
-     */
-    private static final byte[] DV_2_COLOR_MAP = {
-            0xf, // 0 -> white
-            0x6, // 1 -> orange (gold)
-            0xd, // 2 -> magenta (light purple)
-            0x9, // 3 -> light blue
-            0xe, // 4 -> yellow
-            0xa, // 5 -> lime
-            0xc, // 6 -> pink (red)
-            0x8, // 7 -> gray (dark gray)
-            0x7, // 8 -> light gray (gray)
-            0xb, // 9 -> cyan (aqua)
-            0x5, // 10 -> purple (dark purple)
-            0x1, // 11 -> blue (dark blue)
-            0x6, // 12 -> brown (no brown! we re-use gold)
-            0x2, // 13 -> green (dark green)
-            0x4, // 14 -> red (dark red)
-            0x0  // 15 -> black
-    };
     private static final String[] COLOR_KEYS = {"Color", "color"};
     private final EntityType type;
-    private final Map<String,Object> meta;
+    private final Map<String, Object> meta;
     private final int count;
 
     public EntityMatch(EntityType type, Map<String, Object> meta, int count) {
@@ -57,16 +43,29 @@ public class EntityMatch {
         return count;
     }
 
-    public boolean matches(Entity entity) {
-        if (entity != null && entity.getType() == type) {
-            for (String key : meta.keySet()) {
-                if (!matchFieldGetter(entity, key, meta.get(key))) {
-                    return false;
-                }
-            }
-            return true;
+    /**
+     * Try to match the given {@link Entity} to this EntityMatch configuration.
+     * @param entity Entity to match.
+     * @return True if matches, false otherwise.
+     */
+    public boolean matches(@Nullable Entity entity) {
+        if (entity == null || entity.getType() != type) {
+            return false;
         }
-        return false;
+
+        for (String key : meta.keySet()) {
+            if (key.equalsIgnoreCase("color")) {
+                if (entity instanceof Colorable) {
+                    return ((Colorable) entity).getColor() == getColor(meta.get(key));
+                }
+                return true;
+            }
+
+            if (!matchFieldGetter(entity, key, meta.get(key))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean matchFieldGetter(Entity entity, String key, Object value) {
@@ -117,36 +116,87 @@ public class EntityMatch {
 
     public String getDisplayName() {
         StringBuilder sb = new StringBuilder();
-        String name = EntityUtil.getEntityDisplayName(type);
-        String color = getColorCode(meta);
-        sb.append(color);
-        sb.append(name);
-        Map<String,Object> extra = new HashMap<>(meta);
+        Map<String, Object> extra = new HashMap<>(meta);
         for (String key : COLOR_KEYS) {
-            extra.remove(key);
+            if (meta.containsKey(key)) {
+                String color = WordUtils.capitalizeFully(getColor(meta.get(key)).toString().replace("_", " "));
+                sb.append(color).append(" ");
+                extra.remove(key);
+            }
         }
+
+        String name = EntityUtil.getEntityDisplayName(type);
+        sb.append(name);
+
         if (!extra.isEmpty()) {
             sb.append(":").append(gson.toJson(extra));
         }
         return sb.toString();
     }
 
-    private String getColorCode(Map<String, Object> meta) {
-        // TODO: 30/01/2016 - R4zorax: Support more entities?
-        for (String key : COLOR_KEYS) {
-            if (meta.containsKey(key)) {
-                try {
-                    int colorcode = Integer.parseInt("" + meta.get(key));
-                    return  dataValueToFormattingCode(colorcode);
-                } catch (NumberFormatException e) {
-                    // ignore
-                }
-            }
+    /**
+     * Converts the given String to the corresponding {@link DyeColor}.
+     * Defaults to {@link DyeColor#WHITE} on invalid or NULL input.
+     * @param input DyeColor enum value.
+     * @return Corresponding DyeColor, defaults to WHITE on invalid or NULL input.
+     */
+    private @NotNull DyeColor getColor(@Nullable String input) {
+        try {
+            return DyeColor.valueOf(input);
+        } catch (IllegalArgumentException ex) {
+            server.getLogger().warning("Invalid DyeColor value: " + input);
+            server.getLogger().warning("See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/DyeColor.html#enum-constant-summary for valid colors.");
         }
-        return "";
+
+        return DyeColor.WHITE;
     }
 
-    private String dataValueToFormattingCode(int colorcode) {
-        return "\u00a7" + Integer.toHexString(DV_2_COLOR_MAP[colorcode & 0xf]);
+    /**
+     * Converts the given legacy integer value to the corresponsing {@link DyeColor}.
+     * Defaults to {@link DyeColor#WHITE} on invalid or NULL input.
+     * @param input Legacy DyeColor integer value.
+     * @return Corresponding DyeColor, defaults to WHITE on invalid or NULL input.
+     * @deprecated To be used for legacy challenge configs only, use {@link EntityMatch#getColor(String)}.
+     */
+    private @NotNull DyeColor getColor(@Nullable Number input) {
+        if (input == null) {
+            return DyeColor.WHITE;
+        }
+
+        return switch (input.intValue()) {
+            case 0 -> DyeColor.WHITE;
+            case 1 -> DyeColor.ORANGE;
+            case 2 -> DyeColor.MAGENTA;
+            case 3 -> DyeColor.LIGHT_BLUE;
+            case 4 -> DyeColor.YELLOW;
+            case 5 -> DyeColor.LIME;
+            case 6 -> DyeColor.PINK;
+            case 7 -> DyeColor.GRAY;
+            case 8 -> DyeColor.LIGHT_GRAY;
+            case 9 -> DyeColor.CYAN;
+            case 10 -> DyeColor.PURPLE;
+            case 11 -> DyeColor.BLUE;
+            case 12 -> DyeColor.BROWN;
+            case 13 -> DyeColor.GREEN;
+            case 14 -> DyeColor.RED;
+            case 15 -> DyeColor.BLACK;
+            default -> DyeColor.WHITE;
+        };
+    }
+
+    /**
+     * Convenience method to translate a meta String or Number to the corresponding {@link DyeColor}.
+     * See {@link EntityMatch#getColor(String)} for more info.
+     * @param input Meta String or Number.
+     * @return Corresponding DyeColor, defaults to WHITE.
+     */
+    private @NotNull DyeColor getColor(@Nullable Object input) {
+        if (input instanceof String) {
+            return getColor((String) input);
+        } else if (input instanceof Number) {
+            return getColor((Number) input);
+        }
+
+        return DyeColor.WHITE;
     }
 }
