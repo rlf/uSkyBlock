@@ -18,7 +18,7 @@ softdepend:
  - AsyncWorldEdit
  # placeholders
  - MVdWPlaceholderAPI
-api-version: 1.17
+api-version: 1.18
 
 commands:
   challenges:
