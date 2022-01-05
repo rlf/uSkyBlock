@@ -54,7 +54,8 @@ public enum AsyncWorldEditHandler {;
             if (!uSkyBlock.getInstance().getConfig().getBoolean("asyncworldedit.enabled", true)) {
                 return NULL_ADAPTOR;
             }
-            Plugin fawe = getFAWE();
+            //Plugin fawe = getFAWE();
+            Plugin fawe = null; // Disabled b/c 1.18.1 releases
             Plugin awe = getAWE();
             String className;
             if (fawe != null) {
