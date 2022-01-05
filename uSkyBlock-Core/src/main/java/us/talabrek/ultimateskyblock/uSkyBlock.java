@@ -78,7 +78,6 @@ import us.talabrek.ultimateskyblock.island.task.SetBiomeTask;
 import us.talabrek.ultimateskyblock.menu.ConfigMenu;
 import us.talabrek.ultimateskyblock.menu.SkyBlockMenu;
 import us.talabrek.ultimateskyblock.player.IslandPerk;
-import us.talabrek.ultimateskyblock.player.NotificationManager;
 import us.talabrek.ultimateskyblock.player.PerkLogic;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.PlayerLogic;
@@ -165,6 +164,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
     private volatile boolean maintenanceMode = false;
     private BlockLimitLogic blockLimitLogic;
 
+    private SkyUpdateChecker updateChecker;
+
     public uSkyBlock() {
     }
 
@@ -228,10 +229,16 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
                     Bukkit.getConsoleSender().sendMessage(tr("Converting data to UUID, this make take a while!"));
                     getImporter().importUSB(Bukkit.getConsoleSender(), "name2uuid");
                 }
+
                 getServer().dispatchCommand(getServer().getConsoleSender(), "usb flush"); // See uskyblock#4
                 log(Level.INFO, getVersionInfo(false));
             }
         }, getConfig().getLong("init.initDelay", 50L));
+
+        updateChecker = new SkyUpdateChecker(this);
+        // Runs every 4 hours
+        // noinspection deprecation
+        getServer().getScheduler().scheduleAsyncRepeatingTask(this, () -> getUpdateChecker().checkForUpdates(), 0L, 288000L);
 
         metricsManager = new MetricsManager(this);
     }
@@ -998,6 +1005,12 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             }
         }
         msg += pre("\u00a77------------------------------\n");
+
+        if (getConfig().getBoolean("plugin-updates.check", true) && getUpdateChecker().isUpdateAvailable()) {
+            msg += pre("\u00a7bA new update of uSkyBlock is available: \u00a7f{0}\n", getUpdateChecker().getLatestVersion());
+            msg += pre("\u00a7fVisit {0} to download.\n", "https://www.uskyblock.ovh/get");
+        }
+
         return msg;
     }
 
@@ -1057,6 +1070,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
     public HookManager getHookManager() {
         return hookManager;
+    }
+
+    public SkyUpdateChecker getUpdateChecker() {
+        return updateChecker;
     }
 
     public WorldManager getWorldManager() {

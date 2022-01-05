@@ -86,11 +86,17 @@
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>io.papermc:paperlib</include>
                                     <include>net.kyori:*</include>
+                                    <include>org.apache.httpcomponents:httpclient</include>
+                                    <include>org.apache.maven:maven-artifact</include>
                                     <include>org.bstats:*</include>
                                     <include>uSkyBlock:po-utils</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
+                                <relocation>
+                                    <pattern>com.google.code.gson</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.gson</shadedPattern>
+                                </relocation>
                                 <relocation>
                                     <pattern>dk.lockfuglsang.minecraft</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>
@@ -104,12 +110,16 @@
                                     <shadedPattern>us.talabrek.ultimateskyblock.kyori</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>org.bstats</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
+                                    <pattern>org.apache.httpcomponents</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.apache.httpcomponents</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>com.google.code.gson</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.gson</shadedPattern>
+                                    <pattern>org.apache.maven</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.apache.maven</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.metrics</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
@@ -483,6 +493,17 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- Apache HttpComponents -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <scope>compile</scope>
         </dependency>
         <!-- TESTING -->
         <dependency>
