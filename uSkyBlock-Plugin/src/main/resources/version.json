@@ -1,1 +1,1 @@
-{"version":"${project.version}"}
+{"version": "${project.version}", "build": "${env.GITHUB_RUN_NUMBER}", "minecraft-version": "${spigotapi.version}"}
