@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>uSkyBlock</groupId>
+    <groupId>ovh.uskyblock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.12.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>Ultimate SkyBlock</name>
 
     <properties>
@@ -39,6 +39,7 @@
     <modules>
         <module>po-utils</module>
         <module>uSkyBlock-API</module>
+        <module>uSkyBlock-APIv2</module>
         <module>uSkyBlock-Core</module>
         <module>uSkyBlock-Plugin</module>
         <module>uSkyBlock-FAWE</module>
@@ -207,22 +208,27 @@
                 <version>${api.version}</version>
             </dependency>
             <dependency>
-                <groupId>uSkyBlock</groupId>
+                <groupId>ovh.uskyblock</groupId>
+                <artifactId>uSkyBlock-APIv2</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ovh.uskyblock</groupId>
                 <artifactId>uSkyBlock-Core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>uSkyBlock</groupId>
+                <groupId>ovh.uskyblock</groupId>
                 <artifactId>uSkyBlock-FAWE</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>uSkyBlock</groupId>
+                <groupId>ovh.uskyblock</groupId>
                 <artifactId>uSkyBlock-AWE370</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>uSkyBlock</groupId>
+                <groupId>ovh.uskyblock</groupId>
                 <artifactId>po-utils</artifactId>
                 <version>${project.version}</version>
             </dependency>

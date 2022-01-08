@@ -22,6 +22,32 @@ Pre-releases will end in -SNAPSHOT, and is considered **unsafe** for production 
 
 Releases have a clean version number, has been tested, and should be safe for production servers.
 
+# New Maven group/artifactId
+Starting with version 3.0.0-SNAPSHOT, we've changed our Maven groupId's for all submodules except uSkyBlock-API.
+If you're using uSkyBlock-Core or po-utils as dependency in your project, update your
+dependencies to:
+
+```xml
+<dependency>
+    <groupId>ovh.uskyblock</groupId>
+    <artifactId>uSkyBlock-Core</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+We're moving new API features towards APIv2, which is available as:
+
+```xml
+<dependency>
+    <groupId>ovh.uskyblock</groupId>
+    <artifactId>uSkyBlock-APIv2</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+Feel free to use any of the new APIv2 functions on servers running uSkyBlock 3.0.0+. The old API-methods will
+be deprecated and removed in the upcoming plugin releases.
+
 ### Bukkit/Spigot 1.7.9/10 Releases
 
 We provide pre-compiled versions (no support) [here](http://rlf.github.io/uSkyBlock):

@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>uSkyBlock</artifactId>
-        <groupId>uSkyBlock</groupId>
-        <version>2.12.0-SNAPSHOT</version>
+        <groupId>ovh.uskyblock</groupId>
+        <version>3.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uSkyBlock-AWE370</artifactId>
@@ -24,7 +24,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>uSkyBlock</groupId>
+            <groupId>ovh.uskyblock</groupId>
             <artifactId>uSkyBlock-Core</artifactId>
         </dependency>
         <dependency>
