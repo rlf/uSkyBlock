@@ -17,6 +17,10 @@ $HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-API/target/mvn-repo/ \
 travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
 
 rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+$HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-APIv2/target/mvn-repo/ \
+travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
+
+rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
 $HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-AWE370/target/mvn-repo/ \
 travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
 
@@ -41,6 +45,10 @@ travis@travis.internetpolice.eu:WWW-USB/javadocs/release/po-utils/
 rsync -r --delete --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
 $HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-API/target/site/apidocs/ \
 travis@travis.internetpolice.eu:WWW-USB/javadocs/release/uSkyBlock-API/
+
+rsync -r --delete --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+$HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-APIv2/target/site/apidocs/ \
+travis@travis.internetpolice.eu:WWW-USB/javadocs/release/uSkyBlock-APIv2/
 
 rsync -r --delete --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
 $HOME/work/uSkyBlock/uSkyBlock/uSkyBlock-Core/target/site/apidocs/ \
