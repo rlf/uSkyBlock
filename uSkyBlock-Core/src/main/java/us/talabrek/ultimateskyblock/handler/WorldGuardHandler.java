@@ -214,11 +214,11 @@ public class WorldGuardHandler {
     }
 
     public static BlockVector3 getProtectionVectorLeft(final Location island) {
-        return BlockVector3.at(island.getX() + Settings.island_radius - 1, 255.0, island.getZ() + Settings.island_radius - 1);
+        return BlockVector3.at(island.getX() + Settings.island_radius - 1, 319.0, island.getZ() + Settings.island_radius - 1);
     }
 
     public static BlockVector3 getProtectionVectorRight(final Location island) {
-        return BlockVector3.at(island.getX() - Settings.island_radius, 0.0, island.getZ() - Settings.island_radius);
+        return BlockVector3.at(island.getX() - Settings.island_radius, -64.0, island.getZ() - Settings.island_radius);
     }
 
     public static String getIslandNameAt(Location location) {
