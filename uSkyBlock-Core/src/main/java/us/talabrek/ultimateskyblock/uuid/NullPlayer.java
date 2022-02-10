@@ -6,6 +6,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -29,6 +30,12 @@ public class NullPlayer implements OfflinePlayer {
     @Override
     public UUID getUniqueId() {
         return PlayerDB.UNKNOWN_PLAYER_UUID;
+    }
+
+    @NotNull
+    @Override
+    public PlayerProfile getPlayerProfile() {
+        return null;
     }
 
     @Override
