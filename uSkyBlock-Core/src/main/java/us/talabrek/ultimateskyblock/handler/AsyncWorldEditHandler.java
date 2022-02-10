@@ -128,7 +128,7 @@ public enum AsyncWorldEditHandler {;
                 @Override
                 public void run() {
                     try {
-                        final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
+                        final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), (int) region.getVolume());
                         editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
                         editSession.setSideEffectApplier(SideEffectSet.defaults());
                         editSession.getWorld().regenerate(region, editSession);

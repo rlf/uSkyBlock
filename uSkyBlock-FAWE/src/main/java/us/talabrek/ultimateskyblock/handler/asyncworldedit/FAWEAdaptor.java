@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
-import com.fastasyncworldedit.core.util.EditSessionBuilder;
+import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
@@ -10,7 +10,6 @@ import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.World;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -72,7 +71,7 @@ public class FAWEAdaptor implements AWEAdaptor {
     }
 
     public EditSession createEditSession(World bukkitWorld, int maxBlocks) {
-        return new EditSessionBuilder(bukkitWorld).fastmode(true).build();
+        return WorldEdit.getInstance().newEditSessionBuilder().world(bukkitWorld).fastMode(true).build();
     }
 
     @Override

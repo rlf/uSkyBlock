@@ -74,7 +74,7 @@ public class WorldEditClear extends IncrementalRunnable {
         while (!regions.isEmpty()) {
             final Region region = regions.remove(0);
             final EditSession editSession = WorldEditHandler.createEditSession(
-                    new BukkitWorld(world), region.getArea() * 255);
+                    new BukkitWorld(world), (int) region.getVolume());
             editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
             editSession.setSideEffectApplier(SideEffectSet.defaults());
             try {

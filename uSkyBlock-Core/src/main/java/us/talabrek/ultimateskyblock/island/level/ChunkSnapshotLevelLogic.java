@@ -65,8 +65,11 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
         final BlockCountCollection counts = new BlockCountCollection(scoreMap);
         int minX = region.getMinimumPoint().getBlockX();
         int maxX = region.getMaximumPoint().getBlockX();
+        int minY = region.getMinimumPoint().getBlockY();
+        int maxY = region.getMaximumPoint().getBlockY();
         int minZ = region.getMinimumPoint().getBlockZ();
         int maxZ = region.getMaximumPoint().getBlockZ();
+
         for (int x = minX; x <= maxX; ++x) {
             for (int z = minZ; z <= maxZ; ++z) {
                 ChunkSnapshot chunk = getChunkSnapshot(x >> 4, z >> 4, snapshotsOverworld);
@@ -77,7 +80,7 @@ public class ChunkSnapshotLevelLogic extends CommonLevelLogic {
                 }
                 int cx = (x & 0xf);
                 int cz = (z & 0xf);
-                for (int y = 0; y <= 255; y++) {
+                for (int y = minY; y < maxY; y++) {
                     Material blockType = chunk.getBlockType(cx, y, cz);
                     if (blockType == Material.AIR) {
                         continue;

@@ -111,7 +111,7 @@ public class AWE370Adaptor implements AWEAdaptor {
     public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
         final IAsyncWorldEdit awe = getAWE();
         BukkitWorld bukkitWorld = new BukkitWorld(origin.getWorld());
-        int maxBlocks = (255 * Settings.island_protectionRange * Settings.island_protectionRange);
+        int maxBlocks = ((bukkitWorld.getMaxY() - bukkitWorld.getMinY()) * Settings.island_protectionRange * Settings.island_protectionRange);
         IPlayerManager pm = awe.getPlayerManager();
         final IPlayerEntry playerEntry = pm.getUnknownPlayer();
         IThreadSafeEditSession tsSession = (IThreadSafeEditSession) createEditSession(bukkitWorld, maxBlocks);
