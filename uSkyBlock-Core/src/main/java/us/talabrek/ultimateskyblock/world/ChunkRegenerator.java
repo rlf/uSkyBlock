@@ -1,6 +1,6 @@
 package us.talabrek.ultimateskyblock.world;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.Biome;

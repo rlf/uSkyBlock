@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.challenge;
 
 import com.google.gson.Gson;
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.text.WordUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;

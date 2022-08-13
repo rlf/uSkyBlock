@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.UUID;
@@ -166,6 +167,12 @@ public class NullPlayer implements OfflinePlayer {
     @Override
     public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue) {
 
+    }
+
+    @Nullable
+    @Override
+    public Location getLastDeathLocation() {
+        return null;
     }
 
     @Override

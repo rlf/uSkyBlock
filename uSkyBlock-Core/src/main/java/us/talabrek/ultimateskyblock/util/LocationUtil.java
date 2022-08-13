@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.util;
 
 import dk.lockfuglsang.minecraft.po.I18nUtil;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Location;

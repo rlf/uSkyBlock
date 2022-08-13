@@ -8,19 +8,19 @@
     <name>Ultimate SkyBlock</name>
 
     <properties>
-        <adventure-api.version>4.9.3</adventure-api.version>
-        <adventure-bukkit.version>4.0.1</adventure-bukkit.version>
+        <adventure-api.version>4.11.0</adventure-api.version>
+        <adventure-bukkit.version>4.1.2</adventure-bukkit.version>
         <apache-http.version>4.5.13</apache-http.version>
         <gson.version>2.8.9</gson.version>
         <jbannotations.version>23.0.0</jbannotations.version>
-        <maven-artifact.version>3.8.4</maven-artifact.version>
+        <maven-artifact.version>3.8.6</maven-artifact.version>
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.25-SNAPSHOT</bukkit-utils.version>
         <paperlib.version>1.0.7</paperlib.version>
-        <spigotapi.version>1.18.1-R0.1-SNAPSHOT</spigotapi.version>
+        <spigotapi.version>1.19-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
-        <worldedit.version>7.2.8</worldedit.version>
-        <worldguard.version>7.0.6</worldguard.version>
+        <worldedit.version>7.2.12</worldedit.version>
+        <worldguard.version>7.0.8-SNAPSHOT</worldguard.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <finalName>${project.artifactId}</finalName>
@@ -32,7 +32,7 @@
         <!-- Testing -->
         <hamcrest.version>2.2</hamcrest.version>
         <junit.version>4.13.2</junit.version>
-        <junit-vintage-engine.version>5.8.2</junit-vintage-engine.version>
+        <junit-vintage-engine.version>5.9.0</junit-vintage-engine.version>
         <mockito.version>3.12.4</mockito.version>
     </properties>
 
@@ -138,7 +138,8 @@
         </repository>
         <repository> <!-- WorldEdit/WorldGuard -->
             <id>sk89q-repo</id>
-            <url>https://maven.sk89q.com/repo/</url>
+            <!-- <url>https://maven.sk89q.com/repo/</url> -->
+            <url>https://maven.enginehub.org/repo/</url>
         </repository>
         <repository> <!-- Adventure development builds -->
             <id>sonatype-oss-snapshots</id>
