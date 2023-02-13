@@ -174,15 +174,15 @@ permissions:
     children:
       usb.biome.deep_ocean: true
       usb.biome.desert: true
-      usb.biome.extreme_hills: true
+      usb.biome.windswept_hills: true
       usb.biome.forest: true
-      usb.biome.hell: true
+      usb.biome.nether_wastes: true
       usb.biome.jungle: true
-      usb.biome.mushroom: true
+      usb.biome.mushroom_fields: true
       usb.biome.ocean: false # default: true
       usb.biome.plains: true
-      usb.biome.sky: true
-      usb.biome.swampland: true
+      usb.biome.the_end: true
+      usb.biome.swamp: true
       usb.biome.taiga: true
 
   usb.exempt.*:
@@ -390,25 +390,25 @@ permissions:
     default: false
     description: 'Let the player change their islands biome to DESERT'
 
-  usb.biome.extreme_hills:
+  usb.biome.windswept_hills:
     default: false
-    description: 'Let the player change their islands biome to EXTREME_HILLS'
+    description: 'Let the player change their islands biome to WINDSWEPT_HILLS'
 
   usb.biome.forest:
     default: false
     description: 'Let the player change their islands biome to FOREST'
 
-  usb.biome.hell:
+  usb.biome.nether_wastes:
     default: false
-    description: 'Let the player change their islands biome to HELL'
+    description: 'Let the player change their islands biome to NETHER_WASTES'
 
   usb.biome.jungle:
     default: false
     description: 'Let the player change their islands biome to JUNGLE'
 
-  usb.biome.mushroom:
+  usb.biome.mushroom_fields:
     default: false
-    description: 'Let the player change their islands biome to MUSHROOM'
+    description: 'Let the player change their islands biome to MUSHROOM_FIELDS'
 
   usb.biome.ocean:
     default: true
@@ -418,13 +418,13 @@ permissions:
     default: false
     description: 'Let the player change their islands biome to PLAINS'
 
-  usb.biome.sky:
+  usb.biome.the_end:
     default: false
-    description: 'Let the player change their islands biome to SKY'
+    description: 'Let the player change their islands biome to THE_END'
 
-  usb.biome.swampland:
+  usb.biome.swamp:
     default: false
-    description: 'Let the player change their islands biome to SWAMPLAND'
+    description: 'Let the player change their islands biome to SWAMP'
 
   usb.biome.taiga:
     default: false
