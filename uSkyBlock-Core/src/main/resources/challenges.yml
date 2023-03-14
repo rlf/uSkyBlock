@@ -1055,7 +1055,7 @@ ranks:
           items:
           - DIAMOND:1
           - EMERALD:1
-          permission: usb.biome.swampland
+          permission: usb.biome.swamp
           currency: 70
           xp: 70
         repeatReward:
