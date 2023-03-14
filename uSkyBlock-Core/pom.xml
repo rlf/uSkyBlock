@@ -88,6 +88,7 @@
                                     <include>net.kyori:*</include>
                                     <include>org.apache.httpcomponents:httpclient</include>
                                     <include>org.apache.maven:maven-artifact</include>
+                                    <include>org.apache.commons:*</include>
                                     <include>org.bstats:*</include>
                                     <include>ovh.uskyblock:po-utils</include>
                                 </includes>
@@ -108,6 +109,10 @@
                                 <relocation>
                                     <pattern>net.kyori</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.kyori</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.commons</pattern>
+                                    <shadedPattern>us.talabrek.ultimateskyblock.apache.commons</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.apache.httpcomponents</pattern>
@@ -519,7 +524,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.9</version>
+            <version>1.10.0</version>
             <scope>compile</scope>
         </dependency>
         <!-- Apache HttpComponents -->
