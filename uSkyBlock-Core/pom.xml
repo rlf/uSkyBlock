@@ -417,7 +417,7 @@
         <dependency>
             <groupId>com.onarandombox.multiversecore</groupId>
             <artifactId>Multiverse-Core</artifactId>
-            <version>4.1.0</version>
+            <version>4.3.1</version>
             <scope>provided</scope>
             <optional>true</optional>
             <exclusions>
@@ -430,7 +430,7 @@
         <dependency>
             <groupId>com.onarandombox.multiverseinventories</groupId>
             <artifactId>Multiverse-Inventories</artifactId>
-            <version>3.0.0</version>
+            <version>4.2.3</version>
             <scope>provided</scope>
             <optional>true</optional>
             <exclusions>
@@ -470,7 +470,7 @@
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
             <scope>compile</scope>
         </dependency>
         <!-- Guava -->
