@@ -51,9 +51,10 @@ public class InviteHandler implements Listener {
         }
         if (oPi.getHasIsland()) {
             us.talabrek.ultimateskyblock.api.IslandInfo oIsland = plugin.getIslandInfo(oPi);
-            if (oIsland.isParty() && oIsland.isLeader(otherPlayer)) {
-                player.sendMessage(tr("\u00a74That player is already leader on another island."));
-                otherPlayer.sendMessage(tr("\u00a7e{0}\u00a7e tried to invite you, but you are already in a party.", player.getDisplayName()));
+            if (oIsland.isParty() && !oIsland.isLeader(otherPlayer)) {
+                player.sendMessage(tr("§4That player is already member on another island. "));
+                otherPlayer.sendMessage(tr("§e{0}§e tried to invite you, but you are already in a party." +
+                    "To leave your current party, use: /island leave.", player.getDisplayName()));
                 return;
             }
         }
