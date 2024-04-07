@@ -96,7 +96,7 @@ public class SkyBlockMenu {
                     tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
             ),
             new BiomeMenuItem(new ItemStack(Material.LILY_PAD, 1),
-                    "swampland", tr("Swampland"),
+                    "swamp", tr("Swampland"),
                     tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
             ),
             new BiomeMenuItem(new ItemStack(Material.SNOW, 1),
@@ -104,15 +104,15 @@ public class SkyBlockMenu {
                     tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
             ),
             new BiomeMenuItem(new ItemStack(Material.RED_MUSHROOM, 1),
-                    "mushroom", tr("Mushroom"),
+                    "mushroom_fields", tr("Mushroom"),
                     tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
             ),
             new BiomeMenuItem(new ItemStack(Material.NETHER_BRICK, 1),
-                    "hell", tr("Hell"),
+                    "nether_wastes", tr("Hell"),
                     tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
             ),
             new BiomeMenuItem(new ItemStack(Material.ENDER_EYE, 1),
-                    "sky", tr("Sky"),
+                    "the_end", tr("Sky"),
                     tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
             ),
             new BiomeMenuItem(new ItemStack(Material.TALL_GRASS, 1),
@@ -120,7 +120,7 @@ public class SkyBlockMenu {
                     tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
             ),
             new BiomeMenuItem(new ItemStack(Material.EMERALD_ORE, 1),
-                    "extreme_hills", tr("Extreme Hills"),
+                    "windswept_hills", tr("Extreme Hills"),
                     tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
             ),
             new BiomeMenuItem(new ItemStack(Material.ROSE_BUSH, 1),
@@ -136,7 +136,7 @@ public class SkyBlockMenu {
                             "spawn normally.")
             ),
             new BiomeMenuItem(new ItemStack(Material.PACKED_ICE, 1),
-                    "ice_plains", tr("Ice Plains"),
+                    "snowy_plains", tr("Ice Plains"),
                     tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
             )
     );
@@ -552,7 +552,7 @@ public class SkyBlockMenu {
         }
 
         lores.clear();
-        menuItem = new ItemStack(Material.GRASS, 1);
+        menuItem = new ItemStack(Material.SHORT_GRASS, 1);
         meta = menuItem.getItemMeta();
         meta.setDisplayName(tr("\u00a7a\u00a7lReturn to Spawn"));
         addLore(lores, "\u00a7f", tr("Teleport to the spawn area."));
@@ -698,7 +698,7 @@ public class SkyBlockMenu {
         menu.addItem(menuItem);
         lores.clear();
 
-        menuItem = new ItemStack(Material.GRASS, 1);
+        menuItem = new ItemStack(Material.SHORT_GRASS, 1);
         meta4 = menuItem.getItemMeta();
         meta4.setDisplayName(tr("\u00a7a\u00a7lReturn to Spawn"));
         addLore(lores, "\u00a7f", tr("Teleport to the spawn area."));
@@ -866,7 +866,7 @@ public class SkyBlockMenu {
         } else if (currentItem.getType() == Material.RED_BED) {
             p.performCommand("island sethome");
             p.performCommand("island");
-        } else if (currentItem.getType() == Material.GRASS) {
+        } else if (currentItem.getType() == Material.SHORT_GRASS) {
             p.performCommand("island spawn");
         } else if (currentItem.getType() == Material.HOPPER) {
             p.performCommand("island setwarp");

@@ -14,7 +14,7 @@ public class BlockUtilTest {
         Mockito.when(fakeBlock.getType()).thenReturn(Material.DIRT);
         Assert.assertFalse(BlockUtil.isBreathable(fakeBlock));
 
-        Mockito.when(fakeBlock.getType()).thenReturn(Material.GRASS);
+        Mockito.when(fakeBlock.getType()).thenReturn(Material.SHORT_GRASS);
         Assert.assertTrue(BlockUtil.isBreathable(fakeBlock));
 
         Mockito.when(fakeBlock.getType()).thenReturn(Material.WATER);

@@ -1,5 +1,6 @@
 package us.talabrek.ultimateskyblock.uuid;
 
+import org.bukkit.BanEntry;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -10,6 +11,9 @@ import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -44,6 +48,24 @@ public class NullPlayer implements OfflinePlayer {
         return false;
     }
 
+    @Nullable
+    @Override
+    public BanEntry<PlayerProfile> ban(@Nullable String s, @Nullable Date date, @Nullable String s1) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public BanEntry<PlayerProfile> ban(@Nullable String s, @Nullable Instant instant, @Nullable String s1) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public BanEntry<PlayerProfile> ban(@Nullable String s, @Nullable Duration duration, @Nullable String s1) {
+        return null;
+    }
+
     @Override
     public boolean isWhitelisted() {
         return true;
@@ -76,6 +98,12 @@ public class NullPlayer implements OfflinePlayer {
 
     @Override
     public Location getBedSpawnLocation() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Location getRespawnLocation() {
         return null;
     }
 
@@ -175,6 +203,12 @@ public class NullPlayer implements OfflinePlayer {
         return null;
     }
 
+    @Nullable
+    @Override
+    public Location getLocation() {
+        return null;
+    }
+
     @Override
     public Map<String, Object> serialize() {
         return null;
@@ -189,4 +223,6 @@ public class NullPlayer implements OfflinePlayer {
     public void setOp(boolean b) {
 
     }
+
+
 }
