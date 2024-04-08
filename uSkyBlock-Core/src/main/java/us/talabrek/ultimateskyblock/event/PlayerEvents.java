@@ -3,6 +3,7 @@ package us.talabrek.ultimateskyblock.event;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
@@ -35,6 +36,7 @@ import us.talabrek.ultimateskyblock.player.PatienceTester;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
+import us.talabrek.ultimateskyblock.world.WorldManager;
 
 import java.util.*;
 
@@ -254,6 +256,12 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
+        WorldManager wm = plugin.getWorldManager();
+        World pWorld = event.getPlayer().getWorld();
+        if (!wm.isSkyAssociatedWorld(pWorld)) {
+            return;
+        }
+
         if (Settings.extras_respawnAtIsland) {
             PlayerInfo playerInfo = plugin.getPlayerInfo(event.getPlayer());
             if (playerInfo.getHasIsland()) {
@@ -268,7 +276,7 @@ public class PlayerEvents implements Listener {
                 }
             }
         }
-        if (!Settings.extras_sendToSpawn && plugin.getWorldManager().isSkyWorld(event.getPlayer().getWorld())) {
+        if (!Settings.extras_sendToSpawn && wm.isSkyWorld(pWorld)) {
             event.setRespawnLocation(plugin.getWorldManager().getWorld().getSpawnLocation());
         }
     }
