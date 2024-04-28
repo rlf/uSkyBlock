@@ -82,22 +82,13 @@
                             <minimizeJar>true</minimizeJar>
                             <artifactSet>
                                 <includes>
-                                    <include>com.google.code.gson:gson</include>
                                     <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
                                     <include>io.papermc:paperlib</include>
-                                    <include>net.kyori:*</include>
-                                    <include>org.apache.httpcomponents:httpclient</include>
-                                    <include>org.apache.maven:maven-artifact</include>
-                                    <include>org.apache.commons:*</include>
                                     <include>org.bstats:*</include>
                                     <include>ovh.uskyblock:po-utils</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
-                                <relocation>
-                                    <pattern>com.google.code.gson</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.gson</shadedPattern>
-                                </relocation>
                                 <relocation>
                                     <pattern>dk.lockfuglsang.minecraft</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.utils</shadedPattern>
@@ -105,22 +96,6 @@
                                 <relocation>
                                     <pattern>io.papermc.lib</pattern>
                                     <shadedPattern>us.talabrek.ultimateskyblock.paperlib</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>net.kyori</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.kyori</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.apache.commons</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.apache.commons</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.apache.httpcomponents</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.apache.httpcomponents</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.apache.maven</pattern>
-                                    <shadedPattern>us.talabrek.ultimateskyblock.apache.maven</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>org.bstats</pattern>
@@ -474,18 +449,17 @@
             <scope>compile</scope>
         </dependency>
         <!-- Guava -->
-        <!-- bundled with Minecraft, should be kept in sync -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>31.0.1-jre</version>
+            <version>${guava.version}</version>
             <scope>provided</scope>
         </dependency>
         <!-- Google Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>be.maximvdw</groupId>
@@ -503,12 +477,12 @@
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-api</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-platform-bukkit</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <!-- ANNOTATIONS -->
         <dependency>
@@ -518,25 +492,25 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-            <scope>compile</scope>
+            <version>${apache-commons.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.10.0</version>
-            <scope>compile</scope>
+            <version>${apache-commons-text.version}</version>
+            <scope>provided</scope>
         </dependency>
         <!-- Apache HttpComponents -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-artifact</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <!-- TESTING -->
         <dependency>

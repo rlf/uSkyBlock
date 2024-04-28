@@ -19,6 +19,15 @@ softdepend:
  # placeholders
  - MVdWPlaceholderAPI
 api-version: 1.19
+libraries:
+  - com.google.code.gson:gson:${gson.version}
+  - com.google.guava:guava:${guava.version}
+  - net.kyori:adventure-api:${adventure-api.version}
+  - net.kyori:adventure-platform-bukkit:${adventure-bukkit.version}
+  - org.apache.commons:commons-lang3:${apache-commons.version}
+  - org.apache.commons:commons-text:${apache-commons-text.version}
+  - org.apache.httpcomponents:httpclient:${apache-http.version}
+  - org.apache.maven:maven-artifact:${maven-artifact.version}
 
 commands:
   challenges:
