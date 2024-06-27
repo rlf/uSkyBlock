@@ -18,7 +18,6 @@
         <jbannotations.version>23.0.0</jbannotations.version>
         <maven-artifact.version>3.8.6</maven-artifact.version>
         <api.version>${project.version}</api.version>
-        <bukkit-utils.version>1.25-SNAPSHOT</bukkit-utils.version>
         <paperlib.version>1.0.8</paperlib.version>
         <spigotapi.version>1.20.4-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
@@ -41,6 +40,7 @@
 
     <modules>
         <module>po-utils</module>
+        <module>bukkit-utils</module>
         <module>uSkyBlock-API</module>
         <module>uSkyBlock-APIv2</module>
         <module>uSkyBlock-Core</module>
@@ -177,28 +177,6 @@
     </pluginRepositories>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>dk.lockfuglsang.minecraft</groupId>
-                <artifactId>bukkit-utils</artifactId>
-                <version>${bukkit-utils.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>dk.lockfuglsang.minecraft</groupId>
-                        <artifactId>po-utils</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.bukkit</groupId>
-                        <artifactId>bukkit</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>dk.lockfuglsang.minecraft</groupId>
-                <artifactId>bukkit-utils</artifactId>
-                <version>${bukkit-utils.version}</version>
-                <scope>test</scope>
-                <classifier>tests</classifier>
-            </dependency>
             <dependency>
                 <groupId>net.milkbowl.vault</groupId>
                 <artifactId>VaultAPI</artifactId>

@@ -1,0 +1,48 @@
+name: Maven build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_and_test:
+    if: github.repository_owner == 'uskyblock'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: JDK 16
+        uses: actions/setup-java@v1
+        with:
+          java-version: '16'
+          distribution: 'adopt'
+      - name: Cache Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build with Maven
+        run: mvn -U clean deploy
+
+      # Deploy steps when pushed to master
+      - name: Install SSH key
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOST }}
+      - name: Rsync deploy mvn repo
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        run: |
+          rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+          target/mvn-repo/ \
+          travis@travis.internetpolice.eu:WWW-USB/maven/uskyblock/
+      - name: Rsync deploy javadocs
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        run: |
+          rsync -r --quiet -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+          target/site/apidocs \
+          travis@travis.internetpolice.eu:WWW-USB/javadocs/dependencies/bukkit-utils/

@@ -82,7 +82,7 @@
                             <minimizeJar>true</minimizeJar>
                             <artifactSet>
                                 <includes>
-                                    <include>dk.lockfuglsang.minecraft:bukkit-utils</include>
+                                    <include>ovh.uskyblock:bukkit-utils</include>
                                     <include>io.papermc:paperlib</include>
                                     <include>org.bstats:*</include>
                                     <include>ovh.uskyblock:po-utils</include>
@@ -341,14 +341,16 @@
 
     <dependencies>
         <dependency>
-            <groupId>dk.lockfuglsang.minecraft</groupId>
+            <groupId>ovh.uskyblock</groupId>
             <artifactId>bukkit-utils</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>dk.lockfuglsang.minecraft</groupId>
+         <dependency>
+            <groupId>ovh.uskyblock</groupId>
             <artifactId>bukkit-utils</artifactId>
-            <scope>test</scope>
-            <classifier>tests</classifier>
+            <version>3.1.0-SNAPSHOT</version>
+             <type>test-jar</type>
+             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ovh.uskyblock</groupId>
