@@ -1,7 +1,8 @@
 package us.talabrek.ultimateskyblock.menu;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class ConfigMenu {
 
-    private final YmlConfiguration menuConfig;
+    private final FileConfiguration menuConfig;
     private final uSkyBlock plugin;
     private final MenuItemFactory factory;
     private final List<EditMenu> editMenus = new ArrayList<>();
@@ -22,7 +23,7 @@ public class ConfigMenu {
 
     public ConfigMenu(uSkyBlock plugin) {
         this.plugin = plugin;
-        menuConfig = new YmlConfiguration();
+        menuConfig = new YamlConfiguration();
         FileUtil.readConfig(menuConfig, getClass().getClassLoader().getResourceAsStream("configmenu.yml"));
         factory = new MenuItemFactory();
         mainMenu = new MainConfigMenu(plugin, menuConfig, factory, editMenus);

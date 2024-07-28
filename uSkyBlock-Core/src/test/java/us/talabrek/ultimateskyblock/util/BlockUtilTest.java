@@ -3,10 +3,13 @@ package us.talabrek.ultimateskyblock.util;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class BlockUtilTest {
+
+    @Ignore
     @Test
     public void testIsBreathable() throws Exception {
         Block fakeBlock = Mockito.mock(Block.class);

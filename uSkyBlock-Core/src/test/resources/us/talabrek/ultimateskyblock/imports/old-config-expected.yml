@@ -429,7 +429,7 @@ nether:
     blaze: 0.2
 tool-menu:
   enabled: true
-  tool: OAK_SAPLING
+  tool: oak_sapling
   commands:
     CHEST: island
     CRAFTING_TABLE: challenges

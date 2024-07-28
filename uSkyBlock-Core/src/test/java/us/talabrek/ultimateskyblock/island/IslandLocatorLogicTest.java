@@ -1,8 +1,9 @@
 package us.talabrek.ultimateskyblock.island;
 
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -94,7 +95,7 @@ public class IslandLocatorLogicTest {
 
     private uSkyBlock createPluginMock() {
         uSkyBlock plugin = mock(uSkyBlock.class);
-        YmlConfiguration config = new YmlConfiguration();
+        FileConfiguration config = new YamlConfiguration();
         when(plugin.getConfig()).thenReturn(config);
         OrphanLogic orphanLogic = mock(OrphanLogic.class);
         when(plugin.getOrphanLogic()).thenReturn(orphanLogic);

@@ -8,6 +8,7 @@ import us.talabrek.ultimateskyblock.handler.WorldEditHandler;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ public class Settings {
     public static boolean island_removeCreaturesByTeleport;
     public static int island_protectionRange;
     public static int island_radius;
-    public static ItemStack[] island_chestItems;
+    private static List<ItemStack> island_chestItems;
     public static boolean island_addExtraItems;
     public static String[] island_extraPermissions;
     public static boolean island_allowIslandLock;
@@ -119,9 +120,9 @@ public class Settings {
             changed = true;
         }
         general_spawnSize = config.getInt("options.general.spawnSize", 50);
-        island_chestItems = ItemStackUtil.createItemArray(ItemStackUtil.createItemList(
+        island_chestItems = ItemStackUtil.createItemList(
                 config.getStringList("options.island.chestItems")
-        ));
+        );
 
         island_schematicName = config.getString("options.island.schematicName");
         if (island_schematicName == null || "yourschematicname".equals(island_schematicName) || "uSkyBlockDefault".equals(island_schematicName)) {
@@ -162,4 +163,7 @@ public class Settings {
         return changed;
     }
 
+    public static List<ItemStack> getIslandChestItems() {
+        return ItemStackUtil.clone(island_chestItems);
+    }
 }

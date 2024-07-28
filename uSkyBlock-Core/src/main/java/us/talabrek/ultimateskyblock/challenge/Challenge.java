@@ -1,19 +1,19 @@
 package us.talabrek.ultimateskyblock.challenge;
 
-import dk.lockfuglsang.minecraft.nbt.NBTUtil;
+import dk.lockfuglsang.minecraft.util.FormatUtil;
+import dk.lockfuglsang.minecraft.util.ItemRequirement;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.FormatUtil;
-import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 import static dk.lockfuglsang.minecraft.util.FormatUtil.*;
@@ -22,7 +22,6 @@ import static dk.lockfuglsang.minecraft.util.FormatUtil.*;
  * The data-object for a challenge
  */
 public class Challenge {
-    public static final Pattern REQ_PATTERN = Pattern.compile("(?<itemstack>(?<type>[0-9A-Z_]+)(:(?<subtype>[0-9]+))?(?<meta>\\{.*\\})?):(?<amount>[0-9]+)(;(?<op>[+\\-*\\^])(?<inc>[0-9]+))?");
     public static final int MAX_DETAILS = 11;
     public static final int MAX_LINE = 30;
 
@@ -30,9 +29,9 @@ public class Challenge {
         PLAYER, ISLAND, ISLAND_LEVEL;
 
         static Type from(String s) {
-            if (s == null || s.trim().isEmpty() || s.trim().toLowerCase().equals("onplayer")) {
+            if (s == null || s.trim().isEmpty() || s.trim().equalsIgnoreCase("onplayer")) {
                 return PLAYER;
-            } else if (s != null && s.equalsIgnoreCase("islandlevel")) {
+            } else if (s.equalsIgnoreCase("islandlevel")) {
                 return ISLAND_LEVEL;
             }
             return ISLAND;
@@ -43,10 +42,10 @@ public class Challenge {
     private final String description;
     private final String displayName;
     private final Type type;
-    private final List<String> requiredItems;
+    private final List<ItemRequirement> requiredItems;
     private final List<EntityMatch> requiredEntities;
     private final List<String> requiredChallenges;
-    private double requiredLevel;
+    private final double requiredLevel;
     private final Rank rank;
     private final int resetInHours;
     private final ItemStack displayItem;
@@ -59,10 +58,10 @@ public class Challenge {
     private final Reward repeatReward;
     private final int repeatLimit;
 
-    public Challenge(String name, String displayName, String description, Type type, List<String> requiredItems,
-                     List<EntityMatch> requiredEntities, List<String> requiredChallenges, double requiredLevel, Rank rank, int resetInHours,
-                     ItemStack displayItem, String tool, ItemStack lockedItem, int offset, boolean takeItems,
-                     int radius, Reward reward, Reward repeatReward, int repeatLimit) {
+    public Challenge(String name, String displayName, String description, Type type, List<ItemRequirement> requiredItems,
+                     List<EntityMatch> requiredEntities, List<String> requiredChallenges, double requiredLevel, Rank rank,
+                     int resetInHours, ItemStack displayItem, String tool, ItemStack lockedItem, int offset,
+                     boolean takeItems, int radius, Reward reward, Reward repeatReward, int repeatLimit) {
         this.name = name;
         this.displayName = displayName;
         this.type = type;
@@ -112,29 +111,12 @@ public class Challenge {
         return requiredLevel;
     }
 
-    public List<ItemStack> getRequiredItems(int timesCompleted) {
-        List<ItemStack> items = new ArrayList<>();
-        for (String item : requiredItems) {
-            if (item == null || item.trim().isEmpty()) {
-                continue; // Just skip it
-            }
-            Matcher m = REQ_PATTERN.matcher(item);
-            if (m.matches()) {
-                int amount = Integer.parseInt(m.group("amount"), 10);
-                char op = m.group("op") != null ? m.group("op").charAt(0) : 0;
-                int inc = m.group("inc") != null ? Integer.parseInt(m.group("inc"), 10) : 0;
-                amount = ChallengeLogic.calcAmount(amount, op, inc, timesCompleted);
-                ItemStack mat = ItemStackUtil.createItemStack(m.group("itemstack"));
-                ItemMeta meta = mat.getItemMeta();
-                mat.setItemMeta(meta);
-                mat = NBTUtil.addNBTTag(mat, m.group("meta"));
-                mat.setAmount(amount);
-                items.add(mat);
-            } else if (!item.matches("[0-9]+") && type != Type.ISLAND_LEVEL) {
-                uSkyBlock.getInstance().getLogger().log(Level.INFO, "Malformed challenge " + name + ", item: " + item + " is not a valid required item");
-            }
-        }
-        return items;
+    @NotNull
+    public Map<ItemStack, Integer> getRequiredItems(int timesCompleted) {
+        return this.requiredItems.stream().collect(Collectors.toUnmodifiableMap(
+            item -> item.type().clone(),
+            item -> item.amountForRepetitions(timesCompleted)
+        ));
     }
 
     public List<EntityMatch> getRequiredEntities() {
@@ -157,8 +139,7 @@ public class Challenge {
         int timesCompleted = completion.getTimesCompletedInCooldown();
         ItemStack currentChallengeItem = getDisplayItem();
         ItemMeta meta = currentChallengeItem.getItemMeta();
-        List<String> lores = new ArrayList<>();
-        lores.addAll(prefix(wordWrap(getDescription(), MAX_LINE), "\u00a77"));
+        List<String> lores = new ArrayList<>(prefix(wordWrap(getDescription(), MAX_LINE), "\u00a77"));
         Reward reward = getReward();
         if (completion.getTimesCompleted() > 0 && isRepeatable()) {
             currentChallengeItem.setAmount(completion.getTimesCompleted() < currentChallengeItem.getMaxStackSize() ? completion.getTimesCompleted() : currentChallengeItem.getMaxStackSize());
@@ -175,7 +156,7 @@ public class Challenge {
                         final int hours = (int) (cooldown / ChallengeLogic.MS_HOUR);
                         lores.add(tr("\u00a74Requirements will reset in {0} hours.", hours));
                     } else if (cooldown >= 0) {
-                        final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
+                        final int minutes = Math.round((float) cooldown / ChallengeLogic.MS_MIN);
                         lores.add(tr("\u00a74Requirements will reset in {0} minutes.", minutes));
                     }
                 } else {
@@ -187,27 +168,29 @@ public class Challenge {
                         final int hours = (int) (cooldown / ChallengeLogic.MS_HOUR);
                         lores.add(tr("\u00a74You can complete this again in {0} hours.", hours));
                     } else if (cooldown >= 0) {
-                        final int minutes = Math.round(cooldown / ChallengeLogic.MS_MIN);
+                        final int minutes = Math.round((float) cooldown / ChallengeLogic.MS_MIN);
                         lores.add(tr("\u00a74You can complete this again in {0} minutes.", minutes));
                     }
                 }
             }
             reward = getRepeatReward();
         }
-        List<ItemStack> reqItems = getRequiredItems(timesCompleted);
-        if ((reqItems != null && !reqItems.isEmpty()) || (requiredEntities != null && !requiredEntities.isEmpty())) {
+        Map<ItemStack, Integer> requiredItemsForChallenge = getRequiredItems(timesCompleted);
+        if (!requiredItemsForChallenge.isEmpty() || requiredEntities != null && !requiredEntities.isEmpty()) {
             lores.add(tr("\u00a7eThis challenge requires:"));
         }
         List<String> details = new ArrayList<>();
-        if (reqItems != null && !reqItems.isEmpty()) {
-            for (ItemStack item : reqItems) {
+        if (!requiredItemsForChallenge.isEmpty()) {
+            for (Map.Entry<ItemStack, Integer> requiredItem : requiredItemsForChallenge.entrySet()) {
                 if (wrappedDetails(details).size() >= MAX_DETAILS) {
                     details.add(tr("\u00a77and more..."));
                     break;
                 }
-                details.add(item.getAmount() > 1
-                        ? tr("\u00a7f{0}x \u00a77{1}", item.getAmount(), ItemStackUtil.getItemName(item))
-                        : tr("\u00a77{0}", ItemStackUtil.getItemName(item)));
+                int requiredAmount = requiredItem.getValue();
+                ItemStack requiredType = requiredItem.getKey();
+                details.add(requiredAmount > 1
+                    ? tr("\u00a7f{0}x \u00a77{1}", requiredAmount, ItemStackUtil.getItemName(requiredType))
+                    : tr("\u00a77{0}", ItemStackUtil.getItemName(requiredType)));
             }
         }
         if (requiredEntities != null && !requiredEntities.isEmpty() && wrappedDetails(details).size() < MAX_DETAILS) {
@@ -217,8 +200,8 @@ public class Challenge {
                     break;
                 }
                 details.add(entityMatch.getCount() > 1
-                        ? tr("\u00a7f{0}x \u00a77{1}", entityMatch.getCount(), entityMatch.getDisplayName())
-                        : tr("\u00a77{0}", entityMatch.getDisplayName()));
+                    ? tr("\u00a7f{0}x \u00a77{1}", entityMatch.getCount(), entityMatch.getDisplayName())
+                    : tr("\u00a77{0}", entityMatch.getDisplayName()));
             }
         }
         lores.addAll(wrappedDetails(details));
@@ -231,9 +214,7 @@ public class Challenge {
         }
         List<String> lines = wordWrap("\u00a7a" + reward.getRewardText(), 20, MAX_LINE);
         lores.add(tr("\u00a76Item Reward: \u00a7a") + lines.get(0));
-        for (String line : lines.subList(1, lines.size())) {
-            lores.add(line);
-        }
+        lores.addAll(lines.subList(1, lines.size()));
         if (withCurrency) {
             lores.add(tr("\u00a76Currency Reward: \u00a7a{0}", reward.getCurrencyReward()));
         }
@@ -292,16 +273,16 @@ public class Challenge {
     @Override
     public String toString() {
         return "Challenge{" +
-                "name='" + name + '\'' +
-                ", type=" + type +
-                ", requiredItems='" + requiredItems + '\'' +
-                ", rank='" + rank + '\'' +
-                ", resetInHours=" + resetInHours +
-                ", displayItem=" + displayItem +
-                ", takeItems=" + takeItems +
-                ", reward=" + reward +
-                ", repeatReward=" + repeatReward +
-                ", repeatLimit=" + repeatLimit +
-                '}';
+            "name='" + name + '\'' +
+            ", type=" + type +
+            ", requiredItems='" + requiredItems + '\'' +
+            ", rank='" + rank + '\'' +
+            ", resetInHours=" + resetInHours +
+            ", displayItem=" + displayItem +
+            ", takeItems=" + takeItems +
+            ", reward=" + reward +
+            ", repeatReward=" + repeatReward +
+            ", repeatLimit=" + repeatLimit +
+            '}';
     }
 }

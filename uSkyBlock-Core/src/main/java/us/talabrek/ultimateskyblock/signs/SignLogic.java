@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.signs;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -10,7 +10,9 @@ import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.type.WallSign;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import us.talabrek.ultimateskyblock.challenge.Challenge;
 import us.talabrek.ultimateskyblock.challenge.ChallengeCompletion;
@@ -19,14 +21,14 @@ import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.island.IslandInfo;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import us.talabrek.ultimateskyblock.util.LocationUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
@@ -38,7 +40,7 @@ import static dk.lockfuglsang.minecraft.util.FormatUtil.wordWrap;
 public class SignLogic {
     private static final Logger log = Logger.getLogger(SignLogic.class.getName());
     private static final int SIGN_LINE_WIDTH = 11; // Actually more like 15, but we break after.
-    private final YmlConfiguration config;
+    private final FileConfiguration config;
     private final File configFile;
     private final uSkyBlock plugin;
     private final ChallengeLogic challengeLogic;
@@ -169,6 +171,7 @@ public class SignLogic {
         }
     }
 
+    // TODO: This method accesses a lot of unsynchronized data, and should be refactored to be sync.
     private void updateSignAsync(final Location chestLoc, String islandName, String signLoc) {
         String challengeName = config.getString("signs." + signLoc + ".challenge", null);
         if (challengeName == null) {
@@ -178,12 +181,12 @@ public class SignLogic {
         if (challenge == null || challenge.getType() != Challenge.Type.PLAYER) {
             return;
         }
-        final List<ItemStack> requiredItems = new ArrayList<>();
+        Map<ItemStack, Integer> requiredItems = new LinkedHashMap<>();
         boolean isChallengeAvailable = false;
         if (challengeLogic.isIslandSharing()) {
             final ChallengeCompletion completion = challengeLogic.getIslandCompletion(islandName, challengeName);
             if (completion != null) {
-                requiredItems.addAll(challenge.getRequiredItems(completion.getTimesCompletedInCooldown()));
+                requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
             }
         }
         IslandInfo islandInfo = plugin.getIslandInfo(islandName);
@@ -197,11 +200,12 @@ public class SignLogic {
         String signLocString = config.getString("signs." + signLoc + ".location", null);
         final Location signLocation = LocationUtil.fromString(signLocString);
         final boolean challengeLocked = !isChallengeAvailable;
+        final Map<ItemStack, Integer> requiredItemsFinal = requiredItems;
         // Back to sync
-        plugin.sync(() -> updateSignFromChestSync(chestLoc, signLocation, challenge, requiredItems, challengeLocked));
+        plugin.sync(() -> updateSignFromChestSync(chestLoc, signLocation, challenge, requiredItemsFinal, challengeLocked));
     }
 
-    private void updateSignFromChestSync(Location chestLoc, Location signLoc, Challenge challenge, List<ItemStack> requiredItems, boolean challengeLocked) {
+    private void updateSignFromChestSync(Location chestLoc, Location signLoc, Challenge challenge, Map<ItemStack, Integer> requiredItems, boolean challengeLocked) {
         Block chestBlock = chestLoc.getBlock();
         Block signBlock = signLoc != null ? signLoc.getBlock() : null;
         if (signBlock != null && isChest(chestBlock) && signBlock.getState().getBlockData() instanceof WallSign) {
@@ -210,10 +214,12 @@ public class SignLogic {
             int missing = -1;
             if (!requiredItems.isEmpty() && !challengeLocked) {
                 missing = 0;
-                for (ItemStack required : requiredItems) {
-                    if (!chest.getInventory().containsAtLeast(required, required.getAmount())) {
+                for (Map.Entry<ItemStack, Integer> required : requiredItems.entrySet()) {
+                    ItemStack requiredType = required.getKey();
+                    int requiredAmount = required.getValue();
+                    if (!chest.getInventory().containsAtLeast(requiredType, requiredAmount)) {
                         // Max shouldn't be needed, provided containsAtLeast matches getCountOf... but it might not
-                        missing += Math.max(0, required.getAmount() - plugin.getChallengeLogic().getCountOf(chest.getInventory(), required));
+                        missing += Math.max(0, requiredAmount - plugin.getChallengeLogic().getCountOf(chest.getInventory(), requiredType));
                     }
                 }
             }
@@ -296,9 +302,13 @@ public class SignLogic {
         }
     }
 
+    // This logic is duplicated in ChallengeLogic.tryCompleteOnPlayer. It has a lot of the same checks. If they
+    // pass, it moves the items to the player inventory and then calls the challengeLogic to complete the challenge.
+    // This is prone to bugs and exploits, and should be refactored. Ideally we get rid of the transfer and just
+    // refactor the challenge logic to accept multiple inventories as source.
     private void tryComplete(Player player, Location chestLoc, Challenge challenge) {
         BlockState state = chestLoc.getBlock().getState();
-        if (!(state instanceof Chest)) {
+        if (!(state instanceof Chest chest)) {
             return;
         }
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
@@ -306,35 +316,27 @@ public class SignLogic {
             return;
         }
         ChallengeCompletion completion = challengeLogic.getChallenge(playerInfo, challenge.getName());
-        List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
-        Chest chest = (Chest) state;
+        Map<ItemStack, Integer> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
         int missing = 0;
-        for (ItemStack required : requiredItems) {
+        for (Map.Entry<ItemStack, Integer> required : requiredItems.entrySet()) {
+            ItemStack requiredType = required.getKey();
+            int requiredAmount = required.getValue();
             int diff = 0;
-            if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
-                diff = required.getAmount() - plugin.getChallengeLogic().getCountOf(player.getInventory(), required);
+            if (!player.getInventory().containsAtLeast(requiredType, requiredAmount)) {
+                diff = requiredAmount - plugin.getChallengeLogic().getCountOf(player.getInventory(), requiredType);
             }
-            if (diff > 0 && !chest.getInventory().containsAtLeast(required, diff)) {
-                diff -= plugin.getChallengeLogic().getCountOf(chest.getInventory(), required);
+            if (diff > 0 && !chest.getInventory().containsAtLeast(requiredType, diff)) {
+                diff -= plugin.getChallengeLogic().getCountOf(chest.getInventory(), requiredType);
             } else {
                 diff = 0;
             }
             missing += diff;
         }
         if (missing == 0) {
-            ItemStack[] items = requiredItems.toArray(new ItemStack[0]);
-            ItemStack[] copy = ItemStackUtil.clone(requiredItems).toArray(new ItemStack[requiredItems.size()]);
-            HashMap<Integer, ItemStack> missingItems = player.getInventory().removeItem(items);
-            missingItems = chest.getInventory().removeItem(missingItems.values().toArray(new ItemStack[0]));
-            if (!missingItems.isEmpty()) {
-                // This effectively means, we just donated some items to the player (exploit!!)
-                log.warning("Not all items removed from chest and player: " + missingItems.values());
-            }
-            HashMap<Integer, ItemStack> leftOvers = player.getInventory().addItem(copy);
-            if (leftOvers.isEmpty()) {
+            boolean successfulItemTransfer = attemptToMoveItemsToPlayerInventory(player.getInventory(), chest.getInventory(), requiredItems);
+            if (successfulItemTransfer) {
                 plugin.getChallengeLogic().completeChallenge(player, challenge.getName());
             } else {
-                chest.getInventory().addItem(leftOvers.values().toArray(new ItemStack[0]));
                 player.sendMessage(tr("\u00a7cWARNING:\u00a7e Could not transfer all the required items to your inventory!"));
             }
             updateSignsOnContainer(chest.getLocation());
@@ -343,4 +345,25 @@ public class SignLogic {
         }
     }
 
+    // This is a counter-intuitive way transfer the required items from the chest to the player inventory.
+    // It's prone to bugs and exploits, and should be refactored. Ideally we get rid of the transfer and just
+    // refactor the challenge logic to accept multiple inventories as source.
+    private static boolean attemptToMoveItemsToPlayerInventory(Inventory player, Inventory chest, Map<ItemStack, Integer> requiredItems) {
+        ItemStack[] itemsToRemove = ItemStackUtil.asValidItemStacksWithAmount(requiredItems);
+        ItemStack[] itemCopy = ItemStackUtil.asValidItemStacksWithAmount(requiredItems);
+
+        HashMap<Integer, ItemStack> missingItems = player.removeItem(itemsToRemove);
+        missingItems = chest.removeItem(missingItems.values().toArray(new ItemStack[0]));
+        if (!missingItems.isEmpty()) {
+            // This effectively means, we just donated some items to the player (exploit!!)
+            throw new IllegalStateException("Not all items removed from chest and player: " + missingItems.values());
+        }
+        HashMap<Integer, ItemStack> leftOvers = player.addItem(itemCopy);
+        if (leftOvers.isEmpty()) {
+            return true;
+        } else {
+            chest.addItem(leftOvers.values().toArray(new ItemStack[0]));
+            return false;
+        }
+    }
 }

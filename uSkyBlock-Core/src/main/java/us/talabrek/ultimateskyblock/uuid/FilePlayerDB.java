@@ -1,9 +1,10 @@
 package us.talabrek.ultimateskyblock.uuid;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,12 +32,12 @@ public class FilePlayerDB implements PlayerDB {
     private static final Logger log = Logger.getLogger(FilePlayerDB.class.getName());
 
     private final File uuid2NameFile;
-    private final YmlConfiguration uuid2NameConfig;
+    private final FileConfiguration uuid2NameConfig;
     private final uSkyBlock plugin;
 
     private boolean isShuttingDown = false;
     private volatile BukkitTask saveTask;
-    private long saveDelay;
+    private final long saveDelay;
 
     // These caches should NOT be guavaCaches, we need them alive most of the time
     private final Map<String, UUID> name2uuidCache = new ConcurrentHashMap<>();
@@ -45,7 +46,7 @@ public class FilePlayerDB implements PlayerDB {
     public FilePlayerDB(uSkyBlock plugin) {
         this.plugin = plugin;
         uuid2NameFile = new File(plugin.getDataFolder(), "uuid2name.yml");
-        uuid2NameConfig = new YmlConfiguration();
+        uuid2NameConfig = new YamlConfiguration();
         if (uuid2NameFile.exists()) {
             FileUtil.readConfig(uuid2NameConfig, uuid2NameFile);
         }
@@ -192,7 +193,6 @@ public class FilePlayerDB implements PlayerDB {
             if (uuid != null) {
                 return getPlayer(uuid);
             }
-            //noinspection deprecation
             Player player = Bukkit.getPlayer(name);
             if (player != null) {
                 updatePlayer(player.getUniqueId(), player.getName(), player.getDisplayName());

@@ -20,6 +20,7 @@ import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.player.UltimateHolder;
 import us.talabrek.ultimateskyblock.player.UltimateHolder.MenuType;
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.util.GuiItemUtil;
 import us.talabrek.ultimateskyblock.util.PlayerUtil;
 
 import java.util.ArrayList;
@@ -55,90 +56,90 @@ public class SkyBlockMenu {
     private ItemStack invite = new ItemStack(Material.CARROT_ON_A_STICK, 1);
     private ItemStack kick = new ItemStack(Material.LEATHER_BOOTS, 1);
     private List<PartyPermissionMenuItem> permissionMenuItems = Arrays.asList(
-            new PartyPermissionMenuItem(biome, "canChangeBiome", tr("Change Biome"),
-                    tr("change the island''s biome.")),
-            new PartyPermissionMenuItem(lock, "canToggleLock", tr("Toggle Island Lock"),
-                    tr("toggle the island''s lock.")),
-            new PartyPermissionMenuItem(warpset, "canChangeWarp", tr("Set Island Warp"),
-                    tr("set the island''s warp."),
-                    tr("set the island''s warp,\nwhich allows non-group\nmembers to teleport to\nthe island.")),
-            new PartyPermissionMenuItem(warptoggle, "canToggleWarp", tr("Toggle Island Warp"),
-                    tr("toggle the island''s warp."),
-                    tr("toggle the island''s warp,\nallowing them to turn it\non or off at anytime, but\nnot set the location.")),
-            new PartyPermissionMenuItem(invite, "canInviteOthers", tr("Invite Players"),
-                    tr("invite others to the island."),
-                    tr("invite\n" +
-                    "other players to the island if\n" +
-                    "there is enough room for more\n" +
-                    "members")),
-            new PartyPermissionMenuItem(kick, "canKickOthers", tr("Kick Players"),
-                    tr("kick others from the island."),
-                    tr("kick\n" +
-                    "other players from the island,\n" +
-                    "but they are unable to kick\n" +
-                    "the island leader."))
+        new PartyPermissionMenuItem(biome, "canChangeBiome", tr("Change Biome"),
+            tr("change the island''s biome.")),
+        new PartyPermissionMenuItem(lock, "canToggleLock", tr("Toggle Island Lock"),
+            tr("toggle the island''s lock.")),
+        new PartyPermissionMenuItem(warpset, "canChangeWarp", tr("Set Island Warp"),
+            tr("set the island''s warp."),
+            tr("set the island''s warp,\nwhich allows non-group\nmembers to teleport to\nthe island.")),
+        new PartyPermissionMenuItem(warptoggle, "canToggleWarp", tr("Toggle Island Warp"),
+            tr("toggle the island''s warp."),
+            tr("toggle the island''s warp,\nallowing them to turn it\non or off at anytime, but\nnot set the location.")),
+        new PartyPermissionMenuItem(invite, "canInviteOthers", tr("Invite Players"),
+            tr("invite others to the island."),
+            tr("invite\n" +
+                "other players to the island if\n" +
+                "there is enough room for more\n" +
+                "members")),
+        new PartyPermissionMenuItem(kick, "canKickOthers", tr("Kick Players"),
+            tr("kick others from the island."),
+            tr("kick\n" +
+                "other players from the island,\n" +
+                "but they are unable to kick\n" +
+                "the island leader."))
     );
     private List<BiomeMenuItem> biomeMenus = Arrays.asList(
-            new BiomeMenuItem(new ItemStack(Material.TROPICAL_FISH, 1),
-                    "ocean", tr("Ocean"),
-                    tr("The ocean biome is the basic\nstarting biome for all islands.\npassive mobs like animals will\nnot spawn. Hostile mobs will\nspawn normally.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.SPRUCE_SAPLING, 1),
-                    "forest", tr("Forest"),
-                    tr("The forest biome will allow\nyour island to spawn passive.\nmobs like animals (including\nwolves). Hostile mobs will\nspawn normally.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.SAND, 1),
-                    "desert", tr("Desert"),
-                    tr("The desert biome makes it so\nthat there is no rain or snow\non your island. Passive mobs\nwon't spawn. Hostile mobs will\nspawn normally.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.JUNGLE_SAPLING, 1),
-                    "jungle", tr("Jungle"),
-                    tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.LILY_PAD, 1),
-                    "swamp", tr("Swampland"),
-                    tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.SNOW, 1),
-                    "taiga", tr("Taiga"),
-                    tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.RED_MUSHROOM, 1),
-                    "mushroom_fields", tr("Mushroom"),
-                    tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.NETHER_BRICK, 1),
-                    "nether_wastes", tr("Hell"),
-                    tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.ENDER_EYE, 1),
-                    "the_end", tr("Sky"),
-                    tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.TALL_GRASS, 1),
-                    "plains", tr("Plains"),
-                    tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.EMERALD_ORE, 1),
-                    "windswept_hills", tr("Extreme Hills"),
-                    tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.ROSE_BUSH, 1),
-                    "flower_forest", tr("Flower Forest"),
-                    tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
-                    "deep_ocean", tr("Deep Ocean"),
-                    tr("The deep-ocean biome is an advanced\n" +
-                            "biome. Passive mobs like animals will\n" +
-                            "not spawn. Hostile mobs \n"+
-                            "(including Guardians) will\n" +
-                            "spawn normally.")
-            ),
-            new BiomeMenuItem(new ItemStack(Material.PACKED_ICE, 1),
-                    "snowy_plains", tr("Ice Plains"),
-                    tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
-            )
+        new BiomeMenuItem(new ItemStack(Material.TROPICAL_FISH, 1),
+            "ocean", tr("Ocean"),
+            tr("The ocean biome is the basic\nstarting biome for all islands.\npassive mobs like animals will\nnot spawn. Hostile mobs will\nspawn normally.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.SPRUCE_SAPLING, 1),
+            "forest", tr("Forest"),
+            tr("The forest biome will allow\nyour island to spawn passive.\nmobs like animals (including\nwolves). Hostile mobs will\nspawn normally.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.SAND, 1),
+            "desert", tr("Desert"),
+            tr("The desert biome makes it so\nthat there is no rain or snow\non your island. Passive mobs\nwon't spawn. Hostile mobs will\nspawn normally.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.JUNGLE_SAPLING, 1),
+            "jungle", tr("Jungle"),
+            tr("The jungle biome is bright\nand colorful. Passive mobs\n(including ocelots) will\nspawn. Hostile mobs will\nspawn normally.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.LILY_PAD, 1),
+            "swamp", tr("Swampland"),
+            tr("The swamp biome is dark\nand dull. Passive mobs\nwill spawn normally and\nslimes have a small chance\nto spawn at night depending\non the moon phase.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.SNOW, 1),
+            "taiga", tr("Taiga"),
+            tr("The taiga biome has snow\ninstead of rain. Passive\nmobs will spawn normally\n(including wolves) and\nhostile mobs will spawn.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.RED_MUSHROOM, 1),
+            "mushroom_fields", tr("Mushroom"),
+            tr("The mushroom biome is\nbright and colorful.\nMooshrooms are the only\nmobs that will spawn.\nNo other passive or\nhostile mobs will spawn.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.NETHER_BRICK, 1),
+            "nether_wastes", tr("Hell"),
+            tr("The hell biome looks\ndark and dead. Some\nmobs from the nether will\nspawn in this biome\n(excluding ghasts and\nblazes).")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.ENDER_EYE, 1),
+            "the_end", tr("Sky"),
+            tr("The sky biome gives your\nisland a special dark sky.\nOnly endermen will spawn\nin this biome.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.TALL_GRASS, 1),
+            "plains", tr("Plains"),
+            tr("The plains biome has rain\ninstead of snow. Passive\nmobs will spawn normally\n(including horses) and\nhostile mobs will spawn.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.EMERALD_ORE, 1),
+            "windswept_hills", tr("Extreme Hills"),
+            tr("The extreme hills biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.ROSE_BUSH, 1),
+            "flower_forest", tr("Flower Forest"),
+            tr("The flower forest biome.\nPassive mobs will spawn \nnormally and hostile\nmobs will spawn.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.PRISMARINE_SHARD, 1),
+            "deep_ocean", tr("Deep Ocean"),
+            tr("The deep-ocean biome is an advanced\n" +
+                "biome. Passive mobs like animals will\n" +
+                "not spawn. Hostile mobs \n" +
+                "(including Guardians) will\n" +
+                "spawn normally.")
+        ),
+        new BiomeMenuItem(new ItemStack(Material.PACKED_ICE, 1),
+            "snowy_plains", tr("Ice Plains"),
+            tr("The ice-plains biome is an advanced biome.\nMobs will spawn naturally.\nincluding polar-bears")
+        )
     );
 
     public SkyBlockMenu(uSkyBlock plugin, ChallengeLogic challengeLogic) {
@@ -149,7 +150,7 @@ public class SkyBlockMenu {
     public Inventory displayPartyPlayerGUI(final Player player, final String pname) {
         List<String> lores = new ArrayList<>();
         String emptyTitle = tr("{0} <{1}>", "", tr("Permissions"));
-        String title = tr("{0} <{1}>", pname.substring(0, Math.min(32-emptyTitle.length(), pname.length())), tr("Permissions"));
+        String title = tr("{0} <{1}>", pname.substring(0, Math.min(32 - emptyTitle.length(), pname.length())), tr("Permissions"));
         Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title, MenuType.DEFAULT), 9, title);
         final ItemStack pHead = new ItemStack(Material.PLAYER_HEAD, 1);
         final SkullMeta meta3 = (SkullMeta) pHead.getItemMeta();
@@ -200,6 +201,7 @@ public class SkyBlockMenu {
             lores.add(format + line);
         }
     }
+
     private void addLore(List<String> lores, String multiLine) {
         addLore(lores, "", multiLine);
     }
@@ -323,7 +325,8 @@ public class SkyBlockMenu {
         String radius = PlayerUtil.getMetadata(player, "biome.radius", "all");
         String radiusDisplay;
         switch (radius) {
-            case "chunk": radiusDisplay = tr("\u00a72chunk");
+            case "chunk":
+                radiusDisplay = tr("\u00a72chunk");
                 break;
             case "all":
                 radiusDisplay = tr("\u00a7call");
@@ -403,9 +406,8 @@ public class SkyBlockMenu {
                     }
                 }
                 // Only SIMPLE icons supported...
-                ItemStack item = new ItemStack(Material.matchMaterial(icon), 1);
+                ItemStack item = GuiItemUtil.createGuiDisplayItem(icon, title);
                 ItemMeta meta = item.getItemMeta();
-                meta.setDisplayName(title);
                 meta.setLore(lores);
                 item.setItemMeta(meta);
                 menu.setItem(index, item);
@@ -462,7 +464,7 @@ public class SkyBlockMenu {
     public Inventory displayChallengeGUI(final Player player, int page, String playerName) {
         int total = challengeLogic.getTotalPages();
         String title = "\u00a79" + pre("{0} ({1}/{2})", tr("Challenge Menu"), page, total);
-        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title, MenuType.DEFAULT), CHALLENGE_PAGESIZE+COLS_PER_ROW, title);
+        Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title, MenuType.DEFAULT), CHALLENGE_PAGESIZE + COLS_PER_ROW, title);
         final PlayerInfo pi = playerName == null ? plugin.getPlayerInfo(player) : plugin.getPlayerInfo(playerName);
         challengeLogic.populateChallengeRank(menu, pi, page, playerName != null && player.hasPermission("usb.mod.bypassrestriction"));
         int[] pages = new int[9];
@@ -470,28 +472,28 @@ public class SkyBlockMenu {
         pages[8] = total;
         int startOffset = 2;
         if (page > 5) {
-            startOffset = (int) ((Math.round(page/2d)) - 1);
-            if (startOffset > total-7) {
-                startOffset = total-7;
+            startOffset = (int) ((Math.round(page / 2d)) - 1);
+            if (startOffset > total - 7) {
+                startOffset = total - 7;
             }
         }
         for (int i = 0; i < 7; i++) {
-            pages[i+1] = startOffset+i;
+            pages[i + 1] = startOffset + i;
         }
         for (int i = 0; i < pages.length; i++) {
             int p = pages[i];
             if (p >= 1 && p <= total) {
                 ItemStack pageItem;
                 if (p == page) {
-                    pageItem = ItemStackUtil.createItemStack("WRITABLE_BOOK", tr("\u00a77Current page"), null);
+                    pageItem = GuiItemUtil.createGuiDisplayItem(Material.WRITABLE_BOOK, tr("\u00a77Current page"));
                 } else {
-                    pageItem = ItemStackUtil.createItemStack("BOOK", tr("\u00a77Page {0}", p), null);
+                    pageItem = GuiItemUtil.createGuiDisplayItem(Material.BOOK, tr("\u00a77Page {0}", p));
                 }
                 if (i == 0) {
                     pageItem = ItemStackUtil.builder(pageItem)
-                            .displayName(tr("\u00a77First Page"))
-                            .lore(playerName != null ? playerName : "")
-                            .build();
+                        .displayName(tr("\u00a77First Page"))
+                        .lore(playerName != null ? playerName : "")
+                        .build();
                 } else if (i == 8) {
                     pageItem = ItemStackUtil.builder(pageItem).displayName(tr("\u00a77Last Page")).build();
                 }
@@ -512,7 +514,7 @@ public class SkyBlockMenu {
 
     private Inventory createInitMenu(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
-        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
+        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d) * 9;
         String title = "\u00a79" + tr("Island Create Menu");
         Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title, MenuType.DEFAULT), menuSize, title);
         List<String> lores = new ArrayList<>();
@@ -558,7 +560,7 @@ public class SkyBlockMenu {
         addLore(lores, "\u00a7f", tr("Teleport to the spawn area."));
         meta.setLore(lores);
         menuItem.setItemMeta(meta);
-        menu.setItem(menuSize-2, menuItem);
+        menu.setItem(menuSize - 2, menuItem);
 
         lores.clear();
         menuItem = new ItemStack(Material.PLAYER_HEAD, 1);
@@ -567,7 +569,7 @@ public class SkyBlockMenu {
         addLore(lores, "\u00a7f", tr("Want to join another player''s\nisland instead of starting\nyour own? If another player\ninvites you to their island\nyou can click here or use\n\u00a7e/island accept\u00a7f to join them.\n\u00a7e\u00a7lClick here to accept an invite!\n\u00a7e\u00a7l(You must be invited first)"));
         meta2.setLore(lores);
         menuItem.setItemMeta(meta2);
-        menu.setItem(menuSize-1, menuItem);
+        menu.setItem(menuSize - 1, menuItem);
         return menu;
     }
 
@@ -585,7 +587,7 @@ public class SkyBlockMenu {
     }
 
     private Inventory createMainMenu(Player player) {
-		String title = "\u00a79" + tr("Island Menu");
+        String title = "\u00a79" + tr("Island Menu");
         Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title, MenuType.DEFAULT), 18, title);
         List<String> lores = new ArrayList<>();
         ItemStack menuItem = new ItemStack(Material.OAK_DOOR, 1);
@@ -777,7 +779,7 @@ public class SkyBlockMenu {
         ItemMeta meta = currentItem.getItemMeta();
         SkullMeta skull = meta instanceof SkullMeta ? (SkullMeta) meta : null;
         if (!(event.getInventory().getHolder() instanceof UltimateHolder))
-        	return;
+            return;
         String inventoryName = stripFormatting(((UltimateHolder) event.getInventory().getHolder()).getTitle());
         int slotIndex = event.getSlot();
         int menuSize = event.getInventory().getSize();
@@ -838,9 +840,9 @@ public class SkyBlockMenu {
         event.setCancelled(true);
         if (slotIndex == 0) {
             p.performCommand("island create");
-        } else if (slotIndex == menuSize-2) {
+        } else if (slotIndex == menuSize - 2) {
             p.performCommand("island spawn");
-        } else if (slotIndex == menuSize-1) {
+        } else if (slotIndex == menuSize - 1) {
             p.performCommand("island accept");
         } else if (meta != null && meta.getDisplayName() != null) {
             String schemeName = stripFormatting(meta.getDisplayName());
@@ -922,15 +924,15 @@ public class SkyBlockMenu {
     }
 
     private void updateLeaveMenuItem(Inventory inventory, ItemStack currentItem, long millisLeft) {
-        if (currentItem == null || currentItem.getItemMeta() == null ||currentItem.getItemMeta().getLore() == null) {
+        if (currentItem == null || currentItem.getItemMeta() == null || currentItem.getItemMeta().getLore() == null) {
             return;
         }
         ItemMeta meta = currentItem.getItemMeta();
         List<String> lore = meta.getLore();
         if (millisLeft >= 0) {
-            lore.set(lore.size()-1, tr("\u00a7cClick within \u00a79{0}\u00a7c to leave!", TimeUtil.millisAsString(millisLeft)));
+            lore.set(lore.size() - 1, tr("\u00a7cClick within \u00a79{0}\u00a7c to leave!", TimeUtil.millisAsString(millisLeft)));
         } else {
-            lore.set(lore.size()-1, tr("\u00a7cClick to leave"));
+            lore.set(lore.size() - 1, tr("\u00a7cClick to leave"));
         }
         meta.setLore(lore);
         currentItem.setItemMeta(meta);
@@ -939,7 +941,7 @@ public class SkyBlockMenu {
 
     public Inventory createRestartGUI(Player player) {
         List<String> schemeNames = plugin.getIslandGenerator().getSchemeNames();
-        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d)*9;
+        int menuSize = (int) Math.ceil(getMaxSchemeIndex(schemeNames) / 9d) * 9;
         String title = "\u00a79" + tr("Island Restart Menu");
         Inventory menu = Bukkit.createInventory(new UltimateHolder(player, title, MenuType.DEFAULT), menuSize, title);
         List<String> lores = new ArrayList<>();
@@ -1013,16 +1015,15 @@ public class SkyBlockMenu {
         }
         ItemStack item = event.getInventory().getItem(event.getInventory().getSize() - 9);
         String playerName = item != null && item.hasItemMeta() && item.getItemMeta().getLore() != null
-                && item.getItemMeta().getLore().size() > 0
-                ? item.getItemMeta().getLore().get(0)
-                : null;
+            && item.getItemMeta().getLore().size() > 0
+            ? item.getItemMeta().getLore().get(0)
+            : null;
         if (playerName != null && playerName.trim().isEmpty()) {
             playerName = null;
         }
         // Last row is pagination
         if (slotIndex >= CHALLENGE_PAGESIZE && slotIndex < CHALLENGE_PAGESIZE + COLS_PER_ROW
-                && currentItem != null && currentItem.getType() != Material.AIR)
-        {
+            && currentItem != null && currentItem.getType() != Material.AIR) {
             // Pagination
             p.openInventory(displayChallengeGUI(p, currentItem.getAmount(), playerName));
             return;
@@ -1039,7 +1040,7 @@ public class SkyBlockMenu {
             }
             p.openInventory(displayChallengeGUI(p, page, playerName));
         } else {
-            if (slotIndex < (CHALLENGE_PAGESIZE/2)) { // Upper half
+            if (slotIndex < (CHALLENGE_PAGESIZE / 2)) { // Upper half
                 if (page > 1) {
                     p.openInventory(displayChallengeGUI(p, page - 1, playerName));
                 } else {
@@ -1055,7 +1056,7 @@ public class SkyBlockMenu {
 
     private boolean isAirOrLocked(ItemStack currentItem) {
         return currentItem != null && currentItem.getType() == Material.AIR ||
-                currentItem != null && currentItem.getItemMeta() != null && currentItem.getItemMeta().getDisplayName().equals(tr("\u00a74\u00a7lLocked Challenge"));
+            currentItem != null && currentItem.getItemMeta() != null && currentItem.getItemMeta().getDisplayName().equals(tr("\u00a74\u00a7lLocked Challenge"));
     }
 
     private void onClickBiomeMenu(InventoryClickEvent event, ItemStack currentItem, Player p, int slotIndex) {
@@ -1076,7 +1077,7 @@ public class SkyBlockMenu {
             }
             if (currentItem.getType() == Material.RED_CARPET && ix > 0) {
                 ix--;
-            } else if (currentItem.getType() == Material.GREEN_CARPET && ix < radii.size()-1) {
+            } else if (currentItem.getType() == Material.GREEN_CARPET && ix < radii.size() - 1) {
                 ix++;
             }
             radius = radii.get(ix);
@@ -1087,7 +1088,7 @@ public class SkyBlockMenu {
         }
         for (BiomeMenuItem biomeMenu : biomeMenus) {
             ItemStack menuIcon = biomeMenu.getIcon();
-            if (currentItem.getType() == menuIcon.getType() && currentItem.getDurability() == menuIcon.getDurability()) {
+            if (currentItem.getType() == menuIcon.getType()) {
                 String radius = PlayerUtil.getMetadata(p, "biome.radius", "all");
                 p.performCommand("island biome " + biomeMenu.getId() + " " + radius);
                 return;

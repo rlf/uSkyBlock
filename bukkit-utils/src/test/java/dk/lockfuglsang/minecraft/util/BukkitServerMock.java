@@ -1,7 +1,5 @@
 package dk.lockfuglsang.minecraft.util;
 
-import dk.lockfuglsang.minecraft.nbt.NBTItemStackTagger;
-import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Server;
@@ -28,7 +26,6 @@ public class BukkitServerMock {
      * Stubbing data, allows for advanced stubbing behaviour for item-meta
      */
     protected static Map<ItemMeta, Map<String,String>> itemMetaMap = new HashMap<>();
-    private static ItemFactory itemFactoryMock;
 
     public static Server setupServerMock() throws NoSuchFieldException, IllegalAccessException {
         Field server = Bukkit.class.getDeclaredField("server");
@@ -36,19 +33,17 @@ public class BukkitServerMock {
         Server serverMock = createServerMock();
         server.set(null, serverMock);
         server.setAccessible(false);
-
-        NBTUtil.setNBTItemStackTagger(new TestNBTItemStackTagger());
         return serverMock;
     }
 
     public static Server createServerMock() {
         Server serverMock = mock(Server.class);
-        itemFactoryMock = mock(ItemFactory.class);
+        ItemFactory itemFactoryMock = mock(ItemFactory.class);
 
         when(itemFactoryMock.isApplicable(any(ItemMeta.class), any(Material.class)))
                 .thenReturn(true);
 
-        when(itemFactoryMock.equals(any(ItemMeta.class), any(ItemMeta.class)))
+        when(itemFactoryMock.equals(any(), any()))
                 .thenAnswer((Answer<Boolean>) invocationOnMock -> {
                     // Better equals for mocks?
                     return Objects.equals("" + invocationOnMock.getArguments()[0],
@@ -62,8 +57,30 @@ public class BukkitServerMock {
                 .thenAnswer((Answer<ItemMeta>) invocationOnMock -> invocationOnMock.getArguments()[0] != null
                         ? (ItemMeta) invocationOnMock.getArguments()[0]
                         : null);
-        when(itemFactoryMock.updateMaterial(any(ItemMeta.class), any(Material.class)))
-                .thenAnswer(i -> i.getArguments()[1]);
+
+        when(itemFactoryMock.createItemStack(any()))
+                .thenAnswer((Answer<ItemStack>) invocationOnMock -> {
+                    String specification = (String) invocationOnMock.getArguments()[0];
+                    var componentSplitIndex = specification.indexOf('[');
+                    String typeSpecification;
+                    String components;
+                    if (componentSplitIndex > 0) {
+                        typeSpecification = specification.substring(0, componentSplitIndex);
+                        components = specification.substring(componentSplitIndex);
+                    } else {
+                        typeSpecification = specification;
+                        components = "";
+                    }
+                    var type = Material.matchMaterial(typeSpecification);
+                    var itemStack = new ItemStack(type);
+                    var mockMeta = mock(ItemMeta.class, withSettings().extraInterfaces(Damageable.class));
+                    when(((Damageable)mockMeta).getDamage()).thenReturn(0);
+                    when(mockMeta.toString()).thenReturn(components);
+                    when(mockMeta.getAsComponentString()).thenReturn(components.isEmpty() ? "[]" : components);
+                    when(itemStack.getItemMeta()).thenReturn(mockMeta);
+                    return itemStack;
+                });
+
         when(serverMock.getItemFactory()).thenReturn(itemFactoryMock);
 
         UnsafeValues unsafeMock = mock(UnsafeValues.class);
@@ -102,34 +119,5 @@ public class BukkitServerMock {
         when(meta.toString()).thenAnswer((Answer<String>) invocationOnMock -> "" + metaData);
         when(meta.clone()).thenReturn(meta); // Don't clone it - we need to verify it
         return meta;
-    }
-
-    public static class TestNBTItemStackTagger implements NBTItemStackTagger {
-        @Override
-        public String getNBTTag(ItemStack itemStack) {
-            if (itemMetaMap.containsKey(itemStack.getItemMeta())) {
-                Map<String, String> metaMap = itemMetaMap.get(itemStack.getItemMeta());
-                if (metaMap.containsKey("nbt")) {
-                    return metaMap.get("nbt");
-                }
-            }
-            return "";
-        }
-
-        @Override
-        public ItemStack setNBTTag(ItemStack itemStack, String tag) {
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            if (itemMeta != null && itemMetaMap.containsKey(itemMeta)) {
-                Map<String, String> metaMap = itemMetaMap.get(itemMeta);
-                metaMap.put("nbt", tag);
-                itemStack.setItemMeta(itemMeta);
-            }
-            return itemStack;
-        }
-
-        @Override
-        public ItemStack addNBTTag(ItemStack itemStack, String tag) {
-            return setNBTTag(itemStack, tag);
-        }
     }
 }

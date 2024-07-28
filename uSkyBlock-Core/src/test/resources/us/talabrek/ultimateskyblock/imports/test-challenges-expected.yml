@@ -1,0 +1,181 @@
+# ======================================================================================================================
+#
+# Here follows the format and explanation for the challenge group and challenges setup. The single commented (#) are the
+# most used settings while the double commented (##) are optional if you like to use those settings.
+#
+# Item type format
+# Item types are defined as in the minecraft /give command, i.e. with their minecraft key and possible components in
+# square brackets. For example, 'minecraft:diamond_sword[damage=42]'. Refer to the Minecraft wiki for more information:
+# https://minecraft.wiki/w/Data_component_format. You can also use the command '/usb iteminfo' to get the information.
+#
+# This item type is supplemented with additional information depending on where it is used:
+#
+# display-item: <type>
+# An item to be displayed in a GUI. It only defines the item type as above, without any additional information.
+# For example: 'cobblestone', 'minecraft:stone', 'diamond_sword[damage=42]'.
+#
+# item-requirement: <type>:<amount>[;+<increment>]
+# An item requirement for a challenge. The amount is the number of items required. The optional +<amount> is the number
+# of items to add to the required amount for each repeat of the challenge. For example, 'cobblestone:64;+16' would
+# require 64 cobblestone for the first completion and 80 cobblestone for the second completion. Other options are
+# -, *, and / for subtraction, multiplication, and division, respectively. For example, 'cobblestone:64;*2' would
+# require 64 cobblestone for the first completion, 128 cobblestone for the second completion, and 256 cobblestone for
+# the third completion.
+#
+# item-reward: [{p=<probability>}]<type>:<amount>
+# An item reward for a challenge. The amount is the number of items to give. The optional {p=<probability>} is the
+# probability of the item being given. For example, 'cobblestone:64' would give 64 cobblestone every time the challenge
+# is completed, while '{p=0.1}cobblestone:64' would give 64 cobblestone 10% of the time.
+#
+# ======================================================================================================================
+# All challenges are defined in the ranks section. Each rank is a tier of challenges that players can complete.
+#
+# ranks:
+#  # [text] name of the challenge Rank.
+#  TierX:
+#    # [text] The name of the challenge rank that shows when you do /challenges (supports capitals and color codes).
+#    name: '&aCustom Challenges rank name'
+#    # [display-item] The item to be displayed in the challenge menu for completed challenges.
+#    displayItem: 'cyan_terracotta'
+#    # [integer] The time in hours before required items reset to default (this overwrites the main reset time)
+#    resetInHours: 20
+#    # These requirements controls when a challenge group will be available to a player.
+#    requires:
+#      # [integer] The number of tasks per rank that can be left uncompleted to advance to the next rank. For example,
+#                  if you have 4 challenges with a rankLeeway of 1, a player would only need to complete 3 to advance to
+#                  the next rank. A rankLeeway of 0 would require them all.
+#      rankLeeway: 8
+#      # [List[text]] Challenges that have to be completed before this group will available to a player.
+#      challenges:
+#      - a challenge name
+# ======================================================================================================================
+#    challenges:
+#      # [text] The name of the challenge. All challenge names should be lower-case.
+#      defaultchallenge:
+#      # [text] The name of the challenge that shows in /challenges (this supports capitals and color codes).
+#        name: '&a Default Challenge'
+#        # [text] The descriptions players see when they do /challenges <challengename>
+#        description:
+#        # [onIsland/onPlayer/islandLevel] This defines whether the required blocks/items should be in the player's
+#        # inventory or on their island. When using onIsland, the player must within 10 blocks from the required blocks
+#        # on his island. When using islandLevel, the 'requiredItems' field should be the island level required. The
+#        # player must use /island level first to update their level.
+#        type: onPlayer
+#        ## type: islandLevel
+#        ## type: onIsland
+#        # [integer] Overrides the default radius of 10 blocks when using onIsland.
+#        ## radius: 20
+#        # [List[item-requirement] The items required to complete the challenge.
+#        requiredItems:
+#        - stone:64;+16
+#        - cobblestone:64;+16
+#        # [true/false] If the challenge can be repeated or not.
+#        ## repeatable: true
+#        # [integer] The maximum number of times the challenge can be completed. Overrides the default repeatLimit.
+#        #           A value of 0 means unlimited repeats.
+#        ## repeatLimit: 5
+#        # [display-item] The item to be displayed in the challenge menu for completed challenges.
+#        displayItem: cobblestone
+#        # [integer] The time in hours before required items reset to default (overwrites the main and rank defaults).
+#        ## resetInHours: 4
+#        # [true/false] Take required items on completing a challenge.
+#        ## takeItems: true
+#        # The rewards players get for completing the challenge
+#        reward:
+#          # [text] Description of the reward.
+#          text: 'Mossy cobblestone and an iron pickaxe with unbreaking 1'
+#          # [List[item-requirement]] A list of items given to the player for completing the challenge.
+#          items:
+#          - mossy_cobblestone:16
+#          - iron_pickaxe[enchantments={levels:{unbreaking:1}}]:1
+#          # [permission node] A permission granted for completion. Multiple permissions are space-separated.
+#          ## permission: 'test.permission'
+#          # [integer] How much currency to give for completion. (requires an economy plugin)
+#          ## currency: 0
+#          # [integer] How much xp to give to the player for completion.
+#          ## xp: 0
+#          # [List[Text]] Executes the given command upon completion. Prepend with "op" or "console" to run the commands
+#                         as OP or from the Console. Examples:
+#          # Possible command arguments are:
+#          # {player}     - The name of the player
+#          # {playerName} - The display name of the player
+#          # {challenge}  - The name of the challenge
+#          # {position}   - The position of the player
+#          # {party}      - Execute the command once for each member of the party (substituting the name)
+#          ## commands:
+#          ## - 'op: me are the GOD of things'
+#          ## - 'console: give {party} aweseomestuff 32'
+#        # reward section to reward the player for completing a repeated challenge (any time after the first). The
+#        # structure is identical to the 'reward' section.
+#        repeatReward:
+#          text: 'Mossy cobblestone'
+#          items:
+#          - mossy_cobblestone:16
+#
+# ======================================================================================================================
+
+# Unrelated items - should be preserved
+allowChallenges: true
+
+challengeColor: '&e'
+
+# Unrelated item that should be converted
+ISLAND:
+  # Comment should be preserved
+  lockedDisplayItem: blue_stained_glass_pane # Ideally inline comments are also preserved
+
+# Challenge items - items should be converted
+
+path:
+  to:
+    name: '&7Novice'
+    # Simple display item
+    displayItem: cyan_terracotta
+    resetInHours: 20
+    challenges:
+      testchallenge:
+        name: '&7Only for testing'
+        description: Not a real challenge.
+        type: onPlayer
+        # Mix of required items
+        # enchanted_book{StoredEnchantments:[{id:34,lvl:3}]}
+        requiredItems:
+          - cobblestone:64;+2
+          - iron_ingot:100
+          - enchanted_book[]:1
+          - white_wool:32;-1
+          - diamond:1;*1
+          - invalid_item:10
+        displayItem: cobblestone
+        # Complex display item with meta
+        # enchanted_book{StoredEnchantments:[{id:34,lvl:3}]}
+        lockedDisplayItem: enchanted_book[]
+        resetInHours: 12
+        reward:
+          text: Reward to test the converter
+          # enchanted_book{StoredEnchantments:[{id:34,lvl:3}]}
+          items:
+            - leather:3
+            - '{p=0.2}book:1'
+            - '{p=0.99}enchanted_book[]:3'
+          currency: 10
+          xp: 10
+          commands:
+            - op:test command
+        repeatReward:
+          text: This should work the same
+          items:
+            - leather:1
+            - '{p=0.1}book:1'
+          currency: 5
+          xp: 5
+
+# This file has been updated to version 107. Please check the changes made in this version.
+# Changes in this version:
+#  - Items are now specified in the new component format.
+#  - Refer to the config header for the new format.
+#  - NBT tags are not automatically converted. They have been moved to the comments, please check them manually.
+#    You can use the following converter to convert the old item specifications to the new format:
+#    https://docs.papermc.io/misc/tools/item-command-converter
+# DO NOT CHANGE THE VERSION! You will break the conversion and unexpected things will happen!
+version: 107

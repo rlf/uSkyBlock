@@ -1,28 +1,15 @@
 package dk.lockfuglsang.minecraft.file;
 
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,11 +17,12 @@ import java.util.logging.Logger;
 /**
  * Common file-utilities.
  */
-public enum FileUtil {;
+public enum FileUtil {
+    ;
     private static final Logger log = Logger.getLogger(FileUtil.class.getName());
     private static final Collection<String> allwaysOverwrite = new ArrayList<>();
     private static final Collection<String> neverOverwrite = new ArrayList<>();
-    private static final Map<String, YmlConfiguration> configFiles = new ConcurrentHashMap<>();
+    private static final Map<String, FileConfiguration> configFiles = new ConcurrentHashMap<>();
     private static Locale locale = Locale.getDefault();
     private static File dataFolder;
 
@@ -46,23 +34,9 @@ public enum FileUtil {;
         }
     }
 
-    public static void setNeverOverwrite(String... configs) {
-        for (String s : configs) {
-            if (!neverOverwrite.contains(s)) {
-                neverOverwrite.add(s);
-            }
-        }
-    }
-
-    public static YmlConfiguration loadConfig(File file) {
-        YmlConfiguration config = new YmlConfiguration();
-        readConfig(config, file);
-        return config;
-    }
-
     public static void readConfig(FileConfiguration config, File file) {
         if (file == null) {
-            log.log(Level.INFO, "No "  + file + " found, it will be created");
+            log.log(Level.INFO, "No " + file + " found, it will be created");
             return;
         }
         File configFile = file;
@@ -71,7 +45,7 @@ public enum FileUtil {;
             configFile = localeFile;
         }
         if (!configFile.exists()) {
-            log.log(Level.INFO, "No "  + configFile + " found, it will be created");
+            log.log(Level.INFO, "No " + configFile + " found, it will be created");
             return;
         }
         try (Reader rdr = new InputStreamReader(new FileInputStream(configFile), "UTF-8")) {
@@ -101,22 +75,9 @@ public enum FileUtil {;
         }
     }
 
-    public static FilenameFilter createYmlFilenameFilter() {
-        return new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name != null && name.endsWith(".yml");
-            }
-        };
-    }
-
-    public static String getBasename(File file) {
-        return getBasename(file.getName());
-    }
-
     public static String getBasename(String file) {
         String[] lastPart = file.split("(/|\\\\)");
-        file = lastPart[lastPart.length-1];
+        file = lastPart[lastPart.length - 1];
         if (file != null && file.lastIndexOf('.') != -1) {
             return file.substring(0, file.lastIndexOf('.'));
         }
@@ -125,7 +86,7 @@ public enum FileUtil {;
 
     public static String getExtension(String fileName) {
         if (fileName != null && !fileName.isEmpty()) {
-            return fileName.substring(getBasename(fileName).length()+1);
+            return fileName.substring(getBasename(fileName).length() + 1);
         }
         return "";
     }
@@ -153,15 +114,15 @@ public enum FileUtil {;
      * *merged: using data-conversion of special nodes.
      * </pre>
      */
-    public static YmlConfiguration getYmlConfiguration(String configName) {
+    public static FileConfiguration getYmlConfiguration(String configName) {
         // Caching, for your convenience! (and a bigger memory print!)
 
         if (!configFiles.containsKey(configName)) {
-            YmlConfiguration config = new YmlConfiguration();
+            FileConfiguration config = new YamlConfiguration();
             try {
                 // read from datafolder!
                 File configFile = getConfigFile(configName);
-                YmlConfiguration configJar = new YmlConfiguration();
+                YamlConfiguration configJar = new YamlConfiguration();
                 readConfig(config, configFile);
                 readConfig(configJar, getResource(configName));
                 if (!configFile.exists() || config.getInt("version", 0) < configJar.getInt("version", 0)) {
@@ -175,8 +136,8 @@ public enum FileUtil {;
                         String bakFile = String.format("%1$s-%2$tY%2$tm%2$td-%2$tH%2$tM.yml", getBasename(configName), new Date());
                         log.log(Level.INFO, "Moving existing config " + configName + " to backup/" + bakFile);
                         Files.move(Paths.get(configFile.toURI()),
-                                Paths.get(new File(backupFolder, bakFile).toURI()),
-                                StandardCopyOption.REPLACE_EXISTING);
+                            Paths.get(new File(backupFolder, bakFile).toURI()),
+                            StandardCopyOption.REPLACE_EXISTING);
                         if (allwaysOverwrite.contains(configName)) {
                             FileUtil.copy(getResource(configName), configFile);
                             config = configJar;
@@ -231,15 +192,15 @@ public enum FileUtil {;
 
     /**
      * Merges the important keys from src to destination.
-     * @param src The source (containing the new values).
+     *
+     * @param src  The source (containing the new values).
      * @param dest The destination (containing old-values).
      */
-    private static YmlConfiguration mergeConfig(YmlConfiguration src, YmlConfiguration dest) {
+    private static FileConfiguration mergeConfig(FileConfiguration src, FileConfiguration dest) {
         int existing = dest.getInt("version");
         int version = src.getInt("version", existing);
         dest.setDefaults(src);
         dest.options().copyDefaults(true);
-        dest.addComments(src.getComments());
         dest.set("version", version);
         dest.options().copyHeader(false);
         src.options().copyHeader(false);
@@ -252,14 +213,14 @@ public enum FileUtil {;
     /**
      * Removes nodes from dest.defaults, that are specifically excluded in the config
      */
-    private static void removeExcludes(YmlConfiguration dest) {
+    private static void removeExcludes(FileConfiguration dest) {
         List<String> keys = dest.getStringList("merge-ignore");
         for (String key : keys) {
             dest.getDefaults().set(key, null);
         }
     }
 
-    private static void replaceDefaults(YmlConfiguration src, YmlConfiguration dest) {
+    private static void replaceDefaults(FileConfiguration src, FileConfiguration dest) {
         ConfigurationSection forceSection = src.getConfigurationSection("force-replace");
         if (forceSection != null) {
             for (String key : forceSection.getKeys(true)) {
@@ -275,7 +236,7 @@ public enum FileUtil {;
         dest.getDefaults().set("force-replace", null);
     }
 
-    private static void moveNodes(YmlConfiguration src, YmlConfiguration dest) {
+    private static void moveNodes(FileConfiguration src, FileConfiguration dest) {
         ConfigurationSection moveSection = src.getConfigurationSection("move-nodes");
         if (moveSection != null) {
             List<String> keys = new ArrayList<>(moveSection.getKeys(true));
@@ -311,24 +272,9 @@ public enum FileUtil {;
     }
 
     public static void reload() {
-        for (Map.Entry<String, YmlConfiguration> e : configFiles.entrySet()) {
+        for (Map.Entry<String, FileConfiguration> e : configFiles.entrySet()) {
             File configFile = new File(getDataFolder(), e.getKey());
             readConfig(e.getValue(), configFile);
         }
     }
-
-    public static Properties readProperties(String fileName) {
-        File configFile = getConfigFile(fileName);
-        if (configFile != null && configFile.exists() && configFile.canRead()) {
-            Properties prop = new Properties();
-            try (InputStreamReader in = new InputStreamReader(new FileInputStream(configFile), "UTF-8")) {
-                prop.load(in);
-                return prop;
-            } catch (IOException e) {
-                log.log(Level.WARNING, "Error reading " + fileName, e);
-            }
-        }
-        return null;
-    }
-
 }

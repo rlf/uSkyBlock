@@ -1,6 +1,5 @@
 package us.talabrek.ultimateskyblock.challenge;
 
-import dk.lockfuglsang.minecraft.nbt.NBTUtil;
 import dk.lockfuglsang.minecraft.util.FormatUtil;
 import dk.lockfuglsang.minecraft.util.ItemStackUtil;
 import org.bukkit.Bukkit;
@@ -24,19 +23,7 @@ import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerInfo;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 
@@ -188,21 +175,6 @@ public class ChallengeLogic implements Listener {
         return null;
     }
 
-    public static int calcAmount(int amount, char op, int inc, int timesCompleted) {
-        switch (op) {
-            case '+':
-                return amount + inc * timesCompleted;
-            case '-':
-                return amount - inc * timesCompleted; // Why?
-            case '*':
-            case '^':
-                return amount * (int) Math.pow(inc, timesCompleted); // Oh, my god! Just do the time m8!
-            case '/':
-                return amount / (int) Math.pow(inc, timesCompleted); // Yay! Free stuff!!!
-        }
-        return amount;
-    }
-
     public boolean tryComplete(final Player player, final String challenge, final String type) {
         if (type.equalsIgnoreCase("onPlayer")) {
             return tryCompleteOnPlayer(player, challenge);
@@ -216,7 +188,8 @@ public class ChallengeLogic implements Listener {
 
     /**
      * Try to complete a {@link Challenge} for the given {@link Player} where a minimal island level is a requirement.
-     * @param player Player to complete the challenge for.
+     *
+     * @param player    Player to complete the challenge for.
      * @param challenge Challenge to complete.
      * @return True if the challenge was completed succesfully, false otherwise.
      */
@@ -228,7 +201,7 @@ public class ChallengeLogic implements Listener {
         return false;
     }
 
-    private boolean islandContains(Player player, List<ItemStack> itemStacks, int radius) {
+    private boolean islandContains(Player player, Map<ItemStack, Integer> itemStacks, int radius) {
         final Location l = player.getLocation();
         final int px = l.getBlockX();
         final int py = l.getBlockY();
@@ -254,13 +227,14 @@ public class ChallengeLogic implements Listener {
     /**
      * Try to complete a {@link Challenge} on the island of the given {@link Player} where items or entities are
      * required to be present on the island.
-     * @param player Player to complete the challenge for.
+     *
+     * @param player        Player to complete the challenge for.
      * @param challengeName Challenge to complete.
      * @return True if the challenge was completed succesfully, false otherwise.
      */
     private boolean tryCompleteOnIsland(Player player, String challengeName) {
         Challenge challenge = getChallenge(challengeName);
-        List<ItemStack> requiredItems = challenge.getRequiredItems(0);
+        Map<ItemStack, Integer> requiredItems = challenge.getRequiredItems(0);
         int radius = challenge.getRadius();
         if (islandContains(player, requiredItems, radius) && hasEntitiesNear(player, challenge.getRequiredEntities(), radius)) {
             giveReward(player, challenge);
@@ -302,14 +276,15 @@ public class ChallengeLogic implements Listener {
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<EntityMatch, Integer> entry : countMap.entrySet()) {
                 sb.append("\u00a7e - ");
-                sb.append(" \u00a74" + entry.getValue() + " \u00a7ex");
-                sb.append(" \u00a7b" + entry.getKey().getDisplayName() + "\n");
+                sb.append(" \u00a74").append(entry.getValue()).append(" \u00a7ex");
+                sb.append(" \u00a7b").append(entry.getKey().getDisplayName()).append("\n");
             }
             player.sendMessage(tr("\u00a7eStill the following entities short:\n{0}", sb.toString()).split("\n"));
         }
         return countMap.isEmpty();
     }
 
+    // TODO: This logic is duplicated in SignLogic.tryComplete. Refactor to a common method.
     private boolean tryCompleteOnPlayer(Player player, String challengeName) {
         Challenge challenge = getChallenge(challengeName);
         PlayerInfo playerInfo = plugin.getPlayerInfo(player);
@@ -317,17 +292,23 @@ public class ChallengeLogic implements Listener {
         if (challenge != null && completion != null) {
             StringBuilder sb = new StringBuilder();
             boolean hasAll = true;
-            List<ItemStack> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
-            for (ItemStack required : requiredItems) {
-                String name = ItemStackUtil.getItemName(required);
-                if (!player.getInventory().containsAtLeast(required, required.getAmount())) {
-                    sb.append(tr(" \u00a74{0} \u00a7b{1}", (required.getAmount() - getCountOf(player.getInventory(), required)), name));
+            Map<ItemStack, Integer> requiredItems = challenge.getRequiredItems(completion.getTimesCompletedInCooldown());
+            for (Map.Entry<ItemStack, Integer> required : requiredItems.entrySet()) {
+                ItemStack requiredType = required.getKey();
+                int requiredAmount = required.getValue();
+                String name = ItemStackUtil.getItemName(requiredType);
+                if (!player.getInventory().containsAtLeast(requiredType, requiredAmount)) {
+                    sb.append(tr(" \u00a74{0} \u00a7b{1}", (requiredAmount - getCountOf(player.getInventory(), requiredType)), name));
                     hasAll = false;
                 }
             }
             if (hasAll) {
                 if (challenge.isTakeItems()) {
-                    player.getInventory().removeItem(requiredItems.toArray(new ItemStack[requiredItems.size()]));
+                    ItemStack[] itemsToRemove = ItemStackUtil.asValidItemStacksWithAmount(requiredItems);
+                    var leftovers = player.getInventory().removeItem(itemsToRemove);
+                    if (!leftovers.isEmpty()) {
+                        throw new IllegalStateException("Player " + player.getName() + " had items left over after completing challenge " + challengeName + ": " + leftovers);
+                    }
                 }
                 giveReward(player, challenge);
                 return true;
@@ -339,13 +320,9 @@ public class ChallengeLogic implements Listener {
     }
 
     public int getCountOf(Inventory inventory, ItemStack required) {
-        int count = 0;
-        for (ItemStack invItem : inventory.all(required.getType()).values()) {
-            if (invItem.getDurability() == required.getDurability() && NBTUtil.getNBTTag(invItem).equals(NBTUtil.getNBTTag(required))) {
-                count += invItem.getAmount();
-            }
-        }
-        return count;
+        return Arrays.stream(inventory.getContents())
+            .filter(item -> item != null && item.isSimilar(required))
+            .mapToInt(ItemStack::getAmount).sum();
     }
 
     private boolean giveReward(Player player, Challenge challenge) {
@@ -475,7 +452,7 @@ public class ChallengeLogic implements Listener {
         int i = 1;
         for (Iterator<Rank> it = ranksOnPage.iterator(); it.hasNext(); i++) {
             it.next();
-            int rowsInRanks = calculateRows(allRanks.subList(0,i));
+            int rowsInRanks = calculateRows(allRanks.subList(0, i));
             if (rowsToSkip <= 0 || ((rowsToSkip - rowsInRanks) < 0)) {
                 return ranksOnPage;
             }
@@ -551,10 +528,8 @@ public class ChallengeLogic implements Listener {
                         }
                         if (locked != null) {
                             currentChallengeItem.setType(locked.getType());
-                            currentChallengeItem.setDurability(locked.getDurability());
                         } else if (lockedItem != null) {
                             currentChallengeItem.setType(lockedItem.getType());
-                            currentChallengeItem.setDurability(lockedItem.getDurability());
                         }
                     } else {
                         lores = currentChallengeItem.getItemMeta().getLore();
@@ -642,10 +617,9 @@ public class ChallengeLogic implements Listener {
 
     @EventHandler
     public void onMemberJoinedEvent(MemberJoinedEvent e) {
-        if (!completionLogic.isIslandSharing() || !(e.getPlayerInfo() instanceof PlayerInfo)) {
+        if (!completionLogic.isIslandSharing() || !(e.getPlayerInfo() instanceof PlayerInfo playerInfo)) {
             return;
         }
-        PlayerInfo playerInfo = (PlayerInfo) e.getPlayerInfo();
         Map<String, ChallengeCompletion> completions = completionLogic.getIslandChallenges(e.getIslandInfo().getName());
         List<String> permissions = new ArrayList<>();
         for (Map.Entry<String, ChallengeCompletion> entry : completions.entrySet()) {

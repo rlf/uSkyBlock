@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.menu;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -9,7 +9,7 @@ import org.bukkit.inventory.Inventory;
  * Simple menu-less editor for boolean values.
  */
 public class BooleanEditMenu extends AbstractConfigMenu implements EditMenu {
-    public BooleanEditMenu(YmlConfiguration menuConfig) {
+    public BooleanEditMenu(FileConfiguration menuConfig) {
         super(menuConfig);
     }
 
@@ -21,7 +21,7 @@ public class BooleanEditMenu extends AbstractConfigMenu implements EditMenu {
 
     @Override
     public Inventory createEditMenu(String configName, String path, int page) {
-        YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
+        FileConfiguration config = FileUtil.getYmlConfiguration(configName);
         if (config.isBoolean(path)) {
             boolean value = config.getBoolean(path);
             config.set(path, !value);

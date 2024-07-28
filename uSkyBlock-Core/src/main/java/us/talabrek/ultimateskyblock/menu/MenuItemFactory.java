@@ -1,7 +1,7 @@
 package us.talabrek.ultimateskyblock.menu;
 
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,25 +22,25 @@ public class MenuItemFactory {
     public static final int MAX_INT_VALUE = 64;
     public static final String READONLY = "\u00a77";
 
-    public ItemStack createStringItem(String value, String path, YmlConfiguration config, boolean readonly) {
+    public ItemStack createStringItem(String value, String path, FileConfiguration config, boolean readonly) {
         return createLeafItem(new ItemStack(readonly ? Material.FLINT_AND_STEEL : Material.NAME_TAG, 1), value, path, config);
     }
 
-    public ItemStack createLeafItem(ItemStack item, String value, String path, YmlConfiguration config) {
+    public ItemStack createLeafItem(ItemStack item, String value, String path, FileConfiguration config) {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("\u00a77\u00a7o" + path.substring(path.lastIndexOf('.')+1));
         List<String> lore = new ArrayList<>();
         lore.add(STRING + value);
-        String comment = config.getComment(path);
-        if (comment != null) {
-            lore.addAll(wordWrap(comment.replaceAll("\n", " "), 20, 20));
+        List<String> comments = config.getComments(path);
+        if (!comments.isEmpty()) {
+            lore.addAll(wordWrap(String.join(" ", comments), 20, 20));
         }
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;
     }
 
-    public ItemStack createIntegerItem(int value, String path, YmlConfiguration config, boolean readonly) {
+    public ItemStack createIntegerItem(int value, String path, FileConfiguration config, boolean readonly) {
         ItemStack item = createIntegerIcon(value, readonly);
         return createLeafItem(
                 item,
@@ -51,10 +51,10 @@ public class MenuItemFactory {
     public ItemStack createIntegerIcon(int value, boolean readonly) {
         return Math.abs(value) <= MAX_INT_VALUE
                 ? (readonly ? new ItemStack(Material.DETECTOR_RAIL, value) : new ItemStack(Material.RAIL, value))
-                : (readonly ? new ItemStack(Material.IRON_BARS, 1, (short)1) : new ItemStack(Material.ACTIVATOR_RAIL, 1));
+                : (readonly ? new ItemStack(Material.IRON_BARS, 1) : new ItemStack(Material.ACTIVATOR_RAIL, 1));
     }
 
-    public ItemStack createBooleanItem(boolean value, String path, YmlConfiguration config, boolean readonly) {
+    public ItemStack createBooleanItem(boolean value, String path, FileConfiguration config, boolean readonly) {
         ItemStack icon = new ItemStack(readonly ? (value ? Material.GREEN_WOOL : Material.RED_WOOL) : (value ? Material.LIME_WOOL : Material.PINK_WOOL), 1);
         return createLeafItem(icon, value ? TRUE + tr("true") : FALSE + tr("false"),
                 path, config);

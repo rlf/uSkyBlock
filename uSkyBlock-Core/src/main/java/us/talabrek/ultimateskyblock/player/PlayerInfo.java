@@ -1,7 +1,6 @@
 package us.talabrek.ultimateskyblock.player;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -9,6 +8,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +41,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     private static final long serialVersionUID = 1L;
     private static final int YML_VERSION = 1;
     private final uSkyBlock plugin;
-    private String playerName;
+    private final String playerName;
     private String displayName;
     private UUID uuid;
 
@@ -49,8 +49,8 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
 
     private Location homeLocation;
 
-    private volatile FileConfiguration playerData;
-    private File playerConfigFile;
+    private final FileConfiguration playerData;
+    private final File playerConfigFile;
 
     private boolean islandGenerating = false;
     private boolean dirty = false;
@@ -65,7 +65,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
         if (!playerConfigFile.exists() && nameFile.exists() && !currentPlayerName.equals(PlayerDB.UNKNOWN_PLAYER_NAME)) {
             nameFile.renameTo(playerConfigFile);
         }
-        playerData = new YmlConfiguration();
+        playerData = new YamlConfiguration();
         if (playerConfigFile.exists()) {
             FileUtil.readConfig(playerData, playerConfigFile);
         }

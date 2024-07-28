@@ -1,46 +1,25 @@
 package dk.lockfuglsang.minecraft.util;
 
-import dk.lockfuglsang.minecraft.nbt.NBTItemStackTagger;
-import dk.lockfuglsang.minecraft.nbt.NBTUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Server;
-import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
 
 import static dk.lockfuglsang.minecraft.util.ItemStackMatcher.itemStack;
 import static dk.lockfuglsang.minecraft.util.ItemStackMatcher.itemStacks;
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
 
-/**
- * Tests the utility methods of ItemStackUtil
- */
 public class ItemStackUtilTest extends BukkitServerMock {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        Server server = setupServerMock();
+        setupServerMock();
     }
 
     @Before
@@ -49,75 +28,75 @@ public class ItemStackUtilTest extends BukkitServerMock {
         itemMetaMap.clear();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void createItemsWithProbabiltyNull() throws Exception {
-        ItemStackUtil.createItemsWithProbabilty(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void createItemsWithProbabiltyInvalid() throws Exception {
-        ItemStackUtil.createItemsWithProbabilty(Arrays.asList("{p:0.9}10:1"));
+    @Test
+    public void createBasicItemRequirement() {
+        ItemRequirement actual = ItemStackUtil.createItemRequirement("stone:1");
+        ItemRequirement expected = new ItemRequirement(new ItemStack(Material.STONE), 1, ItemRequirement.Operator.NONE, 0.0);
+        assertThat(actual, is(expected));
     }
 
     @Test
-    public void createItemsWithProbabilty1() throws Exception {
-        List<ItemStackUtil.ItemProbability> actual = ItemStackUtil.createItemsWithProbabilty(Arrays.asList("{p=0.9}LAVA_BUCKET:1"));
-        List<ItemStackUtil.ItemProbability> expected = Arrays.asList(
-                new ItemStackUtil.ItemProbability(0.9, new ItemStack(Material.LAVA_BUCKET, 1))
+    public void createItemRequirementWithDifferentIncrements() {
+        var specifications = List.of("stone:1", "stone:12;+1", "stone:1;-10", "stone:100;*0.1", "stone:1;/12.1");
+        var expected = List.of(
+            new ItemRequirement(new ItemStack(Material.STONE), 1, ItemRequirement.Operator.NONE, 0.0),
+            new ItemRequirement(new ItemStack(Material.STONE), 12, ItemRequirement.Operator.ADD, 1.0),
+            new ItemRequirement(new ItemStack(Material.STONE), 1, ItemRequirement.Operator.SUBTRACT, 10.0),
+            new ItemRequirement(new ItemStack(Material.STONE), 100, ItemRequirement.Operator.MULTIPLY, 0.1),
+            new ItemRequirement(new ItemStack(Material.STONE), 1, ItemRequirement.Operator.DIVIDE, 12.1)
         );
+        for (int i = 0; i < specifications.size(); i++) {
+            ItemRequirement actual = ItemStackUtil.createItemRequirement(specifications.get(i));
+            assertThat(actual, is(expected.get(i)));
+        }
+    }
+
+    @Test
+    public void createComplexItemRequirement() {
+        ItemRequirement actual = ItemStackUtil.createItemRequirement("minecraft:white_banner[complex={item:[]}]:1923;/0.001");
+        ItemRequirement expected = new ItemRequirement(new ItemStack(Material.WHITE_BANNER), 1923, ItemRequirement.Operator.DIVIDE, 0.001);
+        assertThat(actual, is(expected));
+        assertThat(actual.type().getItemMeta().toString(), is("[complex={item:[]}]"));
+    }
+
+    @Test
+    public void createItemsWithProbability1() {
+        List<ItemStackUtil.ItemProbability> actual = ItemStackUtil.createItemsWithProbability(List.of("{p=0.9}LAVA_BUCKET:1"));
+        List<ItemStackUtil.ItemProbability> expected = List.of(new ItemStackUtil.ItemProbability(0.9, new ItemStack(Material.LAVA_BUCKET, 1)));
         assertThat(actual, notNullValue());
         assertThat(actual, is(expected));
     }
 
     @Test
-    public void createItemsWithProbabiltyN() throws Exception {
-        List<ItemStackUtil.ItemProbability> actual = ItemStackUtil.createItemsWithProbabilty(Arrays.asList(
-                "{p=0.9}LAVA_BUCKET:1",
-                "{p=0.2}STONE:2:3",
-                "{p=0.3}NETHER_BRICK_FENCE:2"
-        ));
-        List<ItemStackUtil.ItemProbability> expected = Arrays.asList(
-                new ItemStackUtil.ItemProbability(0.9, new ItemStack(Material.LAVA_BUCKET, 1)),
-                new ItemStackUtil.ItemProbability(0.2, new ItemStack(Material.STONE, 3, (short) 2)),
-                new ItemStackUtil.ItemProbability(0.3, new ItemStack(Material.NETHER_BRICK_FENCE, 2))
-        );
+    public void createItemsWithProbabilityN() {
+        List<ItemStackUtil.ItemProbability> actual = ItemStackUtil.createItemsWithProbability(List.of("{p=0.9}LAVA_BUCKET:1", "{p=0.2}STONE:3", "{p=0.3}NETHER_BRICK_FENCE:2"));
+        List<ItemStackUtil.ItemProbability> expected = List.of(new ItemStackUtil.ItemProbability(0.9, new ItemStack(Material.LAVA_BUCKET, 1)), new ItemStackUtil.ItemProbability(0.2, new ItemStack(Material.STONE, 3)), new ItemStackUtil.ItemProbability(0.3, new ItemStack(Material.NETHER_BRICK_FENCE, 2)));
         assertThat(actual, notNullValue());
         assertThat(actual, is(expected));
     }
 
     @Test
-    public void createItemsWithProbabiltyWithNBTTag() throws Exception {
+    public void createItemsWithProbabilityWithComponents() {
         useMetaData = true;
-        List<ItemStackUtil.ItemProbability> actual = ItemStackUtil.createItemsWithProbabilty(Arrays.asList(
-                "{p=0.9}LAVA_BUCKET:1{Potion:Death}",
-                "{p=0.2}STONE:2:3 {MyLittle:\"Pony\"}",
-                "{p=0.3}NETHER_BRICK_FENCE:2\t {meta:{nested:{data:[{},{}]}}}"
-        ));
-        List<ItemStackUtil.ItemProbability> expected = Arrays.asList(
-                new ItemStackUtil.ItemProbability(0.9, NBTUtil.setNBTTag(
-                        new ItemStack(Material.LAVA_BUCKET, 1),
-                        "{Potion:Death}")),
-                new ItemStackUtil.ItemProbability(0.2, NBTUtil.setNBTTag(
-                        new ItemStack(Material.STONE, 3, (short) 2),
-                        "{MyLittle:\"Pony\"}")),
-                new ItemStackUtil.ItemProbability(0.3, NBTUtil.setNBTTag(
-                        new ItemStack(Material.NETHER_BRICK_FENCE, 2),
-                        "{meta:{nested:{data:[{},{}]}}}"))
-        );
-        assertThat(actual, notNullValue());
-        assertThat(actual, is(expected));
-        assertThat(NBTUtil.getNBTTag(actual.get(2).getItem()), is("{meta:{nested:{data:[{},{}]}}}"));
-    }
+        List<ItemStackUtil.ItemProbability> actual = ItemStackUtil.createItemsWithProbability(List.of("{p=0.9}lava_bucket[some: value]:1", "{p=0.2}minecraft:stone[quoted: \"value\"]:3", "{p=0.3}NETHER_BRICK_FENCE[meta:{nested:{data:[{},{}]}}]:2"));
 
-    @Test(expected = NullPointerException.class)
-    public void createItemListNull() throws Exception {
-        ItemStackUtil.createItemList((List) null);
+        assertThat(actual.get(0).item().getType(), is(Material.LAVA_BUCKET));
+        assertThat(actual.get(0).item().getItemMeta().toString(), is("[some: value]"));
+        assertThat(actual.get(0).probability(), is(0.9));
+
+        assertThat(actual.get(1).item().getType(), is(Material.STONE));
+        assertThat(actual.get(1).item().getItemMeta().toString(), is("[quoted: \"value\"]"));
+        assertThat(actual.get(1).probability(), is(0.2));
+
+        assertThat(actual.get(2).item().getType(), is(Material.NETHER_BRICK_FENCE));
+        assertThat(actual.get(2).item().getItemMeta().toString(), is("[meta:{nested:{data:[{},{}]}}]"));
+        assertThat(actual.get(2).probability(), is(0.3));
     }
 
     @Test
-    public void createItemListInvalid() throws Exception {
+    public void createItemListInvalid() {
         try {
-            ItemStackUtil.createItemList(Arrays.asList("DART"));
+            ItemStackUtil.createItemList(List.of("DART"));
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Unknown item: 'DART'"));
@@ -125,122 +104,60 @@ public class ItemStackUtilTest extends BukkitServerMock {
     }
 
     @Test
-    public void createItemList() throws Exception {
-        List<ItemStack> actual = ItemStackUtil.createItemList(Arrays.asList(
-                "LAVA_BUCKET:1",
-                "STONE:2:3",
-                "NETHER_BRICK_FENCE:2"
-        ));
-        List<ItemStack> expected = Arrays.asList(
-                new ItemStack(Material.LAVA_BUCKET, 1),
-                new ItemStack(Material.STONE, 3, (short) 2),
-                new ItemStack(Material.NETHER_BRICK_FENCE, 2)
-        );
+    public void createItemList() {
+        List<ItemStack> actual = ItemStackUtil.createItemList(List.of("LAVA_BUCKET:1", "STONE:3", "NETHER_BRICK_FENCE:2"));
+        List<ItemStack> expected = List.of(new ItemStack(Material.LAVA_BUCKET, 1), new ItemStack(Material.STONE, 3), new ItemStack(Material.NETHER_BRICK_FENCE, 2));
         assertThat(actual, itemStacks(expected));
     }
 
     @Test
-    public void createItemListStringAndListWithNBTTags() throws Exception {
-        useMetaData = true;
-        List<ItemStack> actual = ItemStackUtil.createItemList(Arrays.asList("NETHER_BRICK_FENCE:2{meta2}", "JUNGLE_WOOD:256 {meta3}"));
-        List<ItemStack> expected = Arrays.asList(
-                NBTUtil.setNBTTag(new ItemStack(Material.NETHER_BRICK_FENCE, 2), "{meta2}"),
-                NBTUtil.setNBTTag(new ItemStack(Material.JUNGLE_WOOD, 256), "{meta3}") // Jungle Wood Planks
-        );
-        assertThat(actual, is(expected));
+    public void createItemListStringAndListWithComponents() {
+        List<ItemStack> actual = ItemStackUtil.createItemList(List.of("diamond_sword[damage:200]:2", "white_banner[minecraft:banner_patterns=[{color: \"green\", pattern: \"minecraft:creeper\"}]]:256"));
+
+        assertThat(actual.get(0).getType(), is(Material.DIAMOND_SWORD));
+        assertThat(actual.get(1).getType(), is(Material.WHITE_BANNER));
+
+        assertThat(actual.get(0).getItemMeta().toString(), is("[damage:200]"));
+        assertThat(actual.get(1).getItemMeta().toString(), is("[minecraft:banner_patterns=[{color: \"green\", pattern: \"minecraft:creeper\"}]]"));
+
+        assertThat(actual.get(0).getAmount(), is(2));
         assertThat(actual.get(1).getAmount(), is(256));
-        assertThat(NBTUtil.getNBTTag(actual.get(0)), is("{meta2}"));
     }
 
     @Test
-    public void createItemArrayNull() throws Exception {
+    public void createItemArrayNull() {
         ItemStack[] actual = ItemStackUtil.createItemArray(null);
         assertThat(actual, is(new ItemStack[0]));
     }
 
     @Test
-    public void createItemArrayEmpty() throws Exception {
-        ItemStack[] actual = ItemStackUtil.createItemArray(Collections.<ItemStack>emptyList());
+    public void createItemArrayEmpty() {
+        ItemStack[] actual = ItemStackUtil.createItemArray(List.of());
         assertThat(actual, is(new ItemStack[0]));
     }
 
     @Test
-    public void createItemArray() throws Exception {
-        List<ItemStack> expected = Arrays.asList(
-                new ItemStack(Material.LAVA_BUCKET, 1),
-                new ItemStack(Material.STONE, 3, (short) 2),
-                new ItemStack(Material.NETHER_BRICK_FENCE, 2),
-                new ItemStack(Material.JUNGLE_WOOD, 256) // Jungle Wood Planks
+    public void createItemArray() {
+        List<ItemStack> expected = List.of(new ItemStack(Material.LAVA_BUCKET, 1), new ItemStack(Material.STONE, 3), new ItemStack(Material.NETHER_BRICK_FENCE, 2), new ItemStack(Material.JUNGLE_WOOD, 256) // Jungle Wood Planks
         );
         ItemStack[] actual = ItemStackUtil.createItemArray(expected);
         assertThat(actual, is(expected.toArray()));
     }
 
     @Test
-    @Ignore("Bukkit.getUnsafe() is not available in test-runner")
-    public void createItemStack_LegacyColor() throws Exception {
-        ItemStack actual = ItemStackUtil.createItemStack("STAINED_GLASS_PANE:14");
-        assertThat(actual.getType(), is(Material.RED_STAINED_GLASS_PANE));
-        assertThat(actual.getDurability(), is(0));
-    }
-
-    @Test
-    public void createItemStackName() throws Exception {
+    public void createItemStackName() {
         ItemStack actual = ItemStackUtil.createItemStack("DIRT");
         ItemStack expected = new ItemStack(Material.DIRT, 1);
         assertThat(actual, itemStack(expected));
 
-        actual = ItemStackUtil.createItemStack("STONE:2"); // Diorite
-        expected = new ItemStack(Material.STONE, 1, (short) 2);
+        actual = ItemStackUtil.createItemStack("DIORITE");
+        expected = new ItemStack(Material.DIORITE, 1);
         assertThat(actual, itemStack(expected));
     }
 
     @Test
-    public void createItemStackWithMeta() throws Exception {
-        useMetaData = true;
-        ItemStack actual = ItemStackUtil.createItemStack("STONE:2", "&lMy Title", "Hello &4World");
-        ItemStack expected = new ItemStack(Material.STONE, 1, (short) 2);
-        ItemMeta itemMeta = expected.getItemMeta();
-        itemMeta.setDisplayName("\u00a7lMy Title");
-        itemMeta.setLore(Arrays.asList("Hello \u00a74World"));
-        expected.setItemMeta(itemMeta);
-
-        assertThat(actual.getItemMeta(), notNullValue());
-        verify(actual.getItemMeta()).setDisplayName("\u00a7lMy Title");
-        assertThat(actual, is(expected));
-    }
-
-    @Test
-    public void createItemStackWithMetaNBTTag() throws Exception {
-        useMetaData = true;
-        ItemStack actual = ItemStackUtil.createItemStack("STONE {display:{Name:\"Hi mom\"}}", "&lMy Title", "Hello &4World");
-        ItemStack expected = new ItemStack(Material.STONE, 1);
-        ItemMeta itemMeta = expected.getItemMeta();
-        itemMeta.setDisplayName("\u00a7lMy Title");
-        itemMeta.setLore(Arrays.asList("Hello \u00a74World"));
-        expected.setItemMeta(itemMeta);
-        expected = NBTUtil.setNBTTag(expected, "{display:{Name:\"Hi mom\"}}");
-
-        assertThat(actual.getItemMeta(), notNullValue());
-        verify(actual.getItemMeta()).setDisplayName("\u00a7lMy Title");
-        assertThat(actual, is(expected));
-        // Also verify the string, just to be extra sure
-        assertThat(actual.toString(), is("ItemStack{STONE x 1, {displayName=\u00a7lMy Title, lore=[Hello \u00a74World], nbt={display:{Name:\"Hi mom\"}}}}"));
-    }
-
-    @Test
-    public void testCloneNull() throws Exception {
-        List<ItemStack> clone = ItemStackUtil.clone(null);
-        assertThat(clone, nullValue());
-    }
-
-    @Test
-    public void testClone() throws Exception {
-        List<ItemStack> orig = new ArrayList<>(Arrays.asList(
-                new ItemStack(Material.LAVA, 1),
-                new ItemStack(Material.DIRT, 2),
-                new ItemStack(Material.STONE, 3)
-        ));
+    public void testClone() {
+        List<ItemStack> orig = new ArrayList<>(List.of(new ItemStack(Material.LAVA, 1), new ItemStack(Material.DIRT, 2), new ItemStack(Material.STONE, 3)));
         List<ItemStack> clone = ItemStackUtil.clone(orig);
         assertThat(clone, itemStacks(orig));
         orig.get(0).setAmount(10);
@@ -250,5 +167,4 @@ public class ItemStackUtilTest extends BukkitServerMock {
         assertThat(clone.size(), is(3));
         assertThat(clone.get(1).getAmount(), is(2));
     }
-
 }

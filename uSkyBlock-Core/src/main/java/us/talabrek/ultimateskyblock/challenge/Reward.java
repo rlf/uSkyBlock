@@ -32,8 +32,8 @@ public class Reward {
     public List<ItemStack> getItemReward() {
         List<ItemStack> copy = new ArrayList<>();
         for (ItemStackUtil.ItemProbability e : itemReward) {
-            if (RND.nextDouble() < e.getProbability()) {
-                copy.add(e.getItem().clone());
+            if (RND.nextDouble() < e.probability()) {
+                copy.add(e.item().clone());
             }
         }
         return copy;

@@ -4,9 +4,9 @@ import dk.lockfuglsang.minecraft.command.AbstractCommand;
 import dk.lockfuglsang.minecraft.command.CompositeCommand;
 import dk.lockfuglsang.minecraft.command.completion.AbstractTabCompleter;
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 
@@ -31,7 +31,7 @@ public class ConfigCommand extends CompositeCommand {
             @Override
             public boolean execute(CommandSender commandSender, String alias, Map<String, Object> map, String... args) {
                 if (args.length > 0) {
-                    YmlConfiguration config = FileUtil.getYmlConfiguration(map.get("config") + ".yml");
+                    FileConfiguration config = FileUtil.getYmlConfiguration(map.get("config") + ".yml");
                     String searchTerms = String.join(" ", args);
                     List<String> results = config.getKeys(true).stream()
                             .filter(f -> f.contains(searchTerms))
@@ -47,7 +47,7 @@ public class ConfigCommand extends CompositeCommand {
         this.plugin = plugin;
     }
 
-    private static String toString(YmlConfiguration config, String key) {
+    private static String toString(FileConfiguration config, String key) {
         if (config.isConfigurationSection(key)) {
             return tr("\u00a7a<section>");
         } else if (config.isDouble(key)) {

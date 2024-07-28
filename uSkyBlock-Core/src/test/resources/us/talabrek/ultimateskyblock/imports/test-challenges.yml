@@ -1,0 +1,58 @@
+# Header Comments
+# Make sure these are preserved
+
+# Unrelated items - should be preserved
+allowChallenges: true
+
+challengeColor: '&e'
+
+# Unrelated item that should be converted
+ISLAND:
+  # Comment should be preserved
+  lockedDisplayItem: BLUE_STAINED_GLASS_PANE # Ideally inline comments are also preserved
+
+# Challenge items - items should be converted
+
+path:
+  to:
+    name: '&7Novice'
+    # Simple display item
+    displayItem: CYAN_TERRACOTTA
+    resetInHours: 20
+    challenges:
+      testchallenge:
+        name: '&7Only for testing'
+        description: Not a real challenge.
+        type: onPlayer
+        # Mix of required items
+        requiredItems:
+          - COBBLESTONE:64;+2
+          - IRON_INGOT:100
+          - ENCHANTED_BOOK{StoredEnchantments:[{id:34,lvl:3}]}:1
+          - WHITE_WOOL:32;-1
+          - DIAMOND:1;*1
+          - INVALID_ITEM:10
+        displayItem: COBBLESTONE
+        # Complex display item with meta
+        lockedDisplayItem: 'ENCHANTED_BOOK {StoredEnchantments:[{id:34,lvl:3}]}'
+        resetInHours: 12
+        reward:
+          text: Reward to test the converter
+          items:
+            - LEATHER:3
+            - '{p=0.2}BOOK:1'
+            - '{p=0.99}ENCHANTED_BOOK:3 {StoredEnchantments:[{id:34,lvl:3}]}'
+          currency: 10
+          xp: 10
+          commands:
+            - op:test command
+        repeatReward:
+          text: This should work the same
+          items:
+            - LEATHER:1
+            - '{p=0.1}BOOK:1'
+          currency: 5
+          xp: 5
+
+# Here used to be the old config description. It should be removed and added as header.
+version: 106

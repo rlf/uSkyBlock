@@ -19,7 +19,7 @@
         <maven-artifact.version>3.8.6</maven-artifact.version>
         <api.version>${project.version}</api.version>
         <paperlib.version>1.0.8</paperlib.version>
-        <spigotapi.version>1.20.4-R0.1-SNAPSHOT</spigotapi.version>
+        <spigotapi.version>1.20.6-R0.1-SNAPSHOT</spigotapi.version>
         <vault.version>1.7</vault.version>
         <worldedit.version>7.2.19</worldedit.version>
         <worldguard.version>7.0.9</worldguard.version>

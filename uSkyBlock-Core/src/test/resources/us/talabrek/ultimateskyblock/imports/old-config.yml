@@ -49,15 +49,15 @@ options:
     # [item list] The list of items to place in the chest when a player starts a new island. ITEM_ID:HOW_MANY.
     # default is 2 ice, 1 watermelon, 1 cactus, 1 lava bucket, 1 red & brown mushroom, 1 pumpkin seed, 1 sugar cane, 1 sign.
     chestItems:
-    - ice:2
-    - melon_slice:1
-    - cactus:1
-    - lava_bucket:1
-    - red_mushroom:1
-    - brown_mushroom:1
-    - pumpkin_seeds:1
-    - sugar_cane:1
-    - oak_sign:1
+    - ICE:2
+    - MELON_SLICE:1
+    - CACTUS:1
+    - LAVA_BUCKET:1
+    - RED_MUSHROOM:1
+    - BROWN_MUSHROOM:1
+    - PUMPKIN_SEEDS:1
+    - SUGAR_CANE:1
+    - SIGN:1
     addExtraItems: true
     islandTeleportDelay: 2
     allowPvP: deny
@@ -82,27 +82,27 @@ options:
       spawner: 10
     extraPermissions:
       smallbonus:
-      - cobblestone:16
-      - cooked_porkchop:5
+      - COBBLESTONE:16
+      - COOKED_PORKCHOP:5
       mediumbonus:
-      - torch:16
-      - lava_bucket:1
+      - TORCH:16
+      - LAVA_BUCKET:1
       largebonus:
-      - dirt:5
-      - sand:5
+      - DIRT:5
+      - SAND:5
       giantbonus:
-      - grass_block:1
-      - mycelium:1
+      - GRASS:1
+      - MYCELIUM:1
       extremebonus:
-      - bone:8
-      - coal:4
+      - BONE:8
+      - COAL:4
       donorbonus:
-      - bow:1
-      - arrow:32
-      - stone_sword:1
+      - BOW:1
+      - ARROW:32
+      - STONE_SWORD:1
       netheraccess:
-      - obsidian:14
-      - flint_and_steel:1
+      - OBSIDIAN:14
+      - FLINT_AND_STEEL:1
   extras:
 
     # [true/false] If true, return players that don't have an island (this includes players removed from a party while offline), to the server spawn when they login.
@@ -277,7 +277,7 @@ options:
 donor-perks:
   # the permission node to give to someone
   'usb.donor.small':
-    extraItems: [bone_meal:1]
+    extraItems: [BONE_MEAL:1]
     maxPartySize: 5
     animals: 84
     monsters: 60
@@ -305,7 +305,7 @@ island-schemes:
     description: The default uSkyBlock island
 
     # item to display in the GUI
-    displayItem: oak_sapling
+    displayItem: SAPLING
 
     # optional, default true (true enabled in GUI, false disabled in GUI)
     enabled: true
@@ -329,12 +329,12 @@ island-schemes:
   skySMP:
     permission: usb.schematic.skysmp
     description: The original SkySMP island
-    displayItem: oak_leaves
+    displayItem: OAK_LEAVES
     enabled: false
     index: 3
     extraItems:
-    - obsidian:14
-    - flint_and_steel:1
+    - OBSIDIAN:14
+    - FLINT_AND_STEEL:1
     maxPartySize: 4
     animals: 64
     monsters: 50
@@ -429,7 +429,7 @@ nether:
     blaze: 0.2
 tool-menu:
   enabled: true
-  tool: OAK_SAPLING
+  tool: SAPLING
   commands:
     CHEST: island
     CRAFTING_TABLE: challenges
@@ -462,7 +462,7 @@ placeholder:
   servercommandplaceholder: false
 
 # DO NOT TOUCH THE FIELDS BELOW
-version: 109
+version: 108
 force-replace:
   options.party.invite-timeout: 100
   options.island.islandTeleportDelay: 5

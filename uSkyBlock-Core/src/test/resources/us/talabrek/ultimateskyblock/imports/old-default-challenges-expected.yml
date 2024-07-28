@@ -137,12 +137,6 @@ rankLeeway: 12
 # [integer] The time in hours before required items reset to default. (only if not specified in the challenges below)
 defaultResetInHours: 20
 
-# [integer] The default radius in blocks when using onIsland. Can be overridden in the challenges below.
-radius: 10
-
-# [integer] The maximum number of times a challenge can be completed by default. 0 means unlimited. Can be overridden in the challenge definition below.
-repeatLimit: 0
-
 # [color code] The color to use for uncompleted challenges in the list.
 challengeColor: '&e'
 
@@ -1786,5 +1780,12 @@ ranks:
           currency: 40
           xp: 40
 
+# This file has been updated to version 107. Please check the changes made in this version.
+# Changes in this version:
+#  - Items are now specified in the new component format.
+#  - Refer to the config header for the new format.
+#  - NBT tags are not automatically converted. They have been moved to the comments, please check them manually.
+#    You can use the following converter to convert the old item specifications to the new format:
+#    https://docs.papermc.io/misc/tools/item-command-converter
 # DO NOT CHANGE THE VERSION! You will break the conversion and unexpected things will happen!
 version: 107

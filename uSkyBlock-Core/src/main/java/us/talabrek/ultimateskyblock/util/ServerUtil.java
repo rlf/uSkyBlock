@@ -1,9 +1,10 @@
 package us.talabrek.ultimateskyblock.util;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -18,7 +19,7 @@ public enum ServerUtil {;
         boolean isBungeeMode = false;
         File spigotYml = new File(".", "spigot.yml");
         if (spigotYml.exists()) {
-            YmlConfiguration spigotConfig = new YmlConfiguration();
+            FileConfiguration spigotConfig = new YamlConfiguration();
             FileUtil.readConfig(spigotConfig, spigotYml);
             isBungeeMode = spigotConfig.getBoolean("settings.bungeecord", false);
         }

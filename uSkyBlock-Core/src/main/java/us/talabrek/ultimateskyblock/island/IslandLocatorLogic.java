@@ -1,8 +1,9 @@
 package us.talabrek.ultimateskyblock.island;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import us.talabrek.ultimateskyblock.Settings;
@@ -24,7 +25,7 @@ public class IslandLocatorLogic {
     private static final Logger log = Logger.getLogger(IslandLocatorLogic.class.getName());
     private final uSkyBlock plugin;
     private final File configFile;
-    private final YmlConfiguration config;
+    private final FileConfiguration config;
     private final Map<String, Long> reservations = new ConcurrentHashMap<>();
     private Location lastIsland = null;
     private long reservationTimeout;
@@ -32,7 +33,7 @@ public class IslandLocatorLogic {
     public IslandLocatorLogic(final uSkyBlock plugin) {
         this.plugin = plugin;
         this.configFile = new File(plugin.getDataFolder(), "lastIslandConfig.yml");
-        this.config = new YmlConfiguration();
+        this.config = new YamlConfiguration();
         FileUtil.readConfig(config, configFile);
         // Backward compatibility
         if (!config.contains("options.general.lastIslandX") && plugin.getConfig().contains("options.general.lastIslandX")) {

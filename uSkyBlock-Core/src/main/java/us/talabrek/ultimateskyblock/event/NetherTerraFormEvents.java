@@ -60,7 +60,7 @@ public class NetherTerraFormEvents implements Listener {
         ConfigurationSection config = plugin.getConfig().getConfigurationSection("nether.terraform");
         if (config != null) {
             for (String key : config.getKeys(false)) {
-                Material mat = Material.getMaterial(key);
+                Material mat = Material.matchMaterial(key);
                 if (mat != null) {
                     terraFormMap.put(mat, MaterialUtil.createProbabilityList(config.getStringList(key)));
                 }

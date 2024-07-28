@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 public enum MaterialUtil {
     ;
-    private static final Pattern MATERIAL_PROBABILITY = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?\\s*(?<id>[A-Z_0-9]+)");
+    private static final Pattern MATERIAL_PROBABILITY = Pattern.compile("(\\{p=(?<prob>0\\.[0-9]+)\\})?\\s*(?<id>[A-Z_0-9a-z]+)");
     private static final Collection<Material> SANDS = Arrays.asList(Material.SAND, Material.RED_SAND, Material.GRAVEL, Material.WHITE_CONCRETE_POWDER, Material.ORANGE_CONCRETE_POWDER, Material.MAGENTA_CONCRETE_POWDER, Material.LIGHT_BLUE_CONCRETE_POWDER, Material.YELLOW_CONCRETE_POWDER, Material.LIME_CONCRETE_POWDER, Material.PINK_CONCRETE_POWDER, Material.GRAY_CONCRETE_POWDER, Material.LIGHT_GRAY_CONCRETE_POWDER, Material.CYAN_CONCRETE_POWDER, Material.PURPLE_CONCRETE_POWDER, Material.BLUE_CONCRETE_POWDER, Material.BROWN_CONCRETE_POWDER, Material.GREEN_CONCRETE_POWDER, Material.RED_CONCRETE_POWDER, Material.BLACK_CONCRETE_POWDER);
     private static final Collection<Material> WOOD_TOOLS = Arrays.asList(Material.WOODEN_AXE, Material.WOODEN_HOE, Material.WOODEN_PICKAXE, Material.WOODEN_SHOVEL, Material.WOODEN_SWORD);
     private static final Collection<Material> STONE_TOOLS = Arrays.asList(Material.STONE_AXE, Material.STONE_HOE, Material.STONE_PICKAXE, Material.STONE_SHOVEL, Material.STONE_SWORD);
@@ -68,7 +68,7 @@ public enum MaterialUtil {
         for (String line : matList) {
             Matcher m = MATERIAL_PROBABILITY.matcher(line);
             if (m.matches()) {
-                Material mat = Material.getMaterial(m.group("id"));
+                Material mat = Material.matchMaterial(m.group("id"));
                 if (mat == null) {
                     Bukkit.getLogger().log(Level.WARNING, "Unknown material: " + line);
                     continue;

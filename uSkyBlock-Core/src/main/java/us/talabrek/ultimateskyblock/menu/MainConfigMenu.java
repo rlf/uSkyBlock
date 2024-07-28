@@ -1,10 +1,11 @@
 package us.talabrek.ultimateskyblock.menu;
 
 import dk.lockfuglsang.minecraft.file.FileUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -37,7 +38,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     private final MenuItemFactory factory;
     private final List<EditMenu> editMenus;
 
-    public MainConfigMenu(uSkyBlock plugin, YmlConfiguration menuConfig, MenuItemFactory factory, List<EditMenu> editMenus) {
+    public MainConfigMenu(uSkyBlock plugin, FileConfiguration menuConfig, MenuItemFactory factory, List<EditMenu> editMenus) {
         super(menuConfig);
         this.plugin = plugin;
         this.factory = factory;
@@ -135,7 +136,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
             @Override
             public void run() {
                 try {
-                    YmlConfiguration config = FileUtil.getYmlConfiguration(configName);
+                    FileConfiguration config = FileUtil.getYmlConfiguration(configName);
                     config.set("dirty", null);
                     config.save(new File(plugin.getDataFolder(), configName));
                     plugin.sync(new Runnable() {
@@ -155,7 +156,7 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
     }
 
     private Inventory createFileMenu(String filename, int page) {
-        YmlConfiguration config = FileUtil.getYmlConfiguration(filename);
+        FileConfiguration config = FileUtil.getYmlConfiguration(filename);
         int row = 0;
         int col = 1;
         ArrayList<ItemStack> menuList = new ArrayList<>(54);
@@ -268,16 +269,16 @@ public class MainConfigMenu extends AbstractConfigMenu implements EditMenu {
         return createFileMenu(configName, page);
     }
 
-    private int addSection(ArrayList<ItemStack> menuList, ConfigurationSection sec, int row, int col, YmlConfiguration config, String filename) {
+    private int addSection(ArrayList<ItemStack> menuList, ConfigurationSection sec, int row, int col, FileConfiguration config, String filename) {
         if (isBlackListed(filename, sec.getCurrentPath())) {
             return row;
         }
         ItemStack item = new ItemStack(Material.PAPER, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("\u00a77\u00a7o" + sec.getName());
-        String comment = config.getComment(sec.getCurrentPath());
-        if (comment != null) {
-            meta.setLore(wordWrap(comment.replaceAll("\n", " "), 20, 20));
+        List<String> comments = config.getComments(sec.getCurrentPath());
+        if (!comments.isEmpty()) {
+            meta.setLore(wordWrap(String.join(" ", comments), 20, 20));
         }
         item.setItemMeta(meta);
         int index = getIndex(row, col);

@@ -8,12 +8,12 @@ import dk.lockfuglsang.minecraft.file.FileUtil;
 import dk.lockfuglsang.minecraft.po.I18nUtil;
 import dk.lockfuglsang.minecraft.util.TimeUtil;
 import dk.lockfuglsang.minecraft.util.VersionUtil;
-import dk.lockfuglsang.minecraft.yml.YmlConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -65,6 +65,7 @@ import us.talabrek.ultimateskyblock.handler.CooldownHandler;
 import us.talabrek.ultimateskyblock.handler.WorldGuardHandler;
 import us.talabrek.ultimateskyblock.handler.placeholder.PlaceholderHandler;
 import us.talabrek.ultimateskyblock.hook.HookManager;
+import us.talabrek.ultimateskyblock.imports.ItemComponentConverter;
 import us.talabrek.ultimateskyblock.imports.USBImporterExecutor;
 import us.talabrek.ultimateskyblock.island.BlockLimitLogic;
 import us.talabrek.ultimateskyblock.island.IslandGenerator;
@@ -204,12 +205,21 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         return FileUtil.getYmlConfiguration("config.yml");
     }
 
+    private void convertConfigItemsTo1_20_6IfRequired() {
+        var converter = new ItemComponentConverter(getLogger());
+        converter.checkAndDoImport(getDataFolder());
+    }
+
     @Override
     public void onEnable() {
         WorldManager.skyBlockWorld = null; // Force a re-import or what-ever...
         WorldManager.skyBlockNetherWorld = null;
         missingRequirements = null;
         instance = this;
+
+        // Converter has to run before the plugin loads its config files.
+        convertConfigItemsTo1_20_6IfRequired();
+
         CommandManager.registerRequirements(this);
         FileUtil.setDataFolder(getDataFolder());
         FileUtil.setAllwaysOverwrite("levelConfig.yml");
@@ -247,8 +257,8 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
 
         updateChecker = new SkyUpdateChecker(this);
         // Runs every 4 hours
-        // noinspection deprecation
-        getServer().getScheduler().scheduleAsyncRepeatingTask(this, () -> getUpdateChecker().checkForUpdates(), 0L, 288000L);
+        long FOUR_HOURS_IN_TICKS = 4L * 60L * 60L * 20L;
+        getServer().getScheduler().runTaskTimerAsynchronously(this, () -> getUpdateChecker().checkForUpdates(), 0L, FOUR_HOURS_IN_TICKS);
 
         metricsManager = new MetricsManager(this);
     }
@@ -400,13 +410,10 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
             pi = playerLogic.getPlayerInfo(member);
             islandInfo.removeMember(pi);
         }
-        islandLogic.clearIsland(islandLocation, new Runnable() {
-            @Override
-            public void run() {
-                postDelete(finalPI);
-                postDelete(islandInfo);
-                if (runner != null) runner.run();
-            }
+        islandLogic.clearIsland(islandLocation, () -> {
+            postDelete(finalPI);
+            postDelete(islandInfo);
+            if (runner != null) runner.run();
         });
     }
 
@@ -769,7 +776,7 @@ public class uSkyBlock extends JavaPlugin implements uSkyBlockAPI, CommandManage
         challengeLogic = new ChallengeLogic(FileUtil.getYmlConfiguration("challenges.yml"), this);
         menu = new SkyBlockMenu(this, challengeLogic);
         configMenu = new ConfigMenu(this);
-        YmlConfiguration levelConfig = FileUtil.getYmlConfiguration("levelConfig.yml");
+        FileConfiguration levelConfig = FileUtil.getYmlConfiguration("levelConfig.yml");
         // Disabled until AWE/FAWE supports 1.13
         //levelLogic = AsyncWorldEditHandler.isAWE() ? new AweLevelLogic(this, levelConfig) : new ChunkSnapshotLevelLogic(this, levelConfig);
         levelLogic = new ChunkSnapshotLevelLogic(this, levelConfig);

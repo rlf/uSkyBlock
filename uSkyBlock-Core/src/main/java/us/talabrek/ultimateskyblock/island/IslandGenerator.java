@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
@@ -129,7 +130,7 @@ public class IslandGenerator {
         if (block.getType() == Material.CHEST) {
             final Chest chest = (Chest) block.getState();
             final Inventory inventory = chest.getInventory();
-            inventory.addItem(Settings.island_chestItems);
+            inventory.addItem(Settings.getIslandChestItems().toArray(new ItemStack[0]));
             if (Settings.island_addExtraItems) {
                 inventory.addItem(ItemStackUtil.createItemArray(perk.getExtraItems()));
             }
