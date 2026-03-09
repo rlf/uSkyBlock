@@ -21,7 +21,7 @@
       <div class="inner">
         <h1>uSkyBlock</h1>
         <h2>The best skyblock bukkit plugin around...</h2>
-        <a href="https://github.com/rlf/uSkyBlock" class="button"><small>View project on</small> GitHub</a>
+        <a href="https://github.com/uskyblock/uskyblock" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
 
@@ -31,145 +31,7 @@
           <h1>
 <a id="uskyblock" class="anchor" href="#uskyblock" aria-hidden="true"><span class="octicon octicon-link"></span></a>uSkyBlock</h1>
 
-<p>This is a continually updated and custom version of Talabrek's Ultimate SkyBlock plugin.</p>
+<p>uSkyBlock has been continued by <a href="https://github.com/uskyblock/uskyblock">uSkyBlock Team</a>. Please find our latest releases, sources and other information on our GitHub page.</p>
 
-<p>We are on <a href="https://www.spigotmc.org/resources/uskyblock.2280/">Spigot</a> and <a href="http://dev.bukkit.org/bukkit-plugins/uskyblock/">Bukkit</a></p>
-
-<h1>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
-
-<p>This version depends on the following plugins:</p>
-
-<ul>
-<li>Bukkit/Spigot 1.8-R0.1-SNAPSHOT</li>
-<li>Vault 1.5.x</li>
-<li>WorldEdit 6.0.0-SNAPSHOT</li>
-<li>WorldGuard 6.0.0-SNAPSHOT</li>
-</ul>
-
-<h2>
-<a id="releases" class="anchor" href="#releases" aria-hidden="true"><span class="octicon octicon-link"></span></a>Releases</h2>
-
-<p><a href="https://travis-ci.org/rlf/uSkyBlock"><img src="https://api.travis-ci.org/rlf/uSkyBlock.svg" alt="Build Status"></a> <a href="http://isitmaintained.com/project/rlf/uSkyBlock" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/rlf/uSkyBlock.svg" alt="Average time to resolve an issue"></a> <a href="http://isitmaintained.com/project/rlf/uSkyBlock" title="Percentage of issues still open"><img src="http://isitmaintained.com/badge/open/rlf/uSkyBlock.svg" alt="Percentage of issues still open"></a></p>
-
-<p>Official releases for the latest Bukkit can be found here <a href="https://github.com/rlf/uSkyBlock/releases">https://github.com/rlf/uSkyBlock/releases</a></p>
-
-<p>Releases (unsupported) for Bukkit 1.7.9/10 can be downloaded below
-<ul>
-	<li><a href="releases/bukkit-1.7.10/uSkyBlock-2.4.9.jar">2.4.9 for 1.7.10</a></li>
-</ul>
-</p>
-
-
-<p>Pre-releases will end in a date-stamp, and is considered <strong>unsafe</strong> for production servers.</p>
-
-<p>Releases have a clean version number, has been tested, and should be safe for production servers.</p>
-
-<h2>
-<a id="config-files" class="anchor" href="#config-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config-files</h2>
-
-<p><em>Note</em>: Config files might change quite a bit, and upon activation, the plugin will try to merge the existing ones with the new ones. A backup is kept under the <code>uSkyBlock/backup</code> folder.</p>
-
-<p>Please make sure, that the config files are as you expect them to be, before using the plugin or releasing it to "the public".</p>
-
-<h2>
-<a id="buildingcompiling" class="anchor" href="#buildingcompiling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building/Compiling</h2>
-
-<p>See (<a href="https://github.com/rlf/uSkyBlock/wiki/Building">https://github.com/rlf/uSkyBlock/wiki/Building</a>)</p>
-
-<h1>
-<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
-
-<p>uSkyBlock has an API (since v2.0.1-RC1.65).</p>
-
-<p>To use it, simply drop the api-jar to the classpath of your own plugin, and write some code along these lines:</p>
-
-<div class="highlight highlight-source-java"><pre><span class="pl-smi">Plugin</span> plugin <span class="pl-k">=</span> <span class="pl-smi">Bukkit</span><span class="pl-k">.</span>getPluginManager()<span class="pl-k">.</span>getPlugin(<span class="pl-s"><span class="pl-pds">"</span>uSkyBlock<span class="pl-pds">"</span></span>);
-<span class="pl-k">if</span> (plugin <span class="pl-k">instanceof</span> uSkyBlockAPI <span class="pl-k">&amp;&amp;</span> plugin<span class="pl-k">.</span>isEnabled()) {
-  uSkyBlockAPI usb <span class="pl-k">=</span> (uSkyBlockAPI) plugin;
-  player<span class="pl-k">.</span>sendMessage(<span class="pl-smi">String</span><span class="pl-k">.</span>format(
-    <span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\u</span>00a79Your island score is <span class="pl-cce">\u</span>00a74%5.2f!<span class="pl-pds">"</span></span>, 
-    usb<span class="pl-k">.</span>getIslandLevel(player)
-  ));
-}</pre></div>
-
-	<p>For further details regarding the API, visit the Wiki page: <a href="https://github.com/rlf/uSkyBlock/wiki/API">https://github.com/rlf/uSkyBlock/wiki/API</a> or browse the <a href="apidocs/index.html">JavaDoc API</a></p>
-
-<h2>
-<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
-
-<p>Fork-away, and create pull-requests - we review and accept almost any changes.</p>
-
-<h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
-
-<p>TL;DR - This is licensed under GPLv3</p>
-
-<h3>
-<a id="explanation--history" class="anchor" href="#explanation--history" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explanation / History</h3>
-
-<p>Originally the uSkyBlock was a continuation of the skySMP plugin, which was licensed under GPLv3
-(see <a href="http://dev.bukkit.org/bukkit-plugins/skysmp/">http://dev.bukkit.org/bukkit-plugins/skysmp/</a>).</p>
-
-<p>Talabrek intended to share the code with the public, but simply didn't have the time available to do so.</p>
-
-<p>Unfortunately, he had registered the plugin as <code>All rights reserved</code> on Bukkit, meaning the bukkit staff put the plugin under moderation - further increasing the work-load required to share the plugin.</p>
-
-<p>Those trying to get hold on Talabrek, had a hard time, and eventually multiple developers got their hands on different versions of the uSkyBlock plugin, and tried to continue the work in various channels (wesley27 and wolfwork comes to mind).</p>
-
-<p>On the very last day of 2014, we received the following e-mail from Talabrek:</p>
-
-<blockquote>
-<p>Recently, now that a stable 1.8 and the future of spigot is looking hopeful, I have gotten back to work on the plugin. There is much to be done though, and I just don't have the time to do it, so I finally decided to make it available for the public to work on. This is when I noticed the work you and others have done on the plugin.</p>
-
-<p>I don't have the time and energy to devote to actively developing this plugin anymore, but it is like a pet project to me so I would still like to have a role in it's development. You are making the best effort that I have seen, so I would like for you to continue.</p>
-
-<p>If you are interested, I can make my current code available to you (it's much different than what you currently have now, but some parts might be useful).</p>
-
-<p>-Talabrek</p>
-</blockquote>
-
-<p>So, with Talabreks blessing, this repository will try to consolidate the many different "branches" out there.</p>
-
-<h2>
-<a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h2>
-
-<ul>
-<li>
-<a href="http://www.gnu.org/copyleft/gpl.html">GPLv3</a> - <a href="https://www.tldrlegal.com/l/gpl-3.0">tl;dr Legal</a>
-</li>
-<li>Dutchy1001s guides and tutorials on uSkyBlock - <a href="http://debocraft.x10.mx/skyblock/">http://debocraft.x10.mx/skyblock/</a>
-</li>
-</ul>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/rlf/uSkyBlock/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/rlf/uSkyBlock/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/rlf/uSkyBlock"></a> is maintained by <a href="https://github.com/rlf">rlf</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
-
-            <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-67696850-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-  </body>
+        </section></div></div></body>
 </html>
