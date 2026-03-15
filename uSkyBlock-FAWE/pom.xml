@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.fastasyncworldedit</groupId>
             <artifactId>FastAsyncWorldEdit-Bukkit</artifactId>
-            <version>2.4.3</version>
+            <version>2.6.3</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
