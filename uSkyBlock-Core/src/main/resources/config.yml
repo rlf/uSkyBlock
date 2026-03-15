@@ -372,6 +372,9 @@ asyncworldedit:
 worldguard:
   entry-message: true
   exit-message: true
+  nether:
+    minY: 6
+    minX: 120
 nether:
   enabled: true
   height: 75
